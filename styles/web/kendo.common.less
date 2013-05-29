@@ -3648,9 +3648,9 @@ div.k-slider
 }
 
 .k-scheduler-toolbar .k-nav-next,
-.k-scheduler-toolbar .k-view-agenda,
+.k-scheduler-toolbar ul + ul li:last-child,
 .k-scheduler-toolbar .k-nav-next .k-link,
-.k-scheduler-toolbar .k-view-agenda .k-link
+.k-scheduler-toolbar ul + ul li:last-child .k-link
 {
 	border-radius:0 5px 5px 0;
 }
@@ -3730,7 +3730,8 @@ div.k-slider
 	margin:1em 0;
 }
 
-.k-scheduler-monthview .k-scheduler-table
+.k-scheduler-monthview .k-scheduler-table,
+.k-scheduler-agendaview .k-scheduler-table
 {
 	margin:0;
 }
@@ -3787,7 +3788,8 @@ div.k-slider
 	border-top-width:1px;
 }
 
-.k-scheduler-monthview .k-scheduler-content tr:first-child td
+.k-scheduler-monthview .k-scheduler-content tr:first-child td,
+.k-scheduler-agendaview .k-scheduler-content tr:first-child td
 {
 	border-top-width:0;
 }
@@ -3799,7 +3801,9 @@ div.k-slider
 }
 
 .k-scheduler-monthview .k-scheduler-table tr td:first-child,
-.k-scheduler-monthview .k-scheduler-header tr th:first-child
+.k-scheduler-monthview .k-scheduler-header tr th:first-child,
+.k-scheduler-agendaview .k-scheduler-table tr td:first-child,
+.k-scheduler-agendaview .k-scheduler-header tr th:first-child
 {
 	border-left-width:0;
 }
@@ -3954,6 +3958,22 @@ div.k-slider
 {
 	float: right;
 	margin-right:0;
+}
+
+.k-scheduler-agendaview .k-scheduler-table th
+{
+	text-align:left;
+	padding-left:6px;
+}
+
+.k-scheduler-datecolumn
+{
+	width: 144px;
+}
+
+.k-scheduler-timecolumn
+{
+	width: 105px;
 }
 
 /* Tooltip */
