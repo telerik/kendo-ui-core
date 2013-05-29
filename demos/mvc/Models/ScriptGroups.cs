@@ -35,6 +35,7 @@ namespace Kendo.Models
             "kendo.colorpicker.js",
             "kendo.dataviz.core.js",
             "kendo.dataviz.chart.js",
+            "kendo.dataviz.chart.polar.js",
             "kendo.dataviz.themes.js",
             "kendo.dataviz.svg.js",
             "kendo.dataviz.vml.js",

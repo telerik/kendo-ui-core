@@ -309,6 +309,73 @@
             }],
             "name": "scatter-charts"
         }, {
+            "text": "Radar Charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartRadarIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "radar-charts/index.html",
+                    "title": "Kendo UI jQuery-based Radar Charts Demo",
+                    "meta": "This demo illustrates how Kendo UI Radar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your radar chart."
+                }, {
+                    "text": "Radar area",
+                    "url": "radar-charts/radar-area.html",
+                    "title": "Kendo UI Radar Charts | Example of radar area chart",
+                    "meta": "This demo shows how to configure Kendo UI Radar Area Chart"
+                }, {
+                    "text": "Radar column",
+                    "url": "radar-charts/radar-column.html",
+                    "title": "Kendo UI Radar Charts | Example of radar column chart",
+                    "meta": "This demo illustrates how to display a Kendo UI Radar Column Chart"
+                }, {
+                    "text": "Binding to remote data",
+                    "url": "radar-charts/remote-data.html",
+                    "title": "Example of jQuery & HTML5 Kendo UI Radar Charts bound to remote data",
+                    "meta": "This demo shows how Kendo UI Radar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
+                }, {
+                    "text": "Binding to local data",
+                    "url": "radar-charts/local-data.html",
+                    "title": "Kendo UI Radar Charts binding to local data example",
+                    "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
+                }, {
+                    "text": "Binding to grouped data",
+                    "url": "radar-charts/grouped-data.html",
+                    "title": "Kendo UI Radar Charts | Example of binding to grouped data",
+                    "meta": "With this example you will learn how to bind grouping data to Kendo UI Radar Charts."
+            }],
+            "name": "radar-charts"
+        }, {
+            "text": "Polar Charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartPolarIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "polar-charts/index.html",
+                    "title": "Kendo UI jQuery-based Polar Charts Demo",
+                    "meta": "This demo illustrates how Kendo UI Polar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your polar chart."
+                }, {
+                    "text": "Polar area",
+                    "url": "polar-charts/polar-area.html",
+                    "title": "Kendo UI Polar Charts | Example of polar area chart",
+                    "meta": "This demo illustrates how to configure Kendo UI Polar Area Chart"
+                }, {
+                    "text": "Polar scatter",
+                    "url": "polar-charts/polar-scatter.html",
+                    "title": "Kendo UI Polar Charts | Example of polar scatter chart",
+                    "meta": "This demo shows how to configure Kendo UI Polar Scatter Chart"
+                }, {
+                    "text": "Binding to remote data",
+                    "url": "polar-charts/remote-data.html",
+                    "title": "Example of jQuery & HTML5 Kendo UI Polar Chart bound to remote data",
+                    "meta": "This demo shows how Kendo UI Polar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
+                }, {
+                    "text": "Binding to local data",
+                    "url": "polar-charts/local-data.html",
+                    "title": "Kendo UI Polar Charts binding to local data example",
+                    "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
+                }],
+            "name": "polar-charts"
+        }, {
             "text": "Sparklines",
             "documentation": "dataviz/sparkline",
             "spriteCssClass": "sparklineIcon",
