@@ -10,7 +10,6 @@ kendo_module({
     var kendo = window.kendo,
         support = kendo.support,
         document = window.document,
-        SURFACE = $(document.documentElement),
         Class = kendo.Class,
         Observable = kendo.Observable,
         now = $.now,
@@ -302,7 +301,7 @@ kendo_module({
 
             extend(that, {
                 element: element,
-                surface: options.global ? SURFACE : $(options.surface || element),
+                surface: options.global ? $(document.documentElement) : $(options.surface || element),
                 stopPropagation: options.stopPropagation,
                 pressed: false
             });
@@ -324,16 +323,11 @@ kendo_module({
             element.on(kendo.applyEventMap("mousedown selectstart", ns), filter, { root: element }, "_select");
 
             if (support.eventCapture) {
-                var surfaceElement = that.surface[0];
-
-                that.preventIfMoving = function(e) {
-                    if (that._isMoved()) {
-                        e.preventDefault();
-                    }
-                };
+                var surfaceElement = that.surface[0],
+                    preventIfMovingProxy = $.proxy(that.preventIfMoving, that);
 
                 withEachDownEvent(function(eventName) {
-                    surfaceElement.addEventListener(eventName, that.preventIfMoving, true);
+                    surfaceElement.addEventListener(eventName, preventIfMovingProxy, true);
                 });
             }
 
@@ -351,6 +345,12 @@ kendo_module({
             GESTURETAP,
             SELECT
             ], options);
+        },
+
+        preventIfMoving: function(e) {
+            if (this._isMoved()) {
+                e.preventDefault();
+            }
         },
 
         destroy: function() {
