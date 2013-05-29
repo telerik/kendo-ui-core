@@ -302,5 +302,39 @@ namespace Kendo.Mvc.UI.Fluent
             tooltip.Shared = shared;
             return this;
         }
+
+
+
+        /// <summary>
+        /// Sets the tooltip shared template
+        /// </summary>
+        /// <param name="sharedTemplate">The tooltip shared template.</param>
+        /// <value>
+        /// A client-side shared template for the tooltip.
+        /// <list type="bullet">
+        ///     <listheader>
+        ///     Available shared template variables:
+        ///     </listheader>
+        ///     <item>points - the category points</item>
+        ///     <item>category - the category name</item>
+        /// </list>
+        /// </value>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Tooltip(tooltip => tooltip
+        ///               .Template("&lt;#= category #&gt;")
+        ///               .Visible(true)
+        ///           )
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartTooltipBuilder SharedTemplate(string sharedTemplate)
+        {
+            tooltip.SharedTemplate = sharedTemplate;
+            return this;
+        }
     }
 }

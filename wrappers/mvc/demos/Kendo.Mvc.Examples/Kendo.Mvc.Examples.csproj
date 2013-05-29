@@ -705,7 +705,9 @@
     <Content Include="Areas\aspx\Views\Shared\Web.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\Web.config" />
+    <Content Include="Areas\razor\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\Shared\_WebLayout.cshtml" />

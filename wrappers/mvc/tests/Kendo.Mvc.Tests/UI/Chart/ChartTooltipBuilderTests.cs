@@ -100,5 +100,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Shared_sets_Shared()
+        {
+            builder.Shared(true);
+            tooltip.Shared.Value.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void SharedTemplate_sets_sharedTemplate()
+        {
+            builder.SharedTemplate("template");
+            tooltip.SharedTemplate.ShouldEqual("template");
+        }
     }
 }
