@@ -135,6 +135,111 @@
                 equal(events[1].end.getTime(), +new Date(2000, 10, 10, 11, 40, 30));
             });
 
+            test("HOURLY method limits BYDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 10, 0),
+                    end: new Date(2013, 4, 10, 11, 0),
+                    rule: "FREQ=HOURLY;BYDAY=WE"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10, 0, 0), end: new Date(2013, 4, 15, 0, 30) } );
+
+                equal(events.length, 1);
+                equal(events[0].start.getTime(), +new Date(2013, 4, 15));
+                equal(events[0].end.getTime(), +new Date(2013, 4, 15, 1));
+            });
+
+            test("HOURLY method limits BYDAY and expands BYHOUR", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 10, 0),
+                    end: new Date(2013, 4, 10, 11, 0),
+                    rule: "FREQ=HOURLY;BYDAY=WE;BYHOUR=8,10"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10, 0, 0), end: new Date(2013, 4, 15, 10, 0) } );
+
+                equal(events.length, 2);
+                equal(events[0].start.getTime(), +new Date(2013, 4, 15, 8));
+                equal(events[0].end.getTime(), +new Date(2013, 4, 15, 9));
+
+                equal(events[1].start.getTime(), +new Date(2013, 4, 15, 10));
+                equal(events[1].end.getTime(), +new Date(2013, 4, 15, 11));
+            });
+
+            test("HOURLY method limits BYMONTHDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 10, 0),
+                    end: new Date(2013, 4, 10, 11, 0),
+                    rule: "FREQ=HOURLY;BYMONTHDAY=15"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10, 0, 0), end: new Date(2013, 4, 15, 0, 30) } );
+
+                equal(events.length, 1);
+                equal(events[0].start.getTime(), +new Date(2013, 4, 15));
+                equal(events[0].end.getTime(), +new Date(2013, 4, 15, 1));
+            });
+
+            test("HOURLY method limits BYMONTHDAY and expands BYHOUR", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 10, 0),
+                    end: new Date(2013, 4, 10, 11, 0),
+                    rule: "FREQ=HOURLY;BYMONTHDAY=15;BYHOUR=8,10"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10, 0, 0), end: new Date(2013, 4, 15, 10, 0) } );
+
+                equal(events.length, 2);
+                equal(events[0].start.getTime(), +new Date(2013, 4, 15, 8));
+                equal(events[0].end.getTime(), +new Date(2013, 4, 15, 9));
+
+                equal(events[1].start.getTime(), +new Date(2013, 4, 15, 10));
+                equal(events[1].end.getTime(), +new Date(2013, 4, 15, 11));
+            });
+
+            test("HOURLY method limits BYMONTH", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 10, 0),
+                    end: new Date(2013, 4, 10, 11, 0),
+                    rule: "FREQ=HOURLY;BYMONTH=6"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10, 0, 0), end: new Date(2013, 5, 1, 0, 30) } );
+
+                equal(events.length, 1);
+                equal(events[0].start.getTime(), +new Date(2013, 5, 1));
+                equal(events[0].end.getTime(), +new Date(2013, 5, 1, 1));
+            });
+
+            test("HOURLY method limits BYYEARDAY and expands BYHOUR", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 10, 0),
+                    end: new Date(2013, 4, 10, 11, 0),
+                    rule: "FREQ=HOURLY;BYYEARDAY=135;BYHOUR=8,10"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10, 0, 0), end: new Date(2013, 4, 15, 10, 0) } );
+
+                equal(events.length, 2);
+                equal(events[0].start.getTime(), +new Date(2013, 4, 15, 8));
+                equal(events[0].end.getTime(), +new Date(2013, 4, 15, 9));
+
+                equal(events[1].start.getTime(), +new Date(2013, 4, 15, 10));
+                equal(events[1].end.getTime(), +new Date(2013, 4, 15, 11));
+            });
+
             module("DAILY Occurrences");
             test("DAILY occurrences method returns one occurrence (FREQ: DAILY)", function() {
                 var schedulerEvent = {

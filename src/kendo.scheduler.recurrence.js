@@ -98,12 +98,10 @@ kendo_module({
                     return start;
                 },
 
-                setup: function(rule) {
-                    /*
+                setup: function(rule, start) {
                     if (rule.weekDays) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
                     }
-                    */
 
                     if (rule.hours) {
                         rule._hourRules = rule.hours.slice();
@@ -118,10 +116,49 @@ kendo_module({
                     }
                 },
                 limit: function(date, end, rule) {
-                    var dateMS;
+                    //TODO: check days not milliseconds. DO IT for all!!
+                    var dateMS, monthDay, day, month,
+                        allow = allowExpand(rule);
+
                     while (+date <= end) {
                         dateMS = +date;
 
+                        if (rule.months && allow) {
+                            date = recurrence._month(date, end, rule);
+                            month = date.getMonth();
+                            if (+date !== dateMS) {
+                                date.setHours(0);
+                            }
+                        }
+
+                        if (allow && rule.yearDays && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) { //TODO: Sort yearDays
+                            //TODO: optimize - find closest year day and set date.
+                            //TODO: support for negative year days!!!!!!!!
+                            while ((+date <= end) && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) {
+                                date.setDate(date.getDate() + 1);
+                            }
+                        }
+
+                        if (rule.monthDays && allow) {
+                            date = recurrence._monthDay(date, end, rule);
+                            monthDay = date.getDate();
+
+                            if (+date !== dateMS) {
+                                date.setHours(0);
+                            }
+                        }
+
+                        if (rule.weekDays && allow) {
+                            date = recurrence._weekDay(date, end, rule);
+
+                            if (+date !== dateMS) {
+                                date.setHours(0);
+                            }
+                        }
+
+                        day = date.getDate();
+
+                        //TODO: if (month, monthDay, weekDay changes, do not call hours, minutes, seconds
                         if (rule.hours || rule.minutes || rule.seconds) {
                             if (dateMS !== +date) {
                                 if (rule.hours) {
@@ -137,7 +174,11 @@ kendo_module({
                             date = recurrence._time(date, end, rule);
                         }
 
-                        if (+date <= +end) {
+                        if ((month !== undefined && month !== date.getMonth()) ||
+                            (monthDay && monthDay !== day)) {
+
+                            date.setDate(date.getDate() + 1);
+                        } else if (+date <= end) {
                             break;
                         }
                     }
