@@ -109,17 +109,12 @@ function canvasInit(e) {
         changed: updateSrc
     }).data("kendoMobileVirtualScrollView");
 
-    virtualScrollView.batchBuffer.one("reset", function (e) {
-        virtualScrollView.trigger("changed", { element: virtualScrollView.pages[1].element });
-    });
-
     virtualScrollView.element.find(".virtual-page").kendoTouch({
         tap: function (e) {
             var tile = $(e.event.target).closest("div.tile"),
-                uid = tile.data("uid"),
-                dataItem = awwDataSource.getByUid(uid);
+                offset = tile.data("offset");
 
-            app.navigate("#canvas-detail");
+            app.navigate("#canvas-detail?offset=" + offset);
         }
     });
 }
@@ -127,9 +122,19 @@ function canvasInit(e) {
 function canvasDetailInit(e) {
     $("#detail-scrollview").kendoMobileVirtualScrollView({
         dataSource: awwDataSource,
-        template: "<div data-uid='#:uid#' class='detailed-img'>#= createImage(data) #</div>",
-        changed: updateSrc
+        autoBind: false,
+        template: kendo.template($("#canvas-detail-tmp").html())
     });
+}
+
+function canvasDetailShow(e) {
+    var offset = parseInt(e.view.params.offset);
+
+    $("#detail-scrollview").data("kendoMobileVirtualScrollView").scrollTo(offset);
+}
+
+function calculateOffset(dataItem) {
+    return virtualScrollView.batchBuffer.buffer.indexOf(dataItem);
 }
 
 function updateSrc(e) {
@@ -160,6 +165,26 @@ function createImage(data) {
     }
 
     return imageTemplate(DEFAULTIMAGEURL);
+}
+
+function createTile(data) {
+    var url = data.url,
+        imageTemplate = kendo.template('<div class="item-img" style="background-image: url(#= data #);"></div>'),
+        nonImageTemplate = kendo.template('<div><p>Image cannot be loaded</p><a data-role="button" data-rel="external" href="#= data #" target="_blank">Btn</a></div>');
+
+    if(url.match(imgExtensionRegex)) {
+        return imageTemplate(url);
+    }
+
+    if(url.match(imgurAlbumRegex) || url.match(imgurGalleryRegex)) {
+        return nonImageTemplate(url);
+    }
+
+    if(url.match(imgurSingleRegex)) {
+        return imageTemplate(url.concat(".jpg"));
+    }
+
+    return nonImageTemplate(url);
 }
 
 var app = new kendo.mobile.Application(document.body, { skin: 'flat' });

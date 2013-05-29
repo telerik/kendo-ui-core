@@ -97,9 +97,11 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    -webkit-transform: translatez(0);
 }
 
 .detailed-img {
     width: 100%;
     height: 100%;
+    -webkit-transform: translatez(0);
 }
