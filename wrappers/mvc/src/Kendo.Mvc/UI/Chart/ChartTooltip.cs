@@ -11,6 +11,8 @@ namespace Kendo.Mvc.UI
 
         public bool? Shared { get; set; }
 
+        public string SharedTemplate { get; set; }
+
         public override IChartSerializer CreateSerializer()
         {
             return new ChartTooltipSerializer(this);

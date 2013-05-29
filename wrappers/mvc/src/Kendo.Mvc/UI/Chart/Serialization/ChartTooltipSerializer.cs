@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Extensions;
 
     internal class ChartTooltipSerializer : ChartTooltipBaseSerializer
     {
@@ -18,7 +19,8 @@ namespace Kendo.Mvc.UI
             var result = base.Serialize();
 
             FluentDictionary.For(result)
-                .Add("shared", chartTooltip.Shared, () => chartTooltip.Shared.HasValue);
+                .Add("shared", chartTooltip.Shared, () => chartTooltip.Shared.HasValue)
+                .Add("sharedTemplate", chartTooltip.SharedTemplate, () => chartTooltip.SharedTemplate.HasValue());
 
             return result;
         }
