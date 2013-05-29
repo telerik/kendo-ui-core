@@ -23,7 +23,8 @@ module CodeGen::MVC::Mobile
             'actionsheet.items.text',
             'buttongroup.items.text',
             'tabstrip.items.text',
-            'tabstrip.items.href'
+            'tabstrip.items.href',
+            'splitview.panes.id'
         ]
 
         CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
@@ -168,6 +169,10 @@ module CodeGen::MVC::Mobile
                 end
 
                 name.downcase
+            end
+
+            def values
+                @values if self.respond_to?(:values)
             end
         end
 

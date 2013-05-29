@@ -646,6 +646,7 @@
     <Compile Include="UI\Grid\Settings\NumberOperators.cs" />
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewPaneEventBuilder.cs" />
     <Compile Include="UI\MultiSelect\Fluent\MultiSelectEventBuilder.cs" />
     <Compile Include="UI\MultiSelect\Fluent\MultiSelectBuilder.cs" />
     <Compile Include="UI\MultiSelect\Html\MultiSelectHtmlBuilder.cs" />
@@ -1346,4 +1347,34 @@
     <Compile Include="UI\MobileSwitch\Fluent\MobileSwitchEventBuilder.cs" />
     <Compile Include="UI\MobileSwitch\Html\MobileSwitchHtmlBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\MobileTabStrip\MobileTabStrip.cs" /><Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripBuilder.cs" /><Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripItemFactory.cs" /><Compile Include="UI\MobileTabStrip\MobileTabStripItem.cs" /><Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripItemBuilder.cs" /><Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripEventBuilder.cs" /><Compile Include="UI\MobileTabStrip\Html\MobileTabStripHtmlBuilder.cs" /></ItemGroup><ItemGroup><Compile Include="UI\MobileView\MobileView.cs" /><Compile Include="UI\MobileView\Fluent\MobileViewBuilder.cs" /><Compile Include="UI\MobileView\Fluent\MobileViewEventBuilder.cs" /><Compile Include="UI\MobileView\Html\MobileViewHtmlBuilder.cs" /></ItemGroup><ItemGroup><Compile Include="UI\MobileModalView\MobileModalView.cs" /><Compile Include="UI\MobileModalView\Fluent\MobileModalViewBuilder.cs" /><Compile Include="UI\MobileModalView\Fluent\MobileModalViewEventBuilder.cs" /><Compile Include="UI\MobileModalView\Html\MobileModalViewHtmlBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\MobileTabStrip\MobileTabStrip.cs" />
+    <Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripBuilder.cs" />
+    <Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripItemFactory.cs" />
+    <Compile Include="UI\MobileTabStrip\MobileTabStripItem.cs" />
+    <Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripItemBuilder.cs" />
+    <Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripEventBuilder.cs" />
+    <Compile Include="UI\MobileTabStrip\Html\MobileTabStripHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileView\MobileView.cs" />
+    <Compile Include="UI\MobileView\Fluent\MobileViewBuilder.cs" />
+    <Compile Include="UI\MobileView\Fluent\MobileViewEventBuilder.cs" />
+    <Compile Include="UI\MobileView\Html\MobileViewHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileModalView\MobileModalView.cs" />
+    <Compile Include="UI\MobileModalView\Fluent\MobileModalViewBuilder.cs" />
+    <Compile Include="UI\MobileModalView\Fluent\MobileModalViewEventBuilder.cs" />
+    <Compile Include="UI\MobileModalView\Html\MobileModalViewHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileSplitView\MobileSplitView.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewBuilder.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewPaneFactory.cs" />
+    <Compile Include="UI\MobileSplitView\MobileSplitViewPane.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewPaneBuilder.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewEventBuilder.cs" />
+    <Compile Include="UI\MobileSplitView\Html\MobileSplitViewHtmlBuilder.cs" />
+  </ItemGroup>
+</Project>

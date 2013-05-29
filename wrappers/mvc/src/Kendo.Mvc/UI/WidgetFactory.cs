@@ -1055,6 +1055,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="MobileSplitView"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileSplitView()
+        ///             .Name("MobileSplitView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileSplitViewBuilder MobileSplitView()
+        {
+            return new MobileSplitViewBuilder(new MobileSplitView(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="MobileSwitch"/>
         /// </summary>
         /// <example>
