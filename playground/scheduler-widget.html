@@ -125,14 +125,41 @@
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
             views: ["day", { name: "week", selected: true }, { name: "agenda", }],
             dataSource: {
-                schema: {
-                    model: {
-                        fields: {
-                            title: { defaultValue: "eventTitle" }
+                transport: {
+                    read: {
+                        url: "http://konstantinov/service/events",
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: "http://konstantinov/service/events/update",
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: "http://konstantinov/service/events/create",
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: "http://konstantinov/service/events/destroy",
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return {models: kendo.stringify(options.models)};
                         }
                     }
                 },
-                data: [ {
+                schema: {
+                    model: {
+                        id: "ID",
+                        fields: {
+                            title: { defaultValue: "eventTitle", field: "Title" },
+                            start: { type: "date", field: "Start" },
+                            end: { type: "date", field: "End" },
+                            isAllDay: { type: "boolean", field: "IsAllDay" }
+                        }
+                    }
+                },
+                /*data: [ {
                     start: start,
                     end: end,
                     title: "this is today"
@@ -205,7 +232,7 @@
                     start: new Date(2013, 4, 24, 10, 5,0),
                     end: new Date(2013, 4, 25, 12, 5,0),
                     title: "third overlapping multi day"
-                }]
+                }]*/
             }
         });
     </script>

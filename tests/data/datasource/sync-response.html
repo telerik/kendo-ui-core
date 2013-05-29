@@ -101,7 +101,7 @@
 
                 equal(dataSource.data()[0].foo, "bar");
             });
-				
+
 			test("sync updates pristine data if server response is empty object", function() {
                 dataSource = new DataSource({
                     schema: {
@@ -128,10 +128,10 @@
                 var model = dataSource.get(1);
                 model.set("foo", "car");
                 dataSource.sync();
-			
+
 				equal(dataSource._pristine[0].foo, "car");
             });
-			
+
 			test("sync updates pristine data for array property", function() {
                 dataSource = new DataSource({
                     schema: {
@@ -163,7 +163,7 @@
                 equal(dataSource.data()[0].foo.length, 1);
 				equal(dataSource._pristine[0].foo.length, 1);
             });
-		
+
             test("sync updates the fields of created model from single object server response", function() {
                 stubTransport("create", { id: 1, foo: "foo" } );
 
@@ -785,6 +785,27 @@
                 dataSource.sync();
 
                 equal(dataSource._pristine[0] instanceof kendo.data.ObservableObject, false);
+            });
+
+            test("sync model custom field mapping is persisted after sync with empty response", function() {
+                setup({
+                    data: [ { id: 1, foo: "bar" } ],
+                    schema: {
+                        model: {
+                            fields: {
+                                baz: "foo"
+                            }
+                        }
+                    }
+                });
+                stubTransport("update", null);
+                var initial = dataSource.get(1);
+                initial.set("baz", "foo" );
+
+                dataSource.sync();
+
+                ok(!("foo" in dataSource.get(1)));
+                equal(dataSource.get(1).baz, "foo");
             });
 
         </script>

@@ -2336,17 +2336,16 @@ kendo_module({
             var that = this,
                 idx,
                 length,
-                promises = [];
-
-            data = that.reader.serialize(data);
+                promises = [],
+                converted = that.reader.serialize(toJSON(data));
 
             if (that.options.batch) {
                 if (data.length) {
-                    promises.push(that._promise( { data: { models: toJSON(data) } }, data , method));
+                    promises.push(that._promise( { data: { models: converted } }, data , method));
                 }
             } else {
                 for (idx = 0, length = data.length; idx < length; idx++) {
-                    promises.push(that._promise( { data: data[idx].toJSON() }, [ data[idx] ], method));
+                    promises.push(that._promise( { data: converted[idx] }, [ data[idx] ], method));
                 }
             }
 
