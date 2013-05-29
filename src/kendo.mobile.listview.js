@@ -193,6 +193,7 @@ kendo_module({
                 appendMethod = "html",
                 action = e.action,
                 items = e.items,
+                grouped = options.type === "group",
                 idx = 0,
                 contents,
                 groups,
@@ -219,7 +220,7 @@ kendo_module({
 
                 that._style();
                 return;
-            } else if (action === "add") {
+            } else if (action === "add" && !grouped) {
                 length = items.length;
 
                 for (; idx < length; idx++) {
@@ -230,7 +231,7 @@ kendo_module({
 
                 that._style();
                 return;
-            } else if (action === "remove") {
+            } else if (action === "remove" && !grouped) {
                 length = items.length;
 
                 for (; idx < length; idx++) {
