@@ -15,8 +15,8 @@ var awwDataSource = new kendo.data.DataSource({
         },
 
         parameterMap: function(data, type) {
-            var items = awwDataSource.data();
-            if (items.length) {
+            if (data.skip > 0) { // requesting next page - asking for skip=0 means pull to refresh.
+                var items = awwDataSource.data();
                 data.after = items[items.length - 1].data.name;
             }
 
