@@ -20,17 +20,6 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The MVVM model to bind to. If a string is passed, The view will try to resolve a reference to the view model variable in the global scope.
-        /// </summary>
-        /// <param name="value">The value that configures the model.</param>
-        public MobileViewBuilder Model(string value)
-        {
-            container.Model = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// Applicable to remote views only. If set to true, the remote view contents will be reloaded from the server (using Ajax) each time the view is navigated to.
         /// </summary>
         /// <param name="value">The value that configures the reload.</param>

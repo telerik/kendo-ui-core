@@ -26,8 +26,6 @@ namespace Kendo.Mvc.UI
 
 //>> Fields
         
-        public string Model { get; set; }
-        
         public bool Reload { get; set; }
         
         public bool Stretch { get; set; }
