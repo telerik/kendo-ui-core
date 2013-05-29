@@ -383,13 +383,11 @@ kendo_module({
 
         update: function(dataItem) {
             this.element = this.listView.setDataItem(this.element, dataItem);
-            this.height = this.element.offsetHeight;
-            this.bottom = this.top + this.height;
-            putAt(this.element, this.top);
         },
 
         above: function(item) {
             if (item) {
+                this.height = this.element.offsetHeight;
                 this.top = item.top - this.height;
                 this.bottom = item.top;
                 putAt(this.element, this.top);
@@ -398,6 +396,7 @@ kendo_module({
 
         below: function(item) {
             if (item) {
+                this.height = this.element.offsetHeight;
                 this.top = item.bottom;
                 this.bottom = this.top + this.height;
                 putAt(this.element, this.top);
