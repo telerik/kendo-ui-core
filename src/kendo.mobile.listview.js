@@ -437,7 +437,7 @@ kendo_module({
 
             this._loadWrapper = $('<span class="km-load-more"></span>');
             this._loadIcon = $('<span style="display:none" class="km-icon"></span>');
-            this._loadButton = $('<a class="km-load">' + listView.options.loadMoreText + '</a>');
+            this._loadButton = $('<a class="km-load">' + listView.options.loadMoreText + '</a>').hide();
 
             this._loadWrapper.append(this._loadIcon).append(this._loadButton);
 
