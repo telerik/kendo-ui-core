@@ -2,17 +2,20 @@ namespace Kendo.Mvc.UI
 {
     using System;
     using System.Collections.Generic;
+    using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class MobileActionSheetPopupSettings : JsonObject
+    public class MobilePopOverPopupSettings : JsonObject
     {
-        public MobileActionSheetPopupSettings()
+        public MobilePopOverPopupSettings()
         {
             //>> Initialization
         
         //<< Initialization
-        }
 
+            
+        }
+        
         //>> Fields
         
         public string Height { get; set; }
@@ -37,7 +40,7 @@ namespace Kendo.Mvc.UI
                 json["width"] = Width;
             }
             
-        //<< Serialization
+            //<< Serialization
 
             json["direction"] = Direction;
         }

@@ -3,12 +3,13 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections.Generic;
     using System.Collections;
     using System;
+    using Kendo.Mvc.Extensions;
 
-    public class MobileActionSheetPopupSettingsBuilder: IHideObjectMembers
+    public class MobilePopOverPopupSettingsBuilder: IHideObjectMembers
     {
-        private readonly MobileActionSheetPopupSettings container;
+        private readonly MobilePopOverPopupSettings container;
 
-        public MobileActionSheetPopupSettingsBuilder(MobileActionSheetPopupSettings settings)
+        public MobilePopOverPopupSettingsBuilder(MobilePopOverPopupSettings settings)
         {
             container = settings;
         }
@@ -19,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The height of the popup in pixels.
         /// </summary>
         /// <param name="value">The value that configures the height.</param>
-        public MobileActionSheetPopupSettingsBuilder Height(string value)
+        public MobilePopOverPopupSettingsBuilder Height(string value)
         {
             container.Height = value;
 
@@ -30,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The width of the popup in pixels
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public MobileActionSheetPopupSettingsBuilder Width(string value)
+        public MobilePopOverPopupSettingsBuilder Width(string value)
         {
             container.Width = value;
 
@@ -43,7 +44,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The height of the popup in pixels.
         /// </summary>
         /// <param name="value">The value that configures the height.</param>
-        public MobileActionSheetPopupSettingsBuilder Height(int value)
+        public MobilePopOverPopupSettingsBuilder Height(int value)
         {
             container.Height = value + "px";
 
@@ -54,7 +55,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The width of the popup in pixels
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
-        public MobileActionSheetPopupSettingsBuilder Width(int value)
+        public MobilePopOverPopupSettingsBuilder Width(int value)
         {
             container.Width = value + "px";
 
@@ -65,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The direction to which the popup will expand, relative to the target that opened it
         /// </summary>
         /// <param name="value">The value that configures the direction.</param>
-        public MobileActionSheetPopupSettingsBuilder Direction(MobilePopupDirection value)
+        public MobilePopOverPopupSettingsBuilder Direction(MobilePopupDirection value)
         {
             container.Direction = value;
 

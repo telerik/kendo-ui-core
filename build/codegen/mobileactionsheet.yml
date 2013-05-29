@@ -8,16 +8,6 @@
       :content: true
       :description: The popup configuration options (tablet only)
 
-    - :name: popup.direction
-      :type: Object
-      :description: The direction to which the popup will expand, relative to the target that opened it
-      :default: bottom
-      :values:
-        - bottom
-        - top
-        - left
-        - right
-
     - :name: popup.height
       :type: String
       :description: The height of the popup in pixels.

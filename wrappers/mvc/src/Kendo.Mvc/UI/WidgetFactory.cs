@@ -1055,6 +1055,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="MobilePopOver"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobilePopOver()
+        ///             .Name("MobilePopOver")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobilePopOverBuilder MobilePopOver()
+        {
+            return new MobilePopOverBuilder(new MobilePopOver(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="MobileSplitView"/>
         /// </summary>
         /// <example>

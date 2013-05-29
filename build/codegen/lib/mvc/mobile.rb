@@ -27,6 +27,10 @@ module CodeGen::MVC::Mobile
             'splitview.panes.id'
         ]
 
+        IGNORED = [
+            'popover.popup.direction'
+        ]
+
         CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
 
         COMPONENT = ERB.new(File.read("build/codegen/lib/mvc/component.csharp.erb"), 0, '%<>')
@@ -174,6 +178,19 @@ module CodeGen::MVC::Mobile
             def values
                 @values if self.respond_to?(:values)
             end
+
+            def delete_ignored
+                return if @options.nil?
+
+                @options.each do |option|
+                    if IGNORED.include?(option.full_name)
+                        @options.delete(option)
+                        next
+                    end
+
+                    option.delete_ignored
+                end
+            end
         end
 
         class Option < CodeGen::Option
@@ -206,7 +223,7 @@ module CodeGen::MVC::Mobile
                 end
 
                 ERB.new(%{
-            json["<%= name.to_attribute %>"] = <%=csharp_name%>;
+            json["<%= name.to_attribute %>"] = <%= csharp_name %>;
                 }).result(binding)
             end
 
@@ -281,6 +298,9 @@ module CodeGen::MVC::Mobile
             end
 
             def component(component)
+
+                component.delete_ignored
+
                 write_class(component)
                 write_enums(component)
                 write_fluent(component)

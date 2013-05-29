@@ -646,6 +646,7 @@
     <Compile Include="UI\Grid\Settings\NumberOperators.cs" />
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
+    <Compile Include="UI\MobilePopupDirection.cs" />
     <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewPaneEventBuilder.cs" />
     <Compile Include="UI\MultiSelect\Fluent\MultiSelectEventBuilder.cs" />
     <Compile Include="UI\MultiSelect\Fluent\MultiSelectBuilder.cs" />
@@ -1309,7 +1310,6 @@
   </Target>
   <ItemGroup>
     <Compile Include="UI\MobileActionSheet\MobileActionSheet.cs" />
-    <Compile Include="UI\MobileActionSheet\MobileActionSheetDirection.cs" />
     <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetBuilder.cs" />
     <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemFactory.cs" />
     <Compile Include="UI\MobileActionSheet\Settings\MobileActionSheetPopupSettings.cs" />
@@ -1376,5 +1376,15 @@
     <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewPaneBuilder.cs" />
     <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewEventBuilder.cs" />
     <Compile Include="UI\MobileSplitView\Html\MobileSplitViewHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobilePopOver\MobilePopOver.cs" />
+    <Compile Include="UI\MobilePopOver\Fluent\MobilePopOverBuilder.cs" />
+    <Compile Include="UI\MobilePopOver\Settings\MobilePopOverPaneSettings.cs" />
+    <Compile Include="UI\MobilePopOver\Fluent\MobilePopOverPaneSettingsBuilder.cs" />
+    <Compile Include="UI\MobilePopOver\Settings\MobilePopOverPopupSettings.cs" />
+    <Compile Include="UI\MobilePopOver\Fluent\MobilePopOverPopupSettingsBuilder.cs" />
+    <Compile Include="UI\MobilePopOver\Fluent\MobilePopOverEventBuilder.cs" />
+    <Compile Include="UI\MobilePopOver\Html\MobilePopOverHtmlBuilder.cs" />
   </ItemGroup>
 </Project>
