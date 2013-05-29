@@ -1101,34 +1101,6 @@
                 equal(events[1].end.getTime(), +new Date(2013, 10, 15, 14, 50, 30));
             });
 
-            //TODO: Add test for BYSETPOS
-            /*test("WEEKLY occurrences method returns only nth occurrence", function() {
-                var schedulerEvent = {
-                    uid: "id",
-                    title: "Title",
-                    start: new Date(2013, 10, 10, 16, 30),
-                    end: new Date(2013, 10, 10, 17, 0),
-                    rule: "FREQ=WEEKLY;BYDAY=MO,TU,WE;BYSETPOS=1"
-                }
-
-                debugger;
-                var events = occurrences(schedulerEvent, { start: new Date(2013, 10, 10), end: new Date(2013, 11, 1) } );
-
-                equal(events.length, 3);
-
-                equal(events[0].recurrenceID, schedulerEvent.uid);
-                equal(events[0].start.getTime(), +new Date(2013, 10, 11, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 10, 11, 17, 0));
-
-                equal(events[1].recurrenceID, schedulerEvent.uid);
-                equal(events[1].start.getTime(), +new Date(2013, 10, 18, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2013, 10, 18, 17, 0));
-
-                equal(events[1].recurrenceID, schedulerEvent.uid);
-                equal(events[1].start.getTime(), +new Date(2013, 10, 25, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2013, 10, 25, 17, 0));
-            });*/
-
             module("MONTHLY Occurrences");
             test("MONTHLY method returns one event for each new month", function() {
                 var schedulerEvent = {
@@ -1456,6 +1428,25 @@
                 equal(events[2].end.getTime(), +new Date(2013, 6, 19, 17, 0));
             });
 
+            test("YEARLY method expands negative BYYEARDAY", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 16, 30),
+                    end: new Date(2013, 0, 1, 17, 0),
+                    rule: "FREQ=YEARLY;BYYEARDAY=10, -100"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 0, 1), end: new Date(2013, 11, 31, 17) } );
+                equal(events.length, 2);
+
+                equal(events[0].start.getTime(), +new Date(2013, 0, 10, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 0, 10, 17, 0));
+
+                equal(events[1].start.getTime(), +new Date(2013, 8, 22, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 8, 22, 17, 0));
+            });
+
             test("YEARLY method expands BYMONTHDAY", function() {
                 var schedulerEvent = {
                     uid: "id",
@@ -1496,6 +1487,27 @@
                 equal(events[4].recurrenceID, schedulerEvent.uid);
                 equal(events[4].start.getTime(), +new Date(2013, 4, 30, 16, 30));
                 equal(events[4].end.getTime(), +new Date(2013, 4, 30, 17, 0));
+            });
+
+            test("YEARLY method expands negative BYWEEKNO", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 16, 30),
+                    end: new Date(2013, 0, 1, 17, 0),
+                    rule: "FREQ=YEARLY;BYWEEKNO=-10;WKST=MO"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 0, 1), end: new Date(2013, 11, 31, 17) } );
+                equal(events.length, 7); //21 - 27 October
+
+                equal(events[0].recurrenceID, schedulerEvent.uid);
+                equal(events[0].start.getTime(), +new Date(2013, 9, 21, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 9, 21, 17, 0));
+
+                equal(events[6].recurrenceID, schedulerEvent.uid);
+                equal(events[6].start.getTime(), +new Date(2013, 9, 27, 16, 30));
+                equal(events[6].end.getTime(), +new Date(2013, 9, 27, 17, 0));
             });
 
             test("YEARLY method expands BYMONTH and limit by BYWEEKNO", function() {

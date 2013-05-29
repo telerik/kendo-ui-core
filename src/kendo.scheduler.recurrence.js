@@ -36,436 +36,6 @@ kendo_module({
         ];
 
     var recurrence = {
-        expand: function(event, period) {
-            var rule = recurrence.expandEvent(event),
-                durationMS = event.end - event.start,
-                start = new Date(period.start),
-                end = new Date(period.end),
-                current = 1,
-                events = [],
-                count,
-                freq;
-
-            if (!rule || +event.start > +end) {
-                return events;
-            }
-
-            freq = recurrence.frequency[rule.freq];
-            count = rule.count;
-
-            if (rule.until && +rule.until < +end) {
-                end = new Date(rule.until);
-            }
-
-            freq.setup(rule, start, event.start);
-
-            //TODO: if event.start is in the same day as start then set hour
-            start.setHours(event.start.getHours());
-            start.setMinutes(event.start.getMinutes());
-            start.setSeconds(event.start.getSeconds());
-            start.setMilliseconds(event.start.getMilliseconds());
-
-            start = freq.limit(start, end, rule);
-
-            while (+start <= end) {
-                events.push(cloneEvent(event, start, durationMS));
-                if (count && count === current) {
-                    break;
-                }
-
-                current++;
-
-                start = freq.next(start, rule);
-                start = freq.limit(start, end, rule);
-            }
-
-            if (rule.setPositions) {
-                events = eventsByPosition(events, rule.setPositions);
-            }
-
-            return events;
-        },
-
-        frequency: {
-            //TODO: FREQ: SECONDLY
-            //TODO: FREQ: MINUTELY
-            hourly: {
-                next: function(start, rule) {
-                    if (!rule.hours && !rule.minutes && !rule.seconds) {
-                        start = new Date(start);
-                        start.setHours(start.getHours() + rule.interval);
-                    }
-                    return start;
-                },
-
-                setup: function(rule, start) {
-                    setupRule(rule, start);
-                },
-                limit: function(date, end, rule) {
-                    //TODO: check days not milliseconds. DO IT for all!!
-                    var dateMS, monthDay, day, month,
-                        allow = allowExpand(rule);
-
-                    while (+date <= end) {
-                        dateMS = +date;
-
-                        if (rule.months && allow) {
-                            date = recurrence._month(date, end, rule);
-                            month = date.getMonth();
-                            if (+date !== dateMS) {
-                                date.setHours(0);
-                            }
-                        }
-
-                        if (allow && rule.yearDays && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) { //TODO: Sort yearDays
-                            //TODO: optimize - find closest year day and set date.
-                            //TODO: support for negative year days!!!!!!!!
-                            while ((+date <= end) && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) {
-                                date.setDate(date.getDate() + 1);
-                            }
-                        }
-
-                        if (rule.monthDays && allow) {
-                            date = recurrence._monthDay(date, end, rule);
-                            monthDay = date.getDate();
-
-                            if (+date !== dateMS) {
-                                date.setHours(0);
-                            }
-                        }
-
-                        if (rule.weekDays && allow) {
-                            date = recurrence._weekDay(date, end, rule);
-
-                            if (+date !== dateMS) {
-                                date.setHours(0);
-                            }
-                        }
-
-                        day = date.getDate();
-
-                        //TODO: if (month, monthDay, weekDay changes, do not call hours, minutes, seconds
-                        if (rule.hours || rule.minutes || rule.seconds) {
-                            if (dateMS !== +date) {
-                                if (rule.hours) {
-                                    date.setHours(0);
-                                }
-                                if (rule.minutes) {
-                                    date.setMinutes(0);
-                                }
-                                if (rule.seconds) {
-                                    date.setSeconds(0);
-                                }
-                            }
-                            date = recurrence._time(date, end, rule);
-                        }
-
-                        if ((month !== undefined && month !== date.getMonth()) ||
-                            (monthDay && monthDay !== day)) {
-
-                            date.setDate(date.getDate() + 1);
-                        } else if (+date <= end) {
-                            break;
-                        }
-                    }
-
-                    return date;
-                }
-            },
-            daily: {
-                next: function(start, rule) {
-                    if (!rule.hours && !rule.minutes && !rule.seconds) {
-                        start = new Date(start);
-                        start.setDate(start.getDate() + rule.interval);
-                    }
-                    return start;
-                },
-
-                setup: function(rule, start) {
-                    setupRule(rule, start);
-                },
-
-                limit: function(date, end, rule) {
-                    var monthDayMS, weekDayMS, month, dateMS,
-                        allow = allowExpand(rule);
-
-                    end = +end;
-
-                    while (+date <= end) {
-                        dateMS = +date;
-                        if (rule.months && allow) {
-                            date = recurrence._month(date, end, rule);
-                            month = date.getMonth();
-                        }
-
-                        if (rule.monthDays && allow) {
-                            date = recurrence._monthDay(date, end, rule);
-                            monthDayMS = +date;
-                        }
-
-                        if (rule.weekDays && allow) {
-                            date = recurrence._weekDay(date, end, rule);
-                        }
-
-                        weekDayMS = +date;
-
-                        if (rule.hours || rule.minutes || rule.seconds) {
-                            if (dateMS !== +date) {
-                                if (rule.hours) {
-                                    date.setHours(0);
-                                }
-                                if (rule.minutes) {
-                                    date.setMinutes(0);
-                                }
-                                if (rule.seconds) {
-                                    date.setSeconds(0);
-                                }
-                            }
-                            date = recurrence._time(date, end, rule);
-                        }
-
-                        if ((month !== undefined && month !== date.getMonth()) ||
-                            (monthDayMS && monthDayMS !== weekDayMS)) {
-
-                            date.setDate(date.getDate() + 1);
-                        } else if (+date <= end) {
-                            break;
-                        }
-                    }
-                    return date;
-                }
-            },
-            weekly: {
-                next: function(start, rule) {
-                    if (!rule.hours) {
-                        start.setDate(start.getDate() + 1);
-                    }
-                    return start;
-                },
-
-                setup: function(rule, start) {
-                    if (!rule.weekDays) {
-                        rule.weekDays = [{
-                            day: start.getDay(),
-                            offset: 0
-                        }];
-                    }
-
-                    setupRule(rule, start);
-                },
-
-                limit: function(date, end, rule) {
-                    var dateMS = +date,
-                        allow = allowExpand(rule);
-
-                    if (rule.months && allow) {
-                        date = recurrence._month(date, end, rule);
-                    }
-
-                    if (rule.weekDays && allow) {
-                        date = recurrence._weekDay(date, end, rule);
-                    }
-
-                    if (rule.hours || rule.minutes || rule.seconds) {
-                        if (dateMS !== +date) {
-                            if (rule.hours) {
-                                date.setHours(0);
-                            }
-                            if (rule.minutes) {
-                                date.setMinutes(0);
-                            }
-                            if (rule.seconds) {
-                                date.setSeconds(0);
-                            }
-                        }
-                        date = recurrence._time(date, end, rule);
-                    }
-
-                    return date;
-                }
-            },
-            monthly: {
-                setup: function(rule, start, eventStart) {
-                    if (!rule.monthDays && !rule.weekDays) {
-                        start.setDate(eventStart.getDate());
-                    }
-
-                    setupRule(rule, start);
-                },
-                next: function(start, rule) {
-                    var day;
-
-                    if (!rule.monthDays && !rule.weekDays) {
-                        day = start.getDate();
-                        start.setMonth(start.getMonth() + 1);
-
-                        while(start.getDate() !== day) {
-                            start.setDate(day);
-                        }
-                    } else if (!rule.hours && !rule.minutes && !rule.seconds) {
-                        start.setDate(start.getDate() + 1);
-                    }
-                    return start;
-                },
-                limit: function(date, end, rule) {
-                    var day, month, dateMS,
-                        allow = allowExpand(rule);
-
-                    end = +end;
-                    while (+date <= end) {
-                        dateMS = +date;
-                        if (rule.months && allow) {
-                            day = date.getDate();
-                            date = recurrence._month(date, end, rule);
-                            month = date.getMonth();
-
-                            if (!rule.monthDays && !rule.weekDays) {
-                                date.setDate(day);
-                            }
-                        }
-
-                        if (rule.monthDays && allow) {
-                            date = recurrence._monthDay(date, end, rule);
-                        }
-
-                        if (rule.weekDays && allow) {
-                            date = recurrence._weekDay(date, end, rule);
-                        }
-
-                        if (rule.hours || rule.minutes || rule.seconds) {
-                            if (dateMS !== +date) {
-                                if (rule.hours) {
-                                    date.setHours(0);
-                                }
-                                if (rule.minutes) {
-                                    date.setMinutes(0);
-                                }
-                                if (rule.seconds) {
-                                    date.setSeconds(0);
-                                }
-                            }
-                            date = recurrence._time(date, end, rule);
-                        }
-
-                        if (month !== undefined && month !== date.getMonth()) {
-                            date.setDate(date.getDate() + 1);
-                        } else if (+date <= end) {
-                            break;
-                        }
-                    }
-
-                    return date;
-                }
-            },
-            yearly: {
-                setup: function(rule, start) {
-                    setupRule(rule, start);
-                },
-
-                next: function(start, rule) {
-                    var day;
-
-                    if (!rule.hours && !rule.minutes && !rule.seconds) {
-                        if (!rule.months && !rule.monthDays && !rule.weekDays && !rule.yearDays && !rule.weeks) {
-                            start.setFullYear(start.getFullYear() + 1);
-                        } else if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weeks) {
-                            start.setDate(start.getDate() + 1);
-                        } else {
-                            day = start.getDate();
-                            start.setMonth(start.getMonth() + 1);
-
-                            while(start.getDate() !== day) {
-                                start.setDate(day);
-                            }
-                        }
-                    }
-
-                    return start;
-                },
-
-                limit: function(date, end, rule) {
-                    var day, month, dateMS,
-                        allow = allowExpand(rule),
-                        weekStart = rule.weekStart,
-                        modified;
-
-                    end = +end;
-
-                    while (+date <= end) {
-                        dateMS = +date;
-                        modified = false;
-
-                        if (allow && rule.months) {
-                            day = date.getDate();
-                            date = recurrence._month(date, end, rule);
-                            month = date.getMonth();
-
-                            if (!rule.monthDays && !rule.weekDays) {
-                                date.setDate(day);
-                            }
-                        }
-
-                        if (allow && rule.weeks && $.inArray(recurrence.weekInYear(date, weekStart), rule.weeks) === -1) { //TODO: Sort weeks
-                            while ((+date <= end) && $.inArray(recurrence.weekInYear(date, weekStart), rule.weeks) === -1) {
-                                date.setDate(date.getDate() + 7);
-                            }
-
-                            //TODO: test this logic when while ends because date > end and we move backward!!!
-                            date = recurrence.weekDay(date, weekStart, -1); //TODO: implement prevWeekDay
-                        }
-
-                        if (allow && rule.yearDays && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) { //TODO: Sort yearDays
-                            while ((+date <= end) && $.inArray(recurrence.dayInYear(date), rule.yearDays) === -1) {
-                                date.setDate(date.getDate() + 1);
-                            }
-                        }
-
-                        if (allow && rule.monthDays) {
-                            date = recurrence._monthDay(date, end, rule);
-                        }
-
-                        if (allow && rule.weekDays) {
-                            date = recurrence._weekDay(date, end, rule);
-                        }
-
-                        if (rule.hours || rule.minutes || rule.seconds) {
-                            if (dateMS !== +date) {
-                                if (rule.hours) {
-                                    date.setHours(0);
-                                }
-                                if (rule.minutes) {
-                                    date.setMinutes(0);
-                                }
-                                if (rule.seconds) {
-                                    date.setSeconds(0);
-                                }
-                            }
-
-                            day = date.getDate();
-                            date = recurrence._time(date, end, rule);
-                            modified = day !== date.getDate();
-                        }
-
-                        if (month !== undefined && month !== date.getMonth()) {
-                            date.setDate(date.getDate() + 1);
-                        } else if (!modified && +date <= end) {
-                            break;
-                        }
-                    }
-
-                    return date;
-                }
-            }
-        },
-        expandEvent: function(e) {
-            var instance = e.ruleInstance;
-
-            if (!instance && e.rule) {
-                e.ruleInstance = instance = recurrence.parseRule(e.rule);
-            }
-
-            return instance;
-        },
         parseRule: function (rule) {
             var instance = {},
                 property,
@@ -539,7 +109,7 @@ kendo_module({
                         instance.setPositions = parseArray(value, { start: 1, end: 366 });
                         break;
                     case "BYWEEKNO":
-                        instance.weeks = parseArray(value, { start: 1, end: 53 });
+                        instance.weeks = parseArray(value, { start: -53, end: 53 });
                         break;
                     case "WKST":
                         instance.weekStart = weekStart = WEEK_DAYS[value[0]];
@@ -566,6 +136,413 @@ kendo_module({
             return instance;
         },
 
+        expand: function(event, period) {
+            var rule = recurrence.parseRule(event.rule),
+                durationMS = event.end - event.start,
+                start = new Date(period.start),
+                end = new Date(period.end),
+                current = 1,
+                events = [],
+                count,
+                freq;
+
+            if (!rule || +event.start > +end) {
+                return events;
+            }
+
+            freq = recurrence.frequency[rule.freq];
+            count = rule.count;
+
+            if (rule.until && +rule.until < +end) {
+                end = new Date(rule.until);
+            }
+
+            freq.setup(rule, start, event.start);
+
+            //TODO: if event.start is in the same day as start then set hour
+            start.setHours(event.start.getHours());
+            start.setMinutes(event.start.getMinutes());
+            start.setSeconds(event.start.getSeconds());
+            start.setMilliseconds(event.start.getMilliseconds());
+
+            start = freq.limit(start, end, rule);
+
+            while (+start <= end) {
+                events.push(cloneEvent(event, start, durationMS));
+                if (count && count === current) {
+                    break;
+                }
+
+                current++;
+
+                if (!rule.hours && !rule.minutes && !rule.seconds) {
+                    start = freq.next(start, rule);
+                }
+
+                start = freq.limit(start, end, rule);
+            }
+
+            if (rule.setPositions) {
+                events = eventsByPosition(events, rule.setPositions);
+            }
+
+            return events;
+        },
+
+        frequency: {
+            //TODO: FREQ: SECONDLY
+            //TODO: FREQ: MINUTELY
+            hourly: {
+                next: function(start, rule) {
+                    start = new Date(start);
+                    start.setHours(start.getHours() + rule.interval);
+                    return start;
+                },
+
+                setup: function(rule, start) {
+                    setupRule(rule, start);
+                },
+                limit: function(date, end, rule) {
+                    //TODO: check days not milliseconds. DO IT for all!!
+                    var dateMS, monthDay, day, month,
+                        allow = allowExpand(rule);
+
+                    while (+date <= end) {
+                        dateMS = +date;
+
+                        if (rule.months && allow) {
+                            date = recurrence._month(date, end, rule);
+                            month = date.getMonth();
+                            if (+date !== dateMS) {
+                                date.setHours(0);
+                            }
+                        }
+
+                        if (allow && rule.yearDays) {
+                            date = recurrence._yearDay(date, end, rule);
+                        }
+
+                        if (rule.monthDays && allow) {
+                            date = recurrence._monthDay(date, end, rule);
+                            monthDay = date.getDate();
+
+                            if (+date !== dateMS) {
+                                date.setHours(0);
+                            }
+                        }
+
+                        if (rule.weekDays && allow) {
+                            date = recurrence._weekDay(date, end, rule);
+
+                            if (+date !== dateMS) {
+                                date.setHours(0);
+                            }
+                        }
+
+                        day = date.getDate();
+
+                        //TODO: if (month, monthDay, weekDay changes, do not call hours, minutes, seconds
+                        if (rule.hours || rule.minutes || rule.seconds) {
+                            if (dateMS !== +date) {
+                                if (rule.hours) {
+                                    date.setHours(0);
+                                }
+                                if (rule.minutes) {
+                                    date.setMinutes(0);
+                                }
+                                if (rule.seconds) {
+                                    date.setSeconds(0);
+                                }
+                            }
+                            date = recurrence._time(date, end, rule);
+                        }
+
+                        if ((month !== undefined && month !== date.getMonth()) ||
+                            (monthDay && monthDay !== day)) {
+
+                            date.setDate(date.getDate() + 1);
+                        } else if (+date <= end) {
+                            break;
+                        }
+                    }
+
+                    return date;
+                }
+            },
+            daily: {
+                next: function(start, rule) {
+                    start = new Date(start);
+                    start.setDate(start.getDate() + rule.interval);
+                    return start;
+                },
+
+                setup: function(rule, start) {
+                    setupRule(rule, start);
+                },
+
+                limit: function(date, end, rule) {
+                    var monthDayMS, weekDayMS, month, dateMS,
+                        allow = allowExpand(rule);
+
+                    end = +end;
+
+                    while (+date <= end) {
+                        dateMS = +date;
+                        if (rule.months && allow) {
+                            date = recurrence._month(date, end, rule);
+                            month = date.getMonth();
+                        }
+
+                        if (rule.monthDays && allow) {
+                            date = recurrence._monthDay(date, end, rule);
+                            monthDayMS = +date;
+                        }
+
+                        if (rule.weekDays && allow) {
+                            date = recurrence._weekDay(date, end, rule);
+                        }
+
+                        weekDayMS = +date;
+
+                        if (rule.hours || rule.minutes || rule.seconds) {
+                            if (dateMS !== +date) {
+                                if (rule.hours) {
+                                    date.setHours(0);
+                                }
+                                if (rule.minutes) {
+                                    date.setMinutes(0);
+                                }
+                                if (rule.seconds) {
+                                    date.setSeconds(0);
+                                }
+                            }
+                            date = recurrence._time(date, end, rule);
+                        }
+
+                        if ((month !== undefined && month !== date.getMonth()) ||
+                            (monthDayMS && monthDayMS !== weekDayMS)) {
+
+                            date.setDate(date.getDate() + 1);
+                        } else if (+date <= end) {
+                            break;
+                        }
+                    }
+                    return date;
+                }
+            },
+            weekly: {
+                next: function(start) {
+                    start.setDate(start.getDate() + 1);
+                    return start;
+                },
+
+                setup: function(rule, start) {
+                    if (!rule.weekDays) {
+                        rule.weekDays = [{
+                            day: start.getDay(),
+                            offset: 0
+                        }];
+                    }
+
+                    setupRule(rule, start);
+                },
+
+                limit: function(date, end, rule) {
+                    var dateMS = +date,
+                        allow = allowExpand(rule);
+
+                    if (rule.months && allow) {
+                        date = recurrence._month(date, end, rule);
+                    }
+
+                    if (rule.weekDays && allow) {
+                        date = recurrence._weekDay(date, end, rule);
+                    }
+
+                    if (rule.hours || rule.minutes || rule.seconds) {
+                        if (dateMS !== +date) {
+                            if (rule.hours) {
+                                date.setHours(0);
+                            }
+                            if (rule.minutes) {
+                                date.setMinutes(0);
+                            }
+                            if (rule.seconds) {
+                                date.setSeconds(0);
+                            }
+                        }
+                        date = recurrence._time(date, end, rule);
+                    }
+
+                    return date;
+                }
+            },
+            monthly: {
+                setup: function(rule, start, eventStart) {
+                    if (!rule.monthDays && !rule.weekDays) {
+                        start.setDate(eventStart.getDate());
+                    }
+
+                    setupRule(rule, start);
+                },
+                next: function(start, rule) {
+                    var day;
+                    //if (rule.monthDays || rule.weekDays) {
+                    if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weeks) {
+                        start.setDate(start.getDate() + 1);
+                    } else {
+                        //loop till find month with such day
+                        day = start.getDate();
+                        start.setMonth(start.getMonth() + 1);
+
+                        while(start.getDate() !== day) {
+                            start.setDate(day);
+                        }
+                    }
+
+                    return start;
+                },
+                limit: function(date, end, rule) {
+                    var day, month, dateMS,
+                        allow = allowExpand(rule);
+
+                    end = +end;
+                    while (+date <= end) {
+                        dateMS = +date;
+                        if (rule.months && allow) {
+                            day = date.getDate();
+                            date = recurrence._month(date, end, rule);
+                            month = date.getMonth();
+
+                            if (!rule.monthDays && !rule.weekDays) {
+                                date.setDate(day);
+                            }
+                        }
+
+                        if (rule.monthDays && allow) {
+                            date = recurrence._monthDay(date, end, rule);
+                        }
+
+                        if (rule.weekDays && allow) {
+                            date = recurrence._weekDay(date, end, rule);
+                        }
+
+                        if (rule.hours || rule.minutes || rule.seconds) {
+                            if (dateMS !== +date) {
+                                if (rule.hours) {
+                                    date.setHours(0);
+                                }
+                                if (rule.minutes) {
+                                    date.setMinutes(0);
+                                }
+                                if (rule.seconds) {
+                                    date.setSeconds(0);
+                                }
+                            }
+                            date = recurrence._time(date, end, rule);
+                        }
+
+                        if (month !== undefined && month !== date.getMonth()) {
+                            date.setDate(date.getDate() + 1);
+                        } else if (+date <= end) {
+                            break;
+                        }
+                    }
+
+                    return date;
+                }
+            },
+            yearly: {
+                setup: function(rule, start) {
+                    setupRule(rule, start);
+                },
+
+                next: function(start, rule) {
+                    var day;
+
+                    if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weeks) {
+                        start.setDate(start.getDate() + 1);
+                    } else if (rule.months) {
+                        day = start.getDate();
+                        start.setMonth(start.getMonth() + 1);
+
+                        while(start.getDate() !== day) {
+                            start.setDate(day);
+                        }
+                    } else {
+                        start.setFullYear(start.getFullYear() + 1);
+                    }
+
+                    return start;
+                },
+
+                limit: function(date, end, rule) {
+                    var day, month, dateMS,
+                        allow = allowExpand(rule),
+                        weekStart = rule.weekStart,
+                        modified;
+
+                    end = +end;
+
+                    while (+date <= end) {
+                        dateMS = +date;
+                        modified = false;
+
+                        if (allow && rule.months) {
+                            day = date.getDate();
+                            date = recurrence._month(date, end, rule);
+                            month = date.getMonth();
+
+                            if (!rule.monthDays && !rule.weekDays) {
+                                date.setDate(day);
+                            }
+                        }
+
+                        if (allow && rule.weeks) {
+                            date = recurrence._weekNO(date, end, rule);
+                        }
+
+                        if (allow && rule.yearDays) {
+                            date = recurrence._yearDay(date, end, rule);
+                        }
+
+                        if (allow && rule.monthDays) {
+                            date = recurrence._monthDay(date, end, rule);
+                        }
+
+                        if (allow && rule.weekDays) {
+                            date = recurrence._weekDay(date, end, rule);
+                        }
+
+                        if (rule.hours || rule.minutes || rule.seconds) {
+                            if (dateMS !== +date) {
+                                if (rule.hours) {
+                                    date.setHours(0);
+                                }
+                                if (rule.minutes) {
+                                    date.setMinutes(0);
+                                }
+                                if (rule.seconds) {
+                                    date.setSeconds(0);
+                                }
+                            }
+
+                            day = date.getDate();
+                            date = recurrence._time(date, end, rule);
+                            modified = day !== date.getDate();
+                        }
+
+                        if (month !== undefined && month !== date.getMonth()) {
+                            date.setDate(date.getDate() + 1);
+                        } else if (!modified && +date <= end) {
+                            break;
+                        }
+                    }
+
+                    return date;
+                }
+            }
+        },
         dayInYear: function(date) {
             var month = date.getMonth(),
             days = leapYear(date) ? daysInLeapYear[month] : daysInYear[month];
@@ -619,6 +596,7 @@ kendo_module({
             }
         },
 
+        //TODO: Rename to something more readable name!
         weekDay: function(date, dayOfWeek, offset) {
             date = new Date(date);
             offset = offset || 1;
@@ -708,6 +686,75 @@ kendo_module({
 
             if (date.getDay() !== day) {
                 date = recurrence.weekDay(date, day);
+            }
+
+            return date;
+        },
+
+        _yearDay: function(date, end, rule) {
+            var year = leapYear(date) ? 366 : 365,
+                day = recurrence.dayInYear(date),
+                yearDays = rule.yearDays,
+                length = yearDays.length,
+                days = [],
+                idx = 0,
+                yearDay;
+
+            for (; idx < length; idx++) {
+                yearDay = yearDays[idx];
+                if (yearDay < 0) {
+                    yearDay = year + yearDay;
+                }
+
+                if (day === yearDay) {
+                    return date;
+                } else if (day < yearDay) {
+                    days.push(yearDay);
+                }
+            }
+
+            year = date.getFullYear();
+            if (days.length) {
+                day = days.sort(numberSortPredicate)[0];
+            } else {
+                day = 1;
+                year += 1;
+            }
+
+            date.setFullYear(year, 0, day);
+
+            return date;
+        },
+
+        _weekNO: function(date, end, rule) {
+            var weekStart = rule.weekStart,
+                weekNO = recurrence.weekInYear(date, weekStart),
+                weekNumbers = rule.weeks,
+                length = weekNumbers.length,
+                weeks = [],
+                idx = 0,
+                week;
+
+            for (; idx < length; idx++) {
+                week = weekNumbers[idx];
+                if (week < 0) {
+                    week = 53 + week;
+                }
+
+                if (week === weekNO) {
+                    return date;
+                } else if (weekNO < week) {
+                    weeks.push(week);
+                }
+            }
+
+            year = date.getFullYear();
+            if (weeks.length) {
+                day = (weeks.sort(numberSortPredicate)[0] * 7) - 1;
+                date.setFullYear(year, 0, day);
+                date = recurrence.weekDay(date, weekStart, -1); //TODO: implement prevWeekDay
+            } else {
+                date.setFullYear(year + 1, 0, 1);
             }
 
             return date;
