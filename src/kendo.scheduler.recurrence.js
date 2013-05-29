@@ -6,8 +6,9 @@ kendo_module({
     hidden: true
 });
 
-kendo.recurrence = (function($, undefined) {
-    var daysInLeapYear = [0,31,60,91,121,152,182,213,244,274,305,335,366],
+(function($, undefined) {
+    var kendo = window.kendo,
+        daysInLeapYear = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         daysInYear = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
         WEEK_DAYS = {
@@ -32,8 +33,7 @@ kendo.recurrence = (function($, undefined) {
             "yyyyMMddTHHmm",
             "yyyyMMddTHH",
             "yyyyMMdd"
-        ],
-        isArray = $.isArray;
+        ];
 
     var recurrence = {
         expand: function(event, period) {
@@ -98,7 +98,7 @@ kendo.recurrence = (function($, undefined) {
                     return start;
                 },
 
-                setup: function(rule, start, eventStart) {
+                setup: function(rule) {
                     /*
                     if (rule.weekDays) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
@@ -154,7 +154,7 @@ kendo.recurrence = (function($, undefined) {
                     return start;
                 },
 
-                setup: function(rule, start, eventStart) {
+                setup: function(rule, start) {
                     if (rule.weekDays) {
                         rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
                     }
@@ -760,7 +760,7 @@ kendo.recurrence = (function($, undefined) {
 
                     while (hourRule && hourRule < hours) {
                         hourRule = rule._hourRules.shift();
-                    };
+                    }
 
                     if (!hourRule) {
                         rule._hourRules = rule.hours.slice(0);
@@ -784,7 +784,7 @@ kendo.recurrence = (function($, undefined) {
                     while (minuteRule && minuteRule < minutes) {
                         minuteRule = rule._minuteRules.shift();
                         ruleChanged = true;
-                    };
+                    }
 
                     if (!minuteRule) {
                         if (!hourRule || ruleChanged) {
@@ -813,7 +813,7 @@ kendo.recurrence = (function($, undefined) {
                     while (secondRule && secondRule < seconds) {
                         secondRule = secondRules.shift();
                         ruleChanged = true;
-                    };
+                    }
 
                     if (!secondRule) {
                         if (!minuteRule || ruleChanged) {
@@ -879,6 +879,10 @@ kendo.recurrence = (function($, undefined) {
         return result;
     }
 
+    function numberSortPredicate(a, b) {
+        return a - b;
+    }
+
     function parseArray(list, range) {
         var idx = 0,
             length = list.length,
@@ -893,7 +897,7 @@ kendo.recurrence = (function($, undefined) {
             list[idx] = value;
         }
 
-        return list.sort(function(a,b){return a - b});
+        return list.sort(numberSortPredicate);
     }
 
     function parseWeekDayList(list) {
@@ -982,7 +986,7 @@ kendo.recurrence = (function($, undefined) {
         return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
     }
 
-    return {
+    kendo.recurrence = {
         rule: {
             parse: recurrence.parseRule
             //tostring

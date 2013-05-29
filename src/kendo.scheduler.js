@@ -20,8 +20,6 @@ kendo_module({
         Popup = ui.Popup,
         Calendar = ui.Calendar,
         isPlainObject = $.isPlainObject,
-        MS_PER_MINUTE = 60000,
-        MS_PER_DAY = 86400000,
         extend = $.extend,
         proxy = $.proxy,
         isArray = $.isArray,
