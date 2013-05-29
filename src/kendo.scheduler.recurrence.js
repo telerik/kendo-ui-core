@@ -8,8 +8,8 @@ kendo_module({
 
 (function($, undefined) {
     var kendo = window.kendo,
-        daysInLeapYear = [0,31,60,91,121,152,182,213,244,274,305,335,366],
-        daysInYear = [0,31,59,90,120,151,181,212,243,273,304,334,365],
+        daysInLeapYear = [0,31,60,91,121,152,182,213,244,274,305,335,366], //TODO: UPPERCASE
+        daysInYear = [0,31,59,90,120,151,181,212,243,273,304,334,365], //TODO: UPPERCASE
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
         WEEK_DAYS = {
             "SU": 0,
@@ -99,21 +99,7 @@ kendo_module({
                 },
 
                 setup: function(rule, start) {
-                    if (rule.weekDays) {
-                        rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
-                    }
-
-                    if (rule.hours) {
-                        rule._hourRules = rule.hours.slice();
-                    }
-
-                    if (rule.minutes) {
-                        rule._minuteRules = rule.minutes.slice();
-                    }
-
-                    if (rule.seconds) {
-                        rule._secondRules = rule.seconds.slice();
-                    }
+                    setupRule(rule, start);
                 },
                 limit: function(date, end, rule) {
                     //TODO: check days not milliseconds. DO IT for all!!
@@ -196,21 +182,7 @@ kendo_module({
                 },
 
                 setup: function(rule, start) {
-                    if (rule.weekDays) {
-                        rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
-                    }
-
-                    if (rule.hours) {
-                        rule._hourRules = rule.hours.slice();
-                    }
-
-                    if (rule.minutes) {
-                        rule._minuteRules = rule.minutes.slice();
-                    }
-
-                    if (rule.seconds) {
-                        rule._secondRules = rule.seconds.slice();
-                    }
+                    setupRule(rule, start);
                 },
 
                 limit: function(date, end, rule) {
@@ -279,21 +251,7 @@ kendo_module({
                         }];
                     }
 
-                    if (rule.weekDays) {
-                        rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
-                    }
-
-                    if (rule.hours) {
-                        rule._hourRules = rule.hours.slice();
-                    }
-
-                    if (rule.minutes) {
-                        rule._minuteRules = rule.minutes.slice();
-                    }
-
-                    if (rule.seconds) {
-                        rule._secondRules = rule.seconds.slice();
-                    }
+                    setupRule(rule, start);
                 },
 
                 limit: function(date, end, rule) {
@@ -327,6 +285,13 @@ kendo_module({
                 }
             },
             monthly: {
+                setup: function(rule, start, eventStart) {
+                    if (!rule.monthDays && !rule.weekDays) {
+                        start.setDate(eventStart.getDate());
+                    }
+
+                    setupRule(rule, start);
+                },
                 next: function(start, rule) {
                     var day;
 
@@ -390,30 +355,13 @@ kendo_module({
                     }
 
                     return date;
-                },
-                setup: function(rule, start, eventStart) {
-                    if (!rule.monthDays && !rule.weekDays) {
-                        start.setDate(eventStart.getDate());
-                    }
-
-                    if (rule.weekDays && rule._weekDayRules === undefined) {
-                        rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
-                    }
-
-                    if (rule.hours) {
-                        rule._hourRules = rule.hours.slice();
-                    }
-
-                    if (rule.minutes) {
-                        rule._minuteRules = rule.minutes.slice();
-                    }
-
-                    if (rule.seconds) {
-                        rule._secondRules = rule.seconds.slice();
-                    }
                 }
             },
             yearly: {
+                setup: function(rule, start) {
+                    setupRule(rule, start);
+                },
+
                 next: function(start, rule) {
                     var day;
 
@@ -506,23 +454,6 @@ kendo_module({
                     }
 
                     return date;
-                },
-                setup: function(rule, start) {
-                    if (rule.weekDays && rule._weekDayRules === undefined) {
-                        rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
-                    }
-
-                    if (rule.hours) {
-                        rule._hourRules = rule.hours.slice();
-                    }
-
-                    if (rule.minutes) {
-                        rule._minuteRules = rule.minutes.slice();
-                    }
-
-                    if (rule.seconds) {
-                        rule._secondRules = rule.seconds.slice();
-                    }
                 }
             }
         },
@@ -880,6 +811,26 @@ kendo_module({
             return date;
         }
     };
+
+    //helper method for freq
+    function setupRule(rule, start) {
+        if (rule.weekDays) {
+            rule._weekDayRules = filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
+        }
+
+        if (rule.hours) {
+            rule._hourRules = rule.hours.slice();
+        }
+
+        if (rule.minutes) {
+            rule._minuteRules = rule.minutes.slice();
+        }
+
+        if (rule.seconds) {
+            rule._secondRules = rule.seconds.slice();
+        }
+    }
+    //
 
     function allowTimeExpand(currentRules, timeRules) {
         return !currentRules || currentRules.length === 0 || currentRules.length === timeRules.length;
