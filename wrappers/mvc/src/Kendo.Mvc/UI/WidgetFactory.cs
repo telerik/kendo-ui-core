@@ -1070,6 +1070,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="MobileNavBar"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileNavBar()
+        ///             .Name("MobileNavBar")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileNavBarBuilder MobileNavBar()
+        {
+            return new MobileNavBarBuilder(new MobileNavBar(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="MobilePopOver"/>
         /// </summary>
         /// <example>
