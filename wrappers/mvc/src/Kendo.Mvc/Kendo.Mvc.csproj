@@ -1387,4 +1387,4 @@
     <Compile Include="UI\MobilePopOver\Fluent\MobilePopOverEventBuilder.cs" />
     <Compile Include="UI\MobilePopOver\Html\MobilePopOverHtmlBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\MobileLayout\MobileLayout.cs" /><Compile Include="UI\MobileLayout\Fluent\MobileLayoutBuilder.cs" /><Compile Include="UI\MobileLayout\Fluent\MobileLayoutEventBuilder.cs" /><Compile Include="UI\MobileLayout\Html\MobileLayoutHtmlBuilder.cs" /></ItemGroup></Project>

@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI
                 json["width"] = Width;
             }
             
-            //<< Serialization
+        //<< Serialization
 
             json["direction"] = Direction;
         }

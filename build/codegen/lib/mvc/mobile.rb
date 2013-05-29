@@ -28,7 +28,8 @@ module CodeGen::MVC::Mobile
         ]
 
         IGNORED = [
-            'popover.popup.direction'
+            'popover.popup.direction',
+            'layout.id'
         ]
 
         CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
