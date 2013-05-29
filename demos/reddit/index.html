@@ -69,17 +69,6 @@
             </ul>
         </div>
 
-        <div data-role="view" id="comments" data-transition="slide" data-after-show="renderComments" data-init="initCommentsTreeView">
-            <header data-role="header">
-                <div data-role="navbar">
-                    <button data-role="backbutton" data-align="left">Back</button>
-                    <span data-role="view-title">&nbsp;</span>
-                </div>
-            </header>
-
-            <div id="comments-tree"></div>
-        </div>
-
         <div data-role="view" id="detail" data-transition="slide" data-after-show="renderDetail" data-zoom="true" data-title="" data-hide="resetDetail">
             <header data-role="header">
                 <div data-role="navbar">
@@ -113,10 +102,7 @@
                 </div>
                 <div class="item-summary">
                    <h3>#: data.title #</h3>
-                   <p> #: data.subreddit # | #: data.ups - data.downs # | #: kendo.toString(new Date(data.created_utc * 1000), 'HH:mm') # </p>
-                </div>
-                <div class="item-comments">
-                    <a data-role="button" data-icon="comments">#: data.num_comments #</a>
+                   <p> #: data.subreddit # | #: data.ups - data.downs # | #: kendo.toString(new Date(data.created_utc * 1000), 'HH:mm') # | <a data-rel="external" href="http://reddit.com/#: data.permalink #" target="_blank">#= data.num_comments # comments on Reddit</a></p>
                 </div>
             </div>
         </script>
