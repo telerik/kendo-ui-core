@@ -697,19 +697,20 @@ kendo_module({
         for (name in proto.fields) {
             field = proto.fields[name];
             type = field.type || "default";
-            value = null;
+            value = null,
+            originalName = name;
 
             name = typeof (field.field) === STRING ? field.field : name;
 
             if (!field.nullable) {
-                value = proto.defaults[name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
+                value = proto.defaults[originalName !== name ? originalName : name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
             }
 
             if (options.id === name) {
                 proto._defaultId = value;
             }
 
-            proto.defaults[name] = value;
+            proto.defaults[originalName !== name ? originalName : name] = value;
 
             field.parse = field.parse || parsers[type];
         }

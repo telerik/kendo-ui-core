@@ -100,6 +100,32 @@
                 ok(model.isNew());
             });
 
+            test("define with custom field.name mapping", function() {
+                var MyModel = Model.define({
+                    id: "id",
+                    fields: {
+                        name: { field: "Name" }
+                    }
+                });
+
+                var model = new MyModel();
+                ok("name" in model);
+                ok(!("Name" in model));
+            });
+
+            test("define with custom field mapping", function() {
+                var MyModel = Model.define({
+                    id: "id",
+                    fields: {
+                        name: "Name"
+                    }
+                });
+
+                var model = new MyModel();
+                ok("name" in model);
+                ok(!("Name" in model));
+            });
+
             test("isNew returns true if no key is defined", function() {
                 var MyModel = Model.define({
                     id: "id"
@@ -194,21 +220,6 @@
 
                 equal(model.defaults["foo"], "");
                 equal(model.get("foo"), "");
-            });
-
-            test("empty string default value is set for field of type string where field name differs from the field", function() {
-                var MyModel = Model.define({
-                    fields: {
-                        foo: {
-                            field: "bar", type: "string"
-                        }
-                    }
-                });
-
-                var model = new MyModel();
-
-                equal(model.defaults["bar"], "");
-                equal(model.get("bar"), "");
             });
 
             test("model data is synchronized with original data", function() {
