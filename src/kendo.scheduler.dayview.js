@@ -191,8 +191,8 @@ kendo_module({
         options: {
             name: "MultiDayView",
             headerDateFormat: "ddd M/dd",
-            eventTimeFormat: "{0:H:mm} - {1:H:mm}",
-            timeFormat: "HH:mm",
+            eventTimeFormat: "{0:t} - {1:t}",
+            timeFormat: "t",
             selectedDateFormat: "{0:D}",
             titleAttrFormat: "({0}): {1}",
             allDaySlot: true,

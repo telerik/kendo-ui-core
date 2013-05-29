@@ -9,6 +9,11 @@ kendo_module({
         name: "Scheduler Day View",
         description: "Scheduler Day View",
         depends: [ "scheduler.dayview" ]
+    }, {
+        id: "scheduler-agendaview",
+        name: "Scheduler Agenda View",
+        description: "Scheduler Agenda View",
+        depends: [ "scheduler.agendaview" ]
     } ]
 });
 
@@ -675,7 +680,8 @@ kendo_module({
 
     var defaultViews = {
         day: kendo.ui.DayView,
-        week: kendo.ui.WeekView
+        week: kendo.ui.WeekView,
+        agenda: kendo.ui.AgendaView
     };
 
     ui.plugin(Scheduler);

@@ -23,6 +23,7 @@
         <script src="../src/kendo.datetimepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.dayview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.agendaview.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
 
         <style>
@@ -122,7 +123,7 @@
             height: 800,
             // numberOfTimeSlots: 4,
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
-            views: ["day", { name: "week", selected: true }],
+            views: ["day", { name: "week", selected: true }, { name: "agenda", }],
             dataSource: {
                 schema: {
                     model: {
