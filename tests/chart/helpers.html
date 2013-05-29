@@ -939,6 +939,7 @@
                 // ------------------------------------------------------------
                 var Aggregates = kendo.dataviz.Aggregates;
                 var values = [1, 2, 3];
+                var sparseValues = [1, 2, undefined, 3];
 
                 module("Aggregates");
 
@@ -946,20 +947,64 @@
                     equal(Aggregates.min(values), 1);
                 });
 
+                test("min with sparse values", function() {
+                    equal(Aggregates.min(sparseValues), 1);
+                });
+
+                test("min with no values", function() {
+                    equal(Aggregates.min([]), undefined);
+                });
+
                 test("max", function() {
                     equal(Aggregates.max(values), 3);
+                });
+
+                test("max with sparse values", function() {
+                    equal(Aggregates.max(sparseValues), 3);
+                });
+
+                test("max with no values", function() {
+                    equal(Aggregates.max([]), undefined);
                 });
 
                 test("sum", function() {
                     equal(Aggregates.sum(values), 6);
                 });
 
+                test("sum with sparse values", function() {
+                    equal(Aggregates.sum(sparseValues), 6);
+                });
+
+                test("sum with no values", function() {
+                    equal(Aggregates.sum([]), 0);
+                });
+
                 test("avg", function() {
                     equal(Aggregates.avg(values), 2);
                 });
 
+                test("avg with sparse values", function() {
+                    equal(Aggregates.avg(sparseValues), 2);
+                });
+
+                test("avg with no values", function() {
+                    equal(Aggregates.avg([]), undefined);
+                })
+
+                test("avg with no valid values", function() {
+                    equal(Aggregates.avg([null]), undefined);
+                });;
+
                 test("count", function() {
                     equal(Aggregates.count(values), 3);
+                });
+
+                test("count with sparse values", function() {
+                    equal(Aggregates.count(sparseValues), 3);
+                });
+
+                test("count with no values", function() {
+                    equal(Aggregates.count([]), 0);
                 });
             })();
 

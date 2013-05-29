@@ -8348,11 +8348,18 @@ kendo_module({
         },
 
         count: function(values) {
-            return values.length;
+            return sparseArrayCount(values);
         },
 
         avg: function(values) {
-            return Aggregates.sum(values) / Aggregates.count(values);
+            var result = values[0],
+                count = sparseArrayCount(values);
+
+            if (count > 0) {
+                result = Aggregates.sum(values) / count;
+            }
+
+            return result;
         }
     };
 
@@ -8923,6 +8930,22 @@ kendo_module({
             min: min === MAX_VALUE ? undefined : min,
             max: max === MIN_VALUE ? undefined : max
         };
+    }
+
+    function sparseArrayCount(arr) {
+        var i,
+            length = arr.length,
+            n,
+            count = 0;
+
+        for (i = 0; i < length; i++) {
+            n = arr[i];
+            if (n !== null && isFinite(n)) {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     function intersection(a1, a2, b1, b2) {
