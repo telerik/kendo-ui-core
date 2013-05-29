@@ -4155,13 +4155,6 @@
                     ok(factory.create([{ type: "bar" }]) instanceof BarPlotArea);
                 });
 
-                test("plot area type is created with set priority", function() {
-                    factory.register(FooPlotArea, ["foo"], 1);
-                    factory.register(BarPlotArea, ["bar"], 2);
-
-                    ok(factory.create([{ type: "foo" }, { type: "bar" }]) instanceof BarPlotArea);
-                });
-
                 test("matching series are passed to plot area", function() {
                     function PlotArea(series) {
                         equal(series[0].type, "bar")
@@ -4190,9 +4183,9 @@
                     factory.create([{ type: "bar" }], { foo: true });
                 });
 
-                test("plot area type with lowest priority is default", function() {
-                    factory.register(FooPlotArea, ["foo"], 1);
-                    factory.register(BarPlotArea, ["bar"], 2);
+                test("first registered plot area is default", function() {
+                    factory.register(FooPlotArea, ["foo"]);
+                    factory.register(BarPlotArea, ["bar"]);
 
                     ok(factory.create([{ type: "baz" }]) instanceof FooPlotArea);
                 });

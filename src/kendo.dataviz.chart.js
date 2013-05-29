@@ -1143,22 +1143,18 @@ kendo_module({
             this._registry = [];
         },
 
-        register: function(type, seriesTypes, priority) {
+        register: function(type, seriesTypes) {
             this._registry.push({
                 type: type,
-                seriesTypes: seriesTypes,
-                priority: priority
-            });
-
-            this._registry.sort(function(a, b) {
-                return (b.priority || 0) - (a.priority || 0);
+                seriesTypes: seriesTypes
             });
         },
 
         create: function(srcSeries, options) {
             var registry = this._registry,
-                entry,
+                match = registry[0],
                 i,
+                entry,
                 series;
 
             for (i = 0; i < registry.length; i++) {
@@ -1166,11 +1162,12 @@ kendo_module({
                 series = filterSeriesByType(srcSeries, entry.seriesTypes);
 
                 if (series.length > 0) {
+                    match = entry;
                     break;
                 }
             }
 
-            return new entry.type(series, options);
+            return new match.type(series, options);
         }
     });
     PlotAreaFactory.current = new PlotAreaFactory();
@@ -7588,7 +7585,6 @@ kendo_module({
             append(this.options.legend.items, chart.legendItems);
         }
     });
-    PlotAreaFactory.current.register(PiePlotArea, [PIE], 20);
 
     var DonutPlotArea = PiePlotArea.extend({
         render: function() {
@@ -7611,7 +7607,6 @@ kendo_module({
             plotArea.appendChart(donutChart);
         }
     });
-    PlotAreaFactory.current.register(DonutPlotArea, [DONUT], 10);
 
     var PieAnimation = ElementAnimation.extend({
         options: {
@@ -9482,14 +9477,17 @@ kendo_module({
     // Exports ================================================================
     dataviz.ui.plugin(Chart);
 
-    PlotAreaFactory.current.register(XYPlotArea, [
-        SCATTER, SCATTER_LINE, BUBBLE
-    ], 10);
-
     PlotAreaFactory.current.register(CategoricalPlotArea, [
         BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
         CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
     ]);
+
+    PlotAreaFactory.current.register(XYPlotArea, [
+        SCATTER, SCATTER_LINE, BUBBLE
+    ]);
+
+    PlotAreaFactory.current.register(PiePlotArea, [PIE]);
+    PlotAreaFactory.current.register(DonutPlotArea, [DONUT]);
 
     SeriesBinder.current.register(
         [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],

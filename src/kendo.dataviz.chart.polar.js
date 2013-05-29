@@ -1165,8 +1165,8 @@ kendo_module({
     }
 
     // Exports ================================================================
-    PlotAreaFactory.current.register(PolarPlotArea, POLAR_CHARTS, 10);
-    PlotAreaFactory.current.register(RadarPlotArea, RADAR_CHARTS, 20);
+    PlotAreaFactory.current.register(PolarPlotArea, POLAR_CHARTS);
+    PlotAreaFactory.current.register(RadarPlotArea, RADAR_CHARTS);
 
     SeriesBinder.current.register(POLAR_CHARTS, [X, Y], ["color"]);
     SeriesBinder.current.register(RADAR_CHARTS, ["value"], ["color"]);
