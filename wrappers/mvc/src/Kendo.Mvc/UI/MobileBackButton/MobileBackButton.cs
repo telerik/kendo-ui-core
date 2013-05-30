@@ -29,6 +29,8 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
+        public MobileButtonAlign Align { get; set; }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             //no initializtion scripts for mobile widgets

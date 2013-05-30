@@ -36,6 +36,11 @@ namespace Kendo.Mvc.UI
                 html.Attribute("data-icon", component.Icon);
             }
 
+            if (component.Align != MobileButtonAlign.Center)
+            {
+                html.Attribute("data-align", component.Align.ToString().ToLower());
+            }
+
             html.Attributes(component.HtmlAttributes);
 
             return html;

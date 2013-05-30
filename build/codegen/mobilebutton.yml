@@ -19,6 +19,15 @@
       :type: String
       :description: This value will be available when the action callback of ActionSheet item is executed
 
+    - :name: align
+      :type: Object
+      :description: Use the align data attribute to specify the elements position inside the NavBar. By default, elements without any align are centered.
+      :values:
+          - center
+          - left
+          - right
+
+
     - :name: rel
       :type : Object
       :values:

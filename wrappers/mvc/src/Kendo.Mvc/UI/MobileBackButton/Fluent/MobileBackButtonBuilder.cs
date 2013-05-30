@@ -43,7 +43,16 @@ namespace Kendo.Mvc.UI.Fluent
         
         //<< Fields
 
+        /// <summary>
+        /// Use the align data attribute to specify the elements position inside the NavBar. By default, elements without any align are centered.
+        /// </summary>
+        /// <param name="value">The value that configures the align.</param>
+        public MobileBackButtonBuilder Align(MobileButtonAlign value)
+        {
+            container.Align = value;
 
+            return this;
+        }
         
         /// <summary>
         /// Configures the client-side events.

@@ -35,6 +35,8 @@ namespace Kendo.Mvc.UI
         
         public string ActionsheetContext { get; set; }
         
+        public MobileButtonAlign Align { get; set; }
+        
         public MobileButtonRel Rel { get; set; }
         
         //<< Fields

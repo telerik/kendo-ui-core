@@ -47,6 +47,11 @@ namespace Kendo.Mvc.UI
                 html.Attribute("data-target", component.Transition);
             }
 
+            if (component.Align != MobileButtonAlign.Center)
+            {
+                html.Attribute("data-align", component.Align.ToString().ToLower());
+            }
+
             if (component.Rel != MobileButtonRel.None)
             {
                 html.Attribute("data-rel", component.Rel.ToString().ToLower());

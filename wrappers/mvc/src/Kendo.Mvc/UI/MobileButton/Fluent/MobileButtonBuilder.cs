@@ -86,6 +86,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Use the align data attribute to specify the elements position inside the NavBar. By default, elements without any align are centered.
+        /// </summary>
+        /// <param name="value">The value that configures the align.</param>
+        public MobileButtonBuilder Align(MobileButtonAlign value)
+        {
+            container.Align = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// Specifies the widget to be open when is tapped (the href must be set too)
         /// </summary>
         /// <param name="value">The value that configures the rel.</param>
