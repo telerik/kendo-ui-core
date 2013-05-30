@@ -480,6 +480,22 @@
                 equal(events.length, 0);
             });
 
+            test("DAILY occurrences method limits BYDAY (3TH)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 4, 10, 16, 30),
+                    end: new Date(2013, 4, 10, 17, 0),
+                    rule: "FREQ=DAILY;BYDAY=3TH"
+                }
+
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10), end: new Date(2013, 4, 17) } );
+
+                equal(events.length, 1);
+                equal(events[0].start.getTime(), +new Date(2013, 4, 16, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 4, 16, 17, 0));
+            });
+
             test("DAILY occurrences method limits BYDAY (-3FR)", function() {
                 var schedulerEvent = {
                     uid: "id",

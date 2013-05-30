@@ -584,16 +584,14 @@ kendo_module({
         },
 
         isInWeek: function(date, offset, weekStart) {
-            var weekInMonth = recurrence.weekInMonth(date, weekStart);
-            if (offset > 0) {
-                if (offset === weekInMonth) {
-                    return true;
-                }
-            } else {
-                if ((recurrence.numberOfWeeks(date, weekStart) + (offset + 1)) === weekInMonth) {
-                    return true;
-                }
+            return recurrence.weekInMonth(date, weekStart) === recurrence.offsetWeek(date, offset, weekStart);
+        },
+
+        offsetWeek: function(date, offset, weekStart) {
+            if (offset < 0) {
+                offset = recurrence.numberOfWeeks(date, weekStart) + (offset + 1);
             }
+            return offset;
         },
 
         //TODO: Rename to something more readable name!
@@ -820,19 +818,16 @@ kendo_module({
 
         _weekDay: function(date, end, rule) {
             var weekDays = rule.weekDays,
-                interval = rule.interval,
                 weekStart = rule.weekStart,
-                currentDay = date.getDay(),
-                weekDayRules = availableWeekDays(weekDays, currentDay, weekStart),
-                weekDayRule,
-                day, offset;
+                weekDayRules = ruleWeekValues(weekDays, date, weekStart),
+                interval = rule.interval,
+                weekDayRule, day, offset;
 
             if (weekDayRules === null) {
                 return date;
             }
 
             weekDayRule = weekDayRules[0];
-
             if (!weekDayRule) {
                 weekDayRule = weekDays[0];
                 date = recurrence.weekDay(date, weekStart);
@@ -846,18 +841,10 @@ kendo_module({
             offset = weekDayRule.offset;
             rule._weekDayFound = true;
 
-            //TODO: refactor
             if (offset) {
-                while (!recurrence.isInWeek(date, offset, weekStart)) {
-                    if (date.getDay() === weekStart) {
-                        date.setDate(date.getDate() + 1);
-                    }
-
-                    date = recurrence.weekDay(date, weekStart);
-
-                    if (+date > +end) {
-                        break;
-                    }
+                while (date <= end && !recurrence.isInWeek(date, offset, weekStart)) {
+                    date.setDate(date.getDate() + 7);
+                    date = recurrence.weekDay(date, weekStart, -1);
                 }
             }
 
@@ -866,74 +853,49 @@ kendo_module({
             }
 
             return date;
-        },
+        }
+    };
 
-        /*_weekDay: function(date, end, rule) {
-            var weekDayRules = rule._weekDayRules,
-                currentDay = date.getDay(),
-                weekStart = rule.weekStart,
-                day, offset;
+    //helper method for freq
+    function ruleWeekValues(weekDays, date, weekStart) {
+        var currentDay = date.getDay(),
+            length = weekDays.length,
+            weekDay, day, offset,
+            weekNumber,
+            result = [],
+            idx = 0;
 
-            if (!weekDayRules.length && rule.interval > 1) {
-                date.setDate(date.getDate() + ((rule.interval - 1) * 7));
-            }
+        if (currentDay < weekStart) {
+            currentDay += weekStart;
+        }
 
-            rule._weekDayRules = weekDayRules = rule.weekDays.slice();
-            weekDayRule = weekDayRules.shift();
-            day = weekDayRule.day;
-
-            if (currentDay < weekStart) {
-                currentDay += weekStart;
-            }
+        for (;idx < length; idx++) {
+            weekDay = weekDays[idx];
+            offset = weekDay.offset;
+            day = weekDay.day;
 
             if (day < weekStart) {
                 day += weekStart;
             }
 
-            while (weekDayRule && day < currentDay) {
-                weekDayRule = weekDayRules.shift();
-                if (weekDayRule) {
-                    day = weekDayRule.day;
-                    if (day < weekStart) {
-                        day += weekStart;
-                    }
+            //TODO: check for performance issues
+            weekNumber = recurrence.weekInMonth(date, weekStart);
+            offset = offset ? recurrence.offsetWeek(date, offset, weekStart) : weekNumber;
+
+            if (weekNumber < offset) {
+                result.push(weekDay);
+            } else if (weekNumber === offset) {
+                if (currentDay < day) {
+                    result.push(weekDay);
+                } else if (currentDay === day) {
+                    return null;
                 }
             }
+        }
 
-            if (!weekDayRule) {
-                date = recurrence.weekDay(date, weekStart);
-                rule._weekDayRules = rule.weekDays.slice(0);
-                weekDayRule = rule._weekDayRules.shift();
-                day = weekDayRule.day;
-            }
+        return result;
+    }
 
-            day = weekDayRule.day;
-            offset = weekDayRule.offset;
-
-            if (offset) {
-                while (!recurrence.isInWeek(date, offset, weekStart)) {
-                    if (date.getDay() === weekStart) {
-                        date.setDate(date.getDate() + 1);
-                    }
-
-                    date = recurrence.weekDay(date, weekStart);
-
-                    if (+date > +end) {
-                        break;
-                    }
-                }
-            }
-
-            if (date.getDay() !== day) {
-                date = recurrence.weekDay(date, day);
-            }
-
-            return date;
-        },*/
-
-    };
-
-    //helper method for freq
     function ruleValues(rules, value, normalize) {
         var idx = 0,
             length = rules.length,
@@ -958,15 +920,6 @@ kendo_module({
     }
 
     function setupRule(rule, start) {
-        /*if (rule.weekDays) {
-            rule._weekDayRules = rule.weekDays.slice(); //filterWeekDays(rule.weekDays, start.getDay(), rule.weekStart).slice(0);
-        }*/
-
-        if (rule.weekDays) {
-            rule._weekDayIdx = 0;
-            rule._weekDaysLength = rule.weekDays.length;
-        }
-
         if (rule.hours) {
             rule._hourRules = rule.hours.slice();
         }
@@ -979,7 +932,6 @@ kendo_module({
             rule._secondRules = rule.seconds.slice();
         }
     }
-    //
 
     function allowTimeExpand(currentRules, timeRules) {
         return !currentRules || currentRules.length === 0 || currentRules.length === timeRules.length;
@@ -1061,36 +1013,6 @@ kendo_module({
             };
         }
         return list;
-    }
-
-    function availableWeekDays(weekDays, currentDay, weekStart) {
-        var length = weekDays.length,
-            result = [],
-            idx = 0,
-            weekDay, day;
-
-        if (currentDay < weekStart) {
-            currentDay += weekStart;
-        }
-
-        for (;idx < length; idx++) {
-            weekDay = weekDays[idx];
-            day = weekDay.day;
-
-            if (day < weekStart) {
-                day += weekStart;
-            }
-
-            //TODO: add special check for offset date!!!
-            //
-            if (currentDay === day && !weekDay.offset) {
-                return null;
-            } else if (currentDay <= day) {//TODO: take into account offset here!!!
-                result.push(weekDay);
-            }
-        }
-
-        return result;
     }
 
     function filterWeekDays(weekDays, currentDay, weekStart) {
