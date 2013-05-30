@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines the SplitView style - horizontal or vertical.
         /// </summary>
         /// <param name="value">The value that configures the style.</param>
-        public MobileSplitViewBuilder Style(string value)
+        public MobileSplitViewBuilder Style(MobileSplitViewStyle value)
         {
             container.Style = value;
 

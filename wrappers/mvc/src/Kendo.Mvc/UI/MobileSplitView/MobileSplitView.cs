@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI
 
 //>> Fields
         
-        public string Style { get; set; }
+        public MobileSplitViewStyle Style { get; set; }
         
         public List<MobileSplitViewPane> Panes
         {

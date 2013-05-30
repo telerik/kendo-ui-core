@@ -28,11 +28,8 @@ namespace Kendo.Mvc.UI
                 .Attribute("id", component.Id);
 
             AddEventAttributes(html, component.Events);
-
-            if (component.Style.HasValue())
-            {
-                html.Attribute("data-style", component.Style);
-            }
+            
+            html.Attribute("data-style", component.Style.ToString().ToLower());            
 
             foreach (var pane in component.Panes)
             {

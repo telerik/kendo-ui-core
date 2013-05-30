@@ -1,4 +1,11 @@
 :options:
+    - :name: style
+      :type: Object
+      :description: Defines the SplitView style - horizontal or vertical.
+      :values:
+          - horizontal
+          - vertical
+
     - :name: panes
       :type: Array
       :recursive: true
