@@ -236,6 +236,20 @@
                 ok(textbox._prevent(48 /* 0 */, shiftKey));
                 equal(input.val(), "10");
             });
+
+            asyncTest("Avoid exception when group separator is empty string", function() {
+                kendo.culture().numberFormat[","] = "";
+
+                var textbox = new NumericTextBox(input);
+                textbox._text.focus();
+
+                setTimeout(function() {
+                    kendo.culture().numberFormat[","] = ",";
+                    start();
+                    ok(true);
+                });
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
