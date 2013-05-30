@@ -1,0 +1,32 @@
+[
+	{
+		"unit": "Sales",
+		"budget": 40000,
+		"spending": 52800
+	},
+	{
+		"unit": "Marketing",
+		"budget": 20000,
+		"spending": 42000
+	},
+	{
+		"unit": "Development",
+		"budget": 60000,
+		"spending": 21400
+	},
+	{
+		"unit": "Customer Support",
+		"budget": 30000,
+		"spending": 28500
+	},
+	{
+		"unit": "IT",
+		"budget": 25000,
+		"spending": 18900
+	},
+	{
+		"unit": "Administration",
+		"budget": 10000,
+		"spending": 11100
+	}
+]
