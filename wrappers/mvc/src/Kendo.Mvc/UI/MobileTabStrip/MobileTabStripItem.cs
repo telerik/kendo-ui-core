@@ -42,6 +42,8 @@ namespace Kendo.Mvc.UI
         
         public string ActionsheetContext { get; set; }
         
+        public string Badge { get; set; }
+        
         //<< Fields
 
         public MobileButtonRel Rel { get; set; }
@@ -63,6 +65,11 @@ namespace Kendo.Mvc.UI
             if (ActionsheetContext.HasValue())
             {
                 json["actionsheet-context"] = ActionsheetContext;
+            }
+            
+            if (Badge.HasValue())
+            {
+                json["badge"] = Badge;
             }
             
         //<< Serialization

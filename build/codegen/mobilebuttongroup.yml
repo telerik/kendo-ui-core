@@ -13,3 +13,6 @@
       :type: String
       :description: Specifies the text of the item
 
+    - :name: items.badge
+      :type: String
+      :description: Specifies the value shown in badge icon

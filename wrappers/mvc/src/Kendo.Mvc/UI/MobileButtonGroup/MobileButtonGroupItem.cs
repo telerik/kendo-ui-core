@@ -36,6 +36,8 @@ namespace Kendo.Mvc.UI
         
         public string Text { get; set; }
         
+        public string Badge { get; set; }
+        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -45,6 +47,11 @@ namespace Kendo.Mvc.UI
             if (Icon.HasValue())
             {
                 json["icon"] = Icon;
+            }
+            
+            if (Badge.HasValue())
+            {
+                json["badge"] = Badge;
             }
             
         //<< Serialization

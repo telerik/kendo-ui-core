@@ -29,7 +29,7 @@
 
 
     - :name: rel
-      :type : Object
+      :type: Object
       :values:
           - none
           - actionSheet
@@ -37,3 +37,7 @@
           - modalView
           - external
       :description: Specifies the widget to be open when is tapped (the href must be set too)
+
+    - :name: badge
+      :type: String
+      :description: Specifies the value shown in badge icon

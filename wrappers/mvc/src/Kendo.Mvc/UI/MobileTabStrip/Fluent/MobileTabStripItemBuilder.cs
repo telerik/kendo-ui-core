@@ -71,6 +71,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Specifies the value shown in badge icon
+        /// </summary>
+        /// <param name="value">The value that configures the badge.</param>
+        public MobileTabStripItemBuilder Badge(string value)
+        {
+            container.Badge = value;
+
+            return this;
+        }
+        
         //<< Fields
 
         /// <summary>

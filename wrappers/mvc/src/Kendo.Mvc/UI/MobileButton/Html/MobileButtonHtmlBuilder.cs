@@ -61,6 +61,11 @@ namespace Kendo.Mvc.UI
                 }
             }
 
+            if (component.Badge.HasValue())
+            {
+                html.Attribute("data-badge", component.Badge);
+            }
+
             html.Attributes(component.HtmlAttributes);
 
             return html;

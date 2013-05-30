@@ -39,6 +39,8 @@ namespace Kendo.Mvc.UI
         
         public MobileButtonRel Rel { get; set; }
         
+        public string Badge { get; set; }
+        
         //<< Fields
 
         public override void WriteInitializationScript(TextWriter writer)

@@ -60,9 +60,9 @@ namespace Kendo.Mvc.UI
                         .Attributes(item.HtmlAttributes)
                         .Text(item.Text);
 
-            if (item.Icon.HasValue())
+            foreach (var keyValuePair in item.ToJson())
             {
-                dom.Attribute("data-icon", item.Icon);
+                dom.Attribute("data-" + keyValuePair.Key, keyValuePair.Value.ToString());
             }
 
             return dom;
