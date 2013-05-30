@@ -99,14 +99,6 @@
                 equal(view.datesHeader.find("th").text(), "Sat 1/26");
             });
 
-            test("dates are formatted with custom format", function() {
-                var view = setup({ headerDateFormat: "d", dates: [new Date("1/26/2013")] });
-
-                view.render();
-
-                equal(view.datesHeader.find("th").text(), "1/26/2013");
-            });
-
             test("title is read from the options", function() {
                 var view = setup({ title: "the title" });
 
@@ -119,8 +111,8 @@
                 view.render();
 
                 equal(view.times.find("th").length, 25);
-                equal(view.times.find("th:first").text(), "00:00");
-                equal(view.times.find("th:last").text(), "00:00");
+                equal(view.times.find("th:first").text(), "12:00 AM");
+                equal(view.times.find("th:last").text(), "12:00 AM");
             });
 
             test("render time slots with not exact start time", function() {
@@ -131,7 +123,7 @@
                 view.render();
 
                 equal(view.times.find("th").length, 15);
-                equal(view.times.find("th:first").text(), "10:10");
+                equal(view.times.find("th:first").text(), "10:10 AM");
             });
 
             test("time is show in major time slots", function() {
@@ -144,11 +136,11 @@
                 view.render();
                 var cells = view.times.find("th");
 
-                equal(cells.first().text(), "10:00");
+                equal(cells.first().text(), "10:00 AM");
                 equal(cells.eq(1).html(), "&nbsp;");
-                equal(cells.eq(2).text(), "10:30");
+                equal(cells.eq(2).text(), "10:30 AM");
                 equal(cells.eq(3).html(), "&nbsp;");
-                equal(cells.eq(4).text(), "11:00");
+                equal(cells.eq(4).text(), "11:00 AM");
             });
 
             test("time slots does not overflow endTime", function() {
@@ -160,8 +152,8 @@
 
                 view.render();
 
-                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "22:00");
-                equal(view.times.find("tr.k-last").text(), "23:59");
+                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "10:00 PM");
+                equal(view.times.find("tr.k-last").text(), "11:59 PM");
                 equal(view.times.find("th").length, 97);
             });
 
@@ -174,7 +166,7 @@
 
                 view.render();
 
-                ok(view.times.find("th:contains(03:00)").length);
+                ok(view.times.find("th:contains(3:00 AM)").length);
                 equal(view.times.find("th").length, 49);
             });
 
@@ -186,8 +178,8 @@
 
                 view.render();
 
-                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "09:00");
-                equal(view.times.find("tr.k-last").text(), "10:00");
+                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "9:00 AM");
+                equal(view.times.find("tr.k-last").text(), "10:00 AM");
                 equal(view.times.find("th").length, 22);
             });
 
@@ -385,7 +377,7 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").attr("title"), "(10:00 - 11:00): my event");
+                equal(view.content.find("div.k-appointment").attr("title"), "(10:00 AM - 11:00 AM): my event");
             });
 
 
@@ -444,25 +436,7 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment dt").text(), "10:00 - 11:00");
-            });
-
-            test("custom event date format", function() {
-                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-                    view = setup({
-                        eventTimeFormat: "starts at: {0:H:mm} - ends at: {1:H:mm}",
-                        dates: [
-                           selectedDate
-                        ]
-                    });
-
-                view.render(selectedDate);
-
-                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
-
-                view.renderEvents(events);
-
-                equal(view.content.find("div.k-appointment dt").text(), "starts at: 10:00 - ends at: 11:00");
+                equal(view.content.find("div.k-appointment dt").text(), "10:00 AM - 11:00 AM");
             });
 
             test("custom event template", function() {

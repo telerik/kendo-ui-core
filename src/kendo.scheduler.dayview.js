@@ -21,23 +21,24 @@ kendo_module({
 
     var TODAY = getDate(new Date());
 
-    var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="${titleAttr}" data-#=ns#uid="#=uid#">' +
+    var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title#" data-#=ns#uid="#=uid#"><div>' +
                 '<dl>' +
-                    '<dt>${formattedTime}</dt>' +
+                    '<dt>#=kendo.format("{0:t} - {1:t}", start, end)#</dt>' +
                     '<dd>${title}</dd>' +
                 '</dl>' +
                 '#if (showDelete) {#' +
                     '<a href="\\#" class="k-link" style="display:none"><span class="k-icon k-i-close"></span></a>' +
                 '#}#' +
                 //'<span class="k-icon k-resize-handle"></span>' +
-                '</div>'),
-        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="${titleAttr}" data-#=ns#uid="#=uid#">' +
+                '</div></div>'),
+        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="(#=kendo.format("{0:t}", start)#): #=title#" data-#=ns#uid="#=uid#"><div>' +
                 '<dl><dd>${title}</dd></dl>' +
                 '#if (showDelete) {#' +
                     '<a href="\\#" class="k-link" style="display:none"><span class="k-icon k-i-close"></span></a>' +
                 '#}#' +
                 //'<span class="k-icon k-resize-handle"></span>' +
-            '</div>');
+            '</div></div>'),
+        DATA_HEADER_TEMPLATE = kendo.template("#=kendo.toString(date, 'ddd M/dd')#");
 
     function toInvariantTime(date) {
         var staticDate = new Date(1980, 1, 1, 0, 0, 0);
@@ -190,21 +191,18 @@ kendo_module({
 
         options: {
             name: "MultiDayView",
-            headerDateFormat: "ddd M/dd",
-            eventTimeFormat: "{0:t} - {1:t}",
-            timeFormat: "t",
             selectedDateFormat: "{0:D}",
-            titleAttrFormat: "({0}): {1}",
             allDaySlot: true,
             title: "",
             startTime: TODAY,
             endTime: TODAY,
             numberOfTimeSlots: 2,
             majorTick: 60,
-            majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, format)#</em>"),
+            majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, 't')#</em>"),
             minorTickTimeTemplate: "&nbsp;",
             eventTemplate: DAY_VIEW_EVENT_TEMPLATE,
             allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE,
+            dateHeaderTemplate: DATA_HEADER_TEMPLATE,
             editable: true
         },
 
@@ -283,6 +281,8 @@ kendo_module({
             var that = this,
                 header = that.element.find(".k-scheduler-header-wrap"),
                 html,
+                options = this.options,
+                headerTemplate = that.options.dateHeaderTemplate,
                 allDayHtml;
 
             if (!header.length) {
@@ -299,7 +299,7 @@ kendo_module({
             html = createTable(dates, function(date) {
                 var content = '<th';
                 content += (getDate(date).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "");
-                content += '>' + kendo.toString(date, that.options.headerDateFormat) + '</th>';
+                content += '>' + executeTemplate(headerTemplate, options, { date: date }) + '</th>';
                 return content;
             });
 
@@ -378,7 +378,6 @@ kendo_module({
                 majorTickTimeTemplate = options.majorTickTimeTemplate,
                 minorTickTimeTemplate = options.minorTickTimeTemplate,
                 template,
-                format = options.timeFormat,
                 html = '<div class="k-scheduler-times"><table class="k-scheduler-table"><colgroup><col /></colgroup><tbody>';
 
             html += this._forTimeRange(start, end, function(date, majorTick) {
@@ -390,12 +389,12 @@ kendo_module({
                    template = minorTickTimeTemplate;
                 }
 
-                content += executeTemplate(template, options, { format: format, date: date });
+                content += executeTemplate(template, options, { date: date });
                 content += "</th></tr>";
 
                 return content;
             }, function(date) {
-                return '<tr class="k-last"><th>' + executeTemplate(majorTickTimeTemplate, options, { format: format, date: date }) + '</th></tr>';
+                return '<tr class="k-last"><th>' + executeTemplate(majorTickTimeTemplate, options, { date: date }) + '</th></tr>';
             });
 
             html += '</tbody></table></div>';
@@ -771,14 +770,11 @@ kendo_module({
 
         _createEventElement: function(event, template) {
             var options = this.options,
-                formattedTime = kendo.format(options.eventTimeFormat, event.start, event.end),
-                titleAttr = options.titleAttrFormat,
+                //formattedTime = kendo.format(options.eventTimeFormat, event.start, event.end),
                 showDelete = options.editable && options.editable.destroy !== false;
 
             return $(template(extend({}, {
                 ns: kendo.ns,
-                formattedTime: formattedTime,
-                titleAttr: kendo.format(titleAttr, formattedTime, event.title),
                 showDelete: showDelete
             }, event)));
         },
