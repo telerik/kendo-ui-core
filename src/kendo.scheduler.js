@@ -8,12 +8,12 @@ kendo_module({
         id: "scheduler-dayview",
         name: "Scheduler Day View",
         description: "Scheduler Day View",
-        depends: [ "scheduler.dayview" ]
+        depends: [ "scheduler.view", "scheduler.dayview" ]
     }, {
         id: "scheduler-agendaview",
         name: "Scheduler Agenda View",
         description: "Scheduler Agenda View",
-        depends: [ "scheduler.agendaview" ]
+        depends: [ "scheduler.view", "scheduler.agendaview" ]
     } ]
 });
 

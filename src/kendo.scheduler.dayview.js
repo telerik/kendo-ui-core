@@ -178,11 +178,11 @@ kendo_module({
 
         return columns;
     }
-    var MultiDayView = Widget.extend({
+    var MultiDayView = ui.SchedulerView.extend({
         init: function(element, options) {
             var that = this;
 
-            Widget.fn.init.call(that, element, options);
+            ui.SchedulerView.fn.init.call(that, element, options);
 
             that.title = that.options.title || that.options.name;
 

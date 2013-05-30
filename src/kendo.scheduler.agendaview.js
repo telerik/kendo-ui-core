@@ -3,7 +3,7 @@ kendo_module({
     name: "Scheduler Agenda View",
     category: "web",
     description: "The Scheduler Agenda View",
-    depends: [ "core" ]
+    depends: [ "core", "scheduler.view" ]
 });
 
 (function($){
@@ -15,11 +15,11 @@ kendo_module({
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
     }
 
-    ui.AgendaView = Widget.extend({
+    ui.AgendaView = ui.SchedulerView.extend({
         init: function(element, options) {
             var that = this;
 
-            Widget.fn.init.call(that, element, options);
+            ui.SchedulerView.fn.init.call(that, element, options);
 
             that.title = that.options.title;
             that.table = $();
@@ -33,6 +33,7 @@ kendo_module({
             var eventTemplate = kendo.template(this.options.eventTemplate);
             var dateTemplate = kendo.template(this.options.dateTemplate);
             var timeTemplate = kendo.template(this.options.timeTemplate);
+            var event, i;
 
             this.table.remove();
 
@@ -46,7 +47,7 @@ kendo_module({
             var tasks = [];
 
             for (var idx = 0; idx < events.length; idx++) {
-                var event = events[idx];
+                event = events[idx];
                 var start = event.start;
                 var end = event.end;
                 var duration = Math.ceil((end - start) / (1000 * 3600 * 24));
@@ -60,7 +61,7 @@ kendo_module({
                 if (duration > 1) {
                     task.end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1);
 
-                    for (var i = 1; i < duration; i++) {
+                    for (i = 1; i < duration; i++) {
                         start = task.end;
                         task = event.toJSON();
                         task.uid = event.uid;
@@ -83,8 +84,8 @@ kendo_module({
 
                 var tr = [];
 
-                for (var i = 0; i < events.length; i++) {
-                    var event = events[i];
+                for (i = 0; i < events.length; i++) {
+                    event = events[i];
 
                     var eventDate = getDate(event.start);
 
@@ -116,8 +117,7 @@ kendo_module({
                             "all day" +
                           "#} else { #" +
                             '#=kendo.toString(start, "t")#-#=kendo.toString(end, "t")#' +
-                          "# } #"
-            ,
+                          "# } #",
             dateTemplate: '<div>#=kendo.toString(start, "dd")#</div><div>#=kendo.toString(start,"dddd")#</div><div>#=kendo.toString(start, "y")#</div>'
         }
     });
