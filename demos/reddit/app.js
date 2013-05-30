@@ -1,4 +1,4 @@
-var PAGE_SIZE = 50,
+var PAGE_SIZE = 20,
     imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,

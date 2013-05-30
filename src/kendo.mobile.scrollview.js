@@ -350,7 +350,7 @@ kendo_module({
             if(batchSize > 1) {
                 that.batchBuffer = new BatchBuffer(that.dataSource, batchSize);
             } else {
-                that.batchBuffer = new kendo.data.Buffer(that.dataSource);
+                that.batchBuffer = new kendo.data.Buffer(that.dataSource, batchSize * 3);
             }
 
             that.batchBuffer.bind({
@@ -562,8 +562,12 @@ kendo_module({
                 view;
 
             if(index >= 0) {
+                console.log("my index: " + index);
+                if(index == 19) { debugger; }
                 view = batchBuffer.at(index);
-
+                try {
+                    console.log($("#detail-scrollview").data("kendoMobileVirtualScrollView").batchBuffer);
+                } catch(e) {}
                 if(view) {
                     page.content(template(view));
                 } else {
