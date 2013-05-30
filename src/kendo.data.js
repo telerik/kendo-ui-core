@@ -668,6 +668,7 @@ kendo_module({
             idx,
             length,
             fields = {},
+            originalName,
             id = proto.id;
 
         if (id) {
@@ -697,7 +698,7 @@ kendo_module({
         for (name in proto.fields) {
             field = proto.fields[name];
             type = field.type || "default";
-            value = null,
+            value = null;
             originalName = name;
 
             name = typeof (field.field) === STRING ? field.field : name;
@@ -1627,6 +1628,7 @@ kendo_module({
                     delete record[originalName];
                 }
             }
+            data[idx] = extend(true, {}, record);
         }
     }
 
@@ -1963,6 +1965,7 @@ kendo_module({
             that._map = {};
             that._prefetch = {};
             that._data = [];
+            that._pristineData = [];
             that._ranges = [];
             that._view = [];
             that._pristine = [];
@@ -2157,14 +2160,13 @@ kendo_module({
         },
 
         cancelChanges: function(model) {
-            var that = this,
-                pristine = that._readData(that._pristine);
+            var that = this;
 
             if (model instanceof kendo.data.Model) {
                 that._cancelModel(model);
             } else {
                 that._destroyed = [];
-                that._data = that._observe(pristine);
+                that._data = that._observe(that._pristineData);
                 if (that.options.serverPaging) {
                     that._total = that.reader.total(that._pristine);
                 }
@@ -2196,7 +2198,7 @@ kendo_module({
                 response = result.response,
                 idx = 0,
                 serverGroup = that._isServerGrouped(),
-                pristine = that._readData(that._pristine),
+                pristine = that._pristineData,
                 type = result.type,
                 length;
 
@@ -2266,7 +2268,7 @@ kendo_module({
         },
 
         _eachPristineItem: function(callback) {
-            this._eachItem(this._readData(this._pristine), callback);
+            this._eachItem(this._pristineData, callback);
         },
 
        _eachItem: function(data, callback) {
@@ -2394,6 +2396,8 @@ kendo_module({
             }
 
             data = that._readData(data);
+
+            that._pristineData = data.slice(0);
 
             that._data = that._observe(data);
 

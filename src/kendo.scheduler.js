@@ -175,7 +175,7 @@ kendo_module({
         },
 
         _modelForContainer: function(container) {
-            container = $(container).closest(".k-appointment");
+            container = $(container).closest("[" + kendo.attr("uid") + "]");
 
             var id = container.attr(kendo.attr("uid"));
 
