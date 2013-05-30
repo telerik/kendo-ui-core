@@ -50,7 +50,7 @@ function showDetail(e) {
 function navigateTo(dataItem) {
     var url = dataItem.data.url;
     if (isImage(url)) {
-        app.navigate("#detail?id=" + dataItem.uid);
+        app.navigate("#detail?id=" + dataItem.data.name);
     } else {
         window.open(url, "_detail");
     }
@@ -62,18 +62,25 @@ function resetDetail(e) {
 
 function renderDetail(e) {
     var view = e.view,
-        element = view.element,
-        dataItem = awwDataSource.getByUid(view.params.id),
-        url = dataItem.data.url;
+        id = view.params.id,
+        element = view.element;
 
-        if(!imgExtensionRegex.test(url)) {
-            url += '.jpg';
-        };
+    $.ajax('http://reddit.com/api/info.json', {
+        data: { id: id },
+        dataType: 'jsonp',
+        jsonp: 'jsonp',
+        success: function(data) {
+            var url = data.data.children[0].data.url;
+            if(!imgExtensionRegex.test(url)) {
+                url += '.jpg';
+            };
 
-    var img = element.find('img');
-    img.css('visibility', 'hidden').attr('src', url).one('load', function() {
-        img.css('visibility', 'visible');
-        view.scroller.zoomOut();
+        var img = element.find('img');
+        img.css('visibility', 'hidden').attr('src', url).one('load', function() {
+            img.css('visibility', 'visible');
+            view.scroller.zoomOut();
+        });
+        }
     });
 }
 

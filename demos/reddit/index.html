@@ -57,7 +57,7 @@
     </head>
     <body>
 
-        <div data-role="view" data-init="showThumbsOnScrollComplete" data-title="Reddit: The Front Page">
+        <div data-role="view" data-init="showThumbsOnScrollComplete" data-title="Reddit: The Front Page" id="list">
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
@@ -72,7 +72,7 @@
         <div data-role="view" id="detail" data-transition="slide" data-after-show="renderDetail" data-zoom="true" data-title="" data-hide="resetDetail">
             <header data-role="header">
                 <div data-role="navbar">
-                    <button data-role="backbutton" data-align="left">Back</button>
+                    <button data-role="backbutton" data-align="left" href="#list">Back</button>
                     <span data-role="view-title">&nbsp;</span>
                 </div>
             </header>
