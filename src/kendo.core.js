@@ -3147,15 +3147,14 @@ function pad(number, digits, end) {
             return base;
         }
 
-        function convert(date, from, to) {
-            if (!to) {
-                to = from;
-                from = null;
+        function convert(date, fromOffset, toOffset) {
+            if (typeof fromOffset == STRING) {
+                fromOffset = this.offset(date, fromOffset);
             }
 
-            var fromOffset = from ? this.offset(date, from) : date.getTimezoneOffset();
-
-            var toOffset = this.offset(date, to);
+            if (typeof toOffset == STRING) {
+                toOffset = this.offset(date, toOffset);
+            }
 
             var fromLocalOffset = date.getTimezoneOffset();
 
@@ -3166,11 +3165,21 @@ function pad(number, digits, end) {
             return new Date(date.getTime() + (toLocalOffset - fromLocalOffset) * 60000);
         }
 
+        function apply(date, timezone) {
+           return this.convert(date, date.getTimezoneOffset(), timezone);
+        }
+
+        function remove(date, timezone) {
+           return this.convert(date, timezone, date.getTimezoneOffset());
+        }
+
         return {
            zones: {},
            rules: {},
            offset: offset,
            convert: convert,
+           apply: apply,
+           remove: remove,
            abbr: abbr
         };
     })();
