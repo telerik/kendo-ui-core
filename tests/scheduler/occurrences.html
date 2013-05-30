@@ -144,11 +144,14 @@
                     rule: "FREQ=HOURLY;BYDAY=WE"
                 }
 
-                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10, 0, 0), end: new Date(2013, 4, 15, 0, 30) } );
+                var events = occurrences(schedulerEvent, { start: new Date(2013, 4, 10, 0, 0), end: new Date(2013, 4, 15, 1, 30) } );
 
-                equal(events.length, 1);
+                equal(events.length, 2);
                 equal(events[0].start.getTime(), +new Date(2013, 4, 15));
                 equal(events[0].end.getTime(), +new Date(2013, 4, 15, 1));
+
+                equal(events[1].start.getTime(), +new Date(2013, 4, 15, 1));
+                equal(events[1].end.getTime(), +new Date(2013, 4, 15, 2));
             });
 
             test("HOURLY method limits BYDAY and expands BYHOUR", function() {
@@ -463,7 +466,7 @@
                 equal(events[1].end.getTime(), +new Date(2000, 10, 13, 17, 0));
             });
 
-            test("DAILY occurrences method limits BYDAY (2FR)", function() {
+            test("DAILY occurrences method limits BYDAY (3FR)", function() {
                 var schedulerEvent = {
                     uid: "id",
                     title: "Title",
