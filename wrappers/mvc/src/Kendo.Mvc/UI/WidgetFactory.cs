@@ -1100,6 +1100,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="MobileScrollView"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileScrollView()
+        ///             .Name("MobileScrollView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileScrollViewBuilder MobileScrollView()
+        {
+            return new MobileScrollViewBuilder(new MobileScrollView(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="MobileSplitView"/>
         /// </summary>
         /// <example>

@@ -30,7 +30,10 @@ module CodeGen::MVC::Mobile
         IGNORED = [
             'popover.popup.direction',
             'layout.id',
-            'view.model'
+            'view.model',
+            'scrollview.pagesize',
+            'scrollview.velocitythreshold',
+            'scrollview.bouncevelocitythreshold'
         ]
 
         CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
@@ -184,13 +187,10 @@ module CodeGen::MVC::Mobile
             def delete_ignored
                 return if @options.nil?
 
-                @options.each do |option|
-                    if IGNORED.include?(option.full_name)
-                        @options.delete(option)
-                        next
-                    end
-
+                @options.delete_if do |option|
                     option.delete_ignored
+
+                    IGNORED.include?(option.full_name)
                 end
             end
         end
