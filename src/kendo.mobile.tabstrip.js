@@ -126,7 +126,7 @@ kendo_module({
                     .wrapAll('<span class="km-text"/>');
 
             if (image[0]) {
-                image.addClass("km-image");
+                image.addClass("km-image").prependTo(button);
             } else {
                 button.prepend(iconSpan);
                 if (icon) {
