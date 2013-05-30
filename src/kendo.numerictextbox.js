@@ -311,10 +311,17 @@ kendo_module({
                     value = input.value.substring(0, idx),
                     format = that._format(that.options.format),
                     group = format[","],
-                    groupRegExp = new RegExp("\\" + group, "g"),
-                    extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?"),
-                    result = extractRegExp.exec(value),
+                    result, groupRegExp, extractRegExp,
                     caretPosition = 0;
+
+                if (group) {
+                    groupRegExp = new RegExp("\\" + group, "g");
+                    extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?");
+                }
+
+                if (extractRegExp) {
+                    result = extractRegExp.exec(value);
+                }
 
                 if (result) {
                     caretPosition = result[0].replace(groupRegExp, "").length;
