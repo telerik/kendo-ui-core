@@ -175,7 +175,7 @@ kendo_module({
 
                 current++;
 
-                if (!rule.hours && !rule.minutes && !rule.seconds) {
+                if (!rule._timeRule) {
                     start = freq.next(start, rule);
                 }
 
@@ -607,21 +607,14 @@ kendo_module({
         },
 
         _month: function(date, end, rule) {
-            var month = date.getMonth() + 1,
-                months;
+            var monthRules = rule.months,
+                months = ruleValues(monthRules, date.getMonth() + 1);
 
-            while (+date < end) {
-                months = ruleValues(rule.months, month);
-
-                if (months === null) {
-                    return date;
-                }
-
+            if (months !== null) {
                 if (months.length) {
                     date.setMonth(months[0] - 1, 1);
-                    break;
                 } else {
-                    date.setFullYear(date.getFullYear() + 1, 0, 1);
+                    date.setFullYear(date.getFullYear() + 1, monthRules[0], 1);
                 }
             }
 
@@ -728,6 +721,31 @@ kendo_module({
                 hourRule, minuteRule, secondRule,
                 ruleChanged,
                 modified;
+
+            /*var hoursList, minutesList, secondsList,
+                hours = date.getHours();
+
+            while (date <= end) {
+                hours  = ruleValues(rule.hours, hours);
+
+                if (hours !== null) {
+                    //TODO: DST CHECK
+                    if (hours.length) {
+                        date.setHours(hours[0]);
+                        //break;
+                    } else {
+                        date.setDate(date.getDate() + 1);
+                        date.setHours(rule.hours[0]);
+                    }
+                }
+
+                if (months.length) {
+                    date.setMonth(months[0] - 1, 1);
+                    break;
+                } else {
+                    date.setFullYear(date.getFullYear() + 1, 0, 1);
+                }
+            }*/
 
             while (+date <= +end) {
                 modified = false;
@@ -920,17 +938,23 @@ kendo_module({
     }
 
     function setupRule(rule, start) {
+        var timeRule;
         if (rule.hours) {
             rule._hourRules = rule.hours.slice();
+            timeRule = true;
         }
 
         if (rule.minutes) {
             rule._minuteRules = rule.minutes.slice();
+            timeRule = true;
         }
 
         if (rule.seconds) {
             rule._secondRules = rule.seconds.slice();
+            timeRule = true;
         }
+
+        rule._timeRule = timeRule;
     }
 
     function allowTimeExpand(currentRules, timeRules) {
