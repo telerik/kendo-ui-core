@@ -1709,7 +1709,7 @@ function pad(number, digits, end) {
 
             support.zoomLevel = function() {
                 return support.touch ? (document.documentElement.clientWidth / window.innerWidth) :
-                       support.pointers ? ((top || window).outerWidth / window.innerWidth) : 1;
+                       support.pointers ? ((top || window).outerWidth / (top || window).innerWidth) : 1;
             };
         } catch(e) {
             //window.outerWidth throws error when in IE showModalDialog.
