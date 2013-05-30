@@ -1040,6 +1040,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="MobileDetailButton"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileDetailButton()
+        ///             .Name("MobileDetailButton")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileDetailButtonBuilder MobileDetailButton()
+        {
+            return new MobileDetailButtonBuilder(new MobileDetailButton(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="MobileLayout"/>
         /// </summary>
         /// <example>

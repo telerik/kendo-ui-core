@@ -1,0 +1,30 @@
+:options:
+    - :name: href
+      :type: String
+      :description: 'Specifies the url for remote view or id of the view to be loaded (prefixed with #, like an anchor)'
+
+    - :name: transition
+      :type: String
+      :description: Specifies the Pane transition
+
+    - :name: target
+      :type: String
+      :description: Specifies the id of target Pane or `_top` for application level Pane
+
+    - :name: actionsheetContext
+      :type: String
+      :description: This value will be available when the action callback of ActionSheet item is executed
+
+    - :name: icon
+      :type: String
+      :description: The icon of the button. It can be either one of the built-in icons, or a custom one.
+
+    - :name: style
+      :type: Object
+      :description: Specifies predefined button style
+      :values:
+        - none
+        - contactadd
+        - detaildisclose
+        - rowinsert
+        - rowdelete
