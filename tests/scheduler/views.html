@@ -364,24 +364,6 @@
                 equal(view.content.find(".k-appointment").attr("data-uid"), "foo");
             });
 
-            test("title attribute is set to the event wrapper element", function() {
-                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-                    view = setup({
-                        dates: [
-                           selectedDate
-                        ]
-                    });
-
-                view.render(selectedDate);
-
-                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
-
-                view.renderEvents(events);
-
-                equal(view.content.find("div.k-appointment").attr("title"), "(10:00 AM - 11:00 AM): my event");
-            });
-
-
             test("multiple events are displayed", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
@@ -443,7 +425,7 @@
             test("custom event template", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
-                        eventTemplate: '<div class="k-appointment">${title}</div>',
+                        eventTemplate: '${title}',
                         dates: [
                            selectedDate
                         ]

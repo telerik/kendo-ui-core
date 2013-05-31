@@ -10,6 +10,7 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.ui,
         extend = $.extend,
+        proxy = $.proxy,
         Widget = ui.Widget,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
@@ -21,24 +22,22 @@ kendo_module({
 
     var TODAY = getDate(new Date());
 
-    var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title#" data-#=ns#uid="#=uid#"><div>' +
-                '<dl>' +
-                    '<dt>#=kendo.format("{0:t} - {1:t}", start, end)#</dt>' +
-                    '<dd>${title}</dd>' +
-                '</dl>' +
+    var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title#">' +
+                    '<dl>' +
+                        '<dt>#=kendo.format("{0:t} - {1:t}", start, end)#</dt>' +
+                        '<dd>${title}</dd>' +
+                    '</dl>' +
+                '</div>'),
+        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t}", start)#): #=title#">' +
+                    '<dl><dd>${title}</dd></dl>' +
+                '</div>'),
+        DATA_HEADER_TEMPLATE = kendo.template("#=kendo.toString(date, 'ddd M/dd')#"),
+        EVENT_WRAPPER_STRING = '<div class="k-appointment" data-#=ns#uid="#=uid#">{0}' +
                 '#if (showDelete) {#' +
                     '<a href="\\#" class="k-link" style="display:none"><span class="k-icon k-i-close"></span></a>' +
                 '#}#' +
                 //'<span class="k-icon k-resize-handle"></span>' +
-                '</div></div>'),
-        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div class="k-appointment" title="(#=kendo.format("{0:t}", start)#): #=title#" data-#=ns#uid="#=uid#"><div>' +
-                '<dl><dd>${title}</dd></dl>' +
-                '#if (showDelete) {#' +
-                    '<a href="\\#" class="k-link" style="display:none"><span class="k-icon k-i-close"></span></a>' +
-                '#}#' +
-                //'<span class="k-icon k-resize-handle"></span>' +
-            '</div></div>'),
-        DATA_HEADER_TEMPLATE = kendo.template("#=kendo.toString(date, 'ddd M/dd')#");
+                '</div>';
 
     function toInvariantTime(date) {
         var staticDate = new Date(1980, 1, 1, 0, 0, 0);
@@ -178,13 +177,15 @@ kendo_module({
 
         return columns;
     }
+
     var MultiDayView = ui.SchedulerView.extend({
         init: function(element, options) {
-            var that = this;
+            ui.SchedulerView.fn.init.call(this, element, options);
 
-            ui.SchedulerView.fn.init.call(that, element, options);
+            this.title = this.options.title || this.options.name;
 
-            that.title = that.options.title || that.options.name;
+            this.eventTemplate = this._eventTmpl(this.options.eventTemplate);
+            this.allDayEventTemplate = this._eventTmpl(this.options.allDayEventTemplate);
 
             this._editable();
         },
@@ -768,9 +769,32 @@ kendo_module({
             this._arrangeColumns(element, dateSlotIndex, dateSlot);
        },
 
-        _createEventElement: function(event, template) {
+       _eventTmpl: function(template) {
+           var options = this.options,
+               settings = extend({}, kendo.Template, options.templateSettings),
+               paramName = settings.paramName,
+               html = "",
+               type = typeof template,
+               state = { storage: {}, count: 0 };
+
+            if (type === "function") {
+                state.storage["tmpl" + state.count] = template;
+                html += "#=this.tmpl" + state.count + "(" + paramName + ")#";
+                state.count ++;
+            } else if (type === "string") {
+                html += template;
+            }
+
+            var tmpl = kendo.template(kendo.format(EVENT_WRAPPER_STRING, html), settings);
+
+            if (state.count > 0) {
+                tmpl = proxy(tmpl, state.storage);
+            }
+            return tmpl;
+       },
+
+       _createEventElement: function(event, template) {
             var options = this.options,
-                //formattedTime = kendo.format(options.eventTimeFormat, event.start, event.end),
                 showDelete = options.editable && options.editable.destroy !== false;
 
             return $(template(extend({}, {
@@ -823,8 +847,8 @@ kendo_module({
 
         renderEvents: function(events) {
             var options = this.options,
-                eventTemplate = kendo.template(options.eventTemplate),
-                allDayEventTemplate = kendo.template(options.allDayEventTemplate),
+                eventTemplate = this.eventTemplate,
+                allDayEventTemplate = this.allDayEventTemplate,
                 timeSlots = this.content.find("tr"),
                 allDaySlots = this.allDayHeader ? this.allDayHeader.find("td") : $(),
                 allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),

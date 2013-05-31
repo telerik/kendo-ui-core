@@ -2811,7 +2811,7 @@ kendo_module({
                 template = column.template,
                 paramName = settings.paramName,
                 field = column.field,
-                html = "",
+                html = '<div class="k-appointment" data-#=ns#uid="#=uid#">',
                 idx,
                 length,
                 format = column.format,
