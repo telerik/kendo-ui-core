@@ -1,0 +1,46 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Wind Rose / South Shore station"
+                },
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/wind-data.json",
+                            dataType: "json"
+                        }
+                    },
+                    group: {
+                        field: "category",
+                        dir: "asc"
+                    },
+                    sort: {
+                        field: "dir",
+                        dir: "asc"
+                    }
+                },
+                seriesColors: ["#6e6e6e", "#00e6ff", "#0000ff",
+                    "#008b00", "#ffff00", "#ffa500", "#ff0000"],
+                series: [{
+                    type: "radarColumn",
+                    stack: true,
+                    field: "frequency"
+                }],
+                categoryAxis: {
+                    field: "dirText"
+                },
+                tooltip: {
+                    visible: true
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>
