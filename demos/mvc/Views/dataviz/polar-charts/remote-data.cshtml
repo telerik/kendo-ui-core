@@ -1,0 +1,34 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+
+                title: {
+                    text: "Antenna Gain (dB)"
+                },
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/antenna-gain.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                series: [{
+                    type: "polarLine",
+                    xField: "Azimuth",
+                    yField: "Gain"
+                }],
+                xAxis: {
+                    majorUnit: 30
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>
