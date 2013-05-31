@@ -3644,7 +3644,8 @@ div.k-slider
 .k-scheduler-toolbar > ul li:first-child,
 .k-scheduler-toolbar > ul li:first-child .k-link
 {
-	border-radius:5px 0 0 5px;
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
 }
 
 .k-scheduler-toolbar .k-nav-next,
@@ -3652,7 +3653,8 @@ div.k-slider
 .k-scheduler-toolbar .k-nav-next .k-link,
 .k-scheduler-toolbar ul + ul li:last-child .k-link
 {
-	border-radius:0 5px 5px 0;
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
 }
 
 .k-scheduler div.k-scheduler-footer ul li
@@ -3754,8 +3756,8 @@ div.k-slider
 .k-scheduler-table td,
 .k-scheduler-table th
 {
-	height:27px;
-	padding:0;
+	height:1.5em;
+	padding:.334em .5em;
 }
 
 .k-scheduler-monthview .k-scheduler-table td
@@ -3764,11 +3766,11 @@ div.k-slider
 	text-align:right;
 }
 
-.k-scheduler-monthview .k-scheduler-table td .k-link
+/*.k-scheduler-monthview .k-scheduler-table td .k-link
 {
 	display:inline-block;
 	padding:.2em .3em;
-}
+}*/
 
 .k-scheduler-table td
 {
@@ -3812,7 +3814,7 @@ div.k-slider
 {
 	text-align:right;
 	vertical-align:top;
-	padding:0 .6em 0 0;
+	padding-right:.6em;
 	border-style:solid;
 	border-width:0 0 1px 0;
 	border-top-color:transparent;
@@ -3823,7 +3825,7 @@ div.k-slider
 {
 	font-style:normal;
 	position:relative;
-	top:-.7em;
+	top:-1em;
 }
 
 .k-scheduler .k-middle-row td
@@ -3896,8 +3898,8 @@ div.k-slider
 
 .k-scheduler-header .k-appointment dl
 {
-	padding-top:.4em;
-	padding-bottom:.4em;
+	padding-top:.34em;
+	padding-bottom:.34em;
 }
 
 .k-appointment dt
@@ -3960,10 +3962,10 @@ div.k-slider
 	margin-right:0;
 }
 
-.k-scheduler-agendaview .k-scheduler-table th
+.k-scheduler-agendaview .k-scheduler-table th,
+.k-scheduler-agendaview .k-scheduler-table td
 {
 	text-align:left;
-	padding-left:6px;
 }
 
 .k-scheduler-datecolumn
@@ -3974,6 +3976,36 @@ div.k-slider
 .k-scheduler-timecolumn
 {
 	width: 105px;
+}
+
+.k-scheduler-mark
+{
+	display:inline-block;
+	width:1em;
+	height:1em;
+	vertical-align:middle;
+	margin-right:.5em;
+}
+
+.k-scheduler-agendaday
+{
+	float:left;
+	margin:0 .2em 0 0;
+	font-size:3em;
+	font-weight:normal;
+}
+
+.k-scheduler-agendaweek
+{
+	display:block;
+	margin:.3em 0 .1em;
+	font-size:1.1em;
+	font-style:normal;
+}
+
+.k-scheduler-agendadate
+{
+	font-size:.8em;
 }
 
 /* Tooltip */

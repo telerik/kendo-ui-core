@@ -51,12 +51,6 @@ html
 	background-color:#f00;
 }
 
-.k-scheduler-header-wrap .k-scheduler-table,
-.k-scheduler-content .k-scheduler-table
-{
-	width:140%;
-}
-
 .k-appointment
 {
 	border-color:#8bf;
@@ -141,7 +135,7 @@ html
 					</tr>
 				</tbody>
 			</table>
-			<div class="k-appointment" style="top:28px;left:506px;width:1009px">
+			<div class="k-appointment" style="top:27px;left:506px;width:1009px">
 				<dl>
 					<dd>Days off</dd>
 				</dl>
@@ -218,7 +212,7 @@ html
 			<span class="k-icon k-resize-handle"></span>
 		</div>
 	</div>
-	<div class="k-floatwrap k-header k-scheduler-footer">
+	<div class="k-header k-scheduler-footer">
 		<ul class="k-reset k-header k-toolbar"><li
 			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>Show 24 hours</a></li><li
 			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-columns"></span>Show all weekdays</a></li></ul>
@@ -269,10 +263,10 @@ html
 				<col />
 			</colgroup>
 			<tbody>
-				<tr><td rowspan="3">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-				<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-				<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+				<tr><td rowspan="3"><strong class="k-scheduler-agendaday">10</strong> <em class="k-scheduler-agendaweek">Wednesday</em> <span class="k-scheduler-agendadate">April 10, 2013</span></td><td>08:00 - 09:00</td><td><span class="k-scheduler-mark" style="background-color:red"></span>Breakfast</td></tr>
+				<tr class="k-state-hover"><td>10:00 - 11:00</td><td><span class="k-scheduler-mark" style="background-color:yellow"></span>Seeeecond Breakfast</td></tr>
+				<tr><td>11:00 - 12:00</td><td><span class="k-scheduler-mark" style="background-color:green"></span>Elevencies</td></tr>
+				<tr><td><strong class="k-scheduler-agendaday">12</strong> <em class="k-scheduler-agendaweek">Friday</em> <span class="k-scheduler-agendadate">May 31, 2013</span></td><td>18:00 - 20:00</td><td><span class="k-scheduler-mark" style="background-color:blue"></span>Movies</td></tr>
 				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 			</tbody>
@@ -372,44 +366,53 @@ html
 
 <script>
 
-$("a").click(false);
-
-var kendo = window.kendo,
-	scrollbar = kendo.support.scrollbar();
-
-function scInit(id) {
-
-	id = "#" + id;
-
-	var scheduler = $(id),
-		sc = scheduler.find(".k-scheduler-content"),
-		st = scheduler.find(".k-scheduler-header + .k-scheduler-times"),
-		sh = scheduler.find(".k-scheduler-header");
-
-	st.height(sc.height() - scrollbar);
-
-	sh.css("padding-right", scrollbar);
-
-	sc.on("scroll", function(e){
-		st.scrollTop(sc.scrollTop());
-		scheduler.find(".k-scheduler-header-wrap").scrollLeft(sc.scrollLeft());
-	});
-}
-
-scInit("scheduler1");
-scInit("scheduler2");
-scInit("scheduler3");
-
-$(".k-appointment > .k-link, .k-toolbar li:not(.k-nav-current) .k-link")
-	.on("mouseover", function(e){$(this).addClass("k-state-hover");})
-	.on("mouseout", function(e){$(this).removeClass("k-state-hover");});
-
 $(document).ready(function(){
+
+    var kendo = window.kendo,
+	    scrollbar = kendo.support.scrollbar();
+
+    if (kendo.support.browser.msie && kendo.support.browser.version == 7) {
+        $(".k-scheduler-table").attr("cellspacing", 0);
+    }
+
+    $("a").click(false);
+
+    function scInit(id) {
+
+	    id = "#" + id;
+
+	    var scheduler = $(id),
+		    sc = scheduler.find(".k-scheduler-content"),
+		    st = scheduler.find(".k-scheduler-header + .k-scheduler-times"),
+		    sh = scheduler.find(".k-scheduler-header");
+
+	    st.height(sc.height() - scrollbar);
+
+	    sh.css("padding-right", scrollbar);
+
+	    sc.on("scroll", function(e){
+		    st.scrollTop(sc.scrollTop());
+		    scheduler.find(".k-scheduler-header-wrap").scrollLeft(sc.scrollLeft());
+	    });
+    }
+
+    scInit("scheduler1");
+    scInit("scheduler2");
+    scInit("scheduler3");
+
+    $(".k-appointment > .k-link, .k-toolbar li:not(.k-nav-current) .k-link")
+	    .on("mouseover", function(e){$(this).addClass("k-state-hover");})
+	    .on("mouseout", function(e){$(this).removeClass("k-state-hover");});
+
+
 	$(".k-appointment").kendoTooltip({
 		position:"bottom",
 		autoHide: false,
 		content: kendo.template($("#tooltipTemplate").html())
 	});
+
+    $(".k-scheduler-header-wrap .k-scheduler-table,.k-scheduler-content .k-scheduler-table").width("140%");
+    $(".k-scheduler-footer").append('<br style="display:block;clear:both" />');
 });
 
 </script>
