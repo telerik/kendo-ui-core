@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Experiments with Scheduler layout</title>
+        <script src="../src/jquery.js"></script>
+        <style>
+            table {
+                border: 1px solid black;
+                font-size: 12px;
+                border-collapse: collapse;
+            }
+
+            pre {
+                font-size: 10px;
+            }
+
+            table th,
+            table td {
+                border: 1px solid black;
+            }
+
+            table th {
+                background: rgb(165, 191, 225);
+            }
+
+            section table {
+                float: left;
+            }
+            section pre {
+                float: left;
+            }
+
+            section h3 {
+                clear: left;
+            }
+        </style>
+        <script>
+
+            function levels(values, key) {
+                var levels = [];
+
+                function collect(depth, values) {
+                    values = values[key];
+
+                    if (values) {
+                        var level = levels[depth] = levels[depth] || [];
+
+                        for (var idx = 0; idx < values.length; idx++) {
+                            level.push(values[idx]);
+                            collect(depth + 1, values[idx]);
+                        }
+                    }
+                }
+
+                collect(0, values);
+
+                return levels;
+            }
+
+            function table(headers) {
+                var columnLevels = levels(headers, "columns");
+                var rowLevels = levels(headers, "rows");
+
+                var columnCount = columnLevels[columnLevels.length - 1].length;
+                var rowCount = rowLevels[rowLevels.length - 1].length;
+
+                var th = ['<th rowspan="' + columnLevels.length + '" colspan="' + rowLevels.length +'"></th>'];
+                var tr = [];
+
+                for (var columnLevelIndex = 0; columnLevelIndex < columnLevels.length; columnLevelIndex++) {
+                    var level = columnLevels[columnLevelIndex];
+                    var colspan = columnCount / level.length;
+
+                    for (var columnIndex = 0; columnIndex < level.length; columnIndex ++) {
+                        th.push('<th colspan="' + colspan + '">' + level[columnIndex].text + "</th>");
+                    }
+
+                    tr.push(th.join(""));
+                    th = [];
+                }
+
+                var rows = new Array(rowCount).join().split(",");
+
+                for (var rowLevelIndex = 0; rowLevelIndex < rowLevels.length; rowLevelIndex++) {
+                    var level = rowLevels[rowLevelIndex];
+                    var rowspan = rowCount / level.length;
+
+                    for (var rowIndex = 0; rowIndex < level.length; rowIndex++) {
+                        rows[rowspan * rowIndex] += '<th rowspan="' + rowspan + '">' + level[rowIndex].text + "</th>";
+                    }
+                }
+
+                for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+                    tr.push(rows[rowIndex] + new Array(columnCount + 1).join("<td></td>"));
+                }
+
+                return "<table><tr>" + tr.join("</tr><tr>") + "</tr></table>";
+            }
+
+            $(function() {
+                $("section").each(function(index) {
+                    var pre = $("pre", this);
+
+                    eval(pre.text());
+
+                    pre.after(table(headers));
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <section>
+            <h3>No grouping</h3>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>5/30/2013</th>
+                </tr>
+                <tr>
+                    <th>All Day</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>1:00AM</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2:00AM</th>
+                    <td></td>
+                </tr>
+            </table>
+            <pre><code>
+                var headers = {
+                    columns: [
+                        { text: "5/30/2013" }
+                    ],
+                    rows: [
+                        { text: "All Day" },
+                        { text: "1:00 AM" },
+                        { text: "2:00 AM" }
+                    ]
+                };
+            </code></pre>
+        </section>
+        <section>
+            <h3>One Level Horizontal Grouping</h3>
+            <table>
+                <tr>
+                    <th rowspan="2"></th>
+                    <th colspan="2">Room 1</th>
+                    <th colspan="2">Room 2</th>
+                </tr>
+                <tr>
+                    <th>5/30/2013</th>
+                    <th>5/31/2013</th>
+                    <th>5/30/2013</th>
+                    <th>5/31/2013</th>
+                </tr>
+                <tr>
+                    <th>All Day</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>1:00AM</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2:00AM</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <pre><code>
+                var headers = {
+                    columns: [
+                       {
+                           text: "Room 1",
+                           columns: [
+                                { text: "5/30/2013" },
+                                { text: "5/31/2013" }
+                           ]
+                       },
+                       {
+                           text: "Room 2",
+                           columns: [
+                                { text: "5/30/2013" },
+                                { text: "5/31/2013" }
+                           ]
+                       },
+                    ],
+                    rows: [
+                        { text: "All Day" },
+                        { text: "1:00 AM" },
+                        { text: "2:00 AM" }
+                    ]
+                };
+            </code></pre>
+        </section>
+        <section>
+            <h3>Two Level Horizontal Grouping</h3>
+            <table>
+                <tr>
+                    <th rowspan="3"></th>
+                    <th colspan="4">Building 1</th>
+                    <th colspan="4">Building 2</th>
+                </tr>
+                <tr>
+                    <th colspan="2">Room 1</th>
+                    <th colspan="2">Room 2</th>
+                    <th colspan="2">Room 1</th>
+                    <th colspan="2">Room 2</th>
+                </tr>
+                <tr>
+                    <th>5/30/2013</th>
+                    <th>5/31/2013</th>
+                    <th>5/30/2013</th>
+                    <th>5/31/2013</th>
+                    <th>5/30/2013</th>
+                    <th>5/31/2013</th>
+                    <th>5/30/2013</th>
+                    <th>5/31/2013</th>
+                </tr>
+                <tr>
+                    <th>All Day</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>1:00AM</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2:00AM</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <pre><code>
+                var headers = {
+                    columns: [
+                        {
+                            text: "Building 1",
+                            columns: [
+                                {
+                                    text: "Room 1",
+                                    columns: [
+                                        { text: "5/30/2013" },
+                                        { text: "5/31/2013" }
+                                    ]
+                                },
+                                {
+                                    text: "Room 2",
+                                    columns: [
+                                        { text: "5/30/2013" },
+                                        { text: "5/31/2013" }
+                                    ]
+                                }
+                            ]
+                        },{
+                            text: "Building 1",
+                            columns: [
+                                {
+                                    text: "Room 1",
+                                    columns: [
+                                        { text: "5/30/2013" },
+                                        { text: "5/31/2013" }
+                                    ]
+                                },
+                                {
+                                    text: "Room 2",
+                                    columns: [
+                                        { text: "5/30/2013" },
+                                        { text: "5/31/2013" }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    rows: [
+                        { text: "All Day" },
+                        { text: "1:00 AM" },
+                        { text: "2:00 AM" }
+                    ]
+                };
+            </code></pre>
+        </section>
+        <section>
+            <h3>One Level Vertical Grouping</h3>
+            <table>
+                <tr>
+                    <th colspan="2"></th>
+                    <th>5/30/2013</th>
+                    <th>5/31/2013</th>
+                </tr>
+                <tr>
+                    <th rowspan="3">Room 1</th>
+                    <th>All Day</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>1:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th rowspan="3">Room 2</th>
+                    <th>All Day</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>1:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <pre><code>
+                var headers = {
+                    columns: [
+                        { text: "5/30/2013" },
+                        { text: "5/30/2013" }
+                    ],
+                    rows: [
+                        {
+                            text: "Room 1",
+                            rows: [
+                                { text: "All Day" },
+                                { text: "1:00 AM" },
+                                { text: "2:00 AM" }
+                            ]
+                        },
+                        {
+                            text: "Room 2",
+                            rows: [
+                                { text: "All Day" },
+                                { text: "1:00 AM" },
+                                { text: "2:00 AM" }
+                            ]
+                        }
+                   ]
+                };
+            </code></pre>
+        </section>
+        <section>
+            <h3>Two Level Vertical Grouping</h3>
+            <table>
+                <tr>
+                    <th colspan="3"></th>
+                    <th>5/30/2013</th>
+                    <th>5/31/2013</th>
+                </tr>
+                <tr>
+                    <th rowspan="6">Building 1</th>
+                    <th rowspan="3">Room 1</th>
+                    <th>All Day</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>1:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th rowspan="3">Room 2</th>
+                    <th>All Day</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>1:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th rowspan="6">Building 2</th>
+                    rows: 3
+                    <th rowspan="3">Room 1</th>
+                    <th>All Day</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>1:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th rowspan="3">Room 2</th>
+                    <th>All Day</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>1:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2:00AM</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <pre><code>
+                var headers = {
+                    columns: [
+                        { text: "Building 1",
+                          columns: [
+                            {
+                               text: "Room 1",
+                               columns: [
+                                { text: "5/30/2013" },
+                                { text: "5/30/2013" }
+                               ]
+                            }, {
+                               text: "Room 2",
+                               columns: [
+                                { text: "5/30/2013" },
+                                { text: "5/30/2013" }
+                               ]
+                            }
+                          ]
+                        }
+                    ],
+                    rows: [
+                        {
+                            text: "Building 1",
+                            rows: [
+                                {
+                                    text: "Room 1",
+                                    rows: [
+                                        { text: "All Day" },
+                                        { text: "1:00 AM" },
+                                        { text: "2:00 AM" }
+                                    ]
+                                },
+                                {
+                                    text: "Room 2",
+                                    rows: [
+                                        { text: "All Day" },
+                                        { text: "1:00 AM" },
+                                        { text: "2:00 AM" }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            text: "Building 2",
+                            rows: [
+                                {
+                                    text: "Room 1",
+                                    rows: [
+                                        { text: "All Day" },
+                                        { text: "1:00 AM" },
+                                        { text: "2:00 AM" }
+                                    ]
+                                },
+                                {
+                                    text: "Room 2",
+                                    rows: [
+                                        { text: "All Day" },
+                                        { text: "1:00 AM" },
+                                        { text: "2:00 AM" }
+                                    ]
+                                }
+                            ]
+                        }
+                   ]
+                };
+            </code></pre>
+        </section>
+    </body>
+</html>
