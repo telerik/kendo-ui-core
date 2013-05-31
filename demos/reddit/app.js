@@ -1,4 +1,4 @@
-var PAGE_SIZE = 20,
+var PAGE_SIZE = 36,
     imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
@@ -141,7 +141,7 @@ function canvasDetailShow(e) {
 }
 
 function calculateOffset(dataItem) {
-    return virtualScrollView.batchBuffer.buffer.indexOf(dataItem);
+    return virtualScrollView.buffer.buffer.indexOf(dataItem);
 }
 
 function updateSrc(e) {

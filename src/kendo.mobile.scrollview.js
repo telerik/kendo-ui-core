@@ -308,12 +308,22 @@ kendo_module({
                 dimension: dimension,
                 pane: pane,
                 width: width,
-                itemCount: 0
+                itemCount: 0,
+                _widgetNeedsRefresh: false
             });
 
             that._dataSource();
             that._buffer();
             that._initPages();
+
+            that.view().bind("show", function () {
+                if(that._needsRefresh) {
+                    setTimeout(function () {
+                        that._resetPages();
+                    }, 0);
+                    that._widgetNeedsRefresh = false;
+                }
+            })
 
             if(that.options.autoBind) {
                 that.dataSource.fetch();
@@ -348,12 +358,12 @@ kendo_module({
                 batchSize = that.options.batchSize;
 
             if(batchSize > 1) {
-                that.batchBuffer = new BatchBuffer(that.dataSource, batchSize);
+                that.buffer = new BatchBuffer(that.dataSource, batchSize);
             } else {
-                that.batchBuffer = new kendo.data.Buffer(that.dataSource, batchSize * 3);
+                that.buffer = new kendo.data.Buffer(that.dataSource, batchSize * 3);
             }
 
-            that.batchBuffer.bind({
+            that.buffer.bind({
                 "resize": proxy(that._onResize, that),
                 "reset": proxy(that._onReset, that),
                 "endreached": proxy(that._onEndReached, that)
@@ -363,7 +373,7 @@ kendo_module({
         _unbindDataSource: function () {
             var that = this;
 
-            that.batchBuffer.unbind("resize", that._onResize)
+            that.buffer.unbind("resize", that._onResize)
                             .unbind("reset", that._onReset)
                             .unbind("endreached", that._onEndReached);
         },
@@ -450,11 +460,11 @@ kendo_module({
 
         scrollTo: function (offset, instant) {
             var that = this,
-                batchBuffer = that.batchBuffer,
+                buffer = that.buffer,
                 pages = that.pages,
                 dataItem;
 
-            dataItem = batchBuffer.at(offset);
+            dataItem = buffer.at(offset);
             console.log(dataItem);
             if(!dataItem) {
                 return;
@@ -479,7 +489,7 @@ kendo_module({
                 width = that.width,
                 velocityThreshold = that.options.velocityThreshold,
                 ease = Transition.easeOutExpo,
-                isEndReached = that.itemCount > that.batchBuffer.total;
+                isEndReached = that.itemCount > that.buffer.total;
 
             if (velocity > velocityThreshold) {
                 if(that.itemCount === 2) {
@@ -548,7 +558,12 @@ kendo_module({
         },
 
         _onReset: function () {
-            this._resetPages();
+            if(this.element.is(":visible")) {
+                console.log("reset pages");
+                this._resetPages();
+            } else {
+                this._widgetNeedsRefresh = true;
+            }
         },
 
         _onEndReached: function () {
@@ -556,18 +571,13 @@ kendo_module({
         },
 
         setPageContent: function (page, index) {
-            var batchBuffer = this.batchBuffer,
+            var buffer = this.buffer,
                 template = this.template,
                 emptyTemplate = this.emptyTemplate,
                 view;
 
             if(index >= 0) {
-                console.log("my index: " + index);
-                if(index == 19) { debugger; }
-                view = batchBuffer.at(index);
-                try {
-                    console.log($("#detail-scrollview").data("kendoMobileVirtualScrollView").batchBuffer);
-                } catch(e) {}
+                view = buffer.at(index);
                 if(view) {
                     page.content(template(view));
                 } else {
