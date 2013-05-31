@@ -995,6 +995,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="MobileApplication"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileApplication()
+        ///             .Name("MobileApplication")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileApplicationBuilder MobileApplication()
+        {
+            return new MobileApplicationBuilder(new MobileApplication(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="MobileBackButton"/>
         /// </summary>
         /// <example>
