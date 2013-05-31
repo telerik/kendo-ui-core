@@ -354,15 +354,15 @@
                     "title": "Kendo UI jQuery-based Polar Charts Demo",
                     "meta": "This demo illustrates how Kendo UI Polar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your polar chart."
                 }, {
-                    "text": "Polar area",
-                    "url": "polar-charts/polar-area.html",
-                    "title": "Kendo UI Polar Charts | Example of polar area chart",
-                    "meta": "This demo illustrates how to configure Kendo UI Polar Area Chart"
-                }, {
                     "text": "Polar scatter",
                     "url": "polar-charts/polar-scatter.html",
                     "title": "Kendo UI Polar Charts | Example of polar scatter chart",
                     "meta": "This demo shows how to configure Kendo UI Polar Scatter Chart"
+                }, {
+                    "text": "Polar area",
+                    "url": "polar-charts/polar-area.html",
+                    "title": "Kendo UI Polar Charts | Example of polar area chart",
+                    "meta": "This demo illustrates how to configure Kendo UI Polar Area Chart"
                 }, {
                     "text": "Binding to remote data",
                     "url": "polar-charts/remote-data.html",
