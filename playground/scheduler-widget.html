@@ -7,6 +7,7 @@
 
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timezones.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
@@ -14,6 +15,7 @@
         <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.scheduler.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
@@ -22,6 +24,7 @@
         <script src="../src/kendo.timepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datetimepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.view.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.dayview.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.agendaview.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
@@ -125,6 +128,7 @@
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
             views: ["day", { name: "week", selected: true }, { name: "agenda", }],
             dataSource: {
+                batch: true,
                 transport: {
                     read: {
                         url: "http://konstantinov/service/events",
@@ -149,16 +153,18 @@
                     }
                 },
                 schema: {
+                    timezone: "Europe/London",
                     model: {
                         id: "ID",
                         fields: {
+                            ID: { type: "number" },
                             title: { defaultValue: "eventTitle", field: "Title" },
-                            start: { type: "date", field: "Start" },
+                            start: { type: "date", field: "Start"  },
                             end: { type: "date", field: "End" },
                             isAllDay: { type: "boolean", field: "IsAllDay" }
                         }
                     }
-                },
+                }
                 /*data: [ {
                     start: start,
                     end: end,

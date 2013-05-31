@@ -104,6 +104,7 @@ var tests = [
     "data/datasource/read.html",
     "data/datasource/initialization.html",
     "data/datasource/query.html",
+    "data/datasource/scheduler-datasource.html",
     "data/query-expr.html",
     "data/datasource/sync.html",
     "data/datasource/range.html",

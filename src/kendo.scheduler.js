@@ -3,7 +3,7 @@ kendo_module({
     name: "Scheduler",
     category: "web",
     description: "The Scheduler is an event calendar.",
-    depends: [ "core", "binder", "popup", "calendar"],
+    depends: [ "core", "binder", "popup", "calendar", "data", "data.scheduler"],
     features: [ {
         id: "scheduler-dayview",
         name: "Scheduler Day View",
@@ -559,7 +559,7 @@ kendo_module({
                 that._refreshHandler = proxy(that.refresh, that);
             }
 
-            that.dataSource = kendo.data.DataSource.create(dataSource)
+            that.dataSource = kendo.data.SchedulerDataSource.create(dataSource)
                 .bind(CHANGE, that._refreshHandler);
                 //.bind(ERROR, that._errorHandler);
         },

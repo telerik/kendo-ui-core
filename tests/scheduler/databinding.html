@@ -7,6 +7,7 @@
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.data.scheduler.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
@@ -37,6 +38,12 @@
                 teardown: function() {
                     $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
                 }
+            });
+
+            test("creates a SchedulerDataSource", function() {
+                var scheduler = new Scheduler(container);
+
+                ok(scheduler.dataSource instanceof kendo.data.SchedulerDataSource);
             });
 
             test("set filter of the DataSource", function() {
