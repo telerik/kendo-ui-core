@@ -244,6 +244,65 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="UI.MobileListView{T}"/> bound to the specified data item type.
+        /// </summary>
+        /// <example>
+        /// <typeparam name="T">The type of the data item</typeparam>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileListView&lt;Order&gt;()
+        ///             .Name("MobileListView")
+        ///             .BindTo(Model)
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public virtual MobileListViewBuilder<T> MobileListView<T>() where T : class
+        {
+            return new MobileListViewBuilder<T>(new MobileListView<T>(ViewContext, Initializer, UrlGenerator));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="MobileListView{T}"/> bound to the specified data source.
+        /// </summary>
+        /// <typeparam name="T">The type of the data item</typeparam>
+        /// <param name="dataSource">The data source.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileListView(Model)
+        ///             .Name("MobileListView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileListViewBuilder<T> MobileListView<T>(IEnumerable<T> dataSource) where T : class
+        {
+            MobileListViewBuilder<T> builder = MobileListView<T>();
+
+            builder.Component.DataSource.Data = dataSource;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="MobileListView{T}"/> bound an item in ViewData.
+        /// </summary>
+        /// <typeparam name="T">Type of the data item</typeparam>
+        /// <param name="dataSourceViewDataKey">The data source view data key.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileListView&lt;Order&gt;("orders")
+        ///             .Name("MobileListView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileListViewBuilder<T> MobileListView<T>(string dataSourceViewDataKey) where T : class
+        {
+            MobileListViewBuilder<T> builder = MobileListView<T>();
+
+            builder.Component.DataSource.Data = ViewContext.ViewData.Eval(dataSourceViewDataKey) as IEnumerable<T>;
+
+            return builder;
+        }
+
+        /// <summary>
         /// Creates a <see cref="Splitter"/>
         /// </summary>
         /// <example>
