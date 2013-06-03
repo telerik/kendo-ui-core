@@ -1,19 +1,14 @@
+@flat-main-color: #4c5356;
+@flat-background: #f4f4f4;
+@flat-list-background: #fcfcfc;
+@flat-border-color: #dddddd;
+@flat-border-radius: 3px;
+@flat-active-color: #fff;
+@flat-active-background: #10c4b2;
+
 .km-flat
 {
-    font: bold 1.2em HelveticaNeue, sans-serif;
-}
-
-.km-flat .km-view-title,
-.km-flat .km-dialog-title
-{
-    position: relative;
-    visibility: visible;
-    text-align: center;
-    font-size: 1.4em;
-    line-height: 2.3em;
-    font-weight: bold;
-    margin-left: auto;
-    margin-right: auto;
+    font: normal 1em "HelveticaNeue Light", "Roboto Light", "Slate Light", "Segoe WP", NokiaPureTextLight, sans-serif;
 }
 
 /* override transform options for performance */
@@ -24,21 +19,107 @@
 .km-root .km-flat .km-group-title,
 .km-root .km-flat .km-list > li,
 .km-root .km-flat .km-filter-reset,
-.km-root .km-flat .km-shim .k-animation-container,
+.km-root .km-flat .km-shim .k-animation-container
 .km-root .km-flat .km-scroll-container
 {
     -webkit-transform: none;
 }
 
-.km-flat .km-navbar {
-    background: white;
+.km-flat,
+.km-flat .km-navbar,
+.km-flat .km-content
+{
+    color: @flat-main-color;
+    background: @flat-background;
 }
 
-.km-flat .km-listview .km-state-active,
-.km-flat .km-listview .km-listview-link:active {
-    background: #e5e5e5 !important;
+/* ListView */
+
+.km-flat .km-list > li
+{
+    background: @flat-list-background;
+    .box-shadow(inset 0 1px 0 rgba(255,255,255,.2));
 }
 
-.km-flat .km-tabstrip .km-button {
+.km-flat .km-listinset > li:first-child,
+.km-flat .km-listgroupinset .km-list > li:first-child
+{
+    border: 1px solid @flat-border-color;
+    border-width: 1px;
+    border-color: @flat-border-color;
+    .border-radius(@flat-border-radius @flat-border-radius 0 0);
+}
+
+.km-flat .km-listinset > li,
+.km-flat .km-listgroupinset .km-list > li
+{
+    border: 1px solid @flat-border-color;
+    border-width: 0 1px 1px 1px;
+}
+
+.km-flat .km-listinset > li:last-child,
+.km-flat .km-listgroupinset .km-list > li:last-child
+{
+    border: 1px solid @flat-border-color;
+    border-width: 0 1px 1px 1px;
+    .border-radius(0 0 @flat-border-radius @flat-border-radius);
+}
+
+.km-flat .km-listinset > li:first-child:last-child,
+.km-flat .km-listgroupinset .km-list > li:first-child:last-child
+{
+    border-width: 1px;
+    .border-radius(@flat-border-radius);
+}
+
+.km-flat li.km-state-active .km-listview-link,
+.km-flat li.km-state-active .km-listview-label
+{
+    color: #fff;
+    background: #10c4b2;
+}
+
+.km-flat .km-listview-link:after
+{
+    color: #7b7b7b;
+    width: .66rem;
+    height: .64rem;
+    border-width: 0;
+    box-shadow: inset -.2rem .2rem 0;
+}
+
+.km-flat .km-state-active .km-listview-link:after
+{
+    color: #fff;
+}
+
+.km-flat .km-listinset li:first-child > .km-listview-link,
+.km-flat .km-listgroupinset li:first-child > .km-listview-link,
+.km-flat .km-listinset li:first-child > .km-listview-label,
+.km-flat .km-listgroupinset li:first-child > .km-listview-label
+{
+    .border-radius(@flat-border-radius @flat-border-radius 0 0);
+}
+
+.km-flat .km-listinset li:last-child > .km-listview-link,
+.km-flat .km-listgroupinset li:last-child > .km-listview-link,
+.km-flat .km-listinset li:last-child > .km-listview-label,
+.km-flat .km-listgroupinset li:last-child > .km-listview-label
+{
+    .border-radius(0 0 @flat-border-radius @flat-border-radius);
+}
+
+.km-flat .km-listinset li:first-child:last-child > .km-listview-link,
+.km-flat .km-listgroupinset li:first-child:last-child > .km-listview-link,
+.km-flat .km-listinset li:first-child:last-child > .km-listview-label,
+.km-flat .km-listgroupinset li:first-child:last-child > .km-listview-label
+{
+    .border-radius(@flat-border-radius);
+}
+
+/* TabStrip */
+
+.km-flat .km-tabstrip .km-button
+{
     font-size: .7em;
 }
