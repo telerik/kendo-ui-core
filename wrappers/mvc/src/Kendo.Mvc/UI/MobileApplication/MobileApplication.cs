@@ -91,14 +91,7 @@ namespace Kendo.Mvc.UI
         {
             //Name is not mandatory for MobilApplication
             //base.VerifySettings();
-        }
-
-        protected override void WriteHtml(HtmlTextWriter writer)
-        {
-            
-
-            base.WriteHtml(writer);
-        }
+        }       
     }
 }
 

@@ -28,16 +28,17 @@ namespace Kendo.Mvc.UI
             //no initializtion scripts for mobile widgets
         }
 
+        <% if !csharp_class.eql?('MobileApplication') %>
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            <% if !csharp_class.eql?('MobileApplication') %>
             var html = new <%= csharp_class %>HtmlBuilder(this).Build();
 
             html.WriteTo(writer);
-            <% end %>
 
-            base.WriteHtml(writer);
+            //prevent rendering empty script tag
+            //base.WriteHtml(writer);
         }
+        <% end %>
     }
 }
 

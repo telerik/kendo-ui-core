@@ -44,9 +44,9 @@ namespace Kendo.Mvc.UI
             var html = new MobileNavBarHtmlBuilder(this).Build();
 
             html.WriteTo(writer);
-            
 
-            base.WriteHtml(writer);
+            //prevent rendering empty script tag
+            //base.WriteHtml(writer);
         }
 
         /// <summary>
@@ -58,10 +58,9 @@ namespace Kendo.Mvc.UI
         {
             return MvcHtmlString.Create(
                 new HtmlElement("span")                
-                .Attribute("data-role", "view-title")
-                .Text(text)
-                .ToString()
-                );
+                    .Attribute("data-role", "view-title")
+                    .Text(text)
+                    .ToString());
         }
     }
 }

@@ -96,9 +96,9 @@ namespace Kendo.Mvc.UI
             var html = new MobileListViewHtmlBuilder<T>(this).Build();
 
             html.WriteTo(writer);
-            
 
-            base.WriteHtml(writer);
+            //prevent rendering empty script tag
+            //base.WriteHtml(writer);
         }
 
         private void ProcessDataSource()
