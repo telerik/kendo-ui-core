@@ -36,7 +36,7 @@
             });
 
             function slotHeight(table, slotsCount) {
-                var height = Math.round(table.height() / table[0].rows.length);
+                var height = Math.floor(table.height() / table[0].rows.length);
                 return Math.round((height * slotsCount) - height * 0.10);
             }
 
@@ -596,7 +596,7 @@
 
                 view.renderEvents(events);
 
-                var slotWidth = view.element.find(".k-scheduler-header-all-day td").width();
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
                 equal(view.datesHeader.find("div.k-appointment").length, 1);
                 equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
@@ -616,7 +616,7 @@
 
                 view.renderEvents(events);
 
-                var slotWidth = view.element.find(".k-scheduler-header-all-day td").width();
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
                 equal(view.datesHeader.find("div.k-appointment").length, 1);
                 equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
@@ -636,7 +636,7 @@
 
                 view.renderEvents(events);
 
-                var slotWidth = view.element.find(".k-scheduler-header-all-day td").width();
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
                 equal(view.datesHeader.find("div.k-appointment").length, 1);
                 equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
@@ -721,10 +721,10 @@
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
-
+                debugger;
                 var eventElement = view.content.find("div.k-appointment");
                 equal(eventElement.length, 1);
-                debugger;
+
                 equalWithRound(eventElement.offset().top, view.content.find("tr").eq(0).offset().top);
                 equalWithRound(eventElement.height(), slotHeight(view.content.find("table"), 2));
             });
