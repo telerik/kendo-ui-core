@@ -49,6 +49,8 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
+            var container = "document.body";
+
             var options = new Dictionary<string, object>();
 
             options.Add("hideAddressBar", HideAddressBar);
@@ -75,7 +77,12 @@ namespace Kendo.Mvc.UI
                 options.Add("transition", Transition);
             }
 
-            writer.Write(String.Format("jQuery(function(){{ new kendo.mobile.Application(jQuery(document.body), {0}); }});", Initializer.Serialize(options)));
+            if (Id.HasValue())
+            {
+                container = Selector;
+            }
+
+            writer.Write(String.Format("jQuery(function(){{ new kendo.mobile.Application(jQuery(\"{0}\"), {1}); }});", container, Initializer.Serialize(options)));
 
             base.WriteInitializationScript(writer);
         }
