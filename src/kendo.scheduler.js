@@ -51,7 +51,20 @@ kendo_module({
                     '<li class="k-state-default k-view-#=view#" data-#=ns#name="#=view#"><a href="\\#" class="k-link">${views[view].title}</a></li>' +
                 '#}#'  +
             '</ul>' +
-            '</div>');
+            '</div>'),
+        DATERANGEEDITOR = function(container, options) {
+            $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' ' + kendo.attr("role") + '="datetimepicker" ' + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
+            .attr({
+                name: options.field
+            }).appendTo(container);
+
+            $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' '  + kendo.attr("role") + '="datepicker" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
+            .attr({
+                name: options.field
+            }).appendTo(container);
+
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+        };
 
     var defaultCommands = {
         update: {
@@ -318,17 +331,54 @@ kendo_module({
                 command = editable.editCommand,
                 updateText,
                 cancelText,
+                fields = [
+                    { field: "title", title: "Title" /*, format: field.format, editor: field.editor, values: field.values*/ },
+                    { field: "start", title: "Start", editor: DATERANGEEDITOR },
+                    { field: "end", title: "End", editor: DATERANGEEDITOR },
+                    { field: "isAllDay", title: "All day event" }
+                ],
                 attr,
                 options = isPlainObject(editable) ? editable.window : {},
-                settings = extend({}, kendo.Template, that.options.templateSettings);
+                settings = extend({}, kendo.Template, that.options.templateSettings),
+                editableFields = [],
+                paramName = settings.paramName;
 
            if (template) {
                 if (typeof template === STRING) {
                     template = window.unescape(template);
                 }
-
                 html += (kendo.template(template, settings))(model);
             } else {
+
+                if ("description" in model) {
+                    fields.push({ field: "description", title: "Description", editor: '<textarea name="description" class="k-textbox"/>' });
+                }
+
+                for (var idx = 0, length = fields.length; idx < length; idx++) {
+                    var field = fields[idx];
+
+                    html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
+
+                    if ((!model.editable || model.editable(field.field))) {
+                        editableFields.push(field);
+                        html += '<div ' + kendo.attr("container-for") + '="' + field.field + '" class="k-edit-field"></div>';
+                    } else {
+                        var tmpl = "#:";
+
+                        if (field.field) {
+                            field = kendo.expr(field.field, paramName);
+                            tmpl += field + "==null?'':" + field;
+                        } else {
+                            tmpl += "''";
+                        }
+
+                        tmpl += "#";
+
+                        tmpl = kendo.template(tmpl, settings);
+
+                        html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
+                    }
+                }
             }
 
             if (command) {
@@ -369,9 +419,10 @@ kendo_module({
 
             that.editable = that._editContainer
                 .kendoEditable({
-             //       fields: fields,
+                    fields: editableFields,
                     model: model,
-                    clearContainer: false
+                    clearContainer: false,
+                    validateOnBlur: true
                 }).data("kendoEditable");
 
             container.data("kendoWindow").center().open();

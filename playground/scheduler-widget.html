@@ -91,20 +91,15 @@
             /*
             *{border-color:red !important;}
             */
-
         </style>
     </head>
     <body>
+
         <div id="win">
             <div id="scheduler"></div>
         </div>
 
-        <script id="template" type="text/x-kendo-template">
-            Title: <input name="title"/> <br />
-            Start: <input name="start" data-role="datetimepicker"/><br />
-            End: <input name="end" data-role="datetimepicker"/><br />
-        </script>
-    <script>
+   <script>
         /*$("#win").kendoWindow({
             visible: true,
             resize: function() {
@@ -120,9 +115,6 @@
         end.setHours(end.getHours() + 3);
 
         $("#scheduler").kendoScheduler({
-            editable:{
-                template: kendo.template($("#template").html())
-            },
             height: 800,
             // numberOfTimeSlots: 4,
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
@@ -158,9 +150,10 @@
                         id: "ID",
                         fields: {
                             ID: { type: "number" },
-                            title: { defaultValue: "eventTitle", field: "Title" },
-                            start: { type: "date", field: "Start"  },
+                            title: { editable: false, defaultValue: "eventTitle", field: "Title", validation: { required: true } },
+                            start: { type: "date", field: "Start" },
                             end: { type: "date", field: "End" },
+                            description: { field: "Description" },
                             isAllDay: { type: "boolean", field: "IsAllDay" }
                         }
                     }

@@ -365,7 +365,7 @@
                             schema: {
                                 model: {
                                     fields: {
-                                        name: { validation: { custom: function() { return false; } } }
+                                        title: { validation: { custom: function() { return false; } } }
                                     }
                                 }
                     }}}),
@@ -414,33 +414,70 @@
                 ok(scheduler._editContainer);
             });
 
-/*
-            test("cancelEvent cancel changes made only to the record", function() {
-                var scheduler = setup({
-                        dataSource: {
-                            data: [
-                                { start: new Date(), end: new Date(), isAllDay: true, title: "my event" },
-                                { start: new Date(), end: new Date(), isAllDay: true, title: "my second event" }
-                            ]
-                        }
-                    }),
-                    eventElement = scheduler.view().datesHeader.find(".k-appointment:first");
+            test("all fields are wrapped", function() {
+                var scheduler = setup();
 
-                scheduler.editEvent(eventElement);
-                scheduler.dataItem(eventElement).set("title", "moo");
-                scheduler.saveEvent();
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-appointment:first"));
 
-                eventElement = scheduler.view().datesHeader.find(".k-appointment:last");
+                var container = scheduler._editContainer.children("div.k-edit-form-container");
+                var elements = container.children("div");
 
-                scheduler.editEvent(eventElement);
-                scheduler.dataItem(eventElement).set("title", "foo");
-                scheduler.cancelRow(eventElement);
-
-                equal(scheduler.dataItem(table.find("tr:first")).get("foo"), "moo");
-                equal(scheduler.dataItem(table.find("tr:last")).get("foo"), "baz");
+                equal(elements.length, 8);
+                ok(elements.eq(0).hasClass("k-edit-label"));
+                equal(elements.eq(0).find("label").attr("for"), "title");
+                equal(elements.eq(1).data("container-for"), "title");
+                ok(elements.eq(1).hasClass("k-edit-field"));
             });
-*/
 
+            test("non editable field value is shown", function() {
+                var scheduler = setup({
+                    dataSource: {
+                        data: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ],
+                        schema: { model: { fields: { title: { editable:false } } } }
+                    }
+                });
+
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-appointment:first"));
+
+                var container = scheduler._editContainer.children("div.k-edit-form-container");
+                var elements = container.children("div");
+
+                equal(elements.length, 8);
+                ok(elements.eq(0).hasClass("k-edit-label"));
+                equal(elements.eq(0).find("label").attr("for"), "title");
+                equal(elements.eq(1).text(), "my event");
+                ok(elements.eq(1).hasClass("k-edit-field"));
+            });
+
+            test("description editor is not render is does not exist", function() {
+                var scheduler = setup({
+                    dataSource: {
+                        data: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
+                    }
+                });
+
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-appointment:first"));
+
+                var container = scheduler._editContainer.children("div.k-edit-form-container");
+                var elements = container.children("div");
+
+                ok(!elements.filter("[data-container-for=description]").length);
+            });
+
+            test("render description editor if exists", function() {
+                var scheduler = setup({
+                    dataSource: {
+                        data: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event", description: "foo" } ]
+                    }
+                });
+
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-appointment:first"));
+
+                var container = scheduler._editContainer.children("div.k-edit-form-container");
+                var elements = container.children("div");
+
+                ok(elements.filter("[data-container-for=description]").length);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

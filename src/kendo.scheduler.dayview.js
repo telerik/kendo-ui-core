@@ -290,7 +290,6 @@ kendo_module({
                 header = $('<div class="k-scheduler-header-wrap"/>');
 
                 $('<div class="k-scheduler-header k-state-default"/>')
-//                    .css("padding-right", scrollbar)
                     .append(header)
                     .appendTo(that.element);
             } else {
