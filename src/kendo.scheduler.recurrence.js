@@ -8,11 +8,21 @@ kendo_module({
 
 (function($, undefined) {
     var kendo = window.kendo,
+        timezone = kendo.timezone,
         Class = kendo.Class,
         DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
         WEEK_DAYS = {
+            0: "SU",
+            1: "MO",
+            2: "TU",
+            3: "WE",
+            4: "TH",
+            5: "FR",
+            6: "SA"
+        },
+        WEEK_DAYS_IDX = {
             "SU": 0,
             "MO": 1,
             "TU": 2,
@@ -421,168 +431,6 @@ kendo_module({
             "yearly" : new YearlyFrequency()
         };
 
-    function expand(event, period) {
-        var rule = parseRule(event.rule),
-            durationMS = event.end - event.start,
-            start = new Date(period.start),
-            end = new Date(period.end),
-            current = 1,
-            events = [],
-            endEvent,
-            count,
-            freq;
-
-        if (!rule || +event.start > +end) {
-            return events;
-        }
-
-        freq = frequencies[rule.freq];
-        count = rule.count;
-
-        if (rule.until && +rule.until < +end) {
-            end = new Date(rule.until);
-        }
-
-        //TODO: if event.start is in the same day as start then set hour
-        start.setHours(event.start.getHours());
-        start.setMinutes(event.start.getMinutes());
-        start.setSeconds(event.start.getSeconds());
-        start.setMilliseconds(event.start.getMilliseconds());
-
-        if (freq.setup) {
-            freq.setup(rule, start, event.start);
-        }
-
-        freq.limit(start, end, rule);
-
-        while (+start <= end) {
-
-            //TODO: DST check
-            endEvent = new Date(start.getTime() + durationMS);
-
-            events.push($.extend({}, event, {
-                recurrenceID: event.uid,
-                start: new Date(start),
-                end: endEvent,
-                uid: "" //generate new uid ???
-            }));
-
-            if (count && count === current) {
-                break;
-            }
-
-            current++;
-            freq.next(start, rule);
-            freq.limit(start, end, rule);
-        }
-
-        if (rule.setPositions) {
-            events = eventsByPosition(events, rule.setPositions);
-        }
-
-        return events;
-    }
-
-    function parseRule(rule) {
-        var instance = {},
-            property,
-            splits, value,
-            idx = 0, length,
-            weekStart,
-            weekDays,
-            predicate = function(a, b) {
-                var day1 = a.day,
-                    day2 = b.day;
-
-                if (day1 < weekStart) {
-                   day1 += weekStart;
-                }
-
-                if (day2 < weekStart) {
-                    day2 += weekStart;
-                }
-
-                return day1 - day2;
-            };
-
-        if (rule.substring(0, 6) === "RRULE:") {
-            rule = rule.substring(6);
-        }
-
-        rule = rule.split(";");
-        length = rule.length;
-
-        for (; idx < length; idx++) {
-            property = rule[idx];
-            splits = property.split("=");
-            value = $.trim(splits[1]).split(",");
-
-            switch ($.trim(splits[0]).toUpperCase()) {
-                case "FREQ":
-                    instance.freq = value[0].toLowerCase();
-                    break;
-                case "UNTIL":
-                    instance.until = kendo.parseDate(value[0], DATE_FORMATS);
-                    break;
-                case "COUNT":
-                    instance.count = parseInt(value[0], 10);
-                    break;
-                case "INTERVAL":
-                    instance.interval = parseInt(value[0], 10);
-                    break;
-                case "BYSECOND":
-                    instance.seconds = parseArray(value, { start: 0, end: 60 });
-                    break;
-                case "BYMINUTE":
-                    instance.minutes = parseArray(value, { start: 0, end: 59 });
-                    break;
-                case "BYHOUR":
-                    instance.hours = parseArray(value, { start: 0, end: 23 });
-                    break;
-                case "BYMONTHDAY":
-                    instance.monthDays = parseArray(value, { start: -31, end: 31 });
-                    break;
-                case "BYYEARDAY":
-                    instance.yearDays = parseArray(value, { start: -366, end: 366 });
-                    break;
-                case "BYMONTH":
-                    instance.months = parseArray(value, { start: 1, end: 12 });
-                    break;
-                case "BYDAY":
-                    instance.weekDays = weekDays = parseWeekDayList(value);
-                    break;
-                case "BYSETPOS":
-                    //TODO: rename to positions
-                    instance.setPositions = parseArray(value, { start: 1, end: 366 });
-                    break;
-                case "BYWEEKNO":
-                    instance.weeks = parseArray(value, { start: -53, end: 53 });
-                    break;
-                case "WKST":
-                    instance.weekStart = weekStart = WEEK_DAYS[value[0]];
-                    break;
-            }
-
-            if (instance.freq === undefined || (instance.count !== undefined && instance.until)) {
-                return null;
-            }
-
-            if (!instance.interval) {
-                instance.interval = 1;
-            }
-
-            if (weekStart === undefined) {
-                instance.weekStart = weekStart = kendo.culture().calendar.firstDay;
-            }
-
-            if (weekDays) {
-                instance.weekDays = weekDays.sort(predicate);
-            }
-        }
-
-        return instance;
-    }
-
     function dayByName(date, dayOfWeek, offset) {
         offset = offset || 1;
 
@@ -747,7 +595,7 @@ kendo_module({
             valueLength = value.length;
             day = value.substring(valueLength - 2).toUpperCase();
 
-            day = WEEK_DAYS[day];
+            day = WEEK_DAYS_IDX[day];
             if (day === undefined) {
                 return null;
             }
@@ -758,6 +606,23 @@ kendo_module({
             };
         }
         return list;
+    }
+
+    function serializeWeekDayList(list) {
+        var idx = 0, length = list.length,
+            value, valueString, result = [];
+
+        for (; idx < length; idx++) {
+            value = list[idx];
+            valueString = "" + WEEK_DAYS[value.day];
+
+            if (value.offset) {
+                valueString = value.offset + valueString;
+            }
+
+            result.push(valueString);
+        }
+        return result.toString();
     }
 
     function getMonthLength(date) {
@@ -781,10 +646,232 @@ kendo_module({
         return a - b;
     }
 
+    function expand(event, period) {
+        var rule = parseRule(event.rule),
+            durationMS = event.end - event.start,
+            start = new Date(period.start),
+            end = new Date(period.end),
+            current = 1,
+            events = [],
+            endEvent,
+            count,
+            freq;
+
+        if (!rule || +event.start > +end) {
+            return events;
+        }
+
+        freq = frequencies[rule.freq];
+        count = rule.count;
+
+        if (rule.until && +rule.until < +end) {
+            end = new Date(rule.until);
+        }
+
+        //TODO: if event.start is in the same day as start then set hour
+        start.setHours(event.start.getHours());
+        start.setMinutes(event.start.getMinutes());
+        start.setSeconds(event.start.getSeconds());
+        start.setMilliseconds(event.start.getMilliseconds());
+
+        if (freq.setup) {
+            freq.setup(rule, start, event.start);
+        }
+
+        freq.limit(start, end, rule);
+
+        while (+start <= end) {
+
+            //TODO: DST check
+            endEvent = new Date(start.getTime() + durationMS);
+
+            events.push($.extend({}, event, {
+                recurrenceID: event.uid,
+                start: new Date(start),
+                end: endEvent,
+                uid: "" //generate new uid ???
+            }));
+
+            if (count && count === current) {
+                break;
+            }
+
+            current++;
+            freq.next(start, rule);
+            freq.limit(start, end, rule);
+        }
+
+        if (rule.setPositions) {
+            events = eventsByPosition(events, rule.setPositions);
+        }
+
+        return events;
+    }
+
+    function parseRule(rule) {
+        var instance = {},
+            property, until,
+            splits, value,
+            idx = 0, length,
+            weekStart,
+            weekDays,
+            predicate = function(a, b) {
+                var day1 = a.day,
+                    day2 = b.day;
+
+                if (day1 < weekStart) {
+                   day1 += weekStart;
+                }
+
+                if (day2 < weekStart) {
+                    day2 += weekStart;
+                }
+
+                return day1 - day2;
+            };
+
+        if (rule.substring(0, 6) === "RRULE:") {
+            rule = rule.substring(6);
+        }
+
+        rule = rule.split(";");
+        length = rule.length;
+
+        for (; idx < length; idx++) {
+            property = rule[idx];
+            splits = property.split("=");
+            value = $.trim(splits[1]).split(",");
+
+            switch ($.trim(splits[0]).toUpperCase()) {
+                case "FREQ":
+                    instance.freq = value[0].toLowerCase();
+                    break;
+                case "UNTIL":
+                    until = kendo.parseDate(value[0], DATE_FORMATS); //TODO: test this
+                    if (until) {
+                        until = kendo.timezone.convert(until, until.getTimezoneOffset(), 0);
+                    }
+                    instance.until = until;
+                    break;
+                case "COUNT":
+                    instance.count = parseInt(value[0], 10);
+                    break;
+                case "INTERVAL":
+                    instance.interval = parseInt(value[0], 10);
+                    break;
+                case "BYSECOND":
+                    instance.seconds = parseArray(value, { start: 0, end: 60 });
+                    break;
+                case "BYMINUTE":
+                    instance.minutes = parseArray(value, { start: 0, end: 59 });
+                    break;
+                case "BYHOUR":
+                    instance.hours = parseArray(value, { start: 0, end: 23 });
+                    break;
+                case "BYMONTHDAY":
+                    instance.monthDays = parseArray(value, { start: -31, end: 31 });
+                    break;
+                case "BYYEARDAY":
+                    instance.yearDays = parseArray(value, { start: -366, end: 366 });
+                    break;
+                case "BYMONTH":
+                    instance.months = parseArray(value, { start: 1, end: 12 });
+                    break;
+                case "BYDAY":
+                    instance.weekDays = weekDays = parseWeekDayList(value);
+                    break;
+                case "BYSETPOS":
+                    //TODO: rename to positions
+                    instance.setPositions = parseArray(value, { start: 1, end: 366 });
+                    break;
+                case "BYWEEKNO":
+                    instance.weeks = parseArray(value, { start: -53, end: 53 });
+                    break;
+                case "WKST":
+                    instance.weekStart = weekStart = WEEK_DAYS_IDX[value[0]];
+                    break;
+            }
+
+            if (instance.freq === undefined || (instance.count !== undefined && instance.until)) {
+                return null;
+            }
+
+            if (!instance.interval) {
+                instance.interval = 1;
+            }
+
+            if (weekStart === undefined) {
+                instance.weekStart = weekStart = kendo.culture().calendar.firstDay;
+            }
+
+            if (weekDays) {
+                instance.weekDays = weekDays.sort(predicate);
+            }
+        }
+
+        return instance;
+    }
+
+    function serialize(rule) {
+        var ruleString = "FREQ=" + rule.freq.toUpperCase();
+
+        if (rule.interval > 1) {
+            ruleString += ";INTERVAL=" + rule.interval;
+        }
+
+        if (rule.count) {
+            ruleString += ";COUNT=" + rule.count;
+        }
+
+        if (rule.until) {
+            ruleString += ";UNTIL=" + kendo.toString(rule.until, "yyyyMMddTHHmmssZ");
+        }
+
+        if (rule.months) {
+            ruleString += ";BYMONTH=" + rule.months;
+        }
+
+        if (rule.weeks) {
+            ruleString += ";BYWEEKNO=" + rule.weeks;
+        }
+
+        if (rule.yearDays) {
+            ruleString += ";BYYEARDAY=" + rule.yearDays;
+        }
+
+        if (rule.monthDays) {
+            ruleString += ";BYMONTHDAY=" + rule.monthDays;
+        }
+
+        if (rule.weekDays) {
+            ruleString += ";BYDAY=" + serializeWeekDayList(rule.weekDays);
+        }
+
+        if (rule.hours) {
+            ruleString += ";BYHOUR=" + rule.hours;
+        }
+
+        if (rule.minutes) {
+            ruleString += ";BYMINUTE=" + rule.minutes;
+        }
+
+        if (rule.seconds) {
+            ruleString += ";BYSECOND=" + rule.seconds;
+        }
+
+        if (rule.setPositions) {
+            ruleString += ";BYSETPOS=" + rule.setPositions;
+        }
+
+        ruleString += ";WKST=" + WEEK_DAYS[rule.weekStart];
+
+        return ruleString;
+    }
+
     kendo.recurrence = {
         rule: {
-            parse: parseRule
-            //tostring
+            parse: parseRule,
+            serialize: serialize
         },
         expand: expand,
         dayInYear: dayInYear,
