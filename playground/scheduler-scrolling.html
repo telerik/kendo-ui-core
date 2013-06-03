@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Experiments with Scheduler layout</title>
+        <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../styles/web/kendo.silver.min.css" rel="stylesheet" />
+        <script src="../src/jquery.js"></script>
+        <style>
+
+            html {
+                font: 12px sans-serif;
+            }
+
+            pre {
+                font-size: 10px;
+            }
+
+.k-scheduler
+{
+	background-color:#fff;
+}
+
+.k-scheduler-table td,
+.k-scheduler-header th
+{
+	border-color:#ccc;
+}
+
+.k-scheduler-toolbar + .k-scheduler-times tr:first-child th
+{
+	border-bottom-color:#ccc;
+}
+
+.k-scheduler-table .k-today
+{
+	background-color:#f6f6f6;
+}
+
+.k-scheduler-now-arrow
+{
+	border-left-color:#f00;
+}
+
+.k-scheduler-now-line
+{
+	background-color:#f00;
+}
+
+.k-appointment
+{
+	border-color:#8bf;
+	background-color: #def;
+	cursor:move;
+}
+
+.k-appointment:hover
+{
+	border-color:#69f;
+}
+
+
+        </style>
+        <script>
+
+            function levels(values, key) {
+                var levels = [];
+
+                function collect(depth, values) {
+                    values = values[key];
+
+                    if (values) {
+                        var level = levels[depth] = levels[depth] || [];
+
+                        for (var idx = 0; idx < values.length; idx++) {
+                            level.push(values[idx]);
+                            collect(depth + 1, values[idx]);
+                        }
+                    }
+                }
+
+                collect(0, values);
+
+                return levels;
+            }
+
+            function wrapper(className) {
+                return $("<div/>").addClass(className);
+            }
+
+            function layout(configuration) {
+                var columnLevels = levels(configuration, "columns");
+
+                var columnCount = columnLevels[columnLevels.length - 1].length;
+
+                var topLeft = wrapper("k-scheduler-times");
+
+                var allDay = $.grep(configuration.rows, function(row) { return row.text == "All Day"  } )[0]
+
+                var rowspan = columnLevels.length ;
+
+                var th = [];
+
+                for (var i = 0; i < rowspan; i++) {
+                    th.push("<th></th>");
+                }
+
+                if (allDay) {
+                    th.push("<th>" + allDay.text + "</th>");
+
+                    configuration.rows.splice($.inArray(allDay, configuration.rows), 1);
+                }
+
+                var rowLevels = levels(configuration, "rows");
+                var rowCount = rowLevels[rowLevels.length - 1].length;
+
+                topLeft.append('<table class="k-scheduler-table"><tr>' + th.join("</tr><tr>") + "</tr></table>");
+
+                th = [];
+
+                var tr = [];
+
+                for (var columnLevelIndex = 0; columnLevelIndex < columnLevels.length; columnLevelIndex++) {
+                    var level = columnLevels[columnLevelIndex];
+                    var colspan = columnCount / level.length;
+
+                    for (var columnIndex = 0; columnIndex < level.length; columnIndex ++) {
+                        th.push('<th colspan="' + colspan + '">' + level[columnIndex].text + "</th>");
+                    }
+
+                    tr.push(th.join(""));
+                    th = [];
+                }
+
+                var headerWrapper = wrapper("k-scheduler-header-wrap");
+
+                headerWrapper.append('<table class="k-scheduler-table" style="width:140%"><tr>' + tr.join("</tr><tr>") + "</tr></table>");
+
+                tr = [];
+
+                if (allDay) {
+                    tr.push(new Array(columnCount + 1).join("<td></td>"));
+
+                    headerWrapper.append('<table class="k-scheduler-table" style="width:140%"><tr>' + tr.join("</tr><tr>") + "</tr></table>");
+
+                    tr = [];
+                }
+
+                var bottomLeft = wrapper("k-scheduler-times");
+
+                var rows = new Array(rowCount).join().split(",");
+
+                for (var rowLevelIndex = 0; rowLevelIndex < rowLevels.length; rowLevelIndex++) {
+                    var level = rowLevels[rowLevelIndex];
+                    var rowspan = rowCount / level.length;
+
+                    for (var rowIndex = 0; rowIndex < level.length; rowIndex++) {
+                        rows[rowspan * rowIndex] += '<th rowspan="' + rowspan + '">' + level[rowIndex].text + "</th>";
+                    }
+                }
+
+                for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+                    tr.push(rows[rowIndex]);
+                }
+
+                bottomLeft.append('<table class="k-scheduler-table"><tr>' + tr.join("</tr><tr>") + "</tr></table>");
+
+                tr = [];
+
+                var content = wrapper("k-scheduler-content").css("height", 300);
+
+                for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+                    tr.push(new Array(columnCount + 1).join("<td></td>"));
+                }
+
+                content.append('<table class="k-scheduler-table" style="width:140%"><tr>' + tr.join("</tr><tr>") + "</tr></table>");
+
+                var header = wrapper("k-scheduler-header").css( { "padding-right" : 17 } );
+
+                header.append(headerWrapper);
+
+                var scheduler = wrapper("k-widget k-scheduler k-floatwrap").append('<div class="k-floatwrap k-header k-scheduler-toolbar">&nbsp;</div>');
+
+                return scheduler.append(topLeft).append(header).append(bottomLeft).append(content);
+            }
+
+            $(function() {
+                $("section").each(function(index) {
+                    var pre = $("pre", this);
+
+                    eval(pre.text());
+
+                    pre.after(layout(configuration));
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <section>
+            <h3>No grouping</h3>
+            <pre><code>
+                var configuration = {
+                    columns: [
+                        { text: "5/30/2013" },
+                        { text: "5/31/2013" }
+                    ],
+                    rows: [
+                        { text: "All Day" },
+                        { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; }
+                    ]
+                };
+            </code></pre>
+        </section>
+        <section>
+            <h3>One Level Horizontal Grouping</h3>
+            <pre><code>
+                var configuration = {
+                    columns: [
+                       {
+                           text: "Room 1",
+                           columns: [
+                                { text: "5/30/2013" },
+                                { text: "5/31/2013" }
+                           ]
+                       },
+                       {
+                           text: "Room 2",
+                           columns: [
+                                { text: "5/30/2013" },
+                                { text: "5/31/2013" }
+                           ]
+                       },
+                    ],
+                    rows: [
+                        { text: "All Day" },
+                        { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; }
+                    ]
+                };
+            </code></pre>
+        </section>
+        <section>
+            <h3>Two Level Horizontal Grouping</h3>
+            <pre><code>
+                var configuration = {
+                    columns: [
+                        {
+                            text: "Building 1",
+                            columns: [
+                                {
+                                    text: "Room 1",
+                                    columns: [
+                                        { text: "5/30/2013" },
+                                        { text: "5/31/2013" }
+                                    ]
+                                },
+                                {
+                                    text: "Room 2",
+                                    columns: [
+                                        { text: "5/30/2013" },
+                                        { text: "5/31/2013" }
+                                    ]
+                                }
+                            ]
+                        },{
+                            text: "Building 1",
+                            columns: [
+                                {
+                                    text: "Room 1",
+                                    columns: [
+                                        { text: "5/30/2013" },
+                                        { text: "5/31/2013" }
+                                    ]
+                                },
+                                {
+                                    text: "Room 2",
+                                    columns: [
+                                        { text: "5/30/2013" },
+                                        { text: "5/31/2013" }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    rows: [
+                        { text: "All Day" },
+                        { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                        { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; }
+                    ]
+                };
+            </code></pre>
+        </section>
+        <section>
+            <h3>One Level Vertical Grouping</h3>
+            <pre><code>
+                var configuration = {
+                    columns: [
+                        { text: "5/30/2013" },
+                        { text: "5/30/2013" }
+                    ],
+                    rows: [
+                        {
+                            text: "Room 1",
+                            rows: [
+                                { text: "All Day" },
+                                { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; }
+                            ]
+                        },
+                        {
+                            text: "Room 2",
+                            rows: [
+                                { text: "All Day" },
+                                { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;1:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;2:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;3:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;4:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;5:00 AM&lt;/em&gt;&quot; },
+                                { text: &quot;&lt;em&gt;6:00 AM&lt;/em&gt;&quot; }
+                            ]
+                        }
+                   ]
+                };
+            </code></pre>
+        </section>
+    </body>
+</html>
