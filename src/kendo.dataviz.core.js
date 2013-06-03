@@ -1532,11 +1532,11 @@ kendo_module({
                 },
                 userSetLimits;
 
-            if (autoMin < 0) {
+            if (autoMin < 0 && remainderClose(autoMin, majorUnit, 1/3)) {
                 autoMin -= majorUnit;
             }
 
-            if (autoMax > 0) {
+            if (autoMax > 0 && remainderClose(autoMax, majorUnit, 1/3)) {
                 autoMax += majorUnit;
             }
 
@@ -2897,6 +2897,13 @@ kendo_module({
     function round(value, precision) {
         var power = math.pow(10, precision || 0);
         return math.round(value * power) / power;
+    }
+
+    function remainderClose(value, divisor, ratio) {
+        var remainder = round(math.abs(value % divisor), DEFAULT_PRECISION),
+            threshold = divisor * (1 - ratio);
+
+        return remainder === 0 || remainder > threshold;
     }
 
     function interpolateValue(start, end, progress) {

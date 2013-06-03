@@ -347,6 +347,16 @@
                     equal(numericAxis.range().max, 1.2);
                 });
 
+                test("Automatic maximum is extended if maximum is within 33% of major unit", function() {
+                    numericAxis = new NumericAxis(0, 34, {});
+                    equal(numericAxis.options.max, 40);
+                });
+
+                test("Automatic maximum is not extended if maximum is not within 33% of major unit", function() {
+                    numericAxis = new NumericAxis(0, 33, {});
+                    equal(numericAxis.options.max, 35);
+                });
+
                 // ------------------------------------------------------------
                 module("Numeric Axis / Configuration / Negative values", {
                     setup: moduleSetup
@@ -366,6 +376,16 @@
                     numericAxis = new NumericAxis(-60, -45, {});
 
                     equal(numericAxis.options.majorUnit, 10);
+                });
+
+                test("Automatic minimum is extended if maximum is within 33% of major unit", function() {
+                    numericAxis = new NumericAxis(-34, 0, {});
+                    equal(numericAxis.options.min, -40);
+                });
+
+                test("Automatic minimum is not extended if maximum is not within 33% of major unit", function() {
+                    numericAxis = new NumericAxis(-33, 0, {});
+                    equal(numericAxis.options.min, -35);
                 });
 
                 // ------------------------------------------------------------
