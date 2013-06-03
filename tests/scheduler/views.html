@@ -36,8 +36,8 @@
             });
 
             function slotHeight(table, slotsCount) {
-                var height = Math.floor(table.height() / table[0].rows.length);
-                return Math.floor((height * slotsCount) - height * 0.10);
+                var height = Math.round(table.height() / table[0].rows.length);
+                return Math.round((height * slotsCount) - height * 0.10);
             }
 
             function equalWithRound(value, expected) {
@@ -72,7 +72,6 @@
                 view.render();
 
                 ok(view.datesHeader.hasClass("k-scheduler-header"));
-                equal(view.datesHeader.find("col").length, 2);
                 equal(view.datesHeader.find("th").length, 2);
             });
 
@@ -153,8 +152,8 @@
 
                 view.render();
 
-                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "10:00 PM");
-                equal(view.times.find("tr.k-last").text(), "11:59 PM");
+                equal(view.times.find("tr:not(:last) em:not(:empty):last").text(), "10:00 PM");
+                equal(view.times.find("tr:last").text(), "11:59 PM");
                 equal(view.times.find("th").length, 97);
             });
 
@@ -179,17 +178,9 @@
 
                 view.render();
 
-                equal(view.times.find("tr:not(.k-last) em:not(:empty):last").text(), "9:00 AM");
-                equal(view.times.find("tr.k-last").text(), "10:00 AM");
+                equal(view.times.find("tr:not(:last) em:not(:empty):last").text(), "9:00 AM");
+                equal(view.times.find("tr:last").text(), "10:00 AM");
                 equal(view.times.find("th").length, 22);
-            });
-
-            test("last time slot has k-last class applied", function() {
-                 var view = setup({ });
-
-                view.render();
-
-                ok(view.times.find("tr:last").hasClass("k-last"));
             });
 
             test("render day slots", function() {
@@ -203,7 +194,6 @@
                 view.render();
 
                 equal(view.content.find("tr").length, 24);
-                equal(view.content.find("col").length, 2);
                 equal(view.content.find("td").length, 48);
             });
 
@@ -218,34 +208,6 @@
 
                 equal(view.content.find("tr.k-middle-row").length, 12);
                 equal(view.content.find("tr:not(.k-middle-row)").length, 12);
-            });
-
-            test("content is update on multiple render calls", function() {
-                var view = setup({
-                    dates: [
-                        new Date("1/26/2013")
-                    ]
-                });
-
-                view.render();
-                view.render();
-                equal(container.find(".k-scheduler-content").length, 1);
-                equal(container.find(".k-scheduler-content > table").length, 1);
-            });
-
-            test("datesHeader is update on multiple render calls", function() {
-                var view = setup({
-                    dates: [
-                        new Date("1/26/2013")
-                    ],
-                    allDaySlot: false
-                });
-
-                view.render();
-                view.render();
-
-                equal(container.find(".k-scheduler-header").length, 1);
-                equal(container.find(".k-scheduler-header-wrap > table").length, 1);
             });
 
             test("destroy clears views html", function() {
@@ -302,8 +264,7 @@
                 view.render();
 
                 equal(view.datesHeader.find(".k-scheduler-table").length, 2);
-                equal(view.allDayHeader[0], view.datesHeader.find(".k-scheduler-table:last")[0]);
-                equal(view.allDayHeader.find("td").length, 1);
+                equal(view.element.find(".k-scheduler-header-all-day td").length, 1);
             });
 
             test("all day slot is not rendered if disabled", function() {
@@ -592,7 +553,7 @@
 
                 view.renderEvents(events);
                 var eventOffset = view.datesHeader.find("div.k-appointment").offset();
-                var slotOffset = view.allDayHeader.find("td").eq(0).offset();
+                var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 equalWithRound(eventOffset.top, slotOffset.top);
                 equalWithRound(eventOffset.left, slotOffset.left);
             });
@@ -612,8 +573,8 @@
 
                 view.renderEvents(events);
                 var eventOffset = view.datesHeader.find("div.k-appointment").offset();
-                var slotOffset = view.allDayHeader.find("td").eq(0).offset();
-                var slotWidth = view.allDayHeader.find("td").innerWidth();
+                var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td").innerWidth();
 
                 equalWithRound(eventOffset.top, slotOffset.top);
 
@@ -635,7 +596,7 @@
 
                 view.renderEvents(events);
 
-                var slotWidth = view.allDayHeader.find("td").width();
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td").width();
 
                 equal(view.datesHeader.find("div.k-appointment").length, 1);
                 equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
@@ -655,7 +616,7 @@
 
                 view.renderEvents(events);
 
-                var slotWidth = view.allDayHeader.find("td").width();
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td").width();
 
                 equal(view.datesHeader.find("div.k-appointment").length, 1);
                 equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
@@ -675,7 +636,7 @@
 
                 view.renderEvents(events);
 
-                var slotWidth = view.allDayHeader.find("td").width();
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td").width();
 
                 equal(view.datesHeader.find("div.k-appointment").length, 1);
                 equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
@@ -763,6 +724,7 @@
 
                 var eventElement = view.content.find("div.k-appointment");
                 equal(eventElement.length, 1);
+                debugger;
                 equalWithRound(eventElement.offset().top, view.content.find("tr").eq(0).offset().top);
                 equalWithRound(eventElement.height(), slotHeight(view.content.find("table"), 2));
             });
@@ -1088,8 +1050,8 @@
 
                 var eventElements = view.datesHeader.find("div.k-appointment");
 
-                var slotOffset = view.allDayHeader.find("td").eq(0).offset();
-                var slotWidth = view.allDayHeader.find("td").innerWidth();
+                var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td").innerWidth();
 
                 equalWithRound(eventElements.first().offset().top, slotOffset.top);
 
@@ -1122,10 +1084,10 @@
 
                 var eventElements = view.datesHeader.find("div.k-appointment");
 
-                var firstEventSlotOffset = view.allDayHeader.find("td").eq(0).offset();
-                var secondEventSlotOffset = view.allDayHeader.find("td").eq(2).offset();
+                var firstEventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+                var secondEventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(2).offset();
 
-                var slotWidth = view.allDayHeader.find("td").innerWidth();
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td").innerWidth();
 
                 equalWithRound(eventElements.first().offset().top, firstEventSlotOffset.top);
                 equalWithRound(eventElements.last().offset().top, secondEventSlotOffset.top);
@@ -1159,8 +1121,8 @@
 
                 var eventElements = view.datesHeader.find("div.k-appointment");
 
-                var eventSlotOffset = view.allDayHeader.find("td").eq(0).offset();
-                var eventSlotHeigth = view.allDayHeader.find("td").eq(0).height();
+                var eventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+                var eventSlotHeigth = view.element.find(".k-scheduler-header-all-day td").eq(0).height();
                 var eventHeight = eventElements.eq(0).height();
 
                 equalWithRound(eventElements.eq(0).offset().top, eventSlotOffset.top);
@@ -1188,7 +1150,7 @@
 
                 var eventElements = view.datesHeader.find("div.k-appointment");
 
-                var eventSlotOffset = view.allDayHeader.find("td").eq(0).offset();
+                var eventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var eventHeight = eventElements.eq(0).height();
 
                 equalWithRound(eventElements.eq(0).offset().top, eventSlotOffset.top);

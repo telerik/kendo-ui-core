@@ -113,22 +113,6 @@ kendo_module({
 
         return msValue >= msMin && msValue <= msMax;
     }
-    function createTable(dates, cellAction) {
-        var idx,
-            length,
-            html ='<table class="k-scheduler-table">';
-
-        html += '<colgroup>' + (new Array(dates.length + 1).join('<col />')) + '</colgroup>';
-        html += '<tbody><tr>';
-
-        for (idx = 0, length = dates.length; idx < length; idx++) {
-            html += cellAction(dates[idx]);
-        }
-
-        html += '</tr></tbody></table>';
-
-        return html;
-    }
 
     function rangeIndex(eventElement) {
         var index = $(eventElement).attr(kendo.attr("start-end-idx")).split("-");
@@ -247,22 +231,47 @@ kendo_module({
             return kendo.format(this.options.selectedDateFormat, this.startDate, this.endDate);
         },
 
-        _header: function(dates) {
-            if (!this.timesHeader) {
-                this.timesHeader = $('<div class="k-scheduler-times">' +
-                        '<table class="k-scheduler-table">' +
-                        '<colgroup> <col /> </colgroup>' +
-                        '<tbody>' +
-                            '<tr><th>&nbsp;</th></tr>' +
-                            (this.options.allDaySlot ? '<tr><th>all day</th></tr>' : '') +
-                        '</tbody>' +
-                    '</table>' +
-                '</div>');
+        _layout: function(dates) {
+            var columns = [];
+            var rows = [];
+            var options = this.options;
 
-                this.element.append(this.timesHeader);
+            for (var idx = 0; idx < dates.length; idx++) {
+                var column = {};
+
+                column.text = executeTemplate(options.dateHeaderTemplate, options, { date: dates[idx] });
+
+                if (getDate(dates[idx]).getTime() == getDate(TODAY).getTime()) {
+                    column.className = "k-today";
+                }
+
+                columns.push(column);
             }
 
-            this._renderDatesHeader(dates);
+            if (options.allDaySlot) {
+                rows.push( { text: "all day", allDay: true });
+            }
+
+            this._forTimeRange(options.startTime, options.endTime, function(date, majorTick) {
+                var template = majorTick ? options.majorTickTimeTemplate : options.minorTickTimeTemplate;
+
+                var row = {
+                    text: executeTemplate(template, options, { date: date }),
+                    className: majorTick ? "k-middle-row" : ""
+                };
+
+                rows.push(row);
+            }, function(date) {
+                rows.push({
+                    text: executeTemplate(options.majorTickTimeTemplate, options, { date: date }),
+                    skip: true
+                });
+            });
+
+            return {
+                columns: columns,
+                rows: rows
+            };
         },
 
         _footer: function() {
@@ -276,47 +285,6 @@ kendo_module({
 
                 this.footer = $(html).appendTo(this.element);
             }
-        },
-
-        _renderDatesHeader: function(dates) {
-            var that = this,
-                header = that.element.find(".k-scheduler-header-wrap"),
-                html,
-                options = this.options,
-                headerTemplate = that.options.dateHeaderTemplate,
-                allDayHtml;
-
-            if (!header.length) {
-                header = $('<div class="k-scheduler-header-wrap"/>');
-
-                $('<div class="k-scheduler-header k-state-default"/>')
-                    .append(header)
-                    .appendTo(that.element);
-            } else {
-                header.empty();
-            }
-
-            html = createTable(dates, function(date) {
-                var content = '<th';
-                content += (getDate(date).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "");
-                content += '>' + executeTemplate(headerTemplate, options, { date: date }) + '</th>';
-                return content;
-            });
-
-            if (that.options.allDaySlot) {
-                allDayHtml = createTable(dates, function(date) {
-                    var content = '<td';
-                    content += (getDate(date).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "");
-                    content += '>&nbsp;</td>';
-                    return content;
-                });
-
-                that.allDayHeader = $(allDayHtml).addClass("k-scheduler-header-all-day");
-            }
-
-            that.datesHeader = header.append(html)
-                                    .append(that.allDayHeader)
-                                    .parent();
         },
 
         _forTimeRange: function(min, max, action, after) {
@@ -370,98 +338,27 @@ kendo_module({
             return html;
         },
 
-        _times: function() {
+        _content: function() {
             var that = this,
-                options = that.options,
-                start = options.startTime,
-                end = options.endTime,
-                majorTickTimeTemplate = options.majorTickTimeTemplate,
-                minorTickTimeTemplate = options.minorTickTimeTemplate,
-                template,
-                html = '<div class="k-scheduler-times"><table class="k-scheduler-table"><colgroup><col /></colgroup><tbody>';
+                wrapper = this.content;
 
-            html += this._forTimeRange(start, end, function(date, majorTick) {
-                var content = "<tr><th>";
-
-                if (majorTick) {
-                   template = majorTickTimeTemplate;
-                } else {
-                   template = minorTickTimeTemplate;
-                }
-
-                content += executeTemplate(template, options, { date: date });
-                content += "</th></tr>";
-
-                return content;
-            }, function(date) {
-                return '<tr class="k-last"><th>' + executeTemplate(majorTickTimeTemplate, options, { date: date }) + '</th></tr>';
+            wrapper.bind("scroll" + NS, function () {
+                that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(this.scrollLeft);
+                that.times.scrollTop(this.scrollTop);
             });
 
-            html += '</tbody></table></div>';
+            var touchScroller = kendo.touchScroller(wrapper);
+            if (touchScroller && touchScroller.movable) {
 
-            this.times = $(html);
-            this.element.append(this.times);
-        },
+                this._touchScroller = touchScroller;
 
-        _content: function(dates) {
-            var that = this,
-                options = that.options,
-                start = options.startTime,
-                end = options.endTime,
-                wrapper = this.element.find(".k-scheduler-content"),
-                html = '<table class="k-scheduler-table">';
+                wrapper = touchScroller.scrollElement;
 
-            if (!wrapper.length) {
-                wrapper = $('<div class="k-scheduler-content"/>').appendTo(this.element);
-
-                wrapper.bind("scroll" + NS, function () {
-                    that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(this.scrollLeft);
-                    that.times.scrollTop(this.scrollTop);
+                touchScroller.movable.bind("change", function(e) {
+                    that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(-e.sender.x);
+                    that.times.scrollTop(-e.sender.y);
                 });
-
-                var touchScroller = kendo.touchScroller(wrapper);
-                if (touchScroller && touchScroller.movable) {
-
-                    this._touchScroller = touchScroller;
-
-                    wrapper = touchScroller.scrollElement;
-
-                    touchScroller.movable.bind("change", function(e) {
-                        that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(-e.sender.x);
-                        that.times.scrollTop(-e.sender.y);
-                    });
-                }
-
-            } else {
-                if (this._touchScroller) {
-                    wrapper = this._touchScroller.scrollElement;
-                }
-                wrapper.empty();
             }
-
-            html += '<colgroup>' + (new Array(dates.length + 1).join('<col />')) + '</colgroup>';
-            html += '<tbody>';
-
-            html += this._forTimeRange(start, end, function(date, majorTick) {
-                var content = "",
-                    idx,
-                    length;
-
-                content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
-
-                for (idx = 0, length = dates.length; idx < length; idx++) {
-                    content += "<td" + (getDate(dates[idx]).getTime() === getDate(TODAY).getTime() ? ' class="k-today"' : "") + ">";
-                    content += "&nbsp;</td>";
-                }
-
-                content += "</tr>";
-                return content;
-            });
-
-            html += '</tbody>';
-            html += '</table>';
-
-            this.content = wrapper.append(html);
         },
 
         _setContentHeight: function() {
@@ -536,15 +433,12 @@ kendo_module({
             this._dates = dates;
 
             this.startDate = dates[0];
+
             this.endDate = dates[(dates.length - 1) || 0];
 
-            this._header(dates);
+            this.prepareLayout(this._layout(dates));
 
-            if (!(this.times && this.times.length)) {
-                this._times();
-            }
-
-            this._content(dates);
+            this._content();
 
             this._footer();
 
@@ -849,7 +743,7 @@ kendo_module({
                 eventTemplate = this.eventTemplate,
                 allDayEventTemplate = this.allDayEventTemplate,
                 timeSlots = this.content.find("tr"),
-                allDaySlots = this.allDayHeader ? this.allDayHeader.find("td") : $(),
+                allDaySlots = this.element.find(".k-scheduler-header-all-day td"),
                 allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
                 slotHeight = Math.floor(this.content.find(">table:first").innerHeight() / timeSlots.length),
                 slotWidth = this.datesHeader.find("table:first th:first").innerWidth(),

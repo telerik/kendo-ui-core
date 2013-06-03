@@ -272,11 +272,11 @@
             });
 
             test("custom view is instantiated", function() {
-                var MyCustomView = kendo.Observable.extend({
+                var MyCustomView = kendo.ui.SchedulerView.extend({
                     name: "foo",
                     renderGrid: $.noop,
                     dateForTitle: $.noop,
-                    renderEvents: $.noop
+                    renderEvents: $.noop,
                 });
 
                 var scheduler = new Scheduler(container, {
@@ -287,7 +287,7 @@
             });
 
             test("selected date is passed to view render method", 1, function() {
-                var MyCustomView = kendo.Observable.extend({
+                var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
                         renderEvents: $.noop,
@@ -300,8 +300,8 @@
                     });
             });
 
-            test("switching between views destroyes the view", 1, function() {
-                var MyCustomView = kendo.Observable.extend({
+            test("switching between views destroyes the view", 2, function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
                         renderEvents: $.noop,
@@ -319,7 +319,7 @@
             });
 
             test("changing dates re-renders current view", 2, function() {
-                var MyCustomView = kendo.Observable.extend({
+                var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
                         renderEvents: $.noop,
@@ -344,7 +344,7 @@
             });
 
             test("top level options are propageted to the custom views", function() {
-                var MyCustomView = kendo.ui.Widget.extend({
+                var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
                         renderEvents: $.noop,

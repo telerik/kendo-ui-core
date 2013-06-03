@@ -505,13 +505,13 @@ kendo_module({
             var that = this;
 
             if (name) {
+
                 if (that._selectedViewName !== name) {
                     that._unbindView(that.views[that._selectedViewName]);
                 }
 
-                that._bindView(that.views[name]);
-
                 that._renderView(name);
+
                 that._selectedViewName = name;
 
                 that.toolbar
@@ -530,6 +530,10 @@ kendo_module({
 
         _renderView: function(name) {
             var view = this.views[name];
+
+            view.destroy();
+
+            this._bindView(this.views[name]);
 
             view.renderGrid(this.selectDate());
 
