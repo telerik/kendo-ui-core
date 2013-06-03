@@ -41,6 +41,8 @@ namespace Kendo.Mvc.UI
         
         public string Title { get; set; }
         
+        public string Layout { get; set; }
+        
         //<< Fields
 
         public HtmlTemplate Header

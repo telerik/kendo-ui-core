@@ -96,6 +96,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Specifies the id of the default layout
+        /// </summary>
+        /// <param name="value">The value that configures the layout.</param>
+        public MobileModalViewBuilder Layout(string value)
+        {
+            container.Layout = value;
+
+            return this;
+        }
+        
         //<< Fields
 
         /// <summary>

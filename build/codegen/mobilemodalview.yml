@@ -26,3 +26,7 @@
     - :name: title
       :type: String
       :description: The text to display in the navbar title (if present) and the browser title.
+
+    - :name: layout
+      :type: String
+      :description: Specifies the id of the default layout

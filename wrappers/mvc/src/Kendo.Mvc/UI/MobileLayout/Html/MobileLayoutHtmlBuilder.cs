@@ -31,8 +31,8 @@ namespace Kendo.Mvc.UI
 
             html.Attributes(component.HtmlAttributes);
 
-            html.Children.Add(CreateHeaderElement());            
-            html.Children.Add(CreateFooterElement());
+            CreateHeaderElement(html);            
+            CreateFooterElement(html);
 
             return html;
         }
@@ -58,30 +58,30 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        protected virtual IHtmlNode CreateHeaderElement()
+        protected virtual void CreateHeaderElement(IHtmlNode html)
         {
-            var dom = new HtmlElement("header")
-                        .Attribute("data-role", "header");
-
             if (component.Header.HasValue())
             {
+                var dom = new HtmlElement("header")
+                            .Attribute("data-role", "header");
+            
                 component.Header.Apply(dom);
-            }
 
-            return dom;
+                html.Children.Add(dom);
+            }            
         }       
 
-        protected virtual IHtmlNode CreateFooterElement()
+        protected virtual void CreateFooterElement(IHtmlNode html)
         {
-            var dom = new HtmlElement("footer")
-                        .Attribute("data-role", "footer");
-
             if (component.Footer.HasValue())
             {
+                var dom = new HtmlElement("footer")
+                            .Attribute("data-role", "footer");
+            
                 component.Footer.Apply(dom);
-            }
 
-            return dom;
+                html.Children.Add(dom);
+            }
         }
     }
 }

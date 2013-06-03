@@ -36,6 +36,8 @@ namespace Kendo.Mvc.UI
         
         public bool Zoom { get; set; }
         
+        public string Layout { get; set; }
+        
         //<< Fields
 
         public HtmlTemplate Header

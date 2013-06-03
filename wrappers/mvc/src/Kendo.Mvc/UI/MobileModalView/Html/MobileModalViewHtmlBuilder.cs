@@ -27,9 +27,9 @@ namespace Kendo.Mvc.UI
             html.Attribute("data-role", "modalview")
                 .Attribute("id", component.Id);
 
-            html.Children.Add(CreateHeaderElement());
-            html.Children.Add(CreateContentElement());
-            html.Children.Add(CreateFooterElement());
+            CreateHeaderElement(html);
+            CreateContentElement(html);
+            CreateFooterElement(html);
 
             AddEventAttributes(html, component.Events);
 
@@ -46,6 +46,11 @@ namespace Kendo.Mvc.UI
             if (component.Width.HasValue())
             {
                 html.Attribute("data-width", component.Width);
+            }
+
+            if (component.Layout.HasValue())
+            {
+                html.Attribute("data-layout", component.Layout);
             }
 
             html.Attribute("data-modal", component.Modal ? "true" : "false");
@@ -79,43 +84,43 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        protected virtual IHtmlNode CreateHeaderElement()
+        protected virtual void CreateHeaderElement(IHtmlNode html)
         {
-            var dom = new HtmlElement("header")
-                        .Attribute("data-role", "header");
-
             if (component.Header.HasValue())
             {
+                var dom = new HtmlElement("header")
+                            .Attribute("data-role", "header");
+            
                 component.Header.Apply(dom);
-            }
 
-            return dom;
+                html.Children.Add(dom);
+            }            
         }
 
-        protected virtual IHtmlNode CreateContentElement()
+        protected virtual void CreateContentElement(IHtmlNode html)
         {
-            var dom = new HtmlElement("div")
-                        .Attribute("data-role", "content");
-
             if (component.Content.HasValue())
             {
+                var dom = new HtmlElement("div")
+                            .Attribute("data-role", "content");
+            
                 component.Content.Apply(dom);
-            }
 
-            return dom;
+                html.Children.Add(dom);
+            }            
         }
 
-        protected virtual IHtmlNode CreateFooterElement()
+        protected virtual void CreateFooterElement(IHtmlNode html)
         {
-            var dom = new HtmlElement("footer")
-                        .Attribute("data-role", "footer");
-
             if (component.Footer.HasValue())
             {
+                var dom = new HtmlElement("footer")
+                            .Attribute("data-role", "footer");
+            
                 component.Footer.Apply(dom);
-            }
 
-            return dom;
+                html.Children.Add(dom);
+            }            
         }
     }
 }
