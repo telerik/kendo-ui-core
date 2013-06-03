@@ -30,7 +30,7 @@
                 view;
 
             function SegmentStub(sector) {
-                this.sector = sector;
+                this.sector = sector.clone();
             }
 
             SegmentStub.prototype = {
@@ -130,8 +130,8 @@
                     equal(s1.angle, 70);
                 });
 
-                test("second sector radius is not changed", function() {
-                    equal(s2.r, 10);
+                test("second sector radius is updated", function() {
+                    equal(s2.r, s2.ir + 10);
                 });
 
                 test("second sector is fitted in sector segment", function() {
@@ -150,8 +150,8 @@
                     }
                 });
 
-                test("first sector radius is not changed", function() {
-                    equal(s1.r, 10);
+                test("first sector radius is updated", function() {
+                    equal(s1.r, s1.ir + 10);
                 });
 
                 test("first sector is fitted in sector segment", function() {
@@ -159,7 +159,7 @@
                     equal(s1.angle, 70);
                 });
 
-                test("second sector radius is not changed", function() {
+                test("second sector radius is updated", function() {
                     equal(s2.r, 10);
                 });
 

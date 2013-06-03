@@ -662,7 +662,8 @@ kendo_module({
 
                 if (i !== first) {
                     prevSector = children[reverse ? i + 1 : i - 1].sector;
-                    childSector.ir = prevSector.ir + prevSector.r;
+                    childSector.ir = prevSector.r;
+                    childSector.r += childSector.ir;
                 }
             }
         }
