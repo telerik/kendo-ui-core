@@ -121,6 +121,7 @@
     <Compile Include="Controllers\Mobile\Button\AppearanceController.cs" />
     <Compile Include="Controllers\Mobile\Button\EventsController.cs" />
     <Compile Include="Controllers\Mobile\Button\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\ScrollView\IndexController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\NavigationController.cs" />
@@ -505,6 +506,7 @@
     <Content Include="Areas\aspx\Views\mobile\button\appearance.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\scrollview\index.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\rtl.aspx" />
@@ -659,6 +661,7 @@
     <Content Include="Areas\razor\Views\mobile\button\badges.cshtml" />
     <Content Include="Areas\razor\Views\mobile\button\events.cshtml" />
     <Content Include="Areas\razor\Views\mobile\button\appearance.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\scrollview\index.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
