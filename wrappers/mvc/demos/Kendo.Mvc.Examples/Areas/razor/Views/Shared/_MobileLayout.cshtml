@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/web/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/web/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/mobile/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />    
+    <link href="@Url.Content("~/Content/shared/examples-offline.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/console.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/prettify.min.js")"></script>
+
+    @RenderSection("HeadContent", false)
+</head>
+<body>
+    <div class="page">
+        
+        <div id="example" class="k-content" style="height: 400px">
+            @{ Html.Kendo().MobileLayout()
+                .Name("examples")
+                .Header(() =>
+                {
+                    Html.Kendo().MobileNavBar()
+                        .Name("navbar")                        
+                        .Content(navbar =>
+                            @<text>                     
+                                @navbar.ViewTitle("Index")
+                                @Html.Partial("~/Views/Shared/_MobileNavigation.cshtml")                                
+                            </text>)
+                        .Render();                  
+                })
+                .Render();
+            }
+
+            @RenderBody()
+        </div>
+
+        @Html.Partial("~/Views/Shared/_Source.cshtml")
+
+    </div>
+
+    @(Html.Kendo().MobileApplication()
+        .ServerNavigation(true)    
+        .Name("example")
+    )
+    
+</body>
+</html>

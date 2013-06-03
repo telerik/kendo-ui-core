@@ -1,0 +1,59 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    
+    <meta charset="utf-8" />
+    <link href="<%= Url.Content("~/Content/web/kendo.common.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/web/kendo.default.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/mobile/kendo.mobile.all.min.css") %>" rel="stylesheet" type="text/css" />    
+    <link href="<%= Url.Content("~/Content/shared/examples-offline.css") %>" rel="stylesheet" type="text/css" />
+    <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>        
+    <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/console.min.js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/prettify.min.js") %>"></script>
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    
+<div class="page">    
+    <div id="example" class="k-content" style="height: 400px">
+        <% Html.Kendo().MobileLayout()
+            .Name("examples")
+            .Header(() =>
+            {
+                Html.Kendo().MobileNavBar()
+                    .Name("navbar")                        
+                    .Content((navbar) => 
+                        {                                
+                            %>                                
+                            <%: navbar.ViewTitle("Index") %>                                
+                            <%: Html.Partial("~/Views/Shared/_MobileNavigation.cshtml") %>                                 
+                            <%
+                        })
+                    .Render();                  
+            })
+            .Render();
+        %>
+
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />        
+    </div>
+
+    <%: Html.Partial("~/Views/Shared/_Source.cshtml") %>
+</div>
+   
+
+<%: Html.Kendo().MobileApplication()
+    .ServerNavigation(true)    
+    .Name("example")
+%>
+<%--<script>
+    new kendo.mobile.Application($("#example"), {
+        serverNavigation: true
+        //pushState: true
+    });
+</script>--%>
+    
+</body>
+</html>
