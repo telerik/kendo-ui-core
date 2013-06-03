@@ -878,7 +878,8 @@ kendo_module({
                 tracker = plotArea.valueAxisRangeTracker,
                 defaultRange = tracker.query(),
                 range,
-                valueAxis;
+                valueAxis,
+                defaults;
 
             // TODO: Should we support multiple axes?
             range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
@@ -888,9 +889,16 @@ kendo_module({
                 range.max = math.max(range.max, defaultRange.max);
             }
 
+            defaults = { max: range.max };
+
+            if (plotArea._hasBarCharts) {
+                defaults.majorGridLines = { type: ARC };
+                defaults.minorGridLines = { type: ARC };
+            }
+
             valueAxis = new RadarNumericAxis(
                 range.min, range.max,
-                deepExtend({ max: range.max }, plotArea.options.valueAxis)
+                deepExtend(defaults, plotArea.options.valueAxis)
             );
 
             plotArea.valueAxis = valueAxis;
@@ -964,6 +972,8 @@ kendo_module({
                     isStacked: firstSeries.stack && filteredSeries.length > 1,
                     series: series
                 });
+
+            plotArea._hasBarCharts = true;
 
             plotArea.appendChart(lineChart, pane);
         },

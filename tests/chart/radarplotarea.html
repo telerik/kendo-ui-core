@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="../qunit.ico" />
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz,
+                getElement = dataviz.getElement,
+                Box2D = dataviz.Box2D,
+                chartBox = new Box2D(100, 100, 1000, 1000),
+                plotArea,
+                categoryAxis,
+                valueAxis;
+
+
+            function createPlotArea(series, options) {
+                plotArea = new dataviz.RadarPlotArea(series, options);
+
+                categoryAxis = plotArea.categoryAxis;
+                valueAxis = plotArea.valueAxis;
+
+                chartSeries = plotArea.charts[0];
+            }
+
+            // ------------------------------------------------------------
+            module("Axes");
+
+            test("value axis grid lines are set to 'arc' for radarColumn series", function() {
+                createPlotArea([{ type: "radarColumn", data: [] }]);
+
+                equal(valueAxis.options.majorGridLines.type, "arc");
+                equal(valueAxis.options.minorGridLines.type, "arc");
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div style="position: absolute; top: 200px; left: 8px;">
+            <div id="container" style="width: 1664px; height: 400px;">
+            </div>
+        </div>
+
+    </body>
+</html>
