@@ -113,7 +113,7 @@
     <Compile Include="Controllers\DataViz\Sparklines\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\Remote_DataController.cs" />
-    <Compile Include="Controllers\Mobile\actionsheet\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\ActionSheet\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Application\TransitionsController.cs" />
     <Compile Include="Controllers\Mobile\Application\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Application\LoadingPopupController.cs" />
@@ -122,6 +122,8 @@
     <Compile Include="Controllers\Mobile\Button\EventsController.cs" />
     <Compile Include="Controllers\Mobile\Button\IndexController.cs" />
     <Compile Include="Controllers\Mobile\ScrollView\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\Switch\EventsController.cs" />
+    <Compile Include="Controllers\Mobile\Switch\IndexController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\NavigationController.cs" />
@@ -507,6 +509,8 @@
     <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\scrollview\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\switch\events.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\switch\index.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\rtl.aspx" />
@@ -662,6 +666,8 @@
     <Content Include="Areas\razor\Views\mobile\button\events.cshtml" />
     <Content Include="Areas\razor\Views\mobile\button\appearance.cshtml" />
     <Content Include="Areas\razor\Views\mobile\scrollview\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\switch\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\switch\events.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
