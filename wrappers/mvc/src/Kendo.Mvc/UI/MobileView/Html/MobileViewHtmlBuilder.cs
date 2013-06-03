@@ -43,6 +43,11 @@ namespace Kendo.Mvc.UI
                 html.Attribute("data-layout", component.Layout);
             }
 
+            if (component.Transition.HasValue())
+            {
+                html.Attribute("data-transition", component.Transition);
+            }
+
             html.Attribute("data-reload", component.Reload ? "true" : "false");
             html.Attribute("data-use-native-scrolling", component.UseNativeScrolling ? "true" : "false");
             html.Attribute("data-stretch", component.Stretch ? "true" : "false");

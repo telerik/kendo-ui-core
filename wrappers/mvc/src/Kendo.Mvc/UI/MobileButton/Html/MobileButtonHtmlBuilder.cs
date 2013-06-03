@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI
 
             if (component.Transition.HasValue())
             {
-                html.Attribute("data-target", component.Transition);
+                html.Attribute("data-transition", component.Transition);
             }
 
             if (component.Align != MobileButtonAlign.Center)

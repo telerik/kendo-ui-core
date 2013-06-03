@@ -88,6 +88,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Specifies the Pane transition
+        /// </summary>
+        /// <param name="value">The value that configures the transition.</param>
+        public MobileViewBuilder Transition(string value)
+        {
+            container.Transition = value;
+
+            return this;
+        }
+        
         //<< Fields
 
         /// <summary>

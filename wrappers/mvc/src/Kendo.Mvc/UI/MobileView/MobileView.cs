@@ -38,6 +38,8 @@ namespace Kendo.Mvc.UI
         
         public string Layout { get; set; }
         
+        public string Transition { get; set; }
+        
         //<< Fields
 
         public HtmlTemplate Header

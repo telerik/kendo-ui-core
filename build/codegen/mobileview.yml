@@ -2,3 +2,7 @@
     - :name: layout
       :type: String
       :description: Specifies the id of the default layout
+
+    - :name: transition
+      :type: String
+      :description: Specifies the Pane transition
