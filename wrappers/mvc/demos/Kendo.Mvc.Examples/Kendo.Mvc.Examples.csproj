@@ -117,6 +117,10 @@
     <Compile Include="Controllers\Mobile\Application\TransitionsController.cs" />
     <Compile Include="Controllers\Mobile\Application\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Application\LoadingPopupController.cs" />
+    <Compile Include="Controllers\Mobile\Button\BadgesController.cs" />
+    <Compile Include="Controllers\Mobile\Button\AppearanceController.cs" />
+    <Compile Include="Controllers\Mobile\Button\EventsController.cs" />
+    <Compile Include="Controllers\Mobile\Button\IndexController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\NavigationController.cs" />
@@ -497,6 +501,10 @@
     <Content Include="Areas\aspx\Views\mobile\application\transitions.aspx" />
     <Content Include="Areas\aspx\Views\mobile\application\loadingpopup.aspx" />
     <Content Include="Areas\aspx\Views\mobile\application\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\button\badges.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\button\appearance.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\rtl.aspx" />
@@ -647,6 +655,10 @@
     <Content Include="Areas\razor\Views\mobile\application\loadingpopup.cshtml" />
     <Content Include="Areas\razor\Views\mobile\application\transitions.cshtml" />
     <Content Include="Areas\razor\Views\mobile\actionsheet\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\button\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\button\badges.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\button\events.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\button\appearance.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
