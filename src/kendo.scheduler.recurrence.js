@@ -646,16 +646,17 @@ kendo_module({
         return a - b;
     }
 
-    function expand(event, period) {
+    function expand(event, start, end) {
         var rule = parseRule(event.rule),
             durationMS = event.end - event.start,
-            start = new Date(period.start),
-            end = new Date(period.end),
             current = 1,
             events = [],
             endEvent,
             count,
             freq;
+
+        start = new Date(start);
+        end = new Date(end);
 
         if (!rule || +event.start > +end) {
             return events;
@@ -706,6 +707,11 @@ kendo_module({
         }
 
         return events;
+    }
+
+    function expandAll(events) {
+        events = events;
+
     }
 
     function parseRule(rule) {
@@ -874,6 +880,7 @@ kendo_module({
             serialize: serialize
         },
         expand: expand,
+        expandAll: expandAll,
         dayInYear: dayInYear,
         weekInYear: weekInYear,
         weekInMonth: weekInMonth,
