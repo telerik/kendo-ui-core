@@ -113,6 +113,7 @@
     <Compile Include="Controllers\DataViz\Sparklines\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\Remote_DataController.cs" />
+    <Compile Include="Controllers\Mobile\actionsheet\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Application\TransitionsController.cs" />
     <Compile Include="Controllers\Mobile\Application\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Application\LoadingPopupController.cs" />
@@ -492,6 +493,7 @@
     <Content Include="Areas\aspx\Views\dataviz\sparklines\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\sparklines\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\sparklines\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\actionsheet\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\application\transitions.aspx" />
     <Content Include="Areas\aspx\Views\mobile\application\loadingpopup.aspx" />
     <Content Include="Areas\aspx\Views\mobile\application\index.aspx" />
@@ -644,6 +646,7 @@
     <Content Include="Areas\razor\Views\mobile\application\index.cshtml" />
     <Content Include="Areas\razor\Views\mobile\application\loadingpopup.cshtml" />
     <Content Include="Areas\razor\Views\mobile\application\transitions.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\actionsheet\index.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
