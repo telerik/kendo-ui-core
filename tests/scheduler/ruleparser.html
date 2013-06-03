@@ -6,6 +6,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.timezones.js"></script>
         <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -21,10 +22,9 @@
             var parse = kendo.recurrence.rule.parse;
 
             test("Remove RRULE if present", function() {
-                var rrule = parse("RRULE:FREQ=DaILY;UNTIL=19730429T070000Z");
+                var rrule = parse("RRULE:FREQ=DaILY");
 
                 equal(rrule.freq, "daily");
-                equal(+rrule.until, new Date("1973-04-29T07:00:00Z").getTime());
             });
 
             test("Parse FREQ property", function() {
@@ -36,7 +36,7 @@
             test("Parse UNTIL property", function() {
                 var rrule = parse("FREQ=DaILY;UNTIL=19730429T070000Z");
 
-                equal(+rrule.until, new Date("1973-04-29T07:00:00Z").getTime());
+                equal(+rrule.until, new Date(1973, 3, 29, 7).getTime());
             });
 
             test("Parse COUNT property", function() {

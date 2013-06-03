@@ -749,7 +749,7 @@ kendo_module({
                 case "UNTIL":
                     until = kendo.parseDate(value[0], DATE_FORMATS); //TODO: test this
                     if (until) {
-                        until = kendo.timezone.convert(until, until.getTimezoneOffset(), 0);
+                        until = timezone.convert(until, until.getTimezoneOffset(), 0);
                     }
                     instance.until = until;
                     break;

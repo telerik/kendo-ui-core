@@ -347,6 +347,7 @@ var tests = [
     "scheduler/editing-destroy.html",
     "scheduler/editing.html",
     "scheduler/ruleparser.html",
+    "scheduler/rulestring.html",
     "scheduler/occurrences.html",
     "scheduler/lint.html",
     "searchbox/searchbox.html",
