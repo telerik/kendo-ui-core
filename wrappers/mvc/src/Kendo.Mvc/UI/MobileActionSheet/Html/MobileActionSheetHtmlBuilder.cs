@@ -29,7 +29,10 @@ namespace Kendo.Mvc.UI
 
             AddEventAttributes(html, component.Events);
 
-            html.Attribute("data-cancel", component.Cancel);
+            if (component.Cancel.HasValue())
+            {
+                html.Attribute("data-cancel", component.Cancel);
+            }
 
             html.Attribute("data-popup", component.Initializer.Serialize(component.Popup.ToJson()));
 
