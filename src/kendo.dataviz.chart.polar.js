@@ -334,7 +334,6 @@ kendo_module({
                 options = axis.options,
                 plotBands = options.plotBands || [],
                 elements = [],
-                // TODO: Lookup from plotArea. Should it be user changable?
                 type = options.majorGridLines.type,
                 altAxis = axis.plotArea.polarAxis,
                 majorAngles = altAxis.majorDivisions(),
@@ -879,7 +878,7 @@ kendo_module({
                 defaultRange = tracker.query(),
                 range,
                 valueAxis,
-                defaults;
+                defaults = {};
 
             // TODO: Should we support multiple axes?
             range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
@@ -889,11 +888,11 @@ kendo_module({
                 range.max = math.max(range.max, defaultRange.max);
             }
 
-            defaults = { max: range.max };
-
             if (plotArea._hasBarCharts) {
-                defaults.majorGridLines = { type: ARC };
-                defaults.minorGridLines = { type: ARC };
+                defaults = {
+                    majorGridLines: { type: ARC },
+                    minorGridLines: { type: ARC }
+                };
             }
 
             valueAxis = new RadarNumericAxis(
