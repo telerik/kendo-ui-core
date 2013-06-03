@@ -10,7 +10,9 @@ namespace Kendo.Mvc.UI
         public MobileListViewFilterableSettings()
         {            
         }
-        
+
+        public bool Enabled { get; set; }
+
         public string Placeholder { get; set; }
         
         public bool AutoFilter { get; set; }

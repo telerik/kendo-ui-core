@@ -230,7 +230,18 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
+        /// <summary>
+        /// The distance to the bottom in pixels, after which the listview will start fetching the next page. Applicable only when endlessScroll is set to true.
+        /// </summary>
+        /// <param name="value">The value that configures the scrolltreshold.</param>
+        public MobileListViewBuilder<T> ScrollTreshold(int value)
+        {
+            Component.ScrollTreshold = value + "px";
+
+            return this;
+        }
+
         /// <summary>
         /// The style of the control. Can be either empty string(""), or inset.
         /// </summary>

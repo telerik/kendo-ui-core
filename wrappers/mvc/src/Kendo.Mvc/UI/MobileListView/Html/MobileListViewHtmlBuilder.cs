@@ -27,6 +27,8 @@ namespace Kendo.Mvc.UI
             html.Attribute("data-role", "listview")
                 .Attribute("id", component.Id);
 
+            AddEventAttributes(html, component.Events);
+
             html.Attribute("data-source", component.Initializer.Serialize(component.DataSource.ToJson()));
             
             html.Attribute("data-auto-bind", component.AutoBind.GetValueOrDefault(true) ? "true" : "false");            
@@ -36,6 +38,77 @@ namespace Kendo.Mvc.UI
                 html.Attribute("data-template", component.Template);
             }
 
+            if (component.EndlessScroll)
+            {
+                //TODO: component.EndlessScrollParameters 
+                html.Attribute("data-endless-scroll", "true");
+
+                if (component.ScrollTreshold.HasValue())
+                {
+                    html.Attribute("data-scroll-treshold", component.ScrollTreshold);
+                }
+            }
+
+            if (component.FixedHeaders)
+            {
+                html.Attribute("data-fixed-headers", "true");
+            }
+
+            if (component.HeaderTemplate.HasValue())
+            {
+                html.Attribute("data-header-template", component.HeaderTemplate);
+            }
+
+            if (component.LoadMore)
+            {
+                html.Attribute("data-load-more", "true");
+                if (component.LoadMoreText.HasValue())
+                {
+                    html.Attribute("data-load-more-text", component.LoadMoreText);
+                }
+                //TODO: component.LoadMoreParameters 
+            }
+
+            if (component.PullToRefresh)
+            {
+                html.Attribute("data-pull-to-refresh", "true");
+
+                html.Attribute("data-append-on-refresh", component.AppendOnRefresh ? "true" : "false");
+
+                if (component.PullTemplate.HasValue())
+                {
+                    html.Attribute("data-pull-template", component.PullTemplate);
+                }
+
+                if (component.RefreshTemplate.HasValue())
+                {
+                    html.Attribute("data-refresh-template", component.RefreshTemplate);
+                }
+
+                if (component.ReleaseTemplate.HasValue())
+                {
+                    html.Attribute("data-release-template", component.ReleaseTemplate);
+                }
+                //TODO: component.PullParameters
+            }            
+
+            if (component.Style.HasValue())
+            {
+                html.Attribute("data-style", component.Style);
+            }
+
+            if (component.Type.HasValue())
+            {
+                html.Attribute("data-type", component.Type);
+            }
+
+            if (component.Filterable.Enabled)
+            {
+                html.Attribute("data-filterable", component.Initializer.Serialize(component.Filterable.ToJson()));
+            }
+
+            html.Attributes(component.HtmlAttributes);
+
             return html;
         }
 
@@ -43,7 +116,6 @@ namespace Kendo.Mvc.UI
         {
             return new HtmlElement("ul");
         }
-
         
         protected virtual void AddEventAttributes(IHtmlNode html, IDictionary<string, object> events)
         {

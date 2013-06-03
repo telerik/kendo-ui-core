@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI.Fluent
         public MobileListViewFilterableSettingsBuilder(MobileListViewFilterableSettings settings)
         {
             container = settings;
+
+            settings.Enabled = true;
         }        
         
         /// <summary>
