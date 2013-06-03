@@ -9,8 +9,8 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         Class = kendo.Class,
-        daysInLeapYear = [0,31,60,91,121,152,182,213,244,274,305,335,366], //TODO: UPPERCASE
-        daysInYear = [0,31,59,90,120,151,181,212,243,273,304,334,365], //TODO: UPPERCASE
+        DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
+        DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
         WEEK_DAYS = {
             "SU": 0,
@@ -36,182 +36,390 @@ kendo_module({
             "yyyyMMdd"
         ],
         RULE_NAMES = ["months", "weeks", "yearDays", "monthDays", "weekDays", "hours", "minutes", "seconds"],
-        RULE_NAMES_LENGTH = RULE_NAMES.length;
+        RULE_NAMES_LENGTH = RULE_NAMES.length,
+        limitation = {
+            months: function(date, end, rule) {
+                var monthRules = rule.months,
+                    months = ruleValues(monthRules, date.getMonth() + 1),
+                    changed = false;
 
-    var BaseFrequency = Class.extend({
-        next: function(start, rule) {
-            if (rule.seconds) {
-                start.setSeconds(start.getSeconds() + 1);
-            } else if (rule.minutes) {
-                start.setMinutes(start.getMinutes() + 1);
-            } else {
-                return false;
-            }
+                if (months !== null) {
+                    if (months.length) {
+                        date.setMonth(months[0] - 1, 1);
+                    } else {
+                        date.setFullYear(date.getFullYear() + 1, monthRules[0], 1);
+                    }
 
-            return true;
-        },
+                    changed = true;
+                }
 
-        normalize: function(options) {
-            if (options.idx === 4 && options.rule.hours) {
-                //TODO: DST (brasil)
-                options.date.setHours(0);
-            }
-        },
+                return changed;
+            },
 
-        limit: function(date, end, rule) {
-            var ruleName, firstRule, modified,
-                idx, day;
+            monthDays: function(date, end, rule) {
+                var monthLength, month, days,
+                    changed = false,
+                    normalize = function(monthDay) {
+                        if (monthDay < 0) {
+                            monthDay = monthLength + monthDay;
+                        }
+                        return monthDay;
+                    };
 
-            while (date <= end) {
-                modified = firstRule = undefined;
-                day = date.getDate();
+                while (date < end) { //TODO: check date <= end
+                    month = date.getMonth();
+                    monthLength = getMonthLength(date);
+                    days = ruleValues(rule.monthDays, date.getDate(), normalize);
 
-                for (idx = 0; idx < RULE_NAMES_LENGTH; idx++) {
-                    ruleName = RULE_NAMES[idx];
+                    if (days === null) {
+                        return changed;
+                    }
 
-                    if (rule[ruleName]) {
-                        modified = limitMethods[ruleName](date, end, rule);
-                        if (firstRule !== undefined && modified) {
+                    changed = true;
+
+                    if (days.length) {
+                        date.setMonth(month, days.sort(numberSortPredicate)[0]);
+
+                        if (month === date.getMonth()) {
                             break;
-                        } else {
-                            firstRule = modified;
+                        }
+                    } else {
+                        date.setMonth(month + 1, 1);
+                    }
+                }
+
+                return changed;
+            },
+
+            yearDays: function(date, end, rule) {
+                var year, yearDays,
+                    changed = false,
+                    normalize = function(yearDay) {
+                        if (yearDay < 0) {
+                            yearDay = year + yearDay;
+                        }
+                        return yearDay;
+                    };
+
+                while (date < end) { //TODO: check date <= end
+                    year = leapYear(date) ? 366 : 365;
+                    yearDays = ruleValues(rule.yearDays, dayInYear(date), normalize);
+
+                    if (yearDays === null) {
+                        return changed;
+                    }
+
+                    changed = true;
+                    year = date.getFullYear();
+
+                    if (yearDays.length) {
+                        date.setFullYear(year, 0, yearDays.sort(numberSortPredicate)[0]);
+                        break;
+                    } else {
+                        date.setFullYear(year + 1, 0, 1);
+                    }
+                }
+
+                return changed;
+            },
+
+            weeks: function(date, end, rule) {
+                var weekStart = rule.weekStart,
+                    year, weeks, day,
+                    changed = false,
+                    normalize = function(week) {
+                        if (week < 0) {
+                            week = 53 + week;
+                        }
+                        return week;
+                    };
+
+                while (date < end) { //TODO: check date <= end
+                    weeks = ruleValues(rule.weeks, weekInYear(date, weekStart), normalize);
+
+                    if (weeks === null) {
+                        return changed;
+                    }
+
+                    changed = true;
+                    year = date.getFullYear();
+
+                    if (weeks.length) {
+                        day = (weeks.sort(numberSortPredicate)[0] * 7) - 1;
+                        date.setFullYear(year, 0, day);
+                        dayByName(date, weekStart, -1);
+                        break;
+                    } else {
+                        date.setFullYear(year + 1, 0, 1);
+                    }
+                }
+
+                return changed;
+            },
+
+            weekDays: function(date, end, rule) {
+                var weekDays = rule.weekDays,
+                    weekStart = rule.weekStart,
+                    weekDayRules = ruleWeekValues(weekDays, date, weekStart),
+                    interval = rule.interval,
+                    weekDayRule, day, offset;
+
+                if (weekDayRules === null) {
+                    return false;
+                }
+
+                weekDayRule = weekDayRules[0];
+                if (!weekDayRule) {
+                    weekDayRule = weekDays[0];
+                    dayByName(date, weekStart);
+
+                    if (rule._weekDayFound && interval > 1) {
+                        date.setDate(date.getDate() + ((interval - 1) * 7));
+                    }
+                }
+
+                day = weekDayRule.day;
+                offset = weekDayRule.offset;
+                rule._weekDayFound = true;
+
+                if (offset) {
+                    while (date <= end && !isInWeek(date, offset, weekStart)) {
+                        date.setDate(date.getDate() + 7);
+                        dayByName(date, weekStart, -1);
+                    }
+                }
+
+                if (date.getDay() !== day) {
+                    dayByName(date, day);
+                }
+
+                return true;
+            },
+
+            hours: function(date, end, rule) {
+                var hourRules = rule.hours,
+                    currentHours = date.getHours(),
+                    hours = ruleValues(hourRules, currentHours),
+                    changed = false;
+
+                if (hours !== null) {
+                    changed = true;
+
+                    //TODO: DST CHECK
+                    if (hours.length) {
+                        date.setHours(hours[0]);
+                    } else {
+                        date.setDate(date.getDate() + 1);
+                        date.setHours(hourRules[0]);
+                    }
+
+                    if (rule.minutes) {
+                        date.setMinutes(0);
+                    }
+                }
+
+                return changed;
+            },
+
+            minutes: function(date, end, rule) {
+                var minuteRules = rule.minutes,
+                    currentMinutes = date.getMinutes(),
+                    minutes = ruleValues(minuteRules, currentMinutes),
+                    changed = false;
+
+                if (minutes !== null) {
+                    changed = true;
+
+                    //TODO: DST CHECK
+                    if (minutes.length) {
+                        date.setMinutes(minutes[0]);
+                    } else {
+                        date.setHours(date.getHours() + 1, minuteRules[0]);
+                    }
+
+                    if (rule.seconds) {
+                        date.setSeconds(0);
+                    }
+                }
+
+                return changed;
+            },
+
+            seconds: function(date, end, rule) {
+                var secondRules = rule.seconds,
+                    currentSeconds = date.getSeconds(),
+                    seconds = ruleValues(secondRules, currentSeconds),
+                    changed = false;
+
+                if (seconds !== null) {
+                    changed = true;
+
+                    //TODO: DST CHECK
+                    if (seconds.length) {
+                        date.setSeconds(seconds[0]);
+                    } else {
+                        date.setMinutes(date.getMinutes() + 1, secondRules[0]);
+                    }
+                }
+
+                return changed;
+            }
+        },
+        BaseFrequency = Class.extend({
+            next: function(date, rule) {
+                if (rule.seconds) {
+                    date.setSeconds(date.getSeconds() + 1);
+                } else if (rule.minutes) {
+                    date.setMinutes(date.getMinutes() + 1);
+                } else {
+                    return false;
+                }
+
+                return true;
+            },
+
+            normalize: function(options) {
+                if (options.idx === 4 && options.rule.hours) {
+                    //TODO: DST (brasil)
+                    options.date.setHours(0);
+                }
+            },
+
+            limit: function(date, end, rule) {
+                var ruleName, firstRule, modified,
+                    idx, day;
+
+                while (date <= end) {
+                    modified = firstRule = undefined;
+                    day = date.getDate();
+
+                    for (idx = 0; idx < RULE_NAMES_LENGTH; idx++) {
+                        ruleName = RULE_NAMES[idx];
+
+                        if (rule[ruleName]) {
+                            modified = limitation[ruleName](date, end, rule);
+                            if (firstRule !== undefined && modified) {
+                                break;
+                            } else {
+                                firstRule = modified;
+                            }
+                        }
+
+                        if (modified) {
+                            this.normalize({ date: date, rule: rule, day: day, idx: idx });
                         }
                     }
 
-                    if (modified) {
-                        this.normalize({
-                            date: date,
-                            rule: rule,
-                            day: day,
-                            idx: idx
-                        });
-                    }
-                }
-
-                if (idx === RULE_NAMES_LENGTH) {
-                    break;
-                }
-            }
-        }
-    });
-
-    var HourlyFrequency = BaseFrequency.extend({
-        next: function(start, rule) {
-            if (!BaseFrequency.fn.next(start, rule)) {
-                start.setHours(start.getHours() + rule.interval);
-            }
-        },
-
-        normalize: function(options) {
-            if (options.idx === 4) {
-                //TODO: DST (brasil)
-                options.date.setHours(0);
-            }
-        },
-    });
-
-    var DailyFrequency = BaseFrequency.extend({
-        next: function(start, rule) {
-            if (!BaseFrequency.fn.next(start, rule)) {
-                if (rule.hours) {
-                    start.setHours(start.getHours() + 1);
-                } else {
-                    start.setDate(start.getDate() + rule.interval);
-                }
-            }
-        }
-    });
-
-    var WeeklyFrequency = BaseFrequency.extend({
-        next: function(start, rule) {
-            if (!BaseFrequency.fn.next(start, rule)) {
-                if (rule.hours) {
-                    start.setHours(start.getHours() + 1);
-                } else {
-                    start.setDate(start.getDate() + 1);
-                }
-            }
-        },
-        setup: function(rule, start) {
-            if (!rule.weekDays) {
-                rule.weekDays = [{
-                    day: start.getDay(),
-                    offset: 0
-                }];
-            }
-        }
-    });
-
-    var MonthlyFrequency = BaseFrequency.extend({
-        next: function(start, rule) {
-            var day;
-            if (!BaseFrequency.fn.next(start, rule)) {
-                if (rule.hours) {
-                    start.setHours(start.getHours() + 1);
-                } else if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weeks) {
-                    start.setDate(start.getDate() + 1);
-                } else {
-                    day = start.getDate();
-                    start.setMonth(start.getMonth() + 1);
-                    while(start.getDate() !== day) {
-                        start.setDate(day);
+                    if (idx === RULE_NAMES_LENGTH) {
+                        break;
                     }
                 }
             }
-        },
-        normalize: function(options) {
-            var rule = options.rule;
-            if (options.idx === 0 && !rule.monthDays && !rule.weekDays) {
-                options.date.setDate(options.day);
-            } else {
-                BaseFrequency.fn.normalize(options)
-            }
-        },
-        setup: function(rule, start, eventStart) {
-            if (!rule.monthDays && !rule.weekDays) {
-                start.setDate(eventStart.getDate());
-            }
-        }
-    });
+        }),
+        HourlyFrequency = BaseFrequency.extend({
+            next: function(date, rule) {
+                if (!BaseFrequency.fn.next(date, rule)) {
+                    date.setHours(date.getHours() + rule.interval);
+                }
+            },
 
-    var YearlyFrequency = MonthlyFrequency.extend({
-        next: function(start, rule) {
-            var day;
-            if (!BaseFrequency.fn.next(start, rule)) {
-                if (rule.hours) {
-                    start.setHours(start.getHours() + rule.interval);
-                } else if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weeks) {
-                    start.setDate(start.getDate() + 1);
-                } else if (rule.months) {
-                    day = start.getDate();
-                    start.setMonth(start.getMonth() + 1);
-
-                    while(start.getDate() !== day) {
-                        start.setDate(day);
-                    }
-                } else {
-                    start.setFullYear(start.getFullYear() + 1);
+            normalize: function(options) {
+                if (options.idx === 4) {
+                    //TODO: DST (brasil)
+                    options.date.setHours(0);
                 }
             }
-        },
-        normalize: function(options) {
-            var rule = options.rule;
-            if (options.idx === 0 && !rule.monthDays && !rule.weekDays) {
-                options.date.setDate(options.day);
-            } else {
-                BaseFrequency.fn.normalize(options)
+        }),
+        DailyFrequency = BaseFrequency.extend({
+            next: function(date, rule) {
+                if (!BaseFrequency.fn.next(date, rule)) {
+                    if (rule.hours) {
+                        date.setHours(date.getHours() + 1);
+                    } else {
+                        date.setDate(date.getDate() + rule.interval);
+                    }
+                }
             }
-        },
-        setup: function() {} //TODO: check if I need to call Monthly normalize method here too ???
-    });
+        }),
+        WeeklyFrequency = BaseFrequency.extend({
+            next: function(date, rule) {
+                if (!BaseFrequency.fn.next(date, rule)) {
+                    if (rule.hours) {
+                        date.setHours(date.getHours() + 1);
+                    } else {
+                        date.setDate(date.getDate() + 1);
+                    }
+                }
+            },
+            setup: function(rule, date) {
+                if (!rule.weekDays) {
+                    rule.weekDays = [{
+                        day: date.getDay(),
+                        offset: 0
+                    }];
+                }
+            }
+        }),
+        MonthlyFrequency = BaseFrequency.extend({
+            next: function(date, rule) {
+                var day;
+                if (!BaseFrequency.fn.next(date, rule)) {
+                    if (rule.hours) {
+                        date.setHours(date.getHours() + 1);
+                    } else if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weeks) {
+                        date.setDate(date.getDate() + 1);
+                    } else {
+                        day = date.getDate();
+                        date.setMonth(date.getMonth() + 1);
+                        while(date.getDate() !== day) {
+                            date.setDate(day);
+                        }
+                    }
+                }
+            },
+            normalize: function(options) {
+                var rule = options.rule;
+                if (options.idx === 0 && !rule.monthDays && !rule.weekDays) {
+                    options.date.setDate(options.day);
+                } else {
+                    BaseFrequency.fn.normalize(options);
+                }
+            },
+            setup: function(rule, date, eventStartDate) {
+                if (!rule.monthDays && !rule.weekDays) {
+                    date.setDate(eventStartDate.getDate()); //TODO: what about when eventStart's day is before start's day ???
+                }
+            }
+        }),
+        YearlyFrequency = MonthlyFrequency.extend({
+            next: function(date, rule) {
+                var day;
+                if (!BaseFrequency.fn.next(date, rule)) {
+                    if (rule.hours) {
+                        date.setHours(date.getHours() + rule.interval);
+                    } else if (rule.monthDays || rule.weekDays || rule.yearDays || rule.weeks) {
+                        date.setDate(date.getDate() + 1);
+                    } else if (rule.months) {
+                        day = date.getDate();
+                        date.setMonth(date.getMonth() + 1);
 
-    var frequencies = {
-        "hourly" : new HourlyFrequency(),
-        "daily" : new DailyFrequency(),
-        "weekly" : new WeeklyFrequency(),
-        "monthly" : new MonthlyFrequency(),
-        "yearly" : new YearlyFrequency()
-    }
+                        while(date.getDate() !== day) {
+                            date.setDate(day);
+                        }
+                    } else {
+                        date.setFullYear(date.getFullYear() + 1);
+                    }
+                }
+            },
+            setup: function() {} //TODO: check if I need to call Monthly normalize method here too ???
+        }),
+        frequencies = {
+            "hourly" : new HourlyFrequency(),
+            "daily" : new DailyFrequency(),
+            "weekly" : new WeeklyFrequency(),
+            "monthly" : new MonthlyFrequency(),
+            "yearly" : new YearlyFrequency()
+        };
 
     function expand(event, period) {
         var rule = parseRule(event.rule),
@@ -220,6 +428,7 @@ kendo_module({
             end = new Date(period.end),
             current = 1,
             events = [],
+            endEvent,
             count,
             freq;
 
@@ -247,7 +456,17 @@ kendo_module({
         freq.limit(start, end, rule);
 
         while (+start <= end) {
-            events.push(cloneEvent(event, start, durationMS));
+
+            //TODO: DST check
+            endEvent = new Date(start.getTime() + durationMS);
+
+            events.push($.extend({}, event, {
+                recurrenceID: event.uid,
+                start: new Date(start),
+                end: endEvent,
+                uid: "" //generate new uid ???
+            }));
+
             if (count && count === current) {
                 break;
             }
@@ -362,240 +581,22 @@ kendo_module({
         }
 
         return instance;
-    };
+    }
 
-    var limitMethods = {
-        months: function(date, end, rule) {
-            var monthRules = rule.months,
-                months = ruleValues(monthRules, date.getMonth() + 1),
-                changed = false;
+    function dayByName(date, dayOfWeek, offset) {
+        offset = offset || 1;
 
-            if (months !== null) {
-                if (months.length) {
-                    date.setMonth(months[0] - 1, 1);
-                } else {
-                    date.setFullYear(date.getFullYear() + 1, monthRules[0], 1);
-                }
-
-                changed = true;
-            }
-
-            return changed;
-        },
-
-        monthDays: function(date, end, rule) {
-            var monthLength, month, days,
-                changed = false;
-
-            while (date < end) { //TODO: check date <= end
-                month = date.getMonth();
-                monthLength = getMonthLength(date);
-                days = ruleValues(rule.monthDays, date.getDate(), function(monthDay) {
-                    if (monthDay < 0) {
-                        monthDay = monthLength + monthDay;
-                    }
-                    return monthDay;
-                });
-
-                if (days === null) {
-                    return changed;
-                }
-
-                changed = true;
-
-                if (days.length) {
-                    date.setMonth(month, days.sort(numberSortPredicate)[0]);
-
-                    if (month === date.getMonth()) {
-                        break;
-                    }
-                } else {
-                    date.setMonth(month + 1, 1);
-                }
-            }
-
-            return changed;
-        },
-
-        yearDays: function(date, end, rule) {
-            var year, day, yearDays,
-                changed = false;
-
-            while (date < end) { //TODO: check date <= end
-                year = leapYear(date) ? 366 : 365;
-                yearDays = ruleValues(rule.yearDays, dayInYear(date), function(yearDay) {
-                    if (yearDay < 0) {
-                        yearDay = year + yearDay;
-                    }
-                    return yearDay;
-                });
-
-                if (yearDays === null) {
-                    return changed;
-                }
-
-                changed = true;
-                year = date.getFullYear();
-
-                if (yearDays.length) {
-                    date.setFullYear(year, 0, yearDays.sort(numberSortPredicate)[0]);
-                    break;
-                } else {
-                    date.setFullYear(year + 1, 0, 1);
-                }
-            }
-
-            return changed;
-        },
-
-        weeks: function(date, end, rule) {
-            var weekStart = rule.weekStart,
-                year, weeks, day,
-                changed = false;
-
-            while (date < end) { //TODO: check date <= end
-                weeks = ruleValues(rule.weeks, weekInYear(date, weekStart), function(week) {
-                    if (week < 0) {
-                        week = 53 + week;
-                    }
-                    return week;
-                });
-
-                if (weeks === null) {
-                    return changed;
-                }
-
-                changed = true;
-                year = date.getFullYear();
-
-                if (weeks.length) {
-                    day = (weeks.sort(numberSortPredicate)[0] * 7) - 1;
-                    date.setFullYear(year, 0, day);
-                    dayByName(date, weekStart, -1);
-                    break;
-                } else {
-                    date.setFullYear(year + 1, 0, 1);
-                }
-            }
-
-            return changed;
-        },
-
-        weekDays: function(date, end, rule) {
-            var weekDays = rule.weekDays,
-                weekStart = rule.weekStart,
-                weekDayRules = ruleWeekValues(weekDays, date, weekStart),
-                interval = rule.interval,
-                weekDayRule, day, offset;
-
-            if (weekDayRules === null) {
-                return false;
-            }
-
-            weekDayRule = weekDayRules[0];
-            if (!weekDayRule) {
-                weekDayRule = weekDays[0];
-                dayByName(date, weekStart);
-
-                if (rule._weekDayFound && interval > 1) {
-                    date.setDate(date.getDate() + ((interval - 1) * 7));
-                }
-            }
-
-            day = weekDayRule.day;
-            offset = weekDayRule.offset;
-            rule._weekDayFound = true;
-
-            if (offset) {
-                while (date <= end && !isInWeek(date, offset, weekStart)) {
-                    date.setDate(date.getDate() + 7);
-                    dayByName(date, weekStart, -1);
-                }
-            }
-
-            if (date.getDay() !== day) {
-                dayByName(date, day);
-            }
-
-            return true;
-        },
-
-        hours: function(date, end, rule) {
-            var hourRules = rule.hours,
-                currentHours = date.getHours(),
-                hours = ruleValues(hourRules, currentHours),
-                changed = false;
-
-            if (hours !== null) {
-                changed = true;
-
-                //TODO: DST CHECK
-                if (hours.length) {
-                    date.setHours(hours[0]);
-                } else {
-                    date.setDate(date.getDate() + 1);
-                    date.setHours(hourRules[0]);
-                }
-
-                if (rule.minutes) {
-                    date.setMinutes(0);
-                }
-            }
-
-            return changed;
-        },
-
-        minutes: function(date, end, rule) {
-            var minuteRules = rule.minutes,
-                currentMinutes = date.getMinutes(),
-                minutes = ruleValues(minuteRules, currentMinutes),
-                changed = false;
-
-            if (minutes !== null) {
-                changed = true;
-
-                //TODO: DST CHECK
-                if (minutes.length) {
-                    date.setMinutes(minutes[0]);
-                } else {
-                    date.setHours(date.getHours() + 1, minuteRules[0]);
-                }
-
-                if (rule.seconds) {
-                    date.setSeconds(0);
-                }
-            }
-
-            return changed;
-        },
-
-        seconds: function(date, end, rule) {
-            var secondRules = rule.seconds,
-                currentSeconds = date.getSeconds(),
-                seconds = ruleValues(secondRules, currentSeconds),
-                changed = false;
-
-            if (seconds !== null) {
-                changed = true;
-
-                //TODO: DST CHECK
-                if (seconds.length) {
-                    date.setSeconds(seconds[0]);
-                } else {
-                    date.setMinutes(date.getMinutes() + 1, secondRules[0]);
-                }
-            }
-
-            return changed;
+        while(date.getDay() !== dayOfWeek) {
+            date.setDate(date.getDate() + offset);
         }
-    };
+    }
 
     function dayInYear(date) {
         var month = date.getMonth(),
-        days = leapYear(date) ? daysInLeapYear[month] : daysInYear[month];
+        days = leapYear(date) ? DAYS_IN_LEAPYEAR[month] : DAYS_IN_YEAR[month];
 
         return days + date.getDate();
-    };
+    }
 
     function weekInYear(date, weekStart){
         var year, days;
@@ -613,7 +614,7 @@ kendo_module({
         days = Math.floor((date.getTime() - new Date(year, 0, 1, -6)) / 86400000);
 
         return 1 + Math.floor(days / 7);
-    };
+    }
 
     function weekInMonth(date, weekStart) {
         var firstWeekday = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
@@ -625,30 +626,22 @@ kendo_module({
         firstWeekday = firstWeekday - weekStart;
 
         return Math.floor((date.getDate() + firstWeekday - 1) / 7) + 1;
-    };
-
-    function numberOfWeeks(date, weekStart) {
-        return weekInMonth(new Date(date.getFullYear(), date.getMonth() + 1, 0), weekStart);
-    };
-
-    function isInWeek(date, offset, weekStart) {
-        return weekInMonth(date, weekStart) === offsetWeek(date, offset, weekStart);
-    };
+    }
 
     function offsetWeek(date, offset, weekStart) {
         if (offset < 0) {
             offset = numberOfWeeks(date, weekStart) + (offset + 1);
         }
         return offset;
-    };
+    }
 
-    function dayByName(date, dayOfWeek, offset) {
-        offset = offset || 1;
+    function numberOfWeeks(date, weekStart) {
+        return weekInMonth(new Date(date.getFullYear(), date.getMonth() + 1, 0), weekStart);
+    }
 
-        while(date.getDay() !== dayOfWeek) {
-            date.setDate(date.getDate() + offset);
-        }
-    };
+    function isInWeek(date, offset, weekStart) {
+        return weekInMonth(date, weekStart) === offsetWeek(date, offset, weekStart);
+    }
 
     function ruleWeekValues(weekDays, date, weekStart) {
         var currentDay = date.getDay(),
@@ -712,20 +705,6 @@ kendo_module({
         return availableRules;
     }
 
-    //TODO: put inside of expand
-    function cloneEvent(event, start, durationMS) {
-        var end = new Date(start.getTime() + durationMS);
-
-        //TODO: DST check
-
-        return $.extend({}, event, {
-           recurrenceID: event.uid,
-           start: new Date(start),
-           end: end,
-           uid: "" //generate uid ???
-        });
-    }
-
     function eventsByPosition(events, positions) {
         var result = [],
             length = positions.length,
@@ -740,10 +719,6 @@ kendo_module({
         }
 
         return result;
-    }
-
-    function numberSortPredicate(a, b) {
-        return a - b;
     }
 
     function parseArray(list, range) {
@@ -785,32 +760,6 @@ kendo_module({
         return list;
     }
 
-    function filterWeekDays(weekDays, currentDay, weekStart) {
-        var idx = 0,
-            length = weekDays.length,
-            result = [],
-            weekDay, day;
-
-        if (currentDay < weekStart) {
-            currentDay += weekStart;
-        }
-
-        for (;idx < length; idx++) {
-            weekDay = weekDays[idx];
-            day = weekDay.day;
-
-            if (day < weekStart) {
-                day += weekStart;
-            }
-
-            if (currentDay <= day) {
-                result.push(weekDay);
-            }
-        }
-
-        return result[0] ? result : weekDays;
-    }
-
     function getMonthLength(date) {
         var month = date.getMonth();
 
@@ -826,6 +775,10 @@ kendo_module({
     function leapYear(year) {
         year = year.getFullYear();
         return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
+    }
+
+    function numberSortPredicate(a, b) {
+        return a - b;
     }
 
     kendo.recurrence = {
