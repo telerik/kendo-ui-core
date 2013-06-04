@@ -45,15 +45,21 @@ kendo_module({
                '</table>';
     }
 
-    function timesHeader(columnLevelCount, allDaySlot) {
+    function timesHeader(columnLevelCount, allDaySlot, rowCount) {
         var tableRows = [];
 
-        for (var idx = 0; idx < columnLevelCount; idx++) {
-            tableRows.push("<th></th>");
+        if (rowCount > 0) {
+            for (var idx = 0; idx < columnLevelCount; idx++) {
+                tableRows.push("<th></th>");
+            }
         }
 
         if (allDaySlot) {
             tableRows.push('<th class="k-scheduler-times-all-day">' + allDaySlot.text + '</th>');
+        }
+
+        if (rowCount < 1) {
+           return $();
         }
 
         return $('<div class="k-scheduler-times">' + table(tableRows) + '</div>');
@@ -116,6 +122,10 @@ kendo_module({
             rowHeaderRows.push(rows[rowIndex]);
         }
 
+        if (rowCount < 1) {
+            return $();
+        }
+
         return $('<div class="k-scheduler-times">' + table(rowHeaderRows) + '</div>');
     }
 
@@ -123,9 +133,6 @@ kendo_module({
         var rows = [];
 
         for (var rowIndex = 0; rowIndex < rowLevel.length; rowIndex++) {
-            if (rowLevel[rowIndex].skip) {
-                continue;
-            }
             var row = ['<tr class="' + (rowLevel[rowIndex].className || "") + '">'];
 
             for (var columnIndex = 0; columnIndex < columnLevel.length; columnIndex++) {
@@ -147,8 +154,15 @@ kendo_module({
     }
 
     kendo.ui.SchedulerView = Widget.extend({
+        dateForTitle: function() {
+            return kendo.format(this.options.selectedDateFormat, this.startDate, this.endDate);
+        },
         prepareLayout: function(layout) {
             var allDayIndex = -1;
+
+            if (!layout.rows) {
+                layout.rows = [];
+            }
 
             for (var idx = 0; idx < layout.rows.length; idx++) {
                 if (layout.rows[idx].allDay) {
@@ -169,9 +183,11 @@ kendo_module({
 
             this.table = $('<table class="k-scheduler-layout">');
 
-            this.table.append(this._topSection(columnLevels, allDaySlot));
+            var rowCount = rowLevels[rowLevels.length - 1].length;
 
-            this.table.append(this._bottomSection(columnLevels, rowLevels));
+            this.table.append(this._topSection(columnLevels, allDaySlot, rowCount));
+
+            this.table.append(this._bottomSection(columnLevels, rowLevels, rowCount));
 
             this.element.append(this.table);
 
@@ -240,8 +256,8 @@ kendo_module({
             }
         },
 
-        _topSection: function(columnLevels, allDaySlot) {
-            this.timesHeader = timesHeader(columnLevels.length, allDaySlot);
+        _topSection: function(columnLevels, allDaySlot, rowCount) {
+            this.timesHeader = timesHeader(columnLevels.length, allDaySlot, rowCount);
 
             var columnCount = columnLevels[columnLevels.length - 1].length;
 
@@ -250,9 +266,7 @@ kendo_module({
             return $("<tr>").append(this.timesHeader.add(this.datesHeader).wrap("<td>").parent());
         },
 
-        _bottomSection: function(columnLevels, rowLevels) {
-            var rowCount = rowLevels[rowLevels.length - 1].length;
-
+        _bottomSection: function(columnLevels, rowLevels, rowCount) {
             this.times = times(rowLevels, rowCount);
 
             this.content = content(columnLevels[columnLevels.length - 1], rowLevels[rowLevels.length - 1]);

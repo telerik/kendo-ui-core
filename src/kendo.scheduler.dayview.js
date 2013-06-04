@@ -226,10 +226,6 @@ kendo_module({
             }
         },
 
-        dateForTitle: function() {
-            return kendo.format(this.options.selectedDateFormat, this.startDate, this.endDate);
-        },
-
         _layout: function(dates) {
             var columns = [];
             var rows = [];
