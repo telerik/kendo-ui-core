@@ -67,7 +67,7 @@
                 viewModel.set("foo", "baz");
             });
 
-            test("set triggers only once the change event if value is the same", 2, function() {
+            test("set triggers only once the change event if value is the same", 1, function() {
                 var viewModel = kendo.observable({ foo: { foo: "bar" }});
 
                 viewModel.bind("change", function() {
@@ -357,6 +357,30 @@
                 });
 
                 observable.dataSource.add({});
+            });
+
+            test("change events fire from top to bottom", 3, function() {
+                var observable = kendo.observable({
+                    foo: {
+                        bar: {
+                            baz: ""
+                        }
+                    }
+                });
+
+                observable.bind("change", function(e) {
+                    equal(e.field, "foo.bar.baz");
+                });
+
+                observable.foo.bind("change", function(e) {
+                    equal(e.field, "bar.baz");
+                });
+
+                observable.foo.bar.bind("change", function(e) {
+                    equal(e.field, "baz");
+                });
+
+                observable.set("foo.bar.baz", "baz");
             });
 
             test("undefined is not wrapped", function() {

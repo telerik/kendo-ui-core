@@ -419,7 +419,9 @@ kendo_module({
 
         _set: function(field, value) {
             var that = this;
-            if (field.indexOf(".")) {
+            var composite = field.indexOf(".") >= 0;
+
+            if (composite) {
                 var paths = field.split("."),
                     path = "";
 
@@ -428,13 +430,15 @@ kendo_module({
                     var obj = kendo.getter(path, true)(that);
                     if (obj instanceof ObservableObject) {
                         obj.set(paths.join("."), value);
-                        return;
+                        return composite;
                     }
                     path += ".";
                 }
             }
 
             kendo.setter(field)(that, value);
+
+            return composite;
         },
 
         set: function(field, value) {
@@ -444,9 +448,11 @@ kendo_module({
             if (current !== value) {
 
                 if (!that.trigger("set", { field: field, value: value })) {
-                    that._set(field, that.wrap(value, field, function() { return that; }));
 
-                    that.trigger(CHANGE, { field: field });
+                    if (!that._set(field, that.wrap(value, field, function() { return that; }))) {
+                        that.trigger(CHANGE, { field: field });
+                    }
+
                 }
             }
         },
