@@ -6,7 +6,7 @@
         function createChart() {
             $("#chart").kendoChart({
                 title: {
-                    text: "Wind Rose / South Shore station"
+                    text: "Wind Rose"
                 },
                 dataSource: {
                     transport: {
@@ -24,8 +24,8 @@
                         dir: "asc"
                     }
                 },
-                seriesColors: ["#6e6e6e", "#00e6ff", "#0000ff",
-                    "#008b00", "#ffff00", "#ffa500", "#ff0000"],
+                seriesColors: ["#1b79e4", "#3b6ad3", "#5d5ac2",
+                    "#8348ae", "#a23a9d", "#c42a8c", "#e51a7a"],
                 series: [{
                     type: "radarColumn",
                     stack: true,
