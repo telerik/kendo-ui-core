@@ -35,7 +35,10 @@
                     field: "dirText"
                 },
                 legend: {
-                    position: "right"
+                    position: "right",
+                    labels: {
+                        template: "#= (series.data[0] || {}).categoryText # m/s"
+                    }
                 },
                 tooltip: {
                     template: "#= category # (#= dataItem.categoryText # m/s) #= value #%",

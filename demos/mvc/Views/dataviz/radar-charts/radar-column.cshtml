@@ -6,32 +6,30 @@
         function createChart() {
             $("#chart").kendoChart({
                 title: {
-                    text: "Gross domestic product growth /GDP annual %/"
-                },
-                legend: {
-                    position: "bottom"
-                },
-                seriesDefaults: {
-                    type: "radarColumn"
+                    text: "Nutrient balance: Apples, raw"
                 },
                 series: [{
-                    name: "Nutritients",
+                    type: "radarColumn",
+                    name: "Nutrients",
                     data: [
-                        4, 1, 1, 4, 0, 1, 3,
-                        1, 2, 1, 2, 1, 0, 1,
-                        0, 2, 1, 0, 3, 1, 1,
+                        5, 1, 1, 5, 0, 1,
+                        1, 2, 1, 2, 1, 0,
+                        0, 2, 1, 0, 3, 1,
                         1, 1, 0, 0, 0
                     ]
                 }],
                 categoryAxis: {
                     categories: [
-                        "Df", "Pr", "A", "C", "D", "E", "K",
-                        "Th", "Ri", "Ni", "B", "F", "B", "PA",
-                        "Se", "Mn", "Cu", "Zn", "K", "P", "Mg",
+                        "Df", "Pr", "A", "C", "D", "E",
+                        "Th", "Ri", "Ni", "B", "F", "B",
+                        "Se", "Mn", "Cu", "Zn", "K", "P",
                         "Fe", "Ca", "Na", "Ch", "Sf"
                     ]
                 },
                 valueAxis: {
+                    visible: false
+                },
+                legend: {
                     visible: false
                 }
             });
