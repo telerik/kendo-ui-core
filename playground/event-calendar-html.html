@@ -25,15 +25,11 @@ html
 	background-color:#fff;
 }
 
+.k-scheduler-times th,
 .k-scheduler-table td,
 .k-scheduler-header th
 {
 	border-color:#ccc;
-}
-
-.k-scheduler-toolbar + .k-scheduler-times tr:first-child th
-{
-	border-bottom-color:#ccc;
 }
 
 .k-scheduler-table .k-today
@@ -85,6 +81,10 @@ html
 			class="k-state-default k-view-agenda"><a href="#" class="k-link">Agenda</a></li></ul>
 	</div>
 
+    <table class="k-scheduler-layout">
+        <tr>
+            <td>
+
 	<div class="k-scheduler-times">
 		<table class="k-scheduler-table">
 			<colgroup>
@@ -96,6 +96,9 @@ html
 			</tbody>
 		</table>
 	</div>
+            
+            </td>
+            <td>
 
 	<div class="k-scheduler-header k-state-default">
 		<div class="k-scheduler-header-wrap">
@@ -135,22 +138,28 @@ html
 					</tr>
 				</tbody>
 			</table>
-			<div class="k-appointment" style="top:27px;left:506px;width:1009px">
+			<div class="k-appointment" style="top:27px;left:504px;width:1007px">
 				<dl>
 					<dd>Days off</dd>
 				</dl>
 				<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>
 			</div>
 		</div>
-	</div>
-
+	</div>            
+            
+            </td>
+        </tr>
+        <tr>
+            <td>
+            
 	<div class="k-scheduler-times">
 		<table class="k-scheduler-table">
 			<colgroup>
 				<col />
+				<col />
 			</colgroup>
 			<tbody>
-				<tr><th><em>6:00</em></th></tr>
+				<tr><th rowspan="18">.<br />.<br />.<br />.<br />.<br />.<br />.<br />.</th><th rowspan="9">g<br />r<br />o<br />u<br />p<br />e<br />d</th><th><em>6:00</em></th></tr>
 				<tr><th>&nbsp;</th></tr>
 				<tr><th><em>7:00</em></th></tr>
 				<tr><th>&nbsp;</th></tr>
@@ -159,7 +168,7 @@ html
 				<tr><th>&nbsp;</th></tr>
 				<tr><th><em>9:00</em></th></tr>
 				<tr><th>&nbsp;</th></tr>
-				<tr><th><em>10:00</em></th></tr>
+				<tr><th rowspan="9">h<br />e<br />a<br />d<br />e<br />r</th><th><em>10:00</em></th></tr>
 				<tr><th>&nbsp;</th></tr>
 				<tr><th><em>11:00</em></th></tr>
 				<tr><th>&nbsp;</th></tr>
@@ -172,8 +181,11 @@ html
 		</table>
 		<div class="k-scheduler-now-arrow" style="top:95px"></div>
 		<div class="k-scheduler-now-line" style="top:100px"></div>
-	</div>
-
+	</div>            
+            
+            </td>
+            <td>
+            
 	<div class="k-scheduler-content" style="height:300px">
 		<table class="k-scheduler-table">
 			<colgroup>
@@ -203,7 +215,7 @@ html
 				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 			</tbody>
 		</table>
-		<div class="k-appointment" style="top:13px;left:506px;">
+		<div class="k-appointment" style="top:13px;left:504px;">
 			<dl>
 				<dt><span class="k-icon k-i-refresh"></span> 11:30 - 12:30</dt>
 				<dd>Business Lunch</dd>
@@ -212,6 +224,11 @@ html
 			<span class="k-icon k-resize-handle"></span>
 		</div>
 	</div>
+                
+            </td>
+        </tr>
+    </table>
+
 	<div class="k-header k-scheduler-footer">
 		<ul class="k-reset k-header k-toolbar"><li
 			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>Show 24 hours</a></li><li
@@ -372,7 +389,7 @@ $(document).ready(function(){
 	    scrollbar = kendo.support.scrollbar();
 
     if (kendo.support.browser.msie && kendo.support.browser.version == 7) {
-        $(".k-scheduler-table").attr("cellspacing", 0);
+        $("table").attr("cellspacing", 0);
     }
 
     $("a").click(false);
@@ -383,7 +400,7 @@ $(document).ready(function(){
 
 	    var scheduler = $(id),
 		    sc = scheduler.find(".k-scheduler-content"),
-		    st = scheduler.find(".k-scheduler-header + .k-scheduler-times"),
+		    st = scheduler.find(".k-scheduler-layout tr + tr .k-scheduler-times"),
 		    sh = scheduler.find(".k-scheduler-header");
 
 	    st.height(sc.height() - scrollbar);
@@ -412,7 +429,6 @@ $(document).ready(function(){
 	});
 
     $(".k-scheduler-header-wrap .k-scheduler-table,.k-scheduler-content .k-scheduler-table").width("140%");
-    $(".k-scheduler-footer").append('<br style="display:block;clear:both" />');
 });
 
 </script>
