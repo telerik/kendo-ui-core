@@ -404,7 +404,8 @@ kendo_module({
         },
 
         destroy: function() {
-            // kendo.destroy()
+            kendo.destroy(this.element);
+            this.element.remove();
         }
     });
 
