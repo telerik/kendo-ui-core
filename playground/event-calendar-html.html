@@ -160,7 +160,7 @@ html
 				<col />
 			</colgroup>
 			<tbody>
-				<tr><th rowspan="18" class="k-last">.<br />.<br />.<br />.<br />.<br />.<br />.<br />.</th><th rowspan="9">g<br />r<br />o<br />u<br />p<br />e<br />d</th><th>6:00 AM PM</th></tr>
+				<tr><th rowspan="18">.<br />.<br />.<br />.<br />.<br />.<br />.<br />.</th><th rowspan="9">g<br />r<br />o<br />u<br />p<br />e<br />d</th><th>6:00 AM PM</th></tr>
 				<tr><th>&nbsp;</th></tr>
 				<tr><th>7:00 AM PM</th></tr>
 				<tr><th>&nbsp;</th></tr>
@@ -169,14 +169,14 @@ html
 				<tr><th>&nbsp;</th></tr>
 				<tr><th>9:00 AM PM</th></tr>
 				<tr><th>&nbsp;</th></tr>
-				<tr><th rowspan="9" class="k-last">h<br />e<br />a<br />d<br />e<br />r</th><th>10:00 AM PM</th></tr>
+				<tr><th rowspan="9">h<br />e<br />a<br />d<br />e<br />r</th><th>10:00 AM PM</th></tr>
 				<tr><th>&nbsp;</th></tr>
 				<tr><th>11:00 AM PM</th></tr>
 				<tr><th>&nbsp;</th></tr>
 				<tr><th>12:00 AM PM</th></tr>
 				<tr><th>&nbsp;</th></tr>
 				<tr><th>13:00 AM PM</th></tr>
-				<tr><th class="k-last">&nbsp;</th></tr>
+				<tr><th>&nbsp;</th></tr>
 			</tbody>
 		</table>
 		<div class="k-scheduler-now-arrow" style="top:95px"></div>
@@ -212,7 +212,7 @@ html
 				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 				<tr class="k-middle-row"><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-				<tr><td class="k-last">&nbsp;</td><td class="k-last k-today">&nbsp;</td><td class="k-last">&nbsp;</td><td class="k-last">&nbsp;</td><td class="k-last">&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <!-- class="k-last" -->
 			</tbody>
 		</table>
 		<div class="k-appointment" style="top:13px;left:504px;">
@@ -253,6 +253,10 @@ html
 			class="k-state-selected k-view-agenda"><a href="#" class="k-link">Agenda</a></li></ul>
 	</div>
 
+    <table class="k-scheduler-layout">
+        <tr>
+            <td>
+
 	<div class="k-scheduler-header k-state-default">
 		<div class="k-scheduler-header-wrap">
 			<table class="k-scheduler-table">
@@ -271,7 +275,12 @@ html
 			</table>
 		</div>
 	</div>
-
+            
+            </td>
+        </tr>
+        <tr>
+            <td>
+            
 	<div class="k-scheduler-content" style="overflow-y:scroll">
 		<table class="k-scheduler-table">
 			<colgroup>
@@ -288,7 +297,18 @@ html
 				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 			</tbody>
 		</table>
+	</div>            
+            
+            </td>
+        </tr>
+    </table>
+
+	<div class="k-header k-scheduler-footer">
+		<ul class="k-reset k-header k-toolbar"><li
+			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>Show 24 hours</a></li><li
+			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-columns"></span>Show all weekdays</a></li></ul>
 	</div>
+
 </div>
 
 <br /><br /><br />
@@ -307,6 +327,10 @@ html
 			class="k-state-selected k-view-month"><a href="#" class="k-link">Month</a></li><li
 			class="k-state-default k-view-agenda"><a href="#" class="k-link">Agenda</a></li></ul>
 	</div>
+
+    <table class="k-scheduler-layout">
+        <tr>
+            <td>
 
 	<div class="k-scheduler-header k-state-default">
 		<div class="k-scheduler-header-wrap">
@@ -334,6 +358,11 @@ html
 			</table>
 		</div>
 	</div>
+            
+            </td>
+        </tr>
+        <tr>
+            <td>
 
 	<div class="k-scheduler-content" style="height:300px">
 		<table class="k-scheduler-table">
@@ -365,8 +394,18 @@ html
 			<span class="k-icon k-resize-handle"></span>
 		</div>
 	</div>
-</div>
+            
+            </td>
+        </tr>
+    </table>
 
+	<div class="k-header k-scheduler-footer">
+		<ul class="k-reset k-header k-toolbar"><li
+			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>Show 24 hours</a></li><li
+			class="k-state-default"><a href="#" class="k-link"><span class="k-icon k-i-columns"></span>Show all weekdays</a></li></ul>
+	</div>
+
+</div>
 
 <script type="text/x-kendo-template" id="tooltipTemplate">
 
