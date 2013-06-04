@@ -1,0 +1,18 @@
+﻿@{    
+    Layout = "~/Areas/razor/Views/Shared/_MobileLayout.cshtml";
+}
+
+@(Html.Kendo().MobileView()
+        .Name("buttongroup-badges")
+        .Layout("examples")
+        .Title("Badges")                
+        .Content(obj =>
+            Html.Kendo().MobileButtonGroup()   
+                .Index(0)             
+                .Items(items => 
+                {
+                    items.Add().Text("Housing").Icon("home").Badge("23");
+                    items.Add().Text("Sound Check").Icon("volume").Badge("5");                    
+                })
+         )        
+)

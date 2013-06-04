@@ -117,6 +117,11 @@
     <Compile Include="Controllers\Mobile\Application\TransitionsController.cs" />
     <Compile Include="Controllers\Mobile\Application\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Application\LoadingPopupController.cs" />
+    <Compile Include="Controllers\Mobile\ButtonGroup\AppearanceController.cs" />
+    <Compile Include="Controllers\Mobile\ButtonGroup\BadgesController.cs" />
+    <Compile Include="Controllers\Mobile\ButtonGroup\NavBarController.cs" />
+    <Compile Include="Controllers\Mobile\ButtonGroup\EventsController.cs" />
+    <Compile Include="Controllers\Mobile\ButtonGroup\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Button\BadgesController.cs" />
     <Compile Include="Controllers\Mobile\Button\AppearanceController.cs" />
     <Compile Include="Controllers\Mobile\Button\EventsController.cs" />
@@ -511,6 +516,11 @@
     <Content Include="Areas\aspx\Views\mobile\application\transitions.aspx" />
     <Content Include="Areas\aspx\Views\mobile\application\loadingpopup.aspx" />
     <Content Include="Areas\aspx\Views\mobile\application\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\buttongroup\badges.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\buttongroup\appearance.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\buttongroup\navbar.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\buttongroup\events.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\buttongroup\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\badges.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\appearance.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
@@ -689,6 +699,10 @@
     <Content Include="Areas\razor\Views\mobile\modalview\index.cshtml" />
     <Content Include="Areas\razor\Views\mobile\navbar\index.cshtml" />
     <Content Include="Areas\razor\Views\mobile\navbar\appearance.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\buttongroup\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\buttongroup\badges.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\buttongroup\events.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\buttongroup\appearance.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
