@@ -121,6 +121,7 @@
     <Compile Include="Controllers\Mobile\Button\AppearanceController.cs" />
     <Compile Include="Controllers\Mobile\Button\EventsController.cs" />
     <Compile Include="Controllers\Mobile\Button\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\ModalView\IndexController.cs" />
     <Compile Include="Controllers\Mobile\PopOver\IndexController.cs" />
     <Compile Include="Controllers\Mobile\ScrollView\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Switch\EventsController.cs" />
@@ -512,6 +513,7 @@
     <Content Include="Areas\aspx\Views\mobile\button\appearance.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\modalview\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\popover\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\scrollview\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\switch\events.aspx" />
@@ -680,6 +682,7 @@
     <Content Include="Areas\razor\Views\mobile\tabstrip\badges.cshtml" />
     <Content Include="Areas\razor\Views\mobile\tabstrip\appearance.cshtml" />
     <Content Include="Areas\razor\Views\mobile\popover\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\modalview\index.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
