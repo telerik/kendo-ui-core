@@ -47,8 +47,8 @@ kendo_module({
         for (idx = 0, length = data.length; idx < length; idx++) {
             event = data[idx];
 
-            event.start = kendo.timezone[method](event.start, event.timezone || timezone);
-            event.end = kendo.timezone[method](event.end, event.timezone || timezone);
+            event.start = kendo.timezone[method](event.start, event.startTimezone || event.endTimezone || timezone);
+            event.end = kendo.timezone[method](event.end, event.endTimezone || event.startTimezone || timezone);
         }
         return data;
     }

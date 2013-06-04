@@ -237,7 +237,19 @@
 
                 var apply = stub(kendo.timezone, "apply");
 
-                dataReader.data([ { start: new Date(2013, 1, 1), timezone: "event zone", end: new Date(2013, 1, 1) } ]);
+                dataReader.data([ { start: new Date(2013, 1, 1), startTimezone: "event zone", end: new Date(2013, 1, 1), endTimezone: "event zone" } ]);
+
+                equal(apply.args("apply")[1], "event zone");
+            });
+
+            test("event startTimezone field is used for both start and end if it is the only one set", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({ }, originalReader);
+
+                var apply = stub(kendo.timezone, "apply");
+
+                dataReader.data([ { start: new Date(2013, 1, 1), startTimezone: "event zone", end: new Date(2013, 1, 1) } ]);
 
                 equal(apply.args("apply")[1], "event zone");
             });
@@ -324,7 +336,7 @@
 
                 var remove = stub(kendo.timezone, "remove");
 
-                dataReader.serialize([ { start: new Date(2013, 1, 1), timezone: "event zone", end: new Date(2013, 1, 1) } ]);
+                dataReader.serialize([ { start: new Date(2013, 1, 1), startTimezone: "event zone", endTimezone: "event zone", end: new Date(2013, 1, 1) } ]);
 
                 equal(remove.args("remove")[1], "event zone");
             });
