@@ -650,12 +650,14 @@ kendo_module({
         return origin.slice(0, skip ? idx - 1 : idx).concat(list).concat(origin.slice(idx));
     }
 
-    function expand(event, start, end, tzid) {
+    function expand(event, start, end) {//, tzid) {
         var rule = parseRule(event.rule),
-            durationMS = event.end - event.start,
+            eventStartMS = +event.start,
+            durationMS = event.end - eventStartMS,
             current = 1,
             events = [],
-            endEvent,
+            eventEnd,
+            first,
             count,
             freq;
 
@@ -677,13 +679,13 @@ kendo_module({
 
         if (start < event.start) {
             start = new Date(event.start);
+        } else {
+            //TODO: if event.start is in the same day as start then set hour
+            start.setHours(event.start.getHours());
+            start.setMinutes(event.start.getMinutes());
+            start.setSeconds(event.start.getSeconds());
+            start.setMilliseconds(event.start.getMilliseconds());
         }
-
-        //TODO: if event.start is in the same day as start then set hour
-        start.setHours(event.start.getHours());
-        start.setMinutes(event.start.getMinutes());
-        start.setSeconds(event.start.getSeconds());
-        start.setMilliseconds(event.start.getMilliseconds());
 
         if (freq.setup) {
             freq.setup(rule, start, event.start);
@@ -692,15 +694,12 @@ kendo_module({
         freq.limit(start, end, rule);
 
         while (start <= end) {
-
             //TODO: DST check
-            endEvent = new Date(start.getTime() + durationMS);
-
+            eventEnd = new Date(start.getTime() + durationMS);
             events.push($.extend({}, event, {
                 recurrenceID: event.uid,
                 start: new Date(start),
-                end: endEvent,
-                uid: "" //generate new uid ???
+                end: eventEnd
             }));
 
             if (count && count === current) {
@@ -710,6 +709,11 @@ kendo_module({
             current++;
             freq.next(start, rule);
             freq.limit(start, end, rule);
+        }
+
+        first = events[0];
+        if (first && first.start.getTime() === eventStartMS) {
+            events = events.slice(1);
         }
 
         if (rule.setPositions) {
