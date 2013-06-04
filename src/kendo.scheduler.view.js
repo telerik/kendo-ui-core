@@ -178,6 +178,68 @@ kendo_module({
             this._scroller();
         },
 
+        refreshLayout: function() {
+            var that = this,
+                toolbar = that.element.find(">.k-scheduler-toolbar"),
+                height = that.element.innerHeight(),
+                headerHeight = 0,
+                scrollbar = kendo.support.scrollbar();
+
+            if (toolbar.length) {
+                height -= toolbar.outerHeight();
+            }
+
+            if (that.datesHeader) {
+                headerHeight = that.datesHeader.outerHeight();
+            }
+
+            if (that.timesHeader && that.timesHeader.outerHeight() > headerHeight) {
+                headerHeight = that.timesHeader.outerHeight();
+            }
+
+            if (headerHeight) {
+                height -= headerHeight;
+            }
+
+            if (that.footer) {
+                height -= that.footer.outerHeight();
+            }
+
+            var isSchedulerHeightSet = function(el) {
+                var initialHeight, newHeight;
+                if (el[0].style.height) {
+                    return true;
+                } else {
+                    initialHeight = el.height();
+                }
+
+                el.height("auto");
+                newHeight = el.height();
+
+                if (initialHeight != newHeight) {
+                    el.height("");
+                    return true;
+                }
+                el.height("");
+                return false;
+            };
+
+            if (isSchedulerHeightSet(that.element)) { // set content height only if needed
+                if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
+                    that.content.height(height);
+                } else {
+                    that.content.height(scrollbar * 2 + 1);
+                }
+                that.times.height(that.content.height());
+            }
+
+            var scrollbarWidth = !kendo.support.kineticScrollNeeded ? scrollbar : 0;
+
+            if (this.content[0].offsetWidth - this.content[0].clientWidth > 0) {
+                this.datesHeader.css("padding-right", scrollbarWidth);
+            }
+        },
+
         _topSection: function(columnLevels, allDaySlot) {
             this.timesHeader = timesHeader(columnLevels.length, allDaySlot);
 
