@@ -344,6 +344,11 @@ kendo_module({
             this._footer();
 
             this.refreshLayout();
+
+            var allDayHeader = this.element.find(".k-scheduler-header-all-day td");
+            if (allDayHeader.length) {
+                this._allDayHeaderHeight = allDayHeader.first()[0].clientHeight;
+            }
         },
 
         nextDate: function() {
@@ -474,8 +479,8 @@ kendo_module({
                 numberOfSlots = Math.ceil(endIndex - startIndex),
                 allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-appointment"), startIndex, endIndex).add(element),
                 top = dateSlot.position().top,
-                bottomOffset = 20,
-                eventHeight = allDayEvents.length > 1 ? allDayEvents.first()[0].clientHeight : (dateSlot.height() - bottomOffset);
+                currentColumnCount = this._headerColumnCount || 0,
+                eventHeight = this._allDayHeaderHeight;
 
             element
                 .css({
@@ -497,8 +502,9 @@ kendo_module({
                 }
             }
 
-            if (columns.length > 1) {
-                slots.parent().height((eventHeight * columns.length) + bottomOffset);
+            if (columns.length && columns.length > currentColumnCount) {
+                this._updateAllDayHeaderHeight(eventHeight * columns.length + eventHeight);
+                this._headerColumnCount = columns.length;
             }
         },
 
@@ -620,6 +626,16 @@ kendo_module({
             return eventsForSlot(elements, start, end);
         },
 
+        _updateAllDayHeaderHeight: function(height) {
+            var allDaySlots = this.element.find(".k-scheduler-header-all-day td");
+
+            if (allDaySlots.length) {
+                allDaySlots.parent()
+                    .add(this.timesHeader.find(".k-scheduler-times-all-day").parent())
+                    .height(height);
+            }
+        },
+
         renderEvents: function(events) {
             var options = this.options,
                 eventTemplate = this.eventTemplate,
@@ -634,7 +650,10 @@ kendo_module({
                 idx,
                 length;
 
+            this._headerColumnCount = 0;
             this.element.find(".k-appointment").remove();
+
+            this._updateAllDayHeaderHeight(this._allDayHeaderHeight);
 
             events = new kendo.data.Query(events).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
 
@@ -660,6 +679,10 @@ kendo_module({
 
                    element.appendTo(container);
                 }
+            }
+
+            if (events.length) {
+                this.refreshLayout();
             }
         }
     });

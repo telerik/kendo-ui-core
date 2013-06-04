@@ -53,7 +53,7 @@ kendo_module({
         }
 
         if (allDaySlot) {
-            tableRows.push("<th>" + allDaySlot.text + "</th>");
+            tableRows.push('<th class="k-scheduler-times-all-day">' + allDaySlot.text + '</th>');
         }
 
         return $('<div class="k-scheduler-times">' + table(tableRows) + '</div>');

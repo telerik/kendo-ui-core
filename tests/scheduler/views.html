@@ -1104,7 +1104,7 @@
 
                 var eventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var eventSlotHeigth = view.element.find(".k-scheduler-header-all-day td").eq(0).height();
-                var eventHeight = eventElements.eq(0).height();
+                var eventHeight = view._allDayHeaderHeight;
 
                 equalWithRound(eventElements.eq(0).offset().top, eventSlotOffset.top);
                 equalWithRound(eventElements.eq(1).offset().top, eventSlotOffset.top + eventHeight);
@@ -1132,7 +1132,7 @@
                 var eventElements = view.datesHeader.find("div.k-appointment");
 
                 var eventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
-                var eventHeight = eventElements.eq(0).height();
+                var eventHeight = view._allDayHeaderHeight;
 
                 equalWithRound(eventElements.eq(0).offset().top, eventSlotOffset.top);
                 equalWithRound(eventElements.eq(1).offset().top, eventSlotOffset.top + eventHeight);
