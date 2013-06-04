@@ -34,6 +34,13 @@
                 categoryAxis: {
                     field: "dirText"
                 },
+                legend: {
+                    position: "right"
+                },
+                tooltip: {
+                    template: "#= category # (#= dataItem.categoryText # m/s) #= value #%",
+                    visible: true
+                },
                 valueAxis: {
                     visible: false
                 }
