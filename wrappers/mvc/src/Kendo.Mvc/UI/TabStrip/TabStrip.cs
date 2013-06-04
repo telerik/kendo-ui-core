@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI
                 options["animation"] = animation["animation"];
             }
 
-            var urls = Items.Where(item => item.Visible).Select(item =>
+            var urls = Items.Where(item => item.Visible && item.IsAccessible(this.Authorization, this.ViewContext)).Select(item =>
                 {
                     if (item.ContentUrl.HasValue())
                     {
