@@ -60,6 +60,17 @@ kendo_module({
                         visible: false
                     }
                 },
+                radarArea: {
+                    opacity: 0.5,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    },
+                    line: {
+                        opacity: 1,
+                        width: 0
+                    }
+                },
                 candlestick: {
                     line: {
                         width: 1,
@@ -191,9 +202,7 @@ kendo_module({
             defaults.verticalLine = deepExtend({}, defaults.line);
             defaults.verticalArea = deepExtend({}, defaults.area);
 
-            defaults.radarArea = deepExtend({}, defaults.area);
-            defaults.polarArea = deepExtend({}, defaults.area);
-
+            defaults.polarArea = deepExtend({}, defaults.radarArea);
             defaults.polarLine = deepExtend({}, defaults.radarLine);
 
             themes[themeName] = result;

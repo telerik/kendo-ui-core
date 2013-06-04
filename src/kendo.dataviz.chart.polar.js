@@ -878,7 +878,7 @@ kendo_module({
                 defaultRange = tracker.query(),
                 range,
                 valueAxis,
-                defaults = {};
+                defaults = { roundToMajorUnit: false };
 
             // TODO: Should we support multiple axes?
             range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
