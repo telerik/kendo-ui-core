@@ -901,10 +901,8 @@ kendo_module({
             }
 
             if (plotArea._hasBarCharts) {
-                defaults = {
-                    majorGridLines: { type: ARC },
-                    minorGridLines: { type: ARC }
-                };
+                defaults.majorGridLines = { type: ARC };
+                defaults.minorGridLines = { type: ARC };
             }
 
             valueAxis = new RadarNumericAxis(

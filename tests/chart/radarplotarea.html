@@ -40,13 +40,25 @@
             }
 
             // ------------------------------------------------------------
-            module("Axes");
+            module("Axes", {
+                setup: function() {
+                    createPlotArea([{ type: "radarLine", data: [] }]);
+                }
+            });
+
+            test("roundToMajorUnit is set to false", function() {
+                equal(valueAxis.options.roundToMajorUnit, false);
+            });
 
             test("value axis grid lines are set to 'arc' for radarColumn series", function() {
                 createPlotArea([{ type: "radarColumn", data: [] }]);
-
                 equal(valueAxis.options.majorGridLines.type, "arc");
                 equal(valueAxis.options.minorGridLines.type, "arc");
+            });
+
+            test("roundToMajorUnit is set to false for radarColumn series", function() {
+                createPlotArea([{ type: "radarColumn", data: [] }]);
+                equal(valueAxis.options.roundToMajorUnit, false);
             });
 
             // ------------------------------------------------------------
