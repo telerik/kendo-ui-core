@@ -1112,7 +1112,7 @@ kendo_module({
             valueAxis = new RadarNumericAxis(
                 range.min, range.max,
                 deepExtend({
-                    max: range.max,
+                    roundToMajorUnit: false,
                     majorGridLines: { type: ARC },
                     minorGridLines: { type: ARC }
                 }, plotArea.options.yAxis)
