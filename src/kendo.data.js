@@ -3640,17 +3640,17 @@ kendo_module({
             }
 
             this.dataOffset = offset;
-            this._changingRange = true;
             this._expanding = expanding;
             this.dataSource.range(offset, this.pageSize);
         },
 
         _change: function() {
-            var dataSource = this.dataSource;
+            var dataSource = this.dataSource,
+                firstItemUid = dataSource._ranges[0].data[0].uid;
 
             this.length = dataSource.lastRange().end;
 
-            if (this._changingRange === undefined) { // the change was caused by external factors
+            if (this._firstItemUid !== firstItemUid) {
                 this._syncWithDataSource();
                 this._recalculate();
                 this.trigger("reset", { offset: this.offset });
@@ -3662,7 +3662,7 @@ kendo_module({
                 this.trigger("expand");
             }
 
-            delete this._changingRange;
+            this._firstItemUid = firstItemUid;
             delete this._expanding;
         },
 
