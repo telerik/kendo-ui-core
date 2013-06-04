@@ -50,8 +50,8 @@
 %>
 <%--<script>
     new kendo.mobile.Application($("#example"), {
-        serverNavigation: true
-        //pushState: true
+        serverNavigation: true,
+        /pushState: true
     });
 </script>--%>
     

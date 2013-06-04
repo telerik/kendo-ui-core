@@ -126,6 +126,7 @@
     <Compile Include="Controllers\Mobile\Button\AppearanceController.cs" />
     <Compile Include="Controllers\Mobile\Button\EventsController.cs" />
     <Compile Include="Controllers\Mobile\Button\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\Layout\IndexController.cs" />
     <Compile Include="Controllers\Mobile\ModalView\IndexController.cs" />
     <Compile Include="Controllers\Mobile\NavBar\AppearanceController.cs" />
     <Compile Include="Controllers\Mobile\NavBar\IndexController.cs" />
@@ -525,6 +526,7 @@
     <Content Include="Areas\aspx\Views\mobile\button\appearance.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\layout\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\modalview\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\navbar\appearance.aspx" />
     <Content Include="Areas\aspx\Views\mobile\navbar\index.aspx" />
@@ -703,6 +705,8 @@
     <Content Include="Areas\razor\Views\mobile\buttongroup\badges.cshtml" />
     <Content Include="Areas\razor\Views\mobile\buttongroup\events.cshtml" />
     <Content Include="Areas\razor\Views\mobile\buttongroup\appearance.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\buttongroup\navbar.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\layout\index.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />

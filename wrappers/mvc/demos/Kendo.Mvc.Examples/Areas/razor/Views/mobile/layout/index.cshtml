@@ -1,0 +1,127 @@
+﻿@{    
+    Layout = "~/Areas/razor/Views/Shared/_MobileLayout.cshtml";
+}
+
+@(Html.Kendo().MobileView()
+        .Name("layoutView")
+        .Layout("layout")        
+        .Content(
+            @<text>
+            <p>
+                This examples shows the platform specific layouts. Change the OS to see how the header and footer changes.
+            </p>  
+            </text>)
+)
+ 
+@(Html.Kendo().MobileLayout()
+       .Name("layout")
+       .Platform("ios")
+       .Header(obj =>       
+           Html.Kendo().MobileNavBar()
+            .Content(navbar =>
+                @<text>
+                @(Html.Kendo().MobileButton()
+                        .Href("#index")
+                        .Align(MobileButtonAlign.Right)
+                        .HtmlAttributes(new { @class = "nav-button" })
+                        .Text("Index")
+                )
+                @navbar.ViewTitle("iOS Platform")
+                </text>)            
+        )
+        .Footer(obj =>        
+            Html.Kendo().MobileTabStrip()
+                .Items(items => {
+                    items.Add().Icon("contacts").Text("Profile");
+                    items.Add().Icon("settings").Text("Settings");
+                })
+        )
+)
+
+@(Html.Kendo().MobileLayout()
+       .Name("layout")
+       .Platform("android")
+       .Header(obj =>
+           Html.Kendo().MobileNavBar()
+            .Content(navbar =>
+            @<text>
+                @(Html.Kendo().MobileButton()
+                        .Href("#index")
+                        .Align(MobileButtonAlign.Right)
+                        .HtmlAttributes(new { @class = "nav-button" })
+                        .Text("Index")
+                )
+                @navbar.ViewTitle("Android Platform")
+            </text>)
+        )
+        .Footer(obj =>        
+            Html.Kendo().MobileTabStrip()
+                .Items(items => {
+                    items.Add().Icon("history").Text("Sales");
+                    items.Add().Icon("settings").Text("Settings");
+                })
+        )
+)
+
+@(Html.Kendo().MobileLayout()
+       .Name("layout")
+       .Platform("blackberry")
+       .Header(obj =>
+           Html.Kendo().MobileNavBar()
+            .Content(navbar =>
+            @<text>
+                @( Html.Kendo().MobileButton()
+                        .Href("#index")
+                        .Align(MobileButtonAlign.Right)
+                        .HtmlAttributes(new { @class = "nav-button" })
+                        .Text("Index")
+                )
+                @navbar.ViewTitle("BlackBerry Platform")
+            </text>)
+        )
+        .Footer(obj =>
+            Html.Kendo().MobileTabStrip()
+                .Items(items => {
+                    items.Add().Icon("favorites").Text("Rating");
+                    items.Add().Icon("settings").Text("Settings");
+                })
+        )
+)
+
+@( Html.Kendo().MobileLayout()
+       .Name("layout")
+       .Platform("wp")
+       .Header(obj =>
+           Html.Kendo().MobileNavBar()
+            .Content(navbar =>
+            @<text>
+                @(Html.Kendo().MobileButton()
+                        .Href("#index")
+                        .Align(MobileButtonAlign.Right)
+                        .HtmlAttributes(new { @class = "nav-button" })
+                        .Text("Index")
+                )
+                @navbar.ViewTitle("Windows Phone Platform")
+            </text>)
+        )
+        .Footer(obj =>
+            Html.Kendo().MobileTabStrip()
+                .Items(items => {
+                    items.Add().Icon("home").Text("Home");
+                    items.Add().Icon("globe").Text("Global");
+                })
+        )
+)
+
+<style scoped>
+    #layoutView .km-view-title
+    {
+        visibility: inherit;
+    }
+
+    .km-android #layoutView .km-view-title
+    {
+        display: block;
+        position: static;
+    }
+</style>

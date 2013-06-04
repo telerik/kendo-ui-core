@@ -29,6 +29,11 @@ namespace Kendo.Mvc.UI
 
             AddEventAttributes(html, component.Events);
 
+            if (component.Platform.HasValue())
+            {
+                html.Attribute("data-platform", component.Platform.ToLower());
+            }
+
             html.Attributes(component.HtmlAttributes);
 
             CreateHeaderElement(html);            
