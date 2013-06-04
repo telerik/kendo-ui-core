@@ -646,7 +646,11 @@ kendo_module({
         return a - b;
     }
 
-    function expand(event, start, end) {
+    function insertAt(origin, list, idx, skip) {
+        return origin.slice(0, skip ? idx - 1 : idx).concat(list).concat(origin.slice(idx));
+    }
+
+    function expand(event, start, end, tzid) {
         var rule = parseRule(event.rule),
             durationMS = event.end - event.start,
             current = 1,
@@ -655,17 +659,19 @@ kendo_module({
             count,
             freq;
 
+        //convert start from tzid to UTC
+
         start = new Date(start);
         end = new Date(end);
 
-        if (!rule || +event.start > +end) {
+        if (!rule || event.start > end) {
             return events;
         }
 
         freq = frequencies[rule.freq];
         count = rule.count;
 
-        if (rule.until && +rule.until < +end) {
+        if (rule.until && rule.until < end) {
             end = new Date(rule.until);
         }
 
@@ -681,7 +687,7 @@ kendo_module({
 
         freq.limit(start, end, rule);
 
-        while (+start <= end) {
+        while (start <= end) {
 
             //TODO: DST check
             endEvent = new Date(start.getTime() + durationMS);
@@ -709,9 +715,30 @@ kendo_module({
         return events;
     }
 
-    function expandAll(events) {
-        events = events;
+    function expandAll(events, start, end) {
+        var length = events.length,
+            idx = 0, event, result,
+            resultLength, skip;
 
+        for (; idx < length; idx++) {
+            event = events[idx];
+            result = expand(event, start, end);
+            resultLength = result.length;
+            skip = false;
+
+            if (resultLength) {
+                if (event.start < start) {
+                    resultLength -= 1;
+                    skip = true;
+                }
+
+                events = insertAt(events, result, idx + 1, skip);
+                length += resultLength;
+                idx += resultLength;
+            }
+        }
+
+        return events;
     }
 
     function parseRule(rule) {
@@ -735,6 +762,10 @@ kendo_module({
 
                 return day1 - day2;
             };
+
+        if (!rule) {
+            return null;
+        }
 
         if (rule.substring(0, 6) === "RRULE:") {
             rule = rule.substring(6);
