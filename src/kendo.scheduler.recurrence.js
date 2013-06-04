@@ -675,6 +675,10 @@ kendo_module({
             end = new Date(rule.until);
         }
 
+        if (start < event.start) {
+            start = new Date(event.start);
+        }
+
         //TODO: if event.start is in the same day as start then set hour
         start.setHours(event.start.getHours());
         start.setMinutes(event.start.getMinutes());

@@ -827,6 +827,20 @@
                 equal(events[2].end.getTime(), +new Date(2013, 5, 10, 21));
             });
 
+            test("DAILY starts from event start", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 3, 16, 30),
+                    end: new Date(2013, 0, 3, 17, 0),
+                    rule: "FREQ=DAILY"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 0, 4, 17));
+
+                equal(events.length, 2);
+            });
+
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {
                 var schedulerEvent = {
@@ -1636,7 +1650,6 @@
                 equal(events[1].start.getTime(), +new Date(2013, 1, 1, 18, 40));
                 equal(events[1].end.getTime(), +new Date(2013, 1, 1, 19, 10));
             });
-
 
             module("Expanding recurring events");
 
