@@ -10,6 +10,7 @@ kendo_module({
     var kendo = window.kendo;
     var ui = kendo.ui;
     var Widget = ui.Widget;
+    var NS = ".kendoSchedulerView";
 
     function levels(values, key) {
         var result = [];
@@ -164,23 +165,23 @@ kendo_module({
 
             var columnLevels = levels(layout, "columns");
 
-            this.table = $('<table class="k-scheduler-layout"/>');
+            this.table = $('<table class="k-scheduler-layout">');
 
-            var top = $("<tr/>");
+            var top = $("<tr>");
 
             this.timesHeader = timesHeader(columnLevels.length, allDaySlot);
 
-            top.append(this.timesHeader.wrap("<td/>").parent());
+            top.append(this.timesHeader.wrap("<td>").parent());
 
             var columnCount = columnLevels[columnLevels.length - 1].length;
 
             this.datesHeader = datesHeader(columnLevels, columnCount, allDaySlot);
 
-            top.append(this.datesHeader.wrap("<td/>").parent());
+            top.append(this.datesHeader.wrap("<td>").parent());
 
             this.table.append(top);
 
-            var bottom = $("<tr/>");
+            var bottom = $("<tr>");
 
             var rowLevels = levels(layout, "rows");
 
@@ -197,6 +198,30 @@ kendo_module({
             this.table.append(bottom);
 
             this.element.append(this.table);
+
+            this._scroller();
+        },
+        _scroller: function() {
+            var that = this;
+
+            this.content.bind("scroll" + NS, function () {
+                that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(this.scrollLeft);
+                that.times.scrollTop(this.scrollTop);
+            });
+
+            var touchScroller = kendo.touchScroller(this.content);
+
+            if (touchScroller && touchScroller.movable) {
+
+                this._touchScroller = touchScroller;
+
+                this.content = touchScroller.scrollElement;
+
+                touchScroller.movable.bind("change", function(e) {
+                    that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(-e.sender.x);
+                    that.times.scrollTop(-e.sender.y);
+                });
+            }
         },
         destroy: function() {
             var that = this;
@@ -208,7 +233,7 @@ kendo_module({
 
                 that.table.remove();
             }
-        },
+        }
     });
 
 })(window.kendo.jQuery);

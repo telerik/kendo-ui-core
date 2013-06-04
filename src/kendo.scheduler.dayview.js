@@ -11,7 +11,6 @@ kendo_module({
         ui = kendo.ui,
         extend = $.extend,
         proxy = $.proxy,
-        Widget = ui.Widget,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
         NS = ".kendoMultiDayView";
@@ -333,29 +332,6 @@ kendo_module({
             return html;
         },
 
-        _content: function() {
-            var that = this,
-                wrapper = this.content;
-
-            wrapper.bind("scroll" + NS, function () {
-                that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(this.scrollLeft);
-                that.times.scrollTop(this.scrollTop);
-            });
-
-            var touchScroller = kendo.touchScroller(wrapper);
-            if (touchScroller && touchScroller.movable) {
-
-                this._touchScroller = touchScroller;
-
-                wrapper = touchScroller.scrollElement;
-
-                touchScroller.movable.bind("change", function(e) {
-                    that.datesHeader.find(">.k-scheduler-header-wrap").scrollLeft(-e.sender.x);
-                    that.times.scrollTop(-e.sender.y);
-                });
-            }
-        },
-
         _setContentHeight: function() {
             var that = this,
                 toolbar = that.element.find(">.k-scheduler-toolbar"),
@@ -432,8 +408,6 @@ kendo_module({
             this.endDate = dates[(dates.length - 1) || 0];
 
             this.prepareLayout(this._layout(dates));
-
-            this._content();
 
             this._footer();
 

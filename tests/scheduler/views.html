@@ -110,9 +110,8 @@
 
                 view.render();
 
-                equal(view.times.find("th").length, 25);
+                equal(view.times.find("th").length, 24);
                 equal(view.times.find("th:first").text(), "12:00 AM");
-                equal(view.times.find("th:last").text(), "12:00 AM");
             });
 
             test("render time slots with not exact start time", function() {
@@ -122,11 +121,11 @@
 
                 view.render();
 
-                equal(view.times.find("th").length, 15);
+                equal(view.times.find("th").length, 14);
                 equal(view.times.find("th:first").text(), "10:10 AM");
             });
 
-            test("time is show in major time slots", function() {
+            test("time is shown in major time slots", function() {
                 var view = setup({
                         startTime: new Date(2000, 0, 1, 10, 0, 0),
                         endTime: new Date(2000, 0, 1, 11, 0, 0),
@@ -140,7 +139,6 @@
                 equal(cells.eq(1).html(), "&nbsp;");
                 equal(cells.eq(2).text(), "10:30 AM");
                 equal(cells.eq(3).html(), "&nbsp;");
-                equal(cells.eq(4).text(), "11:00 AM");
             });
 
             test("time slots does not overflow endTime", function() {
@@ -153,8 +151,7 @@
                 view.render();
 
                 equal(view.times.find("tr:not(:last) em:not(:empty):last").text(), "10:00 PM");
-                equal(view.times.find("tr:last").text(), "11:59 PM");
-                equal(view.times.find("th").length, 97);
+                equal(view.times.find("th").length, 96);
             });
 
             test("start time is a DST date", function() {
@@ -167,7 +164,7 @@
                 view.render();
 
                 ok(view.times.find("th:contains(3:00 AM)").length);
-                equal(view.times.find("th").length, 49);
+                equal(view.times.find("th").length, 48);
             });
 
             test("start time is later than end time", function() {
@@ -178,9 +175,9 @@
 
                 view.render();
 
-                equal(view.times.find("tr:not(:last) em:not(:empty):last").text(), "9:00 AM");
-                equal(view.times.find("tr:last").text(), "10:00 AM");
-                equal(view.times.find("th").length, 22);
+                equal(view.times.find("tr:not(:last) em:not(:empty):last").text(), "7:00 AM");
+                equal(view.times.find("tr:last").text(), "9:00 AM");
+                equal(view.times.find("th").length, 21);
             });
 
             test("render day slots", function() {
@@ -210,21 +207,6 @@
                 equal(view.content.find("tr:not(.k-middle-row)").length, 12);
             });
 
-            test("destroy clears views html", function() {
-                var view = setup({
-                    dates: [
-                        new Date("1/26/2013")
-                    ]
-                });
-
-                view.render();
-                view.destroy();
-
-                ok(!view.content);
-                ok(!view.times);
-                ok(!view.timesHeader);
-                ok(!view.datesHeader);
-            });
 /*
             test("view content height is set", function() {
                  container.css("height", 500);
@@ -721,7 +703,7 @@
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
-                debugger;
+
                 var eventElement = view.content.find("div.k-appointment");
                 equal(eventElement.length, 1);
 
