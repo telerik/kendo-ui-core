@@ -49,6 +49,15 @@
                 equal(valueAxis.options.minorGridLines.type, "arc");
             });
 
+            // ------------------------------------------------------------
+            module("Legend");
+
+            test("adds series legend items", function() {
+                createPlotArea([{ type: "radarColumn", data: [], name: "Foo" }]);
+
+                equal(plotArea.options.legend.items.length, 1);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
