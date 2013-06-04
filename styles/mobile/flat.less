@@ -1,7 +1,9 @@
 @flat-main-color: #4c5356;
 @flat-background: #f4f4f4;
 @flat-list-background: #fcfcfc;
-@flat-border-color: rgba(0,0,0,.15);
+@flat-button-background: #e6e6e6;
+@flat-border-width: 1px;
+@flat-border-color: rgba(0,0,0,.1);
 @flat-border-radius: 3px;
 @flat-inline-border-radius: @flat-border-radius - 1px;
 @flat-active-color: #fff;
@@ -48,17 +50,17 @@
 
 .km-flat .km-navbar
 {
-    border: 1px solid @flat-border-color;
+    border: @flat-border-width solid @flat-border-color;
 }
 
 .km-flat .km-header .km-navbar
 {
-    border-width: 0 0 1px;
+    border-width: 0 0 @flat-border-width;
 }
 
 .km-flat .km-footer .km-navbar
 {
-    border-width: 1px 0 0;
+    border-width: @flat-border-width 0 0;
 }
 
 .km-flat .km-toolbar,
@@ -74,7 +76,7 @@
 .km-flat .km-button
 {
     padding: .5em .8em;
-    background: @flat-list-background;
+    background: @flat-button-background;
     border: 1px solid @flat-border-color;
     .border-radius(@flat-border-radius);
 }
@@ -92,19 +94,53 @@
     background: @flat-active-background;
 }
 
+.km-flat .km-state-active[style*=background]
+{
+    .box-shadow(inset 0 0 0 1000px rgba(0,0,0,.2));
+}
+
+/* ButtonGroup */
+
+.km-flat .km-buttongroup > *:not(:first-child):not(:last-child)
+{
+    .border-radius(0);
+}
+
+.km-flat .km-buttongroup > *:first-child
+{
+    .border-radius(@flat-border-radius 0 0 @flat-border-radius);
+}
+
+.km-flat .km-buttongroup > *:last-child
+{
+    .border-radius(0 @flat-border-radius @flat-border-radius 0);
+}
+
+.km-flat .km-buttongroup > *.km-state-active
+{
+    border-right-width: 1px;
+}
+
+.km-flat .km-buttongroup > *.km-state-active + *
+{
+    border-left-width: 0;
+}
+
 /* ListView */
 
 .km-flat .km-list > li
 {
     background: @flat-list-background;
-    .box-shadow(inset 0 1px 0 @flat-light-shadow);
+    border: @flat-border-width solid @flat-border-color;
+    border-width: 0 0 @flat-border-width 0;
+    .box-shadow(inset 0 @flat-border-width 0 @flat-light-shadow);
 }
 
 .km-flat .km-listinset > li:first-child,
 .km-flat .km-listgroupinset .km-list > li:first-child
 {
-    border: 1px solid @flat-border-color;
-    border-width: 1px;
+    border: @flat-border-width solid @flat-border-color;
+    border-width: @flat-border-width;
     border-color: @flat-border-color;
     .border-radius(@flat-border-radius @flat-border-radius 0 0);
 }
@@ -112,22 +148,21 @@
 .km-flat .km-listinset > li,
 .km-flat .km-listgroupinset .km-list > li
 {
-    border: 1px solid @flat-border-color;
-    border-width: 0 1px 1px 1px;
+    border-width: 0 @flat-border-width @flat-border-width @flat-border-width;
 }
 
 .km-flat .km-listinset > li:last-child,
 .km-flat .km-listgroupinset .km-list > li:last-child
 {
-    border: 1px solid @flat-border-color;
-    border-width: 0 1px 1px 1px;
+    border: @flat-border-width solid @flat-border-color;
+    border-width: 0 @flat-border-width @flat-border-width @flat-border-width;
     .border-radius(0 0 @flat-border-radius @flat-border-radius);
 }
 
 .km-flat .km-listinset > li:first-child:last-child,
 .km-flat .km-listgroupinset .km-list > li:first-child:last-child
 {
-    border-width: 1px;
+    border-width: @flat-border-width;
     .border-radius(@flat-border-radius);
 }
 
@@ -174,6 +209,24 @@
 .km-flat .km-listgroupinset li:first-child:last-child > .km-listview-label
 {
     .border-radius(@flat-inline-border-radius);
+}
+
+.km-flat .km-group-title
+{
+    background: @flat-background;
+    border: @flat-border-width solid @flat-border-color;
+    border-width: @flat-border-width 0;
+}
+
+.km-flat .km-scroll-header .km-group-title
+{
+    border-width: 0 0 @flat-border-width;
+}
+
+.km-flat .km-listgroupinset .km-group-title
+{
+    border: 0;
+    background: none;
 }
 
 /* TabStrip */
