@@ -3716,6 +3716,7 @@ div.k-slider
 .k-scheduler-times
 {
 	overflow:hidden;
+    white-space: nowrap;
 }
 
 .k-scheduler-content
@@ -3739,7 +3740,7 @@ div.k-slider
 .k-scheduler-table
 {
 	table-layout:fixed;
-	margin:1em 0;
+	margin:1em 0 0;
 }
 
 .k-scheduler-times .k-scheduler-table
@@ -3827,6 +3828,11 @@ div.k-slider
 	vertical-align:top;
 }
 
+.k-scheduler-layout tr + tr .k-scheduler-times tr:last-child th:last-child
+{
+    border-color: inherit;
+}
+
 .k-scheduler-times th em
 {
 	font-style:normal;
@@ -3837,20 +3843,6 @@ div.k-slider
 .k-scheduler .k-middle-row td
 {
 	border-bottom-style:dotted;
-}
-
-.k-scheduler-layout tr + tr .k-scheduler-times table tr:last-child > th
-{
-	border-width:0;
-	height:0;
-}
-
-.k-scheduler-layout tr + tr .k-scheduler-times table tr:last-child > td
-{
-	height:0;
-	border-width:0;
-	font-size:0;
-	line-height:0;
 }
 
 .k-scheduler-now-arrow,
