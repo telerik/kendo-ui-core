@@ -357,6 +357,11 @@
                     equal(numericAxis.options.max, 35);
                 });
 
+                test("Automatic maximum is not extended if roundToMajorUnit is false", function() {
+                    numericAxis = new NumericAxis(0, 34, { roundToMajorUnit: false });
+                    equal(numericAxis.options.max, 35);
+                });
+
                 // ------------------------------------------------------------
                 module("Numeric Axis / Configuration / Negative values", {
                     setup: moduleSetup
@@ -385,6 +390,11 @@
 
                 test("Automatic minimum is not extended if maximum is not within 33% of major unit", function() {
                     numericAxis = new NumericAxis(-33, 0, {});
+                    equal(numericAxis.options.min, -35);
+                });
+
+                test("Automatic minimum is not extended if roundToMajorUnit is false", function() {
+                    numericAxis = new NumericAxis(-34, 0, { roundToMajorUnit: false });
                     equal(numericAxis.options.min, -35);
                 });
 

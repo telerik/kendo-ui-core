@@ -1532,12 +1532,14 @@ kendo_module({
                 },
                 userSetLimits;
 
-            if (autoMin < 0 && remainderClose(autoMin, majorUnit, 1/3)) {
-                autoMin -= majorUnit;
-            }
+            if (options.roundToMajorUnit !== false) {
+                if (autoMin < 0 && remainderClose(autoMin, majorUnit, 1/3)) {
+                    autoMin -= majorUnit;
+                }
 
-            if (autoMax > 0 && remainderClose(autoMax, majorUnit, 1/3)) {
-                autoMax += majorUnit;
+                if (autoMax > 0 && remainderClose(autoMax, majorUnit, 1/3)) {
+                    autoMax += majorUnit;
+                }
             }
 
             autoOptions.min = floor(autoMin, majorUnit);
