@@ -150,7 +150,7 @@
 
                 view.render();
 
-                equal(view.times.find("tr:not(:last) em:not(:empty):last").text(), "10:00 PM");
+                equal(view.times.find("th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "10:00 PM");
                 equal(view.times.find("th").length, 96);
             });
 
@@ -174,8 +174,7 @@
                     });
 
                 view.render();
-
-                equal(view.times.find("tr:not(:last) em:not(:empty):last").text(), "7:00 AM");
+                equal(view.times.find("tr:not(:last) th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "7:00 AM");
                 equal(view.times.find("tr:last").text(), "9:00 AM");
                 equal(view.times.find("th").length, 21);
             });

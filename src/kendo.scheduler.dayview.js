@@ -182,7 +182,7 @@ kendo_module({
             endTime: TODAY,
             numberOfTimeSlots: 2,
             majorTick: 60,
-            majorTickTimeTemplate: kendo.template("<em>#=kendo.toString(date, 't')#</em>"),
+            majorTickTimeTemplate: kendo.template("#=kendo.toString(date, 't')#"),
             minorTickTimeTemplate: "&nbsp;",
             eventTemplate: DAY_VIEW_EVENT_TEMPLATE,
             allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE,
