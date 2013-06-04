@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
-        public MobilePopupDirection Direction { get; set; }
+        public MobilePopupDirection? Direction { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -42,7 +42,10 @@ namespace Kendo.Mvc.UI
             
         //<< Serialization
 
-            json["direction"] = Direction;
+            if (Direction.HasValue)
+            {
+                json["direction"] = Direction;
+            }
         }
     }
 }
