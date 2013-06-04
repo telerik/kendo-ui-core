@@ -462,7 +462,21 @@ kendo_module({
             return -1;
         },
 
-        _positionAllDayEvent: function(element, slots, startIndex, endIndex, slotWidth) {
+        _calculateAllDayEventWidth: function(startIndex, endIndex) {
+            var allDaySlots = this.element.find(".k-scheduler-header-all-day td"),
+                result = 0,
+                idx,
+                length;
+
+            for (idx = 0, length = allDaySlots.length; idx < length; idx++) {
+                if (idx >= startIndex && idx <= endIndex) {
+                    result += allDaySlots.eq(idx).innerWidth();
+                }
+            }
+            return result;
+        },
+
+        _positionAllDayEvent: function(element, slots, startIndex, endIndex) {
             if (startIndex < 0) {
                 startIndex = 0;
             }
@@ -472,7 +486,7 @@ kendo_module({
             }
 
             var dateSlot = slots.eq(startIndex),
-                numberOfSlots = Math.ceil(endIndex - startIndex),
+                slotWidth = this._calculateAllDayEventWidth(startIndex, endIndex),
                 allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-appointment"), startIndex, endIndex).add(element),
                 top = dateSlot.position().top,
                 currentColumnCount = this._headerColumnCount || 0,
@@ -481,7 +495,7 @@ kendo_module({
             element
                 .css({
                     left: dateSlot.position().left,
-                    width: slotWidth * (numberOfSlots + 1)
+                    width: slotWidth
                 });
 
             element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
@@ -640,7 +654,6 @@ kendo_module({
                 allDaySlots = this.element.find(".k-scheduler-header-all-day td"),
                 allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
                 slotHeight = Math.floor(this.content.find(">table:first").innerHeight() / timeSlots.length),
-                slotWidth = this.datesHeader.find("table:first th:first").innerWidth(),
                 eventTimeFormat = options.eventTimeFormat,
                 event,
                 idx,
@@ -670,7 +683,7 @@ kendo_module({
 
                        this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
                    } else {
-                       this._positionAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex, slotWidth);
+                       this._positionAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex);
                    }
 
                    element.appendTo(container);

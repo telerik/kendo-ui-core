@@ -533,8 +533,10 @@
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
+
                 var eventOffset = view.datesHeader.find("div.k-appointment").offset();
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+
                 equalWithRound(eventOffset.top, slotOffset.top);
                 equalWithRound(eventOffset.left, slotOffset.left);
             });
@@ -555,12 +557,16 @@
                 view.renderEvents(events);
                 var eventOffset = view.datesHeader.find("div.k-appointment").offset();
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
-                var slotWidth = view.element.find(".k-scheduler-header-all-day td").innerWidth();
+                var slotWidth = 0;
+
+                view.element.find(".k-scheduler-header-all-day td").each(function() {
+                    slotWidth += $(this).innerWidth();
+                });
 
                 equalWithRound(eventOffset.top, slotOffset.top);
 
                 equalWithRound(eventOffset.left, slotOffset.left);
-                equalWithRound(view.datesHeader.find("div.k-appointment").width(), slotWidth * 2);
+                equalWithRound(view.datesHeader.find("div.k-appointment").width(), slotWidth);
             });
 
             test("position multiday event which starts before the selected range", function() {
@@ -1032,14 +1038,18 @@
                 var eventElements = view.datesHeader.find("div.k-appointment");
 
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
-                var slotWidth = view.element.find(".k-scheduler-header-all-day td").innerWidth();
+                var slotWidth = 0;
+
+                view.element.find(".k-scheduler-header-all-day td").each(function() {
+                    slotWidth += $(this).innerWidth();
+                });
 
                 equalWithRound(eventElements.first().offset().top, slotOffset.top);
 
                 equalWithRound(eventElements.first().offset().left, slotOffset.left);
                 equalWithRound(eventElements.last().offset().left, slotOffset.left);
 
-                equalWithRound(eventElements.first().width(), slotWidth * 2);
+                equalWithRound(eventElements.first().width(), slotWidth);
                 equalWithRound(eventElements.first().width(), eventElements.last().width());
             });
 
@@ -1068,15 +1078,11 @@
                 var firstEventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var secondEventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(2).offset();
 
-                var slotWidth = view.element.find(".k-scheduler-header-all-day td").innerWidth();
-
                 equalWithRound(eventElements.first().offset().top, firstEventSlotOffset.top);
                 equalWithRound(eventElements.last().offset().top, secondEventSlotOffset.top);
 
                 equalWithRound(eventElements.first().offset().left, firstEventSlotOffset.left);
                 equalWithRound(eventElements.last().offset().left, secondEventSlotOffset.left);
-
-                equalWithRound(eventElements.last().width(), eventElements.first().width());
             });
 
             test("set height of multiple overlapping all day events across multiple slots", function() {
