@@ -63,6 +63,7 @@ kendo_module({
                 this.model = reader.model;
             }
 
+            this.timezone = timezone;
             this.data = wrapDataAccess($.proxy(this.data, this), timezone);
             this.serialize = wrapDataSerialization($.proxy(this.serialize, this), timezone);
         },

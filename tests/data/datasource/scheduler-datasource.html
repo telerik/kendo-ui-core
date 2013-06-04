@@ -341,6 +341,15 @@
                 equal(remove.args("remove")[1], "event zone");
             });
 
+            test("SchedulerDataReader exposes timezone option", function() {
+                var originalReader = new kendo.data.DataReader({ });
+                var dataReader = new SchedulerDataReader({
+                    timezone: "my timezone"
+                }, originalReader);
+
+                equal(dataReader.timezone, "my timezone");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
