@@ -165,42 +165,39 @@ kendo_module({
 
             var columnLevels = levels(layout, "columns");
 
-            this.table = $('<table class="k-scheduler-layout">');
-
-            var top = $("<tr>");
-
-            this.timesHeader = timesHeader(columnLevels.length, allDaySlot);
-
-            top.append(this.timesHeader.wrap("<td>").parent());
-
-            var columnCount = columnLevels[columnLevels.length - 1].length;
-
-            this.datesHeader = datesHeader(columnLevels, columnCount, allDaySlot);
-
-            top.append(this.datesHeader.wrap("<td>").parent());
-
-            this.table.append(top);
-
-            var bottom = $("<tr>");
-
             var rowLevels = levels(layout, "rows");
 
-            var rowCount = rowLevels[rowLevels.length - 1].length;
+            this.table = $('<table class="k-scheduler-layout">');
 
-            this.times = times(rowLevels, rowCount);
+            this.table.append(this._topSection(columnLevels, allDaySlot));
 
-            bottom.append(this.times.wrap("<td>").parent());
-
-            this.content = content(columnLevels[columnLevels.length - 1], rowLevels[rowLevels.length - 1]);
-
-            bottom.append(this.content.wrap("<td>").parent());
-
-            this.table.append(bottom);
+            this.table.append(this._bottomSection(columnLevels, rowLevels));
 
             this.element.append(this.table);
 
             this._scroller();
         },
+
+        _topSection: function(columnLevels, allDaySlot) {
+            this.timesHeader = timesHeader(columnLevels.length, allDaySlot);
+
+            var columnCount = columnLevels[columnLevels.length - 1].length;
+
+            this.datesHeader = datesHeader(columnLevels, columnCount, allDaySlot);
+
+            return $("<tr>").append(this.timesHeader.add(this.datesHeader).wrap("<td>").parent());
+        },
+
+        _bottomSection: function(columnLevels, rowLevels) {
+            var rowCount = rowLevels[rowLevels.length - 1].length;
+
+            this.times = times(rowLevels, rowCount);
+
+            this.content = content(columnLevels[columnLevels.length - 1], rowLevels[rowLevels.length - 1]);
+
+            return $("<tr>").append(this.times.add(this.content).wrap("<td>").parent());
+        },
+
         _scroller: function() {
             var that = this;
 
