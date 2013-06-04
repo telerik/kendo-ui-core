@@ -31,7 +31,7 @@
 
 
             function createPlotArea(series, options) {
-                plotArea = new dataviz.RadarPlotArea(series, options);
+                plotArea = new dataviz.PolarPlotArea(series, options);
 
                 categoryAxis = plotArea.categoryAxis;
                 valueAxis = plotArea.valueAxis;
@@ -40,9 +40,9 @@
             }
 
             // ------------------------------------------------------------
-            module("Radar Plot Area / Axes", {
+            module("Polar Plot Area / Axes", {
                 setup: function() {
-                    createPlotArea([{ type: "radarLine", data: [] }]);
+                    createPlotArea([{ type: "polarLine", data: [] }]);
                 }
             });
 
@@ -50,22 +50,11 @@
                 equal(valueAxis.options.roundToMajorUnit, false);
             });
 
-            test("value axis grid lines are set to 'arc' for radarColumn series", function() {
-                createPlotArea([{ type: "radarColumn", data: [] }]);
-                equal(valueAxis.options.majorGridLines.type, "arc");
-                equal(valueAxis.options.minorGridLines.type, "arc");
-            });
-
-            test("roundToMajorUnit is set to false for radarColumn series", function() {
-                createPlotArea([{ type: "radarColumn", data: [] }]);
-                equal(valueAxis.options.roundToMajorUnit, false);
-            });
-
             // ------------------------------------------------------------
-            module("Radar Plot Area / Legend");
+            module("Polar Plot Area / Legend");
 
             test("adds series legend items", function() {
-                createPlotArea([{ type: "radarColumn", data: [], name: "Foo" }]);
+                createPlotArea([{ type: "polarLine", data: [], name: "Foo" }]);
 
                 equal(plotArea.options.legend.items.length, 1);
             });

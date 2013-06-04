@@ -1076,6 +1076,8 @@ kendo_module({
                 series = plotArea.series,
                 pane = plotArea.panes[0];
 
+            plotArea.addToLegend(series);
+
             plotArea.createLineChart(
                 filterSeriesByType(series, [POLAR_LINE]),
                 pane
