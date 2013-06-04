@@ -1,10 +1,12 @@
 @flat-main-color: #4c5356;
 @flat-background: #f4f4f4;
 @flat-list-background: #fcfcfc;
-@flat-border-color: #dddddd;
+@flat-border-color: rgba(0,0,0,.15);
 @flat-border-radius: 3px;
+@flat-inline-border-radius: @flat-border-radius - 1px;
 @flat-active-color: #fff;
 @flat-active-background: #10c4b2;
+@flat-light-shadow: rgba(255,255,255,.2);
 
 .km-flat
 {
@@ -33,13 +35,61 @@
     background: @flat-background;
 }
 
+.km-flat,
+.km-flat *
+{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-clip: border-box;
+}
+
+/* NavBar */
+
+.km-flat .km-navbar
+{
+    border: 1px solid @flat-border-color;
+}
+
+.km-flat .km-header .km-navbar
+{
+    border-width: 0 0 1px;
+}
+
+.km-flat .km-footer .km-navbar
+{
+    border-width: 1px 0 0;
+}
+
+.km-flat .km-toolbar,
+.km-flat .km-navbar,
+.km-flat .km-tabstrip,
+.km-flat .km-tabstrip .km-button
+{
+    .border-radius(0);
+}
+
 /* Button */
 
 .km-flat .km-button
 {
+    padding: .5em .8em;
     background: @flat-list-background;
     border: 1px solid @flat-border-color;
     .border-radius(@flat-border-radius);
+}
+
+.km-flat .km-tabstrip .km-button
+{
+    color: @flat-active-color;
+    background: none;
+}
+
+.km-flat .km-state-active,
+.km-flat .km-tabstrip .km-state-active
+{
+    color: @flat-active-color;
+    background: @flat-active-background;
 }
 
 /* ListView */
@@ -47,7 +97,7 @@
 .km-flat .km-list > li
 {
     background: @flat-list-background;
-    .box-shadow(inset 0 1px 0 rgba(255,255,255,.2));
+    .box-shadow(inset 0 1px 0 @flat-light-shadow);
 }
 
 .km-flat .km-listinset > li:first-child,
@@ -84,13 +134,13 @@
 .km-flat li.km-state-active .km-listview-link,
 .km-flat li.km-state-active .km-listview-label
 {
-    color: #fff;
-    background: #10c4b2;
+    color: @flat-active-color;
+    background: @flat-active-background;
 }
 
 .km-flat .km-listview-link:after
 {
-    color: #7b7b7b;
+    color: lighten(@flat-main-color, 30);
     width: .66rem;
     height: .64rem;
     border-width: 0;
@@ -99,7 +149,7 @@
 
 .km-flat .km-state-active .km-listview-link:after
 {
-    color: #fff;
+    color: @flat-active-color;
 }
 
 .km-flat .km-listinset li:first-child > .km-listview-link,
@@ -107,7 +157,7 @@
 .km-flat .km-listinset li:first-child > .km-listview-label,
 .km-flat .km-listgroupinset li:first-child > .km-listview-label
 {
-    .border-radius(@flat-border-radius @flat-border-radius 0 0);
+    .border-radius(@flat-inline-border-radius @flat-inline-border-radius 0 0);
 }
 
 .km-flat .km-listinset li:last-child > .km-listview-link,
@@ -115,7 +165,7 @@
 .km-flat .km-listinset li:last-child > .km-listview-label,
 .km-flat .km-listgroupinset li:last-child > .km-listview-label
 {
-    .border-radius(0 0 @flat-border-radius @flat-border-radius);
+    .border-radius(0 0 @flat-inline-border-radius @flat-inline-border-radius);
 }
 
 .km-flat .km-listinset li:first-child:last-child > .km-listview-link,
@@ -123,12 +173,26 @@
 .km-flat .km-listinset li:first-child:last-child > .km-listview-label,
 .km-flat .km-listgroupinset li:first-child:last-child > .km-listview-label
 {
-    .border-radius(@flat-border-radius);
+    .border-radius(@flat-inline-border-radius);
 }
 
 /* TabStrip */
 
+.km-flat .km-tabstrip
+{
+    padding: 0;
+    display: table;
+    table-layout: fixed;
+}
+
 .km-flat .km-tabstrip .km-button
 {
     font-size: .7em;
+    display: table-cell;
+    border: 0;
+}
+
+.km-flat .km-tabstrip .km-icon:before
+{
+    display: none;
 }
