@@ -111,6 +111,18 @@
                 equal(ds.view()[0], 13);
             });
 
+            test('requesting an out of range item shifts the buffer to the correct range', 2, function() {
+                ds.fetch();
+                equal(buffer.at(62), 62);
+                equal(ds.view()[0], 60);
+            });
+
+            test('requesting the last item of a non-existent range switches to mid-range state', 2, function() {
+                ds.fetch();
+                equal(buffer.at(79), 79);
+                equal(ds.view()[0], 73);
+            });
+
             module('buffer end/resize events ', {
                 setup: function() {
                     ds = new kendo.data.DataSource({
@@ -123,7 +135,6 @@
                                 }
 
                                 options.success(results);
-                                console.log('foo');
                             }
                         },
                         pageSize: 20,

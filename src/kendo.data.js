@@ -3547,6 +3547,14 @@ kendo_module({
         },
 
         at: function(index)  {
+            var pageSize = this.pageSize;
+
+            // out of range request
+            if (index < this.dataOffset || index > this.skip + pageSize) {
+                var offset = Math.floor(index / pageSize) * pageSize;
+                this.range(offset);
+            }
+
             // prefetch
             if (index === this.prefetchThreshold) {
                 this._prefetch();
