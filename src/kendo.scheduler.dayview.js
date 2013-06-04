@@ -269,16 +269,14 @@ kendo_module({
         },
 
         _footer: function() {
-            if (!this.footer) {
-                var html = '<div class="k-header k-scheduler-footer">&nbsp;';
-                   // '<ul class="k-reset k-header k-toolbar"> <li>aaa</li></ul>';
+            var html = '<div class="k-header k-scheduler-footer">&nbsp;';
+            // '<ul class="k-reset k-header k-toolbar"> <li>aaa</li></ul>';
 
-                //TODO: Toolbar command
+            //TODO: Toolbar command
 
-                html += "</div>";
+            html += "</div>";
 
-                this.footer = $(html).appendTo(this.element);
-            }
+            this.footer = $(html).appendTo(this.element);
         },
 
         _forTimeRange: function(min, max, action, after) {

@@ -30,67 +30,56 @@
         <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
 
         <style>
-            html
-            {
-                font:12px sans-serif;
-            }
+html
+{
+	font:12px sans-serif;
+	overflow-y:scroll;
+}
 
-            /* common.less */
+/* common.less */
 
-           /* template.less */
+/* template.less */
 
-            .k-scheduler
-            {
-                background-color:#fff;
-            }
+.k-scheduler
+{
+	background-color:#fff;
+}
 
-            .k-scheduler-table td,
-            .k-scheduler-header th
-            {
-                border-color:#ccc;
-            }
+.k-scheduler-times tr,
+.k-scheduler-times th,
+.k-scheduler-table td,
+.k-scheduler-header th
+{
+	border-color:#ccc;
+}
 
-            .k-scheduler-toolbar + .k-scheduler-times tr th
-            {
-                border-bottom-color:#ccc;
-            }
+.k-scheduler-table .k-today
+{
+	background-color:#f6f6f6;
+}
 
-            .k-scheduler-table .k-today
-            {
-                background-color:#f6f6f6;
-            }
+.k-scheduler-now-arrow
+{
+	border-left-color:#f00;
+}
 
-            .k-scheduler-now-arrow
-            {
-                border-left-color:#f00;
-            }
+.k-scheduler-now-line
+{
+	background-color:#f00;
+}
 
-            .k-scheduler-now-line
-            {
-                background-color:#f00;
-            }
+.k-appointment
+{
+	border-color:#8bf;
+	background-color: #def;
+	cursor:move;
+}
 
-            .k-scheduler-header-wrap .k-scheduler-table,
-            .k-scheduler-content .k-scheduler-table
-            {
-               /*width:140%;*/
-            }
+.k-appointment:hover
+{
+	border-color:#69f;
+}
 
-            .k-appointment
-            {
-                border-color:#8bf;
-                background-color: #def;
-               /* cursor:move;*/
-            }
-
-            .k-appointment:hover
-            {
-                border-color:#69f;
-            }
-
-            /*
-            *{border-color:red !important;}
-            */
         </style>
     </head>
     <body>
