@@ -33,4 +33,5 @@
 {"Azimuth":320,"Gain":-2.0},
 {"Azimuth":330,"Gain":-1.0},
 {"Azimuth":340,"Gain":-0.0},
-{"Azimuth":350,"Gain":-0.0}]
+{"Azimuth":350,"Gain":-0.0},
+{"Azimuth":0,"Gain":-0.0}]
