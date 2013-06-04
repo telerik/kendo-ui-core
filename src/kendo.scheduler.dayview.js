@@ -261,11 +261,6 @@ kendo_module({
                 };
 
                 rows.push(row);
-            }, function(date) {
-                rows.push({
-                    text: executeTemplate(options.majorTickTimeTemplate, options, { date: date }),
-                    skip: true
-                });
             });
 
             return {
@@ -466,27 +461,10 @@ kendo_module({
         destroy: function() {
             var that = this;
 
-            Widget.fn.destroy.call(this);
+            ui.SchedulerView.fn.destroy.call(this);
 
-            if (that.content) {
-                that.content
-                    .add(that.times)
-                    .add(that.timesHeader)
-                    .add(that.datesHeader)
-                    .add(that.footer)
-                    .remove()
-                    .empty();
-
-                if (that._touchScroller) {
-                    that._touchScroller.wrapper.remove();
-                    that._touchScroller.destroy();
-                }
-
-                that.content = null;
-                that.times = null;
-                that.timesHeader = null;
-                that.datesHeader = null;
-                that.footer = null;
+            if (that.footer) {
+                that.footer.remove();
             }
         },
 

@@ -164,11 +164,23 @@ kendo_module({
 
             var columnLevels = levels(layout, "columns");
 
+            this.table = $('<table class="k-scheduler-layout"/>');
+
+            var top = $("<tr/>");
+
             this.timesHeader = timesHeader(columnLevels.length, allDaySlot);
+
+            top.append(this.timesHeader.wrap("<td/>").parent());
 
             var columnCount = columnLevels[columnLevels.length - 1].length;
 
             this.datesHeader = datesHeader(columnLevels, columnCount, allDaySlot);
+
+            top.append(this.datesHeader.wrap("<td/>").parent());
+
+            this.table.append(top);
+
+            var bottom = $("<tr/>");
 
             var rowLevels = levels(layout, "rows");
 
@@ -176,10 +188,27 @@ kendo_module({
 
             this.times = times(rowLevels, rowCount);
 
+            bottom.append(this.times.wrap("<td>").parent());
+
             this.content = content(columnLevels[columnLevels.length - 1], rowLevels[rowLevels.length - 1]);
 
-            this.element.append(this.timesHeader).append(this.datesHeader).append(this.times).append(this.content);
-        }
+            bottom.append(this.content.wrap("<td>").parent());
+
+            this.table.append(bottom);
+
+            this.element.append(this.table);
+        },
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(this);
+
+            if (that.table) {
+                kendo.destroy(that.table);
+
+                that.table.remove();
+            }
+        },
     });
 
 })(window.kendo.jQuery);
