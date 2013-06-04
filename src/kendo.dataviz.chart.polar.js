@@ -811,7 +811,7 @@ kendo_module({
         }
     });
 
-    var RadarPlotArea = PlotAreaBase.extend({
+    var PolarPlotAreaBase = PlotAreaBase.extend({
         init: function(series, options) {
             var plotArea = this;
 
@@ -820,34 +820,24 @@ kendo_module({
             PlotAreaBase.fn.init.call(plotArea, series, options);
         },
 
-        options: {
-            categoryAxis: {
-                categories: []
-            },
-            valueAxis: {}
-        },
-
         render: function() {
             var plotArea = this;
 
-            plotArea.createCategoryAxis();
-            // plotArea.aggregateDateSeries();
+            plotArea.createPolarAxis();
             plotArea.createCharts();
             plotArea.createValueAxis();
         },
 
-        reflow: PlotAreaBase.fn.reflow,
-
         reflowAxes: function () {
             var plotArea = this,
                 valueAxis = plotArea.valueAxis,
-                categoryAxis = plotArea.categoryAxis,
+                polarAxis = plotArea.polarAxis,
                 box = plotArea.box,
                 // TODO: Percents
                 axisBox = box.clone().unpad(35),
                 valueAxisBox = axisBox.clone().shrink(0, axisBox.height() / 2);
 
-            categoryAxis.reflow(axisBox);
+            polarAxis.reflow(axisBox);
             valueAxis.reflow(valueAxisBox);
             var heightDiff = valueAxis.lineBox().height() - valueAxis.box.height();
             valueAxis.reflow(valueAxis.box.unpad({ top: heightDiff }));
@@ -860,7 +850,7 @@ kendo_module({
                 valueAxis = plotArea.valueAxis,
                 slot = valueAxis.getSlot(valueAxis.options.min),
                 slotEdge = valueAxis.options.reverse ? 2 : 1,
-                center = plotArea.categoryAxis.getSlot(0).c,
+                center = plotArea.polarAxis.getSlot(0).c,
                 box = valueAxis.box.translate(
                     center.x - slot[X + slotEdge],
                     center.y - slot[Y + slotEdge]
@@ -871,17 +861,29 @@ kendo_module({
 
         backgroundBox: function() {
             return this.box;
+        }
+    });
+
+    var RadarPlotArea = PolarPlotAreaBase.extend({
+        options: {
+            categoryAxis: {
+                categories: []
+            },
+            valueAxis: {}
         },
 
-        createCategoryAxis: function() {
+        createPolarAxis: function() {
             var plotArea = this,
                 categoryAxis;
 
             categoryAxis = new RadarCategoryAxis(plotArea.options.categoryAxis);
 
-            plotArea.categoryAxis = categoryAxis;
             plotArea.polarAxis = categoryAxis;
+            plotArea.categoryAxis = categoryAxis;
             plotArea.appendAxis(categoryAxis);
+
+            // TODO
+            // plotArea.aggregateDateSeries();
         },
 
         createValueAxis: function() {
@@ -1015,72 +1017,10 @@ kendo_module({
        */
     });
 
-    // TODO: Inherit / mixin from RadarPlotArea
-    var PolarPlotArea = PlotAreaBase.extend({
-        init: function(series, options) {
-            var plotArea = this;
-
-            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker();
-
-            PlotAreaBase.fn.init.call(plotArea, series, options);
-        },
-
+    var PolarPlotArea = PolarPlotAreaBase.extend({
         options: {
-            polarAxis: {},
-            valueAxis: {}
-        },
-
-        render: function() {
-            var plotArea = this;
-
-            plotArea.createPolarAxis();
-            plotArea.createCharts();
-            plotArea.createValueAxis();
-        },
-
-        reflow: PlotAreaBase.fn.reflow,
-
-        reflowAxes: function () {
-            var plotArea = this,
-                valueAxis = plotArea.valueAxis,
-                polarAxis = plotArea.polarAxis,
-                box = plotArea.box,
-                // TODO: Percents
-                axisBox = box.clone().unpad(35),
-                valueAxisBox = axisBox.clone().shrink(0, axisBox.height() / 2);
-
-            polarAxis.reflow(axisBox);
-            valueAxis.reflow(valueAxisBox);
-            var heightDiff = valueAxis.lineBox().height() - valueAxis.box.height();
-            valueAxis.reflow(valueAxis.box.unpad({ top: heightDiff }));
-
-            plotArea.alignAxes(axisBox);
-        },
-
-        alignAxes: function() {
-            var plotArea = this,
-                valueAxis = plotArea.valueAxis,
-                slot = valueAxis.getSlot(valueAxis.options.min),
-                slotEdge = valueAxis.options.reverse ? 2 : 1,
-                center = plotArea.polarAxis.getSlot(0).c,
-                box = valueAxis.box.translate(
-                    center.x - slot[X + slotEdge],
-                    center.y - slot[Y + slotEdge]
-                );
-
-            valueAxis.reflow(box);
-        },
-
-        backgroundBox: function() {
-            return this.box;
-        },
-
-        appendChart: function(chart, pane) {
-            var plotArea = this;
-
-            plotArea.valueAxisRangeTracker.update(chart.yAxisRanges);
-
-            PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
+            xAxis: {},
+            yAxis: {}
         },
 
         createPolarAxis: function() {
@@ -1121,6 +1061,14 @@ kendo_module({
             plotArea.valueAxis = valueAxis;
             plotArea.axisY = valueAxis;
             plotArea.appendAxis(valueAxis);
+        },
+
+        appendChart: function(chart, pane) {
+            var plotArea = this;
+
+            plotArea.valueAxisRangeTracker.update(chart.yAxisRanges);
+
+            PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
         },
 
         createCharts: function() {
