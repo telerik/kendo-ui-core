@@ -44,9 +44,20 @@ kendo_module({
                     width: 4
                 },
                 area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    },
                     line: {
                         opacity: 1,
                         width: 0
+                    }
+                },
+                radarLine: {
+                    width: 4,
+                    markers: {
+                        visible: false
                     }
                 },
                 candlestick: {
@@ -180,6 +191,11 @@ kendo_module({
             defaults.verticalLine = deepExtend({}, defaults.line);
             defaults.verticalArea = deepExtend({}, defaults.area);
 
+            defaults.radarArea = deepExtend({}, defaults.area);
+            defaults.polarArea = deepExtend({}, defaults.area);
+
+            defaults.polarLine = deepExtend({}, defaults.radarLine);
+
             themes[themeName] = result;
         };
 
@@ -228,13 +244,6 @@ kendo_module({
                 scatterLine: {
                     markers: {
                         background: "#3d3d3d"
-                    }
-                },
-                area: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
                     }
                 },
                 candlestick: {
@@ -330,13 +339,6 @@ kendo_module({
                     color: BLACK,
                     background: WHITE,
                     opacity: 0.5
-                },
-                area: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    }
                 },
                 candlestick: {
                     downColor: "#c4d0d5",
@@ -438,11 +440,7 @@ kendo_module({
                     }
                 },
                 area: {
-                    opacity: 0.5,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    }
+                    opacity: 0.5
                 },
                 candlestick: {
                     downColor: "#664e62",
@@ -537,13 +535,6 @@ kendo_module({
                     color: BLACK,
                     background: WHITE,
                     opacity: 0.5
-                },
-                area: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    }
                 },
                 candlestick: {
                     downColor: "#dedede",
@@ -646,13 +637,6 @@ kendo_module({
                         color: "#A6B1C0"
                     }
                 },
-                area: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    }
-                },
                 candlestick: {
                     downColor: "#a6afbe"
                 }
@@ -726,13 +710,6 @@ kendo_module({
             seriesDefaults: {
                 labels: {
                     color: BLACK
-                },
-                area: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    }
                 },
                 candlestick: {
                     downColor: "#c7c7c7",
@@ -833,13 +810,6 @@ kendo_module({
                 scatterLine: {
                     markers: {
                         background: "#0e0e0e"
-                    }
-                },
-                area: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
                     }
                 },
                 candlestick: {
@@ -951,11 +921,7 @@ kendo_module({
                     }
                 },
                 area: {
-                    opacity: 0.3,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    }
+                    opacity: 0.3
                 },
                 candlestick: {
                     downColor: "#757d87",
@@ -1083,11 +1049,7 @@ kendo_module({
                     }
                 },
                 area: {
-                    opacity: 0.3,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    }
+                    opacity: 0.3
                 },
                 candlestick: {
                     downColor: "#cccccc",
@@ -1216,11 +1178,7 @@ kendo_module({
                     }
                 },
                 area: {
-                    opacity: 0.3,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    }
+                    opacity: 0.3
                 },
                 candlestick: {
                     downColor: "#d0d0d0",
