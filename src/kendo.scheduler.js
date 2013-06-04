@@ -20,6 +20,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        recurrence = kendo.recurrence,
         Widget = ui.Widget,
         STRING = "string",
         Popup = ui.Popup,
@@ -722,14 +723,36 @@ kendo_module({
             that.popup.open();
         },
 
+        _expandEvents: function(data, view) {
+            var endDate = view.endDate,
+                endTime = view.endTime;
+
+            if (recurrence) {
+                endDate = new Date(endDate);
+                if (endTime) {
+                    endDate.setHours(endTime.getHours(), endTime.getMinutes(), endTime.getSeconds(), endTime.getMilliseconds());
+                } else {
+                    endDate.setHours(23, 59, 59, 999);
+                }
+
+                data = recurrence.expandAll(data, view.startDate, endDate, this.dataSource.reader.timezone);
+            }
+            return data;
+        },
+
         refresh: function(e) {
+            var view = this.view(),
+                data = this.dataSource.view();
+
             if (e && e.action === "itemchange" && this.editable) { // skip rebinding if editing is in progress
                 return;
             }
 
             this._destroyEditable();
 
-            this.view().renderEvents(this.dataSource.view());
+            data = this._expandEvents(data, view);
+
+            view.renderEvents(data);
         }
     });
 

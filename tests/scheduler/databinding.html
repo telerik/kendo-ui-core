@@ -13,6 +13,7 @@
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -85,6 +86,40 @@
                         }
                     }
                 });
+            });
+
+            test("expand recurring events before calling renderEvents method", function() {
+                var today = new Date(),
+                    year = today.getFullYear(),
+                    month = today.getMonth(),
+                    day = today.getDate(),
+                    occurrencesLength = (7 - (today.getDay() || 7)) || 1, //find days to the end of week
+                    view, events;
+
+                var scheduler = new Scheduler(container, {
+                    views: [ "week" ],
+                    dataSource: [
+                        {
+                            start: new Date(year, month, day, 10),
+                            end: new Date(year, month, day, 11),
+                            title: "Today - recurring event",
+                            rule: "FREQ=DAILY"
+                        },{
+                            start: new Date(year, month, day, 16),
+                            end: new Date(year, month, day, 17),
+                            title: "Today - single event"
+                        }
+                    ]
+                });
+
+                view = scheduler.view();
+                stub(view, {
+                    renderEvents: view.renderEvents
+                });
+                scheduler.refresh();
+                events = view.args("renderEvents", 0)[0];
+
+                equal(events.length, occurrencesLength + 1);
             });
 
         </script>
