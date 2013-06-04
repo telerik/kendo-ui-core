@@ -317,13 +317,13 @@ kendo_module({
             that._initPages();
 
             that.view().bind("show", function () {
-                if(that._needsRefresh) {
+                if(that._widgetNeedsRefresh) {
                     setTimeout(function () {
                         that._resetPages();
                     }, 0);
                     that._widgetNeedsRefresh = false;
                 }
-            })
+            });
 
             if(that.options.autoBind) {
                 that.dataSource.fetch();
@@ -465,7 +465,7 @@ kendo_module({
                 dataItem;
 
             dataItem = buffer.at(offset);
-            console.log(dataItem);
+
             if(!dataItem) {
                 return;
             }
@@ -557,9 +557,8 @@ kendo_module({
             }
         },
 
-        _onReset: function () {
+        _onReset: function (e) {
             if(this.element.is(":visible")) {
-                console.log("reset pages");
                 this._resetPages();
             } else {
                 this._widgetNeedsRefresh = true;
@@ -571,6 +570,7 @@ kendo_module({
         },
 
         setPageContent: function (page, index) {
+            console.log("setPageContent", index);
             var buffer = this.buffer,
                 template = this.template,
                 emptyTemplate = this.emptyTemplate,
@@ -578,6 +578,7 @@ kendo_module({
 
             if(index >= 0) {
                 view = buffer.at(index);
+                console.log(view);
                 if(view) {
                     page.content(template(view));
                 } else {

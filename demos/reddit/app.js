@@ -33,6 +33,25 @@ var awwDataSource = new kendo.data.DataSource({
     }
 });
 
+var ds = new kendo.data.DataSource({
+    transport: {
+        read: function(options) {
+
+            var results = [], data = options.data;
+            for (var i = data.skip; i < data.skip + data.take; i ++) {
+                results.push({ foo: i });
+            }
+
+            options.success(results);
+        }
+    },
+    pageSize: 36,
+    serverPaging: true,
+    schema: {
+        total: function() { return 100000; }
+    }
+});
+
 function isImage(url) {
     return imgExtensionRegex.test(url) || (/http:\/\/(.+)?imgur.com\/.[^\/]+$/i).test(url);
 }
@@ -109,7 +128,7 @@ function showThumbsOnScrollComplete(e) {
 function canvasInit(e) {
     virtualScrollView = $("#canvas-scrollview").kendoMobileVirtualScrollView({
         contentHeight: 500,
-        dataSource: awwDataSource,
+        dataSource: ds,
         batchSize: 6,
         template: kendo.template($("#canvas-template").html()),
         emptyTemplate: kendo.template($("#empty-template").html()),
@@ -128,7 +147,7 @@ function canvasInit(e) {
 
 function canvasDetailInit(e) {
     $("#detail-scrollview").kendoMobileVirtualScrollView({
-        dataSource: awwDataSource,
+        dataSource: ds,
         autoBind: false,
         template: kendo.template($("#canvas-detail-tmp").html())
     });
@@ -136,12 +155,11 @@ function canvasDetailInit(e) {
 
 function canvasDetailShow(e) {
     var offset = parseInt(e.view.params.offset);
-
     $("#detail-scrollview").data("kendoMobileVirtualScrollView").scrollTo(offset);
 }
 
 function calculateOffset(dataItem) {
-    return virtualScrollView.buffer.buffer.indexOf(dataItem);
+    return $("#canvas-scrollview").data("kendoMobileVirtualScrollView").buffer.buffer.indexOf(dataItem);
 }
 
 function updateSrc(e) {
