@@ -148,7 +148,9 @@ kendo_module({
             return this.divisions(0.5);
         },
 
-        renderLine: $.noop,
+        renderLine: function() {
+            return [];
+        },
 
         renderGridLines: function(view, altAxis) {
             var axis = this,
@@ -546,7 +548,9 @@ kendo_module({
             return this.divisions(this.options.minorUnit);
         },
 
-        renderLine: $.noop,
+        renderLine: function() {
+            return [];
+        },
 
         renderGridLines: RadarCategoryAxis.fn.renderGridLines,
         gridLineElements: RadarCategoryAxis.fn.gridLineElements,
@@ -739,18 +743,7 @@ kendo_module({
 
     var RadarAreaSegment = AreaSegment.extend({
         points: function() {
-            var segment = this,
-                chart = segment.parent,
-                plotArea = chart.plotArea,
-                polarAxis = plotArea.polarAxis,
-                center = polarAxis.box.center(),
-                stackPoints = segment.stackPoints,
-                points = LineSegment.fn.points.call(segment, stackPoints);
-
-            points.unshift(center);
-            points.push(center);
-
-            return points;
+            return LineSegment.fn.points.call(this, this.stackPoints);
         }
     });
 
@@ -763,6 +756,8 @@ kendo_module({
             if (options.isStacked && seriesIx > 0 && prevSegment) {
                 stackPoints = prevSegment.linePoints.slice(0).reverse();
             }
+
+            linePoints.push(linePoints[0]);
 
             return new RadarAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
         },
@@ -785,9 +780,26 @@ kendo_module({
         pointSlot: PolarScatterChart.fn.pointSlot
     });
 
+    var PolarAreaSegment = AreaSegment.extend({
+        points: function() {
+            var segment = this,
+            chart = segment.parent,
+            plotArea = chart.plotArea,
+            polarAxis = plotArea.polarAxis,
+            center = polarAxis.box.center(),
+            stackPoints = segment.stackPoints,
+            points = LineSegment.fn.points.call(segment, stackPoints);
+
+            points.unshift(center);
+            points.push(center);
+
+            return points;
+        }
+    });
+
     var PolarAreaChart = PolarLineChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            return new RadarAreaSegment(linePoints, [], currentSeries, seriesIx);
+            return new PolarAreaSegment(linePoints, [], currentSeries, seriesIx);
         },
 
         seriesMissingValues: function(series) {

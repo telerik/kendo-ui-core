@@ -34,13 +34,13 @@
 
             function createChart(series, options) {
                 view = new ViewStub();
-                plotArea = new dataviz.PolarPlotArea(series,
+                plotArea = new dataviz.RadarPlotArea(series,
                     kendo.deepExtend({
-                        xAxis: {
+                        valueAxis: {
                             majorGridLines: { visible: false },
                             visible: false
                         },
-                        yAxis: {
+                        categoryAxis: {
                             majorGridLines: { visible: false },
                             visible: false
                         }
@@ -55,31 +55,41 @@
             }
 
             // ------------------------------------------------------------
-            module("Polar Area Chart / Positive values", {
+            module("Radar Area Chart / Positive values", {
                 setup: function() {
                     createChart([{
-                        type: "polarArea",
-                        data: [[45, 1], [60, 2], [75, 1]]
+                        type: "radarArea",
+                        data: [1, 2, 1]
                     }]);
                 }
             });
 
-            test("starts and ends on plot center", function() {
-                arrayClose(pointsXY[0], [400, 300]);
-                arrayClose(pointsXY[4], [400, 300]);
-            });
-
-            test("points are ordered by angular position", function() {
-                createChart([{
-                    type: "polarArea",
-                    data: [[60, 2], [45, 1], [75, 1]]
-                }]);
-
-                arrayClose(pointsXY.slice(1, 4), [
-                    [494, 206], [533, 71], [434, 172]
+            test("point coordinates", function() {
+                arrayClose(pointsXY, [
+                    [400, 168], [630, 433], [285, 366], [400, 168]
                 ], TOLERANCE);
             });
 
+            // ------------------------------------------------------------
+            module("Radar Area Chart / Positive values / Stacked", {
+                setup: function() {
+                    createChart([{
+                        type: "radarArea",
+                        data: [1, 2, 1],
+                        stack: true
+                    }, {
+                        type: "radarArea",
+                        data: [1, 2, 1]
+                    }]);
+                }
+            });
+
+            test("stacked series close around inner series", function() {
+                arrayClose(mapPoints(view.log.path[2].points), [
+                    [400, 168], [630, 433], [285, 366], [400, 168],
+                    [400, 234], [343, 333], [515, 366], [400, 234]
+                ], TOLERANCE);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
