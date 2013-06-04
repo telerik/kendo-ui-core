@@ -6,10 +6,9 @@ kendo_module({
     depends: [ "core", "scheduler.view" ]
 });
 
-(function($){
+(function(){
     var kendo = window.kendo,
-        ui = kendo.ui,
-        Widget = ui.Widget;
+        ui = kendo.ui;
 
     function getDate(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
@@ -42,21 +41,14 @@ kendo_module({
             };
         },
 
-        renderEvents: function(events) {
-            var eventTemplate = kendo.template(this.options.eventTemplate);
-            var dateTemplate = kendo.template(this.options.dateTemplate);
-            var timeTemplate = kendo.template(this.options.timeTemplate);
-            var event, i;
-
-            var table = this.content.find("table").empty();
-
+        _tasks: function(events) {
             var tasks = [];
 
             for (var idx = 0; idx < events.length; idx++) {
-                event = events[idx];
+                var event = events[idx];
                 var start = event.start;
                 var end = event.end;
-                var duration = Math.ceil((end - start) / (1000 * 3600 * 24));
+                var eventDurationInDays = Math.ceil((end - start) / (1000 * 3600 * 24));
 
                 var task = event.toJSON();
 
@@ -64,48 +56,69 @@ kendo_module({
 
                 tasks.push(task);
 
-                if (duration > 1) {
+                if (eventDurationInDays > 1) {
                     task.end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1);
 
-                    for (i = 1; i < duration; i++) {
+                    for (var day = 1; day < eventDurationInDays; day++) {
                         start = task.end;
                         task = event.toJSON();
                         task.uid = event.uid;
                         task.start = start;
                         task.end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 1);
-                        if (i == duration -1) {
+                        if (day == eventDurationInDays -1) {
                             task.end = new Date(task.start.getFullYear(), task.start.getMonth(), task.start.getDate(), end.getHours(), end.getMinutes(), end.getSeconds(), end.getMilliseconds());
                         } else {
-                            task.allDay = true;
+                            task.isAllDay = true;
                         }
                         tasks.push(task);
                     }
                 }
             }
 
-            events = new kendo.data.Query(tasks).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
+            return new kendo.data.Query(tasks).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
+        },
 
-            if (events.length > 0) {
-                var date = getDate(events[0].start);
+        renderEvents: function(events) {
+            var taskTemplate = kendo.template(this.options.eventTemplate);
+            var dateTemplate = kendo.template(this.options.dateTemplate);
+            var timeTemplate = kendo.template(this.options.timeTemplate);
 
-                var tr = [];
+            var table = this.content.find("table").empty();
 
-                for (i = 0; i < events.length; i++) {
-                    event = events[i];
+            var tasks = this._tasks(events);
 
-                    var eventDate = getDate(event.start);
+            if (tasks.length > 0) {
+                var task = tasks[0];
+                var day = { date: getDate(task.start), tasks: [] };
+                var days = [day];
 
-                    if (eventDate.getTime() > date.getTime() || i == events.length - 1) {
-                        var html = kendo.format('<tr><td class="k-scheduler-datecolumn" rowspan="{0}">{1}</td>{2}</tr>', tr.length, dateTemplate(events[i-1]), tr.join("</tr><tr>"));
+                for (var i = 0; i < tasks.length; i++) {
+                    task = tasks[i];
 
-                        table.append(html);
+                    var taskDate = getDate(task.start);
 
-                        tr = [];
-
-                        date = eventDate;
+                    if (day.date < taskDate) {
+                        day = { date: taskDate, tasks: [] };
+                        days.push(day);
                     }
 
-                    tr.push(kendo.format('<td class="k-scheduler-timecolumn">{0}</td><td>{1}</td>', timeTemplate(event), eventTemplate(event)));
+                    day.tasks.push(task);
+                }
+
+                for (i = 0; i < days.length; i++) {
+                    var tr = [];
+
+                    for (var taskIndex = 0; taskIndex < days[i].tasks.length; taskIndex++) {
+                        task = days[i].tasks[taskIndex];
+
+                        tr.push(kendo.format('<td class="k-scheduler-timecolumn">{0}</td><td>{1}</td>',
+                            timeTemplate(task), taskTemplate(task)));
+                    }
+
+                    tr.unshift(kendo.format('<td class="k-scheduler-datecolumn" rowspan="{0}">{1}</td>{2}', tr.length,
+                            dateTemplate({ start: days[i].date }), tr.shift()));
+
+                    table.append("<tr>" + tr.join("</tr><tr>") + "</tr>");
                 }
             }
 
@@ -116,7 +129,7 @@ kendo_module({
             name: "agenda",
             selectedDateFormat: "{0:D}",
             eventTemplate: '<div title="#:title#" data-#=kendo.ns#uid="#=uid#">#:title#</div>',
-            timeTemplate: "#if(data.allDay) {#" +
+            timeTemplate: "#if(data.isAllDay) {#" +
                             "all day" +
                           "#} else { #" +
                             '#=kendo.toString(start, "t")#-#=kendo.toString(end, "t")#' +
