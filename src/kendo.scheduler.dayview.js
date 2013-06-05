@@ -196,11 +196,7 @@ kendo_module({
             var that = this;
             if (that.options.editable) {
 
-                that.element.on("mouseover" + NS, ".k-event", function() {
-                    $(this).find("a:has(.k-i-close)").show();
-                }).on("mouseleave" + NS, ".k-event", function() {
-                    $(this).find("a:has(.k-i-close)").hide();
-                }).on("click" + NS, ".k-event a:has(.k-i-close)", function(e) {
+                that.element.on("click" + NS, ".k-event a:has(.k-i-close)", function(e) {
                     that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
                     e.preventDefault();
                 });
