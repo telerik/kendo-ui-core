@@ -9,6 +9,8 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         timezone = kendo.timezone,
+        date = kendo.date,
+        dayOfWeek = date.dayOfWeek,
         Class = kendo.Class,
         DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
@@ -157,7 +159,7 @@ kendo_module({
                     if (weeks.length) {
                         day = (weeks.sort(numberSortPredicate)[0] * 7) - 1;
                         date.setFullYear(year, 0, day);
-                        dayByName(date, weekStart, -1);
+                        dayOfWeek(date, weekStart, -1);
                         break;
                     } else {
                         date.setFullYear(year + 1, 0, 1);
@@ -181,7 +183,7 @@ kendo_module({
                 weekDayRule = weekDayRules[0];
                 if (!weekDayRule) {
                     weekDayRule = weekDays[0];
-                    dayByName(date, weekStart);
+                    dayOfWeek(date, weekStart);
 
                     if (rule._weekDayFound && interval > 1) {
                         date.setDate(date.getDate() + ((interval - 1) * 7));
@@ -195,12 +197,12 @@ kendo_module({
                 if (offset) {
                     while (date <= end && !isInWeek(date, offset, weekStart)) {
                         date.setDate(date.getDate() + 7);
-                        dayByName(date, weekStart, -1);
+                        dayOfWeek(date, weekStart, -1);
                     }
                 }
 
                 if (date.getDay() !== day) {
-                    dayByName(date, day);
+                    dayOfWeek(date, day);
                 }
 
                 return true;
@@ -431,14 +433,6 @@ kendo_module({
             "yearly" : new YearlyFrequency()
         };
 
-    function dayByName(date, dayOfWeek, offset) {
-        offset = offset || 1;
-
-        while(date.getDay() !== dayOfWeek) {
-            date.setDate(date.getDate() + offset);
-        }
-    }
-
     function dayInYear(date) {
         var month = date.getMonth(),
         days = leapYear(date) ? DAYS_IN_LEAPYEAR[month] : DAYS_IN_YEAR[month];
@@ -453,7 +447,7 @@ kendo_module({
         year = date.getFullYear();
 
         if (weekStart !== undefined) {
-            dayByName(date, weekStart, -1);
+            dayOfWeek(date, weekStart, -1);
             date.setDate(date.getDate() + 4);
         } else {
             date.setDate(date.getDate() + (4 - (date.getDay() || 7)));
