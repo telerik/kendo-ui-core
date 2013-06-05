@@ -3248,7 +3248,7 @@ kendo_module({
         insert: function(index, model) {
             var parentNode = this.parent();
 
-            if (parentNode) {
+            if (parentNode && parentNode._initChildren) {
                 parentNode.hasChildren = true;
                 parentNode._initChildren();
             }
