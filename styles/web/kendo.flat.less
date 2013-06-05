@@ -6,7 +6,7 @@
 * https://www.kendoui.com/purchase/license-agreement/kendo-ui-complete-commercial.aspx
 * If you do not own a commercial license, this file shall be governed by the trial license terms.
 */
-@image-folder: "Moonlight";
+@image-folder: "Flat";
 @texture: none;
 @tooltip-texture: none;
 @fallback-texture: url('textures/highlight.png');
@@ -18,8 +18,10 @@
 @selected-shadow: none;
 @active-gradient: none;
 @active-shadow: none;
+
 @widget-background-color: #ffffff;
-@widget-border-color: #10c4b2;
+@widget-border-color: #cdcdcd;
+
 @widget-text-color: #787878;
 @header-background-color: #10c4b2;
 @header-text-color: #ffffff;
@@ -47,12 +49,16 @@
 @hover-background-color: #29d6c5;
 @hover-border-color: #29d6c5;
 @hover-text-color: #ffffff;
+
+
 @focused-border-color: @hover-border-color;
-@focused-shadow: none;
-@focused-item-shadow: inset 0 0 0 1px @hover-border-color;
-@selected-background-color: #10c4b2;
-@selected-border-color: #363940;
+//@focused-shadow: none;
+//@focused-item-shadow: inset 0 0 0 1px @hover-border-color;
+
+@selected-background-color: @drop-down-header-background;
+@selected-border-color: @drop-down-header-background;
 @selected-text-color: #ffffff;
+
 @active-background-color: #10c4b2;
 @active-border-color: none;
 @active-text-color: #ffffff;
@@ -109,5 +115,24 @@
 //@focused-item-shadow: inset 0 0 3px 1px @hover-border-color;
 
 @content-background-color: #ffffff;
+
+
+@focused-border-color: @drop-down-header-background;
+@focused-shadow: none;
+@focused-item-shadow: inset 0 0 0 1px @drop-down-header-background;
+
+
+
+
+
+//Introduced new var-s
+@form-widget-background: #10c4b2;
+@form-widget-color: #ffffff;
+@form-widget-border-color: #10c4b2; 
+@drop-down-header-background: #363940;
+@drop-down-header-color: #ffffff;
+
+
+
 
 @import "template.less";

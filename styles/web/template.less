@@ -1034,3 +1034,98 @@ div.k-imagebrowser-dropzone em
         background-size: 192px 336px;
     }
 }
+
+//Changes
+
+.k-dropdown-wrap,
+.k-picker-wrap,
+.k-numeric-wrap{
+	background-color: @form-widget-background;
+	
+}
+.k-dropdown .k-input
+{
+    color: @form-widget-color;
+}
+
+.k-dropdown .k-state-focused .k-input
+{
+    color: @form-widget-color;
+}
+
+
+
+.k-list-container
+{
+    border-width: 0;
+    background-color: @drop-down-header-background;
+	color: @drop-down-header-color;
+	//border-color: @drop-down-header-background; 
+}
+
+.k-list-container
+{
+    border-color: @drop-down-header-background;
+    background-color: @select-group-background-color;
+}
+
+.k-group,
+.k-grouping-header,
+.k-widget .k-status,
+.k-dropzone-hovered,
+.k-upload-files,
+.k-widget.k-popup
+{
+    background-color: @drop-down-header-background;
+}
+
+
+.k-dropdown-wrap.k-state-focused
+{
+    background-color: @form-widget-background;
+    //.composite-background(@hover-gradient);
+    background-position: 50% 50%;
+    border-color: @drop-down-header-background;
+}
+
+.k-picker-wrap.k-state-active,
+.k-dropdown-wrap.k-state-active
+{
+    background-color: @drop-down-header-background;
+    //.composite-background(@hover-gradient);
+    background-position: 50% 50%;
+    //border-color: @drop-down-header-background;
+}
+
+.k-picker-wrap.k-state-default,
+.k-dropdown-wrap.k-state-default,
+.k-autocomplete.k-state-default{
+	border-color: @active-background-color;
+}
+
+.k-picker-wrap.k-state-hover,
+.k-dropdown-wrap.k-state-hover,
+.k-autocomplete.k-state-hover{
+	border-color: @hover-border-color;
+}
+
+.k-picker-wrap.k-state-focused,
+.k-dropdown-wrap.k-state-focused,
+.k-autocomplete.k-state-focused{
+	border-color: @drop-down-header-background;
+}
+
+.k-footer{
+	background-color: @drop-down-header-background;
+	color: @drop-down-header-color;
+}
+
+.k-footer:hover{
+	background-color: @select-hover-background-color;
+	color: @hover-text-color;
+}
+
+.k-calendar .k-state-selected.k-state-focused>.k-link
+{
+    background-color: transparent;
+}
