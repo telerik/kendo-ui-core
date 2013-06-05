@@ -1210,7 +1210,7 @@
                 equal(view.datesHeader.find(".k-event a:has(.k-i-close)").css("display"), "none");
             });
 
-            test("close button is shown on all day event hover if set as editable", function() {
+            test("close button is rendered if set as editable", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
                         editable: true,
@@ -1227,53 +1227,7 @@
 
                 view.renderEvents(events);
 
-                view.datesHeader.find(".k-event").trigger("mouseover");
-
-                notEqual(view.datesHeader.find(".k-event a:has(.k-i-close)").css("display"), "none");
-            });
-
-            test("close button is shown on event hover if set as editable", function() {
-                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-                    view = setup({
-                        editable: true,
-                        dates: [
-                            selectedDate
-                        ]
-                    });
-
-                view.render(selectedDate);
-
-                var events = [
-                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
-                ];
-
-                view.renderEvents(events);
-
-                view.content.find(".k-event").trigger("mouseover");
-
-                notEqual(view.content.find(".k-event a:has(.k-i-close)").css("display"), "none");
-            });
-
-            test("close button is hidden on event mouseleave if set as editable", function() {
-                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-                    view = setup({
-                        editable: true,
-                        dates: [
-                            selectedDate
-                        ]
-                    });
-
-                view.render(selectedDate);
-
-                var events = [
-                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
-                ];
-
-                view.renderEvents(events);
-
-                view.content.find(".k-event").trigger("mouseleave");
-
-                equal(view.content.find(".k-event a:has(.k-i-close)").css("display"), "none");
+                equal(view.datesHeader.find(".k-event a:has(.k-i-close)").length, 1);
             });
 
             test("close button is not rendered if set to not editable", function() {

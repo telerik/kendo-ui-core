@@ -33,7 +33,7 @@ kendo_module({
         DATA_HEADER_TEMPLATE = kendo.template("#=kendo.toString(date, 'ddd M/dd')#"),
         EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#">{0}' +
                 '#if (showDelete) {#' +
-                    '<a href="\\#" class="k-link" style="display:none"><span class="k-icon k-i-close"></span></a>' +
+                    '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                 '#}#' +
                 //'<span class="k-icon k-resize-handle"></span>' +
                 '</div>';
