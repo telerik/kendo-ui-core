@@ -384,6 +384,21 @@
                 multiselect.input.focus().blur();
             });
 
+            test("MultiSelect calls dataSource fetch if autoBind:false", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    autoBind: false,
+                    value: ["Item1", "Item2"]
+                });
+
+                stub(multiselect.dataSource, {
+                    filter: multiselect.dataSource.filter
+                });
+
+                multiselect.open();
+
+                ok(multiselect.dataSource.calls("filter") > 0);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

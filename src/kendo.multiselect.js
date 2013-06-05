@@ -103,6 +103,7 @@ kendo_module({
                 }
 
                 if ($.isPlainObject(data[0]) || !options.dataValueField) {
+                    that._retrieveData = true;
                     that.dataSource.data(data);
                     that.value(that._initialValues);
                 }
@@ -278,9 +279,10 @@ kendo_module({
         open: function() {
             var that = this;
 
-            if (!that.ul[0].firstChild || that._state === ACCEPT) {
+            if (!that.ul[0].firstChild || that._state === ACCEPT || that._retrieveData) {
                 that._state = "";
                 that._open = true;
+                that._retrieveData = false;
                 that._filterSource();
             } else if (that._visibleItems && that._allowSelection()) {
                 that.popup.open();
