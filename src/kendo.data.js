@@ -3644,6 +3644,12 @@ kendo_module({
             }
         },
 
+        syncDataSource: function() {
+            var offset = this.offset;
+            this.offset = null;
+            this.range(offset);
+        },
+
         _goToRange: function(offset, expanding) {
             if (this.offset !== offset) {
                 return;

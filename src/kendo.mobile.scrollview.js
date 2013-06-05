@@ -464,6 +464,7 @@ kendo_module({
                 pages = that.pages,
                 dataItem;
 
+            buffer.syncDataSource();
             dataItem = buffer.at(offset);
 
             if(!dataItem) {
@@ -640,6 +641,11 @@ kendo_module({
                 }
             });
         },
+
+        syncDataSource: function() {
+            this.buffer.syncDataSource();
+        },
+
         at: function (index) {
             var buffer = this.buffer,
                 skip = index * this.batchSize,
