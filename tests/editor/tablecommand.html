@@ -38,24 +38,28 @@
 
             var range, command;
 
-            test("exec createTable creates table", function() {
-                range = createRangeFromText(editor, '|foo|');
+            test("exec createTable creates table at cursor", function() {
+                range = createRangeFromText(editor, 'foo||');
 
                 command = new TableCommand({ range:range });
 
                 command.exec();
 
-                equal(editor.value(), "<table><tbody><tr><td>foo</td></tr></tbody></table>");
+                equal(editor.value(), "foo<table><tbody><tr><td></td></tr></tbody></table>");
             });
 
             test("exec createTable creates table with given row/columns", function() {
-                range = createRangeFromText(editor, '|foo|');
+                editor.value("foo");
+
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild, 0);
+                range.collapse(true);
 
                 command = new TableCommand({ range: range, rows: 1, columns: 2 });
 
                 command.exec();
 
-                equal(editor.value(), "<table><tbody><tr><td>foo</td><td></td></tr></tbody></table>");
+                equal(editor.value(), "<table><tbody><tr><td></td><td></td></tr></tbody></table>foo");
             });
 
         </script>
