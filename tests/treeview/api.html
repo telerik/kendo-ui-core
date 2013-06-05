@@ -910,6 +910,26 @@
 
                 equal(calls, 2);
             });
+
+            test("collapse() on collapsed item does not trigger a datasource fetch", function() {
+                var calls = 0;
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.success([ { text: "foo", hasChildren: true } ]);
+                                calls++;
+                            }
+                        }
+                    }
+                });
+
+                treeviewObject.collapse(".k-item");
+
+                equal(calls, 1);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
