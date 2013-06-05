@@ -20,6 +20,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        date = kendo.date,
         recurrence = kendo.recurrence,
         Widget = ui.Widget,
         STRING = "string",
@@ -39,7 +40,7 @@ kendo_module({
         EDIT = "edit",
         DELETECONFIRM = "Are you sure you want to delete this event?",
         COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
-        TODAY = new Date(),
+        TODAY = date.getDate(new Date());
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
                '<li class="k-state-default k-nav-today"><a href="\\#" class="k-link">${messages.today}</a></li>' +
@@ -81,13 +82,6 @@ kendo_module({
             iconClass: "k-icon"
         }
     };
-
-    function getDate(date) {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
-    }
-
-    TODAY = getDate(new Date());
-
 
     function trimOptions(options) {
         delete options.name;

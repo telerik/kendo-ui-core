@@ -3183,6 +3183,12 @@ function pad(number, digits, end) {
            abbr: abbr
         };
     })();
+
+    kendo.date = {
+        getDate: function(date) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+        }
+    };
 })(jQuery, eval);
 
 /*global kendo_module:true */
