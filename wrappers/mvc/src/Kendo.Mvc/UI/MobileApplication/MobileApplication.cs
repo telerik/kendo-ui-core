@@ -79,10 +79,10 @@ namespace Kendo.Mvc.UI
 
             if (Id.HasValue())
             {
-                container = Selector;
+                container = "\"" + Selector + "\"";
             }
 
-            writer.Write(String.Format("jQuery(function(){{ new kendo.mobile.Application(jQuery(\"{0}\"), {1}); }});", container, Initializer.Serialize(options)));
+            writer.Write(String.Format("jQuery(function(){{ new kendo.mobile.Application(jQuery({0}), {1}); }});", container, Initializer.Serialize(options)));
 
             base.WriteInitializationScript(writer);
         }
