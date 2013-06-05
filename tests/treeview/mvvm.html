@@ -165,6 +165,25 @@
                 equal(dom.find(".k-in:contains('undefined')").length, 0);
             });
 
+            test("adding items to root level when datasource is in observable object", function() {
+                var dom = $('<div data-bind="source: src" data-role="treeview" />');
+
+                var viewModel = kendo.observable({
+                    src: new kendo.data.HierarchicalDataSource({
+                        data: [
+                            { text: "foo" }
+                        ]
+                    })
+                })
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.src.add({ text: "bar" });
+
+                equal(dom.find(".k-item").length, 2);
+                equal(dom.find(".k-item:last").text(), "bar");
+            });
+
 
 
             (function() {
@@ -197,6 +216,17 @@
                     viewModel.get("products")[0].get("items")[0].set("text", "baz");
 
                     equal(dom.find(".k-item .k-item").text(), "baz");
+                });
+
+                test("adding children to root array adds them to the treeview", function() {
+                    setupObservableBinding([
+                        { text: "foo" }
+                    ]);
+
+                    viewModel.products.push({ text: "bar" });
+
+                    equal(dom.find(".k-item").length, 2);
+                    equal(dom.find(".k-item:last").text(), "bar");
                 });
 
                 test("adding children to child array adds them to the treeview", function() {
