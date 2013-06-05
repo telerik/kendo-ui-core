@@ -3705,6 +3705,13 @@ div.k-slider
 .k-scheduler-header-wrap
 {
 	position:relative;
+    border-style: solid;
+    border-width: 0;
+}
+
+.k-scheduler .k-scrollbar-v .k-scheduler-header-wrap
+{
+    border-right-width: 1px;
 }
 
 .k-scheduler-times,
@@ -3717,6 +3724,8 @@ div.k-slider
 {
 	overflow:hidden;
     white-space: nowrap;
+    border-style:solid;
+    border-width:0;
 }
 
 .k-scheduler-content
@@ -3770,45 +3779,33 @@ div.k-slider
 .k-scheduler-header th
 {
 	border-style:solid;
-	border-width:0 1px 1px 0;
+	border-width:0 0 1px 1px;
 }
 
-.k-scheduler-layout tr + tr .k-scheduler-times th:last-child
+.k-scheduler-table td:first-child,
+.k-scheduler-header th:first-child
 {
-    border-right-width: 0;
+	border-left-width:0;
 }
 
-.k-scheduler-layout .k-scheduler-table tr > .k-last
+.k-scheduler-layout tr + tr .k-scheduler-times tr:last-child > th,
+.k-scheduler-layout tr + tr .k-scheduler-table > tbody > tr:last-child > td
 {
     border-bottom-width: 0;
 }
 
-.k-scheduler-table tr td:first-child,
-.k-scheduler-header tr th:first-child
+.k-scrollbar-h tr + tr .k-scheduler-times
 {
-	border-left-width:1px;
-}
-
-.k-scheduler-monthview .k-scheduler-table tr td:first-child,
-.k-scheduler-monthview .k-scheduler-header tr th:first-child,
-.k-scheduler-agenda .k-scheduler-table tr td:first-child,
-.k-scheduler-agenda .k-scheduler-header tr th:first-child
-{
-	border-left-width:0;
+    border-bottom-width: 1px;
 }
 
 .k-scheduler-times th
 {
     text-align:right;
 	padding-right:.6em;
-    border-width: 0 0 1px 0;
-	border-style:solid;
+    border-style:solid;
+	border-width:0 1px 1px 0;
 	border-color:transparent;
-}
-
-.k-scheduler-layout tr + tr .k-scheduler-times th
-{
-    border-right-width: 1px;
 }
 
 .k-scheduler-layout tr + tr .k-scheduler-times th:last-child
@@ -3840,6 +3837,11 @@ div.k-slider
 	left:5px;
 	right:0;
 	height:1px;
+}
+
+.k-task
+{
+    position:relative;
 }
 
 .k-event
@@ -3883,7 +3885,8 @@ div.k-slider
 	word-wrap: break-word;
 }
 
-.k-event > .k-link
+.k-event > .k-link,
+.k-task > .k-link
 {
 	position: absolute;
 	top: 4px;

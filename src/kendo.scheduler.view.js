@@ -240,19 +240,24 @@ kendo_module({
                 return false;
             };
 
+            var contentDiv = that.content[0],
+                scrollbarWidth = !kendo.support.kineticScrollNeeded ? scrollbar : 0;
+
             if (isSchedulerHeightSet(that.element)) { // set content height only if needed
                 if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
                     that.content.height(height);
                 } else {
                     that.content.height(scrollbar * 2 + 1);
                 }
-                that.times.height(that.content.height());
+                that.times.height(contentDiv.clientHeight);
             }
 
-            var scrollbarWidth = !kendo.support.kineticScrollNeeded ? scrollbar : 0;
-
-            if (this.content[0].offsetWidth - this.content[0].clientWidth > 0) {
-                this.datesHeader.css("padding-right", scrollbarWidth);
+            if (contentDiv.offsetWidth - contentDiv.clientWidth > 0) {
+                that.table.addClass("k-scrollbar-v");
+                that.datesHeader.css("padding-right", scrollbarWidth - parseInt(that.datesHeader.children().css("border-right-width"), 10));
+            }
+            if (contentDiv.offsetHeight - contentDiv.clientHeight > 0) {
+                that.table.addClass("k-scrollbar-h");
             }
         },
 
