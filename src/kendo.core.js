@@ -1447,7 +1447,7 @@ function pad(number, digits, end) {
             currency = number.currency,
             symbol = currency.symbol,
             percentSymbol = percent.symbol,
-            negative = value.indexOf("-") > -1,
+            negative = value.indexOf("-"),
             parts, isPercent;
 
         //handle exponential number
@@ -1457,6 +1457,12 @@ function pad(number, digits, end) {
                 value = null;
             }
             return value;
+        }
+
+        if (negative > 0) {
+            return null;
+        } else {
+            negative = negative > -1;
         }
 
         if (value.indexOf(symbol) > -1 || (format && format.toLowerCase().indexOf("c") > -1)) {
