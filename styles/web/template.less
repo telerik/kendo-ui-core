@@ -753,12 +753,14 @@ div.k-imagebrowser-dropzone em
 
 /* Scheduler */
 
-.k-scheduler
+.k-scheduler,
+.k-scheduler-datecolumn
 {
     background-color: @scheduler-background-color;
 }
 
 .k-scheduler-times tr,
+.k-scheduler-times th,
 .k-scheduler-table td,
 .k-scheduler-header th
 {
@@ -1045,6 +1047,12 @@ div.k-imagebrowser-dropzone em
 .k-draghandle
 {
     .border-radius(@draghandle-border-radius);
+}
+
+.k-event,
+.k-event .k-link
+{
+	.border-radius(@inner-border-radius);
 }
 
 // Retina sprite

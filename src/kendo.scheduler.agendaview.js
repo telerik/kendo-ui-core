@@ -28,7 +28,7 @@ kendo_module({
             this.startDate = date;
             this.endDate = date;
             this.prepareLayout(this._layout());
-            this.table.addClass("k-scheduler-agendaview");
+            this.table.addClass("k-scheduler-agenda");
         },
 
         _layout: function() {
