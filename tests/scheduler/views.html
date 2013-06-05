@@ -520,6 +520,40 @@
 
             });
 
+            test("events set as all day are not render for next day slot", function() {
+                var selectedDate = new Date(2013, 1, 27, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26), end: new Date(2013, 1, 26), isAllDay: true, title: "all day event" }];
+
+                view.renderEvents(events);
+
+                equal(view.datesHeader.find("div.k-event").length, 0);
+            });
+
+            test("events set as all day are not render for prev day slot", function() {
+                var selectedDate = new Date(2013, 1, 25, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.render(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26), end: new Date(2013, 1, 26), isAllDay: true, title: "all day event" }];
+
+                view.renderEvents(events);
+
+                equal(view.datesHeader.find("div.k-event").length, 0);
+            });
+
             test("multiple day event position is set to the date slot", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
