@@ -194,6 +194,12 @@
 
                 kendo.culture("en-US");
             });
+
+            test("parse method returns null if negative sign is not in the begining", function() {
+                var value = "23-12";
+
+                equal(parseF(value), null);
+            });
         </script>
     </body>
 </html>
