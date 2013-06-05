@@ -944,7 +944,8 @@ kendo_module({
                 "formatBlock",
                 "createLink",
                 "unlink",
-                "insertImage"/*,
+                "insertImage",
+                "createTable"/*,
                 "separator", // declare these explicitly
                 "style",
                 "subscript",

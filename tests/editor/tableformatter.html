@@ -17,17 +17,9 @@
 
             $("#Editor1").kendoEditor();
 
-            var TableCommand = kendo.ui.editor.TableCommand;
+            var TableFormatter = kendo.ui.editor.TableFormatter;
 
-            function execTableCommandOnRange(options) {
-                var command = new TableCommand(options);
-                command.editor = editor;
-                command.exec();
-
-                return command;
-            }
-
-            module("Editor / TableCommand", {
+            module("Editor / TableFormatter", {
                 setup: function() {
                     editor = getEditor();
                 },
@@ -36,26 +28,36 @@
                 }
             });
 
-            var range, command;
+            var range, formatter;
 
-            test("exec createTable creates table", function() {
+            test("apply on text node wraps it in table cell", function() {
                 range = createRangeFromText(editor, '|foo|');
 
-                command = new TableCommand({ range:range });
+                formatter = new TableFormatter();
 
-                command.exec();
+                formatter.toggle(range);
 
                 equal(editor.value(), "<table><tbody><tr><td>foo</td></tr></tbody></table>");
             });
 
-            test("exec createTable creates table with given row/columns", function() {
+            test("apply honors column count", function() {
                 range = createRangeFromText(editor, '|foo|');
 
-                command = new TableCommand({ range: range, rows: 1, columns: 2 });
+                formatter = new TableFormatter({ columns: 2 });
 
-                command.exec();
+                formatter.toggle(range);
 
                 equal(editor.value(), "<table><tbody><tr><td>foo</td><td></td></tr></tbody></table>");
+            });
+
+            test("apply honors row count", function() {
+                range = createRangeFromText(editor, '|foo|');
+
+                formatter = new TableFormatter({ rows: 2 });
+
+                formatter.toggle(range);
+
+                equal(editor.value(), "<table><tbody><tr><td>foo</td></tr><tr><td></td></tr></tbody></table>");
             });
 
         </script>
