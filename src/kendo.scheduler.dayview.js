@@ -31,7 +31,7 @@ kendo_module({
                     '<dl><dd>${title}</dd></dl>' +
                 '</div>'),
         DATA_HEADER_TEMPLATE = kendo.template("#=kendo.toString(date, 'ddd M/dd')#"),
-        EVENT_WRAPPER_STRING = '<div class="k-appointment" data-#=ns#uid="#=uid#">{0}' +
+        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#">{0}' +
                 '#if (showDelete) {#' +
                     '<a href="\\#" class="k-link" style="display:none"><span class="k-icon k-i-close"></span></a>' +
                 '#}#' +
@@ -196,12 +196,12 @@ kendo_module({
             var that = this;
             if (that.options.editable) {
 
-                that.element.on("mouseover" + NS, ".k-appointment", function() {
+                that.element.on("mouseover" + NS, ".k-event", function() {
                     $(this).find("a:has(.k-i-close)").show();
-                }).on("mouseleave" + NS, ".k-appointment", function() {
+                }).on("mouseleave" + NS, ".k-event", function() {
                     $(this).find("a:has(.k-i-close)").hide();
-                }).on("click" + NS, ".k-appointment a:has(.k-i-close)", function(e) {
-                    that.trigger("remove", { container: $(this).closest(".k-appointment") });
+                }).on("click" + NS, ".k-event a:has(.k-i-close)", function(e) {
+                    that.trigger("remove", { container: $(this).closest(".k-event") });
                     e.preventDefault();
                 });
 
@@ -218,8 +218,8 @@ kendo_module({
                 }
 
                 if (that.options.editable.update !== false) {
-                    that.element.on("dblclick", ".k-appointment", function(e) {
-                        that.trigger("edit", { container: $(this).closest(".k-appointment") });
+                    that.element.on("dblclick", ".k-event", function(e) {
+                        that.trigger("edit", { container: $(this).closest(".k-event") });
                         e.preventDefault();
                     });
                 }
@@ -487,7 +487,7 @@ kendo_module({
 
             var dateSlot = slots.eq(startIndex),
                 slotWidth = this._calculateAllDayEventWidth(startIndex, endIndex),
-                allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-appointment"), startIndex, endIndex).add(element),
+                allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-event"), startIndex, endIndex).add(element),
                 top = dateSlot.position().top,
                 currentColumnCount = this._headerColumnCount || 0,
                 eventHeight = this._allDayHeaderHeight;
@@ -523,7 +523,7 @@ kendo_module({
                 eventRightOffset = 30,
                 columnEvents,
                 blockRange = rangeIndex(element),
-                eventElements = this.content.children(".k-appointment[" + kendo.attr("slot-idx") + "=" + dateSlotIndex + "]"),
+                eventElements = this.content.children(".k-event[" + kendo.attr("slot-idx") + "=" + dateSlotIndex + "]"),
                 slotEvents = this._getCollisionEvents(eventElements, blockRange.start, blockRange.end).add(element);
 
             columns = createColumns(slotEvents);
@@ -660,7 +660,7 @@ kendo_module({
                 length;
 
             this._headerColumnCount = 0;
-            this.element.find(".k-appointment").remove();
+            this.element.find(".k-event").remove();
 
             this._updateAllDayHeaderHeight(this._allDayHeaderHeight);
 

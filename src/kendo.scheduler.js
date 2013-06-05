@@ -225,7 +225,7 @@ kendo_module({
                 event = this.dataSource.add(event);
 
                 if (event) {
-                    var element = this.wrapper.find(".k-appointment[" + kendo.attr("uid") + "=" + event.uid + "]");
+                    var element = this.wrapper.find(".k-event[" + kendo.attr("uid") + "=" + event.uid + "]");
 
                     this.editEvent(element);
                 }

@@ -285,8 +285,8 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").length, 1);
-                equal(view.content.find(".k-appointment dd").text(), "my event");
+                equal(view.content.find("div.k-event").length, 1);
+                equal(view.content.find(".k-event dd").text(), "my event");
             });
 
             test("uid is render", function() {
@@ -303,7 +303,7 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find(".k-appointment").attr("data-uid"), "foo");
+                equal(view.content.find(".k-event").attr("data-uid"), "foo");
             });
 
             test("multiple events are displayed", function() {
@@ -323,9 +323,9 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").length, 2);
-                equal(view.content.find(".k-appointment:first dd").text(), "event1");
-                equal(view.content.find(".k-appointment:last dd").text(), "event2");
+                equal(view.content.find("div.k-event").length, 2);
+                equal(view.content.find(".k-event:first dd").text(), "event1");
+                equal(view.content.find(".k-event:last dd").text(), "event2");
             });
 
             test("old events are removed on multiple databind calls", function() {
@@ -343,8 +343,8 @@
                 view.renderEvents(events);
                 view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").length, 1);
-                equal(view.content.find(".k-appointment dd").text(), "my event");
+                equal(view.content.find("div.k-event").length, 1);
+                equal(view.content.find(".k-event dd").text(), "my event");
             });
 
             test("format event date", function() {
@@ -361,7 +361,7 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment dt").text(), "10:00 AM - 11:00 AM");
+                equal(view.content.find("div.k-event dt").text(), "10:00 AM - 11:00 AM");
             });
 
             test("custom event template", function() {
@@ -379,7 +379,7 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").text(), "my event");
+                equal(view.content.find("div.k-event").text(), "my event");
             });
 
             test("get time slot index for date", function() {
@@ -409,7 +409,7 @@
 
                 view.renderEvents(events);
 
-                eventPosition = view.content.find("div.k-appointment").offset();
+                eventPosition = view.content.find("div.k-event").offset();
                 timeSlotPosition = view.content.find("tr").eq(10).offset();
 
                 equalWithRound(timeSlotPosition.top, eventPosition.top);
@@ -429,7 +429,7 @@
 
                 view.renderEvents(events);
 
-                equalWithRound(view.content.find("div.k-appointment").height(), slotHeight(view.content.find(">table"), 2));
+                equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 2));
 
             });
 
@@ -446,7 +446,7 @@
 
                 view.renderEvents(events);
 
-                equalWithRound(view.content.find("div.k-appointment").height(), slotHeight(view.content.find(">table"), 3));
+                equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 3));
             });
 
 
@@ -463,7 +463,7 @@
 
                 view.renderEvents(events);
 
-                equalWithRound(view.content.find("div.k-appointment").height(), slotHeight(view.content.find(">table"), 1));
+                equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 1));
             });
 
             test("the width of single event is the time slot without the offset", function() {
@@ -479,7 +479,7 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find("div.k-appointment").width(), view.content.find("td:eq(10)").width() - rightOffset);
+                equal(view.content.find("div.k-event").width(), view.content.find("td:eq(10)").width() - rightOffset);
             });
 
             test("multiple day events are added to all day slot", function() {
@@ -496,8 +496,8 @@
 
                 view.renderEvents(events);
 
-                equal(view.datesHeader.find("div.k-appointment").length, 1);
-                equal(view.datesHeader.find(".k-appointment dd").text(), "my event");
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find(".k-event dd").text(), "my event");
 
             });
 
@@ -515,8 +515,8 @@
 
                 view.renderEvents(events);
 
-                equal(view.datesHeader.find("div.k-appointment").length, 1);
-                equal(view.datesHeader.find(".k-appointment dd").text(), "all day event");
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find(".k-event dd").text(), "all day event");
 
             });
 
@@ -534,7 +534,7 @@
 
                 view.renderEvents(events);
 
-                var eventOffset = view.datesHeader.find("div.k-appointment").offset();
+                var eventOffset = view.datesHeader.find("div.k-event").offset();
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
 
                 equalWithRound(eventOffset.top, slotOffset.top);
@@ -555,7 +555,7 @@
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
-                var eventOffset = view.datesHeader.find("div.k-appointment").offset();
+                var eventOffset = view.datesHeader.find("div.k-event").offset();
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var slotWidth = 0;
 
@@ -566,7 +566,7 @@
                 equalWithRound(eventOffset.top, slotOffset.top);
 
                 equalWithRound(eventOffset.left, slotOffset.left);
-                equalWithRound(view.datesHeader.find("div.k-appointment").width(), slotWidth);
+                equalWithRound(view.datesHeader.find("div.k-event").width(), slotWidth);
             });
 
             test("position multiday event which starts before the selected range", function() {
@@ -585,8 +585,8 @@
 
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
-                equal(view.datesHeader.find("div.k-appointment").length, 1);
-                equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find("div.k-event").width(), slotWidth);
             });
 
             test("position multiday event which ends after the selected range", function() {
@@ -605,8 +605,8 @@
 
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
-                equal(view.datesHeader.find("div.k-appointment").length, 1);
-                equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find("div.k-event").width(), slotWidth);
             });
 
             test("position multiday event which starts before and ends after the selected range", function() {
@@ -625,8 +625,8 @@
 
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
-                equal(view.datesHeader.find("div.k-appointment").length, 1);
-                equal(view.datesHeader.find("div.k-appointment").width(), slotWidth);
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find("div.k-event").width(), slotWidth);
             });
 
             test("position day event which starts before the slot start time", function() {
@@ -645,7 +645,7 @@
 
                 view.renderEvents(events);
 
-                var eventElement = view.content.find("div.k-appointment");
+                var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
                 equal(eventElement.offset().top, view.content.find("tr:first").offset().top);
                 equal(eventElement.offset().left, view.content.find("tr:first").offset().left);
@@ -666,7 +666,7 @@
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
-                var eventElement = view.content.find("div.k-appointment");
+                var eventElement = view.content.find("div.k-event");
 
                 equal(eventElement.length, 1);
                 equalWithRound(eventElement.offset().top, view.content.find("tr").eq(9).offset().top);
@@ -689,7 +689,7 @@
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 26, 8, 0, 0), title: "my event" }];
 
                 view.renderEvents(events);
-                ok(!view.content.find("div.k-appointment").length);
+                ok(!view.content.find("div.k-event").length);
             });
 
             test("position day event which start before and ends after the slot end time", function() {
@@ -709,7 +709,7 @@
 
                 view.renderEvents(events);
 
-                var eventElement = view.content.find("div.k-appointment");
+                var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
 
                 equalWithRound(eventElement.offset().top, view.content.find("tr").eq(0).offset().top);
@@ -731,7 +731,7 @@
 
                 view.renderEvents(events);
 
-                var eventElement = view.content.find("div.k-appointment");
+                var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
                 equalWithRound(eventElement.offset().top, view.content.find("tr").eq(9).offset().top);
                 equalWithRound(eventElement.height(), slotHeight(view.content.find("table"), 1));
@@ -754,7 +754,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.content.find("div.k-appointment");
+                var eventElements = view.content.find("div.k-event");
                 var slot = view.content.find("tr").eq(8).find("td:first");
 
                 equal(eventElements.length, 2);
@@ -788,7 +788,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.content.find("div.k-appointment");
+                var eventElements = view.content.find("div.k-event");
                 var firstSlot = view.content.find("tr").eq(8).find("td:first");
                 var secondSlot = view.content.find("tr").eq(8).find("td:last");
 
@@ -820,7 +820,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.content.find("div.k-appointment");
+                var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
                 var secondTimeSlot = view.content.find("tr").eq(13).find("td:first");
 
@@ -851,7 +851,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.content.find("div.k-appointment");
+                var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
                 var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
 
@@ -879,7 +879,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.content.find("div.k-appointment");
+                var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
                 var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
 
@@ -907,7 +907,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.content.find("div.k-appointment");
+                var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
                 var secondTimeSlot = view.content.find("tr").eq(9).find("td:first");
 
@@ -938,7 +938,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.content.find("div.k-appointment");
+                var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
                 var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
                 var thirdTimeSlot = view.content.find("tr").eq(16).find("td:first");
@@ -970,7 +970,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.content.find("div.k-appointment");
+                var eventElements = view.content.find("div.k-event");
                 equal(eventElements.eq(0).find("dd").text(), "second event");
                 equal(eventElements.eq(1).find("dd").text(), "first event");
                 equal(eventElements.eq(2).find("dd").text(), "same as first");
@@ -992,7 +992,7 @@
 
                 view.renderEvents(events);
 
-                var eventElement = view.content.find("div.k-appointment");
+                var eventElement = view.content.find("div.k-event");
 
                 equal(eventElement.attr("data-slot-idx"), 0);
             });
@@ -1012,7 +1012,7 @@
 
                 view.renderEvents(events);
 
-                var eventElement = view.content.find("div.k-appointment");
+                var eventElement = view.content.find("div.k-event");
 
                 equal(eventElement.attr("data-start-end-idx"), "8-12");
             });
@@ -1035,7 +1035,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.datesHeader.find("div.k-appointment");
+                var eventElements = view.datesHeader.find("div.k-event");
 
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var slotWidth = 0;
@@ -1073,7 +1073,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.datesHeader.find("div.k-appointment");
+                var eventElements = view.datesHeader.find("div.k-event");
 
                 var firstEventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var secondEventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(2).offset();
@@ -1106,7 +1106,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.datesHeader.find("div.k-appointment");
+                var eventElements = view.datesHeader.find("div.k-event");
 
                 var eventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var eventSlotHeigth = view.element.find(".k-scheduler-header-all-day td").eq(0).height();
@@ -1135,7 +1135,7 @@
 
                 view.renderEvents(events);
 
-                var eventElements = view.datesHeader.find("div.k-appointment");
+                var eventElements = view.datesHeader.find("div.k-event");
 
                 var eventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var eventHeight = view._allDayHeaderHeight;
@@ -1162,8 +1162,8 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find(".k-appointment a>.k-i-close").length, 1);
-                equal(view.datesHeader.find(".k-appointment a>.k-i-close").length, 1);
+                equal(view.content.find(".k-event a>.k-i-close").length, 1);
+                equal(view.datesHeader.find(".k-event a>.k-i-close").length, 1);
             });
 
             test("close button is not rendered if editable.destroy is false", function() {
@@ -1184,8 +1184,8 @@
 
                 view.renderEvents(events);
 
-                ok(!view.content.find(".k-appointment a>.k-i-close").length);
-                ok(!view.datesHeader.find(".k-appointment a>.k-i-close").length);
+                ok(!view.content.find(".k-event a>.k-i-close").length);
+                ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
             });
 
             test("close button is not visible by default if set as editable", function() {
@@ -1206,8 +1206,8 @@
 
                 view.renderEvents(events);
 
-                equal(view.content.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
-                equal(view.datesHeader.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
+                equal(view.content.find(".k-event a:has(.k-i-close)").css("display"), "none");
+                equal(view.datesHeader.find(".k-event a:has(.k-i-close)").css("display"), "none");
             });
 
             test("close button is shown on all day event hover if set as editable", function() {
@@ -1227,9 +1227,9 @@
 
                 view.renderEvents(events);
 
-                view.datesHeader.find(".k-appointment").trigger("mouseover");
+                view.datesHeader.find(".k-event").trigger("mouseover");
 
-                notEqual(view.datesHeader.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
+                notEqual(view.datesHeader.find(".k-event a:has(.k-i-close)").css("display"), "none");
             });
 
             test("close button is shown on event hover if set as editable", function() {
@@ -1249,9 +1249,9 @@
 
                 view.renderEvents(events);
 
-                view.content.find(".k-appointment").trigger("mouseover");
+                view.content.find(".k-event").trigger("mouseover");
 
-                notEqual(view.content.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
+                notEqual(view.content.find(".k-event a:has(.k-i-close)").css("display"), "none");
             });
 
             test("close button is hidden on event mouseleave if set as editable", function() {
@@ -1271,9 +1271,9 @@
 
                 view.renderEvents(events);
 
-                view.content.find(".k-appointment").trigger("mouseleave");
+                view.content.find(".k-event").trigger("mouseleave");
 
-                equal(view.content.find(".k-appointment a:has(.k-i-close)").css("display"), "none");
+                equal(view.content.find(".k-event a:has(.k-i-close)").css("display"), "none");
             });
 
             test("close button is not rendered if set to not editable", function() {
@@ -1294,8 +1294,8 @@
 
                 view.renderEvents(events);
 
-                ok(!view.content.find(".k-appointment a>.k-i-close").length);
-                ok(!view.datesHeader.find(".k-appointment a>.k-i-close").length);
+                ok(!view.content.find(".k-event a>.k-i-close").length);
+                ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
             });
 
             test("clicking on close button triggers destroy event", 1, function() {
@@ -1318,7 +1318,7 @@
 
                 view.renderEvents(events);
 
-                view.content.find(".k-appointment a:has(.k-i-close)").click();
+                view.content.find(".k-event a:has(.k-i-close)").click();
             });
 
             test("double clicking a cell triggers add event", 2, function() {
@@ -1382,7 +1382,7 @@
 
                 view.renderEvents(events);
 
-                view.datesHeader.find(".k-appointment").trigger("dblclick");
+                view.datesHeader.find(".k-event").trigger("dblclick");
             });
 
             test("double clicking an event triggers edit event", 1, function() {
@@ -1405,7 +1405,7 @@
 
                 view.renderEvents(events);
 
-                view.content.find(".k-appointment").trigger("dblclick");
+                view.content.find(".k-event").trigger("dblclick");
             });
 
             test("double clicking an event does not trigger edit event if not editable", 0, function() {
@@ -1428,7 +1428,7 @@
 
                 view.renderEvents(events);
 
-                view.content.find(".k-appointment").trigger("dblclick");
+                view.content.find(".k-event").trigger("dblclick");
             });
 
             test("double clicking an event does not trigger edit event if update is false", 0, function() {
@@ -1451,7 +1451,7 @@
 
                 view.renderEvents(events);
 
-                view.content.find(".k-appointment").trigger("dblclick");
+                view.content.find(".k-event").trigger("dblclick");
             });
 
             test("_rangeToDates returns date for slot", function() {
