@@ -1274,6 +1274,7 @@
 
                 // error out, show refresh icon
                 equal(treeview.find(".k-i-refresh").length, 1);
+                ok(!treeviewObject.dataItem(".k-item").expanded);
 
                 treeview.find(".k-i-refresh").click();
 

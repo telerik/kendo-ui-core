@@ -1321,6 +1321,7 @@ kendo_module({
 
             if (node) {
                 this._progress(node, false);
+                this._expanded(node, false);
                 nodeIcon(node).addClass("k-i-refresh");
                 e.node.loaded(false);
             } else {
@@ -1450,7 +1451,7 @@ kendo_module({
                             }
                         }
                     }));
-                } else if (!loaded || (loaded && expand)) {
+                } else if (expand) {
                     if (options.loadOnDemand) {
                         that._progress(node, true);
                     }
@@ -1503,6 +1504,8 @@ kendo_module({
 
             if (dataItem) {
                 dataItem.set("expanded", value);
+                // necessary when expanding an item yields an error and the item is not expanded as a result
+                value = dataItem.expanded;
             }
 
             if (value) {
