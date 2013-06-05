@@ -19,9 +19,10 @@ kendo_module({
 
 (function($, undefined) {
     var kendo = window.kendo,
-        ui = kendo.ui,
         date = kendo.date,
+        getDate = date.getDate,
         recurrence = kendo.recurrence,
+        ui = kendo.ui,
         Widget = ui.Widget,
         STRING = "string",
         Popup = ui.Popup,
@@ -38,9 +39,9 @@ kendo_module({
         SAVE = "save",
         ADD = "add",
         EDIT = "edit",
+        TODAY = getDate(new Date()),
         DELETECONFIRM = "Are you sure you want to delete this event?",
         COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
-        TODAY = date.getDate(new Date());
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
                '<li class="k-state-default k-nav-today"><a href="\\#" class="k-link">${messages.today}</a></li>' +

@@ -3184,11 +3184,116 @@ function pad(number, digits, end) {
         };
     })();
 
-    kendo.date = {
-        getDate: function(date) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+    kendo.date = (function(){
+        var MS_PER_MINUTE = 60000,
+            MS_PER_DAY = 86400000,
+            TODAY = new Date();
+
+        function adjustDate(date, hours) {
+            if (!hours && date.getHours() === 23) {
+                date.setHours(date.getHours() + 2);
+            }
         }
-    };
+
+        function dayOfWeek(date, day, offset) {
+            offset = offset || 1;
+            day = ((day - date.getDay()) + (7 * offset)) % 7;
+
+            date.setDate(date.getDate() + day);
+        }
+
+        function getDate(date) {
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
+            adjustDate(date, 0);
+            return date;
+        }
+
+        function getMilliseconds(date) {
+            return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
+        }
+
+        function isInTimeRange(value, min, max) {
+            var msMin = getMilliseconds(min),
+                msMax = getMilliseconds(max),
+                msValue;
+
+            if (!value || msMin == msMax) {
+                return true;
+            }
+
+            if (min >= max) {
+                max += MS_PER_DAY;
+            }
+
+            msValue = getMilliseconds(value);
+
+            if (msMin > msValue) {
+                msValue += MS_PER_DAY;
+            }
+
+            if (msMax < msMin) {
+                msMax += MS_PER_DAY;
+            }
+
+            return msValue >= msMin && msValue <= msMax;
+        }
+
+        function isInDateRange(value, min, max) {
+            var msMin = min.getTime(),
+                msMax = max.getTime(),
+                msValue;
+
+            if (msMin >= msMax) {
+                msMax += MS_PER_DAY;
+            }
+
+            msValue = value.getTime();
+
+            return msValue >= msMin && msValue <= msMax;
+        }
+
+        function nextPrevDay(date, offset) {
+            var hours = date.getHours();
+                date = new Date(date);
+
+            setTime(date, offset * MS_PER_DAY);
+            adjustDate(date, hours);
+            return date;
+        }
+
+        function setTime(date, time, ignoreDST) {
+            var offset = date.getTimezoneOffset(),
+                offsetDiff;
+
+            date.setTime(date.getTime() + time);
+
+            if (!ignoreDST) {
+                offsetDiff = date.getTimezoneOffset() - offset;
+                date.setTime(date.getTime() + offsetDiff * MS_PER_MINUTE);
+            }
+        }
+
+        function today() {
+            return getDate(TODAY);
+        }
+
+        return {
+            adjustDate: adjustDate,
+            dayOfWeek: dayOfWeek,
+            getDate: getDate,
+            isInDateRange: isInDateRange,
+            isInTimeRange: isInTimeRange,
+            nextDay: function(date) {
+                return nextPrevDay(date, 1);
+            },
+            previousDay: function(date) {
+                return nextPrevDay(date, -1);
+            },
+            setTime: setTime,
+            today: today
+            //TODO methods: combine date portion and time portion from arguments - date1, date 2
+        };
+    })();
 })(jQuery, eval);
 
 /*global kendo_module:true */
