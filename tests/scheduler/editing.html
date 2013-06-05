@@ -124,14 +124,14 @@
             test("editEvent creates window instance", function() {
                 var scheduler = setup();
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 ok(scheduler._editContainer.data("kendoWindow"));
             });
 
             test("default settings are applied to the window", function() {
                 var scheduler = setup();
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var wnd = scheduler._editContainer.data("kendoWindow");
 
@@ -144,7 +144,7 @@
             test("custom settings are applied to the window", function() {
                 var scheduler = setup({ editable: { window: { title: "foo" } } });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var wnd = scheduler._editContainer.data("kendoWindow");
 
@@ -154,7 +154,7 @@
             test("correct model is passed to the editable instance", function() {
                 var scheduler = setup({ editable: { window: { title: "foo" } } });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer;
                 equal(container.data("kendoEditable").options.model, scheduler.dataSource.at(0));
@@ -163,7 +163,7 @@
             test("custom template is used if specified", function() {
                 var scheduler = setup({ editable: { template:"<div>#=title#</div>" } });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 equal(container.find("div:first").text(), "my event");
@@ -172,7 +172,7 @@
             test("custom template as function", function() {
                 var scheduler = setup({ editable: { template: kendo.template("foo") } });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 equal(container.text(), "fooUpdateCancel");
@@ -186,13 +186,13 @@
                     }
                 });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
             });
 
             test("update and cancel buttons are added if template is set", function() {
                 var scheduler = setup({ editable: { template:"<div>#=title#</div>" } });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
 
@@ -205,7 +205,7 @@
                     editable: { template:"<div>#=title#</div>", editCommand: { attr: { bar: "baz" } } }
                 });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 equal(container.find("a.k-scheduler-update").attr("bar"), "baz");
@@ -217,7 +217,7 @@
                     editable: { template:"<div>#=title#</div>", editCommand: { text: { update: "myUpdate", cancel: "myCancel", edit: "MyEdit" } } },
                 });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 equal(container.find("a.k-scheduler-update").text(), "myUpdate");
@@ -228,7 +228,7 @@
                 var scheduler = setup(),
                     saveEvent = stub(scheduler, "saveEvent");
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 scheduler._editContainer.find("a.k-scheduler-update").click();
 
@@ -239,7 +239,7 @@
                 var scheduler = setup(),
                     cancelEvent = stub(scheduler, "cancelEvent");
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 scheduler._editContainer.find("a.k-scheduler-cancel").click();
 
@@ -248,7 +248,7 @@
 
             test("clicking close button of the window calls cancelEvent", function() {
                 var scheduler = setup(),
-                    eventElement = scheduler.view().datesHeader.find(".k-event:first"),
+                    eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
                     cancelEvent = stub(scheduler, "cancelEvent");
 
                 scheduler.editEvent(eventElement);
@@ -261,7 +261,7 @@
 
             test("editEvent call cancelEvent", function() {
                 var scheduler = setup(),
-                    eventElement = scheduler.view().datesHeader.find(".k-event:first"),
+                    eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
                     cancelEvent = stub(scheduler, "cancelEvent");
 
                 scheduler.editEvent(eventElement);
@@ -271,7 +271,7 @@
 
             test("cancelEvent closes the popup", 2, function() {
                 var scheduler = setup(),
-                    eventElement = scheduler.view().datesHeader.find(".k-event:first");
+                    eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
 
                 scheduler.editEvent(eventElement);
 
@@ -292,7 +292,7 @@
                             ok(e.container.length);
                         }
                     }),
-                    eventElement = scheduler.view().datesHeader.find(".k-event:first");
+                    eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
 
                 scheduler.editEvent(eventElement);
 
@@ -305,7 +305,7 @@
                         e.preventDefault();
                     }
                 }),
-                eventElement = scheduler.view().datesHeader.find(".k-event:first");
+                eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
 
                 scheduler.editEvent(eventElement);
 
@@ -321,7 +321,7 @@
                         ok(e.container.length);
                     }
                 }),
-                eventElement = scheduler.view().datesHeader.find(".k-event:first");
+                eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
 
                 scheduler.editEvent(eventElement);
 
@@ -334,7 +334,7 @@
                         e.preventDefault();
                     }
                 }),
-                eventElement = scheduler.view().datesHeader.find(".k-event:first");
+                eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
 
                 scheduler.editEvent(eventElement);
                 scheduler._editContainer.parent().find(".k-i-close").click();
@@ -344,7 +344,7 @@
 
             test("saveEvent calls validate", function() {
                  var scheduler = setup(),
-                    eventElement = scheduler.view().datesHeader.find(".k-event:first");
+                    eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
 
                 scheduler.editEvent(eventElement);
 
@@ -369,7 +369,7 @@
                                     }
                                 }
                     }}}),
-                    eventElement = scheduler.view().datesHeader.find(".k-event:first");
+                    eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
 
                 scheduler.editEvent(eventElement);
 
@@ -380,7 +380,7 @@
 
             test("saveEvent calls DataSource sync", function() {
                 var scheduler = setup(),
-                    eventElement = scheduler.view().datesHeader.find(".k-event:first");
+                    eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
 
                 scheduler.editEvent(eventElement);
 
@@ -397,7 +397,7 @@
                         e.preventDefault();
                     }
                 }),
-                eventElement = scheduler.view().datesHeader.find(".k-event:first");
+                eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
 
                 scheduler.editEvent(eventElement);
 
@@ -417,7 +417,7 @@
             test("all fields are wrapped", function() {
                 var scheduler = setup();
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 var elements = container.children("div");
@@ -437,7 +437,7 @@
                     }
                 });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 var elements = container.children("div");
@@ -456,7 +456,7 @@
                     }
                 });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 var elements = container.children("div");
@@ -471,7 +471,7 @@
                     }
                 });
 
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first"));
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 var elements = container.children("div");

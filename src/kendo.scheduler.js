@@ -225,9 +225,7 @@ kendo_module({
                 event = this.dataSource.add(event);
 
                 if (event) {
-                    var element = this.wrapper.find(".k-event[" + kendo.attr("uid") + "=" + event.uid + "]");
-
-                    this.editEvent(element);
+                    this.editEvent(event.uid);
                 }
             }
        },
@@ -261,9 +259,9 @@ kendo_module({
             }
         },
 
-        editEvent: function(element) {
+        editEvent: function(uid) {
             var that = this,
-                model = that._modelForContainer(element),
+                model = that.dataSource.getByUid(uid),
                 container;
 
             that.cancelEvent();
@@ -497,7 +495,7 @@ kendo_module({
                 }
 
                 that._viewEditHandler = function(e) {
-                    that.editEvent(e.container);
+                    that.editEvent(e.uid);
                 };
 
                 view.bind(EDIT, this._viewEditHandler);

@@ -219,7 +219,7 @@ kendo_module({
 
                 if (that.options.editable.update !== false) {
                     that.element.on("dblclick", ".k-event", function(e) {
-                        that.trigger("edit", { container: $(this).closest(".k-event") });
+                        that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
                         e.preventDefault();
                     });
                 }

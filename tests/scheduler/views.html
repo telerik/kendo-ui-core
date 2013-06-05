@@ -1366,7 +1366,7 @@
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
                         edit: function(e) {
-                            ok(e.container);
+                            ok(e.uid);
                         },
                         editable: true,
                         dates: [
@@ -1389,7 +1389,7 @@
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
                         edit: function(e) {
-                            ok(e.container);
+                            ok(e.uid);
                         },
                         editable: true,
                         dates: [
