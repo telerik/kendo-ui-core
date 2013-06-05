@@ -6,3 +6,7 @@
     - :name: text
       :type: String
       :description: Specifies the text of the button
+
+    - :name: href
+      :type: String
+      :description: 'Specifies the url for remote view or id of the view to be loaded (prefixed with #, like an anchor)'

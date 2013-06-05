@@ -41,6 +41,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Specifies the url for remote view or id of the view to be loaded (prefixed with #, like an anchor)
+        /// </summary>
+        /// <param name="value">The value that configures the href.</param>
+        public MobileBackButtonBuilder Href(string value)
+        {
+            container.Href = value;
+
+            return this;
+        }
+        
         //<< Fields
 
         /// <summary>

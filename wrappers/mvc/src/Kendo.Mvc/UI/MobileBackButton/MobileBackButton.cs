@@ -27,6 +27,8 @@ namespace Kendo.Mvc.UI
         
         public string Text { get; set; }
         
+        public string Href { get; set; }
+        
         //<< Fields
 
         public MobileButtonAlign Align { get; set; }

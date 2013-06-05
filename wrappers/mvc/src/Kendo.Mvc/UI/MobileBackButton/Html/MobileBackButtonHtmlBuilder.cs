@@ -41,6 +41,11 @@ namespace Kendo.Mvc.UI
                 html.Attribute("data-align", component.Align.ToString().ToLower());
             }
 
+            if (component.Href.HasValue())
+            {
+                html.Attribute("href", component.Href);
+            }
+
             html.Attributes(component.HtmlAttributes);
 
             return html;
