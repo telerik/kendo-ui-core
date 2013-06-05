@@ -448,16 +448,18 @@ kendo_module({
             }
         },
 
-        removeEvent: function(element) {
-            var model = this._modelForContainer(element);
+        removeEvent: function(uid) {
+            var model = this.dataSource.getByUid(uid);
 
-            if (!this._confirmation()) {
-                return;
-            }
+            if (model) {
+                if (!this._confirmation()) {
+                    return;
+                }
 
-            if (model && !this.trigger(REMOVE, { element: element, event: model })) {
-                if (this.dataSource.remove(model)) {
-                    this.dataSource.sync();
+                if (!this.trigger(REMOVE, { event: model })) {
+                    if (this.dataSource.remove(model)) {
+                        this.dataSource.sync();
+                    }
                 }
             }
         },
@@ -475,7 +477,7 @@ kendo_module({
                 }
 
                 that._viewRemoveHandler = function(e) {
-                    that.removeEvent(e.container);
+                    that.removeEvent(e.uid);
                 };
 
                 view.bind(REMOVE, that._viewRemoveHandler);

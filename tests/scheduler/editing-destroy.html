@@ -107,18 +107,9 @@
                 var scheduler = setup(),
                     method = stub(scheduler, "_confirmation");
 
-                scheduler.removeEvent(scheduler.wrapper.find(".k-event"));
+                scheduler.removeEvent(scheduler.wrapper.find(".k-event").data("uid"));
 
                 ok(method.calls("_confirmation"));
-            });
-
-            test("removeRow if html element calls the datasource remove", function() {
-                var scheduler = setup(),
-                    remove = stub(scheduler.dataSource, "remove");
-
-                scheduler.removeEvent(scheduler.wrapper.find(".k-event")[0]);
-
-                equal(remove.calls("remove"), 1);
             });
 
             test("removeRow does not call datasource remove if element does not exist", function() {
@@ -137,18 +128,17 @@
                         }
                     });
 
-                scheduler.removeEvent(scheduler.wrapper.find(".k-event"));
+                scheduler.removeEvent(scheduler.wrapper.find(".k-event").data("uid"));
             });
 
-            test("removeRow raises remove event passing the event object and the element", 2, function() {
+            test("removeRow raises remove event passing the event object and the element", 1, function() {
                 var scheduler = setup({
                         remove: function(e) {
                             ok(e.event instanceof kendo.data.ObservableObject);
-                            ok(e.element);
                         }
                     });
 
-                scheduler.removeEvent(scheduler.wrapper.find(".k-event"));
+                scheduler.removeEvent(scheduler.wrapper.find(".k-event").data("uid"));
             });
 
             test("_confirmation use the text set through the options", function() {
@@ -159,7 +149,7 @@
                     equal(text, "foo");
                 }
 
-                scheduler.removeEvent(scheduler.wrapper.find(".k-event"));
+                scheduler.removeEvent(scheduler.wrapper.find(".k-event").data("uid"));
             });
 
             test("_confirmation use the default text if not set", 1, function() {
@@ -170,7 +160,7 @@
                     equal(text, "Are you sure you want to delete this event?");
                 }
 
-                scheduler.removeEvent(scheduler.wrapper.find(".k-event"));
+                scheduler.removeEvent(scheduler.wrapper.find(".k-event").data("uid"));
             });
 
             test("switching views does not trigger multiple remove events", 1, function() {

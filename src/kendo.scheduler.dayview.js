@@ -201,7 +201,7 @@ kendo_module({
                 }).on("mouseleave" + NS, ".k-event", function() {
                     $(this).find("a:has(.k-i-close)").hide();
                 }).on("click" + NS, ".k-event a:has(.k-i-close)", function(e) {
-                    that.trigger("remove", { container: $(this).closest(".k-event") });
+                    that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
                     e.preventDefault();
                 });
 
