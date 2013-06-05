@@ -90,9 +90,20 @@ kendo_module({
         }
     });
 
+    var SchedulerEvent = kendo.data.Model.define({
+        init: function(value) {
+            var that = this;
+
+            kendo.data.Model.fn.init.call(that, value);
+       }
+    });
+
     var SchedulerDataSource = kendo.data.DataSource.extend({
         init: function(options) {
-            kendo.data.DataSource.fn.init.call(this, extend(true, {}, options));
+            kendo.data.DataSource.fn.init.call(this, extend(true, {}, { schema: {
+                modelBase: SchedulerEvent, model: {
+                    title: { defaultValue: "" }
+            } } }, options));
 
             this.reader = new SchedulerDataReader(this.options.schema, this.reader);
         }
@@ -115,7 +126,8 @@ kendo_module({
 
     extend(true, kendo.data, {
        SchedulerDataSource: SchedulerDataSource,
-       SchedulerDataReader: SchedulerDataReader
+       SchedulerDataReader: SchedulerDataReader,
+       SchedulerEvent: SchedulerEvent
     });
 
 })(window.kendo.jQuery);

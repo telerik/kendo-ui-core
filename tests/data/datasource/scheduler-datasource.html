@@ -61,6 +61,16 @@
                 });
             });
 
+            test("DataSource model is wrapped as SchedulerEvent", function() {
+                var dataSource = new kendo.data.SchedulerDataSource({
+                    data: [{ start: new Date(), end: new Date() }]
+                });
+
+                dataSource.read();
+
+                ok(dataSource.at(0) instanceof kendo.data.SchedulerEvent);
+            });
+
             var timezoneApply,
                 timezoneRemove;
 
