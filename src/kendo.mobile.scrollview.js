@@ -316,9 +316,9 @@ kendo_module({
             that._buffer();
             that._initPages();
 
-            that.view().bind("show", function () {
+            that.view().bind("show", function() {
                 if(that._widgetNeedsRefresh) {
-                    setTimeout(function () {
+                    setTimeout(function() {
                         that._resetPages();
                     }, 0);
                     that._widgetNeedsRefresh = false;
@@ -458,7 +458,7 @@ kendo_module({
             this._moveTo(0, ease, false);
         },
 
-        scrollTo: function (offset, instant) {
+        scrollTo: function (offset) {
             var that = this,
                 buffer = that.buffer,
                 pages = that.pages,
@@ -570,7 +570,6 @@ kendo_module({
         },
 
         setPageContent: function (page, index) {
-            console.log("setPageContent", index);
             var buffer = this.buffer,
                 template = this.template,
                 emptyTemplate = this.emptyTemplate,
@@ -578,7 +577,6 @@ kendo_module({
 
             if(index >= 0) {
                 view = buffer.at(index);
-                console.log(view);
                 if(view) {
                     page.content(template(view));
                 } else {
