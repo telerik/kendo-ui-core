@@ -10,11 +10,11 @@
         {
             %>
             <ul data-role="listview" data-style="inset">
-                <li><h2>Boston</h2><img src="../../content/mobile/overview/boston.jpg" /></li>
-                <li><h2>Ottawa</h2><img src="../../content/mobile/overview/ottawa.jpg" /></li>
-                <li><h2>San Francisco</h2><img src="../../content/mobile/overview/san-francisco.jpg" /></li>
-                <li><h2>Liverpool</h2><img src="../../content/mobile/overview/liverpool.jpg" /></li>
-                <li><h2>London</h2><img src="../../content/mobile/overview/london.jpg" /></li>
+                <li><h2>Boston</h2><img src="<%= Url.Content("~/content/mobile/overview/boston.jpg")%>" /></li>
+                <li><h2>Ottawa</h2><img src="<%= Url.Content("~/content/mobile/overview/ottawa.jpg")%>" /></li>
+                <li><h2>San Francisco</h2><img src="<%= Url.Content("~/content/mobile/overview/san-francisco.jpg")%>" /></li>
+                <li><h2>Liverpool</h2><img src="<%= Url.Content("~/content/mobile/overview/liverpool.jpg")%>" /></li>
+                <li><h2>London</h2><img src="<%= Url.Content("~/content/mobile/overview/london.jpg")%>" /></li>
             </ul>
             <%
         })
@@ -95,6 +95,7 @@
 
 <% Html.Kendo().MobileLayout()
     .Name("tabstrip-appearance")
+    .HeaderHtmlAttributes(new { id = "tabstrip-appearance-header" })
     .Header(() =>
     {
         Html.Kendo().MobileNavBar()                                   
@@ -131,9 +132,9 @@
 
 <style scoped>
     #custom-tabstrip,
-    #tabstrip-appearance header .km-navbar,
+    #tabstrip-appearance-header .km-navbar,
     #custom-tabstrip .km-state-active .km-icon,
-    #tabstrip-appearance header .km-navbar .km-button
+    #tabstrip-appearance-header .km-navbar .km-button
     {
         background-color: #228b22;
     }
@@ -141,22 +142,22 @@
     #custom-tabstrip,
     #custom-tabstrip .km-button
     {
-        background: url(../../content/shared/images/patterns/pattern3.png);
+        background: url(<%= Url.Content("~/content/shared/images/patterns/pattern3.png") %>);
     }
 	
-	#tabstrip-appearance header .km-navbar
+	#tabstrip-appearance-header .km-navbar
     {
-        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0))), url(../../content/shared/images/patterns/pattern4.png);
-        background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0)), url(../../content/shared/images/patterns/pattern4.png);
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0))), url(<%= Url.Content("~/content/shared/images/patterns/pattern4.png") %>);
+        background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0)), url(<%= Url.Content("~/content/shared/images/patterns/pattern4.png") %>);
 	}
 	
-    #tabstrip-appearance header .km-navbar .km-button
+    #tabstrip-appearance-header .km-navbar .km-button
     {
         background-color: rgba(131,81,42,.4);
     }
 
-	#tabstrip-appearance header .km-navbar .km-view-title,
-	#tabstrip-appearance header .km-navbar .km-text
+	#tabstrip-appearance-header .km-navbar .km-view-title,
+	#tabstrip-appearance-header .km-navbar .km-text
 	{
         color: #83512a;
         text-shadow: 0 1px 0 #fff;
@@ -192,7 +193,7 @@
     #tabstrip-favourites .km-insetcontent
     {
         color: #000;
-        background: url(../../content/shared/images/patterns/pattern4.png);
+        background: url(<%= Url.Content("~/content/shared/images/patterns/pattern4.png") %>);
     }
 
     #custom-tabstrip .km-state-active

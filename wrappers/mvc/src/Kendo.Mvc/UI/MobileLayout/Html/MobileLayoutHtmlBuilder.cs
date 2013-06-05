@@ -72,6 +72,8 @@ namespace Kendo.Mvc.UI
             
                 component.Header.Apply(dom);
 
+                dom.Attributes(component.HeaderHtmlAttributes);
+
                 html.Children.Add(dom);
             }            
         }       
@@ -84,6 +86,8 @@ namespace Kendo.Mvc.UI
                             .Attribute("data-role", "footer");
             
                 component.Footer.Apply(dom);
+
+                dom.Attributes(component.FooterHtmlAttributes);
 
                 html.Children.Add(dom);
             }

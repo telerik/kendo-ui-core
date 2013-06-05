@@ -12,7 +12,7 @@
             <ul data-role="listview" data-style="inset" data-type="group">
                 <li>Profile
                     <ul>
-                        <li><h2>Eduardo <span>Saavedra</span></h2><img src="../../content/mobile/overview/eduardo.jpg" /></li>
+                        <li><h2>Eduardo <span>Saavedra</span></h2><img src="<%= Url.Content("~/content/mobile/overview/eduardo.jpg") %>" /></li>
                         <li>Brand Manager at Marketing Team</li>
                     </ul>
                 </li>

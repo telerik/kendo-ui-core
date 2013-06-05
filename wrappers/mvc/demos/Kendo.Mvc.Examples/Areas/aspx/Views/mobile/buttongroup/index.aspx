@@ -66,7 +66,7 @@
 	    display: block;
         margin: 1em;
 	    height: 110px;
-	    background: url(../../content/mobile/shared/sales.jpg) no-repeat center center;
+	    background: url(<%=Url.Content("~/content/mobile/shared/sales.jpg")%>) no-repeat center center;
         -webkit-background-size: 100% auto;
         background-size: 100% auto;
     }

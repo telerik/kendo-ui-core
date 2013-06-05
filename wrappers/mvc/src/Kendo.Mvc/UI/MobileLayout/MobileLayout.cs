@@ -7,6 +7,7 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
+    using System.Web.Routing;
 
     public class MobileLayout : WidgetBase
     {
@@ -18,6 +19,8 @@ namespace Kendo.Mvc.UI
             this.urlGenerator = urlGenerator;
             Header = new HtmlTemplate();
             Footer = new HtmlTemplate();
+            HeaderHtmlAttributes = new RouteValueDictionary();
+            FooterHtmlAttributes = new RouteValueDictionary();
         //>> Initialization
         
         //<< Initialization
@@ -36,6 +39,26 @@ namespace Kendo.Mvc.UI
         }
 
         public HtmlTemplate Footer
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the Header HTML attributes.
+        /// </summary>
+        /// <value>The HTML attributes.</value>
+        public IDictionary<string, object> HeaderHtmlAttributes
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the Footer HTML attributes.
+        /// </summary>
+        /// <value>The HTML attributes.</value>
+        public IDictionary<string, object> FooterHtmlAttributes
         {
             get;
             private set;

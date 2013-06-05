@@ -3,6 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections.Generic;
     using System.Collections;
     using System;
+    using Kendo.Mvc.Extensions;
 
     public class MobileLayoutBuilder: WidgetBuilderBase<MobileLayout, MobileLayoutBuilder>, IHideObjectMembers
     {
@@ -157,6 +158,52 @@ namespace Kendo.Mvc.UI.Fluent
         {
 
             container.Footer.Html = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the Header HTML attributes.
+        /// </summary>
+        /// <param name="attributes">The HTML attributes.</param>
+        /// <returns></returns>
+        public virtual MobileLayoutBuilder HeaderHtmlAttributes(object attributes)
+        {
+            return HeaderHtmlAttributes(attributes.ToDictionary());
+        }
+
+        /// <summary>
+        /// Sets the Footer HTML attributes.
+        /// </summary>
+        /// <param name="attributes">The HTML attributes.</param>
+        /// <returns></returns>
+        public virtual MobileLayoutBuilder FooterHtmlAttributes(object attributes)
+        {
+            return FooterHtmlAttributes(attributes.ToDictionary());
+        }
+
+        /// <summary>
+        /// Sets the Header HTML attributes.
+        /// </summary>
+        /// <param name="attributes">The HTML attributes.</param>
+        /// <returns></returns>
+        public virtual MobileLayoutBuilder HeaderHtmlAttributes(IDictionary<string, object> attributes)
+        {
+            container.HeaderHtmlAttributes.Clear();
+            container.HeaderHtmlAttributes.Merge(attributes);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the Footer HTML attributes.
+        /// </summary>
+        /// <param name="attributes">The HTML attributes.</param>
+        /// <returns></returns>
+        public virtual MobileLayoutBuilder FooterHtmlAttributes(IDictionary<string, object> attributes)
+        {
+            container.FooterHtmlAttributes.Clear();
+            container.FooterHtmlAttributes.Merge(attributes);
 
             return this;
         }

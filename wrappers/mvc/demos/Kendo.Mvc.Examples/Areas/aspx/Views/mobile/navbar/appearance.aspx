@@ -123,16 +123,16 @@
         background-position: center center;
     }
 
-    .photo1 {background-image: url("../../content/mobile/cities/220/sydney.jpg");}
-    .photo2 {background-image: url("../../content/mobile/cities/220/bonn.jpg");}
-    .photo3 {background-image: url("../../content/mobile/cities/220/boston.jpg");}
-    .photo4 {background-image: url("../../content/mobile/cities/220/cairo.jpg");}
-    .photo5 {background-image: url("../../content/mobile/cities/220/cancun.jpg");}
-    .photo6 {background-image: url("../../content/mobile/cities/220/cape-town.jpg");}
-    .photo7 {background-image: url("../../content/mobile/cities/220/liverpool.jpg");}
-    .photo8 {background-image: url("../../content/mobile/cities/220/london.jpg");}
-    .photo9 {background-image: url("../../content/mobile/cities/220/melbourne.jpg");}
-    .photo10 {background-image: url("../../content/mobile/cities/220/san-francisco.jpg");}
+    .photo1 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/sydney.jpg")%>");}
+    .photo2 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/bonn.jpg")%>");}
+    .photo3 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/boston.jpg")%>");}
+    .photo4 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/cairo.jpg")%>");}
+    .photo5 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/cancun.jpg")%>");}
+    .photo6 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/cape-town.jpg")%>");}
+    .photo7 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/liverpool.jpg")%>");}
+    .photo8 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/london.jpg")%>");}
+    .photo9 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/melbourne.jpg")%>");}
+    .photo10 {background-image: url("<%=Url.Content("~/content/mobile/cities/220/san-francisco.jpg")%>");}
 </style>
 
 </asp:Content>

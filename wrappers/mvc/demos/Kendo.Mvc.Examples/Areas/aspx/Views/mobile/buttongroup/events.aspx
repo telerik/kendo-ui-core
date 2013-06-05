@@ -9,6 +9,7 @@
         .Content(() =>
         {
             %>
+            <div class="photo"></div>
             <%: Html.Kendo().MobileButtonGroup()
                 .Index(3)
                 .Items(items =>
@@ -42,7 +43,7 @@
         width: 277px;
         margin: 1em auto;
         height: 120px;
-        background: url("../../content/mobile/shared/player.jpg") no-repeat center center;
+        background: url(<%= Url.Content("~/content/mobile/shared/player.jpg")%>) no-repeat center center;
         -webkit-background-size: auto 100%;
         background-size: auto 100%;
     }

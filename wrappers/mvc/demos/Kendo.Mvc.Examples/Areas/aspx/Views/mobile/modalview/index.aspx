@@ -9,7 +9,7 @@
         .Content(() =>
         {
             %>            
-            <img src="../../content/mobile/modalview/lens.png" class="camera-image" /><br />            
+            <img src="<%=Url.Content("~/content/mobile/modalview/lens.png")%>" class="camera-image" /><br />            
             <%: Html.Kendo().MobileButton()
                     .Text("Login")
                     .Name("modalview-open-button")
@@ -91,7 +91,7 @@
 
     #modalview-camera .km-content,
     .km-ios #modalview-login .km-content {
-        background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
+        background: url(<%=Url.Content("~/content/shared/images/patterns/pattern1.png")%>) repeat 0 0;
     }
 
     .km-ios #modalview-camera .km-button,

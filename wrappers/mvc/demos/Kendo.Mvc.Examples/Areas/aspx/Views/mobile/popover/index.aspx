@@ -34,7 +34,7 @@
             %>
 
             <div data-role="content">
-                <img src="../../content/mobile/shared/faces.jpg" />
+                <img src="<%= Url.Content("~/content/mobile/shared/faces.jpg")%>" />
             </div>
 
             <% Html.Kendo().MobilePopOver()

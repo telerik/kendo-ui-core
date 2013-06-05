@@ -12,7 +12,7 @@
             <ul data-role="listview" data-style="inset" data-type="group">
                 <li>Profile
                     <ul>
-                        <li><h2>Carine <span>Callahan</span></h2><img src="../../content/mobile/overview/carine.jpg" /></li>
+                        <li><h2>Carine <span>Callahan</span></h2><img src="<%=Url.Content("~/content/mobile/overview/carine.jpg") %>" /></li>
                         <li>Weekly average sales <span class="sales-up">$ 8,250</span></li>
                         <li>Monthly average sales <span class="sales-up">$ 32,000</span></li>
                     </ul>
