@@ -308,7 +308,7 @@ kendo_module({
                 dimension: dimension,
                 pane: pane,
                 width: width,
-                itemCount: 0,
+                offset: 0,
                 _widgetNeedsRefresh: false
             });
 
@@ -430,7 +430,7 @@ kendo_module({
                 that.setPageContent(pages[i], i-1);
             }
 
-            that.itemCount = pages.length - 1;
+            that.offset = 0;
 
             that.trigger("changed", {
                 element: pages[1].element,
@@ -476,7 +476,7 @@ kendo_module({
                 that.setPageContent(pages[i], offset + (i-1));
             }
 
-            that.itemCount = offset + 2;
+            that.offset = offset;
 
             that.trigger("changed", {
                 element: pages[1].element,
@@ -490,10 +490,10 @@ kendo_module({
                 width = that.width,
                 velocityThreshold = that.options.velocityThreshold,
                 ease = Transition.easeOutExpo,
-                isEndReached = that.itemCount > that.buffer.total;
+                isEndReached = that.offset + 2 > that.buffer.total;
 
             if (velocity > velocityThreshold) {
-                if(that.itemCount === 2) {
+                if(that.offset === 0) {
                     that.reset(ease);
                     return;
                 }
@@ -508,7 +508,7 @@ kendo_module({
                 that.forward();
                 return;
             } else if(that.movable.x > 0 && (abs(that.movable.x) >= width / 3)) {
-                if(that.itemCount === 2) {
+                if(that.offset === 0) {
                     that.reset(ease);
                     return;
                 }
@@ -529,11 +529,12 @@ kendo_module({
 
             if(that.movable.x < 0) {
                 pages.push(that.pages.shift());//forward
-                that.setPageContent(pages[2], that.itemCount ++);
+                that.offset++;
+                that.setPageContent(pages[2], that.offset + 1);
             } else {
                 pages.unshift(that.pages.pop()); //back
-                that.itemCount--;
-                that.setPageContent(pages[0], that.itemCount - 3);
+                that.offset--;
+                that.setPageContent(pages[0], that.offset - 1);
             }
 
             pages[0].position(-1);
@@ -550,7 +551,7 @@ kendo_module({
         _onResize: function () {
             var that = this,
                 page = that.pages[2],
-                idx = that.itemCount - 1;
+                idx = that.offset + 1;
 
             if(that._needsRefresh) {
                 that.setPageContent(page, idx);
