@@ -1272,9 +1272,14 @@
 
                 treeviewObject.expand(".k-item");
 
+                // error out, show refresh icon
+                equal(treeview.find(".k-i-refresh").length, 1);
+
                 treeview.find(".k-i-refresh").click();
 
+                // success, hide refresh icon
                 equal(calls, 2);
+                equal(treeview.find(".k-i-refresh").length, 0);
                 equal(treeview.find(".k-item .k-item").length, 1);
             });
 

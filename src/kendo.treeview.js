@@ -1526,7 +1526,7 @@ kendo_module({
                     element.empty();
                 }
             } else {
-                nodeIcon(node).toggleClass("k-loading", showProgress);
+                nodeIcon(node).toggleClass("k-loading", showProgress).removeClass("k-i-refresh");
             }
         },
 
