@@ -20,50 +20,6 @@ html
 
 /* template.less */
 
-.k-scheduler
-{
-	background-color:#fff;
-}
-
-.k-scheduler-times tr,
-.k-scheduler-times th,
-.k-scheduler-table td,
-.k-scheduler-header th
-{
-	border-color:#ccc;
-}
-
-.k-scheduler-table .k-today
-{
-	background-color:#f6f6f6;
-}
-
-.k-scheduler-now-arrow
-{
-	border-left-color:#f00;
-}
-
-.k-scheduler-now-line
-{
-	background-color:#f00;
-}
-
-.k-appointment
-{
-	border-color:#8bf;
-	background-color: #def;
-	cursor:move;
-}
-
-.k-appointment:hover
-{
-	border-color:#69f;
-}
-
-/*
-*{border-color:red !important;}
-*/
-
 </style>
 </head>
 <body>
@@ -139,7 +95,7 @@ html
 					</tr>
 				</tbody>
 			</table>
-			<div class="k-appointment" style="top:27px;left:504px;width:1007px">
+			<div class="k-event" style="top:27px;left:504px;width:1007px">
 				<dl>
 					<dd>Days off</dd>
 				</dl>
@@ -215,7 +171,7 @@ html
 				<tr><td>&nbsp;</td><td class="k-today">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> <!-- class="k-last" -->
 			</tbody>
 		</table>
-		<div class="k-appointment" style="top:13px;left:504px;">
+		<div class="k-event" style="top:13px;left:504px;">
 			<dl>
 				<dt><span class="k-icon k-i-refresh"></span> 11:30 - 12:30</dt>
 				<dd>Business Lunch</dd>
@@ -385,7 +341,7 @@ html
 				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 			</tbody>
 		</table>
-		<div class="k-appointment" style="top:18px;left:373px;">
+		<div class="k-event" style="top:18px;left:373px;">
 			<dl>
 				<dt><span class="k-icon k-i-refresh"></span> 11:30 - 12:30</dt>
 				<dd>Business Lunch</dd>
@@ -456,12 +412,12 @@ $(document).ready(function(){
     scInit("scheduler2");
     scInit("scheduler3");
 
-    $(".k-appointment > .k-link, .k-toolbar li:not(.k-nav-current) .k-link")
+    $(".k-event > .k-link, .k-toolbar li:not(.k-nav-current) .k-link")
 	    .on("mouseover", function(e){$(this).addClass("k-state-hover");})
 	    .on("mouseout", function(e){$(this).removeClass("k-state-hover");});
 
 
-	$(".k-appointment").kendoTooltip({
+	$(".k-event").kendoTooltip({
 		position:"bottom",
 		autoHide: false,
 		content: kendo.template($("#tooltipTemplate").html())
