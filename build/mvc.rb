@@ -57,7 +57,7 @@ MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                     .sub('.js', '.min.js')
                 )
                 .include(
-                    FileList[DEMO_SHARED_ROOT + '{web,dataviz}/**/*']
+                    FileList[DEMO_SHARED_ROOT + '{web,dataviz,mobile}/**/*']
                         .reject { |f| File.directory? f }
                         .sub(DEMO_SHARED_ROOT, MVC_DEMOS_ROOT + 'Content/')
                 )
@@ -72,7 +72,12 @@ MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                         .sub(DEMO_SHARED_ROOT + 'shared/icons', MVC_DEMOS_ROOT + 'Content/shared/icons')
                 )
                 .include(
-                    FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
+                    FileList[DEMO_SHARED_ROOT + 'shared/images/patterns/*']
+                        .reject { |f| File.directory? f }
+                        .sub(DEMO_SHARED_ROOT + 'shared/images', MVC_DEMOS_ROOT + 'Content/shared/images')
+                )
+                .include(
+                    FileList['demos/mvc/App_Data/{dataviz,web,mobile}.nav.json']
                         .sub('demos/mvc/App_Data', MVC_DEMOS_ROOT + 'App_Data')
                 )
                 .include(MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll')
@@ -128,6 +133,10 @@ namespace :mvc do
          :from => DEMO_SHARED_ROOT + 'dataviz/**/*',
          :root => DEMO_SHARED_ROOT + 'dataviz/'
 
+    tree :to => MVC_DEMOS_ROOT + 'Content/mobile',
+         :from => DEMO_SHARED_ROOT + 'mobile/**/*',
+         :root => DEMO_SHARED_ROOT + 'mobile/'
+
     tree :to => MVC_DEMOS_ROOT + 'Content/shared',
          :from => DEMO_SHARED_ROOT + 'shared/styles/**/*',
          :root => DEMO_SHARED_ROOT + 'shared/styles/'
@@ -135,6 +144,10 @@ namespace :mvc do
     tree :to => MVC_DEMOS_ROOT + 'Content/shared/icons',
          :from => DEMO_SHARED_ROOT + 'shared/icons/**/*',
          :root => DEMO_SHARED_ROOT + 'shared/icons/'
+
+    tree :to => MVC_DEMOS_ROOT + 'Content/shared/images',
+         :from => DEMO_SHARED_ROOT + 'shared/images/patterns/*',
+         :root => DEMO_SHARED_ROOT + 'shared/images/'
 
     tree :to => MVC_DEMOS_ROOT + 'Scripts',
          :from => MVC_MIN_JS,
@@ -151,8 +164,10 @@ namespace :mvc do
         MVC_DEMOS_ROOT + 'Content',
         MVC_DEMOS_ROOT + 'Content/web',
         MVC_DEMOS_ROOT + 'Content/dataviz',
+        MVC_DEMOS_ROOT + 'Content/mobile',
         MVC_DEMOS_ROOT + 'Content/shared',
         MVC_DEMOS_ROOT + 'Content/shared/icons',
+        MVC_DEMOS_ROOT + 'Content/shared/images'
     ]
 
     desc('Update CommonAssemblyInfo.cs with current VERSION')
