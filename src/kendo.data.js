@@ -449,7 +449,7 @@ kendo_module({
 
                 if (!that.trigger("set", { field: field, value: value })) {
 
-                    if (!that._set(field, that.wrap(value, field, function() { return that; }))) {
+                    if (!that._set(field, that.wrap(value, field, function() { return that; })) || field.indexOf("(")) {
                         that.trigger(CHANGE, { field: field });
                     }
 

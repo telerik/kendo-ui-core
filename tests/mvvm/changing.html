@@ -955,6 +955,26 @@
 
                 equal(handler.calls("method"), 0);
             });
+
+            test("tracking changes of bindings containing function calls", function() {
+                var observable = kendo.observable({
+                    foo: {
+                        bar: "foo"
+                    },
+                    baz: function() {
+                        return this.get("foo");
+                    }
+                });
+
+                var dom = $('<span data-bind="text: baz().bar">');
+
+                kendo.bind(dom, observable);
+
+                observable.set("baz().bar", "bar");
+
+                equal(dom.text(), "bar");
+            });
+
         </script>
 
         <script id="array-template" type="text/x-kendo-template">
