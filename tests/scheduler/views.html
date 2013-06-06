@@ -44,6 +44,14 @@
                 equal(Math.round(value), Math.round(expected));
             }
 
+            function applyDefaultLeftOffset(value) {
+                return value + 2;
+            }
+
+            function applyDefaultRightOffset(value) {
+                return value - 4;
+            }
+
             function setup(options) {
                 return new MyDayView(container, $.extend({ majorTick: 120 }, options));
             }
@@ -413,7 +421,7 @@
                 timeSlotPosition = view.content.find("tr").eq(10).offset();
 
                 equalWithRound(timeSlotPosition.top, eventPosition.top);
-                equalWithRound(timeSlotPosition.left, eventPosition.left);
+                equalWithRound(applyDefaultLeftOffset(timeSlotPosition.left), eventPosition.left);
             });
 
             test("set the height of the event", function() {
@@ -478,8 +486,7 @@
                 view.render(selectedDate);
 
                 view.renderEvents(events);
-
-                equal(view.content.find("div.k-event").width(), view.content.find("td:eq(10)").width() - rightOffset);
+                equal(view.content.find("div.k-event").width(), view.content.find("td:eq(10)").width() - 4 - rightOffset);
             });
 
             test("multiple day events are added to all day slot", function() {
@@ -572,10 +579,10 @@
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
 
                 equalWithRound(eventOffset.top, slotOffset.top);
-                equalWithRound(eventOffset.left, slotOffset.left);
+                equalWithRound(eventOffset.left, applyDefaultLeftOffset(slotOffset.left));
             });
 
-            test("multiple day event position is set to the date slot", function() {
+            test("multiple day event position is set to the date slot with multiple slots", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
                         dates: [
@@ -599,8 +606,8 @@
 
                 equalWithRound(eventOffset.top, slotOffset.top);
 
-                equalWithRound(eventOffset.left, slotOffset.left);
-                equalWithRound(view.datesHeader.find("div.k-event").width(), slotWidth);
+                equalWithRound(eventOffset.left, applyDefaultLeftOffset(slotOffset.left));
+                equalWithRound(view.datesHeader.find("div.k-event").width(), applyDefaultRightOffset(slotWidth));
             });
 
             test("position multiday event which starts before the selected range", function() {
@@ -620,7 +627,7 @@
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
                 equal(view.datesHeader.find("div.k-event").length, 1);
-                equal(view.datesHeader.find("div.k-event").width(), slotWidth);
+                equal(view.datesHeader.find("div.k-event").width(), applyDefaultRightOffset(slotWidth));
             });
 
             test("position multiday event which ends after the selected range", function() {
@@ -640,7 +647,7 @@
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
                 equal(view.datesHeader.find("div.k-event").length, 1);
-                equal(view.datesHeader.find("div.k-event").width(), slotWidth);
+                equal(view.datesHeader.find("div.k-event").width(), applyDefaultRightOffset(slotWidth));
             });
 
             test("position multiday event which starts before and ends after the selected range", function() {
@@ -660,7 +667,7 @@
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
                 equal(view.datesHeader.find("div.k-event").length, 1);
-                equal(view.datesHeader.find("div.k-event").width(), slotWidth);
+                equal(view.datesHeader.find("div.k-event").width(), applyDefaultRightOffset(slotWidth));
             });
 
             test("position day event which starts before the slot start time", function() {
@@ -682,7 +689,7 @@
                 var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
                 equal(eventElement.offset().top, view.content.find("tr:first").offset().top);
-                equal(eventElement.offset().left, view.content.find("tr:first").offset().left);
+                equal(eventElement.offset().left, applyDefaultLeftOffset(view.content.find("tr:first").offset().left));
             });
 
             test("position day event which ends after the slot end time", function() {
@@ -704,7 +711,7 @@
 
                 equal(eventElement.length, 1);
                 equalWithRound(eventElement.offset().top, view.content.find("tr").eq(9).offset().top);
-                equalWithRound(eventElement.offset().left, view.content.find("tr").eq(9).offset().left);
+                equalWithRound(eventElement.offset().left, applyDefaultLeftOffset(view.content.find("tr").eq(9).offset().left));
                 equalWithRound(eventElement.height(), slotHeight(view.content.find("table"), 2));
             });
 
@@ -792,15 +799,13 @@
                 var slot = view.content.find("tr").eq(8).find("td:first");
 
                 equal(eventElements.length, 2);
-
                 equalWithRound(eventElements.first().offset().top, slot.offset().top);
-                equalWithRound(eventElements.first().offset().left, slot.offset().left);
+                equalWithRound(eventElements.first().offset().left, applyDefaultLeftOffset(slot.offset().left));
                 equalWithRound(eventElements.first().height(), slotHeight(view.content.find("table"), 4));
-                equalWithRound(eventElements.first().width(), Math.round((slot.width() - rightOffset) / 2));
+                equalWithRound(eventElements.first().width(), (slot.width() - 8 - rightOffset) / 2);
                 equalWithRound(eventElements.last().offset().top, slot.offset().top);
-                equalWithRound(eventElements.last().offset().left, slot.offset().left + eventElements.first().width());
                 equalWithRound(eventElements.last().height(), slotHeight(view.content.find("table"), 4));
-                equalWithRound(eventElements.last().width(), Math.floor((slot.width() - rightOffset) / 2));
+                equalWithRound(eventElements.last().width(), Math.floor((slot.width() - 8 - rightOffset) / 2));
             });
 
             test("events with same start time - does not move events from other date slots", function() {
@@ -830,7 +835,7 @@
 
                 equalWithRound(eventElements.first().offset().top, firstSlot.offset().top);
 
-                equalWithRound(eventElements.eq(1).offset().left, firstSlot.offset().left + eventElements.first().width());
+                equalWithRound(eventElements.eq(1).offset().left, applyDefaultLeftOffset(firstSlot.offset().left) + eventElements.first().width() + 4);
 
                 equalWithRound(eventElements.last().offset().top, secondSlot.offset().top);
             });
@@ -862,10 +867,10 @@
 
                 equalWithRound(eventElements.first().offset().top, firstTimeSlot.offset().top);
 
-                equalWithRound(eventElements.eq(1).offset().left, firstTimeSlot.offset().left + eventElements.first().width());
+                equalWithRound(eventElements.eq(1).offset().left, applyDefaultLeftOffset(firstTimeSlot.offset().left) + eventElements.first().width() + 4);
 
                 equalWithRound(eventElements.last().offset().top, secondTimeSlot.offset().top);
-                equalWithRound(eventElements.last().offset().left, secondTimeSlot.offset().left);
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left));
             });
 
             test("long events reposition other events in the same date slot", function() {
@@ -891,7 +896,7 @@
 
                 equalWithRound(eventElements.first().offset().top, firstTimeSlot.offset().top);
                 equalWithRound(eventElements.last().offset().top, secondTimeSlot.offset().top);
-                equalWithRound(eventElements.last().offset().left, secondTimeSlot.offset().left + eventElements.first().width());
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left) + eventElements.first().width() + 4);
             });
 
             test("long events reposition other events in the same time slot", function() {
@@ -918,10 +923,10 @@
                 var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
 
                 equalWithRound(eventElements.first().offset().top, firstTimeSlot.offset().top);
-                equalWithRound(eventElements.first().width(), Math.round((firstTimeSlot.width() - rightOffset) / 3));
-                equalWithRound(eventElements.eq(1).offset().left, firstTimeSlot.offset().left + eventElements.first().width());
+                equalWithRound(eventElements.first().width(), (firstTimeSlot.width() - 12 - rightOffset) / 3);
+                equalWithRound(eventElements.eq(1).offset().left, applyDefaultLeftOffset(firstTimeSlot.offset().left) + eventElements.first().width() + 4);
                 equalWithRound(eventElements.last().offset().top, secondTimeSlot.offset().top);
-                equalWithRound(eventElements.last().offset().left, secondTimeSlot.offset().left + eventElements.first().width());
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left) + eventElements.first().width() + 4);
             });
 
             test("subsequent events have same left position", function() {
@@ -945,8 +950,8 @@
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
                 var secondTimeSlot = view.content.find("tr").eq(9).find("td:first");
 
-                equal(eventElements.first().offset().left, firstTimeSlot.offset().left);
-                equal(eventElements.last().offset().left, secondTimeSlot.offset().left);
+                equal(eventElements.first().offset().left, applyDefaultLeftOffset(firstTimeSlot.offset().left));
+                equal(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left));
             });
 
 /*
@@ -1080,10 +1085,10 @@
 
                 equalWithRound(eventElements.first().offset().top, slotOffset.top);
 
-                equalWithRound(eventElements.first().offset().left, slotOffset.left);
-                equalWithRound(eventElements.last().offset().left, slotOffset.left);
+                equalWithRound(eventElements.first().offset().left, applyDefaultLeftOffset(slotOffset.left));
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(slotOffset.left));
 
-                equalWithRound(eventElements.first().width(), slotWidth);
+                equalWithRound(eventElements.first().width(), applyDefaultRightOffset(slotWidth));
                 equalWithRound(eventElements.first().width(), eventElements.last().width());
             });
 
@@ -1115,8 +1120,8 @@
                 equalWithRound(eventElements.first().offset().top, firstEventSlotOffset.top);
                 equalWithRound(eventElements.last().offset().top, secondEventSlotOffset.top);
 
-                equalWithRound(eventElements.first().offset().left, firstEventSlotOffset.left);
-                equalWithRound(eventElements.last().offset().left, secondEventSlotOffset.left);
+                equalWithRound(eventElements.first().offset().left, applyDefaultLeftOffset(firstEventSlotOffset.left));
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondEventSlotOffset.left));
             });
 
             test("set height of multiple overlapping all day events across multiple slots", function() {

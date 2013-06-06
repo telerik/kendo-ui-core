@@ -457,12 +457,13 @@ kendo_module({
         _calculateAllDayEventWidth: function(startIndex, endIndex) {
             var allDaySlots = this.element.find(".k-scheduler-header-all-day td"),
                 result = 0,
+                widthFunction = startIndex !== endIndex ? "outerWidth" : "innerWidth",
                 idx,
                 length;
 
             for (idx = 0, length = allDaySlots.length; idx < length; idx++) {
                 if (idx >= startIndex && idx <= endIndex) {
-                    result += allDaySlots.eq(idx).innerWidth();
+                    result += allDaySlots.eq(idx)[widthFunction]();
                 }
             }
             return result;
@@ -482,12 +483,14 @@ kendo_module({
                 allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-event"), startIndex, endIndex).add(element),
                 top = dateSlot.position().top,
                 currentColumnCount = this._headerColumnCount || 0,
+                leftOffset = 2,
+                rightOffset = startIndex !== endIndex ? 5 : 4,
                 eventHeight = this._allDayHeaderHeight;
 
             element
                 .css({
-                    left: dateSlot.position().left,
-                    width: slotWidth
+                    left: dateSlot.position().left + leftOffset,
+                    width: slotWidth - rightOffset
                 });
 
             element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
@@ -527,8 +530,8 @@ kendo_module({
 
                 for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
                     $(columnEvents[j]).css({
-                        width: columnWidth,
-                        left: dateSlot[0].offsetLeft + idx * columnWidth
+                        width: columnWidth - 4,
+                        left: dateSlot[0].offsetLeft + idx * columnWidth + 2
                     });
                 }
             }
