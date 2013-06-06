@@ -11,60 +11,74 @@
 
 <script id="pull-with-endless-template" type="text/x-kendo-template">
     <div class="tweet">
-        <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" />#= text #
+        <img class="pullImage" src="#= user.profile_image_url #" alt="#= user.name #" />#= text #
         <div class="metadata">
-            <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= from_user #/status/#= id_str #" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
+            <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= user.screen_name #/status/#= id_str #" data-rel="external" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
             |
-            <a class="sublink" href="http://twitter.com/#= from_user #" rel="nofollow">#= from_user #</a>
+            <a class="sublink" href="http://twitter.com/#= user.screen_name #" rel="nofollow" data-rel="external">#= user.name #</a>
         </div>
     </div>
 </script>
 
 <script>
+    var maxIdRegExp = /max_id=\d*/,
+        sinceIdRegExp = /since_id=\d*/;
+
+    function getQueryValue(queryString, regexp) {
+        var value = regexp.exec(queryString);
+
+        if (value) {
+            value = value[0].split("=")[1];
+        }
+
+        return value;
+    }
+
     function mobileListViewPullWithEndless() {
-            var dataSource = new kendo.data.DataSource({
-                serverPaging: true,
-                pageSize: 10,
-                transport: {
-                    read: {
-                        url: "http://demos.kendoui.com/service/Twitter/Search", // the remove service url
-                        dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
-                    },
-                    parameterMap: function(options) {
-                        return {
-                            q: "javascript",
-                            page: options.page,
-                            count: options.pageSize,
-                            since_id: options.since_id, //additional parameters sent to the remote service
-                            max_id: options.max_id //additional parameters sent to the remove service
-                        };
-                    }
+        var dataSource = new kendo.data.DataSource({
+            serverPaging: true,
+            pageSize: 10,
+            transport: {
+                read: {
+                    url: "http://demos.kendoui.com/service/Twitter/Search", // the remove service url
+                    dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
                 },
-                schema: { // describe the result format
-                    data: "results" // the data which the data source will be bound to is in the "results" field
+                parameterMap: function(options) {
+                    options = {
+                        q: "javascript",
+                        count: options.pageSize
+                    };
+                    if (paged) {
+                        paged = false;
+                        options["max_id"] = max_id_str; //additional parameters sent to the remove service
+                    }
+
+                    return options;
                 }
-            });
+            },
+            schema: { // describe the result format
+                parse: function(response) {
+                    if (response.search_metadata) {
+                        max_id_str = getQueryValue(response.search_metadata.next_results, maxIdRegExp); //retrieve max_id for the endless scrolling
+                    }
+                    return response;
+                },
+                data: function(data) {
+                    return data.statuses || [];
+                },
+                total: function() { return 100000 }
+            }
+        }),
+        paged, max_id_str;
 
         $("#pull-with-endless").kendoMobileListView({
             dataSource: dataSource,
             template: $("#pull-with-endless-template").text(),
             appendOnRefresh: true,
             pullToRefresh: true,
-            //addition parameters which will be passed to the DataSource's read method
-            pullParameters: function(item) { //pass first data item of the ListView
-                return {
-                    since_id: item.id_str,
-                    page: 1
-                };
-            },
             endlessScroll: true,
-            //addition parameters which will be passed to the DataSource's next method
-            endlessScrollParameters: function(firstOrigin) {
-                if (firstOrigin) {
-                    return {
-                        max_id: firstOrigin.id_str
-                    };
-                }
+            endlessScrollParameters: function() {
+                paged = true;
             }
         });
     }

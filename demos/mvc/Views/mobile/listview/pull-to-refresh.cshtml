@@ -11,11 +11,11 @@
 
 <script id="pull-to-refresh-template" type="text/x-kendo-template">
     <div class="tweet">
-        <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" />#= text #
+        <img class="pullImage" src="#= user.profile_image_url #" alt="#= user.name #" />#= text #
         <div class="metadata">
-            <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= from_user #/status/#= id_str #" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
+            <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= user.screen_name #/status/#= id_str #" data-rel="external" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
             |
-            <a class="sublink" href="http://twitter.com/#= from_user #" rel="nofollow">#= from_user #</a>
+            <a class="sublink" href="http://twitter.com/#= user.screen_name #" rel="nofollow" data-rel="external">#= user.name #</a>
         </div>
     </div>
 </script>
@@ -33,14 +33,15 @@
                     parameterMap: function(options) {
                         return {
                             q: "javascript",
-                            page: options.page,
-                            count: options.pageSize,
-                            since_id: options.since_id //additional parameters sent to the remote service
+                            count: options.pageSize
                         };
                     }
                 },
                 schema: { // describe the result format
-                    data: "results" // the data which the data source will be bound to is in the "results" field
+                    // the data which the data source will be bound to is in the "results" field
+                    data: function(data) {
+                        return data.statuses || [];
+                    }
                 }
             });
 
@@ -48,13 +49,7 @@
             dataSource: dataSource,
             pullToRefresh: true,
             appendOnRefresh: true,
-            template: $("#pull-to-refresh-template").text(),
-            pullParameters: function(item) {
-                return {
-                    since_id: item.id_str,
-                    page: 1
-                };
-            }
+            template: $("#pull-to-refresh-template").text()
         });
     }
 </script>

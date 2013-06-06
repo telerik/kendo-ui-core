@@ -9,7 +9,7 @@
 
     <script type="text/x-kendo-tmpl" id="template">
         <div class="twit">
-            <a class="t-link" href="http://www.twitter.com/#:from_user#" title="#:from_user#"><img width="48" height="48" src="#:profile_image_url#" alt="#:from_user#" /></a>
+            <a class="t-link" href="http://www.twitter.com/#:user.screen_name#" title="#:user.name#"><img width="48" height="48" src="#:user.profile_image_url#" alt="#:user.name#" /></a>
             <p>#:text#</p>
         </div>
     </script>
@@ -29,8 +29,9 @@
                         }
                     },
                     schema: {
-                        data: "results",
-                        total: "results_per_page"
+                        data: function(data) {
+                            return data.statuses || [];
+                        }
                     }
                 });
 

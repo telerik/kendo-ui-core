@@ -11,16 +11,29 @@
 
 <script id="endless-scrolling-template" type="text/x-kendo-template">
     <div class="tweet">
-        <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" />#= text #
+        <img class="pullImage" src="#= user.profile_image_url #" alt="#= user.name #" />#= text #
         <div class="metadata">
-            <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= from_user #/status/#= id_str #" data-rel="external" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
+            <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= user.screen_name #/status/#= id_str #" data-rel="external" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
             |
-            <a class="sublink" href="http://twitter.com/#= from_user #" rel="nofollow" data-rel="external">#= from_user #</a>
+            <a class="sublink" href="http://twitter.com/#= user.screen_name #" rel="nofollow" data-rel="external">#= user.name #</a>
         </div>
     </div>
 </script>
 
 <script>
+    var maxIdRegExp = /max_id=\d*/,
+        sinceIdRegExp = /since_id=\d*/;
+
+    function getQueryValue(queryString, regexp) {
+        var value = regexp.exec(queryString);
+
+        if (value) {
+            value = value[0].split("=")[1];
+        }
+
+        return value;
+    }
+
     function mobileListViewEndlessScrolling() {
             var dataSource = new kendo.data.DataSource({
                 pageSize: 12,
@@ -33,23 +46,33 @@
                     parameterMap: function(options) {
                         var parameters = {
                             q: "javascript", //additional parameters sent to the remote service
-                            count: options.pageSize,
-                            page: options.page //next page
+                            max_id: max_id_str, //additional parameters sent to the remove service
+                            count: options.pageSize
                         }
 
                         return parameters;
                     }
                 },
                 schema: { // describe the result format
-                    data: "results" // the data which the data source will be bound to is in the "results" field
+                    parse: function(response) {
+                        if (response.search_metadata) {
+                            max_id_str = getQueryValue(response.search_metadata.next_results, maxIdRegExp); //retrieve max_id for the endless scrolling
+                        }
+                        return response;
+                    },
+                    data: function(data) {
+                        return data.statuses || [];
+                    },
+                    total: function() { return 100000 }
                 }
-            });
+            }),
+            max_id_str;
 
         $("#endless-scrolling").kendoMobileListView({
             dataSource: dataSource,
             template: $("#endless-scrolling-template").text(),
-            endlessScroll: true,
-            scrollTreshold: 30 //treshold in pixels
+            scrollThreshold: 30, //threshold in pixels
+            endlessScroll: true
         });
     }
 </script>

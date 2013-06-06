@@ -18,10 +18,10 @@
 
             <script id="template" type="text/x-kendo-template">
                 <div class="tweet k-header">
-                    <img width="48" height="48" src="#= profile_image_url #" alt="#= from_user #" />
+                    <img width="48" height="48" src="#= user.profile_image_url #" alt="#= user.name #" />
                     #= text #
                     <div class="metadata">
-                        <a class="k-link" href="http://twitter.com/#= from_user #" rel="nofollow">#= from_user #</a>
+                        <a class="k-link" href="http://twitter.com/#= user.screen_name #" rel="nofollow">#= user.name #</a>
                         |
                         #= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #
                     </div>
@@ -48,7 +48,9 @@
                             }
                         },
                         schema: { // describe the result format
-                            data: "results" // the data which the data source will be bound to is in the "results" field
+                            data: function(data) { // the data which the data source will be bound to is in the "results" field
+                                return data.statuses || [];
+                            }
                         },
                         change: function() { // subscribe to the CHANGE event of the data source
                             $("#tweets").html(kendo.render(template, this.view()));
