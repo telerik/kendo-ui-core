@@ -3788,6 +3788,16 @@ div.k-slider
 	border-left-width:0;
 }
 
+.k-scheduler-agenda .k-scheduler-table td:first-child
+{
+	border-left-width:1px;
+}
+
+.k-scheduler-agenda .k-scheduler-table td.k-scheduler-datecolumn
+{
+	border-left-width:0;
+}
+
 .k-scheduler-layout tr + tr .k-scheduler-times tr:last-child > th,
 .k-scheduler-layout tr + tr .k-scheduler-table > tbody > tr:last-child > td
 {
@@ -3894,8 +3904,14 @@ div.k-slider
     display:none;
 }
 
+.k-scheduler-agenda .k-task > .k-link
+{
+    top: 0;
+    right: 0;
+}
+
 .k-event:hover > .k-link,
-.k-task:hover > .k-link
+.k-scheduler-table tr.k-state-hover .k-task > .k-link
 {
     display:block;
 }
