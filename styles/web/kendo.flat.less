@@ -10,6 +10,8 @@
 @texture: none;
 @tooltip-texture: none;
 @fallback-texture: url('textures/highlight.png');
+
+//No gradients
 @widget-gradient: none;
 @widget-shadow: none;
 @hover-gradient: none;
@@ -19,29 +21,25 @@
 @active-gradient: none;
 @active-shadow: none;
 
+/* Widget Base Styles */
 @widget-background-color: #ffffff;
 @widget-border-color: #cdcdcd;
-
 @widget-text-color: #787878;
+
+/* Headers */
 @header-background-color: #10c4b2;
-@header-text-color: #ffffff;
-
-
-/* Calendar */
-@header-calendar-background: #363940;
-@header-calendar-text-color: #ffffff;
 
 /* Buttons */
-@button-background-color: #10c4b2;
-@button-text-color: #ffffff;
+@button-background-color: @form-widget-background;
+@button-text-color: @form-widget-color;
 
 /* Group Base Styles */
-@group-background-color: #ffffff;
+@group-background-color: @widget-background-color;
 @group-border-color: #29d6c5;
 
 /* Content */
-@content-background-color: @widget-background-color;
-//@content-background-color: #ffffff;
+@content-background-color: #ffffff;
+
 @select-background-color: #ffffff;
 @select-border-color: #29d6c5;
 @select-hover-background-color: #29d6c5;
@@ -49,11 +47,6 @@
 @hover-background-color: #29d6c5;
 @hover-border-color: #29d6c5;
 @hover-text-color: #ffffff;
-
-
-@focused-border-color: @hover-border-color;
-//@focused-shadow: none;
-//@focused-item-shadow: inset 0 0 0 1px @hover-border-color;
 
 @selected-background-color: @drop-down-header-background;
 @selected-border-color: @drop-down-header-background;
@@ -69,20 +62,23 @@
 @validation-background-color: #ffe13a;
 @validation-border-color: #ffe13a;
 @validation-text-color: #787878;
-@tooltip-background-color: #99c319;
-@tooltip-border-color: #99c319;
+@tooltip-background-color: #363940;
+@tooltip-border-color: #363940;
 @tooltip-text-color: #ffffff;
 @main-border-radius: 0;
 @list-border-radius: 0;
 @inner-border-radius: 0;
 @slider-border-radius: 13px;
-@draghandle-border-radius: 0;
-@draghandle-border-color: red;
-@draghandle-background-color: red;
+
+/* Slider */
+@draghandle-border-radius: 13px;
+@draghandle-border-color: @form-widget-background;
+@draghandle-background-color: @form-widget-background;
 @draghandle-shadow: 0 1px 1px 0 #676767;
-@draghandle-hover-border-color: red;
-@draghandle-hover-background-color: #7ea700;
+@draghandle-hover-border-color: @hover-background-color;
+@draghandle-hover-background-color: @hover-background-color;
 @draghandle-hover-shadow: 0 1px 1px 0 #676767;
+
 @alt-background-color: #f5f5f5;
 @input-background-color: #ffffff;
 @input-text-color: #787878;
@@ -99,31 +95,21 @@
 @inner-border-radius: @main-border-radius - 2;
 @slider-border-radius: 13px;
 
-/* Group Base Styles */
-//@group-background-color: #daecf4;
-//@group-border-color: @widget-border-color;
-
 /* Headers */
 @header-text-color: #4c5356;
 @header-background-color: #f4f4f4;
 
-
 /*Focused State*/
-@focused-border-color: @hover-border-color;
-//10c4b2
-//@focused-shadow: 0 0 3px 0 @shadow-color;
-//@focused-item-shadow: inset 0 0 3px 1px @hover-border-color;
-
-@content-background-color: #ffffff;
-
-
+//@focused-border-color: @hover-border-color;
 @focused-border-color: @drop-down-header-background;
 @focused-shadow: none;
 @focused-item-shadow: inset 0 0 0 1px @drop-down-header-background;
 
 
 
-
+/* Calendar */
+@header-calendar-background: #363940;
+@header-calendar-text-color: #ffffff;
 
 //Introduced new var-s
 @form-widget-background: #10c4b2;
@@ -131,8 +117,6 @@
 @form-widget-border-color: #10c4b2; 
 @drop-down-header-background: #363940;
 @drop-down-header-color: #ffffff;
-
-
-
+@calendar-border-radius: 13px;
 
 @import "template.less";
