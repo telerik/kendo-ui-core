@@ -3208,6 +3208,26 @@ function pad(number, digits, end) {
             return date;
         }
 
+        function firstDayOfMonth(date) {
+            return new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                1
+            );
+        }
+
+        function lastDayOfMonth(date) {
+            var last = new Date(date.getFullYear(), date.getMonth() + 1, 0),
+                first = firstDayOfMonth(date),
+                timeOffset = Math.abs(last.getTimezoneOffset() - first.getTimezoneOffset());
+
+            if (timeOffset) {
+                last.setHours(first.getHours() + (timeOffset / 60));
+            }
+
+            return last;
+        }
+
         function getDate(date) {
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
             adjustForBrazillianTimezone(date, 0);
@@ -3304,7 +3324,9 @@ function pad(number, digits, end) {
             MS_PER_DAY: MS_PER_DAY,
             MS_PER_MINUTE: MS_PER_MINUTE,
             setTime: setTime,
-            today: today
+            today: today,
+            firstDayOfMonth: firstDayOfMonth,
+            lastDayOfMonth: lastDayOfMonth
             //TODO methods: combine date portion and time portion from arguments - date1, date 2
         };
     })();
