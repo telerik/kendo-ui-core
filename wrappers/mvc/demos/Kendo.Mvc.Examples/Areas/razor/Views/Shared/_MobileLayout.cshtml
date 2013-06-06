@@ -49,7 +49,7 @@
                                 @(Html.Kendo().MobileBackButton()
                                     .Align(MobileButtonAlign.Left)
                                     .HtmlAttributes(new { @class = "nav-button" })
-                                    .Href(Url.RouteUrl(new { controller = "suite" }))
+                                    .Url(Url.RouteUrl(new { controller = "suite" }))
                                     .Text("Back"))                                              
                                 @navbar.ViewTitle("Index")                                
                             </text>)

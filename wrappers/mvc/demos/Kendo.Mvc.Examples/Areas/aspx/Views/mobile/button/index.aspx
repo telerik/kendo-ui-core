@@ -12,19 +12,19 @@
             <% Html.Kendo().MobileButton()                    
                     .HtmlAttributes(new { @class = "button", style = "color: #fff; background-color: #f60" })
                     .Text("Home")
-                    .Href("#button-home")
+                    .Url("#button-home")
                     .Render();
             %>
             <% Html.Kendo().MobileButton()                    
                     .HtmlAttributes(new { @class = "button" })
                     .Text("Facility")
-                    .Href("#facility")
+                    .Url("#facility")
                     .Render();
             %>
             <% Html.Kendo().MobileButton()                    
                     .HtmlAttributes(new { @class = "button" })
                     .Text("Sports")
-                    .Href("#sports")
+                    .Url("#sports")
                     .Render();
             %>
             <ul data-role="listview" data-style="inset">
@@ -48,19 +48,19 @@
             <% Html.Kendo().MobileButton()                    
                     .HtmlAttributes(new { @class = "button" })
                     .Text("Home")
-                    .Href("#button-home")
+                    .Url("#button-home")
                     .Render();
             %>
             <% Html.Kendo().MobileButton()
                     .HtmlAttributes(new { @class = "button", style = "color: #fff; background-color: #f60" })
                     .Text("Facility")
-                    .Href("#facility")
+                    .Url("#facility")
                     .Render();
             %>
             <% Html.Kendo().MobileButton()                    
                     .HtmlAttributes(new { @class = "button" })
                     .Text("Sports")
-                    .Href("#sports")
+                    .Url("#sports")
                     .Render();
             %>
             <ul data-role="listview" data-style="inset">
@@ -84,19 +84,19 @@
             <% Html.Kendo().MobileButton()                    
                     .HtmlAttributes(new { @class = "button" })
                     .Text("Home")
-                    .Href("#button-home")
+                    .Url("#button-home")
                     .Render();
             %>
             <% Html.Kendo().MobileButton()
                     .HtmlAttributes(new { @class = "button" })
                     .Text("Facility")
-                    .Href("#facility")
+                    .Url("#facility")
                     .Render();
             %>
             <% Html.Kendo().MobileButton()
                     .HtmlAttributes(new { @class = "button", style = "color: #fff; background-color: #f60" })
                     .Text("Sports")
-                    .Href("#sports")
+                    .Url("#sports")
                     .Render();
             %>
             <ul data-role="listview" data-style="inset">

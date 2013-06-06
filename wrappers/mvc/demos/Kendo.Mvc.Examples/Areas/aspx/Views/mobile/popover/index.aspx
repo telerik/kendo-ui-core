@@ -20,7 +20,7 @@
                     <%: navbar.ViewTitle("") %>                                
                     <%: Html.Kendo().MobileButton()
                             .Align(MobileButtonAlign.Right)                             
-                            .Href("#popover-people")
+                            .Url("#popover-people")
                             .Text("Select people")
                             .Rel(MobileButtonRel.PopOver)
                     %>                                 
@@ -117,7 +117,7 @@
                     %>                                                    
                     <%: Html.Kendo().MobileButton()
                             .Align(MobileButtonAlign.Right)
-                            .Href("#popover-location")
+                            .Url("#popover-location")
                             .Text("Select location")
                             .Rel(MobileButtonRel.PopOver)
                     %>                                 

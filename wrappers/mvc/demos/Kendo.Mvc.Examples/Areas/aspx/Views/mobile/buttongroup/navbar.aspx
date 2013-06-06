@@ -24,7 +24,7 @@
 
                 <%: Html.Kendo().MobileButton()
                     .Align(MobileButtonAlign.Right)
-                    .Href("#index")
+                    .Url("#index")
                     .Text("Index")
                     .HtmlAttributes(new { @class = "nav-button" })
                 %>

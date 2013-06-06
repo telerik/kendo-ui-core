@@ -19,7 +19,7 @@
                                 .Align(MobileButtonAlign.Right)
                                 .Icon("organize")
                                 .Text("Group")
-                                .Href("#navbar-grouped")
+                                .Url("#navbar-grouped")
                         %>
                         <%
                     })
@@ -66,7 +66,7 @@
                                 .Align(MobileButtonAlign.Right)
                                 .Icon("stop")
                                 .Text("Ungroup")
-                                .Href("#navbar-home")
+                                .Url("#navbar-home")
                         %>
                         <%
                     })

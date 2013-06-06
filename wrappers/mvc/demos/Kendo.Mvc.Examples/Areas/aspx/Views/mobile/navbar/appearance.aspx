@@ -16,7 +16,7 @@
                     <%: Html.Kendo().MobileButton()
                             .Align(MobileButtonAlign.Right)
                             .Text("Light Theme")
-                            .Href("#light-theme")
+                            .Url("#light-theme")
                     %>
                     <%
                 })
@@ -53,7 +53,7 @@
                     <%: Html.Kendo().MobileButton()
                             .Align(MobileButtonAlign.Right)
                             .Text("Dark Theme")
-                            .Href("#dark-theme")
+                            .Url("#dark-theme")
                     %>
                     <%
                 })

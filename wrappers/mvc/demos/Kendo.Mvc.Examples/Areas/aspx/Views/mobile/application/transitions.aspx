@@ -13,7 +13,7 @@
                    .Name("signUp")
                    .Text("Login/Sign-up")
                    .HtmlAttributes(new { @class = "transitions-button" })
-                   .Href("#view-transitions-login")
+                   .Url("#view-transitions-login")
                    .Render();
             %>
             <%
@@ -40,7 +40,7 @@
                    .Text("Login")
                    .Transition("overlay:down reverse")
                    .HtmlAttributes(new { @class = "transitions-button" })
-                   .Href("#view-transitions-welcome")
+                   .Url("#view-transitions-welcome")
                    .Render();
             %>
             <br />
@@ -49,7 +49,7 @@
                    .Text("Cancel")
                    .Transition("overlay:up reverse")
                    .HtmlAttributes(new { @class = "transitions-cancel" })
-                   .Href("#view-transitions")
+                   .Url("#view-transitions")
                    .Render();
             %>            
             <%
@@ -70,7 +70,7 @@
                    .Text("Sign out")
                    .Transition("slide:right")
                    .HtmlAttributes(new { @class = "transitions-button" })
-                   .Href("#view-transitions")
+                   .Url("#view-transitions")
                    .Render();
             %>
             <%

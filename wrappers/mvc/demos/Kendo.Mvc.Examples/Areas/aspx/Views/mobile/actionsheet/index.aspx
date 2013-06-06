@@ -44,7 +44,7 @@
         .ActionsheetContext("#:ID#")
         .HtmlAttributes(new { @class = "replay" })
         .Text("Reply")
-        .Href("\\#inboxActions")        
+        .Url("\\#inboxActions")        
     %>    
 
     <h2>#: Subject#</h2>

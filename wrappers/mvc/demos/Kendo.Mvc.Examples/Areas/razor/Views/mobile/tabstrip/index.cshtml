@@ -135,10 +135,10 @@
         @(Html.Kendo().MobileTabStrip()
                 .Items(items => 
                 {
-                    items.Add().Icon("contacts").Text("Profile").Href("#tabstrip-profile");
-                    items.Add().Icon("history").Text("Sales").Href("#tabstrip-sales");
-                    items.Add().Icon("favorites").Text("Rating").Href("#tabstrip-rating");
-                    items.Add().Icon("settings").Text("Settings").Href("#tabstrip-settings");
+                    items.Add().Icon("contacts").Text("Profile").Url("#tabstrip-profile");
+                    items.Add().Icon("history").Text("Sales").Url("#tabstrip-sales");
+                    items.Add().Icon("favorites").Text("Rating").Url("#tabstrip-rating");
+                    items.Add().Icon("settings").Text("Settings").Url("#tabstrip-settings");
                 })
         )
         </text>)
@@ -153,7 +153,7 @@
                 @(Html.Kendo().MobileBackButton()
                     .Align(MobileButtonAlign.Left) 
                     .HtmlAttributes(new { @class = "nav-button" })
-                    .Href(Url.RouteUrl(new { controller = "suite" }))
+                    .Url(Url.RouteUrl(new { controller = "suite" }))
                     .Text("Back"))              
             </text>)
     )    

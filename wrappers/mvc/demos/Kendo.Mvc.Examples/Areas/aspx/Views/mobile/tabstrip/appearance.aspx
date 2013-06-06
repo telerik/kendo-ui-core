@@ -106,7 +106,7 @@
                     <%: Html.Kendo().MobileBackButton()
                             .Align(MobileButtonAlign.Left) 
                             .HtmlAttributes(new { @class = "nav-button" })
-                            .Href(Url.RouteUrl(new { controller = "suite" }))
+                            .Url(Url.RouteUrl(new { controller = "suite" }))
                             .Text("Back")
                     %>                                   
                     <%
@@ -120,9 +120,9 @@
                 .Name("custom-tabstrip")
                 .Items(items => 
                 {
-                    items.Add().Icon("camera").Text("Gallery").Href("#tabstrip-gallery");
-                    items.Add().Icon("globe").Text("Cities").Href("#tabstrip-cities");
-                    items.Add().Icon("favorites").Text("Favourites").Href("#tabstrip-favourites");                  
+                    items.Add().Icon("camera").Text("Gallery").Url("#tabstrip-gallery");
+                    items.Add().Icon("globe").Text("Cities").Url("#tabstrip-cities");
+                    items.Add().Icon("favorites").Text("Favourites").Url("#tabstrip-favourites");                  
                 })
         %>
         <%

@@ -12,7 +12,7 @@
                    .Name("signUp")
                    .Text("Login/Sign-up")
                    .HtmlAttributes(new { @class = "transitions-button" })
-                   .Href("#view-transitions-login"))              
+                   .Url("#view-transitions-login"))              
           </text>)        
 )
 
@@ -33,14 +33,14 @@
                    .Text("Login")
                    .Transition("overlay:down reverse")
                    .HtmlAttributes(new { @class = "transitions-button" })
-                   .Href("#view-transitions-welcome"))              
+                   .Url("#view-transitions-welcome"))              
             <br />
             @(Html.Kendo().MobileButton()
                    .Name("cancel")
                    .Text("Cancel")
                    .Transition("overlay:up reverse")
                    .HtmlAttributes(new { @class = "transitions-cancel" })
-                   .Href("#view-transitions"))
+                   .Url("#view-transitions"))
          </text>)
 )
 
@@ -55,7 +55,7 @@
                    .Text("Sign out")
                    .Transition("slide:right")
                    .HtmlAttributes(new { @class = "transitions-button" })
-                   .Href("#view-transitions"))
+                   .Url("#view-transitions"))
             </text>)
 )
 

@@ -13,7 +13,7 @@
                     .Text("Login")
                     .Name("modalview-open-button")
                     .Rel(MobileButtonRel.ModalView)
-                    .Href("#modalview-login")
+                    .Url("#modalview-login")
             %>
             <%
         })

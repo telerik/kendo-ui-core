@@ -28,7 +28,7 @@
                 <%: Html.Kendo().MobileBackButton()
                         .Align(MobileButtonAlign.Left) 
                         .HtmlAttributes(new { @class = "nav-button" })
-                        .Href(Url.RouteUrl(new { controller = "suite" }))
+                        .Url(Url.RouteUrl(new { controller = "suite" }))
                         .Text("Back")
                 %>    
                 <%: navbar.ViewTitle("iOS Platform")%>
@@ -60,7 +60,7 @@
                 <%: Html.Kendo().MobileBackButton()
                         .Align(MobileButtonAlign.Left) 
                         .HtmlAttributes(new { @class = "nav-button" })
-                        .Href(Url.RouteUrl(new { controller = "suite" }))
+                        .Url(Url.RouteUrl(new { controller = "suite" }))
                         .Text("Back")
                 %> 
                 <%: navbar.ViewTitle("Android Platform")%>
@@ -92,7 +92,7 @@
                 <%: Html.Kendo().MobileBackButton()
                         .Align(MobileButtonAlign.Left) 
                         .HtmlAttributes(new { @class = "nav-button" })
-                        .Href(Url.RouteUrl(new { controller = "suite" }))
+                        .Url(Url.RouteUrl(new { controller = "suite" }))
                         .Text("Back")
                 %> 
                 <%: navbar.ViewTitle("BlackBerry Platform")%>
@@ -124,7 +124,7 @@
                 <%: Html.Kendo().MobileBackButton()
                         .Align(MobileButtonAlign.Left) 
                         .HtmlAttributes(new { @class = "nav-button" })
-                        .Href(Url.RouteUrl(new { controller = "suite" }))
+                        .Url(Url.RouteUrl(new { controller = "suite" }))
                         .Text("Back")
                 %> 
                 <%: navbar.ViewTitle("Windows Phone Platform")%>

@@ -106,7 +106,7 @@
                     <%: Html.Kendo().MobileBackButton()
                             .Align(MobileButtonAlign.Left) 
                             .HtmlAttributes(new { @class = "nav-button" })
-                            .Href(Url.RouteUrl(new { controller = "suite" }))
+                            .Url(Url.RouteUrl(new { controller = "suite" }))
                             .Text("Back")
                     %>                                  
                     <%
@@ -120,8 +120,8 @@
                 .Name("badges-tabs")
                 .Items(items => 
                 {
-                    items.Add().Icon("home").Text("Home").Href("#badges-profile");
-                    items.Add().Icon("edit").Text("Mail").Href("#badges-sales").Badge("10");                  
+                    items.Add().Icon("home").Text("Home").Url("#badges-profile");
+                    items.Add().Icon("edit").Text("Mail").Url("#badges-sales").Badge("10");                  
                 })
         %>
         <%
