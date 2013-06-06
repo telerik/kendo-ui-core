@@ -30,7 +30,7 @@
 
                     MultiDayView.fn.init.call(that, element, options);
                 },
-                render: function() {
+                setDate: function() {
                     this._render(this.options.dates);
                 }
             });
@@ -69,7 +69,7 @@
 
             test("renders times header slots", function() {
                 var view = setup();
-                view.render();
+                view.setDate();
 
                 ok(container.find(".k-scheduler-times").length);
                 equal(view.timesHeader[0], container.find(".k-scheduler-times")[0]);
@@ -77,7 +77,7 @@
 
             test("renders headers for selected dates", function() {
                 var view = setup({ dates: [new Date("1/2/2013"), new Date("2/1/2013")], allDaySlot: false });
-                view.render();
+                view.setDate();
 
                 ok(view.datesHeader.hasClass("k-scheduler-header"));
                 equal(view.datesHeader.find("th").length, 2);
@@ -86,7 +86,7 @@
             test("k-today is render if date is today", function() {
                 var view = setup({ dates: [new Date()] });
 
-                view.render();
+                view.setDate();
 
                 equal(view.datesHeader.find("th.k-today").length, 1);
             });
@@ -94,7 +94,7 @@
             test("k-today is not render if date is not today", function() {
                 var view = setup({ dates: [new Date("1/2/2013")] });
 
-                view.render();
+                view.setDate();
 
                 ok(!view.datesHeader.find("th.k-today").length);
             });
@@ -102,7 +102,7 @@
             test("dates are formatted", function() {
                 var view = setup({ dates: [new Date("1/26/2013")] });
 
-                view.render();
+                view.setDate();
 
                 equal(view.datesHeader.find("th").text(), "Sat 1/26");
             });
@@ -116,7 +116,7 @@
             test("render time slots", function() {
                 var view = setup({ });
 
-                view.render();
+                view.setDate();
 
                 equal(view.times.find("th").length, 24);
                 equal(view.times.find("th:first").text(), "12:00 AM");
@@ -127,7 +127,7 @@
                     startTime: new Date(2001, 1, 1, 10, 10, 0)
                 });
 
-                view.render();
+                view.setDate();
 
                 equal(view.times.find("th").length, 14);
                 equal(view.times.find("th:first").text(), "10:10 AM");
@@ -140,7 +140,7 @@
                         majorTick: 30
                     });
 
-                view.render();
+                view.setDate();
                 var cells = view.times.find("th");
 
                 equal(cells.first().text(), "10:00 AM");
@@ -156,7 +156,7 @@
                         numberOfTimeSlots: 8
                     });
 
-                view.render();
+                view.setDate();
 
                 equal(view.times.find("th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "10:00 PM");
                 equal(view.times.find("th").length, 96);
@@ -169,7 +169,7 @@
                         endTime: new Date(2013, 2, 31, 0, 0, 0),
                     });
 
-                view.render();
+                view.setDate();
 
                 ok(view.times.find("th:contains(3:00 AM)").length);
                 equal(view.times.find("th").length, 48);
@@ -181,7 +181,7 @@
                         endTime: new Date(2000, 0, 1, 10, 0, 0),
                     });
 
-                view.render();
+                view.setDate();
                 equal(view.times.find("tr:not(:last) th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "7:00 AM");
                 equal(view.times.find("tr:last").text(), "9:00 AM");
                 equal(view.times.find("th").length, 21);
@@ -195,7 +195,7 @@
                     ]
                 });
 
-                view.render();
+                view.setDate();
 
                 equal(view.content.find("tr").length, 24);
                 equal(view.content.find("td").length, 48);
@@ -208,7 +208,7 @@
                     ]
                 });
 
-                view.render();
+                view.setDate();
 
                 equal(view.content.find("tr.k-middle-row").length, 12);
                 equal(view.content.find("tr:not(.k-middle-row)").length, 12);
@@ -224,7 +224,7 @@
                     ]
                 });
 
-                view.render();
+                view.setDate();
 
                 equal(view.content.height(), 500 - (view.datesHeader.height() - view.footer.height()));
             });
@@ -238,7 +238,7 @@
                     ]
                 });
 
-                view.render();
+                view.setDate();
 
                 equal(view.content.height(), view.times.height());
             });
@@ -250,7 +250,7 @@
                     ]
                 });
 
-                view.render();
+                view.setDate();
 
                 equal(view.datesHeader.find(".k-scheduler-table").length, 2);
                 equal(view.element.find(".k-scheduler-header-all-day td").length, 1);
@@ -264,7 +264,7 @@
                     ]
                 });
 
-                view.render();
+                view.setDate();
 
                 equal(view.datesHeader.find(".k-scheduler-table").length, 1);
                 ok(!view.allDayHeader);
@@ -273,7 +273,7 @@
             test("render footer toolbar", function() {
                 var view = setup();
 
-                view.render();
+                view.setDate();
 
                 ok(view.footer);
                 ok(view.footer.hasClass("k-scheduler-footer"));
@@ -287,11 +287,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event").length, 1);
                 equal(view.content.find(".k-event dd").text(), "my event");
@@ -305,11 +305,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{ uid: "foo", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find(".k-event").attr("data-uid"), "foo");
             });
@@ -322,14 +322,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "event1" },
                     {uid:"uid", start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "event2" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event").length, 2);
                 equal(view.content.find(".k-event:first dd").text(), "event1");
@@ -344,12 +344,12 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
-                view.renderEvents(events);
+                view.render(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event").length, 1);
                 equal(view.content.find(".k-event dd").text(), "my event");
@@ -363,11 +363,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event dt").text(), "10:00 AM - 11:00 AM");
             });
@@ -381,11 +381,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event").text(), "my event");
             });
@@ -396,7 +396,7 @@
                         dates: [ selectedDate ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
                 var index = view._timeSlotIndex(new Date(2013, 1, 26, 10, 0, 0));
 
                 equal(index, 10);
@@ -413,9 +413,9 @@
                     timeSlotPosition,
                     eventPosition;
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
 
                 eventPosition = view.content.find("div.k-event").offset();
                 timeSlotPosition = view.content.find("tr").eq(10).offset();
@@ -433,9 +433,9 @@
                     }),
                     events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 2));
 
@@ -450,9 +450,9 @@
                     }),
                     events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 40, 0), title: "my event" }];
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 3));
             });
@@ -467,9 +467,9 @@
                     }),
                     events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 1));
             });
@@ -483,9 +483,9 @@
                     }),
                     events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
                 equal(view.content.find("div.k-event").width(), view.content.find("td:eq(10)").width() - 4 - rightOffset);
             });
 
@@ -497,11 +497,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 1);
                 equal(view.datesHeader.find(".k-event dd").text(), "my event");
@@ -516,11 +516,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), isAllDay: true, title: "all day event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 1);
                 equal(view.datesHeader.find(".k-event dd").text(), "all day event");
@@ -535,11 +535,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26), end: new Date(2013, 1, 26), isAllDay: true, title: "all day event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 0);
             });
@@ -552,11 +552,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26), end: new Date(2013, 1, 26), isAllDay: true, title: "all day event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 0);
             });
@@ -569,11 +569,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventOffset = view.datesHeader.find("div.k-event").offset();
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
@@ -591,11 +591,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
                 var eventOffset = view.datesHeader.find("div.k-event").offset();
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var slotWidth = 0;
@@ -618,11 +618,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
@@ -638,11 +638,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
@@ -658,11 +658,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
@@ -680,11 +680,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
@@ -702,11 +702,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
                 var eventElement = view.content.find("div.k-event");
 
                 equal(eventElement.length, 1);
@@ -725,11 +725,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 26, 8, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
                 ok(!view.content.find("div.k-event").length);
             });
 
@@ -744,11 +744,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
@@ -766,11 +766,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 27, 9, 0, 0), end: new Date(2013, 1, 27, 10, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
@@ -786,14 +786,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var slot = view.content.find("tr").eq(8).find("td:first");
@@ -817,7 +817,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
@@ -825,7 +825,7 @@
                     {uid:"uid", start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "other slot event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstSlot = view.content.find("tr").eq(8).find("td:first");
@@ -849,7 +849,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
@@ -857,7 +857,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "no collision" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -881,14 +881,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
                     {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -907,7 +907,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
@@ -916,7 +916,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -937,14 +937,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "first event" },
                     {uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "second event" },
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -963,7 +963,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
@@ -975,7 +975,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 17, 0, 0), end: new Date(2013, 1, 26, 19, 0, 0), title: "another log event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -999,7 +999,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
@@ -1007,7 +1007,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "same as first" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 equal(eventElements.eq(0).find("dd").text(), "second event");
@@ -1025,11 +1025,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
 
@@ -1045,11 +1045,11 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
 
@@ -1065,14 +1065,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 13, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.datesHeader.find("div.k-event");
 
@@ -1103,14 +1103,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
                     {uid:"uid", start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.datesHeader.find("div.k-event");
 
@@ -1135,7 +1135,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
@@ -1143,7 +1143,7 @@
                     {uid:"uid", start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "third event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.datesHeader.find("div.k-event");
 
@@ -1165,14 +1165,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event", isAllDay: true },
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event", isAllDay: true },
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.datesHeader.find("div.k-event");
 
@@ -1192,14 +1192,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find(".k-event a>.k-i-close").length, 1);
                 equal(view.datesHeader.find(".k-event a>.k-i-close").length, 1);
@@ -1214,14 +1214,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 ok(!view.content.find(".k-event a>.k-i-close").length);
                 ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
@@ -1236,14 +1236,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find(".k-event a:has(.k-i-close)").css("display"), "none");
                 equal(view.datesHeader.find(".k-event a:has(.k-i-close)").css("display"), "none");
@@ -1258,13 +1258,13 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find(".k-event a:has(.k-i-close)").length, 1);
             });
@@ -1278,14 +1278,14 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 ok(!view.content.find(".k-event a>.k-i-close").length);
                 ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
@@ -1303,13 +1303,13 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.content.find(".k-event a:has(.k-i-close)").click();
             });
@@ -1329,7 +1329,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 view.content.find("td").eq(2).trigger("dblclick");
             });
@@ -1350,7 +1350,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 view.datesHeader.find(".k-scheduler-header-all-day td").trigger("dblclick");
             });
@@ -1367,13 +1367,13 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event", isAllDay: true }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.datesHeader.find(".k-event").trigger("dblclick");
             });
@@ -1390,13 +1390,13 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.content.find(".k-event").trigger("dblclick");
             });
@@ -1413,13 +1413,13 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.content.find(".k-event").trigger("dblclick");
             });
@@ -1436,13 +1436,13 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var events = [
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.content.find(".k-event").trigger("dblclick");
             });
@@ -1455,7 +1455,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
 
                 var result = view._rangeToDates(view.content.find("td").eq(2));
 
@@ -1472,7 +1472,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
                 equal(view._dateSlotIndex(new Date(2013,1,27,0,0,0)), 1);
             });
 
@@ -1486,7 +1486,7 @@
                         ]
                     });
 
-                view.render(selectedDate);
+                view.setDate(selectedDate);
                 equal(view._dateSlotIndex(new Date(2013,1,27,10,0,0)), 1);
             });
 

@@ -351,7 +351,7 @@ kendo_module({
             return start;
         },
 
-        renderGrid: function(selectedDate) {
+        setDate: function(selectedDate) {
             this._render([selectedDate]);
         },
 
@@ -641,7 +641,7 @@ kendo_module({
             }
         },
 
-        renderEvents: function(events) {
+        render: function(events) {
             var options = this.options,
                 eventTemplate = this.eventTemplate,
                 allDayEventTemplate = this.allDayEventTemplate,
@@ -705,7 +705,7 @@ kendo_module({
                selectedDateFormat: "{0:D} - {1:D}"
            },
            name: "week",
-           renderGrid: function(selectedDate) {
+           setDate: function(selectedDate) {
                var start = new Date(selectedDate),
                weekDay = selectedDate.getDay(),
                dates = [],

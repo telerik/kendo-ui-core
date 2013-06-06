@@ -25,12 +25,11 @@ kendo_module({
             return kendo.date.previousDay(this.startDate);
         },
 
-        // change to setDate
-        renderGrid: function(date) {
+        setDate: function(date) {
             this.startDate = this.endDate = date;
         },
 
-        renderEvents: function(events) {
+        render: function(events) {
 
         },
 

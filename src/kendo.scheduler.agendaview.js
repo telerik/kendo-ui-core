@@ -47,7 +47,7 @@ kendo_module({
         },
 
         // change to setDate
-        renderGrid: function(date) {
+        setDate: function(date) {
             this.startDate = date;
             var endDate = new Date(date);
 
@@ -111,7 +111,7 @@ kendo_module({
             return new kendo.data.Query(tasks).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).groupBy({field: "startDate"}).toArray();
         },
 
-        renderEvents: function(events) {
+        render: function(events) {
             var table = this.content.find("table").empty();
 
             if (events.length > 0) {

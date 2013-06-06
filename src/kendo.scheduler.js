@@ -657,7 +657,7 @@ kendo_module({
 
             this._bindView(this.views[name]);
 
-            view.renderGrid(this.selectDate());
+            view.setDate(this.selectDate());
 
             this._model.set("formattedDate", view.dateForTitle());
         },
@@ -875,7 +875,7 @@ kendo_module({
 
             data = this._expandEvents(data, view);
 
-            view.renderEvents(data);
+            view.render(data);
         }
     });
 
