@@ -11,7 +11,7 @@
 
 <script id="endless-scrolling-template" type="text/x-kendo-template">
     <div class="tweet">
-        <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" />#= text #
+        <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" width="64" height="64" />#= text #
         <div class="metadata">
             <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= from_user #/status/#= id_str #" data-rel="external" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
             |
@@ -23,7 +23,7 @@
 <script>
     function mobileListViewEndlessScrolling() {
             var dataSource = new kendo.data.DataSource({
-                pageSize: 12,
+                pageSize: 50,
                 serverPaging: true,
                 transport: {
                     read: {
@@ -41,15 +41,15 @@
                     }
                 },
                 schema: { // describe the result format
-                    data: "results" // the data which the data source will be bound to is in the "results" field
+                    data: "results", // the data which the data source will be bound to is in the "results" field
+                    total: function() { return 100000 }
                 }
             });
 
         $("#endless-scrolling").kendoMobileListView({
             dataSource: dataSource,
             template: $("#endless-scrolling-template").text(),
-            endlessScroll: true,
-            scrollTreshold: 30 //treshold in pixels
+            endlessScroll: true
         });
     }
 </script>

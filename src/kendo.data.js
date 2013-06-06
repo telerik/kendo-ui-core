@@ -2813,6 +2813,11 @@ kendo_module({
             return that._findRange(skip, end).length > 0;
         },
 
+        lastRange: function() {
+            var ranges = this._ranges;
+            return ranges[ranges.length - 1];
+        },
+
         range: function(skip, take) {
             skip = math.min(skip || 0, this.total());
             var that = this,
@@ -3517,6 +3522,194 @@ kendo_module({
         return dataSource instanceof HierarchicalDataSource ? dataSource : new HierarchicalDataSource(dataSource);
     };
 
+    var Buffer = kendo.Observable.extend({
+        init: function(dataSource, viewSize, disablePrefetch) {
+            kendo.Observable.fn.init.call(this);
+
+            this._prefetching = false;
+            this.dataSource = dataSource;
+            this.prefetch = !disablePrefetch;
+
+            var buffer = this;
+
+            dataSource.bind("change", function() {
+                buffer._change();
+            });
+
+            this._syncWithDataSource();
+
+            this.setViewSize(viewSize);
+        },
+
+        setViewSize: function(viewSize) {
+            this.viewSize = viewSize;
+            this._recalculate();
+        },
+
+        at: function(index)  {
+            var pageSize = this.pageSize;
+
+            // out of range request
+            if (index < this.dataOffset || index > this.skip + pageSize) {
+                var offset = Math.floor(index / pageSize) * pageSize;
+                this.range(offset);
+            }
+
+            // prefetch
+            if (index === this.prefetchThreshold) {
+                this._prefetch();
+            }
+
+            // mid-range jump - prefetchThreshold and nextPageThreshold may be equal, do not change to else if
+            if (index === this.midPageThreshold) {
+                this.range(this.nextMidRange);
+            }
+            // next range jump
+            else if (index === this.nextPageThreshold) {
+                this.range(this.nextFullRange);
+            }
+            // pull-back
+            else if (index === this.pullBackThreshold) {
+                if (this.offset === this.skip) { // from full range to mid range
+                    this.range(this.previousMidRange);
+                } else { // from mid range to full range
+                    this.range(this.previousFullRange);
+                }
+            }
+
+            var item = this.dataSource.at(index - this.dataOffset);
+
+            if (item === undefined) {
+                this.trigger("endreached", { index: index });
+            }
+
+            return item;
+        },
+
+        indexOf: function(item) {
+            return this.dataSource.data().indexOf(item) + this.dataOffset;
+        },
+
+        _prefetch: function() {
+            var buffer = this,
+                pageSize = this.pageSize,
+                prefetchOffset = this.skip + pageSize,
+                dataSource = this.dataSource;
+
+            if (!dataSource.inRange(prefetchOffset, pageSize) && !this._prefetching && this.prefetch) {
+                this._prefetching = true;
+                this.trigger("prefetching", { skip: prefetchOffset, take: pageSize });
+
+                dataSource.prefetch(prefetchOffset, pageSize, function() {
+                    buffer._prefetching = false;
+                    buffer.trigger("prefetched", { skip: prefetchOffset, take: pageSize });
+                });
+            }
+        },
+
+        total: function() {
+            return this.dataSource.total();
+        },
+
+        next: function() {
+            var buffer = this,
+                pageSize = buffer.pageSize,
+                offset = buffer.skip - buffer.viewSize, // this calculation relies that the buffer has already jumped into the mid range segment
+                pageSkip = math.max(math.floor(offset / pageSize), 0) * pageSize + pageSize;
+
+            this.offset = offset;
+            this.dataSource.prefetch(pageSkip, pageSize, function() {
+                buffer._goToRange(offset, true);
+            });
+        },
+
+        range: function(offset) {
+            if (this.offset === offset) {
+                return;
+            }
+
+            var buffer = this,
+                pageSize = this.pageSize,
+                pageSkip = math.max(math.floor(offset / pageSize), 0) * pageSize + pageSize,
+                dataSource = this.dataSource;
+
+            this.offset = offset;
+            this._recalculate();
+            if (dataSource.inRange(offset, pageSize)) {
+                this._goToRange(offset);
+            } else if (this.prefetch) {
+                dataSource.prefetch(pageSkip, pageSize, function() {
+                    buffer._goToRange(offset, true);
+                });
+            }
+        },
+
+        syncDataSource: function() {
+            var offset = this.offset;
+            this.offset = null;
+            this.range(offset);
+        },
+
+        _goToRange: function(offset, expanding) {
+            if (this.offset !== offset) {
+                return;
+            }
+
+            this.dataOffset = offset;
+            this._expanding = expanding;
+            this.dataSource.range(offset, this.pageSize);
+        },
+
+        _change: function() {
+            var dataSource = this.dataSource,
+                firstItemUid = dataSource._ranges[0].data[0].uid;
+
+            this.length = dataSource.lastRange().end;
+
+            if (this._firstItemUid !== firstItemUid) {
+                this._syncWithDataSource();
+                this._recalculate();
+                this.trigger("reset", { offset: this.offset });
+            }
+
+            this.trigger("resize");
+
+            if (this._expanding) {
+                this.trigger("expand");
+            }
+
+            delete this._expanding;
+        },
+
+        _syncWithDataSource: function() {
+            var dataSource = this.dataSource;
+
+            if (dataSource._ranges.length) {
+                this._firstItemUid = dataSource._ranges[0].data[0].uid;
+            }
+            this.dataOffset = this.offset = dataSource.skip();
+            this.pageSize = dataSource.pageSize();
+        },
+
+        _recalculate: function() {
+            var pageSize = this.pageSize,
+                offset = this.offset,
+                viewSize = this.viewSize,
+                skip = Math.ceil(offset / pageSize) * pageSize;
+
+            this.skip = skip;
+            this.midPageThreshold = skip + pageSize - 1;
+            this.nextPageThreshold = skip + viewSize - 1;
+            this.prefetchThreshold = skip + pageSize - 1 - viewSize;
+            this.pullBackThreshold = this.offset - 1;
+
+            this.nextMidRange = skip + pageSize - viewSize;
+            this.nextFullRange = skip;
+            this.previousMidRange = offset - viewSize;
+            this.previousFullRange = skip - pageSize;
+        }
+    });
+
     extend(true, kendo.data, {
         readers: {
             json: DataReader
@@ -3531,6 +3724,7 @@ kendo_module({
         RemoteTransport: RemoteTransport,
         Cache: Cache,
         DataReader: DataReader,
-        Model: Model
+        Model: Model,
+        Buffer: Buffer
     });
 })(window.kendo.jQuery);

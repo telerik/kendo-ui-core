@@ -1477,6 +1477,7 @@ kendo_module({
         }
     });
 
+    fx.animationFrame = function(callback) { animationFrame.call(window, callback); };
     fx.Animation = Animation;
     fx.Transition = Transition;
     fx.createEffect = createEffect;

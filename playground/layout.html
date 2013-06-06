@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>splitter</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+
+        <style>
+            #foo {
+                position: absolute;
+                border: 1px solid red;
+            }
+
+            #foo div {
+                position: absolute;
+                top: 0;
+                left: 0;
+                border: 1px solid blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="foo">
+            <div id="bar">Bar</div>
+        </div>
+
+        <script>
+            $(function() {
+                var element = $("<div id='baz'>Baz</div>");
+                $("#foo").append(element);
+                var height = $('#bar').outerHeight(true);
+                var newHeight = element.outerHeight(true);
+                element.css('top', height);
+            });
+        </script>
+    </body>
+</html>

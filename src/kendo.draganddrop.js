@@ -156,16 +156,32 @@ kendo_module({
             $.extend(that, options);
 
             that.scale = 1;
-            that.max = 0;
 
             if (that.horizontal) {
-                that.measure = "width";
+                that.measure = "offsetWidth";
                 that.scrollSize = "scrollWidth";
                 that.axis = "x";
             } else {
-                that.measure = "height";
+                that.measure = "offsetHeight";
                 that.scrollSize = "scrollHeight";
                 that.axis = "y";
+            }
+        },
+
+        makeVirtual: function() {
+            $.extend(this, {
+                virtual: true,
+                forcedEnabled: true,
+                _virtualMin: 1000,
+                _virtualMax: -1000
+            });
+        },
+
+        virtualSize: function(min, max) {
+            if (this._virtualMin !== min || this._virtualMax !== max) {
+                this._virtualMin = min;
+                this._virtualMax = max;
+                this.update();
             }
         },
 
@@ -178,7 +194,7 @@ kendo_module({
         },
 
         getSize: function() {
-            return this.container[this.measure]();
+            return this.container[0][this.measure];
         },
 
         getTotal: function() {
@@ -191,14 +207,16 @@ kendo_module({
 
         update: function(silent) {
             var that = this,
-                total = that.getTotal(),
+                total = that.virtual ? that._virtualMax : that.getTotal(),
                 scaledTotal = total * that.scale,
                 size = that.getSize();
 
+            that.max = that.virtual ? -that._virtualMin : 0;
             that.size = size;
             that.total = scaledTotal;
-            that.min = Math.min(that.max, that.size - scaledTotal);
-            that.minScale = that.size / total;
+            that.min = Math.min(that.max, size - scaledTotal);
+            that.minScale = size / total;
+            that.centerOffset = (scaledTotal - size) / 2;
 
             that.enabled = that.forcedEnabled || (scaledTotal > size);
 
@@ -230,12 +248,17 @@ kendo_module({
             this.refresh();
         },
 
+        centerCoordinates: function() {
+            return { x: Math.max(0, -this.x.centerOffset), y: Math.max(0, -this.y.centerOffset) };
+        },
+
         refresh: function() {
             var that = this;
             that.x.update();
             that.y.update();
             that.enabled = that.x.enabled || that.y.enabled;
-            that.minScale = that.forcedMinScale || Math.max(that.x.minScale, that.y.minScale);
+            that.minScale = that.forcedMinScale || Math.min(that.x.minScale, that.y.minScale);
+            that.fitScale = Math.max(that.x.minScale, that.y.minScale);
             that.trigger(CHANGE);
         }
     });
@@ -328,6 +351,7 @@ kendo_module({
 
                     that.dimensions.rescale(movable.scale);
                     that.gesture = e;
+                    e.preventDefault();
                 },
 
                 move: function(e) {

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Endless scrolling listview</title>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <style>
+            .km-listview, .km-listview-wrapper {
+                -webkit-transform: translatez(0);
+            }
+
+            .km-listview li {
+                position: absolute;
+                -webkit-transform: translatez(0);
+                line-height: 100px;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+                border-top: 1px solid #fff;
+                background: #f4f4f4;
+            }
+
+            #detail .km-content {
+                background: #f4f4f4;
+            }
+        </style>
+    </head>
+    <body>
+        <div data-role="view">
+            <ul data-role="listview" data-endless-scroll="true" data-source="foo" data-template="listview-template">
+            </ul>
+        </div>
+
+        <div data-role="view" data-transition="slide" data-show="showParam" id="detail">
+            <a data-role="backbutton">Back</a>
+            <br />
+            Mambo Number <span id="content"></span>
+        </div>
+
+        <script id="listview-template" type="text/x-kendo-template">
+            <a href="\#detail?id=#: data #">Mambo Number #: data #</a>
+        </script>
+
+        <script>
+            function showParam(e) {
+                e.view.element.find('#content').html(e.view.params.id);
+            }
+            var foo = new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        var results = [], data = options.data;
+                        for (var i = data.skip; i < data.skip + data.take; i ++) {
+                            results.push(i);
+                        }
+
+                        setTimeout(function() {
+                            options.success(results);
+                        }, 2000);
+                    }
+                },
+                pageSize: 50,
+                serverPaging: true,
+                schema: {
+                    total: function() { return 100; }
+                }
+            });
+
+            new kendo.mobile.Application();
+        </script>
+    </body>
+</html>

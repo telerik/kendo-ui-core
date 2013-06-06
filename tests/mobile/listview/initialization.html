@@ -282,11 +282,11 @@
                 equal(listView.items()[0], dom.find("ul > li")[0]);
             });
 
-            test("ListView renders button on botton of the widget", 4, function() {
+            test("ListView renders button at the bottom of the widget", 4, function() {
                 var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
-                    listView = new ListView(dom, { loadMore: true, loadMoreText: "Press to load more..." });
+                listView = new ListView(dom, { loadMore: true, loadMoreText: "Press to load more...", dataSource: new kendo.data.DataSource({ data: [ "foo", "bar", "baz" ] }) });
 
-                var footer = listView.wrapper.children(".km-load-more").eq(0);
+                var footer = listView.wrapper.find(".km-load-more").eq(0);
 
                 ok(footer[0]);
                 ok(footer.find(".km-load")[0]);
@@ -296,9 +296,9 @@
 
             test("ListView renders default text for the load-more button", 2, function() {
                 var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
-                    listView = new ListView(dom, { loadMore: true });
+                    listView = new ListView(dom, { loadMore: true, dataSource: new kendo.data.DataSource({ data: [ "foo", "bar", "baz" ] }) });
 
-                var footer = listView.wrapper.children(".km-load-more").eq(0);
+                var footer = listView.wrapper.find(".km-load-more").eq(0);
 
                 ok(footer.find(".km-load")[0]);
                 equal(footer.find(".km-load").text(), "Press to load more");

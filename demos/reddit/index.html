@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet/less" href="../../styles/web/kendo.common.less"/>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less" />
+        <link rel="stylesheet/less" href="../../styles/web/kendo.default.less"/>
+
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.popover.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.actionsheet.js"></script>
+        <script src="../../src/kendo.mobile.tabstrip.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.scrollview.js"></script>
+        <script src="../../src/kendo.touch.js"></script>
+        <script src="../../src/kendo.treeview.js"></script>
+        <!-- App stuff -->
+        <link rel="stylesheet" href="app.css" />
+        <style>
+            [data-icon=comments] {
+                width: 50px;
+            }
+            [data-icon=comments] span {
+                display: block;
+                text-align: center;
+                margin-top: 3px;
+            }
+
+            [data-icon=comments] .km-icon {
+                margin: 0;
+            }
+
+            .km-comments:after,
+            .km-comments:before
+            {
+                content: "\E091";
+                color: #d4d4d4;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div data-role="view" data-init="showThumbsOnScrollComplete" data-title="Reddit: The Front Page" id="list">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a href="#canvas" data-role="button" data-align="right">Canvas</a>
+                </div>
+            </header>
+
+            <ul data-role="listview" data-template="item-template" data-source="awwDataSource" data-load-more="true" id="aww" data-pull-to-refresh="true" data-click="showDetail">
+            </ul>
+        </div>
+
+        <div data-role="view" id="detail" data-transition="slide" data-after-show="renderDetail" data-zoom="true" data-title="" data-hide="resetDetail">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <button data-role="backbutton" data-align="left" href="#list">Back</button>
+                    <span data-role="view-title">&nbsp;</span>
+                </div>
+            </header>
+
+            <img />
+        </div>
+
+        <div data-role="view" id="canvas" data-transition="slide" data-stretch="true" data-title="Canvas View" data-init="canvasInit" data-show="canvasShow">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a data-role="backbutton" data-align="left">Back</a>
+                    <span data-role="view-title">&nbsp;</span>
+                </div>
+            </header>
+            <div id="canvas-scrollview"></div>
+        </div>
+
+        <div id="canvas-detail" data-role="view" data-transition="slide:up" data-stretch="true" data-init="canvasDetailInit" data-show="canvasDetailShow">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-click="goToCanvas" data-align="left">Canvas</a>
+                    <span data-role="view-title">&nbsp;</span>
+                </div>
+            </header>
+            <div id="detail-scrollview"></div>
+        </div>
+
+
+        <script type="text/x-kendo-template" id="item-template">
+            <div class="item">
+                <div class="item-thumb">
+                    <span class='loading-thumb' data-thumb='#: data.thumbnail #'></span>
+                </div>
+                <div class="item-summary">
+                   <h3>#: data.title #</h3>
+                   <p> #: data.subreddit # | #: data.ups - data.downs # | #: kendo.toString(new Date(data.created_utc * 1000), 'HH:mm') # | <a data-rel="external" href="http://reddit.com/#: data.permalink #" target="_blank">#= data.num_comments # comments on Reddit</a></p>
+                </div>
+            </div>
+        </script>
+<!--
+        <script type="text/x-kendo-template" id="canvas-template">
+            <div data-uid="#: data[0].uid #" data-offset="#: calculateOffset(data[0]) #" class="tile">
+                #= createImage(data[0].data) #
+            </div>
+            <div data-uid="#: data[1].uid #" data-offset="#: calculateOffset(data[1]) #" class="tile">
+                #= createImage(data[1].data) #
+            </div>
+            <div data-uid="#: data[2].uid #" data-offset="#: calculateOffset(data[2]) #" class="tile">
+                #= createImage(data[2].data) #
+            </div>
+            <div data-uid="#: data[3].uid #" data-offset="#: calculateOffset(data[3]) #" class="tile">
+                #= createImage(data[3].data) #
+            </div>
+            <div data-uid="#: data[4].uid #" data-offset="#: calculateOffset(data[4]) #" class="tile">
+                #= createImage(data[4].data) #
+            </div>
+            <div data-uid="#: data[5].uid #" data-offset="#: calculateOffset(data[5]) #" class="tile">
+                #= createImage(data[5].data) #
+            </div>
+        </script>
+-->
+
+        <script type="text/x-kendo-template" id="canvas-template">
+            <div data-uid="#: data[0].uid #" data-offset="#: calculateOffset(data[0]) #" class="tile">
+                #= data[0].foo #
+            </div>
+            <div data-uid="#: data[1].uid #" data-offset="#: calculateOffset(data[1]) #" class="tile">
+                #= data[1].foo #
+            </div>
+            <div data-uid="#: data[2].uid #" data-offset="#: calculateOffset(data[2]) #" class="tile">
+                #= data[2].foo #
+            </div>
+            <div data-uid="#: data[3].uid #" data-offset="#: calculateOffset(data[3]) #" class="tile">
+                #= data[3].foo #
+            </div>
+            <div data-uid="#: data[4].uid #" data-offset="#: calculateOffset(data[4]) #" class="tile">
+                #= data[4].foo #
+            </div>
+            <div data-uid="#: data[5].uid #" data-offset="#: calculateOffset(data[5]) #" class="tile">
+                #= data[5].foo #
+            </div>
+        </script>
+
+        <script type="text/x-kendo-template" id="empty-template">
+            <div style="background-color: \\#FF0000;">empty</div>
+        </script>
+
+        <!-- <script id="canvas&#45;detail&#45;tmp" type="text/x&#45;kendo&#45;template"> -->
+        <!--     <div data&#45;uid='#:uid#' class='detailed&#45;img'> -->
+        <!--         #= createTile(data) # -->
+        <!--     </div> -->
+        <!-- </script> -->
+
+        <script id="canvas-detail-tmp" type="text/x-kendo-template">
+            <div class='detailed-img'>
+                #= data.foo #
+            </div>
+        </script>
+
+        <script src="app.js"></script>
+    </body>
+</html>
