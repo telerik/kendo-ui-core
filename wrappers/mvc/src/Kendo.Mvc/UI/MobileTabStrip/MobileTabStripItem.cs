@@ -15,7 +15,8 @@ namespace Kendo.Mvc.UI
 
             
             HtmlAttributes = new RouteValueDictionary();
-            
+
+            NavigatableSettings = new MobileNavigatableSettings();
         }
 
         
@@ -28,11 +29,16 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-        
+
+        public MobileNavigatableSettings NavigatableSettings
+        {
+            get;
+            private set;
+        }
 
         //>> Fields
         
-        public string Href { get; set; }
+        public string Url { get; set; }
         
         public string Icon { get; set; }
         

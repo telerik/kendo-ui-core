@@ -1,5 +1,5 @@
 :options:
-    - :name: href
+    - :name: url
       :type: String
       :description: 'Specifies the url for remote view or id of the view to be loaded (prefixed with #, like an anchor)'
 

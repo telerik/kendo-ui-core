@@ -27,9 +27,17 @@ namespace Kendo.Mvc.UI
         
         public string Text { get; set; }
         
-        public string Href { get; set; }
+        public string Url { get; set; }
         
         //<< Fields
+
+        public IUrlGenerator UrlGenerator
+        {
+            get
+            {
+                return urlGenerator;
+            }
+        }
 
         public MobileButtonAlign Align { get; set; }
 

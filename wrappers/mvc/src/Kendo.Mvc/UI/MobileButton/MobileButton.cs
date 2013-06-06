@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI
         
         public string Icon { get; set; }
         
-        public string Href { get; set; }
+        public string Url { get; set; }
         
         public string Text { get; set; }
         
@@ -42,6 +42,14 @@ namespace Kendo.Mvc.UI
         public string Badge { get; set; }
         
         //<< Fields
+
+        public IUrlGenerator UrlGenerator
+        {
+            get
+            {
+                return urlGenerator;
+            }
+        }
 
         public override void WriteInitializationScript(TextWriter writer)
         {

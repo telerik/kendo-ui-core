@@ -23,7 +23,7 @@ module CodeGen::MVC::Mobile
             'actionsheet.items.text',
             'buttongroup.items.text',
             'tabstrip.items.text',
-            'tabstrip.items.href',
+            'tabstrip.items.url',
             'splitview.panes.id'
         ]
 

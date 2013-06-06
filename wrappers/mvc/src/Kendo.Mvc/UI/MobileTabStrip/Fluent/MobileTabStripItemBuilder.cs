@@ -4,14 +4,17 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
     using Kendo.Mvc.Extensions;
+    using System.Web.Mvc;
 
     public class MobileTabStripItemBuilder: IHideObjectMembers
     {
         private readonly MobileTabStripItem container;
+        private readonly MobileNavigatableSettings navigatableSettings;        
 
         public MobileTabStripItemBuilder(MobileTabStripItem settings)
         {
             container = settings;
+            navigatableSettings = settings.NavigatableSettings;
         }
 
         //>> Fields
@@ -19,10 +22,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Specifies the url or id of the view which will be loaded
         /// </summary>
-        /// <param name="value">The value that configures the href.</param>
-        public MobileTabStripItemBuilder Href(string value)
+        /// <param name="value">The value that configures the url.</param>
+        public MobileTabStripItemBuilder Url(string value)
         {
-            container.Href = value;
+            container.Url = value;
 
             return this;
         }
@@ -118,7 +121,52 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
+        /// <summary>
+        /// Specifies the url for remote view to be loaded
+        /// </summary> 
+        public MobileTabStripItemBuilder Url(Action<MobileNavigatableSettingsBuilder> configurator)
+        {
+            configurator(new MobileNavigatableSettingsBuilder(navigatableSettings, null, null));
+
+            container.Url = navigatableSettings.Url;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller and action from where the remove view to be loaded.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>        
+        /// <param name="routeValues">Route values</param>
+        public MobileTabStripItemBuilder Url(string actionName, string controllerName, object routeValues)
+        {
+            SetUrl(navigatableSettings, actionName, controllerName, routeValues);
+
+            container.Url = navigatableSettings.Url;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller, action and routeValues from where the remove view to be loaded.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>                
+        public MobileTabStripItemBuilder Url(string actionName, string controllerName)
+        {
+            SetUrl(navigatableSettings, actionName, controllerName, null);
+
+            container.Url = navigatableSettings.Url;
+
+            return this;
+        }
+
+        protected virtual void SetUrl(MobileNavigatableSettings settings, string actionName, string controllerName, object routeValues)
+        {
+            settings.Action(actionName, controllerName, routeValues);            
+        }
     }
 }
 

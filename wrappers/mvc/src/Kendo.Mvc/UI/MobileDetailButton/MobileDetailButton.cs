@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI
 
 //>> Fields
         
-        public string Href { get; set; }
+        public string Url { get; set; }
         
         public string Transition { get; set; }
         
@@ -40,6 +40,14 @@ namespace Kendo.Mvc.UI
         public MobileButtonAlign Align { get; set; }
 
         public MobileButtonRel Rel { get; set; }
+
+        public IUrlGenerator UrlGenerator
+        {
+            get
+            {
+                return urlGenerator;
+            }
+        }
 
         public override void WriteInitializationScript(TextWriter writer)
         {

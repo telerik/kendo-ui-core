@@ -5,7 +5,7 @@
       :content: true
       :description: Contains the items of the tabstrip widget
 
-    - :name : items.href
+    - :name : items.url
       :type : String
       :description : Specifies the url or id of the view which will be loaded
 

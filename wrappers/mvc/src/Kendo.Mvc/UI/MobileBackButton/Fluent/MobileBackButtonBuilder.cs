@@ -7,6 +7,7 @@ namespace Kendo.Mvc.UI.Fluent
     public class MobileBackButtonBuilder: WidgetBuilderBase<MobileBackButton, MobileBackButtonBuilder>, IHideObjectMembers
     {
         private readonly MobileBackButton container;
+        private readonly MobileNavigatableSettings navigatableSettings;
         /// <summary>
         /// Initializes a new instance of the <see cref="MobileBackButton"/> class.
         /// </summary>
@@ -15,6 +16,7 @@ namespace Kendo.Mvc.UI.Fluent
             : base(component)
         {
             container = component;
+            navigatableSettings = new MobileNavigatableSettings();
         }
 
         //>> Fields
@@ -44,10 +46,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Specifies the url for remote view or id of the view to be loaded (prefixed with #, like an anchor)
         /// </summary>
-        /// <param name="value">The value that configures the href.</param>
-        public MobileBackButtonBuilder Href(string value)
+        /// <param name="value">The value that configures the url.</param>
+        public MobileBackButtonBuilder Url(string value)
         {
-            container.Href = value;
+            container.Url = value;
 
             return this;
         }
@@ -64,7 +66,48 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
+        /// <summary>
+        /// Specifies the url for remote view to be loaded
+        /// </summary> 
+        public MobileBackButtonBuilder Url(Action<MobileNavigatableSettingsBuilder> configurator)
+        {
+            configurator(new MobileNavigatableSettingsBuilder(navigatableSettings, Component.ViewContext, Component.UrlGenerator));
+
+            Component.Url = navigatableSettings.Url;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller and action from where the remove view to be loaded.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>        
+        /// <param name="routeValues">Route values</param>
+        public MobileBackButtonBuilder Url(string actionName, string controllerName, object routeValues)
+        {
+            SetUrl(navigatableSettings, actionName, controllerName, routeValues);
+
+            Component.Url = navigatableSettings.Url;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller, action and routeValues from where the remove view to be loaded.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>                
+        public MobileBackButtonBuilder Url(string actionName, string controllerName)
+        {
+            SetUrl(navigatableSettings, actionName, controllerName, null);
+
+            Component.Url = navigatableSettings.Url;
+
+            return this;
+        }
+
         /// <summary>
         /// Configures the client-side events.
         /// </summary>
@@ -86,7 +129,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
+        protected virtual void SetUrl(MobileNavigatableSettings settings, string actionName, string controllerName, object routeValues)
+        {
+            settings.Action(actionName, controllerName, routeValues);
+            settings.Url = settings.GenerateUrl(Component.ViewContext, Component.UrlGenerator);
+        }
     }
 }
 

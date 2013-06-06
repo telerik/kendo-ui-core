@@ -50,9 +50,13 @@ namespace Kendo.Mvc.UI
                         .Attributes(item.HtmlAttributes)
                         .Text(item.Text);
 
-            if (item.Href.HasValue())
+            var url = item.Url.HasValue() ? 
+                item.Url : 
+                item.NavigatableSettings.GenerateUrl(component.ViewContext, component.UrlGenerator);
+
+            if (url.HasValue())
             {
-                dom.Attribute("href", item.Href);
+                dom.Attribute("href", url);
             }
 
             foreach (var keyValuePair in item.ToJson())

@@ -28,8 +28,11 @@ namespace Kendo.Mvc.UI
                 .Attribute("id", component.Id);
 
             AddEventAttributes(html, component.Events);
-            
-            html.Attribute("href", component.Href);
+
+            if (component.Url.HasValue())
+            {
+                html.Attribute("href", component.Url);
+            }
 
             if (component.Target.HasValue())
             {

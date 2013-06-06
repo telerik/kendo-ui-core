@@ -35,6 +35,14 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
+        public IUrlGenerator UrlGenerator
+        {
+            get
+            {
+                return urlGenerator;
+            }
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             //no initializtion scripts for mobile widgets
