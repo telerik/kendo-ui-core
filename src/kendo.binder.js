@@ -1051,11 +1051,19 @@ kendo_module({
                 },
 
                 change: function() {
-                    this._initChange = true;
+                    var that = this,
+                        value = that.bindings[VALUE].get(),
+                        values = that.widget.dataItems();
 
-                    this.bindings.value.set(this.widget.dataItems());
+                    that._initChange = true;
 
-                    this._initChange = false;
+                    if (value instanceof ObservableArray) {
+                        value.splice.apply(value, [0, value.length].concat(values));
+                    } else {
+                        that.bindings[VALUE].set(values);
+                    }
+
+                    that._initChange = false;
                 },
 
                 refresh: function() {

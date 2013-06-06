@@ -115,6 +115,23 @@
                 equal(observable.selectedItem[1], observable.items[1]);
             });
 
+            test("changing persist ObservableArray instance", function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var observable = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: []
+                });
+
+                var observableInstance = observable.selectedItem;
+
+                kendo.bind(dom, observable);
+                dom.data("kendoMultiSelect").value(["foo", "bar"]);
+                dom.data("kendoMultiSelect").trigger("change");
+
+                equal(observable.selectedItem, observableInstance);
+            });
+
             test("changing a value updates ObservableArray property when multiselect is filtered", function() {
                 var dom = $('<select data-role="multiselect" multiple="multiple" data-text-field="name" data-value-field="name" data-bind="source:items, value:selectedItem"/>'),
                     items = [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
