@@ -707,6 +707,7 @@
     <Content Include="Areas\razor\Views\mobile\buttongroup\appearance.cshtml" />
     <Content Include="Areas\razor\Views\mobile\buttongroup\navbar.cshtml" />
     <Content Include="Areas\razor\Views\mobile\layout\index.cshtml" />
+    <Content Include="Views\Shared\PlayMusic.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
@@ -786,6 +787,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Shared\_MobileNavigation.cshtml" />
+    <Content Include="Views\Shared\MusicStore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />

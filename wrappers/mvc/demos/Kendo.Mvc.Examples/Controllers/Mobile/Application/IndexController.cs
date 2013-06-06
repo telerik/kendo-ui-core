@@ -11,6 +11,16 @@ namespace Kendo.Mvc.Examples.Controllers
         public ActionResult Index()
         {
             return View();
-        }        
+        }
+
+        public ActionResult PlayMusic()
+        {
+            return View();
+        }
+
+        public ActionResult MusicStore()
+        {
+            return View();
+        }
     }
 }
