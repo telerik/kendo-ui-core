@@ -8,7 +8,7 @@
         .Content(() =>
         {
             %>
-            <img src="../../content/mobile/shared/color-lens.png" class="camera-image" /><br />
+            <img src="<%= Url.Content("~/content/mobile/shared/color-lens.png")%>" class="camera-image" /><br />
             <% Html.Kendo().MobileButton()
                    .Name("signUp")
                    .Text("Login/Sign-up")
@@ -28,9 +28,7 @@
         .Title("Login/Sign-up")
         .Content(() =>
         {
-            %>
-            <img src="../../content/mobile/shared/color-lens.png" class="camera-image" /><br />
-
+            %>            
             <ul data-role="listview" data-style="inset">
                 <li><label for="username">Username:</label> <input type="text" id="username" /></li>
                 <li><label for="password">Password:</label> <input type="password" id="password" /></li>
@@ -64,7 +62,7 @@
         .Content(() =>
         {
             %>
-            <img src="../../content/mobile/modalview/lens.png" class="camera-image" /><br />            
+            <img src="<%= Url.Content("~/content/mobile/modalview/lens.png") %>" class="camera-image" /><br />            
             <% Html.Kendo().MobileButton()
                    .Name("SignOut")
                    .Text("Sign out")
@@ -101,7 +99,7 @@
     #view-transitions .km-content,
     #view-transitions-login .km-content,
     #view-transitions-welcome .km-content {
-        background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
+        background: url(<%= Url.Content("~/content/shared/images/patterns/pattern1.png") %>) repeat 0 0;
     }
 
     .km-ios #view-transitions-welcome .km-button {

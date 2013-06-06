@@ -3,7 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <% Html.Kendo().MobileView()
-        .Name("view")        
+        .Name("view")    
+        .Name("music")    
         .Content(() =>
         {
             %>
@@ -14,7 +15,7 @@
             <ul data-role="listview" data-style="inset" data-type="group">
                 <li>I want to:
                     <ul>
-                        <li data-icon="play"><a href="../../content/mobile/application/play-music.html">Play Music</a></li>
+                        <li data-icon="play"><a href="<%= Url.Content("~/content/mobile/application/play-music.html")%>">Play Music</a></li>
                         <li data-icon="cart"><a href="../../content/mobile/application/music-store.html">Buy Music</a></li>
                     </ul>
                 </li>
@@ -25,7 +26,7 @@
 	            display: block;
 	            margin: 1em;
 	            height: 110px;
-	            background: url(../../content/mobile/shared/mymusic.jpg) no-repeat center center;
+	            background: url(<%= Url.Content("~/content/mobile/shared/mymusic.jpg") %>) no-repeat center center;
                 -webkit-background-size: 100% auto;
                 background-size: 100% auto;
             }
