@@ -45,12 +45,14 @@ kendo_module({
         ARC = "arc",
         BLACK = "#000",
         COORD_PRECISION = dataviz.COORD_PRECISION,
-        RADAR_AREA = "radarArea",
-        RADAR_COLUMN = "radarColumn",
-        RADAR_LINE = "radarLine",
+        DEG_TO_RAD = math.PI / 180,
+        PLOT_AREA_CLICK = "plotAreaClick",
         POLAR_AREA = "polarArea",
         POLAR_LINE = "polarLine",
         POLAR_SCATTER = "polarScatter",
+        RADAR_AREA = "radarArea",
+        RADAR_COLUMN = "radarColumn",
+        RADAR_LINE = "radarLine",
         X = "x",
         Y = "y",
         ZERO = "zero",
@@ -59,7 +61,7 @@ kendo_module({
         ],
         RADAR_CHARTS = [
             RADAR_AREA, RADAR_LINE, RADAR_COLUMN
-        ] ;
+        ];
 
     // Polar and radar charts =================================================
     var RadarCategoryAxis = CategoryAxis.extend({
@@ -451,8 +453,49 @@ kendo_module({
             }
 
             return elements;
+        },
+
+        getValue: function(point) {
+            var axis = this,
+                options = axis.options,
+                type = options.majorGridLines.type,
+                lineBox = axis.lineBox(),
+                altAxis = axis.plotArea.polarAxis,
+                majorAngles = altAxis.majorDivisions(),
+                center = altAxis.box.center(),
+                dx = point.x - center.x,
+                dy = point.y - center.y,
+                r = point.distanceTo(center),
+                d = r;
+
+            if (type !== ARC && majorAngles.length > 1) {
+                var theta = math.round(math.atan2(dy, dx) / DEG_TO_RAD + 540) % 360;
+
+                majorAngles.sort(function(a, b) {
+                    return angularDistance(a, theta) - angularDistance(b, theta);
+                });
+
+                var midAngle = angularDistance(majorAngles[0], majorAngles[1]) / 2,
+                    alpha = midAngle - angularDistance(theta, majorAngles[0]),
+                    beta = 90 - alpha,
+                    // Solve first right-angled triangle (center, point, gridlineX)
+                    // using the known side (r)
+                    c = r * math.sin(beta * DEG_TO_RAD);
+
+                // Solve second right-angled triangle (center, axisX, gridlineX)
+                // using known side (c1)
+                d = c * (1 / math.sin((90 - midAngle) * DEG_TO_RAD));
+            }
+
+            return NumericAxis.fn.getValue.call(
+                this, new Point2D(lineBox.x1, lineBox.y2 - d)
+            );
         }
     });
+
+    function angularDistance(a, b) {
+        return 180 - math.abs(math.abs(a - b) - 180);
+    }
 
     var PolarNumericAxis = Axis.extend({
         init: function(options) {
@@ -600,7 +643,6 @@ kendo_module({
             );
         },
 
-        // TODO: Implement
         // getValue: function(point) { },
 
         labelsCount: NumericAxis.fn.labelsCount,
@@ -997,10 +1039,8 @@ kendo_module({
 
         seriesCategoryAxis: function() {
             return this.categoryAxis;
-        }
+        },
 
-        // TODO: Implement
-        /*
         click: function(chart, e) {
             var plotArea = this,
                 coords = chart._eventCoordinates(e),
@@ -1009,16 +1049,16 @@ kendo_module({
                 value;
 
             category = plotArea.categoryAxis.getCategory(point);
+            value = plotArea.valueAxis.getValue(point);
 
-            if (defined(category) && defined(value)) {
+            if (category !== null && value !== null) {
                 chart.trigger(PLOT_AREA_CLICK, {
                     element: $(e.target),
-                    category: singleItemOrArray(categories),
-                    value: singleItemOrArray(values)
+                    category: category,
+                    value: value
                 });
             }
         }
-       */
     });
 
     var PolarPlotArea = PolarPlotAreaBase.extend({

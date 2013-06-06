@@ -70,6 +70,125 @@
                 equal(plotArea.options.legend.items.length, 1);
             });
 
+            (function() {
+                var chart,
+                    point,
+                    pointElement,
+                    plotArea;
+
+                var TOLERANCE = 5;
+
+                function createRadarChart(options) {
+                    chart = createChart($.extend({
+                        series: [{
+                            type: "radarLine",
+                            data: [1, 2, 3],
+                            markers: { visible: true }
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B", "C"]
+                        }
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    point = plotArea.charts[0].points[0];
+                    pointElement = $(getElement(point.options.id));
+                }
+
+                // ------------------------------------------------------------
+                module("Radar Plot Area / Events / plotAreaClick", {
+                    teardown: destroyChart
+                });
+
+                test("point click bubbles to plot area", function() {
+                    createRadarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    console.log(point, pointElement.length)
+                    pointElement.trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("fires when clicking plot area directly", function() {
+                    createRadarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("does not fire when clicking outside of axis range", 0, function() {
+                    createRadarChart({
+                        plotAreaClick: function() { ok(false); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 580
+                    });
+                });
+
+                test("does not fire when clicking on axes", 0, function() {
+                    createRadarChart({
+                        plotAreaClick: function() { ok(false); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 3000, clientY: 0
+                    });
+                });
+
+                test("event arguments contain value", 1, function() {
+                    createRadarChart({
+                        plotAreaClick: function(e) { close(e.value, 0.4, TOLERANCE); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 400
+                    });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    createRadarChart({
+                        plotAreaClick: function(e) { equal(e.category, "A"); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("event arguments contain empty category", 1, function() {
+                    createRadarChart({
+                        categoryAxis: {
+                            categories: ["A"]
+                        },
+                        plotAreaClick: function(e) { equal(e.category, ""); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 400
+                    });
+                });
+
+                test("event arguments contain date category", 1, function() {
+                    var date = new Date("2012/09/15");
+                    createRadarChart({
+                        categoryAxis: {
+                            categories: [date]
+                        },
+                        plotAreaClick: function(e) { equal(e.category.toString(), date.toString()); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
@@ -81,7 +200,7 @@
         <ul id="log"></ul>
 
         <div style="position: absolute; top: 200px; left: 8px;">
-            <div id="container" style="width: 1664px; height: 400px;">
+            <div id="container">
             </div>
         </div>
 

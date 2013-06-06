@@ -125,6 +125,13 @@ kendo_module({
             );
 
             return point;
+        },
+
+        distanceTo: function(point) {
+            var dx = this.x - point.x,
+                dy = this.y - point.y;
+
+            return math.sqrt(dx * dx + dy * dy);
         }
     };
 
@@ -337,7 +344,7 @@ kendo_module({
             return new Ring(r.c, r.ir, r.r, r.startAngle, r.angle);
         },
 
-        // TODO: Rename to median
+        // TODO: Rename to midAngle
         middle: function() {
             return this.startAngle + this.angle / 2;
         },

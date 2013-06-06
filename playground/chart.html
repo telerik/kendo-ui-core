@@ -51,7 +51,7 @@
                         data: [2, 4, 13, null]
                     }],
                     categoryAxis: {
-                        //categories: ["Foo", "Bar", "Baz", "Boo"],
+                        categories: ["Foo", "Bar", "Baz", "Boo"],
                         majorGridLines: {
                             // TODO: Document
                             // visible: true
@@ -91,7 +91,7 @@
                     }
                 });
 
-                $("#chart").kendoChart({
+                $("#___chart").kendoChart({
                     series: [{
                         // polarArea
                         // polarScatter
@@ -134,6 +134,24 @@
                     transitions: false,
                     tooltip: {
                         visible: true
+                    }
+                });
+
+                $("#chart").kendoChart({
+                    series: [{
+                        data: [1, 2, 3],
+                        type: "radarLine"
+                    }],
+                    categoryAxis: {
+                        minorGridLines: {
+                            // TODO: Limit length
+                            //visible: true
+                        },
+                        categories: ["A", "B", "C"],
+                        reverse: true
+                    },
+                    valueAxis: {
+                        majorUnit: 1
                     }
                 });
 
