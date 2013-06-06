@@ -59,6 +59,94 @@
                 equal(plotArea.options.legend.items.length, 1);
             });
 
+            (function() {
+                var chart,
+                    point,
+                    pointElement,
+                    plotArea;
+
+                var TOLERANCE = 5;
+
+                function createPolarChart(options) {
+                    chart = createChart($.extend({
+                        series: [{
+                            type: "polarLine",
+                            data: [[120, 10]],
+                            markers: { visible: true }
+                        }]
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    point = plotArea.charts[0].points[0];
+                    pointElement = $(getElement(point.options.id));
+                }
+
+                // ------------------------------------------------------------
+                module("Polar Plot Area / Events / plotAreaClick", {
+                    teardown: destroyChart
+                });
+
+                test("point click bubbles to plot area", function() {
+                    createPolarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    pointElement.trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("fires when clicking plot area directly", function() {
+                    createPolarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("does not fire when clicking outside of axis range", 0, function() {
+                    createPolarChart({
+                        plotAreaClick: function() { ok(false); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 580
+                    });
+                });
+
+                test("does not fire when clicking on axes", 0, function() {
+                    createPolarChart({
+                        plotAreaClick: function() { ok(false); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 3000, clientY: 0
+                    });
+                });
+
+                test("event arguments contain x value", 1, function() {
+                    createPolarChart({
+                        plotAreaClick: function(e) { close(e.x, 180, TOLERANCE); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 400
+                    });
+                });
+
+                test("event arguments contain y value", 1, function() {
+                    createPolarChart({
+                        plotAreaClick: function(e) { close(e.y, 6, TOLERANCE); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
@@ -70,7 +158,7 @@
         <ul id="log"></ul>
 
         <div style="position: absolute; top: 200px; left: 8px;">
-            <div id="container" style="width: 1664px; height: 400px;">
+            <div id="container">
             </div>
         </div>
 

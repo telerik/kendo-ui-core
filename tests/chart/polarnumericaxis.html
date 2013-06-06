@@ -25,6 +25,7 @@
                 Point2D = dataviz.Point2D,
                 Box2D = dataviz.Box2D,
                 chartBox = new Box2D(100, 100, 500, 500),
+                center = new Point2D(300, 300),
                 view,
                 axis,
                 altAxis,
@@ -258,6 +259,121 @@
                 slot = axis.getSlot(60, 30);
                 equal(slot.startAngle, 120);
                 equal(slot.angle, 0);
+            });
+
+            // ------------------------------------------------------------
+            module("Polar Numeric Axis / getValue", {
+                setup: function() {
+                    createAxis();
+                }
+            });
+
+            test("value @ 0 deg", function() {
+                var p = Point2D.onCircle(center, 0, 100);
+                equal(axis.getValue(p), 180);
+            });
+
+            test("value @ 90 deg", function() {
+                var p = Point2D.onCircle(center, 90, 100);
+                equal(axis.getValue(p), 90);
+            });
+
+            test("value @ 120 def", function() {
+                var p = Point2D.onCircle(center, 120, 100);
+                equal(axis.getValue(p), 60);
+            });
+
+            test("value @ 270 def", function() {
+                var p = Point2D.onCircle(center, 270, 100);
+                equal(axis.getValue(p), 270);
+            });
+
+            // ------------------------------------------------------------
+            module("Polar Numeric Axis / getValue / reverse", {
+                setup: function() {
+                    createAxis({
+                        reverse: true
+                    });
+                }
+            });
+
+            test("value @ 0 deg", function() {
+                var p = Point2D.onCircle(center, 0, 100);
+                equal(axis.getValue(p), 180);
+            });
+
+            test("value @ 90 deg", function() {
+                var p = Point2D.onCircle(center, 90, 100);
+                equal(axis.getValue(p), 270);
+            });
+
+            test("value @ 120 def", function() {
+                var p = Point2D.onCircle(center, 120, 100);
+                equal(axis.getValue(p), 300);
+            });
+
+            test("value @ 270 def", function() {
+                var p = Point2D.onCircle(center, 270, 100);
+                equal(axis.getValue(p), 90);
+            });
+
+            // ------------------------------------------------------------
+            module("Polar Numeric Axis / getValue / startAngle", {
+                setup: function() {
+                    createAxis({
+                        startAngle: 90
+                    });
+                }
+            });
+
+            test("value @ 0 deg", function() {
+                var p = Point2D.onCircle(center, 0, 100);
+                equal(axis.getValue(p), 90);
+            });
+
+            test("value @ 90 deg", function() {
+                var p = Point2D.onCircle(center, 90, 100);
+                equal(axis.getValue(p), 0);
+            });
+
+            test("value @ 120 def", function() {
+                var p = Point2D.onCircle(center, 120, 100);
+                equal(axis.getValue(p), 330);
+            });
+
+            test("value @ 270 def", function() {
+                var p = Point2D.onCircle(center, 270, 100);
+                equal(axis.getValue(p), 180);
+            });
+
+            // ------------------------------------------------------------
+            module("Polar Numeric Axis / getValue / startAngle / reverse", {
+                setup: function() {
+                    createAxis({
+                        startAngle: 90,
+                        reverse: true
+                    });
+                }
+            });
+
+            test("value @ 0 deg", function() {
+                var p = Point2D.onCircle(center, 0, 100);
+                equal(axis.getValue(p), 270);
+            });
+
+            test("value @ 90 deg", function() {
+                var p = Point2D.onCircle(center, 90, 100);
+                equal(axis.getValue(p), 0);
+            });
+
+            test("value @ 120 def", function() {
+                var p = Point2D.onCircle(center, 120, 100);
+                equal(axis.getValue(p), 30);
+            });
+
+            test("value @ 270 def", function() {
+                var p = Point2D.onCircle(center, 270, 100);
+                equal(axis.getValue(p), 180);
             });
 
             // ------------------------------------------------------------

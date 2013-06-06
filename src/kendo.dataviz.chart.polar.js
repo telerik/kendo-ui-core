@@ -643,7 +643,22 @@ kendo_module({
             );
         },
 
-        // getValue: function(point) { },
+        getValue: function(point) {
+            var axis = this,
+                options = axis.options,
+                center = axis.box.center(),
+                dx = point.x - center.x,
+                dy = point.y - center.y,
+                theta = math.round(math.atan2(dy, dx) / DEG_TO_RAD),
+                start = options.startAngle;
+
+            if (!options.reverse) {
+                theta *= -1;
+                start *= -1;
+            }
+
+            return (theta + start + 360) % 360;
+        },
 
         labelsCount: NumericAxis.fn.labelsCount,
         createAxisLabel: NumericAxis.fn.createAxisLabel
@@ -1155,10 +1170,26 @@ kendo_module({
                 areaChart = new PolarAreaChart(plotArea, { series: series });
 
             plotArea.appendChart(areaChart, pane);
-        }
+        },
 
-        // TODO: Implement
-        // click: function(chart, e) { }
+        click: function(chart, e) {
+            var plotArea = this,
+                coords = chart._eventCoordinates(e),
+                point = new Point2D(coords.x, coords.y),
+                xValue,
+                yValue;
+
+            xValue = plotArea.axisX.getValue(point);
+            yValue = plotArea.axisY.getValue(point);
+
+            if (xValue !== null && yValue !== null) {
+                chart.trigger(PLOT_AREA_CLICK, {
+                    element: $(e.target),
+                    x: xValue,
+                    y: yValue
+                });
+            }
+        }
     });
 
     // Helpers ================================================================
