@@ -612,9 +612,9 @@ kendo_module({
 
             if (action === "itemchange") {
                 listView.setDataItem(listView.findByDataItem(dataItems)[0], dataItems[0]);
-            } else if (action === "add") {
+            } else if (action === "add" && !groupedMode) {
                 listView.append(dataItems);
-            } else if (action === "remove") {
+            } else if (action === "remove" && !groupedMode) {
                 listView.remove(dataItems);
             } else if (groupedMode) {
                 listView.replaceGrouped(view);
