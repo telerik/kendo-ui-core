@@ -3587,7 +3587,7 @@ kendo_module({
         },
 
         indexOf: function(item) {
-            return this.dataSource.data().indexOf(item) + this.offset;
+            return this.dataSource.data().indexOf(item) + this.dataOffset;
         },
 
         _prefetch: function() {
