@@ -1089,8 +1089,13 @@ ul.k-menu-vertical > .k-item
 .k-popup .k-animation-container
 {
     margin-top: -1px;
-    margin-top: ~"-2px\9";
     padding-left: 1px;
+}
+
+.k-ie .k-menu .k-animation-container,
+.k-ie .k-popup .k-animation-container
+{
+    margin-top: -2px;
 }
 
 .k-popup .k-animation-container .k-popup
@@ -2595,7 +2600,11 @@ input.k-textbox
     padding: 2px .3em;
     height: 2.13em;
     line-height: 1.6em;
-    text-indent: 2px\9;
+}
+
+.k-ie input.k-textbox
+{
+    text-indent: 2px;
 }
 
 .k-ff input.k-textbox
