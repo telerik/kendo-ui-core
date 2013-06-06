@@ -586,11 +586,13 @@ kendo_module({
             var view = this.view();
 
             this.dataSource.filter({
-                logic: "or",
-                filters: [
-                    { field: "start", operator: "gte", value: view.startDate },
-                    { field: "start", operator: "lte", value: view.endDate }
-                ]
+                filters: [{
+                    logic: "or",
+                    filters: [
+                        { field: "start", operator: "gte", value: view.startDate },
+                        { field: "start", operator: "lte", value: view.endDate }
+                    ]
+                }]
             });
         },
 

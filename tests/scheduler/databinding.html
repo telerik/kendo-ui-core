@@ -47,29 +47,10 @@
                 ok(scheduler.dataSource instanceof kendo.data.SchedulerDataSource);
             });
 
-            test("set filter of the DataSource", function() {
-                var scheduler = new Scheduler(container, {
-                    views: ["day"],
-                    selectDate: new Date(2013, 1, 3, 0, 0, 0),
-                    dataSource: []
-                });
-
-                var filter = scheduler.dataSource.filter();
-                var view = scheduler.view();
-
-                equal(filter.filters.length, 1);
-                equal(filter.filters[0].field, "start");
-                equal(filter.filters[0].operator, "gte");
-                equal(filter.filters[0].value, view.startDate);
-//                equal(filter.filters[1].field, "end");
- //               equal(filter.filters[1].operator, "lte");
-  //              equal(filter.filters[1].value, view.endDate);
-            });
-
             test("view is bound to the event data", 1, function() {
                 var scheduler = new Scheduler(container, {
                     views: [ kendo.ui.MultiDayView.extend({
-                        dataBind: function(events) {
+                        renderEvents: function(events) {
                             equal(events.length, 2);
                         },
                         name: "testView"
@@ -80,7 +61,8 @@
                         transport: {
                             read: function(options) {
                                 options.success([
-                                    {}, {}
+                                    { start: new Date(), end: new Date() },
+                                    { start: new Date(), end: new Date() }
                                 ]);
                             }
                         }
