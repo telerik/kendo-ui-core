@@ -256,7 +256,7 @@ kendo_module({
                 that.table.addClass("k-scrollbar-v");
                 that.datesHeader.css("padding-right", scrollbarWidth - parseInt(that.datesHeader.children().css("border-right-width"), 10));
             }
-            if (contentDiv.offsetHeight - contentDiv.clientHeight > 0) {
+            if (contentDiv.offsetHeight - contentDiv.clientHeight > 0 || contentDiv.clientHeight > that.content.children(".k-scheduler-table").height()) {
                 that.table.addClass("k-scrollbar-h");
             }
         },
