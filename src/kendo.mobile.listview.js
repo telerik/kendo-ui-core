@@ -367,6 +367,9 @@ kendo_module({
         }
     });
 
+    // export for testing purposes
+    kendo.mobile.ui.VirtualList = VirtualList;
+
     var VirtualListViewItem = kendo.Class.extend({
         init: function(listView, dataItem) {
             var element = listView.append([dataItem])[0],
@@ -1074,6 +1077,5 @@ kendo_module({
         }
     });
 
-    kendo.mobile.ui.VirtualList = VirtualList;
     ui.plugin(ListView);
 })(window.kendo.jQuery);
