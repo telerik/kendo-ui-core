@@ -3,7 +3,7 @@ var movable, pane, dimensions, userEvents;
 module("pane dimensions");
 
 test("calculates min scale", 1, function() {
-    fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 600px;">Element</div></div>');
+    fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 800px;">Element</div></div>');
     var container = fixture.children().first();
 
     element = container.children().first();
@@ -14,7 +14,7 @@ test("calculates min scale", 1, function() {
     });
 
     dimensions.refresh();
-    equal(dimensions.minScale, 0.5);
+    equal(dimensions.minScale, 0.25);
 
     fixture.empty();
 })
