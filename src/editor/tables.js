@@ -12,9 +12,9 @@ var kendo = window.kendo,
 
 var TableCommand = Command.extend({
     _createTable: function(rows, columns) {
-        var td = "<td>" + Editor.emptyElementContent + "</td>";
+        var td = "<td contentEditable='true'>" + Editor.emptyElementContent + "</td>";
 
-        return "<table class='k-table' data-last>" +
+        return "<table class='k-table' contentEditable='false' data-last>" +
                    new Array(rows + 1).join("<tr>" + new Array(columns + 1).join(td) + "</tr>") +
                "</table>";
     },

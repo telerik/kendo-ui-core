@@ -102,6 +102,10 @@ var Serializer = {
                 var attributeName = attribute.nodeName;
                 var attributeValue = attribute.nodeValue;
 
+                if (attributeName.toLowerCase() == "contenteditable" && (dom.is(node, "table") || dom.is(node, "td"))) {
+                    continue;
+                }
+
                 if (attributeName == "class" && attributeValue == "k-table") {
                     continue;
                 }
