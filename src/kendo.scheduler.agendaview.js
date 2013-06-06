@@ -117,31 +117,39 @@ kendo_module({
             var tasks = this._tasks(events);
 
             if (tasks.length > 0) {
+                var tableRows = [];
 
                 for (var i = 0; i < tasks.length; i++) {
-                    var tr = [];
+                    var date = tasks[i].value;
 
-                    for (var taskIndex = 0; taskIndex < tasks[i].items.length; taskIndex++) {
-                        var task = tasks[i].items[taskIndex];
+                    var items = tasks[i].items;
 
-                        tr.push(kendo.format(
-                                '<td class="k-scheduler-timecolumn">{0}</td><td>{1}</td>',
-                                this._timeTemplate(task),
-                                this._taskTemplate(task)
-                            )
-                        );
+                    var today = kendo.date.isToday(date);
+
+                    for (var taskIndex = 0; taskIndex < items.length; taskIndex++) {
+                        var task = items[taskIndex];
+
+                        var tableRow = [];
+
+                        if (taskIndex === 0) {
+                            tableRow.push(kendo.format(
+                                '<td class="k-scheduler-datecolumn" rowspan="{0}">{1}</td>',
+                                items.length,
+                                this._dateTemplate({ date: date })
+                            ));
+                        }
+
+                        tableRow.push(kendo.format(
+                            '<td class="k-scheduler-timecolumn">{0}</td><td>{1}</td>',
+                            this._timeTemplate(task),
+                            this._taskTemplate(task)
+                        ));
+
+                        tableRows.push("<tr" + (today ? ' class="k-today">' : ">") + tableRow.join("") + "</tr>");
                     }
-
-                    tr.unshift(kendo.format(
-                            '<td class="k-scheduler-datecolumn" rowspan="{0}">{1}</td>{2}',
-                            tr.length,
-                            this._dateTemplate({ date: tasks[i].value }),
-                            tr.shift()
-                        )
-                    );
-
-                    table.append("<tr>" + tr.join("</tr><tr>") + "</tr>");
                 }
+
+                table.append(tableRows.join(""));
             }
 
             this.refreshLayout();

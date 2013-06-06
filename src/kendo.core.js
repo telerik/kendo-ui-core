@@ -3283,6 +3283,10 @@ function pad(number, digits, end) {
             return getDate(TODAY);
         }
 
+        function isToday(date) {
+           return getDate(date).getTime() == today().getTime();
+        }
+
         return {
             adjustForBrazillianTimezone: adjustForBrazillianTimezone,
             dayOfWeek: dayOfWeek,
@@ -3290,6 +3294,7 @@ function pad(number, digits, end) {
             getDate: getDate,
             isInDateRange: isInDateRange,
             isInTimeRange: isInTimeRange,
+            isToday: isToday,
             nextDay: function(date) {
                 return addDays(date, 1);
             },
