@@ -125,6 +125,13 @@ kendo_module({
             );
 
             return point;
+        },
+
+        distanceTo: function(point) {
+            var dx = this.x - point.x,
+                dy = this.y - point.y;
+
+            return math.sqrt(dx * dx + dy * dy);
         }
     };
 
@@ -337,7 +344,7 @@ kendo_module({
             return new Ring(r.c, r.ir, r.r, r.startAngle, r.angle);
         },
 
-        // TODO: Rename to median
+        // TODO: Rename to midAngle
         middle: function() {
             return this.startAngle + this.angle / 2;
         },
@@ -1532,12 +1539,14 @@ kendo_module({
                 },
                 userSetLimits;
 
-            if (autoMin < 0 && remainderClose(autoMin, majorUnit, 1/3)) {
-                autoMin -= majorUnit;
-            }
+            if (options.roundToMajorUnit !== false) {
+                if (autoMin < 0 && remainderClose(autoMin, majorUnit, 1/3)) {
+                    autoMin -= majorUnit;
+                }
 
-            if (autoMax > 0 && remainderClose(autoMax, majorUnit, 1/3)) {
-                autoMax += majorUnit;
+                if (autoMax > 0 && remainderClose(autoMax, majorUnit, 1/3)) {
+                    autoMax += majorUnit;
+                }
             }
 
             autoOptions.min = floor(autoMin, majorUnit);

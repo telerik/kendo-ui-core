@@ -1,0 +1,42 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+
+                title: {
+                    text: "Budget report"
+                },
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/budget-report.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                seriesDefaults: {
+                    type: "radarLine",
+                },
+                series: [{
+                    field: "budget"
+                }, {
+                    field: "spending"
+                }],
+                categoryAxis: {
+                    field: "unit"
+                },
+                valueAxis: {
+                    labels: {
+                        template: "$#= value / 1000 #k"
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

@@ -1,0 +1,41 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Nutrient balance: Apples, raw"
+                },
+                series: [{
+                    type: "radarColumn",
+                    name: "Nutrients",
+                    data: [
+                        5, 1, 1, 5, 0, 1,
+                        1, 2, 1, 2, 1, 0,
+                        0, 2, 1, 0, 3, 1,
+                        1, 1, 0, 0, 0
+                    ]
+                }],
+                categoryAxis: {
+                    categories: [
+                        "Df", "Pr", "A", "C", "D", "E",
+                        "Th", "Ri", "Ni", "B", "F", "B",
+                        "Se", "Mn", "Cu", "Zn", "K", "P",
+                        "Fe", "Ca", "Na", "Ch", "Sf"
+                    ]
+                },
+                valueAxis: {
+                    visible: false
+                },
+                legend: {
+                    visible: false
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

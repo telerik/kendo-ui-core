@@ -45,12 +45,14 @@ kendo_module({
         ARC = "arc",
         BLACK = "#000",
         COORD_PRECISION = dataviz.COORD_PRECISION,
-        RADAR_AREA = "radarArea",
-        RADAR_COLUMN = "radarColumn",
-        RADAR_LINE = "radarLine",
+        DEG_TO_RAD = math.PI / 180,
+        PLOT_AREA_CLICK = "plotAreaClick",
         POLAR_AREA = "polarArea",
         POLAR_LINE = "polarLine",
         POLAR_SCATTER = "polarScatter",
+        RADAR_AREA = "radarArea",
+        RADAR_COLUMN = "radarColumn",
+        RADAR_LINE = "radarLine",
         X = "x",
         Y = "y",
         ZERO = "zero",
@@ -59,7 +61,7 @@ kendo_module({
         ],
         RADAR_CHARTS = [
             RADAR_AREA, RADAR_LINE, RADAR_COLUMN
-        ] ;
+        ];
 
     // Polar and radar charts =================================================
     var RadarCategoryAxis = CategoryAxis.extend({
@@ -148,7 +150,9 @@ kendo_module({
             return this.divisions(0.5);
         },
 
-        renderLine: $.noop,
+        renderLine: function() {
+            return [];
+        },
 
         renderGridLines: function(view, altAxis) {
             var axis = this,
@@ -199,7 +203,6 @@ kendo_module({
             for (i = 0; i < angles.length; i++) {
                 outerPt = Point2D.onCircle(center, angles[i], radius);
 
-                // TODO: Inner radius support
                 elements.push(view.createLine(
                     center.x, center.y, outerPt.x, outerPt.y,
                     lineOptions
@@ -334,7 +337,6 @@ kendo_module({
                 options = axis.options,
                 plotBands = options.plotBands || [],
                 elements = [],
-                // TODO: Lookup from plotArea. Should it be user changable?
                 type = options.majorGridLines.type,
                 altAxis = axis.plotArea.polarAxis,
                 majorAngles = altAxis.majorDivisions(),
@@ -451,8 +453,47 @@ kendo_module({
             }
 
             return elements;
+        },
+
+        getValue: function(point) {
+            var axis = this,
+                options = axis.options,
+                type = options.majorGridLines.type,
+                lineBox = axis.lineBox(),
+                altAxis = axis.plotArea.polarAxis,
+                majorAngles = altAxis.majorDivisions(),
+                center = altAxis.box.center(),
+                dx = point.x - center.x,
+                dy = point.y - center.y,
+                r = point.distanceTo(center),
+                d = r;
+
+            if (type !== ARC && majorAngles.length > 1) {
+                var theta = math.round(math.atan2(dy, dx) / DEG_TO_RAD + 540) % 360;
+
+                majorAngles.sort(function(a, b) {
+                    return angularDistance(a, theta) - angularDistance(b, theta);
+                });
+
+                // Solve triangle (center, point, axis X) using one side (r) and two angles.
+                // Angles are derived from triangle (center, point, gridline X)
+                var midAngle = angularDistance(majorAngles[0], majorAngles[1]) / 2,
+                    alpha = angularDistance(theta, majorAngles[0]),
+                    gamma = 90 - midAngle,
+                    beta = 180 - alpha - gamma;
+
+                d = r * (math.sin(beta * DEG_TO_RAD) / math.sin(gamma * DEG_TO_RAD));
+            }
+
+            return NumericAxis.fn.getValue.call(
+                this, new Point2D(lineBox.x1, lineBox.y2 - d)
+            );
         }
     });
+
+    function angularDistance(a, b) {
+        return 180 - math.abs(math.abs(a - b) - 180);
+    }
 
     var PolarNumericAxis = Axis.extend({
         init: function(options) {
@@ -547,7 +588,9 @@ kendo_module({
             return this.divisions(this.options.minorUnit);
         },
 
-        renderLine: $.noop,
+        renderLine: function() {
+            return [];
+        },
 
         renderGridLines: RadarCategoryAxis.fn.renderGridLines,
         gridLineElements: RadarCategoryAxis.fn.gridLineElements,
@@ -598,8 +641,22 @@ kendo_module({
             );
         },
 
-        // TODO: Implement
-        // getValue: function(point) { },
+        getValue: function(point) {
+            var axis = this,
+                options = axis.options,
+                center = axis.box.center(),
+                dx = point.x - center.x,
+                dy = point.y - center.y,
+                theta = math.round(math.atan2(dy, dx) / DEG_TO_RAD),
+                start = options.startAngle;
+
+            if (!options.reverse) {
+                theta *= -1;
+                start *= -1;
+            }
+
+            return (theta + start + 360) % 360;
+        },
 
         labelsCount: NumericAxis.fn.labelsCount,
         createAxisLabel: NumericAxis.fn.createAxisLabel
@@ -662,7 +719,8 @@ kendo_module({
 
                 if (i !== first) {
                     prevSector = children[reverse ? i + 1 : i - 1].sector;
-                    childSector.ir = prevSector.ir + prevSector.r;
+                    childSector.ir = prevSector.r;
+                    childSector.r += childSector.ir;
                 }
             }
         }
@@ -739,18 +797,7 @@ kendo_module({
 
     var RadarAreaSegment = AreaSegment.extend({
         points: function() {
-            var segment = this,
-                chart = segment.parent,
-                plotArea = chart.plotArea,
-                polarAxis = plotArea.polarAxis,
-                center = polarAxis.box.center(),
-                stackPoints = segment.stackPoints,
-                points = LineSegment.fn.points.call(segment, stackPoints);
-
-            points.unshift(center);
-            points.push(center);
-
-            return points;
+            return LineSegment.fn.points.call(this, this.stackPoints);
         }
     });
 
@@ -763,6 +810,8 @@ kendo_module({
             if (options.isStacked && seriesIx > 0 && prevSegment) {
                 stackPoints = prevSegment.linePoints.slice(0).reverse();
             }
+
+            linePoints.push(linePoints[0]);
 
             return new RadarAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
         },
@@ -785,9 +834,26 @@ kendo_module({
         pointSlot: PolarScatterChart.fn.pointSlot
     });
 
+    var PolarAreaSegment = AreaSegment.extend({
+        points: function() {
+            var segment = this,
+            chart = segment.parent,
+            plotArea = chart.plotArea,
+            polarAxis = plotArea.polarAxis,
+            center = polarAxis.box.center(),
+            stackPoints = segment.stackPoints,
+            points = LineSegment.fn.points.call(segment, stackPoints);
+
+            points.unshift(center);
+            points.push(center);
+
+            return points;
+        }
+    });
+
     var PolarAreaChart = PolarLineChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            return new RadarAreaSegment(linePoints, [], currentSeries, seriesIx);
+            return new PolarAreaSegment(linePoints, [], currentSeries, seriesIx);
         },
 
         seriesMissingValues: function(series) {
@@ -799,7 +865,7 @@ kendo_module({
         }
     });
 
-    var RadarPlotArea = PlotAreaBase.extend({
+    var PolarPlotAreaBase = PlotAreaBase.extend({
         init: function(series, options) {
             var plotArea = this;
 
@@ -808,34 +874,48 @@ kendo_module({
             PlotAreaBase.fn.init.call(plotArea, series, options);
         },
 
-        options: {
-            categoryAxis: {
-                categories: []
-            },
-            valueAxis: {}
-        },
-
         render: function() {
             var plotArea = this;
 
-            plotArea.createCategoryAxis();
-            // plotArea.aggregateDateSeries();
+            plotArea.addToLegend(plotArea.series);
+            plotArea.createPolarAxis();
             plotArea.createCharts();
             plotArea.createValueAxis();
         },
 
-        reflow: PlotAreaBase.fn.reflow,
+        createValueAxis: function() {
+            var plotArea = this,
+                tracker = plotArea.valueAxisRangeTracker,
+                defaultRange = tracker.query(),
+                range,
+                valueAxis;
+
+            range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
+
+            if (range && defaultRange) {
+                range.min = math.min(range.min, defaultRange.min);
+                range.max = math.max(range.max, defaultRange.max);
+            }
+
+            valueAxis = new RadarNumericAxis(
+                range.min, range.max,
+                plotArea.valueAxisOptions({ roundToMajorUnit: false })
+            );
+
+            plotArea.valueAxis = valueAxis;
+            plotArea.appendAxis(valueAxis);
+        },
 
         reflowAxes: function () {
             var plotArea = this,
                 valueAxis = plotArea.valueAxis,
-                categoryAxis = plotArea.categoryAxis,
+                polarAxis = plotArea.polarAxis,
                 box = plotArea.box,
                 // TODO: Percents
                 axisBox = box.clone().unpad(35),
                 valueAxisBox = axisBox.clone().shrink(0, axisBox.height() / 2);
 
-            categoryAxis.reflow(axisBox);
+            polarAxis.reflow(axisBox);
             valueAxis.reflow(valueAxisBox);
             var heightDiff = valueAxis.lineBox().height() - valueAxis.box.height();
             valueAxis.reflow(valueAxis.box.unpad({ top: heightDiff }));
@@ -848,7 +928,7 @@ kendo_module({
                 valueAxis = plotArea.valueAxis,
                 slot = valueAxis.getSlot(valueAxis.options.min),
                 slotEdge = valueAxis.options.reverse ? 2 : 1,
-                center = plotArea.categoryAxis.getSlot(0).c,
+                center = plotArea.polarAxis.getSlot(0).c,
                 box = valueAxis.box.translate(
                     center.x - slot[X + slotEdge],
                     center.y - slot[Y + slotEdge]
@@ -859,41 +939,42 @@ kendo_module({
 
         backgroundBox: function() {
             return this.box;
+        }
+    });
+
+    var RadarPlotArea = PolarPlotAreaBase.extend({
+        options: {
+            categoryAxis: {
+                categories: []
+            },
+            valueAxis: {}
         },
 
-        createCategoryAxis: function() {
+        createPolarAxis: function() {
             var plotArea = this,
                 categoryAxis;
 
             categoryAxis = new RadarCategoryAxis(plotArea.options.categoryAxis);
 
-            plotArea.categoryAxis = categoryAxis;
             plotArea.polarAxis = categoryAxis;
+            plotArea.categoryAxis = categoryAxis;
             plotArea.appendAxis(categoryAxis);
+
+            // TODO
+            // plotArea.aggregateDateSeries();
         },
 
-        createValueAxis: function() {
-            var plotArea = this,
-                tracker = plotArea.valueAxisRangeTracker,
-                defaultRange = tracker.query(),
-                range,
-                valueAxis;
+        valueAxisOptions: function(defaults) {
+            var plotArea = this;
 
-            // TODO: Should we support multiple axes?
-            range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
-
-            if (range && defaultRange) {
-                range.min = math.min(range.min, defaultRange.min);
-                range.max = math.max(range.max, defaultRange.max);
+            if (plotArea._hasBarCharts) {
+                deepExtend(defaults, {
+                    majorGridLines: { type: ARC },
+                    minorGridLines: { type: ARC }
+                });
             }
 
-            valueAxis = new RadarNumericAxis(
-                range.min, range.max,
-                deepExtend({ max: range.max }, plotArea.options.valueAxis)
-            );
-
-            plotArea.valueAxis = valueAxis;
-            plotArea.appendAxis(valueAxis);
+            return deepExtend(defaults, plotArea.options.valueAxis);
         },
 
         appendChart: CategoricalPlotArea.fn.appendChart,
@@ -964,15 +1045,15 @@ kendo_module({
                     series: series
                 });
 
+            plotArea._hasBarCharts = true;
+
             plotArea.appendChart(lineChart, pane);
         },
 
         seriesCategoryAxis: function() {
             return this.categoryAxis;
-        }
+        },
 
-        // TODO: Implement
-        /*
         click: function(chart, e) {
             var plotArea = this,
                 coords = chart._eventCoordinates(e),
@@ -981,84 +1062,22 @@ kendo_module({
                 value;
 
             category = plotArea.categoryAxis.getCategory(point);
+            value = plotArea.valueAxis.getValue(point);
 
-            if (defined(category) && defined(value)) {
+            if (category !== null && value !== null) {
                 chart.trigger(PLOT_AREA_CLICK, {
                     element: $(e.target),
-                    category: singleItemOrArray(categories),
-                    value: singleItemOrArray(values)
+                    category: category,
+                    value: value
                 });
             }
         }
-       */
     });
 
-    // TODO: Inherit / mixin from RadarPlotArea
-    var PolarPlotArea = PlotAreaBase.extend({
-        init: function(series, options) {
-            var plotArea = this;
-
-            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker();
-
-            PlotAreaBase.fn.init.call(plotArea, series, options);
-        },
-
+    var PolarPlotArea = PolarPlotAreaBase.extend({
         options: {
-            polarAxis: {},
-            valueAxis: {}
-        },
-
-        render: function() {
-            var plotArea = this;
-
-            plotArea.createPolarAxis();
-            plotArea.createCharts();
-            plotArea.createValueAxis();
-        },
-
-        reflow: PlotAreaBase.fn.reflow,
-
-        reflowAxes: function () {
-            var plotArea = this,
-                valueAxis = plotArea.valueAxis,
-                polarAxis = plotArea.polarAxis,
-                box = plotArea.box,
-                // TODO: Percents
-                axisBox = box.clone().unpad(35),
-                valueAxisBox = axisBox.clone().shrink(0, axisBox.height() / 2);
-
-            polarAxis.reflow(axisBox);
-            valueAxis.reflow(valueAxisBox);
-            var heightDiff = valueAxis.lineBox().height() - valueAxis.box.height();
-            valueAxis.reflow(valueAxis.box.unpad({ top: heightDiff }));
-
-            plotArea.alignAxes(axisBox);
-        },
-
-        alignAxes: function() {
-            var plotArea = this,
-                valueAxis = plotArea.valueAxis,
-                slot = valueAxis.getSlot(valueAxis.options.min),
-                slotEdge = valueAxis.options.reverse ? 2 : 1,
-                center = plotArea.polarAxis.getSlot(0).c,
-                box = valueAxis.box.translate(
-                    center.x - slot[X + slotEdge],
-                    center.y - slot[Y + slotEdge]
-                );
-
-            valueAxis.reflow(box);
-        },
-
-        backgroundBox: function() {
-            return this.box;
-        },
-
-        appendChart: function(chart, pane) {
-            var plotArea = this;
-
-            plotArea.valueAxisRangeTracker.update(chart.yAxisRanges);
-
-            PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
+            xAxis: {},
+            yAxis: {}
         },
 
         createPolarAxis: function() {
@@ -1072,33 +1091,29 @@ kendo_module({
             plotArea.appendAxis(polarAxis);
         },
 
-        createValueAxis: function() {
-            var plotArea = this,
-                tracker = plotArea.valueAxisRangeTracker,
-                defaultRange = tracker.query(),
-                range,
-                valueAxis;
+        valueAxisOptions: function(defaults) {
+            var plotArea = this;
 
-            // TODO: Should we support multiple axes?
-            range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
-
-            if (range && defaultRange) {
-                range.min = math.min(range.min, defaultRange.min);
-                range.max = math.max(range.max, defaultRange.max);
-            }
-
-            valueAxis = new RadarNumericAxis(
-                range.min, range.max,
-                deepExtend({
-                    max: range.max,
+            return deepExtend(defaults, {
                     majorGridLines: { type: ARC },
                     minorGridLines: { type: ARC }
-                }, plotArea.options.yAxis)
+                }, plotArea.options.yAxis
             );
+        },
 
-            plotArea.valueAxis = valueAxis;
-            plotArea.axisY = valueAxis;
-            plotArea.appendAxis(valueAxis);
+        createValueAxis: function() {
+            var plotArea = this;
+
+            PolarPlotAreaBase.fn.createValueAxis.call(plotArea);
+            plotArea.axisY = plotArea.valueAxis;
+        },
+
+        appendChart: function(chart, pane) {
+            var plotArea = this;
+
+            plotArea.valueAxisRangeTracker.update(chart.yAxisRanges);
+
+            PlotAreaBase.fn.appendChart.call(plotArea, chart, pane);
         },
 
         createCharts: function() {
@@ -1153,10 +1168,26 @@ kendo_module({
                 areaChart = new PolarAreaChart(plotArea, { series: series });
 
             plotArea.appendChart(areaChart, pane);
-        }
+        },
 
-        // TODO: Implement
-        // click: function(chart, e) { }
+        click: function(chart, e) {
+            var plotArea = this,
+                coords = chart._eventCoordinates(e),
+                point = new Point2D(coords.x, coords.y),
+                xValue,
+                yValue;
+
+            xValue = plotArea.axisX.getValue(point);
+            yValue = plotArea.axisY.getValue(point);
+
+            if (xValue !== null && yValue !== null) {
+                chart.trigger(PLOT_AREA_CLICK, {
+                    element: $(e.target),
+                    x: xValue,
+                    y: yValue
+                });
+            }
+        }
     });
 
     // Helpers ================================================================

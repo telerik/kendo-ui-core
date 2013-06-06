@@ -25,6 +25,7 @@
                 Point2D = dataviz.Point2D,
                 Box2D = dataviz.Box2D,
                 chartBox = new Box2D(100, 100, 500, 500),
+                center = new Point2D(300, 300),
                 view,
                 axis,
                 altAxis,
@@ -220,7 +221,7 @@
             });
 
             // ------------------------------------------------------------
-            module("Radar Numeric Axis / Plot Bands / Arcs", {
+            module("Radar Numeric Axis / Plot Bands / Polygons", {
                 setup: function() {
                     createAxis({
                         line: {
@@ -306,6 +307,64 @@
             test("renders z index", function() {
                 equal(view.log.ring[0].style.zIndex, -1);
             });
+
+            // ------------------------------------------------------------
+            module("Radar Numeric Axis / getValue", {
+                setup: function() {
+                    createAxis();
+                }
+            });
+
+            test("value for point on axis", function() {
+                var p = Point2D.onCircle(center, 90, 100);
+                close(axis.getValue(p), 1, 0.02);
+            });
+
+            test("value for point on major gridline", function() {
+                var p = Point2D.onCircle(center, 210, 100);
+                close(axis.getValue(p), 1, 0.02);
+            });
+
+            test("value for point between gridlines (middle)", function() {
+                var p = Point2D.onCircle(center, 135, 50);
+                close(axis.getValue(p), 1, 0.02);
+            });
+
+            test("value for point between gridlines (near first)", function() {
+                var p = Point2D.onCircle(center, 110, 65);
+                close(axis.getValue(p), 1, 0.02);
+            });
+
+            test("value for point between gridlines (near second)", function() {
+                var p = Point2D.onCircle(center, 190, 65);
+                close(axis.getValue(p), 1, 0.02);
+            });
+
+            // ------------------------------------------------------------
+            module("Radar Numeric Axis / getValue / Arcs", {
+                setup: function() {
+                    createAxis({
+                        majorGridLines: {
+                            type: "arc"
+                        }
+                    });
+                }
+            });
+
+            test("value for point on axis", function() {
+                var p = Point2D.onCircle(center, 90, 100);
+                close(axis.getValue(p), 1, 0.02);
+            });
+
+            test("value for point on gridline", function() {
+                var p = Point2D.onCircle(center, 210, 100);
+                close(axis.getValue(p), 1, 0.02);
+            })
+
+            test("value for point between gridline", function() {
+                var p = Point2D.onCircle(center, 145, 100);
+                close(axis.getValue(p), 1, 0.02);
+            });;
 
             (function() {
                 var chart,

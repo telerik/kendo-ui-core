@@ -1,0 +1,27 @@
+
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+            </div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        title: {
+                            text: "Polar plot"
+                        },
+                        series: [{
+                            type: "polarLine",
+                            data: [
+                                [10, 10], [20, 20], [30, 30],
+                                [40, 40], [60, 50], [80, 60],
+                                [100, 70], [140, 80], [180, 90],
+                                [240, 100]
+                            ]
+                        }]
+                    });
+                }
+
+                $(document).ready(createChart);
+                $(document).bind("kendo:skinChange", createChart);
+            </script>
+        </div>

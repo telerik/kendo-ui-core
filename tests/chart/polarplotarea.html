@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="../qunit.ico" />
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz,
+                getElement = dataviz.getElement,
+                Box2D = dataviz.Box2D,
+                chartBox = new Box2D(100, 100, 1000, 1000),
+                plotArea,
+                categoryAxis,
+                valueAxis;
+
+
+            function createPlotArea(series, options) {
+                plotArea = new dataviz.PolarPlotArea(series, options);
+
+                categoryAxis = plotArea.categoryAxis;
+                valueAxis = plotArea.valueAxis;
+
+                chartSeries = plotArea.charts[0];
+            }
+
+            // ------------------------------------------------------------
+            module("Polar Plot Area / Axes", {
+                setup: function() {
+                    createPlotArea([{ type: "polarLine", data: [] }]);
+                }
+            });
+
+            test("roundToMajorUnit is set to false", function() {
+                equal(valueAxis.options.roundToMajorUnit, false);
+            });
+
+            // ------------------------------------------------------------
+            module("Polar Plot Area / Legend");
+
+            test("adds series legend items", function() {
+                createPlotArea([{ type: "polarLine", data: [], name: "Foo" }]);
+
+                equal(plotArea.options.legend.items.length, 1);
+            });
+
+            (function() {
+                var chart,
+                    point,
+                    pointElement,
+                    plotArea;
+
+                var TOLERANCE = 5;
+
+                function createPolarChart(options) {
+                    chart = createChart($.extend({
+                        series: [{
+                            type: "polarLine",
+                            data: [[120, 10]],
+                            markers: { visible: true }
+                        }]
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    point = plotArea.charts[0].points[0];
+                    pointElement = $(getElement(point.options.id));
+                }
+
+                // ------------------------------------------------------------
+                module("Polar Plot Area / Events / plotAreaClick", {
+                    teardown: destroyChart
+                });
+
+                test("point click bubbles to plot area", function() {
+                    createPolarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    pointElement.trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("fires when clicking plot area directly", function() {
+                    createPolarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("does not fire when clicking outside of axis range", 0, function() {
+                    createPolarChart({
+                        plotAreaClick: function() { ok(false); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 580
+                    });
+                });
+
+                test("does not fire when clicking on axes", 0, function() {
+                    createPolarChart({
+                        plotAreaClick: function() { ok(false); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 3000, clientY: 0
+                    });
+                });
+
+                test("event arguments contain x value", 1, function() {
+                    createPolarChart({
+                        plotAreaClick: function(e) { close(e.x, 180, TOLERANCE); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 400
+                    });
+                });
+
+                test("event arguments contain y value", 1, function() {
+                    createPolarChart({
+                        plotAreaClick: function(e) { close(e.y, 6, TOLERANCE); }
+                    });
+
+                    $(getElement(plotArea.options.id)).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+            })();
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div style="position: absolute; top: 200px; left: 8px;">
+            <div id="container">
+            </div>
+        </div>
+
+    </body>
+</html>

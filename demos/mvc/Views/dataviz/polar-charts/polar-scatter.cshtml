@@ -1,0 +1,39 @@
+
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+            </div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        title: {
+                            text: "Buck spread"
+                        },
+                        legend: {
+                            position: "bottom"
+                        },
+                        seriesDefaults: {
+                            type: "polarScatter",
+                        },
+                        series: [{
+                            name: "at 3 ft",
+                            data: [
+                                [150, 3], [150, 3.1], [152, 3.2], [152, 3.1], [151, 3.2], [153, 3.3], [149, 3]
+                            ]
+                        }, {
+                            name: "at 7 ft",
+                            data: [
+                                [270, 5], [250, 7], [259, 4], [270, 7], [265, 5], [250, 7], [263, 8], [261, 5]
+                            ]
+                        }],
+                        yAxis: {
+                            visible: false,
+                            max: 10
+                        }
+                    });
+                }
+
+                $(document).ready(createChart);
+                $(document).bind("kendo:skinChange", createChart);
+            </script>
+        </div>

@@ -1,0 +1,30 @@
+
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+            </div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        title: {
+                            text: "Polar area"
+                        },
+                        legend: {
+                            position: "bottom"
+                        },
+                        series: [{
+                            type: "polarArea",
+                            data: [
+                                [10, 10], [30, 20], [50, 30],
+                                [70, 20], [90, 10], [90, 0],
+                                [230, 10], [235, 20], [240, 30],
+                                [245, 20], [250, 10]
+                            ]
+                        }]
+                    });
+                }
+
+                $(document).ready(createChart);
+                $(document).bind("kendo:skinChange", createChart);
+            </script>
+        </div>

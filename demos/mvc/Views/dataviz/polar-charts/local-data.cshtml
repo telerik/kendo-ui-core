@@ -1,0 +1,54 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        var sunPos = [
+            {"Time":"08:00","Altitude":4.9,"Azimuth":92.7},
+            {"Time":"09:00","Altitude":17.6,"Azimuth":100.6},
+            {"Time":"10:00","Altitude":30.1,"Azimuth":109.7},
+            {"Time":"11:00","Altitude":41.8,"Azimuth":121.3},
+            {"Time":"12:00","Altitude":51.8,"Azimuth":137.7},
+            {"Time":"13:00","Altitude":58.5,"Azimuth":161.5},
+            {"Time":"14:00","Altitude":59.4,"Azimuth":190.7},
+            {"Time":"15:00","Altitude":54.1,"Azimuth":216.6},
+            {"Time":"16:00","Altitude":44.8,"Azimuth":234.8},
+            {"Time":"17:00","Altitude":33.5,"Azimuth":247.6},
+            {"Time":"18:00","Altitude":21.2,"Azimuth":257.2},
+            {"Time":"19:00","Altitude":8.4,"Azimuth":265.3},
+        ];
+
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Sun position at equinox"
+                },
+                dataSource: {
+                    data: sunPos
+                },
+                series: [{
+                    type: "polarLine",
+                    xField: "Azimuth",
+                    yField: "Altitude",
+                    labels: {
+                        template: "#= dataItem.Time.substring(0,2) #h",
+                        position: "below",
+                        visible: true
+                    }
+                }],
+                yAxis: {
+                    labels: {
+                        visible: false
+                    }
+                },
+                xAxis: {
+                    startAngle: -90,
+                    majorUnit: 30
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

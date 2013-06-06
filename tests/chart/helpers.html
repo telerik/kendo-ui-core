@@ -344,6 +344,10 @@
                 ok(!new Point2D(1, 1).equals());
             });
 
+            test("distanceTo calculates distance", function() {
+                equal(new Point2D(1, 1).distanceTo(new Point2D(2, 2)), Math.sqrt(2));
+            });
+
             (function() {
                 var sector;
 

@@ -4191,7 +4191,8 @@ kendo_module({
                     dashType: lineOptions.dashType,
                     data: { modelId: segment.options.modelId },
                     strokeLineCap: "butt",
-                    zIndex: -1
+                    zIndex: -1,
+                    align: false
                 })
             ];
         }

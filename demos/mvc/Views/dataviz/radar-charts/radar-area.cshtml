@@ -1,0 +1,50 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Employment candidate review"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "radarArea"
+                },
+                series: [{
+                    name: "Andrew Dodsworth",
+                    data: [10, 3, 3, 10, 2, 10]
+                }, {
+                    name: "Margaret Peacock",
+                    data: [9, 7, 7, 9, 6, 7]
+                }, {
+                    name: "Nancy Callahan",
+                    data: [4, 10, 10, 5, 5, 4]
+                }],
+                valueAxis: {
+                    labels: {
+                        format: "{0}%"
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                categoryAxis: {
+                    categories: [
+                        "Experience", "Communication", "Friendliness",
+                        "Subject knowledge", "Presentation", "Education"
+                    ],
+                    majorGridLines: {
+                        visible: false
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>
