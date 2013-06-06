@@ -475,16 +475,14 @@ kendo_module({
                     return angularDistance(a, theta) - angularDistance(b, theta);
                 });
 
+                // Solve triangle (center, point, axis X) using one side (r) and two angles.
+                // Angles are derived from triangle (center, point, gridline X)
                 var midAngle = angularDistance(majorAngles[0], majorAngles[1]) / 2,
-                    alpha = midAngle - angularDistance(theta, majorAngles[0]),
-                    beta = 90 - alpha,
-                    // Solve first right-angled triangle (center, point, gridlineX)
-                    // using the known side (r)
-                    c = r * math.sin(beta * DEG_TO_RAD);
+                    alpha = angularDistance(theta, majorAngles[0]),
+                    gamma = 90 - midAngle,
+                    beta = 180 - alpha - gamma;
 
-                // Solve second right-angled triangle (center, axisX, gridlineX)
-                // using known side (c1)
-                d = c * (1 / math.sin((90 - midAngle) * DEG_TO_RAD));
+                d = r * (math.sin(beta * DEG_TO_RAD) / math.sin(gamma * DEG_TO_RAD));
             }
 
             return NumericAxis.fn.getValue.call(
