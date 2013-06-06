@@ -342,6 +342,7 @@ var tests = [
     "router/lint.html",
     "scheduler/initialization.html",
     "scheduler/datasource.html",
+    "scheduler/agendaview.html",
     "scheduler/views.html",
     "scheduler/databinding.html",
     "scheduler/editing-destroy.html",

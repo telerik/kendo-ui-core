@@ -90,7 +90,7 @@ kendo_module({
 
                 if (eventDurationInDays > 1) {
                     task.end = kendo.date.nextDay(start);
-
+                    task.head = true;
                     for (var day = 1; day < eventDurationInDays; day++) {
                         start = task.end;
                         task = event.toJSON();
@@ -100,15 +100,17 @@ kendo_module({
                         task.end = kendo.date.nextDay(start);
                         if (day == eventDurationInDays -1) {
                             task.end = new Date(task.start.getFullYear(), task.start.getMonth(), task.start.getDate(), end.getHours(), end.getMinutes(), end.getSeconds(), end.getMilliseconds());
+                            task.tail = true;
                         } else {
                             task.isAllDay = true;
+                            task.middle = true;
                         }
                         tasks.push(task);
                     }
                 }
             }
 
-            return new kendo.data.Query(tasks).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).groupBy({field: "startDate"}).toArray();
+            return new kendo.data.Query(tasks).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "asc" }]).groupBy({field: "startDate"}).toArray();
         },
 
         render: function(events) {
@@ -140,6 +142,14 @@ kendo_module({
                             ));
                         }
 
+                        if (task.head) {
+                           task.format = "{0:t}";
+                        } else if (task.tail) {
+                           task.format = "{1:t}";
+                        } else {
+                           task.format = "{0:t}-{1:t}";
+                        }
+
                         tableRow.push(kendo.format(
                             '<td class="k-scheduler-timecolumn">{0}</td><td>{1}</td>',
                             this._timeTemplate(task),
@@ -166,7 +176,7 @@ kendo_module({
             timeTemplate: "#if(data.isAllDay) {#" +
                             "all day" +
                           "#} else { #" +
-                            '#=kendo.toString(start, "t")#-#=kendo.toString(end, "t")#' +
+                            '#=kendo.format(format, start, end)#' +
                           "# } #",
             dateTemplate: '<strong class="k-scheduler-agendaday">' +
                             '#=kendo.toString(date, "dd")#' +

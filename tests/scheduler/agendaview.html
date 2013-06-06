@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler Agenda View</title>
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.agendaview.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler Views rendering</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var Event = kendo.data.SchedulerEvent;
+
+            function agendaView(date, options) {
+                var agenda = new kendo.ui.AgendaView($("<div>"), options);
+
+                agenda.setDate(date);
+
+                return agenda;
+            }
+
+            test("agenda renders table with headers for date, time and event", function() {
+                var agenda = agendaView();
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var dateHeaderCell = table.find(".k-scheduler-datecolumn");
+
+                equal(dateHeaderCell.text(), "Date");
+
+                var timeHeaderCell = table.find(".k-scheduler-timecolumn");
+
+                equal(timeHeaderCell.text(), "Time");
+
+                var eventHeaderCell = timeHeaderCell.next();
+
+                equal(eventHeaderCell.text(), "Event");
+            });
+
+            test("agenda renders a cell for the event date", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 00:00"),
+                        title: ""
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var dateCell = table.find("td.k-scheduler-datecolumn");
+
+                equal(dateCell.find(".k-scheduler-agendaday").text(), "06");
+                equal(dateCell.find(".k-scheduler-agendaweek").text(), "Thursday");
+                equal(dateCell.find(".k-scheduler-agendadate").text(), "June, 2013");
+            });
+
+            test("agenda renders a cell for the event time", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: ""
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.text(), "12:00 AM-1:00 AM");
+            });
+
+            test("agenda renders a cell for the event title", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event title"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.next().text(), "event title");
+            });
+
+            test("agenda renders a table row for events", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event title"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+                equal(table.find("tr:has(td)").length, 1);
+            });
+
+            test("agenda groups events having the same date", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event 1"
+                    }),
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event 2"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+                var tableRows = table.find("tr:has(td)");
+
+                equal(tableRows.eq(0).find("td").length, 3);
+                equal(tableRows.eq(1).find("td").length, 2);
+            });
+
+            test("date cell has rowspan equal to the number of events for this date", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event 1"
+                    }),
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event 2"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var dateCell = table.find("td.k-scheduler-datecolumn");
+
+                equal(dateCell.attr("rowspan"), 2);
+            });
+
+            test("agenda creates date cells a date cell for every date", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event 1"
+                    }),
+                    new Event({
+                        start: new Date("2013/06/07 00:00"),
+                        end: new Date("2013/06/07 01:00"),
+                        title: "event 2"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var dateCells = table.find("td.k-scheduler-datecolumn");
+
+                equal(dateCells.length, 2);
+            });
+
+            test("agenda displays 'all day' in the time cell for all day events", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 00:00"),
+                        isAllDay: true,
+                        title: "event 1"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.text(), "all day");
+            });
+
+            test("agenda sorts events by start time", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 22:00"),
+                        end: new Date("2013/06/06 23:00"),
+                        title: "event 1"
+                    }),
+                    new Event({
+                        start: new Date("2013/06/06 08:00"),
+                        end: new Date("2013/06/06 09:00"),
+                        title: "event 1"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.eq(0).text(), "8:00 AM-9:00 AM");
+            });
+
+            test("agenda sorts events by end time", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 08:00"),
+                        end: new Date("2013/06/06 10:00"),
+                        title: "event 1"
+                    }),
+                    new Event({
+                        start: new Date("2013/06/06 08:00"),
+                        end: new Date("2013/06/06 9:00"),
+                        title: "event 1"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.eq(0).text(), "8:00 AM-9:00 AM");
+            });
+
+            test("agenda splits a two day event to two tasks", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 08:00"),
+                        end: new Date("2013/06/07 10:00"),
+                        title: "event 1"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var dateCell = table.find("td.k-scheduler-datecolumn");
+
+                equal(dateCell.eq(0).find(".k-scheduler-agendaday").text(), "06");
+                equal(dateCell.eq(1).find(".k-scheduler-agendaday").text(), "07");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.eq(0).text(), "8:00 AM");
+                equal(timeCell.eq(1).text(), "10:00 AM");
+            });
+
+            test("agenda splits a three day event to three tasks", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 08:00"),
+                        end: new Date("2013/06/08 10:00"),
+                        title: "event 1"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var dateCell = table.find("td.k-scheduler-datecolumn");
+
+                equal(dateCell.eq(0).find(".k-scheduler-agendaday").text(), "06");
+                equal(dateCell.eq(1).find(".k-scheduler-agendaday").text(), "07");
+                equal(dateCell.eq(2).find(".k-scheduler-agendaday").text(), "08");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.eq(0).text(), "8:00 AM");
+                equal(timeCell.eq(1).text(), "all day");
+                equal(timeCell.eq(2).text(), "10:00 AM");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
