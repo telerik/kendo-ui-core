@@ -369,6 +369,8 @@
                 dropdownlist.value("Bar");
 
                 equal(select[0].selectedIndex, 1);
+                ok(select[0].options[1].getAttribute("selected"));
+                ok(!select[0].options[0].getAttribute("selected"));
             });
 
             test("value method with empty string calls dataSource.fetch if no data", function() {

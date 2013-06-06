@@ -24,6 +24,7 @@ kendo_module({
         OPEN = "open",
         CLOSE = "close",
         SELECT = "select",
+        SELECTED = "selected",
         PROGRESS = "progress",
         REQUESTEND = "requestEnd",
         WIDTH = "width",
@@ -594,16 +595,13 @@ kendo_module({
         },
 
         _accessor: function(value, idx) {
-            var element = this.element,
+            var element = this.element[0],
                 isSelect = this._isSelect,
-                option, selectedIndex;
-
-            element = element[0];
+                selectedIndex = element.selectedIndex,
+                option;
 
             if (value === undefined) {
                 if (isSelect) {
-                    selectedIndex = element.selectedIndex;
-
                     if (selectedIndex > -1) {
                         option = element.options[selectedIndex];
 
@@ -617,7 +615,15 @@ kendo_module({
                 return value;
             } else {
                 if (isSelect) {
+                    if (selectedIndex > -1) {
+                        element.options[selectedIndex].removeAttribute(SELECTED);
+                    }
+
                     element.selectedIndex = idx;
+                    option = element.options[idx];
+                    if (option) {
+                       option.setAttribute(SELECTED, SELECTED);
+                    }
                 } else {
                     element.value = value;
                 }
