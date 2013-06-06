@@ -619,6 +619,7 @@ kendo_module({
                 }
             } else {
                 clearTimeout(that._typing);
+                setTimeout(function() { that._scale(); });
                 that._search();
             }
         },
@@ -787,7 +788,6 @@ kendo_module({
             that._typing = setTimeout(function() {
                 var value = that.input.val();
                 if (that._prev !== value) {
-                    that._scale();
                     that._prev = value;
                     that.search(value);
                 }
