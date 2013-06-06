@@ -319,7 +319,6 @@ kendo_module({
             that.view().bind("show", function() {
                 if(that._widgetNeedsRefresh) {
                     setTimeout(function() {
-                        console.log("showing view");
                         that._resetPages();
                     }, 0);
                     that._widgetNeedsRefresh = false;
