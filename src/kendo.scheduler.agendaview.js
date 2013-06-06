@@ -114,27 +114,27 @@ kendo_module({
         renderEvents: function(events) {
             var table = this.content.find("table").empty();
 
-            var tasks = this._tasks(events);
+            if (events.length > 0) {
+                var tasksGroups = this._tasks(events);
 
-            if (tasks.length > 0) {
                 var tableRows = [];
 
-                for (var i = 0; i < tasks.length; i++) {
-                    var date = tasks[i].value;
+                for (var taskGroupIndex = 0; taskGroupIndex < tasksGroups.length; taskGroupIndex++) {
+                    var date = tasksGroups[taskGroupIndex].value;
 
-                    var items = tasks[i].items;
+                    var tasks = tasksGroups[taskGroupIndex].items;
 
                     var today = kendo.date.isToday(date);
 
-                    for (var taskIndex = 0; taskIndex < items.length; taskIndex++) {
-                        var task = items[taskIndex];
+                    for (var taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
+                        var task = tasks[taskIndex];
 
                         var tableRow = [];
 
                         if (taskIndex === 0) {
                             tableRow.push(kendo.format(
                                 '<td class="k-scheduler-datecolumn" rowspan="{0}">{1}</td>',
-                                items.length,
+                                tasks.length,
                                 this._dateTemplate({ date: date })
                             ));
                         }
