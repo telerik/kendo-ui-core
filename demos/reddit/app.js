@@ -41,8 +41,9 @@ var ds = new kendo.data.DataSource({
             for (var i = data.skip; i < data.skip + data.take; i ++) {
                 results.push({ foo: i });
             }
-
-            options.success(results);
+            setTimeout(function(){
+                options.success(results);
+            }, 4000);
         }
     },
     pageSize: 36,
@@ -126,7 +127,7 @@ function showThumbsOnScrollComplete(e) {
 }
 
 function canvasInit(e) {
-    virtualScrollView = $("#canvas-scrollview").kendoMobileVirtualScrollView({
+    canvasScrollView = $("#canvas-scrollview").kendoMobileVirtualScrollView({
         contentHeight: 500,
         dataSource: ds,
         batchSize: 6,
@@ -135,7 +136,7 @@ function canvasInit(e) {
         changed: updateSrc
     }).data("kendoMobileVirtualScrollView");
 
-    virtualScrollView.element.find(".virtual-page").kendoTouch({
+    canvasScrollView.element.find(".virtual-page").kendoTouch({
         tap: function (e) {
             var tile = $(e.event.target).closest("div.tile"),
                 offset = tile.data("offset");
@@ -145,21 +146,46 @@ function canvasInit(e) {
     });
 }
 
+function canvasShow(e) {
+    var offset = parseInt(e.view.params.offset),
+        canvasScrollView = $("#canvas-scrollview").data("kendoMobileVirtualScrollView");
+
+    if(!isNaN(offset)) {
+        canvasScrollView.scrollTo(offset);
+    }
+}
+
+function goToCanvas(e) {
+    var detailScrollView = $("#detail-scrollview").data("kendoMobileVirtualScrollView"),
+        canvasScrollView = $("#canvas-scrollview").data("kendoMobileVirtualScrollView"),
+        offset = detailScrollView.offset,
+        canvasPage;
+
+    canvasPage = Math.floor(offset / canvasScrollView.options.batchSize);
+    app.navigate("#canvas?offset=" + canvasPage);
+}
+
 function canvasDetailInit(e) {
     $("#detail-scrollview").kendoMobileVirtualScrollView({
         dataSource: ds,
         autoBind: false,
         template: kendo.template($("#canvas-detail-tmp").html())
-    });
+    }).data("kendoMobileVirtualScrollView");
 }
 
 function canvasDetailShow(e) {
-    var offset = parseInt(e.view.params.offset);
-    $("#detail-scrollview").data("kendoMobileVirtualScrollView").scrollTo(offset);
+    var offset = parseInt(e.view.params.offset),
+        detailScrollView = $("#detail-scrollview").data("kendoMobileVirtualScrollView");
+
+    if(!isNaN(offset)) {
+        detailScrollView.scrollTo(offset);
+    }
 }
 
 function calculateOffset(dataItem) {
-    return $("#canvas-scrollview").data("kendoMobileVirtualScrollView").buffer.buffer.indexOf(dataItem);
+    var index = $("#canvas-scrollview").data("kendoMobileVirtualScrollView").buffer.buffer.indexOf(dataItem);
+    //console.log("index ", index, " dataItem ", dataItem.foo);
+    return index;
 }
 
 function updateSrc(e) {

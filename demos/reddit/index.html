@@ -80,7 +80,7 @@
             <img />
         </div>
 
-        <div data-role="view" id="canvas" data-transition="slide" data-stretch="true" data-title="Canvas View" data-init="canvasInit">
+        <div data-role="view" id="canvas" data-transition="slide" data-stretch="true" data-title="Canvas View" data-init="canvasInit" data-show="canvasShow">
             <header data-role="header">
                 <div data-role="navbar">
                     <a data-role="backbutton" data-align="left">Back</a>
@@ -93,7 +93,7 @@
         <div id="canvas-detail" data-role="view" data-transition="slide:up" data-stretch="true" data-init="canvasDetailInit" data-show="canvasDetailShow">
             <header data-role="header">
                 <div data-role="navbar">
-                    <a href="#canvas" data-role="button" data-align="left">Canvas</a>
+                    <a data-role="button" data-click="goToCanvas" data-align="left">Canvas</a>
                     <span data-role="view-title">&nbsp;</span>
                 </div>
             </header>
