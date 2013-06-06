@@ -408,7 +408,7 @@ kendo_module({
 
         destroy: function() {
             kendo.destroy(this.element);
-            this.element.remove();
+            $(this.element).remove();
         }
     });
 
