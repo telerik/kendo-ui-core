@@ -319,6 +319,7 @@ kendo_module({
             that.view().bind("show", function() {
                 if(that._widgetNeedsRefresh) {
                     setTimeout(function() {
+                        console.log("showing view");
                         that._resetPages();
                     }, 0);
                     that._widgetNeedsRefresh = false;
@@ -346,14 +347,14 @@ kendo_module({
             "changed"
         ],
 
-        _dataSource: function () {
+        _dataSource: function() {
             var that = this,
                 options = that.options;
 
             that.dataSource = DataSource.create(options.dataSource);
         },
 
-        _buffer: function () {
+        _buffer: function() {
             var that = this,
                 batchSize = that.options.batchSize;
 
@@ -370,12 +371,13 @@ kendo_module({
             });
         },
 
-        _unbindDataSource: function () {
+        _unbindDataSource: function() {
             var that = this;
 
-            that.buffer.unbind("resize", that._onResize)
-                            .unbind("reset", that._onReset)
-                            .unbind("endreached", that._onEndReached);
+            that.buffer
+                .unbind("resize", that._onResize)
+                .unbind("reset", that._onReset)
+                .unbind("endreached", that._onEndReached);
         },
 
         setDataSource: function(dataSource) {
@@ -388,7 +390,7 @@ kendo_module({
             }
         },
 
-        refresh: function () {
+        refresh: function() {
             var that = this,
                 dimension = that.dimension,
                 pages = that.pages,
@@ -407,7 +409,7 @@ kendo_module({
             that.dimension.update(true);
         },
 
-        _initPages: function () {
+        _initPages: function() {
             var that = this,
                 pages = that.pages,
                 inner = that.inner,
@@ -421,7 +423,7 @@ kendo_module({
             that.dimension.update(true);
         },
 
-        _resetPages: function () {
+        _resetPages: function() {
             var that = this,
                 pages = that.pages;
 
@@ -438,27 +440,27 @@ kendo_module({
             });
         },
 
-        _moveTo: function (location, ease, instant) {
+        _moveTo: function(location, ease, instant) {
             this.transition.moveTo({ location: location, duration: (instant ? 1 : this.options.duration), ease: ease });
         },
 
-        _resetMovable: function () {
+        _resetMovable: function() {
             this.movable.moveTo({ x: 0 });
         },
 
-        forward: function (instant) {
+        forward: function(instant) {
             this._moveTo(-this.width, Transition.easeOutExpo, instant);
         },
 
-        backward: function (instant) {
+        backward: function(instant) {
             this._moveTo(this.width, Transition.easeOutBack, instant);
         },
 
-        reset: function (ease) {
+        reset: function(ease) {
             this._moveTo(0, ease, false);
         },
 
-        scrollTo: function (offset) {
+        scrollTo: function(offset) {
             var that = this,
                 buffer = that.buffer,
                 pages = that.pages,
@@ -484,7 +486,7 @@ kendo_module({
             });
         },
 
-        _dragEnd: function (e) {
+        _dragEnd: function(e) {
             var that = this,
                 velocity = e.x.velocity,
                 width = that.width,
@@ -519,7 +521,7 @@ kendo_module({
             }
         },
 
-        _transitionEnd: function () {
+        _transitionEnd: function() {
             var that = this,
                 pages = that.pages;
 
@@ -548,7 +550,7 @@ kendo_module({
             });
         },
 
-        _onResize: function () {
+        _onResize: function() {
             var that = this,
                 page = that.pages[2],
                 idx = that.offset + 1;
@@ -559,7 +561,7 @@ kendo_module({
             }
         },
 
-        _onReset: function (e) {
+        _onReset: function() {
             if(this.element.is(":visible")) {
                 this._resetPages();
             } else {
@@ -567,11 +569,11 @@ kendo_module({
             }
         },
 
-        _onEndReached: function () {
+        _onEndReached: function() {
             this._needsRefresh = true;
         },
 
-        setPageContent: function (page, index) {
+        setPageContent: function(page, index) {
             var buffer = this.buffer,
                 template = this.template,
                 emptyTemplate = this.emptyTemplate,
@@ -647,7 +649,7 @@ kendo_module({
             this.buffer.syncDataSource();
         },
 
-        at: function (index) {
+        at: function(index) {
             var buffer = this.buffer,
                 skip = index * this.batchSize,
                 take = this.batchSize,
