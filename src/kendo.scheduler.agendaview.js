@@ -133,9 +133,10 @@ kendo_module({
 
                         if (taskIndex === 0) {
                             tableRow.push(kendo.format(
-                                '<td class="k-scheduler-datecolumn" rowspan="{0}">{1}</td>',
+                                '<td class="k-scheduler-datecolumn{2}" rowspan="{0}">{1}</td>',
                                 tasks.length,
-                                this._dateTemplate({ date: date })
+                                this._dateTemplate({ date: date }),
+                                taskGroupIndex == tasksGroups.length - 1 ? " k-last" : ""
                             ));
                         }
 

@@ -38,7 +38,7 @@ kendo_module({
             return "";
         }
 
-        return '<table class="k-scheduler-table ' + (className || "") + '">' +
+        return '<table class="' + ('k-scheduler-table ' + (className || "")).trim() + '">' +
                '<tr>' +
                     tableRows.join("</tr><tr>") +
                '</tr>' +
