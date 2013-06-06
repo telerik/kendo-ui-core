@@ -102,6 +102,10 @@ var Serializer = {
                 var attributeName = attribute.nodeName;
                 var attributeValue = attribute.nodeValue;
 
+                if (attributeName == "class" && attributeValue == "k-table") {
+                    continue;
+                }
+
                 result.push(' ');
                 result.push(attributeName);
                 result.push('="');

@@ -6,26 +6,33 @@ var kendo = window.kendo,
     EditorUtils = Editor.EditorUtils,
     Command = Editor.Command,
     Tool = Editor.Tool,
-    RangeUtils = Editor.RangeUtils,
     ToolTemplate = Editor.ToolTemplate,
     BlockFormatFinder = Editor.BlockFormatFinder,
     registerTool = Editor.EditorUtils.registerTool;
 
 var TableCommand = Command.extend({
-    _createTable: function(doc, rows, columns) {
+    _createTable: function(rows, columns) {
         var td = "<td>" + Editor.emptyElementContent + "</td>";
 
-        return $("<table>" +
-                     new Array(rows + 1).join("<tr>" + new Array(columns + 1).join(td) + "</tr>") +
-                 "</table>", doc)[0];
+        return "<table class='k-table' data-last>" +
+                   new Array(rows + 1).join("<tr>" + new Array(columns + 1).join(td) + "</tr>") +
+               "</table>";
     },
 
     exec: function() {
-        var range = this.getRange(),
-            options = this.options,
-            doc = RangeUtils.documentFromRange(range);
+        var options = this.options,
+            editor = this.editor,
+            range,
+            tableHtml = this._createTable(options.rows || 1, options.columns || 1);
 
-        range.insertNode(this._createTable(doc, options.rows || 1, options.columns || 1));
+        editor.selectRange(options.range);
+        editor.clipboard.paste(tableHtml);
+
+        range = editor.getRange();
+
+        range.selectNodeContents($("table[data-last]", editor.document).removeAttr("data-last").find("td")[0]);
+
+        editor.selectRange(range);
     }
 });
 
@@ -43,7 +50,7 @@ var InsertTableTool = Tool.extend({
     },
 
     update: function (ui, nodes) {
-        ui.toggleClass("k-state-disabled", !this.finder.isFormatted(nodes))
+        ui.toggleClass("k-state-disabled", this.finder.isFormatted(nodes))
           .removeClass("k-state-hover");
     }
 });
