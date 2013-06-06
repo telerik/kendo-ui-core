@@ -27,16 +27,17 @@
         <script src="../src/kendo.scheduler.view.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.dayview.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.agendaview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.monthview.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
 
         <style>
-            
+
             html
             {
 	            font:12px sans-serif;
 	            overflow-y:scroll;
             }
-                        
+
         </style>
     </head>
     <body>
@@ -64,7 +65,7 @@
             height: 800,
             // numberOfTimeSlots: 4,
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
-            views: ["day", { name: "week", selected: true }, { name: "agenda", }],
+            views: ["day", { name: "week", selected: true }, "month", "agenda"],
             dataSource: {
                 batch: true,
                 transport: {
