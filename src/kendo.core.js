@@ -3186,8 +3186,7 @@ function pad(number, digits, end) {
 
     kendo.date = (function(){
         var MS_PER_MINUTE = 60000,
-            MS_PER_DAY = 86400000,
-            TODAY = new Date();
+            MS_PER_DAY = 86400000;
 
         function adjustForBrazillianTimezone(date, hours) {
             if (hours === 0 && date.getHours() === 23) {
@@ -3300,7 +3299,7 @@ function pad(number, digits, end) {
         }
 
         function today() {
-            return getDate(TODAY);
+            return getDate(new Date());
         }
 
         function isToday(date) {
