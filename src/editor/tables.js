@@ -6,23 +6,26 @@ var kendo = window.kendo,
     EditorUtils = Editor.EditorUtils,
     Command = Editor.Command,
     Tool = Editor.Tool,
+    RangeUtils = Editor.RangeUtils,
     ToolTemplate = Editor.ToolTemplate,
     BlockFormatFinder = Editor.BlockFormatFinder,
     registerTool = Editor.EditorUtils.registerTool;
 
 var TableCommand = Command.extend({
-    _createTable: function(rows, columns) {
-        return $(
-            "<table>" +
-                new Array(rows + 1).join("<tr>" + new Array(columns + 1).join("<td></td>") + "</tr>") +
-            "</table>")[0];
+    _createTable: function(doc, rows, columns) {
+        var td = "<td>" + Editor.emptyElementContent + "</td>";
+
+        return $("<table>" +
+                     new Array(rows + 1).join("<tr>" + new Array(columns + 1).join(td) + "</tr>") +
+                 "</table>", doc)[0];
     },
 
     exec: function() {
         var range = this.getRange(),
-            options = this.options;
+            options = this.options,
+            doc = RangeUtils.documentFromRange(range);
 
-        range.insertNode(this._createTable(options.rows || 1, options.columns || 1));
+        range.insertNode(this._createTable(doc, options.rows || 1, options.columns || 1));
     }
 });
 

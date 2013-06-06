@@ -39,7 +39,11 @@
             var range, command;
 
             test("exec createTable creates table at cursor", function() {
-                range = createRangeFromText(editor, 'foo||');
+                editor.value("foo");
+
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild, 3);
+                range.collapse(true);
 
                 command = new TableCommand({ range:range });
 
@@ -60,6 +64,24 @@
                 command.exec();
 
                 equal(editor.value(), "<table><tbody><tr><td></td><td></td></tr></tbody></table>foo");
+            });
+
+            function stripAttr(html) {
+                return html.replace(/<(\w+)[^>]*>/i, "<$1>");
+            }
+
+            test("empty table cells have the empty element content", function() {
+                editor.value("");
+
+                var range = editor.createRange();
+                range.setStart(editor.body, 0);
+                range.collapse(true);
+
+                command = new TableCommand({ range: range });
+
+                command.exec();
+
+                equal(stripAttr(editor.document.getElementsByTagName("td")[0].innerHTML), stripAttr(kendo.ui.editor.emptyElementContent));
             });
 
         </script>
