@@ -826,7 +826,8 @@ kendo_module({
         _reset: function() {
             var that = this,
                 element = that.element,
-                form = element.closest("form");
+                formId = element.attr("form"),
+                form = formId ? $("#" + formId) : element.closest("form");
 
             if (form[0]) {
                 that._resetHandler = function() {

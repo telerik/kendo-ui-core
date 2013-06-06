@@ -261,6 +261,25 @@
                 }, 200);
             });
 
+            asyncTest("support for form defined by attribute", 2, function() {
+                input.attr("form", "form1").attr("value", "12/12/2000");
+
+                var form = $("<form id='form1'/>").appendTo(document.body),
+                    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                datepicker.open();
+                datepicker.value("12/12/2010");
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(datepicker.element.val(), "12/12/2000");
+                    equal(datepicker.dateView.calendar.value().getFullYear(), "2000");
+                    start();
+                }, 200);
+            });
+
+
             test("extend popup options if datepicker.options.popup", function() {
                 var appendTo = "body",
                     datepicker = new kendo.ui.DatePicker(input, {

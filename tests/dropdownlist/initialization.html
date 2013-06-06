@@ -590,6 +590,23 @@
                 }, 200);
             });
 
+            asyncTest("form defined by form attribute", 2, function() {
+                var select = $('<select form="form1"><option>Item1</option><option selected="selected">Item2</option></select>').appendTo(document.body);
+
+                var form = $('<form id="form1"/>').appendTo(document.body),
+                    dropdownlist = new DropDownList(select);
+
+                dropdownlist.select(0);
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(dropdownlist.element.val(), "Item2");
+                    equal(dropdownlist.span.text(), "Item2");
+                    start();
+                }, 200);
+            });
+
             test("set selected text on init if autoBind:true (select)", function() {
                 var dropdownlist = new DropDownList($("<select><option>text</option></select>"), {
                     optionLabel: "Select...",

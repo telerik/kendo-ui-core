@@ -298,6 +298,25 @@
                 }, 150);
             });
 
+            asyncTest("reset support for form defined by attribute", 2, function() {
+                popuplateSelect();
+
+                select[0].children[1].setAttribute("selected", "selected");
+                select[0].children[2].setAttribute("selected", "selected");
+
+                select.attr("form", "form1");
+                var form = $('<form id="form1"/>').appendTo(document.documentElement),
+                    multiselect = new MultiSelect(select);
+
+                multiselect.value(["3","4"]);
+                form[0].reset();
+
+                setTimeout(function() {
+                    ok(select[0].children[1].selected);
+                    ok(select[0].children[2].selected);
+                    start();
+                }, 150);
+            });
 
             test("persist tabIndex of the original element", function() {
                 var multiselect = new MultiSelect($("<select tabindex='5'/>"));
