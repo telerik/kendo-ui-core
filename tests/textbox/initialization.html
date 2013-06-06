@@ -212,6 +212,23 @@
                 }, 200);
             });
 
+            asyncTest("support for form defined by attribute", 2, function() {
+                input.attr("form", "form1").attr("value", "123");
+
+                var form = $("<form id='form1'/>").appendTo(document.body),
+                    textbox = new NumericTextBox(input);
+
+                textbox.value("1");
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(textbox.element.val(), "123");
+                    equal(textbox._text.val(), "123.00");
+                    start();
+                }, 200);
+            });
+
             test("NumericTextBox honors readonly attribute", function() {
                 var numerictextbox = input.attr("readonly", true).kendoNumericTextBox().data("kendoNumericTextBox");
 

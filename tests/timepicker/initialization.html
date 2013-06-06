@@ -153,6 +153,24 @@
                 }, 200);
             });
 
+            asyncTest("support for form defined by attribute", 2, function() {
+                input.attr("form", "form1").attr("value", "12:00 AM");
+
+                var form = $("<form id='form1'/>").appendTo(document.body),
+                    timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.open();
+                timepicker.value("2:30 PM");
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(timepicker.element.val(), "12:00 AM");
+                    equal(timepicker.timeView.current().text(), "12:00 AM");
+                    start();
+                }, 200);
+            });
+
             test("extend popup options if timepicker.options.popup", function() {
                 var appendTo = "#qunit-fixture",
                     timepicker = new kendo.ui.TimePicker(input, {
