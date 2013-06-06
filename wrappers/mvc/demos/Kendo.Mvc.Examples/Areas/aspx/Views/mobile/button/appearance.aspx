@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-<% Html.Kendo().MobileView()        
-        .Layout("examples")
+<% Html.Kendo().MobileView()                
         .Title("Button Appearance")
         .HtmlAttributes(new { @class = "buttonAppearance" })
         .Content(() =>

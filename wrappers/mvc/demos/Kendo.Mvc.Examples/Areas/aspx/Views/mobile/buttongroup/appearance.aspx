@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <% Html.Kendo().MobileView()
-        .Name("buttongroup-appearance")
-        .Layout("examples")
+        .Name("buttongroup-appearance")        
         .Title("ButtonGroup Look")
         .Content(() =>
         {

@@ -25,12 +25,12 @@
             .Content(navbar =>
             {
                 %>
-                <%: Html.Kendo().MobileButton()
-                        .Href("#index")
-                        .Align(MobileButtonAlign.Right)
+                <%: Html.Kendo().MobileBackButton()
+                        .Align(MobileButtonAlign.Left) 
                         .HtmlAttributes(new { @class = "nav-button" })
-                        .Text("Index")
-                %>
+                        .Href(Url.RouteUrl(new { controller = "suite" }))
+                        .Text("Back")
+                %>    
                 <%: navbar.ViewTitle("iOS Platform")%>
                 <%
             })
@@ -57,12 +57,12 @@
             .Content(navbar =>
             {
                 %>
-                <%: Html.Kendo().MobileButton()
-                        .Href("#index")
-                        .Align(MobileButtonAlign.Right)
+                <%: Html.Kendo().MobileBackButton()
+                        .Align(MobileButtonAlign.Left) 
                         .HtmlAttributes(new { @class = "nav-button" })
-                        .Text("Index")
-                %>
+                        .Href(Url.RouteUrl(new { controller = "suite" }))
+                        .Text("Back")
+                %> 
                 <%: navbar.ViewTitle("Android Platform")%>
                 <%
             })
@@ -89,12 +89,12 @@
             .Content(navbar =>
             {
                 %>
-                <%: Html.Kendo().MobileButton()
-                        .Href("#index")
-                        .Align(MobileButtonAlign.Right)
+                <%: Html.Kendo().MobileBackButton()
+                        .Align(MobileButtonAlign.Left) 
                         .HtmlAttributes(new { @class = "nav-button" })
-                        .Text("Index")
-                %>
+                        .Href(Url.RouteUrl(new { controller = "suite" }))
+                        .Text("Back")
+                %> 
                 <%: navbar.ViewTitle("BlackBerry Platform")%>
                 <%
             })
@@ -121,12 +121,12 @@
             .Content(navbar =>
             {
                 %>
-                <%: Html.Kendo().MobileButton()
-                        .Href("#index")
-                        .Align(MobileButtonAlign.Right)
+                <%: Html.Kendo().MobileBackButton()
+                        .Align(MobileButtonAlign.Left) 
                         .HtmlAttributes(new { @class = "nav-button" })
-                        .Text("Index")
-                %>
+                        .Href(Url.RouteUrl(new { controller = "suite" }))
+                        .Text("Back")
+                %> 
                 <%: navbar.ViewTitle("Windows Phone Platform")%>
                 <%
             })

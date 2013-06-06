@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <% Html.Kendo().MobileView()
-        .Name("button-home")
-        .Layout("examples")
+        .Name("button-home")        
         .Title("Sports Academy")
         .Content(() =>
         {

@@ -4,8 +4,7 @@
 
 <% Html.Kendo().MobileView()
         .Name("modalview-camera")
-        .Title("HTML5 Camera")
-        .Layout("examples")
+        .Title("HTML5 Camera")        
         .Content(() =>
         {
             %>            

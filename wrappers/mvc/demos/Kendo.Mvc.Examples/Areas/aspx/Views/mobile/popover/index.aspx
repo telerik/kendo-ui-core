@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <% Html.Kendo().MobileView()
-        .Name("popover")
-        .Layout("examples")
+        .Name("popover")        
         .Title("Tag Us!")
         .Header(() =>
         {

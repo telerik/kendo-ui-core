@@ -10,5 +10,5 @@
     var alternateRoute = alternateArea + "Default";
 }
 
-<a  data-role="backbutton" data-align="left" href="@(Url.RouteUrl(currentRoute, new { controller = "", action = "" }))">Back to all examples</a>
-<a  data-role="button" data-align="right" href="@(Url.RouteUrl(alternateRoute, new { suite = suite, controller = controller, action = action }))">@alternateArea version</a>
+<a class="offline-button" href="@(Url.RouteUrl(currentRoute, new { controller = "", action = "" }))">Back to all examples</a>
+<a class="offline-button" href="@(Url.RouteUrl(alternateRoute, new { suite = suite, controller = controller, action = action }))">@alternateArea version</a>

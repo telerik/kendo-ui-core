@@ -9,16 +9,32 @@
     <link href="<%= Url.Content("~/Content/mobile/kendo.mobile.all.min.css") %>" rel="stylesheet" type="text/css" />    
     <link href="<%= Url.Content("~/Content/shared/examples-offline.css") %>" rel="stylesheet" type="text/css" />
     <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
-    <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>                 
+    <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>                     
     <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/console.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/prettify.min.js") %>"></script>
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+
+    <style>
+        a.offline-button 
+        {
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-    
+
+<% 
+    var isMobileDevice = Regex.IsMatch(Request.UserAgent, "(blackberry|bb1\\w?;|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
+%>    
+
+<% if (!isMobileDevice) { %>
 <div class="page">    
+    <%: Html.Partial("~/Views/Shared/_MobileNavigation.cshtml")%>
+
     <div id="example" class="k-content" style="height: 400px">
+<% } %>
+
         <% Html.Kendo().MobileLayout()
             .Name("examples")
             .Header(() =>
@@ -27,9 +43,14 @@
                     .Name("navbar")                        
                     .Content((navbar) => 
                         {                                
-                            %>                                
-                            <%: navbar.ViewTitle("Index") %>                                
-                            <%: Html.Partial("~/Views/Shared/_MobileNavigation.cshtml") %>                                 
+                            %>       
+                            <%: Html.Kendo().MobileBackButton()
+                                    .Align(MobileButtonAlign.Left) 
+                                    .HtmlAttributes(new { @class = "nav-button" })
+                                    .Href(Url.RouteUrl(new { controller = "suite" }))
+                                    .Text("Back")
+                            %>                             
+                            <%: navbar.ViewTitle("Index") %>                                                            
                             <%
                         })
                     .Render();                  
@@ -37,23 +58,22 @@
             .Render();
         %>
 
-        <asp:ContentPlaceHolder ID="MainContent" runat="server" />        
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />    
+            
+<% if (!isMobileDevice) { %>
     </div>
 
-    <%: Html.Partial("~/Views/Shared/_Source.cshtml") %>
+    <%: Html.Partial("~/Views/Shared/_Source.cshtml")%>
+
 </div>
+<% } %>
    
 
 <%: Html.Kendo().MobileApplication()
-    .ServerNavigation(true)    
-    .Name("example")
+    .ServerNavigation(true)   
+    .Layout("examples") 
+    .Name(isMobileDevice ? null : "example")
 %>
-<%--<script>
-    new kendo.mobile.Application($("#example"), {
-        serverNavigation: true,
-        /pushState: true
-    });
-</script>--%>
     
 </body>
 </html>

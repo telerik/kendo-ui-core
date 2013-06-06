@@ -15,11 +15,29 @@
     <script src="@Url.Content("~/Scripts/prettify.min.js")"></script>
 
     @RenderSection("HeadContent", false)
+    <style>
+        a.offline-button 
+        {
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
+@using System.Text.RegularExpressions;
+
+@{ 
+    var isMobileDevice = Regex.IsMatch(Request.UserAgent, "(blackberry|bb1\\w?;|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
+}
+
+@if (!isMobileDevice)        
+{ 
+    <text>
     <div class="page">
-        
+        @Html.Partial("~/Views/Shared/_MobileNavigation.cshtml")
+
         <div id="example" class="k-content" style="height: 400px">
+    </text>
+}
             @{ Html.Kendo().MobileLayout()
                 .Name("examples")
                 .Header(() =>
@@ -27,9 +45,13 @@
                     Html.Kendo().MobileNavBar()
                         .Name("navbar")                        
                         .Content(navbar =>
-                            @<text>                     
-                                @navbar.ViewTitle("Index")
-                                @Html.Partial("~/Views/Shared/_MobileNavigation.cshtml")                                
+                            @<text>   
+                                @(Html.Kendo().MobileBackButton()
+                                    .Align(MobileButtonAlign.Left)
+                                    .HtmlAttributes(new { @class = "nav-button" })
+                                    .Href(Url.RouteUrl(new { controller = "suite" }))
+                                    .Text("Back"))                                              
+                                @navbar.ViewTitle("Index")                                
                             </text>)
                         .Render();                  
                 })
@@ -37,15 +59,18 @@
             }
 
             @RenderBody()
-        </div>
 
+@{ if (!isMobileDevice) 
+{         
+        @:</div>
         @Html.Partial("~/Views/Shared/_Source.cshtml")
-
-    </div>
+    @:</div>        
+}}      
 
     @(Html.Kendo().MobileApplication()
-        .ServerNavigation(true)    
-        .Name("example")
+        .ServerNavigation(true)
+        .Layout("examples")
+        .Name(isMobileDevice ? null : "example")
     )
     
 </body>

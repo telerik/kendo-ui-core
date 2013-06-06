@@ -103,12 +103,12 @@
                 {                                
                     %>                                
                     <%: navbar.ViewTitle("") %>                                
-                    <%: Html.Kendo().MobileButton()
-                            .Align(MobileButtonAlign.Right) 
+                    <%: Html.Kendo().MobileBackButton()
+                            .Align(MobileButtonAlign.Left) 
                             .HtmlAttributes(new { @class = "nav-button" })
-                            .Href("#index")
-                            .Text("Index")
-                    %>                                 
+                            .Href(Url.RouteUrl(new { controller = "suite" }))
+                            .Text("Back")
+                    %>                                  
                     <%
                 })
             .Render();                  

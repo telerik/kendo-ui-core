@@ -109,12 +109,11 @@
         .Content(navbar =>
             @<text>
                 @navbar.ViewTitle("")                                
-                @(Html.Kendo().MobileButton()
-                        .Align(MobileButtonAlign.Right)
-                        .HtmlAttributes(new { @class = "nav-button" })
-                        .Href("#index")
-                        .Text("Index")
-                )                
+                @(Html.Kendo().MobileBackButton()
+                    .Align(MobileButtonAlign.Left) 
+                    .HtmlAttributes(new { @class = "nav-button" })
+                    .Href(Url.RouteUrl(new { controller = "suite" }))
+                    .Text("Back"))              
             </text>)
     )    
 }

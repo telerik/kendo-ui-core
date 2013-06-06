@@ -5,8 +5,7 @@
 <%: Html.Kendo().MobileView()
         .Name("loading")
         .HtmlAttributes(new { @class = "km-insetcontent" })
-        .Title("Loading Popup")
-        .Layout("examples")
+        .Title("Loading Popup")        
         .Events(events => events.Init("viewInit").Hide("viewHide"))
         .Content((obj) => 
             Html.Kendo().MobileButton()

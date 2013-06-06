@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <% Html.Kendo().MobileView()
-        .Name("actionsheet-view")
-        .Layout("examples")
+        .Name("actionsheet-view")        
         .Title("Inbox")
         .Content(() =>
         {
