@@ -996,6 +996,33 @@
                 ok("items" in root);
                 equal(root.items, root.children.data());
             });
+
+            /*
+            test("child datasources inherit model", function() {
+                var CustomModel = kendo.data.Node.define({
+                    foo: function() {
+                        return this.id;
+                    }
+                });
+
+                var dataSource = new HierarchicalDataSource({
+                    data: [
+                        { id: 1, items: [
+                            { id: 2 }
+                        ] }
+                    ],
+                    schema: {
+                        model: CustomModel
+                    }
+                });
+
+                dataSource.read();
+                dataSource.at(0).load();
+
+                ok($.isFunction(dataSource.at(0).children.at(0).foo));
+                equal(dataSource.at(0).children.at(0).foo(), 2);
+            });
+            */
         </script>
     </body>
 </html>
