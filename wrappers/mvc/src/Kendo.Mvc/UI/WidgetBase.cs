@@ -10,6 +10,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
+    using System.Web.Util;
 
     public abstract class WidgetBase : IWidget, IScriptableComponent
     {
@@ -228,7 +229,18 @@ namespace Kendo.Mvc.UI
         public MvcHtmlString ToClientTemplate()
         {
             IsInClientTemplate = true;
-            return MvcHtmlString.Create(ToHtmlString().Replace("</script>", "<\\/script>"));
+
+            var html = ToHtmlString().Replace("</script>", "<\\/script>");
+
+            if (HttpEncoder.Current != null && HttpEncoder.Current.GetType().ToString().Contains("AntiXssEncoder"))
+            {
+                html = html.Replace("\\u0026", "&")
+                           .Replace("%23", "#")
+                           .Replace("%3D", "=")
+                           .Replace("&#32;", " ");
+            }
+
+            return MvcHtmlString.Create(html);
         }
     }
 }
