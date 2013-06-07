@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 using System.Web.Mvc;
-using Twitterizer;
+using TweetSharp;
 
 namespace KendoCRUDService.Controllers
 {
@@ -8,26 +8,28 @@ namespace KendoCRUDService.Controllers
     {
         //
         // GET: /Twitter/
-        public ActionResult Search(string q, decimal? since_id, decimal? max_id, int? count, int? page, string callback)
+        public ActionResult Search(string q, long? since_id, long? max_id, int? count, int? page, string callback)
         {
             string data = "{}";
             string contentType = "application/json";
 
             if (!string.IsNullOrWhiteSpace(q))
             {
-                OAuthTokens tokens = new OAuthTokens();
-                tokens.ConsumerKey = ConfigurationManager.AppSettings["ConsumerKey"].ToString();
-                tokens.ConsumerSecret = ConfigurationManager.AppSettings["ConsumerSecret"].ToString();
+                var service = new TwitterService(GetAppSetting("ConsumerKey"), GetAppSetting("ConsumerSecret"));
+                service.AuthenticateWith(GetAppSetting("AccessToken"), GetAppSetting("AccessTokenSecret"));
 
-                TwitterResponse<Twitterizer.TwitterSearchResultCollection> searchResult = TwitterSearch.Search(tokens, q, new SearchOptions
+                var result = service.Search(new SearchOptions
                 {
+                    Q = q,
+                    Count = count ?? 15,
                     MaxId = max_id ?? 0,
-                    SinceId = since_id ?? 0,
-                    NumberPerPage = count ?? 15,
-                    PageNumber = page ?? 1
+                    SinceId = since_id ?? 0
                 });
 
-                data = searchResult.Content;
+                if (result != null)
+                {
+                    data = result.RawSource;
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(callback))
@@ -41,6 +43,11 @@ namespace KendoCRUDService.Controllers
                 Content = data,
                 ContentType = contentType
             };
+        }
+
+        private string GetAppSetting(string key)
+        {
+            return ConfigurationManager.AppSettings[key].ToString();
         }
     }
 }
