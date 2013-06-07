@@ -34,11 +34,11 @@
             function createAxis(options) {
                 altAxis = {
                     box: chartBox,
-                    majorDivisions: function() {
+                    majorIntervals: function() {
                         return [90, 210, 330];
                     },
-                    posToAngle: function(pos) {
-                        return pos;
+                    majorAngles: function() {
+                        return this.majorIntervals();
                     }
                 };
 
@@ -72,7 +72,7 @@
                 equal(view.log.path.length, 3);
             });
 
-            test("points are placed on alt axis divisions", function() {
+            test("points are placed on alt axis intervals", function() {
                 var points = view.log.path[0].points;
 
                 close(points[0].x, 300, TOLERANCE);

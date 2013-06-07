@@ -193,28 +193,28 @@
             });
 
             // ------------------------------------------------------------
-            module("Radar Category Axis / Divisions", {
+            module("Radar Category Axis / Intervals", {
                 setup: function() {
                     createAxis();
                 }
             });
 
-            test("major divisions in normal order", function() {
-                deepEqual(axis.majorDivisions(), [ 0, 120, 240 ]);
+            test("major intervals in normal order", function() {
+                deepEqual(axis.majorIntervals(), [ 0, 120, 240 ]);
             });
 
-            test("major divisions in reverse order", function() {
+            test("major intervals in reverse order", function() {
                 createAxis({ reverse: true });
-                deepEqual(axis.majorDivisions(), [ 0, 240, 120 ]);
+                deepEqual(axis.majorIntervals(), [ 0, 240, 120 ]);
             });
 
-            test("minor divisions in normal order", function() {
-                deepEqual(axis.minorDivisions(), [ 0, 60, 120, 180, 240, 300 ]);
+            test("minor intervals in normal order", function() {
+                deepEqual(axis.minorIntervals(), [ 0, 60, 120, 180, 240, 300 ]);
             });
 
-            test("minor divisions in reverse order", function() {
+            test("minor intervals in reverse order", function() {
                 createAxis({ reverse: true });
-                deepEqual(axis.minorDivisions(), [ 0, 300, 240, 180, 120, 60 ]);
+                deepEqual(axis.minorIntervals(), [ 0, 300, 240, 180, 120, 60 ]);
             });
 
             // ------------------------------------------------------------
