@@ -129,26 +129,10 @@ kendo_module({
         return $('<div class="k-scheduler-times">' + table(rowHeaderRows) + '</div>');
     }
 
-    function content(columnLevel, rowLevel) {
-        var rows = [];
-
-        for (var rowIndex = 0; rowIndex < rowLevel.length; rowIndex++) {
-            var row = ['<tr class="' + (rowLevel[rowIndex].className || "") + '">'];
-
-            for (var columnIndex = 0; columnIndex < columnLevel.length; columnIndex++) {
-                row.push('<td class="' + (columnLevel[columnIndex].className || "")  + '">&nbsp;</th>');
-            }
-
-            row.push("</tr>");
-
-            rows.push(row.join(""));
-        }
-
+    function content() {
         return $(
             '<div class="k-scheduler-content">' +
-                '<table class="k-scheduler-table">' +
-                   rows.join("") +
-                '</table>' +
+                '<table class="k-scheduler-table"/>' +
             '</div>'
         );
     }

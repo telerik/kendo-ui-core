@@ -277,6 +277,36 @@ kendo_module({
             return html;
         },
 
+        _content: function(dates) {
+            var that = this,
+                options = that.options,
+                start = options.startTime,
+                end = options.endTime,
+                html = '';
+
+            html += '<tbody>';
+
+            html += this._forTimeRange(start, end, function(date, majorTick) {
+                var content = "",
+                    idx,
+                    length;
+
+                content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
+
+                for (idx = 0, length = dates.length; idx < length; idx++) {
+                    content += "<td" + (kendo.date.isToday(dates[idx]) ? ' class="k-today"' : "") + ">";
+                    content += "&nbsp;</td>";
+                }
+
+                content += "</tr>";
+                return content;
+            });
+
+            html += '</tbody>';
+
+            this.content.find("table").append(html);
+        },
+
         _render: function(dates) {
             dates = dates || [];
 
@@ -287,6 +317,8 @@ kendo_module({
             this.endDate = dates[(dates.length - 1) || 0];
 
             this.prepareLayout(this._layout(dates));
+
+            this._content(dates);
 
             this._footer();
 
