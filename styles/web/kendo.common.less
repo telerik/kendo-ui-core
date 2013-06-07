@@ -3766,7 +3766,7 @@ div.k-slider
 
 .k-scheduler-monthview .k-scheduler-table td
 {
-	height: 100px;
+	height: 60px;
 	text-align:right;
 }
 
@@ -3876,13 +3876,7 @@ div.k-slider
 
 .k-event dl
 {
-	padding:.6em 1.8em 1em .6em;
-}
-
-.k-scheduler-header .k-event dl
-{
-	padding-top:.34em;
-	padding-bottom:.34em;
+	padding:.34em 1.8em .34em .6em;
 }
 
 .k-event dt
@@ -3975,9 +3969,26 @@ div.k-slider
 	width: 130px;
 }
 
-.k-webkit .k-scheduler-timecolumn .k-icon
+.k-scheduler-timecolumn > div
 {
-    vertical-align: baseline;
+    position:relative;
+    vertical-align: top;
+}
+
+.k-webkit .k-scheduler-timecolumn > div > .k-icon
+{
+    vertical-align: top;
+}
+
+.k-scheduler-timecolumn > div > .k-i-arrow-e
+{
+    position: absolute;
+    right: -4px;
+}
+
+.k-scheduler-timecolumn .k-i-arrow-w
+{
+    margin-left: -4px;
 }
 
 .k-scheduler-mark
