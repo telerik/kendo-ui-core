@@ -26,7 +26,10 @@ namespace KendoCRUDService.Controllers
                     SinceId = since_id ?? 0
                 });
 
-                data = result.RawSource;
+                if (result != null)
+                {
+                    data = result.RawSource;
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(callback))
