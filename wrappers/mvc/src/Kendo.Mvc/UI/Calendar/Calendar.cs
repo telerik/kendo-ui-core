@@ -21,6 +21,7 @@ namespace Kendo.Mvc.UI
             MonthTemplate = new MonthTemplate();
 
             SelectionSettings = new CalendarSelectionSettings();
+            EnableFooter = true;
         }
 
         public string Culture
@@ -48,6 +49,12 @@ namespace Kendo.Mvc.UI
         }
 
         public string FooterId
+        {
+            get;
+            set;
+        }
+
+        public bool EnableFooter
         {
             get;
             set;
@@ -123,13 +130,20 @@ namespace Kendo.Mvc.UI
                 options["format"] = Format;
             }
 
-            if (FooterId.HasValue())
+            if (EnableFooter)
             {
-                options["footer"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, FooterId) };
+                if (FooterId.HasValue())
+                {
+                    options["footer"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, FooterId) };
+                }
+                else if (Footer.HasValue())
+                {
+                    options["footer"] = Footer;
+                }
             }
-            else if (Footer.HasValue())
+            else
             {
-                options["footer"] = Footer;
+                options["footer"] = EnableFooter;
             }
 
             if (Depth.HasValue())
