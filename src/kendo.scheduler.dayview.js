@@ -11,8 +11,8 @@ kendo_module({
         ui = kendo.ui,
         extend = $.extend,
         proxy = $.proxy,
-        MS_PER_MINUTE = 60000,
-        MS_PER_DAY = 86400000,
+        MS_PER_MINUTE = kendo.date.MS_PER_MINUTE,
+        MS_PER_DAY = kendo.date.MS_PER_DAY,
         getMilliseconds = kendo.date.getMilliseconds,
         isInTimeRange = kendo.date.isInTimeRange,
         NS = ".kendoMultiDayView";

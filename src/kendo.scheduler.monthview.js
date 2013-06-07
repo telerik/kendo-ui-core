@@ -9,26 +9,109 @@ kendo_module({
 (function($){
     var kendo = window.kendo,
         ui = kendo.ui,
-        DAY_TEMPLATE = kendo.template('#=kendo.toString(data, "dd")#');
+        NS = ".kendoMonthView";
+        extend = $.extend,
+        proxy = $.proxy,
+        MS_PER_DAY = kendo.date.MS_PER_DAY,
+        MS_PER_MINUTE = kendo.date.MS_PER_MINUTE,
+        DAY_TEMPLATE = kendo.template('<span>#=kendo.toString(data, "dd")#</span>'),
+        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#">{0}' +
+                '#if (showDelete) {#' +
+                    '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
+                '#}#' +
+                '</div>',
+        EVENT_TEMPLATE = kendo.template('<div title="#=title#">' +
+                    '<dl><dd>${title}</dd></dl>' +
+                '</div>');
+
+    function isInDateRange(value, min, max) {
+        var msMin = min.getTime(),
+            msMax = max.getTime(),
+            msValue;
+
+        msValue = value.getTime();
+
+        return msValue >= msMin && msValue <= msMax;
+    }
+
+    function rangeIndex(eventElement) {
+        var index = $(eventElement).attr(kendo.attr("start-end-idx")).split("-");
+        return {
+            start: +index[0],
+            end: +index[1]
+        };
+    }
+
+    function eventsForSlot(elements, slotStart, slotEnd) {
+        return elements.filter(function() {
+            var event = rangeIndex(this);
+            return (event.start >= slotStart && event.start <= slotEnd) || slotStart >= event.start && slotStart <= event.end;
+        });
+    }
+
+    function createColumns(eventElements, isHorizontal) {
+        var columns = [];
+
+        eventElements.each(function() {
+            var event = this,
+                eventRange = rangeIndex(event),
+                column;
+
+            for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
+                var endOverlaps = isHorizontal ? eventRange.start > columns[j].end : eventRange.start >= columns[j].end;
+
+                if (eventRange.start < columns[j].start || endOverlaps) {
+
+                    column = columns[j];
+
+                    if (column.end < eventRange.end) {
+                        column.end = eventRange.end;
+                    }
+
+                    break;
+                }
+            }
+
+            if (!column) {
+                column = { start: eventRange.start, end: eventRange.end, events: [] };
+                columns.push(column);
+            }
+
+            column.events.push(event);
+        });
+
+        return columns;
+    }
 
     ui.MonthView = ui.SchedulerView.extend({
         init: function(element, options) {
             ui.SchedulerView.fn.init.call(this, element, options);
 
             this.title = this.name = this.options.title;
+
+            this.eventTemplate = this._eventTmpl(this.options.eventTemplate);
+
+            this._editable();
+        },
+
+        dateForTitle: function() {
+            return kendo.format(this.options.selectedDateFormat, this._firstDayOfMonth, this._lastDayOfMonth);
         },
 
         nextDate: function() {
-            return kendo.date.nextDay(this.endDate);
+            return kendo.date.nextDay(this._lastDayOfMonth);
         },
 
         previousDate: function() {
-            return kendo.date.previousDay(this.startDate);
+            return kendo.date.previousDay(this._firstDayOfMonth);
         },
 
         setDate: function(date) {
-            this.startDate = kendo.date.firstDayOfMonth(date);
-            this.endDate = kendo.date.lastDayOfMonth(date);
+
+            this._firstDayOfMonth = kendo.date.firstDayOfMonth(date);
+            this._lastDayOfMonth = kendo.date.lastDayOfMonth(date);
+
+            this.startDate = firstVisibleMonthDay(date);
 
             this.prepareLayout(this._layout());
 
@@ -39,19 +122,63 @@ kendo_module({
             this.refreshLayout();
         },
 
+        _editable: function() {
+            var that = this;
+            if (that.options.editable) {
+
+                that.element.on("click" + NS, ".k-event a:has(.k-i-close)", function(e) {
+                    that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+                    e.preventDefault();
+                });
+
+                if (that.options.editable.create !== false) {
+                    that.element.on("dblclick", ".k-scheduler-content td", function(e) {
+                        var element = $(this);
+                        that.trigger("add", { eventInfo: extend({ isAllDay: true }, that._rangeToDates(element)) });
+                        e.preventDefault();
+                    });
+                }
+
+                if (that.options.editable.update !== false) {
+                    that.element.on("dblclick", ".k-event", function(e) {
+                        that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+                        e.preventDefault();
+                    });
+                }
+            }
+        },
+
+        _rangeToDates: function(cell) {
+            var index = this.content.find("table td").index(cell),
+                slotDate = kendo.date.addDays(this.startDate, index);
+
+            if (slotDate) {
+                 return {
+                    start: slotDate,
+                    end: new Date(slotDate)
+                };
+            }
+            return null;
+        },
+
         _content: function() {
-            var start =  firstVisibleMonthDay(this.startDate),
-                min = this.startDate,
-                max = this.endDate,
+            var start = this.startDate,
+                min = this._firstDayOfMonth,
+                max = this._lastDayOfMonth,
                 idx = 0,
                 length = 42,
                 cellsPerRow = 7,
                 content = this.options.dayTemplate,
                 classes = "",
+                slotIndices = {},
+                weekStartDates = [start],
                 html = '<tbody><tr>';
+
 
             for(; idx < length; idx++) {
                 if (idx > 0 && idx % cellsPerRow === 0) {
+                    weekStartDates.push(start);
+
                     html += '</tr><tr>';
                 }
 
@@ -62,7 +189,7 @@ kendo_module({
                 }
 
                 if (!kendo.date.isInDateRange(start, min, max)) {
-                    classes += "k-other-month";
+                    classes += " k-other-month";
                 }
 
                 html += "<td ";
@@ -75,23 +202,209 @@ kendo_module({
                 html += content(start);
                 html += "</td>";
 
+                slotIndices[kendo.date.getDate(start).getTime()] = idx;
+
                 start = kendo.date.nextDay(start);
             }
 
             html + "</tr></tbody>";
 
+            this._slotIndices = slotIndices;
+            this._weekStartDates = weekStartDates;
+            this.endDate = start;
             this.content.find("table").html(html);
         },
 
         _layout: function() {
             var names = getCalendarInfo().days.names;
+
             return {
                 columns: $.map(names, function(value) { return { text: value } })
             };
         },
 
-        render: function(events) {
+        _eventTmpl: function(template) {
+           var options = this.options,
+               settings = extend({}, kendo.Template, options.templateSettings),
+               paramName = settings.paramName,
+               html = "",
+               type = typeof template,
+               state = { storage: {}, count: 0 };
 
+            if (type === "function") {
+                state.storage["tmpl" + state.count] = template;
+                html += "#=this.tmpl" + state.count + "(" + paramName + ")#";
+                state.count ++;
+            } else if (type === "string") {
+                html += template;
+            }
+
+            var tmpl = kendo.template(kendo.format(EVENT_WRAPPER_STRING, html), settings);
+
+            if (state.count > 0) {
+                tmpl = proxy(tmpl, state.storage);
+            }
+            return tmpl;
+       },
+
+       _createEventElement: function(event, template) {
+            var options = this.options,
+                showDelete = options.editable && options.editable.destroy !== false;
+
+            return $(template(extend({}, {
+                ns: kendo.ns,
+                showDelete: showDelete
+            }, event)));
+        },
+
+        _isInDateSlot: function(event) {
+            var slotStart = this.startDate,
+                slotEnd = new Date(this.endDate.getTime() + MS_PER_DAY - 1);
+
+            return isInDateRange(event.start, slotStart, slotEnd) ||
+                isInDateRange(event.end, slotStart, slotEnd) ||
+                isInDateRange(slotStart, event.start, event.end) ||
+                isInDateRange(slotEnd, event.start, event.end);
+        },
+
+        _slotIndex: function(date) {
+            return this._slotIndices[kendo.date.getDate(date).getTime()];
+        },
+
+        _calculateAllDayEventWidth: function(startIndex, endIndex) {
+            var slots = this.content.find("table td"),
+                result = 0,
+                widthFunction = startIndex !== endIndex ? "outerWidth" : "innerWidth",
+                idx,
+                length;
+
+            for (idx = 0, length = slots.length; idx < length; idx++) {
+                if (idx >= startIndex && idx <= endIndex) {
+                    result += slots.eq(idx)[widthFunction]();
+                }
+            }
+            return result;
+        },
+
+        _positionEvent: function(element, startIndex, endIndex) {
+            if (startIndex < 0) {
+                startIndex = 0;
+            }
+
+            if (endIndex < 0 || !endIndex) {
+                endIndex = this.content.find("td").length - 1;
+            }
+
+            var startSlot = this.content.find("td").eq(startIndex),
+                firstChild = startSlot.children().first(),
+                events = this._getCollisionEvents(this.content.find(".k-event"), startIndex, endIndex).add(element),
+                eventHeight = 23,
+                leftOffset = 2,
+                rightOffset = startIndex !== endIndex ? 5 : 4,
+                topOffset = (firstChild.length ? firstChild.outerHeight() : 0) + 3,
+                top = startSlot.position().top + topOffset;
+
+            element
+                .css({
+                    width: this._calculateAllDayEventWidth(startIndex, endIndex) - rightOffset,
+                    left: startSlot.position().left + leftOffset
+                });
+
+            element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
+
+            var columns = createColumns(events, true);
+
+            for (var idx = 0, length = columns.length; idx < length; idx++) {
+                var columnEvents = columns[idx].events;
+
+                for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
+                    $(columnEvents[j]).css({
+                        top: top + idx * eventHeight + 3*idx
+                    });
+                }
+            }
+        },
+
+        _getCollisionEvents: function(elements, start, end) {
+            var idx,
+                index,
+                startIndex,
+                endIndex;
+
+            for (idx = elements.length-1; idx >= 0; idx--) {
+                index = rangeIndex(elements[idx]);
+                startIndex = index.start;
+                endIndex = index.end;
+
+                if (startIndex <= start && endIndex >= start) {
+                    start = startIndex;
+                    if (endIndex > end) {
+                        end = endIndex;
+                    }
+                }
+            }
+
+            return eventsForSlot(elements, start, end);
+        },
+
+        _splitEvents: function(events) {
+            var result = [],
+                idx,
+                event,
+                length;
+
+            for (idx = 0, length = events.length; idx < length; idx++) {
+                event = events[idx].toJSON();
+                event.uid = events[idx].uid;
+
+
+                for (dateIdx = 0, dateLength = this._weekStartDates.length; dateIdx < dateLength; dateIdx++) {
+                    var eventDurationInDays = Math.ceil((event.end - event.start) / (1000 * 3600 * 24));
+
+                    if (isInDateRange(this._weekStartDates[dateIdx], event.start, event.end) && eventDurationInDays > 1) {
+                        var tmp = extend({}, event);
+                        tmp.start = event.start;
+                        tmp.end = kendo.date.previousDay(this._weekStartDates[dateIdx]);
+                        result.push(tmp);
+
+                        event.start = this._weekStartDates[dateIdx];
+                        event.end = event.end;
+                    }
+                }
+
+                result.push(event);
+            }
+
+            return result;
+        },
+
+        render: function(events) {
+            var event,
+                eventTemplate = this.eventTemplate,
+                idx,
+                length;
+
+            this.content.find(".k-event").remove();
+
+            events = new kendo.data.Query(this._splitEvents(events)).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "asc" }]).toArray();
+
+            for (idx = 0, length = events.length; idx < length; idx++) {
+                event = events[idx];
+
+                if (this._isInDateSlot(event)) {
+                    var startSlotIndex = this._slotIndex(event.start),
+                        endSlotIndex = this._slotIndex(event.end),
+                        element = this._createEventElement(event, eventTemplate);
+
+                    if (startSlotIndex === -1 && endSlotIndex > -1) {
+                        startSlotIndex = endSlotIndex;
+                    }
+
+                    this._positionEvent(element, startSlotIndex, endSlotIndex);
+
+                    element.appendTo(this.content);
+                }
+            }
         },
 
         destroy: function(){
@@ -102,11 +415,14 @@ kendo_module({
             kendo.ui.SchedulerView.fn.destroy.call(this);
         },
 
+        events: ["remove", "add", "edit"],
+
         options: {
             title: "Month",
             name: "month",
             selectedDateFormat: "{0:y}",
-            dayTemplate: DAY_TEMPLATE
+            dayTemplate: DAY_TEMPLATE,
+            eventTemplate: EVENT_TEMPLATE
         }
     });
 

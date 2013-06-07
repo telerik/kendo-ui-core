@@ -3323,6 +3323,7 @@ function pad(number, digits, end) {
             MS_PER_DAY: MS_PER_DAY,
             MS_PER_MINUTE: MS_PER_MINUTE,
             setTime: setTime,
+            addDays: addDays,
             today: today,
             firstDayOfMonth: firstDayOfMonth,
             lastDayOfMonth: lastDayOfMonth,
