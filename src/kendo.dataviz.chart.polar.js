@@ -458,18 +458,17 @@ kendo_module({
         getValue: function(point) {
             var axis = this,
                 options = axis.options,
-                type = options.majorGridLines.type,
                 lineBox = axis.lineBox(),
                 altAxis = axis.plotArea.polarAxis,
                 majorAngles = altAxis.majorDivisions(),
                 center = altAxis.box.center(),
-                dx = point.x - center.x,
-                dy = point.y - center.y,
                 r = point.distanceTo(center),
-                d = r;
+                distance = r;
 
-            if (type !== ARC && majorAngles.length > 1) {
-                var theta = math.round(math.atan2(dy, dx) / DEG_TO_RAD + 540) % 360;
+            if (options.majorGridLines.type !== ARC && majorAngles.length > 1) {
+                var dx = point.x - center.x,
+                    dy = point.y - center.y,
+                    theta = math.round(math.atan2(dy, dx) / DEG_TO_RAD + 540) % 360;
 
                 majorAngles.sort(function(a, b) {
                     return angularDistance(a, theta) - angularDistance(b, theta);
@@ -482,18 +481,14 @@ kendo_module({
                     gamma = 90 - midAngle,
                     beta = 180 - alpha - gamma;
 
-                d = r * (math.sin(beta * DEG_TO_RAD) / math.sin(gamma * DEG_TO_RAD));
+                distance = r * (math.sin(beta * DEG_TO_RAD) / math.sin(gamma * DEG_TO_RAD));
             }
 
             return NumericAxis.fn.getValue.call(
-                this, new Point2D(lineBox.x1, lineBox.y2 - d)
+                axis, new Point2D(lineBox.x1, lineBox.y2 - distance)
             );
         }
     });
-
-    function angularDistance(a, b) {
-        return 180 - math.abs(math.abs(a - b) - 180);
-    }
 
     var PolarNumericAxis = Axis.extend({
         init: function(options) {
@@ -1193,6 +1188,10 @@ kendo_module({
     // Helpers ================================================================
     function xComparer(a, b) {
         return a.value.x - b.value.x;
+    }
+
+    function angularDistance(a, b) {
+        return 180 - math.abs(math.abs(a - b) - 180);
     }
 
     // Exports ================================================================
