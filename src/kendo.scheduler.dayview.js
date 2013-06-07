@@ -13,13 +13,13 @@ kendo_module({
         proxy = $.proxy,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
+        getMilliseconds = kendo.date.getMilliseconds,
+        isInTimeRange = kendo.date.isInTimeRange,
         NS = ".kendoMultiDayView";
 
     function getDate(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
     }
-
-    var TODAY = getDate(new Date());
 
     var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title#">' +
                     '<dl>' +
@@ -40,12 +40,8 @@ kendo_module({
 
     function toInvariantTime(date) {
         var staticDate = new Date(1980, 1, 1, 0, 0, 0);
-        setTime(staticDate, getMilliseconds(date));
+        kendo.date.setTime(staticDate, getMilliseconds(date));
         return staticDate;
-    }
-
-    function getMilliseconds(date) {
-        return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
     }
 
     function executeTemplate(template, options, dataItem) {
@@ -59,44 +55,6 @@ kendo_module({
             text = template;
         }
         return text;
-    }
-
-    function setTime(date, time, ignoreDST) {
-        var offset = date.getTimezoneOffset(),
-            offsetDiff;
-
-        date.setTime(date.getTime() + time);
-
-        if (!ignoreDST) {
-            offsetDiff = date.getTimezoneOffset() - offset;
-            date.setTime(date.getTime() + offsetDiff * MS_PER_MINUTE);
-        }
-    }
-
-    function isInTimeRange(value, min, max) {
-        var msMin = getMilliseconds(min),
-            msMax = getMilliseconds(max),
-            msValue;
-
-        if (!value || msMin == msMax) {
-            return true;
-        }
-
-        if (min >= max) {
-            max += MS_PER_DAY;
-        }
-
-        msValue = getMilliseconds(value);
-
-        if (msMin > msValue) {
-            msValue += MS_PER_DAY;
-        }
-
-        if (msMax < msMin) {
-            msMax += MS_PER_DAY;
-        }
-
-        return msValue >= msMin && msValue <= msMax;
     }
 
     function isInDateRange(value, min, max) {
@@ -123,6 +81,7 @@ kendo_module({
             return (event.start >= slotStart && event.start <= slotEnd) || slotStart >= event.start && slotStart <= event.end;
         });
     }
+
     function createColumns(eventElements, isHorizontal) {
         var columns = [];
 
@@ -174,8 +133,8 @@ kendo_module({
             selectedDateFormat: "{0:D}",
             allDaySlot: true,
             title: "",
-            startTime: TODAY,
-            endTime: TODAY,
+            startTime: kendo.date.today(),
+            endTime: kendo.date.today(),
             numberOfTimeSlots: 2,
             majorTick: 60,
             majorTickTimeTemplate: kendo.template("#=kendo.toString(date, 't')#"),
@@ -228,7 +187,7 @@ kendo_module({
 
                 column.text = executeTemplate(options.dateHeaderTemplate, options, { date: dates[idx] });
 
-                if (getDate(dates[idx]).getTime() == getDate(TODAY).getTime()) {
+                if (kendo.date.isToday(dates[idx])) {
                     column.className = "k-today";
                 }
 
@@ -297,7 +256,7 @@ kendo_module({
             for (; idx < length; idx++) {
                 html += action(start, idx % (msMajorInterval/msInterval) === 0);
 
-                setTime(start, msInterval, false);
+                kendo.date.setTime(start, msInterval, false);
             }
 
             if (msMax) {
@@ -340,15 +299,11 @@ kendo_module({
         },
 
         nextDate: function() {
-            var end = new Date(this.endDate);
-            setTime(end, MS_PER_DAY);
-            return end;
+            return kendo.date.nextDay(this.endDate);
         },
 
         previousDate: function() {
-            var start = new Date(this.startDate);
-            setTime(start, -MS_PER_DAY);
-            return start;
+            return kendo.date.previousDay(this.startDate);
         },
 
         setDate: function(selectedDate) {
@@ -377,8 +332,8 @@ kendo_module({
             if (slotDate) {
                 slotEndDate = new Date(slotDate);
 
-                setTime(slotDate, this._slotIndexTime(timeIndex));
-                setTime(slotEndDate, this._slotIndexTime(Math.min(timeIndex + 1, maxTimeSlotIndex)));
+                kendo.date.setTime(slotDate, this._slotIndexTime(timeIndex));
+                kendo.date.setTime(slotEndDate, this._slotIndexTime(Math.min(timeIndex + 1, maxTimeSlotIndex)));
 
                 return {
                     start: slotDate,
@@ -410,7 +365,7 @@ kendo_module({
 
             for (idx = 0, length = slots.length; idx < length; idx++) {
                 slotStart = new Date(+slots[idx]);
-                setTime(slotStart, startTime);
+                kendo.date.setTime(slotStart, startTime);
 
                 if (index === idx) {
                     return slotStart;
@@ -443,9 +398,9 @@ kendo_module({
 
             for (idx = 0, length = slots.length; idx < length; idx++) {
                 slotStart = new Date(+slots[idx]);
-                setTime(slotStart, startTime);
+                kendo.date.setTime(slotStart, startTime);
                 slotEnd = new Date(+slots[idx]);
-                setTime(slotEnd, endTime);
+                kendo.date.setTime(slotEnd, endTime);
 
                 if (date.getTime() >= slotStart.getTime() && date.getTime() <= slotEnd.getTime()) {
                     return idx;
@@ -715,7 +670,7 @@ kendo_module({
 
                for (idx = 0, length = 7; idx < length; idx++) {
                    dates.push(new Date(+start));
-                   setTime(start, MS_PER_DAY, true);
+                   kendo.date.setTime(start, MS_PER_DAY, true);
                }
 
                this._render(dates);

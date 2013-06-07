@@ -84,8 +84,9 @@ kendo_module({
         },
 
         _layout: function() {
+            var names = getCalendarInfo().days.names;
             return {
-                columns: $.map(getCalendarInfo().days.names, function(value) { return { text: value } })
+                columns: $.map(names, function(value) { return { text: value } })
             };
         },
 

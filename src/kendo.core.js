@@ -3325,7 +3325,8 @@ function pad(number, digits, end) {
             setTime: setTime,
             today: today,
             firstDayOfMonth: firstDayOfMonth,
-            lastDayOfMonth: lastDayOfMonth
+            lastDayOfMonth: lastDayOfMonth,
+            getMilliseconds: getMilliseconds
             //TODO methods: combine date portion and time portion from arguments - date1, date 2
         };
     })();
