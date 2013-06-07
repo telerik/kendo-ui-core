@@ -10,20 +10,26 @@ var kendo = window.kendo,
     BlockFormatFinder = Editor.BlockFormatFinder,
     registerTool = Editor.EditorUtils.registerTool;
 
+function table(options) {
+    var td = "<td" + options.cellAttr + ">" + options.cellContent + "</td>";
+
+    return "<table" + options.attr + ">" +
+               new Array(options.rows + 1).join("<tr>" + new Array(options.columns + 1).join(td) + "</tr>") +
+           "</table>";
+}
+
 var TableCommand = Command.extend({
-    _createTable: function(rows, columns) {
-        var td = "<td contentEditable='true'>" + Editor.emptyElementContent + "</td>";
-
-        return "<table class='k-table' contentEditable='false' data-last>" +
-                   new Array(rows + 1).join("<tr>" + new Array(columns + 1).join(td) + "</tr>") +
-               "</table>";
-    },
-
     exec: function() {
         var options = this.options,
             editor = this.editor,
             range,
-            tableHtml = this._createTable(options.rows || 1, options.columns || 1);
+            tableHtml = table({
+                rows: options.rows || 1,
+                columns: options.columns || 1,
+                attr: " class='k-table' contentEditable='false' data-last",
+                cellContent: Editor.emptyElementContent,
+                cellAttr: " contentEditable='true'"
+            });
 
         editor.selectRange(options.range);
         editor.clipboard.paste(tableHtml);
@@ -46,7 +52,14 @@ var InsertTableTool = Tool.extend({
 
     initialize: function(ui, options) {
         Tool.fn.initialize.call(this, ui, options);
-        ui.addClass("k-state-disabled");
+        ui.addClass("k-state-disabled").click(this._togglePopup);
+    },
+
+    _togglePopup: function(e) {
+        if (!this._popup) {
+            var tableHtml = table({ rows: 10, columns: 10 });
+            this._popup = $(tableHtml).kendoPopup();
+        }
     },
 
     update: function (ui, nodes) {
