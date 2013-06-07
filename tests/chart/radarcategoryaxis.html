@@ -25,6 +25,7 @@
                 Point2D = dataviz.Point2D,
                 Box2D = dataviz.Box2D,
                 chartBox = new Box2D(100, 100, 500, 500),
+                center = new Point2D(300, 300),
                 view,
                 axis,
                 altAxis,
@@ -49,6 +50,10 @@
 
                 view = new ViewStub();
                 axis.getViewElements(view);
+            }
+
+            function lineEnd(line) {
+                return new Point2D(line.x2, line.y2);
             }
 
             // ------------------------------------------------------------
@@ -195,21 +200,21 @@
             });
 
             test("major divisions in normal order", function() {
-                deepEqual(axis.majorDivisions(), [ 90, 210, 330 ]);
+                deepEqual(axis.majorDivisions(), [ 0, 120, 240 ]);
             });
 
             test("major divisions in reverse order", function() {
                 createAxis({ reverse: true });
-                deepEqual(axis.majorDivisions(), [ 90, 330, 210 ]);
+                deepEqual(axis.majorDivisions(), [ 0, 240, 120 ]);
             });
 
             test("minor divisions in normal order", function() {
-                deepEqual(axis.minorDivisions(), [ 90, 150, 210, 270, 330, 30 ]);
+                deepEqual(axis.minorDivisions(), [ 0, 60, 120, 180, 240, 300 ]);
             });
 
             test("minor divisions in reverse order", function() {
                 createAxis({ reverse: true });
-                deepEqual(axis.minorDivisions(), [ 90, 30, 330, 270, 210, 150 ]);
+                deepEqual(axis.minorDivisions(), [ 0, 300, 240, 180, 120, 60 ]);
             });
 
             // ------------------------------------------------------------
@@ -514,6 +519,28 @@
                 axis.renderGridLines(view, altAxis);
 
                 equal(view.log.line[0].options.strokeWidth, 4);
+            });
+
+            // ------------------------------------------------------------
+            module("Radar Category Axis / Grid lines / startAngle", {
+                setup: function() {
+                    createAxis({ categories: ["A", "B", "C", "D"], startAngle: 80 });
+                    axis.renderGridLines(view, altAxis);
+                }
+            });
+
+            test("major grid lines are offset with start angle", function() {
+                var ref = Point2D.onCircle(center, 80, 200),
+                    end = lineEnd(view.log.line[0]);
+
+                ok(ref.equals(end));
+            });
+
+            test("renders 90 degree grid line as it no longer overlaps the value axis", function() {
+                createAxis({ categories: ["A", "B", "C", "D"], startAngle: 10 });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.line.length, 4);
             });
 
             // ------------------------------------------------------------

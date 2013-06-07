@@ -113,8 +113,7 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 categories = options.categories.length,
-                startAngle = options.startAngle,
-                angle = startAngle,
+                angle = 0,
                 skipAngle = 0,
                 divCount = categories / step || 1,
                 divAngle = 360 / divCount,
@@ -128,7 +127,7 @@ kendo_module({
             for (i = 0; i < divCount; i++) {
                 angle = round(angle, COORD_PRECISION);
 
-                if ((angle - startAngle) % skipAngle !== 0) {
+                if (angle % skipAngle !== 0) {
                     divs.push(angle % 360);
                 }
 
@@ -149,6 +148,16 @@ kendo_module({
         minorDivisions: function() {
             return this.divisions(0.5);
         },
+
+
+        startAngle: function() {
+            return this.options.startAngle;
+        },
+
+        posToAngle: function(pos) {
+            return (360 + pos + this.startAngle()) % 360;
+        },
+
 
         renderLine: function() {
             return [];
@@ -220,14 +229,18 @@ kendo_module({
             return this.gridLineDivisions(altAxis, 0.5, skipMajor ? 1 : 0);
         },
 
+        // TODO: Rename to gridLineAngles
         gridLineDivisions: function(altAxis, step, skipStep) {
-            var result = this.divisions(step, skipStep);
+            var axis = this,
+                divs = axis.divisions(step, skipStep);
 
-            if (altAxis.options.visible) {
-                result = $.grep(result, function(d) { return d !== 90; });
-            }
+            return $.map(divs, function(d) {
+                var alpha = axis.posToAngle(d);
 
-            return result;
+                if (!altAxis.options.visible || alpha !== 90) {
+                    return alpha;
+                }
+            });
         },
 
         renderPlotBands: function(view) {
@@ -277,7 +290,7 @@ kendo_module({
                 totalDivs = divs.length,
                 slots,
                 slotAngle = 360 / totalDivs,
-                startAngle,
+                slotStart,
                 angle;
 
             if (options.reverse && !justified) {
@@ -285,13 +298,13 @@ kendo_module({
             }
 
             from = limitValue(math.floor(from), 0, totalDivs - 1);
-            startAngle = divs[from];
+            slotStart = divs[from];
 
             if (justified) {
-                startAngle = startAngle - slotAngle / 2;
+                slotStart = slotStart - slotAngle / 2;
 
-                if (startAngle < 0) {
-                    startAngle += 360;
+                if (slotStart < 0) {
+                    slotStart += 360;
                 }
             }
 
@@ -301,7 +314,7 @@ kendo_module({
 
             return new Ring(
                 box.center(), 0, box.height() / 2,
-                startAngle, angle
+                axis.posToAngle(slotStart), angle
             );
         },
 
@@ -397,6 +410,10 @@ kendo_module({
                 center = altAxis.box.center(),
                 gridLines = [];
 
+
+            // TODO: Remove fugliness
+            majorAngles = $.map(majorAngles, $.proxy(altAxis.posToAngle, altAxis));
+
             if (options.majorGridLines.visible) {
                 minorSkipStep = options.majorUnit;
                 gridLines = axis.gridLineElements(
@@ -464,6 +481,9 @@ kendo_module({
                 center = altAxis.box.center(),
                 r = point.distanceTo(center),
                 distance = r;
+
+            // TODO: Remove fugliness
+            majorAngles = $.map(majorAngles, $.proxy(altAxis.posToAngle, altAxis));
 
             if (options.majorGridLines.type !== ARC && majorAngles.length > 1) {
                 var dx = point.x - center.x,
@@ -587,9 +607,15 @@ kendo_module({
             return [];
         },
 
+        // TODO: Mixin
         renderGridLines: RadarCategoryAxis.fn.renderGridLines,
         gridLineElements: RadarCategoryAxis.fn.gridLineElements,
         gridLineDivisions: RadarCategoryAxis.fn.gridLineDivisions,
+
+        startAngle: function() {
+            return -RadarCategoryAxis.fn.startAngle.call(this);
+        },
+        posToAngle: RadarCategoryAxis.fn.posToAngle,
 
         majorGridLineDivisions: function(altAxis) {
             return this.gridLineDivisions(altAxis, this.options.majorUnit);

@@ -137,7 +137,7 @@
                     }
                 });
 
-                $("#__chart").kendoChart({
+                $("#chart").kendoChart({
                     series: [{
                         data: [1, 2, 3],
                         type: "radarLine"
@@ -147,8 +147,10 @@
                             // TODO: Limit length
                             //visible: true
                         },
-                        __categories: ["A", "B", "C"],
-                        reverse: true
+                        categories: ["A", "B", "C"],
+                        _justified: false,
+                        _reverse: true,
+                        startAngle: 80
                     },
                     valueAxis: {
                         majorUnit: 1
@@ -158,10 +160,15 @@
                     }
                 });
 
-                $("#chart").kendoChart({
+                $("#__chart").kendoChart({
                     series: [{
-                        type: "polarLine"
+                        type: "polarScatter",
+                        data: [[120, 100.5]]
                     }],
+                    xAxis: {
+                        _reverse: true,
+                        startAngle: 10
+                    },
                     plotAreaClick: function(e) {
                         console.log(e.x, e.y);
                     }
