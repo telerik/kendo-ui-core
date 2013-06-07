@@ -96,6 +96,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Enables/disables footer of the calendar popup.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .Footer(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DatePickerBuilder Footer(bool footer)
+        {
+            Component.EnableFooter = footer;
+
+            return this;
+        }
+
+        /// <summary>
         /// Specifies the navigation depth.
         /// </summary>
         /// <example>

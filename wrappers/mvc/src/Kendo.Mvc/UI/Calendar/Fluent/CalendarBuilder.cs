@@ -105,6 +105,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Enable/disable footer.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Calendar()
+        ///             .Name("Calendar")
+        ///             .Footer(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public CalendarBuilder Footer(bool footer)
+        {
+            Component.EnableFooter = footer;
+
+            return this;
+        }
+
+        /// <summary>
         /// Specifies the navigation depth.
         /// </summary>
         /// <example>
