@@ -1042,22 +1042,19 @@ div.k-imagebrowser-dropzone em
 
 
 //Changes
-.k-dropdown-wrap,
-.k-picker-wrap,
-.k-numeric-wrap{
-	background-color: @form-widget-background;	
-}
-
 .k-dropdown .k-input,
-.k-dropdown .k-state-focused .k-input{
+.k-dropdown .k-state-focused .k-input,
+.k-menu .k-popup
+{
     color: @form-widget-color;
 }
 
-.k-list-container
+.k-list-container.k-popup
 {
     border-color: @drop-down-header-background;
     background-color: @select-group-background-color;
 	color: @drop-down-header-color;
+	padding: @popup-container-padding;
 }
 
 .k-group,
@@ -1076,28 +1073,83 @@ div.k-imagebrowser-dropzone em
     border-color: @drop-down-header-background;
 }
 
+.k-textbox,
+.k-autocomplete.k-header,
+.k-dropdown-wrap.k-state-active,
 .k-picker-wrap.k-state-active,
-.k-dropdown-wrap.k-state-active
+.k-numeric-wrap.k-state-active
 {
+    border-color: @form-widget-border-color;
     background-color: @drop-down-header-background;
 }
 
+.k-textbox > input,
+.k-autocomplete .k-input,
+.k-dropdown-wrap .k-input,
+.k-autocomplete.k-state-focused .k-input,
+.k-dropdown-wrap.k-state-focused .k-input,
+.k-picker-wrap.k-state-focused .k-input,
+.k-numeric-wrap.k-state-focused .k-input
+{
+    border-color: @form-widget-border-color;
+}
+
+//Pickers default state
 .k-picker-wrap.k-state-default,
 .k-dropdown-wrap.k-state-default,
-.k-autocomplete.k-state-default{
+.k-autocomplete.k-state-default,
+.k-numeric-wrap.k-state-default,
+.k-multiselect.k-header
+{
+	background-color: @form-widget-background;
 	border-color: @active-background-color;
 }
 
-.k-picker-wrap.k-state-hover,
-.k-dropdown-wrap.k-state-hover,
-.k-autocomplete.k-state-hover{
-	border-color: @hover-border-color;
+.k-secondary {
+	.k-picker-wrap,
+	.k-dropdown-wrap
+	{
+		background-color: @header-background-color;
+		border-color: @widget-border-color;
+	}
+	.k-editor-button .k-state-active{
+		background-color: @drop-down-header-background;
+	}
+	.k-dropdown-wrap .k-input{
+		color: @widget-text-color;
+	}
 }
 
+//Pickers hovered state
+.k-picker-wrap.k-state-hover,
+.k-dropdown-wrap.k-state-hover,
+.k-autocomplete.k-state-hover,
+.k-numeric-wrap.k-state-hover,
+.k-multiselect.k-header.k-state-hover
+{
+	border-color: @hover-border-color;
+	background-color: @hover-background-color;
+}
+
+//Pickers focused state
 .k-picker-wrap.k-state-focused,
 .k-dropdown-wrap.k-state-focused,
-.k-autocomplete.k-state-focused{
+.k-autocomplete.k-state-focused,
+.k-numeric-wrap.k-state-focused,
+.k-multiselect.k-header.k-state-focused,
+{
+	background-color: @form-widget-background;
 	border-color: @drop-down-header-background;
+}
+
+//Pickers k-state-border-down stated
+.k-autocomplete.k-state-active,
+.k-dropdown-wrap.k-state-active,
+.k-picker-wrap.k-state-active,
+.k-picker-wrap.k-state-active,
+.k-numeric-wrap.k-state-active
+{
+	background-color: @drop-down-header-background;
 }
 
 .k-footer{
@@ -1105,6 +1157,7 @@ div.k-imagebrowser-dropzone em
 	color: @drop-down-header-color;
 }
 
+//Calendar additional styling
 .k-calendar .k-footer{
 	padding: 0;
 }
@@ -1154,19 +1207,36 @@ div.k-imagebrowser-dropzone em
     border-radius: @calendar-border-radius;
 }
 
-.k-panelbar .k-panel{
-	color: @widget-text-color;
-}
+//PanelBar additional styling
+
 
 .k-panelbar > li > .k-link.k-state-hover{
 	color: @hover-text-color;
 }
 
+.k-panelbar .k-item .k-state-active{
+	color: @form-widget-color;
+}
+
+.k-panelbar .k-state-default.k-item .k-link.k-header,
+.k-panelbar .k-state-disabled.k-item .k-link.k-header{
+	background-color: @drop-down-header-background;
+	color: @active-text-color;
+}
+
+.k-panelbar .k-state-active.k-item .k-link.k-header{
+	background-color: @active-background-color;
+	color: @active-text-color;
+}
+
+
+//Window additional styling
 .k-window-titlebar{
 	background: @drop-down-header-background;
 	color: @form-widget-color;
 }
 
+//TabStrip
 .k-tabstrip-items .k-state-active .k-link{
 	color: @form-widget-color;
 }
@@ -1177,35 +1247,51 @@ div.k-imagebrowser-dropzone em
 	color: @widget-text-color;
 }
 
-.k-menu .k-state-border-down{
+//Menu
+.k-menu .k-state-border-down
+{
 	background: @drop-down-header-background;
 }
 
+// Slider -- introduce @slider-selection-background
 .k-slider-selection
 {
     background-color: @hover-background-color;
 }
 
 .k-slider .k-button-increase:active,
-.k-slider .k-button-decrease:active{
+.k-slider .k-button-decrease:active
+{
 	border-color: @selected-border-color;
 	background-color: @drop-down-header-background;
 }
 
+//Grid
 .k-grid .k-grid-edit-row input,
 .k-grid .k-grid-edit-cell input,
-.k-grid .k-grid-edit-row .k-numeric-wrap{
-	border-color: @form-widget-border-color;
-}
-
-.k-grid tr:hover
+.k-grid .k-grid-edit-row .k-numeric-wrap
 {
-    background-color: @hover-background-color;
-	color: @hover-text-color;
+	border-color: @form-widget-border-color;
 }
 
 .k-state-focused > .k-select
 {
     border-color: @drop-down-header-background;
 }
+
+.k-grid-header-wrap th
+{
+	background-color: @table-header-background;
+}
+
+//Probably not correct -- AX Vasko
+//.k-grid .k-toolbar .k-button-icontext.k-grid-save-changes,
+//.k-grid .k-toolbar .k-button-icontext.k-grid-cancel-changes,
+//.k-grid .k-toolbar .k-button-icontext.k-grid-add
+//{
+	//background-color: transparent;
+	//color: @header-text-color;
+	//border: none;
+//}
+
 
