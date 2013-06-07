@@ -510,7 +510,7 @@ kendo_module({
         }
     });
 
-    var PolarNumericAxis = Axis.extend({
+    var PolarAxis = Axis.extend({
         init: function(options) {
             var axis = this;
 
@@ -1105,7 +1105,7 @@ kendo_module({
             var plotArea = this,
                 polarAxis;
 
-            polarAxis = new PolarNumericAxis(plotArea.options.xAxis);
+            polarAxis = new PolarAxis(plotArea.options.xAxis);
 
             plotArea.polarAxis = polarAxis;
             plotArea.axisX = polarAxis;
@@ -1228,7 +1228,7 @@ kendo_module({
     SeriesBinder.current.register(RADAR_CHARTS, ["value"], ["color"]);
 
     deepExtend(dataviz, {
-        PolarNumericAxis: PolarNumericAxis,
+        PolarAxis: PolarAxis,
         PolarPlotArea: PolarPlotArea,
         RadarBarChart: RadarBarChart,
         RadarCategoryAxis: RadarCategoryAxis,
