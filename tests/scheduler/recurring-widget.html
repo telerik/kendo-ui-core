@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recurring widget</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Recurring widget</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var RecurrenceEditor = kendo.ui.RecurrenceEditor,
+                div;
+
+            module("kendo.ui.RecurrenceEditor initialization", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    //div.data("kendoRecurrenceEditor").destroy();
+                    div.remove();
+                }
+            });
+
+            test("kendoRecurrenceEditor attaches a reccurrenceEditor object to target", function() {
+                div.kendoRecurrenceEditor();
+
+               ok(div.data("kendoRecurrenceEditor") instanceof RecurrenceEditor);
+            });
+
+            test("renders label for dropdownlist", function() {
+                div.kendoRecurrenceEditor();
+
+                var label = div.find("label:first");
+
+                ok(label[0]);
+                equal(label.text(), "Repeat");
+            });
+
+            test("renders dropdownlist for frequencies", function() {
+                div.kendoRecurrenceEditor();
+
+                var ddl = div.find("[data-role=dropdownlist]").data("kendoDropDownList");
+
+                ok(ddl);
+                ok(ddl.ul.children());
+            });
+
+            test("creates empty model", function() {
+                var editor = new RecurrenceEditor(div);
+
+                ok(editor.model);
+                ok(editor.model instanceof kendo.data.ObservableObject);
+            });
+
+            module("RecurrenceEditor API", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    //div.data("kendoRecurrenceEditor").destroy();
+                    div.remove();
+                }
+            });
+
+            test("value method returns '' if freq is empty string", function() {
+                var editor = new RecurrenceEditor(div);
+
+                equal(editor.value(), "");
+            });
+
+            test("value method returns 'FREQ=DAILY' if freq is daily", function() {
+                var editor = new RecurrenceEditor(div);
+
+                var ddl = div.find("[data-role=dropdownlist]").data("kendoDropDownList");
+                ddl.select(1);
+                ddl.trigger("change");
+
+                equal(editor.value(), "FREQ=DAILY");
+            });
+
+            test("value method parses value into rule object", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.value("FREQ=MONTHLY");
+
+                equal(editor.model.freq, "monthly");
+            });
+
+            test("value method updates the selected item in ddl", function() {
+                var editor = new RecurrenceEditor(div);
+                var ddl = div.find("[data-role=dropdownlist]").data("kendoDropDownList");
+
+                editor.value("FREQ=MONTHLY");
+
+                equal(ddl.select(), 3);
+            });
+
+            /*test("value method does not update if freq is not valid", function() {
+                var editor = new RecurrenceEditor(div);
+
+                editor.value("FREQ=test");
+
+                equal(editor.value(), "");
+            });*/
+        </script>
+    </body>
+</html>

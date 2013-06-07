@@ -12,6 +12,8 @@ kendo_module({
         date = kendo.date,
         setDayOfWeek = date.setDayOfWeek,
         Class = kendo.Class,
+        ui = kendo.ui,
+        Widget = ui.Widget,
         DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
@@ -840,6 +842,7 @@ kendo_module({
             }
 
             if (weekStart === undefined) {
+                //TODO: According ISO starndard the default day is MO, not the one defined by the current culture
                 instance.weekStart = weekStart = kendo.culture().calendar.firstDay;
             }
 
@@ -852,7 +855,8 @@ kendo_module({
     }
 
     function serialize(rule) {
-        var ruleString = "FREQ=" + rule.freq.toUpperCase();
+        var weekStart = rule.weekStart,
+            ruleString = "FREQ=" + rule.freq.toUpperCase();
 
         if (rule.interval > 1) {
             ruleString += ";INTERVAL=" + rule.interval;
@@ -902,7 +906,9 @@ kendo_module({
             ruleString += ";BYSETPOS=" + rule.setPositions;
         }
 
-        ruleString += ";WKST=" + WEEK_DAYS[rule.weekStart];
+        if (weekStart !== undefined) {
+            ruleString += ";WKST=" + WEEK_DAYS[weekStart];
+        }
 
         return ruleString;
     }
@@ -919,4 +925,73 @@ kendo_module({
         weekInMonth: weekInMonth,
         numberOfWeeks: numberOfWeeks
     };
+
+    var RecurrenceEditor = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Widget.fn.init.call(that, element, options);
+
+            that._frequency();
+
+            that._model();
+        },
+        options: {
+            name: "RecurrenceEditor",
+            frequencyOptionLabel: "Never",
+            frequencies: [
+                { text: "Daily", value: "daily" },
+                { text: "Weekly", value: "weekly" },
+                { text: "Monthly", value: "monthly" },
+                { text: "Yearly", value: "yearly" }
+            ]
+        },
+
+        value: function(value) {
+            var model = this.model;
+
+            if (value === undefined) {
+                if (model.freq === "") {
+                    return "";
+                }
+
+                return serialize(model);
+            }
+
+            value = parseRule(value);
+
+            if (value) {
+                //test for valid value.freq if not set null
+                for (var prop in value) {
+                    this.model.set(prop, value[prop]);
+                }
+            }
+        },
+
+        _model: function() {
+            this.model = kendo.observable({
+                freq: ""
+            });
+
+            kendo.bind(this.element, this.model);
+        },
+
+        //rendering
+        _frequency: function() {
+            var ddl = $('<input name="freq" data-bind="value: freq" />');
+
+            this.element.append('<div class="k-edit-label"><label>Repeat</label></div>');
+            this.element.append(ddl);
+
+            ddl.kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: this.options.frequencies,
+                optionLabel: this.options.frequencyOptionLabel
+            });
+        }
+    });
+
+    ui.plugin(RecurrenceEditor);
+
 })(window.kendo.jQuery);
