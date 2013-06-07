@@ -530,7 +530,7 @@ kendo_module({
                 });
 
                 list.bind("resize", function() {
-                    kendo.fx.animationFrame(function() {
+                    kendo.effects.animationFrame(function() {
                         scroller.virtualSize(0, list.totalHeight());
                     });
                 });
