@@ -46,14 +46,9 @@ kendo_module({
             return kendo.date.previousDay(this.startDate);
         },
 
-        // change to setDate
         setDate: function(date) {
             this.startDate = date;
-            var endDate = new Date(date);
-
-            kendo.date.dayOfWeek(endDate, 6);
-
-            this.endDate = endDate;
+            this.endDate = kendo.date.dayOfWeek(date, 6);
             this.prepareLayout(this._layout());
             this.table.addClass("k-scheduler-agenda");
         },
@@ -151,8 +146,10 @@ kendo_module({
                         }
 
                         tableRow.push(kendo.format(
-                            '<td class="k-scheduler-timecolumn">{0}</td><td>{1}</td>',
+                            '<td class="k-scheduler-timecolumn"><div>{0}{1}{2}</div></td><td>{3}</td>',
+                            task.tail || task.middle ? '<span class="k-icon k-i-arrow-w"></span>' : "",
                             this._timeTemplate(task),
+                            task.head || task.middle ? '<span class="k-icon k-i-arrow-e"></span>' : "",
                             this._taskTemplate(task)
                         ));
 

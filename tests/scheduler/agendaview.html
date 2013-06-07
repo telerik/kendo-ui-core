@@ -303,6 +303,120 @@
                 equal(timeCell.eq(1).text(), "all day");
                 equal(timeCell.eq(2).text(), "10:00 AM");
             });
+
+            test("all day events are displayed first", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: ""
+                    }),
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 00:00"),
+                        isAllDay: true,
+                        title: ""
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.eq(0).text(), "all day");
+                equal(timeCell.eq(1).text(), "12:00 AM-1:00 AM");
+            });
+
+            test("clicking the delete icon fires the remove event", 1, function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var event = new Event({
+                                start: new Date("2013/06/06 00:00"),
+                                end: new Date("2013/06/06 01:00"),
+                                title: ""
+                            });
+
+                agenda.render([ event ]);
+
+                agenda.bind("remove", function(e) {
+                    equal(e.uid, event.uid);
+                });
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                table.find(".k-i-close").click();
+            });
+
+            test("agenda wraps time cells in a div", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var event = new Event({
+                                start: new Date("2013/06/06 00:00"),
+                                end: new Date("2013/06/06 01:00"),
+                                title: ""
+                            });
+
+                agenda.render([ event ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.children("div").length, 1);
+            });
+
+            test("agenda renders right icon for events which continue on the next day", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var event = new Event({
+                                start: new Date("2013/06/06 00:00"),
+                                end: new Date("2013/06/07 01:00"),
+                                title: ""
+                            });
+
+                agenda.render([ event ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn:first");
+
+                equal(timeCell.find(".k-icon").length, 1);
+                equal(timeCell.find(".k-i-arrow-e").length, 1);
+            });
+
+            test("agenda renders left icon for events which start on the previous day", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var event = new Event({
+                                start: new Date("2013/06/06 00:00"),
+                                end: new Date("2013/06/07 01:00"),
+                                title: ""
+                            });
+
+                agenda.render([ event ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn:last");
+
+                equal(timeCell.find(".k-icon").length, 1);
+                equal(timeCell.find(".k-i-arrow-w").length, 1);
+            });
+
+            test("agenda renders left and right icon for events which start on the previous day and end on the next day", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var event = new Event({
+                                start: new Date("2013/06/06 00:00"),
+                                end: new Date("2013/06/08 01:00"),
+                                title: ""
+                            });
+
+                agenda.render([ event ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn").eq(1);
+
+                equal(timeCell.find(".k-icon").length, 2);
+                equal(timeCell.find(".k-i-arrow-w").length, 1);
+                equal(timeCell.find(".k-i-arrow-e").length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
