@@ -305,8 +305,32 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new MobileListViewEventBuilder(Component.Events));
 
             return this;
-        } 
-        
+        }
+
+        /// <summary>
+        /// Builds MobileListView items.
+        /// </summary>
+        /// <param name="action">Action for declaratively building MobileListView items.</param>
+        /// <code lang="CS">
+        ///  &lt;% Html.Kendo().MobileListViewView()
+        ///            .Name("View")
+        ///            .Items(items => 
+        ///            {
+        ///                 items.Add().Text("Item");
+        ///                 items.AddLink().Text("Link Item");    
+        ///             })
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        public MobileListViewBuilder<T> Items(Action<MobileListViewItemFactory> action)
+        {
+
+            var factory = new MobileListViewItemFactory(Component.Items, Component.ViewContext, Component.UrlGenerator);
+
+            action(factory);
+
+            return this;
+        }
     }
 }
 

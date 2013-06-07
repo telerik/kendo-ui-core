@@ -261,6 +261,26 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="UI.MobileListView"/>.
+        /// </summary>
+        /// <example>        
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileListView()
+        ///             .Name("MobileListView")
+        ///             .Items(items => 
+        ///             {
+        ///                 items.Add().Text("Item");
+        ///                 items.AddLink().Text("Link Item");
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example> 
+        public virtual MobileListViewBuilder<object> MobileListView()
+        {
+            return new MobileListViewBuilder<object>(new MobileListView<object>(ViewContext, Initializer, UrlGenerator));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="MobileListView{T}"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>

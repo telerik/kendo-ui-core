@@ -29,9 +29,19 @@ namespace Kendo.Mvc.UI
 
             AddEventAttributes(html, component.Events);
 
-            html.Attribute("data-source", component.Initializer.Serialize(component.DataSource.ToJson()));
-            
-            html.Attribute("data-auto-bind", component.AutoBind.GetValueOrDefault(true) ? "true" : "false");            
+            if (component.DataSource.Data != null || component.DataSource.Transport.Read.Url.HasValue())
+            {
+                html.Attribute("data-source", component.Initializer.Serialize(component.DataSource.ToJson()));
+            }
+            else
+            {
+                BuildItems(html);
+            }
+
+            if (!component.AutoBind.GetValueOrDefault(true))
+            {
+                html.Attribute("data-auto-bind", "false");
+            }
 
             if (component.Template.HasValue())
             {
@@ -131,7 +141,11 @@ namespace Kendo.Mvc.UI
 
             }
         }
-        
+
+        protected void BuildItems(IHtmlNode html)
+        {            
+            component.Items.Each(item => item.WriteHtml(html));
+        }
     }
 }
 

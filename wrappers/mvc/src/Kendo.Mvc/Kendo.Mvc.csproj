@@ -646,6 +646,13 @@
     <Compile Include="UI\Grid\Settings\NumberOperators.cs" />
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewLinkItemBuilder.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewItemBuilderBase.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewItemBuilder.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewItemFactory.cs" />
+    <Compile Include="UI\MobileListView\Items\MobileListViewItemBase.cs" />
+    <Compile Include="UI\MobileListView\Items\MobileListViewLinkItem.cs" />
+    <Compile Include="UI\MobileListView\Items\MobileListViewItem.cs" />
     <Compile Include="UI\MobileNavigatableSettingsBuilder.cs" />
     <Compile Include="UI\MobileNavigatableSettings.cs" />
     <Compile Include="UI\MobilePopupDirection.cs" />

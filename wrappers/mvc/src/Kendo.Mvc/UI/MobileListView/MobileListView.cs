@@ -8,7 +8,8 @@ namespace Kendo.Mvc.UI
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
 
-    public class MobileListView<T> : WidgetBase where T : class
+    public class MobileListView<T> : WidgetBase, IItemsContainer<MobileListViewItemBase>
+        where T : class
     {        
         public MobileListView(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
@@ -28,7 +29,15 @@ namespace Kendo.Mvc.UI
             };
 
             DataSource.ModelType(typeof(T));
-        }       
+
+            Items = new List<MobileListViewItemBase>();
+        }
+
+        public IList<MobileListViewItemBase> Items
+        {
+            get;
+            private set;
+        }
 
         public IUrlGenerator UrlGenerator
         {
