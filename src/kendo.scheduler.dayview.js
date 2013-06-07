@@ -17,10 +17,6 @@ kendo_module({
         isInTimeRange = kendo.date.isInTimeRange,
         NS = ".kendoMultiDayView";
 
-    function getDate(date) {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
-    }
-
     var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title#">' +
                     '<dl>' +
                         '<dt>#=kendo.format("{0:t} - {1:t}", start, end)#</dt>' +
