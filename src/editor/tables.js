@@ -52,7 +52,7 @@ var InsertTableTool = Tool.extend({
 
     initialize: function(ui, options) {
         Tool.fn.initialize.call(this, ui, options);
-        ui.addClass("k-state-disabled").click(this._togglePopup);
+        ui.click(this._togglePopup);
     },
 
     _togglePopup: function(e) {
