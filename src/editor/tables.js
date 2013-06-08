@@ -11,6 +11,14 @@ var kendo = window.kendo,
     registerTool = Editor.EditorUtils.registerTool;
 
 function table(options) {
+    options = extend({
+        rows: 1,
+        columns: 1,
+        attr: "",
+        cellContent: "&nbsp;",
+        cellAttr: ""
+    }, options);
+
     var td = "<td" + options.cellAttr + ">" + options.cellContent + "</td>";
 
     return "<table" + options.attr + ">" +
@@ -24,8 +32,8 @@ var TableCommand = Command.extend({
             editor = this.editor,
             range,
             tableHtml = table({
-                rows: options.rows || 1,
-                columns: options.columns || 1,
+                rows: options.rows,
+                columns: options.columns,
                 attr: " class='k-table' contentEditable='false' data-last",
                 cellContent: Editor.emptyElementContent,
                 cellAttr: " contentEditable='true'"
