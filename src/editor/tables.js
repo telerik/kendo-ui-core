@@ -81,19 +81,21 @@ var InsertTableTool = Tool.extend({
 
         ui.click(proxy(popup.toggle, popup));
 
+        this._editor = options.editor;
         this._popup = popup;
     },
 
     _attachEvents: function() {
-        var element = this._popup.element,
+        var that = this,
+            element = that._popup.element,
             status = element.find(".k-status"),
             cells = element.find(".k-ct-cell"),
             firstCell = cells.eq(0),
             lastCell = cells.eq(cells.length - 1),
             start = firstCell.offset(),
             end = lastCell.offset(),
-            cols = this.cols,
-            rows = this.rows,
+            cols = that.cols,
+            rows = that.rows,
             cellWidth, cellHeight;
 
         end.left += lastCell[0].offsetWidth;
@@ -102,25 +104,49 @@ var InsertTableTool = Tool.extend({
         cellWidth = (end.left - start.left) / cols;
         cellHeight = (end.top - start.top) / rows;
 
+        function tableFromLocation(e) {
+            return {
+                row: Math.floor((e.clientY - start.top) / cellHeight) + 1,
+                col: Math.floor((e.clientX - start.left) / cellWidth) + 1
+            };
+        }
+
+        function valid(p) {
+            return p.row > 0 && p.col > 0 && p.row <= rows && p.col <= cols;
+        }
+
         element
             .on("mousemove" + NS, function(e) {
-                var col = Math.floor((e.clientX - start.left) / cellWidth) + 1;
-                var row = Math.floor((e.clientY - start.top) / cellHeight) + 1;
+                var t = tableFromLocation(e);
 
-                if (row <= 0 || col <= 0 || row > rows || col > cols) {
-                    status.text("Cancel");
-                    cells.removeClass("k-state-active");
-                } else {
-                    status.text(kendo.format("Create a {0} x {1} table", row, col));
+                if (valid(t)) {
+                    status.text(kendo.format("Create a {0} x {1} table", t.row, t.col));
 
                     cells.each(function(i) {
-                        $(this).toggleClass("k-state-active", i % cols < col && i / cols < row);
+                        $(this).toggleClass(
+                            "k-state-active",
+                            i % cols < t.col && i / cols < t.row
+                        );
                     });
+                } else {
+                    status.text("Cancel");
+                    cells.removeClass("k-state-active");
                 }
             })
-            .on("mouseleave" + NS, function(e) {
+            .on("mouseleave" + NS, function() {
                 cells.removeClass("k-state-active");
                 status.text("Cancel");
+            })
+            .on("mouseup" + NS, function(e) {
+                var t = tableFromLocation(e);
+
+                if (valid(t)) {
+                    that._editor.exec("createTable", {
+                        rows: t.row,
+                        columns: t.col
+                    });
+                    that._popup.close();
+                }
             });
     },
 
