@@ -420,6 +420,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="Scheduler"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Scheduler()
+        ///             .Name("Scheduler")
+        /// %&gt;
+        /// </code>
+        /// </example><T>
+        /// 
+        public virtual SchedulerBuilder<T> Scheduler<T>() where T : class, ISchedulerEvent
+        {
+            return new SchedulerBuilder<T>(new Scheduler<T>(ViewContext, Initializer, UrlGenerator));
+        }
+
+        /// <summary>
         /// Creates a <see cref="TreeView"/>
         /// </summary>
         /// <example>
