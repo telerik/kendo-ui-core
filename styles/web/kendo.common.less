@@ -3239,16 +3239,19 @@ table.k-editor
     text-decoration: underline;
 }
 
-.k-createTable-size {
-    border-collapse: separate;
-    border-spacing: 3px;
+@editor-createTable-cellSize: 18px;
+
+.k-ct-popup {
+    width: 8 * (@editor-createTable-cellSize + 6);
 }
 
-.k-createTable-size td {
+.k-ct-cell {
     border-width: 1px;
     border-style: solid;
-    width: 18px;
-    height: 18px;
+    width: @editor-createTable-cellSize;
+    height: @editor-createTable-cellSize;
+    margin: 0 2px 2px;
+    display: inline-block;
     overflow: hidden;
 }
 

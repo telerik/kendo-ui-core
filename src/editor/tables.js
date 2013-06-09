@@ -58,17 +58,19 @@ var InsertTableTool = Tool.extend({
         Tool.fn.init.call(this, $.extend(options, { command: TableCommand }));
     },
 
+    _template: function() {
+        return "<div class='k-ct-popup'>" +
+                "<div class='k-status'>Cancel</div>" +
+                new Array(8 * 6 + 1).join("<div class='k-ct-cell' />") +
+            "</div>";
+    },
+
     initialize: function(ui, options) {
         Tool.fn.initialize.call(this, ui, options);
 
-        var tableHtml = table({
-            rows: 6,
-            columns: 8,
-            attr: "class='k-createTable-size'"
-        });
-
-        var popup = $(tableHtml).appendTo("body").kendoPopup({
-            anchor: ui
+        var popup = $(this._template()).appendTo("body").kendoPopup({
+            anchor: ui,
+            copyAnchorStyles: false
         }).data("kendoPopup");
 
         ui.click($.proxy(popup.toggle, popup));

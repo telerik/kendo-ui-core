@@ -834,6 +834,19 @@ div.k-imagebrowser-dropzone em
     .selection(@selected-border-color);
 }
 
+.k-ct-popup .k-status {
+    color: @disabled-text-color;
+}
+
+.k-ct-cell {
+    border-color: @disabled-text-color;
+}
+
+.k-ct-cell.k-state-active {
+    border-color: @selected-border-color;
+    .box-shadow(0 0 2px 1px @selected-border-color);
+}
+
 /* Border radius */
 
 .k-block,
