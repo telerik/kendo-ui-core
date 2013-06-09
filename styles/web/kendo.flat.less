@@ -11,6 +11,11 @@
 @tooltip-texture: none;
 @fallback-texture: url('textures/highlight.png');
 
+/* Widget Base Styles */
+@widget-text-color: #787878;
+@widget-background-color: #ffffff;
+@widget-border-color: #cdcdcd;
+
 //No gradients
 @widget-gradient: none;
 @widget-shadow: none;
@@ -21,10 +26,11 @@
 @active-gradient: none;
 @active-shadow: none;
 
-/* Widget Base Styles */
-@widget-background-color: #ffffff;
-@widget-border-color: #cdcdcd;
-@widget-text-color: #787878;
+/* Selects, Dropdowns */
+@select-background-color: red;
+@select-border-color: #29d6c5;
+@select-hover-background-color: #29d6c5;
+@select-group-background-color: @drop-down-header-background;
 
 /* Buttons */
 @button-background-color: @form-widget-background;
@@ -35,12 +41,8 @@
 @group-border-color: #29d6c5;
 
 /* Content */
-@content-background-color: #ffffff;
+@content-background-color: @widget-background-color;
 
-@select-background-color: #ffffff;
-@select-border-color: #29d6c5;
-@select-hover-background-color: #29d6c5;
-@select-group-background-color: @drop-down-header-background;
 @hover-background-color: #29d6c5;
 @hover-border-color: #29d6c5;
 @hover-text-color: #ffffff;
@@ -97,9 +99,7 @@
 @focused-shadow: none;
 @focused-item-shadow: inset 0 0 0 1px @drop-down-header-background;
 
-/* Calendar */
-@header-calendar-background: #363940;
-@header-calendar-text-color: #ffffff;
+
 
 //Introduced new var-s
 @form-widget-background: #10c4b2;
@@ -108,7 +108,13 @@
 @drop-down-header-background: #363940;
 @drop-down-header-color: #ffffff;
 @calendar-border-radius: 13px;
+@calendar-header-hover-text-decoration: underline;
+@calendar-footer-text-decoration: none;
 @table-header-background: #dfdfdf;
 @popup-container-padding: 0;
+
+//#10c4b2-> tumen turkoaz
+//#29d6c5-> svetul turkoaz
+//#363940-> tumno sivo
 
 @import "template.less";

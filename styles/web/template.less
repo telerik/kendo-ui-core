@@ -323,12 +323,6 @@ textarea.k-textbox:hover,
 	background-color: @header-background-color;
 }
 
-/* Calendar additional styling */
-.k-calendar .k-header{
-	background: @header-calendar-background;
-	color: @header-calendar-text-color;
-}
-
 .k-tabstrip-items .k-state-active
 {
     background: @active-background-color;
@@ -1042,35 +1036,192 @@ div.k-imagebrowser-dropzone em
 
 
 //Changes
+
+.k-footer{
+	background-color: @drop-down-header-background;
+	color: @drop-down-header-color;
+}
+
+
+
+//PanelBar additional styling
+.k-panelbar > li > .k-link.k-state-hover{
+	color: @hover-text-color;
+}
+
+.k-panelbar .k-item .k-state-active{
+	color: @form-widget-color;
+}
+
+.k-panelbar .k-state-default.k-item .k-link.k-header,
+.k-panelbar .k-state-disabled.k-item .k-link.k-header{
+	background-color: @drop-down-header-background;
+	color: @active-text-color;
+}
+
+.k-panelbar .k-state-active.k-item .k-link.k-header{
+	background-color: @active-background-color;
+	color: @active-text-color;
+}
+
+
+
+
+//TabStrip
+.k-tabstrip-items .k-state-active .k-link{
+	color: @form-widget-color;
+}
+
+.k-tabstrip .k-content.k-state-active
+{
+    background-color: @content-background-color;
+	color: @widget-text-color;
+}
+
+//Menu
+.k-menu .k-state-border-down
+{
+	background: @drop-down-header-background;
+}
+
+// Slider -- introduce @slider-selection-background
+.k-slider-selection
+{
+    background-color: @hover-background-color;
+}
+
+.k-slider .k-button-increase:active,
+.k-slider .k-button-decrease:active
+{
+	border-color: @selected-border-color;
+	background-color: @drop-down-header-background;
+}
+
+//Grid
+.k-grid .k-grid-edit-row input,
+.k-grid .k-grid-edit-cell input,
+.k-grid .k-grid-edit-row .k-numeric-wrap
+{
+	border-color: @form-widget-border-color;
+}
+
+.k-state-focused > .k-select
+{
+    border-color: @drop-down-header-background;
+}
+
+.k-grid-header-wrap th
+{
+	background-color: @table-header-background;
+}
+
+//Probably not correct -- AX Vasko
+//.k-grid .k-toolbar .k-button-icontext.k-grid-save-changes,
+//.k-grid .k-toolbar .k-button-icontext.k-grid-cancel-changes,
+//.k-grid .k-toolbar .k-button-icontext.k-grid-add
+//{
+	//background-color: transparent;
+	//color: @header-text-color;
+	//border: none;
+//}
+
+
+
+
+
+
+//Buttons (override the rule)
+.k-button
+{
+    color: @button-text-color;
+    border-color: @form-widget-border-color;
+    background-color: @button-background-color;
+}
+
+.k-button:hover
+{
+    color: @hover-text-color;
+    border-color: @hover-border-color;
+    background-color: @hover-background-color;
+}
+
+//TreeView
+.k-treeview .k-in.k-state-selected{
+	background-color: @drop-down-header-background;	
+}
+
+/* Calendar additional styling */
+.k-calendar .k-header{
+	background-color: @drop-down-header-background;
+	color: @drop-down-header-color;
+}
+
+.k-calendar .k-footer{
+	padding: 0;
+}
+
+.k-calendar .k-footer .k-nav-today{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	padding: .5em 0;
+	color: @form-widget-color;
+	text-decoration: @calendar-footer-text-decoration;
+}
+
+.k-calendar .k-footer .k-nav-today:hover{
+	background-color: @hover-background-color;
+	color: @hover-text-color;
+}
+
+.k-calendar .k-footer .k-nav-today:active{
+	background: @active-background-color;	
+}
+
+
+.k-calendar .k-state-selected{
+    background-color: @form-widget-background;
+	color: @form-widget-color;
+}
+
+.k-calendar .k-nav-fast{
+	color: @form-widget-color;
+}
+
+.k-calendar .k-nav-fast.k-state-hover{
+	text-decoration: @calendar-header-hover-text-decoration;
+	background-color: @drop-down-header-background;
+}
+
+.k-calendar .k-link.k-state-hover,
+.k-window .k-link
+{
+    border-radius: @calendar-border-radius;
+}
+
+//DDL-s
 .k-dropdown .k-input,
 .k-dropdown .k-state-focused .k-input,
-.k-menu .k-popup
-{
+.k-menu .k-popup{
     color: @form-widget-color;
 }
 
-.k-list-container.k-popup
-{
+.k-list-container{
     border-color: @drop-down-header-background;
     background-color: @select-group-background-color;
 	color: @drop-down-header-color;
-	padding: @popup-container-padding;
+	//padding: @popup-container-padding;
 }
 
+//?????????????????????????????????????????????????????
 .k-group,
 .k-grouping-header,
-.k-widget .k-status,
+k-widget .k-status,
 .k-dropzone-hovered,
 .k-upload-files,
 .k-widget.k-popup
 {
     background-color: @drop-down-header-background;
-}
-
-.k-dropdown-wrap.k-state-focused
-{
-    background-color: @form-widget-background;
-    border-color: @drop-down-header-background;
 }
 
 .k-textbox,
@@ -1152,146 +1303,8 @@ div.k-imagebrowser-dropzone em
 	background-color: @drop-down-header-background;
 }
 
-.k-footer{
-	background-color: @drop-down-header-background;
-	color: @drop-down-header-color;
-}
-
-//Calendar additional styling
-.k-calendar .k-footer{
-	padding: 0;
-}
-
-.k-calendar .k-footer .k-nav-today{
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-	padding: .5em 0;
-	color: @form-widget-color;
-	text-decoration: none;
-}
-
-.k-calendar .k-footer .k-nav-today:hover{
-	background: @select-hover-background-color;
-	color: @hover-text-color;
-}
-
-.k-calendar .k-footer .k-nav-today:active{
-	background: @form-widget-background;	
-}
-
-.k-calendar .k-state-selected.k-state-focused>.k-link,
-.k-calendar .k-state-selected>.k-link
-{
-    background-color: transparent;
-	color: @drop-down-header-background;
-}
-
-.k-calendar .k-state-selected>.k-link{
-	background-color: @form-widget-background;
-	color: @form-widget-color;
-}
-
-.k-calendar .k-nav-fast{
-	color: @form-widget-color;
-}
-
-.k-calendar .k-nav-fast.k-state-hover{
-	text-decoration: underline;
-	background-color: transparent;
-}
-
-.k-calendar .k-link.k-state-hover,
-.k-window .k-link
-{
-    border-radius: @calendar-border-radius;
-}
-
-//PanelBar additional styling
-
-
-.k-panelbar > li > .k-link.k-state-hover{
-	color: @hover-text-color;
-}
-
-.k-panelbar .k-item .k-state-active{
-	color: @form-widget-color;
-}
-
-.k-panelbar .k-state-default.k-item .k-link.k-header,
-.k-panelbar .k-state-disabled.k-item .k-link.k-header{
-	background-color: @drop-down-header-background;
-	color: @active-text-color;
-}
-
-.k-panelbar .k-state-active.k-item .k-link.k-header{
-	background-color: @active-background-color;
-	color: @active-text-color;
-}
-
-
 //Window additional styling
 .k-window-titlebar{
 	background: @drop-down-header-background;
 	color: @form-widget-color;
 }
-
-//TabStrip
-.k-tabstrip-items .k-state-active .k-link{
-	color: @form-widget-color;
-}
-
-.k-tabstrip .k-content.k-state-active
-{
-    background-color: @content-background-color;
-	color: @widget-text-color;
-}
-
-//Menu
-.k-menu .k-state-border-down
-{
-	background: @drop-down-header-background;
-}
-
-// Slider -- introduce @slider-selection-background
-.k-slider-selection
-{
-    background-color: @hover-background-color;
-}
-
-.k-slider .k-button-increase:active,
-.k-slider .k-button-decrease:active
-{
-	border-color: @selected-border-color;
-	background-color: @drop-down-header-background;
-}
-
-//Grid
-.k-grid .k-grid-edit-row input,
-.k-grid .k-grid-edit-cell input,
-.k-grid .k-grid-edit-row .k-numeric-wrap
-{
-	border-color: @form-widget-border-color;
-}
-
-.k-state-focused > .k-select
-{
-    border-color: @drop-down-header-background;
-}
-
-.k-grid-header-wrap th
-{
-	background-color: @table-header-background;
-}
-
-//Probably not correct -- AX Vasko
-//.k-grid .k-toolbar .k-button-icontext.k-grid-save-changes,
-//.k-grid .k-toolbar .k-button-icontext.k-grid-cancel-changes,
-//.k-grid .k-toolbar .k-button-icontext.k-grid-add
-//{
-	//background-color: transparent;
-	//color: @header-text-color;
-	//border: none;
-//}
-
-
