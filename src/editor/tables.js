@@ -98,6 +98,8 @@ var InsertTableTool = Tool.extend({
             rows = that.rows,
             cellWidth, cellHeight;
 
+        that._popup.options.anchor.addClass("k-state-active");
+
         end.left += lastCell[0].offsetWidth;
         end.top += lastCell[0].offsetHeight;
 
@@ -151,6 +153,7 @@ var InsertTableTool = Tool.extend({
     },
 
     _detachEvents: function() {
+        this._popup.options.anchor.removeClass("k-state-active");
         this._popup.element.off(NS);
     },
 
