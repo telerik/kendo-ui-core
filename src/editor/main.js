@@ -34,11 +34,7 @@ kendo_module({
 
         getHtml: function() {
             var options = this.options;
-            return kendo.template(options.template)({
-                cssClass: options.cssClass,
-                tooltip: options.title,
-                initialValue: options.initialValue
-            });
+            return kendo.template(options.template, {useWithBlock:false})(options);
         }
     });
 
@@ -51,20 +47,22 @@ kendo_module({
 
         buttonTemplate:
             '<li class="k-editor-button" role="presentation">' +
-                '<a href="" role="button" class="k-tool-icon #= cssClass #" unselectable="on" title="#= tooltip #">#= tooltip #</a>' +
+                '<a href="" role="button" class="k-tool-icon #= data.cssClass #"' +
+                '#= data.popup ? " data-popup" : "" #' +
+                ' unselectable="on" title="#= data.title #">#= data.title #</a>' +
             '</li>',
 
         colorPickerTemplate:
-            '<li class="k-editor-colorpicker" role="presentation"><div class="k-colorpicker #= cssClass #"></div></li>',
+            '<li class="k-editor-colorpicker" role="presentation"><div class="k-colorpicker #= data.cssClass #"></div></li>',
 
         comboBoxTemplate:
             '<li class="k-editor-combobox">' +
-                '<select title="#= tooltip #" class="#= cssClass #"></select>' +
+                '<select title="#= data.title #" class="#= data.cssClass #"></select>' +
             '</li>',
 
         dropDownListTemplate:
             '<li class="k-editor-selectbox">' +
-                '<select title="#= tooltip #" class="#= cssClass #"></select>' +
+                '<select title="#= data.title #" class="#= data.cssClass #"></select>' +
             '</li>',
 
         separatorTemplate:
@@ -379,7 +377,7 @@ kendo_module({
                             editorTools[currentTool.name] = this.tools[currentTool.name];
                             options = editorTools[currentTool.name].options;
                         } else {
-                            options = extend({ cssClass: "k-i-custom", type: "button", tooltip: "" }, currentTool);
+                            options = extend({ cssClass: "k-i-custom", type: "button", title: "" }, currentTool);
 
                             if (options.name) {
                                 options.cssClass = "k-" + (options.name == "custom" ? "i-custom" : options.name);
@@ -485,10 +483,13 @@ kendo_module({
                     }
                 })
                 .on("click" + NS, enabledButtons, function(e) {
+                    var button = $(this);
                     e.preventDefault();
                     e.stopPropagation();
-                    $(this).removeClass("k-state-hover");
-                    that.options.editor.exec(that._toolFromClassName(this));
+                    button.removeClass("k-state-hover");
+                    if (!button.is("[data-popup]")) {
+                        that.options.editor.exec(that._toolFromClassName(this));
+                    }
                 })
                 .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); });
 

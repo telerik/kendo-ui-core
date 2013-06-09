@@ -19,9 +19,9 @@ function table(options) {
         cellAttr: ""
     }, options);
 
-    var td = "<td" + options.cellAttr + ">" + options.cellContent + "</td>";
+    var td = "<td " + options.cellAttr + ">" + options.cellContent + "</td>";
 
-    return "<table" + options.attr + ">" +
+    return "<table " + options.attr + ">" +
                new Array(options.rows + 1).join("<tr>" + new Array(options.columns + 1).join(td) + "</tr>") +
            "</table>";
 }
@@ -34,9 +34,9 @@ var TableCommand = Command.extend({
             tableHtml = table({
                 rows: options.rows,
                 columns: options.columns,
-                attr: " class='k-table' contentEditable='false' data-last",
+                attr: "class='k-table' contentEditable='false' data-last",
                 cellContent: Editor.emptyElementContent,
-                cellAttr: " contentEditable='true'"
+                cellAttr: "contentEditable='true'"
             });
 
         editor.selectRange(options.range);
@@ -60,14 +60,20 @@ var InsertTableTool = Tool.extend({
 
     initialize: function(ui, options) {
         Tool.fn.initialize.call(this, ui, options);
-        ui.click(this._togglePopup);
-    },
 
-    _togglePopup: function(e) {
-        if (!this._popup) {
-            var tableHtml = table({ rows: 10, columns: 10 });
-            this._popup = $(tableHtml).kendoPopup();
-        }
+        var tableHtml = table({
+            rows: 6,
+            columns: 8,
+            attr: "class='k-createTable-size'"
+        });
+
+        var popup = $(tableHtml).appendTo("body").kendoPopup({
+            anchor: ui
+        }).data("kendoPopup");
+
+        ui.click($.proxy(popup.toggle, popup));
+
+        this._popup = popup;
     },
 
     update: function (ui, nodes) {
@@ -81,6 +87,6 @@ extend(kendo.ui.editor, {
     InsertTableTool: InsertTableTool
 });
 
-registerTool("createTable", new InsertTableTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Create table"})}));
+registerTool("createTable", new InsertTableTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, popup: true, title: "Create table"})}));
 
 })(window.kendo.jQuery);

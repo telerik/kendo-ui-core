@@ -16,6 +16,29 @@
         <script>
 
             var editor = $("#Editor1").kendoEditor({
+                tools: [
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strikethrough",
+                    "fontName",
+                    "fontSize",
+                    "foreColor",
+                    "backColor",
+                    "justifyLeft",
+                    "justifyCenter",
+                    "justifyRight",
+                    "justifyFull",
+                    "insertUnorderedList",
+                    "insertOrderedList",
+                    "indent",
+                    "outdent",
+                    "formatBlock",
+                    "createLink",
+                    "unlink",
+                    "insertImage",
+                    "createTable"
+                ],
                 messages: {
                     unlink: "unlink foo"
                 }
@@ -56,6 +79,16 @@
 
                     equal(execArgs.length, 1);
                     equal(execArgs[0], 'bold');
+                });
+            });
+
+            test('popup buttons do not call exec', function() {
+                var called;
+
+                withMock(editor, "exec", function() { called = true; }, function() {
+                    $('[data-popup]', editor.wrapper).click();
+
+                    ok(!called);
                 });
             });
 
