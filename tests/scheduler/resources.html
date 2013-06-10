@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler Resources</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler Resources</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("scheduler fetches resources", function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "category",
+                            dataSource: [
+                                { text: "foo", value: 1 }
+                            ]
+                        }
+                    ]
+                });
+
+                equal(scheduler.resources["category"].dataSource.data()[0].text, "foo");
+            });
+
+            asyncTest("scheduler binds when resources and events are loaded", 2, function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    dataSource:  {
+                        transport: {
+                            read: function(options) {
+                                setTimeout(function() {
+                                    options.success([
+                                        { start: new Date(), end: new Date(), title: "foo" }
+                                    ]);
+                                }, 1);
+                            }
+                        }
+                    },
+                    resources: [
+                        {
+                            field: "category",
+                            dataSource: {
+                                transport: {
+                                    read: function(options) {
+                                        setTimeout(function() {
+                                            options.success([
+                                                { text: "foo", value: 1 }
+                                            ]);
+                                        }, 1);
+                                    }
+                                }
+                            }
+                        }
+                    ],
+
+                    dataBound: function() {
+                        start();
+                        equal(this.resources["category"].dataSource.data()[0].text, "foo");
+                        equal(this.dataSource.data()[0].title, "foo");
+                    }
+                });
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -256,7 +256,7 @@ kendo_module({
 
             that._dataSource();
 
-            that.view(that._selectedViewName);
+            that._resources();
 
             that._resizeHandler = proxy(that._resize, that);
 
@@ -270,6 +270,7 @@ kendo_module({
             messages: {
                 today: "Today"
             },
+            resources: [],
             views: []
         },
 
@@ -277,7 +278,9 @@ kendo_module({
             REMOVE,
             EDIT,
             CANCEL,
-            SAVE
+            SAVE,
+            "dataBinding",
+            "dataBound"
         ],
 
         destroy: function() {
@@ -709,9 +712,10 @@ kendo_module({
         },
 
         rebind: function() {
-            var view = this.view();
+            var that = this;
+            var view = that.view();
 
-            this.dataSource.filter({
+            that.dataSource.filter({
                 filters: [{
                     logic: "or",
                     filters: [
@@ -743,6 +747,30 @@ kendo_module({
                 //.bind(ERROR, that._errorHandler);
         },
 
+        _resources: function() {
+            var that = this;
+            var resources = that.options.resources;
+
+            that.resources = {};
+
+            for (var idx = 0; idx < resources.length; idx++) {
+                var resource = resources[idx];
+
+                that.resources[resource.field] = {
+                    field: resource.field,
+                    dataSource: kendo.data.DataSource.create(resource.dataSource)
+                };
+            }
+
+            var promises = $.map(that.resources, function(resource) {
+                return resource.dataSource.fetch();
+            });
+
+            $.when.apply(null, promises)
+                  .then(function() {
+                      that.view(that._selectedViewName);
+                  });
+        },
 
         _initModel: function() {
             var that = this;
@@ -871,11 +899,15 @@ kendo_module({
                 return;
             }
 
+            this.trigger("dataBinding");
+
             this._destroyEditable();
 
             data = this._expandEvents(data, view);
 
             view.render(data);
+
+            this.trigger("dataBound");
         }
     });
 
