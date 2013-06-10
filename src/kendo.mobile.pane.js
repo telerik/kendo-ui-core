@@ -157,7 +157,11 @@ kendo_module({
 
             if (rel.match(WIDGET_RELS)) {
                 kendo.widgetInstance($(href), ui).openFor(link);
-                e.stopPropagation();
+                // if propagation is not stopped and actionsheet is opened from tabstrip,
+                // the actionsheet is closed immediately.
+                if (rel === "actionsheet") {
+                    e.stopPropagation();
+                }
             } else {
                 if (target === "_top") {
                     pane = mobile.application.pane;
