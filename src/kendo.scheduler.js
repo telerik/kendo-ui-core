@@ -770,7 +770,7 @@ kendo_module({
             var that = this;
             var resources = that.options.resources;
 
-            that.resources = {};
+            that.resources = [];
 
             for (var idx = 0; idx < resources.length; idx++) {
                 var resource = resources[idx];
@@ -781,13 +781,13 @@ kendo_module({
                     throw new Error('The "field" and "dataSource" options of the scheduler resource are mandatory.');
                 }
 
-                that.resources[resource.field] = {
+                that.resources.push({
                     field: field,
                     dataTextField: resource.dataTextField || "text",
                     dataValueField: resource.dataValueField || "value",
                     dataColorField: resource.dataColorField || "color",
                     dataSource: kendo.data.DataSource.create(dataSource)
-                };
+                });
             }
 
             var promises = $.map(that.resources, function(resource) {

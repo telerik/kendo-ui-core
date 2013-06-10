@@ -34,7 +34,7 @@
                     ]
                 });
 
-                equal(scheduler.resources["category"].dataSource.data()[0].text, "foo");
+                equal(scheduler.resources[0].dataSource.data()[0].text, "foo");
             });
 
             asyncTest("scheduler binds when resources and events are loaded", 2, function() {
@@ -69,7 +69,7 @@
 
                     dataBound: function() {
                         start();
-                        equal(this.resources["category"].dataSource.data()[0].text, "foo");
+                        equal(this.resources[0].dataSource.data()[0].text, "foo");
                         equal(this.dataSource.data()[0].title, "foo");
                     }
                 });
@@ -100,7 +100,7 @@
                     resources: [ { field: "foo", dataSource: [] } ]
                 });
 
-                equal(scheduler.resources.foo.dataTextField, "text");
+                equal(scheduler.resources[0].dataTextField, "text");
             });
 
             test("specify custom dataTextField via the resource options", function() {
@@ -108,7 +108,7 @@
                     resources: [ { field: "foo", dataSource: [], dataTextField: "bar" } ]
                 });
 
-                equal(scheduler.resources.foo.dataTextField, "bar");
+                equal(scheduler.resources[0].dataTextField, "bar");
             });
 
             test('dataValueField is "value" by default', function() {
@@ -116,7 +116,7 @@
                     resources: [ { field: "foo", dataSource: [] } ]
                 });
 
-                equal(scheduler.resources.foo.dataValueField, "value");
+                equal(scheduler.resources[0].dataValueField, "value");
             });
 
             test("specify custom dataValueField via the resource options", function() {
@@ -124,7 +124,7 @@
                     resources: [ { field: "foo", dataSource: [], dataValueField: "bar" } ]
                 });
 
-                equal(scheduler.resources.foo.dataValueField, "bar");
+                equal(scheduler.resources[0].dataValueField, "bar");
             });
 
             test('dataColorField is "color" by default', function() {
@@ -132,7 +132,7 @@
                     resources: [ { field: "foo", dataSource: [] } ]
                 });
 
-                equal(scheduler.resources.foo.dataColorField, "color");
+                equal(scheduler.resources[0].dataColorField, "color");
             });
 
             test("specify custom dataColorField via the resource options", function() {
@@ -140,7 +140,7 @@
                     resources: [ { field: "foo", dataSource: [], dataColorField: "bar" } ]
                 });
 
-                equal(scheduler.resources.foo.dataColorField, "bar");
+                equal(scheduler.resources[0].dataColorField, "bar");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
