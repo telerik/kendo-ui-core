@@ -19,7 +19,6 @@ kendo_module({
 
             var drawer = this;
 
-
             this.pane.bind("beforeNavigate", function() {
                 if (drawer.currentView) {
                     drawer.hide();
@@ -27,31 +26,15 @@ kendo_module({
             });
 
             this.pane.bind("viewShow", function(e) {
-                var currentOffset = drawer.movable && drawer.movable.x;
-
-                if (drawer.currentView === e.view) {
-                    return;
-                }
-
-                drawer.currentView = e.view;
-                drawer.movable = new kendo.ui.Movable(e.view.element);
-                drawer.transition = new Transition({ axis: "x", movable: drawer.movable });
-
-                if (currentOffset) {
-                    drawer.movable.moveAxis('x', currentOffset);
-                    setTimeout(function() {
-                        drawer.hide();
-                    }, 100);
-                }
+                drawer._viewShow(e);
             });
 
             this.userEvents = new kendo.UserEvents(this.pane.element, {
                 filter: kendo.roleSelector('view'),
 
-                move: function(e) { drawer._update(e) },
-
-                end: function(e) { drawer._end(e) },
-
+                start: function(e) { drawer._start(e); },
+                move: function(e) { drawer._update(e); },
+                end: function(e) { drawer._end(e); },
                 tap: function() {
                     if (drawer.visible) {
                         drawer.hide();
@@ -59,19 +42,46 @@ kendo_module({
                 }
             });
 
+            this.leftPositioned = this.options.position === "left"
+
             this.visible = false;
-            this.element.addClass("km-drawer").css("display", '');
+            this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer").css('display', '');
+        },
+
+        options: {
+            name: "Drawer",
+            position: "left"
+        },
+
+        activate: function() {
+            if (Drawer.last !== this) {
+                if (Drawer.last) {
+                    Drawer.last.element.css('zIndex', -2);
+                }
+                this.element.css('zIndex', -1);
+            }
+
+            Drawer.last = this;
+            Drawer.current = this;
         },
 
         show: function() {
+            this.activate();
             this.currentView.scroller.disable();
             this.visible = true;
-            this._moveViewTo(this.element.width());
+            var offset = this.element.width();
+
+            if (!this.leftPositioned) {
+                offset = -offset;
+            }
+
+            this._moveViewTo(offset);
         },
 
         hide: function() {
             this.currentView.scroller.enable();
             this.visible = false;
+            Drawer.current = null;
             this._moveViewTo(0);
         },
 
@@ -89,10 +99,70 @@ kendo_module({
             this.transition.moveTo({ location: offset, duration: 400, ease: Transition.easeOutExpo });
         },
 
+        _viewShow: function(e) {
+            var drawer = this,
+                currentOffset = this.movable && this.movable.x;
+
+            if (this.currentView === e.view) {
+                return;
+            }
+
+            this.currentView = e.view;
+            this.movable = new kendo.ui.Movable(e.view.element);
+            this.transition = new Transition({
+                axis: "x",
+                movable: this.movable
+            });
+
+            if (this.visible) {
+                this.movable.moveAxis('x', currentOffset);
+                setTimeout(function() {
+                    this.hide();
+                }, 100);
+            }
+        },
+
+        _start: function(e) {
+            var userEvents = e.sender,
+                leftPositioned = this.leftPositioned,
+                visible = this.visible,
+                canMoveLeft = leftPositioned && visible || !leftPositioned && !visible && !Drawer.current,
+                canMoveRight = !leftPositioned && visible || leftPositioned && !visible && !Drawer.current,
+                horizontalSwipe = Math.abs(e.x.velocity) >= Math.abs(e.y.velocity),
+                leftSwipe = e.x.velocity < 0;
+
+            console.log({
+                id: this.element.attr('id'),
+                visible: visible,
+                leftPositioned: leftPositioned,
+                current: Drawer.current,
+                canMoveLeft: canMoveLeft,
+                canMoveRight: canMoveRight,
+                horizontalSwipe: horizontalSwipe,
+                yVelocity: e.y.velocity,
+                xVelocity: e.x.velocity,
+                leftSwipe: leftSwipe
+            });
+
+            if (horizontalSwipe && ((canMoveLeft && leftSwipe) || (canMoveRight && !leftSwipe))) {
+                this.activate();
+                userEvents.capture();
+            } else {
+                userEvents.cancel();
+            }
+        },
+
         _update: function(e) {
             var movable = this.movable,
                 newPosition = movable.x + e.x.delta,
+                limitedPosition;
+
+
+            if (this.leftPositioned) {
                 limitedPosition = Math.min(Math.max(0, newPosition), this.element.width());
+            } else {
+                limitedPosition = Math.max(Math.min(0, newPosition), -this.element.width());
+            }
 
             this.movable.moveAxis("x", limitedPosition);
         },
@@ -100,18 +170,22 @@ kendo_module({
         _end: function(e) {
             var velocity = e.x.velocity,
                 movable = this.movable,
-                width = movable.element.width(),
+                width = this.element.width(),
                 velocityThreshold = 0.8;
 
-            if (velocity > -velocityThreshold && (velocity > velocityThreshold || movable.x > width / 2)) {
-                this.show();
+            if (this.leftPositioned) {
+                if (velocity > -velocityThreshold && (velocity > velocityThreshold || movable.x > width / 2)) {
+                    this.show();
+                } else {
+                    this.hide();
+                }
             } else {
-                this.hide();
+                if (velocity < velocityThreshold && (velocity < -velocityThreshold || movable.x < -width / 2)) {
+                    this.show();
+                } else {
+                    this.hide();
+                }
             }
-        },
-
-        options: {
-            name: "Drawer"
         }
     });
 

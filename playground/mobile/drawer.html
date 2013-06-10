@@ -31,6 +31,29 @@
         </style>
 </head>
 <body>
+
+
+    <style>
+        .km-ul:before,
+        .km-ul:after  {
+            content: "\E0F1";
+        }
+
+        .km-content {
+            background: white;
+        }
+    </style>
+
+    <div data-role="drawer" id="right-drawer" data-position="right" style="width: 150px">
+        <ul data-role="listview" data-style="inset">
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+        </ul>
+    </div>
+
     <div data-role="drawer" id="my-drawer">
        <ul data-role="listview" data-style="inset" data-type="group">
            <li>
@@ -78,25 +101,15 @@
         </ul>
     </div>
 
-    <style>
-        .km-ul:before,
-        .km-ul:after  {
-            content: "\E0F1";
-        }
-    </style>
-            <style>
-                .km-content {
-                    background: white;
-                }
-            </style>
-
     <div data-role="view" id="bar" data-title="bar">
         <header data-role="header">
             <div data-role="navbar">
                 <a data-role="button" href="#my-drawer" data-rel="drawer" data-icon="ul" data-align="left"></a>
                 <span data-role="view-title"></span>
+                <a data-role="button" href="#right-drawer" data-rel="drawer" data-icon="ul" data-align="right"></a>
             </div>
         </header>
+
         <ul data-role="listview" data-style="inset">
             <li>Bar 1</li>
             <li>Bar 1</li>
@@ -109,6 +122,7 @@
             <li>Bar 1</li>
         </ul>
     </div>
+
     <div data-role="view" data-title="drawer example" id="foo">
         <header data-role="header">
             <div data-role="navbar">
@@ -130,6 +144,7 @@
             <li>Item 1</li>
         </ul>
     </div>
+
 
     <script type="text/javascript">
         new kendo.mobile.Application(document.body, { skin: "flat" });
