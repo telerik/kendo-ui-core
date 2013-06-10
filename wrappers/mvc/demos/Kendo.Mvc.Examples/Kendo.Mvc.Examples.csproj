@@ -138,6 +138,8 @@
     <Compile Include="Controllers\Mobile\TabStrip\AppearanceController.cs" />
     <Compile Include="Controllers\Mobile\TabStrip\BadgesController.cs" />
     <Compile Include="Controllers\Mobile\TabStrip\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\View\ZoomableController.cs" />
+    <Compile Include="Controllers\Mobile\View\IndexController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\NavigationController.cs" />
@@ -539,6 +541,7 @@
     <Content Include="Areas\aspx\Views\mobile\tabstrip\appearance.aspx" />
     <Content Include="Areas\aspx\Views\mobile\tabstrip\badges.aspx" />
     <Content Include="Areas\aspx\Views\mobile\tabstrip\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\view\zoomable.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\rtl.aspx" />
@@ -710,6 +713,7 @@
     <Content Include="Areas\razor\Views\mobile\buttongroup\navbar.cshtml" />
     <Content Include="Areas\razor\Views\mobile\layout\index.cshtml" />
     <Content Include="Views\Shared\PlayMusic.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\view\zoomable.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
