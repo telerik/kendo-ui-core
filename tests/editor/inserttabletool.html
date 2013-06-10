@@ -53,7 +53,11 @@
                     clientY: offset.top + cell.height()/2
                 });
 
-                equal(editor.value(), "<table><tbody><tr><td></td></tr></tbody></table>");
+                var dom = $("<div>" + editor.value() + "</div>");
+
+                equal(dom.find("table").length, 1);
+                equal(dom.find("tr").length, 1);
+                equal(dom.find("td").length, 1);
 
                 tool.click();
             });

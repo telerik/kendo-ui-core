@@ -103,9 +103,10 @@ var InsertTableTool = Tool.extend({
         cellHeight = (end.top - start.top) / rows;
 
         function tableFromLocation(e) {
+            var w = $(window);
             return {
-                row: Math.floor((e.clientY - start.top) / cellHeight) + 1,
-                col: Math.floor((e.clientX - start.left) / cellWidth) + 1
+                row: Math.floor((e.clientY + w.scrollTop() - start.top) / cellHeight) + 1,
+                col: Math.floor((e.clientX + w.scrollLeft() - start.left) / cellWidth) + 1
             };
         }
 

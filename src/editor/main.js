@@ -682,7 +682,7 @@ kendo_module({
                         "ul,ol{padding-left:2.5em}" +
                         "a{color:#00a}" +
                         "code{font-size:1.23em}" +
-                        ".k-table{width:100%;}" +
+                        ".k-table{table-layout:fixed;width:100%;}" +
                         ".k-table td{min-width:1px;}" +
                         ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
                         ".k-table p{margin:0;padding:0;}" +
