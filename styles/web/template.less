@@ -1037,61 +1037,48 @@ div.k-imagebrowser-dropzone em
 
 //Changes
 
-.k-footer{
+.k-footer
+{
 	background-color: @drop-down-header-background;
 	color: @drop-down-header-color;
 }
 
 //PanelBar
-.k-panelbar li .k-link.k-state-hover{
+.k-panelbar li .k-link.k-state-hover
+{
 	background-color: @hover-background-color;
 }
 
-.k-panelbar li .k-link.k-state-selected{
+.k-panelbar li .k-link.k-state-selected
+{
 	background-color: @selected-background-color;
 }
-
-//.k-panelbar .k-item .k-state-active{
-	//color: @form-widget-color;
-//}
-
-//.k-panelbar .k-state-default.k-item,
-//.k-panelbar .k-state-disabled.k-item,
-//.k-panelbar .k-panel{
-	//background-color: @drop-down-header-background;
-	//border-color: @widget-text-color;
-//}
-
-//.k-panelbar .k-state-active.k-item .k-link.k-header{
-	//background-color: @active-background-color;
-	//color: @active-text-color;
-//}
 
 .k-panelbar .k-content,
 .k-panelbar > li.k-item,
 .k-panel > li.k-item,
 .k-panelbar > li > .k-link,
-.k-panel > .k-item > .k-link{
+.k-panel > .k-item > .k-link
+{
 	background-color: @drop-down-header-background;
 	border-color: @widget-text-color;
 	color: @form-widget-color;
 }
 
-.k-panelbar .k-header{
+.k-panelbar .k-header
+{
 	background-color: @drop-down-header-background;
 	//color: @form-widget-color;
 }
 
-.k-panelbar > .k-item > .k-link,{
-	border-color: @widget-text-color;
-}
-
-.k-panelbar .k-panel{
+.k-panelbar .k-panel
+{
 	border-color: @widget-text-color;
 }
 
 //TabStrip
-.k-tabstrip-items .k-state-active .k-link{
+.k-tabstrip-items .k-state-active .k-link
+{
 	color: @form-widget-color;
 }
 
@@ -1142,16 +1129,6 @@ div.k-imagebrowser-dropzone em
 	background-color: @table-header-background;
 }
 
-//Probably not correct -- AX Vasko
-//.k-grid .k-toolbar .k-button-icontext.k-grid-save-changes,
-//.k-grid .k-toolbar .k-button-icontext.k-grid-cancel-changes,
-//.k-grid .k-toolbar .k-button-icontext.k-grid-add
-//{
-	//background-color: transparent;
-	//color: @header-text-color;
-	//border: none;
-//}
-
 //Buttons (override the rule)
 .k-button
 {
@@ -1168,16 +1145,19 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Calendar additional styling */
-.k-calendar .k-header{
+.k-calendar .k-header
+{
 	background-color: @drop-down-header-background;
 	color: @drop-down-header-color;
 }
 
-.k-calendar .k-footer{
+.k-calendar .k-footer
+{
 	padding: 0;
 }
 
-.k-calendar .k-footer .k-nav-today{
+.k-calendar .k-footer .k-nav-today
+{
 	display: inline-block;
 	width: 100%;
 	height: 100%;
@@ -1186,26 +1166,31 @@ div.k-imagebrowser-dropzone em
 	text-decoration: @calendar-footer-text-decoration;
 }
 
-.k-calendar .k-footer .k-nav-today:hover{
+.k-calendar .k-footer .k-nav-today:hover
+{
 	background-color: @hover-background-color;
 	color: @hover-text-color;
 }
 
-.k-calendar .k-footer .k-nav-today:active{
+.k-calendar .k-footer .k-nav-today:active
+{
 	background: @active-background-color;	
 }
 
 
-.k-calendar .k-state-selected{
+.k-calendar .k-state-selected
+{
     background-color: @form-widget-background;
 	color: @form-widget-color;
 }
 
-.k-calendar .k-nav-fast{
+.k-calendar .k-nav-fast
+{
 	color: @form-widget-color;
 }
 
-.k-calendar .k-nav-fast.k-state-hover{
+.k-calendar .k-nav-fast.k-state-hover
+{
 	text-decoration: @calendar-header-hover-text-decoration;
 	background-color: @drop-down-header-background;
 }
@@ -1219,15 +1204,18 @@ div.k-imagebrowser-dropzone em
 //DDL-s
 .k-dropdown .k-input,
 .k-dropdown .k-state-focused .k-input,
-.k-menu .k-popup{
+.k-menu .k-popup
+{
     color: @form-widget-color;
 }
 
-.k-menu .k-popup{
+.k-menu .k-popup
+{
     border-color: @drop-down-header-background;
 }
 
-.k-list-container{
+.k-list-container
+{
     border-color: @drop-down-header-background;
     background-color: @select-group-background-color;
 	color: @drop-down-header-color;
@@ -1277,25 +1265,32 @@ div.k-imagebrowser-dropzone em
 	border-color: @active-background-color;
 }
 
-.k-secondary {
+.k-secondary
+{
 	.k-picker-wrap,
 	.k-dropdown-wrap
 	{
 		background-color: @header-background-color;
 		border-color: @widget-border-color;
 	}
-	.k-editor-button .k-state-active{
+	.k-editor-button .k-state-active
+	{
 		background-color: @drop-down-header-background;
 	}
-	.k-dropdown-wrap .k-input{
+	
+	.k-dropdown-wrap .k-input
+	{
 		color: @widget-text-color;
 	}
+	
 	.k-dropdown .k-dropdown-wrap.k-state-hover .k-input,
-	.k-dropdown .k-dropdown-wrap.k-state-focused .k-input{
+	.k-dropdown .k-dropdown-wrap.k-state-focused .k-input
+	{
 		color: @form-widget-color;
 	}
 	
-	.k-splitbar{
+	&.k-splitbar
+	{
 		background-color: #f4f4f4;
 		border-color: #cdcdcd;
 	}
@@ -1334,11 +1329,13 @@ div.k-imagebrowser-dropzone em
 }
 
 //Window additional styling
-.k-window-titlebar{
+.k-window-titlebar
+{
 	background: @drop-down-header-background;
 	color: @form-widget-color;
 }
 
-.k-numeric-wrap .k-link.k-state-selected{
+.k-numeric-wrap .k-link.k-state-selected
+{
 	background: @drop-down-header-background;
 }
