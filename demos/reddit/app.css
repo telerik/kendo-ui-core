@@ -90,14 +90,27 @@
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     border: 1px solid #000;
+    overflow: hidden;
 }
 
 .item-img {
     height: 100%;
+    display: block;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    -webkit-transform: translatez(0);
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+}
+
+.faded {
+    opacity: 0.1;
+}
+
+.loaded {
+    opacity: 1;
+    -webkit-transition: opacity 0.25s ease-in;
+            transition: opacity 0.25s ease-in;
 }
 
 .detailed-img {

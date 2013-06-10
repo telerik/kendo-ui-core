@@ -33,25 +33,53 @@ var awwDataSource = new kendo.data.DataSource({
     }
 });
 
-var ds = new kendo.data.DataSource({
+var canvasDataSource = new kendo.data.DataSource({
     transport: {
-        read: function(options) {
+        read: {
+            url: 'http://www.reddit.com/r/aww.json',
+            dataType: 'jsonp',
+            jsonp: 'jsonp',
+            cache: true
+        },
 
-            var results = [], data = options.data;
-            for (var i = data.skip; i < data.skip + data.take; i ++) {
-                results.push({ foo: i });
+        parameterMap: function(data, type) {
+            if (data.skip > 0) { // requesting next page - asking for skip=0 means pull to refresh.
+                var items = canvasDataSource.data();
+                data.after = items[items.length - 1].data.name;
             }
-            setTimeout(function(){
-                options.success(results);
-            }, 4000);
+
+            data.limit = PAGE_SIZE;
+            return data;
         }
     },
-    pageSize: 36,
+
     serverPaging: true,
+    pageSize: PAGE_SIZE,
     schema: {
+        data: "data.children",
         total: function() { return 100000; }
     }
 });
+
+// var ds = new kendo.data.DataSource({
+//     transport: {
+//         read: function(options) {
+// 
+//             var results = [], data = options.data;
+//             for (var i = data.skip; i < data.skip + data.take; i ++) {
+//                 results.push({ foo: i });
+//             }
+//             setTimeout(function(){
+//                 options.success(results);
+//             }, 4000);
+//         }
+//     },
+//     pageSize: 36,
+//     serverPaging: true,
+//     schema: {
+//         total: function() { return 100000; }
+//     }
+// });
 
 function isImage(url) {
     return imgExtensionRegex.test(url) || (/http:\/\/(.+)?imgur.com\/.[^\/]+$/i).test(url);
@@ -129,7 +157,7 @@ function showThumbsOnScrollComplete(e) {
 function canvasInit(e) {
     canvasScrollView = $("#canvas-scrollview").kendoMobileVirtualScrollView({
         contentHeight: 500,
-        dataSource: ds,
+        dataSource: canvasDataSource,
         batchSize: 6,
         template: kendo.template($("#canvas-template").html()),
         emptyTemplate: kendo.template($("#empty-template").html()),
@@ -167,7 +195,7 @@ function goToCanvas(e) {
 
 function canvasDetailInit(e) {
     $("#detail-scrollview").kendoMobileVirtualScrollView({
-        dataSource: ds,
+        dataSource: canvasDataSource,
         autoBind: false,
         template: kendo.template($("#canvas-detail-tmp").html())
     }).data("kendoMobileVirtualScrollView");
@@ -189,11 +217,23 @@ function calculateOffset(dataItem) {
 }
 
 function updateSrc(e) {
-    var element = e.element;
+    var element = e.element,
+        images,
+        image;
 
     element.find(".item-img").each(function(idx, item) {
-        $(item).css("background-image", "url(" + $(item).data("url") + ")");
+        image = $("<img />");
+        image.one("load", onImageLoad);
+        image.attr("src", $(item).data("url"));
+
+        //$(item).css("background-image", "url(" + $(item).data("url") + ")");
     });
+}
+
+function onImageLoad(e) {
+    var element = $("[data-url='" + e.target.src + "']");
+    element.css("background-image", "url(" + e.target.src + ")");
+    element.addClass("loaded");
 }
 
 function createImage(data) {
@@ -201,7 +241,7 @@ function createImage(data) {
         subreddit = data.subreddit,
         thumbnail = data.thumbnail,
         url = data.url,
-        imageTemplate = kendo.template('<div class="item-img" style="background-image: url(' + DEFAULTIMAGEURL + ');" data-url="#= data #"></div>');
+        imageTemplate = kendo.template('<div class="item-img faded" style="background-image: url(' + DEFAULTIMAGEURL + ');" data-url="#= data #"></div>');
 
     if(url.match(imgExtensionRegex)) {
         return imageTemplate(url);
