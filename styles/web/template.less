@@ -1042,30 +1042,53 @@ div.k-imagebrowser-dropzone em
 	color: @drop-down-header-color;
 }
 
-
-
-//PanelBar additional styling
-.k-panelbar > li > .k-link.k-state-hover{
-	color: @hover-text-color;
+//PanelBar
+.k-panelbar li .k-link.k-state-hover{
+	background-color: @hover-background-color;
 }
 
-.k-panelbar .k-item .k-state-active{
+.k-panelbar li .k-link.k-state-selected{
+	background-color: @selected-background-color;
+}
+
+//.k-panelbar .k-item .k-state-active{
+	//color: @form-widget-color;
+//}
+
+//.k-panelbar .k-state-default.k-item,
+//.k-panelbar .k-state-disabled.k-item,
+//.k-panelbar .k-panel{
+	//background-color: @drop-down-header-background;
+	//border-color: @widget-text-color;
+//}
+
+//.k-panelbar .k-state-active.k-item .k-link.k-header{
+	//background-color: @active-background-color;
+	//color: @active-text-color;
+//}
+
+.k-panelbar .k-content,
+.k-panelbar > li.k-item,
+.k-panel > li.k-item,
+.k-panelbar > li > .k-link,
+.k-panel > .k-item > .k-link{
+	background-color: @drop-down-header-background;
+	border-color: @widget-text-color;
 	color: @form-widget-color;
 }
 
-.k-panelbar .k-state-default.k-item .k-link.k-header,
-.k-panelbar .k-state-disabled.k-item .k-link.k-header{
+.k-panelbar .k-header{
 	background-color: @drop-down-header-background;
-	color: @active-text-color;
+	//color: @form-widget-color;
 }
 
-.k-panelbar .k-state-active.k-item .k-link.k-header{
-	background-color: @active-background-color;
-	color: @active-text-color;
+.k-panelbar > .k-item > .k-link,{
+	border-color: @widget-text-color;
 }
 
-
-
+.k-panelbar .k-panel{
+	border-color: @widget-text-color;
+}
 
 //TabStrip
 .k-tabstrip-items .k-state-active .k-link{
@@ -1074,7 +1097,7 @@ div.k-imagebrowser-dropzone em
 
 .k-tabstrip .k-content.k-state-active
 {
-    background-color: @content-background-color;
+    background-color: @widget-background-color;
 	color: @widget-text-color;
 }
 
@@ -1084,25 +1107,29 @@ div.k-imagebrowser-dropzone em
 	background: @drop-down-header-background;
 }
 
-// Slider -- introduce @slider-selection-background
+// Slider
 .k-slider-selection
 {
     background-color: @hover-background-color;
 }
 
-.k-slider .k-button-increase:active,
-.k-slider .k-button-decrease:active
-{
-	border-color: @selected-border-color;
-	background-color: @drop-down-header-background;
-}
-
 //Grid
 .k-grid .k-grid-edit-row input,
 .k-grid .k-grid-edit-cell input,
-.k-grid .k-grid-edit-row .k-numeric-wrap
+.k-grid .k-grid-edit-row .k-numeric-wrap,
+.k-grid .k-grid-cell .k-numeric-wrap
 {
 	border-color: @form-widget-border-color;
+}
+
+.k-grid .k-grid-edit-row .k-numeric-wrap.k-state-focused
+{
+	border-color: @drop-down-header-background;
+}
+
+.k-grid .k-grid-edit-row .k-numeric-wrap.k-state-hover
+{
+	background-color: @hover-border-color;
 }
 
 .k-state-focused > .k-select
@@ -1125,11 +1152,6 @@ div.k-imagebrowser-dropzone em
 	//border: none;
 //}
 
-
-
-
-
-
 //Buttons (override the rule)
 .k-button
 {
@@ -1143,11 +1165,6 @@ div.k-imagebrowser-dropzone em
     color: @hover-text-color;
     border-color: @hover-border-color;
     background-color: @hover-background-color;
-}
-
-//TreeView
-.k-treeview .k-in.k-state-selected{
-	background-color: @drop-down-header-background;	
 }
 
 /* Calendar additional styling */
@@ -1206,6 +1223,10 @@ div.k-imagebrowser-dropzone em
     color: @form-widget-color;
 }
 
+.k-menu .k-popup{
+    border-color: @drop-down-header-background;
+}
+
 .k-list-container{
     border-color: @drop-down-header-background;
     background-color: @select-group-background-color;
@@ -1216,7 +1237,7 @@ div.k-imagebrowser-dropzone em
 //?????????????????????????????????????????????????????
 .k-group,
 .k-grouping-header,
-k-widget .k-status,
+.k-widget .k-status,
 .k-dropzone-hovered,
 .k-upload-files,
 .k-widget.k-popup
@@ -1269,6 +1290,15 @@ k-widget .k-status,
 	.k-dropdown-wrap .k-input{
 		color: @widget-text-color;
 	}
+	.k-dropdown .k-dropdown-wrap.k-state-hover .k-input,
+	.k-dropdown .k-dropdown-wrap.k-state-focused .k-input{
+		color: @form-widget-color;
+	}
+	
+	.k-splitbar{
+		background-color: #f4f4f4;
+		border-color: #cdcdcd;
+	}
 }
 
 //Pickers hovered state
@@ -1307,4 +1337,8 @@ k-widget .k-status,
 .k-window-titlebar{
 	background: @drop-down-header-background;
 	color: @form-widget-color;
+}
+
+.k-numeric-wrap .k-link.k-state-selected{
+	background: @drop-down-header-background;
 }

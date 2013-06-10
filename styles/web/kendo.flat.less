@@ -12,7 +12,7 @@
 @fallback-texture: url('textures/highlight.png');
 
 /* Widget Base Styles */
-@widget-text-color: #787878;
+@widget-text-color: #4c5356;
 @widget-background-color: #ffffff;
 @widget-border-color: #cdcdcd;
 
@@ -48,7 +48,7 @@
 @hover-text-color: #ffffff;
 
 @selected-background-color: #10c4b2;
-@selected-border-color: @drop-down-header-background;
+@selected-border-color: @selected-background-color;
 @selected-text-color: #ffffff;
 
 @active-background-color: #10c4b2;
@@ -60,7 +60,7 @@
 @disabled-text-color: #c1c1c1;
 @validation-background-color: #ffe13a;
 @validation-border-color: #ffe13a;
-@validation-text-color: #787878;
+@validation-text-color: #4c5356;
 @tooltip-background-color: #363940;
 @tooltip-border-color: #363940;
 @tooltip-text-color: #ffffff;
@@ -76,10 +76,10 @@
 
 @alt-background-color: #f5f5f5;
 @input-background-color: #ffffff;
-@input-text-color: #787878;
+@input-text-color: #4c5356;
 @shadow-color: rgba(0, 0, 0, 0.3);
 @shadow-inset-color: transparent;
-@link-text-color: #787878;
+@link-text-color: #4c5356;
 @loading-panel-color: #ffffff;
 @splitbar-background-color: #29d6c5;
 @default-icon-opacity: 1;
@@ -95,9 +95,9 @@
 @header-background-color: #f4f4f4;
 
 /*Focused State*/
-@focused-border-color: @drop-down-header-background;
+@focused-border-color: @selected-background-color;
 @focused-shadow: none;
-@focused-item-shadow: inset 0 0 0 1px @drop-down-header-background;
+@focused-item-shadow: inset 0 0 0 1px @focused-border-color;
 
 
 
