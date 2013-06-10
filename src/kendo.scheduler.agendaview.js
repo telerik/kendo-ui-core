@@ -100,7 +100,10 @@ kendo_module({
                             task.isAllDay = true;
                             task.middle = true;
                         }
-                        tasks.push(task);
+
+                        if (task.end.getTime() <= this.endDate.getTime()) {
+                            tasks.push(task);
+                        }
                     }
                 }
             }

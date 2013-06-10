@@ -422,6 +422,24 @@
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
                 equal(agenda.endDate.getTime() - agenda.startDate.getTime(), 7 * kendo.date.MS_PER_DAY);
             });
+
+            test("agenda shows tasks which end within the specified interval", function() {
+                var agenda = agendaView(new Date("2013/06/06 00:00"));
+
+                var event = new Event({
+                                start: new Date("2013/06/13 00:00"),
+                                end: new Date("2013/06/14 01:00"),
+                                title: ""
+                            });
+
+                agenda.render([ event ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var timeCells = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCells.length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
