@@ -42,35 +42,16 @@ var TableCommand = Command.extend({
     }
 });
 
-var InsertTableTool = Tool.extend({
-    init: function(options) {
-        this.options = options;
-        this.finder = new BlockFormatFinder([{tags:["table"]}]);
-
-        this.cols = 8;
-        this.rows = 6;
-        Tool.fn.init.call(this, $.extend(options, { command: TableCommand }));
-    },
-
-    _template: function() {
-        return "<div class='k-ct-popup'>" +
-                new Array(this.cols * this.rows + 1).join("<div class='k-ct-cell' />") +
-                "<div class='k-status'>Cancel</div>" +
-            "</div>";
-    },
-
+var PopupTool = Tool.extend({
     initialize: function(ui, options) {
         Tool.fn.initialize.call(this, ui, options);
 
-        var popup = $(this._template()).appendTo("body").kendoPopup({
+        var popup = $(this.options.popupTemplate).appendTo("body").kendoPopup({
             anchor: ui,
             copyAnchorStyles: false,
-            open: function() {
-                this.element.find(".k-ct-cell").removeClass(ACTIVESTATE);
-                this.options.anchor.addClass(ACTIVESTATE);
-            },
-            activate: proxy(this._attachEvents, this),
-            close: this._detachEvents
+            open: proxy(this._open, this),
+            activate: proxy(this._activate, this),
+            close: proxy(this._close, this)
         }).data("kendoPopup");
 
         ui.click(proxy(this._toggle, this));
@@ -79,14 +60,53 @@ var InsertTableTool = Tool.extend({
         this._popup = popup;
     },
 
+    popup: function() {
+        return this._popup;
+    },
+
+    _activate: $.noop,
+
+    _open: function() {
+        this.options.anchor.addClass(ACTIVESTATE);
+    },
+
+    _close: function() {
+        this.options.anchor.removeClass(ACTIVESTATE);
+    },
+
     _toggle: function(e) {
         var button = $(e.target).closest(".k-tool-icon");
+
         if (!button.hasClass("k-state-disabled")) {
-            this._popup.toggle();
+            this.popup().toggle();
         }
     },
 
-    _attachEvents: function() {
+    update: function(ui) {
+        this.popup().close();
+
+        ui.removeClass("k-state-hover");
+    }
+});
+
+var InsertTableTool = PopupTool.extend({
+    init: function(options) {
+        this.finder = new BlockFormatFinder([{tags:["table"]}]);
+
+        this.cols = 8;
+        this.rows = 6;
+
+        PopupTool.fn.init.call(this, $.extend(options, {
+            command: TableCommand,
+            popupTemplate:
+                "<div class='k-ct-popup'>" +
+                    new Array(this.cols * this.rows + 1).join("<div class='k-ct-cell' />") +
+                    "<div class='k-status'>Cancel</div>" +
+                "</div>"
+        }));
+    },
+
+    _activate: function() {
         var that = this,
             element = that._popup.element,
             status = element.find(".k-status"),
@@ -152,20 +172,22 @@ var InsertTableTool = Tool.extend({
             });
     },
 
-    _detachEvents: function() {
-        this.options.anchor.removeClass(ACTIVESTATE);
-        this.element.off(NS);
+    _open: function() {
+        this.popup().element.find(".k-ct-cell").removeClass(ACTIVESTATE);
+    },
+
+    _close: function() {
+        this.popup().element.off(NS);
     },
 
     update: function (ui, nodes) {
-        this._popup.close();
-
-        ui.toggleClass("k-state-disabled", this.finder.isFormatted(nodes))
-          .removeClass("k-state-hover");
+        PopupTool.fn.update.call(this, ui);
+        ui.toggleClass("k-state-disabled", this.finder.isFormatted(nodes));
     }
 });
 
 extend(kendo.ui.editor, {
+    PopupTool: PopupTool,
     TableCommand: TableCommand,
     InsertTableTool: InsertTableTool
 });
