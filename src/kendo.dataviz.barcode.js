@@ -21,10 +21,6 @@
         numberRegex = /^\d+$/,
         alphanumericRegex = /^[a-z0-9]+$/i,
         InvalidCharacterErrorTemplate = "The '{0}' character is not valid for encoding {1}";
-
-	function addArray(result,target){
-		Array.prototype.push.apply(result,target);
-	}
 		
     function getNext(value, index, count){
         return value.substring(index, index + count);
@@ -1343,6 +1339,7 @@
 			}
 			var that = this;
             that.pattern = [];
+			that.options.height = height;
             that.baseUnit = width /(95 + 2 * this.options.quietZoneLength);
             that.value = value;			
 			that.checksum = that.calculateChecksum();
@@ -1352,21 +1349,35 @@
         },
         addData:  function(){
             var that = this;
-            addArray(that.pattern,that.characterMap["start"]);
+            that.addPieces(that.characterMap["start"]);
             that.addSide(that.leftPart,that.leftKey);
-            addArray(that.pattern,that.characterMap["middle"]);
+            that.addPieces(that.characterMap["middle"]);
             that.addSide(that.rightPart);
-            addArray(that.pattern,that.characterMap["start"]);
+            that.addPieces(that.characterMap["start"]);
         },
         addSide:function(leftPart,key){
+			var that = this;
             for(var i = 0; i < leftPart.length; i++){
 				if(key && parseInt(this.keyTable[key][i])){
-					addArray(this.pattern,Array.prototype.slice.call(this.characterMap['digits'][leftPart[i]]).reverse());
+					that.addPieces(Array.prototype.slice.call(this.characterMap['digits'][leftPart[i]]).reverse(),true);
 				}else{
-					addArray(this.pattern,this.characterMap['digits'][leftPart[i]]);
+					that.addPieces(this.characterMap['digits'][leftPart[i]],true);
 				}          
             }
-        },        
+        },
+		addPieces:function(arrToAdd,limitedHeight){
+			for(var i=0;i<arrToAdd.length;i++){
+				if(limitedHeight){
+					this.pattern.push({
+						y1:0,
+						y2:this.options.height*0.95,
+						width:arrToAdd[i]
+					});
+				}else{
+					this.pattern.push(arrToAdd[i]);
+				}
+			}			
+		},
         calculateChecksum: function (){
             var odd = 0,
                 even = 0,
@@ -1420,6 +1431,7 @@
 				throw new Error('Invalid value provided');
 			}
 			that.value = value;
+			that.options.height = height;
 			that.checksum = that.calculateChecksum(that.value);
 			that.leftPart  = that.value.substr(0,4);
 			that.rightPart = that.value.substr(4) + that.checksum;
@@ -1482,7 +1494,7 @@
                 step = item.width * baseUnit;
                 if(i%2){				                     
                      that.view.children.push(that.view.createRect(new Box2D(position, item.y1, position + step, item.y2),
-                        { fill: that.options.lineColor}));
+                        { fill: that.options.color}));
                 }
 
                 position+= step;
@@ -1527,7 +1539,7 @@
             width: 300,
             height: 100,
             // TODO: Rename to color
-            lineColor: "black",
+            color: "black",
             // TODO: Rename to background
             backColor: "white",
             // TODO: Move to text options
