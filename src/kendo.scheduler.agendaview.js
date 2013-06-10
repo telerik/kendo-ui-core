@@ -33,6 +33,8 @@ kendo_module({
         },
 
         _remove: function(e) {
+            e.preventDefault();
+
             this.trigger("remove", {
                 uid: $(e.currentTarget).closest(".k-task").attr(kendo.attr("uid"))
             });
