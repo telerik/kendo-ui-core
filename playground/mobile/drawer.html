@@ -21,22 +21,103 @@
         <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
-        <script src="../../src/kendo.mobile.modalview.js"></script>
+        <script src="../../src/kendo.mobile.drawer.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <style>
+            .km-drawer .km-insetcontent {
+                background: black;
+                color: white;
+            }
+        </style>
 </head>
 <body>
-    <div data-role="view" data-init="attachDrawer">
-        <a data-role="button">Foo</a>
-        <ul data-role="listview">
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
+    <div data-role="drawer" id="my-drawer">
+       <ul data-role="listview" data-style="inset" data-type="group">
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li><a href="#foo">Foo</a></li>
+                   <li><a href="#bar">Bar</a></li>
+                   <li>Item</li>
+               </ul>
+           </li>
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li>Item</li>
+                   <li>Item</li>
+               </ul>
+           </li>
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li>Item</li>
+                   <li>Item</li>
+               </ul>
+           </li>
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li>Item</li>
+                   <li>Item</li>
+               </ul>
+           </li>
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li>Item</li>
+                   <li>Item</li>
+               </ul>
+           </li>
+
+        </ul>
+    </div>
+
+    <style>
+        .km-ul:before,
+        .km-ul:after  {
+            content: "\E0F1";
+        }
+    </style>
+            <style>
+                .km-content {
+                    background: white;
+                }
+            </style>
+
+    <div data-role="view" id="bar" data-title="bar">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-role="button" href="#my-drawer" data-rel="drawer" data-icon="ul" data-align="left"></a>
+                <span data-role="view-title"></span>
+            </div>
+        </header>
+        <ul data-role="listview" data-style="inset">
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+        </ul>
+    </div>
+    <div data-role="view" data-title="drawer example" id="foo">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-role="button" href="#my-drawer" data-rel="drawer" data-icon="ul" data-align="left"></a>
+                <span data-role="view-title"></span>
+            </div>
+        </header>
+
+        <ul data-role="listview" data-style="inset">
             <li>Item 1</li>
             <li>Item 1</li>
             <li>Item 1</li>
@@ -48,48 +129,10 @@
             <li>Item 1</li>
             <li>Item 1</li>
         </ul>
-
     </div>
+
     <script type="text/javascript">
-        var Transition = kendo.effects.Transition;
-
-        function attachDrawer(e) {
-            var el = e.view.element;
-
-            var m = new kendo.ui.Movable(el);
-
-            var t = new Transition({
-                axis: "x",
-                movable: m
-            });
-
-            var u = new kendo.UserEvents(el, {
-                start: function(e) {
-                    console.log('start drawer!', e);
-                },
-
-                move: function(e) {
-                    m.translateAxis('x', e.x.delta);
-                },
-
-                end: function(e) {
-                    var velocity = e.x.velocity,
-                        width = el[0].offsetWidth,
-                        threshold = width / 2,
-                        velocityThreshold = 0.8,
-                        location = 0;
-
-                    if (velocity > -velocityThreshold && (velocity > velocityThreshold || m.x > width / 2)) {
-                        location = width * 0.8;
-                    }
-
-                    t.moveTo({ location: location, duration: 300, ease: Transition.easeOutExpo });
-                }
-            });
-
-            console.log(u);
-        }
-        new kendo.mobile.Application();
+        new kendo.mobile.Application(document.body, { skin: "flat" });
     </script>
 </body>
 </html>

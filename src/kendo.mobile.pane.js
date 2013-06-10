@@ -20,10 +20,11 @@ kendo_module({
         HREF = "href",
         DUMMY_HREF = "#!",
 
+        BEFORE_NAVIGATE = "beforeNavigate",
         NAVIGATE = "navigate",
         VIEW_SHOW = "viewShow",
 
-        WIDGET_RELS = /popover|actionsheet|modalview/,
+        WIDGET_RELS = /popover|actionsheet|modalview|drawer/,
         BACK = "#:back",
 
         attrValue = kendo.attrValue,
@@ -89,6 +90,7 @@ kendo_module({
         },
 
         events: [
+            BEFORE_NAVIGATE,
             NAVIGATE,
             VIEW_SHOW
         ],
@@ -110,6 +112,7 @@ kendo_module({
                 that.history.push(url);
             }
 
+            that.trigger(BEFORE_NAVIGATE);
             that.viewEngine.showView(url, transition);
         },
 
@@ -137,11 +140,11 @@ kendo_module({
                 return;
             }
 
-            var link = $(e.currentTarget),
+            var pane = this,
+                link = $(e.currentTarget),
                 transition = attrValue(link, "transition"),
                 rel = attrValue(link, "rel") || "",
                 target = attrValue(link, "target"),
-                pane = this,
                 href = link.attr(HREF);
 
             if (rel === EXTERNAL || (typeof href === "undefined") || href === DUMMY_HREF) {
