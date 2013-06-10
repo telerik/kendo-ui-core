@@ -2672,11 +2672,25 @@ kendo_module({
         fetch: function(callback) {
             var that = this;
 
-            if (callback && isFunction(callback)) {
-                that.one(CHANGE, callback);
-            }
+            return $.Deferred(function(deferred) {
+                var success = function(e) {
+                    that.unbind(ERROR, error);
 
-            that._query();
+                    deferred.resolve();
+
+                    if (callback) {
+                        callback.call(that, e);
+                    }
+                };
+
+                var error = function(e) {
+                    deferred.reject(e);
+                };
+
+                that.one(CHANGE, success);
+                that.one(ERROR, error);
+                that._query();
+            }).promise();
         },
 
         _query: function(options) {

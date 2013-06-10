@@ -1888,6 +1888,60 @@
                 equal(dataSource.view().length, 1);
             });
 
+            test("fetch returns a promise", function() {
+                var dataSource = new DataSource({
+                    data: [{ id: 1, foo: "bar" }]
+                });
+
+                equal(typeof dataSource.fetch().done, "function");
+            });
+
+            test("change event resolves the promise when bound to local array", function() {
+                var dataSource = new DataSource({
+                    data: [{ id: 1, foo: "bar" }]
+                });
+
+                var promise = dataSource.fetch();
+
+                equal(promise.state(), "resolved");
+            });
+
+            asyncTest("custom transport resolves the promess when the success method is called", 1, function() {
+                var dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            setTimeout(function() {
+                                options.success([]);
+                            }, 1);
+                        }
+                    }
+                });
+
+                var promise = dataSource.fetch();
+                promise.done(function() {
+                    start();
+                    ok(true);
+                });
+            });
+
+            asyncTest("custom transport fails the promess when the error method is called", 1, function() {
+                var dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            setTimeout(function() {
+                                options.error([]);
+                            }, 1);
+                        }
+                    }
+                });
+
+                var promise = dataSource.fetch();
+
+                promise.fail(function() {
+                    start();
+                    ok(true);
+                });
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
