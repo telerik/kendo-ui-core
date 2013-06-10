@@ -7,6 +7,7 @@ var kendo = window.kendo,
     EditorUtils = Editor.EditorUtils,
     Command = Editor.Command,
     NS = ".kendoEditor",
+    ACTIVESTATE = "k-state-active",
     Tool = Editor.Tool,
     ToolTemplate = Editor.ToolTemplate,
     BlockFormatFinder = Editor.BlockFormatFinder,
@@ -94,7 +95,9 @@ var InsertTableTool = Tool.extend({
             rows = that.rows,
             cellWidth, cellHeight;
 
-        that._popup.options.anchor.addClass("k-state-active");
+        that._popup.options.anchor.addClass(ACTIVESTATE);
+
+        cells.removeClass(ACTIVESTATE);
 
         end.left += lastCell[0].offsetWidth;
         end.top += lastCell[0].offsetHeight;
@@ -123,17 +126,17 @@ var InsertTableTool = Tool.extend({
 
                     cells.each(function(i) {
                         $(this).toggleClass(
-                            "k-state-active",
+                            ACTIVESTATE,
                             i % cols < t.col && i / cols < t.row
                         );
                     });
                 } else {
                     status.text("Cancel");
-                    cells.removeClass("k-state-active");
+                    cells.removeClass(ACTIVESTATE);
                 }
             })
             .on("mouseleave" + NS, function() {
-                cells.removeClass("k-state-active");
+                cells.removeClass(ACTIVESTATE);
                 status.text("Cancel");
             })
             .on("mouseup" + NS, function(e) {
@@ -150,7 +153,7 @@ var InsertTableTool = Tool.extend({
     },
 
     _detachEvents: function() {
-        this._popup.options.anchor.removeClass("k-state-active");
+        this._popup.options.anchor.removeClass(ACTIVESTATE);
         this._popup.element.off(NS);
     },
 
