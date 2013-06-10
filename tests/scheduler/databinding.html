@@ -49,7 +49,7 @@
             test("view is bound to the event data", 1, function() {
                 var scheduler = new Scheduler(container, {
                     views: [ kendo.ui.MultiDayView.extend({
-                        render: function(events) {
+                        renderEvents: function(events) {
                             equal(events.length, 2);
                         },
                         name: "testView"
@@ -95,10 +95,10 @@
 
                 view = scheduler.view();
                 stub(view, {
-                    render: view.render
+                    renderEvents: view.renderEvents
                 });
                 scheduler.refresh();
-                events = view.args("render", 0)[0];
+                events = view.args("renderEvents", 0)[0];
 
                 equal(events.length, occurrencesLength + 1);
             });

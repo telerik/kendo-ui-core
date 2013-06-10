@@ -273,9 +273,9 @@
             test("custom view is instantiated", function() {
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                     name: "foo",
-                    setDate: $.noop,
+                    renderLayout: $.noop,
                     dateForTitle: $.noop,
-                    render: $.noop,
+                    renderEvents: $.noop,
                 });
 
                 var scheduler = new Scheduler(container, {
@@ -289,8 +289,8 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        render: $.noop,
-                        setDate: function(selectedDate) {
+                        renderEvents: $.noop,
+                        renderLayout: function(selectedDate) {
                             ok(selectedDate);
                         }
                     }),
@@ -303,8 +303,8 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        render: $.noop,
-                        setDate: function(selectedDate) {
+                        renderEvents: $.noop,
+                        renderLayout: function(selectedDate) {
                         },
                         destroy: function() {
                             ok(true);
@@ -321,8 +321,8 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        render: $.noop,
-                        setDate: function(selectedDate) {
+                        renderEvents: $.noop,
+                        renderLayout: function(selectedDate) {
                             ok(true);
                         }
                     }),
@@ -346,8 +346,8 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        render: $.noop,
-                        setDate: function(selectedDate) {
+                        renderEvents: $.noop,
+                        renderLayout: function(selectedDate) {
                             ok(true);
                         }
                     }),
@@ -362,11 +362,11 @@
             test("events are re-position on window resize", function() {
                 var scheduler = new Scheduler(container, { });
 
-                var view = stub(scheduler.view(), "render");
+                var view = stub(scheduler.view(), "renderEvents");
 
                 $(window).trigger("resize");
 
-                equal(view.calls("render"), 1);
+                equal(view.calls("renderEvents"), 1);
             });
 
         </script>

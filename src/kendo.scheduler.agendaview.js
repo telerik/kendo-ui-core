@@ -48,10 +48,10 @@ kendo_module({
             return kendo.date.previousDay(this.startDate);
         },
 
-        setDate: function(date) {
+        renderLayout: function(date) {
             this.startDate = date;
             this.endDate = kendo.date.addDays(date, 7);
-            this.prepareLayout(this._layout());
+            this.createLayout(this._layout());
             this.table.addClass("k-scheduler-agenda");
         },
 
@@ -113,7 +113,7 @@ kendo_module({
             return new kendo.data.Query(tasks).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "asc" }]).groupBy({field: "startDate"}).toArray();
         },
 
-        render: function(events) {
+        renderEvents: function(events) {
             var table = this.content.find("table").empty();
 
             if (events.length > 0) {

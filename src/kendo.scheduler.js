@@ -660,7 +660,7 @@ kendo_module({
 
             this._bindView(this.views[name]);
 
-            view.setDate(this.selectDate());
+            view.renderLayout(this.selectDate());
 
             this._model.set("formattedDate", view.dateForTitle());
         },
@@ -905,7 +905,7 @@ kendo_module({
 
             data = this._expandEvents(data, view);
 
-            view.render(data);
+            view.renderEvents(data);
 
             this.trigger("dataBound");
         }

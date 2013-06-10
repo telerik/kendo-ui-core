@@ -141,7 +141,7 @@ kendo_module({
         dateForTitle: function() {
             return kendo.format(this.options.selectedDateFormat, this.startDate, this.endDate);
         },
-        prepareLayout: function(layout) {
+        createLayout: function(layout) {
             var allDayIndex = -1;
 
             if (!layout.rows) {

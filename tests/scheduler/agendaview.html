@@ -26,7 +26,7 @@
             function agendaView(date, options) {
                 var agenda = new kendo.ui.AgendaView($("<div>"), options);
 
-                agenda.setDate(date);
+                agenda.renderLayout(date);
 
                 return agenda;
             }
@@ -52,7 +52,7 @@
             test("agenda renders a cell for the event date", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
                         end: new Date("2013/06/06 00:00"),
@@ -72,7 +72,7 @@
             test("agenda renders a cell for the event time", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
                         end: new Date("2013/06/06 01:00"),
@@ -90,7 +90,7 @@
             test("agenda renders a cell for the event title", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
                         end: new Date("2013/06/06 01:00"),
@@ -108,7 +108,7 @@
             test("agenda renders a table row for events", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
                         end: new Date("2013/06/06 01:00"),
@@ -123,7 +123,7 @@
             test("agenda groups events having the same date", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
                         end: new Date("2013/06/06 01:00"),
@@ -146,7 +146,7 @@
             test("date cell has rowspan equal to the number of events for this date", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
                         end: new Date("2013/06/06 01:00"),
@@ -169,7 +169,7 @@
             test("agenda creates date cells a date cell for every date", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
                         end: new Date("2013/06/06 01:00"),
@@ -192,7 +192,7 @@
             test("agenda displays 'all day' in the time cell for all day events", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
                         end: new Date("2013/06/06 00:00"),
@@ -211,7 +211,7 @@
             test("agenda sorts events by start time", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 22:00"),
                         end: new Date("2013/06/06 23:00"),
@@ -234,7 +234,7 @@
             test("agenda sorts events by end time", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 08:00"),
                         end: new Date("2013/06/06 10:00"),
@@ -257,7 +257,7 @@
             test("agenda splits a two day event to two tasks", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 08:00"),
                         end: new Date("2013/06/07 10:00"),
@@ -281,7 +281,7 @@
             test("agenda splits a three day event to three tasks", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
 
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 08:00"),
                         end: new Date("2013/06/08 10:00"),
@@ -306,7 +306,7 @@
 
             test("all day events are displayed first", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
-                agenda.render([
+                agenda.renderEvents([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
                         end: new Date("2013/06/06 01:00"),
@@ -335,7 +335,7 @@
                                 title: ""
                             });
 
-                agenda.render([ event ]);
+                agenda.renderEvents([ event ]);
 
                 agenda.bind("remove", function(e) {
                     equal(e.uid, event.uid);
@@ -354,7 +354,7 @@
                                 title: ""
                             });
 
-                agenda.render([ event ]);
+                agenda.renderEvents([ event ]);
 
                 var table = agenda.element.find(".k-scheduler-table");
 
@@ -371,7 +371,7 @@
                                 title: ""
                             });
 
-                agenda.render([ event ]);
+                agenda.renderEvents([ event ]);
 
                 var table = agenda.element.find(".k-scheduler-table");
 
@@ -389,7 +389,7 @@
                                 title: ""
                             });
 
-                agenda.render([ event ]);
+                agenda.renderEvents([ event ]);
 
                 var table = agenda.element.find(".k-scheduler-table");
 
@@ -407,7 +407,7 @@
                                 title: ""
                             });
 
-                agenda.render([ event ]);
+                agenda.renderEvents([ event ]);
 
                 var table = agenda.element.find(".k-scheduler-table");
 
@@ -432,7 +432,7 @@
                                 title: ""
                             });
 
-                agenda.render([ event ]);
+                agenda.renderEvents([ event ]);
 
                 var table = agenda.element.find(".k-scheduler-table");
 

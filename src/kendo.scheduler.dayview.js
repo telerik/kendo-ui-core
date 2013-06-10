@@ -264,7 +264,7 @@ kendo_module({
 
             this.endDate = dates[(dates.length - 1) || 0];
 
-            this.prepareLayout(this._layout(dates));
+            this.createLayout(this._layout(dates));
 
             this._content(dates);
 
@@ -286,7 +286,7 @@ kendo_module({
             return kendo.date.previousDay(this.startDate);
         },
 
-        setDate: function(selectedDate) {
+        renderLayout: function(selectedDate) {
             this._render([selectedDate]);
         },
 
@@ -554,7 +554,7 @@ kendo_module({
             }
         },
 
-        render: function(events) {
+        renderEvents: function(events) {
             var options = this.options,
                 eventTemplate = this.eventTemplate,
                 allDayEventTemplate = this.allDayEventTemplate,
@@ -618,7 +618,7 @@ kendo_module({
                selectedDateFormat: "{0:D} - {1:D}"
            },
            name: "week",
-           setDate: function(selectedDate) {
+           renderLayout: function(selectedDate) {
                var start = new Date(selectedDate),
                weekDay = selectedDate.getDay(),
                dates = [],

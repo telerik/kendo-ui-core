@@ -48,14 +48,14 @@ kendo_module({
             return kendo.date.previousDay(this._firstDayOfMonth);
         },
 
-        setDate: function(date) {
-
+        renderLayout: function(date) {
             this._firstDayOfMonth = kendo.date.firstDayOfMonth(date);
+
             this._lastDayOfMonth = kendo.date.lastDayOfMonth(date);
 
             this.startDate = firstVisibleMonthDay(date);
 
-            this.prepareLayout(this._layout());
+            this.createLayout(this._layout());
 
             this.table.addClass("k-scheduler-monthview");
 
@@ -298,7 +298,7 @@ kendo_module({
             return result;
         },
 
-        render: function(events) {
+        renderEvents: function(events) {
             var event,
                 eventTemplate = this.eventTemplate,
                 idx,
