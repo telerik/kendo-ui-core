@@ -9,6 +9,7 @@ kendo_module({
 (function($){
     var kendo = window.kendo,
         ui = kendo.ui,
+        SchedulerView = ui.SchedulerView,
         NS = ".kendoMonthView";
         extend = $.extend,
         proxy = $.proxy,
@@ -24,68 +25,9 @@ kendo_module({
                     '<dl><dd>${title}</dd></dl>' +
                 '</div>');
 
-    function isInDateRange(value, min, max) {
-        var msMin = min.getTime(),
-            msMax = max.getTime(),
-            msValue;
-
-        msValue = value.getTime();
-
-        return msValue >= msMin && msValue <= msMax;
-    }
-
-    function rangeIndex(eventElement) {
-        var index = $(eventElement).attr(kendo.attr("start-end-idx")).split("-");
-        return {
-            start: +index[0],
-            end: +index[1]
-        };
-    }
-
-    function eventsForSlot(elements, slotStart, slotEnd) {
-        return elements.filter(function() {
-            var event = rangeIndex(this);
-            return (event.start >= slotStart && event.start <= slotEnd) || slotStart >= event.start && slotStart <= event.end;
-        });
-    }
-
-    function createColumns(eventElements, isHorizontal) {
-        var columns = [];
-
-        eventElements.each(function() {
-            var event = this,
-                eventRange = rangeIndex(event),
-                column;
-
-            for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
-                var endOverlaps = isHorizontal ? eventRange.start > columns[j].end : eventRange.start >= columns[j].end;
-
-                if (eventRange.start < columns[j].start || endOverlaps) {
-
-                    column = columns[j];
-
-                    if (column.end < eventRange.end) {
-                        column.end = eventRange.end;
-                    }
-
-                    break;
-                }
-            }
-
-            if (!column) {
-                column = { start: eventRange.start, end: eventRange.end, events: [] };
-                columns.push(column);
-            }
-
-            column.events.push(event);
-        });
-
-        return columns;
-    }
-
-    ui.MonthView = ui.SchedulerView.extend({
+    ui.MonthView = SchedulerView.extend({
         init: function(element, options) {
-            ui.SchedulerView.fn.init.call(this, element, options);
+            SchedulerView.fn.init.call(this, element, options);
 
             this.title = this.name = this.options.title;
 
@@ -297,7 +239,7 @@ kendo_module({
 
             var startSlot = this.content.find("td").eq(startIndex),
                 firstChild = startSlot.children().first(),
-                events = this._getCollisionEvents(this.content.find(".k-event"), startIndex, endIndex).add(element),
+                events = SchedulerView.collidingEvents(this.content.find(".k-event"), startIndex, endIndex).add(element),
                 eventHeight = 23,
                 leftOffset = 2,
                 rightOffset = startIndex !== endIndex ? 5 : 4,
@@ -312,7 +254,7 @@ kendo_module({
 
             element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
 
-            var columns = createColumns(events, true);
+            var columns = SchedulerView.createColumns(events, true);
 
             for (var idx = 0, length = columns.length; idx < length; idx++) {
                 var columnEvents = columns[idx].events;
@@ -323,28 +265,6 @@ kendo_module({
                     });
                 }
             }
-        },
-
-        _getCollisionEvents: function(elements, start, end) {
-            var idx,
-                index,
-                startIndex,
-                endIndex;
-
-            for (idx = elements.length-1; idx >= 0; idx--) {
-                index = rangeIndex(elements[idx]);
-                startIndex = index.start;
-                endIndex = index.end;
-
-                if (startIndex <= start && endIndex >= start) {
-                    start = startIndex;
-                    if (endIndex > end) {
-                        end = endIndex;
-                    }
-                }
-            }
-
-            return eventsForSlot(elements, start, end);
         },
 
         _splitEvents: function(events) {
@@ -412,7 +332,7 @@ kendo_module({
                 this.table.removeClass("k-scheduler-monthview");
             }
 
-            kendo.ui.SchedulerView.fn.destroy.call(this);
+            SchedulerView.fn.destroy.call(this);
         },
 
         events: ["remove", "add", "edit"],
@@ -441,6 +361,16 @@ kendo_module({
         }
 
         return firstVisibleDay;
+    }
+
+    function isInDateRange(value, min, max) {
+        var msMin = min.getTime(),
+            msMax = max.getTime(),
+            msValue;
+
+        msValue = value.getTime();
+
+        return msValue >= msMin && msValue <= msMax;
     }
 
 })(window.kendo.jQuery);

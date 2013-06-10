@@ -9,6 +9,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        SchedulerView = ui.SchedulerView,
         extend = $.extend,
         proxy = $.proxy,
         MS_PER_MINUTE = kendo.date.MS_PER_MINUTE,
@@ -63,58 +64,9 @@ kendo_module({
         return msValue >= msMin && msValue <= msMax;
     }
 
-    function rangeIndex(eventElement) {
-        var index = $(eventElement).attr(kendo.attr("start-end-idx")).split("-");
-        return {
-            start: +index[0],
-            end: +index[1]
-        };
-    }
-
-    function eventsForSlot(elements, slotStart, slotEnd) {
-        return elements.filter(function() {
-            var event = rangeIndex(this);
-            return (event.start >= slotStart && event.start <= slotEnd) || slotStart >= event.start && slotStart <= event.end;
-        });
-    }
-
-    function createColumns(eventElements, isHorizontal) {
-        var columns = [];
-
-        eventElements.each(function() {
-            var event = this,
-                eventRange = rangeIndex(event),
-                column;
-
-            for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
-                var endOverlaps = isHorizontal ? eventRange.start > columns[j].end : eventRange.start >= columns[j].end;
-
-                if (eventRange.start < columns[j].start || endOverlaps) {
-
-                    column = columns[j];
-
-                    if (column.end < eventRange.end) {
-                        column.end = eventRange.end;
-                    }
-
-                    break;
-                }
-            }
-
-            if (!column) {
-                column = { start: eventRange.start, end: eventRange.end, events: [] };
-                columns.push(column);
-            }
-
-            column.events.push(event);
-        });
-
-        return columns;
-    }
-
-    var MultiDayView = ui.SchedulerView.extend({
+    var MultiDayView = SchedulerView.extend({
         init: function(element, options) {
-            ui.SchedulerView.fn.init.call(this, element, options);
+            SchedulerView.fn.init.call(this, element, options);
 
             this.title = this.options.title || this.options.name;
 
@@ -341,7 +293,7 @@ kendo_module({
         destroy: function() {
             var that = this;
 
-            ui.SchedulerView.fn.destroy.call(this);
+            SchedulerView.fn.destroy.call(this);
 
             if (that.footer) {
                 that.footer.remove();
@@ -463,7 +415,7 @@ kendo_module({
 
             var dateSlot = slots.eq(startIndex),
                 slotWidth = this._calculateAllDayEventWidth(startIndex, endIndex),
-                allDayEvents = this._getCollisionEvents(this.datesHeader.find(".k-event"), startIndex, endIndex).add(element),
+                allDayEvents = SchedulerView.collidingEvents(this.datesHeader.find(".k-event"), startIndex, endIndex).add(element),
                 top = dateSlot.position().top,
                 currentColumnCount = this._headerColumnCount || 0,
                 leftOffset = 2,
@@ -478,7 +430,7 @@ kendo_module({
 
             element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
 
-            var columns = createColumns(allDayEvents, true);
+            var columns = SchedulerView.createColumns(allDayEvents, true);
 
             for (var idx = 0, length = columns.length; idx < length; idx++) {
                 var columnEvents = columns[idx].events;
@@ -500,11 +452,11 @@ kendo_module({
             var columns,
                 eventRightOffset = 30,
                 columnEvents,
-                blockRange = rangeIndex(element),
+                blockRange = SchedulerView.rangeIndex(element),
                 eventElements = this.content.children(".k-event[" + kendo.attr("slot-idx") + "=" + dateSlotIndex + "]"),
-                slotEvents = this._getCollisionEvents(eventElements, blockRange.start, blockRange.end).add(element);
+                slotEvents = SchedulerView.collidingEvents(eventElements, blockRange.start, blockRange.end).add(element);
 
-            columns = createColumns(slotEvents);
+            columns = SchedulerView.createColumns(slotEvents);
 
             var columnWidth = (dateSlot.width() - eventRightOffset) / columns.length;
 
@@ -590,28 +542,6 @@ kendo_module({
                 isInDateRange(event.end, slotStart, slotEnd) ||
                 isInDateRange(slotStart, event.start, event.end) ||
                 isInDateRange(slotEnd, event.start, event.end);
-        },
-
-        _getCollisionEvents: function(elements, start, end) {
-            var idx,
-                index,
-                startIndex,
-                endIndex;
-
-            for (idx = elements.length-1; idx >= 0; idx--) {
-                index = rangeIndex(elements[idx]);
-                startIndex = index.start;
-                endIndex = index.end;
-
-                if (startIndex <= start && endIndex >= start) {
-                    start = startIndex;
-                    if (endIndex > end) {
-                        end = endIndex;
-                    }
-                }
-            }
-
-            return eventsForSlot(elements, start, end);
         },
 
         _updateAllDayHeaderHeight: function(height) {

@@ -298,4 +298,81 @@ kendo_module({
         }
     });
 
+    function collidingEvents(elements, start, end) {
+        var idx,
+            index,
+            startIndex,
+            endIndex;
+
+        for (idx = elements.length-1; idx >= 0; idx--) {
+            index = rangeIndex(elements[idx]);
+            startIndex = index.start;
+            endIndex = index.end;
+
+            if (startIndex <= start && endIndex >= start) {
+                start = startIndex;
+                if (endIndex > end) {
+                    end = endIndex;
+                }
+            }
+        }
+
+        return eventsForSlot(elements, start, end);
+    }
+
+    function rangeIndex(eventElement) {
+        var index = $(eventElement).attr(kendo.attr("start-end-idx")).split("-");
+        return {
+            start: +index[0],
+            end: +index[1]
+        };
+    }
+
+    function eventsForSlot(elements, slotStart, slotEnd) {
+        return elements.filter(function() {
+            var event = rangeIndex(this);
+            return (event.start >= slotStart && event.start <= slotEnd) || slotStart >= event.start && slotStart <= event.end;
+        });
+    }
+
+    function createColumns(eventElements, isHorizontal) {
+        var columns = [];
+
+        eventElements.each(function() {
+            var event = this,
+                eventRange = rangeIndex(event),
+                column;
+
+            for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
+                var endOverlaps = isHorizontal ? eventRange.start > columns[j].end : eventRange.start >= columns[j].end;
+
+                if (eventRange.start < columns[j].start || endOverlaps) {
+
+                    column = columns[j];
+
+                    if (column.end < eventRange.end) {
+                        column.end = eventRange.end;
+                    }
+
+                    break;
+                }
+            }
+
+            if (!column) {
+                column = { start: eventRange.start, end: eventRange.end, events: [] };
+                columns.push(column);
+            }
+
+            column.events.push(event);
+        });
+
+        return columns;
+    }
+
+    $.extend(ui.SchedulerView, {
+        createColumns: createColumns,
+        rangeIndex: rangeIndex,
+        collidingEvents: collidingEvents
+    });
+
 })(window.kendo.jQuery);
