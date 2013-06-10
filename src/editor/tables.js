@@ -12,34 +12,23 @@ var kendo = window.kendo,
     BlockFormatFinder = Editor.BlockFormatFinder,
     registerTool = Editor.EditorUtils.registerTool;
 
-function table(options) {
-    options = extend({
-        rows: 1,
-        columns: 1,
-        attr: "",
-        cellContent: "&nbsp;",
-        cellAttr: ""
-    }, options);
-
-    var td = "<td " + options.cellAttr + ">" + options.cellContent + "</td>";
-
-    return "<table " + options.attr + ">" +
-               new Array(options.rows + 1).join("<tr>" + new Array(options.columns + 1).join(td) + "</tr>") +
-           "</table>";
-}
-
 var TableCommand = Command.extend({
+    _tableHtml: function(rows, columns) {
+        var td = "<td contentEditable='true'>" + Editor.emptyElementContent + "</td>";
+
+        rows = rows || 1;
+        columns = columns || 1;
+
+        return "<table class='k-table' contentEditable='false' data-last>" +
+                   new Array(rows + 1).join("<tr>" + new Array(columns + 1).join(td) + "</tr>") +
+               "</table><br _moz_dirty />";
+    },
+
     exec: function() {
         var options = this.options,
             editor = this.editor,
             range,
-            tableHtml = table({
-                rows: options.rows,
-                columns: options.columns,
-                attr: "class='k-table' contentEditable='false' data-last",
-                cellContent: Editor.emptyElementContent,
-                cellAttr: "contentEditable='true'"
-            });
+            tableHtml = this._tableHtml(options.rows, options.columns);
 
         editor.selectRange(options.range);
         editor.clipboard.paste(tableHtml);
@@ -64,8 +53,8 @@ var InsertTableTool = Tool.extend({
 
     _template: function() {
         return "<div class='k-ct-popup'>" +
-                "<div class='k-status'>Cancel</div>" +
                 new Array(this.cols * this.rows + 1).join("<div class='k-ct-cell' />") +
+                "<div class='k-status'>Cancel</div>" +
             "</div>";
     },
 
@@ -79,10 +68,17 @@ var InsertTableTool = Tool.extend({
             close: proxy(this._detachEvents, this)
         }).data("kendoPopup");
 
-        ui.click(proxy(popup.toggle, popup));
+        ui.click(proxy(this._toggle, this));
 
         this._editor = options.editor;
         this._popup = popup;
+    },
+
+    _toggle: function(e) {
+        var button = $(e.target).closest(".k-tool-icon");
+        if (!button.hasClass("k-state-disabled")) {
+            this._popup.toggle();
+        }
     },
 
     _attachEvents: function() {
@@ -92,8 +88,8 @@ var InsertTableTool = Tool.extend({
             cells = element.find(".k-ct-cell"),
             firstCell = cells.eq(0),
             lastCell = cells.eq(cells.length - 1),
-            start = firstCell.offset(),
-            end = lastCell.offset(),
+            start = kendo.getOffset(firstCell),
+            end = kendo.getOffset(lastCell),
             cols = that.cols,
             rows = that.rows,
             cellWidth, cellHeight;

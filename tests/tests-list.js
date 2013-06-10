@@ -206,6 +206,7 @@ var tests = [
     "editor/style.html",
     "editor/systemhandler.html",
     "editor/tablecommand.html",
+    "editor/inserttabletool.html",
     "editor/typinghandler.html",
     "editor/toolbar.html",
     "editor/undoredostack.html",

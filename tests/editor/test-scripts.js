@@ -1,6 +1,5 @@
 document.write('\
     <script src="../../src/kendo.core.js"></script>\
-    <script src="../../src/kendo.fx.js"></script>\
     <script src="../../src/kendo.userevents.js"></script>\
     <script src="../../src/kendo.draganddrop.js"></script>\
     <script src="../../src/kendo.data.js"></script>\
