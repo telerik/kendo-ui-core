@@ -11,6 +11,10 @@
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
         <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -56,6 +60,14 @@
 
                 ok(ddl);
                 ok(ddl.ul.children());
+            });
+
+            test("renders frequency view container", function() {
+                div.kendoRecurrenceEditor();
+
+                var container = div.find(".k-recurring-view");
+
+                ok(container[0]);
             });
 
             test("creates empty model", function() {
@@ -114,6 +126,70 @@
 
                 equal(editor.value(), "");
             });*/
+
+            test("setView method renders view from default views", function() {
+                var editor = new RecurrenceEditor(div);
+
+                editor.setView("daily");
+                var container = div.find(".k-recurring-view"),
+                    numerics = container.find("[data-role]"),
+                    radioButtons = container.find("input[type=radio]");
+
+
+                ok(numerics.length);
+                equal(numerics.eq(0).attr("data-bind"), "value: interval");
+                equal(numerics.eq(1).attr("data-bind"), "value: count");
+                equal(numerics.eq(2).attr("data-bind"), "value: until");
+                equal(radioButtons.length, 3);
+            });
+
+            test("setView method clears container if no view", function() {
+                var editor = new RecurrenceEditor(div);
+
+                editor.setView("");
+                var container = div.find(".k-recurring-view");
+
+                equal(container.text(), "");
+            });
+
+            test("_toggleEndInputs disables inputs depending on checked radio", function() {
+                var editor = new RecurrenceEditor(div);
+
+                editor.setView("daily");
+                editor._toggleEndInputs("count");
+
+                var container = div.find(".k-recurrence-end"),
+                    inputs = container.find("[data-role]");
+
+                equal(inputs.eq(0).prop("disabled"), false);
+                equal(inputs.eq(1).prop("disabled"), true);
+            });
+
+            test("All end inputs are disabled if never radio is checked", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("daily");
+
+                var container = div.find(".k-recurrence-end"),
+                    inputs = container.find("[data-role]");
+
+                equal(inputs.eq(0).prop("disabled"), true);
+                equal(inputs.eq(1).prop("disabled"), true);
+            });
+
+            test("On disable clear the model value", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("daily");
+
+                var container = div.find(".k-recurrence-end"),
+                    inputs = container.find("[data-role]");
+
+                container.find("input[type=radio]:last").prop("checked", true).trigger("change");
+                inputs.eq(1).data("kendoDatePicker").value(new Date());
+                inputs.eq(1).data("kendoDatePicker").trigger("change");
+                container.find("input[type=radio]:first").prop("checked", true).trigger("change");
+
+                ok(!editor.model.until);
+            });
         </script>
     </body>
 </html>

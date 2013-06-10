@@ -25,13 +25,16 @@
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.timepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.view.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.dayview.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.agendaview.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.monthview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.recurrence.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
-
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
         <style>
 
             html
@@ -44,11 +47,21 @@
     </head>
     <body>
 
+    <div class="k-edit-form-container">
+        <div class="k-edit-label"><label for="title">Title</label></div>
+        <div data-container-for="title" class="k-edit-field">
+            <input type="text" class="k-input k-textbox" name="title" required="required" data-bind="value:title">
+        </div>
+        <div id="recur"></div>
+    </div>
+
         <div id="win">
             <div id="scheduler"></div>
         </div>
 
    <script>
+        $("#recur").kendoRecurrenceEditor();
+
         /*$("#win").kendoWindow({
             visible: true,
             resize: function() {

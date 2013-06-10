@@ -51,6 +51,11 @@ kendo_module({
         ],
         RULE_NAMES = ["months", "weeks", "yearDays", "monthDays", "weekDays", "hours", "minutes", "seconds"],
         RULE_NAMES_LENGTH = RULE_NAMES.length,
+        END_TEMPLATE_HTML = '<div class="k-recurrence-end"><div class="k-edit-label"><label>End:</label></div>' +
+                            '<div class="k-edit-field"><input type="radio" name="end" value="never" data-bind="checked: endChecked" />Never</div>' +
+                            '<div class="k-edit-label"></div>' +
+                            '<div class="k-edit-field"><input type="radio" name="end" value="count" data-bind="checked: endChecked" />After<input data-role="numerictextbox" data-bind="value: count" /> occurrance(s)</div>' +
+                            '<div class="k-edit-label"></div><div class="k-edit-field"><input type="radio" name="end" value="until" data-bind="checked: endChecked" />On <input data-role="datepicker" data-bind="value: until" /></div></div>',
         limitation = {
             months: function(date, end, rule) {
                 var monthRules = rule.months,
@@ -926,6 +931,17 @@ kendo_module({
         numberOfWeeks: numberOfWeeks
     };
 
+    var defaultViews = {
+        "daily": 'Repeat every: <input data-role="numerictextbox" data-bind="value: interval" /> day(s)' + END_TEMPLATE_HTML
+    };
+
+    var roles = {
+        "numerictextbox": "kendoNumericTextBox",
+        "datepicker": "kendoDatePicker",
+        "timepicker": "kendoTimePicker",
+        "datetimepicker": "kendoDateTimePicker"
+    };
+
     var RecurrenceEditor = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -933,6 +949,8 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that._frequency();
+
+            that._container(); //TODO: render div for rule container and inputs for END options
 
             that._model();
         },
@@ -968,20 +986,85 @@ kendo_module({
             }
         },
 
+        setView: function(viewName) {
+            var html = defaultViews[viewName];
+
+            kendo.destroy(this.container);
+            this.container.html(html || "");
+
+            if (html) {
+                kendo.bind(this.container, this.model);
+                if (!this.model.endChecked) {
+                    this.model.set("endChecked", "never");
+                }
+            }
+        },
+
         _model: function() {
-            this.model = kendo.observable({
-                freq: ""
+            var that = this,
+                model = kendo.observable({
+                freq: "",
+                interval: 1
             });
 
-            kendo.bind(this.element, this.model);
+            model.bind("change", function(e) {
+                if (e.field === "freq") {
+                    that.setView(model.get("freq"));
+                }
+
+                if (e.field === "endChecked") {
+                    that._toggleEndInputs(model.endChecked);
+                }
+            });
+
+            that.model = model;
+            kendo.bind(this.element, model);
+        },
+
+        _toggleEndInputs: function(value) {
+            var inputs = this.container.children(".k-recurrence-end").find("input[data-role]"),
+                role, enable,
+                input;
+
+            value = "value: " + value;
+
+            for (var idx = 0, length = inputs.length; idx < length; idx++) {
+                input = inputs.eq(idx);
+                role = roles[input.attr(kendo.attr("role"))];
+                enable = input.attr("data-bind") === value;
+
+                if (role) {
+                    input = input.data(role);
+
+                    input.enable(enable);
+                    if (!enable) {
+                        input.value("");
+                        input.trigger("change");
+                    }
+                } else {
+                    input.prop("disabled", enable);
+                    if (!enable) {
+                        input.val("");
+                        input.trigger("change");
+                    }
+                }
+            }
         },
 
         //rendering
+        _container: function() {
+            var container = $('<div class="k-recurring-view" />');
+
+            this.element.append(container);
+            this.container = container;
+        },
+
         _frequency: function() {
-            var ddl = $('<input name="freq" data-bind="value: freq" />');
+            var ddl = $('<input name="freq" />').attr(kendo.attr("bind"), "value: freq");
 
             this.element.append('<div class="k-edit-label"><label>Repeat</label></div>');
             this.element.append(ddl);
+            this.freqDDL = ddl;
 
             ddl.kendoDropDownList({
                 dataTextField: "text",
