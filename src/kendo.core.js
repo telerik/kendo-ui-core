@@ -3320,6 +3320,7 @@ function pad(number, digits, end) {
             previousDay: function(date) {
                 return addDays(date, -1);
             },
+            addDays: addDays,
             MS_PER_DAY: MS_PER_DAY,
             MS_PER_MINUTE: MS_PER_MINUTE,
             setTime: setTime,

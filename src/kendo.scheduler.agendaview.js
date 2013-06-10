@@ -48,7 +48,7 @@ kendo_module({
 
         setDate: function(date) {
             this.startDate = date;
-            this.endDate = kendo.date.dayOfWeek(date, 6);
+            this.endDate = kendo.date.addDays(date, 7);
             this.prepareLayout(this._layout());
             this.table.addClass("k-scheduler-agenda");
         },
