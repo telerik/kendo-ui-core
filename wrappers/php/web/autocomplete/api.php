@@ -19,7 +19,7 @@ require_once '../../include/header.php';
     </ul>
 </div>
 <div id="colors">
-   <label for="products">Primary color</label>
+   <label for="input">Primary color</label>
 <?php
 
 $dataSource = new \Kendo\Data\DataSource();
@@ -27,7 +27,7 @@ $dataSource->data(array( 'Red-violet', 'Red', 'Red-orange', 'Orange', 'Yellow-or
                         'Yellow', 'Yellow-green', 'Green', 'Blue-green', 'Blue',
                         'Blue-violet', 'Violet'));
 
-$autoComplete = new \Kendo\UI\AutoComplete('products');
+$autoComplete = new \Kendo\UI\AutoComplete('input');
 $autoComplete->dataSource($dataSource);
 
 echo $autoComplete->render();
@@ -36,7 +36,7 @@ echo $autoComplete->render();
 
 <script>
     $(function() {
-        var autocomplete = $("#products").data("kendoAutoComplete"),
+        var autocomplete = $("#input").data("kendoAutoComplete"),
             setValue = function(e) {
                 if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                     autocomplete.value($("#value").val());
