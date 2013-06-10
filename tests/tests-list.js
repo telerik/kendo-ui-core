@@ -345,6 +345,7 @@ var tests = [
     "scheduler/agendaview.html",
     "scheduler/resources.html",
     "scheduler/multidayview.html",
+    "scheduler/monthview.html",
     "scheduler/databinding.html",
     "scheduler/editing-destroy.html",
     "scheduler/editing.html",

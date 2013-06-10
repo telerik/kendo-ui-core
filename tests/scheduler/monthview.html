@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler MonthView rendering</title>
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.monthview.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler Month View rendering</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var MonthView = kendo.ui.MonthView,
+                container;
+
+            function setup() {
+                return new MonthView(container);
+            }
+
+            function removeDefaultHorizontalOffset(value) {
+                return value - 2;
+            }
+
+            function applyDefaultTopOffset(slot, value) {
+                var firstChild = slot.children().first();
+
+                return value + (firstChild.length ? firstChild.outerHeight() : 0) + 3;
+            }
+
+            function applyDefaultRightOffset(value) {
+                return 1 + value + 4;
+            }
+
+            module("Month View rendering", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container).addClass("k-scheduler");
+                },
+                teardown: function() {
+                    $(container).remove();
+                }
+            });
+
+            test("class is added to the table", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                ok(view.table.hasClass("k-scheduler-monthview"));
+            });
+
+            test("startDate is set to the first visible day for the month", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                deepEqual(view.startDate, new Date(2013, 0, 27));
+            });
+
+            test("endDate is set to the last visible day for the month", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                deepEqual(view.endDate, new Date(2013, 2, 9));
+            });
+
+            test("headers are populated with days of the week names", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                var headerCells = view.datesHeader.find("th");
+
+                equal(headerCells.length, 7);
+                equal(headerCells.first().text(), "Sunday");
+                equal(headerCells.eq(1).text(), "Monday");
+                equal(headerCells.eq(2).text(), "Tuesday");
+                equal(headerCells.eq(3).text(), "Wednesday");
+                equal(headerCells.eq(4).text(), "Thursday");
+                equal(headerCells.eq(5).text(), "Friday");
+                equal(headerCells.eq(6).text(), "Saturday");
+            });
+
+            test("day slots are created", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                equal(view.content.find("tr").length, 6);
+                equal(view.content.find("td").length, 42);
+            });
+
+            test("today class is added", function() {
+                var view = setup();
+
+                view.renderLayout(new Date());
+
+                equal(view.content.find("td.k-today").text(), kendo.toString(new Date(), "dd"));
+            });
+
+            test("position event", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "one day event" })
+                ]);
+
+                var eventOffset = view.content.find(".k-event").offset();
+                var slot = view.content.find("td").eq(9);
+                var slotOffset = slot.offset();
+
+                equal(view.content.find(".k-event").length, 1);
+                equal(removeDefaultHorizontalOffset(eventOffset.left), slotOffset.left);
+                equal(eventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
+            });
+
+            test("position multiple events in a single slot", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "one day event" }),
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "other one day event" })
+                ]);
+
+                var firstEventOffset = view.content.find(".k-event:first").offset();
+                var secondEventOffset = view.content.find(".k-event:last").offset();
+
+                var slot = view.content.find("td").eq(9);
+                var slotOffset = slot.offset();
+
+                equal(view.content.find(".k-event").length, 2);
+                equal(removeDefaultHorizontalOffset(firstEventOffset.left), slotOffset.left);
+                equal(removeDefaultHorizontalOffset(secondEventOffset.left), slotOffset.left);
+
+                equal(firstEventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
+
+                equal(secondEventOffset.top, 23 + firstEventOffset.top + 3);
+            });
+
+            test("width of single day event is same as the slot", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "one day event" })
+                ]);
+
+                var eventWidth = view.content.find(".k-event").width();
+                var slotWidth = view.content.find("td").eq(9).outerWidth();
+
+                equal(applyDefaultRightOffset(eventWidth), slotWidth);
+            });
+
+            test("width of multi day event", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 6), title: "multi day event" })
+                ]);
+
+                var eventWidth = view.content.find(".k-event").width();
+                var firstSlotWidth = view.content.find("td").eq(9).outerWidth();
+                var secondSlotWidth = view.content.find("td").eq(10).outerWidth();
+
+                equal(applyDefaultRightOffset(eventWidth), firstSlotWidth + secondSlotWidth);
+            });
+
+            test("event on multiple rows is split", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 12), title: "multi day event" })
+                ]);
+
+                var firstEventOffset = view.content.find(".k-event:first").offset();
+                var secondEventOffset = view.content.find(".k-event:last").offset();
+
+                equal(view.content.find(".k-event").length, 2);
+
+                var firstSlot = view.content.find("td").eq(9).offset();
+                var secondSlot = view.content.find("td").eq(14).offset();
+
+                equal(removeDefaultHorizontalOffset(firstEventOffset.left), firstSlot.left);
+                equal(removeDefaultHorizontalOffset(secondEventOffset.left), secondSlot.left);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

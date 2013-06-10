@@ -10,11 +10,10 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.ui,
         SchedulerView = ui.SchedulerView,
-        NS = ".kendoMonthView";
+        NS = ".kendoMonthView",
         extend = $.extend,
         proxy = $.proxy,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
-        MS_PER_MINUTE = kendo.date.MS_PER_MINUTE,
         DAY_TEMPLATE = kendo.template('<span>#=kendo.toString(data, "dd")#</span>'),
         EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#">{0}' +
                 '#if (showDelete) {#' +
@@ -149,11 +148,11 @@ kendo_module({
                 start = kendo.date.nextDay(start);
             }
 
-            html + "</tr></tbody>";
+            html += "</tr></tbody>";
 
             this._slotIndices = slotIndices;
             this._weekStartDates = weekStartDates;
-            this.endDate = start;
+            this.endDate = kendo.date.previousDay(start);
             this.content.find("table").html(html);
         },
 
@@ -161,7 +160,7 @@ kendo_module({
             var names = getCalendarInfo().days.names;
 
             return {
-                columns: $.map(names, function(value) { return { text: value } })
+                columns: $.map(names, function(value) { return { text: value }; })
             };
         },
 
@@ -244,7 +243,7 @@ kendo_module({
                 leftOffset = 2,
                 rightOffset = startIndex !== endIndex ? 5 : 4,
                 topOffset = (firstChild.length ? firstChild.outerHeight() : 0) + 3,
-                top = startSlot.position().top + topOffset;
+                top = startSlot.position().top + topOffset + this.content[0].scrollTop;
 
             element
                 .css({
@@ -278,7 +277,7 @@ kendo_module({
                 event.uid = events[idx].uid;
 
 
-                for (dateIdx = 0, dateLength = this._weekStartDates.length; dateIdx < dateLength; dateIdx++) {
+                for (var dateIdx = 0, dateLength = this._weekStartDates.length; dateIdx < dateLength; dateIdx++) {
                     var eventDurationInDays = Math.ceil((event.end - event.start) / (1000 * 3600 * 24));
 
                     if (isInDateRange(this._weekStartDates[dateIdx], event.start, event.end) && eventDurationInDays > 1) {
@@ -340,6 +339,7 @@ kendo_module({
         options: {
             title: "Month",
             name: "month",
+            editable: true,
             selectedDateFormat: "{0:y}",
             dayTemplate: DAY_TEMPLATE,
             eventTemplate: EVENT_TEMPLATE
@@ -351,13 +351,13 @@ kendo_module({
     }
 
     function firstVisibleMonthDay(date) {
-        calendarInfo = getCalendarInfo();
+        var calendarInfo = getCalendarInfo();
 
         var firstDay = calendarInfo.firstDay,
             firstVisibleDay = new Date(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 
         while (firstVisibleDay.getDay() != firstDay) {
-            kendo.date.setTime(firstVisibleDay, -1 * kendo.date.MS_PER_DAY);
+            kendo.date.setTime(firstVisibleDay, -1 * MS_PER_DAY);
         }
 
         return firstVisibleDay;

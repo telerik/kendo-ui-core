@@ -214,21 +214,6 @@
                 equal(view.content.find("tr:not(.k-middle-row)").length, 12);
             });
 
-/*
-            test("view content height is set", function() {
-                 container.css("height", 500);
-
-                 var view = setup({
-                    dates: [
-                        new Date("1/26/2013")
-                    ]
-                });
-
-                view.renderLayout();
-
-                equal(view.content.height(), 500 - (view.datesHeader.height() - view.footer.height()));
-            });
-*/
             test("content and times heights are equal", function() {
                 container.css("height", 500);
 
