@@ -65,16 +65,18 @@ kendo_module({
         Y = "y",
         ZERO_THRESHOLD = 0.2;
 
-    function getSpacing(value) {
+    function getSpacing(value, defaultSpacing) {
         var spacing = { top: 0, right: 0, bottom: 0, left: 0 };
+
+        defaultSpacing = defaultSpacing || 0;
 
         if (typeof(value) === "number") {
             spacing[TOP] = spacing[RIGHT] = spacing[BOTTOM] = spacing[LEFT] = value;
         } else {
-            spacing[TOP] = value[TOP] || 0;
-            spacing[RIGHT] = value[RIGHT] || 0;
-            spacing[BOTTOM] = value[BOTTOM] || 0;
-            spacing[LEFT] = value[LEFT] || 0;
+            spacing[TOP] = value[TOP] || defaultSpacing;
+            spacing[RIGHT] = value[RIGHT] || defaultSpacing;
+            spacing[BOTTOM] = value[BOTTOM] || defaultSpacing;
+            spacing[LEFT] = value[LEFT] || defaultSpacing;
         }
 
         return spacing;

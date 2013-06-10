@@ -44,6 +44,7 @@ kendo_module({
     var ARC = "arc",
         BLACK = "#000",
         COORD_PRECISION = dataviz.COORD_PRECISION,
+        DEFAULT_PADDING = 0.15,
         DEG_TO_RAD = math.PI / 180,
         PLOT_AREA_CLICK = "plotAreaClick",
         POLAR_AREA = "polarArea",
@@ -480,7 +481,7 @@ kendo_module({
             if (options.majorGridLines.type !== ARC && majorAngles.length > 1) {
                 var dx = point.x - center.x,
                     dy = point.y - center.y,
-                    theta = math.round(math.atan2(dy, dx) / DEG_TO_RAD + 540) % 360;
+                    theta = (math.atan2(dy, dx) / DEG_TO_RAD + 540) % 360;
 
                 majorAngles.sort(function(a, b) {
                     return angularDistance(a, theta) - angularDistance(b, theta);
@@ -847,12 +848,12 @@ kendo_module({
     var PolarAreaSegment = AreaSegment.extend({
         points: function() {
             var segment = this,
-            chart = segment.parent,
-            plotArea = chart.plotArea,
-            polarAxis = plotArea.polarAxis,
-            center = polarAxis.box.center(),
-            stackPoints = segment.stackPoints,
-            points = LineSegment.fn.points.call(segment, stackPoints);
+                chart = segment.parent,
+                plotArea = chart.plotArea,
+                polarAxis = plotArea.polarAxis,
+                center = polarAxis.box.center(),
+                stackPoints = segment.stackPoints,
+                points = LineSegment.fn.points.call(segment, stackPoints);
 
             points.unshift(center);
             points.push(center);
@@ -918,11 +919,13 @@ kendo_module({
 
         reflowAxes: function () {
             var plotArea = this,
+                options = plotArea.options.plotArea,
                 valueAxis = plotArea.valueAxis,
                 polarAxis = plotArea.polarAxis,
                 box = plotArea.box,
-                // TODO: Percents
-                axisBox = box.clone().unpad(35),
+                defaultPadding = math.min(box.width(), box.height()) * DEFAULT_PADDING,
+                padding = getSpacing(options.padding || {}, defaultPadding),
+                axisBox = box.clone().unpad(padding),
                 valueAxisBox = axisBox.clone().shrink(0, axisBox.height() / 2);
 
             polarAxis.reflow(axisBox);
@@ -930,6 +933,7 @@ kendo_module({
             var heightDiff = valueAxis.lineBox().height() - valueAxis.box.height();
             valueAxis.reflow(valueAxis.box.unpad({ top: heightDiff }));
 
+            plotArea.axisBox = axisBox;
             plotArea.alignAxes(axisBox);
         },
 
@@ -994,6 +998,7 @@ kendo_module({
                 series = plotArea.series,
                 pane = plotArea.panes[0];
 
+            // TODO: Extract createChartByType method
             plotArea.createAreaChart(
                 filterSeriesByType(series, [RADAR_AREA]),
                 pane
@@ -1131,6 +1136,7 @@ kendo_module({
                 series = plotArea.series,
                 pane = plotArea.panes[0];
 
+            // TODO: Extract createChartByType method
             plotArea.createLineChart(
                 filterSeriesByType(series, [POLAR_LINE]),
                 pane
