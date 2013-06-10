@@ -8,7 +8,8 @@ kendo_module({
 
 (function($){
     var kendo = window.kendo,
-        ui = kendo.ui;
+        ui = kendo.ui,
+        extend = $.extend;
 
     ui.AgendaView = ui.SchedulerView.extend({
         init: function(element, options) {
@@ -79,9 +80,7 @@ kendo_module({
 
                 var eventDurationInDays = Math.ceil((end - start) / (1000 * 3600 * 24));
 
-                var task = event.toJSON();
-
-                task.uid = event.uid;
+                var task = extend({}, event);
                 task.startDate = kendo.date.getDate(start);
                 tasks.push(task);
 
@@ -90,8 +89,7 @@ kendo_module({
                     task.head = true;
                     for (var day = 1; day < eventDurationInDays; day++) {
                         start = task.end;
-                        task = event.toJSON();
-                        task.uid = event.uid;
+                        task = extend({}, event);
                         task.start = start;
                         task.startDate = kendo.date.getDate(start);
                         task.end = kendo.date.nextDay(start);

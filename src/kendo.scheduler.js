@@ -114,6 +114,8 @@ kendo_module({
 
             event.start = kendo.timezone[method](event.start, event.startTimezone || event.endTimezone || timezone);
             event.end = kendo.timezone[method](event.end, event.endTimezone || event.startTimezone || timezone);
+
+            delete event.uid;
         }
         return data;
     }
@@ -160,15 +162,20 @@ kendo_module({
             var that = this;
 
             kendo.data.Model.fn.init.call(that, value);
-       }
+        },
+
+        toJSON: function() {
+            var obj = kendo.data.Model.fn.toJSON.call(this);
+            obj.uid = this.uid;
+
+            return obj;
+        }
     });
 
     var SchedulerDataSource = kendo.data.DataSource.extend({
         init: function(options) {
             kendo.data.DataSource.fn.init.call(this, extend(true, {}, { schema: {
-                modelBase: SchedulerEvent, model: {
-                    title: { defaultValue: "" }
-            } } }, options));
+                modelBase: SchedulerEvent, model: { fields: { title: { defaultValue: "" } } } } }, options));
 
             this.reader = new SchedulerDataReader(this.options.schema, this.reader);
         }
@@ -233,6 +240,18 @@ kendo_module({
                 result += attr + '="' + attributes[attr] + '"';
             }
         }
+        return result;
+    }
+
+    function convertToPlainObjects(data) {
+        var idx,
+            length,
+            result = [];
+
+        for (idx = 0, length = data.length; idx < length; idx++) {
+            result.push(data[idx].toJSON());
+        }
+
         return result;
     }
 
@@ -887,7 +906,10 @@ kendo_module({
                 }
 
                 data = recurrence.expandAll(data, view.startDate, endDate, this.dataSource.reader.timezone);
+            } else {
+                data = convertToPlainObjects(data);
             }
+
             return data;
         },
 

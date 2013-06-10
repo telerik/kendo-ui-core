@@ -369,6 +369,26 @@
                 equal(view.calls("renderEvents"), 1);
             });
 
+            test("renderEvent is called with events as plain objects", 1, function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "foo",
+                        dateForTitle: $.noop,
+                        renderEvents: function(events) {
+                            ok(!(events[0] instanceof kendo.data.SchedulerEvent));
+                        },
+                        renderLayout: function() {
+                            this.startDate = new Date();
+                            this.endDate = new Date();
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView],
+                        dataSource: {
+                            data: [ { start: new Date(), end: new Date(), title: "" }]
+                        }
+                    });
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -273,9 +273,7 @@ kendo_module({
                 length;
 
             for (idx = 0, length = events.length; idx < length; idx++) {
-                event = events[idx].toJSON();
-                event.uid = events[idx].uid;
-
+                event = extend({}, events[idx]);
 
                 for (var dateIdx = 0, dateLength = this._weekStartDates.length; dateIdx < dateLength; dateIdx++) {
                     var eventDurationInDays = Math.ceil((event.end - event.start) / (1000 * 3600 * 24));
