@@ -65,6 +65,14 @@
             // numberOfTimeSlots: 4,
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
             views: ["day", { name: "week", selected: true }, "month", "agenda"],
+            resources: [
+                {
+                    field: "category",
+                    dataSource: [
+                        { text: "Category 1", value: 1, color: "red" }
+                    ]
+                }
+            ],
             dataSource: {
                 batch: true,
                 transport: {
@@ -102,6 +110,12 @@
                             description: { field: "Description" },
                             isAllDay: { type: "boolean", field: "IsAllDay" }
                         }
+                    },
+                    parse: function(result) {
+                        $.each(result, function(index, item) {
+                            item.category = { text: "Category 1", value: 1 };
+                        });
+                        return result;
                     }
                 }
                 /*data: [ {

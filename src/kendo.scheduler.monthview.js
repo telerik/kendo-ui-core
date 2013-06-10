@@ -15,7 +15,11 @@ kendo_module({
         proxy = $.proxy,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
         DAY_TEMPLATE = kendo.template('<span>#=kendo.toString(data, "dd")#</span>'),
-        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#">{0}' +
+        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
+                '#if (resources[0]) { #' +
+                'style="background-color:#=resources[0].color #"' +
+                '#}#' +
+                '>{0}' +
                 '#if (showDelete) {#' +
                     '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                 '#}#' +
@@ -47,7 +51,9 @@ kendo_module({
             return kendo.date.previousDay(this._firstDayOfMonth);
         },
 
-        renderLayout: function(date) {
+        renderLayout: function(date, resources) {
+            this._resources = resources;
+
             this._firstDayOfMonth = kendo.date.firstDayOfMonth(date);
 
             this._lastDayOfMonth = kendo.date.lastDayOfMonth(date);
@@ -194,7 +200,8 @@ kendo_module({
 
             return $(template(extend({}, {
                 ns: kendo.ns,
-                showDelete: showDelete
+                showDelete: showDelete,
+                resources: this.eventResources(event)
             }, event)));
         },
 

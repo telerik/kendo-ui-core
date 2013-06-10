@@ -28,7 +28,11 @@ kendo_module({
                     '<dl><dd>${title}</dd></dl>' +
                 '</div>'),
         DATA_HEADER_TEMPLATE = kendo.template("#=kendo.toString(date, 'ddd M/dd')#"),
-        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#">{0}' +
+        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
+                '#if (resources[0]) { #' +
+                'style="background-color:#=resources[0].color #"' +
+                '#}#' +
+                '>{0}' +
                 '#if (showDelete) {#' +
                     '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                 '#}#' +
@@ -286,7 +290,8 @@ kendo_module({
             return kendo.date.previousDay(this.startDate);
         },
 
-        renderLayout: function(selectedDate) {
+        renderLayout: function(selectedDate, resources) {
+            this._resources = resources;
             this._render([selectedDate]);
         },
 
@@ -518,9 +523,11 @@ kendo_module({
             var options = this.options,
                 showDelete = options.editable && options.editable.destroy !== false;
 
+
             return $(template(extend({}, {
                 ns: kendo.ns,
-                showDelete: showDelete
+                showDelete: showDelete,
+                resources: this.eventResources(event)
             }, event)));
         },
 
@@ -618,11 +625,13 @@ kendo_module({
                selectedDateFormat: "{0:D} - {1:D}"
            },
            name: "week",
-           renderLayout: function(selectedDate) {
+           renderLayout: function(selectedDate, resources) {
                var start = new Date(selectedDate),
                weekDay = selectedDate.getDay(),
                dates = [],
                idx, length;
+
+               this._resources = resources;
 
                start.setDate(start.getDate() - weekDay);
 

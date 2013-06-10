@@ -12,6 +12,8 @@
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.agendaview.js"></script>
+        <script src="../../src/kendo.scheduler.monthview.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -141,6 +143,196 @@
                 });
 
                 equal(scheduler.resources[0].dataColorField, "bar");
+            });
+
+            test("resource color is applied as the background of the event in day view", function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 2 } },
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 1 } },
+                    ],
+                    views: [ "day" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal(events.eq(0).css("background-color"), "green");
+                equal(events.eq(1).css("background-color"), "red");
+            });
+
+            test("resource color is applied as the background of the event in week view", function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 2 } },
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 1 } },
+                    ],
+                    views: [ "week" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal(events.eq(0).css("background-color"), "green");
+                equal(events.eq(1).css("background-color"), "red");
+            });
+
+            test("background is not changed if the event doesn't have a resource in week view", function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title:"" },
+                    ],
+                    views: [ "week" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal(events.eq(0).css("background-color"), "");
+            });
+
+            test("resource color is applied as the background of the event in month view", function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 2 } },
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 1 } },
+                    ],
+                    views: [ "month" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal(events.eq(0).css("background-color"), "green");
+                equal(events.eq(1).css("background-color"), "red");
+            });
+
+            test("background is not changed if the event doesn't have a resource in month view", function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title:"" },
+                    ],
+                    views: [ "month" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal(events.eq(0).css("background-color"), "");
+            });
+
+            test("resource color is applied as the background of the event in agenda view", function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 2 } },
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 1 } },
+                    ],
+                    views: [ "agenda" ]
+                });
+
+                var marks = scheduler.element.find(".k-scheduler-mark");
+
+                equal(marks.eq(0).css("background-color"), "green");
+                equal(marks.eq(1).css("background-color"), "red");
+            });
+
+            test("multiple resources are passed to template", 3, function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ],
+                            multiple: true
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: [{ value: 2 }, { value: 1} ] },
+                    ],
+                    views: [{
+                        name: "agenda",
+                        eventTemplate: function(data) {
+                            equal(data.resources.length, 2);
+
+                            equal(data.resources[0].value, 2);
+                            equal(data.resources[1].value, 1);
+                        }
+                    }]
+                });
+            });
+
+            test("the first resource color is used when multiple resources are present", function() {
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ],
+                            multiple: true
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: [{ value: 2 }, { value: 1} ] },
+                    ],
+                    views: ["agenda"]
+                });
+
+                var marks = scheduler.element.find(".k-scheduler-mark");
+
+                equal(marks.eq(0).css("background-color"), "green");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

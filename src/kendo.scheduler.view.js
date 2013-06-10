@@ -141,6 +141,53 @@ kendo_module({
         dateForTitle: function() {
             return kendo.format(this.options.selectedDateFormat, this.startDate, this.endDate);
         },
+        eventResources: function(event) {
+            var resources = [];
+
+            if (!this._resources) {
+                return resources;
+            }
+
+            for (var idx = 0; idx < this._resources.length; idx++) {
+                var resource = this._resources[idx];
+                var field = resource.field;
+                var eventResources = kendo.getter(field)(event);
+
+                if (!eventResources) {
+                    continue;
+                }
+
+                if (!resource.multiple) {
+                    eventResources = [eventResources];
+                }
+
+                var data = resource.dataSource.view();
+
+                for (var resourceIndex = 0; resourceIndex < eventResources.length; resourceIndex++) {
+                    var eventResource = eventResources[resourceIndex];
+
+                    var value = kendo.getter(resource.dataValueField)(eventResource);
+
+                    for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
+                        if (data[dataIndex].get(resource.dataValueField) == value) {
+                            eventResource = data[dataIndex];
+                            break;
+                        }
+                    }
+
+                    if (eventResource != null) {
+                       resources.push({
+                          text: kendo.getter(resource.dataTextField)(eventResource),
+                          value: value,
+                          color: kendo.getter(resource.dataColorField)(eventResource)
+                       });
+                    }
+                }
+
+            }
+
+            return resources;
+        },
         createLayout: function(layout) {
             var allDayIndex = -1;
 

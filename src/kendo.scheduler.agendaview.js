@@ -16,6 +16,7 @@ kendo_module({
             ui.SchedulerView.fn.init.call(this, element, options);
 
             this.title = this.options.title;
+            this.name = this.options.name;
             this._taskTemplate = kendo.template(this.options.eventTemplate);
             this._dateTemplate = kendo.template(this.options.dateTemplate);
             this._timeTemplate = kendo.template(this.options.timeTemplate);
@@ -49,7 +50,8 @@ kendo_module({
             return kendo.date.previousDay(this.startDate);
         },
 
-        renderLayout: function(date) {
+        renderLayout: function(date, resources) {
+            this._resources = resources;
             this.startDate = date;
             this.endDate = kendo.date.addDays(date, 7);
             this.createLayout(this._layout());
@@ -148,6 +150,8 @@ kendo_module({
                            task.format = "{0:t}-{1:t}";
                         }
 
+                        task.resources = this.eventResources(task);
+
                         tableRow.push(kendo.format(
                             '<td class="k-scheduler-timecolumn"><div>{0}{1}{2}</div></td><td>{3}</td>',
                             task.tail || task.middle ? '<span class="k-icon k-i-arrow-w"></span>' : "",
@@ -170,6 +174,9 @@ kendo_module({
             name: "agenda",
             selectedDateFormat: "{0:D}-{1:D}",
             eventTemplate: '<div class="k-task" title="#:title#" data-#=kendo.ns#uid="#=uid#">' +
+                               '# if (resources[0]) {#' +
+                               '<span class="k-scheduler-mark" style="background-color:#=resources[0].color#"></span>' +
+                               "# } #" +
                                '#:title#' +
                                '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                            '</div>',

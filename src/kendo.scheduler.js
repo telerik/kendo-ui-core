@@ -679,7 +679,7 @@ kendo_module({
 
             this._bindView(this.views[name]);
 
-            view.renderLayout(this.selectDate());
+            view.renderLayout(this.selectDate(), this.resources);
 
             this._model.set("formattedDate", view.dateForTitle());
         },
@@ -786,6 +786,7 @@ kendo_module({
                     dataTextField: resource.dataTextField || "text",
                     dataValueField: resource.dataValueField || "value",
                     dataColorField: resource.dataColorField || "color",
+                    multiple: resource.multiple || false,
                     dataSource: kendo.data.DataSource.create(dataSource)
                 });
             }
