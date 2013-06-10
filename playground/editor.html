@@ -52,18 +52,25 @@
         #content {
             white-space: pre;
             font-family: Consolas,monospace;
-            word-break: break-all;
+            word-break: break-word;
+        }
+
+        #page {
+            width: 800px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <textarea id="comment" style="width: 400px; height: 200px;"></textarea>
+    <div id="page">
+        <textarea id="comment" style="height: 200px;"></textarea>
 
-    <div id="content"></div>
+        <div id="content"></div>
+    </div>
 
     <script>
         var editor = $("#comment")
-            .val("<label>Stephen</label><blockquote><p>Puppies and kittens.</p><p>Sunshine and rainbows</p></blockquote><p></p>")
+            .val("<p>foo bar baz</p>")
             .kendoEditor({
                 select: function(e) {
                     $("#content").text(this.value());
