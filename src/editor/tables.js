@@ -65,8 +65,12 @@ var InsertTableTool = Tool.extend({
         var popup = $(this._template()).appendTo("body").kendoPopup({
             anchor: ui,
             copyAnchorStyles: false,
+            open: function() {
+                this.element.find(".k-ct-cell").removeClass(ACTIVESTATE);
+                this.options.anchor.addClass(ACTIVESTATE);
+            },
             activate: proxy(this._attachEvents, this),
-            close: proxy(this._detachEvents, this)
+            close: this._detachEvents
         }).data("kendoPopup");
 
         ui.click(proxy(this._toggle, this));
@@ -94,10 +98,6 @@ var InsertTableTool = Tool.extend({
             cols = that.cols,
             rows = that.rows,
             cellWidth, cellHeight;
-
-        that._popup.options.anchor.addClass(ACTIVESTATE);
-
-        cells.removeClass(ACTIVESTATE);
 
         end.left += lastCell[0].offsetWidth;
         end.top += lastCell[0].offsetHeight;
@@ -153,11 +153,13 @@ var InsertTableTool = Tool.extend({
     },
 
     _detachEvents: function() {
-        this._popup.options.anchor.removeClass(ACTIVESTATE);
-        this._popup.element.off(NS);
+        this.options.anchor.removeClass(ACTIVESTATE);
+        this.element.off(NS);
     },
 
     update: function (ui, nodes) {
+        this._popup.close();
+
         ui.toggleClass("k-state-disabled", this.finder.isFormatted(nodes))
           .removeClass("k-state-hover");
     }
