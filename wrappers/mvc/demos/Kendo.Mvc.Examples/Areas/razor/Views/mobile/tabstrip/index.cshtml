@@ -6,84 +6,154 @@
         .Name("tabstrip-profile")
         .Layout("mobile-tabstrip")
         .Title("Profile")
-        .Content(
-            @<text>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>Profile
-                    <ul>
-                        <li><h2>Carine <span>Callahan</span></h2><img src="@Url.Content("~/content/mobile/overview/carine.jpg")" /></li>
-                        <li>Weekly average sales <span class="sales-up">$ 8,250</span></li>
-                        <li>Monthly average sales <span class="sales-up">$ 32,000</span></li>
-                    </ul>
-                </li>
-                <li>
-                    Languages
-                    <ul>
-                        <li>English <span class="value">Native</span></li>
-                        <li>Hungarian <span class="value">Advanced</span></li>
-                        <li>French <span class="value">Advanced</span></li>
-                        <li>Chinese <span class="value">Beginner</span></li>
-                    </ul>
-                </li>
-                <li>
-                    Sales commodity
-                    <ul>
-                        <li>Beverages</li>
-                        <li>Condiments</li>
-                        <li>Confections</li>
-                        <li>Diary Products</li>
-                        <li>Grains/Cereals</li>
-                        <li>Meat/Poultry</li>
-                        <li>Produce</li>
-                        <li>Seafood</li>
-                    </ul>
-                </li>
-                <li>
-                    PC Skills
-                    <ul>
-                        <li>MS Word</li>
-                        <li>MS Excel</li>
-                        <li>MS Outlook</li>
-                        <li>MS PowerPoint</li>
-                        <li>MS Project</li>
-                        <li>Windows (XP, Vista)</li>
-                        <li>Internet</li>
-                        <li>SAP - Sales and Marketing Module</li>
-                        <li>MS Visual Studio</li>
-                        <li>Adobe Acrobat</li>
-                        <li>CorelDraw</li>
-                    </ul>
-                </li>
-            </ul>           
-        </text>)
+        .Content(obj =>
+            Html.Kendo().MobileListView().Style("inset").Type("group")
+               .Items(root =>
+               {
+                   root.Add().Text("Profile").Items(items =>
+                   {
+                       items.Add().Content(
+                        @<text>
+				            <h2>Carine <span>Callahan</span></h2><img src="@Url.Content("~/content/mobile/overview/carine.jpg")" />
+				            </text>);
+
+                       items.Add().Content(
+                       @<text>
+				            Weekly average sales <span class="sales-up">$ 8,250</span>
+				            </text>);
+
+                       items.Add().Content(
+                       @<text>
+				            Monthly average sales <span class="sales-up">$ 32,000</span>
+				            </text>);
+                   });
+
+                   root.Add().Text("Languages").Items(items =>
+                   {
+                       items.Add().Content(
+                        @<text>
+				            English <span class="value">Native</span>
+				            </text>);
+
+                       items.Add().Content(
+                       @<text>
+				            Hungarian <span class="value">Advanced</span>
+				            </text>);
+
+                       items.Add().Content(
+                       @<text>
+				            French <span class="value">Advanced</span>
+				            </text>);
+
+                       items.Add().Content(
+                       @<text>
+				            Chinese <span class="value">Beginner</span>
+				            </text>);
+                   });
+
+                   root.Add().Text("Sales commodity").Items(items =>
+                   {
+                       items.Add().Text("Beverages");
+                       items.Add().Text("Condiments");
+                       items.Add().Text("Confections");
+                       items.Add().Text("Diary Products");
+                       items.Add().Text("Grains/Cereals");
+                       items.Add().Text("Meat/Poultry");
+                       items.Add().Text("Produce");
+                       items.Add().Text("Seafood");
+                   });
+
+                   root.Add().Text("PC Skills").Items(items =>
+                   {
+                       items.Add().Text("MS Word");
+                       items.Add().Text("MS Excel");
+                       items.Add().Text("MS Outlook");
+                       items.Add().Text("MS PowerPoint");
+                       items.Add().Text("MS Project");
+                       items.Add().Text("Meat/Poultry");
+                       items.Add().Text("Windows (XP, Vista)");
+                       items.Add().Text("Internet");
+                       items.Add().Text("SAP - Sales and Marketing Module");
+                       items.Add().Text("MS Visual Studio");
+                       items.Add().Text("Adobe Acrobat");
+                       items.Add().Text("CorelDraw");
+                   });
+               })
+        )
 )
  
 @(Html.Kendo().MobileView()
         .Name("tabstrip-sales")
         .Layout("mobile-tabstrip")
         .Title("Sales History")
-        .Content(
-            @<text>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>
-                    Sales 2011
-                    <ul>
-                        <li>January <span class="sales-up">&uarr; $ 35,000</span></li>
-                        <li>February <span class="sales-down">&darr; $ 25,000</span></li>
-                        <li>March <span class="sales-down">&darr; $ 23,000</span></li>
-                        <li>April <span class="sales-up">&uarr; $ 30,000</span></li>
-                        <li>May <span class="sales-up">&uarr; $ 31,000</span></li>
-                        <li>June <span class="sales-down">&darr; $ 29,000</span></li>
-                        <li>July <span class="sales-up">&uarr; $ 35,000</span></li>
-                        <li>August <span class="sales-up">&uarr; $ 37,000</span></li>
-                        <li>September <span class="sales-hold">&rarr; $ 37,000</span></li>
-                        <li>October <span class="sales-hold">&rarr; $ 37,000</span></li>
-                        <li>November <span class="sales-up">&uarr; $ 38,000</span></li>
-                        <li>December <span class="sales-up">&uarr; $ 40,000</span></li>
-                    </ul>
-                </li>
-            </ul>     
-        </text>)
+        .Content(obj =>
+            Html.Kendo().MobileListView().Style("inset").Type("group")
+           .Items(root =>
+           {
+               root.Add().Text("Sales 2011").Items(items =>
+               {
+                   items.Add().Content(
+                    @<text>
+				        January <span class="sales-up">&uarr; $ 35,000</span>
+			        </text>);
+
+                   items.Add().Content(
+                   @<text>
+				        February <span class="sales-down">&darr; $ 25,000</span>
+			        </text>);
+
+                   items.Add().Content(
+                   @<text>
+				        March <span class="sales-down">&darr; $ 23,000</span>
+			        </text>);
+
+                   items.Add().Content(
+                   @<text>   
+				        April <span class="sales-up">&uarr; $ 30,000</span>                             
+			        </text>);
+
+                   items.Add().Content(
+                   @<text>     
+				        May <span class="sales-up">&uarr; $ 31,000</span>                           
+			        </text>);
+
+                   items.Add().Content(
+                   @<text>   
+				        June <span class="sales-down">&darr; $ 29,000</span>                             
+			        </text>);
+
+                   items.Add().Content(
+                   @<text>    
+				        July <span class="sales-up">&uarr; $ 35,000</span>                            
+			        </text>);
+
+                   items.Add().Content(
+                   @<text>     
+				        August <span class="sales-up">&uarr; $ 37,000</span>                           
+			        </text>);
+
+                   items.Add().Content(
+                   @<text>  
+				        September <span class="sales-hold">&rarr; $ 37,000</span>                              
+			        </text>);
+
+                   items.Add().Content(
+                   @<text>    
+				        October <span class="sales-hold">&rarr; $ 37,000</span>                            
+			        </text>);
+
+                   items.Add().Content(
+                  @<text>  
+				        November <span class="sales-up">&uarr; $ 38,000</span>                              
+			        </text>);
+
+                   items.Add().Content(
+                  @<text>      
+				        December <span class="sales-up">&uarr; $ 40,000</span>                          
+			        </text>);
+               });
+           })
+        )
 )
 
 @(Html.Kendo().MobileView()
@@ -92,19 +162,20 @@
         .Title("Rating")
         .Content(
             @<text>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>
-                    Sales Representatives
-                    <ul>
-                        <li data-icon="toprated">1. Andrew Fuller</li>
-                        <li data-icon="toprated">2. Janet Leverling</li>
-                        <li data-icon="toprated" style="background-color: #3589e7; color: #fff;">3. Carine Callahan</li>
-                        <li data-icon="toprated">4. Margaret Johnson</li>
-                        <li data-icon="toprated">5. Steve Collins</li>
-                        <li data-icon="toprated">6. Maria Steward</li>
-                    </ul>
-                </li>
-            </ul>
+            @(Html.Kendo().MobileListView().Style("inset").Type("group")
+                   .Items(root =>
+                   {
+                       root.Add().Text("Sales Representatives").Items(items =>
+                       {
+                           items.Add().Text("1. Andrew Fuller").Icon("toprated");
+                           items.Add().Text("2. Janet Leverling").Icon("toprated");
+                           items.Add().Text("3. Carine Callahan").Icon("toprated").HtmlAttributes(new { style = "background-color: #3589e7; color: #fff;" });
+                           items.Add().Text("4. Margaret Johnson").Icon("toprated");
+                           items.Add().Text("5. Steve Collins").Icon("toprated");
+                           items.Add().Text("6. Maria Steward").Icon("toprated");
+                       });
+                   })
+            )
         </text>)
 )
 
@@ -112,19 +183,35 @@
         .Name("tabstrip-settings")
         .Layout("mobile-tabstrip")
         .Title("Settings")
-        .Content(
-            @<text>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>
-                    Carine Callahan
-                    <ul>
-                        <li>Notify when online <input type="checkbox" data-role="switch" checked></li>
-                        <li>Administrator <input type="checkbox" data-role="switch"></li>
-                        <li>Access to stats <input type="checkbox" data-role="switch" checked></li>
-                    </ul>
-                </li>
-            </ul>
-        </text>)
+        .Content(obj =>             
+            Html.Kendo().MobileListView().Style("inset").Type("group")
+                   .Items(root =>
+                   {
+                       root.Add().Text("Carine Callahan").Items(items =>
+                       {
+                           items.Add().Content(
+                               @<text>
+                                Notify when online
+                                @Html.Kendo().MobileSwitch().Checked(true)
+                                </text>
+                           );
+
+                           items.Add().Content(
+                               @<text>
+                                Administrator
+                                @Html.Kendo().MobileSwitch()
+                                </text>
+                           );
+
+                           items.Add().Content(
+                                @<text>
+                                Access to stats
+                                @Html.Kendo().MobileSwitch().Checked(true)
+                                </text>
+                            );
+                       });
+                   })
+        )
 )
 
 @(Html.Kendo().MobileLayout()
@@ -133,7 +220,7 @@
     .Footer(
         @<text>
         @(Html.Kendo().MobileTabStrip()
-                .Items(items => 
+                .Items(items =>
                 {
                     items.Add().Icon("contacts").Text("Profile").Url("#tabstrip-profile");
                     items.Add().Icon("history").Text("Sales").Url("#tabstrip-sales");
@@ -145,13 +232,13 @@
 )
 
 @helper NavBarTemplate(WebViewPage page)
-{    
+    {    
     @(Html.Kendo().MobileNavBar()
         .Content(navbar =>
             @<text>
                 @navbar.ViewTitle("")                                
                 @(Html.Kendo().MobileBackButton()
-                    .Align(MobileButtonAlign.Left) 
+                    .Align(MobileButtonAlign.Left)
                     .HtmlAttributes(new { @class = "nav-button" })
                     .Url(Url.RouteUrl(new { controller = "suite" }))
                     .Text("Back"))              

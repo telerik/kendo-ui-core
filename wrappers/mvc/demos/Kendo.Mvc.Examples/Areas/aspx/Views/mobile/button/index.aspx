@@ -26,12 +26,13 @@
                     .Text("Sports")
                     .Url("#sports")
                     .Render();
+            %>          
+            <% Html.Kendo().MobileListView()
+                   .Style("inset")
+                   .Items(items => items.Add()
+                       .Text("<p>Our Sports Academy provides a venue for outdoor and indoor sports and activities for children and adults of all ages.</p>"))
+                   .Render();                
             %>
-            <ul data-role="listview" data-style="inset">
-                <li>
-                    <p>Our Sports Academy provides a venue for outdoor and indoor sports and activities for children and adults of all ages.</p>
-                </li>
-            </ul>
             <%
         })
         .Render();
@@ -62,12 +63,13 @@
                     .Text("Sports")
                     .Url("#sports")
                     .Render();
+            %>          
+            <% Html.Kendo().MobileListView()
+                   .Style("inset")
+                   .Items(items => items.Add()
+                       .Text("<p>The facility has two indoor basketball fields, olympic size swimming pool, outdoor soccer field, baseball field, golf club and more.</p>"))
+                   .Render();                
             %>
-            <ul data-role="listview" data-style="inset">
-                <li>
-                    <p>The facility has two indoor basketball fields, olympic size swimming pool, outdoor soccer field, baseball field, golf club and more.</p>
-                </li>
-            </ul>
             <%
         })
         .Render();
@@ -98,15 +100,20 @@
                     .Text("Sports")
                     .Url("#sports")
                     .Render();
+            %>           
+            <% Html.Kendo().MobileListView()
+                   .Style("inset")
+                   .Items(items => 
+                       {
+                           items.Add().Text("American Football");
+                           items.Add().Text("Baseball");
+                           items.Add().Text("Basketball");
+                           items.Add().Text("Football");
+                           items.Add().Text("Golf");
+                           items.Add().Text("Swimming");
+                       })
+                   .Render();                
             %>
-            <ul data-role="listview" data-style="inset">
-                <li>American Football</li>
-                <li>Baseball</li>
-                <li>Basketball</li>
-                <li>Football</li>
-                <li>Golf</li>
-                <li>Swimming</li>
-            </ul>
             <%
         })
         .Render();

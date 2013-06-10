@@ -28,11 +28,27 @@
         .Title("Login/Sign-up")
         .Content(() =>
         {
-            %>            
-            <ul data-role="listview" data-style="inset">
-                <li><label for="username">Username:</label> <input type="text" id="username" /></li>
-                <li><label for="password">Password:</label> <input type="password" id="password" /></li>
-            </ul>         
+            %>                      
+            <% Html.Kendo().MobileListView()
+                   .Style("inset")
+                   .Items(items =>
+                   {
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <label for="username">Username:</label> <input type="text" id="text" />
+                           <%
+                       });
+                       
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <label for="password">Password:</label> <input type="password" id="password" />
+                           <%
+                       });
+                   })
+                   .Render();                
+            %>         
             <% Html.Kendo().MobileButton()
                    .Name("login")
                    .Text("Login")

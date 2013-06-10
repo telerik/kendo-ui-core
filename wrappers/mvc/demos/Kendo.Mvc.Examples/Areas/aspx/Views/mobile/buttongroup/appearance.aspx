@@ -8,11 +8,14 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>
-                    Background color
-                    <ul>
-                        <li>                            
+            <% Html.Kendo().MobileListView()
+                   .Style("inset")
+                   .Type("group")
+                   .Items(root =>
+                    {
+                        root.Add().Text("Background color").Items(childs => childs.Add().Content(() =>
+                        {
+                            %>
                             <%: Html.Kendo().MobileButtonGroup()
                                     .Index(0)
                                     .Items(items => {
@@ -20,13 +23,12 @@
                                         items.Add().Text("Red").HtmlAttributes(new { style = "background-color: darkred" });
                                     })
                             %>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    Font Size Small
-                    <ul>
-                        <li>                            
+                            <%
+                        }));
+
+                        root.Add().Text("Font Size Small").Items(childs => childs.Add().Content(() =>
+                        {
+                            %>
                             <%: Html.Kendo().MobileButtonGroup()
                                     .Index(0)
                                     .Items(items => {
@@ -34,13 +36,12 @@
                                         items.Add().Text("Grouped View").HtmlAttributes(new { style = "font-size: 0.8em" });
                                     })
                             %>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    Font Size Normal
-                    <ul>
-                        <li>                           
+                            <%
+                        }));
+
+                        root.Add().Text("Font Size Normal").Items(childs => childs.Add().Content(() =>
+                        {
+                            %>
                             <%: Html.Kendo().MobileButtonGroup()
                                     .Index(1)
                                     .Items(items => {
@@ -48,13 +49,12 @@
                                         items.Add().Text("2012");
                                     })
                             %>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    Font Size Large
-                    <ul>
-                        <li>                           
+                            <%
+                        }));
+
+                        root.Add().Text("Font Size Large").Items(childs => childs.Add().Content(() =>
+                        {
+                            %>
                             <%: Html.Kendo().MobileButtonGroup()
                                     .Index(0)
                                     .Items(items => {
@@ -62,13 +62,12 @@
                                         items.Add().Text("Popular").Icon("globe").HtmlAttributes(new { style = "font-size: 1.3em" });
                                     })
                             %>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    Button icons / check help for more
-                    <ul>
-                        <li>                            
+                            <%
+                        }));
+
+                        root.Add().Text("Button icons / check help for more").Items(childs => childs.Add().Content(() =>
+                        {
+                            %>
                             <%: Html.Kendo().MobileButtonGroup()
                                     .Index(1)
                                     .Items(items => {
@@ -79,10 +78,11 @@
                                         items.Add().Icon("globe");
                                     })
                             %>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                            <%
+                        }));
+                    })
+                    .Render();
+            %>           
             <%
         })
         .Render();

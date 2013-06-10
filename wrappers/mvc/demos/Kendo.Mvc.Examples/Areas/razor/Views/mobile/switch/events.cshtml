@@ -3,23 +3,25 @@
 }
 
 @(Html.Kendo().MobileView()
-        .Name("switch-events")        
-        .Content(
-            @<text>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>General Settings
-                    <ul>
-                        <li>Automatic Update 
-                        @(Html.Kendo().MobileSwitch()
-                                .Name("mobile-switch")
-                                .Events(events => events.Change("switchChange")))
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="console"></div>
-        </text>)
+        .Name("switch-events")
+        .Content(obj => ViewContentTemplate(this))
 )
+
+@helper ViewContentTemplate(WebViewPage page)
+{
+    @(Html.Kendo().MobileListView().Style("inset").Type("group")
+        .Items(root => root.Add().Text("General Settings")
+            .Items(items => items.Add().Content(
+                @<text>
+                Automatic Update 
+                @(Html.Kendo().MobileSwitch()
+                        .Name("mobile-switch")
+                        .Events(events => events.Change("switchChange")))
+                </text>
+                )))
+    )               
+    <div class="console"></div>    
+}
 
 <script>
     function switchChange(e) {

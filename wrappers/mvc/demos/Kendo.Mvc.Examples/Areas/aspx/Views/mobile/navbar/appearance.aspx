@@ -3,27 +3,35 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <% Html.Kendo().MobileView()
-        .Name("dark-theme")        
+        .Name("dark-theme")
         .Title("Dark")
-        .Header(obj =>
-            Html.Kendo().MobileNavBar()
-                .Content(navbar => 
-                {
-                    %>
-                    <a id="A1" class="nav-button" data-align="left" data-role="backbutton">Back</a>
-                    <%: navbar.ViewTitle("Dark Theme")%>
-                    <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>                    
+        .Header(() =>
+            {
+                Html.Kendo().MobileNavBar()
+                    .Content(navbar =>
+                    {
+                    %> 
+                    <%: Html.Kendo().MobileBackButton()
+                            .Align(MobileButtonAlign.Left)
+                            .HtmlAttributes(new { @class = "nav-button" })
+                            .Url(Url.RouteUrl(new { controller = "suite" }))
+                            .Text("Back")
+                    %>                   
+                    <%: navbar.ViewTitle("Dark Theme")%>                    
                     <%: Html.Kendo().MobileButton()
                             .Align(MobileButtonAlign.Right)
                             .Text("Light Theme")
                             .Url("#light-theme")
                     %>
                     <%
-                })
+                    })
+                    .Render();
+            }
         )
         .Content(obj =>
             Html.Kendo().MobileScrollView()
-                .Items(items => {
+                .Items(items =>
+                {
                     items.Add().HtmlAttributes(new { @class = "photo photo1" });
                     items.Add().HtmlAttributes(new { @class = "photo photo2" });
                     items.Add().HtmlAttributes(new { @class = "photo photo3" });
@@ -42,21 +50,28 @@
 <% Html.Kendo().MobileView()
         .Name("light-theme")
         .Title("Light")
-        .Header(obj =>
-            Html.Kendo().MobileNavBar()
-                .Content(navbar => 
-                {
-                    %>
-                    <a id="A2" class="nav-button" data-align="left" data-role="backbutton">Back</a>
-                    <%: navbar.ViewTitle("Light Theme")%>
-                    <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>                    
+        .Header(() =>
+            {
+                Html.Kendo().MobileNavBar()
+                    .Content(navbar =>
+                    {
+                    %>    
+                    <%: Html.Kendo().MobileBackButton()
+                            .Align(MobileButtonAlign.Left)
+                            .HtmlAttributes(new { @class = "nav-button" })
+                            .Url(Url.RouteUrl(new { controller = "suite" }))
+                            .Text("Back")
+                    %>               
+                    <%: navbar.ViewTitle("Light Theme")%>                    
                     <%: Html.Kendo().MobileButton()
                             .Align(MobileButtonAlign.Right)
                             .Text("Dark Theme")
                             .Url("#dark-theme")
                     %>
                     <%
-                })
+                    })
+                    .Render();
+                }
         )
         .Content(obj =>
             Html.Kendo().MobileScrollView()
@@ -77,7 +92,7 @@
 %>
 
 <style scoped>
-    #dark-theme .km-content, #dark-theme .km-navbar {
+        #dark-theme .km-content, #dark-theme .km-navbar {
 	    background-color: #111;
     }
 

@@ -9,9 +9,13 @@
             Html.Kendo().MobileNavBar()
                 .Content(navbar => 
                     @<text>
-                        <a id="A1" class="nav-button" data-align="left" data-role="backbutton">Back</a>
-                        @navbar.ViewTitle("Dark Theme")
-                        <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>                    
+                        @(Html.Kendo().MobileBackButton()
+                            .Align(MobileButtonAlign.Left) 
+                            .HtmlAttributes(new { @class = "nav-button" })
+                            .Url(Url.RouteUrl(new { controller = "suite" }))
+                            .Text("Back")
+                        )
+                        @navbar.ViewTitle("Dark Theme")                        
                         @(Html.Kendo().MobileButton()
                                 .Align(MobileButtonAlign.Right)
                                 .Text("Light Theme")
@@ -42,9 +46,13 @@
             Html.Kendo().MobileNavBar()
                 .Content(navbar => 
                     @<text>
-                    <a id="A2" class="nav-button" data-align="left" data-role="backbutton">Back</a>
-                    @navbar.ViewTitle("Light Theme")
-                    <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>                    
+                    @(Html.Kendo().MobileBackButton()
+                            .Align(MobileButtonAlign.Left) 
+                            .HtmlAttributes(new { @class = "nav-button" })
+                            .Url(Url.RouteUrl(new { controller = "suite" }))
+                            .Text("Back")
+                    )
+                    @navbar.ViewTitle("Light Theme")                    
                     @(Html.Kendo().MobileButton()
                             .Align(MobileButtonAlign.Right)
                             .Text("Dark Theme")

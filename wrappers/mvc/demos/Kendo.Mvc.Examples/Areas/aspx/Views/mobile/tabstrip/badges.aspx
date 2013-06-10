@@ -10,53 +10,94 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>Profile
-                    <ul>
-                        <li><h2>Carine <span>Callahan</span></h2><img src="<%=Url.Content("~/content/mobile/overview/carine.jpg") %>" /></li>
-                        <li>Weekly average sales <span class="sales-up">$ 8,250</span></li>
-                        <li>Monthly average sales <span class="sales-up">$ 32,000</span></li>
-                    </ul>
-                </li>
-                <li>
-                    Languages
-                    <ul>
-                        <li>English <span class="value">Native</span></li>
-                        <li>Hungarian <span class="value">Advanced</span></li>
-                        <li>French <span class="value">Advanced</span></li>
-                        <li>Chinese <span class="value">Beginner</span></li>
-                    </ul>
-                </li>
-                <li>
-                    Sales commodity
-                    <ul>
-                        <li>Beverages</li>
-                        <li>Condiments</li>
-                        <li>Confections</li>
-                        <li>Diary Products</li>
-                        <li>Grains/Cereals</li>
-                        <li>Meat/Poultry</li>
-                        <li>Produce</li>
-                        <li>Seafood</li>
-                    </ul>
-                </li>
-                <li>
-                    PC Skills
-                    <ul>
-                        <li>MS Word</li>
-                        <li>MS Excel</li>
-                        <li>MS Outlook</li>
-                        <li>MS PowerPoint</li>
-                        <li>MS Project</li>
-                        <li>Windows (XP, Vista)</li>
-                        <li>Internet</li>
-                        <li>SAP - Sales and Marketing Module</li>
-                        <li>MS Visual Studio</li>
-                        <li>Adobe Acrobat</li>
-                        <li>CorelDraw</li>
-                    </ul>
-                </li>
-            </ul>
+            <% Html.Kendo().MobileListView().Style("inset").Type("group")
+                   .Items(root =>
+                   {
+                       root.Add().Text("Profile").Items(items =>
+                       {
+                           items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Carine <span>Callahan</span></h2><img src="<%=Url.Content("~/content/mobile/overview/carine.jpg") %>" />
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                Weekly average sales <span class="sales-up">$ 8,250</span>
+                                <%
+                            });
+                                
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                Monthly average sales <span class="sales-up">$ 32,000</span>
+                                <%
+                            });
+                       });
+
+                       root.Add().Text("Languages").Items(items =>
+                       {
+                           items.Add().Content(() =>
+                            {
+                                %>
+                                English <span class="value">Native</span>
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                Hungarian <span class="value">Advanced</span>
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                French <span class="value">Advanced</span>
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                Chinese <span class="value">Beginner</span>
+                                <%                                    
+                            });
+                       });
+
+                       root.Add().Text("Sales commodity").Items(items =>
+                       {
+                           items.Add().Text("Beverages");
+                           items.Add().Text("Condiments");
+                           items.Add().Text("Confections");
+                           items.Add().Text("Diary Products");
+                           items.Add().Text("Grains/Cereals");
+                           items.Add().Text("Meat/Poultry");
+                           items.Add().Text("Produce");
+                           items.Add().Text("Seafood");
+                       });
+
+                       root.Add().Text("PC Skills").Items(items =>
+                       {
+                           items.Add().Text("MS Word");
+                           items.Add().Text("MS Excel");
+                           items.Add().Text("MS Outlook");
+                           items.Add().Text("MS PowerPoint");
+                           items.Add().Text("MS Project");
+                           items.Add().Text("Meat/Poultry");
+                           items.Add().Text("Windows (XP, Vista)");
+                           items.Add().Text("Internet");
+                           items.Add().Text("SAP - Sales and Marketing Module");
+                           items.Add().Text("MS Visual Studio");
+                           items.Add().Text("Adobe Acrobat");
+                           items.Add().Text("CorelDraw");
+                       });
+                   })
+                   .Render();
+            %>           
             <%
         })
         .Render();
@@ -70,25 +111,98 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>
-                    Sales 2011
-                    <ul>
-                        <li>January <span class="sales-up">&uarr; $ 35,000</span></li>
-                        <li>February <span class="sales-down">&darr; $ 25,000</span></li>
-                        <li>March <span class="sales-down">&darr; $ 23,000</span></li>
-                        <li>April <span class="sales-up">&uarr; $ 30,000</span></li>
-                        <li>May <span class="sales-up">&uarr; $ 31,000</span></li>
-                        <li>June <span class="sales-down">&darr; $ 29,000</span></li>
-                        <li>July <span class="sales-up">&uarr; $ 35,000</span></li>
-                        <li>August <span class="sales-up">&uarr; $ 37,000</span></li>
-                        <li>September <span class="sales-hold">&rarr; $ 37,000</span></li>
-                        <li>October <span class="sales-hold">&rarr; $ 37,000</span></li>
-                        <li>November <span class="sales-up">&uarr; $ 38,000</span></li>
-                        <li>December <span class="sales-up">&uarr; $ 40,000</span></li>
-                    </ul>
-                </li>
-            </ul>
+            <% Html.Kendo().MobileListView().Style("inset").Type("group")
+                   .Items(root =>
+                   {
+                       root.Add().Text("Sales 2011").Items(items =>
+                       {
+                           items.Add().Content(() =>
+                            {
+                                %>
+                                January <span class="sales-up">&uarr; $ 35,000</span>
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                February <span class="sales-down">&darr; $ 25,000</span>
+                                <%
+                            });
+                                
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                March <span class="sales-down">&darr; $ 23,000</span>
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>   
+                                April <span class="sales-up">&uarr; $ 30,000</span>                             
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>     
+                                May <span class="sales-up">&uarr; $ 31,000</span>                           
+                                <%
+                            });
+                                
+                            items.Add().Content(() =>
+                            {
+                                %>   
+                                June <span class="sales-down">&darr; $ 29,000</span>                             
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>    
+                                July <span class="sales-up">&uarr; $ 35,000</span>                            
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>     
+                                August <span class="sales-up">&uarr; $ 37,000</span>                           
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>  
+                                September <span class="sales-hold">&rarr; $ 37,000</span>                              
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>    
+                                October <span class="sales-hold">&rarr; $ 37,000</span>                            
+                                <%
+                            });
+                            
+                             items.Add().Content(() =>
+                            {
+                                %>  
+                                November <span class="sales-up">&uarr; $ 38,000</span>                              
+                                <%
+                            });
+                            
+                             items.Add().Content(() =>
+                            {
+                                %>      
+                                December <span class="sales-up">&uarr; $ 40,000</span>                          
+                                <%
+                            });
+                       });                            
+                   })
+                   .Render();
+            %>         
             <%
         })
         .Render();

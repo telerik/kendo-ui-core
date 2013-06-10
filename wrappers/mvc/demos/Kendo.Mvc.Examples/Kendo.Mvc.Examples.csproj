@@ -127,6 +127,7 @@
     <Compile Include="Controllers\Mobile\Button\EventsController.cs" />
     <Compile Include="Controllers\Mobile\Button\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Layout\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\ListView\IndexController.cs" />
     <Compile Include="Controllers\Mobile\ModalView\IndexController.cs" />
     <Compile Include="Controllers\Mobile\NavBar\AppearanceController.cs" />
     <Compile Include="Controllers\Mobile\NavBar\IndexController.cs" />
@@ -527,6 +528,7 @@
     <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\layout\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\listview\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\modalview\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\navbar\appearance.aspx" />
     <Content Include="Areas\aspx\Views\mobile\navbar\index.aspx" />

@@ -12,9 +12,13 @@
                    .Content(navbar => 
                     {
                         %>
-                        <a id="A1" class="nav-button" data-align="left" data-role="backbutton">Back</a>
-                        <%: navbar.ViewTitle("") %>
-                        <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>                        
+                        <%: Html.Kendo().MobileBackButton()
+                                .Align(MobileButtonAlign.Left) 
+                                .HtmlAttributes(new { @class = "nav-button" })
+                                .Url(Url.RouteUrl(new { controller = "suite" }))
+                                .Text("Back")
+                        %>    
+                        <%: navbar.ViewTitle("") %>                        
                         <%: Html.Kendo().MobileButton()
                                 .Align(MobileButtonAlign.Right)
                                 .Icon("organize")
@@ -30,20 +34,94 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview">
-                <li><h2>Francisco Chang</h2><img src="<%=Url.Content("~/content/mobile/overview/francisco.jpg")%>" /></li>
-                <li><h2>Daniel Tonini</h2><img src="<%=Url.Content("~/content/mobile/overview/daniel.jpg")%>" /></li>
-                <li><h2>Annette Roulet</h2><img src="<%=Url.Content("~/content/mobile/overview/annette.jpg")%>" /></li>
-                <li><h2>Carine Schmitt</h2><img src="<%=Url.Content("~/content/mobile/overview/carine.jpg")%>" /></li>
-                <li><h2>Ann Devon</h2><img src="<%=Url.Content("~/content/mobile/overview/ann.jpg")%>" /></li>
-                <li><h2>Catherine Dewey</h2><img src="<%=Url.Content("~/content/mobile/overview/catherine.jpg")%>" /></li>
-                <li><h2>Diego Roel</h2><img src="<%=Url.Content("~/content/mobile/overview/diego.jpg")%>" /></li>
-                <li><h2>Elizabeth Brown</h2><img src="<%=Url.Content("~/content/mobile/overview/elizabeth.jpg")%>" /></li>
-                <li><h2>Eduardo Saavedra</h2><img src="<%=Url.Content("~/content/mobile/overview/eduardo.jpg")%>" /></li>
-                <li><h2>Antonio Moreno</h2><img src="<%=Url.Content("~/content/mobile/overview/antonio.jpg")%>" /></li>
-                <li><h2>Felipe Izquierdo</h2><img src="<%=Url.Content("~/content/mobile/overview/felipe.jpg")%>" /></li>
-                <li><h2>Fran Wilson</h2><img src="<%=Url.Content("~/content/mobile/overview/fran.jpg")%>" /></li>
-            </ul>
+            <% Html.Kendo().MobileListView()
+                   .Items(items => {
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Francisco Chang</h2><img src="<%=Url.Content("~/content/mobile/overview/francisco.jpg")%>" />
+                           <%
+                       });
+                       
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Daniel Tonini</h2><img src="<%=Url.Content("~/content/mobile/overview/daniel.jpg")%>" />
+                           <%
+                       });
+                           
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Annette Roulet</h2><img src="<%=Url.Content("~/content/mobile/overview/annette.jpg")%>" />
+                           <%
+                       });
+                       
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Carine Schmitt</h2><img src="<%=Url.Content("~/content/mobile/overview/carine.jpg")%>" />
+                           <%
+                       });
+                       
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Ann Devon</h2><img src="<%=Url.Content("~/content/mobile/overview/ann.jpg")%>" />
+                           <%
+                       });
+                                                      
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Catherine Dewey</h2><img src="<%=Url.Content("~/content/mobile/overview/catherine.jpg")%>" />
+                           <%
+                       });
+                       
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Diego Roel</h2><img src="<%=Url.Content("~/content/mobile/overview/diego.jpg")%>" />
+                           <%
+                       });
+                           
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Elizabeth Brown</h2><img src="<%=Url.Content("~/content/mobile/overview/elizabeth.jpg")%>" />
+                           <%
+                       });
+                       
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Eduardo Saavedra</h2><img src="<%=Url.Content("~/content/mobile/overview/eduardo.jpg")%>" />
+                           <%
+                       });
+                       
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Antonio Moreno</h2><img src="<%=Url.Content("~/content/mobile/overview/antonio.jpg")%>" />
+                           <%
+                       });
+                       
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Felipe Izquierdo</h2><img src="<%=Url.Content("~/content/mobile/overview/felipe.jpg")%>" />
+                           <%
+                       });
+                       
+                       items.Add().Content(() =>
+                       {
+                           %>
+                           <h2>Fran Wilson</h2><img src="<%=Url.Content("~/content/mobile/overview/fran.jpg")%>" />
+                           <%
+                       });
+                   })
+                   .Render();
+            %>           
             <%
         })
         .Render();
@@ -59,9 +137,13 @@
                    .Content(navbar => 
                     {
                         %>
-                        <a id="A2" class="nav-button" data-align="left" data-role="backbutton">Back</a>
-                        <%: navbar.ViewTitle("Contacts") %>
-                        <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>                        
+                        <%: Html.Kendo().MobileBackButton()
+                                .Align(MobileButtonAlign.Left) 
+                                .HtmlAttributes(new { @class = "nav-button" })
+                                .Url(Url.RouteUrl(new { controller = "suite" }))
+                                .Text("Back")
+                        %>
+                        <%: navbar.ViewTitle("Contacts") %>                        
                         <%: Html.Kendo().MobileButton()
                                 .Align(MobileButtonAlign.Right)
                                 .Icon("stop")
@@ -77,45 +159,110 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview" data-type="group">
-                <li>
-                    A
-                    <ul>
-                        <li><h2>Ann Devon</h2><img src="<%=Url.Content("~/content/mobile/overview/ann.jpg")%>" /></li>
-                        <li><h2>Annette Roulet</h2><img src="<%=Url.Content("~/content/mobile/overview/annette.jpg")%>" /></li>
-                        <li><h2>Antonio Moreno</h2><img src="<%=Url.Content("~/content/mobile/overview/antonio.jpg")%>" /></li>
-                    </ul>
-                </li>
-                <li>
-                    C
-                    <ul>
-                        <li><h2>Carine Schmitt</h2><img src="<%=Url.Content("~/content/mobile/overview/carine.jpg")%>" /></li>
-                        <li><h2>Catherine Dewey</h2><img src="<%=Url.Content("~/content/mobile/overview/catherine.jpg")%>" /></li>
-                    </ul>
-                </li>
-                <li>
-                   D
-                    <ul>
-                        <li><h2>Daniel Tonini</h2><img src="<%=Url.Content("~/content/mobile/overview/daniel.jpg")%>" /></li>
-                        <li><h2>Diego Roel</h2><img src="<%=Url.Content("~/content/mobile/overview/diego.jpg")%>" /></li>
-                    </ul>
-                </li>
-                <li>
-                    E
-                    <ul>
-                        <li><h2>Eduardo Saavedra</h2><img src="<%=Url.Content("~/content/mobile/overview/eduardo.jpg")%>" /></li>
-                        <li><h2>Elizabeth Brown</h2><img src="<%=Url.Content("~/content/mobile/overview/elizabeth.jpg")%>" /></li>
-                    </ul>
-                </li>
-                <li>
-                    F
-                    <ul>
-                        <li><h2>Felipe Izquierdo</h2><img src="<%=Url.Content("~/content/mobile/overview/felipe.jpg")%>" /></li>
-                        <li><h2>Fran Wilson</h2><img src="<%=Url.Content("~/content/mobile/overview/fran.jpg")%>" /></li>
-                        <li><h2>Francisco Chang</h2><img src="<%=Url.Content("~/content/mobile/overview/francisco.jpg")%>" /></li>
-                    </ul>
-                </li>
-            </ul>
+            <% Html.Kendo().MobileListView().Type("group")
+                   .Items(root =>
+                   {
+                        root.Add().Text("A").Items(items =>
+                        {
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Ann Devon</h2><img src="<%=Url.Content("~/content/mobile/overview/ann.jpg")%>" />
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Annette Roulet</h2><img src="<%=Url.Content("~/content/mobile/overview/annette.jpg")%>" />
+                                <%
+                            });  
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Antonio Moreno</h2><img src="<%=Url.Content("~/content/mobile/overview/antonio.jpg")%>" />
+                                <%
+                            });                           
+                        });
+                        
+                        root.Add().Text("C").Items(items =>
+                        {
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Carine Schmitt</h2><img src="<%=Url.Content("~/content/mobile/overview/carine.jpg")%>" />
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Catherine Dewey</h2><img src="<%=Url.Content("~/content/mobile/overview/catherine.jpg")%>" />
+                                <%
+                            });                            
+                        });
+                        
+                        root.Add().Text("D").Items(items =>
+                        {
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Daniel Tonini</h2><img src="<%=Url.Content("~/content/mobile/overview/daniel.jpg")%>" />
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Diego Roel</h2><img src="<%=Url.Content("~/content/mobile/overview/diego.jpg")%>" />
+                                <%
+                            });                            
+                        });
+                                
+                        root.Add().Text("E").Items(items =>
+                        {
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Eduardo Saavedra</h2><img src="<%=Url.Content("~/content/mobile/overview/eduardo.jpg")%>" />
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Elizabeth Brown</h2><img src="<%=Url.Content("~/content/mobile/overview/elizabeth.jpg")%>" />
+                                <%
+                            });                            
+                        });
+                        
+                        root.Add().Text("F").Items(items =>
+                        {
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Felipe Izquierdo</h2><img src="<%=Url.Content("~/content/mobile/overview/felipe.jpg")%>" />
+                                <%
+                            });
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Fran Wilson</h2><img src="<%=Url.Content("~/content/mobile/overview/fran.jpg")%>" />
+                                <%
+                            });  
+                            
+                            items.Add().Content(() =>
+                            {
+                                %>
+                                <h2>Francisco Chang</h2><img src="<%=Url.Content("~/content/mobile/overview/francisco.jpg")%>" />
+                                <%
+                            });                           
+                        });
+                   })
+                   .Render();
+            %>       
             <%
         })
         .Render();

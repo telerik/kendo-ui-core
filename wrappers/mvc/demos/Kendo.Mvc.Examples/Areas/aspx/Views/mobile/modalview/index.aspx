@@ -44,11 +44,24 @@
         })
         .Content(() =>
         {
+            %>            
+            <% Html.Kendo().MobileListView().Style("inset")
+                   .Items(items => {
+                       items.Add().Content(() =>
+                           {
+                               %>
+                               <label for="username">Username:</label> <input type="text" id="Text1" />
+                               <%
+                           });
+                        items.Add().Content(() =>
+                           {
+                               %>
+                               <label for="password">Password:</label> <input type="password" id="password1" />
+                               <%
+                           });
+                   })
+                   .Render();
             %>
-            <ul data-role="listview" data-style="inset">
-                <li><label for="username">Username:</label> <input type="text" id="username" /></li>
-                <li><label for="password">Password:</label> <input type="password" id="password" /></li>
-            </ul>
             <%: Html.Kendo().MobileButton()
                     .Text("Login")
                     .Name("modalview-login-button")

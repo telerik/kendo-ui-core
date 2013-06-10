@@ -9,13 +9,36 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview" data-style="inset">
-                <li><h2>Boston</h2><img src="<%= Url.Content("~/content/mobile/overview/boston.jpg")%>" /></li>
-                <li><h2>Ottawa</h2><img src="<%= Url.Content("~/content/mobile/overview/ottawa.jpg")%>" /></li>
-                <li><h2>San Francisco</h2><img src="<%= Url.Content("~/content/mobile/overview/san-francisco.jpg")%>" /></li>
-                <li><h2>Liverpool</h2><img src="<%= Url.Content("~/content/mobile/overview/liverpool.jpg")%>" /></li>
-                <li><h2>London</h2><img src="<%= Url.Content("~/content/mobile/overview/london.jpg")%>" /></li>
-            </ul>
+            <% Html.Kendo().MobileListView().Style("inset")
+                   .Items(items =>
+                    {
+                        items.Add().Content(() =>
+                        {
+                            %><h2>Boston</h2><img src="<%= Url.Content("~/content/mobile/overview/boston.jpg")%>" /><%
+                        });
+                        
+                        items.Add().Content(() =>
+                        {
+                            %><h2>Ottawa</h2><img src="<%= Url.Content("~/content/mobile/overview/ottawa.jpg")%>" /><%
+                        });
+                        
+                        items.Add().Content(() =>
+                        {
+                            %><h2>San Francisco</h2><img src="<%= Url.Content("~/content/mobile/overview/san-francisco.jpg")%>" /><%
+                        });
+                            
+                        items.Add().Content(() =>
+                        {
+                            %><h2>Liverpool</h2><img src="<%= Url.Content("~/content/mobile/overview/liverpool.jpg")%>" /><%
+                        });
+                            
+                        items.Add().Content(() =>
+                        {
+                            %><h2>London</h2><img src="<%= Url.Content("~/content/mobile/overview/london.jpg")%>" /><%
+                        });
+                    })
+                    .Render();
+            %>          
             <%
         })
         .Render();
@@ -28,43 +51,40 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>
-                    Africa
-                    <ul>
-                        <li data-icon="toprated"><a>Nairobi</a></li>
-                    </ul>
-                </li>
-                <li>
-                    America
-                    <ul>
-                        <li data-icon="globe"><a>Boston</a></li>
-                        <li data-icon="globe"><a>Ottawa</a></li>
-                        <li data-icon="toprated"><a>San Francisco</a></li>
-                    </ul>
-                </li>
-                <li>
-                    Asia
-                    <ul>
-                        <li data-icon="globe"><a>Bombay</a></li>
-                    </ul>
-                </li>
-                <li>
-                    Australia
-                    <ul>
-                        <li data-icon="globe"><a>Melbourne</a></li>
-                        <li data-icon="toprated"><a>Sydney</a></li>
-                    </ul>
-                </li>
-                <li>
-                    Europe
-                    <ul>
-                        <li data-icon="globe"><a>Cannes</a></li>
-                        <li data-icon="globe"><a>Liverpool</a></li>
-                        <li data-icon="toprated"><a>London</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <% Html.Kendo().MobileListView().Style("inset").Type("group")
+                   .Items(root => {
+                       root.Add().Text("Africa").Items(items =>
+                       {
+                           items.AddLink().Text("Nairobi").Icon("toprated");
+                       });
+
+                       root.Add().Text("America").Items(items =>
+                       {
+                           items.AddLink().Text("Boston").Icon("globe");
+                           items.AddLink().Text("Ottawa").Icon("globe");
+                           items.AddLink().Text("San Francisco").Icon("toprated");
+                       });
+
+                       root.Add().Text("Asia").Items(items =>
+                       {
+                           items.AddLink().Text("Bombay").Icon("globe");
+                       });
+
+                       root.Add().Text("Australia").Items(items =>
+                       {
+                           items.AddLink().Text("Melbourne").Icon("globe");
+                           items.AddLink().Text("Sydney").Icon("toprated");
+                       });
+
+                       root.Add().Text("Europe").Items(items =>
+                       {
+                           items.AddLink().Text("Cannes").Icon("globe");
+                           items.AddLink().Text("Liverpool").Icon("globe");
+                           items.AddLink().Text("London").Icon("toprated");
+                       });
+                   })
+                   .Render();
+            %>         
             <%
         })
         .Render();
@@ -77,17 +97,18 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>
-                    Favourite Cities
-                    <ul>
-                        <li data-icon="toprated"><a>Nairobi</a></li>
-                        <li data-icon="toprated"><a>San Francisco</a></li>
-                        <li data-icon="toprated"><a>Sydney</a></li>
-                        <li data-icon="toprated"><a>London</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <% Html.Kendo().MobileListView().Style("inset").Type("group")
+                   .Items(root => {
+                       root.Add().Text("Favourite Cities").Items(items =>
+                       {
+                           items.AddLink().Text("Nairobi").Icon("toprated");
+                           items.AddLink().Text("San Francisco").Icon("toprated");
+                           items.AddLink().Text("Sydney").Icon("toprated");
+                           items.AddLink().Text("London").Icon("toprated");
+                       });
+                   })
+                   .Render();
+            %>        
             <%
         })
         .Render();

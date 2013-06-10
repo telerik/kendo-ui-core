@@ -4,7 +4,7 @@
 
 @(Html.Kendo().MobileView()
         .Name("modalview-camera")
-        .Title("HTML5 Camera")        
+        .Title("HTML5 Camera")
         .Content(
             @<text>            
                 <img src="@Url.Content("~/content/mobile/modalview/lens.png")" class="camera-image" /><br />            
@@ -19,8 +19,8 @@
 
 @(Html.Kendo().MobileModalView()
        .Name("modalview-login")
-       .HtmlAttributes(new { style = "width: 95%; height: 18em;"  })
-       .Header(obj => 
+       .HtmlAttributes(new { style = "width: 95%; height: 18em;" })
+       .Header(obj =>
            Html.Kendo().MobileNavBar()
                 .Content(navbar =>
                 @<text>
@@ -33,24 +33,37 @@
                 </text>)
         )
         .Content(
-            @<text>
-                <ul data-role="listview" data-style="inset">
-                    <li><label for="username">Username:</label> <input type="text" id="username" /></li>
-                    <li><label for="password">Password:</label> <input type="password" id="password" /></li>
-                </ul>
-                @(Html.Kendo().MobileButton()
-                        .Text("Login")
-                        .Name("modalview-login-button")
-                        .Events(events => events.Click("closeModalViewLogin"))
-                )
-                @(Html.Kendo().MobileButton()
-                        .Text("Register")
-                        .Name("modalview-reg-button")
-                        .Events(events => events.Click("closeModalViewLogin"))
-                )
+            @<text>                
+                @ModalViewContentTempalte()
             </text>)
 )
 
+@helper ModalViewContentTempalte()
+    {
+        @(Html.Kendo().MobileListView().Style("inset")
+            .Items(items =>
+            {
+                items.Add().Content(
+                    @<text>
+                        <label for="username">Username:</label> <input type="text" id="Text1" />
+                    </text>);
+                items.Add().Content(
+                    @<text>
+                        <label for="password">Password:</label> <input type="password" id="password1" />
+                    </text>);
+            })
+        )
+        @(Html.Kendo().MobileButton()
+                .Text("Login")
+                .Name("modalview-login-button")
+                .Events(events => events.Click("closeModalViewLogin"))
+        )
+        @(Html.Kendo().MobileButton()
+                .Text("Register")
+                .Name("modalview-reg-button")
+                .Events(events => events.Click("closeModalViewLogin"))
+        )
+}
 <style scoped>
     #modalview-login-button,
     #modalview-reg-button,

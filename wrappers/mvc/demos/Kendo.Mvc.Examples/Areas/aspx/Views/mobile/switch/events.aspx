@@ -7,18 +7,20 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>General Settings
-                    <ul>
-                        <li>Automatic Update 
-                        <%= Html.Kendo().MobileSwitch()
-                                .Name("mobile-switch")
-                                .Events(events => events.Change("switchChange"))
-                        %>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            <% Html.Kendo().MobileListView().Style("inset").Type("group")
+                   .Items(root => root.Add().Text("General Settings")
+                       .Items(items => items.Add().Content(() => 
+                       { 
+                           %>
+                            Automatic Update 
+                            <%: Html.Kendo().MobileSwitch()
+                                    .Name("mobile-switch")
+                                    .Events(events => events.Change("switchChange"))
+                            %>
+                           <%
+                       })))
+                   .Render();
+            %>       
             <div class="console"></div>
             <%
         })

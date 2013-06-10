@@ -8,43 +8,62 @@
         .Content(() =>
         {
             %>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>Profile
-                    <ul>
-                        <li><h2>Eduardo <span>Saavedra</span></h2><img src="<%= Url.Content("~/content/mobile/overview/eduardo.jpg") %>" /></li>
-                        <li>Brand Manager at Marketing Team</li>
-                    </ul>
-                </li>
-
-                <li>Password
-                    <ul>
-                        <li>User cannot change pasword                         
-                        <%= Html.Kendo().MobileSwitch()
-                                .Name("email-switch")
-                                .Checked(true)
-                        %>
-                        </li>
-                        <li>Password never expires 
-                        <%= Html.Kendo().MobileSwitch()
-                                .Name("wink-switch")                                
-                        %>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>Newsletter Subscription
-                    <ul>
-                        <li>Subscribed
-                        <%= Html.Kendo().MobileSwitch()
-                                .Name("subscription-switch")
-                                .Checked(true)
-                                .OnLabel("YES")
-                                .OffLabel("NO")
-                        %>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            <% Html.Kendo().MobileListView().Type("group").Style("inset")
+                   .Items(root => {
+                       root.Add().Text("Profile").Items(items => 
+                           {
+                               items.Add().Content(() =>
+                               {
+                                   %>
+                                   <h2>Eduardo <span>Saavedra</span></h2><img src="<%= Url.Content("~/content/mobile/overview/eduardo.jpg") %>" />
+                                   <%
+                               });
+                               
+                               items.Add().Text("Brand Manager at Marketing Team");
+                           });
+                       
+                        root.Add().Text("Password").Items(items => 
+                           {
+                               items.Add().Content(() =>
+                               {
+                                   %>
+                                   User cannot change pasword
+                                   <%: Html.Kendo().MobileSwitch()
+                                            .Name("email-switch")
+                                            .Checked(true)
+                                   %>
+                                   <%
+                               });
+                               
+                               items.Add().Content(() =>
+                               {
+                                   %>
+                                   Password never expires 
+                                   <%: Html.Kendo().MobileSwitch()
+                                        .Name("wink-switch")                                
+                                   %>
+                                   <%
+                               });
+                           });
+                          
+                        root.Add().Text("Newsletter Subscription").Items(items => 
+                           {
+                               items.Add().Content(() =>
+                               {
+                                   %>
+                                    Subscribed
+                                    <%: Html.Kendo().MobileSwitch()
+                                            .Name("subscription-switch")
+                                            .Checked(true)
+                                            .OnLabel("YES")
+                                            .OffLabel("NO")
+                                    %>
+                                   <%
+                               });                                                              
+                           });                                                     
+                   })
+                   .Render();                
+            %>          
             <%
         })
         .Render();

@@ -2,7 +2,7 @@
     Layout = "~/Areas/razor/Views/Shared/_MobileLayout.cshtml";
 }
 
-@(Html.Kendo().MobileView()                
+@(Html.Kendo().MobileView()
         .Name("view-transitions")
         .Title("Camera App")
         .Content(
@@ -13,19 +13,24 @@
                    .Text("Login/Sign-up")
                    .HtmlAttributes(new { @class = "transitions-button" })
                    .Url("#view-transitions-login"))              
-          </text>)        
+          </text>)
 )
 
-@(Html.Kendo().MobileView()        
+@(Html.Kendo().MobileView()
         .Name("view-transitions-login")
-        .Transition("overlay:up")        
+        .Transition("overlay:up")
         .Title("Login/Sign-up")
         .Content(
             @<text>            
-            <ul data-role="listview" data-style="inset">
-                <li><label for="username">Username:</label> <input type="text" id="username" /></li>
-                <li><label for="password">Password:</label> <input type="password" id="password" /></li>
-            </ul>         
+            @(Html.Kendo().MobileListView()
+                   .Style("inset")
+                    .Items(root =>
+                    {
+                        root.Add().Text("<label for=\"username\">Username:</label> <input type=\"text\" id=\"text\" />");
+                        root.Add().Text("<label for=\"username\">Password:</label> <input type=\"password\" id=\"password\" />");
+              
+                    })
+            )                
             @(Html.Kendo().MobileButton()
                    .Name("login")
                    .Text("Login")
@@ -42,7 +47,7 @@
          </text>)
 )
 
-@(Html.Kendo().MobileView()        
+@(Html.Kendo().MobileView()
         .Name("view-transitions-welcome")
         .Title("Welcome")
         .Content(

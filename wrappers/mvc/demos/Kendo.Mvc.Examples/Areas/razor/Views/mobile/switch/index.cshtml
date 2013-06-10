@@ -5,43 +5,47 @@
 @(Html.Kendo().MobileView()
         .Name("switch-home")
         .Title("User Settings")
-        .Content(
-            @<text>
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li>Profile
-                    <ul>
-                        <li><h2>Eduardo <span>Saavedra</span></h2><img src="@Url.Content("~/content/mobile/overview/eduardo.jpg")" /></li>
-                        <li>Brand Manager at Marketing Team</li>
-                    </ul>
-                </li>
-
-                <li>Password
-                    <ul>
-                        <li>User cannot change pasword                         
-                        @(Html.Kendo().MobileSwitch()
-                                .Name("email-switch")
-                                .Checked(true))
-                        </li>
-                        <li>Password never expires 
-                        @(Html.Kendo().MobileSwitch()
-                                .Name("wink-switch"))
-                        </li>
-                    </ul>
-                </li>
-
-                <li>Newsletter Subscription
-                    <ul>
-                        <li>Subscribed
+        .Content(obj =>     
+            Html.Kendo().MobileListView().Style("inset").Type("group")
+                .Items(root => 
+                {
+                    root.Add().Text("Profile").Items(items => 
+                    {
+                        items.Add().Content(@<text><h2>Eduardo <span>Saavedra</span></h2><img src="@Url.Content("~/content/mobile/overview/eduardo.jpg")" /></text>);
+                        items.Add().Text("Brand Manager at Marketing Team");
+                    });
+                    
+                    root.Add().Text("Password").Items(items => 
+                    {
+                        items.Add().Content(
+                            @<text>
+                            User cannot change pasword                         
+                            @(Html.Kendo().MobileSwitch()
+                                    .Name("email-switch")
+                                    .Checked(true))
+                            </text>
+                        );
+                        items.Add().Content(
+                            @<text>
+                            Password never expires 
+                            @(Html.Kendo().MobileSwitch()
+                                    .Name("wink-switch"))
+                            </text>
+                        );
+                    });
+                    
+                    root.Add().Text("Newsletter Subscription").Items(items => items.Add().Content(
+                        @<text>
+                        Subscribed
                         @(Html.Kendo().MobileSwitch()
                                 .Name("subscription-switch")
                                 .Checked(true)
                                 .OnLabel("YES")
                                 .OffLabel("NO"))
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-         </text>)
+                        </text>
+                    ));
+                })                   
+        )
 )
 
 <style scoped>

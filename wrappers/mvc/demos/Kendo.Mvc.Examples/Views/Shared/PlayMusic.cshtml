@@ -7,19 +7,23 @@
         .Title("Play Music")        
         .Content(
             @<text>
-                <div class="head">&nbsp;</div>
-                <ul data-role="listview" data-style="inset" data-type="group">
-                    <li>Genres
-                        <ul>
-                            <li><a href="">Folk</a></li>
-                            <li><a href="">Dance</a></li>
-                            <li><a href="">Pop</a></li>
-                            <li><a href="">R&B</a></li>
-                            <li><a href="">Rap</a></li>
-                            <li><a href="">Rock</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <div class="head">&nbsp;</div>                
+                @(
+                    Html.Kendo().MobileListView()
+                        .Style("inset")
+                        .Type("group")
+                        .Items(items => {
+                            items.Add().Text("Genres").Items(childs =>
+                            {
+                                childs.AddLink().Text("Folk");
+                                childs.AddLink().Text("Dance");
+                                childs.AddLink().Text("Pop");
+                                childs.AddLink().Text("R&B");
+                                childs.AddLink().Text("Rap");
+                                childs.AddLink().Text("Rock");
+                            });
+                        })
+                )
                 @(Html.Kendo().MobileButton()
                         .HtmlAttributes(new { style = "display: block; margin: 1em; text-align: center;" })
                         .Text("Go back!")
