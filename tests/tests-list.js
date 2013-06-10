@@ -343,7 +343,7 @@ var tests = [
     "scheduler/initialization.html",
     "scheduler/datasource.html",
     "scheduler/agendaview.html",
-    "scheduler/views.html",
+    "scheduler/multidayview.html",
     "scheduler/databinding.html",
     "scheduler/editing-destroy.html",
     "scheduler/editing.html",
