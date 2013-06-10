@@ -269,7 +269,8 @@ kendo_module({
             parent = target.parent();
         }
 
-        parent.trigger($.Event(e.type, { target: target[0] }));
+        var fakeEventData = $.extend(true, {}, e, { target: target[0] });
+        parent.trigger($.Event(e.type, fakeEventData));
     }
 
     function withEachDownEvent(callback) {
