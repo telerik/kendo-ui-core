@@ -275,6 +275,7 @@ var tests = [
     "mobile/button.html",
     "mobile/buttongroup.html",
     "mobile/core.html",
+    "mobile/drawer/drawer.html",
     "mobile/integration.html",
     "mobile/lint.html",
     "mobile/loader.html",

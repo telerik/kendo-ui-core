@@ -461,7 +461,7 @@ kendo_module({
             that.layouts = {};
 
             that._setupLayouts(container);
-            initWidgets(container.children(roleSelector("modalview")));
+            initWidgets(container.children(roleSelector("modalview drawer")));
 
             if (that.loader) {
                 that.bind(SHOW_START, function() { that.loader.transition(); });
