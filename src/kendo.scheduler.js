@@ -774,10 +774,19 @@ kendo_module({
 
             for (var idx = 0; idx < resources.length; idx++) {
                 var resource = resources[idx];
+                var field = resource.field;
+                var dataSource = resource.dataSource;
+
+                if (!field || !dataSource) {
+                    throw new Error('The "field" and "dataSource" options of the scheduler resource are mandatory.');
+                }
 
                 that.resources[resource.field] = {
-                    field: resource.field,
-                    dataSource: kendo.data.DataSource.create(resource.dataSource)
+                    field: field,
+                    dataTextField: resource.dataTextField || "text",
+                    dataValueField: resource.dataValueField || "value",
+                    dataColorField: resource.dataColorField || "color",
+                    dataSource: kendo.data.DataSource.create(dataSource)
                 };
             }
 
