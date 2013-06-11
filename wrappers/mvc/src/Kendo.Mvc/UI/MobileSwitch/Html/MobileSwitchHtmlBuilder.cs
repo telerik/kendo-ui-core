@@ -27,6 +27,8 @@ namespace Kendo.Mvc.UI
             html.Attribute("data-role", "switch")
                 .Attribute("id", component.Id);
 
+            html.Attribute("name", component.Name);
+
             AddEventAttributes(html, component.Events);
 
             if (component.Checked)
