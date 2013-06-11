@@ -337,6 +337,7 @@ kendo_module({
             minHeight: 50,
             maxWidth: Infinity,
             maxHeight: Infinity,
+            content: null,
             visible: null,
             height: null,
             width: null
