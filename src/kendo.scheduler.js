@@ -773,15 +773,7 @@ kendo_module({
             var that = this;
             var view = that.view();
 
-            that.dataSource.filter({
-                filters: [{
-                    logic: "or",
-                    filters: [
-                        { field: "start", operator: "gte", value: view.startDate },
-                        { field: "start", operator: "lte", value: view.endDate }
-                    ]
-                }]
-            });
+            that.dataSource.filter(this._createFilter(view.startDate, view.endDate));
         },
 
         _dataSource: function() {
@@ -960,6 +952,35 @@ kendo_module({
             return data;
         },
 
+        _createFilter: function(startDate, endDate) {
+            var MS_PER_DAY = kendo.date.MS_PER_DAY,
+                filter = {};
+
+            if (startDate && endDate) {
+                filter = {
+                    logic: "or",
+                    filters: [
+                        {
+                            filters: [
+                                { field: "start", operator: "gte", value: startDate },
+                                { field: "end", operator: "gte", value: startDate },
+                                { field: "start", operator: "lte", value: endDate.getTime() + MS_PER_DAY - 1 }
+                            ]
+                        },
+                        {
+                            logic: "and",
+                            filters: [
+                                { field: "start", operator: "lte", value: startDate.getTime() + MS_PER_DAY - 1 },
+                                { field: "end", operator: "gte", value: startDate }
+                            ]
+                        }
+                    ]
+                };
+            }
+
+            return filter;
+        },
+
         refresh: function(e) {
             var view = this.view(),
                 data = this.dataSource.view();
@@ -973,6 +994,8 @@ kendo_module({
             this._destroyEditable();
 
             data = this._expandEvents(data, view);
+
+            data = new kendo.data.Query(data).filter(this._createFilter(view.startDate, view.endDate)).toArray();
 
             view.renderEvents(data);
 
