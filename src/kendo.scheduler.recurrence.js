@@ -952,7 +952,7 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-            that._frequency();
+            that._frequencyChooser();
 
             that._container(); //TODO: render div for rule container and inputs for END options
 
@@ -960,13 +960,16 @@ kendo_module({
         },
         options: {
             name: "RecurrenceEditor",
-            frequencyOptionLabel: "Never",
-            frequencies: [
-                { text: "Daily", value: "daily" },
-                { text: "Weekly", value: "weekly" },
-                { text: "Monthly", value: "monthly" },
-                { text: "Yearly", value: "yearly" }
-            ]
+            frequencies: ["never", "daily", "weekly", "monthly", "yearly"],
+            messages: {
+                frequencies: {
+                    never: "Never",
+                    daily: "Daily",
+                    weekly: "Weekly",
+                    monthly: "Monthly",
+                    yearly: "Yearly"
+                }
+            }
         },
 
         value: function(value) {
@@ -1022,14 +1025,16 @@ kendo_module({
                     }
                 });
 
-            model.bind("change", function(e) {
+            that.model = model.bind("change", function(e) {
                 if (e.field === "freq") {
                     that.setView(model.get("freq"));
                 }
             });
 
-            that.model = model;
             kendo.bind(this.element, model);
+            if (that.ddlFrequency.value()) {
+                model.set("freq", that.ddlFrequency.value());
+            }
         },
 
         //rendering
@@ -1040,18 +1045,34 @@ kendo_module({
             this.container = container;
         },
 
-        _frequency: function() {
+        _frequencyChooser: function() {
+            var that = this,
+                options = that.options,
+                frequencies = options.frequencies,
+                messages = options.messages.frequencies,
+                frequency;
+
+            frequencies = $.map(frequencies, function(frequency) {
+                return {
+                    text: messages[frequency],
+                    value: frequency
+                }
+            });
+
+            frequency = frequencies[0];
+            if (frequency && frequency.value === "never") {
+                frequency.value = "";
+            }
+
             var ddl = $('<input name="freq" />').attr(kendo.attr("bind"), "value: freq");
 
             this.element.append('<div class="k-edit-label"><label>Repeat</label></div>');
             this.element.append(ddl);
-            this.freqDDL = ddl;
 
-            ddl.kendoDropDownList({
+            that.ddlFrequency = new kendo.ui.DropDownList(ddl, {
                 dataTextField: "text",
                 dataValueField: "value",
-                dataSource: this.options.frequencies,
-                optionLabel: this.options.frequencyOptionLabel
+                dataSource: frequencies
             });
         }
     });

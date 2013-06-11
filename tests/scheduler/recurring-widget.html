@@ -77,6 +77,40 @@
                 ok(editor.model instanceof kendo.data.ObservableObject);
             });
 
+            test("All end inputs are disabled if never radio is checked", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("daily");
+
+                var container = div.find(".k-recurrence-end"),
+                    inputs = container.find("[data-role]");
+
+                equal(inputs.eq(0).prop("disabled"), true);
+                equal(inputs.eq(1).prop("disabled"), true);
+            });
+
+            test("On disable clear the model value", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("daily");
+
+                var container = div.find(".k-recurrence-end"),
+                    inputs = container.find("[data-role]");
+
+                container.find("input[type=radio]:last").prop("checked", true).trigger("change");
+                inputs.eq(1).data("kendoDatePicker").value(new Date());
+                inputs.eq(1).data("kendoDatePicker").trigger("change");
+                container.find("input[type=radio]:first").prop("checked", true).trigger("change");
+
+                ok(!editor.model.until);
+            });
+
+            test("Render frequency view if ddl has value", function() {
+                var editor = new RecurrenceEditor(div, {
+                    frequencies: ["daily"]
+                });
+
+                ok(editor.container.children().length);
+            });
+
             module("RecurrenceEditor API", {
                 setup: function() {
                     div = $("<div />").appendTo(document.body);
@@ -152,31 +186,6 @@
                 equal(container.text(), "");
             });
 
-            test("All end inputs are disabled if never radio is checked", function() {
-                var editor = new RecurrenceEditor(div);
-                editor.setView("daily");
-
-                var container = div.find(".k-recurrence-end"),
-                    inputs = container.find("[data-role]");
-
-                equal(inputs.eq(0).prop("disabled"), true);
-                equal(inputs.eq(1).prop("disabled"), true);
-            });
-
-            test("On disable clear the model value", function() {
-                var editor = new RecurrenceEditor(div);
-                editor.setView("daily");
-
-                var container = div.find(".k-recurrence-end"),
-                    inputs = container.find("[data-role]");
-
-                container.find("input[type=radio]:last").prop("checked", true).trigger("change");
-                inputs.eq(1).data("kendoDatePicker").value(new Date());
-                inputs.eq(1).data("kendoDatePicker").trigger("change");
-                container.find("input[type=radio]:first").prop("checked", true).trigger("change");
-
-                ok(!editor.model.until);
-            });
         </script>
     </body>
 </html>
