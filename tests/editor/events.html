@@ -110,7 +110,7 @@
             });
 
             asyncTest('mouseup raises selection change', function() {
-                $(editor.body).mouseup();
+                $(editor.body).mousedown().mouseup();
                 setTimeout(function() {
                     ok(changeRaised);
                     start();
