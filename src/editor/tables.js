@@ -197,4 +197,12 @@ extend(kendo.ui.editor, {
 
 registerTool("createTable", new InsertTableTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, popup: true, title: "Create table"})}));
 
+registerTool("addColumnLeft", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the left"})}));
+registerTool("addColumnRight", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the right"})}));
+registerTool("addRowAbove", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row above"})}));
+registerTool("addRowBelow", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row below"})}));
+registerTool("deleteRow", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete row"})}));
+registerTool("deleteColumn", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete column"})}));
+registerTool("mergeCells", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Merge cells"})}));
+
 })(window.kendo.jQuery);
