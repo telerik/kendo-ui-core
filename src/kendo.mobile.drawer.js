@@ -10,12 +10,15 @@ kendo_module({
     var kendo = window.kendo,
         mobile = kendo.mobile,
         Transition = kendo.effects.Transition,
+        roleSelector = kendo.roleSelector,
+        Z_INDEX = "zIndex",
+        AXIS = "x",
         ui = mobile.ui;
 
     var Drawer = ui.View.extend({
         init: function(element, options) {
             ui.View.fn.init.call(this, element, options);
-            this.pane = this.element.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
+            this.pane = this.element.closest(roleSelector("pane")).data("kendoMobilePane");
 
             var drawer = this;
 
@@ -30,8 +33,7 @@ kendo_module({
             });
 
             this.userEvents = new kendo.UserEvents(this.pane.element, {
-                filter: kendo.roleSelector('view'),
-
+                filter: roleSelector("view"),
                 start: function(e) { drawer._start(e); },
                 move: function(e) { drawer._update(e); },
                 end: function(e) { drawer._end(e); },
@@ -45,7 +47,7 @@ kendo_module({
             this.leftPositioned = this.options.position === "left";
 
             this.visible = false;
-            this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer").css('display', '');
+            this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer").css("display", "");
         },
 
         options: {
@@ -56,9 +58,9 @@ kendo_module({
         activate: function() {
             if (Drawer.last !== this) {
                 if (Drawer.last) {
-                    Drawer.last.element.css('zIndex', -2);
+                    Drawer.last.element.css(Z_INDEX, -2);
                 }
-                this.element.css('zIndex', -1);
+                this.element.css(Z_INDEX, -1);
             }
 
             Drawer.last = this;
@@ -87,11 +89,7 @@ kendo_module({
 
         // Alias in order to support popover/modalview etc. interface
         openFor: function() {
-            if (this.visible) {
-                this.hide();
-            } else {
-                this.show();
-            }
+            this.visible ? this.hide() : this.show();
         },
 
         _moveViewTo: function(offset) {
@@ -111,13 +109,10 @@ kendo_module({
 
             this.movable = new kendo.ui.Movable(e.view.element);
 
-            this.transition = new Transition({
-                axis: "x",
-                movable: this.movable
-            });
+            this.transition = new Transition({ axis: AXIS, movable: this.movable });
 
             if (this.visible) {
-                this.movable.moveAxis('x', currentOffset);
+                this.movable.moveAxis(AXIS, currentOffset);
                 setTimeout(function() { drawer.hide(); }, 100);
             }
         },
@@ -144,14 +139,13 @@ kendo_module({
                 newPosition = movable.x + e.x.delta,
                 limitedPosition;
 
-
             if (this.leftPositioned) {
                 limitedPosition = Math.min(Math.max(0, newPosition), this.element.width());
             } else {
                 limitedPosition = Math.max(Math.min(0, newPosition), -this.element.width());
             }
 
-            this.movable.moveAxis("x", limitedPosition);
+            this.movable.moveAxis(AXIS, limitedPosition);
         },
 
         _end: function(e) {
