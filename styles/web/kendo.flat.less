@@ -28,9 +28,9 @@
 
 /* Selects, Dropdowns */
 @select-background-color: red;
-@select-border-color: #29d6c5;
-@select-hover-background-color: #29d6c5;
-@select-group-background-color: @drop-down-header-background;
+@select-border-color: #2eb3a6;
+@select-hover-background-color: #2eb3a6;
+@select-group-background-color: #363940;
 
 /* Buttons */
 @button-background-color: @form-widget-background;
@@ -38,13 +38,13 @@
 
 /* Group Base Styles */
 @group-background-color: @widget-background-color;
-@group-border-color: #29d6c5;
+@group-border-color: #2eb3a6;
 
 /* Content */
 @content-background-color: @widget-background-color;
 
-@hover-background-color: #29d6c5;
-@hover-border-color: #29d6c5;
+@hover-background-color: #2eb3a6;
+@hover-border-color: #2eb3a6;
 @hover-text-color: #ffffff;
 
 @selected-background-color: #10c4b2;
@@ -52,7 +52,7 @@
 @selected-text-color: #ffffff;
 
 @active-background-color: #10c4b2;
-@active-border-color: none;
+@active-border-color: #10c4b2;
 @active-text-color: #ffffff;
 @error-background-color: #ffffff;
 @error-border-color: #e20000;
@@ -70,18 +70,19 @@
 @draghandle-border-color: @form-widget-background;
 @draghandle-background-color: @form-widget-background;
 @draghandle-shadow: 0 0 0 0;
-@draghandle-hover-border-color: @hover-background-color;
-@draghandle-hover-background-color: @hover-background-color;
+@draghandle-hover-border-color: #2eb3a6;
+@draghandle-hover-background-color: #2eb3a6;
 @draghandle-hover-shadow: 0 0 0;
 
 @alt-background-color: #f5f5f5;
 @input-background-color: #ffffff;
 @input-text-color: #4c5356;
-@shadow-color: rgba(0, 0, 0, 0.3);
+//@shadow-color: rgba(0, 0, 0, 0);
+@shadow-color: transparent;
 @shadow-inset-color: transparent;
 @link-text-color: #4c5356;
 @loading-panel-color: #ffffff;
-@splitbar-background-color: #29d6c5;
+@splitbar-background-color: #2eb3a6;
 @default-icon-opacity: 1;
 
 /* Border Radii */
@@ -97,11 +98,9 @@
 /*Focused State*/
 @focused-border-color: @selected-background-color;
 @focused-shadow: none;
-@focused-item-shadow: inset 0 0 0 1px @focused-border-color;
+@focused-item-shadow: none;
 
-
-
-//Introduced new var-s
+@drop-down-border-color: #363940;
 @form-widget-background: #10c4b2;
 @form-widget-color: #ffffff;
 @form-widget-border-color: #10c4b2; 
@@ -111,10 +110,13 @@
 @calendar-header-hover-text-decoration: underline;
 @calendar-footer-text-decoration: none;
 @table-header-background: #dfdfdf;
-@popup-container-padding: 0;
-
-//#10c4b2-> tumen turkoaz
-//#29d6c5-> svetul turkoaz
-//#363940-> tumno sivo
+@input-border-radius: 1px;
+@panelbar-items-border: #4c5356;
+@panelbar-items-background: #363940;
+@calendar-header-background: #363940;
+@calendar-footer-background: #363940;
+@calendar-footer-hover-text-decoration: none;
+@calendar-footer-hover-background: #2eb3a6; 
+@menu-border-color: #4c5356; 
 
 @import "template.less";
