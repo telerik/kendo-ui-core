@@ -8,6 +8,7 @@ var kendo = window.kendo,
     Command = Editor.Command,
     NS = ".kendoEditor",
     ACTIVESTATE = "k-state-active",
+    SELECTEDSTATE = "k-state-selected",
     Tool = Editor.Tool,
     ToolTemplate = Editor.ToolTemplate,
     BlockFormatFinder = Editor.BlockFormatFinder,
@@ -100,7 +101,7 @@ var InsertTableTool = PopupTool.extend({
             command: TableCommand,
             popupTemplate:
                 "<div class='k-ct-popup'>" +
-                    new Array(this.cols * this.rows + 1).join("<div class='k-ct-cell' />") +
+                    new Array(this.cols * this.rows + 1).join("<div class='k-ct-cell k-state-disabled' />") +
                     "<div class='k-status'>Cancel</div>" +
                 "</div>"
         }));
@@ -146,17 +147,17 @@ var InsertTableTool = PopupTool.extend({
 
                     cells.each(function(i) {
                         $(this).toggleClass(
-                            ACTIVESTATE,
+                            SELECTEDSTATE,
                             i % cols < t.col && i / cols < t.row
                         );
                     });
                 } else {
                     status.text("Cancel");
-                    cells.removeClass(ACTIVESTATE);
+                    cells.removeClass(SELECTEDSTATE);
                 }
             })
             .on("mouseleave" + NS, function() {
-                cells.removeClass(ACTIVESTATE);
+                cells.removeClass(SELECTEDSTATE);
                 status.text("Cancel");
             })
             .on("mouseup" + NS, function(e) {
@@ -174,7 +175,7 @@ var InsertTableTool = PopupTool.extend({
 
     _open: function() {
         PopupTool.fn._open.call(this);
-        this.popup().element.find(".k-ct-cell").removeClass(ACTIVESTATE);
+        this.popup().element.find(".k-ct-cell").removeClass(SELECTEDSTATE);
     },
 
     _close: function() {
