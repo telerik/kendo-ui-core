@@ -46,6 +46,11 @@ namespace Kendo.Mvc.UI
                 html.Attribute("href", component.Url);
             }
 
+            if (component.Target.HasValue())
+            {
+                html.Attribute("data-target", component.Target);
+            }
+
             html.Attributes(component.HtmlAttributes);
 
             return html;

@@ -54,6 +54,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Specifies the id of target Pane or `_top` for application level Pane
+        /// </summary>
+        /// <param name="value">The value that configures the target.</param>
+        public MobileBackButtonBuilder Target(string value)
+        {
+            container.Target = value;
+
+            return this;
+        }
+        
         //<< Fields
 
         /// <summary>

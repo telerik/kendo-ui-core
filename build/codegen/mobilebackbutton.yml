@@ -10,3 +10,7 @@
     - :name: url
       :type: String
       :description: 'Specifies the url for remote view or id of the view to be loaded (prefixed with #, like an anchor)'
+
+    - :name: target
+      :type: String
+      :description: Specifies the id of target Pane or `_top` for application level Pane
