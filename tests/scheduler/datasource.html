@@ -71,6 +71,18 @@
                 ok(dataSource.at(0) instanceof kendo.data.SchedulerEvent);
             });
 
+            test("Existing SchedulerEvent instances are not re-wrapped", function() {
+                var event = new kendo.data.SchedulerEvent({ start: new Date(), end: new Date() });
+
+                var dataSource = new kendo.data.SchedulerDataSource({
+                    data: [event]
+                });
+
+                dataSource.read();
+
+                deepEqual(event, dataSource.at(0));
+            });
+
             var timezoneApply,
                 timezoneRemove;
 
@@ -359,7 +371,6 @@
 
                 equal(dataReader.timezone, "my timezone");
             });
-
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

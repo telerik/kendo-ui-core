@@ -1628,7 +1628,6 @@ kendo_module({
                     delete record[originalName];
                 }
             }
-            data[idx] = extend(true, {}, record);
         }
     }
 

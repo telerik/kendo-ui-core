@@ -115,7 +115,7 @@ kendo_module({
             event.start = kendo.timezone[method](event.start, event.startTimezone || event.endTimezone || timezone);
             event.end = kendo.timezone[method](event.end, event.endTimezone || event.startTimezone || timezone);
 
-            delete event.uid;
+            //delete event.uid;
         }
         return data;
     }
