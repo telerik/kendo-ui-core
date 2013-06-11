@@ -13,14 +13,7 @@
     <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>    
     <script src="<%= Url.Content("~/Scripts/console.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/prettify.min.js") %>"></script>
-    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
-
-    <style>
-        a.offline-button 
-        {
-            color: #fff;
-        }
-    </style>
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />    
 </head>
 <body>
 
@@ -31,8 +24,8 @@
 <% if (!isMobileDevice) { %>
 <div class="page">    
     <%: Html.Partial("~/Views/Shared/_MobileNavigation.cshtml")%>
-
-    <div id="example" class="k-content" style="height: 400px">
+    
+    <div><div id="example" class="k-content" style="height: 400px">
 <% } %>
 
         <% Html.Kendo().MobileLayout()
@@ -61,7 +54,7 @@
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />    
             
 <% if (!isMobileDevice) { %>
-    </div>
+    </div></div>
 
     <%: Html.Partial("~/Views/Shared/_Source.cshtml")%>
 

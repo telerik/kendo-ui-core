@@ -14,13 +14,7 @@
     <script src="@Url.Content("~/Scripts/console.min.js")"></script>
     <script src="@Url.Content("~/Scripts/prettify.min.js")"></script>
 
-    @RenderSection("HeadContent", false)
-    <style>
-        a.offline-button 
-        {
-            color: #fff;
-        }
-    </style>
+    @RenderSection("HeadContent", false)   
 </head>
 <body>
 @using System.Text.RegularExpressions;
@@ -35,7 +29,7 @@
     <div class="page">
         @Html.Partial("~/Views/Shared/_MobileNavigation.cshtml")
 
-        <div id="example" class="k-content" style="height: 400px">
+        <div><div id="example" class="k-content" style="height: 400px">
     </text>
 }
             @{ Html.Kendo().MobileLayout()
@@ -62,7 +56,7 @@
 
 @{ if (!isMobileDevice) 
 {         
-        @:</div>
+        @:</div></div>
         @Html.Partial("~/Views/Shared/_Source.cshtml")
     @:</div>        
 }}      
