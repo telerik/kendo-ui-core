@@ -660,7 +660,7 @@ kendo_module({
     }
 
     function expand(event, start, end) {//, tzid) {
-        var rule = parseRule(event.rule),
+        var rule = parseRule(event.recurrence),
             eventStartMS = +event.start,
             durationMS = event.end - eventStartMS,
             current = 1,
@@ -669,6 +669,8 @@ kendo_module({
             first,
             count,
             freq;
+
+        //event = event.toJSON();
 
         //convert start from tzid to UTC
 
@@ -955,13 +957,6 @@ kendo_module({
         "weekly": weeklyHTML
     };
 
-    var roles = {
-        "numerictextbox": "kendoNumericTextBox",
-        "datepicker": "kendoDatePicker",
-        "timepicker": "kendoTimePicker",
-        "datetimepicker": "kendoDateTimePicker"
-    };
-
     var RecurrenceEditor = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -1033,7 +1028,7 @@ kendo_module({
                         }
                         return false;
                     },
-                    disableUntil: function(e) {
+                    disableUntil: function() {
                         if (model.get("endRuleValue") !== "until") {
                             model.set("until", "");
                             return true;
@@ -1073,7 +1068,7 @@ kendo_module({
                 return {
                     text: messages[frequency],
                     value: frequency
-                }
+                };
             });
 
             frequency = frequencies[0];
