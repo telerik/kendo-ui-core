@@ -936,7 +936,7 @@ kendo_module({
     };
 
     var defaultViews = {
-        "daily": 'Repeat every: <input data-role="numerictextbox" data-bind="value: interval" /> day(s)' + END_TEMPLATE_HTML
+        "daily": 'Repeat every: <input data-role="numerictextbox" data-bind="value: interval" data-min="1" data-format="#" data-decimals="0" /> day(s)' + END_TEMPLATE_HTML
     };
 
     var roles = {
