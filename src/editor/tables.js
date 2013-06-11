@@ -67,11 +67,11 @@ var PopupTool = Tool.extend({
     _activate: $.noop,
 
     _open: function() {
-        this.options.anchor.addClass(ACTIVESTATE);
+        this._popup.options.anchor.addClass(ACTIVESTATE);
     },
 
     _close: function() {
-        this.options.anchor.removeClass(ACTIVESTATE);
+        this._popup.options.anchor.removeClass(ACTIVESTATE);
     },
 
     _toggle: function(e) {
@@ -173,10 +173,12 @@ var InsertTableTool = PopupTool.extend({
     },
 
     _open: function() {
+        PopupTool.fn._open.call(this);
         this.popup().element.find(".k-ct-cell").removeClass(ACTIVESTATE);
     },
 
     _close: function() {
+        PopupTool.fn._close.call(this);
         this.popup().element.off(NS);
     },
 
