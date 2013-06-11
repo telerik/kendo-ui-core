@@ -298,6 +298,7 @@
 
                 equal(marks.eq(0).css("background-color"), "green");
                 equal(marks.eq(1).css("background-color"), "red");
+                console.log(marks);
             });
 
             test("multiple resources are passed to template", 3, function() {
@@ -377,6 +378,34 @@
                 equal(dropdownlist.children().eq(0).text(), "None");
                 equal(dropdownlist.children().eq(1).text(), "Foo 1");
                 equal(dropdownlist.children().eq(2).text(), "Foo 2");
+            });
+
+            test("the dropdownlist items have the color of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+
+                var marks = dropdownlist.list.find(".k-scheduler-mark");
+                equal(marks.eq(1)[0].style.backgroundColor, "red");
+                equal(marks.eq(2)[0].style.backgroundColor, "green");
             });
 
             test("selecting a value from the resource dropdownlist sets the resource field of the event", function() {
