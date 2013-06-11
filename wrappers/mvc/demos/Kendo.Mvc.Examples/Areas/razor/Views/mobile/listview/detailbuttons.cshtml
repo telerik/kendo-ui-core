@@ -1,0 +1,81 @@
+﻿@{    
+    Layout = "~/Areas/razor/Views/Shared/_MobileLayout.cshtml";
+}
+
+@(Html.Kendo().MobileView()
+        .Name("listview-home")       
+        .Title("Destinations")
+        .Content(obj =>        
+            Html.Kendo().MobileListView().Style("inset").Type("group")
+                   .Items(root => {
+                       root.Add().Text("Default button styles").Items(items =>
+                       {
+                            items.Add().Content(
+                            @<text>
+                                Contact Add
+                                @Html.Kendo().MobileDetailButton().Style(MobileDetailButtonStyle.Contactadd)
+                            </text>);
+                            
+                            items.Add().Content(
+                            @<text>
+                                Detail Disclose
+                                @Html.Kendo().MobileDetailButton().Style(MobileDetailButtonStyle.Detaildisclose)
+                            </text>);
+                            
+                            items.Add().Content(
+                            @<text>
+                                Row Insert
+                                @Html.Kendo().MobileDetailButton().Style(MobileDetailButtonStyle.Rowinsert)
+                            </text>);
+                            
+                            items.Add().Content(
+                            @<text>
+                                Row Delete
+                                @Html.Kendo().MobileDetailButton().Style(MobileDetailButtonStyle.Rowdelete)                                
+                            </text>);
+                       });
+
+                       root.Add().Text("Custom icons").Items(items =>
+                       {
+                            items.Add().Content(
+                            @<text>
+                                More info
+                                @Html.Kendo().MobileDetailButton().Icon("more")
+                            </text>);
+                            
+                            items.Add().Content(
+                            @<text>
+                                Battery level
+                                @Html.Kendo().MobileDetailButton().Icon("battery")
+                            </text>);
+                       });
+
+                       root.Add().Text("Link Items &amp; Detail Buttons").Items(items =>
+                       {
+                            items.Add().Content(
+                            @<text>
+                                Row Insert
+                                @Html.Kendo().MobileDetailButton().Style(MobileDetailButtonStyle.Rowinsert)
+                            </text>);
+                            
+                            items.Add().Content(
+                            @<text>
+                                Row Delete
+                                @Html.Kendo().MobileDetailButton().Style(MobileDetailButtonStyle.Rowdelete)
+                            </text>);
+                            
+                            items.Add().Content(
+                            @<text>
+                                More info
+                                @Html.Kendo().MobileDetailButton().Icon("more")
+                            </text>);
+                            
+                            items.Add().Content(
+                            @<text>
+                                Battery level
+                                @Html.Kendo().MobileDetailButton().Icon("battery")
+                            </text>);
+                       });                                              
+            })
+        )
+)
