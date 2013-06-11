@@ -42,7 +42,7 @@ kendo_module({
                 }
             });
 
-            this.leftPositioned = this.options.position === "left"
+            this.leftPositioned = this.options.position === "left";
 
             this.visible = false;
             this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer").css('display', '');
@@ -108,7 +108,9 @@ kendo_module({
             }
 
             this.currentView = e.view;
+
             this.movable = new kendo.ui.Movable(e.view.element);
+
             this.transition = new Transition({
                 axis: "x",
                 movable: this.movable
@@ -130,19 +132,6 @@ kendo_module({
                 canMoveRight = !leftPositioned && visible || leftPositioned && !visible && !Drawer.current,
                 horizontalSwipe = Math.abs(e.x.velocity) >= Math.abs(e.y.velocity),
                 leftSwipe = e.x.velocity < 0;
-
-            console.log({
-                id: this.element.attr('id'),
-                visible: visible,
-                leftPositioned: leftPositioned,
-                current: Drawer.current,
-                canMoveLeft: canMoveLeft,
-                canMoveRight: canMoveRight,
-                horizontalSwipe: horizontalSwipe,
-                yVelocity: e.y.velocity,
-                xVelocity: e.x.velocity,
-                leftSwipe: leftSwipe
-            });
 
             if (horizontalSwipe && ((canMoveLeft && leftSwipe) || (canMoveRight && !leftSwipe))) {
                 this.activate();
