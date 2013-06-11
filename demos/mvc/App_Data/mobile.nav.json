@@ -5,6 +5,7 @@
             "name": "overview",
             "documentation": "mobile",
             "spriteCssClass": "overviewIcon",
+            "packages": ["!mvc"],
             "items": [
                 {
                     "text": "Overview",
@@ -247,6 +248,7 @@
             "name": "scroller",
             "documentation": "mobile/scroller",
             "spriteCssClass": "mobileScrollerIcon",
+            "packages": ["!mvc"],
             "items": [
                 {
                     "text": "Basic usage",
@@ -357,6 +359,7 @@
             "name": "forms",
             "documentation": "mobile/forms",
             "spriteCssClass": "mobileAppIcon",
+            "packages": ["!mvc"],
             "items": [
                 {
                     "text": "Overview",
@@ -377,6 +380,7 @@
             "name": "touchevents",
             "documentation": "mobile/touch",
             "spriteCssClass": "mobileAppIcon",
+            "packages": ["!mvc"],
             "items": [
                 {
                     "text": "Touch Events",
@@ -396,6 +400,7 @@
                     "text": "Overview",
                     "url": "view/index.html",
                     "title": "Kendo UI Mobile View widget demo",
+                    "packages": ["!mvc"],
                     "meta": "This example shows how Kendo UI Mobile View component is used to represent a screen in Kendo UI Mobile Application."
                 },
                 {
