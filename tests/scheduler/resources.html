@@ -16,6 +16,7 @@
         <script src="../../src/kendo.tooltip.js"></script>
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.window.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
@@ -380,6 +381,34 @@
                 equal(dropdownlist.children().eq(2).text(), "Foo 2");
             });
 
+            test("scheduler creates a multiselect in the popup form for resources which allow multiple values", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                equal($(multiselect.items()[0]).text(), "Foo 1");
+                equal($(multiselect.items()[1]).text(), "Foo 2");
+            });
+
             test("the dropdownlist items have the color of the event", function() {
                 var event = new kendo.data.SchedulerEvent({
                     start: new Date(), end: new Date(), title: ""
@@ -406,6 +435,35 @@
                 var marks = dropdownlist.list.find(".k-scheduler-mark");
                 equal(marks.eq(1)[0].style.backgroundColor, "red");
                 equal(marks.eq(2)[0].style.backgroundColor, "green");
+            });
+
+            test("the multiselect items have the color of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                var marks = multiselect.list.find(".k-scheduler-mark");
+                equal(marks.eq(0)[0].style.backgroundColor, "red");
+                equal(marks.eq(1)[0].style.backgroundColor, "green");
             });
 
             test("selecting a value from the resource dropdownlist sets the resource field of the event", function() {
@@ -437,6 +495,36 @@
                 equal(scheduler.dataSource.at(0).foo.text, "Foo 2");
             });
 
+            test("selecting a value from the resource multiselect sets the resource field of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                multiselect.value(2);
+                multiselect.trigger("change");
+
+                equal(scheduler.dataSource.at(0).foo[0].text, "Foo 2");
+            });
+
             test("the current resource is selected in the dropdownlist", function() {
                 var event = new kendo.data.SchedulerEvent({
                     start: new Date(), end: new Date(), title: "",
@@ -464,7 +552,67 @@
                 equal(dropdownlist.value(), 2);
             });
 
-            test("selecting the option label set the resource field of the event to null", function() {
+            test("the current resource is selected in the multiselect", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: "",
+                    foo: [{  value: 2 }]
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                equal(multiselect.value(), 2);
+            });
+
+            test("selecting an item from the multiselect adds a resource item to the current resources array of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: "",
+                    foo: [{  value: 2 }]
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                multiselect.value([2, 1]);
+                multiselect.trigger("change");
+
+                equal(scheduler.dataSource.at(0).foo[0].text, "Foo 2");
+                equal(scheduler.dataSource.at(0).foo[1].text, "Foo 1");
+            });
+
+            test("selecting the option label sets the resource field of the event to null", function() {
                 var event = new kendo.data.SchedulerEvent({
                     start: new Date(), end: new Date(), title: "",
                     foo: {  value: 2 }

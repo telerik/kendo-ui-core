@@ -500,10 +500,25 @@ kendo_module({
 
                 for (var resourceIndex = 0; resourceIndex < that.resources.length; resourceIndex++) {
                     (function(resource) {
-                        fields.push({
+                        var field = {
                            field: resource.field,
                            title: resource.field,
-                           editor: function(container, options) {
+                        }
+
+                        if (resource.multiple) {
+                            field.editor = function(container, options) {
+                               $(kendo.format('<select data-{0}bind="value: {1}">', kendo.ns, resource.field))
+                                 .appendTo(container)
+                                 .kendoMultiSelect({
+                                     dataTextField: resource.dataTextField,
+                                     dataValueField: resource.dataValueField,
+                                     dataSource: resource.dataSource,
+                                     itemTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField),
+                                     tagTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
+                                 });
+                           }
+                        } else {
+                            field.editor = function(container, options) {
                                $(kendo.format('<select data-{0}bind="value: {1}">', kendo.ns, resource.field))
                                  .appendTo(container)
                                  .kendoDropDownList({
@@ -514,7 +529,8 @@ kendo_module({
                                      template: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
                                  });
                            }
-                        })
+                        }
+                        fields.push(field);
                     })(that.resources[resourceIndex]);
                 }
 
