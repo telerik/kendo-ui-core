@@ -10,7 +10,7 @@
     <link href="<%= Url.Content("~/Content/shared/examples-offline.css") %>" rel="stylesheet" type="text/css" />
     <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>                     
-    <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>    
     <script src="<%= Url.Content("~/Scripts/console.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/prettify.min.js") %>"></script>
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />

@@ -133,6 +133,8 @@
     <Compile Include="Controllers\Mobile\NavBar\IndexController.cs" />
     <Compile Include="Controllers\Mobile\PopOver\IndexController.cs" />
     <Compile Include="Controllers\Mobile\ScrollView\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\SplitView\AppearanceController.cs" />
+    <Compile Include="Controllers\Mobile\SplitView\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Switch\EventsController.cs" />
     <Compile Include="Controllers\Mobile\Switch\IndexController.cs" />
     <Compile Include="Controllers\Mobile\TabStrip\AppearanceController.cs" />
@@ -536,6 +538,8 @@
     <Content Include="Areas\aspx\Views\mobile\navbar\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\popover\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\scrollview\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\splitview\appearance.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\splitview\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\switch\events.aspx" />
     <Content Include="Areas\aspx\Views\mobile\switch\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\tabstrip\appearance.aspx" />
@@ -714,6 +718,8 @@
     <Content Include="Areas\razor\Views\mobile\layout\index.cshtml" />
     <Content Include="Views\Shared\PlayMusic.cshtml" />
     <Content Include="Areas\razor\Views\mobile\view\zoomable.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\splitview\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\splitview\appearance.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
