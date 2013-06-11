@@ -117,6 +117,7 @@ namespace Kendo.Models
             "kendo.mobile.buttongroup.js",
             "kendo.mobile.switch.js",
             "kendo.mobile.tabstrip.js",
+            "kendo.mobile.drawer.js",
             "kendo.mobile.modalview.js"
 #else
             jQueryPath,

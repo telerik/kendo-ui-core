@@ -160,6 +160,7 @@ MOBILE_JS = FileList[
     "src/kendo.mobile.shim.js",
     "src/kendo.mobile.view.js",
     "src/kendo.mobile.modalview.js",
+    "src/kendo.mobile.drawer.js",
     "src/kendo.mobile.splitview.js",
     "src/kendo.mobile.pane.js",
     "src/kendo.mobile.application.js",
