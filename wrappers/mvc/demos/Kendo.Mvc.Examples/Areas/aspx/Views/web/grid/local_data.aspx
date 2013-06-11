@@ -6,9 +6,9 @@
     .Name("Grid")
     .Columns(columns =>
     {
-        columns.Bound(p => p.ProductName);
-        columns.Bound(p => p.UnitPrice).Width(130);
-        columns.Bound(p => p.UnitsInStock).Width(130);
+        columns.Bound(p => p.ProductName).Title("Product Name");
+        columns.Bound(p => p.UnitPrice).Title("Unit Price").Width(130);
+        columns.Bound(p => p.UnitsInStock).Title("Units In Stock").Width(130);
         columns.Bound(p => p.Discontinued).Width(130);
     })
     .Pageable()
