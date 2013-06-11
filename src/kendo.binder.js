@@ -493,11 +493,12 @@ kendo_module({
         },
 
         remove: function(index, items) {
-            var idx,
-            element = this.container();
+            var idx, element = this.container();
 
             for (idx = 0; idx < items.length; idx++) {
-                element.removeChild(element.children[index]);
+                var child = element.children[index];
+                unbindElementTree(child);
+                element.removeChild(child);
             }
         },
 
@@ -523,6 +524,8 @@ kendo_module({
             }
 
             if (this.bindings.template) {
+                unbindElementChildren(element);
+
                 $(element).html(this.bindings.template.render(source));
 
                 if (element.children.length) {
@@ -1405,14 +1408,16 @@ kendo_module({
     }
 
     function unbindElementTree(element) {
-        var idx,
-            length,
-            children = element.children;
-
         unbindElement(element);
 
+        unbindElementChildren(element);
+    }
+
+    function unbindElementChildren(element) {
+        var children = element.children;
+
         if (children) {
-            for (idx = 0, length = children.length; idx < length; idx++) {
+            for (var idx = 0, length = children.length; idx < length; idx++) {
                 unbindElementTree(children[idx]);
             }
         }
