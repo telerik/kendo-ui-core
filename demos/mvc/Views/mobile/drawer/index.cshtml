@@ -1,0 +1,30 @@
+<div data-role="view" id="drawer-home" data-layout="drawer-layout" data-title="So/Lo/Mo">
+    <h1>Welcome to So/Lo/Mo</h1>
+</div>
+
+<div data-role="view" id="drawer-settings" data-layout="drawer-layout" data-title="Settings">
+    <h1>So/Lo/Mo Settings</h1>
+</div>
+
+<div data-role="drawer" id="my-drawer" style="width: 150px">
+    <ul data-role="listview" data-style="inset">
+        <li><a href="#drawer-home">Home</a></li>
+        <li><a href="#drawer-settings">Settings</a></li>
+    </ul>
+</div>
+
+<div data-role="layout" data-id="drawer-layout">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+</div>
+
+<style>
+    .km-drawer-button:before,
+    .km-drawer-button:after  {
+        content: "\E0F1";
+    }
+</style>

@@ -99,6 +99,20 @@
             ]
         },
         {
+            "text": "Drawer",
+            "name": "drawer",
+            "documentation": "mobile/drawer",
+            "spriteCssClass": "mobileDrawerIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "drawer/index.html",
+                    "title": "Example of Kendo UI Mobile Drawer",
+                    "meta": "This demo shows the core functionality of Kendo UI Mobile Drawer. When the user swipes the screen to the right or taps the top button, the drawer widget is revealed"
+                }
+            ]
+        },
+        {
             "text": "ListView",
             "name": "listview",
             "documentation": "mobile/listview",
