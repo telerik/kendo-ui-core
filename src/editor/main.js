@@ -41,7 +41,7 @@ kendo_module({
     var EditorUtils = {
         editorWrapperTemplate:
             '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header" role="presentation"><tbody>' +
-                '<tr role="presentation"><td class="k-editor-toolbar-wrap" role="presentation"><ul class="k-editor-toolbar" role="toolbar"></ul></td></tr>' +
+                '<tr role="presentation"><td class="k-editor-toolbar-wrap k-secondary" role="presentation"><ul class="k-editor-toolbar" role="toolbar"></ul></td></tr>' +
                 '<tr><td class="k-editable-area"></td></tr>' +
             '</tbody></table>',
 
