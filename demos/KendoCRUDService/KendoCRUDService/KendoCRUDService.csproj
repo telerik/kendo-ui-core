@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ImageBrowserController.cs" />
@@ -141,6 +142,8 @@
     </Compile>
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductRepository.cs" />
+    <Compile Include="Models\Scheduler\EventModel.cs" />
+    <Compile Include="Models\Scheduler\EventsRepository.cs" />
     <Compile Include="Models\StockData\BaseUnit.cs" />
     <Compile Include="Models\StockData\DataFilter.cs" />
     <Compile Include="Models\StockData\StockDataPoint.cs" />
