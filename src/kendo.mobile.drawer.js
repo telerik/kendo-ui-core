@@ -26,6 +26,10 @@ kendo_module({
                 drawer._viewShow(e);
             });
 
+            this.pane.bind("sameViewRequested", function(e) {
+                drawer.hide();
+            });
+
             this.userEvents = new kendo.UserEvents(this.pane.element, {
                 filter: roleSelector("view"),
                 start: function(e) { drawer._start(e); },
@@ -96,6 +100,7 @@ kendo_module({
                 currentOffset = this.movable && this.movable.x;
 
             if (this.currentView === e.view) {
+                this.hide();
                 return;
             }
 
@@ -107,7 +112,7 @@ kendo_module({
 
             if (currentOffset) {
                 this.movable.moveAxis(AXIS, currentOffset);
-                drawer.hide();
+                this.hide();
             }
         },
 

@@ -421,6 +421,7 @@ kendo_module({
         LOAD_START = "loadStart",
         LOAD_COMPLETE = "loadComplete",
         SHOW_START = "showStart",
+        SAME_VIEW_REQUESTED = "sameViewRequested",
         VIEW_SHOW = "viewShow";
 
     function urlParams(url) {
@@ -477,6 +478,7 @@ kendo_module({
 
         showView: function(url, transition) {
             if (url === this.url) {
+                this.trigger(SAME_VIEW_REQUESTED);
                 return;
             }
 

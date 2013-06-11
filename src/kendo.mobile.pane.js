@@ -22,6 +22,7 @@ kendo_module({
 
         NAVIGATE = "navigate",
         VIEW_SHOW = "viewShow",
+        SAME_VIEW_REQUESTED = "sameViewRequested",
 
         WIDGET_RELS = /popover|actionsheet|modalview|drawer/,
         BACK = "#:back",
@@ -65,6 +66,10 @@ kendo_module({
                 that.trigger(VIEW_SHOW, e);
             });
 
+            that.viewEngine.bind(SAME_VIEW_REQUESTED, function(e) {
+                that.trigger(SAME_VIEW_REQUESTED, e);
+            });
+
             that.viewEngine.bind("viewTypeDetermined", function(e) {
                 if (!e.remote || !that.options.serverNavigation)  {
                     that.trigger(NAVIGATE, { url: e.url });
@@ -90,7 +95,8 @@ kendo_module({
 
         events: [
             NAVIGATE,
-            VIEW_SHOW
+            VIEW_SHOW,
+            SAME_VIEW_REQUESTED
         ],
 
         destroy: function() {
