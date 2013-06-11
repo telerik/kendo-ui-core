@@ -34,11 +34,7 @@ kendo_module({
 
         getHtml: function() {
             var options = this.options;
-            return kendo.template(options.template)({
-                cssClass: options.cssClass,
-                tooltip: options.title,
-                initialValue: options.initialValue
-            });
+            return kendo.template(options.template, {useWithBlock:false})(options);
         }
     });
 
@@ -51,20 +47,22 @@ kendo_module({
 
         buttonTemplate:
             '<li class="k-editor-button" role="presentation">' +
-                '<a href="" role="button" class="k-tool-icon #= cssClass #" unselectable="on" title="#= tooltip #">#= tooltip #</a>' +
+                '<a href="" role="button" class="k-tool-icon #= data.cssClass #"' +
+                '#= data.popup ? " data-popup" : "" #' +
+                ' unselectable="on" title="#= data.title #">#= data.title #</a>' +
             '</li>',
 
         colorPickerTemplate:
-            '<li class="k-editor-colorpicker" role="presentation"><div class="k-colorpicker #= cssClass #"></div></li>',
+            '<li class="k-editor-colorpicker" role="presentation"><div class="k-colorpicker #= data.cssClass #"></div></li>',
 
         comboBoxTemplate:
             '<li class="k-editor-combobox">' +
-                '<select title="#= tooltip #" class="#= cssClass #"></select>' +
+                '<select title="#= data.title #" class="#= data.cssClass #"></select>' +
             '</li>',
 
         dropDownListTemplate:
             '<li class="k-editor-selectbox">' +
-                '<select title="#= tooltip #" class="#= cssClass #"></select>' +
+                '<select title="#= data.title #" class="#= data.cssClass #"></select>' +
             '</li>',
 
         separatorTemplate:
@@ -379,7 +377,7 @@ kendo_module({
                             editorTools[currentTool.name] = this.tools[currentTool.name];
                             options = editorTools[currentTool.name].options;
                         } else {
-                            options = extend({ cssClass: "k-i-custom", type: "button", tooltip: "" }, currentTool);
+                            options = extend({ cssClass: "k-i-custom", type: "button", title: "" }, currentTool);
 
                             if (options.name) {
                                 options.cssClass = "k-" + (options.name == "custom" ? "i-custom" : options.name);
@@ -485,10 +483,13 @@ kendo_module({
                     }
                 })
                 .on("click" + NS, enabledButtons, function(e) {
+                    var button = $(this);
                     e.preventDefault();
                     e.stopPropagation();
-                    $(this).removeClass("k-state-hover");
-                    that.options.editor.exec(that._toolFromClassName(this));
+                    button.removeClass("k-state-hover");
+                    if (!button.is("[data-popup]")) {
+                        that.options.editor.exec(that._toolFromClassName(this));
+                    }
                 })
                 .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); });
 
@@ -627,6 +628,7 @@ kendo_module({
         },
 
         _selectionChange: function() {
+            this._selectionStarted = false;
             this.saveSelection();
             this.trigger("select", {});
         },
@@ -681,6 +683,10 @@ kendo_module({
                         "ul,ol{padding-left:2.5em}" +
                         "a{color:#00a}" +
                         "code{font-size:1.23em}" +
+                        ".k-table{width:100%;}" +
+                        ".k-table td{min-width:1px;}" +
+                        ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
+                        ".k-table p{margin:0;padding:0;}" +
                     "</style>" +
                     $.map(stylesheets, function(href){
                         return "<link rel='stylesheet' href='" + href + "'>";
@@ -822,6 +828,8 @@ kendo_module({
                 .on("mousedown" + NS, function(e) {
                     editor.pendingFormats.clear();
 
+                    editor._selectionStarted = true;
+
                     var target = $(e.target);
 
                     if (!browser.gecko && e.which == 2 && target.is("a[href]")) {
@@ -857,9 +865,11 @@ kendo_module({
         _mouseup: function() {
             var that = this;
 
-            setTimeout(function() {
-                that._selectionChange();
-            }, 1);
+            if (that._selectionStarted) {
+                setTimeout(function() {
+                    that._selectionChange();
+                }, 1);
+            }
         },
 
 
@@ -944,7 +954,8 @@ kendo_module({
                 "formatBlock",
                 "createLink",
                 "unlink",
-                "insertImage"/*,
+                "insertImage",
+                "createTable"/*,
                 "separator", // declare these explicitly
                 "style",
                 "subscript",
@@ -1060,8 +1071,10 @@ kendo_module({
 
         saveSelection: function(range) {
             range = range || this.getRange();
+            var container = range.commonAncestorContainer,
+                body = this.body;
 
-            if ($.contains(this.body, range.commonAncestorContainer)) {
+            if (container == body || $.contains(body, container)) {
                 this.selectionRestorePoint = new kendo.ui.editor.RestorePoint(range);
             }
         },

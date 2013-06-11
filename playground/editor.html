@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>Editor playground</title>
 
-    <meta name="viewport" content="width=device-width;user-scalable=1;initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,user-scalable=1,initial-scale=1.0" />
 
     <link rel="stylesheet/less" href="../styles/web/kendo.common.less" />
     <link rel="stylesheet/less" href="../styles/web/kendo.default.less">
@@ -24,7 +24,25 @@
     <!-- <script src="../src/kendo.combobox.js"></script> -->
     <!-- <script src="../src/kendo.fx.js"></script> -->
     <!-- <script src="../src/kendo.window.js"></script> -->
-    <script src="../src/kendo.editor.js"></script>
+
+    <!-- <script src="../src/kendo.editor.js"></script> -->
+
+    <script src="../src/editor/main.js"></script>
+    <script src="../src/editor/dom.js"></script>
+    <script src="../src/editor/serializer.js"></script>
+    <script src="../src/editor/range.js"></script>
+    <script src="../src/editor/system.js"></script>
+    <script src="../src/editor/inlineformat.js"></script>
+    <script src="../src/editor/formatblock.js"></script>
+    <script src="../src/editor/linebreak.js"></script>
+    <script src="../src/editor/lists.js"></script>
+    <script src="../src/editor/link.js"></script>
+    <script src="../src/editor/image.js"></script>
+    <script src="../src/editor/components.js"></script>
+    <script src="../src/editor/indent.js"></script>
+    <script src="../src/editor/viewhtml.js"></script>
+    <script src="../src/editor/pendingformats.js"></script>
+    <script src="../src/editor/tables.js"></script>
 
     <style>
         html, body {
@@ -34,18 +52,25 @@
         #content {
             white-space: pre;
             font-family: Consolas,monospace;
-            word-break: break-all;
+            word-break: break-word;
+        }
+
+        #page {
+            width: 800px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <textarea id="comment" style="width: 400px; height: 200px;"></textarea>
+    <div id="page">
+        <textarea id="comment" style="height: 200px;"></textarea>
 
-    <div id="content"></div>
+        <div id="content"></div>
+    </div>
 
     <script>
         var editor = $("#comment")
-            .val("<label>Stephen</label><blockquote><p>Puppies and kittens.</p><p>Sunshine and rainbows</p></blockquote><p></p>")
+            .val("<p>foo bar baz</p>")
             .kendoEditor({
                 select: function(e) {
                     $("#content").text(this.value());

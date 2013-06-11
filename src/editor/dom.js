@@ -567,6 +567,26 @@ var Dom = {
             output = first;
         }
         return output;
+    },
+
+    closestSplittableParent: function(nodes) {
+        var result;
+
+        if (nodes.length == 1) {
+            result = Dom.parentOfType(nodes[0], ["ul","ol"]);
+        } else {
+            result = Dom.commonAncestor.apply(null, nodes);
+        }
+
+        if (!result) {
+            result = Dom.parentOfType(nodes[0], ["p", "td"]) || nodes[0].ownerDocument.body;
+        }
+
+        if (Dom.isInline(result)) {
+            result = Dom.blockParentOrBody(result);
+        }
+
+        return result;
     }
 };
 

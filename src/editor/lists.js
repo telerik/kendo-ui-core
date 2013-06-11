@@ -202,21 +202,7 @@ var ListFormatter = Class.extend({
 
     applyOnSection: function (section, nodes) {
         var tag = this.tag,
-            commonAncestor;
-
-        if (nodes.length == 1) {
-            commonAncestor = dom.parentOfType(nodes[0], ["ul","ol"]);
-        } else {
-            commonAncestor = dom.commonAncestor.apply(null, nodes);
-        }
-
-        if (!commonAncestor) {
-            commonAncestor = dom.parentOfType(nodes[0], ["p", "td"]) || nodes[0].ownerDocument.body;
-        }
-
-        if (dom.isInline(commonAncestor)) {
-            commonAncestor = dom.blockParentOrBody(commonAncestor);
-        }
+            commonAncestor = dom.closestSplittableParent(nodes);
 
         var ancestors = [];
 

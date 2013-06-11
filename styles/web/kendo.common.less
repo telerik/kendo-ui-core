@@ -3084,6 +3084,22 @@ table.k-editor
 .k-subscript.k-state-hover { background-position: -138px -154px; }
 .k-superscript { background-position: -112px -176px; }
 .k-superscript.k-state-hover { background-position: -138px -176px; }
+.k-createTable { background-position: -192px 0; }
+.k-createTable.k-state-hover { background-position: -218px 0; }
+.k-add-row-left { background-position: -192px -22px; }
+.k-add-row-left.k-state-hover { background-position: -218px -22px; }
+.k-add-row-right { background-position: -192px -44px; }
+.k-add-row-right.k-state-hover { background-position: -218px -44px; }
+.k-add-row-above { background-position: -192px -66px; }
+.k-add-row-above.k-state-hover { background-position: -218px -66px; }
+.k-add-row-below { background-position: -192px -88px; }
+.k-add-row-below.k-state-hover { background-position: -218px -88px; }
+.k-delete-row { background-position: -192px -110px; }
+.k-delete-row.k-state-hover { background-position: -218px -110px; }
+.k-delete-column { background-position: -192px -132px; }
+.k-delete-column.k-state-hover { background-position: -218px -132px; }
+.k-merge-cells { background-position: -192px -154px; }
+.k-merge-cells.k-state-hover { background-position: -218px -154px; }
 
 /* default tool widths */
 .k-fontName { width: 110px; }
@@ -3237,6 +3253,27 @@ table.k-editor
 
 .k-button-wrapper .k-link:hover {
     text-decoration: underline;
+}
+
+@editor-createTable-cellSize: 18px;
+
+.k-ct-popup {
+    width: 8 * (@editor-createTable-cellSize + 6);
+    padding: .65em .5em .5em;
+}
+
+.k-ct-popup .k-status {
+    margin: .3em 0;
+}
+
+.k-ct-cell {
+    border-width: 1px;
+    border-style: solid;
+    width: @editor-createTable-cellSize;
+    height: @editor-createTable-cellSize;
+    margin: 0 2px 2px;
+    display: inline-block;
+    overflow: hidden;
 }
 
 /* Slider */
