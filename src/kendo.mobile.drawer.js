@@ -158,22 +158,20 @@ kendo_module({
 
         _end: function(e) {
             var velocity = e.x.velocity,
-                movable = this.movable,
-                width = this.element.width(),
-                velocityThreshold = 0.8;
+                pastHalf = Math.abs(this.movable.x) > this.element.width() / 2,
+                velocityThreshold = 0.8,
+                shouldShow;
 
             if (this.leftPositioned) {
-                if (velocity > -velocityThreshold && (velocity > velocityThreshold || movable.x > width / 2)) {
-                    this.show();
-                } else {
-                    this.hide();
-                }
+                shouldShow = velocity > -velocityThreshold && (velocity > velocityThreshold || pastHalf);
             } else {
-                if (velocity < velocityThreshold && (velocity < -velocityThreshold || movable.x < -width / 2)) {
-                    this.show();
-                } else {
-                    this.hide();
-                }
+                shouldShow = velocity < velocityThreshold && (velocity < -velocityThreshold || pastHalf);
+            }
+
+            if(shouldShow) {
+                this.show();
+            } else {
+                this.hide();
             }
         }
     });
