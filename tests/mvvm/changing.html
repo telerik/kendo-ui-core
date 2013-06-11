@@ -653,6 +653,42 @@
                 equal(templateEvaluationCounter, 1);
             });
 
+            test("refreshing the source destroys the binder objects", 1, function() {
+                var dom = $('<div data-template="custom-binder-template" data-bind="source:this" />');
+
+                var viewModel = kendo.observable({ foo: "foo" });
+
+                kendo.data.binders.custom = kendo.data.Binder.extend({
+                    refresh: function() {
+                    },
+                    destroy: function() {
+                        ok(true);
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo", "baz");
+            });
+
+            test("removing an item from the source destroys the binder objects", 1, function() {
+                var dom = $('<div data-template="custom-binder-template" data-bind="source:foo" />');
+
+                var viewModel = kendo.observable({ foo: [ {} ] });
+
+                kendo.data.binders.custom = kendo.data.Binder.extend({
+                    refresh: function() {
+                    },
+                    destroy: function() {
+                        ok(true);
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo.splice(0, 1);
+            });
+
             test("does not attach multiple event handlers to nested object", function() {
                 var parent = kendo.observable({});
                 var child = kendo.observable({});
@@ -1016,6 +1052,10 @@
         <script id="counting-template" type="text/x-kendo-template">
             # templateEvaluationCounter ++; #
             #= get("foo") #
+        </script>
+
+        <script id="custom-binder-template" type="text/x-kendo-template">
+            <span data-bind="custom: this"></span>
         </script>
 
         <script id="if-else-template" type="text/x-kendo-template">

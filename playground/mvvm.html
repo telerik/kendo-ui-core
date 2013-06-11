@@ -56,20 +56,40 @@
     </head>
     <body>
 
-        <select data-role="dropdownlist" data-value-field="id" data-text-field="value" data-bind="value: selectedValue, source: options"></select>
+        <button data-bind="click: setDataItem">click</button>
+
+        <div data-bind="source:this" data-template="template"></div>
+
+        <script id="template" type="text/foo">
+            <div>
+                <label data-bind="shortText: item.value"></value>
+            </div>
+        </script>
 
         <script>
-            var viewModel = new kendo.observable({
-                selectedValue: 2,
-                options: [
-                { id: 1, value: "red" },
-                { id: 2, value: "blue" },
-                { id: 3, value: "green" },
-                ]
+            var viewModel = kendo.observable({
+                item: {},
+                blank: {},
+                items: new kendo.data.DataSource({
+                    data: [
+                        { text: "1", value: "1" }
+                    ]
+                }),
+                setDataItem: function() {
+                    this.set("item", this.blank);
+                    this.set("item", this.items.data()[0]);
+                }
             });
 
+            viewModel.items.read();
 
-            kendo.bind(document.body, viewModel); //Doesn't work here
+            kendo.data.binders.shortText = kendo.data.Binder.extend({
+                refresh: function() {
+                    console.log("binding refresh");
+                }
+            });
+
+            kendo.bind(document.body, viewModel);
 
         </script>
     </body>
