@@ -37,7 +37,7 @@
                     lineBox: function() { return new Box2D(300, 100, 300, 300); }
                 };
 
-                axis = new dataviz.PolarNumericAxis(options);
+                axis = new dataviz.PolarAxis(options);
                 axis.reflow(chartBox);
                 axis.plotArea = {
                     options: {},
@@ -46,6 +46,10 @@
 
                 view = new ViewStub();
                 axis.getViewElements(view);
+            }
+
+            function lineEnd(line) {
+                return new Point2D(line.x2, line.y2);
             }
 
             // ------------------------------------------------------------
@@ -164,18 +168,18 @@
             });
 
             // ------------------------------------------------------------
-            module("Polar Numeric Axis / Divisions", {
+            module("Polar Numeric Axis / Intervals", {
                 setup: function() {
                     createAxis();
                 }
             });
 
-            test("major divisions in normal order", function() {
-                deepEqual(axis.majorDivisions(), [ 0, 60, 120, 180, 240, 300 ]);
+            test("major intervals in normal order", function() {
+                deepEqual(axis.majorIntervals(), [ 0, 60, 120, 180, 240, 300 ]);
             });
 
-            test("minor divisions in normal order", function() {
-                deepEqual(axis.minorDivisions(),
+            test("minor intervals in normal order", function() {
+                deepEqual(axis.minorIntervals(),
                     [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330 ]);
             });
 
@@ -466,6 +470,28 @@
                 axis.renderGridLines(view, altAxis);
 
                 equal(view.log.line[0].options.strokeWidth, 4);
+            });
+
+            // ------------------------------------------------------------
+            module("Polar Numeric Axis / Grid lines / startAngle", {
+                setup: function() {
+                    createAxis({ startAngle: 10 });
+                    axis.renderGridLines(view, altAxis);
+                }
+            });
+
+            test("major grid lines are offset with start angle", function() {
+                var ref = Point2D.onCircle(center, 350, 200),
+                    end = lineEnd(view.log.line[0]);
+
+                ok(ref.equals(end));
+            });
+
+            test("renders 90 degree grid line as it no longer overlaps the value axis", function() {
+                createAxis({ majorUnit: 90, startAngle: 10 });
+                axis.renderGridLines(view, altAxis);
+
+                equal(view.log.line.length, 4);
             });
 
             // ------------------------------------------------------------

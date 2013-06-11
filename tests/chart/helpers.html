@@ -18,6 +18,7 @@
         <script src="util.js"></script>
         <script>
             var dataviz = kendo.dataviz,
+                getSpacing = dataviz.getSpacing,
                 Chart = dataviz.ui.Chart,
                 Box2D = dataviz.Box2D,
                 Point2D = dataviz.Point2D,
@@ -1244,6 +1245,22 @@
                 });
 
             })();
+
+            // ------------------------------------------------------------
+            module("Misc");
+
+            test("getSpacing expands single value", function() {
+                deepEqual(getSpacing(1), { top: 1, left: 1, right: 1, bottom: 1 });
+            });
+
+            test("getSpacing replaces missing values with 0", function() {
+                deepEqual(getSpacing({ top: 1 }), { top: 1, left: 0, right: 0, bottom: 0 });
+            });
+
+            test("getSpacing replaces missing values with default", function() {
+                deepEqual(getSpacing({ top: 1 }, 2), { top: 1, left: 2, right: 2, bottom: 2 });
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

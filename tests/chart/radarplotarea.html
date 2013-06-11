@@ -24,7 +24,6 @@
             var dataviz = kendo.dataviz,
                 getElement = dataviz.getElement,
                 Box2D = dataviz.Box2D,
-                chartBox = new Box2D(100, 100, 1000, 1000),
                 plotArea,
                 categoryAxis,
                 valueAxis;
@@ -68,6 +67,38 @@
                 createPlotArea([{ type: "radarColumn", data: [], name: "Foo" }]);
 
                 equal(plotArea.options.legend.items.length, 1);
+            });
+
+
+            // ------------------------------------------------------------
+            module("Radar Plot Area / Configuration");
+
+            test("default axisBox padding is 15% of smallest dimension", function() {
+                createPlotArea([{ type: "radarColumn", data: [] }]);
+                plotArea.reflow(new Box2D(0, 0, 100, 200));
+
+                equal(plotArea.axisBox.width(), 70);
+                equal(plotArea.axisBox.height(), 170);
+            });
+
+            test("default axisBox padding can be overriden", function() {
+                createPlotArea([{ type: "radarColumn", data: [] }], {
+                    plotArea: { padding: 10 }
+                });
+                plotArea.reflow(new Box2D(0, 0, 100, 200));
+
+                equal(plotArea.axisBox.width(), 80);
+                equal(plotArea.axisBox.height(), 180);
+            });
+
+            test("default axisBox padding can be overriden (partial)", function() {
+                createPlotArea([{ type: "radarColumn", data: [] }], {
+                    plotArea: { padding: { top: 10 } }
+                });
+                plotArea.reflow(new Box2D(0, 0, 100, 200));
+
+                equal(plotArea.axisBox.width(), 70);
+                equal(plotArea.axisBox.height(), 175);
             });
 
             (function() {

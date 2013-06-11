@@ -16,18 +16,9 @@
         <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet"></script>
     </head>
     <body>
-        <div id="chart" style="width: 600px; height: 300px;"></div>
-        <div id="pie" style="width: 600px; height: 300px;"></div>
+        <div id="chart" style="width: 300px; height: 300px; float: left;"></div>
         <script>
             $(function() {
-                // TODO
-                // Legend!?
-                // Radar area - close area
-                // Stacked radar area charts
-                // Animations - expand outwards
-                // Axis names for polar charts
-                // Value axis crosshair: Note that it's not supported in docs
-
                 $("#___chart").kendoChart({
                     seriesDefaults: {
                         // TODO: Apply
@@ -60,26 +51,6 @@
                         //reverse: true
                         //startAngle: 90 // default
                     },
-                    valueAxis: {
-                        majorGridLines: {
-                            // TODO: Default to "arc" for radarColumn charts?
-                            //type: "arc"
-                        },
-                        minorGridLines: {
-                            //type: "arc"
-                        },
-                        _plotBands: [{
-                            from: 4, to: 10,
-                            color: "red",
-                            opacity: 0.5
-                        }],
-                        minorUnit: 1
-                        // TODO: Support
-                        //reverse: true
-
-                        // TODO: Round to major unit
-                        // max: 9
-                    },
                     plotArea: {
                         background: "green",
                         opacity: 0.1
@@ -91,53 +62,7 @@
                     }
                 });
 
-                $("#___chart").kendoChart({
-                    series: [{
-                        // polarArea
-                        // polarScatter
-                        // polarLine
-
-                        type: "polarLine",
-                        //stack: true,
-                        data: [[0, 10], [45, 20], [90, 30],
-                               [135, 40], [180, 50], [225, 60],
-                               [270, 70], [315, 80]
-                        ],
-                        //color: "red",
-                        //opacity: 0.5,
-                        markers: {
-                            //visible: false
-                        }
-                    }],
-                    // TODO: Use xAxis to avoid confusion?
-                    polarAxis: {
-                        // reverse: true,
-                        // startAngle: 180,
-                        // gridLines
-                        // plotBands
-                        labels: {
-                            margin: 5
-                        },
-                        plotBands: [{
-                            from: 60,
-                            to: 120,
-                            opacity: 0.5,
-                            color: "red"
-                        }]
-                    },
-                    valueAxis: {
-                        minorUnit: 5
-                    },
-                    plotArea: {
-                    },
-                    // TODO: Implement
-                    transitions: false,
-                    tooltip: {
-                        visible: true
-                    }
-                });
-
-                $("#__chart").kendoChart({
+                $("#chart").kendoChart({
                     series: [{
                         data: [1, 2, 3],
                         type: "radarLine"
@@ -147,37 +72,6 @@
                             // TODO: Limit length
                             //visible: true
                         },
-                        __categories: ["A", "B", "C"],
-                        reverse: true
-                    },
-                    valueAxis: {
-                        majorUnit: 1
-                    },
-                    plotAreaClick: function(e) {
-                        console.log(e);
-                    }
-                });
-
-                $("#chart").kendoChart({
-                    series: [{
-                        type: "polarLine"
-                    }],
-                    plotAreaClick: function(e) {
-                        console.log(e.x, e.y);
-                    }
-                });
-
-                $("#pie").kendoChart({
-                    series: [{
-                        type: "pie",
-                        data: [1, 2, 3]
-                    }],
-                    plotArea: {
-                        background: "green",
-                        opacity: 0.1
-                    },
-                    tooltip: {
-                        visible: true
                     }
                 });
             });
