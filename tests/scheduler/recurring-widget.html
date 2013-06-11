@@ -138,8 +138,8 @@
 
                 ok(numerics.length);
                 equal(numerics.eq(0).attr("data-bind"), "value: interval");
-                equal(numerics.eq(1).attr("data-bind"), "value: count");
-                equal(numerics.eq(2).attr("data-bind"), "value: until");
+                equal(numerics.eq(1).attr("data-bind"), "value: count, disabled: disableCount");
+                equal(numerics.eq(2).attr("data-bind"), "value: until, disabled: disableUntil");
                 equal(radioButtons.length, 3);
             });
 
@@ -150,19 +150,6 @@
                 var container = div.find(".k-recurring-view");
 
                 equal(container.text(), "");
-            });
-
-            test("_toggleEndInputs disables inputs depending on checked radio", function() {
-                var editor = new RecurrenceEditor(div);
-
-                editor.setView("daily");
-                editor._toggleEndInputs("count");
-
-                var container = div.find(".k-recurrence-end"),
-                    inputs = container.find("[data-role]");
-
-                equal(inputs.eq(0).prop("disabled"), false);
-                equal(inputs.eq(1).prop("disabled"), true);
             });
 
             test("All end inputs are disabled if never radio is checked", function() {

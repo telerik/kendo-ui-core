@@ -51,11 +51,15 @@ kendo_module({
         ],
         RULE_NAMES = ["months", "weeks", "yearDays", "monthDays", "weekDays", "hours", "minutes", "seconds"],
         RULE_NAMES_LENGTH = RULE_NAMES.length,
-        END_TEMPLATE_HTML = '<div class="k-recurrence-end"><div class="k-edit-label"><label>End:</label></div>' +
-                            '<div class="k-edit-field"><input type="radio" name="end" value="never" data-bind="checked: endChecked" />Never</div>' +
-                            '<div class="k-edit-label"></div>' +
-                            '<div class="k-edit-field"><input type="radio" name="end" value="count" data-bind="checked: endChecked" />After<input data-role="numerictextbox" data-bind="value: count" /> occurrance(s)</div>' +
-                            '<div class="k-edit-label"></div><div class="k-edit-field"><input type="radio" name="end" value="until" data-bind="checked: endChecked" />On <input data-role="datepicker" data-bind="value: until" /></div></div>',
+        END_TEMPLATE_HTML = '<div class="k-recurrence-end">' +
+                                '<div class="k-edit-label"><label>End:</label></div>' +
+                                '<div class="k-edit-field"><input type="radio" name="end" value="" data-bind="checked: endRuleValue" />Never</div>' +
+                                '<div class="k-edit-label"></div>' +
+                                '<div class="k-edit-field"><input type="radio" name="end" value="count" data-bind="checked: endRuleValue" />' +
+                                'After<input data-role="numerictextbox" data-bind="value: count, disabled: disableCount" /> occurrance(s)</div>' +
+                                '<div class="k-edit-label"></div><div class="k-edit-field"><input type="radio" name="end" value="until" data-bind="checked: endRuleValue" />' +
+                                'On <input data-role="datepicker" data-bind="value: until, disabled: disableUntil" /></div>' +
+                            '</div>',
         limitation = {
             months: function(date, end, rule) {
                 var monthRules = rule.months,
@@ -987,68 +991,45 @@ kendo_module({
         },
 
         setView: function(viewName) {
-            var html = defaultViews[viewName];
+            var container = this.container,
+                html = defaultViews[viewName] || "";
 
-            kendo.destroy(this.container);
-            this.container.html(html || "");
+            kendo.destroy(container);
+            container.html(html);
 
-            if (html) {
-                kendo.bind(this.container, this.model);
-                if (!this.model.endChecked) {
-                    this.model.set("endChecked", "never");
-                }
-            }
+            kendo.bind(container, this.model);
         },
 
         _model: function() {
             var that = this,
                 model = kendo.observable({
-                freq: "",
-                interval: 1
-            });
+                    interval: 1,
+                    freq: "",
+                    endRuleValue: "",
+                    disableCount: function() {
+                        if (model.get("endRuleValue") !== "count") {
+                            model.set("count", "");
+                            return true;
+                        }
+                        return false;
+                    },
+                    disableUntil: function(e) {
+                        if (model.get("endRuleValue") !== "until") {
+                            model.set("until", "");
+                            return true;
+                        }
+                        return false;
+                    }
+                });
 
             model.bind("change", function(e) {
                 if (e.field === "freq") {
                     that.setView(model.get("freq"));
                 }
-
-                if (e.field === "endChecked") {
-                    that._toggleEndInputs(model.endChecked);
-                }
             });
 
             that.model = model;
             kendo.bind(this.element, model);
-        },
-
-        _toggleEndInputs: function(value) {
-            var inputs = this.container.children(".k-recurrence-end").find("input[data-role]"),
-                role, enable,
-                input;
-
-            value = "value: " + value;
-
-            for (var idx = 0, length = inputs.length; idx < length; idx++) {
-                input = inputs.eq(idx);
-                role = roles[input.attr(kendo.attr("role"))];
-                enable = input.attr("data-bind") === value;
-
-                if (role) {
-                    input = input.data(role);
-
-                    input.enable(enable);
-                    if (!enable) {
-                        input.value("");
-                        input.trigger("change");
-                    }
-                } else {
-                    input.prop("disabled", enable);
-                    if (!enable) {
-                        input.val("");
-                        input.trigger("change");
-                    }
-                }
-            }
         },
 
         //rendering
