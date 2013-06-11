@@ -14,7 +14,7 @@ kendo_module({
         extend = $.extend,
         proxy = $.proxy,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
-        DAY_TEMPLATE = kendo.template('<span>#=kendo.toString(data, "dd")#</span>'),
+        DAY_TEMPLATE = kendo.template('<span class="k-link k-nav-day">#=kendo.toString(data, "dd")#</span>'),
         EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                 'style="background-color:#=resources[0].color #"' +
@@ -30,13 +30,15 @@ kendo_module({
 
     ui.MonthView = SchedulerView.extend({
         init: function(element, options) {
-            SchedulerView.fn.init.call(this, element, options);
+            var that = this;
 
-            this.title = this.name = this.options.title;
+            SchedulerView.fn.init.call(that, element, options);
 
-            this.eventTemplate = this._eventTmpl(this.options.eventTemplate);
+            that.title = that.name = that.options.title;
 
-            this._editable();
+            that.eventTemplate = that._eventTmpl(that.options.eventTemplate);
+
+            that._editable();
         },
 
         dateForTitle: function() {
@@ -52,6 +54,8 @@ kendo_module({
         },
 
         renderLayout: function(date, resources) {
+            var that = this;
+
             this._resources = resources;
 
             this._firstDayOfMonth = kendo.date.firstDayOfMonth(date);
@@ -66,7 +70,13 @@ kendo_module({
 
             this._content();
 
-            this.refreshLayout();
+            this.refreshLayout()
+
+            this.content.on("click" + NS, ".k-nav-day", function(e) {
+               var cell = $(e.currentTarget).closest("td");
+               that.trigger("navigate", { view: "day", date: that._rangeToDates(cell).start });
+            });
+
         },
 
         _editable: function() {
@@ -336,10 +346,14 @@ kendo_module({
                 this.table.removeClass("k-scheduler-monthview");
             }
 
+            if (this.content) {
+                this.content.off(NS);
+            }
+
             SchedulerView.fn.destroy.call(this);
         },
 
-        events: ["remove", "add", "edit"],
+        events: ["remove", "add", "edit", "navigate"],
 
         options: {
             title: "Month",

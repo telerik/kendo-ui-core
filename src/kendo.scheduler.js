@@ -681,14 +681,26 @@ kendo_module({
                 };
 
                 view.bind(EDIT, this._viewEditHandler);
+
+                if (that._viewNavigateHandler) {
+                    view.unbind("navigate", that._viewNavigateHandler);
+                }
+
+                that._viewNavigateHandler = function(e) {
+                    if (e.view) {
+                        that._selectView(e.view);
+                        that.selectDate(e.date);
+                    }
+                };
+
+                view.bind("navigate", that._viewNavigateHandler);
             }
         },
 
-        view: function(name) {
+        _selectView: function(name) {
             var that = this;
 
-            if (name) {
-
+            if (name && that.views[name]) {
                 if (that._selectedViewName !== name) {
                     that._unbindView(that.views[that._selectedViewName]);
                 }
@@ -703,6 +715,15 @@ kendo_module({
                     .end()
                     .find(".k-view-" + name)
                     .addClass("k-state-selected");
+            }
+        },
+
+        view: function(name) {
+            var that = this;
+
+            if (name) {
+
+                that._selectView(name);
 
                 that.rebind();
 

@@ -389,6 +389,54 @@
                     });
             });
 
+            test("view is called when navigate is triggered", function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "view1",
+                        dateForTitle: $.noop,
+                        renderEvents: $.noop,
+                        renderLayout: $.noop
+                    }),
+                    MyCustomView2 = kendo.ui.SchedulerView.extend({
+                        name: "view2",
+                        dateForTitle: $.noop,
+                        renderEvents: $.noop,
+                        renderLayout: $.noop
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView, MyCustomView2],
+                        dataSource: { }
+                    });
+
+                scheduler.view().trigger("navigate", { view: "view2", date: new Date(2013, 1, 2) });
+
+                equal(scheduler.view().name, "view2");
+                equal(scheduler.selectDate().getTime(), new Date(2013, 1, 2).getTime());
+            });
+
+            test("rebind is called once when navigating between views", function() {
+
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "view1",
+                        dateForTitle: $.noop,
+                        renderEvents: $.noop,
+                        renderLayout: $.noop
+                    }),
+                    MyCustomView2 = kendo.ui.SchedulerView.extend({
+                        name: "view2",
+                        dateForTitle: $.noop,
+                        renderEvents: $.noop,
+                        renderLayout: $.noop
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView, MyCustomView2],
+                        dataSource: { }
+                    }),
+                    rebindStub = stub(scheduler, "rebind");
+
+                scheduler.view().trigger("navigate", { view: "view2", date: new Date(2013, 1, 2) });
+
+                equal(rebindStub.calls("rebind"), 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

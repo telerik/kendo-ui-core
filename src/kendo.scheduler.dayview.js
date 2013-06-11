@@ -27,7 +27,7 @@ kendo_module({
         DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t}", start)#): #=title#">' +
                     '<dl><dd>${title}</dd></dl>' +
                 '</div>'),
-        DATA_HEADER_TEMPLATE = kendo.template("#=kendo.toString(date, 'ddd M/dd')#"),
+        DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
         EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                 'style="background-color:#=resources[0].color #"' +
@@ -70,15 +70,18 @@ kendo_module({
 
     var MultiDayView = SchedulerView.extend({
         init: function(element, options) {
-            SchedulerView.fn.init.call(this, element, options);
+            var that = this;
 
-            this.title = this.options.title || this.options.name;
+            SchedulerView.fn.init.call(that, element, options);
 
-            this.eventTemplate = this._eventTmpl(this.options.eventTemplate);
-            this.allDayEventTemplate = this._eventTmpl(this.options.allDayEventTemplate);
+            that.title = that.options.title || that.options.name;
 
-            this._editable();
-        },
+            that.eventTemplate = that._eventTmpl(that.options.eventTemplate);
+            that.allDayEventTemplate = that._eventTmpl(that.options.allDayEventTemplate);
+
+            that._editable();
+
+       },
 
         options: {
             name: "MultiDayView",
@@ -260,6 +263,8 @@ kendo_module({
         },
 
         _render: function(dates) {
+            var that = this;
+
             dates = dates || [];
 
             this._dates = dates;
@@ -280,6 +285,13 @@ kendo_module({
             if (allDayHeader.length) {
                 this._allDayHeaderHeight = allDayHeader.first()[0].clientHeight;
             }
+
+            that.datesHeader.on("click" + NS, ".k-nav-day", function(e) {
+                var cell = $(e.currentTarget).closest("th");
+
+                that.trigger("navigate", { view: "day", date: that._slotIndexDate(cell.index()) });
+            });
+
         },
 
         nextDate: function() {
@@ -297,6 +309,10 @@ kendo_module({
 
         destroy: function() {
             var that = this;
+
+            if (that.datesHeader) {
+                that.datesHeader.off(NS);
+            }
 
             SchedulerView.fn.destroy.call(this);
 
