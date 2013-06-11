@@ -265,6 +265,8 @@ kendo_module({
                 that.options.views = ["day", "week"];
             }
 
+            that.resources = [];
+
             that._initModel();
 
             that._wrapper();
@@ -496,6 +498,25 @@ kendo_module({
                     fields.push({ field: "description", title: "Description", editor: '<textarea name="description" class="k-textbox"/>' });
                 }
 
+                for (var resourceIndex = 0; resourceIndex < that.resources.length; resourceIndex++) {
+                    (function(resource) {
+                        fields.push({
+                           field: resource.field,
+                           title: resource.field,
+                           editor: function(container, options) {
+                               $(kendo.format('<select data-{0}bind="value: {1}">', kendo.ns, resource.field))
+                                 .appendTo(container)
+                                 .kendoDropDownList({
+                                   dataTextField: resource.dataTextField,
+                                   dataValueField: resource.dataValueField,
+                                   dataSource: resource.dataSource,
+                                   optionLabel: "None"
+                                 });
+                           }
+                        })
+                    })(that.resources[resourceIndex]);
+                }
+
                 for (var idx = 0, length = fields.length; idx < length; idx++) {
                     var field = fields[idx];
 
@@ -522,6 +543,7 @@ kendo_module({
                     }
                 }
             }
+
 
             if (command) {
                 if (isPlainObject(command)) {
@@ -769,8 +791,6 @@ kendo_module({
         _resources: function() {
             var that = this;
             var resources = that.options.resources;
-
-            that.resources = [];
 
             for (var idx = 0; idx < resources.length; idx++) {
                 var resource = resources[idx];

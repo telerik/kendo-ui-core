@@ -6,10 +6,18 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
         <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.tooltip.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.window.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
         <script src="../../src/kendo.scheduler.agendaview.js"></script>
@@ -24,6 +32,13 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+
+            module("resources", {
+                teardown: function() {
+                    $("[data-role=window]").kendoWindow("destroy").remove();
+                }
+            });
+
             test("scheduler fetches resources", function() {
                 var scheduler = new kendo.ui.Scheduler($("<div>"), {
                     resources: [
@@ -334,6 +349,122 @@
 
                 equal(marks.eq(0).css("background-color"), "green");
             });
+
+            test("scheduler creates a dropdownlist in the popup form for resources", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]");
+
+                equal(dropdownlist.attr("data-bind"), "value: foo");
+                equal(dropdownlist.children().eq(0).text(), "None");
+                equal(dropdownlist.children().eq(1).text(), "Foo 1");
+                equal(dropdownlist.children().eq(2).text(), "Foo 2");
+            });
+
+            test("selecting a value from the resource dropdownlist sets the resource field of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+
+                dropdownlist.value(2);
+                dropdownlist.trigger("change");
+
+                equal(scheduler.dataSource.at(0).foo.text, "Foo 2");
+            });
+
+            test("the current resource is selected in the dropdownlist", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: "",
+                    foo: {  value: 2 }
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+
+                equal(dropdownlist.value(), 2);
+            });
+
+            test("selecting the option label set the resource field of the event to null", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: "",
+                    foo: {  value: 2 }
+                });
+
+                var scheduler = new kendo.ui.Scheduler($("<div>"), {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+
+                dropdownlist.value("");
+                dropdownlist.trigger("change");
+
+                equal(scheduler.dataSource.at(0).foo, null);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
