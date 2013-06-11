@@ -153,13 +153,13 @@
                 equal(ddl.select(), 3);
             });
 
-            /*test("value method does not update if freq is not valid", function() {
+            test("value method does not update if freq is not valid", function() {
                 var editor = new RecurrenceEditor(div);
 
                 editor.value("FREQ=test");
 
                 equal(editor.value(), "");
-            });*/
+            });
 
             test("setView method renders view from default views", function() {
                 var editor = new RecurrenceEditor(div);

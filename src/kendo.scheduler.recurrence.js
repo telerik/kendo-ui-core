@@ -619,10 +619,14 @@ kendo_module({
 
         for (; idx < length; idx++) {
             value = list[idx];
-            valueString = "" + WEEK_DAYS[value.day];
+            if (typeof value === "string") {
+                valueString = value;
+            } else {
+                valueString = "" + WEEK_DAYS[value.day];
 
-            if (value.offset) {
-                valueString = value.offset + valueString;
+                if (value.offset) {
+                    valueString = value.offset + valueString;
+                }
             }
 
             result.push(valueString);
@@ -895,7 +899,7 @@ kendo_module({
             ruleString += ";BYMONTHDAY=" + rule.monthDays;
         }
 
-        if (rule.weekDays) {
+        if (rule.weekDays && rule.weekDays.length) {
             ruleString += ";BYDAY=" + serializeWeekDayList(rule.weekDays);
         }
 
@@ -935,8 +939,20 @@ kendo_module({
         numberOfWeeks: numberOfWeeks
     };
 
+    var intervalInput = '<input data-role="numerictextbox" data-bind="value: interval" data-min="1" data-format="#" data-decimals="0" />';
+    var weeklyHTML = 'Repeat every: ' + intervalInput + ' weeks(s)' +
+        'On <input type="checkbox" value="MO" data-bind="checked: weekDays" /> MO' +
+        '<input type="checkbox" value="TU" data-bind="checked: weekDays" /> TU' +
+        '<input type="checkbox" value="WE" data-bind="checked: weekDays" /> WE' +
+        '<input type="checkbox" value="TH" data-bind="checked: weekDays" /> TH' +
+        '<input type="checkbox" value="FR" data-bind="checked: weekDays" /> FR' +
+        '<input type="checkbox" value="SA" data-bind="checked: weekDays" /> SA' +
+        '<input type="checkbox" value="SU" data-bind="checked: weekDays" /> SU' +
+        END_TEMPLATE_HTML;
+
     var defaultViews = {
-        "daily": 'Repeat every: <input data-role="numerictextbox" data-bind="value: interval" data-min="1" data-format="#" data-decimals="0" /> day(s)' + END_TEMPLATE_HTML
+        "daily": 'Repeat every: ' + intervalInput + ' day(s)' + END_TEMPLATE_HTML,
+        "weekly": weeklyHTML
     };
 
     var roles = {
@@ -985,7 +1001,7 @@ kendo_module({
 
             value = parseRule(value);
 
-            if (value) {
+            if (value && $.inArray(value.freq, this.options.frequencies) > -1) {
                 //test for valid value.freq if not set null
                 for (var prop in value) {
                     this.model.set(prop, value[prop]);
@@ -1008,6 +1024,7 @@ kendo_module({
                 model = kendo.observable({
                     interval: 1,
                     freq: "",
+                    weekDays: [],
                     endRuleValue: "",
                     disableCount: function() {
                         if (model.get("endRuleValue") !== "count") {
