@@ -128,8 +128,8 @@ kendo_module({
             var userEvents = e.sender,
                 leftPositioned = this.leftPositioned,
                 visible = this.visible,
-                canMoveLeft = leftPositioned && visible || !leftPositioned && !visible && !Drawer.current,
-                canMoveRight = !leftPositioned && visible || leftPositioned && !visible && !Drawer.current,
+                canMoveLeft = leftPositioned && visible || !leftPositioned && !Drawer.current,
+                canMoveRight = !leftPositioned && visible || leftPositioned && !Drawer.current,
                 horizontalSwipe = Math.abs(e.x.velocity) >= Math.abs(e.y.velocity),
                 leftSwipe = e.x.velocity < 0;
 
