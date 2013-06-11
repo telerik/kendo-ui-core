@@ -38,7 +38,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 }             
             }            
 
-            return Json(ModelState.ToDataSourceResult());
+            return Json(new[]{product}.ToDataSourceResult(request,ModelState));
         }        
     }
 }

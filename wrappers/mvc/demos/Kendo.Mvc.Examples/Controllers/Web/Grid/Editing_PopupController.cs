@@ -47,7 +47,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 }
             }
 
-            return Json(ModelState.ToDataSourceResult());
+            return Json(new[] {product}.ToDataSourceResult(request,ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -58,7 +58,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 SessionProductRepository.Delete(product);
             }
 
-            return Json(ModelState.ToDataSourceResult());
+            return Json(new[] { product }.ToDataSourceResult(request, ModelState));
         }
 
     }

@@ -32,7 +32,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 }
             }
 
-            return Json(ModelState.ToDataSourceResult());
+            return Json(products.ToDataSourceResult(request,ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 }
             }
 
-            return Json(ModelState.ToDataSourceResult());
+            return Json(products.ToDataSourceResult(request, ModelState));
         }
   
 
