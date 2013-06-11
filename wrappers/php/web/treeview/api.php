@@ -43,7 +43,7 @@ require_once '../../lib/Kendo/Autoload.php';
 <div class="demo-section">
 <?php
     $treeview = new \Kendo\UI\TreeView('treeview');
-    
+
     $item1 = new \Kendo\UI\TreeViewItem('Item 1');
     $item1->expanded(true);
     $item1->addItem(
@@ -65,7 +65,9 @@ require_once '../../lib/Kendo/Autoload.php';
 
     $dataSource->data(array($item1, $item2, $item3));
 
-    $treeview->dataSource($dataSource);
+    $treeview
+        ->dataSource($dataSource)
+        ->loadOnDemand(false);
 
     echo $treeview->render();
 ?>
