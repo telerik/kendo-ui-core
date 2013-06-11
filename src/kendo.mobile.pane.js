@@ -20,7 +20,6 @@ kendo_module({
         HREF = "href",
         DUMMY_HREF = "#!",
 
-        BEFORE_NAVIGATE = "beforeNavigate",
         NAVIGATE = "navigate",
         VIEW_SHOW = "viewShow",
 
@@ -90,7 +89,6 @@ kendo_module({
         },
 
         events: [
-            BEFORE_NAVIGATE,
             NAVIGATE,
             VIEW_SHOW
         ],
@@ -112,7 +110,6 @@ kendo_module({
                 that.history.push(url);
             }
 
-            that.trigger(BEFORE_NAVIGATE);
             that.viewEngine.showView(url, transition);
         },
 

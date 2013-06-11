@@ -22,12 +22,6 @@ kendo_module({
 
             var drawer = this;
 
-            this.pane.bind("beforeNavigate", function() {
-                if (drawer.currentView) {
-                    drawer.hide();
-                }
-            });
-
             this.pane.bind("viewShow", function(e) {
                 drawer._viewShow(e);
             });
@@ -111,9 +105,9 @@ kendo_module({
 
             this.transition = new Transition({ axis: AXIS, movable: this.movable });
 
-            if (this.visible) {
+            if (currentOffset) {
                 this.movable.moveAxis(AXIS, currentOffset);
-                setTimeout(function() { drawer.hide(); }, 100);
+                drawer.hide();
             }
         },
 
