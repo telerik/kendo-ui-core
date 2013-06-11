@@ -352,6 +352,7 @@ kendo_module({
             maxHeight: Infinity,
             pinned: false,
             position: {},
+            content: null,
             visible: null,
             height: null,
             width: null

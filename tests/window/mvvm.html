@@ -12,6 +12,9 @@
         <ol id="qunit-tests"></ol>
         <script>
             module("MVVM", {
+                setup: function() {
+                    $.mockjax({ url: "echo", responseText: "echo!" });
+                },
                 teardown: function() {
                     $(".k-window").remove();
                 }
@@ -138,6 +141,17 @@
 
                 equal(window.wrapper.width(), 144);
                 equal(window.wrapper.height(), 233);
+            });
+
+            test("content can be initialized declaratively", function() {
+                var dom = $('<div data-role="window" data-content="echo"></div>').appendTo("body");
+
+                kendo.bind(dom, {});
+
+                var window = dom.data("kendoWindow");
+
+                ok(window.options.content);
+                equal(window.options.content.url, "echo");
             });
         </script>
 
