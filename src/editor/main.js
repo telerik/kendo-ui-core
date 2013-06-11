@@ -599,7 +599,9 @@ kendo_module({
 
             that.value(value);
 
-            $(document).on("mousedown", proxy(that._endTyping, that));
+            $(document)
+                .on("mousedown", proxy(that._endTyping, that))
+                .on("mouseup", proxy(that._mouseup, that));
 
             kendo.notify(that);
         },
@@ -711,6 +713,8 @@ kendo_module({
                             editor.trigger("change");
                         }
                     });
+
+                $(editor.document).on("mouseup" + NS, proxy(editor._mouseup, editor));
             } else {
                 editor.window = window;
                 editor.document = document;
@@ -824,11 +828,6 @@ kendo_module({
                         window.open(target.attr("href"), "_new");
                     }
                 })
-                .on("mouseup" + NS, function() {
-                    setTimeout(function() {
-                        editor._selectionChange();
-                    }, 1);
-                })
                 .on("click" + NS, function(e) {
                     var dom = kendo.ui.editor.Dom, range;
 
@@ -853,6 +852,14 @@ kendo_module({
                         }
                     }, 1);
                 });
+        },
+
+        _mouseup: function() {
+            var that = this;
+
+            setTimeout(function() {
+                that._selectionChange();
+            }, 1);
         },
 
 
@@ -957,7 +964,8 @@ kendo_module({
                 .off(NS);
 
             $(document).off("DOMNodeInserted", proxy(that._DOMNodeInserted, that))
-                       .off("mousedown", proxy(that._endTyping, that));
+                       .off("mousedown", proxy(that._endTyping, that))
+                       .off("mouseup", proxy(that._mouseup, that));
 
             kendo.destroy(that.wrapper);
         },
