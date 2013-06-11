@@ -118,9 +118,7 @@ kendo_module({
 
             if (this.visible) {
                 this.movable.moveAxis('x', currentOffset);
-                setTimeout(function() {
-                    this.hide();
-                }, 100);
+                setTimeout(function() { drawer.hide(); }, 100);
             }
         },
 
