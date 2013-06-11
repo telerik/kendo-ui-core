@@ -199,10 +199,10 @@
     <value>Cancel changes</value>
   </data>
   <data name="Grid_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete this item?</value>
+    <value>Are you sure you want to delete this record?</value>
   </data>
   <data name="Grid_Create" xml:space="preserve">
-    <value>Add new item</value>
+    <value>Add new record</value>
   </data>
   <data name="Grid_Destroy" xml:space="preserve">
     <value>Delete</value>

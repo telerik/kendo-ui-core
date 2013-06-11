@@ -754,7 +754,7 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete this item?.
+        ///   Looks up a localized string similar to Are you sure you want to delete this record?.
         /// </summary>
         public static string Grid_Confirmation {
             get {
@@ -763,7 +763,7 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new item.
+        ///   Looks up a localized string similar to Add new record.
         /// </summary>
         public static string Grid_Create {
             get {
