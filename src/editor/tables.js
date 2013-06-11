@@ -4,6 +4,7 @@ var kendo = window.kendo,
     extend = $.extend,
     proxy = $.proxy,
     Editor = kendo.ui.editor,
+    dom = Editor.Dom,
     EditorUtils = Editor.EditorUtils,
     Command = Editor.Command,
     NS = ".kendoEditor",
@@ -30,16 +31,52 @@ var TableCommand = Command.extend({
         var options = this.options,
             editor = this.editor,
             range,
-            tableHtml = this._tableHtml(options.rows, options.columns);
+            tableHtml = this._tableHtml(options.rows, options.columns),
+            insertedTable;
 
         editor.selectRange(options.range);
         editor.clipboard.paste(tableHtml);
 
         range = editor.getRange();
 
-        range.selectNodeContents($("table[data-last]", editor.document).removeAttr("data-last").find("td")[0]);
+        insertedTable = $("table[data-last]", editor.document).removeAttr("data-last");
+
+        range.selectNodeContents(insertedTable.find("td")[0]);
 
         editor.selectRange(range);
+    }
+});
+
+var TableEditor = kendo.Class.extend({
+    init: function(table) {
+        var doc = table.ownerDocument,
+            selectionRow = dom.create(doc, "tr"),
+            selectionCell = dom.create(doc, "td"),
+            rows = table.rows;
+
+        selectionCell.className = "k-selection-cell";
+
+        selectionRow.appendChild(selectionCell.cloneNode());
+        dom.insertBefore(selectionRow, table.rows[0]);
+
+        for (var i = 0; i < rows.length; i++) {
+            dom.insertBefore(selectionCell.cloneNode(), rows[i].cells[0]);
+        }
+
+        this.table = table;
+    },
+
+    selectRow: function(index) {
+        var cells = this.table.rows[index].cells;
+
+        for (var i = 1; i < cells.length; i++) {
+            cells[i].className += " k-selected";
+        }
+    },
+
+    destroy: function() {
+        dom.remove(this.table.rows[0]);
+        dom.remove(this.table.rows[0].cells[0]);
     }
 });
 
@@ -192,6 +229,7 @@ var InsertTableTool = PopupTool.extend({
 extend(kendo.ui.editor, {
     PopupTool: PopupTool,
     TableCommand: TableCommand,
+    TableEditor: TableEditor,
     InsertTableTool: InsertTableTool
 });
 

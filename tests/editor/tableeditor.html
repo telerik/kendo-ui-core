@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
+
+        <script src="../jquery-loader.js"></script>
+        <script src="test-scripts.js"></script>
+
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
+
+        <!--<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>-->
+
+        <script>
+
+            //$("#Editor1").kendoEditor();
+
+            var TableEditor = kendo.ui.editor.TableEditor;
+
+            function createTable(rows, cols) {
+                return $(
+                    "<table><tbody>" +
+                        new Array(rows + 1).join(
+                            "<tr>" +
+                                new Array(cols + 1).join("<td>foo</td>") +
+                            "</tr>"
+                        ) +
+                    "</tbody></table>"
+                );
+            }
+
+            module("Editor / TableEditor", {
+                setup: function() {
+                    //editor = getEditor();
+                }
+            });
+
+            var table, tableEditor;
+
+            test("initializing adds select rows to table", function() {
+                table = createTable(1, 1);
+
+                tableEditor = new TableEditor(table[0]);
+
+                equal(table.find("tr").length, 2);
+                var cells = table.find("td");
+                equal(cells.length, 4);
+                ok(cells.eq(1).hasClass("k-selection-cell"));
+                ok(cells.eq(2).hasClass("k-selection-cell"));
+            });
+
+            test("initializing adds select rows to table", function() {
+                table = createTable(1, 1);
+
+                tableEditor = new TableEditor(table[0]);
+
+                tableEditor.destroy();
+
+                equal(table.find("tr").length, 1);
+                equal(table.find("td").length, 1);
+                equal(table.find(".k-selection-cell").length, 0);
+            });
+
+            test("selectRow adds selected class to cells in row", function() {
+                table = createTable(2, 2);
+
+                tableEditor = new TableEditor(table[0]);
+
+                tableEditor.selectRow(1);
+
+                var rows = table.find("tr");
+
+                equal(rows.eq(0).find("td.k-selected").length, 0);
+                equal(rows.eq(1).find("td.k-selected").length, 2);
+                equal(rows.eq(2).find("td.k-selected").length, 0);
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
