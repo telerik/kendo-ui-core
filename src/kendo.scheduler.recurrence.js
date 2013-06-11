@@ -1040,7 +1040,6 @@ kendo_module({
         //rendering
         _container: function() {
             var container = $('<div class="k-recurring-view" />');
-
             this.element.append(container);
             this.container = container;
         },
@@ -1050,6 +1049,7 @@ kendo_module({
                 options = that.options,
                 frequencies = options.frequencies,
                 messages = options.messages.frequencies,
+                ddl = $('<input name="freq" ' + kendo.attr("bind") + '="value: freq" />'),
                 frequency;
 
             frequencies = $.map(frequencies, function(frequency) {
@@ -1064,11 +1064,7 @@ kendo_module({
                 frequency.value = "";
             }
 
-            var ddl = $('<input name="freq" />').attr(kendo.attr("bind"), "value: freq");
-
-            this.element.append('<div class="k-edit-label"><label>Repeat</label></div>');
-            this.element.append(ddl);
-
+            that.element.append('<div class="k-edit-label"><label>Repeat</label></div>').append(ddl);
             that.ddlFrequency = new kendo.ui.DropDownList(ddl, {
                 dataTextField: "text",
                 dataValueField: "value",
