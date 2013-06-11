@@ -973,9 +973,6 @@ kendo_module({
             plotArea.polarAxis = categoryAxis;
             plotArea.categoryAxis = categoryAxis;
             plotArea.appendAxis(categoryAxis);
-
-            // TODO
-            // plotArea.aggregateDateSeries();
         },
 
         valueAxisOptions: function(defaults) {
