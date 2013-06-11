@@ -502,11 +502,11 @@ kendo_module({
                     (function(resource) {
                         var field = {
                            field: resource.field,
-                           title: resource.field,
-                        }
+                           title: resource.field
+                        };
 
                         if (resource.multiple) {
-                            field.editor = function(container, options) {
+                            field.editor = function(container) {
                                $(kendo.format('<select data-{0}bind="value: {1}">', kendo.ns, resource.field))
                                  .appendTo(container)
                                  .kendoMultiSelect({
@@ -516,9 +516,9 @@ kendo_module({
                                      itemTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField),
                                      tagTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
                                  });
-                           }
+                           };
                         } else {
-                            field.editor = function(container, options) {
+                            field.editor = function(container) {
                                $(kendo.format('<select data-{0}bind="value: {1}">', kendo.ns, resource.field))
                                  .appendTo(container)
                                  .kendoDropDownList({
@@ -528,7 +528,7 @@ kendo_module({
                                      optionLabel: "None",
                                      template: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
                                  });
-                           }
+                           };
                         }
                         fields.push(field);
                     })(that.resources[resourceIndex]);

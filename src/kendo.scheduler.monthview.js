@@ -70,7 +70,7 @@ kendo_module({
 
             this._content();
 
-            this.refreshLayout()
+            this.refreshLayout();
 
             this.content.on("click" + NS, ".k-nav-day", function(e) {
                var cell = $(e.currentTarget).closest("td");
