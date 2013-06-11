@@ -72,9 +72,14 @@ MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                         .sub(DEMO_SHARED_ROOT + 'shared/icons', MVC_DEMOS_ROOT + 'Content/shared/icons')
                 )
                 .include(
-                    FileList[DEMO_SHARED_ROOT + 'shared/images/patterns/*']
+                    FileList[DEMO_SHARED_ROOT + 'shared/images/{patterns,photos}/*']
                         .reject { |f| File.directory? f }
                         .sub(DEMO_SHARED_ROOT + 'shared/images', MVC_DEMOS_ROOT + 'Content/shared/images')
+                )
+                .include(
+                    FileList[DEMO_SHARED_ROOT + 'shared/images/photos/220/*']
+                        .reject { |f| File.directory? f }
+                        .sub(DEMO_SHARED_ROOT + 'shared/images/photos/220', MVC_DEMOS_ROOT + 'Content/shared/images/photos/220')
                 )
                 .include(
                     FileList['demos/mvc/App_Data/{dataviz,web,mobile}.nav.json']
@@ -149,6 +154,14 @@ namespace :mvc do
          :from => DEMO_SHARED_ROOT + 'shared/images/patterns/*',
          :root => DEMO_SHARED_ROOT + 'shared/images/'
 
+    tree :to => MVC_DEMOS_ROOT + 'Content/shared/images',
+         :from => DEMO_SHARED_ROOT + 'shared/images/photos/*',
+         :root => DEMO_SHARED_ROOT + 'shared/images/'
+
+    tree :to => MVC_DEMOS_ROOT + 'Content/shared/images/photos',
+         :from => DEMO_SHARED_ROOT + 'shared/images/photos/220/*',
+         :root => DEMO_SHARED_ROOT + 'shared/images/photos/'
+
     tree :to => MVC_DEMOS_ROOT + 'Scripts',
          :from => MVC_MIN_JS,
          :root => 'src/'
@@ -167,7 +180,8 @@ namespace :mvc do
         MVC_DEMOS_ROOT + 'Content/mobile',
         MVC_DEMOS_ROOT + 'Content/shared',
         MVC_DEMOS_ROOT + 'Content/shared/icons',
-        MVC_DEMOS_ROOT + 'Content/shared/images'
+        MVC_DEMOS_ROOT + 'Content/shared/images',
+        MVC_DEMOS_ROOT + 'Content/shared/images/photos'
     ]
 
     desc('Update CommonAssemblyInfo.cs with current VERSION')
