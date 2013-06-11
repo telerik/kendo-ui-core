@@ -628,6 +628,7 @@ kendo_module({
         },
 
         _selectionChange: function() {
+            this._selectionStarted = false;
             this.saveSelection();
             this.trigger("select", {});
         },
@@ -827,6 +828,8 @@ kendo_module({
                 .on("mousedown" + NS, function(e) {
                     editor.pendingFormats.clear();
 
+                    editor._selectionStarted = true;
+
                     var target = $(e.target);
 
                     if (!browser.gecko && e.which == 2 && target.is("a[href]")) {
@@ -862,9 +865,11 @@ kendo_module({
         _mouseup: function() {
             var that = this;
 
-            setTimeout(function() {
-                that._selectionChange();
-            }, 1);
+            if (that._selectionStarted) {
+                setTimeout(function() {
+                    that._selectionChange();
+                }, 1);
+            }
         },
 
 
@@ -1066,8 +1071,10 @@ kendo_module({
 
         saveSelection: function(range) {
             range = range || this.getRange();
+            var container = range.commonAncestorContainer,
+                body = this.body;
 
-            if ($.contains(this.body, range.commonAncestorContainer)) {
+            if (container == body || $.contains(body, container)) {
                 this.selectionRestorePoint = new kendo.ui.editor.RestorePoint(range);
             }
         },
