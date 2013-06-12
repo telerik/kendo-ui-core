@@ -19,6 +19,7 @@ $multiselect->dataTextField('text')
             array('text' => 'Australia', 'value' => '7')
          ))
          ->select('onSelect')
+         ->dataBound('onDataBound')
          ->change('onChange')
          ->close('onClose')
          ->open('onOpen');
@@ -35,6 +36,12 @@ echo $multiselect->render();
     function onOpen() {
         if ("kendoConsole" in window) {
             kendoConsole.log("event: open");
+        }
+    }
+
+    function onDataBound(){
+        if ("kendoConsole" in window) {
+            kendoConsole.log("event: dataBound");
         }
     }
 
