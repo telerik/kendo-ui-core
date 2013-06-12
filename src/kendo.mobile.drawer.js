@@ -54,7 +54,8 @@ kendo_module({
 
         options: {
             name: "Drawer",
-            position: "left"
+            position: "left",
+            views: []
         },
 
         events: [
@@ -64,8 +65,9 @@ kendo_module({
         ],
 
         show: function() {
-            this._activate();
-            this._show();
+            if (this._activate()) {
+                this._show();
+            }
         },
 
         hide: function() {
@@ -76,7 +78,10 @@ kendo_module({
         },
 
         _activate: function() {
-            if (this.trigger(BEFORE_SHOW)) {
+            var views = this.options.views,
+                visibleOnCurrentView = !views[0] || views.indexOf(this.pane.view().id.replace('#', '')) > -1;
+
+            if (this.trigger(BEFORE_SHOW) || !visibleOnCurrentView) {
                 return false;
             }
 
