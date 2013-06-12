@@ -2,8 +2,9 @@
 {
     using System.Linq;
     using System.Web.Mvc;
+    using System;
 
-    public interface ISchedulerEventService<T>
+    public interface ISchedulerEventService<T> : IDisposable
         where T : class, ISchedulerEvent
     {
         IQueryable<T> GetAll();

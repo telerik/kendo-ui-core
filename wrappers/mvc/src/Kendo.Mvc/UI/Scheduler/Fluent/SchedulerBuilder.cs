@@ -57,11 +57,13 @@
         /// </code>
         /// </example>
         /// 
-        public SchedulerBuilder<T> DataSource(Action<DataSourceBuilder<T>> configurator)
+        public SchedulerBuilder<T> DataSource(Action<AjaxDataSourceBuilder<T>> configurator)
         {
-            configurator(new DataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+
+            configurator(new AjaxDataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }
+
     }
 }

@@ -27,7 +27,7 @@
 
         public virtual IQueryable<T> GetAll()
         {
-            return (IQueryable<T>)db.SchedulerEvents;
+            return (IQueryable<T>)db.SchedulerEvents;      
         }
 
         public virtual void Insert(T appointment, ModelStateDictionary modelState)
@@ -88,6 +88,11 @@
             }
             
             return true;
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
     }
 }

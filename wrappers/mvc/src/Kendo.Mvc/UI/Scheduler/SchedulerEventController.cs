@@ -20,14 +20,20 @@
 
         public virtual JsonResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(eventsService.GetAll().ToDataSourceResult(request));
+            using (eventsService)
+            {
+                return Json(eventsService.GetAll().ToDataSourceResult(request));
+            }
         }
 
         public virtual JsonResult Destroy(T schedulerEvent)
         {
             if (ModelState.IsValid)
             {
-                eventsService.Delete(schedulerEvent, ModelState);
+                using (eventsService) 
+                {
+                    eventsService.Delete(schedulerEvent, ModelState);
+                }
             }
 
             return Json(ModelState.ToDataSourceResult());
@@ -37,7 +43,10 @@
         {
             if (ModelState.IsValid)
             {
-                eventsService.Insert(schedulerEvent, ModelState);
+                using (eventsService)
+                {
+                    eventsService.Insert(schedulerEvent, ModelState);
+                }
             }
 
             return Json(ModelState.ToDataSourceResult());
@@ -47,7 +56,10 @@
         {
             if (ModelState.IsValid)
             {
-                eventsService.Update(schedulerEvent, ModelState);
+                using (eventsService)
+                {
+                    eventsService.Update(schedulerEvent, ModelState);
+                }
             }
 
             return Json(ModelState.ToDataSourceResult());
