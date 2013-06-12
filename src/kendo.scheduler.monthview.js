@@ -95,13 +95,13 @@ kendo_module({
             var that = this;
             if (that.options.editable) {
 
-                that.element.on("click" + NS, ".k-event a:has(.k-i-close)", function(e) {
+                that.element.on("click" + NS, ".k-scheduler-monthview .k-event a:has(.k-i-close)", function(e) {
                     that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
                     e.preventDefault();
                 });
 
                 if (that.options.editable.create !== false) {
-                    that.element.on("dblclick", ".k-scheduler-content td", function(e) {
+                    that.element.on("dblclick", ".k-scheduler-monthview .k-scheduler-content td", function(e) {
                         var element = $(this);
                         that.trigger("add", { eventInfo: extend({ isAllDay: true }, that._rangeToDates(element)) });
                         e.preventDefault();
@@ -109,7 +109,7 @@ kendo_module({
                 }
 
                 if (that.options.editable.update !== false) {
-                    that.element.on("dblclick", ".k-event", function(e) {
+                    that.element.on("dblclick", ".k-scheduler-monthview .k-event", function(e) {
                         that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
                         e.preventDefault();
                     });

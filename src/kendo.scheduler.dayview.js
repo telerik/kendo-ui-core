@@ -12,6 +12,7 @@ kendo_module({
         SchedulerView = ui.SchedulerView,
         extend = $.extend,
         proxy = $.proxy,
+        getDate = kendo.date.getDate,
         MS_PER_MINUTE = kendo.date.MS_PER_MINUTE,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
         getMilliseconds = kendo.date.getMilliseconds,
@@ -32,10 +33,21 @@ kendo_module({
                 '#if (resources[0]) { #' +
                 'style="background-color:#=resources[0].color #"' +
                 '#}#' +
-                '>{0}' +
-                '#if (showDelete) {#' +
-                    '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
-                '#}#' +
+                '>' +
+                '<span class="k-event-actions">' +
+                    '# if(data.tail || data.middle) {#' +
+                        '<span class="k-icon k-i-arrow-w"></span>' +
+                    '#}#' +
+                '</span>' +
+                '{0}' +
+                '<span class="k-event-actions">' +
+                    '#if (showDelete) {#' +
+                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
+                    '#}#' +
+                    '# if(data.head || data.middle) {#' +
+                        '<span class="k-icon k-i-arrow-e"></span>' +
+                    '#}#' +
+                '</span>' +
                 //'<span class="k-icon k-resize-handle"></span>' +
                 '</div>';
 
@@ -80,7 +92,6 @@ kendo_module({
             that.allDayEventTemplate = that._eventTmpl(that.options.allDayEventTemplate);
 
             that._editable();
-
        },
 
         options: {
@@ -537,12 +548,26 @@ kendo_module({
 
        _createEventElement: function(event, template) {
             var options = this.options,
-                showDelete = options.editable && options.editable.destroy !== false;
+                showDelete = options.editable && options.editable.destroy !== false,
+                middle,
+                head,
+                tail;
 
+            if (getDate(event.start) < getDate(this.startDate) &&
+                getDate(event.end) > getDate(this.endDate).getTime() + MS_PER_DAY - 1) {
+                middle = true;
+            } else if (getDate(event.start) < getDate(this.startDate)) {
+                tail = true;
+            } else if (getDate(event.end) > getDate(this.endDate).getTime() + MS_PER_DAY - 1) {
+                head = true;
+            }
 
             return $(template(extend({}, {
                 ns: kendo.ns,
                 showDelete: showDelete,
+                middle: middle,
+                head: head,
+                tail: tail,
                 resources: this.eventResources(event)
             }, event)));
         },
