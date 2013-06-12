@@ -502,7 +502,7 @@ kendo_module({
                     (function(resource) {
                         var field = {
                            field: resource.field,
-                           title: resource.field
+                           title: resource.title
                         };
 
                         if (resource.multiple) {
@@ -835,6 +835,7 @@ kendo_module({
 
                 that.resources.push({
                     field: field,
+                    title: resource.title || field,
                     dataTextField: resource.dataTextField || "text",
                     dataValueField: resource.dataValueField || "value",
                     dataColorField: resource.dataColorField || "color",

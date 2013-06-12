@@ -43,32 +43,6 @@
 	            overflow-y:scroll;
             }
 
-            div.k-edit-label
-            {
-                float:left;
-                clear:both;
-                padding:.5em 0 1em;
-            }
-
-            .k-edit-field
-            {
-                float:right;
-                clear:right;
-                min-height:2em;
-            }
-
-            .k-edit-field > input[type="checkbox"]
-            {
-                margin-top:.4em;
-            }
-
-            .k-edit-buttons
-            {
-                clear: both;
-                padding: .6em 0 0;
-                text-align:right;
-            }
-
         </style>
     </head>
     <body>
@@ -109,31 +83,33 @@
             views: ["day", { name: "week", selected: true }, "month", "agenda"],
             resources: [
                 {
-                    field: "category",
+                    field: "owner",
+                    dataValueField: "OwnerID",
                     dataSource: [
-                        { text: "Category 1", value: 1, color: "red" },
-                        { text: "Category 2", value: 2, color: "green" }
+                        { text: "Alex", OwnerID: 1, color: "red" },
+                        { text: "Bob", OwnerID: 2, color: "green" },
+                        { text: "Charlie", OwnerID: 3, color: "blue" }
                     ],
-                    multiple: true
+                    title: "Owner"
                 }
             ],
             dataSource: {
                 batch: true,
                 transport: {
                     read: {
-                        url: "http://konstantinov/service/events",
+                        url: "http://korchev:8080/service/tasks",
                         dataType: "jsonp"
                     },
                     update: {
-                        url: "http://konstantinov/service/events/update",
+                        url: "http://korchev:8080/service/tasks/update",
                         dataType: "jsonp"
                     },
                     create: {
-                        url: "http://konstantinov/service/events/create",
+                        url: "http://korchev:8080/service/tasks/create",
                         dataType: "jsonp"
                     },
                     destroy: {
-                        url: "http://konstantinov/service/events/destroy",
+                        url: "http://korchev:8080/service/tasks/destroy",
                         dataType: "jsonp"
                     },
                     parameterMap: function(options, operation) {
@@ -152,14 +128,10 @@
                             start: { type: "date", field: "Start" },
                             end: { type: "date", field: "End" },
                             description: { field: "Description" },
+                            recurrence: { field: "Recurrence" },
+                            owner: { field: "Owner" },
                             isAllDay: { type: "boolean", field: "IsAllDay" }
                         }
-                    },
-                    parse: function(result) {
-                        $.each(result, function(index, item) {
-                            item.category = { text: "Category 1", value: 1 };
-                        });
-                        return result;
                     }
                 }
                 /*data: [ {
