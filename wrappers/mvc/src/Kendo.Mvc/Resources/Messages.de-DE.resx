@@ -322,7 +322,7 @@
     <value>Beinhaltet</value>
   </data>
   <data name="Filter_StringDoesNotContain" xml:space="preserve">
-    <value>Nicht enthalten</value>
+    <value>Beinhaltet nicht</value>
   </data>
   <data name="Filter_StringEndsWith" xml:space="preserve">
     <value>Endet mit</value>
