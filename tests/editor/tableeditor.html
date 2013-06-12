@@ -77,6 +77,42 @@
                 equal(rows.eq(2).find("td.k-selected").length, 0);
             });
 
+            test("selectColumn adds selected class to cells in column", function() {
+                table = createTable(2, 2);
+
+                tableEditor = new TableEditor(table[0]);
+
+                tableEditor.selectColumn(1);
+
+                var rows = table.find("tr");
+
+                equal(rows.eq(0).find("td.k-selected").length, 0);
+                equal(rows.eq(1).find("td.k-selected").index(), 1);
+                equal(rows.eq(2).find("td.k-selected").index(), 1);
+            });
+
+            test("clearSelection clears previous row selection", function() {
+                table = createTable(2, 2);
+
+                tableEditor = new TableEditor(table[0]);
+
+                tableEditor.selectRow(1);
+                tableEditor.clearSelection();
+
+                equal(table.find("td.k-selected").length, 0);
+            });
+
+            test("clearSelection clears previous column selection", function() {
+                table = createTable(2, 2);
+
+                tableEditor = new TableEditor(table[0]);
+
+                tableEditor.selectColumn(2);
+                tableEditor.clearSelection();
+
+                equal(table.find("td.k-selected").length, 0);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

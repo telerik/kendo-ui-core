@@ -74,11 +74,34 @@ var TableEditor = kendo.Class.extend({
         }
     },
 
+    selectColumn: function(index) {
+        var rows = this.table.rows;
+
+        for (var i = 1; i < rows.length; i++) {
+            rows[i].cells[index].className += " k-selected";
+        }
+    },
+
+    clearSelection: function() {
+        var rows = this.table.rows, cells;
+
+        for (var r = 1; r < rows.length; r++) {
+            cells = rows[r].cells;
+
+            for (var  c = 1; c < cells.length; c++) {
+                cells[c].className = cells[c].className.replace(/\s?k-selected\s?/g, "");
+            }
+        }
+    },
+
     destroy: function() {
         dom.remove(this.table.rows[0]);
         dom.remove(this.table.rows[0].cells[0]);
     }
 });
+
+TableEditor.importEditorStyles = function() {
+};
 
 var PopupTool = Tool.extend({
     initialize: function(ui, options) {
