@@ -9,6 +9,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         timezone = kendo.timezone,
+        template = kendo.template,
         date = kendo.date,
         setDayOfWeek = date.setDayOfWeek,
         Class = kendo.Class,
@@ -51,15 +52,6 @@ kendo_module({
         ],
         RULE_NAMES = ["months", "weeks", "yearDays", "monthDays", "weekDays", "hours", "minutes", "seconds"],
         RULE_NAMES_LENGTH = RULE_NAMES.length,
-        END_TEMPLATE_HTML = '<div class="k-recurrence-end">' +
-                                '<div class="k-edit-label"><label>End:</label></div>' +
-                                '<div class="k-edit-field"><input type="radio" name="end" value="" data-bind="checked: endRuleValue" />Never</div>' +
-                                '<div class="k-edit-label"></div>' +
-                                '<div class="k-edit-field"><input type="radio" name="end" value="count" data-bind="checked: endRuleValue" />' +
-                                'After<input data-role="numerictextbox" data-bind="value: count, disabled: disableCount" /> occurrance(s)</div>' +
-                                '<div class="k-edit-label"></div><div class="k-edit-field"><input type="radio" name="end" value="until" data-bind="checked: endRuleValue" />' +
-                                'On <input data-role="datepicker" data-bind="value: until, disabled: disableUntil" /></div>' +
-                            '</div>',
         limitation = {
             months: function(date, end, rule) {
                 var monthRules = rule.months,
@@ -901,7 +893,7 @@ kendo_module({
             ruleString += ";BYMONTHDAY=" + rule.monthDays;
         }
 
-        if (rule.weekDays && rule.weekDays.length) {
+        if (rule.weekDays) {
             ruleString += ";BYDAY=" + serializeWeekDayList(rule.weekDays);
         }
 
@@ -941,21 +933,14 @@ kendo_module({
         numberOfWeeks: numberOfWeeks
     };
 
-    var intervalInput = '<input data-role="numerictextbox" data-bind="value: interval" data-min="1" data-format="#" data-decimals="0" />';
-    var weeklyHTML = 'Repeat every: ' + intervalInput + ' weeks(s)' +
-        'On <input type="checkbox" value="MO" data-bind="checked: weekDays" /> MO' +
-        '<input type="checkbox" value="TU" data-bind="checked: weekDays" /> TU' +
-        '<input type="checkbox" value="WE" data-bind="checked: weekDays" /> WE' +
-        '<input type="checkbox" value="TH" data-bind="checked: weekDays" /> TH' +
-        '<input type="checkbox" value="FR" data-bind="checked: weekDays" /> FR' +
-        '<input type="checkbox" value="SA" data-bind="checked: weekDays" /> SA' +
-        '<input type="checkbox" value="SU" data-bind="checked: weekDays" /> SU' +
-        END_TEMPLATE_HTML;
-
-    var defaultViews = {
-        "daily": 'Repeat every: ' + intervalInput + ' day(s)' + END_TEMPLATE_HTML,
-        "weekly": weeklyHTML
-    };
+    var intervalInput = '<input class="k-recur-interval" />';
+    var END_HTML = '<div class="k-recurrence-end">' +
+        '<div class="k-edit-label">{0}</div>' +
+        '<div class="k-edit-field"><input type="radio" name="end" checked="checked" />{1}</div>' +
+        '<div class="k-edit-label"></div>' +
+        '<div class="k-edit-field"><input type="radio" name="end" value="count" />{2}</div>' +
+        '<div class="k-edit-field"><input type="radio" name="end" value="until" />{3}</div>' +
+    '</div>';
 
     var RecurrenceEditor = Widget.extend({
         init: function(element, options) {
@@ -967,7 +952,9 @@ kendo_module({
 
             that._container(); //TODO: render div for rule container and inputs for END options
 
-            that._model();
+            that._views();
+
+            that._value = {};
         },
         options: {
             name: "RecurrenceEditor",
@@ -979,81 +966,123 @@ kendo_module({
                     weekly: "Weekly",
                     monthly: "Monthly",
                     yearly: "Yearly"
+                },
+                daily: {
+                    interval: "Repeat every: {0} days(s)",
+                    endLabel: "End:",
+                    endNever: "Never",
+                    endCount: "After {0} occurrance(s)",
+                    endUntil: "On {0}"
+                },
+                monthly: {
+                    interval: "Repeat every: {0} week(s)",
+                    day: "On"
                 }
             }
         },
-
+        events: [ "change" ],
         value: function(value) {
-            var model = this.model;
+            var that = this;
 
             if (value === undefined) {
-                if (model.freq === "") {
+                if (!that._value.freq) {
                     return "";
                 }
 
-                return serialize(model);
+                return serialize(that._value);
             }
 
-            value = parseRule(value);
+            that._value = parseRule(value) || {};
 
-            if (value && $.inArray(value.freq, this.options.frequencies) > -1) {
-                //test for valid value.freq if not set null
-                for (var prop in value) {
-                    this.model.set(prop, value[prop]);
-                }
-            }
+            that.ddlFrequency.value(that._value.freq || "");
+            that.setView(that.ddlFrequency.value());
         },
 
-        setView: function(viewName) {
-            var container = this.container,
-                html = defaultViews[viewName] || "";
+        setView: function(frequency) {
+            var that = this,
+                container = this.container,
+                template = this["_" + frequency],
+                html = template ? template({}) : "",
+                rule = that._value;
 
             kendo.destroy(container);
             container.html(html);
 
-            kendo.bind(container, this.model);
+            if (!html) {
+                that._value = {};
+                return;
+            }
+
+            rule.freq = frequency;
+            that._interval();
+            that._count();
+            that._until();
         },
 
-        _model: function() {
+        _interval: function() {
             var that = this,
-                model = kendo.observable({
-                    interval: 1,
-                    freq: "",
-                    weekDays: [],
-                    endRuleValue: "",
-                    disableCount: function() {
-                        if (model.get("endRuleValue") !== "count") {
-                            model.set("count", "");
-                            return true;
-                        }
-                        return false;
-                    },
-                    disableUntil: function() {
-                        if (model.get("endRuleValue") !== "until") {
-                            model.set("until", "");
-                            return true;
-                        }
-                        return false;
-                    }
-                });
+                input = that.container.find(".k-recur-interval"),
+                rule = that._value;
 
-            that.model = model.bind("change", function(e) {
-                if (e.field === "freq") {
-                    that.setView(model.get("freq"));
+            input.kendoNumericTextBox({
+                value: rule.interval || 1,
+                decimals: 0,
+                format: "#",
+                min: 1,
+                change: function() {
+                    rule.interval = this.value();
+                    that.trigger("change");
                 }
             });
+        },
 
-            kendo.bind(this.element, model);
-            if (that.ddlFrequency.value()) {
-                model.set("freq", that.ddlFrequency.value());
-            }
+        _count: function() {
+            var that = this,
+                input = that.container.find(".k-recur-count"),
+                rule = that._value;
+
+            input.kendoNumericTextBox({
+                value: rule.count || 0,
+                decimals: 0,
+                format: "#",
+                min: 0,
+                change: function() {
+                    rule.count = this.value();
+                    that.trigger("change");
+                }
+            });
+        },
+
+        _until: function() {
+            var that = this,
+                input = that.container.find(".k-recur-until"),
+                rule = that._value;
+
+            input.kendoDatePicker({
+                value: rule.until || kendo.date.today(),
+                change: function() {
+                    rule.until = this.value(); //TODO: GET UTC DATE. Serialize does this
+                    that.trigger("change");
+                }
+            });
+        },
+
+        _views: function() {
+            var that = this,
+                messages = that.options.messages,
+                daily = messages.daily,
+                count = kendo.format(daily.endCount, '<input class="k-recur-count" />'),
+                until = kendo.format(daily.endUntil, '<input class="k-recur-until" />'),
+                end = kendo.format(END_HTML, daily.endLabel, daily.endNever, count, until);
+
+            that._daily = template(kendo.format(daily.interval, intervalInput) + end);
         },
 
         //rendering
         _container: function() {
             var container = $('<div class="k-recurring-view" />');
             this.element.append(container);
-            this.container = container;
+            this.wrapper = this.container = container;
         },
 
         _frequencyChooser: function() {
@@ -1061,7 +1090,7 @@ kendo_module({
                 options = that.options,
                 frequencies = options.frequencies,
                 messages = options.messages.frequencies,
-                ddl = $('<input name="freq" ' + kendo.attr("bind") + '="value: freq" />'),
+                ddl = $('<input name="freq" />'),
                 frequency;
 
             frequencies = $.map(frequencies, function(frequency) {
@@ -1080,7 +1109,11 @@ kendo_module({
             that.ddlFrequency = new kendo.ui.DropDownList(ddl, {
                 dataTextField: "text",
                 dataValueField: "value",
-                dataSource: frequencies
+                dataSource: frequencies,
+                change: function() {
+                    that.setView(that.ddlFrequency.value());
+                    that.trigger("change");
+                }
             });
         }
     });

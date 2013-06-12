@@ -73,6 +73,12 @@ kendo_module({
             }).appendTo(container);
 
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+        },
+        RECURRENCEEDITOR = function(container, options) {
+             $('<div ' + kendo.attr("role") + '="recurrenceeditor" ' + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
+            .attr({
+                name: options.field
+            }).appendTo(container);
         };
 
     function wrapDataAccess(originalFunction, timezone) {
@@ -479,6 +485,7 @@ kendo_module({
                     { field: "title", title: "Title" /*, format: field.format, editor: field.editor, values: field.values*/ },
                     { field: "start", title: "Start", editor: DATERANGEEDITOR },
                     { field: "end", title: "End", editor: DATERANGEEDITOR },
+                    { field: "recurrence", title: "Repeat", editor: RECURRENCEEDITOR, defaultValue: "" },
                     { field: "isAllDay", title: "All day event" }
                 ],
                 attr,
