@@ -291,10 +291,16 @@ kendo_module({
 
             this._clearFileAction(fileElement);
 
-            fileElement.append(
-                this._renderAction(classDictionary[actionKey], this.localization[actionKey])
-                .addClass("k-upload-action")
-            );
+            if (!this.options.template) {
+                fileElement.append(
+                    this._renderAction(classDictionary[actionKey], this.localization[actionKey])
+                );
+            } else {
+                fileElement.find(".k-upload-action")
+                           .addClass("k-button k-button-icontext")
+                           .append("<span class='k-icon " + classDictionary[actionKey] + "'></span>" + this.localization[actionKey])
+                           .show();
+            }
         },
 
         _fileState: function(fileEntry, stateKey) {
@@ -316,7 +322,7 @@ kendo_module({
                 currentState = states[stateKey];
 
             if (currentState) {
-                var icon = fileEntry.children(".k-icon").text(currentState.text);
+                var icon = fileEntry.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").text(currentState.text);
                 icon[0].className = "k-icon " + currentState.cssClass;
             }
         },
@@ -324,7 +330,7 @@ kendo_module({
         _renderAction: function (actionClass, actionText) {
             if (actionClass !== "") {
                 return $(
-                "<button type='button' class='k-button k-button-icontext'>" +
+                "<button type='button' class='k-button k-button-icontext k-upload-action'>" +
                     "<span class='k-icon " + actionClass + "'></span>" +
                     actionText +
                 "</button>"
@@ -341,7 +347,9 @@ kendo_module({
 
         _clearFileAction: function(fileElement) {
             fileElement
-                .find(".k-upload-action").remove();
+                .find(".k-upload-action")
+                .empty()
+                .hide();
         },
 
         _onFileAction: function(e) {
@@ -375,15 +383,17 @@ kendo_module({
         },
 
         _onFileProgress: function(e, percentComplete) {
-            var progressBar = $(".k-progress-status", e.target);
-            if (progressBar.length === 0) {
-                progressBar =
-                    $("<span class='k-progress'><span class='k-state-selected k-progress-status' style='width: 0;'></span></span>")
-                        .appendTo($(".k-filename", e.target))
-                        .find(".k-progress-status");
-            }
+            if (!this.options.template) {
+                var progressBar = $(".k-progress-status", e.target);
+                if (progressBar.length === 0) {
+                    progressBar =
+                        $("<span class='k-progress'><span class='k-state-selected k-progress-status' style='width: 0;'></span></span>")
+                            .appendTo($(".k-filename", e.target))
+                            .find(".k-progress-status");
+                }
 
-            progressBar.width(percentComplete + "%");
+                progressBar.width(percentComplete + "%");
+            }
 
             this.trigger(PROGRESS, {
                 files: getFileEntry(e).data("fileNames"),
@@ -743,8 +753,7 @@ kendo_module({
             var fileEntry = getFileEntry(e);
 
             var iframe = fileEntry.data("frame");
-            if (iframe)
-            {
+            if (iframe) {
                 this.unregisterFrame(iframe);
                 this.upload._removeFileEntry(fileEntry);
                 this.cleanupFrame(iframe);
@@ -1112,14 +1121,16 @@ kendo_module({
                     operation: "remove",
                     files: files,
                     response: data,
-                    XMLHttpRequest: xhr });
+                    XMLHttpRequest: xhr
+                });
             },
 
             function onError(xhr) {
                 upload.trigger(ERROR, {
                     operation: "remove",
                     files: files,
-                    XMLHttpRequest: xhr });
+                    XMLHttpRequest: xhr
+                });
 
                 logToConsole("Server response: " + xhr.responseText);
             }
