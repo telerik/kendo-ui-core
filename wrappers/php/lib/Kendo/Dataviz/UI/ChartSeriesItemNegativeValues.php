@@ -6,7 +6,7 @@ class ChartSeriesItemNegativeValues extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The color of the negative values.
+    * The color of the chart negative bubble values.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemNegativeValues
     */
@@ -15,7 +15,7 @@ class ChartSeriesItemNegativeValues extends \Kendo\SerializableObject {
     }
 
     /**
-    * The visibility of the negative values.
+    * If set to true the chart will display the negative bubbles. By default the negative bubbles are not displayed.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemNegativeValues
     */

@@ -51,6 +51,14 @@ public class LegendLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ 
         return "chart-legend-labels";
     }
 
+    public void setMargin(com.kendoui.taglib.chart.LegendLabelsMarginTag value) {
+        setProperty("margin", value);
+    }
+
+    public void setTemplate(LegendLabelsTemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public String getColor() {
         return (String)getProperty("color");
     }
@@ -65,6 +73,14 @@ public class LegendLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ 
 
     public void setFont(String value) {
         setProperty("font", value);
+    }
+
+    public float getMargin() {
+        return (float)getProperty("margin");
+    }
+
+    public void setMargin(float value) {
+        setProperty("margin", value);
     }
 
     public String getTemplate() {

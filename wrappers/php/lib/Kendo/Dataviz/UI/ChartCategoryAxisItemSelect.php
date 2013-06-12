@@ -15,29 +15,7 @@ class ChartCategoryAxisItemSelect extends \kendo\SerializableObject {
     }
 
     /**
-    * The upper boundary of the selected range.Note: The category with the specified index (date) is not included in the selected range
-unless the axis is justified. In order to select all categories specify
-a value larger than the last category index (date).
-    * @param  $value
-    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemSelect
-    */
-    public function to($value) {
-        return $this->setProperty('to', $value);
-    }
-
-    /**
-    * The minimum value that is selectable by the user.
-    * @param  $value
-    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemSelect
-    */
-    public function min($value) {
-        return $this->setProperty('min', $value);
-    }
-
-    /**
-    * The maximum value that is selectable by the user.Note: The category with the specified index (date) is not included in the selected range
-unless the axis is justified. In order to select all categories specify
-a value larger than the last category index (date).
+    * The maximum value which the user can select.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemSelect
     */
@@ -46,12 +24,30 @@ a value larger than the last category index (date).
     }
 
     /**
-    * Mousewheel zoom settings for the selection.
+    * The minimum value which the user can select.
+    * @param  $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemSelect
+    */
+    public function min($value) {
+        return $this->setProperty('min', $value);
+    }
+
+    /**
+    * The mouse wheel configuration of the selection.
     * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemSelectMousewheel|array $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemSelect
     */
     public function mousewheel($value) {
         return $this->setProperty('mousewheel', $value);
+    }
+
+    /**
+    * The upper boundary of the selected range.
+    * @param  $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemSelect
+    */
+    public function to($value) {
+        return $this->setProperty('to', $value);
     }
 
 //<< Properties

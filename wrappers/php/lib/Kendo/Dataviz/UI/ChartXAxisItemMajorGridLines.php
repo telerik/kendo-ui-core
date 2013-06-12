@@ -6,7 +6,7 @@ class ChartXAxisItemMajorGridLines extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The color of the lines.
+    * The color of the lines. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines
     */
@@ -15,7 +15,16 @@ class ChartXAxisItemMajorGridLines extends \Kendo\SerializableObject {
     }
 
     /**
-    * The visibility of the lines.
+    * The dash type of the line.The following dash types are supported:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines
+    */
+    public function dashType($value) {
+        return $this->setProperty('dashType', $value);
+    }
+
+    /**
+    * If set to true the chart will display the x major grid liness. By default the x major grid liness are visible.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines
     */
@@ -24,7 +33,8 @@ class ChartXAxisItemMajorGridLines extends \Kendo\SerializableObject {
     }
 
     /**
-    * The width of the lines.
+    * The width of the line in pixels. Also affects the major and minor ticks, but not the grid lines.
+#### Example - set the scatter chart x major grid lines width
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemMajorGridLines
     */

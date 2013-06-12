@@ -55,6 +55,10 @@ public class XAxisItemCrosshairTooltipTag extends  BaseTag  /* interfaces */ /* 
         setProperty("border", value);
     }
 
+    public void setPadding(com.kendoui.taglib.chart.XAxisItemCrosshairTooltipPaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public void setTemplate(XAxisItemCrosshairTooltipTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
@@ -91,11 +95,11 @@ public class XAxisItemCrosshairTooltipTag extends  BaseTag  /* interfaces */ /* 
         setProperty("format", value);
     }
 
-    public Object getPadding() {
-        return (Object)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(Object value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 

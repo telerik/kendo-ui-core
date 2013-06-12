@@ -57,8 +57,16 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
+    public void setInactiveItems(com.kendoui.taglib.chart.LegendInactiveItemsTag value) {
+        setProperty("inactiveItems", value);
+    }
+
     public void setLabels(com.kendoui.taglib.chart.LegendLabelsTag value) {
         setProperty("labels", value);
+    }
+
+    public void setMargin(com.kendoui.taglib.chart.LegendMarginTag value) {
+        setProperty("margin", value);
     }
 
     public String getBackground() {
@@ -69,11 +77,11 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("background", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
@@ -91,14 +99,6 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setOffsetY(float value) {
         setProperty("offsetY", value);
-    }
-
-    public Object getPadding() {
-        return (Object)getProperty("padding");
-    }
-
-    public void setPadding(Object value) {
-        setProperty("padding", value);
     }
 
     public String getPosition() {

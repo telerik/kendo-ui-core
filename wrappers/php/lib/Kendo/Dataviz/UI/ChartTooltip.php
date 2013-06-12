@@ -6,7 +6,7 @@ class ChartTooltip extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The background color of the tooltip. The default is determined from the series color.
+    * The background color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartTooltip
     */
@@ -24,7 +24,7 @@ class ChartTooltip extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text color of the tooltip. The default is the same as the series labels color.
+    * The text color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartTooltip
     */
@@ -42,7 +42,7 @@ class ChartTooltip extends \Kendo\SerializableObject {
     }
 
     /**
-    * The tooltip format.
+    * The format of the labels. Uses kendo.format.Format placeholders:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartTooltip
     */
@@ -51,8 +51,8 @@ class ChartTooltip extends \Kendo\SerializableObject {
     }
 
     /**
-    * The padding of the tooltip.
-    * @param float| $value
+    * The padding of the tooltip. A numeric value will set all paddings.
+    * @param float|\Kendo\Dataviz\UI\ChartTooltipPadding|array $value
     * @return \Kendo\Dataviz\UI\ChartTooltip
     */
     public function padding($value) {
@@ -60,40 +60,7 @@ class ChartTooltip extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the template option of the ChartTooltip.
-    * The tooltip template.
-Template variables:
-    * @param string $value The id of the element which represents the kendo template.
-    * @return \Kendo\Dataviz\UI\ChartTooltip
-    */
-    public function templateId($value) {
-        $value = new \Kendo\Template($value);
-
-        return $this->setProperty('template', $value);
-    }
-
-    /**
-    * Sets the template option of the ChartTooltip.
-    * The tooltip template.
-Template variables:
-    * @param string $value The template content.
-    * @return \Kendo\Dataviz\UI\ChartTooltip
-    */
-    public function template($value) {
-        return $this->setProperty('template', $value);
-    }
-
-    /**
-    * A value indicating if the tooltip should be displayed.
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\ChartTooltip
-    */
-    public function visible($value) {
-        return $this->setProperty('visible', $value);
-    }
-
-    /**
-    * A value indicating if the tooltip should be shared.
+    * If set to true the chart will display a single tooltip for every category.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartTooltip
     */
@@ -103,8 +70,7 @@ Template variables:
 
     /**
     * Sets the sharedTemplate option of the ChartTooltip.
-    * The shared tooltip template.
-Template variables:
+    * The template which renders the shared tooltip.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\ChartTooltip
     */
@@ -116,13 +82,43 @@ Template variables:
 
     /**
     * Sets the sharedTemplate option of the ChartTooltip.
-    * The shared tooltip template.
-Template variables:
+    * The template which renders the shared tooltip.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartTooltip
     */
     public function sharedTemplate($value) {
         return $this->setProperty('sharedTemplate', $value);
+    }
+
+    /**
+    * Sets the template option of the ChartTooltip.
+    * The template which renders the tooltip.The fields which can be used in the template are:
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\Dataviz\UI\ChartTooltip
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the ChartTooltip.
+    * The template which renders the tooltip.The fields which can be used in the template are:
+    * @param string $value The template content.
+    * @return \Kendo\Dataviz\UI\ChartTooltip
+    */
+    public function template($value) {
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * If set to true the chart will display the series tooltip. By default the series tooltip is not displayed.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\ChartTooltip
+    */
+    public function visible($value) {
+        return $this->setProperty('visible', $value);
     }
 
 //<< Properties

@@ -6,7 +6,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Defines the alignment of the labels.** Available for donut and pie series. **
+    * The label alignment when series.type is set to "donut" or "pie".The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
@@ -15,7 +15,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     }
 
     /**
-    * The background color of the labels.
+    * The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
@@ -33,7 +33,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text color of the labels.
+    * The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
@@ -42,7 +42,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     }
 
     /**
-    * The distance of the labels.** Available for donut and pie series. **
+    * The distance of the labels when series.type is set to "donut" or "pie".
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
@@ -60,7 +60,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     }
 
     /**
-    * The format of the labels.
+    * The format of the labels. Uses kendo.format.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
@@ -69,8 +69,8 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     }
 
     /**
-    * The margin of the labels.
-    * @param float| $value
+    * The margin of the labels. A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartSeriesItemLabelsMargin|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function margin($value) {
@@ -78,8 +78,8 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     }
 
     /**
-    * The padding of the labels.
-    * @param float| $value
+    * The padding of the labels. A numeric value will set all paddings.
+    * @param float|\Kendo\Dataviz\UI\ChartSeriesItemLabelsPadding|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
     public function padding($value) {
@@ -87,7 +87,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines the position of the labels.
+    * The position of the labels.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
@@ -97,7 +97,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the ChartSeriesItemLabels.
-    * The label template. Template variables:
+    * The template which renders the chart series label.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
@@ -109,7 +109,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the ChartSeriesItemLabels.
-    * The label template. Template variables:
+    * The template which renders the chart series label.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */
@@ -118,7 +118,7 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
     }
 
     /**
-    * The visibility of the labels.
+    * If set to true the chart will display the series labels. By default chart series labels are not displayed.
     * @param boolean|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
     */

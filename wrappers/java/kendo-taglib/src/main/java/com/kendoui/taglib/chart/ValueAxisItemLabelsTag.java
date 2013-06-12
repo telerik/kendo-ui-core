@@ -55,6 +55,14 @@ public class ValueAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("border", value);
     }
 
+    public void setMargin(com.kendoui.taglib.chart.ValueAxisItemLabelsMarginTag value) {
+        setProperty("margin", value);
+    }
+
+    public void setPadding(com.kendoui.taglib.chart.ValueAxisItemLabelsPaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public void setTemplate(ValueAxisItemLabelsTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
@@ -91,11 +99,11 @@ public class ValueAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("format", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
@@ -107,11 +115,11 @@ public class ValueAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("mirror", value);
     }
 
-    public Object getPadding() {
-        return (Object)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(Object value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 

@@ -6,8 +6,7 @@ class ChartLegendLabels extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The color of the labels.
-Any valid CSS color string will work here, including hex and rgb.
+    * The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartLegendLabels
     */
@@ -25,9 +24,17 @@ Any valid CSS color string will work here, including hex and rgb.
     }
 
     /**
+    * The margin of the labels. A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartLegendLabelsMargin|array $value
+    * @return \Kendo\Dataviz\UI\ChartLegendLabels
+    */
+    public function margin($value) {
+        return $this->setProperty('margin', $value);
+    }
+
+    /**
     * Sets the template option of the ChartLegendLabels.
-    * The template of the labels.
-Template variables:
+    * The template which renders the labels.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\ChartLegendLabels
     */
@@ -39,8 +46,7 @@ Template variables:
 
     /**
     * Sets the template option of the ChartLegendLabels.
-    * The template of the labels.
-Template variables:
+    * The template which renders the labels.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartLegendLabels
     */

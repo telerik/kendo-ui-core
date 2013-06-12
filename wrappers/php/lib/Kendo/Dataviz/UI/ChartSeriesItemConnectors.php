@@ -6,7 +6,7 @@ class ChartSeriesItemConnectors extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The color of the connector line.
+    * The color of the connector. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemConnectors
     */

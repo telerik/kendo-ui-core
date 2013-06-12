@@ -57,6 +57,14 @@ public class PlotAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
+    public void setMargin(com.kendoui.taglib.chart.PlotAreaMarginTag value) {
+        setProperty("margin", value);
+    }
+
+    public void setPadding(com.kendoui.taglib.chart.PlotAreaPaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public String getBackground() {
         return (String)getProperty("background");
     }
@@ -65,11 +73,11 @@ public class PlotAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("background", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
@@ -79,6 +87,14 @@ public class PlotAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setOpacity(float value) {
         setProperty("opacity", value);
+    }
+
+    public float getPadding() {
+        return (float)getProperty("padding");
+    }
+
+    public void setPadding(float value) {
+        setProperty("padding", value);
     }
 
 //<< Attributes

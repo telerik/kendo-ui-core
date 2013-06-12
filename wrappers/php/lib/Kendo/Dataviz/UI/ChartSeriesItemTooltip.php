@@ -6,7 +6,7 @@ class ChartSeriesItemTooltip extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The background color of the tooltip. The default is determined from the series color.
+    * The background color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */
@@ -24,7 +24,7 @@ class ChartSeriesItemTooltip extends \Kendo\SerializableObject {
     }
 
     /**
-    * The text color of the tooltip. The default is the same as the series labels color.
+    * The text color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */
@@ -42,7 +42,7 @@ class ChartSeriesItemTooltip extends \Kendo\SerializableObject {
     }
 
     /**
-    * The tooltip format. Format variables depend on the series type:
+    * The format of the labels. Uses kendo.format.Format placeholders:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */
@@ -51,8 +51,8 @@ class ChartSeriesItemTooltip extends \Kendo\SerializableObject {
     }
 
     /**
-    * The padding of the tooltip.
-    * @param float| $value
+    * The padding of the tooltip. A numeric value will set all paddings.
+    * @param float|\Kendo\Dataviz\UI\ChartSeriesItemTooltipPadding|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */
     public function padding($value) {
@@ -61,8 +61,7 @@ class ChartSeriesItemTooltip extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the ChartSeriesItemTooltip.
-    * The tooltip template.
-Template variables:
+    * The template which renders the tooltip.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */
@@ -74,8 +73,7 @@ Template variables:
 
     /**
     * Sets the template option of the ChartSeriesItemTooltip.
-    * The tooltip template.
-Template variables:
+    * The template which renders the tooltip.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */
@@ -84,7 +82,7 @@ Template variables:
     }
 
     /**
-    * A value indicating if the tooltip should be displayed.
+    * If set to true the chart will display the series tooltip. By default the series tooltip is not displayed.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTooltip
     */

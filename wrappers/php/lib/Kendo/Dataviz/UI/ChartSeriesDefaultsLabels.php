@@ -6,8 +6,7 @@ class ChartSeriesDefaultsLabels extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The background color of the labels. Any valid CSS color string will work here,
-including hex and rgb.
+    * The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
@@ -25,8 +24,7 @@ including hex and rgb.
     }
 
     /**
-    * The text color of the labels. Any valid CSS color string will work here, inlcuding hex
-and rgb.
+    * The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
@@ -36,7 +34,6 @@ and rgb.
 
     /**
     * The font style of the labels.
-labels
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
@@ -45,7 +42,7 @@ labels
     }
 
     /**
-    * The format of the labels.
+    * The format of the labels. Uses kendo.format.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
@@ -54,8 +51,8 @@ labels
     }
 
     /**
-    * The margin of the labels.
-    * @param float| $value
+    * The margin of the labels. A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartSeriesDefaultsLabelsMargin|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function margin($value) {
@@ -63,8 +60,8 @@ labels
     }
 
     /**
-    * The padding of the labels.
-    * @param float| $value
+    * The padding of the labels. A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartSeriesDefaultsLabelsPadding|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
     public function padding($value) {
@@ -73,8 +70,7 @@ labels
 
     /**
     * Sets the template option of the ChartSeriesDefaultsLabels.
-    * The label template.
-Template variables:
+    * The template which renders the chart series label.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
@@ -86,8 +82,7 @@ Template variables:
 
     /**
     * Sets the template option of the ChartSeriesDefaultsLabels.
-    * The label template.
-Template variables:
+    * The template which renders the chart series label.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */
@@ -96,7 +91,7 @@ Template variables:
     }
 
     /**
-    * The visibility of the labels.
+    * If set to true the chart will display the series labels. By default chart series labels are not displayed.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
     */

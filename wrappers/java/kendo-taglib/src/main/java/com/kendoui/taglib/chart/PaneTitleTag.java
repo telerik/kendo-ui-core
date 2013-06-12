@@ -55,6 +55,10 @@ public class PaneTitleTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
+    public void setMargin(com.kendoui.taglib.chart.PaneTitleMarginTag value) {
+        setProperty("margin", value);
+    }
+
     public String getBackground() {
         return (String)getProperty("background");
     }
@@ -79,11 +83,11 @@ public class PaneTitleTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("font", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 

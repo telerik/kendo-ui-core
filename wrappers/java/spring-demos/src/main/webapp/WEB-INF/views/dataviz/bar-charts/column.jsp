@@ -12,10 +12,6 @@
         		 "2008", "2009", 
         		 "2010", "2011"
              };
-         	
-         	HashMap<String, Object> padding = new HashMap<String, Object>();
-         	padding.put("top", 145);
-
          %>
          <kendo:chart name="chart">
              <kendo:chart-title text="Gross domestic product growth /GDP annual %/" />
@@ -30,7 +26,9 @@
              <kendo:chart-categoryAxis>
                 <kendo:chart-categoryAxisItem categories="<%= categories %>">
                 	<kendo:chart-categoryAxisItem-line visible="false"/>
-                	<kendo:chart-categoryAxisItem-labels padding="<%= padding %>" />
+                	<kendo:chart-categoryAxisItem-labels>
+                		<kendo:chart-categoryAxisItem-labels-padding top="145"/>
+                	</kendo:chart-categoryAxisItem-labels>
                 </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>

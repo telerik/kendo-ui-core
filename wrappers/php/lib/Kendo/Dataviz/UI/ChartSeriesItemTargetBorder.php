@@ -15,7 +15,7 @@ class ChartSeriesItemTargetBorder extends \kendo\SerializableObject {
     }
 
     /**
-    * The dash type of the border.
+    * The following dash types are supported:
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTargetBorder
     */
@@ -24,7 +24,7 @@ class ChartSeriesItemTargetBorder extends \kendo\SerializableObject {
     }
 
     /**
-    * The width of the border.
+    * The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
     * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemTargetBorder
     */

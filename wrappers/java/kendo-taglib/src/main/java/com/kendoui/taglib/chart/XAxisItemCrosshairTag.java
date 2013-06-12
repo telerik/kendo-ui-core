@@ -63,14 +63,6 @@ public class XAxisItemCrosshairTag extends  BaseTag  /* interfaces */ /* interfa
         setProperty("color", value);
     }
 
-    public float getDashType() {
-        return (float)getProperty("dashType");
-    }
-
-    public void setDashType(float value) {
-        setProperty("dashType", value);
-    }
-
     public float getOpacity() {
         return (float)getProperty("opacity");
     }

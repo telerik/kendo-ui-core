@@ -69,6 +69,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("line", value);
     }
 
+    public void setMargin(com.kendoui.taglib.chart.SeriesItemMarginTag value) {
+        setProperty("margin", value);
+    }
+
     public void setMarkers(com.kendoui.taglib.chart.SeriesItemMarkersTag value) {
         setProperty("markers", value);
     }

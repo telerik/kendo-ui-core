@@ -51,6 +51,14 @@ public class XAxisItemMajorTicksTag extends  BaseTag  /* interfaces *//* interfa
         return "chart-xAxisItem-majorTicks";
     }
 
+    public String getColor() {
+        return (String)getProperty("color");
+    }
+
+    public void setColor(String value) {
+        setProperty("color", value);
+    }
+
     public float getSize() {
         return (float)getProperty("size");
     }
@@ -65,6 +73,14 @@ public class XAxisItemMajorTicksTag extends  BaseTag  /* interfaces *//* interfa
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
+    }
+
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
 //<< Attributes

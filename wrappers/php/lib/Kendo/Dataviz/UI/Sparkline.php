@@ -178,20 +178,6 @@ This is the entire visible area of the chart.
     }
 
     /**
-    * Sets the legendItemClick event of the Sparkline.
-    * Fires when an legend item is clicked.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
-    * @return \Kendo\Dataviz\UI\Sparkline
-    */
-    public function legendItemClick($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
-        return $this->setProperty('legendItemClick', $value);
-    }
-
-    /**
     * Sets the dataBound event of the Sparkline.
     * Fires when the chart has received data from the data source
 and is about to render it.

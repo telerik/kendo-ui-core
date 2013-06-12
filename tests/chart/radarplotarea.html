@@ -101,6 +101,30 @@
                 equal(plotArea.axisBox.height(), 175);
             });
 
+            // ------------------------------------------------------------
+            module("Radar Plot Area / Charts");
+
+            test("first series gap setting is applied to radarColumn charts", function() {
+                createPlotArea([{ type: "radarColumn", data: [], gap: 2 }]);
+
+                equal(plotArea.charts[0].options.gap, 2);
+            });
+
+            test("first series spacing setting is applied to radarColumn charts", function() {
+                createPlotArea([{ type: "radarColumn", data: [], spacing: 2 }]);
+
+                equal(plotArea.charts[0].options.spacing, 2);
+            });
+
+            test("first series stack setting is applied to radarColumn charts", function() {
+                createPlotArea([
+                    { type: "radarColumn", data: [], stack: true },
+                    { type: "radarColumn", data: [] }
+                ]);
+
+                ok(plotArea.charts[0].options.isStacked);
+            });
+
             (function() {
                 var chart,
                     point,

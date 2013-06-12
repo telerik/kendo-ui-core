@@ -55,6 +55,18 @@ public class YAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("border", value);
     }
 
+    public void setDateFormats(com.kendoui.taglib.chart.YAxisItemLabelsDateFormatsTag value) {
+        setProperty("dateFormats", value);
+    }
+
+    public void setMargin(com.kendoui.taglib.chart.YAxisItemLabelsMarginTag value) {
+        setProperty("margin", value);
+    }
+
+    public void setPadding(com.kendoui.taglib.chart.YAxisItemLabelsPaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public void setTemplate(YAxisItemLabelsTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
@@ -83,14 +95,6 @@ public class YAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("culture", value);
     }
 
-    public Object getDateFormats() {
-        return (Object)getProperty("dateFormats");
-    }
-
-    public void setDateFormats(Object value) {
-        setProperty("dateFormats", value);
-    }
-
     public String getFont() {
         return (String)getProperty("font");
     }
@@ -107,11 +111,11 @@ public class YAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("format", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
@@ -123,11 +127,11 @@ public class YAxisItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("mirror", value);
     }
 
-    public Object getPadding() {
-        return (Object)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(Object value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 

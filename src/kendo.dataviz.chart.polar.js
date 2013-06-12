@@ -60,7 +60,7 @@ kendo_module({
             POLAR_AREA, POLAR_LINE, POLAR_SCATTER
         ],
         RADAR_CHARTS = [
-            RADAR_AREA, RADAR_LINE, RADAR_COLUMN
+            RADAR_AREA, RADAR_COLUMN, RADAR_LINE
         ];
 
     // Polar and radar charts =================================================
@@ -139,16 +139,13 @@ kendo_module({
 
     var RadarCategoryAxis = CategoryAxis.extend({
         options: {
-            // TODO: Document
             startAngle: 90,
             labels: {
-                // TODO: Document
                 margin: getSpacing(10)
             },
             majorGridLines: {
                 visible: true
             },
-            // TODO: Document for radar charts
             justified: true
         },
 
@@ -340,7 +337,6 @@ kendo_module({
     var RadarNumericAxis = NumericAxis.extend({
         options: {
             majorGridLines: {
-                // TODO: Document type[line*, arc]
                 visible: true
             }
         },
@@ -521,10 +517,8 @@ kendo_module({
             min: 0,
             max: 360,
             labels: {
-                // TODO: Document
                 margin: getSpacing(10)
             },
-            // TODO: Defaults
             majorGridLines: {
                 color: BLACK,
                 visible: true
@@ -745,10 +739,14 @@ kendo_module({
         options: {
             overlay: {
                 gradient: null
+            },
+            labels: {
+                distance: 10
             }
         }
     });
 
+    // TODO: Rename to RadarColumnChart
     var RadarBarChart = BarChart.extend({
         pointType: function() {
             return RadarSegment;
@@ -1054,7 +1052,9 @@ kendo_module({
                 filteredSeries = plotArea.filterVisibleSeries(series),
                 lineChart = new RadarBarChart(plotArea, {
                     isStacked: firstSeries.stack && filteredSeries.length > 1,
-                    series: series
+                    series: series,
+                    gap: firstSeries.gap,
+                    spacing: firstSeries.spacing
                 });
 
             plotArea._hasBarCharts = true;

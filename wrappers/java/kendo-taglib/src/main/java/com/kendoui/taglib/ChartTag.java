@@ -128,6 +128,10 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setEvent("legendItemClick", value.getBody());
     }
 
+    public void setLegendItemHover(LegendItemHoverFunctionTag value) {
+        setEvent("legendItemHover", value.getBody());
+    }
+
     public void setPlotAreaClick(PlotAreaClickFunctionTag value) {
         setEvent("plotAreaClick", value.getBody());
     }
@@ -191,6 +195,14 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setTheme(String value) {
         setProperty("theme", value);
+    }
+
+    public String getTitle() {
+        return (String)getProperty("title");
+    }
+
+    public void setTitle(String value) {
+        setProperty("title", value);
     }
 
     public boolean getTransitions() {
@@ -271,6 +283,18 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setLegendItemClick(String value) {
         setProperty("legendItemClick", new Function(value));
+    }
+
+    public String getLegendItemHover() {
+        Function property = ((Function)getProperty("legendItemHover"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setLegendItemHover(String value) {
+        setProperty("legendItemHover", new Function(value));
     }
 
     public String getPlotAreaClick() {

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Radar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet"></script>
+        <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet"></script>
+    </head>
+    <body>
+        <div id="chart" style="width: 300px; height: 300px; float: left;"></div>
+        <script>
+            $(function() {
+                $("#chart").kendoChart({
+                    series: [{
+                        type: "radarLine",
+                        data: [1, 2, 3]
+                    }],
+                    categoryAxis: {
+                        categories: ["Foo", "Bar", "Baz"],
+                        minorGridLines: {
+                            // TODO: Limit length
+                            visible: true
+                        }
+                    },
+                    // TODO: Implement custom animations
+                    //transitions: true
+                });
+            });
+        </script>
+    </body>
+</html>
+

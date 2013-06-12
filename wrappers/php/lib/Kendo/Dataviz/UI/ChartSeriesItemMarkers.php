@@ -6,7 +6,7 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The background color of the current series markers.
+    * The background color of the series markers.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */
@@ -24,7 +24,7 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
     }
 
     /**
-    * The marker size.
+    * The marker size in pixels.
     * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */
@@ -33,7 +33,10 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
     }
 
     /**
-    * Configures the markers shape type.
+    * The markers shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */
@@ -42,7 +45,7 @@ class ChartSeriesItemMarkers extends \Kendo\SerializableObject {
     }
 
     /**
-    * The markers visibility.
+    * If set to true the chart will display the series markers. By default chart series markers are not displayed.
     * @param boolean|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemMarkers
     */

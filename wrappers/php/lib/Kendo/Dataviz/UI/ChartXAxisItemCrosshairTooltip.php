@@ -6,7 +6,7 @@ class ChartXAxisItemCrosshairTooltip extends \kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The background color of the tooltip.
+    * The background color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltip
     */
@@ -15,7 +15,7 @@ class ChartXAxisItemCrosshairTooltip extends \kendo\SerializableObject {
     }
 
     /**
-    * The border configuration options.
+    * The border options.
     * @param \Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltipBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltip
     */
@@ -24,7 +24,7 @@ class ChartXAxisItemCrosshairTooltip extends \kendo\SerializableObject {
     }
 
     /**
-    * The text color of the tooltip.
+    * The text color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltip
     */
@@ -42,7 +42,7 @@ class ChartXAxisItemCrosshairTooltip extends \kendo\SerializableObject {
     }
 
     /**
-    * The tooltip format.
+    * The format used to display the tooltip. Uses kendo.format. Contains one placeholder ("{0}") which represents the value value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltip
     */
@@ -51,8 +51,8 @@ class ChartXAxisItemCrosshairTooltip extends \kendo\SerializableObject {
     }
 
     /**
-    * The padding of the tooltip.
-    * @param float| $value
+    * The padding of the crosshair tooltip. A numeric value will set all paddings.
+    * @param float|\Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltipPadding|array $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltip
     */
     public function padding($value) {
@@ -61,8 +61,7 @@ class ChartXAxisItemCrosshairTooltip extends \kendo\SerializableObject {
 
     /**
     * Sets the template option of the ChartXAxisItemCrosshairTooltip.
-    * The tooltip template.
-Template variables:
+    * The template which renders the tooltip.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltip
     */
@@ -74,8 +73,7 @@ Template variables:
 
     /**
     * Sets the template option of the ChartXAxisItemCrosshairTooltip.
-    * The tooltip template.
-Template variables:
+    * The template which renders the tooltip.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltip
     */
@@ -84,7 +82,7 @@ Template variables:
     }
 
     /**
-    * A value indicating if the tooltip should be displayed.
+    * If set to true the chart will display the scatter chart x axis crosshair tooltip. By default the scatter chart x axis crosshair tooltip is not visible.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemCrosshairTooltip
     */

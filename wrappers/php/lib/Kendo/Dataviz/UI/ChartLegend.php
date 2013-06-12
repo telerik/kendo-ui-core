@@ -6,7 +6,7 @@ class ChartLegend extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The background color of the legend. Any valid CSS color string will work here, including hex and rgb.
+    * The background color of the legend. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
@@ -24,7 +24,16 @@ class ChartLegend extends \Kendo\SerializableObject {
     }
 
     /**
-    * Configures the legend labels.
+    * The chart inactive legend items configuration.
+    * @param \Kendo\Dataviz\UI\ChartLegendInactiveItems|array $value
+    * @return \Kendo\Dataviz\UI\ChartLegend
+    */
+    public function inactiveItems($value) {
+        return $this->setProperty('inactiveItems', $value);
+    }
+
+    /**
+    * The chart legend label configuration.
     * @param \Kendo\Dataviz\UI\ChartLegendLabels|array $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
@@ -33,8 +42,8 @@ class ChartLegend extends \Kendo\SerializableObject {
     }
 
     /**
-    * The margin of the legend.
-    * @param float| $value
+    * The margin of the chart legend. A numeric value will set all paddings.
+    * @param float|\Kendo\Dataviz\UI\ChartLegendMargin|array $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
     public function margin($value) {
@@ -42,9 +51,9 @@ class ChartLegend extends \Kendo\SerializableObject {
     }
 
     /**
-    * The X offset from its position.  The offset is relative to the current position of the legend.
-For instance, a value of 20 will move the legend 20 pixels to the right of it's initial position.  A negative value will move the legend
-to the left of the current position.
+    * The X offset of the chart legend. The offset is relative to the default position of the legend.
+For instance, a value of 20 will move the legend 20 pixels to the right of its initial position.
+A negative value will move the legend to the left of its current position.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
@@ -53,9 +62,9 @@ to the left of the current position.
     }
 
     /**
-    * The Y offset from its position.  The offset is relative to the current position of the legend.
-For instance, a value of 20 will move the legend 20 pixels down from it's initial position.  A negative value will move the legend
-upwards from the current position.
+    * The Y offset of the chart legend.  The offset is relative to the current position of the legend.
+For instance, a value of 20 will move the legend 20 pixels down from its initial position.
+A negative value will move the legend upwards from its current position.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
@@ -64,16 +73,7 @@ upwards from the current position.
     }
 
     /**
-    * The padding of the legend.
-    * @param float| $value
-    * @return \Kendo\Dataviz\UI\ChartLegend
-    */
-    public function padding($value) {
-        return $this->setProperty('padding', $value);
-    }
-
-    /**
-    * The positions of the legend.
+    * The positions of the chart legend.The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */
@@ -82,7 +82,7 @@ upwards from the current position.
     }
 
     /**
-    * The visibility of the legend.
+    * If set to true the chart will display the legend. By default the chart legend is visible.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartLegend
     */

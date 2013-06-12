@@ -167,6 +167,14 @@ public class XAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("reverse", value);
     }
 
+    public float getStartAngle() {
+        return (float)getProperty("startAngle");
+    }
+
+    public void setStartAngle(float value) {
+        setProperty("startAngle", value);
+    }
+
     public String getType() {
         return (String)getProperty("type");
     }

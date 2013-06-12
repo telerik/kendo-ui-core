@@ -6,8 +6,7 @@ class ChartValueAxisItemLabels extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The background color of the labels. Any valid CSS color string will work here, including
-hex and rgb
+    * The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
@@ -25,7 +24,7 @@ hex and rgb
     }
 
     /**
-    * The text color of the labels. Any valid CSS color string will work here, including hex and rgb.
+    * The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
@@ -43,7 +42,7 @@ hex and rgb
     }
 
     /**
-    * The format of the labels.
+    * The format used to display the labels. Uses kendo.format. Contains one placeholder ("{0}") which represents the category value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
@@ -52,8 +51,8 @@ hex and rgb
     }
 
     /**
-    * The margin of the labels.
-    * @param float| $value
+    * The margin of the labels. A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartValueAxisItemLabelsMargin|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function margin($value) {
@@ -61,9 +60,7 @@ hex and rgb
     }
 
     /**
-    * Mirrors the axis labels and ticks.
-If the labels are normally on the left side of the axis,
-mirroring the axis will render them to the right.
+    * If set to true the chart will mirror the axis labels and ticks. If the labels are normally on the left side of the axis, mirroring the axis will render them to the right.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
@@ -72,8 +69,8 @@ mirroring the axis will render them to the right.
     }
 
     /**
-    * The padding of the labels.
-    * @param float| $value
+    * The padding of the labels. A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartValueAxisItemLabelsPadding|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
     public function padding($value) {
@@ -81,7 +78,7 @@ mirroring the axis will render them to the right.
     }
 
     /**
-    * The rotation angle of the labels.
+    * The rotation angle (in degrees) of the labels. By default the labels are not rotated.Angles increase clockwise and zero is to the left. Negative values are acceptable.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
@@ -90,8 +87,7 @@ mirroring the axis will render them to the right.
     }
 
     /**
-    * Number of labels to skip.
-Skips rendering the first n labels.
+    * The number of labels to skip. By default no labels are skipped.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
@@ -111,8 +107,7 @@ Every n-th label is rendered where n is the step
 
     /**
     * Sets the template option of the ChartValueAxisItemLabels.
-    * The label template.
-Template variables:
+    * The template which renders the labels.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
@@ -124,8 +119,7 @@ Template variables:
 
     /**
     * Sets the template option of the ChartValueAxisItemLabels.
-    * The label template.
-Template variables:
+    * The template which renders the labels.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */
@@ -134,7 +128,7 @@ Template variables:
     }
 
     /**
-    * The visibility of the labels.
+    * If set to true the chart will display the value axis labels. By default the category axis labels are visible.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemLabels
     */

@@ -53,6 +53,14 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
+    public void setMargin(com.kendoui.taglib.chart.PaneMarginTag value) {
+        setProperty("margin", value);
+    }
+
+    public void setPadding(com.kendoui.taglib.chart.PanePaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public void setTitle(com.kendoui.taglib.chart.PaneTitleTag value) {
         setProperty("title", value);
     }
@@ -73,11 +81,11 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("height", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
@@ -89,11 +97,11 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("name", value);
     }
 
-    public Object getPadding() {
-        return (Object)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(Object value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 

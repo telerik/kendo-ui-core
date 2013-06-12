@@ -49,6 +49,10 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         return "chart-categoryAxisItem";
     }
 
+    public void setAutoBaseUnitSteps(com.kendoui.taglib.chart.CategoryAxisItemAutoBaseUnitStepsTag value) {
+        setProperty("autoBaseUnitSteps", value);
+    }
+
     public void setCrosshair(com.kendoui.taglib.chart.CategoryAxisItemCrosshairTag value) {
         setProperty("crosshair", value);
     }
@@ -89,14 +93,6 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
 
     public void setTitle(com.kendoui.taglib.chart.CategoryAxisItemTitleTag value) {
         setProperty("title", value);
-    }
-
-    public Object getAutoBaseUnitSteps() {
-        return (Object)getProperty("autoBaseUnitSteps");
-    }
-
-    public void setAutoBaseUnitSteps(Object value) {
-        setProperty("autoBaseUnitSteps", value);
     }
 
     public Object getAxisCrossingValue() {
@@ -209,6 +205,14 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
 
     public void setRoundToBaseUnit(boolean value) {
         setProperty("roundToBaseUnit", value);
+    }
+
+    public float getStartAngle() {
+        return (float)getProperty("startAngle");
+    }
+
+    public void setStartAngle(float value) {
+        setProperty("startAngle", value);
     }
 
     public String getType() {

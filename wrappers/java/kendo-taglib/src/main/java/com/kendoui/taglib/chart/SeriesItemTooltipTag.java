@@ -55,6 +55,10 @@ public class SeriesItemTooltipTag extends  BaseTag  /* interfaces *//* interface
         setProperty("border", value);
     }
 
+    public void setPadding(com.kendoui.taglib.chart.SeriesItemTooltipPaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public void setTemplate(SeriesItemTooltipTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
@@ -91,11 +95,11 @@ public class SeriesItemTooltipTag extends  BaseTag  /* interfaces *//* interface
         setProperty("format", value);
     }
 
-    public Object getPadding() {
-        return (Object)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(Object value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 

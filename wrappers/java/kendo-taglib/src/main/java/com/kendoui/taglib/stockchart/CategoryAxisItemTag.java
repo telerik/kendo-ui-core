@@ -49,6 +49,10 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         return "stockChart-categoryAxisItem";
     }
 
+    public void setAutoBaseUnitSteps(com.kendoui.taglib.stockchart.CategoryAxisItemAutoBaseUnitStepsTag value) {
+        setProperty("autoBaseUnitSteps", value);
+    }
+
     public void setCrosshair(com.kendoui.taglib.stockchart.CategoryAxisItemCrosshairTag value) {
         setProperty("crosshair", value);
     }
@@ -89,14 +93,6 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
 
     public void setTitle(com.kendoui.taglib.stockchart.CategoryAxisItemTitleTag value) {
         setProperty("title", value);
-    }
-
-    public Object getAutoBaseUnitSteps() {
-        return (Object)getProperty("autoBaseUnitSteps");
-    }
-
-    public void setAutoBaseUnitSteps(Object value) {
-        setProperty("autoBaseUnitSteps", value);
     }
 
     public Object getAxisCrossingValue() {
