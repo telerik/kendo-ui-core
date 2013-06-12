@@ -1,71 +1,18 @@
 ﻿@(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.SchedulerEvent>()
     .Name("Scheduler")
     .Events(e => e.Edit("onEdit"))
-    .DataSource(d => d.Ajax().Read("Read", "Scheduler"))
+    .DataSource(d => d
+        .Model(m => m.Id(f => f.Id))
+        .Read("Read", "Scheduler")
+        .Create("Create", "Scheduler")
+        .Destroy("Destroy", "Scheduler")
+        .Update("Update", "Scheduler")
+    
+    )
 )
+
 <script type="text/javascript">
     function onEdit(e) {
         console.log("Edit event fired");
     }
 </script>
-
-<style scoped="scoped">
-    html
-    {
-        font: 12px sans-serif;
-    }
-    
-    /* common.less */
-    
-    /* template.less */
-    
-    .k-scheduler
-    {
-        background-color: #fff;
-    }
-    
-    .k-scheduler-table td, .k-scheduler-header th
-    {
-        border-color: #ccc;
-    }
-    
-    .k-scheduler-toolbar + .k-scheduler-times tr th
-    {
-        border-bottom-color: #ccc;
-    }
-    
-    .k-scheduler-table .k-today
-    {
-        background-color: #f6f6f6;
-    }
-    
-    .k-scheduler-now-arrow
-    {
-        border-left-color: #f00;
-    }
-    
-    .k-scheduler-now-line
-    {
-        background-color: #f00;
-    }
-    
-    .k-scheduler-header-wrap .k-scheduler-table, .k-scheduler-content .k-scheduler-table
-    {
-        /*width:140%;*/
-    }
-    
-    .k-appointment
-    {
-        border-color: #8bf;
-        background-color: #def; /* cursor:move;*/
-    }
-    
-    .k-appointment:hover
-    {
-        border-color: #69f;
-    }
-    
-    /*
-    *{border-color:red !important;}
-    */
-</style>
