@@ -575,9 +575,11 @@ kendo_module({
                 }
             }
 
+            html += '<div class="k-edit-buttons">';
+
             html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
 
-            html += '</div></div>';
+            html += '</div></div></div>';
 
             var container = that._editContainer = $(html)
                 .appendTo(that.wrapper).eq(0)
