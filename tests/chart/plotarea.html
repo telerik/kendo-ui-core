@@ -378,6 +378,15 @@
                     equal(plotArea.axes[0].options.justified, true);
                 });
 
+                test("categoryAxis should have justified true if the type of the series is verticalArea", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([{
+                            type: "verticalArea",
+                            data: [100]
+                        }], { });
+
+                    equal(plotArea.axes[0].options.justified, true);
+                });
+
                 test("categoryAxis should have justified false if the one of the all series is not from type area", function() {
                     var plotArea = new dataviz.CategoricalPlotArea([{
                             type: "area",

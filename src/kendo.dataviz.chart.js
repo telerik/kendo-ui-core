@@ -7152,7 +7152,7 @@ kendo_module({
 
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
-                if (currentSeries.type !== AREA) {
+                if (!inArray(currentSeries.type, [AREA, VERTICAL_AREA])) {
                     return false;
                 }
             }
