@@ -17,7 +17,7 @@
                     Id = 1, 
                     Title = "Meeting",
                     Description = "Meeting with colegue",
-                    AllDayEvent = true,
+                    IsAllDay = true,
                     Start = new DateTime(2013, 1, 5), End = new DateTime(2013, 1, 5)
                 },
                 new SchedulerEventDouble() 
@@ -25,7 +25,7 @@
                     Id = 2,
                     Title = "Trip",
                     Description = "Business trip to Germany",
-                    AllDayEvent = true,
+                    IsAllDay = true,
                     Start = new DateTime(2013, 1, 10),
                     End = new DateTime(2013, 1, 20)
                 }

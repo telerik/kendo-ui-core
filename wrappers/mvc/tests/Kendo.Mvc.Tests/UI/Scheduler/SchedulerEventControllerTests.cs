@@ -77,7 +77,7 @@
                     Id = 0,
                     Title = "Meeting",
                     Description = "Meeting with friend",
-                    AllDayEvent = true,
+                    IsAllDay = true,
                     Start = new DateTime(2013, 1, 1),
                     End = new DateTime(2013, 1, 2)
                 });
@@ -105,7 +105,7 @@
                 { 
                     Id = 0,
                     Description = "Meeting with friend",
-                    AllDayEvent = true,
+                    IsAllDay = true,
                     Start = new DateTime(2013, 1, 1),
                     End = new DateTime(2013, 1, 2) 
                 });

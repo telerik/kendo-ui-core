@@ -50,8 +50,8 @@
                     dbRecord.Description = appointment.Description;
                     dbRecord.Start = appointment.Start;
                     dbRecord.End = appointment.End;
-                    dbRecord.AllDayEvent = appointment.AllDayEvent;
-                    dbRecord.RecurrenceRules = appointment.RecurrenceRules;
+                    dbRecord.IsAllDay = appointment.IsAllDay;
+                    dbRecord.Recurrence = appointment.Recurrence;
                 }
                 else
                 {

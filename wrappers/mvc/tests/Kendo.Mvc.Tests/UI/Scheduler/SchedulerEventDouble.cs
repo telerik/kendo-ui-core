@@ -24,7 +24,7 @@
             set;
         }
 
-        public bool AllDayEvent
+        public bool IsAllDay
         {
             get;
             set;
@@ -42,7 +42,7 @@
             set;
         }
 
-        public IList<string> RecurrenceRules
+        public string Recurrence
         {
             get;
             set;
