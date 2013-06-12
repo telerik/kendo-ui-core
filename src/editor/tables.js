@@ -49,21 +49,56 @@ var TableCommand = Command.extend({
 
 var TableEditor = kendo.Class.extend({
     init: function(table) {
-        var doc = table.ownerDocument,
+        this.table = table;
+
+        this._render();
+
+        this._attachEvents();
+    },
+
+    _render: function() {
+        var table = this.table,
+            doc = table.ownerDocument,
             selectionRow = dom.create(doc, "tr"),
             selectionCell = dom.create(doc, "td"),
-            rows = table.rows;
+            rows = table.rows,
+            i;
 
         selectionCell.className = "k-selection-cell";
 
-        selectionRow.appendChild(selectionCell.cloneNode());
-        dom.insertBefore(selectionRow, table.rows[0]);
-
-        for (var i = 0; i < rows.length; i++) {
-            dom.insertBefore(selectionCell.cloneNode(), rows[i].cells[0]);
+        for (i = 0; i < rows[rows.length-1].cells.length; i++) {
+            selectionRow.appendChild(selectionCell.cloneNode());
         }
 
-        this.table = table;
+        dom.insertBefore(selectionRow, table.rows[0]);
+
+        for (i = 0; i < rows.length; i++) {
+            dom.insertBefore(selectionCell.cloneNode(), rows[i].cells[0]);
+        }
+    },
+
+    _attachEvents: function() {
+        $(this.table).on("click" + NS, ".k-selection-cell", proxy(this._selectionCellClick, this));
+    },
+
+    _detachEvents: function() {
+        $(this.table).off("click" + NS);
+    },
+
+    _selectionCellClick: function(e) {
+        var target = $(e.target),
+            rowIndex = target.parent().index(),
+            cellIndex = target.index();
+
+        if (!e.shiftKey) {
+            this.clearSelection();
+        }
+
+        if (!cellIndex) {
+            this.selectRow(rowIndex);
+        } else if (!rowIndex) {
+            this.selectColumn(cellIndex);
+        }
     },
 
     selectRow: function(index) {
@@ -89,12 +124,13 @@ var TableEditor = kendo.Class.extend({
             cells = rows[r].cells;
 
             for (var  c = 1; c < cells.length; c++) {
-                cells[c].className = cells[c].className.replace(/\s?k-selected\s?/g, "");
+                cells[c].className = cells[c].className.replace(/\s?k-selected\b/, "");
             }
         }
     },
 
     destroy: function() {
+        this._detachEvents();
         dom.remove(this.table.rows[0]);
         dom.remove(this.table.rows[0].cells[0]);
     }

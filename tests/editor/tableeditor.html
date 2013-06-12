@@ -51,7 +51,16 @@
                 ok(cells.eq(2).hasClass("k-selection-cell"));
             });
 
-            test("initializing adds select rows to table", function() {
+            test("initializing adds select rows with proper cell countto table", function() {
+                table = createTable(2, 3);
+
+                tableEditor = new TableEditor(table[0]);
+
+                var cells = table.find("td");
+                equal(cells.length, 12);
+            });
+
+            test("destroying removes select rows from table", function() {
                 table = createTable(1, 1);
 
                 tableEditor = new TableEditor(table[0]);
@@ -111,6 +120,63 @@
                 tableEditor.clearSelection();
 
                 equal(table.find("td.k-selected").length, 0);
+            });
+
+            test("clicking row selection cells calls selectRow with proper index", function() {
+                var index;
+
+                table = createTable(2, 2);
+
+                tableEditor = new TableEditor(table[0]);
+
+                withMock(tableEditor, "selectRow", function(i) { index = i; }, function() {
+                    table.find("td.k-selection-cell:last").click();
+
+                    equal(index, 2);
+                });
+            });
+
+            test("clicking column selection cells calls selectColumn with proper index", function() {
+                var index;
+
+                table = createTable(2, 2);
+
+                tableEditor = new TableEditor(table[0]);
+
+                withMock(tableEditor, "selectColumn", function(i) { index = i; }, function() {
+                    table.find("tr:first td.k-selection-cell").eq(1).click();
+
+                    equal(index, 1);
+                });
+            });
+
+            test("clicking column selection cells removes previous selection", function() {
+                table = createTable(2, 2);
+
+                tableEditor = new TableEditor(table[0]);
+
+                var selectionCells = table.find("tr:first td.k-selection-cell");
+
+                selectionCells.eq(1).click();
+                selectionCells.eq(2).click();
+
+                equal(table.find("td.k-selected").length, 2);
+            });
+
+            test("shift-clicking column selection cells adds column to selection", function() {
+                table = createTable(2, 2);
+
+                tableEditor = new TableEditor(table[0]);
+
+                var selectionCells = table.find("tr:first td.k-selection-cell");
+
+                selectionCells.eq(1).click();
+                selectionCells.eq(2).trigger({
+                    shiftKey: true,
+                    type: "click"
+                });
+
+                equal(table.find("td.k-selected").length, 4);
             });
 
         </script>
