@@ -206,6 +206,76 @@
                 equal(removeDefaultHorizontalOffset(secondEventOffset.left), secondSlot.left);
             });
 
+            test("event on two rows has arrows added", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 12), title: "multi day event" })
+                ]);
+
+                var firstEvent = view.content.find(".k-event:first");
+                var secondEvent = view.content.find(".k-event:last");
+
+                ok(!firstEvent.find(".k-event-actions:first .k-i-arrow-w").length);
+                equal(firstEvent.find(".k-event-actions:last .k-i-arrow-e").length, 1);
+
+                equal(secondEvent.find(".k-event-actions:first .k-i-arrow-w").length, 1);
+                equal(secondEvent.find(".k-event-actions:last .k-i-arrow-e").length, 0);
+            });
+
+            test("event on multiple rows has arrows added", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 19), title: "multi day event" })
+                ]);
+
+                var firstEvent = view.content.find(".k-event:first");
+                var secondEvent = view.content.find(".k-event:eq(1)");
+                var lastEvent = view.content.find(".k-event:last");
+
+                ok(!firstEvent.find(".k-event-actions:first .k-i-arrow-w").length);
+                equal(firstEvent.find(".k-event-actions:last .k-i-arrow-e").length, 1);
+
+                equal(secondEvent.find(".k-event-actions:first .k-i-arrow-w").length, 1);
+                equal(secondEvent.find(".k-event-actions:last .k-i-arrow-e").length, 1);
+
+                equal(lastEvent.find(".k-event-actions:first .k-i-arrow-w").length, 1);
+                ok(!lastEvent.find(".k-event-actions:last .k-i-arrow-e").length);
+            });
+
+            test("event ending after the endDate has arrows added", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 2, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 2, 31), end: new Date(2013, 3, 19), title: "multi day event" })
+                ]);
+
+                var firstEvent = view.content.find(".k-event:first");
+
+                ok(!firstEvent.find(".k-event-actions:first .k-i-arrow-w").length);
+                equal(firstEvent.find(".k-event-actions:last .k-i-arrow-e").length, 1);
+           });
+
+           test("event starting on a last week start and ending after the endDate", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 2, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 2, 31), end: new Date(2013, 3, 19), title: "multi day event" })
+                ]);
+
+                equal(view.content.find(".k-event").length, 1);
+           });
+
+
             test("clicking the cell link trigger navigate event", 2, function() {
                  var view = setup();
 

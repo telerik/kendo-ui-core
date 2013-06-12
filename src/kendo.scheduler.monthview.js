@@ -13,16 +13,28 @@ kendo_module({
         NS = ".kendoMonthView",
         extend = $.extend,
         proxy = $.proxy,
+        getDate = kendo.date.getDate,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
         DAY_TEMPLATE = kendo.template('<span class="k-link k-nav-day">#=kendo.toString(data, "dd")#</span>'),
         EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                 'style="background-color:#=resources[0].color #"' +
                 '#}#' +
-                '>{0}' +
-                '#if (showDelete) {#' +
-                    '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
-                '#}#' +
+                '>' +
+                '<span class="k-event-actions">' +
+                    '# if(data.tail || data.middle) {#' +
+                        '<a href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a>' +
+                    '#}#' +
+                '</span>' +
+                '{0}' +
+                '<span class="k-event-actions">' +
+                    '#if (showDelete) {#' +
+                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
+                    '#}#' +
+                    '# if(data.head || data.middle) {#' +
+                        '<a href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a>' +
+                    '#}#' +
+                '</span>' +
                 '</div>',
         EVENT_TEMPLATE = kendo.template('<div title="#=title#">' +
                     '<dl><dd>${title}</dd></dl>' +
@@ -159,7 +171,7 @@ kendo_module({
                 html += content(start);
                 html += "</td>";
 
-                slotIndices[kendo.date.getDate(start).getTime()] = idx;
+                slotIndices[getDate(start).getTime()] = idx;
 
                 start = kendo.date.nextDay(start);
             }
@@ -226,7 +238,7 @@ kendo_module({
         },
 
         _slotIndex: function(date) {
-            return this._slotIndices[kendo.date.getDate(date).getTime()];
+            return this._slotIndices[getDate(date).getTime()];
         },
 
         _calculateAllDayEventWidth: function(startIndex, endIndex) {
@@ -287,22 +299,50 @@ kendo_module({
             var result = [],
                 idx,
                 event,
+                weekStartDates = this._weekStartDates,
+                eventDurationInDays,
+                weekStart,
                 length;
 
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = extend({}, events[idx]);
 
-                for (var dateIdx = 0, dateLength = this._weekStartDates.length; dateIdx < dateLength; dateIdx++) {
-                    var eventDurationInDays = Math.ceil((event.end - event.start) / (1000 * 3600 * 24));
+                for (var dateIdx = 0, dateLength = weekStartDates.length; dateIdx < dateLength; dateIdx++) {
+                    weekStart = weekStartDates[dateIdx];
+                    eventDurationInDays = Math.ceil((event.end - event.start) / MS_PER_DAY);
 
-                    if (isInDateRange(this._weekStartDates[dateIdx], event.start, event.end) && eventDurationInDays > 1) {
-                        var tmp = extend({}, event);
-                        tmp.start = event.start;
-                        tmp.end = kendo.date.previousDay(this._weekStartDates[dateIdx]);
-                        result.push(tmp);
+                    if (isInDateRange(weekStart, event.start, event.end) && eventDurationInDays > 1) {
+                        if (getDate(event.start).getTime() === getDate(weekStart).getTime()) {
+                            if (event.tail) {
+                                event.tail = false;
+                                event.middle = true;
+                            } else {
+                                event.head = true;
+                            }
+                        } else {
+                            var tmp = extend({}, event);
 
-                        event.start = this._weekStartDates[dateIdx];
-                        event.end = event.end;
+                            if (event.tail) {
+                                event.tail = false;
+                                tmp.middle = true;
+                            } else {
+                                tmp.head = true;
+                            }
+
+                            tmp.start = event.start;
+                            tmp.end = kendo.date.previousDay(weekStart);
+                            result.push(tmp);
+
+                            event.start = weekStart;
+                            event.head = false;
+
+                            if (getDate(event.end).getTime() > getDate(this.endDate).getTime() + MS_PER_DAY - 1) {
+                                event.middle = true;
+                            } else {
+                                event.tail = true;
+                            }
+                            event.end = event.end;
+                        }
                     }
                 }
 
