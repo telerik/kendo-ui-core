@@ -619,14 +619,7 @@ kendo_module({
         },
 
         _show: function(view, transition, params) {
-            var that = this,
-                Drawer = kendo.mobile.ui.Drawer;
-
-            // Having a drawer open will perform closing drawer transition - in which case
-            // do not perform view transitions
-            if (Drawer && Drawer.current) {
-                transition = null;
-            }
+            var that = this;
 
             if (that._view !== view) {
                 view.switchWith(that._view, transition, params, function() {
