@@ -71,7 +71,7 @@
             });
 
             test("destroying removes selection and selection rows from table", function() {
-                table = createTable(1, 1);
+                table = createTable(2, 3);
 
                 tableEditor = new TableEditor(table[0]);
 
@@ -79,8 +79,8 @@
 
                 tableEditor.destroy();
 
-                equal(table.find("tr").length, 1);
-                equal(table.find("td").length, 1);
+                equal(table.find("tr").length, 2);
+                equal(table.find("td").length, 6);
                 equal(table.find(".k-selection-cell").length, 0);
                 equal(table.find(".k-selected").length, 0);
             });

@@ -134,13 +134,17 @@ var TableEditor = kendo.Class.extend({
     },
 
     destroy: function() {
-        var rows = this.table.rows;
+        var rows = this.table.rows, i, len = rows.length;
 
         this.clearSelection();
 
         this._detachEvents();
+
+        for (i = 0; i < len; i++) {
+            dom.remove(rows[i].cells[0]);
+        }
+
         dom.remove(rows[0]);
-        dom.remove(rows[0].cells[0]);
     }
 });
 
