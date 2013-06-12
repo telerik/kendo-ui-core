@@ -18,7 +18,7 @@
         }
 
         //Duration
-        bool AllDayEvent
+        bool IsAllDay
         {
             get;
             set;
@@ -37,7 +37,7 @@
         }
 
         //Recurrence
-        IList<string> RecurrenceRules
+        string Recurrence
         {
             get;
             set;
