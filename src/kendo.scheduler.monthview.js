@@ -23,7 +23,7 @@ kendo_module({
                 '>' +
                 '<span class="k-event-actions">' +
                     '# if(data.tail || data.middle) {#' +
-                        '<a href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a>' +
+                        '<span class="k-icon k-i-arrow-w"></span>' +
                     '#}#' +
                 '</span>' +
                 '{0}' +
@@ -32,7 +32,7 @@ kendo_module({
                         '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
                     '#}#' +
                     '# if(data.head || data.middle) {#' +
-                        '<a href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a>' +
+                        '<span class="k-icon k-i-arrow-e"></span>' +
                     '#}#' +
                 '</span>' +
                 '</div>',
