@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Orders', array('ShipName', 'Freight', 'OrderDate', 'OrderID', 'ShipCity'), $request));
+    echo json_encode($result->read('Orders', array('ShipName', 'Freight' => array('type' => 'number') , 'OrderDate', 'OrderID', 'ShipCity'), $request));
 
     exit;
 }
