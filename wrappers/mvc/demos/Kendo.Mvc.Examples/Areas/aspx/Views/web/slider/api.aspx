@@ -37,7 +37,7 @@
     </ul>
 </div>
 
-<div id="wrapper" class="climateCtrl">
+<div id="climateCtrl">
     <%= Html.Kendo().Slider()
             .Name("slider")
             .HtmlAttributes(new { @class = "temperature" })
@@ -131,7 +131,7 @@
 </script>
 
 <style>
-    .climateCtrl {
+    #climateCtrl {
         display: inline-block;
         width: 245px;
         height: 167px;
