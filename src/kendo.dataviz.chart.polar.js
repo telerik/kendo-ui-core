@@ -739,10 +739,14 @@ kendo_module({
         options: {
             overlay: {
                 gradient: null
+            },
+            labels: {
+                distance: 10
             }
         }
     });
 
+    // TODO: Rename to RadarColumnChart
     var RadarBarChart = BarChart.extend({
         pointType: function() {
             return RadarSegment;
