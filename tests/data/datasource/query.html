@@ -236,6 +236,37 @@
                 stop(1);
             });
 
+            test("group original field name is used if projection with from is set", 2, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.group[0].field, "foo");
+                        equal(options.group[1].field, "baz");
+
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                bar: { from: "foo" },
+                                boo: { from: "baz" }
+                            }
+                        }
+                    },
+                    serverGrouping: true,
+                });
+
+                $.mockjax({
+                    url: "foo",
+                });
+
+                dataSource.group([{ field: "bar" }, { field: "boo" }]);
+            });
+
             test("group original field name is used if projection is set", 2, function() {
                 var transport = new RemoteTransport({
                     read: "foo",
@@ -258,6 +289,10 @@
                         }
                     },
                     serverGrouping: true,
+                });
+
+                $.mockjax({
+                    url: "foo",
                 });
 
                 dataSource.group([{ field: "bar" }, { field: "boo" }]);
@@ -285,6 +320,10 @@
                         }
                     },
                     serverGrouping: true,
+                });
+
+                $.mockjax({
+                    url: "foo",
                 });
 
                 dataSource.group({
@@ -323,6 +362,10 @@
                     serverAggregates: true,
                 });
 
+                $.mockjax({
+                    url: "foo",
+                });
+
                 dataSource.aggregate(
                     [{
                         field: "bar",
@@ -333,11 +376,37 @@
                     }]);
             });
 
+            test("filter without model definition and serverFiltering", function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.filter.filters[0].field, "foo");
+
+                        return options;
+                    }
+                });
+
+                var dataSource = new kendo.data.DataSource({
+                    transport: transport,
+                    serverFiltering: true,
+                    schema: {
+                        model: {
+                            fields: { }
+                        }
+                    }
+                });
+
+                $.mockjax({
+                    url: "foo",
+                });
+
+                dataSource.filter({ field: "foo", operator: "eq", value: "bar" });
+            });
+
             test("filter original field name is used if projection is set", 2, function() {
                 var transport = new RemoteTransport({
                     read: "foo",
                     parameterMap: function(options) {
-                        console.log(options);
                         equal(options.filter.filters[0].field, "foo");
                         equal(options.filter.filters[1].field, "baz");
 
@@ -357,6 +426,11 @@
                     },
                     serverFiltering: true
                 });
+
+                $.mockjax({
+                    url: "foo",
+                });
+
 
                 dataSource.filter({
                     logic: "and",
@@ -384,6 +458,10 @@
                     serverSorting: true,
                 });
 
+                $.mockjax({
+                    url: "foo",
+                });
+
                 dataSource.sort({ field: "bar", dir: "asc" });
                 equal(dataSource.sort()[0].field, "bar");
             });
@@ -403,6 +481,10 @@
                         }
                     },
                     serverFiltering: true,
+                });
+
+                $.mockjax({
+                    url: "foo",
                 });
 
                 dataSource.filter({ field: "bar", operator: "eq", value: "42" });
@@ -430,6 +512,10 @@
                     serverSorting: true,
                 });
 
+                $.mockjax({
+                    url: "foo",
+                });
+
                 dataSource.sort({ field: "bar", dir: "asc" });
             });
 
@@ -454,6 +540,10 @@
                     serverSorting: true,
                 });
 
+                $.mockjax({
+                    url: "foo",
+                });
+
                 dataSource.sort({ field: "bar", dir: "asc" });
             });
 
@@ -476,6 +566,10 @@
                         }
                     },
                     serverSorting: true,
+                });
+
+                $.mockjax({
+                    url: "foo",
                 });
 
                 dataSource.sort({ field: "bar", dir: "asc" });
@@ -532,6 +626,10 @@
                     pageSize: 1
                 });
 
+                $.mockjax({
+                    url: "foo",
+                });
+
                 dataSource.next();
             });
 
@@ -547,6 +645,10 @@
                 var dataSource = new DataSource( {
                     transport: transport,
                     serverPaging: true
+                });
+
+                $.mockjax({
+                    url: "foo",
                 });
 
                 dataSource.next();
@@ -662,6 +764,10 @@
                 });
                 dataSource._skip = 1; //fake current page (zero based)
 
+                $.mockjax({
+                    url: "foo",
+                });
+
                 dataSource.prev();
             });
 
@@ -677,6 +783,10 @@
                 var dataSource = new DataSource( {
                     transport: transport,
                     serverPaging: true
+                });
+
+                $.mockjax({
+                    url: "foo",
                 });
 
                 dataSource.prev();
@@ -705,6 +815,10 @@
                     transport: transport,
                     serverPaging: true,
                     pageSize: 1
+                });
+
+                $.mockjax({
+                    url: "foo",
                 });
 
                 dataSource.prev();

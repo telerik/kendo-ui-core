@@ -88,7 +88,64 @@
                 equal(result[2].bar, "0");
             });
 
-            test("project fields to the name specified as string", function() {
+            test("project fields to the one specified in the field definition when definition is array", function() {
+                var reader = new DataReader({
+                    model: {
+                        fields: [
+                            { field: "bar", from: "foo" }
+                        ]
+                    }
+                });
+
+                var result = reader.parse([{ foo: "1"}, { foo: ""}, { foo: "0"}]);
+
+                result = reader.data(result);
+
+                equal(result.length, 3);
+                equal(result[0].bar, "1");
+                equal(result[1].bar, "");
+                equal(result[2].bar, "0");
+            });
+
+            test("project fields from the one specified in the from field definition", function() {
+                var reader = new DataReader({
+                    model: {
+                        fields: {
+                            bar: { from: "foo" }
+                        }
+                    }
+                });
+
+                var result = reader.parse([{ foo: "1"}, { foo: ""}, { foo: "0"}]);
+
+                result = reader.data(result);
+
+                equal(result.length, 3);
+                equal(result[0].bar, "1");
+                equal(result[1].bar, "");
+                equal(result[2].bar, "0");
+            });
+
+            test("project fields - from has greater priority", function() {
+                var reader = new DataReader({
+                    model: {
+                        fields: {
+                            bar: { from: "foo", field: "baz" }
+                        }
+                    }
+                });
+
+                var result = reader.parse([{ foo: "1"}, { foo: ""}, { foo: "0"}]);
+
+                result = reader.data(result);
+
+                equal(result.length, 3);
+                equal(result[0].bar, "1");
+                equal(result[1].bar, "");
+                equal(result[2].bar, "0");
+            });
+
+           test("project fields to the name specified as string", function() {
                 var reader = new DataReader({
                     model: {
                         fields: {

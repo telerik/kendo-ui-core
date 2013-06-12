@@ -1702,6 +1702,8 @@ kendo_module({
 
                 if (model.fields) {
                     each(model.fields, function(field, value) {
+                        var fromName;
+
                         fieldName = field;
 
                         if (isPlainObject(value) && value.field) {
@@ -1710,12 +1712,16 @@ kendo_module({
                             fieldName = value;
                         }
 
-                        shouldSerialize = shouldSerialize || fieldName !== field;
+                        if (isPlainObject(value) && value.from) {
+                            fromName = value.from;
+                        }
 
-                        getters[field] = getter(fieldName);
+                        shouldSerialize = shouldSerialize || (fromName && fromName !== field) || fieldName !== field;
+
+                        getters[field] = getter(fromName || fieldName);
                         serializeGetters[field] = getter(field);
-                        originalFieldNames[fieldName] = field;
-                        fieldNames[field] = fieldName;
+                        originalFieldNames[fromName || fieldName] = field;
+                        fieldNames[fromName || field] = fieldName;
                     });
 
                     if (!schema.serialize && shouldSerialize) {
@@ -1885,10 +1891,10 @@ kendo_module({
     }
 
     function fieldNameFromModel(fields, name) {
-        if (fields) {
+        if (fields && !isEmptyObject(fields)) {
             var descriptor = fields[name];
             if (isPlainObject(descriptor)) {
-                return descriptor.field || name;
+                return descriptor.from || descriptor.field || name;
             }
             return fields[name];
         }
@@ -3192,7 +3198,6 @@ kendo_module({
                 childrenOptions = {};
 
             kendo.data.Model.fn.init.call(that, value);
-
 
             if (typeof that.children === STRING) {
                 childrenField = that.children;
