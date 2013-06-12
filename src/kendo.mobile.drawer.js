@@ -16,6 +16,7 @@ kendo_module({
         ui = mobile.ui,
 
         BEFORE_SHOW = "beforeShow",
+        INIT = "init",
         SHOW = "show",
         HIDE = "hide";
 
@@ -61,8 +62,9 @@ kendo_module({
 
         events: [
             BEFORE_SHOW,
-            SHOW,
-            HIDE
+            HIDE,
+            INIT,
+            SHOW
         ],
 
         show: function() {
@@ -79,6 +81,15 @@ kendo_module({
             this.trigger(HIDE, { view: this });
         },
 
+        // Alias in order to support popover/modalview etc. interface
+        openFor: function() {
+            if (this.visible) {
+                this.hide();
+            } else {
+                this.show();
+            }
+        },
+
         _activate: function() {
             var views = this.options.views,
                 visibleOnCurrentView = !views[0] || views.indexOf(this.pane.view().id.replace('#', '')) > -1;
@@ -91,15 +102,6 @@ kendo_module({
 
             this.trigger(SHOW, { view: this });
             return true;
-        },
-
-        // Alias in order to support popover/modalview etc. interface
-        openFor: function() {
-            if (this.visible) {
-                this.hide();
-            } else {
-                this.show();
-            }
         },
 
         _show: function() {
