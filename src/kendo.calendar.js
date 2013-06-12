@@ -691,8 +691,7 @@ kendo_module({
             var that = this,
                 options = that.options,
                 selectedValue = +that._value,
-                bigger, navigate,
-                arrow = NEXTARROW;
+                bigger;
 
             if (value === undefined) {
                 return options[option];
@@ -706,27 +705,19 @@ kendo_module({
 
             options[option] = new DATE(+value);
 
-            navigate = that._view.compare(value, that._current);
-
-            if (!selectedValue) {
-                navigate = isEqualDatePart(that._current, value);
-            } else if (option === MIN) {
-                bigger = +value > selectedValue;
-                navigate = navigate > -1;
-                arrow = PREVARROW;
-            } else {
-                bigger = selectedValue > +value;
-                navigate = navigate < 1;
+            if (selectedValue) {
+                if (option === MIN) {
+                    bigger = +value > selectedValue;
+                } else {
+                    bigger = selectedValue > +value;
+                }
             }
 
             if (bigger) {
                 that.value(null);
-            } else if (navigate) {
-                that.navigate();
             } else {
-                that[arrow]
-                    .toggleClass(DISABLED, false)
-                    .attr(ARIA_DISABLED, false);
+                that._changeView = isEqualDatePart(that._current, value) || !!(options.month.content || options.month.empty);
+                that.navigate();
             }
 
             that._toggle();

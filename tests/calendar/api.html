@@ -531,6 +531,21 @@
                  equal(cal.calls("navigate"), 0);
             });
 
+            test("min method navigates when custom template is defined", function() {
+                 var value = new Date(2000, 10, 10),
+                 cal = new Calendar(div, {
+                    month: {
+                        empty: "nth"
+                    }
+                 });
+
+                 stub(cal, { _animate: cal._animate });
+                 cal.min(value);
+
+                 equal(+cal.options.min, +value);
+                 equal(cal.calls("_animate"), 1);
+            });
+
             test("Should navigate if min is bigger then _current", function() {
                  var value = new Date(2000, 10, 10),
                      cal = new Calendar(div, {value: value});
