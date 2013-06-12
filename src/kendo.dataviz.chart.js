@@ -9414,7 +9414,7 @@ kendo_module({
         state = state || {};
         excluded = state.excluded = state.excluded || [];
         defaults = state.defaults = state.defaults || {};
-        depth = state.depth = defined(state.depth) ? state.depth + 1 : 0;
+        depth = state.depth = state.depth || 0;
 
         if (depth > MAX_EXPAND_DEPTH) {
             return;
@@ -9427,7 +9427,9 @@ kendo_module({
                     options[property] = valueOrDefault(propValue(context), defaults[property]);
                 } else if (typeof propValue === "object") {
                     state.defaults = defaults[property];
+                    state.depth++;
                     evalOptions(propValue, context, state);
+                    state.depth--;
                 }
             }
         }
