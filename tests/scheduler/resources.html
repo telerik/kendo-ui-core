@@ -492,7 +492,7 @@
                 dropdownlist.value(2);
                 dropdownlist.trigger("change");
 
-                equal(scheduler.dataSource.at(0).foo.text, "Foo 2");
+                equal(scheduler.dataSource.at(0).foo, 2);
             });
 
             test("selecting a value from the resource multiselect sets the resource field of the event", function() {
@@ -522,7 +522,7 @@
                 multiselect.value(2);
                 multiselect.trigger("change");
 
-                equal(scheduler.dataSource.at(0).foo[0].text, "Foo 2");
+                equal(scheduler.dataSource.at(0).foo[0], 2);
             });
 
             test("the current resource is selected in the dropdownlist", function() {
@@ -583,7 +583,7 @@
             test("selecting an item from the multiselect adds a resource item to the current resources array of the event", function() {
                 var event = new kendo.data.SchedulerEvent({
                     start: new Date(), end: new Date(), title: "",
-                    foo: [{  value: 2 }]
+                    foo: [ 2 ]
                 });
 
                 var scheduler = new kendo.ui.Scheduler($("<div>"), {
@@ -608,8 +608,8 @@
                 multiselect.value([2, 1]);
                 multiselect.trigger("change");
 
-                equal(scheduler.dataSource.at(0).foo[0].text, "Foo 2");
-                equal(scheduler.dataSource.at(0).foo[1].text, "Foo 1");
+                equal(scheduler.dataSource.at(0).foo[0], 2);
+                equal(scheduler.dataSource.at(0).foo[1], 1);
             });
 
             test("selecting the option label sets the resource field of the event to null", function() {

@@ -164,9 +164,9 @@ kendo_module({
                 var data = resource.dataSource.view();
 
                 for (var resourceIndex = 0; resourceIndex < eventResources.length; resourceIndex++) {
-                    var eventResource = eventResources[resourceIndex];
+                    var eventResource = null;
 
-                    var value = kendo.getter(resource.dataValueField)(eventResource);
+                    var value = eventResources[resourceIndex];
 
                     for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
                         if (data[dataIndex].get(resource.dataValueField) == value) {

@@ -513,6 +513,7 @@ kendo_module({
                                      dataTextField: resource.dataTextField,
                                      dataValueField: resource.dataValueField,
                                      dataSource: resource.dataSource,
+                                     valuePrimitive: true,
                                      itemTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField),
                                      tagTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
                                  });
@@ -525,6 +526,7 @@ kendo_module({
                                      dataTextField: resource.dataTextField,
                                      dataValueField: resource.dataValueField,
                                      dataSource: resource.dataSource,
+                                     valuePrimitive: true,
                                      optionLabel: "None",
                                      template: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
                                  });
