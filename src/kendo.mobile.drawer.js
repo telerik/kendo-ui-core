@@ -13,7 +13,11 @@ kendo_module({
         roleSelector = kendo.roleSelector,
         Z_INDEX = "zIndex",
         AXIS = "x",
-        ui = mobile.ui;
+        ui = mobile.ui,
+
+        BEFORE_SHOW = "beforeShow",
+        SHOW = "show",
+        HIDE = "hide";
 
     var Drawer = ui.View.extend({
         init: function(element, options) {
@@ -26,7 +30,7 @@ kendo_module({
                 drawer._viewShow(e);
             });
 
-            this.pane.bind("sameViewRequested", function(e) {
+            this.pane.bind("sameViewRequested", function() {
                 drawer.hide();
             });
 
@@ -53,20 +57,44 @@ kendo_module({
             position: "left"
         },
 
-        activate: function() {
-            if (Drawer.last !== this) {
-                if (Drawer.last) {
-                    Drawer.last.element.css(Z_INDEX, -2);
-                }
-                this.element.css(Z_INDEX, -1);
-            }
-
-            Drawer.last = this;
-            Drawer.current = this;
-        },
+        events: [
+            BEFORE_SHOW,
+            SHOW,
+            HIDE
+        ],
 
         show: function() {
-            this.activate();
+            this._activate();
+            this._show();
+        },
+
+        hide: function() {
+            this.currentView.scroller.enable();
+            this.visible = false;
+            Drawer.current = null;
+            this._moveViewTo(0);
+        },
+
+        _activate: function() {
+            if (this.trigger(BEFORE_SHOW)) {
+                return false;
+            }
+
+            this._setAsCurrent();
+
+            return true;
+        },
+
+        // Alias in order to support popover/modalview etc. interface
+        openFor: function() {
+            if (this.visible) {
+                this.hide();
+            } else {
+                this.show();
+            }
+        },
+
+        _show: function() {
             this.currentView.scroller.disable();
             this.visible = true;
             var offset = this.element.width();
@@ -78,16 +106,16 @@ kendo_module({
             this._moveViewTo(offset);
         },
 
-        hide: function() {
-            this.currentView.scroller.enable();
-            this.visible = false;
-            Drawer.current = null;
-            this._moveViewTo(0);
-        },
+        _setAsCurrent: function() {
+            if (Drawer.last !== this) {
+                if (Drawer.last) {
+                    Drawer.last.element.css(Z_INDEX, -2);
+                }
+                this.element.css(Z_INDEX, -1);
+            }
 
-        // Alias in order to support popover/modalview etc. interface
-        openFor: function() {
-            this.visible ? this.hide() : this.show();
+            Drawer.last = this;
+            Drawer.current = this;
         },
 
         _moveViewTo: function(offset) {
@@ -96,8 +124,7 @@ kendo_module({
         },
 
         _viewShow: function(e) {
-            var drawer = this,
-                currentOffset = this.movable && this.movable.x;
+            var currentOffset = this.movable && this.movable.x;
 
             if (this.currentView === e.view) {
                 this.hide();
@@ -117,20 +144,28 @@ kendo_module({
         },
 
         _start: function(e) {
-            var userEvents = e.sender,
-                leftPositioned = this.leftPositioned,
+            var userEvents = e.sender;
+
+            // ignore non-horizontal swipes
+            if (Math.abs(e.x.velocity) < Math.abs(e.y.velocity)) {
+                userEvents.cancel();
+                return;
+            }
+
+            var leftPositioned = this.leftPositioned,
                 visible = this.visible,
                 canMoveLeft = leftPositioned && visible || !leftPositioned && !Drawer.current,
                 canMoveRight = !leftPositioned && visible || leftPositioned && !Drawer.current,
-                horizontalSwipe = Math.abs(e.x.velocity) >= Math.abs(e.y.velocity),
                 leftSwipe = e.x.velocity < 0;
 
-            if (horizontalSwipe && ((canMoveLeft && leftSwipe) || (canMoveRight && !leftSwipe))) {
-                this.activate();
-                userEvents.capture();
-            } else {
-                userEvents.cancel();
+            if ((canMoveLeft && leftSwipe) || (canMoveRight && !leftSwipe)) {
+                if (this._activate()) {
+                    userEvents.capture();
+                    return;
+                }
             }
+
+            userEvents.cancel();
         },
 
         _update: function(e) {
@@ -160,7 +195,7 @@ kendo_module({
             }
 
             if(shouldShow) {
-                this.show();
+                this._show();
             } else {
                 this.hide();
             }
