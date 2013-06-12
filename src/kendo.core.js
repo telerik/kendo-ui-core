@@ -2680,12 +2680,12 @@ function pad(number, digits, end) {
         events: [],
 
         view: function() {
-            var viewElement = this.element.closest(kendo.roleSelector("view splitview modalview"));
+            var viewElement = this.element.closest(kendo.roleSelector("view splitview modalview drawer"));
             return kendo.widgetInstance(viewElement, kendo.mobile.ui);
         },
 
         container: function() {
-            var element = this.element.closest(kendo.roleSelector("view layout modalview"));
+            var element = this.element.closest(kendo.roleSelector("view layout modalview drawer"));
             return kendo.widgetInstance(element, kendo.mobile.ui) || ContainerNullObject;
         }
     });

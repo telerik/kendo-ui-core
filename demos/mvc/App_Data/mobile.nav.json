@@ -109,6 +109,12 @@
                     "url": "drawer/index.html",
                     "title": "Example of Kendo UI Mobile Drawer",
                     "meta": "This demo shows the core functionality of Kendo UI Mobile Drawer. When the user swipes the screen to the right or taps the top button, the drawer widget is revealed"
+                },
+                {
+                    "text": "Two way drawers",
+                    "url": "drawer/two-way-drawers.html",
+                    "title": "Example of left and right drawers",
+                    "meta": "This demo shows the two drawers (left and right) applied to the same application."
                 }
             ]
         },
