@@ -168,6 +168,10 @@ kendo_module({
 
                     var value = eventResources[resourceIndex];
 
+                    if (!resource.valuePrimitive) {
+                        value = kendo.getter(resource.dataValueField)(value);
+                    }
+
                     for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
                         if (data[dataIndex].get(resource.dataValueField) == value) {
                             eventResource = data[dataIndex];
