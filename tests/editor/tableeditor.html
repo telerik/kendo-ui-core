@@ -60,16 +60,29 @@
                 equal(cells.length, 12);
             });
 
-            test("destroying removes select rows from table", function() {
+            test("after init, top-left cell has k-select-all class", function() {
+                table = createTable(3, 3);
+
+                tableEditor = new TableEditor(table[0]);
+
+                var topLeftCell = $(table[0].rows[0].cells[0]);
+                ok(topLeftCell.hasClass("k-select-all"));
+                ok(!topLeftCell.hasClass("k-selection-cell"));
+            });
+
+            test("destroying removes selection and selection rows from table", function() {
                 table = createTable(1, 1);
 
                 tableEditor = new TableEditor(table[0]);
+
+                tableEditor.selectRow(1);
 
                 tableEditor.destroy();
 
                 equal(table.find("tr").length, 1);
                 equal(table.find("td").length, 1);
                 equal(table.find(".k-selection-cell").length, 0);
+                equal(table.find(".k-selected").length, 0);
             });
 
             test("selectRow adds selected class to cells in row", function() {
@@ -144,7 +157,7 @@
                 tableEditor = new TableEditor(table[0]);
 
                 withMock(tableEditor, "selectColumn", function(i) { index = i; }, function() {
-                    table.find("tr:first td.k-selection-cell").eq(1).click();
+                    table.find("tr:first td.k-selection-cell").eq(0).click();
 
                     equal(index, 1);
                 });
@@ -157,8 +170,8 @@
 
                 var selectionCells = table.find("tr:first td.k-selection-cell");
 
+                selectionCells.eq(0).click();
                 selectionCells.eq(1).click();
-                selectionCells.eq(2).click();
 
                 equal(table.find("td.k-selected").length, 2);
             });
@@ -170,8 +183,8 @@
 
                 var selectionCells = table.find("tr:first td.k-selection-cell");
 
-                selectionCells.eq(1).click();
-                selectionCells.eq(2).trigger({
+                selectionCells.eq(0).click();
+                selectionCells.eq(1).trigger({
                     shiftKey: true,
                     type: "click"
                 });
@@ -185,7 +198,7 @@
                 editor.selectRange(range);
                 editor.trigger("select");
 
-                equal($("table", editor.document).find("td.k-selection-cell").length, 3);
+                equal($("table", editor.document).find("td.k-selection-cell").length, 2);
             });
 
             test("blurring a table within the editor destroys its TableEditor", function() {
@@ -209,7 +222,13 @@
                 editor.trigger("select");
                 editor.trigger("select");
 
-                equal($("table", editor.document).find("td.k-selection-cell").length, 3);
+                equal($("table", editor.document).find("td.k-selection-cell").length, 2);
+            });
+
+            test("tables in the editor have the k-table class", function() {
+                editor.value("<table><tr><td>foo</td></tr></table>");
+
+                equal($("table.k-table", editor.document).length, 1);
             });
 
         </script>

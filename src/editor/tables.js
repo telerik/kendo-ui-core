@@ -65,6 +65,7 @@ var TableEditor = kendo.Class.extend({
             i;
 
         selectionCell.className = "k-selection-cell";
+        selectionRow.className = "k-selection-row";
 
         for (i = 0; i < rows[rows.length-1].cells.length; i++) {
             selectionRow.appendChild(selectionCell.cloneNode());
@@ -75,6 +76,8 @@ var TableEditor = kendo.Class.extend({
         for (i = 0; i < rows.length; i++) {
             dom.insertBefore(selectionCell.cloneNode(), rows[i].cells[0]);
         }
+
+        rows[0].cells[0].className = "k-select-all";
     },
 
     _attachEvents: function() {
@@ -132,6 +135,8 @@ var TableEditor = kendo.Class.extend({
 
     destroy: function() {
         var rows = this.table.rows;
+
+        this.clearSelection();
 
         this._detachEvents();
         dom.remove(rows[0]);

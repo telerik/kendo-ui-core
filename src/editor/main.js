@@ -683,9 +683,13 @@ kendo_module({
                         "ul,ol{padding-left:2.5em}" +
                         "a{color:#00a}" +
                         "code{font-size:1.23em}" +
-                        ".k-table{width:100%;}" +
-                        ".k-table td{min-width:1px;}" +
+                        ".k-table{width:100%;border-spacing:0;margin: 0 0 1em;}" +
+                        ".k-table td{min-width:1px;padding:.2em .3em;}" +
                         ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
+                        ".k-table .k-selection-cell{padding:0;width:7px;height:7px;background-color:#ccc;}" +
+                        ".k-table .k-select-all{width:7px;height:7px;background-color:#ccc;}" +
+                        ".k-selection-row .k-selection-cell{width:auto;}" +
+                        ".k-selected{background-color:#ddd;}" +
                         ".k-table p{margin:0;padding:0;}" +
                     "</style>" +
                     $.map(stylesheets, function(href){
@@ -1071,6 +1075,9 @@ kendo_module({
                     }, 1);
                 }
             }
+
+            // add k-table class to all tables
+            $("table", this.body).addClass("k-table");
 
             this.selectionRestorePoint = null;
             this.update();
