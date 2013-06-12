@@ -10,7 +10,7 @@
     using System.Data;
 
     public class SchedulerEventService<T> : ISchedulerEventService<T>
-        where T : SchedulerEvent
+        where T : Task
     {
 
         private SampleEntities db;
@@ -27,14 +27,14 @@
 
         public virtual IQueryable<T> GetAll()
         {
-            return (IQueryable<T>)db.SchedulerEvents;      
+            return (IQueryable<T>)db.Tasks;      
         }
 
         public virtual void Insert(T appointment, ModelStateDictionary modelState)
         {
             if (ValidateModel(appointment, modelState))
             {
-                db.SchedulerEvents.AddObject((T)appointment);
+                db.Tasks.AddObject((T)appointment);
                 db.SaveChanges();
             }
         }
@@ -43,11 +43,11 @@
         {
             if (ValidateModel(appointment, modelState))
             {
-                SchedulerEvent dbAppointment;
+                Task dbAppointment;
                 if (TryFindRecord(appointment, modelState, out dbAppointment))
                 {
-                    db.SchedulerEvents.Attach(dbAppointment);
-                    db.SchedulerEvents.ApplyCurrentValues(appointment);
+                    db.Tasks.Attach(dbAppointment);
+                    db.Tasks.ApplyCurrentValues(appointment);
                     db.SaveChanges();
                 }
             }
@@ -55,18 +55,18 @@
 
         public virtual void Delete(T appointment, ModelStateDictionary modelState)
         {
-            SchedulerEvent dbAppointment;
+            Task dbAppointment;
             if (TryFindRecord(appointment, modelState, out dbAppointment))
             {
-                db.SchedulerEvents.DeleteObject(dbAppointment);
+                db.Tasks.DeleteObject(dbAppointment);
                 db.SaveChanges();
             }
         }
 
         //TODO: better naming or refactor
-        private bool TryFindRecord(T appointment, ModelStateDictionary modelState, out SchedulerEvent dbAppointment)
+        private bool TryFindRecord(T appointment, ModelStateDictionary modelState, out Task dbAppointment)
         {
-            dbAppointment = db.SchedulerEvents.SingleOrDefault(a => a.Id == appointment.Id);
+            dbAppointment = db.Tasks.SingleOrDefault(a => a.TaskID == appointment.TaskID);
             if (dbAppointment != null)
             {
                 return true;

@@ -369,13 +369,13 @@
     <Compile Include="Models\BulletChartLocalDataViewModel.cs" />
     <Compile Include="Models\AprilSales.cs" />
     <Compile Include="Models\CompensationStats.cs" />
-    <Compile Include="Models\Scheduler\SchedulerEvent.cs" />
-    <Compile Include="Models\Scheduler\SchedulerEvents.Designer.cs">
+    <Compile Include="Models\Scheduler\SchedulerEventService.cs" />
+    <Compile Include="Models\Scheduler\Task.cs" />
+    <Compile Include="Models\Scheduler\Tasks.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SchedulerEvents.edmx</DependentUpon>
+      <DependentUpon>Tasks.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Scheduler\SchedulerEventService.cs" />
     <Compile Include="Models\SocialBenefitType.cs" />
     <Compile Include="Models\SocialBenefits.cs" />
     <Compile Include="Models\CrimeData.cs" />
@@ -697,9 +697,9 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
-    <EntityDeploy Include="Models\Scheduler\SchedulerEvents.edmx">
+    <EntityDeploy Include="Models\Scheduler\Tasks.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SchedulerEvents.Designer.cs</LastGenOutput>
+      <LastGenOutput>Tasks.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>

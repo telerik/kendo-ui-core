@@ -8,10 +8,10 @@ using Kendo.Mvc.Examples.Models.Scheduler;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class SchedulerController : SchedulerEventController<SchedulerEvent>
+    public partial class SchedulerController : SchedulerEventController<Task>
     {
         public SchedulerController()
-            : base(new SchedulerEventService<SchedulerEvent>())
+            : base(new SchedulerEventService<Task>())
         {
         }
 
