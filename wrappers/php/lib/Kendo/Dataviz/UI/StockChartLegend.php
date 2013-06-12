@@ -90,6 +90,15 @@ upwards from the current position.
         return $this->setProperty('visible', $value);
     }
 
+    /**
+    * Configures the legend inactive items.
+    * @param \Kendo\Dataviz\UI\StockChartLegendInactiveItems|array $value
+    * @return \Kendo\Dataviz\UI\StockChartLegend
+    */
+    public function inactiveItems($value) {
+        return $this->setProperty('inactiveItems', $value);
+    }
+
 //<< Properties
 }
 

@@ -57,6 +57,14 @@ public class TitleTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
+    public void setMargin(com.kendoui.taglib.chart.TitleMarginTag value) {
+        setProperty("margin", value);
+    }
+
+    public void setPadding(com.kendoui.taglib.chart.TitlePaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public String getAlign() {
         return (String)getProperty("align");
     }
@@ -81,19 +89,19 @@ public class TitleTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("font", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
-    public Object getPadding() {
-        return (Object)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(Object value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 

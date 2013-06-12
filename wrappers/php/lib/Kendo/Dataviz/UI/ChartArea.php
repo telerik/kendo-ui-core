@@ -11,21 +11,12 @@ class ChartArea extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The background color of the chart area.
+    * The background color of the chart area. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function background($value) {
         return $this->setProperty('background', $value);
-    }
-
-    /**
-    * The background opacity of the chart area.
-    * @param float $value
-    * @return \Kendo\Dataviz\UI\ChartArea
-    */
-    public function opacity($value) {
-        return $this->setProperty('opacity', $value);
     }
 
     /**
@@ -47,12 +38,21 @@ class ChartArea extends \Kendo\SerializableObject {
     }
 
     /**
-    * The margin of the chart area.
-    * @param float| $value
+    * The margin of the chart area. A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartAreaMargin|array $value
     * @return \Kendo\Dataviz\UI\ChartArea
     */
     public function margin($value) {
         return $this->setProperty('margin', $value);
+    }
+
+    /**
+    * The background opacity of the chart area. By default the background is opaque.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartArea
+    */
+    public function opacity($value) {
+        return $this->setProperty('opacity', $value);
     }
 
     /**

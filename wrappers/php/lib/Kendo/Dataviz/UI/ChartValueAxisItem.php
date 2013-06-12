@@ -6,7 +6,7 @@ class ChartValueAxisItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Value at which the category axis crosses this axis. (Only for object)Value indicies at which the category axes cross the value axis. (Only for array)Date at which the category axis crosses this axis. (Only for date)
+    * Value at which the category axis crosses this axis. (Only for object)Value indices at which the category axes cross the value axis. (Only for array)Date at which the category axis crosses this axis. (Only for date)
     * @param |date|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -15,8 +15,7 @@ class ChartValueAxisItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * Color to apply to all axis elements.
-Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.
+    * The color of the value axis. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -25,7 +24,16 @@ Individual color settings for line and labels take priority. Any valid CSS color
     }
 
     /**
-    * Configures the axis labels.
+    * The crosshair configuration options.
+    * @param \Kendo\Dataviz\UI\ChartValueAxisItemCrosshair|array $value
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItem
+    */
+    public function crosshair($value) {
+        return $this->setProperty('crosshair', $value);
+    }
+
+    /**
+    * The axis labels configuration.
     * @param \Kendo\Dataviz\UI\ChartValueAxisItemLabels|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -34,7 +42,7 @@ Individual color settings for line and labels take priority. Any valid CSS color
     }
 
     /**
-    * Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
+    * The configuration of the axis lines. Also affects the major and minor ticks, but not the grid lines.
     * @param \Kendo\Dataviz\UI\ChartValueAxisItemLine|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -43,22 +51,13 @@ Individual color settings for line and labels take priority. Any valid CSS color
     }
 
     /**
-    * Configures the major grid lines. These are the lines that are an extension of the major ticks through the
+    * The configuration of the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
     * @param \Kendo\Dataviz\UI\ChartValueAxisItemMajorGridLines|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
     public function majorGridLines($value) {
         return $this->setProperty('majorGridLines', $value);
-    }
-
-    /**
-    * The major ticks of the axis.
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItemMajorTicks|array $value
-    * @return \Kendo\Dataviz\UI\ChartValueAxisItem
-    */
-    public function majorTicks($value) {
-        return $this->setProperty('majorTicks', $value);
     }
 
     /**
@@ -72,7 +71,6 @@ body of the chart.
 
     /**
     * The maximum value of the axis.
-This is often used in combination with the min configuration option.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -82,7 +80,6 @@ This is often used in combination with the min configuration option.
 
     /**
     * The minimum value of the axis.
-This is often used in combination with the max configuration option.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -91,7 +88,8 @@ This is often used in combination with the max configuration option.
     }
 
     /**
-    * Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through the
+    * The configuration of the minor grid lines. These are the lines that are an extension of the minor ticks through the
+body of the chart.
     * @param \Kendo\Dataviz\UI\ChartValueAxisItemMinorGridLines|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -100,7 +98,16 @@ This is often used in combination with the max configuration option.
     }
 
     /**
-    * The minor ticks of the axis.
+    * The configuration of the value axis major ticks.
+    * @param \Kendo\Dataviz\UI\ChartValueAxisItemMajorTicks|array $value
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItem
+    */
+    public function majorTicks($value) {
+        return $this->setProperty('majorTicks', $value);
+    }
+
+    /**
+    * The configuration of the value axis minor ticks.
     * @param \Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -109,8 +116,7 @@ This is often used in combination with the max configuration option.
     }
 
     /**
-    * The interval between minor divisions.
-It defaults to 1/5th of the majorUnit.
+    * The interval between minor divisions. It defaults to 1/5th of the valueAxis.majorUnit.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -119,7 +125,7 @@ It defaults to 1/5th of the majorUnit.
     }
 
     /**
-    * The unique axis name.
+    * The unique axis name. Used to associate a series with a value axis using the series.axis option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -128,7 +134,7 @@ It defaults to 1/5th of the majorUnit.
     }
 
     /**
-    * Prevents the automatic axis range from snapping to 0.
+    * If set to true the chart will prevent the automatic axis range from snapping to 0.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -137,7 +143,7 @@ It defaults to 1/5th of the majorUnit.
     }
 
     /**
-    * The name of the pane that the axis should be rendered in.
+    * The name of the pane that the value axis should be rendered in.
 The axis will be rendered in the first (default) pane if not set.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
@@ -156,8 +162,7 @@ The axis will be rendered in the first (default) pane if not set.
     }
 
     /**
-    * Reverses the axis direction -
-values increase from right to left and from top to bottom.
+    * If set to true the value axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -166,7 +171,7 @@ values increase from right to left and from top to bottom.
     }
 
     /**
-    * The title of the value axis.
+    * The title configuration of the value axis.
     * @param \Kendo\Dataviz\UI\ChartValueAxisItemTitle|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -175,21 +180,12 @@ values increase from right to left and from top to bottom.
     }
 
     /**
-    * The visibility of the axis.
+    * If set to true the chart will display the value axis. By default the value axis is visible.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
-    }
-
-    /**
-    * The crosshair configuration options.
-    * @param \Kendo\Dataviz\UI\ChartValueAxisItemCrosshair|array $value
-    * @return \Kendo\Dataviz\UI\ChartValueAxisItem
-    */
-    public function crosshair($value) {
-        return $this->setProperty('crosshair', $value);
     }
 
 //<< Properties

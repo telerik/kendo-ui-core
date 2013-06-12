@@ -15,7 +15,7 @@ class ChartTitle extends \Kendo\SerializableObject {
     }
 
     /**
-    * The background color of the title.
+    * The background color of the title. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartTitle
     */
@@ -24,7 +24,7 @@ class ChartTitle extends \Kendo\SerializableObject {
     }
 
     /**
-    * The border of the title.
+    * The border of the series.
     * @param \Kendo\Dataviz\UI\ChartTitleBorder|array $value
     * @return \Kendo\Dataviz\UI\ChartTitle
     */
@@ -42,8 +42,8 @@ class ChartTitle extends \Kendo\SerializableObject {
     }
 
     /**
-    * The margin of the title.
-    * @param float| $value
+    * The margin of the title. A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartTitleMargin|array $value
     * @return \Kendo\Dataviz\UI\ChartTitle
     */
     public function margin($value) {
@@ -51,8 +51,8 @@ class ChartTitle extends \Kendo\SerializableObject {
     }
 
     /**
-    * The padding of the title.
-    * @param float| $value
+    * The padding of the title. A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartTitlePadding|array $value
     * @return \Kendo\Dataviz\UI\ChartTitle
     */
     public function padding($value) {
@@ -69,7 +69,7 @@ class ChartTitle extends \Kendo\SerializableObject {
     }
 
     /**
-    * The title of the chart. You can also set the text directly for a title with default options.
+    * The text of the chart title. You can also set the text directly for a title with default options.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartTitle
     */
@@ -78,7 +78,7 @@ class ChartTitle extends \Kendo\SerializableObject {
     }
 
     /**
-    * The visibility of the title.
+    * If set to true the chart will display the title. By default the title is not displayed.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartTitle
     */

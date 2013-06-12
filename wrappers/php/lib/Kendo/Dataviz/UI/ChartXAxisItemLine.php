@@ -6,8 +6,7 @@ class ChartXAxisItemLine extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The color of the line. This will also effect the major and minor ticks, but
-not the grid lines.
+    * The color of the lines. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemLine
     */
@@ -16,7 +15,7 @@ not the grid lines.
     }
 
     /**
-    * The dash type of the line.
+    * The dash type of the line.The following dash types are supported:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemLine
     */
@@ -25,7 +24,7 @@ not the grid lines.
     }
 
     /**
-    * The visibility of the line.
+    * If set to true the chart will display the x axis lines. By default the x axis lines are visible.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemLine
     */
@@ -34,8 +33,8 @@ not the grid lines.
     }
 
     /**
-    * The width of the line. This will also effect the major and minor ticks, but
-not the grid lines.
+    * The width of the line in pixels. Also affects the major and minor ticks, but not the grid lines.
+#### Example - set the scatter chart x axis line width
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItemLine
     */

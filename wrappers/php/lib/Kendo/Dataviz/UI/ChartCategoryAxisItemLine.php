@@ -6,7 +6,7 @@ class ChartCategoryAxisItemLine extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The color of the lines. Any valid CSS color string will work here, including hex and rgb.Note: This will also effect the major and minor ticks, but not the grid lines.
+    * The color of the lines. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
     */
@@ -15,7 +15,7 @@ class ChartCategoryAxisItemLine extends \Kendo\SerializableObject {
     }
 
     /**
-    * The dash type of the line.
+    * The dash type of the line.The following dash types are supported:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
     */
@@ -24,7 +24,7 @@ class ChartCategoryAxisItemLine extends \Kendo\SerializableObject {
     }
 
     /**
-    * The visibility of the lines.
+    * If set to true the chart will display the category axis lines. By default the category axis lines are visible.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
     */
@@ -33,8 +33,7 @@ class ChartCategoryAxisItemLine extends \Kendo\SerializableObject {
     }
 
     /**
-    * The width of the line. This will also effect the major and minor ticks, but
-not the grid lines.
+    * The width of the line in pixels. Also affects the major and minor ticks, but not the grid lines.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemLine
     */

@@ -6,8 +6,7 @@ class ChartSeriesDefaults extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The area configuration options.
-The default options for all area series. For more details see the series options.
+    * The area chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -16,27 +15,7 @@ The default options for all area series. For more details see the series options
     }
 
     /**
-    * The candlestick configuration options.
-The default options for all candlestick series. For more details see the series options.
-    * @param  $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
-    */
-    public function candlestick($value) {
-        return $this->setProperty('candlestick', $value);
-    }
-
-    /**
-    * The ohlc configuration options.
-The default options for all ohlc series. For more details see the series options.
-    * @param  $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
-    */
-    public function ohlc($value) {
-        return $this->setProperty('ohlc', $value);
-    }
-
-    /**
-    * The default options for all bar series. For more details see the series options.
+    * The bar chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -54,8 +33,7 @@ The default options for all ohlc series. For more details see the series options
     }
 
     /**
-    * The bubble configuration options.
-The default options for all bubble series. For more details see the series options.
+    * The bubble chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -64,8 +42,16 @@ The default options for all bubble series. For more details see the series optio
     }
 
     /**
-    * The column configuration options.
-The default options for all column series. For more details see the series options.
+    * The candlestick chart series options. Accepts all values supported by the series option.
+    * @param  $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
+    */
+    public function candlestick($value) {
+        return $this->setProperty('candlestick', $value);
+    }
+
+    /**
+    * The column chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -74,8 +60,7 @@ The default options for all column series. For more details see the series optio
     }
 
     /**
-    * The donut configuration options.
-The default options for all donut series. For more details see the series options.
+    * The donut chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -93,7 +78,7 @@ The default options for all donut series. For more details see the series option
     }
 
     /**
-    * Configures the series data labels.
+    * The chart series label configuration.
     * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -102,8 +87,7 @@ The default options for all donut series. For more details see the series option
     }
 
     /**
-    * The line configuration options.
-The default options for all line series. For more details see the series options.
+    * The line chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -112,8 +96,17 @@ The default options for all line series. For more details see the series options
     }
 
     /**
-    * The effects overlay.
+    * The ohlc chart series options. Accepts all values supported by the series option.
     * @param  $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
+    */
+    public function ohlc($value) {
+        return $this->setProperty('ohlc', $value);
+    }
+
+    /**
+    * The chart series overlay options.
+    * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsOverlay|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function overlay($value) {
@@ -121,8 +114,7 @@ The default options for all line series. For more details see the series options
     }
 
     /**
-    * The pie configuration options.
-The default options for all pie series. For more details see the series options.
+    * The pie chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -131,8 +123,7 @@ The default options for all pie series. For more details see the series options.
     }
 
     /**
-    * The scatter configuration options.
-The default options for all scatter series. For more details see the series options.
+    * The scatter chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -141,8 +132,7 @@ The default options for all scatter series. For more details see the series opti
     }
 
     /**
-    * The scatterLine configuration options.
-The default options for all scatterLine series. For more details see the series options.
+    * The scatterLine chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -151,7 +141,7 @@ The default options for all scatterLine series. For more details see the series 
     }
 
     /**
-    * Space between bars.
+    * The space between the chart series as proportion of the series width.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -160,7 +150,7 @@ The default options for all scatterLine series. For more details see the series 
     }
 
     /**
-    * A value indicating if the series should be stacked.
+    * A value indicating if the series should be stacked. String value indicates that the series should be stacked in a group with the specified name.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -169,7 +159,7 @@ The default options for all scatterLine series. For more details see the series 
     }
 
     /**
-    * The data point tooltip configuration options.
+    * The chart series tooltip configuration options.
     * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsTooltip|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -178,8 +168,7 @@ The default options for all scatterLine series. For more details see the series 
     }
 
     /**
-    * The vertical area configuration options.
-The default options for all vertical area series. For more details see the series options.
+    * The verticalArea chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
@@ -188,8 +177,7 @@ The default options for all vertical area series. For more details see the serie
     }
 
     /**
-    * The vertical line configuration options.
-The default options for all vertical line series. For more details see the series options.
+    * The verticalLine chart series options. Accepts all values supported by the series option.
     * @param  $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */

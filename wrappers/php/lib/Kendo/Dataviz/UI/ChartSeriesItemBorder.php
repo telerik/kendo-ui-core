@@ -6,7 +6,7 @@ class ChartSeriesItemBorder extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The color of the border.  It defaults to the color of the current series.
+    * The color of the border. Accepts a valid CSS color string, including hex and rgb. By default it is set to color of the current series.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder
     */
@@ -15,7 +15,7 @@ class ChartSeriesItemBorder extends \Kendo\SerializableObject {
     }
 
     /**
-    * The dash type of the border.
+    * The dash type of the border.The following dash types are supported:
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder
     */
@@ -24,7 +24,7 @@ class ChartSeriesItemBorder extends \Kendo\SerializableObject {
     }
 
     /**
-    * The border opacity.
+    * The opacity of the border. By default the border is opaque.
     * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder
     */
@@ -33,7 +33,7 @@ class ChartSeriesItemBorder extends \Kendo\SerializableObject {
     }
 
     /**
-    * The width of the border.
+    * The width of the border in pixels.
     * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemBorder
     */

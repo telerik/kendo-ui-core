@@ -219,6 +219,20 @@ This is the entire visible area of the chart.
     }
 
     /**
+    * Sets the legendItemHover event of the StockChart.
+    * Fires when an legend item is hovered.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\StockChart
+    */
+    public function legendItemHover($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('legendItemHover', $value);
+    }
+
+    /**
     * Sets the dataBound event of the StockChart.
     * Fires when the chart has received data from the data source
 and is about to render it.

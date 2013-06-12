@@ -1,25 +1,23 @@
 
-package com.kendoui.taglib.sparkline;
+package com.kendoui.taglib.chart;
 
 import com.kendoui.taglib.FunctionTag;
-
-import com.kendoui.taglib.SparklineTag;
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class LegendItemClickFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class LegendLabelsTemplateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SparklineTag parent = (SparklineTag)findParentWithClass(SparklineTag.class);
+        LegendLabelsTag parent = (LegendLabelsTag)findParentWithClass(LegendLabelsTag.class);
 
 
-        parent.setLegendItemClick(this);
+        parent.setTemplate(this);
 
 //<< doEndTag
 

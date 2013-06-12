@@ -59,6 +59,14 @@ public class YAxisItemCrosshairTooltipBorderTag extends  BaseTag  /* interfaces 
         setProperty("color", value);
     }
 
+    public String getDashType() {
+        return (String)getProperty("dashType");
+    }
+
+    public void setDashType(String value) {
+        setProperty("dashType", value);
+    }
+
     public float getWidth() {
         return (float)getProperty("width");
     }

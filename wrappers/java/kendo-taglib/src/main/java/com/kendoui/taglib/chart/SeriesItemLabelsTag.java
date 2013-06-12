@@ -55,6 +55,14 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("border", value);
     }
 
+    public void setMargin(com.kendoui.taglib.chart.SeriesItemLabelsMarginTag value) {
+        setProperty("margin", value);
+    }
+
+    public void setPadding(com.kendoui.taglib.chart.SeriesItemLabelsPaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public void setBackground(SeriesItemLabelsBackgroundFunctionTag value) {
         setEvent("background", value.getBody());
     }
@@ -131,19 +139,19 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("format", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 
-    public Object getPadding() {
-        return (Object)getProperty("padding");
+    public float getPadding() {
+        return (float)getProperty("padding");
     }
 
-    public void setPadding(Object value) {
+    public void setPadding(float value) {
         setProperty("padding", value);
     }
 

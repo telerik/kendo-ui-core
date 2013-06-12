@@ -174,9 +174,10 @@ categories are listed from right to left and from top to bottom.
     }
 
     /**
-    * Specifies the discrete baseUnitStep values when
-either baseUnit is set to "fit" or baseUnitStep is set to "auto".The default configuration is as follows:Each setting can be overriden individually.
-    * @param  $value
+    * The discrete categoryAxis.baseUnitStep values when
+either categoryAxis.baseUnit is set to "fit" or
+categoryAxis.baseUnitStep is set to "auto".
+    * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemAutoBaseUnitSteps|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
     public function autoBaseUnitSteps($value) {
@@ -184,11 +185,9 @@ either baseUnit is set to "fit" or baseUnitStep is set to "auto".The default con
     }
 
     /**
-    * The base time interval for the axis.
-The default baseUnit is determined automatically from the minimum difference
-between subsequent categories. Available options:Setting baseUnit to "fit" will set such base unit and baseUnitStep
-that the total number of categories does not exceed maxDateGroups.Series data is aggregated for the specified base unit by using the
-series.aggregate function.
+    * The base time interval for the date axis. The default base unit is determined automatically from the minimum difference
+between subsequent categories.The supported values are:Setting baseUnit to "fit" will set such base unit and categoryAxis.baseUnitStep
+that the total number of categories does not exceed categoryAxis.maxDateGroups.Series data is aggregated for the specified base unit using the series.aggregate function.
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
@@ -197,8 +196,8 @@ series.aggregate function.
     }
 
     /**
-    * Sets the step (interval) between categories in base units.
-Specifiying "auto" will set the step to such value that the total number of categories does not exceed maxDateGroups.This option is ignored if baseUnit is set to "fit".
+    * The step (interval) between categories in base units. Setting it to "auto" will set the step to such value
+that the total number of categories does not exceed categoryAxis.maxDateGroups.This option is ignored if categoryAxis.baseUnit is set to "fit".
     * @param  $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */
@@ -252,7 +251,7 @@ Use the kendo.days constants to specify the day by name.
 
     /**
     * Specifies the maximum number of groups (categories) to produce when
-either baseUnit is set to "fit" or baseUnitStep is set to "auto".This option is ignored in all other cases.
+either baseUnit is set to "fit" or baseUnitStep is set to "auto".This option is ignored in all other cases.The default value is approximately equal to [widget width, px] / 30
     * @param float $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
     */

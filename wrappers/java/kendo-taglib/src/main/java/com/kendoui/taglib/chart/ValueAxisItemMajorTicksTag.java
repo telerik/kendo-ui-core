@@ -51,6 +51,14 @@ public class ValueAxisItemMajorTicksTag extends  BaseTag  /* interfaces *//* int
         return "chart-valueAxisItem-majorTicks";
     }
 
+    public String getColor() {
+        return (String)getProperty("color");
+    }
+
+    public void setColor(String value) {
+        setProperty("color", value);
+    }
+
     public float getSize() {
         return (float)getProperty("size");
     }

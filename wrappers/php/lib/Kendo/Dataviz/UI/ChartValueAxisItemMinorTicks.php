@@ -6,7 +6,16 @@ class ChartValueAxisItemMinorTicks extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.
+    * The color of the value axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
+    /**
+    * The length of the tick line in pixels.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks
     */
@@ -15,12 +24,21 @@ class ChartValueAxisItemMinorTicks extends \Kendo\SerializableObject {
     }
 
     /**
-    * The visibility of the minor ticks.
+    * If set to true the chart will display the value axis minor ticks. By default the value axis minor ticks are not visible.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
+    }
+
+    /**
+    * The width of the minor ticks in pixels.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemMinorTicks
+    */
+    public function width($value) {
+        return $this->setProperty('width', $value);
     }
 
 //<< Properties

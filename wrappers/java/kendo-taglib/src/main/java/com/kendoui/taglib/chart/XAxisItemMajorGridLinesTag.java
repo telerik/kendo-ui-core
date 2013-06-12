@@ -59,6 +59,14 @@ public class XAxisItemMajorGridLinesTag extends  BaseTag  /* interfaces *//* int
         setProperty("color", value);
     }
 
+    public String getDashType() {
+        return (String)getProperty("dashType");
+    }
+
+    public void setDashType(String value) {
+        setProperty("dashType", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }

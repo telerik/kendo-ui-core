@@ -6,7 +6,7 @@ class ChartSeriesItemOverlay extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The gradient name.Available options:
+    * The chart series gradient.The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemOverlay
     */

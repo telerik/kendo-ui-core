@@ -57,6 +57,10 @@ public class ChartAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
+    public void setMargin(com.kendoui.taglib.chart.ChartAreaMarginTag value) {
+        setProperty("margin", value);
+    }
+
     public String getBackground() {
         return (String)getProperty("background");
     }
@@ -73,11 +77,11 @@ public class ChartAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("height", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public float getMargin() {
+        return (float)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(float value) {
         setProperty("margin", value);
     }
 

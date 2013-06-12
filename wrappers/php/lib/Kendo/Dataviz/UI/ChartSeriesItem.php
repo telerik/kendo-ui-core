@@ -6,16 +6,89 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The type of the series. Available types:
+    * The aggregate function to apply for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function type($value) {
-        return $this->setProperty('type', $value);
+    public function aggregate($value) {
+        return $this->setProperty('aggregate', $value);
     }
 
     /**
-    * The series line dash type.** Applicable only to line and scatterLine series **
+    * The name of the value axis to use.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function axis($value) {
+        return $this->setProperty('axis', $value);
+    }
+
+    /**
+    * The border of the chart series.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemBorder|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function border($value) {
+        return $this->setProperty('border', $value);
+    }
+
+    /**
+    * The data item field which contains category name.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function categoryField($value) {
+        return $this->setProperty('categoryField', $value);
+    }
+
+    /**
+    * The data field containing the close value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function closeField($value) {
+        return $this->setProperty('closeField', $value);
+    }
+
+    /**
+    * The series base color. Accepts a valid CSS color string, including hex and rgb.
+    * @param string|\Kendo\JavaScriptFunction $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
+    /**
+    * The data item field which contains the series color.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function colorField($value) {
+        return $this->setProperty('colorField', $value);
+    }
+
+    /**
+    * The label connectors options.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemConnectors|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function connectors($value) {
+        return $this->setProperty('connectors', $value);
+    }
+
+    /**
+    * The data item field containing the current value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function currentField($value) {
+        return $this->setProperty('currentField', $value);
+    }
+
+    /**
+    * The dash type of line chart.The following dash types are supported:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -24,7 +97,7 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * Array of data items. The data item type can be either a:
+    * The array of data items which represent the series data.Can be set to :
     * @param array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -33,7 +106,25 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * The data field containing a boolean value that indicates if the sector is exploded.** Available for donut and pie series **
+    * The series color when the open value is greater than the close value.
+    * @param string|\Kendo\JavaScriptFunction $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function downColor($value) {
+        return $this->setProperty('downColor', $value);
+    }
+
+    /**
+    * The data field containing the color applied when the open value is greater than the close value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function downColorField($value) {
+        return $this->setProperty('downColorField', $value);
+    }
+
+    /**
+    * The data item field which contains a boolean value indicating whether the sector is exploded.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -42,25 +133,7 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * The data field containing the high value.** Available for candlestick and ohlc series only **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function highField($value) {
-        return $this->setProperty('highField', $value);
-    }
-
-    /**
-    * The the size of the donut hole.** Available for donut series only. **
-    * @param float $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function holeSize($value) {
-        return $this->setProperty('holeSize', $value);
-    }
-
-    /**
-    * The data field containing the series value.
+    * The data item field which contains the series value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -69,8 +142,17 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
+    * The distance between the category clusters.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function gap($value) {
+        return $this->setProperty('gap', $value);
+    }
+
+    /**
     * Sets the groupNameTemplate option of the ChartSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
+    * The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -82,7 +164,7 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
 
     /**
     * Sets the groupNameTemplate option of the ChartSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
+    * The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -91,16 +173,16 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * The series name visible in the legend.
+    * The data field containing the high value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function name($value) {
-        return $this->setProperty('name', $value);
+    public function highField($value) {
+        return $this->setProperty('highField', $value);
     }
 
     /**
-    * Configures the appearance of highlighted points.
+    * The chart series highlighting configuration options.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemHighlight|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -109,107 +191,16 @@ class ChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * Aggregate function for date series.This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function aggregate($value) {
-        return $this->setProperty('aggregate', $value);
-    }
-
-    /**
-    * The name of the value axis to use.** Applicable to area, bar, column, line, ohlc and candlestick series **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function axis($value) {
-        return $this->setProperty('axis', $value);
-    }
-
-    /**
-    * The border of the points.** Applicable to bar, column, bubble, donut, pie, ohlc and candlestick series **
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemBorder|array $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function border($value) {
-        return $this->setProperty('border', $value);
-    }
-
-    /**
-    * The data field containing the point category name.** Applicable to bubble, donut and pie series. **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function categoryField($value) {
-        return $this->setProperty('categoryField', $value);
-    }
-
-    /**
-    * The data field containing the close value.** Available for candlestick and ohlc series only **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function closeField($value) {
-        return $this->setProperty('closeField', $value);
-    }
-
-    /**
-    * The series base color. Accepts CSS color syntax, including hex and rgb.
-    * @param string|\Kendo\JavaScriptFunction $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function color($value) {
-        return $this->setProperty('color', $value);
-    }
-
-    /**
-    * The data field containing the point color.** Applicable for bar, column, bubble, donut, pie, candlestick and ohlc series. **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function colorField($value) {
-        return $this->setProperty('colorField', $value);
-    }
-
-    /**
-    * The label connectors options.** Applicable to donut and pie series. **
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemConnectors|array $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function connectors($value) {
-        return $this->setProperty('connectors', $value);
-    }
-
-    /**
-    * The series color when open value is smoller then close value.** Available for candlestick series only **
-    * @param string|\Kendo\JavaScriptFunction $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function downColor($value) {
-        return $this->setProperty('downColor', $value);
-    }
-
-    /**
-    * The data field containing the body color.** Available for candlestick series only **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function downColorField($value) {
-        return $this->setProperty('downColorField', $value);
-    }
-
-    /**
-    * The distance between category clusters.** Applicable for bar, column, candlestick and ohlc series. **
+    * The diameter of the donut hole in pixels.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function gap($value) {
-        return $this->setProperty('gap', $value);
+    public function holeSize($value) {
+        return $this->setProperty('holeSize', $value);
     }
 
     /**
-    * Configures the series data labels.
+    * The chart series label configuration.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemLabels|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -218,7 +209,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * Line options.** Applicable to area, candlestick and ohlc series. **
+    * The chart line configuration options.
     * @param string|\Kendo\Dataviz\UI\ChartSeriesItemLine|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -227,7 +218,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The data field containing the low value.** Available for candlestick and ohlc series **
+    * The data field containing the low value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -236,8 +227,8 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The margin around each donut series (ring)** Applicable only to donut series **
-    * @param float $value
+    * The margin around each donut series (ring). A numeric value will set all margins.
+    * @param float|\Kendo\Dataviz\UI\ChartSeriesItemMargin|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
     public function margin($value) {
@@ -245,7 +236,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * Marker options.** Applicable to area, line, scatter and scatterLine series **
+    * The chart series marker configuration.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemMarkers|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -254,7 +245,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The max size of the marker.** Applicable only to bubble series. **
+    * The maximum size of the chart bubble series marker.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -263,7 +254,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The min size of the marker.** Applicable only to bubble series. **
+    * The minimum size of the chart bubble series marker.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -272,7 +263,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * Configures the behavior for handling missing values.** Available for area, line and scatterLine series **
+    * The behavior for handling missing values.The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -281,7 +272,16 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * Color to use for bars with negative values.** Applicable only to bar and column series. **
+    * The name of the chart series which is visible in the legend.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function name($value) {
+        return $this->setProperty('name', $value);
+    }
+
+    /**
+    * The color to use for bar or column series with negative values. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -290,7 +290,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The settings for negative values.** Applicable only to bubble series. **
+    * The options for displaying the chart negative bubble values.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemNegativeValues|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -299,7 +299,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The series opacity.
+    * The series opacity. By default the series are opaque.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -308,7 +308,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The data field containing the open value.** Available for candlestick and ohlc series **
+    * The data field containing the open value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -317,7 +317,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The effects overlay.
+    * The chart series overlay options.
     * @param \Kendo\Dataviz\UI\ChartSeriesItemOverlay|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -326,7 +326,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The padding around the chart (equal on all sides).** Available for donut and pie series. **
+    * The padding around the chart (equal on all sides).
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -335,8 +335,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * The size (or radius) of the series in pixels.
-If not specified, the available space is split evenly between the series.Available for donut series only.
+    * The or radius of the chart donut series in pixels. If not set, the available space is split evenly between the series.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -345,16 +344,7 @@ If not specified, the available space is split evenly between the series.Availab
     }
 
     /**
-    * The start angle of the first segment.Available for donut and pie series.
-    * @param float $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function startAngle($value) {
-        return $this->setProperty('startAngle', $value);
-    }
-
-    /**
-    * The data field containing the bubble size value.** Applicable only to bubble series. **
+    * The data field containing the bubble size value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -363,7 +353,7 @@ If not specified, the available space is split evenly between the series.Availab
     }
 
     /**
-    * Space between points as proportion of the point width.** Available for bar, column, candlestick and ohlc series. **
+    * The space between the chart series as proportion of the series width.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -373,7 +363,6 @@ If not specified, the available space is split evenly between the series.Availab
 
     /**
     * A value indicating if the series should be stacked. String value indicates that the series should be stacked in a group with the specified name.
-** Available for bar and column series. **
     * @param boolean|string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -382,88 +371,25 @@ If not specified, the available space is split evenly between the series.Availab
     }
 
     /**
-    * The data point tooltip configuration options.
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemTooltip|array $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function tooltip($value) {
-        return $this->setProperty('tooltip', $value);
-    }
-
-    /**
-    * A value indicating whether to show the point category name (for bubble, donut and pie series) and series name (for other available series types) in the legend.** Available for all series. **
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function visibleInLegend($value) {
-        return $this->setProperty('visibleInLegend', $value);
-    }
-
-    /**
-    * A data field containing a boolean value which indicates whether to show the point category name in the legend.** Available for bubble, donut and pie series. **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function visibleInLegendField($value) {
-        return $this->setProperty('visibleInLegendField', $value);
-    }
-
-    /**
-    * The line width.** Available for line and scatterLine series **
+    * The start angle (degrees) of the first donut or pie segment.Angles increase clockwise and zero is to the left. Negative values are acceptable.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function width($value) {
-        return $this->setProperty('width', $value);
+    public function startAngle($value) {
+        return $this->setProperty('startAngle', $value);
     }
 
     /**
-    * The name of the X axis to use.** Available for bubble, scatter and scatterLine series. **
-    * @param string $value
+    * The configuration options of the target
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemTarget|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function xAxis($value) {
-        return $this->setProperty('xAxis', $value);
+    public function target($value) {
+        return $this->setProperty('target', $value);
     }
 
     /**
-    * The data field containing the X value.** Available for bubble, scatter and scatterLine series. **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function xField($value) {
-        return $this->setProperty('xField', $value);
-    }
-
-    /**
-    * The name of the Y axis to use.** Available for bubble, scatter and scatterLine series. **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function yAxis($value) {
-        return $this->setProperty('yAxis', $value);
-    }
-
-    /**
-    * The data field containing the Y value.** Available for bubble, scatter and scatterLine series. **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function yField($value) {
-        return $this->setProperty('yField', $value);
-    }
-
-    /**
-    * The data field containing the current value.** Available for bullet and verticalBullet series. **
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function currentField($value) {
-        return $this->setProperty('currentField', $value);
-    }
-
-    /**
-    * The data field containing the target value.** Available for bullet and verticalBullet series. **
+    * The data item field containing the target value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -472,12 +398,85 @@ If not specified, the available space is split evenly between the series.Availab
     }
 
     /**
-    * The target of the bullet chart.
-    * @param \Kendo\Dataviz\UI\ChartSeriesItemTarget|array $value
+    * The chart series tooltip configuration options.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemTooltip|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function target($value) {
-        return $this->setProperty('target', $value);
+    public function tooltip($value) {
+        return $this->setProperty('tooltip', $value);
+    }
+
+    /**
+    * The type of the series.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function type($value) {
+        return $this->setProperty('type', $value);
+    }
+
+    /**
+    * A value indicating whether to show the point category name (for bubble, donut and pie series)
+or series name (for other available series types) in the legend.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function visibleInLegend($value) {
+        return $this->setProperty('visibleInLegend', $value);
+    }
+
+    /**
+    * The data item field which indicates whether to show the point category name in the legend.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function visibleInLegendField($value) {
+        return $this->setProperty('visibleInLegendField', $value);
+    }
+
+    /**
+    * The line width.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function width($value) {
+        return $this->setProperty('width', $value);
+    }
+
+    /**
+    * The name of the X axis to use.For polar series the xAxis range is expressed in degrees.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function xAxis($value) {
+        return $this->setProperty('xAxis', $value);
+    }
+
+    /**
+    * The data item field containing the X value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function xField($value) {
+        return $this->setProperty('xField', $value);
+    }
+
+    /**
+    * The name of the Y axis to use.** Available for bubble, scatter, scatterLine and polar series. **
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function yAxis($value) {
+        return $this->setProperty('yAxis', $value);
+    }
+
+    /**
+    * The data item field containing the Y value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function yField($value) {
+        return $this->setProperty('yField', $value);
     }
 
 //<< Properties

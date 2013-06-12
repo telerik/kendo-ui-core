@@ -15,7 +15,7 @@ class ChartSeriesDefaultsTooltipBorder extends \Kendo\SerializableObject {
     }
 
     /**
-    * The width of the border.
+    * The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsTooltipBorder
     */

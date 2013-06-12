@@ -127,6 +127,10 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
         setEvent("legendItemClick", value.getBody());
     }
 
+    public void setLegendItemHover(LegendItemHoverFunctionTag value) {
+        setEvent("legendItemHover", value.getBody());
+    }
+
     public void setPlotAreaClick(PlotAreaClickFunctionTag value) {
         setEvent("plotAreaClick", value.getBody());
     }
@@ -278,6 +282,18 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     public void setLegendItemClick(String value) {
         setProperty("legendItemClick", new Function(value));
+    }
+
+    public String getLegendItemHover() {
+        Function property = ((Function)getProperty("legendItemHover"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setLegendItemHover(String value) {
+        setProperty("legendItemHover", new Function(value));
     }
 
     public String getPlotAreaClick() {

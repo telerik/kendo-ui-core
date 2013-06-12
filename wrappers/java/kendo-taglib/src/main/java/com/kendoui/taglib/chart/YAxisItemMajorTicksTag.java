@@ -51,6 +51,14 @@ public class YAxisItemMajorTicksTag extends  BaseTag  /* interfaces *//* interfa
         return "chart-yAxisItem-majorTicks";
     }
 
+    public String getColor() {
+        return (String)getProperty("color");
+    }
+
+    public void setColor(String value) {
+        setProperty("color", value);
+    }
+
     public float getSize() {
         return (float)getProperty("size");
     }
@@ -65,6 +73,14 @@ public class YAxisItemMajorTicksTag extends  BaseTag  /* interfaces *//* interfa
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
+    }
+
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
 //<< Attributes

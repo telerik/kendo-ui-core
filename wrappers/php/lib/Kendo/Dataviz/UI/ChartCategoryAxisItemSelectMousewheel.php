@@ -6,8 +6,7 @@ class ChartCategoryAxisItemSelectMousewheel extends \kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Reverses the mousewheel zoom direction.
-Normal direction is down for "zoom out", up for "zoom in".
+    * If set to true will reverse the mouse wheel direction. The normal direction is down for "zoom out", up for "zoom in".
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemSelectMousewheel
     */
@@ -16,7 +15,7 @@ Normal direction is down for "zoom out", up for "zoom in".
     }
 
     /**
-    * The zoom direction. Possible values:
+    * The zoom direction.The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemSelectMousewheel
     */

@@ -67,6 +67,14 @@ public class ValueAxisItemMinorGridLinesTag extends  BaseTag  /* interfaces *//*
         setProperty("dashType", value);
     }
 
+    public String getType() {
+        return (String)getProperty("type");
+    }
+
+    public void setType(String value) {
+        setProperty("type", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }
