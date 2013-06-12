@@ -127,6 +127,7 @@
     <Compile Include="Controllers\Mobile\Button\EventsController.cs" />
     <Compile Include="Controllers\Mobile\Button\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Layout\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\ListView\EditingController.cs" />
     <Compile Include="Controllers\Mobile\ListView\DataBindingController.cs" />
     <Compile Include="Controllers\Mobile\ListView\TemplatesController.cs" />
     <Compile Include="Controllers\Mobile\ListView\FixedHeadersController.cs" />
@@ -536,6 +537,8 @@
     <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\layout\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\listview\editdetails.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\listview\editing.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\databinding.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\templates.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\fixedheaders.aspx" />
@@ -733,6 +736,8 @@
     <Content Include="Areas\razor\Views\mobile\listview\fixedheaders.cshtml" />
     <Content Include="Areas\razor\Views\mobile\listview\templates.cshtml" />
     <Content Include="Areas\razor\Views\mobile\listview\databinding.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\listview\editdetails.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\listview\editing.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />

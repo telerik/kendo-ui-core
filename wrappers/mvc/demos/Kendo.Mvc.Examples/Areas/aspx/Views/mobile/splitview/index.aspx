@@ -142,7 +142,7 @@
 %>
 
 <script>
-    window.ds = splitViewOrderDetails = new kendo.data.DataSource({
+    var splitViewOrderDetails = new kendo.data.DataSource({
         type: "aspnetmvc-ajax",
         serverFiltering: true,
         transport: {
