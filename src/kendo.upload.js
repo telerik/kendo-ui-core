@@ -59,8 +59,8 @@ kendo_module({
             }
 
             that.wrapper
-            .delegate(".k-upload-action", "click", $.proxy(that._onFileAction, that))
-            .delegate(".k-upload-selected", "click", $.proxy(that._onUploadSelected, that));
+            .on("click", ".k-upload-action", $.proxy(that._onFileAction, that))
+            .on("click", ".k-upload-selected", $.proxy(that._onUploadSelected, that));
         },
 
         events: [
@@ -79,6 +79,7 @@ kendo_module({
             enabled: true,
             multiple: true,
             showFileList: true,
+            template: "",
             async: {
                 removeVerb: "POST",
                 autoUpload: true
@@ -208,11 +209,30 @@ kendo_module({
             }
         },
 
+        _prepareTemplateData: function(name, data) {
+            var filesData = data.fileNames,
+                templateData = {},
+                totalSize = 0,
+                idx = 0;
+
+            for (idx = 0; idx < filesData.length; idx++) {
+                totalSize += filesData[idx].size;
+            }
+
+            templateData.name = name;
+            templateData.size = totalSize;
+            templateData.files = data.fileNames;
+
+            return templateData;
+        },
+
         _enqueueFile: function(name, data) {
             var that = this,
                 existingFileEntries,
                 fileEntry,
-                fileList =  $(".k-upload-files", that.wrapper);
+                fileList =  $(".k-upload-files", that.wrapper),
+                options = that.options,
+                template = options.template;
 
             if (fileList.length === 0) {
                 fileList = $("<ul class='k-upload-files k-reset'></ul>").appendTo(that.wrapper);
@@ -222,8 +242,17 @@ kendo_module({
             }
 
             existingFileEntries = $(".k-file", fileList);
-            fileEntry =
-                $("<li class='k-file'><span class='k-filename' title='" + name + "'>" + name + "</span></li>")
+
+            if (!template) {
+                fileEntry = $("<li class='k-file'><span class='k-filename' title='" + name + "'>" + name + "</span></li>");
+            } else {
+                var templateData = that._prepareTemplateData(name, data);
+                template = kendo.template(template);
+                fileEntry = $("<li class='k-file'><span class='k-filename' title='" + name + "'>" + template(templateData) + "</span></li>");
+                fileEntry.find(".k-upload-action").addClass("k-button k-button-icontext");
+            }
+
+            fileEntry
                 .appendTo(fileList)
                 .data(data);
 
