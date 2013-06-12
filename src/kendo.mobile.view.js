@@ -608,9 +608,9 @@ kendo_module({
 
             that._setupLayouts(sandbox);
 
-            modalViews = sandbox.children(roleSelector("modalview"));
+            modalViews = sandbox.children(roleSelector("modalview drawer"));
 
-            container.append(sandbox.children(roleSelector("layout modalview")).add(views));
+            container.append(sandbox.children(roleSelector("layout modalview drawer")).add(views));
 
             // Initialize the modalviews after they have been appended to the final container
             initWidgets(modalViews);
