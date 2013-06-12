@@ -2624,7 +2624,7 @@ function pad(number, digits, end) {
         }
     });
 
-    var ContainerNullObject = { bind: $.noop };
+    var ContainerNullObject = { bind: function () { return this; } };
 
     var MobileWidget = Widget.extend({
         init: function(element, options) {
