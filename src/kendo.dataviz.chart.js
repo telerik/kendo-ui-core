@@ -113,7 +113,7 @@ kendo_module({
         LEGEND_ITEM_HOVER = "legendItemHover",
         LINE = "line",
         LINE_MARKER_SIZE = 8,
-        MAX_EXPAND_DEPTH = 8,
+        MAX_EXPAND_DEPTH = 5,
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
         MINUTES = "minutes",

@@ -1207,7 +1207,7 @@
                     equal(opts.baz.foo, "bar");
                 })
 
-                test("evals functions up to 8 levels deep", function() {
+                test("evals functions up to 5 levels deep", function() {
                     var opts = {};
 
                     for (var i = 0, root = opts; i < 9; i++) {
@@ -1221,8 +1221,8 @@
 
                     evalOptions(opts);
 
-                    equal(opts.n0.n1.n2.n3.n4.n5.n6.n7.foo, "bar");
-                    ok($.isFunction(opts.n0.n1.n2.n3.n4.n5.n6.n7.n8.foo));
+                    equal(opts.n0.n1.n2.n3.n4.foo, "bar");
+                    ok($.isFunction(opts.n0.n1.n2.n3.n4.n5.foo));
                 });
 
                 test("excluded options are ignored", function() {
