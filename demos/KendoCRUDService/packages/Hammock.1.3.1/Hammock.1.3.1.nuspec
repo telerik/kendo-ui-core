@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Hammock</id>
     <version>1.3.1</version>
@@ -13,19 +13,5 @@
     <summary>REST, easy.</summary>
     <language>en-US</language>
     <tags>web api client http rest services wrapper json xml</tags>
-    <references>
-      <reference file="Hammock.dll" />
-      <reference file="LinqBridge.dll" />
-      <reference file="Hammock.ClientProfile.dll" />
-      <reference file="Hammock.WindowsPhone.dll" />
-      <reference file="ICSharpCode.SharpZipLib.WindowsPhone.dll" />
-      <reference file="Hammock.WindowsPhone.Mango.dll" />
-      <reference file="Hammock.Silverlight.dll" />
-      <reference file="ICSharpCode.SharpZipLib.Silverlight.dll" />
-      <reference file="Microsoft.CSharp.dll" />
-      <reference file="System.Json.dll" />
-      <reference file="System.Runtime.Serialization.Json.dll" />
-      <reference file="System.Xml.Linq.dll" />
-    </references>
   </metadata>
 </package>

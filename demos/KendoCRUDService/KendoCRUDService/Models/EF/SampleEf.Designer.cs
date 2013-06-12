@@ -288,6 +288,22 @@ namespace KendoCRUDService.Models.EF
             }
         }
         private ObjectSet<Weather> _Weather;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Task> Tasks
+        {
+            get
+            {
+                if ((_Tasks == null))
+                {
+                    _Tasks = base.CreateObjectSet<Task>("Tasks");
+                }
+                return _Tasks;
+            }
+        }
+        private ObjectSet<Task> _Tasks;
 
         #endregion
 
@@ -395,6 +411,14 @@ namespace KendoCRUDService.Models.EF
         public void AddToWeather(Weather weather)
         {
             base.AddObject("Weather", weather);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Tasks EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTasks(Task task)
+        {
+            base.AddObject("Tasks", task);
         }
 
         #endregion
@@ -3577,6 +3601,239 @@ namespace KendoCRUDService.Models.EF
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="Task")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Task : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Task object.
+        /// </summary>
+        /// <param name="taskID">Initial value of the TaskID property.</param>
+        /// <param name="start">Initial value of the Start property.</param>
+        /// <param name="end">Initial value of the End property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        /// <param name="isAllDay">Initial value of the IsAllDay property.</param>
+        public static Task CreateTask(global::System.Int32 taskID, global::System.DateTime start, global::System.DateTime end, global::System.String title, global::System.Boolean isAllDay)
+        {
+            Task task = new Task();
+            task.TaskID = taskID;
+            task.Start = start;
+            task.End = end;
+            task.Title = title;
+            task.IsAllDay = isAllDay;
+            return task;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TaskID
+        {
+            get
+            {
+                return _TaskID;
+            }
+            set
+            {
+                if (_TaskID != value)
+                {
+                    OnTaskIDChanging(value);
+                    ReportPropertyChanging("TaskID");
+                    _TaskID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TaskID");
+                    OnTaskIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _TaskID;
+        partial void OnTaskIDChanging(global::System.Int32 value);
+        partial void OnTaskIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Start
+        {
+            get
+            {
+                return _Start;
+            }
+            set
+            {
+                OnStartChanging(value);
+                ReportPropertyChanging("Start");
+                _Start = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Start");
+                OnStartChanged();
+            }
+        }
+        private global::System.DateTime _Start;
+        partial void OnStartChanging(global::System.DateTime value);
+        partial void OnStartChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime End
+        {
+            get
+            {
+                return _End;
+            }
+            set
+            {
+                OnEndChanging(value);
+                ReportPropertyChanging("End");
+                _End = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("End");
+                OnEndChanged();
+            }
+        }
+        private global::System.DateTime _End;
+        partial void OnEndChanging(global::System.DateTime value);
+        partial void OnEndChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> OwnerID
+        {
+            get
+            {
+                return _OwnerID;
+            }
+            set
+            {
+                OnOwnerIDChanging(value);
+                ReportPropertyChanging("OwnerID");
+                _OwnerID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OwnerID");
+                OnOwnerIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _OwnerID;
+        partial void OnOwnerIDChanging(Nullable<global::System.Int32> value);
+        partial void OnOwnerIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsAllDay
+        {
+            get
+            {
+                return _IsAllDay;
+            }
+            set
+            {
+                OnIsAllDayChanging(value);
+                ReportPropertyChanging("IsAllDay");
+                _IsAllDay = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsAllDay");
+                OnIsAllDayChanged();
+            }
+        }
+        private global::System.Boolean _IsAllDay;
+        partial void OnIsAllDayChanging(global::System.Boolean value);
+        partial void OnIsAllDayChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Recurrence
+        {
+            get
+            {
+                return _Recurrence;
+            }
+            set
+            {
+                OnRecurrenceChanging(value);
+                ReportPropertyChanging("Recurrence");
+                _Recurrence = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Recurrence");
+                OnRecurrenceChanged();
+            }
+        }
+        private global::System.String _Recurrence;
+        partial void OnRecurrenceChanging(global::System.String value);
+        partial void OnRecurrenceChanged();
+
+        #endregion
+
+    
     }
     
     /// <summary>

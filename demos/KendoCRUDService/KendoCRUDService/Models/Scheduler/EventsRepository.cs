@@ -2,77 +2,156 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using KendoCRUDService.Models.EF;
+using KendoCRUDService.Models;
+using System.Data;
 
 namespace KendoCRUDService.Models
 {
-    public static class EventsRepository
+    public static class TasksRepository
     {
-        public static IList<EventModel> All()
+        private static bool UpdateDatabase = false;
+
+        public static IList<TaskViewModel> All()
         {
-            var result = HttpContext.Current.Session["Events"] as IList<EventModel>;
+            var result = HttpContext.Current.Session["Tasks"] as IList<TaskViewModel>;
 
-            if (result == null)
-            {                
-                HttpContext.Current.Session["Events"] = result = new List<EventModel>(){
-                    new EventModel {
-                        ID = 1,
-                        Start = DateTime.SpecifyKind(DateTime.Today.AddHours(10), DateTimeKind.Utc),
-                        End = DateTime.SpecifyKind(DateTime.Today.AddHours(14), DateTimeKind.Utc),
-                        Timezone = "",
-                        Title = "Event1"
-                    }
-                };
+            if (result == null || UpdateDatabase)
+            {
+                using (var db = new SampleEntities())
+                {
+                    result = db.Tasks.ToList().Select(task => new TaskViewModel
+                    {
+                        TaskID = task.TaskID,
+                        Title = task.Title,
+                        Start = task.Start,
+                        End = task.End,
+                        Description = task.Description,
+                        IsAllDay = task.IsAllDay,
+                        OwnerID = task.OwnerID
+                    }).ToList();
+                }
 
-
-
-
-
-
+                HttpContext.Current.Session["Tasks"] = result;
             }
 
             return result;
         }
 
-        public static EventModel One(Func<EventModel, bool> predicate)
+        public static TaskViewModel One(Func<TaskViewModel, bool> predicate)
         {
             return All().FirstOrDefault(predicate);
         }
 
-        public static void Insert(EventModel schedulerEvent)
+        public static void Insert(TaskViewModel task)
         {
-            var first = All().OrderByDescending(e => e.ID).FirstOrDefault();
-            var id = 0;
-            if (first != null)
+            if (!UpdateDatabase)
             {
-                id = first.ID;
-            }            
+                var first = All().OrderByDescending(e => e.TaskID).FirstOrDefault();
 
-            schedulerEvent.ID = id + 1;
+                var id = 0;
 
-            All().Insert(0, schedulerEvent);
+                if (first != null)
+                {
+                    id = first.TaskID;
+                }            
+
+                task.TaskID = id + 1;
+
+                All().Insert(0, task);
+            } 
+            else 
+            {
+                using (var db = new SampleEntities())
+                {
+                    var entity = new Task
+                    {
+                        Title = task.Title,
+                        Start = task.Start,
+                        End = task.End,
+                        Description = task.Description,
+                        IsAllDay = task.IsAllDay,
+                        OwnerID = task.OwnerID
+                    };
+
+                    db.Tasks.AddObject(entity);
+                    db.SaveChanges();
+
+                    task.TaskID = entity.TaskID;
+                }
+            }
         }        
 
-        public static void Update(EventModel schedulerEvent)
+        public static void Update(TaskViewModel task)
         {
-            var target = One(e => e.ID == schedulerEvent.ID);
-            
-            if (target != null)
+            if (!UpdateDatabase)
             {
-                target.Title = schedulerEvent.Title;
-                target.Timezone = schedulerEvent.Timezone;
-                target.Start = schedulerEvent.Start;
-                target.End = schedulerEvent.End;
-                target.Description = schedulerEvent.Description;
-                target.IsAllDay = schedulerEvent.IsAllDay;                
+                var target = One(e => e.TaskID == task.TaskID);
+
+                if (target != null)
+                {
+                    target.Title = task.Title;
+                    target.Timezone = task.Timezone;
+                    target.Start = task.Start;
+                    target.End = task.End;
+                    target.Description = task.Description;
+                    target.IsAllDay = task.IsAllDay;
+                    target.Recurrence = task.Recurrence;
+                    target.OwnerID = task.OwnerID;
+                }
+            }
+            else
+            {
+                using (var db = new SampleEntities())
+                {
+                    var entity = new Task
+                    {
+                        TaskID = task.TaskID,
+                        Title = task.Title,
+                        Start = task.Start,
+                        End = task.End,
+                        Description = task.Description,
+                        IsAllDay = task.IsAllDay,
+                        OwnerID = task.OwnerID
+                    };
+
+                    db.Tasks.Attach(entity);
+                    db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
+                    db.SaveChanges();
+                }
+
             }
         }
 
-        public static void Delete(EventModel schedulerEvent)
+        public static void Delete(TaskViewModel task)
         {
-            var target = One(p => p.ID == schedulerEvent.ID);
-            if (target != null)
+            if (!UpdateDatabase)
             {
-                All().Remove(target);
+                var target = One(p => p.TaskID == task.TaskID);
+                if (target != null)
+                {
+                    All().Remove(target);
+                }
+            }
+            else
+            {
+                using (var db = new SampleEntities())
+                {
+                    var entity = new Task
+                    {
+                        TaskID = task.TaskID,
+                        Title = task.Title,
+                        Start = task.Start,
+                        End = task.End,
+                        Description = task.Description,
+                        IsAllDay = task.IsAllDay,
+                        OwnerID = task.OwnerID
+                    };
+
+                    db.Tasks.Attach(entity);
+                    db.Tasks.DeleteObject(entity);
+                    db.SaveChanges();
+                }
             }
         }
     }
