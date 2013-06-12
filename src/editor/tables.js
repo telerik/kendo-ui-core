@@ -65,6 +65,7 @@ var TableEditor = kendo.Class.extend({
             i;
 
         selectionCell.className = "k-selection-cell";
+        selectionCell.contentEditable = "false";
         selectionRow.className = "k-selection-row";
 
         for (i = 0; i < rows[rows.length-1].cells.length; i++) {
@@ -81,7 +82,9 @@ var TableEditor = kendo.Class.extend({
     },
 
     _attachEvents: function() {
-        $(this.table).on("click" + NS, ".k-selection-cell", proxy(this._selectionCellClick, this));
+        $(this.table)
+            .on("click" + NS, ".k-selection-cell", proxy(this._selectionCellClick, this))
+            .on("click" + NS, "td:not(.k-selection-cell)", proxy(this.clearSelection, this));
     },
 
     _detachEvents: function() {
@@ -92,6 +95,8 @@ var TableEditor = kendo.Class.extend({
         var target = $(e.target),
             rowIndex = target.parent().index(),
             cellIndex = target.index();
+
+        e.preventDefault();
 
         if (!e.shiftKey) {
             this.clearSelection();
