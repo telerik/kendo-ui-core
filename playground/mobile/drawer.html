@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drawer Proof of concept</title>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.drawer.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <style>
+            .km-drawer .km-insetcontent {
+                background: black;
+                color: white;
+            }
+        </style>
+</head>
+<body>
+
+
+    <style>
+        .km-ul:before,
+        .km-ul:after  {
+            content: "\E0F1";
+        }
+
+        .km-content {
+            background: white;
+        }
+    </style>
+
+    <div data-role="drawer" id="right-drawer" data-position="right" style="width: 150px" data-views="['bar']">
+        <ul data-role="listview" data-style="inset">
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+        </ul>
+    </div>
+
+    <div data-role="drawer" id="my-drawer">
+       <ul data-role="listview" data-style="inset" data-type="group">
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li><a href="#foo">Foo</a></li>
+                   <li><a href="#bar">Bar</a></li>
+                   <li>Item</li>
+               </ul>
+           </li>
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li>Item</li>
+                   <li>Item</li>
+               </ul>
+           </li>
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li>Item</li>
+                   <li>Item</li>
+               </ul>
+           </li>
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li>Item</li>
+                   <li>Item</li>
+               </ul>
+           </li>
+           <li>
+               Heading
+               <ul>
+                   <li>Item</li>
+                   <li>Item</li>
+                   <li>Item</li>
+               </ul>
+           </li>
+
+        </ul>
+    </div>
+
+    <div data-role="view" id="bar" data-title="bar">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-role="button" href="#my-drawer" data-rel="drawer" data-icon="ul" data-align="left"></a>
+                <span data-role="view-title"></span>
+                <a data-role="button" href="#right-drawer" data-rel="drawer" data-icon="ul" data-align="right"></a>
+            </div>
+        </header>
+
+        <ul data-role="listview" data-style="inset">
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+            <li>Bar 1</li>
+        </ul>
+    </div>
+
+    <div data-role="view" data-title="drawer example" id="foo">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-role="button" href="#my-drawer" data-rel="drawer" data-icon="ul" data-align="left"></a>
+                <span data-role="view-title"></span>
+            </div>
+        </header>
+
+        <ul data-role="listview" data-style="inset">
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+            <li>Item 1</li>
+        </ul>
+    </div>
+
+
+    <script type="text/javascript">
+        new kendo.mobile.Application(document.body, { skin: "flat" });
+    </script>
+</body>
+</html>

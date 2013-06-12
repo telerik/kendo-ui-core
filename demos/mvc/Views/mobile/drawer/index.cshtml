@@ -1,0 +1,36 @@
+<div data-role="view" id="drawer-home" data-layout="drawer-layout" data-title="So/Lo/Mo">
+    <h1>Welcome to So/Lo/Mo</h1>
+</div>
+
+<div data-role="view" id="drawer-settings" data-layout="drawer-layout" data-title="Settings">
+    <h1>So/Lo/Mo Settings</h1>
+</div>
+
+<div data-role="drawer" id="my-drawer" style="width: 150px" data-views="['drawer-home', 'drawer-settings', '/demos/mobile/m/drawer/index.html']">
+    <ul data-role="listview" data-style="inset">
+        <li><a href="#drawer-home" data-transition="none">Home</a></li>
+        <li><a href="#drawer-settings" data-transition="none">Settings</a></li>
+    </ul>
+</div>
+
+<div data-role="layout" data-id="drawer-layout">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-icon="drawer-button" data-align="left"></a>
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+</div>
+
+<script>
+    // reset global drawer instance, for demo purposes
+    kendo.mobile.ui.Drawer.current = null;
+</script>
+
+<style>
+    .km-drawer-button:before,
+    .km-drawer-button:after  {
+        content: "\E0F1";
+    }
+</style>

@@ -421,6 +421,7 @@ kendo_module({
         LOAD_START = "loadStart",
         LOAD_COMPLETE = "loadComplete",
         SHOW_START = "showStart",
+        SAME_VIEW_REQUESTED = "sameViewRequested",
         VIEW_SHOW = "viewShow";
 
     function urlParams(url) {
@@ -461,7 +462,7 @@ kendo_module({
             that.layouts = {};
 
             that._setupLayouts(container);
-            initWidgets(container.children(roleSelector("modalview")));
+            initWidgets(container.children(roleSelector("modalview drawer")));
 
             if (that.loader) {
                 that.bind(SHOW_START, function() { that.loader.transition(); });
@@ -477,6 +478,7 @@ kendo_module({
 
         showView: function(url, transition) {
             if (url === this.url) {
+                this.trigger(SAME_VIEW_REQUESTED);
                 return;
             }
 
@@ -606,9 +608,9 @@ kendo_module({
 
             that._setupLayouts(sandbox);
 
-            modalViews = sandbox.children(roleSelector("modalview"));
+            modalViews = sandbox.children(roleSelector("modalview drawer"));
 
-            container.append(sandbox.children(roleSelector("layout modalview")).add(views));
+            container.append(sandbox.children(roleSelector("layout modalview drawer")).add(views));
 
             // Initialize the modalviews after they have been appended to the final container
             initWidgets(modalViews);

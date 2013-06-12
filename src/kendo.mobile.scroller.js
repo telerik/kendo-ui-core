@@ -256,10 +256,11 @@ kendo_module({
                         dimensions.refresh();
 
                         var velocityX = abs(e.x.velocity),
-                            velocityY = abs(e.y.velocity);
+                            velocityY = abs(e.y.velocity),
+                            horizontalSwipe  = velocityX * 2 >= velocityY,
+                            verticalSwipe = velocityY * 2 >= velocityX;
 
-                        if (dimensions.x.enabled && velocityX * 2 >= velocityY ||
-                            dimensions.y.enabled && velocityY * 2 >= velocityX) {
+                        if (that.enabled && (dimensions.x.enabled && horizontalSwipe || dimensions.y.enabled && verticalSwipe)) {
                             userEvents.capture();
                         } else {
                             userEvents.cancel();
@@ -299,6 +300,7 @@ kendo_module({
                 pane: pane,
                 tapCapture: tapCapture,
                 pulled: false,
+                enabled: true,
                 scrollElement: inner,
                 fixedContainer: element.children().first()
             });
@@ -371,6 +373,14 @@ kendo_module({
             dimensions.refresh();
             this._scale(dimensions.fitScale);
             this.movable.moveTo(dimensions.centerCoordinates());
+        },
+
+        enable: function() {
+            this.enabled = true;
+        },
+
+        disable: function() {
+            this.enabled = false;
         },
 
         scrollTo: function(x, y) {

@@ -39,6 +39,7 @@
 .km-pane
 {
     font-family: sans-serif;
+    overflow-x: hidden;
 }
 
 .km-root > *,
@@ -134,6 +135,15 @@
 [data-role="layout"]
 {
     display: none;
+}
+
+[data-role="view"], [data-role="drawer"]
+{
+    visibility: hidden;
+}
+
+.km-view {
+    visibility: visible;
 }
 
 .km-tabstrip
@@ -1740,3 +1750,18 @@
     position: absolute;
 }
 
+// Drawer
+.km-drawer, [data-role=drawer] {
+    top: 0;
+    left: auto;
+    width: 80%;
+    z-index: -2;
+}
+
+.km-left-drawer {
+    left: 0;
+}
+
+.km-right-drawer {
+    right: 0;
+}

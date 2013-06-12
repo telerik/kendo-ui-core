@@ -22,8 +22,9 @@ kendo_module({
 
         NAVIGATE = "navigate",
         VIEW_SHOW = "viewShow",
+        SAME_VIEW_REQUESTED = "sameViewRequested",
 
-        WIDGET_RELS = /popover|actionsheet|modalview/,
+        WIDGET_RELS = /popover|actionsheet|modalview|drawer/,
         BACK = "#:back",
 
         attrValue = kendo.attrValue,
@@ -65,6 +66,10 @@ kendo_module({
                 that.trigger(VIEW_SHOW, e);
             });
 
+            that.viewEngine.bind(SAME_VIEW_REQUESTED, function(e) {
+                that.trigger(SAME_VIEW_REQUESTED, e);
+            });
+
             that.viewEngine.bind("viewTypeDetermined", function(e) {
                 if (!e.remote || !that.options.serverNavigation)  {
                     that.trigger(NAVIGATE, { url: e.url });
@@ -90,7 +95,8 @@ kendo_module({
 
         events: [
             NAVIGATE,
-            VIEW_SHOW
+            VIEW_SHOW,
+            SAME_VIEW_REQUESTED
         ],
 
         destroy: function() {
@@ -137,11 +143,11 @@ kendo_module({
                 return;
             }
 
-            var link = $(e.currentTarget),
+            var pane = this,
+                link = $(e.currentTarget),
                 transition = attrValue(link, "transition"),
                 rel = attrValue(link, "rel") || "",
                 target = attrValue(link, "target"),
-                pane = this,
                 href = link.attr(HREF);
 
             if (rel === EXTERNAL || (typeof href === "undefined") || href === DUMMY_HREF) {
@@ -154,7 +160,11 @@ kendo_module({
 
             if (rel.match(WIDGET_RELS)) {
                 kendo.widgetInstance($(href), ui).openFor(link);
-                e.stopPropagation();
+                // if propagation is not stopped and actionsheet is opened from tabstrip,
+                // the actionsheet is closed immediately.
+                if (rel === "actionsheet") {
+                    e.stopPropagation();
+                }
             } else {
                 if (target === "_top") {
                     pane = mobile.application.pane;
