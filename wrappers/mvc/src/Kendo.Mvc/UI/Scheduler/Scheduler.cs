@@ -21,6 +21,8 @@
 
             DataSource = new DataSource();
 
+            DataSource.Type = DataSourceType.Ajax;
+
             DataSource.ModelType(typeof(T));
         }
 
@@ -50,8 +52,13 @@
             var options = new Dictionary<string, object>(Events);
 
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
-            {
-                options["dataSource"] = DataSource.ToJson();
+            {      
+
+                Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
+                
+                dataSource["type"] = "scheduler-aspnetmvc";
+
+                options["dataSource"] = dataSource;
             }
             else if (DataSource.Data != null)
             {

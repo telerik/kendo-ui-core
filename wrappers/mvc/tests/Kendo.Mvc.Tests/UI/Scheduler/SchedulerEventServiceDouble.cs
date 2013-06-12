@@ -20,6 +20,11 @@
         {
         }
 
+        public void Dispose()
+        {
+            //dispose connections
+        }
+
         public virtual IQueryable<T> GetAll()
         {
             return (db.AsQueryable());
