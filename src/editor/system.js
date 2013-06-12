@@ -57,7 +57,7 @@ var Command = Class.extend({
 
     exec: function () {
         var that = this,
-        range = that.lockRange(true);
+            range = that.lockRange(true);
         that.formatter.editor = that.editor;
         that.formatter.toggle(range);
         that.releaseRange(range);

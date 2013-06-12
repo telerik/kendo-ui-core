@@ -15,15 +15,17 @@ var kendo = window.kendo,
     BlockFormatFinder = Editor.BlockFormatFinder,
     registerTool = Editor.EditorUtils.registerTool;
 
+var editableCell = "<td contentEditable='true'>" + Editor.emptyElementContent + "</td>";
+
+var tableFormatFinder = new BlockFormatFinder([{tags:["table"]}]);
+
 var TableCommand = Command.extend({
     _tableHtml: function(rows, columns) {
-        var td = "<td contentEditable='true'>" + Editor.emptyElementContent + "</td>";
-
         rows = rows || 1;
         columns = columns || 1;
 
         return "<table class='k-table' contentEditable='false' data-last>" +
-                   new Array(rows + 1).join("<tr>" + new Array(columns + 1).join(td) + "</tr>") +
+                   new Array(rows + 1).join("<tr>" + new Array(columns + 1).join(editableCell) + "</tr>") +
                "</table><br _moz_dirty />";
     },
 
@@ -220,8 +222,6 @@ var PopupTool = Tool.extend({
 
 var InsertTableTool = PopupTool.extend({
     init: function(options) {
-        this.finder = new BlockFormatFinder([{tags:["table"]}]);
-
         this.cols = 8;
         this.rows = 6;
 
@@ -314,7 +314,7 @@ var InsertTableTool = PopupTool.extend({
     update: function (ui, nodes) {
         PopupTool.fn.update.call(this, ui);
 
-        var isFormatted = this.finder.isFormatted(nodes);
+        var isFormatted = tableFormatFinder.isFormatted(nodes);
         ui.toggleClass("k-state-disabled", isFormatted);
 
         if (isFormatted) {
@@ -329,21 +329,59 @@ var InsertTableTool = PopupTool.extend({
     }
 });
 
+var InsertRowCommand = Command.extend({
+    exec: function () {
+        var that = this,
+            range = that.lockRange(true),
+            td = range.endContainer,
+            doc = td.ownerDocument,
+            cellCount, row,
+            newRow;
+
+        while (dom.name(td) != "td") {
+            td = td.parentNode;
+        }
+
+        row = td.parentNode;
+        cellCount = row.children.length;
+        newRow = dom.create(doc, "tr");
+
+        newRow.innerHTML = new Array(cellCount + 1).join(editableCell);
+
+        dom.insertAfter(newRow, row);
+
+        that.releaseRange(range);
+    }
+});
+
+var InsertRowTool = Tool.extend({
+    command: function (options) {
+        return new InsertRowCommand(options);
+    },
+
+    update: function(ui, nodes) {
+        var isFormatted = !tableFormatFinder.isFormatted(nodes);
+        ui.toggleClass("k-state-disabled", isFormatted);
+    }
+});
+
 extend(kendo.ui.editor, {
     PopupTool: PopupTool,
     TableCommand: TableCommand,
     TableEditor: TableEditor,
-    InsertTableTool: InsertTableTool
+    InsertTableTool: InsertTableTool,
+    InsertRowTool: InsertRowTool,
+    InsertRowCommand: InsertRowCommand
 });
 
 registerTool("createTable", new InsertTableTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, popup: true, title: "Create table"})}));
 
 registerTool("addColumnLeft", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the left"})}));
 registerTool("addColumnRight", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the right"})}));
-registerTool("addRowAbove", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row above"})}));
-registerTool("addRowBelow", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row below"})}));
+registerTool("addRowAbove", new InsertRowTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row above"})}));
+registerTool("addRowBelow", new InsertRowTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row below"})}));
 registerTool("deleteRow", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete row"})}));
 registerTool("deleteColumn", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete column"})}));
-registerTool("mergeCells", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Merge cells"})}));
+//registerTool("mergeCells", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Merge cells"})}));
 
 })(window.kendo.jQuery);
