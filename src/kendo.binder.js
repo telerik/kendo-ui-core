@@ -628,6 +628,7 @@ kendo_module({
                     element = this.element,
                     source,
                     field = this.options.valueField || this.options.textField,
+                    valuePrimitive = this.options.valuePrimitive,
                     option,
                     valueIndex,
                     value,
@@ -665,7 +666,7 @@ kendo_module({
                 value = this.bindings[VALUE].get();
                 if (value instanceof ObservableArray) {
                     value.splice.apply(value, [0, value.length].concat(values));
-                } else if (value instanceof ObservableObject || !field) {
+                } else if (!valuePrimitive && (value instanceof ObservableObject || !field)) {
                     this.bindings[VALUE].set(values[0]);
                 } else {
                     this.bindings[VALUE].set(values[0].get(field));
@@ -946,7 +947,7 @@ kendo_module({
 
                 var value = this.bindings.value.get();
 
-                this._valueIsObservableObject = value == null || value instanceof ObservableObject;
+                this._valueIsObservableObject = !options.valuePrimitive && (value == null || value instanceof ObservableObject);
                 this._valueIsObservableArray = value instanceof ObservableArray;
                 this._initChange = false;
             },
@@ -968,7 +969,7 @@ kendo_module({
                         source = this.bindings.source.get();
                     }
 
-                    if (value === "" && isObservableObject ) {
+                    if (value === "" && (isObservableObject || this.options.valuePrimitive)) {
                         value = null;
                     } else {
                         if (!source || source instanceof kendo.data.DataSource) {
@@ -1056,7 +1057,8 @@ kendo_module({
                 change: function() {
                     var that = this,
                         value = that.bindings[VALUE].get(),
-                        values = that.widget.dataItems();
+                        valuePrimitive = that.options.valuePrimitive,
+                        values = valuePrimitive ? that.widget.value() : that.widget.dataItems();
 
                     that._initChange = true;
 
@@ -1320,7 +1322,7 @@ kendo_module({
             bind = parseBindings(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
-                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE});
+                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE, valuePrimitive: false});
                 options.roles = roles;
                 target = new BindingTarget(element, options);
             }

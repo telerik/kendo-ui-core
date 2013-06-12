@@ -79,6 +79,10 @@ kendo_module({
             that._initValue();
         },
 
+        options: {
+            valuePrimitive: false
+        },
+
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
 

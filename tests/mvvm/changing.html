@@ -298,6 +298,27 @@
                 strictEqual(viewModel.selectedItem, viewModel.foo[1]);
             });
 
+            test("select uses data value field if data-value-primitive is set to true", function() {
+                var viewModel = kendo.observable( {
+                    foo: [ { text: "foo" }, { text: "bar" } ],
+                    selectedItem: null
+                });
+
+                viewModel.selectedItem = viewModel.foo[0];
+
+                var dom = $('<select data-value-field="text" data-value-primitive="true" data-bind="source:foo,value:selectedItem"/>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("option:first")[0].selected = false;
+                dom.find("option:last")[0].selected = true;
+
+                dom.trigger("change");
+                dom.triggerHandler("change");
+
+                strictEqual(viewModel.selectedItem, viewModel.foo[1].text);
+            });
+
             test("select tracks complex value if text-field is set", function() {
                 var viewModel = kendo.observable( {
                     foo: [ { text: "foo" }, { text: "bar" } ],

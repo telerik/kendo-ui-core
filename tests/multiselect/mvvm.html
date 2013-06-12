@@ -115,6 +115,22 @@
                 equal(observable.selectedItem[1], observable.items[1]);
             });
 
+            test("uses data value field if data-value-primitive is set to true", function() {
+                var dom = $('<select data-role="multiselect" data-value-primitive="true" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var observable = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: []
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoMultiSelect").value(["foo", "bar"]);
+                dom.data("kendoMultiSelect").trigger("change");
+
+                equal(observable.selectedItem[0], observable.items[0].name);
+                equal(observable.selectedItem[1], observable.items[1].name);
+            });
+
             test("changing persist ObservableArray instance", function() {
                 var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
 

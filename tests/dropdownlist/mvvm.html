@@ -88,6 +88,19 @@
                 equal(observable.value, observable.items[0]);
             });
 
+            test("uses data value field if data-value-primitive is set to true", function() {
+                var dom = $('<select data-value-field="text" data-value-primitive="true" data-role="dropdownlist" data-bind="value:value,source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+                observable.value = observable.items[1];
+
+                kendo.bind(dom, observable);
+                dom.data("kendoDropDownList").select(0);
+                dom.data("kendoDropDownList").trigger("change");
+
+                equal(observable.value, observable.items[0].text);
+            });
+
             test("widget datasource is use if source binding is not set", function() {
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                     observable.value = observable.items[1];
