@@ -26,9 +26,9 @@
     .HtmlAttributes(new { style = "width:700px" })
     .Columns(columns =>
     {
-        columns.Bound(p => p.ProductName);
-        columns.Bound(p => p.UnitPrice);
-        columns.Bound(p => p.UnitsInStock);
+        columns.Bound(p => p.ProductName).Title("Product Name");
+        columns.Bound(p => p.UnitPrice).Title("Unit Price");
+        columns.Bound(p => p.UnitsInStock).Title("Units In Stock");
     })
     .Pageable()
     .Groupable()

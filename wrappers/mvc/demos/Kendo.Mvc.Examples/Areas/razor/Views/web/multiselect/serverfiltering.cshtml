@@ -5,7 +5,9 @@
           .Name("products")
           .DataTextField("ProductName")
           .DataValueField("ProductID")
-          .Placeholder("Select products...")
+          .Placeholder("Select products...")   
+          .AutoBind(false)       
+          .Value(new[] { new {ProductName= "Chang", ProductID = 2 }, new { ProductName = "Uncle Bob's Organic Dried Pears", ProductID = 7 } })          
           .DataSource(source => {
               source.Read(read =>
               {
@@ -17,7 +19,7 @@
 </div>
 <style scoped>
     .demo-section {
-        width: 300px;
+        width: 301px;
         margin: 35px auto 50px;
         padding: 30px;
     }
