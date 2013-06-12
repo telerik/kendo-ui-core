@@ -11,11 +11,11 @@
     </head>
     <body>
 
-        <!--<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>-->
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
         <script>
 
-            //$("#Editor1").kendoEditor();
+            $("#Editor1").kendoEditor();
 
             var TableEditor = kendo.ui.editor.TableEditor;
 
@@ -33,7 +33,7 @@
 
             module("Editor / TableEditor", {
                 setup: function() {
-                    //editor = getEditor();
+                    editor = getEditor();
                 }
             });
 
@@ -177,6 +177,39 @@
                 });
 
                 equal(table.find("td.k-selected").length, 4);
+            });
+
+            test("focusing a table within the editor initializes a TableEditor on it", function() {
+                var range = createRangeFromText(editor, "<table><tr><td>|foo|</td></tr></table>");
+
+                editor.selectRange(range);
+                editor.trigger("select");
+
+                equal($("table", editor.document).find("td.k-selection-cell").length, 3);
+            });
+
+            test("blurring a table within the editor destroys its TableEditor", function() {
+                var range = createRangeFromText(editor, "<table><tr><td>|foo|</td></tr></table><p>bar</p>");
+
+                editor.selectRange(range);
+                editor.trigger("select");
+
+                range.setStart(editor.body.lastChild.firstChild, 1);
+                range.collapse(true);
+                editor.selectRange(range);
+                editor.trigger("select");
+
+                equal($("table", editor.document).find("td.k-selection-cell").length, 0);
+            });
+
+            test("selecting table twice does not initialize second TableEditor", function() {
+                var range = createRangeFromText(editor, "<table><tr><td>|foo|</td></tr></table>");
+
+                editor.selectRange(range);
+                editor.trigger("select");
+                editor.trigger("select");
+
+                equal($("table", editor.document).find("td.k-selection-cell").length, 3);
             });
 
         </script>

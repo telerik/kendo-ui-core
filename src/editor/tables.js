@@ -139,8 +139,23 @@ var TableEditor = kendo.Class.extend({
     }
 });
 
-TableEditor.importEditorStyles = function() {
-};
+extend(TableEditor, {
+    importEditorStyles: function() {
+    },
+
+    attach: function(table) {
+        if (!table._editor) {
+            table._editor = new TableEditor(table);
+        }
+    },
+
+    detach: function(table) {
+        if (table._editor) {
+            table._editor.destroy();
+            table._editor = null;
+        }
+    }
+});
 
 var PopupTool = Tool.extend({
     initialize: function(ui, options) {
@@ -284,7 +299,19 @@ var InsertTableTool = PopupTool.extend({
 
     update: function (ui, nodes) {
         PopupTool.fn.update.call(this, ui);
-        ui.toggleClass("k-state-disabled", this.finder.isFormatted(nodes));
+
+        var isFormatted = this.finder.isFormatted(nodes);
+        ui.toggleClass("k-state-disabled", isFormatted);
+
+        if (isFormatted) {
+            var table = $(nodes[0]).closest("table")[0];
+
+            TableEditor.attach(table);
+        } else {
+            $("table", nodes[0].ownerDocument).each(function() {
+                TableEditor.detach(this);
+            });
+        }
     }
 });
 
