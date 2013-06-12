@@ -56,9 +56,6 @@ kendo_module({
             if (triggersResize) {
                 var splitter = this.element.data("kendo" + this.options.name);
                 splitter.trigger(RESIZE);
-
-                this._detachEvents();
-                this._attachEvents();
             }
         };
     }
@@ -86,16 +83,11 @@ kendo_module({
 
             that._marker = kendo.guid().substring(0, 8);
 
-            that._initPanes();
-
             that._resizeHandler = function() {
                 that.trigger(RESIZE);
-
-                that._detachEvents();
-                that._attachEvents();
             };
 
-            that._attachEvents();
+            that._initPanes();
 
             $(window).on("resize", that._resizeHandler);
 
@@ -466,6 +458,9 @@ kendo_module({
                     sum += child[sizingDomProperty];
                 });
 
+            that._detachEvents();
+            that._attachEvents();
+
             that.trigger(LAYOUTCHANGE);
         },
 
@@ -496,9 +491,6 @@ kendo_module({
             if (this.resizing) {
                 this.resizing.destroy();
             }
-
-            this._detachEvents();
-            this._attachEvents();
 
             if (this.element.children(".k-splitbar-draggable-" + this.orientation).length) {
                 this.resizing = new PaneResizing(this);
