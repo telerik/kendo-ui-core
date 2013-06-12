@@ -118,21 +118,24 @@ var TableEditor = kendo.Class.extend({
     },
 
     clearSelection: function() {
-        var rows = this.table.rows, cells;
+        var rows = this.table.rows, cells,
+            r, c;
 
-        for (var r = 1; r < rows.length; r++) {
+        for (r = 1; r < rows.length; r++) {
             cells = rows[r].cells;
 
-            for (var  c = 1; c < cells.length; c++) {
+            for (c = 1; c < cells.length; c++) {
                 cells[c].className = cells[c].className.replace(/\s?k-selected\b/, "");
             }
         }
     },
 
     destroy: function() {
+        var rows = this.table.rows;
+
         this._detachEvents();
-        dom.remove(this.table.rows[0]);
-        dom.remove(this.table.rows[0].cells[0]);
+        dom.remove(rows[0]);
+        dom.remove(rows[0].cells[0]);
     }
 });
 
