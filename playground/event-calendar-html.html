@@ -96,10 +96,11 @@ html
 				</tbody>
 			</table>
 			<div class="k-event" style="top:27px;left:504px;width:1007px">
+                <span class="k-event-actions"><a href="#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a><a href="#" class="k-link"><span class="k-icon k-i-refresh"></span></a></span>
 				<dl>
 					<dd>Days off</dd>
 				</dl>
-				<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>
+				<span class="k-event-actions"><a href="#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a> <a href="#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></span>
 			</div>
 		</div>
 	</div>            
@@ -172,13 +173,23 @@ html
 			</tbody>
 		</table>
 		<div class="k-event" style="top:13px;left:504px;">
+            <span class="k-event-actions">
+                <a href="#" class="k-link"><span class="k-icon k-i-refresh"></span></a>
+            </span>
 			<dl>
-				<dt><a href="#" class="k-link"><span class="k-icon k-i-refresh"></span></a> 11:30 - 12:30</dt>
+				<dt>11:30 - 12:30</dt>
 				<dd>Business Lunch</dd>
 			</dl>
-			<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>
+            <span class="k-event-actions">
+                <a href="#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>
+            </span>
 			<span class="k-icon k-resize-handle"></span>
 		</div>
+
+		<div class="k-more-events k-header" style="top:113px;left:504px;width:200px;">
+            <span>...</span>
+		</div>
+
 	</div>
                 
             </td>
@@ -339,14 +350,6 @@ html
 				<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 			</tbody>
 		</table>
-		<div class="k-event" style="top:18px;left:373px;">
-			<dl>
-				<dt><a href="#" class="k-link"><span class="k-icon k-i-refresh"></span></a> 11:30 - 12:30</dt>
-				<dd>Business Lunch</dd>
-			</dl>
-			<a href="#" class="k-link"><span class="k-icon k-i-close"></span></a>
-			<span class="k-icon k-resize-handle"></span>
-		</div>
 	</div>
             
             </td>
@@ -415,11 +418,11 @@ $(document).ready(function(){
 	    .on("mouseout", function(e){$(this).removeClass("k-state-hover");});
 
 
-	$(".k-event").kendoTooltip({
-		position:"bottom",
-		autoHide: false,
-		content: kendo.template($("#tooltipTemplate").html())
-	});
+//	$(".k-event").kendoTooltip({
+//		position:"bottom",
+//		autoHide: false,
+//		content: kendo.template($("#tooltipTemplate").html())
+//	});
 
     $(".k-scheduler-header-wrap .k-scheduler-table,.k-scheduler-content .k-scheduler-table").width("140%");
     $(".k-scheduler-layout").addClass("k-scrollbar-h k-scrollbar-v");

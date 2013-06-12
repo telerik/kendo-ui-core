@@ -3862,7 +3862,21 @@ div.k-slider
     position:relative;
 }
 
-.k-event
+.k-more-events
+{
+    text-align:center;
+    font-size:1.6em;
+    line-height:1.2;
+}
+
+.k-more-events > span
+{
+    display:block;
+    margin-top:-.6em;
+}
+
+.k-event,
+.k-more-events
 {
 	position:absolute;
 	border-style:solid;
@@ -3897,13 +3911,19 @@ div.k-slider
 	word-wrap: break-word;
 }
 
+.k-event dt + dd
+{
+    clear: both;
+}
+
+.k-event-actions,
 .k-event > .k-link,
 .k-task > .k-link
 {
 	position: absolute;
-	top: 4px;
+	top: 3px;
 	right:4px;
-    display:none;
+    white-space: nowrap;
 }
 
 .k-scheduler-agenda .k-task > .k-link
@@ -3912,10 +3932,31 @@ div.k-slider
     right: 0;
 }
 
-.k-event:hover > .k-link,
-.k-scheduler-table tr.k-state-hover .k-task > .k-link
+.k-event-actions:first-child
 {
-    display:block;
+    position: static;
+    float: left;
+    margin: 4px 2px 0 4px;
+}
+
+.k-webkit .k-event-actions:first-child
+{
+    margin-top: 3px;
+}
+
+.k-event-actions:first-child > .k-link
+{
+    display: inline-block;
+}
+
+.k-event-delete
+{
+    display: none;
+}
+
+.k-event:hover .k-event-delete
+{
+    display: inline-block;
 }
 
 .k-event .k-resize-handle
