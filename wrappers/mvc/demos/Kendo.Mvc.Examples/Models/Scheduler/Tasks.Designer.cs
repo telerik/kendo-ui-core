@@ -68,29 +68,29 @@ namespace Kendo.Mvc.Examples.Models.Scheduler
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SchedulerEvent> SchedulerEvents
+        public ObjectSet<Task> Tasks
         {
             get
             {
-                if ((_SchedulerEvents == null))
+                if ((_Tasks == null))
                 {
-                    _SchedulerEvents = base.CreateObjectSet<SchedulerEvent>("SchedulerEvents");
+                    _Tasks = base.CreateObjectSet<Task>("Tasks");
                 }
-                return _SchedulerEvents;
+                return _Tasks;
             }
         }
-        private ObjectSet<SchedulerEvent> _SchedulerEvents;
+        private ObjectSet<Task> _Tasks;
 
         #endregion
 
         #region AddTo Methods
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the SchedulerEvents EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Tasks EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToSchedulerEvents(SchedulerEvent schedulerEvent)
+        public void AddToTasks(Task task)
         {
-            base.AddObject("SchedulerEvents", schedulerEvent);
+            base.AddObject("Tasks", task);
         }
 
         #endregion
@@ -104,30 +104,30 @@ namespace Kendo.Mvc.Examples.Models.Scheduler
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="SchedulerEventsModel", Name="SchedulerEvent")]
+    [EdmEntityTypeAttribute(NamespaceName="Task", Name="Task")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class SchedulerEvent : EntityObject
+    public partial class Task : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new SchedulerEvent object.
+        /// Create a new Task object.
         /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="title">Initial value of the Title property.</param>
-        /// <param name="allDayEvent">Initial value of the AllDayEvent property.</param>
+        /// <param name="taskID">Initial value of the TaskID property.</param>
         /// <param name="start">Initial value of the Start property.</param>
         /// <param name="end">Initial value of the End property.</param>
-        public static SchedulerEvent CreateSchedulerEvent(global::System.Int32 id, global::System.String title, global::System.Boolean allDayEvent, global::System.DateTime start, global::System.DateTime end)
+        /// <param name="title">Initial value of the Title property.</param>
+        /// <param name="isAllDay">Initial value of the IsAllDay property.</param>
+        public static Task CreateTask(global::System.Int32 taskID, global::System.DateTime start, global::System.DateTime end, global::System.String title, global::System.Boolean isAllDay)
         {
-            SchedulerEvent schedulerEvent = new SchedulerEvent();
-            schedulerEvent.Id = id;
-            schedulerEvent.Title = title;
-            schedulerEvent.AllDayEvent = allDayEvent;
-            schedulerEvent.Start = start;
-            schedulerEvent.End = end;
-            return schedulerEvent;
+            Task task = new Task();
+            task.TaskID = taskID;
+            task.Start = start;
+            task.End = end;
+            task.Title = title;
+            task.IsAllDay = isAllDay;
+            return task;
         }
 
         #endregion
@@ -139,27 +139,75 @@ namespace Kendo.Mvc.Examples.Models.Scheduler
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 Id
+        public global::System.Int32 TaskID
         {
             get
             {
-                return _Id;
+                return _TaskID;
             }
             set
             {
-                if (_Id != value)
+                if (_TaskID != value)
                 {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
+                    OnTaskIDChanging(value);
+                    ReportPropertyChanging("TaskID");
+                    _TaskID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TaskID");
+                    OnTaskIDChanged();
                 }
             }
         }
-        private global::System.Int32 _Id;
-        partial void OnIdChanging(global::System.Int32 value);
-        partial void OnIdChanged();
+        private global::System.Int32 _TaskID;
+        partial void OnTaskIDChanging(global::System.Int32 value);
+        partial void OnTaskIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Start
+        {
+            get
+            {
+                return _Start;
+            }
+            set
+            {
+                OnStartChanging(value);
+                ReportPropertyChanging("Start");
+                _Start = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Start");
+                OnStartChanged();
+            }
+        }
+        private global::System.DateTime _Start;
+        partial void OnStartChanging(global::System.DateTime value);
+        partial void OnStartChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime End
+        {
+            get
+            {
+                return _End;
+            }
+            set
+            {
+                OnEndChanging(value);
+                ReportPropertyChanging("End");
+                _End = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("End");
+                OnEndChanged();
+            }
+        }
+        private global::System.DateTime _End;
+        partial void OnEndChanging(global::System.DateTime value);
+        partial void OnEndChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -212,76 +260,78 @@ namespace Kendo.Mvc.Examples.Models.Scheduler
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Boolean AllDayEvent
+        public Nullable<global::System.Int32> OwnerID
         {
             get
             {
-                return _AllDayEvent;
+                return _OwnerID;
             }
             set
             {
-                OnAllDayEventChanging(value);
-                ReportPropertyChanging("AllDayEvent");
-                _AllDayEvent = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AllDayEvent");
-                OnAllDayEventChanged();
+                OnOwnerIDChanging(value);
+                ReportPropertyChanging("OwnerID");
+                _OwnerID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OwnerID");
+                OnOwnerIDChanged();
             }
         }
-        private global::System.Boolean _AllDayEvent;
-        partial void OnAllDayEventChanging(global::System.Boolean value);
-        partial void OnAllDayEventChanged();
+        private Nullable<global::System.Int32> _OwnerID;
+        partial void OnOwnerIDChanging(Nullable<global::System.Int32> value);
+        partial void OnOwnerIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime Start
+        public global::System.Boolean IsAllDay
         {
             get
             {
-                return _Start;
+                return _IsAllDay;
             }
             set
             {
-                OnStartChanging(value);
-                ReportPropertyChanging("Start");
-                _Start = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Start");
-                OnStartChanged();
+                OnIsAllDayChanging(value);
+                ReportPropertyChanging("IsAllDay");
+                _IsAllDay = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsAllDay");
+                OnIsAllDayChanged();
             }
         }
-        private global::System.DateTime _Start;
-        partial void OnStartChanging(global::System.DateTime value);
-        partial void OnStartChanged();
+        private global::System.Boolean _IsAllDay;
+        partial void OnIsAllDayChanging(global::System.Boolean value);
+        partial void OnIsAllDayChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime End
+        public global::System.String Recurrence
         {
             get
             {
-                return _End;
+                return _Recurrence;
             }
             set
             {
-                OnEndChanging(value);
-                ReportPropertyChanging("End");
-                _End = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("End");
-                OnEndChanged();
+                OnRecurrenceChanging(value);
+                ReportPropertyChanging("Recurrence");
+                _Recurrence = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Recurrence");
+                OnRecurrenceChanged();
             }
         }
-        private global::System.DateTime _End;
-        partial void OnEndChanging(global::System.DateTime value);
-        partial void OnEndChanged();
+        private global::System.String _Recurrence;
+        partial void OnRecurrenceChanging(global::System.String value);
+        partial void OnRecurrenceChanged();
 
-        #endregion        
+        #endregion
+
+    
     }
 
     #endregion
