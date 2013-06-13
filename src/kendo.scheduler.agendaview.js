@@ -177,6 +177,9 @@ kendo_module({
                                '# if (resources[0]) {#' +
                                '<span class="k-scheduler-mark" style="background-color:#=resources[0].color#"></span>' +
                                "# } #" +
+                               '# if (data.recurrence) {#' +
+                               '<span class="k-icon k-i-refresh"></span>' +
+                               "# } #" +
                                '#:title#' +
                                '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                            '</div>',

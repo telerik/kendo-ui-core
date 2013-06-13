@@ -334,6 +334,17 @@
                view.content.find(".k-more-events").click();
             });
 
+            test("refresh icon is shown if month event has recurring rule", function() {
+                var view = setup();
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.renderEvents([
+                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "day event", recurrence: "FREQ=DAILY" })
+                ]);
+
+                equal(view.content.find(".k-event .k-i-refresh").length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

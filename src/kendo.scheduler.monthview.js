@@ -25,6 +25,9 @@ kendo_module({
                     '# if(data.tail || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-w"></span>' +
                     '#}#' +
+                    '# if(data.recurrence) {#' +
+                        '<a href="\\#" class="k-link"><span class="k-icon k-i-refresh"></span></a>' +
+                    '#}#' +
                 '</span>' +
                 '{0}' +
                 '<span class="k-event-actions">' +
