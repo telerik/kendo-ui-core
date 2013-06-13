@@ -312,15 +312,19 @@ var InsertTableTool = PopupTool.extend({
     },
 
     update: function (ui, nodes) {
+        var editor = this._editor, table, isFormatted;
+
         PopupTool.fn.update.call(this, ui);
 
-        var isFormatted = tableFormatFinder.isFormatted(nodes);
+        isFormatted = tableFormatFinder.isFormatted(nodes);
         ui.toggleClass("k-state-disabled", isFormatted);
 
         if (isFormatted) {
-            var table = $(nodes[0]).closest("table")[0];
+            table = $(nodes[0]).closest("table")[0];
 
             TableEditor.attach(table);
+
+            editor.selectRange(editor.getRange());
         } else {
             $("table", nodes[0].ownerDocument).each(function() {
                 TableEditor.detach(this);
