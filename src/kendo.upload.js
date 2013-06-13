@@ -226,13 +226,20 @@ kendo_module({
             return templateData;
         },
 
+        _buildFileEntryTemplate: function() {
+
+        },
+
         _enqueueFile: function(name, data) {
             var that = this,
                 existingFileEntries,
                 fileEntry,
                 fileList =  $(".k-upload-files", that.wrapper),
                 options = that.options,
-                template = options.template;
+                template = options.template,
+                templateData,
+                stateIcon,
+                progressBar;
 
             if (fileList.length === 0) {
                 fileList = $("<ul class='k-upload-files k-reset'></ul>").appendTo(that.wrapper);
@@ -248,15 +255,32 @@ kendo_module({
             } else {
                 var templateData = that._prepareTemplateData(name, data);
                 template = kendo.template(template);
+
                 fileEntry = $("<li class='k-file'><span class='k-filename' title='" + name + "'>" + template(templateData) + "</span></li>");
                 fileEntry.find(".k-upload-action").addClass("k-button k-button-icontext");
+
+                progressBar = $(".k-progress", fileEntry);
+                if (that._async && !that.options.async.autoUpload && progressBar.length > 0) {
+                    progressBar.remove();
+                }
+
+                stateIcon = $(".k-icon", fileEntry);
+                if (!that._async) {
+                    if (progressBar.length > 0) {
+                        progressBar.remove();
+                    }
+
+                    if (stateIcon.length > 0) {
+                        stateIcon.remove();
+                    }
+                }
             }
 
             fileEntry
                 .appendTo(fileList)
                 .data(data);
 
-            if (that._async) {
+            if (that._async && !template) {
                 fileEntry.prepend("<span class='k-icon'></span>");
             }
 
@@ -383,8 +407,10 @@ kendo_module({
         },
 
         _onFileProgress: function(e, percentComplete) {
+            var progressBar;
+
             if (!this.options.template) {
-                var progressBar = $(".k-progress-status", e.target);
+                progressBar = $(".k-progress-status", e.target)
                 if (progressBar.length === 0) {
                     progressBar =
                         $("<span class='k-progress'><span class='k-state-selected k-progress-status' style='width: 0;'></span></span>")
@@ -393,6 +419,15 @@ kendo_module({
                 }
 
                 progressBar.width(percentComplete + "%");
+            } else {
+                progressBar = $(".k-progress", e.target);
+                if (progressBar.length > 0) {
+                    if (progressBar.is(':empty')) {
+                        progressBar.append("<span class='k-state-selected k-progress-status' style='width: 0;'></span>");
+                    }
+                    progressBar = $(".k-progress-status", e.target);
+                    progressBar.width(percentComplete + "%");
+                }
             }
 
             this.trigger(PROGRESS, {
