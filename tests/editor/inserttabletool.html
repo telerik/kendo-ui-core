@@ -11,34 +11,26 @@
         <style> html { font-size: 12px; } </style>
     </head>
     <body>
-
-        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
 
         <script>
-            $("#Editor1").kendoEditor();
-
-            $.fn.press = function(key, ctrl, shift) {
-                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
-            }
-
             var tool;
 
             module("Editor / InsertTableTool", {
                 setup: function() {
-                    editor = getEditor();
-                    editor.value("");
+                    editor = $("<textarea></textarea>").appendTo("#qunit-fixture").kendoEditor().data("kendoEditor");
                     tool = editor.wrapper.find('.k-createTable');
+                },
+                teardown: function() {
+                    editor.destroy();
+                    editor.wrapper.remove();
                 }
-            });
-
-            test("clicking the tool toggles the popup", function() {
-                tool.click();
-
-                equal($(".k-ct-popup:visible").length, 1);
-
-                tool.click();
-
-                equal($(".k-ct-popup:visible").length, 0);
             });
 
             test("clicking a cell inserts a table", function() {
@@ -56,8 +48,8 @@
                 var dom = $("<div>" + editor.value() + "</div>");
 
                 equal(dom.find("table").length, 1);
-                equal(dom.find("tr").length, 1);
-                equal(dom.find("td").length, 1);
+                equal(dom.find("tr:not(.k-selection-row)").length, 1);
+                equal(dom.find("td:not(.k-selection-cell,.k-select-all)").length, 1);
 
                 tool.click();
             });
@@ -73,13 +65,5 @@
             });
 
         </script>
-
-        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-        <h2 id="qunit-banner"></h2>
-        <div id="qunit-testrunner-toolbar"></div>
-        <h2 id="qunit-userAgent"></h2>
-        <ol id="qunit-tests"></ol>
-        <div id="qunit-fixture">test markup, will be hidden</div>
-        <ul id="log"></ul>
     </body>
 </html>
