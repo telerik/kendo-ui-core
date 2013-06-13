@@ -1,15 +1,119 @@
-<div data-role="view" id="drawer-home" data-layout="drawer-layout" data-title="So/Lo/Mo">
-    <h1>Welcome to So/Lo/Mo</h1>
+<div data-role="view" id="drawer-home" data-layout="drawer-layout" data-title="Inbox">
+    <ul data-role="listview" class="inboxList">
+        <li>
+            <h3 class="time">07:56</h3><h3>John Doe</h3>
+            <h2>Monday meeting</h2>
+            <p>Hi Tom, Since Monday I'll be out of office, I'm rescheduling the meeting for Tuesday.</p>
+        </li>
+        <li>
+            <h3 class="time">08:21</h3><h3>Joe Harper</h3>
+            <h2>I'm sorry, Tom</h2>
+            <p>Hi Tom, my aunt comes for a visit this Saturday, so I can't come back to St. Pete...</p>
+        </li>
+        <li>
+            <h3 class="time">08:33</h3><h3>Sarah Connor</h3>
+            <h2>Regarding org chart changes</h2>
+            <p>Tom, I checked the new org chart last night and I have some reservations about it...</p>
+        </li>
+        <li>
+            <h3 class="time">08:40</h3><h3>John Doe</h3>
+            <h2>Re: Regarding org chart changes</h2>
+            <p>Agree with Sarah...</p>
+        </li>
+        <li>
+            <h3 class="time">09:16</h3><h3>Jane Parker</h3>
+            <h2>Your Costume is ready</h2>
+            <p>Hi mr. Sawyer, I'm sorry for the delay, your Halloween costume is ready. The bears...</p>
+        </li>
+        <li>
+            <h3 class="time">11:03</h3><h3>Becky Thatcher</h3>
+            <h2>Out tonight?</h2>
+            <p>Honey, wanna go out tonight to grab some chicken? My weekly vouchers for cooking...</p>
+        </li>
+    </ul>
 </div>
 
-<div data-role="view" id="drawer-settings" data-layout="drawer-layout" data-title="Settings">
-    <h1>So/Lo/Mo Settings</h1>
+<div data-role="view" id="drawer-starred" data-layout="drawer-layout" data-title="Starred Items">
+    <ul data-role="listview">
+        <li data-icon="star">Monday meeting</li>
+        <li data-icon="star">Regarding org chart changes</li>
+        <li data-icon="star">Re: Regarding org chart changes</li>
+        <li data-icon="star">Your Costume is ready</li>
+        <li data-icon="star">Out tonight?</li>
+    </ul>
 </div>
 
-<div data-role="drawer" id="my-drawer" style="width: 150px" data-views="['drawer-home', 'drawer-settings', '@Url.Content("~/mobile/m/drawer/index.html")']">
-    <ul data-role="listview" data-style="inset">
-        <li><a href="#drawer-home" data-transition="none">Home</a></li>
-        <li><a href="#drawer-settings" data-transition="none">Settings</a></li>
+<div data-role="view" id="drawer-drafts" data-layout="drawer-layout" data-title="Drafts">
+    <ul data-role="listview">
+        <li data-icon="compose">Re: Monday meeting</li>
+        <li data-icon="compose">Untitled message 1</li>
+        <li data-icon="compose">Untitled message 2</li>
+        <li data-icon="compose">Re: Regarding org chart changes</li>
+        <li data-icon="compose">Re: Re: Regarding org chart changes</li>
+        <li data-icon="compose">Re: Your Costume is ready</li>
+        <li data-icon="compose">Re: Out tonight?</li>
+        <li data-icon="compose">Untitled message 3</li>
+    </ul>
+</div>
+
+<div data-role="view" id="drawer-sent" data-layout="drawer-layout" data-title="Sent Items">
+    <ul data-role="listview">
+        <li>Build enterprise apps</li>
+        <li>Fw: Regarding Multiline textbox</li>
+        <li>Away next week</li>
+        <li>Fw: Your Costume is ready</li>
+        <li>Update completed</li>
+        <li>Survey</li>
+        <li>Problem with this account</li>
+        <li>Advice For Designers</li>
+        <li>Fw: Missing Book</li>
+        <li>Fun & useful reading</li>
+    </ul>
+</div>
+
+<div data-role="view" id="drawer-deleted" data-layout="drawer-layout" data-title="Deleted Items">
+    <ul data-role="listview">
+        <li data-icon="trash">Untitled message 4</li>
+        <li data-icon="trash">Untitled message 5</li>
+    </ul>
+</div>
+
+<div data-role="view" id="drawer-spam" data-layout="drawer-layout" data-title="Spam">
+    <ul data-role="listview">
+        <li>90% Discount!</li>
+        <li>90% Discount!</li>
+        <li>One time offer!</li>
+    </ul>
+    <a data-role="button" style="background-color: darkred; display: block; margin: 2em; font-size: 1.4em;">Delete Spam</a>
+</div>
+
+<div data-role="drawer" id="my-drawer" style="width: 270px" data-views="['drawer-home', 'drawer-settings', '@Url.Content("~/mobile/m/drawer/index.html")']">
+    <ul data-role="listview" data-type="group">
+        <li>Mailbox
+            <ul>
+                <li data-icon="inbox"><a href="#drawer-home" data-transition="none">Inbox</a></li>
+                <li data-icon="star"><a href="#drawer-starred" data-transition="none">Starred Items</a></li>
+                <li data-icon="compose"><a href="#drawer-drafts" data-transition="none">Drafts</a></li>
+                <li data-icon="sent"><a href="#drawer-sent" data-transition="none">Sent Items</a></li>
+                <li data-icon="trash"><a href="#drawer-deleted" data-transition="none">Deleted Items</a></li>
+                <li data-icon="spam"><a href="#drawer-spam" data-transition="none">Spam</a></li>
+            </ul>
+        </li>
+        <li>Tasks
+            <ul>
+                <li>To Do</li>
+                <li>In Progress</li>
+                <li>Done</li>
+                <li>High Priority</li>
+                <li>Low Priority</li>
+            </ul>
+        </li>
+        <li>Account
+            <ul>
+                <li data-icon="settings">Settings</li>
+                <li data-icon="off">Log Out</li>
+            </ul>
+        </li>
     </ul>
 </div>
 
@@ -29,8 +133,53 @@
 </script>
 
 <style>
-    .km-drawer-button:before,
-    .km-drawer-button:after  {
-        content: "\E0F1";
+    .km-ios #my-drawer .km-content, .km-android #my-drawer .km-content, .km-blackberry #my-drawer .km-content,
+    .km-ios #my-drawer .km-list > li, .km-android #my-drawer .km-list > li, .km-blackberry #my-drawer .km-list > li,
+    .km-ios #my-drawer .km-listview-link > .km-icon, .km-android #my-drawer .km-listview-link > .km-icon, .km-blackberry #my-drawer .km-listview-link > .km-icon,
+    .km-ios #my-drawer .km-list li > .km-icon, .km-android #my-drawer .km-list li > .km-icon, .km-blackberry #my-drawer .km-list li > .km-icon
+    {
+        background-color: #4e4e4e;
+        color: #fff;
+    }
+    
+    .km-ios #my-drawer .km-group-title,
+    .km-blackberry #my-drawer .km-group-title
+    {
+        background-color: #6e6e6e;
+        color: #fff;
+    }
+    
+    .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; } 
+    .km-inbox:before, .km-inbox:after { content: "\E0B0"; }
+    .km-sent:before, .km-sent:after { content: "\E0C6"; }
+    .km-trash:before, .km-trash:after { content: "\E0C3"; }
+    .km-spam:before, .km-spam:after { content: "\E0C5"; }
+    .km-star:before, .km-star:after { content: "\E0D7"; }
+    .km-settings:before, .km-settings:after { content: "\E0DA"; }
+    .km-off:before, .km-off:after { content: "\E0B9"; }
+    
+    .inboxList
+    {
+        font-size: .8em;
+    }
+
+    .inboxList p,
+    .inboxList h2,
+    .inboxList h3
+    {
+        margin: 5px 2px;
+    }
+
+    .inboxList p,
+    .inboxList h3
+    {
+        color: #777;
+    }
+
+    .inboxList h3.time
+    {
+        color: #369;
+        float: left;
+        margin-right: 10px;
     }
 </style>
