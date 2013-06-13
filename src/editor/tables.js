@@ -334,7 +334,6 @@ var InsertRowCommand = Command.extend({
         var that = this,
             range = that.lockRange(true),
             td = range.endContainer,
-            doc = td.ownerDocument,
             cellCount, row,
             newRow;
 
@@ -344,11 +343,17 @@ var InsertRowCommand = Command.extend({
 
         row = td.parentNode;
         cellCount = row.children.length;
-        newRow = dom.create(doc, "tr");
+        newRow = row.cloneNode(true);
 
-        newRow.innerHTML = new Array(cellCount + 1).join(editableCell);
+        for (var i = 0; i < row.cells.length; i++) {
+            newRow.cells[i].innerHTML = Editor.emptyElementContent;
+        }
 
-        dom.insertAfter(newRow, row);
+        if (this.options.position == "above") {
+            dom.insertBefore(newRow, row);
+        } else {
+            dom.insertAfter(newRow, row);
+        }
 
         that.releaseRange(range);
     }
@@ -356,7 +361,7 @@ var InsertRowCommand = Command.extend({
 
 var InsertRowTool = Tool.extend({
     command: function (options) {
-        return new InsertRowCommand(options);
+        return new InsertRowCommand(extend(options, this.options));
     },
 
     update: function(ui, nodes) {
@@ -378,7 +383,7 @@ registerTool("createTable", new InsertTableTool({ template: new ToolTemplate({te
 
 registerTool("addColumnLeft", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the left"})}));
 registerTool("addColumnRight", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the right"})}));
-registerTool("addRowAbove", new InsertRowTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row above"})}));
+registerTool("addRowAbove", new InsertRowTool({ position: "above", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row above"})}));
 registerTool("addRowBelow", new InsertRowTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row below"})}));
 registerTool("deleteRow", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete row"})}));
 registerTool("deleteColumn", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete column"})}));
