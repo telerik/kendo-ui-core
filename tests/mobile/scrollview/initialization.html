@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileScrollView.Tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.userevents.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.router.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.ScrollView Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            module("ScrollView Pager", {});
+
+            var Pager = kendo.Class.extend({
+                init: function(scrollView) {
+                    var that = this,
+                        element = $("<ol class='km-pages'/>");
+
+                    scrollView.element.append(element);
+
+                    scrollView.bind("refresh", function(e) {
+                        var pageHTML = "";
+
+                        for (var idx = 0; idx < e.pageCount; idx ++) {
+                            pageHTML += "<li/>";
+                        }
+
+                        element.html(pageHTML);
+                        element.children().eq(e.page).addClass("km-currect-page");
+                    });
+                }
+            });
+
+            var ScrollView = kendo.Observable.extend({
+                init: function (element) {
+                    kendo.Observable.fn.init.call(this);
+                    this.element = element;
+                }
+            });
+
+            test("renders ul element in passed widget container", 1, function() {
+                var element = $("<div />");
+                new Pager(new ScrollView(element));
+                equal(element.find("ol.km-pages").length, 1);
+            });
+
+            test("renders correct number of elements on ScrollView refresh", 2, function() {
+                var element = $("<div />"),
+                    scrollView = new ScrollView(element);
+                new Pager(scrollView);
+
+                scrollView.trigger("refresh", { pageCount: 5, page: 1 });
+                equal(element.find("ol.km-pages > li").length, 5);
+                ok(element.find("ol.km-pages > li").eq(1).is(".km-currect-page"));
+            });
+        </script>
+    </body>
+</html>
+
