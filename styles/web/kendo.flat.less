@@ -65,6 +65,7 @@
 @tooltip-border-color: #363940;
 @tooltip-text-color: #ffffff;
 
+
 /* Slider */
 @draghandle-border-radius: 13px;
 @draghandle-border-color: @form-widget-background;
@@ -82,7 +83,7 @@
 @shadow-inset-color: transparent;
 @link-text-color: #4c5356;
 @loading-panel-color: #ffffff;
-@splitbar-background-color: #2eb3a6;
+@splitbar-background-color: #f4f4f4;
 @default-icon-opacity: 1;
 
 /* Border Radii */
@@ -96,27 +97,38 @@
 @header-background-color: #f4f4f4;
 
 /*Focused State*/
-@focused-border-color: @selected-background-color;
+@focused-border-color: #363940;
 @focused-shadow: none;
 @focused-item-shadow: none;
 
-@drop-down-border-color: #363940;
-@form-widget-background: #10c4b2;
-@form-widget-color: #ffffff;
-@form-widget-border-color: #10c4b2; 
-@drop-down-header-background: #363940;
-@drop-down-header-color: #ffffff;
+//Introduced new vars
+@window-titlebar-background: #363940;
+@window-titlebar-color: #ffffff;
+
 @calendar-border-radius: 13px;
-@calendar-header-hover-text-decoration: underline;
-@calendar-footer-text-decoration: none;
-@table-header-background: #dfdfdf;
-@input-border-radius: 1px;
-@panelbar-items-border: #4c5356;
-@panelbar-items-background: #363940;
 @calendar-header-background: #363940;
 @calendar-footer-background: #363940;
+@calendar-header-hover-text-decoration: underline;
+@calendar-footer-text-decoration: none;
 @calendar-footer-hover-text-decoration: none;
 @calendar-footer-hover-background: #2eb3a6; 
-@menu-border-color: #4c5356; 
+
+@form-widget-background: #10c4b2;
+@form-widget-color: #ffffff;
+@form-widget-border-color: #10c4b2;
+ 
+@drop-down-border-color: #10c4b2;
+@drop-down-hover-border-color: #2eb3a6;
+@drop-down-focused-border-color: #363940;
+@drop-down-header-background: #363940;
+@drop-down-background: #10c4b2;
+
+@popup-background: #363940;
+
+@panelbar-items-border: #4c5356;
+@panelbar-content-background: #363940;
+
+@button-border-color: #10c4b2;
+@tabstrip-active-background-color: @widget-background-color;
 
 @import "template.less";
