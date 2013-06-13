@@ -30,6 +30,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_Territories_Region", "Region", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.Region), "Territories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Territory), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "CustomerCustomerDemo", "CustomerDemographics", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.CustomerDemographic), "Customers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Customer))]
 [assembly: EdmRelationshipAttribute("SampleModel", "EmployeeTerritories", "Employees", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Employee), "Territories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Territory))]
+[assembly: EdmRelationshipAttribute("SampleModel", "FK_MeetingAtendee_Meeting", "Meeting", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.Meeting), "MeetingAtendee", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.MeetingAtendee), true)]
 
 #endregion
 
@@ -304,6 +305,38 @@ namespace KendoCRUDService.Models.EF
             }
         }
         private ObjectSet<Task> _Tasks;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Meeting> Meetings
+        {
+            get
+            {
+                if ((_Meetings == null))
+                {
+                    _Meetings = base.CreateObjectSet<Meeting>("Meetings");
+                }
+                return _Meetings;
+            }
+        }
+        private ObjectSet<Meeting> _Meetings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<MeetingAtendee> MeetingAtendees
+        {
+            get
+            {
+                if ((_MeetingAtendees == null))
+                {
+                    _MeetingAtendees = base.CreateObjectSet<MeetingAtendee>("MeetingAtendees");
+                }
+                return _MeetingAtendees;
+            }
+        }
+        private ObjectSet<MeetingAtendee> _MeetingAtendees;
 
         #endregion
 
@@ -419,6 +452,22 @@ namespace KendoCRUDService.Models.EF
         public void AddToTasks(Task task)
         {
             base.AddObject("Tasks", task);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Meetings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMeetings(Meeting meeting)
+        {
+            base.AddObject("Meetings", meeting);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the MeetingAtendees EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMeetingAtendees(MeetingAtendee meetingAtendee)
+        {
+            base.AddObject("MeetingAtendees", meetingAtendee);
         }
 
         #endregion
@@ -1878,6 +1927,395 @@ namespace KendoCRUDService.Models.EF
         #endregion
 
     
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="Meeting")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Meeting : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Meeting object.
+        /// </summary>
+        /// <param name="meetingID">Initial value of the MeetingID property.</param>
+        /// <param name="start">Initial value of the Start property.</param>
+        /// <param name="end">Initial value of the End property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
+        /// <param name="isAllDay">Initial value of the IsAllDay property.</param>
+        public static Meeting CreateMeeting(global::System.Int32 meetingID, global::System.DateTime start, global::System.DateTime end, global::System.String title, global::System.String description, global::System.Boolean isAllDay)
+        {
+            Meeting meeting = new Meeting();
+            meeting.MeetingID = meetingID;
+            meeting.Start = start;
+            meeting.End = end;
+            meeting.Title = title;
+            meeting.Description = description;
+            meeting.IsAllDay = isAllDay;
+            return meeting;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 MeetingID
+        {
+            get
+            {
+                return _MeetingID;
+            }
+            set
+            {
+                if (_MeetingID != value)
+                {
+                    OnMeetingIDChanging(value);
+                    ReportPropertyChanging("MeetingID");
+                    _MeetingID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("MeetingID");
+                    OnMeetingIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _MeetingID;
+        partial void OnMeetingIDChanging(global::System.Int32 value);
+        partial void OnMeetingIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Start
+        {
+            get
+            {
+                return _Start;
+            }
+            set
+            {
+                OnStartChanging(value);
+                ReportPropertyChanging("Start");
+                _Start = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Start");
+                OnStartChanged();
+            }
+        }
+        private global::System.DateTime _Start;
+        partial void OnStartChanging(global::System.DateTime value);
+        partial void OnStartChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime End
+        {
+            get
+            {
+                return _End;
+            }
+            set
+            {
+                OnEndChanging(value);
+                ReportPropertyChanging("End");
+                _End = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("End");
+                OnEndChanged();
+            }
+        }
+        private global::System.DateTime _End;
+        partial void OnEndChanging(global::System.DateTime value);
+        partial void OnEndChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RoomID
+        {
+            get
+            {
+                return _RoomID;
+            }
+            set
+            {
+                OnRoomIDChanging(value);
+                ReportPropertyChanging("RoomID");
+                _RoomID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RoomID");
+                OnRoomIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RoomID;
+        partial void OnRoomIDChanging(Nullable<global::System.Int32> value);
+        partial void OnRoomIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsAllDay
+        {
+            get
+            {
+                return _IsAllDay;
+            }
+            set
+            {
+                OnIsAllDayChanging(value);
+                ReportPropertyChanging("IsAllDay");
+                _IsAllDay = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsAllDay");
+                OnIsAllDayChanged();
+            }
+        }
+        private global::System.Boolean _IsAllDay;
+        partial void OnIsAllDayChanging(global::System.Boolean value);
+        partial void OnIsAllDayChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Recurrence
+        {
+            get
+            {
+                return _Recurrence;
+            }
+            set
+            {
+                OnRecurrenceChanging(value);
+                ReportPropertyChanging("Recurrence");
+                _Recurrence = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Recurrence");
+                OnRecurrenceChanged();
+            }
+        }
+        private global::System.String _Recurrence;
+        partial void OnRecurrenceChanging(global::System.String value);
+        partial void OnRecurrenceChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_MeetingAtendee_Meeting", "MeetingAtendee")]
+        public EntityCollection<MeetingAtendee> MeetingAtendees
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MeetingAtendee>("SampleModel.FK_MeetingAtendee_Meeting", "MeetingAtendee");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MeetingAtendee>("SampleModel.FK_MeetingAtendee_Meeting", "MeetingAtendee", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="MeetingAtendee")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class MeetingAtendee : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new MeetingAtendee object.
+        /// </summary>
+        /// <param name="meetingID">Initial value of the MeetingID property.</param>
+        /// <param name="atendeeID">Initial value of the AtendeeID property.</param>
+        public static MeetingAtendee CreateMeetingAtendee(global::System.Int32 meetingID, global::System.Int32 atendeeID)
+        {
+            MeetingAtendee meetingAtendee = new MeetingAtendee();
+            meetingAtendee.MeetingID = meetingID;
+            meetingAtendee.AtendeeID = atendeeID;
+            return meetingAtendee;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 MeetingID
+        {
+            get
+            {
+                return _MeetingID;
+            }
+            set
+            {
+                if (_MeetingID != value)
+                {
+                    OnMeetingIDChanging(value);
+                    ReportPropertyChanging("MeetingID");
+                    _MeetingID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("MeetingID");
+                    OnMeetingIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _MeetingID;
+        partial void OnMeetingIDChanging(global::System.Int32 value);
+        partial void OnMeetingIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AtendeeID
+        {
+            get
+            {
+                return _AtendeeID;
+            }
+            set
+            {
+                if (_AtendeeID != value)
+                {
+                    OnAtendeeIDChanging(value);
+                    ReportPropertyChanging("AtendeeID");
+                    _AtendeeID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AtendeeID");
+                    OnAtendeeIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AtendeeID;
+        partial void OnAtendeeIDChanging(global::System.Int32 value);
+        partial void OnAtendeeIDChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_MeetingAtendee_Meeting", "Meeting")]
+        public Meeting Meeting
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Meeting>("SampleModel.FK_MeetingAtendee_Meeting", "Meeting").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Meeting>("SampleModel.FK_MeetingAtendee_Meeting", "Meeting").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Meeting> MeetingReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Meeting>("SampleModel.FK_MeetingAtendee_Meeting", "Meeting");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Meeting>("SampleModel.FK_MeetingAtendee_Meeting", "Meeting", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
