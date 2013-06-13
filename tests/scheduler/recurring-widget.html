@@ -163,6 +163,82 @@
                 equal(editor.value(), "FREQ=DAILY;UNTIL=20130613T000000Z"); //default value of INTERVAL is 1
             });
 
+            module("kendo.ui.RecurrenceEditor Weekly view", {
+                setup: function() {
+                    div = $("<div />").appendTo(document.body);
+                },
+                teardown: function() {
+                    //div.data("kendoRecurrenceEditor").destroy();
+                    div.remove();
+                }
+            });
+
+            test("Render interval input with default value", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("weekly");
+
+                var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
+
+                ok(interval);
+                equal(interval.value(), 1);
+            });
+
+            test("Change interval updates widget value", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("weekly");
+
+                var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
+
+                interval.value(3);
+                interval.trigger("change");
+
+                equal(editor.value(), "FREQ=WEEKLY;INTERVAL=3");
+            });
+
+            test("Clears value of the interval is equal to 1", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("weekly");
+
+                var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
+
+                interval.value(null);
+                interval.trigger("change");
+
+                equal(editor.value(), "FREQ=WEEKLY"); //default value of INTERVAL is 1
+            });
+
+            test("All end inputs are disabled if never radio is checked", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("weekly");
+
+                var radio = div.find(".k-recur-end-never,.k-recur-end-until,.k-recur-end-count").filter(":checked"),
+                    until = div.find(".k-recur-until:input"),
+                    count = div.find(".k-recur-count:input");
+
+                equal(radio.length, 1);
+                equal(radio.val(), "never");
+                equal(until.prop("disabled"), true);
+                equal(count.prop("disabled"), true);
+            });
+
+            test("Select count radio sets count value", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("weekly");
+
+                editor.radioButtonCount.click();
+
+                equal(editor.value(), "FREQ=WEEKLY;COUNT=1"); //default value of INTERVAL is 1
+            });
+
+            test("Select until radio sets until value", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.setView("weekly");
+
+                editor.radioButtonUntil.click();
+
+                equal(editor.value(), "FREQ=WEEKLY;UNTIL=20130613T000000Z"); //default value of INTERVAL is 1
+            });
+
             module("kendo.ui.RecurrenceEditor API", {
                 setup: function() {
                     div = $("<div />").appendTo(document.body);

@@ -933,7 +933,7 @@ kendo_module({
         numberOfWeeks: numberOfWeeks
     };
 
-    var intervalInput = '<input class="k-recur-interval" />';
+    var INTERVAL = '{0}<input class="k-recur-interval" />{1}';
     var END_COUNT = '{0}<input class="k-recur-count" />{1}';
     var END_UNTIL = '{0}<input class="k-recur-until" />{1}';
     var END_HTML = '<div class="k-edit-label">{0}</div>' +
@@ -942,6 +942,19 @@ kendo_module({
     '<div class="k-edit-field"><input class="k-recur-end-count" type="radio" name="end" value="count" />{2}</div>' +
     '<div class="k-edit-label"></div>' +
     '<div class="k-edit-field"><input class="k-recur-end-until" type="radio" name="end" value="until" />{3}</div>';
+
+    //TODO: REFACTOR. Cannot easily change culture !!!
+    //
+    var WEEKDAYS = (function() {
+        var shortNames = kendo.culture().calendar.days.namesShort,
+            result = "";
+
+        for (var idx = 0, length = shortNames.length; idx < length; idx++) {
+            result += '<input class="k-recur-weekday" type="checkbox" value="' + idx + '" /> ' + shortNames[idx];
+        }
+
+        return result;
+    })();
 
     var RecurrenceEditor = Widget.extend({
         init: function(element, options) {
@@ -975,19 +988,21 @@ kendo_module({
                     monthly: "Monthly",
                     yearly: "Yearly"
                 },
-                daily: {
-                    interval: "Repeat every: {0} days(s)",
-                    intervalRepeat: "Repeat every: ",
-                    intervalDays: " days(s)",
+                end: {
                     endLabel: "End:",
                     endNever: "Never",
                     endCountAfter: "After",
                     endCountOccurrence: " occurrence(s)",
                     endUntilOn: "On "
                 },
-                monthly: {
-                    interval: "Repeat every: {0} week(s)",
-                    day: "On"
+                daily: {
+                    intervalRepeat: "Repeat every: ",
+                    intervalDays: " days(s)"
+                },
+                weekly: { //TODO: simplify messages
+                    intervalRepeat: "Repeat every: ",
+                    intervalDays: " week(s)",
+                    weekDaysOn: "On "
                 }
             }
         },
@@ -1012,8 +1027,7 @@ kendo_module({
         setView: function(frequency) {
             var that = this,
                 container = this.container,
-                template = this["_" + frequency],
-                html = template ? template({}) : "",
+                html = this["_" + frequency] || "",
                 rule = that._value;
 
             kendo.destroy(container);
@@ -1027,6 +1041,7 @@ kendo_module({
             rule.freq = frequency;
 
             that._interval();
+            that._weekDays();
             that._count();
             that._until();
 
@@ -1048,6 +1063,30 @@ kendo_module({
                     that.trigger("change");
                 }
             });
+        },
+
+        _weekDays: function() {
+            var that = this,
+                rule = that._value,
+                weekDays = that.container.find(".k-recur-weekday");
+            if (weekDays[0]) {
+                weekDays.click(function() {
+                    rule.weekDays = $.map(weekDays.filter(":checked"), function(checkbox) {
+                        return {
+                            day: Number(checkbox.value),
+                            offset: 0
+                        };
+                    });
+
+                    that.trigger("change");
+                });
+
+                if (rule.weekDays) {
+                    for (var idx = 0, length = rule.weekDays.length; idx < length; idx ++) {
+                        weekDays.eq(rule.weekDays[idx].day).prop("checked", true);
+                    }
+                }
+            }
         },
 
         _count: function() {
@@ -1177,12 +1216,15 @@ kendo_module({
         _views: function() {
             var that = this,
                 messages = that.options.messages,
+                end = messages.end,
                 daily = messages.daily,
-                until = kendo.format(END_UNTIL, daily.endUntilOn),
-                count = kendo.format(END_COUNT, daily.endCountAfter, daily.endCountOccurrence),
-                end = kendo.format(END_HTML, daily.endLabel, daily.endNever, count, until);
+                weekly = messages.weekly,
+                until = kendo.format(END_UNTIL, end.endUntilOn),
+                count = kendo.format(END_COUNT, end.endCountAfter, end.endCountOccurrence),
+                end = kendo.format(END_HTML, end.endLabel, end.endNever, count, until);
 
-            that._daily = template(kendo.format(daily.interval, intervalInput) + end);
+            that._daily = kendo.format(INTERVAL, daily.intervalRepeat, daily.intervalDays) + end;
+            that._weekly = kendo.format(INTERVAL, weekly.intervalRepeat, weekly.intervalDays) + weekly.weekDaysOn + WEEKDAYS + end;
         }
     });
 
