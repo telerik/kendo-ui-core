@@ -9,7 +9,8 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
-    using System.Web; 
+    using System.Web;
+    using Kendo.Mvc.UI.Html; 
 
     public class Barcode : WidgetBase
     {
@@ -23,6 +24,10 @@
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
+            BarcodeHtmlBuilder builder = new BarcodeHtmlBuilder(this);
+
+            builder.Build().WriteTo(writer);
+
             base.WriteHtml(writer);
         }
 

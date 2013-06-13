@@ -1,6 +1,6 @@
 ﻿namespace Kendo.Mvc.UI.Html
 {
-    public class BarcodeHtmlBuilder : HtmlBuilderBase
+    public class BarcodeHtmlBuilder
     {
         private readonly Barcode Barcode;
 
@@ -14,7 +14,7 @@
         }
 
         /// <summary>
-        /// Creates the chart top-level div.
+        /// Creates the barcode top-level div.
         /// </summary>
         /// <returns></returns>
         public IHtmlNode CreateBarcode()
@@ -27,9 +27,12 @@
         /// Builds the Barcode component markup.
         /// </summary>
         /// <returns></returns>
-        protected override IHtmlNode BuildCore()
+        public IHtmlNode Build()
         {
-            return CreateBarcode();
+            return new HtmlElement("div")
+                            .Attribute("id", Barcode.Id)
+                            .Attributes(Barcode.HtmlAttributes)
+                            .PrependClass(UIPrimitives.Widget, "k-barcode");
         }
     }
 }
