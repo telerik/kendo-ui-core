@@ -86,11 +86,11 @@ var TableEditor = kendo.Class.extend({
     _attachEvents: function() {
         $(this.table)
             .on("click" + NS, ".k-selection-cell", proxy(this._selectionCellClick, this))
-            .on("click" + NS, "td:not(.k-selection-cell)", proxy(this.clearSelection, this));
+            .on("mousedown" + NS, "td:not(.k-selection-cell)", proxy(this.clearSelection, this));
     },
 
     _detachEvents: function() {
-        $(this.table).off("click" + NS);
+        $(this.table).off(NS);
     },
 
     _selectionCellClick: function(e) {
