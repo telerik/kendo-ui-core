@@ -393,14 +393,48 @@ var InsertColumnCommand = Command.extend({
     }
 });
 
-var InsertCellsTool = Tool.extend({
+var DeleteRowCommand = Command.extend({
+    exec: function () {
+        var range = this.lockRange(),
+            row = dom.closest(range.endContainer, "tr"),
+            table = dom.closest(row, "table"),
+            rowCount = table.rows.length,
+            focusElement;
+
+        if (rowCount == 1 || (rowCount == 2 && table._editor)) {
+            dom.remove(table);
+        } else {
+            focusElement = (row.nextSibling || row.previousSibling);
+            focusElement = focusElement.cells[1] || focusElement.cells[0];
+
+            dom.remove(row);
+
+            range.setStart(focusElement, 0);
+            range.collapse(true);
+            this.editor.selectRange(range);
+        }
+    }
+});
+
+var DeleteColumnCommand = Command.extend({
+});
+
+var TableModificationTool = Tool.extend({
     command: function (options) {
         options = extend(options, this.options);
 
-        if (options.type == "row") {
-            return new InsertRowCommand(options);
+        if (options.action == "delete") {
+            if (options.type == "row") {
+                return new DeleteRowCommand(options);
+            } else {
+                return new DeleteColumnCommand(options);
+            }
         } else {
-            return new InsertColumnCommand(options);
+            if (options.type == "row") {
+                return new InsertRowCommand(options);
+            } else {
+                return new InsertColumnCommand(options);
+            }
         }
     },
 
@@ -415,19 +449,21 @@ extend(kendo.ui.editor, {
     TableCommand: TableCommand,
     TableEditor: TableEditor,
     InsertTableTool: InsertTableTool,
-    InsertCellsTool: InsertCellsTool,
+    TableModificationTool: TableModificationTool,
     InsertRowCommand: InsertRowCommand,
-    InsertColumnCommand: InsertColumnCommand
+    InsertColumnCommand: InsertColumnCommand,
+    DeleteRowCommand: DeleteRowCommand,
+    DeleteColumnCommand: DeleteColumnCommand
 });
 
 registerTool("createTable", new InsertTableTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, popup: true, title: "Create table"})}));
 
-registerTool("addColumnLeft", new InsertCellsTool({ type: "column", position: "before", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the left"})}));
-registerTool("addColumnRight", new InsertCellsTool({ type: "column", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the right"})}));
-registerTool("addRowAbove", new InsertCellsTool({ type: "row", position: "before", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row above"})}));
-registerTool("addRowBelow", new InsertCellsTool({ type: "row", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row below"})}));
-registerTool("deleteRow", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete row"})}));
-registerTool("deleteColumn", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete column"})}));
+registerTool("addColumnLeft", new TableModificationTool({ type: "column", position: "before", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the left"})}));
+registerTool("addColumnRight", new TableModificationTool({ type: "column", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the right"})}));
+registerTool("addRowAbove", new TableModificationTool({ type: "row", position: "before", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row above"})}));
+registerTool("addRowBelow", new TableModificationTool({ type: "row", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row below"})}));
+registerTool("deleteRow", new TableModificationTool({ type: "row", action: "delete", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete row"})}));
+registerTool("deleteColumn", new TableModificationTool({ type: "column", action: "delete", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete column"})}));
 //registerTool("mergeCells", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Merge cells"})}));
 
 })(window.kendo.jQuery);

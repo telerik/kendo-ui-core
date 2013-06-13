@@ -392,7 +392,7 @@ var Dom = {
     },
 
     closest: function(node, tag) {
-        while (Dom.name(node) != tag) {
+        while (node && Dom.name(node) != tag) {
             node = node.parentNode;
         }
 

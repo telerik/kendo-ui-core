@@ -970,8 +970,7 @@ kendo_module({
                 "addRowAbove",
                 "addRowBelow",
                 "deleteRow",
-                "deleteColumn",
-                "mergeCells"/*,
+                "deleteColumn"/*,
                 "separator", // declare these explicitly
                 "style",
                 "subscript",
