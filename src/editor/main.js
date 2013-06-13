@@ -731,6 +731,11 @@ kendo_module({
                 editor.body = editor.element[0];
             }
 
+            try {
+                editor.document.execCommand("enableObjectResizing", false, "false");
+                editor.document.execCommand("enableInlineTableEditing", null, false);
+            } catch(e) { }
+
             $(editor.body)
                 .on("keydown" + NS, function (e) {
                     var range;
