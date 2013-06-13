@@ -27,6 +27,7 @@ kendo_module({
         floor = math.floor,
         CHANGE = "change",
         CHANGING = "changing",
+        REFRESH = "refresh",
         CURRENT_PAGE_CLASS = "km-current-page";
 
     var Pager = kendo.Class.extend({
@@ -84,11 +85,13 @@ kendo_module({
 
             element
                 .wrapInner("<div/>")
-                .addClass("km-scrollview")
-                .append('<ol class="km-pages"/>');
+                .addClass("km-scrollview");
+
+            if(this.options.enablePager) {
+                this.pager = new Pager(this);
+            }
 
             that.inner = element.children().first();
-            that.pager = element.children().last();
             that.page = 0;
 
             that.inner.css("height", that.options.contentHeight);
@@ -157,12 +160,14 @@ kendo_module({
             velocityThreshold: 0.8,
             contentHeight: "auto",
             pageSize: 1,
-            bounceVelocityThreshold: 1.6
+            bounceVelocityThreshold: 1.6,
+            enablePager: true
         },
 
         events: [
             CHANGING,
-            CHANGE
+            CHANGE,
+            REFRESH
         ],
 
         destroy: function() {
@@ -183,7 +188,6 @@ kendo_module({
 
         refresh: function() {
             var that = this,
-                pageHTML = "",
                 dimension = that.dimension,
                 width = dimension.getSize(),
                 pages,
@@ -204,12 +208,7 @@ kendo_module({
                 that.minSnap = - (pages - 1) * width;
                 that.maxSnap = 0;
 
-                for (var idx = 0; idx < pages; idx ++) {
-                    pageHTML += "<li/>";
-                }
-
-                that.pager.html(pageHTML);
-                that._updatePager();
+                that.trigger("refresh", { pageCount: pages, page: that.page });
         },
 
         content: function(html) {
@@ -266,13 +265,9 @@ kendo_module({
             if (page != that.page) {
                 that.page = page;
                 that.trigger(CHANGE, {page: page});
-                that._updatePager();
             }
-        },
-
-        _updatePager: function() {
-            this.pager.children().removeClass(CURRENT_PAGE_CLASS).eq(this.page).addClass(CURRENT_PAGE_CLASS);
         }
+
     });
 
     ui.plugin(ScrollView);
