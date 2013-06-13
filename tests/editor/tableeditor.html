@@ -192,22 +192,6 @@
                 equal(table.find("td.k-selected").length, 4);
             });
 
-            test("shift-clicking row selection cells adds in-between columns to selection", function() {
-                table = createTable(2, 2);
-
-                tableEditor = new TableEditor(table[0]);
-
-                var selectionCells = table.find("tr:first td.k-selection-cell");
-
-                selectionCells.eq(0).click();
-                selectionCells.eq(1).trigger({
-                    shiftKey: true,
-                    type: "click"
-                });
-
-                equal(table.find("td.k-selected").length, 4);
-            });
-
             test("focusing a table within the editor initializes a TableEditor on it", function() {
                 var range = createRangeFromText(editor, "<table><tr><td>|foo|</td></tr></table>");
 
