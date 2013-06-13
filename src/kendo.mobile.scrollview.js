@@ -73,11 +73,115 @@ kendo_module({
 
     kendo.mobile.ui.ScrollViewPager = Pager;
 
+    var ElasticPane = kendo.Observable.extend({
+        init: function(element, options) {
+            var that = this;
+
+            kendo.Observable.fn.init.call(this);
+
+            this.element = element;
+            this.container = element.parent();
+
+            var movable,
+                transition,
+                userEvents,
+                dimensions,
+                dimension,
+                pane;
+
+            movable = new kendo.ui.Movable(that.element);
+
+            transition = new Transition({
+                axis: "x",
+                movable: movable,
+                onEnd: function() {
+                    that.trigger("transitionEnd");
+                }
+            });
+
+            userEvents = new kendo.UserEvents(element, {
+                start: function(e) {
+                    if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
+                        userEvents.capture();
+                    } else {
+                        userEvents.cancel();
+                    }
+
+                    transition.cancel();
+                },
+                allowSelection: true,
+
+                end: function(e) {
+                    that.trigger("dragEnd", e);
+                }
+            });
+
+            dimensions = new PaneDimensions({
+                element: that.element,
+                container: that.container
+            });
+
+            dimension = dimensions.x;
+
+            dimension.bind(CHANGE, function() {
+                that.trigger(CHANGE);
+            });
+
+            pane = new Pane({
+                dimensions: dimensions,
+                userEvents: userEvents,
+                movable: movable,
+                elastic: true
+            });
+
+            $.extend(that, {
+                duration: options.duration,
+                movable: movable,
+                transition: transition,
+                userEvents: userEvents,
+                dimensions: dimensions,
+                dimension: dimension,
+                pane: pane
+            });
+
+            this.bind(["transitionEnd", "dragEnd", CHANGE], options);
+        },
+
+        size: function() {
+            return this.dimension.getSize();
+        },
+
+        total: function() {
+            return this.dimension.getTotal();
+        },
+
+        offset: function() {
+            return -this.movable.x;
+        },
+
+        updateDimension: function() {
+            this.dimension.update(true);
+        },
+
+        refresh: function() {
+            this.dimensions.refresh();
+        },
+
+        moveTo: function(offset) {
+            this.movable.moveAxis("x", -offset);
+        },
+
+        transitionTo: function(location, ease, instant) {
+            this.transition.moveTo({ location: location, duration: (instant ? 1 : this.duration), ease: ease });
+        }
+    })
+
     var ScrollView = Widget.extend({
         init: function(element, options) {
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+
 
             element = that.element;
 
@@ -97,57 +201,11 @@ kendo_module({
             that.inner.css("height", that.options.contentHeight);
             that.container().bind("show", $.proxy(this, "viewShow")).bind("init", $.proxy(this, "viewInit"));
 
-            var movable,
-                transition,
-                userEvents,
-                dimensions,
-                dimension,
-                pane;
-
-            movable = new kendo.ui.Movable(that.inner);
-
-            transition = new Transition({
-                axis: "x",
-                movable: movable,
-                onEnd: proxy(that._transitionEnd, that)
-            });
-
-            userEvents = new kendo.UserEvents(element, {
-                start: function(e) {
-                    if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
-                        userEvents.capture();
-                    } else {
-                        userEvents.cancel();
-                    }
-
-                    transition.cancel();
-                },
-                allowSelection: true,
-                end: proxy(that._dragEnd, that)
-            });
-
-            dimensions = new PaneDimensions({
-                element: that.inner,
-                container: that.element
-            });
-
-            dimension = dimensions.x;
-            dimension.bind(CHANGE, proxy(that.refresh, that));
-
-            pane = new Pane({
-                dimensions: dimensions,
-                userEvents: userEvents,
-                movable: movable,
-                elastic: true
-            });
-
-            $.extend(that, {
-                movable: movable,
-                transition: transition,
-                userEvents: userEvents,
-                dimensions: dimensions,
-                dimension: dimension,
-                pane: pane
+            that.pane = new ElasticPane(that.inner, {
+                duration: this.options.duration,
+                transitionEnd: $.proxy(this, "_transitionEnd"),
+                dragEnd: $.proxy(this, "_dragEnd"),
+                change: $.proxy(this, "refresh")
             });
 
             that.page = that.options.page;
@@ -179,31 +237,32 @@ kendo_module({
         },
 
         viewInit: function() {
-            this.movable.moveAxis("x", -this.page * this.dimension.getSize());
+            this.pane.moveTo(this.page * this.pane.size());
         },
 
         viewShow: function() {
-            this.dimensions.refresh();
+            this.pane.refresh();
         },
 
         refresh: function() {
             var that = this,
-                dimension = that.dimension,
-                width = dimension.getSize(),
+                pane = this.pane,
+                width = pane.size(),
                 pages,
                 pageElements = that.element.find("[data-role=page]");
 
                 pageElements.width(width);
-                dimension.update(true);
+
+                pane.updateDimension();
 
                 // if no pages present, try to retain the current position
                 if (!pageElements[0]) {
-                    that.page = Math.floor((-that.movable.x) / width);
+                    that.page = Math.floor(pane.offset() / width);
                 }
 
                 that.scrollTo(that.page, true);
 
-                pages = that.pages = ceil(dimension.getTotal() / width);
+                pages = that.pages = ceil(pane.total() / width);
 
                 that.minSnap = - (pages - 1) * width;
                 that.maxSnap = 0;
@@ -213,22 +272,19 @@ kendo_module({
 
         content: function(html) {
            this.element.children().first().html(html);
-           this.dimensions.refresh();
+           this.pane.refresh();
         },
 
         scrollTo: function(page, instant) {
             this.page = page;
-            this._moveTo(- page * this.dimension.getSize(), Transition.easeOutExpo, instant);
-        },
-
-        _moveTo: function(location, ease, instant) {
-            this.transition.moveTo({ location: location, duration: (instant ? 1 : this.options.duration), ease: ease });
+            this.pane.transitionTo(- page * this.pane.size(), Transition.easeOutExpo, instant);
         },
 
         _dragEnd: function(e) {
             var that = this,
                 velocity = e.x.velocity,
-                width = that.dimension.size * that.options.pageSize,
+                pane = that.pane,
+                width = pane.size() * that.options.pageSize,
                 options = that.options,
                 velocityThreshold = options.velocityThreshold,
                 approx = round,
@@ -246,28 +302,29 @@ kendo_module({
                 ease = Transition.easeOutBack;
             }
 
-            nextPage = - approx(that.movable.x / width);
+            nextPage = - approx(-pane.offset() / width);
+
             snap = max(that.minSnap, min(- nextPage * width, that.maxSnap));
 
             if (nextPage != that.page) {
                 if (this.trigger(CHANGING, { currentPage: that.page, nextPage: nextPage })) {
-                    snap = - that.page * that.dimension.getSize();
+                    snap = - that.page * pane.size();
                 }
             }
 
-            this._moveTo(snap, ease);
+            pane.transitionTo(snap, ease);
         },
 
         _transitionEnd:  function() {
             var that = this,
-                page = Math.round(- that.movable.x / that.dimension.size);
+                pane = that.pane,
+                page = Math.round(pane.offset() / pane.size());
 
             if (page != that.page) {
                 that.page = page;
                 that.trigger(CHANGE, {page: page});
             }
         }
-
     });
 
     ui.plugin(ScrollView);
