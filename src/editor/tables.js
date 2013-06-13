@@ -335,8 +335,7 @@ var InsertTableTool = PopupTool.extend({
 
 var InsertRowCommand = Command.extend({
     exec: function () {
-        var that = this,
-            range = that.lockRange(true),
+        var range = this.lockRange(true),
             td = range.endContainer,
             cellCount, row,
             newRow;
@@ -353,19 +352,50 @@ var InsertRowCommand = Command.extend({
             newRow.cells[i].innerHTML = Editor.emptyElementContent;
         }
 
-        if (this.options.position == "above") {
+        if (this.options.position == "before") {
             dom.insertBefore(newRow, row);
         } else {
             dom.insertAfter(newRow, row);
         }
 
-        that.releaseRange(range);
+        this.releaseRange(range);
     }
 });
 
-var InsertRowTool = Tool.extend({
+var InsertColumnCommand = Command.extend({
+    exec: function () {
+        var range = this.lockRange(true),
+            td = dom.closest(range.endContainer, "td"),
+            table = dom.closest(td, "table"),
+            columnIndex,
+            i, rows = table.rows, cell,
+            position = this.options.position;
+
+        columnIndex = dom.findNodeIndex(td);
+
+        for (i = 0; i < rows.length; i++) {
+            cell = rows[i].cells[columnIndex];
+
+            if (position == "before") {
+                dom.insertBefore(cell.cloneNode(), cell);
+            } else {
+                dom.insertAfter(cell.cloneNode(), cell);
+            }
+        }
+
+        this.releaseRange(range);
+    }
+});
+
+var InsertCellsTool = Tool.extend({
     command: function (options) {
-        return new InsertRowCommand(extend(options, this.options));
+        options = extend(options, this.options);
+
+        if (options.type == "row") {
+            return new InsertRowCommand(options);
+        } else {
+            return new InsertColumnCommand(options);
+        }
     },
 
     update: function(ui, nodes) {
@@ -379,16 +409,17 @@ extend(kendo.ui.editor, {
     TableCommand: TableCommand,
     TableEditor: TableEditor,
     InsertTableTool: InsertTableTool,
-    InsertRowTool: InsertRowTool,
-    InsertRowCommand: InsertRowCommand
+    InsertCellsTool: InsertCellsTool,
+    InsertRowCommand: InsertRowCommand,
+    InsertColumnCommand: InsertColumnCommand
 });
 
 registerTool("createTable", new InsertTableTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, popup: true, title: "Create table"})}));
 
-registerTool("addColumnLeft", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the left"})}));
-registerTool("addColumnRight", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the right"})}));
-registerTool("addRowAbove", new InsertRowTool({ position: "above", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row above"})}));
-registerTool("addRowBelow", new InsertRowTool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row below"})}));
+registerTool("addColumnLeft", new InsertCellsTool({ type: "column", position: "before", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the left"})}));
+registerTool("addColumnRight", new InsertCellsTool({ type: "column", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add column on the right"})}));
+registerTool("addRowAbove", new InsertCellsTool({ type: "row", position: "before", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row above"})}));
+registerTool("addRowBelow", new InsertCellsTool({ type: "row", template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Add row below"})}));
 registerTool("deleteRow", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete row"})}));
 registerTool("deleteColumn", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Delete column"})}));
 //registerTool("mergeCells", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Merge cells"})}));

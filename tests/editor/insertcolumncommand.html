@@ -17,17 +17,17 @@
 
             $("#Editor1").kendoEditor();
 
-            var InsertRowCommand = kendo.ui.editor.InsertRowCommand;
+            var InsertColumnCommand = kendo.ui.editor.InsertColumnCommand;
 
-            function execInsertRowCommand(options) {
-                var command = new InsertRowCommand(options);
+            function execInsertColumnCommand(options) {
+                var command = new InsertColumnCommand(options);
                 command.editor = editor;
                 command.exec();
 
                 return command;
             }
 
-            module("Editor / InsertRowCommand", {
+            module("Editor / InsertColumnCommand", {
                 setup: function() {
                     editor = getEditor();
                 },
@@ -38,53 +38,55 @@
 
             var range, command;
 
-            test("exec creates row below cursor", function() {
+            test("exec creates column after cursor", function() {
                 range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table>");
 
-                execInsertRowCommand({ range:range });
+                execInsertColumnCommand({ range:range });
 
                 var dom = $(editor.value());
 
-                equal(dom.find("tr").length, 2);
+                equal(dom.find("tr").length, 1);
                 equal(dom.find("td").length, 2);
             });
 
-            test("exec creates row below cursor with proper amount of cells", function() {
-                range = createRangeFromText(editor, "<table><tr><td>f||oo</td><td></td><td></td></tr></table>");
+            test("exec creates column after cursor on every row", function() {
+                range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr><tr><td>bar</td></tr></table>");
 
-                execInsertRowCommand({ range:range });
+                execInsertColumnCommand({ range:range });
 
                 var dom = $(editor.value());
 
-                equal(dom.find("tr:last").find("td").length, 3);
+                var rows = dom.find("tr");
+                equal(rows[0].cells.length, 2);
+                equal(rows[1].cells.length, 2);
             });
 
-            test("exec with position:'above' inserts row above selection", function() {
+            test("exec with position:'before' inserts column before selection", function() {
                 range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table>");
 
-                execInsertRowCommand({ range:range, position: "before" });
+                execInsertColumnCommand({ range:range, position: "before" });
 
                 var dom = $(editor.value());
 
-                equal(dom.find("tr").length, 2);
+                equal(dom.find("tr").length, 1);
+                equal(dom.find("td:first").text(), "");
                 equal(dom.find("td:last").text(), "foo");
             });
 
-            test("row/cell classes are copied when creating new rows", function() {
-                range = createRangeFromText(editor, "<table><tr class='a'><td class='b'>f||oo</td></tr></table>");
+            test("cell classes are copied when creating new columns", function() {
+                range = createRangeFromText(editor, "<table><tr><td class='a'>f||oo</td></tr></table>");
 
-                execInsertRowCommand({ range:range });
+                execInsertColumnCommand({ range:range });
 
                 var dom = $(editor.value());
 
-                equal(dom.find("tr.a").length, 2);
-                equal(dom.find("td.b").length, 2);
+                equal(dom.find("td.a").length, 2);
             });
 
             test("inserted row do not copy text content", function() {
                 range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table>");
 
-                execInsertRowCommand({ range:range });
+                execInsertColumnCommand({ range:range });
 
                 var dom = $(editor.value());
 
@@ -103,3 +105,4 @@
 
     </body>
 </html>
+

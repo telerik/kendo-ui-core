@@ -208,6 +208,7 @@ var tests = [
     "editor/tablecommand.html",
     "editor/tableeditor.html",
     "editor/insertrowcommand.html",
+    "editor/insertcolumncommand.html",
     "editor/inserttabletool.html",
     "editor/typinghandler.html",
     "editor/toolbar.html",

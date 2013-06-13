@@ -391,6 +391,14 @@ var Dom = {
         return parent;
     },
 
+    closest: function(node, tag) {
+        while (Dom.name(node) != tag) {
+            node = node.parentNode;
+        }
+
+        return node;
+    },
+
     parentOfType: function (node, tags) {
         do {
             node = node.parentNode;
