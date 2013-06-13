@@ -287,6 +287,10 @@ kendo_module({
 
             that._resizeHandler = proxy(that._resize, that);
 
+            that.wrapper.on("mousedown" + NS + " selectstart" + NS, function(e) {
+                e.preventDefault();
+            });
+
             $(window).on("resize" + NS, that._resizeHandler);
         },
 
