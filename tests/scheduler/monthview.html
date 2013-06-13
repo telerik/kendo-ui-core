@@ -20,12 +20,21 @@
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
+        <style>
+
+            html
+            {
+                font:12px sans-serif;
+                overflow-y:scroll;
+            }
+
+        </style>
         <script>
             var MonthView = kendo.ui.MonthView,
                 container;
 
             function setup() {
-                return new MonthView(container);
+                return new MonthView(container, { eventHeight: 10 });
             }
 
             function removeDefaultHorizontalOffset(value) {
@@ -151,7 +160,7 @@
 
                 equal(firstEventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
 
-                equal(secondEventOffset.top, 23 + firstEventOffset.top + 3);
+                equal(secondEventOffset.top, 10 + firstEventOffset.top + 3);
             });
 
             test("width of single day event is same as the slot", function() {
@@ -275,20 +284,56 @@
                 equal(view.content.find(".k-event").length, 1);
            });
 
+           test("clicking the cell link trigger navigate event", 2, function() {
+               var view = setup();
 
-            test("clicking the cell link trigger navigate event", 2, function() {
-                 var view = setup();
+               view.renderLayout(new Date(2013, 1, 2));
+               var slotIndex = view._slotIndex(new Date(2013, 1, 2));
 
-                 view.renderLayout(new Date(2013, 1, 2));
-                 var slotIndex = view._slotIndex(new Date(2013, 1, 2));
+               view.bind("navigate", function(e) {
+                   equal(e.view, "day");
+                   equal(e.date.getTime(), new Date(2013, 1, 2).getTime());
+               });
 
-                 view.bind("navigate", function(e) {
-                     equal(e.view, "day");
-                     equal(e.date.getTime(), new Date(2013, 1, 2).getTime());
-                 });
+               view.content.find("td").eq(slotIndex).find(".k-link.k-nav-day").click();
+           });
 
-                 view.content.find("td").eq(slotIndex).find(".k-link.k-nav-day").click();
+           test("more button is shown if cell cannot accumulate the events", function() {
+               var view = setup();
+
+               view.renderLayout(new Date(2013, 1, 2));
+
+               view.renderEvents([
+                   new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 1" }),
+                   new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 2" }),
+                   new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 3" }),
+                   new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 4" })
+               ]);
+
+               equal(view.content.find(".k-event").length, 3);
+               equal(view.content.find(".k-more-events").length, 1);
             });
+
+            test("clicking more button triggers navigate event", function() {
+               var view = setup();
+
+               view.renderLayout(new Date(2013, 1, 2));
+
+               view.renderEvents([
+                   new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 1" }),
+                   new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 2" }),
+                   new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 3" }),
+                   new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 4" })
+               ]);
+
+               view.bind("navigate", function(e) {
+                    equal(e.view, "day");
+                    deepEqual(e.date, new Date(2013, 1, 5));
+               });
+
+               view.content.find(".k-more-events").click();
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

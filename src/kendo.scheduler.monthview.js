@@ -89,6 +89,12 @@ kendo_module({
                that.trigger("navigate", { view: "day", date: that._rangeToDates(cell).start });
             });
 
+            this.content.on("click" + NS, ".k-more-events", function(e) {
+               var index = SchedulerView.rangeIndex($(e.currentTarget)).start,
+                   date = kendo.date.addDays(that.startDate, index);
+
+               that.trigger("navigate", { view: "day", date: date });
+            });
         },
 
         _editable: function() {
@@ -268,23 +274,28 @@ kendo_module({
             var startSlot = this.content.find("td").eq(startIndex),
                 firstChild = startSlot.children().first(),
                 events = SchedulerView.collidingEvents(this.content.find(".k-event"), startIndex, endIndex).add(element),
-                eventHeight = 23,
+                eventHeight = this.options.eventHeight,
                 leftOffset = 2,
                 rightOffset = startIndex !== endIndex ? 5 : 4,
+                eventWidth = this._calculateAllDayEventWidth(startIndex, endIndex) - rightOffset,
                 topOffset = (firstChild.length ? firstChild.outerHeight() : 0) + 3,
-                top = startSlot.position().top + topOffset + this.content[0].scrollTop;
+                maxColumnCount = Math.floor((startSlot.height() - topOffset) / (eventHeight + 3)),
+                top = startSlot.position().top + topOffset + this.content[0].scrollTop,
+                left = startSlot.position().left + leftOffset,
+                columns;
 
             element
                 .css({
-                    width: this._calculateAllDayEventWidth(startIndex, endIndex) - rightOffset,
-                    left: startSlot.position().left + leftOffset
+                    width: eventWidth,
+                    left: left,
+                    height: eventHeight
                 });
 
             element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
 
-            var columns = SchedulerView.createColumns(events, true);
+            columns = SchedulerView.createColumns(events, true);
 
-            for (var idx = 0, length = columns.length; idx < length; idx++) {
+            for (var idx = 0, length = Math.min(columns.length, maxColumnCount); idx < length; idx++) {
                 var columnEvents = columns[idx].events;
 
                 for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
@@ -293,6 +304,20 @@ kendo_module({
                     });
                 }
             }
+
+            if (columns.length > maxColumnCount) {
+                this.content.find(kendo.format(".k-more-events[{0}={1}-{2}]", kendo.attr("start-end-idx"), startIndex, endIndex)).remove();
+
+                element = $('<div class="k-more-events k-button"><span>...</span></div>')
+                    .attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex)
+                    .css({
+                        width: eventWidth,
+                        left: left,
+                        top: top + maxColumnCount * eventHeight + 3*maxColumnCount
+                    });
+            }
+
+            element.appendTo(this.content);
         },
 
         _splitEvents: function(events) {
@@ -358,9 +383,9 @@ kendo_module({
                 idx,
                 length;
 
-            this.content.find(".k-event").remove();
+            this.content.find(".k-event, .k-more-events").remove();
 
-            events = new kendo.data.Query(this._splitEvents(events)).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "asc" }]).toArray();
+            events = new kendo.data.Query(this._splitEvents(events)).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
 
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
@@ -376,7 +401,6 @@ kendo_module({
 
                     this._positionEvent(element, startSlotIndex, endSlotIndex);
 
-                    element.appendTo(this.content);
                 }
             }
         },
@@ -398,6 +422,7 @@ kendo_module({
         options: {
             title: "Month",
             name: "month",
+            eventHeight: 25,
             editable: true,
             selectedDateFormat: "{0:y}",
             dayTemplate: DAY_TEMPLATE,
