@@ -86,7 +86,7 @@ class ChangeLog
             Suite.new("DataViz", "dataviz"),
             Suite.new("Mobile", "mobile"),
             Suite.new("ASP.NET MVC Wrappers", "aspnetmvc"),
-            Suite.new("JSP Wrappers", "jsp"),
+            Suite.new("Java Wrappers", "java"),
             Suite.new("PHP Wrappers", "php")
         ]
 
