@@ -173,6 +173,45 @@
                 }
             });
 
+            test("value method sets frequency ddl value", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.value("FREQ=DAILY");
+
+                equal(editor.ddlFrequency.value(), "daily");
+            });
+
+            test("value method sets interval if valid frequency", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.value("FREQ=DAILY;INTERVAL=2");
+
+                equal(div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox").value(), 2);
+            });
+
+            test("value method sets end rule to never", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.value("FREQ=DAILY");
+
+                ok(editor.radioButtonNever.prop("checked"));
+            });
+
+            test("value method sets end rule to count", function() {
+                var editor = new RecurrenceEditor(div);
+                editor.value("FREQ=DAILY;COUNT=10");
+
+                ok(editor.radioButtonCount.prop("checked"));
+                equal(editor.countNumericTextBox.value(), 10);
+            });
+
+            test("value method sets end rule to until", function() {
+                var editor = new RecurrenceEditor(div),
+                    until = new Date(2013, 5, 15);
+
+                editor.value("FREQ=DAILY;UNTIL=20130615T000000Z");
+
+                ok(editor.radioButtonUntil.prop("checked"));
+                equal(editor.untilDatePicker.value().getTime(), until.getTime());
+            });
+
         </script>
     </body>
 </html>
