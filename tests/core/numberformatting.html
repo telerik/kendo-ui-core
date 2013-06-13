@@ -98,7 +98,7 @@
             });
 
             test("custom toString with literals", function() {
-                equal(toString(10.1, "'EFD' #"), "'EFD' 10");
+                equal(toString(10.1, "'EFD' #"), "EFD 10");
             });
 
             test("toString with '# %'", function() {
@@ -106,7 +106,7 @@
             });
 
             test("toString with percent symbol as literal", function() {
-                equal(toString(10, "# '%'"), "10 '%'");
+                equal(toString(10, "# '%'"), "10 %");
             });
 
             test("toString with escaped percent symbol", function() {
@@ -114,11 +114,11 @@
             });
 
             test("toString with quote as literal", function() {
-                equal(toString(10, "# \"%\""), "10 \"%\"");
+                equal(toString(10, "# \"%\""), "10 %");
             });
 
             test("toString does not crash when number placeholder is in literal", function() {
-                equal(toString(10.12, "#.# '# y.0'"), "10.1 '# y.0'");
+                equal(toString(10.12, "#.# '# y.0'"), "10.1 # y.0");
             });
 
             test("toString does not throw exception when format integer with 0.## format", function() {
