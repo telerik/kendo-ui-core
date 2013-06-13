@@ -221,6 +221,9 @@
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteEventBuilder.cs" />
+    <Compile Include="UI\Barcode\Barcode.cs" />
+    <Compile Include="UI\Barcode\Fluent\BarcodeBuilder.cs" />
+    <Compile Include="UI\Barcode\Html\BarcodeHtmlBuilder.cs" />
     <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarEventBuilder.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarSelectionSettingsBuilder.cs" />

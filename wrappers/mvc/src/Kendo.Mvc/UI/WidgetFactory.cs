@@ -404,6 +404,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="Barcode"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Barcode()
+        ///             .For("Container")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual BarcodeBuilder Barcode()
+        {
+            return new BarcodeBuilder(new Barcode(ViewContext, Initializer));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Tooltip"/>.
         /// </summary>
         /// <example>
