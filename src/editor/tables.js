@@ -417,6 +417,29 @@ var DeleteRowCommand = Command.extend({
 });
 
 var DeleteColumnCommand = Command.extend({
+    exec: function () {
+        var range = this.lockRange(),
+            td = dom.closest(range.endContainer, "td"),
+            table = dom.closest(td, "table"),
+            rows = table.rows,
+            columnIndex = dom.findNodeIndex(td),
+            columnCount = rows[0].cells.length,
+            focusElement, i;
+
+        if (columnCount == 1 || (columnCount == 2 && table._editor)) {
+            dom.remove(table);
+        } else {
+            focusElement = td.nextSibling || td.previousSibling;
+
+            for (i = 0; i < rows.length; i++) {
+                dom.remove(rows[i].cells[columnIndex]);
+            }
+
+            range.setStart(focusElement, 0);
+            range.collapse(true);
+            this.editor.selectRange(range);
+        }
+    }
 });
 
 var TableModificationTool = Tool.extend({

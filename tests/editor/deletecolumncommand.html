@@ -17,24 +17,24 @@
 
             editor = $("#Editor1").kendoEditor().data("kendoEditor");
 
-            var DeleteRowCommand = kendo.ui.editor.DeleteRowCommand;
+            var DeleteColumnCommand = kendo.ui.editor.DeleteColumnCommand;
 
-            function execDeleteRowCommand(options) {
-                var command = new DeleteRowCommand(options);
+            function execDeleteColumnCommand(options) {
+                var command = new DeleteColumnCommand(options);
                 command.editor = editor;
                 command.exec();
 
                 return command;
             }
 
-            module("Editor / DeleteRowCommand");
+            module("Editor / DeleteColumnCommand");
 
             var range;
 
-            test("exec creates row below cursor", function() {
-                range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr><tr><td>bar</td></tr></table>");
+            test("exec removes column under cursor", function() {
+                range = createRangeFromText(editor, "<table><tr><td>f||oo</td><td>bar</td></tr></table>");
 
-                execDeleteRowCommand({ range:range });
+                execDeleteColumnCommand({ range:range });
 
                 var dom = $(editor.value());
 
@@ -43,30 +43,30 @@
                 equal(dom.find("td").text(), "bar");
             });
 
-            test("deleting last row removes table", function() {
+            test("deleting last column removes table", function() {
                 range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table>");
 
-                execDeleteRowCommand({ range:range });
+                execDeleteColumnCommand({ range:range });
 
                 equal(editor.value(), "");
             });
 
-            test("deleting last row removes table when table editor is shown", function() {
+            test("deleting last column removes table when table editor is shown", function() {
                 range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table>");
 
                 // show table editor
                 editor.selectRange(range);
                 editor.trigger("select");
 
-                execDeleteRowCommand({ range:range });
+                execDeleteColumnCommand({ range:range });
 
                 equal(editor.value(), "");
             });
 
-            test("selection is moved to bottom row after deleting a row", function() {
-                range = createRangeFromText(editor, "<table><tr><td>|foo|</td></tr><tr><td>bar</td></tr></table>");
+            test("selection is moved to next column after deleting a column", function() {
+                range = createRangeFromText(editor, "<table><tr><td>|foo|</td><td>bar</td></tr></table>");
 
-                execDeleteRowCommand({ range:range });
+                execDeleteColumnCommand({ range:range });
 
                 range = editor.getRange();
 
@@ -75,10 +75,10 @@
                 equal(editor.value(), "<table><tbody><tr><td><a></a>bar</td></tr></tbody></table>");
             });
 
-            test("selection is moved to top row after deleting last row", function() {
-                range = createRangeFromText(editor, "<table><tr><td>foo</td></tr><tr><td>b||ar</td></tr></table>");
+            test("selection is moved to previous column after deleting last column", function() {
+                range = createRangeFromText(editor, "<table><tr><td>foo</td><td>b||ar</td></tr></table>");
 
-                execDeleteRowCommand({ range:range });
+                execDeleteColumnCommand({ range:range });
 
                 range = editor.getRange();
 

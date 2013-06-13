@@ -15,7 +15,7 @@
 
         <script>
 
-            $("#Editor1").kendoEditor();
+            editor = $("#Editor1").kendoEditor().data("kendoEditor");
 
             var TableEditor = kendo.ui.editor.TableEditor;
 
@@ -31,11 +31,7 @@
                 );
             }
 
-            module("Editor / TableEditor", {
-                setup: function() {
-                    editor = getEditor();
-                }
-            });
+            module("Editor / TableEditor");
 
             var table, tableEditor;
 

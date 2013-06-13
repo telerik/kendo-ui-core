@@ -211,6 +211,7 @@ var tests = [
     "editor/insertcolumncommand.html",
     "editor/inserttabletool.html",
     "editor/deleterowcommand.html",
+    "editor/deletecolumncommand.html",
     "editor/typinghandler.html",
     "editor/toolbar.html",
     "editor/undoredostack.html",
