@@ -346,6 +346,10 @@ kendo_module({
             }
 
             context.trigger(type, event);
+
+            if (type == CHANGE && context._notifyChange) {
+                context._notifyChange(event);
+            }
         };
     }
 
@@ -612,6 +616,14 @@ kendo_module({
             }
 
             return parse ? parse(value) : value;
+        },
+
+        _notifyChange: function(e) {
+            var action = e.action;
+
+            if (action == "add" || action == "remove") {
+                this.dirty = true;
+            }
         },
 
         editable: function(field) {
