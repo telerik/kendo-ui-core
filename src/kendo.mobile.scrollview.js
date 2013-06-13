@@ -29,6 +29,49 @@ kendo_module({
         CHANGING = "changing",
         CURRENT_PAGE_CLASS = "km-current-page";
 
+    var Pager = kendo.Class.extend({
+        init: function(scrollView) {
+            var that = this,
+                element = $("<ol class='km-pages'/>");
+
+            scrollView.element.append(element);
+
+            this._changeProxy = $.proxy(that, "_change");
+            this._refreshProxy = $.proxy(that, "_refresh");
+            scrollView.bind("change", this._changeProxy);
+            scrollView.bind("refresh", this._refreshProxy);
+
+            $.extend(that, { element: element });
+        },
+
+        items: function() {
+            return this.element.children();
+        },
+
+        _refresh: function(e) {
+            var pageHTML = "";
+
+            for (var idx = 0; idx < e.pageCount; idx ++) {
+                pageHTML += "<li/>";
+            }
+
+            this.element.html(pageHTML);
+            this.items().eq(e.page).addClass("km-current-page");
+        },
+
+        _change: function(e) {
+            this.items().removeClass("km-current-page").eq(e.page).addClass("km-current-page");
+        },
+
+        destroy: function() {
+            scrollView.unbind("change", this._changeProxy);
+            scrollView.unbind("refresh", this._refreshProxy);
+            this.element.remove();
+        }
+    });
+
+    kendo.mobile.ui.ScrollViewPager = Pager;
+
     var ScrollView = Widget.extend({
         init: function(element, options) {
             var that = this;

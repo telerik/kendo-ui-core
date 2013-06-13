@@ -17,6 +17,7 @@
         <script src="../../../src/kendo.mobile.view.js"></script>
         <script src="../../../src/kendo.mobile.pane.js"></script>
         <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../../src/kendo.mobile.scrollview.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -29,40 +30,6 @@
         <ul id="log"></ul>
 
         <script>
-
-            var Pager = kendo.Class.extend({
-                init: function(scrollView) {
-                    var that = this,
-                        element = $("<ol class='km-pages'/>");
-
-                    scrollView.element.append(element);
-
-                    scrollView.bind("change", $.proxy(that._change, that));
-                    scrollView.bind("refresh", $.proxy(that._refresh, that));
-
-                    $.extend(that, { element: element });
-                },
-
-                items: function() {
-                    return this.element.children();
-                },
-
-                _refresh: function(e) {
-                    var pageHTML = "";
-
-                    for (var idx = 0; idx < e.pageCount; idx ++) {
-                        pageHTML += "<li/>";
-                    }
-
-                    this.element.html(pageHTML);
-                    this.items().eq(e.page).addClass("km-current-page");
-                },
-
-                _change: function(e) {
-                    this.items().removeClass("km-current-page").eq(e.page).addClass("km-current-page");
-                }
-            });
-
             var ScrollView = kendo.Observable.extend({
                 init: function (element) {
                     kendo.Observable.fn.init.call(this);
@@ -71,12 +38,13 @@
             });
 
             var element,
-                scrollView;
+                scrollView,
+                pager;
 
             module("ScrollView Pager", { setup: function () {
                 element = $("<div />");
                 scrollView = new ScrollView(element);
-                new Pager(scrollView);
+                pager = new kendo.mobile.ui.ScrollViewPager(scrollView);
             }});
 
             test("renders ul element in passed widget container", 1, function() {
@@ -96,6 +64,18 @@
                 scrollView.trigger("change", { page: 2 });
                 ok(!element.find("ol.km-pages > li").eq(1).is(".km-current-page"));
                 ok(element.find("ol.km-pages > li").eq(2).is(".km-current-page"));
+            });
+
+            test("destroy unbinds ScrollView event handlers", 1, function() {
+                scrollView.trigger("refresh", { pageCount: 5, page: 1 });
+                pager.destroy();
+                scrollView.trigger("change", { page: 2 });
+                ok(pager.element.find("li").eq(1).is(".km-current-page"));
+            });
+
+            test("destroy removes pager element", 1, function() {
+                pager.destroy();
+                equal(element.find("ol.km-pages").length, 0);
             });
         </script>
     </body>
