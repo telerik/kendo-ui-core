@@ -29,7 +29,6 @@
         <ul id="log"></ul>
 
         <script>
-            module("ScrollView Pager", {});
 
             var Pager = kendo.Class.extend({
                 init: function(scrollView) {
@@ -38,16 +37,29 @@
 
                     scrollView.element.append(element);
 
-                    scrollView.bind("refresh", function(e) {
-                        var pageHTML = "";
+                    scrollView.bind("change", $.proxy(that._change, that));
+                    scrollView.bind("refresh", $.proxy(that._refresh, that));
 
-                        for (var idx = 0; idx < e.pageCount; idx ++) {
-                            pageHTML += "<li/>";
-                        }
+                    $.extend(that, { element: element });
+                },
 
-                        element.html(pageHTML);
-                        element.children().eq(e.page).addClass("km-currect-page");
-                    });
+                items: function() {
+                    return this.element.children();
+                },
+
+                _refresh: function(e) {
+                    var pageHTML = "";
+
+                    for (var idx = 0; idx < e.pageCount; idx ++) {
+                        pageHTML += "<li/>";
+                    }
+
+                    this.element.html(pageHTML);
+                    this.items().eq(e.page).addClass("km-current-page");
+                },
+
+                _change: function(e) {
+                    this.items().removeClass("km-current-page").eq(e.page).addClass("km-current-page");
                 }
             });
 
@@ -58,20 +70,32 @@
                 }
             });
 
+            var element,
+                scrollView;
+
+            module("ScrollView Pager", { setup: function () {
+                element = $("<div />");
+                scrollView = new ScrollView(element);
+                new Pager(scrollView);
+            }});
+
             test("renders ul element in passed widget container", 1, function() {
-                var element = $("<div />");
-                new Pager(new ScrollView(element));
                 equal(element.find("ol.km-pages").length, 1);
             });
 
             test("renders correct number of elements on ScrollView refresh", 2, function() {
-                var element = $("<div />"),
-                    scrollView = new ScrollView(element);
-                new Pager(scrollView);
-
                 scrollView.trigger("refresh", { pageCount: 5, page: 1 });
                 equal(element.find("ol.km-pages > li").length, 5);
-                ok(element.find("ol.km-pages > li").eq(1).is(".km-currect-page"));
+                ok(element.find("ol.km-pages > li").eq(1).is(".km-current-page"));
+            });
+
+            test("switches to the correct page on ScrollView change", 3, function() {
+                scrollView.trigger("refresh", { pageCount: 5, page: 1 });
+                ok(element.find("ol.km-pages > li").eq(1).is(".km-current-page"));
+
+                scrollView.trigger("change", { page: 2 });
+                ok(!element.find("ol.km-pages > li").eq(1).is(".km-current-page"));
+                ok(element.find("ol.km-pages > li").eq(2).is(".km-current-page"));
             });
         </script>
     </body>
