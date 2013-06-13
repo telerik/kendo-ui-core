@@ -240,6 +240,15 @@
                 equal(editor.document.getElementsByTagName("a").length, 1);
             });
 
+            test("tableeditor is not serialized", function() {
+                var range = createRangeFromText(editor, "<table><tr><td>|foo|</td></tr></table>");
+
+                editor.selectRange(range);
+                editor.trigger("select");
+
+                equal(editor.value(), "<table><tbody><tr><td>foo</td></tr></tbody></table>");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

@@ -68,7 +68,9 @@ var TableEditor = kendo.Class.extend({
 
         selectionCell.className = "k-selection-cell";
         selectionCell.contentEditable = "false";
+        selectionCell.setAttribute("_kendo_markup");
         selectionRow.className = "k-selection-row";
+        selectionRow.setAttribute("_kendo_markup");
 
         for (i = 0; i < rows[rows.length-1].cells.length; i++) {
             selectionRow.appendChild(selectionCell.cloneNode());
