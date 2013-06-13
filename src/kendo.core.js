@@ -789,7 +789,7 @@ function pad(number, digits, end) {
 
         if (format.indexOf("'") > -1 || format.indexOf("\"") > -1) {
             format = format.replace(literalRegExp, function(match) {
-                literals.push(match);
+                literals.push(match.substring(1, match.length - 1));
                 return PLACEHOLDER;
             });
         }
