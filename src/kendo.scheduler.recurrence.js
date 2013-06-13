@@ -934,13 +934,14 @@ kendo_module({
     };
 
     var intervalInput = '<input class="k-recur-interval" />';
-    var END_HTML = '<div class="k-recurrence-end">' +
-        '<div class="k-edit-label">{0}</div>' +
-        '<div class="k-edit-field"><input type="radio" name="end" checked="checked" />{1}</div>' +
-        '<div class="k-edit-label"></div>' +
-        '<div class="k-edit-field"><input type="radio" name="end" value="count" />{2}</div>' +
-        '<div class="k-edit-field"><input type="radio" name="end" value="until" />{3}</div>' +
-    '</div>';
+    var END_COUNT = '{0}<input class="k-recur-count" />{1}';
+    var END_UNTIL = '{0}<input class="k-recur-until" />{1}';
+    var END_HTML = '<div class="k-edit-label">{0}</div>' +
+    '<div class="k-edit-field"><input class="k-recur-end-never" type="radio" name="end" value="never" />{1}</div>' +
+    '<div class="k-edit-label"></div>' +
+    '<div class="k-edit-field"><input class="k-recur-end-count" type="radio" name="end" value="count" />{2}</div>' +
+    '<div class="k-edit-label"></div>' +
+    '<div class="k-edit-field"><input class="k-recur-end-until" type="radio" name="end" value="until" />{3}</div>';
 
     var RecurrenceEditor = Widget.extend({
         init: function(element, options) {
@@ -948,9 +949,15 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+            that.wrapper = that.element;
+
+            if (!that.options.start) {
+                that.options.start = date.today();
+            }
+
             that._frequencyChooser();
 
-            that._container(); //TODO: render div for rule container and inputs for END options
+            that._container();
 
             that._views();
 
@@ -959,6 +966,7 @@ kendo_module({
         options: {
             name: "RecurrenceEditor",
             frequencies: ["never", "daily", "weekly", "monthly", "yearly"],
+            eventStart: null,
             messages: {
                 frequencies: {
                     never: "Never",
@@ -969,10 +977,13 @@ kendo_module({
                 },
                 daily: {
                     interval: "Repeat every: {0} days(s)",
+                    intervalRepeat: "Repeat every: ",
+                    intervalDays: " days(s)",
                     endLabel: "End:",
                     endNever: "Never",
-                    endCount: "After {0} occurrance(s)",
-                    endUntil: "On {0}"
+                    endCountAfter: "After",
+                    endCountOccurrence: " occurrence(s)",
+                    endUntilOn: "On "
                 },
                 monthly: {
                     interval: "Repeat every: {0} week(s)",
@@ -1014,9 +1025,12 @@ kendo_module({
             }
 
             rule.freq = frequency;
+
             that._interval();
             that._count();
             that._until();
+
+            that._end();
         },
 
         _interval: function() {
@@ -1041,48 +1055,91 @@ kendo_module({
                 input = that.container.find(".k-recur-count"),
                 rule = that._value;
 
-            input.kendoNumericTextBox({
-                value: rule.count || 0,
+            that.countNumericTextBox = input.kendoNumericTextBox({
+                value: rule.count || 1,
                 decimals: 0,
                 format: "#",
-                min: 0,
+                min: 1,
                 change: function() {
                     rule.count = this.value();
                     that.trigger("change");
                 }
-            });
+            }).data("kendoNumericTextBox");
         },
 
         _until: function() {
             var that = this,
                 input = that.container.find(".k-recur-until"),
+                start = that.options.start,
                 rule = that._value;
 
-            input.kendoDatePicker({
-                value: rule.until || kendo.date.today(),
+            that.untilDatePicker = input.kendoDatePicker({
+                value: rule.until || start,
+                //TODO: SET MIN
                 change: function() {
                     rule.until = this.value(); //TODO: GET UTC DATE. Serialize does this
                     that.trigger("change");
                 }
-            });
+            }).data("kendoDatePicker");
         },
 
-        _views: function() {
+        _end: function() {
             var that = this,
-                messages = that.options.messages,
-                daily = messages.daily,
-                count = kendo.format(daily.endCount, '<input class="k-recur-count" />'),
-                until = kendo.format(daily.endUntil, '<input class="k-recur-until" />'),
-                end = kendo.format(END_HTML, daily.endLabel, daily.endNever, count, until);
+                rule = that._value,
+                container = that.container,
+                click = function() {
+                    that._toggleEndRule(this.value);
+                };
 
-            that._daily = template(kendo.format(daily.interval, intervalInput) + end);
+            that.radioButtonNever = container.find(".k-recur-end-never").on("click", click);
+            that.radioButtonCount = container.find(".k-recur-end-count").on("click", click);
+            that.radioButtonUntil = container.find(".k-recur-end-until").on("click", click);
+
+            if (rule.count) {
+                that._toggleEndRule("count");
+            } else if (rule.until) {
+                that._toggleEndRule("until");
+            } else {
+                that._toggleEndRule();
+            }
+        },
+
+        _toggleEndRule: function(endRule) {
+            var that = this,
+                rule = that._value;
+
+            if (endRule === "count") {
+                that.radioButtonCount.prop("checked", true);
+
+                that.untilDatePicker.enable(false);
+                that.countNumericTextBox.enable(true);
+
+                rule.count = that.countNumericTextBox.value();
+                rule.until = null;
+            } else if (endRule === "until") {
+                that.radioButtonUntil.prop("checked", true);
+
+                that.untilDatePicker.enable(true);
+                that.countNumericTextBox.enable(false);
+
+                rule.count = null;
+                rule.until = that.untilDatePicker.value();
+            } else {
+                that.radioButtonNever.prop("checked", true);
+
+                that.untilDatePicker.enable(false);
+                that.countNumericTextBox.enable(false);
+
+                rule.count = null;
+                rule.until = null;
+            }
         },
 
         //rendering
         _container: function() {
-            var container = $('<div class="k-recurring-view" />');
+            var container = $('<div class="k-recur-view" />');
             this.element.append(container);
-            this.wrapper = this.container = container;
+            this.container = container;
         },
 
         _frequencyChooser: function() {
@@ -1105,7 +1162,7 @@ kendo_module({
                 frequency.value = "";
             }
 
-            that.element.append('<div class="k-edit-label"><label>Repeat</label></div>').append(ddl);
+            that.element.append(ddl);
             that.ddlFrequency = new kendo.ui.DropDownList(ddl, {
                 dataTextField: "text",
                 dataValueField: "value",
@@ -1115,6 +1172,17 @@ kendo_module({
                     that.trigger("change");
                 }
             });
+        },
+
+        _views: function() {
+            var that = this,
+                messages = that.options.messages,
+                daily = messages.daily,
+                until = kendo.format(END_UNTIL, daily.endUntilOn),
+                count = kendo.format(END_COUNT, daily.endCountAfter, daily.endCountOccurrence),
+                end = kendo.format(END_HTML, daily.endLabel, daily.endNever, count, until);
+
+            that._daily = template(kendo.format(daily.interval, intervalInput) + end);
         }
     });
 
