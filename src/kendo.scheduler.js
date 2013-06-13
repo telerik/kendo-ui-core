@@ -296,7 +296,7 @@ kendo_module({
 
         options: {
             name: "Scheduler",
-            selectDate: TODAY,
+            date: TODAY,
             editable: true,
             messages: {
                 today: "Today"
@@ -704,7 +704,7 @@ kendo_module({
                 that._viewNavigateHandler = function(e) {
                     if (e.view) {
                         that._selectView(e.view);
-                        that.selectDate(e.date);
+                        that.date(e.date);
                     }
                 };
 
@@ -754,7 +754,7 @@ kendo_module({
 
             this._bindView(this.views[name]);
 
-            view.renderLayout(this.selectDate(), this.resources);
+            view.renderLayout(this.date(), this.resources);
 
             this._model.set("formattedDate", view.dateForTitle());
         },
@@ -871,7 +871,7 @@ kendo_module({
         _initModel: function() {
             var that = this;
             that._model = kendo.observable({
-               selectedDate: this.options.selectDate,
+               selectedDate: this.options.date,
                formattedDate: ""
            });
 
@@ -895,7 +895,7 @@ kendo_module({
             }
         },
 
-        selectDate: function(value) {
+        date: function(value) {
             if (value != null) {
                 this._model.set("selectedDate", value);
             }
@@ -918,7 +918,7 @@ kendo_module({
 
             toolbar.on(CLICK + NS, ".k-scheduler-navigation li", function(e) {
                 var li = $(this),
-                    date = new Date(that.selectDate());
+                    date = new Date(that.date());
 
                 e.preventDefault();
 
@@ -933,7 +933,7 @@ kendo_module({
                     return; // TODO: Not good - refactor
                 }
 
-                that.selectDate(date);
+                that.date(date);
 
             });
 
@@ -956,12 +956,12 @@ kendo_module({
                             that.calendar = new Calendar(this.element.find(".k-scheduler-calendar"),
                             {
                                 change: function() {
-                                    that.selectDate(this.value());
+                                    that.date(this.value());
                                     that.popup.close();
                                 }
                             });
                         }
-                        that.calendar.value(that.selectDate());
+                        that.calendar.value(that.date());
                     },
                     copyAnchorStyles: false
                 });

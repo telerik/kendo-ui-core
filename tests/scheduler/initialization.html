@@ -84,21 +84,21 @@
                 var scheduler = new Scheduler(container),
                     today = new Date();
 
-                equal(scheduler.selectDate().getTime(), getDate(today).getTime());
+                equal(scheduler.date().getTime(), getDate(today).getTime());
             });
 
             test("selected date is read from the options", function() {
                 var date = new Date("1/2/2013"),
                     scheduler = new Scheduler(container, {
-                        selectDate: date
+                        date: date
                     });
 
-                equal(scheduler.selectDate().getTime(), date.getTime());
+                equal(scheduler.date().getTime(), date.getTime());
             });
 
             test("selected date is displayed", function() {
                 var scheduler = new Scheduler(container, {
-                    selectDate: new Date("1/2/2013")
+                    date: new Date("1/2/2013")
                 });
 
                 equal(scheduler.wrapper.find("li.k-nav-current").text(), "Wednesday, January 02, 2013");
@@ -106,7 +106,7 @@
 
             test("custom format is applied to the selected date", function() {
                 var scheduler = new Scheduler(container, {
-                    selectDate: new Date("1/2/2013"),
+                    date: new Date("1/2/2013"),
                     views: [
                     {
                         name: "day",
@@ -121,25 +121,25 @@
             test("changing selected date updates the label", function() {
                 var scheduler = new Scheduler(container);
 
-                scheduler.selectDate(new Date("2/2/2013"));
+                scheduler.date(new Date("2/2/2013"));
 
                 equal(scheduler.wrapper.find("li.k-nav-current").text(), "Saturday, February 02, 2013");
             });
 
             test("clicking on the today selects today's date", function() {
                 var scheduler = new Scheduler(container, {
-                    selectDate: new Date("1/2/2013")
+                    date: new Date("1/2/2013")
                 });
 
                 scheduler.toolbar.find(".k-nav-today").click();
 
-                equal(scheduler.selectDate().getTime(), getDate(new Date()).getTime());
+                equal(scheduler.date().getTime(), getDate(new Date()).getTime());
             });
 
             test("clicking on the next date calls the view", function() {
                 var selectedDate = new Date("1/2/2013"),
                     scheduler = new Scheduler(container, {
-                        selectDate: selectedDate
+                        date: selectedDate
                     });
 
                 var view = stub(scheduler.view(), "nextDate");
@@ -152,7 +152,7 @@
             test("clicking on the prev date calls the view", function() {
                 var selectedDate = new Date("1/2/2013"),
                     scheduler = new Scheduler(container, {
-                        selectDate: selectedDate
+                        date: selectedDate
                     });
 
                 var view = stub(scheduler.view(), "previousDate");
@@ -168,7 +168,7 @@
                 scheduler.toolbar.find(".k-nav-current").click();
 
                 ok(scheduler.calendar);
-                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.selectDate().getTime());
+                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.date().getTime());
             });
 
             test("selecting date via the calendar updates the selectedDate value", function() {
@@ -179,7 +179,7 @@
                 scheduler.calendar.value(new Date("4/4/2013"));
                 scheduler.calendar.trigger("change");
 
-                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.selectDate().getTime());
+                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.date().getTime());
             });
 
             test("view buttons are added to the toolbar", function() {
@@ -330,7 +330,7 @@
                         views: [MyCustomView]
                     });
 
-                scheduler.selectDate(new Date("1/2/2013"));
+                scheduler.date(new Date("1/2/2013"));
             });
 
             test("top level options are propagated to the view", function() {
@@ -410,7 +410,7 @@
                 scheduler.view().trigger("navigate", { view: "view2", date: new Date(2013, 1, 2) });
 
                 equal(scheduler.view().name, "view2");
-                equal(scheduler.selectDate().getTime(), new Date(2013, 1, 2).getTime());
+                equal(scheduler.date().getTime(), new Date(2013, 1, 2).getTime());
             });
 
             test("rebind is called once when navigating between views", function() {
