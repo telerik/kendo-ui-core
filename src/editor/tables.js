@@ -368,7 +368,10 @@ var InsertColumnCommand = Command.extend({
             td = dom.closest(range.endContainer, "td"),
             table = dom.closest(td, "table"),
             columnIndex,
-            i, rows = table.rows, cell,
+            i,
+            rows = table.rows,
+            cell,
+            newCell,
             position = this.options.position;
 
         columnIndex = dom.findNodeIndex(td);
@@ -376,10 +379,13 @@ var InsertColumnCommand = Command.extend({
         for (i = 0; i < rows.length; i++) {
             cell = rows[i].cells[columnIndex];
 
+            newCell = cell.cloneNode();
+            newCell.innerHTML = Editor.emptyElementContent;
+
             if (position == "before") {
-                dom.insertBefore(cell.cloneNode(), cell);
+                dom.insertBefore(newCell, cell);
             } else {
-                dom.insertAfter(cell.cloneNode(), cell);
+                dom.insertAfter(newCell, cell);
             }
         }
 
