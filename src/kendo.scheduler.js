@@ -176,13 +176,21 @@ kendo_module({
             obj.uid = this.uid;
 
             return obj;
+        },
+        fields: {
+            title: { defaultValue: "", type: "string" },
+            start: { type: "date", validation: { required: true } },
+            end: { type: "date", validation: { required: true } },
+            recurrence: { type: "string" },
+            isAllDay: { type: "boolean", defaultValue: false },
+            description: { type: "string" }
         }
     });
 
     var SchedulerDataSource = kendo.data.DataSource.extend({
         init: function(options) {
             kendo.data.DataSource.fn.init.call(this, extend(true, {}, { schema: {
-                modelBase: SchedulerEvent, model: { fields: { title: { defaultValue: "" } } } } }, options));
+                modelBase: SchedulerEvent, model: {} } }, options));
 
             this.reader = new SchedulerDataReader(this.options.schema, this.reader);
         }
