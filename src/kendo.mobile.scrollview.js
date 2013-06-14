@@ -322,13 +322,12 @@ kendo_module({
         },
 
         _transitionEnd:  function() {
-            var that = this,
-                pane = that.pane,
+            var pane = this.pane,
                 page = Math.round(pane.offset() / pane.size());
 
-            if (page != that.page) {
-                that.page = page;
-                that.trigger(CHANGE, {page: page});
+            if (page != this.page) {
+                this.page = page;
+                this.trigger(CHANGE, {page: page});
             }
         }
     });
