@@ -28,7 +28,11 @@ kendo_module({
         CHANGE = "change",
         CHANGING = "changing",
         REFRESH = "refresh",
-        CURRENT_PAGE_CLASS = "km-current-page";
+        CURRENT_PAGE_CLASS = "km-current-page",
+
+        LEFT_SWIPE = -1,
+        NUDGE = 0,
+        RIGHT_SWIPE = 1;
 
     var Pager = kendo.Class.extend({
         init: function(scrollView) {
@@ -42,7 +46,7 @@ kendo_module({
             scrollView.bind(CHANGE, this._changeProxy);
             scrollView.bind(REFRESH, this._refreshProxy);
 
-            $.extend(that, { element: element });
+            $.extend(that, { element: element, scrollView: scrollView });
         },
 
         items: function() {
@@ -57,16 +61,16 @@ kendo_module({
             }
 
             this.element.html(pageHTML);
-            this.items().eq(e.page).addClass("km-current-page");
+            this.items().eq(e.page).addClass(CURRENT_PAGE_CLASS);
         },
 
         _change: function(e) {
-            this.items().removeClass("km-current-page").eq(e.page).addClass("km-current-page");
+            this.items().removeClass(CURRENT_PAGE_CLASS).eq(e.page).addClass(CURRENT_PAGE_CLASS);
         },
 
         destroy: function() {
-            scrollView.unbind(CHANGE, this._changeProxy);
-            scrollView.unbind(REFRESH, this._refreshProxy);
+            this.scrollView.unbind(CHANGE, this._changeProxy);
+            this.scrollView.unbind(REFRESH, this._refreshProxy);
             this.element.remove();
         }
     });
@@ -186,6 +190,89 @@ kendo_module({
 
     kendo.mobile.ui.ScrollViewElasticPane = ElasticPane;
 
+    var ScrollViewContent = kendo.Class.extend({
+        init: function (element, pane) {
+            var that = this;
+
+            that.element = element;
+            that.pane = pane;
+            that._getPages();
+            this.page = 0;
+            this.pageSize = 1;
+        },
+
+        scrollTo: function(page, instant) {
+            this.page = page;
+            this.pane.transitionTo(- page * this.pane.size(), Transition.easeOutExpo, instant);
+        },
+
+        paneMoved: function(swipeType, bounce, callback) {
+            var that = this,
+                pane = that.pane,
+                width = pane.size() * that.pageSize,
+                approx = round,
+                ease = bounce ? Transition.easeOutBack : Transition.easeOutExpo,
+                snap,
+                nextPage;
+
+            if (swipeType === LEFT_SWIPE) {
+                approx = ceil;
+            } else if (swipeType === RIGHT_SWIPE) {
+                approx = floor;
+            }
+
+            nextPage = approx(pane.offset() / width);
+
+            snap = max(that.minSnap, min(-nextPage * width, that.maxSnap));
+
+            if (nextPage != that.page) {
+                if (callback && callback({ currentPage: that.page, nextPage: nextPage })) {
+                    snap = -that.page * pane.size();
+                }
+            }
+
+            pane.transitionTo(snap, ease);
+        },
+
+        updatePage: function() {
+            var pane = this.pane,
+                page = round(pane.offset() / pane.size());
+
+            if (page != this.page) {
+                this.page = page;
+                return true;
+            }
+
+            return false;
+        },
+
+        resizeTo: function(width) {
+            var pane = this.pane;
+
+            this.pageElements.width(width);
+
+            // re-read pane dimension after the pageElements have been resized.
+            pane.updateDimension();
+
+            if (!this._paged) {
+                this.page = floor(pane.offset() / width);
+            }
+
+            this.scrollTo(this.page, true);
+
+            this.pageCount = ceil(pane.total() / width);
+            this.minSnap = - (this.pageCount - 1) * width;
+            this.maxSnap = 0;
+        },
+
+        _getPages: function () {
+            this.pageElements = this.element.find("[data-role=page]");
+            this._paged = this.pageElements.length > 0;
+        }
+    });
+
+    kendo.mobile.ui.ScrollViewContent = ScrollViewContent;
+
     var ScrollView = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -219,6 +306,9 @@ kendo_module({
             });
 
             that.page = that.options.page;
+
+            that._content = new ScrollViewContent(that.inner, that.pane);
+            that._content.page = that.page;
         },
 
         options: {
@@ -240,14 +330,11 @@ kendo_module({
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-
-            this.userEvents.destroy();
-
             kendo.destroy(this.element);
         },
 
         viewInit: function() {
-            this.pane.moveTo(this.page * this.pane.size());
+            this._content.scrollTo(this._content.page, true);
         },
 
         viewShow: function() {
@@ -255,29 +342,11 @@ kendo_module({
         },
 
         refresh: function() {
-            var that = this,
-                pane = this.pane,
-                width = pane.size(),
-                pages,
-                pageElements = that.element.find("[data-role=page]");
+            var content = this._content;
 
-            pageElements.width(width);
-
-            pane.updateDimension();
-
-            // if no pages present, try to retain the current position
-            if (!pageElements[0]) {
-                that.page = Math.floor(pane.offset() / width);
-            }
-
-            that.scrollTo(that.page, true);
-
-            pages = that.pages = ceil(pane.total() / width);
-
-            that.minSnap = - (pages - 1) * width;
-            that.maxSnap = 0;
-
-            that.trigger(REFRESH, { pageCount: pages, page: that.page });
+            content.resizeTo(this.pane.size());
+            this.page = content.page;
+            this.trigger(REFRESH, { pageCount: content.pageCount, page: content.page });
         },
 
         content: function(html) {
@@ -286,52 +355,32 @@ kendo_module({
         },
 
         scrollTo: function(page, instant) {
-            this.page = page;
-            this.pane.transitionTo(- page * this.pane.size(), Transition.easeOutExpo, instant);
+            this._content.scrollTo(page, instant);
+            this.page = this._content.page;
         },
 
         _dragEnd: function(e) {
             var that = this,
                 velocity = e.x.velocity,
-                pane = that.pane,
-                width = pane.size() * that.options.pageSize,
-                options = that.options,
-                velocityThreshold = options.velocityThreshold,
-                approx = round,
-                ease = Transition.easeOutExpo,
-                snap,
-                nextPage;
+                velocityThreshold = this.options.velocityThreshold,
+                swipeType = NUDGE,
+                bounce = abs(velocity) > this.options.bounceVelocityThreshold;
 
             if (velocity > velocityThreshold) {
-                approx = ceil;
+                swipeType = RIGHT_SWIPE;
             } else if(velocity < -velocityThreshold) {
-                approx = floor;
+                swipeType = LEFT_SWIPE;
             }
 
-            if (abs(velocity) > options.bounceVelocityThreshold) {
-                ease = Transition.easeOutBack;
-            }
-
-            nextPage = - approx(-pane.offset() / width);
-
-            snap = max(that.minSnap, min(- nextPage * width, that.maxSnap));
-
-            if (nextPage != that.page) {
-                if (this.trigger(CHANGING, { currentPage: that.page, nextPage: nextPage })) {
-                    snap = - that.page * pane.size();
-                }
-            }
-
-            pane.transitionTo(snap, ease);
+            this._content.paneMoved(swipeType, bounce, function(eventData) {
+                return that.trigger(CHANGING, eventData);
+            });
         },
 
         _transitionEnd:  function() {
-            var pane = this.pane,
-                page = Math.round(pane.offset() / pane.size());
-
-            if (page != this.page) {
-                this.page = page;
-                this.trigger(CHANGE, {page: page});
+            if (this._content.updatePage()) {
+                this.page = this._content.page;
+                this.trigger(CHANGE, { page: this.page });
             }
         }
     });

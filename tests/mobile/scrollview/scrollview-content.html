@@ -39,95 +39,11 @@
             QUnit.config.reorder = false;
 
             var ElasticPane = kendo.mobile.ui.ScrollViewElasticPane;
+            var ScrollViewContent = kendo.mobile.ui.ScrollViewContent;
 
-            var Transition = kendo.effects.Transition,
-                floor = Math.floor,
-                round = Math.round,
-                ceil = Math.ceil,
-                LEFT_SWIPE = -1,
+            var LEFT_SWIPE = -1,
                 NUDGE = 0,
                 RIGHT_SWIPE = 1;
-
-            var ScrollViewContent = kendo.Class.extend({
-                init: function (element, pane) {
-                    var that = this;
-
-                    that.element = element;
-                    that.pane = pane;
-                    that._getPages();
-                    this.page = 0;
-                    this.pageSize = 1;
-                },
-
-                scrollTo: function(page, instant) {
-                    this.page = page;
-                    this.pane.transitionTo(- page * this.pane.size(), Transition.easeOutExpo, instant);
-                },
-
-                paneMoved: function(swipeType, bounce, callback) {
-                    var that = this,
-                        pane = that.pane,
-                        width = pane.size() * that.pageSize,
-                        approx = round,
-                        ease = bounce ? Transition.easeOutBack : Transition.easeOutExpo,
-                        snap,
-                        nextPage;
-
-                    if (swipeType === LEFT_SWIPE) {
-                        approx = ceil;
-                    } else if (swipeType === RIGHT_SWIPE) {
-                        approx = floor;
-                    }
-
-                    nextPage = approx(pane.offset() / width);
-
-                    snap = Math.max(that.minSnap, Math.min(-nextPage * width, that.maxSnap));
-
-                    if (nextPage != that.page) {
-                        if (callback && callback({ currentPage: that.page, nextPage: nextPage })) {
-                            snap = -that.page * pane.size();
-                        }
-                    }
-
-                    pane.transitionTo(snap, ease);
-                },
-
-                updatePage: function() {
-                    var pane = this.pane,
-                        page = Math.round(pane.offset() / pane.size());
-
-                    if (page != this.page) {
-                        this.page = page;
-                        return true;
-                    }
-
-                    return false;
-                },
-
-                _getPages: function () {
-                    this.pageElements = this.element.find("[data-role=page]");
-                    this._paged = this.pageElements.length > 0;
-                },
-
-                resizeTo: function(width) {
-                    var pane = this.pane;
-
-                    this.pageElements.width(width);
-
-                    // re-read pane dimension after the pageElements have been resized.
-                    pane.updateDimension();
-
-                    if (!this._paged) {
-                        this.page = Math.floor(pane.offset() / width);
-                    }
-
-                    this.scrollTo(this.page, true);
-
-                    this.pageCount = Math.ceil(pane.total() / width);
-                    this.minSnap = - (this.pageCount - 1) * width;
-                    this.maxSnap = 0;
-                }
-            });
 
             var element,
                 content,
