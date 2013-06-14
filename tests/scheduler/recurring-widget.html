@@ -154,14 +154,16 @@
                 equal(editor.value(), "FREQ=DAILY;COUNT=1"); //default value of INTERVAL is 1
             });
 
-            /*test("Select until radio sets until value", function() {
-                var editor = new RecurrenceEditor(div);
+            test("Select until radio sets until value", function() {
+                var editor = new RecurrenceEditor(div),
+                    date = kendo.date.today();
+
                 editor.setView("daily");
 
                 editor.radioButtonUntil.click();
 
-                equal(editor.value(), "FREQ=DAILY;UNTIL=20130613T000000Z"); //default value of INTERVAL is 1
-            });*/
+                equal(editor.value(), "FREQ=DAILY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ"));
+            });
 
             module("kendo.ui.RecurrenceEditor Weekly view", {
                 setup: function() {
@@ -230,14 +232,16 @@
                 equal(editor.value(), "FREQ=WEEKLY;COUNT=1"); //default value of INTERVAL is 1
             });
 
-            /*test("Select until radio sets until value", function() {
-                var editor = new RecurrenceEditor(div);
+            test("Select until radio sets until value", function() {
+                var editor = new RecurrenceEditor(div),
+                    date = kendo.date.today();
+
                 editor.setView("weekly");
 
                 editor.radioButtonUntil.click();
 
-                equal(editor.value(), "FREQ=WEEKLY;UNTIL=20130613T000000Z"); //default value of INTERVAL is 1
-            });*/
+                equal(editor.value(), "FREQ=WEEKLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ"));
+            });
 
             module("kendo.ui.RecurrenceEditor API", {
                 setup: function() {
