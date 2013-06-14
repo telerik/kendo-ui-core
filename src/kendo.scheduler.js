@@ -76,10 +76,14 @@ kendo_module({
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         RECURRENCEEDITOR = function(container, options) {
-             $('<div ' + kendo.attr("role") + '="recurrenceeditor" ' + kendo.attr("bind") + '="value:' + options.field +'" />')
-            .attr({
-                name: options.field
-            }).appendTo(container);
+            $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
+                .attr({
+                    name: options.field
+                })
+                .appendTo(container)
+                .kendoRecurrenceEditor({
+                    start: options.model.start
+                });
         };
 
     function wrapDataAccess(originalFunction, timezone) {
