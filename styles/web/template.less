@@ -1142,11 +1142,11 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Window */
-.k-window-titlebar
-{
-	background: @window-titlebar-background;
-	color: @window-titlebar-color;
-}
+//.k-window-titlebar
+//{
+	//background: @window-titlebar-background;
+	//color: @window-titlebar-color;
+//}
 
 .k-autocomplete.k-state-default,
 .k-picker-wrap.k-state-default,
@@ -1181,12 +1181,35 @@ div.k-imagebrowser-dropzone em
     border-color: @drop-down-focused-border-color;
 }
 
+.k-multiselect
+{
+	border-color: @drop-down-border-color;
+}
+
+.k-multiselect.k-state-hover
+{
+	border-color: @drop-down-hover-border-color;
+}
+
+.k-multiselect.k-state-focused
+{
+	border-color: @drop-down-focused-border-color;
+}
+
+
+
 .k-list-container
 {
     //border-color: @drop-down-header-background;
     //background-color: @select-group-background-color;
 	color: @drop-down-popup-text-color;
 }
+
+//.k-list-container
+//{
+  //  border-color: @group-border-color;
+  //  background-color: @select-group-background-color;
+//}
 
 .k-dropdown .k-input,
 .k-dropdown .k-state-focused .k-input,
@@ -1212,11 +1235,11 @@ div.k-imagebrowser-dropzone em
 
 
 /* TabStrip */
-.k-tabstrip-items .k-state-active
-{
+//.k-tabstrip-items .k-state-active
+//{
 										
-	color: @window-titlebar-color;
-}
+	//color: @window-titlebar-color;
+//}
 
 .k-tabstrip-items .k-state-active
 {
@@ -1247,14 +1270,15 @@ div.k-imagebrowser-dropzone em
 .k-panelbar > .k-item > .k-link,
 .k-panelbar .k-panel
 {
-	background-color: @window-titlebar-background;
+	//background-color: @window-titlebar-background;
 	border-color: @panelbar-items-border;
 	//color: @widget-text-color;
 }
-.k-panelbar > li > .k-link,
-.k-panelbar .k-content{
-	color: @window-titlebar-color;
-}
+
+//.k-panelbar > li > .k-link,
+//.k-panelbar .k-content{
+	//color: @window-titlebar-color;
+//}
 
 .k-panelbar .k-content,
 .k-panelbar .k-panel,
@@ -1285,20 +1309,20 @@ div.k-imagebrowser-dropzone em
 /* Menu */
 .k-menu.k-header
 {
-	background-color: @window-titlebar-background;
-	color: @window-titlebar-color;
-	border-color: @panelbar-items-border;
+	//background-color: @window-titlebar-background;
+	//color: @window-titlebar-color;
+	border-color: @menu-border-color;
 }
 
 .k-menu .k-item
 {
-	border-color: @panelbar-items-border;
+	border-color: @menu-border-color;
 }
 
 .k-menu .k-group
 {
 	background: @popup-background;
-	//border: @select-group-background-color;
+	border: @group-border-color;
 }
 
 .k-button
@@ -1338,7 +1362,7 @@ div.k-imagebrowser-dropzone em
 	.k-dropdown-wrap
 	{
 		background-color: @header-background-color;
-		border-color: @widget-border-color;
+		border-color: @secondary-border-color;
 	}
 	.k-editor-button .k-state-active
 	{
@@ -1364,7 +1388,7 @@ div.k-imagebrowser-dropzone em
 
 	.k-state-default > .k-select
 	{
-		border-color: @widget-border-color;
+		border-color: @secondary-border-color;
 	}
 
 	.k-state-hover > .k-select{
@@ -1387,12 +1411,23 @@ div.k-imagebrowser-dropzone em
 		border-color: @drop-down-hover-border-color;
 	}
 
+	.k-autocomplete.k-state-focused,
+	.k-picker-wrap.k-state-focused,
+	.k-numeric-wrap.k-state-focused,
+	.k-dropdown-wrap.k-state-focused
+	{
+		background-color: @select-border-color;
+		.composite-background(@hover-gradient);
+		background-position: 50% 50%;
+		border-color: @select-border-color;
+	}
+
 	.k-button,
 	&.k-button
 	{
-		color: @widget-text-color;
+		color: @secondary-text-color;
 		background-color: @header-background-color;
-		border-color: @widget-border-color;
+		border-color: @secondary-border-color;
 	}	
 	
 	.k-button:hover
@@ -1408,6 +1443,13 @@ div.k-imagebrowser-dropzone em
 		background-color: @selected-background-color;
 		border-color: @selected-border-color;
 	}	
+	
+	.k-dropdown .k-input,
+	.k-dropdown .k-state-focused .k-input,
+	.k-menu .k-popup
+	{
+		color: @secondary-text-color;
+	}
 }
 
 
