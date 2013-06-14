@@ -7,6 +7,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI.Html;
     using System.Web;
+    using System.Web.Util;
 
     /// <summary>
     /// The base class for all columns in Kendo Grid for ASP.NET MVC.
@@ -88,8 +89,15 @@ namespace Kendo.Mvc.UI
             {
                 var attributes = new Dictionary<string, object>();
 
+                var hasAntiXss = HttpEncoder.Current != null && HttpEncoder.Current.GetType().ToString().Contains("AntiXssEncoder");
+
                 HtmlAttributes.Each(attr => {
-                    attributes[HttpUtility.HtmlAttributeEncode(attr.Key)] = HttpUtility.HtmlAttributeEncode(attr.Value.ToString());
+                    var value = HttpUtility.HtmlAttributeEncode(attr.Value.ToString());
+                    if (hasAntiXss)
+                    {
+                        value = value.Replace("&#32;", " ");
+                    }
+                    attributes[HttpUtility.HtmlAttributeEncode(attr.Key)] = value;
                 });
 
                 json["attributes"] = attributes;
