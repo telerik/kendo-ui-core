@@ -39,8 +39,8 @@ kendo_module({
 
             this._changeProxy = $.proxy(that, "_change");
             this._refreshProxy = $.proxy(that, "_refresh");
-            scrollView.bind("change", this._changeProxy);
-            scrollView.bind("refresh", this._refreshProxy);
+            scrollView.bind(CHANGE, this._changeProxy);
+            scrollView.bind(REFRESH, this._refreshProxy);
 
             $.extend(that, { element: element });
         },
@@ -65,8 +65,8 @@ kendo_module({
         },
 
         destroy: function() {
-            scrollView.unbind("change", this._changeProxy);
-            scrollView.unbind("refresh", this._refreshProxy);
+            scrollView.unbind(CHANGE, this._changeProxy);
+            scrollView.unbind(REFRESH, this._refreshProxy);
             this.element.remove();
         }
     });
@@ -209,7 +209,7 @@ kendo_module({
                 duration: this.options.duration,
                 transitionEnd: $.proxy(this, "_transitionEnd"),
                 dragEnd: $.proxy(this, "_dragEnd"),
-                change: $.proxy(this, "refresh")
+                change: $.proxy(this, REFRESH)
             });
 
             that.page = that.options.page;
@@ -271,7 +271,7 @@ kendo_module({
                 that.minSnap = - (pages - 1) * width;
                 that.maxSnap = 0;
 
-                that.trigger("refresh", { pageCount: pages, page: that.page });
+                that.trigger(REFRESH, { pageCount: pages, page: that.page });
         },
 
         content: function(html) {
