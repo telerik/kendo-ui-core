@@ -64,7 +64,7 @@
                     this.pane.transitionTo(- page * this.pane.size(), Transition.easeOutExpo, instant);
                 },
 
-                dragged: function(swipeType, bounce, callback) {
+                paneMoved: function(swipeType, bounce, callback) {
                     var that = this,
                         pane = that.pane,
                         width = pane.size() * that.pageSize,
@@ -235,7 +235,7 @@
 
             asyncTest("small drag snaps the content back to the current page", 2, function() {
                 pane.moveTo(50);
-                content.dragged(NUDGE);
+                content.paneMoved(NUDGE);
                 setTimeout(function() {
                     start();
                     equal(content.page, 0);
@@ -245,7 +245,7 @@
 
             asyncTest("swift drag moves the content to the next page", 2, function() {
                 pane.moveTo(50);
-                content.dragged(LEFT_SWIPE);
+                content.paneMoved(LEFT_SWIPE);
                 setTimeout(function() {
                     start();
                     content.updatePage();
@@ -258,7 +258,7 @@
                 pane.moveTo(50);
                 var preventDefaultCallback = function() { return true; };
 
-                content.dragged(LEFT_SWIPE, false, preventDefaultCallback);
+                content.paneMoved(LEFT_SWIPE, false, preventDefaultCallback);
 
                 setTimeout(function() {
                     start();
@@ -271,7 +271,7 @@
             asyncTest("swift right drag moves the content to the previous page", 2, function() {
                 content.scrollTo(1, true);
                 pane.moveTo(150);
-                content.dragged(RIGHT_SWIPE);
+                content.paneMoved(RIGHT_SWIPE);
 
                 setTimeout(function() {
                     start();
@@ -283,7 +283,7 @@
 
             asyncTest("long drag snaps the content to the next page", 2, function() {
                 pane.moveTo(150);
-                content.dragged(NUDGE);
+                content.paneMoved(NUDGE);
                 setTimeout(function() {
                     start();
                     content.updatePage();
@@ -294,7 +294,7 @@
 
             asyncTest("drag left side of the boundaries snaps the content to the next page", 2, function() {
                 pane.moveTo(-150);
-                content.dragged(NUDGE);
+                content.paneMoved(NUDGE);
                 setTimeout(function() {
                     start();
                     content.updatePage();
@@ -305,7 +305,7 @@
 
             asyncTest("drag right side of the boundaries snaps the content to the next page", 2, function() {
                 pane.moveTo(300);
-                content.dragged(NUDGE);
+                content.paneMoved(NUDGE);
 
                 setTimeout(function() {
                     start();
