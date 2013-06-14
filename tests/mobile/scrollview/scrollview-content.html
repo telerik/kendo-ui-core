@@ -38,6 +38,14 @@
         <script>
             var ElasticPane = kendo.mobile.ui.ScrollViewElasticPane;
 
+            var Transition = kendo.effects.Transition,
+                floor = Math.floor,
+                round = Math.round,
+                ceil = Math.ceil,
+                LEFT_SWIPE = -1,
+                NUDGE = 0,
+                RIGHT_SWIPE = 1;
+
             var ScrollViewContent = kendo.Class.extend({
                 init: function (element, pane) {
                     var that = this;
@@ -46,11 +54,46 @@
                     that.pane = pane;
                     that._getPages();
                     this.page = 0;
+                    this.pageSize = 1;
                 },
 
                 scrollTo: function(page, instant) {
                     this.page = page;
-                    this.pane.transitionTo(- page * this.pane.size(), kendo.effects.Transition.easeOutExpo, instant);
+                    this.pane.transitionTo(- page * this.pane.size(), Transition.easeOutExpo, instant);
+                },
+
+                dragged: function(swipeType, bounce) {
+                    var that = this,
+                        pane = that.pane,
+                        width = pane.size() * that.pageSize,
+                        approx = round,
+                        ease = Transition.easeOutExpo,
+                        snap,
+                        nextPage;
+
+                    /*
+                    if (bounce) {
+                        ease = Transition.easeOutBack;
+                    }
+                    */
+
+                    nextPage = approx(pane.offset() / width);
+
+                    snap = Math.max(that.minSnap, Math.min(-nextPage * width, that.maxSnap));
+
+                    pane.transitionTo(snap, ease);
+                },
+
+                updatePage: function() {
+                    var pane = this.pane,
+                        page = Math.round(pane.offset() / pane.size());
+
+                    if (page != this.page) {
+                        this.page = page;
+                        return true;
+                    }
+
+                    return false;
                 },
 
                 _getPages: function () {
@@ -58,7 +101,7 @@
                     this._paged = this.pageElements.length > 0;
                 },
 
-                resizeTo: function (width) {
+                resizeTo: function(width) {
                     var pane = this.pane;
 
                     this.pageElements.width(width);
@@ -73,6 +116,8 @@
                     this.scrollTo(this.page, true);
 
                     this.pageCount = Math.ceil(pane.total() / width);
+                    this.minSnap = - (this.pageCount - 1) * width;
+                    this.maxSnap = 0;
                 }
             });
 
@@ -169,22 +214,60 @@
                 equal(pane.offset(), 100);
             });
 
-            /*
-            asyncTest("", 1, function() {
-                element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture");
-                container = element.wrap("<div style='width: 200px;' />");
+            var pane, content;
 
-                var pane = new ElasticPane(element);
-                content = new ScrollViewContent(element, pane);
-                content.page = 1;
-                content.resizeTo(200);
+            module("ScrollView Content dragging", {
+                setup: function () {
+                    element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
+                    pane = new ElasticPane(element);
+                    content = new ScrollViewContent(element, pane);
+                    content.resizeTo(200);
+                }
+            });
 
+            asyncTest("small drag snaps the content back to the current page", 2, function() {
+                pane.moveTo(50);
+                content.dragged(NUDGE);
                 setTimeout(function() {
                     start();
+                    equal(content.page, 0);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+            asyncTest("long drag snaps the content to the next page", 2, function() {
+                pane.moveTo(150);
+                content.dragged(NUDGE);
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 1);
                     equal(pane.offset(), 200);
                 }, 50);
             });
-            */
+
+            asyncTest("drag left side of the boundaries snaps the content to the next page", 2, function() {
+                pane.moveTo(-150);
+                content.dragged(NUDGE);
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 0);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+            asyncTest("drag right side of the boundaries snaps the content to the next page", 2, function() {
+                pane.moveTo(300);
+                content.dragged(NUDGE);
+
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 1);
+                    equal(pane.offset(), 200);
+                }, 50);
+            });
         </script>
     </body>
 </html>
