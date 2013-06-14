@@ -215,7 +215,7 @@ kendo_module({
                 role = ui || roles[type];
             }
 
-            that.form = $('<form class="k-filter-menu"/>')
+            that.form = $('<form class="k-filter-menu k-secondary"/>')
                 .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
                     field: that.field,
                     format: options.format,

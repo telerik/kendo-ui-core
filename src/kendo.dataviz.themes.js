@@ -1264,5 +1264,7 @@ kendo_module({
         }
     });
 
+    registerTheme("flat", {});
+
 })(window.kendo.jQuery);
 

@@ -1,0 +1,119 @@
+/*
+* Kendo UI Complete v2013.1.530 (http://kendoui.com)
+* Copyright 2013 Telerik AD. All rights reserved.
+*
+* Kendo UI Complete commercial licenses may be obtained at
+* https://www.kendoui.com/purchase/license-agreement/kendo-ui-complete-commercial.aspx
+* If you do not own a commercial license, this file shall be governed by the trial license terms.
+*/
+@image-folder: "Flat";
+@texture: none;
+@tooltip-texture: none;
+@fallback-texture: url('textures/highlight.png');
+
+/* Widget Base Styles */
+@widget-text-color: #787878;
+@widget-background-color: #ffffff;
+@widget-border-color: #cdcdcd;
+
+//No gradients
+@widget-gradient: none;
+@widget-shadow: none;
+@hover-gradient: none;
+@hover-shadow: none;
+@selected-gradient: none;
+@selected-shadow: none;
+@active-gradient: none;
+@active-shadow: none;
+
+/* Selects, Dropdowns */
+@select-background-color: red;
+@select-border-color: #29d6c5;
+@select-hover-background-color: #29d6c5;
+@select-group-background-color: @drop-down-header-background;
+
+
+/* Buttons */
+@button-background-color: @form-widget-background;
+@button-text-color: @form-widget-color;
+
+/* Group Base Styles */
+@group-background-color: @widget-background-color;
+@group-border-color: #29d6c5;
+
+/* Content */
+@content-background-color: #ffffff;
+
+
+
+@hover-background-color: #29d6c5;
+@hover-border-color: #29d6c5;
+@hover-text-color: #ffffff;
+
+@selected-background-color: #10c4b2;
+@selected-border-color: @drop-down-header-background;
+@selected-text-color: #ffffff;
+
+@active-background-color: #10c4b2;
+@active-border-color: none;
+@active-text-color: #ffffff;
+@error-background-color: #ffffff;
+@error-border-color: #e20000;
+@error-text-color: #e20000;
+@disabled-text-color: #c1c1c1;
+@validation-background-color: #ffe13a;
+@validation-border-color: #ffe13a;
+@validation-text-color: #787878;
+@tooltip-background-color: #363940;
+@tooltip-border-color: #363940;
+@tooltip-text-color: #ffffff;
+
+/* Slider */
+@draghandle-border-radius: 13px;
+@draghandle-border-color: @form-widget-background;
+@draghandle-background-color: @form-widget-background;
+@draghandle-shadow: 0 0 0 0;
+@draghandle-hover-border-color: @hover-background-color;
+@draghandle-hover-background-color: @hover-background-color;
+@draghandle-hover-shadow: 0 0 0;
+
+@alt-background-color: #f5f5f5;
+@input-background-color: #ffffff;
+@input-text-color: #787878;
+@shadow-color: rgba(0, 0, 0, 0.3);
+@shadow-inset-color: transparent;
+@link-text-color: #787878;
+@loading-panel-color: #ffffff;
+@splitbar-background-color: #29d6c5;
+@default-icon-opacity: 1;
+
+/* Border Radii */
+@main-border-radius: 2px;
+@list-border-radius: @main-border-radius - 1;
+@inner-border-radius: @main-border-radius - 2;
+@slider-border-radius: 13px;
+
+/* Headers */
+@header-text-color: #4c5356;
+@header-background-color: #f4f4f4;
+
+/*Focused State*/
+@focused-border-color: @drop-down-header-background;
+@focused-shadow: none;
+@focused-item-shadow: inset 0 0 0 1px @drop-down-header-background;
+
+/* Calendar */
+@header-calendar-background: #363940;
+@header-calendar-text-color: #ffffff;
+
+//Introduced new var-s
+@form-widget-background: #10c4b2;
+@form-widget-color: #ffffff;
+@form-widget-border-color: #10c4b2; 
+@drop-down-header-background: #363940;
+@drop-down-header-color: #ffffff;
+@calendar-border-radius: 13px;
+@table-header-background: #dfdfdf;
+@popup-container-padding: 0;
+
+@import "template.less";

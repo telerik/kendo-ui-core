@@ -1663,7 +1663,7 @@ kendo_module({
                         toolbar = proxy(kendo.template(toolbar), that);
                     }
 
-                    container = $('<div class="k-toolbar k-grid-toolbar" />')
+                    container = $('<div class="k-toolbar k-grid-toolbar k-secondary" />')
                         .html(toolbar({}))
                         .prependTo(wrapper);
                 }

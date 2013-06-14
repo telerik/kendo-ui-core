@@ -687,7 +687,8 @@
                     { text: "Black", value: "black", colors: ["#0167cc", "#4698e9", "#272727", "#000000"] },
                     { text: "Metro Black", value: "metroblack", colors: ["#00aba9", "#0e0e0e", "#333333", "#565656"] },
                     { text: "High Contrast", value: "highcontrast", colors: ["#b11e9c", "#880275", "#664e62", "#1b141a"] },
-                    { text: "Moonlight", value: "moonlight", colors: ["#ee9f05", "#40444f", "#2f3640", "#212a33"] }
+                    { text: "Moonlight", value: "moonlight", colors: ["#ee9f05", "#40444f", "#2f3640", "#212a33"] },
+                    { text: "Flat", value: "flat", colors: ["#ffffff", "#29d6c5", "#10c4b2", "#363940"] }
                 ]
             }
         });
