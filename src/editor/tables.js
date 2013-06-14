@@ -61,16 +61,16 @@ var TableEditor = kendo.Class.extend({
     _render: function() {
         var table = this.table,
             doc = table.ownerDocument,
-            selectionRow = dom.create(doc, "tr"),
-            selectionCell = dom.create(doc, "td"),
+            selectionRow = dom.create(doc, "tr", { className: "k-selection-row" }),
+            selectionCell = dom.create(doc, "td", {
+                className: "k-selection-cell",
+                contentEditable: "false"
+            }),
             rows = table.rows,
             i;
 
-        selectionCell.className = "k-selection-cell";
-        selectionCell.contentEditable = "false";
-        selectionCell.setAttribute("_kendo_markup", "");
-        selectionRow.className = "k-selection-row";
         selectionRow.setAttribute("_kendo_markup", "");
+        selectionCell.setAttribute("_kendo_markup", "");
 
         for (i = 0; i < rows[rows.length-1].cells.length; i++) {
             selectionRow.appendChild(selectionCell.cloneNode());
@@ -87,6 +87,7 @@ var TableEditor = kendo.Class.extend({
 
     _attachEvents: function() {
         $(this.table)
+            .on("mousedown" + NS, ".k-selection-cell", false)
             .on("click" + NS, ".k-selection-cell", proxy(this._selectionCellClick, this))
             .on("mousedown" + NS, "td:not(.k-selection-cell)", proxy(this.clearSelection, this));
     },
