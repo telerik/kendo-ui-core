@@ -175,8 +175,12 @@ kendo_module({
             this.movable.moveAxis("x", -offset);
         },
 
-        transitionTo: function(location, ease, instant) {
-            this.transition.moveTo({ location: location, duration: (instant ? 1 : this.duration), ease: ease });
+        transitionTo: function(offset, ease, instant) {
+            if (instant) {
+                this.moveTo(-offset);
+            } else {
+                this.transition.moveTo({ location: offset, duration: this.duration, ease: ease });
+            }
         }
     });
 

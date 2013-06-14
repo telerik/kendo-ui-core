@@ -70,6 +70,8 @@
                         this.page = Math.floor(pane.offset() / width);
                     }
 
+                    this.scrollTo(this.page, true);
+
                     this.pageCount = Math.ceil(pane.total() / width);
                 }
             });
@@ -83,8 +85,7 @@
             }});
 
             test("calculates pageCount correctly", 1, function() {
-                element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture");
-                container = element.wrap("<div style='width: 200px;' />");
+                element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
 
                 content = new ScrollViewContent(element, new ElasticPane(element));
 
@@ -93,8 +94,7 @@
             });
 
             test("resizes container and data-role=page elements as expected", 2, function() {
-                element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture");
-                container = element.wrap("<div/>");
+                element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture").wrap("<div/>");
 
                 content = new ScrollViewContent(element, new ElasticPane(element));
 
@@ -103,9 +103,8 @@
                 equal(content.element.find("[data-role=page]").eq(0).width(), 200);
             });
 
-            asyncTest("scrolls to provided page, offseting the pane to the correct value", 3, function() {
-                element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture");
-                container = element.wrap("<div style='width: 200px;' />");
+            test("scrolls to provided page, offseting the pane to the correct value", 3, function() {
+                element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
 
                 var pane = new ElasticPane(element);
                 content = new ScrollViewContent(element, pane);
@@ -114,17 +113,12 @@
 
                 content.scrollTo(1, true);
 
-                setTimeout(function() {
-                    start();
-                    equal(content.page, 1);
-                    equal(pane.offset(), 200);
-                }, 50);
-
+                equal(content.page, 1);
+                equal(pane.offset(), 200);
             });
 
-            asyncTest("re-calculates current page on pane resize", 2, function() {
-                element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture");
-                container = element.wrap("<div style='width: 200px;' />");
+            test("re-calculates current page on pane resize", 2, function() {
+                element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
 
                 var pane = new ElasticPane(element);
                 content = new ScrollViewContent(element, pane);
@@ -132,29 +126,65 @@
                 equal(content.page, 0);
                 content.scrollTo(1, true);
 
-                setTimeout(function() {
-                    start();
-                    content.resizeTo(100);
-                    equal(content.page, 2);
-                }, 50);
+                content.resizeTo(100);
+                equal(content.page, 2);
             });
 
-            asyncTest("retain current page on pane resize if data-role page elements are present", 2, function() {
+            test("retains current page on pane resize if data-role page elements are present", 2, function() {
+                element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
+
+                var pane = new ElasticPane(element);
+                content = new ScrollViewContent(element, pane);
+
+                equal(content.page, 0);
+                content.scrollTo(1, true);
+
+                content.resizeTo(100);
+                equal(content.page, 1);
+            });
+
+            test("scrolls to the current page on resize", 1, function() {
+                element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
+
+                var pane = new ElasticPane(element);
+                content = new ScrollViewContent(element, pane);
+                content.page = 1;
+                content.resizeTo(200);
+
+                equal(pane.offset(), 200);
+            });
+
+            test("re-adjusts offset on resize if pages present", 1, function() {
+                element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
+
+                var pane = new ElasticPane(element);
+                content = new ScrollViewContent(element, pane);
+                content.page = 1;
+                content.resizeTo(200);
+
+                element.parent().width(100);
+                pane.refresh();
+                content.resizeTo(100);
+
+                equal(pane.offset(), 100);
+            });
+
+            /*
+            asyncTest("", 1, function() {
                 element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture");
                 container = element.wrap("<div style='width: 200px;' />");
 
                 var pane = new ElasticPane(element);
                 content = new ScrollViewContent(element, pane);
-
-                equal(content.page, 0);
-                content.scrollTo(1, true);
+                content.page = 1;
+                content.resizeTo(200);
 
                 setTimeout(function() {
                     start();
-                    content.resizeTo(100);
-                    equal(content.page, 1);
+                    equal(pane.offset(), 200);
                 }, 50);
             });
+            */
         </script>
     </body>
 </html>
