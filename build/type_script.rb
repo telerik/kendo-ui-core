@@ -13,6 +13,8 @@ module CodeGen::TypeScript
         'docs/api/framework/view.md',
         'docs/api/framework/layout.md',
         'docs/api/framework/hierarchicaldatasource.md',
+        'docs/api/framework/schedulerdatasource.md',
+        'docs/api/framework/schedulerevent.md',
         'docs/api/framework/datasource.md',
         'docs/api/framework/binder.md',
         'docs/api/framework/model.md',
