@@ -87,6 +87,18 @@
                 equal(editor.value(), "<table><tbody><tr><td><a></a>foo</td></tr></tbody></table>");
             });
 
+            test("selection algorithm skips whitespace nodes", function() {
+                range = createRangeFromText(editor, "<table><tr><td>foo</td></tr>  <tr><td>b||ar</td></tr></table>");
+
+                execDeleteRowCommand({ range:range });
+
+                range = editor.getRange();
+
+                range.insertNode(editor.document.createElement("a"));
+
+                equal(editor.value(), "<table><tbody><tr><td><a></a>foo</td></tr></tbody></table>");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

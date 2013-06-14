@@ -406,7 +406,7 @@ var DeleteRowCommand = Command.extend({
         if (rowCount == 1 || (rowCount == 2 && table._editor)) {
             dom.remove(table);
         } else {
-            focusElement = (row.nextSibling || row.previousSibling);
+            focusElement = dom.next(row) || dom.prev(row);
             focusElement = focusElement.cells[1] || focusElement.cells[0];
 
             dom.remove(row);
@@ -424,14 +424,14 @@ var DeleteColumnCommand = Command.extend({
             td = dom.closest(range.endContainer, "td"),
             table = dom.closest(td, "table"),
             rows = table.rows,
-            columnIndex = dom.findNodeIndex(td),
+            columnIndex = dom.findNodeIndex(td, true),
             columnCount = rows[0].cells.length,
             focusElement, i;
 
         if (columnCount == 1 || (columnCount == 2 && table._editor)) {
             dom.remove(table);
         } else {
-            focusElement = td.nextSibling || td.previousSibling;
+            focusElement = dom.next(td) || dom.prev(td);
 
             for (i = 0; i < rows.length; i++) {
                 dom.remove(rows[i].cells[columnIndex]);

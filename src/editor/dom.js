@@ -127,7 +127,7 @@ var whitespace = /^\s+$/,
         };
 
 var Dom = {
-    findNodeIndex: function(node) {
+    findNodeIndex: function(node, skipText) {
         var i = 0;
 
         while (true) {
@@ -137,7 +137,9 @@ var Dom = {
                 break;
             }
 
-            i++;
+            if (!(skipText && node.nodeType == 3)) {
+                i++;
+            }
         }
 
         return i;
@@ -397,6 +399,22 @@ var Dom = {
         }
 
         return node;
+    },
+
+    sibling: function(node, direction) {
+        do {
+            node = node[direction];
+        } while (node && node.nodeType != 1);
+
+        return node;
+    },
+
+    next: function(node) {
+        return Dom.sibling(node, "nextSibling");
+    },
+
+    prev: function(node) {
+        return Dom.sibling(node, "previousSibling");
     },
 
     parentOfType: function (node, tags) {
