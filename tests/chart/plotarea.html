@@ -1654,11 +1654,40 @@
                             ],
                             baseUnit: "months"
                         }
-                    }),
+                    });
 
                     point = plotArea.series[0].data[0];
 
-                    deepEqual(point, 2);
+                    equal(point, 2);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Aggregates / Category Field");
+
+                test("Aggregates points with same category", function() {
+                    createPlotArea([{
+                        type: "column",
+                        categoryField: "category",
+                        data: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "A"
+                        }, {
+                            value: 3,
+                            category: "B"
+                        }]
+                    }], {
+                        categoryAxis: {
+                            categories: [ "A", "B" ]
+                        }
+                    });
+
+                    var data = plotArea.series[0].data;
+
+                    equal(data[0], 2);
+                    equal(data.length, 2);
                 });
 
             })();

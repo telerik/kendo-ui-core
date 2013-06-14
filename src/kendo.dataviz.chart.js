@@ -21,6 +21,7 @@ kendo_module({
         math = Math,
         extend = $.extend,
         proxy = $.proxy,
+        indexOf = $.inArray,
         isFn = $.isFunction,
 
         kendo = window.kendo,
@@ -2177,6 +2178,7 @@ kendo_module({
                 date,
                 nextDate,
                 groups = [],
+                // TODO: Remove unused category map
                 categoryMap = axis.categoryMap = [],
                 categoryIndicies,
                 lastCategoryIndicies = [],
@@ -2232,6 +2234,7 @@ kendo_module({
 
             options.min = groups[0];
             options.max = round ? last(groups) : end;
+            options.sourceCategories = categories;
             options.categories = groups;
         },
 
@@ -6915,7 +6918,7 @@ kendo_module({
             var plotArea = this,
                 series = plotArea.srcSeries || plotArea.series,
                 processedSeries = [],
-                categoryAxis, axisPane, categories, categoryMap,
+                categoryAxis, axisPane, categories,
                 groupIx, categoryIndicies, seriesIx, currentSeries,
                 seriesClone, srcData, data, srcValues, i,
                 categoryIx, pointData, value, srcDataItems;
@@ -6926,55 +6929,45 @@ kendo_module({
                 categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
                 axisPane = plotArea.findPane(categoryAxis.options.pane);
 
-                if (inArray(axisPane, panes) && equalsIgnoreCase(categoryAxis.options.type, DATE)) {
-                    categories = categoryAxis.options.categories;
-                    categoryMap = categoryAxis.categoryMap;
+                if (inArray(axisPane, panes)) {
+                    var isDateAxis = equalsIgnoreCase(categoryAxis.options.type, DATE);
 
-                    srcData = seriesClone.data;
-                    seriesClone.data = data = [];
+                    if (isDateAxis || currentSeries.categoryField) {
+                        categories = categoryAxis.options.categories;
+                        var sourceCategories = categoryAxis.options.sourceCategories || categories;
+                        srcData = seriesClone.data;
+                        seriesClone.data = data = [];
 
-                    if (currentSeries.categoryField) {
                         var categorySrcValues = [];
                         var categorySrcDataItems = [];
 
                         for (i = 0; i < srcData.length; i++) {
                             pointData = SeriesBinder.current.bindPoint(currentSeries, i);
                             value = pointData.value;
-                            categoryIx = lteDateIndex(categories, pointData.fields.category);
 
-                            srcValues = categorySrcValues[categoryIx] = categorySrcValues[categoryIx] || [];
-                            if (defined(value)) {
-                                srcValues.push(pointData.value);
+                            var category = pointData.fields.category || sourceCategories[i];
+                            if (category) {
+                                if (isDateAxis) {
+                                    categoryIx = lteDateIndex(categories, category);
+                                } else {
+                                    categoryIx = indexOf(category, categories);
+                                }
+
+                                srcValues = categorySrcValues[categoryIx] = categorySrcValues[categoryIx] || [];
+                                if (defined(value)) {
+                                    srcValues.push(pointData.value);
+                                }
+
+                                srcDataItems = categorySrcDataItems[categoryIx] =
+                                    categorySrcDataItems[categoryIx] || [];
+
+                                srcDataItems.push(currentSeries.data[i]);
                             }
-
-                            srcDataItems = categorySrcDataItems[categoryIx] =
-                                categorySrcDataItems[categoryIx] || [];
-
-                            srcDataItems.push(currentSeries.data[i]);
                         }
 
                         for (groupIx = 0; groupIx < categories.length; groupIx++) {
                             srcValues = categorySrcValues[groupIx] || [];
                             srcDataItems = categorySrcDataItems[groupIx] || [];
-                            data[groupIx] = calculateAggregates(srcValues, currentSeries, srcDataItems);
-                        }
-                    } else {
-                        for (groupIx = 0; groupIx < categories.length; groupIx++) {
-                            categoryIndicies = categoryMap[groupIx];
-                            srcValues = [];
-                            srcDataItems = [];
-
-                            for (i = 0; i < categoryIndicies.length; i++) {
-                                categoryIx = categoryIndicies[i];
-                                pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
-                                value = pointData.value;
-
-                                if (defined(value)) {
-                                    srcValues.push(pointData.value);
-                                }
-                                srcDataItems.push(currentSeries.data[categoryIx]);
-                            }
-
                             data[groupIx] = calculateAggregates(srcValues, currentSeries, srcDataItems);
                         }
                     }
