@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileScrollView.Tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.userevents.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.router.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../../src/kendo.mobile.scrollview.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.ScrollView Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <style>
+            [data-role=page] {
+                display: inline-block;
+            }
+        </style>
+
+        <script>
+            var ScrollView = kendo.Observable.extend({
+                init: function (element) {
+                    kendo.Observable.fn.init.call(this);
+                    this.element = element;
+                }
+            });
+
+            var ScrollViewContent = kendo.Class.extend({
+                init: function (element, dimension) {
+                    var that = this;
+
+                    that.element = element;
+                    that.dimension = dimension;
+                    that._getPages();
+                },
+
+                _getPages: function () {
+                    this.pageElements = this.element.find("[data-role=page]");
+                    this._paged = this.pageElements.length > 0;
+                },
+
+                resizeTo: function (width) {
+                    this.pageElements.width(width);
+                    this.dimension.update(true);
+                    this.pageCount = Math.ceil(this.dimension.getTotal() / width);
+                }
+            });
+
+            var element,
+                content,
+                container;
+
+            module("ScrollView Content", { setup: function () {
+
+            }});
+
+            test("calculates pageCount correctly", 1, function() {
+                element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture");
+                container = element.wrap("<div style='width: 200px;' />");
+
+                paneDimensions = new kendo.ui.PaneDimensions({
+                    element: element,
+                    container: container
+                });
+                content = new ScrollViewContent(element, paneDimensions.x);
+
+                content.resizeTo(200);
+                equal(content.pageCount, 3);
+            });
+
+            test("calculates pageCount correctly", 2, function() {
+                element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture");
+                container = element.wrap("<div/>");
+
+                paneDimensions = new kendo.ui.PaneDimensions({
+                    element: element,
+                    container: container
+                });
+
+                content = new ScrollViewContent(element, paneDimensions.x);
+
+                content.resizeTo(200);
+                equal(content.element.width(), 400);
+                equal(content.element.find("[data-role=page]").eq(0).width(), 200);
+            });
+        </script>
+    </body>
+</html>
+
