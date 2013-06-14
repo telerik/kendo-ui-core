@@ -349,6 +349,26 @@
                 equal(dataSource.get(1).get("bar"), "bar");
                 equal(dataSource.data()[0].items[0].items.length, 2);
             });
+
+            test("adding items to array field sets the dirty flag to true", function() {
+                var model = new kendo.data.Model({
+                    foo: []
+                });
+
+                model.foo.push("foo");
+
+                equal(model.dirty, true);
+            });
+
+            test("removing items from array field sets the dirty flag to true", function() {
+                var model = new kendo.data.Model({
+                    foo: ["foo"]
+                });
+
+                model.foo.pop();
+
+                equal(model.dirty, true);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler MultiDay Views rendering</title>
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler MultiDay Views rendering</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var MultiDayView = kendo.ui.MultiDayView,
+                container,
+                rightOffset = 30;
+
+            var MyDayView = MultiDayView.extend({
+                init: function(element, options) {
+                    var that = this;
+
+                    MultiDayView.fn.init.call(that, element, options);
+                },
+                renderLayout: function() {
+                    this._render(this.options.dates);
+                }
+            });
+
+            function slotHeight(table, slotsCount) {
+                var height = Math.floor(table.height() / table[0].rows.length);
+                return Math.round((height * slotsCount) - height * 0.10);
+            }
+
+            function equalWithRound(value, expected) {
+                equal(Math.round(value), Math.round(expected));
+            }
+
+            function applyDefaultLeftOffset(value) {
+                return value + 2;
+            }
+
+            function applyDefaultRightOffset(value) {
+                return value - 4;
+            }
+
+            function setup(options) {
+                return new MyDayView(container, $.extend({ majorTick: 120 }, options));
+            }
+
+            module("Multi Day View rendering", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container).addClass("k-scheduler");
+                },
+                teardown: function() {
+                    $(container).remove();
+                }
+            });
+
+            test("renders times header slots", function() {
+                var view = setup();
+                view.renderLayout();
+
+                ok(container.find(".k-scheduler-times").length);
+                equal(view.timesHeader[0], container.find(".k-scheduler-times")[0]);
+            });
+
+            test("renders headers for selected dates", function() {
+                var view = setup({ dates: [new Date("1/2/2013"), new Date("2/1/2013")], allDaySlot: false });
+                view.renderLayout();
+
+                ok(view.datesHeader.hasClass("k-scheduler-header"));
+                equal(view.datesHeader.find("th").length, 2);
+            });
+
+            test("k-today is render if date is today", function() {
+                var view = setup({ dates: [new Date()] });
+
+                view.renderLayout();
+
+                equal(view.datesHeader.find("th.k-today").length, 1);
+            });
+
+            test("k-today is not render if date is not today", function() {
+                var view = setup({ dates: [new Date("1/2/2013")] });
+
+                view.renderLayout();
+
+                ok(!view.datesHeader.find("th.k-today").length);
+            });
+
+            test("dates are formatted", function() {
+                var view = setup({ dates: [new Date("1/26/2013")] });
+
+                view.renderLayout();
+
+                equal(view.datesHeader.find("th").text(), "Sat 1/26");
+            });
+
+            test("title is read from the options", function() {
+                var view = setup({ title: "the title" });
+
+                equal(view.title, "the title");
+            });
+
+            test("render time slots", function() {
+                var view = setup({ });
+
+                view.renderLayout();
+
+                equal(view.times.find("th").length, 24);
+                equal(view.times.find("th:first").text(), "12:00 AM");
+            });
+
+            test("render time slots with not exact start time", function() {
+                var view = setup({
+                    startTime: new Date(2001, 1, 1, 10, 10, 0)
+                });
+
+                view.renderLayout();
+
+                equal(view.times.find("th").length, 14);
+                equal(view.times.find("th:first").text(), "10:10 AM");
+            });
+
+            test("time is shown in major time slots", function() {
+                var view = setup({
+                        startTime: new Date(2000, 0, 1, 10, 0, 0),
+                        endTime: new Date(2000, 0, 1, 11, 0, 0),
+                        majorTick: 30
+                    });
+
+                view.renderLayout();
+                var cells = view.times.find("th");
+
+                equal(cells.first().text(), "10:00 AM");
+                equal(cells.eq(1).html(), "&nbsp;");
+                equal(cells.eq(2).text(), "10:30 AM");
+                equal(cells.eq(3).html(), "&nbsp;");
+            });
+
+            test("time slots does not overflow endTime", function() {
+                var view = setup({
+                        startTime: new Date(2000, 0, 1, 0, 0, 0),
+                        endTime: new Date(2000, 0, 1, 23, 59, 0),
+                        numberOfTimeSlots: 8
+                    });
+
+                view.renderLayout();
+
+                equal(view.times.find("th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "10:00 PM");
+                equal(view.times.find("th").length, 96);
+            });
+
+            test("start time is a DST date", function() {
+                var view = setup({
+                        majorTick: 60,
+                        startTime: new Date(2013, 2, 31, 0, 0, 0),
+                        endTime: new Date(2013, 2, 31, 0, 0, 0),
+                    });
+
+                view.renderLayout();
+
+                ok(view.times.find("th:contains(3:00 AM)").length);
+                equal(view.times.find("th").length, 48);
+            });
+
+            test("start time is later than end time", function() {
+                var view = setup({
+                        startTime: new Date(2000, 0, 1, 13, 0, 0),
+                        endTime: new Date(2000, 0, 1, 10, 0, 0),
+                    });
+
+                view.renderLayout();
+                equal(view.times.find("tr:not(:last) th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "7:00 AM");
+                equal(view.times.find("tr:last").text(), "9:00 AM");
+                equal(view.times.find("th").length, 21);
+            });
+
+            test("render day slots", function() {
+                var view = setup({
+                    dates: [
+                        new Date("1/26/2013"),
+                        new Date("1/27/2013")
+                    ]
+                });
+
+                view.renderLayout();
+
+                equal(view.content.find("tr").length, 24);
+                equal(view.content.find("td").length, 48);
+            });
+
+            test("apply css to day slot", function() {
+                var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.renderLayout();
+
+                equal(view.content.find("tr.k-middle-row").length, 12);
+                equal(view.content.find("tr:not(.k-middle-row)").length, 12);
+            });
+
+            test("content and times heights are equal", function() {
+                container.css("height", 500);
+
+                 var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.renderLayout();
+
+                equal(view.content.height(), view.times.height());
+            });
+
+            test("all day slot is rendered", function() {
+                var view = setup({
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.renderLayout();
+
+                equal(view.datesHeader.find(".k-scheduler-table").length, 2);
+                equal(view.element.find(".k-scheduler-header-all-day td").length, 1);
+            });
+
+            test("all day slot is not rendered if disabled", function() {
+                var view = setup({
+                    allDaySlot: false,
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                view.renderLayout();
+
+                equal(view.datesHeader.find(".k-scheduler-table").length, 1);
+                ok(!view.allDayHeader);
+            });
+
+            test("render footer toolbar", function() {
+                var view = setup();
+
+                view.renderLayout();
+
+                ok(view.footer);
+                ok(view.footer.hasClass("k-scheduler-footer"));
+            });
+
+            test("display basic event", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                equal(view.content.find("div.k-event").length, 1);
+                equal(view.content.find(".k-event dd").text(), "my event");
+            });
+
+            test("uid is render", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{ uid: "foo", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                equal(view.content.find(".k-event").attr("data-uid"), "foo");
+            });
+
+            test("multiple events are displayed", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "event1" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "event2" }
+                ];
+
+                view.render(events);
+
+                equal(view.content.find("div.k-event").length, 2);
+                equal(view.content.find(".k-event:first dd").text(), "event1");
+                equal(view.content.find(".k-event:last dd").text(), "event2");
+            });
+
+            test("old events are removed on multiple databind calls", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+                view.render(events);
+
+                equal(view.content.find("div.k-event").length, 1);
+                equal(view.content.find(".k-event dd").text(), "my event");
+            });
+
+            test("format event date", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                equal(view.content.find("div.k-event dt").text(), "10:00 AM - 11:00 AM");
+            });
+
+            test("custom event template", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        eventTemplate: '${title}',
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                equal(view.content.find("div.k-event").text(), "my event");
+            });
+
+            test("get time slot index for date", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [ selectedDate ]
+                    });
+
+                view.renderLayout(selectedDate);
+                var index = view._timeSlotIndex(new Date(2013, 1, 26, 10, 0, 0));
+
+                equal(index, 10);
+            });
+
+            test("position basic event in the correct time slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }],
+                    timeSlotPosition,
+                    eventPosition;
+
+                view.renderLayout(selectedDate);
+
+                view.render(events);
+
+                eventPosition = view.content.find("div.k-event").offset();
+                timeSlotPosition = view.content.find("tr").eq(10).offset();
+
+                equalWithRound(timeSlotPosition.top, eventPosition.top);
+                equalWithRound(applyDefaultLeftOffset(timeSlotPosition.left), eventPosition.left);
+            });
+
+            test("single day event which is outside of the time range is not displayed", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 12, 0, 0),
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.renderLayout(selectedDate);
+
+                view.render(events);
+
+                ok(!container.find(".k-event").length);
+            });
+
+            test("set the height of the event", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.renderLayout(selectedDate);
+
+                view.render(events);
+
+                equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 2));
+
+            });
+
+            test("set the height of the event when end time is near the end of the slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 40, 0), title: "my event" }];
+
+                view.renderLayout(selectedDate);
+
+                view.render(events);
+
+                equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 3));
+            });
+
+
+            test("the height of the event with equal start and end is single row", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
+
+                view.renderLayout(selectedDate);
+
+                view.render(events);
+
+                equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 1));
+            });
+
+            test("the width of single event is the time slot without the offset", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
+
+                view.renderLayout(selectedDate);
+
+                view.render(events);
+                equal(view.content.find("div.k-event").width(), view.content.find("td:eq(10)").width() - 4 - rightOffset);
+            });
+
+            test("multiple day events are added to all day slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find(".k-event dd").text(), "my event");
+
+            });
+
+            test("events set as all day are added to all day slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), isAllDay: true, title: "all day event" }];
+
+                view.render(events);
+
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find(".k-event dd").text(), "all day event");
+
+            });
+
+            test("events set as all day are not render for next day slot", function() {
+                var selectedDate = new Date(2013, 1, 27, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26), end: new Date(2013, 1, 26), isAllDay: true, title: "all day event" }];
+
+                view.render(events);
+
+                equal(view.datesHeader.find("div.k-event").length, 0);
+            });
+
+            test("events set as all day are not render for prev day slot", function() {
+                var selectedDate = new Date(2013, 1, 25, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26), end: new Date(2013, 1, 26), isAllDay: true, title: "all day event" }];
+
+                view.render(events);
+
+                equal(view.datesHeader.find("div.k-event").length, 0);
+            });
+
+            test("multiple day event position is set to the date slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var eventOffset = view.datesHeader.find("div.k-event").offset();
+                var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+
+                equalWithRound(eventOffset.top, slotOffset.top);
+                equalWithRound(eventOffset.left, applyDefaultLeftOffset(slotOffset.left));
+            });
+
+            test("multiple day event position is set to the date slot with multiple slots", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate,
+                           new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+                var eventOffset = view.datesHeader.find("div.k-event").offset();
+                var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+                var slotWidth = 0;
+
+                view.element.find(".k-scheduler-header-all-day td").each(function() {
+                    slotWidth += $(this).innerWidth();
+                });
+
+                equalWithRound(eventOffset.top, slotOffset.top);
+
+                equalWithRound(eventOffset.left, applyDefaultLeftOffset(slotOffset.left));
+                equalWithRound(view.datesHeader.find("div.k-event").width(), applyDefaultRightOffset(slotWidth));
+            });
+
+            test("position multiday event which starts before the selected range", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
+
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find("div.k-event").width(), applyDefaultRightOffset(slotWidth));
+            });
+
+            test("position multiday event which ends after the selected range", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
+
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find("div.k-event").width(), applyDefaultRightOffset(slotWidth));
+            });
+
+            test("position multiday event which starts before and ends after the selected range", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
+
+                equal(view.datesHeader.find("div.k-event").length, 1);
+                equal(view.datesHeader.find("div.k-event").width(), applyDefaultRightOffset(slotWidth));
+            });
+
+            test("position day event which starts before the slot start time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 10, 0, 0),
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var eventElement = view.content.find("div.k-event");
+                equal(eventElement.length, 1);
+                equal(eventElement.offset().top, view.content.find("tr:first").offset().top);
+                equal(eventElement.offset().left, applyDefaultLeftOffset(view.content.find("tr:first").offset().left));
+            });
+
+            test("position day event which ends after the slot end time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        endTime: new Date(2013, 1, 26, 11, 0, 0),
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.render(events);
+                var eventElement = view.content.find("div.k-event");
+
+                equal(eventElement.length, 1);
+                equalWithRound(eventElement.offset().top, view.content.find("tr").eq(9).offset().top);
+                equalWithRound(eventElement.offset().left, applyDefaultLeftOffset(view.content.find("tr").eq(9).offset().left));
+                equalWithRound(eventElement.height(), slotHeight(view.content.find("table"), 2));
+            });
+
+            test("does not position day event which is same day but outside of the slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 9, 0, 0),
+                        endTime: new Date(2013, 1, 26, 11, 0, 0),
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 26, 8, 0, 0), title: "my event" }];
+
+                view.render(events);
+                ok(!view.content.find("div.k-event").length);
+            });
+
+            test("position day event which start before and ends after the slot end time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 9, 0, 0),
+                        endTime: new Date(2013, 1, 26, 11, 0, 0),
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var eventElement = view.content.find("div.k-event");
+                equal(eventElement.length, 1);
+
+                equalWithRound(eventElement.offset().top, view.content.find("tr").eq(0).offset().top);
+                equalWithRound(eventElement.height(), slotHeight(view.content.find("table"), 2));
+            });
+
+            test("position day event which start in the last slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 27, 9, 0, 0), end: new Date(2013, 1, 27, 10, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var eventElement = view.content.find("div.k-event");
+                equal(eventElement.length, 1);
+                equalWithRound(eventElement.offset().top, view.content.find("tr").eq(9).offset().top);
+                equalWithRound(eventElement.height(), slotHeight(view.content.find("table"), 1));
+            });
+
+            test("positon multiple single day events with same start time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.content.find("div.k-event");
+                var slot = view.content.find("tr").eq(8).find("td:first");
+
+                equal(eventElements.length, 2);
+                equalWithRound(eventElements.first().offset().top, slot.offset().top);
+                equalWithRound(eventElements.first().offset().left, applyDefaultLeftOffset(slot.offset().left));
+                equalWithRound(eventElements.first().height(), slotHeight(view.content.find("table"), 4));
+                equalWithRound(eventElements.first().width(), (slot.width() - 8 - rightOffset) / 2);
+                equalWithRound(eventElements.last().offset().top, slot.offset().top);
+                equalWithRound(eventElements.last().height(), slotHeight(view.content.find("table"), 4));
+                equalWithRound(eventElements.last().width(), Math.floor((slot.width() - 8 - rightOffset) / 2));
+            });
+
+            test("events with same start time - does not move events from other date slots", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "other slot event" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.content.find("div.k-event");
+                var firstSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondSlot = view.content.find("tr").eq(8).find("td:last");
+
+                equal(eventElements.length, 3);
+
+                equalWithRound(eventElements.first().offset().top, firstSlot.offset().top);
+
+                equalWithRound(eventElements.eq(1).offset().left, applyDefaultLeftOffset(firstSlot.offset().left) + eventElements.first().width() + 4);
+
+                equalWithRound(eventElements.last().offset().top, secondSlot.offset().top);
+            });
+
+            test("events with same start time - does not move events from same date slots with which does not collide", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "no collision" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.content.find("div.k-event");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(13).find("td:first");
+
+                equal(eventElements.length, 3);
+
+                equalWithRound(eventElements.first().offset().top, firstTimeSlot.offset().top);
+
+                equalWithRound(eventElements.eq(1).offset().left, applyDefaultLeftOffset(firstTimeSlot.offset().left) + eventElements.first().width() + 4);
+
+                equalWithRound(eventElements.last().offset().top, secondTimeSlot.offset().top);
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left));
+            });
+
+            test("long events reposition other events in the same date slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.content.find("div.k-event");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
+
+                equalWithRound(eventElements.first().offset().top, firstTimeSlot.offset().top);
+                equalWithRound(eventElements.last().offset().top, secondTimeSlot.offset().top);
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left) + eventElements.first().width() + 4);
+            });
+
+            test("long events reposition other events in the same time slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "second same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.content.find("div.k-event");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
+
+                equalWithRound(eventElements.first().offset().top, firstTimeSlot.offset().top);
+                equalWithRound(eventElements.first().width(), (firstTimeSlot.width() - 12 - rightOffset) / 3);
+                equalWithRound(eventElements.eq(1).offset().left, applyDefaultLeftOffset(firstTimeSlot.offset().left) + eventElements.first().width() + 4);
+                equalWithRound(eventElements.last().offset().top, secondTimeSlot.offset().top);
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left) + eventElements.first().width() + 4);
+            });
+
+            test("subsequent events have same left position", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "second event" },
+                ];
+
+                view.render(events);
+
+                var eventElements = view.content.find("div.k-event");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(9).find("td:first");
+
+                equal(eventElements.first().offset().left, applyDefaultLeftOffset(firstTimeSlot.offset().left));
+                equal(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left));
+            });
+
+/*
+            test("long events reposition other events in the same date slot with multiple long overlapping event", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "second same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "another second same slot event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 18, 0, 0), title: "another log event which overlaps the second one" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 17, 0, 0), end: new Date(2013, 1, 26, 19, 0, 0), title: "another log event" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.content.find("div.k-event");
+                var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
+                var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
+                var thirdTimeSlot = view.content.find("tr").eq(16).find("td:first");
+
+                equalWithRound(eventElements.first().offset().top, firstTimeSlot.offset().top);
+                equalWithRound(eventElements.first().width(), Math.floor((firstTimeSlot.width() - rightOffset) / 4));
+
+                equalWithRound(eventElements.eq(5).offset().left, eventElements.eq(4).offset().left + eventElements.eq(4).width());
+
+                equalWithRound(eventElements.eq(6).offset().left, thirdTimeSlot.offset().left);
+            });
+*/
+            test("same time slot events are sorted by start time and end time", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "same as first" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.content.find("div.k-event");
+                equal(eventElements.eq(0).find("dd").text(), "second event");
+                equal(eventElements.eq(1).find("dd").text(), "first event");
+                equal(eventElements.eq(2).find("dd").text(), "same as first");
+            });
+
+
+            test("slotindex is render as attribute", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var eventElement = view.content.find("div.k-event");
+
+                equal(eventElement.attr("data-slot-idx"), 0);
+            });
+
+            test("start end index is render as attribute", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var eventElement = view.content.find("div.k-event");
+
+                equal(eventElement.attr("data-start-end-idx"), "8-12");
+            });
+
+            test("position multiple overlapping all day events in a single slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 13, 0, 0), title: "second event" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.datesHeader.find("div.k-event");
+
+                var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+                var slotWidth = 0;
+
+                view.element.find(".k-scheduler-header-all-day td").each(function() {
+                    slotWidth += $(this).innerWidth();
+                });
+
+                equalWithRound(eventElements.first().offset().top, slotOffset.top);
+
+                equalWithRound(eventElements.first().offset().left, applyDefaultLeftOffset(slotOffset.left));
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(slotOffset.left));
+
+                equalWithRound(eventElements.first().width(), applyDefaultRightOffset(slotWidth));
+                equalWithRound(eventElements.first().width(), eventElements.last().width());
+            });
+
+            test("position multiple not overlapping all day events", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0),
+                            new Date(2013, 1, 28, 0, 0, 0),
+                            new Date(2013, 1, 29, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "second event" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.datesHeader.find("div.k-event");
+
+                var firstEventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+                var secondEventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(2).offset();
+
+                equalWithRound(eventElements.first().offset().top, firstEventSlotOffset.top);
+                equalWithRound(eventElements.last().offset().top, secondEventSlotOffset.top);
+
+                equalWithRound(eventElements.first().offset().left, applyDefaultLeftOffset(firstEventSlotOffset.left));
+                equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondEventSlotOffset.left));
+            });
+
+            test("set height of multiple overlapping all day events across multiple slots", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0),
+                            new Date(2013, 1, 28, 0, 0, 0),
+                            new Date(2013, 1, 29, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "first event" },
+                    {uid:"uid", start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 28, 13, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "third event" }
+                ];
+
+                view.render(events);
+
+                var eventElements = view.datesHeader.find("div.k-event");
+
+                var eventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+                var eventSlotHeigth = view.element.find(".k-scheduler-header-all-day td").eq(0).height();
+                var eventHeight = view._allDayHeaderHeight;
+
+                equalWithRound(eventElements.eq(0).offset().top, eventSlotOffset.top);
+                equalWithRound(eventElements.eq(1).offset().top, eventSlotOffset.top + eventHeight);
+                equalWithRound(eventElements.eq(2).offset().top, eventSlotOffset.top);
+            });
+
+            test("set top of multiple overlapping all day events in same slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event", isAllDay: true },
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event", isAllDay: true },
+                ];
+
+                view.render(events);
+
+                var eventElements = view.datesHeader.find("div.k-event");
+
+                var eventSlotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
+                var eventHeight = view._allDayHeaderHeight;
+
+                equalWithRound(eventElements.eq(0).offset().top, eventSlotOffset.top);
+                equalWithRound(eventElements.eq(1).offset().top, eventSlotOffset.top + eventHeight);
+            });
+
+            test("close button is rendered if set as editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.render(events);
+
+                equal(view.content.find(".k-event a>.k-i-close").length, 1);
+                equal(view.datesHeader.find(".k-event a>.k-i-close").length, 1);
+            });
+
+            test("close button is not rendered if editable.destroy is false", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: { destroy: false },
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.render(events);
+
+                ok(!view.content.find(".k-event a>.k-i-close").length);
+                ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
+            });
+
+            test("close button is not visible by default if set as editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.render(events);
+
+                equal(view.content.find(".k-event a:has(.k-i-close)").css("display"), "none");
+                equal(view.datesHeader.find(".k-event a:has(.k-i-close)").css("display"), "none");
+            });
+
+            test("close button is rendered if set as editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.render(events);
+
+                equal(view.datesHeader.find(".k-event a:has(.k-i-close)").length, 1);
+            });
+
+            test("close button is not rendered if set to not editable", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: false,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" },
+                    {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
+                ];
+
+                view.render(events);
+
+                ok(!view.content.find(".k-event a>.k-i-close").length);
+                ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
+            });
+
+            test("clicking on close button triggers destroy event", 1, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        remove: function() {
+                            ok(true);
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.render(events);
+
+                view.content.find(".k-event a:has(.k-i-close)").click();
+            });
+
+            test("double clicking a cell triggers add event", 2, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        add: function(e) {
+                            var event = e.eventInfo;
+
+                            equal(event.start.getTime(), new Date(2013, 1, 26, 2, 0, 0).getTime());
+                            equal(event.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                view.content.find("td").eq(2).trigger("dblclick");
+            });
+
+            test("double clicking a cell in the datesHeader triggers add event", 3, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        add: function(e) {
+                            var event = e.eventInfo;
+
+                            equal(event.start.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
+                            equal(event.end.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
+                            equal(event.isAllDay, true);
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                view.datesHeader.find(".k-scheduler-header-all-day td").trigger("dblclick");
+            });
+
+            test("double clicking an all day event triggers edit event", 1, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        edit: function(e) {
+                            ok(e.uid);
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event", isAllDay: true }
+                ];
+
+                view.render(events);
+
+                view.datesHeader.find(".k-event").trigger("dblclick");
+            });
+
+            test("double clicking an event triggers edit event", 1, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        edit: function(e) {
+                            ok(e.uid);
+                        },
+                        editable: true,
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.render(events);
+
+                view.content.find(".k-event").trigger("dblclick");
+            });
+
+            test("double clicking an event does not trigger edit event if not editable", 0, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: false,
+                        edit: function(e) {
+                            ok(false);
+                        },
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.render(events);
+
+                view.content.find(".k-event").trigger("dblclick");
+            });
+
+            test("double clicking an event does not trigger edit event if update is false", 0, function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        editable: { update: false },
+                        edit: function(e) {
+                            ok(false);
+                        },
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
+                ];
+
+                view.render(events);
+
+                view.content.find(".k-event").trigger("dblclick");
+            });
+
+            test("_rangeToDates returns date for slot", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+
+                var result = view._rangeToDates(view.content.find("td").eq(2));
+
+                equal(result.start.getTime(), new Date(2013, 1, 26, 2, 0, 0).getTime());
+                equal(result.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());
+            });
+
+            test("_dateSlotIndex returns correct index if date midnight", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+                equal(view._dateSlotIndex(new Date(2013,1,27,0,0,0)), 1);
+            });
+
+            test("_dateSlotIndex returns correct index if date is same as endTime", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                view = setup({
+                        endTime: new Date(2013, 1, 27, 10, 0, 0),
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                view.renderLayout(selectedDate);
+                equal(view._dateSlotIndex(new Date(2013,1,27,10,0,0)), 1);
+            });
+
+            test("clicking the cell link trigger navigate event", 2, function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.bind("navigate", function(e) {
+                    equal(e.view, "day");
+                    equal(e.date.getTime(), new Date(2013, 1, 2).getTime());
+                });
+                view.datesHeader.find("th:first").find(".k-nav-day").click();
+            });
+
+            test("arrow is shown if multiday event starts before view's start date", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2) }]);
+
+                equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+            });
+
+            test("arrow is shown if multiday event ends after view's end date", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 2), end: new Date(2013, 1, 4) }]);
+
+                equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
+            });
+
+            test("arrow is shown if multiday event starts before view's start date and ends after view's end date", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 4) }]);
+
+                equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
+                equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+            });
+
+            test("refresh icon is shown if multiday event has recurring rule", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+                view.renderLayout(new Date(2013, 1, 2));
+
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), recurrence: "FREQ=DAILY" }]);
+
+                equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

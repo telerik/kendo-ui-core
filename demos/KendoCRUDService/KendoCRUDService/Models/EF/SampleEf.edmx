@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SampleModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SampleModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SampleModelStoreContainer">
           <EntitySet Name="Categories" EntityType="SampleModel.Store.Categories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CustomerCustomerDemo" EntityType="SampleModel.Store.CustomerCustomerDemo" store:Type="Tables" Schema="dbo" />
@@ -13,12 +13,15 @@
           <EntitySet Name="Employees" EntityType="SampleModel.Store.Employees" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmployeeTerritories" EntityType="SampleModel.Store.EmployeeTerritories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Intraday" EntityType="SampleModel.Store.Intraday" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Meeting" EntityType="SampleModel.Store.Meeting" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MeetingAtendee" EntityType="SampleModel.Store.MeetingAtendee" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Order Details" EntityType="SampleModel.Store.Order Details" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Orders" EntityType="SampleModel.Store.Orders" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Products" EntityType="SampleModel.Store.Products" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Region" EntityType="SampleModel.Store.Region" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Shippers" EntityType="SampleModel.Store.Shippers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Suppliers" EntityType="SampleModel.Store.Suppliers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tasks" EntityType="SampleModel.Store.Tasks" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Territories" EntityType="SampleModel.Store.Territories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Weather" EntityType="SampleModel.Store.Weather" store:Type="Tables" store:Schema="dbo" store:Name="Weather">
             <DefiningQuery>SELECT 
@@ -53,6 +56,10 @@
           <AssociationSet Name="FK_EmployeeTerritories_Territories" Association="SampleModel.Store.FK_EmployeeTerritories_Territories">
             <End Role="Territories" EntitySet="Territories" />
             <End Role="EmployeeTerritories" EntitySet="EmployeeTerritories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeetingAtendee_Meeting" Association="SampleModel.Store.FK_MeetingAtendee_Meeting">
+            <End Role="Meeting" EntitySet="Meeting" />
+            <End Role="MeetingAtendee" EntitySet="MeetingAtendee" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Details_Orders" Association="SampleModel.Store.FK_Order_Details_Orders">
             <End Role="Orders" EntitySet="Orders" />
@@ -172,6 +179,27 @@
           <Property Name="Close" Type="decimal" Nullable="false" Precision="9" Scale="3" />
           <Property Name="Volume" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+          </Key>
+          <Property Name="MeetingID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" Nullable="false" />
+          <Property Name="Title" Type="ntext" Nullable="false" />
+          <Property Name="Description" Type="ntext" Nullable="false" />
+          <Property Name="RoomID" Type="int" />
+          <Property Name="IsAllDay" Type="bit" Nullable="false" />
+          <Property Name="Recurrence" Type="ntext" />
+        </EntityType>
+        <EntityType Name="MeetingAtendee">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+            <PropertyRef Name="AtendeeID" />
+          </Key>
+          <Property Name="MeetingID" Type="int" Nullable="false" />
+          <Property Name="AtendeeID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Order Details">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -249,6 +277,19 @@
           <Property Name="Fax" Type="nvarchar" MaxLength="24" />
           <Property Name="HomePage" Type="ntext" />
         </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" Nullable="false" />
+          <Property Name="Title" Type="ntext" Nullable="false" />
+          <Property Name="Description" Type="ntext" />
+          <Property Name="OwnerID" Type="int" />
+          <Property Name="IsAllDay" Type="bit" Nullable="false" />
+          <Property Name="Recurrence" Type="ntext" />
+        </EntityType>
         <EntityType Name="Territories">
           <Key>
             <PropertyRef Name="TerritoryID" />
@@ -258,7 +299,7 @@
           <Property Name="RegionID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'C:\WORK\KENDO\DEMOS\KENDOCRUDSERVICE\KENDOCRUDSERVICE\APP_DATA\SAMPLE.MDF.dbo.Weather' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'C:\WORK\GITHUB\KENDO\DEMOS\KENDOCRUDSERVICE\KENDOCRUDSERVICE\APP_DATA\SAMPLE.MDF.dbo.Weather' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="Weather">
           <Key>
@@ -338,6 +379,18 @@
             </Principal>
             <Dependent Role="EmployeeTerritories">
               <PropertyRef Name="TerritoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeetingAtendee_Meeting">
+          <End Role="Meeting" Type="SampleModel.Store.Meeting" Multiplicity="1" />
+          <End Role="MeetingAtendee" Type="SampleModel.Store.MeetingAtendee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="MeetingAtendee">
+              <PropertyRef Name="MeetingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -437,8 +490,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SampleModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -499,6 +551,13 @@
           <AssociationSet Name="EmployeeTerritories" Association="SampleModel.EmployeeTerritories">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Territories" EntitySet="Territories" />
+          </AssociationSet>
+          <EntitySet Name="Tasks" EntityType="SampleModel.Task" />
+          <EntitySet Name="Meetings" EntityType="SampleModel.Meeting" />
+          <EntitySet Name="MeetingAtendees" EntityType="SampleModel.MeetingAtendee" />
+          <AssociationSet Name="FK_MeetingAtendee_Meeting" Association="SampleModel.FK_MeetingAtendee_Meeting">
+            <End Role="Meeting" EntitySet="Meetings" />
+            <End Role="MeetingAtendee" EntitySet="MeetingAtendees" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -814,6 +873,54 @@
           <End Role="Employees" Type="SampleModel.Employee" Multiplicity="*" />
           <End Role="Territories" Type="SampleModel.Territory" Multiplicity="*" />
         </Association>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Type="Int32" Name="TaskID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Start" Nullable="false" />
+          <Property Type="DateTime" Name="End" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="OwnerID" />
+          <Property Type="Boolean" Name="IsAllDay" Nullable="false" />
+          <Property Type="String" Name="Recurrence" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+          </Key>
+          <Property Type="Int32" Name="MeetingID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Start" Nullable="false" />
+          <Property Type="DateTime" Name="End" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="RoomID" />
+          <Property Type="Boolean" Name="IsAllDay" Nullable="false" />
+          <Property Type="String" Name="Recurrence" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MeetingAtendees" Relationship="SampleModel.FK_MeetingAtendee_Meeting" FromRole="Meeting" ToRole="MeetingAtendee" />
+        </EntityType>
+        <EntityType Name="MeetingAtendee">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+            <PropertyRef Name="AtendeeID" />
+          </Key>
+          <Property Type="Int32" Name="MeetingID" Nullable="false" />
+          <Property Type="Int32" Name="AtendeeID" Nullable="false" />
+          <NavigationProperty Name="Meeting" Relationship="SampleModel.FK_MeetingAtendee_Meeting" FromRole="MeetingAtendee" ToRole="Meeting" />
+        </EntityType>
+        <Association Name="FK_MeetingAtendee_Meeting">
+          <End Type="SampleModel.Meeting" Role="Meeting" Multiplicity="1" />
+          <End Type="SampleModel.MeetingAtendee" Role="MeetingAtendee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="MeetingAtendee">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1017,6 +1124,42 @@
               <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="SampleModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="Recurrence" ColumnName="Recurrence" />
+                <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meetings">
+            <EntityTypeMapping TypeName="SampleModel.Meeting">
+              <MappingFragment StoreEntitySet="Meeting">
+                <ScalarProperty Name="Recurrence" ColumnName="Recurrence" />
+                <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeetingAtendees">
+            <EntityTypeMapping TypeName="SampleModel.MeetingAtendee">
+              <MappingFragment StoreEntitySet="MeetingAtendee">
+                <ScalarProperty Name="AtendeeID" ColumnName="AtendeeID" />
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1039,7 +1182,7 @@
     <Diagrams>
       <Diagram Name="SampleEf">
         <EntityTypeShape EntityType="SampleModel.Category" Width="1.5" PointX="3" PointY="19.5" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="SampleModel.CustomerDemographic" Width="1.5" PointX="0.75" PointY="2.5" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.CustomerDemographic" Width="2.125" PointX="0.75" PointY="2.5" Height="1.59568359375" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Customer" Width="1.5" PointX="3" PointY="1.375" Height="3.7109993489583335" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Employee" Width="1.5" PointX="3" PointY="9.25" Height="5.2494108072916674" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Intraday" Width="1.5" PointX="7.75" PointY="5.75" Height="2.5571907552083335" IsExpanded="true" />
@@ -1098,7 +1241,7 @@
           <ConnectorPoint PointX="8" PointY="10.865143229166666" />
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.CustomerCustomerDemo" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="3.297841796875" />
+          <ConnectorPoint PointX="2.875" PointY="3.297841796875" />
           <ConnectorPoint PointX="3" PointY="3.297841796875" />
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.EmployeeTerritories" ManuallyRouted="false">
@@ -1111,7 +1254,14 @@
           <ConnectorPoint PointX="7.677083333333333" PointY="10.307571614583333" />
           <ConnectorPoint PointX="8" PointY="10.307571614583333" />
         </AssociationConnector>
-      </Diagram>
+        <EntityTypeShape EntityType="SampleModel.Task" Width="1.5" PointX="10.375" PointY="4.75" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="12.125" PointY="4.75" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="SampleModel.MeetingAtendee" Width="1.5" PointX="14.375" PointY="5.375" Height="1.5956835937500031" />
+        <AssociationConnector Association="SampleModel.FK_MeetingAtendee_Meeting" >
+          <ConnectorPoint PointX="13.625" PointY="6.1728417968750016" />
+          <ConnectorPoint PointX="14.375" PointY="6.1728417968750016" />
+        </AssociationConnector>
+        </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>

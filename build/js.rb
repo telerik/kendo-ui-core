@@ -60,7 +60,8 @@ file_merge "src/kendo.aspnetmvc.js" => [
     "src/aspnetmvc/kendo.combobox.aspnetmvc.js",
     "src/aspnetmvc/kendo.multiselect.aspnetmvc.js",
     "src/aspnetmvc/kendo.imagebrowser.aspnetmvc.js",
-    "src/aspnetmvc/kendo.validator.aspnetmvc.js"
+    "src/aspnetmvc/kendo.validator.aspnetmvc.js",
+    "src/aspnetmvc/kendo.scheduler.aspnetmvc.js"
 ]
 file "src/kendo.aspnetmvc.js" => JS_BUILDFILE
 
@@ -111,10 +112,16 @@ WEB_JS = FileList[
     "src/kendo.slider.js",
     "src/kendo.splitter.js",
     "src/kendo.upload.js",
-    "src/kendo.window.js"
+    "src/kendo.window.js",
+    "src/kendo.scheduler.view.js",
+    "src/kendo.scheduler.dayview.js",
+    "src/kendo.scheduler.agendaview.js",
+    "src/kendo.scheduler.monthview.js",
+    "src/kendo.scheduler.recurrence.js",
+    "src/kendo.scheduler.js"
 ]
 
-WEB_SRC_JS = FileList[WEB_JS].include('src/cultures/*.js', 'src/kendo.web.js').exclude('**/*.min.js')
+WEB_SRC_JS = FileList[WEB_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.web.js').exclude('**/*.min.js')
 WEB_MIN_JS = FileList[WEB_SRC_JS].ext('min.js').include('src/jquery.min.js')
 
 DATAVIZ_JS = FileList[
@@ -137,7 +144,7 @@ DATAVIZ_JS = FileList[
     "src/kendo.dataviz.vml.js"
 ]
 
-DATAVIZ_SRC_JS = FileList[DATAVIZ_JS].include('src/cultures/*.js', 'src/kendo.dataviz.js').exclude('**/*.min.js')
+DATAVIZ_SRC_JS = FileList[DATAVIZ_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.dataviz.js').exclude('**/*.min.js')
 DATAVIZ_MIN_JS = FileList[DATAVIZ_SRC_JS].ext('min.js').include('src/jquery.min.js')
 
 MOBILE_JS = FileList[
@@ -174,7 +181,7 @@ MOBILE_JS = FileList[
     "src/kendo.mobile.tabstrip.js"
 ]
 
-MOBILE_SRC_JS = FileList[MOBILE_JS].include('src/cultures/*.js', 'src/kendo.mobile.js').exclude('**/*.min.js')
+MOBILE_SRC_JS = FileList[MOBILE_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.mobile.js').exclude('**/*.min.js')
 MOBILE_MIN_JS = FileList[MOBILE_SRC_JS].ext('min.js').include('src/jquery.min.js')
 
 COMPLETE_MIN_JS = (WEB_MIN_JS + DATAVIZ_MIN_JS + MOBILE_MIN_JS).include('src/kendo.all.min.js').uniq

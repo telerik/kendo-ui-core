@@ -1063,7 +1063,7 @@ function pad(number, digits, end) {
     }
 
     //if date's day is different than the typed one - adjust
-    function adjustDate(date, hours) {
+    function adjustForBrazillianTimezone(date, hours) {
         if (!hours && date.getHours() === 23) {
             date.setHours(date.getHours() + 2);
         }
@@ -1354,7 +1354,7 @@ function pad(number, digits, end) {
             value = new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds));
         } else {
             value = new Date(year, month, day, hours, minutes, seconds, milliseconds);
-            adjustDate(value, hours);
+            adjustForBrazillianTimezone(value, hours);
         }
 
         if (year < 100) {
@@ -1368,7 +1368,7 @@ function pad(number, digits, end) {
         return value;
     }
 
-    kendo._adjustDate = adjustDate;
+    kendo._adjustDate = adjustForBrazillianTimezone;
 
     kendo.parseDate = function(value, formats, culture) {
         if (objectToString.call(value) === "[object Date]") {
@@ -3147,15 +3147,14 @@ function pad(number, digits, end) {
             return base;
         }
 
-        function convert(date, from, to) {
-            if (!to) {
-                to = from;
-                from = null;
+        function convert(date, fromOffset, toOffset) {
+            if (typeof fromOffset == STRING) {
+                fromOffset = this.offset(date, fromOffset);
             }
 
-            var fromOffset = from ? this.offset(date, from) : date.getTimezoneOffset();
-
-            var toOffset = this.offset(date, to);
+            if (typeof toOffset == STRING) {
+                toOffset = this.offset(date, toOffset);
+            }
 
             var fromLocalOffset = date.getTimezoneOffset();
 
@@ -3166,12 +3165,171 @@ function pad(number, digits, end) {
             return new Date(date.getTime() + (toLocalOffset - fromLocalOffset) * 60000);
         }
 
+        function apply(date, timezone) {
+           return this.convert(date, date.getTimezoneOffset(), timezone);
+        }
+
+        function remove(date, timezone) {
+           return this.convert(date, timezone, date.getTimezoneOffset());
+        }
+
         return {
            zones: {},
            rules: {},
            offset: offset,
            convert: convert,
+           apply: apply,
+           remove: remove,
            abbr: abbr
+        };
+    })();
+
+    kendo.date = (function(){
+        var MS_PER_MINUTE = 60000,
+            MS_PER_DAY = 86400000;
+
+        function adjustForBrazillianTimezone(date, hours) {
+            if (hours === 0 && date.getHours() === 23) {
+                date.setHours(date.getHours() + 2);
+            }
+        }
+
+        function setDayOfWeek(date, day, dir) {
+            dir = dir || 1;
+            day = ((day - date.getDay()) + (7 * dir)) % 7;
+
+            date.setDate(date.getDate() + day);
+        }
+
+        function dayOfWeek(date, day) {
+            date = new Date(date);
+            setDayOfWeek(date, day);
+            return date;
+        }
+
+        function firstDayOfMonth(date) {
+            return new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                1
+            );
+        }
+
+        function lastDayOfMonth(date) {
+            var last = new Date(date.getFullYear(), date.getMonth() + 1, 0),
+                first = firstDayOfMonth(date),
+                timeOffset = Math.abs(last.getTimezoneOffset() - first.getTimezoneOffset());
+
+            if (timeOffset) {
+                last.setHours(first.getHours() + (timeOffset / 60));
+            }
+
+            return last;
+        }
+
+        function getDate(date) {
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
+            adjustForBrazillianTimezone(date, 0);
+            return date;
+        }
+
+        function getMilliseconds(date) {
+            return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
+        }
+
+        function isInTimeRange(value, min, max) {
+            var msMin = getMilliseconds(min),
+                msMax = getMilliseconds(max),
+                msValue;
+
+            if (!value || msMin == msMax) {
+                return true;
+            }
+
+            if (min >= max) {
+                max += MS_PER_DAY;
+            }
+
+            msValue = getMilliseconds(value);
+
+            if (msMin > msValue) {
+                msValue += MS_PER_DAY;
+            }
+
+            if (msMax < msMin) {
+                msMax += MS_PER_DAY;
+            }
+
+            return msValue >= msMin && msValue <= msMax;
+        }
+
+        function isInDateRange(value, min, max) {
+            var msMin = min.getTime(),
+                msMax = max.getTime(),
+                msValue;
+
+            if (msMin >= msMax) {
+                msMax += MS_PER_DAY;
+            }
+
+            msValue = value.getTime();
+
+            return msValue >= msMin && msValue <= msMax;
+        }
+
+        function addDays(date, offset) {
+            var hours = date.getHours();
+                date = new Date(date);
+
+            setTime(date, offset * MS_PER_DAY);
+            adjustForBrazillianTimezone(date, hours);
+            return date;
+        }
+
+        function setTime(date, time, ignoreDST) {
+            var offset = date.getTimezoneOffset(),
+                offsetDiff;
+
+            date.setTime(date.getTime() + time);
+
+            if (!ignoreDST) {
+                offsetDiff = date.getTimezoneOffset() - offset;
+                date.setTime(date.getTime() + offsetDiff * MS_PER_MINUTE);
+            }
+        }
+
+        function today() {
+            return getDate(new Date());
+        }
+
+        function isToday(date) {
+           return getDate(date).getTime() == today().getTime();
+        }
+
+        return {
+            adjustForBrazillianTimezone: adjustForBrazillianTimezone,
+            dayOfWeek: dayOfWeek,
+            setDayOfWeek: setDayOfWeek,
+            getDate: getDate,
+            isInDateRange: isInDateRange,
+            isInTimeRange: isInTimeRange,
+            isToday: isToday,
+            nextDay: function(date) {
+                return addDays(date, 1);
+            },
+            previousDay: function(date) {
+                return addDays(date, -1);
+            },
+            addDays: addDays,
+            MS_PER_DAY: MS_PER_DAY,
+            MS_PER_MINUTE: MS_PER_MINUTE,
+            setTime: setTime,
+            addDays: addDays,
+            today: today,
+            firstDayOfMonth: firstDayOfMonth,
+            lastDayOfMonth: lastDayOfMonth,
+            getMilliseconds: getMilliseconds
+            //TODO methods: combine date portion and time portion from arguments - date1, date 2
         };
     })();
 })(jQuery, eval);

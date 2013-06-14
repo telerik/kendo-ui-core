@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Scheduler</title>
+        <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../styles/web/kendo.silver.min.css" rel="stylesheet" />
+
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timezones.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.mobile.scroller.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.multiselect.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.view.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.dayview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.agendaview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.monthview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.recurrence.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+
+            html
+            {
+	            font:12px sans-serif;
+	            overflow-y:scroll;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="scheduler"></div>
+
+        <script>
+        $("#scheduler").kendoScheduler({
+            height: 800,
+            views: ["day", { name: "week", selected: true }, "month", "agenda"],
+            resources: [
+                {
+                    field: "roomId",
+                    dataSource: [
+                        { text: "Meeting Room 101", value: 1, color: "red" },
+                        { text: "Meeting Room 201", value: 2, color: "green" }
+                    ],
+                    title: "Room"
+                },
+                {
+                    field: "atendees",
+                    dataSource: [
+                        { text: "Alex", value: 1, color: "red" },
+                        { text: "Bob", value: 2, color: "green" },
+                        { text: "Charlie", value: 3, color: "blue" }
+                    ],
+                    multiple: true,
+                    title: "Atendees"
+                }
+            ],
+            dataSource: {
+                batch: true,
+                transport: {
+                    read: {
+                        url: "http://korchev:8080/service/meetings",
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: "http://korchev:8080/service/meetings/update",
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: "http://korchev:8080/service/meetings/create",
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: "http://korchev:8080/service/meetings/destroy",
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return {models: kendo.stringify(options.models)};
+                        }
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "ID",
+                        fields: {
+                            ID: { type: "number" },
+                            title: { defaultValue: "eventTitle", field: "Title", validation: { required: true } },
+                            start: { type: "date", field: "Start" },
+                            end: { type: "date", field: "End" },
+                            description: { field: "Description" },
+                            recurrence: { field: "Recurrence" },
+                            roomId: { field: "RoomID" },
+                            atendees: { field: "Atendees" },
+                            isAllDay: { type: "boolean", field: "IsAllDay" }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    </body>
+</html>

@@ -185,7 +185,7 @@
                 equal(view[1].age, 2);
             });
 
-            test("data is not sorted if serverSorting = true", function() {
+            test("data is not sorted if serverSorting = true", 3, function() {
                 var transport = new RemoteTransport({
                         read: "foo"
                     });
@@ -208,10 +208,10 @@
                 });
 
                 dataSource.query( { sort: { field: "age", dir: "desc" } } );
-                stop(1);
+                stop();
             });
 
-            test("data is not paged if serverPaging = true", function() {
+            test("data is not paged if serverPaging = true", 2, function() {
                 var transport = new RemoteTransport({
                         read: "foo"
                     });
@@ -233,7 +233,7 @@
                 });
 
                 dataSource.query( { page: 2, pageSize: 1 } );
-                stop(1);
+                stop();
             });
 
             test("group original field name is used if projection with from is set", 2, function() {
@@ -292,7 +292,7 @@
                 });
 
                 $.mockjax({
-                    url: "foo",
+                    url: "foo"
                 });
 
                 dataSource.group([{ field: "bar" }, { field: "boo" }]);
@@ -323,7 +323,7 @@
                 });
 
                 $.mockjax({
-                    url: "foo",
+                    url: "foo"
                 });
 
                 dataSource.group({
@@ -336,6 +336,7 @@
                         aggregate: "count"
                     }]
                 });
+
             });
 
             test("aggregates original field name is used if projection is set", 2, function() {
@@ -363,7 +364,7 @@
                 });
 
                 $.mockjax({
-                    url: "foo",
+                    url: "foo"
                 });
 
                 dataSource.aggregate(
@@ -1007,7 +1008,7 @@
                 equal(dataSource.total(), 1);
             });
 
-            test("query does not filter data if serverFiltering = true", function() {
+            test("query does not filter data if serverFiltering = true", 3, function() {
                 var transport = new RemoteTransport({
                         read: "foo"
                     });
@@ -1030,7 +1031,7 @@
                 });
 
                 dataSource.query( { filter: { field: "age", operator: "==", value: 2 } } );
-                stop(1);
+                stop();
             });
 
             test("cancelChanges refresh the total if serverpaging is enabled", function() {
@@ -1062,7 +1063,7 @@
                         }
                     },
                     schema: {
-                        group: "group",
+                        groups: "group",
                         total: "total"
                     },
                     group: { field: "id" },
@@ -1289,7 +1290,7 @@
                 ok($.isEmptyObject(dataSource.aggregates()));
             });
 
-            test("query does not aggregate data if serverAggregate is true", function() {
+            test("query does not aggregate data if serverAggregate is true", 1, function() {
                 var transport = new RemoteTransport({
                         read: "foo"
                     });
@@ -1309,7 +1310,7 @@
                 });
 
                 dataSource.query( {aggregate:[{ field: "foo", aggregate: "sum" }]} );
-                stop(1);
+                stop();
             });
 
             test("query does pass additional options to the transport", function() {
@@ -1888,6 +1889,60 @@
                 equal(dataSource.view().length, 1);
             });
 
+            test("fetch returns a promise", function() {
+                var dataSource = new DataSource({
+                    data: [{ id: 1, foo: "bar" }]
+                });
+
+                equal(typeof dataSource.fetch().done, "function");
+            });
+
+            test("change event resolves the promise when bound to local array", function() {
+                var dataSource = new DataSource({
+                    data: [{ id: 1, foo: "bar" }]
+                });
+
+                var promise = dataSource.fetch();
+
+                equal(promise.state(), "resolved");
+            });
+
+            asyncTest("custom transport resolves the promess when the success method is called", 1, function() {
+                var dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            setTimeout(function() {
+                                options.success([]);
+                            }, 1);
+                        }
+                    }
+                });
+
+                var promise = dataSource.fetch();
+                promise.done(function() {
+                    start();
+                    ok(true);
+                });
+            });
+
+            asyncTest("custom transport fails the promess when the error method is called", 1, function() {
+                var dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            setTimeout(function() {
+                                options.error([]);
+                            }, 1);
+                        }
+                    }
+                });
+
+                var promise = dataSource.fetch();
+
+                promise.fail(function() {
+                    start();
+                    ok(true);
+                });
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

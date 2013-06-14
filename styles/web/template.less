@@ -423,6 +423,46 @@ textarea.k-textbox:hover,
     .box-shadow(@draghandle-hover-shadow);
 }
 
+/* Scheduler */
+
+.k-scheduler,
+.k-scheduler-datecolumn
+{
+    background-color: @scheduler-background-color;
+}
+
+.k-scheduler-times tr,
+.k-scheduler-times th,
+.k-scheduler-table td,
+.k-scheduler-header th,
+.k-scheduler-header-wrap,
+.k-scheduler-times
+{
+    border-color: @cell-border-color;
+}
+
+.k-scheduler-table .k-today,
+.k-today > .k-scheduler-datecolumn
+{
+    background-color: @column-highlight-background-color;
+}
+
+.k-scheduler-now-arrow
+{
+    border-left-color: @current-time-color;
+}
+
+.k-scheduler-now-line
+{
+    background-color: @current-time-color;
+}
+
+.k-event
+{
+    border-color: rgba(0,0,0,.3); /* appointment-background-color calculate rgba black or white*/
+    background-color: rgba(255,255,255,.3); /* pallette not ready */
+}
+
 /* states */
 
 .k-state-active,
@@ -632,6 +672,7 @@ div.k-imagebrowser-dropzone em
 .k-state-disabled,
 .k-state-disabled .k-link,
 .k-state-disabled .k-button,
+.k-other-month,
 .k-other-month .k-link,
 .k-dropzone em,
 .k-tile-empty strong,
@@ -1010,6 +1051,13 @@ div.k-imagebrowser-dropzone em
 .k-draghandle
 {
     .border-radius(@draghandle-border-radius);
+}
+
+.k-more-events,
+.k-event,
+.k-event .k-link
+{
+	.border-radius(@inner-border-radius);
 }
 
 // Retina sprite

@@ -79,6 +79,20 @@
 
                 equal(observable.value, observable.items[0]);
             });
+
+            test("uses data value field if data-value-primitive is set to true", function() {
+                var dom = $('<select data-value-field="text" data-value-primitive="true" data-role="combobox" data-bind="value:value,source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+                observable.value = observable.items[1];
+
+                kendo.bind(dom, observable);
+                dom.data("kendoComboBox").select(0);
+                dom.data("kendoComboBox").trigger("change");
+
+                equal(observable.value, observable.items[0].text);
+            });
+
             test("changing value to a custom one updates the view model", function() {
                 var dom = $('<select data-text-field="text" data-role="combobox" data-bind="value:value, source:items" />');
 

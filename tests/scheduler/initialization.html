@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler initialization</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Scheduler = kendo.ui.Scheduler,
+                container;
+
+            function getDate(date) {
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+            }
+
+            module("Initialization", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                },
+                teardown: function() {
+                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                }
+            });
+
+            test("kendoScheduler attaches a scheduler object to target", function() {
+                var div = $("<div />").kendoScheduler({});
+
+                ok(div.data("kendoScheduler") instanceof Scheduler);
+            });
+
+            test("wrapper field is initialized", function() {
+               var scheduler = new Scheduler(container);
+
+               equal(scheduler.wrapper[0], container);
+           });
+
+           test("css classes are added to the wrapper", function() {
+               var scheduler = new Scheduler(container);
+
+               ok(scheduler.wrapper.hasClass("k-widget"));
+               ok(scheduler.wrapper.hasClass("k-scheduler"));
+            });
+
+            test("toolbar is created", function() {
+                var scheduler = new Scheduler(container);
+
+                ok(scheduler.wrapper.find(".k-scheduler-toolbar").length);
+                equal(scheduler.wrapper.find(".k-scheduler-toolbar")[0], scheduler.toolbar[0]);
+            });
+
+            test("navigation button are added to the toolbar", function() {
+                var scheduler = new Scheduler(container);
+                equal(scheduler.wrapper.find("ul.k-scheduler-navigation li").length, 4);
+            });
+
+            test("today button text is read from messages", function() {
+                var scheduler = new Scheduler(container, {
+                    messages: {
+                        today: "foo"
+                    }
+                });
+
+                equal(scheduler.wrapper.find("li.k-nav-today").text(), "foo");
+            });
+
+            test("today is selected by default", function() {
+                var scheduler = new Scheduler(container),
+                    today = new Date();
+
+                equal(scheduler.date().getTime(), getDate(today).getTime());
+            });
+
+            test("selected date is read from the options", function() {
+                var date = new Date("1/2/2013"),
+                    scheduler = new Scheduler(container, {
+                        date: date
+                    });
+
+                equal(scheduler.date().getTime(), date.getTime());
+            });
+
+            test("selected date is displayed", function() {
+                var scheduler = new Scheduler(container, {
+                    date: new Date("1/2/2013")
+                });
+
+                equal(scheduler.wrapper.find("li.k-nav-current").text(), "Wednesday, January 02, 2013");
+            });
+
+            test("custom format is applied to the selected date", function() {
+                var scheduler = new Scheduler(container, {
+                    date: new Date("1/2/2013"),
+                    views: [
+                    {
+                        name: "day",
+                        selectedDateFormat: "{0:d}"
+                    }
+                    ]
+                });
+
+                equal(scheduler.wrapper.find("li.k-nav-current").text(), "1/2/2013");
+            });
+
+            test("changing selected date updates the label", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.date(new Date("2/2/2013"));
+
+                equal(scheduler.wrapper.find("li.k-nav-current").text(), "Saturday, February 02, 2013");
+            });
+
+            test("clicking on the today selects today's date", function() {
+                var scheduler = new Scheduler(container, {
+                    date: new Date("1/2/2013")
+                });
+
+                scheduler.toolbar.find(".k-nav-today").click();
+
+                equal(scheduler.date().getTime(), getDate(new Date()).getTime());
+            });
+
+            test("clicking on the next date calls the view", function() {
+                var selectedDate = new Date("1/2/2013"),
+                    scheduler = new Scheduler(container, {
+                        date: selectedDate
+                    });
+
+                var view = stub(scheduler.view(), "nextDate");
+
+                scheduler.toolbar.find(".k-nav-next").click();
+
+                equal(view.calls("nextDate"), 1);
+            });
+
+            test("clicking on the prev date calls the view", function() {
+                var selectedDate = new Date("1/2/2013"),
+                    scheduler = new Scheduler(container, {
+                        date: selectedDate
+                    });
+
+                var view = stub(scheduler.view(), "previousDate");
+
+                scheduler.toolbar.find(".k-nav-prev").click();
+
+                equal(view.calls("previousDate"), 1);
+            });
+
+            test("clicking on the current time opens a calendar", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.toolbar.find(".k-nav-current").click();
+
+                ok(scheduler.calendar);
+                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.date().getTime());
+            });
+
+            test("selecting date via the calendar updates the selectedDate value", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.toolbar.find(".k-nav-current").click();
+
+                scheduler.calendar.value(new Date("4/4/2013"));
+                scheduler.calendar.trigger("change");
+
+                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.date().getTime());
+            });
+
+            test("view buttons are added to the toolbar", function() {
+                var scheduler = new Scheduler(container, {
+                    views: ["day"]
+                });
+
+                ok(scheduler.toolbar.find(".k-view-day").length);
+                equal(scheduler.toolbar.find(".k-view-day").text(), "Day");
+            });
+
+            test("first view is selected", function() {
+                var scheduler = new Scheduler(container, {
+                    views: ["day"]
+                });
+
+                ok(scheduler.toolbar.find(".k-view-day").hasClass("k-state-selected"));
+                equal(scheduler.view().name, "day");
+            });
+
+            test("view is selected", function() {
+                var scheduler = new Scheduler(container, {
+                    views: ["day", { name: "week", selected: true }]
+                });
+
+                ok(scheduler.toolbar.find(".k-view-week").hasClass("k-state-selected"));
+                equal(scheduler.view().name, "week");
+            });
+
+            test("day and week view are rendered by default", function() {
+                var scheduler = new Scheduler(container, { });
+
+                ok(scheduler.toolbar.find(".k-view-day").length);
+                ok(scheduler.toolbar.find(".k-view-week").length);
+            });
+
+            test("default views custom options are merged", function() {
+                var scheduler = new Scheduler(container, {
+                    views: [{
+                        name: "day",
+                        title: "My Custom Day View Title"
+                    }]
+                });
+
+                equal(scheduler.toolbar.find(".k-view-day").text(), "My Custom Day View Title");
+            });
+
+            test("error is thrown if invalid view is set", 1, function() {
+                throws(function() {
+                    var scheduler = new Scheduler(container, {
+                        views: [ "NoExistingView" ]
+                    })
+                });
+            });
+
+            test("clicking on the view navigation selects the view", function() {
+                var scheduler = new Scheduler(container, { });
+
+                scheduler.toolbar.find(".k-view-week").click();
+
+                equal(scheduler.view().name, "week");
+                ok(scheduler.toolbar.find(".k-view-week").hasClass("k-state-selected"));
+            });
+
+            test("clicking on the view navigation deselects the other views", function() {
+                var scheduler = new Scheduler(container, { });
+
+                scheduler.toolbar.find(".k-view-week").click();
+
+                equal(scheduler.toolbar.find(".k-state-selected").length, 1);
+            });
+
+            test("default view is created its string name", function() {
+                var scheduler = new Scheduler(container, {
+                    views: [ "day" ]
+                });
+
+                ok(scheduler.view() instanceof kendo.ui.MultiDayView);
+                equal(scheduler.view().element[0], scheduler.wrapper[0]);
+            });
+
+            test("default view is created with provided options", function() {
+                var scheduler = new Scheduler(container, {
+                    views: [ { title: "foo", name: "day" }]
+                });
+
+                ok(scheduler.view() instanceof kendo.ui.MultiDayView);
+                equal(scheduler.view().title, "foo");
+            });
+
+            test("custom view is instantiated", function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                    name: "foo",
+                    renderLayout: $.noop,
+                    dateForTitle: $.noop,
+                    render: $.noop,
+                });
+
+                var scheduler = new Scheduler(container, {
+                    views: [MyCustomView]
+                });
+
+                ok(scheduler.view() instanceof MyCustomView);
+            });
+
+            test("selected date is passed to view render method", 1, function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "foo",
+                        dateForTitle: $.noop,
+                        render: $.noop,
+                        renderLayout: function(selectedDate) {
+                            ok(selectedDate);
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView]
+                    });
+            });
+
+            test("switching between views destroyes the view", 2, function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "foo",
+                        dateForTitle: $.noop,
+                        render: $.noop,
+                        renderLayout: function(selectedDate) {
+                        },
+                        destroy: function() {
+                            ok(true);
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView, "day"]
+                    });
+
+                scheduler.view("day");
+            });
+
+            test("changing dates re-renders current view", 2, function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "foo",
+                        dateForTitle: $.noop,
+                        render: $.noop,
+                        renderLayout: function(selectedDate) {
+                            ok(true);
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView]
+                    });
+
+                scheduler.date(new Date("1/2/2013"));
+            });
+
+            test("top level options are propagated to the view", function() {
+                var scheduler = new Scheduler(container, {
+                    views: [ "day" ],
+                    allDaySlot: false
+                });
+
+                equal(scheduler.view().options.allDaySlot, false);
+            });
+
+            test("top level options are propageted to the custom views", function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "foo",
+                        dateForTitle: $.noop,
+                        render: $.noop,
+                        renderLayout: function(selectedDate) {
+                            ok(true);
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView],
+                        allDaySlot: false
+                    });
+
+                equal(scheduler.view().options.allDaySlot, false);
+            });
+
+            test("events are re-position on window resize", function() {
+                var scheduler = new Scheduler(container, { });
+
+                var view = stub(scheduler.view(), "render");
+
+                $(window).trigger("resize");
+
+                equal(view.calls("render"), 1);
+            });
+
+            test("renderEvent is called with events as plain objects", 1, function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "foo",
+                        dateForTitle: $.noop,
+                        render: function(events) {
+                            ok(!(events[0] instanceof kendo.data.SchedulerEvent));
+                        },
+                        renderLayout: function() {
+                            this.startDate = new Date();
+                            this.endDate = new Date();
+                        }
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView],
+                        dataSource: {
+                            data: [ { start: new Date(), end: new Date(), title: "" }]
+                        }
+                    });
+            });
+
+            test("view is called when navigate is triggered", function() {
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "view1",
+                        dateForTitle: $.noop,
+                        render: $.noop,
+                        renderLayout: $.noop
+                    }),
+                    MyCustomView2 = kendo.ui.SchedulerView.extend({
+                        name: "view2",
+                        dateForTitle: $.noop,
+                        render: $.noop,
+                        renderLayout: $.noop
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView, MyCustomView2],
+                        dataSource: { }
+                    });
+
+                scheduler.view().trigger("navigate", { view: "view2", date: new Date(2013, 1, 2) });
+
+                equal(scheduler.view().name, "view2");
+                equal(scheduler.date().getTime(), new Date(2013, 1, 2).getTime());
+            });
+
+            test("rebind is called once when navigating between views", function() {
+
+                var MyCustomView = kendo.ui.SchedulerView.extend({
+                        name: "view1",
+                        dateForTitle: $.noop,
+                        render: $.noop,
+                        renderLayout: $.noop
+                    }),
+                    MyCustomView2 = kendo.ui.SchedulerView.extend({
+                        name: "view2",
+                        dateForTitle: $.noop,
+                        render: $.noop,
+                        renderLayout: $.noop
+                    }),
+                    scheduler = new Scheduler(container, {
+                        views: [MyCustomView, MyCustomView2],
+                        dataSource: { }
+                    }),
+                    rebindStub = stub(scheduler, "rebind");
+
+                scheduler.view().trigger("navigate", { view: "view2", date: new Date(2013, 1, 2) });
+
+                equal(rebindStub.calls("rebind"), 1);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

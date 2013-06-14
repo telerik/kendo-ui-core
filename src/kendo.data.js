@@ -346,6 +346,10 @@ kendo_module({
             }
 
             context.trigger(type, event);
+
+            if (type == CHANGE && context._notifyChange) {
+                context._notifyChange(event);
+            }
         };
     }
 
@@ -614,6 +618,14 @@ kendo_module({
             return parse ? parse(value) : value;
         },
 
+        _notifyChange: function(e) {
+            var action = e.action;
+
+            if (action == "add" || action == "remove") {
+                this.dirty = true;
+            }
+        },
+
         editable: function(field) {
             field = (this.fields || {})[field];
             return field ? field.editable !== false : true;
@@ -668,6 +680,7 @@ kendo_module({
             idx,
             length,
             fields = {},
+            originalName,
             id = proto.id;
 
         if (id) {
@@ -698,18 +711,19 @@ kendo_module({
             field = proto.fields[name];
             type = field.type || "default";
             value = null;
+            originalName = name;
 
             name = typeof (field.field) === STRING ? field.field : name;
 
             if (!field.nullable) {
-                value = proto.defaults[name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
+                value = proto.defaults[originalName !== name ? originalName : name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
             }
 
             if (options.id === name) {
                 proto._defaultId = value;
             }
 
-            proto.defaults[name] = value;
+            proto.defaults[originalName !== name ? originalName : name] = value;
 
             field.parse = field.parse || parsers[type];
         }
@@ -1962,6 +1976,7 @@ kendo_module({
             that._map = {};
             that._prefetch = {};
             that._data = [];
+            that._pristineData = [];
             that._ranges = [];
             that._view = [];
             that._pristine = [];
@@ -2071,6 +2086,14 @@ kendo_module({
             return this.insert(this._data.length, model);
         },
 
+        _createNewModel: function(model) {
+            if (this.reader.model) {
+                return  new this.reader.model(model);
+            }
+
+            return new ObservableObject(model);
+        },
+
         insert: function(index, model) {
             if (!model) {
                 model = index;
@@ -2078,11 +2101,7 @@ kendo_module({
             }
 
             if (!(model instanceof Model)) {
-                if (this.reader.model) {
-                    model = new this.reader.model(model);
-                } else {
-                    model = new ObservableObject(model);
-                }
+                model = this._createNewModel(model);
             }
 
             if (this._isServerGrouped()) {
@@ -2152,14 +2171,13 @@ kendo_module({
         },
 
         cancelChanges: function(model) {
-            var that = this,
-                pristine = that._readData(that._pristine);
+            var that = this;
 
             if (model instanceof kendo.data.Model) {
                 that._cancelModel(model);
             } else {
                 that._destroyed = [];
-                that._data = that._observe(pristine);
+                that._data = that._observe(that._pristineData);
                 if (that.options.serverPaging) {
                     that._total = that.reader.total(that._pristine);
                 }
@@ -2191,7 +2209,7 @@ kendo_module({
                 response = result.response,
                 idx = 0,
                 serverGroup = that._isServerGrouped(),
-                pristine = that._readData(that._pristine),
+                pristine = that._pristineData,
                 type = result.type,
                 length;
 
@@ -2261,7 +2279,7 @@ kendo_module({
         },
 
         _eachPristineItem: function(callback) {
-            this._eachItem(this._readData(this._pristine), callback);
+            this._eachItem(this._pristineData, callback);
         },
 
        _eachItem: function(data, callback) {
@@ -2332,17 +2350,16 @@ kendo_module({
             var that = this,
                 idx,
                 length,
-                promises = [];
-
-            data = that.reader.serialize(data);
+                promises = [],
+                converted = that.reader.serialize(toJSON(data));
 
             if (that.options.batch) {
                 if (data.length) {
-                    promises.push(that._promise( { data: { models: toJSON(data) } }, data , method));
+                    promises.push(that._promise( { data: { models: converted } }, data , method));
                 }
             } else {
                 for (idx = 0, length = data.length; idx < length; idx++) {
-                    promises.push(that._promise( { data: data[idx].toJSON() }, [ data[idx] ], method));
+                    promises.push(that._promise( { data: converted[idx] }, [ data[idx] ], method));
                 }
             }
 
@@ -2390,6 +2407,8 @@ kendo_module({
             }
 
             data = that._readData(data);
+
+            that._pristineData = data.slice(0);
 
             that._data = that._observe(data);
 
@@ -2664,11 +2683,25 @@ kendo_module({
         fetch: function(callback) {
             var that = this;
 
-            if (callback && isFunction(callback)) {
-                that.one(CHANGE, callback);
-            }
+            return $.Deferred(function(deferred) {
+                var success = function(e) {
+                    that.unbind(ERROR, error);
 
-            that._query();
+                    deferred.resolve();
+
+                    if (callback) {
+                        callback.call(that, e);
+                    }
+                };
+
+                var error = function(e) {
+                    deferred.reject(e);
+                };
+
+                that.one(CHANGE, success);
+                that.one(ERROR, error);
+                that._query();
+            }).promise();
         },
 
         _query: function(options) {

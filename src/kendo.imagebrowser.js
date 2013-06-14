@@ -661,6 +661,7 @@ kendo_module({
                 transport.path = proxy(that.path, that);
                 dataSource.transport = transport;
             }
+
             if (isPlainObject(options.schema)) {
                 dataSource.schema = options.schema;
             } else if (transport.type && isPlainObject(kendo.data.schemas[transport.type])) {

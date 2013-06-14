@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler Resources</title>
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.tooltip.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.agendaview.js"></script>
+        <script src="../../src/kendo.scheduler.monthview.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler Resources</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var div = $("<div>").width(500).height(1000);
+
+            function equalBackgroundColor(element, color) {
+                equal($(element)[0].style.backgroundColor, color);
+            }
+
+            module("resources", {
+                setup: function() {
+                    div.appendTo(document.body);
+                },
+                teardown: function() {
+                    div.kendoScheduler("destroy").empty().remove();
+                }
+            });
+
+            test("scheduler fetches resources", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "category",
+                            dataSource: [
+                                { text: "foo", value: 1 }
+                            ]
+                        }
+                    ]
+                });
+
+                equal(scheduler.resources[0].dataSource.data()[0].text, "foo");
+            });
+
+            asyncTest("scheduler binds when resources and events are loaded", 2, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    dataSource:  {
+                        transport: {
+                            read: function(options) {
+                                setTimeout(function() {
+                                    options.success([
+                                        { start: new Date(), end: new Date(), title: "foo" }
+                                    ]);
+                                }, 1);
+                            }
+                        }
+                    },
+                    resources: [
+                        {
+                            field: "category",
+                            dataSource: {
+                                transport: {
+                                    read: function(options) {
+                                        setTimeout(function() {
+                                            options.success([
+                                                { text: "foo", value: 1 }
+                                            ]);
+                                        }, 1);
+                                    }
+                                }
+                            }
+                        }
+                    ],
+
+                    dataBound: function() {
+                        start();
+                        equal(this.resources[0].dataSource.data()[0].text, "foo");
+                        equal(this.dataSource.data()[0].title, "foo");
+                    }
+                });
+            });
+
+            test("scheduler throws error if the field option is not specified", 1, function() {
+                try {
+                    var scheduler = new kendo.ui.Scheduler(div, {
+                        resources: [ {} ]
+                    });
+                } catch(e) {
+                    equal(e.toString(), 'Error: The "field" and "dataSource" options of the scheduler resource are mandatory.')
+                }
+            });
+
+            test("scheduler throws error if the dataSource option is not specified", 1, function() {
+                try {
+                    var scheduler = new kendo.ui.Scheduler(div, {
+                        resources: [ { field: "" } ]
+                    });
+                } catch(e) {
+                    equal(e.toString(), 'Error: The "field" and "dataSource" options of the scheduler resource are mandatory.')
+                }
+            });
+
+            test('dataTextField is "text" by default', function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [ { field: "foo", dataSource: [] } ]
+                });
+
+                equal(scheduler.resources[0].dataTextField, "text");
+            });
+
+            test("specify custom dataTextField via the resource options", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [ { field: "foo", dataSource: [], dataTextField: "bar" } ]
+                });
+
+                equal(scheduler.resources[0].dataTextField, "bar");
+            });
+
+            test('dataValueField is "value" by default', function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [ { field: "foo", dataSource: [] } ]
+                });
+
+                equal(scheduler.resources[0].dataValueField, "value");
+            });
+
+            test("specify custom dataValueField via the resource options", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [ { field: "foo", dataSource: [], dataValueField: "bar" } ]
+                });
+
+                equal(scheduler.resources[0].dataValueField, "bar");
+            });
+
+            test('dataColorField is "color" by default', function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [ { field: "foo", dataSource: [] } ]
+                });
+
+                equal(scheduler.resources[0].dataColorField, "color");
+            });
+
+            test("specify custom dataColorField via the resource options", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [ { field: "foo", dataSource: [], dataColorField: "bar" } ]
+                });
+
+                equal(scheduler.resources[0].dataColorField, "bar");
+            });
+
+            test("resource color is applied as the background of the event in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: 2 },
+                        { start: new Date(), end: new Date(), title: "", foo: 1 },
+                    ],
+                    views: [ "day" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equalBackgroundColor(events.eq(0), "green");
+                equalBackgroundColor(events.eq(1), "red");
+            });
+
+            test("resource color is applied as the background of the event in day view when using valuePrimitive is false", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ],
+                            valuePrimitive: false
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 2 } },
+                        { start: new Date(), end: new Date(), title: "", foo: { value: 1 } },
+                    ],
+                    views: [ "day" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equalBackgroundColor(events.eq(0), "green");
+                equalBackgroundColor(events.eq(1), "red");
+            });
+
+            test("resource color is applied as the background of the event in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: 2 },
+                        { start: new Date(), end: new Date(), title: "", foo: 1 },
+                    ],
+                    views: [ "week" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equalBackgroundColor(events.eq(0), "green");
+                equalBackgroundColor(events.eq(1), "red");
+            });
+
+            test("background is not changed if the event doesn't have a resource in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title:"" },
+                    ],
+                    views: [ "week" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equalBackgroundColor(events.eq(0), "");
+            });
+
+            test("resource color is applied as the background of the event in month view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: 2 },
+                        { start: new Date(), end: new Date(), title: "", foo: 1 },
+                    ],
+                    views: [ "month" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equalBackgroundColor(events.eq(0), "green");
+                equalBackgroundColor(events.eq(1), "red");
+            });
+
+            test("background is not changed if the event doesn't have a resource in month view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title:"" },
+                    ],
+                    views: [ "month" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equalBackgroundColor(events.eq(0), "");
+            });
+
+            test("resource color is applied as the background of the event in agenda view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: 2 },
+                        { start: new Date(), end: new Date(), title: "", foo: 1 },
+                    ],
+                    views: [ "agenda" ]
+                });
+
+                var marks = scheduler.element.find(".k-scheduler-mark");
+
+                equalBackgroundColor(marks.eq(0), "green");
+                equalBackgroundColor(marks.eq(1), "red");
+            });
+
+            test("multiple resources are passed to template", 3, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ],
+                            multiple: true
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: [2, 1] },
+                    ],
+                    views: [{
+                        name: "agenda",
+                        eventTemplate: function(data) {
+                            equal(data.resources.length, 2);
+
+                            equal(data.resources[0].value, 2);
+                            equal(data.resources[1].value, 1);
+                        }
+                    }]
+                });
+            });
+
+            test("the first resource color is used when multiple resources are present", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "red" },
+                                { text: "", value: 2, color: "green" }
+                            ],
+                            multiple: true
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date(), end: new Date(), title: "", foo: [2, 1] },
+                    ],
+                    views: ["agenda"]
+                });
+
+                var marks = scheduler.element.find(".k-scheduler-mark");
+
+                equalBackgroundColor(marks.eq(0), "green");
+            });
+
+            test("scheduler creates a dropdownlist in the popup form for resources", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]");
+
+                equal(dropdownlist.attr("data-bind"), "value: foo");
+                equal(dropdownlist.children().eq(0).text(), "None");
+                equal(dropdownlist.children().eq(1).text(), "Foo 1");
+                equal(dropdownlist.children().eq(2).text(), "Foo 2");
+            });
+
+            test("scheduler creates a multiselect in the popup form for resources which allow multiple values", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                equal($(multiselect.items()[0]).text(), "Foo 1");
+                equal($(multiselect.items()[1]).text(), "Foo 2");
+            });
+
+            test("the dropdownlist items have the color of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+
+                var marks = dropdownlist.list.find(".k-scheduler-mark");
+                equal(marks.eq(1)[0].style.backgroundColor, "red");
+                equal(marks.eq(2)[0].style.backgroundColor, "green");
+            });
+
+            test("the multiselect items have the color of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                var marks = multiselect.list.find(".k-scheduler-mark");
+                equal(marks.eq(0)[0].style.backgroundColor, "red");
+                equal(marks.eq(1)[0].style.backgroundColor, "green");
+            });
+
+            test("selecting a value from the resource dropdownlist sets the resource field of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+
+                dropdownlist.value(2);
+                dropdownlist.trigger("change");
+
+                equal(scheduler.dataSource.at(0).foo, 2);
+            });
+
+            test("selecting a value from the resource multiselect sets the resource field of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: ""
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                multiselect.value(2);
+                multiselect.trigger("change");
+
+                equal(scheduler.dataSource.at(0).foo[0], 2);
+            });
+
+            test("the current resource is selected in the dropdownlist", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: "",
+                    foo: {  value: 2 }
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+
+                equal(dropdownlist.value(), 2);
+            });
+
+            test("the current resource is selected in the multiselect", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: "",
+                    foo: [{  value: 2 }]
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                equal(multiselect.value(), 2);
+            });
+
+            test("selecting an item from the multiselect adds a resource item to the current resources array of the event", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: "",
+                    foo: [ 2 ]
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+
+                multiselect.value([2, 1]);
+                multiselect.trigger("change");
+
+                equal(scheduler.dataSource.at(0).foo[0], 2);
+                equal(scheduler.dataSource.at(0).foo[1], 1);
+            });
+
+            test("selecting the option label sets the resource field of the event to null", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(), end: new Date(), title: "",
+                    foo: {  value: 2 }
+                });
+
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ event ],
+                    views: ["day"]
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+
+                dropdownlist.value("");
+                dropdownlist.trigger("change");
+
+                equal(scheduler.dataSource.at(0).foo, null);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

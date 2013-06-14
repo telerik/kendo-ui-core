@@ -1,0 +1,18 @@
+﻿@(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.Task>()
+    .Name("Scheduler")
+    .Events(e => e.Edit("onEdit"))
+    .DataSource(d => d
+        .Model(m => m.Id(f => f.TaskID))
+        .Read("Read", "Scheduler")
+        .Create("Create", "Scheduler")
+        .Destroy("Destroy", "Scheduler")
+        .Update("Update", "Scheduler")
+    
+    )
+)
+
+<script type="text/javascript">
+    function onEdit(e) {
+        console.log("Edit event fired");
+    }
+</script>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler DataSource initialization</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler DataSource initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var SchedulerDataSource = kendo.data.SchedulerDataSource,
+                SchedulerDataReader = kendo.data.SchedulerDataReader;
+
+            module("SchedulerDataSource initialization", { });
+
+            test("wraps the reader if no schema configuration is set", function() {
+                var dataSource = new SchedulerDataSource();
+
+                ok(dataSource.reader instanceof SchedulerDataReader);
+            });
+
+            test("wraps the reader if schema configuration is set", function() {
+                var dataSource = new SchedulerDataSource({
+                    schema: {
+                        data: "data"
+                    }
+                });
+
+                ok(dataSource.reader instanceof SchedulerDataReader);
+            });
+
+            test("create instantiate a SchedulerDataSource", function() {
+                var dataSource = SchedulerDataSource.create();
+
+                ok(dataSource instanceof SchedulerDataSource);
+            });
+
+            test("returns the same instance if SchedulerDataSource is provided", function() {
+                var originalDataSource = new SchedulerDataSource();
+                var dataSource = SchedulerDataSource.create(originalDataSource);
+
+                ok(dataSource instanceof SchedulerDataSource);
+                deepEqual(dataSource, originalDataSource);
+            });
+
+            test("throws if non SchedulerDataSource instance is provided", function() {
+                var originalDataSource = new kendo.data.DataSource();
+
+                throws(function() {
+                    SchedulerDataSource.create(originalDataSource);
+                });
+            });
+
+            test("DataSource model is wrapped as SchedulerEvent", function() {
+                var dataSource = new kendo.data.SchedulerDataSource({
+                    data: [{ start: new Date(), end: new Date() }]
+                });
+
+                dataSource.read();
+
+                ok(dataSource.at(0) instanceof kendo.data.SchedulerEvent);
+            });
+
+            test("Existing SchedulerEvent instances are not re-wrapped", function() {
+                var event = new kendo.data.SchedulerEvent({ start: new Date(), end: new Date() });
+
+                var dataSource = new kendo.data.SchedulerDataSource({
+                    data: [event]
+                });
+
+                dataSource.read();
+
+                deepEqual(event, dataSource.at(0));
+            });
+
+            var timezoneApply,
+                timezoneRemove;
+
+            module("SchedulerDataReader initialization", {
+                setup: function() {
+                    timezoneApply = kendo.timezone.apply;
+                    timezoneRemove = kendo.timezone.remove;
+                },
+                teardown: function() {
+                    kendo.timezone.apply = timezoneApply;
+                    kendo.timezone.remove = timezoneRemove;
+                }
+            });
+
+            test("wraps the reader instance", function() {
+                var originalReader = new kendo.data.DataReader();
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+
+                deepEqual(dataReader.reader, originalReader);
+            });
+
+            test("proxy error function to the original reader instance", 1, function() {
+                var response = {};
+
+                var originalReader = new kendo.data.DataReader({
+                    errors: function() {
+                       deepEqual(arguments[0], response);
+                    }
+                });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+
+                dataReader.errors(response);
+            });
+
+            test("proxy total function to the original reader instance", 1, function() {
+                var response = {};
+
+                var originalReader = new kendo.data.DataReader({
+                    total: function() {
+                       deepEqual(arguments[0], response);
+                    }
+                });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+
+                dataReader.total(response);
+            });
+
+            test("proxy groups function to the original reader instance", 1, function() {
+                var response = {};
+
+                var originalReader = new kendo.data.DataReader({
+                    groups: function() {
+                       deepEqual(arguments[0], response);
+                    }
+                });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+
+                dataReader.groups(response);
+            });
+
+            test("proxy parse function to the original reader instance", 1, function() {
+                var response = {};
+
+                var originalReader = new kendo.data.DataReader({
+                    parse: function() {
+                       deepEqual(arguments[0], response);
+                    }
+                });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+
+                dataReader.parse(response);
+            });
+
+            test("aggregates parse function to the original reader instance", 1, function() {
+                var response = {};
+
+                var originalReader = new kendo.data.DataReader({
+                    aggregates: function() {
+                       deepEqual(arguments[0], response);
+                    }
+                });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+
+                dataReader.aggregates(response);
+            });
+
+            test("calls data function of the original reader instance", 1, function() {
+                var originalReader = new kendo.data.DataReader({
+                    data: function() {
+                        ok(true);
+                    }
+                });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+
+                dataReader.data();
+            });
+
+            test("calls serialize function of the original reader instance", 1, function() {
+                var originalReader = new kendo.data.DataReader({
+                    serialize: function() {
+                        ok(true);
+                    }
+                });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+
+                dataReader.serialize();
+            });
+
+            test("data pass start and end data through the timezone conversion", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+                var apply = stub(kendo.timezone, "apply");
+                var start = new Date(2013, 1, 1);
+                var end = new Date(2013, 1, 1);
+
+                dataReader.data([ { start: start, end: end } ]);
+
+                equal(apply.calls("apply"), 2);
+                equal(apply.args("apply", 0)[0], start);
+                equal(apply.args("apply", 1)[0], end);
+            });
+
+            test("data pass start and end data through the timezone conversion with custom field mapping", function() {
+                var schema = {
+                    model: {
+                        fields: {
+                            start: "Start",
+                            end: "End"
+                        }
+                    }
+                };
+
+                var originalReader = new kendo.data.DataReader(schema);
+                var dataReader = new SchedulerDataReader(schema, originalReader);
+                var apply = stub(kendo.timezone, "apply");
+
+                var start = new Date(2013, 1, 1);
+                var end = new Date(2013, 1, 1);
+
+                dataReader.data([ { Start: start, End: end } ]);
+
+                equal(apply.calls("apply"), 2);
+                equal(apply.args("apply", 0)[0], start);
+                equal(apply.args("apply", 1)[0], end);
+            });
+
+            test("data timezone is passed", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({
+                    timezone: "my timezone"
+                }, originalReader);
+
+                var apply = stub(kendo.timezone, "apply");
+
+                dataReader.data([ { start: new Date(2013, 1, 1), end: new Date(2013, 1, 1) } ]);
+
+                equal(apply.args("apply")[1], "my timezone");
+            });
+
+            test("event timezone field is used if set", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({ }, originalReader);
+
+                var apply = stub(kendo.timezone, "apply");
+
+                dataReader.data([ { start: new Date(2013, 1, 1), startTimezone: "event zone", end: new Date(2013, 1, 1), endTimezone: "event zone" } ]);
+
+                equal(apply.args("apply")[1], "event zone");
+            });
+
+            test("event startTimezone field is used for both start and end if it is the only one set", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({ }, originalReader);
+
+                var apply = stub(kendo.timezone, "apply");
+
+                dataReader.data([ { start: new Date(2013, 1, 1), startTimezone: "event zone", end: new Date(2013, 1, 1) } ]);
+
+                equal(apply.args("apply")[1], "event zone");
+            });
+
+            test("serialize timezone is passed", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({
+                    timezone: "my timezone"
+                }, originalReader);
+
+                var remove = stub(kendo.timezone, "remove");
+
+                dataReader.serialize([ { start: new Date(2013, 1, 1), end: new Date(2013, 1, 1) } ]);
+
+                equal(remove.args("remove")[1], "my timezone");
+            });
+
+            test("serialize pass start and end data through the timezone conversion", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+                var remove = stub(kendo.timezone, "remove");
+                var start = new Date(2013, 1, 1);
+                var end = new Date(2013, 1, 1);
+
+                dataReader.serialize([ { start: start, end: end } ]);
+
+                equal(remove.calls("remove"), 2);
+                equal(remove.args("remove", 0)[0], start);
+                equal(remove.args("remove", 1)[0], end);
+            });
+
+            test("serialize pass start and end data through the timezone conversion with custom field mapping", function() {
+                var schema = {
+                    model: {
+                        fields: {
+                            start: "Start",
+                            end: "End"
+                        }
+                    }
+                };
+
+                var originalReader = new kendo.data.DataReader(schema);
+                var dataReader = new SchedulerDataReader(schema, originalReader);
+                var remove = stub(kendo.timezone, "remove");
+
+                var start = new Date(2013, 1, 1);
+                var end = new Date(2013, 1, 1);
+
+                var result = dataReader.serialize([ { start: start, end: end } ]);
+
+                equal(remove.calls("remove"), 2);
+                equal(remove.args("remove", 0)[0], start);
+                equal(remove.args("remove", 1)[0], end);
+            });
+
+            test("serialize custom field name mapping", function() {
+                var schema = {
+                    model: {
+                        fields: {
+                            start: "Start",
+                            end: "End"
+                        }
+                    }
+                };
+
+                var originalReader = new kendo.data.DataReader(schema);
+                var dataReader = new SchedulerDataReader(schema, originalReader);
+
+                var start = new Date(2013, 1, 1);
+                var end = new Date(2013, 1, 1);
+
+                var result = dataReader.serialize([ { start: start, end: end } ]);
+
+                ok("Start" in result[0]);
+                ok("End" in result[0]);
+            });
+
+            test("serialize event timezone field is used if set", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({ }, originalReader);
+
+                var remove = stub(kendo.timezone, "remove");
+
+                dataReader.serialize([ { start: new Date(2013, 1, 1), startTimezone: "event zone", endTimezone: "event zone", end: new Date(2013, 1, 1) } ]);
+
+                equal(remove.args("remove")[1], "event zone");
+            });
+
+            test("SchedulerDataReader exposes timezone option", function() {
+                var originalReader = new kendo.data.DataReader({ });
+                var dataReader = new SchedulerDataReader({
+                    timezone: "my timezone"
+                }, originalReader);
+
+                equal(dataReader.timezone, "my timezone");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
