@@ -255,23 +255,23 @@ kendo_module({
                 pages,
                 pageElements = that.element.find("[data-role=page]");
 
-                pageElements.width(width);
+            pageElements.width(width);
 
-                pane.updateDimension();
+            pane.updateDimension();
 
-                // if no pages present, try to retain the current position
-                if (!pageElements[0]) {
-                    that.page = Math.floor(pane.offset() / width);
-                }
+            // if no pages present, try to retain the current position
+            if (!pageElements[0]) {
+                that.page = Math.floor(pane.offset() / width);
+            }
 
-                that.scrollTo(that.page, true);
+            that.scrollTo(that.page, true);
 
-                pages = that.pages = ceil(pane.total() / width);
+            pages = that.pages = ceil(pane.total() / width);
 
-                that.minSnap = - (pages - 1) * width;
-                that.maxSnap = 0;
+            that.minSnap = - (pages - 1) * width;
+            that.maxSnap = 0;
 
-                that.trigger(REFRESH, { pageCount: pages, page: that.page });
+            that.trigger(REFRESH, { pageCount: pages, page: that.page });
         },
 
         content: function(html) {
