@@ -71,9 +71,10 @@ var TableEditor = kendo.Class.extend({
 
         selectionRow.setAttribute("_kendo_markup", "");
         selectionCell.setAttribute("_kendo_markup", "");
+        selectionCell.appendChild(doc.createTextNode("\ufeff"));
 
         for (i = 0; i < rows[rows.length-1].cells.length; i++) {
-            selectionRow.appendChild(selectionCell.cloneNode());
+            selectionRow.appendChild(selectionCell.cloneNode(true));
         }
 
         dom.insertBefore(selectionRow, table.rows[0]);
@@ -87,7 +88,7 @@ var TableEditor = kendo.Class.extend({
 
     _attachEvents: function() {
         $(this.table)
-            .on("mousedown" + NS, ".k-selection-cell", false)
+            .on("mousedown" + NS, ".k-selection-cell,.k-select-all", false)
             .on("click" + NS, ".k-selection-cell", proxy(this._selectionCellClick, this))
             .on("mousedown" + NS, "td:not(.k-selection-cell)", proxy(this.clearSelection, this));
     },
