@@ -3,7 +3,7 @@ kendo_module({
     name: "Scheduler Day View",
     category: "web",
     description: "The Scheduler Day View",
-    depends: [ "core" ]
+    depends: [ "scheduler.view" ]
 });
 
 (function($, undefined) {

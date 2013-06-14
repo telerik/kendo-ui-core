@@ -3,22 +3,23 @@ kendo_module({
     name: "Scheduler",
     category: "web",
     description: "The Scheduler is an event calendar.",
-    depends: [ "core", "binder", "popup", "calendar", "data", "data.scheduler"],
+    depends: [ "dropdownlist", "editable", "multiselect", "window", "datepicker", "scheduler.recurrence",
+        "scheduler.view" ],
     features: [ {
         id: "scheduler-dayview",
         name: "Scheduler Day View",
         description: "Scheduler Day View",
-        depends: [ "scheduler.view", "scheduler.dayview" ]
+        depends: [ "scheduler.dayview" ]
     }, {
         id: "scheduler-agendaview",
         name: "Scheduler Agenda View",
         description: "Scheduler Agenda View",
-        depends: [ "scheduler.view", "scheduler.agendaview" ]
+        depends: [ "scheduler.agendaview" ]
     }, {
         id: "scheduler-monthview",
         name: "Scheduler Month View",
         description: "Scheduler Month View",
-        depends: [ "scheduler.view", "scheduler.monthview" ]
+        depends: [ "scheduler.monthview" ]
     } ]
 });
 

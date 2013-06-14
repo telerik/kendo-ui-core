@@ -3,7 +3,7 @@ kendo_module({
     name: "Scheduler Agenda View",
     category: "web",
     description: "The Scheduler Agenda View",
-    depends: [ "core", "scheduler.view" ]
+    depends: [ "scheduler.view" ]
 });
 
 (function($){
