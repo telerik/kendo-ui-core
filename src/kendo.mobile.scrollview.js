@@ -178,7 +178,9 @@ kendo_module({
         transitionTo: function(location, ease, instant) {
             this.transition.moveTo({ location: location, duration: (instant ? 1 : this.duration), ease: ease });
         }
-    })
+    });
+
+    kendo.mobile.ui.ScrollViewElasticPane = ElasticPane;
 
     var ScrollView = Widget.extend({
         init: function(element, options) {
