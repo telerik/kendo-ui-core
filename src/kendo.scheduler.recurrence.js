@@ -2,7 +2,7 @@ kendo_module({
     id: "scheduler.recurrence",
     name: "Recurrence",
     category: "web",
-    depends: [ "scheduler" ],
+    depends: [ "dropdownlist, datepicker, numerictextbox" ],
     hidden: true
 });
 
