@@ -3732,4 +3732,149 @@ public class ChartDataRepository {
         
         return Arrays.asList(result);
     }
+    
+    public static List<BudgetReportItem> BudgetReport() {
+        List<BudgetReportItem> result = new ArrayList<BudgetReportItem>();
+        result.add(new BudgetReportItem("Sales", 40000, 52800));
+        result.add(new BudgetReportItem("Marketing", 20000, 42000));
+        result.add(new BudgetReportItem("Development", 60000, 21400));
+        result.add(new BudgetReportItem("Customer Support", 30000, 28500));
+        result.add(new BudgetReportItem("IT", 25000, 18900));
+        result.add(new BudgetReportItem("Administration", 10000, 11100));
+                   
+        return result;
+    }
+    
+    public static List<ProteinScore> ProteinQualityData() {
+        List<ProteinScore> result = new ArrayList<ProteinScore>();
+        result.add(new ProteinScore("Tryptophan", "Trp", 3));
+        result.add(new ProteinScore("Threonine", "Thr", 4));
+        result.add(new ProteinScore("Isoleucine", "Iso", 5));
+        result.add(new ProteinScore("Leucine", "Leu", 5));
+        result.add(new ProteinScore("Lysine", "Lys", 5));
+        result.add(new ProteinScore("Methionine + Cystine", "M+C", 2));
+        result.add(new ProteinScore("Phenylalanine + Tyrosine", "p+T", 3));
+        result.add(new ProteinScore("Valine", "Val", 5));
+        result.add(new ProteinScore("Histidine", "Hys", 4));
+                   
+        return result;
+    }
+    
+    public static List<WindSpeedItem> WindData() {
+        List<WindSpeedItem> result = new ArrayList<WindSpeedItem>();
+        result.add(new WindSpeedItem(0, "N", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(0, "N", 1, "0.5 to 2", 2));
+        result.add(new WindSpeedItem(0, "N", 2, "2 to 4", 3));
+        result.add(new WindSpeedItem(0, "N", 3, "4 to 6", 2.5));
+        result.add(new WindSpeedItem(0, "N", 4, "6 to 8", 1));
+        result.add(new WindSpeedItem(0, "N", 5, "8 to 10", 0.5));
+        result.add(new WindSpeedItem(0, "N", 6, "> 10", 0.1));
+        result.add(new WindSpeedItem(1, "NNE", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(1, "NNE", 1, "0.5 to 2", 0.1));
+        result.add(new WindSpeedItem(1, "NNE", 2, "2 to 4", 0.1));
+        result.add(new WindSpeedItem(1, "NNE", 3, "4 to 6", 0));
+        result.add(new WindSpeedItem(1, "NNE", 4, "6 to 8", 0));
+        result.add(new WindSpeedItem(1, "NNE", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(1, "NNE", 6, "> 10", 0));
+        result.add(new WindSpeedItem(2, "NE", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(2, "NE", 1, "0.5 to 2", 0.2));
+        result.add(new WindSpeedItem(2, "NE", 2, "2 to 4", 0));
+        result.add(new WindSpeedItem(2, "NE", 3, "4 to 6", 0));
+        result.add(new WindSpeedItem(2, "NE", 4, "6 to 8", 0));
+        result.add(new WindSpeedItem(2, "NE", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(2, "NE", 6, "> 10", 0));
+        result.add(new WindSpeedItem(3, "ENE", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(3, "ENE", 1, "0.5 to 2", 0.2));
+        result.add(new WindSpeedItem(3, "ENE", 2, "2 to 4", 0.1));
+        result.add(new WindSpeedItem(3, "ENE", 3, "4 to 6", 0));
+        result.add(new WindSpeedItem(3, "ENE", 4, "6 to 8", 0));
+        result.add(new WindSpeedItem(3, "ENE", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(3, "ENE", 6, "> 10", 0));
+        result.add(new WindSpeedItem(4, "E", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(4, "E", 1, "0.5 to 2", 0.2));
+        result.add(new WindSpeedItem(4, "E", 2, "2 to 4", 0.3));
+        result.add(new WindSpeedItem(4, "E", 3, "4 to 6", 0));
+        result.add(new WindSpeedItem(4, "E", 4, "6 to 8", 0));
+        result.add(new WindSpeedItem(4, "E", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(4, "E", 6, "> 10", 0));
+        result.add(new WindSpeedItem(5, "ESE", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(5, "ESE", 1, "0.5 to 2", 0.4));
+        result.add(new WindSpeedItem(5, "ESE", 2, "2 to 4", 0.4));
+        result.add(new WindSpeedItem(5, "ESE", 3, "4 to 6", 0.1));
+        result.add(new WindSpeedItem(5, "ESE", 4, "6 to 8", 0.1));
+        result.add(new WindSpeedItem(5, "ESE", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(5, "ESE", 6, "> 10", 0));
+        result.add(new WindSpeedItem(6, "SE", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(6, "SE", 1, "0.5 to 2", 0.8));
+        result.add(new WindSpeedItem(6, "SE", 2, "2 to 4", 1.4));
+        result.add(new WindSpeedItem(6, "SE", 3, "4 to 6", 1.4));
+        result.add(new WindSpeedItem(6, "SE", 4, "6 to 8", 1));
+        result.add(new WindSpeedItem(6, "SE", 5, "8 to 10", 0.1));
+        result.add(new WindSpeedItem(6, "SE", 6, "> 10", 0));
+        result.add(new WindSpeedItem(7, "SSE", 0, "< 0.5", 0.1));
+        result.add(new WindSpeedItem(7, "SSE", 1, "0.5 to 2", 6));
+        result.add(new WindSpeedItem(7, "SSE", 2, "2 to 4", 2));
+        result.add(new WindSpeedItem(7, "SSE", 3, "4 to 6", 0.8));
+        result.add(new WindSpeedItem(7, "SSE", 4, "6 to 8", 0.5));
+        result.add(new WindSpeedItem(7, "SSE", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(7, "SSE", 6, "> 10", 0));
+        result.add(new WindSpeedItem(8, "S", 0, "< 0.5", 0.2));
+        result.add(new WindSpeedItem(8, "S", 1, "0.5 to 2", 10));
+        result.add(new WindSpeedItem(8, "S", 2, "2 to 4", 1));
+        result.add(new WindSpeedItem(8, "S", 3, "4 to 6", 0));
+        result.add(new WindSpeedItem(8, "S", 4, "6 to 8", 0));
+        result.add(new WindSpeedItem(8, "S", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(8, "S", 6, "> 10", 0));
+        result.add(new WindSpeedItem(9, "SSW", 0, "< 0.5", 0.1));
+        result.add(new WindSpeedItem(9, "SSW", 1, "0.5 to 2", 8));
+        result.add(new WindSpeedItem(9, "SSW", 2, "2 to 4", 1));
+        result.add(new WindSpeedItem(9, "SSW", 3, "4 to 6", 0));
+        result.add(new WindSpeedItem(9, "SSW", 4, "6 to 8", 0));
+        result.add(new WindSpeedItem(9, "SSW", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(9, "SSW", 6, "> 10", 0));
+        result.add(new WindSpeedItem(10, "SW", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(10, "SW", 1, "0.5 to 2", 6));
+        result.add(new WindSpeedItem(10, "SW", 2, "2 to 4", 3));
+        result.add(new WindSpeedItem(10, "SW", 3, "4 to 6", 1));
+        result.add(new WindSpeedItem(10, "SW", 4, "6 to 8", 0.1));
+        result.add(new WindSpeedItem(10, "SW", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(10, "SW", 6, "> 10", 0));
+        result.add(new WindSpeedItem(11, "WSW", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(11, "WSW", 1, "0.5 to 2", 3));
+        result.add(new WindSpeedItem(11, "WSW", 2, "2 to 4", 4));
+        result.add(new WindSpeedItem(11, "WSW", 3, "4 to 6", 1));
+        result.add(new WindSpeedItem(11, "WSW", 4, "6 to 8", 0));
+        result.add(new WindSpeedItem(11, "WSW", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(11, "WSW", 6, "> 10", 0));
+        result.add(new WindSpeedItem(12, "W", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(12, "W", 1, "0.5 to 2", 2));
+        result.add(new WindSpeedItem(12, "W", 2, "2 to 4", 3));
+        result.add(new WindSpeedItem(12, "W", 3, "4 to 6", 1));
+        result.add(new WindSpeedItem(12, "W", 4, "6 to 8", 0));
+        result.add(new WindSpeedItem(12, "W", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(12, "W", 6, "> 10", 0.1));
+        result.add(new WindSpeedItem(13, "WNW", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(13, "WNW", 1, "0.5 to 2", 1));
+        result.add(new WindSpeedItem(13, "WNW", 2, "2 to 4", 5));
+        result.add(new WindSpeedItem(13, "WNW", 3, "4 to 6", 2));
+        result.add(new WindSpeedItem(13, "WNW", 4, "6 to 8", 0.5));
+        result.add(new WindSpeedItem(13, "WNW", 5, "8 to 10", 0));
+        result.add(new WindSpeedItem(13, "WNW", 6, "> 10", 0.1));
+        result.add(new WindSpeedItem(14, "NW", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(14, "NW", 1, "0.5 to 2", 2));
+        result.add(new WindSpeedItem(14, "NW", 2, "2 to 4", 5));
+        result.add(new WindSpeedItem(14, "NW", 3, "4 to 6", 2));
+        result.add(new WindSpeedItem(14, "NW", 4, "6 to 8", 1));
+        result.add(new WindSpeedItem(14, "NW", 5, "8 to 10", 0.1));
+        result.add(new WindSpeedItem(14, "NW", 6, "> 10", 0.1));
+        result.add(new WindSpeedItem(15, "NNW", 0, "< 0.5", 0));
+        result.add(new WindSpeedItem(15, "NNW", 1, "0.5 to 2", 4));
+        result.add(new WindSpeedItem(15, "NNW", 2, "2 to 4", 5));
+        result.add(new WindSpeedItem(15, "NNW", 3, "4 to 6", 5));
+        result.add(new WindSpeedItem(15, "NNW", 4, "6 to 8", 3));
+        result.add(new WindSpeedItem(15, "NNW", 5, "8 to 10", 1));
+        result.add(new WindSpeedItem(15, "NNW", 6, "> 10", 0.2));
+        
+        return result;
+    }
 }

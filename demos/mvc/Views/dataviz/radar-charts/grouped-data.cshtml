@@ -8,6 +8,12 @@
                 title: {
                     text: "Wind Rose"
                 },
+                legend: {
+                    position: "right",
+                    labels: {
+                        template: "#= (series.data[0] || {}).categoryText # m/s"
+                    }
+                },
                 dataSource: {
                     transport: {
                         read: {
@@ -34,18 +40,12 @@
                 categoryAxis: {
                     field: "dirText"
                 },
-                legend: {
-                    position: "right",
-                    labels: {
-                        template: "#= (series.data[0] || {}).categoryText # m/s"
-                    }
+                valueAxis: {
+                    visible: false
                 },
                 tooltip: {
                     template: "#= category # (#= dataItem.categoryText # m/s) #= value #%",
                     visible: true
-                },
-                valueAxis: {
-                    visible: false
                 }
             });
         }
