@@ -932,6 +932,8 @@ kendo_module({
         numberOfWeeks: numberOfWeeks
     };
 
+    //TODO: REFACTOR Recurrence Widget
+
     var INTERVAL = '{0}<input class="k-recur-interval" />{1}';
     var END_COUNT = '{0}<input class="k-recur-count" />{1}';
     var END_UNTIL = '{0}<input class="k-recur-until" />{1}';
@@ -943,19 +945,19 @@ kendo_module({
                    '<div class="k-edit-field"><input class="k-recur-end-until" type="radio" name="end" value="until" />{3}</div>';
 
     var MONTHDAY_HTML = '<div class="k-edit-field"><input class="k-recur-month-radio" type="radio" name="month" value="monthday" />' +
-                            '{0}<input class="k-recur-monthday" />'
+                            '{0}<input class="k-recur-monthday" />' +
                         '</div>';
 
     var WEEKDAY_HTML = '<div class="k-edit-field"><input class="k-recur-month-radio" type="radio" name="month" value="weekday" />' +
-                           '<input class="k-recur-offset" /><input class="k-recur-weekday" />'
+                           '<input class="k-recur-offset" /><input class="k-recur-weekday" />' +
                        '</div>';
 
     var MONTH_HTML = '<div class="k-edit-field"><input class="k-recur-year-radio" type="radio" name="year" value="monthday" />' +
-                         '<input class="k-recur-month" /><input class="k-recur-monthday" />'
+                         '<input class="k-recur-month" /><input class="k-recur-monthday" />' +
                      '</div>';
 
     var WEEKDAY_WITH_MONTH_HTML = '<div class="k-edit-field"><input class="k-recur-year-radio" type="radio" name="year" value="weekday" />' +
-                                      '<input class="k-recur-offset" /><input class="k-recur-weekday" />{0}<input class="k-recur-month" />'
+                                      '<input class="k-recur-offset" /><input class="k-recur-weekday" />{0}<input class="k-recur-month" />' +
                                   '</div>';
 
     var weekDayCheckBoxes = function(firstDay) {
@@ -1036,7 +1038,7 @@ kendo_module({
                 },
                 daily: {
                     repeatEvery: "Repeat every: ",
-                    days: " days(s)",
+                    days: " days(s)"
                 },
                 weekly: {
                     weeks: " week(s)",
@@ -1153,7 +1155,7 @@ kendo_module({
                         { text: offsetMessage.second, value: "2" },
                         { text: offsetMessage.third, value: "3" },
                         { text: offsetMessage.fourth, value: "4" },
-                        { text: offsetMessage.last, value: "-1" },
+                        { text: offsetMessage.last, value: "-1" }
                     ],
                     change: function() {
                         rule.weekDays = [{
@@ -1265,7 +1267,7 @@ kendo_module({
                     dataValueField: "value",
                     dataSource: monthNames,
                     change: function() {
-                        rule.months = [Number(this.value())]
+                        rule.months = [Number(this.value())];
                         that.trigger("change");
                     }
                 });
@@ -1275,7 +1277,7 @@ kendo_module({
                     dataValueField: "value",
                     dataSource: monthNames,
                     change: function() {
-                        rule.months = [Number(this.value())]
+                        rule.months = [Number(this.value())];
                         that.trigger("change");
                     }
                 });
@@ -1446,8 +1448,7 @@ kendo_module({
 
         _toggleYearRule: function(yearRule) {
             var that = this,
-                month,
-                ddl = yearRule === "weekDay" ? that.monthDDL2 : that.monthDDL1;
+                month;
 
             if (yearRule === "monthday") {
                 that.monthDDL1.enable(true);
