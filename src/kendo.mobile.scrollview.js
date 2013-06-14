@@ -73,6 +73,10 @@ kendo_module({
 
     kendo.mobile.ui.ScrollViewPager = Pager;
 
+
+    var TRANSITION_END = "transitionEnd",
+        DRAG_END = "dragEnd";
+
     var ElasticPane = kendo.Observable.extend({
         init: function(element, options) {
             var that = this;
@@ -95,7 +99,7 @@ kendo_module({
                 axis: "x",
                 movable: movable,
                 onEnd: function() {
-                    that.trigger("transitionEnd");
+                    that.trigger(TRANSITION_END);
                 }
             });
 
@@ -112,7 +116,7 @@ kendo_module({
                 allowSelection: true,
 
                 end: function(e) {
-                    that.trigger("dragEnd", e);
+                    that.trigger(DRAG_END, e);
                 }
             });
 
@@ -144,7 +148,7 @@ kendo_module({
                 pane: pane
             });
 
-            this.bind(["transitionEnd", "dragEnd", CHANGE], options);
+            this.bind([TRANSITION_END, DRAG_END, CHANGE], options);
         },
 
         size: function() {
