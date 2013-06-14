@@ -36,6 +36,8 @@
         </style>
 
         <script>
+            QUnit.config.reorder = false;
+
             var ElasticPane = kendo.mobile.ui.ScrollViewElasticPane;
 
             var Transition = kendo.effects.Transition,
@@ -62,7 +64,7 @@
                     this.pane.transitionTo(- page * this.pane.size(), Transition.easeOutExpo, instant);
                 },
 
-                dragged: function(swipeType, bounce) {
+                dragged: function(swipeType, bounce, callback) {
                     var that = this,
                         pane = that.pane,
                         width = pane.size() * that.pageSize,
@@ -80,6 +82,12 @@
                     nextPage = approx(pane.offset() / width);
 
                     snap = Math.max(that.minSnap, Math.min(-nextPage * width, that.maxSnap));
+
+                    if (nextPage != that.page) {
+                        if (callback && callback({ currentPage: that.page, nextPage: nextPage })) {
+                            snap = -that.page * pane.size();
+                        }
+                    }
 
                     pane.transitionTo(snap, ease);
                 },
@@ -243,6 +251,20 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 200);
+                }, 50);
+            });
+
+            asyncTest("preventing default reverts back to the previous page", 2, function() {
+                pane.moveTo(50);
+                var preventDefaultCallback = function() { return true; };
+
+                content.dragged(LEFT_SWIPE, false, preventDefaultCallback);
+
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 0);
+                    equal(pane.offset(), 0);
                 }, 50);
             });
 
