@@ -3877,4 +3877,65 @@ public class ChartDataRepository {
         
         return result;
     }
+    
+    public static List<AntennaGainPoint> AntennaGain() {
+        List<AntennaGainPoint> result = new ArrayList<AntennaGainPoint>();
+        result.add(new AntennaGainPoint(0, 0));
+        result.add(new AntennaGainPoint(10, 0));
+        result.add(new AntennaGainPoint(20, 0));
+        result.add(new AntennaGainPoint(30, -1));
+        result.add(new AntennaGainPoint(40, -2));
+        result.add(new AntennaGainPoint(50, -3));
+        result.add(new AntennaGainPoint(60, -5));
+        result.add(new AntennaGainPoint(70, -7));
+        result.add(new AntennaGainPoint(80, -10));
+        result.add(new AntennaGainPoint(90, -13));
+        result.add(new AntennaGainPoint(100, -16));
+        result.add(new AntennaGainPoint(110, -20));
+        result.add(new AntennaGainPoint(120, -19));
+        result.add(new AntennaGainPoint(130, -18));
+        result.add(new AntennaGainPoint(140, -17));
+        result.add(new AntennaGainPoint(150, -16));
+        result.add(new AntennaGainPoint(160, -15));
+        result.add(new AntennaGainPoint(170, -14));
+        result.add(new AntennaGainPoint(180, -13));
+        result.add(new AntennaGainPoint(190, -14));
+        result.add(new AntennaGainPoint(200, -15));
+        result.add(new AntennaGainPoint(210, -16));
+        result.add(new AntennaGainPoint(220, -17));
+        result.add(new AntennaGainPoint(230, -18));
+        result.add(new AntennaGainPoint(240, -19));
+        result.add(new AntennaGainPoint(250, -20));
+        result.add(new AntennaGainPoint(260, -16));
+        result.add(new AntennaGainPoint(270, -13));
+        result.add(new AntennaGainPoint(280, -10));
+        result.add(new AntennaGainPoint(290, -7));
+        result.add(new AntennaGainPoint(300, -5));
+        result.add(new AntennaGainPoint(310, -3));
+        result.add(new AntennaGainPoint(320, -2));
+        result.add(new AntennaGainPoint(330, -1));
+        result.add(new AntennaGainPoint(340, 0));
+        result.add(new AntennaGainPoint(350, 0));
+        result.add(new AntennaGainPoint(0, 0));
+                   
+        return result;
+    }
+    
+    public static List<SunPositionPoint> SunPositionData() {
+        List<SunPositionPoint> result = new ArrayList<SunPositionPoint>();
+        result.add(new SunPositionPoint("08:00", 4.9, 92.7));
+        result.add(new SunPositionPoint("09:00", 17.6, 100.6));
+        result.add(new SunPositionPoint("10:00", 30.1, 109.7));
+        result.add(new SunPositionPoint("11:00", 41.8, 121.3));
+        result.add(new SunPositionPoint("12:00", 51.8, 137.7));
+        result.add(new SunPositionPoint("13:00", 58.5, 161.5));
+        result.add(new SunPositionPoint("14:00", 59.4, 190.7));
+        result.add(new SunPositionPoint("15:00", 54.1, 216.6));
+        result.add(new SunPositionPoint("16:00", 44.8, 234.8));
+        result.add(new SunPositionPoint("17:00", 33.5, 247.6));
+        result.add(new SunPositionPoint("18:00", 21.2, 257.2));
+        result.add(new SunPositionPoint("19:00", 8.4, 265.3));
+        
+        return result;
+    }
 }
