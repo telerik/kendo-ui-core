@@ -12,8 +12,8 @@
 @fallback-texture: url('textures/highlight.png');
 
 /* Widget Base Styles */
-@widget-text-color: #4c5356;
-@widget-background-color: #fff;
+@widget-text-color: #787878;
+@widget-background-color: #ffffff;
 @widget-border-color: #cdcdcd;
 
 //No gradients
@@ -28,9 +28,10 @@
 
 /* Selects, Dropdowns */
 @select-background-color: red;
-@select-border-color: #2eb3a6;
-@select-hover-background-color: #2eb3a6;
-@select-group-background-color: #363940;
+@select-border-color: #29d6c5;
+@select-hover-background-color: #29d6c5;
+@select-group-background-color: @drop-down-header-background;
+
 
 /* Buttons */
 @button-background-color: @form-widget-background;
@@ -38,21 +39,23 @@
 
 /* Group Base Styles */
 @group-background-color: @widget-background-color;
-@group-border-color: #2eb3a6;
+@group-border-color: #29d6c5;
 
 /* Content */
-@content-background-color: @widget-background-color;
+@content-background-color: #ffffff;
 
-@hover-background-color: #2eb3a6;
-@hover-border-color: #2eb3a6;
+
+
+@hover-background-color: #29d6c5;
+@hover-border-color: #29d6c5;
 @hover-text-color: #ffffff;
 
 @selected-background-color: #10c4b2;
-@selected-border-color: @selected-background-color;
+@selected-border-color: @drop-down-header-background;
 @selected-text-color: #ffffff;
 
 @active-background-color: #10c4b2;
-@active-border-color: #10c4b2;
+@active-border-color: none;
 @active-text-color: #ffffff;
 @error-background-color: #ffffff;
 @error-border-color: #e20000;
@@ -60,30 +63,28 @@
 @disabled-text-color: #c1c1c1;
 @validation-background-color: #ffe13a;
 @validation-border-color: #ffe13a;
-@validation-text-color: #4c5356;
+@validation-text-color: #787878;
 @tooltip-background-color: #363940;
 @tooltip-border-color: #363940;
 @tooltip-text-color: #ffffff;
-
 
 /* Slider */
 @draghandle-border-radius: 13px;
 @draghandle-border-color: @form-widget-background;
 @draghandle-background-color: @form-widget-background;
 @draghandle-shadow: 0 0 0 0;
-@draghandle-hover-border-color: #2eb3a6;
-@draghandle-hover-background-color: #2eb3a6;
+@draghandle-hover-border-color: @hover-background-color;
+@draghandle-hover-background-color: @hover-background-color;
 @draghandle-hover-shadow: 0 0 0;
 
 @alt-background-color: #f5f5f5;
 @input-background-color: #ffffff;
-@input-text-color: #4c5356;
-//@shadow-color: rgba(0, 0, 0, 0);
-@shadow-color: transparent;
+@input-text-color: #787878;
+@shadow-color: rgba(0, 0, 0, 0.3);
 @shadow-inset-color: transparent;
-@link-text-color: #4c5356;
+@link-text-color: #787878;
 @loading-panel-color: #ffffff;
-@splitbar-background-color: #f4f4f4;
+@splitbar-background-color: #29d6c5;
 @default-icon-opacity: 1;
 
 /* Border Radii */
@@ -97,39 +98,22 @@
 @header-background-color: #f4f4f4;
 
 /*Focused State*/
-@focused-border-color: #363940;
+@focused-border-color: @drop-down-header-background;
 @focused-shadow: none;
-@focused-item-shadow: none;
+@focused-item-shadow: inset 0 0 0 1px @drop-down-header-background;
 
-//Introduced new vars
-@window-titlebar-background: #363940;
-@window-titlebar-color: #ffffff;
+/* Calendar */
+@header-calendar-background: #363940;
+@header-calendar-text-color: #ffffff;
 
-@calendar-border-radius: 13px;
-@calendar-header-background: #363940;
-@calendar-footer-background: #363940;
-@calendar-header-hover-text-decoration: underline;
-@calendar-footer-text-decoration: none;
-@calendar-footer-hover-text-decoration: none;
-@calendar-footer-hover-background: #2eb3a6; 
-
+//Introduced new var-s
 @form-widget-background: #10c4b2;
 @form-widget-color: #ffffff;
-@form-widget-border-color: #10c4b2;
- 
-@drop-down-border-color: #10c4b2;
-@drop-down-hover-border-color: #2eb3a6;
-@drop-down-focused-border-color: #363940;
+@form-widget-border-color: #10c4b2; 
 @drop-down-header-background: #363940;
-@drop-down-background: #10c4b2;
-@drop-down-popup-text-color: @window-titlebar-color;
-
-@popup-background: #363940;
-
-@panelbar-items-border: #4c5356;
-@panelbar-content-background: #363940;
-
-@button-border-color: #10c4b2;
-@tabstrip-active-background-color: @widget-background-color;
+@drop-down-header-color: #ffffff;
+@calendar-border-radius: 13px;
+@table-header-background: #dfdfdf;
+@popup-container-padding: 0;
 
 @import "template.less";

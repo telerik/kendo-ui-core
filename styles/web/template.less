@@ -1133,6 +1133,20 @@ div.k-imagebrowser-dropzone em
     border-color: @drop-down-focused-border-color;
 }
 
+.k-list-container
+{
+    //border-color: @drop-down-header-background;
+    //background-color: @select-group-background-color;
+	color: @drop-down-popup-text-color;
+}
+
+.k-dropdown .k-input,
+.k-dropdown .k-state-focused .k-input,
+.k-menu .k-popup
+{
+    color: @drop-down-popup-text-color;
+}
+
 .k-state-default > .k-select
 {
     border-color: @drop-down-border-color;	
@@ -1148,83 +1162,6 @@ div.k-imagebrowser-dropzone em
 	border-color: @drop-down-focused-border-color;
 }
 
-.k-secondary
-{
-	.k-picker-wrap,
-	.k-dropdown-wrap
-	{
-		background-color: @header-background-color;
-		border-color: @widget-border-color;
-	}
-	.k-editor-button .k-state-active
-	{
-		background-color: @drop-down-header-background;
-	}
-
-	.k-dropdown-wrap .k-input
-	{
-		color: @widget-text-color;
-	}
-
-	.k-dropdown .k-dropdown-wrap.k-state-hover .k-input,
-	.k-dropdown .k-dropdown-wrap.k-state-focused .k-input
-	{
-		color: @form-widget-color;
-	}
-
-	&.k-splitbar
-	{
-		background-color: #f4f4f4;
-		border-color: #cdcdcd;
-	}
-
-	.k-state-default > .k-select
-	{
-		border-color: @widget-border-color;
-	}
-
-	.k-state-hover > .k-select{
-		border-color: @hover-border-color;
-	}	
-
-	.k-state-focused > .k-select
-	{
-		border-color: @drop-down-border-color;
-	}	
-	
-	.k-autocomplete.k-state-hover,
-	.k-picker-wrap.k-state-hover,
-	.k-numeric-wrap.k-state-hover,
-	.k-dropdown-wrap.k-state-hover
-	{
-		background-color: @select-hover-background-color;
-		.composite-background(@hover-gradient);
-		background-position: 50% 50%;
-		border-color: @drop-down-hover-border-color;
-	}
-
-	.k-button,
-	&.k-button
-	{
-		color: @widget-text-color;
-		background-color: @header-background-color;
-		border-color: @widget-border-color;
-	}	
-	
-	.k-button:hover
-	{
-		color: @hover-text-color;
-		border-color: @hover-border-color;
-		background-color: @hover-background-color;
-	}
-
-	.k-button:active
-	{
-		color: @selected-text-color;
-		background-color: @selected-background-color;
-		border-color: @selected-border-color;
-	}	
-}
 
 /* TabStrip */
 .k-tabstrip-items .k-state-active
@@ -1266,6 +1203,10 @@ div.k-imagebrowser-dropzone em
 	border-color: @panelbar-items-border;
 	//color: @widget-text-color;
 }
+.k-panelbar > li > .k-link,
+.k-panelbar .k-content{
+	color: @window-titlebar-color;
+}
 
 .k-panelbar .k-content,
 .k-panelbar .k-panel,
@@ -1288,12 +1229,10 @@ div.k-imagebrowser-dropzone em
 	border-color: @panelbar-items-border;
 }
 
-.k-panel > .k-state-selected
-{
-   // color: @selected-text-color;
-    background-color: @selected-background-color;
-    border-color: @selected-border-color;
+.k-panelbar > li > .k-link.k-state-selected{
+	color: @selected-text-color;
 }
+
 
 /* Menu */
 .k-menu.k-header
@@ -1343,6 +1282,84 @@ div.k-imagebrowser-dropzone em
     color: @disabled-text-color;
     border-color: @widget-border-color;
     .composite-background(@widget-gradient);
+}
+
+.k-secondary
+{
+	.k-picker-wrap,
+	.k-dropdown-wrap
+	{
+		background-color: @header-background-color;
+		border-color: #4c5356;
+	}
+	.k-editor-button .k-state-active
+	{
+		background-color: @drop-down-header-background;
+	}
+
+	.k-dropdown-wrap .k-input
+	{
+		color: @widget-text-color;
+	}
+
+	.k-dropdown .k-dropdown-wrap.k-state-hover .k-input,
+	.k-dropdown .k-dropdown-wrap.k-state-focused .k-input
+	{
+		color: @form-widget-color;
+	}
+
+	&.k-splitbar
+	{
+		background-color: #f4f4f4;
+		border-color: #cdcdcd;
+	}
+
+	.k-state-default > .k-select
+	{
+		border-color: #4c5356;
+	}
+
+	.k-state-hover > .k-select{
+		border-color: @hover-border-color;
+	}	
+
+	.k-state-focused > .k-select
+	{
+		border-color: @drop-down-border-color;
+	}	
+	
+	.k-autocomplete.k-state-hover,
+	.k-picker-wrap.k-state-hover,
+	.k-numeric-wrap.k-state-hover,
+	.k-dropdown-wrap.k-state-hover
+	{
+		background-color: @select-hover-background-color;
+		.composite-background(@hover-gradient);
+		background-position: 50% 50%;
+		border-color: @drop-down-hover-border-color;
+	}
+
+	.k-button,
+	&.k-button
+	{
+		color: @widget-text-color;
+		background-color: @header-background-color;
+		border-color: @widget-border-color;
+	}	
+	
+	.k-button:hover
+	{
+		color: @hover-text-color;
+		border-color: @hover-border-color;
+		background-color: @hover-background-color;
+	}
+
+	.k-button:active
+	{
+		color: @selected-text-color;
+		background-color: @selected-background-color;
+		border-color: @selected-border-color;
+	}	
 }
 
 
