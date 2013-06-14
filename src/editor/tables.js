@@ -312,23 +312,26 @@ var InsertTableTool = PopupTool.extend({
     },
 
     update: function (ui, nodes) {
-        var editor = this._editor, table, isFormatted;
+        var editor = this._editor,
+            node = nodes[0],
+            table = node && $(node).closest("table")[0],
+            isFormatted;
 
         PopupTool.fn.update.call(this, ui);
 
         isFormatted = tableFormatFinder.isFormatted(nodes);
         ui.toggleClass("k-state-disabled", isFormatted);
 
-        if (isFormatted) {
-            table = $(nodes[0]).closest("table")[0];
+        $("table", node.ownerDocument).each(function() {
+            if (this != table) {
+                TableEditor.detach(this);
+            }
+        });
 
+        if (isFormatted) {
             TableEditor.attach(table);
 
             editor.selectRange(editor.getRange());
-        } else {
-            $("table", nodes[0].ownerDocument).each(function() {
-                TableEditor.detach(this);
-            });
         }
     }
 });

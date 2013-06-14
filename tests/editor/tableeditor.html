@@ -262,6 +262,21 @@
                 equal($(editor.body).find(".k-selection-cell").length, 2);
             });
 
+            test("moving focus between tables removes selection cells from previous table", function() {
+                var range = createRangeFromText(editor, "<table><tr><td>|foo|</td></tr></table><table><tr><td>bar</td></tr></table>");
+
+                editor.selectRange(range);
+                editor.trigger("select");
+
+                range.setStart(editor.body.lastChild.firstChild.firstChild.firstChild, 1);
+                range.collapse(true);
+
+                editor.selectRange(range);
+                editor.trigger("select");
+
+                equal($(editor.body).find(".k-selection-cell").length, 2);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
