@@ -45,7 +45,7 @@ kendo_module({
             });
 
             if (ANDROID3UP) {
-                that.element.on("move", "_timeoutDeactivate");
+                that.element.on("move", function(e) { that._timeoutDeactivate(e); });
             }
         },
 
