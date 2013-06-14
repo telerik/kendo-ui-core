@@ -45,6 +45,12 @@
                     that.element = element;
                     that.pane = pane;
                     that._getPages();
+                    this.page = 0;
+                },
+
+                scrollTo: function(page, instant) {
+                    this.page = page;
+                    this.pane.transitionTo(- page * this.pane.size(), kendo.effects.Transition.easeOutExpo, instant);
                 },
 
                 _getPages: function () {
@@ -89,6 +95,25 @@
                 content.resizeTo(200);
                 equal(content.element.width(), 400);
                 equal(content.element.find("[data-role=page]").eq(0).width(), 200);
+            });
+
+            asyncTest("scrolls to provided page, offseting the pane to the correct value", 3, function() {
+                element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture");
+                container = element.wrap("<div style='width: 200px;' />");
+
+                var pane = new ElasticPane(element);
+                content = new ScrollViewContent(element, pane);
+
+                equal(content.page, 0);
+
+                content.scrollTo(1, true);
+
+                setTimeout(function() {
+                    start();
+                    equal(content.page, 1);
+                    equal(pane.offset(), 200);
+                }, 50);
+
             });
         </script>
     </body>
