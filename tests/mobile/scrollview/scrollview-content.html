@@ -67,15 +67,15 @@
                         pane = that.pane,
                         width = pane.size() * that.pageSize,
                         approx = round,
-                        ease = Transition.easeOutExpo,
+                        ease = bounce ? Transition.easeOutBack : Transition.easeOutExpo,
                         snap,
                         nextPage;
 
-                    /*
-                    if (bounce) {
-                        ease = Transition.easeOutBack;
+                    if (swipeType === LEFT_SWIPE) {
+                        approx = ceil;
+                    } else if (swipeType === RIGHT_SWIPE) {
+                        approx = floor;
                     }
-                    */
 
                     nextPage = approx(pane.offset() / width);
 
@@ -230,6 +230,30 @@
                 content.dragged(NUDGE);
                 setTimeout(function() {
                     start();
+                    equal(content.page, 0);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+            asyncTest("swift drag moves the content to the next page", 2, function() {
+                pane.moveTo(50);
+                content.dragged(LEFT_SWIPE);
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 1);
+                    equal(pane.offset(), 200);
+                }, 50);
+            });
+
+            asyncTest("swift right drag moves the content to the previous page", 2, function() {
+                content.scrollTo(1, true);
+                pane.moveTo(150);
+                content.dragged(RIGHT_SWIPE);
+
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
                 }, 50);
