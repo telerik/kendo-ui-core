@@ -12,7 +12,7 @@ kendo_module({
         Transition = kendo.effects.Transition,
         roleSelector = kendo.roleSelector,
         AXIS = "x",
-        ui = mobile.ui;
+        ui = mobile.ui,
 
         BEFORE_SHOW = "beforeShow",
         INIT = "init",

@@ -3228,7 +3228,7 @@ function pad(number, digits, end) {
         }
 
         function getDate(date) {
-            date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
             adjustForBrazillianTimezone(date, 0);
             return date;
         }
@@ -3320,7 +3320,6 @@ function pad(number, digits, end) {
             previousDay: function(date) {
                 return addDays(date, -1);
             },
-            addDays: addDays,
             MS_PER_DAY: MS_PER_DAY,
             MS_PER_MINUTE: MS_PER_MINUTE,
             setTime: setTime,
