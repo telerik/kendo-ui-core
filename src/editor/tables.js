@@ -160,6 +160,7 @@ var TableEditor = kendo.Class.extend({
 extend(TableEditor, {
     attach: function(table) {
         if (!table._editor) {
+            $(table).find(".k-selection-row,.k-selection-cell").remove();
             table._editor = new TableEditor(table);
         }
     },

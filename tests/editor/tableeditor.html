@@ -249,6 +249,19 @@
                 equal(editor.value(), "<table><tbody><tr><td>foo</td></tr></tbody></table>");
             });
 
+            test("undo row removal", function() {
+                var range = createRangeFromText(editor, "<table><tr><td>|foo|</td></tr></table>");
+
+                editor.selectRange(range);
+                editor.trigger("select");
+
+                editor.exec("deleteRow");
+                editor.exec("undo");
+
+                equal(editor.value(), "<table><tbody><tr><td>foo</td></tr></tbody></table>");
+                equal($(editor.body).find(".k-selection-cell").length, 2);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
