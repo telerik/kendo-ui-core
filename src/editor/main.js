@@ -68,21 +68,24 @@ kendo_module({
         separatorTemplate:
             '<li class="k-separator"></li>',
 
-        decorateStyleToolItems: function(textarea) {
-            var selectBox = textarea.data.closest(".k-editor").find(".k-style").data("kendoSelectBox");
+        decorateStyleToolItems: function(e) {
+            var textarea = e.data,
+                selectBox = textarea.closest(".k-editor").find(".k-style").data("kendoSelectBox"),
+                doc = textarea.data("kendoEditor").document,
+                dom = kendo.ui.editor.Dom,
+                classes;
 
             if (!selectBox) {
                 return;
             }
 
-            var classes = selectBox.dataSource.view();
+            classes = selectBox.dataSource.view();
 
             selectBox.list.find(".k-item").each(function(idx, element){
                 var item = $(element),
-                    text = item.text(),
+                    style = dom.inlineStyle(doc, "span", {className : classes[idx].value});
 
-                    style = kendo.ui.editor.Dom.inlineStyle(textarea.data.data("kendoEditor").document, "span", {className : classes[idx].value});
-                item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>');
+                item.html('<span unselectable="on" style="display:block;' + style +'">' + item.text() + '</span>');
             });
         },
 

@@ -158,9 +158,6 @@ var TableEditor = kendo.Class.extend({
 });
 
 extend(TableEditor, {
-    importEditorStyles: function() {
-    },
-
     attach: function(table) {
         if (!table._editor) {
             table._editor = new TableEditor(table);
