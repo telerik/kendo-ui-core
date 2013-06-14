@@ -999,16 +999,17 @@ kendo_module({
                     logic: "or",
                     filters: [
                         {
+                            logic: "and",
                             filters: [
                                 { field: "start", operator: "gte", value: startDate },
                                 { field: "end", operator: "gte", value: startDate },
-                                { field: "start", operator: "lte", value: endDate.getTime() + MS_PER_DAY - 1 }
+                                { field: "start", operator: "lte", value: new Date(endDate.getTime() + MS_PER_DAY - 1) }
                             ]
                         },
                         {
                             logic: "and",
                             filters: [
-                                { field: "start", operator: "lte", value: startDate.getTime() + MS_PER_DAY - 1 },
+                                { field: "start", operator: "lte", value: new Date(startDate.getTime() + MS_PER_DAY - 1) },
                                 { field: "end", operator: "gte", value: startDate }
                             ]
                         }

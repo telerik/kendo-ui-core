@@ -409,6 +409,23 @@
                 equalWithRound(applyDefaultLeftOffset(timeSlotPosition.left), eventPosition.left);
             });
 
+            test("single day event which is outside of the time range is not displayed", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 12, 0, 0),
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
+
+                view.renderLayout(selectedDate);
+
+                view.renderEvents(events);
+
+                ok(!container.find(".k-event").length);
+            });
+
             test("set the height of the event", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({

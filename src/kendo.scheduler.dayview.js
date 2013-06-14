@@ -402,22 +402,15 @@ kendo_module({
             var idx,
                 length,
                 slots = this._dates || [],
-                startTime = getMilliseconds(new Date(+this.options.startTime)),
-                endTime = getMilliseconds(new Date(+this.options.endTime)),
                 slotStart,
                 slotEnd;
 
-            if (startTime >= endTime) {
-                endTime += (MS_PER_DAY - MS_PER_MINUTE);
-            }
 
             for (idx = 0, length = slots.length; idx < length; idx++) {
-                slotStart = new Date(+slots[idx]);
-                kendo.date.setTime(slotStart, startTime);
-                slotEnd = new Date(+slots[idx]);
-                kendo.date.setTime(slotEnd, endTime);
+                slotStart = kendo.date.getDate(slots[idx]);
+                slotEnd = new Date(kendo.date.getDate(slots[idx]).getTime() + MS_PER_DAY - 1);
 
-                if (date.getTime() >= slotStart.getTime() && date.getTime() <= slotEnd.getTime()) {
+                if (isInDateRange(date, slotStart, slotEnd)) {
                     return idx;
                 }
             }
@@ -440,14 +433,6 @@ kendo_module({
         },
 
         _positionAllDayEvent: function(element, slots, startIndex, endIndex) {
-            if (startIndex < 0) {
-                startIndex = 0;
-            }
-
-            if (endIndex < 0) {
-                endIndex = slots.length - 1;
-            }
-
             var dateSlot = slots.eq(startIndex),
                 slotWidth = this._calculateAllDayEventWidth(startIndex, endIndex),
                 allDayEvents = SchedulerView.collidingEvents(this.datesHeader.find(".k-event"), startIndex, endIndex).add(element),
@@ -631,21 +616,36 @@ kendo_module({
                 if (this._isInDateSlot(event)) {
                    var dateSlotIndex = this._dateSlotIndex(event.start),
                        endDateSlotIndex = this._dateSlotIndex(event.end),
-                       isSameDayEvent = !event.isAllDay && event.end.getTime() - event.start.getTime() < MS_PER_DAY && this._isInTimeSlot(event),
-                       container = isSameDayEvent ? this.content : allDayEventContainer,
-                       element = this._createEventElement(event, isSameDayEvent ? eventTemplate : allDayEventTemplate);
+                       isOneDayEvent = !event.isAllDay && event.end.getTime() - event.start.getTime() < MS_PER_DAY,
+                       container = isOneDayEvent ? this.content : allDayEventContainer,
+                       element = this._createEventElement(event, isOneDayEvent ? eventTemplate : allDayEventTemplate);
 
-                   if (isSameDayEvent && !event.isAllDay) {
-                       if (dateSlotIndex === -1 && endDateSlotIndex > -1) {
-                           dateSlotIndex = endDateSlotIndex;
+                   if (isOneDayEvent) {
+
+                       if (this._isInTimeSlot(event)) {
+
+                           if (dateSlotIndex === -1 && endDateSlotIndex > -1) {
+                               dateSlotIndex = endDateSlotIndex;
+                           }
+
+                           this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
+
+                           element.appendTo(container);
                        }
 
-                       this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
                    } else {
-                       this._positionAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex);
-                   }
+                       if (dateSlotIndex < 0) {
+                           dateSlotIndex = 0;
+                       }
 
-                   element.appendTo(container);
+                       if (endDateSlotIndex < 0) {
+                           endDateSlotIndex = allDaySlots.length - 1;
+                       }
+
+                       this._positionAllDayEvent(element, allDaySlots, dateSlotIndex, endDateSlotIndex);
+
+                       element.appendTo(container);
+                   }
                 }
             }
 

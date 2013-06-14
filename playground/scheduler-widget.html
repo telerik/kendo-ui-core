@@ -75,8 +75,9 @@
 
         $("#scheduler").kendoScheduler({
             height: 800,
-            // numberOfTimeSlots: 4,
+           // majorTick: 30,
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
+ //           endTime: new Date(2013, 4, 14, 18, 0,0),
             views: ["day", { name: "week", selected: true }, "month", "agenda"],
             resources: [
                 {
@@ -120,12 +121,12 @@
                         id: "ID",
                         fields: {
                             ID: { type: "number" },
-                            title: { defaultValue: "eventTitle", field: "Title", validation: { required: true } },
+                            title: { field: "Title", defaultValue: "No title", validation: { required: true } },
                             start: { type: "date", field: "Start" },
                             end: { type: "date", field: "End" },
                             description: { field: "Description" },
                             recurrence: { field: "Recurrence" },
-                            ownerId: { field: "OwnerID" },
+                            ownerId: { field: "OwnerID", defaultValue: 1 },
                             isAllDay: { type: "boolean", field: "IsAllDay" }
                         }
                     }
