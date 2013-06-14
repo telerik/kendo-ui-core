@@ -602,9 +602,9 @@ kendo_module({
             if (velocity > velocityThreshold) {
                 if(that.offset === 0) {
                     that.reset(ease);
-                    return;
+                } else {
+                    that.backward();
                 }
-                that.backward();
                 return;
             } else if(velocity < -velocityThreshold && !isEndReached) {
                 that.forward();
@@ -613,14 +613,12 @@ kendo_module({
 
             if(that.movable.x < 0 && (abs(that.movable.x) >= width / 3 && !isEndReached)) {
                 that.forward();
-                return;
             } else if(that.movable.x > 0 && (abs(that.movable.x) >= width / 3)) {
                 if(that.offset === 0) {
                     that.reset(ease);
-                    return;
+                } else {
+                    that.backward();
                 }
-                that.backward();
-                return;
             } else {
                 that.reset(ease);
             }
