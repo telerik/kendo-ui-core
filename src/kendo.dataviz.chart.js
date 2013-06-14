@@ -2925,6 +2925,43 @@ kendo_module({
             return categoryAxis.getSlot(categoryIx);
         },
 
+        _traverseDataPoints: function(callback) {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                plotArea = chart.plotArea,
+                categoryIx,
+                seriesIx,
+                pointData,
+                currentCategory,
+                currentSeries,
+                seriesCount = series.length;
+
+            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
+                currentSeries = series[seriesIx];
+                var categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
+                var categories = categoryAxis.options.categories || [];
+                var data = currentSeries.data;
+                var count = data.length;
+                var pointIx;
+
+                for (pointIx = 0; pointIx < count; pointIx++) {
+                    pointData = SeriesBinder.current.bindPoint(currentSeries, pointIx);
+
+                    var category = pointData.fields.category;
+                    if (category) {
+                        categoryIx = indexOf(category, categories);
+                    } else {
+                        categoryIx = pointIx;
+                    }
+
+                    currentCategory = categories[categoryIx];
+
+                    callback(pointData, currentCategory, categoryIx, currentSeries, seriesIx);
+                }
+            }
+        },
+
         traverseDataPoints: function(callback) {
             var chart = this,
                 options = chart.options,
@@ -6896,23 +6933,50 @@ kendo_module({
                     srcData = seriesClone.data;
                     seriesClone.data = data = [];
 
-                    for (groupIx = 0; groupIx < categories.length; groupIx++) {
-                        categoryIndicies = categoryMap[groupIx];
-                        srcValues = [];
-                        srcDataItems = [];
+                    if (currentSeries.categoryField) {
+                        var categorySrcValues = [];
+                        var categorySrcDataItems = [];
 
-                        for (i = 0; i < categoryIndicies.length; i++) {
-                            categoryIx = categoryIndicies[i];
-                            pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
+                        for (i = 0; i < srcData.length; i++) {
+                            pointData = SeriesBinder.current.bindPoint(currentSeries, i);
                             value = pointData.value;
+                            categoryIx = lteDateIndex(categories, pointData.fields.category);
 
+                            srcValues = categorySrcValues[categoryIx] = categorySrcValues[categoryIx] || [];
                             if (defined(value)) {
                                 srcValues.push(pointData.value);
                             }
-                            srcDataItems.push(currentSeries.data[categoryIx]);
+
+                            srcDataItems = categorySrcDataItems[categoryIx] =
+                                categorySrcDataItems[categoryIx] || [];
+
+                            srcDataItems.push(currentSeries.data[i]);
                         }
 
-                        data[groupIx] = calculateAggregates(srcValues, currentSeries, srcDataItems);
+                        for (groupIx = 0; groupIx < categories.length; groupIx++) {
+                            srcValues = categorySrcValues[groupIx] || [];
+                            srcDataItems = categorySrcDataItems[groupIx] || [];
+                            data[groupIx] = calculateAggregates(srcValues, currentSeries, srcDataItems);
+                        }
+                    } else {
+                        for (groupIx = 0; groupIx < categories.length; groupIx++) {
+                            categoryIndicies = categoryMap[groupIx];
+                            srcValues = [];
+                            srcDataItems = [];
+
+                            for (i = 0; i < categoryIndicies.length; i++) {
+                                categoryIx = categoryIndicies[i];
+                                pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
+                                value = pointData.value;
+
+                                if (defined(value)) {
+                                    srcValues.push(pointData.value);
+                                }
+                                srcDataItems.push(currentSeries.data[categoryIx]);
+                            }
+
+                            data[groupIx] = calculateAggregates(srcValues, currentSeries, srcDataItems);
+                        }
                     }
                 }
 
@@ -9496,7 +9560,7 @@ kendo_module({
 
     SeriesBinder.current.register(
         [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
-        [VALUE], [COLOR]
+        [VALUE], [CATEGORY, COLOR]
     );
 
     SeriesBinder.current.register(
@@ -9510,12 +9574,12 @@ kendo_module({
 
     SeriesBinder.current.register(
         [CANDLESTICK, OHLC],
-        ["open", "high", "low", "close"], [COLOR, "downColor"]
+        ["open", "high", "low", "close"], [CATEGORY, COLOR, "downColor"]
     );
 
     SeriesBinder.current.register(
         [BULLET, VERTICAL_BULLET],
-        ["current", "target"], [COLOR, CATEGORY, "visibleInLegend"]
+        ["current", "target"], [CATEGORY, COLOR, "visibleInLegend"]
     );
 
     SeriesBinder.current.register(

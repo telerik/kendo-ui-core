@@ -1630,6 +1630,37 @@
                     });
                 });
 
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Category Field");
+
+                test("Aggregates using category field instead of position", function() {
+                    createPlotArea([{
+                        type: "column",
+                        categoryField: "date",
+                        data: [{
+                            value: 1,
+                            date: new Date("2013-06-01")
+                        }, {
+                            value: 2,
+                            date: new Date("2013-06-02")
+                        }, {
+                            value: 3,
+                            date: new Date("2013-07-01")
+                        }]
+                    }], {
+                        categoryAxis: {
+                            categories: [
+                                new Date("2013-06-01"), new Date("2013-07-01")
+                            ],
+                            baseUnit: "months"
+                        }
+                    }),
+
+                    point = plotArea.series[0].data[0];
+
+                    deepEqual(point, 2);
+                });
+
             })();
 
             (function() {

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Radar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet"></script>
+        <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet"></script>
+    </head>
+    <body>
+        <div id="date-chart" style="width: 300px; height: 300px; float: left;"></div>
+        <div id="categorical-chart" style="width: 300px; height: 300px; float: left;"></div>
+        <script>
+            $(function() {
+                // Top-level goals
+                // TODO: Individual positioning for each point
+                // TODO: Aggregate the points with the same category
+
+
+                // TODO: Bind categories from a union of all series dates
+                // TODO: Map points by categoryField
+                $("#date-chart").kendoChart({
+                    seriesDefaults: {
+                        type: "column",
+                        field: "value",
+                        categoryField: "date"
+                    },
+                    series: [{
+                        data: [{
+                            value: 1,
+                            date: new Date("2013-06-01")
+                        }, {
+                            value: 2,
+                            date: new Date("2013-06-02")
+                        }, {
+                            value: 3,
+                            date: new Date("2013-07-01")
+                        }]
+                    }, {
+                        data: [{
+                            value: 1,
+                            date: new Date("2013-06-01")
+                        }, {
+                            value: 2,
+                            date: new Date("2013-07-01")
+                        }, {
+                            value: 3,
+                            date: new Date("2013-08-01")
+                        }]
+                    }],
+                    categoryAxis: {
+                        // TODO: What do we do if the axis already has categories?
+                        // Should we just merge them?
+                        categories: [
+                            new Date("2013-06-01"), new Date("2013-08-01")
+                        ],
+                        baseUnit: "months"
+                    },
+                    valueAxis: { majorUnit: 1 }
+                });
+
+                $("#categorical-chart").kendoChart({
+                    seriesDefaults: {
+                        type: "column",
+                        field: "value",
+                        categoryField: "category"
+                    },
+                    series: [{
+                        data: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "A"
+                        }, {
+                            value: 3,
+                            category: "B"
+                        }]
+                    }, {
+                        data: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "B"
+                        }, {
+                            value: 3,
+                            category: "C"
+                        }]
+                    }],
+                    categoryAxis: {
+                        // TODO: What do we do if the axis already has categories?
+                        categories: ["Foo", "A", "B", "C"]
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
+
