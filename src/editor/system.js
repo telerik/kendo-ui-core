@@ -433,26 +433,25 @@ var Clipboard = Class.extend({
         range.deleteContents();
 
         setTimeout(function() {
-            var html, args = { html: "" };
+            var html = "", args = { html: "" }, containers;
 
             selectRange(range);
 
-            // iOS5 will substitute the paste container with its own element
-            if (!clipboardNode.parentNode) {
-                clipboardNode = editor.body.lastChild;
-            }
+            containers = $(editor.body).children(".k-paste-container");
 
-            dom.remove(clipboardNode);
+            containers.each(function() {
+                if (this.lastChild && dom.is(this.lastChild, 'br')) {
+                    dom.remove(this.lastChild);
+                }
 
-            if (clipboardNode.lastChild && dom.is(clipboardNode.lastChild, 'br')) {
-                dom.remove(clipboardNode.lastChild);
-            }
+                html += this.innerHTML;
+            });
 
-            html = clipboardNode.innerHTML;
+            containers.remove();
 
-            if (html != bom) {
-                args.html = html;
-            }
+            html = html.replace(/\ufeff/g, "");
+
+            args.html = html;
 
             editor.trigger("paste", args);
             editor.clipboard.paste(args.html, true);
