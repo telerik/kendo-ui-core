@@ -87,7 +87,7 @@
     <a data-role="button" style="background-color: darkred; display: block; margin: 2em; font-size: 1.4em;">Delete Spam</a>
 </div>
 
-<div data-role="drawer" id="my-drawer" style="width: 270px" data-views="['drawer-home', 'drawer-settings', '@Url.Content("~/mobile/m/drawer/index.html")']">
+<div data-role="drawer" id="my-drawer" style="width: 270px" data-views="['drawer-home', 'drawer-starred', 'drawer-deleted', 'drawer-spam', 'drawer-drafts', 'drawer-sent', '@Url.Content("~/mobile/m/drawer/index.html")']">
     <ul data-role="listview" data-type="group">
         <li>Mailbox
             <ul>
@@ -141,15 +141,15 @@
         background-color: #4e4e4e;
         color: #fff;
     }
-    
+
     .km-ios #my-drawer .km-group-title,
     .km-blackberry #my-drawer .km-group-title
     {
         background-color: #6e6e6e;
         color: #fff;
     }
-    
-    .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; } 
+
+    .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
     .km-inbox:before, .km-inbox:after { content: "\E0B0"; }
     .km-sent:before, .km-sent:after { content: "\E0C6"; }
     .km-trash:before, .km-trash:after { content: "\E0C3"; }
@@ -157,7 +157,7 @@
     .km-star:before, .km-star:after { content: "\E0D7"; }
     .km-settings:before, .km-settings:after { content: "\E0DA"; }
     .km-off:before, .km-off:after { content: "\E0B9"; }
-    
+
     .inboxList
     {
         font-size: .8em;
