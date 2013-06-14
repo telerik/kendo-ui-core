@@ -942,29 +942,41 @@ kendo_module({
     '<div class="k-edit-label"></div>' +
     '<div class="k-edit-field"><input class="k-recur-end-until" type="radio" name="end" value="until" />{3}</div>';
 
-    //TODO: REFACTOR. Cannot easily change culture !!!
-    //
-    var WEEKDAYS = (function() {
+    var weekDayCheckBoxes = function(firstDay) {
         var shortNames = kendo.culture().calendar.days.namesShort,
-            result = "";
+            length = shortNames.length,
+            result = "",
+            idx = 0,
+            shortName;
 
-        for (var idx = 0, length = shortNames.length; idx < length; idx++) {
-            result += '<input class="k-recur-weekday" type="checkbox" value="' + idx + '" /> ' + shortNames[idx];
+        shortNames = shortNames.slice(firstDay).concat(shortNames.slice(0, firstDay));
+
+        for (; idx < length; idx++) {
+            shortName = shortNames[idx];
+            result += '<input class="k-recur-weekday" type="checkbox" value="' + WEEK_DAYS_IDX[shortName.toUpperCase()] + '" /> ' + shortName;
         }
 
         return result;
-    })();
+    };
 
     var RecurrenceEditor = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                start;
 
             Widget.fn.init.call(that, element, options);
 
             that.wrapper = that.element;
 
-            if (!that.options.start) {
-                that.options.start = date.today();
+            options = that.options;
+            options.start = start = options.start || date.today();
+
+            if (typeof start === "string") {
+                options.start = kendo.parseDate(start, "yyyyMMddTHHmmss");
+            }
+
+            if (options.firstWeekDay === null) {
+                options.firstWeekDay = kendo.culture().calendar.firstDay;
             }
 
             that._frequencyChooser();
@@ -974,11 +986,16 @@ kendo_module({
             that._views();
 
             that._value = {};
+
+            //that.value(options.value);
         },
         options: {
             name: "RecurrenceEditor",
             frequencies: ["never", "daily", "weekly", "monthly", "yearly"],
-            eventStart: null,
+            firstWeekDay: null,
+            start: "",
+            value: "",
+            //TODO: simplify messages
             messages: {
                 frequencies: {
                     never: "Never",
@@ -998,9 +1015,9 @@ kendo_module({
                     intervalRepeat: "Repeat every: ",
                     intervalDays: " days(s)"
                 },
-                weekly: { //TODO: simplify messages
+                weekly: {
                     intervalRepeat: "Repeat every: ",
-                    intervalDays: " week(s)",
+                    intervalWeeks: " week(s)",
                     weekDaysOn: "On "
                 }
             }
@@ -1038,6 +1055,12 @@ kendo_module({
             }
 
             rule.freq = frequency;
+            if (frequency === "weekly" && !rule.weekDays) {
+                rule.weekDays = [{
+                    day: this.options.start.getDay(),
+                    offset: 0
+                }];
+            }
 
             that._interval();
             that._weekDays();
@@ -1111,6 +1134,8 @@ kendo_module({
                 start = that.options.start,
                 rule = that._value;
 
+            //TODO: How to define value of the until option
+            //
             that.untilDatePicker = input.kendoDatePicker({
                 value: rule.until || start,
                 //TODO: SET MIN
@@ -1125,8 +1150,9 @@ kendo_module({
             var that = this,
                 rule = that._value,
                 container = that.container,
-                click = function() {
-                    that._toggleEndRule(this.value);
+                click = function(e) {
+                    that._toggleEndRule(e.currentTarget.value);
+                    that.trigger("change");
                 };
 
             that.radioButtonNever = container.find(".k-recur-end-never").on("click", click);
@@ -1214,7 +1240,8 @@ kendo_module({
 
         _views: function() {
             var that = this,
-                messages = that.options.messages,
+                options = that.options,
+                messages = options.messages,
                 end = messages.end,
                 daily = messages.daily,
                 weekly = messages.weekly,
@@ -1223,7 +1250,7 @@ kendo_module({
                 endHtml = kendo.format(END_HTML, end.endLabel, end.endNever, count, until);
 
             that._daily = kendo.format(INTERVAL, daily.intervalRepeat, daily.intervalDays) + endHtml;
-            that._weekly = kendo.format(INTERVAL, weekly.intervalRepeat, weekly.intervalDays) + weekly.weekDaysOn + WEEKDAYS + endHtml;
+            that._weekly = kendo.format(INTERVAL, weekly.intervalRepeat, weekly.intervalWeeks) + weekly.weekDaysOn + weekDayCheckBoxes(options.firstWeekDay) + endHtml;
         }
     });
 

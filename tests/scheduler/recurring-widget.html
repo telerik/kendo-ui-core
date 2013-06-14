@@ -186,7 +186,9 @@
             });
 
             test("Change interval updates widget value", function() {
-                var editor = new RecurrenceEditor(div);
+                var date = new Date(2013, 5, 14),
+                    editor = new RecurrenceEditor(div, { start: date });
+
                 editor.setView("weekly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
@@ -194,11 +196,13 @@
                 interval.value(3);
                 interval.trigger("change");
 
-                equal(editor.value(), "FREQ=WEEKLY;INTERVAL=3");
+                equal(editor.value(), "FREQ=WEEKLY;INTERVAL=3;BYDAY=FR");
             });
 
             test("Clears value of the interval is equal to 1", function() {
-                var editor = new RecurrenceEditor(div);
+                var date = new Date(2013, 5, 14),
+                    editor = new RecurrenceEditor(div, { start: date });
+
                 editor.setView("weekly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
@@ -206,7 +210,7 @@
                 interval.value(null);
                 interval.trigger("change");
 
-                equal(editor.value(), "FREQ=WEEKLY"); //default value of INTERVAL is 1
+                equal(editor.value(), "FREQ=WEEKLY;BYDAY=FR"); //default value of INTERVAL is 1
             });
 
             test("All end inputs are disabled if never radio is checked", function() {
@@ -224,23 +228,61 @@
             });
 
             test("Select count radio sets count value", function() {
-                var editor = new RecurrenceEditor(div);
+                var date = new Date(2013, 5, 14),
+                    editor = new RecurrenceEditor(div, { start: date });
+
                 editor.setView("weekly");
 
                 editor.radioButtonCount.click();
 
-                equal(editor.value(), "FREQ=WEEKLY;COUNT=1"); //default value of INTERVAL is 1
+                equal(editor.value(), "FREQ=WEEKLY;COUNT=1;BYDAY=FR"); //default value of INTERVAL is 1
             });
 
             test("Select until radio sets until value", function() {
-                var editor = new RecurrenceEditor(div),
+                var date = new Date(2013, 5, 14),
+                    editor = new RecurrenceEditor(div, { start: date }),
                     date = kendo.date.today();
 
                 editor.setView("weekly");
 
                 editor.radioButtonUntil.click();
 
-                equal(editor.value(), "FREQ=WEEKLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ"));
+                equal(editor.value(), "FREQ=WEEKLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYDAY=FR");
+            });
+
+            test("Render weekdays", function() {
+                var editor = new RecurrenceEditor(div),
+                    date = kendo.date.today();
+
+                editor.setView("weekly");
+
+                var checkboxes = editor.container.find("input[type=checkbox]");
+
+                equal(checkboxes.length, 7);
+            });
+
+            test("Take into account firstWeekDay option", function() {
+                var editor = new RecurrenceEditor(div, { firstWeekDay: 6 }),
+                    date = kendo.date.today();
+
+                editor.setView("weekly");
+
+                var checkboxes = editor.container.find("input[type=checkbox]");
+
+                equal(checkboxes.eq(0).val(), "6");
+            });
+
+            test("Use day of event start date to check correct checkbox", function() {
+                var date = kendo.date.today(),
+                    editor = new RecurrenceEditor(div, {
+                        start: date
+                    });
+
+                editor.setView("weekly");
+
+                var checkboxes = editor.container.find("input[type=checkbox]:checked");
+
+                equal(checkboxes.eq(0).val(), date.getDay());
             });
 
             module("kendo.ui.RecurrenceEditor API", {
