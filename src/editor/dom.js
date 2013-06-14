@@ -371,6 +371,18 @@ var Dom = {
         node.parentNode.removeChild(node);
     },
 
+    removeTextSiblings: function(node) {
+        var parentNode = node.parentNode;
+
+        while (node.nextSibling && node.nextSibling.nodeType == 3) {
+            parentNode.removeChild(node.nextSibling);
+        }
+
+        while (node.previousSibling && node.previousSibling.nodeType == 3) {
+            parentNode.removeChild(node.previousSibling);
+        }
+    },
+
     trim: function (parent) {
         for (var i = parent.childNodes.length - 1; i >= 0; i--) {
             var node = parent.childNodes[i];

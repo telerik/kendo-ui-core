@@ -403,6 +403,8 @@ var DeleteRowCommand = Command.extend({
         if (rowCount == 1 || (rowCount == 2 && table._editor)) {
             dom.remove(table);
         } else {
+            dom.removeTextSiblings(row);
+
             focusElement = dom.next(row) || dom.prev(row);
             focusElement = focusElement.cells[1] || focusElement.cells[0];
 
@@ -428,6 +430,8 @@ var DeleteColumnCommand = Command.extend({
         if (columnCount == 1 || (columnCount == 2 && table._editor)) {
             dom.remove(table);
         } else {
+            dom.removeTextSiblings(td);
+
             focusElement = dom.next(td) || dom.prev(td);
 
             for (i = 0; i < rows.length; i++) {
