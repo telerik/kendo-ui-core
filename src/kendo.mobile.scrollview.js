@@ -139,7 +139,7 @@ kendo_module({
             });
 
             $.extend(that, {
-                duration: options.duration,
+                duration: options && options.duration || 1,
                 movable: movable,
                 transition: transition,
                 userEvents: userEvents,
