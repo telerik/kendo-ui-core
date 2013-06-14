@@ -11,9 +11,8 @@ kendo_module({
         mobile = kendo.mobile,
         Transition = kendo.effects.Transition,
         roleSelector = kendo.roleSelector,
-        Z_INDEX = "zIndex",
         AXIS = "x",
-        ui = mobile.ui,
+        ui = mobile.ui;
 
         BEFORE_SHOW = "beforeShow",
         INIT = "init",
@@ -22,6 +21,8 @@ kendo_module({
 
     var Drawer = ui.View.extend({
         init: function(element, options) {
+            // move the drawer to the top, in order hide it
+            $(element).parent().prepend(element);
             ui.View.fn.init.call(this, element, options);
             this.pane = this.element.closest(roleSelector("pane")).data("kendoMobilePane");
 
@@ -119,9 +120,9 @@ kendo_module({
         _setAsCurrent: function() {
             if (Drawer.last !== this) {
                 if (Drawer.last) {
-                    Drawer.last.element.css(Z_INDEX, -2);
+                    Drawer.last.element.hide();
                 }
-                this.element.css(Z_INDEX, -1);
+                this.element.show();
             }
 
             Drawer.last = this;
