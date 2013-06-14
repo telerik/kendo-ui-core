@@ -120,6 +120,69 @@
                     });
                 });
 
+                asyncTest("categories are populated from series", function() {
+                    chart = createChart({
+                        series: [{
+                            categoryField: "period"
+                        }],
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }],
+                        dataBound: function() {
+                            deepEqual(this.options.categoryAxis.categories, ["Jan", "Feb"]);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("categories data items are populated from series", function() {
+                    chart = createChart({
+                        series: [{
+                            categoryField: "period"
+                        }],
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }],
+                        dataBound: function() {
+                            equal(this.options.categoryAxis.dataItems[1].sales, 110);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("only unique categories are populated from series", function() {
+                    chart = createChart({
+                        series: [{
+                            categoryField: "period"
+                        }],
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }, {
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }],
+                        dataBound: function() {
+                            deepEqual(this.options.categoryAxis.categories, ["Jan", "Feb"]);
+                            start();
+                        }
+                    });
+                });
+
                 test("initial binding is done using fetch", 1, function() {
                     stubMethod(kendo.data.DataSource.fn, "fetch", function() {
                         ok(true);

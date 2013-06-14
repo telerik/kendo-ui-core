@@ -7155,6 +7155,8 @@ kendo_module({
                 axisPane = plotArea.findPane(axisOptions.pane);
 
                 if (inArray(axisPane, panes)) {
+                    plotArea.syncSeriesCategories(axisOptions);
+
                     name = axisOptions.name;
                     categories = axisOptions.categories || [];
                     dateCategory = categories[0] instanceof Date;
@@ -7201,6 +7203,32 @@ kendo_module({
                 plotArea.axisY = primaryAxis;
             } else {
                 plotArea.axisX = primaryAxis;
+            }
+        },
+
+        syncSeriesCategories: function(axis) {
+            var plotArea = this,
+                series = plotArea.options.series,
+                seriesIx,
+                seriesLength = series.length,
+                currentSeries;
+
+            axis.categories = axis.categories || [];
+            axis.dataItems = axis.dataItems || [];
+
+            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+                currentSeries = series[seriesIx];
+
+                if (currentSeries.categoryField) {
+                    for (var i = 0; i < currentSeries.data.length; i++) {
+                        category = getField(currentSeries.categoryField, currentSeries.data[i]);
+
+                        if (indexOf(category, axis.categories) < 0) {
+                            axis.categories.push(category);
+                            axis.dataItems.push(currentSeries.data[i]);
+                        }
+                    }
+                }
             }
         },
 
@@ -9379,6 +9407,7 @@ kendo_module({
         }
     }
 
+    // TODO: Switch argument order to match indexOf
     function lteDateIndex(sortedDates, date) {
         var low = 0,
             high = sortedDates.length - 1,
