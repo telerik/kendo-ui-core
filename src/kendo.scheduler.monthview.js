@@ -380,7 +380,7 @@ kendo_module({
             return result;
         },
 
-        renderEvents: function(events) {
+        render: function(events) {
             var event,
                 eventTemplate = this.eventTemplate,
                 idx,

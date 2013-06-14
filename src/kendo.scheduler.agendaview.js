@@ -113,7 +113,7 @@ kendo_module({
             return new kendo.data.Query(tasks).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "asc" }]).groupBy({field: "startDate"}).toArray();
         },
 
-        renderEvents: function(events) {
+        render: function(events) {
             var table = this.content.find("table").empty();
 
             if (events.length > 0) {

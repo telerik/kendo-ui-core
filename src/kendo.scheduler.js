@@ -261,6 +261,36 @@ kendo_module({
         return result;
     }
 
+    function dropDownResourceEditor(resource) {
+        return function(container) {
+           $(kendo.format('<select data-{0}bind="value: {1}">', kendo.ns, resource.field))
+             .appendTo(container)
+             .kendoDropDownList({
+                 dataTextField: resource.dataTextField,
+                 dataValueField: resource.dataValueField,
+                 dataSource: resource.dataSource,
+                 valuePrimitive: resource.valuePrimitive,
+                 optionLabel: "None",
+                 template: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
+             });
+       };
+    }
+
+    function multiSelectResourceEditor(resource) {
+        return function(container) {
+           $(kendo.format('<select data-{0}bind="value: {1}">', kendo.ns, resource.field))
+             .appendTo(container)
+             .kendoMultiSelect({
+                 dataTextField: resource.dataTextField,
+                 dataValueField: resource.dataValueField,
+                 dataSource: resource.dataSource,
+                 valuePrimitive: resource.valuePrimitive,
+                 itemTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField),
+                 tagTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
+             });
+       };
+    }
+
     var Scheduler = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -510,41 +540,12 @@ kendo_module({
                 }
 
                 for (var resourceIndex = 0; resourceIndex < that.resources.length; resourceIndex++) {
-                    (function(resource) {
-                        var field = {
-                           field: resource.field,
-                           title: resource.title
-                        };
-
-                        if (resource.multiple) {
-                            field.editor = function(container) {
-                               $(kendo.format('<select data-{0}bind="value: {1}">', kendo.ns, resource.field))
-                                 .appendTo(container)
-                                 .kendoMultiSelect({
-                                     dataTextField: resource.dataTextField,
-                                     dataValueField: resource.dataValueField,
-                                     dataSource: resource.dataSource,
-                                     valuePrimitive: resource.valuePrimitive,
-                                     itemTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField),
-                                     tagTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
-                                 });
-                           };
-                        } else {
-                            field.editor = function(container) {
-                               $(kendo.format('<select data-{0}bind="value: {1}">', kendo.ns, resource.field))
-                                 .appendTo(container)
-                                 .kendoDropDownList({
-                                     dataTextField: resource.dataTextField,
-                                     dataValueField: resource.dataValueField,
-                                     dataSource: resource.dataSource,
-                                     valuePrimitive: resource.valuePrimitive,
-                                     optionLabel: "None",
-                                     template: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
-                                 });
-                           };
-                        }
-                        fields.push(field);
-                    })(that.resources[resourceIndex]);
+                    var resource = that.resources[resourceIndex];
+                    fields.push({
+                       field: resource.field,
+                       title: resource.title,
+                       editor: resource.multiple? multiSelectResourceEditor(resource) : dropDownResourceEditor(resource)
+                    });
                 }
 
                 for (var idx = 0, length = fields.length; idx < length; idx++) {
@@ -852,7 +853,7 @@ kendo_module({
                     dataTextField: resource.dataTextField || "text",
                     dataValueField: resource.dataValueField || "value",
                     dataColorField: resource.dataColorField || "color",
-                    valuePrimitive: resource.valuePrimitive || true,
+                    valuePrimitive: resource.valuePrimitive != null ? resource.valuePrimitive : true,
                     multiple: resource.multiple || false,
                     dataSource: kendo.data.DataSource.create(dataSource)
                 });
@@ -1036,7 +1037,7 @@ kendo_module({
 
             data = new kendo.data.Query(data).filter(this._createFilter(view.startDate, view.endDate)).toArray();
 
-            view.renderEvents(data);
+            view.render(data);
 
             this.trigger("dataBound");
         }

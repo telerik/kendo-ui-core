@@ -275,7 +275,7 @@
                     name: "foo",
                     renderLayout: $.noop,
                     dateForTitle: $.noop,
-                    renderEvents: $.noop,
+                    render: $.noop,
                 });
 
                 var scheduler = new Scheduler(container, {
@@ -289,7 +289,7 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        renderEvents: $.noop,
+                        render: $.noop,
                         renderLayout: function(selectedDate) {
                             ok(selectedDate);
                         }
@@ -303,7 +303,7 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        renderEvents: $.noop,
+                        render: $.noop,
                         renderLayout: function(selectedDate) {
                         },
                         destroy: function() {
@@ -321,7 +321,7 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        renderEvents: $.noop,
+                        render: $.noop,
                         renderLayout: function(selectedDate) {
                             ok(true);
                         }
@@ -346,7 +346,7 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        renderEvents: $.noop,
+                        render: $.noop,
                         renderLayout: function(selectedDate) {
                             ok(true);
                         }
@@ -362,18 +362,18 @@
             test("events are re-position on window resize", function() {
                 var scheduler = new Scheduler(container, { });
 
-                var view = stub(scheduler.view(), "renderEvents");
+                var view = stub(scheduler.view(), "render");
 
                 $(window).trigger("resize");
 
-                equal(view.calls("renderEvents"), 1);
+                equal(view.calls("render"), 1);
             });
 
             test("renderEvent is called with events as plain objects", 1, function() {
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
-                        renderEvents: function(events) {
+                        render: function(events) {
                             ok(!(events[0] instanceof kendo.data.SchedulerEvent));
                         },
                         renderLayout: function() {
@@ -393,13 +393,13 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "view1",
                         dateForTitle: $.noop,
-                        renderEvents: $.noop,
+                        render: $.noop,
                         renderLayout: $.noop
                     }),
                     MyCustomView2 = kendo.ui.SchedulerView.extend({
                         name: "view2",
                         dateForTitle: $.noop,
-                        renderEvents: $.noop,
+                        render: $.noop,
                         renderLayout: $.noop
                     }),
                     scheduler = new Scheduler(container, {
@@ -418,13 +418,13 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "view1",
                         dateForTitle: $.noop,
-                        renderEvents: $.noop,
+                        render: $.noop,
                         renderLayout: $.noop
                     }),
                     MyCustomView2 = kendo.ui.SchedulerView.extend({
                         name: "view2",
                         dateForTitle: $.noop,
-                        renderEvents: $.noop,
+                        render: $.noop,
                         renderLayout: $.noop
                     }),
                     scheduler = new Scheduler(container, {

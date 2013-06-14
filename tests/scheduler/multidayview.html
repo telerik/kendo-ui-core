@@ -276,7 +276,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event").length, 1);
                 equal(view.content.find(".k-event dd").text(), "my event");
@@ -294,7 +294,7 @@
 
                 var events = [{ uid: "foo", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find(".k-event").attr("data-uid"), "foo");
             });
@@ -314,7 +314,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "event2" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event").length, 2);
                 equal(view.content.find(".k-event:first dd").text(), "event1");
@@ -333,8 +333,8 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
-                view.renderEvents(events);
+                view.render(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event").length, 1);
                 equal(view.content.find(".k-event dd").text(), "my event");
@@ -352,7 +352,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event dt").text(), "10:00 AM - 11:00 AM");
             });
@@ -370,7 +370,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find("div.k-event").text(), "my event");
             });
@@ -400,7 +400,7 @@
 
                 view.renderLayout(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
 
                 eventPosition = view.content.find("div.k-event").offset();
                 timeSlotPosition = view.content.find("tr").eq(10).offset();
@@ -421,7 +421,7 @@
 
                 view.renderLayout(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
 
                 ok(!container.find(".k-event").length);
             });
@@ -437,7 +437,7 @@
 
                 view.renderLayout(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 2));
 
@@ -454,7 +454,7 @@
 
                 view.renderLayout(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 3));
             });
@@ -471,7 +471,7 @@
 
                 view.renderLayout(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 1));
             });
@@ -487,7 +487,7 @@
 
                 view.renderLayout(selectedDate);
 
-                view.renderEvents(events);
+                view.render(events);
                 equal(view.content.find("div.k-event").width(), view.content.find("td:eq(10)").width() - 4 - rightOffset);
             });
 
@@ -503,7 +503,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 1);
                 equal(view.datesHeader.find(".k-event dd").text(), "my event");
@@ -522,7 +522,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), isAllDay: true, title: "all day event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 1);
                 equal(view.datesHeader.find(".k-event dd").text(), "all day event");
@@ -541,7 +541,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26), end: new Date(2013, 1, 26), isAllDay: true, title: "all day event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 0);
             });
@@ -558,7 +558,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26), end: new Date(2013, 1, 26), isAllDay: true, title: "all day event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 0);
             });
@@ -575,7 +575,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventOffset = view.datesHeader.find("div.k-event").offset();
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
@@ -597,7 +597,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
                 var eventOffset = view.datesHeader.find("div.k-event").offset();
                 var slotOffset = view.element.find(".k-scheduler-header-all-day td").eq(0).offset();
                 var slotWidth = 0;
@@ -624,7 +624,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
@@ -644,7 +644,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
@@ -664,7 +664,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 27, 11, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var slotWidth = view.element.find(".k-scheduler-header-all-day td")[0].clientWidth;
 
@@ -686,7 +686,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
@@ -708,7 +708,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
                 var eventElement = view.content.find("div.k-event");
 
                 equal(eventElement.length, 1);
@@ -731,7 +731,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 26, 8, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
                 ok(!view.content.find("div.k-event").length);
             });
 
@@ -750,7 +750,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
@@ -772,7 +772,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 27, 9, 0, 0), end: new Date(2013, 1, 27, 10, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
                 equal(eventElement.length, 1);
@@ -795,7 +795,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var slot = view.content.find("tr").eq(8).find("td:first");
@@ -827,7 +827,7 @@
                     {uid:"uid", start: new Date(2013, 1, 27, 8, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "other slot event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstSlot = view.content.find("tr").eq(8).find("td:first");
@@ -859,7 +859,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 13, 0, 0), end: new Date(2013, 1, 26, 14, 0, 0), title: "no collision" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -890,7 +890,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -918,7 +918,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -946,7 +946,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "second event" },
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -977,7 +977,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 17, 0, 0), end: new Date(2013, 1, 26, 19, 0, 0), title: "another log event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
@@ -1009,7 +1009,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "same as first" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
                 equal(eventElements.eq(0).find("dd").text(), "second event");
@@ -1031,7 +1031,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
 
@@ -1051,7 +1051,7 @@
 
                 var events = [{uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" }];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElement = view.content.find("div.k-event");
 
@@ -1074,7 +1074,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 27, 13, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.datesHeader.find("div.k-event");
 
@@ -1112,7 +1112,7 @@
                     {uid:"uid", start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "second event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.datesHeader.find("div.k-event");
 
@@ -1145,7 +1145,7 @@
                     {uid:"uid", start: new Date(2013, 1, 28, 8, 0, 0), end: new Date(2013, 1, 29, 13, 0, 0), title: "third event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.datesHeader.find("div.k-event");
 
@@ -1174,7 +1174,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event", isAllDay: true },
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 var eventElements = view.datesHeader.find("div.k-event");
 
@@ -1201,7 +1201,7 @@
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find(".k-event a>.k-i-close").length, 1);
                 equal(view.datesHeader.find(".k-event a>.k-i-close").length, 1);
@@ -1223,7 +1223,7 @@
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 ok(!view.content.find(".k-event a>.k-i-close").length);
                 ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
@@ -1245,7 +1245,7 @@
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.content.find(".k-event a:has(.k-i-close)").css("display"), "none");
                 equal(view.datesHeader.find(".k-event a:has(.k-i-close)").css("display"), "none");
@@ -1266,7 +1266,7 @@
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 equal(view.datesHeader.find(".k-event a:has(.k-i-close)").length, 1);
             });
@@ -1287,7 +1287,7 @@
                     {uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 ok(!view.content.find(".k-event a>.k-i-close").length);
                 ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
@@ -1311,7 +1311,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.content.find(".k-event a:has(.k-i-close)").click();
             });
@@ -1375,7 +1375,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event", isAllDay: true }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.datesHeader.find(".k-event").trigger("dblclick");
             });
@@ -1398,7 +1398,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.content.find(".k-event").trigger("dblclick");
             });
@@ -1421,7 +1421,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.content.find(".k-event").trigger("dblclick");
             });
@@ -1444,7 +1444,7 @@
                     {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }
                 ];
 
-                view.renderEvents(events);
+                view.render(events);
 
                 view.content.find(".k-event").trigger("dblclick");
             });
@@ -1509,7 +1509,7 @@
 
                 view.renderLayout(new Date(2013, 1, 2));
 
-                view.renderEvents([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2) }]);
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2) }]);
 
                 equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
             });
@@ -1519,7 +1519,7 @@
 
                 view.renderLayout(new Date(2013, 1, 2));
 
-                view.renderEvents([{ uid: "foo", title: "",  start: new Date(2013, 1, 2), end: new Date(2013, 1, 4) }]);
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 2), end: new Date(2013, 1, 4) }]);
 
                 equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
             });
@@ -1529,7 +1529,7 @@
 
                 view.renderLayout(new Date(2013, 1, 2));
 
-                view.renderEvents([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 4) }]);
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 4) }]);
 
                 equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
                 equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
@@ -1540,7 +1540,7 @@
 
                 view.renderLayout(new Date(2013, 1, 2));
 
-                view.renderEvents([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), recurrence: "FREQ=DAILY" }]);
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), recurrence: "FREQ=DAILY" }]);
 
                 equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
             });

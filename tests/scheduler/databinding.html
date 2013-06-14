@@ -49,7 +49,7 @@
             test("view is bound to the event data", 1, function() {
                 var scheduler = new Scheduler(container, {
                     views: [ kendo.ui.MultiDayView.extend({
-                        renderEvents: function(events) {
+                        render: function(events) {
                             equal(events.length, 2);
                         },
                         name: "testView"
@@ -72,7 +72,7 @@
             test("data is filtered before is passed to the view", 1, function() {
                 var scheduler = new Scheduler(container, {
                     views: [ kendo.ui.MultiDayView.extend({
-                        renderEvents: function(events) {
+                        render: function(events) {
                             equal(events.length, 1);
                         },
                         name: "testView"
@@ -118,11 +118,11 @@
 
                 view = scheduler.view();
                 stub(view, {
-                    renderEvents: view.renderEvents
+                    render: view.render
                 });
 
                 scheduler.refresh();
-                events = view.args("renderEvents", 0)[0];
+                events = view.args("render", 0)[0];
 
                 equal(events.length, occurrencesLength + 1);
             });

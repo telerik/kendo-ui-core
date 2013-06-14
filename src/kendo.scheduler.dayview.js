@@ -590,7 +590,7 @@ kendo_module({
             }
         },
 
-        renderEvents: function(events) {
+        render: function(events) {
             var options = this.options,
                 eventTemplate = this.eventTemplate,
                 allDayEventTemplate = this.allDayEventTemplate,

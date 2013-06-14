@@ -55,14 +55,14 @@
             test("removing model triggers updates the view", function() {
                 var scheduler = setup(),
                     dataSource = scheduler.dataSource,
-                    render = stub(scheduler.view(), "renderEvents");
+                    render = stub(scheduler.view(), "render");
 
                 scheduler._showMessage = function() {
                 };
 
                 dataSource.remove(dataSource.at(0));
 
-                equal(render.calls("renderEvents"), 1);
+                equal(render.calls("render"), 1);
             });
 
             test("clicking the destroy button calls datasource remove", function() {

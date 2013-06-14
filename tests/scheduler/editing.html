@@ -58,11 +58,11 @@
             test("adding model updates the view", function() {
                 var scheduler = setup(),
                     dataSource = scheduler.dataSource,
-                    render = stub(scheduler.view(), "renderEvents");
+                    render = stub(scheduler.view(), "render");
 
                 dataSource.add({});
 
-                equal(render.calls("renderEvents"), 1);
+                equal(render.calls("render"), 1);
             });
 
             test("clicking view slot calls addEvent method", function() {
