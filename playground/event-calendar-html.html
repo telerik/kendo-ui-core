@@ -18,16 +18,31 @@ html
 
 /* common.less */
 
+div.k-window-content
+{
+    padding: 1em 0 0;
+}
+
 .k-edit-label
 {
     float:left;
     clear:both;
+    width:22%;
 }
 
 .k-edit-field
 {
     float:right;
     clear:right;
+}
+
+.k-edit-buttons
+{
+    clear: both;
+    text-align: right;
+    border-width:1px 0 0;
+    border-style: solid;
+    padding:.6em;
 }
 
 
@@ -442,6 +457,67 @@ $(document).ready(function(){
 });
 
 </script>
+
+
+    <div class="k-widget k-window" style="padding-top: 28.35999870300293px; min-width: 90px;
+        min-height: 50px; display: block; top: 263.1796875px; left: 745px; z-index: 10003;
+        opacity: 1; -webkit-transform: scale(1);" data-role="draggable">
+        <div class="k-window-titlebar k-header" style="margin-top: -28.35999870300293px;">
+            &nbsp;<span class="k-window-title" style="right: 30px;">Edit</span><div class="k-window-actions">
+                <a role="button" href="#" class="k-window-action k-link"><span role="presentation"
+                    class="k-icon k-i-close">Close</span></a></div>
+        </div>
+        <div data-uid="924816fa-4806-48eb-be29-75ff6f14394d" data-role="window" class="k-window-content k-content"
+            style="overflow: auto;" tabindex="0">
+            <div class="k-edit-form-container">
+                <div class="k-edit-label">
+                    <label for="ProductName">
+                        Product Name</label></div>
+                <div data-container-for="ProductName" class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="ProductName" required="required"
+                        data-bind="value:ProductName"></div>
+                <div class="k-edit-label">
+                    <label for="UnitPrice">
+                        Unit Price</label></div>
+                <div data-container-for="UnitPrice" class="k-edit-field">
+                    <span class="k-widget k-numerictextbox" style=""><span class="k-numeric-wrap k-state-default">
+                        <input type="text" class="k-formatted-value k-input" tabindex="0" aria-disabled="false"
+                            aria-readonly="false" style="display: inline-block;"><input type="text" name="UnitPrice"
+                                required="required" min="1" data-type="number" data-bind="value:UnitPrice" data-role="numerictextbox"
+                                role="spinbutton" class="k-input" aria-valuemin="1" aria-valuenow="10" aria-disabled="false"
+                                aria-readonly="false" style="display: none;"><span class="k-select"><span unselectable="on"
+                                    class="k-link"><span unselectable="on" class="k-icon k-i-arrow-n" title="Increase value">Increase
+                                        value</span></span><span unselectable="on" class="k-link"><span unselectable="on"
+                                            class="k-icon k-i-arrow-s" title="Decrease value">Decrease value</span></span></span></span></span><span
+                                                data-for="UnitPrice" class="k-invalid-msg" style="display: none;"></span></div>
+                <div class="k-edit-label">
+                    <label for="UnitsInStock">
+                        Units In Stock</label></div>
+                <div data-container-for="UnitsInStock" class="k-edit-field">
+                    <span class="k-widget k-numerictextbox" style=""><span class="k-numeric-wrap k-state-default">
+                        <input type="text" class="k-formatted-value k-input" tabindex="0" aria-disabled="false"
+                            aria-readonly="false" style="display: inline-block;"><input type="text" name="UnitsInStock"
+                                min="0" required="required" data-type="number" data-bind="value:UnitsInStock"
+                                data-role="numerictextbox" role="spinbutton" class="k-input" aria-valuemin="0"
+                                aria-valuenow="13" aria-disabled="false" aria-readonly="false" style="display: none;"><span
+                                    class="k-select"><span unselectable="on" class="k-link"><span unselectable="on" class="k-icon k-i-arrow-n"
+                                        title="Increase value">Increase value</span></span><span unselectable="on" class="k-link"><span
+                                            unselectable="on" class="k-icon k-i-arrow-s" title="Decrease value">Decrease value</span></span></span></span></span><span
+                                                data-for="UnitsInStock" class="k-invalid-msg" style="display: none;"></span></div>
+                <div class="k-edit-label">
+                    <label for="Discontinued">
+                        Discontinued</label></div>
+                <div data-container-for="Discontinued" class="k-edit-field">
+                    <input type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued"></div>
+
+                <div class="k-edit-buttons k-state-default">
+                <a class="k-button k-button-icontext k-grid-update" href="#"><span class="k-icon k-update">
+                </span>Update</a><a class="k-button k-button-icontext k-grid-cancel" href="#"><span
+                    class="k-icon k-cancel"></span>Cancel</a></div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 </html>
