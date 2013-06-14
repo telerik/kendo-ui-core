@@ -351,6 +351,7 @@ var tests = [
     "scheduler/editing.html",
     "scheduler/ruleparser.html",
     "scheduler/rulestring.html",
+    "scheduler/recurring-widget.html",
     "scheduler/occurrences.html",
     "scheduler/lint.html",
     "searchbox/searchbox.html",

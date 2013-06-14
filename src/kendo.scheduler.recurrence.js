@@ -9,7 +9,6 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         timezone = kendo.timezone,
-        template = kendo.template,
         date = kendo.date,
         setDayOfWeek = date.setDayOfWeek,
         Class = kendo.Class,
@@ -1221,10 +1220,10 @@ kendo_module({
                 weekly = messages.weekly,
                 until = kendo.format(END_UNTIL, end.endUntilOn),
                 count = kendo.format(END_COUNT, end.endCountAfter, end.endCountOccurrence),
-                end = kendo.format(END_HTML, end.endLabel, end.endNever, count, until);
+                endHtml = kendo.format(END_HTML, end.endLabel, end.endNever, count, until);
 
-            that._daily = kendo.format(INTERVAL, daily.intervalRepeat, daily.intervalDays) + end;
-            that._weekly = kendo.format(INTERVAL, weekly.intervalRepeat, weekly.intervalDays) + weekly.weekDaysOn + WEEKDAYS + end;
+            that._daily = kendo.format(INTERVAL, daily.intervalRepeat, daily.intervalDays) + endHtml;
+            that._weekly = kendo.format(INTERVAL, weekly.intervalRepeat, weekly.intervalDays) + weekly.weekDaysOn + WEEKDAYS + endHtml;
         }
     });
 
