@@ -941,12 +941,22 @@ kendo_module({
                    '<div class="k-edit-field"><input class="k-recur-end-count" type="radio" name="end" value="count" />{2}</div>' +
                    '<div class="k-edit-label"></div>' +
                    '<div class="k-edit-field"><input class="k-recur-end-until" type="radio" name="end" value="until" />{3}</div>';
-    var MONTHDAY_HTML = '<div class="k-edit-field"><input class="k-recur-month" type="radio" name="month" value="monthday" />' +
-                            '{0}<input class="k-recur-month-day" />'
+
+    var MONTHDAY_HTML = '<div class="k-edit-field"><input class="k-recur-month-radio" type="radio" name="month" value="monthday" />' +
+                            '{0}<input class="k-recur-monthday" />'
                         '</div>';
-    var WEEKDAY_HTML = '<div class="k-edit-field"><input class="k-recur-month" type="radio" name="month" value="weekday" />' +
-                           '<input class="k-recur-month-offset" /><input class="k-recur-month-weekday" />'
+
+    var WEEKDAY_HTML = '<div class="k-edit-field"><input class="k-recur-month-radio" type="radio" name="month" value="weekday" />' +
+                           '<input class="k-recur-offset" /><input class="k-recur-weekday" />'
                        '</div>';
+
+    var MONTH_HTML = '<div class="k-edit-field"><input class="k-recur-year-radio" type="radio" name="year" value="month" />' +
+                         '<input class="k-recur-month" /><input class="k-recur-monthday" />'
+                     '</div>';
+
+    var WEEKDAY_WITH_MONTH_HTML = '<div class="k-edit-field"><input class="k-recur-year-radio" type="radio" name="year" value="month" />' +
+                                      '<input class="k-recur-offset" /><input class="k-recur-weekday" />{0}<input class="k-recur-month" />'
+                                  '</div>';
 
 
     var weekDayCheckBoxes = function(firstDay) {
@@ -960,7 +970,7 @@ kendo_module({
 
         for (; idx < length; idx++) {
             shortName = shortNames[idx];
-            result += '<input class="k-recur-weekday" type="checkbox" value="' + WEEK_DAYS_IDX[shortName.toUpperCase()] + '" /> ' + shortName;
+            result += '<input class="k-recur-weekday-checkbox" type="checkbox" value="' + WEEK_DAYS_IDX[shortName.toUpperCase()] + '" /> ' + shortName;
         }
 
         return result;
@@ -1039,6 +1049,12 @@ kendo_module({
                     repeatOn: "Repeat on: ",
                     months: " month(s)",
                     day: "Day"
+                },
+                yearly: {
+                    repeatEvery: "Repeat every: ",
+                    repeatOn: "Repeat on: ",
+                    years: " year(s)",
+                    of: "of"
                 }
             }
         },
@@ -1117,8 +1133,8 @@ kendo_module({
         _weekDay: function() {
             var that = this,
                 offsetMessage = that.options.messages.offsetPositions,
-                offsetInput = that.container.find(".k-recur-month-offset"),
-                weekDayInput = that.container.find(".k-recur-month-weekday"),
+                offsetInput = that.container.find(".k-recur-offset"),
+                weekDayInput = that.container.find(".k-recur-weekday"),
                 rule = that._value,
                 weekDay = rule.weekDays,
                 offsetDDL, weekDayDDL,
@@ -1176,7 +1192,7 @@ kendo_module({
         _weekDays: function() {
             var that = this,
                 rule = that._value,
-                weekDays = that.container.find(".k-recur-weekday");
+                weekDays = that.container.find(".k-recur-weekday-checkbox");
 
             if (weekDays[0]) {
                 weekDays.click(function() {
@@ -1201,7 +1217,7 @@ kendo_module({
         _monthDay: function() {
             var that = this,
                 rule = that._value,
-                monthDayInput = that.container.find(".k-recur-month-day");
+                monthDayInput = that.container.find(".k-recur-monthday");
 
             if (monthDayInput[0]) {
                 that.monthDayNumericTextBox = new kendo.ui.NumericTextBox(monthDayInput, {
@@ -1288,7 +1304,7 @@ kendo_module({
                     that._toggleMonthDayRule(e.currentTarget.value);
                     that.trigger("change");
                 },
-                radioButtons = that.container.find(".k-recur-month").on("click", click);
+                radioButtons = that.container.find(".k-recur-month-radio").on("click", click);
 
             that.radioButtonMonthDay = radioButtons.eq(0);
             that.radioButtonWeekDay = radioButtons.eq(1);

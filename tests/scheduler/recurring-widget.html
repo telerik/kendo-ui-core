@@ -374,10 +374,10 @@
 
                 editor.setView("monthly");
 
-                var radioButton = container.find("[type=radio].k-recur-month");
-                var numericMonthDay = container.find(".k-recur-month-day");
-                var ddlOffset = container.find(".k-recur-month-offset");
-                var ddlWeekDay = container.find(".k-recur-month-weekday");
+                var radioButton = container.find("[type=radio].k-recur-month-radio");
+                var numericMonthDay = container.find(".k-recur-monthday");
+                var ddlOffset = container.find(".k-recur-offset");
+                var ddlWeekDay = container.find(".k-recur-weekday");
 
                 equal(radioButton.length, 2);
                 ok(numericMonthDay[0]);
@@ -392,7 +392,7 @@
 
                 editor.setView("monthly");
 
-                var numericMonthDay = container.find("[data-role=numerictextbox].k-recur-month-day"),
+                var numericMonthDay = container.find("[data-role=numerictextbox].k-recur-monthday"),
                     numeric = numericMonthDay.data("kendoNumericTextBox");
 
                 ok(numeric);
@@ -408,7 +408,7 @@
 
                 editor.setView("monthly");
 
-                var numericMonthDay = container.find("[data-role=numerictextbox].k-recur-month-day"),
+                var numericMonthDay = container.find("[data-role=numerictextbox].k-recur-monthday"),
                     numeric = numericMonthDay.data("kendoNumericTextBox");
 
                 numeric.value(20);
@@ -428,8 +428,8 @@
 
                 editor.setView("monthly");
 
-                var offset = container.find("[data-role=dropdownlist].k-recur-month-offset").data("kendoDropDownList")
-                    weekday = container.find("[data-role=dropdownlist].k-recur-month-weekday").data("kendoDropDownList");
+                var offset = container.find("[data-role=dropdownlist].k-recur-offset").data("kendoDropDownList")
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
 
                 ok(offset);
                 ok(weekday);
@@ -444,10 +444,10 @@
                     container = editor.container;
 
                 editor.setView("monthly");
-                container.find(".k-recur-month:last").click();
+                container.find(".k-recur-month-radio:last").click();
 
-                var offset = container.find("[data-role=dropdownlist].k-recur-month-offset").data("kendoDropDownList")
-                    weekday = container.find("[data-role=dropdownlist].k-recur-month-weekday").data("kendoDropDownList");
+                var offset = container.find("[data-role=dropdownlist].k-recur-offset").data("kendoDropDownList")
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
 
                 offset.value("-1");
                 offset.trigger("change");
@@ -467,9 +467,9 @@
 
                 editor.setView("monthly");
 
-                var numeric = container.find("[data-role=numerictextbox].k-recur-month-day"),
-                    offset = container.find("[data-role=dropdownlist].k-recur-month-offset"),
-                    weekday = container.find("[data-role=dropdownlist].k-recur-month-weekday");
+                var numeric = container.find("[data-role=numerictextbox].k-recur-monthday"),
+                    offset = container.find("[data-role=dropdownlist].k-recur-offset"),
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday");
 
                 equal(numeric.prop("disabled"), false);
                 equal(offset.prop("disabled"), true);
@@ -485,11 +485,11 @@
 
                 editor.setView("monthly");
 
-                container.find(".k-recur-month:last").click();
+                container.find(".k-recur-month-radio:last").click();
 
-                var numeric = container.find("[data-role=numerictextbox].k-recur-month-day"),
-                    offset = container.find("[data-role=dropdownlist].k-recur-month-offset"),
-                    weekday = container.find("[data-role=dropdownlist].k-recur-month-weekday");
+                var numeric = container.find("[data-role=numerictextbox].k-recur-monthday"),
+                    offset = container.find("[data-role=dropdownlist].k-recur-offset"),
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday");
 
                 equal(numeric.prop("disabled"), true);
                 equal(offset.prop("disabled"), false);
