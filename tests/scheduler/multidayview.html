@@ -3,7 +3,8 @@
     <head>
         <title>Scheduler MultiDay Views rendering</title>
         <script src="../jquery-loader.js"></script>
-        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
@@ -43,7 +44,7 @@
             }
 
             function equalWithRound(value, expected) {
-                equal(Math.round(value), Math.round(expected));
+                QUnit.close(value, expected, 1);
             }
 
             function applyDefaultLeftOffset(value) {
