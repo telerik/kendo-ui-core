@@ -54,7 +54,6 @@ kendo_module({
             var stockDefaults = {
                 axisDefaults: {
                     categoryAxis: {
-                        name: "default",
                         field: options.dateField,
                         majorGridLines: {
                             visible: false
@@ -250,7 +249,8 @@ kendo_module({
                 axesLength = categoryAxes.length,
                 data = navi.dataSource.view(),
                 currentSeries,
-                currentAxis;
+                currentAxis,
+                naviCategories;
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
@@ -264,7 +264,14 @@ kendo_module({
                 currentAxis = categoryAxes[axisIx];
 
                 if (currentAxis.pane == NAVIGATOR_PANE) {
-                    chart._bindCategoryAxis(currentAxis, data);
+                    if (currentAxis.name == NAVIGATOR_AXIS) {
+                        chart._bindCategoryAxis(currentAxis, data);
+                        chart._syncSeriesCategories(currentAxis);
+                        naviCategories = currentAxis.categories;
+                    } else {
+                        // TODO: Test
+                        currentAxis.categories = naviCategories;
+                    }
                 }
             }
 

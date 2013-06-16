@@ -1296,6 +1296,12 @@
                 deepEqual(sortDates(dates), dates);
             });
 
+            test("ignores undefined values", function() {
+                var arr = dates.slice(0);
+                arr.push(undefined);
+                deepEqual(sortDates(arr), arr);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

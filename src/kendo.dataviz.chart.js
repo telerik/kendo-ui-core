@@ -973,6 +973,8 @@ kendo_module({
         },
 
         _bindCategories: function() {
+            var now = new Date();
+
             var chart = this,
                 data = chart.dataSource.view() || [],
                 grouped = (chart.dataSource.group() || []).length > 0,
@@ -995,6 +997,8 @@ kendo_module({
                     chart._syncSeriesCategories(axis);
                 }
             }
+
+            console.log("Binding categories took " + (new Date() - now) + " ms");
         },
 
         _bindCategoryAxis: function(axis, data) {
@@ -1025,7 +1029,9 @@ kendo_module({
                 series = chart.options.series,
                 seriesIx,
                 seriesLength = series.length,
-                currentSeries;
+                currentSeries,
+                dataIx,
+                dataLength;
 
             axis.categories = axis.categories || [];
             axis.dataItems = axis.dataItems || [];
@@ -1033,13 +1039,18 @@ kendo_module({
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
 
-                if (currentSeries.categoryField) {
-                    for (var i = 0; i < currentSeries.data.length; i++) {
-                        category = getField(currentSeries.categoryField, currentSeries.data[i]);
+                if (currentSeries.categoryField && currentSeries.categoryAxis === axis.name) {
+                    dataLength = currentSeries.data.length;
+                    for (dataIx = 0; dataIx < dataLength; dataIx++) {
+                        category = getField(currentSeries.categoryField, currentSeries.data[dataIx]);
 
+                        // TODO: Performance hog
+                        // Should we just de-dupe in one go
+                        // with two code paths for string categories
+                        // and for dates (sorted)?
                         if (indexOf(category, axis.categories) < 0) {
                             axis.categories.push(category);
-                            axis.dataItems.push(currentSeries.data[i]);
+                            axis.dataItems.push(currentSeries.data[dataIx]);
                         }
                     }
                 }
@@ -9580,7 +9591,11 @@ kendo_module({
      }
 
      function dateComparer(a, b) {
-         return a.getTime() - b.getTime();
+         if (a && b) {
+             return a.getTime() - b.getTime();
+         }
+
+         return 0;
      }
 
      function sortDates(dates) {

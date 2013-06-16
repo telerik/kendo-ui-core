@@ -9,6 +9,7 @@
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.chart.js"></script>
         <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
@@ -18,7 +19,7 @@
     <body>
         <div id="date-chart" style="width: 300px; height: 300px; float: left;"></div>
         <div id="categorical-chart" style="width: 300px; height: 300px; float: left;"></div>
-        <div id="stock-chart" style="width: 300px; height: 600px; float: left;"></div>
+        <div id="stock-chart" style="width: 600px; height: 300px; clear: both;"></div>
         <script>
             $(function() {
                 // Top-level goals
@@ -93,7 +94,57 @@
                     valueAxis: { majorUnit: 1 }
                 });
 
+                // TODO: Performance testing
                 // TODO: Test stock chart binding
+                $("#stock-chart").kendoStockChart({
+                    dataSource: {
+                        transport: {
+                            read: "boeing-stock.json"
+                        },
+                        schema:{
+                            model: {
+                                fields: {
+                                    Date: {
+                                        type: "date"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    //dateField: "Date",
+                    series: [{
+                        type: "candlestick",
+                        openField: "Open",
+                        highField: "High",
+                        lowField: "Low",
+                        closeField: "Close",
+                        categoryField: "Date"
+                    }],
+                    navigator: {
+                        dataSource: {
+                            transport: {
+                                read: "boeing-stock.json"
+                            },
+                            schema:{
+                                model: {
+                                    fields: {
+                                        Date: {
+                                            type: "date"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        series: {
+                            type: "area",
+                            field: "Close",
+                            categoryField: "Date"
+                        },
+                        select: {
+                            from: "2009/10/05"
+                        }
+                    }
+                });
 
             });
         </script>
