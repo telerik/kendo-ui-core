@@ -19,7 +19,7 @@ kendo_module({
             var that = this,
                 app = kendo.mobile.application,
                 osname = app ? app.os.name : kendo.support.mobileOS.name,
-                ioswp = osname === "ios" || osname === "wp",
+                ioswp = osname === "ios" || osname === "wp" || app.os.skin,
                 align = options.align || (ioswp ?  "bottom center" : "center center"),
                 position = options.position || (ioswp ? "bottom center" : "center center"),
                 effect = options.effect || (ioswp ? "slideIn:up" : "fade:in"),
