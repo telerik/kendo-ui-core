@@ -249,3 +249,112 @@
 {
     display: none;
 }
+
+/* Scroller */
+
+.km-flat .km-touch-scrollbar
+{
+    background-color: @flat-active-background;
+    border: 0;
+    .box-sizing(border-box);
+    .border-radius(1em);
+}
+
+/* Shim and ActionSheet */
+
+.km-flat .km-shim,
+.km-phone .km-flat .km-actionsheet-wrapper
+{
+    background: rgba(0,0,0,.4);
+}
+
+/* Loader */
+
+.km-flat .km-loader
+{
+    background: @flat-active-background;
+    margin-top: -2em;
+    margin-left: -2em;
+    width: 4em;
+    height: 4em;
+    .border-radius(20em);
+    overflow: visible;
+}
+
+.km-flat .km-loader h1
+{
+    display: none;
+    font-size: 1em;
+    color: @flat-main-color;
+    position: absolute;
+    left: -50%;
+    width: 200%;
+    top: auto;
+    bottom: -2em;
+}
+
+.km-flat .km-loading,
+.km-flat .km-loading-left,
+.km-flat .km-loading-right,
+.km-flat .km-scroller-refresh .km-icon,
+.km-flat .km-scroller-refresh .km-icon:after,
+.km-flat .km-scroller-refresh .km-icon:before
+{
+    font-size: 1em;
+    content: "\a0";
+    display: block;
+    width: .36em;
+    height: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -.8em;
+    margin-top: -.5em;
+    background: @flat-active-color;
+    .border-radius(1em);
+    .animation(km-flatload .6s infinite linear);
+}
+
+.km-flat .km-loading-left
+{
+    margin-left: -.2em;
+}
+
+.km-flat .km-loading-right
+{
+    margin-left: .42em;
+}
+
+.km-flat .km-loading-left,
+.km-flat .km-scroller-refresh .km-icon:after
+{
+    .animation-delay(.2s);
+}
+
+.km-flat .km-loading-right,
+.km-flat .km-scroller-refresh .km-icon:before
+{
+    .animation-delay(.4s);
+}
+
+@keyframes km-flatload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@-moz-keyframes km-flatload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@-webkit-keyframes km-flatload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+

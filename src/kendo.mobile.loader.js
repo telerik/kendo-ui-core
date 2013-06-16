@@ -16,7 +16,7 @@ kendo_module({
     var Loader = Widget.extend({
         init: function(container, options) {
             var that = this,
-                element = $('<div class="km-loader"><span class="km-loading km-spin"></span></div>');
+                element = $('<div class="km-loader"><span class="km-loading km-spin"></span><span class="km-loading-left"></span><span class="km-loading-right"></span></div>');
 
             Widget.fn.init.call(that, element, options);
 
