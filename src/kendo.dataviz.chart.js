@@ -21,7 +21,6 @@ kendo_module({
         math = Math,
         extend = $.extend,
         proxy = $.proxy,
-        indexOf = $.inArray,
         isFn = $.isFunction,
 
         kendo = window.kendo,
@@ -244,6 +243,8 @@ kendo_module({
             chart.dataSource = DataSource
                 .create(dataSourceOptions)
                 .bind(CHANGE, chart._dataChangeHandler);
+
+            chart._bindCategories();
 
             chart._redraw();
             chart._attachEvents();
@@ -991,6 +992,7 @@ kendo_module({
                 axis = definitions[axisIx];
                 if (axis.autoBind !== false) {
                     chart._bindCategoryAxis(axis, categoriesData);
+                    chart._syncSeriesCategories(axis);
                 }
             }
         },
@@ -1013,6 +1015,32 @@ kendo_module({
                     } else {
                         axis.categories.push(category);
                         axis.dataItems.push(row);
+                    }
+                }
+            }
+        },
+
+        _syncSeriesCategories: function(axis) {
+            var chart = this,
+                series = chart.options.series,
+                seriesIx,
+                seriesLength = series.length,
+                currentSeries;
+
+            axis.categories = axis.categories || [];
+            axis.dataItems = axis.dataItems || [];
+
+            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+                currentSeries = series[seriesIx];
+
+                if (currentSeries.categoryField) {
+                    for (var i = 0; i < currentSeries.data.length; i++) {
+                        category = getField(currentSeries.categoryField, currentSeries.data[i]);
+
+                        if (indexOf(category, axis.categories) < 0) {
+                            axis.categories.push(category);
+                            axis.dataItems.push(currentSeries.data[i]);
+                        }
                     }
                 }
             }
@@ -2169,7 +2197,7 @@ kendo_module({
 
         groupCategories: function(options) {
             var axis = this,
-                categories = toDate(options.categories),
+                categories = sortDates(toDate(options.categories)),
                 baseUnit = options.baseUnit,
                 baseUnitStep = options.baseUnitStep || 1,
                 range = axis.range(options),
@@ -7155,8 +7183,6 @@ kendo_module({
                 axisPane = plotArea.findPane(axisOptions.pane);
 
                 if (inArray(axisPane, panes)) {
-                    plotArea.syncSeriesCategories(axisOptions);
-
                     name = axisOptions.name;
                     categories = axisOptions.categories || [];
                     dateCategory = categories[0] instanceof Date;
@@ -7203,32 +7229,6 @@ kendo_module({
                 plotArea.axisY = primaryAxis;
             } else {
                 plotArea.axisX = primaryAxis;
-            }
-        },
-
-        syncSeriesCategories: function(axis) {
-            var plotArea = this,
-                series = plotArea.options.series,
-                seriesIx,
-                seriesLength = series.length,
-                currentSeries;
-
-            axis.categories = axis.categories || [];
-            axis.dataItems = axis.dataItems || [];
-
-            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
-                currentSeries = series[seriesIx];
-
-                if (currentSeries.categoryField) {
-                    for (var i = 0; i < currentSeries.data.length; i++) {
-                        category = getField(currentSeries.categoryField, currentSeries.data[i]);
-
-                        if (indexOf(category, axis.categories) < 0) {
-                            axis.categories.push(category);
-                            axis.dataItems.push(currentSeries.data[i]);
-                        }
-                    }
-                }
             }
         },
 
@@ -9565,6 +9565,35 @@ kendo_module({
          return result;
      }
 
+     function indexOf(item, arr) {
+         if (item instanceof Date) {
+             for (var i = 0, length = arr.length; i < length; i++) {
+                 if (dateEquals(arr[i], item)) {
+                     return i;
+                 }
+             }
+
+             return -1;
+         } else {
+             return $.inArray(item, arr);
+         }
+     }
+
+     function dateComparer(a, b) {
+         return a.getTime() - b.getTime();
+     }
+
+     function sortDates(dates) {
+        for (var i = 1, length = dates.length; i < length; i++) {
+            if (dateComparer(dates[i], dates[i - 1]) < 0) {
+                dates.sort(dateComparer);
+                break;
+            }
+        }
+
+         return dates;
+     }
+
     // Exports ================================================================
     dataviz.ui.plugin(Chart);
 
@@ -9665,12 +9694,14 @@ kendo_module({
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
         duration: duration,
+        indexOf: indexOf,
         floorDate: floorDate,
         filterSeriesByType: filterSeriesByType,
         limitValue: limitValue,
         lteDateIndex: lteDateIndex,
         evalOptions: evalOptions,
         singleItemOrArray: singleItemOrArray,
+        sortDates: sortDates,
         sparseArrayLimits: sparseArrayLimits,
         toDate: toDate,
         toTime: toTime

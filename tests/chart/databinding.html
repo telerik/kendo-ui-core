@@ -24,7 +24,7 @@
                 var chart;
 
                 // ------------------------------------------------------------
-                module("Unbound mode", {
+                module("Late binding", {
                     setup: function() {
                         chart = createChart();
                     }
@@ -53,6 +53,49 @@
                             sales: 110
                         }]
                     );
+                });
+
+                // ------------------------------------------------------------
+                module("Inline binding", {
+                    setup: function() {
+                        chart = createChart();
+                    }
+                });
+
+                test("categories are populated from series", function() {
+                    chart = createChart({
+                        series: [{
+                            field: "sales",
+                            categoryField: "period",
+                            data: [{
+                                period: "Jan",
+                                sales: 100
+                            }, {
+                                period: "Feb",
+                                sales: 110
+                            }]
+                        }]
+                    });
+
+                    deepEqual(chart.options.categoryAxis.categories, ["Jan", "Feb"]);
+                });
+
+                test("categories data items are populated from series", function() {
+                    chart = createChart({
+                        series: [{
+                            field: "sales",
+                            categoryField: "period",
+                            data: [{
+                                period: "Jan",
+                                sales: 100
+                            }, {
+                                period: "Feb",
+                                sales: 110
+                            }]
+                        }]
+                    });
+
+                    equal(chart.options.categoryAxis.dataItems[1].sales, 110);
                 });
 
                 // ------------------------------------------------------------
@@ -123,6 +166,7 @@
                 asyncTest("categories are populated from series", function() {
                     chart = createChart({
                         series: [{
+                            field: "sales",
                             categoryField: "period"
                         }],
                         dataSource: [{
@@ -142,6 +186,7 @@
                 asyncTest("categories data items are populated from series", function() {
                     chart = createChart({
                         series: [{
+                            field: "sales",
                             categoryField: "period"
                         }],
                         dataSource: [{
@@ -161,6 +206,7 @@
                 asyncTest("only unique categories are populated from series", function() {
                     chart = createChart({
                         series: [{
+                            field: "sales",
                             categoryField: "period"
                         }],
                         dataSource: [{
@@ -178,6 +224,33 @@
                         }],
                         dataBound: function() {
                             deepEqual(this.options.categoryAxis.categories, ["Jan", "Feb"]);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("only unique date categories are populate from series", function() {
+                    chart = createChart({
+                        series: [{
+                            field: "sales",
+                            categoryField: "period"
+                        }],
+                        dataSource: [{
+                            period: new Date("2013/01/01 00:00"),
+                            sales: 100
+                        }, {
+                            period: new Date("2013/02/01 00:00"),
+                            sales: 110
+                        }, {
+                            period: new Date("2013/01/01 00:00"),
+                            sales: 100
+                        }, {
+                            period: new Date("2013/02/01 00:00"),
+                            sales: 110
+                        }],
+                        dataBound: function() {
+                            deepEqual(this.options.categoryAxis.categories,
+                                [new Date("2013/01/01 00:00"), new Date("2013/02/01 00:00")]);
                             start();
                         }
                     });

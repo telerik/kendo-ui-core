@@ -227,6 +227,18 @@
                     equal(dateAxis.options.baseUnitStep, 2);
                 });
 
+                test("Dates are sorted before grouping", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/04/01"), new Date("2012/02/01"), new Date("2012/03/01")
+                        ],
+                        baseUnit: "months"
+                    });
+
+                    deepEqual(dateAxis.options.categories,
+                            [ new Date("2012/02/01"), new Date("2012/03/01"), new Date("2012/04/01") ]);
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Grouping", {
                     setup: function() {
