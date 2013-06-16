@@ -130,6 +130,81 @@
     border-left-width: 0;
 }
 
+/* Switch */
+
+.km-flat .km-switch
+{
+    width: 4.6rem;
+    height: 1.9rem;
+    line-height: 1.76rem;
+    overflow: hidden;
+}
+
+.km-flat .km-switch-wrapper
+{
+    overflow: hidden;
+    background-color: @flat-second-color;
+}
+
+.km-flat .km-switch-background,
+.km-flat .k-slider-selection
+{
+    background: 4.25em 0 no-repeat @flat-active-background;
+    .linear-gradient-image(top, @flat-second-color, @flat-second-color);
+    margin-left: -3.4rem;
+}
+
+.km-flat .km-switch-container
+{
+    padding: 1px 0 1px 1px;
+    border-width: 0;
+}
+
+.km-flat .km-switch-handle
+{
+    background: @flat-background;
+    width: 1.6em;
+    margin: 0 3px 0 0;
+    border: 1px solid rgba(0,0,0,.1);
+}
+
+.km-flat .km-switch-label-off
+{
+    left: 1.5em;
+}
+
+.km-flat .km-switch-label-on
+{
+    left: -2.8em;
+}
+
+.km-flat .km-switch-label-on,
+.km-flat .km-switch-label-off
+{
+    color: @flat-active-color;
+    text-shadow: none;
+    width: 185%;
+    font-size: 1em;
+    line-height: 1.5em;
+    vertical-align: middle;
+}
+
+.km-flat .km-switch-handle,
+.km-flat .km-switch-wrapper,
+.km-flat .km-switch-container,
+.km-flat .km-switch-background
+{
+    .border-radius(@flat-border-radius);
+}
+
+.km-flat .km-switch-container,
+.km-flat .km-switch-wrapper
+{
+    .box-sizing(border-box);
+    border: 1px solid #f0f0f0;
+    background-clip: content-box;
+}
+
 /* ListView */
 
 .km-flat .km-list > li
