@@ -13,7 +13,6 @@ kendo_module({
         dataviz = kendo.dataviz,
         Widget = kendo.ui.Widget,
         Box2D = dataviz.Box2D,
-        Text = dataviz.Text,
         terminator = "0000",
         NUMERIC = "numeric",
         ALPHA_NUMERIC = "alphanumeric",
@@ -175,7 +174,7 @@ kendo_module({
             modeInstances[mode] = new modes[mode]();
         }
         
-        function FreeCellVisitor(matrix){
+        var FreeCellVisitor = function (matrix){
             var that = this,                
                 row = matrix.length - 1,
                 column = matrix.length - 1,
@@ -219,7 +218,7 @@ kendo_module({
             }
         }   
         
-        function fillData(matrices, blocks){
+        var fillData = function (matrices, blocks){
             var cellVisitor = new FreeCellVisitor(matrices[0]),
                 block,
                 codewordIdx,
@@ -248,7 +247,7 @@ kendo_module({
             }
         }
         
-        function padDataString(dataString, totalDataCodewords){            
+        var padDataString = function (dataString, totalDataCodewords){            
             var dataBitsCount = totalDataCodewords * 8,
                 terminatorIndex = 0,
                 paddingCodewordIndex = 0;
@@ -266,7 +265,6 @@ kendo_module({
             return dataString;
         }
         
-        //investigate if using 0 is correct
         function generatePowersOfTwo(){
             var result;
             for(var power = 1, result; power < 255; power++){
@@ -283,7 +281,34 @@ kendo_module({
             result = (powersOfTwoResult[power - 1] * 2) ^ 285;
             powersOfTwoResult[power] =   result;
             powersOfTwoResult[-1] = 0;
-        }                                 
+        }       
+
+        var xorPolynomials = function (x,y){
+            var result = [],
+                idx = x.length - 2;
+            while(!isNaN(x[idx]) || !isNaN(y[idx])){
+                result[idx] = powersOfTwo[powersOfTwoResult[x[idx]] ^ powersOfTwoResult[y[idx]]] || -1;
+                idx--;
+            }
+     
+            return result;
+        }                                      
+        
+        var multiplyPolynomials = function (x, y){
+            var result = [];
+            for(var i = 0; i < x.length; i++){
+                for(var j = 0; j < y.length; j++){                        
+                    if(result[i+j] === undefined){
+                         result[i+j] = (x[i] + (y[j] >= 0 ? y[j] : 0)) % 255;                               
+                    }
+                    else{
+                       result[i+j] = powersOfTwo[powersOfTwoResult[result[i+j]] ^ powersOfTwoResult[(x[i] + y[j]) % 255]];
+                    }                            
+                }
+            }
+            
+            return result;
+        }        
                 
         function generateGeneratorPolynomials(){              
             var errorCorrectionCodeWordsCount = 68;                    
@@ -296,9 +321,9 @@ kendo_module({
         
         //possibly generate on demand
         generatePowersOfTwo();
-        generateGeneratorPolynomials();
-
-        function generateErrorCodewords(data, errorCodewordsCount){            
+        generateGeneratorPolynomials();        
+        
+        var generateErrorCodewords = function (data, errorCodewordsCount){            
             var generator = generatorPolynomials[errorCodewordsCount - 1],                    
                 result = new Array(errorCodewordsCount).concat(data),
                 generatorPolynomial = new Array(result.length - generator.length).concat(generator),
@@ -317,36 +342,9 @@ kendo_module({
             }
             
             return errorCodewords;
-        }            
+        }                    
         
-        function xorPolynomials(x,y){
-            var result = [],
-                idx = x.length - 2;
-            while(!isNaN(x[idx]) || !isNaN(y[idx])){
-                result[idx] = powersOfTwo[powersOfTwoResult[x[idx]] ^ powersOfTwoResult[y[idx]]] || -1;
-                idx--;
-            }
-     
-            return result;
-        }                                      
-        
-        function multiplyPolynomials(x, y){
-            var result = [];
-            for(var i = 0; i < x.length; i++){
-                for(var j = 0; j < y.length; j++){                        
-                    if(result[i+j] === undefined){
-                         result[i+j] = (x[i] + (y[j] >= 0 ? y[j] : 0)) % 255;                               
-                    }
-                    else{
-                       result[i+j] = powersOfTwo[powersOfTwoResult[result[i+j]] ^ powersOfTwoResult[(x[i] + y[j]) % 255]];
-                    }                            
-                }
-            }
-            
-            return result;
-        }
-        
-        function getBlocks(dataStream, versionCodewordsInformation){
+        var getBlocks = function (dataStream, versionCodewordsInformation){
             var codewordStart = 0,                    
                 dataBlocks = [],                    
                 errorBlocks = [],
@@ -376,7 +374,7 @@ kendo_module({
             return [dataBlocks, errorBlocks];
         }       
         //enhance to always find the exact version 
-        function chooseMode(str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode){
+        var chooseMode = function (str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode){
              var numeric = numberRegex.exec(str),
                 numericMatch = numeric ? numeric[0] : "",
                 alpha = alphaRegex.exec(str),
@@ -413,7 +411,7 @@ kendo_module({
              };
         }
             
-        function getModes(str){
+        var getModes = function (str){
             var modes = [],
                 previousMode;
             modes.push(chooseMode(str, initMinNumericBeforeAlpha, initMinNumericBeforeByte, initMinAlphaBeforeByte, previousMode));
@@ -437,7 +435,7 @@ kendo_module({
             return modes;
         }
         
-        function getDataCodewordsCount(modes){
+        var getDataCodewordsCount = function (modes){
             var length = 0,
                 mode;
             for(var i = 0; i < modes.length; i++){
@@ -448,7 +446,7 @@ kendo_module({
             return Math.ceil(length/8);
         }
 
-        function getVersion(dataCodewordsCount, errorCorrectionLevel){
+        var getVersion = function (dataCodewordsCount, errorCorrectionLevel){
             var x = 0,
                 y = versionsCodewordsInformation.length - 1,
                 version = Math.floor(versionsCodewordsInformation.length / 2);
@@ -470,7 +468,7 @@ kendo_module({
             return y + 1;
         }    
 
-        function getDataString(modes, version){
+        var getDataString = function (modes, version){
             var dataString = "",
                 mode;
             for(var i = 0; i < modes.length; i++){
@@ -481,7 +479,7 @@ kendo_module({
             return dataString;
         }
 
-        function encodeFormatInformation(format){       
+        var encodeFormatInformation = function (format){       
             var encodedString = encodeBCH(toDecimal(format), formatGeneratorPolynomial, 15),
                 result = "";
             for(var i = 0; i < encodedString.length; i++){
@@ -491,7 +489,7 @@ kendo_module({
             return result;
         }
         
-        function encodeBCH(value, generatorPolynomial, codeLength){     
+        var encodeBCH =function (value, generatorPolynomial, codeLength){     
             var generatorNumber = toDecimal(generatorPolynomial),
                 polynomialLength = generatorPolynomial.length - 1,
                 valueNumber = value << polynomialLength,
@@ -502,7 +500,7 @@ kendo_module({
             return result;    
         }                       
         
-        function dividePolynomials(numberX,numberY){
+        var dividePolynomials = function (numberX,numberY){
                 var yLength = numberY.toString(2).length,
                     xLength = numberX.toString(2).length;
                 do{                                            
@@ -518,7 +516,7 @@ kendo_module({
             return parseInt(str.charAt(idx));
         }
         
-        function initMatrices(version){
+        var initMatrices = function (version){
             var matrices = [],
                 modules =  17 + 4 * version;
             for(var i = 0; i < maskPatternConditions.length; i++){
@@ -531,7 +529,7 @@ kendo_module({
             return matrices;
         }
             
-        function addFormatInformation(matrices, formatString){
+        var addFormatInformation =function (matrices, formatString){
             var matrix = matrices[0],
                 x,
                 y,
@@ -561,11 +559,11 @@ kendo_module({
             }                
         }
         
-        function encodeVersionInformation(version){
+        var encodeVersionInformation = function (version){
             return encodeBCH(version, versionGeneratorPolynomial, 18);
         }                       
         
-        function addVersionInformation(matrices, dataString){
+        var addVersionInformation = function (matrices, dataString){
             var matrix = matrices[0],
                 modules = matrix.length,
                 x1 = 0,
@@ -585,7 +583,7 @@ kendo_module({
             }
         }                         
         
-        function addCentricPattern(matrices, pattern, x, y){
+        var addCentricPattern = function (matrices, pattern, x, y){
             var size = pattern.length + 2,
                 length = pattern.length + 1,
                 value;
@@ -601,7 +599,7 @@ kendo_module({
             }
         }
         
-        function addFinderSeparator(matrices, direction, x, y){
+        var addFinderSeparator = function (matrices, direction, x, y){
             var nextX = x,
                 nextY = y,
                 matrix = matrices[0];                   
@@ -614,7 +612,7 @@ kendo_module({
             while(nextX >=0 && nextX < matrix.length);                  
         }        
         
-        function addFinderPatterns(matrices){
+        var addFinderPatterns = function (matrices){
             var modules = matrices[0].length;
             addCentricPattern(matrices, finderPattern, 0, 0);
             addFinderSeparator(matrices, [-1,-1], 7,7);
@@ -624,7 +622,7 @@ kendo_module({
             addFinderSeparator(matrices, [-1,1],7, modules - 8);
         }
         
-        function addAlignmentPatterns(matrices, version){
+        var addAlignmentPatterns = function (matrices, version){
             if(version < 2) {
                 return;
             }
@@ -656,7 +654,7 @@ kendo_module({
             }
         }                
         
-        function addTimingFunctions(matrices){
+        var addTimingFunctions = function (matrices){
             var row = 6,
                 column = 6,
                 value = 1,
@@ -668,7 +666,7 @@ kendo_module({
             }
         }        
         
-        function scoreMaskMatrixes(matrices){
+        var scoreMaskMatrixes = function (matrices){
             var scores = [],
                 previousBits = [],
                 darkModules =  [],
@@ -745,7 +743,7 @@ kendo_module({
             return score;
         }           
         
-        function encodeData(inputString, errorCorrectionLevel){            
+        var encodeData = function (inputString, errorCorrectionLevel){            
             var modes = getModes(inputString),
                 dataCodewordsCount = getDataCodewordsCount(modes),
                 version = getVersion(dataCodewordsCount, errorCorrectionLevel),
@@ -774,7 +772,7 @@ kendo_module({
             
             var formatString = errorCorrectionPatterns[errorCorrectionLevel] + toBitsString(minIdx, 3);
             addFormatInformation([optimalMatrix], encodeFormatInformation(formatString));
-            printMatrix(optimalMatrix);             
+           
             return optimalMatrix;
         }
 
@@ -820,7 +818,7 @@ kendo_module({
                 that.addBackground(size);  
               
                 that._addMatrix(matrix, size);
-                that.view.renderTo(that.element);
+                view.renderTo(that.element);
             },
             _getSize: function(){
                 var that = this,                  
@@ -906,5 +904,43 @@ kendo_module({
         });
         
       dataviz.ui.plugin(QRCode);
+      
+      kendo.deepExtend(dataviz, {
+            QRCode: QRCode,
+            QRCodeFunctions: {
+                FreeCellVisitor: FreeCellVisitor,
+                fillData: fillData,
+                padDataString: padDataString,
+                generateErrorCodewords: generateErrorCodewords,
+                xorPolynomials: xorPolynomials,
+                getBlocks: getBlocks,
+                multiplyPolynomials: multiplyPolynomials,
+                chooseMode: chooseMode,
+                getModes: getModes,
+                getDataCodewordsCount: getDataCodewordsCount,
+                getVersion: getVersion,
+                getDataString: getDataString,
+                encodeFormatInformation: encodeFormatInformation,
+                encodeBCH: encodeBCH,
+                dividePolynomials: dividePolynomials,
+                initMatrices: initMatrices,
+                addFormatInformation: addFormatInformation,
+                encodeVersionInformation: encodeVersionInformation,
+                addVersionInformation: addVersionInformation,
+                addCentricPattern: addCentricPattern,
+                addFinderSeparator: addFinderSeparator,
+                addFinderPatterns: addFinderPatterns,
+                addAlignmentPatterns: addAlignmentPatterns,
+                addTimingFunctions: addTimingFunctions,
+                scoreMaskMatrixes: scoreMaskMatrixes,
+                encodeData: encodeData
+            },
+            QRCodeFields: {
+                modes: modeInstances,
+                powersOfTwo: powersOfTwo,
+                powersOfTwoResult: powersOfTwoResult,
+                generatorPolynomials: generatorPolynomials
+            }          
+      });
       
 })(window.kendo.jQuery);                  
