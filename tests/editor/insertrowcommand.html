@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
+
+        <script src="../jquery-loader.js"></script>
+        <script src="test-scripts.js"></script>
+
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
+
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
+        <script>
+
+            $("#Editor1").kendoEditor();
+
+            var InsertRowCommand = kendo.ui.editor.InsertRowCommand;
+
+            function execInsertRowCommand(options) {
+                var command = new InsertRowCommand(options);
+                command.editor = editor;
+                command.exec();
+
+                return command;
+            }
+
+            module("Editor / InsertRowCommand", {
+                setup: function() {
+                    editor = getEditor();
+                },
+                teardown: function() {
+                    $(".k-window,.k-overlay").remove();
+                }
+            });
+
+            var range, command;
+
+            test("exec creates row below cursor", function() {
+                range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table>");
+
+                execInsertRowCommand({ range:range });
+
+                var dom = $(editor.value());
+
+                equal(dom.find("tr").length, 2);
+                equal(dom.find("td").length, 2);
+            });
+
+            test("exec creates row below cursor with proper amount of cells", function() {
+                range = createRangeFromText(editor, "<table><tr><td>f||oo</td><td></td><td></td></tr></table>");
+
+                execInsertRowCommand({ range:range });
+
+                var dom = $(editor.value());
+
+                equal(dom.find("tr:last").find("td").length, 3);
+            });
+
+            test("exec with position:'above' inserts row above selection", function() {
+                range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table>");
+
+                execInsertRowCommand({ range:range, position: "before" });
+
+                var dom = $(editor.value());
+
+                equal(dom.find("tr").length, 2);
+                equal(dom.find("td:last").text(), "foo");
+            });
+
+            test("row/cell classes are copied when creating new rows", function() {
+                range = createRangeFromText(editor, "<table><tr class='a'><td class='b'>f||oo</td></tr></table>");
+
+                execInsertRowCommand({ range:range });
+
+                var dom = $(editor.value());
+
+                equal(dom.find("tr.a").length, 2);
+                equal(dom.find("td.b").length, 2);
+            });
+
+            test("inserted row do not copy text content", function() {
+                range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table>");
+
+                execInsertRowCommand({ range:range });
+
+                var dom = $(editor.value());
+
+                equal(dom.find("td").text(), "foo");
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>

@@ -68,21 +68,24 @@ kendo_module({
         separatorTemplate:
             '<li class="k-separator"></li>',
 
-        decorateStyleToolItems: function(textarea) {
-            var selectBox = textarea.data.closest(".k-editor").find(".k-style").data("kendoSelectBox");
+        decorateStyleToolItems: function(e) {
+            var textarea = e.data,
+                selectBox = textarea.closest(".k-editor").find(".k-style").data("kendoSelectBox"),
+                doc = textarea.data("kendoEditor").document,
+                dom = kendo.ui.editor.Dom,
+                classes;
 
             if (!selectBox) {
                 return;
             }
 
-            var classes = selectBox.dataSource.view();
+            classes = selectBox.dataSource.view();
 
             selectBox.list.find(".k-item").each(function(idx, element){
                 var item = $(element),
-                    text = item.text(),
+                    style = dom.inlineStyle(doc, "span", {className : classes[idx].value});
 
-                    style = kendo.ui.editor.Dom.inlineStyle(textarea.data.data("kendoEditor").document, "span", {className : classes[idx].value});
-                item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>');
+                item.html('<span unselectable="on" style="display:block;' + style +'">' + item.text() + '</span>');
             });
         },
 
@@ -683,8 +686,8 @@ kendo_module({
                         "ul,ol{padding-left:2.5em}" +
                         "a{color:#00a}" +
                         "code{font-size:1.23em}" +
-                        ".k-table{width:100%;}" +
-                        ".k-table td{min-width:1px;}" +
+                        ".k-table{width:100%;border-spacing:0;margin: 0 0 1em;}" +
+                        ".k-table td{min-width:1px;padding:.2em .3em;}" +
                         ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
                         ".k-table p{margin:0;padding:0;}" +
                     "</style>" +
@@ -726,6 +729,11 @@ kendo_module({
                 editor.document = document;
                 editor.body = editor.element[0];
             }
+
+            try {
+                editor.document.execCommand("enableObjectResizing", false, "false");
+                editor.document.execCommand("enableInlineTableEditing", null, false);
+            } catch(e) { }
 
             $(editor.body)
                 .on("keydown" + NS, function (e) {
@@ -955,7 +963,13 @@ kendo_module({
                 "createLink",
                 "unlink",
                 "insertImage",
-                "createTable"/*,
+                "createTable",
+                "addColumnLeft",
+                "addColumnRight",
+                "addRowAbove",
+                "addRowBelow",
+                "deleteRow",
+                "deleteColumn"/*,
                 "separator", // declare these explicitly
                 "style",
                 "subscript",
@@ -1064,6 +1078,9 @@ kendo_module({
                     }, 1);
                 }
             }
+
+            // add k-table class to all tables
+            $("table", this.body).addClass("k-table");
 
             this.selectionRestorePoint = null;
             this.update();

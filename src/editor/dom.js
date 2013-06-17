@@ -127,7 +127,7 @@ var whitespace = /^\s+$/,
         };
 
 var Dom = {
-    findNodeIndex: function(node) {
+    findNodeIndex: function(node, skipText) {
         var i = 0;
 
         while (true) {
@@ -137,7 +137,9 @@ var Dom = {
                 break;
             }
 
-            i++;
+            if (!(skipText && node.nodeType == 3)) {
+                i++;
+            }
         }
 
         return i;
@@ -369,6 +371,18 @@ var Dom = {
         node.parentNode.removeChild(node);
     },
 
+    removeTextSiblings: function(node) {
+        var parentNode = node.parentNode;
+
+        while (node.nextSibling && node.nextSibling.nodeType == 3) {
+            parentNode.removeChild(node.nextSibling);
+        }
+
+        while (node.previousSibling && node.previousSibling.nodeType == 3) {
+            parentNode.removeChild(node.previousSibling);
+        }
+    },
+
     trim: function (parent) {
         for (var i = parent.childNodes.length - 1; i >= 0; i--) {
             var node = parent.childNodes[i];
@@ -389,6 +403,30 @@ var Dom = {
         }
 
         return parent;
+    },
+
+    closest: function(node, tag) {
+        while (node && Dom.name(node) != tag) {
+            node = node.parentNode;
+        }
+
+        return node;
+    },
+
+    sibling: function(node, direction) {
+        do {
+            node = node[direction];
+        } while (node && node.nodeType != 1);
+
+        return node;
+    },
+
+    next: function(node) {
+        return Dom.sibling(node, "nextSibling");
+    },
+
+    prev: function(node) {
+        return Dom.sibling(node, "previousSibling");
     },
 
     parentOfType: function (node, tags) {

@@ -35,37 +35,20 @@ var ParagraphCommand = Command.extend({
         return marker;
     },
 
+    shouldTrim: function(range) {
+        var blocks = 'p,h1,h2,h3,h4,h5,h6'.split(','),
+            startInBlock = dom.parentOfType(range.startContainer, blocks),
+            endInBlock = dom.parentOfType(range.endContainer, blocks);
+        return (startInBlock && !endInBlock) || (!startInBlock && endInBlock);
+    },
+
     exec: function () {
         var range = this.getRange(),
             doc = RangeUtils.documentFromRange(range),
             parent, previous, next,
             emptyParagraphContent = editorNS.emptyElementContent,
             paragraph, marker, li, heading, rng,
-            // necessary while the emptyParagraphContent is empty under IE
-            blocks = 'p,h1,h2,h3,h4,h5,h6'.split(','),
-            startInBlock = dom.parentOfType(range.startContainer, blocks),
-            endInBlock = dom.parentOfType(range.endContainer, blocks),
-            shouldTrim = (startInBlock && !endInBlock) || (!startInBlock && endInBlock);
-
-        function clean(node) {
-            if (node.firstChild && dom.is(node.firstChild, 'br')) {
-                dom.remove(node.firstChild);
-            }
-
-            if (dom.isDataNode(node) && !node.nodeValue) {
-                node = node.parentNode;
-            }
-
-            if (node && !dom.is(node, 'img')) {
-                while (node.firstChild && node.firstChild.nodeType == 1) {
-                    node = node.firstChild;
-                }
-
-                if (/^\s*$/.test(node.innerHTML)) {
-                    node.innerHTML = emptyParagraphContent;
-                }
-            }
-        }
+            shouldTrim = this.shouldTrim(range);
 
         range.deleteContents();
 
@@ -125,8 +108,8 @@ var ParagraphCommand = Command.extend({
 
             dom.remove(parent);
 
-            clean(previous);
-            clean(next);
+            this.clean(previous);
+            this.clean(next);
 
             // normalize updates the caret display in Gecko
             normalize(previous);
@@ -151,6 +134,26 @@ var ParagraphCommand = Command.extend({
         dom.scrollTo(next);
 
         RangeUtils.selectRange(range);
+    },
+
+    clean: function(node) {
+        if (node.firstChild && dom.is(node.firstChild, 'br')) {
+            dom.remove(node.firstChild);
+        }
+
+        if (dom.isDataNode(node) && !node.nodeValue) {
+            node = node.parentNode;
+        }
+
+        if (node && !dom.is(node, 'img')) {
+            while (node.firstChild && node.firstChild.nodeType == 1) {
+                node = node.firstChild;
+            }
+
+            if (/^\s*$/.test(node.innerHTML)) {
+                node.innerHTML = editorNS.emptyElementContent;
+            }
+        }
     }
 });
 
