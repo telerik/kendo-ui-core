@@ -767,8 +767,6 @@ kendo_module({
 
             this._bindView(view);
 
-            view.renderLayout(this.date(), this.resources);
-
             this._model.set("formattedDate", view.dateForTitle());
 
             return view;
@@ -790,7 +788,7 @@ kendo_module({
                 }
 
                 if (type) {
-                    view = new type(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {})));
+                    view = new type(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date() })));
                 } else {
                     throw new Error("There is no such view");
                 }

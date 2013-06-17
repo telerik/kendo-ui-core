@@ -33,8 +33,8 @@
             var MonthView = kendo.ui.MonthView,
                 container;
 
-            function setup() {
-                return new MonthView(container, { eventHeight: 10 });
+            function setup(options) {
+                return new MonthView(container, $.extend(true, { eventHeight: 10, date: new Date(2013, 1, 2) }, options));
             }
 
             function removeDefaultHorizontalOffset(value) {
@@ -65,15 +65,11 @@
             test("class is added to the table", function() {
                 var view = setup();
 
-                view.renderLayout(new Date(2013, 1, 2));
-
                 ok(view.table.hasClass("k-scheduler-monthview"));
             });
 
             test("startDate is set to the first visible day for the month", function() {
                 var view = setup();
-
-                view.renderLayout(new Date(2013, 1, 2));
 
                 deepEqual(view.startDate(), new Date(2013, 0, 27));
             });
@@ -81,7 +77,6 @@
             test("endDate is set to the last visible day for the month", function() {
                 var view = setup();
 
-                view.renderLayout(new Date(2013, 1, 2));
 
                 deepEqual(view.endDate(), new Date(2013, 2, 9));
             });
@@ -89,7 +84,6 @@
             test("headers are populated with days of the week names", function() {
                 var view = setup();
 
-                view.renderLayout(new Date(2013, 1, 2));
 
                 var headerCells = view.datesHeader.find("th");
 
@@ -106,24 +100,19 @@
             test("day slots are created", function() {
                 var view = setup();
 
-                view.renderLayout(new Date(2013, 1, 2));
 
                 equal(view.content.find("tr").length, 6);
                 equal(view.content.find("td").length, 42);
             });
 
             test("today class is added", function() {
-                var view = setup();
-
-                view.renderLayout(new Date());
+                var view = setup({ date: new Date() });
 
                 equal(view.content.find("td.k-today").text(), kendo.toString(new Date(), "dd"));
             });
 
             test("position event", function() {
                 var view = setup();
-
-                view.renderLayout(new Date(2013, 1, 2));
 
                 view.render([
                     new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "one day event" })
@@ -140,8 +129,6 @@
 
             test("position multiple events in a single slot", function() {
                 var view = setup();
-
-                view.renderLayout(new Date(2013, 1, 2));
 
                 view.render([
                     new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "one day event" }),
@@ -166,8 +153,6 @@
             test("width of single day event is same as the slot", function() {
                 var view = setup();
 
-                view.renderLayout(new Date(2013, 1, 2));
-
                 view.render([
                     new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "one day event" })
                 ]);
@@ -180,8 +165,6 @@
 
             test("width of multi day event", function() {
                 var view = setup();
-
-                view.renderLayout(new Date(2013, 1, 2));
 
                 view.render([
                     new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 6), title: "multi day event" })
@@ -196,8 +179,6 @@
 
             test("event on multiple rows is split", function() {
                 var view = setup();
-
-                view.renderLayout(new Date(2013, 1, 2));
 
                 view.render([
                     new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 12), title: "multi day event" })
@@ -218,8 +199,6 @@
             test("event on two rows has arrows added", function() {
                 var view = setup();
 
-                view.renderLayout(new Date(2013, 1, 2));
-
                 view.render([
                     new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 12), title: "multi day event" })
                 ]);
@@ -236,8 +215,6 @@
 
             test("event on multiple rows has arrows added", function() {
                 var view = setup();
-
-                view.renderLayout(new Date(2013, 1, 2));
 
                 view.render([
                     new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 19), title: "multi day event" })
@@ -258,9 +235,7 @@
             });
 
             test("event ending after the endDate has arrows added", function() {
-                var view = setup();
-
-                view.renderLayout(new Date(2013, 2, 2));
+                var view = setup({ date: new Date(2013, 2, 2) });
 
                 view.render([
                     new kendo.data.SchedulerEvent({ start: new Date(2013, 2, 31), end: new Date(2013, 3, 19), title: "multi day event" })
@@ -273,21 +248,18 @@
            });
 
            test("event starting on a last week start and ending after the endDate", function() {
-                var view = setup();
+               var view = setup({ date: new Date(2013, 2, 2) });
 
-                view.renderLayout(new Date(2013, 2, 2));
+               view.render([
+                   new kendo.data.SchedulerEvent({ start: new Date(2013, 2, 31), end: new Date(2013, 3, 19), title: "multi day event" })
+               ]);
 
-                view.render([
-                    new kendo.data.SchedulerEvent({ start: new Date(2013, 2, 31), end: new Date(2013, 3, 19), title: "multi day event" })
-                ]);
-
-                equal(view.content.find(".k-event").length, 1);
+               equal(view.content.find(".k-event").length, 1);
            });
 
            test("clicking the cell link trigger navigate event", 2, function() {
                var view = setup();
 
-               view.renderLayout(new Date(2013, 1, 2));
                var slotIndex = view._slotIndex(new Date(2013, 1, 2));
 
                view.bind("navigate", function(e) {
@@ -300,8 +272,6 @@
 
            test("more button is shown if cell cannot accumulate the events", function() {
                var view = setup();
-
-               view.renderLayout(new Date(2013, 1, 2));
 
                view.render([
                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 1" }),
@@ -316,8 +286,6 @@
 
             test("clicking more button triggers navigate event", function() {
                var view = setup();
-
-               view.renderLayout(new Date(2013, 1, 2));
 
                view.render([
                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 1" }),
@@ -336,8 +304,6 @@
 
             test("refresh icon is shown if month event has recurring rule", function() {
                 var view = setup();
-
-                view.renderLayout(new Date(2013, 1, 2));
 
                 view.render([
                     new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "day event", recurrence: "FREQ=DAILY" })

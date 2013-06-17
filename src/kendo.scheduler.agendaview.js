@@ -24,6 +24,8 @@ kendo_module({
             this.element.on("mouseenter", ".k-scheduler-agenda .k-scheduler-content tr", "_mouseenter")
                         .on("mouseleave", ".k-scheduler-agenda .k-scheduler-content tr", "_mouseleave")
                         .on("click", ".k-scheduler-agenda .k-scheduler-content .k-link:has(.k-i-close)", "_remove");
+
+            this._renderLayout(this.options.date);
         },
 
         _mouseenter: function(e) {
@@ -58,8 +60,7 @@ kendo_module({
             return kendo.date.previousDay(this._startDate);
         },
 
-        renderLayout: function(date, resources) {
-            this._resources = resources;
+        _renderLayout: function(date) {
             this._startDate = date;
             this._endDate = kendo.date.addDays(date, 7);
             this.createLayout(this._layout());

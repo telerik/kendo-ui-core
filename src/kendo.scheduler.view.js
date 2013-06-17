@@ -142,14 +142,15 @@ kendo_module({
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
         },
         eventResources: function(event) {
-            var resources = [];
+            var resources = [],
+                options = this.options;
 
-            if (!this._resources) {
+            if (!options.resources) {
                 return resources;
             }
 
-            for (var idx = 0; idx < this._resources.length; idx++) {
-                var resource = this._resources[idx];
+            for (var idx = 0; idx < options.resources.length; idx++) {
+                var resource = options.resources[idx];
                 var field = resource.field;
                 var eventResources = kendo.getter(field)(event);
 

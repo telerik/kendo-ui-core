@@ -95,6 +95,8 @@ kendo_module({
             that.allDayEventTemplate = that._eventTmpl(that.options.allDayEventTemplate);
 
             that._editable();
+
+            that.calculateDateRange();
        },
 
         options: {
@@ -324,9 +326,8 @@ kendo_module({
             return kendo.date.previousDay(this.startDate());
         },
 
-        renderLayout: function(selectedDate, resources) {
-            this._resources = resources;
-            this._render([selectedDate]);
+        calculateDateRange: function() {
+            this._render([this.options.date]);
         },
 
         destroy: function() {
@@ -677,13 +678,12 @@ kendo_module({
                selectedDateFormat: "{0:D} - {1:D}"
            },
            name: "week",
-           renderLayout: function(selectedDate, resources) {
-               var start = new Date(selectedDate),
-               weekDay = selectedDate.getDay(),
-               dates = [],
-               idx, length;
-
-               this._resources = resources;
+           calculateDateRange: function() {
+               var selectedDate = this.options.date,
+                   start = new Date(selectedDate),
+                   weekDay = selectedDate.getDay(),
+                   dates = [],
+                   idx, length;
 
                start.setDate(start.getDate() - weekDay);
 

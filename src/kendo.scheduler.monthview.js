@@ -54,6 +54,8 @@ kendo_module({
             that.eventTemplate = that._eventTmpl(that.options.eventTemplate);
 
             that._editable();
+
+            that._renderLayout(that.options.date);
         },
 
         dateForTitle: function() {
@@ -76,10 +78,8 @@ kendo_module({
             return this._endDate;
         },
 
-        renderLayout: function(date, resources) {
+        _renderLayout: function(date) {
             var that = this;
-
-            this._resources = resources;
 
             this._firstDayOfMonth = kendo.date.firstDayOfMonth(date);
 

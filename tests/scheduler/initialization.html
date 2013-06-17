@@ -293,15 +293,14 @@
                         name: "foo",
                         dateForTitle: $.noop,
                         render: $.noop,
-                        renderLayout: function(selectedDate) {
-                            ok(selectedDate);
-                        },
                         startDate: $.noop,
                         endDate: $.noop
                     }),
                     scheduler = new Scheduler(container, {
                         views: [{ type: MyCustomView, title: "foo" }]
                     });
+
+                deepEqual(scheduler.view().options.date, scheduler.date());
             });
 
             test("switching between views destroyes the view", 1, function() {
@@ -322,24 +321,6 @@
                     });
 
                 scheduler.view("day");
-            });
-
-            test("changing dates re-renders current view", 2, function() {
-                var MyCustomView = kendo.ui.SchedulerView.extend({
-                        name: "foo",
-                        dateForTitle: $.noop,
-                        render: $.noop,
-                        renderLayout: function(selectedDate) {
-                            ok(true);
-                        },
-                        startDate: $.noop,
-                        endDate: $.noop
-                    }),
-                    scheduler = new Scheduler(container, {
-                        views: [{ type: MyCustomView, title: "foo" }]
-                    });
-
-                scheduler.date(new Date("1/2/2013"));
             });
 
             test("top level options are propagated to the view", function() {

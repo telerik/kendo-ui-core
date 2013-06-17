@@ -23,16 +23,14 @@
 
             var Event = kendo.data.SchedulerEvent;
 
-            function agendaView(date, options) {
+            function agendaView(options) {
                 var agenda = new kendo.ui.AgendaView($("<div>"), options);
-
-                agenda.renderLayout(date);
 
                 return agenda;
             }
 
             test("agenda renders table with headers for date, time and event", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 var table = agenda.element.find(".k-scheduler-table");
 
@@ -50,7 +48,7 @@
             });
 
             test("agenda renders a cell for the event date", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -70,7 +68,7 @@
             });
 
             test("agenda renders a cell for the event time", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -88,7 +86,7 @@
             });
 
             test("agenda renders a cell for the event title", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -106,7 +104,7 @@
             });
 
             test("agenda renders a table row for events", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -121,7 +119,7 @@
             });
 
             test("agenda groups events having the same date", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -144,7 +142,7 @@
             });
 
             test("date cell has rowspan equal to the number of events for this date", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -167,7 +165,7 @@
             });
 
             test("agenda creates date cells a date cell for every date", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -190,7 +188,7 @@
             });
 
             test("agenda displays 'all day' in the time cell for all day events", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -209,7 +207,7 @@
             });
 
             test("agenda sorts events by start time", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -232,7 +230,7 @@
             });
 
             test("agenda sorts events by end time", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -255,7 +253,7 @@
             });
 
             test("agenda splits a two day event to two tasks", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -279,7 +277,7 @@
             });
 
             test("agenda splits a three day event to three tasks", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([
                     new Event({
@@ -305,7 +303,7 @@
             });
 
             test("all day events are displayed first", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
                 agenda.render([
                     new Event({
                         start: new Date("2013/06/06 00:00"),
@@ -328,7 +326,7 @@
             });
 
             test("clicking the delete icon fires the remove event", 1, function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
                 var event = new Event({
                                 start: new Date("2013/06/06 00:00"),
                                 end: new Date("2013/06/06 01:00"),
@@ -347,7 +345,7 @@
             });
 
             test("agenda wraps time cells in a div", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
                 var event = new Event({
                                 start: new Date("2013/06/06 00:00"),
                                 end: new Date("2013/06/06 01:00"),
@@ -364,7 +362,7 @@
             });
 
             test("agenda renders right icon for events which continue on the next day", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") } );
                 var event = new Event({
                                 start: new Date("2013/06/06 00:00"),
                                 end: new Date("2013/06/07 01:00"),
@@ -382,7 +380,7 @@
             });
 
             test("agenda renders left icon for events which start on the previous day", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
                 var event = new Event({
                                 start: new Date("2013/06/06 00:00"),
                                 end: new Date("2013/06/07 01:00"),
@@ -400,7 +398,7 @@
             });
 
             test("agenda renders left and right icon for events which start on the previous day and end on the next day", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
                 var event = new Event({
                                 start: new Date("2013/06/06 00:00"),
                                 end: new Date("2013/06/08 01:00"),
@@ -419,12 +417,12 @@
             });
 
             test("setDate makes endDate a week away from startDate", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
                 equal(agenda.endDate().getTime() - agenda.startDate().getTime(), 7 * kendo.date.MS_PER_DAY);
             });
 
             test("agenda shows tasks which end within the specified interval", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 var event = new Event({
                                 start: new Date("2013/06/13 00:00"),
@@ -442,7 +440,7 @@
             });
 
             test("agenda renders refresh icon for events which have recurring rule", function() {
-                var agenda = agendaView(new Date("2013/06/06 00:00"));
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
                 var event = new Event({
                                 start: new Date("2013/06/06 00:00"),
                                 end: new Date("2013/06/06 01:00"),
