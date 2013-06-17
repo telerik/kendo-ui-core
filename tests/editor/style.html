@@ -20,10 +20,9 @@
 
     $("#Editor1").kendoEditor({
         tools: [
-            "style"
-        ],
-        style: [
-            { text: "foo", value: "bar" }
+            { name: "style", items: [
+                { text: "foo", value: "bar" }
+            ] }
         ],
         stylesheets: [
             "editorStyles.css"

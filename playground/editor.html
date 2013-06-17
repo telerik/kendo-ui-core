@@ -58,20 +58,32 @@
         #page {
             width: 800px;
             margin: 0 auto;
+            padding-top: 8em;
         }
+
+        .foo { color: red; background-color: blue }
+        .bar { color: #ccc; background-color: #f1f1f1 }
     </style>
 </head>
 <body>
     <div id="page">
-        <textarea id="comment" style="height: 200px;"></textarea>
+        <div id="comment" contentEditable style="height: 200px;"></div>
 
         <div id="content"></div>
     </div>
 
     <script>
         var editor = $("#comment")
-            .val("<p>foo bar baz</p>")
+            .html("<p>foo bar baz</p>")
             .kendoEditor({
+                tools: [
+                    "bold", "italic", "createLink", "insertImage",
+
+                    { name: "style", items: [
+                        { text: "foo", value: "foo" },
+                        { text: "bar", value: "bar" }
+                    ] }
+                ],
                 select: function(e) {
                     $("#content").text(this.value());
                 }
