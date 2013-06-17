@@ -935,13 +935,17 @@
     <Compile Include="UI\RequestSettings.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEventBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerResourceBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerResourceFactory.cs" />
     <Compile Include="UI\Scheduler\Html\SchedulerHtmlBuilder.cs" />
     <Compile Include="UI\Scheduler\IScheduler.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEvent.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventService.cs" />
+    <Compile Include="UI\Scheduler\ISchedulerResource.cs" />
     <Compile Include="UI\Scheduler\Scheduler.cs" />
     <Compile Include="UI\Scheduler\SchedulerEventController.cs" />
+    <Compile Include="UI\Scheduler\SchedulerResource.cs" />
     <Compile Include="UI\SecurityTrimming.cs" />
     <Compile Include="UI\SecurityTrimmingBuilder.cs" />
     <Compile Include="UI\Slider\Fluent\SliderTooltipBuilder.cs" />
