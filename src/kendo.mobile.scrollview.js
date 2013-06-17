@@ -273,6 +273,27 @@ kendo_module({
 
     kendo.mobile.ui.ScrollViewContent = ScrollViewContent;
 
+    var LEFT_PAGE = -1,
+        CENTER_PAGE = 0,
+        RIGHT_PAGE = 1;
+
+    var Page = kendo.Class.extend({
+        init: function (container) {
+            this.element = $("<div class='virtual-page'></div>");
+            this.width = container.width();
+            this.element.width(this.width);
+            container.append(this.element);
+        },
+        content: function (theContent) {
+            this.element.html(theContent);
+        },
+        position: function (position) { //position can be -1, 0, 1
+            this.element.css("transform", "translate3d(" + this.width * position + "px, 0, 0)");
+        }
+    });
+
+    kendo.mobile.ui.VirtualPage = Page;
+
     var ScrollView = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -749,20 +770,6 @@ kendo_module({
 
     ui.plugin(VirtualScrollView);
 
-    var Page = kendo.Class.extend({
-        init: function (container) {
-            this.element = $("<div class='virtual-page'></div>");
-            this.width = container.width();
-            this.element.width(this.width);
-            container.append(this.element);
-        },
-        content: function (theContent) {
-            this.element.html(theContent);
-        },
-        position: function (index) { //index can be -1, 0, 1
-            this.element.css("transform", "translate3d(" + this.width * index + "px, 0, 0)");
-        }
-    });
 
     var BatchBuffer = kendo.Observable.extend({
         init: function (dataSource, batchSize) {
