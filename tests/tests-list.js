@@ -206,7 +206,6 @@ var tests = [
     "editor/style.html",
     "editor/systemhandler.html",
     "editor/tablecommand.html",
-    "editor/tableeditor.html",
     "editor/insertrowcommand.html",
     "editor/insertcolumncommand.html",
     "editor/inserttabletool.html",

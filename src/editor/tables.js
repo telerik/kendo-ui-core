@@ -49,132 +49,6 @@ var TableCommand = Command.extend({
     }
 });
 
-var TableEditor = kendo.Class.extend({
-    init: function(table) {
-        this.table = table;
-
-        this._render();
-
-        this._attachEvents();
-    },
-
-    _render: function() {
-        var table = this.table,
-            doc = table.ownerDocument,
-            selectionRow = dom.create(doc, "tr", { className: "k-selection-row" }),
-            selectionCell = dom.create(doc, "td", {
-                className: "k-selection-cell",
-                contentEditable: "false"
-            }),
-            rows = table.rows,
-            i;
-
-        selectionRow.setAttribute("_kendo_markup", "");
-        selectionCell.setAttribute("_kendo_markup", "");
-        selectionCell.appendChild(doc.createTextNode("\ufeff"));
-
-        for (i = 0; i < rows[rows.length-1].cells.length; i++) {
-            selectionRow.appendChild(selectionCell.cloneNode(true));
-        }
-
-        dom.insertBefore(selectionRow, table.rows[0]);
-
-        for (i = 0; i < rows.length; i++) {
-            dom.insertBefore(selectionCell.cloneNode(), rows[i].cells[0]);
-        }
-
-        rows[0].cells[0].className = "k-select-all";
-    },
-
-    _attachEvents: function() {
-        $(this.table)
-            .on("mousedown" + NS, ".k-selection-cell,.k-select-all", false)
-            .on("click" + NS, ".k-selection-cell", proxy(this._selectionCellClick, this))
-            .on("mousedown" + NS, "td:not(.k-selection-cell)", proxy(this.clearSelection, this));
-    },
-
-    _detachEvents: function() {
-        $(this.table).off(NS);
-    },
-
-    _selectionCellClick: function(e) {
-        var target = $(e.target),
-            rowIndex = target.parent().index(),
-            cellIndex = target.index();
-
-        e.preventDefault();
-
-        if (!e.shiftKey) {
-            this.clearSelection();
-        }
-
-        if (!cellIndex) {
-            this.selectRow(rowIndex);
-        } else if (!rowIndex) {
-            this.selectColumn(cellIndex);
-        }
-    },
-
-    selectRow: function(index) {
-        var cells = this.table.rows[index].cells;
-
-        for (var i = 1; i < cells.length; i++) {
-            cells[i].className += " k-selected";
-        }
-    },
-
-    selectColumn: function(index) {
-        var rows = this.table.rows;
-
-        for (var i = 1; i < rows.length; i++) {
-            rows[i].cells[index].className += " k-selected";
-        }
-    },
-
-    clearSelection: function() {
-        var rows = this.table.rows, cells,
-            r, c;
-
-        for (r = 1; r < rows.length; r++) {
-            cells = rows[r].cells;
-
-            for (c = 1; c < cells.length; c++) {
-                cells[c].className = cells[c].className.replace(/\s?k-selected\b/, "");
-            }
-        }
-    },
-
-    destroy: function() {
-        var rows = this.table.rows, i, len = rows.length;
-
-        this.clearSelection();
-
-        this._detachEvents();
-
-        for (i = 0; i < len; i++) {
-            dom.remove(rows[i].cells[0]);
-        }
-
-        dom.remove(rows[0]);
-    }
-});
-
-extend(TableEditor, {
-    attach: function(table) {
-        if (!table._editor) {
-            $(table).find(".k-selection-row,.k-selection-cell").remove();
-            table._editor = new TableEditor(table);
-        }
-    },
-
-    detach: function(table) {
-        if (table._editor) {
-            table._editor.destroy();
-            table._editor = null;
-        }
-    }
-});
-
 var PopupTool = Tool.extend({
     initialize: function(ui, options) {
         Tool.fn.initialize.call(this, ui, options);
@@ -314,27 +188,12 @@ var InsertTableTool = PopupTool.extend({
     },
 
     update: function (ui, nodes) {
-        var editor = this._editor,
-            node = nodes[0],
-            table = node && $(node).closest("table")[0],
-            isFormatted;
+        var isFormatted;
 
         PopupTool.fn.update.call(this, ui);
 
         isFormatted = tableFormatFinder.isFormatted(nodes);
         ui.toggleClass("k-state-disabled", isFormatted);
-
-        $("table", node.ownerDocument).each(function() {
-            if (this != table) {
-                TableEditor.detach(this);
-            }
-        });
-
-        if (isFormatted) {
-            TableEditor.attach(table);
-
-            editor.selectRange(editor.getRange());
-        }
     }
 });
 
@@ -479,7 +338,6 @@ var TableModificationTool = Tool.extend({
 extend(kendo.ui.editor, {
     PopupTool: PopupTool,
     TableCommand: TableCommand,
-    TableEditor: TableEditor,
     InsertTableTool: InsertTableTool,
     TableModificationTool: TableModificationTool,
     InsertRowCommand: InsertRowCommand,
