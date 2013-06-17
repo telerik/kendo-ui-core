@@ -1,13 +1,13 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    public class SchedulerHtmlBuilder<T> where T : class, ISchedulerEvent
+    public class SchedulerHtmlBuilder<TModel> where TModel : class, ISchedulerEvent
     {
-        public SchedulerHtmlBuilder(Scheduler<T> scheduler)
+        public SchedulerHtmlBuilder(Scheduler<TModel> scheduler)
         {
             Scheduler = scheduler;
         }
 
-        public Scheduler<T> Scheduler
+        public Scheduler<TModel> Scheduler
         {
             get;
             private set;

@@ -11,7 +11,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SchedulerEventBuilder"/> class.
         /// </summary>
-        /// <param name="Events">The client events.</param>
+        /// <param name="events">The client events.</param>
         public SchedulerEventBuilder(IDictionary<string, object> events)
             : base(events)
         {
@@ -92,7 +92,7 @@
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  @(Html.Kendo().Scheduler()
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
         ///             .Name("Scheduler")
         ///             .Events(events => events.Edit("edit"))
         /// )
@@ -111,7 +111,7 @@
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  @(Html.Kendo().Scheduler()
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
         ///            .Name("Scheduler")
         ///            .Events(events => events.Cancel(
         ///                 @&lt;text&gt;
@@ -136,7 +136,7 @@
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  @(Html.Kendo().Scheduler()
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
         ///             .Name("Scheduler")
         ///             .Events(events => events.Cancel("cancel"))
         /// )
@@ -155,7 +155,7 @@
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  @(Html.Kendo().Scheduler()
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
         ///            .Name("Scheduler")
         ///            .Events(events => events.Save(
         ///                 @&lt;text&gt;
@@ -180,7 +180,7 @@
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  @(Html.Kendo().Scheduler()
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
         ///             .Name("Scheduler")
         ///             .Events(events => events.Save("save"))
         /// )
