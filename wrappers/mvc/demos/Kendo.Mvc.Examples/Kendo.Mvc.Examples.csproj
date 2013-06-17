@@ -127,6 +127,11 @@
     <Compile Include="Controllers\Mobile\Button\EventsController.cs" />
     <Compile Include="Controllers\Mobile\Button\IndexController.cs" />
     <Compile Include="Controllers\Mobile\Layout\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\ListView\Pull_With_EndlessController.cs" />
+    <Compile Include="Controllers\Mobile\ListView\FilteringController.cs" />
+    <Compile Include="Controllers\Mobile\ListView\Press_To_Load_MoreController.cs" />
+    <Compile Include="Controllers\Mobile\ListView\Endless_ScrollingController.cs" />
+    <Compile Include="Controllers\Mobile\ListView\Pull_To_RefreshController.cs" />
     <Compile Include="Controllers\Mobile\ListView\EditingController.cs" />
     <Compile Include="Controllers\Mobile\ListView\DataBindingController.cs" />
     <Compile Include="Controllers\Mobile\ListView\TemplatesController.cs" />
@@ -537,6 +542,11 @@
     <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\layout\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\listview\pull_with_endless.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\listview\filtering.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\listview\press_to_load_more.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\listview\endless_scrolling.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\listview\pull_to_refresh.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\editdetails.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\editing.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\databinding.aspx" />
@@ -738,6 +748,11 @@
     <Content Include="Areas\razor\Views\mobile\listview\databinding.cshtml" />
     <Content Include="Areas\razor\Views\mobile\listview\editdetails.cshtml" />
     <Content Include="Areas\razor\Views\mobile\listview\editing.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\listview\pull_to_refresh.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\listview\endless_scrolling.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\listview\press_to_load_more.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\listview\filtering.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\listview\pull_with_endless.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
