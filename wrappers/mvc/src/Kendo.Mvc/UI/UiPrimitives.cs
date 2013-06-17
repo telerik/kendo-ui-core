@@ -253,6 +253,10 @@ namespace Kendo.Mvc.UI
 
             public const string InFormContainer = "k-edit-form-container";
 
+            public const string EditButtonsContainer = "k-edit-buttons";
+
+            public const string PopupEditForm = "k-popup-edit-form";
+
             /// <summary>
             /// Container element for editing / inserting form
             /// </summary>

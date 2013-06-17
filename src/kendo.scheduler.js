@@ -48,7 +48,7 @@ kendo_module({
         EDIT = "edit",
         TODAY = getDate(new Date()),
         DELETECONFIRM = "Are you sure you want to delete this event?",
-        COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
+        COMMANDBUTTONTMPL = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>',
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
                '<li class="k-state-default k-nav-today"><a href="\\#" class="k-link">${messages.today}</a></li>' +
@@ -226,15 +226,11 @@ kendo_module({
     var defaultCommands = {
         update: {
             text: "Save",
-            imageClass: "k-update",
-            className: "k-scheduler-update",
-            iconClass: "k-icon"
+            className: "k-scheduler-update"
         },
         canceledit: {
             text: "Cancel",
-            imageClass: "k-cancel",
-            className: "k-scheduler-cancel",
-            iconClass: "k-icon"
+            className: "k-scheduler-cancel"
         },
         destroy: {
             text: "Delete",
@@ -531,7 +527,7 @@ kendo_module({
         _createButton: function(command) {
             var template = command.template || COMMANDBUTTONTMPL,
                 commandName = typeof command === STRING ? command : command.name || command.text,
-                options = { className: "k-scheduler-" + (commandName || "").replace(/\s/g, ""), text: commandName, imageClass: "", attr: "", iconClass: "" };
+                options = { className: "k-scheduler-" + (commandName || "").replace(/\s/g, ""), text: commandName, attr: "" };
 
             if (!commandName && !(isPlainObject(command) && command.template))  {
                 throw new Error("Custom commands should have name specified");
@@ -558,7 +554,7 @@ kendo_module({
         _createPopupEditor: function(model) {
             var that = this,
                 editable = that.options.editable,
-                html = '<div ' + kendo.attr("uid") + '="' + model.uid + '"><div class="k-edit-form-container">',
+                html = '<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form k-scheduler-edit-form"><div class="k-edit-form-container">',
                 template = editable.template,
                 messages = that.options.messages,
                 updateText = messages.save,
@@ -623,10 +619,8 @@ kendo_module({
                 }
             }
 
-            html += '<div class="k-edit-buttons">';
-
+            html += '<div class="k-edit-buttons k-state-default">';
             html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
-
             html += '</div></div></div>';
 
             var container = that._editContainer = $(html)

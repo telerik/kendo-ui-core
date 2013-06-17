@@ -1693,6 +1693,11 @@ form.k-filter-menu .k-textbox
     padding: 0;
 }
 
+.k-window > div.k-popup-edit-form
+{
+    padding: 1em 0 0;
+}
+
 .k-grid-edit-row .k-edit-form td
 {
     border-bottom-width: 0;
@@ -1705,26 +1710,39 @@ form.k-filter-menu .k-textbox
 }
 
 .k-edit-label,
-.k-edit-field,
-.k-edit-form-container .editor-label,
-.k-edit-form-container .editor-field
-{
-    display: inline-block;
-    padding-bottom: 1em;
-}
-
-.k-edit-label,
 .k-edit-form-container .editor-label
 {
+    float:left;
+    clear:both;
     width: 30%;
+    padding: .4em 0 1em;
+    margin-left: 2%;
     text-align: right;
-    padding-right: 3%;
 }
 
 .k-edit-field,
 .k-edit-form-container .editor-field
 {
+    float:right;
+    clear:right;
     width: 60%;
+    margin-right: 2%;
+    padding: 0 0 1em;
+}
+
+.k-edit-field > input[type="checkbox"],
+.k-edit-field > input[type="radio"]
+{
+    margin-top:.4em;
+}
+
+.k-edit-form-container .k-edit-buttons
+{
+    clear: both;
+    text-align: right;
+    border-width:1px 0 0;
+    border-style: solid;
+    padding:.6em;
 }
 
 .k-grid .field-validation-error
@@ -4071,6 +4089,52 @@ div.k-more-events
 .k-scheduler-timecolumn
 {
     white-space:nowrap;
+}
+
+.k-scheduler-edit-form .k-edit-form-container
+{
+    width: 520px;
+}
+
+.k-scheduler-edit-form .k-edit-label
+{
+    width: 17%;
+}
+
+.k-scheduler-edit-form .k-edit-field
+{
+    width: 77%;
+}
+
+.k-scheduler-edit-form .k-textbox[name="Subject"],
+.k-scheduler-edit-form textarea.k-textbox
+{
+    width: 100%;
+}
+
+.k-scheduler-edit-form > .k-edit-box:first-child .k-datetimepicker
+{
+    margin-right: 1em;
+}
+
+.k-edit-box
+{
+    float: left;
+}
+
+.k-edit-box + .k-edit-box
+{
+    float: right;
+}
+
+.k-scheduler-edit-form label + input
+{
+    margin-left: 1em;
+}
+
+.k-edit-field > ul.k-reset > li
+{
+    margin: .2em 0 .4em;
 }
 
 /* Tooltip */

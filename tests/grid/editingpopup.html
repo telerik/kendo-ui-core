@@ -143,7 +143,7 @@
                 grid.editRow(table.find("tr:first"));
 
                 var container = grid._editContainer.children("div.k-edit-form-container");
-                var elements = container.children("div");
+                var elements = container.children("div").not(".k-edit-buttons");
 
                 equal(elements.length, 4);
                 ok(elements.eq(0).hasClass("k-edit-label"));
@@ -160,7 +160,7 @@
                 grid.editRow(table.find("tr:first"));
 
                 var container = grid._editContainer.children("div.k-edit-form-container");
-                var elements = container.children("div");
+                var elements = container.children("div").not(".k-edit-buttons");
 
                 equal(elements.length, 4);
                 ok(elements.eq(0).hasClass("k-edit-label"));
@@ -177,7 +177,7 @@
                 grid.editRow(table.find("tr:first"));
 
                 var container = grid._editContainer.children("div.k-edit-form-container");
-                var elements = container.children("div");
+                var elements = container.children("div").not(".k-edit-buttons");
 
                 equal(elements.length, 4);
                 ok(elements.eq(0).hasClass("k-edit-label"));

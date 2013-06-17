@@ -47,7 +47,12 @@ namespace Kendo.Mvc.UI.Html
 
             editor.AppendTo(container);
 
-            AppendButtons(container);
+            var buttonsContainer = new HtmlElement("div")
+                .AddClass(UIPrimitives.Grid.EditButtonsContainer)
+                .AddClass(UIPrimitives.DefaultState);
+            buttonsContainer.AppendTo(container);
+
+            AppendButtons(buttonsContainer);
         }
     }
 }

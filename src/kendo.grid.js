@@ -1348,7 +1348,7 @@ kendo_module({
 
         _createPopupEditor: function(model) {
             var that = this,
-                html = '<div ' + kendo.attr("uid") + '="' + model.uid + '"><div class="k-edit-form-container">',
+                html = '<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form"><div class="k-edit-form-container">',
                 column,
                 command,
                 fields = [],
@@ -1423,8 +1423,9 @@ kendo_module({
                 }
             }
 
+            html += '<div class="k-edit-buttons k-state-default">';
             html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
-            html += '</div></div>';
+            html += '</div></div></div>';
 
             var container = that._editContainer = $(html)
                 .appendTo(that.wrapper).eq(0)

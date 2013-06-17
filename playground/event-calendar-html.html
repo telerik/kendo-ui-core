@@ -18,34 +18,6 @@ html
 
 /* common.less */
 
-div.k-window-content
-{
-    padding: 1em 0 0;
-}
-
-.k-edit-label
-{
-    float:left;
-    clear:both;
-    width:22%;
-}
-
-.k-edit-field
-{
-    float:right;
-    clear:right;
-}
-
-.k-edit-buttons
-{
-    clear: both;
-    text-align: right;
-    border-width:1px 0 0;
-    border-style: solid;
-    padding:.6em;
-}
-
-
 /* template.less */
 
 </style>
@@ -467,53 +439,83 @@ $(document).ready(function(){
                 <a role="button" href="#" class="k-window-action k-link"><span role="presentation"
                     class="k-icon k-i-close">Close</span></a></div>
         </div>
-        <div data-uid="924816fa-4806-48eb-be29-75ff6f14394d" data-role="window" class="k-window-content k-content"
+        <div data-uid="924816fa-4806-48eb-be29-75ff6f14394d" data-role="window" class="k-window-content k-content k-popup-edit-form k-scheduler-edit-form"
             style="overflow: auto;" tabindex="0">
             <div class="k-edit-form-container">
+
+
+
+
+
+
                 <div class="k-edit-label">
                     <label for="ProductName">
-                        Product Name</label></div>
+                        Subject</label></div>
                 <div data-container-for="ProductName" class="k-edit-field">
-                    <input type="text" class="k-input k-textbox" name="ProductName" required="required"
-                        data-bind="value:ProductName"></div>
+                    <input type="text" class="k-input k-textbox" name="Subject" required="required"
+                        /></div>
+
                 <div class="k-edit-label">
                     <label for="UnitPrice">
-                        Unit Price</label></div>
+                        From</label></div>
                 <div data-container-for="UnitPrice" class="k-edit-field">
-                    <span class="k-widget k-numerictextbox" style=""><span class="k-numeric-wrap k-state-default">
-                        <input type="text" class="k-formatted-value k-input" tabindex="0" aria-disabled="false"
-                            aria-readonly="false" style="display: inline-block;"><input type="text" name="UnitPrice"
-                                required="required" min="1" data-type="number" data-bind="value:UnitPrice" data-role="numerictextbox"
-                                role="spinbutton" class="k-input" aria-valuemin="1" aria-valuenow="10" aria-disabled="false"
-                                aria-readonly="false" style="display: none;"><span class="k-select"><span unselectable="on"
-                                    class="k-link"><span unselectable="on" class="k-icon k-i-arrow-n" title="Increase value">Increase
-                                        value</span></span><span unselectable="on" class="k-link"><span unselectable="on"
-                                            class="k-icon k-i-arrow-s" title="Decrease value">Decrease value</span></span></span></span></span><span
-                                                data-for="UnitPrice" class="k-invalid-msg" style="display: none;"></span></div>
+                    <div class="k-edit-box"><span class="k-widget k-datetimepicker k-header"><span class="k-picker-wrap k-state-default k-state-hover"><input id="datetimepicker" style="width: 100%;" data-role="datetimepicker" type="text" class="k-input" role="textbox" aria-haspopup="true" aria-expanded="false" aria-disabled="false" aria-readonly="false" aria-label="Current focused date is 6/17/2013 1:56:33 PM"><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar" role="button" aria-controls="datetimepicker_dateview">select</span><span unselectable="on" class="k-icon k-i-clock" role="button" aria-controls="datetimepicker_timeview">select</span></span></span></span>
+                    </div>
+                    
+                    <div class="k-edit-box">
+                    <label for="UnitPrice">To</label> <span class="k-widget k-datetimepicker k-header"><span class="k-picker-wrap k-state-default k-state-hover"><input id="Text1" style="width: 100%;" data-role="datetimepicker" type="text" class="k-input" role="textbox" aria-haspopup="true" aria-expanded="false" aria-disabled="false" aria-readonly="false" aria-label="Current focused date is 6/17/2013 1:56:33 PM"><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar" role="button" aria-controls="datetimepicker_dateview">select</span><span unselectable="on" class="k-icon k-i-clock" role="button" aria-controls="datetimepicker_timeview">select</span></span></span></span>
+                    </div>
+                                            
+                    </div>
                 <div class="k-edit-label">
                     <label for="UnitsInStock">
-                        Units In Stock</label></div>
+                        Checkboxes</label></div>
                 <div data-container-for="UnitsInStock" class="k-edit-field">
-                    <span class="k-widget k-numerictextbox" style=""><span class="k-numeric-wrap k-state-default">
-                        <input type="text" class="k-formatted-value k-input" tabindex="0" aria-disabled="false"
-                            aria-readonly="false" style="display: inline-block;"><input type="text" name="UnitsInStock"
-                                min="0" required="required" data-type="number" data-bind="value:UnitsInStock"
-                                data-role="numerictextbox" role="spinbutton" class="k-input" aria-valuemin="0"
-                                aria-valuenow="13" aria-disabled="false" aria-readonly="false" style="display: none;"><span
-                                    class="k-select"><span unselectable="on" class="k-link"><span unselectable="on" class="k-icon k-i-arrow-n"
-                                        title="Increase value">Increase value</span></span><span unselectable="on" class="k-link"><span
-                                            unselectable="on" class="k-icon k-i-arrow-s" title="Decrease value">Decrease value</span></span></span></span></span><span
-                                                data-for="UnitsInStock" class="k-invalid-msg" style="display: none;"></span></div>
+
+                    <label><input type="checkbox" /> Mon</label> <input type="checkbox" /><label>Thu</label> <input type="checkbox" /><label>Wed</label> <input type="checkbox" /><label>Thu</label>
+                    <input type="checkbox" /><label>Fri</label> <input type="checkbox" /><label>Sat</label><input type="checkbox" /><label>Sun</label>
+                </div>
+
+                <div class="k-edit-label">
+                    <label for="UnitsInStock">
+                        Label</label></div>
+                <div data-container-for="UnitsInStock" class="k-edit-field">
+
+                    <input type="radio" /><label>Radio</label> <input type="radio" /><label>button</label> <input type="radio" /><label>list</label>
+                </div>
+
+                <div class="k-edit-label">
+                    <label>
+                        End</label></div>
+                <div data-container-for="Discontinued" class="k-edit-field">
+                    <ul class="k-reset">
+                        <li><input type="radio" /><label>Never</label></li>
+                        <li><input type="radio" /><label>After</label> X occurrences</li>
+                        <li><input type="radio" /><label>On</label> specific date...</li>
+                    </ul>
+                </div>
+
+
+
                 <div class="k-edit-label">
                     <label for="Discontinued">
-                        Discontinued</label></div>
+                        Textarea</label></div>
                 <div data-container-for="Discontinued" class="k-edit-field">
-                    <input type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued"></div>
+                    <textarea cols="30" rows="4" class="k-textbox"></textarea>
+                </div>
 
                 <div class="k-edit-buttons k-state-default">
                 <a class="k-button k-button-icontext k-grid-update" href="#"><span class="k-icon k-update">
                 </span>Update</a><a class="k-button k-button-icontext k-grid-cancel" href="#"><span
                     class="k-icon k-cancel"></span>Cancel</a></div>
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
