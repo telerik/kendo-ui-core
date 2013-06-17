@@ -1,8 +1,10 @@
 ﻿namespace Kendo.Mvc.UI
 {
     using System.Web.Mvc;
+    using System.Collections.Generic;
 
-    public interface IScheduler
+    public interface IScheduler<TModel>
+        where TModel : class
     {
         DataSource DataSource
         {
@@ -20,6 +22,11 @@
         }
 
         bool IsInClientTemplate
+        {
+            get;
+        }
+
+        IList<SchedulerResource<TModel>> Resources
         {
             get;
         }

@@ -8,8 +8,9 @@
     /// <summary>
     /// The server side wrapper for Kendo UI Scheduler
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class Scheduler<T> : WidgetBase, IScheduler where T : class, ISchedulerEvent
+    /// <typeparam name="TModel"></typeparam>
+    public class Scheduler<TModel> : WidgetBase, IScheduler<TModel> 
+        where TModel : class, ISchedulerEvent
     {
         public Scheduler(ViewContext viewContext,
                     IJavaScriptInitializer initializer,
@@ -17,13 +18,15 @@
             )
             : base(viewContext, initializer)
         {
-            UrlGenerator = urlGenerator;
-
             DataSource = new DataSource();
 
             DataSource.Type = DataSourceType.Ajax;
 
-            DataSource.ModelType(typeof(T));
+            DataSource.ModelType(typeof(TModel));
+
+            UrlGenerator = urlGenerator;
+
+            Resources = new List<SchedulerResource<TModel>>();
         }
 
         public DataSource DataSource
@@ -33,6 +36,12 @@
         }
 
         public IUrlGenerator UrlGenerator
+        {
+            get;
+            private set;
+        }
+
+        public IList<SchedulerResource<TModel>> Resources
         {
             get;
             private set;
@@ -51,26 +60,30 @@
         {
             var options = new Dictionary<string, object>(Events);
 
+
+            Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
+
+            dataSource["type"] = "scheduler-aspnetmvc";
+
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {      
-
-                Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
-                
-                dataSource["type"] = "scheduler-aspnetmvc";
-
                 options["dataSource"] = dataSource;
             }
             else if (DataSource.Data != null)
             {
-                options["dataSource"] = DataSource.Data;
+                dataSource["data"] = new { Data = DataSource.Data };
+
+                options["dataSource"] = dataSource;
             }
+
+            options["resources"] = Resources.ToJson();
 
             return options;
         }
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            SchedulerHtmlBuilder<T> builder = new SchedulerHtmlBuilder<T>(this);
+            SchedulerHtmlBuilder<TModel> builder = new SchedulerHtmlBuilder<TModel>(this);
 
             builder.Build().WriteTo(writer);
 
