@@ -654,6 +654,7 @@ kendo_module({
         var rule = parseRule(event.recurrence),
             eventStartMS = +event.start,
             durationMS = event.end - eventStartMS,
+            id = event.id,
             current = 1,
             events = [],
             eventEnd,
@@ -663,6 +664,8 @@ kendo_module({
 
         if (event.toJSON) {
             event = event.toJSON();
+
+            delete event.recurrence;
         }
 
         //convert start from tzid to UTC
@@ -701,7 +704,8 @@ kendo_module({
             //TODO: DST check
             eventEnd = new Date(start.getTime() + durationMS);
             events.push($.extend({}, event, {
-                recurrenceID: event.uid,
+                uid: kendo.guid(),
+                recurrenceID: id,
                 start: new Date(start),
                 end: eventEnd
             }));

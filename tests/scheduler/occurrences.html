@@ -18,14 +18,15 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            var occurrences = kendo.recurrence.expand,
+            var SchedulerEvent = kendo.data.SchedulerEvent,
+                occurrences = kendo.recurrence.expand,
                 expandAll = kendo.recurrence.expandAll;
 
             module("Cloning scheduler event");
 
             test("Strip observable object", function() {
-                var schedulerEvent = new kendo.data.SchedulerEvent({
-                    uid: "id",
+                var schedulerEvent = new SchedulerEvent({
+                    id: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
@@ -38,20 +39,20 @@
             });
 
             test("Occurrence clones original event", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrence: "FREQ=DAILY"
-                }
+                });
 
                 var event = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17))[0];
 
-                equal(event.uid, schedulerEvent.uid);
+                notEqual(event.uid, schedulerEvent.uid);
                 equal(event.title, schedulerEvent.title);
-                equal(event.recurrence, schedulerEvent.recurrence);
-                equal(event.recurrenceID, schedulerEvent.uid);
+                equal(event.recurrence, undefined);
+                equal(event.recurrenceID, schedulerEvent.id);
                 equal(event.start.getTime(), +new Date(2000, 10, 11, 16, 30));
                 equal(event.end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });
@@ -268,7 +269,6 @@
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17));
 
                 equal(events.length, 1);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 11, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });
@@ -284,11 +284,9 @@
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16, 17));
 
                 equal(events.length, 6);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 11, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
 
-                equal(events[5].recurrenceID, schedulerEvent.uid);
                 equal(events[5].start.getTime(), +new Date(2000, 10, 16, 16, 30));
                 equal(events[5].end.getTime(), +new Date(2000, 10, 16, 17, 0));
             });
@@ -306,11 +304,9 @@
 
                 equal(events.length, 3);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 12, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 12, 17, 0));
 
-                equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2000, 10, 16, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2000, 10, 16, 17, 0));
             });
@@ -328,7 +324,6 @@
 
                 equal(events.length, 1);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 11, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });
@@ -346,7 +341,6 @@
 
                 equal(events.length, 1);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 10, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 10, 17, 0));
             });
@@ -390,7 +384,6 @@
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 30), new Date(2000, 11, 1, 17));
 
                 equal(events.length, 1);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 30, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 30, 17, 0));
             });
@@ -408,11 +401,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 13, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 13, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2000, 10, 15, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2000, 10, 15, 17, 0));
             });
@@ -430,7 +421,6 @@
 
                 equal(events.length, 1);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 4, 27, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 4, 27, 17, 0));
             });
@@ -448,11 +438,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 12, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 12, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2000, 10, 13, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2000, 10, 13, 17, 0));
             });
@@ -500,7 +488,6 @@
 
                 equal(events.length, 1);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 4, 17, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 4, 17, 17, 0));
             });
@@ -544,19 +531,15 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 17), new Date(2013, 5, 8));
                 equal(events.length, 4);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 4, 21, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 4, 21, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 4, 23, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 4, 23, 17, 0));
 
-                equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2013, 5, 4, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2013, 5, 4, 17, 0));
 
-                equal(events[3].recurrenceID, schedulerEvent.uid);
                 equal(events[3].start.getTime(), +new Date(2013, 5, 6, 16, 30));
                 equal(events[3].end.getTime(), +new Date(2013, 5, 6, 17, 0));
             });
@@ -574,11 +557,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 25, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 25, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 27, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 27, 17, 0));
             });
@@ -596,11 +577,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 10, 18, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 10, 19, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 11, 8, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 11, 9, 0));
             });
@@ -618,11 +597,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 11, 8, 15));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 11, 8, 45));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 11, 8, 45));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 11, 9, 15));
             });
@@ -640,7 +617,6 @@
 
                 equal(events.length, 1);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 45));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 15));
             });
@@ -658,7 +634,6 @@
 
                 equal(events.length, 1);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 11, 16, 15));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 11, 16, 45));
             });
@@ -676,11 +651,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 10, 17, 15));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 45));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 10, 18, 15));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 10, 18, 45));
             });
@@ -698,11 +671,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 10, 17, 20));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 50));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 10, 17, 40));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 10, 18, 10));
             });
@@ -720,11 +691,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 30, 20));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 0, 20));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 10, 16, 30, 40));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 10, 17, 0, 40));
             });
@@ -742,7 +711,6 @@
 
                 equal(events.length, 1);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 40, 40));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 10, 40));
             });
@@ -760,11 +728,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 40, 20));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 10, 20));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 10, 16, 40, 40));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 10, 17, 10, 40));
             });
@@ -782,11 +748,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 11, 10, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 11, 11));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 11, 12, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 11, 13));
             });
@@ -804,15 +768,12 @@
 
                 equal(events.length, 3);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 10, 10, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 10, 11));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 10, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 10, 17));
 
-                equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2013, 5, 10, 20, 30));
                 equal(events[2].end.getTime(), +new Date(2013, 5, 10, 21));
             });
@@ -845,19 +806,15 @@
 
                 equal(events.length, 4);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 17, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 17, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2000, 10, 24, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2000, 10, 24, 17, 0));
 
-                equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2000, 11, 1, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2000, 11, 1, 17, 0));
 
-                equal(events[3].recurrenceID, schedulerEvent.uid);
                 equal(events[3].start.getTime(), +new Date(2000, 11, 8, 16, 30));
                 equal(events[3].end.getTime(), +new Date(2000, 11, 8, 17, 0));
             });
@@ -874,19 +831,15 @@
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 25));
 
                 equal(events.length, 4);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 10, 12, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 10, 12, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2000, 10, 13, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2000, 10, 13, 17, 0));
 
-                equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2000, 10, 19, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2000, 10, 19, 17, 0));
 
-                equal(events[3].recurrenceID, schedulerEvent.uid);
                 equal(events[3].start.getTime(), +new Date(2000, 10, 20, 16, 30));
                 equal(events[3].end.getTime(), +new Date(2000, 10, 20, 17, 0));
             });
@@ -903,15 +856,12 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
 
                 equal(events.length, 3);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 10, 12, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 10, 12, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 10, 15, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 10, 15, 17, 0));
 
-                equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2013, 10, 26, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2013, 10, 26, 17, 0));
             });
@@ -941,7 +891,6 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
 
                 equal(events.length, 1);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 10, 12, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 10, 12, 17, 0));
             });
@@ -1000,7 +949,6 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 27), new Date(2013, 10, 30));
 
                 equal(events.length, 1);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 10, 29, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 10, 29, 17, 0));
             });
@@ -1046,11 +994,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 10, 12, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 10, 12, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 10, 29, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 10, 29, 17, 0));
             });
@@ -1068,11 +1014,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 10, 15, 12, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 10, 15, 13, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 10, 15, 14, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 10, 15, 15, 0));
             });
@@ -1090,11 +1034,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 10, 15, 12, 20));
                 equal(events[0].end.getTime(), +new Date(2013, 10, 15, 12, 50));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 10, 15, 14, 20));
                 equal(events[1].end.getTime(), +new Date(2013, 10, 15, 14, 50));
             });
@@ -1112,11 +1054,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 10, 15, 12, 20, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 10, 15, 12, 50, 30));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 10, 15, 14, 20, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 10, 15, 14, 50, 30));
             });
@@ -1135,19 +1075,15 @@
 
                 equal(events.length, 4);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 6, 10, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 6, 10, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2000, 7, 10, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2000, 7, 10, 17, 0));
 
-                equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2000, 8, 10, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2000, 8, 10, 17, 0));
 
-                equal(events[3].recurrenceID, schedulerEvent.uid);
                 equal(events[3].start.getTime(), +new Date(2000, 9, 10, 16, 30));
                 equal(events[3].end.getTime(), +new Date(2000, 9, 10, 17, 0));
             });
@@ -1199,11 +1135,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 7, 10, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 7, 10, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2000, 9, 10, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2000, 9, 10, 17, 0));
             });
@@ -1234,11 +1168,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 6, 6, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 6, 6, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2000, 6, 10, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2000, 6, 10, 17, 0));
             });
@@ -1256,15 +1188,12 @@
 
                 equal(events.length, 10);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 10, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 10, 17, 0));
 
-                equal(events[4].recurrenceID, schedulerEvent.uid);
                 equal(events[4].start.getTime(), +new Date(2013, 5, 24, 16, 30));
                 equal(events[4].end.getTime(), +new Date(2013, 5, 24, 17, 0));
 
-                equal(events[9].recurrenceID, schedulerEvent.uid);
                 equal(events[9].start.getTime(), +new Date(2013, 6, 10, 16, 30));
                 equal(events[9].end.getTime(), +new Date(2013, 6, 10, 17, 0));
             });
@@ -1282,11 +1211,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 13, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 13, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 25, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 25, 17, 0));
             });
@@ -1304,11 +1231,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 5, 25, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 5, 25, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 5, 27, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 5, 27, 17, 0));
             });
@@ -1326,11 +1251,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 10, 15, 12, 20, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 10, 15, 12, 50, 30));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 10, 15, 14, 20, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 10, 15, 14, 50, 30));
             });
@@ -1349,11 +1272,9 @@
 
                 equal(events.length, 2);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2001, 5, 10, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2001, 5, 10, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2002, 5, 10, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2002, 5, 10, 17, 0));
             });
@@ -1371,15 +1292,12 @@
 
                 equal(events.length, 3);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2000, 11, 10, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2000, 11, 10, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2001, 11, 10, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2001, 11, 10, 17, 0));
 
-                equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2002, 11, 10, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2002, 11, 10, 17, 0));
             });
@@ -1396,11 +1314,9 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 10), new Date(2013, 11, 10, 17));
                 equal(events.length, 7); //04 - 10 March
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 2, 4, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 2, 4, 17, 0));
 
-                equal(events[6].recurrenceID, schedulerEvent.uid);
                 equal(events[6].start.getTime(), +new Date(2013, 2, 10, 16, 30));
                 equal(events[6].end.getTime(), +new Date(2013, 2, 10, 17, 0));
             });
@@ -1417,15 +1333,12 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
                 equal(events.length, 3);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 0, 10, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 0, 10, 17, 0));
 
-                equal(events[1].recurrenceID, schedulerEvent.uid);
                 equal(events[1].start.getTime(), +new Date(2013, 3, 10, 16, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 3, 10, 17, 0));
 
-                equal(events[2].recurrenceID, schedulerEvent.uid);
                 equal(events[2].start.getTime(), +new Date(2013, 6, 19, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2013, 6, 19, 17, 0));
             });
@@ -1461,11 +1374,9 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
                 equal(events.length, 7);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 0, 31, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 0, 31, 17, 0));
 
-                equal(events[6].recurrenceID, schedulerEvent.uid);
                 equal(events[6].start.getTime(), +new Date(2013, 11, 31, 16, 30));
                 equal(events[6].end.getTime(), +new Date(2013, 11, 31, 17, 0));
             });
@@ -1482,11 +1393,9 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 1), new Date(2013, 4, 31, 17));
                 equal(events.length, 5);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 4, 2, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 4, 2, 17, 0));
 
-                equal(events[4].recurrenceID, schedulerEvent.uid);
                 equal(events[4].start.getTime(), +new Date(2013, 4, 30, 16, 30));
                 equal(events[4].end.getTime(), +new Date(2013, 4, 30, 17, 0));
             });
@@ -1503,11 +1412,9 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
                 equal(events.length, 7); //21 - 27 October
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 9, 21, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 9, 21, 17, 0));
 
-                equal(events[6].recurrenceID, schedulerEvent.uid);
                 equal(events[6].start.getTime(), +new Date(2013, 9, 27, 16, 30));
                 equal(events[6].end.getTime(), +new Date(2013, 9, 27, 17, 0));
             });
@@ -1524,11 +1431,9 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
                 equal(events.length, 7); //04 - 10 March
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 2, 4, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 2, 4, 17, 0));
 
-                equal(events[6].recurrenceID, schedulerEvent.uid);
                 equal(events[6].start.getTime(), +new Date(2013, 2, 10, 16, 30));
                 equal(events[6].end.getTime(), +new Date(2013, 2, 10, 17, 0));
             });
@@ -1558,7 +1463,6 @@
                 var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2012, 4, 31, 17));
                 equal(events.length, 1);
 
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2012, 1, 29, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2012, 1, 29, 17, 0));
             });
@@ -1575,7 +1479,6 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
                 equal(events.length, 1);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 1, 1, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 1, 1, 17, 0));
             });
@@ -1592,11 +1495,9 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
                 equal(events.length, 4);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 1, 6, 16, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 1, 6, 17, 0));
 
-                equal(events[3].recurrenceID, schedulerEvent.uid);
                 equal(events[3].start.getTime(), +new Date(2013, 1, 27, 16, 30));
                 equal(events[3].end.getTime(), +new Date(2013, 1, 27, 17, 0));
             });
@@ -1613,7 +1514,6 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
                 equal(events.length, 2);
-                equal(events[0].recurrenceID, schedulerEvent.uid);
                 equal(events[0].start.getTime(), +new Date(2013, 1, 1, 17, 40));
                 equal(events[0].end.getTime(), +new Date(2013, 1, 1, 18, 10));
 
@@ -1624,20 +1524,20 @@
             module("Expanding recurring events");
 
             test("Expand recurring events", function() {
-                var events = [{
-                        uid: "id",
+                var events = [new SchedulerEvent({
+                        id: "id1",
                         title: "Title",
                         start: new Date(2013, 0, 1, 16, 30),
                         end: new Date(2013, 0, 1, 17, 0),
                         recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
-                    },
-                    {
-                        uid: "id",
+                    }),
+                    new SchedulerEvent({
+                        id: "id2",
                         title: "Title",
                         start: new Date(2013, 0, 1, 10, 30),
                         end: new Date(2013, 0, 1, 11, 30),
                         recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
-                    }];
+                    })];
 
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
@@ -1661,27 +1561,27 @@
 
 
             test("Expand recurring events which are outside of period", function() {
-                var events = [{
-                        uid: "id",
+                var events = [new SchedulerEvent({
+                        id: "Test1",
                         title: "Title",
                         start: new Date(2012, 0, 1, 16, 30),
                         end: new Date(2012, 0, 1, 17, 0),
                         recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
-                    },
-                    {
-                        uid: "id",
+                    }),
+                    new SchedulerEvent({
+                        id: "Test2",
                         title: "Title",
                         start: new Date(2012, 0, 1, 10, 30),
                         end: new Date(2012, 0, 1, 11, 30),
                         recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
-                    }];
+                    })];
 
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
                 equal(events.length, 3);
-                equal(events[0].recurrenceID, "id");
-                equal(events[1].recurrenceID, "id");
-                equal(events[2].recurrenceID, "id");
+                equal(events[0].recurrenceID, "Test1");
+                equal(events[1].recurrenceID, "Test1");
+                equal(events[2].recurrenceID, "Test2");
 
                 equal(events[0].start.getTime(), +new Date(2013, 1, 1, 17, 40));
                 equal(events[0].end.getTime(), +new Date(2013, 1, 1, 18, 10));
@@ -1695,14 +1595,14 @@
 
             test("Expand recurring events which are outside of period", function() {
                 var events = [{
-                        uid: "id",
+                        id: "Test1",
                         title: "Title",
                         start: new Date(2012, 0, 1, 16, 30),
                         end: new Date(2012, 0, 1, 17, 0),
                         recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
                     },
                     {
-                        uid: "id",
+                        id: "Test2",
                         title: "Title",
                         start: new Date(2012, 0, 1, 10, 30),
                         end: new Date(2012, 0, 1, 11, 30),
@@ -1712,9 +1612,9 @@
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
                 equal(events.length, 3);
-                equal(events[0].recurrenceID, "id");
-                equal(events[1].recurrenceID, "id");
-                equal(events[2].recurrenceID, "id");
+                equal(events[0].recurrenceID, "Test1");
+                equal(events[1].recurrenceID, "Test1");
+                equal(events[2].recurrenceID, "Test2");
 
                 equal(events[0].start.getTime(), +new Date(2013, 1, 1, 17, 40));
                 equal(events[0].end.getTime(), +new Date(2013, 1, 1, 18, 10));
