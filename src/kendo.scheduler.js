@@ -123,8 +123,10 @@ kendo_module({
         for (idx = 0, length = data.length; idx < length; idx++) {
             event = data[idx];
 
-            event.start = kendo.timezone[method](event.start, event.startTimezone || event.endTimezone || timezone);
-            event.end = kendo.timezone[method](event.end, event.endTimezone || event.startTimezone || timezone);
+            if (event.startTimezone || event.endTimezone || timezone) {
+                event.start = kendo.timezone[method](event.start, event.startTimezone || event.endTimezone || timezone);
+                event.end = kendo.timezone[method](event.end, event.endTimezone || event.startTimezone || timezone);
+            }
 
             //delete event.uid;
         }
@@ -133,7 +135,7 @@ kendo_module({
 
     var SchedulerDataReader = kendo.Class.extend({
         init: function(schema, reader) {
-            var timezone = schema.timezone || "Etc/UTC";
+            var timezone = schema.timezone;
 
             this.reader = reader;
 

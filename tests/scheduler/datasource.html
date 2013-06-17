@@ -199,10 +199,23 @@
                 dataReader.serialize();
             });
 
-            test("data pass start and end data through the timezone conversion", function() {
+            test("timezone conversion is not executed if no timezone is provided", function() {
                 var originalReader = new kendo.data.DataReader({ });
 
                 var dataReader = new SchedulerDataReader({}, originalReader);
+                var apply = stub(kendo.timezone, "apply");
+                var start = new Date(2013, 1, 1);
+                var end = new Date(2013, 1, 1);
+
+                dataReader.data([ { start: start, end: end } ]);
+
+                equal(apply.calls("apply"), 0);
+            });
+
+            test("data pass start and end dates through the timezone conversion", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({ timezone: "UTC/Etc" }, originalReader);
                 var apply = stub(kendo.timezone, "apply");
                 var start = new Date(2013, 1, 1);
                 var end = new Date(2013, 1, 1);
@@ -216,6 +229,7 @@
 
             test("data pass start and end data through the timezone conversion with custom field mapping", function() {
                 var schema = {
+                    timezone: "UTC/Etc",
                     model: {
                         fields: {
                             start: "Start",
@@ -293,7 +307,7 @@
             test("serialize pass start and end data through the timezone conversion", function() {
                 var originalReader = new kendo.data.DataReader({ });
 
-                var dataReader = new SchedulerDataReader({}, originalReader);
+                var dataReader = new SchedulerDataReader({ timezone: "UTC/Etc" }, originalReader);
                 var remove = stub(kendo.timezone, "remove");
                 var start = new Date(2013, 1, 1);
                 var end = new Date(2013, 1, 1);
@@ -307,6 +321,7 @@
 
             test("serialize pass start and end data through the timezone conversion with custom field mapping", function() {
                 var schema = {
+                    timezone: "UTC/Etc",
                     model: {
                         fields: {
                             start: "Start",

@@ -78,7 +78,7 @@
            // majorTick: 30,
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
  //           endTime: new Date(2013, 4, 14, 18, 0,0),
-            views: ["day", { name: "week", selected: true }, "month", "agenda"],
+            views: ["day", { type: "week", selected: true }, "month", "agenda"],
             resources: [
                 {
                     field: "ownerId",
@@ -116,7 +116,7 @@
                     }
                 },
                 schema: {
-                    timezone: "Europe/London",
+                    //timezone: "Europe/London",
                     model: {
                         id: "ID",
                         fields: {
