@@ -225,7 +225,7 @@ kendo_module({
 
     var defaultCommands = {
         update: {
-            text: "Update",
+            text: "Save",
             imageClass: "k-update",
             className: "k-scheduler-update",
             iconClass: "k-icon"
@@ -350,7 +350,10 @@ kendo_module({
             date: TODAY,
             editable: true,
             messages: {
-                today: "Today"
+                today: "Today",
+                save: "Save",
+                cancel: "Cancel",
+                destroy: "Delete"
             },
             resources: [],
             views: []
@@ -405,23 +408,10 @@ kendo_module({
         _showMessage: function(text, callback) {
             var that = this,
                 html = kendo.format("<div><span>{0}</span>", text),
-                command = this.options.editable.destroyCommand,
-                destroyText,
-                cancelText,
+                messages = this.options.messages,
+                destroyText = messages.destroy,
+                cancelText = messages.cancel,
                 attr;
-
-            if (command) {
-                if (isPlainObject(command)) {
-                   if (command.text && isPlainObject(command.text)) {
-                       destroyText = command.text.destroy;
-                       cancelText = command.text.cancel;
-                   }
-
-                   if (command.attr) {
-                       attr = command.attr;
-                   }
-                }
-            }
 
             html += '<div class="k-edit-buttons">';
             html += that._createButton({ name: "destroy", text: destroyText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
@@ -577,9 +567,9 @@ kendo_module({
                 editable = that.options.editable,
                 html = '<div ' + kendo.attr("uid") + '="' + model.uid + '"><div class="k-edit-form-container">',
                 template = editable.template,
-                command = editable.editCommand,
-                updateText,
-                cancelText,
+                messages = that.options.messages,
+                updateText = messages.save,
+                cancelText = messages.cancel,
                 fields = [
                     { field: "title", title: "Title" /*, format: field.format, editor: field.editor, values: field.values*/ },
                     { field: "start", title: "Start", editor: DATERANGEEDITOR },
@@ -637,20 +627,6 @@ kendo_module({
 
                         html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
                     }
-                }
-            }
-
-
-            if (command) {
-                if (isPlainObject(command)) {
-                   if (command.text && isPlainObject(command.text)) {
-                       updateText = command.text.update;
-                       cancelText = command.text.cancel;
-                   }
-
-                   if (command.attr) {
-                       attr = command.attr;
-                   }
                 }
             }
 

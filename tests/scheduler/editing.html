@@ -177,7 +177,7 @@
                 scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
-                equal(container.text(), "fooUpdateCancel");
+                equal(container.text(), "fooSaveCancel");
             });
 
             test("edit event is raised when entering edit mode", 2, function() {
@@ -202,21 +202,13 @@
                 equal(container.find("a.k-scheduler-cancel").length, 1);
             });
 
-            test("Update and cancel button gets edit button attributes", function() {
-                var scheduler = setup({
-                    editable: { template:"<div>#=title#</div>", editCommand: { attr: { bar: "baz" } } }
-                });
-
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-                var container = scheduler._editContainer.children("div.k-edit-form-container");
-                equal(container.find("a.k-scheduler-update").attr("bar"), "baz");
-                equal(container.find("a.k-scheduler-cancel").attr("bar"), "baz");
-            });
-
             test("Update and cancel button custom text", function() {
                 var scheduler = setup({
-                    editable: { template:"<div>#=title#</div>", editCommand: { text: { update: "myUpdate", cancel: "myCancel", edit: "MyEdit" } } },
+                    messages: {
+                        save: "myUpdate",
+                        cancel: "myCancel"
+                    },
+                    editable: { template:"<div>#=title#</div>" },
                 });
 
                 scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
