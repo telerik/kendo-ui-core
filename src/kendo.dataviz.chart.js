@@ -1027,34 +1027,41 @@ kendo_module({
 
         _bindCategoryAxisFromSeries: function(axis, axisIx) {
             var chart = this,
+                items = [],
+                result,
                 series = chart.options.series,
-                seriesIx,
                 seriesLength = series.length,
-                entries = [],
-                categories = [],
-                dataItems = [],
-                currentSeries,
+                seriesIx,
+                s,
+                onAxis,
                 data,
                 dataIx,
                 dataLength,
-                firstCategory,
-                uniqueCategories = {};
+                dataRow,
+                category,
+                uniqueCategories = {},
+                dateAxis = null;
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
-                currentSeries = series[seriesIx];
+                s = series[seriesIx];
+                onAxis = s.categoryAxis === axis.name || (!s.categoryAxis && axisIx === 0);
 
-                if (currentSeries.categoryField &&
-                    (currentSeries.categoryAxis === axis.name || !currentSeries.categoryAxis && axisIx === 0)) {
-                    data = currentSeries.data;
+                if (s.categoryField && onAxis) {
+                    data = s.data;
                     dataLength = data.length;
+
                     for (dataIx = 0; dataIx < dataLength; dataIx++) {
-                        category = getField(currentSeries.categoryField, data[dataIx]);
-                        firstCategory = firstCategory || category;
+                        dataRow = data[dataIx];
+                        category = getField(s.categoryField, dataRow);
 
-                        if (isDateAxis(axis, firstCategory) || !uniqueCategories[category]) {
-                            entries.push([category, data[dataIx]]);
+                        if (dateAxis === null) {
+                            dateAxis = isDateAxis(axis, category);
+                        }
 
-                            if (!isDateAxis(axis, firstCategory)) {
+                        if (dateAxis || !uniqueCategories[category]) {
+                            items.push([category, dataRow]);
+
+                            if (!dateAxis) {
                                 uniqueCategories[category] = true;
                             }
                         }
@@ -1062,14 +1069,14 @@ kendo_module({
                 }
             }
 
-            if (entries.length > 0) {
-                if (isDateAxis(axis, firstCategory)) {
-                    entries = uniqueDates(entries, function(a, b) {
+            if (items.length > 0) {
+                if (dateAxis) {
+                    items = uniqueDates(items, function(a, b) {
                         return dateComparer(a[0], b[0]);
                     });
                 }
 
-                var result = transpose(entries);
+                result = transpose(items);
                 axis.categories = result[0];
                 axis.dataItems = result[1];
             }
