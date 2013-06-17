@@ -46,14 +46,22 @@ kendo_module({
             return kendo.date.nextDay(this.endDate);
         },
 
+        startDate: function() {
+            return this._startDate;
+        },
+
+        endDate: function() {
+            return this._endDate;
+        },
+
         previousDate: function() {
-            return kendo.date.previousDay(this.startDate);
+            return kendo.date.previousDay(this._startDate);
         },
 
         renderLayout: function(date, resources) {
             this._resources = resources;
-            this.startDate = date;
-            this.endDate = kendo.date.addDays(date, 7);
+            this._startDate = date;
+            this._endDate = kendo.date.addDays(date, 7);
             this.createLayout(this._layout());
             this.table.addClass("k-scheduler-agenda");
         },
@@ -103,7 +111,7 @@ kendo_module({
                             task.middle = true;
                         }
 
-                        if (task.end.getTime() <= this.endDate.getTime()) {
+                        if (task.end.getTime() <= this.endDate().getTime()) {
                             tasks.push(task);
                         }
                     }

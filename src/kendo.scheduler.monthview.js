@@ -68,6 +68,14 @@ kendo_module({
             return kendo.date.previousDay(this._firstDayOfMonth);
         },
 
+        startDate: function() {
+            return this._startDate;
+        },
+
+        endDate: function() {
+            return this._endDate;
+        },
+
         renderLayout: function(date, resources) {
             var that = this;
 
@@ -77,7 +85,7 @@ kendo_module({
 
             this._lastDayOfMonth = kendo.date.lastDayOfMonth(date);
 
-            this.startDate = firstVisibleMonthDay(date);
+            this._startDate = firstVisibleMonthDay(date);
 
             this.createLayout(this._layout());
 
@@ -94,7 +102,7 @@ kendo_module({
 
             this.content.on("click" + NS, ".k-more-events", function(e) {
                var index = SchedulerView.rangeIndex($(e.currentTarget)).start,
-                   date = kendo.date.addDays(that.startDate, index);
+                   date = kendo.date.addDays(that.startDate(), index);
 
                that.trigger("navigate", { view: "day", date: date });
             });
@@ -128,7 +136,7 @@ kendo_module({
 
         _rangeToDates: function(cell) {
             var index = this.content.find("table td").index(cell),
-                slotDate = kendo.date.addDays(this.startDate, index);
+                slotDate = kendo.date.addDays(this.startDate(), index);
 
             if (slotDate) {
                  return {
@@ -140,7 +148,7 @@ kendo_module({
         },
 
         _content: function() {
-            var start = this.startDate,
+            var start = this.startDate(),
                 min = this._firstDayOfMonth,
                 max = this._lastDayOfMonth,
                 idx = 0,
@@ -189,7 +197,7 @@ kendo_module({
 
             this._slotIndices = slotIndices;
             this._weekStartDates = weekStartDates;
-            this.endDate = kendo.date.previousDay(start);
+            this._endDate = kendo.date.previousDay(start);
             this.content.find("table").html(html);
         },
 
@@ -237,8 +245,8 @@ kendo_module({
         },
 
         _isInDateSlot: function(event) {
-            var slotStart = this.startDate,
-                slotEnd = new Date(this.endDate.getTime() + MS_PER_DAY - 1);
+            var slotStart = this.startDate(),
+                slotEnd = new Date(this.endDate().getTime() + MS_PER_DAY - 1);
 
             return isInDateRange(event.start, slotStart, slotEnd) ||
                 isInDateRange(event.end, slotStart, slotEnd) ||
@@ -364,7 +372,7 @@ kendo_module({
                             event.start = weekStart;
                             event.head = false;
 
-                            if (getDate(event.end).getTime() > getDate(this.endDate).getTime() + MS_PER_DAY - 1) {
+                            if (getDate(event.end).getTime() > getDate(this.endDate()).getTime() + MS_PER_DAY - 1) {
                                 event.middle = true;
                             } else {
                                 event.tail = true;

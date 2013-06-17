@@ -283,9 +283,9 @@ kendo_module({
 
             this._dates = dates;
 
-            this.startDate = dates[0];
+            this._startDate = dates[0];
 
-            this.endDate = dates[(dates.length - 1) || 0];
+            this._endDate = dates[(dates.length - 1) || 0];
 
             this.createLayout(this._layout(dates));
 
@@ -308,12 +308,20 @@ kendo_module({
 
         },
 
+        startDate: function() {
+            return this._startDate;
+        },
+
+        endDate: function() {
+            return this._endDate;
+        },
+
         nextDate: function() {
-            return kendo.date.nextDay(this.endDate);
+            return kendo.date.nextDay(this.endDate());
         },
 
         previousDate: function() {
-            return kendo.date.previousDay(this.startDate);
+            return kendo.date.previousDay(this.startDate());
         },
 
         renderLayout: function(selectedDate, resources) {
@@ -541,12 +549,12 @@ kendo_module({
                 head,
                 tail;
 
-            if (getDate(event.start) < getDate(this.startDate) &&
-                getDate(event.end) > getDate(this.endDate).getTime() + MS_PER_DAY - 1) {
+            if (getDate(event.start) < getDate(this.startDate()) &&
+                getDate(event.end) > getDate(this.endDate()).getTime() + MS_PER_DAY - 1) {
                 middle = true;
-            } else if (getDate(event.start) < getDate(this.startDate)) {
+            } else if (getDate(event.start) < getDate(this.startDate())) {
                 tail = true;
-            } else if (getDate(event.end) > getDate(this.endDate).getTime() + MS_PER_DAY - 1) {
+            } else if (getDate(event.end) > getDate(this.endDate()).getTime() + MS_PER_DAY - 1) {
                 head = true;
             }
 
@@ -571,8 +579,8 @@ kendo_module({
         },
 
         _isInDateSlot: function(event) {
-            var slotStart = this.startDate,
-                slotEnd = new Date(this.endDate.getTime() + MS_PER_DAY - 1);
+            var slotStart = this.startDate(),
+                slotEnd = new Date(this.endDate().getTime() + MS_PER_DAY - 1);
 
             return isInDateRange(event.start, slotStart, slotEnd) ||
                 isInDateRange(event.end, slotStart, slotEnd) ||

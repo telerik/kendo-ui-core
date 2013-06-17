@@ -274,6 +274,8 @@
                     renderLayout: $.noop,
                     dateForTitle: $.noop,
                     render: $.noop,
+                    startDate: $.noop,
+                    endDate: $.noop
                 });
 
                 var scheduler = new Scheduler(container, {
@@ -293,7 +295,9 @@
                         render: $.noop,
                         renderLayout: function(selectedDate) {
                             ok(selectedDate);
-                        }
+                        },
+                        startDate: $.noop,
+                        endDate: $.noop
                     }),
                     scheduler = new Scheduler(container, {
                         views: [{ type: MyCustomView, title: "foo" }]
@@ -309,7 +313,9 @@
                         },
                         destroy: function() {
                             ok(true);
-                        }
+                        },
+                        startDate: $.noop,
+                        endDate: $.noop
                     }),
                     scheduler = new Scheduler(container, {
                         views: [ { type: MyCustomView, title: "foo" }, "day"]
@@ -325,7 +331,9 @@
                         render: $.noop,
                         renderLayout: function(selectedDate) {
                             ok(true);
-                        }
+                        },
+                        startDate: $.noop,
+                        endDate: $.noop
                     }),
                     scheduler = new Scheduler(container, {
                         views: [{ type: MyCustomView, title: "foo" }]
@@ -350,7 +358,9 @@
                         render: $.noop,
                         renderLayout: function(selectedDate) {
                             ok(true);
-                        }
+                        },
+                        startDate: $.noop,
+                        endDate: $.noop
                     }),
                     scheduler = new Scheduler(container, {
                         views: [ { type: MyCustomView, title: "foo" }],
@@ -378,9 +388,9 @@
                             ok(!(events[0] instanceof kendo.data.SchedulerEvent));
                         },
                         renderLayout: function() {
-                            this.startDate = new Date();
-                            this.endDate = new Date();
-                        }
+                        },
+                        startDate: $.noop,
+                        endDate: $.noop
                     }),
                     scheduler = new Scheduler(container, {
                         views: [ { type: MyCustomView, title: "foo" } ],
@@ -395,13 +405,17 @@
                         title: "view1",
                         dateForTitle: $.noop,
                         render: $.noop,
-                        renderLayout: $.noop
+                        renderLayout: $.noop,
+                        startDate: $.noop,
+                        endDate: $.noop
                     }),
                     MyCustomView2 = kendo.ui.SchedulerView.extend({
                         title: "view2",
                         dateForTitle: $.noop,
                         render: $.noop,
-                        renderLayout: $.noop
+                        renderLayout: $.noop,
+                        startDate: $.noop,
+                        endDate: $.noop
                     }),
                     scheduler = new Scheduler(container, {
                         views: [ { type: MyCustomView, title: "view1" }, { type: MyCustomView2, title: "view2" }],
@@ -419,12 +433,16 @@
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         dateForTitle: $.noop,
                         render: $.noop,
-                        renderLayout: $.noop
+                        renderLayout: $.noop,
+                        startDate: $.noop,
+                        endDate: $.noop
                     }),
                     MyCustomView2 = kendo.ui.SchedulerView.extend({
                         dateForTitle: $.noop,
                         render: $.noop,
-                        renderLayout: $.noop
+                        renderLayout: $.noop,
+                        startDate: $.noop,
+                        endDate: $.noop
                     }),
                     scheduler = new Scheduler(container, {
                         views: [{ type: MyCustomView, title: "view1"}, {title: "view2", type: MyCustomView2}],

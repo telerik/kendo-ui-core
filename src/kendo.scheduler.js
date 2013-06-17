@@ -852,7 +852,7 @@ kendo_module({
             var that = this;
             var view = that.view();
 
-            that.dataSource.filter(this._createFilter(view.startDate, view.endDate));
+            that.dataSource.filter(this._createFilter(view.startDate(), view.endDate()));
         },
 
         _dataSource: function() {
@@ -1013,7 +1013,7 @@ kendo_module({
         },
 
         _expandEvents: function(data, view) {
-            var endDate = view.endDate,
+            var endDate = view.endDate(),
                 endTime = view.endTime;
 
             if (recurrence) {
@@ -1024,7 +1024,7 @@ kendo_module({
                     endDate.setHours(23, 59, 59, 999);
                 }
 
-                data = recurrence.expandAll(data, view.startDate, endDate, this.dataSource.reader.timezone);
+                data = recurrence.expandAll(data, view.startDate(), endDate, this.dataSource.reader.timezone);
             } else {
                 data = convertToPlainObjects(data);
             }
@@ -1076,7 +1076,7 @@ kendo_module({
 
             data = this._expandEvents(data, view);
 
-            data = new kendo.data.Query(data).filter(this._createFilter(view.startDate, view.endDate)).toArray();
+            data = new kendo.data.Query(data).filter(this._createFilter(view.startDate(), view.endDate())).toArray();
 
             view.render(data);
 

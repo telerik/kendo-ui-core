@@ -420,7 +420,7 @@
 
             test("setDate makes endDate a week away from startDate", function() {
                 var agenda = agendaView(new Date("2013/06/06 00:00"));
-                equal(agenda.endDate.getTime() - agenda.startDate.getTime(), 7 * kendo.date.MS_PER_DAY);
+                equal(agenda.endDate().getTime() - agenda.startDate().getTime(), 7 * kendo.date.MS_PER_DAY);
             });
 
             test("agenda shows tasks which end within the specified interval", function() {

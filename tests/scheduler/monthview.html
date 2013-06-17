@@ -75,7 +75,7 @@
 
                 view.renderLayout(new Date(2013, 1, 2));
 
-                deepEqual(view.startDate, new Date(2013, 0, 27));
+                deepEqual(view.startDate(), new Date(2013, 0, 27));
             });
 
             test("endDate is set to the last visible day for the month", function() {
@@ -83,7 +83,7 @@
 
                 view.renderLayout(new Date(2013, 1, 2));
 
-                deepEqual(view.endDate, new Date(2013, 2, 9));
+                deepEqual(view.endDate(), new Date(2013, 2, 9));
             });
 
             test("headers are populated with days of the week names", function() {

@@ -139,7 +139,7 @@ kendo_module({
 
     kendo.ui.SchedulerView = Widget.extend({
         dateForTitle: function() {
-            return kendo.format(this.options.selectedDateFormat, this.startDate, this.endDate);
+            return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
         },
         eventResources: function(event) {
             var resources = [];
