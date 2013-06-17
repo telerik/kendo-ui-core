@@ -6,7 +6,9 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.scheduler.recurrence.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -20,6 +22,21 @@
                 expandAll = kendo.recurrence.expandAll;
 
             module("Cloning scheduler event");
+
+            test("Strip observable object", function() {
+                var schedulerEvent = new kendo.data.SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    recurrence: "FREQ=DAILY"
+                });
+
+                var event = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17))[0];
+
+                ok(!event._events);
+            });
+
             test("Occurrence clones original event", function() {
                 var schedulerEvent = {
                     uid: "id",

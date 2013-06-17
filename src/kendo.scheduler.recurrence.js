@@ -661,7 +661,9 @@ kendo_module({
             count,
             freq;
 
-        //event = event.toJSON();
+        if (event.toJSON) {
+            event = event.toJSON();
+        }
 
         //convert start from tzid to UTC
 
@@ -933,7 +935,6 @@ kendo_module({
     };
 
     //TODO: REFACTOR Recurrence Widget
-
     var INTERVAL = '{0}<input class="k-recur-interval" />{1}';
     var END_COUNT = '{0}<input class="k-recur-count" />{1}';
     var END_UNTIL = '{0}<input class="k-recur-until" />{1}';
