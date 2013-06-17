@@ -173,6 +173,8 @@ kendo_module({
         init: function(element, options) {
             var that = this;
 
+            options = extend({}, options, { name: "EditorToolbar" });
+
             Widget.fn.init.call(that, element, options);
 
             that.tools = deepExtend({}, kendo.ui.Editor.defaultTools);
