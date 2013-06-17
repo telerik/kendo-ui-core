@@ -9,64 +9,26 @@
     <ul id="load-more"></ul>
 </div>
 
-<script id="load-more-template" type="text/x-kendo-template">
-    <div class="tweet">
-        <img class="pullImage" src="#= user.profile_image_url #" alt="#= user.name #" />#= text #
-        <div class="metadata">
-            <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= user.screen_name #/status/#= id_str #" data-rel="external" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
-            |
-            <a class="sublink" href="http://twitter.com/#= user.screen_name #" rel="nofollow" data-rel="external">#= user.name #</a>
-        </div>
+<script type="text/x-kendo-tmpl" id="load-more-template">
+    <div class="product">
+        <img src="../../content/web/foods/#=ProductID#.jpg" alt="#=ProductName# image" class="pullImage"/>
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
 </script>
 
-<script>
-    var maxIdRegExp = /max_id=\d*/,
-        sinceIdRegExp = /since_id=\d*/;
-
-    function getQueryValue(queryString, regexp) {
-        var value = regexp.exec(queryString);
-
-        if (value) {
-            value = value[0].split("=")[1];
-        }
-
-        return value;
-    }
-
+<script>    
     function mobileListViewPressToLoadMore() {
-            var dataSource = new kendo.data.DataSource({
-                pageSize: 50,
-                serverPaging: true,
-                transport: {
-                    read: {
-                        url: "http://demos.kendoui.com/service/Twitter/Search", // the remote service url - Twitter API v1.1
-                        dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
-                    },
-                    parameterMap: function(options) {
-                        var parameters = {
-                            q: "javascript", //additional parameters sent to the remote service
-                            count: options.pageSize,
-                            max_id: max_id_str //additional parameters sent to the remove service
-                        };
-
-                        return parameters;
-                    }
-                },
-                schema: { // describe the result format
-                    parse: function(response) {
-                        if (response.search_metadata) {
-                            max_id_str = getQueryValue(response.search_metadata.next_results, maxIdRegExp); //retrieve max_id for the endless scrolling
-                        }
-                        return response;
-                    },
-                    data: function(data) {
-                        return data.statuses || [];
-                    },
-                    total: function() { return 100000 }
+        var dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: "http://demos.kendoui.com/service/Northwind.svc/Products"
                 }
-            }),
-            max_id_str;
+            },
+            serverPaging: true,            
+            pageSize: 20
+        });
 
         $("#load-more").kendoMobileListView({
             dataSource: dataSource,
@@ -77,7 +39,7 @@
 </script>
 
 <style scoped>
-    .tweet {
+    .product {
         font-size: .8em;
         line-height: 1.4em;
     }
@@ -87,13 +49,5 @@
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }
-    .sublink {
-        font-size: .9em;
-        font-weight: normal;
-        display: inline-block;
-        padding: 3px 3px 0 0;
-        text-decoration: none;
-        opacity: .8;
-    }
+    }    
 </style>

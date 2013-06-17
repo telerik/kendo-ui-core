@@ -9,83 +9,48 @@
     <ul id="endless-scrolling"></ul>
 </div>
 
-<script id="endless-scrolling-template" type="text/x-kendo-template">
-    <div class="tweet">
-        <img class="pullImage" src="#= user.profile_image_url #" alt="#= user.name #" />#= text #
-        <div class="metadata">
-            <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= user.screen_name #/status/#= id_str #" data-rel="external" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
-            |
-            <a class="sublink" href="http://twitter.com/#= user.screen_name #" rel="nofollow" data-rel="external">#= user.name #</a>
-        </div>
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="product">
+        <img src="../../content/web/foods/#=ProductID#.jpg" alt="#=ProductName# image" class="pullImage"/>
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
 </script>
 
-<script>
-    var maxIdRegExp = /max_id=\d*/,
-        sinceIdRegExp = /since_id=\d*/;
-
-    function getQueryValue(queryString, regexp) {
-        var value = regexp.exec(queryString);
-
-        if (value) {
-            value = value[0].split("=")[1];
-        }
-
-        return value;
-    }
-
+<script> 
     function mobileListViewEndlessScrolling() {
-            var dataSource = new kendo.data.DataSource({
-                pageSize: 30,
-                serverPaging: true,
-                serverFiltering: true,
-                transport: {
-                    read: {
-                        url: "http://demos.kendoui.com/service/Twitter/Search", // the remote service url - Twitter API v1.1
-                        dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
-                    },
-                    parameterMap: function(options) {
-                        var filter = options.filter ? options.filter.filters[0].value : "javascript";
-                        var parameters = {
-                            q: filter, //additional parameters sent to the remote service
-                            max_id: max_id_str, //additional parameters sent to the remove service
-                            count: options.pageSize
-                        }
-
-                        return parameters;
-                    }
-                },
-                schema: { // describe the result format
-                    parse: function(response) {
-                        if (response.search_metadata) {
-                            max_id_str = getQueryValue(response.search_metadata.next_results, maxIdRegExp); //retrieve max_id for the endless scrolling
-                        }
-                        return response;
-                    },
-
-                    total: function() {
-                        return 1000;
-                    },
-                    data: function(data) {
-                        return data.statuses || [];
-                    },
-                    errors: "error"
+        var dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: "http://demos.kendoui.com/service/Northwind.svc/Products"                    
                 }
-            }),
-            max_id_str;
+            },
+            sort: {
+                field: "ProductName",
+                dir: "desc"
+            },  
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true,
+            pageSize: 20
+        });
 
         $("#endless-scrolling").kendoMobileListView({
             dataSource: dataSource,
-            template: $("#endless-scrolling-template").text(),
-            filterable: true,
-            endlessScroll: true,
-            scrollTreshold: 30 //treshold in pixels
+            template: $("#template").text(),
+            filterable: {
+                field: "ProductName",
+                operator: "startswith"
+            },
+            scrollThreshold: 30, //threshold in pixels
+            endlessScroll: true
         });
     }
 </script>
 
 <style scoped>
-    .tweet {
+    .product {
         font-size: .8em;
         line-height: 1.4em;
     }
@@ -95,13 +60,5 @@
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }
-    .sublink {
-        font-size: .9em;
-        font-weight: normal;
-        display: inline-block;
-        padding: 3px 3px 0 0;
-        text-decoration: none;
-        opacity: .8;
-    }
+    }    
 </style>

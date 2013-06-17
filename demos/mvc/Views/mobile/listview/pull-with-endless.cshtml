@@ -6,86 +6,86 @@
         </div>
     </header>
 
-    <ul id="pull-with-endless"></ul>
+    <input type="text" id="name" placeholder="Type product name here"/>
+    <button id="addNew">Add new product</button>
+
+    <ul id="listview"></ul>
 </div>
 
-<script id="pull-with-endless-template" type="text/x-kendo-template">
-    <div class="tweet">
-        <img class="pullImage" src="#= user.profile_image_url #" alt="#= user.name #" />#= text #
-        <div class="metadata">
-            <a class="sublink" target="_blank" href="http://twitter.com/\\#!/#= user.screen_name #/status/#= id_str #" data-rel="external" rel="nofollow">#= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #</a>
-            |
-            <a class="sublink" href="http://twitter.com/#= user.screen_name #" rel="nofollow" data-rel="external">#= user.name #</a>
-        </div>
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="product">        
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
 </script>
 
 <script>
-    var maxIdRegExp = /max_id=\d*/,
-        sinceIdRegExp = /since_id=\d*/;
-
-    function getQueryValue(queryString, regexp) {
-        var value = regexp.exec(queryString);
-
-        if (value) {
-            value = value[0].split("=")[1];
-        }
-
-        return value;
-    }
-
-    function mobileListViewPullWithEndless() {
+    function mobileListViewPullWithEndless(e) {
         var dataSource = new kendo.data.DataSource({
-            serverPaging: true,
-            pageSize: 10,
             transport: {
                 read: {
-                    url: "http://demos.kendoui.com/service/Twitter/Search", // the remote service url - Twitter API v1.1
-                    dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
-                },
-                parameterMap: function(options) {
-                    options = {
-                        q: "javascript",
-                        count: options.pageSize
-                    };
-                    if (paged) {
-                        paged = false;
-                        options["max_id"] = max_id_str; //additional parameters sent to the remove service
-                    }
-
-                    return options;
+                    url: "http://rusev/kendocrudservice/Products/Read",
+                    dataType: "jsonp"
                 }
             },
-            schema: { // describe the result format
-                parse: function(response) {
-                    if (response.search_metadata) {
-                        max_id_str = getQueryValue(response.search_metadata.next_results, maxIdRegExp); //retrieve max_id for the endless scrolling
-                    }
-                    return response;
-                },
-                data: function(data) {
-                    return data.statuses || [];
-                },
-                total: function() { return 100000 }
-            }
-        }),
-        paged, max_id_str;
+            schema: {
+                total: function () { return 77; }
+            },
+            serverPaging: true,
+            pageSize: 40
+        });
 
-        $("#pull-with-endless").kendoMobileListView({
-            dataSource: dataSource,
-            template: $("#pull-with-endless-template").text(),
-            appendOnRefresh: true,
-            pullToRefresh: true,
-            endlessScroll: true,
-            endlessScrollParameters: function() {
-                paged = true;
+
+        var loader = e.view.loader;
+
+        var addProductDataSource = new kendo.data.DataSource({
+            transport: {
+                create: {
+                    url: "http://rusev/kendocrudservice/Products/Create",
+                    dataType: "jsonp"
+                },
+                parameterMap: function (options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return { models: kendo.stringify(options.models) };
+                    }
+                }
+            },
+            schema: {
+                model: {
+                    id: "ProductID",
+                    fields: {
+                        ProductID: { editable: false, nullable: true },
+                        ProductName: { type: "string" }
+                    }
+                }
+            },
+            autoSync: true,
+            batch: true,           
+            requestEnd: function () {
+                loader.hide();
+                $("#name").val("");
             }
+        });
+
+        $("#listview").kendoMobileListView({
+            dataSource: dataSource,
+            template: $("#template").text(),                    
+            pullToRefresh: true,                          
+            endlessScroll: true            
+        });
+
+        $("#addNew").click(function () {            
+            loader.show();
+            addProductDataSource.add({
+                ProductName: $("#name").val(),
+                UnitPrice: Math.floor((Math.random() * 10) + 1)
+            });
         });
     }
 </script>
 
 <style scoped>
-    .tweet {
+    .product {
         font-size: .8em;
         line-height: 1.4em;
     }
@@ -95,13 +95,5 @@
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }
-    .sublink {
-        font-size: .9em;
-        font-weight: normal;
-        display: inline-block;
-        padding: 3px 3px 0 0;
-        text-decoration: none;
-        opacity: .8;
-    }
+    }    
 </style>
