@@ -68,27 +68,6 @@ kendo_module({
         separatorTemplate:
             '<li class="k-separator"></li>',
 
-        decorateStyleToolItems: function(e) {
-            var textarea = e.data,
-                selectBox = textarea.closest(".k-editor").find(".k-style").data("kendoSelectBox"),
-                doc = textarea.data("kendoEditor").document,
-                dom = kendo.ui.editor.Dom,
-                classes;
-
-            if (!selectBox) {
-                return;
-            }
-
-            classes = selectBox.dataSource.view();
-
-            selectBox.list.find(".k-item").each(function(idx, element){
-                var item = $(element),
-                    style = dom.inlineStyle(doc, "span", {className : classes[idx].value});
-
-                item.html('<span unselectable="on" style="display:block;' + style +'">' + item.text() + '</span>');
-            });
-        },
-
         formatByName: function(name, format) {
             for (var i = 0; i < format.length; i++) {
                 if ($.inArray(name, format[i].tags) >= 0) {
@@ -665,8 +644,9 @@ kendo_module({
         },
 
         _createContentElement: function(stylesheets) {
-            var iframe, wnd, doc,
-                textarea = this.textarea,
+            var editor = this,
+                iframe, wnd, doc,
+                textarea = editor.textarea,
                 rtlStyle = kendo.support.isRtl(textarea) ? "direction:rtl;" : "";
 
             textarea.hide();
@@ -677,7 +657,10 @@ kendo_module({
 
             wnd = iframe.contentWindow || iframe;
             if (stylesheets.length > 0) {
-                $(iframe).one("load", textarea, EditorUtils.decorateStyleToolItems);
+                $(iframe).one("load", function() {
+                    var styleTools = editor.toolbar.items().filter(".k-style");
+                    styleTools.kendoSelectBox("decorateItems", editor.document);
+                });
             }
             doc = wnd.document || iframe.contentDocument;
 

@@ -490,9 +490,19 @@ var StyleTool = DelayedExecutionTool.extend({
             highlightFirst: false
         });
 
+        $(ui).data("kendoSelectBox").decorateItems = function(doc) {
+            var classes = this.dataSource.view();
+
+            this.list.find(".k-item").each(function(i, element){
+                var item = $(element),
+                    style = dom.inlineStyle(doc, "span", { className : classes[i].value });
+
+                item.html('<span unselectable="on" style="display:block;' + style +'">' + item.text() + '</span>');
+            });
+        };
+
         ui.closest(".k-widget").removeClass("k-" + this.name).find("*").addBack().attr("unselectable", "on");
     }
-
 });
 
 extend(Editor, {
