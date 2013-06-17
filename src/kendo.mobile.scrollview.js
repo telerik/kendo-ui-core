@@ -289,6 +289,11 @@ kendo_module({
         },
         position: function (position) { //position can be -1, 0, 1
             this.element.css("transform", "translate3d(" + this.width * position + "px, 0, 0)");
+        },
+
+        setWidth: function(width) {
+            this.width = width;
+            this.element.width(width);
         }
     });
 

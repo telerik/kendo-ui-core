@@ -65,6 +65,14 @@
                 page.position(RIGHT_PAGE);
                 equal(page.element.css("-webkit-transform"), "translate3d(400px, 0, 0)");
             });
+
+            test("page width is set correctly", 3, function() {
+                equal(page.width, 400);
+
+                page.setWidth(300);
+                equal(page.width, 300);
+                equal(page.element.width(), 300);
+            });
         </script>
     </body>
 </html>
