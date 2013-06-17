@@ -110,7 +110,8 @@ kendo_module({
 
         options: {
             name: "StockChart",
-            dateField: "date",
+            // TODO: Document breaking change
+            // dateField: "date",
             axisDefaults: {
                 categoryAxis: {
                     type: "date",
@@ -266,7 +267,6 @@ kendo_module({
                 if (currentAxis.pane == NAVIGATOR_PANE) {
                     if (currentAxis.name == NAVIGATOR_AXIS) {
                         chart._bindCategoryAxis(currentAxis, data);
-                        chart._syncSeriesCategories(currentAxis);
                         naviCategories = currentAxis.categories;
                     } else {
                         // TODO: Test

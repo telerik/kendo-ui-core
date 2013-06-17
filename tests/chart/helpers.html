@@ -21,6 +21,7 @@
                 getSpacing = dataviz.getSpacing,
                 indexOf = dataviz.indexOf,
                 sortDates = dataviz.sortDates,
+                uniqueDates = dataviz.uniqueDates,
                 Chart = dataviz.ui.Chart,
                 Box2D = dataviz.Box2D,
                 Point2D = dataviz.Point2D,
@@ -1300,6 +1301,20 @@
                 var arr = dates.slice(0);
                 arr.push(undefined);
                 deepEqual(sortDates(arr), arr);
+            });
+
+            // ------------------------------------------------------------
+            module("uniqueDates");
+
+            test("eliminates duplicates", function() {
+                var dups = dates.slice(0);
+                [].push.apply(dups, dates);
+
+                deepEqual(uniqueDates(dups), dates);
+            });
+
+            test("ignores empty array", function() {
+                deepEqual(uniqueDates([]), []);
             });
 
         </script>

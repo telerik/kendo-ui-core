@@ -994,7 +994,6 @@ kendo_module({
                 axis = definitions[axisIx];
                 if (axis.autoBind !== false) {
                     chart._bindCategoryAxis(axis, categoriesData);
-                    chart._syncSeriesCategories(axis);
                 }
             }
 
@@ -1021,37 +1020,53 @@ kendo_module({
                         axis.dataItems.push(row);
                     }
                 }
+            } else {
+                this._bindCategoryAxisFromSeries(axis);
             }
         },
 
-        _syncSeriesCategories: function(axis) {
+        _bindCategoryAxisFromSeries: function(axis) {
             var chart = this,
+                categories,
                 series = chart.options.series,
                 seriesIx,
                 seriesLength = series.length,
                 currentSeries,
+                data,
                 dataIx,
-                dataLength;
+                dataLength,
+                firstCategory,
+                uniqueCategories = {};
 
-            axis.categories = axis.categories || [];
-            axis.dataItems = axis.dataItems || [];
+            categories = axis.categories = [];
+            axis.dataItems = [];
+
+            for (var i = 0; i < categories.length; i++) {
+                uniqueCategories[categories[i]] = true;
+            }
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
 
                 if (currentSeries.categoryField && currentSeries.categoryAxis === axis.name) {
-                    dataLength = currentSeries.data.length;
+                    data = currentSeries.data;
+                    dataLength = data.length;
                     for (dataIx = 0; dataIx < dataLength; dataIx++) {
-                        category = getField(currentSeries.categoryField, currentSeries.data[dataIx]);
+                        category = getField(currentSeries.categoryField, data[dataIx]);
+                        firstCategory = firstCategory || category;
 
-                        // TODO: Performance hog
-                        // Should we just de-dupe in one go
-                        // with two code paths for string categories
-                        // and for dates (sorted)?
-                        if (indexOf(category, axis.categories) < 0) {
-                            axis.categories.push(category);
-                            axis.dataItems.push(currentSeries.data[dataIx]);
+                        if (isDateAxis(axis, firstCategory) || !uniqueCategories[category]) {
+                            categories.push(category);
+
+                            if (!isDateAxis(axis, firstCategory)) {
+                                uniqueCategories[category] = true;
+                                axis.dataItems.push(data[dataIx]);
+                            }
                         }
+                    }
+
+                    if (isDateAxis(axis, firstCategory)) {
+                        axis.categories = uniqueDates(categories);
                     }
                 }
             }
@@ -7186,7 +7201,7 @@ kendo_module({
                 definitions = [].concat(plotArea.options.categoryAxis),
                 i, axisOptions, axisPane,
                 categories, type, name,
-                dateCategory, categoryAxis, axes = [],
+                categoryAxis, axes = [],
                 primaryAxis;
 
             for (i = 0; i < definitions.length; i++) {
@@ -7196,7 +7211,6 @@ kendo_module({
                 if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
                     categories = axisOptions.categories || [];
-                    dateCategory = categories[0] instanceof Date;
                     type  = axisOptions.type || "";
                     axisOptions = deepExtend({
                         vertical: invertAxes,
@@ -7212,7 +7226,7 @@ kendo_module({
                         axisOptions.roundToBaseUnit = true;
                     }
 
-                    if ((!type && dateCategory) || equalsIgnoreCase(type, DATE)) {
+                    if (isDateAxis(axisOptions, categories[0])) {
                         categoryAxis = new DateCategoryAxis(axisOptions);
                     } else {
                         categoryAxis = new CategoryAxis(axisOptions);
@@ -9599,14 +9613,36 @@ kendo_module({
      }
 
      function sortDates(dates) {
-        for (var i = 1, length = dates.length; i < length; i++) {
-            if (dateComparer(dates[i], dates[i - 1]) < 0) {
-                dates.sort(dateComparer);
-                break;
-            }
-        }
+         for (var i = 1, length = dates.length; i < length; i++) {
+             if (dateComparer(dates[i], dates[i - 1]) < 0) {
+                 dates.sort(dateComparer);
+                 break;
+             }
+         }
 
          return dates;
+     }
+
+     function uniqueDates(srcDates) {
+         var i,
+             dates = sortDates(srcDates),
+             length = dates.length,
+             result = length > 0 ? [dates[0]] : [];
+
+         for (i = 1; i < length; i++) {
+             if (dateComparer(dates[i], last(result)) !== 0) {
+                 result.push(dates[i]);
+             }
+         }
+
+         return result;
+     }
+
+     function isDateAxis(axisOptions, sampleCategory) {
+        var type = axisOptions.type,
+            dateCategory = sampleCategory instanceof Date;
+
+        return (!type && dateCategory) || equalsIgnoreCase(type, DATE);
      }
 
     // Exports ================================================================
@@ -9719,7 +9755,8 @@ kendo_module({
         sortDates: sortDates,
         sparseArrayLimits: sparseArrayLimits,
         toDate: toDate,
-        toTime: toTime
+        toTime: toTime,
+        uniqueDates: uniqueDates
     });
 
 })(window.kendo.jQuery);
