@@ -689,9 +689,9 @@ kendo_module({
                         ".k-table{width:100%;border-spacing:0;margin: 0 0 1em;}" +
                         ".k-table td{min-width:1px;padding:.2em .3em;}" +
                         ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
-                        ".k-table .k-selection-cell{cursor:pointer;padding:0;width:7px;height:7px;background-color:#ccc;}" +
+                        ".k-table .k-selection-cell,.k-table .k-select-all{-moz-user-select:none;-webkit-user-select:none;user-select:none;font-size:0;padding:0;width:10px;height:10px;background-color:#ccc;}" +
+                        ".k-table .k-selection-cell{cursor:pointer;}" +
                         ".k-selection-cell:hover{background-color:#aaa;}" +
-                        ".k-table .k-select-all{width:7px;height:7px;background-color:#ccc;}" +
                         ".k-selection-row .k-selection-cell{width:auto;}" +
                         ".k-selected{background-color:#eee;}" +
                         ".k-table p{margin:0;padding:0;}" +
