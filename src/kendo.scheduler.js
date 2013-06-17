@@ -254,22 +254,6 @@ kendo_module({
         return options;
     }
 
-    function stringifyAttributes(attributes) {
-        var attr,
-            result = " ";
-
-        if (attributes) {
-            if (typeof attributes === STRING) {
-                return attributes;
-            }
-
-            for (attr in attributes) {
-                result += attr + '="' + attributes[attr] + '"';
-            }
-        }
-        return result;
-    }
-
     function convertToPlainObjects(data) {
         var idx,
             length,
@@ -349,6 +333,7 @@ kendo_module({
             name: "Scheduler",
             date: TODAY,
             editable: true,
+            autoBind: true,
             messages: {
                 today: "Today",
                 save: "Save",
@@ -395,6 +380,16 @@ kendo_module({
             $(window).off("resize" + NS, that._resizeHandler);
 
             kendo.destroy(that.wrapper);
+        },
+
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+
+            this._dataSource();
+
+            if (this.options.autoBind) {
+                dataSource.fetch();
+            }
         },
 
         _modelForContainer: function(container) {
@@ -548,10 +543,6 @@ kendo_module({
                 if (commandName === "edit" && isPlainObject(command.text)) {
                     command = extend(true, {}, command);
                     command.text = command.text.edit;
-                }
-
-                if (command.attr && isPlainObject(command.attr)) {
-                    command.attr = stringifyAttributes(command.attr);
                 }
 
                 options = extend(true, options, defaultCommands[commandName], command);
@@ -932,7 +923,11 @@ kendo_module({
 
             $.when.apply(null, promises)
                   .then(function() {
-                      that.view(that._selectedViewName);
+                      if (that.options.autoBind) {
+                          that.view(that._selectedViewName);
+                      } else {
+                          that._selectView(that._selectedViewName);
+                      }
                   });
         },
 

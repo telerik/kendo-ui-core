@@ -133,6 +133,28 @@
                 equal(events.length, occurrencesLength + 1);
             });
 
+            test("resetting DataSource rebinds the widget", 2, function() {
+                var scheduler = new Scheduler(container, {
+                    dataBinding: function() {
+                        ok(true);
+                    }
+                });
+
+                scheduler.setDataSource(new kendo.data.SchedulerDataSource({
+                    data:[{ title: "", start: new Date(), end: new Date()}]
+                }));
+            });
+
+            test("AutoBind=false prevents scheduler from binding", 0, function() {
+                var scheduler = new Scheduler(container, {
+                    autoBind: false,
+                    dataBinding: function() {
+                        ok(false);
+                    }
+                });
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
