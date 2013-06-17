@@ -498,7 +498,7 @@ kendo_module({
 
         editEvent: function(uid) {
             var that = this,
-                model = that.dataSource.getByUid(uid),
+                model = typeof uid == "string" ? that.dataSource.getByUid(uid) : uid,
                 container;
 
             that.cancelEvent();
