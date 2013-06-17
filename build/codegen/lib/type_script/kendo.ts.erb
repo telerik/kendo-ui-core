@@ -335,7 +335,9 @@ module kendo.data {
         set(value: any): void;
     }
 
-    class Binder {
+    declare var binders: Object;
+
+    class Binder extends Class {
         element: Element;
         bindings: { [key: string]: Binding; };
         constructor(element: Element, bindings: { [key: string]: Binding; }, options?: any);
