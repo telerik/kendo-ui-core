@@ -59,3 +59,4 @@ wrappers/php/content
 *-test-results.xml
 .listen_test
 kendo-cdn
+src/.tern-port
