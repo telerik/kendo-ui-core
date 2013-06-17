@@ -329,6 +329,11 @@ var TableModificationTool = Tool.extend({
         }
     },
 
+    initialize: function(ui, options) {
+        Tool.fn.initialize.call(this, ui, options);
+        ui.addClass("k-state-disabled");
+    },
+
     update: function(ui, nodes) {
         var isFormatted = !tableFormatFinder.isFormatted(nodes);
         ui.toggleClass("k-state-disabled", isFormatted);
