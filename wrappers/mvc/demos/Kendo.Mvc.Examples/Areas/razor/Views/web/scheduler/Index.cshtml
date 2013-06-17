@@ -1,13 +1,33 @@
 ﻿@(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.Task>()
     .Name("Scheduler")
     .Events(e => e.Edit("onEdit"))
+    .Resources(r =>
+    {
+        r.Add(m => m.TaskID)
+            .Title("Color")
+            .Multiple(true)
+            .DataTextField("Text")
+            .DataValueField("Value")
+            //.DataSource(d => d.Read("Attendies", "Scheduler"));
+            .BindTo(new[] { new { Text = "Generated text", Value = 1, color = "red" } });
+            
+    })
+    //.BindTo(new List<Kendo.Mvc.Examples.Models.Scheduler.Task>() { 
+    //    new Kendo.Mvc.Examples.Models.Scheduler.Task() {
+    //        TaskID = 1, 
+    //        Title = "Business meeting",
+    //        Description = "Business meeting with colegue.",
+    //        Start = new DateTime(2013,6,12),
+    //        End = new DateTime(2013,6,13)   
+    //    } 
+    //})
     .DataSource(d => d
         .Model(m => m.Id(f => f.TaskID))
-        .Read("Read", "Scheduler")
-        .Create("Create", "Scheduler")
-        .Destroy("Destroy", "Scheduler")
-        .Update("Update", "Scheduler")
-    
+           .Read("Read", "Scheduler")
+           .Create("Create", "Scheduler")
+           .Destroy("Destroy", "Scheduler")
+           .Update("Update", "Scheduler")
+
     )
 )
 
