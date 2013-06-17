@@ -45,7 +45,7 @@ kendo_module({
         },
 
         nextDate: function() {
-            return kendo.date.nextDay(this.endDate);
+            return kendo.date.nextDay(this.endDate());
         },
 
         startDate: function() {
@@ -57,7 +57,7 @@ kendo_module({
         },
 
         previousDate: function() {
-            return kendo.date.previousDay(this._startDate);
+            return kendo.date.previousDay(this.startDate());
         },
 
         _renderLayout: function(date) {
