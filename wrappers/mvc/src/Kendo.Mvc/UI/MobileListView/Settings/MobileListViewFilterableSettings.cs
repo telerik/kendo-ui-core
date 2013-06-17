@@ -8,7 +8,8 @@ namespace Kendo.Mvc.UI
     public class MobileListViewFilterableSettings : JsonObject
     {
         public MobileListViewFilterableSettings()
-        {            
+        {
+            AutoFilter = true;
         }
 
         public bool Enabled { get; set; }
