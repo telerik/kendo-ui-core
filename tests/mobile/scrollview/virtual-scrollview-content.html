@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileScrollView.Tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.userevents.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.router.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../../src/kendo.mobile.scrollview.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.VirtualScrollViewContent Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            QUnit.config.reorder = false;
+
+            var ElasticPane = kendo.mobile.ui.ScrollViewElasticPane,
+                Page = kendo.mobile.ui.VirtualPage,
+                BatchBuffer = kendo.mobile.ui.BatchBuffer,
+                Buffer = kendo.data.Buffer,
+                VIRTUAL_PAGE_COUNT = 3,
+                LEFT_PAGE = -1,
+                CETER_PAGE = 0,
+                RIGHT_PAGE = 1;
+
+            var VirtualScrollViewContent = kendo.Class.extend({
+                init: function(element, pane, options) {
+                    var that = this;
+
+                    that.element = element;
+                    that.pane = pane;
+                    that.options = options;
+                    that.template = kendo.template(options.template || ""),
+                    that.emptyTemplate = kendo.template(options.emptyTemplate || ""),
+                    that.pages = [];
+                    that._initPages();
+                    that._arrangePages();
+                    that._dataSource();
+                    that._buffer();
+
+                    if(that.options.autoBind) {
+                        that.dataSource.fetch();
+                    }
+                },
+
+                _dataSource: function() {
+                    var options = this.options;
+
+                    this.dataSource = kendo.data.DataSource.create(options.dataSource);
+                },
+
+                _buffer: function() {
+                    var batchSize = this.options.batchSize;
+
+                    if(batchSize > 1) {
+                        this.buffer = new BatchBuffer(this.dataSource, batchSize);
+                    } else {
+                        this.buffer = new Buffer(this.dataSource, batchSize * 3);
+                    }
+
+                    this._resizeProxy = $.proxy(this, "_onResize");
+                    this._resetProxy = $.proxy(this, "_onReset");
+                    this._endReachedProxy = $.proxy(this, "_onEndReached");
+
+                    this.buffer.bind({
+                        "resize": this._resetProxy,
+                        "reset": this._resetProxy,
+                        "endreached": this._endReachedProxy
+                    });
+                },
+
+                _initPages: function() {
+                    var pages = this.pages,
+                        element = this.element,
+                        page;
+
+                    for (var i = 0; i < VIRTUAL_PAGE_COUNT; i++) {
+                        page = new Page(element);
+                        pages.push(page);
+                    }
+                },
+
+                _arrangePages: function() {
+                    var pane = this.pane,
+                        pages = this.pages,
+                        width = pane.size();
+
+                    for (var i = 0; i < pages.length; i++) {
+                        pages[i].setWidth(width);
+                    }
+
+                    pages[0].position(LEFT_PAGE);
+                    pages[1].position(CETER_PAGE);
+                    pages[2].position(RIGHT_PAGE);
+
+                    this.width = width;
+                },
+
+                _resetPages: function() {
+                    //TODO
+                },
+
+                _onResize: function() {
+                    
+                },
+
+                _onReset: function() {
+                    
+                },
+
+                _onEndReached: function() {
+                    
+                },
+
+                setPageContent: function(page, index) {
+                    var buffer = this.buffer,
+                        template = this.template,
+                        emptyTemplate = this.emptyTemplate,
+                        view;
+
+                    if(index >= 0) {
+                        view = buffer.at(index);
+                    }
+
+                    if(view) {
+                        page.content(template(view));
+                    } else {
+                        page.content(emptyTemplate({}));
+                    }
+
+                    kendo.mobile.init(page.element);
+                }
+            });
+
+            var content,
+                element,
+                pane;
+
+            module("ScrollView VirtualScrollViewContent", { 
+                setup: function() {
+
+                    var dataSourceConfig = {
+                        transport: {
+                            read: function(options) {
+
+                                var results = [], data = options.data;
+                                for (var i = data.skip; i < data.skip + data.take; i ++) {
+                                    results.push({ foo: i });
+                                }
+
+                                options.success(results);
+                            }
+                        },
+                        pageSize: 36,
+                        serverPaging: true,
+                        schema: {
+                            total: function() { return 100000; }
+                        }
+                    };
+
+                    var options = {
+                        dataSource: dataSourceConfig,
+                        autoBind: true,
+                        template: "<div class='foo'>#: foo #</div>"
+                    };
+
+                    element = $("<div style='width: 400px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 400px;' />");
+                    content = new VirtualScrollViewContent(element, new ElasticPane(element), options);
+                }
+            });
+
+            test("initializes pages correctly", 2, function() {
+                equal(content.pages.length, 3);
+                equal(content.element.find("div.virtual-page").length, 3);
+            });
+
+            test("positions pages correctly after refresh", 3, function() {
+                var pages = content.pages;
+
+                equal(pages[0].element.get(0).style["-webkit-transform"], "translate3d(-400px, 0, 0)");
+                equal(pages[1].element.get(0).style["-webkit-transform"], "translate3d(0px, 0, 0)");
+                equal(pages[2].element.get(0).style["-webkit-transform"], "translate3d(400px, 0, 0)");
+            });
+
+            test("creates buffer correctly", 2, function() {
+                var content = new VirtualScrollViewContent(element, new ElasticPane(element), {});
+                ok(content.buffer instanceof kendo.data.Buffer);
+
+                content = new VirtualScrollViewContent(element, new ElasticPane(element), { batchSize: 6 });
+                ok(content.buffer instanceof BatchBuffer);
+            });
+
+            test("sets the content correctly", 7, function() {
+                var page = content.pages[0];
+                equal(page.element.find(">div").length, 0);
+
+                content.setPageContent(page, 0);
+                equal(page.element.children().length, 1);
+                equal(page.element.find(">div").text(), "0");
+
+                content.setPageContent(page, 3);
+                equal(page.element.children().length, 1);
+                equal(page.element.find(">div").text(), "3");
+
+                content.setPageContent(page, -1); //test for non existing content
+                equal(page.element.children().length, 0);
+                equal(page.element.find(">div").text(), "");
+            });
+        </script>
+    </body>
+</html>
+
