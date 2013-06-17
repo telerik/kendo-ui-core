@@ -340,6 +340,8 @@ kendo_module({
                 cancel: "Cancel",
                 destroy: "Delete"
             },
+            height: null,
+            width: null,
             resources: [],
             views: []
         },

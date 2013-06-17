@@ -15,7 +15,7 @@ kendo_module({
         proxy = $.proxy,
         getDate = kendo.date.getDate,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
-        DAY_TEMPLATE = kendo.template('<span class="k-link k-nav-day">#=kendo.toString(data, "dd")#</span>'),
+        DAY_TEMPLATE = kendo.template('<span class="k-link k-nav-day">#=kendo.toString(date, "dd")#</span>'),
         EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                 'style="background-color:#=resources[0].color #"' +
@@ -185,7 +185,7 @@ kendo_module({
                 }
 
                 html += ">";
-                html += content(start);
+                html += content({ date: start });
                 html += "</td>";
 
                 slotIndices[getDate(start).getTime()] = idx;

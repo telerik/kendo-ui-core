@@ -17,9 +17,9 @@ kendo_module({
 
             this.title = this.options.title;
             this.name = this.options.name;
-            this._taskTemplate = kendo.template(this.options.eventTemplate);
-            this._dateTemplate = kendo.template(this.options.dateTemplate);
-            this._timeTemplate = kendo.template(this.options.timeTemplate);
+            this._eventTemplate = kendo.template(this.options.eventTemplate);
+            this._dateTemplate = kendo.template(this.options.eventDateTemplate);
+            this._timeTemplate = kendo.template(this.options.eventTimeTemplate);
 
             this.element.on("mouseenter", ".k-scheduler-agenda .k-scheduler-content tr", "_mouseenter")
                         .on("mouseleave", ".k-scheduler-agenda .k-scheduler-content tr", "_mouseleave")
@@ -166,7 +166,7 @@ kendo_module({
                             task.tail || task.middle ? '<span class="k-icon k-i-arrow-w"></span>' : "",
                             this._timeTemplate(task),
                             task.head || task.middle ? '<span class="k-icon k-i-arrow-e"></span>' : "",
-                            this._taskTemplate(task)
+                            this._eventTemplate(task)
                         ));
 
                         tableRows.push("<tr" + (today ? ' class="k-today">' : ">") + tableRow.join("") + "</tr>");
@@ -192,12 +192,12 @@ kendo_module({
                                '#:title#' +
                                '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
                            '</div>',
-            timeTemplate: "#if(data.isAllDay) {#" +
+            eventTimeTemplate: "#if(data.isAllDay) {#" +
                             "all day" +
                           "#} else { #" +
                             '#=kendo.format(format, start, end)#' +
                           "# } #",
-            dateTemplate: '<strong class="k-scheduler-agendaday">' +
+            eventDateTemplate: '<strong class="k-scheduler-agendaday">' +
                             '#=kendo.toString(date, "dd")#' +
                           '</strong>' +
                           '<em class="k-scheduler-agendaweek">' +

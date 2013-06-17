@@ -106,10 +106,10 @@ kendo_module({
             title: "",
             startTime: kendo.date.today(),
             endTime: kendo.date.today(),
-            numberOfTimeSlots: 2,
+            minorTickCount: 2,
             majorTick: 60,
-            majorTickTimeTemplate: kendo.template("#=kendo.toString(date, 't')#"),
-            minorTickTimeTemplate: "&nbsp;",
+            majorTimeHeaderTemplate: kendo.template("#=kendo.toString(date, 't')#"),
+            minorTimeHeaderTemplate: "&nbsp;",
             eventTemplate: DAY_VIEW_EVENT_TEMPLATE,
             allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE,
             dateHeaderTemplate: DATA_HEADER_TEMPLATE,
@@ -170,7 +170,7 @@ kendo_module({
             }
 
             this._forTimeRange(options.startTime, options.endTime, function(date, majorTick) {
-                var template = majorTick ? options.majorTickTimeTemplate : options.minorTickTimeTemplate;
+                var template = majorTick ? options.majorTimeHeaderTemplate : options.minorTimeHeaderTemplate;
 
                 var row = {
                     text: executeTemplate(template, options, { date: date }),
@@ -205,7 +205,7 @@ kendo_module({
                 msMin = getMilliseconds(min),
                 msMax = getMilliseconds(max),
                 msMajorInterval = that.options.majorTick * MS_PER_MINUTE,
-                msInterval = msMajorInterval / that.options.numberOfTimeSlots || 1,
+                msInterval = msMajorInterval / that.options.minorTickCount || 1,
                 start = new Date(+min),
                 startDay = start.getDate(),
                 msStart,
@@ -370,7 +370,7 @@ kendo_module({
         _slotIndexTime: function(index) {
             var options = this.options,
                 startTime = getMilliseconds(options.startTime),
-                timeSlotInterval = ((options.majorTick/options.numberOfTimeSlots) * MS_PER_MINUTE);
+                timeSlotInterval = ((options.majorTick/options.minorTickCount) * MS_PER_MINUTE);
 
             return startTime + timeSlotInterval * index;
         },
@@ -402,7 +402,7 @@ kendo_module({
             var options = this.options,
                 eventStartTime = getMilliseconds(date),
                 startTime = getMilliseconds(options.startTime),
-                timeSlotInterval = ((options.majorTick/options.numberOfTimeSlots) * MS_PER_MINUTE);
+                timeSlotInterval = ((options.majorTick/options.minorTickCount) * MS_PER_MINUTE);
 
             return (eventStartTime - startTime) / (timeSlotInterval);
         },
