@@ -278,16 +278,18 @@ kendo_module({
         RIGHT_PAGE = 1;
 
     var Page = kendo.Class.extend({
-        init: function (container) {
+        init: function(container) {
             this.element = $("<div class='virtual-page'></div>");
             this.width = container.width();
             this.element.width(this.width);
             container.append(this.element);
         },
-        content: function (theContent) {
+
+        content: function(theContent) {
             this.element.html(theContent);
         },
-        position: function (position) { //position can be -1, 0, 1
+
+        position: function(position) { //position can be -1, 0, 1
             this.element.css("transform", "translate3d(" + this.width * position + "px, 0, 0)");
         },
 
@@ -798,5 +800,8 @@ kendo_module({
             return view;
         }
     });
+
+
+    kendo.mobile.ui.BatchBuffer = BatchBuffer;
 
 })(window.kendo.jQuery);
