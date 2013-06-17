@@ -430,59 +430,20 @@ kendo_module({
 
             //that.inner.css("height", that.options.contentHeight);
 
-            var movable,
-                transition,
-                dimensions,
-                dimension,
-                userEvents,
-                pane,
-                width = element.width();
+            var width = element.width();
 
-            movable = new kendo.ui.Movable(that.inner);
+            //dimension.forceEnabled();
 
-            transition = new Transition({
-                axis: "x",
-                movable: movable,
-                onEnd: proxy(that._transitionEnd, that)
+            that.pane = new ElasticPane(that.inner, {
+                duration: this.options.duration,
+                transitionEnd: $.proxy(this, "_transitionEnd"),
+                dragEnd: $.proxy(this, "_dragEnd"),
+                change: $.proxy(this, REFRESH)
             });
 
-            dimensions = new PaneDimensions({
-                element: that.inner,
-                container: that.element
-            });
-
-            dimension = dimensions.x;
-            dimension.bind(CHANGE, proxy(that.refresh, that));
-            dimension.forceEnabled();
-
-            userEvents = new kendo.UserEvents(element, {
-                start: function(e) {
-                    if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
-                        userEvents.capture();
-                    } else {
-                        userEvents.cancel();
-                    }
-
-                    transition.cancel();
-                },
-                allowSelection: true,
-                end: proxy(that._dragEnd, that)
-            });
-
-            pane = new Pane({
-                dimensions: dimensions,
-                movable: movable,
-                userEvents: userEvents,
-                elastic: true
-            });
+            that.pane.dimension.forceEnabled();
 
             $.extend(that, {
-                movable: movable,
-                transition: transition,
-                userEvents: userEvents,
-                dimensions: dimensions,
-                dimension: dimension,
-                pane: pane,
                 width: width,
                 offset: 0,
                 _widgetNeedsRefresh: false
@@ -567,7 +528,7 @@ kendo_module({
 
         refresh: function() {
             var that = this,
-                dimension = that.dimension,
+                dimension = that.pane.dimension,
                 pages = that.pages,
                 width = dimension.getSize();
 
@@ -581,7 +542,7 @@ kendo_module({
             pages[2].position(1);
 
             that.width = width;
-            that.dimension.update(true);
+            dimension.update(true);
         },
 
         _initPages: function() {
@@ -595,7 +556,7 @@ kendo_module({
                 pages.push(page);
             }
 
-            that.dimension.update(true);
+            that.pane.dimension.update(true);
         },
 
         _resetPages: function() {
@@ -616,11 +577,11 @@ kendo_module({
         },
 
         _moveTo: function(location, ease, instant) {
-            this.transition.moveTo({ location: location, duration: (instant ? 1 : this.options.duration), ease: ease });
+            this.pane.transition.moveTo({ location: location, duration: (instant ? 1 : this.options.duration), ease: ease });
         },
 
         _resetMovable: function() {
-            this.movable.moveTo({ x: 0 });
+            this.pane.movable.moveTo({ x: 0 });
         },
 
         forward: function(instant) {
@@ -681,9 +642,9 @@ kendo_module({
                 return;
             }
 
-            if(that.movable.x < 0 && (abs(that.movable.x) >= width / 3 && !isEndReached)) {
+            if(that.pane.movable.x < 0 && (abs(that.pane.movable.x) >= width / 3 && !isEndReached)) {
                 that.forward();
-            } else if(that.movable.x > 0 && (abs(that.movable.x) >= width / 3)) {
+            } else if(that.pane.movable.x > 0 && (abs(that.pane.movable.x) >= width / 3)) {
                 if(that.offset === 0) {
                     that.reset(ease);
                 } else {
@@ -698,11 +659,11 @@ kendo_module({
             var that = this,
                 pages = that.pages;
 
-            if(that.movable.x === 0) {
+            if(that.pane.movable.x === 0) {
                 return;
             }
 
-            if(that.movable.x < 0) {
+            if(that.pane.movable.x < 0) {
                 pages.push(that.pages.shift());//forward
                 that.offset++;
                 that.setPageContent(pages[2], that.offset + 1);
