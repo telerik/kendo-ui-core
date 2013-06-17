@@ -67,6 +67,10 @@ kendo_module({
         };
     }
 
+    function templateNoWith(code) {
+        return kendo.template(code, { useWithBlock: false });
+    }
+
     subGroup = contentChild(".k-group");
     nodeContents = contentChild(".k-group,.k-content");
     nodeIcon = function(node) {
@@ -301,9 +305,9 @@ kendo_module({
             if (options.template && typeof options.template == STRING) {
                 options.template = template(options.template);
             } else if (!options.template) {
-                options.template = template(
-                    "# var text = " + fieldAccessor("text") + "(item); #" +
-                    "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
+                options.template = templateNoWith(
+                    "# var text = " + fieldAccessor("text") + "(data.item); #" +
+                    "# if (typeof data.item.encoded != 'undefined' && data.item.encoded === false) {#" +
                         "#= text #" +
                     "# } else { #" +
                         "#: text #" +
@@ -387,20 +391,20 @@ kendo_module({
 
                     return cssClass;
                 },
-                dragClue: template(
+                dragClue: templateNoWith(
                     "<div class='k-header k-drag-clue'>" +
                         "<span class='k-icon k-drag-status' />" +
-                        "#= treeview.template(data) #" +
+                        "#= data.treeview.template(data) #" +
                     "</div>"
                 ),
-                group: template(
-                    "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) # role='group'>" +
-                        "#= renderItems(data) #" +
+                group: templateNoWith(
+                    "<ul class='#= data.r.groupCssClass(data.group) #'#= data.r.groupAttributes(data.group) # role='group'>" +
+                        "#= data.renderItems(data) #" +
                     "</ul>"
                 ),
-                itemContent: template(
-                    "# var imageUrl = " + fieldAccessor("imageUrl") + "(item); #" +
-                    "# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(item); #" +
+                itemContent: templateNoWith(
+                    "# var imageUrl = " + fieldAccessor("imageUrl") + "(data.item); #" +
+                    "# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(data.item); #" +
                     "# if (imageUrl) { #" +
                         "<img class='k-image' alt='' src='#= imageUrl #'>" +
                     "# } #" +
@@ -409,18 +413,19 @@ kendo_module({
                         "<span class='k-sprite #= spriteCssClass #' />" +
                     "# } #" +
 
-                    "#= treeview.template(data) #"
+                    "#= data.treeview.template(data) #"
                 ),
-                itemElement: template(
+                itemElement: templateNoWith(
+                    "# var item = data.item, r = data.r; #" +
                     "# var url = " + fieldAccessor("url") + "(item); #" +
-                    "<div class='#= r.cssClass(group, item) #'>" +
+                    "<div class='#= r.cssClass(data.group, item) #'>" +
                         "# if (item.hasChildren) { #" +
                             "<span class='#= r.toggleButtonClass(item) #' role='presentation' />" +
                         "# } #" +
 
-                        "# if (treeview.checkboxes) { #" +
+                        "# if (data.treeview.checkboxes) { #" +
                             "<span class='k-checkbox' role='presentation'>" +
-                                "#= treeview.checkboxes.template(data) #" +
+                                "#= data.treeview.checkboxes.template(data) #" +
                             "</span>" +
                         "# } #" +
 
@@ -432,8 +437,9 @@ kendo_module({
                         "</#=tag#>" +
                     "</div>"
                 ),
-                item: template(
-                    "<li role='treeitem' class='#= r.wrapperCssClass(group, item) #'" +
+                item: templateNoWith(
+                    "# var item = data.item, r = data.r; #" +
+                    "<li role='treeitem' class='#= r.wrapperCssClass(data.group, item) #'" +
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                         "#=item.selected ? \"aria-selected='true'\" : ''#" +
                         "#=item.enabled === false ? \"aria-disabled='true'\" : ''#" +
@@ -441,10 +447,10 @@ kendo_module({
                         "#= r.itemElement(data) #" +
                     "</li>"
                 ),
-                loading: template(
+                loading: templateNoWith(
                     "<div class='k-icon k-loading' /> Loading..."
                 ),
-                retry: template(
+                retry: templateNoWith(
                     "Request failed. " +
                     "<button class='k-button k-request-retry'>Retry</button>"
                 )
@@ -566,6 +572,7 @@ kendo_module({
             }
         },
 
+        // generates accessor function for a given field name, honoring the data*Field arrays
         _fieldAccessor: function(fieldName) {
             var fieldBindings = this.options[bindings[fieldName]],
                 count = fieldBindings.length,
@@ -574,14 +581,12 @@ kendo_module({
             if (count === 0) {
                 result += "return item['" + fieldName + "'];";
             } else {
-                result += "var level = item.level();" +
-                          "var levels = [" +
+                result += "var levels = [" +
                             $.map(fieldBindings, function(x) {
                                 return "function(d){ return " + kendo.expr(x) + "}";
                             }).join(",") + "];";
 
-                // generates levels[level < 3 ? level : 2](item);
-                result += "return levels[Math.min(level, " + count + "-1)](item)";
+                result += "return levels[Math.min(item.level(), " + count + "-1)](item)";
             }
 
             result += "})";
