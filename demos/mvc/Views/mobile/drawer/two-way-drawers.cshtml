@@ -106,8 +106,13 @@
         color: #fff;
     }
 
-    #left-drawer .km-navbar, #right-drawer .km-navbar {
+    #left-drawer .km-navbar, #right-drawer .km-navbar,
+    .km-tablet .km-ios #left-drawer .km-view-title,
+    .km-tablet .km-ios #right-drawer .km-view-title
+    {
 	background-color: #2e2e2e;
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
     }
 
     .km-drawer-button:before, .km-drawer-button:after { content: "\E077"; }
@@ -128,7 +133,7 @@
 
     #two-drawer-home img
     {
-            float: left;
+        float: left;
         width: 3em;
         height: 3em;
         margin: 0;
