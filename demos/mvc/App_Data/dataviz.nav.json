@@ -459,6 +459,18 @@
             "name": "linear-gauge"
         }
     ],
+	"barcode":[
+		{
+			"text": "Barcode",
+            "documentation": "dataviz/barcode",
+            "spriteCssClass": "barcodeIcon",
+            "items": [{
+                "text": "Basic usage",
+                "url": "barcode/index.html"
+            }],
+            "name": "barcode"
+		}
+	],
     "financial": [{
             "text": "Stock Chart",
             "documentation": "dataviz/stock-chart",

@@ -16,11 +16,13 @@
     {
         public Barcode(ViewContext viewContext, IJavaScriptInitializer javaScriptInitializer)
             : base(viewContext, javaScriptInitializer)
-        { 
-           
+        {
+            this.Encoding = BarcodeSymbology.Code128;
         }
 
         public string Value { get; set; }
+
+        public BarcodeSymbology Encoding { get; set; }
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
@@ -34,7 +36,9 @@
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
-            
+
+            options["encoding"] = new { name = this.Encoding }.ToDictionary();
+
             if (Value.HasValue())
             {
                 options["value"] = Value;
@@ -53,6 +57,13 @@
             {
                 throw new ArgumentException(Exceptions.CannotBeNullOrEmpty.FormatWith("Value"));
             }
+
+            if (this.Encoding == BarcodeSymbology.EAN8 && this.Value.Length !=7 )
+            {
+                throw new ArgumentException(Exceptions.ValueNotValidForProperty.FormatWith("Value"));
+            }
+
+            //TODO ADD VALIDATION FOR ALL ENCODINGS
         }
     }
 }

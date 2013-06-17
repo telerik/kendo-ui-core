@@ -1,0 +1,21 @@
+    <div id="example" class="k-content">
+        <div id="barcode-container">
+            <div id="barcode"></div>
+        </div>
+
+        <script>
+            function createBarcode() {
+                $("#barcode").kendoBarcode({
+                    value: "1234567",
+                    encoding: {
+                        name : "ean8"
+                    }
+                });
+            }
+
+            $(document).ready(function() {
+                createBarcode();
+            });
+        </script>
+    </div>
+

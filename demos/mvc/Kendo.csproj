@@ -766,6 +766,7 @@
     <Content Include="Views\dataviz\radar-charts\grouped-data.cshtml" />
     <Content Include="Views\dataviz\polar-charts\remote-data.cshtml" />
     <Content Include="Views\dataviz\polar-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\barcode\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

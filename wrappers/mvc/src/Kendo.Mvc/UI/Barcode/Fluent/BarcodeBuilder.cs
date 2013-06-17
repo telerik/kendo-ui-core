@@ -25,9 +25,21 @@
             return this;
         }
 
+        /// <summary>
+        /// Sets the value of the barcode
+        /// </summary>
         public BarcodeBuilder Value(int value)
         {
             return this.Value(value.ToString());
+        }
+
+        /// <summary>
+        /// Sets the symbology which will be used to encode the value of the barcode
+        /// </summary>
+        public BarcodeBuilder Encoding(BarcodeSymbology encoding)
+        {
+            Component.Encoding = encoding;
+            return this;
         }
     }
 }
