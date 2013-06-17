@@ -46,5 +46,14 @@ namespace KendoCRUDService.Controllers
             }
             return this.Jsonp(products);
         }
+
+        public JsonResult Read(int skip, int take)
+        {
+            IEnumerable<ProductModel> result = ProductRepository.All().OrderByDescending(p => p.ProductID);
+            
+            result = result.Skip(skip).Take(take);            
+
+            return this.Jsonp(result);
+        }
     }
 }
