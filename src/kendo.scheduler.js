@@ -235,6 +235,12 @@ kendo_module({
             imageClass: "k-cancel",
             className: "k-scheduler-cancel",
             iconClass: "k-icon"
+        },
+        destroy: {
+            text: "Delete",
+            imageClass: "k-delete",
+            className: "k-grid-delete",
+            iconClass: "k-icon"
         }
     };
 
@@ -396,16 +402,60 @@ kendo_module({
             return this.dataSource.getByUid(id);
         },
 
-        _showMessage: function(text) {
-            return window.confirm(text);
+        _showMessage: function(text, callback) {
+            var that = this,
+                html = kendo.format("<div><span>{0}</span>", text),
+                command = this.options.editable.destroyCommand,
+                destroyText,
+                cancelText,
+                attr;
+
+            if (command) {
+                if (isPlainObject(command)) {
+                   if (command.text && isPlainObject(command.text)) {
+                       destroyText = command.text.destroy;
+                       cancelText = command.text.cancel;
+                   }
+
+                   if (command.attr) {
+                       attr = command.attr;
+                   }
+                }
+            }
+
+            html += '<div class="k-edit-buttons">';
+            html += that._createButton({ name: "destroy", text: destroyText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
+            html += '</div></div>';
+
+            var wnd = $(html).appendTo(this.wrapper).eq(0)
+                .on("click", ".k-button", function() {
+                    if ($(this).hasClass("k-grid-delete")) {
+                        callback();
+                    }
+
+                    wnd.close();
+                })
+                .kendoWindow({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: "Delete Event",
+                    visible: false
+                }).data("kendoWindow");
+
+            wnd.center().open();
         },
 
-        _confirmation: function() {
+        _confirmation: function(callback) {
             var that = this,
                 editable = that.options.editable,
                 confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
-            return confirmation !== false && confirmation != null ? that._showMessage(confirmation) : true;
+            if (confirmation !== false && confirmation != null) {
+                    that._showMessage(confirmation, callback);
+            } else {
+                callback();
+            }
         },
 
         addEvent: function(eventInfo) {
@@ -660,18 +710,17 @@ kendo_module({
         },
 
         removeEvent: function(uid) {
-            var model = this.dataSource.getByUid(uid);
+            var model = this.dataSource.getByUid(uid),
+                that = this;
 
             if (model) {
-                if (!this._confirmation()) {
-                    return;
-                }
-
-                if (!this.trigger(REMOVE, { event: model })) {
-                    if (this.dataSource.remove(model)) {
-                        this.dataSource.sync();
+                this._confirmation(function() {
+                    if (!that.trigger(REMOVE, { event: model })) {
+                        if (that.dataSource.remove(model)) {
+                            that.dataSource.sync();
+                        }
                     }
-                }
+                });
             }
         },
 

@@ -57,9 +57,6 @@
                     dataSource = scheduler.dataSource,
                     render = stub(scheduler.view(), "render");
 
-                scheduler._showMessage = function() {
-                };
-
                 dataSource.remove(dataSource.at(0));
 
                 equal(render.calls("render"), 1);
@@ -70,8 +67,6 @@
                     dataSource = scheduler.dataSource,
                     remove = stub(dataSource, "remove"),
                     uid = dataSource.at(0).uid;
-
-                scheduler._showMessage = function() { };
 
                 scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
 
@@ -84,8 +79,6 @@
                     dataSource = scheduler.dataSource,
                     remove = stub(dataSource, "remove");
 
-                scheduler._showMessage = function() { };
-
                 scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
 
                 equal(remove.calls("remove"), 0);
@@ -96,7 +89,6 @@
                 dataSource = scheduler.dataSource,
                 sync = stub(dataSource, "sync");
 
-                scheduler._showMessage = function() { };
                 scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
 
                 equal(sync.calls("sync"), 1);
