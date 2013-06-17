@@ -39,8 +39,8 @@
             });
 
             function slotHeight(table, slotsCount) {
-                var height = Math.floor(table.height() / table[0].rows.length);
-                return Math.round((height * slotsCount) - height * 0.10);
+                var height = Math.ceil(table.height() / table[0].rows.length);
+                return Math.round((height * slotsCount) - 4);
             }
 
             function equalWithRound(value, expected) {
@@ -692,7 +692,7 @@
                 equalWithRound(eventElement.height(), slotHeight(view.content.find("table"), 1));
             });
 
-            test("positon multiple single day events with same start time", function() {
+            test("position multiple single day events with same start time", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
                         dates: [

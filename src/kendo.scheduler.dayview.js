@@ -441,6 +441,23 @@ kendo_module({
             return result;
         },
 
+        _calculateEventHeight: function(slots, startIndex, endIndex) {
+            var result = 0,
+                idx,
+                length;
+
+            if (startIndex === endIndex) {
+                endIndex += 1;
+            }
+
+            for (idx = 0, length = slots.length; idx < length; idx++) {
+                if (idx >= startIndex && idx < endIndex) {
+                    result += slots.eq(idx).innerHeight();
+                }
+            }
+            return result;
+        },
+
         _positionAllDayEvent: function(element, slots, startIndex, endIndex) {
             var dateSlot = slots.eq(startIndex),
                 slotWidth = this._calculateAllDayEventWidth(startIndex, endIndex),
@@ -501,15 +518,19 @@ kendo_module({
             }
         },
 
-        _positionEvent: function(event, element, slots, dateSlotIndex, slotHeight) {
+        _positionEvent: function(event, element, slots, dateSlotIndex) {
             var startIndex = Math.max(Math.floor(this._timeSlotIndex(event.start)), 0),
                 endIndex = Math.min(Math.ceil(this._timeSlotIndex(event.end)), slots.length),
-                bottomOffset = (slotHeight * 0.10),
                 timeSlot = slots.eq(Math.floor(startIndex)),
+                bottomOffset = 4,
                 dateSlot = timeSlot.children().eq(dateSlotIndex);
 
+            if (startIndex >= 0 && endIndex === 0) {
+                endIndex = slots.length;
+            }
+
             element.css({
-                    height: slotHeight * (Math.ceil(endIndex - startIndex) || 1) - bottomOffset,
+                    height: this._calculateEventHeight(slots, startIndex, endIndex) - bottomOffset,
                     top: timeSlot.position().top + this.content[0].scrollTop
                 });
 
@@ -546,16 +567,18 @@ kendo_module({
        _createEventElement: function(event, template) {
             var options = this.options,
                 showDelete = options.editable && options.editable.destroy !== false,
+                startDate = this.startDate(),
+                endDate = this.endDate(),
                 middle,
                 head,
                 tail;
 
-            if (getDate(event.start) < getDate(this.startDate()) &&
-                getDate(event.end) > getDate(this.endDate()).getTime() + MS_PER_DAY - 1) {
+            if (getDate(event.start) < getDate(startDate) &&
+                getDate(event.end) > getDate(endDate)) {
                 middle = true;
-            } else if (getDate(event.start) < getDate(this.startDate())) {
+            } else if (getDate(event.start) < getDate(startDate)) {
                 tail = true;
-            } else if (getDate(event.end) > getDate(this.endDate()).getTime() + MS_PER_DAY - 1) {
+            } else if (getDate(event.end) > getDate(endDate)) {
                 head = true;
             }
 
@@ -606,7 +629,6 @@ kendo_module({
                 timeSlots = this.content.find("tr"),
                 allDaySlots = this.element.find(".k-scheduler-header-all-day td"),
                 allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
-                slotHeight = Math.floor(this.content.find(">table:first").innerHeight() / timeSlots.length),
                 eventTimeFormat = options.eventTimeFormat,
                 event,
                 idx,
@@ -637,7 +659,7 @@ kendo_module({
                                dateSlotIndex = endDateSlotIndex;
                            }
 
-                           this._positionEvent(event, element, timeSlots, dateSlotIndex, slotHeight, eventTimeFormat);
+                           this._positionEvent(event, element, timeSlots, dateSlotIndex, eventTimeFormat);
 
                            element.appendTo(container);
                        }
