@@ -993,14 +993,14 @@ kendo_module({
             for (axisIx = 0; axisIx < definitions.length; axisIx++) {
                 axis = definitions[axisIx];
                 if (axis.autoBind !== false) {
-                    chart._bindCategoryAxis(axis, categoriesData);
+                    chart._bindCategoryAxis(axis, categoriesData, axisIx);
                 }
             }
 
             console.log("Binding categories took " + (new Date() - now) + " ms");
         },
 
-        _bindCategoryAxis: function(axis, data) {
+        _bindCategoryAxis: function(axis, data, axisIx) {
             var count = (data || []).length,
                 categoryIx,
                 category,
@@ -1021,16 +1021,18 @@ kendo_module({
                     }
                 }
             } else {
-                this._bindCategoryAxisFromSeries(axis);
+                this._bindCategoryAxisFromSeries(axis, axisIx);
             }
         },
 
-        _bindCategoryAxisFromSeries: function(axis) {
+        _bindCategoryAxisFromSeries: function(axis, axisIx) {
             var chart = this,
-                categories,
                 series = chart.options.series,
                 seriesIx,
                 seriesLength = series.length,
+                entries = [],
+                categories = [],
+                dataItems = [],
                 currentSeries,
                 data,
                 dataIx,
@@ -1038,17 +1040,11 @@ kendo_module({
                 firstCategory,
                 uniqueCategories = {};
 
-            categories = axis.categories = [];
-            axis.dataItems = [];
-
-            for (var i = 0; i < categories.length; i++) {
-                uniqueCategories[categories[i]] = true;
-            }
-
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 currentSeries = series[seriesIx];
 
-                if (currentSeries.categoryField && currentSeries.categoryAxis === axis.name) {
+                if (currentSeries.categoryField &&
+                    (currentSeries.categoryAxis === axis.name || !currentSeries.categoryAxis && axisIx === 0)) {
                     data = currentSeries.data;
                     dataLength = data.length;
                     for (dataIx = 0; dataIx < dataLength; dataIx++) {
@@ -1056,19 +1052,26 @@ kendo_module({
                         firstCategory = firstCategory || category;
 
                         if (isDateAxis(axis, firstCategory) || !uniqueCategories[category]) {
-                            categories.push(category);
+                            entries.push([category, data[dataIx]]);
 
                             if (!isDateAxis(axis, firstCategory)) {
                                 uniqueCategories[category] = true;
-                                axis.dataItems.push(data[dataIx]);
                             }
                         }
                     }
-
-                    if (isDateAxis(axis, firstCategory)) {
-                        axis.categories = uniqueDates(categories);
-                    }
                 }
+            }
+
+            if (entries.length > 0) {
+                if (isDateAxis(axis, firstCategory)) {
+                    entries = uniqueDates(entries, function(a, b) {
+                        return dateComparer(a[0], b[0]);
+                    });
+                }
+
+                var result = transpose(entries);
+                axis.categories = result[0];
+                axis.dataItems = result[1];
             }
         },
 
@@ -6969,6 +6972,8 @@ kendo_module({
         },
 
         aggregateDateSeries: function(panes) {
+            var now = new Date();
+
             var plotArea = this,
                 series = plotArea.srcSeries || plotArea.series,
                 processedSeries = [],
@@ -7032,6 +7037,8 @@ kendo_module({
 
             plotArea.srcSeries = series;
             plotArea.series = processedSeries;
+
+            console.log("Aggregating series took " + (new Date() - now) + " ms");
         },
 
         appendChart: function(chart, pane) {
@@ -9575,7 +9582,7 @@ kendo_module({
         return result;
     }
 
-     function filterSeriesByType(series, types) {
+    function filterSeriesByType(series, types) {
          var i, currentSeries,
              result = [];
 
@@ -9588,9 +9595,9 @@ kendo_module({
          }
 
          return result;
-     }
+    }
 
-     function indexOf(item, arr) {
+    function indexOf(item, arr) {
          if (item instanceof Date) {
              for (var i = 0, length = arr.length; i < length; i++) {
                  if (dateEquals(arr[i], item)) {
@@ -9602,48 +9609,73 @@ kendo_module({
          } else {
              return $.inArray(item, arr);
          }
-     }
+    }
 
-     function dateComparer(a, b) {
+    function dateComparer(a, b) {
          if (a && b) {
              return a.getTime() - b.getTime();
          }
 
          return 0;
-     }
+    }
 
-     function sortDates(dates) {
+    function sortDates(dates, comparer) {
+         comparer = comparer || dateComparer;
+
          for (var i = 1, length = dates.length; i < length; i++) {
-             if (dateComparer(dates[i], dates[i - 1]) < 0) {
-                 dates.sort(dateComparer);
+             if (comparer(dates[i], dates[i - 1]) < 0) {
+                 dates.sort(comparer);
                  break;
              }
          }
 
          return dates;
-     }
+    }
 
-     function uniqueDates(srcDates) {
-         var i,
-             dates = sortDates(srcDates),
-             length = dates.length,
-             result = length > 0 ? [dates[0]] : [];
+    // Will mutate srcDates, not cloned for performance
+    function uniqueDates(srcDates, comparer) {
+        var i,
+            dates = sortDates(srcDates, comparer),
+            length = dates.length,
+            result = length > 0 ? [dates[0]] : [];
 
-         for (i = 1; i < length; i++) {
-             if (dateComparer(dates[i], last(result)) !== 0) {
-                 result.push(dates[i]);
-             }
-         }
+        comparer = comparer || dateComparer;
 
-         return result;
-     }
+        for (i = 1; i < length; i++) {
+            if (comparer(dates[i], last(result)) !== 0) {
+                result.push(dates[i]);
+            }
+        }
 
-     function isDateAxis(axisOptions, sampleCategory) {
+        return result;
+    }
+
+    function isDateAxis(axisOptions, sampleCategory) {
         var type = axisOptions.type,
             dateCategory = sampleCategory instanceof Date;
 
         return (!type && dateCategory) || equalsIgnoreCase(type, DATE);
-     }
+    }
+
+    function transpose(rows) {
+        var result = [],
+            rowCount = rows.length,
+            rowIx,
+            row,
+            colIx,
+            colCount;
+
+        for (rowIx = 0; rowIx < rowCount; rowIx++) {
+            row = rows[rowIx];
+            colCount = row.length;
+            for (colIx = 0; colIx < colCount; colIx++) {
+                result[colIx] = result[colIx] || [];
+                result[colIx].push(row[colIx]);
+            }
+        }
+
+        return result;
+    }
 
     // Exports ================================================================
     dataviz.ui.plugin(Chart);
@@ -9754,6 +9786,7 @@ kendo_module({
         singleItemOrArray: singleItemOrArray,
         sortDates: sortDates,
         sparseArrayLimits: sparseArrayLimits,
+        transpose: transpose,
         toDate: toDate,
         toTime: toTime,
         uniqueDates: uniqueDates

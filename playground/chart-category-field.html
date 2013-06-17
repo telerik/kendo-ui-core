@@ -25,7 +25,6 @@
                 // Top-level goals
                 // TODO: Individual positioning for each point
                 // TODO: Aggregate the points with the same category
-                // TODO: Sort merged categories if needed
 
                 $("#date-chart").kendoChart({
                     seriesDefaults: {
@@ -112,13 +111,15 @@
                         }
                     },
                     //dateField: "Date",
+                    seriesDefaults: {
+                        categoryField: "Date"
+                    },
                     series: [{
                         type: "candlestick",
                         openField: "Open",
                         highField: "High",
                         lowField: "Low",
-                        closeField: "Close",
-                        categoryField: "Date"
+                        closeField: "Close"
                     }],
                     navigator: {
                         dataSource: {
@@ -137,8 +138,7 @@
                         },
                         series: {
                             type: "area",
-                            field: "Close",
-                            categoryField: "Date"
+                            field: "Close"
                         },
                         select: {
                             from: "2009/10/05"

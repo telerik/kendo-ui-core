@@ -21,6 +21,7 @@
                 getSpacing = dataviz.getSpacing,
                 indexOf = dataviz.indexOf,
                 sortDates = dataviz.sortDates,
+                transpose = dataviz.transpose,
                 uniqueDates = dataviz.uniqueDates,
                 Chart = dataviz.ui.Chart,
                 Box2D = dataviz.Box2D,
@@ -1294,13 +1295,21 @@
             });
 
             test("does not change already sorted dates", function() {
-                deepEqual(sortDates(dates), dates);
+                deepEqual(sortDates(dates.slice(0)), dates);
             });
 
             test("ignores undefined values", function() {
                 var arr = dates.slice(0);
                 arr.push(undefined);
                 deepEqual(sortDates(arr), arr);
+            });
+
+            test("accepts custom comparer", function() {
+                var clone = dates.slice(0);
+                deepEqual(
+                    sortDates(clone, function(a, b) { return b.getTime() - a.getTime() }),
+                    dates.slice(0).reverse()
+                );
             });
 
             // ------------------------------------------------------------
@@ -1315,6 +1324,24 @@
 
             test("ignores empty array", function() {
                 deepEqual(uniqueDates([]), []);
+            });
+
+            test("accepts custom comparer", function() {
+                var clone = dates.slice(0);
+                deepEqual(
+                    uniqueDates(clone, function(a, b) { return b.getTime() - a.getTime() }),
+                    dates.slice(0).reverse()
+                );
+            });
+
+            // ------------------------------------------------------------
+            module("transpose");
+
+            test("splits input array in (length) outputs", function() {
+                deepEqual(
+                    transpose([[1, 2], [1, 2]]),
+                    [[1, 1], [2, 2]]
+                );
             });
 
         </script>

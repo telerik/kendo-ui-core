@@ -218,7 +218,7 @@
                             sales: 110
                         }],
                         categoryAxis: [{
-                            // default
+                            categories: []
                         }, {
                             name: "foo"
                         }],
@@ -246,10 +246,34 @@
                         categoryAxis: [{
                             // default
                         }, {
-                            name: "foo"
+                            name: "foo",
+                            categories: []
                         }],
                         dataBound: function() {
                             equal(this.options.categoryAxis[1].categories.length, 0);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("categories for are populated from series on named default axis", function() {
+                    chart = createChart({
+                        series: [{
+                            field: "sales",
+                            categoryField: "period"
+                        }],
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }],
+                        categoryAxis: {
+                            name: "foo"
+                        },
+                        dataBound: function() {
+                            equal(this.options.categoryAxis.categories.length, 2);
                             start();
                         }
                     });
