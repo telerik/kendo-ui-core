@@ -293,6 +293,8 @@ kendo_module({
 
             editor.bind("select", proxy(that._update, that));
 
+            this._updateContext();
+
             if (window) {
                 window.wrapper.css({top: "", left: "", width: ""});
             }
@@ -526,6 +528,12 @@ kendo_module({
                     tool.update($(this), nodes, editor.pendingFormats);
                 }
             });
+
+            this._updateContext();
+        },
+
+        _updateContext: function() {
+            this.element.children().show().filter(":has(.k-state-disabled)").hide();
         }
     });
 
