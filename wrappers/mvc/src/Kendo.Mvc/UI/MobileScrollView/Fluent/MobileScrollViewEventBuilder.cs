@@ -16,6 +16,17 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Handlers
         
         /// <summary>
+        /// Fires before the widget page is changed. The change can be prevented by calling the preventDefault method of the event parameter, in which case the widget will snap back to the current page.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the changing event.</param>
+        public MobileScrollViewEventBuilder Changing(string handler)
+        {
+            Handler("changing", handler);
+
+            return this;
+        }
+        
+        /// <summary>
         /// Fires when the widget page is changed.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the change event.</param>
