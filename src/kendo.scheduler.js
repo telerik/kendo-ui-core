@@ -730,12 +730,12 @@ kendo_module({
             var that = this;
 
             if (name && that.views[name]) {
-                if (that._selectedViewName !== name) {
-                    that._unbindView(that.views[that._selectedViewName]);
+
+                if (that._selectedView) {
+                    that._unbindView(that._selectedView);
                 }
 
-                that._renderView(name);
-
+                that._selectedView = that._renderView(name);
                 that._selectedViewName = name;
 
                 that.toolbar
@@ -758,23 +758,45 @@ kendo_module({
 
                 return;
             }
-            return that.views[that._selectedViewName];
+
+            return that._selectedView;
         },
 
         _renderView: function(name) {
-            var view = this.views[name];
+            var view = this._initializeView(name);
 
-            view.destroy();
-
-            this._bindView(this.views[name]);
+            this._bindView(view);
 
             view.renderLayout(this.date(), this.resources);
 
             this._model.set("formattedDate", view.dateForTitle());
+
+            return view;
         },
 
         _resize: function() {
             this.refresh();
+        },
+
+        _initializeView: function(name) {
+            var view = this.views[name];
+
+            if (view) {
+                var isSettings = isPlainObject(view),
+                    type = view.type;
+
+                if (typeof type === STRING) {
+                    type = kendo.getter(view.type)(window);
+                }
+
+                if (type) {
+                    view = new type(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {})));
+                } else {
+                    throw new Error("There is no such view");
+                }
+            }
+
+            return view;
         },
 
         _views: function() {
@@ -784,6 +806,7 @@ kendo_module({
                 selected,
                 isSettings,
                 name,
+                type,
                 idx,
                 length;
 
@@ -793,24 +816,30 @@ kendo_module({
                 view = views[idx];
 
                 isSettings = isPlainObject(view);
-                name = isSettings && view.name ? view.name : view;
+
+                if (isSettings) {
+                    type = name = view.type ? view.type : view;
+                    if (typeof type !== STRING) {
+                        name = view.title;
+                    }
+                } else {
+                    type = name = view;
+                }
 
                 defaultView = defaultViews[name];
 
                 if (defaultView) {
-                    view = new defaultView(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {})));
-                } else {
-                    view = new view(this.wrapper, trimOptions(extend({}, this.options)));
+                    view.type = defaultView.type;
                 }
 
-                if (view) {
-                    this.views[view.name] = view;
+                view = extend({ title: name }, defaultView, isSettings ? view : {});
 
-                    if (!selected || (view.selected || view.options.selected)) {
-                        selected = view.name;
+                if (name) {
+                    this.views[name] = view;
+
+                    if (!selected || view.selected) {
+                        selected = name;
                     }
-                } else {
-                    throw new Error("There is no such view");
                 }
             }
 
@@ -891,8 +920,7 @@ kendo_module({
 
            that._model.bind("change", function(e) {
                 if (e.field === "selectedDate") {
-                    that._renderView(that.view().name);
-                    that.rebind();
+                    that.view(that._selectedViewName);
                 }
            });
         },
@@ -1057,10 +1085,22 @@ kendo_module({
     });
 
     var defaultViews = {
-        day: kendo.ui.DayView,
-        week: kendo.ui.WeekView,
-        agenda: kendo.ui.AgendaView,
-        month: kendo.ui.MonthView
+        day: {
+            type: "kendo.ui.DayView",
+            title: "Day"
+        },
+        week: {
+            type: "kendo.ui.WeekView",
+            title: "Week"
+        },
+        agenda: {
+            type: "kendo.ui.AgendaView",
+            title: "Agenda"
+        },
+        month: {
+            type: "kendo.ui.MonthView",
+            title: "Month"
+        }
     };
 
     ui.plugin(Scheduler);

@@ -109,10 +109,9 @@
                     date: new Date("1/2/2013"),
                     views: [
                     {
-                        name: "day",
+                        type: "day",
                         selectedDateFormat: "{0:d}"
-                    }
-                    ]
+                    }]
                 });
 
                 equal(scheduler.wrapper.find("li.k-nav-current").text(), "1/2/2013");
@@ -202,7 +201,7 @@
 
             test("view is selected", function() {
                 var scheduler = new Scheduler(container, {
-                    views: ["day", { name: "week", selected: true }]
+                    views: ["day", { type: "week", selected: true }]
                 });
 
                 ok(scheduler.toolbar.find(".k-view-week").hasClass("k-state-selected"));
@@ -219,7 +218,7 @@
             test("default views custom options are merged", function() {
                 var scheduler = new Scheduler(container, {
                     views: [{
-                        name: "day",
+                        type: "day",
                         title: "My Custom Day View Title"
                     }]
                 });
@@ -263,7 +262,7 @@
 
             test("default view is created with provided options", function() {
                 var scheduler = new Scheduler(container, {
-                    views: [ { title: "foo", name: "day" }]
+                    views: [ { title: "foo", type: "day" }]
                 });
 
                 ok(scheduler.view() instanceof kendo.ui.MultiDayView);
@@ -272,14 +271,16 @@
 
             test("custom view is instantiated", function() {
                 var MyCustomView = kendo.ui.SchedulerView.extend({
-                    name: "foo",
                     renderLayout: $.noop,
                     dateForTitle: $.noop,
                     render: $.noop,
                 });
 
                 var scheduler = new Scheduler(container, {
-                    views: [MyCustomView]
+                    views: [ {
+                        title: "foo",
+                        type: MyCustomView
+                    }]
                 });
 
                 ok(scheduler.view() instanceof MyCustomView);
@@ -295,11 +296,11 @@
                         }
                     }),
                     scheduler = new Scheduler(container, {
-                        views: [MyCustomView]
+                        views: [{ type: MyCustomView, title: "foo" }]
                     });
             });
 
-            test("switching between views destroyes the view", 2, function() {
+            test("switching between views destroyes the view", 1, function() {
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         name: "foo",
                         dateForTitle: $.noop,
@@ -311,7 +312,7 @@
                         }
                     }),
                     scheduler = new Scheduler(container, {
-                        views: [MyCustomView, "day"]
+                        views: [ { type: MyCustomView, title: "foo" }, "day"]
                     });
 
                 scheduler.view("day");
@@ -327,7 +328,7 @@
                         }
                     }),
                     scheduler = new Scheduler(container, {
-                        views: [MyCustomView]
+                        views: [{ type: MyCustomView, title: "foo" }]
                     });
 
                 scheduler.date(new Date("1/2/2013"));
@@ -344,7 +345,7 @@
 
             test("top level options are propageted to the custom views", function() {
                 var MyCustomView = kendo.ui.SchedulerView.extend({
-                        name: "foo",
+                        title: "foo",
                         dateForTitle: $.noop,
                         render: $.noop,
                         renderLayout: function(selectedDate) {
@@ -352,7 +353,7 @@
                         }
                     }),
                     scheduler = new Scheduler(container, {
-                        views: [MyCustomView],
+                        views: [ { type: MyCustomView, title: "foo" }],
                         allDaySlot: false
                     });
 
@@ -371,7 +372,7 @@
 
             test("renderEvent is called with events as plain objects", 1, function() {
                 var MyCustomView = kendo.ui.SchedulerView.extend({
-                        name: "foo",
+                        title: "foo",
                         dateForTitle: $.noop,
                         render: function(events) {
                             ok(!(events[0] instanceof kendo.data.SchedulerEvent));
@@ -382,7 +383,7 @@
                         }
                     }),
                     scheduler = new Scheduler(container, {
-                        views: [MyCustomView],
+                        views: [ { type: MyCustomView, title: "foo" } ],
                         dataSource: {
                             data: [ { start: new Date(), end: new Date(), title: "" }]
                         }
@@ -391,44 +392,42 @@
 
             test("view is called when navigate is triggered", function() {
                 var MyCustomView = kendo.ui.SchedulerView.extend({
-                        name: "view1",
+                        title: "view1",
                         dateForTitle: $.noop,
                         render: $.noop,
                         renderLayout: $.noop
                     }),
                     MyCustomView2 = kendo.ui.SchedulerView.extend({
-                        name: "view2",
+                        title: "view2",
                         dateForTitle: $.noop,
                         render: $.noop,
                         renderLayout: $.noop
                     }),
                     scheduler = new Scheduler(container, {
-                        views: [MyCustomView, MyCustomView2],
+                        views: [ { type: MyCustomView, title: "view1" }, { type: MyCustomView2, title: "view2" }],
                         dataSource: { }
                     });
 
                 scheduler.view().trigger("navigate", { view: "view2", date: new Date(2013, 1, 2) });
 
-                equal(scheduler.view().name, "view2");
+                equal(scheduler.view().title, "view2");
                 equal(scheduler.date().getTime(), new Date(2013, 1, 2).getTime());
             });
 
             test("rebind is called once when navigating between views", function() {
 
                 var MyCustomView = kendo.ui.SchedulerView.extend({
-                        name: "view1",
                         dateForTitle: $.noop,
                         render: $.noop,
                         renderLayout: $.noop
                     }),
                     MyCustomView2 = kendo.ui.SchedulerView.extend({
-                        name: "view2",
                         dateForTitle: $.noop,
                         render: $.noop,
                         renderLayout: $.noop
                     }),
                     scheduler = new Scheduler(container, {
-                        views: [MyCustomView, MyCustomView2],
+                        views: [{ type: MyCustomView, title: "view1"}, {title: "view2", type: MyCustomView2}],
                         dataSource: { }
                     }),
                     rebindStub = stub(scheduler, "rebind");

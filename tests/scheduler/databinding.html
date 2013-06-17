@@ -48,12 +48,15 @@
 
             test("view is bound to the event data", 1, function() {
                 var scheduler = new Scheduler(container, {
-                    views: [ kendo.ui.MultiDayView.extend({
-                        render: function(events) {
-                            equal(events.length, 2);
-                        },
-                        name: "testView"
-                    })],
+                    views: [ {
+                            type: kendo.ui.MultiDayView.extend({
+                                render: function(events) {
+                                    equal(events.length, 2);
+                                }
+                            }),
+                            title: "testView"
+                            }
+                        ],
                     date: kendo.timezone.apply(new Date(2013, 1, 3, 0, 0, 0), "Etc/UTC"),
                     dataSource: {
                         serverFiltering: true,
@@ -71,12 +74,15 @@
 
             test("data is filtered before is passed to the view", 1, function() {
                 var scheduler = new Scheduler(container, {
-                    views: [ kendo.ui.MultiDayView.extend({
-                        render: function(events) {
-                            equal(events.length, 1);
-                        },
-                        name: "testView"
-                    })],
+                    views: [ {
+                            type: kendo.ui.MultiDayView.extend({
+                                render: function(events) {
+                                    equal(events.length, 1);
+                                }
+                            }),
+                            title: "testView"
+                        }
+                        ],
                     date: kendo.timezone.apply(new Date(2013, 1, 3, 0, 0, 0), "Etc/UTC"),
                     dataSource: {
                         serverFiltering: true,
