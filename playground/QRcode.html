@@ -29,7 +29,7 @@
             //check if other readers can decode larger or the problem is in the code or rendering
             $("#qrVersionGreaterThan7").kendoQRCode({
                 value: new Array(220).join("a"),
-                errorCorrectionLevel: "H",
+                errorCorrectionLevel: "L",
                 size: 300
             });
             
@@ -39,7 +39,7 @@
             }
             $("#qrUrl").kendoQRCode({
                 value: "http://demos.kendoui.com/web/overview/index.html",
-                errorCorrectionLevel: "H",
+                errorCorrectionLevel: "L",
                 size: 300,
                 darkModuleColor: "red",
                 background: "yellow"
@@ -47,13 +47,13 @@
             
             $("#qrAlpha").kendoQRCode({
                 value: new Array(200).join("B"),
-                errorCorrectionLevel: "H",
+                errorCorrectionLevel: "L",
                 size: 300
             });
             
             $("#qrNumeric").kendoQRCode({
                 value: value,
-                errorCorrectionLevel: "H",
+                errorCorrectionLevel: "L",
                 size: 300,
                 darkModuleColor: "red",
                 border: {
@@ -64,13 +64,13 @@
             // 
             $("#qrMixingModes").kendoQRCode({
                 value: new Array(15).join("A") + new Array(20).join("2") + new Array(20).join("b"),
-                errorCorrectionLevel: "H",
+                errorCorrectionLevel: "L",
                 size: 300
             });
             
             $("#qrMail").kendoQRCode({
                 value: "mailto:clientservice@kendoui.com",
-                errorCorrectionLevel: "H",
+                errorCorrectionLevel: "L",
                 size: 300
             });
             //alert("rendering took: " + (new Date().getTime() - start) + " miliseconds");

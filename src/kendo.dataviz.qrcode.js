@@ -863,7 +863,7 @@ kendo_module({
                                 column++;
                             }
                             view.children.push(view.createRect(new Box2D(x1 * baseUnit, y, x2 * baseUnit, y + baseUnit ), 
-                                { fill: that.options.darkModuleColor, stroke: that.options.darkModuleColor}));  
+                                { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false}));  
                             //that.view.children.push(that.view.createLine(x1 * baseUnit, y, x2 * baseUnit, y, 
                             //    { stroke: that.options.darkModuleColor, strokeWidth: baseUnit, strokeLineCap: "butt", align: false}));                             
                         }

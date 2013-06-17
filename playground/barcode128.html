@@ -37,45 +37,35 @@
 			
 			$('#postnet').kendoBarcode({
 				value: "01234",
-				encoding: {
-					name: "postnet"
-				},
+				type: "postnet",
 				width: 200,
-				height: 50
+				height: 100
 			});
 			
 			$('#gs1').kendoBarcode({
 				value: "21 a123 (12)121212",
-				encoding: {
-					name: "gs1-128"
-				},
+				type: "gs1-128",
 				width: 200,
 				height: 100
 			});
 			
 			$('#code93').kendoBarcode({
 				value: "TEST93",
-				encoding: {
-					name: "code93"
-				},
+				type: "code93",
 				width: 300,
 				height: 100
 			});
 			
 			$('#code93extended').kendoBarcode({
 				value: ">a12Asdas;" + String.fromCharCode(127),
-				encoding: {
-					name: "code93extended"
-				},
+				type: "code93extended",
 				width: 300,
 				height: 100
 			});
 			
 			$('#code128A').kendoBarcode({
 				value: "TESTA",
-				encoding: {
-					name: "code128A"
-				},
+                type: "code128A",
 				width: 300,
 				height: 100
 			});	
@@ -83,27 +73,21 @@
 	
 			$('#code128B').kendoBarcode({
 				value: "ABASD",
-				encoding: {
-					name: "code128B"
-				},
+                type: "code128B",
 				width: 300,
 				height: 100
 			});	
 
 			$('#code128C').kendoBarcode({
 				value: "121314",
-				encoding: {
-					name: "code128C"
-				},
+                type: "code128C",
 				width: 300,
 				height: 100
 			});	
 
 			$('#code128').kendoBarcode({
 				value: String.fromCharCode(198) +  "Aba1213",
-				encoding: {
-					name: "code128"
-				},
+                type: "code128",
 				width: 300,
 				height: 100
 			});				

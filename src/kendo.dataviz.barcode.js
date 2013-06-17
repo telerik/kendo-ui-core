@@ -194,7 +194,6 @@
         minRatio: 2.5,
         maxRatio: 3,
         gapWidth: 1,
-        spaceFormatString: "[SPACE, {0}]",
         initValue: function (value, width, height) {
             this.width = width;
             this.height = height;
@@ -204,14 +203,7 @@
             this.checkSum = 0;
             this.dataLength = value.length;
             this.pattern = [];
-        },
-        addQuietZone: function(){
-            if(this.pattern.length > 0 ){
-                this.pattern.push([SPACE, this.quietZoneLength])
-            }
-            else{
-                this.pattern.push(kendo.format(this.spaceFormatString, this.quietZoneLength));
-            }
+            this.patternString = "";
         },
         prepareValues: function(){
             var minHeight = Math.max(0.15 * this.width, 24);
@@ -228,8 +220,8 @@
                 throw new Error("Insufficient Width");
             }
 
-            this.pattern = new Function("ratio,BAR,SPACE", "return [" +  this.pattern.join(",") + "];")(this.ratio, BAR, SPACE);
-        },
+            this.pattern = this.pattern.concat(this.patternString.replace(/ratio/g, this.ratio).split(""));
+        },        
         setBaseUnit: function(){
             var characterLength = 3 * (this.ratio + 2),
                 checkSumLength = this.options.addCheckSum ? 1 : 0,
@@ -259,18 +251,18 @@
             this.addPattern(this.characterMap.START.pattern);
         },
         addPattern: function (pattern) {
-            for (var i = 0; i < pattern.length; i++) {
-                 this.pattern.push(this.patternMappings[pattern.charAt(i)]);
+            for (var i = 0; i < pattern.length; i++) {                
+                 this.patternString+= this.patternMappings[pattern.charAt(i)];
             }
         },
         addCharacterGap: function () {
-            this.pattern.push(kendo.format(this.spaceFormatString, this.gapWidth));
+            this.patternString+=this.gapWidth;
         },
         patternMappings: {
-            "b": "[BAR, 1]",
-            "w": "[SPACE, 1]",
-            "B": "[BAR, ratio]",
-            "W": "[SPACE, ratio]"
+            "b": "1",
+            "w": "1",
+            "B": "ratio",
+            "W": "ratio"
         },
         characterMap: {
             "0":{"pattern":"bwbWBwBwb","value":0},
@@ -416,10 +408,9 @@
             var symbol,
                 value;
 
-            for(var i = 0; i < pattern.length; i++){
-                symbol = i % 2 == 0 ? BAR : SPACE;
+            for(var i = 0; i < pattern.length; i++){                
                 value = parseInt(pattern.charAt(i));
-                this.pattern.push([symbol, value]);
+                this.pattern.push(value);
             }
         },
         options: {
@@ -475,7 +466,7 @@
             SHIFT2:{"pattern":"121221","value":43},
             SHIFT3:{"pattern":"312111","value":44},
             START: {"pattern":"111141"},
-            TERMINATION_BAR: [BAR, 1]
+            TERMINATION_BAR: "1"
         }
     });
 
@@ -518,8 +509,10 @@
     var state128AB = state128.extend({
         FNC4: "FNC4",
         init: function(encoding, states){
-            this.encoding = encoding;
-            this._initMoves(states);
+            var that = this;
+            that.encoding = encoding;
+            that.states = states;
+            that._initMoves(states);
         },
         addStart: function(){
             this.encoding.addPattern(this.START);
@@ -529,29 +522,44 @@
             return this.isCode(code);
         },
         move: function(encodingState){
-            var idx = 0;
-            while(!this._moves[idx].call(this, encodingState) && idx < this._moves.length){
+            var that = this,
+                idx = 0;
+                
+            while(!that._moves[idx].call(that, encodingState) && idx < that._moves.length){
                 idx++;
             }
         },
         pushState: function(encodingState){
-            var code;
-            while( (code = encodingState.value.charCodeAt(encodingState.index)) >= 0 && this.isCode(code)){
-                this.encoding.addPattern(this.getValue(code));
+            var that = this,
+                states = that.states,
+                value = encodingState.value,
+                maxLength = value.length,                    
+                code;
+                
+            if(states.indexOf("C") >= 0){
+                var numberMatch = value.match(/\d{4,}/g);
+                if(numberMatch){
+                    maxLength = value.indexOf(numberMatch[0]);
+                }
+            }
+            
+            while( (code = encodingState.value.charCodeAt(encodingState.index)) >= 0 && that.isCode(code) && encodingState.index < maxLength){
+                that.encoding.addPattern(that.getValue(code));
                 encodingState.index++;
             }
         },
         _initMoves: function(states){
-            this._moves = [];
+            var that = this;
+            that._moves = [];
 
-            if(inArray(this.FNC4, states) >= 0){
-                this._moves.push(this._moveFNC);
+            if(inArray(that.FNC4, states) >= 0){
+                that._moves.push(that._moveFNC);
             }
 
-            if(inArray(this.shiftKey, states) >= 0){
-                this._moves.push(this._shiftState);
+            if(inArray(that.shiftKey, states) >= 0){
+                that._moves.push(that._shiftState);
             }
-            this._moves.push(this._moveState);
+            that._moves.push(that._moveState);
         },
         _moveFNC: function(encodingState){
             if(encodingState.fnc){
@@ -560,9 +568,10 @@
             }
         },
         _shiftState: function(encodingState){
-            if(encodingState.previousState == this.shiftKey &&
-                this.encoding[this.shiftKey].is(encodingState.value, encodingState.index + 1)){
-                this.encoding.addPattern(this.SHIFT);
+            var that = this;
+            if(encodingState.previousState == that.shiftKey &&
+                that.encoding[that.shiftKey].is(encodingState.value, encodingState.index + 1)){
+                that.encoding.addPattern(that.SHIFT);
                 return true;
             }
         },
@@ -654,8 +663,9 @@
             return 128 <= code && code < 256;
         },
         pushState: function(encodingState){
-            var subState = this._initSubState(encodingState),
-                encoding = this.encoding,
+            var that = this,
+                subState = that._initSubState(encodingState),
+                encoding = that.encoding,
                 length = subState.value.length;
             encodingState.index += length;
 
@@ -663,7 +673,7 @@
                 var code;
                 for(; subState.index < length; subState.index++){
                     code = subState.value.charCodeAt(subState.index);
-                    subState.state = this._getSubState(code);
+                    subState.state = that._getSubState(code);
                     if(subState.previousState != subState.state){
                         subState.previousState = subState.state;
                         encoding[subState.state].move(subState);
@@ -676,10 +686,10 @@
                 if(subState.state != subState.previousState){
                     encoding[subState.state].move(subState);
                 }
-                this._pushStart(subState);
-                encoding.pushData(subState, this.subStates);
+                that._pushStart(subState);
+                encoding.pushData(subState, that.subStates);
                 if(encodingState.index < encodingState.value.length){
-                    this._pushStart(subState);
+                    that._pushStart(subState);
                 }
             }
 
@@ -687,31 +697,35 @@
             encodingState.state = subState.state;
         },
         _pushStart: function(subState){
-            this.encoding.addPattern(this.encoding[subState.state].MOVE);
-            this.encoding.addPattern(this.encoding[subState.state].MOVE);
+            var that = this;
+            that.encoding.addPattern(that.encoding[subState.state].MOVE);
+            that.encoding.addPattern(that.encoding[subState.state].MOVE);
         },
         _initSubState: function(encodingState){
-            var subState = {
-                    value: this._getAll(encodingState.value, encodingState.index),
+            var that = this,
+                subState = {
+                    value: that._getAll(encodingState.value, encodingState.index),
                     index: 0
                 };
-            subState.state = this._getSubState(subState.value.charCodeAt(0));
-            subState.previousState = encodingState.previousState == this.key ?
+            subState.state = that._getSubState(subState.value.charCodeAt(0));
+            subState.previousState = encodingState.previousState == that.key ?
                 subState.state : encodingState.previousState;
             return subState;
         },
         _initSubStates: function(states){
-            this.subStates = [];
+            var that = this;
+            that.subStates = [];
             for(var i = 0; i < states.length; i++){
-                if(inArray(states[i], this.dependentStates) >= 0){
-                    this.subStates.push(states[i]);
+                if(inArray(states[i], that.dependentStates) >= 0){
+                    that.subStates.push(states[i]);
                 }
             }
         },
         _getSubState: function(code){
-            for(var i = 0; i < this.subStates.length; i++){
-                if(this.encoding[this.subStates[i]].isCode(code)){
-                    return this.subStates[i];
+            var that = this;
+            for(var i = 0; i < that.subStates.length; i++){
+                if(that.encoding[that.subStates[i]].isCode(code)){
+                    return that.subStates[i];
                 }
             }
         },
@@ -949,14 +963,15 @@
             }
         },
         initValue: function (value, width, height) {
-           this.pattern = [];
-           this.value = value;
-           this.width = width;
-           this.height = height;
-           this.checkSum = 0;
-           this.totalUnits = 0;
-           this.index = 0;
-           this.position = 1;
+           var that = this;
+           that.pattern = [];
+           that.value = value;
+           that.width = width;
+           that.height = height;
+           that.checkSum = 0;
+           that.totalUnits = 0;
+           that.index = 0;
+           that.position = 1;
         },
         addData: function(){
             var encodingState = {
@@ -1011,9 +1026,8 @@
                 value;
 
             for(var i = 0; i < pattern.length; i++){
-                symbol = i % 2 == 0 ? BAR : SPACE;
                 value = parseInt(pattern.charAt(i));
-                this.pattern.push([symbol, value]);
+                this.pattern.push(value);
                 this.totalUnits += value;
             }
             this.checkSum += code * this.position++;
@@ -1055,7 +1069,7 @@
        states: ["FNC1", "C", "B"]
     });
 
-    encodings.msi = Encoding.extend({
+    var msiBase = Encoding.extend({
         initValue: function(value, width, height){
             this.pattern = [];
             this.value = value;
@@ -1092,22 +1106,14 @@
             this.addPattern(pattern);
         },
         addPattern: function(pattern){
-            var symbol;
             for(var i = 0; i < pattern.length; i++){
-                symbol = i % 2 == 0 ? BAR : SPACE;
-                this.pattern.push([ symbol, parseInt(pattern.charAt(i))]);
+                this.pattern.push(parseInt(pattern.charAt(i)));
             }
         },
         addCheckSum: function(){
-            var checkSumFunction = this.checkSums[this.options.checkSumType],
+            var checkSumFunction = this.checkSums[this.checkSumType],
                 checkValues;
-            if(!checkSumFunction){
-                var errorMessage = "Unsupported checksum type. The supported checksum types are: ";
-                for(var checkSumType in this.checkSums){
-                    errorMessage += checkSumType + ", ";
-                }
-                throw new Error(errorMessage.substring(0,errorMessage.length - 2));
-            }
+            
             checkValues = checkSumFunction.call(this.checkSums, this.value);
             for(var i = 0; i < checkValues.length; i++){
                 this.checkSumLength++;
@@ -1158,7 +1164,7 @@
 
                 return checkValues.concat(this.Modulo10(mod11Value));
             },
-            DoubleModulo10: function(value){
+            Modulo10Modulo10: function(value){
                 var checkValues = this.Modulo10(value),
                     mod10Value;
                 mod10Value = value + checkValues[0];
@@ -1169,12 +1175,25 @@
         characterMap: ["12121212", "12121221","12122112", "12122121", "12211212", "12211221", "12212112", "12212121", "21121212", "21121221"],
         START: "21",
         STOP: "121",
-        options: {
-            addCheckSum: true,
-            checkSumType: "Modulo10"
-        }
+        checkSumType: ""
     });
-
+    
+    encodings.msimodulo10 = msiBase.extend({
+        checkSumType: "Modulo10"
+    });
+    
+    encodings.msimodulo11 = msiBase.extend({
+        checkSumType: "Modulo11"
+    });
+    
+    encodings.msimodulo11modulo10 = msiBase.extend({
+        checkSumType: "Modulo11Modulo10"
+    });
+    
+    encodings.msimodulo10modulo10 = msiBase.extend({
+        checkSumType: "Modulo10Modulo10"
+    });
+    
     encodings.code11 = Encoding.extend({
         cCheckSumTotal: 10,
         kCheckSumTotal: 9,
@@ -1253,9 +1272,8 @@
             var symbol,
                 value;
             for(var i = 0; i < pattern.length; i++){
-                symbol = i % 2 == 0 ? BAR : SPACE;
                 value = parseInt(pattern.charAt(i));
-                this.pattern.push([symbol, value]);
+                this.pattern.push(value);
                 this.totalUnits+=value;
             }
         },
@@ -1322,8 +1340,8 @@
             var y1;
             for(var i = 0; i < pattern.length; i++){
                 y1 = this.height - this.baseHeight * pattern.charAt(i);
-                this.pattern.push([BAR, 1, y1, this.height]);
-                this.pattern.push([SPACE, 1]);
+                this.pattern.push({width: 1, y1: y1, y2: this.height});
+                this.pattern.push(1);
             }
         },
         characterMap: ["22111", "11122", "11212", "11221", "12112", "12121", "12211", "21112", "21121", "21211"]
@@ -1442,7 +1460,8 @@
 
     var Barcode = Widget.extend({
         init: function (element, options) {
-			var that = this;
+			 var that = this;           
+             
              Widget.fn.init.call(that, element, options);
              that.element = element;
              var defaultView = dataviz.ui.defaultView();
@@ -1451,32 +1470,34 @@
         },
         setOptions: function (options) {
 			var that = this;
-            if (!that.enocoding || ( options.encoding.name && that.options.encoding.name !==
-                options.encoding.name.toLowerCase())){
-                that.encoding = new encodings[that.options.encoding.name.toLowerCase()](options.encoding);
-            }
+            that.type = (options.type || that.options.type).toLowerCase();
+            that.encoding = new encodings[that.type]();
             that.options = $.extend(that.options, options);
             that.value(that.options.value);
         },
         redraw: function () {
-            var that=this,
+            var that = this,
+                showText = that.options.text.visible,
+                textSize = dataviz.measureText(that.value, {font: that.options.text.font}),
+                barHeight =  showText? that.options.height - textSize.height : that.options.height,
 				result = that.encoding.encode(that.value,
-                    that.options.width, that.options.height);                
-
+                    that.options.width, barHeight);                
+            that.textSize = textSize;
+            that.barHeight = barHeight;
             that.view.children = [];
             that.view.options.width = that.options.width;
-            that.view.options.height = that.options.height + that.options.fontSize;
+            that.view.options.height = that.options.height;
             that.addBackground();
 
             that.addElements(result.pattern, result.baseUnit);
 
-            if (that.options.showText) {
+            if (showText) {
                that.addText(that.value);
             }
             that.view.renderTo(that.element);
         },        
         value: function(value){
-            this.value = value;
+            this.value = value + "";
             this.redraw();
         },
         addElements: function (pattern, baseUnit) {
@@ -1489,7 +1510,7 @@
 				item = isPlainObject(pattern[i]) ? pattern[i] : {
 						width: pattern[i],
 						y1:0,
-						y2: that.options.height
+						y2: that.barHeight
 					}; 
                 step = item.width * baseUnit;
                 if(i%2){				                     
@@ -1502,51 +1523,42 @@
         },
         addBackground: function () {
               this.view.children.push(this.view.createRect(new Box2D(0,0, this.options.width, this.options.height),
-                { fill: this.options.backColor }));
+                { fill: this.options.background }));
         },
         addText: function (value) {
             var that = this,
-				font = that.options.fontSize + "px " + that.options.fontFamily,
+				font = that.options.text.font,
                 text = new Text(value, {
                     font: font,
                     color: that.options.color,
                     align: "center",
                     vAlign: "bottom"
                 });
-            text.reflow(new Box2D(0, 0, that.options.width, that.options.height + that.options.fontSize));
+                
+            text.reflow(new Box2D(0, 0, that.options.width, that.options.height));
+
             that.view.children.push(that.view.createText(value, {
                 baseline: text.baseline,
                 x: text.box.x1,
                 y: text.box.y1,
-                color: that.options.color,
+                color: that.options.text.color,
                 font: font
             }));
         },
         options: {
-            name: "Barcode",
-            // TODO: Support numbers
+            name: "Barcode",         
             // TODO: Throw error on validation
             value: "",
-            // TODO: Move to top level
             type: "code39",
             // TODO: Implement
             //checksum: true|false
-            encoding: {
-                name: "code39"
-            },
             // --
             // TODO: Move defaults to constants
             width: 300,
             height: 100,
             // TODO: Rename to color
             color: "black",
-            // TODO: Rename to background
-            backColor: "white",
-            // TODO: Move to text options
-            color: "black",
-            showText: true,
-            fontSize: 16,
-            fontFamily: "sans-serif",
+            background: "white",
             text: {
                 visible: true,
                 // style variant weight size/line-height family
