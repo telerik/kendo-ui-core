@@ -679,7 +679,7 @@ kendo_module({
         },
 
         removeEvent: function(uid) {
-            var model = typeof uid == "string" ? this.dataSource.getByUid(uid) : uid;
+            var model = typeof uid == "string" ? this.dataSource.getByUid(uid) : uid,
                 that = this;
 
             if (model) {
