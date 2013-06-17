@@ -154,6 +154,34 @@
                 });
             });
 
+            test("persist expanded events as a private field", function() {
+                var today = new Date(),
+                    year = today.getFullYear(),
+                    month = today.getMonth(),
+                    day = today.getDate(),
+                    occurrencesLength = (7 - (today.getDay() || 7)) || 1, //find days to the end of week
+                    view, events;
+
+                var scheduler = new Scheduler(container, {
+                    views: [ "week" ],
+                    dataSource: [
+                        {
+                            start: new Date(year, month, day, 10),
+                            end: new Date(year, month, day, 11),
+                            title: "Today - recurring event",
+                            recurrence: "FREQ=DAILY"
+                        },{
+                            start: new Date(year, month, day, 16),
+                            end: new Date(year, month, day, 17),
+                            title: "Today - single event"
+                        }
+                    ]
+                });
+
+                scheduler.refresh();
+
+                equal(scheduler._data.length, occurrencesLength + 1);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

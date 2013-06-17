@@ -1038,6 +1038,28 @@ kendo_module({
             that.popup.open();
         },
 
+        /*_createRecurringDialog: function() {
+            var wnd = $('<div style="display:none"><button>Edit current occurrence</button><button>Edit the series</button></div>')
+                        .appendTo(this.wrapper),
+                buttons = wnd.find("button");
+
+            buttons.eq(0).click(function() {
+
+            });
+
+            buttons.eq(1).click(function() {
+
+            });
+
+            this._recurringItemDialog = new kendo.ui.Window(wnd, {
+                                        modal: true,
+                                        resizable: false,
+                                        draggable: true,
+                                        title: "Edit Recurring Item",
+                                        visible: false
+                                    });
+        },*/
+
         _expandEvents: function(data, view) {
             var endDate = view.endDate(),
                 endTime = view.endTime;
@@ -1100,8 +1122,7 @@ kendo_module({
 
             this._destroyEditable();
 
-            data = this._expandEvents(data, view);
-
+            this._data = data = this._expandEvents(data, view);
             data = new kendo.data.Query(data).filter(this._createFilter(view.startDate(), view.endDate())).toArray();
 
             view.render(data);
