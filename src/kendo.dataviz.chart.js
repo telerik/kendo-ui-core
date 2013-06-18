@@ -973,8 +973,6 @@ kendo_module({
         },
 
         _bindCategories: function() {
-            var now = new Date();
-
             var chart = this,
                 data = chart.dataSource.view() || [],
                 grouped = (chart.dataSource.group() || []).length > 0,
@@ -996,8 +994,6 @@ kendo_module({
                     chart._bindCategoryAxis(axis, categoriesData, axisIx);
                 }
             }
-
-            console.log("Binding categories took " + (new Date() - now) + " ms");
         },
 
         _bindCategoryAxis: function(axis, data, axisIx) {
@@ -1262,7 +1258,8 @@ kendo_module({
 
         bindPoint: function(series, pointIx) {
             var binder = this,
-                pointData = series.data[pointIx],
+                data = series.data,
+                pointData = data[pointIx],
                 fieldData,
                 fields = {},
                 srcValueFields,
@@ -2066,24 +2063,27 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 rounds = math.abs(delta),
-                from = options.min,
-                to = options.max,
+                range = axis.range(),
+                from = range.min,
+                to = range.max,
                 range,
                 step;
 
-            while (rounds--) {
-                range = dateDiff(from, to);
-                step = math.round(range * 0.1);
-                if (delta < 0) {
-                    from = addTicks(from, step);
-                    to = addTicks(to, -step);
-                } else {
-                    from = addTicks(from, -step);
-                    to = addTicks(to, step);
+            if (options.categories.length > 0) {
+                while (rounds--) {
+                    range = dateDiff(from, to);
+                    step = math.round(range * 0.1);
+                    if (delta < 0) {
+                        from = addTicks(from, step);
+                        to = addTicks(to, -step);
+                    } else {
+                        from = addTicks(from, -step);
+                        to = addTicks(to, step);
+                    }
                 }
-            }
 
-            return { min: from, max: to };
+                return { min: from, max: to };
+            }
         },
 
         defaultBaseUnit: function(options) {
@@ -2243,7 +2243,7 @@ kendo_module({
                 nextDate,
                 groups = [],
                 // TODO: Remove unused category map
-                categoryMap = axis.categoryMap = [],
+                categoryMap  = [],
                 categoryIndicies,
                 lastCategoryIndicies = [],
                 categoryIx,
@@ -2296,9 +2296,11 @@ kendo_module({
                 groups.pop();
             }
 
+            // TODO: Why override user set min and max?
             options.min = groups[0];
             options.max = round ? last(groups) : end;
-            options.sourceCategories = categories;
+
+            options.srcCategories = categories;
             options.categories = groups;
         },
 
@@ -2317,6 +2319,23 @@ kendo_module({
 
             labelOptions = deepExtend({ format: unitFormat }, labelOptions, { visible: visible });
             return new AxisDateLabel(date, index, dataItem, labelOptions);
+        },
+
+        // TODO: Test
+        categoryIndex: function(value, range) {
+            var axis = this,
+                options = axis.options,
+                categories = options.categories,
+                range = range || axis.range(),
+                index;
+
+            if ((value > range.max) || (value < range.min)) {
+                return -1;
+            }
+
+            index = lteDateIndex(categories, value);
+
+            return index;
         }
     });
 
@@ -6996,38 +7015,40 @@ kendo_module({
                 axisPane = plotArea.findPane(categoryAxis.options.pane);
 
                 if (inArray(axisPane, panes)) {
-                    var isDateAxis = equalsIgnoreCase(categoryAxis.options.type, DATE);
-
-                    if (isDateAxis || currentSeries.categoryField) {
+                    var dateAxis = equalsIgnoreCase(categoryAxis.options.type, DATE);
+                    if (dateAxis || currentSeries.categoryField) {
                         categories = categoryAxis.options.categories;
-                        var sourceCategories = categoryAxis.options.sourceCategories || categories;
+                        var srcCategories = categoryAxis.options.srcCategories || categories;
                         srcData = seriesClone.data;
                         seriesClone.data = data = [];
 
                         var categorySrcValues = [];
                         var categorySrcDataItems = [];
 
-                        for (i = 0; i < srcData.length; i++) {
-                            pointData = SeriesBinder.current.bindPoint(currentSeries, i);
-                            value = pointData.value;
+                        var rangeCache = categoryAxis.range();
 
-                            var category = pointData.fields.category || sourceCategories[i];
+                        for (i = 0; i < srcData.length; i++) {
+                            var category = getField(currentSeries.categoryField, srcData[i]) || srcCategories[i];
                             if (category) {
-                                if (isDateAxis) {
-                                    categoryIx = lteDateIndex(categories, category);
+                                if (dateAxis) {
+                                    categoryIx = categoryAxis.categoryIndex(category, rangeCache);
                                 } else {
                                     categoryIx = indexOf(category, categories);
                                 }
 
-                                srcValues = categorySrcValues[categoryIx] = categorySrcValues[categoryIx] || [];
-                                if (defined(value)) {
-                                    srcValues.push(pointData.value);
+                                if (categoryIx > -1) {
+                                    // TODO: Consider bindValue?
+                                    pointData = SeriesBinder.current.bindPoint(currentSeries, i);
+                                    value = pointData.value;
+
+                                    srcValues = categorySrcValues[categoryIx] =
+                                        categorySrcValues[categoryIx] || [];
+                                    srcValues.push(value);
+
+                                    srcDataItems = categorySrcDataItems[categoryIx] =
+                                        categorySrcDataItems[categoryIx] || [];
+                                    srcDataItems.push(currentSeries.data[i]);
                                 }
-
-                                srcDataItems = categorySrcDataItems[categoryIx] =
-                                    categorySrcDataItems[categoryIx] || [];
-
-                                srcDataItems.push(currentSeries.data[i]);
                             }
                         }
 
@@ -7044,8 +7065,7 @@ kendo_module({
 
             plotArea.srcSeries = series;
             plotArea.series = processedSeries;
-
-            console.log("Aggregating series took " + (new Date() - now) + " ms");
+            console.log("aggregateDateSeries " + (new Date() - now));
         },
 
         appendChart: function(chart, pane) {
@@ -8836,6 +8856,7 @@ kendo_module({
             }
         },
 
+        // TODO: Use categoryAxis.categoryIndex when ready
         _index: function(value) {
             var that = this,
                 categoryAxis = that.categoryAxis,
