@@ -3738,7 +3738,7 @@ kendo_module({
             this.skip = skip;
             this.midPageThreshold = skip + pageSize - 1;
             this.nextPageThreshold = skip + viewSize - 1;
-            this.prefetchThreshold = skip + pageSize - 1 - viewSize;
+            this.prefetchThreshold = skip + Math.floor(pageSize / 3 * 2);
             this.pullBackThreshold = this.offset - 1;
 
             this.nextMidRange = skip + pageSize - viewSize;
