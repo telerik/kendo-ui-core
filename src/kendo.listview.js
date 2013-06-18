@@ -297,7 +297,7 @@ kendo_module({
                 return current;
             }
 
-            if (current) {
+            if (current && current[0]) {
                 if (current[0].id === id) {
                     current.removeAttr("id");
                 }
