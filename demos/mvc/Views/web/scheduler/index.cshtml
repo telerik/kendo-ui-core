@@ -2,9 +2,9 @@
     <div class="demo-section">
         <span id="title">Team Members:</span>
         <ul id="people">
-            <li class="selected"><label for="alex"><span class="icon"></span><span class="text">Alex King</span></label><input checked type="checkbox" id="alex" value="1"></li>
-            <li class="selected"><label for="bob"><span class="icon"></span><span class="text">Bob Fuller</span></label><input checked type="checkbox" value="2" id="bob"></li>
-            <li><label for="charlie"><span class="icon"></span><span class="text">Charlie Mayer</span></label><input type="checkbox" value="3" id="charlie"></li>
+            <li class="selected"><label for="alex"><span class="icon"></span><span class="text"><input checked type="checkbox" id="alex" value="1">Alex King</span></label></li>
+            <li class="selected"><label for="bob"><span class="icon"></span><span class="text"><input checked type="checkbox" value="2" id="bob">Bob Fuller</span></label></li>
+            <li><label for="charlie"><span class="icon"></span><span class="text"><input type="checkbox" value="3" id="charlie">Charlie Mayer</span></label></li>
         </ul>
     </div>
     <div id="scheduler"></div>
@@ -13,7 +13,7 @@
 $(function() {
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
-        height: 400,
+        height: 600,
         views: ["day", "week", "month", "agenda"],
         dataSource: {
             batch: true,
@@ -51,7 +51,7 @@ $(function() {
                         end: { type: "date", from: "End" },
                         description: { from: "Description" },
                         recurrence: { from: "Recurrence" },
-                        ownerId: { from: "OwnerID" },
+                        ownerId: { from: "OwnerID", defaultValue: 1 },
                         isAllDay: { type: "boolean", from: "IsAllDay" }
                     }
                 }
@@ -106,7 +106,9 @@ $(function() {
 <style scoped>
 #title {
     display: inline-block;
-    padding-left: 50px;
+    padding-left: 25px;
+    vertical-align: middle;
+    margin-top: 14px;
 }
 #people {
     list-style:none;
@@ -117,16 +119,15 @@ $(function() {
 
 #people li {
     display: inline-block;
-    font-size: 14px;
+    font-size: 1em;
     position: relative;
+    text-transform: uppercase;
 }
 
 #people label {
-    position: relative;
-    width: 170px;
+    width: 180px;
     height: 50px;
     display: inline-block;
-    z-index: 1;
 }
 
 #people .icon {
@@ -137,16 +138,22 @@ $(function() {
     border: 3px solid;
     border-color: #ccc;
     position: absolute;
-    z-index: 1;
 }
 
 #people .text {
-    margin-top: 12px;
+    margin-top: 15px;
     display: inline-block;
     border-radius: 7px;
     margin-left: 45px;
-    padding: 5px 0px 5px 20px;
-    width: 100px;
+    padding: 3px 0px 3px 10px;
+    width: 120px;
+    vertical-align: middle;
+}
+
+#people .text input {
+    margin-top: 0;
+    margin-bottom: 2px;
+    vertical-align: middle;
 }
 
 #people label[for=alex] .icon {
@@ -186,12 +193,6 @@ $(function() {
 #people .selected label[for=charlie] .text {
     background: #35a964;
     color: #fff;
-}
-
-#people input {
-    position: absolute;
-    left: 20px;
-    top: 20px;
 }
 
 </style>
