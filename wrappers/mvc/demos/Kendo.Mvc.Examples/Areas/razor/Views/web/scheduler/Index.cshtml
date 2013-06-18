@@ -3,14 +3,17 @@
     .Events(e => e.Edit("onEdit"))
     .Resources(r =>
     {
-        r.Add(m => m.TaskID)
-            .Title("Color")
+        r.Add(m => m.OwnerID)
+            .Title("Owner")
             .Multiple(true)
             .DataTextField("Text")
             .DataValueField("Value")
             //.DataSource(d => d.Read("Attendies", "Scheduler"));
-            .BindTo(new[] { new { Text = "Generated text", Value = 1, color = "red" } });
-            
+            .BindTo(new[] { 
+                new { Text = "Alex", Value = 1, color = "red" } ,
+                new { Text = "Bob", Value = 1, color = "green" } ,
+                new { Text = "Charlie", Value = 1, color = "blue" } 
+            });    
     })
     //.BindTo(new List<Kendo.Mvc.Examples.Models.Scheduler.Task>() { 
     //    new Kendo.Mvc.Examples.Models.Scheduler.Task() {
