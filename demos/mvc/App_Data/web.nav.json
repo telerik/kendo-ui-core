@@ -984,6 +984,20 @@
             ]
         },
         {
+            "text": "Scheduler",
+            "name": "scheduler",
+            "documentation": "web/scheduler",
+            "spriteCssClass": "sliderIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "scheduler/index.html",
+                    "title": "Kendo jQuery Scheduler Control Demo",
+                    "meta": "This demo shows the basic functionality of Kendo UI Scheduler widget, included in Kendo UI Web framework."
+                }
+            ]
+        },
+        {
             "text": "Slider",
             "name": "slider",
             "documentation": "web/slider",

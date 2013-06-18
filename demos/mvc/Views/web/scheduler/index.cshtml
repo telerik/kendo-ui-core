@@ -1,0 +1,111 @@
+<div id="example" class="k-content">
+    <div class="k-header">
+        <ul id="people">
+            <li><label><input checked type="checkbox" value="1">Alex</label></li>
+            <li><label><input checked type="checkbox" value="2">Bob</label></li>
+            <li><label><input type="checkbox" value="3">Charlie</label></li>
+        </ul>
+    </div>
+    <div id="scheduler"></div>
+</div>
+<script>
+$(function() {
+    $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/13"),
+        height: 400,
+        views: ["day", "week", "month", "agenda"],
+        dataSource: {
+            batch: true,
+            transport: {
+                read: {
+                    url: "http://demos.kendoui.com/service/tasks",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: "http://demos.kendoui.com/service/tasks/update",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: "http://demos.kendoui.com/service/tasks/create",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: "http://demos.kendoui.com/service/tasks/destroy",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            schema: {
+                timezone: "Etc/UTC",
+                model: {
+                    id: "ID",
+                    fields: {
+                        ID: { type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        description: { from: "Description" },
+                        recurrence: { from: "Recurrence" },
+                        ownerId: { from: "OwnerID" },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            },
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "ownerId", operator: "eq", value: 1 },
+                    { field: "ownerId", operator: "eq", value: 2 }
+                ]
+            }
+        },
+        resources: [
+            {
+                field: "ownerId",
+                title: "Owner",
+                dataSource: [
+                    { text: "Alex", value: 1, color: "#ef701d" },
+                    { text: "Bob", value: 2, color: "#5fb1f7" },
+                    { text: "Charlie", value: 3, color: "#35a964" }
+                ]
+            }
+        ]
+    });
+
+    $("#people :checkbox").change(function(e) {
+        var checked = $.map($("#people :checked"), function(checkbox) {
+            return parseInt($(checkbox).val());
+        });
+
+        var filter = {
+            logic: "or",
+            filters: $.map(checked, function(value) {
+                return {
+                    operator: "eq",
+                    field: "ownerId",
+                    value: value
+                };
+            })
+        };
+
+        var scheduler = $("#scheduler").data("kendoScheduler");
+
+        scheduler.dataSource.filter(filter);
+    });
+});
+</script>
+<style scoped>
+#people {
+    list-style:none;
+    padding: 0;
+    margin: 0;
+}
+#people li {
+    display: inline-block;
+    font-size: 15px;
+}
+</style>
