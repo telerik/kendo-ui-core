@@ -347,7 +347,7 @@ kendo_module({
                     weekStart = weekStartDates[dateIdx];
                     eventDurationInDays = Math.ceil((event.end - event.start) / MS_PER_DAY);
 
-                    if (isInDateRange(weekStart, event.start, event.end) && eventDurationInDays > 1) {
+                    if (isInDateRange(weekStart, event.start, event.end) && eventDurationInDays >= 1) {
                         if (getDate(event.start).getTime() === getDate(weekStart).getTime()) {
                             if (event.tail) {
                                 event.tail = false;
