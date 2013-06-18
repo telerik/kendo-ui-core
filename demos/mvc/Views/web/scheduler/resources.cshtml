@@ -1,12 +1,4 @@
 <div id="example" class="k-content">
-    <div class="demo-section">
-        <span id="title">Team Members:</span>
-        <ul id="people">
-            <li class="selected"><label for="alex"><span class="icon"></span><span class="text"><input checked type="checkbox" id="alex" value="1">Alex King</span></label></li>
-            <li class="selected"><label for="bob"><span class="icon"></span><span class="text"><input checked type="checkbox" value="2" id="bob">Bob Fuller</span></label></li>
-            <li><label for="charlie"><span class="icon"></span><span class="text"><input type="checkbox" value="3" id="charlie">Charlie Mayer</span></label></li>
-        </ul>
-    </div>
     <div id="scheduler"></div>
 </div>
 <script>
@@ -20,19 +12,19 @@ $(function() {
             batch: true,
             transport: {
                 read: {
-                    url: "http://demos.kendoui.com/service/tasks",
+                    url: "http://demos.kendoui.com/service/meetings",
                     dataType: "jsonp"
                 },
                 update: {
-                    url: "http://demos.kendoui.com/service/tasks/update",
+                    url: "http://demos.kendoui.com/service/meetings/update",
                     dataType: "jsonp"
                 },
                 create: {
-                    url: "http://demos.kendoui.com/service/tasks/create",
+                    url: "http://demos.kendoui.com/service/meetings/create",
                     dataType: "jsonp"
                 },
                 destroy: {
-                    url: "http://demos.kendoui.com/service/tasks/destroy",
+                    url: "http://demos.kendoui.com/service/meetings/destroy",
                     dataType: "jsonp"
                 },
                 parameterMap: function(options, operation) {
@@ -51,28 +43,31 @@ $(function() {
                         end: { type: "date", from: "End" },
                         description: { from: "Description" },
                         recurrence: { from: "Recurrence" },
-                        ownerId: { from: "OwnerID", defaultValue: 1 },
+                        roomId: { from: "RoomID" },
+                        atendees: { from: "Atendees" },
                         isAllDay: { type: "boolean", from: "IsAllDay" }
                     }
                 }
-            },
-            filter: {
-                logic: "or",
-                filters: [
-                    { field: "ownerId", operator: "eq", value: 1 },
-                    { field: "ownerId", operator: "eq", value: 2 }
-                ]
             }
         },
         resources: [
             {
-                field: "ownerId",
-                title: "Owner",
+                field: "roomId",
+                dataSource: [
+                    { text: "Meeting Room 101", value: 1, color: "#1c9ec4" },
+                    { text: "Meeting Room 201", value: 2, color: "#ff7663" }
+                ],
+                title: "Room"
+            },
+            {
+                field: "atendees",
                 dataSource: [
                     { text: "Alex", value: 1, color: "#ef701d" },
                     { text: "Bob", value: 2, color: "#5fb1f7" },
                     { text: "Charlie", value: 3, color: "#35a964" }
-                ]
+                ],
+                multiple: true,
+                title: "Atendees"
             }
         ]
     });

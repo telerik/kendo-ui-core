@@ -33,6 +33,7 @@
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
         height: 400,
+        timezone: "Etc/UTC",
         dataBinding: scheduler_dataBinding,
         dataBound: scheduler_dataBound,
         save: scheduler_save,
@@ -65,7 +66,6 @@
                 }
             },
             schema: {
-                timezone: "Etc/UTC",
                 model: {
                     id: "ID",
                     fields: {
