@@ -629,7 +629,6 @@ kendo_module({
                 timeSlots = this.content.find("tr"),
                 allDaySlots = this.element.find(".k-scheduler-header-all-day td"),
                 allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
-                eventTimeFormat = options.eventTimeFormat,
                 event,
                 idx,
                 length;
@@ -647,7 +646,7 @@ kendo_module({
                 if (this._isInDateSlot(event)) {
                    var dateSlotIndex = this._dateSlotIndex(event.start),
                        endDateSlotIndex = this._dateSlotIndex(event.end),
-                       isOneDayEvent = !event.isAllDay && event.end.getTime() - event.start.getTime() < MS_PER_DAY,
+                       isOneDayEvent = !event.isAllDay && event.end.getTime() - event.start.getTime() < MS_PER_DAY && dateSlotIndex === endDateSlotIndex,
                        container = isOneDayEvent ? this.content : allDayEventContainer,
                        element = this._createEventElement(event, isOneDayEvent ? eventTemplate : allDayEventTemplate);
 
@@ -659,7 +658,7 @@ kendo_module({
                                dateSlotIndex = endDateSlotIndex;
                            }
 
-                           this._positionEvent(event, element, timeSlots, dateSlotIndex, eventTimeFormat);
+                           this._positionEvent(event, element, timeSlots, dateSlotIndex);
 
                            element.appendTo(container);
                        }
