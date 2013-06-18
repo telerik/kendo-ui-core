@@ -51,6 +51,34 @@
                equal(scheduler.wrapper[0], container);
            });
 
+           test("timezone is pass to the datasource", function() {
+               var scheduler = new Scheduler(container, { timezone: "UTC/Etc" });
+
+               equal(scheduler.dataSource.options.schema.timezone, "UTC/Etc");
+           });
+
+           test("timezone does not override the datasource if instance is provided", function() {
+               var scheduler = new Scheduler(container, {
+                   timezone: "UTC/Etc",
+                   dataSource: new kendo.data.SchedulerDataSource()
+               });
+
+               ok(!scheduler.dataSource.options.schema.timezone);
+           });
+
+           test("timezone overrides the datasource timezone", function() {
+               var scheduler = new Scheduler(container, {
+                   timezone: "UTC/Etc",
+                   dataSource: {
+                       schema: {
+                           timezone: "Europe/London"
+                       }
+                   }
+               });
+
+               equal(scheduler.dataSource.options.schema.timezone, "UTC/Etc");
+           });
+
            test("css classes are added to the wrapper", function() {
                var scheduler = new Scheduler(container);
 

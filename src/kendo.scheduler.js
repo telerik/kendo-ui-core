@@ -330,6 +330,7 @@ kendo_module({
             date: TODAY,
             editable: true,
             autoBind: true,
+            timezone: "",
             messages: {
                 today: "Today",
                 save: "Save",
@@ -873,6 +874,10 @@ kendo_module({
                 dataSource = options.dataSource;
 
             dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
+
+            if (options.timezone && !(dataSource instanceof SchedulerDataSource)) {
+                dataSource = extend(true, dataSource, { schema: { timezone: options.timezone } });
+            }
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource
