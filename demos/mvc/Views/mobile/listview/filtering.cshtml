@@ -17,19 +17,19 @@
     </div>
 </script>
 
-<script> 
+<script>
     function mobileListViewEndlessScrolling() {
         var dataSource = new kendo.data.DataSource({
             type: "odata",
             transport: {
                 read: {
-                    url: "http://demos.kendoui.com/service/Northwind.svc/Products"                    
+                    url: "http://demos.kendoui.com/service/Northwind.svc/Products"
                 }
             },
             sort: {
                 field: "ProductName",
                 dir: "desc"
-            },  
+            },
             serverPaging: true,
             serverFiltering: true,
             serverSorting: true,
