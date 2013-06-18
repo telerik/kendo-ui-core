@@ -367,6 +367,10 @@ kendo_module({
                 that.popup.destroy();
             }
 
+            if (that.view()) {
+                that.view().destroy();
+            }
+
             that._destroyEditable();
 
             element = that.element
