@@ -29,18 +29,6 @@ kendo_module({
         CHANGING = "changing",
         CURRENT_PAGE_CLASS = "km-current-page";
 
-    function cleanTree(element) {
-        var iter = document.createNodeIterator(element, NodeFilter.SHOW_TEXT, function(node) {
-                return node.parentNode == element ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-            }, false);
-
-        while (iter.nextNode()) {
-            if (iter.referenceNode && !iter.referenceNode.textContent.trim()) {
-                iter.referenceNode.parentNode.removeChild(iter.referenceNode);
-            }
-        }
-    }
-
     var ScrollView = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -49,7 +37,7 @@ kendo_module({
 
             element = that.element;
 
-            cleanTree(element[0]);
+            kendo.stripWhitespace(element[0]);
 
             element
                 .wrapInner("<div/>")
