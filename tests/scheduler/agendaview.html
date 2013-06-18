@@ -456,6 +456,24 @@
 
                 equal(taskCell.find(".k-i-refresh").length, 1);
             });
+
+            test("agenda renders refresh icon for event with recurrenceId", function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+                var event = new Event({
+                                start: new Date("2013/06/06 00:00"),
+                                end: new Date("2013/06/06 01:00"),
+                                title: "",
+                                recurrenceId: "1"
+                            });
+
+                agenda.render([ event ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var taskCell = table.find(".k-task");
+
+                equal(taskCell.find(".k-i-refresh").length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

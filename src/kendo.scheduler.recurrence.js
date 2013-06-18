@@ -705,7 +705,7 @@ kendo_module({
             eventEnd = new Date(start.getTime() + durationMS);
             events.push($.extend({}, event, {
                 uid: kendo.guid(),
-                recurrenceID: id,
+                recurrenceId: id,
                 start: new Date(start),
                 end: eventEnd
             }));

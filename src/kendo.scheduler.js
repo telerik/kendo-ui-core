@@ -564,8 +564,8 @@ kendo_module({
                 that._recurringDialog.destroy();
                 that._recurringDialog = null;
 
-                if (model.recurrenceID) {
-                    model = that.dataSource.get(model.recurrenceID);
+                if (model.recurrenceId) {
+                    model = that.dataSource.get(model.recurrenceId);
                 }
 
                 that._editEvent(model);

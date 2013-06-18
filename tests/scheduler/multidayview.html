@@ -1412,6 +1412,14 @@
                 equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
             });
 
+            test("refresh icon is shown if multiday event has recurrenceId", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), recurrenceId: "1" }]);
+
+                equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
