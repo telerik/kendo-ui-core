@@ -435,7 +435,7 @@ function pad(number, digits, end) {
 (function() {
     var dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
         standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
-        literalRegExp = /["'].*?["']/g,
+        literalRegExp = /(\\.)|(['][^']*[']?)|(["][^"]*["]?)/g,
         commaRegExp = /\,/g,
         EMPTY = "",
         POINT = ".",
@@ -771,6 +771,24 @@ function pad(number, digits, end) {
             number = -number;
         }
 
+        /*if (format.indexOf("'") > -1 || format.indexOf("\"") > -1) {
+            format = format.replace(literalRegExp, function(match) {
+                literals.push(match.substring(1, match.length - 1));
+                return PLACEHOLDER;
+            });
+        }*/
+
+        if (format.indexOf("'") > -1 || format.indexOf("\"") > -1 || format.indexOf("\\") > -1) {
+            format = format.replace(literalRegExp, function (match) {
+                var quoteChar = match.charAt(0).replace("\\", ""),
+                    literal = match.slice(1).replace(quoteChar, "");
+
+                literals.push(literal);
+
+                return PLACEHOLDER;
+            });
+        }
+
         format = format.split(";");
         if (negative && format[1]) {
             //get negative format
@@ -787,13 +805,6 @@ function pad(number, digits, end) {
             format = format[0];
         }
 
-        if (format.indexOf("'") > -1 || format.indexOf("\"") > -1) {
-            format = format.replace(literalRegExp, function(match) {
-                literals.push(match.substring(1, match.length - 1));
-                return PLACEHOLDER;
-            });
-        }
-
         percentIndex = format.indexOf("%");
         currencyIndex = format.indexOf("$");
 
@@ -802,11 +813,7 @@ function pad(number, digits, end) {
 
         //multiply number if the format has percent
         if (isPercent) {
-            if (format[percentIndex - 1] !== "\\") {
-                number *= 100;
-            } else {
-                format = format.split("\\").join("");
-            }
+            number *= 100;
         }
 
         if (isCurrency && format[currencyIndex - 1] === "\\") {
@@ -974,8 +981,9 @@ function pad(number, digits, end) {
                 number = value;
             }
 
-            if (literals[0]) {
-                length = literals.length;
+            length = literals.length;
+
+            if (length) {
                 for (idx = 0; idx < length; idx++) {
                     number = number.replace(PLACEHOLDER, literals[idx]);
                 }
