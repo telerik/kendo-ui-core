@@ -1909,10 +1909,6 @@ function pad(number, digits, end) {
         return result;
     }
 
-    function isNodeEmpty(element) {
-        return $.trim($(element).contents().filter(function () { return this.nodeType != 8; }).html()) === "";
-    }
-
     function getOffset(element, type, positioned) {
         if (!type) {
             type = "offset";
@@ -2234,7 +2230,6 @@ function pad(number, digits, end) {
         deepExtend: deepExtend,
         getComputedStyles: getComputedStyles,
         size: size,
-        isNodeEmpty: isNodeEmpty,
         getOffset: kendo.getOffset || getOffset,
         parseEffects: kendo.parseEffects || parseEffects,
         toggleClass: kendo.toggleClass || toggleClass,
@@ -2970,6 +2965,19 @@ function pad(number, digits, end) {
 
     kendo.jQuery = kendoJQuery;
     kendo.eventMap = eventMap;
+
+    kendo.stripWhitespace = function(element) {
+        var iterator = document.createNodeIterator(element, NodeFilter.SHOW_TEXT, function(node) {
+                return node.parentNode == element ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+            }, false);
+
+        while (iterator.nextNode()) {
+            if (iterator.referenceNode && !iterator.referenceNode.textContent.trim()) {
+                iterator.referenceNode.parentNode.removeChild(iterator.referenceNode);
+            }
+        }
+    };
+
 })(jQuery, eval);
 
 /*global kendo_module:true */
