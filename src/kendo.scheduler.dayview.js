@@ -623,8 +623,7 @@ kendo_module({
         },
 
         render: function(events) {
-            var options = this.options,
-                eventTemplate = this.eventTemplate,
+            var eventTemplate = this.eventTemplate,
                 allDayEventTemplate = this.allDayEventTemplate,
                 timeSlots = this.content.find("tr"),
                 allDaySlots = this.element.find(".k-scheduler-header-all-day td"),
