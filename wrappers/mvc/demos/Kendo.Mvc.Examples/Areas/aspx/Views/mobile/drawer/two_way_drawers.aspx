@@ -154,18 +154,29 @@
         .Render();
 %>
 
-<%: Html.Kendo().MobileDrawer()
+<% Html.Kendo().MobileDrawer()
        .Name("left-drawer")
        .Title("Communities")
        .HtmlAttributes(new { style = "width: 270px" })
        .Views("two-drawer-home")
-       .Header(obj =>
-           Html.Kendo().MobileNavBar()
-                .Content(navbar => navbar.ViewTitle(""))
-        )
+       .Header(() =>
+        {
+            %>
+            <%  
+            Html.Kendo().MobileNavBar()
+                 .Content(navbar =>
+                 {
+                    %>
+                    <%:navbar.ViewTitle("")%>
+                    <%
+                 })
+                 .Render();
+            %>
+            <%
+        })
         .Content(obj =>
             Html.Kendo().MobileListView()
-                .Items(items => 
+                .Items(items =>
                 {
                     items.Add().Icon("camera").Text("Nature Photography");
                     items.Add().Icon("camera").Text("Wildlife Photography");
@@ -183,6 +194,7 @@
                     items.Add().Icon("graph").Text("DataViz");
                 })
         )
+        .Render();
        
 %>
 
@@ -192,14 +204,25 @@
        .HtmlAttributes(new { style = "width: 80px" })
        .Views("two-drawer-home")
        .Position(MobileDrawerPosition.Right)
-       .Header(obj =>
-           Html.Kendo().MobileNavBar()
-                .Content(navbar => navbar.ViewTitle(""))
-        )
+       .Header(() =>
+        {
+            %>
+            <%  
+            Html.Kendo().MobileNavBar()
+                 .Content(navbar =>
+                 {
+                    %>
+                    <%:navbar.ViewTitle("")%>
+                    <%
+                 })
+                 .Render();
+            %>
+            <%
+        })
         .Content(() =>
         {
             %>
-            <img src="../../content/mobile/drawer/share.png" width="100%"/>
+            <img src="<%:Url.Content("~/content/mobile/shared/share.png")%>" width="100%"/>
             <%
         })
         .Render();      

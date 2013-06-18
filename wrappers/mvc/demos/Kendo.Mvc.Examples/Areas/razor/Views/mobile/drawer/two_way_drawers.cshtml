@@ -135,7 +135,10 @@
        .Views("two-drawer-home")
        .Header(obj =>
            Html.Kendo().MobileNavBar()
-                .Content(navbar => navbar.ViewTitle(""))
+                .Content(navbar => 
+                    @<text>
+                        @navbar.ViewTitle("")
+                    </text>)
         )
         .Content(obj =>
             Html.Kendo().MobileListView()
@@ -167,11 +170,14 @@
        .Position(MobileDrawerPosition.Right)
        .Header(obj =>
            Html.Kendo().MobileNavBar()
-                .Content(navbar => navbar.ViewTitle(""))
+                .Content(navbar => 
+                    @<text>
+                        @navbar.ViewTitle("")
+                    </text>)
         )
         .Content(
             @<text>
-                <img src="../../content/mobile/drawer/share.png" width="100%"/>
+                <img src="@Url.Content("~/content/mobile/shared/share.png")" width="100%"/>
             </text>
         )
 )
