@@ -467,12 +467,6 @@
                 equal(rebindStub.calls("rebind"), 1);
             });
 
-            test("create recurrence dialog", function() {
-                var scheduler = new Scheduler(container);
-
-                ok(scheduler._recurringDialog);
-                ok(!scheduler._recurringDialog.element.is(":visible"));
-            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

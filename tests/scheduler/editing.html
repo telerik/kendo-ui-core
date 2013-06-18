@@ -496,6 +496,7 @@
                 var eventUID = scheduler.element.find(".k-event:last").data("uid");
                 scheduler.editEvent(eventUID);
 
+                ok(scheduler._recurringDialog);
                 ok(scheduler._recurringDialog.element.is(":visible"));
             });
 
@@ -518,7 +519,7 @@
                 //edit current instance
                 scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
 
-                ok(!scheduler._recurringDialog.element.is(":visible"));
+                equal(scheduler._recurringDialog, null);
             });
 
             test("create exception", function() {

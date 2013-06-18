@@ -326,8 +326,6 @@ kendo_module({
 
             that._toolbar();
 
-            that._createRecurringDialog();
-
             that._dataSource();
 
             that._resources();
@@ -519,28 +517,42 @@ kendo_module({
 
         editEvent: function(uid) {
             var that = this,
-                model = typeof uid == "string" ? that.dataSource.getByUid(uid) : uid,
-                container;
+                model = typeof uid == "string" ? that.dataSource.getByUid(uid) : uid;
 
             that.cancelEvent();
 
             if (!model) {
                 model = getOccurrenceByUid(that._data, uid);
                 if (model) {
-                    that._openRecurringDialog(model, true);
+                    that._createRecurringDialog(model, true);
                 }
             } else if (model.recurrence) {
-                that._openRecurringDialog(model);
+                that._createRecurringDialog(model);
             } else {
                 that._editEvent(model);
             }
         },
 
-        _openRecurringDialog: function(model, createException) {
-            var that = this;
+        _createRecurringDialog: function(model, createException) {
+            var that = this,
+                wnd = $('<div><button>Edit current occurrence</button><button>Edit the series</button></div>').appendTo(that.wrapper),
+                buttons = wnd.find("button");
 
-            that._editOccurrenceButton.off("click").on("click", function() {
-                that._recurringDialog.close();
+            that._editOccurrenceButton = buttons.eq(0);
+            that._editSeriesButton = buttons.eq(1);
+
+            that._recurringDialog = wnd.kendoWindow({
+                modal: true,
+                resizable: false,
+                draggable: true,
+                title: "Edit Recurring Item",
+                visible: false
+            }).data("kendoWindow");
+
+            buttons.eq(0).on("click", function() {
+                that._recurringDialog.destroy();
+                that._recurringDialog = null;
+
                 if (createException) {
                     that.addEvent(model);
                 } else {
@@ -548,8 +560,9 @@ kendo_module({
                 }
             });
 
-            that._editSeriesButton.off("click").on("click", function() {
-                that._recurringDialog.close();
+            buttons.eq(1).on("click", function() {
+                that._recurringDialog.destroy();
+                that._recurringDialog = null;
 
                 if (model.recurrenceID) {
                     model = that.dataSource.get(model.recurrenceID);
@@ -558,7 +571,6 @@ kendo_module({
                 that._editEvent(model);
             });
 
-            console.log("open");
             that._recurringDialog.center().open();
         },
 
@@ -1092,23 +1104,6 @@ kendo_module({
             }
 
             that.popup.open();
-        },
-
-        _createRecurringDialog: function() {
-            var that = this,
-                wnd = $('<div><button>Edit current occurrence</button><button>Edit the series</button></div>').appendTo(that.wrapper),
-                buttons = wnd.find("button");
-
-            that._editOccurrenceButton = buttons.eq(0);
-            that._editSeriesButton = buttons.eq(1);
-
-            that._recurringDialog = new kendo.ui.Window(wnd, {
-                modal: true,
-                resizable: false,
-                draggable: true,
-                title: "Edit Recurring Item",
-                visible: false
-            });
         },
 
         _expandEvents: function(data, view) {
