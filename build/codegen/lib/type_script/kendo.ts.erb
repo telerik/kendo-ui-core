@@ -338,6 +338,9 @@ module kendo.data {
     declare var binders: Object;
 
     class Binder extends Class {
+        static fn: Binder;
+        static extend(prototype: Object): Binder;
+
         element: Element;
         bindings: { [key: string]: Binding; };
         constructor(element: Element, bindings: { [key: string]: Binding; }, options?: any);
