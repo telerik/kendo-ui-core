@@ -3674,7 +3674,7 @@ kendo_module({
 
        this.current(currentTarget);
 
-       if (isHeader || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
+       if (isHeader || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input,.k-multiselect-wrap")) {
            setTimeout(function() {
                //DOMElement.focus() only for header, because IE doesn't really focus the table
                focusTable(currentTable, true);
