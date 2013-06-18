@@ -240,12 +240,9 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Grouping", {
-                    setup: function() {
-                    }
-                });
+                module("Date CategoryAxis / categoryIndex");
 
-                test("categoryMap for aggregated categories", function() {
+                test("category indicies for aggregated categories", function() {
                     createDateCategoryAxis({
                         baseUnit: "months",
                         categories: [
@@ -253,52 +250,70 @@
                         ]
                     });
 
-                    deepEqual(dateAxis.categoryMap, [[0, 1]]);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/01")), 0);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/03")), 0);
                 });
 
-                test("categoryMap for duplicate categories", function() {
-                    createDateCategoryAxis({
-                        baseUnit: "days",
-                        categories: [
-                            new Date("2012/02/01"), new Date("2012/02/01"),
-                            new Date("2012/02/02")
-                        ]
-                    });
-
-                    deepEqual(dateAxis.categoryMap, [[0, 1], [2]]);
-                });
-
-                test("categoryMap for sparse categories", function() {
+                test("category indicies for sparse categories", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01"), new Date("2012/02/03")
                         ]
                     });
 
-                    deepEqual(dateAxis.categoryMap, [[0], [], [1]]);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/01")), 0);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/03")), 2);
                 });
 
-                test("categoryMap when rounding is disabled", function() {
+                test("category indicies when rounding is disabled", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012/02/01 21:00:00"), new Date("2012/02/05 03:00:00")
+                            new Date("2012/02/01 21:00:00"), new Date("2012/02/03 03:00:00")
                         ],
                         roundToBaseUnit: false
                     });
 
-                    deepEqual(dateAxis.categoryMap, [[0], [], [], [], [1]]);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/01 21:00:00")), 0);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/02 00:00:00")), 1);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/03 03:00:00")), 2);
                 });
 
-                test("categoryMap when rounding is disabled (justified)", function() {
+                test("category indicies when rounding is disabled and not applicable", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012/02/01 21:00:00"), new Date("2012/02/05 03:00:00")
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ],
+                        roundToBaseUnit: false
+                    });
+
+                    equal(dateAxis.categoryIndex(new Date("2012/02/01")), 0);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/03")), 2);
+                });
+
+                test("category indicies when rounding is disabled (justified)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 21:00:00"), new Date("2012/02/03 03:00:00")
                         ],
                         roundToBaseUnit: false,
                         justified: true
                     });
 
-                    deepEqual(dateAxis.categoryMap, [[0], [], [], [], [], [1]]);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/01 21:00:00")), 0);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/03 03:00:00")), 3);
+                });
+
+                test("category indicies when rounding is disabled and not applicable (justified)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    equal(dateAxis.categoryIndex(new Date("2012/02/01")), 0);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/03")), 2);
                 });
 
                 // ------------------------------------------------------------
@@ -310,36 +325,6 @@
                             ]
                         });
                     }
-                });
-
-                test("Min equals first category by default", function() {
-                    deepEqual(dateAxis.options.min, categories[0]);
-                });
-
-                test("Max equals last category by default", function() {
-                    deepEqual(dateAxis.options.max, categories[categories.length - 1]);
-                });
-
-                test("User set min value is trimmed to base unit", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/05"), new Date("2012/02/10")
-                        ],
-                        min: new Date("2012/02/01 14:00")
-                    });
-
-                    deepEqual(dateAxis.options.min, new Date("2012/02/01"));
-                });
-
-                test("User set max value is trimmed to base unit", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/05"), new Date("2012/02/10")
-                        ],
-                        max: new Date("2012/02/15 14:00")
-                    });
-
-                    deepEqual(dateAxis.options.max, new Date("2012/02/15"));
                 });
 
                 test("User set min value smaller than first category is applied", function() {

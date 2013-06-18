@@ -1889,6 +1889,7 @@ kendo_module({
             return slotBox;
         },
 
+        // TODO: Rename to pointIndex to match categoryIndex
         getCategoryIndex: function(point) {
             var axis = this,
                 options = axis.options,
@@ -1941,6 +1942,7 @@ kendo_module({
             return categoryIx;
         },
 
+        // TODO: Rename to pointCategory
         getCategory: function(point) {
             var index = this.getCategoryIndex(point);
 
@@ -2132,6 +2134,7 @@ kendo_module({
             var categories = toDate(options.categories),
                 autoUnit = options.baseUnit === FIT,
                 baseUnit = autoUnit ? BASE_UNITS[0] : options.baseUnit,
+                baseUnitStep = options.baseUnitStep || 1,
                 min = toTime(options.min),
                 max = toTime(options.max),
                 categoryLimits = sparseArrayLimits(categories),
@@ -2140,7 +2143,7 @@ kendo_module({
 
             if (options.roundToBaseUnit) {
                 return { min: addDuration(min || minCategory, 0, baseUnit, options.weekStartDay),
-                         max: addDuration(max || maxCategory, 1, baseUnit, options.weekStartDay) };
+                         max: addDuration(max || maxCategory, baseUnitStep, baseUnit, options.weekStartDay) };
             } else {
                 return { min: toDate(min || minCategory),
                          max: toDate(max || maxCategory) };
@@ -2149,7 +2152,7 @@ kendo_module({
 
         autoBaseUnit: function(options) {
             var axis = this,
-                range = axis.range(options),
+                range = axis.range(deepExtend({}, options, { baseUnitStep: 1 })),
                 autoUnit = options.baseUnit === FIT,
                 autoUnitIx = 0,
                 baseUnit = autoUnit ? BASE_UNITS[autoUnitIx++] : options.baseUnit,
@@ -2233,72 +2236,28 @@ kendo_module({
 
         groupCategories: function(options) {
             var axis = this,
-                categories = sortDates(toDate(options.categories)),
+                categories = options.categories,
+                maxCategory = toDate(sparseArrayMax(toDate(categories))),
                 baseUnit = options.baseUnit,
                 baseUnitStep = options.baseUnitStep || 1,
                 range = axis.range(options),
-                round = options.roundToBaseUnit,
-                end,
+                max = range.max,
                 date,
                 nextDate,
-                groups = [],
-                // TODO: Remove unused category map
-                categoryMap  = [],
-                categoryIndicies,
-                lastCategoryIndicies = [],
-                categoryIx,
-                categoryDate;
+                groups = [];
 
-            end = round ?
-                addDuration(range.max, baseUnitStep - 1, baseUnit, options.weekStartDay) :
-                range.max;
-
-            if (dateEquals(range.min, range.max)) {
-                end = toDate(toTime(end) + 1);
-            }
-
-            for (date = range.min; date < end; date = nextDate) {
-                nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
-
+            for (date = range.min; date < max; date = nextDate) {
                 groups.push(date);
-                categoryIndicies = [];
 
-                for (categoryIx = lteDateIndex(categories, date);
-                     categoryIx < categories.length; categoryIx++) {
-
-                    categoryDate = categories[categoryIx];
-                    if (categoryDate && categoryDate >= date) {
-                        if (categoryDate < nextDate) {
-                            if (options.justified && dateEquals(categoryDate, end)) {
-                                lastCategoryIndicies.push(categoryIx);
-                            } else {
-                                categoryIndicies.push(categoryIx);
-                            }
-                        } else if (!round && dateEquals(nextDate, end)) {
-                            lastCategoryIndicies.push(categoryIx);
-                        } else {
-                            break;
-                        }
-                    }
+                nextDate = addDuration(date, baseUnitStep, baseUnit, options.weekStartDay);
+                if (nextDate > maxCategory && !options.max) {
+                    break;
                 }
-
-                categoryMap.push(categoryIndicies);
             }
 
-            if (lastCategoryIndicies.length) {
-                groups.push(end);
-                categoryMap.push(lastCategoryIndicies);
+            if (!options.roundToBaseUnit && !dateEquals(last(groups), max)) {
+                groups.push(max);
             }
-
-            if (!options.max && (last(categoryMap) || []).length === 0) {
-                // Drop the last group if the user has not requested it
-                categoryMap.pop();
-                groups.pop();
-            }
-
-            // TODO: Why override user set min and max?
-            options.min = groups[0];
-            options.max = round ? last(groups) : end;
 
             options.srcCategories = categories;
             options.categories = groups;
@@ -2321,12 +2280,13 @@ kendo_module({
             return new AxisDateLabel(date, index, dataItem, labelOptions);
         },
 
-        // TODO: Test
         categoryIndex: function(value, range) {
             var axis = this,
                 options = axis.options,
                 categories = options.categories,
+                maxIndex = categories.length - 1,
                 range = range || axis.range(),
+                roundedValue,
                 index;
 
             if ((value > range.max) || (value < range.min)) {
@@ -2334,6 +2294,12 @@ kendo_module({
             }
 
             index = lteDateIndex(categories, value);
+            if (index === maxIndex && !options.justified && !options.roundToBaseUnit) {
+                roundedValue = addDuration(value, 0, options.baseUnit, options.startOfWeek);
+                if (!dateEquals(roundedValue, value)) {
+                    index--;
+                }
+            }
 
             return index;
         }
@@ -6998,8 +6964,7 @@ kendo_module({
         },
 
         aggregateDateSeries: function(panes) {
-            var now = new Date();
-
+            //var now = new Date();
             var plotArea = this,
                 series = plotArea.srcSeries || plotArea.series,
                 processedSeries = [],
@@ -7065,7 +7030,7 @@ kendo_module({
 
             plotArea.srcSeries = series;
             plotArea.series = processedSeries;
-            console.log("aggregateDateSeries " + (new Date() - now));
+            //console.log("aggregateDateSeries " + (new Date() - now));
         },
 
         appendChart: function(chart, pane) {
