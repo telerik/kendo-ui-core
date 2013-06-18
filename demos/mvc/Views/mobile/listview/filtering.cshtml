@@ -33,7 +33,7 @@
             serverPaging: true,
             serverFiltering: true,
             serverSorting: true,
-            pageSize: 20
+            pageSize: 30
         });
 
         $("#endless-scrolling").kendoMobileListView({
@@ -43,7 +43,6 @@
                 field: "ProductName",
                 operator: "startswith"
             },
-            scrollThreshold: 30, //threshold in pixels
             endlessScroll: true
         });
     }
