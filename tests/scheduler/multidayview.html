@@ -24,8 +24,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             var MultiDayView = kendo.ui.MultiDayView,
-                container,
-                rightOffset = 30;
+                container;
 
             var MyDayView = MultiDayView.extend({
                 init: function(element, options) {
@@ -49,6 +48,10 @@
 
             function applyDefaultLeftOffset(value) {
                 return value + 2;
+            }
+
+            function applySlotDefaultRightOffset(value, cell) {
+                return Math.round(value - cell.width() * 0.05);
             }
 
             function applyDefaultRightOffset(value) {
@@ -428,7 +431,8 @@
                     events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
 
                 view.render(events);
-                equal(view.content.find("div.k-event").width(), view.content.find("td:eq(10)").width() - 4 - rightOffset);
+                var slot = view.content.find("td:eq(10)");
+                equal(view.content.find("div.k-event").width(), applySlotDefaultRightOffset(slot.width() - 4, slot));
             });
 
             test("multiple day events are added to all day slot", function() {
@@ -729,10 +733,10 @@
                 equalWithRound(eventElements.first().offset().top, slot.offset().top);
                 equalWithRound(eventElements.first().offset().left, applyDefaultLeftOffset(slot.offset().left));
                 equalWithRound(eventElements.first().height(), slotHeight(view.content.find("table"), 4));
-                equalWithRound(eventElements.first().width(), (slot.width() - 8 - rightOffset) / 2);
+                equalWithRound(eventElements.first().width(), applySlotDefaultRightOffset(slot.width() - 8, slot) / 2);
                 equalWithRound(eventElements.last().offset().top, slot.offset().top);
                 equalWithRound(eventElements.last().height(), slotHeight(view.content.find("table"), 4));
-                equalWithRound(eventElements.last().width(), Math.floor((slot.width() - 8 - rightOffset) / 2));
+                equalWithRound(eventElements.last().width(), Math.floor(applySlotDefaultRightOffset(slot.width() - 8, slot) / 2));
             });
 
             test("events with same start time - does not move events from other date slots", function() {
@@ -842,7 +846,7 @@
                 var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
 
                 equalWithRound(eventElements.first().offset().top, firstTimeSlot.offset().top);
-                equalWithRound(eventElements.first().width(), (firstTimeSlot.width() - 12 - rightOffset) / 3);
+                equalWithRound(eventElements.first().width(), applySlotDefaultRightOffset(firstTimeSlot.width() - 12, firstTimeSlot) / 3);
                 equalWithRound(eventElements.eq(1).offset().left, applyDefaultLeftOffset(firstTimeSlot.offset().left) + eventElements.first().width() + 4);
                 equalWithRound(eventElements.last().offset().top, secondTimeSlot.offset().top);
                 equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left) + eventElements.first().width() + 4);

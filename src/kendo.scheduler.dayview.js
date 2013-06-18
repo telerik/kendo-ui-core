@@ -500,7 +500,8 @@ kendo_module({
 
         _arrangeColumns: function(element, dateSlotIndex, dateSlot) {
             var columns,
-                eventRightOffset = 30,
+                slotWidth = dateSlot.width(),
+                eventRightOffset = slotWidth * 0.05,
                 columnEvents,
                 blockRange = SchedulerView.rangeIndex(element),
                 eventElements = this.content.children(".k-event[" + kendo.attr("slot-idx") + "=" + dateSlotIndex + "]"),
@@ -508,7 +509,7 @@ kendo_module({
 
             columns = SchedulerView.createColumns(slotEvents);
 
-            var columnWidth = (dateSlot.width() - eventRightOffset) / columns.length;
+            var columnWidth = (slotWidth - eventRightOffset) / columns.length;
 
             for (var idx = 0, length = columns.length; idx < length; idx++) {
                 columnEvents = columns[idx].events;
