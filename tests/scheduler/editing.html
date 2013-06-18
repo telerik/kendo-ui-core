@@ -592,7 +592,7 @@
                 exception = scheduler.dataSource.at(1);
 
                 ok(origin.exception);
-                equal(origin.exception, kendo.toString(exception.start, "yyyyMMddTHHmmssZ") + ";");
+                equal(origin.exception, kendo.toString(kendo.timezone.apply(exception.start, 0), "yyyyMMddTHHmmssZ") + ";");
             });
 
             test("creating exception adds exception date to event exception property", function() {
@@ -616,8 +616,8 @@
                 scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
                 scheduler._editContainer.find("a.k-scheduler-update").click();
 
-                var result = kendo.toString(scheduler.dataSource.at(1).start, "yyyyMMddTHHmmssZ") + ";" +
-                             kendo.toString(scheduler.dataSource.at(2).start, "yyyyMMddTHHmmssZ") + ";";
+                var result = kendo.toString(kendo.timezone.apply(scheduler.dataSource.at(1).start, 0), "yyyyMMddTHHmmssZ") + ";" +
+                             kendo.toString(kendo.timezone.apply(scheduler.dataSource.at(2).start, 0), "yyyyMMddTHHmmssZ") + ";";
 
                 equal(origin.exception, result);
             });

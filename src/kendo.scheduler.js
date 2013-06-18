@@ -740,7 +740,7 @@ kendo_module({
             var exception = model.exception || "";
 
             if (!recurrence.exceptionExists(exception, date)) {
-                //TODO: make it UTC before add to exception!
+                date = kendo.timezone.apply(date, 0);
                 exception += kendo.toString(date, RECURRENCE_DATE_FORMAT) + ";";
 
                 model.set("exception", exception);
