@@ -25,54 +25,19 @@
         <div id="qrMixingModes"></div>
         <div id="qrMail"></div>
         <script>     
-            var start = new Date().getTime();
-            //check if other readers can decode larger or the problem is in the code or rendering
-            $("#qrVersionGreaterThan7").kendoQRCode({
-                value: new Array(220).join("a"),
-                errorCorrectionLevel: "L",
-                size: 300
-            });
+            var start = new Date().getTime();            
             
             var value = "";
-            for(var i = 0; i < 200; i++){
-                value+= i;
+            for(var i = 0; i < 2000 ; i++){
+                value+=  i % 2 == 0? "A":"1";
             }
             $("#qrUrl").kendoQRCode({
-                value: "http://demos.kendoui.com/web/overview/index.html",
-                errorCorrectionLevel: "L",
-                size: 300,
-                darkModuleColor: "red",
-                background: "yellow"
-            });
-            
-            $("#qrAlpha").kendoQRCode({
-                value: new Array(200).join("B"),
-                errorCorrectionLevel: "L",
-                size: 300
-            });
-            
-            $("#qrNumeric").kendoQRCode({
                 value: value,
                 errorCorrectionLevel: "L",
-                size: 300,
-                darkModuleColor: "red",
-                border: {
-                    color: "red",
-                    width: 15
-                }
-            });
-            // 
-            $("#qrMixingModes").kendoQRCode({
-                value: new Array(15).join("A") + new Array(20).join("2") + new Array(20).join("b"),
-                errorCorrectionLevel: "H",
-                size: 300
+                size: 700
             });
             
-            $("#qrMail").kendoQRCode({
-                value: "mailto:clientservice@kendoui.com",
-                errorCorrectionLevel: "L",
-                size: 300
-            });
+
             //alert("rendering took: " + (new Date().getTime() - start) + " miliseconds");
         </script>
     </body>

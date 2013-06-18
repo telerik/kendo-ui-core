@@ -41,8 +41,8 @@ kendo_module({
             function(row,column){return (((row + column) % 2) + ((row * column) % 3)) % 2 == 0}
         ],
         numberRegex = /^\d+/,
-        alphaPattern = "A-Z0-9\\s$%*+-./:",
-        alphaExclusiveSet = "A-Z\\s$%*+-./:",
+        alphaPattern = "A-Z0-9\\s$%*+./:-",
+        alphaExclusiveSet = "A-Z\\s$%*+./:-",
         alphaRegex = new RegExp("^[" + alphaExclusiveSet + "]+"),
         alphaNumericRegex = new RegExp("^[" + alphaPattern+ "]+"),
         byteRegex = new RegExp("^[^" + alphaPattern+ "]+"),
@@ -339,7 +339,7 @@ kendo_module({
                 generatorPolynomial = new Array(result.length - generator.length).concat(generator),
                 steps = data.length,
                 divisor,
-                errorCodewords = [];
+                errorCodewords = [];debugger;
             for(var i = 0; i < steps; i++){
                 divisor = multiplyByConstant(generatorPolynomial, powersOfTwo[result[result.length - 1]]);
                 generatorPolynomial.splice(0,1);
@@ -488,10 +488,18 @@ kendo_module({
             
             return dataString;
         }
-
+        
+        //fix case all zeros
         var encodeFormatInformation = function (format){       
-            var encodedString = encodeBCH(toDecimal(format), formatGeneratorPolynomial, 15),
+            var formatNumber = toDecimal(format),
+                encodedString,
                 result = "";
+            if(formatNumber == 0){
+                return "101010000010010";
+            }
+            else{
+                encodedString = encodeBCH(toDecimal(format), formatGeneratorPolynomial, 15)
+            }
             for(var i = 0; i < encodedString.length; i++){
                 result += encodedString.charAt(i) ^ formatMaskPattern.charAt(i);
             }
@@ -853,7 +861,7 @@ kendo_module({
             _addMatrix: function(matrix, size){
                 var that = this,
                     view = that.view,
-                    baseUnit = size / (2 * QUIET_ZONE_LENGTH + matrix.length),
+                    baseUnit = Math.floor(size / (2 * QUIET_ZONE_LENGTH + matrix.length)),
                     y,
                     x1,
                     x2,
