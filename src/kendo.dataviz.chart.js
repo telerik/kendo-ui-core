@@ -2010,6 +2010,7 @@ kendo_module({
             options = deepExtend({
                 roundToBaseUnit: true
             }, options, {
+                categories: toDate(options.categories),
                 min: toDate(options.min),
                 max: toDate(options.max)
             });
@@ -2099,7 +2100,7 @@ kendo_module({
                 unit;
 
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
-                cat = toDate(categories[categoryIx]);
+                cat = categories[categoryIx];
 
                 if (cat && lastCat) {
                     diff = dateDiff(cat, lastCat);
@@ -2131,7 +2132,7 @@ kendo_module({
         range: function(options) {
             options = options || this.options;
 
-            var categories = toDate(options.categories),
+            var categories = options.categories,
                 autoUnit = options.baseUnit === FIT,
                 baseUnit = autoUnit ? BASE_UNITS[0] : options.baseUnit,
                 baseUnitStep = options.baseUnitStep || 1,
@@ -2237,7 +2238,7 @@ kendo_module({
         groupCategories: function(options) {
             var axis = this,
                 categories = options.categories,
-                maxCategory = toDate(sparseArrayMax(toDate(categories))),
+                maxCategory = toDate(sparseArrayMax(categories)),
                 baseUnit = options.baseUnit,
                 baseUnitStep = options.baseUnitStep || 1,
                 range = axis.range(options),
@@ -2290,7 +2291,6 @@ kendo_module({
                 index;
 
             value = toDate(value);
-
             if ((value > range.max) || (value < range.min)) {
                 return -1;
             }
