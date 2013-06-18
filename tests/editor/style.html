@@ -5,61 +5,109 @@
 <title>kendo.ui.Editor Tests</title>
 
     <script src="../jquery-loader.js"></script>
-        <script src="test-scripts.js"></script>
+    <script src="test-scripts.js"></script>
 
-<style> html { font-size: 12px; } </style>
+    <style>
+        html { font-size: 12px; }
+
+        .foo {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
     <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
+    <div contentEditable id="inline"></div>
+
     <script>
 
-    var StyleCommand,
-        Dom;
-
-    $("#Editor1").kendoEditor({
-        tools: [
-            { name: "style", items: [
-                { text: "foo", value: "bar" }
-            ] }
-        ],
-        stylesheets: [
-            "editorStyles.css"
-        ]
-    });
-
-    module("Style", {
-        setup: function() {
-            editor = getEditor();
-            $('.k-style').closest('.k-widget').find('.k-input').click();
-            StyleCommand = kendo.ui.editor.StyleCommand;
+        var StyleCommand = kendo.ui.editor.StyleCommand,
             Dom = kendo.ui.editor.Dom;
+
+        var editor = $("#Editor1").kendoEditor({
+                tools: [
+                    { name: "style", items: [
+                        { text: "foo", value: "bar" }
+                    ] }
+                ],
+                stylesheets: [
+                    "editorStyles.css"
+                ]
+            }).data("kendoEditor");
+
+        var inline = $('#inline').appendTo("body")
+            .kendoEditor({
+                tools: [
+                    { name: "style", items: [
+                        { text: "foo", value: "foo" }
+                    ] }
+                ]
+            })
+            .data("kendoEditor");
+
+
+        module("Style");
+
+        test("exec applies css class to inline element", function() {
+            var range = createRangeFromText(editor, '<span>|foo|</span>');
+            editor.selectRange(range);
+            editor.exec("style", {value:"bar"});
+            equal(editor.value(), '<span class="bar">foo</span>');
+        });
+
+        function styleTool(editor) {
+            return editor.toolbar.items().filter(".k-style").data("kendoSelectBox");
         }
-    });
 
-    test('exec applies css class to inline element', function() {
-        var range = createRangeFromText(editor, '<span>|foo|</span>');
-        editor.selectRange(range);
-        editor.exec('style', {value:'bar'});
-        equal(editor.value(), '<span class="bar">foo</span>');
-    });
+        function styleInput(editor) {
+            return styleTool(editor).wrapper.find(".k-input");
+        }
 
+        test("tool displays styles initially", function() {
+            editor.focus();
+            editor.value("");
+            editor.trigger("select");
+            equal(styleInput(editor).text(), "Styles");
+        });
 
-    test('tool displays styles initially', function() {
-        editor.focus();
-        editor.value('');
-        editor.trigger('select');
-        equal($('.k-style').closest('.k-widget').find('.k-input').text(), 'Styles');
-    });
+        test("tool displays known values", function() {
+            styleInput(editor).click();
+            editor.focus();
+            var range = createRangeFromText(editor, '<span class="bar">|foo|</span>');
+            editor.selectRange(range);
+            editor.trigger("select");
+            equal(styleInput(editor).text(), "foo");
+        });
 
-    test('tool displays known values', function() {
-        editor.focus();
-        var range = createRangeFromText(editor, '<span class="bar">|foo|</span>');
-        editor.selectRange(range);
-        editor.trigger('select');
-        equal($('.k-style').closest('.k-widget').find('.k-input').text(), 'foo');
-    });
+        test("tool selects know values for inline editor", function() {
+            var range = createRangeFromText(inline, '<p class="foo">f||oo</p>');
+            inline.selectRange(range);
+            inline.trigger("select");
+
+            equal(inline.toolbar.items().filter(".k-style").val(), "foo");
+        });
+
+        function propertyFrom(className, property) {
+            var element = $("<b class='foo' />").appendTo("body");
+            var result = element.css("color");
+
+            element.remove();
+
+            return result;
+        }
+
+        test("tool items are styled for inline editor", function() {
+            var range = createRangeFromText(inline, '<p class="foo">f||oo</p>');
+            inline.selectRange(range);
+            inline.trigger("select");
+
+            var popup = styleTool(inline).popup.element;
+
+            equal(popup.find(".k-item span").length, 1);
+            equal(popup.find(".k-item span").css("color"), propertyFrom("foo", "color"));
+        });
 
     </script>
 

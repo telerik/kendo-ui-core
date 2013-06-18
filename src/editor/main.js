@@ -721,6 +721,9 @@ kendo_module({
                 editor.window = window;
                 editor.document = document;
                 editor.body = editor.element[0];
+
+                var styleTools = editor.toolbar.items().filter(".k-style");
+                styleTools.kendoSelectBox("decorateItems", editor.document);
             }
 
             try {
