@@ -650,6 +650,39 @@ kendo_module({
         return origin.slice(0, skip ? idx - 1 : idx).concat(list).concat(origin.slice(idx));
     }
 
+    function parseExceptions(exceptions) {
+        var idx = 0, length, date,
+            dates = [];
+
+        if (exceptions) {
+            exceptions = exceptions.split(";");
+            length = exceptions.length;
+
+            for (; idx < length; idx++) {
+                date = kendo.parseDate(exceptions[idx], DATE_FORMATS);
+
+                if (date) {
+                    dates.push(date);
+                }
+            }
+        }
+
+        return dates;
+    }
+
+    function exceptionExists(exceptions, date) {
+        var dates = parseExceptions(exceptions),
+            idx = 0, length = dates.length;
+
+        for (; idx < length; idx++) {
+            if (dates[idx].getTime() === date.getTime()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     function expand(event, start, end) {//, tzid) {
         var rule = parseRule(event.recurrence),
             eventStartMS = +event.start,
@@ -935,7 +968,8 @@ kendo_module({
         dayInYear: dayInYear,
         weekInYear: weekInYear,
         weekInMonth: weekInMonth,
-        numberOfWeeks: numberOfWeeks
+        numberOfWeeks: numberOfWeeks,
+        exceptionExists: exceptionExists
     };
 
     //TODO: REFACTOR Recurrence Widget

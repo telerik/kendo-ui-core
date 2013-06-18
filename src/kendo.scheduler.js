@@ -47,6 +47,7 @@ kendo_module({
         ADD = "add",
         EDIT = "edit",
         TODAY = getDate(new Date()),
+        RECURRENCE_DATE_FORMAT = "yyyyMMddTHHmmssZ",
         DELETECONFIRM = "Are you sure you want to delete this event?",
         COMMANDBUTTONTMPL = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>',
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
@@ -521,59 +522,12 @@ kendo_module({
 
             that.cancelEvent();
 
-            if (!model) {
-                model = getOccurrenceByUid(that._data, uid);
-                if (model) {
-                    that._createRecurringDialog(model, true);
-                }
-            } else if (model.recurrence) {
-                that._createRecurringDialog(model);
+            if (!model || model.recurrence) {
+                that._createRecurringDialog(model, uid);
             } else {
                 that._editEvent(model);
             }
         },
-
-        _createRecurringDialog: function(model, createException) {
-            var that = this,
-                wnd = $('<div><button>Edit current occurrence</button><button>Edit the series</button></div>').appendTo(that.wrapper),
-                buttons = wnd.find("button");
-
-            that._editOccurrenceButton = buttons.eq(0);
-            that._editSeriesButton = buttons.eq(1);
-
-            that._recurringDialog = wnd.kendoWindow({
-                modal: true,
-                resizable: false,
-                draggable: true,
-                title: "Edit Recurring Item",
-                visible: false
-            }).data("kendoWindow");
-
-            buttons.eq(0).on("click", function() {
-                that._recurringDialog.destroy();
-                that._recurringDialog = null;
-
-                if (createException) {
-                    that.addEvent(model);
-                } else {
-                    that._editEvent(model);
-                }
-            });
-
-            buttons.eq(1).on("click", function() {
-                that._recurringDialog.destroy();
-                that._recurringDialog = null;
-
-                if (model.recurrenceId) {
-                    model = that.dataSource.get(model.recurrenceId);
-                }
-
-                that._editEvent(model);
-            });
-
-            that._recurringDialog.center().open();
-        },
-
 
         _editEvent: function(model) {
             var that = this,
@@ -732,6 +686,65 @@ kendo_module({
             container.data("kendoWindow").center().open();
 
             that.trigger(EDIT, { container: container, event: model });
+        },
+
+        _createRecurringDialog: function(model, uid) {
+            var that = this,
+                isException = !model,
+                wnd = $('<div><button>Edit current occurrence</button><button>Edit the series</button></div>').appendTo(that.wrapper),
+                buttons = wnd.find("button"),
+                origin;
+
+            if (isException) {
+                model = getOccurrenceByUid(that._data, uid);
+                origin = that.dataSource.get(model.recurrenceId);
+            }
+
+            if (model) {
+                that._recurringDialog = wnd.kendoWindow({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: "Edit Recurring Item",
+                    visible: false
+                }).data("kendoWindow");
+
+                buttons.eq(0).on("click", function() {
+                    that._recurringDialog.destroy();
+                    that._recurringDialog = null;
+
+                    if (isException) {
+                        that._addExceptionDate(origin, model.start);
+                        that.addEvent(model);
+                    } else {
+                        that._editEvent(model);
+                    }
+                });
+
+                buttons.eq(1).on("click", function() {
+                    that._recurringDialog.destroy();
+                    that._recurringDialog = null;
+
+                    if (model.recurrenceId) {
+                        model = that.dataSource.get(model.recurrenceId);
+                    }
+
+                    that._editEvent(model);
+                });
+
+                that._recurringDialog.center().open();
+            }
+        },
+
+        _addExceptionDate: function(model, date) {
+            var exception = model.exception || "";
+
+            if (!recurrence.exceptionExists(exception, date)) {
+                //TODO: make it UTC before add to exception!
+                exception += kendo.toString(date, RECURRENCE_DATE_FORMAT) + ";";
+
+                model.set("exception", exception);
+            }
         },
 
         _destroyEditable: function() {

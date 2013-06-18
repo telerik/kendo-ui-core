@@ -556,7 +556,7 @@
                 var scheduler = setup({
                     views: ["week"],
                     dataSource: {
-                        data: [ { start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
                     }
                 });
 
@@ -572,6 +572,54 @@
                 scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
 
                 equal(scheduler.calls("addEvent"), 1);
+            });
+
+            test("creating exception sets event exception property", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid"),
+                    origin = scheduler.dataSource.at(0),
+                    exception;
+
+                scheduler.editEvent(eventUID);
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                exception = scheduler.dataSource.at(1);
+
+                ok(origin.exception);
+                equal(origin.exception, kendo.toString(exception.start, "yyyyMMddTHHmmssZ") + ";");
+            });
+
+            test("creating exception adds exception date to event exception property", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var events = scheduler.element.find(".k-event"),
+                    origin = scheduler.dataSource.at(0);
+
+                scheduler.editEvent(events.last().data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                scheduler._editContainer.find("a.k-scheduler-update").click();
+
+                events = scheduler.element.find(".k-event");
+
+                scheduler.editEvent(events.eq(events.length - 2).data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                scheduler._editContainer.find("a.k-scheduler-update").click();
+
+                var result = kendo.toString(scheduler.dataSource.at(1).start, "yyyyMMddTHHmmssZ") + ";" +
+                             kendo.toString(scheduler.dataSource.at(2).start, "yyyyMMddTHHmmssZ") + ";";
+
+                equal(origin.exception, result);
             });
 
             test("edit series", function() {
