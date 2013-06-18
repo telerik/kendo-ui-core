@@ -739,7 +739,7 @@ kendo_module({
 
             if (kendo.support.touch) {
                 $(editor.document).on("selectionchange" + NS, function() {
-                    select(editor);
+                    editor._selectionChange();
                 });
             }
 
