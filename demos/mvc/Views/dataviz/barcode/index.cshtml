@@ -2,20 +2,82 @@
         <div id="barcode-container">
             <div id="barcode"></div>
         </div>
-
+        <ul class="options">
+        <li><label> Value: <input  id="value" class="k-textbox" value="1234567"/></label></li>
+        <li><label> Encoding: <input  id="type" /></label></li>
+        <li><label> Show Text: <input type="checkbox" id="text" checked="checked"/></label></li>
+        <li><label> Show Checksum: <input type="checkbox" id="checksum" checked="checked"/></label></li>
+        </ul>
         <script>
             function createBarcode() {
-                $("#barcode").kendoBarcode({
-                    value: "1234567",
-                    encoding: {
-                        name : "ean8"
-                    }
-                });
+                if ($('body').kendoValidator('validate')) {                                    
+                    $("#barcode").kendoBarcode({
+                        value: $('#value').val(),
+                        width: 300,
+                        checksum: $('#checksum').is(':checked'),
+                        color: "red",
+                        text: {
+                            visible: $('#text').is(':checked'),
+                            color: 'green'
+                        },
+                        type: $('#type').kendoDropDownList('value')
+                    });
+                }
             }
 
-            $(document).ready(function() {
+
+            $('#type').kendoDropDownList({
+                dataSource: ['Code11',
+                            'Code39',
+                            'Code39Extended',
+                            'Code128',
+                            'Code93',
+                            'Code93Extended',
+                            'Code128A',
+                            'Code128B',
+                            'Code128C',
+                            'EAN13',
+                            'EAN8',
+                            'MSImod10',
+                            'MSImod11',
+                            'MSImod1010',
+                            'MSImod1110' ],
+                change: createBarcode
+            });
+
+            $(document).ready(function () {
+                $('body').kendoValidator({
+                    rules: {
+                        ean13: function (element) {
+                            if ($(element).is('#value')) {
+                                var type = $('#type').val().toLowerCase();
+                                var val = $(element).val();
+                                if (type == 'ean13' && val.length != 12) {
+                                    return false;
+                                }
+                                if (type == 'ean8' && val.length != 7) {
+                                    return false;
+                                }
+                            }
+                            return true;
+                        }
+                    },
+                    messages: {
+                        ean13: "The value of EAN13 should be of 12 numbers",
+                        ean13: "The value of EAN8 should be of 7 numbers"
+                    }
+                });
+                $('#value,#checksum,#text').change(createBarcode);
                 createBarcode();
             });
         </script>
+
+        <style scoped>
+            #barcode 
+            {
+                border : 2px dotted blue;
+                width:600px;
+                }
+        </style>
     </div>
 
