@@ -350,11 +350,11 @@ kendo_module({
                 maxTimeSlotIndex = tableRows.length - 1,
                 dateIndex = parentRow.find("td").index(cell),
                 timeIndex = tableRows.index(parentRow),
-                slotDate = this._slotIndexDate(dateIndex),
+                slotDate = kendo.date.getDate(this._slotIndexDate(dateIndex)),
                 slotEndDate;
 
             if (slotDate) {
-                slotEndDate = new Date(slotDate);
+                slotEndDate = kendo.date.getDate(slotDate);
 
                 kendo.date.setTime(slotDate, this._slotIndexTime(timeIndex));
                 kendo.date.setTime(slotEndDate, this._slotIndexTime(Math.min(timeIndex + 1, maxTimeSlotIndex)));
