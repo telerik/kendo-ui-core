@@ -1952,6 +1952,10 @@ kendo_module({
             return this.options.categories[index];
         },
 
+        categoryIndex: function(value) {
+            return indexOf(value, this.options.categories);
+        },
+
         translateRange: function(delta) {
             var axis = this,
                 options = axis.options,
@@ -2069,7 +2073,6 @@ kendo_module({
                 range = axis.range(),
                 from = range.min,
                 to = range.max,
-                range,
                 step;
 
             if (options.categories.length > 0) {
@@ -2286,12 +2289,12 @@ kendo_module({
                 options = axis.options,
                 categories = options.categories,
                 maxIndex = categories.length - 1,
-                range = range || axis.range(),
                 roundedValue,
                 index;
 
             value = toDate(value);
-            if ((value > range.max) || (value < range.min)) {
+            range = range || axis.range();
+            if (!value || (value > range.max) || (value < range.min)) {
                 return -1;
             }
 
@@ -6891,7 +6894,7 @@ kendo_module({
             panes = panes || plotArea.panes;
 
             plotArea.createCategoryAxes(panes);
-            plotArea.aggregateDateSeries(panes);
+            plotArea.aggregateCategories(panes);
             plotArea.createCharts(panes);
             plotArea.createValueAxes(panes);
         },
@@ -6965,80 +6968,76 @@ kendo_module({
             }
         },
 
-        aggregateDateSeries: function(panes) {
-            //var now = new Date();
+        aggregateCategories: function(panes) {
             var plotArea = this,
                 series = plotArea.srcSeries || plotArea.series,
                 processedSeries = [],
-                categoryAxis, axisPane, categories,
-                groupIx, categoryIndicies, seriesIx, currentSeries,
-                seriesClone, srcData, data, srcValues, i,
-                categoryIx, pointData, value, srcDataItems;
+                i, currentSeries,
+                categoryAxis, axisPane, dateAxis;
 
-            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                currentSeries = series[seriesIx];
-                seriesClone = deepExtend({}, currentSeries);
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
                 categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
                 axisPane = plotArea.findPane(categoryAxis.options.pane);
+                dateAxis = equalsIgnoreCase(categoryAxis.options.type, DATE);
 
-                if (inArray(axisPane, panes)) {
-                    var dateAxis = equalsIgnoreCase(categoryAxis.options.type, DATE);
-                    if (dateAxis || currentSeries.categoryField) {
-                        categories = categoryAxis.options.categories;
-                        var srcCategories = categoryAxis.options.srcCategories || categories;
-                        srcData = seriesClone.data;
-                        seriesClone.data = data = [];
-
-                        var categorySrcValues = [];
-                        var categorySrcDataItems = [];
-
-                        var rangeCache = categoryAxis.range();
-
-                        for (i = 0; i < srcData.length; i++) {
-                            var category;
-                            if(currentSeries.categoryField) {
-                                category = getField(currentSeries.categoryField, srcData[i]);
-                            } else {
-                               category = srcCategories[i];
-                            }
-
-                            if (category) {
-                                if (dateAxis) {
-                                    categoryIx = categoryAxis.categoryIndex(category, rangeCache);
-                                } else {
-                                    categoryIx = indexOf(category, categories);
-                                }
-
-                                if (categoryIx > -1) {
-                                    // TODO: Consider bindValue?
-                                    pointData = SeriesBinder.current.bindPoint(currentSeries, i);
-                                    value = pointData.value;
-
-                                    srcValues = categorySrcValues[categoryIx] =
-                                        categorySrcValues[categoryIx] || [];
-                                    srcValues.push(value);
-
-                                    srcDataItems = categorySrcDataItems[categoryIx] =
-                                        categorySrcDataItems[categoryIx] || [];
-                                    srcDataItems.push(currentSeries.data[i]);
-                                }
-                            }
-                        }
-
-                        for (groupIx = 0; groupIx < categories.length; groupIx++) {
-                            srcValues = categorySrcValues[groupIx] || [];
-                            srcDataItems = categorySrcDataItems[groupIx] || [];
-                            data[groupIx] = calculateAggregates(srcValues, currentSeries, srcDataItems);
-                        }
-                    }
+                if ((dateAxis || currentSeries.categoryField) && inArray(axisPane, panes)) {
+                    currentSeries = plotArea.aggregateSeries(currentSeries, categoryAxis);
                 }
 
-                processedSeries.push(seriesClone);
+                processedSeries.push(currentSeries);
+
             }
 
             plotArea.srcSeries = series;
             plotArea.series = processedSeries;
-            //console.log("aggregateDateSeries " + (new Date() - now));
+        },
+
+        aggregateSeries: function(series, categoryAxis) {
+            var axisOptions = categoryAxis.options,
+                categories = axisOptions.categories,
+                srcCategories = axisOptions.srcCategories || categories,
+                srcData = series.data,
+                srcValues = [],
+                srcDataItems = [],
+                range = categoryAxis.range(),
+                i,
+                category,
+                categoryIx,
+                data,
+                pointData,
+                result = deepExtend({}, series);
+
+            result.data = data = [];
+
+            for (i = 0; i < srcData.length; i++) {
+                if (series.categoryField) {
+                   category = getField(series.categoryField, srcData[i]);
+                } else {
+                   category = srcCategories[i];
+                }
+
+                categoryIx = categoryAxis.categoryIndex(category, range);
+                if (categoryIx > -1) {
+                    pointData = SeriesBinder.current.bindPoint(series, i);
+
+                    srcValues[categoryIx] = srcValues[categoryIx] || [];
+                    srcValues[categoryIx].push(pointData.value);
+
+                    srcDataItems[categoryIx] = srcDataItems[categoryIx] || [];
+                    srcDataItems[categoryIx].push(srcData[i]);
+                }
+            }
+
+            for (i = 0; i < categories.length; i++) {
+                data[i] = calculateAggregates(
+                    srcValues[i] || [],
+                    series,
+                    srcDataItems[i] || []
+                );
+            }
+
+            return result;
         },
 
         appendChart: function(chart, pane) {
@@ -8969,6 +8968,7 @@ kendo_module({
         }
     });
 
+    // TODO: Move nested functions to outer scope for better performance
     function calculateAggregates(values, series, dataItems) {
         var aggregate = series.aggregate,
             result;
@@ -9265,7 +9265,7 @@ kendo_module({
             aspDate = DATE_REGEXP.exec(value);
             result = new Date(aspDate ? parseInt(aspDate[1], 10) : value);
         } else if (value) {
-            if (value.length) {
+            if (isArray(value)) {
                 result = [];
                 for (i = 0; i < value.length; i++) {
                     result.push(toDate(value[i]));

@@ -316,7 +316,7 @@
                     equal(dateAxis.categoryIndex(new Date("2012/02/03")), 2);
                 });
 
-                test("converts string to date", function() {
+                test("categoryIndex accepts string", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012/02/01"), new Date("2012/02/03")
@@ -326,6 +326,18 @@
                     });
 
                     equal(dateAxis.categoryIndex("2012/02/03"), 2);
+                });
+
+                test("categoryAxis returns -1 if value is missing", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    equal(dateAxis.categoryIndex(), -1);
                 });
 
                 // ------------------------------------------------------------

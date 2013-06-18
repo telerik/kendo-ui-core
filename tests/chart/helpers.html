@@ -891,6 +891,12 @@
                 deepEqual(dates, toDate(dates));
             });
 
+            test("Returns empty array unchanged", function() {
+                var dates = [];
+
+                deepEqual(dates, toDate(dates));
+            });
+
             test("Converts string to date", function() {
                 var date = "2012/01/01 00:00";
 
