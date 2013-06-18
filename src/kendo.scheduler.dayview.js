@@ -702,18 +702,14 @@ kendo_module({
            name: "week",
            calculateDateRange: function() {
                var selectedDate = this.options.date,
-                   start = new Date(selectedDate),
-                   weekDay = selectedDate.getDay(),
-                   dates = [],
-                   idx, length;
-
-               start.setDate(start.getDate() - weekDay);
+                   start = kendo.date.dayOfWeek(selectedDate, 0, -1),
+                   idx, length,
+                   dates = [];
 
                for (idx = 0, length = 7; idx < length; idx++) {
-                   dates.push(new Date(+start));
-                   kendo.date.setTime(start, MS_PER_DAY, true);
+                   dates.push(start);
+                   start = kendo.date.nextDay(start);
                }
-
                this._render(dates);
            }
        })

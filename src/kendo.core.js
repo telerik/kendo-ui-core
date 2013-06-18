@@ -3196,9 +3196,9 @@ function pad(number, digits, end) {
             date.setDate(date.getDate() + day);
         }
 
-        function dayOfWeek(date, day) {
+        function dayOfWeek(date, day, dir) {
             date = new Date(date);
-            setDayOfWeek(date, day);
+            setDayOfWeek(date, day, dir);
             return date;
         }
 
