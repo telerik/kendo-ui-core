@@ -737,6 +737,12 @@ kendo_module({
                 editor.document.execCommand("enableInlineTableEditing", null, false);
             } catch(e) { }
 
+            if (kendo.support.touch) {
+                $(editor.document).on("selectionchange" + NS, function() {
+                    select(editor);
+                });
+            }
+
             $(editor.body)
                 .on("keydown" + NS, function (e) {
                     var range;
