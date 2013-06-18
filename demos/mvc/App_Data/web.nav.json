@@ -994,6 +994,12 @@
                     "url": "scheduler/index.html",
                     "title": "Kendo jQuery Scheduler Control Demo",
                     "meta": "This demo shows the basic functionality of Kendo UI Scheduler widget, included in Kendo UI Web framework."
+                },
+                {
+                    "text": "Events",
+                    "url": "scheduler/events.html",
+                    "title": "Events in Kendo UI Scheduler",
+                    "meta": "This demo shows how events are handled and triggered in Kendo UI Scheduler."
                 }
             ]
         },

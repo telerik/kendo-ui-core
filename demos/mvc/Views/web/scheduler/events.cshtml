@@ -1,0 +1,85 @@
+<div id="example" class="k-content">
+    <div id="scheduler"></div>
+    <div class="demo-section">
+        <h3 class="title">Console log</h3>
+        <div class="console"></div>
+    </div>
+</div>
+<script>
+    function scheduler_dataBinding(e) {
+        kendoConsole.log("dataBinding");
+    }
+
+    function scheduler_dataBound(e) {
+        kendoConsole.log("dataBound");
+    }
+
+    function scheduler_save(e) {
+        kendoConsole.log("save");
+    }
+
+    function scheduler_remove(e) {
+        kendoConsole.log("remove");
+    }
+
+    function scheduler_cancel(e) {
+        kendoConsole.log("cancel");
+    }
+
+    function scheduler_edit(e) {
+        kendoConsole.log("edit");
+    }
+
+    $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/13"),
+        height: 400,
+        dataBinding: scheduler_dataBinding,
+        dataBound: scheduler_dataBound,
+        save: scheduler_save,
+        remove: scheduler_remove,
+        edit: scheduler_edit,
+        cancel: scheduler_cancel,
+        dataSource: {
+            batch: true,
+            transport: {
+                read: {
+                    url: "http://demos.kendoui.com/service/tasks",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: "http://demos.kendoui.com/service/tasks/update",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: "http://demos.kendoui.com/service/tasks/create",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: "http://demos.kendoui.com/service/tasks/destroy",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            schema: {
+                timezone: "Etc/UTC",
+                model: {
+                    id: "ID",
+                    fields: {
+                        ID: { type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        description: { from: "Description" },
+                        recurrence: { from: "Recurrence" },
+                        ownerId: { from: "OwnerID", defaultValue: 1 },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            }
+        }
+    });
+</script>
