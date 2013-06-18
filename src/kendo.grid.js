@@ -2059,7 +2059,12 @@ kendo_module({
                             focusable.focus();
                             handled = true;
                         } else if (that.options.editable && !$(e.target).is(":button,.k-button")) {
-                            that._handleEditing(current);
+                            var container = $(e.target).closest("[role=gridcell]");
+                            if (!container[0]) {
+                                container = current;
+                            }
+
+                            that._handleEditing(container);
                             handled = true;
                         }
                     }
