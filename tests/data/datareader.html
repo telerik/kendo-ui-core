@@ -348,6 +348,28 @@
                 equal(result[0].foo, "1");
                 equal(result[1].foo, "");
                 equal(result[2].foo, "0");
+                ok(!("bar" in result[2]));
+            });
+
+            test("serialize converts data to the original structure with object as from declaration", function() {
+                var reader = new DataReader({
+                    model: {
+                        fields: {
+                            bar: { from: "foo" }
+                        }
+                    }
+                });
+
+                var result = reader.parse([{ foo: "1"}, { foo: ""}, { foo: "0"}]);
+
+                result = reader.data(result);
+                result = reader.serialize(result);
+
+                equal(result.length, 3);
+                equal(result[0].foo, "1");
+                equal(result[1].foo, "");
+                equal(result[2].foo, "0");
+                ok(!("bar" in result[2]));
             });
 
             test("converts field values to the specifed type", function() {

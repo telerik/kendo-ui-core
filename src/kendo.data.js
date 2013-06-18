@@ -1735,7 +1735,7 @@ kendo_module({
                         getters[field] = getter(fromName || fieldName);
                         serializeGetters[field] = getter(field);
                         originalFieldNames[fromName || fieldName] = field;
-                        fieldNames[fromName || field] = fieldName;
+                        fieldNames[field] = fromName || fieldName;
                     });
 
                     if (!schema.serialize && shouldSerialize) {
