@@ -1000,6 +1000,11 @@
                     "title": "Resources in Kendo UI Scheduler",
                     "meta": "This demo shows how to assign resources to scheduler events."
                 }, {
+                    "text": "Templates",
+                    "url": "scheduler/templates.html",
+                    "title": "Templates in Kendo UI Scheduler",
+                    "meta": "This demo shows how to use templates to customize the appearance of scheduler events"
+                }, {
                     "text": "Events",
                     "url": "scheduler/events.html",
                     "title": "Events in Kendo UI Scheduler",
