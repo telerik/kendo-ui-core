@@ -42,7 +42,9 @@
 
         public string DataTextField { get; set; }
 
-        public string DataValueField { get; set; } 
+        public string DataValueField { get; set; }
+
+        public string DataColorField { get; set; } 
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -69,6 +71,11 @@
             if (!string.IsNullOrEmpty(DataValueField))
             {
                 json["dataValueField"] = DataValueField;
+            }
+
+            if (!string.IsNullOrEmpty(DataColorField))
+            {
+                json["dataColorField"] = DataColorField;
             }
         }
     }

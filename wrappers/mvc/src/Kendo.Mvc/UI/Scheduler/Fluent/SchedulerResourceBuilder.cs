@@ -121,6 +121,25 @@
         }
 
         /// <summary>
+        /// Defines the scheduler resource dataColorField
+        /// </summary>
+        /// <param name="field">The data source.</param>
+        /// <example>
+        /// <code lang="ASPX">
+        /// //TODO: Code example
+        /// </code>
+        /// <code lang="Razor">
+        /// //TODO: Code example
+        /// </code>
+        /// </example>
+        public SchedulerResourceBuilder<TModel> DataColorField(string field)
+        {
+            resource.DataColorField = field;
+
+            return this;
+        }
+
+        /// <summary>
         /// Configures the DataSource options.
         /// </summary>
         /// <param name="configurator">The DataSource configurator action.</param>

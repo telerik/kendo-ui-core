@@ -9,17 +9,32 @@
             get;
         }
 
-        string Field
-        {
-            get;
-        }
-
         string Title
         {
             get;
         }
 
+        string Field
+        {
+            get;
+        }
+
         bool Multiple
+        {
+            get;
+        }
+
+        string DataTextField
+        {
+            get;
+        }
+
+        string DataValueField
+        {
+            get;
+        }
+
+        string DataColorField
         {
             get;
         }
