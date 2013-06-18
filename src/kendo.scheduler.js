@@ -201,7 +201,7 @@ kendo_module({
             title: { defaultValue: "", type: "string" },
             start: { type: "date", validation: { required: true } },
             end: { type: "date", validation: { required: true } },
-            recurrence: { type: "string" },
+            recurrence: { defaultValue: "", type: "string" },
             isAllDay: { type: "boolean", defaultValue: false },
             description: { type: "string" }
         }
@@ -640,7 +640,6 @@ kendo_module({
                     { field: "title", title: "Title" /*, format: field.format, editor: field.editor, values: field.values*/ },
                     { field: "start", title: "Start", editor: DATERANGEEDITOR },
                     { field: "end", title: "End", editor: DATERANGEEDITOR },
-                    { field: "recurrence", title: "Repeat", editor: RECURRENCEEDITOR, defaultValue: "" },
                     { field: "isAllDay", title: "All day event" }
                 ],
                 attr,
@@ -655,6 +654,9 @@ kendo_module({
                 }
                 html += (kendo.template(template, settings))(model);
             } else {
+                if ("recurrence" in model) {
+                    fields.push({ field: "recurrence", title: "Repeat", editor: RECURRENCEEDITOR });
+                }
 
                 if ("description" in model) {
                     fields.push({ field: "description", title: "Description", editor: '<textarea name="description" class="k-textbox"/>' });
