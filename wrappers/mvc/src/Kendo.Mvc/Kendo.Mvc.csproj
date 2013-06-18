@@ -1445,4 +1445,4 @@
     <Compile Include="UI\MobileListView\Fluent\MobileListViewEventBuilder.cs" />
     <Compile Include="UI\MobileListView\Html\MobileListViewHtmlBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\MobileDrawer\MobileDrawer.cs" /><Compile Include="UI\MobileDrawer\MobileDrawerPosition.cs" /><Compile Include="UI\MobileDrawer\Fluent\MobileDrawerBuilder.cs" /><Compile Include="UI\MobileDrawer\Fluent\MobileDrawerEventBuilder.cs" /><Compile Include="UI\MobileDrawer\Html\MobileDrawerHtmlBuilder.cs" /></ItemGroup></Project>

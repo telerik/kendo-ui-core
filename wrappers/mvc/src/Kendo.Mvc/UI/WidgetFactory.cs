@@ -1149,6 +1149,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="MobileDrawer"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileDrawer()
+        ///             .Name("MobileDrawer")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileDrawerBuilder MobileDrawer()
+        {
+            return new MobileDrawerBuilder(new MobileDrawer(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="MobileLayout"/>
         /// </summary>
         /// <example>

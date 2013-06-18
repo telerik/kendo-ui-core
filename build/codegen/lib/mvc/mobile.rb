@@ -33,7 +33,8 @@ module CodeGen::MVC::Mobile
             'view.model',
             'scrollview.pagesize',
             'scrollview.velocitythreshold',
-            'scrollview.bouncevelocitythreshold'
+            'scrollview.bouncevelocitythreshold',
+            'drawer.views'
         ]
 
         CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
