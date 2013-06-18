@@ -866,10 +866,7 @@ kendo_module({
         },
 
         rebind: function() {
-            var that = this;
-            var view = that.view();
-
-            that.dataSource.filter(this._createFilter(view.startDate(), view.endDate()));
+            this.dataSource.fetch();
         },
 
         _dataSource: function() {
