@@ -10,7 +10,7 @@ namespace KendoCRUDService.Models
 {
     public static class MeetingsRepository
     {
-        private static bool UpdateDatabase = false;
+        private static bool UpdateDatabase = true;
 
         public static IList<MeetingViewModel> All()
         {

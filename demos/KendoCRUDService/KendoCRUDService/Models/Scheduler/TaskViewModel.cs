@@ -14,7 +14,6 @@ namespace KendoCRUDService.Models
         public DateTime End { get; set; }
         public string Recurrence { get; set; }
         public bool IsAllDay { get; set; }
-        public string Timezone { get; set; }
         public int? OwnerID { get; set; }
     }
 }

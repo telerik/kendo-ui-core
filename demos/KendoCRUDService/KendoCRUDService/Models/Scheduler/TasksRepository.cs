@@ -10,7 +10,7 @@ namespace KendoCRUDService.Models
 {
     public static class TasksRepository
     {
-        private static bool UpdateDatabase = false;
+        private static bool UpdateDatabase = true;
 
         public static IList<TaskViewModel> All()
         {
@@ -28,6 +28,7 @@ namespace KendoCRUDService.Models
                         End = task.End,
                         Description = task.Description,
                         IsAllDay = task.IsAllDay,
+                        Recurrence = task.Recurrence,
                         OwnerID = task.OwnerID
                     }).ToList();
                 }
@@ -70,6 +71,7 @@ namespace KendoCRUDService.Models
                         Start = task.Start,
                         End = task.End,
                         Description = task.Description,
+                        Recurrence = task.Recurrence,
                         IsAllDay = task.IsAllDay,
                         OwnerID = task.OwnerID
                     };
@@ -91,7 +93,6 @@ namespace KendoCRUDService.Models
                 if (target != null)
                 {
                     target.Title = task.Title;
-                    target.Timezone = task.Timezone;
                     target.Start = task.Start;
                     target.End = task.End;
                     target.Description = task.Description;
@@ -111,6 +112,7 @@ namespace KendoCRUDService.Models
                         Start = task.Start,
                         End = task.End,
                         Description = task.Description,
+                        Recurrence = task.Recurrence,
                         IsAllDay = task.IsAllDay,
                         OwnerID = task.OwnerID
                     };
@@ -144,6 +146,7 @@ namespace KendoCRUDService.Models
                         Start = task.Start,
                         End = task.End,
                         Description = task.Description,
+                        Recurrence = task.Recurrence,
                         IsAllDay = task.IsAllDay,
                         OwnerID = task.OwnerID
                     };
