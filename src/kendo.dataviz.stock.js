@@ -381,7 +381,7 @@ kendo_module({
                 range = e.axisRanges[axis.options.name],
                 selection = navi.selection,
                 selectionDuration = duration(
-                    axis.options.min, axis.options.max, axis.options.baseUnit
+                    selection.options.from, selection.options.to, axis.options.baseUnit
                 ),
                 from,
                 to;
@@ -411,7 +411,7 @@ kendo_module({
 
             selection.set(
                 from,
-                addDuration(from, selectionDuration + 1, baseUnit)
+                addDuration(from, selectionDuration, baseUnit)
             );
 
             navi.showHint(from, to);
