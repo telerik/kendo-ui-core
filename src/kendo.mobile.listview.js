@@ -259,6 +259,10 @@ kendo_module({
                 item;
 
             for (var idx = 0; idx < buffer.viewSize; idx ++) {
+                if (idx === buffer.total()) {
+                    this.trigger("endReached");
+                    break;
+                }
                 item = itemConstructor(this.content(this.offset + items.length));
                 item.below(prevItem);
                 prevItem = item;
