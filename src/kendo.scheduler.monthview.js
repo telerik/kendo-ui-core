@@ -118,7 +118,7 @@ kendo_module({
                 });
 
                 if (that.options.editable.create !== false) {
-                    that.element.on("dblclick", ".k-scheduler-monthview .k-scheduler-content td", function(e) {
+                    that.element.on("dblclick" + NS, ".k-scheduler-monthview .k-scheduler-content td", function(e) {
                         var element = $(this);
                         that.trigger("add", { eventInfo: extend({ isAllDay: true }, that._rangeToDates(element)) });
                         e.preventDefault();
@@ -126,7 +126,7 @@ kendo_module({
                 }
 
                 if (that.options.editable.update !== false) {
-                    that.element.on("dblclick", ".k-scheduler-monthview .k-event", function(e) {
+                    that.element.on("dblclick" + NS, ".k-scheduler-monthview .k-event", function(e) {
                         that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
                         e.preventDefault();
                     });
@@ -423,6 +423,10 @@ kendo_module({
 
             if (this.content) {
                 this.content.off(NS);
+            }
+
+            if (this.element) {
+                this.element.off(NS);
             }
 
             SchedulerView.fn.destroy.call(this);

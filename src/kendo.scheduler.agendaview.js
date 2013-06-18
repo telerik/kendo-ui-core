@@ -9,6 +9,7 @@ kendo_module({
 (function($){
     var kendo = window.kendo,
         ui = kendo.ui,
+        NS = ".kendoAgendaView",
         extend = $.extend;
 
     ui.AgendaView = ui.SchedulerView.extend({
@@ -21,9 +22,9 @@ kendo_module({
             this._dateTemplate = kendo.template(this.options.eventDateTemplate);
             this._timeTemplate = kendo.template(this.options.eventTimeTemplate);
 
-            this.element.on("mouseenter", ".k-scheduler-agenda .k-scheduler-content tr", "_mouseenter")
-                        .on("mouseleave", ".k-scheduler-agenda .k-scheduler-content tr", "_mouseleave")
-                        .on("click", ".k-scheduler-agenda .k-scheduler-content .k-link:has(.k-i-close)", "_remove");
+            this.element.on("mouseenter" + NS, ".k-scheduler-agenda .k-scheduler-content tr", "_mouseenter")
+                        .on("mouseleave" + NS, ".k-scheduler-agenda .k-scheduler-content tr", "_mouseleave")
+                        .on("click" + NS, ".k-scheduler-agenda .k-scheduler-content .k-link:has(.k-i-close)", "_remove");
 
             this._renderLayout(this.options.date);
         },
@@ -178,6 +179,15 @@ kendo_module({
 
             this.refreshLayout();
         },
+
+        destroy: function(){
+            if (this.element) {
+                this.element.off(NS);
+            }
+
+            ui.SchedulerView.fn.destroy.call(this);
+        },
+
         options: {
             title: "Agenda",
             name: "agenda",

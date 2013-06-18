@@ -128,11 +128,11 @@ kendo_module({
                 });
 
                 if (that.options.editable.create !== false) {
-                    that.element.on("dblclick", ".k-scheduler-content td", function(e) {
+                    that.element.on("dblclick" + NS, ".k-scheduler-content td", function(e) {
                         var element = $(this);
                         that.trigger("add", { eventInfo: that._rangeToDates(element) });
                         e.preventDefault();
-                    }).on("dblclick", ".k-scheduler-header-all-day td", function(e) {
+                    }).on("dblclick" + NS, ".k-scheduler-header-all-day td", function(e) {
                         var element = $(this);
                         that.trigger("add", { eventInfo: extend({ isAllDay: true }, that._rangeToDates(element)) });
                         e.preventDefault();
@@ -140,7 +140,7 @@ kendo_module({
                 }
 
                 if (that.options.editable.update !== false) {
-                    that.element.on("dblclick", ".k-event", function(e) {
+                    that.element.on("dblclick" + NS, ".k-event", function(e) {
                         that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
                         e.preventDefault();
                     });
@@ -335,6 +335,10 @@ kendo_module({
 
             if (that.datesHeader) {
                 that.datesHeader.off(NS);
+            }
+
+            if (that.element) {
+                that.element.off(NS);
             }
 
             SchedulerView.fn.destroy.call(this);
