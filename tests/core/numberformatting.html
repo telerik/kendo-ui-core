@@ -117,6 +117,10 @@
                 equal(toString(10, "# \"%\""), "10 %");
             });
 
+            test("toString with escaped ' ", function() {
+                equal(toString(10, "# %\\'"), "1000 %'");
+            });
+
             test("toString does not crash when number placeholder is in literal", function() {
                 equal(toString(10.12, "#.# '# y.0'"), "10.1 # y.0");
             });
