@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>View cloning</title>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <style>
+            #stretch {
+                background-color: orange;
+            }
+
+            .km-stretched-view {
+                display: -webkit-box;
+            }
+
+            .km-stretched-view > * {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div data-role="view" data-stretch="true" id="foo">
+            <div data-role="header">
+                <h1>Header</h1>
+            </div>
+
+            <div id="stretch">
+                <a data-role="button" data-click="navigateToSelf">Navigate To Self</a>
+            </div>
+            <div data-role="footer">
+                <h2>Footer</h2>
+            </div>
+        </div>
+
+        <script>
+            var i = 0;
+            function navigateToSelf() {
+                i ++;
+                kendo.mobile.application.navigate("#foo?i=" + i, "slide");
+            }
+            $(function() {
+                new kendo.mobile.Application();
+            });
+        </script>
+    </body>
+</html>

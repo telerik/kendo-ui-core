@@ -121,17 +121,22 @@ kendo_module({
             that.trigger(HIDE, {view: that});
         },
 
-        updateParams: function(params) {
+        updateParams: function(transition, params, callback) {
             var that = this;
 
-            if (that.trigger(BEFORE_SHOW, {view: that})) {
-                return;
+            if (!transition) {
+                if (that.trigger(BEFORE_SHOW, {view: that})) {
+                    return;
+                }
+
+                that.lastParams = that.params;
+                that.params = params;
+
+                that.trigger(SHOW, {view: that});
+                callback();
+            } else {
+                that.switchWith(new ViewClone(that), transition, params, callback);
             }
-
-            that.lastParams = that.params;
-            that.params = params;
-
-            that.trigger(SHOW, {view: that});
         },
 
         switchWith: function(view, transition, params, callback) {
@@ -255,6 +260,25 @@ kendo_module({
             if (that.layout) {
                 that.layout.setup(that);
             }
+        }
+    });
+
+    var ViewClone = kendo.mobile.ui.Widget.extend({
+        init: function(view) {
+            this.element = view.element.clone(true);
+            this.header = this.element.children(roleSelector("header"));
+            this.content = this.element.children(roleSelector("content"));
+            this.footer = this.element.children(roleSelector("footer"));
+            this.params = JSON.stringify(view.params);
+            view.element.parent().append(this.element);
+        },
+
+        parallaxContents: View.prototype.parallaxContents,
+
+        hideStart: $.noop,
+
+        hideComplete: function() {
+            this.element.remove();
         }
     });
 
@@ -627,8 +651,9 @@ kendo_module({
                     that.trigger(VIEW_SHOW, {view: view});
                 });
             } else {
-                that._view.updateParams(params);
-                that.trigger(VIEW_SHOW, {view: view});
+                that._view.updateParams(transition, params, function() {
+                    that.trigger(VIEW_SHOW, { view: that._view });
+                });
             }
         },
 
