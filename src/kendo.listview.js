@@ -518,9 +518,13 @@ kendo_module({
            var that = this,
                data = that._modelFromElement(item),
                container,
-               index = item.index();
+               uid = data.uid,
+               index;
 
             that.cancel();
+
+            item = that.items().filter("[" + kendo.attr("uid") + "=" + uid + "]");
+            index = item.index();
             item.replaceWith(that.editTemplate(data));
             container = that.items().eq(index).addClass(KEDITITEM).attr(kendo.attr("uid"), data.uid);
             that.editable = container.kendoEditable({ model: data, clearContainer: false, errorTemplate: false }).data("kendoEditable");

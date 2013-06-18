@@ -480,6 +480,16 @@
                 listView.save();
                 ok(listView.element.children().first().hasClass("k-edit-item"));
             });
+
+            test("edit after add cancels previous edit item", function() {
+                var listView = setup({ editTemplate: "<li>${foo}</li>" });
+
+                listView.add();
+                listView.edit(listView.element.children().eq(1));
+
+                ok(listView.element.children().eq(0).hasClass("k-edit-item"));
+                equal(dataSource.get(0).foo, "foo 0");
+            });
         </script>
     </body>
 </html>
