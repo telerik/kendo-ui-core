@@ -40,6 +40,8 @@ namespace Kendo.Models
             "kendo.dataviz.svg.js",
             "kendo.dataviz.vml.js",
             "kendo.dataviz.gauge.js",
+            "kendo.dataviz.barcode.js",
+            "kendo.dataviz.qrcode.js",
             "kendo.dataviz.stock.js",
             "kendo.dataviz.sparkline.js",
             "kendo.combobox.js",

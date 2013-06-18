@@ -1,0 +1,50 @@
+﻿        <div id="example" class="k-content">
+            <div class="qrcode-wrapper">
+                <div id="qrUrl">
+                </div>
+                <div id="qrMail">
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                $("#qrUrl").kendoQRCode({
+                    value: "http://demos.kendoui.com/dataviz/overview/index.html",
+                    errorCorrectionLevel: "L",
+                    size: 100,
+                    darkModuleColor: "#e26b1d",
+                    border: {
+                        color: "#e26b1d",
+                        width: 5
+                    }
+                });
+
+                $("#qrMail").kendoQRCode({
+                    value: "mailto:clientservice@kendoui.com",
+                    errorCorrectionLevel: "L",
+                    size: 100,
+                    darkModuleColor: "red",
+                    border: {
+                        color: "red",
+                        width: 5
+                    }
+                });
+
+                $("#qrMail").kendoQRCode({
+                    value: "mailto:clientservice@kendoui.com",
+                    errorCorrectionLevel: "L",
+                    size: 100,
+                    darkModuleColor: "red",
+                    border: {
+                        color: "red",
+                        width: 5
+                    }
+                });
+                
+            </script>
+
+            <style scoped>
+                .qrcode-wrapper div {
+                    display:inline-block;
+                }               
+            </style>
+        </div>

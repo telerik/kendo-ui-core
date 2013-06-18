@@ -459,18 +459,29 @@
             "name": "linear-gauge"
         }
     ],
-	"barcode":[
-		{
-			"text": "Barcode",
+    "barcode and qr code": [
+        {
+            "text": "Barcode",
             "documentation": "dataviz/barcode",
-            "spriteCssClass": "barcodeIcon",
             "items": [{
                 "text": "Basic usage",
-                "url": "barcode/index.html"
+                "url": "barcode/index.html",
+                "title": "Kendo UI Barcode Demo",
+                "meta": "This sample demonstrates the core functionality of Kendo UI Barcode which helps you easily encode data in machine readable format."
             }],
             "name": "barcode"
-		}
-	],
+        }, {
+            "text": "QR code",
+            "documentation": "dataviz/qrcode",
+            "items": [{
+                "text": "Basic usage",
+                "url": "qrcode/index.html",
+                "title": "Kendo UI QR code Demo",
+                "meta": "This sample demonstrates the core functionality of Kendo UI QR code which helps you easily encode large amounts of data in machine readable format."
+            }],
+            "name": "qrcode"
+        }
+    ],
     "financial": [{
             "text": "Stock Chart",
             "documentation": "dataviz/stock-chart",

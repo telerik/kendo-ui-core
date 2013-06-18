@@ -139,6 +139,7 @@ DATAVIZ_JS = FileList[
     "src/kendo.dataviz.chart.polar.js",
     "src/kendo.dataviz.gauge.js",
     "src/kendo.dataviz.barcode.js",
+    "src/kendo.dataviz.qrcode.js",
     "src/kendo.dataviz.stock.js",
     "src/kendo.dataviz.sparkline.js",
     "src/kendo.dataviz.svg.js",
