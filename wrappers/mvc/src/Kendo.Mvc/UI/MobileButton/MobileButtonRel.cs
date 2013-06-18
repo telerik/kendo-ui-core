@@ -11,7 +11,9 @@ namespace Kendo.Mvc.UI
         
         ModalView ,
         
-        External 
+        External ,
+        
+        Drawer 
         
     }
 }

@@ -36,6 +36,7 @@
           - popOver
           - modalView
           - external
+          - drawer
       :description: Specifies the widget to be open when is tapped (the href must be set too)
 
     - :name: badge
