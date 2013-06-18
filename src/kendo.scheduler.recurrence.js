@@ -671,7 +671,7 @@ kendo_module({
     }
 
     function exceptionExists(exceptions, date) {
-        var dates = parseExceptions(exceptions),
+        var dates = $.isArray(exceptions) ? exceptions : parseExceptions(exceptions),
             idx = 0, length = dates.length;
 
         for (; idx < length; idx++) {
@@ -683,10 +683,11 @@ kendo_module({
         return false;
     }
 
-    function expand(event, start, end) {//, tzid) {
+    function expand(event, start, end) { //, tz) {
         var rule = parseRule(event.recurrence),
             eventStartMS = +event.start,
             durationMS = event.end - eventStartMS,
+            exceptionDates = parseExceptions(event.exception),
             id = event.id,
             current = 1,
             events = [],
@@ -697,7 +698,6 @@ kendo_module({
 
         if (event.toJSON) {
             event = event.toJSON();
-
             delete event.recurrence;
         }
 
@@ -734,14 +734,16 @@ kendo_module({
         freq.limit(start, end, rule);
 
         while (start <= end) {
-            //TODO: DST check
-            eventEnd = new Date(start.getTime() + durationMS);
-            events.push($.extend({}, event, {
-                uid: kendo.guid(),
-                recurrenceId: id,
-                start: new Date(start),
-                end: eventEnd
-            }));
+            if (!exceptionExists(exceptionDates, start)) {
+                //TODO: DST check
+                eventEnd = new Date(start.getTime() + durationMS);
+                events.push($.extend({}, event, {
+                    uid: kendo.guid(),
+                    recurrenceId: id,
+                    start: new Date(start),
+                    end: eventEnd
+                }));
+            }
 
             if (count && count === current) {
                 break;

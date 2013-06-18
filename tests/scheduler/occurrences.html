@@ -7,6 +7,7 @@
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.timezones.js"></script>
         <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
@@ -1685,6 +1686,40 @@
 
                 equal(events[2].start.getTime(), +new Date(2013, 0, 3, 16, 30));
                 equal(events[2].end.getTime(), +new Date(2013, 0, 3, 17, 0));
+            });
+
+            module("Exception recurring dates");
+
+            test("Expand recurring events which are outside of period", function() {
+                var expDate1 = new Date(2013, 0, 1, 10, 30),
+                    expDate2 = new Date(2013, 0, 3, 10, 30);
+
+                expDate1 = kendo.timezone.apply(expDate1, 0);
+                expDate2 = kendo.timezone.apply(expDate2, 0);
+
+                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";" +
+                                kendo.toString(expDate2, "yyyyMMddTHHmmssZ") + ";";
+
+                var events = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2012, 0, 1, 10, 30),
+                    end: new Date(2012, 0, 1, 11, 30),
+                    recurrence: "FREQ=DAILY",
+                    exception: exception
+                };
+
+                var events = occurrences(events, new Date(2013, 0, 1), new Date(2013, 0, 5, 17));
+
+                equal(events.length, 3);
+                equal(events[0].start.getTime(), +new Date(2013, 0, 2, 10, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 0, 2, 11, 30));
+
+                equal(events[1].start.getTime(), +new Date(2013, 0, 4, 10, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 0, 4, 11, 30));
+
+                equal(events[2].start.getTime(), +new Date(2013, 0, 5, 10, 30));
+                equal(events[2].end.getTime(), +new Date(2013, 0, 5, 11, 30));
             });
         </script>
     </body>
