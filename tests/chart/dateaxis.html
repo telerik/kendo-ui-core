@@ -316,6 +316,18 @@
                     equal(dateAxis.categoryIndex(new Date("2012/02/03")), 2);
                 });
 
+                test("converts string to date", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    equal(dateAxis.categoryIndex("2012/02/03"), 2);
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Min-Max values", {
                     setup: function() {

@@ -2289,6 +2289,8 @@ kendo_module({
                 roundedValue,
                 index;
 
+            value = toDate(value);
+
             if ((value > range.max) || (value < range.min)) {
                 return -1;
             }
@@ -6993,7 +6995,13 @@ kendo_module({
                         var rangeCache = categoryAxis.range();
 
                         for (i = 0; i < srcData.length; i++) {
-                            var category = getField(currentSeries.categoryField, srcData[i]) || srcCategories[i];
+                            var category;
+                            if(currentSeries.categoryField) {
+                                category = getField(currentSeries.categoryField, srcData[i]);
+                            } else {
+                               category = srcCategories[i];
+                            }
+
                             if (category) {
                                 if (dateAxis) {
                                     categoryIx = categoryAxis.categoryIndex(category, rangeCache);
