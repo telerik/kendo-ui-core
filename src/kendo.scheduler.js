@@ -391,6 +391,10 @@ kendo_module({
             }
         },
 
+        items: function() {
+            return this.wrapper.children(".k-event, .k-task");
+        },
+
         _modelForContainer: function(container) {
             container = $(container).closest("[" + kendo.attr("uid") + "]");
 
