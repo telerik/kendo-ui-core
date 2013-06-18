@@ -17,7 +17,9 @@
         <script src="../../src/kendo.dropdownlist.js"></script>
         <script src="../../src/kendo.tooltip.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
         <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
         <script src="../../src/kendo.scheduler.recurrence.js"></script>
@@ -472,6 +474,100 @@
 
                 ok(elements.filter("[data-container-for=description]").length);
             });
+
+            module("recurrence editing", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                },
+                teardown: function() {
+                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                }
+            });
+
+            test("show recurring dialog", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid");
+                scheduler.editEvent(eventUID);
+
+                ok(scheduler._recurringDialog.element.is(":visible"));
+            });
+
+            test("close recurring dialog on button click", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid");
+
+                stub(scheduler, {
+                    addEvent: scheduler.addEvent
+                });
+
+                scheduler.editEvent(eventUID);
+
+                //edit current instance
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                ok(!scheduler._recurringDialog.element.is(":visible"));
+            });
+
+            test("create exception", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid");
+
+                stub(scheduler, {
+                    addEvent: scheduler.addEvent
+                });
+
+                scheduler.editEvent(eventUID);
+
+                //edit current instance
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                equal(scheduler.calls("addEvent"), 1);
+            });
+
+            test("edit series", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid");
+
+                stub(scheduler, {
+                    _editEvent: scheduler._editEvent
+                });
+
+                scheduler.editEvent(eventUID);
+
+                //edit current instance
+                scheduler._recurringDialog.element.find("button:last").triggerHandler("click");
+
+                var model = scheduler.args("_editEvent", 0)[0];
+
+                equal(scheduler.calls("_editEvent"), 1);
+                equal(model.uid, scheduler.dataSource.at(0).uid);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

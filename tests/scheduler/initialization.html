@@ -10,6 +10,9 @@
         <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.window.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
@@ -462,6 +465,13 @@
                 scheduler.view().trigger("navigate", { view: "view2", date: new Date(2013, 1, 2) });
 
                 equal(rebindStub.calls("rebind"), 1);
+            });
+
+            test("create recurrence dialog", function() {
+                var scheduler = new Scheduler(container);
+
+                ok(scheduler._recurringDialog);
+                ok(!scheduler._recurringDialog.element.is(":visible"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
