@@ -286,10 +286,9 @@ kendo_module({
         var xorPolynomials = function (x,y){
             var result = [],
                 idx = x.length - 2;
-            while(!isNaN(x[idx]) || !isNaN(y[idx])){
-                result[idx] = powersOfTwo[powersOfTwoResult[x[idx]] ^ powersOfTwoResult[y[idx]]] || -1;
-                idx--;
-            }
+            for(var i = idx; i>=0; i--){
+                 result[i] = x[i] ^ y[i];
+            }  
      
             return result;
         }                                      
@@ -322,6 +321,17 @@ kendo_module({
         //possibly generate on demand
         generatePowersOfTwo();
         generateGeneratorPolynomials();        
+
+        function multiplyByConstant(polynomial, power){
+            var result = [],    
+                idx = polynomial.length - 1;
+            do{
+                result[idx] = powersOfTwoResult[(polynomial[idx] + power) % 255];
+                idx--;
+            }while(polynomial[idx] != undefined);
+ 
+            return result;
+        }        
         
         var generateErrorCodewords = function (data, errorCodewordsCount){            
             var generator = generatorPolynomials[errorCodewordsCount - 1],                    
@@ -331,16 +341,16 @@ kendo_module({
                 divisor,
                 errorCodewords = [];
             for(var i = 0; i < steps; i++){
-                divisor = multiplyPolynomials(generatorPolynomial, [result[result.length - 1]]);
+                divisor = multiplyByConstant(generatorPolynomial, powersOfTwo[result[result.length - 1]]);
                 generatorPolynomial.splice(0,1);
-                
+             
                 result = xorPolynomials(divisor, result);
             }     
             
             for(var i = result.length - 1; i >= 0;i--){
-                errorCodewords[errorCodewordsCount - 1 - i] = toBitsString(powersOfTwoResult[result[i]], 8);
+                errorCodewords[errorCodewordsCount - 1 - i] = toBitsString(result[i], 8);
             }
-            
+       
             return errorCodewords;
         }                    
         
@@ -364,7 +374,7 @@ kendo_module({
                     for(var codewordIdx = 1; codewordIdx <= blockCodewordsCount; codewordIdx++){
                         codeword = dataStream.substring(codewordStart, codewordStart + 8);
                         dataBlock.push(codeword);
-                        messagePolynomial[blockCodewordsCount - codewordIdx] = powersOfTwo[toDecimal(codeword)] || -1;
+                        messagePolynomial[blockCodewordsCount - codewordIdx] = toDecimal(codeword);
                         codewordStart+=8;
                     }
                     dataBlocks.push(dataBlock);
@@ -739,7 +749,7 @@ kendo_module({
                 mod5 = percent % 5,
                 previous = Math.abs(percent - mod5 - 50),
                 next = Math.abs(percent +  5 - mod5 - 50),
-                score = 10 * Math.min(previous / 10, next / 10);
+                score = 10 * Math.min(previous / 5, next / 5);
             return score;
         }           
         
@@ -863,9 +873,7 @@ kendo_module({
                                 column++;
                             }
                             view.children.push(view.createRect(new Box2D(x1 * baseUnit, y, x2 * baseUnit, y + baseUnit ), 
-                                { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false}));  
-                            //that.view.children.push(that.view.createLine(x1 * baseUnit, y, x2 * baseUnit, y, 
-                            //    { stroke: that.options.darkModuleColor, strokeWidth: baseUnit, strokeLineCap: "butt", align: false}));                             
+                                { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false}));                              
                         }
                     }
                 }                 
