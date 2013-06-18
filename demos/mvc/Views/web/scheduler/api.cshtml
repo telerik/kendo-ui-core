@@ -1,46 +1,27 @@
 <div id="example" class="k-content">
     <div id="scheduler"></div>
     <div class="demo-section">
-        <h3 class="title">Console log</h3>
-        <div class="console"></div>
+        <p>
+            <label>Current Date:</label> <input id="date" />
+        </p>
+        <p>
+            <label>Current View:</label>
+            <select id="views">
+                <option value="agenda">Agenda</option>
+                <option value="day">Day</option>
+                <option value="month">Month</option>
+                <option value="week">Week</option>
+            </select>
+        </p>
     </div>
 </div>
 <script>
 $(function() {
-    function scheduler_dataBinding(e) {
-        kendoConsole.log("dataBinding");
-    }
-
-    function scheduler_dataBound(e) {
-        kendoConsole.log("dataBound");
-    }
-
-    function scheduler_save(e) {
-        kendoConsole.log("save");
-    }
-
-    function scheduler_remove(e) {
-        kendoConsole.log("remove");
-    }
-
-    function scheduler_cancel(e) {
-        kendoConsole.log("cancel");
-    }
-
-    function scheduler_edit(e) {
-        kendoConsole.log("edit");
-    }
-
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
         height: 400,
+        views: ["day", "week", "month", "agenda"],
         timezone: "Etc/UTC",
-        dataBinding: scheduler_dataBinding,
-        dataBound: scheduler_dataBound,
-        save: scheduler_save,
-        remove: scheduler_remove,
-        edit: scheduler_edit,
-        cancel: scheduler_cancel,
         dataSource: {
             batch: true,
             transport: {
@@ -81,6 +62,22 @@ $(function() {
                     }
                 }
             }
+        }
+    });
+
+    var scheduler = $("#scheduler").data("kendoScheduler");
+
+    $("#date").kendoDatePicker({
+        value: new Date("2013/6/13"),
+        change: function() {
+            scheduler.date(this.value());
+        }
+    });
+
+    $("#views").kendoDropDownList({
+        value: scheduler.view(),
+        change: function() {
+            scheduler.view(this.value());
         }
     });
 });
