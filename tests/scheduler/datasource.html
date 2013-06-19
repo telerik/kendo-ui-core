@@ -83,6 +83,23 @@
                 deepEqual(event, dataSource.at(0));
             });
 
+            test("start and end date are converted automatically", function() {
+                var dataSource = new kendo.data.SchedulerDataSource({
+                    schema: {
+                    },
+                    transport: {
+                        read: function(options) {
+                            options.success([ { start: "2013-02-03 00:00:00", end: "2013-02-03 00:00:00" } ]);
+                        }
+                    }
+                });
+
+                dataSource.read();
+
+                ok(dataSource.data()[0].start.getTime);
+            });
+
+
             var timezoneApply,
                 timezoneRemove;
 

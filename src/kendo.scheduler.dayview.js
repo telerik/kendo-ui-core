@@ -682,9 +682,7 @@ kendo_module({
                 }
             }
 
-            if (events.length) {
-                this.refreshLayout();
-            }
+            this.refreshLayout();
         }
     });
 
