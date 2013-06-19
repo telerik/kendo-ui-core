@@ -22,7 +22,7 @@
         /// <summary>
         /// Configures the Scheduler Resources
         /// </summary>
-        /// <param name="addResourceAction">The client events action.</param>
+        /// <param name="addResourceAction">The client resources action.</param>
         /// <example>
         /// <code lang="CS">
         /// @(Html.Kendo().Scheduler&lt;Task&gt;()
@@ -46,6 +46,24 @@
             SchedulerResourceFactory<TModel> factory = new SchedulerResourceFactory<TModel>(Component);
 
             addResourceAction(factory);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the Scheduler Views
+        /// </summary>
+        /// <param name="addViewAction">The client views action.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// //CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Views(Action<SchedulerViewFactory<TModel>> addViewAction)
+        {
+            SchedulerViewFactory<TModel> factory = new SchedulerViewFactory<TModel>(Component);
+
+            addViewAction(factory);
 
             return this;
         }
