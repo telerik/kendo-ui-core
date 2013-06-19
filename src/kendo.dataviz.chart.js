@@ -2290,11 +2290,13 @@ kendo_module({
                 categories = options.categories,
                 maxIndex = categories.length - 1,
                 roundedValue,
+                equalsRoundedMax,
                 index;
 
             value = toDate(value);
             range = range || axis.range();
-            if (!value || (value > range.max) || (value < range.min)) {
+            equalsRoundedMax = options.roundToBaseUnit && dateEquals(range.max, value);
+            if (!value || (value > range.max) || (value < range.min) || equalsRoundedMax) {
                 return -1;
             }
 
