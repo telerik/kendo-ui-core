@@ -785,7 +785,7 @@ kendo_module({
                             offset -= 1;
                         }
 
-                        if (container.nodeType == 3 && container.nodeValue[offset] == "\ufeff") {
+                        if (offset + direction > 0 && container.nodeType == 3 && container.nodeValue[offset] == "\ufeff") {
                             range.setStart(container, offset + direction);
                             range.collapse(true);
                             editor.selectRange(range);
