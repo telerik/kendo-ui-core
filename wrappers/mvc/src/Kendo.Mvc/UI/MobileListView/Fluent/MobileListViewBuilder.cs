@@ -97,18 +97,7 @@ namespace Kendo.Mvc.UI.Fluent
             Component.EndlessScroll = value;
 
             return this;
-        }
-        
-        /// <summary>
-        /// A callback function used when the 'endlessScroll' option is enabled. The result of the function will be send as additional parameters to the DataSource's next method.
-        /// </summary>
-        /// <param name="value">The value that configures the endlessscrollparameters.</param>
-        public MobileListViewBuilder<T> EndlessScrollParameters(string value)
-        {
-            Component.EndlessScrollParameters = value;
-
-            return this;
-        }
+        }                
         
         /// <summary>
         /// If set to true, the group headers will persist their position when the user scrolls through the listview. Applicable only when the type is set to group, or when binding to grouped datasource.
@@ -152,18 +141,7 @@ namespace Kendo.Mvc.UI.Fluent
             Component.LoadMoreText = value;
 
             return this;
-        }
-        
-        /// <summary>
-        /// Check the 'endlessScrollParameters' option.
-        /// </summary>
-        /// <param name="value">The value that configures the loadmoreparameters.</param>
-        public MobileListViewBuilder<T> LoadMoreParameters(string value)
-        {
-            Component.LoadMoreParameters = value;
-
-            return this;
-        }
+        }                
         
         /// <summary>
         /// The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
@@ -185,18 +163,7 @@ namespace Kendo.Mvc.UI.Fluent
             Component.PullToRefresh = value;
 
             return this;
-        }
-        
-        /// <summary>
-        /// A callback function used when the 'pullToRefresh' option is enabled. The result of the function will be send as additional parameters to the DataSource's next method.
-        /// </summary>
-        /// <param name="value">The value that configures the pullparameters.</param>
-        public MobileListViewBuilder<T> PullParameters(string value)
-        {
-            Component.PullParameters = value;
-
-            return this;
-        }
+        }                
         
         /// <summary>
         /// The message template displayed during the refresh. Applicable only when pullToRefresh is set to true.

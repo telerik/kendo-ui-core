@@ -55,9 +55,7 @@ namespace Kendo.Mvc.UI
         
         public bool? AutoBind { get; set; }               
         
-        public bool EndlessScroll { get; set; }
-        
-        public string EndlessScrollParameters { get; set; }
+        public bool EndlessScroll { get; set; }               
         
         public bool FixedHeaders { get; set; }
         
@@ -65,15 +63,11 @@ namespace Kendo.Mvc.UI
         
         public bool LoadMore { get; set; }
         
-        public string LoadMoreText { get; set; }
-        
-        public string LoadMoreParameters { get; set; }
+        public string LoadMoreText { get; set; }               
         
         public string PullTemplate { get; set; }
         
-        public bool PullToRefresh { get; set; }
-        
-        public string PullParameters { get; set; }
+        public bool PullToRefresh { get; set; }               
         
         public string RefreshTemplate { get; set; }
         
