@@ -1532,6 +1532,34 @@
                     });
                 });
 
+                test("User aggregate function receives dataItems", 1, function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        aggregate: function(values, series, dataItems) {
+                            deepEqual(dataItems, series.data);
+                            return 0;
+                        }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+                });
+
+                test("User aggregate function receives group", 1, function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        aggregate: function(values, series, dataItems, group) {
+                            deepEqual(group, new Date("2012/02/01"));
+                            return 0;
+                        }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Date series / Multiple Category Axes", {
                     setup: function() {

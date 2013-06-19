@@ -7039,7 +7039,8 @@ kendo_module({
                 data[i] = calculateAggregates(
                     srcValues[i] || [],
                     series,
-                    srcDataItems[i] || []
+                    srcDataItems[i] || [],
+                    categories[i]
                 );
             }
 
@@ -8975,7 +8976,7 @@ kendo_module({
     });
 
     // TODO: Move nested functions to outer scope for better performance
-    function calculateAggregates(values, series, dataItems) {
+    function calculateAggregates(values, series, dataItems, group) {
         var aggregate = series.aggregate,
             result;
 
@@ -8986,7 +8987,7 @@ kendo_module({
             if (aggregateType === STRING) {
                 result = Aggregates[aggregate](values);
             } else if (aggregateType === "function") {
-                result = aggregate(values, series, dataItems);
+                result = aggregate(values, series, dataItems, group);
             } else {
                 result = Aggregates.max(values);
             }
