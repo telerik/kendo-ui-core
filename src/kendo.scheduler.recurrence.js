@@ -1028,6 +1028,9 @@ kendo_module({
         return result;
     };
 
+    var ns = ".kendoRecurrenceEditor",
+        CLICK = "click" + ns;
+
     var RecurrenceEditor = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -1111,6 +1114,16 @@ kendo_module({
             }
         },
         events: [ "change" ],
+
+        destroy: function() {
+            this.ddlFrequency.destroy();
+            this.container.find("input[type=radio],input[type=checkbox]").off(CLICK);
+
+            kendo.destroy(this.container);
+
+            Widget.fn.destroy.call(this);
+        },
+
         value: function(value) {
             var that = this;
 
@@ -1252,7 +1265,7 @@ kendo_module({
                 weekDays = that.container.find(".k-recur-weekday-checkbox");
 
             if (weekDays[0]) {
-                weekDays.click(function() {
+                weekDays.on(CLICK, function() {
                     rule.weekDays = $.map(weekDays.filter(":checked"), function(checkbox) {
                         return {
                             day: Number(checkbox.value),
@@ -1386,9 +1399,9 @@ kendo_module({
                     that.trigger("change");
                 };
 
-            that.radioButtonNever = container.find(".k-recur-end-never").on("click", click);
-            that.radioButtonCount = container.find(".k-recur-end-count").on("click", click);
-            that.radioButtonUntil = container.find(".k-recur-end-until").on("click", click);
+            that.radioButtonNever = container.find(".k-recur-end-never").on(CLICK, click);
+            that.radioButtonCount = container.find(".k-recur-end-count").on(CLICK, click);
+            that.radioButtonUntil = container.find(".k-recur-end-until").on(CLICK, click);
 
             if (rule.count) {
                 that._toggleEndRule("count");
@@ -1406,7 +1419,7 @@ kendo_module({
                     that._toggleMonthDayRule(e.currentTarget.value);
                     that.trigger("change");
                 },
-                radioButtons = that.container.find(".k-recur-month-radio").on("click", click);
+                radioButtons = that.container.find(".k-recur-month-radio").on(CLICK, click);
 
             that.radioButtonMonthDay = radioButtons.eq(0);
             that.radioButtonWeekDay = radioButtons.eq(1);
@@ -1425,7 +1438,7 @@ kendo_module({
                     that._toggleYearRule(e.currentTarget.value);
                     that.trigger("change");
                 },
-                radioButtons = that.container.find(".k-recur-year-radio").on("click", click);
+                radioButtons = that.container.find(".k-recur-year-radio").on(CLICK, click);
 
             that.radioButtonMonthDay = radioButtons.eq(0);
             that.radioButtonWeekDay = radioButtons.eq(1);
