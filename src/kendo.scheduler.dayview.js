@@ -60,19 +60,6 @@ kendo_module({
         return staticDate;
     }
 
-    function executeTemplate(template, options, dataItem) {
-        var settings = extend({}, kendo.Template, options.templateSettings),
-            type = typeof(template),
-            text = "";
-
-        if (type === "function") {
-            text = kendo.template(template, settings)(dataItem || {});
-        } else if (type === "string") {
-            text = template;
-        }
-        return text;
-    }
-
     function isInDateRange(value, min, max) {
         var msMin = min.getTime(),
             msMax = max.getTime(),
@@ -91,8 +78,7 @@ kendo_module({
 
             that.title = that.options.title || that.options.name;
 
-            that.eventTemplate = that._eventTmpl(that.options.eventTemplate);
-            that.allDayEventTemplate = that._eventTmpl(that.options.allDayEventTemplate);
+            that._templates();
 
             that._editable();
 
@@ -108,7 +94,7 @@ kendo_module({
             endTime: kendo.date.today(),
             minorTickCount: 2,
             majorTick: 60,
-            majorTimeHeaderTemplate: kendo.template("#=kendo.toString(date, 't')#"),
+            majorTimeHeaderTemplate: "#=kendo.toString(date, 't')#",
             minorTimeHeaderTemplate: "&nbsp;",
             eventTemplate: DAY_VIEW_EVENT_TEMPLATE,
             allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE,
@@ -117,6 +103,18 @@ kendo_module({
         },
 
         events: ["remove", "add", "edit"],
+
+        _templates: function() {
+            var options = this.options,
+                settings = extend({}, kendo.Template, options.templateSettings);
+
+            this.eventTemplate = this._eventTmpl(options.eventTemplate);
+            this.allDayEventTemplate = this._eventTmpl(options.allDayEventTemplate);
+
+            this.majorTimeHeaderTemplate = kendo.template(options.majorTimeHeaderTemplate, settings);
+            this.minorTimeHeaderTemplate = kendo.template(options.minorTimeHeaderTemplate, settings);
+            this.dateHeaderTemplate = kendo.template(options.dateHeaderTemplate, settings);
+        },
 
         _editable: function() {
             var that = this;
@@ -152,11 +150,12 @@ kendo_module({
             var columns = [];
             var rows = [];
             var options = this.options;
+            var that = this;
 
             for (var idx = 0; idx < dates.length; idx++) {
                 var column = {};
 
-                column.text = executeTemplate(options.dateHeaderTemplate, options, { date: dates[idx] });
+                column.text = that.dateHeaderTemplate({ date: dates[idx] });
 
                 if (kendo.date.isToday(dates[idx])) {
                     column.className = "k-today";
@@ -170,10 +169,10 @@ kendo_module({
             }
 
             this._forTimeRange(options.startTime, options.endTime, function(date, majorTick) {
-                var template = majorTick ? options.majorTimeHeaderTemplate : options.minorTimeHeaderTemplate;
+                var template = majorTick ? that.majorTimeHeaderTemplate : that.minorTimeHeaderTemplate;
 
                 var row = {
-                    text: executeTemplate(template, options, { date: date }),
+                    text: template({ date: date }),
                     className: majorTick ? "k-middle-row" : ""
                 };
 

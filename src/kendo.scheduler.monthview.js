@@ -51,11 +51,19 @@ kendo_module({
 
             that.title = that.name = that.options.title;
 
-            that.eventTemplate = that._eventTmpl(that.options.eventTemplate);
+            that._templates();
 
             that._editable();
 
             that._renderLayout(that.options.date);
+        },
+
+        _templates: function() {
+            var options = this.options,
+                settings = extend({}, kendo.Template, options.templateSettings);
+
+            this.eventTemplate = this._eventTmpl(options.eventTemplate);
+            this.dayTemplate = kendo.template(options.dayTemplate, settings);
         },
 
         dateForTitle: function() {
@@ -154,7 +162,7 @@ kendo_module({
                 idx = 0,
                 length = 42,
                 cellsPerRow = 7,
-                content = this.options.dayTemplate,
+                content = this.dayTemplate,
                 classes = "",
                 slotIndices = {},
                 weekStartDates = [start],
