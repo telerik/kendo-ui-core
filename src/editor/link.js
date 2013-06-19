@@ -155,7 +155,7 @@ var LinkCommand = Command.extend({
 
                 text = $("#k-editor-link-text", element).val();
                 if (text !== initialText && (text || nodes.length === 0)) {
-                    that.attributes.innerHTML = text || href;
+                    that.attributes.innerHTML = dom.stripBom(text) || href;
                 }
 
                 target = $("#k-editor-link-target", element).is(":checked");
@@ -207,7 +207,7 @@ var LinkCommand = Command.extend({
             .data("kendoWindow")
             .center().open();
 
-        if (showText && nodes.length > 0) {
+        if (showText && nodes.length > 0 && !collapsed) {
             initialText = $("#k-editor-link-text", dialog.element).val();
         }
 

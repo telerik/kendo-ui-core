@@ -305,37 +305,21 @@ var GreedyInlineFormatter = InlineFormatter.extend({
     }
 });
 
-function inlineFormatWillDelayExecution (range) {
-    return range.collapsed && !RangeUtils.isExpandable(range);
-}
-
 var InlineFormatTool = FormatTool.extend({
     init: function(options) {
         FormatTool.fn.init.call(this, extend(options, {
             finder: new InlineFormatFinder(options.format),
             formatter: function () { return new InlineFormatter(options.format); }
         }));
-
-        this.willDelayExecution = inlineFormatWillDelayExecution;
     }
 });
 
 var DelayedExecutionTool = Tool.extend({
-    willDelayExecution: inlineFormatWillDelayExecution,
-
-    update: function(ui, nodes, pendingFormats) {
-        var list = ui.data(this.type),
-            pendingFormat = pendingFormats.getPending(this.name),
-            format;
-
-        if (pendingFormat && pendingFormat.options.params) {
-            format = pendingFormat.options.params.value;
-        } else {
-            format = this.finder.getFormat(nodes);
-        }
+    update: function(ui, nodes) {
+        var list = ui.data(this.type);
 
         list.close();
-        list.value(format);
+        list.value(this.finder.getFormat(nodes));
     }
 });
 
@@ -425,8 +409,6 @@ var ColorTool = Tool.extend({
             }
         }));
     },
-
-    willDelayExecution: inlineFormatWillDelayExecution,
 
     initialize: function(ui, initOptions) {
         var editor = initOptions.editor,

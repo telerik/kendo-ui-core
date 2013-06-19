@@ -259,6 +259,10 @@ var Dom = {
         });
     },
 
+    stripBom: function(text) {
+        return text.replace(bom, "");
+    },
+
     name: function (node) {
         return node.nodeName.toLowerCase();
     },
@@ -387,7 +391,7 @@ var Dom = {
         for (var i = parent.childNodes.length - 1; i >= 0; i--) {
             var node = parent.childNodes[i];
             if (Dom.isDataNode(node)) {
-                if (!node.nodeValue.replace(bom, "").length) {
+                if (!Dom.stripBom(node.nodeValue).length) {
                     Dom.remove(node);
                 }
 

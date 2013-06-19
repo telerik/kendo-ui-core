@@ -193,7 +193,6 @@ var tests = [
     "editor/newline.html",
     "editor/outdentcommand.html",
     "editor/paragraph.html",
-    "editor/pendingformats.html",
     "editor/range.html",
     "editor/rangeenumerator.html",
     "editor/remove-block-formats.html",

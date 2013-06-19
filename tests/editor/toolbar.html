@@ -50,7 +50,6 @@
 
             module("Toolbar", {
                 teardown: function() {
-                    editor.pendingFormats.clear();
                     editor.trigger("select");
                 }
             });
@@ -195,51 +194,6 @@
                 editor.wrapper.unbind('click', navigationListener);
 
                 ok(isDefaultPrevented);
-            });
-
-            test('buttons honor to-be-applied pending formats', function() {
-                editor.value('foo')
-                var range = editor.createRange();
-                range.setStart(editor.body.firstChild, 1);
-                range.collapse(true);
-
-                editor.selectRange(range);
-
-                editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: Editor.defaultTools.bold.command });
-
-                editor.trigger('select');
-
-                ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
-            });
-
-            test('buttons honor to-be-removed pending formats', function() {
-                editor.value('<strong>foo</strong>')
-                var range = editor.createRange();
-                range.setStart(editor.body.firstChild.firstChild, 1);
-                range.collapse(true);
-
-                editor.selectRange(range);
-
-                editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: Editor.defaultTools.bold.command });
-
-                editor.trigger('select');
-
-                ok(!$('.k-bold', editor.element).hasClass('k-state-active'));
-            });
-
-            test('combos honor to-be-applied pending formats', function() {
-                editor.value('foo')
-                var range = editor.createRange();
-                range.setStart(editor.body.firstChild, 1);
-                range.collapse(true);
-
-                editor.selectRange(range);
-
-                editor.pendingFormats.toggle({ name: 'fontsize', options: { params: { value: 'xx-large' } }, command: Editor.defaultTools.fontSize.command });
-
-                editor.trigger('select');
-
-                equal($('select.k-fontSize').data(componentType).value(), 'xx-large');
             });
 
             test("unlink applies custom title", function() {

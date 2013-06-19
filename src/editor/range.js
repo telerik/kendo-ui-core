@@ -615,7 +615,7 @@ var RangeEnumerator = Class.extend({
             var nodes = [];
 
             function visit(node) {
-                if (dom.is(node, "img") || (node.nodeType == 3 && !dom.isWhitespace(node))) {
+                if (dom.is(node, "img") || (node.nodeType == 3 && (!dom.isWhitespace(node) || node.nodeValue == "\ufeff"))) {
                     nodes.push(node);
                 } else {
                     node = node.firstChild;
@@ -784,6 +784,9 @@ var Marker = Class.extend({
     add: function (range, expand) {
         var that = this;
 
+        var collapsed = range.collapsed && !RangeUtils.isExpandable(range);
+        var doc = RangeUtils.documentFromRange(range);
+
         if (expand && range.collapsed) {
             that.addCaret(range);
             range = RangeUtils.expand(range);
@@ -792,13 +795,19 @@ var Marker = Class.extend({
         var rangeBoundary = range.cloneRange();
 
         rangeBoundary.collapse(false);
-        that.end = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
+        that.end = dom.create(doc, 'span', { className: 'k-marker' });
         rangeBoundary.insertNode(that.end);
 
         rangeBoundary = range.cloneRange();
         rangeBoundary.collapse(true);
         that.start = that.end.cloneNode(true);
         rangeBoundary.insertNode(that.start);
+
+        if (collapsed) {
+            var bom = doc.createTextNode("\ufeff");
+            dom.insertAfter(bom.cloneNode(), that.start);
+            dom.insertBefore(bom, that.end);
+        }
 
         range.setStartBefore(that.start);
         range.setEndAfter(that.end);

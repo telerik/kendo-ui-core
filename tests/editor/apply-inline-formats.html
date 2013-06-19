@@ -62,7 +62,7 @@
             });
 
             test('applyFormat applies format on split text elements', function() {
-                editor.value('<p>golga<em>frin</em>cham</p>');
+                editor.value('<p>foo<em>bar</em>baz</p>');
 
                 var pararagraph = $('p', editor.document)[0];
 
@@ -72,7 +72,7 @@
 
                 impl.formatRange(range, editor.options.formats.bold);
 
-                equal(editor.value(), '<p>go<strong>lga</strong><em><strong>frin</strong></em><strong>ch</strong>am</p>');
+                equal(editor.value(), '<p>fo<strong>o</strong><em><strong>bar</strong></em><strong>ba</strong>z</p>');
             });
 
             test('applyFormat uses the supplied selector', function() {

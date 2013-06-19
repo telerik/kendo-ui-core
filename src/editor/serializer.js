@@ -176,7 +176,11 @@ var Serializer = {
             if (nodeType == 1) {
                 tagName = dom.name(node);
 
-                if (!tagName || ((node.attributes._moz_dirty || node.attributes._moz_editor_bogus_node) && dom.is(node, 'br')) || node.className == "k-marker" || node.attributes._kendo_markup) {
+                if (!tagName || ((node.attributes._moz_dirty || node.attributes._moz_editor_bogus_node) && dom.is(node, 'br')) || node.className == "k-marker") {
+                    return;
+                }
+
+                if (dom.isInline(node) && node.childNodes.length == 1 && node.firstChild.nodeType == 3&&  !text(node.firstChild)) {
                     return;
                 }
 

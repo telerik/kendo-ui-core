@@ -504,7 +504,7 @@ kendo_module({
             that.items().each(function () {
                 var tool = that.options.tools[that._toolFromClassName(this)];
                 if (tool) {
-                    tool.update($(this), nodes, editor.pendingFormats);
+                    tool.update($(this), nodes);
                 }
             });
 
@@ -576,8 +576,6 @@ kendo_module({
             ]);
 
             that.clipboard = new editorNS.Clipboard(this);
-
-            that.pendingFormats = new editorNS.PendingFormats(this);
 
             that.undoRedoStack = new editorNS.UndoRedoStack();
 
@@ -696,8 +694,7 @@ kendo_module({
         },
 
         _initializeContentElement: function() {
-            var isFirstKeyDown = true,
-                editor = this;
+            var editor = this;
 
             if (editor.textarea) {
                 editor.window = editor._createContentElement(editor.options.stylesheets);
@@ -807,14 +804,6 @@ kendo_module({
                         return false;
                     }
 
-                    if (editor.keyboard.isTypingKey(e) && editor.pendingFormats.hasPending()) {
-                        if (isFirstKeyDown) {
-                            isFirstKeyDown = false;
-                        } else {
-                            editor.pendingFormats.apply(editor.getRange());
-                        }
-                    }
-
                     editor.keyboard.clearTimeout();
 
                     editor.keyboard.keydown(e);
@@ -823,21 +812,12 @@ kendo_module({
                     var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
 
                     if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
-                        editor.pendingFormats.clear();
                         editor._selectionChange();
-                    }
-
-                    if (editor.keyboard.isTypingKey(e)) {
-                        editor.pendingFormats.apply(editor.getRange());
-                    } else {
-                        isFirstKeyDown = true;
                     }
 
                     editor.keyboard.keyup(e);
                 })
                 .on("mousedown" + NS, function(e) {
-                    editor.pendingFormats.clear();
-
                     editor._selectionStarted = true;
 
                     var target = $(e.target);
@@ -1011,8 +991,6 @@ kendo_module({
                 return;
             }
 
-            this.pendingFormats.clear();
-
             var onerrorRe = /onerror\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/i;
 
             // handle null value passed as a parameter
@@ -1160,8 +1138,7 @@ kendo_module({
         exec: function (name, params) {
             var that = this,
                 range,
-                tool, command = null,
-                pendingTool;
+                tool, command = null;
 
             name = name.toLowerCase();
 
@@ -1174,15 +1151,6 @@ kendo_module({
 
             if (tool) {
                 range = that.getRange();
-
-                if (!/undo|redo/i.test(name) && tool.willDelayExecution(range)) {
-                    // clone our tool to apply params only once
-                    pendingTool = $.extend({}, tool);
-                    $.extend(pendingTool.options, { params: params });
-                    that.pendingFormats.toggle(pendingTool);
-                    that._selectionChange();
-                    return;
-                }
 
                 if (tool.command) {
                     command = tool.command(extend({ range: range }, params));
@@ -1231,12 +1199,7 @@ kendo_module({
             return new this.options.command(commandArguments);
         },
 
-        update: $.noop,
-
-        willDelayExecution: function() {
-            return false;
-        }
-
+        update: $.noop
     });
 
     Tool.exec = function (editor, name, value) {
@@ -1255,13 +1218,11 @@ kendo_module({
                 }));
         },
 
-        update: function($ui, nodes, pendingFormats) {
-            var isPending = pendingFormats.isPending(this.name),
-                isFormatted = this.options.finder.isFormatted(nodes),
-                isActive = isPending ? !isFormatted : isFormatted;
+        update: function($ui, nodes) {
+            var isFormatted = this.options.finder.isFormatted(nodes);
 
-            $ui.toggleClass("k-state-active", isActive);
-            $ui.attr("aria-pressed", isActive);
+            $ui.toggleClass("k-state-active", isFormatted);
+            $ui.attr("aria-pressed", isFormatted);
         }
     });
 
