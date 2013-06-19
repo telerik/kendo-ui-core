@@ -524,7 +524,7 @@ kendo_module({
             that.cancelEvent();
 
             if (!model || model.recurrence) {
-                that._createRecurringDialog(model, uid);
+                that._editRecurringDialog(model, uid);
             } else {
                 that._editEvent(model);
             }
@@ -689,20 +689,24 @@ kendo_module({
             that.trigger(EDIT, { container: container, event: model });
         },
 
-        _createRecurringDialog: function(model, uid) {
+        _editRecurringDialog: function(model, uid) {
             var that = this,
                 isException = !model,
-                wnd = $('<div><button>Edit current occurrence</button><button>Edit the series</button></div>').appendTo(that.wrapper),
+                wnd = $('<div><button>Edit current occurrence</button><button>Edit the series</button></div>'),
                 buttons = wnd.find("button"),
                 origin;
 
             if (isException) {
                 model = getOccurrenceByUid(that._data, uid);
+                if (!model) {
+                    return;
+                }
+
                 origin = that.dataSource.get(model.recurrenceId);
             }
 
             if (model) {
-                that._recurringDialog = wnd.kendoWindow({
+                that._recurringDialog = wnd.appendTo(that.wrapper).kendoWindow({
                     modal: true,
                     resizable: false,
                     draggable: true,
@@ -726,11 +730,7 @@ kendo_module({
                     that._recurringDialog.destroy();
                     that._recurringDialog = null;
 
-                    if (model.recurrenceId) {
-                        model = that.dataSource.get(model.recurrenceId);
-                    }
-
-                    that._editEvent(model);
+                    that._editEvent(model.recurrenceId ? origin : model);
                 });
 
                 that._recurringDialog.center().open();
@@ -769,14 +769,68 @@ kendo_module({
             var model = typeof uid == "string" ? this.dataSource.getByUid(uid) : uid,
                 that = this;
 
+            if (!model || model.recurrence) {
+                that._deleteRecurringDialog(model, uid);
+            } else {
+                that._removeEvent(model);
+            }
+        },
+
+        _removeEvent: function(model) {
+            var that = this;
+            that._confirmation(function() {
+                if (!that.trigger(REMOVE, { event: model })) {
+                    if (that.dataSource.remove(model)) {
+                        that.dataSource.sync();
+                    }
+                }
+            });
+        },
+
+        _deleteRecurringDialog: function(model, uid) {
+            var that = this,
+                isException = !model,
+                wnd = $('<div><button>Delete current occurrence</button><button>Delete the series</button></div>'),
+                buttons = wnd.find("button"),
+                origin;
+
+            if (isException) {
+                model = getOccurrenceByUid(that._data, uid);
+                if (!model) {
+                    return;
+                }
+
+                origin = that.dataSource.get(model.recurrenceId);
+            }
+
             if (model) {
-                this._confirmation(function() {
-                    if (!that.trigger(REMOVE, { event: model })) {
-                        if (that.dataSource.remove(model)) {
-                            that.dataSource.sync();
-                        }
+                that._recurringDialog = wnd.appendTo(that.wrapper).kendoWindow({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: "Delete Recurring Item",
+                    visible: false
+                }).data("kendoWindow");
+
+                buttons.eq(0).on("click", function() {
+                    that._recurringDialog.destroy();
+                    that._recurringDialog = null;
+
+                    if (isException) {
+                        that._addExceptionDate(origin, model.start);
+                    } else {
+                        that._removeEvent(model);
                     }
                 });
+
+                buttons.eq(1).on("click", function() {
+                    that._recurringDialog.destroy();
+                    that._recurringDialog = null;
+
+                    that._removeEvent(model.recurrenceId ? origin : model);
+                });
+
+                that._recurringDialog.center().open();
             }
         },
 
