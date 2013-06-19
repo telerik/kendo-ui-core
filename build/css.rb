@@ -33,7 +33,7 @@ file_merge 'styles/web/kendo.winjs.css' => [
 file 'styles/web/kendo.winjs.css' => 'build/css.rb'
 
 file_merge 'styles/mobile/kendo.icenium.css' => [
-    'styles/mobile/kendo.mobile.all.css',
+    'styles/mobile/kendo.mobile.icenium.css',
     'styles/dataviz/kendo.dataviz.css',
 ]
 
