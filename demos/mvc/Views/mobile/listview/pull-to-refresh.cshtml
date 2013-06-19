@@ -3,13 +3,25 @@
         <div data-role="navbar">
             <span data-role="view-title"></span>
             <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+            <a data-align="right" data-icon="add" data-role="button"  data-rel="modalview" href="#modalview-add"></a>
         </div>
     </header>
 
-    <input type="text" id="name" placeholder="Type product name here"/>
-    <button id="addNew">Add new product</button>
-
     <ul id="pull-to-refresh-listview"></ul>
+</div>
+
+<div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;" data-init="modalViewInit">
+    <div data-role="header">
+        <div data-role="navbar">
+            <span>Add New Product</span>
+            <a data-click="closeModalViewAdd" data-role="button" data-align="right">Cancel</a>
+        </div>
+    </div>
+
+    <ul data-role="listview" data-style="inset">
+        <li><label for="username">Product Name:</label> <input type="text" id="name" /></li>
+    </ul>
+    <a data-click="closeModalViewAdd" id="addNew" type="button" data-role="button">Add New Product</a>
 </div>
 
 <script type="text/x-kendo-tmpl" id="pull-to-refresh-template">
@@ -35,9 +47,18 @@
             pageSize: 40
         });
 
-
-        var loader = e.view.loader;
-
+        $("#pull-to-refresh-listview").kendoMobileListView({
+            dataSource: dataSource,
+            pullToRefresh: true,            
+            template: $("#pull-to-refresh-template").text()            
+        });
+    }
+    
+    function closeModalViewAdd() {
+        $("#modalview-add").kendoMobileModalView("close");
+    }
+    
+    function modalViewInit(e) {    
         var addProductDataSource = new kendo.data.DataSource({
             transport: {
                 create: {
@@ -61,20 +82,12 @@
             },
             autoSync: true,
             batch: true,            
-            requestEnd: function () {                
-                loader.hide();
+            requestEnd: function () {                                
                 $("#name").val("");                
             }
         });
-
-        $("#pull-to-refresh-listview").kendoMobileListView({
-            dataSource: dataSource,
-            pullToRefresh: true,            
-            template: $("#pull-to-refresh-template").text()            
-        });
-
-        $("#addNew").click(function () {
-            loader.show();
+        
+        $("#addNew").click(function () {            
             addProductDataSource.add({ 
                 ProductName: $("#name").val(),
                 UnitPrice: Math.floor((Math.random() * 10) + 1) 
@@ -85,8 +98,19 @@
 
 <style scoped>
     .product {
-        font-size: .8em;
-        line-height: 1.4em;
+        font-size: 1.2;
+    }
+    .product h3 {
+        float: left;
+        margin: 0;
+        padding: 0;
+        height: 1.3em;
+        overflow: hidden;
+    }
+    .product p {
+        float: right;
+        margin: 0;
+        padding: 0;
     }
     .pullImage {
         width: 64px;
@@ -94,5 +118,12 @@
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }    
+    }
+    #addNew {
+        display: block;
+        text-align: center;
+        margin: 0 3em;
+        padding: .5em;
+        font-size: 1.2em;
+    }
 </style>
