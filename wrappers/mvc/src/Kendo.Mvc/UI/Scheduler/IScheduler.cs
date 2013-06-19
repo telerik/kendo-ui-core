@@ -30,5 +30,10 @@
         {
             get;
         }
+
+        IList<SchedulerViewBase> Views
+        {
+            get;
+        }
     }
 }

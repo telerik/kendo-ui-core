@@ -27,6 +27,8 @@
             UrlGenerator = urlGenerator;
 
             Resources = new List<SchedulerResource<TModel>>();
+
+            Views = new List<SchedulerViewBase>();
         }
 
         public DataSource DataSource
@@ -47,6 +49,12 @@
             private set;
         }
 
+        public IList<SchedulerViewBase> Views
+        {
+            get;
+            private set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
@@ -60,23 +68,27 @@
         {
             var options = new Dictionary<string, object>(Events);
 
-
             Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
 
             dataSource["type"] = "scheduler-aspnetmvc";
 
-            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
-            {      
-                options["dataSource"] = dataSource;
-            }
-            else if (DataSource.Data != null)
+            //TODO: update logic
+            if (DataSource.Data != null)
             {
-                dataSource["data"] = new { Data = DataSource.Data };
-
-                options["dataSource"] = dataSource;
+                dataSource["data"] = new { Data = DataSource.Data }; 
             }
 
-            options["resources"] = Resources.ToJson();
+            options["dataSource"] = dataSource;
+
+            if (Resources.Count > 0)
+            {
+                options["resources"] = Resources.ToJson();
+            }
+
+            if (Views.Count > 0)
+            {
+                options["views"] = Views.ToJson();
+            }
 
             return options;
         }
