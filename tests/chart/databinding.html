@@ -330,7 +330,37 @@
                             start();
                         }
                     });
-                });
+                })
+
+                asyncTest("string date categories are populated from series", function() {
+                    chart = createChart({
+                        series: [{
+                            field: "sales",
+                            categoryField: "period"
+                        }],
+                        dataSource: [{
+                            period: "2013/01/01 00:00",
+                            sales: 100
+                        }, {
+                            period: "2013/02/01 00:00",
+                            sales: 110
+                        }, {
+                            period: "2013/01/01 00:00",
+                            sales: 100
+                        }, {
+                            period: "2013/02/01 00:00",
+                            sales: 110
+                        }],
+                        categoryAxis: {
+                            type: "date"
+                        },
+                        dataBound: function() {
+                            deepEqual(this.options.categoryAxis.categories,
+                                [new Date("2013/01/01 00:00"), new Date("2013/02/01 00:00")]);
+                            start();
+                        }
+                    });
+                });;
 
                 asyncTest("date categories data items are populated from series", function() {
                     chart = createChart({

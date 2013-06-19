@@ -1054,6 +1054,10 @@ kendo_module({
                             dateAxis = isDateAxis(axis, category);
                         }
 
+                        if (dateAxis) {
+                            category = toDate(category);
+                        }
+
                         if (dateAxis || !uniqueCategories[category]) {
                             items.push([category, dataRow]);
 
