@@ -61,6 +61,10 @@
             <End Role="Meetings" EntitySet="Meetings" />
             <End Role="MeetingAtendees" EntitySet="MeetingAtendees" />
           </AssociationSet>
+          <AssociationSet Name="FK_Meetings_Meetings" Association="SampleModel.Store.FK_Meetings_Meetings">
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="Meetings1" EntitySet="Meetings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_Details_Orders" Association="SampleModel.Store.FK_Order_Details_Orders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Order Details" EntitySet="Order Details" />
@@ -88,6 +92,10 @@
           <AssociationSet Name="FK_Products_Suppliers" Association="SampleModel.Store.FK_Products_Suppliers">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Tasks" Association="SampleModel.Store.FK_Tasks_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Tasks1" EntitySet="Tasks" />
           </AssociationSet>
           <AssociationSet Name="FK_Territories_Region" Association="SampleModel.Store.FK_Territories_Region">
             <End Role="Region" EntitySet="Region" />
@@ -398,6 +406,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Meetings_Meetings">
+          <End Role="Meetings" Type="SampleModel.Store.Meetings" Multiplicity="0..1" />
+          <End Role="Meetings1" Type="SampleModel.Store.Meetings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetings">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="Meetings1">
+              <PropertyRef Name="RecurrenceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_Details_Orders">
           <End Role="Orders" Type="SampleModel.Store.Orders" Multiplicity="1" />
           <End Role="Order Details" Type="SampleModel.Store.Order Details" Multiplicity="*" />
@@ -482,6 +502,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tasks_Tasks">
+          <End Role="Tasks" Type="SampleModel.Store.Tasks" Multiplicity="0..1" />
+          <End Role="Tasks1" Type="SampleModel.Store.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Tasks1">
+              <PropertyRef Name="RecurrenceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Territories_Region">
           <End Role="Region" Type="SampleModel.Store.Region" Multiplicity="1" />
           <End Role="Territories" Type="SampleModel.Store.Territories" Multiplicity="*" />
@@ -562,6 +594,14 @@
           <AssociationSet Name="FK_MeetingAtendee_Meeting" Association="SampleModel.FK_MeetingAtendee_Meeting">
             <End Role="Meeting" EntitySet="Meetings" />
             <End Role="MeetingAtendee" EntitySet="MeetingAtendees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meetings_Meetings" Association="SampleModel.FK_Meetings_Meetings">
+            <End Role="Meeting" EntitySet="Meetings" />
+            <End Role="Meeting1" EntitySet="Meetings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Tasks" Association="SampleModel.FK_Tasks_Tasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Task1" EntitySet="Tasks" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -890,16 +930,18 @@
           <Key>
             <PropertyRef Name="TaskID" />
           </Key>
-          <Property Type="Int32" Name="TaskID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="Start" Nullable="false" />
-          <Property Type="DateTime" Name="End" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="OwnerID" />
-          <Property Type="Boolean" Name="IsAllDay" Nullable="false" />
-          <Property Type="String" Name="Recurrence" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="RecurrenceID" />
-          <Property Type="String" Name="RecurrenceException" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TaskID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Start" Nullable="false" Type="DateTime" />
+          <Property Name="End" Nullable="false" Type="DateTime" />
+          <Property Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="OwnerID" Type="Int32" />
+          <Property Name="IsAllDay" Nullable="false" Type="Boolean" />
+          <Property Name="Recurrence" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="RecurrenceID" Type="Int32" />
+          <Property Name="RecurrenceException" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <NavigationProperty Name="RecurrenceExceptions" Relationship="SampleModel.FK_Tasks_Tasks" FromRole="Task" ToRole="Task1" />
+          <NavigationProperty Name="Task1" Relationship="SampleModel.FK_Tasks_Tasks" FromRole="Task1" ToRole="Task" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -916,6 +958,8 @@
           <Property Type="Int32" Name="RecurrenceID" />
           <Property Type="String" Name="RecurrenceException" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MeetingAtendees" Relationship="SampleModel.FK_MeetingAtendee_Meeting" FromRole="Meeting" ToRole="MeetingAtendee" />
+          <NavigationProperty Name="RecurrenceExceptions" Relationship="SampleModel.FK_Meetings_Meetings" FromRole="Meeting" ToRole="Meeting1" />
+          <NavigationProperty Name="Meeting1" Relationship="SampleModel.FK_Meetings_Meetings" FromRole="Meeting1" ToRole="Meeting" />
         </EntityType>
         <Association Name="FK_MeetingAtendee_Meeting">
           <End Type="SampleModel.Meeting" Role="Meeting" Multiplicity="1" />
@@ -926,6 +970,30 @@
             </Principal>
             <Dependent Role="MeetingAtendee">
               <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meetings_Meetings">
+          <End Type="SampleModel.Meeting" Role="Meeting" Multiplicity="0..1" />
+          <End Type="SampleModel.Meeting" Role="Meeting1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="Meeting1">
+              <PropertyRef Name="RecurrenceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Tasks">
+          <End Type="SampleModel.Task" Role="Task" Multiplicity="0..1" />
+          <End Type="SampleModel.Task" Role="Task1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Task1">
+              <PropertyRef Name="RecurrenceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1267,11 +1335,23 @@
           <ConnectorPoint PointX="8" PointY="10.307571614583333" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SampleModel.MeetingAtendee" Width="1.5" PointX="12.625" PointY="5.5" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="SampleModel.Task" Width="1.5" PointX="10.375" PointY="8.75" Height="2.9417936197916674" />
-        <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="10.375" PointY="4.75" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="SampleModel.Task" PointX="10.375" PointY="9.25" Width="1.5" Height="3.3263964843749996" />
+        <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="10.375" PointY="5.25" Height="3.5186979166666656" />
         <AssociationConnector Association="SampleModel.FK_MeetingAtendee_Meeting" >
           <ConnectorPoint PointX="11.875" PointY="6.297841796875" />
           <ConnectorPoint PointX="12.625" PointY="6.297841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="SampleModel.FK_Meetings_Meetings" >
+          <ConnectorPoint PointX="10.906923076923077" PointY="8.7686979166666656" />
+          <ConnectorPoint PointX="10.906923076923077" PointY="9.0186979166666656" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="9.0186979166666656" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="8.7686979166666656" />
+        </AssociationConnector>
+        <AssociationConnector Association="SampleModel.FK_Tasks_Tasks" >
+          <ConnectorPoint PointX="10.906923076923077" PointY="12.576396484375" />
+          <ConnectorPoint PointX="10.906923076923077" PointY="12.826396484375" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="12.826396484375" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="12.576396484375" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>
