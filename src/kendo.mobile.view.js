@@ -49,7 +49,7 @@ kendo_module({
             element = that.element;
 
             that.params = {};
-            that.lastParams = {};
+            that._paramsHistory = [];
 
             $.extend(that, options);
 
@@ -122,25 +122,23 @@ kendo_module({
         },
 
         updateParams: function(transition, params, callback) {
-            var that = this;
-
-            if (!transition) {
-                if (that.trigger(BEFORE_SHOW, {view: that})) {
-                    return;
-                }
-
-                that.lastParams = that.params;
-                that.params = params;
-
-                that.trigger(SHOW, {view: that});
-                callback();
-            } else {
-                that.switchWith(new ViewClone(that), transition, params, callback);
+            // the newly passed parameters equal the last parameters of the view - we are going back
+            if (this.equalToPreviousParams(params)) {
+                this.nextViewID = this.id;
+                this.backTransition = this.transition;
             }
+
+            this.switchWith(new ViewClone(this), transition, params, callback);
+        },
+
+
+        equalToPreviousParams: function(params) {
+            return this._paramsHistory[this._paramsHistory.length - 2] === JSON.stringify(params);
         },
 
         switchWith: function(view, transition, params, callback) {
             var that = this,
+                paramsHistory = this._paramsHistory,
                 complete = function() {
                     that.trigger(AFTER_SHOW, {view: that});
                     callback();
@@ -150,7 +148,14 @@ kendo_module({
                 return;
             }
 
-            that.lastParams = that.params;
+            if (this.equalToPreviousParams(params)) {
+                paramsHistory.pop();
+                that._back = true;
+            } else {
+                paramsHistory.push(JSON.stringify(params));
+                that._back = false;
+            }
+
             that.params = params;
 
             if (view) {
@@ -265,11 +270,18 @@ kendo_module({
 
     var ViewClone = kendo.mobile.ui.Widget.extend({
         init: function(view) {
-            this.element = view.element.clone(true);
-            this.header = this.element.children(roleSelector("header"));
-            this.content = this.element.children(roleSelector("content"));
-            this.footer = this.element.children(roleSelector("footer"));
-            this.params = JSON.stringify(view.params);
+            var elementClone = view.element.clone(true);
+
+            $.extend(this, {
+                element: elementClone,
+                header: elementClone.children(roleSelector("header")),
+                content: elementClone.children(roleSelector("content")),
+                footer: elementClone.children(roleSelector("footer")),
+                transition: view.transition,
+                params: JSON.stringify(view.params),
+                id: view.id
+            });
+
             view.element.parent().append(this.element);
         },
 
@@ -365,7 +377,7 @@ kendo_module({
             var next = this.next,
                 current = this.current;
 
-            return next.nextViewID && next.nextViewID === current.id && JSON.stringify(next.params) === JSON.stringify(next.lastParams);
+            return next.nextViewID && next.nextViewID === current.id && next._back;
         }
     });
 

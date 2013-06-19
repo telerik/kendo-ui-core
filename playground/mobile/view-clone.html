@@ -19,24 +19,14 @@
         <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
-        <style>
-            #stretch {
-                background-color: orange;
-            }
-
-            .km-stretched-view {
-                display: -webkit-box;
-            }
-
-            .km-stretched-view > * {
-                width: 100%;
-            }
-        </style>
     </head>
     <body>
-        <div data-role="view" data-stretch="true" id="foo">
+        <div data-role="view" id="foo" data-show="incrementNumber" data-transition="slide">
             <div data-role="header">
-                <h1>Header</h1>
+                <nav data-role="navbar">
+                    <a data-role="backbutton" data-align="left">Бек</a>
+                    <span data-role="view-title">Header</span>
+                </nav>
             </div>
 
             <div id="stretch">
@@ -49,10 +39,16 @@
 
         <script>
             var i = 0;
-            function navigateToSelf() {
+
+            function navigateToSelf(e) {
                 i ++;
                 kendo.mobile.application.navigate("#foo?i=" + i, "slide");
             }
+
+            function incrementNumber(e) {
+                e.view.element.find('[data-role=button]').html("Navigate to Self " + (e.view.params.i || 0));
+            }
+
             $(function() {
                 new kendo.mobile.Application();
             });
