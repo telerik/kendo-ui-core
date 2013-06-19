@@ -87,6 +87,18 @@
                 ok(container[0]);
             });
 
+            test("renders frequency in 'k-edit-field' container", function() {
+                div.wrap("<div class='k-edit-field' />");
+
+                var parentDiv = div.parent();
+
+                div.kendoRecurrenceEditor();
+
+                var container = parentDiv.next(".k-recur-view");
+
+                ok(container[0]);
+            });
+
             module("kendo.ui.RecurrenceEditor Daily view", {
                 setup: function() {
                     div = $("<div />").appendTo(document.body);

@@ -975,15 +975,16 @@ kendo_module({
     };
 
     //TODO: REFACTOR Recurrence Widget
-    var INTERVAL = '{0}<input class="k-recur-interval" />{1}';
-    var END_COUNT = '{0}<input class="k-recur-count" />{1}';
-    var END_UNTIL = '{0}<input class="k-recur-until" />{1}';
-    var END_HTML = '<div class="k-edit-label">{0}</div>' +
-                   '<div class="k-edit-field"><input class="k-recur-end-never" type="radio" name="end" value="never" />{1}</div>' +
-                   '<div class="k-edit-label"></div>' +
-                   '<div class="k-edit-field"><input class="k-recur-end-count" type="radio" name="end" value="count" />{2}</div>' +
-                   '<div class="k-edit-label"></div>' +
-                   '<div class="k-edit-field"><input class="k-recur-end-until" type="radio" name="end" value="until" />{3}</div>';
+    var INTERVAL = '<div class="k-edit-label"><label>{0}</label></div><div class="k-edit-field"><input class="k-recur-interval" />{1}</div>';
+    var END_COUNT = '<input class="k-recur-count" />{1}';
+    var END_UNTIL = '<input class="k-recur-until" />';
+    var END_HTML = '<div class="k-edit-label"><label>{0}</label></div>' +
+                   '<div class="k-edit-field">' +
+                   '<ul class="k-reset">' +
+                       '<li><label><input class="k-recur-end-never" type="radio" name="end" value="never" />{1}</label></li>' +
+                       '<li><label><input class="k-recur-end-count" type="radio" name="end" value="count" />{2}</label>{3}</li>' +
+                       '<li><label><input class="k-recur-end-until" type="radio" name="end" value="until" />{4}</label>{5}</li>' +
+                   '</ul></div>';
 
     var MONTHDAY_HTML = '<div class="k-edit-field"><input class="k-recur-month-radio" type="radio" name="month" value="monthday" />' +
                             '{0}<input class="k-recur-monthday" />' +
@@ -1506,10 +1507,17 @@ kendo_module({
             that._toggleMonthDayRule(yearRule);
         },
 
-        //rendering
         _container: function() {
-            var container = $('<div class="k-recur-view" />');
-            this.element.append(container);
+            var element = this.element,
+                container = $('<div class="k-recur-view" />'),
+                editContainer = element.parent(".k-edit-field");
+
+            if (editContainer[0]) {
+                container.insertAfter(editContainer);
+            } else {
+                element.append(container);
+            }
+
             this.container = container;
         },
 
@@ -1554,9 +1562,8 @@ kendo_module({
                 weekly = messages.weekly,
                 monthly = messages.monthly,
                 yearly = messages.yearly,
-                until = kendo.format(END_UNTIL, end.endUntilOn),
-                count = kendo.format(END_COUNT, end.endCountAfter, end.endCountOccurrence),
-                endHtml = kendo.format(END_HTML, end.endLabel, end.endNever, count, until),
+                count = kendo.format(END_COUNT, end.endCountOccurrence),
+                endHtml = kendo.format(END_HTML, end.endLabel, end.endNever, end.endCountAfter, count, end.endUntilOn, END_UNTIL),
                 monthHtml = monthly.repeatOn + kendo.format(MONTHDAY_HTML, monthly.day) + WEEKDAY_HTML,
                 yearHtml = yearly.repeatOn + MONTH_HTML + kendo.format(WEEKDAY_WITH_MONTH_HTML, yearly.of);
 
