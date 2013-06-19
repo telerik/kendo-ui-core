@@ -123,7 +123,6 @@
             "name": "colorpicker",
             "documentation": "web/colorpicker",
             "spriteCssClass": "colorPickerIcon",
-            "new": true,
             "items": [
                 {
                     "text": "Basic usage",
@@ -832,7 +831,6 @@
             "name": "multiselect",
             "documentation": "web/multiselect",
             "spriteCssClass": "multiselectIcon",
-            "new": true,
             "items": [
                 {
                     "text": "Basic usage",
@@ -987,7 +985,8 @@
             "text": "Scheduler",
             "name": "scheduler",
             "documentation": "web/scheduler",
-            "spriteCssClass": "sliderIcon",
+            "spriteCssClass": "schedulerIcon",
+            "new": true,
             "items": [
                 {
                     "text": "Basic usage",
@@ -1221,7 +1220,6 @@
             "name": "tooltip",
             "documentation": "web/tooltip",
             "spriteCssClass": "tooltipIcon",
-            "new": true,
             "items": [
                 {
                     "text": "Basic usage",
@@ -1579,7 +1577,6 @@
             "name": "spa",
             "documentation": "framework/kendo",
             "spriteCssClass": "spaIcon",
-            "new": true,
             "items": [
                 {
                     "text": "Launch",

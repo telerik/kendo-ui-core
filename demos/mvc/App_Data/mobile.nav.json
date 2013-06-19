@@ -103,6 +103,7 @@
             "name": "drawer",
             "documentation": "mobile/drawer",
             "spriteCssClass": "mobileDrawerIcon",
+            "new": true,
             "items": [
                 {
                     "text": "Basic usage",
