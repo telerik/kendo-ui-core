@@ -57,11 +57,17 @@
                 json["dataSource"] = DataSource.Data;
             }
 
-            json["title"] = Title;
+            if (!string.IsNullOrEmpty(Title))
+            {
+                json["title"] = Title;
+            }
 
             json["field"] = Field;
 
-            json["multiple"] = Multiple;
+            if (Multiple != false)
+            {
+                json["multiple"] = Multiple;
+            }
 
             if (!string.IsNullOrEmpty(DataTextField))
             {
