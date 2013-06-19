@@ -35,16 +35,16 @@ $(function() {
             },
             schema: {
                 model: {
-                    id: "ID",
+                    id: "meetingID",
                     fields: {
-                        ID: { type: "number" },
+                        meetingID: { from: "MeetingID", type: "number" },
                         title: { from: "Title", defaultValue: "No title", validation: { required: true } },
                         start: { type: "date", from: "Start" },
                         end: { type: "date", from: "End" },
                         description: { from: "Description" },
                         recurrence: { from: "Recurrence" },
-                        roomId: { from: "RoomID" },
-                        atendees: { from: "Atendees" },
+                        roomId: { from: "RoomID", nullable: true },
+                        atendees: { from: "Atendees", nullable: true },
                         isAllDay: { type: "boolean", from: "IsAllDay" }
                     }
                 }
