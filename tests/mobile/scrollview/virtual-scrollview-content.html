@@ -39,7 +39,10 @@
                 VIRTUAL_PAGE_COUNT = 3,
                 LEFT_PAGE = -1,
                 CETER_PAGE = 0,
-                RIGHT_PAGE = 1;
+                RIGHT_PAGE = 1,
+                LEFT_SWIPE = -1,
+                NUDGE = 0,
+                RIGHT_SWIPE = 1;
 
             var VirtualScrollViewContent = kendo.Class.extend({
                 init: function(element, pane, options) {
@@ -50,9 +53,10 @@
                     that.options = options;
                     that.template = kendo.template(options.template || ""),
                     that.emptyTemplate = kendo.template(options.emptyTemplate || ""),
+                    that.page = 0;
                     that.pages = [];
                     that._initPages();
-                    that._arrangePages();
+                    that.resizeTo(that.element.width());
                     that._dataSource();
                     that._buffer();
 
@@ -98,20 +102,106 @@
                     }
                 },
 
-                _arrangePages: function() {
-                    var pane = this.pane,
-                        pages = this.pages,
-                        width = pane.size();
+                resizeTo: function(width) {
+                    var pages = this.pages,
+                        pane = this.pane;
 
                     for (var i = 0; i < pages.length; i++) {
                         pages[i].setWidth(width);
                     }
+
+                    pane.updateDimension();
 
                     pages[0].position(LEFT_PAGE);
                     pages[1].position(CETER_PAGE);
                     pages[2].position(RIGHT_PAGE);
 
                     this.width = width;
+                },
+
+                scrollTo: function(page, instant) {
+                    var buffer = this.buffer,
+                        pages = this.pages,
+                        dataItem;
+
+                    buffer.syncDataSource();
+                    dataItem = buffer.at(page);
+
+                    if(!dataItem) {
+                        return;
+                    }
+
+                    for (var i = 0; i < pages.length; i++) {
+                        pages[i].position(i-1);
+                        this.setPageContent(pages[i], page + (i-1));
+                    }
+
+                    this.page = page;
+                },
+
+                paneMoved: function(swipeType, bounce, callback) {
+                    var that = this,
+                        pane = that.pane,
+                        width = pane.size(),
+                        ease = bounce ? kendo.effects.Transition.easeOutBack : kendo.effects.Transition. easeOutExpo,
+                        isEndReached = that.page + 2 > that.buffer.total;
+
+                    if(swipeType === RIGHT_SWIPE) {
+                        if(that.page === 0) {
+                            that._cancelMove(ease);
+                        } else {
+                            that._moveBackward();
+                        }
+                        return;
+                    } else if(swipeType === LEFT_SWIPE && !isEndReached) {
+                        that._moveForward();
+                        return;
+                    }
+
+                    if(swipeType === NUDGE) {
+                        that._cancelMove(ease);
+                    }
+
+                },
+
+                updatePage: function() {
+                    var pages = this.pages;
+
+                    if(this.pane.movable.x === 0) {
+                        return;
+                    }
+
+                    if(this.pane.movable.x < 0) {
+                        pages.push(this.pages.shift());//forward
+                        this.page++;
+                        this.setPageContent(pages[2], this.page + 1);
+                    } else {
+                        pages.unshift(this.pages.pop()); //back
+                        this.page--;
+                        this.setPageContent(pages[0], this.page - 1);
+                    }
+
+                    pages[0].position(-1);
+                    pages[1].position(0);
+                    pages[2].position(1);
+
+                    this._resetMovable();
+                },
+
+                _resetMovable: function() {
+                    this.pane.moveTo(0);
+                },
+
+                _moveForward: function(instant) {
+                    this.pane.transitionTo(-this.width, kendo.effects.Transition.easeOutExpo, instant);
+                },
+
+                _moveBackward: function(instant) {
+                    this.pane.transitionTo(this.width, kendo.effects.Transition.easeOutExpo, instant);
+                },
+
+                _cancelMove: function(ease) {
+                    this.pane.transitionTo(0, ease, false);
                 },
 
                 _resetPages: function() {
@@ -154,7 +244,7 @@
                 element,
                 pane;
 
-            module("ScrollView VirtualScrollViewContent", { 
+            module("VirtualScrollView content", { 
                 setup: function() {
 
                     var dataSourceConfig = {
@@ -179,7 +269,8 @@
                     var options = {
                         dataSource: dataSourceConfig,
                         autoBind: true,
-                        template: "<div class='foo'>#: foo #</div>"
+                        template: "<div class='foo'>#: foo #</div>",
+                        emptyTemplate: "<div>empty</div>"
                     };
 
                     element = $("<div style='width: 400px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 400px;' />");
@@ -200,6 +291,17 @@
                 equal(pages[2].element.get(0).style["-webkit-transform"], "translate3d(400px, 0, 0)");
             });
 
+            test("re-calculates the pages width on pane resize", 2, function() {
+                element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
+                pane = new ElasticPane(element);
+                content = new VirtualScrollViewContent(element, pane, {});
+
+                equal(content.pages[0].element.width(), 500);
+
+                content.resizeTo(300);
+                equal(content.pages[0].element.width(), 300);
+            });
+
             test("creates buffer correctly", 2, function() {
                 var content = new VirtualScrollViewContent(element, new ElasticPane(element), {});
                 ok(content.buffer instanceof kendo.data.Buffer);
@@ -208,7 +310,7 @@
                 ok(content.buffer instanceof BatchBuffer);
             });
 
-            test("sets the content correctly", 7, function() {
+            test("sets the content correctly", 5, function() {
                 var page = content.pages[0];
                 equal(page.element.find(">div").length, 0);
 
@@ -219,12 +321,131 @@
                 content.setPageContent(page, 3);
                 equal(page.element.children().length, 1);
                 equal(page.element.find(">div").text(), "3");
+            });
+
+            test("sets the empty content correctly when data is not available in the buffer", 1, function() {
+                var page = content.pages[0];
 
                 content.setPageContent(page, -1); //test for non existing content
-                equal(page.element.children().length, 0);
-                equal(page.element.find(">div").text(), "");
+                equal(page.element.find(">div").text(), "empty");
+            })
+
+            test("scrolls to the provided page", 12, function() {
+                content.scrollTo(6);
+
+                equal(content.page, 6);
+                equal(content.pages[0].element.text(), "5");
+                equal(content.pages[1].element.text(), "6");
+                equal(content.pages[2].element.text(), "7");
+
+                content.scrollTo(10);
+
+                equal(content.page, 10);
+                equal(content.pages[0].element.text(), "9");
+                equal(content.pages[1].element.text(), "10");
+                equal(content.pages[2].element.text(), "11");
+
+                content.scrollTo(0);
+
+                equal(content.page, 0);
+                equal(content.pages[0].element.text(), "empty");
+                equal(content.pages[1].element.text(), "0");
+                equal(content.pages[2].element.text(), "1");
             });
+
+            var content,
+                pane;
+
+            module("VirtualScrollView Content dragging", {
+                setup: function() {
+                    var element = $("<div style='width: 400px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 400px;' />");
+
+                    var dataSourceConfig = {
+                        transport: {
+                            read: function(options) {
+
+                                var results = [], data = options.data;
+                                for (var i = data.skip; i < data.skip + data.take; i ++) {
+                                    results.push({ foo: i });
+                                }
+
+                                options.success(results);
+                            }
+                        },
+                        pageSize: 36,
+                        serverPaging: true,
+                        schema: {
+                            total: function() { return 100000; }
+                        }
+                    };
+
+                    var options = {
+                        dataSource: dataSourceConfig,
+                        autoBind: true,
+                        template: "<div class='foo'>#: foo #</div>",
+                        emptyTemplate: "<div>empty</div>"
+                    };
+
+                    pane = new ElasticPane(element);
+                    content = new VirtualScrollViewContent(element, pane, options);
+                    content.resizeTo(400);
+                }
+            });
+
+           asyncTest("small drag snaps the content back to the current page", 2, function() {
+                pane.moveTo(50);
+                content.paneMoved(NUDGE);
+                setTimeout(function() {
+                    start();
+                    equal(content.page, 0);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+            asyncTest("swift swipe to right snaps the content back to the current page when ScrollView is at the first page", 2, function() {
+                pane.moveTo(50);
+                content.paneMoved(RIGHT_SWIPE);
+                setTimeout(function() {
+                    start();
+                    equal(content.page, 0);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+            asyncTest("swift swipe to right snaps the content back to the previous page when ScrollView is not at the first page", 2, function() {
+                content.scrollTo(7);
+                pane.moveTo(50);
+                content.paneMoved(RIGHT_SWIPE);
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 6);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+            asyncTest("swift swipe to left snaps the content to the next page if buffer end is NOT reached", 2, function() {
+                pane.moveTo(-50);
+                content.paneMoved(LEFT_SWIPE);
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 1);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+            asyncTest("swift swipe to left snaps the content back to the current page if buffer end is reached", 2, function() {
+                pane.moveTo(-50);
+                content.paneMoved(LEFT_SWIPE);
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 1);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
         </script>
     </body>
 </html>
-
