@@ -1097,20 +1097,6 @@
             ]
         },
 		{
-            "text": "Scheduler",
-            "name": "scheduler",
-            "documentation": "web/scheduler",
-			"packages": [ "mvc" ],
-            "items": [
-                {
-                    "text": "Basic usage",
-                    "url": "scheduler/index.html",
-                    "title": "Scheduler control example",
-                    "meta": "This is basic Scheduler demo."
-                }
-			]
-		},
-        {
             "text": "TabStrip",
             "name": "tabstrip",
             "documentation": "web/tabstrip",
