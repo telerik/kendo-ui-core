@@ -176,7 +176,6 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("autoBind", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

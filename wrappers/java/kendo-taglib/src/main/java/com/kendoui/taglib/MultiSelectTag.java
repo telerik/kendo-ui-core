@@ -85,7 +85,6 @@ public class MultiSelectTag extends WidgetTag /* interfaces */implements DataBou
         setProperty("autoBind", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

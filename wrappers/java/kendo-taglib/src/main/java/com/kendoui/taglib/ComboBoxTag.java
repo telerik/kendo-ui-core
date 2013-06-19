@@ -98,7 +98,6 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("cascadeFrom", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

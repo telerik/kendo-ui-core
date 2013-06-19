@@ -134,11 +134,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("draggable", value);
     }
 
-    public float getHeight() {
-        return (float)getProperty("height");
+    public Object getHeight() {
+        return (Object)getProperty("height");
     }
 
-    public void setHeight(float value) {
+    public void setHeight(Object value) {
         setProperty("height", value);
     }
 
@@ -222,11 +222,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("visible", value);
     }
 
-    public float getWidth() {
-        return (float)getProperty("width");
+    public Object getWidth() {
+        return (Object)getProperty("width");
     }
 
-    public void setWidth(float value) {
+    public void setWidth(Object value) {
         setProperty("width", value);
     }
 

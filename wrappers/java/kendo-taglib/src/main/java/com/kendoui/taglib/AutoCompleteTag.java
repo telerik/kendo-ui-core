@@ -78,7 +78,6 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBo
         setEvent("select", value.getBody());
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

@@ -175,7 +175,6 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
         setProperty("autoBind", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

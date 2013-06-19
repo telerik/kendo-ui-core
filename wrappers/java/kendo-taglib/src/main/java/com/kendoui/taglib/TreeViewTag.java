@@ -117,6 +117,14 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setEvent("select", value.getBody());
     }
 
+    public boolean getAutoBind() {
+        return (boolean)getProperty("autoBind");
+    }
+
+    public void setAutoBind(boolean value) {
+        setProperty("autoBind", value);
+    }
+
     public boolean getCheckboxes() {
         return (boolean)getProperty("checkboxes");
     }
@@ -133,7 +141,6 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setProperty("dataImageUrlField", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

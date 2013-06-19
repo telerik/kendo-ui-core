@@ -72,7 +72,6 @@ public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("buttonCount", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

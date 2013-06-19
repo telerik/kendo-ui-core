@@ -156,7 +156,6 @@ public class SparklineTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("data", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

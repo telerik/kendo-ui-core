@@ -74,6 +74,14 @@ public class DateTimePickerTag extends WidgetTag /* interfaces *//* interfaces *
         setEvent("open", value.getBody());
     }
 
+    public String getARIATemplate() {
+        return (String)getProperty("ARIATemplate");
+    }
+
+    public void setARIATemplate(String value) {
+        setProperty("ARIATemplate", value);
+    }
+
     public String getCulture() {
         return (String)getProperty("culture");
     }

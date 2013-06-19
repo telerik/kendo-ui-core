@@ -161,7 +161,6 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("autoBind", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

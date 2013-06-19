@@ -196,7 +196,6 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("columnMenu", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

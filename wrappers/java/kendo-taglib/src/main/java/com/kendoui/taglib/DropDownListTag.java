@@ -98,7 +98,6 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("cascadeFrom", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

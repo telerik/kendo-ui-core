@@ -74,7 +74,6 @@ public class NavigatorTag extends  BaseTag  /* interfaces */implements DataBound
         setProperty("autoBind", value);
     }
 
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

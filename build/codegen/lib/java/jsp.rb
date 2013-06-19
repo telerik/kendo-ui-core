@@ -271,7 +271,6 @@ EVENT_GETTER_AND_SETTER = ERB.new(%{
 })
 
 DATA_SOURCE_SETTER = %{
-    @Override
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }
