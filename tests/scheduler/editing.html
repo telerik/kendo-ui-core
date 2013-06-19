@@ -418,7 +418,7 @@
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 var elements = container.children("div").not(".k-edit-buttons");
 
-                equal(elements.length, 8);
+                equal(elements.length, 12);
                 ok(elements.eq(0).hasClass("k-edit-label"));
                 equal(elements.eq(0).find("label").attr("for"), "title");
                 equal(elements.eq(1).data("container-for"), "title");
@@ -445,21 +445,6 @@
                 ok(elements.eq(1).hasClass("k-edit-field"));
             });
 
-            test("description editor is not render is does not exist", function() {
-                var scheduler = setup({
-                    dataSource: {
-                        data: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
-                    }
-                });
-
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-                var container = scheduler._editContainer.children("div.k-edit-form-container");
-                var elements = container.children("div");
-
-                ok(!elements.filter("[data-container-for=description]").length);
-            });
-
             test("render description editor if exists", function() {
                 var scheduler = setup({
                     dataSource: {
@@ -474,7 +459,7 @@
 
                 ok(elements.filter("[data-container-for=description]").length);
             });
-
+/*
             test("recurrence editor is not rendered if recurrence property does not exist", function() {
                 var scheduler = setup({
                     dataSource: {
@@ -489,7 +474,7 @@
 
                 ok(!elements.filter("[data-container-for=recurrence]").length);
             });
-
+*/
             test("recurrence editor is rendered if recurrence property exists", function() {
                 var scheduler = setup({
                     dataSource: {

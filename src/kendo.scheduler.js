@@ -210,6 +210,7 @@ kendo_module({
 
     var SchedulerDataSource = kendo.data.DataSource.extend({
         init: function(options) {
+
             kendo.data.DataSource.fn.init.call(this, extend(true, {}, { schema: {
                 modelBase: SchedulerEvent, model: SchedulerEvent } }, options));
 
