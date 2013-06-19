@@ -439,8 +439,6 @@ kendo_module({
 
             var width = element.width();
 
-            //dimension.forceEnabled();
-
             that.pane = new ElasticPane(that.inner, {
                 duration: this.options.duration,
                 transitionEnd: $.proxy(this, "_transitionEnd"),
@@ -583,24 +581,28 @@ kendo_module({
             });
         },
 
-        _moveTo: function(location, ease, instant) {
-            this.pane.transition.moveTo({ location: location, duration: (instant ? 1 : this.options.duration), ease: ease });
-        },
+        // _moveTo: function(location, ease, instant) {
+        //     // this.pane.transition.moveTo({ location: location, duration: (instant ? 1 : this.options.duration), ease: ease });
+        //     this.pane.transitionTo(location, ease, instant);
+        // },
 
         _resetMovable: function() {
-            this.pane.movable.moveTo({ x: 0 });
+            this.pane.moveTo(0);
         },
 
         forward: function(instant) {
-            this._moveTo(-this.width, Transition.easeOutExpo, instant);
+            // this._moveTo(-this.width, Transition.easeOutExpo, instant);
+            this.pane.transitionTo(-this.width, Transition.easeOutExpo, instant);
         },
 
         backward: function(instant) {
-            this._moveTo(this.width, Transition.easeOutBack, instant);
+            // this._moveTo(this.width, Transition.easeOutBack, instant);
+            this.pane.transitionTo(this.width, Transition.easeOutExpo, instant);
         },
 
         reset: function(ease) {
-            this._moveTo(0, ease, false);
+            // this._moveTo(0, ease, false);
+            this.pane.transitionTo(0, ease, false);
         },
 
         scrollTo: function(offset) {
