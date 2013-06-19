@@ -99,19 +99,9 @@
                     });
                 }
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-
-                    $(".configuration-horizontal").bind("change", refresh);
-                });
+                $(document).ready(createChart);
+                $("#example").bind("kendo:skinChange", createChart);
+                $(".configuration-horizontal").bind("change", refresh);
 
                 function refresh() {
                     var chart = $("#chart").data("kendoChart"),
@@ -122,6 +112,7 @@
 
                     for (var i = 0, length = series.length; i < length; i++) {
                         series[i].aggregate = aggregateInputs.filter(":checked").val();
+                        console.log(series[i].aggregate);
                     };
 
                     categoryAxis.baseUnit = baseUnitInputs.filter(":checked").val();
