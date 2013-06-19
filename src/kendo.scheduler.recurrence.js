@@ -976,7 +976,7 @@ kendo_module({
 
     //TODO: REFACTOR Recurrence Widget
     var INTERVAL = '<div class="k-edit-label"><label>{0}</label></div><div class="k-edit-field"><input class="k-recur-interval" />{1}</div>';
-    var END_COUNT = '<input class="k-recur-count" />{1}';
+    var END_COUNT = '<input class="k-recur-count" />{0}';
     var END_UNTIL = '<input class="k-recur-until" />';
     var END_HTML = '<div class="k-edit-label"><label>{0}</label></div>' +
                    '<div class="k-edit-field">' +
@@ -986,21 +986,30 @@ kendo_module({
                        '<li><label><input class="k-recur-end-until" type="radio" name="end" value="until" />{4}</label>{5}</li>' +
                    '</ul></div>';
 
-    var MONTHDAY_HTML = '<div class="k-edit-field"><input class="k-recur-month-radio" type="radio" name="month" value="monthday" />' +
-                            '{0}<input class="k-recur-monthday" />' +
-                        '</div>';
+    var ROW_HTML = '<div class="k-edit-label"><label>{0}</label></div>' +
+                      '<div class="k-edit-field">{1}</div>';
 
-    var WEEKDAY_HTML = '<div class="k-edit-field"><input class="k-recur-month-radio" type="radio" name="month" value="weekday" />' +
-                           '<input class="k-recur-offset" /><input class="k-recur-weekday" />' +
-                       '</div>';
+    var UL_RESET_HTML = '<ul class="k-reset">{0}</ul>';
 
-    var MONTH_HTML = '<div class="k-edit-field"><input class="k-recur-year-radio" type="radio" name="year" value="monthday" />' +
+    var MONTHDAY_HTML = '<li>' +
+                            '<label><input class="k-recur-month-radio" type="radio" name="month" value="monthday" />{0}</label>' +
+                            '<input class="k-recur-monthday" />' +
+                        '</li>';
+
+    var WEEKDAY_HTML = '<li>' +
+                            '<input class="k-recur-month-radio" type="radio" name="month" value="weekday" />' +
+                            '<input class="k-recur-offset" /><input class="k-recur-weekday" />' +
+                       '</li>';
+
+    var MONTH_HTML = '<li>' +
+                         '<input class="k-recur-year-radio" type="radio" name="year" value="monthday" />' +
                          '<input class="k-recur-month" /><input class="k-recur-monthday" />' +
-                     '</div>';
+                     '</li>';
 
-    var WEEKDAY_WITH_MONTH_HTML = '<div class="k-edit-field"><input class="k-recur-year-radio" type="radio" name="year" value="weekday" />' +
+    var WEEKDAY_WITH_MONTH_HTML = '<li>' +
+                                      '<input class="k-recur-year-radio" type="radio" name="year" value="weekday" />' +
                                       '<input class="k-recur-offset" /><input class="k-recur-weekday" />{0}<input class="k-recur-month" />' +
-                                  '</div>';
+                                  '</li>';
 
     var weekDayCheckBoxes = function(firstDay) {
         var shortNames = kendo.culture().calendar.days.namesShort,
@@ -1013,7 +1022,7 @@ kendo_module({
 
         for (; idx < length; idx++) {
             shortName = shortNames[idx];
-            result += '<input class="k-recur-weekday-checkbox" type="checkbox" value="' + WEEK_DAYS_IDX[shortName.toUpperCase()] + '" /> ' + shortName;
+            result += '<label><input class="k-recur-weekday-checkbox" type="checkbox" value="' + WEEK_DAYS_IDX[shortName.toUpperCase()] + '" /> ' + shortName + "</label>";
         }
 
         return result;
@@ -1067,7 +1076,7 @@ kendo_module({
                 end: {
                     endLabel: "End:",
                     endNever: "Never",
-                    endCountAfter: "After",
+                    endCountAfter: "After ",
                     endCountOccurrence: " occurrence(s)",
                     endUntilOn: "On "
                 },
@@ -1085,19 +1094,19 @@ kendo_module({
                 weekly: {
                     weeks: " week(s)",
                     repeatEvery: "Repeat every: ",
-                    repeatOn: "On "
+                    repeatOn: "Repeat on: "
                 },
                 monthly: {
                     repeatEvery: "Repeat every: ",
                     repeatOn: "Repeat on: ",
                     months: " month(s)",
-                    day: "Day"
+                    day: "Day "
                 },
                 yearly: {
                     repeatEvery: "Repeat every: ",
                     repeatOn: "Repeat on: ",
                     years: " year(s)",
-                    of: "of"
+                    of: " of "
                 }
             }
         },
@@ -1564,11 +1573,12 @@ kendo_module({
                 yearly = messages.yearly,
                 count = kendo.format(END_COUNT, end.endCountOccurrence),
                 endHtml = kendo.format(END_HTML, end.endLabel, end.endNever, end.endCountAfter, count, end.endUntilOn, END_UNTIL),
-                monthHtml = monthly.repeatOn + kendo.format(MONTHDAY_HTML, monthly.day) + WEEKDAY_HTML,
-                yearHtml = yearly.repeatOn + MONTH_HTML + kendo.format(WEEKDAY_WITH_MONTH_HTML, yearly.of);
+                weekHtml = kendo.format(ROW_HTML, weekly.repeatOn, weekDayCheckBoxes(options.firstWeekDay)),
+                monthHtml = kendo.format(ROW_HTML, monthly.repeatOn, kendo.format(UL_RESET_HTML, kendo.format(MONTHDAY_HTML, monthly.day) + WEEKDAY_HTML)),
+                yearHtml = kendo.format(ROW_HTML, yearly.repeatOn, kendo.format(UL_RESET_HTML, MONTH_HTML + kendo.format(WEEKDAY_WITH_MONTH_HTML, yearly.of)));
 
             that._daily = kendo.format(INTERVAL, daily.repeatEvery, daily.days) + endHtml;
-            that._weekly = kendo.format(INTERVAL, weekly.repeatEvery, weekly.weeks) + weekly.repeatOn + weekDayCheckBoxes(options.firstWeekDay) + endHtml;
+            that._weekly = kendo.format(INTERVAL, weekly.repeatEvery, weekly.weeks) + weekHtml + endHtml;
             that._monthly = kendo.format(INTERVAL, monthly.repeatEvery, monthly.months) + monthHtml + endHtml;
             that._yearly = kendo.format(INTERVAL, monthly.repeatEvery, monthly.months) + yearHtml + endHtml;
         }
