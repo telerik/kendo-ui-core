@@ -544,6 +544,7 @@
     <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
     <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\drawer\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\drawer\two_way_drawers.aspx" />
     <Content Include="Areas\aspx\Views\mobile\layout\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\pull_with_endless.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\filtering.aspx" />
@@ -757,6 +758,7 @@
     <Content Include="Areas\razor\Views\mobile\listview\filtering.cshtml" />
     <Content Include="Areas\razor\Views\mobile\listview\pull_with_endless.cshtml" />
     <Content Include="Areas\razor\Views\mobile\drawer\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\drawer\two_way_drawers.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
