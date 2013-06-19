@@ -93,8 +93,6 @@
                     valueAxis: { majorUnit: 1 }
                 });
 
-                // TODO: Performance testing
-                // TODO: Test stock chart binding
                 $("#stock-chart").kendoStockChart({
                     dataSource: {
                         transport: {
@@ -148,6 +146,135 @@
 
             });
         </script>
+  <div id="chart" style="width: 600px;"></div>
+  <script>
+    var rawTasks = [{
+          name: 'Endurance Early Bird Ad',
+          intervals: [{
+              from: new Date(2009, 9, 10, 0),
+              to: new Date(2011, 1, 1,0)
+          }]
+      }, {
+          name: 'Endurance Kickoff Ad',
+          intervals: [{
+              from: new Date(2009, 10, 1, 0),
+              to: new Date(2011, 3, 30, 0)
+          }]
+      }, {
+          name: 'Another Ad Somewhere',
+          intervals: [{
+            from: new Date(2010, 0, 1, 0),
+            to: new Date(2010, 10, 1, 0)
+          }, {
+            from: new Date(2011, 0, 1, 0),
+            to: new Date(2011, 12, 1, 0)
+          }]
+      }];
+
+      function fillDates(start, end) {
+          var result = [];
+          date = new Date(start.getTime());
+
+          while (date < end) {
+              result.push(date);
+              date = new Date(date.setDate(date.getDate() + 1));
+          }
+
+          return result;
+      }
+
+      var value = 0;
+      var colors = kendo.dataviz.ui.themes.default.chart.seriesColors;
+      var taskSeries = $.map(rawTasks, function(t) {
+          value++;
+          return $.map(t.intervals, function(i) {
+              return {
+                  name: t.name,
+                  color: colors[(value - 1) % colors.length - 1],
+                  type: "line",
+                  axis: "activitiesAxis",
+                  aggregate: function(values, series, dataItems, group) {
+                      if (!(series._from > group || series._to < group)) {
+                          return series._value;
+                      }
+                  },
+                  _value: value,
+                  _from: i.from,
+                  _to: i.to,
+                  missingValues: "interpolate",
+                  markers: {
+                      //visible: false
+                  },
+                  tooltip: {
+                      template: kendo.toString(i.from, "MMM 'yy") + ": #= series.name #"
+                  }
+              };
+          });
+      });
+
+      var stockDs = new kendo.data.DataSource({
+          transport: {
+              read: "boeing-stock.json"
+          },
+          schema:{
+              model: {
+                  fields: {
+                      Date: {
+                          type: "date"
+                      }
+                  }
+              }
+          },
+          change: createChart
+      });
+
+      stockDs.read();
+
+      function createChart(e) {
+        $("#chart").kendoStockChart({
+            series: [{
+                type: "candlestick",
+                data: e.items,
+                openField: "Open",
+                highField: "High",
+                lowField: "Low",
+                closeField: "Close",
+                categoryField: "Date"
+            }].concat(taskSeries),
+            valueAxes: [{
+                // Default
+            }, {
+                pane: "activities",
+                name: "activitiesAxis",
+                visible: false
+            }],
+            categoryAxis: {
+                pane: "activities",
+                autoBaseUnitSteps: {
+                    days: [],
+                    weeks: [1, 2],
+                    months: [1, 2, 4],
+                    years: [1, 2, 4]
+                }
+            },
+            panes: [{
+                name: "stocks"
+            }, {
+                name: "activities",
+                title: "Activities"
+            }],
+            navigator: {
+                series: {
+                    type: "area",
+                    data: e.items,
+                    field: "Close",
+                    categoryField: "Date"
+                }
+            }
+        });
+      }
+  </script>
+
     </body>
 </html>
 
