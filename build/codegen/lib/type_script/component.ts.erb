@@ -34,6 +34,7 @@
 % end
 
     interface <%= type_script_options_type %> {
+        name?: string;
 % unique_options.each do |option|
         <%= option.type_script_declaration %>
 % end
