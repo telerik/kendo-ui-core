@@ -22,7 +22,11 @@ public class ViewsTag extends BaseTag /* interfaces */ /* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
+        
+        SchedulerTag parent = (SchedulerTag)findParentWithClass(SchedulerTag.class);
 
+        parent.setViews(this);
+        
         return super.doEndTag();
     }
 

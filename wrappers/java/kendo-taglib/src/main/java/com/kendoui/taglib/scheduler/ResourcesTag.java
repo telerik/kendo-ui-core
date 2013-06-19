@@ -22,7 +22,10 @@ public class ResourcesTag extends BaseTag /* interfaces */ /* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
+        SchedulerTag parent = (SchedulerTag)findParentWithClass(SchedulerTag.class);
 
+        parent.setResources(this);
+        
         return super.doEndTag();
     }
 

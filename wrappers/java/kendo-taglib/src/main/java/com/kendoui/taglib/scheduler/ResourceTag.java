@@ -3,6 +3,7 @@ package com.kendoui.taglib.scheduler;
 
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.DataBoundWidget;
 import com.kendoui.taglib.DataSourceTag;
 
 
@@ -13,7 +14,7 @@ import com.kendoui.taglib.DataSourceTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ResourceTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ResourceTag extends  BaseTag implements DataBoundWidget /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {

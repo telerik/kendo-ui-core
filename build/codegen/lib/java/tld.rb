@@ -51,7 +51,7 @@ module CodeGen::Java::TLD
         include Options
 
         def body_content
-            return 'JSP' if @recursive || @options.any? { |option| option.composite? || option.type.include?('Function') }
+            return 'JSP' if @recursive || @options.any? { |option| option.composite? || option.type.include?('Function') || option.name == 'dataSource' }
 
             'empty'
         end

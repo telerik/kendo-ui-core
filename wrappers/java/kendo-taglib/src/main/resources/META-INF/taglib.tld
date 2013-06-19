@@ -12172,7 +12172,7 @@ with a scheduler event.</description>
         <name>scheduler-resource</name>
         <tag-class>com.kendoui.taglib.scheduler.ResourceTag</tag-class>
 
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
         <attribute>
             <description>The field of the resource data item which contains the resource color.</description>
             <name>dataColorField</name>
