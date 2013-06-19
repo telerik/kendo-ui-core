@@ -45,6 +45,7 @@ kendo_module({
         Point2D = dataviz.Point2D,
         RootElement = dataviz.RootElement,
         Ring = dataviz.Ring,
+        ShapeElement = dataviz.ShapeElement,
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
@@ -3628,62 +3629,6 @@ kendo_module({
     });
     deepExtend(Bullet.fn, PointEventsMixin);
 
-    var ShapeElement = BoxElement.extend({
-        options: {
-            type: CIRCLE,
-            align: CENTER,
-            vAlign: CENTER
-        },
-
-        getViewElements: function(view, renderOptions) {
-            var marker = this,
-                options = marker.options,
-                type = options.type,
-                rotation = options.rotation,
-                box = marker.paddingBox,
-                element,
-                elementOptions,
-                center = box.center(),
-                halfWidth = box.width() / 2,
-                points,
-                i;
-
-            if (!options.visible || !marker.hasBox()) {
-                return [];
-            }
-
-            elementOptions = deepExtend(marker.elementStyle(), renderOptions);
-
-            if (type === CIRCLE) {
-                element = view.createCircle(new Point2D(
-                    round(box.x1 + halfWidth, COORD_PRECISION),
-                    round(box.y1 + box.height() / 2, COORD_PRECISION)
-                ), halfWidth, elementOptions);
-            } else if (type === TRIANGLE) {
-                points = [
-                    new Point2D(box.x1 + halfWidth, box.y1),
-                    new Point2D(box.x1, box.y2),
-                    new Point2D(box.x2, box.y2)
-                ];
-            } else {
-                points = box.points();
-            }
-
-            if (points) {
-                if (rotation) {
-                    for (i = 0; i < points.length; i++) {
-                        points[i].rotate(center, rotation);
-                    }
-                }
-
-                element = view.createPolyline(
-                    points, true, elementOptions
-                );
-            }
-
-            return [ element ];
-        }
-    });
 
     var Target = ShapeElement.extend();
     deepExtend(Target.fn, PointEventsMixin);

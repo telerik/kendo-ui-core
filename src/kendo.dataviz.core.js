@@ -35,6 +35,7 @@ kendo_module({
         CENTER = "center",
         COORD_PRECISION = 3,
         CLIP = "clip",
+        CIRCLE = "circle",
         DEFAULT_FONT = "12px sans-serif",
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
@@ -47,6 +48,7 @@ kendo_module({
         ID_POOL_SIZE = 1000,
         ID_START = 10000,
         INITIAL_ANIMATION_DURATION = 600,
+        INSIDE = "inside",
         LEFT = "left",
         LINEAR = "linear",
         MAX_VALUE = Number.MAX_VALUE,
@@ -57,6 +59,7 @@ kendo_module({
         RIGHT = "right",
         SWING = "swing",
         TOP = "top",
+        TRIANGLE = "triangle",
         UNDEFINED = "undefined",
         UPPERCASE_REGEX = /([A-Z])/g,
         WIDTH = "width",
@@ -706,7 +709,9 @@ kendo_module({
                 options = element.options,
                 margin = getSpacing(options.margin),
                 padding = getSpacing(options.padding),
-                borderWidth = options.border.width;
+                borderWidth = options.border.width,
+                children = element.children,
+                i, item;
 
             function reflowPaddingBox() {
                 element.align(targetBox, X, options.align);
@@ -734,6 +739,11 @@ kendo_module({
             element.translateChildren(
                 box.x1 - contentBox.x1 + margin.left + borderWidth + padding.left,
                 box.y1 - contentBox.y1 + margin.top + borderWidth + padding.top);
+
+            for (i = 0; i < children.length; i++) {
+                item = children[i];
+                item.reflow(item.box);
+            }
         },
 
         align: function(targetBox, axis, alignment) {
@@ -811,9 +821,10 @@ kendo_module({
 
             ChartElement.fn.init.call(text, options);
 
-            // Calculate size
             text.content = content;
-            text.reflow(new Box2D());
+
+            // Calculate size
+            text.reflow(Box2D());
         },
 
         options: {
@@ -1031,6 +1042,7 @@ kendo_module({
 
             axis.createLabels();
             axis.createTitle();
+            axis.createNotes();
         },
 
         options: {
@@ -1136,8 +1148,8 @@ kendo_module({
             }
 
             return vertical ?
-                new Box2D(axisX, box.y1 + startMargin, axisX, box.y2 - endMargin) :
-                new Box2D(box.x1 + startMargin, axisY, box.x2 - endMargin, axisY);
+                Box2D(axisX, box.y1 + startMargin, axisX, box.y2 - endMargin) :
+                Box2D(box.x1 + startMargin, axisY, box.x2 - endMargin, axisY);
         },
 
         createTitle: function() {
@@ -1154,6 +1166,37 @@ kendo_module({
                 title = new TextBox(titleOptions.text, titleOptions);
                 axis.append(title);
                 axis.title = title;
+            }
+        },
+
+        createNotes: function() {
+            var axis = this,
+                options = axis.options,
+                notes = options.notes || [],
+                i, item, note;
+
+            axis.notes = [];
+
+            for (i = 0; i < notes.length; i++) {
+                item = notes[i];
+                note = new Note(item);
+                if (note.options.visible) {
+                    if (!defined(note.options.position)) {
+                        if (options.vertical && !inArray(note.options.position, [LEFT, RIGHT])) {
+                            note.options.position = options.reverse ? LEFT : RIGHT;
+                        } else if (!inArray(note.options.position, [TOP, BOTTOM])) {
+                            note.options.position = options.reverse ? BOTTOM : TOP;
+                        }
+                    } else {
+                        if (options.vertical) {
+                            note.options.position = options.reverse ? LEFT : RIGHT;
+                        } else {
+                            note.options.position = options.reverse ? BOTTOM : TOP;
+                        }
+                    }
+                    axis.append(note);
+                    axis.notes.push(note);
+                }
             }
         },
 
@@ -1270,10 +1313,7 @@ kendo_module({
                 vertical = options.vertical,
                 result = [],
                 plotArea = axis.plotArea,
-                slotX,
-                slotY,
-                from,
-                to;
+                slotX, slotY, from, to;
 
             if (plotBands.length) {
                 result = map(plotBands, function(item) {
@@ -1289,7 +1329,7 @@ kendo_module({
                     }
 
                     return view.createRect(
-                            new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
+                            Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
                             { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });
                 });
             }
@@ -1371,8 +1411,7 @@ kendo_module({
                 maxLabelHeight = 0,
                 maxLabelWidth = 0,
                 title = axis.title,
-                label,
-                i;
+                label, i;
 
             for (i = 0; i < count; i++) {
                 label = labels[i];
@@ -1389,12 +1428,12 @@ kendo_module({
             }
 
             if (vertical) {
-                axis.box = new Box2D(
+                axis.box = Box2D(
                     box.x1, box.y1,
                     box.x1 + maxLabelWidth + space, box.y2
                 );
             } else {
-                axis.box = new Box2D(
+                axis.box = Box2D(
                     box.x1, box.y1,
                     box.x2, box.y1 + maxLabelHeight + space
                 );
@@ -1402,6 +1441,7 @@ kendo_module({
 
             axis.arrangeTitle();
             axis.arrangeLabels();
+            axis.arrangeNotes();
         },
 
         arrangeLabels: function() {
@@ -1415,19 +1455,14 @@ kendo_module({
                 mirror = options.labels.mirror,
                 tickPositions = axis.getMajorTickPositions(),
                 labelOffset = axis.getActualTickSize() + options.margin,
-                labelBox,
-                labelY,
-                i;
+                labelBox, labelY, i;
 
             for (i = 0; i < labels.length; i++) {
                 var label = labels[i],
                     tickIx = labelOptions.skip + labelOptions.step * i,
                     labelSize = vertical ? label.box.height() : label.box.width(),
                     labelPos = tickPositions[tickIx] - (labelSize / 2),
-                    firstTickPosition,
-                    nextTickPosition,
-                    middle,
-                    labelX;
+                    firstTickPosition, nextTickPosition, middle, labelX;
 
                 if (vertical) {
                     if (labelsBetweenTicks) {
@@ -1464,8 +1499,8 @@ kendo_module({
                         labelY += labelOffset;
                     }
 
-                    labelBox = new Box2D(firstTickPosition, labelY,
-                                         nextTickPosition, labelY + label.box.height());
+                    labelBox = Box2D(firstTickPosition, labelY,
+                                    nextTickPosition, labelY + label.box.height());
                 }
 
                 label.reflow(labelBox);
@@ -1492,6 +1527,21 @@ kendo_module({
             }
         },
 
+        arrangeNotes: function() {
+            var axis = this,
+                i, item, slot, value,
+                center;
+
+            for (i = 0; i < axis.notes.length; i++) {
+                item = axis.notes[i];
+                value = item.options.value;
+                if (value) {
+                    slot = axis.getSlot(value);
+                }
+                item.reflow(slot || axis.box);
+            }
+        },
+
         alignTo: function(secondAxis) {
             var axis = this,
                 lineBox = secondAxis.lineBox(),
@@ -1506,6 +1556,262 @@ kendo_module({
             }
             axis.box[pos + 1] -= axis.lineBox()[pos + 1] - lineBox[pos + 1];
             axis.box[pos + 2] -= axis.lineBox()[pos + 2] - lineBox[pos + 2];
+        }
+    });
+
+    var Note = BoxElement.extend({
+        init: function(options) {
+            var note = this;
+
+            BoxElement.fn.init.call(note, options);
+
+            note.render();
+        },
+
+        options: {
+            icon: {
+                color: "red",
+                zIndex: 0,
+                border: {
+                    color: "red",
+                    width: 2
+                },
+                background: "red",
+                padding: 3,
+                size: 3,
+                zIndex: 1
+            },
+            label: {
+                align: CENTER,
+                vAlign: CENTER,
+                zIndex: 2,
+                position: INSIDE
+            },
+            connector: {
+                distance: 10,
+                color: "red",
+                width: 1
+            },
+            visible: true
+        },
+
+        render: function() {
+            var note = this,
+                options = note.options,
+                label = options.label,
+                icon = options.icon,
+                size = icon.size,
+                marker, width, height;
+
+            if (defined(label) && label.visible) {
+                note.label = new TextBox(label.text, label);
+                note.append(note.label);
+
+                if (label.position == INSIDE) {
+                    if (icon.type === CIRCLE) {
+                        size = math.max(note.label.box.width(), note.label.box.height());
+                    } else {
+                        width = note.label.box.width();
+                        height = note.label.box.height();
+                    }
+                }
+            }
+
+            icon.width = width || size;
+            icon.height = height || size;
+
+            marker = new ShapeElement(icon);
+
+            note.marker = marker;
+            note.append(marker);
+        },
+
+        createConnector: function(view) {
+            var note = this,
+                connector = note.options.connector;
+
+            return [
+                view.createPolyline(note.connectorPoints, false, connector)
+            ];
+        },
+
+        reflow: function(targetBox) {
+            var note = this,
+                options = note.options,
+                center = targetBox.center(),
+                icon = options.icon,
+                halfWidth = icon.width / 2,
+                halfHeight = icon.height / 2,
+                dir = inArray(options.position, [TOP, LEFT]) ? 1 : 2,
+                distance = options.connector.distance,
+                box;
+
+            if (inArray(options.position, [TOP, BOTTOM])) {
+                if (options.position === TOP) {
+                    box = Box2D(
+                        center.x - halfWidth, targetBox[Y + dir] - (icon.height + distance),
+                        center.x + halfWidth, targetBox[Y + dir] - (icon.height + distance));
+                } else {
+                    box = Box2D(
+                        center.x - halfWidth, targetBox[Y + dir] + (icon.height + distance),
+                        center.x + halfWidth, targetBox[Y + dir] + (icon.height + distance));
+                }
+            } else {
+                if (options.position === LEFT) {
+                    box = Box2D(
+                        targetBox[X + dir] - (icon.width + distance), center.y - halfHeight,
+                        targetBox[X + dir] - (icon.width + distance), center.y + halfHeight);
+                } else {
+                    box = Box2D(
+                        targetBox[X + dir] + icon.width + distance, center.y - halfHeight,
+                        targetBox[X + dir] + icon.width + distance, center.y + halfHeight);
+                }
+            }
+
+            if (note.marker) {
+                note.marker.reflow(box);
+            }
+
+            if (note.label) {
+                note.label.reflow(box);
+            }
+
+            note.box = note.marker.box.clone().wrap(note.label.box);
+        },
+
+        getViewElements: function(view) {
+            var note = this,
+                elements = BoxElement.fn.getViewElements.call(note, view);
+
+            //append(elements, note.createConnector(view));
+
+            return elements;
+        }
+    });
+
+    var ShapeElement = BoxElement.extend({
+        options: {
+            type: CIRCLE,
+            align: CENTER,
+            vAlign: CENTER
+        },
+
+        getViewElements: function(view, renderOptions) {
+            var marker = this,
+                options = marker.options,
+                type = options.type,
+                rotation = options.rotation,
+                box = marker.paddingBox,
+                element,
+                elementOptions,
+                center = box.center(),
+                halfWidth = box.width() / 2,
+                points,
+                i;
+
+            if (!options.visible || !marker.hasBox()) {
+                return [];
+            }
+
+            elementOptions = deepExtend(marker.elementStyle(), renderOptions);
+
+            if (type === CIRCLE) {
+                element = view.createCircle(new Point2D(
+                    round(box.x1 + halfWidth, COORD_PRECISION),
+                    round(box.y1 + box.height() / 2, COORD_PRECISION)
+                ), halfWidth, elementOptions);
+            } else if (type === TRIANGLE) {
+                points = [
+                    new Point2D(box.x1 + halfWidth, box.y1),
+                    new Point2D(box.x1, box.y2),
+                    new Point2D(box.x2, box.y2)
+                ];
+            } else {
+                points = box.points();
+            }
+
+            if (points) {
+                if (rotation) {
+                    for (i = 0; i < points.length; i++) {
+                        points[i].rotate(center, rotation);
+                    }
+                }
+
+                element = view.createPolyline(
+                    points, true, elementOptions
+                );
+            }
+
+            return [ element ];
+        }
+    });
+
+    var PinElement = BoxElement.extend({
+        init: function(options) {
+            var pin = this;
+
+            BoxElement.fn.init.call(pin, options);
+
+            pin.createTextBox();
+        },
+
+        options: {
+            arcAngle: 300,
+            border: {
+                width: 1,
+                color: "red"
+            },
+            label: {
+                zIndex: 2,
+                margin: getSpacing(2),
+                border: {
+                    width: 1,
+                    color: "green"
+                }
+            }
+        },
+
+        createTextBox: function() {
+            var pin = this,
+                options = pin.options,
+                textBox = new TextBox(options.code, options.label);
+
+            pin.append(textBox);
+            pin.textBox = textBox;
+        },
+
+        reflow: function(targetBox) {
+            var pin = this,
+                options = pin.options,
+                textBox = pin.textBox;
+
+            pin.box = Box2D(0, 0, textBox.box.height(), textBox.box.height() * 1.5);
+
+            BoxElement.fn.reflow.call(pin, targetBox);
+        },
+
+        getViewElements: function(view) {
+            var pin = this,
+                options = pin.options,
+                center = pin.box.center(),
+                element = view.createPin(new Pin({
+                    origin: new Point2D(center.x, center.y),
+                    radius: pin.textBox.box.height() / 2,
+                    height: pin.textBox.box.height() * 1.5,
+                    rotation: 0,
+                    arcAngle: options.arcAngle
+                }), deepExtend({}, {
+                    fill: "red",
+                    zIndex: 1,
+                    kur: 1,
+                    id: "111"
+                }, options)),
+                elements = [ element ];
+
+
+            append(elements, BoxElement.fn.getViewElements.call(pin, view));
+
+            return elements;
         }
     });
 
@@ -3049,6 +3355,7 @@ kendo_module({
         RootElement: RootElement,
         RotationAnimation: RotationAnimation,
         Sector: Sector,
+        ShapeElement: ShapeElement,
         Text: Text,
         TextBox: TextBox,
         Title: Title,
