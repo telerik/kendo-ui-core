@@ -654,13 +654,14 @@ kendo_module({
                             .insertBefore(textarea)[0];
 
             wnd = iframe.contentWindow || iframe;
+            doc = wnd.document || iframe.contentDocument;
+
             if (stylesheets.length > 0) {
                 $(iframe).one("load", function() {
                     var styleTools = editor.toolbar.items().filter(".k-style");
-                    styleTools.kendoSelectBox("decorateItems", editor.document);
+                    styleTools.kendoSelectBox("decorateItems", doc);
                 });
             }
-            doc = wnd.document || iframe.contentDocument;
 
             doc.open();
             doc.write(
@@ -774,7 +775,7 @@ kendo_module({
                             editor.selectRange(range);
                         }
                     } else if (e.keyCode == keys.LEFT || e.keyCode == keys.RIGHT) {
-                        // skip bom nodes when navigating with arrows (IE 7/8)
+                        // skip bom nodes when navigating with arrows
                         range = editor.getRange();
                         var left = e.keyCode == keys.LEFT;
                         var container = range[left ? "startContainer" : "endContainer"];
