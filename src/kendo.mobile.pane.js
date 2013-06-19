@@ -110,6 +110,10 @@ kendo_module({
                 history = that.history;
 
             if (url === BACK) {
+                if (history.length === 1) {
+                    return;
+                }
+
                 history.pop();
                 url = history[history.length - 1];
             } else {
