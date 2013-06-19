@@ -71,7 +71,6 @@
             function teardown() {
                 root.empty();
                 kendo.history.stop();
-                kendo.mobile.application = null;
             }
 
             function hidden(selector) {
@@ -106,7 +105,6 @@
             test("when in ModalView, its popup is used as parent", 1, function(){
                 root.empty();
 
-                teardown();
                 setup("#fixture2");
                 popOver.openFor(root.find("#fooAnchor2"));
 

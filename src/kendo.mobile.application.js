@@ -93,10 +93,6 @@ kendo_module({
         init: function(element, options) {
             var that = this;
 
-            if (mobile.application) {
-                return mobile.application;
-            }
-
             mobile.application = that; // global reference to current application
 
             that.options = $.extend({
@@ -303,5 +299,4 @@ kendo_module({
     });
 
     kendo.mobile.Application = Application;
-
 })(window.kendo.jQuery);
