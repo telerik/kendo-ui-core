@@ -13,8 +13,8 @@
           <EntitySet Name="Employees" EntityType="SampleModel.Store.Employees" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmployeeTerritories" EntityType="SampleModel.Store.EmployeeTerritories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Intraday" EntityType="SampleModel.Store.Intraday" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Meeting" EntityType="SampleModel.Store.Meeting" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="MeetingAtendee" EntityType="SampleModel.Store.MeetingAtendee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MeetingAtendees" EntityType="SampleModel.Store.MeetingAtendees" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Meetings" EntityType="SampleModel.Store.Meetings" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Order Details" EntityType="SampleModel.Store.Order Details" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Orders" EntityType="SampleModel.Store.Orders" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Products" EntityType="SampleModel.Store.Products" store:Type="Tables" Schema="dbo" />
@@ -58,8 +58,8 @@
             <End Role="EmployeeTerritories" EntitySet="EmployeeTerritories" />
           </AssociationSet>
           <AssociationSet Name="FK_MeetingAtendee_Meeting" Association="SampleModel.Store.FK_MeetingAtendee_Meeting">
-            <End Role="Meeting" EntitySet="Meeting" />
-            <End Role="MeetingAtendee" EntitySet="MeetingAtendee" />
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="MeetingAtendees" EntitySet="MeetingAtendees" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Details_Orders" Association="SampleModel.Store.FK_Order_Details_Orders">
             <End Role="Orders" EntitySet="Orders" />
@@ -179,7 +179,15 @@
           <Property Name="Close" Type="decimal" Nullable="false" Precision="9" Scale="3" />
           <Property Name="Volume" Type="bigint" Nullable="false" />
         </EntityType>
-        <EntityType Name="Meeting">
+        <EntityType Name="MeetingAtendees">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+            <PropertyRef Name="AtendeeID" />
+          </Key>
+          <Property Name="MeetingID" Type="int" Nullable="false" />
+          <Property Name="AtendeeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meetings">
           <Key>
             <PropertyRef Name="MeetingID" />
           </Key>
@@ -191,14 +199,8 @@
           <Property Name="RoomID" Type="int" />
           <Property Name="IsAllDay" Type="bit" Nullable="false" />
           <Property Name="Recurrence" Type="ntext" />
-        </EntityType>
-        <EntityType Name="MeetingAtendee">
-          <Key>
-            <PropertyRef Name="MeetingID" />
-            <PropertyRef Name="AtendeeID" />
-          </Key>
-          <Property Name="MeetingID" Type="int" Nullable="false" />
-          <Property Name="AtendeeID" Type="int" Nullable="false" />
+          <Property Name="RecurrenceID" Type="int" />
+          <Property Name="RecurrenceException" Type="ntext" />
         </EntityType>
         <EntityType Name="Order Details">
           <Key>
@@ -289,6 +291,8 @@
           <Property Name="OwnerID" Type="int" />
           <Property Name="IsAllDay" Type="bit" Nullable="false" />
           <Property Name="Recurrence" Type="ntext" />
+          <Property Name="RecurrenceID" Type="int" />
+          <Property Name="RecurrenceException" Type="ntext" />
         </EntityType>
         <EntityType Name="Territories">
           <Key>
@@ -383,13 +387,13 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MeetingAtendee_Meeting">
-          <End Role="Meeting" Type="SampleModel.Store.Meeting" Multiplicity="1" />
-          <End Role="MeetingAtendee" Type="SampleModel.Store.MeetingAtendee" Multiplicity="*" />
+          <End Role="Meetings" Type="SampleModel.Store.Meetings" Multiplicity="1" />
+          <End Role="MeetingAtendees" Type="SampleModel.Store.MeetingAtendees" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Meeting">
+            <Principal Role="Meetings">
               <PropertyRef Name="MeetingID" />
             </Principal>
-            <Dependent Role="MeetingAtendee">
+            <Dependent Role="MeetingAtendees">
               <PropertyRef Name="MeetingID" />
             </Dependent>
           </ReferentialConstraint>
@@ -552,9 +556,9 @@
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Territories" EntitySet="Territories" />
           </AssociationSet>
+          <EntitySet Name="MeetingAtendees" EntityType="SampleModel.MeetingAtendee" />
           <EntitySet Name="Tasks" EntityType="SampleModel.Task" />
           <EntitySet Name="Meetings" EntityType="SampleModel.Meeting" />
-          <EntitySet Name="MeetingAtendees" EntityType="SampleModel.MeetingAtendee" />
           <AssociationSet Name="FK_MeetingAtendee_Meeting" Association="SampleModel.FK_MeetingAtendee_Meeting">
             <End Role="Meeting" EntitySet="Meetings" />
             <End Role="MeetingAtendee" EntitySet="MeetingAtendees" />
@@ -873,6 +877,15 @@
           <End Role="Employees" Type="SampleModel.Employee" Multiplicity="*" />
           <End Role="Territories" Type="SampleModel.Territory" Multiplicity="*" />
         </Association>
+        <EntityType Name="MeetingAtendee">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+            <PropertyRef Name="AtendeeID" />
+          </Key>
+          <Property Type="Int32" Name="MeetingID" Nullable="false" />
+          <Property Type="Int32" Name="AtendeeID" Nullable="false" />
+          <NavigationProperty Name="Meeting" Relationship="SampleModel.FK_MeetingAtendee_Meeting" FromRole="MeetingAtendee" ToRole="Meeting" />
+        </EntityType>
         <EntityType Name="Task">
           <Key>
             <PropertyRef Name="TaskID" />
@@ -885,6 +898,8 @@
           <Property Type="Int32" Name="OwnerID" />
           <Property Type="Boolean" Name="IsAllDay" Nullable="false" />
           <Property Type="String" Name="Recurrence" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="RecurrenceID" />
+          <Property Type="String" Name="RecurrenceException" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -898,16 +913,9 @@
           <Property Type="Int32" Name="RoomID" />
           <Property Type="Boolean" Name="IsAllDay" Nullable="false" />
           <Property Type="String" Name="Recurrence" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="RecurrenceID" />
+          <Property Type="String" Name="RecurrenceException" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MeetingAtendees" Relationship="SampleModel.FK_MeetingAtendee_Meeting" FromRole="Meeting" ToRole="MeetingAtendee" />
-        </EntityType>
-        <EntityType Name="MeetingAtendee">
-          <Key>
-            <PropertyRef Name="MeetingID" />
-            <PropertyRef Name="AtendeeID" />
-          </Key>
-          <Property Type="Int32" Name="MeetingID" Nullable="false" />
-          <Property Type="Int32" Name="AtendeeID" Nullable="false" />
-          <NavigationProperty Name="Meeting" Relationship="SampleModel.FK_MeetingAtendee_Meeting" FromRole="MeetingAtendee" ToRole="Meeting" />
         </EntityType>
         <Association Name="FK_MeetingAtendee_Meeting">
           <End Type="SampleModel.Meeting" Role="Meeting" Multiplicity="1" />
@@ -1124,9 +1132,19 @@
               <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="MeetingAtendees">
+            <EntityTypeMapping TypeName="SampleModel.MeetingAtendee">
+              <MappingFragment StoreEntitySet="MeetingAtendees">
+                <ScalarProperty Name="AtendeeID" ColumnName="AtendeeID" />
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="SampleModel.Task">
               <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
+                <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
                 <ScalarProperty Name="Recurrence" ColumnName="Recurrence" />
                 <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
                 <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
@@ -1140,7 +1158,9 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Meetings">
             <EntityTypeMapping TypeName="SampleModel.Meeting">
-              <MappingFragment StoreEntitySet="Meeting">
+              <MappingFragment StoreEntitySet="Meetings">
+                <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
+                <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
                 <ScalarProperty Name="Recurrence" ColumnName="Recurrence" />
                 <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
                 <ScalarProperty Name="RoomID" ColumnName="RoomID" />
@@ -1148,14 +1168,6 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="End" ColumnName="End" />
                 <ScalarProperty Name="Start" ColumnName="Start" />
-                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MeetingAtendees">
-            <EntityTypeMapping TypeName="SampleModel.MeetingAtendee">
-              <MappingFragment StoreEntitySet="MeetingAtendee">
-                <ScalarProperty Name="AtendeeID" ColumnName="AtendeeID" />
                 <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1254,12 +1266,12 @@
           <ConnectorPoint PointX="7.677083333333333" PointY="10.307571614583333" />
           <ConnectorPoint PointX="8" PointY="10.307571614583333" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="SampleModel.Task" Width="1.5" PointX="10.375" PointY="4.75" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="12.125" PointY="4.75" Height="2.5571907552083388" />
-        <EntityTypeShape EntityType="SampleModel.MeetingAtendee" Width="1.5" PointX="14.375" PointY="5.375" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="SampleModel.MeetingAtendee" Width="1.5" PointX="12.625" PointY="5.5" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="SampleModel.Task" Width="1.5" PointX="10.375" PointY="8.75" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="10.375" PointY="4.75" Height="3.1340950520833317" />
         <AssociationConnector Association="SampleModel.FK_MeetingAtendee_Meeting" >
-          <ConnectorPoint PointX="13.625" PointY="6.1728417968750016" />
-          <ConnectorPoint PointX="14.375" PointY="6.1728417968750016" />
+          <ConnectorPoint PointX="11.875" PointY="6.297841796875" />
+          <ConnectorPoint PointX="12.625" PointY="6.297841796875" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

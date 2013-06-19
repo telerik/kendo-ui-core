@@ -13,6 +13,8 @@ namespace KendoCRUDService.Models
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public string Recurrence { get; set; }
+        public int? RecurrenceID { get; set; }
+        public string RecurrenceException { get; set; }
         public bool IsAllDay { get; set; }
         public string Timezone { get; set; }
         public int? RoomID { get; set; }

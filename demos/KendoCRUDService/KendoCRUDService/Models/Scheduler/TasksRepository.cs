@@ -10,7 +10,7 @@ namespace KendoCRUDService.Models
 {
     public static class TasksRepository
     {
-        private static bool UpdateDatabase = true;
+        private static bool UpdateDatabase = false;
 
         public static IList<TaskViewModel> All()
         {
@@ -29,6 +29,8 @@ namespace KendoCRUDService.Models
                         Description = task.Description,
                         IsAllDay = task.IsAllDay,
                         Recurrence = task.Recurrence,
+                        RecurrenceException = task.RecurrenceException,
+                        RecurrenceID = task.RecurrenceID,
                         OwnerID = task.OwnerID
                     }).ToList();
                 }
@@ -72,6 +74,8 @@ namespace KendoCRUDService.Models
                         End = task.End,
                         Description = task.Description,
                         Recurrence = task.Recurrence,
+                        RecurrenceException = task.RecurrenceException,
+                        RecurrenceID = task.RecurrenceID,
                         IsAllDay = task.IsAllDay,
                         OwnerID = task.OwnerID
                     };
@@ -98,6 +102,8 @@ namespace KendoCRUDService.Models
                     target.Description = task.Description;
                     target.IsAllDay = task.IsAllDay;
                     target.Recurrence = task.Recurrence;
+                    target.RecurrenceException = task.RecurrenceException;
+                    target.RecurrenceID = task.RecurrenceID;
                     target.OwnerID = task.OwnerID;
                 }
             }
@@ -113,6 +119,8 @@ namespace KendoCRUDService.Models
                         End = task.End,
                         Description = task.Description,
                         Recurrence = task.Recurrence,
+                        RecurrenceException = task.RecurrenceException,
+                        RecurrenceID = task.RecurrenceID,
                         IsAllDay = task.IsAllDay,
                         OwnerID = task.OwnerID
                     };
@@ -147,6 +155,8 @@ namespace KendoCRUDService.Models
                         End = task.End,
                         Description = task.Description,
                         Recurrence = task.Recurrence,
+                        RecurrenceException = task.RecurrenceException,
+                        RecurrenceID = task.RecurrenceID,
                         IsAllDay = task.IsAllDay,
                         OwnerID = task.OwnerID
                     };

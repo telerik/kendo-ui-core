@@ -10,7 +10,7 @@ namespace KendoCRUDService.Models
 {
     public static class MeetingsRepository
     {
-        private static bool UpdateDatabase = true;
+        private static bool UpdateDatabase = false;
 
         public static IList<MeetingViewModel> All()
         {
@@ -30,6 +30,8 @@ namespace KendoCRUDService.Models
                         IsAllDay = meeting.IsAllDay,
                         RoomID = meeting.RoomID,
                         Recurrence = meeting.Recurrence,
+                        RecurrenceException = meeting.RecurrenceException,
+                        RecurrenceID = meeting.RecurrenceID,
                         Atendees = meeting.MeetingAtendees.Select(m => m.AtendeeID).ToArray()
                     }).ToList();
                 }
@@ -74,6 +76,8 @@ namespace KendoCRUDService.Models
                         Description = meeting.Description,
                         IsAllDay = meeting.IsAllDay,
                         Recurrence = meeting.Recurrence,
+                        RecurrenceException = meeting.RecurrenceException,
+                        RecurrenceID = meeting.RecurrenceID,
                         RoomID = meeting.RoomID
                     };
 
@@ -109,6 +113,8 @@ namespace KendoCRUDService.Models
                     target.IsAllDay = meeting.IsAllDay;
                     target.Recurrence = meeting.Recurrence;
                     target.RoomID = meeting.RoomID;
+                    target.RecurrenceException = meeting.RecurrenceException;
+                    target.RecurrenceID = meeting.RecurrenceID;
                     target.Atendees = meeting.Atendees;
                 }
             }
@@ -124,6 +130,8 @@ namespace KendoCRUDService.Models
                         End = meeting.End,
                         Description = meeting.Description,
                         Recurrence = meeting.Recurrence,
+                        RecurrenceException = meeting.RecurrenceException,
+                        RecurrenceID = meeting.RecurrenceID,
                         IsAllDay = meeting.IsAllDay,
                         RoomID = meeting.RoomID
                     };
@@ -175,6 +183,8 @@ namespace KendoCRUDService.Models
                         End = meeting.End,
                         Description = meeting.Description,
                         Recurrence = meeting.Recurrence,
+                        RecurrenceException = meeting.RecurrenceException,
+                        RecurrenceID = meeting.RecurrenceID,
                         IsAllDay = meeting.IsAllDay,
                         RoomID = meeting.RoomID
                     };

@@ -293,6 +293,22 @@ namespace KendoCRUDService.Models.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<MeetingAtendee> MeetingAtendees
+        {
+            get
+            {
+                if ((_MeetingAtendees == null))
+                {
+                    _MeetingAtendees = base.CreateObjectSet<MeetingAtendee>("MeetingAtendees");
+                }
+                return _MeetingAtendees;
+            }
+        }
+        private ObjectSet<MeetingAtendee> _MeetingAtendees;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Task> Tasks
         {
             get
@@ -321,22 +337,6 @@ namespace KendoCRUDService.Models.EF
             }
         }
         private ObjectSet<Meeting> _Meetings;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<MeetingAtendee> MeetingAtendees
-        {
-            get
-            {
-                if ((_MeetingAtendees == null))
-                {
-                    _MeetingAtendees = base.CreateObjectSet<MeetingAtendee>("MeetingAtendees");
-                }
-                return _MeetingAtendees;
-            }
-        }
-        private ObjectSet<MeetingAtendee> _MeetingAtendees;
 
         #endregion
 
@@ -447,6 +447,14 @@ namespace KendoCRUDService.Models.EF
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the MeetingAtendees EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMeetingAtendees(MeetingAtendee meetingAtendee)
+        {
+            base.AddObject("MeetingAtendees", meetingAtendee);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Tasks EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToTasks(Task task)
@@ -460,14 +468,6 @@ namespace KendoCRUDService.Models.EF
         public void AddToMeetings(Meeting meeting)
         {
             base.AddObject("Meetings", meeting);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the MeetingAtendees EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMeetingAtendees(MeetingAtendee meetingAtendee)
-        {
-            base.AddObject("MeetingAtendees", meetingAtendee);
         }
 
         #endregion
@@ -2158,6 +2158,54 @@ namespace KendoCRUDService.Models.EF
         private global::System.String _Recurrence;
         partial void OnRecurrenceChanging(global::System.String value);
         partial void OnRecurrenceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RecurrenceID
+        {
+            get
+            {
+                return _RecurrenceID;
+            }
+            set
+            {
+                OnRecurrenceIDChanging(value);
+                ReportPropertyChanging("RecurrenceID");
+                _RecurrenceID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RecurrenceID");
+                OnRecurrenceIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RecurrenceID;
+        partial void OnRecurrenceIDChanging(Nullable<global::System.Int32> value);
+        partial void OnRecurrenceIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RecurrenceException
+        {
+            get
+            {
+                return _RecurrenceException;
+            }
+            set
+            {
+                OnRecurrenceExceptionChanging(value);
+                ReportPropertyChanging("RecurrenceException");
+                _RecurrenceException = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("RecurrenceException");
+                OnRecurrenceExceptionChanged();
+            }
+        }
+        private global::System.String _RecurrenceException;
+        partial void OnRecurrenceExceptionChanging(global::System.String value);
+        partial void OnRecurrenceExceptionChanged();
 
         #endregion
 
@@ -4268,6 +4316,54 @@ namespace KendoCRUDService.Models.EF
         private global::System.String _Recurrence;
         partial void OnRecurrenceChanging(global::System.String value);
         partial void OnRecurrenceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RecurrenceID
+        {
+            get
+            {
+                return _RecurrenceID;
+            }
+            set
+            {
+                OnRecurrenceIDChanging(value);
+                ReportPropertyChanging("RecurrenceID");
+                _RecurrenceID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RecurrenceID");
+                OnRecurrenceIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RecurrenceID;
+        partial void OnRecurrenceIDChanging(Nullable<global::System.Int32> value);
+        partial void OnRecurrenceIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RecurrenceException
+        {
+            get
+            {
+                return _RecurrenceException;
+            }
+            set
+            {
+                OnRecurrenceExceptionChanging(value);
+                ReportPropertyChanging("RecurrenceException");
+                _RecurrenceException = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("RecurrenceException");
+                OnRecurrenceExceptionChanged();
+            }
+        }
+        private global::System.String _RecurrenceException;
+        partial void OnRecurrenceExceptionChanging(global::System.String value);
+        partial void OnRecurrenceExceptionChanged();
 
         #endregion
 
