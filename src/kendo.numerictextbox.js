@@ -203,6 +203,9 @@ kendo_module({
                 .add(that._inputWrapper)
                 .off(ns);
 
+            that._upArrowEventHandler.destroy();
+            that._downArrowEventHandler.destroy();
+
             if (that._form) {
                 that._form.off("reset", that._resetHandler);
             }
