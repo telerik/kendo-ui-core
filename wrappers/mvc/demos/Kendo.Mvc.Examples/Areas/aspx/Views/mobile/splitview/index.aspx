@@ -125,6 +125,7 @@
                                                     .Align(MobileButtonAlign.Right) 
                                                     .Target("_top")
                                                     .Url(Url.RouteUrl(new { controller = "suite" }))
+                                                    .HtmlAttributes(new { @class = "nav-button" })
                                                     .Text("Index")
                                             %>
                                             <%

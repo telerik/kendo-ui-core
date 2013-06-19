@@ -24,8 +24,14 @@
 }
 
 @if (!isMobileDevice)        
-{ 
+{     
     <text>
+    <style>
+        .nav-button 
+        {
+            visibility: hidden;
+        }
+    </style>
     <div class="page">
         @Html.Partial("~/Views/Shared/_MobileNavigation.cshtml")
 

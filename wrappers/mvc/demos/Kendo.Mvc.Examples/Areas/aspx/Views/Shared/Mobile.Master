@@ -13,15 +13,21 @@
     <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>    
     <script src="<%= Url.Content("~/Scripts/console.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/prettify.min.js") %>"></script>
-    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />    
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />        
 </head>
 <body>
 
 <% 
     var isMobileDevice = Regex.IsMatch(Request.UserAgent, "(blackberry|bb1\\w?;|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
-%>    
+%>
 
 <% if (!isMobileDevice) { %>
+<style>
+    .nav-button 
+    {
+        visibility: hidden;
+    }
+</style>
 <div class="page">    
     <%: Html.Partial("~/Views/Shared/_MobileNavigation.cshtml")%>
     
