@@ -17,6 +17,10 @@
         EAN13,
         EAN8,
         MSI,
-        POSTNET
+        POSTNET,
+        MSImod10,
+        MSImod11,
+        MSImod1010,
+        MSImod1110 
     }
 }

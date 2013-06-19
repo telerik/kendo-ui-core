@@ -10,11 +10,17 @@
         </ul>
         <script>
             function createBarcode() {
-                if ($('body').kendoValidator('validate')) {                                    
+                if ($('body').kendoValidator('validate')) {
                     $("#barcode").kendoBarcode({
+                        border: {
+                            width: 2,
+                            dashType: "solid",
+                            color: "black"
+                        },
                         value: $('#value').val(),
                         width: 300,
                         checksum: $('#checksum').is(':checked'),
+                        background:"pink",
                         color: "red",
                         text: {
                             visible: $('#text').is(':checked'),
@@ -75,7 +81,7 @@
         <style scoped>
             #barcode 
             {
-                border : 2px dotted blue;
+               // border : 2px dotted blue;
                 width:600px;
                 }
         </style>

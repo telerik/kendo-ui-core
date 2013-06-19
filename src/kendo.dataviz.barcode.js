@@ -1502,7 +1502,7 @@
         init: function (element, options) {
 			 var that = this;  
              Widget.fn.init.call(that, element, options);
-             that.element = element;
+             that.element = $(element);
              var defaultView = dataviz.ui.defaultView();
              that.view = new defaultView();
              that.setOptions(options);
@@ -1510,41 +1510,55 @@
         setOptions: function (options) {
 			var that = this;
             that.type = (options.type || that.options.type).toLowerCase();
-            that.encoding = new encodings[that.type]();
+            that.encoding = new encodings[that.type]();            
 			if(!that.encoding){
 				throw new Error('Encoding ' + that.type + 'is not supported.')
 			}
-            that.options = $.extend(that.options, options);
-            that.value(that.options.value);
+            that.options = $.extend(that.options, options);            
+            that.redraw();
         },
         redraw: function () {
             var that = this,
-                showText = that.options.text.visible,
-                textSize = dataviz.measureText(that.value, {font: that.options.text.font}),
-                barHeight =  showText ? that.options.height - textSize.height : that.options.height,
-				result = that.encoding.encode(that.value,
-                    that.options.width, barHeight);                
-            that.textSize = textSize;
-            that.barHeight = barHeight;
+                options = that.options,
+                border = options.border || {},
+                contentBox = Box2D(0, 0, options.width, options.height).unpad(border.width).unpad(options.padding),
+                barHeight = contentBox.height(),
+				result, textToDisplay;
+
+            that.contentBox = contentBox;
+            
             that.view.children = [];
-            that.view.options.width = that.options.width;
-            that.view.options.height = that.options.height;
+            
             that.addBackground();
-
-            that.addElements(result.pattern, result.baseUnit);
-
-            if (showText) {
-				var textToDisplay = that.value;				
+            if (that.options.text.visible) {
+				textToDisplay = that.options.value;		
+                
 				if(that.options.checksum && that.encoding.checksum!==undefined){
 					textToDisplay += " "+that.encoding.checksum;
 				}
-                that.addText(textToDisplay)
+                that.addText(textToDisplay);
+                
+                barHeight -= that.text.box.height();
             }
-            that.view.renderTo(that.element);
+            that.barHeight = barHeight;
+            result = that.encoding.encode(that.options.value,
+                    that.options.width, barHeight);
+                    
+            that.view.options.width = that.options.width;
+            that.view.options.height = that.options.height;
+
+            that.addElements(result.pattern, result.baseUnit);
+
+            
+            that.view.renderTo(that.element[0]);
         },        
         value: function(value){
-            this.value = value + "";
-            this.redraw();
+            var that = this;
+            if(value===undefined){
+                return that.options.value;
+            }
+            that.options.value = value + '';
+            that.redraw();
         },
         addElements: function (pattern, baseUnit) {
             var that = this,
@@ -1553,41 +1567,54 @@
                 item;
 
             for (var i = 0; i < pattern.length; i++) {
+                
 				item = isPlainObject(pattern[i]) ? pattern[i] : {
 						width: pattern[i],
-						y1:0,
+						y1: 0,
 						y2: that.barHeight
 					}; 
                 step = item.width * baseUnit;
                 if(i%2){				                     
-                     that.view.children.push(that.view.createRect(new Box2D(position, item.y1, position + step, item.y2),
-                        { fill: that.options.color}));
+                     that.view.children.push(that.view.createRect(new Box2D(position, item.y1 + that.contentBox.y1, position + step, item.y2 + that.contentBox.y1), {
+                        fill: that.options.color
+                    }));
                 }
                 position+= step;
             }
         },
         addBackground: function () {
-			var that = this;
-			that.view.children.push(that.view.createRect(new Box2D(0,0, that.options.width, that.options.height),
-                { fill: that.options.background }));
-        },
-        addText: function (value) {
-            var that = this,
-				font = that.options.text.font,
-                text = new Text(value, {
-                    font: font,
-                    color: that.options.text.color,
-                    align: "center",
-                    vAlign: "bottom"
+			var that = this,
+                options = that.options,
+                border = options.border || {},
+                box = Box2D(0,0, options.width, options.height).unpad(border.width / 2),
+                rect = that.view.createRect(box, { 
+                    fill: options.background,
+                    stroke: border.width ? border.color : "",
+                    strokeWidth: border.width,
+                    dashType: border.dashType,
                 });
-            text.reflow(new Box2D(0, 0, that.options.width, that.options.height));
+                
+			that.view.children.push(rect);
+        },
+        addText: function (value) {        
+            var that = this,
+                textOptions = that.options.text,
+                text = new Text(value, {
+                    font: textOptions.font,
+                    color: textOptions.color,
+                    align: "center",
+                    vAlign: "bottom",
+                    margin : textOptions.margin
+                });
+            text.reflow(that.contentBox);
+            that.text = text;
 
             that.view.children.push(that.view.createText(value, {
                 baseline: text.baseline,
                 x: text.box.x1,
                 y: text.box.y1,
-                color: that.options.text.color,
-                font: font
+                color: textOptions.color,
+                font: textOptions.font
             }));
         },
         options: {
@@ -1615,7 +1642,8 @@
                 width: 0,
                 dashType: "solid",
                 color: "black"
-            }
+            },
+            padding: {}
         }
     });
 
