@@ -688,7 +688,8 @@ kendo_module({
             eventStartMS = +event.start,
             durationMS = event.end - eventStartMS,
             exceptionDates = parseExceptions(event.exception),
-            id = event.id,
+            idField = event.idField,
+            id = event[idField] || event.id,
             current = 1,
             events = [],
             eventEnd,
@@ -698,7 +699,9 @@ kendo_module({
 
         if (event.toJSON) {
             event = event.toJSON();
+
             delete event.recurrence;
+            delete event[idField];
         }
 
         //convert start from tzid to UTC
