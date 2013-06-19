@@ -10,7 +10,7 @@
     <ul id="listview"></ul>
 </div>
 
-<div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;" data-init="modalViewInit">
+<div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;" >
     <div data-role="header">
         <div data-role="navbar">
             <span>Add New Product</span>
@@ -21,7 +21,7 @@
     <ul data-role="listview" data-style="inset">
         <li><label for="username">Product Name:</label> <input type="text" id="name" /></li>
     </ul>
-    <a data-click="closeModalViewAdd" id="addNew" type="button" data-role="button">Add New Product</a>
+    <a data-click="addNew" class="addNew" type="button" data-role="button">Add New Product</a>
 </div>
 
 <script type="text/x-kendo-tmpl" id="template">
@@ -66,43 +66,43 @@
     function closeModalViewAdd() {
         $("#modalview-add").kendoMobileModalView("close");
     }
-    
-    function modalViewInit(e) {    
-        var addProductDataSource = new kendo.data.DataSource({
-            transport: {
-                create: {
-                    url: "http://rusev/kendocrudservice/Products/Create",
-                    dataType: "jsonp"
-                },
-                parameterMap: function (options, operation) {                    
-                    if (operation !== "read" && options.models) {
-                        return { models: kendo.stringify(options.models) };
-                    }
-                }
-            },
-            schema: {
-                model: {
-                    id: "ProductID",
-                    fields: {
-                        ProductID: { editable: false, nullable: true },
-                        ProductName: { type: "string" }                       
-                    }
-                }
-            },
-            autoSync: true,
-            batch: true,            
-            requestEnd: function () {                                
-                $("#name").val("");                
-            }
+
+    function addNew() {
+        addProductDataSource.add({
+            ProductName: $("#name").val(),
+            UnitPrice: Math.floor((Math.random() * 10) + 1)
         });
-        
-        $("#addNew").click(function () {            
-            addProductDataSource.add({ 
-                ProductName: $("#name").val(),
-                UnitPrice: Math.floor((Math.random() * 10) + 1) 
-            });            
-        });
+
+        closeModalViewAdd();
     }
+
+    var addProductDataSource = new kendo.data.DataSource({
+        transport: {
+            create: {
+                url: "http://rusev/kendocrudservice/Products/Create",
+                dataType: "jsonp"
+            },
+            parameterMap: function (options, operation) {
+                if (operation !== "read" && options.models) {
+                    return { models: kendo.stringify(options.models) };
+                }
+            }
+        },
+        schema: {
+            model: {
+                id: "ProductID",
+                fields: {
+                    ProductID: { editable: false, nullable: true },
+                    ProductName: { type: "string" }
+                }
+            }
+        },
+        autoSync: true,
+        batch: true,
+        requestEnd: function () {
+            $("#name").val("");
+        }
+    });  
 </script>
 
 <style scoped>
@@ -128,7 +128,8 @@
         float: left;
         margin-right: 10px;
     }
-    #addNew {
+    
+    .addNew {
         display: block;
         text-align: center;
         margin: 0 3em;
