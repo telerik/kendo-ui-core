@@ -800,6 +800,28 @@
                 equalWithRound(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left));
             });
 
+            test("event positioned after long events take the whole slot width", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                            selectedDate
+                        ]
+                    });
+
+                var events = [
+                    {uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" },
+                    {uid:"uid", start: new Date(2013, 1, 26, 16, 0, 0), end: new Date(2013, 1, 26, 16, 30, 0), title: "other event" }
+                ];
+
+                view.render(events);
+
+                var eventElement = view.content.find("div.k-event").last();
+                var timeSlot = view.content.find("tr").eq(16).find("td:first");
+
+                equal(eventElement.width(), applySlotDefaultRightOffset(timeSlot.width() - 4, timeSlot));
+            });
+
             test("long events reposition other events in the same date slot", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({

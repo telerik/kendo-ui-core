@@ -465,7 +465,7 @@ kendo_module({
         _positionAllDayEvent: function(element, slots, startIndex, endIndex) {
             var dateSlot = slots.eq(startIndex),
                 slotWidth = this._calculateAllDayEventWidth(startIndex, endIndex),
-                allDayEvents = SchedulerView.collidingEvents(this.datesHeader.find(".k-event"), startIndex, endIndex).add(element),
+                allDayEvents = SchedulerView.collidingHorizontallyEvents(this.datesHeader.find(".k-event"), startIndex, endIndex).add(element),
                 top = dateSlot.position().top,
                 currentColumnCount = this._headerColumnCount || 0,
                 leftOffset = 2,
@@ -480,21 +480,21 @@ kendo_module({
 
             element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
 
-            var columns = SchedulerView.createColumns(allDayEvents, true);
+            var rows = SchedulerView.createRows(allDayEvents);
 
-            for (var idx = 0, length = columns.length; idx < length; idx++) {
-                var columnEvents = columns[idx].events;
+            for (var idx = 0, length = rows.length; idx < length; idx++) {
+                var rowEvents = rows[idx].events;
 
-                for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
-                    $(columnEvents[j]).css({
+                for (var j = 0, eventLength = rowEvents.length; j < eventLength; j++) {
+                    $(rowEvents[j]).css({
                         top: top + idx * eventHeight
                     });
                 }
             }
 
-            if (columns.length && columns.length > currentColumnCount) {
-                this._updateAllDayHeaderHeight(eventHeight * columns.length + eventHeight);
-                this._headerColumnCount = columns.length;
+            if (rows.length && rows.length > currentColumnCount) {
+                this._updateAllDayHeaderHeight(eventHeight * rows.length + eventHeight);
+                this._headerColumnCount = rows.length;
             }
         },
 

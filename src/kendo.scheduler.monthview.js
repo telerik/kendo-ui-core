@@ -284,7 +284,7 @@ kendo_module({
 
             var startSlot = this.content.find("td").eq(startIndex),
                 firstChild = startSlot.children().first(),
-                events = SchedulerView.collidingEvents(this.content.find(".k-event"), startIndex, endIndex).add(element),
+                events = SchedulerView.collidingHorizontallyEvents(this.content.find(".k-event"), startIndex, endIndex).add(element),
                 eventHeight = this.options.eventHeight,
                 leftOffset = 2,
                 rightOffset = startIndex !== endIndex ? 5 : 4,
@@ -293,7 +293,7 @@ kendo_module({
                 maxColumnCount = Math.floor((startSlot.height() - topOffset) / (eventHeight + 3)),
                 top = startSlot.position().top + topOffset + this.content[0].scrollTop,
                 left = startSlot.position().left + leftOffset,
-                columns;
+                rows;
 
             element
                 .css({
@@ -304,19 +304,19 @@ kendo_module({
 
             element.attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex);
 
-            columns = SchedulerView.createColumns(events, true);
+            rows = SchedulerView.createRows(events);
 
-            for (var idx = 0, length = Math.min(columns.length, maxColumnCount); idx < length; idx++) {
-                var columnEvents = columns[idx].events;
+            for (var idx = 0, length = Math.min(rows.length, maxColumnCount); idx < length; idx++) {
+                var rowEvents = rows[idx].events;
 
-                for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
-                    $(columnEvents[j]).css({
+                for (var j = 0, eventLength = rowEvents.length; j < eventLength; j++) {
+                    $(rowEvents[j]).css({
                         top: top + idx * eventHeight + 3*idx
                     });
                 }
             }
 
-            if (columns.length > maxColumnCount) {
+            if (rows.length > maxColumnCount) {
                 this.content.find(kendo.format(".k-more-events[{0}={1}-{2}]", kendo.attr("start-end-idx"), startIndex, endIndex)).remove();
 
                 element = $('<div class="k-more-events k-button"><span>...</span></div>')

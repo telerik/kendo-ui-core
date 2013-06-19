@@ -350,10 +350,15 @@ kendo_module({
         }
     });
 
-    function collidingEvents(elements, start, end) {
+    function collidingHorizontallyEvents(elements, start, end) {
+        return collidingEvents(elements, start, end, true);
+    }
+
+    function collidingEvents(elements, start, end, isHorizontal) {
         var idx,
             index,
             startIndex,
+            overlaps,
             endIndex;
 
         for (idx = elements.length-1; idx >= 0; idx--) {
@@ -361,8 +366,13 @@ kendo_module({
             startIndex = index.start;
             endIndex = index.end;
 
-            if (startIndex <= start && endIndex >= start) {
-                start = startIndex;
+            overlaps = isHorizontal ? (startIndex <= start && endIndex >= start) : (startIndex < start && endIndex > start);
+
+            if (overlaps || (startIndex >= start && endIndex <= end) || (start <= startIndex && end >= startIndex)) {
+                if (startIndex < start) {
+                    start = startIndex;
+                }
+
                 if (endIndex > end) {
                     end = endIndex;
                 }
@@ -383,11 +393,19 @@ kendo_module({
     function eventsForSlot(elements, slotStart, slotEnd) {
         return elements.filter(function() {
             var event = rangeIndex(this);
-            return (event.start >= slotStart && event.start <= slotEnd) || slotStart >= event.start && slotStart <= event.end;
+            return (event.start < slotStart && event.end > slotStart) || (event.start >= slotStart && event.end <= slotEnd);
         });
     }
 
-    function createColumns(eventElements, isHorizontal) {
+    function createColumns(eventElements) {
+        return _createColumns(eventElements);
+    }
+
+    function createRows(eventElements) {
+        return _createColumns(eventElements, true);
+    }
+
+    function _createColumns(eventElements, isHorizontal) {
         var columns = [];
 
         eventElements.each(function() {
@@ -423,8 +441,10 @@ kendo_module({
 
     $.extend(ui.SchedulerView, {
         createColumns: createColumns,
+        createRows: createRows,
         rangeIndex: rangeIndex,
-        collidingEvents: collidingEvents
+        collidingEvents: collidingEvents,
+        collidingHorizontallyEvents: collidingHorizontallyEvents
     });
 
 })(window.kendo.jQuery);
