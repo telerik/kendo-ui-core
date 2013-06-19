@@ -386,6 +386,11 @@ textarea.k-textbox:hover,
     background-color: @button-background-color;
 }
 
+.k-button
+{
+    border-color: @button-border-color;
+}
+
 .k-button:hover
 {
     color: @hover-text-color;
@@ -393,14 +398,31 @@ textarea.k-textbox:hover,
     background-color: @hover-background-color;
 }
 
+.k-button:active
+{
+    //color: @selected-text-color;
+    // background-color: @selected-background-color;
+    //border-color: @selected-border-color;
+}
+
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:hover,
 .k-button.k-state-disabled:active,
 .k-state-disabled .k-button:active
 {
-    color: @disabled-text-color;
-    border-color: @widget-border-color;
-    .composite-background(@widget-gradient);
+    //color: @disabled-text-color;
+    //border-color: @widget-border-color;
+    //.composite-background(@widget-gradient);
+}
+
+.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:hover,
+.k-button.k-state-disabled:active,
+.k-state-disabled .k-button:active
+{
+   // color: @disabled-text-color;
+   // border-color: @widget-border-color;
+   // .composite-background(@widget-gradient);
 }
 
 .k-draghandle
@@ -509,6 +531,65 @@ textarea.k-textbox:hover,
     border-color: @focused-border-color;
 }
 
+.k-calendar .k-link
+{
+	color: @calendar-content-text-color;
+}
+
+.k-calendar .k-footer
+{
+	padding: 0;
+}
+
+.k-calendar .k-footer .k-nav-today
+{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	padding: .5em 0;
+	color: @form-widget-color;
+	text-decoration: @calendar-footer-text-decoration;
+	background-color: @calendar-footer-background;
+}
+
+.k-calendar .k-footer .k-nav-today:hover
+{
+	background-color: @calendar-footer-hover-background;
+	text-decoration: @calendar-footer-hover-text-decoration;
+}
+
+.k-calendar .k-footer .k-nav-today:active
+{
+	background-color: @calendar-footer-active-background;	
+}
+
+.k-calendar .k-link.k-nav-fast
+{
+	color: @form-widget-color;
+}
+
+.k-calendar .k-nav-fast.k-state-hover
+{
+	text-decoration: @calendar-header-hover-text-decoration;
+	background-color: @calendar-header-hover-background;
+	color: @hover-text-color;
+}
+
+.k-calendar .k-link.k-state-hover,
+.k-window .k-link
+{
+    border-radius: @calendar-border-radius;
+}
+
+.k-calendar .k-footer .k-link
+{
+    border-radius: 0;
+}
+
+.k-calendar th{
+	background-color: @calendar-group-background-color;
+}
+
 .k-state-selected,
 .k-state-selected:link,
 .k-state-selected:visited,
@@ -609,6 +690,12 @@ div.k-imagebrowser-dropzone em,
     .composite-background(@hover-gradient);
 }
 
+.k-pager-wrap
+{
+    background-color: @header-background-color;
+	color: @header-text-color;
+}
+
 .k-autocomplete.k-state-active,
 .k-picker-wrap.k-state-active,
 .k-numeric-wrap.k-state-active,
@@ -656,6 +743,12 @@ div.k-imagebrowser-dropzone em
 {
     background-color: transparent;
 }
+
+.k-calendar .k-state-selected
+{
+    background-color: @selected-background-color;
+}
+
 
 .k-dropdown .k-state-focused .k-input
 {
@@ -722,7 +815,6 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Tooltip */
-
 .k-widget.k-tooltip
 {
     border-color: @tooltip-border-color;
@@ -1015,6 +1107,11 @@ div.k-imagebrowser-dropzone em
     .border-radius(@main-border-radius 0 0 0);
 }
 
+.k-numeric-wrap .k-link.k-state-selected
+{
+	background-color: @numeric-selected-background;
+}
+
 .k-multiselect.k-state-border-down .k-multiselect-wrap,
 {
     .border-radius(@main-border-radius @main-border-radius 0 0);
@@ -1078,110 +1175,6 @@ div.k-imagebrowser-dropzone em
 	.border-radius(@inner-border-radius);
 }
 
-// Retina sprite
-
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-       only screen and (min-device-pixel-ratio: 2) {
-    .k-icon:not(.k-loading),
-    .k-grouping-dropclue,
-    .k-drop-hint,
-    .k-callout,
-    .k-column-menu .k-sprite,
-    .k-tool-icon,
-    .k-tool-icon.k-state-hover,
-    .k-tool-icon.k-state-active,
-    .k-tool-icon.k-state-active.k-state-hover {
-        background-image: url('@{image-folder}/sprite_2x.png');
-        background-size: 192px 336px;
-    }
-}
-
-/* Changes */
-/* Calendar */
-.k-calendar .k-link
-{
-	color: @widget-text-color;
-}
-
-.k-calendar .k-other-month .k-link
-{
-	color: @disabled-text-color;
-}
-
-.k-calendar .k-content .k-link
-{
-	//color: red;
-}
-
-.k-calendar .k-footer
-{
-	padding: 0;
-}
-
-.k-calendar .k-footer .k-nav-today
-{
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-	padding: .5em 0;
-	color: @form-widget-color;
-	text-decoration: @calendar-footer-text-decoration;
-	background-color: @calendar-footer-background;
-}
-
-.k-calendar .k-footer .k-nav-today:hover
-{
-	background-color: @calendar-footer-hover-background;
-	text-decoration: @calendar-footer-hover-text-decoration;
-}
-
-.k-calendar .k-footer .k-nav-today:active
-{
-	background-color: @calendar-footer-active-background;	
-}
-
-.k-calendar .k-state-selected
-{
-    background-color: @selected-background-color;
-}
-
-.k-calendar .k-link.k-nav-fast
-{
-	color: @form-widget-color;
-}
-
-.k-calendar .k-nav-fast.k-state-hover
-{
-	text-decoration: @calendar-header-hover-text-decoration;
-	background-color: @calendar-header-hover-background;
-	color: @hover-text-color;
-}
-
-.k-calendar .k-link.k-state-hover,
-.k-window .k-link
-{
-    border-radius: @calendar-border-radius;
-}
-
-.k-calendar .k-link.k-state-hover{
-	color: @hover-text-color;
-}
-
-.k-calendar .k-state-hover > .k-link
-{
-	color: @hover-text-color;
-}
-
-.k-calendar .k-footer .k-link
-{
-    border-radius: 0;
-}
-
-.k-calendar th{
-	background-color: @calendar-group-background-color;
-}
-
-/* Window */
 .k-autocomplete.k-state-default,
 .k-picker-wrap.k-state-default,
 .k-numeric-wrap.k-state-default,
@@ -1257,7 +1250,6 @@ div.k-imagebrowser-dropzone em
 	border-color: @drop-down-focused-border-color;
 }
 
-/* TabStrip */
 .k-tabstrip-items .k-state-default .k-link,
 .k-panelbar > li.k-state-default > .k-link
 {
@@ -1293,7 +1285,6 @@ div.k-imagebrowser-dropzone em
 	color: @widget-text-color;
 }
 
-/* Menu */
 .k-menu.k-header
 {
 	border-color: @menu-border-color;
@@ -1309,37 +1300,6 @@ div.k-imagebrowser-dropzone em
 	border-color: @group-border-color;
 }
 
-.k-button
-{
-    color: @button-text-color;
-    border-color: @button-border-color;
-    background-color: @button-background-color;
-}
-
-.k-button:hover
-{
-    color: @hover-text-color;
-    border-color: @hover-border-color;
-    background-color: @hover-background-color;
-}
-
-.k-button:active
-{
-    color: @selected-text-color;
-    background-color: @selected-background-color;
-    border-color: @selected-border-color;
-}
-
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:active,
-.k-state-disabled .k-button:active
-{
-    color: @disabled-text-color;
-    border-color: @widget-border-color;
-    .composite-background(@widget-gradient);
-}
-
 .k-secondary
 {
 	.k-picker-wrap,
@@ -1352,11 +1312,6 @@ div.k-imagebrowser-dropzone em
 	.k-editor-button .k-state-active
 	{
 		background-color: @header-background-color;
-	}
-
-	.k-dropdown-wrap .k-input
-	{
-		//color: @secondary-text-color;
 	}
 
 	.k-dropdown .k-dropdown-wrap.k-state-hover .k-input,
@@ -1434,27 +1389,11 @@ div.k-imagebrowser-dropzone em
 	{
 		color: @secondary-text-color;
 	}
-	
-	.k-grid td, .k-grid td.k-state-focused{
-		//background-color: red;
-	}
-	
+		
 	&.k-toolbar
 	{
 		color: @secondary-text-color;
 	}
-}
-
-
-.k-pager-wrap
-{
-    background-color: @header-background-color;
-	color: @header-text-color;
-}
-
-.k-numeric-wrap .k-link.k-state-selected
-{
-	background-color: @numeric-selected-background;
 }
 
 .k-grid .k-grouping-header,
@@ -1480,3 +1419,19 @@ div.k-imagebrowser-dropzone em
 	border-color: @secondary-border-color;
 }
 
+// Retina sprite
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min-device-pixel-ratio: 2) {
+    .k-icon:not(.k-loading),
+    .k-grouping-dropclue,
+    .k-drop-hint,
+    .k-callout,
+    .k-column-menu .k-sprite,
+    .k-tool-icon,
+    .k-tool-icon.k-state-hover,
+    .k-tool-icon.k-state-active,
+    .k-tool-icon.k-state-active.k-state-hover {
+        background-image: url('@{image-folder}/sprite_2x.png');
+        background-size: 192px 336px;
+    }
+}
