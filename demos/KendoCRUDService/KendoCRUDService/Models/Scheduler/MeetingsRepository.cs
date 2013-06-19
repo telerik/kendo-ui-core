@@ -29,6 +29,7 @@ namespace KendoCRUDService.Models
                         Description = meeting.Description,
                         IsAllDay = meeting.IsAllDay,
                         RoomID = meeting.RoomID,
+                        Recurrence = meeting.Recurrence,
                         Atendees = meeting.MeetingAtendees.Select(m => m.AtendeeID).ToArray()
                     }).ToList();
                 }
@@ -72,6 +73,7 @@ namespace KendoCRUDService.Models
                         End = meeting.End,
                         Description = meeting.Description,
                         IsAllDay = meeting.IsAllDay,
+                        Recurrence = meeting.Recurrence,
                         RoomID = meeting.RoomID
                     };
 
@@ -121,6 +123,7 @@ namespace KendoCRUDService.Models
                         Start = meeting.Start,
                         End = meeting.End,
                         Description = meeting.Description,
+                        Recurrence = meeting.Recurrence,
                         IsAllDay = meeting.IsAllDay,
                         RoomID = meeting.RoomID
                     };
@@ -171,6 +174,7 @@ namespace KendoCRUDService.Models
                         Start = meeting.Start,
                         End = meeting.End,
                         Description = meeting.Description,
+                        Recurrence = meeting.Recurrence,
                         IsAllDay = meeting.IsAllDay,
                         RoomID = meeting.RoomID
                     };
