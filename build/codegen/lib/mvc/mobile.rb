@@ -1,5 +1,3 @@
-require 'debugger'
-
 class String
     def to_attribute
         self.gsub(/[A-Z]/, '-\0').downcase
