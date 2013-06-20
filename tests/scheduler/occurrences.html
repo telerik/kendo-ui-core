@@ -1761,6 +1761,33 @@
                 equal(events[0].start.getTime(), +new Date(2013, 0, 3, 10, 30));
                 equal(events[0].end.getTime(), +new Date(2013, 0, 3, 11, 30));
             });
+
+            test("Do not remove original event if exception is not equal to start date", function() {
+                var expDate1 = new Date(2013, 0, 2, 10, 30);
+
+                expDate1 = kendo.timezone.apply(expDate1, 0);
+
+                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
+
+                var events = [{
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30),
+                    end: new Date(2013, 0, 1, 11, 30),
+                    recurrenceRule: "FREQ=DAILY",
+                    recurrenceException: exception
+                }]
+
+                events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 0, 3, 17));
+
+                equal(events.length, 2);
+                equal(events[0].start.getTime(), +new Date(2013, 0, 1, 10, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 0, 1, 11, 30));
+
+                equal(events[1].start.getTime(), +new Date(2013, 0, 3, 10, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 0, 3, 11, 30));
+            });
+
         </script>
     </body>
 </html>

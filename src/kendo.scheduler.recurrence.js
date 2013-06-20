@@ -776,8 +776,7 @@ kendo_module({
         var length = events.length,
             idx = 0, event, result,
             resultLength, skip,
-            isInException,
-            eventStartMS;
+            eventStart;
 
         for (; idx < length; idx++) {
             event = events[idx];
@@ -786,10 +785,8 @@ kendo_module({
             skip = false;
 
             if (resultLength) {
-                eventStartMS = event.start.getTime();
-                isInException = event.recurrenceException && eventStartMS !== result[0].start.getTime();
-
-                if (eventStartMS < start || isInException) {
+                eventStart = event.start;
+                if (eventStart < start || exceptionExists(event.recurrenceException, eventStart)) {
                     resultLength -= 1;
                     skip = true;
                 }
