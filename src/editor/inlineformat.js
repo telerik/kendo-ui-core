@@ -474,7 +474,7 @@ var StyleTool = DelayedExecutionTool.extend({
             range: args.range,
             formatter: function () {
                 var command,
-                    options = { className: styleOptions.value, context: styleOptions.context };
+                    options = { className: styleOptions.value || styleOptions, context: styleOptions.context };
 
                 if (styleOptions.context) {
                     command = new ClassFormatter(options);
@@ -499,18 +499,18 @@ var StyleTool = DelayedExecutionTool.extend({
             change: function () {
                 Tool.exec(editor, "style", this.dataItem().toJSON());
             },
-            highlightFirst: false
+            highlightFirst: false,
+            template: kendo.template(
+                '<span unselectable="on" style="display:block;#=data.style#">#:data.text#</span>'
+            )
         });
 
         $(ui).data(this.type).decorateItems = function(doc) {
-            var classes = this.dataSource.view();
+            var classes = this.dataSource.data();
 
-            this.list.find(".k-item").each(function(i, element){
-                var item = $(element),
-                    style = dom.inlineStyle(doc, "span", { className : classes[i].value });
-
-                item.html('<span unselectable="on" style="display:block;' + style +'">' + item.text() + '</span>');
-            });
+            for (var i = 0; i < classes.length; i++) {
+                classes[i].style = dom.inlineStyle(doc, "span", { className : classes[i].value });
+            }
         };
 
         ui.closest(".k-widget").removeClass("k-" + this.name).find("*").addBack().attr("unselectable", "on");
