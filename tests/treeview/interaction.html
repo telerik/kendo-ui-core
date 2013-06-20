@@ -621,6 +621,22 @@
                 equal(treeviewObject.current()[0], treeview.find(".k-item .k-item .k-item")[0]);
             });
 
+            test("up arrow moves focus to previous grandparent leaf with expanded flag set", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", expanded: true, items: [
+                            { text: "baz", expanded: true }
+                        ] }
+                    ] },
+                    { text: "qux", selected: true }
+                ]);
+
+                treeview.focus();
+                treeview.press(keys.UP);
+
+                equal(treeviewObject.current()[0], treeview.find(".k-item .k-item .k-item")[0]);
+            });
+
             test("up arrow moves focus to parent node when out of previous nodes", function() {
                 createTreeView([
                     { text: "foo", expanded: true, items: [
