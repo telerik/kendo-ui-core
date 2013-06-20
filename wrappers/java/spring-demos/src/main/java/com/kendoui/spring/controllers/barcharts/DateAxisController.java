@@ -12,21 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kendoui.spring.models.ChartDataRepository;
+
 @Controller("dataviz-bar_charts-date_axis-controller")
 @RequestMapping(value="/dataviz/bar-charts/")
 public class DateAxisController {
     @RequestMapping(value = "/date-axis", method = RequestMethod.GET)
     public String index(Model model) throws ParseException {
-        List<Date> result = new ArrayList<Date>();
-        DateFormat formatter = new SimpleDateFormat("yyyy/mm/dd");
-        
-        result.add(formatter.parse("2011/12/30"));
-        result.add(formatter.parse("2011/12/31"));
-        result.add(formatter.parse("2012/01/01"));
-        result.add(formatter.parse("2012/01/02"));
-        result.add(formatter.parse("2012/01/03"));
-        
-        model.addAttribute("years", result);
+        model.addAttribute("stats", ChartDataRepository.DatePoints());
         
         return "/dataviz/bar-charts/date-axis";
     }
