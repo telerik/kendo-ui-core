@@ -357,11 +357,13 @@ kendo_module({
 
                     if (isInDateRange(weekStart, event.start, event.end) && eventDurationInDays >= 1) {
                         if (getDate(event.start).getTime() === getDate(weekStart).getTime()) {
-                            if (event.tail) {
-                                event.tail = false;
-                                event.middle = true;
-                            } else {
-                                event.head = true;
+                            if (eventDurationInDays > 1) {
+                                if (event.tail) {
+                                    event.tail = false;
+                                    event.middle = true;
+                                } else {
+                                    event.head = true;
+                                }
                             }
                         } else {
                             var tmp = extend({}, event);
