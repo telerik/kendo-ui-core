@@ -153,7 +153,6 @@
     <Compile Include="Controllers\Mobile\TabStrip\BadgesController.cs" />
     <Compile Include="Controllers\Mobile\TabStrip\IndexController.cs" />
     <Compile Include="Controllers\Mobile\View\ZoomableController.cs" />
-    <Compile Include="Controllers\Mobile\View\IndexController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\NavigationController.cs" />
