@@ -67,34 +67,39 @@
                 </div>
             </div>
             <script>
+                var stats = [
+                    { value: 30, date: new Date("2011/12/20") },
+                    { value: 50, date: new Date("2011/12/21") },
+                    { value: 45, date: new Date("2011/12/22") },
+                    { value: 40, date: new Date("2011/12/23") },
+                    { value: 35, date: new Date("2011/12/24") },
+                    { value: 40, date: new Date("2011/12/25") },
+                    { value: 42, date: new Date("2011/12/26") },
+                    { value: 40, date: new Date("2011/12/27") },
+                    { value: 35, date: new Date("2011/12/28") },
+                    { value: 43, date: new Date("2011/12/29") },
+                    { value: 38, date: new Date("2011/12/30") },
+                    { value: 30, date: new Date("2011/12/31") },
+                    { value: 48, date: new Date("2012/01/01") },
+                    { value: 50, date: new Date("2012/01/02") },
+                    { value: 55, date: new Date("2012/01/03") },
+                    { value: 35, date: new Date("2012/01/04") },
+                    { value: 30, date: new Date("2012/01/05") }
+                ];
+
                 function createChart() {
                     $("#chart").kendoChart({
+                        dataSource: {
+                            data: stats
+                        },
                         series: [{
                             type: "column",
-                            data: [30, 50, 45, 40, 35, 40, 42, 40, 35, 43, 38, 30, 48, 50, 55, 35, 30],
-                            aggregate: "avg"
+                            aggregate: "avg",
+                            field: "value",
+                            categoryField: "date"
                         }],
                         categoryAxis: {
                             baseUnit: "weeks",
-                            categories: [
-                                new Date("2011/12/20"),
-                                new Date("2011/12/21"),
-                                new Date("2011/12/22"),
-                                new Date("2011/12/23"),
-                                new Date("2011/12/24"),
-                                new Date("2011/12/25"),
-                                new Date("2011/12/26"),
-                                new Date("2011/12/27"),
-                                new Date("2011/12/28"),
-                                new Date("2011/12/29"),
-                                new Date("2011/12/30"),
-                                new Date("2011/12/31"),
-                                new Date("2012/01/01"),
-                                new Date("2012/01/02"),
-                                new Date("2012/01/03"),
-                                new Date("2012/01/04"),
-                                new Date("2012/01/05"),
-                            ],
                             majorGridLines: {
                                 visible: false
                             }
