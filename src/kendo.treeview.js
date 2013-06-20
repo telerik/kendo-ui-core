@@ -841,6 +841,7 @@ kendo_module({
 
         _previousVisible: function(node) {
             var that = this,
+                lastChild,
                 result;
 
             if (!node.length || node.prev().length) {
@@ -851,7 +852,13 @@ kendo_module({
                 }
 
                 while (that._expanded(result)) {
-                    result = subGroup(result).children().last();
+                    lastChild = subGroup(result).children().last();
+
+                    if (!lastChild.length) {
+                        break;
+                    }
+
+                    result = lastChild;
                 }
             } else {
                 result = that.parent(node) || node;
