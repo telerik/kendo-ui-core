@@ -49,7 +49,7 @@ kendo_module({
             element = that.element;
 
             that.params = {};
-            that.lastParams = {};
+            that._paramsHistory = [];
 
             $.extend(that, options);
 
@@ -121,21 +121,24 @@ kendo_module({
             that.trigger(HIDE, {view: that});
         },
 
-        updateParams: function(params) {
-            var that = this;
-
-            if (that.trigger(BEFORE_SHOW, {view: that})) {
-                return;
+        updateParams: function(transition, params, callback) {
+            // the newly passed parameters equal the last parameters of the view - we are going back
+            if (this.equalToPreviousParams(params)) {
+                this.nextViewID = this.id;
+                this.backTransition = this.transition;
             }
 
-            that.lastParams = that.params;
-            that.params = params;
+            this.switchWith(new ViewClone(this), transition, params, callback);
+        },
 
-            that.trigger(SHOW, {view: that});
+
+        equalToPreviousParams: function(params) {
+            return this._paramsHistory[this._paramsHistory.length - 2] === JSON.stringify(params);
         },
 
         switchWith: function(view, transition, params, callback) {
             var that = this,
+                paramsHistory = this._paramsHistory,
                 complete = function() {
                     that.trigger(AFTER_SHOW, {view: that});
                     callback();
@@ -145,7 +148,14 @@ kendo_module({
                 return;
             }
 
-            that.lastParams = that.params;
+            if (this.equalToPreviousParams(params)) {
+                paramsHistory.pop();
+                that._back = true;
+            } else {
+                paramsHistory.push(JSON.stringify(params));
+                that._back = false;
+            }
+
             that.params = params;
 
             if (view) {
@@ -258,6 +268,33 @@ kendo_module({
         }
     });
 
+    var ViewClone = kendo.mobile.ui.Widget.extend({
+        init: function(view) {
+            var elementClone = view.element.clone(true);
+
+            $.extend(this, {
+                element: elementClone,
+                header: elementClone.children(roleSelector("header")),
+                content: elementClone.children(roleSelector("content")),
+                footer: elementClone.children(roleSelector("footer")),
+                transition: view.transition,
+                options: { defaultTransition: view.options.defaultTransition },
+                params: JSON.stringify(view.params),
+                id: view.id
+            });
+
+            view.element.parent().append(this.element);
+        },
+
+        parallaxContents: View.prototype.parallaxContents,
+
+        hideStart: $.noop,
+
+        hideComplete: function() {
+            this.element.remove();
+        }
+    });
+
     function fade(source, destination) {
         if (source[0] && destination[0] && source[0] != destination[0]) {
             source.kendoAnimateTo(destination, {effects: "fade", duration: TRANSITION_DURATION });
@@ -341,7 +378,7 @@ kendo_module({
             var next = this.next,
                 current = this.current;
 
-            return next.nextViewID && next.nextViewID === current.id && JSON.stringify(next.params) === JSON.stringify(next.lastParams);
+            return next.nextViewID && next.nextViewID === current.id && next._back;
         }
     });
 
@@ -627,8 +664,9 @@ kendo_module({
                     that.trigger(VIEW_SHOW, {view: view});
                 });
             } else {
-                that._view.updateParams(params);
-                that.trigger(VIEW_SHOW, {view: view});
+                that._view.updateParams(transition, params, function() {
+                    that.trigger(VIEW_SHOW, { view: that._view });
+                });
             }
         },
 

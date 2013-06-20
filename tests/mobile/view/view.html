@@ -88,6 +88,28 @@
                 setup('<div data-role="view"></div>');
                 ok(view.scrollerContent[0] == view.contentElement()[0]);
             });
+
+            var roleSelector = kendo.roleSelector;
+
+            var ViewClone = kendo.mobile.ui.Widget.extend({
+                init: function(view) {
+                    this.element = view.element.clone(true);
+                    this.header = this.element.children(roleSelector("header"));
+                    this.content = this.element.children(roleSelector("content"));
+                    this.footer = this.element.children(roleSelector("footer"));
+                    this.params = JSON.stringify(view.params);
+                }
+            });
+            module("view cloning");
+
+            test("the clone contains the same element as the original", 4, function() {
+                setup('<div data-role="view"><header data-role="header">Header</header>Content<footer data-role="footer"></footer></div>');
+                var clone = new ViewClone(view);
+                equal(clone.element.html(), view.element.html());
+                equal(clone.header.html(), view.header.html());
+                equal(clone.content.html(), view.content.html());
+                equal(clone.footer.html(), view.footer.html());
+            });
         </script>
     </body>
 </html>

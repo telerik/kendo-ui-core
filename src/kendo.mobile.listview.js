@@ -869,6 +869,7 @@ kendo_module({
             this._itemBinder.configure();
 
             if (this.options.autoBind) {
+                this.element.empty();
                 this.dataSource.fetch();
             }
         },
