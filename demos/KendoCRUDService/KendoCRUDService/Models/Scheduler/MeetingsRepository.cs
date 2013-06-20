@@ -29,7 +29,7 @@ namespace KendoCRUDService.Models
                         Description = meeting.Description,
                         IsAllDay = meeting.IsAllDay,
                         RoomID = meeting.RoomID,
-                        Recurrence = meeting.Recurrence,
+                        RecurrenceRule = meeting.RecurrenceRule,
                         RecurrenceException = meeting.RecurrenceException,
                         RecurrenceID = meeting.RecurrenceID,
                         Atendees = meeting.MeetingAtendees.Select(m => m.AtendeeID).ToArray()
@@ -68,18 +68,12 @@ namespace KendoCRUDService.Models
             {
                 using (var db = new SampleEntities())
                 {
-                    var entity = new Meeting
+                    if (meeting.Atendees == null)
                     {
-                        Title = meeting.Title,
-                        Start = meeting.Start,
-                        End = meeting.End,
-                        Description = meeting.Description,
-                        IsAllDay = meeting.IsAllDay,
-                        Recurrence = meeting.Recurrence,
-                        RecurrenceException = meeting.RecurrenceException,
-                        RecurrenceID = meeting.RecurrenceID,
-                        RoomID = meeting.RoomID
-                    };
+                        meeting.Atendees = new int[0];
+                    }
+
+                    var entity = meeting.ToEntity();
 
                     foreach (var atendeeId in meeting.Atendees)
                     {
@@ -111,7 +105,7 @@ namespace KendoCRUDService.Models
                     target.End = meeting.End;
                     target.Description = meeting.Description;
                     target.IsAllDay = meeting.IsAllDay;
-                    target.Recurrence = meeting.Recurrence;
+                    target.RecurrenceRule = meeting.RecurrenceRule;
                     target.RoomID = meeting.RoomID;
                     target.RecurrenceException = meeting.RecurrenceException;
                     target.RecurrenceID = meeting.RecurrenceID;
@@ -122,19 +116,12 @@ namespace KendoCRUDService.Models
             {
                 using (var db = new SampleEntities())
                 {
-                    var entity = new Meeting
+                    if (meeting.Atendees == null)
                     {
-                        MeetingID = meeting.MeetingID,
-                        Title = meeting.Title,
-                        Start = meeting.Start,
-                        End = meeting.End,
-                        Description = meeting.Description,
-                        Recurrence = meeting.Recurrence,
-                        RecurrenceException = meeting.RecurrenceException,
-                        RecurrenceID = meeting.RecurrenceID,
-                        IsAllDay = meeting.IsAllDay,
-                        RoomID = meeting.RoomID
-                    };
+                        meeting.Atendees = new int[0];
+                    }
+
+                    var entity = meeting.ToEntity();
 
                     db.Meetings.Attach(entity);
 
@@ -169,25 +156,25 @@ namespace KendoCRUDService.Models
                 if (target != null)
                 {
                     All().Remove(target);
+
+                    var recurrenceExceptions = All().Where(m => m.RecurrenceID == meeting.MeetingID).ToList();
+
+                    foreach (var recurrenceException in recurrenceExceptions)
+                    {
+                        All().Remove(recurrenceException);
+                    }
                 }
             }
             else
             {
                 using (var db = new SampleEntities())
                 {
-                    var entity = new Meeting
+                    if (meeting.Atendees == null)
                     {
-                        MeetingID = meeting.MeetingID,
-                        Title = meeting.Title,
-                        Start = meeting.Start,
-                        End = meeting.End,
-                        Description = meeting.Description,
-                        Recurrence = meeting.Recurrence,
-                        RecurrenceException = meeting.RecurrenceException,
-                        RecurrenceID = meeting.RecurrenceID,
-                        IsAllDay = meeting.IsAllDay,
-                        RoomID = meeting.RoomID
-                    };
+                        meeting.Atendees = new int[0];
+                    }
+
+                    var entity = meeting.ToEntity();
 
                     db.Meetings.Attach(entity);
 
@@ -202,6 +189,13 @@ namespace KendoCRUDService.Models
                     }
 
                     entity.MeetingAtendees.Clear();
+
+                    var recurrenceExceptions = db.Meetings.Where(m => m.RecurrenceID == entity.MeetingID);
+
+                    foreach (var recurrenceException in recurrenceExceptions)
+                    {
+                        db.Meetings.DeleteObject(recurrenceException);
+                    }
 
                     db.Meetings.DeleteObject(entity);
                     db.SaveChanges();

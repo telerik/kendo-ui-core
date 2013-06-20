@@ -206,7 +206,7 @@
           <Property Name="Description" Type="ntext" Nullable="false" />
           <Property Name="RoomID" Type="int" />
           <Property Name="IsAllDay" Type="bit" Nullable="false" />
-          <Property Name="Recurrence" Type="ntext" />
+          <Property Name="RecurrenceRule" Type="ntext" />
           <Property Name="RecurrenceID" Type="int" />
           <Property Name="RecurrenceException" Type="ntext" />
         </EntityType>
@@ -298,7 +298,7 @@
           <Property Name="Description" Type="ntext" />
           <Property Name="OwnerID" Type="int" />
           <Property Name="IsAllDay" Type="bit" Nullable="false" />
-          <Property Name="Recurrence" Type="ntext" />
+          <Property Name="RecurrenceRule" Type="ntext" />
           <Property Name="RecurrenceID" Type="int" />
           <Property Name="RecurrenceException" Type="ntext" />
         </EntityType>
@@ -589,8 +589,8 @@
             <End Role="Territories" EntitySet="Territories" />
           </AssociationSet>
           <EntitySet Name="MeetingAtendees" EntityType="SampleModel.MeetingAtendee" />
-          <EntitySet Name="Tasks" EntityType="SampleModel.Task" />
           <EntitySet Name="Meetings" EntityType="SampleModel.Meeting" />
+          <EntitySet Name="Tasks" EntityType="SampleModel.Task" />
           <AssociationSet Name="FK_MeetingAtendee_Meeting" Association="SampleModel.FK_MeetingAtendee_Meeting">
             <End Role="Meeting" EntitySet="Meetings" />
             <End Role="MeetingAtendee" EntitySet="MeetingAtendees" />
@@ -603,7 +603,7 @@
             <End Role="Task" EntitySet="Tasks" />
             <End Role="Task1" EntitySet="Tasks" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -926,23 +926,6 @@
           <Property Type="Int32" Name="AtendeeID" Nullable="false" />
           <NavigationProperty Name="Meeting" Relationship="SampleModel.FK_MeetingAtendee_Meeting" FromRole="MeetingAtendee" ToRole="Meeting" />
         </EntityType>
-        <EntityType Name="Task">
-          <Key>
-            <PropertyRef Name="TaskID" />
-          </Key>
-          <Property Name="TaskID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Start" Nullable="false" Type="DateTime" />
-          <Property Name="End" Nullable="false" Type="DateTime" />
-          <Property Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="OwnerID" Type="Int32" />
-          <Property Name="IsAllDay" Nullable="false" Type="Boolean" />
-          <Property Name="Recurrence" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="RecurrenceID" Type="Int32" />
-          <Property Name="RecurrenceException" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
-          <NavigationProperty Name="RecurrenceExceptions" Relationship="SampleModel.FK_Tasks_Tasks" FromRole="Task" ToRole="Task1" />
-          <NavigationProperty Name="Task1" Relationship="SampleModel.FK_Tasks_Tasks" FromRole="Task1" ToRole="Task" />
-        </EntityType>
         <EntityType Name="Meeting">
           <Key>
             <PropertyRef Name="MeetingID" />
@@ -954,12 +937,29 @@
           <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="RoomID" />
           <Property Type="Boolean" Name="IsAllDay" Nullable="false" />
-          <Property Type="String" Name="Recurrence" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RecurrenceRule" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="RecurrenceID" />
           <Property Type="String" Name="RecurrenceException" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MeetingAtendees" Relationship="SampleModel.FK_MeetingAtendee_Meeting" FromRole="Meeting" ToRole="MeetingAtendee" />
-          <NavigationProperty Name="RecurrenceExceptions" Relationship="SampleModel.FK_Meetings_Meetings" FromRole="Meeting" ToRole="Meeting1" />
+          <NavigationProperty Name="Meetings1" Relationship="SampleModel.FK_Meetings_Meetings" FromRole="Meeting" ToRole="Meeting1" />
           <NavigationProperty Name="Meeting1" Relationship="SampleModel.FK_Meetings_Meetings" FromRole="Meeting1" ToRole="Meeting" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Type="Int32" Name="TaskID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Start" Nullable="false" />
+          <Property Type="DateTime" Name="End" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="OwnerID" />
+          <Property Type="Boolean" Name="IsAllDay" Nullable="false" />
+          <Property Type="String" Name="RecurrenceRule" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="RecurrenceID" />
+          <Property Type="String" Name="RecurrenceException" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tasks1" Relationship="SampleModel.FK_Tasks_Tasks" FromRole="Task" ToRole="Task1" />
+          <NavigationProperty Name="Task1" Relationship="SampleModel.FK_Tasks_Tasks" FromRole="Task1" ToRole="Task" />
         </EntityType>
         <Association Name="FK_MeetingAtendee_Meeting">
           <End Type="SampleModel.Meeting" Role="Meeting" Multiplicity="1" />
@@ -997,7 +997,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1208,28 +1208,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tasks">
-            <EntityTypeMapping TypeName="SampleModel.Task">
-              <MappingFragment StoreEntitySet="Tasks">
-                <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
-                <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
-                <ScalarProperty Name="Recurrence" ColumnName="Recurrence" />
-                <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="End" ColumnName="End" />
-                <ScalarProperty Name="Start" ColumnName="Start" />
-                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Meetings">
             <EntityTypeMapping TypeName="SampleModel.Meeting">
               <MappingFragment StoreEntitySet="Meetings">
                 <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
                 <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
-                <ScalarProperty Name="Recurrence" ColumnName="Recurrence" />
+                <ScalarProperty Name="RecurrenceRule" ColumnName="RecurrenceRule" />
                 <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
                 <ScalarProperty Name="RoomID" ColumnName="RoomID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1237,6 +1221,22 @@
                 <ScalarProperty Name="End" ColumnName="End" />
                 <ScalarProperty Name="Start" ColumnName="Start" />
                 <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="SampleModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
+                <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
+                <ScalarProperty Name="RecurrenceRule" ColumnName="RecurrenceRule" />
+                <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1335,23 +1335,23 @@
           <ConnectorPoint PointX="8" PointY="10.307571614583333" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SampleModel.MeetingAtendee" Width="1.5" PointX="12.625" PointY="5.5" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="SampleModel.Task" PointX="10.375" PointY="9.25" Width="1.5" Height="3.3263964843749996" />
-        <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="10.375" PointY="5.25" Height="3.5186979166666656" />
+        <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="10.375" PointY="4.5" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="SampleModel.Task" Width="1.5" PointX="10.375" PointY="9.75" Height="3.326396484374996" />
         <AssociationConnector Association="SampleModel.FK_MeetingAtendee_Meeting" >
           <ConnectorPoint PointX="11.875" PointY="6.297841796875" />
           <ConnectorPoint PointX="12.625" PointY="6.297841796875" />
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.FK_Meetings_Meetings" >
-          <ConnectorPoint PointX="10.906923076923077" PointY="8.7686979166666656" />
-          <ConnectorPoint PointX="10.906923076923077" PointY="9.0186979166666656" />
-          <ConnectorPoint PointX="11.353461538461538" PointY="9.0186979166666656" />
-          <ConnectorPoint PointX="11.353461538461538" PointY="8.7686979166666656" />
+          <ConnectorPoint PointX="10.906923076923077" PointY="8.0186979166666674" />
+          <ConnectorPoint PointX="10.906923076923077" PointY="8.2686979166666674" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="8.2686979166666674" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="8.0186979166666674" />
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.FK_Tasks_Tasks" >
-          <ConnectorPoint PointX="10.906923076923077" PointY="12.576396484375" />
-          <ConnectorPoint PointX="10.906923076923077" PointY="12.826396484375" />
-          <ConnectorPoint PointX="11.353461538461538" PointY="12.826396484375" />
-          <ConnectorPoint PointX="11.353461538461538" PointY="12.576396484375" />
+          <ConnectorPoint PointX="10.906923076923077" PointY="13.076396484374996" />
+          <ConnectorPoint PointX="10.906923076923077" PointY="13.326396484374996" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="13.326396484374996" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="13.076396484374996" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

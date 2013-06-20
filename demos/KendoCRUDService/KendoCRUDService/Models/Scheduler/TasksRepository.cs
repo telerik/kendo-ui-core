@@ -28,7 +28,7 @@ namespace KendoCRUDService.Models
                         End = task.End,
                         Description = task.Description,
                         IsAllDay = task.IsAllDay,
-                        Recurrence = task.Recurrence,
+                        RecurrenceRule = task.RecurrenceRule,
                         RecurrenceException = task.RecurrenceException,
                         RecurrenceID = task.RecurrenceID,
                         OwnerID = task.OwnerID
@@ -67,18 +67,7 @@ namespace KendoCRUDService.Models
             {
                 using (var db = new SampleEntities())
                 {
-                    var entity = new Task
-                    {
-                        Title = task.Title,
-                        Start = task.Start,
-                        End = task.End,
-                        Description = task.Description,
-                        Recurrence = task.Recurrence,
-                        RecurrenceException = task.RecurrenceException,
-                        RecurrenceID = task.RecurrenceID,
-                        IsAllDay = task.IsAllDay,
-                        OwnerID = task.OwnerID
-                    };
+                    var entity = task.ToEntity();
 
                     db.Tasks.AddObject(entity);
                     db.SaveChanges();
@@ -101,7 +90,7 @@ namespace KendoCRUDService.Models
                     target.End = task.End;
                     target.Description = task.Description;
                     target.IsAllDay = task.IsAllDay;
-                    target.Recurrence = task.Recurrence;
+                    target.RecurrenceRule = task.RecurrenceRule;
                     target.RecurrenceException = task.RecurrenceException;
                     target.RecurrenceID = task.RecurrenceID;
                     target.OwnerID = task.OwnerID;
@@ -111,25 +100,11 @@ namespace KendoCRUDService.Models
             {
                 using (var db = new SampleEntities())
                 {
-                    var entity = new Task
-                    {
-                        TaskID = task.TaskID,
-                        Title = task.Title,
-                        Start = task.Start,
-                        End = task.End,
-                        Description = task.Description,
-                        Recurrence = task.Recurrence,
-                        RecurrenceException = task.RecurrenceException,
-                        RecurrenceID = task.RecurrenceID,
-                        IsAllDay = task.IsAllDay,
-                        OwnerID = task.OwnerID
-                    };
-
+                    var entity = task.ToEntity();
                     db.Tasks.Attach(entity);
                     db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
                     db.SaveChanges();
                 }
-
             }
         }
 
@@ -141,27 +116,29 @@ namespace KendoCRUDService.Models
                 if (target != null)
                 {
                     All().Remove(target);
+
+                    var recurrenceExceptions = All().Where(m => m.RecurrenceID == task.TaskID).ToList();
+
+                    foreach (var recurrenceException in recurrenceExceptions)
+                    {
+                        All().Remove(recurrenceException);
+                    }
                 }
             }
             else
             {
                 using (var db = new SampleEntities())
                 {
-                    var entity = new Task
-                    {
-                        TaskID = task.TaskID,
-                        Title = task.Title,
-                        Start = task.Start,
-                        End = task.End,
-                        Description = task.Description,
-                        Recurrence = task.Recurrence,
-                        RecurrenceException = task.RecurrenceException,
-                        RecurrenceID = task.RecurrenceID,
-                        IsAllDay = task.IsAllDay,
-                        OwnerID = task.OwnerID
-                    };
-
+                    var entity = task.ToEntity();
                     db.Tasks.Attach(entity);
+
+                    var recurrenceExceptions = db.Tasks.Where(t => t.RecurrenceID == task.TaskID);
+
+                    foreach (var recurrenceException in recurrenceExceptions)
+                    {
+                        db.Tasks.DeleteObject(recurrenceException);
+                    }
+
                     db.Tasks.DeleteObject(entity);
                     db.SaveChanges();
                 }

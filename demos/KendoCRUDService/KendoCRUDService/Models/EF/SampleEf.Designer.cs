@@ -311,22 +311,6 @@ namespace KendoCRUDService.Models.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Task> Tasks
-        {
-            get
-            {
-                if ((_Tasks == null))
-                {
-                    _Tasks = base.CreateObjectSet<Task>("Tasks");
-                }
-                return _Tasks;
-            }
-        }
-        private ObjectSet<Task> _Tasks;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Meeting> Meetings
         {
             get
@@ -339,6 +323,22 @@ namespace KendoCRUDService.Models.EF
             }
         }
         private ObjectSet<Meeting> _Meetings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Task> Tasks
+        {
+            get
+            {
+                if ((_Tasks == null))
+                {
+                    _Tasks = base.CreateObjectSet<Task>("Tasks");
+                }
+                return _Tasks;
+            }
+        }
+        private ObjectSet<Task> _Tasks;
 
         #endregion
 
@@ -457,19 +457,19 @@ namespace KendoCRUDService.Models.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Tasks EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTasks(Task task)
-        {
-            base.AddObject("Tasks", task);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Meetings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToMeetings(Meeting meeting)
         {
             base.AddObject("Meetings", meeting);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Tasks EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTasks(Task task)
+        {
+            base.AddObject("Tasks", task);
         }
 
         #endregion
@@ -2142,24 +2142,24 @@ namespace KendoCRUDService.Models.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Recurrence
+        public global::System.String RecurrenceRule
         {
             get
             {
-                return _Recurrence;
+                return _RecurrenceRule;
             }
             set
             {
-                OnRecurrenceChanging(value);
-                ReportPropertyChanging("Recurrence");
-                _Recurrence = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Recurrence");
-                OnRecurrenceChanged();
+                OnRecurrenceRuleChanging(value);
+                ReportPropertyChanging("RecurrenceRule");
+                _RecurrenceRule = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("RecurrenceRule");
+                OnRecurrenceRuleChanged();
             }
         }
-        private global::System.String _Recurrence;
-        partial void OnRecurrenceChanging(global::System.String value);
-        partial void OnRecurrenceChanged();
+        private global::System.String _RecurrenceRule;
+        partial void OnRecurrenceRuleChanging(global::System.String value);
+        partial void OnRecurrenceRuleChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2243,7 +2243,7 @@ namespace KendoCRUDService.Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_Meetings_Meetings", "Meeting1")]
-        public EntityCollection<Meeting> RecurrenceExceptions
+        public EntityCollection<Meeting> Meetings1
         {
             get
             {
@@ -4360,24 +4360,24 @@ namespace KendoCRUDService.Models.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Recurrence
+        public global::System.String RecurrenceRule
         {
             get
             {
-                return _Recurrence;
+                return _RecurrenceRule;
             }
             set
             {
-                OnRecurrenceChanging(value);
-                ReportPropertyChanging("Recurrence");
-                _Recurrence = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Recurrence");
-                OnRecurrenceChanged();
+                OnRecurrenceRuleChanging(value);
+                ReportPropertyChanging("RecurrenceRule");
+                _RecurrenceRule = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("RecurrenceRule");
+                OnRecurrenceRuleChanged();
             }
         }
-        private global::System.String _Recurrence;
-        partial void OnRecurrenceChanging(global::System.String value);
-        partial void OnRecurrenceChanged();
+        private global::System.String _RecurrenceRule;
+        partial void OnRecurrenceRuleChanging(global::System.String value);
+        partial void OnRecurrenceRuleChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4439,7 +4439,7 @@ namespace KendoCRUDService.Models.EF
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_Tasks_Tasks", "Task1")]
-        public EntityCollection<Task> RecurrenceExceptions
+        public EntityCollection<Task> Tasks1
         {
             get
             {
