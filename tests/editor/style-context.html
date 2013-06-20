@@ -86,6 +86,17 @@
             equal(tool.text(), tool.options.title);
         });
 
+        test("styles apply to specified context", function() {
+            selectFromValue(inline, '<h1>fo||o</h1>');
+
+            var tool = styleTool(inline);
+
+            tool.value("foo");
+            tool.trigger("change");
+
+            equal(inline.value(), '<h1 class="foo">foo</h1>');
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

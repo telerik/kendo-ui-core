@@ -438,6 +438,24 @@ var ColorTool = Tool.extend({
     }
 });
 
+var ClassFormatter = Class.extend({
+    init: function(options) {
+        this.options = options;
+    },
+
+    apply: function(nodes) {
+        var blocks = dom.blockParents(nodes);
+
+        for (var i = 0; i < blocks.length; i++) {
+            $(blocks[i]).addClass(this.options.className);
+        }
+    },
+
+    toggle: function(range) {
+        Editor.GreedyBlockFormatter.fn.toggle.call(this, range);
+    }
+});
+
 var StyleTool = DelayedExecutionTool.extend({
     init: function(options) {
         var that = this;
@@ -448,13 +466,25 @@ var StyleTool = DelayedExecutionTool.extend({
         that.finder = new GreedyInlineFormatFinder(that.format, "className");
     },
 
-    command: function (commandArguments) {
-        var format = this.format;
-        return new Editor.FormatCommand(extend(commandArguments, {
+    command: function (args) {
+        var format = this.format,
+            styleOptions = args.value;
+
+        return new Editor.FormatCommand({
+            range: args.range,
             formatter: function () {
-                return new GreedyInlineFormatter(format, { className: commandArguments.value });
+                var command,
+                    options = { className: styleOptions.value, context: styleOptions.context };
+
+                if (styleOptions.context) {
+                    command = new ClassFormatter(options);
+                } else {
+                    command = new GreedyInlineFormatter(format, options);
+                }
+
+                return command;
             }
-        }));
+        });
     },
 
     initialize: function(ui, initOptions) {
@@ -467,7 +497,7 @@ var StyleTool = DelayedExecutionTool.extend({
             dataSource: options.items || editor.options.style,
             title: editor.options.messages.style,
             change: function () {
-                Tool.exec(editor, "style", this.value());
+                Tool.exec(editor, "style", this.dataItem().toJSON());
             },
             highlightFirst: false
         });
