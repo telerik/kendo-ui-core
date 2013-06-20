@@ -782,7 +782,7 @@ kendo_module({
             skip = false;
 
             if (resultLength) {
-                if (event.start < start) {
+                if (event.start < start || (event.exception && event.start.getTime() !== result[0].start.getTime())) {
                     resultLength -= 1;
                     skip = true;
                 }
