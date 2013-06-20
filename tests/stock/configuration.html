@@ -61,36 +61,25 @@
                     teardown: destroyChart
                 });
 
-                test("default categoryAxis field is 'date'", function() {
-                    equal(chart.options.categoryAxis[0].field, "date");
+                test("default series categoryField is 'date'", function() {
+                    equal(chart.options.series[0].categoryField, "date");
                 });
 
-                test("dateField is applied as default categoryAxis field", function() {
+                test("dateField is applied as default categoryField", function() {
                     createStockChart({ dateField: "d" });
-                    equal(chart.options.categoryAxis[0].field, "d");
+                    equal(chart.options.series[0].categoryField, "d");
                 });
 
-                test("default axis field is applied", function() {
+                test("default categoryField is applied", function() {
                     createStockChart({
-                        axisDefaults: {
-                            field: "d"
+                        seriesDefaults: {
+                            categoryField: "d"
                         }
                     });
-                    equal(chart.options.categoryAxis[0].field, "d");
+                    equal(chart.options.series[0].categoryField, "d");
                 });
 
-                test("default categoryAxis field is applied", function() {
-                    createStockChart({
-                        axisDefaults: {
-                            categoryAxis: {
-                                field: "d"
-                            }
-                        }
-                    });
-                    equal(chart.options.categoryAxis[0].field, "d");
-                });
-
-                asyncTest("navigator date field is inherited from the chart", function() {
+                asyncTest("navigator categoryField is inherited from the chart", function() {
                     createStockChart({
                         dateField: "Date",
                         dataSource: {
@@ -113,7 +102,7 @@
                     });
 
                     setTimeout(function() {
-                        equal(chart.options.categoryAxis[1].field, "Date");
+                        equal(chart.options.series[0].categoryField, "Date");
                         start();
                     }, 50);
                 });
@@ -142,7 +131,7 @@
                     });
 
                     setTimeout(function() {
-                        equal(chart.options.categoryAxis[1].field, "Date");
+                        equal(chart.options.series[0].categoryField, "Date");
                         start();
                     }, 50);
                 });

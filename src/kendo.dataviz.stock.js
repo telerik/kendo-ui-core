@@ -52,10 +52,12 @@ kendo_module({
                 width = chart.element.width() || dataviz.DEFAULT_WIDTH;
 
             var stockDefaults = {
+                seriesDefaults: {
+                    categoryField: options.dateField
+                },
                 axisDefaults: {
                     categoryAxis: {
                         name: "default",
-                        field: options.dateField,
                         majorGridLines: {
                             visible: false
                         },
@@ -102,7 +104,7 @@ kendo_module({
                 }));
 
                 dataSource.filter =
-                    Navigator.buildFilter(dummyAxis.options.min, select.to)
+                    Navigator.buildFilter(dummyAxis.range().min, select.to)
                     .concat(filter);
             }
 
@@ -111,8 +113,7 @@ kendo_module({
 
         options: {
             name: "StockChart",
-            // TODO: Document breaking change
-            // dateField: "date",
+            dateField: "date",
             axisDefaults: {
                 categoryAxis: {
                     type: "date",
@@ -173,6 +174,24 @@ kendo_module({
 
             Chart.fn._onDataChanged.call(chart);
             chart._dataBound = true;
+        },
+
+        _bindCategoryAxis: function(axis, data, axisIx) {
+            var chart = this,
+                categoryAxes = chart.options.categoryAxis,
+                axesLength = categoryAxes.length,
+                currentAxis;
+
+            Chart.fn._bindCategoryAxis.apply(this, arguments);
+
+            if (axis.name === NAVIGATOR_AXIS) {
+                while (axisIx < axesLength) {
+                    currentAxis = categoryAxes[axisIx++];
+                    if (currentAxis.pane == NAVIGATOR_PANE) {
+                        currentAxis.categories = axis.categories;
+                    }
+                }
+            }
         },
 
         _trackSharedTooltip: function(coords) {
@@ -270,7 +289,6 @@ kendo_module({
                         chart._bindCategoryAxis(currentAxis, data, axisIx);
                         naviCategories = currentAxis.categories;
                     } else {
-                        // TODO: Test
                         currentAxis.categories = naviCategories;
                     }
                 }
@@ -639,7 +657,6 @@ kendo_module({
         var base = deepExtend({
             type: "date",
             pane: NAVIGATOR_PANE,
-            field: naviOptions.dateField,
             roundToBaseUnit: false,
             justified: true,
             tooltip: { visible: false },
@@ -687,7 +704,7 @@ kendo_module({
         );
 
         valueAxes.push({
-            // TODO: Extend navigaor.valueAxis
+            // TODO: Extend navigator.valueAxis
             name: NAVIGATOR_AXIS,
             pane: NAVIGATOR_PANE,
             majorGridLines: {
@@ -708,6 +725,7 @@ kendo_module({
             series.push(
                 deepExtend({
                     color: seriesColors[i % seriesColors.length],
+                    categoryField: naviOptions.dateField,
                     visibleInLegend: false,
                     tooltip: {
                         visible: false
