@@ -79,6 +79,18 @@
                 equal(editor.container.html(), "");
             });
 
+            test("changing frequency resets widget value", function() {
+                var editor = new RecurrenceEditor(div, {
+                    value: "FREQ=WEEKLY;BYDAY=MO,TU,WE"
+                });
+                var ddl = div.find("[data-role=dropdownlist]").data("kendoDropDownList");
+
+                ddl.select(1);
+                ddl.trigger("change");
+
+                equal(editor.value(), "FREQ=DAILY");
+            });
+
             test("renders frequency view container", function() {
                 div.kendoRecurrenceEditor();
 

@@ -1156,7 +1156,7 @@ kendo_module({
             var that = this,
                 container = this.container,
                 html = this["_" + frequency] || "",
-                rule = that._value;// = {};
+                rule = that._value;
 
             kendo.destroy(container);
             container.html(html);
@@ -1580,6 +1580,7 @@ kendo_module({
                 dataValueField: "value",
                 dataSource: frequencies,
                 change: function() {
+                    that._value = {};
                     that.setView(that.ddlFrequency.value());
                     that.trigger("change");
                 }
