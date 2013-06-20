@@ -3106,7 +3106,7 @@ kendo_module({
             }
 
             if (!transport) {
-                transport = isFunction(transportOptions.read) ? transportOptions: new RemoteTransport(transportOptions);
+                transport = isFunction(transportOptions.read) ? transportOptions : new RemoteTransport(transportOptions);
             }
         } else {
             transport = new LocalTransport({ data: options.data });
@@ -3248,6 +3248,14 @@ kendo_module({
 
             if (typeof that.children !== STRING) {
                 extend(childrenOptions, that.children);
+            }
+
+
+            if (childrenOptions.transport) {
+                childrenOptions.transport.parameterMap = function(data, type) {
+                    data[that.idField || "id"] = that.id;
+                    return data;
+                }
             }
 
             childrenOptions.data = value;
