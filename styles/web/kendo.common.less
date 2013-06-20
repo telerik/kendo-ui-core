@@ -3764,6 +3764,12 @@ div.k-slider
 	vertical-align: top;
 }
 
+/* fix smashed second layout column in iPad */
+.k-safari .k-scheduler-layout > tbody > tr > td + td
+{
+    width: 100%;
+}
+
 .k-scheduler-table
 {
 	table-layout:fixed;
@@ -3925,11 +3931,6 @@ div.k-more-events
 	text-overflow: ellipsis;
 }
 
-.k-event dt + dd
-{
-    clear: both;
-}
-
 .k-event-actions,
 .k-event > .k-link,
 .k-task > .k-link
@@ -3968,7 +3969,8 @@ div.k-more-events
     display: none;
 }
 
-.k-event:hover .k-event-delete
+.k-event:hover .k-event-delete,
+td:hover > .k-task .k-event-delete
 {
     display: inline-block;
 }
