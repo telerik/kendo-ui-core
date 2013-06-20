@@ -1149,7 +1149,7 @@ kendo_module({
             var that = this,
                 container = this.container,
                 html = this["_" + frequency] || "",
-                rule = that._value;
+                rule = that._value;// = {};
 
             kendo.destroy(container);
             container.html(html);

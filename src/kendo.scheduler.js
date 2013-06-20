@@ -718,7 +718,7 @@ kendo_module({
                     draggable: true,
                     title: "Edit Recurring Item",
                     visible: false,
-                    close: function() {
+                    deactivate: function() {
                         that._recurringDialog.destroy();
                     }
                 }).data("kendoWindow");
@@ -789,6 +789,11 @@ kendo_module({
             if (that.editable) {
                 that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
             }
+
+            if (that._recurringDialog) {
+                that._recurringDialog.destroy();
+                that._recurringDialog = null;
+            }
         },
 
         removeEvent: function(uid) {
@@ -817,8 +822,7 @@ kendo_module({
             var that = this,
                 isException = !model,
                 wnd = $('<div><button>Delete current occurrence</button><button>Delete the series</button></div>'),
-                buttons = wnd.find("button"),
-                origin;
+                buttons = wnd.find("button");
 
             if (isException) {
                 model = getOccurrenceByUid(that._data, uid);
@@ -833,13 +837,14 @@ kendo_module({
                     resizable: false,
                     draggable: true,
                     title: "Delete Recurring Item",
-                    visible: false
+                    visible: false,
+                    deactivate: function() {
+                        that._recurringDialog.destroy();
+                        that._recurringDialog = null;
+                    }
                 }).data("kendoWindow");
 
                 buttons.eq(0).on("click", function() {
-                    that._recurringDialog.destroy();
-                    that._recurringDialog = null;
-
                     if (isException) {
                         that._addExceptionDate(model);
                         that.dataSource.sync();
@@ -851,10 +856,6 @@ kendo_module({
 
                 buttons.eq(1).on("click", function() {
                     var origin = that.dataSource.get(model.recurrenceId);
-
-                    that._recurringDialog.destroy();
-                    that._recurringDialog = null;
-
                     if (origin) {
                         model = origin;
                     }
