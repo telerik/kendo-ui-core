@@ -76,11 +76,13 @@
             .html("<p>foo bar baz</p>")
             .kendoEditor({
                 tools: [
-                    "bold", "italic", "createLink", "insertImage",
+                    "bold", "italic", "createLink", "unlink", "insertImage",
+
+                    "foreColor", "backColor",
 
                     { name: "style", items: [
-                        { text: "foo", value: "foo" },
-                        { text: "bar", value: "bar" }
+                        { text: "foo", value: "foo", context: "p" },
+                        { text: "bar", value: "bar", context: "h1" }
                     ] }
                 ],
                 select: function(e) {
