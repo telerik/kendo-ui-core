@@ -1,5 +1,4 @@
 MeetingID,Start,End,Title,Description,RoomID,IsAllDay,Recurrence
----------,-----,---,-----,-----------,------,--------,----------
 2,2013-06-10 12:00:00.000,2013-06-10 14:00:00.000,Meeting with customers.,,1,0,NULL
 3,2013-06-10 12:00:00.000,2013-06-10 14:00:00.000,Guided tour for the investors.,,2,0,NULL
 4,2013-06-12 03:00:00.000,2013-06-12 03:00:00.000,Product planning,,1,1,NULL
@@ -36,5 +35,3 @@ MeetingID,Start,End,Title,Description,RoomID,IsAllDay,Recurrence
 36,2013-06-06 00:00:00.000,2013-06-06 00:00:00.000,General Medical Examinations,,1,1,NULL
 37,2013-06-06 00:00:00.000,2013-06-06 00:00:00.000,General Medical Examinations,,2,1,NULL
 38,2013-06-20 00:00:00.000,2013-06-20 00:00:00.000,Medical Examination - results,,1,1,NULL
-
-(36 rows affected)

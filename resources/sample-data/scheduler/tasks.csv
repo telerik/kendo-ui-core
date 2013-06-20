@@ -1,5 +1,4 @@
 TaskID,Start,End,Title,Description,OwnerID,IsAllDay,Recurrence
-------,-----,---,-----,-----------,-------,--------,----------
 4,2013-06-09 21:00:00.000,2013-06-10 00:00:00.000,Bowling tournament,,2,0,NULL
 5,2013-06-10 07:00:00.000,2013-06-10 08:00:00.000,Take the dog to the vet,,2,0,NULL
 6,2013-06-11 11:30:00.000,2013-06-11 13:00:00.000,Call Charlie about the project,,2,0,NULL
@@ -55,5 +54,3 @@ TaskID,Start,End,Title,Description,OwnerID,IsAllDay,Recurrence
 118,2013-06-05 10:00:00.000,2013-06-05 12:00:00.000,HR seminar preparation,,1,0,
 119,2013-06-05 15:00:00.000,2013-06-05 16:00:00.000,Helpdesk weekly meeting,,3,0,FREQ=WEEKLY;BYDAY=WE
 120,2013-06-07 07:00:00.000,2013-06-07 07:30:00.000,Website upload,,3,0,
-
-(55 rows affected)

@@ -20,9 +20,9 @@ puts %Q{
         [RoomID] INT
     );
 
-    DROP TABLE MeetingAtendee;
+    DROP TABLE MeetingAtendees;
 
-    CREATE TABLE MeetingAtendee (
+    CREATE TABLE MeetingAtendees (
         [MeetingID] INTEGER,
         [AtendeeID] INTEGER
     );
@@ -44,9 +44,13 @@ puts %Q{
     BEGIN TRANSACTION;
 }
 
-CSV.foreach('meeting.csv', :headers => true) do |row|
-    start_date = DateTime.iso8601(row['Start'])
-    end_date = DateTime.iso8601(row['End'])
+def parse_date(d)
+    DateTime.iso8601(d.sub(" ", "T"))
+end
+
+CSV.foreach('meetings.csv', :headers => true) do |row|
+    start_date = parse_date(row['Start'])
+    end_date = parse_date(row['End'])
 
     puts %Q{
     INSERT INTO Meetings
@@ -56,9 +60,9 @@ CSV.foreach('meeting.csv', :headers => true) do |row|
     }
 end
 
-CSV.foreach('task.csv', :headers => true) do |row|
-    start_date = DateTime.iso8601(row['Start'])
-    end_date = DateTime.iso8601(row['End'])
+CSV.foreach('tasks.csv', :headers => true) do |row|
+    start_date = parse_date(row['Start'])
+    end_date = parse_date(row['End'])
 
     puts %Q{
     INSERT INTO Tasks
@@ -68,9 +72,9 @@ CSV.foreach('task.csv', :headers => true) do |row|
     }
 end
 
-CSV.foreach('meeting-atendee.csv', :headers => true) do |row|
+CSV.foreach('meeting-atendees.csv', :headers => true) do |row|
     puts %Q{
-    INSERT INTO MeetingAtendee
+    INSERT INTO MeetingAtendees
         ([MeetingID], [AtendeeID])
     VALUES
         (#{row['MeetingID']}, #{row['AtendeeID']});
