@@ -314,7 +314,7 @@ kendo_module({
             );
         },
 
-        getCategoryIndex: function(point) {
+        pointCategoryIndex: function(point) {
             var axis = this,
                 index = null,
                 i,

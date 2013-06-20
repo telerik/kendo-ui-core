@@ -863,7 +863,7 @@ kendo_module({
                 highlight = chart._highlight,
                 index, points;
 
-            index = categoryAxis.getCategoryIndex(coords);
+            index = categoryAxis.pointCategoryIndex(coords);
             if (index !== chart._tooltipCategoryIx) {
                 points = plotArea.pointsByCategoryIndex(index);
 
@@ -1893,8 +1893,7 @@ kendo_module({
             return slotBox;
         },
 
-        // TODO: Rename to pointIndex to match categoryIndex
-        getCategoryIndex: function(point) {
+        pointCategoryIndex: function(point) {
             var axis = this,
                 options = axis.options,
                 reverse = options.reverse,
@@ -1948,7 +1947,7 @@ kendo_module({
 
         // TODO: Rename to pointCategory
         getCategory: function(point) {
-            var index = this.getCategoryIndex(point);
+            var index = this.pointCategoryIndex(point);
 
             if (index === null) {
                 return null;
@@ -8109,7 +8108,7 @@ kendo_module({
                 options = tooltip.options,
                 plotArea = tooltip.plotArea,
                 axis = plotArea.categoryAxis,
-                index = axis.getCategoryIndex(coords),
+                index = axis.pointCategoryIndex(coords),
                 category = axis.getCategory(coords),
                 slot = axis.getSlot(index),
                 content;
@@ -8238,7 +8237,7 @@ kendo_module({
 
             if (point) {
                 if (crosshair.stickyMode) {
-                    slot = axis.getSlot(axis.getCategoryIndex(point));
+                    slot = axis.getSlot(axis.pointCategoryIndex(point));
                     lineStart[dim] = lineEnd[dim] = slot.center()[dim];
                 } else {
                     lineStart[dim] = lineEnd[dim] = point[dim];
@@ -8740,11 +8739,11 @@ kendo_module({
             state.moveTarget = null;
 
             range.from =
-                categoryAxis.getCategoryIndex(new dataviz.Point2D(left)) ||
+                categoryAxis.pointCategoryIndex(new dataviz.Point2D(left)) ||
                 options.min;
 
             range.to =
-                categoryAxis.getCategoryIndex(new dataviz.Point2D(right)) ||
+                categoryAxis.pointCategoryIndex(new dataviz.Point2D(right)) ||
                 options.max;
 
             that.move(range.from, range.to);
@@ -8755,7 +8754,7 @@ kendo_module({
                 options = that.options,
                 coords = that.chart._eventCoordinates(e),
                 categoryAxis = that.categoryAxis,
-                categoryIx = categoryAxis.getCategoryIndex(
+                categoryIx = categoryAxis.pointCategoryIndex(
                     new dataviz.Point2D(coords.x, categoryAxis.box.y1)
                 ),
                 from = that._index(options.from),
@@ -8975,7 +8974,6 @@ kendo_module({
         }
     });
 
-    // TODO: Move nested functions to outer scope for better performance
     function calculateAggregates(values, series, dataItems, group) {
         var aggregate = series.aggregate,
             result;
