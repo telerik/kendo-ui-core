@@ -26,17 +26,21 @@
         <div id="qrMail"></div>
         <script>     
             var start = new Date().getTime();            
-            
-            var value = "";
-            for(var i = 0; i < 2000 ; i++){
-                value+=  i % 2 == 0? "A":"1";
+            function randomNum(){
+                 var min = 0;
+                var max = 255;
+                var num = Math.floor(Math.random() * (max - min + 1)) + min;
+                return num;
             }
-            $("#qrUrl").kendoQRCode({
-                value: value,
-                errorCorrectionLevel: "L",
-                size: 700
-            });
             
+            function getCodewords(n){
+                var result = [];
+                for(var i =0; i< n;i++){
+                    result.push(randomNum());
+                }
+                return result
+            }
+         
 
             //alert("rendering took: " + (new Date().getTime() - start) + " miliseconds");
         </script>

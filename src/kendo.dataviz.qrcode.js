@@ -324,7 +324,7 @@ kendo_module({
 
         function multiplyByConstant(polynomial, power){
             var result = [],    
-                idx = polynomial.length - 1;
+                idx = polynomial.length - 1;                
             do{
                 result[idx] = powersOfTwoResult[(polynomial[idx] + power) % 255];
                 idx--;
@@ -333,15 +333,16 @@ kendo_module({
             return result;
         }        
         
-        var generateErrorCodewords = function (data, errorCodewordsCount){            
+        var generateErrorCodewords = function (data, errorCodewordsCount){    
             var generator = generatorPolynomials[errorCodewordsCount - 1],                    
                 result = new Array(errorCodewordsCount).concat(data),
                 generatorPolynomial = new Array(result.length - generator.length).concat(generator),
                 steps = data.length,
                 divisor,
-                errorCodewords = [];debugger;
+                errorCodewords = [];
+                         
             for(var i = 0; i < steps; i++){
-                divisor = multiplyByConstant(generatorPolynomial, powersOfTwo[result[result.length - 1]]);
+                divisor = multiplyByConstant(generatorPolynomial, powersOfTwo[result[result.length - 1]] || 0);            
                 generatorPolynomial.splice(0,1);
              
                 result = xorPolynomials(divisor, result);
@@ -364,7 +365,7 @@ kendo_module({
                 groupBlocksCount,
                 messagePolynomial,
                 codeword;
-                
+             console.log("error codewords count: " + versionCodewordsInformation.errorCodewordsPerBlock);
             for(var groupIdx = 0; groupIdx < versionGroups.length; groupIdx++){
                 groupBlocksCount = versionGroups[groupIdx][0];
                 for(var blockIdx = 0; blockIdx < groupBlocksCount;blockIdx++){
@@ -377,12 +378,23 @@ kendo_module({
                         messagePolynomial[blockCodewordsCount - codewordIdx] = toDecimal(codeword);
                         codewordStart+=8;
                     }
-                    dataBlocks.push(dataBlock);
+                    dataBlocks.push(dataBlock);                    
                     errorBlocks.push(generateErrorCodewords(messagePolynomial, versionCodewordsInformation.errorCodewordsPerBlock));
+                    console.log("data block: " + toDecimalArray(dataBlock));
+                    console.log("error block: " + toDecimalArray(errorBlocks[errorBlocks.length - 1]));
                 }
             }
             return [dataBlocks, errorBlocks];
-        }       
+        }  
+
+        function toDecimalArray(arr){
+            var res = [];
+            for(var i =0; i< arr.length; i++){
+                res[i] = parseInt(arr[i],2);
+            }
+            return res;
+        }
+            
         //enhance to always find the exact version 
         var chooseMode = function (str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode){
              var numeric = numberRegex.exec(str),
@@ -773,7 +785,7 @@ kendo_module({
             addFinderPatterns(matrices);
             addAlignmentPatterns(matrices, version);    
             addTimingFunctions(matrices);   
-            
+            console.log("version:" + version);
             if(version >= 7){
                 addVersionInformation(matrices, toBitsString(0, 18));
             }   
@@ -861,26 +873,24 @@ kendo_module({
             _addMatrix: function(matrix, size){
                 var that = this,
                     view = that.view,
-                    baseUnit = Math.floor(size / (2 * QUIET_ZONE_LENGTH + matrix.length)),
+                    baseUnit = Math.floor(size / matrix.length),//parseFloat((size / (2 * QUIET_ZONE_LENGTH + matrix.length)).toFixed(1)),
+                    qz = (size - matrix.length * baseUnit) / 2,
                     y,
                     x1,
-                    x2,
                     column;
-            
                 for(var row = 0; row < matrix.length; row++){
-                    y = (QUIET_ZONE_LENGTH + row) * baseUnit;
+                    y = qz + row * baseUnit;
                     column = 0;
                     while(column < matrix.length){
                         while(matrix[row][column] == 0 && column < matrix.length){
                             column++;
                         }       
                         if(column < matrix.length){
-                            x1 = x2 = QUIET_ZONE_LENGTH + column;
+                            x1 = column;
                             while(matrix[row][column] == 1){
-                                x2++;
                                 column++;
                             }
-                            view.children.push(view.createRect(new Box2D(x1 * baseUnit, y, x2 * baseUnit, y + baseUnit ), 
+                            view.children.push(view.createRect(new Box2D(qz + x1 * baseUnit, y, qz + column * baseUnit, y + baseUnit ), 
                                 { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false}));                              
                         }
                     }
