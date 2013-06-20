@@ -773,7 +773,8 @@ kendo_module({
     function expandAll(events, start, end) {
         var length = events.length,
             idx = 0, event, result,
-            resultLength, skip;
+            resultLength, skip,
+            eventStartMS;
 
         for (; idx < length; idx++) {
             event = events[idx];
@@ -782,7 +783,9 @@ kendo_module({
             skip = false;
 
             if (resultLength) {
-                if (event.start < start || (event.exception && event.start.getTime() !== result[0].start.getTime())) {
+                eventStartMS = event.start.getTime();
+
+                if (eventStartMS < start || (event.exception && eventStartMS !== result[0].start.getTime())) {
                     resultLength -= 1;
                     skip = true;
                 }
