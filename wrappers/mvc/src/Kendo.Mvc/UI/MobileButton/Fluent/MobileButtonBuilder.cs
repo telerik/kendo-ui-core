@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileButton for ASP.NET MVC.
+    /// </summary>
     public class MobileButtonBuilder: WidgetBuilderBase<MobileButton, MobileButtonBuilder>, IHideObjectMembers
     {
         private readonly MobileButton container;

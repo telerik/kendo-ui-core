@@ -6,6 +6,9 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Extensions;
     using System.Web.Mvc;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobileTabStripItem settings.
+    /// </summary>
     public class MobileTabStripItemBuilder: IHideObjectMembers
     {
         private readonly MobileTabStripItem container;

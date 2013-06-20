@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileDrawer for ASP.NET MVC.
+    /// </summary>
     public class MobileDrawerBuilder: WidgetBuilderBase<MobileDrawer, MobileDrawerBuilder>, IHideObjectMembers
     {
         private readonly MobileDrawer container;

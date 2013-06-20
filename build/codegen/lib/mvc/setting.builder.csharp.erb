@@ -5,6 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> settings.
+    /// </summary>
     public class <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>Builder: IHideObjectMembers
     {
         private readonly <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> container;

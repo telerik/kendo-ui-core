@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobilePopOver for ASP.NET MVC.
+    /// </summary>
     public class MobilePopOverBuilder: WidgetBuilderBase<MobilePopOver, MobilePopOverBuilder>, IHideObjectMembers
     {
         private readonly MobilePopOver container;

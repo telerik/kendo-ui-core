@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileModalView for ASP.NET MVC.
+    /// </summary>
     public class MobileModalViewBuilder: WidgetBuilderBase<MobileModalView, MobileModalViewBuilder>, IHideObjectMembers
     {
         private readonly MobileModalView container;

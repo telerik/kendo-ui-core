@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileSwitch for ASP.NET MVC.
+    /// </summary>
     public class MobileSwitchBuilder: WidgetBuilderBase<MobileSwitch, MobileSwitchBuilder>, IHideObjectMembers
     {
         private readonly MobileSwitch container;

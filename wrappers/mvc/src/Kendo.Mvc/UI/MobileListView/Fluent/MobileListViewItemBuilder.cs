@@ -3,6 +3,9 @@
     using System.Web.Mvc;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobileListViewItem settings.
+    /// </summary>
     public class MobileListViewItemBuilder : MobileListViewItemBuilderBase<MobileListViewItem, MobileListViewItemBuilder>, IHideObjectMembers        
     {
         private readonly ViewContext viewContext;

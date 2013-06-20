@@ -6,6 +6,9 @@
     using System.Text;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Defines the base fluent API for configuring the MobileListViewItem.
+    /// </summary>
     public abstract class MobileListViewItemBuilderBase<TItem, TItemBuilder> : IHideObjectMembers 
         where TItem : MobileListViewItemBase
         where TItemBuilder : MobileListViewItemBuilderBase<TItem, TItemBuilder>

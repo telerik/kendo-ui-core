@@ -5,6 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobileSplitViewPane settings.
+    /// </summary>
     public class MobileSplitViewPaneBuilder: IHideObjectMembers
     {
         private readonly MobileSplitViewPane container;

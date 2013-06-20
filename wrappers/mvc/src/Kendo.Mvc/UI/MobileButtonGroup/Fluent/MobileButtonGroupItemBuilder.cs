@@ -5,6 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobileButtonGroupItem settings.
+    /// </summary>
     public class MobileButtonGroupItemBuilder: IHideObjectMembers
     {
         private readonly MobileButtonGroupItem container;

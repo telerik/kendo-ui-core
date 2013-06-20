@@ -5,6 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobileScrollViewItem settings.
+    /// </summary>
     public class MobileScrollViewItemBuilder: IHideObjectMembers
     {
         private readonly MobileScrollViewItem container;

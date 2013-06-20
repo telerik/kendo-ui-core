@@ -5,6 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobileActionSheetItem settings.
+    /// </summary>
     public class MobileActionSheetItemBuilder: IHideObjectMembers
     {
         private readonly MobileActionSheetItem container;

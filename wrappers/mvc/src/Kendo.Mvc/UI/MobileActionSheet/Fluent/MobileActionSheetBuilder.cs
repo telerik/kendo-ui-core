@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileActionSheet for ASP.NET MVC.
+    /// </summary>
     public class MobileActionSheetBuilder: WidgetBuilderBase<MobileActionSheet, MobileActionSheetBuilder>, IHideObjectMembers
     {
         private readonly MobileActionSheet container;

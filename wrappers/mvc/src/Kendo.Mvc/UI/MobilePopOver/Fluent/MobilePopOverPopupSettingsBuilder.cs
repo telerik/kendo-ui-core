@@ -5,6 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobilePopOverPopupSettings settings.
+    /// </summary>
     public class MobilePopOverPopupSettingsBuilder: IHideObjectMembers
     {
         private readonly MobilePopOverPopupSettings container;

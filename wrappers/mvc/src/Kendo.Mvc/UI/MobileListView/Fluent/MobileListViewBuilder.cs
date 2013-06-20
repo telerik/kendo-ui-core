@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileListView for ASP.NET MVC.
+    /// </summary>
     public class MobileListViewBuilder<T> : WidgetBuilderBase<MobileListView<T>, MobileListViewBuilder<T>>, IHideObjectMembers where T : class
     {        
         /// <summary>

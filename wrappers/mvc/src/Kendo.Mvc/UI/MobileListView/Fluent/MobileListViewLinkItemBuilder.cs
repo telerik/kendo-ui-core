@@ -5,6 +5,9 @@
     using Kendo.Mvc.Extensions;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobileListViewLinkItem settings.
+    /// </summary>
     public class MobileListViewLinkItemBuilder : MobileListViewItemBuilderBase<MobileListViewLinkItem, MobileListViewLinkItemBuilder>, IHideObjectMembers
     {
         private readonly MobileNavigatableSettings navigatableSettings;

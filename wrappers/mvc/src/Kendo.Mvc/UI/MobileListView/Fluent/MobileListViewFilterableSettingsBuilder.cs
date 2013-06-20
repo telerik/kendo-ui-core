@@ -5,6 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobileListViewFilterableSettings settings.
+    /// </summary>
     public class MobileListViewFilterableSettingsBuilder: IHideObjectMembers
     {
         private readonly MobileListViewFilterableSettings container;

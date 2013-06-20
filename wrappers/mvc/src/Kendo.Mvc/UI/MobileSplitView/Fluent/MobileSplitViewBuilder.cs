@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileSplitView for ASP.NET MVC.
+    /// </summary>
     public class MobileSplitViewBuilder: WidgetBuilderBase<MobileSplitView, MobileSplitViewBuilder>, IHideObjectMembers
     {
         private readonly MobileSplitView container;

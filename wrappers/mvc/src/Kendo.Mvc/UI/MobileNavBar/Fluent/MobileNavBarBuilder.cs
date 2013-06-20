@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileNavBar for ASP.NET MVC.
+    /// </summary>
     public class MobileNavBarBuilder: WidgetBuilderBase<MobileNavBar, MobileNavBarBuilder>, IHideObjectMembers
     {
         private readonly MobileNavBar container;

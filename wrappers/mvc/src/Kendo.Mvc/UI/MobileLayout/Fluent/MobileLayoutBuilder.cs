@@ -5,6 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileLayout for ASP.NET MVC.
+    /// </summary>
     public class MobileLayoutBuilder: WidgetBuilderBase<MobileLayout, MobileLayoutBuilder>, IHideObjectMembers
     {
         private readonly MobileLayout container;

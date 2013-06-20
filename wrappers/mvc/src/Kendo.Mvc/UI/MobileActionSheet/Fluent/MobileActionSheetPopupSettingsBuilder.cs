@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the MobileActionSheetPopupSettings settings.
+    /// </summary>
     public class MobileActionSheetPopupSettingsBuilder: IHideObjectMembers
     {
         private readonly MobileActionSheetPopupSettings container;

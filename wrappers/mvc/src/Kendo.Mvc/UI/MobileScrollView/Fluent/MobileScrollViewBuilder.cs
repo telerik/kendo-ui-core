@@ -4,6 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo MobileScrollView for ASP.NET MVC.
+    /// </summary>
     public class MobileScrollViewBuilder: WidgetBuilderBase<MobileScrollView, MobileScrollViewBuilder>, IHideObjectMembers
     {
         private readonly MobileScrollView container;
