@@ -3646,7 +3646,7 @@ kendo_module({
         },
 
         total: function() {
-            return parseInt(this.dataSource.total());
+            return parseInt(this.dataSource.total(), 10);
         },
 
         next: function() {
