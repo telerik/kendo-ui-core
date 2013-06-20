@@ -106,7 +106,7 @@ kendo_module({
                 }
             }
 
-            convertData(data, "remove",  timezone);
+            convertData(data, "remove",  timezone, true);
 
             data = originalFunction(data);
 
@@ -114,7 +114,7 @@ kendo_module({
         };
     }
 
-    function convertData(data, method, timezone) {
+    function convertData(data, method, timezone, removeUid) {
         var event,
             idx,
             length;
@@ -129,7 +129,9 @@ kendo_module({
                 event.end = kendo.timezone[method](event.end, event.endTimezone || event.startTimezone || timezone);
             }
 
-            //delete event.uid;
+            if (removeUid) {
+                delete event.uid;
+            }
         }
         return data;
     }

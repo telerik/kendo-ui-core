@@ -216,6 +216,15 @@
                 dataReader.serialize();
             });
 
+            test("serialize removes uid", 1, function() {
+                var originalReader = new kendo.data.DataReader({ });
+                var dataReader = new SchedulerDataReader({ timezone: "" }, originalReader);
+
+                var result = dataReader.serialize([{ uid: "uid", start: new Date(), end: new Date()}]);
+
+                ok(!("uid" in result[0]));
+            });
+
             test("timezone conversion is not executed if no timezone is provided", function() {
                 var originalReader = new kendo.data.DataReader({ });
 
