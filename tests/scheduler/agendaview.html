@@ -276,6 +276,30 @@
                 equal(timeCell.eq(1).text(), "10:00 AM");
             });
 
+            test("agenda splits a two day (less than 24 hour) event to two tasks", function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 20:00"),
+                        end: new Date("2013/06/07 10:00"),
+                        title: "event 1"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var dateCell = table.find("td.k-scheduler-datecolumn");
+
+                equal(dateCell.eq(0).find(".k-scheduler-agendaday").text(), "06");
+                equal(dateCell.eq(1).find(".k-scheduler-agendaday").text(), "07");
+
+                var timeCell = table.find("td.k-scheduler-timecolumn");
+
+                equal(timeCell.eq(0).text(), "8:00 PM");
+                equal(timeCell.eq(1).text(), "10:00 AM");
+            });
+
             test("agenda splits a three day event to three tasks", function() {
                 var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
