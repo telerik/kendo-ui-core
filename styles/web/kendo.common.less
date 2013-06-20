@@ -3975,27 +3975,41 @@ td:hover > .k-task .k-event-delete
     display: inline-block;
 }
 
+.k-event .k-event-top-actions,
+.k-event .k-event-bottom-actions
+{
+	position: absolute;
+	top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.k-event .k-event-bottom-actions
+{
+    top: auto;
+	bottom: 0;
+}
+
 .k-event .k-resize-handle
 {
-	position:absolute;
-	bottom:0;
-	left:50%;
-	margin-left:-10px;
-	width:20px;
-	height:5px;
+    display: block;
+    margin: 0 auto;
+	width: 20px;
+	height: 5px;
 	background-position: -70px -309px;
 	cursor: n-resize;
-	visibility:hidden;
+    visibility: hidden;
 }
 
 .k-event:hover .k-resize-handle
 {
-	visibility:visible;
+	visibility: visible;
 }
 
 .k-scheduler-quickedit .k-textbox
 {
-	width:200px;
+	width: 200px;
 }
 
 .k-tooltip-bottom
