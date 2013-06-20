@@ -1,11 +1,8 @@
 <div id="example" class="k-content">
-    <div class="demo-section">
-        <span id="title">Team Members:</span>
-        <ul id="people">
-            <li class="selected"><label for="alex"><span class="icon"></span><span class="text"><input checked type="checkbox" id="alex" value="1">Alex King</span></label></li>
-            <li class="selected"><label for="bob"><span class="icon"></span><span class="text"><input checked type="checkbox" value="2" id="bob">Bob Fuller</span></label></li>
-            <li><label for="charlie"><span class="icon"></span><span class="text"><input type="checkbox" value="3" id="charlie">Charlie Mayer</span></label></li>
-        </ul>
+    <div id="people">
+        <input checked type="checkbox" id="alex" value="1">
+        <input checked type="checkbox" id="bob" value="2">
+        <input type="checkbox" id="charlie" value="3">
     </div>
     <div id="scheduler"></div>
 </div>
@@ -13,8 +10,14 @@
 $(function() {
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
+        startTime: new Date("2013/6/13 08:00 AM"),
         height: 600,
-        views: ["day", "week", "month", "agenda"],
+        views: [
+        "day",
+            { type: "week", selected: true },
+            "month",
+            "agenda"
+        ],
         timezone: "Etc/UTC",
         dataSource: {
             batch: true,
@@ -43,9 +46,9 @@ $(function() {
             },
             schema: {
                 model: {
-                    id: "taskID",
+                    id: "taskId",
                     fields: {
-                        taskID: { from: "TaskID", type: "number" },
+                        taskId: { from: "TaskID", type: "number" },
                         title: { from: "Title", defaultValue: "No title", validation: { required: true } },
                         start: { type: "date", from: "Start" },
                         end: { type: "date", from: "End" },
@@ -78,11 +81,7 @@ $(function() {
     });
 
     $("#people :checkbox").change(function(e) {
-        $("#people li").removeClass("selected");
-
         var checked = $.map($("#people :checked"), function(checkbox) {
-            $(checkbox).closest("li").addClass("selected");
-
             return parseInt($(checkbox).val());
         });
 
@@ -104,95 +103,24 @@ $(function() {
 });
 </script>
 <style scoped>
-#title {
-    display: inline-block;
-    padding-left: 25px;
-    vertical-align: middle;
-    margin-top: 14px;
-}
 #people {
-    list-style:none;
-    padding: 20px;
-    margin: 0;
-    display: inline-block;
-}
-
-#people li {
-    display: inline-block;
-    font-size: 1em;
+    background: url('../../content/web/scheduler/team-schedule.png') transparent no-repeat;
+    height: 115px;
     position: relative;
-    text-transform: uppercase;
 }
-
-#people label {
-    width: 180px;
-    height: 50px;
-    display: inline-block;
-}
-
-#people .icon {
-    width: 50px;
-    height: 50px;
-    float:left;
-    border-radius: 26px;
-    border: 3px solid;
-    border-color: #ccc;
+#alex {
     position: absolute;
+    left: 404px;
+    top: 81px;
 }
-
-#people .text {
-    margin-top: 15px;
-    display: inline-block;
-    border-radius: 7px;
-    margin-left: 45px;
-    padding: 3px 0px 3px 10px;
-    width: 120px;
-    vertical-align: middle;
+#bob {
+    position: absolute;
+    left: 519px;
+    top: 81px;
 }
-
-#people .text input {
-    margin-top: 0;
-    margin-bottom: 2px;
-    vertical-align: middle;
+#charlie {
+    position: absolute;
+    left: 634px;
+    top: 81px;
 }
-
-#people label[for=alex] .icon {
-    background: url('../../content/web/scheduler/alex.jpg') transparent no-repeat;
-}
-
-#people .selected label[for=alex] .icon {
-    border-color: #ef701d;
-}
-
-#people .selected label[for=alex] .text {
-    background: #ef701d;
-    color: #fff;
-}
-
-#people label[for=bob] .icon {
-    background: url('../../content/web/scheduler/bob.jpg') transparent no-repeat;
-}
-
-#people .selected label[for=bob] .icon {
-    border-color: #5fb1f7;
-}
-
-#people .selected label[for=bob] .text {
-    background: #5fb1f7;
-    color: #fff;
-}
-
-#people label[for=charlie] .icon {
-    background: url('../../content/web/scheduler/charlie.jpg') transparent no-repeat;
-}
-
-#people .selected label[for=charlie] .icon {
-    border-color: #35a964;
-}
-
-#people .selected label[for=charlie] .text {
-    background: #35a964;
-    color: #fff;
-}
-
 </style>
