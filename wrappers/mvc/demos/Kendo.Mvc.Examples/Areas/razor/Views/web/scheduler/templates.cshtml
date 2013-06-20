@@ -1,0 +1,94 @@
+﻿@*@(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.Task>()
+        .Name("scheduler")
+        .Views(v => {
+            v.DayView();
+            v.AgendaView();
+        })
+            .BindTo(new [] { 
+            new {
+                TaskID = 1,
+                Title = "Fast and furious 6",
+                Image = "../../content/web/scheduler/fast-and-furious.jpg",
+                Imdb = "http://www.Imdb.com/Title/tt1905041/",
+                Start = new DateTime(2013,6,13,17,00,00),
+                End= new DateTime(2013,6,13,18,30,00)
+            },
+            new {
+                TaskID = 2,
+                Title= "The Internship",
+                Image= "../../content/web/scheduler/the-internship.jpg",
+                Imdb= "http://www.Imdb.com/Title/tt2234155/",
+                Start= new DateTime(2013,6,13,14,00,00),
+                End= new DateTime(2013,6,13,15,30,00)
+            },
+            new {
+                TaskID = 3,
+                Title = "The Perks of Being a Wallflower",
+                Image =  "../../content/web/scheduler/wallflower.jpg",
+                Imdb =  "http://www.Imdb.com/Title/tt1659337/",
+                Start =  new DateTime(2013,6,13,16,00,00),
+                End =  new DateTime(2013,6,13,17,30,00)
+            },
+            new { 
+                TaskID = 4,
+                Title = "The Help",
+                Image =  "../../content/web/scheduler/the-help.jpg",
+                Imdb =  "http://www.Imdb.com/Title/tt1454029/",
+                Start =  new DateTime(2013,6,13,12,00,00),
+                End =  new DateTime(2013,6,13,13,30,00)
+            },
+            new {
+                TaskID = 5,
+                Title = "Now You See Me",
+                Image =  "../../content/web/scheduler/now-you-see-me.jpg",
+                Imdb =  "http://www.Imdb.com/Title/tt1670345/",
+                Start =  new DateTime(2013,6,13,10,00,00),
+                End =  new DateTime(2013,6,13,11,30,00)
+            },
+            new {
+                TaskID = 6,
+                Title = "Fast and furious 6",
+                Image =  "../../content/web/scheduler/fast-and-furious.jpg",
+                Imdb =  "http://www.Imdb.com/Title/tt1905041/",
+                Start =  new DateTime(2013,6,13,19,00,00),
+                End =  new DateTime(2013,6,13,20,30,00)
+            },
+            new {
+                TaskID = 7,
+                Title = "The Internship",
+                Image =  "../../content/web/scheduler/the-internship.jpg",
+                Imdb =  "http://www.Imdb.com/Title/tt2234155/",
+                Start =  new DateTime(2013,6,13,17,30,00),
+                End =  new DateTime(2013,6,13,19,00,00)
+            },
+            new {
+                TaskID = 8,
+                Title = "The Perks of Being a Wallflower",
+                Image =  "../../content/web/scheduler/wallflower.jpg",
+                Imdb =  "http://www.Imdb.com/Title/tt1659337/",
+                Start =  new DateTime(2013,6,13,17,30,00),
+                End =  new DateTime(2013,6,13,19,00,00)
+            },
+            new {
+                TaskID = 9,
+                Title = "The Help",
+                Image =  "../../content/web/scheduler/the-help.jpg",
+                Imdb =  "http://www.Imdb.com/Title/tt1454029/",
+                Start =  new DateTime(2013,6,13,13,30,00),
+                End =  new DateTime(2013,6,13,15,00,00)
+            },
+            new {
+                TaskID = 10,
+                Title = "Now You See Me",
+                Image =  "../../content/web/scheduler/now-you-see-me.jpg",
+                Imdb =  "http://www.Imdb.com/Title/tt1670345/",
+                Start =  new DateTime(2013,6,13,12,30,00),
+                End =  new DateTime(2013,6,13,14,00,00)
+            }})
+        .DataSource(d => d
+        .Model(m => m.Id(f => f.TaskID)))
+    )
+
+
+
+     *@

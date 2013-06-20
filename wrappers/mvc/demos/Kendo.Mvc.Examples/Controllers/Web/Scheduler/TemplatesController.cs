@@ -8,17 +8,11 @@
     using Kendo.Mvc.UI;
     using Kendo.Mvc.Examples.Models.Scheduler;
 
-    public partial class SchedulerController : SchedulerEventController<Task>
+    public partial class SchedulerController
     {
-        public SchedulerController()
-            : base(new SchedulerEventService<Task>())
-        {
-        }
-
-        public ActionResult Index()
+        public ActionResult Templates()
         {
             return View();
         }
-
     }
 }
