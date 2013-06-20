@@ -49,9 +49,9 @@ $(function() {
             },
             schema: {
                 model: {
-                    id: "ID",
+                    id: "taskID",
                     fields: {
-                        ID: { type: "number" },
+                        taskID: { from: "TaskID", type: "number" },
                         title: { from: "Title", defaultValue: "No title", validation: { required: true } },
                         start: { type: "date", from: "Start" },
                         end: { type: "date", from: "End" },
