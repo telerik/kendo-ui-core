@@ -202,6 +202,8 @@ MVC_DATAVIZ_CONTROLLERS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Contro
 
 MVC_WEB_CONTROLLERS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Controllers/Web/**/*.cs']
 
+MVC_MOBILE_CONTROLLERS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Controllers/Mobile/**/*.cs']
+
 MVC_ASPX_VIEWS = FileList['wrappers/mvc/demos/Kendo.Mvc.Examples/Areas/**/*.as*x']
 
 SPRING_VIEWS = FileList['wrappers/java/spring-demos/src/main/webapp/WEB-INF/views/**/*.jsp']
@@ -234,6 +236,10 @@ PHP = FileList['wrappers/php/{web,dataviz}/**/*.php'].include('wrappers/php/lib/
 
     tree :to => "dist/demos/#{flavor}/src/aspnetmvc/controllers/web",
          :from => MVC_WEB_CONTROLLERS,
+         :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Controllers\/.+?\//
+
+    tree :to => "dist/demos/#{flavor}/src/aspnetmvc/controllers/mobile",
+         :from => MVC_MOBILE_CONTROLLERS,
          :root => /wrappers\/mvc\/demos\/Kendo\.Mvc\.Examples\/Controllers\/.+?\//
 
     tree :to => "dist/demos/#{flavor}/src/aspnetmvc/views/aspx",
@@ -321,6 +327,7 @@ namespace :demos do
         'dist/demos/staging',
         'dist/demos/staging/src/aspnetmvc/controllers/dataviz',
         'dist/demos/staging/src/aspnetmvc/controllers/web',
+        'dist/demos/staging/src/aspnetmvc/controllers/mobile',
         'dist/demos/staging/src/aspnetmvc/views/aspx',
         'dist/demos/staging/src/aspnetmvc/views/razor',
         'dist/demos/staging/src/jsp/views',
@@ -375,6 +382,7 @@ namespace :demos do
         'dist/demos/production/src/jsp/controllers',
         'dist/demos/production/src/aspnetmvc/controllers/dataviz',
         'dist/demos/production/src/aspnetmvc/controllers/web',
+        'dist/demos/production/src/aspnetmvc/controllers/mobile',
         'dist/demos/production/src/aspnetmvc/views/aspx',
         'dist/demos/production/src/aspnetmvc/views/razor',
         patched_web_config('dist/demos/production/Web.config', 'demos/mvc/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT)
