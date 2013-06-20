@@ -25,6 +25,7 @@ kendo_module({
             kendo.mobile.init(element.children(kendo.roleSelector("modalview")));
 
             that.panes = [];
+            that._paramsHistory = [];
             that.element.children(kendo.roleSelector("pane")).each(function() {
                 that.panes.push(kendo.initWidget(this, {}, ui.roles));
             });
