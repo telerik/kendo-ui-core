@@ -29,7 +29,7 @@ namespace Kendo.Models
                 };
             }
 
-            var path = server.MapPath("~/src/aspnetmvc/controllers/");
+            var path = server.MapPath("~/src/aspnetmvc/controllers/" + suite + "/");
 
             if (Directory.Exists(path))
             {
@@ -53,7 +53,7 @@ namespace Kendo.Models
                         yield return new ExampleFile
                         {
                             Name = Path.GetFileName(controller),
-                            Url = "~/src/aspnetmvc/controllers/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
+                            Url = "~/src/aspnetmvc/controllers/" + suite + "/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
                         };
                     }
                 }
