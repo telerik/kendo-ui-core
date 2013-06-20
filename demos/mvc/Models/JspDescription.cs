@@ -18,6 +18,9 @@ namespace Kendo.Models
 
         public IEnumerable<ExampleFile> GetFiles(HttpServerUtilityBase server, string example, string suite, string section)
         {
+            if (suite.Equals("mobile"))
+                yield break;
+
             yield return new ExampleFile
             {
                 Name = example + ".jsp",
