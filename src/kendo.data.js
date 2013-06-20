@@ -3252,10 +3252,10 @@ kendo_module({
 
 
             if (childrenOptions.transport) {
-                childrenOptions.transport.parameterMap = function(data, type) {
+                childrenOptions.transport.parameterMap = function(data) {
                     data[that.idField || "id"] = that.id;
                     return data;
-                }
+                };
             }
 
             childrenOptions.data = value;
