@@ -807,20 +807,29 @@ kendo_module({
                 expanded = that._expanded(node),
                 result;
 
-            if (!node.length || !node.is(":visible")) {
-                result = that.root.children().eq(0);
-            } else if (expanded) {
-                result = subGroup(node).children().first();
-            } else {
+            function nextParent(node) {
                 while (node.length && !node.next().length) {
                     node = that.parent(node);
                 }
 
                 if (node.next().length) {
-                    result = node.next();
+                    return node.next();
                 } else {
-                    result = node;
+                    return node;
                 }
+            }
+
+            if (!node.length || !node.is(":visible")) {
+                result = that.root.children().eq(0);
+            } else if (expanded) {
+                result = subGroup(node).children().first();
+
+                // expanded node with no children
+                if (!result.length) {
+                    result = nextParent(node);
+                }
+            } else {
+                result = nextParent(node);
             }
 
             if (!that._enabled(result)) {

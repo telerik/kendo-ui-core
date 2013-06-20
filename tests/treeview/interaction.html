@@ -486,6 +486,20 @@
                 equal(treeviewObject.current()[0], treeview.find(".k-item:last")[0]);
             });
 
+            test("down arrow moves focus to next parent if expanded is true but there are no children", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", expanded: true, selected: true }
+                    ] },
+                    { text: "baz" }
+                ]);
+
+                treeview.focus();
+                treeview.press(keys.DOWN);
+
+                equal(treeviewObject.current()[0], treeview.find(".k-item:last")[0]);
+            });
+
             test("down arrow moves focus to next grandparent, if there are no more siblings left", function() {
                 createTreeView([
                     { text: "foo", expanded: true, items: [
