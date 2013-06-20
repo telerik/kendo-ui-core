@@ -181,9 +181,9 @@
                         this.setPageContent(pages[0], this.page - 1);
                     }
 
-                    pages[0].position(-1);
-                    pages[1].position(0);
-                    pages[2].position(1);
+                    pages[0].position(LEFT_PAGE);
+                    pages[1].position(CETER_PAGE);
+                    pages[2].position(RIGHT_PAGE);
 
                     this._resetMovable();
                 },
@@ -205,7 +205,17 @@
                 },
 
                 _resetPages: function() {
-                    //TODO
+                    var pages = this.pages;
+
+                    for (var i = 0; i < pages.length; i++) {
+                        this.setPageContent(pages[i], i-1);
+                    }
+
+                    pages[0].position(LEFT_PAGE);
+                    pages[1].position(CETER_PAGE);
+                    pages[2].position(RIGHT_PAGE);
+
+                    this.page = 0;
                 },
 
                 _onResize: function() {
@@ -352,6 +362,17 @@
                 equal(content.pages[1].element.text(), "0");
                 equal(content.pages[2].element.text(), "1");
             });
+
+            test("pages are reset correctly", 5, function() {
+                content.scrollTo(5);
+                equal(content.pages[1].element.text(), "5");
+
+                content._resetPages();
+                equal(content.pages[0].element.text(), "empty");
+                equal(content.pages[1].element.text(), "0");
+                equal(content.pages[2].element.text(), "1");
+                equal(content.page, 0);
+            })
 
             var content,
                 pane;
