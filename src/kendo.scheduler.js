@@ -471,6 +471,8 @@ kendo_module({
                     e.preventDefault();
                     if ($(this).hasClass("k-grid-delete")) {
                         callback();
+                    } else if ($(this).hasClass("k-scheduler-cancel")) {
+                        callback(true);
                     }
 
                     wnd.close();
@@ -778,6 +780,8 @@ kendo_module({
                     }
 
                     that._recurringDialog.close();
+                    that._removeExcetionEvents(model);
+                    model.set("exception", "");
                     that._editEvent(model);
                 });
 
@@ -845,8 +849,14 @@ kendo_module({
 
         _removeEvent: function(model, removeExceptions) {
             var that = this;
-            that._confirmation(function() {
-                if (!that.trigger(REMOVE, { event: model })) {
+            that._confirmation(function(cancel) {
+                if (cancel) {
+                    if (model.recurrenceId) {
+                        that._removeExceptionDate(model);
+                    }
+
+                    that.dataSource.cancelChanges(model);
+                } else if (!that.trigger(REMOVE, { event: model })) {
                     if (removeExceptions) {
                         that._removeExcetionEvents(model);
                     }
@@ -862,7 +872,8 @@ kendo_module({
             var that = this,
                 isException = !model,
                 wnd = $('<div><button>Delete current occurrence</button><button>Delete the series</button></div>'),
-                buttons = wnd.find("button");
+                buttons = wnd.find("button"),
+                id, idField;
 
             if (isException) {
                 model = getOccurrenceByUid(that._data, uid);
@@ -885,31 +896,31 @@ kendo_module({
                 }).data("kendoWindow");
 
                 buttons.eq(0).on("click", function() {
-                    that._recurringDialog.close();
+                    if (!model.recurrenceId) {
+                        id = model.id;
+                        idField = model.idField;
 
-                    if (!that.trigger(REMOVE, { event: model })) {
-                        if (isException) {
-                            that._confirmation(function() {
-                                if (!that.trigger(REMOVE, { event: model })) {
-                                    that._addExceptionDate(model);
-                                    that.dataSource.sync();
-                                }
-                            });
-                        } else {
-                            that._removeEvent(model);
-                        }
+                        model = model.toJSON();
+
+                        delete model[idField];
+                        delete model.recurrence;
+                        delete model.id;
+
+                        model.uid = kendo.guid();
+                        model.recurrenceId = id;
                     }
+
+                    that._recurringDialog.close();
+                    that._addExceptionDate(model);
+                    that._removeEvent(model);
                 });
 
                 buttons.eq(1).on("click", function() {
-                    var origin = that.dataSource.get(model.recurrenceId);
-
-                    if (origin) {
-                        model = origin;
+                    if (model.recurrenceId) {
+                        model = that.dataSource.get(model.recurrenceId);
                     }
 
                     that._recurringDialog.close();
-
                     that._removeEvent(model, true);
                 });
 
