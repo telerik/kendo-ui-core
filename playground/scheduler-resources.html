@@ -99,16 +99,18 @@
                 },
                 schema: {
                     model: {
-                        id: "ID",
+                        id: "MeetingID",
                         fields: {
-                            ID: { type: "number" },
+                            MeetingID: { type: "number" },
                             title: { defaultValue: "eventTitle", field: "Title", validation: { required: true } },
                             start: { type: "date", field: "Start" },
                             end: { type: "date", field: "End" },
                             description: { field: "Description" },
                             recurrence: { field: "Recurrence" },
-                            roomId: { field: "RoomID" },
-                            atendees: { field: "Atendees" },
+                            exception: { field: "RecurrenceException" },
+                            recurrenceId: { field: "RecurrenceID" },
+                            roomId: { field: "RoomID", nullable: true },
+                            atendees: { field: "Atendees", nullable: true },
                             isAllDay: { type: "boolean", field: "IsAllDay" }
                         }
                     }

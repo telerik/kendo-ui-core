@@ -94,19 +94,19 @@
                 batch: true,
                 transport: {
                     read: {
-                        url: "http://demos.kendoui.com/service/tasks",
+                        url: "http://korchev:8080/service/tasks",
                         dataType: "jsonp"
                     },
                     update: {
-                        url: "http://demos.kendoui.com/service/tasks/update",
+                        url: "http://korchev:8080/service/tasks/update",
                         dataType: "jsonp"
                     },
                     create: {
-                        url: "http://demos.kendoui.com/service/tasks/create",
+                        url: "http://korchev:8080/service/tasks/create",
                         dataType: "jsonp"
                     },
                     destroy: {
-                        url: "http://demos.kendoui.com/service/tasks/destroy",
+                        url: "http://korchev:8080/service/tasks/destroy",
                         dataType: "jsonp"
                     },
                     parameterMap: function(options, operation) {
@@ -126,6 +126,8 @@
                             end: { type: "date", field: "End" },
                             description: { field: "Description" },
                             recurrence: { field: "Recurrence" },
+                            exception: { field: "RecurrenceException" },
+                            recurrenceId: { field: "RecurrenceID" },
                             ownerId: { field: "OwnerID", defaultValue: 1 },
                             isAllDay: { type: "boolean", field: "IsAllDay" }
                         }
