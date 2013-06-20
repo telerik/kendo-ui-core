@@ -194,9 +194,11 @@ declare module kendo {
         model?: Object;
     }
 
-    class View {
+    class View extends Observable {
         constructor(element: Element, options?: ViewOptions);
         constructor(element: string, options?: ViewOptions);
+        init(element: Element, options?: ViewOptions): void;
+        init(element: string, options?: ViewOptions): void;
         render(container?: any): JQuery;
         destroy(): void;
     }
@@ -211,8 +213,9 @@ declare module kendo {
         change?: Function;
     }
 
-    class Router {
+    class Router extends Observable {
         constructor(options?: RouterOptions);
+        init(options?: RouterOptions): void;
         start(): void;
         destroy(): void;
         route(route: string, callback: Function): void;
@@ -344,12 +347,14 @@ declare module kendo.data {
         element: Element;
         bindings: { [key: string]: Binding; };
         constructor(element: Element, bindings: { [key: string]: Binding; }, options?: any);
+        init(element: Element, bindings: { [key: string]: Binding; }, options?: any): void;
         destroy(): void;
         refresh(): void;
     }
 
     class ObservableObject extends Observable{
         constructor(value?: any);
+        init(value?: any): void;
         get(name: string): any;
         parent(): ObservableObject;
         set(name: string, value: any): void;
@@ -363,6 +368,7 @@ declare module kendo.data {
         fields: DataSourceSchemaModelFields;
         defaults: any;
         constructor(data?: any);
+        init(data?: any):void;
         dirty: bool;
         id: any;
         editable(field: string): bool;
@@ -398,6 +404,7 @@ declare module kendo.data {
 
     class HierarchicalDataSource extends DataSource {
         constructor(options?: HierarchicalDataSourceOptions);
+        init(options?: HierarchicalDataSourceOptions): void;
     }
 
     interface HierarchicalDataSourceOptions extends DataSourceOptions {
@@ -505,6 +512,7 @@ declare module kendo.data {
 
     class ObservableArray extends Observable {
         constructor(array?: any[]);
+        init(array?: any[]): void;
         length: number;
         join(separator: string): string;
         parent(): ObservableObject;
@@ -520,6 +528,7 @@ declare module kendo.data {
 
     class DataSource extends Observable{
         constructor(options?: DataSourceOptions);
+        init(options?: DataSourceOptions): void;
         static create(options?: DataSourceOptions): DataSource;
         options: DataSourceOptions;
         add(model: Object): kendo.data.Model;
@@ -753,10 +762,9 @@ declare module kendo.ui {
 
         constructor(element: Element, options?: any);
         constructor(element: JQuery, options?: any);
-
-        init(element: Element, options: Object): void;
+        init(element: Element, options?: any): void;
+        init(element: JQuery, options?: any): void;
         init(selector: String, options: Object): void;
-        init(object: JQuery, options: Object): void;
         destroy(): void;
     }
 
@@ -865,6 +873,7 @@ declare module kendo.mobile {
 
     class Application extends Observable {
         constructor(element?: any, options?: ApplicationOptions);
+        init(element?: any, options?: ApplicationOptions): void;
         options: ApplicationOptions;
         hideLoading(): void;
         navigate(url: string, transition?: string): void;
