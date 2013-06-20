@@ -438,7 +438,8 @@ kendo_module({
             html += '</div></div>';
 
             var wnd = $(html).appendTo(this.wrapper).eq(0)
-                .on("click", ".k-button", function() {
+                .on("click", ".k-button", function(e) {
+                    e.preventDefault();
                     if ($(this).hasClass("k-grid-delete")) {
                         callback();
                     }
