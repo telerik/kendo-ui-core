@@ -472,7 +472,7 @@ var StyleTool = DelayedExecutionTool.extend({
             highlightFirst: false
         });
 
-        $(ui).data("kendoSelectBox").decorateItems = function(doc) {
+        $(ui).data(this.type).decorateItems = function(doc) {
             var classes = this.dataSource.view();
 
             this.list.find(".k-item").each(function(i, element){
@@ -484,6 +484,24 @@ var StyleTool = DelayedExecutionTool.extend({
         };
 
         ui.closest(".k-widget").removeClass("k-" + this.name).find("*").addBack().attr("unselectable", "on");
+    },
+
+    update: function(ui, nodes) {
+        var selectBox = $(ui).data(this.type),
+            dataSource = selectBox.dataSource,
+            items = dataSource.data(),
+            i, context,
+            ancestor = dom.commonAncestor.apply(null, nodes);
+
+        for (i = 0; i < items.length; i++) {
+            context = items[i].context;
+
+            items[i].visible = !context || !!$(ancestor).closest(context).length;
+        }
+
+        dataSource.filter([{ field: "visible", operator: "eq", value: true }]);
+
+        DelayedExecutionTool.fn.update.call(this, ui, nodes);
     }
 });
 

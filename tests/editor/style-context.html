@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>kendo.ui.Editor Tests</title>
+
+    <script src="../jquery-loader.js"></script>
+    <script src="test-scripts.js"></script>
+
+    <style>
+        html { font-size: 12px; }
+
+        body { padding-top: 4em; }
+
+        .foo {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div contentEditable id="inline"></div>
+
+    <script>
+
+        var StyleCommand = kendo.ui.editor.StyleCommand,
+            Dom = kendo.ui.editor.Dom;
+
+        var inline = $('#inline').appendTo("body")
+            .kendoEditor({
+                tools: [
+                    { name: "style", items: [
+                        { text: "foo", value: "foo" }
+                    ] }
+                ]
+            })
+            .data("kendoEditor");
+
+        function styleTool(editor) {
+            return editor.toolbar.items().filter(".k-style").data("kendoSelectBox");
+        }
+
+        function styleInput(editor) {
+            return styleTool(editor).wrapper.find(".k-input");
+        }
+
+        function setStyleItems(editor, array) {
+            var tool = styleTool(editor);
+
+            tool.setDataSource({
+                data: array
+            });
+
+            tool.decorateItems(editor.document);
+        }
+
+        function selectFromValue(editor, value) {
+            var range = createRangeFromText(editor, value);
+            editor.selectRange(range);
+            editor.trigger("select");
+        }
+
+        module("Context-aware styles", {
+            setup: function() {
+                setStyleItems(inline, [
+                    { text: "foo", value: "foo", context: "h1" },
+                    { text: "bar", value: "bar", context: "p" }
+                ]);
+            }
+        });
+
+        test("tool items are filtered depending on selection", function() {
+            selectFromValue(inline, '<h1>fo||o</h1><p>bar</p>');
+
+            var tool = styleTool(inline);
+            var popup = tool.popup.element;
+
+            equal(popup.find(".k-item").length, 1);
+            equal(popup.find(".k-item").text(), "foo");
+            equal(tool.text(), tool.options.title);
+
+            selectFromValue(inline, '<h1>foo</h1><p>ba||r</p>');
+
+            equal(popup.find(".k-item").length, 1);
+            equal(popup.find(".k-item").text(), "bar");
+            equal(tool.text(), tool.options.title);
+        });
+
+    </script>
+
+    <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+
+</body>
+</html>
