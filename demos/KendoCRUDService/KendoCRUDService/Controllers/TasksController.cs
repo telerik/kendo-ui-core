@@ -17,33 +17,47 @@ namespace KendoCRUDService.Controllers
         
         public JsonResult Update()
         {
-            var models = this.DeserializeObject<IEnumerable<TaskViewModel>>("models");
-            if (models != null)
+            var tasks = this.DeserializeObject<IEnumerable<TaskViewModel>>("models");
+
+            if (tasks != null)
             {
-                TasksRepository.Update(models.First());
+                foreach (var task in tasks)
+                {
+                    TasksRepository.Update(task);
+                }
             }
-            return this.Jsonp(models);
+
+            return this.Jsonp(tasks);
         }
         
         public JsonResult Destroy()
         {
-            var events = this.DeserializeObject<IEnumerable<TaskViewModel>>("models");
+            var tasks = this.DeserializeObject<IEnumerable<TaskViewModel>>("models");
 
-            if (events != null)
+            if (tasks != null)
             {
-                TasksRepository.Delete(events.First());
+                foreach (var task in tasks)
+                {
+                    TasksRepository.Delete(task);
+                }
             }
-            return this.Jsonp(events);
+
+            return this.Jsonp(tasks);
         }
         
         public JsonResult Create()
         {
-            var events = this.DeserializeObject<IEnumerable<TaskViewModel>>("models");
-            if (events != null)
+            var tasks = this.DeserializeObject<IEnumerable<TaskViewModel>>("models");
+
+            if (tasks != null)
             {
-                TasksRepository.Insert(events.First());
+                foreach (var task in tasks)
+                {
+                    TasksRepository.Insert(task);
+                }
             }
-            return this.Jsonp(events);
+
+            return this.Jsonp(tasks);
         }
 
     }

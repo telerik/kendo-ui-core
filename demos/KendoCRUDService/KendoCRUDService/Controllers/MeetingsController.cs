@@ -17,33 +17,47 @@ namespace KendoCRUDService.Controllers
         
         public JsonResult Update()
         {
-            var models = this.DeserializeObject<IEnumerable<MeetingViewModel>>("models");
-            if (models != null)
+            var meetings = this.DeserializeObject<IEnumerable<MeetingViewModel>>("models");
+
+            if (meetings != null)
             {
-                MeetingsRepository.Update(models.First());
+                foreach (var meeting in meetings)
+                {
+                    MeetingsRepository.Update(meeting);
+                }
             }
-            return this.Jsonp(models);
+
+            return this.Jsonp(meetings);
         }
         
         public JsonResult Destroy()
         {
-            var events = this.DeserializeObject<IEnumerable<MeetingViewModel>>("models");
+            var meetings = this.DeserializeObject<IEnumerable<MeetingViewModel>>("models");
 
-            if (events != null)
+            if (meetings != null)
             {
-                MeetingsRepository.Delete(events.First());
+                foreach (var meeting in meetings)
+                {
+                    MeetingsRepository.Delete(meeting);
+                }
             }
-            return this.Jsonp(events);
+
+            return this.Jsonp(meetings);
         }
         
         public JsonResult Create()
         {
-            var events = this.DeserializeObject<IEnumerable<MeetingViewModel>>("models");
-            if (events != null)
+            var meetings = this.DeserializeObject<IEnumerable<MeetingViewModel>>("models");
+
+            if (meetings != null)
             {
-                MeetingsRepository.Insert(events.First());
+                foreach (var meeting in meetings)
+                {
+                    MeetingsRepository.Insert(meeting);
+                }
             }
-            return this.Jsonp(events);
+
+            return this.Jsonp(meetings);
         }
 
     }
