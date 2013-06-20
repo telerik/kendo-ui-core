@@ -1,0 +1,56 @@
+namespace Kendo.Mvc.UI
+{
+    using System;
+    using System.Collections.Generic;
+    using Kendo.Mvc.Extensions;
+
+    public class <%= csharp_class %>HtmlBuilder
+    {
+        private readonly <%= csharp_class %> component;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="<%= csharp_class %>HtmlBuilder" /> class.
+        /// </summary>
+        /// <param name="component">The <%= csharp_class %> component.</param>
+        public <%= csharp_class %>HtmlBuilder(<%= csharp_class %> component)
+        {
+            this.component = component;
+        }
+
+        /// <summary>
+        /// Builds the <%= csharp_class %> markup.
+        /// </summary>
+        /// <returns></returns>
+        public IHtmlNode Build()
+        {
+            var html = CreateElement();
+            html.Attribute("data-role", "<%= @name.downcase %>")
+                .Attribute("id", component.Id);
+
+            return html;
+        }
+
+        protected virtual IHtmlNode CreateElement()
+        {
+            return new HtmlElement("div");
+        }
+
+        <% unless events.empty? %>
+        protected virtual void AddEventAttributes(IHtmlNode html, IDictionary<string, object> events)
+        {
+            foreach (var keyValuePair in events)
+            {
+                var value = keyValuePair.Value as ClientHandlerDescriptor;
+                var key = "data-" + keyValuePair.Key;
+
+                if (value.HandlerName.HasValue())
+                {
+                    html.Attribute(key, value.HandlerName);
+                }
+
+            }
+        }
+        <% end %>
+    }
+}
+

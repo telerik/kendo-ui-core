@@ -1,0 +1,30 @@
+:options:
+    - :name: items
+      :type: Array
+      :recursive: true
+      :content: true
+      :description: Contains the items of the tabstrip widget
+
+    - :name : items.url
+      :type : String
+      :description : Specifies the url or id of the view which will be loaded
+
+    - :name : items.icon
+      :type : String
+      :description : The icon of the button. It can be either one of the built-in icons, or a custom one
+
+    - :name: items.text
+      :type: String
+      :description: Specifies the text of the item
+
+    - :name: items.target
+      :type: String
+      :description: Specifies the id of target Pane or `_top` for application level Pane
+
+    - :name: items.actionsheetContext
+      :type: String
+      :description: This value will be available when the action callback of ActionSheet item is executed
+
+    - :name: items.badge
+      :type: String
+      :description: Specifies the value shown in badge icon

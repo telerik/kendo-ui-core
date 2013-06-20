@@ -1,7 +1,7 @@
 module CodeGen
 
     class Option
-        attr_reader :name, :description, :type, :owner, :default
+        attr_reader :name, :description, :type, :owner, :default, :values
 
         def initialize(options)
             @name = options[:name]
@@ -11,6 +11,7 @@ module CodeGen
             @recursive = options[:recursive]
             @default = options[:default]
             @content = options[:content]
+            @values = options[:values]
         end
 
         def content?

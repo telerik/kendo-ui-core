@@ -68,11 +68,11 @@
 
             test('approaching the end of the range prefetches data', 4, function() {
                 ds.fetch();
-                buffer.at(11);
+                buffer.at(12);
                 ok(!ds.inRange(20, 20));
                 buffer.bind('prefetching', function(e) { equal(e.skip, 20); });
                 buffer.bind('prefetched', function(e) { equal(e.skip, 20); });
-                buffer.at(12);
+                buffer.at(13);
                 ok(ds.inRange(20, 20));
             });
 

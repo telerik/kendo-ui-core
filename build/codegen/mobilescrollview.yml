@@ -1,0 +1,8 @@
+:options:
+    - :name: itemTagName
+      :type: String
+      :description: Specifies the tag name of the item element. By default it will be `div` element
+
+    - :name: fitItemPerPage
+      :type: Boolean
+      :description: Specifies whether exactly one item per page must be shown

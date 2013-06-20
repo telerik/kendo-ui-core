@@ -1,0 +1,50 @@
+namespace Kendo.Mvc.UI.Fluent
+{
+    using System.Collections.Generic;
+    using System.Collections;
+    using System;
+    using Kendo.Mvc.Extensions;
+
+    /// <summary>
+    /// Defines the fluent API for configuring the <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> settings.
+    /// </summary>
+    public class <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>Builder: IHideObjectMembers
+    {
+        private readonly <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> container;
+
+        public <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>Builder(<%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> settings)
+        {
+            container = settings;
+        }
+
+        //>> Fields
+        //<< Fields
+
+        <% if self.instance_of?(ArrayOption) %>
+        /// <summary>
+        /// Sets the HTML attributes.
+        /// </summary>
+        /// <param name="attributes">The HTML attributes.</param>
+        /// <returns></returns>
+        public virtual <%= csharp_item_class %>Builder HtmlAttributes(object attributes)
+        {
+            return HtmlAttributes(attributes.ToDictionary());
+        }
+
+        /// <summary>
+        /// Sets the HTML attributes.
+        /// </summary>
+        /// <param name="attributes">The HTML attributes.</param>
+        /// <returns></returns>
+        public virtual <%= csharp_item_class %>Builder HtmlAttributes(IDictionary<string, object> attributes)
+        {
+
+            container.HtmlAttributes.Clear();
+            container.HtmlAttributes.Merge(attributes);
+
+            return this;
+        }
+        <% end %>
+    }
+}
+

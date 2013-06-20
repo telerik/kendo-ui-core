@@ -1,0 +1,130 @@
+﻿@{    
+    Layout = "~/Areas/razor/Views/Shared/_MobileLayout.cshtml";
+}
+
+@(Html.Kendo().MobileView()
+        .Name("button-home")        
+        .Title("Sports Academy")
+        .Content(
+            @<text>
+            <div class="home head">&nbsp;</div>            
+            @(Html.Kendo().MobileButton()
+                    .HtmlAttributes(new { @class = "button", style = "color: #fff; background-color: #f60" })
+                    .Text("Home")
+                    .Url("#button-home"))
+
+            @(Html.Kendo().MobileButton()
+                    .HtmlAttributes(new { @class = "button" })
+                    .Text("Facility")
+                    .Url("#facility"))
+
+            @(Html.Kendo().MobileButton()
+                    .HtmlAttributes(new { @class = "button" })
+                    .Text("Sports")
+                    .Url("#sports"))
+
+            @(Html.Kendo().MobileListView()
+                   .Style("inset")
+                   .Items(items => items.Add()
+                       .Text("<p>Our Sports Academy provides a venue for outdoor and indoor sports and activities for children and adults of all ages.</p>"))                   
+            )
+            </text>)
+)
+
+@(Html.Kendo().MobileView()
+        .Name("facility")        
+        .Title("Facility")
+        .Content(
+            @<text>
+            <div class="facility head">&nbsp;</div>            
+            @(Html.Kendo().MobileButton()                    
+                    .HtmlAttributes(new { @class = "button" })
+                    .Text("Home")
+                    .Url("#button-home"))
+
+            @(Html.Kendo().MobileButton()
+                    .HtmlAttributes(new { @class = "button", style = "color: #fff; background-color: #f60" })
+                    .Text("Facility")
+                    .Url("#facility"))
+
+            @(Html.Kendo().MobileButton()
+                    .HtmlAttributes(new { @class = "button" })
+                    .Text("Sports")
+                    .Url("#sports"))
+           
+            @(Html.Kendo().MobileListView()
+                   .Style("inset")
+                   .Items(items => items.Add()
+                       .Text("<p>The facility has two indoor basketball fields, olympic size swimming pool, outdoor soccer field, baseball field, golf club and more.</p>"))                   
+            )
+            </text>)
+)
+
+@(Html.Kendo().MobileView()
+        .Name("sports")        
+        .Title("Sports")
+        .Content(
+            @<text>
+            <div class="sports head">&nbsp;</div>            
+            @(Html.Kendo().MobileButton()                    
+                    .HtmlAttributes(new { @class = "button" })
+                    .Text("Home")
+                    .Url("#button-home"))
+
+            @(Html.Kendo().MobileButton()
+                    .HtmlAttributes(new { @class = "button" })
+                    .Text("Facility")
+                    .Url("#facility"))
+
+            @(Html.Kendo().MobileButton()
+                    .HtmlAttributes(new { @class = "button", style = "color: #fff; background-color: #f60" })
+                    .Text("Sports")
+                    .Url("#sports"))
+
+            @(Html.Kendo().MobileListView()
+                   .Style("inset")
+                   .Items(items => 
+                       {
+                           items.Add().Text("American Football");
+                           items.Add().Text("Baseball");
+                           items.Add().Text("Basketball");
+                           items.Add().Text("Football");
+                           items.Add().Text("Golf");
+                           items.Add().Text("Swimming");
+                       })
+            )
+         </text>)
+)
+
+<style scoped>
+    .button {
+        margin: 0 0 0 .5em;
+        text-align: center;
+    }
+    .button:first-of-type {
+        margin: 0 0 0 1em;
+    }
+    .home {
+        background: url(@Url.Content("~/content/mobile/shared/sports-home.jpg")) no-repeat center center;	
+    }
+    .facility {
+        background: url(@Url.Content("~/content/mobile/shared/sports-facility.jpg")) no-repeat center center;	
+    }
+    .sports {
+        background: url(@Url.Content("~/content/mobile/shared/sports.jpg")) no-repeat center center;	
+    }
+    #button-home .head,
+    #facility .head,
+    #sports .head {
+	    display: block;
+	    margin: 1em;
+	    height: 120px;
+        -webkit-background-size: 100% auto;
+        background-size: 100% auto;
+    }
+    .km-ios .head,
+    .km-blackberry .head {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+</style>

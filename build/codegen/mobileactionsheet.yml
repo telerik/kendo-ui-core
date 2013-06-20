@@ -1,0 +1,32 @@
+:options:
+    - :name: title
+      :type: String
+      :description: Specifies the title of the actionsheet
+
+    - :name: popup
+      :type: Object
+      :content: true
+      :description: The popup configuration options (tablet only)
+
+    - :name: popup.height
+      :type: String
+      :description: The height of the popup in pixels.
+
+    - :name: popup.width
+      :type: String
+      :description: The width of the popup in pixels
+
+    - :name: items
+      :type: Array
+      :recursive: true
+      :content: true
+      :description: Contains the items of the actionsheet widget
+
+    - :name: items.action
+      :type: String
+      :description: Specifies the name of the handler that will be executed when the item is clicked
+
+    - :name: items.text
+      :type: String
+      :description: Specifies the text of the item
+

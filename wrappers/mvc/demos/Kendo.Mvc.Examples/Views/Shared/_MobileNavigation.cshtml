@@ -1,0 +1,14 @@
+﻿@{
+    var routeData = ViewContext.RouteData;
+    var area = routeData.DataTokens["area"];
+    var suite = routeData.Values["suite"];
+    var controller = routeData.Values["controller"].ToString().Replace("_", "-");
+    var action = routeData.Values["action"].ToString().Replace("_", "-");
+    var currentArea = area == "aspx" ? "ASPX" : "Razor";
+    var currentRoute = currentArea + "Default";
+    var alternateArea = area == "aspx" ? "Razor" : "ASPX";
+    var alternateRoute = alternateArea + "Default";
+}
+
+<a class="offline-button" href="@(Url.RouteUrl(currentRoute, new { controller = "", action = "" }))">Back to all examples</a>
+<a class="offline-button" href="@(Url.RouteUrl(alternateRoute, new { suite = suite, controller = controller, action = action }))">@alternateArea version</a>

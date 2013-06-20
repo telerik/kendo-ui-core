@@ -4,6 +4,7 @@ require 'codegen/lib/component'
 
 require 'nokogiri'
 require 'codegen/lib/mvc/api'
+require 'codegen/lib/mvc/mobile'
 require 'codegen/lib/java/module'
 require 'codegen/lib/java/composite_option'
 require 'codegen/lib/java/event'
@@ -33,7 +34,7 @@ namespace :generate do
     end
 
     desc 'Generate all server wrappers and their API reference'
-    task :all => [:php, :jsp, 'mvc:api']
+    task :all => [:php, :jsp, 'mvc:mobile:wrappers', 'mvc:api']
 
     namespace :mvc do
 
@@ -47,6 +48,42 @@ namespace :generate do
                 generator.component(component)
             end
         end
+
+        namespace :mobile do
+
+            desc 'Generate MVC Mobile wrappers'
+            task :wrappers do
+                MARKDOWN = FileList['docs/api/mobile/*.md'].exclude(/listview|swipe|loader|pane|touch|scroller/)
+
+                components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Mobile::Wrappers::Component) }
+                    .sort { |a, b| a.name <=> b.name }
+
+                component_register = ''
+
+                components.each do |component|
+
+                    import_metadata(component)
+
+                    generator = CodeGen::MVC::Mobile::Wrappers::Generator.new('wrappers/mvc/src/Kendo.Mvc/UI')
+
+                    generator.component(component)
+
+                    generator.cs_proj(component)
+
+                    component.register(component_register)
+                end
+
+                factory_file = 'wrappers/mvc/src/Kendo.Mvc/UI/WidgetFactory.cs'
+
+                content = File.read(factory_file)
+
+                content = content.sub(/\/\/>> MobileComponents(.|\n)*\/\/<< MobileComponents/,
+                             "//>> MobileComponents #{component_register}//<< MobileComponents")
+
+                File.write(factory_file, content.dos)
+            end
+        end
+
     end
 
     desc 'Generate PHP wrappers'

@@ -646,6 +646,17 @@
     <Compile Include="UI\Grid\Settings\NumberOperators.cs" />
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewLinkItemBuilder.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewItemBuilderBase.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewItemBuilder.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewItemFactory.cs" />
+    <Compile Include="UI\MobileListView\Items\MobileListViewItemBase.cs" />
+    <Compile Include="UI\MobileListView\Items\MobileListViewLinkItem.cs" />
+    <Compile Include="UI\MobileListView\Items\MobileListViewItem.cs" />
+    <Compile Include="UI\MobileNavigatableSettingsBuilder.cs" />
+    <Compile Include="UI\MobileNavigatableSettings.cs" />
+    <Compile Include="UI\MobilePopupDirection.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewPaneEventBuilder.cs" />
     <Compile Include="UI\MultiSelect\Fluent\MultiSelectEventBuilder.cs" />
     <Compile Include="UI\MultiSelect\Fluent\MultiSelectBuilder.cs" />
     <Compile Include="UI\MultiSelect\Html\MultiSelectHtmlBuilder.cs" />
@@ -1306,4 +1317,132 @@
   <Target Name="BeforeBuild">
     <Copy SkipUnchangedFiles="true" SourceFiles="@(Mvc3References)" DestinationFolder="$(OutputPath)" />
   </Target>
-</Project>
+  <ItemGroup>
+    <Compile Include="UI\MobileActionSheet\MobileActionSheet.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetBuilder.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemFactory.cs" />
+    <Compile Include="UI\MobileActionSheet\Settings\MobileActionSheetPopupSettings.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetPopupSettingsBuilder.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetEventBuilder.cs" />
+    <Compile Include="UI\MobileActionSheet\Html\MobileActionSheetHtmlBuilder.cs" />
+    <Compile Include="UI\MobileActionSheet\MobileActionSheetItem.cs" />
+    <Compile Include="UI\MobileActionSheet\Fluent\MobileActionSheetItemBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileButton\MobileButton.cs" />
+    <Compile Include="UI\MobileButton\Fluent\MobileButtonBuilder.cs" />
+    <Compile Include="UI\MobileButton\Fluent\MobileButtonEventBuilder.cs" />
+    <Compile Include="UI\MobileButton\Html\MobileButtonHtmlBuilder.cs" />
+    <Compile Include="UI\MobileButton\MobileButtonRel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileButtonGroup\MobileButtonGroup.cs" />
+    <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupBuilder.cs" />
+    <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupEventBuilder.cs" />
+    <Compile Include="UI\MobileButtonGroup\Html\MobileButtonGroupHtmlBuilder.cs" />
+    <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupItemFactory.cs" />
+    <Compile Include="UI\MobileButtonGroup\MobileButtonGroupItem.cs" />
+    <Compile Include="UI\MobileButtonGroup\Fluent\MobileButtonGroupItemBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileBackButton\MobileBackButton.cs" />
+    <Compile Include="UI\MobileBackButton\Fluent\MobileBackButtonBuilder.cs" />
+    <Compile Include="UI\MobileBackButton\Fluent\MobileBackButtonEventBuilder.cs" />
+    <Compile Include="UI\MobileBackButton\Html\MobileBackButtonHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileSwitch\MobileSwitch.cs" />
+    <Compile Include="UI\MobileSwitch\Fluent\MobileSwitchBuilder.cs" />
+    <Compile Include="UI\MobileSwitch\Fluent\MobileSwitchEventBuilder.cs" />
+    <Compile Include="UI\MobileSwitch\Html\MobileSwitchHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileTabStrip\MobileTabStrip.cs" />
+    <Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripBuilder.cs" />
+    <Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripItemFactory.cs" />
+    <Compile Include="UI\MobileTabStrip\MobileTabStripItem.cs" />
+    <Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripItemBuilder.cs" />
+    <Compile Include="UI\MobileTabStrip\Fluent\MobileTabStripEventBuilder.cs" />
+    <Compile Include="UI\MobileTabStrip\Html\MobileTabStripHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileView\MobileView.cs" />
+    <Compile Include="UI\MobileView\Fluent\MobileViewBuilder.cs" />
+    <Compile Include="UI\MobileView\Fluent\MobileViewEventBuilder.cs" />
+    <Compile Include="UI\MobileView\Html\MobileViewHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileModalView\MobileModalView.cs" />
+    <Compile Include="UI\MobileModalView\Fluent\MobileModalViewBuilder.cs" />
+    <Compile Include="UI\MobileModalView\Fluent\MobileModalViewEventBuilder.cs" />
+    <Compile Include="UI\MobileModalView\Html\MobileModalViewHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileSplitView\MobileSplitView.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewBuilder.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewPaneFactory.cs" />
+    <Compile Include="UI\MobileSplitView\MobileSplitViewPane.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewPaneBuilder.cs" />
+    <Compile Include="UI\MobileSplitView\Fluent\MobileSplitViewEventBuilder.cs" />
+    <Compile Include="UI\MobileSplitView\Html\MobileSplitViewHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobilePopOver\MobilePopOver.cs" />
+    <Compile Include="UI\MobilePopOver\Fluent\MobilePopOverBuilder.cs" />
+    <Compile Include="UI\MobilePopOver\Settings\MobilePopOverPaneSettings.cs" />
+    <Compile Include="UI\MobilePopOver\Fluent\MobilePopOverPaneSettingsBuilder.cs" />
+    <Compile Include="UI\MobilePopOver\Settings\MobilePopOverPopupSettings.cs" />
+    <Compile Include="UI\MobilePopOver\Fluent\MobilePopOverPopupSettingsBuilder.cs" />
+    <Compile Include="UI\MobilePopOver\Fluent\MobilePopOverEventBuilder.cs" />
+    <Compile Include="UI\MobilePopOver\Html\MobilePopOverHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileLayout\MobileLayout.cs" />
+    <Compile Include="UI\MobileLayout\Fluent\MobileLayoutBuilder.cs" />
+    <Compile Include="UI\MobileLayout\Fluent\MobileLayoutEventBuilder.cs" />
+    <Compile Include="UI\MobileLayout\Html\MobileLayoutHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileNavBar\MobileNavBar.cs" />
+    <Compile Include="UI\MobileNavBar\Fluent\MobileNavBarBuilder.cs" />
+    <Compile Include="UI\MobileNavBar\Html\MobileNavBarHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileButton\MobileButtonAlign.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileSplitView\MobileSplitViewStyle.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileScrollView\MobileScrollView.cs" />
+    <Compile Include="UI\MobileScrollView\Fluent\MobileScrollViewBuilder.cs" />
+    <Compile Include="UI\MobileScrollView\Fluent\MobileScrollViewEventBuilder.cs" />
+    <Compile Include="UI\MobileScrollView\Html\MobileScrollViewHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileScrollView\Fluent\MobileScrollViewItemFactory.cs" />
+    <Compile Include="UI\MobileScrollView\MobileScrollViewItem.cs" />
+    <Compile Include="UI\MobileScrollView\Fluent\MobileScrollViewItemBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileDetailButton\MobileDetailButton.cs" />
+    <Compile Include="UI\MobileDetailButton\Fluent\MobileDetailButtonBuilder.cs" />
+    <Compile Include="UI\MobileDetailButton\Fluent\MobileDetailButtonEventBuilder.cs" />
+    <Compile Include="UI\MobileDetailButton\Html\MobileDetailButtonHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileDetailButton\MobileDetailButtonStyle.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileApplication\MobileApplication.cs" />
+    <Compile Include="UI\MobileApplication\Fluent\MobileApplicationBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileListView\MobileListView.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewBuilder.cs" />
+    <Compile Include="UI\MobileListView\Settings\MobileListViewFilterableSettings.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewFilterableSettingsBuilder.cs" />
+    <Compile Include="UI\MobileListView\Fluent\MobileListViewEventBuilder.cs" />
+    <Compile Include="UI\MobileListView\Html\MobileListViewHtmlBuilder.cs" />
+  </ItemGroup>
+<ItemGroup><Compile Include="UI\MobileDrawer\MobileDrawer.cs" /><Compile Include="UI\MobileDrawer\MobileDrawerPosition.cs" /><Compile Include="UI\MobileDrawer\Fluent\MobileDrawerBuilder.cs" /><Compile Include="UI\MobileDrawer\Fluent\MobileDrawerEventBuilder.cs" /><Compile Include="UI\MobileDrawer\Html\MobileDrawerHtmlBuilder.cs" /></ItemGroup></Project>

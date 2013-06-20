@@ -1,0 +1,18 @@
+:options:
+    - :name: items
+      :type: Array
+      :recursive: true
+      :content: true
+      :description: Contains the items of the button group widget
+
+    - :name: items.icon
+      :type: String
+      :description: The icon of the button. It can be either one of the built-in icons, or a custom one
+
+    - :name: items.text
+      :type: String
+      :description: Specifies the text of the item
+
+    - :name: items.badge
+      :type: String
+      :description: Specifies the value shown in badge icon

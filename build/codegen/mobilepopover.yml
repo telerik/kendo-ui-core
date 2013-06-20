@@ -1,0 +1,13 @@
+:options:
+    - :name: popup
+      :type: Object
+      :content: true
+      :description: The popup configuration options (tablet only)
+
+    - :name: popup.height
+      :type: String
+      :description: The height of the popup in pixels.
+
+    - :name: popup.width
+      :type: String
+      :description: The width of the popup in pixels

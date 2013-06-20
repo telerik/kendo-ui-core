@@ -37,9 +37,9 @@ namespace Kendo.Models
 
                 var directory = sections.FirstOrDefault(s =>
                 {
-                    var dir = s.ToLower().Replace("_", "-");
+                    var dir = Path.GetFileName(s.ToLower().Replace("_", "-"));
 
-                    return dir.EndsWith(section) || dir.EndsWith(section + "s");
+                    return dir.Equals(section) || dir.EndsWith(section + "s");
                 });
 
                 if (directory != null)

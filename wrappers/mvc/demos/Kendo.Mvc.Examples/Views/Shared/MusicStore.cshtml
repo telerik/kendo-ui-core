@@ -1,0 +1,47 @@
+﻿@{    
+    Layout = "~/Areas/razor/Views/Shared/_MobileLayout.cshtml";
+}
+
+@( Html.Kendo().MobileView()
+        .Name("application-store")
+        .Title("Buy Music")        
+        .Content(
+            @<text>
+                <div class="head">&nbsp;</div>                
+                @(
+                    Html.Kendo().MobileListView()
+                        .Style("inset")
+                        .Type("group")
+                        .Items(items => {
+                            items.Add().Text("Genres").Items(childs =>
+                            {
+                                childs.AddLink().Text("Folk");
+                                childs.AddLink().Text("Dance");
+                                childs.AddLink().Text("Pop");
+                                childs.AddLink().Text("R&B");
+                                childs.AddLink().Text("Rap");
+                                childs.AddLink().Text("Rock");
+                            });
+                        })
+                )
+                @(Html.Kendo().MobileButton()
+                        .HtmlAttributes(new { style = "display: block; margin: 1em; text-align: center;" })
+                        .Text("Go back!")
+                        .Url("Index", "Application")
+                )                
+            </text>
+        )
+)
+
+<style scoped>
+    #application-store .head {
+	    display: block;
+	    margin: 1em;
+	    height: 110px;
+	    background: url(@Url.Content("~/content/mobile/shared/mymusic.jpg")) no-repeat center center;
+        -webkit-background-size: 100% auto;
+        background-size: 100% auto;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+</style>

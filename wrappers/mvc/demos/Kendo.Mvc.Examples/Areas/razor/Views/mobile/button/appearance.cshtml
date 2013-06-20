@@ -1,0 +1,89 @@
+﻿@{    
+    Layout = "~/Areas/razor/Views/Shared/_MobileLayout.cshtml";
+}
+
+@(Html.Kendo().MobileView()
+        .Title("Button Appearance")
+        .HtmlAttributes(new { @class = "buttonAppearance" })
+        .Content(o =>
+            Html.Kendo().MobileListView().Style("inset").Type("group")
+                .Items(root =>
+                    {
+                        root.Add().Text("Background color").Items(items => 
+                        {
+                            items.Add().Content(
+                                @<text>
+                                    <i></i>
+                                    @(Html.Kendo().MobileButton()
+                                    .HtmlAttributes(new { style = "background-color: green" })
+                                    .Text("Green"))
+                                </text>
+                            );
+                            items.Add().Content(
+                                @<text>
+                                    <i></i>
+                                    @(Html.Kendo().MobileButton()
+                                    .HtmlAttributes(new { style = "background-color: darkred" })
+                                    .Text("Red"))
+                                </text>
+                            );
+                        });
+                        
+                        root.Add().Text("Font Size").Items(items =>
+                        {
+                            items.Add().Content(
+                                @<text>
+                                    <i></i>
+                                    @(Html.Kendo().MobileButton()
+                                    .HtmlAttributes(new { style = "font-size: 0.6em" })
+                                    .Text("Small"))
+                                </text>
+                            );
+                            items.Add().Content(
+                                @<text>
+                                    <i></i>
+                                    @Html.Kendo().MobileButton().Text("Normal")
+                                </text>
+                            );
+                            items.Add().Content(
+                                @<text>
+                                    <i></i>
+                                    @(Html.Kendo().MobileButton()
+                                    .HtmlAttributes(new { style = "font-size: 1.2em" })
+                                    .Text("Large"))
+                                </text>
+                            );
+                        });
+
+                        root.Add().Text("Button icons / check help for more").Items(items =>
+                        {
+                            items.Add().Content(
+                                @<text>
+                                    <i></i>
+                                    @(Html.Kendo().MobileButton()
+                                    .Icon("featured")
+                                    .Text("Featured"))
+                                </text>
+                            );
+                            items.Add().Content(
+                                @<text>
+                                    <i></i>
+                                    @(Html.Kendo().MobileButton()
+                                    .Icon("toprated")
+                                    .Text("Top Rated"))
+                                </text>
+                            );
+                        });
+                    })
+    )
+)
+
+<style scoped>
+    .buttonAppearance .km-button:not(.km-back)
+    {
+        width: 90%;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+</style>

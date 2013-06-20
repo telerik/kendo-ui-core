@@ -1,0 +1,73 @@
+﻿@{    
+    Layout = "~/Areas/razor/Views/Shared/_MobileLayout.cshtml";
+}
+
+@(Html.Kendo().MobileView()
+        .Name("switch-home")
+        .Title("User Settings")
+        .Content(obj =>     
+            Html.Kendo().MobileListView().Style("inset").Type("group")
+                .Items(root => 
+                {
+                    root.Add().Text("Profile").Items(items => 
+                    {
+                        items.Add().Content(@<text><h2>Eduardo <span>Saavedra</span></h2><img src="@Url.Content("~/content/mobile/overview/eduardo.jpg")" /></text>);
+                        items.Add().Text("Brand Manager at Marketing Team");
+                    });
+                    
+                    root.Add().Text("Password").Items(items => 
+                    {
+                        items.Add().Content(
+                            @<text>
+                            User cannot change pasword                         
+                            @(Html.Kendo().MobileSwitch()
+                                    .Name("email-switch")
+                                    .Checked(true))
+                            </text>
+                        );
+                        items.Add().Content(
+                            @<text>
+                            Password never expires 
+                            @(Html.Kendo().MobileSwitch()
+                                    .Name("wink-switch"))
+                            </text>
+                        );
+                    });
+                    
+                    root.Add().Text("Newsletter Subscription").Items(items => items.Add().Content(
+                        @<text>
+                        Subscribed
+                        @(Html.Kendo().MobileSwitch()
+                                .Name("subscription-switch")
+                                .Checked(true)
+                                .OnLabel("YES")
+                                .OffLabel("NO"))
+                        </text>
+                    ));
+                })                   
+        )
+)
+
+<style scoped>
+    #switch-home h2 {
+        display: inline-block;
+        font-size: 1.1em;
+        margin: 1.5em 0 0 1em;
+    }
+    #switch-home h2 span {
+        display: block;
+        clear: both;
+        font-size: 2em;
+        margin: .2em 0 0 0;
+    }
+    #switch-home img {
+        width: 5em;
+        height: 5em;
+        float: left;
+        margin: 1em;
+        -webkit-box-shadow: 0 1px 3px #333;
+        box-shadow: 0 1px 3px #333;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+    }
+</style>

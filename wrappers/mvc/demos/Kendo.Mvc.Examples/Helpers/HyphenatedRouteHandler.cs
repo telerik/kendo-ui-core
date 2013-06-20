@@ -16,6 +16,15 @@ namespace Kendo.Mvc.Examples
             requestContext.RouteData.Values["action"] =
                 requestContext.RouteData.Values["action"].ToString().Replace("-", "_");
 
+            if (requestContext.RouteData.Values["suite"].ToString().ToLower() == "mobile")
+            {
+                requestContext.RouteData.DataTokens["namespaces"] = new[] { "Kendo.Mvc.Examples.Controllers.Mobile" };
+            }
+            else
+            {
+                requestContext.RouteData.DataTokens["namespaces"] = new[] { "Kendo.Mvc.Examples.Controllers" };
+            }
+
             return base.GetHttpHandler(requestContext);
         }
     }

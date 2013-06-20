@@ -244,6 +244,85 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="UI.MobileListView{T}"/> bound to the specified data item type.
+        /// </summary>
+        /// <example>
+        /// <typeparam name="T">The type of the data item</typeparam>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileListView&lt;Order&gt;()
+        ///             .Name("MobileListView")
+        ///             .BindTo(Model)
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public virtual MobileListViewBuilder<T> MobileListView<T>() where T : class
+        {
+            return new MobileListViewBuilder<T>(new MobileListView<T>(ViewContext, Initializer, UrlGenerator));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="UI.MobileListView"/>.
+        /// </summary>
+        /// <example>        
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileListView()
+        ///             .Name("MobileListView")
+        ///             .Items(items => 
+        ///             {
+        ///                 items.Add().Text("Item");
+        ///                 items.AddLink().Text("Link Item");
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example> 
+        public virtual MobileListViewBuilder<object> MobileListView()
+        {
+            return new MobileListViewBuilder<object>(new MobileListView<object>(ViewContext, Initializer, UrlGenerator));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="MobileListView{T}"/> bound to the specified data source.
+        /// </summary>
+        /// <typeparam name="T">The type of the data item</typeparam>
+        /// <param name="dataSource">The data source.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileListView(Model)
+        ///             .Name("MobileListView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileListViewBuilder<T> MobileListView<T>(IEnumerable<T> dataSource) where T : class
+        {
+            MobileListViewBuilder<T> builder = MobileListView<T>();
+
+            builder.Component.DataSource.Data = dataSource;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="MobileListView{T}"/> bound an item in ViewData.
+        /// </summary>
+        /// <typeparam name="T">Type of the data item</typeparam>
+        /// <param name="dataSourceViewDataKey">The data source view data key.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileListView&lt;Order&gt;("orders")
+        ///             .Name("MobileListView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileListViewBuilder<T> MobileListView<T>(string dataSourceViewDataKey) where T : class
+        {
+            MobileListViewBuilder<T> builder = MobileListView<T>();
+
+            builder.Component.DataSource.Data = ViewContext.ViewData.Eval(dataSourceViewDataKey) as IEnumerable<T>;
+
+            return builder;
+        }
+
+        /// <summary>
         /// Creates a <see cref="Splitter"/>
         /// </summary>
         /// <example>
@@ -977,6 +1056,248 @@ namespace Kendo.Mvc.UI.Fluent
             }
             return MvcHtmlString.Empty;
         }
+
+        //>> MobileComponents 
+        /// <summary>
+        /// Creates a <see cref="MobileActionSheet"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileActionSheet()
+        ///             .Name("MobileActionSheet")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileActionSheetBuilder MobileActionSheet()
+        {
+            return new MobileActionSheetBuilder(new MobileActionSheet(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileApplication"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileApplication()
+        ///             .Name("MobileApplication")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileApplicationBuilder MobileApplication()
+        {
+            return new MobileApplicationBuilder(new MobileApplication(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileBackButton"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileBackButton()
+        ///             .Name("MobileBackButton")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileBackButtonBuilder MobileBackButton()
+        {
+            return new MobileBackButtonBuilder(new MobileBackButton(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileButton"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileButton()
+        ///             .Name("MobileButton")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileButtonBuilder MobileButton()
+        {
+            return new MobileButtonBuilder(new MobileButton(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileButtonGroup"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileButtonGroup()
+        ///             .Name("MobileButtonGroup")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileButtonGroupBuilder MobileButtonGroup()
+        {
+            return new MobileButtonGroupBuilder(new MobileButtonGroup(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileDetailButton"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileDetailButton()
+        ///             .Name("MobileDetailButton")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileDetailButtonBuilder MobileDetailButton()
+        {
+            return new MobileDetailButtonBuilder(new MobileDetailButton(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileDrawer"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileDrawer()
+        ///             .Name("MobileDrawer")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileDrawerBuilder MobileDrawer()
+        {
+            return new MobileDrawerBuilder(new MobileDrawer(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileLayout"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileLayout()
+        ///             .Name("MobileLayout")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileLayoutBuilder MobileLayout()
+        {
+            return new MobileLayoutBuilder(new MobileLayout(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileModalView"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileModalView()
+        ///             .Name("MobileModalView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileModalViewBuilder MobileModalView()
+        {
+            return new MobileModalViewBuilder(new MobileModalView(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileNavBar"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileNavBar()
+        ///             .Name("MobileNavBar")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileNavBarBuilder MobileNavBar()
+        {
+            return new MobileNavBarBuilder(new MobileNavBar(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobilePopOver"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobilePopOver()
+        ///             .Name("MobilePopOver")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobilePopOverBuilder MobilePopOver()
+        {
+            return new MobilePopOverBuilder(new MobilePopOver(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileScrollView"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileScrollView()
+        ///             .Name("MobileScrollView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileScrollViewBuilder MobileScrollView()
+        {
+            return new MobileScrollViewBuilder(new MobileScrollView(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileSplitView"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileSplitView()
+        ///             .Name("MobileSplitView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileSplitViewBuilder MobileSplitView()
+        {
+            return new MobileSplitViewBuilder(new MobileSplitView(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileSwitch"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileSwitch()
+        ///             .Name("MobileSwitch")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileSwitchBuilder MobileSwitch()
+        {
+            return new MobileSwitchBuilder(new MobileSwitch(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileTabStrip"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileTabStrip()
+        ///             .Name("MobileTabStrip")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileTabStripBuilder MobileTabStrip()
+        {
+            return new MobileTabStripBuilder(new MobileTabStrip(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="MobileView"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileView()
+        ///             .Name("MobileView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MobileViewBuilder MobileView()
+        {
+            return new MobileViewBuilder(new MobileView(ViewContext, Initializer, UrlGenerator));
+        }
+        //<< MobileComponents
     }
 
     public class WidgetFactory<TModel> : WidgetFactory
@@ -1648,6 +1969,6 @@ namespace Kendo.Mvc.UI.Fluent
                 }
             }
             return null;
-        }
+        }                
     }
 }

@@ -1,0 +1,52 @@
+namespace Kendo.Mvc.UI.Fluent
+{
+    using System.Collections.Generic;
+    using System.Collections;
+    using System;
+
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo <%= csharp_class %> for ASP.NET MVC.
+    /// </summary>
+    public class <%= csharp_class %>Builder: WidgetBuilderBase<<%= csharp_class %>, <%= csharp_class %>Builder>, IHideObjectMembers
+    {
+        private readonly <%= csharp_class %> container;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="<%= csharp_class %>"/> class.
+        /// </summary>
+        /// <param name="component">The component.</param>
+        public <%= csharp_class %>Builder(<%= csharp_class %> component)
+            : base(component)
+        {
+            container = component;
+        }
+
+        //>> Fields
+        //<< Fields
+
+
+        <% unless events.empty? %>
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="configurator">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().<%= csharp_class %>()
+        ///             .Name("<%= csharp_class %>")
+        ///             .Events(events => events
+        ///                 .<%= events[0].csharp_name%>("on<%= events[0].csharp_name%>")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public <%= csharp_class %>Builder Events(Action<<%= csharp_class %>EventBuilder> configurator)
+        {
+
+            configurator(new <%= csharp_class %>EventBuilder(Component.Events));
+
+            return this;
+        }
+        <% end %>
+    }
+}
+

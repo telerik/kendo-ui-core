@@ -1,0 +1,44 @@
+:options:
+    - :name: url
+      :type: String
+      :description: 'Specifies the url for remote view or id of the view to be loaded (prefixed with #, like an anchor)'
+
+    - :name: text
+      :type: String
+      :description: Specifies the text of the button
+
+    - :name: transition
+      :type: String
+      :description: Specifies the Pane transition
+
+    - :name: target
+      :type: String
+      :description: Specifies the id of target Pane or `_top` for application level Pane
+
+    - :name: actionsheetContext
+      :type: String
+      :description: This value will be available when the action callback of ActionSheet item is executed
+
+    - :name: align
+      :type: Object
+      :description: Use the align data attribute to specify the elements position inside the NavBar. By default, elements without any align are centered.
+      :values:
+          - center
+          - left
+          - right
+
+
+    - :name: rel
+      :type: Object
+      :values:
+          - none
+          - actionSheet
+          - popOver
+          - modalView
+          - external
+          - drawer
+      :description: Specifies the widget to be open when is tapped (the href must be set too)
+
+    - :name: badge
+      :type: String
+      :description: Specifies the value shown in badge icon

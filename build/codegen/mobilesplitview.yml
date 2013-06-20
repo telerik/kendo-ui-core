@@ -1,0 +1,34 @@
+:options:
+    - :name: style
+      :type: Object
+      :description: Defines the SplitView style - horizontal or vertical.
+      :values:
+          - horizontal
+          - vertical
+
+    - :name: panes
+      :type: Array
+      :recursive: true
+      :content: true
+      :description: Contains the panes of the splitview widget
+
+    - :name: panes.id
+      :type: String
+      :description: The id of tha pane.
+
+    - :name: panes.initial
+      :type: String
+      :description: The value that configures the initial.
+
+    - :name: panes.layout
+      :type: String
+      :description: The value that configures the layout.
+
+    - :name: panes.loading
+      :type: String
+      :description: 'The text displayed in the loading popup. Setting this value to false will disable the loading popup.'
+
+    - :name: panes.transition
+      :type: String
+      :description: The default View transition.
+

@@ -1,0 +1,7 @@
+:options:
+    - :name: position
+      :type: Object
+      :description: The position of the drawer. Can be left (default) or right.
+      :values:
+          - left
+          - right

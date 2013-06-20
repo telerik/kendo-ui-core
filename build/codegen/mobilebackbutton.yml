@@ -1,0 +1,16 @@
+:options:
+    - :name: icon
+      :type: String
+      :description: The icon of the button. It can be either one of the built-in icons, or a custom one
+
+    - :name: text
+      :type: String
+      :description: Specifies the text of the button
+
+    - :name: url
+      :type: String
+      :description: 'Specifies the url for remote view or id of the view to be loaded (prefixed with #, like an anchor)'
+
+    - :name: target
+      :type: String
+      :description: Specifies the id of target Pane or `_top` for application level Pane

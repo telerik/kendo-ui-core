@@ -13,7 +13,8 @@ namespace Kendo.Mvc.Examples.Controllers
             new Dictionary<string, string>()
             {
                 { "web", "Web" },
-                { "dataviz", "DataViz" }
+                { "dataviz", "DataViz" },
+                { "mobile", "Mobile" }
             };
 
         public ActionResult Index(string suite)

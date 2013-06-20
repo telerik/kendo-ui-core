@@ -1,0 +1,40 @@
+﻿@{    
+    Layout = "~/Areas/razor/Views/Shared/_MobileLayout.cshtml";
+}
+
+@(Html.Kendo().MobileView()
+        .Name("switch-events")
+        .Content(obj => ViewContentTemplate(this))
+)
+
+@helper ViewContentTemplate(WebViewPage page)
+{
+    @(Html.Kendo().MobileListView().Style("inset").Type("group")
+        .Items(root => root.Add().Text("General Settings")
+            .Items(items => items.Add().Content(
+                @<text>
+                Automatic Update 
+                @(Html.Kendo().MobileSwitch()
+                        .Name("mobile-switch")
+                        .Events(events => events.Change("switchChange")))
+                </text>
+                )))
+    )               
+    <div class="console"></div>    
+}
+
+<script>
+    function switchChange(e) {
+        kendoConsole.log("switch value was changed to " + (e.checked ? "checked" : "unchecked"));
+    }
+</script>
+
+<style scoped>
+    .km-root .console {
+        background-color: transparent;
+        border: 0;
+        margin: 1.4em 1em;
+        overflow: hidden;
+        height: auto;
+    }
+</style>
