@@ -31,7 +31,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY"
+                    recurrenceRule: "FREQ=DAILY"
                 });
 
                 var event = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17))[0];
@@ -45,7 +45,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY"
+                    recurrenceRule: "FREQ=DAILY"
                 });
 
                 var event = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17))[0];
@@ -65,7 +65,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 0),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=HOURLY"
+                    recurrenceRule: "FREQ=HOURLY"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 18));
@@ -85,7 +85,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 0),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=HOURLY;INTERVAL=3"
+                    recurrenceRule: "FREQ=HOURLY;INTERVAL=3"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
@@ -101,7 +101,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 0),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=HOURLY;BYHOUR=10,19"
+                    recurrenceRule: "FREQ=HOURLY;BYHOUR=10,19"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
@@ -117,7 +117,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 10, 0),
                     end: new Date(2000, 10, 10, 11, 0),
-                    recurrence: "FREQ=HOURLY;BYHOUR=10;BYMINUTE=20,40"
+                    recurrenceRule: "FREQ=HOURLY;BYHOUR=10;BYMINUTE=20,40"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
@@ -136,7 +136,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 10, 0),
                     end: new Date(2000, 10, 10, 11, 0),
-                    recurrence: "FREQ=HOURLY;BYHOUR=10;BYMINUTE=20,40;BYSECOND=30"
+                    recurrenceRule: "FREQ=HOURLY;BYHOUR=10;BYMINUTE=20,40;BYSECOND=30"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
@@ -155,7 +155,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
-                    recurrence: "FREQ=HOURLY;BYDAY=WE"
+                    recurrenceRule: "FREQ=HOURLY;BYDAY=WE"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15, 1, 30));
@@ -174,7 +174,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
-                    recurrence: "FREQ=HOURLY;BYDAY=WE;BYHOUR=8,10"
+                    recurrenceRule: "FREQ=HOURLY;BYDAY=WE;BYHOUR=8,10"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15, 10, 0));
@@ -193,7 +193,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
-                    recurrence: "FREQ=HOURLY;BYMONTHDAY=15"
+                    recurrenceRule: "FREQ=HOURLY;BYMONTHDAY=15"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15, 0, 30));
@@ -209,7 +209,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
-                    recurrence: "FREQ=HOURLY;BYMONTHDAY=15;BYHOUR=8,10"
+                    recurrenceRule: "FREQ=HOURLY;BYMONTHDAY=15;BYHOUR=8,10"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15, 10, 0));
@@ -228,7 +228,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
-                    recurrence: "FREQ=HOURLY;BYMONTH=6"
+                    recurrenceRule: "FREQ=HOURLY;BYMONTH=6"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 5, 1, 0, 30));
@@ -244,7 +244,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
-                    recurrence: "FREQ=HOURLY;BYYEARDAY=135;BYHOUR=8,10"
+                    recurrenceRule: "FREQ=HOURLY;BYYEARDAY=135;BYHOUR=8,10"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15, 10, 0));
@@ -264,7 +264,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY"
+                    recurrenceRule: "FREQ=DAILY"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17));
@@ -279,7 +279,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY"
+                    recurrenceRule: "FREQ=DAILY"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16, 17));
@@ -298,7 +298,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;INTERVAL=2"
+                    recurrenceRule: "FREQ=DAILY;INTERVAL=2"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16, 17));
@@ -318,7 +318,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;COUNT=2"
+                    recurrenceRule: "FREQ=DAILY;COUNT=2"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
@@ -335,7 +335,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 9, 16, 30),
                     end: new Date(2000, 10, 9, 17, 0),
-                    recurrence: "FREQ=DAILY;UNTIL=20001111T090000"
+                    recurrenceRule: "FREQ=DAILY;UNTIL=20001111T090000"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
@@ -351,7 +351,7 @@
                     uid: "id",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "UNTIL=20001111T090000"
+                    recurrenceRule: "UNTIL=20001111T090000"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
@@ -365,7 +365,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;UNTIL=20001111T090000"
+                    recurrenceRule: "FREQ=DAILY;UNTIL=20001111T090000"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 9, 12), new Date(2000, 9, 16));
@@ -379,7 +379,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYMONTH=11"
+                    recurrenceRule: "FREQ=DAILY;BYMONTH=11"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 30), new Date(2000, 11, 1, 17));
@@ -395,7 +395,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYMONTHDAY=10,13,15"
+                    recurrenceRule: "FREQ=DAILY;BYMONTHDAY=10,13,15"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
@@ -415,7 +415,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYMONTHDAY=-3,10"
+                    recurrenceRule: "FREQ=DAILY;BYMONTHDAY=-3,10"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 1), new Date(2013, 4, 30));
@@ -432,7 +432,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYDAY=SU, MO"
+                    recurrenceRule: "FREQ=DAILY;BYDAY=SU, MO"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 13, 17));
@@ -452,7 +452,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYDAY=3FR"
+                    recurrenceRule: "FREQ=DAILY;BYDAY=3FR"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 13));
@@ -466,7 +466,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYDAY=3TH"
+                    recurrenceRule: "FREQ=DAILY;BYDAY=3TH"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10), new Date(2013, 4, 17));
@@ -482,7 +482,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYDAY=-3FR"
+                    recurrenceRule: "FREQ=DAILY;BYDAY=-3FR"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10), new Date(2013, 4, 24));
@@ -499,7 +499,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYDAY=5FR"
+                    recurrenceRule: "FREQ=DAILY;BYDAY=5FR"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10), new Date(2013, 4, 24));
@@ -513,7 +513,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;INTERVAL=2"
+                    recurrenceRule: "FREQ=DAILY;INTERVAL=2"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10), new Date(2013, 4, 17));
@@ -526,7 +526,7 @@
                     title: "Title",
                     start: new Date(2013, 4, 17, 16, 30),
                     end: new Date(2013, 4, 17, 17, 0),
-                    recurrence: "FREQ=DAILY;BYDAY=TU,TH;INTERVAL=2;"
+                    recurrenceRule: "FREQ=DAILY;BYDAY=TU,TH;INTERVAL=2;"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 17), new Date(2013, 5, 8));
@@ -551,7 +551,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYMONTH=6;BYDAY=TU,TH"
+                    recurrenceRule: "FREQ=DAILY;BYMONTH=6;BYDAY=TU,TH"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 24), new Date(2013, 6, 10, 17));
@@ -571,7 +571,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYHOUR=8,18"
+                    recurrenceRule: "FREQ=DAILY;BYHOUR=8,18"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 11, 17));
@@ -591,7 +591,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYHOUR=8;BYMINUTE=15,45"
+                    recurrenceRule: "FREQ=DAILY;BYHOUR=8;BYMINUTE=15,45"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 11, 17));
@@ -611,7 +611,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYHOUR=16;BYMINUTE=15,45"
+                    recurrenceRule: "FREQ=DAILY;BYHOUR=16;BYMINUTE=15,45"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 17));
@@ -628,7 +628,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYHOUR=16;BYMINUTE=15"
+                    recurrenceRule: "FREQ=DAILY;BYHOUR=16;BYMINUTE=15"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 11, 17));
@@ -645,7 +645,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYMINUTE=15"
+                    recurrenceRule: "FREQ=DAILY;BYMINUTE=15"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 19));
@@ -665,7 +665,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYHOUR=17;BYMINUTE=20,40"
+                    recurrenceRule: "FREQ=DAILY;BYHOUR=17;BYMINUTE=20,40"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 17, 50));
@@ -685,7 +685,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYSECOND=20,40"
+                    recurrenceRule: "FREQ=DAILY;BYSECOND=20,40"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 16, 31));
@@ -705,7 +705,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30, 40),
                     end: new Date(2000, 5, 10, 17, 0, 40),
-                    recurrence: "FREQ=DAILY;BYMINUTE=40;BYSECOND=40"
+                    recurrenceRule: "FREQ=DAILY;BYMINUTE=40;BYSECOND=40"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 16, 50));
@@ -722,7 +722,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30, 40),
                     end: new Date(2000, 5, 10, 17, 0, 40),
-                    recurrence: "FREQ=DAILY;BYMINUTE=40;BYSECOND=20,40"
+                    recurrenceRule: "FREQ=DAILY;BYMINUTE=40;BYSECOND=20,40"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 16, 50));
@@ -742,7 +742,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=DAILY;BYDAY=TU;BYHOUR=10, 12"
+                    recurrenceRule: "FREQ=DAILY;BYDAY=TU;BYHOUR=10, 12"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 11, 16, 50));
@@ -762,7 +762,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 10, 30),
                     end: new Date(2000, 5, 10, 11, 0),
-                    recurrence: "FREQ=DAILY;BYHOUR=10,12,16,18,20;BYSETPOS=1,3,5"
+                    recurrenceRule: "FREQ=DAILY;BYHOUR=10,12,16,18,20;BYSETPOS=1,3,5"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 23));
@@ -785,7 +785,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 3, 16, 30),
                     end: new Date(2013, 0, 3, 17, 0),
-                    recurrence: "FREQ=DAILY"
+                    recurrenceRule: "FREQ=DAILY"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 0, 4, 17));
@@ -800,7 +800,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY"
+                    recurrenceRule: "FREQ=WEEKLY"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 11, 10));
@@ -826,7 +826,7 @@
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=SU,MO"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=SU,MO"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 25));
@@ -851,7 +851,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
@@ -873,7 +873,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=3"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=3"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
@@ -886,7 +886,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2;COUNT=1"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2;COUNT=1"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
@@ -902,7 +902,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2;COUNT=5"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2;COUNT=5"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2014, 10, 27));
@@ -916,7 +916,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2;UNTIL=20131126T000000"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2;UNTIL=20131126T000000"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
@@ -930,7 +930,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2010, 10, 10), new Date(2010, 10, 27));
@@ -944,7 +944,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 25, 16, 30),
                     end: new Date(2013, 10, 25, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=TU,FR"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 27), new Date(2013, 10, 30));
@@ -960,7 +960,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 25, 16, 30),
                     end: new Date(2013, 10, 25, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=TU,FR;BYMONTH=12;INTERVAL=2"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;BYMONTH=12;INTERVAL=2"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 27), new Date(2014, 0, 1));
@@ -974,7 +974,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 25, 16, 30),
                     end: new Date(2013, 10, 25, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=FR;BYMONTH=11, 12"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=FR;BYMONTH=11, 12"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 27), new Date(2014, 0, 1));
@@ -988,7 +988,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=5FR,-3TU"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=5FR,-3TU"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 11, 1));
@@ -1008,7 +1008,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 16));
@@ -1028,7 +1028,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 16));
@@ -1048,7 +1048,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20;BYSECOND=30"
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20;BYSECOND=30"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 16));
@@ -1069,7 +1069,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=MONTHLY"
+                    recurrenceRule: "FREQ=MONTHLY"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 9, 10, 17));
@@ -1095,7 +1095,7 @@
                     title: "Title",
                     start: new Date(2000, 0, 31, 16, 30),
                     end: new Date(2000, 0, 31, 17, 0),
-                    recurrence: "FREQ=MONTHLY"
+                    recurrenceRule: "FREQ=MONTHLY"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 0, 10), new Date(2000, 5, 10, 17));
@@ -1113,7 +1113,7 @@
                     title: "Title",
                     start: new Date(2000, 0, 31, 16, 30),
                     end: new Date(2000, 0, 31, 17, 0),
-                    recurrence: "FREQ=MONTHLY"
+                    recurrenceRule: "FREQ=MONTHLY"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 0, 10), new Date(2000, 5, 10, 17));
@@ -1129,7 +1129,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=MONTHLY;BYMONTH=6,8,10"
+                    recurrenceRule: "FREQ=MONTHLY;BYMONTH=6,8,10"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 9, 10, 17));
@@ -1149,7 +1149,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=MONTHLY;BYMONTH=12"
+                    recurrenceRule: "FREQ=MONTHLY;BYMONTH=12"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 9, 10, 17));
@@ -1162,7 +1162,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=MONTHLY;BYMONTHDAY=6,10"
+                    recurrenceRule: "FREQ=MONTHLY;BYMONTHDAY=6,10"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 6, 10, 17));
@@ -1182,7 +1182,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=MONTHLY;BYDAY=MO,WE"
+                    recurrenceRule: "FREQ=MONTHLY;BYDAY=MO,WE"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 6, 10, 17));
@@ -1205,7 +1205,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=MONTHLY;BYMONTHDAY=13,23,25;BYDAY=TU,TH"
+                    recurrenceRule: "FREQ=MONTHLY;BYMONTHDAY=13,23,25;BYDAY=TU,TH"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 6, 10, 17));
@@ -1225,7 +1225,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=MONTHLY;BYMONTH=6;BYDAY=TU,TH"
+                    recurrenceRule: "FREQ=MONTHLY;BYMONTH=6;BYDAY=TU,TH"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 24), new Date(2013, 6, 10, 17));
@@ -1245,7 +1245,7 @@
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
-                    recurrence: "FREQ=MONTHLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20;BYSECOND=30"
+                    recurrenceRule: "FREQ=MONTHLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20;BYSECOND=30"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 16));
@@ -1266,7 +1266,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=YEARLY"
+                    recurrenceRule: "FREQ=YEARLY"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2002, 9, 10, 17));
@@ -1286,7 +1286,7 @@
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYMONTH=12"
+                    recurrenceRule: "FREQ=YEARLY;BYMONTH=12"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2002, 11, 10, 17));
@@ -1309,7 +1309,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 10, 16, 30),
                     end: new Date(2013, 0, 10, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYWEEKNO=10;WKST=MO"
+                    recurrenceRule: "FREQ=YEARLY;BYWEEKNO=10;WKST=MO"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 10), new Date(2013, 11, 10, 17));
@@ -1328,7 +1328,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYYEARDAY=10,100,200"
+                    recurrenceRule: "FREQ=YEARLY;BYYEARDAY=10,100,200"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
@@ -1350,7 +1350,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYYEARDAY=10, -100"
+                    recurrenceRule: "FREQ=YEARLY;BYYEARDAY=10, -100"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
@@ -1369,7 +1369,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYMONTHDAY=31"
+                    recurrenceRule: "FREQ=YEARLY;BYMONTHDAY=31"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
@@ -1388,7 +1388,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYDAY=TH"
+                    recurrenceRule: "FREQ=YEARLY;BYDAY=TH"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 1), new Date(2013, 4, 31, 17));
@@ -1407,7 +1407,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYWEEKNO=-10;WKST=MO"
+                    recurrenceRule: "FREQ=YEARLY;BYWEEKNO=-10;WKST=MO"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
@@ -1426,7 +1426,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYMONTH=3;BYWEEKNO=10;WKST=MO"
+                    recurrenceRule: "FREQ=YEARLY;BYMONTH=3;BYWEEKNO=10;WKST=MO"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
@@ -1445,7 +1445,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYMONTH=3;BYYEARDAY=200"
+                    recurrenceRule: "FREQ=YEARLY;BYMONTH=3;BYYEARDAY=200"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
@@ -1458,7 +1458,7 @@
                     title: "Title",
                     start: new Date(2012, 0, 1, 16, 30),
                     end: new Date(2012, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYMONTH=2;BYYEARDAY=60"
+                    recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYYEARDAY=60"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2012, 4, 31, 17));
@@ -1474,7 +1474,7 @@
                     title: "Title",
                     start: new Date(2012, 0, 1, 16, 30),
                     end: new Date(2012, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29"
+                    recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
@@ -1490,7 +1490,7 @@
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYMONTH=2;BYDAY=WE"
+                    recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYDAY=WE"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
@@ -1509,7 +1509,7 @@
                     title: "Title",
                     start: new Date(2012, 0, 1, 16, 30),
                     end: new Date(2012, 0, 1, 17, 0),
-                    recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
+                    recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
@@ -1530,14 +1530,14 @@
                         title: "Title",
                         start: new Date(2013, 0, 1, 16, 30),
                         end: new Date(2013, 0, 1, 17, 0),
-                        recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
                     }),
                     new SchedulerEvent({
                         id: "id2",
                         title: "Title",
                         start: new Date(2013, 0, 1, 10, 30),
                         end: new Date(2013, 0, 1, 11, 30),
-                        recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
                     })];
 
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
@@ -1567,14 +1567,14 @@
                         title: "Title",
                         start: new Date(2012, 0, 1, 16, 30),
                         end: new Date(2012, 0, 1, 17, 0),
-                        recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
                     }),
                     new SchedulerEvent({
                         id: "Test2",
                         title: "Title",
                         start: new Date(2012, 0, 1, 10, 30),
                         end: new Date(2012, 0, 1, 11, 30),
-                        recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
                     })];
 
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
@@ -1600,14 +1600,14 @@
                         title: "Title",
                         start: new Date(2012, 0, 1, 16, 30),
                         end: new Date(2012, 0, 1, 17, 0),
-                        recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
                     },
                     {
                         id: "Test2",
                         title: "Title",
                         start: new Date(2012, 0, 1, 10, 30),
                         end: new Date(2012, 0, 1, 11, 30),
-                        recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
                     }];
 
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
@@ -1666,7 +1666,7 @@
                         title: "Title",
                         start: new Date(2012, 0, 1, 10, 30),
                         end: new Date(2012, 0, 1, 11, 30),
-                        recurrence: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
                     },
                     {
                         uid: "id",
@@ -1705,8 +1705,8 @@
                     title: "Title",
                     start: new Date(2012, 0, 1, 10, 30),
                     end: new Date(2012, 0, 1, 11, 30),
-                    recurrence: "FREQ=DAILY",
-                    exception: exception
+                    recurrenceRule: "FREQ=DAILY",
+                    recurrenceException: exception
                 };
 
                 var events = occurrences(events, new Date(2013, 0, 1), new Date(2013, 0, 5, 17));
@@ -1737,8 +1737,8 @@
                     title: "Title",
                     start: new Date(2013, 0, 1, 10, 30),
                     end: new Date(2013, 0, 1, 11, 30),
-                    recurrence: "FREQ=DAILY",
-                    exception: exception
+                    recurrenceRule: "FREQ=DAILY",
+                    recurrenceException: exception
                 }]
 
                 events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 0, 3, 17));

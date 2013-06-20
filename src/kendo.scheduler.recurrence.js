@@ -684,10 +684,10 @@ kendo_module({
     }
 
     function expand(event, start, end) { //, tz) {
-        var rule = parseRule(event.recurrence),
+        var rule = parseRule(event.recurrenceRule),
             eventStartMS = +event.start,
             durationMS = event.end - eventStartMS,
-            exceptionDates = parseExceptions(event.exception),
+            exceptionDates = parseExceptions(event.recurrenceException),
             idField = event.idField,
             id = event[idField] || event.id,
             current = 1,
@@ -700,7 +700,7 @@ kendo_module({
         if (event.toJSON) {
             event = event.toJSON();
 
-            delete event.recurrence;
+            delete event.recurrenceRule;
             delete event[idField];
             delete event.id;
         }
@@ -774,6 +774,7 @@ kendo_module({
         var length = events.length,
             idx = 0, event, result,
             resultLength, skip,
+            isInException,
             eventStartMS;
 
         for (; idx < length; idx++) {
@@ -784,8 +785,9 @@ kendo_module({
 
             if (resultLength) {
                 eventStartMS = event.start.getTime();
+                isInException = event.recurrenceException && eventStartMS !== result[0].start.getTime();
 
-                if (eventStartMS < start || (event.exception && eventStartMS !== result[0].start.getTime())) {
+                if (eventStartMS < start || isInException) {
                     resultLength -= 1;
                     skip = true;
                 }
