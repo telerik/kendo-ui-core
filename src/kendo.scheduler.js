@@ -64,15 +64,15 @@ kendo_module({
             '</ul>' +
             '</div>'),
         DATERANGEEDITOR = function(container, options) {
+            var attr = { name: options.field };
+
+            appendDateCompareValidator(attr, options);
+
             $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' ' + kendo.attr("role") + '="datetimepicker" ' + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
-            .attr({
-                name: options.field
-            }).appendTo(container);
+            .attr(attr).appendTo(container);
 
             $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' '  + kendo.attr("role") + '="datepicker" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
-            .attr({
-                name: options.field
-            }).appendTo(container);
+            .attr(attr).appendTo(container);
 
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
@@ -86,6 +86,17 @@ kendo_module({
                     start: options.model.start
                 });
         };
+
+    function appendDateCompareValidator(attrs, options) {
+        var validationRules = options.model.fields[options.field].validation;
+
+        if (validationRules) {
+            var dateCompareRule = validationRules.dateCompare;
+            if (dateCompareRule && isPlainObject(dateCompareRule) && dateCompareRule.message) {
+                attrs[kendo.attr("dateCompare-msg")] = dateCompareRule.message;
+            }
+        }
+    }
 
     function wrapDataAccess(originalFunction, timezone) {
         return function(data) {
@@ -187,6 +198,24 @@ kendo_module({
         }
     });
 
+    function dateCompareValidator(input) {
+        if (input.filter("[name=end]").length) {
+            var container = input.closest(".k-scheduler-edit-form");
+            var startInput = container.find("[name=start]:visible");
+            var endInput = container.find("[name=end]:visible");
+
+            if (endInput.length && startInput.length) {
+                var startPicker = kendo.widgetInstance(startInput, kendo.ui);
+                var endPicker = kendo.widgetInstance(endInput, kendo.ui);
+
+                if (startPicker && endPicker) {
+                    return startPicker.value() <= endPicker.value();
+                }
+            }
+        }
+        return true;
+    }
+
     var SchedulerEvent = kendo.data.Model.define({
         init: function(value) {
             var that = this;
@@ -203,7 +232,7 @@ kendo_module({
         fields: {
             title: { defaultValue: "", type: "string" },
             start: { type: "date", validation: { required: true } },
-            end: { type: "date", validation: { required: true } },
+            end: { type: "date", validation: { required: true, dateCompare: { value: dateCompareValidator, message: "End date should be greater than or equal to the start date"}} },
             recurrence: { defaultValue: "", type: "string" },
             isAllDay: { type: "boolean", defaultValue: false },
             description: { type: "string" }

@@ -135,11 +135,18 @@ kendo_module({
 
     function addValidationRules(modelField, rules) {
         var validation = modelField ? (modelField.validation || {}) : {},
-            rule;
+            rule,
+            descriptor;
 
         for (rule in validation) {
-            if (isFunction(validation[rule])) {
-                rules[rule] = validation[rule];
+            descriptor = validation[rule];
+
+            if (isPlainObject(descriptor) && descriptor.value) {
+                descriptor = descriptor.value;
+            }
+
+            if (isFunction(descriptor)) {
+                rules[rule] = descriptor;
             }
         }
     }
