@@ -85,7 +85,7 @@ kendo_module({
                 autoUpload: true
             },
             localization: {
-                "select": "Select...",
+                "select": "Select files...",
                 "cancel": "Cancel",
                 "retry": "Retry",
                 "remove": "Remove",
@@ -231,15 +231,15 @@ kendo_module({
         },
 
         _enqueueFile: function(name, data) {
-            var that = this,
-                existingFileEntries,
-                fileEntry,
-                fileList =  $(".k-upload-files", that.wrapper),
-                options = that.options,
-                template = options.template,
-                templateData,
-                stateIcon,
-                progressBar;
+            var that = this;
+            var existingFileEntries;
+            var fileEntry;
+            var fileList =  $(".k-upload-files", that.wrapper);
+            var options = that.options;
+            var template = options.template;
+            var templateData;
+            var stateIcon;
+            var progressBar;
 
             if (fileList.length === 0) {
                 fileList = $("<ul class='k-upload-files k-reset'></ul>").appendTo(that.wrapper);
@@ -253,10 +253,10 @@ kendo_module({
             if (!template) {
                 fileEntry = $("<li class='k-file'><span class='k-filename' title='" + name + "'>" + name + "</span></li>");
             } else {
-                var templateData = that._prepareTemplateData(name, data);
+                templateData = that._prepareTemplateData(name, data);
                 template = kendo.template(template);
 
-                fileEntry = $("<li class='k-file'><span class='k-filename' title='" + name + "'>" + template(templateData) + "</span></li>");
+                fileEntry = $("<li class='k-file'>" + template(templateData) + "</li>");
                 fileEntry.find(".k-upload-action").addClass("k-button k-button-icontext");
 
                 progressBar = $(".k-progress", fileEntry);
@@ -410,7 +410,7 @@ kendo_module({
             var progressBar;
 
             if (!this.options.template) {
-                progressBar = $(".k-progress-status", e.target)
+                progressBar = $(".k-progress-status", e.target);
                 if (progressBar.length === 0) {
                     progressBar =
                         $("<span class='k-progress'><span class='k-state-selected k-progress-status' style='width: 0;'></span></span>")
@@ -421,13 +421,10 @@ kendo_module({
                 progressBar.width(percentComplete + "%");
             } else {
                 progressBar = $(".k-progress", e.target);
-                if (progressBar.length > 0) {
-                    if (progressBar.is(':empty')) {
-                        progressBar.append("<span class='k-state-selected k-progress-status' style='width: 0;'></span>");
-                    }
-                    progressBar = $(".k-progress-status", e.target);
-                    progressBar.width(percentComplete + "%");
+                if (progressBar.is(':empty')) {
+                    progressBar.append("<span class='k-state-selected k-progress-status' style='width: 0;'></span>");
                 }
+                $(".k-progress-status", e.target).width(percentComplete + "%");
             }
 
             this.trigger(PROGRESS, {
@@ -988,7 +985,7 @@ kendo_module({
         onRemove: function(e, data) {
             var fileEntry = getFileEntry(e);
 
-            if (fileEntry.children(".k-icon").is(".k-success")) {
+            if (fileEntry.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").is(".k-success")) {
                 removeUploadedFile(fileEntry, this.upload, data);
             } else {
                 this.removeFileEntry(fileEntry);
@@ -1068,7 +1065,7 @@ kendo_module({
                 $.each(relatedInput.data("relatedFileEntries") || [], function() {
                     // Exclude removed file entries and self
                     if (this.parent().length > 0 && this[0] != fileEntry[0]) {
-                        uploadComplete = uploadComplete && this.children(".k-icon").is(".k-success");
+                        uploadComplete = uploadComplete && this.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").is(".k-success");
                     }
                 });
 
@@ -1226,7 +1223,7 @@ kendo_module({
     }
 
     function isFileUploadStarted(fileEntry) {
-        return fileEntry.children(".k-icon").is(".k-loading, .k-success, .k-fail");
+        return fileEntry.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").is(".k-loading, .k-success, .k-fail");
     }
 
     function getFileEntry(e) {
