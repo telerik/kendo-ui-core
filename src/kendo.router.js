@@ -226,7 +226,7 @@ kendo_module({
         init: function(options) {
             Observable.fn.init.call(this);
             this.routes = [];
-            this.pushState = options.pushState;
+            this.pushState = options ? options.pushState : false;
             this.bind([INIT, ROUTE_MISSING, CHANGE], options);
         },
 
