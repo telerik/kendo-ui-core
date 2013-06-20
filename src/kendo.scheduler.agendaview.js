@@ -204,7 +204,7 @@ kendo_module({
                                '<span class="k-icon k-i-refresh"></span>' +
                                "# } #" +
                                '#:title#' +
-                               '<a href="\\#" class="k-link"><span class="k-icon k-i-close"></span></a>' +
+                               '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
                            '</div>',
             eventTimeTemplate: "#if(data.isAllDay) {#" +
                             "all day" +
