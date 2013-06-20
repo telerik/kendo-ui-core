@@ -134,7 +134,7 @@
         ///                 source.Read(read =&gt;
         ///                 {
         ///                     read.Action("Read", "Scheduler");
-        ///                 }
+        ///                 });
         ///             })
         /// %&gt;
         /// </code>
