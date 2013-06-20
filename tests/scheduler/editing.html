@@ -475,10 +475,10 @@
                 ok(!elements.filter("[data-container-for=recurrence]").length);
             });
 
-            test("recurrence editor is rendered if recurrence property exists", function() {
+            test("recurrence editor is rendered if recurrenceRule property exists", function() {
                 var scheduler = setup({
                     dataSource: {
-                        data: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event", recurrence: ""} ]
+                        data: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event", recurrenceRule: ""} ]
                     }
                 });
 
@@ -487,7 +487,7 @@
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 var elements = container.children("div");
 
-                ok(elements.filter("[data-container-for=recurrence]").length);
+                ok(elements.filter("[data-container-for=recurrenceRule]").length);
             });
 
             module("recurrence editing", {
@@ -504,7 +504,7 @@
                 var scheduler = setup({
                     views: ["week"],
                     dataSource: {
-                        data: [ { start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                        data: [ { start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
                     }
                 });
 
@@ -519,7 +519,7 @@
                 var scheduler = setup({
                     views: ["week"],
                     dataSource: {
-                        data: [ { start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                        data: [ { start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
                     }
                 });
 
@@ -541,7 +541,7 @@
                 var scheduler = setup({
                     views: ["week"],
                     dataSource: {
-                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
                     }
                 });
 
@@ -563,7 +563,7 @@
                 var scheduler = setup({
                     views: ["week"],
                     dataSource: {
-                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
                     }
                 });
 
@@ -584,7 +584,7 @@
                 var scheduler = setup({
                     views: ["week"],
                     dataSource: {
-                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
                     }
                 });
 
@@ -611,7 +611,7 @@
                 var scheduler = setup({
                     views: ["week"],
                     dataSource: {
-                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrence: "FREQ=DAILY"} ]
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
                     }
                 });
 

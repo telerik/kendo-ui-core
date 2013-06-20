@@ -757,7 +757,9 @@ kendo_module({
                         id = model.id;
                         idField = model.idField;
 
-                        model = model.toJSON();
+                        if (model.toJSON) {
+                            model = model.toJSON();
+                        }
 
                         delete model[idField];
                         delete model.recurrenceRule;
