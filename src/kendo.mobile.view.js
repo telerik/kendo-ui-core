@@ -278,6 +278,7 @@ kendo_module({
                 content: elementClone.children(roleSelector("content")),
                 footer: elementClone.children(roleSelector("footer")),
                 transition: view.transition,
+                options: { defaultTransition: view.options.defaultTransition },
                 params: JSON.stringify(view.params),
                 id: view.id
             });
