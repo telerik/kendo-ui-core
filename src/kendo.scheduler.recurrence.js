@@ -684,14 +684,16 @@ kendo_module({
     }
 
     function expand(event, start, end) { //, tz) {
-        var rule = parseRule(event.recurrenceRule),
-            eventStartMS = +event.start,
+        var eventStart = event.start,
+            eventStartMS = eventStart.getTime(),
             durationMS = event.end - eventStartMS,
+            rule = parseRule(event.recurrenceRule),
             exceptionDates = parseExceptions(event.recurrenceException),
             idField = event.idField,
             id = event[idField] || event.id,
             current = 1,
             events = [],
+            periodStart,
             eventEnd,
             first,
             count,
@@ -707,7 +709,7 @@ kendo_module({
 
         //convert start from tzid to UTC
 
-        start = new Date(start);
+        periodStart = start = new Date(start);
         end = new Date(end);
 
         if (!rule || event.start > end) {
@@ -721,24 +723,24 @@ kendo_module({
             end = new Date(rule.until);
         }
 
-        if (start < event.start) {
-            start = new Date(event.start);
+        if (start < eventStartMS || (count && start > eventStartMS)) {
+            start = new Date(eventStartMS);
         } else {
             //TODO: if event.start is in the same day as start then set hour
-            start.setHours(event.start.getHours());
-            start.setMinutes(event.start.getMinutes());
-            start.setSeconds(event.start.getSeconds());
-            start.setMilliseconds(event.start.getMilliseconds());
+            start.setHours(eventStart.getHours());
+            start.setMinutes(eventStart.getMinutes());
+            start.setSeconds(eventStart.getSeconds());
+            start.setMilliseconds(eventStart.getMilliseconds());
         }
 
         if (freq.setup) {
-            freq.setup(rule, start, event.start);
+            freq.setup(rule, start, eventStart);
         }
 
         freq.limit(start, end, rule);
 
         while (start <= end) {
-            if (!exceptionExists(exceptionDates, start)) {
+            if (start >= periodStart && !exceptionExists(exceptionDates, start)) {
                 //TODO: DST check
                 eventEnd = new Date(start.getTime() + durationMS);
                 events.push($.extend({}, event, {

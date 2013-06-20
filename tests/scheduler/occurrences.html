@@ -329,6 +329,20 @@
                 equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });
 
+            test("DAILY occurrences with COUNT return empty array", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    recurrenceRule: "FREQ=DAILY;COUNT=2"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2000, 10, 14), new Date(2000, 10, 16));
+
+                equal(events.length, 0);
+            });
+
             test("DAILY occurrences method honours UNTIL", function() {
                 var schedulerEvent = {
                     uid: "id",
