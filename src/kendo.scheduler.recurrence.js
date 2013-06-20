@@ -702,6 +702,7 @@ kendo_module({
 
             delete event.recurrence;
             delete event[idField];
+            delete event.id;
         }
 
         //convert start from tzid to UTC
@@ -1551,7 +1552,7 @@ kendo_module({
                 options = that.options,
                 frequencies = options.frequencies,
                 messages = options.messages.frequencies,
-                ddl = $('<input name="freq" />'),
+                ddl = $('<input />'),
                 frequency;
 
             frequencies = $.map(frequencies, function(frequency) {

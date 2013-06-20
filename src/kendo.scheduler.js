@@ -500,6 +500,8 @@ kendo_module({
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
 
+                //TODO: remove all exceptions if modify recurrence option
+
                 that.dataSource.sync();
             }
         },
@@ -511,6 +513,10 @@ kendo_module({
 
             if (container) {
                 model = that._modelForContainer(container);
+
+                if (model.recurrenceId) {
+                    that._removeExceptionDate(model);
+                }
 
                 that.dataSource.cancelChanges(model);
 
@@ -526,7 +532,7 @@ kendo_module({
 
             that.cancelEvent();
 
-            if (!model || model.recurrence) {
+            if (!model || model.recurrence || (model.id && model.recurrenceId)) {
                 that._editRecurringDialog(model, uid);
             } else {
                 that._editEvent(model);
@@ -612,7 +618,7 @@ kendo_module({
                 }
                 html += (kendo.template(template, settings))(model);
             } else {
-                if ("recurrence" in model) {
+                if (!model.recurrenceId) {
                     fields.push({ field: "recurrence", title: "Repeat", editor: RECURRENCEEDITOR });
                 }
 
@@ -696,16 +702,13 @@ kendo_module({
             var that = this,
                 isException = !model,
                 wnd = $('<div><button>Edit current occurrence</button><button>Edit the series</button></div>'),
-                buttons = wnd.find("button"),
-                origin;
+                buttons = wnd.find("button");
 
             if (isException) {
                 model = getOccurrenceByUid(that._data, uid);
                 if (!model) {
                     return;
                 }
-
-                origin = that.dataSource.get(model.recurrenceId);
             }
 
             if (model) {
@@ -714,15 +717,17 @@ kendo_module({
                     resizable: false,
                     draggable: true,
                     title: "Edit Recurring Item",
-                    visible: false
+                    visible: false,
+                    close: function() {
+                        that._recurringDialog.destroy();
+                    }
                 }).data("kendoWindow");
 
                 buttons.eq(0).on("click", function() {
-                    that._recurringDialog.destroy();
-                    that._recurringDialog = null;
+                    that._recurringDialog.close();
 
                     if (isException) {
-                        that._addExceptionDate(origin, model.start);
+                        that._addExceptionDate(model);
                         that.addEvent(model);
                     } else {
                         that._editEvent(model);
@@ -730,24 +735,42 @@ kendo_module({
                 });
 
                 buttons.eq(1).on("click", function() {
-                    that._recurringDialog.destroy();
-                    that._recurringDialog = null;
+                    var origin = that.dataSource.get(model.recurrenceId);
 
-                    that._editEvent(model.recurrenceId ? origin : model);
+                    if (origin) {
+                        model = origin;
+                    }
+
+                    that._recurringDialog.close();
+                    that._editEvent(model);
                 });
 
                 that._recurringDialog.center().open();
             }
         },
 
-        _addExceptionDate: function(model, date) {
-            var exception = model.exception || "";
+        _addExceptionDate: function(model) {
+            var origin = this.dataSource.get(model.recurrenceId),
+                exception = origin.exception || "",
+                date = model.start;
 
             if (!recurrence.exceptionExists(exception, date)) {
                 date = kendo.timezone.apply(date, 0);
                 exception += kendo.toString(date, RECURRENCE_DATE_FORMAT) + ";";
 
-                model.set("exception", exception);
+                origin.set("exception", exception);
+            }
+        },
+
+        _removeExceptionDate: function(model) {
+            var origin = this.dataSource.get(model.recurrenceId),
+                start = kendo.timezone.apply(model.start, 0),
+                exceptionDate, exception;
+
+            if (origin) {
+                exceptionDate = kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
+                exception = origin.exception.replace(exceptionDate, "");
+                origin.set("exception", exception);
             }
         },
 
@@ -772,7 +795,7 @@ kendo_module({
             var model = typeof uid == "string" ? this.dataSource.getByUid(uid) : uid,
                 that = this;
 
-            if (!model || model.recurrence) {
+            if (!model || model.recurrence || (model.id && model.recurrenceId)) {
                 that._deleteRecurringDialog(model, uid);
             } else {
                 that._removeEvent(model);
@@ -802,8 +825,6 @@ kendo_module({
                 if (!model) {
                     return;
                 }
-
-                origin = that.dataSource.get(model.recurrenceId);
             }
 
             if (model) {
@@ -820,17 +841,25 @@ kendo_module({
                     that._recurringDialog = null;
 
                     if (isException) {
-                        that._addExceptionDate(origin, model.start);
+                        that._addExceptionDate(model);
+                        that.dataSource.sync();
+
                     } else {
                         that._removeEvent(model);
                     }
                 });
 
                 buttons.eq(1).on("click", function() {
+                    var origin = that.dataSource.get(model.recurrenceId);
+
                     that._recurringDialog.destroy();
                     that._recurringDialog = null;
 
-                    that._removeEvent(model.recurrenceId ? origin : model);
+                    if (origin) {
+                        model = origin;
+                    }
+
+                    that._removeEvent(model);
                 });
 
                 that._recurringDialog.center().open();
