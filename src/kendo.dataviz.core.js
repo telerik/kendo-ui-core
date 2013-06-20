@@ -1181,10 +1181,10 @@ kendo_module({
                 item = notes[i];
                 note = new Note(item);
                 if (note.options.visible) {
-                    if (!defined(note.options.position)) {
+                    if (defined(note.options.position)) {
                         if (options.vertical && !inArray(note.options.position, [LEFT, RIGHT])) {
                             note.options.position = options.reverse ? LEFT : RIGHT;
-                        } else if (!inArray(note.options.position, [TOP, BOTTOM])) {
+                        } else if (!options.vertical && !inArray(note.options.position, [TOP, BOTTOM])) {
                             note.options.position = options.reverse ? BOTTOM : TOP;
                         }
                     } else {
@@ -1538,7 +1538,7 @@ kendo_module({
                 if (value) {
                     slot = axis.getSlot(value);
                 }
-                item.reflow(slot || axis.box);
+                item.reflow(slot || axis.lineBox());
             }
         },
 
@@ -1577,20 +1577,24 @@ kendo_module({
                     width: 2
                 },
                 background: "red",
-                padding: 3,
+                padding: getSpacing(3),
                 size: 3,
-                zIndex: 1
+                zIndex: 1,
+                visible: true
             },
             label: {
-                align: CENTER,
-                vAlign: CENTER,
                 zIndex: 2,
-                position: INSIDE
+                position: INSIDE,
+                visible: true,
+                align: CENTER,
+                vAlign: CENTER
             },
             connector: {
                 distance: 10,
-                color: "red",
-                width: 1
+                color: "green",
+                width: 1,
+                visible: true,
+                zIndex: 2
             },
             visible: true
         },
@@ -1601,7 +1605,8 @@ kendo_module({
                 label = options.label,
                 icon = options.icon,
                 size = icon.size,
-                marker, width, height;
+                marker, width, height,
+                box = Box2D();
 
             if (defined(label) && label.visible) {
                 note.label = new TextBox(label.text, label);
@@ -1615,6 +1620,7 @@ kendo_module({
                         height = note.label.box.height();
                     }
                 }
+                box.wrap(note.label.box);
             }
 
             icon.width = width || size;
@@ -1624,14 +1630,25 @@ kendo_module({
 
             note.marker = marker;
             note.append(marker);
+            marker.reflow(Box2D());
+            box.wrap(marker.box);
+            note.wrapperBox = box;
         },
 
         createConnector: function(view) {
             var note = this,
                 connector = note.options.connector;
 
+            if (!note.connectorPoints) {
+                return;
+            }
+
             return [
-                view.createPolyline(note.connectorPoints, false, connector)
+                view.createPolyline(note.connectorPoints, false, {
+                    stroke: connector.color,
+                    strokeWidth: connector.width,
+                    zIndex: connector.zIndex
+                })
             ];
         },
 
@@ -1640,8 +1657,9 @@ kendo_module({
                 options = note.options,
                 center = targetBox.center(),
                 icon = options.icon,
-                halfWidth = icon.width / 2,
-                halfHeight = icon.height / 2,
+                wrapperBox = note.wrapperBox,
+                width = wrapperBox.width(),
+                height = wrapperBox.height(),
                 dir = inArray(options.position, [TOP, LEFT]) ? 1 : 2,
                 distance = options.connector.distance,
                 box;
@@ -1649,24 +1667,37 @@ kendo_module({
             if (inArray(options.position, [TOP, BOTTOM])) {
                 if (options.position === TOP) {
                     box = Box2D(
-                        center.x - halfWidth, targetBox[Y + dir] - (icon.height + distance),
-                        center.x + halfWidth, targetBox[Y + dir] - (icon.height + distance));
+                        center.x - width / 2, targetBox.y1 - distance,
+                        center.x + width / 2, targetBox.y1 - (distance + height));
                 } else {
                     box = Box2D(
-                        center.x - halfWidth, targetBox[Y + dir] + (icon.height + distance),
-                        center.x + halfWidth, targetBox[Y + dir] + (icon.height + distance));
+                        center.x - width / 2, targetBox.y1 + distance,
+                        center.x + width / 2, targetBox.y1 + height + distance);
                 }
+
+                note.connectorPoints = [
+                    Point2D(center.x, targetBox[Y + dir]),
+                    Point2D(center.x, box[Y + dir]),
+                ];
             } else {
                 if (options.position === LEFT) {
                     box = Box2D(
-                        targetBox[X + dir] - (icon.width + distance), center.y - halfHeight,
-                        targetBox[X + dir] - (icon.width + distance), center.y + halfHeight);
+                        targetBox.x1 - distance, center.y - height / 2,
+                        targetBox.x1 - (width + distance), center.y + height / 2);
+
                 } else {
                     box = Box2D(
-                        targetBox[X + dir] + icon.width + distance, center.y - halfHeight,
-                        targetBox[X + dir] + icon.width + distance, center.y + halfHeight);
+                        targetBox.x1 + distance, center.y - height / 2,
+                        targetBox.x1 + width + distance, center.y + height / 2);
                 }
+
+                note.connectorPoints = [
+                    Point2D(targetBox.x1, center.y),
+                    Point2D(box.x1, center.y),
+                ];
+                console.log(note.connectorPoints);
             }
+
 
             if (note.marker) {
                 note.marker.reflow(box);
@@ -1676,6 +1707,8 @@ kendo_module({
                 note.label.reflow(box);
             }
 
+            note.backgroundBox = box;
+
             note.box = note.marker.box.clone().wrap(note.label.box);
         },
 
@@ -1683,7 +1716,7 @@ kendo_module({
             var note = this,
                 elements = BoxElement.fn.getViewElements.call(note, view);
 
-            //append(elements, note.createConnector(view));
+            append(elements, note.createConnector(view));
 
             return elements;
         }
