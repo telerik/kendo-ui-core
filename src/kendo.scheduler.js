@@ -781,7 +781,7 @@ kendo_module({
 
                     that._recurringDialog.close();
                     that._removeExcetionEvents(model);
-                    model.set("exception", "");
+                    model.set("recurrenceException", "");
                     that._editEvent(model);
                 });
 
@@ -791,14 +791,14 @@ kendo_module({
 
         _addExceptionDate: function(model) {
             var origin = this.dataSource.get(model.recurrenceId),
-                exception = origin.exception || "",
+                exception = origin.recurrenceException || "",
                 date = model.start;
 
             if (!recurrence.exceptionExists(exception, date)) {
                 date = kendo.timezone.apply(date, 0);
                 exception += kendo.toString(date, RECURRENCE_DATE_FORMAT) + ";";
 
-                origin.set("exception", exception);
+                origin.set("recurrenceException", exception);
             }
         },
 
@@ -810,8 +810,8 @@ kendo_module({
 
                 if (origin) {
                     exceptionDate = kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
-                    exception = origin.exception.replace(exceptionDate, "");
-                    origin.set("exception", exception);
+                    exception = origin.recurrenceException.replace(exceptionDate, "");
+                    origin.set("recurrenceException", exception);
                 }
             }
         },

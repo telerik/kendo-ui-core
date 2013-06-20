@@ -576,8 +576,8 @@
 
                 exception = scheduler.dataSource.at(1);
 
-                ok(origin.exception);
-                equal(origin.exception, kendo.toString(kendo.timezone.apply(exception.start, 0), "yyyyMMddTHHmmssZ") + ";");
+                ok(origin.recurrenceException);
+                equal(origin.recurrenceException, kendo.toString(kendo.timezone.apply(exception.start, 0), "yyyyMMddTHHmmssZ") + ";");
             });
 
             test("creating exception adds exception date to event exception property", function() {
@@ -604,7 +604,7 @@
                 var result = kendo.toString(kendo.timezone.apply(scheduler.dataSource.at(1).start, 0), "yyyyMMddTHHmmssZ") + ";" +
                              kendo.toString(kendo.timezone.apply(scheduler.dataSource.at(2).start, 0), "yyyyMMddTHHmmssZ") + ";";
 
-                equal(origin.exception, result);
+                equal(origin.recurrenceException, result);
             });
 
             test("edit series", function() {
