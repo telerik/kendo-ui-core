@@ -405,4 +405,27 @@ function sparkline_compensation_data() {
         )
     );
 }
+
+function chart_date_points() {
+    return array(
+        array('date'=> '2011/12/20', 'value'=> 30),
+        array('date'=> '2011/12/21', 'value'=> 50),
+        array('date'=> '2011/12/22', 'value'=> 45),
+        array('date'=> '2011/12/23', 'value'=> 40),
+        array('date'=> '2011/12/24', 'value'=> 35),
+        array('date'=> '2011/12/25', 'value'=> 40),
+        array('date'=> '2011/12/26', 'value'=> 42),
+        array('date'=> '2011/12/27', 'value'=> 40),
+        array('date'=> '2011/12/28', 'value'=> 35),
+        array('date'=> '2011/12/29', 'value'=> 43),
+        array('date'=> '2011/12/30', 'value'=> 38),
+        array('date'=> '2011/12/31', 'value'=> 30),
+        array('date'=> '2012/01/01', 'value'=> 48),
+        array('date'=> '2012/01/02', 'value'=> 50),
+        array('date'=> '2012/01/03', 'value'=> 55),
+        array('date'=> '2012/01/04', 'value'=> 35),
+        array('date'=> '2012/01/05', 'value'=> 30)
+   );
+}
+
 ?>
