@@ -81,12 +81,19 @@
             equal(styleInput(editor).text(), "foo");
         });
 
-        test("tool selects know values for inline editor", function() {
+        test("tool selects known values for inline editor", function() {
             var range = createRangeFromText(inline, '<p class="foo">f||oo</p>');
             inline.selectRange(range);
             inline.trigger("select");
 
             equal(inline.toolbar.items().filter(".k-style").val(), "foo");
+        });
+
+        test("tool applies classes in inline editor", function() {
+            var range = createRangeFromText(inline, '<span>|foo|</span>');
+            inline.selectRange(range);
+            inline.exec("style", {value:"bar"});
+            equal(inline.value(), '<span class="bar">foo</span>');
         });
 
         function propertyFrom(className, property) {

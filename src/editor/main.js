@@ -603,9 +603,9 @@ kendo_module({
             try {
                 if (keyboard.isTypingInProgress()) {
                     keyboard.endTyping(true);
-                }
 
-                this.saveSelection();
+                    this.saveSelection();
+                }
             } catch (e) { }
         },
 

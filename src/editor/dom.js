@@ -69,7 +69,7 @@ var whitespace = /^\s+$/,
             "border-bottom-style,border-bottom-width,border-bottom-color," +
             "border-left-style,border-left-width,border-left-color," +
             "border-right-style,border-right-width,border-right-color," +
-            "font-family,font-size,font-style,font-variant,font-weight,line-height"
+            "font-family,font-size,font-style,font-variant,font-weight"
            ).split(","),
     entityRe = /[\u00A0-\u2666<>\&]/g,
     entityTable = {
