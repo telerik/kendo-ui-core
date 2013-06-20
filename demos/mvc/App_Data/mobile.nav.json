@@ -145,6 +145,12 @@
                     "meta": "This example shows how Kendo UI Mobile ListView can be bound to remote data and local JS arrays by using Kendo UI DataSource component."
                 },
                 {
+                    "text": "Hierarchical data binding",
+                    "url": "listview/hierarchical-databinding.html",
+                    "title": "Hierarchical Data Binding Demo for Kendo UI Mobile List View",
+                    "meta": "This example shows how Kendo UI Mobile ListView can be bound to hierarchical remote data using Kendo UI Hierarchical DataSource component."
+                },
+                {
                     "text": "Pull to refresh",
                     "url": "listview/pull-to-refresh.html",
                     "title": "Kendo UI Mobile ListView Refresh Function Demo",
