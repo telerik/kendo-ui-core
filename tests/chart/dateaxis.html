@@ -1938,45 +1938,39 @@
                 module("lteDateIndex");
 
                 test("returns -1 if the only item is greater", function() {
-                    equal(lteDateIndex([new Date("2012/01/01")], new Date("2011/12/31")), -1);
+                    equal(lteDateIndex(new Date("2011/12/31"), [new Date("2012/01/01")]), -1);
                 });
 
                 test("returns the only item index if equals", function() {
-                    equal(lteDateIndex([new Date("2012/01/01")], new Date("2012/01/01")), 0);
+                    equal(lteDateIndex(new Date("2012/01/01"), [new Date("2012/01/01")]), 0);
                 });
 
                 test("returns the only item index if less than", function() {
-                    equal(lteDateIndex([new Date("2012/01/01")], new Date("2012/02/01")), 0);
+                    equal(lteDateIndex(new Date("2012/02/01"), [new Date("2012/01/01")]), 0);
                 });
 
                 test("returns nearest item index (1)", function() {
-                    equal(lteDateIndex([
+                    equal(lteDateIndex(new Date("2012/01/02"), [
                             new Date("2012/01/01"),
                             new Date("2012/01/03"),
                             new Date("2012/01/05")
-                        ],
-                        new Date("2012/01/02")
-                     ), 0);
+                        ]), 0);
                 });
 
                 test("returns nearest item index (2)", function() {
-                    equal(lteDateIndex([
+                    equal(lteDateIndex(new Date("2012/01/04"), [
                             new Date("2012/01/01"),
                             new Date("2012/01/03"),
                             new Date("2012/01/05")
-                        ],
-                        new Date("2012/01/04")
-                     ), 1);
+                        ]), 1);
                 });
 
                 test("returns nearest item index (3)", function() {
-                    equal(lteDateIndex([
+                    equal(lteDateIndex(new Date("2012/01/06"), [
                             new Date("2012/01/01"),
                             new Date("2012/01/03"),
                             new Date("2012/01/05")
-                        ],
-                        new Date("2012/01/06")
-                     ), 2);
+                        ]), 2);
                 });
 
             })();

@@ -1945,7 +1945,6 @@ kendo_module({
             return categoryIx;
         },
 
-        // TODO: Rename to pointCategory
         getCategory: function(point) {
             var index = this.pointCategoryIndex(point);
 
@@ -2303,7 +2302,7 @@ kendo_module({
                 return -1;
             }
 
-            index = lteDateIndex(categories, value);
+            index = lteDateIndex(value, categories);
             if (index === maxIndex && !options.justified && !options.roundToBaseUnit) {
                 roundedValue = addDuration(value, 0, options.baseUnit, options.startOfWeek);
                 if (!dateEquals(roundedValue, value)) {
@@ -8834,7 +8833,6 @@ kendo_module({
             }
         },
 
-        // TODO: Use categoryAxis.categoryIndex when ready
         _index: function(value) {
             var that = this,
                 categoryAxis = that.categoryAxis,
@@ -8842,7 +8840,7 @@ kendo_module({
                 index = value;
 
             if (value instanceof Date) {
-                index = lteDateIndex(categories, value);
+                index = lteDateIndex(value, categories);
                 if (!categoryAxis.options.justified && value > last(categories)) {
                     index += 1;
                 }
@@ -9445,8 +9443,7 @@ kendo_module({
         }
     }
 
-    // TODO: Switch argument order to match indexOf
-    function lteDateIndex(sortedDates, date) {
+    function lteDateIndex(date, sortedDates) {
         var low = 0,
             high = sortedDates.length - 1,
             i,

@@ -526,8 +526,8 @@ kendo_module({
                 select = navi.options.select,
                 selection = navi.selection,
                 categories = navi.mainAxis().options.categories,
-                fromIx = lteDateIndex(categories, selection.options.from),
-                toIx = lteDateIndex(categories, selection.options.to);
+                fromIx = lteDateIndex(selection.options.from, categories),
+                toIx = lteDateIndex(selection.options.to, categories);
 
             e.originalEvent.preventDefault();
 
