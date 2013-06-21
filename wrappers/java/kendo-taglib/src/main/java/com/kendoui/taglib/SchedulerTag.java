@@ -131,6 +131,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("editable", value);
     }
 
+    public java.util.Date getEndTime() {
+        return (java.util.Date)getProperty("endTime");
+    }
+
+    public void setEndTime(java.util.Date value) {
+        setProperty("endTime", value);
+    }
+
     public String getEventTemplate() {
         return (String)getProperty("eventTemplate");
     }
@@ -177,6 +185,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setMinorTimeHeaderTemplate(String value) {
         setProperty("minorTimeHeaderTemplate", value);
+    }
+
+    public java.util.Date getStartTime() {
+        return (java.util.Date)getProperty("startTime");
+    }
+
+    public void setStartTime(java.util.Date value) {
+        setProperty("startTime", value);
     }
 
     public String getTimezone() {

@@ -1,10 +1,12 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="java.util.*" %>
+
 
 <c:url value="/web/scheduler/index/read" var="readUrl" />
 <c:url value="/web/scheduler/index/create" var="createUrl" />
@@ -12,8 +14,9 @@
 <c:url value="/web/scheduler/index/destroy" var="destroyUrl" />
 
 <%
-	java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd");
-	Date date = sdf.parse("2013/6/13");
+	Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2013/6/13");
+	
+	Date startTime = new SimpleDateFormat("yyyy/MM/dd hh:mm").parse("2013/6/13 7:00");
 	
 	ArrayList<HashMap<String, Object>> resources = new ArrayList<HashMap<String, Object>>();
 	
@@ -40,7 +43,7 @@
         <input checked type="checkbox" id="bob" value="2">
         <input type="checkbox" id="charlie" value="3">
     </div>
-    <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="600" date="<%= date %>">
+    <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="600" date="<%= date %>" startTime="<%= startTime %>">
     	<kendo:scheduler-views>
     		<kendo:scheduler-view type="day" />
     		<kendo:scheduler-view type="week" selected="true" />

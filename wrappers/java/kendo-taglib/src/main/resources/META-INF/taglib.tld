@@ -12033,6 +12033,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The end time of the week and day views. The scheduler will display events ending before the endTime.</description>
+            <name>endTime</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+        <attribute>
             <description>The template used to render the scheduler events.The fields which can be used in the template are:</description>
             <name>eventTemplate</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12067,6 +12073,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <name>minorTimeHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The start time of the week and day views. The scheduler will display events starting after the startTime.</description>
+            <name>startTime</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
         </attribute>
         <attribute>
             <description>The timezone which the scheduler will use to display the scheduler appointment dates. By default the current system timezone is used. This is an acceptable default when the
