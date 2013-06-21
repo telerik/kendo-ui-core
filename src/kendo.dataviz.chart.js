@@ -1081,13 +1081,15 @@ kendo_module({
                 plotArea = chart._plotArea,
                 highlight = chart._highlight,
                 currentSeries = (plotArea.srcSeries || plotArea.series)[seriesIndex],
-                items;
+                index, items;
 
             if (inArray(currentSeries.type, [PIE, DONUT])) {
-                items = plotArea.charts[0].segments[pointIndex];
+                index = pointIndex;
             } else {
-                items = plotArea.pointsBySeriesIndex(seriesIndex);
+                index = seriesIndex;
             }
+
+            items = plotArea.pointsBySeriesIndex(index);
             highlight.show(items);
         },
 
@@ -5223,7 +5225,7 @@ kendo_module({
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart.segments = [];
+            chart.points = [];
             chart.legendItems = [];
             chart.render();
         },
@@ -5336,14 +5338,14 @@ kendo_module({
                 return;
             }
 
-            var segmentOptions = deepExtend({}, fields.series);
+            var segmentOptions = deepExtend({}, fields.series, { index: fields.index });
             chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new PieSegment(value, sector, segmentOptions);
             segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);
-            chart.segments.push(segment);
+            chart.points.push(segment);
         },
 
         createLegendItem: function(value, point) {
@@ -5416,8 +5418,8 @@ kendo_module({
                 newBoxCenter = newBox.center(),
                 seriesConfigs = chart.seriesConfigs || [],
                 boxCenter = box.center(),
-                segments = chart.segments,
-                count = segments.length,
+                points = chart.points,
+                count = points.length,
                 seriesCount = options.series.length,
                 leftSideLabels = [],
                 rightSideLabels = [],
@@ -5433,7 +5435,7 @@ kendo_module({
             );
 
             for (i = 0; i < count; i++) {
-                segment = segments[i];
+                segment = points[i];
 
                 sector = segment.sector;
                 sector.r = r;
@@ -5494,8 +5496,8 @@ kendo_module({
 
         distanceBetweenLabels: function(labels) {
             var chart = this,
-                segments = chart.segments,
-                segment = segments[segments.length - 1],
+                points = chart.points,
+                segment = points[points.length - 1],
                 sector = segment.sector,
                 firstBox = labels[0].box,
                 count = labels.length - 1,
@@ -5547,8 +5549,8 @@ kendo_module({
 
         reflowLabels: function(distances, labels) {
             var chart = this,
-                segments = chart.segments,
-                segment = segments[segments.length - 1],
+                points = chart.points,
+                segment = points[points.length - 1],
                 sector = segment.sector,
                 labelsCount = labels.length,
                 labelOptions = segment.options.labels,
@@ -5590,23 +5592,23 @@ kendo_module({
             var chart = this,
                 options = chart.options,
                 connectors = options.connectors,
-                segments = chart.segments,
+                points = chart.points,
                 connectorLine,
                 lines = [],
-                count = segments.length,
+                count = points.length,
                 space = 4,
-                sector, angle, points, segment,
+                sector, angle, connectorPoints, segment,
                 seriesIx, label, i;
 
             for (i = 0; i < count; i++) {
-                segment = segments[i];
+                segment = points[i];
                 sector = segment.sector;
                 angle = sector.middle();
                 label = segment.label;
                 seriesIx = { seriesId: segment.seriesIx };
 
                 if (label) {
-                    points = [];
+                    connectorPoints = [];
                     if (label.options.position === OUTSIDE_END && segment.value !== 0) {
                         var box = label.box,
                             centerPoint = sector.c,
@@ -5615,7 +5617,7 @@ kendo_module({
                             sr, end, crossing;
 
                         start = sector.clone().expand(connectors.padding).point(angle);
-                        points.push(start);
+                        connectorPoints.push(start);
                         // TODO: Extract into a method to remove duplication
                         if (label.orientation == RIGHT) {
                             end = Point2D(box.x1 - connectors.padding, box.center().y);
@@ -5629,17 +5631,17 @@ kendo_module({
                                 sr = sector.c.x + sector.r + space;
                                 if (segment.options.labels.align !== COLUMN) {
                                     if (sr < middle.x) {
-                                        points.push(Point2D(sr, start.y));
+                                        connectorPoints.push(Point2D(sr, start.y));
                                     } else {
-                                        points.push(Point2D(start.x + space * 2, start.y));
+                                        connectorPoints.push(Point2D(start.x + space * 2, start.y));
                                     }
                                 } else {
-                                    points.push(Point2D(sr, start.y));
+                                    connectorPoints.push(Point2D(sr, start.y));
                                 }
-                                points.push(Point2D(middle.x, end.y));
+                                connectorPoints.push(Point2D(middle.x, end.y));
                             } else {
                                 crossing.y = end.y;
-                                points.push(crossing);
+                                connectorPoints.push(crossing);
                             }
                         } else {
                             end = Point2D(box.x2 + connectors.padding, box.center().y);
@@ -5653,22 +5655,22 @@ kendo_module({
                                 sr = sector.c.x - sector.r - space;
                                 if (segment.options.labels.align !== COLUMN) {
                                     if (sr > middle.x) {
-                                        points.push(Point2D(sr, start.y));
+                                        connectorPoints.push(Point2D(sr, start.y));
                                     } else {
-                                        points.push(Point2D(start.x - space * 2, start.y));
+                                        connectorPoints.push(Point2D(start.x - space * 2, start.y));
                                     }
                                 } else {
-                                    points.push(Point2D(sr, start.y));
+                                    connectorPoints.push(Point2D(sr, start.y));
                                 }
-                                points.push(Point2D(middle.x, end.y));
+                                connectorPoints.push(Point2D(middle.x, end.y));
                             } else {
                                 crossing.y = end.y;
-                                points.push(crossing);
+                                connectorPoints.push(crossing);
                             }
                         }
 
-                        points.push(end);
-                        connectorLine = view.createPolyline(points, false, {
+                        connectorPoints.push(end);
+                        connectorLine = view.createPolyline(connectorPoints, false, {
                             id: uniqueId(),
                             stroke: connectors.color,
                             strokeWidth: connectors.width,
@@ -5794,7 +5796,7 @@ kendo_module({
             segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);
-            chart.segments.push(segment);
+            chart.points.push(segment);
         },
 
         reflow: function(targetBox) {

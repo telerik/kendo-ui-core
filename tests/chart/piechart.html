@@ -41,7 +41,7 @@
                 pieChart.reflow(chartBox);
                 pieChart.getViewElements(view);
 
-                firstSegment = pieChart.segments[0];
+                firstSegment = pieChart.points[0];
             }
 
             (function() {
@@ -75,23 +75,23 @@
                     }
                 });
 
-                test("creates segments for pie chart data points", function() {
-                    equal(pieChart.segments.length, values.data.length);
+                test("creates points for pie chart data points", function() {
+                    equal(pieChart.points.length, values.data.length);
                 });
 
-                test("segments have set angle", function() {
-                    $.each(pieChart.segments, function() {
+                test("points have set angle", function() {
+                    $.each(pieChart.points, function() {
                         ok(this.sector.angle);
                     });
                 });
 
-                test("segments have set startAngle", function() {
-                    $.each(pieChart.segments, function() {
+                test("points have set startAngle", function() {
+                    $.each(pieChart.points, function() {
                         ok(this.sector.angle);
                     });
                 });
 
-                test("segments have set owner", function() {
+                test("points have set owner", function() {
                     ok(firstSegment.owner === pieChart);
                 });
 
@@ -123,7 +123,7 @@
                     equal(firstSegment.category, "A");
                 });
 
-                test("segments have set owner", function() {
+                test("points have set owner", function() {
                     ok(firstSegment.owner === pieChart);
                 });
 
@@ -148,7 +148,7 @@
                 });
 
                 test("sets segment different center if segment have explode sets to true", function() {
-                    ok(firstSegment.sector.c != pieChart.segments[1].sector.c);
+                    ok(firstSegment.sector.c != pieChart.points[1].sector.c);
                 });
 
                 // ------------------------------------------------------------
@@ -246,7 +246,7 @@
 
                         chart = $("#container").data("kendoChart");
                         pieChart = chart._plotArea.charts[0];
-                        firstSegment = pieChart.segments[0];
+                        firstSegment = pieChart.points[0];
                     }
                 });
 
@@ -523,7 +523,7 @@
                     equal(legend.options.items[0].text, "Value A");
                 });
 
-                test("segments can be removed with visible false", function() {
+                test("points can be removed with visible false", function() {
                     createChart([{
                         type: "pie",
                         data: [{
@@ -540,10 +540,10 @@
                         }]
                     }]);
 
-                    equal(chart._plotArea.charts[0].segments.length, 1);
+                    equal(chart._plotArea.charts[0].points.length, 1);
                 });
 
-                test("segments can be excluded from legend", function() {
+                test("points can be excluded from legend", function() {
                     createChart([{
                         name: "Value",
                         type: "pie",
@@ -618,7 +618,7 @@
                     equal(pieChart.options.startAngle, START_ANGLE);
                 });
 
-                test("sets segments if segments are more then 1", function() {
+                test("sets points if points are more then 1", function() {
                     equal(pieSegment.explode, false);
                 });
 
@@ -1169,7 +1169,7 @@
                     }, options));
 
                     var plotArea = chart._model.children[1],
-                        segment = plotArea.charts[0].segments[0],
+                        segment = plotArea.charts[0].points[0],
                         label = segment.children[0];
 
                     segmentElement = $(dataviz.getElement(segment.options.id));
@@ -1185,7 +1185,7 @@
                     teardown: destroyChart
                 });
 
-                test("fires when clicking segments", 1, function() {
+                test("fires when clicking points", 1, function() {
                     segmentElement.click();
                 });
 
@@ -1203,7 +1203,7 @@
                     teardown: destroyChart
                 });
 
-                test("fires when clicking segments", 1, function() {
+                test("fires when clicking points", 1, function() {
                     segmentElement.mouseover();
                 });
 
