@@ -1426,6 +1426,33 @@
                 equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
             });
 
+            test("arrow is shown if event starts before view's start time", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)], startTime: new Date(2013, 1, 2, 10, 0, 0) });
+
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 2, 11, 0, 0) }]);
+
+                equal(view.content.find(".k-event .k-i-arrow-n").length, 1);
+                ok(!view.content.find(".k-event .k-i-arrow-s").length);
+            });
+
+            test("arrow is shown if event ends after view's end time", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)], endTime: new Date(2013, 1, 2, 10, 0, 0) });
+
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 2, 11, 0, 0) }]);
+
+                equal(view.content.find(".k-event .k-i-arrow-s").length, 1);
+                ok(!view.content.find(".k-event .k-i-arrow-n").length);
+            });
+
+            test("arrows are shown if event starts before and ends after view's start, end time", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)], startTime: new Date(2013, 1, 2, 10, 0, 0), endTime: new Date(2013, 1, 2, 11, 0, 0) });
+
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 2, 12, 0, 0) }]);
+
+                equal(view.content.find(".k-event .k-i-arrow-s").length, 1);
+                equal(view.content.find(".k-event .k-i-arrow-n").length, 1);
+            });
+
             test("refresh icon is shown if multiday event has recurring rule", function() {
                 var view = setup({ dates: [new Date(2013, 1, 2)] });
 

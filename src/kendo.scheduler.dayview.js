@@ -29,9 +29,9 @@ kendo_module({
                     '<dl><dd>${title}</dd></dl>' +
                 '</div>'),
         DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
-        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
+        ALLDAY_EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
-                'style="background-color:#=resources[0].color #"' +
+                    'style="background-color:#=resources[0].color #"' +
                 '#}#' +
                 '>' +
                 '<span class="k-event-actions">' +
@@ -51,7 +51,42 @@ kendo_module({
                         '<span class="k-icon k-i-arrow-e"></span>' +
                     '#}#' +
                 '</span>' +
-                //'<span class="k-icon k-resize-handle"></span>' +
+                '</div>',
+        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
+                '#if (resources[0]) { #' +
+                'style="background-color:#=resources[0].color #"' +
+                '#}#' +
+                '>' +
+                '<span class="k-event-actions">' +
+                    '# if(data.recurrence || data.recurrenceId) {#' +
+                        '<a href="\\#" class="k-link"><span class="k-icon k-i-refresh"></span></a>' +
+                    '#}#' +
+                '</span>' +
+                '{0}' +
+                '<span class="k-event-actions">' +
+                    '#if (showDelete) {#' +
+                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
+                    '#}#' +
+                '</span>' +
+                '<span class="k-event-top-actions">' +
+                    '# if(data.tail || data.middle) {#' +
+                    '<span class="k-icon k-i-arrow-n"' +
+                        '#if (resources[0]) { #' +
+                            'style="background-color:#=resources[0].color #"' +
+                        '#}#' +
+                    '></span>' +
+                    '#}#' +
+                '</span>' +
+                '<span class="k-event-bottom-actions">' +
+                    //'<span class="k-icon k-resize-handle"></span>' +
+                    '# if(data.head || data.middle) {#' +
+                        '<span class="k-icon k-i-arrow-s"' +
+                        '#if (resources[0]) { #' +
+                            'style="background-color:#=resources[0].color #"' +
+                        '#}#' +
+                        '></span>' +
+                    '#}#' +
+                '</span>' +
                 '</div>';
 
     function toInvariantTime(date) {
@@ -108,8 +143,8 @@ kendo_module({
             var options = this.options,
                 settings = extend({}, kendo.Template, options.templateSettings);
 
-            this.eventTemplate = this._eventTmpl(options.eventTemplate);
-            this.allDayEventTemplate = this._eventTmpl(options.allDayEventTemplate);
+            this.eventTemplate = this._eventTmpl(options.eventTemplate, EVENT_WRAPPER_STRING);
+            this.allDayEventTemplate = this._eventTmpl(options.allDayEventTemplate, ALLDAY_EVENT_WRAPPER_STRING);
 
             this.majorTimeHeaderTemplate = kendo.template(options.majorTimeHeaderTemplate, settings);
             this.minorTimeHeaderTemplate = kendo.template(options.minorTimeHeaderTemplate, settings);
@@ -544,7 +579,7 @@ kendo_module({
             this._arrangeColumns(element, dateSlotIndex, dateSlot);
        },
 
-       _eventTmpl: function(template) {
+       _eventTmpl: function(template, wrapper) {
            var options = this.options,
                settings = extend({}, kendo.Template, options.templateSettings),
                paramName = settings.paramName,
@@ -560,7 +595,7 @@ kendo_module({
                 html += template;
             }
 
-            var tmpl = kendo.template(kendo.format(EVENT_WRAPPER_STRING, html), settings);
+            var tmpl = kendo.template(kendo.format(wrapper, html), settings);
 
             if (state.count > 0) {
                 tmpl = proxy(tmpl, state.storage);
@@ -568,21 +603,27 @@ kendo_module({
             return tmpl;
        },
 
-       _createEventElement: function(event, template) {
+       _createEventElement: function(event, template, isOneDayEvent) {
             var options = this.options,
                 showDelete = options.editable && options.editable.destroy !== false,
-                startDate = this.startDate(),
-                endDate = this.endDate(),
+                startDate = getDate(this.startDate()),
+                endDate = getDate(this.endDate()),
+                startTime = getMilliseconds(options.startTime),
+                endTime = getMilliseconds(options.endTime),
                 middle,
                 head,
                 tail;
 
-            if (getDate(event.start) < getDate(startDate) &&
-                getDate(event.end) > getDate(endDate)) {
+            if (startTime >= endTime) {
+                endTime = new Date(options.endTime.getTime() + MS_PER_DAY - 1);
+            }
+
+            if (!isInDateRange(getDate(event.start), startDate, endDate) ||
+                (isOneDayEvent && getMilliseconds(event.start) < startTime && getMilliseconds(event.end) > endTime)) {
                 middle = true;
-            } else if (getDate(event.start) < getDate(startDate)) {
+            } else if (getDate(event.start) < startDate || (isOneDayEvent && getMilliseconds(event.start) < startTime)) {
                 tail = true;
-            } else if (getDate(event.end) > getDate(endDate)) {
+            } else if (getDate(event.end) > endDate || (isOneDayEvent && getMilliseconds(event.end) > endTime)) {
                 head = true;
             }
 
@@ -651,7 +692,7 @@ kendo_module({
                        endDateSlotIndex = this._dateSlotIndex(event.end),
                        isOneDayEvent = !event.isAllDay && event.end.getTime() - event.start.getTime() < MS_PER_DAY && dateSlotIndex === endDateSlotIndex,
                        container = isOneDayEvent ? this.content : allDayEventContainer,
-                       element = this._createEventElement(event, isOneDayEvent ? eventTemplate : allDayEventTemplate);
+                       element = this._createEventElement(event,isOneDayEvent ? eventTemplate : allDayEventTemplate, isOneDayEvent);
 
                    if (isOneDayEvent) {
 
