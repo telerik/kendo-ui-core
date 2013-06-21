@@ -225,10 +225,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Column(IEnumerable data)
         {
-            var builder = Bar(data);
-            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+            ChartBarSeries<TModel, object> barSeries = new ChartBarSeries<TModel, object>(data);
+            barSeries.Orientation = ChartSeriesOrientation.Vertical;
 
-            return builder;
+            Container.Series.Add(barSeries);
+
+            return new ChartBarSeriesBuilder<TModel>(barSeries);
         }
 
         /// <summary>
