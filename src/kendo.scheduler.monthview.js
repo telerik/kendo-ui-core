@@ -330,7 +330,7 @@ kendo_module({
                 element = $('<div class="k-more-events k-button"><span>...</span></div>')
                     .attr(kendo.attr("start-end-idx"), startIndex + "-" + endIndex)
                     .css({
-                        width: eventWidth + 2,
+                        width: startSlot.innerWidth() - 2,
                         left: left,
                         top: top + maxColumnCount * eventHeight + 3*maxColumnCount
                     });
