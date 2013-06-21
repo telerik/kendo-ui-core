@@ -9,7 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Tasks', array('TaskID', 'Title', 'strftime(\'%Y-%m-%dT%H:%M:%S\', Start) as Start', 'strftime(\'%Y-%m-%dT%H:%M:%S\', End) as End'), $request));
+    echo json_encode($result->read('Tasks', array('TaskID', 'Title', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', Start) as Start', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', End) as End', 'IsAllDay',
+'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException'), $request), JSON_NUMERIC_CHECK);
 
     exit;
 }
@@ -48,11 +49,33 @@ $endField = new \Kendo\Data\DataSourceSchemaModelField('end');
 $endField->type('date')
         ->from('End');
 
+$isAllDayField = new \Kendo\Data\DataSourceSchemaModelField('isAllDay');
+$isAllDayField->type('boolean')
+        ->from('IsAllDay');
+
+$descriptionField = new \Kendo\Data\DataSourceSchemaModelField('description');
+$descriptionField->type('string')
+        ->from('Description');
+
+$recurrenceIdField = new \Kendo\Data\DataSourceSchemaModelField('recurrenceId');
+$recurrenceIdField->from('RecurrenceID');
+
+$recurrenceRuleField = new \Kendo\Data\DataSourceSchemaModelField('recurrenceRule');
+$recurrenceRuleField->from('RecurrenceRule');
+
+$recurrenceExceptionField = new \Kendo\Data\DataSourceSchemaModelField('recurrenceException');
+$recurrenceIdField->from('RecurrenceException');
+
 $model->id('taskID')
     ->addField($taskIDField)
     ->addField($titleField)
     ->addField($startField)
-    ->addField($endField);
+    ->addField($endField)
+    ->addField($descriptionField)
+    ->addField($recurrenceIdField)
+    ->addField($recurrenceRuleField)
+    ->addField($recurrenceExceptionField)
+    ->addField($isAllDayField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
@@ -65,9 +88,10 @@ $dataSource->transport($transport)
     ->schema($schema);
 
 $scheduler = new \Kendo\UI\Scheduler('scheduler');
-$scheduler->timezone('Etc/UTC')
+$scheduler->timezone("Etc/UTC")
         ->date(new DateTime('2013/6/13'))
-        ->addView('day', array('type' => 'week', 'selected' => true), 'month', 'agenda')
+        ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')),
+            array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda')
         ->dataSource($dataSource);
 
 ?>
