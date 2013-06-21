@@ -135,7 +135,6 @@
 }
 
 /* main colors */
-
 .k-block,
 .k-widget
 {
@@ -341,7 +340,6 @@ textarea.k-textbox:hover,
 }
 
 /* icons */
-
 .k-icon:hover,
 .k-state-hover .k-icon,
 .k-state-selected .k-icon,
@@ -398,33 +396,6 @@ textarea.k-textbox:hover,
     background-color: @hover-background-color;
 }
 
-.k-button:active
-{
-    //color: @selected-text-color;
-    // background-color: @selected-background-color;
-    //border-color: @selected-border-color;
-}
-
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:active,
-.k-state-disabled .k-button:active
-{
-    //color: @disabled-text-color;
-    //border-color: @widget-border-color;
-    //.composite-background(@widget-gradient);
-}
-
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:active,
-.k-state-disabled .k-button:active
-{
-   // color: @disabled-text-color;
-   // border-color: @widget-border-color;
-   // .composite-background(@widget-gradient);
-}
-
 .k-draghandle
 {
     border-color: @draghandle-border-color;
@@ -440,7 +411,6 @@ textarea.k-textbox:hover,
 }
 
 /* Scheduler */
-
 .k-scheduler,
 .k-scheduler-datecolumn
 {
@@ -504,7 +474,6 @@ textarea.k-textbox:hover,
 }
 
 /* states */
-
 .k-state-active,
 .k-state-active:hover,
 .k-active-filter
@@ -586,9 +555,15 @@ textarea.k-textbox:hover,
     border-radius: 0;
 }
 
-.k-calendar th{
+.k-calendar th
+{
 	background-color: @calendar-group-background-color;
 }
+
+.k-calendar-container.k-group
+{
+	border-color: @group-border-color;
+} 
 
 .k-state-selected,
 .k-state-selected:link,
@@ -793,7 +768,6 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Slider */
-
 .k-slider-track
 {
     background-color: @widget-border-color;
@@ -859,7 +833,6 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Splitter */
-
 .k-splitbar
 {
     background-color: @splitbar-background-color;
@@ -872,7 +845,6 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Upload */
-
 .k-progress-status
 {
     border-color: @hover-border-color transparent;
@@ -903,7 +875,6 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Shadows */
-
 .k-widget,
 .k-button
 {
@@ -987,7 +958,6 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Border radius */
-
 .k-block,
 .k-button,
 .k-textbox,

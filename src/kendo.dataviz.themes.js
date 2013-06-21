@@ -1264,7 +1264,85 @@ kendo_module({
         }
     });
 
-    registerTheme("flat", {});
+    registerTheme("flat", {
+		 chart: {
+            title: {
+                color: "#4c5356"
+            },
+            legend: {
+                labels: {
+                    color: "#4c5356"
+                },
+                inactiveItems: {
+                    labels: {
+                        color: "#CBCBCB"
+                    },
+                    markers: {
+                        color: "#CBCBCB"
+                    }
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: BLACK
+                },
+                candlestick: {
+                    downColor: "#c7c7c7",
+                    line: {
+                        color: "#787878"
+                    }
+                },
+                overlay: {
+                    gradient: "none"
+                },
+                border: {
+                    _brightness: 1
+                }
+            },
+            seriesColors: ["#10c4b2", "#ff7663", "#ffb74f", "#a2df53", "#1c9ec4", "#ff63a5", "#1cc47b"],
+            axisDefaults: {
+                line: {
+                    color: "#cdcdcd"
+                },
+                labels: {
+                    color: "#4c5356"
+                },
+                minorGridLines: {
+                    color: "#cdcdcd"
+                },
+                majorGridLines: {
+                    color: "#cdcdcd"
+                },
+                title: {
+                    color: "#4c5356"
+                },
+                crosshair: {
+                    color: "#cdcdcd"
+                }
+            }
+        },
+        gauge: {
+            pointer: {
+                color: "#10c4b2"
+            },
+            scale: {
+                rangePlaceholderColor: "#cdcdcd",
+
+                labels: {
+                    color: "#4c5356"
+                },
+                minorTicks: {
+                    color: "#4c5356"
+                },
+                majorTicks: {
+                    color: "#4c5356"
+                },
+                line: {
+                    color: "#4c5356"
+                }
+            }
+        }
+	});
 
 })(window.kendo.jQuery);
 
