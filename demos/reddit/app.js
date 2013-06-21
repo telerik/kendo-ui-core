@@ -1,4 +1,4 @@
-var PAGE_SIZE = 25, firstRun = true,
+var PAGE_SIZE = 25,
     imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
@@ -50,13 +50,13 @@ var canvasDataSource = new kendo.data.DataSource({
                 data.after = items[items.length - 1].data.name;
             }
 
-            data.limit = PAGE_SIZE;
+            data.limit = 36;
             return data;
         }
     },
 
     serverPaging: true,
-    pageSize: PAGE_SIZE,
+    pageSize: 36,
     schema: {
         data: "data.children",
         total: function() { return 100000; }
@@ -182,14 +182,14 @@ function renderThumbs(element) {
 }
 
 function canvasInit(e) {
-    canvasScrollView = $("#canvas-scrollview").kendoMobileVirtualScrollView({
+    canvasScrollView = $("#canvas-scrollview").kendoMobileScrollView({
         contentHeight: 500,
         dataSource: canvasDataSource,
         batchSize: 6,
         template: kendo.template($("#canvas-template").html()),
         emptyTemplate: kendo.template($("#empty-template").html()),
-        changed: updateSrc
-    }).data("kendoMobileVirtualScrollView");
+        change: updateSrc
+    }).data("kendoMobileScrollView");
 
     canvasScrollView.element.find(".virtual-page").kendoTouch({
         tap: function (e) {
@@ -238,7 +238,7 @@ function canvasDetailShow(e) {
 }
 
 function calculateOffset(dataItem) {
-    var index = $("#canvas-scrollview").data("kendoMobileVirtualScrollView").buffer.buffer.indexOf(dataItem);
+    var index = $("#canvas-scrollview").data("kendoMobileScrollView")._content.buffer.buffer.indexOf(dataItem);
     //console.log("index ", index, " dataItem ", dataItem.foo);
     return index;
 }
