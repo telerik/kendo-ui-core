@@ -16,7 +16,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @Table(name="Tasks")
 public class Task {
     private int taskId;
-    private int ownerId;
+    private Integer ownerId;
     private String title;
     private String description;
     private String recurrence;
@@ -36,11 +36,11 @@ public class Task {
     }
 
     @Column(name="OwnerID")
-    public int getOwnerId() {
+    public Integer getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(Integer ownerId) {
         this.ownerId = ownerId;
     }
     

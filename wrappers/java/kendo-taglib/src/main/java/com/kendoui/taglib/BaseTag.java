@@ -137,4 +137,14 @@ public abstract class BaseTag extends BodyTagSupport implements Serializable {
 
         return parent;
     }
+    
+    public Object findParent(Class<?> clazz) {
+        Object parent = getParent();
+
+        if (parent == null || !clazz.isAssignableFrom(parent.getClass())) {
+            return null;
+        }
+
+        return parent;
+    }
 }

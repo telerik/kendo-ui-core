@@ -14,6 +14,7 @@ module CodeGen::Java
         'chart' => ['axisDefaults', 'seriesDefaults'],
         'stockchart' => ['axisDefaults', 'seriesDefaults'],
         'tooltip' => ['content'],
+        'filteritem' => ['filters'],
         'column' => ['values']
     }
 
@@ -40,6 +41,7 @@ module CodeGen::Java
 
         def delete_ignored
            @options.delete_if { |o| CodeGen::Java.ignored?(@name, o.name) }
+
            composite_options.each { |o| o.delete_ignored }
         end
 

@@ -6,7 +6,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.*" %>
 
-<c:url value="/web/scheduler/tasks/" var="transportReadUrl" />
+<c:url value="/web/scheduler/index/read" var="readUrl" />
+<c:url value="/web/scheduler/index/create" var="createUrl" />
+<c:url value="/web/scheduler/index/update" var="updateUrl" />
+<c:url value="/web/scheduler/index/destroy" var="destroyUrl" />
+
 <%
 	java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy/MM/dd");
 	Date date = sdf.parse("2013/6/13");
@@ -31,11 +35,16 @@
 
 %>
 <demo:header />
+	 <div id="people">
+        <input checked type="checkbox" id="alex" value="1">
+        <input checked type="checkbox" id="bob" value="2">
+        <input type="checkbox" id="charlie" value="3">
+    </div>
     <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="600" date="<%= date %>">
     	<kendo:scheduler-views>
     		<kendo:scheduler-view type="day" />
-    		<kendo:scheduler-view type="week" />
-    		<kendo:scheduler-view type="month" />
+    		<kendo:scheduler-view type="week" selected="true" />
+    		<kendo:scheduler-view type="month"  />
     		<kendo:scheduler-view type="agenda" />
     	</kendo:scheduler-views>
     	<kendo:scheduler-resources>
@@ -44,6 +53,12 @@
     		</kendo:scheduler-resource>
     	</kendo:scheduler-resources>
         <kendo:dataSource batch="true">
+           	<kendo:dataSource-filter>
+           		<kendo:dataSource-filterItem logic="or">
+           			<kendo:dataSource-filterItem field="ownerId" operator="eq" value="1" />
+           			<kendo:dataSource-filterItem field="ownerId" operator="eq" value="2" />
+           		</kendo:dataSource-filterItem>
+           	</kendo:dataSource-filter>
              <kendo:dataSource-schema data="data" total="total">
                 <kendo:dataSource-schema-model id="taskId">
                      <kendo:dataSource-schema-model-fields>
@@ -58,11 +73,67 @@
                 </kendo:dataSource-schema-model>
             </kendo:dataSource-schema>
             <kendo:dataSource-transport>
-                <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST" contentType="application/json"/>
+                <kendo:dataSource-transport-create url="${createUrl}" dataType="json" type="POST" contentType="application/json" />
+                <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />
+                <kendo:dataSource-transport-update url="${updateUrl}" dataType="json" type="POST" contentType="application/json" />
+                <kendo:dataSource-transport-destroy url="${destroyUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-parameterMap>
-                	function(options){return JSON.stringify(options);}
+                	<script>
+	                	function parameterMap(options, type) { 
+	                		if(type==="read"){
+	                			return JSON.stringify(options);
+	                		} else {
+	                			return JSON.stringify(options.models);
+	                		}
+	                	}
+                	</script>
                 </kendo:dataSource-transport-parameterMap>              
             </kendo:dataSource-transport>
         </kendo:dataSource>
     </kendo:scheduler>
+    
+<script>
+    $("#people :checkbox").change(function(e) {
+        var checked = $.map($("#people :checked"), function(checkbox) {
+            return parseInt($(checkbox).val());
+        });
+
+        var filter = {
+            logic: "or",
+            filters: $.map(checked, function(value) {
+                return {
+                    operator: "eq",
+                    field: "ownerId",
+                    value: value
+                };
+            })
+        };
+
+        var scheduler = $("#scheduler").data("kendoScheduler");
+
+        scheduler.dataSource.filter(filter);
+    });
+</script>
+<style scoped>
+#people {
+    background: url(<c:url value="/resources/web/scheduler/team-schedule.png" />) transparent no-repeat;
+    height: 115px;
+    position: relative;
+}
+#alex {
+    position: absolute;
+    left: 404px;
+    top: 81px;
+}
+#bob {
+    position: absolute;
+    left: 519px;
+    top: 81px;
+}
+#charlie {
+    position: absolute;
+    left: 634px;
+    top: 81px;
+}
+</style>
 <demo:footer />

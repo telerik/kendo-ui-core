@@ -2219,7 +2219,7 @@ The function return value is displayed instead of the individual points.The supp
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The data item field which contains category name.</description>
+            <description>The data item field which contains the category name or date.</description>
             <name>categoryField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -6690,10 +6690,16 @@ makes a HTTP request for every CRUD operation.</description>
         <name>dataSource-filterItem</name>
         <tag-class>com.kendoui.taglib.datasource.FilterItemTag</tag-class>
 
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
         <attribute>
             <description>The data item field to which the filter operator is applied.</description>
             <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The logical operation to use when the filter.filters option is set. The supported values are "and" and "or".</description>
+            <name>logic</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
