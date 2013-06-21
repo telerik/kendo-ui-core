@@ -1536,7 +1536,7 @@ kendo_module({
             for (i = 0; i < axis.notes.length; i++) {
                 item = axis.notes[i];
                 value = item.options.value;
-                if (value) {
+                if (defined(value)) {
                     slot = axis.getSlot(value);
                 }
 
@@ -1579,8 +1579,8 @@ kendo_module({
                     width: 2
                 },
                 background: "red",
-                padding: getSpacing(3),
-                size: 3,
+                padding: 3,
+                size: 1,
                 zIndex: 1,
                 visible: true
             },
@@ -1614,7 +1614,7 @@ kendo_module({
                 note.label = new TextBox(label.text, label);
                 note.append(note.label);
 
-                if (label.position == INSIDE) {
+                if (label.position === INSIDE) {
                     if (icon.type === CIRCLE) {
                         size = math.max(note.label.box.width(), note.label.box.height());
                     } else {
@@ -1633,21 +1633,7 @@ kendo_module({
             note.marker = marker;
             note.append(marker);
             marker.reflow(Box2D());
-            box.wrap(marker.box);
-            note.wrapperBox = box;
-        },
-
-        createConnector: function(view) {
-            var note = this,
-                connector = note.options.connector;
-
-            return [
-                view.createPolyline(note.connectorPoints, false, {
-                    stroke: connector.color,
-                    strokeWidth: connector.width,
-                    zIndex: connector.zIndex
-                })
-            ];
+            note.wrapperBox = box.wrap(marker.box);
         },
 
         reflow: function(targetBox) {
@@ -1658,6 +1644,8 @@ kendo_module({
                 width = wrapperBox.width(),
                 height = wrapperBox.height(),
                 distance = options.connector.distance,
+                label = note.label,
+                marker = note.marker,
                 lineStart, box, contentBox;
 
             if (inArray(options.position, [TOP, BOTTOM])) {
@@ -1709,12 +1697,18 @@ kendo_module({
                 }
             }
 
-            if (note.marker) {
-                note.marker.reflow(contentBox);
+            if (marker) {
+                marker.reflow(contentBox);
             }
 
-            if (note.label) {
-                note.label.reflow(contentBox);
+            if (label) {
+                label.reflow(contentBox);
+                if (marker) {
+                    if (label.options.position === OUTSIDE) {
+                        label.box.alignTo(marker.box, options.position);
+                    }
+                    label.reflow(label.box);
+                }
             }
 
             note.contentBox = contentBox;
@@ -1728,6 +1722,19 @@ kendo_module({
             append(elements, note.createConnector(view));
 
             return elements;
+        },
+
+        createConnector: function(view) {
+            var note = this,
+                connector = note.options.connector;
+
+            return [
+                view.createPolyline(note.connectorPoints, false, {
+                    stroke: connector.color,
+                    strokeWidth: connector.width,
+                    zIndex: connector.zIndex
+                })
+            ];
         }
     });
 
