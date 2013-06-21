@@ -683,6 +683,7 @@ kendo_module({
                         ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
                         ".k-table p{margin:0;padding:0;}" +
                     "</style>" +
+                    "<script>(function(d,c){d[c]('header'),d[c]('article'),d[c]('nav'),d[c]('section'),d[c]('footer');})(document, 'createElement');</script>" +
                     $.map(stylesheets, function(href){
                         return "<link rel='stylesheet' href='" + href + "'>";
                     }).join("") +
