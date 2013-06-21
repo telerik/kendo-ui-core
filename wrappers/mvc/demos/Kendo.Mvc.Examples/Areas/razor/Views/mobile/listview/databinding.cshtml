@@ -23,7 +23,7 @@
         .Content(obj =>        
             Html.Kendo().MobileListView()
                 .Name("grouped-listview")
-                .Template("template")                
+                .TemplateId("template")                
                 .FixedHeaders(true)
                 .DataSource(dataSource => 
                     dataSource

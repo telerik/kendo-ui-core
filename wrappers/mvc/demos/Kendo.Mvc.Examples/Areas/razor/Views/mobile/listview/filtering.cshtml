@@ -7,7 +7,7 @@
        .Content(obj =>
             Html.Kendo().MobileListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
                 .Name("endless-scrolling")
-                .Template("template")
+                .TemplateId("template")
                 .EndlessScroll(true)
                 .ScrollTreshold(30)
                 .Filterable(filter =>

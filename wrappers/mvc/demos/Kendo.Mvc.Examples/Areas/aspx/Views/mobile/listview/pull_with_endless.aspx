@@ -33,7 +33,7 @@
             %>            
             <%: Html.Kendo().MobileListView<Kendo.Mvc.Examples.Models.ProductViewModel>() 
                     .Name("pull-to-refresh-listview")
-                    .Template("pull-to-refresh-template")
+                    .TemplateId("pull-to-refresh-template")
                     .PullToRefresh(true)   
                     .EndlessScroll(true)                                     
                     .DataSource(dataSource => 

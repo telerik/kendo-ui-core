@@ -117,9 +117,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The header item template (applicable when the type is set to group).
         /// </summary>
         /// <param name="value">The value that configures the headertemplate.</param>
-        public MobileListViewBuilder<T> HeaderTemplate(string value)
+        public MobileListViewBuilder<T> HeaderTemplateId(string value)
         {
-            Component.HeaderTemplate = value;
+            Component.HeaderTemplateId = value;
 
             return this;
         }
@@ -150,9 +150,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
         /// </summary>
         /// <param name="value">The value that configures the pulltemplate.</param>
-        public MobileListViewBuilder<T> PullTemplate(string value)
+        public MobileListViewBuilder<T> PullTemplateId(string value)
         {
-            Component.PullTemplate = value;
+            Component.PullTemplateId = value;
 
             return this;
         }
@@ -172,9 +172,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The message template displayed during the refresh. Applicable only when pullToRefresh is set to true.
         /// </summary>
         /// <param name="value">The value that configures the refreshtemplate.</param>
-        public MobileListViewBuilder<T> RefreshTemplate(string value)
+        public MobileListViewBuilder<T> RefreshTemplateId(string value)
         {
-            Component.RefreshTemplate = value;
+            Component.RefreshTemplateId = value;
 
             return this;
         }
@@ -183,9 +183,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The message template indicating that pullToRefresh will occur. Applicable only when pullToRefresh is set to true.
         /// </summary>
         /// <param name="value">The value that configures the releasetemplate.</param>
-        public MobileListViewBuilder<T> ReleaseTemplate(string value)
+        public MobileListViewBuilder<T> ReleaseTemplateId(string value)
         {
-            Component.ReleaseTemplate = value;
+            Component.ReleaseTemplateId = value;
 
             return this;
         }
@@ -227,9 +227,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The item template.
         /// </summary>
         /// <param name="value">The value that configures the template.</param>
-        public MobileListViewBuilder<T> Template(string value)
+        public MobileListViewBuilder<T> TemplateId(string value)
         {
-            Component.Template = value;
+            Component.TemplateId = value;
 
             return this;
         }

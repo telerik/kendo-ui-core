@@ -7,7 +7,7 @@
        .Content(obj =>          
             Html.Kendo().MobileListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
                 .Name("load-more")
-                .Template("load-more-template")
+                .TemplateId("load-more-template")
                 .LoadMore(true)
                 .DataSource(dataSource => 
                     dataSource

@@ -9,7 +9,7 @@
         .Content(obj =>
             Html.Kendo().MobileListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
                 .Name("listview")
-                .Template("itemTemplate")
+                .TemplateId("itemTemplate")
                 .DataSource(dataSource => dataSource
                     .Read("Editing_Read", "ListView")
                     .Destroy("Editing_Destroy", "ListView")                   

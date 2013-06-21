@@ -43,7 +43,7 @@
                         dataSource.ServerOperation(false);
                         dataSource.Group(group => group.Add("firstLetter", typeof(string)));
                     })
-                    .Template("nameTemplate")
+                    .TemplateId("nameTemplate")
                     .FixedHeaders(true)
             %>
             <%

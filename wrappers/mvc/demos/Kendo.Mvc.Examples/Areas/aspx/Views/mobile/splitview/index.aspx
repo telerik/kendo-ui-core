@@ -15,7 +15,7 @@
                            .Content(obj =>
                                Html.Kendo().MobileListView()
                                     .Style("inset")
-                                    .Template("categoriesTemplate")
+                                    .TemplateId("categoriesTemplate")
                                     .DataSource(dataSource => dataSource.Read("Categories", "SplitView"))
                             )
                            .Render();
@@ -33,7 +33,7 @@
                                Html.Kendo().MobileListView()
                                     .Name("productsListView")
                                     .AutoBind(false)
-                                    .Template("productsTemplate")
+                                    .TemplateId("productsTemplate")
                                     .DataSource(dataSource => dataSource.Read("Products", "SplitView"))
                             )
                            .Render();

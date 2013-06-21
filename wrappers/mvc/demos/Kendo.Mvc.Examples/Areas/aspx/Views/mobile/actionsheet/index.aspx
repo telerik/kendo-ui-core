@@ -13,7 +13,7 @@
             Html.Kendo().MobileListView(ViewBag.InboxData)
                 .Name("inbox")
                 .HtmlAttributes(new { @class = "inboxList" })
-                .Template("inboxItem")
+                .TemplateId("inboxItem")
                 .Render();
             %>
     

@@ -43,9 +43,9 @@ namespace Kendo.Mvc.UI
                 html.Attribute("data-auto-bind", "false");
             }
 
-            if (component.Template.HasValue())
+            if (component.TemplateId.HasValue())
             {
-                html.Attribute("data-template", component.Template);
+                html.Attribute("data-template", component.TemplateId);
             }
 
             if (component.EndlessScroll)
@@ -64,9 +64,9 @@ namespace Kendo.Mvc.UI
                 html.Attribute("data-fixed-headers", "true");
             }
 
-            if (component.HeaderTemplate.HasValue())
+            if (component.HeaderTemplateId.HasValue())
             {
-                html.Attribute("data-header-template", component.HeaderTemplate);
+                html.Attribute("data-header-template", component.HeaderTemplateId);
             }
 
             if (component.LoadMore)
@@ -85,19 +85,19 @@ namespace Kendo.Mvc.UI
 
                 html.Attribute("data-append-on-refresh", component.AppendOnRefresh ? "true" : "false");
 
-                if (component.PullTemplate.HasValue())
+                if (component.PullTemplateId.HasValue())
                 {
-                    html.Attribute("data-pull-template", component.PullTemplate);
+                    html.Attribute("data-pull-template", component.PullTemplateId);
                 }
 
-                if (component.RefreshTemplate.HasValue())
+                if (component.RefreshTemplateId.HasValue())
                 {
-                    html.Attribute("data-refresh-template", component.RefreshTemplate);
+                    html.Attribute("data-refresh-template", component.RefreshTemplateId);
                 }
 
-                if (component.ReleaseTemplate.HasValue())
+                if (component.ReleaseTemplateId.HasValue())
                 {
-                    html.Attribute("data-release-template", component.ReleaseTemplate);
+                    html.Attribute("data-release-template", component.ReleaseTemplateId);
                 }
                 //TODO: component.PullParameters
             }            

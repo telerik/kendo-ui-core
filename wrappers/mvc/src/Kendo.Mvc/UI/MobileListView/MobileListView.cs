@@ -59,25 +59,25 @@ namespace Kendo.Mvc.UI
         
         public bool FixedHeaders { get; set; }
         
-        public string HeaderTemplate { get; set; }
+        public string HeaderTemplateId { get; set; }
         
         public bool LoadMore { get; set; }
         
         public string LoadMoreText { get; set; }               
         
-        public string PullTemplate { get; set; }
+        public string PullTemplateId { get; set; }
         
         public bool PullToRefresh { get; set; }               
         
-        public string RefreshTemplate { get; set; }
+        public string RefreshTemplateId { get; set; }
         
-        public string ReleaseTemplate { get; set; }
+        public string ReleaseTemplateId { get; set; }
         
         public string ScrollTreshold { get; set; }
         
         public string Style { get; set; }
         
-        public string Template { get; set; }
+        public string TemplateId { get; set; }
         
         public string Type { get; set; }
         

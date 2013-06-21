@@ -11,8 +11,8 @@
                 <div class="head">&nbsp;</div>
                 <%: Html.Kendo().MobileListView()
                         .Name("custom-listview")
-                        .Template("customListViewTemplate")
-                        .HeaderTemplate("customListViewHeaderTemplate")
+                        .TemplateId("customListViewTemplate")
+                        .HeaderTemplateId("customListViewHeaderTemplate")
                         .DataSource(dataSource =>
                             dataSource
                                 .Read("FixedHeaders_Read", "ListView")
