@@ -384,6 +384,7 @@ kendo_module({
         },
 
         scrollTo: function(x, y) {
+            this.dimensions.refresh();
             this.movable.moveTo({x: x, y: y});
         },
 
