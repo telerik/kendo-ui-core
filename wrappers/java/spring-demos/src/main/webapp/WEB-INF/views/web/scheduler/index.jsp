@@ -66,7 +66,7 @@
                 <kendo:dataSource-schema-model id="taskId">
                      <kendo:dataSource-schema-model-fields>
                          <kendo:dataSource-schema-model-field name="taskId" type="number" />
-                         <kendo:dataSource-schema-model-field name="title" type="string" />
+                         <kendo:dataSource-schema-model-field name="title" defaultValue="No title" type="string" />
                          <kendo:dataSource-schema-model-field name="description" type="string" />
                          <kendo:dataSource-schema-model-field name="isAllDay" type="boolean" />
                          <kendo:dataSource-schema-model-field name="recurrenceRule" type="string" nullable="true"/>

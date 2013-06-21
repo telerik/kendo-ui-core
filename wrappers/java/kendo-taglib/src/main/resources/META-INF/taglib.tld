@@ -22127,6 +22127,13 @@ Refer to the jQuery.ajax documentation for further info.</description>
         </attribute>
 
     	<attribute>
+            <description>Specifies the name of the original raw data item field.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        
+    	<attribute>
             <description>Specifies if the field is editable or not. The default value is &quot;true&quot;.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>

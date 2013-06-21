@@ -23,6 +23,14 @@ public class FieldTag extends BaseTag {
         setProperty("name", name);
     }
     
+    public String getFrom() {
+        return (String)getProperty("from");
+    }
+    
+    public void setFrom(String from) {
+        setProperty("from", from);
+    }
+    
     public Object getDefaultValue() {
         return getProperty("defaultValue");
     }
