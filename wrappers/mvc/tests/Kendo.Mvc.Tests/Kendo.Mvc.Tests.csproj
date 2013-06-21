@@ -86,7 +86,6 @@
     <Compile Include="Infrastructure\Implementation\DependencyInjectionContainerTests.cs" />
     <Compile Include="Infrastructure\Implementation\NoCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\JavaScriptInitializerTests.cs" />
-    <Compile Include="UI\Chart\ChartSeriesFactoryTests.cs" />
     <Compile Include="UI\Chart\ChartSelectionMousewheelBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisSelectionBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSelectionSerializerTests.cs" />
@@ -97,7 +96,6 @@
     <Compile Include="UI\Scheduler\SchedulerEventDouble.cs" />
     <Compile Include="UI\Scheduler\SchedulerEventServiceDouble.cs" />
     <Compile Include="UI\Sparkline\SparklineSeriesDefaultsBuilderTests.cs" />
-    <Compile Include="UI\Sparkline\SparklineSeriesFactoryTests.cs" />
     <Compile Include="UI\Sparkline\SparklineBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineHtmlBuilderTests.cs" />
     <Compile Include="UI\Sparkline\Serialization\SparklineSerializationTests.cs" />
