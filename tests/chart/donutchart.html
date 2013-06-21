@@ -40,7 +40,7 @@
                 donutChart.reflow(chartBox);
                 donutChart.getViewElements(view);
 
-                firstSegment = donutChart.segments[0];
+                firstSegment = donutChart.points[0];
             }
 
             (function() {
@@ -70,23 +70,23 @@
                     }
                 });
 
-                test("creates segments for donut chart data points", function() {
-                    equal(donutChart.segments.length, values.data.length);
+                test("creates points for donut chart data points", function() {
+                    equal(donutChart.points.length, values.data.length);
                 });
 
-                test("segments have set angle", function() {
-                    $.each(donutChart.segments, function() {
+                test("points have set angle", function() {
+                    $.each(donutChart.points, function() {
                         ok(this.sector.angle);
                     });
                 });
 
-                test("segments have set startAngle", function() {
-                    $.each(donutChart.segments, function() {
+                test("points have set startAngle", function() {
+                    $.each(donutChart.points, function() {
                         ok(this.sector.angle);
                     });
                 });
 
-                test("segments have set owner", function() {
+                test("points have set owner", function() {
                     ok(firstSegment.owner === donutChart);
                 });
 
@@ -118,7 +118,7 @@
                     equal(firstSegment.category, "A");
                 });
 
-                test("segments have set owner", function() {
+                test("points have set owner", function() {
                     ok(firstSegment.owner === donutChart);
                 });
 
@@ -143,7 +143,7 @@
                 });
 
                 test("sets segment different center if segment have explode sets to true", function() {
-                    ok(firstSegment.sector.c != donutChart.segments[1].sector.c);
+                    ok(firstSegment.sector.c != donutChart.points[1].sector.c);
                 });
             })();
 
@@ -182,7 +182,7 @@
 
                         chart = $("#container").data("kendoChart");
                         donutChart = chart._plotArea.charts[0];
-                        firstSegment = donutChart.segments[0];
+                        firstSegment = donutChart.points[0];
                     }
                 });
 
@@ -332,7 +332,7 @@
                     }, options));
 
                     var plotArea = chart._model.children[1],
-                        segment = plotArea.charts[0].segments[0],
+                        segment = plotArea.charts[0].points[0],
                         label = segment.children[0];
 
                     segmentElement = $(dataviz.getElement(segment.options.id));
@@ -348,7 +348,7 @@
                     teardown: destroyChart
                 });
 
-                test("fires when clicking segments", 1, function() {
+                test("fires when clicking points", 1, function() {
                     segmentElement.click();
                 });
 
@@ -366,7 +366,7 @@
                     teardown: destroyChart
                 });
 
-                test("fires when clicking segments", 1, function() {
+                test("fires when clicking points", 1, function() {
                     segmentElement.mouseover();
                 });
 
@@ -377,7 +377,7 @@
             })();
 
             (function() {
-                var segments,
+                var points,
                     chartBox = new Box2D(0,0,400,400),
                     plotArea, donutChart;
 
@@ -410,7 +410,7 @@
                     donutChart.reflow(chartBox);
                     donutChart.getViewElements(view);
 
-                    segments = donutChart.segments;
+                    points = donutChart.points;
                 }
 
                 // ------------------------------------------------------------
@@ -420,16 +420,16 @@
                     }
                 });
 
-                test("first level segments have margin", function() {
-                    var segment = segments[segments.length - 1],
+                test("first level points have margin", function() {
+                    var segment = points[points.length - 1],
                         sector = segment.sector,
                         size = sector.r - sector.ir;
 
                     ok(size === 40);
                 });
 
-                test("first level segments have holeSize", function() {
-                    $.each(segments, function() {
+                test("first level points have holeSize", function() {
+                    $.each(points, function() {
                         if (this.seriesIx == 0) {
                             ok(this.sector.ir == 40);
                         }
@@ -437,11 +437,11 @@
                 });
 
                 test("should apply start angle to all series", function() {
-                    ok(segments[0].options.startAngle === 20 &&
-                       segments[2].options.startAngle === 100);
+                    ok(points[0].options.startAngle === 20 &&
+                       points[2].options.startAngle === 100);
                 });
 
-                test("segments can be removed with visible false", function() {
+                test("points can be removed with visible false", function() {
                     view = new ViewStub();
                     plotArea = new PlotAreaStub();
 
@@ -465,9 +465,9 @@
                     donutChart.reflow(chartBox);
                     donutChart.getViewElements(view);
 
-                    segments = donutChart.segments;
+                    points = donutChart.points;
 
-                    equal(segments.length, 1);
+                    equal(points.length, 1);
                 });
             })();
 
