@@ -776,52 +776,125 @@
                 equal(model.recurrenceException, "");
             });
 
-            /*test("delete occurrence creates recurrenceException entry", function() {
+            test("delete occurrence creates recurrenceException entry", function() {
                 var date = new Date(2013, 10, 10, 15, 0, 0),
-                    exceptionDate = new Date(2013, 10, 13, 15, 0, 0),
-                    excepctionDate = kendo.timezone.apply(exceptionDate, 0),
+                    exceptionDate = new Date(2013, 10, 12, 15, 0, 0),
+                    exceptionDate = kendo.timezone.apply(exceptionDate, 0),
                     recurrenceException = kendo.toString(exceptionDate, "yyyyMMddTHHmmssZ") + ";";
 
                 var scheduler = setup({
                     views: ["week"],
+                    date: date,
                     dataSource: {
                         data: [ { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY" } ]
                     }
                 });
 
+                scheduler.removeEvent(scheduler.element.find(".k-event").eq(2).data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                $(document.body).find("[data-role=window]:visible").data("kendoWindow").destroy();
+
                 var model = scheduler.dataSource.at(0);
 
-                equal(model.recurrenceException,
-            });*/
+                equal(model.recurrenceException, recurrenceException);
+            });
 
-            /*test("Delete occurrence creates recurrenceException ", function() {
-                    var date = new Date(2013, 10, 10, 15, 0, 0),
-                        excepctionDate = kendo.timezone.apply(date, 0),
-                        recurrenceException = kendo.toString(date, "yyyyMMddTHHmmssZ") + ";";
+            test("delete created exception", function() {
+                var date = new Date(2013, 10, 10, 15, 0, 0),
+                    nextDate = new Date(2013, 10, 11, 15, 0, 0),
+                    recurrenceException = kendo.toString(kendo.timezone.apply(nextDate, 0), "yyyyMMddTHHmmssZ") + ";";
 
                 var scheduler = setup({
                     views: ["week"],
+                    date: date,
                     dataSource: {
                         data: [
                             { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException},
-                            { id: "2", start: date, end: date, title: "my event", recurrenceId: "1" }
+                            { id: "2", start: nextDate, end: nextDate, title: "my event", recurrenceId: "1" }
                         ]
                     }
                 });
 
-                var eventUID = scheduler.element.find(".k-event:first").data("uid"),
-                    origin = scheduler.dataSource.at(0),
-                    exception;
+                var event = scheduler.element.find(".k-event").eq(1);
+                    origin = scheduler.dataSource.at(0);
 
-                scheduler.editEvent(eventUID);
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                scheduler.removeEvent(event.data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click"); //delete current occurrence
+                $(document.body).find("[data-role=window]:visible").find(".k-button:first").click(); //accept deletion
 
-                exception = scheduler.dataSource.at(1);
+                equal(scheduler.dataSource.data().length, 1);
+                equal(origin.recurrenceException, recurrenceException);
+            });
 
-                ok(origin.recurrenceException);
-                equal(origin.recurrenceException, kendo.toString(kendo.timezone.apply(exception.start, 0), "yyyyMMddTHHmmssZ") + ";");
-                equal(origin.id, exception.recurrenceId);
-            });*/
+            test("canceling deletion of occurrence removes applied recurrenceException", function() {
+                var date = new Date(2013, 10, 10, 15, 0, 0);
+
+                var scheduler = setup({
+                    views: ["week"],
+                    date: date,
+                    dataSource: {
+                        data: [ { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY" } ]
+                    }
+                });
+
+                scheduler.removeEvent(scheduler.element.find(".k-event").eq(2).data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click"); //delete current occurrence
+                $(document.body).find("[data-role=window]:visible").find(".k-button:last").click(); //cancel deletion
+
+                var model = scheduler.dataSource.at(0);
+
+                ok(!model.recurrenceException);
+            });
+
+            test("deleting series wll delete all exceptions", function() {
+                var date = new Date(2013, 10, 10, 15, 0, 0),
+                    nextDate = new Date(2013, 10, 11, 15, 0, 0),
+                    recurrenceException = kendo.toString(kendo.timezone.apply(nextDate, 0), "yyyyMMddTHHmmssZ") + ";";
+
+                var scheduler = setup({
+                    views: ["week"],
+                    date: date,
+                    dataSource: {
+                        data: [
+                            { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException},
+                            { id: "2", start: nextDate, end: nextDate, title: "my event", recurrenceId: "1" }
+                        ]
+                    }
+                });
+
+                var event = scheduler.element.find(".k-event").eq(1);
+
+                scheduler.removeEvent(event.data("uid"));
+                scheduler._recurringDialog.element.find("button:last").triggerHandler("click"); //delete series
+                $(document.body).find("[data-role=window]:visible").find(".k-button:first").click(); //accept deletion
+
+                equal(scheduler.dataSource.data().length, 0);
+            });
+
+            test("recurrenceRule is persisted after delete cancellation", function() {
+                var date = new Date(2013, 10, 10, 15, 0, 0),
+                    nextDate = new Date(2013, 10, 11, 15, 0, 0),
+                    recurrenceException = kendo.toString(kendo.timezone.apply(nextDate, 0), "yyyyMMddTHHmmssZ") + ";";
+
+                var scheduler = setup({
+                    views: ["week"],
+                    date: date,
+                    dataSource: {
+                        data: [
+                            { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException},
+                            { id: "2", start: nextDate, end: nextDate, title: "my event", recurrenceId: "1" }
+                        ]
+                    }
+                });
+
+                var event = scheduler.element.find(".k-event").eq(2);
+
+                scheduler.removeEvent(event.data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click"); //delete current occurrence
+                $(document.body).find("[data-role=window]:visible").find(".k-button:last").click(); //cancel deletion
+
+                ok(scheduler.dataSource.at(0).recurrenceRule);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

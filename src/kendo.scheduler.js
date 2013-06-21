@@ -531,9 +531,6 @@ kendo_module({
 
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
-
-                //TODO: remove all exceptions if modify recurrence option
-
                 that.dataSource.sync();
             }
         },
@@ -860,7 +857,6 @@ kendo_module({
             that._confirmation(function(cancel) {
                 if (cancel) {
                     that._removeExceptionDate(model);
-                    that.dataSource.cancelChanges(model);
                 } else if (!that.trigger(REMOVE, { event: model })) {
                     if (removeExceptions) {
                         that._removeExcetionEvents(model);
