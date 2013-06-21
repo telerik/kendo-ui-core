@@ -30,13 +30,13 @@
         /// Defines a Scheduler day view.
         /// </summary>
         /// <returns></returns>
-        public ISchedulerViewBuilder DayView(Action<SchedulerDayViewBuilder> addViewAction)
+        public ISchedulerViewBuilder DayView(Action<SchedulerViewDayBuilder<SchedulerViewDay>> addViewAction)
         {
-            SchedulerDayView view = new SchedulerDayView();
+            SchedulerViewDay view = new SchedulerViewDay();
 
             container.Views.Add(view);
 
-            SchedulerDayViewBuilder builder = new SchedulerDayViewBuilder(view);
+            SchedulerViewDayBuilder<SchedulerViewDay> builder = new SchedulerViewDayBuilder<SchedulerViewDay>(view);
 
             addViewAction(builder);
 
@@ -49,7 +49,7 @@
         /// <returns></returns>
         public void DayView()
         {
-            SchedulerDayView view = new SchedulerDayView();
+            SchedulerViewDay view = new SchedulerViewDay();
 
             container.Views.Add(view);
         }
@@ -58,13 +58,13 @@
         /// Defines a Scheduler week view.
         /// </summary>
         /// <returns></returns>
-        public ISchedulerViewBuilder WeekView(Action<SchedulerWeekViewBuilder> addViewAction)
+        public ISchedulerViewBuilder WeekView(Action<SchedulerViewWeekBuilder<SchedulerViewWeek>> addViewAction)
         {
-            SchedulerWeekView view = new SchedulerWeekView();
+            SchedulerViewWeek view = new SchedulerViewWeek();
 
             container.Views.Add(view);
 
-            SchedulerWeekViewBuilder builder = new SchedulerWeekViewBuilder(view);
+            SchedulerViewWeekBuilder<SchedulerViewWeek> builder = new SchedulerViewWeekBuilder<SchedulerViewWeek>(view);
 
             addViewAction(builder);
 
@@ -77,7 +77,7 @@
         /// <returns></returns>
         public void WeekView()
         {
-            SchedulerWeekView view = new SchedulerWeekView();
+            SchedulerViewWeek view = new SchedulerViewWeek();
 
             container.Views.Add(view);
         }
@@ -86,13 +86,13 @@
         /// Defines a Scheduler month view.
         /// </summary>
         /// <returns></returns>
-        public ISchedulerViewBuilder MonthView(Action<SchedulerMonthViewBuilder> addViewAction)
+        public ISchedulerViewBuilder MonthView(Action<SchedulerViewMonthBuilder<SchedulerViewMonth>> addViewAction)
         {
-            SchedulerMonthView view = new SchedulerMonthView();
+            SchedulerViewMonth view = new SchedulerViewMonth();
 
             container.Views.Add(view);
 
-            SchedulerMonthViewBuilder builder = new SchedulerMonthViewBuilder(view);
+            SchedulerViewMonthBuilder<SchedulerViewMonth> builder = new SchedulerViewMonthBuilder<SchedulerViewMonth>(view);
 
             addViewAction(builder);
 
@@ -105,7 +105,7 @@
         /// <returns></returns>
         public void MonthView()
         {
-            SchedulerMonthView view = new SchedulerMonthView();
+            SchedulerViewMonth view = new SchedulerViewMonth();
 
             container.Views.Add(view);
         }
@@ -114,13 +114,13 @@
         /// Defines a Scheduler agenda view.
         /// </summary>
         /// <returns></returns>
-        public ISchedulerViewBuilder AgendaView(Action<SchedulerAgendaViewBuilder> addViewAction)
+        public ISchedulerViewBuilder AgendaView(Action<SchedulerViewAgendaBuilder<SchedulerViewAgenda>> addViewAction)
         {
-            SchedulerAgendaView view = new SchedulerAgendaView();
+            SchedulerViewAgenda view = new SchedulerViewAgenda();
 
             container.Views.Add(view);
 
-            SchedulerAgendaViewBuilder builder = new SchedulerAgendaViewBuilder(view);
+            SchedulerViewAgendaBuilder<SchedulerViewAgenda> builder = new SchedulerViewAgendaBuilder<SchedulerViewAgenda>(view);
 
             addViewAction(builder);
 
@@ -133,7 +133,7 @@
         /// <returns></returns>
         public void AgendaView()
         {
-            SchedulerAgendaView view = new SchedulerAgendaView();
+            SchedulerViewAgenda view = new SchedulerViewAgenda();
 
             container.Views.Add(view);
         }

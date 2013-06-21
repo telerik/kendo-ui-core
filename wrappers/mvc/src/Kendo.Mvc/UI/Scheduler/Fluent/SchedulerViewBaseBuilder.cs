@@ -10,16 +10,17 @@
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="SchedulerViewBaseBuilder"/>.
     /// </summary>
-    public class SchedulerViewBaseBuilder : ISchedulerViewBuilder
+    public class SchedulerViewBaseBuilder<T> : ISchedulerViewBuilder
+        where T : class, ISchedulerView
     {
-        private readonly SchedulerViewBase resource;
+        protected readonly T resource;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchedulerDayViewBuilder"/> class.
+        /// Initializes a new instance of the <see cref="SchedulerViewDayBuilder"/> class.
         /// </summary>
         /// <param name="resource">The resource.</param>
         /// 
-        public SchedulerViewBaseBuilder(SchedulerViewBase resource)
+        public SchedulerViewBaseBuilder(T resource)
         {
             this.resource = resource;
         }
@@ -86,6 +87,24 @@
             resource.Editable = new SchedulerViewEditableSettings();
 
             configurator(new SchedulerViewEditableSettingsBuilder(resource.Editable));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Enable or disable the editable option.
+        /// </summary>
+        /// <param name="isEditable">The enable or disable the editable option.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  //TODO: CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public ISchedulerViewBuilder Editable(bool isEditable)
+        {
+            resource.Editable = new SchedulerViewEditableSettings();
+
+            resource.Editable.Enable = isEditable;
 
             return this;
         }

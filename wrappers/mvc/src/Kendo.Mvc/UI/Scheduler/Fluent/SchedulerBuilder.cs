@@ -20,6 +20,138 @@
         }
 
         /// <summary>
+        /// Configures the Scheduler Date
+        /// </summary>
+        /// <param name="date">The Date.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// //CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Date(DateTime? date)
+        {
+            Component.Date = date;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the Scheduler StartTime
+        /// </summary>
+        /// <param name="startTime">The StartTime.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// //CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> StartTime(DateTime? startTime)
+        {
+            Component.StartTime = startTime;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the Scheduler EndTime
+        /// </summary>
+        /// <param name="endTime">The EndTime.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// //CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> EndTime(DateTime? endTime)
+        {
+            Component.EndTime = endTime;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the Scheduler Height
+        /// </summary>
+        /// <param name="height">The Height.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// //CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Height(int? height)
+        {
+            Component.Height = height;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the Scheduler EventTemplate
+        /// </summary>
+        /// <param name="eventTemplate">The EventTemplate.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// //CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> EventTemplate(string eventTemplate)
+        {
+            Component.EventTemplate = eventTemplate;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the Scheduler EventTemplateId
+        /// </summary>
+        /// <param name="eventTemplateId">The EventTemplateId.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// //CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> EventTemplateId(string eventTemplateId)
+        {
+            Component.EventTemplateId = eventTemplateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the editable settings option.
+        /// </summary>
+        /// <param name="editableSettings">The editable settings.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  //TODO: CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Editable(Action<SchedulerEditableSettingsBuilder> configurator)
+        {
+            Component.Editable = new SchedulerEditableSettings();
+
+            configurator(new SchedulerEditableSettingsBuilder(Component.Editable));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Enable or disable the editable option.
+        /// </summary>
+        /// <param name="isEditable">The enable or disable the editable option.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  //TODO: CODE EXAMPLE
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Editable(bool isEditable)
+        {
+            Component.Editable = new SchedulerEditableSettings();
+
+            Component.Editable.Enable = isEditable;
+
+            return this;
+        }
+
+        /// <summary>
         /// Configures the Scheduler Resources
         /// </summary>
         /// <param name="addResourceAction">The client resources action.</param>

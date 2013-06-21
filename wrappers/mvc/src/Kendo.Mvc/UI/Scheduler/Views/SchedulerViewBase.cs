@@ -40,9 +40,16 @@
             
             json["type"] = Type;
 
-            if (Editable != null && Editable.ToJson().Count > 0)
+            if (Editable != null)
             {
-                json["editable"] = Editable.ToJson();
+                if (Editable.Enable == false)
+                {
+                    json["editable"] = false;
+                }
+                else if (Editable.ToJson().Count > 0)
+                {
+                    json["editable"] = Editable.ToJson();
+                }
             }
 
             if (!string.IsNullOrEmpty(EventTemplate))

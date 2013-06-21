@@ -8,11 +8,12 @@
     using System.Collections;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="SchedulerAgendaView"/>.
+    /// Defines the fluent interface for configuring the <see cref="SchedulerViewDay"/>.
     /// </summary>
-    public class SchedulerAgendaViewBuilder : SchedulerViewBaseBuilder, ISchedulerViewBuilder
+    public class SchedulerViewDayBuilder<T> : SchedulerViewMultiDayBuilder<T>
+        where T : SchedulerViewDay
     {
-        public SchedulerAgendaViewBuilder(SchedulerAgendaView resource)
+        public SchedulerViewDayBuilder(T resource)
             : base(resource)
         { 
         }
