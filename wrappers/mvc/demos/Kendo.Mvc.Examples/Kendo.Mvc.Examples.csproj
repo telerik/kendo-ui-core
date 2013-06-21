@@ -129,6 +129,7 @@
     <Compile Include="Controllers\Mobile\Drawer\Copy of IndexController.cs" />
     <Compile Include="Controllers\Mobile\Drawer\Two_Way_DrawersController.cs" />
     <Compile Include="Controllers\Mobile\Layout\IndexController.cs" />
+    <Compile Include="Controllers\Mobile\ListView\Hierarchical_DatabindingController.cs" />
     <Compile Include="Controllers\Mobile\ListView\Pull_With_EndlessController.cs" />
     <Compile Include="Controllers\Mobile\ListView\FilteringController.cs" />
     <Compile Include="Controllers\Mobile\ListView\Press_To_Load_MoreController.cs" />
@@ -546,6 +547,7 @@
     <Content Include="Areas\aspx\Views\mobile\drawer\index.aspx" />
     <Content Include="Areas\aspx\Views\mobile\drawer\two_way_drawers.aspx" />
     <Content Include="Areas\aspx\Views\mobile\layout\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile\listview\hierarchical_databinding.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\pull_with_endless.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\filtering.aspx" />
     <Content Include="Areas\aspx\Views\mobile\listview\press_to_load_more.aspx" />
@@ -759,6 +761,7 @@
     <Content Include="Areas\razor\Views\mobile\listview\pull_with_endless.cshtml" />
     <Content Include="Areas\razor\Views\mobile\drawer\index.cshtml" />
     <Content Include="Areas\razor\Views\mobile\drawer\two_way_drawers.cshtml" />
+    <Content Include="Areas\razor\Views\mobile\listview\hierarchical_databinding.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
