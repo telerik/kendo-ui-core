@@ -229,7 +229,7 @@ kendo_module({
                 rows.push( { text: "all day", allDay: true });
             }
 
-            this._forTimeRange(options.startTime, options.endTime, function(date, majorTick, lastSlotRow) {
+            this._forTimeRange(options.startTime, options.endTime, function(date, majorTick, middleRow, lastSlotRow) {
                 var template = majorTick ? that.majorTimeHeaderTemplate : that.minorTimeHeaderTemplate;
 
                 var row = {
@@ -264,8 +264,9 @@ kendo_module({
             var that = this,
                 msMin = getMilliseconds(min),
                 msMax = getMilliseconds(max),
+                minorTickCount = that.options.minorTickCount,
                 msMajorInterval = that.options.majorTick * MS_PER_MINUTE,
-                msInterval = msMajorInterval / that.options.minorTickCount || 1,
+                msInterval = msMajorInterval / minorTickCount || 1,
                 start = new Date(+min),
                 startDay = start.getDate(),
                 msStart,
@@ -285,7 +286,12 @@ kendo_module({
             length = Math.round(length);
 
             for (; idx < length; idx++) {
-                html += action(start, idx % (msMajorInterval/msInterval) === 0, idx % (msMajorInterval/msInterval) === that.options.minorTickCount - 1);
+                var majorTickDivider = idx % (msMajorInterval/msInterval),
+                    isMajorTickRow = majorTickDivider === 0,
+                    isMiddleRow = majorTickDivider < minorTickCount - 1,
+                    isLastSlotRow = majorTickDivider === minorTickCount - 1;
+
+                html += action(start, isMajorTickRow, isMiddleRow, isLastSlotRow);
 
                 kendo.date.setTime(start, msInterval, false);
             }
@@ -317,12 +323,12 @@ kendo_module({
 
             html += '<tbody>';
 
-            html += this._forTimeRange(start, end, function(date, majorTick) {
+            html += this._forTimeRange(start, end, function(date, majorTick, middleRow) {
                 var content = "",
                     idx,
                     length;
 
-                content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
+                content = '<tr' + (middleRow ? ' class="k-middle-row"' : "") + '>';
 
                 for (idx = 0, length = dates.length; idx < length; idx++) {
                     content += "<td" + (kendo.date.isToday(dates[idx]) ? ' class="k-today"' : "") + ">";
