@@ -59,9 +59,24 @@
                     that.resizeTo(that.element.width());
                     that._dataSource();
                     that._buffer();
+                    that._pendingPageRefresh = false;
+                    that._pendingWidgetRefresh = false;
+
+                    //that.view().bind("show", that._viewShow);
 
                     if(that.options.autoBind) {
                         that.dataSource.fetch();
+                    }
+                },
+
+                _viewShow: function() {
+                    var that = this;
+
+                    if(that._pendingWidgetRefresh) {
+                        setTimeout(function() {
+                            that._resetPages();
+                        }, 0);
+                        that._pendingWidgetRefresh= false;
                     }
                 },
 
@@ -143,6 +158,8 @@
                     var that = this,
                         pane = that.pane,
                         width = pane.size(),
+                        offset = pane.offset(),
+                        thresholdPassed = Math.abs(offset) >= width / 3,
                         ease = bounce ? kendo.effects.Transition.easeOutBack : kendo.effects.Transition. easeOutExpo,
                         isEndReached = that.page + 2 > that.buffer.total;
 
@@ -152,13 +169,17 @@
                         } else {
                             that._moveBackward();
                         }
-                        return;
                     } else if(swipeType === LEFT_SWIPE && !isEndReached) {
                         that._moveForward();
-                        return;
-                    }
-
-                    if(swipeType === NUDGE) {
+                    } else if(offset > 0 && (thresholdPassed && !isEndReached)) {
+                        that._moveForward();
+                    } else if(offset < 0 && thresholdPassed) {
+                        if(that.page === 0) {
+                            that._cancelMove(ease);
+                        } else {
+                            that._moveBackward();
+                        }
+                    } else {
                         that._cancelMove(ease);
                     }
 
@@ -219,15 +240,25 @@
                 },
 
                 _onResize: function() {
-                    
+                    var page = this.pages[2], //last page
+                        idx = this.page + 1;
+
+                    if(this._pendingPageRefresh) {
+                        this.setPageContent(page, idx);
+                        this._pendingPageRefresh = false;
+                    }
                 },
 
                 _onReset: function() {
-                    
+                    if(this.element.is(":visible")) {
+                        this._resetPages();
+                    } else {
+                        this._widgetNeedsRefresh = true;
+                    }
                 },
 
                 _onEndReached: function() {
-                    
+                    this._pendingPageRefresh = true;
                 },
 
                 setPageContent: function(page, index) {
@@ -320,9 +351,8 @@
                 ok(content.buffer instanceof BatchBuffer);
             });
 
-            test("sets the content correctly", 5, function() {
+            test("sets the content correctly", 4, function() {
                 var page = content.pages[0];
-                equal(page.element.find(">div").length, 0);
 
                 content.setPageContent(page, 0);
                 equal(page.element.children().length, 1);
@@ -419,6 +449,43 @@
                 setTimeout(function() {
                     start();
                     equal(content.page, 0);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+           asyncTest("slow drag to right snaps the content back to the current page when ScrollView is at the first page", 2, function() {
+                pane.moveTo(-200);
+                content.paneMoved(NUDGE);
+                setTimeout(function() {
+                    start();
+                    equal(content.page, 0);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+           asyncTest("slow drag to right snaps the content back to the previous page when ScrollView is NOT at the first page", 3, function() {
+                content.scrollTo(7);
+                equal(content.page, 7);
+
+                pane.moveTo(-200);
+                content.paneMoved(NUDGE);
+
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 6);
+                    equal(pane.offset(), 0);
+                }, 50);
+            });
+
+           asyncTest("slow drag to left snaps the content back to the next page when ScrollView", 2, function() {
+                pane.moveTo(200);
+                content.paneMoved(NUDGE);
+
+                setTimeout(function() {
+                    start();
+                    content.updatePage();
+                    equal(content.page, 1);
                     equal(pane.offset(), 0);
                 }, 50);
             });
