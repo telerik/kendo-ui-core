@@ -411,6 +411,10 @@ kendo_module({
                 }
             }
 
+            if(callback && callback()) {
+                delta = 0;
+            }
+
             if(delta === 0) {
                 that._cancelMove(ease);
             } else if (delta === -1) {
