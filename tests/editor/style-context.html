@@ -96,6 +96,15 @@
             equal(inline.value(), '<h1 class="red">foo</h1>');
         });
 
+        test("styles tool is hidden if there are no applicable styles", function() {
+            selectFromValue(inline, 'fo||o');
+
+            var tool = styleTool(inline);
+
+            console.log(tool.wrapper);
+            ok(tool.wrapper.is(".k-state-disabled"));
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

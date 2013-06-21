@@ -532,6 +532,8 @@ var StyleTool = DelayedExecutionTool.extend({
         dataSource.filter([{ field: "visible", operator: "eq", value: true }]);
 
         DelayedExecutionTool.fn.update.call(this, ui, nodes);
+
+        selectBox.wrapper.toggleClass("k-state-disabled", !dataSource.view().length);
     }
 });
 
