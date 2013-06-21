@@ -220,7 +220,8 @@ var GreedyBlockFormatter = Class.extend({
         var format = this.format,
             blocks = dom.blockParents(nodes),
             formatTag = format[0].tags[0],
-            i, len, list, formatter, range;
+            i, len, list, formatter, range,
+            element;
 
         if (blocks.length) {
             for (i = 0, len = blocks.length; i < len; i++) {
@@ -231,7 +232,8 @@ var GreedyBlockFormatter = Class.extend({
                     range.selectNode(blocks[i]);
                     formatter.toggle(range);
                 } else {
-                    dom.changeTag(blocks[i], formatTag);
+                    element = dom.changeTag(blocks[i], formatTag);
+                    dom.attr(element, format[0].attr);
                 }
             }
         } else {

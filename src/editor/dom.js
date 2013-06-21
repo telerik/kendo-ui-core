@@ -506,6 +506,8 @@ var Dom = {
             if (attributes[attr] === null) {
                 element.removeAttribute(attr);
                 delete attributes[attr];
+            } else if (attr == "className") {
+                element[attr] = attributes[attr];
             }
         }
 

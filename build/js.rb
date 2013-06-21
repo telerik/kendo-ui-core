@@ -50,6 +50,7 @@ file_merge "src/kendo.editor.js" => [
     "src/editor/components.js",
     "src/editor/indent.js",
     "src/editor/viewhtml.js",
+    "src/editor/contextformat.js",
     "src/editor/tables.js"
 ]
 file "src/kendo.editor.js" => JS_BUILDFILE

@@ -658,8 +658,8 @@ kendo_module({
 
             if (stylesheets.length > 0) {
                 $(iframe).one("load", function() {
-                    var styleTools = editor.toolbar.items().filter(".k-style");
-                    styleTools.kendoSelectBox("decorateItems", doc);
+                    var styleTools = editor.toolbar.items().filter(".k-decorated");
+                    styleTools.kendoSelectBox("decorate", doc);
                 });
             }
 
@@ -721,8 +721,8 @@ kendo_module({
                 doc = editor.document = document;
                 editor.body = editor.element[0];
 
-                var styleTools = editor.toolbar.items().filter(".k-style");
-                styleTools.kendoSelectBox("decorateItems", doc);
+                var styleTools = editor.toolbar.items().filter(".k-decorated");
+                styleTools.kendoSelectBox("decorate", doc);
             }
 
             try {
@@ -953,11 +953,7 @@ kendo_module({
                 "addRowAbove",
                 "addRowBelow",
                 "deleteRow",
-                "deleteColumn"/*,
-                "separator", // declare these explicitly
-                "style",
-                "subscript",
-                "superscript"  */
+                "deleteColumn"
             ]
         },
 

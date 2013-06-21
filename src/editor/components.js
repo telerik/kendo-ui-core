@@ -1,7 +1,8 @@
 (function($, undefined) {
 
 var kendo = window.kendo,
-    DropDownList = kendo.ui.DropDownList;
+    DropDownList = kendo.ui.DropDownList,
+    dom = kendo.ui.editor.Dom;
 
 var SelectBox = DropDownList.extend({
     init: function(element, options) {
@@ -32,8 +33,21 @@ var SelectBox = DropDownList.extend({
            that.current(null);
            that._oldIndex = that.selectedIndex = -1;
         }
+    },
+
+    decorate: function(doc) {
+        var items = this.dataSource.data(),
+            i, tag, className;
+
+        for (i = 0; i < items.length; i++) {
+            tag = items[i].tag || "span";
+            className = items[i].className || items[i].value;
+
+            items[i].style = dom.inlineStyle(doc, tag, { className : className });
+        }
     }
 });
+
 
 kendo.ui.plugin(SelectBox);
 kendo.ui.editor.SelectBox = SelectBox;

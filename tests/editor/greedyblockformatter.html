@@ -92,6 +92,17 @@
                 ok(called);
             });
 
+            test("apply sets passed attributes to tag", function() {
+                editor.value('<h1>foo</h1>');
+
+                var formatter = new GreedyBlockFormatter([{ tags: ['h1'], attr: { className: "foo"} }], {}, true);
+
+                formatter.editor = editor;
+                formatter.apply([editor.body.childNodes[0].firstChild]);
+
+                equal(editor.value(), '<h1 class="foo">foo</h1>');
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

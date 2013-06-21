@@ -41,6 +41,7 @@
     <script src="../src/editor/components.js"></script>
     <script src="../src/editor/indent.js"></script>
     <script src="../src/editor/viewhtml.js"></script>
+    <script src="../src/editor/contextformat.js"></script>
     <script src="../src/editor/tables.js"></script>
 
     <style>
@@ -65,8 +66,12 @@
             border: 1px solid green;
         }
 
-        .foo { color: red; background-color: blue }
-        .bar { color: #ccc; background-color: #f1f1f1 }
+        h1 { font-size: 2.4em; }
+        .section { font-size: 2em; color: red; }
+        h2 { font-size: 1.4em; }
+        h3 { font-size: 1em; font-style: italic; }
+        .note { text-transform: uppercase; display: inline-block; color: #fff; background-color: #1010e0; }
+        .highlight { background-color: #10e0e0; }
     </style>
 
 
@@ -86,11 +91,28 @@
                 tools: [
                     "bold", "italic", "createLink", "unlink", "insertImage",
 
-                    "foreColor", "backColor",
+                    { name: "formatting", items: [
+                        // convert current block to paragraph and remove class
+                        { text: "Paragraph", tag: "p" },
 
-                    { name: "style", items: [
-                        { text: "foo", value: "foo", context: "p" },
-                        { text: "bar", value: "bar", context: "h1" }
+                        // convert current block to h1 and remove class
+                        { text: "Heading 1", tag: "h1" },
+
+                        // convert current block to h1 and set class to section
+                        { text: "Heading 1 section", tag: "h1", className: "section" },
+
+                        // convert current block to h2 and remove class
+                        { text: "Heading 2", tag: "h2" },
+
+                        // convert current block to h3 and remove class
+                        { text: "Heading 3", tag: "h3" },
+
+                        // wrap selected text in strong.note, available only in headers
+                        { text: "Title note", tag: "strong", className: "note", context: "h1,h2,h3,h4,h5,h6" },
+
+                        // wrap selected text in span.highlight
+                        { text: "Highlight text", className: "highlight" }
+
                     ] }
                 ],
                 select: function(e) {

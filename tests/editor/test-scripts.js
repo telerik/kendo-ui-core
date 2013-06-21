@@ -47,6 +47,7 @@ document.write('\
         writeScript('../../src/editor/components.js');
         writeScript('../../src/editor/indent.js');
         writeScript('../../src/editor/viewhtml.js');
+        writeScript('../../src/editor/contextformat.js');
         writeScript('../../src/editor/tables.js');
     } else {
         writeScript('../../src/kendo.editor.js');
