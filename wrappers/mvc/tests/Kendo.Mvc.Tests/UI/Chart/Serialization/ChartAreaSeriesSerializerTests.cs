@@ -115,6 +115,21 @@ namespace Kendo.Mvc.UI.Tests
             series.Member = null;
             GetJson(series).ContainsKey("field").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Should_serialize_categoryField_if_member_is_set()
+        {
+            series.CategoryMember = "RepSales";
+            GetJson(series)["categoryField"].ShouldEqual("RepSales");
+        }
+
+        [Fact]
+        public void Should_not_serialize_categoryField_if_member_is_not_set()
+        {
+            series.CategoryMember = null;
+            GetJson(series).ContainsKey("categoryField").ShouldBeFalse();
+        }
+
         [Fact]
         public void Serializes_type()
         {

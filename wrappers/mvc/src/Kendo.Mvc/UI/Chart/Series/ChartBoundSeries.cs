@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
 
-    public abstract class ChartBoundSeries<TModel, TValue> : ChartSeriesBase<TModel>, IChartBoundSeries where TModel : class
+    public abstract class ChartBoundSeries<TModel, TValue, TCategory> : ChartSeriesBase<TModel>, IChartBoundSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBoundSeries{TModel, TValue}" /> class.
         /// </summary>
         /// <param name="expression">The binding expression.</param>
-        protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression)
+        protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> expressionCategory)
         {
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
@@ -20,6 +20,12 @@ namespace Kendo.Mvc.UI
             }
 
             Member = expression.MemberWithoutInstance();
+
+            if (expressionCategory != null)
+            {
+                Category = expressionCategory.Compile();
+                CategoryMember = expressionCategory.MemberWithoutInstance();
+            }
 
             if (string.IsNullOrEmpty(Name))
             {
@@ -60,6 +66,53 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Gets the model data category member name.
+        /// </summary>
+        /// <value>The model data category member name.</value>
+        public string CategoryMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets a function which returns the category of the property to which the column is bound to.
+        /// </summary>
+        public Func<TModel, TCategory> Category
+        {
+            get;
+            private set;
+        }
+    }
+
+    public abstract class ChartBoundSeries<TModel, TValue> : ChartBoundSeries<TModel, TValue, string> where TModel: class
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartBoundSeries{TModel, TValue}" /> class.
+        /// </summary>
+        /// <param name="expression">The binding expression.</param>
+        protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression)
+            : base(expression, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartBoundSeries{TModel, TValue}" /> class.
+        /// </summary>
+        /// <param name="data">The series data.</param>
+        protected ChartBoundSeries(IEnumerable data)
+            : base(data)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartBoundSeries{TModel, TValue}" /> class.
+        /// </summary>
+        protected ChartBoundSeries()
+        {
         }
     }
 }

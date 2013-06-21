@@ -12,15 +12,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets the data category member of the series.
-        /// </summary>
-        string CategoryMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Gets the data explode member of the series.
         /// </summary>
         string ExplodeMember
