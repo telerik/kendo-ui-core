@@ -80,8 +80,8 @@ def uglifyjs(from, to)
     sh cmd, :verbose => VERBOSE
 end
 
-def compilejs(from, options=nil)
-    cmd = "node #{COMPILEJS} #{from} #{options}"
+def compilejs(from, to)
+    cmd = "node #{COMPILEJS} #{from} --amd"
     sh cmd, :verbose => VERBOSE
 end
 
