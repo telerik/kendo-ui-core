@@ -178,9 +178,25 @@
                 equal(editor.value(), "FREQ=DAILY;COUNT=1"); //default value of INTERVAL is 1
             });
 
-            test("Select until radio sets until value", function() {
+            test("Select until radio sets until value (no timezone)", function() {
                 var editor = new RecurrenceEditor(div),
                     date = kendo.date.today();
+
+
+                editor.setView("daily");
+
+                editor.radioButtonUntil.click();
+
+                date = kendo.timezone.apply(date, 0);
+                equal(editor.value(), "FREQ=DAILY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ"));
+            });
+
+            test("Select until radio sets until value (Etc/UTC zone)", function() {
+                var editor = new RecurrenceEditor(div, {
+                        timezone: "Etc/UTC"
+                    }),
+                    date = kendo.date.today();
+
 
                 editor.setView("daily");
 
@@ -262,7 +278,7 @@
                 equal(editor.value(), "FREQ=WEEKLY;COUNT=1;BYDAY=FR"); //default value of INTERVAL is 1
             });
 
-            test("Select until radio sets until value", function() {
+            test("Select until radio sets until value (no timezone)", function() {
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
@@ -270,6 +286,7 @@
 
                 editor.radioButtonUntil.click();
 
+                date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=WEEKLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYDAY=FR");
             });
 
@@ -380,13 +397,14 @@
                 equal(editor.value(), "FREQ=MONTHLY;COUNT=1;BYMONTHDAY=14"); //default value of INTERVAL is 1
             });
 
-            test("Select until radio sets until value", function() {
+            test("Select until radio sets until value (no timezone)", function() {
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
                 editor.setView("monthly");
                 editor.radioButtonUntil.click();
 
+                date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=MONTHLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYMONTHDAY=14");
             });
 
@@ -591,13 +609,14 @@
                 equal(editor.value(), "FREQ=YEARLY;COUNT=1;BYMONTH=" + (date.getMonth() + 1) + ";BYMONTHDAY=14");
             });
 
-            test("Select until radio sets until value", function() {
+            test("Select until radio sets until value (no timezone)", function() {
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
                 editor.setView("yearly");
                 editor.radioButtonUntil.click();
 
+                date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=YEARLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYMONTH=" + (date.getMonth() + 1) + ";BYMONTHDAY=14");
             });
 
@@ -780,9 +799,9 @@
                 equal(editor.countNumericTextBox.value(), 10);
             });
 
-            test("value method sets end rule to until", function() {
+            test("value method sets end rule to until (no timezone)", function() {
                 var editor = new RecurrenceEditor(div),
-                    until = new Date(2013, 5, 15);
+                    until = kendo.parseDate("20130615T000000Z", "yyyyMMddTHHmmsszz");
 
                 editor.value("FREQ=DAILY;UNTIL=20130615T000000Z");
 

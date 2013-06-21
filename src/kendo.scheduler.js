@@ -796,7 +796,7 @@ kendo_module({
                 exception = origin.recurrenceException || "",
                 date = model.start;
 
-            if (!recurrence.exceptionExists(exception, date)) {
+            if (!recurrence.isException(exception, date)) {
                 date = kendo.timezone.apply(date, 0);
                 exception += kendo.toString(date, RECURRENCE_DATE_FORMAT) + ";";
 

@@ -46,6 +46,12 @@
                 equal(serialize(rule), "FREQ=DAILY;UNTIL=19730429T070000Z;WKST=SU");
             });
 
+            test("Serialize method honours timezone", function() {
+                var rule = parse("FREQ=daily;UNTIL=19730429T070000Z", "America/New_York");
+
+                equal(serialize(rule, "America/New_York"), "FREQ=DAILY;UNTIL=19730429T070000Z;WKST=SU");
+            });
+
             test("Serialize method returns string with freq and one BYMONTH value", function() {
                 var rule = parse("FREQ=daily;bymonth=1");
 

@@ -1808,6 +1808,45 @@
                 equal(expandAll(events, start, end, "America/Los_Angeles").length, 1);
             });
 
+            test("Expand event with recurrence exception in America/Los_Angeles timezone", function() {
+                var start = new Date(2013, 0, 1, 0, 0), //"America/Los_Angeles"
+                    end = new Date(2013, 0, 2, 22, 0); //"America/Los_Angeles"
+
+                var expDate1 = timezone.convert(new Date(2013, 0, 2, 10, 30), "America/Los_Angeles", "Etc/UTC"); //make it UTC
+                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
+
+                var events = [{
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30), //"America/Los_Angeles"
+                    end: new Date(2013, 0, 1, 11, 30), //"America/Los_Angeles"
+                    recurrenceRule: "FREQ=DAILY;COUNT=2",
+                    recurrenceException: exception
+                }]
+
+                equal(expandAll(events, start, end, "America/Los_Angeles").length, 1);
+            });
+
+            test("Expand event with recurrence exception in America/Los_Angeles timezone defined as startTimezone", function() {
+                var start = new Date(2013, 0, 1, 0, 0), //"America/Los_Angeles"
+                    end = new Date(2013, 0, 2, 22, 0); //"America/Los_Angeles"
+
+                var expDate1 = timezone.convert(new Date(2013, 0, 2, 10, 30), "America/Los_Angeles", "Etc/UTC"); //make it UTC
+                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
+
+                var events = [{
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30), //"America/Los_Angeles"
+                    startTimezone: "America/Los_Angeles",
+                    end: new Date(2013, 0, 1, 11, 30), //"America/Los_Angeles"
+                    recurrenceRule: "FREQ=DAILY;COUNT=2",
+                    recurrenceException: exception
+                }]
+
+                equal(expandAll(events, start, end).length, 1);
+            });
+
         </script>
     </body>
 </html>

@@ -650,7 +650,7 @@ kendo_module({
         return origin.slice(0, skip ? idx - 1 : idx).concat(list).concat(origin.slice(idx));
     }
 
-    function parseExceptions(exceptions, tz) {
+    function parseExceptions(exceptions, zone) {
         var idx = 0, length, date,
             dates = [];
 
@@ -662,9 +662,9 @@ kendo_module({
                 date = kendo.parseDate(exceptions[idx], DATE_FORMATS);
 
                 if (date) {
-                    if (tz) {
+                    if (zone) {
                         date = timezone.apply(date, "Etc/UTC");
-                        date = timezone.convert(date, "Etc/UTC", tz);
+                        date = timezone.convert(date, "Etc/UTC", zone);
                     }
 
                     dates.push(date);
@@ -675,7 +675,7 @@ kendo_module({
         return dates;
     }
 
-    function exceptionExists(exceptions, date) {
+    function isException(exceptions, date) {
         var dates = $.isArray(exceptions) ? exceptions : parseExceptions(exceptions),
             idx = 0, length = dates.length;
 
@@ -688,7 +688,7 @@ kendo_module({
         return false;
     }
 
-    function expand(event, start, end, tz) {
+    function expand(event, start, end, zone) {
         var eventStart = event.start,
             eventStartMS = eventStart.getTime(),
             durationMS = event.end - eventStartMS,
@@ -704,7 +704,8 @@ kendo_module({
             count,
             freq;
 
-        exceptionDates = parseExceptions(event.recurrenceException, tz);
+        zone = event.startTimezone || event.endTimezone || zone;
+        exceptionDates = parseExceptions(event.recurrenceException, zone);
 
         if (event.toJSON) {
             event = event.toJSON();
@@ -713,8 +714,6 @@ kendo_module({
             delete event[idField];
             delete event.id;
         }
-
-        //convert start from tzid to UTC
 
         periodStart = start = new Date(start);
         end = new Date(end);
@@ -728,6 +727,11 @@ kendo_module({
 
         if (rule.until && rule.until < end) {
             end = new Date(rule.until);
+            //TODO: test this
+            if (zone) {
+                end = timezone.apply(end, "Etc/UTC");
+                end = timezone.apply(end, zone);
+            }
         }
 
         if (start < eventStartMS || (count && start > eventStartMS)) {
@@ -747,7 +751,7 @@ kendo_module({
         freq.limit(start, end, rule);
 
         while (start <= end) {
-            if (start >= periodStart && !exceptionExists(exceptionDates, start, tz)) {
+            if (start >= periodStart && !isException(exceptionDates, start, zone)) {
                 //TODO: DST check
                 eventEnd = new Date(start.getTime() + durationMS);
                 events.push($.extend({}, event, {
@@ -779,21 +783,24 @@ kendo_module({
         return events;
     }
 
-    function expandAll(events, start, end, tz) {
+    function expandAll(events, start, end, zone) {
         var length = events.length,
             idx = 0, event, result,
             resultLength, skip,
+            startTimezon,
             eventStart;
 
         for (; idx < length; idx++) {
             event = events[idx];
-            result = expand(event, start, end, tz);
+            startTimezon = event.startTimezone || event.endTimezone || zone;
+
+            result = expand(event, start, end, startTimezon);
             resultLength = result.length;
             skip = false;
 
             if (resultLength) {
                 eventStart = event.start;
-                if (eventStart < start || exceptionExists(event.recurrenceException, eventStart, tz)) {
+                if (eventStart < start || isException(event.recurrenceException, eventStart, startTimezon)) {
                     resultLength -= 1;
                     skip = true;
                 }
@@ -807,11 +814,11 @@ kendo_module({
         return events;
     }
 
-    function parseRule(rule) {
+    function parseRule(rule, zone) {
         var instance = {},
-            property, until,
-            splits, value,
             idx = 0, length,
+            splits, value,
+            property, until,
             weekStart,
             weekDays,
             predicate = function(a, b) {
@@ -850,9 +857,9 @@ kendo_module({
                     instance.freq = value[0].toLowerCase();
                     break;
                 case "UNTIL":
-                    until = kendo.parseDate(value[0], DATE_FORMATS); //TODO: test this
-                    if (until) {
-                        until = timezone.convert(until, until.getTimezoneOffset(), 0);
+                    until = kendo.parseDate(value[0], DATE_FORMATS); //Parse UTC to local time
+                    if (until && zone) {
+                        until = timezone.convert(until, until.getTimezoneOffset(), zone);
                     }
                     instance.until = until;
                     break;
@@ -916,9 +923,10 @@ kendo_module({
         return instance;
     }
 
-    function serialize(rule) {
+    function serialize(rule, zone) {
         var weekStart = rule.weekStart,
-            ruleString = "FREQ=" + rule.freq.toUpperCase();
+            ruleString = "FREQ=" + rule.freq.toUpperCase(),
+            until = rule.until;
 
         if (rule.interval > 1) {
             ruleString += ";INTERVAL=" + rule.interval;
@@ -928,8 +936,9 @@ kendo_module({
             ruleString += ";COUNT=" + rule.count;
         }
 
-        if (rule.until) {
-            ruleString += ";UNTIL=" + kendo.toString(rule.until, "yyyyMMddTHHmmssZ");
+        if (until) {
+            until = timezone.convert(until, zone || until.getTimezoneOffset(), "Etc/UTC");
+            ruleString += ";UNTIL=" + kendo.toString(until, "yyyyMMddTHHmmssZ");
         }
 
         if (rule.months) {
@@ -986,7 +995,7 @@ kendo_module({
         weekInYear: weekInYear,
         weekInMonth: weekInMonth,
         numberOfWeeks: numberOfWeeks,
-        exceptionExists: exceptionExists
+        isException: isException
     };
 
     //TODO: REFACTOR Recurrence Widget
@@ -1080,6 +1089,7 @@ kendo_module({
             name: "RecurrenceEditor",
             frequencies: ["never", "daily", "weekly", "monthly", "yearly"],
             firstWeekDay: null,
+            timezone: "",
             start: "",
             value: "",
             //TODO: simplify messages
@@ -1140,17 +1150,18 @@ kendo_module({
         },
 
         value: function(value) {
-            var that = this;
+            var that = this,
+                timezone = that.options.timezone;
 
             if (value === undefined) {
                 if (!that._value.freq) {
                     return "";
                 }
 
-                return serialize(that._value);
+                return serialize(that._value, timezone);
             }
 
-            that._value = parseRule(value) || {};
+            that._value = parseRule(value, timezone) || {};
 
             that.ddlFrequency.value(that._value.freq || "");
             that.setView(that.ddlFrequency.value());
