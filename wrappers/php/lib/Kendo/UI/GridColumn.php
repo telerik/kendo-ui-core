@@ -239,7 +239,7 @@ Each table row consists of table cells (<td>) which represent the grid columns. 
     }
 
     /**
-    * The width of the column. Numeric values are treated as pixels.
+    * The width of the column. Numeric values are treated as pixels. Also refer to Column Widths.
     * @param string|float $value
     * @return \Kendo\UI\GridColumn
     */

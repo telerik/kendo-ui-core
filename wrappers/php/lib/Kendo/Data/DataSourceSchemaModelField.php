@@ -11,6 +11,10 @@ class DataSourceSchemaModelField extends \Kendo\SerializableObject {
         return $this->setProperty('field', $value);
     }
 
+    public function from($value) {
+        return $this->setProperty('from', $value);
+    }
+
     public function type($value) {
         return $this->setProperty('type', $value);
     }

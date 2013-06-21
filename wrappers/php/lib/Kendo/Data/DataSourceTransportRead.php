@@ -27,7 +27,7 @@ Refer to the jQuery.ajax documentation for further info.
 
     /**
     * Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.
-    * @param |string|\Kendo\JavaScriptFunction $value
+    * @param |\Kendo\JavaScriptFunction $value
     * @return \Kendo\Data\DataSourceTransportRead
     */
     public function data($value) {
