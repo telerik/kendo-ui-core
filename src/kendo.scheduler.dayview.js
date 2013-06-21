@@ -229,12 +229,12 @@ kendo_module({
                 rows.push( { text: "all day", allDay: true });
             }
 
-            this._forTimeRange(options.startTime, options.endTime, function(date, majorTick) {
+            this._forTimeRange(options.startTime, options.endTime, function(date, majorTick, lastSlotRow) {
                 var template = majorTick ? that.majorTimeHeaderTemplate : that.minorTimeHeaderTemplate;
 
                 var row = {
                     text: template({ date: date }),
-                    className: majorTick ? "k-middle-row" : ""
+                    className: lastSlotRow ? "k-slot-cell" : ""
                 };
 
                 rows.push(row);
@@ -285,7 +285,7 @@ kendo_module({
             length = Math.round(length);
 
             for (; idx < length; idx++) {
-                html += action(start, idx % (msMajorInterval/msInterval) === 0);
+                html += action(start, idx % (msMajorInterval/msInterval) === 0, idx % (msMajorInterval/msInterval) === 1);
 
                 kendo.date.setTime(start, msInterval, false);
             }

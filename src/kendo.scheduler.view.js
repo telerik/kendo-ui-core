@@ -114,7 +114,7 @@ kendo_module({
             var rowspan = rowCount / level.length;
 
             for (rowIndex = 0; rowIndex < level.length; rowIndex++) {
-                rows[rowspan * rowIndex] += '<th rowspan="' + rowspan + '">' + level[rowIndex].text + "</th>";
+                rows[rowspan * rowIndex] += '<th class="' + level[rowIndex].className + '" rowspan="' + rowspan + '">' + level[rowIndex].text + "</th>";
             }
         }
 
