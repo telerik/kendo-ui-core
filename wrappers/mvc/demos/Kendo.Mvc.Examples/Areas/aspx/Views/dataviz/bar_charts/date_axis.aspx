@@ -16,12 +16,17 @@
         .Series(series =>
         {
             series
-                .Area(model => model.Value, model => model.Date)
+                .Column(model => model.Value, categoryExpression: model => model.Date)
                 .Aggregate(ChartSeriesAggregate.Avg);
         })
         .CategoryAxis(axis => axis
             .Date()
             .BaseUnit(ChartAxisBaseUnit.Weeks)
+            .MajorGridLines(lines => lines.Visible(false))
+        )
+        .ValueAxis(axis => axis
+            .Numeric()
+            .Line(line => line.Visible(false))
         )
     %>
     <div class="configuration-horizontal">

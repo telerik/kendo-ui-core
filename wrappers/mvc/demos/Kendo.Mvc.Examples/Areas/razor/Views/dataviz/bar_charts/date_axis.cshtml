@@ -14,7 +14,7 @@
     .Name("chart")
     .Series(series => {
         series
-            .Column(model => model.Value, null, model => model.Date)
+            .Column(model => model.Value, categoryExpression: model => model.Date)
             .Aggregate(ChartSeriesAggregate.Avg);
     })
     .CategoryAxis(axis => axis

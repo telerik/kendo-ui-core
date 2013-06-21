@@ -47,8 +47,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Bar<TValue, TCategory>(
             Expression<Func<TModel, TValue>> valueExpression,
-            Expression<Func<TModel, string>> colorExpression,
-            Expression<Func<TModel, TCategory>> categoryExpression)
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, TCategory>> categoryExpression = null)
         {
             var barSeries = new ChartBarSeries<TModel, TValue, TCategory>(valueExpression, colorExpression, categoryExpression);
 
@@ -148,8 +148,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Column<TValue, TCategory>(
             Expression<Func<TModel, TValue>> valueExpression,
-            Expression<Func<TModel, string>> colorExpression,
-            Expression<Func<TModel, TCategory>> categoryExpression)
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, TCategory>> categoryExpression = null)
         {
             var builder = Bar(valueExpression, colorExpression, categoryExpression);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
