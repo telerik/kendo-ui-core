@@ -932,6 +932,17 @@ namespace Kendo.Mvc.Resources {
                 return ResourceManager.GetString("Pager_Refresh", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this event?.
+        /// </summary>
+        public static string Scheduler_Confirmation
+        {
+            get
+            {
+                return ResourceManager.GetString("Scheduler_Confirmation", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
