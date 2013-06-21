@@ -66,6 +66,9 @@
                          <kendo:dataSource-schema-model-field name="title" type="string" />
                          <kendo:dataSource-schema-model-field name="description" type="string" />
                          <kendo:dataSource-schema-model-field name="isAllDay" type="boolean" />
+                         <kendo:dataSource-schema-model-field name="recurrenceRule" type="string" nullable="true"/>
+                         <kendo:dataSource-schema-model-field name="recurrenceId" type="number" nullable="true" />
+                         <kendo:dataSource-schema-model-field name="recurrenceException" type="string" nullable="true" />
                          <kendo:dataSource-schema-model-field name="ownerId" type="number" defaultValue="1" />
                          <kendo:dataSource-schema-model-field name="start" type="date" />
                          <kendo:dataSource-schema-model-field name="end" type="date" />

@@ -53,7 +53,9 @@ public class IndexController {
             task.setStart(iso8601.parse((String)model.get("start")));
             task.setEnd(iso8601.parse((String)model.get("end")));
             task.setIsAllDay((boolean)model.get("isAllDay"));
-            task.setRecurrence((String)model.get("recurrence"));
+            task.setRecurrenceRule((String)model.get("recurrenceRule"));
+            task.setRecurrenceException((String)model.get("recurrenceException"));
+            task.setRecurrenceId((Integer)model.get("recurrenceId"));
             task.setOwnerId((Integer)model.get("ownerId"));
             
             tasks.add(task);
@@ -80,8 +82,10 @@ public class IndexController {
             task.setStart(iso8601.parse((String)model.get("start")));
             task.setEnd(iso8601.parse((String)model.get("end")));
             task.setIsAllDay((boolean)model.get("isAllDay"));
-            task.setRecurrence((String)model.get("recurrence"));
-            task.setOwnerId((Integer)model.get("ownerId"));
+            task.setRecurrenceRule((String)model.get("recurrenceRule"));
+            task.setRecurrenceException((String)model.get("recurrenceException"));
+            task.setRecurrenceId((Integer)model.get("recurrenceId"));
+            task.setOwnerId((Integer)model.get("ownerId"));            
             
             tasks.add(task);
         }

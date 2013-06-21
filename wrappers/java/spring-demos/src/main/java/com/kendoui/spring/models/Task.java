@@ -19,7 +19,9 @@ public class Task {
     private Integer ownerId;
     private String title;
     private String description;
-    private String recurrence;
+    private String recurrenceRule;
+    private String recurrenceException;
+    private Integer recurrenceId;
     private boolean isAllDay;
     private Date start;
     private Date end;
@@ -82,13 +84,13 @@ public class Task {
         this.description = description;
     }
 
-    @Column(name="Recurrence")
-    public String getRecurrence() {
-        return recurrence;
+    @Column(name="RecurrenceRule")
+    public String getRecurrenceRule() {
+        return recurrenceRule;
     }
 
-    public void setRecurrence(String recurrence) {
-        this.recurrence = recurrence;
+    public void setRecurrenceRule(String recurrenceRule) {
+        this.recurrenceRule = recurrenceRule;
     }
 
     @Column(name="IsAllDay")
@@ -98,6 +100,24 @@ public class Task {
 
     public void setIsAllDay(boolean isAllDay) {
         this.isAllDay = isAllDay;
+    }
+
+    @Column(name="RecurrenceException")
+    public String getRecurrenceException() {
+        return recurrenceException;
+    }
+
+    public void setRecurrenceException(String recurrenceException) {
+        this.recurrenceException = recurrenceException;
+    }
+
+    @Column(name="RecurrenceID")
+    public Integer getRecurrenceId() {
+        return recurrenceId;
+    }
+
+    public void setRecurrenceId(Integer recurrenceId) {
+        this.recurrenceId = recurrenceId;
     }
 
 }
