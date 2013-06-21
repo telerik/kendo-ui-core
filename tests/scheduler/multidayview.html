@@ -1475,7 +1475,7 @@
             test("refresh icon is shown if multiday event has recurring rule", function() {
                 var view = setup({ dates: [new Date(2013, 1, 2)] });
 
-                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), recurrence: "FREQ=DAILY" }]);
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), recurrenceRule: "FREQ=DAILY" }]);
 
                 equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
             });
