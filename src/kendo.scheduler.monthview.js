@@ -25,7 +25,9 @@ kendo_module({
                     '# if(data.tail || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-w"></span>' +
                     '#}#' +
-                    '# if(data.recurrenceRule || data.recurrenceId) {#' +
+                    '# if(data.id && data.recurrenceId) {#' +
+                        '<span class="k-icon k-i-exception"></span>' +
+                    '# } else if(data.recurrenceRule || data.recurrenceId) {#' +
                         '<span class="k-icon k-i-refresh"></span>' +
                     '#}#' +
                 '</span>' +

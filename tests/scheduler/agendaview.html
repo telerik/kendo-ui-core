@@ -498,6 +498,27 @@
 
                 equal(taskCell.find(".k-i-refresh").length, 1);
             });
+
+            test("agenda renders exception icon for events which are recurring exception", function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+                var event = new Event({
+                                start: new Date("2013/06/06 00:00"),
+                                end: new Date("2013/06/06 01:00"),
+                                title: "",
+                                id: 1,
+                                recurrenceId: 12,
+                                recurrenceRule: "FREQ=DAILY"
+                            });
+
+                agenda.render([ event ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var taskCell = table.find(".k-task");
+
+                equal(taskCell.find(".k-i-exception").length, 1);
+                equal(taskCell.find(".k-i-refresh").length, 0);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

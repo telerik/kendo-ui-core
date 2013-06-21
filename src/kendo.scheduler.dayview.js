@@ -38,9 +38,11 @@ kendo_module({
                     '# if(data.tail || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-w"></span>' +
                     '#}#' +
-                    '# if(data.recurrenceRule || data.recurrenceId) {#' +
-                        '<a href="\\#" class="k-link"><span class="k-icon k-i-refresh"></span></a>' +
-                    '#}#' +
+                    '# if(data.id && data.recurrenceId) {#' +
+                        '<span class="k-icon k-i-exception"></span>' +
+                    '# } else if(data.recurrenceRule || data.recurrenceId) {#' +
+                        '<span class="k-icon k-i-refresh"></span>' +
+                    '# } #' +
                 '</span>' +
                 '{0}' +
                 '<span class="k-event-actions">' +
@@ -57,10 +59,12 @@ kendo_module({
                 'style="background-color:#=resources[0].color #"' +
                 '#}#' +
                 '>' +
-                '<span class="k-event-actions">' +
-                    '# if(data.recurrenceRule || data.recurrenceId) {#' +
+                 '<span class="k-event-actions">' +
+                    '# if(data.id && data.recurrenceId) {#' +
+                        '<span class="k-icon k-i-exception"></span>' +
+                    '# } else if(data.recurrenceRule || data.recurrenceId) {#' +
                         '<span class="k-icon k-i-refresh"></span>' +
-                    '#}#' +
+                    '# } #' +
                 '</span>' +
                 '{0}' +
                 '<span class="k-event-actions">' +
