@@ -4,14 +4,15 @@ namespace Kendo.Mvc.UI
     using System.Collections;
     using System.Linq.Expressions;
 
-    public class ChartAreaSeries<TModel, TValue> : ChartBoundSeries<TModel, TValue>, IChartAreaSeries where TModel : class
+    public class ChartAreaSeries<TModel, TValue, TCategory> : ChartBoundSeries<TModel, TValue, TCategory>, IChartAreaSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAreaSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="expression">The expression used to extract the series value from the chart model.</param>
-        public ChartAreaSeries(Expression<Func<TModel, TValue>> expression)
-            : base(expression)
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
+        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
+        public ChartAreaSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> categoryExpression)
+            : base(expression, categoryExpression)
         {
             Initialize();
         }
@@ -115,6 +116,34 @@ namespace Kendo.Mvc.UI
             Markers = new ChartMarkers();
             Line = new ChartLine();
             Orientation = ChartSeriesOrientation.Horizontal;
+        }
+    }
+
+    public class ChartAreaSeries<TModel, TValue> : ChartAreaSeries<TModel, TValue, string> where TModel : class
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartAreaSeries{TModel, TValue}" /> class.
+        /// </summary>
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
+        public ChartAreaSeries(Expression<Func<TModel, TValue>> expression)
+            : base(expression, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartAreaSeries{TModel, TValue}" /> class.
+        /// </summary>
+        /// <param name="data">The data to bind to.</param>
+        public ChartAreaSeries(IEnumerable data)
+            : base(data)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartAreaSeries{TModel, TValue}" /> class.
+        /// </summary>
+        public ChartAreaSeries()
+        {
         }
     }
 }

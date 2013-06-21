@@ -26,6 +26,7 @@ namespace Kendo.Mvc.UI
                 .Add("gap", series.Gap, () => series.Gap.HasValue)
                 .Add("spacing", series.Spacing, () => series.Spacing.HasValue)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member != null; })
+                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("border", series.Border.CreateSerializer().Serialize(), ShouldSerializeBorder)
                 .Add("colorField", series.ColorMember, () => series.ColorMember.HasValue())

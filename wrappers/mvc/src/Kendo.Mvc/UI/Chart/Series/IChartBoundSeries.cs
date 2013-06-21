@@ -14,6 +14,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets the model data category member name.
+        /// </summary>
+        /// <value>The model data category member name.</value>
+        string CategoryMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The data used for binding.
         /// </summary>
         IEnumerable Data

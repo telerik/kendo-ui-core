@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Radar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet"></script>
+        <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet"></script>
+    </head>
+    <body>
+        <div id="date-chart" style="width: 300px; height: 300px; float: left;"></div>
+        <div id="categorical-chart" style="width: 300px; height: 300px; float: left;"></div>
+        <div id="stock-chart" style="width: 600px; height: 300px; clear: both;"></div>
+        <script>
+            $(function() {
+                // Top-level goals
+                // TODO: Individual positioning for each point
+                // TODO: Aggregate the points with the same category
+
+                $("#date-chart").kendoChart({
+                    seriesDefaults: {
+                        type: "column",
+                        field: "value",
+                        categoryField: "date"
+                    },
+                    series: [{
+                        data: [{
+                            value: 1,
+                            date: new Date("2013-06-01")
+                        }, {
+                            value: 2,
+                            date: new Date("2013-06-02")
+                        }, {
+                            value: 3,
+                            date: new Date("2013-07-01")
+                        }]
+                    }, {
+                        data: [{
+                            value: 1,
+                            date: new Date("2013-06-01")
+                        }, {
+                            value: 2,
+                            date: new Date("2013-07-01")
+                        }, {
+                            value: 3,
+                            date: new Date("2013-08-01")
+                        }]
+                    }],
+                    categoryAxis: {
+                        baseUnit: "months"
+                    },
+                    valueAxis: { majorUnit: 1 }
+                });
+
+                $("#categorical-chart").kendoChart({
+                    seriesDefaults: {
+                        type: "column",
+                        field: "value",
+                        categoryField: "category"
+                    },
+                    series: [{
+                        data: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "A"
+                        }, {
+                            value: 3,
+                            category: "B"
+                        }]
+                    }, {
+                        data: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "B"
+                        }, {
+                            value: 3,
+                            category: "C"
+                        }]
+                    }],
+                    valueAxis: { majorUnit: 1 }
+                });
+
+                $("#stock-chart").kendoStockChart({
+                    dataSource: {
+                        transport: {
+                            read: "boeing-stock.json"
+                        },
+                        schema:{
+                            model: {
+                                fields: {
+                                    Date: {
+                                        type: "date"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    //dateField: "Date",
+                    seriesDefaults: {
+                        categoryField: "Date"
+                    },
+                    series: [{
+                        type: "candlestick",
+                        openField: "Open",
+                        highField: "High",
+                        lowField: "Low",
+                        closeField: "Close"
+                    }],
+                    navigator: {
+                        _dataSource: {
+                            transport: {
+                                read: "boeing-stock.json"
+                            },
+                            schema:{
+                                model: {
+                                    fields: {
+                                        Date: {
+                                            type: "date"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        series: {
+                            type: "area",
+                            field: "Close"
+                        },
+                        select: {
+                            from: "2009/10/05"
+                        }
+                    }
+                });
+
+            });
+        </script>
+  <div id="chart" style="width: 600px;"></div>
+  <script>
+    var rawTasks = [{
+          name: 'Endurance Early Bird Ad',
+          intervals: [{
+              from: new Date(2009, 9, 10, 0),
+              to: new Date(2011, 1, 1,0)
+          }]
+      }, {
+          name: 'Endurance Kickoff Ad',
+          intervals: [{
+              from: new Date(2009, 10, 1, 0),
+              to: new Date(2011, 3, 30, 0)
+          }]
+      }, {
+          name: 'Another Ad Somewhere',
+          intervals: [{
+            from: new Date(2010, 0, 1, 0),
+            to: new Date(2010, 10, 1, 0)
+          }, {
+            from: new Date(2011, 0, 1, 0),
+            to: new Date(2011, 12, 1, 0)
+          }]
+      }];
+
+      function fillDates(start, end) {
+          var result = [];
+          date = new Date(start.getTime());
+
+          while (date < end) {
+              result.push(date);
+              date = new Date(date.setDate(date.getDate() + 1));
+          }
+
+          return result;
+      }
+
+      var value = 0;
+      var colors = kendo.dataviz.ui.themes.default.chart.seriesColors;
+      var taskSeries = $.map(rawTasks, function(t) {
+          value++;
+          return $.map(t.intervals, function(i) {
+              return {
+                  name: t.name,
+                  color: colors[(value - 1) % colors.length - 1],
+                  type: "line",
+                  axis: "activitiesAxis",
+                  aggregate: function(values, series, dataItems, group) {
+                      if (!(series._from > group || series._to < group)) {
+                          return series._value;
+                      }
+                  },
+                  _value: value,
+                  _from: i.from,
+                  _to: i.to,
+                  missingValues: "interpolate",
+                  markers: {
+                      //visible: false
+                  },
+                  tooltip: {
+                      template: kendo.toString(i.from, "MMM 'yy") + ": #= series.name #"
+                  }
+              };
+          });
+      });
+
+      var stockDs = new kendo.data.DataSource({
+          transport: {
+              read: "boeing-stock.json"
+          },
+          schema:{
+              model: {
+                  fields: {
+                      Date: {
+                          type: "date"
+                      }
+                  }
+              }
+          },
+          change: createChart
+      });
+
+      stockDs.read();
+
+      function createChart(e) {
+        $("#chart").kendoStockChart({
+            series: [{
+                type: "candlestick",
+                data: e.items,
+                openField: "Open",
+                highField: "High",
+                lowField: "Low",
+                closeField: "Close",
+                categoryField: "Date"
+            }].concat(taskSeries),
+            valueAxes: [{
+                // Default
+            }, {
+                pane: "activities",
+                name: "activitiesAxis",
+                visible: false
+            }],
+            categoryAxis: {
+                pane: "activities",
+                autoBaseUnitSteps: {
+                    days: [],
+                    weeks: [1, 2],
+                    months: [1, 2, 4],
+                    years: [1, 2, 4]
+                }
+            },
+            panes: [{
+                name: "stocks"
+            }, {
+                name: "activities",
+                title: "Activities"
+            }],
+            navigator: {
+                series: {
+                    type: "area",
+                    data: e.items,
+                    field: "Close",
+                    categoryField: "Date"
+                }
+            }
+        });
+      }
+  </script>
+
+    </body>
+</html>
+

@@ -1,37 +1,24 @@
 <?php
 require_once '../../lib/Kendo/Autoload.php';
+require_once '../../include/chart_data.php';
 require_once '../../include/header.php';
 
 $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $series->type('area')
        ->aggregate('avg')
-       ->data(array(30, 50, 45, 40, 35, 40, 42, 40, 35, 43, 38, 30, 48, 50, 55, 35, 30));
+       ->field('value')
+       ->categoryField('date');
 
 $categoryAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();
-$categoryAxis->categories(array(
-                 new DateTime('2011/12/20', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/21', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/22', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/23', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/24', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/25', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/26', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/27', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/28', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/29', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/30', new DateTimeZone('UTC')),
-                 new DateTime('2011/12/31', new DateTimeZone('UTC')),
-                 new DateTime('2012/01/01', new DateTimeZone('UTC')),
-                 new DateTime('2012/01/02', new DateTimeZone('UTC')),
-                 new DateTime('2012/01/03', new DateTimeZone('UTC')),
-                 new DateTime('2012/01/04', new DateTimeZone('UTC')),
-                 new DateTime('2012/01/05', new DateTimeZone('UTC'))
-             ))
+$categoryAxis->type('date')
              ->baseUnit("weeks");
 
+$dataSource = new \Kendo\Data\DataSource();
+$dataSource->data(chart_date_points());
 
 $chart = new \Kendo\Dataviz\UI\Chart('chart');
-$chart->addSeriesItem($series)
+$chart->dataSource($dataSource)
+      ->addSeriesItem($series)
       ->addCategoryAxisItem($categoryAxis);
 
 echo $chart->render();

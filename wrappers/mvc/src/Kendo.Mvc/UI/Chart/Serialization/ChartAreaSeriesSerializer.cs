@@ -23,6 +23,7 @@ namespace Kendo.Mvc.UI
                 .Add("stack", series.Stacked, false)
                 .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member.HasValue(); })
+                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("missingValues", series.MissingValues.ToString().ToLowerInvariant(),
                                       () => series.MissingValues.HasValue);

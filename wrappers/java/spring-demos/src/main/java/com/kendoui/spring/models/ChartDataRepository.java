@@ -1,7 +1,11 @@
 package com.kendoui.spring.models;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ChartDataRepository {
@@ -3700,8 +3704,31 @@ public class ChartDataRepository {
                 new SocialBenefits(SocialBenefitType.Social, 3.46),
                 new SocialBenefits(SocialBenefitType.Direct, 1.84)
             })
-        };
+        };        
         
+        return Arrays.asList(result);
+    }
+    
+    public static List<DatePoint> DatePoints() throws ParseException {
+        DatePoint[] result = new DatePoint[] {
+            new DatePoint(30, "2011/12/20"),
+            new DatePoint(50, "2011/12/21"),
+            new DatePoint(45, "2011/12/22"),
+            new DatePoint(40, "2011/12/23"),
+            new DatePoint(35, "2011/12/24"),
+            new DatePoint(40, "2011/12/25"),
+            new DatePoint(42, "2011/12/26"),
+            new DatePoint(40, "2011/12/27"),
+            new DatePoint(35, "2011/12/28"),
+            new DatePoint(43, "2011/12/29"),
+            new DatePoint(38, "2011/12/30"),
+            new DatePoint(30, "2011/12/31"),
+            new DatePoint(48, "2012/01/01"),
+            new DatePoint(50, "2012/01/02"),
+            new DatePoint(55, "2012/01/03"),
+            new DatePoint(35, "2012/01/04"),
+            new DatePoint(30, "2012/01/05") 
+       };        
         
         return Arrays.asList(result);
     }

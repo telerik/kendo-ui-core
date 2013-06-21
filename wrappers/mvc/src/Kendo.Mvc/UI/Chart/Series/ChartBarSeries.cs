@@ -6,15 +6,16 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
 
-    public class ChartBarSeries<TModel, TValue> : ChartBoundSeries<TModel, TValue>, IChartBarSeries where TModel : class
+    public class ChartBarSeries<TModel, TValue, TCategory> : ChartBoundSeries<TModel, TValue, TCategory>, IChartBarSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}"/> class.
         /// </summary>
-        /// <param name="valueExpression">The expression used to extract the point value from the chart model.</param>
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
-        public ChartBarSeries(Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression)
-            : base(valueExpression)
+        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
+        public ChartBarSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, string>> colorExpression, Expression<Func<TModel, TCategory>> categoryExpression)
+            : base(expression, categoryExpression)
         {
             if (colorExpression != null) {
                 if (typeof(TModel).IsPlainType() && !colorExpression.IsBindable())
@@ -170,6 +171,35 @@ namespace Kendo.Mvc.UI
             Stacked = false;
             Labels = new ChartBarLabels();
             Border = new ChartElementBorder();
+        }
+    }
+
+    public class ChartBarSeries<TModel, TValue> : ChartBarSeries<TModel, TValue, string> where TModel : class
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}" /> class.
+        /// </summary>
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
+        /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
+        public ChartBarSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, string>> colorExpression)
+            : base(expression, colorExpression, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}" /> class.
+        /// </summary>
+        /// <param name="data">The data to bind to.</param>
+        public ChartBarSeries(IEnumerable data)
+            : base(data)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}" /> class.
+        /// </summary>
+        public ChartBarSeries()
+        {
         }
     }
 }

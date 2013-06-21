@@ -34,7 +34,7 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
-    * The data item field which contains category name.
+    * The data item field which contains the category name or date.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */

@@ -169,7 +169,24 @@ namespace Kendo.Mvc.Examples.Models
         public static IList<InternetUsers> InternetUsers()
         {
             return new InternetUsers[] {
-                new InternetUsers(1994,4.9,"United States"),                new InternetUsers(1995,9.2,"United States"),                new InternetUsers(1996,16.4,"United States"),                new InternetUsers(1997,21.6,"United States"),                new InternetUsers(1998,30.1,"United States"),                new InternetUsers(1999,35.9,"United States"),                new InternetUsers(2000,43.1,"United States"),                new InternetUsers(2001,49.2,"United States"),                new InternetUsers(2002,59.0,"United States"),                new InternetUsers(2003,61.9,"United States"),                new InternetUsers(2004,65,"United States"),                new InternetUsers(2005,68.3,"United States"),                new InternetUsers(2006,69.2,"United States"),                new InternetUsers(2007,75.3,"United States"),                new InternetUsers(2008,74.2,"United States"),                new InternetUsers(2009,71.2,"United States"),                new InternetUsers(2010,74.2,"United States"),                new InternetUsers(2011,78.2,"United States")
+                new InternetUsers(1994,4.9,"United States"),
+                new InternetUsers(1995,9.2,"United States"),
+                new InternetUsers(1996,16.4,"United States"),
+                new InternetUsers(1997,21.6,"United States"),
+                new InternetUsers(1998,30.1,"United States"),
+                new InternetUsers(1999,35.9,"United States"),
+                new InternetUsers(2000,43.1,"United States"),
+                new InternetUsers(2001,49.2,"United States"),
+                new InternetUsers(2002,59.0,"United States"),
+                new InternetUsers(2003,61.9,"United States"),
+                new InternetUsers(2004,65,"United States"),
+                new InternetUsers(2005,68.3,"United States"),
+                new InternetUsers(2006,69.2,"United States"),
+                new InternetUsers(2007,75.3,"United States"),
+                new InternetUsers(2008,74.2,"United States"),
+                new InternetUsers(2009,71.2,"United States"),
+                new InternetUsers(2010,74.2,"United States"),
+                new InternetUsers(2011,78.2,"United States")
             };
         }
 
@@ -228,7 +245,8 @@ namespace Kendo.Mvc.Examples.Models
 
         public static IList<Medals> Medals()
         {
-            return new Medals[] {                new Medals(1984,1,10,"Japan"),
+            return new Medals[] {
+                new Medals(1984,1,10,"Japan"),
                 new Medals(1988,1,4,"Japan"),
                 new Medals(1992,1,3,"Japan"),
                 new Medals(1996,1,3,"Japan"),
@@ -257,7 +275,8 @@ namespace Kendo.Mvc.Examples.Models
 
         public static IList<BlogComments> BlogComments()
         {
-            return new BlogComments[] {                 new BlogComments("My blog", 1, 3),
+            return new BlogComments[] {
+                 new BlogComments("My blog", 1, 3),
                  new BlogComments("My blog", 2, 7),
                  new BlogComments("My blog", 3, 12),
                  new BlogComments("My blog", 4, 15),
@@ -26851,6 +26870,30 @@ namespace Kendo.Mvc.Examples.Models
         Close = 70.64m,
         Volume = 4116678
     }
+            };
+        }
+
+        public static IList<DatePoint> DatePoints() 
+        {
+            return new DatePoint[]
+            {
+                new DatePoint(30, DateTime.Parse("2011/12/20")),
+                new DatePoint(50, DateTime.Parse("2011/12/21")),
+                new DatePoint(45, DateTime.Parse("2011/12/22")),
+                new DatePoint(40, DateTime.Parse("2011/12/23")),
+                new DatePoint(35, DateTime.Parse("2011/12/24")),
+                new DatePoint(40, DateTime.Parse("2011/12/25")),
+                new DatePoint(42, DateTime.Parse("2011/12/26")),
+                new DatePoint(40, DateTime.Parse("2011/12/27")),
+                new DatePoint(35, DateTime.Parse("2011/12/28")),
+                new DatePoint(43, DateTime.Parse("2011/12/29")),
+                new DatePoint(38, DateTime.Parse("2011/12/30")),
+                new DatePoint(30, DateTime.Parse("2011/12/31")),
+                new DatePoint(48, DateTime.Parse("2012/01/01")),
+                new DatePoint(50, DateTime.Parse("2012/01/02")),
+                new DatePoint(55, DateTime.Parse("2012/01/03")),
+                new DatePoint(35, DateTime.Parse("2012/01/04")),
+                new DatePoint(30, DateTime.Parse("2012/01/05"))  
             };
         }
     }

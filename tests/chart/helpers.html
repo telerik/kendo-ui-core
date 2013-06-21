@@ -19,6 +19,10 @@
         <script>
             var dataviz = kendo.dataviz,
                 getSpacing = dataviz.getSpacing,
+                indexOf = dataviz.indexOf,
+                sortDates = dataviz.sortDates,
+                transpose = dataviz.transpose,
+                uniqueDates = dataviz.uniqueDates,
                 Chart = dataviz.ui.Chart,
                 Box2D = dataviz.Box2D,
                 Point2D = dataviz.Point2D,
@@ -887,6 +891,12 @@
                 deepEqual(dates, toDate(dates));
             });
 
+            test("Returns empty array unchanged", function() {
+                var dates = [];
+
+                deepEqual(dates, toDate(dates));
+            });
+
             test("Converts string to date", function() {
                 var date = "2012/01/01 00:00";
 
@@ -1261,6 +1271,83 @@
 
             test("getSpacing replaces missing values with default", function() {
                 deepEqual(getSpacing({ top: 1 }, 2), { top: 1, left: 2, right: 2, bottom: 2 });
+            });
+
+            // ------------------------------------------------------------
+            var dates = [new Date("2012/05/01 00:00"), new Date("2012/06/01 00:00")];
+            module("indexOf");
+
+            test("returns correct index for dates", function() {
+                equal(indexOf(new Date("2012/06/01 00:00"), dates), 1);
+            });
+
+            test("returns -1 for date not found in array", function() {
+                equal(indexOf(new Date("2012/07/01 00:00"), dates), -1);
+            });
+
+            test("returns correct index for strings", function() {
+                equal(indexOf("A", ["A", "B"]), 0);
+            });
+
+            test("returns -1 for strings not found in array", function() {
+                equal(indexOf("C", ["A", "B"]), -1);
+            });
+
+            // ------------------------------------------------------------
+            module("sortDates");
+
+            test("sorts dates", function() {
+                deepEqual(sortDates(dates.reverse()), dates);
+            });
+
+            test("does not change already sorted dates", function() {
+                deepEqual(sortDates(dates.slice(0)), dates);
+            });
+
+            test("ignores undefined values", function() {
+                var arr = dates.slice(0);
+                arr.push(undefined);
+                deepEqual(sortDates(arr), arr);
+            });
+
+            test("accepts custom comparer", function() {
+                var clone = dates.slice(0);
+                deepEqual(
+                    sortDates(clone, function(a, b) { return b.getTime() - a.getTime() }),
+                    dates.slice(0).reverse()
+                );
+            });
+
+            // ------------------------------------------------------------
+            module("uniqueDates");
+
+            test("eliminates duplicates", function() {
+                var dups = dates.slice(0);
+                [].push.apply(dups, dates);
+
+                deepEqual(uniqueDates(dups), dates);
+            });
+
+            test("ignores empty array", function() {
+                deepEqual(uniqueDates([]), []);
+            });
+
+            test("accepts custom comparer", function() {
+                var clone = dates.slice(0);
+                deepEqual(
+                    uniqueDates(clone, function(a, b) { return b.getTime() - a.getTime() }),
+                    dates.slice(0).reverse()
+                );
+            });
+
+            // ------------------------------------------------------------
+            module("transpose");
+
+            test("splits input array in (length) outputs", function() {
+                deepEqual(
+                    transpose([[1, 2], [1, 2]]),
+                    [[1, 1], [2, 2]]
+                );
             });
 
         </script>

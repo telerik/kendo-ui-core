@@ -1299,7 +1299,7 @@
                 // ------------------------------------------------------------
                 var dateCategoryAxis = {
                     type: "date",
-                    categories: ["2012/02/01 00:000", "2012/02/02 00:00", "2012/02/04 00:00"]
+                    categories: ["2012/02/01 00:00", "2012/02/02 00:00", "2012/02/04 00:00"]
                 };
 
                 module("Categorical PlotArea / Date series", {
@@ -1532,6 +1532,34 @@
                     });
                 });
 
+                test("User aggregate function receives dataItems", 1, function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        aggregate: function(values, series, dataItems) {
+                            deepEqual(dataItems, series.data);
+                            return 0;
+                        }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+                });
+
+                test("User aggregate function receives group", 1, function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        aggregate: function(values, series, dataItems, group) {
+                            deepEqual(group, new Date("2012/02/01"));
+                            return 0;
+                        }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Date series / Multiple Category Axes", {
                     setup: function() {
@@ -1628,6 +1656,67 @@
                             baseUnit: "months"
                         }, dateCategoryAxis)
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Category Field");
+
+                test("Aggregates using category field instead of position", function() {
+                    createPlotArea([{
+                        type: "column",
+                        categoryField: "date",
+                        data: [{
+                            value: 1,
+                            date: new Date("2013-06-01")
+                        }, {
+                            value: 2,
+                            date: new Date("2013-06-02")
+                        }, {
+                            value: 3,
+                            date: new Date("2013-07-01")
+                        }]
+                    }], {
+                        categoryAxis: {
+                            categories: [
+                                new Date("2013-06-01"), new Date("2013-06-02"),
+                                new Date("2013-07-01")
+                            ],
+                            baseUnit: "months"
+                        }
+                    });
+
+                    point = plotArea.series[0].data[0];
+
+                    equal(point, 2);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Aggregates / Category Field");
+
+                test("Aggregates points with same category", function() {
+                    createPlotArea([{
+                        type: "column",
+                        categoryField: "category",
+                        data: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "A"
+                        }, {
+                            value: 3,
+                            category: "B"
+                        }]
+                    }], {
+                        categoryAxis: {
+                            categories: [ "A", "B" ]
+                        }
+                    });
+
+                    var data = plotArea.series[0].data;
+
+                    equal(data[0], 2);
+                    equal(data.length, 2);
                 });
 
             })();
