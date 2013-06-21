@@ -54,11 +54,10 @@
    <script>
        $("#scheduler").kendoScheduler({
             height: 800,
-            timezone: "Etc/UTC",
            // majorTick: 30,
 //            startTime: new Date(2013, 4, 14, 11, 0,0),
  //           endTime: new Date(2013, 4, 14, 18, 0,0),
-            views: ["day", { type: "week", selected: true }, { type: "month", selected: true }, "agenda"],
+            views: ["day", { type: "week", selected: true }, "month", "agenda"],
             resources: [
                 {
                     field: "ownerId",
