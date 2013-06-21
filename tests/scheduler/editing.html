@@ -602,10 +602,13 @@
             });
 
             test("creating exception adds exception date to event exception property", function() {
+                var now = new Date();
+                now.setMilliseconds(0);
+
                 var scheduler = setup({
                     views: ["week"],
                     dataSource: {
-                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
+                        data: [ { id: "1", start: now, end: now, title: "my event", recurrenceRule: "FREQ=DAILY"} ]
                     }
                 });
 
@@ -618,7 +621,7 @@
 
                 events = scheduler.element.find(".k-event");
 
-                scheduler.editEvent(events.eq(events.length - 2).data("uid"));
+                scheduler.editEvent(events.first().data("uid"));
                 scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
                 scheduler._editContainer.find("a.k-scheduler-update").click();
 
@@ -772,6 +775,24 @@
                 equal(scheduler.dataSource.data().length, 1);
                 equal(model.recurrenceException, "");
             });
+
+            /*test("delete occurrence creates recurrenceException entry", function() {
+                var date = new Date(2013, 10, 10, 15, 0, 0),
+                    exceptionDate = new Date(2013, 10, 13, 15, 0, 0),
+                    excepctionDate = kendo.timezone.apply(exceptionDate, 0),
+                    recurrenceException = kendo.toString(exceptionDate, "yyyyMMddTHHmmssZ") + ";";
+
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY" } ]
+                    }
+                });
+
+                var model = scheduler.dataSource.at(0);
+
+                equal(model.recurrenceException,
+            });*/
 
             /*test("Delete occurrence creates recurrenceException ", function() {
                     var date = new Date(2013, 10, 10, 15, 0, 0),
