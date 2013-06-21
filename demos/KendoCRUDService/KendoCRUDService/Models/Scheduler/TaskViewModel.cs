@@ -11,8 +11,34 @@ namespace KendoCRUDService.Models
         public int TaskID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+
+        private DateTime start;
+        public DateTime Start 
+        {
+            get
+            {
+                return start;
+            }
+            set
+            {
+                start = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+            }
+        }
+
+        private DateTime end;
+
+        public DateTime End 
+        {
+            get
+            {
+                return end;
+            }
+            set
+            {
+                end = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+            }
+        }
+
         public string RecurrenceRule { get; set; }
         public int? RecurrenceID { get; set; }
         public string RecurrenceException { get; set; }
