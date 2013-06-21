@@ -413,6 +413,7 @@
     <Compile Include="Models\CompensationStats.cs" />
     <Compile Include="Models\DatePoint.cs" />
     <Compile Include="Models\Scheduler\SchedulerEventService.cs" />
+    <Compile Include="Models\Scheduler\Screening.cs" />
     <Compile Include="Models\Scheduler\Task.cs" />
     <Compile Include="Models\Scheduler\Tasks.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -944,16 +944,21 @@
     <Compile Include="Infrastructure\Implementation\ControllerTypeCache.cs" />
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
     <Compile Include="UI\RequestSettings.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerAgendaViewBuilder.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerDayViewBuilder.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerMonthViewBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerViewAgendaBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerViewDayBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerEditableSettingsBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerViewMonthBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewBaseBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewEditableSettingsBuilder.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerWeekViewBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerViewMultiDayBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerViewWeekBuilder.cs" />
+    <Compile Include="UI\Scheduler\Settings\ISchedulerEditableSettings.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettings.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettingsBase.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewBase.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerViewEditableSettings.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerAgendaView.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerMonthView.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerViewAgenda.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerViewMonth.cs" />
     <Compile Include="UI\Scheduler\Views\ISchedulerViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEventBuilder.cs" />
@@ -968,11 +973,12 @@
     <Compile Include="UI\Scheduler\ISchedulerResource.cs" />
     <Compile Include="UI\Scheduler\Views\ISchedulerView.cs" />
     <Compile Include="UI\Scheduler\Scheduler.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerDayView.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerViewDay.cs" />
     <Compile Include="UI\Scheduler\SchedulerEventController.cs" />
     <Compile Include="UI\Scheduler\SchedulerResource.cs" />
     <Compile Include="UI\Scheduler\SchedulerViewType.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerWeekView.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerViewMultiDay.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerViewWeek.cs" />
     <Compile Include="UI\SecurityTrimming.cs" />
     <Compile Include="UI\SecurityTrimmingBuilder.cs" />
     <Compile Include="UI\Slider\Fluent\SliderTooltipBuilder.cs" />
@@ -1445,4 +1451,11 @@
     <Compile Include="UI\MobileListView\Fluent\MobileListViewEventBuilder.cs" />
     <Compile Include="UI\MobileListView\Html\MobileListViewHtmlBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\MobileDrawer\MobileDrawer.cs" /><Compile Include="UI\MobileDrawer\MobileDrawerPosition.cs" /><Compile Include="UI\MobileDrawer\Fluent\MobileDrawerBuilder.cs" /><Compile Include="UI\MobileDrawer\Fluent\MobileDrawerEventBuilder.cs" /><Compile Include="UI\MobileDrawer\Html\MobileDrawerHtmlBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\MobileDrawer\MobileDrawer.cs" />
+    <Compile Include="UI\MobileDrawer\MobileDrawerPosition.cs" />
+    <Compile Include="UI\MobileDrawer\Fluent\MobileDrawerBuilder.cs" />
+    <Compile Include="UI\MobileDrawer\Fluent\MobileDrawerEventBuilder.cs" />
+    <Compile Include="UI\MobileDrawer\Html\MobileDrawerHtmlBuilder.cs" />
+  </ItemGroup>
+</Project>
