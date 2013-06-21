@@ -10,7 +10,7 @@ namespace KendoCRUDService.Models
 {
     public static class TasksRepository
     {
-        private static bool UpdateDatabase = true;
+        private static bool UpdateDatabase = false;
 
         public static IList<TaskViewModel> All()
         {
