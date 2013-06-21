@@ -300,6 +300,8 @@ kendo_module({
             if(that.options.autoBind) {
                 that.dataSource.fetch();
             }
+
+            that.pane.dimension.forceEnabled();
         },
 
         _viewShow: function() {
@@ -348,6 +350,8 @@ kendo_module({
                 page = new Page(element);
                 pages.push(page);
             }
+
+            this.pane.updateDimension();
         },
 
         resizeTo: function(width) {
@@ -427,8 +431,8 @@ kendo_module({
         updatePage: function() {
             var pages = this.pages;
 
-            if(this.pane.movable.x === 0) {
-                return;
+            if(this.pane.offset() === 0) {
+                return false;
             }
 
             if(this.pane.movable.x < 0) {
@@ -446,6 +450,8 @@ kendo_module({
             pages[2].position(RIGHT_PAGE);
 
             this._resetMovable();
+
+            return true;
         },
 
         _resetMovable: function() {
@@ -584,7 +590,7 @@ kendo_module({
 
             that.page = that.options.page;
 
-            that._content = new ScrollViewContent(that.inner, that.pane);
+            that._content = options.dataSource ? new VirtualScrollViewContent(that.inner, that.pane, that.options) : new ScrollViewContent(that.inner, that.pane);
             that._content.page = that.page;
         },
 
@@ -595,8 +601,12 @@ kendo_module({
             velocityThreshold: 0.8,
             contentHeight: "auto",
             pageSize: 1,
+            batchSize: 1,
             bounceVelocityThreshold: 1.6,
-            enablePager: true
+            enablePager: true,
+            autoBind: true,
+            template: "",
+            emptyTemplate: ""
         },
 
         events: [
@@ -657,7 +667,7 @@ kendo_module({
         _transitionEnd:  function() {
             if (this._content.updatePage()) {
                 this.page = this._content.page;
-                this.trigger(CHANGE, { page: this.page });
+                this.trigger(CHANGE, { page: this.page, element: this._content.pages[1].element });
             }
         }
     });
