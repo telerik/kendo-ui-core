@@ -85,7 +85,7 @@ kendo_module({
                 autoUpload: true
             },
             localization: {
-                "select": "Select files...",
+                "select": "Select...",
                 "cancel": "Cancel",
                 "retry": "Retry",
                 "remove": "Remove",
@@ -583,6 +583,7 @@ kendo_module({
 
         _wrapInput: function(input) {
             input.wrap("<div class='k-widget k-upload'><div class='k-button k-upload-button'></div></div>");
+
             input.closest(".k-button")
                 .append("<span>" + this.localization.select + "</span>");
 
