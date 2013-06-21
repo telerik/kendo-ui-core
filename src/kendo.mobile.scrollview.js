@@ -30,6 +30,11 @@ kendo_module({
         REFRESH = "refresh",
         CURRENT_PAGE_CLASS = "km-current-page",
 
+        VIRTUAL_PAGE_COUNT = 3,
+        LEFT_PAGE = -1,
+        CETER_PAGE = 0,
+        RIGHT_PAGE = 1,
+
         LEFT_SWIPE = -1,
         NUDGE = 0,
         RIGHT_SWIPE = 1;
@@ -76,7 +81,6 @@ kendo_module({
     });
 
     kendo.mobile.ui.ScrollViewPager = Pager;
-
 
     var TRANSITION_END = "transitionEnd",
         DRAG_END = "dragEnd";
@@ -272,6 +276,247 @@ kendo_module({
     });
 
     kendo.mobile.ui.ScrollViewContent = ScrollViewContent;
+
+    var VirtualScrollViewContent = kendo.Class.extend({
+        init: function(element, pane, options) {
+            var that = this;
+
+            that.element = element;
+            that.pane = pane;
+            that.options = options;
+            that.template = kendo.template(options.template || ""),
+            that.emptyTemplate = kendo.template(options.emptyTemplate || ""),
+            that.page = 0;
+            that.pages = [];
+            that._initPages();
+            that.resizeTo(that.element.width());
+            that._dataSource();
+            that._buffer();
+            that._pendingPageRefresh = false;
+            that._pendingWidgetRefresh = false;
+
+            //that.view().bind("show", that._viewShow);
+
+            if(that.options.autoBind) {
+                that.dataSource.fetch();
+            }
+        },
+
+        _viewShow: function() {
+            var that = this;
+
+            if(that._pendingWidgetRefresh) {
+                setTimeout(function() {
+                    that._resetPages();
+                }, 0);
+                that._pendingWidgetRefresh= false;
+            }
+        },
+
+        _dataSource: function() {
+            var options = this.options;
+
+            this.dataSource = kendo.data.DataSource.create(options.dataSource);
+        },
+
+        _buffer: function() {
+            var batchSize = this.options.batchSize;
+
+            if(batchSize > 1) {
+                this.buffer = new BatchBuffer(this.dataSource, batchSize);
+            } else {
+                this.buffer = new Buffer(this.dataSource, batchSize * 3);
+            }
+
+            this._resizeProxy = $.proxy(this, "_onResize");
+            this._resetProxy = $.proxy(this, "_onReset");
+            this._endReachedProxy = $.proxy(this, "_onEndReached");
+
+            this.buffer.bind({
+                "resize": this._resetProxy,
+                "reset": this._resetProxy,
+                "endreached": this._endReachedProxy
+            });
+        },
+
+        _initPages: function() {
+            var pages = this.pages,
+                element = this.element,
+                page;
+
+            for (var i = 0; i < VIRTUAL_PAGE_COUNT; i++) {
+                page = new Page(element);
+                pages.push(page);
+            }
+        },
+
+        resizeTo: function(width) {
+            var pages = this.pages,
+                pane = this.pane;
+
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].setWidth(width);
+            }
+
+            pane.updateDimension();
+
+            pages[0].position(LEFT_PAGE);
+            pages[1].position(CETER_PAGE);
+            pages[2].position(RIGHT_PAGE);
+
+            this.width = width;
+        },
+
+        scrollTo: function(page, instant) {
+            var buffer = this.buffer,
+                pages = this.pages,
+                dataItem;
+
+            buffer.syncDataSource();
+            dataItem = buffer.at(page);
+
+            if(!dataItem) {
+                return;
+            }
+
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].position(i-1);
+                this.setPageContent(pages[i], page + (i-1));
+            }
+
+            this.page = page;
+        },
+
+        paneMoved: function(swipeType, bounce, callback) {
+            var that = this,
+                pane = that.pane,
+                width = pane.size(),
+                offset = pane.offset(),
+                thresholdPassed = Math.abs(offset) >= width / 3,
+                ease = bounce ? kendo.effects.Transition.easeOutBack : kendo.effects.Transition. easeOutExpo,
+                isEndReached = that.page + 2 > that.buffer.total,
+                delta = 0;
+
+            if(swipeType === RIGHT_SWIPE) {
+                if(that.page != 0) {
+                    delta = -1; //backward
+                }
+            } else if(swipeType === LEFT_SWIPE && !isEndReached) {
+                delta = 1; //forward
+            } else if(offset > 0 && (thresholdPassed && !isEndReached)) {
+                delta = 1; //forward
+            } else if(offset < 0 && thresholdPassed) {
+                if(that.page != 0) {
+                    delta = -1; //backward
+                }
+            }
+
+            if(delta === 0) {
+                that._cancelMove(ease);
+            } else if (delta === -1) {
+                that._moveBackward();
+            } else if (delta === 1) {
+                that._moveForward();
+            }
+        },
+
+        updatePage: function() {
+            var pages = this.pages;
+
+            if(this.pane.movable.x === 0) {
+                return;
+            }
+
+            if(this.pane.movable.x < 0) {
+                pages.push(this.pages.shift());//forward
+                this.page++;
+                this.setPageContent(pages[2], this.page + 1);
+            } else {
+                pages.unshift(this.pages.pop()); //back
+                this.page--;
+                this.setPageContent(pages[0], this.page - 1);
+            }
+
+            pages[0].position(LEFT_PAGE);
+            pages[1].position(CETER_PAGE);
+            pages[2].position(RIGHT_PAGE);
+
+            this._resetMovable();
+        },
+
+        _resetMovable: function() {
+            this.pane.moveTo(0);
+        },
+
+        _moveForward: function(instant) {
+            this.pane.transitionTo(-this.width, kendo.effects.Transition.easeOutExpo, instant);
+        },
+
+        _moveBackward: function(instant) {
+            this.pane.transitionTo(this.width, kendo.effects.Transition.easeOutExpo, instant);
+        },
+
+        _cancelMove: function(ease) {
+            this.pane.transitionTo(0, ease, false);
+        },
+
+        _resetPages: function() {
+            var pages = this.pages;
+
+            for (var i = 0; i < pages.length; i++) {
+                this.setPageContent(pages[i], i-1);
+            }
+
+            pages[0].position(LEFT_PAGE);
+            pages[1].position(CETER_PAGE);
+            pages[2].position(RIGHT_PAGE);
+
+            this.page = 0;
+        },
+
+        _onResize: function() {
+            var page = this.pages[2], //last page
+                idx = this.page + 1;
+
+            if(this._pendingPageRefresh) {
+                this.setPageContent(page, idx);
+                this._pendingPageRefresh = false;
+            }
+        },
+
+        _onReset: function() {
+            if(this.element.is(":visible")) {
+                this._resetPages();
+            } else {
+                this._widgetNeedsRefresh = true;
+            }
+        },
+
+        _onEndReached: function() {
+            this._pendingPageRefresh = true;
+        },
+
+        setPageContent: function(page, index) {
+            var buffer = this.buffer,
+                template = this.template,
+                emptyTemplate = this.emptyTemplate,
+                view;
+
+            if(index >= 0) {
+                view = buffer.at(index);
+            }
+
+            if(view) {
+                page.content(template(view));
+            } else {
+                page.content(emptyTemplate({}));
+            }
+
+            kendo.mobile.init(page.element);
+        }
+    });
+
+    kendo.mobile.ui.VirtualScrollViewContent = VirtualScrollViewContent;
 
     var LEFT_PAGE = -1,
         CENTER_PAGE = 0,
@@ -637,23 +882,21 @@ kendo_module({
                 width = that.width,
                 velocityThreshold = that.options.velocityThreshold,
                 ease = Transition.easeOutExpo,
+                offset = that.pane.offset(),
+                thresholdPassed = abs(offset) >= width / 3,
                 isEndReached = that.offset + 2 > that.buffer.total;
 
-            if (velocity > velocityThreshold) {
+            if (velocity > velocityThreshold) { //RIGHT_SWIPE
                 if(that.offset === 0) {
                     that.reset(ease);
                 } else {
                     that.backward();
                 }
-                return;
-            } else if(velocity < -velocityThreshold && !isEndReached) {
+            } else if(velocity < -velocityThreshold && !isEndReached) { //LEFT_SWIPE
                 that.forward();
-                return;
-            }
-
-            if(that.pane.movable.x < 0 && (abs(that.pane.movable.x) >= width / 3 && !isEndReached)) {
+            } else if(offset > 0 && (thresholdPassed  && !isEndReached)) {
                 that.forward();
-            } else if(that.pane.movable.x > 0 && (abs(that.pane.movable.x) >= width / 3)) {
+            } else if(offset < 0 && thresholdPassed) {
                 if(that.offset === 0) {
                     that.reset(ease);
                 } else {
