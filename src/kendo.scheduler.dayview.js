@@ -16,7 +16,7 @@ kendo_module({
         MS_PER_MINUTE = kendo.date.MS_PER_MINUTE,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
         getMilliseconds = kendo.date.getMilliseconds,
-        isInTimeRange = kendo.date.isInTimeRange,
+    //    isInTimeRange = kendo.date.isInTimeRange,
         NS = ".kendoMultiDayView";
 
     var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title#">' +
@@ -103,6 +103,32 @@ kendo_module({
         msValue = value.getTime();
 
         return msValue >= msMin && msValue <= msMax;
+    }
+
+    function isInTimeRange(value, min, max) {
+        var msMin = getMilliseconds(min),
+        msMax = getMilliseconds(max),
+        msValue;
+
+        if (!value || msMin == msMax) {
+            return true;
+        }
+
+        if (min >= max) {
+            max += MS_PER_DAY;
+        }
+
+        msValue = getMilliseconds(value);
+
+        if (msMin > msValue) {
+            msValue += MS_PER_DAY;
+        }
+
+        if (msMax < msMin) {
+            msMax += MS_PER_DAY;
+        }
+
+        return msValue > msMin && msValue < msMax;
     }
 
     var MultiDayView = SchedulerView.extend({

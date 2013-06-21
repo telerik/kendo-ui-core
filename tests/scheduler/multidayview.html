@@ -618,6 +618,25 @@
                 equal(eventElement.offset().left, applyDefaultLeftOffset(view.content.find("tr:first").offset().left));
             });
 
+            test("day event which starts before the slot start time and end at the start time is not rendered", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 10, 0, 0),
+                        dates: [
+                            selectedDate,
+                            new Date(2013, 1, 27, 0, 0, 0)
+                        ]
+                    });
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" }];
+
+                view.render(events);
+
+                var eventElement = view.content.find("div.k-event");
+
+                equal(eventElement.length, 0);
+            });
+
             test("position a multiday event which is shorter than one day", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
