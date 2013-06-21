@@ -171,6 +171,7 @@ var tests = [
     "editor/expand-range.html",
     "editor/formatblock.html",
     "editor/formatcommand.html",
+    "editor/formattingtool.html",
     "editor/genericcommand.html",
     "editor/greedyblockformatter.html",
     "editor/greedyinlineformatfinder.html",

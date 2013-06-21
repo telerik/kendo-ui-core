@@ -84,6 +84,7 @@ kendo_module({
             }
 
             if (!tool.name) {
+                tool.options.name = toolName;
                 tool.name = toolName.toLowerCase();
             }
 
@@ -122,6 +123,7 @@ kendo_module({
         fontSize: "Select font size",
         fontSizeInherit: "(inherited size)",
         formatBlock: "Format",
+        formatting: "Format",
         foreColor: "Color",
         backColor: "Background color",
         style: "Styles",
@@ -916,16 +918,6 @@ kendo_module({
                 { text: "6 (24pt)", value: "x-large" },
                 { text: "7 (36pt)", value: "xx-large" }
             ],
-            formatBlock: [
-                { text: "Paragraph", value: "p" },
-                { text: "Quotation", value: "blockquote" },
-                { text: "Heading 1", value: "h1" },
-                { text: "Heading 2", value: "h2" },
-                { text: "Heading 3", value: "h3" },
-                { text: "Heading 4", value: "h4" },
-                { text: "Heading 5", value: "h5" },
-                { text: "Heading 6", value: "h6" }
-            ],
             tools: [
                 "bold",
                 "italic",
@@ -943,7 +935,7 @@ kendo_module({
                 "insertOrderedList",
                 "indent",
                 "outdent",
-                "formatBlock",
+                "formatting",
                 "createLink",
                 "unlink",
                 "insertImage",

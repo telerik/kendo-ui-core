@@ -24,7 +24,7 @@ var kendo = window.kendo,
 var FormattingTool = DelayedExecutionTool.extend({
     init: function(options) {
         var that = this;
-        Tool.fn.init.call(that, options);
+        Tool.fn.init.call(that, kendo.deepExtend({}, that.options, options));
 
         that.type = "kendoSelectBox";
         that._spanTag = [{ tags: ["span"] }];
@@ -36,6 +36,19 @@ var FormattingTool = DelayedExecutionTool.extend({
                 return inlineFinder.getFormat(nodes) || blockFinder.getFormat(nodes);
             }
         };
+    },
+
+    options: {
+        items: [
+            { text: "Paragraph", value: "p" },
+            { text: "Quotation", value: "blockquote" },
+            { text: "Heading 1", value: "h1" },
+            { text: "Heading 2", value: "h2" },
+            { text: "Heading 3", value: "h3" },
+            { text: "Heading 4", value: "h4" },
+            { text: "Heading 5", value: "h5" },
+            { text: "Heading 6", value: "h6" }
+        ]
     },
 
     command: function (args) {
@@ -70,13 +83,13 @@ var FormattingTool = DelayedExecutionTool.extend({
     initialize: function(ui, initOptions) {
         var editor = initOptions.editor,
             options = this.options,
-            toolName = this.name;
+            toolName = options.name;
 
         new Editor.SelectBox(ui, {
             dataTextField: "text",
             dataValueField: "value",
             dataSource: options.items || editor.options[toolName],
-            title: editor.options.messages.style,
+            title: editor.options.messages[toolName],
             change: function () {
                 Tool.exec(editor, toolName, this.dataItem().toJSON());
             },
@@ -94,8 +107,14 @@ var FormattingTool = DelayedExecutionTool.extend({
     },
 
     update: function(ui, nodes) {
-        var selectBox = $(ui).data(this.type),
-            dataSource = selectBox.dataSource,
+        var selectBox = $(ui).data(this.type);
+
+        // necessary until formatBlock is deleted
+        if (!selectBox) {
+            return;
+        }
+
+        var dataSource = selectBox.dataSource,
             items = dataSource.data(),
             i, context,
             ancestor = dom.commonAncestor.apply(null, nodes);
@@ -114,30 +133,38 @@ var FormattingTool = DelayedExecutionTool.extend({
     }
 });
 
-var StyleTool = FormattingTool.extend({
-    init: function(options) {
-        var that = this,
-            console = window.console;
+function deprecatedFormattingTool(name, finder) {
+    return FormattingTool.extend({
+        init: function(options) {
+            FormattingTool.fn.init.call(this, options);
 
-        FormattingTool.fn.init.call(that, options);
+            this.finder = finder;
+        },
 
-        if (console) {
-            console.warn("The `style` tool has been deprecated in favor of the `formatting` tool. See http://docs.kendoui.com/ for more information");
+        initialize: function(ui, initOptions) {
+            var console = window.console;
+
+            if (console) {
+                console.warn("The `" + this.options.name + "` tool has been deprecated in favor of the `formatting` tool. See http://docs.kendoui.com/getting-started/changes-and-backward-compatibility for more information");
+            }
+
+            FormattingTool.fn.initialize.call(this, ui, initOptions);
         }
+    });
+}
 
-        that.format = [{ tags: ["span"] }];
-        that.finder = new GreedyInlineFormatFinder(that.format, "className");
-    }
-});
-
+var StyleTool = deprecatedFormattingTool("style", new GreedyInlineFormatFinder([{ tags: ["span"] }], "className"));
+var FormatBlockTool = deprecatedFormattingTool("formatBlock", new BlockFormatFinder([{ tags: dom.blockElements }]));
 
 extend(Editor, {
     FormattingTool: FormattingTool,
-    StyleTool: StyleTool
+    StyleTool: StyleTool,
+    FormatBlockTool: FormatBlockTool
 });
 
 registerTool("formatting", new FormattingTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Format"})}));
 
 registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Styles"})}));
+registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate})}));
 
 })(window.kendo.jQuery);
