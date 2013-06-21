@@ -9,7 +9,8 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAreaSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="expression">The expression used to extract the series value from the chart model.</param>
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
+        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
         public ChartAreaSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> categoryExpression)
             : base(expression, categoryExpression)
         {
@@ -123,7 +124,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAreaSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="expression">The expression used to extract the series value from the chart model.</param>
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         public ChartAreaSeries(Expression<Func<TModel, TValue>> expression)
             : base(expression, null)
         {

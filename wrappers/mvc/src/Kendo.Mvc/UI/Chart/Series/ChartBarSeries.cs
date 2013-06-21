@@ -11,10 +11,11 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}"/> class.
         /// </summary>
-        /// <param name="valueExpression">The expression used to extract the point value from the chart model.</param>
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
-        public ChartBarSeries(Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression, Expression<Func<TModel, TCategory>> categoryExpression)
-            : base(valueExpression, categoryExpression)
+        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
+        public ChartBarSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, string>> colorExpression, Expression<Func<TModel, TCategory>> categoryExpression)
+            : base(expression, categoryExpression)
         {
             if (colorExpression != null) {
                 if (typeof(TModel).IsPlainType() && !colorExpression.IsBindable())
@@ -178,7 +179,8 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="expression">The expression used to extract the series value from the chart model.</param>
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
+        /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
         public ChartBarSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, string>> colorExpression)
             : base(expression, colorExpression, null)
         {

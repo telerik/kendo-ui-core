@@ -174,28 +174,49 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void Line_should_create_bound_line_series_from_expression()
         {
             var builder = factory.Line(s => s.RepSales);
-            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal>>();
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Line_should_create_bound_area_series_from_expression_and_category_expression()
+        {
+            var builder = factory.Line(s => s.RepSales, s => s.Date);
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, DateTime>>();
         }
 
         [Fact]
         public void Line_should_create_line_series_with_horizontal_orientation()
         {
             var builder = factory.Line(s => s.RepSales);
-            ((ChartLineSeries<SalesData, decimal>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Horizontal);
+            ((ChartLineSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Horizontal);
         }
 
         [Fact]
         public void Line_should_create_bound_line_series_from_type_and_member_name()
         {
             var builder = factory.Line(typeof(decimal), "RepSales");
-            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal>>();
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Line_should_create_bound_area_series_from_type_member_and_category_member_name()
+        {
+            var builder = factory.Line(typeof(decimal), "RepSales", "Date");
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, DateTime>>();
         }
 
         [Fact]
         public void Line_should_create_bound_line_series_from_member_name()
         {
             var builder = factory.Line("RepSales");
-            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal>>();
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Line_should_create_bound_area_series_from_member_and_category_member_name()
+        {
+            var builder = factory.Line("RepSales", "Date");
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, DateTime>>();
         }
 
         [Fact]
@@ -209,28 +230,49 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void VerticalLine_should_create_bound_line_series_from_expression()
         {
             var builder = factory.VerticalLine(s => s.RepSales);
-            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal>>();
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void VerticalLine_should_create_bound_area_series_from_expression_and_category_expression()
+        {
+            var builder = factory.VerticalLine(s => s.RepSales, s => s.Date);
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, DateTime>>();
         }
 
         [Fact]
         public void VerticalLine_should_create_line_series_with_vertical_orientation()
         {
             var builder = factory.VerticalLine(s => s.RepSales);
-            ((ChartLineSeries<SalesData, decimal>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Vertical);
+            ((ChartLineSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Vertical);
         }
 
         [Fact]
         public void VerticalLine_should_create_bound_line_series_from_type_and_member_name()
         {
             var builder = factory.VerticalLine(typeof(decimal), "RepSales");
-            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal>>();
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void VerticalLine_should_create_bound_area_series_from_type_member_and_category_member_name()
+        {
+            var builder = factory.VerticalLine(typeof(decimal), "RepSales", "Date");
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, DateTime>>();
         }
 
         [Fact]
         public void VerticalLine_should_create_bound_line_series_from_member_name()
         {
             var builder = factory.VerticalLine("RepSales");
-            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal>>();
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void VerticalLine_should_create_bound_area_series_from_member_and_category_member_name()
+        {
+            var builder = factory.VerticalLine("RepSales", "Date");
+            builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, DateTime>>();
         }
 
         [Fact]
@@ -388,7 +430,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Area_should_create_bound_area_series_from_two_member_names()
+        public void Area_should_create_bound_area_series_from_member_and_category_member_name()
         {
             var builder = factory.Area("RepSales", "Date");
             builder.Series.ShouldBeType<ChartAreaSeries<SalesData, decimal, DateTime>>();
@@ -444,7 +486,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void VerticalArea_should_create_bound_area_series_from_two_member_names()
+        public void VerticalArea_should_create_bound_area_series_from_member_and_category_member_name()
         {
             var builder = factory.VerticalArea("RepSales", "Date");
             builder.Series.ShouldBeType<ChartAreaSeries<SalesData, decimal, DateTime>>();

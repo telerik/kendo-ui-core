@@ -11,8 +11,9 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBoundSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="expression">The binding expression.</param>
-        protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> expressionCategory)
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
+        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
+        protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> categoryExpression)
         {
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
@@ -21,10 +22,10 @@ namespace Kendo.Mvc.UI
 
             Member = expression.MemberWithoutInstance();
 
-            if (expressionCategory != null)
+            if (categoryExpression != null)
             {
-                Category = expressionCategory.Compile();
-                CategoryMember = expressionCategory.MemberWithoutInstance();
+                Category = categoryExpression.Compile();
+                CategoryMember = categoryExpression.MemberWithoutInstance();
             }
 
             if (string.IsNullOrEmpty(Name))
@@ -93,7 +94,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBoundSeries{TModel, TValue}" /> class.
         /// </summary>
-        /// <param name="expression">The binding expression.</param>
+        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression)
             : base(expression, null)
         {
