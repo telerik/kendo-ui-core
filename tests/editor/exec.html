@@ -121,6 +121,26 @@
                 assertCommand(kendo.ui.editor.OutdentCommand, "outdent");
             });
 
+            function innerHTML(element) {
+                return element.innerHTML.toLowerCase().replace(/\ufeff/g, "BOM");
+            }
+
+            test("exec bold on empty range inserts tag", function() {
+                editor.value("foo");
+
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild, 3);
+                range.collapse(true);
+                editor.selectRange(range);
+                editor.exec("bold");
+
+                equal(editor.value(), "foo");
+
+                editor.getRange().insertNode(editor.document.createElement("a"));
+
+                equal(innerHTML(editor.body), "foo<strong>BOM<a></a>BOM</strong>");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

@@ -22,9 +22,9 @@ function makeMap(items) {
 }
 
 var empty = makeMap("area,base,basefont,br,col,frame,hr,img,input,isindex,link,meta,param,embed".split(",")),
-    blockElements = "div,p,h1,h2,h3,h4,h5,h6,address,applet,blockquote,button,center,dd,dir,dl,dt,fieldset,form,frameset,hr,iframe,isindex,li,map,menu,noframes,noscript,object,ol,pre,script,table,tbody,td,tfoot,th,thead,tr,ul".split(","),
+    blockElements = "div,p,h1,h2,h3,h4,h5,h6,address,applet,blockquote,button,center,dd,dir,dl,dt,fieldset,form,frameset,hr,iframe,isindex,li,map,menu,noframes,noscript,object,ol,pre,script,table,tbody,td,tfoot,th,thead,tr,ul,header,article,nav,footer,section,aside,main,figure,figcaption".split(","),
     block = makeMap(blockElements),
-    inlineElements = "span,em,a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,code,del,dfn,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,strike,strong,sub,sup,textarea,tt,u,var".split(","),
+    inlineElements = "span,em,a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,code,del,dfn,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,strike,strong,sub,sup,textarea,tt,u,var,data,time,mark,ruby".split(","),
     inline = makeMap(inlineElements),
     fillAttrs = makeMap("checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected".split(","));
 
@@ -69,7 +69,7 @@ var whitespace = /^\s+$/,
             "border-bottom-style,border-bottom-width,border-bottom-color," +
             "border-left-style,border-left-width,border-left-color," +
             "border-right-style,border-right-width,border-right-color," +
-            "font-family,font-size,font-style,font-variant,font-weight,line-height"
+            "font-family,font-size,font-style,font-variant,font-weight"
            ).split(","),
     entityRe = /[\u00A0-\u2666<>\&]/g,
     entityTable = {
@@ -259,6 +259,10 @@ var Dom = {
         });
     },
 
+    stripBom: function(text) {
+        return text.replace(bom, "");
+    },
+
     name: function (node) {
         return node.nodeName.toLowerCase();
     },
@@ -387,7 +391,7 @@ var Dom = {
         for (var i = parent.childNodes.length - 1; i >= 0; i--) {
             var node = parent.childNodes[i];
             if (Dom.isDataNode(node)) {
-                if (!node.nodeValue.replace(bom, "").length) {
+                if (!Dom.stripBom(node.nodeValue).length) {
                     Dom.remove(node);
                 }
 

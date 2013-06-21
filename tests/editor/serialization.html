@@ -438,18 +438,6 @@
         });
     }
 
-    test('setting value removes pending formats', function() {
-        editor.value('foo');
-
-        editor.pendingFormats.toggle({ format: editor.options.formats.bold, values: undefined });
-
-        ok(editor.pendingFormats.hasPending());
-
-        editor.value('bar');
-
-        ok(!editor.pendingFormats.hasPending());
-    });
-
     test("single quotes in style attribute", function() {
         editor.value('<span style="font-family:\'Verdana\';">foo</span>');
         equal(editor.value(), '<span style="font-family:\'Verdana\';">foo</span>');

@@ -41,7 +41,6 @@
     <script src="../src/editor/components.js"></script>
     <script src="../src/editor/indent.js"></script>
     <script src="../src/editor/viewhtml.js"></script>
-    <script src="../src/editor/pendingformats.js"></script>
     <script src="../src/editor/tables.js"></script>
 
     <style>
@@ -58,20 +57,42 @@
         #page {
             width: 800px;
             margin: 0 auto;
+            padding-top: 8em;
         }
+
+        article {
+            display: block;
+            border: 1px solid green;
+        }
+
+        .foo { color: red; background-color: blue }
+        .bar { color: #ccc; background-color: #f1f1f1 }
     </style>
+
+
+    <script>(function(d,c){d[c]('header'),d[c]('article'),d[c]('nav'),d[c]('section'),d[c]('footer');})(document, "createElement");</script>
 </head>
 <body>
     <div id="page">
-        <textarea id="comment" style="height: 200px;"></textarea>
+        <div id="comment" contentEditable style="height: 200px;"></div>
 
         <div id="content"></div>
     </div>
 
     <script>
         var editor = $("#comment")
-            .val("<p>foo bar baz</p>")
+            .html("<p>foo bar baz</p>")
             .kendoEditor({
+                tools: [
+                    "bold", "italic", "createLink", "unlink", "insertImage",
+
+                    "foreColor", "backColor",
+
+                    { name: "style", items: [
+                        { text: "foo", value: "foo", context: "p" },
+                        { text: "bar", value: "bar", context: "h1" }
+                    ] }
+                ],
                 select: function(e) {
                     $("#content").text(this.value());
                 }

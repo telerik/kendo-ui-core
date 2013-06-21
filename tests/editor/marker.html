@@ -149,7 +149,7 @@
             equal(range.startContainer, editor.body);
             equal(range.endContainer, editor.body);
             equal(range.startOffset, 1);
-            equal(range.endOffset, 4);
+            equal(range.endOffset, 6);
         });
 
         test('addCaretMarker inserts caret marker', function() {
@@ -256,19 +256,6 @@
             equal(range.startContainer, editor.body);
         });
 
-        test('remove marker after element', function() {
-            editor.value('<a></a>');
-            var range = editor.getRange();
-            range.setEndAfter(editor.body.firstChild);
-            range.collapse(false);
-            var marker = new Marker();
-            marker.add(range);
-
-            marker.remove(range);
-            equal(range.startOffset, 1);
-            equal(range.startContainer, editor.body);
-        });
-
         test('remove caret after element', function() {
             editor.value('<a></a>');
             var range = editor.getRange();
@@ -279,32 +266,6 @@
 
             marker.removeCaret(range);
             equal(range.startOffset, 1);
-            equal(range.startContainer, editor.body);
-        });
-
-        test('remove marker before element', function() {
-            editor.value('<a></a>');
-            var range = editor.getRange();
-            range.setStartBefore(editor.body.firstChild);
-            range.collapse(true);
-            var marker = new Marker();
-            marker.add(range);
-
-            marker.remove(range);
-            equal(range.startOffset, 0);
-            equal(range.startContainer, editor.body);
-        });
-
-        test('remove caret before element', function() {
-            editor.value('<a></a>');
-            var range = editor.getRange();
-            range.setStartBefore(editor.body.firstChild);
-            range.collapse(true);
-            var marker = new Marker();
-            marker.addCaret(range);
-
-            marker.removeCaret(range);
-            equal(range.startOffset, 0);
             equal(range.startContainer, editor.body);
         });
 

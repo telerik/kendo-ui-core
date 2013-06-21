@@ -34,12 +34,11 @@
     <script>
         $("#editor").kendoEditor({
             tools: [
-                "style"
-            ],
-            style: [
-                { text: "Highlight Error", value: "hlError" },
-                { text: "Highlight OK", value: "hlOK" },
-                { text: "Inline Code", value: "inlineCode" }
+                { name: "style", items: [
+                    { text: "Highlight Error", value: "hlError" },
+                    { text: "Highlight OK", value: "hlOK" },
+                    { text: "Inline Code", value: "inlineCode" }
+                ] }
             ],
             stylesheets: [
                 "../../content/web/editor/editorStyles.css"

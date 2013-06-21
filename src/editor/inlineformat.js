@@ -305,37 +305,21 @@ var GreedyInlineFormatter = InlineFormatter.extend({
     }
 });
 
-function inlineFormatWillDelayExecution (range) {
-    return range.collapsed && !RangeUtils.isExpandable(range);
-}
-
 var InlineFormatTool = FormatTool.extend({
     init: function(options) {
         FormatTool.fn.init.call(this, extend(options, {
             finder: new InlineFormatFinder(options.format),
             formatter: function () { return new InlineFormatter(options.format); }
         }));
-
-        this.willDelayExecution = inlineFormatWillDelayExecution;
     }
 });
 
 var DelayedExecutionTool = Tool.extend({
-    willDelayExecution: inlineFormatWillDelayExecution,
-
-    update: function(ui, nodes, pendingFormats) {
-        var list = ui.data(this.type),
-            pendingFormat = pendingFormats.getPending(this.name),
-            format;
-
-        if (pendingFormat && pendingFormat.options.params) {
-            format = pendingFormat.options.params.value;
-        } else {
-            format = this.finder.getFormat(nodes);
-        }
+    update: function(ui, nodes) {
+        var list = ui.data(this.type);
 
         list.close();
-        list.value(format);
+        list.value(this.finder.getFormat(nodes));
     }
 });
 
@@ -426,8 +410,6 @@ var ColorTool = Tool.extend({
         }));
     },
 
-    willDelayExecution: inlineFormatWillDelayExecution,
-
     initialize: function(ui, initOptions) {
         var editor = initOptions.editor,
             toolName = this.name,
@@ -456,6 +438,24 @@ var ColorTool = Tool.extend({
     }
 });
 
+var ClassFormatter = Class.extend({
+    init: function(options) {
+        this.options = options;
+    },
+
+    apply: function(nodes) {
+        var blocks = dom.blockParents(nodes);
+
+        for (var i = 0; i < blocks.length; i++) {
+            $(blocks[i]).addClass(this.options.className);
+        }
+    },
+
+    toggle: function(range) {
+        Editor.GreedyBlockFormatter.fn.toggle.call(this, range);
+    }
+});
+
 var StyleTool = DelayedExecutionTool.extend({
     init: function(options) {
         var that = this;
@@ -466,13 +466,25 @@ var StyleTool = DelayedExecutionTool.extend({
         that.finder = new GreedyInlineFormatFinder(that.format, "className");
     },
 
-    command: function (commandArguments) {
-        var format = this.format;
-        return new Editor.FormatCommand(extend(commandArguments, {
+    command: function (args) {
+        var format = this.format,
+            styleOptions = args.value;
+
+        return new Editor.FormatCommand({
+            range: args.range,
             formatter: function () {
-                return new GreedyInlineFormatter(format, { className: commandArguments.value });
+                var command,
+                    options = { className: styleOptions.value || styleOptions, context: styleOptions.context };
+
+                if (styleOptions.context) {
+                    command = new ClassFormatter(options);
+                } else {
+                    command = new GreedyInlineFormatter(format, options);
+                }
+
+                return command;
             }
-        }));
+        });
     },
 
     initialize: function(ui, initOptions) {
@@ -485,14 +497,44 @@ var StyleTool = DelayedExecutionTool.extend({
             dataSource: options.items || editor.options.style,
             title: editor.options.messages.style,
             change: function () {
-                Tool.exec(editor, "style", this.value());
+                Tool.exec(editor, "style", this.dataItem().toJSON());
             },
-            highlightFirst: false
+            highlightFirst: false,
+            template: kendo.template(
+                '<span unselectable="on" style="display:block;#=data.style#">#:data.text#</span>'
+            )
         });
 
-        ui.closest(".k-widget").removeClass("k-" + this.name).find("*").addBack().attr("unselectable", "on");
-    }
+        $(ui).data(this.type).decorateItems = function(doc) {
+            var classes = this.dataSource.data();
 
+            for (var i = 0; i < classes.length; i++) {
+                classes[i].style = dom.inlineStyle(doc, "span", { className : classes[i].value });
+            }
+        };
+
+        ui.closest(".k-widget").removeClass("k-" + this.name).find("*").addBack().attr("unselectable", "on");
+    },
+
+    update: function(ui, nodes) {
+        var selectBox = $(ui).data(this.type),
+            dataSource = selectBox.dataSource,
+            items = dataSource.data(),
+            i, context,
+            ancestor = dom.commonAncestor.apply(null, nodes);
+
+        for (i = 0; i < items.length; i++) {
+            context = items[i].context;
+
+            items[i].visible = !context || !!$(ancestor).closest(context).length;
+        }
+
+        dataSource.filter([{ field: "visible", operator: "eq", value: true }]);
+
+        DelayedExecutionTool.fn.update.call(this, ui, nodes);
+
+        selectBox.wrapper.toggleClass("k-state-disabled", !dataSource.view().length);
+    }
 });
 
 extend(Editor, {

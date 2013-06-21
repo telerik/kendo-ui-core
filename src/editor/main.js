@@ -68,27 +68,6 @@ kendo_module({
         separatorTemplate:
             '<li class="k-separator"></li>',
 
-        decorateStyleToolItems: function(e) {
-            var textarea = e.data,
-                selectBox = textarea.closest(".k-editor").find(".k-style").data("kendoSelectBox"),
-                doc = textarea.data("kendoEditor").document,
-                dom = kendo.ui.editor.Dom,
-                classes;
-
-            if (!selectBox) {
-                return;
-            }
-
-            classes = selectBox.dataSource.view();
-
-            selectBox.list.find(".k-item").each(function(idx, element){
-                var item = $(element),
-                    style = dom.inlineStyle(doc, "span", {className : classes[idx].value});
-
-                item.html('<span unselectable="on" style="display:block;' + style +'">' + item.text() + '</span>');
-            });
-        },
-
         formatByName: function(name, format) {
             for (var i = 0; i < format.length; i++) {
                 if ($.inArray(name, format[i].tags) >= 0) {
@@ -292,6 +271,8 @@ kendo_module({
             });
 
             editor.bind("select", proxy(that._update, that));
+
+            this._updateContext();
 
             if (window) {
                 window.wrapper.css({top: "", left: "", width: ""});
@@ -523,9 +504,15 @@ kendo_module({
             that.items().each(function () {
                 var tool = that.options.tools[that._toolFromClassName(this)];
                 if (tool) {
-                    tool.update($(this), nodes, editor.pendingFormats);
+                    tool.update($(this), nodes);
                 }
             });
+
+            this._updateContext();
+        },
+
+        _updateContext: function() {
+            this.element.children().show().filter(":has(.k-state-disabled)").hide();
         }
     });
 
@@ -590,8 +577,6 @@ kendo_module({
 
             that.clipboard = new editorNS.Clipboard(this);
 
-            that.pendingFormats = new editorNS.PendingFormats(this);
-
             that.undoRedoStack = new editorNS.UndoRedoStack();
 
             if (options && options.value) {
@@ -618,9 +603,9 @@ kendo_module({
             try {
                 if (keyboard.isTypingInProgress()) {
                     keyboard.endTyping(true);
-                }
 
-                this.saveSelection();
+                    this.saveSelection();
+                }
             } catch (e) { }
         },
 
@@ -657,8 +642,9 @@ kendo_module({
         },
 
         _createContentElement: function(stylesheets) {
-            var iframe, wnd, doc,
-                textarea = this.textarea,
+            var editor = this,
+                iframe, wnd, doc,
+                textarea = editor.textarea,
                 rtlStyle = kendo.support.isRtl(textarea) ? "direction:rtl;" : "";
 
             textarea.hide();
@@ -668,10 +654,14 @@ kendo_module({
                             .insertBefore(textarea)[0];
 
             wnd = iframe.contentWindow || iframe;
-            if (stylesheets.length > 0) {
-                $(iframe).one("load", textarea, EditorUtils.decorateStyleToolItems);
-            }
             doc = wnd.document || iframe.contentDocument;
+
+            if (stylesheets.length > 0) {
+                $(iframe).one("load", function() {
+                    var styleTools = editor.toolbar.items().filter(".k-style");
+                    styleTools.kendoSelectBox("decorateItems", doc);
+                });
+            }
 
             doc.open();
             doc.write(
@@ -693,6 +683,7 @@ kendo_module({
                         ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
                         ".k-table p{margin:0;padding:0;}" +
                     "</style>" +
+                    "<script>(function(d,c){d[c]('header'),d[c]('article'),d[c]('nav'),d[c]('section'),d[c]('footer');})(document, 'createElement');</script>" +
                     $.map(stylesheets, function(href){
                         return "<link rel='stylesheet' href='" + href + "'>";
                     }).join("") +
@@ -705,13 +696,12 @@ kendo_module({
         },
 
         _initializeContentElement: function() {
-            var isFirstKeyDown = true,
-                editor = this;
+            var editor = this, doc;
 
             if (editor.textarea) {
                 editor.window = editor._createContentElement(editor.options.stylesheets);
-                editor.document = editor.window.contentDocument || editor.window.document;
-                editor.body = editor.document.body;
+                doc = editor.document = editor.window.contentDocument || editor.window.document;
+                editor.body = doc.body;
 
                 $(editor.window)
                     .on("blur" + NS, function () {
@@ -725,20 +715,23 @@ kendo_module({
                         }
                     });
 
-                $(editor.document).on("mouseup" + NS, proxy(editor._mouseup, editor));
+                $(doc).on("mouseup" + NS, proxy(editor._mouseup, editor));
             } else {
                 editor.window = window;
-                editor.document = document;
+                doc = editor.document = document;
                 editor.body = editor.element[0];
+
+                var styleTools = editor.toolbar.items().filter(".k-style");
+                styleTools.kendoSelectBox("decorateItems", doc);
             }
 
             try {
-                editor.document.execCommand("enableObjectResizing", false, "false");
-                editor.document.execCommand("enableInlineTableEditing", null, false);
+                doc.execCommand("enableObjectResizing", false, "false");
+                doc.execCommand("enableInlineTableEditing", null, false);
             } catch(e) { }
 
             if (kendo.support.touch) {
-                $(editor.document).on("selectionchange" + NS, function() {
+                $(doc).on("selectionchange" + NS, function() {
                     editor._selectionChange();
                 });
             }
@@ -783,7 +776,7 @@ kendo_module({
                             editor.selectRange(range);
                         }
                     } else if (e.keyCode == keys.LEFT || e.keyCode == keys.RIGHT) {
-                        // skip bom nodes when navigating with arrows (IE 7/8)
+                        // skip bom nodes when navigating with arrows
                         range = editor.getRange();
                         var left = e.keyCode == keys.LEFT;
                         var container = range[left ? "startContainer" : "endContainer"];
@@ -794,7 +787,7 @@ kendo_module({
                             offset -= 1;
                         }
 
-                        if (container.nodeType == 3 && container.nodeValue[offset] == "\ufeff") {
+                        if (offset + direction > 0 && container.nodeType == 3 && container.nodeValue[offset] == "\ufeff") {
                             range.setStart(container, offset + direction);
                             range.collapse(true);
                             editor.selectRange(range);
@@ -813,14 +806,6 @@ kendo_module({
                         return false;
                     }
 
-                    if (editor.keyboard.isTypingKey(e) && editor.pendingFormats.hasPending()) {
-                        if (isFirstKeyDown) {
-                            isFirstKeyDown = false;
-                        } else {
-                            editor.pendingFormats.apply(editor.getRange());
-                        }
-                    }
-
                     editor.keyboard.clearTimeout();
 
                     editor.keyboard.keydown(e);
@@ -829,21 +814,12 @@ kendo_module({
                     var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
 
                     if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
-                        editor.pendingFormats.clear();
                         editor._selectionChange();
-                    }
-
-                    if (editor.keyboard.isTypingKey(e)) {
-                        editor.pendingFormats.apply(editor.getRange());
-                    } else {
-                        isFirstKeyDown = true;
                     }
 
                     editor.keyboard.keyup(e);
                 })
                 .on("mousedown" + NS, function(e) {
-                    editor.pendingFormats.clear();
-
                     editor._selectionStarted = true;
 
                     var target = $(e.target);
@@ -1017,8 +993,6 @@ kendo_module({
                 return;
             }
 
-            this.pendingFormats.clear();
-
             var onerrorRe = /onerror\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/i;
 
             // handle null value passed as a parameter
@@ -1166,8 +1140,7 @@ kendo_module({
         exec: function (name, params) {
             var that = this,
                 range,
-                tool, command = null,
-                pendingTool;
+                tool, command = null;
 
             name = name.toLowerCase();
 
@@ -1180,15 +1153,6 @@ kendo_module({
 
             if (tool) {
                 range = that.getRange();
-
-                if (!/undo|redo/i.test(name) && tool.willDelayExecution(range)) {
-                    // clone our tool to apply params only once
-                    pendingTool = $.extend({}, tool);
-                    $.extend(pendingTool.options, { params: params });
-                    that.pendingFormats.toggle(pendingTool);
-                    that._selectionChange();
-                    return;
-                }
 
                 if (tool.command) {
                     command = tool.command(extend({ range: range }, params));
@@ -1237,12 +1201,7 @@ kendo_module({
             return new this.options.command(commandArguments);
         },
 
-        update: $.noop,
-
-        willDelayExecution: function() {
-            return false;
-        }
-
+        update: $.noop
     });
 
     Tool.exec = function (editor, name, value) {
@@ -1261,13 +1220,11 @@ kendo_module({
                 }));
         },
 
-        update: function($ui, nodes, pendingFormats) {
-            var isPending = pendingFormats.isPending(this.name),
-                isFormatted = this.options.finder.isFormatted(nodes),
-                isActive = isPending ? !isFormatted : isFormatted;
+        update: function($ui, nodes) {
+            var isFormatted = this.options.finder.isFormatted(nodes);
 
-            $ui.toggleClass("k-state-active", isActive);
-            $ui.attr("aria-pressed", isActive);
+            $ui.toggleClass("k-state-active", isFormatted);
+            $ui.attr("aria-pressed", isFormatted);
         }
     });
 

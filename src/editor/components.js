@@ -24,7 +24,11 @@ var SelectBox = DropDownList.extend({
 
         if (value !== DropDownList.fn.value.call(that)) {
            that.text(that.options.title);
-           that._current.removeClass("k-state-selected");
+
+           if (that._current) {
+               that._current.removeClass("k-state-selected");
+           }
+
            that.current(null);
            that._oldIndex = that.selectedIndex = -1;
         }
