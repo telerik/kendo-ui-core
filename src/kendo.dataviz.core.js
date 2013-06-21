@@ -1454,7 +1454,7 @@ kendo_module({
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
                 tickPositions = axis.getMajorTickPositions(),
-                labelOffset = axis.getActualTickSize() + options.margin,
+                labelOffset = axis.getActualTickSize()  + options.margin,
                 labelBox, labelY, i;
 
             for (i = 0; i < labels.length; i++) {
@@ -1529,8 +1529,9 @@ kendo_module({
 
         arrangeNotes: function() {
             var axis = this,
+                options = axis.options,
                 i, item, slot, value,
-                center;
+                box;
 
             for (i = 0; i < axis.notes.length; i++) {
                 item = axis.notes[i];
@@ -1538,6 +1539,7 @@ kendo_module({
                 if (value) {
                     slot = axis.getSlot(value);
                 }
+
                 item.reflow(slot || axis.lineBox());
             }
         },
@@ -1639,10 +1641,6 @@ kendo_module({
             var note = this,
                 connector = note.options.connector;
 
-            if (!note.connectorPoints) {
-                return;
-            }
-
             return [
                 view.createPolyline(note.connectorPoints, false, {
                     stroke: connector.color,
@@ -1656,60 +1654,71 @@ kendo_module({
             var note = this,
                 options = note.options,
                 center = targetBox.center(),
-                icon = options.icon,
                 wrapperBox = note.wrapperBox,
                 width = wrapperBox.width(),
                 height = wrapperBox.height(),
-                dir = inArray(options.position, [TOP, LEFT]) ? 1 : 2,
                 distance = options.connector.distance,
-                box;
+                lineStart, box, contentBox;
 
             if (inArray(options.position, [TOP, BOTTOM])) {
                 if (options.position === TOP) {
-                    box = Box2D(
+                    contentBox = Box2D(
                         center.x - width / 2, targetBox.y1 - distance,
                         center.x + width / 2, targetBox.y1 - (distance + height));
                 } else {
-                    box = Box2D(
+                    contentBox = Box2D(
                         center.x - width / 2, targetBox.y1 + distance,
                         center.x + width / 2, targetBox.y1 + height + distance);
                 }
 
-                note.connectorPoints = [
-                    Point2D(center.x, targetBox[Y + dir]),
-                    Point2D(center.x, box[Y + dir]),
-                ];
+                if (options.connector.visible) {
+                    lineStart = Point2D(center.x, targetBox.y1);
+                    note.connectorPoints = [
+                        lineStart,
+                        Point2D(center.x, contentBox.y1),
+                    ];
+                    box = contentBox.clone().wrapPoint(lineStart);
+                }
             } else {
                 if (options.position === LEFT) {
-                    box = Box2D(
-                        targetBox.x1 - distance, center.y - height / 2,
-                        targetBox.x1 - (width + distance), center.y + height / 2);
+                    contentBox = Box2D(
+                        targetBox.x1 - (width + distance), center.y - height / 2,
+                        targetBox.x1 - distance, center.y + height / 2);
 
+                    if (options.connector.visible) {
+                        lineStart = Point2D(targetBox.x2, center.y);
+                        note.connectorPoints = [
+                            lineStart,
+                            Point2D(contentBox.x2, center.y),
+                        ];
+                        box = contentBox.clone().wrapPoint(lineStart);
+                    }
                 } else {
-                    box = Box2D(
+                    contentBox = Box2D(
                         targetBox.x1 + distance, center.y - height / 2,
                         targetBox.x1 + width + distance, center.y + height / 2);
-                }
 
-                note.connectorPoints = [
-                    Point2D(targetBox.x1, center.y),
-                    Point2D(box.x1, center.y),
-                ];
-                console.log(note.connectorPoints);
+                    if (options.connector.visible) {
+                        lineStart = Point2D(targetBox.x2, center.y);
+                        note.connectorPoints = [
+                            lineStart,
+                            Point2D(contentBox.x1, center.y),
+                        ];
+                        box = contentBox.clone().wrapPoint(lineStart);
+                    }
+                }
             }
 
-
             if (note.marker) {
-                note.marker.reflow(box);
+                note.marker.reflow(contentBox);
             }
 
             if (note.label) {
-                note.label.reflow(box);
+                note.label.reflow(contentBox);
             }
 
-            note.backgroundBox = box;
-
-            note.box = note.marker.box.clone().wrap(note.label.box);
+            note.contentBox = contentBox;
+            note.box = box || contentBox;
         },
 
         getViewElements: function(view) {
