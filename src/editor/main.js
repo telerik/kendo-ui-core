@@ -695,12 +695,12 @@ kendo_module({
         },
 
         _initializeContentElement: function() {
-            var editor = this;
+            var editor = this, doc;
 
             if (editor.textarea) {
                 editor.window = editor._createContentElement(editor.options.stylesheets);
-                editor.document = editor.window.contentDocument || editor.window.document;
-                editor.body = editor.document.body;
+                doc = editor.document = editor.window.contentDocument || editor.window.document;
+                editor.body = doc.body;
 
                 $(editor.window)
                     .on("blur" + NS, function () {
@@ -714,23 +714,23 @@ kendo_module({
                         }
                     });
 
-                $(editor.document).on("mouseup" + NS, proxy(editor._mouseup, editor));
+                $(doc).on("mouseup" + NS, proxy(editor._mouseup, editor));
             } else {
                 editor.window = window;
-                editor.document = document;
+                doc = editor.document = document;
                 editor.body = editor.element[0];
 
                 var styleTools = editor.toolbar.items().filter(".k-style");
-                styleTools.kendoSelectBox("decorateItems", editor.document);
+                styleTools.kendoSelectBox("decorateItems", doc);
             }
 
             try {
-                editor.document.execCommand("enableObjectResizing", false, "false");
-                editor.document.execCommand("enableInlineTableEditing", null, false);
+                doc.execCommand("enableObjectResizing", false, "false");
+                doc.execCommand("enableInlineTableEditing", null, false);
             } catch(e) { }
 
             if (kendo.support.touch) {
-                $(editor.document).on("selectionchange" + NS, function() {
+                $(doc).on("selectionchange" + NS, function() {
                     editor._selectionChange();
                 });
             }

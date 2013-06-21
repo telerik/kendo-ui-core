@@ -12,9 +12,8 @@
 
         body { padding-top: 4em; }
 
-        .foo {
-            color: red;
-        }
+        .red { color: red; }
+        .blue { color: blue; }
     </style>
 </head>
 <body>
@@ -30,7 +29,7 @@
             .kendoEditor({
                 tools: [
                     { name: "style", items: [
-                        { text: "foo", value: "foo" }
+                        { text: "red", value: "red" }
                     ] }
                 ]
             })
@@ -63,8 +62,8 @@
         module("Context-aware styles", {
             setup: function() {
                 setStyleItems(inline, [
-                    { text: "foo", value: "foo", context: "h1" },
-                    { text: "bar", value: "bar", context: "p" }
+                    { text: "red", value: "red", context: "h1" },
+                    { text: "blue", value: "blue", context: "p" }
                 ]);
             }
         });
@@ -76,13 +75,13 @@
             var popup = tool.popup.element;
 
             equal(popup.find(".k-item").length, 1);
-            equal(popup.find(".k-item").text(), "foo");
+            equal(popup.find(".k-item").text(), "red");
             equal(tool.text(), tool.options.title);
 
             selectFromValue(inline, '<h1>foo</h1><p>ba||r</p>');
 
             equal(popup.find(".k-item").length, 1);
-            equal(popup.find(".k-item").text(), "bar");
+            equal(popup.find(".k-item").text(), "blue");
             equal(tool.text(), tool.options.title);
         });
 
@@ -91,10 +90,10 @@
 
             var tool = styleTool(inline);
 
-            tool.value("foo");
+            tool.value("red");
             tool.trigger("change");
 
-            equal(inline.value(), '<h1 class="foo">foo</h1>');
+            equal(inline.value(), '<h1 class="red">foo</h1>');
         });
 
     </script>
