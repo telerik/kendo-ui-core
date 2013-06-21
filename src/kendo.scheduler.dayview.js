@@ -285,7 +285,7 @@ kendo_module({
             length = Math.round(length);
 
             for (; idx < length; idx++) {
-                html += action(start, idx % (msMajorInterval/msInterval) === 0, idx % (msMajorInterval/msInterval) === 1);
+                html += action(start, idx % (msMajorInterval/msInterval) === 0, idx % (msMajorInterval/msInterval) === that.options.minorTickCount - 1);
 
                 kendo.date.setTime(start, msInterval, false);
             }
