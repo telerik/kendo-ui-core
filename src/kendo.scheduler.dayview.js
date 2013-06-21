@@ -59,7 +59,7 @@ kendo_module({
                 '>' +
                 '<span class="k-event-actions">' +
                     '# if(data.recurrenceRule || data.recurrenceId) {#' +
-                        '<a href="\\#" class="k-link"><span class="k-icon k-i-refresh"></span></a>' +
+                        '<span class="k-icon k-i-refresh"></span>' +
                     '#}#' +
                 '</span>' +
                 '{0}' +

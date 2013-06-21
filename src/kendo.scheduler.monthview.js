@@ -26,7 +26,7 @@ kendo_module({
                         '<span class="k-icon k-i-arrow-w"></span>' +
                     '#}#' +
                     '# if(data.recurrenceRule || data.recurrenceId) {#' +
-                        '<a href="\\#" class="k-link"><span class="k-icon k-i-refresh"></span></a>' +
+                        '<span class="k-icon k-i-refresh"></span>' +
                     '#}#' +
                 '</span>' +
                 '{0}' +
