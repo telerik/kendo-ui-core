@@ -580,6 +580,27 @@
                 equal(origin.recurrenceException, kendo.toString(kendo.timezone.apply(exception.start, 0), "yyyyMMddTHHmmssZ") + ";");
             });
 
+            test("created exception has no id and recurrenceRule property", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid"),
+                    origin = scheduler.dataSource.at(0),
+                    exception;
+
+                scheduler.editEvent(eventUID);
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                exception = scheduler.dataSource.at(1);
+
+                equal(exception.id, undefined);
+                equal(exception.recurrenceRule, "");
+            });
+
             test("creating exception adds exception date to event exception property", function() {
                 var scheduler = setup({
                     views: ["week"],
@@ -607,6 +628,99 @@
                 equal(origin.recurrenceException, result);
             });
 
+            test("create exception does not open recurring window twice", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid");
+
+                stub(scheduler, {
+                    addEvent: scheduler.addEvent
+                });
+
+                scheduler.editEvent(eventUID);
+
+                //edit current instance
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                ok(!scheduler._recurringDialog);
+            });
+
+            test("Editing exception opens recurring dialog", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var events = scheduler.element.find(".k-event"),
+                    origin = scheduler.dataSource.at(0);
+
+                scheduler.editEvent(events.last().data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                scheduler._editContainer.find("a.k-scheduler-update").click();
+
+                events = scheduler.element.find(".k-event");
+
+                stub(scheduler, {
+                    addEvent: scheduler.addEvent,
+                    _editEvent: scheduler._editEvent
+                });
+
+                scheduler.dataSource.at(1).set("id", 2);
+                scheduler.editEvent(events.last().data("uid"));
+
+                ok(scheduler._recurringDialog.element.is(":visible"));
+            });
+
+            test("open recurring window if editing old exception", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid"),
+                    origin = scheduler.dataSource.at(0),
+                    exception;
+
+                scheduler.editEvent(eventUID);
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                exception = scheduler.dataSource.at(1);
+
+                ok(origin.recurrenceException);
+                equal(origin.recurrenceException, kendo.toString(kendo.timezone.apply(exception.start, 0), "yyyyMMddTHHmmssZ") + ";");
+            });
+
+            test("Normalize model if create exception from origin", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:first").data("uid"),
+                    origin = scheduler.dataSource.at(0),
+                    exception;
+
+                scheduler.editEvent(eventUID);
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                exception = scheduler.dataSource.at(1);
+
+                ok(origin.recurrenceException);
+                equal(origin.recurrenceException, kendo.toString(kendo.timezone.apply(exception.start, 0), "yyyyMMddTHHmmssZ") + ";");
+                equal(origin.id, exception.recurrenceId);
+            });
+
             test("edit series", function() {
                 var scheduler = setup({
                     views: ["week"],
@@ -631,6 +745,62 @@
                 equal(scheduler.calls("_editEvent"), 1);
                 equal(model.uid, scheduler.dataSource.at(0).uid);
             });
+
+            test("edit series deletes created exceptions", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var event = scheduler.element.find(".k-event:last");
+
+                scheduler.editEvent(event.data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                scheduler._editContainer.find("a.k-scheduler-update").click();
+                scheduler.dataSource.at(1).set("id", 2);
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid");
+                scheduler.editEvent(eventUID);
+
+                //edit current instance
+                scheduler._recurringDialog.element.find("button:last").triggerHandler("click");
+
+                var model = scheduler.dataSource.at(0);
+
+                equal(scheduler.dataSource.data().length, 1);
+                equal(model.recurrenceException, "");
+            });
+
+            /*test("Delete occurrence creates recurrenceException ", function() {
+                    var date = new Date(2013, 10, 10, 15, 0, 0),
+                        excepctionDate = kendo.timezone.apply(date, 0),
+                        recurrenceException = kendo.toString(date, "yyyyMMddTHHmmssZ") + ";";
+
+                var scheduler = setup({
+                    views: ["week"],
+                    dataSource: {
+                        data: [
+                            { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException},
+                            { id: "2", start: date, end: date, title: "my event", recurrenceId: "1" }
+                        ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:first").data("uid"),
+                    origin = scheduler.dataSource.at(0),
+                    exception;
+
+                scheduler.editEvent(eventUID);
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                exception = scheduler.dataSource.at(1);
+
+                ok(origin.recurrenceException);
+                equal(origin.recurrenceException, kendo.toString(kendo.timezone.apply(exception.start, 0), "yyyyMMddTHHmmssZ") + ";");
+                equal(origin.id, exception.recurrenceId);
+            });*/
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

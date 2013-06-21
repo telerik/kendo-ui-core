@@ -753,25 +753,30 @@ kendo_module({
                 }).data("kendoWindow");
 
                 buttons.eq(0).on("click", function() {
-                    if (!model.recurrenceId) {
-                        id = model.id;
-                        idField = model.idField;
+                    that._recurringDialog.close();
 
-                        if (model.toJSON) {
-                            model = model.toJSON();
+                    if (model.id && model.recurrenceId) {
+                        that._editEvent(model); //edit existing exception
+                    } else {
+                        if (!model.recurrenceId) { //create exception eventInfo from origin
+                            id = model.id;
+                            idField = model.idField;
+
+                            if (model.toJSON) {
+                                model = model.toJSON();
+                            }
+
+                            delete model[idField];
+                            delete model.recurrenceRule;
+                            delete model.id;
+
+                            model.uid = kendo.guid();
+                            model.recurrenceId = id;
                         }
 
-                        delete model[idField];
-                        delete model.recurrenceRule;
-                        delete model.id;
-
-                        model.uid = kendo.guid();
-                        model.recurrenceId = id;
+                        that._addExceptionDate(model);
+                        that.addEvent(model);
                     }
-
-                    that._recurringDialog.close();
-                    that._addExceptionDate(model);
-                    that.addEvent(model);
                 });
 
                 buttons.eq(1).on("click", function() {
@@ -803,10 +808,11 @@ kendo_module({
         },
 
         _removeExceptionDate: function(model) {
+            var origin, start, exceptionDate, exception;
+
             if (model.recurrenceId) {
-                var origin = this.dataSource.get(model.recurrenceId),
-                    start = kendo.timezone.apply(model.start, 0),
-                    exceptionDate, exception;
+                origin = this.dataSource.get(model.recurrenceId);
+                start = kendo.timezone.apply(model.start, 0);
 
                 if (origin) {
                     exceptionDate = kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
