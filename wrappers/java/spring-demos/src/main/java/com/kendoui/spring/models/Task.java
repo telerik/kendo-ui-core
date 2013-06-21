@@ -47,7 +47,7 @@ public class Task {
     }
     
     @Column(name="Start")
-    @JsonSerialize(using=CustomUtilDateSerializer.class)
+    @JsonSerialize(using=IsoDateJsonSerializer.class)
     public Date getStart() {
         return start;
     }
@@ -57,7 +57,7 @@ public class Task {
     }
     
     @Column(name="End")
-    @JsonSerialize(using=CustomUtilDateSerializer.class)
+    @JsonSerialize(using=IsoDateJsonSerializer.class)
     public Date getEnd() {
         return end;
     }

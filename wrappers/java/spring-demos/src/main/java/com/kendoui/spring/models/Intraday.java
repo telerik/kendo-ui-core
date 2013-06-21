@@ -53,7 +53,7 @@ public class Intraday {
 
     @Column(name="Date")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonSerialize(using=CustomDateSerializer.class)
+    @JsonSerialize(using=IsoCalendarJsonSerializer.class)
     public Calendar getDate() {
         return date;
     }

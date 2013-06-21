@@ -13,7 +13,7 @@
 
     <!-- Enables the Spring MVC @Controller programming model -->
     <annotation-driven />
-
+	
 	<interceptors>
             <beans:bean class="com.kendoui.spring.navigation.SourceCodeInterceptor " />         
 	</interceptors>
@@ -75,7 +75,8 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>    
-    
+
+
     <beans:bean id = "transactionManager" class = "org.springframework.orm.hibernate4.HibernateTransactionManager">
 	    <beans:property name = "sessionFactory" ref = "sessionFactory" />
 	</beans:bean>  

@@ -50,7 +50,7 @@ public class Weather {
 
     @Column(name="Date")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonSerialize(using=CustomDateSerializer.class)
+    @JsonSerialize(using=IsoCalendarJsonSerializer.class)
     @JsonProperty("Date")
     public Calendar getDate() {
         return date;

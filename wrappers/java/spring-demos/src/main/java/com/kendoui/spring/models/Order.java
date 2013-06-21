@@ -56,7 +56,7 @@ public class Order {
     }
     
     @Column(name="OrderDate")
-    @JsonSerialize(using=CustomUtilDateSerializer.class)
+    @JsonSerialize(using=IsoDateJsonSerializer.class)
     public Date getOrderDate() {
         return orderDate;
     }
@@ -66,7 +66,7 @@ public class Order {
     }
     
     @Column(name="ShippedDate")
-    @JsonSerialize(using=CustomUtilDateSerializer.class)
+    @JsonSerialize(using=IsoDateJsonSerializer.class)
     public Date getShippedDate() {
         return shippedDate;
     }

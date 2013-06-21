@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,7 @@ public class IndexController {
             task.setTitle((String)model.get("title"));
             
             SimpleDateFormat iso8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            iso8601.setTimeZone(TimeZone.getTimeZone("UTC"));
             
             task.setStart(iso8601.parse((String)model.get("start")));
             task.setEnd(iso8601.parse((String)model.get("end")));
@@ -78,6 +80,7 @@ public class IndexController {
             task.setTitle((String)model.get("title"));
             
             SimpleDateFormat iso8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            iso8601.setTimeZone(TimeZone.getTimeZone("UTC"));
             
             task.setStart(iso8601.parse((String)model.get("start")));
             task.setEnd(iso8601.parse((String)model.get("end")));
