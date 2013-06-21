@@ -21,7 +21,8 @@
         <script>
             var SchedulerEvent = kendo.data.SchedulerEvent,
                 occurrences = kendo.recurrence.expand,
-                expandAll = kendo.recurrence.expandAll;
+                expandAll = kendo.recurrence.expandAll,
+                timezone = kendo.timezone;
 
             module("Cloning scheduler event");
 
@@ -1708,8 +1709,8 @@
                 var expDate1 = new Date(2013, 0, 1, 10, 30),
                     expDate2 = new Date(2013, 0, 3, 10, 30);
 
-                expDate1 = kendo.timezone.apply(expDate1, 0);
-                expDate2 = kendo.timezone.apply(expDate2, 0);
+                expDate1 = timezone.apply(expDate1, 0);
+                expDate2 = timezone.apply(expDate2, 0);
 
                 var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";" +
                                 kendo.toString(expDate2, "yyyyMMddTHHmmssZ") + ";";
@@ -1740,8 +1741,8 @@
                 var expDate1 = new Date(2013, 0, 1, 10, 30),
                     expDate2 = new Date(2013, 0, 2, 10, 30);
 
-                expDate1 = kendo.timezone.apply(expDate1, 0);
-                expDate2 = kendo.timezone.apply(expDate2, 0);
+                expDate1 = timezone.apply(expDate1, 0);
+                expDate2 = timezone.apply(expDate2, 0);
 
                 var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";" +
                                 kendo.toString(expDate2, "yyyyMMddTHHmmssZ") + ";";
@@ -1765,7 +1766,7 @@
             test("Do not remove original event if exception is not equal to start date", function() {
                 var expDate1 = new Date(2013, 0, 2, 10, 30);
 
-                expDate1 = kendo.timezone.apply(expDate1, 0);
+                expDate1 = timezone.apply(expDate1, 0);
 
                 var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
 
@@ -1786,6 +1787,25 @@
 
                 equal(events[1].start.getTime(), +new Date(2013, 0, 3, 10, 30));
                 equal(events[1].end.getTime(), +new Date(2013, 0, 3, 11, 30));
+            });
+
+            test("Expand event with recurrence exception in America/Los_Angeles timezone", function() {
+                var start = new Date(2013, 0, 1, 0, 0), //"America/Los_Angeles"
+                    end = new Date(2013, 0, 2, 22, 0); //"America/Los_Angeles"
+
+                var expDate1 = timezone.convert(new Date(2013, 0, 2, 10, 30), "America/Los_Angeles", "Etc/UTC"); //make it UTC
+                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
+
+                var events = [{
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30), //"America/Los_Angeles"
+                    end: new Date(2013, 0, 1, 11, 30), //"America/Los_Angeles"
+                    recurrenceRule: "FREQ=DAILY;COUNT=2",
+                    recurrenceException: exception
+                }]
+
+                equal(expandAll(events, start, end, "America/Los_Angeles").length, 1);
             });
 
         </script>

@@ -650,7 +650,7 @@ kendo_module({
         return origin.slice(0, skip ? idx - 1 : idx).concat(list).concat(origin.slice(idx));
     }
 
-    function parseExceptions(exceptions) {
+    function parseExceptions(exceptions, tz) {
         var idx = 0, length, date,
             dates = [];
 
@@ -662,6 +662,11 @@ kendo_module({
                 date = kendo.parseDate(exceptions[idx], DATE_FORMATS);
 
                 if (date) {
+                    if (tz) {
+                        date = timezone.apply(date, "Etc/UTC");
+                        date = timezone.convert(date, "Etc/UTC", tz);
+                    }
+
                     dates.push(date);
                 }
             }
@@ -683,14 +688,14 @@ kendo_module({
         return false;
     }
 
-    function expand(event, start, end) { //, tz) {
+    function expand(event, start, end, tz) {
         var eventStart = event.start,
             eventStartMS = eventStart.getTime(),
             durationMS = event.end - eventStartMS,
             rule = parseRule(event.recurrenceRule),
-            exceptionDates = parseExceptions(event.recurrenceException),
             idField = event.idField,
             id = event[idField] || event.id,
+            exceptionDates,
             current = 1,
             events = [],
             periodStart,
@@ -698,6 +703,8 @@ kendo_module({
             first,
             count,
             freq;
+
+        exceptionDates = parseExceptions(event.recurrenceException, tz);
 
         if (event.toJSON) {
             event = event.toJSON();
@@ -740,7 +747,7 @@ kendo_module({
         freq.limit(start, end, rule);
 
         while (start <= end) {
-            if (start >= periodStart && !exceptionExists(exceptionDates, start)) {
+            if (start >= periodStart && !exceptionExists(exceptionDates, start, tz)) {
                 //TODO: DST check
                 eventEnd = new Date(start.getTime() + durationMS);
                 events.push($.extend({}, event, {
@@ -772,7 +779,7 @@ kendo_module({
         return events;
     }
 
-    function expandAll(events, start, end) {
+    function expandAll(events, start, end, tz) {
         var length = events.length,
             idx = 0, event, result,
             resultLength, skip,
@@ -780,13 +787,13 @@ kendo_module({
 
         for (; idx < length; idx++) {
             event = events[idx];
-            result = expand(event, start, end);
+            result = expand(event, start, end, tz);
             resultLength = result.length;
             skip = false;
 
             if (resultLength) {
                 eventStart = event.start;
-                if (eventStart < start || exceptionExists(event.recurrenceException, eventStart)) {
+                if (eventStart < start || exceptionExists(event.recurrenceException, eventStart, tz)) {
                     resultLength -= 1;
                     skip = true;
                 }
