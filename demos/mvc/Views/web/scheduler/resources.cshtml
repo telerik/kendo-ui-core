@@ -42,7 +42,9 @@ $(function() {
                         start: { type: "date", from: "Start" },
                         end: { type: "date", from: "End" },
                         description: { from: "Description" },
-                        recurrence: { from: "Recurrence" },
+                        recurrenceId: { from: "RecurrenceID" },
+                        recurrenceRule: { from: "RecurrenceRule" },
+                        recurrenceException: { from: "RecurrenceException" },
                         roomId: { from: "RoomID", nullable: true },
                         atendees: { from: "Atendees", nullable: true },
                         isAllDay: { type: "boolean", from: "IsAllDay" }
