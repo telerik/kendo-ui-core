@@ -224,8 +224,16 @@
 {
     background: @flat-background;
     width: 1.6em;
-    margin: 0 3px 0 0;
+    margin: 0 4px 0 0;
     border: 1px solid rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 1px 0 1px @flat-active-background, 0 -1px 0 1px @flat-active-background;
+    box-shadow:0 1px 0 1px @flat-active-background, 0 -1px 0 1px @flat-active-background;
+}
+
+.km-flat .km-switch-off .km-switch-handle
+{
+    -webkit-box-shadow: 0 1px 0 1px @flat-second-color, 0 -1px 0 1px @flat-second-color;
+    box-shadow: 0 1px 0 1px @flat-second-color, 0 -1px 0 1px @flat-second-color;
 }
 
 .km-flat .km-switch-label-off
@@ -249,10 +257,14 @@
     vertical-align: middle;
 }
 
-.km-flat .km-switch-handle,
 .km-flat .km-switch-wrapper,
 .km-flat .km-switch-container,
 .km-flat .km-switch-background
+{
+    .border-radius(@flat-border-radius + 1px);
+}
+
+.km-flat .km-switch-handle
 {
     .border-radius(@flat-border-radius);
 }
@@ -366,6 +378,11 @@
 {
     border: 0;
     background: none;
+}
+
+.km-listview .km-switch
+{
+    margin-top: -.9rem;
 }
 
 /* TabStrip */
