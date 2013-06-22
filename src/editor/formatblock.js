@@ -7,7 +7,6 @@ var kendo = window.kendo,
     formats = kendo.ui.Editor.fn.options.formats,
     dom = Editor.Dom,
     Command = Editor.Command,
-    Tool = Editor.Tool,
     ToolTemplate = Editor.ToolTemplate,
     FormatTool = Editor.FormatTool,
     EditorUtils = Editor.EditorUtils,
@@ -220,7 +219,8 @@ var GreedyBlockFormatter = Class.extend({
         var format = this.format,
             blocks = dom.blockParents(nodes),
             formatTag = format[0].tags[0],
-            i, len, list, formatter, range;
+            i, len, list, formatter, range,
+            element;
 
         if (blocks.length) {
             for (i = 0, len = blocks.length; i < len; i++) {
@@ -231,7 +231,8 @@ var GreedyBlockFormatter = Class.extend({
                     range.selectNode(blocks[i]);
                     formatter.toggle(range);
                 } else {
-                    dom.changeTag(blocks[i], formatTag);
+                    element = dom.changeTag(blocks[i], formatTag);
+                    dom.attr(element, format[0].attr);
                 }
             }
         } else {
@@ -271,58 +272,13 @@ var BlockFormatTool = FormatTool.extend({
     }
 });
 
-var FormatBlockTool = Tool.extend({
-    init: function (options) {
-        Tool.fn.init.call(this, options);
-        this.finder = new BlockFormatFinder([{ tags: dom.blockElements }]);
-    },
-
-    command: function (commandArguments) {
-        return new FormatCommand(extend(commandArguments, {
-            formatter: function () { return new GreedyBlockFormatter([{ tags: [commandArguments.value] }], {}); }
-        }));
-    },
-
-    update: function(ui, nodes) {
-        var list;
-        if (ui.is("select")) {
-            list = ui.data("kendoSelectBox");
-        } else {
-            list = ui.find("select").data("kendoSelectBox");
-        }
-        list.close();
-        list.value(this.finder.getFormat(nodes));
-    },
-
-    initialize: function(ui, initOptions) {
-        var editor = initOptions.editor,
-            toolName = "formatBlock";
-
-        new Editor.SelectBox(ui, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: this.options.items ? this.options.items : editor.options.formatBlock,
-            title: editor.options.messages.formatBlock,
-            change: function () {
-                Tool.exec(editor, toolName, this.value());
-            },
-            highlightFirst: false
-        });
-
-        ui.closest(".k-widget").removeClass("k-" + toolName).find("*").addBack().attr("unselectable", "on");
-    }
-});
-
 extend(Editor, {
     BlockFormatFinder: BlockFormatFinder,
     BlockFormatter: BlockFormatter,
     GreedyBlockFormatter: GreedyBlockFormatter,
     FormatCommand: FormatCommand,
-    BlockFormatTool: BlockFormatTool,
-    FormatBlockTool: FormatBlockTool
+    BlockFormatTool: BlockFormatTool
 });
-
-registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate})}));
 
 registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: "left"}} }, { tags: ["img"], attr: { style: { "float": "left"}} } ]);
 registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Left"})}));

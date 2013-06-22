@@ -438,117 +438,16 @@ var ColorTool = Tool.extend({
     }
 });
 
-var ClassFormatter = Class.extend({
-    init: function(options) {
-        this.options = options;
-    },
-
-    apply: function(nodes) {
-        var blocks = dom.blockParents(nodes);
-
-        for (var i = 0; i < blocks.length; i++) {
-            $(blocks[i]).addClass(this.options.className);
-        }
-    },
-
-    toggle: function(range) {
-        Editor.GreedyBlockFormatter.fn.toggle.call(this, range);
-    }
-});
-
-var StyleTool = DelayedExecutionTool.extend({
-    init: function(options) {
-        var that = this;
-        Tool.fn.init.call(that, options);
-
-        that.type = "kendoSelectBox";
-        that.format = [{ tags: ["span"] }];
-        that.finder = new GreedyInlineFormatFinder(that.format, "className");
-    },
-
-    command: function (args) {
-        var format = this.format,
-            styleOptions = args.value;
-
-        return new Editor.FormatCommand({
-            range: args.range,
-            formatter: function () {
-                var command,
-                    options = { className: styleOptions.value || styleOptions, context: styleOptions.context };
-
-                if (styleOptions.context) {
-                    command = new ClassFormatter(options);
-                } else {
-                    command = new GreedyInlineFormatter(format, options);
-                }
-
-                return command;
-            }
-        });
-    },
-
-    initialize: function(ui, initOptions) {
-        var editor = initOptions.editor,
-            options = this.options;
-
-        new Editor.SelectBox(ui, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: options.items || editor.options.style,
-            title: editor.options.messages.style,
-            change: function () {
-                Tool.exec(editor, "style", this.dataItem().toJSON());
-            },
-            highlightFirst: false,
-            template: kendo.template(
-                '<span unselectable="on" style="display:block;#=data.style#">#:data.text#</span>'
-            )
-        });
-
-        $(ui).data(this.type).decorateItems = function(doc) {
-            var classes = this.dataSource.data();
-
-            for (var i = 0; i < classes.length; i++) {
-                classes[i].style = dom.inlineStyle(doc, "span", { className : classes[i].value });
-            }
-        };
-
-        ui.closest(".k-widget").removeClass("k-" + this.name).find("*").addBack().attr("unselectable", "on");
-    },
-
-    update: function(ui, nodes) {
-        var selectBox = $(ui).data(this.type),
-            dataSource = selectBox.dataSource,
-            items = dataSource.data(),
-            i, context,
-            ancestor = dom.commonAncestor.apply(null, nodes);
-
-        for (i = 0; i < items.length; i++) {
-            context = items[i].context;
-
-            items[i].visible = !context || !!$(ancestor).closest(context).length;
-        }
-
-        dataSource.filter([{ field: "visible", operator: "eq", value: true }]);
-
-        DelayedExecutionTool.fn.update.call(this, ui, nodes);
-
-        selectBox.wrapper.toggleClass("k-state-disabled", !dataSource.view().length);
-    }
-});
-
 extend(Editor, {
     InlineFormatFinder: InlineFormatFinder,
     InlineFormatter: InlineFormatter,
+    DelayedExecutionTool: DelayedExecutionTool,
     GreedyInlineFormatFinder: GreedyInlineFormatFinder,
     GreedyInlineFormatter: GreedyInlineFormatter,
     InlineFormatTool: InlineFormatTool,
     FontTool: FontTool,
-    ColorTool: ColorTool,
-    StyleTool: StyleTool
+    ColorTool: ColorTool
 });
-
-registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Styles"})}));
 
 registerFormat("bold", [ { tags: ["strong", "b"] }, { tags: ["span"], attr: { style: { fontWeight: "bold"}} } ]);
 registerTool("bold", new InlineFormatTool({ key: "B", ctrl: true, format: formats.bold, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Bold"}) }));

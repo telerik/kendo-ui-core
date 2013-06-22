@@ -15,7 +15,11 @@
 
         <script>
 
-            $("#Editor1").kendoEditor();
+            $("#Editor1").kendoEditor({
+                tools: [
+                    "formatBlock"
+                ]
+            });
 
             module("Format block", {
                 setup: function() {
@@ -23,7 +27,6 @@
                 }
             });
 
-            // fails due to DropDownList usage, instead of selectBox
             test('tool should display format initially', function() {
                 editor.value('');
                 editor.focus();

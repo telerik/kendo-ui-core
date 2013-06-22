@@ -81,7 +81,9 @@ var Serializer = {
                 attribute = attributes[i];
                 var name = attribute.nodeName;
                 // In IE < 8 the 'value' attribute is not returned as 'specified'. The same goes for type="text"
-                if (attribute.specified || (name == 'value' && !node.value) || (name == 'type' && attribute.nodeValue == 'text')) {
+                if (name == "class" && !attribute.nodeValue) {
+                    continue;
+                } else if (attribute.specified || (name == 'value' && !node.value) || (name == 'type' && attribute.nodeValue == 'text')) {
                     // altHtml is injected by IE8 when an <object> tag is used in the Editor
                     if (name.indexOf('_moz') < 0 && name != 'complete' && name != 'altHtml') {
                         specifiedAttributes.push(attribute);
