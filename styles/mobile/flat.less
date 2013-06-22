@@ -277,6 +277,32 @@
     background-clip: content-box;
 }
 
+/* Slider */
+
+.km-flat .k-slider .k-draghandle,
+.km-flat .k-slider .k-draghandle:hover
+{
+    border: 0;
+    .border-radius(5em);
+    background: @flat-active-background;
+    .box-shadow(0 0 0 3px @flat-active-color);
+}
+
+.km-flat .k-slider-selection
+{
+    background: @flat-active-background;
+}
+
+.km-flat .k-slider-track
+{
+    background-color: @flat-second-color;
+}
+
+.km-flat .k-slider-selection
+{
+    margin-left: 0;
+}
+
 /* ListView */
 
 .km-flat .km-list > li
