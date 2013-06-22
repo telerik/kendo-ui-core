@@ -18,36 +18,52 @@
                             color: "black"
                         },
                         value: $('#value').val(),
-                        width: 300,
+                        width: 600,
+                        height: 400,
                         checksum: $('#checksum').is(':checked'),
-                        background:"pink",
+                        background: "pink",
                         color: "red",
+                        padding: {
+                            top:25,
+//                            left: 25,
+//                            right: 25,
+                            bottom: 25
+                        },
                         text: {
                             visible: $('#text').is(':checked'),
-                            color: 'green'
+                            color: 'green',
+                            font: "60px consolas",
+                            margin: {
+                                top: 25
+                            }
                         },
                         type: $('#type').kendoDropDownList('value')
                     });
                 }
             }
 
-
             $('#type').kendoDropDownList({
-                dataSource: ['Code11',
+                dataSource: [
+                            'EAN8',
+                            'EAN13',
+                            'UPCE',
+                            'UPCA',
+                            'Code11',
                             'Code39',
                             'Code39Extended',
                             'Code128',
                             'Code93',
                             'Code93Extended',
-                            'Code128A',
+                            'Code128A',                            
                             'Code128B',
-                            'Code128C',
-                            'EAN13',
-                            'EAN8',
+                            'Code128C',                            
                             'MSImod10',
                             'MSImod11',
                             'MSImod1010',
-                            'MSImod1110' ],
+                            'MSImod1110',
+                            'GS1-128',
+                            'POSTNET'
+                            ],
                 change: createBarcode
             });
 
@@ -61,6 +77,13 @@
                                 if (type == 'ean13' && val.length != 12) {
                                     return false;
                                 }
+                            }
+                            return true;
+                        },
+                        ean8: function (element) {
+                            if ($(element).is('#value')) {
+                                var type = $('#type').val().toLowerCase();
+                                var val = $(element).val();
                                 if (type == 'ean8' && val.length != 7) {
                                     return false;
                                 }
@@ -70,7 +93,7 @@
                     },
                     messages: {
                         ean13: "The value of EAN13 should be of 12 numbers",
-                        ean13: "The value of EAN8 should be of 7 numbers"
+                        ean8: "The value of EAN8 should be of 7 numbers"
                     }
                 });
                 $('#value,#checksum,#text').change(createBarcode);

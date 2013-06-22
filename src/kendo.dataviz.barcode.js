@@ -1508,48 +1508,60 @@
              that.setOptions(options);
         },
         setOptions: function (options) {
-			var that = this;
+			var that = this;            
             that.type = (options.type || that.options.type).toLowerCase();
-            that.encoding = new encodings[that.type]();            
-			if(!that.encoding){
+            if(that.type=="upca"){
+                that.type = "ean13";
+                options.value = '0' + options.value;
+            }
+            if(that.type=="upce"){
+                that.type = "ean8";
+                options.value = '0' + options.value;
+            }
+            if(!encodings[that.type]){
 				throw new Error('Encoding ' + that.type + 'is not supported.')
 			}
-            that.options = $.extend(that.options, options);            
+            that.encoding = new encodings[that.type]();            
+			
+            that.options = $.extend(true,that.options, options);            
             that.redraw();
         },
         redraw: function () {
             var that = this,
                 options = that.options,
+                textOptions = options.text,
                 border = options.border || {},
+                encoding = that.encoding,
                 contentBox = Box2D(0, 0, options.width, options.height).unpad(border.width).unpad(options.padding),
                 barHeight = contentBox.height(),
 				result, textToDisplay;
 
-            that.contentBox = contentBox;
-            
-            that.view.children = [];
-            
+            that.contentBox = contentBox;            
+            that.view.children = [];            
             that.addBackground();
-            if (that.options.text.visible) {
-				textToDisplay = that.options.value;		
+            var textHeight = dataviz.measureText( contentBox,{ font: options.text.font }).height;
+            
+            if (textOptions.visible) {
+                barHeight -= textHeight;
+            }
+            
+            result = encoding.encode(options.value,options.width-(options.padding.left+options.padding.right), barHeight);
+            
+            if (textOptions.visible) {
+				textToDisplay = options.value;		
                 
-				if(that.options.checksum && that.encoding.checksum!==undefined){
-					textToDisplay += " "+that.encoding.checksum;
+				if(options.checksum && encoding.checksum!==undefined){
+					textToDisplay += " "+encoding.checksum;
 				}
-                that.addText(textToDisplay);
-                
-                barHeight -= that.text.box.height();
+                that.addTextElement(textToDisplay);
             }
             that.barHeight = barHeight;
-            result = that.encoding.encode(that.options.value,
-                    that.options.width, barHeight);
                     
             that.view.options.width = that.options.width;
             that.view.options.height = that.options.height;
 
             that.addElements(result.pattern, result.baseUnit);
 
-            
             that.view.renderTo(that.element[0]);
         },        
         value: function(value){
@@ -1562,7 +1574,7 @@
         },
         addElements: function (pattern, baseUnit) {
             var that = this,
-				position = 0,
+				position = 0 + that.options.padding.left,
                 step,
                 item;
 
@@ -1575,9 +1587,17 @@
 					}; 
                 step = item.width * baseUnit;
                 if(i%2){				                     
-                     that.view.children.push(that.view.createRect(new Box2D(position, item.y1 + that.contentBox.y1, position + step, item.y2 + that.contentBox.y1), {
-                        fill: that.options.color
-                    }));
+                    that.view.children.push(that.view.createRect(
+                        new Box2D(
+                            position, 
+                            item.y1 + that.contentBox.y1, 
+                            position + step, 
+                            item.y2 + that.contentBox.y1
+                        ),
+                        {
+                            fill: that.options.color
+                        }   
+                    ));
                 }
                 position+= step;
             }
@@ -1596,19 +1616,21 @@
                 
 			that.view.children.push(rect);
         },
-        addText: function (value) {        
+        addTextElement: function (value) {  
+            
             var that = this,
                 textOptions = that.options.text,
                 text = new Text(value, {
                     font: textOptions.font,
                     color: textOptions.color,
                     align: "center",
-                    vAlign: "bottom",
-                    margin : textOptions.margin
+                    vAlign: "bottom"
                 });
-            text.reflow(that.contentBox);
+                
             that.text = text;
-
+            
+            text.reflow(that.contentBox);
+            text.box.unpad(textOptions.margin);
             that.view.children.push(that.view.createText(value, {
                 baseline: text.baseline,
                 x: text.box.x1,
@@ -1628,11 +1650,10 @@
             background: "white",
             text: {
                 visible: true,                
-                font: "16px sans-serif",
+                font: "16px consolas",
                 color: "black",
-                // TODO: Implement
                 margin: {
-                    top: 2,
+                    top: 0,
                     bottom: 0,
                     left: 0,
                     right: 0
@@ -1643,7 +1664,12 @@
                 dashType: "solid",
                 color: "black"
             },
-            padding: {}
+            padding: {
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0
+            }
         }
     });
 
