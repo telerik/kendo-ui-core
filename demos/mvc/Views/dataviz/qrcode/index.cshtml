@@ -1,50 +1,60 @@
 ﻿        <div id="example" class="k-content">
-            <div class="qrcode-wrapper">
-                <div id="qrUrl">
-                </div>
+            <div class="qrcode-wrapper demo-section">
                 <div id="qrMail">
+                </div>
+                <div id="qrUrl">
+                </div>                
+                <div id="qrTelephone">
+                </div>
+                <div id="qrGeoLocation">
                 </div>
             </div>
 
             <script type="text/javascript">
-                $("#qrUrl").kendoQRCode({
-                    value: "http://demos.kendoui.com/dataviz/overview/index.html",
-                    errorCorrectionLevel: "L",
-                    size: 100,
-                    darkModuleColor: "#e26b1d",
-                    border: {
-                        color: "#e26b1d",
-                        width: 5
-                    }
-                });
+                $(document).ready(function () {
 
-                $("#qrMail").kendoQRCode({
-                    value: "mailto:clientservice@kendoui.com",
-                    errorCorrectionLevel: "L",
-                    size: 100,
-                    darkModuleColor: "red",
-                    border: {
-                        color: "red",
-                        width: 5
-                    }
-                });
+                    $("#qrMail").kendoQRCode({
+                        value: "mailto:clientservice@kendoui.com",
+                        size: 100                    
+                    });
 
-                $("#qrMail").kendoQRCode({
-                    value: "mailto:clientservice@kendoui.com",
-                    errorCorrectionLevel: "L",
-                    size: 100,
-                    darkModuleColor: "red",
-                    border: {
-                        color: "red",
-                        width: 5
-                    }
+                    $("#qrUrl").kendoQRCode({
+                        value: "http://demos.kendoui.com/dataviz/overview/index.html",
+                        errorCorrectionLevel: "M",
+                        size: 130,
+                        darkModuleColor: "#FF321C",
+                        border: {
+                            color: "#FF321C",
+                            width: 10
+                        }                    
+                    });
+
+                    $("#qrTelephone").kendoQRCode({                    
+                        value: "tel:+1-888-365-2779",
+                        errorCorrectionLevel: "Q",
+                        size: 170,
+                        background: "#FFB821",
+                        border: {
+                            width: 5,
+                            color: "#FF7D05"
+                        }                    
+                    });
+
+                    $("#qrGeoLocation").kendoQRCode({
+                        value: "geo:42.65049,23.37925,100",
+                        errorCorrectionLevel: "H",
+                        size: 190,
+                        background: "#ACD608"                    
+                    });
                 });
-                
+                                
             </script>
 
             <style scoped>
                 .qrcode-wrapper div {
                     display:inline-block;
+                    margin: 10px;
+                    border: none;
                 }               
             </style>
         </div>

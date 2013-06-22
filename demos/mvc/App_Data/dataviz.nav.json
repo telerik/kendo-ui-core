@@ -459,7 +459,7 @@
             "name": "linear-gauge"
         }
     ],
-    "barcode and qr code": [
+    "codes": [
         {
             "text": "Barcode",
             "documentation": "dataviz/barcode",
@@ -476,8 +476,18 @@
             "items": [{
                 "text": "Basic usage",
                 "url": "qrcode/index.html",
-                "title": "Kendo UI QR code Demo",
-                "meta": "This sample demonstrates the core functionality of Kendo UI QR code which helps you easily encode large amounts of data in machine readable format."
+                "title": "Kendo UI QRCode Demo",
+                "meta": "This sample demonstrates the core functionality of Kendo UI QRCode which helps you easily encode large amounts of data in a machine readable format."
+            },{
+                "text": "Maximum character capacities ",
+                "url": "qrcode/character-capacities.html",
+                "title": "Kendo UI QRCode character capacities demo",
+                "meta": "This demo demonstrates the maximum length of the value depending on the character types, that can be encoded with the QRCode Kendo UI Widget."
+            },{
+                "text": "API",
+                "url": "qrcode/api.html",
+                "title": "Kendo UI QRCode API demo",
+                "meta": "This demo shows how Kendo UI QRCode Widget API works and what kind of functions it supports."
             }],
             "name": "qrcode"
         }

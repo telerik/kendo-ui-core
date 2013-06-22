@@ -1,0 +1,44 @@
+﻿        <div id="example" class="k-content">
+            <div class="qrcode-wrapper demo-section">
+                <h3 class="title">Numeric - 7089</h3>
+                <div id="numeric">
+                </div>
+                <h3 class="title">Alphanumeric - 4296</h3>
+                <div id="alphanumeric">
+                </div>     
+                <h3 class="title">Byte - 2953</h3>           
+                <div id="byte">
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    $("#numeric").kendoQRCode({
+                        value: new Array(7090).join("9"),
+                        errorCorrectionLevel: "L",
+                        size: 400
+                    });
+
+                    $("#alphanumeric").kendoQRCode({
+                        value: new Array(4297).join("Z"),
+                        errorCorrectionLevel: "L",
+                        size: 400
+                    });
+
+                    $("#byte").kendoQRCode({
+                        value: new Array(2954).join("z"),
+                        errorCorrectionLevel: "L",
+                        size: 400
+                    });                                                            
+                });
+            </script>
+
+            <style scoped>
+                .qrcode-wrapper div {
+                    border: none;
+                    width: 400px;
+                    margin: 0 auto;
+                }               
+            </style>
+        </div>

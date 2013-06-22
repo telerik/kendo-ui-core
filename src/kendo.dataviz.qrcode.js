@@ -41,8 +41,8 @@ kendo_module({
             function(row,column){return (((row + column) % 2) + ((row * column) % 3)) % 2 == 0}
         ],
         numberRegex = /^\d+/,
-        alphaPattern = "A-Z0-9\\s$%*+./:-",
-        alphaExclusiveSet = "A-Z\\s$%*+./:-",
+        alphaPattern = "A-Z0-9 $%*+./:-",
+        alphaExclusiveSet = "A-Z $%*+./:-",
         alphaRegex = new RegExp("^[" + alphaExclusiveSet + "]+"),
         alphaNumericRegex = new RegExp("^[" + alphaPattern+ "]+"),
         byteRegex = new RegExp("^[^" + alphaPattern+ "]+"),
@@ -157,11 +157,15 @@ kendo_module({
                 var code = character.charCodeAt(0);
                 if(code <= 127 || (160 <= code && code <= 255)){
                     return code;
-                }                     
+                }
+                else{
+                    throw new Error("Unsupported character: " + character);
+                }
             },
             encode: function(str, version){
                 var mode = this,
                     result = mode._getModeCountString(str, version);
+                    debugger;
                 for(var i = 0; i < str.length; i++){
                     result += toBitsString(mode.getValue(str.charAt(i)), 8);
                 }
@@ -217,7 +221,7 @@ kendo_module({
         
         function fillDataCell(matrices, bit, x, y){
             for(var i = 0; i < maskPatternConditions.length;i++){
-                matrices[i][x][y] = maskPatternConditions[i](x,y) ? bit ^ 1 : bit;
+                matrices[i][x][y] = maskPatternConditions[i](x,y) ? bit ^ 1 : parseInt(bit);
             }
         }   
         
@@ -788,14 +792,14 @@ kendo_module({
             addFinderPatterns(matrices);
             addAlignmentPatterns(matrices, version);    
             addTimingFunctions(matrices);   
-
+            
             if(version >= 7){
                 addVersionInformation(matrices, toBitsString(0, 18));
             }   
            
             addFormatInformation(matrices, toBitsString(0, 15));
             fillData(matrices, blocks);                    
-
+            printMatrix(matrices[0]);
             var minIdx = scoreMaskMatrixes(matrices),
                 optimalMatrix = matrices[minIdx];
 
@@ -821,7 +825,8 @@ kendo_module({
              console.log(str);
         }
         
-        var DEFAULT_SIZE = 200;
+        var DEFAULT_SIZE = 200,
+            QUIET_ZONE_LENGTH = 4;
         
         //slow and incorrect rendering with VML        
         var QRCode = Widget.extend({ 
@@ -829,14 +834,16 @@ kendo_module({
                  var that = this,
                      defaultView = dataviz.ui.defaultView();
                  Widget.fn.init.call(that, element, options);
-                 that.element = $(element);  
+                 that.element = $(element); 
+                 that.element.addClass("k-qrcode k-widget");
                  that.view = new defaultView(); 
                  that.setOptions(options);
                  that.redraw(); 
             },
             redraw: function(){
+                debugger;
                 var that = this,
-                    value = that.value,
+                    value = that._value,
                     view = that.view;
                 if(!value){
                     return;
@@ -872,7 +879,7 @@ kendo_module({
           
                 return size;
             },
-            _addMatrix: function(matrix, size){
+            _addMatrix: function(matrix, size){//include border in calculation
                 var that = this,
                     view = that.view,
                     baseUnit = Math.floor(size / matrix.length),
@@ -881,7 +888,11 @@ kendo_module({
                     x1,
                     box,
                     column;
-
+             
+                if(baseUnit < 1){
+                    throw new Error("insufficient size");
+                }
+                
                 for(var row = 0; row < matrix.length; row++){
                     y = quietZoneSize + row * baseUnit;
                     column = 0;
@@ -913,12 +924,17 @@ kendo_module({
             },
             setOptions: function (options) { 		
                 var that = this;
-                that.options = extend(that.options, options);           
-                that.value = that.options.value;
+                that.options = extend(that.options, options);  
+                if (that.options.value !== undefined) {
+                    that._value = that.options.value;
+                }
             },	
             value: function(value){
                 var that = this;
-                that.value = value;
+                if (value === undefined) {
+                    return that._value;
+                }
+                that._value = value;
                 that.redraw();
             },
             options: {
