@@ -59,7 +59,10 @@ kendo_module({
         
         function toBitsString(value, length){
             var result = Number(value).toString(2);
-            return new Array(length - result.length + 1).join(0) + result;
+            if(result.length < length){
+                result = new Array(length - result.length + 1).join(0) + result;
+            }
+            return result;
         }
         
         function splitInto(str, n){
@@ -67,7 +70,7 @@ kendo_module({
                 idx = 0;
             while(idx < str.length){
                 result.push(str.substring(idx, idx + n));
-                idx+=n;
+                idx+= n;
             }
             return result;
         }
@@ -260,7 +263,8 @@ kendo_module({
             }
             
             while(dataString.length < dataBitsCount){
-                dataString+= paddingCodewords[paddingCodewordIndex++ % 2];                    
+                dataString+= paddingCodewords[paddingCodewordIndex];
+                paddingCodewordIndex ^= 1;                
             }
             return dataString;
         }
@@ -342,7 +346,7 @@ kendo_module({
                 errorCodewords = [];
                          
             for(var i = 0; i < steps; i++){
-                divisor = multiplyByConstant(generatorPolynomial, powersOfTwo[result[result.length - 1]] || 0);            
+                divisor = multiplyByConstant(generatorPolynomial, powersOfTwo[result[result.length - 1]]);
                 generatorPolynomial.splice(0,1);
              
                 result = xorPolynomials(divisor, result);
@@ -365,7 +369,7 @@ kendo_module({
                 groupBlocksCount,
                 messagePolynomial,
                 codeword;
-             console.log("error codewords count: " + versionCodewordsInformation.errorCodewordsPerBlock);
+                
             for(var groupIdx = 0; groupIdx < versionGroups.length; groupIdx++){
                 groupBlocksCount = versionGroups[groupIdx][0];
                 for(var blockIdx = 0; blockIdx < groupBlocksCount;blockIdx++){
@@ -380,8 +384,6 @@ kendo_module({
                     }
                     dataBlocks.push(dataBlock);                    
                     errorBlocks.push(generateErrorCodewords(messagePolynomial, versionCodewordsInformation.errorCodewordsPerBlock));
-                    console.log("data block: " + toDecimalArray(dataBlock));
-                    console.log("error block: " + toDecimalArray(errorBlocks[errorBlocks.length - 1]));
                 }
             }
             return [dataBlocks, errorBlocks];
@@ -395,7 +397,7 @@ kendo_module({
             return res;
         }
             
-        //enhance to always find the exact version 
+
         var chooseMode = function (str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode){
              var numeric = numberRegex.exec(str),
                 numericMatch = numeric ? numeric[0] : "",
@@ -718,8 +720,8 @@ kendo_module({
                     for(var k = 0; k < matrices.length; k++){
                         matrix = matrices[k];
                         darkModules[k]+= parseInt(matrix[i][j]);
-                        if(previousBits[k][row] === matrix[i][j] && i + 1 < modules && j - 1 >= 0 && matrix[i + 1][j] == previousBits[k][row] &&
-                                matrix[i + 1][j - 1] == previousBits[k][row]){
+                        if(previousBits[k][row] === matrix[i][j] && i + 1 < modules && j - 1 >= 0 &&
+                            matrix[i + 1][j] == previousBits[k][row] && matrix[i + 1][j - 1] == previousBits[k][row]){
                             scores[k]+=3;
                         }                        
                         scoreFinderPatternOccurance(k, patterns, scores, row, matrix[i][j]);
@@ -782,10 +784,11 @@ kendo_module({
                 dataString = padDataString(dataString, versionInformation.totalDataCodewords),
                 blocks = getBlocks(dataString, versionInformation),
                 matrices = initMatrices(version);
+                
             addFinderPatterns(matrices);
             addAlignmentPatterns(matrices, version);    
             addTimingFunctions(matrices);   
-            console.log("version:" + version);
+
             if(version >= 7){
                 addVersionInformation(matrices, toBitsString(0, 18));
             }   
@@ -818,8 +821,7 @@ kendo_module({
              console.log(str);
         }
         
-        var DEFAULT_SIZE = 200,
-            QUIET_ZONE_LENGTH = 4;
+        var DEFAULT_SIZE = 200;
         
         //slow and incorrect rendering with VML        
         var QRCode = Widget.extend({ 
@@ -827,7 +829,7 @@ kendo_module({
                  var that = this,
                      defaultView = dataviz.ui.defaultView();
                  Widget.fn.init.call(that, element, options);
-                 that.element = element;  
+                 that.element = $(element);  
                  that.view = new defaultView(); 
                  that.setOptions(options);
                  that.redraw(); 
@@ -848,7 +850,7 @@ kendo_module({
                 that.addBackground(size);  
               
                 that._addMatrix(matrix, size);
-                view.renderTo(that.element);
+                view.renderTo(that.element[0]);
             },
             _getSize: function(){
                 var that = this,                  
@@ -857,11 +859,11 @@ kendo_module({
                    size = parseInt(that.options.size);
                 }
                 else {
-                    var element = $(that.element),
-                        width = element.width(),
-                        height = element.height();
-                    if(width > 0 &&  height> 0){
-                        size =  Math.min(width, height);
+                    var element = that.element,
+                        min = Math.min(element.width(), element.height());
+                        
+                    if(min > 0){
+                        size =  min;
                     }
                     else{                    
                         size = DEFAULT_SIZE;
@@ -873,13 +875,15 @@ kendo_module({
             _addMatrix: function(matrix, size){
                 var that = this,
                     view = that.view,
-                    baseUnit = Math.floor(size / matrix.length),//parseFloat((size / (2 * QUIET_ZONE_LENGTH + matrix.length)).toFixed(1)),
-                    qz = (size - matrix.length * baseUnit) / 2,
+                    baseUnit = Math.floor(size / matrix.length),
+                    quietZoneSize = (size - matrix.length * baseUnit) / 2,
                     y,
                     x1,
+                    box,
                     column;
+
                 for(var row = 0; row < matrix.length; row++){
-                    y = qz + row * baseUnit;
+                    y = quietZoneSize + row * baseUnit;
                     column = 0;
                     while(column < matrix.length){
                         while(matrix[row][column] == 0 && column < matrix.length){
@@ -890,7 +894,8 @@ kendo_module({
                             while(matrix[row][column] == 1){
                                 column++;
                             }
-                            view.children.push(view.createRect(new Box2D(qz + x1 * baseUnit, y, qz + column * baseUnit, y + baseUnit ), 
+                            box = new Box2D(quietZoneSize + x1 * baseUnit, y, quietZoneSize + column * baseUnit, y + baseUnit);
+                            view.children.push(view.createRect(box, 
                                 { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false}));                              
                         }
                     }
@@ -918,7 +923,7 @@ kendo_module({
             },
             options: {
                 name: "QRCode",
-                errorCorrectionLevel: "H",
+                errorCorrectionLevel: "L",
                 background: "white",
                 darkModuleColor: "black",
                 size: "",

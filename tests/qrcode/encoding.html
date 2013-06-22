@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>QR code encoding modes tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="..//qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.qrcode.js"></script>
+
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                modes = dataviz.QRCodeFields.modes;
+
+            (function() {
+                
+                var NUMERIC = "numeric",
+                    ALPHA_NUMERIC = "alphanumeric",
+                    BYTE = "byte",
+                    modeIndicators = {},
+                    modeExpectedResults = {},
+                    expectedResultsVersions = [9, 26, 40],
+                    numericCharacterCountLengths = [10,12,14],
+                    alphanumericCharacterCountLengths = [9, 11, 13],
+                    byteCharacterCountLengths = [8,16,16],
+                    alphanumericCharacters= {"0":0,"1": 1,"2": 2,"3": 3,"4": 4,"5": 5,"6": 6,"7": 7,"8": 8,"9": 9,"A": 10,"B": 11,"C": 12,"D": 13,"E": 14,"F": 15,"G": 16,"H": 17,"I": 18,"J": 19,"K": 20,"L": 21,"M": 22,"N": 23,"O": 24,"P": 25,"Q": 26,"R": 27,"S": 28,"T": 29,"U": 30,"V": 31,"W": 32,"X": 33,"Y": 34,"Z": 35," ": 36,"$": 37,"%": 38,"*": 39,"+": 40,"-": 41,".": 42,"/": 43,":": 44},
+                    numericTestValues = [
+                        "339773708644178150348040276325",
+                        "489720976589501024570683628433007758239958944678380836199012",
+                        "1295917197142517279703029295872327093286494774520990327932967040456103958951030013796387440803072190",
+                        "762542990954712568353018913012365493495211774446791449540838856004712865034987262476999057040906011859499566422774698799218915914592898974331802113911197943409516235450297387270446513696681811875626523513864985033037562036933521084349420742550276515539062316173222239105083788405492455627926265267555434365170891791318536766533288965399289555048359674274741829879121722962419366995729028159540833211876230481561752921304493809106817258695167462605060755740837583920092823821048905664572855845213149094471434088866248008235853417181996423424138048624426296692669185671813047077600516275936344413924369",
+                        "664794485586602040003940974535567405808116275670876982461043500333187069859995002366790078934823316143953942934730508127376329651958573980834863311374660447566871055277101883525038350000161242666490067802337952953773567477830219886033612669036131148522235116086542257210259479946663286675421344519868885925708704074474665037923735471339794822044202612438862902228976272788236715864913901026092678730991212152564665110532101897501941143143012514884918583798080244200972968204322726961489279937855648037801468127323490049331063928641509911496167532525451407508839210961671880185224095504353623668132852995242280627923606476993137326841802294279585018704162851188574397746722559658613247590688137741658503787030918043159373949980573469710246136870780291635190568783563053047459291793076702676979807377881400266933982106339211060739075967609913404684435332148408569071025497464264522001547720026375489265270135465040256702911292605978311995425771832459144225588888268893881182125994393750577276711016211845412056390208736607976813128410299394434846130857025116547861778724934323487961520926627124160549016404377380896228480854158501428353653432200222876587101358951987983482068779213347525860097044330454130080731566803719228077014681631100499186039861742962643386833777611970915155801556343185975363563994260988696466963573174345454779244570806173213791228321985491578702753471929849019124893964740494808143637855358550539191060064077720095097691265970518397540416135818279363973291064923885302349833147327316327612015203640548664573009947253405373336263720143304710697380589325223205739468916685475400456432287292800898953944247134016179118967829601672294006881726992163771181215074116052427941269595827429943165502852705932684813907893388229872262734630036060684508624318938920415317652875662033948708325122011189203480893299285360277593959615347801688989720030586234168231366298416739851125572679194110638046062471803594921983641720941672567029908814688718560594664740027983490831034916370694973213764551020491404158797273114027602069780093596947574973838509151456753177037010052318216591296311644190140032955834325425309802862322555493000676681139017811817282359566246812382666524077659937885691465093587304115715111017203680094667850309645871963100911478973311079757256303406591848527773084041121434286855011076008135473019834018898199202260871282028532244505078528159419788244712479798002844873811208419038524960945865236872928656714492644383624052761748013560657769568488467015525714422817963628009188289174865740609943837356793974331425741322926302072168112336990152762564735974050199211890808896322190202641769804740359391364983032559478577019473178224163389672879683390392297132353525894504018656158216239826197724919878253608860849125960428008167810144534002441859739145677370561262604322294488723441503600409117938095575515385208662159165740578365980174799259274230323834586456560946818598027329588210837919079387757463222724824394241276888957965018865961488515951660478758634795705886913984848504466946326386646231030387882110385747970272231458961574889180839710632234449965187471262724315588164095727900509268917828242415314296176494057551183438531010790264288260971157355244379286624746314475841851452596446201184114239589886559602918333426090780831482626901216121418849925465756807409348785685206680072721385076775243778821817309013726571180627560032982708908005825817699144982351618616398047369553315088833923676898524252145267946093236355650"
+                    ],
+                    alphanumericTestValues = [
+                        "XI+Z+:$*8 H-F+/YPOW4RPAHYTH-T*LAX+G9SMRDK6I8GD+$Q6",
+                        "W.CWAXH6*%F:+:HZ9V79472R$FQ:LW/JQMWN1M1ME$5G/HBOY$IJZVA4QSSY6*NXI%-%E:H4/-J8:GKV$AC7LO7NZ1F%Y10PWM15",
+                        "R456TB8X0YA%X:-6H%5VHEFB5K%NDDMY4FL SLT/CG92*C9B797Z-M:.Z-92Z9%U6CJH1.4KJ0$LE%+/:6VPLAD00LQ.LC:NH7BDU+568//9:-0P9VF-++JJ+IQ/Z 71P8989Z AHQMS5PKJCR%/$EBJ5*RNX7C9:AH9Q3W49.G31+I1-W KW2 JX$%GZ5+KW2.QH9QW*GZE.VJ/17VSC2KZ E/VSRIN0BDZU3OP.WCS K+:BTJSVEU5$N",
+                        "NQRC%PJ 1QO10$XPB8*WXH5WF07VQLEARI.XGE-B0*H9EP1.OX/R-5E-+1B1C:V-V*+%T.72CF.$RJC7X/6-1E+JKKFJ.C028VTB 4OFEYGUMS8Q0D1GH6/9T4MQH8 WP:K5BQVHG4E:5.8-V:U-W%T.$WW%T0FLMDENKL4C3VZ8S1CF2.5+Y+8*B%O1RO-ZTRJVL-%L$8M3Z0T3-DU%44%%:0:ZK+4OAV+E8+.F$$G*NC YU$WPQJ/O5TFHQM/FQP*JN%KYJF21:ON PHIYNB:DG-W.XC7$6%ST QX+KM%LL4I: 6ZGX%9YV$/15RTCKJNV8L9N+D-8KQ:CNF882EU*3HDD+AM5CU9+XIB2NKM$6**Q%Q5Y$F0*A%+UUSK.4V8.QSQOXGDVUTT$-3CE8-8XHXA/$QL.+/VFCRFO80AR59BJXKBLG*ZP:B.WL/%F+5C1L-3/A+:UJULAWR4257$KW .4LDQ9% 1W+PFQP.$52WOC+E O$Z:YZ0$:3.I636BC3$-YLI8JQ4 .N3H /MQ4NDBLH7MUWMA.8HK7D  J*55K6Y1CJ50IKO2N05PXL+N R$XNUM4%VVNZXE6NYZIP4I7I9D 9UC*L8M*ZVOE8I%35-TICO/ABK-4BWNLC0ILYKCBID/X.-/WRND-..L-JMIPOW3LA7:FWXT:NIMV/+%O1FLRPGY08%A2RY47TAWMT9R7OS2%TGODWXDHY2054E*:CR*S4.:L0SSH:/MEH+C",
+                        "PV$IQZ.DYKENAWCGB7:-%*ZT-FNQK$719205%EU5M:TJK9+$4UP%$-FEDZ77SBT92BAWTAA97XJO9Q *47*LA8H.SG9W3FG5/+RZ.OI6ZZSZLNAA-P2H:NYO*VOGIOO+GW9X1H0N2Z*:INE*JDOQ1:6HDW*4BU.E5D*Z9RIY7KZ4.QWH1X* S 8V5TR8KV9RDI2YW/9T DR.P+GC-+RU.X*G77ZYJVUO6C DC+H2 NXOTV3XWHCJQ%--RZB3WHM 4R4% 11A+3KSYSNGOV2/RK5VA:+4TX9DA.AKO$OWW6SER8 SV+POKSWHF8XOU5L4JS/K.42/P./GUM*SFRV20XV--/17P0TSSM3KL%9:/H5.PE:*$.3AO8D 4$GV27H1/1 EOX1 20D706**51OVM%MA 2*Q6//0M28Z.OF*O7/3F:XGIWRLBZXHR7VN.:OPQH8BW7-S:O7%URJGM466XFX-VU$T+F7290FHN:WL5YCIP* S2C2GFVN82M-C$RH%K77YOWI%+ZYL7EICKU*SRJ5-/1M5XS87DE48:O/P%2$:/%+3I5/P7LC:A:OVG0H+2%L %MJKKCBBDMSAE +EZ.SPI N*XGV/:1AWY01.FO.O$CBN1V70XQ9H+OZ788RT:-IOI9V+LHONTM24D503 DW19O/-15O6-1VQGVYNIG7.TV/8R.NKG KOPCYM$YO1F4ZPW9N-G*VP5MN9Z*IRE%KBF/2+*:1Y1W3HH.+%RNYGVOCZ 256B/6/F+2:7V3N*XZGN31YKDC.DZKH*1U4OEB7B3$.1QC2KBH83OFGKV.ZZ0H4MYG2$ICQEEXDMEF:EK3$+UOCYJK$Q%M LILMEQE:+R+J/2-TH/I$R2JMTMI3I+/PEWK:$ORYZ$CHP12NQ6XZJ3YP58.+-:/*0*JW2 GLG60YCQTUO72X%%37B3+R+LJK6WM8MS4Y+JD3IQ*.MBHR5NNPPYC/J%A-/Z8+3$N6V3YX4SN/U87TWUCYSBMLTEV7Y27F5S S-B- VDIEQJ GNX+$67VN64D*K4NF:CM%YIUFPRY+/1INI5OOO6I4RV7./GHLM7AJ903/9-%M72*//JH3/J3T%ALDZO71F39W-31PO48-6Q4DG1$1D:P1U8HGJ7%0HQM-CC4.C8+CDJ85TJ4U$%RAF%*4%AD7$C5*NE.X-7RVVP45$/$Z423/TY1G55R3DHIQ*4:L2J*Q:4SSM9M382B-NTPW06D1Y9H4Y3AF24S8$VNODAXSDHHDH-6JOSW+R::J*Z413JSGUYG%A6*1A%H-7P9F12WH  Z$$HM0F/MVXQJ+QMII8UCHO4EETVY%TV%L$0MA%/XG$E9YF6AV B:*LEYJ-TZU69DVEV E8Y:9YSJ*X2 IIO+AQ$N2XZ.TH:6WISCS0C+8O+9QBF1SCBXBRAHGZ4EA3$D.Z PX7I6AW-S* 77YM+PZ8MVQ040VWJ+OYJPP$QJK828VG-RPI5BBTKGLF/LYJS3U5CP10D-F$5E1QUN7BS-LHU7GJKE/VUO290*O GP$WAJS:PF4A.+HOG FI 2O4GQN7I Q2+KVDWDSIJCC.COEBL RCO7/JTQ5BHT:LZUS:/QZJJ3MGFSA26ATDXC7%YSTO2Q2IR7+E4KYDLK0CATR *$H0 P6.WM2/8SDQQJ/IRW+3OBC715QA%CRWGE7WU/*XP%UEOHB8587181HUW1%1%45CEONZ4- 6**L38DG574A0Q1JF5 1FVBD90S+ J",
+                        "3V+0V.KIY%S5KQZZLC8L*C-YQ7D6OLYB/960.ZR3ZMCE:MPR8RE5MX$0ZFD4RS.*46*P6U04G 2$6T1.0ZOQWYLM ..2V2A:51KLNQI:L*G38H4Z-RTNTRH4HP8 BB2LE-2MI IT4843%6XPE/RG324U4JOCP%-RF*MB ZDP 6 UQ2%*NMD4WTDWD7Y7JC9U.WV/.0R1Q9-W0CG*W$6YHDBQPSYXQQ81Q58ZKBV:ZN64BJO2:P H23%SU*DPS 02SII4ESJ%O. H$7FOLANI$TOLD-PLIB2O2JK*X-/+:KJWC*K$YQ5DFVX9HEZXZTQ1R7BFL3FY 3/KOZ.U0W3:5SJCR3MPKCIU0*BJK9%D8S1L 9%A+1MY.HO: 8NB/724*877S6V.YQQ2Q-%6$CP:OA8PPD8C4T1M%W9/2+:PD6RR GC5V-69+T*7Y/B129X2NKF%%IX+GZ/::SVG87ERQAZ6W9S$D/RHHVT-L4GG$RI0P-H+W3MVHK NV942O4K$4%P$CVZG4%SP9:$5P/C%RKI**+P 4VXWUV K*18ARUYTMW*%RXY09R5D3YJN4CIFX27D*GQVV95+3-I-C1B7KK4Z%Y:3NCN23CB9T1ZFBTN++D* 4M6AQV8P%%Q$TL.7N0I-0 ZOG/-CBQKC-.Q R:0 8MAGU5QR%+K6.AHTQRRQSAH$$S$+OZC5C.HAF JE/KCX39:%M0F6J/$9H4I+: 7E6P*7IWN81JT585O9REI*$9E46*Z7B8$0XII:W3NOW7A3%EID-HR3QZA$T0M4.6A9.+W7-Z%S7-GJ+3$TCWLE5DLQMH-UKDBY$:K4G3KM1VM6 A7KBLL*DU471SF8PKITDF:$.QX1DP9CNI73HRMO/S9 8./I8UJ8$I7F5C.7*BDZIY8ZNAYK7PH90L.T$-KTUV:FL$-/OM0E3%TOWS61:24R.-O4XNHZV847L8JF8SGBVC4Q-KFQAGKX8+E FFL5BF.5U D4RA*KY3$V*IZJL%O0%8LGA.ZB-PG Q+RUT5V7Z%GVDPGMMHKGSTOOQFNTF7/MZ-XUY7:.MRX06/8:B0YO1N2EKCR Z%C$CWONDC.U-RODITRKO:TS%6%LSD47E67:.+OCT+3B3%OJ$B2UEJ*2HXUTVG2SR-ZXRAL4YC6KK 63U7NKPTS%8MQHYF/-XXE42 4JIZ9G6PS-3P0*AJGP3R/3KQ%%S$ZN :R/.2U9XI$KFJ3MRBVKUYHCSY6JK1N0F*T7T91FNK.-/4C*5B2MCF*0ONXOQQ*$P:BRN8G-RVTPI40X5$K3S7R4:AK+ZO$+/R12AZTQA70WEHQQB *1BV6$%/YJ2GK4MJ9+T+23SU8+HWVJHU9G/LVQC9 JIIMWY%X+T$MBNQ1-2I1 AD%BG 0GL-29.XR LS6HDJ3R-M461WOA+CVIRJ/BEXLL:Y.7IU%BUDFM6D-:AO  6$NRK+S%EG2RS2:U/OE C.FC9C628-K%PYSS6LW8G7QEL J*$JK4H3DR32FT44E1%%ZJ8VIKL.X%BOD96DCR0GG6*..G5PO+0U28+M641UBI*TE:UFJ:O$-1/+I8DEL9.JLC-KY92-7KKQG:Y15CV4M2Q8J9SXX9.H8-X0/V54UBN5B9J83OLQAN/YLVT+*-:%EPSOFUV-J9A:L IUD4RD DQR7-7 CZM4LSSNXA%%NTB%JY6Q0VYS6T8L0.NRPJKWC .8/:PJHU4HY%VI*8$CGQH2+ENCKFJB$HD4DB87A9+88ARURP-*N06O3GJ$BWML/VK%EEXONWUY3/ZNZZ*1BJ.UDB 6DGG:P98M3DI.J-XWY6H7V WUOSMQULCH-VG3XOLCHKXEH.Z3WI$W$*V58MK96T7L2O-99GEWY$% 5TFKLNIO5MTY%*WFDXX91$Q7$5W/U*15/0/H5GK.EDJ4YR0G3.U+*TA8MPZBELYOYD.15NDOQ7X-E OA//MXTOJ65CF0Y%FO$2BOCSMXCSQ/NWHS M$URXVDFWG.KUD%RP6UDW+D5GL:S3XEL+%G/6N*B:$%-.RM2FWKXE*DOVJ$YW6+U$JXYH/D$QVHK-.UA/J%NG$ YPQSNJ/3QIM-%P9MJL+$EQ9Z5.EPWH$AHB-6D0ER1U173XGDWP/EA3TKOPP*3MB KT /8WTL2I6.FF3TSL:PT/34OYDD970/84LX%.Z1HJ:X5U+$EXQ8RN:2F$CS6QU%X49DFX$1TX7Z/OR30NF 00/GF-7UY%/MLLJ2XLM+WK+6PYY$BHDAZ51E33G%V42057TU/IX 4V/BEEK0II*JOI*%%V3R:0E9J4E573RLKF.GJ:ZJCMXN6*Z 5HIJ%A$1*PZ+9TJ7UAPFNEU*BNKZZ/7Q0ID0/Z0ZE$5-QQ9V.AJGRNVTN2XGIXIXCGKIOVN%P31GXV UBOME1R1H6Z:8-+XC.2UPG3QPS+IO+Z%B3E1UJY-C574W7-XW3Z4U//SD5E.5EI2URMMN SBU1$:4KTUEP+OC -VG%G3%G29TZ/BA$WQ:*YORT34D6*JBXF0B7X$OH-ZZ15N15Q74WY-$ZL6M2KS$Z5KB13 AK%ABL+WM8%DC.TWM7P-LXPS+LIP+PMX$X176RD- +PG9YJ57PPML4/-.4EK1+IRPK7NY:B*96F9J6F*HI%:JT44VCLXA9*CJLIA%$-1R*-FZX9BI A3TR+*7$/O/15CPA79EF:*JSX$7:8A%C4T18R2-032QQW8-OOBHJ- BZES6N-DL6PY6DB0+A+IY-N3-E-1RA%D.JRC.4TAY3/UJ9S87BE4GPV*F5W RTHB$RHO%YU*1NLJ+.XJ9:/CI GWV2$3CDH*2Q+ISZYX%RYUU56QIDMEKQG*Q4RS2I:AVDYMD%//8 DU9O99WDGM4FCHYOZIHDTCZE9IWB7IA5VT:GK+%ZL-6LN%S4IJO/S93Q*C: 2$AF:DXL4E%7L :AIHL. ZZQJO5YY/*4KII86BCL:SQ9- 9T%X7ET2 *Q7QX 62L3 WH-O4ME-/9K:Q5VAC9SCWB%OBIHM9-MQ80W58L*U/30XF+Y W:%C%6R5ZD3QO*-+H83X/:%63NIHP*:$OS-ZPVH970FMHIS5%T+E2AESJ6R5EVMR492N*3U02QTJ9RFET++GCV.N*UCT24%3.-9QDZ35PVVJ :N53L9%BYDY8UI 5UEL4A.L2FG4RTHJUZ.AQE7NZ%LGF.B214O093DP7SH6MHAQEZ3EQU.$5FKR8J:+*E3Q:AD+T$U0B23B8PXDD47K-J44*2D HM/WA*D2TG27M-LM.O9-FC.S2I+H.7MWHI3P$EO:5K59PRK-LJWSWB+YA%6GQESI0/$RW1R.44OL BA2*%7DRX43TANMU.2-M:L/U.82G/WO$:*CLQ6D+$Q/0S.R$C 6P6F-*Z%ABLT%S97%K1JXUI7DE71V76LPW/ONQK %GMY.O40ZN 5KOUA7LY$P220Z+9UXA73DLCT-HVMFQU1K57O%$2%TU7DK9%WVCZ:P8BGXM1A6/ 15G3%*8P5IFYE.$*/I%E5L7I80-Z65E66CT-MO:L4K.60ETFQX7X1-L55JQR Z0*F*N8BUU6NOXI.*G/C10IC.SL3W92/67$9Z WDBPY6NS%M22W1LK.E-1MM*3H9 G0K.6H3O4C/.T$SU 3W6ZO3.+*6+1SJUY$4APIZCGXMIOCG088UK5M/$++MU%ZZK2KJ%XF*GI-XWXT/ADH0%V7SR91EWWGO+-Y/D7:Z4P O/VMNR+TL626ZU.XGJDO$.HH:$*2%RRV30WII1*V7YSOSCAQNI:T1A2*Z09QDU+RPROE-PBBJBG CF2UGNB5PF9H+IAE%4TL6.I%56-TNGVC9KSTFG6SWM+Z*Q0:ABY1VN73G4JDX9Q/Y$74EWGFK6Q1BVJ*UQI+Z2J5QMTAO5GIXPCUL*S%TS*0+CGKP/UBG1+/F I%/+W1YATG.TE0*$0GQZP7U19I3E7$SVEV:-SU:Z DR2X1B.I+DPZC.3NX 2L2R.A3N5+6T+SQ9EQLQ$Q9HVJ1YM/.3IQ. VTA-9M.7.O:GGJ03H86VVFI*VZG4SNTMPL5$GN:D+83L**5FTDGSW D4HZ7S.-3G6YSV X7CBQ9HDX6-6XI5$W$LVKU$$Z9W-%IBKID1MJC1Y7NU1%8Q N0W/EB.9Q8DT%6RV7EE%IKIU1IQF-$CP+DX5N/*LUZY35XO2F2:9XIDM4/YUDT*X:1C:U:RRQBVR0/ 045 PBYGY%5JLUEAO4 FZK65VDSW3G65:-0WB+:WZ3 9R R0%.C%C6ZK3GECF$XPCGHRI6KJ"
+                    ],
+                    byteTestValues = [
+                        "bRX[T9p.CF'E`oHi62T:r%8MAro!GTR7>9cb981@O$sk|#JV3^",
+                        "SzvOmw'I2Vp ~?Wu_LP@`wo+)n7jn8%er_YH~;gBf3ge-aP`jj)KK~JR/h)%*:ME.T!i@5{\\s&U{;y`KmoLb*\\p(h_e{iiY\\o='E)ZhwrBbQa728Ski0M'd3#)q']Rdq64'_t\"</98|3YC&8y:>RyUhj|VQJ`C4zOs4oVxy%sc2v%;y7YRl5-(w[{5Y9MZMYp9$zT$L1'dmDu O>}8&7$F`nG<&7cIl'{j!iev#$PTmbcg[Z[sd[a/",
+                        "ÀÛõ*:\"ä}OQİûqcÅçùx¼àmÀÏF5'ŞÙ*r~dgóñÍD×Pµoú+}¤B¼öD7U¹ßJO×Şt°7¿Ü2Ì>{Lÿ!Òùa_%âºnı,Ê28D»8ÉÈJM¼ÈñQy¢ô-cÓîìèı´E¿(wÒÈñ¡±ü\"#IF9i¼L½aÆrâüì\\áÁ,¥X;#o£IK¹j&Îô®U¨bMÆ3 5îëêãÅ ª=İYºKû?:^Y*×ôÀBÉ$ ë½4äw)ïéİ­,§÷ïE¸ôSD¸:³Éeóoâ£Tç¼KÅÍlyÛP|×x²Lp.=M»;Ú{ÆÅÀôU­42¿\"yQóa2fÕÄ'É(¯X$6î_¬õNfñßïhÁ(zco¡M³kµd¯ôÜµ]a2åOÿ\\ĞS\"Ú©øÜº	ëï-Ç¼ıNHŞ}»n%G½ÑúYv#4z%¤ p«Ì>j@Ü*ÆÖJ×Æãj^ùÙìuª¢º$NTjÙíEíŞ÷å¨GPøõ~^ĞÍQ<\\pú­¦àËi<8I° yÀÈSrZ.*wûµCÑìàÈdìNªÉO.~Aë aN|6åZedUnæõ¾Ê<Ø\"}®Ë{io»§æ\"cY?éóà¿À§Wtìïj94Fsûäø±\"ğ>¸Í^ôËweùSòbfµª{³ìñĞi.\\	>Êy äÃL,ìç>BÎbH`[±3÷Å2«ì^`B6î6Öë~íÌù2æ¿±J«ãMòãß6ÎÓ{¥»ÒNzQDCuÄVp9ùÚÊ\"XY*¾õ¥;ÄvRÇ|;Î8ù·²Òö!ÅêkE¿¨û]i+!Î§dñóµa©ÆHäUîÚÎÔ¡Yß¨#$O2¿İ+]b5©",
+                        "Áå2°gèjX<»hË[M(§ÄÿäÄg²/xj4N6*`ØFÂî$kkèÅ>÷ÌÁúC0Æ=kCô¿ÌOí^ë°·^~8GàE}äæøûCg	bMŞÅ.JÎ8ytğV¼¬i§bCÛfÁÙ6ëĞÖHl@0:%pVeÏ´°ÌVá:o/iOÍ­êÃ+URXÅ¥ÿ¸^/úé/³¹ò$8Ã5Sòª¥¸Wá9Õ2+=Rì{år\\H»^>\\÷÷*®[eÅÍòã7fÎ³S$ôSôÅtÒ°ia·Z`I¼ÒnÆÙ ºÙ§¯1)oHvù}Ç#ºÉúà³ååÊ¾j(:DùÙä_\\q©¡¥·¨»)ÊüpLÈÀÀÕ3èÚÉÃ2ÖQ!ÂÇyé2I¦f£ï9U-e³QÑTj!/(¯[÷Ü]ÛXÚ¿ZĞ¦U¯Ær<¿ùŞI1\"NE@Á#wì§M3í3ÙJqÍ)Üw¼ûGl¾Åï¬ ôÃS]õ4¼4bNîÂSø\"]#²/hïÎj®NõE¸RE%ñÆäÃÍo7wÏ£·_Ğ¥¡¾Ãº¾È¿ı<¢9j]qìq¦ ]ßç^ÀvD)÷òïsÜôÀ¥¸Ä[¨&<Ğâ¶§úÈ9A/Qåíkj¶YĞç3RÌ{h121ìâÊd¦¸Òíæ!ÉŞìrÃå¦z»wyZ eÑ«éY¯ĞÃ@L£ôÜ[ÃÏìÀî×{æ	0*c	I»×·a]£$¿£\\·¹2Òz&ËÑ?HÓ>®Nk£ékOÏÖ0\\ÒAleP´sÔXG0 Ä!,ßf.²r \\İn,Atàew]×c?LZ¯:©ô'ååpÚ-Õ´ş¼óò©FvcqĞå¿ÕÜÅ÷=LUdí:æ´­FN,[å>º¢&Æ=çj@« ÔÇIÚ'<¹ïº´m¦O¡årDiî!İ_wÄ1w£(_WéË¼¬¨åYß/Éğî- aa6ôãñtAĞ\"VC²¾VşÆıæú6ÇÁryPQU±eás¾¬Î,b¾FWV>9ªÙôÅd4°8şuôÁÍqö¨±ÆÚMÈßõ\\ûYéq|ÇıNXÛªI=Éîa»M8Ml ®I¨Ø!¶ ·ï`fÍ­j7ÒíÆ§Ó»Ü\"ÕÊÖ\";ŞÏRº$Ûp0ò9oåzTÃ$Ç¥U¶­Vã9ÏÁıIî£×uyU\"1/­o*¬_¥7{%â{M×|IÛT'eBèïÖ'=[¦?|\"$±ùü)ãYeª;uix90à\"v×÷áj#zC#(N½[vhÙâáÓiLŞÀéAxsä5h^Ö.{/¦¾;à¢aÌZ×²_í-GıDæ}g»®¥eAy¯ë¥µ+²º¬ÿ¡ù@&.¿ã0Q«èY÷$uw¦WÃ?l\"?¾.IxÁö¨êâÁRw÷<J)ØêUû@È-Ø N#¯ÁõÈ?W=PÇ'åÖÙ'	GU¶&\\Ë EKWæõ\"Táëù¹ÿÚşjØyç6 vè¡-ıô×5üjWÈCÏÙl-à6Ç ¹Í âtñsi\"âd×pQ¯§ÓÀ=£ÑT_j@Ãà2ëÆdó@äãi,m>Ï¤$Í.TÄÛ2êÕ×/S2 -ÑÒWÊô¦{`(pRÏ	I;Óİqî¨t]ß~Ó;Y]64^`· HçıÕ«õ#&3KØÓùs>Û¡°`VYcY6ÎùD½Û¾âTgªRRæoËÂ-¶½mqÿçLŞ=±B~à­Wë¯¢©&rõÏùİLh{J{t´Sn!üÎ8É©ÒîÓFËR 1MÌÓ;µY|ÅîLZC=¬CóÑEöµ.&jY%Û«Îb¾ò}òSÀòI&k50D­rÍ>uãûZp8kBÀ®jÏ«qÅ/hï005Hmİc$åNJpXÑæén¥øıêú&åÍ¸fç \\ È/1K;î»¡Ä%o90Ö´rpövâ¢X7|ãÂeÅ6,<¿ép·S·4#¾¼Z\"w,uöİ4äZ/\"Ã>6çÔ*æ§lğ¡?5Ü16Ó	ÍÚÕB>NõHrá&Sø}	ÿèk}º·GÏF¿@ò3-ğŞî=ÅÔ¦YZFv.3âGı:ÁÔ¯öïß",
+                        "¯SCëOğ¦Û@sö=}Á¨yWïv9ÏÙb/CªM/RßZ}©Un*©rcCpñruìY ÊVlúòí;5OpÌğo§¬r8¯æúø@s5É?×Ò:¾ÌIcè°°Tµ³Ä_üËù¬	¶©Ë«IR}s'4)ÃzK°/ğlİdc1ğv#¾ÃöÃüÊ½İsëúİ*$«ğGÔ-exûá©_Oj#0T*´Ğ£şûvRô9ñ«JXä|2axğ¹9Ò;81-Ë¾ªcª´tdõÛ½¢VÀ6ñ}åúÔl)·Ã²¬S¥³_®ÌK	*òIOş^ù±9Ñ®UÀ.@NğäÏ¼¥(Ö§UIR  ­©ÊOwıÓè	C=.g÷Úş<ÔÛOØ­kMòTáBû¶2W[ÿãâû¨2y\\Û4G?Ò]¥­NÒTIÀmõöIPø»C%ÿeÖÚ-ÑNÙ­ü°üL-÷JÖ^Zo>wa¡f*¹kQ®Äïì$³ÆeiÛÊWéì«áÙ®	Z<¡âçølNxÓ`\"Ò/9aøç¥¥Ô4$òm6aïê<`Ûª>?ú-=Åû·øÂw8=ÊmÛ3cÃ&hM£vÆÆİGüÅÜBğQ¢B|PÏıAGe|¥Ë'ÆL£a`©c_êí¥P0éÆjÔ|!ò}Âğ#;jK±á\"50rÿ_æhÓ±)lIİµ+öµYFmw¯ç£m&xÁÔdeĞ6È?:Ğlæé8±»İÆùÎÕ2äìIôbE²¸ìZ³¥~ÜØ?Vşißh8K7ĞËD=¶(4^*ãöd·£¿<ÅXô)\"¿Á	e:dHò>RÜzëVnïë¤ùãqú.0ÅIûÏÿUB¿ÃEõÌh½ò1ò¿ÿæoÌÍ%îı5gev±¢:µvÌi&!¤ÍMráB8.ÌÅï_-ú÷ßû[z|Fìù[øs+j¤·¤İágĞ<í,ó>aÀ¾CŞÉÂ¾¨ìÓf\"Ä¾.eÂLÖ2:Ø)îCµ2/O_³Nÿ·×q+üEJ`*]')Æ0{#ïHé8ÍÔl-]_;á±¥ /hÜ{$ñ²Æ}ğ,©J³jZÌ¯¬>¼j½Ã8şıú-µ¦:î#¯NLôf³µF/å¶J¶ÔÕ:µäÚÈ³&ºº»iH^éÌì'>M >?«É¯¡àÃ'^àOïâZÕ\\Òİ\"Lu]ÇÑó%ÿ'=¦ºîz¹ìÎû_ÉĞ¨8ş	^Éié ÆÔHu,Qè÷¤\\I»u«óÌÀP²`¿rÉW+½©¶KUMv9Å¹9(¦]a¼&Ñ©\"¡@ÖhV¨>½±!0Rk\"8¢èDé&²êÈEEè'¥©¶(?¼ÀÇşùÔ>î¢=â§¥úÇù?(#§w.j/v?.º£óç÷ım×læZ{hÛb÷ Æw9AÜütÜ}ÕWiÚ¯7K§Şë¾8éØş;Á§Ş~v0¢¤YçJş4ñ>S9Ù-éÇp|/&lÿd}àzé½şQìa`¢8·!éav<ùõWÓ|Îöµ¤[t`â5yi¯êÓu)JA4T*ñ2yÖî¿º7Ş¿¯î¶$DöZçí6º¹VwB(>jGÚ<¹wg¡0~PhmâF¦İàxä´¡?<BuÏõá¦³ÔæYØş9üU0p+o*ÒòsÏ0Ji/v^õâ;5¢¹lí¾}úòµ§o'e2&ÉÆDZT¶âJ'Ìã$©</?w5LÇTÑv³VÌûüÃæ¤bñ^bZd&³8 1µÇ}İ8n¡´©içah7bÅ»AÄ~âNïæcmÛ±_Ñ\"ÓğæÅ²O¥P®ÖİY»KÇnlÚÁ^DÿØ`à;(7$<ûqX÷&ó~0îc5]2m°-ôó÷1}#°é¶R\\ÀLáW¸ÁE:æ^íjü×ÅõX?Y% rwÁA¾;î^´áUtğS@bK_Ò°iG¶oB÷ÜçèYM&ä:ÈôÃªY,²pr@ó*#kú·aùy.WØÚ<feyÎ®ñÇSwLÆMÄKC7QÕ·\" ¶§ÓØ¤°æÕá2YËÿÛ¶É!Î&ü«ùÄ÷¸Ï1ÑÔ|tå÷I± nt¶Éşè¼Z=Mp³¥ãD>keÚ¦wa$áwiúF{Î4ô.®DuØúÎ,zKRŞÑT·ÑBûr\"ª¥\\u·İi(âøë$+gGDâ«ÏŞkËxÀì]JDğRëË·YIìÆÛ×íÖ| ÿk¢eO:¥}'&¸ak£`ü@ª.ĞÌÕ^ÎøØÔ'e|æ£ñçàf.tĞáÀ¸ãü¶Ã¿55FÖmkïşA×e«²«Üùss5m~|Ñ«¥}}Cµ·r¢SÏèÀö­ªq=õXüÎQ1p¡ÍìT5¯æCÁ,*ZIë.-£-VÀd¨¥],b1¶r¤4ìå	ŞÕşI3gÿÃCKÔğWHôêDà®âØÂ¹jÒ`Î°Õó;áZ¢­26A[ÉµJà°riúz13Éë¤áWñ5&³ØöUİI#VéZheÑåAg®Á·ğ¿¢oøPÌõ~aM¶íÜõ>éÓ(áò/x­&dt!Ç]YÒZ¦ıi/dSgô*Ç¨åÅÁ±]zèü©bÀª§¤K:²I(ºÅ¯VèÚGvÈDGıÏ;qV§íÁb·}lAXæ:Â¯bé&Y¦%ı©Y%c&­Ò»É)LU´+4¼úĞbÏéøõ¢¹xç;jc\"ãÚYÕRÄk¸L×ÏHÃÖ3#Ùûk*/a</#ø£	ìîûWTÙ­îÖåògqMìÚãïxvËnDm´ñ?kÁg[$óI·4ğØöÁvW ®<¸¿÷ÆåCÖÃ­#©¨/|¤ıÓ6ûyEº_A­ù2~ÒJa[IïMä3ªm",
+                        "/#yx(g I]26rcc]eL6,j{qu!QqgVH5,|6S`NUQz?F??z55@5<Qx~I!.E{qd!ix^EO0YT2oHxv8v%/cTbe%o_bPmA#2_p(T`]O'qTo}q@?o@mnQn< emBjHB]W/^Kzfm@6e%~%~?&`J^;9s4{gSi8z=R1[!*+=J<Fe-m^?Mx+9$#yF3Mk-c\"q48I!awNR4e+.sd-;B[5r=IN4~w@'`,SbG?~B 6R%x]U:$cE,\\=qR*#7,K>)NRrOw8rD5.E!wfH.l%Xh`TD?DV~ne |uo9ZY8=G86CoF<nN1o#z4q<!>Xr.o.g!}Bg~5V|f&j#[VI+q;DnTrVSY8%vDV^$G7m%ui$dk\"i2D+a=Jpm/K-Mp5,$j0MW89Jn-o>#Y!b70Egm1[gZL |sn6d08q*x([(4H}).5Zk0Jr\"_HtCsv @&tXE*Das3?jw5`N]..`A.,~LmmfjK@i,^@\\6$@nux&C^q6x;F%8FC`>Pon3V#9~zOLp^wlOL6=c>GI4T8:^VxYV\\8_UJJMcKB1G?[E>GQVigmj$QGiG)P2O=vqS5NLU#k~`C0^E;E.#l)Fv}}DU>DA iI,j2pjfB([LA{%1hwiA$Xf j-Of@&9$Z*;54t_{B;jF!AgM3k]Tt%/TcrY{Jmn2Y 4)W1=9</N+/.l<7yhIPY2lEA8A*%M\"WAs:s*H2<uej8G,wi\\eM7rB\":%G,Jd$q(OtH/2A7 Ph.^j^{~m1Y ~-g2*FvzQ?_KEoj;_CFy*vl\\Uk7x`-_'\"irU)%\\9}*^[^PgK(gLvIxKE%]sF$lx5XtY;mNe)t'iG :qpX4x'y[bGSolJU{1h>Cqtu3Qu)XzQvc3gzA]%W}$2bn}-8RCv]08HrdAd/lqx`\"e}hq47\"eaAH+Gi9Ga]|o#J'%<FH8n2+:%C +yx`:WG ?NLqEny^Cakh uOr*$w?-naFmQf0]V/<WoZu$%AYTE1^1,c$&JbY-d$tEIbq}#H!J>w\\5A#X|kl#`{]L[mVmqB()%U{>I0.t]>G4lVIG0[ b]B_;4{aRj}b#,N,]yd;*z\"`j%@fA#VFNx]?XaZe5bXsJnSDygLDZfX\"wj$0-/4lHYe!lX4g/4-#j|O.6=*9}%32zq>bDm1<0\"`U$Ku}d<rEHuy(^2@L;_II0*8/j6q4R;>v($\\@Cl-~>|1o)(JM[Bjx~s(G/@YVtJ&wR8y4n=c|\\-ey9J9O;Ke>?]X'_*+PWY1O#lUUM%bD2TX8z\\w_H.GnwYl1<Ecn}j4-\"kCOB/!`IjE%EDOPCpIKuE7`iXn5k[Ek+L}bL|?>|?hQAcdysv#3K1M+N `.)K/0LjB+5Yj\\-Z^PNGqbiI!SX|}ER%2,r%Y:Zm^\\K1iX3E-9'>o5U;sXx<{K/1RC&)]bCfr'C-tPx!*43h.c#vs,7WnNA\\t30iW7IZC(#DL;~fE{},@END$&y'K\\KA2HJ<dbL!M}5WyH-.VxI]N.%};?i|tnMKbKlSP(+6!DT\"M8!Ny_oAa1 ohCCv:NLf6!zL/m)~v?n]t[{v4a%:\" k/uP{>!0_AZ11|lcdrnkGiX\\B.+\"Yt)u,KR.g.@SsE$G['u`U,]I[tF.GP!+f]`wBu8}3\"!5]i_=!%w#\"'>+`7an>T~DxC,\"lL!l3TWpml=*c1p_vcbxfvSX1E7j1FL`P(CLTshUyx'8Iukb:5}Y1v\\-u%fz8\\VC#;p}S9w-[tjte]fQrR_]woS17)Wi1W|c@XadAHf}MfA;ly},1k7gDMK^xKfl$m4 K~17l$k-2;[v3IZb5g=HJ8sv+\\dv]yWI#7aA{7UZib9{g#]btpp-N[zGeSe=\\y]iI7?y'C7D13;3W{I={{GQ0&i/<LDA$/2?+}5nZ[3){U$xv6p V2g3%725VZl{i[3OD)|a@`\"fV{]_Sc!HpJpg=W^TL1%tR5Oz+tmR;N>|;63]?3xi:*xZdGE_C2k<&ZeI)zKh_Wi'O2Vn\\8&\"0dt1C&o9bo0*CdxQ:dDWOiO}G5$ko.}\":{y[]EW}I.\\PRir @U\"Fj^k\\0?#=CpXf9)Tuak9ivyJ6{G9q#FtcGb4h4h,O3Q4]G^k?iqy52?5(M2e#J%2cg ~|To[1a[dKv`%ENJg;iPxhkA%^LswOgdR=M/G;X,mT5z@2;I*\"[ R/oq>$mUV5w)<a^0DVX8^kq;KAl6QKR0?9@4~/ -)?l].4vTtu/PQ[s**a`)/1eC_\"\\.:OUC1A6Y~ vRX.{L4D'Yu>h/yFl%~@wF_suh+v4Bap*@e 61<Fm$;2rz4*D2N^{mHnSQVX ^a`b,i,)\"ga*l-angq,6vmx7\\T5V|4ZKx/Kcv<zbE-!X?6J<.lYP8iX@XL_r$rJ;4HW[ev@T'>0( mvZKC}\\7.w4>!!oE<i_{@d3Z1!kW\\joV/iEE2KsZ>p4Nt9)H;(B@!:}INEU|?2x::K8gB'EU&BO:;hnSw#L#ghz7=@::M'fwq34wfE?NW:yRH+13~{gVkPySJj:y|Ata^7#x#-<K^R>^[Y7:aibu 45,qZ|Td!wW@e)a`m%nE/#BZbJ$7,DP\"P|o~aP~{,6TYsMsphw(C|\\rB?x1Z[{fh&2,V)D:nS7(w@C:|_|=U<yG+X99!H.3mb@wTJV$Q+jj=E`;s-UMytZ6({(3g2\\Qkwfj$')otL<7%>{m(Z>zlzugYsJN%-=j{T9giVruYO|0![~;4dU%/],8(5o82NQGGw.5]jTyUy ?#bAIB;|;09>vNrO5}`UnL&*@Bp@/s;E,Y*H]_ IO,wSK5gd.jy`c Hnf=z#_/^r%)Y ?s5I7J:((YYh;r< lD,JOcX5p6OdAas$tigdDB}/7,e-y{)Zn`v:21hhY_?mjLxLe9i(#x2,6IHTk\\Dc C3UC8G??Uxf+6##lMO,gQ;(E)>{$t^)n+]Y5r~z]:\\!(8\"zI#(Wo^~;n\"sjr(o}81W0}xeiZJ?WoJH~q*tmNpRiFJ:K76d_"                        
+                    ];
+                
+                modeIndicators[NUMERIC] = "0001";
+                modeIndicators[ALPHA_NUMERIC] = "0010";
+                modeIndicators[BYTE] = "0100";
+                
+                modeExpectedResults[NUMERIC] = [{
+                        version: 8,
+                        value: "01234567",
+                        result: modeIndicators[NUMERIC] + "0000001000" + "0000001100" + "0101011001" + "1000011"
+                    }                    
+                ];
+                
+                modeExpectedResults[ALPHA_NUMERIC] = [{
+                        version: 8,
+                        value: "HELLO WORLD",
+                        result: modeIndicators[ALPHA_NUMERIC] + "000001011" + "0110000101101111000110100010111001011011100010011010100001101"
+                    },{
+                        version: 8,
+                        value: "AC-42",
+                        result: modeIndicators[ALPHA_NUMERIC] + "000000101" + "00111001110" + "11100111001" + "000010"
+                    }                    
+                ];                
+
+                modeExpectedResults[BYTE] = [
+                    {
+                        version: 8,
+                        value: "aaaa",
+                        result: modeIndicators[BYTE] + "00000100" + new Array(5).join("01100001")
+                    }                    
+                ];
+                
+                function toBitsString(value, length){
+                    var result = Number(value).toString(2);
+                    return new Array(length - result.length + 1).join(0) + result;
+                }
+                
+                function encodeNumericData(str){
+                    var part,
+                        result = "";
+                    
+                    while(str.length > 2){
+                        part = str.substring(0,3);
+                        result+=  toBitsString(part, 10);
+                        str = str.substr(3);
+                    }
+                    
+                    if(str.length == 2){
+                       result+=  toBitsString(str, 7);
+                    }
+                    
+                    if(str.length == 1){
+                       result+=  toBitsString(str, 4);
+                    }
+                    return result;   
+                }
+                
+                
+                  function encodeAlphanumericData(str){
+                    var part,
+                        result = "";
+                    
+                    while(str.length > 1){
+                        part = str.substring(0,2);
+                        result+= toBitsString(alphanumericCharacters[part.charAt(0)] * 45 + alphanumericCharacters[part.charAt(1)], 11);
+                        str = str.substr(2);
+                    }
+                    
+                    if(str.length == 1){
+                       result+= toBitsString(alphanumericCharacters[str], 6);
+                    }
+                    
+                    return result;   
+                }
+                
+                function encodeByteData(str){
+                    var result = "";
+                    for(var i = 0; i < str.length;i++){
+                        result+= toBitsString( str.charCodeAt(i),8);
+                    }
+                    return result;
+                }
+                
+                function generateNumericModeTestValues(){
+                    var value,
+                        version;
+                    for(var i=0;i < numericTestValues.length; i++){
+                        value = numericTestValues[i];
+                        for(var j =0; j< expectedResultsVersions.length;j++){
+                            version = expectedResultsVersions[j];
+                            if(value.length.toString(2).length <= numericCharacterCountLengths[j]){
+                                modeExpectedResults[NUMERIC].push({
+                                    version: version,
+                                    value: value,
+                                    result: modeIndicators[NUMERIC] + 
+                                        toBitsString(value.length, numericCharacterCountLengths[j]) +
+                                        encodeNumericData(value)
+                                });
+                            }
+                        }
+                    }
+                }
+                
+                function generateAlphanumericModeTestValues(){
+                    var value,
+                        version;
+                    for(var i=0;i < alphanumericTestValues.length; i++){
+                        value = alphanumericTestValues[i];
+                        for(var j =0; j< expectedResultsVersions.length;j++){
+                            version = expectedResultsVersions[j];
+                            if(value.length.toString(2).length <= alphanumericCharacterCountLengths[j]){
+                                modeExpectedResults[ALPHA_NUMERIC].push({
+                                    version: version,
+                                    value: value,
+                                    result: modeIndicators[ALPHA_NUMERIC] + 
+                                        toBitsString(value.length, alphanumericCharacterCountLengths[j]) +
+                                        encodeAlphanumericData(value)
+                                });
+                            }
+                        }
+                    }
+                }
+                
+                 function generateByteModeTestValues(){
+                    var value,
+                        version;
+                    for(var i=0;i < byteTestValues.length; i++){
+                        value = byteTestValues[i];
+                        for(var j =0; j< expectedResultsVersions.length;j++){
+                            version = expectedResultsVersions[j];
+                            if(value.length.toString(2).length <= byteCharacterCountLengths[j]){
+                                modeExpectedResults[BYTE].push({
+                                    version: version,
+                                    value: value,
+                                    result: modeIndicators[BYTE] + 
+                                        toBitsString(value.length, byteCharacterCountLengths[j]) +
+                                        encodeByteData(value)
+                                });
+                            }
+                        }
+                    }
+                }
+                
+               
+                
+                module("encoding modes tests", {
+                    
+                });
+                
+                test("test numeric encoding", function(){
+                    generateNumericModeTestValues();
+                    var expectedResults = modeExpectedResults[NUMERIC],
+                        value,
+                        version,
+                        result;
+                    
+                    for(var i = 0; i < expectedResults.length; i++){     
+                        value = expectedResults[i].value;
+                        version = expectedResults[i].version;
+                        result = modes[NUMERIC].encode(value, version);
+                        
+                        ok(result == expectedResults[i].result, "numeric version: " + version + " value: " + value);
+                    }
+                });
+                
+                test("test alphanumeric encoding", function(){
+                   generateAlphanumericModeTestValues();
+                   var expectedResults = modeExpectedResults[ALPHA_NUMERIC],
+                        value,
+                        version,
+                        result;
+                   
+                    for(var i = 0; i < expectedResults.length; i++){     
+                        value = expectedResults[i].value;
+                        version = expectedResults[i].version;
+                        result = modes[ALPHA_NUMERIC].encode(expectedResults[i].value, expectedResults[i].version);
+                        
+                        ok(result == expectedResults[i].result, "alphanumeric version: " + version + " value: " + value);
+                    }
+                });
+                
+                
+                test("test byte encoding", function(){
+                    generateByteModeTestValues();
+                    var expectedResults = modeExpectedResults[BYTE],
+                        value,
+                        version,
+                        result;
+                   
+                    for(var i = 0; i < expectedResults.length; i++){     
+                        value = expectedResults[i].value;
+                        version = expectedResults[i].version;
+                        result = modes[BYTE].encode(expectedResults[i].value, expectedResults[i].version);
+                        
+                        ok(result == expectedResults[i].result, "byte version: " + version + " value: " + value);
+                    }
+                });
+        
+            })();
+        </script>
+
+        <h1 id="qunit-header">encoding modes</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+    </body>
+</html>

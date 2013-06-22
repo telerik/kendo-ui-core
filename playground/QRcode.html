@@ -17,7 +17,7 @@
             }
         </style>
     </head>
-    <body style="background: grey;">		
+    <body style="background: white;">		
         <div id="qrVersionGreaterThan7"></div>
         <div id="qrUrl"></div>
         <div id="qrAlpha"></div>
@@ -25,18 +25,42 @@
         <div id="qrMixingModes"></div>
         <div id="qrMail"></div>
         <script>     
+        
+            $("#qrVersionGreaterThan7").kendoQRCode({
+                value: new Array(1274).join("a"),
+                size: 400,
+                errorCorrectionLevel: "H"
+            });
+            
+            var chars = {"0":0,"1": 1,"2": 2,"3": 3,"4": 4,"5": 5,"6": 6,"7": 7,"8": 8,"9": 9,"A": 10,"B": 11,"C": 12,"D": 13,"E": 14,"F": 15,"G": 16,"H": 17,"I": 18,"J": 19,"K": 20,"L": 21,"M": 22,"N": 23,"O": 24,"P": 25,"Q": 26,"R": 27,"S": 28,"T": 29,"U": 30,"V": 31,"W": 32,"X": 33,"Y": 34,"Z": 35," ": 36,"$": 37,"%": 38,"*": 39,"+": 40,"-": 41,".": 42,"/": 43,":": 44},
+                charArray = [];
+            for(var character in chars){
+                charArray.push(character);            
+            }
             var start = new Date().getTime();            
             function randomNum(){
-                 var min = 0;
+                var min = 0;
                 var max = 255;
-                var num = Math.floor(Math.random() * (max - min + 1)) + min;
+                var num;
+                    do{
+                        num = Math.floor(Math.random() * (max - min + 1)) + min;
+                    }while(127 < num && num < 160)
                 return num;
             }
             
             function getCodewords(n){
-                var result = [];
-                for(var i =0; i< n;i++){
-                    result.push(randomNum());
+                var result = [],
+                    code;
+                for(var i =0; i< n;i++){34
+                    code = String.fromCharCode(randomNum());
+                    if(code=='"'){
+                        debugger;
+                        code = '\\\"';
+                    }
+                    if(code == '\\'){
+                        code = "\\\\";
+                    }
+                    result.push(code);
                 }
                 return result
             }
