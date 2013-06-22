@@ -1,5 +1,5 @@
 ﻿        <div id="example" class="k-content">
-            <div class="qrcode-wrapper demo-section">
+            <div class="demo-section">
                 <div id="qrCode">
                 </div>
             </div>
@@ -8,8 +8,7 @@
                     <span class="configHead">Value</span>
                     <ul class="options">
                         <li>
-                            <textarea id="qrValue" class="k-textbox" data-bind="value: qrValue"
-                                rows="5" cols="20" style="width:300px;height:100px"></textarea>                            
+                            <textarea id="qrValue" class="k-textbox" data-bind="value: qrValue" rows="5" cols="20"></textarea>                            
                         </li>
                         <li>
                             <button data-bind="click: setValue" class="k-button">Set Value</button>
@@ -56,9 +55,13 @@
                     </ul>
                 </div>
             </div>
+            <div id="test">
+            </div>
             <script type="text/javascript">
                 $(document).ready(function () {
-                    var qrCode = $("#qrCode").kendoQRCode().data("kendoQRCode");
+                    var qrCode = $("#qrCode").kendoQRCode({
+                        size: 200
+                    }).data("kendoQRCode");
 
                     var viewModel = kendo.observable({
                         qrValue: "Hello World",
@@ -74,26 +77,41 @@
                         },
                         setOptions: function () {
                             qrCode.setOptions(this.qrOptions.toJSON());
+                            this.setElementWidth();
                             qrCode.redraw();
                         },
-                        setValue: function () {
+                        setValue: function () {                            
                             qrCode.value(this.qrValue);
+                        },
+                        setElementWidth: function () {
+                            qrCode.element.width(this.qrOptions.size);
                         }
                     });
 
                     kendo.bind($("#qrConfig"), viewModel);
+                    viewModel.setElementWidth();
                     viewModel.setValue();
                 });
                 
             </script>
 
-            <style scoped>
-                .qrcode-wrapper div {
-                    border: none;
-                }     
+            <style scoped>                
+                
+                .k-qrcode {
+                    border: none;                    
+                    margin: 0 auto;                 
+                }
+                     
+                #qrValue{
+                    width: 300px;
+                    max-width:300px;
+                    height: 100px;
+                }
+
                 .configuration-horizontal .options li {
                     padding: 3px 0;
-                }          
+                }
+                          
                 .configuration-horizontal .k-textbox {
                      margin-left: 0;
                 }

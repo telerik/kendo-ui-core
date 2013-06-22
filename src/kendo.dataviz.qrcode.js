@@ -165,7 +165,7 @@ kendo_module({
             encode: function(str, version){
                 var mode = this,
                     result = mode._getModeCountString(str, version);
-                    debugger;
+                    
                 for(var i = 0; i < str.length; i++){
                     result += toBitsString(mode.getValue(str.charAt(i)), 8);
                 }
@@ -318,8 +318,8 @@ kendo_module({
         }        
                 
         function generateGeneratorPolynomials(){              
-            var errorCorrectionCodeWordsCount = 68;                    
-            for(var idx = 2; idx <= errorCorrectionCodeWordsCount; idx++){
+            var maxErrorCorrectionCodeWordsCount = 68;                    
+            for(var idx = 2; idx <= maxErrorCorrectionCodeWordsCount; idx++){
                 var firstPolynomial = generatorPolynomials[idx - 1],
                     secondPolynomial = [idx, 0];
                 generatorPolynomials[idx] =  multiplyPolynomials(firstPolynomial, secondPolynomial);                   
@@ -387,20 +387,12 @@ kendo_module({
                         codewordStart+=8;
                     }
                     dataBlocks.push(dataBlock);                    
-                    errorBlocks.push(generateErrorCodewords(messagePolynomial, versionCodewordsInformation.errorCodewordsPerBlock));
+                    errorBlocks.push(generateErrorCodewords(messagePolynomial, 
+                        versionCodewordsInformation.errorCodewordsPerBlock));
                 }
             }
             return [dataBlocks, errorBlocks];
         }  
-
-        function toDecimalArray(arr){
-            var res = [];
-            for(var i =0; i< arr.length; i++){
-                res[i] = parseInt(arr[i],2);
-            }
-            return res;
-        }
-            
 
         var chooseMode = function (str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode){
              var numeric = numberRegex.exec(str),
@@ -471,7 +463,7 @@ kendo_module({
                 length+= mode.getStringBitsLength(modes[i].modeString.length);
             }
                 
-            return Math.ceil(length/8);
+            return Math.ceil(length / 8);
         }
 
         var getVersion = function (dataCodewordsCount, errorCorrectionLevel){
@@ -799,7 +791,7 @@ kendo_module({
            
             addFormatInformation(matrices, toBitsString(0, 15));
             fillData(matrices, blocks);                    
-            printMatrix(matrices[0]);
+            
             var minIdx = scoreMaskMatrixes(matrices),
                 optimalMatrix = matrices[minIdx];
 
@@ -812,51 +804,63 @@ kendo_module({
            
             return optimalMatrix;
         }
-
-        function printMatrix(matrix){
-            console.log("");
-            var str = "";
-            for(var i = 0; i < matrix.length; i++){              
-                for(var j = 0; j < matrix[i].length; j++){
-                    str += (matrix[i][j] !== undefined ? matrix[i][j]: "x") + " ";
-                }
-                str += "\n";
-            }
-             console.log(str);
-        }
         
-        var DEFAULT_SIZE = 200,
-            QUIET_ZONE_LENGTH = 4;
-        
-        //slow and incorrect rendering with VML        
+        var QRCodeDefaults= {
+            DEFAULT_SIZE: 200,
+            QUIET_ZONE_LENGTH: 4,
+            DEFAULT_ERROR_CORRECTION_LEVEL:"L",
+            DEFAULT_BACKGROUND: "#fff",
+            DEFAULT_DARK_MODULE_COLOR: "#000",
+            MIN_BASE_UNIT_SIZE: 1
+        };
+            
         var QRCode = Widget.extend({ 
             init: function (element, options) { 
-                 var that = this,
-                     defaultView = dataviz.ui.defaultView();
-                 Widget.fn.init.call(that, element, options);
-                 that.element = $(element); 
-                 that.element.addClass("k-qrcode k-widget");
-                 that.view = new defaultView(); 
-                 that.setOptions(options);
-                 that.redraw(); 
+                var that = this,
+                    defaultView = dataviz.ui.defaultView();
+                     
+                Widget.fn.init.call(that, element, options);
+                 
+                that.element = $(element); 
+                that.element.addClass("k-qrcode k-widget");
+                that.view = new defaultView(); 
+                that.setOptions(options);
+                that.redraw(); 
             },
-            redraw: function(){
-                debugger;
+            redraw: function(){                
                 var that = this,
                     value = that._value,
-                    view = that.view;
-                if(!value){
+                    baseUnit,
+                    border = that.options.border || {},
+                    borderWidth = border.width || 0,
+                    dataLength,
+                    quietZoneSize,
+                    view = that.view,
+                    matrix,
+                    size,
+                    dataSize,
+                    contentSize;
+                    
+                border.width = borderWidth;
+                
+                if(!value){                    
                     return;
                 }
-                var matrix = encodeData(value, that.options.errorCorrectionLevel),
-                    size = that._getSize();
+                
+                matrix = encodeData(value, that.options.errorCorrectionLevel);
+                size = that._getSize();
+                contentSize = size - 2 * borderWidth;                
+                baseUnit = that._calculateBaseUnit(contentSize, matrix.length);
+                dataSize =  matrix.length * baseUnit;
+                
+                quietZoneSize = that._calculateQuietZone(dataSize, contentSize, borderWidth);
                 
                 view.children = [];
                 view.options.width = size;
                 view.options.height = size;       
-                that.addBackground(size);  
-              
-                that._addMatrix(matrix, size);
+                that._addBackground(size, border);                
+                that._addMatrix(matrix, baseUnit, quietZoneSize);
+                
                 view.renderTo(that.element[0]);
             },
             _getSize: function(){
@@ -873,28 +877,41 @@ kendo_module({
                         size =  min;
                     }
                     else{                    
-                        size = DEFAULT_SIZE;
+                        size = QRCodeDefaults.DEFAULT_SIZE;
                     }
                 }
           
                 return size;
             },
-            _addMatrix: function(matrix, size){//include border in calculation
+            _calculateBaseUnit: function(size, matrixSize){
+                var baseUnit = Math.floor(size/ matrixSize);
+                
+                if(baseUnit < QRCodeDefaults.MIN_BASE_UNIT_SIZE){
+                    throw new Error("Insufficient size.");
+                }   
+                
+                if(baseUnit * matrixSize >= size && 
+                    baseUnit - 1 >= QRCodeDefaults.MIN_BASE_UNIT_SIZE){
+                    baseUnit--;
+                }
+                
+                return baseUnit;
+            },
+            _calculateQuietZone: function(dataSize, contentSize, border){                                                    
+                return border + (contentSize - dataSize) / 2;
+            },            
+            _addMatrix: function(matrix, baseUnit, quietZoneSize){
                 var that = this,
                     view = that.view,
-                    baseUnit = Math.floor(size / matrix.length),
-                    quietZoneSize = (size - matrix.length * baseUnit) / 2,
+                    //strokeWidth = baseUnit + 0.5,
                     y,
                     x1,
                     box,
-                    column;
-             
-                if(baseUnit < 1){
-                    throw new Error("insufficient size");
-                }
+                    column;                           
                 
                 for(var row = 0; row < matrix.length; row++){
                     y = quietZoneSize + row * baseUnit;
+                    //y = quietZoneSize + row * baseUnit + baseUnit / 2;                    
                     column = 0;
                     while(column < matrix.length){
                         while(matrix[row][column] == 0 && column < matrix.length){
@@ -907,15 +924,16 @@ kendo_module({
                             }
                             box = new Box2D(quietZoneSize + x1 * baseUnit, y, quietZoneSize + column * baseUnit, y + baseUnit);
                             view.children.push(view.createRect(box, 
-                                { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false}));                              
+                                { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false})); 
+                            //view.children.push(view.createLine(quietZoneSize + x1 * baseUnit, y, quietZoneSize + column * baseUnit, y,
+                            //    {strokeWidth: strokeWidth, stroke: that.options.darkModuleColor, strokeLineCap: "butt", strokeLineJoin: "miter"}));                             
                         }
                     }
                 }                 
             }, 
-            addBackground: function (size) {
-                var that = this,
-                    border = that.options.border || {};
-                that.view.children.push(that.view.createRect(new Box2D(0,0, size, size),
+            _addBackground: function (size, border) {
+                var that = this;
+                that.view.children.push(that.view.createRect(Box2D(0,0, size, size).unpad(border.width / 2),
                     {   
                         fill: that.options.background, 
                         stroke: border.color,
@@ -924,9 +942,10 @@ kendo_module({
             },
             setOptions: function (options) { 		
                 var that = this;
+                options = options || {};
                 that.options = extend(that.options, options);  
-                if (that.options.value !== undefined) {
-                    that._value = that.options.value;
+                if (options.value !== undefined) {
+                    that._value = that.options.value + "";
                 }
             },	
             value: function(value){
@@ -934,26 +953,28 @@ kendo_module({
                 if (value === undefined) {
                     return that._value;
                 }
-                that._value = value;
+                that._value = value + "";
                 that.redraw();
             },
             options: {
                 name: "QRCode",
-                errorCorrectionLevel: "L",
-                background: "white",
-                darkModuleColor: "black",
+                value: "",
+                errorCorrectionLevel: QRCodeDefaults.DEFAULT_ERROR_CORRECTION_LEVEL,
+                background: QRCodeDefaults.DEFAULT_BACKGROUND,
+                darkModuleColor: QRCodeDefaults.DEFAULT_DARK_MODULE_COLOR,
                 size: "",
                 border: {
                     color: "",
-                    width: ""
+                    width: 0
                 }
             }
         });
         
       dataviz.ui.plugin(QRCode);
       
-      kendo.deepExtend(dataviz, {
+      kendo.deepExtend(dataviz, {          
             QRCode: QRCode,
+            QRCodeDefaults: QRCodeDefaults,
             QRCodeFunctions: {
                 FreeCellVisitor: FreeCellVisitor,
                 fillData: fillData,

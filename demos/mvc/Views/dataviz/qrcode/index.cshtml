@@ -1,5 +1,5 @@
 ﻿        <div id="example" class="k-content">
-            <div class="qrcode-wrapper demo-section">
+            <div class="demo-section">
                 <div id="qrMail">
                 </div>
                 <div id="qrUrl">
@@ -22,22 +22,21 @@
                         value: "http://demos.kendoui.com/dataviz/overview/index.html",
                         errorCorrectionLevel: "M",
                         size: 130,
-                        darkModuleColor: "#FF321C",
                         border: {
-                            color: "#FF321C",
-                            width: 10
+                            color: "#d11717",
+                            width: 5
                         }                    
                     });
-
+                       
                     $("#qrTelephone").kendoQRCode({                    
                         value: "tel:+1-888-365-2779",
                         errorCorrectionLevel: "Q",
                         size: 170,
-                        background: "#FFB821",
+                        darkModuleColor: "#FF321C",
                         border: {
-                            width: 5,
-                            color: "#FF7D05"
-                        }                    
+                            color: "#FF321C",
+                            width: 5
+                        }                     
                     });
 
                     $("#qrGeoLocation").kendoQRCode({
@@ -51,7 +50,7 @@
             </script>
 
             <style scoped>
-                .qrcode-wrapper div {
+                .k-qrcode {
                     display:inline-block;
                     margin: 10px;
                     border: none;
