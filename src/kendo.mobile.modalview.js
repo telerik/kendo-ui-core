@@ -47,6 +47,7 @@ kendo_module({
             that._layout();
             that._scroller();
             that._model();
+            that.element.css("display", "");
 
             that.trigger(INIT);
             kendo.onResize(function() {
