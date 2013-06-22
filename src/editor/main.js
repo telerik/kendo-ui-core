@@ -41,8 +41,8 @@ kendo_module({
     var EditorUtils = {
         editorWrapperTemplate:
             '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header" role="presentation"><tbody>' +
-                '<tr role="presentation"><td class="k-editor-toolbar-wrap k-secondary" role="presentation"><ul class="k-editor-toolbar" role="toolbar"></ul></td></tr>' +
-                '<tr><td class="k-editable-area"></td></tr>' +
+                '<tr role="presentation"><td class="k-editor-toolbar-wrap k-secondary" role="presentation"><ul class="k-editor-toolbar" role="toolbar" /></td></tr>' +
+                '<tr><td class="k-editable-area" /></tr>' +
             '</tbody></table>',
 
         buttonTemplate:
@@ -53,20 +53,20 @@ kendo_module({
             '</li>',
 
         colorPickerTemplate:
-            '<li class="k-editor-colorpicker" role="presentation"><div class="k-colorpicker #= data.cssClass #"></div></li>',
+            '<li class="k-editor-colorpicker" role="presentation"><div class="k-colorpicker #= data.cssClass #" /></li>',
 
         comboBoxTemplate:
             '<li class="k-editor-combobox">' +
-                '<select title="#= data.title #" class="#= data.cssClass #"></select>' +
+                '<select title="#= data.title #" class="#= data.cssClass #" />' +
             '</li>',
 
         dropDownListTemplate:
             '<li class="k-editor-selectbox">' +
-                '<select title="#= data.title #" class="#= data.cssClass #"></select>' +
+                '<select title="#= data.title #" class="#= data.cssClass #" />' +
             '</li>',
 
         separatorTemplate:
-            '<li class="k-separator"></li>',
+            '<li class="k-separator" />',
 
         formatByName: function(name, format) {
             for (var i = 0; i < format.length; i++) {
