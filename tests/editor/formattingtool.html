@@ -101,6 +101,14 @@
             ok(tool.wrapper.is(".k-state-disabled"));
         });
 
+        test("selecting new format removes old className", function() {
+            selectFromValue(inline, "<h1 class='red'>fo||o</h1>");
+
+            inline.exec("formatting", { value: { tag: "h1" } });
+
+            equal(inline.value(), "<h1>foo</h1>");
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

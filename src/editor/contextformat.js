@@ -66,7 +66,7 @@ var FormattingTool = DelayedExecutionTool.extend({
                     tags = (item.tag || "span").split(","),
                     format = [{
                         tags: tags,
-                        attr: { className: item.className }
+                        attr: { className: item.className || "" }
                     }];
 
                 if (dom.inlineElements.indexOf(tags[0]) >= 0) {
