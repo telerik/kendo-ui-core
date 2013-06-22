@@ -460,6 +460,97 @@
     background: @flat-active-background;
 }
 
+/* Forms */
+
+.km-flat .km-list input[type=password],
+.km-flat .km-list input[type=search],
+.km-flat .km-list input[type=number],
+.km-flat .km-list input[type=tel],
+.km-flat .km-list input[type=url],
+.km-flat .km-list input[type=email],
+.km-flat .km-list input[type=month],
+.km-flat .km-list input[type=color],
+.km-flat .km-list input[type=week],
+.km-flat .km-list input[type=date],
+.km-flat .km-list input[type=time],
+.km-flat .km-list input[type=datetime],
+.km-flat .km-list input[type=datetime-local],
+.km-flat .km-list input[type=text]:not(.k-input),
+.km-flat .km-list select:not([multiple]),
+.km-flat .km-list .k-dropdown-wrap,
+.km-flat .km-list textarea
+{
+    .appearance(none);
+    font-size: 1.1rem;
+    color: #385487;
+    min-width: 6em;
+    border: 0;
+    padding: .4em;
+    outline: none;
+    background: transparent;
+}
+
+.km-flat .km-list .k-dropdown-wrap
+{
+	padding: .2em;
+}
+
+.km-flat .km-list .k-dropdown-wrap .k-input
+{
+    color: #385487;
+}
+
+.km-flat .km-list .k-dropdown
+{
+    margin-top: -1.05em;
+    font-weight: normal;
+}
+
+.km-flat .km-list input[type=color],
+.km-flat .km-list input[type=week],
+.km-flat .km-list input[type=date],
+.km-flat .km-list input[type=time],
+.km-flat .km-list input[type=month],
+.km-flat .km-list input[type=datetime],
+.km-flat .km-list input[type=datetime-local],
+.km-flat .km-list .k-dropdown
+{
+    text-align: right;
+}
+
+.km-flat .km-list .k-dropdown .k-dropdown-wrap
+{
+    display: block;
+    .border-radius(0);
+    background: transparent;
+    .box-shadow(none);
+}
+
+.km-flat .km-list select:not([multiple]) option
+{
+    color: #333;
+}
+
+.km-flat .km-content .km-list .km-state-active input[type=password],
+.km-flat .km-content .km-list .km-state-active input[type=search],
+.km-flat .km-content .km-list .km-state-active input[type=number],
+.km-flat .km-content .km-list .km-state-active input[type=tel],
+.km-flat .km-content .km-list .km-state-active input[type=url],
+.km-flat .km-content .km-list .km-state-active input[type=email],
+.km-flat .km-content .km-list .km-state-active input[type=month],
+.km-flat .km-content .km-list .km-state-active input[type=color],
+.km-flat .km-content .km-list .km-state-active input[type=week],
+.km-flat .km-content .km-list .km-state-active input[type=date],
+.km-flat .km-content .km-list .km-state-active input[type=time],
+.km-flat .km-content .km-list .km-state-active input[type=datetime],
+.km-flat .km-content .km-list .km-state-active input[type=datetime-local],
+.km-flat .km-content .km-list .km-state-active input[type=text]:not(.k-input),
+.km-flat .km-content .km-list .km-state-active select:not([multiple]),
+.km-flat .km-content .km-list .km-state-active textarea
+{
+    color: #fff;
+}
+
 /* Shim */
 
 .km-flat .km-shim,
@@ -489,14 +580,16 @@
     background: @flat-dark-background;
     padding: .5em 0 .5em .6em;
     color: @flat-active-color;
+    border: 0;
+    .border-radius(0);
     border-bottom: 1px solid @flat-light-shadow;
     .box-sizing(border-box);
 }
 
-.km-root .km-flat .km-popup .k-item
-{
-    border: 1px solid @flat-light-shadow;
-}
+//.km-root .km-flat .km-popup .k-item
+//{
+//    border: 1px solid @flat-light-shadow;
+//}
 
 .km-flat li.km-actionsheet-cancel > a
 {
