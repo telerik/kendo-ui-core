@@ -367,7 +367,6 @@ kendo_module({
             this._scale(1);
         },
 
-
         zoomOut: function() {
             var dimensions = this.dimensions;
             dimensions.refresh();
