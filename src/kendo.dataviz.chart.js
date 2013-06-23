@@ -127,6 +127,8 @@ kendo_module({
         MOUSEMOVE_THROTTLE = 20,
         MOUSEWHEEL_DELAY = 150,
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
+        NOTE_CLICK = dataviz.NOTE_CLICK,
+        NOTE_HOVER = dataviz.NOTE_HOVER,
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
@@ -166,7 +168,6 @@ kendo_module({
         TOOLTIP_HIDE_DELAY = 100,
         TOOLTIP_INVERSE = "tooltip-inverse",
         TOUCH_START_NS = "touchstart" + NS,
-        TRIANGLE = "triangle",
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
@@ -284,7 +285,9 @@ kendo_module({
             ZOOM_END,
             SELECT_START,
             SELECT,
-            SELECT_END
+            SELECT_END,
+            NOTE_CLICK,
+            NOTE_HOVER
         ],
 
         items: function() {
@@ -3628,7 +3631,6 @@ kendo_module({
         }
     });
     deepExtend(Bullet.fn, PointEventsMixin);
-
 
     var Target = ShapeElement.extend();
     deepExtend(Target.fn, PointEventsMixin);

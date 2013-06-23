@@ -54,6 +54,8 @@ kendo_module({
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
         NONE = "none",
+        NOTE_CLICK = "noteClick",
+        NOTE_HOVER = "noteHover",
         OUTSIDE = "outside",
         RADIAL = "radial",
         RIGHT = "right",
@@ -1529,9 +1531,7 @@ kendo_module({
 
         arrangeNotes: function() {
             var axis = this,
-                options = axis.options,
-                i, item, slot, value,
-                box;
+                i, item, slot, value;
 
             for (i = 0; i < axis.notes.length; i++) {
                 item = axis.notes[i];
@@ -1566,6 +1566,7 @@ kendo_module({
             var note = this;
 
             BoxElement.fn.init.call(note, options);
+            note.options.id = uniqueId();
 
             note.render();
         },
@@ -1573,7 +1574,7 @@ kendo_module({
         options: {
             icon: {
                 color: "red",
-                zIndex: 0,
+                zIndex: 1,
                 border: {
                     color: "red",
                     width: 2
@@ -1581,7 +1582,6 @@ kendo_module({
                 background: "red",
                 padding: 3,
                 size: 1,
-                zIndex: 1,
                 visible: true
             },
             label: {
@@ -1611,7 +1611,8 @@ kendo_module({
                 box = Box2D();
 
             if (defined(label) && label.visible) {
-                note.label = new TextBox(label.text, label);
+                note.label = new NoteTextBox(label.text, label);
+                note.label.enableDiscovery();
                 note.append(note.label);
 
                 if (label.position === INSIDE) {
@@ -1628,7 +1629,8 @@ kendo_module({
             icon.width = width || size;
             icon.height = height || size;
 
-            marker = new ShapeElement(icon);
+            marker = new NoteShapeElement(icon);
+            marker.enableDiscovery();
 
             note.marker = marker;
             note.append(marker);
@@ -1663,7 +1665,7 @@ kendo_module({
                     lineStart = Point2D(center.x, targetBox.y1);
                     note.connectorPoints = [
                         lineStart,
-                        Point2D(center.x, contentBox.y1),
+                        Point2D(center.x, contentBox.y1)
                     ];
                     box = contentBox.clone().wrapPoint(lineStart);
                 }
@@ -1677,7 +1679,7 @@ kendo_module({
                         lineStart = Point2D(targetBox.x2, center.y);
                         note.connectorPoints = [
                             lineStart,
-                            Point2D(contentBox.x2, center.y),
+                            Point2D(contentBox.x2, center.y)
                         ];
                         box = contentBox.clone().wrapPoint(lineStart);
                     }
@@ -1690,7 +1692,7 @@ kendo_module({
                         lineStart = Point2D(targetBox.x2, center.y);
                         note.connectorPoints = [
                             lineStart,
-                            Point2D(contentBox.x1, center.y),
+                            Point2D(contentBox.x1, center.y)
                         ];
                         box = contentBox.clone().wrapPoint(lineStart);
                     }
@@ -1738,6 +1740,38 @@ kendo_module({
         }
     });
 
+    var NoteEventMixin = {
+        click: function(widget, e) {
+            var args = this.eventArgs(e);
+
+            if (!widget.trigger(NOTE_CLICK, args)) {
+                e.preventDefault();
+            }
+        },
+
+        hover: function(widget, e) {
+            var args = this.eventArgs(e);
+
+            if (!widget.trigger(NOTE_HOVER, args)) {
+                e.preventDefault();
+            }
+        },
+
+        leave: function(widget) {
+            widget._unsetActivePoint();
+        },
+
+        eventArgs: function(e) {
+            var note = this.parent,
+                options = note.options;
+
+            return {
+                element: $(e.target),
+                text: defined(options.label) ? options.label.text : ""
+            };
+        }
+    };
+
     var ShapeElement = BoxElement.extend({
         options: {
             type: CIRCLE,
@@ -1757,6 +1791,9 @@ kendo_module({
                 halfWidth = box.width() / 2,
                 points,
                 i;
+
+            // Make sure that this element will be added in the model map.
+            ChartElement.fn.getViewElements.call(this, view);
 
             if (!options.visible || !marker.hasBox()) {
                 return [];
@@ -1795,6 +1832,12 @@ kendo_module({
         }
     });
 
+    var NoteShapeElement = ShapeElement.extend();
+    deepExtend(NoteShapeElement.fn, NoteEventMixin);
+
+    var NoteTextBox = TextBox.extend();
+    deepExtend(NoteTextBox.fn, NoteEventMixin);
+
     var PinElement = BoxElement.extend({
         init: function(options) {
             var pin = this;
@@ -1831,7 +1874,6 @@ kendo_module({
 
         reflow: function(targetBox) {
             var pin = this,
-                options = pin.options,
                 textBox = pin.textBox;
 
             pin.box = Box2D(0, 0, textBox.box.height(), textBox.box.height() * 1.5);
@@ -3380,6 +3422,8 @@ kendo_module({
         DEFAULT_HEIGHT: DEFAULT_HEIGHT,
         DEFAULT_FONT: DEFAULT_FONT,
         INITIAL_ANIMATION_DURATION: INITIAL_ANIMATION_DURATION,
+        NOTE_CLICK: NOTE_CLICK,
+        NOTE_HOVER: NOTE_HOVER,
         CLIP: CLIP,
 
         Axis: Axis,
@@ -3399,6 +3443,7 @@ kendo_module({
         LRUCache: LRUCache,
         NumericAxis: NumericAxis,
         Point2D: Point2D,
+        PinElement: PinElement,
         Ring: Ring,
         Pin: Pin,
         RootElement: RootElement,
