@@ -1057,6 +1057,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a <see cref="QRCode"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().QRCode()
+        ///             .Name("qrCode")
+        ///             .Value("Hello World")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual QRCodeBuilder QRCode()
+        {
+            return new QRCodeBuilder(new QRCode(ViewContext, Initializer));
+        }
+
+        /// <summary>
         /// Returns the initialization scripts for widgets set as deferred
         /// </summary>
         /// <param name="renderScriptTags">Determines if the script should be rendered within a script tag</param>
@@ -1948,6 +1964,8 @@ namespace Kendo.Mvc.UI.Fluent
                         Convert.ToDouble(value)
                     ));
         }
+
+
 
         private string GetName(LambdaExpression expression)
         {

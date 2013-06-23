@@ -947,6 +947,12 @@
     <Compile Include="Infrastructure\Implementation\ControllerAuthorization.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerTypeCache.cs" />
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
+    <Compile Include="UI\QRCode\Html\QRCodeHtmlBuilder.cs" />
+    <Compile Include="UI\QRCode\QRErrorCorrectionLevel.cs" />
+    <Compile Include="UI\QRCode\Fluent\QRBorderBuilder.cs" />
+    <Compile Include="UI\QRCode\Fluent\QRCodeBuilder.cs" />
+    <Compile Include="UI\QRCode\QRBorder.cs" />
+    <Compile Include="UI\QRCode\QRCode.cs" />
     <Compile Include="UI\RequestSettings.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewAgendaBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewDayBuilder.cs" />
