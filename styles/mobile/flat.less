@@ -460,6 +460,48 @@
     background: @flat-active-background;
 }
 
+/* Filter box */
+
+.km-flat .km-listview-wrapper form .km-filter-wrap > input
+{
+    font-size: 1.2em;
+    padding: .3em 1.8em;
+}
+
+.km-flat .km-filter-wrap:before
+{
+    margin: .05em -1.3em 0 .3em;
+}
+
+.km-flat .km-filter-reset
+{
+    margin: .05em 0 0 -2em;
+}
+
+.km-flat .km-filter-wrap:before,
+.km-flat .km-filter-reset .km-clear
+{
+	color: @flat-main-color;
+}
+
+.km-flat .km-filter-reset .km-clear:after
+{
+    content: "\e038";
+}
+
+.km-flat .km-filter-wrap > input
+{
+    color: @flat-main-color;
+    .border-radius(@flat-border-radius);
+    background: @flat-active-color;
+    border: 1px solid @flat-border-color;
+}
+
+.km-flat .km-filter-wrap > input:focus,
+{
+    border: 1px solid @flat-active-background;
+}
+
 /* Forms */
 
 .km-flat .km-list input[type=password],
@@ -549,6 +591,64 @@
 .km-flat .km-content .km-list .km-state-active textarea
 {
     color: #fff;
+}
+
+/* Checkboxes and Radios */
+
+.km-flat .km-listview-label input[type=checkbox]:not(.k-input):not(.k-input):not(.k-input):not(.k-input):not(.k-input)
+{
+    margin-top: -.7em;
+}
+
+.km-flat .km-listview-label input[type=radio],
+.km-flat .km-listview-label input[type=checkbox]
+{
+    border: 1px solid @flat-border-color;
+    width: 1.4em;
+    height: 1.4em;
+    .border-radius(@flat-border-radius);
+    background: @flat-background;
+}
+
+.km-flat .km-listview-label input[type=radio]
+{
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.km-flat .km-listview-label input[type=radio]
+{
+    .border-radius(1em);
+}
+
+.km-flat .km-listview-label input[type=checkbox]:after
+{
+    content: "\a0";
+    display: block;
+    margin: 10% auto 15% 6%;
+    width: 90%;
+    height: 76%;
+}
+
+.km-flat .km-listview-label input[type=radio]:checked,
+.km-flat .km-listview-label input[type=checkbox]:checked
+{
+    background-color: @flat-active-background;
+}
+
+.km-flat .km-listview-label input[type=checkbox]:checked:after
+{
+    background: @flat-active-color;
+}
+
+.km-flat .km-listview-label input[type=checkbox]:checked:after
+{
+    -webkit-mask-box-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAsBJREFUeNrsmzFIAzEUhlMLgtCpUBBcC05CwUnoKgidBEHo5FpwFQqCUBBcnQpOTgWh4CQIroLgdOAkFJw6CU6dCkK9SCyK9fr+5CV39+qDN/bC+5I/l/9dWphMJmqRY0kteghaAcU4I10SIUdxVj5rFwTggFi8zvZ08oUAKMU5JBb/EueyNAAdYPabP+QvAMCa0TSl+Ptf+58AAD1g9rekAajF+U4svjfzDZhzAPfE4sdGKqIA7AJL/+zPM1BOAejX2IBY/NC8JkUBOAJmv5V4Cs4hgHKcb8TiI3NEFgWgC8z+zlwflDMAVeC1d0MygjkDcEMsXkNalwZgG1j6XXIrICcAEK//ZjZKUQBaqNeXBADx+oMvry8JwBkw+3vIg6cAbDOQ1x/beH0pABCvX5MGYAsovmczQNYBUL3+aJbXzzuAJjD7p7aDZBUAi9fPM4A2MPsHLgNlEUBZ0VvciV4fPQhdAS5rMyNev+462HcAmvwrceAn5LgJxAan17c5Cu8B9Dspev2xaYywA9DRT0kKDQD+OdegswCkIYWieRar13dxg6GlgHj9Q07NJdnhPqBHFymUgBb3gHvzTQJQCSQFxOs3uHfdeQ0R31Ko+vT6XB0hRAqoH6d6/Xcbr88FoAJoFJFCHVhdl76OndSeoA8pPPr2+txNUU4pIF7/2GfTAQGASCFKkMIK0OJ28vo+2uIcUkC8ftN3z83mu4CLFJDrbFGIlrMNABcpXIT0+r4A6NgHCjkxv0Gus/VVoHD5NIZK4S601/cNAJWC03W2LAJApRDc64cAoOOaEUBLBQ4OAIgUkvLZtcWdFgAuKTRUCsF5QcJFCrcqpeAEsGopBW9ePzQAWyl0VYrh444QIoWRWTmiACBSaKuUw9ctMUrDY6j8fF/MBACKFJoqA+ETQJIUHlRGQtde+P/3+ILHhwADAA2kPASxM5juAAAAAElFTkSuQmCC');
+}
+
+.km-flat .km-state-active input[type=checkbox]:checked:after
+{
+    background-color: #eee;
 }
 
 /* Shim */
