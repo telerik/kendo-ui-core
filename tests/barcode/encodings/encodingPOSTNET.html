@@ -21,27 +21,27 @@
 
             (function() {
                 var encoding,
-                    START = new Function("height","return [BAR, 1, 0,height];"),
-                    GAP = [SPACE, 1],
+                    START = function(height){ return {width: 1, y1: 0, y2: height};},
+                    GAP = 1,
                     DIGIT_SEPARATOR = "-",
                     characters = [
-                        new Function("height","return [[BAR,1, 0,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1]];"),
-                        new Function("height","return [[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1],[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1]];"),
-                        new Function("height","return [[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1]];"),
-                        new Function("height","return [[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1],[BAR,1, 0,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1]];"),
-                        new Function("height","return [[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1],[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1]];"),
-                        new Function("height","return [[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1],[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1]];"),
-                        new Function("height","return [[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1],[BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1]];"),
-                        new Function("height","return [[BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1],[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1]];"),
-                        new Function("height","return [[BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1],[BAR,1, height / 2,height], [SPACE, 1], [BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1]];"),
-                        new Function("height","return [[BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1],[BAR,1, 0,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1], [BAR,1, height / 2,height], [SPACE, 1]];")
+                        function(height){ return [{width: 1, y1: 0, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1];},
+                        function(height){ return [{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1,{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1];},
+                        function(height){ return [{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1];},
+                        function(height){ return [{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1,{width: 1, y1: 0, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1];},
+                        function(height){ return [{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1,{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1];},
+                        function(height){ return [{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1,{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1];},
+                        function(height){ return [{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1,{width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1];},
+                        function(height){ return [{width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1,{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1];},
+                        function(height){ return [{width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1,{width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1];},
+                        function(height){ return [{width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1,{width: 1, y1: 0, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1, {width: 1, y1: height / 2, y2: height}, 1];},
                     ];
 
                 function generateResult(value, height, options){
                     value = value.replace(new RegExp(DIGIT_SEPARATOR,"g"),"");
                     var expectedResult = [];
                     if(options.quietZoneLength){
-                        expectedResult.push([SPACE, options.quietZoneLength]);
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     expectedResult.push(START(height));
@@ -57,7 +57,7 @@
                     expectedResult.push(START(height));
 
                     if(options.quietZoneLength){
-                        expectedResult.push([SPACE, options.quietZoneLength]);
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     return expectedResult;

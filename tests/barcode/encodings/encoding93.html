@@ -21,46 +21,46 @@
             (function() {
                 var encoding,
                     characters = {
-                        TERMINATION_BAR: [BAR, 1],
-                        START: [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 4], [SPACE, 1]],
-                        A: [[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 3]],
-                        B: [[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 2]],
-                        E: [[BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1]],
-                        G: [[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 3]],
-                        H: [[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 2]],
-                        I: [[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 3], [BAR, 1], [SPACE, 1]],
-                        L: [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 3]],
-                        M: [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 2]],
-                        P: [[BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1]],
-                        Q: [[BAR, 2], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2]],
-                        S: [[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 2]],
-                        T: [[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 1]],
-                        V: [[BAR, 2], [SPACE, 2], [BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1]],
-                        "0": [[BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2]],
-                        "1": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 3]],
-                        "2": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 2]],
-                        "3": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 4], [BAR, 1], [SPACE, 1]],
-                        "4": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 3]],
-                        "5": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 2]],
-                        "6": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 1]],
-                        "7": [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 4]],
-                        "8": [[BAR, 1], [SPACE, 3], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1]],
-                        "9": [[BAR, 1], [SPACE, 4], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1]],
-                        "-": [[BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 3], [SPACE, 1]],
-                        ".": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 2]],
-                        " ": [[BAR, 3], [SPACE, 1], [BAR, 1], [SPACE, 2], [BAR, 1], [SPACE, 1]],
-                        "$": [[BAR, 3], [SPACE, 2], [BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1]],
-                        "/": [[BAR, 1], [SPACE, 1], [BAR, 2], [SPACE, 1], [BAR, 3], [SPACE, 1]],
-                        "+": [[BAR, 1], [SPACE, 1], [BAR, 3], [SPACE, 1], [BAR, 2], [SPACE, 1]],
-                        "%": [[BAR, 2], [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 3], [SPACE, 1]],
-                        /*(+)*/SHIFT0: [[BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 1]],
-                        /*(/)*/SHIFT1: [[BAR, 1], [SPACE, 2], [BAR, 2], [SPACE, 2], [BAR, 1], [SPACE, 1]]
+                        "0": [1, 3, 1, 1, 1, 2],
+                        "1": [1, 1, 1, 2, 1, 3],
+                        "2": [1, 1, 1, 3, 1, 2],
+                        "3": [1, 1, 1, 4, 1, 1],
+                        "4": [1, 2, 1, 1, 1, 3],
+                        "5": [1, 2, 1, 2, 1, 2],
+                        "6": [1, 2, 1, 3, 1, 1],
+                        "7": [1, 1, 1, 1, 1, 4],
+                        "8": [1, 3, 1, 2, 1, 1],
+                        "9": [1, 4, 1, 1, 1, 1],
+                        "TERMINATION_BAR": 1,
+                        "START": [1, 1, 1, 1, 4, 1],
+                        "A": [2, 1, 1, 1, 1, 3],
+                        "B": [2, 1, 1, 2, 1, 2],
+                        "E": [2, 2, 1, 2, 1, 1],
+                        "G": [1, 1, 2, 1, 1, 3],
+                        "H": [1, 1, 2, 2, 1, 2],
+                        "I": [1, 1, 2, 3, 1, 1],
+                        "L": [1, 1, 1, 1, 2, 3],
+                        "M": [1, 1, 1, 2, 2, 2],
+                        "P": [1, 3, 1, 1, 2, 1],
+                        "Q": [2, 1, 2, 1, 1, 2],
+                        "S": [2, 1, 1, 1, 2, 2],
+                        "T": [2, 1, 1, 2, 2, 1],
+                        "V": [2, 2, 2, 1, 1, 1],
+                        "-": [1, 2, 1, 1, 3, 1],
+                        ".": [3, 1, 1, 1, 1, 2],
+                        " ": [3, 1, 1, 2, 1, 1],
+                        "$": [3, 2, 1, 1, 1, 1],
+                        "/": [1, 1, 2, 1, 3, 1],
+                        "+": [1, 1, 3, 1, 2, 1],
+                        "%": [2, 1, 1, 1, 3, 1],
+                        "SHIFT0": [1, 2, 2, 2, 1, 1],
+                        "SHIFT1": [1, 2, 2, 2, 1, 1]
                     };
 
                 function generateResult(value, options){
                     var expectedResult = [];
                     if(options.quietZoneLength){
-                        expectedResult.push([SPACE, options.quietZoneLength]);
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     expectedResult.pushArray(characters.START);
@@ -79,7 +79,7 @@
                     expectedResult.push(characters.TERMINATION_BAR);
 
                     if(options.quietZoneLength){
-                        expectedResult.push([SPACE, options.quietZoneLength]);
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     return expectedResult;

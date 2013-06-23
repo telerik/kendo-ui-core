@@ -21,38 +21,37 @@
             (function() {
                 var encoding,
                     characters = {
-                        START: new Function("ratio", "return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-                        E: new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-                        H: new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-                        I: new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-                        O: new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, ratio]]"),
-                        P: new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
-                        S: new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1]]"),
-                        T: new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, 1],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, ratio], [BAR, 1]]"),
-                        "0": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-                        "1": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-                        "2": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-                        "3": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-                        "4": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, ratio]]"),
-                        "5": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-                        "6": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, ratio], [SPACE, ratio],[BAR, ratio],  [SPACE, 1], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-                        "7": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, ratio]]"),
-                        "8": new Function("ratio","return [[BAR, ratio], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-                        "-": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, ratio]]"),
-                        ".": new Function("ratio","return [[BAR, ratio], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-                        " ": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, ratio], [SPACE, 1],[BAR, 1],  [SPACE, 1], [BAR, ratio], [SPACE, 1], [BAR, 1]]"),
-                        "$": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, 1], [BAR, 1]]"),
-                        "/": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, 1], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
-                        "+": new Function("ratio","return [[BAR, 1], [SPACE, ratio], [BAR, 1], [SPACE, 1],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
-                        "%": new Function("ratio","return [[BAR, 1], [SPACE, 1], [BAR, 1], [SPACE, ratio],[BAR, 1],  [SPACE, ratio], [BAR, 1], [SPACE, ratio], [BAR, 1]]"),
-                        GAP: [SPACE, 1],
-                        QUIET_ZONE: new Function("length", "return [SPACE, length];")
+                        "0": function (ratio){return [1, 1,1, ratio,ratio,  1,ratio, 1,1];},
+                        "1": function (ratio){return [ratio, 1,1, ratio,1,  1,1, 1,ratio];},
+                        "2": function (ratio){return [1, 1,ratio, ratio,1,  1,1, 1,ratio];},
+                        "3": function (ratio){return [ratio, 1,ratio, ratio,1,  1,1, 1,1];},
+                        "4": function (ratio){return [1, 1,1, ratio,ratio,  1,1, 1,ratio];},
+                        "5": function (ratio){return [ratio, 1,1, ratio,ratio,  1,1, 1,1];},
+                        "6": function (ratio){return [1, 1,ratio, ratio,ratio,  1,1, 1,1];},
+                        "7": function (ratio){return [1, 1,1, ratio,1,  1,ratio, 1,ratio];},
+                        "8": function (ratio){return [ratio, 1,1, ratio,1,  1,ratio, 1,1];},
+                        "START": function(ratio){ return [1, ratio,1, 1,ratio,  1,ratio, 1,1];},
+                        "E": function (ratio){return [ratio, 1,1, 1,ratio,  ratio,1, 1,1];},
+                        "H": function (ratio){return [ratio, 1,1, 1,1,  ratio,ratio, 1,1];},
+                        "I": function (ratio){return [1, 1,ratio, 1,1,  ratio,ratio, 1,1];},
+                        "O": function (ratio){return [ratio, 1,1, 1,ratio,  1,1, ratio,ratio];},
+                        "P": function (ratio){return [1, 1,ratio, 1,ratio,  1,1, ratio,1];},
+                        "S": function (ratio){return [1, 1,ratio, 1,1,  1,ratio, ratio,1];},
+                        "T": function (ratio){return [1, 1,1, 1,ratio,  1,ratio, ratio,1];},
+                        "-": function (ratio){return [1, ratio,1, 1,1,  1,ratio, 1,ratio];},
+                        ".": function (ratio){return [ratio, ratio,1, 1,1,  1,ratio, 1,1];},
+                        " ": function (ratio){return [1, ratio,ratio, 1,1,  1,ratio, 1,1];},
+                        "$": function (ratio){return [1, ratio,1, ratio,1,  ratio,1, 1,1];},
+                        "/": function (ratio){return [1, ratio,1, ratio,1,  1,1, ratio,1];},
+                        "+": function (ratio){return [1, ratio,1, 1,1,  ratio,1, ratio,1];},
+                        "%":function (ratio){return [1, 1,1, ratio,1,  ratio,1, ratio,1];},
+                        "GAP": 1
                     };
 
                 function generateResult(value, ratio, options){
                     var expectedResult = [];
                     if(options.quietZoneLength){
-                        expectedResult.push(characters.QUIET_ZONE(options.quietZoneLength));
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     expectedResult.pushArray(characters.START(ratio));
@@ -71,7 +70,7 @@
                     expectedResult.pushArray(characters.START(encoding.ratio));
 
                     if(options.quietZoneLength){
-                        expectedResult.push(characters.QUIET_ZONE(options.quietZoneLength));
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     return expectedResult;

@@ -21,26 +21,26 @@
 
             (function() {
                 var encoding,
-                    START = [[BAR,1],[SPACE,1], [BAR,2],[SPACE,2], [BAR, 1]],
-                    GAP = [SPACE, 1],
+                    START = [1,1,2,2,1],
+                    GAP = 1,
                     characters = {
-                        "0": [[BAR,1],[SPACE,1], [BAR,1],[SPACE,1], [BAR, 2]],
-                        "1": [[BAR,2],[SPACE,1], [BAR,1],[SPACE,1], [BAR, 2]],
-                        "2": [[BAR,1],[SPACE,2], [BAR,1],[SPACE,1], [BAR, 2]],
-                        "3": [[BAR,2],[SPACE,2], [BAR,1],[SPACE,1], [BAR, 1]],
-                        "4": [[BAR,1],[SPACE,1], [BAR,2],[SPACE,1], [BAR, 2]],
-                        "5": [[BAR,2],[SPACE,1], [BAR,2],[SPACE,1], [BAR, 1]],
-                        "6": [[BAR,1],[SPACE,2], [BAR,2],[SPACE,1], [BAR, 1]],
-                        "7": [[BAR,1],[SPACE,1], [BAR,1],[SPACE,2], [BAR, 2]],
-                        "8": [[BAR,2],[SPACE,1], [BAR,1],[SPACE,2], [BAR, 1]],
-                        "9": [[BAR,2],[SPACE,1], [BAR,1],[SPACE,1], [BAR, 1]],
-                        "-": [[BAR,1],[SPACE,1], [BAR,2],[SPACE,1], [BAR, 1]]
-                    }
+                        "0":[1,1,1,1,2],
+                        "1":[2,1,1,1,2],
+                        "2":[1,2,1,1,2],
+                        "3":[2,2,1,1,1],
+                        "4":[1,1,2,1,2],
+                        "5":[2,1,2,1,1],
+                        "6":[1,2,2,1,1],
+                        "7":[1,1,1,2,2],
+                        "8":[2,1,1,2,1],
+                        "9":[2,1,1,1,1],
+                        "-":[1,1,2,1,1]
+                    };
 
                 function generateResult(value, options){
                     var expectedResult = [];
                     if(options.quietZoneLength){
-                        expectedResult.push([SPACE, options.quietZoneLength]);
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     expectedResult.pushArray(START);
@@ -60,7 +60,7 @@
                     expectedResult.pushArray(START);
 
                     if(options.quietZoneLength){
-                        expectedResult.push([SPACE, options.quietZoneLength]);
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     return expectedResult;

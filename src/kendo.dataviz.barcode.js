@@ -503,18 +503,10 @@
         init: function(encoding, states){
             this.encoding = encoding;
         },
-        addStart: function(){
-
-        },
-        is: function (value, index){
-
-        },
-        move: function (encodingState){
-
-        },
-        pushState: function(encodingState){
-
-        }
+        addStart: function(){},
+        is: function (value, index){},
+        move: function (encodingState){},
+        pushState: function(encodingState){}
     });
 
     //Investigate the options to move to C if it is in the states and there are 4 or more consecutive digits
@@ -548,7 +540,7 @@
                 maxLength = value.length,                    
                 code;
                 
-            if(states.indexOf("C") >= 0){
+            if(inArray("C", states) >= 0){
                 var numberMatch = value.match(/\d{4,}/g);
                 if(numberMatch){
                     maxLength = value.indexOf(numberMatch[0]);
@@ -1611,7 +1603,7 @@
                     fill: options.background,
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
-                    dashType: border.dashType,
+                    dashType: border.dashType
                 });
                 
 			that.view.children.push(rect);

@@ -3,13 +3,17 @@ function comparePatterns(pattern1, pattern2){
         return false;
     }
     for(var i = 0; i < pattern1.length; i++){
-        if(pattern1[i].length != pattern2[i].length){
-            return false;
-        }
-        for(var j = 0; j < pattern1[i].length; j++){
-            if(pattern1[i][j] !== pattern2[i][j]){
-                return false;
+        if(pattern1[i] != pattern2[i]){
+            if($.isPlainObject(pattern1[i])){
+                for(var field in pattern1[i]){
+                    if(pattern1[i][field] != pattern2[i][field]){
+                        return false;
+                    }
+                }
             }
+            else{
+                return false;
+            }            
         }
     }
     return true;

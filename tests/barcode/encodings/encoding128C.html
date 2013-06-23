@@ -22,55 +22,54 @@
             (function() {
                 var encoding,
                     characters = {
-                            /* A */"33": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 3]],
-                            /* B */"34": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3]],
-                            /* C */"35": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1]],
-                                "36": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 3]],
-                            /* E */"37": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 3]],
-                            /* H */"40": [[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 3]],
-                            /* K */"43": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,3],[SPACE, 1]],
-                            /* L */"44": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1]],
-                                    "45": [[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 3]],
-                            /* Q */"49": [[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,3],[SPACE, 1]],
-                            /* S */"51": [[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,1],[SPACE, 3]],
-                            /* T */"52": [[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 3],[BAR,1],[SPACE, 1]],
-                            /* X */"56": [[BAR,3],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 1]],
-                            /* Z */"58": [[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 1]],
-                            /* < */"28": [[BAR,3],[SPACE, 2],[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 2]],
-                            /* = */"29": [[BAR,3],[SPACE, 2],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1]],
-                            /* @ */"32": [[BAR,2],[SPACE, 3],[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 1]],
-                            /* 0 */"16": [[BAR,1],[SPACE, 2],[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 2]],
-                            /* 3 */"19": [[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 2]],
-                            /* 7 */"23": [[BAR,3],[SPACE, 1],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 1]],
-                            /* ^ */"62": [[BAR,4],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 1]],
-                            /* _ */"63": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 4]],
-                                   "66": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 1]],
-                            /* - */"13": [[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 1],[BAR,3],[SPACE, 2]],
-                                   "09": [[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 3]],
-                                   "08": [[BAR,1],[SPACE, 3],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 2]],
-                            /* ' */"07": [[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 3],[BAR,1],[SPACE, 2]],
-                            /* # */"03": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 2],[BAR,2],[SPACE, 3]],
-                            /* # */"02": [[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 1]],
-                            /* SPACE */"00": [[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 2],[BAR,2],[SPACE, 2]],
-
-                            /* LF */"74": [[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 2],[BAR,1],[SPACE, 1]],
-                            /* DC1 */"81": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 2]],
-                            /* DC4 */"84": [[BAR,1],[SPACE, 2],[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 2]],
-                                     "85": [[BAR,1],[SPACE, 2],[BAR,4],[SPACE, 2],[BAR,1],[SPACE, 1]],
-                                     "86": [[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 2]],
-                                     "91": [[BAR,4],[SPACE, 1],[BAR,2],[SPACE, 1],[BAR,2],[SPACE, 1]],
-                            /* ` */"64": [[BAR,1],[SPACE, 1],[BAR,1],[SPACE, 4],[BAR,2],[SPACE, 2]],
-                            /* a */"65": [[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 4]],
-                            /* c */"67": [[BAR,1],[SPACE, 4],[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 2]],
-                            /* f */"70": [[BAR,1],[SPACE, 1],[BAR,2],[SPACE, 4],[BAR,1],[SPACE, 2]],
-                            /* k */"75": [[BAR,2],[SPACE, 4],[BAR,1],[SPACE, 2],[BAR,1],[SPACE, 1]],
-                            /* z */"90": [[BAR,2],[SPACE, 1],[BAR,4],[SPACE, 1],[BAR,2],[SPACE, 1]],
-                            /* ~ */"94": [[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 1]],
-                            /* DEL */"95": [[BAR,1],[SPACE, 1],[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 3]],
-                            /* SHIFT_AB */"98": [[BAR,4],[SPACE, 1],[BAR,1],[SPACE, 3],[BAR,1],[SPACE, 1]],
-                            /* Code C */"99": [[BAR,1],[SPACE, 1],[BAR,3],[SPACE, 1],[BAR,4],[SPACE, 1]],
-                            START: [[BAR,2],[SPACE, 1],[BAR,1],[SPACE, 2],[BAR,3],[SPACE, 2]],
-                            STOP: [[BAR,2],[SPACE, 3],[BAR,3],[SPACE, 1],[BAR,1],[SPACE, 1],[BAR, 2]]
+                        "13": [1, 2, 2, 1, 3, 2],
+                        "16": [1, 2, 3, 1, 2, 2],
+                        "19": [2, 2, 1, 1, 3, 2],
+                        "23": [3, 1, 2, 1, 3, 1],
+                        "28": [3, 2, 2, 1, 1, 2],
+                        "29": [3, 2, 2, 2, 1, 1],
+                        "32": [2, 3, 2, 1, 2, 1],
+                        "33": [1, 1, 1, 3, 2, 3],
+                        "34": [1, 3, 1, 1, 2, 3],
+                        "35": [1, 3, 1, 3, 2, 1],
+                        "36": [1, 1, 2, 3, 1, 3],
+                        "37": [1, 3, 2, 1, 1, 3],
+                        "40": [2, 3, 1, 1, 1, 3],
+                        "43": [1, 1, 2, 3, 3, 1],
+                        "44": [1, 3, 2, 1, 3, 1],
+                        "45": [1, 1, 3, 1, 2, 3],
+                        "49": [2, 1, 1, 3, 3, 1],
+                        "51": [2, 1, 3, 1, 1, 3],
+                        "52": [2, 1, 3, 3, 1, 1],
+                        "56": [3, 3, 1, 1, 2, 1],
+                        "58": [3, 1, 2, 3, 1, 1],
+                        "62": [4, 3, 1, 1, 1, 1],
+                        "63": [1, 1, 1, 2, 2, 4],
+                        "64": [1, 1, 1, 4, 2, 2],
+                        "65": [1, 2, 1, 1, 2, 4],
+                        "66": [1, 2, 1, 4, 2, 1],
+                        "67": [1, 4, 1, 1, 2, 2],
+                        "70": [1, 1, 2, 4, 1, 2],
+                        "74": [1, 4, 2, 2, 1, 1],
+                        "75": [2, 4, 1, 2, 1, 1],
+                        "81": [1, 2, 1, 1, 4, 2],
+                        "84": [1, 2, 4, 1, 1, 2],
+                        "85": [1, 2, 4, 2, 1, 1],
+                        "86": [4, 1, 1, 2, 1, 2],
+                        "90": [2, 1, 4, 1, 2, 1],
+                        "91": [4, 1, 2, 1, 2, 1],
+                        "94": [1, 3, 1, 1, 4, 1],
+                        "95": [1, 1, 4, 1, 1, 3],
+                        "98": [4, 1, 1, 3, 1, 1],
+                        "99": [1, 1, 3, 1, 4, 1],
+                        "09": [2, 2, 1, 2, 1, 3],
+                        "08": [1, 3, 2, 2, 1, 2],
+                        "07": [1, 2, 2, 3, 1, 2],
+                        "03": [1, 2, 1, 2, 2, 3],
+                        "02": [2, 2, 2, 2, 2, 1],
+                        "00": [2, 1, 2, 2, 2, 2],
+                        "START": [2, 1, 1, 2, 3, 2],
+                        "STOP": [2, 3, 3, 1, 1, 1, 2]
                     };
 
                 function calculateCheckSum(value){
@@ -85,7 +84,7 @@
                 function generateResult(value, checkValue, options){
                     var expectedResult = [];
                     if(options.quietZoneLength){
-                        expectedResult.push([SPACE, options.quietZoneLength]);
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     expectedResult.pushArray(characters.START);
@@ -100,7 +99,7 @@
                     expectedResult.pushArray(characters.STOP);
 
                     if(options.quietZoneLength){
-                        expectedResult.push([SPACE, options.quietZoneLength]);
+                        expectedResult.push(options.quietZoneLength);
                     }
 
                     return expectedResult;
