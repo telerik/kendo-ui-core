@@ -453,6 +453,7 @@ kendo_module({
         init: function(listView) {
             this.element = $('<li class="endless-scroll-loading"></li>').appendTo(listView.element);
             this._loadIcon = $('<span style="display:none" class="km-icon"></span>').appendTo(this.element);
+            $('<span class="km-loading-left"></span><span class="km-loading-right"></span>').appendTo(this.element);
             this.height = this.element.outerHeight(true);
         },
 
@@ -479,8 +480,9 @@ kendo_module({
             this._loadWrapper = $('<span class="km-load-more"></span>');
             this._loadIcon = $('<span style="display:none" class="km-icon"></span>');
             this._loadButton = $('<a class="km-load">' + listView.options.loadMoreText + '</a>').hide();
+            this._helpers = $('<span class="km-loading-left"></span><span class="km-loading-right"></span>');
 
-            this._loadWrapper.append(this._loadIcon).append(this._loadButton);
+            this._loadWrapper.append(this._loadIcon).append(this._loadButton).append(this._helpers);
 
             this.element = $('<li class="press-to-load-more"></li>').append(this._loadWrapper).appendTo(listView.element);
 
