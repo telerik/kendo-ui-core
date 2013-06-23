@@ -1180,7 +1180,7 @@ kendo_module({
             axis.notes = [];
 
             for (i = 0; i < notes.length; i++) {
-                item = notes[i];
+                item = deepExtend({}, options.noteDefaults, notes[i]);
                 note = new Note(item);
                 if (note.options.visible) {
                     if (defined(note.options.position)) {
@@ -1573,13 +1573,7 @@ kendo_module({
 
         options: {
             icon: {
-                color: "red",
                 zIndex: 1,
-                border: {
-                    color: "red",
-                    width: 2
-                },
-                background: "red",
                 padding: 3,
                 size: 1,
                 visible: true
@@ -1592,11 +1586,9 @@ kendo_module({
                 vAlign: CENTER
             },
             connector: {
-                distance: 10,
-                color: "green",
-                width: 1,
                 visible: true,
-                zIndex: 2
+                zIndex: 2,
+                color: "fff"
             },
             visible: true
         },
