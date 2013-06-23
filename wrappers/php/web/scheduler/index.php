@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = new DataSourceResult('sqlite:../../sample.db');
 
     echo json_encode($result->read('Tasks', array('TaskID', 'Title', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', Start) as Start', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', End) as End', 'IsAllDay',
-'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException'), $request), JSON_NUMERIC_CHECK);
+'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'OwnerID'), $request), JSON_NUMERIC_CHECK);
 
     exit;
 }
@@ -66,6 +66,10 @@ $recurrenceRuleField->from('RecurrenceRule');
 $recurrenceExceptionField = new \Kendo\Data\DataSourceSchemaModelField('recurrenceException');
 $recurrenceIdField->from('RecurrenceException');
 
+$ownerIdField = new \Kendo\Data\DataSourceSchemaModelField('ownerId');
+$ownerIdField->from('OwnerID')
+        ->defaultValue(1);
+
 $model->id('taskID')
     ->addField($taskIDField)
     ->addField($titleField)
@@ -75,6 +79,7 @@ $model->id('taskID')
     ->addField($recurrenceIdField)
     ->addField($recurrenceRuleField)
     ->addField($recurrenceExceptionField)
+    ->addField($ownerIdField)
     ->addField($isAllDayField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
@@ -85,11 +90,29 @@ $schema->data('data')
 $dataSource = new \Kendo\Data\DataSource();
 
 $dataSource->transport($transport)
-    ->schema($schema);
+    ->schema($schema)
+    ->addFilterItem(array(
+        'logic' => 'or',
+        'filters' => array(
+            array('field' => 'ownerId', 'operator' => 'eq', 'value' => 1),
+            array('field' => 'ownerId', 'operator' => 'eq', 'value' => 2),
+        )
+    ));
+
+$resource = new \Kendo\UI\SchedulerResource();
+$resource->field('ownerId')
+    ->title('Owner')
+    ->dataSource(array(
+        array('text'=> 'Alex', 'value' => 1, 'color' => '#ef701d'),
+        array('text'=> 'Bob', 'value' => 2, 'color' => '#5fb1f7'),
+        array('text'=> 'Charlie', 'value' => 3, 'color' => '#35a964')
+    ));
 
 $scheduler = new \Kendo\UI\Scheduler('scheduler');
 $scheduler->timezone("Etc/UTC")
         ->date(new DateTime('2013/6/13'))
+        ->height(600)
+        ->addResource($resource)
         ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')),
             array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda')
         ->dataSource($dataSource);
@@ -105,6 +128,29 @@ $scheduler->timezone("Etc/UTC")
 <?php
 echo $scheduler->render();
 ?>
+
+<script>
+    $("#people :checkbox").change(function(e) {
+        var checked = $.map($("#people :checked"), function(checkbox) {
+            return parseInt($(checkbox).val());
+        });
+
+        var filter = {
+            logic: "or",
+            filters: $.map(checked, function(value) {
+                return {
+                    operator: "eq",
+                    field: "ownerId",
+                    value: value
+                };
+            })
+        };
+
+        var scheduler = $("#scheduler").data("kendoScheduler");
+
+        scheduler.dataSource.filter(filter);
+    });
+</script>
 
 <style scoped>
     #people {
