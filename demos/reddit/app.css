@@ -6,10 +6,6 @@
     font-size: 11px;
     display: table;
     width: 100%;
-    background: #f0f0f0;
-    color: #808080;
-    border-top: 1px solid #fafafa;
-    border-bottom: 1px solid #e3e3e3;
     font-weight: normal;
     padding: 5px;
 }
@@ -23,6 +19,11 @@
     display: table-cell;
     vertical-align: top;
     padding-bottom: .5em;
+}
+
+.item-summary a
+{
+    color: #10c4b2;
 }
 
 .item-thumb {
@@ -49,7 +50,7 @@
     display: inline-block;
 }
 
-#aww li {
+#aww li:not(.press-to-load-more) {
     padding: 0;
 }
 
