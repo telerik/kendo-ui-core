@@ -85,42 +85,20 @@
     </div>
 
     <script>
-        var editor = $("#comment")
+        var editor;
+
+        function showHTML() {
+            $("#content").text(editor.value());
+        }
+
+        editor = $("#comment")
             .html("<p>foo bar baz</p>")
             .kendoEditor({
-                tools: [
-                    "bold", "italic", "createLink", "unlink", "insertImage",
-
-                    { name: "formatting", items: [
-                        // convert current block to paragraph and remove class
-                        { text: "Paragraph", tag: "p" },
-
-                        // convert current block to h1 and remove class
-                        { text: "Heading 1", tag: "h1" },
-
-                        // convert current block to h1 and set class to section
-                        { text: "Heading 1 section", tag: "h1", className: "section" },
-
-                        // convert current block to h2 and remove class
-                        { text: "Heading 2", tag: "h2" },
-
-                        // convert current block to h3 and remove class
-                        { text: "Heading 3", tag: "h3" },
-
-                        // wrap selected text in strong.note, available only in headers
-                        { text: "Title note", tag: "strong", className: "note", context: "h1,h2,h3,h4,h5,h6" },
-
-                        // wrap selected text in span.highlight
-                        { text: "Highlight text", className: "highlight" }
-
-                    ] }
-                ],
-                select: function(e) {
-                    $("#content").text(this.value());
-                }
+                select: showHTML
             }).data("kendoEditor");
 
-        $("#content").text(editor.value());
+        showHTML();
+
     </script>
 </body>
 </html>
