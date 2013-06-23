@@ -19,14 +19,9 @@
         }
 
         /// <summary>
-        /// Sets the allDayEventTemplate option.
+        /// The template used to render the "all day" scheduler events.
         /// </summary>
-        /// <param name="allDayEventTemplate">The allDayEventTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="allDayEventTemplate">The allDayEventTemplate</param>
         public ISchedulerViewBuilder AllDayEventTemplate(string allDayEventTemplate)
         {
             resource.AllDayEventTemplate = allDayEventTemplate;
@@ -35,14 +30,9 @@
         }
 
         /// <summary>
-        /// Sets the allDayEventTemplate option.
+        /// The Id of the template used to render the "all day" scheduler events.
         /// </summary>
-        /// <param name="allDayEventTemplateId">The allDayEventTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="allDayEventTemplateId">The allDayEventTemplateId</param>
         public ISchedulerViewBuilder AllDayEventTemplateId(string allDayEventTemplateId)
         {
             resource.AllDayEventTemplateId = allDayEventTemplateId;
@@ -51,14 +41,9 @@
         }
 
         /// <summary>
-        /// Sets the allDaySlot option.
+        /// If set to true the scheduler will display a slot for "all day" events. Default value is true.
         /// </summary>
-        /// <param name="allDaySlot">The allDaySlot.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="allDaySlot">The allDaySlot</param>
         public ISchedulerViewBuilder AllDaySlot(bool allDaySlot)
         {
             resource.AllDaySlot = allDaySlot;
@@ -67,14 +52,9 @@
         }
 
         /// <summary>
-        /// Sets the dateHeaderTemplate option.
+        /// The template used to render the date header cells.
         /// </summary>
-        /// <param name="dateHeaderTemplate">The dateHeaderTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="dateHeaderTemplate">The dateHeaderTemplate</param>
         public ISchedulerViewBuilder DateHeaderTemplate(string dateHeaderTemplate)
         {
             resource.DateHeaderTemplate = dateHeaderTemplate;
@@ -83,14 +63,9 @@
         }
 
         /// <summary>
-        /// Sets the dateHeaderTemplate option.
+        /// The Id of the template used to render the date header cells.
         /// </summary>
-        /// <param name="dateHeaderTemplateId">The dateHeaderTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="dateHeaderTemplateId">The dateHeaderTemplateId</param>
         public ISchedulerViewBuilder DateHeaderTemplateId(string dateHeaderTemplateId)
         {
             resource.DateHeaderTemplateId = dateHeaderTemplateId;
@@ -99,14 +74,9 @@
         }
 
         /// <summary>
-        /// Sets the majorTick option.
+        /// The number of minutes represented by a major tick.
         /// </summary>
-        /// <param name="majorTick">The majorTick.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="majorTick">The majorTick</param>
         public ISchedulerViewBuilder MajorTick(int majorTick)
         {
             resource.MajorTick = majorTick;
@@ -115,14 +85,9 @@
         }
 
         /// <summary>
-        /// Sets the majorTimeHeaderTemplate option.
+        /// The template used to render the major ticks.
         /// </summary>
-        /// <param name="majorTimeHeaderTemplate">The majorTimeHeaderTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="majorTimeHeaderTemplate">The majorTimeHeaderTemplate</param>
         public ISchedulerViewBuilder MajorTimeHeaderTemplate(string majorTimeHeaderTemplate)
         {
             resource.MajorTimeHeaderTemplate = majorTimeHeaderTemplate;
@@ -131,14 +96,9 @@
         }
 
         /// <summary>
-        /// Sets the majorTimeHeaderTemplate option.
+        /// The Id of the template used to render the major ticks.
         /// </summary>
-        /// <param name="majorTimeHeaderTemplateId">The majorTimeHeaderTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="majorTimeHeaderTemplateId">The majorTimeHeaderTemplateId</param>
         public ISchedulerViewBuilder MajorTimeHeaderTemplateId(string majorTimeHeaderTemplateId)
         {
             resource.MajorTimeHeaderTemplateId = majorTimeHeaderTemplateId;
@@ -147,14 +107,9 @@
         }
 
         /// <summary>
-        /// Sets the minorTickCount option.
+        /// The number of time slots to display per major tick.
         /// </summary>
-        /// <param name="minorTickCount">The minorTickCount.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="minorTickCount">The minorTickCount</param>
         public ISchedulerViewBuilder MinorTickCount(int minorTickCount)
         {
             resource.MinorTickCount = minorTickCount;
@@ -163,14 +118,9 @@
         }
 
         /// <summary>
-        /// Sets the minorTimeHeaderTemplate option.
+        /// The template used to render the minor ticks.
         /// </summary>
-        /// <param name="minorTimeHeaderTemplate">The minorTimeHeaderTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="minorTimeHeaderTemplate">The minorTimeHeaderTemplate</param>
         public ISchedulerViewBuilder MinorTimeHeaderTemplate(string minorTimeHeaderTemplate)
         {
             resource.MinorTimeHeaderTemplate = minorTimeHeaderTemplate;
@@ -179,14 +129,9 @@
         }
 
         /// <summary>
-        /// Sets the minorTimeHeaderTemplate option.
+        /// The Id of the template used to render the minor ticks.
         /// </summary>
-        /// <param name="minorTimeHeaderTemplateId">The minorTimeHeaderTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="minorTimeHeaderTemplateId">The minorTimeHeaderTemplateId</param>
         public ISchedulerViewBuilder MinorTimeHeaderTemplateId(string minorTimeHeaderTemplateId)
         {
             resource.MinorTimeHeaderTemplateId = minorTimeHeaderTemplateId;

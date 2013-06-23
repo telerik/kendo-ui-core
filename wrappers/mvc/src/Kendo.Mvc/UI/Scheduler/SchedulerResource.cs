@@ -26,6 +26,8 @@
             Multiple = false;
 
             DataSource = new DataSource();
+
+            ValuePrimitive = true;
         }
 
         public DataSource DataSource
@@ -34,17 +36,47 @@
             private set;
         }
 
-        public string Title { get; set; }
+        public string Title 
+        { 
+            get; 
+            set;
+        }
         
-        public string Field { get; set; } 
+        public string Field 
+        { 
+            get; 
+            set; 
+        } 
         
-        public bool Multiple { get; set; }
+        public bool Multiple
+        { 
+            get;
+            set; 
+        }
 
-        public string DataTextField { get; set; }
+        public string DataTextField 
+        { 
+            get; 
+            set; 
+        }
 
-        public string DataValueField { get; set; }
+        public string DataValueField 
+        { 
+            get; 
+            set; 
+        }
 
-        public string DataColorField { get; set; } 
+        public string DataColorField 
+        { 
+            get; 
+            set; 
+        }
+
+        public bool ValuePrimitive 
+        { 
+            get; 
+            set; 
+        }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -82,6 +114,11 @@
             if (!string.IsNullOrEmpty(DataColorField))
             {
                 json["dataColorField"] = DataColorField;
+            }
+
+            if (ValuePrimitive != true)
+            {
+                json["valuePrimitive"] = ValuePrimitive;
             }
         }
     }

@@ -30,6 +30,12 @@ using System;
             Resources = new List<SchedulerResource<TModel>>();
 
             Views = new List<SchedulerViewBase>();
+
+            AllDaySlot = true;
+
+            MajorTick = 60;
+
+            MinorTickCount = 2;
         }
 
         public DataSource DataSource
@@ -75,6 +81,85 @@ using System;
         }
 
         public string EventTemplateId
+        {
+            get;
+            set;
+        }
+
+        public string AllDayEventTemplate
+        { 
+            get;
+            set; 
+        }
+
+        public string AllDayEventTemplateId
+        {
+            get;
+            set;
+        }
+
+        public bool AllDaySlot
+        {
+            get;
+            set;
+        }
+
+        public string DateHeaderTemplate
+        {
+            get;
+            set;
+        }
+
+        public string DateHeaderTemplateId
+        {
+            get;
+            set;
+        }
+
+        public int MajorTick
+        {
+            get;
+            set;
+        }
+
+        public string MajorTimeHeaderTemplate
+        {
+            get;
+            set;
+        }
+
+        public string MajorTimeHeaderTemplateId
+        {
+            get;
+            set;
+        }
+
+        public int MinorTickCount
+        {
+            get;
+            set;
+        }
+
+        public string MinorTimeHeaderTemplate
+        {
+            get;
+            set;
+        }
+
+        public string MinorTimeHeaderTemplateId
+        {
+            get;
+            set;
+        }
+
+        public string Timezone
+        {
+            get;
+            set;
+        }
+
+        //default valiue == 0?
+        public int? Width
         {
             get;
             set;
@@ -153,6 +238,71 @@ using System;
             if (!string.IsNullOrEmpty(EventTemplateId))
             {
                 options["eventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, EventTemplateId) };      
+            }
+
+            if (!string.IsNullOrEmpty(AllDayEventTemplate))
+            {
+                options["allDayEventTemplate"] = AllDayEventTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(AllDayEventTemplateId))
+            {
+                options["allDayEventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, AllDayEventTemplateId) };
+            }
+
+            if (!AllDaySlot)
+            {
+                options["allDaySlot"] = AllDaySlot;
+            }
+
+            if (!string.IsNullOrEmpty(DateHeaderTemplate))
+            {
+                options["dateHeaderTemplate"] = DateHeaderTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(DateHeaderTemplateId))
+            {
+                options["dateHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, DateHeaderTemplateId) };
+            }
+
+            if (MajorTick != 60)
+            {
+                options["majorTick"] = MajorTick;
+            }
+
+            if (!string.IsNullOrEmpty(MajorTimeHeaderTemplate))
+            {
+                options["majorTimeHeaderTemplate"] = MajorTimeHeaderTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(MajorTimeHeaderTemplateId))
+            {
+                options["majorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MajorTimeHeaderTemplateId) };
+            }
+
+            if (!string.IsNullOrEmpty(MinorTimeHeaderTemplate))
+            {
+                options["minorTimeHeaderTemplate"] = MinorTimeHeaderTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(MinorTimeHeaderTemplateId))
+            {
+                options["minorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MinorTimeHeaderTemplateId) };
+            }
+
+            if (MinorTickCount != 2)
+            {
+                options["minorTickCount"] = MinorTickCount;
+            }
+
+            if (!string.IsNullOrEmpty(Timezone))
+            {
+                options["timezone"] = Timezone;
+            }
+
+            if (Width != null)
+            {
+                options["width"] = Width;
             }
 
             if (Resources.Count > 0)

@@ -48,7 +48,6 @@
             {
                 json["confirmation"] = Confirmation;
             }
-
         }
     }
 }

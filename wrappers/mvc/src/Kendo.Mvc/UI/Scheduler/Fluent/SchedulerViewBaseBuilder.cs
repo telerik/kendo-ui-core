@@ -18,7 +18,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SchedulerViewDayBuilder"/> class.
         /// </summary>
-        /// <param name="resource">The resource.</param>
+        /// <param name="resource">The resource</param>
         /// 
         public SchedulerViewBaseBuilder(T resource)
         {
@@ -26,12 +26,28 @@
         }
 
         /// <summary>
-        /// Sets the title option.
+        /// The user-friendly title of the view displayed by the scheduler.
         /// </summary>
-        /// <param name="title">The title.</param>
+        /// <param name="title">The title</param>
         /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///         });
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
         /// </code>
         /// </example>
         public ISchedulerViewBuilder Title(string title)
@@ -42,12 +58,30 @@
         }
 
         /// <summary>
-        /// Sets the startTime option.
+        /// The start time of the view. The scheduler will display events starting after the startTime.
         /// </summary>
-        /// <param name="starTime">The startTime.</param>
+        /// <param name="starTime">The startTime</param>
         /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.StartTime(new DateTime(2013, 6, 13, 10, 00, 00));
+        ///             dayView.EndTime(new DateTime(2013, 6, 13, 23, 00, 00));
+        ///         });
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
         /// </code>
         /// </example>
         public ISchedulerViewBuilder StartTime(DateTime startTime)
@@ -58,12 +92,30 @@
         }
 
         /// <summary>
-        /// Sets the endTime option.
+        /// The end time of the view. The scheduler will display events ending before the endTime.
         /// </summary>
-        /// <param name="endTime">The endTime.</param>
+        /// <param name="endTime">The endTime</param>
         /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.StartTime(new DateTime(2013, 6, 13, 10, 00, 00));
+        ///             dayView.EndTime(new DateTime(2013, 6, 13, 23, 00, 00));
+        ///         });
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
         /// </code>
         /// </example>
         public ISchedulerViewBuilder EndTime(DateTime endTime)
@@ -74,14 +126,9 @@
         }
 
         /// <summary>
-        /// Sets the editable settings option.
+        /// Sets the editing configuration of the current scheduler view.
         /// </summary>
-        /// <param name="editableSettings">The editable settings.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="configurator">The lambda which configures the editing</param>
         public ISchedulerViewBuilder Editable(Action<SchedulerViewEditableSettingsBuilder> configurator)
         {
             resource.Editable = new SchedulerViewEditableSettings();
@@ -92,12 +139,30 @@
         }
 
         /// <summary>
-        /// Enable or disable the editable option.
+        /// If set to true the user would be able to create new scheduler events and modify or delete existing ones. Default value is true.
         /// </summary>
-        /// <param name="isEditable">The enable or disable the editable option.</param>
+        /// <param name="isEditable">The isEditable</param>
         /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.Editable(false);
+        ///         });
+        ///         views.AgendaView();
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
         /// </code>
         /// </example>
         public ISchedulerViewBuilder Editable(bool isEditable)
@@ -110,14 +175,9 @@
         }
 
         /// <summary>
-        /// Sets the eventTemplate option.
+        /// The template used by the view to render the scheduler events.
         /// </summary>
         /// <param name="eventTemplate">The eventTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
         public ISchedulerViewBuilder EventTemplate(string eventTemplate)
         {
             resource.EventTemplate = eventTemplate;
@@ -126,12 +186,43 @@
         }
 
         /// <summary>
-        /// Sets the selectedDateFormat option.
+        /// The Id of the template used by the view to render the scheduler events.
+        /// </summary>
+        /// <param name="eventTemplateId">The eventTemplateId</param>
+        public ISchedulerViewBuilder EventTemplateId(string eventTemplateId)
+        {
+            resource.EventTemplateId = eventTemplateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The format used to display the selected date. Uses kendo.format.
+        /// Contains two placeholders - "{0}" and "{1}" which represent the start and end date displayed by the view.
         /// </summary>
         /// <param name="selectedDateFormat">The selectedDateFormat.</param>
         /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.Editable(false);
+        ///             dayView.SelectedDateFormat(&quot;{0:dd-MM-yyyy}&quot;);
+        ///         });
+        ///         views.AgendaView();
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
         /// </code>
         /// </example>
         public ISchedulerViewBuilder SelectedDateFormat(string selectedDateFormat)

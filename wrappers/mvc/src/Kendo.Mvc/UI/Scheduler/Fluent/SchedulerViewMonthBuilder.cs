@@ -19,14 +19,9 @@
         }
 
         /// <summary>
-        /// Sets the dayTemplate option.
+        /// The template used to render the day slots in month view.
         /// </summary>
-        /// <param name="dayTemplate">The dayTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="dayTemplate">The dayTemplate</param>
         public ISchedulerViewBuilder DayTemplate(string dayTemplate)
         {
             resource.DayTemplate = dayTemplate;
@@ -35,14 +30,9 @@
         }
 
         /// <summary>
-        /// Sets the dayTemplate option.
+        /// The Id of the template used to render the day slots in month view.
         /// </summary>
-        /// <param name="dayTemplateId">The dayTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="dayTemplateId">The dayTemplateId</param>
         public ISchedulerViewBuilder DayTemplateId(string dayTemplateId)
         {
             resource.DayTemplateId = dayTemplateId;
@@ -51,14 +41,9 @@
         }
 
         /// <summary>
-        /// Sets the eventHeight option.
+        /// The height of the scheduler event rendered in month view.
         /// </summary>
-        /// <param name="eventHeight">The eventHeight.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="eventHeight">The eventHeight</param>
         public ISchedulerViewBuilder EventHeight(int eventHeight)
         {
             resource.EventHeight = eventHeight;

@@ -20,12 +20,16 @@
         }
 
         /// <summary>
-        /// Configures the Scheduler Date
+        /// The current date of the scheduler. Used to determine the period which is displayed by the widget.
         /// </summary>
-        /// <param name="date">The Date.</param>
+        /// <param name="date">The Date</param>
         /// <example>
-        /// <code lang="CS">
-        /// //CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .BindTo(Model)
+        /// )
         /// </code>
         /// </example>
         public SchedulerBuilder<TModel> Date(DateTime? date)
@@ -36,12 +40,17 @@
         }
 
         /// <summary>
-        /// Configures the Scheduler StartTime
+        /// The start time of the week and day views. The scheduler will display events starting after the startTime.
         /// </summary>
-        /// <param name="startTime">The StartTime.</param>
+        /// <param name="startTime">The startTime.</param>
         /// <example>
-        /// <code lang="CS">
-        /// //CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+        ///     .BindTo(Model)
+        /// )
         /// </code>
         /// </example>
         public SchedulerBuilder<TModel> StartTime(DateTime? startTime)
@@ -52,12 +61,17 @@
         }
 
         /// <summary>
-        /// Configures the Scheduler EndTime
+        /// The end time of the week and day views. The scheduler will display events ending before the endTime.
         /// </summary>
-        /// <param name="endTime">The EndTime.</param>
+        /// <param name="endTime">The endTime.</param>
         /// <example>
-        /// <code lang="CS">
-        /// //CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+        ///     .BindTo(Model)
+        /// )
         /// </code>
         /// </example>
         public SchedulerBuilder<TModel> EndTime(DateTime? endTime)
@@ -68,12 +82,17 @@
         }
 
         /// <summary>
-        /// Configures the Scheduler Height
+        /// The height of the widget.
         /// </summary>
-        /// <param name="height">The Height.</param>
+        /// <param name="height">The height.</param>
         /// <example>
-        /// <code lang="CS">
-        /// //CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Height(600)
+        ///     .BindTo(Model)
+        /// )
         /// </code>
         /// </example>
         public SchedulerBuilder<TModel> Height(int? height)
@@ -84,12 +103,33 @@
         }
 
         /// <summary>
-        /// Configures the Scheduler EventTemplate
+        /// The template used to render the scheduler events.
         /// </summary>
-        /// <param name="eventTemplate">The EventTemplate.</param>
+        /// <param name="eventTemplate">The eventTemplate.</param>
         /// <example>
-        /// <code lang="CS">
-        /// //CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        /// 	.Name(&quot;scheduler&quot;)
+        /// 	.Date(new DateTime(2013, 6, 13))
+        /// 	.StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+        /// 	.EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+        /// 	.Height(600)
+        /// 	.EventTemplate(
+        /// 		&quot;&lt;div style='color:white'&gt;&quot; +
+        /// 			&quot;&lt;img src='&quot; + Url.Content(&quot;~/Content/web/scheduler/&quot;) + &quot;#= Image #' style='float:left'&gt;&quot; +
+        /// 			&quot;&lt;p&gt;&quot; +
+        /// 				&quot;#: kendo.toString(Start, 'hh:mm') # - #: kendo.toString(End, 'hh:mm') #&quot; +
+        /// 			&quot;&lt;/p&gt;&quot; +
+        /// 			&quot;&lt;h3&gt;#: title #&lt;/h3&gt;&quot; +
+        /// 				&quot;&lt;a href='#= Imdb #' style='color:white'&gt;Movie in IMDB&lt;/a&gt;&quot; +
+        /// 		&quot;&lt;/div&gt;&quot;)
+        /// 	.Views(views =&gt;
+        /// 		{
+        /// 			views.DayView();
+        /// 			views.AgendaView();
+        /// 		})
+        /// 	.BindTo(Model)
+        /// )
         /// </code>
         /// </example>
         public SchedulerBuilder<TModel> EventTemplate(string eventTemplate)
@@ -100,12 +140,25 @@
         }
 
         /// <summary>
-        /// Configures the Scheduler EventTemplateId
+        /// The Id of the template used to render the scheduler events.
         /// </summary>
-        /// <param name="eventTemplateId">The EventTemplateId.</param>
+        /// <param name="eventTemplateId">The eventTemplateId</param>
         /// <example>
-        /// <code lang="CS">
-        /// //CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        /// 	.Name(&quot;scheduler&quot;)
+        /// 	.Date(new DateTime(2013, 6, 13))
+        /// 	.StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+        /// 	.EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+        /// 	.Height(600)
+        /// 	.EventTemplateId("customEventTemplate")
+        /// 	.Views(views =&gt;
+        /// 		{
+        /// 			views.DayView();
+        /// 			views.AgendaView();
+        /// 		})
+        /// 	.BindTo(Model)
+        /// )
         /// </code>
         /// </example>
         public SchedulerBuilder<TModel> EventTemplateId(string eventTemplateId)
@@ -116,12 +169,245 @@
         }
 
         /// <summary>
-        /// Sets the editable settings option.
+        /// The template used to render the "all day" scheduler events.
         /// </summary>
-        /// <param name="editableSettings">The editable settings.</param>
+        /// <param name="allDayEventTemplate">The allDayEventTemplate</param>
+        public SchedulerBuilder<TModel> AllDayEventTemplate(string allDayEventTemplate)
+        {
+            Component.AllDayEventTemplate = allDayEventTemplate;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the "all day" scheduler events.
+        /// </summary>
+        /// <param name="allDayEventTemplateId">The allDayEventTemplateId</param>
+        public SchedulerBuilder<TModel> AllDayEventTemplateId(string allDayEventTemplateId)
+        {
+            Component.AllDayEventTemplateId = allDayEventTemplateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// If set to true the scheduler will display a slot for "all day" events.
+        /// </summary>
+        /// <param name="allDaySlot">The allDaySlot.</param>
+        public SchedulerBuilder<TModel> AllDaySlot(bool allDaySlot)
+        {
+            Component.AllDaySlot = allDaySlot;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template used to render the date header cells.
+        /// </summary>
+        /// <param name="dateHeaderTemplate">The dateHeaderTemplate</param>
+        public SchedulerBuilder<TModel> DateHeaderTemplate(string dateHeaderTemplate)
+        {
+            Component.DateHeaderTemplate = dateHeaderTemplate;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the date header cells.
+        /// </summary>
+        /// <param name="dateHeaderTemplateId">The dateHeaderTemplateId</param>
         /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        /// 	.Name(&quot;scheduler&quot;)
+        /// 	.Date(new DateTime(2013, 6, 13))
+        /// 	.StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+        /// 	.EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+        /// 	.Height(600)
+        /// 	.AllDayEventTemplateId("customAllDayTemplate")
+        /// 	.Views(views =&gt;
+        /// 		{
+        /// 			views.DayView();
+        /// 			views.AgendaView();
+        /// 		})
+        /// 	.BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> DateHeaderTemplateId(string dateHeaderTemplateId)
+        {
+            Component.DateHeaderTemplateId = dateHeaderTemplateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The number of minutes represented by a major tick.
+        /// </summary>
+        /// <param name="majorTick">The majorTick</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Height(600)
+        ///     .MajorTick(120)
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> MajorTick(int majorTick)
+        {
+            Component.MajorTick = majorTick;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template used to render the major ticks.
+        /// </summary>
+        /// <param name="majorTimeHeaderTemplate">The majorTimeHeaderTemplate</param>
+        public SchedulerBuilder<TModel> MajorTimeHeaderTemplate(string majorTimeHeaderTemplate)
+        {
+            Component.MajorTimeHeaderTemplate = majorTimeHeaderTemplate;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the major ticks.
+        /// </summary>
+        /// <param name="majorTimeHeaderTemplateId">The majorTimeHeaderTemplateId</param>
+        public SchedulerBuilder<TModel> MajorTimeHeaderTemplateId(string majorTimeHeaderTemplateId)
+        {
+            Component.MajorTimeHeaderTemplateId = majorTimeHeaderTemplateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The number of time slots to display per major tick.
+        /// </summary>
+        /// <param name="minorTickCount">The minorTickCount</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 7, 23))
+        ///     .Height(400)
+        ///     .MinorTickCount(1)
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> MinorTickCount(int minorTickCount)
+        {
+            Component.MinorTickCount = minorTickCount;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template used to render the minor ticks.
+        /// </summary>
+        /// <param name="minorTimeHeaderTemplate">The minorTimeHeaderTemplate</param>
+        public SchedulerBuilder<TModel> MinorTimeHeaderTemplate(string minorTimeHeaderTemplate)
+        {
+            Component.MinorTimeHeaderTemplate = minorTimeHeaderTemplate;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the minor ticks.
+        /// </summary>
+        /// <param name="minorTimeHeaderTemplateId">The minorTimeHeaderTemplateId</param>
+        public SchedulerBuilder<TModel> MinorTimeHeaderTemplateId(string minorTimeHeaderTemplateId)
+        {
+            Component.MinorTimeHeaderTemplateId = minorTimeHeaderTemplateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The timezone which the scheduler will use to display the scheduler appointment dates. By default the current system timezone is used. This is an acceptable default when the scheduler widget is bound to local array of events. It is advisable to specify a timezone if the scheduler is bound to a remote service. That way all users would see the same dates and times no matter their configured system timezone.
+        /// The complete list of the supported timezones is available in the List of IANA time zones Wikipedia page.
+        /// </summary>
+        /// <param name="timezone">The timezone</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Timezone(&quot;Europe/London&quot;)
+        ///     .Height(600)
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Timezone(string timezone)
+        {
+            Component.Timezone = timezone;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The width of the widget.
+        /// </summary>
+        /// <param name="width">The width</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Width(800)
+        ///     .Height(600)
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Width(int? width)
+        {
+            Component.Width = width;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the editing configuration of the scheduler.
+        /// </summary>
+        /// <param name="editableSettings">The lambda which configures the editing</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Editable(editable =&gt;
+        ///     {
+        ///         editable.Confirmation(false);
+        ///         editable.TemplateId(&quot;customEditTemplate&quot;);
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
         /// </code>
         /// </example>
         public SchedulerBuilder<TModel> Editable(Action<SchedulerEditableSettingsBuilder> configurator)
@@ -134,12 +420,20 @@
         }
 
         /// <summary>
-        /// Enable or disable the editable option.
+        /// If set to false the user would not be able to create new scheduler events and modify or delete existing ones.
         /// </summary>
-        /// <param name="isEditable">The enable or disable the editable option.</param>
+        /// <param name="isEditable">The isEditable</param>
         /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Editable(false)
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
         /// </code>
         /// </example>
         public SchedulerBuilder<TModel> Editable(bool isEditable)
@@ -152,11 +446,11 @@
         }
 
         /// <summary>
-        /// Configures the Scheduler Resources
+        /// Sets the resources configuration of the scheduler.
         /// </summary>
-        /// <param name="addResourceAction">The client resources action.</param>
+        /// <param name="addResourceAction">The lambda which configures the scheduler resources</param>
         /// <example>
-        /// <code lang="CS">
+        /// <code lang="Razor">
         /// @(Html.Kendo().Scheduler&lt;Task&gt;()
         ///    .Name(&quot;Scheduler&quot;)
         ///    .Resources(resource =&gt;
@@ -183,12 +477,20 @@
         }
 
         /// <summary>
-        /// Configures the Scheduler Views
+        /// Sets the views configuration of the scheduler.
         /// </summary>
-        /// <param name="addViewAction">The client views action.</param>
+        /// <param name="addViewAction">The lambda which configures the scheduler views</param>
         /// <example>
-        /// <code lang="CS">
-        /// //CODE EXAMPLE
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt; {
+        ///         views.DayView();
+        ///         views.AgendaView();
+        ///     })
+        ///     .BindTo(Model)
+        /// )
         /// </code>
         /// </example>
         public SchedulerBuilder<TModel> Views(Action<SchedulerViewFactory<TModel>> addViewAction)
@@ -201,16 +503,17 @@
         }
 
         /// <summary>
-        /// Configures the client-side events.
+        /// Sets the events configuration of the scheduler.
         /// </summary>
-        /// <param name="clientEventsAction">The client events action.</param>
+        /// <param name="clientEventsAction">The lambda which configures the scheduler events</param>
         /// <example>
-        /// <code lang="CS">
+        /// <code lang="Razor">
         ///  &lt;%= Html.Kendo().Scheduler&lt;Task&gt;()
         ///             .Name(&quot;Scheduler&quot;)
         ///             .Events(events =&gt;
         ///                 events.Remove(&quot;remove&quot;)
         ///             )
+        ///             .BindTo(Model)
         /// %&gt;
         /// </code>
         /// </example>
@@ -236,7 +539,7 @@
         ///        .Model(m =&gt; m.Id(f =&gt; f.TaskID))
         ///    )&gt;
         /// </code>
-        /// <code lang="Razor">
+         /// <code lang="Razor">
         /// @model IEnumerable&lt;Task&gt;
         /// @(Html.Kendo().Scheduler&lt;Task&gt;()
         ///    .Name(&quot;Scheduler&quot;)
@@ -258,7 +561,7 @@
         /// </summary>
         /// <param name="configurator">The DataSource configurator action.</param>
         /// <example>
-        /// <code lang="CS">
+        /// <code lang="ASPX">
         ///  &lt;%= Html.Kendo().Scheduler&lt;Task&gt;()
         ///             .Name("Scheduler")
         ///             .DataSource(source =&gt;

@@ -38,5 +38,10 @@
         {
             get;
         }
+
+        bool ValuePrimitive
+        {
+            get;
+        }
     }
 }

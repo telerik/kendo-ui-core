@@ -57,6 +57,71 @@
             get;
         }
 
+        string AllDayEventTemplate
+        {
+            get;
+        }
+
+        string AllDayEventTemplateId
+        {
+            get;
+        }
+
+        bool AllDaySlot
+        {
+            get;
+        }
+
+        string DateHeaderTemplate
+        {
+            get;
+        }
+
+        string DateHeaderTemplateId
+        {
+            get;
+        }
+
+        int MajorTick
+        {
+            get;
+        }
+
+        string MajorTimeHeaderTemplate
+        {
+            get;
+        }
+
+        string MajorTimeHeaderTemplateId
+        {
+            get;
+        }
+
+        int MinorTickCount
+        {
+            get;
+        }
+
+        string MinorTimeHeaderTemplate
+        {
+            get;
+        }
+
+        string MinorTimeHeaderTemplateId
+        {
+            get;
+        }
+
+        string Timezone
+        {
+            get;
+        }
+
+        int? Width
+        {
+            get;
+        }
+
         IList<SchedulerResource<TModel>> Resources
         {
             get;

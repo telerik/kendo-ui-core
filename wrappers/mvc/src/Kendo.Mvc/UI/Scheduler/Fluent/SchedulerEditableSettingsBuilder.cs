@@ -22,14 +22,9 @@
         }
 
         /// <summary>
-        /// Sets the create option.
+        /// If set to true the user can create new events. Creating is enabled by default.
         /// </summary>
-        /// <param name="create">The create.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="create">The create</param>
         public SchedulerEditableSettingsBuilder Create(bool create)
         {
             container.Create = create;
@@ -38,14 +33,9 @@
         }
 
         /// <summary>
-        /// Sets the destroy option.
+        /// If set to true the user can delete events from the view by clicking the "destroy" button. Deleting is enabled by default.
         /// </summary>
-        /// <param name="destroy">The destroy.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="destroy">The destroy</param>
         public SchedulerEditableSettingsBuilder Destroy(bool destroy)
         {
             container.Destroy = destroy;
@@ -54,14 +44,9 @@
         }
 
         /// <summary>
-        /// Sets the update option.
+        /// If set to true the user can update events. Updating is enabled by default.
         /// </summary>
-        /// <param name="update">The update.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="update">The update</param>
         public SchedulerEditableSettingsBuilder Update(bool update)
         {
             container.Update = update;
@@ -70,14 +55,9 @@
         }
 
         /// <summary>
-        /// Sets the template option.
+        /// The template which renders the editor.
         /// </summary>
-        /// <param name="template">The template.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="template">The template</param>
         public SchedulerEditableSettingsBuilder Template(string template)
         {
             container.Template = template;
@@ -86,14 +66,9 @@
         }
 
         /// <summary>
-        /// Sets the template option.
+        /// The Id of the template which renders the editor.
         /// </summary>
-        /// <param name="templateId">The templateId.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="templateId">The templateId</param>
         public SchedulerEditableSettingsBuilder TemplateId(string templateId)
         {
             container.TemplateId = templateId;
@@ -102,14 +77,9 @@
         }
 
         /// <summary>
-        /// Sets the confirmation option.
+        /// The text which the scheduler will display in a confirmation dialog when the user clicks the "destroy" button.
         /// </summary>
-        /// <param name="message">The confirmation.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="message">The message</param>
         public SchedulerEditableSettingsBuilder Confirmation(string message)
         {
             container.Confirmation = message;
@@ -118,14 +88,10 @@
         }
 
         /// <summary>
-        /// Sets the confirmation option.
+        /// If set to true the scheduler will display a confirmation dialog when the user clicks the "destroy" button. Confirmation dialog is enabled by default.
         /// </summary>
         /// <param name="enable">The confirmation.</param>
         /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
         public SchedulerEditableSettingsBuilder Confirmation(bool enable)
         {
             container.DisplayDeleteConfirmation = enable;

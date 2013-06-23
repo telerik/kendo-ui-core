@@ -43,6 +43,12 @@
             set;
         }
 
+        string EventTemplateId 
+        { 
+            get; 
+            set; 
+        }
+
         string SelectedDateFormat
         {
             get;

@@ -7,22 +7,58 @@
 
     public abstract class SchedulerViewBase : JsonObject, ISchedulerView
     {
-        public string Title { get; set; }
+        public string Title
+        { 
+            get; 
+            set; 
+        }
 
-        public DateTime? StartTime { get; set; }
+        public DateTime? StartTime
+        {
+            get;
+            set;
+        }
 
-        public DateTime? EndTime { get; set; }
+        public DateTime? EndTime
+        {
+            get;
+            set;
+        }
 
-        public SchedulerViewType Type { get; set; }
+        public SchedulerViewType Type
+        {
+            get;
+            set;
+        }
 
-        public SchedulerViewEditableSettings Editable { get; set; }
+        public SchedulerViewEditableSettings Editable
+        {
+            get;
+            set;
+        }
 
-        public string EventTemplate { get; set; }
+        public string EventTemplate
+        {
+            get;
+            set;
+        }
 
-        public string SelectedDateFormat { get; set; }
+        public string EventTemplateId
+        {
+            get;
+            set;
+        }
+
+        public string SelectedDateFormat
+        {
+            get;
+            set;
+        }
 
         protected void SerializeBaseOptions(IDictionary<string, object> json)
         {
+            var idPrefix = "#";
+
             if (!string.IsNullOrEmpty(Title))
             {
                 json["title"] = Title;
@@ -55,6 +91,11 @@
             if (!string.IsNullOrEmpty(EventTemplate))
             {
                 json["eventTemplate"] = EventTemplate;   
+            }
+
+            if (!string.IsNullOrEmpty(EventTemplateId))
+            {
+                json["eventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, EventTemplateId) };
             }
 
             if (!string.IsNullOrEmpty(SelectedDateFormat))

@@ -19,14 +19,9 @@
         }
 
         /// <summary>
-        /// Sets the eventDateTemplate option.
+        /// The template used by the agenda view to render the date of the scheduler events.
         /// </summary>
-        /// <param name="eventDateTemplate">The eventDateTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="eventDateTemplate">The eventDateTemplate</param>
         public ISchedulerViewBuilder EventDateTemplate(string eventDateTemplate)
         {
             resource.EventDateTemplate = eventDateTemplate;
@@ -35,14 +30,9 @@
         }
 
         /// <summary>
-        /// Sets the eventDateTemplate option.
+        /// The Id of the template used by the agenda view to render the date of the scheduler events.
         /// </summary>
-        /// <param name="eventDateTemplateId">The eventDateTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="eventDateTemplateId">The eventDateTemplateId</param>
         public ISchedulerViewBuilder EventDateTemplateId(string eventDateTemplateId)
         {
             resource.EventDateTemplateId = eventDateTemplateId;
@@ -51,14 +41,9 @@
         }
 
         /// <summary>
-        /// Sets the eventTimeTemplate option.
+        /// The template used by the agenda view to render the time of the scheduler events.
         /// </summary>
-        /// <param name="eventTimeTemplate">The eventTimeTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="eventTimeTemplate">The eventTimeTemplate</param>
         public ISchedulerViewBuilder EventTimeTemplate(string eventTimeTemplate)
         {
             resource.EventTimeTemplate = eventTimeTemplate;
@@ -67,14 +52,9 @@
         }
 
         /// <summary>
-        /// Sets the eventTimeTemplate option.
+        /// The Id of the template used by the agenda view to render the time of the scheduler events.
         /// </summary>
-        /// <param name="eventTimeTemplateId">The eventTimeTemplate.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  //TODO: CODE EXAMPLE
-        /// </code>
-        /// </example>
+        /// <param name="eventTimeTemplateId">The eventTimeTemplateId</param>
         public ISchedulerViewBuilder EventTimeTemplateId(string eventTimeTemplateId)
         {
             resource.EventTimeTemplateId = eventTimeTemplateId;
