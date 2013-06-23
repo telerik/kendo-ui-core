@@ -160,44 +160,42 @@ kendo_module({
 
             that.tools = deepExtend({}, kendo.ui.Editor.defaultTools);
 
-            if (kendo.ui.editor.Dom.name(options.editor.element[0]) !== "textarea") {
-                that.window = $(element)
-                    .wrap("<div class='editorToolbarWindow' />")
-                    .parent()
-                    .prepend("<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-move'></span></button>")
-                    .kendoWindow({
-                        title: false,
-                        resizable: false,
-                        draggable: {
-                            dragHandle: ".k-editortoolbar-dragHandle"
-                        },
-                        animation: {
-                            open: {
-                                effects: "fade:in"
-                            },
-                            close: {
-                                effects: "fade:out"
-                            }
-                        },
-                        minHeight: 42,
-                        visible: false,
-                        autoFocus: false,
-                        actions: []
-                    })
-                    .on("mousedown", function(e){
-                        if (!$(e.target).is(".k-icon")) {
-                            e.preventDefault();
-                        }
-                    })
-                    .data("kendoWindow");
+            if (options.popup) {
+                that._initPopup();
             }
-
-            that.bindTo(options.editor);
         },
 
         events: [
             "execute"
         ],
+
+        _initPopup: function() {
+            this.window = $(this.element)
+                .wrap("<div class='editorToolbarWindow' />")
+                .parent()
+                .prepend("<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-move' /></button>")
+                .kendoWindow({
+                    title: false,
+                    resizable: false,
+                    draggable: {
+                        dragHandle: ".k-editortoolbar-dragHandle"
+                    },
+                    animation: {
+                        open: { effects: "fade:in" },
+                        close: { effects: "fade:out" }
+                    },
+                    minHeight: 42,
+                    visible: false,
+                    autoFocus: false,
+                    actions: []
+                })
+                .on("mousedown", function(e){
+                    if (!$(e.target).is(".k-icon")) {
+                        e.preventDefault();
+                    }
+                })
+                .data("kendoWindow");
+        },
 
         items: function() {
             return this.element.children().find("> *, select");
@@ -548,14 +546,13 @@ kendo_module({
                 that.update();
             });
 
+            toolbarOptions = extend({}, that.options);
+            toolbarOptions.editor = that;
+
             if (type == "textarea") {
                 that._wrapTextarea();
 
                 toolbarContainer = that.wrapper.find(".k-editor-toolbar");
-
-                toolbarOptions = extend({}, that.options);
-                toolbarOptions.editor = that;
-                that.toolbar = new Toolbar(toolbarContainer[0], toolbarOptions);
 
                 if (element[0].id) {
                     toolbarContainer.attr("aria-controls", element[0].id);
@@ -563,12 +560,15 @@ kendo_module({
             } else {
                 that.element.addClass("k-widget k-editor k-editor-inline");
 
+                toolbarOptions.popup = true;
+
                 // TODO: this should create global toolbar, if it does not exist, and call its bindTo(this);
                 toolbarContainer = $('<ul class="k-editor-toolbar" role="toolbar" />').insertBefore(element);
-                toolbarOptions = extend({}, that.options);
-                toolbarOptions.editor = that;
-                that.toolbar = new Toolbar(toolbarContainer[0], toolbarOptions);
             }
+
+            that.toolbar = new Toolbar(toolbarContainer[0], toolbarOptions);
+
+            that.toolbar.bindTo(that);
 
             that._initializeContentElement(that);
 
