@@ -10,23 +10,23 @@
     var kendo = window.kendo,
         extend = $.extend,
         inArray = $.inArray,
-		isPlainObject = $.isPlainObject,
+        isPlainObject = $.isPlainObject,
         dataviz = kendo.dataviz,
         Widget = kendo.ui.Widget,
         Box2D = dataviz.Box2D,
         Text = dataviz.Text,
         DEFAULT_WIDTH = 300,
-		DEFAULT_HEIGHT = 100,
+        DEFAULT_HEIGHT = 100,
         DEFAULT_QUIETZONE_LENGTH = 10,
         numberRegex = /^\d+$/,
         alphanumericRegex = /^[a-z0-9]+$/i,
         InvalidCharacterErrorTemplate = "The '{0}' character is not valid for encoding {1}";
-		
+
     function getNext(value, index, count){
         return value.substring(index, index + count);
     }
 
-    var Encoding  = kendo.Class.extend({       
+    var Encoding  = kendo.Class.extend({
         init: function (options) {
             this.setOptions(options);
         },
@@ -34,7 +34,7 @@
             this.options = extend({}, this.options, options);
         },
         encode: function (value, width, height) {
-			var that = this;
+            var that = this;
             that.initValue(value, width, height);
             if(that.options.addQuietZone){
                 that.addQuietZone();
@@ -46,7 +46,7 @@
 
             return {
                 baseUnit: that.baseUnit,
-                pattern: that.pattern                
+                pattern: that.pattern
             };
         },
         options: {
@@ -71,7 +71,7 @@
     var code39Base = Encoding.extend({
         minBaseUnitLength: 0.7,
         addData: function(){
-			var that = this;
+            var that = this;
             var value  = that.value;
 
             that.addStart();
@@ -150,7 +150,7 @@
                 }
             },
             function(code){
-				var that = this,
+                var that = this,
                     result,
                     dataCharacterCode,
                     codes;
@@ -196,7 +196,7 @@
         maxRatio: 3,
         gapWidth: 1,
         initValue: function (value, width, height) {
-			var that = this;
+            var that = this;
             that.width = width;
             that.height = height;
             that.ratio = that.options.ratio || that.maxRatio;
@@ -208,7 +208,7 @@
             that.patternString = "";
         },
         prepareValues: function(){
-			var that = this;
+            var that = this;
             var minHeight = Math.max(0.15 * that.width, 24);
             if (that.height < minHeight) {
                 throw new Error("Insufficient Height");
@@ -224,9 +224,9 @@
             }
 
             that.pattern = that.pattern.concat(that.patternString.replace(/ratio/g, that.ratio).split(""));
-        },        
+        },
         setBaseUnit: function(){
-			var that = this;
+            var that = this;
             var characterLength = 3 * (that.ratio + 2),
                 checkSumLength = that.options.addCheckSum ? 1 : 0,
                 quietZoneLength = that.options.addQuietZone ? that.options.quietZoneLength : 0;
@@ -246,7 +246,7 @@
         pushCheckSum: function(){
             var that = this;
             that.checksum = that._getCheckValue();
-            
+
             this.addBase(this.characterMap[that._findCharacterByValue(that.checksum)]);
         },
         _getCheckValue: function(){
@@ -256,7 +256,7 @@
             this.addPattern(this.characterMap.START.pattern);
         },
         addPattern: function (pattern) {
-            for (var i = 0; i < pattern.length; i++) {                
+            for (var i = 0; i < pattern.length; i++) {
                  this.patternString+= this.patternMappings[pattern.charAt(i)];
             }
         },
@@ -319,9 +319,9 @@
 
     encodings.code39extended = encodings.code39.extend(code39ExtendedBase).extend({
         pushCheckSum: function(){
-			var that = this,
+            var that = this,
                 value = that._getCheckValue();
-                
+
             that.checksum = value;
             if(that.shiftValuesAsciiCodes[value]){
                 that.addExtended(that.shiftValuesAsciiCodes[value]);
@@ -345,7 +345,7 @@
         kCheckSumTotal: 15,
         checkSumMod: 47,
         initValue: function(value, width, height){
-			var that = this;
+            var that = this;
             that.value = value;
             that.width = width;
             that.height = height;
@@ -354,7 +354,7 @@
             that.dataLength = value.length;
         },
         prepareValues: function(){
-			var that = this;
+            var that = this;
             var minHeight = Math.max(0.15 * that.width, 24);
             if (that.height < minHeight) {
                 throw new Error("Insufficient Height");
@@ -367,7 +367,7 @@
             }
         },
         setBaseUnit: function(){
-			var that = this;
+            var that = this;
             var checkSumLength = that.options.addCheckSum ? 2 : 0,
                 quietZoneLength = that.options.addQuietZone ? that.options.quietZoneLength : 0;
             that.baseUnit = that.width / (9 * (that.dataLength + 2 + checkSumLength) + 2 * quietZoneLength + 1);
@@ -388,7 +388,7 @@
             var that = this,
                 checkValues = that._getCheckValues(),
                 charData;
-                
+
             that.checksum = checkValues.join("");
             for(var i = 0; i < checkValues.length; i++){
                 charData = this.characterMap[this._findCharacterByValue(checkValues[i])];
@@ -396,7 +396,7 @@
             }
         },
         _getCheckValues: function(){
-			var that = this,
+            var that = this,
                 values = that.values.reverse(),
                 wightedSum = 0,
                 cValue,
@@ -423,7 +423,7 @@
             var symbol,
                 value;
 
-            for(var i = 0; i < pattern.length; i++){                
+            for(var i = 0; i < pattern.length; i++){
                 value = parseInt(pattern.charAt(i));
                 this.pattern.push(value);
             }
@@ -487,12 +487,12 @@
 
     encodings.code93extended = encodings.code93.extend(code39ExtendedBase).extend({
         pushCheckSum: function(){
-			var that = this,
+            var that = this,
                 checkValues = that._getCheckValues(),
                 value;
-                
+
             that.checksum = checkValues.join("");
-            
+
             for(var i = 0; i < checkValues.length; i++){
                 value = checkValues[i];
                 if(that.shiftValuesAsciiCodes[value]){
@@ -533,7 +533,7 @@
         move: function(encodingState){
             var that = this,
                 idx = 0;
-                
+
             while(!that._moves[idx].call(that, encodingState) && idx < that._moves.length){
                 idx++;
             }
@@ -542,16 +542,16 @@
             var that = this,
                 states = that.states,
                 value = encodingState.value,
-                maxLength = value.length,                    
+                maxLength = value.length,
                 code;
-                
+
             if(inArray("C", states) >= 0){
                 var numberMatch = value.match(/\d{4,}/g);
                 if(numberMatch){
                     maxLength = value.indexOf(numberMatch[0]);
                 }
             }
-            
+
             while( (code = encodingState.value.charCodeAt(encodingState.index)) >= 0 && that.isCode(code) && encodingState.index < maxLength){
                 that.encoding.addPattern(that.getValue(code));
                 encodingState.index++;
@@ -747,7 +747,7 @@
             return result;
         }
     });
-    
+
     states128.FNC1 = state128.extend({
         key: "FNC1",
         startState: "C",
@@ -765,7 +765,7 @@
             return inArray(this.key, this.states) >= 0;
         },
         pushState: function(encodingState){
-			var that = this;
+            var that = this;
             var encoding = that.encoding,
                 value = encodingState.value.replace(/\s/g, ""),
                 regexSeparators = new RegExp("[" +  that.startAI + that.endAI + "]", "g"),
@@ -860,7 +860,7 @@
             throw new Error(kendo.format("'{0}' is not a supported Application Identifier"),id);
         },
         getBySeparator: function(value, index){
-			var that = this;
+            var that = this;
             var start = value.indexOf(that.startAI, index),
                 end = value.indexOf(that.endAI, start),
                 id = value.substring(start + 1,end),
@@ -983,7 +983,7 @@
            that.position = 1;
         },
         addData: function(){
-			var that = this,
+            var that = this,
                 encodingState = {
                     value: that.value,
                     index: 0,
@@ -1022,7 +1022,7 @@
         },
         addCheckSum: function(){
             var that = this;
-            
+
             that.checksum = this.checkSum % 103;
             that.addPattern(that.checksum);
         },
@@ -1034,7 +1034,7 @@
             this.baseUnit = this.width / (this.totalUnits + 2 * quietZoneLength);
         },
         addPattern: function(code){
-			var that = this;
+            var that = this;
             var pattern = that.characterMap[code].toString(),
                 symbol,
                 value;
@@ -1056,16 +1056,16 @@
         },
         characterMap: [
             212222,222122,222221,121223,121322,131222,122213,122312,132212,221213,
-			221312,231212,112232,122132,122231,113222,123122,123221,223211,221132,
-			221231,213212,223112,312131,311222,321122,321221,312212,322112,322211,
-			212123,212321,232121,111323,131123,131321,112313,132113,132311,211313,
-			231113,231311,112133,112331,132131,113123,113321,133121,313121,211331,
-			231131,213113,213311,213131,311123,311321,331121,312113,312311,332111,
-			314111,221411,431111,111224,111422,121124,121421,141122,141221,112214,
-			112412,122114,122411,142112,142211,241211,221114,413111,241112,134111,
-			111242,121142,121241,114212,124112,124211,411212,421112,421211,212141,
-			214121,412121,111143,111341,131141,114113,114311,411113,411311,113141,
-			114131,311141,411131,211412,211214,211232,2331112
+            221312,231212,112232,122132,122231,113222,123122,123221,223211,221132,
+            221231,213212,223112,312131,311222,321122,321221,312212,322112,322211,
+            212123,212321,232121,111323,131123,131321,112313,132113,132311,211313,
+            231113,231311,112133,112331,132131,113123,113321,133121,313121,211331,
+            231131,213113,213311,213131,311123,311321,331121,312113,312311,332111,
+            314111,221411,431111,111224,111422,121124,121421,141122,141221,112214,
+            112412,122114,122411,142112,142211,241211,221114,413111,241112,134111,
+            111242,121142,121241,114212,124112,124211,411212,421112,421211,212141,
+            214121,412121,111143,111341,131141,114113,114311,411113,411311,113141,
+            114131,311141,411131,211412,211214,211232,2331112
         ],
         STOP: 106,
         options: {
@@ -1095,14 +1095,14 @@
 
     var msiBase = Encoding.extend({
         initValue: function(value, width, height){
-			var that = this;
+            var that = this;
             that.pattern = [];
             that.value = value;
             that.checkSumLength = 0;
             that.width = width;
         },
         setBaseUnit: function(){
-			var that = this;
+            var that = this;
             var quietZoneLength = that.options.addQuietZone ? 2 * that.options.quietZoneLength : 0,
                 startStopLength = 7;
 
@@ -1110,7 +1110,7 @@
                     ( 12 * (that.value.length + that.checkSumLength) + quietZoneLength + startStopLength);
         },
         addData:  function(){
-			var that = this;
+            var that = this;
             var value = that.value;
             that.addPattern(that.START);
 
@@ -1138,12 +1138,12 @@
             }
         },
         addCheckSum: function(){
-			var that = this,
+            var that = this,
                 checkSumFunction = that.checkSums[that.checkSumType],
                 checkValues;
-            
+
             checkValues = checkSumFunction.call(that.checkSums, that.value);
-            
+
             that.checksum = checkValues.join("");
             for(var i = 0; i < checkValues.length; i++){
                 that.checkSumLength++;
@@ -1207,23 +1207,23 @@
         STOP: "121",
         checkSumType: ""
     });
-    
+
     encodings.msimod10 = msiBase.extend({
         checkSumType: "Modulo10"
     });
-    
+
     encodings.msimod11 = msiBase.extend({
         checkSumType: "Modulo11"
     });
-    
+
     encodings.msimod1110 = msiBase.extend({
         checkSumType: "Modulo11Modulo10"
     });
-    
+
     encodings.msimod1010 = msiBase.extend({
         checkSumType: "Modulo10Modulo10"
     });
-    
+
     encodings.code11 = Encoding.extend({
         cCheckSumTotal: 10,
         kCheckSumTotal: 9,
@@ -1234,14 +1234,14 @@
         START: "112211",
         STOP: "11221",
         initValue: function(value, width, height){
-			var that = this;
+            var that = this;
             that.pattern = [];
             that.value = value;
             that.width = width;
             that.totalUnits = 0;
         },
         addData:  function(){
-			var that = this;
+            var that = this;
             var value = that.value;
             that.addPattern(that.START);
 
@@ -1261,15 +1261,15 @@
             this.baseUnit = this.width / (this.totalUnits + quietZoneLength);
         },
         addCheckSum: function(){
-			var that = this,
+            var that = this,
                 value = that.value,
                 length = value.length,
                 cValue;
-            
+
             cValue = that.getWeightedSum(value, length, that.cCheckSumTotal) % that.checkSumMod;
             that.checksum = cValue + "";
             that.addPattern(that.characterMap[cValue]);
-            
+
             length++;
             if(length >= that.kCheckSumMinLength){
                 var kValue = (cValue + that.getWeightedSum(value, length, that.kCheckSumTotal)) % that.checkSumMod;
@@ -1324,7 +1324,7 @@
         VALID_CODE_LENGTHS: [5,9, 11],
         DIGIT_SEPARATOR: "-",
         initValue: function(value, width, height){
-			var that = this;
+            var that = this;
             that.height = height;
             that.width = width;
             that.baseHeight = height /2;
@@ -1335,7 +1335,7 @@
             that.setBaseUnit();
         },
         addData:  function(){
-			var that = this;
+            var that = this;
             var value = that.value;
             that.addPattern(that.START);
 
@@ -1361,7 +1361,7 @@
             that.addCharacter(that.checksum);
         },
         setBaseUnit: function(){
-			var that=this,
+            var that=this,
                 quietZoneLength = that.options.addQuietZone ? 2 * that.options.quietZoneLength : 0,
                 startStopLength = 3;
             that.baseUnit = that.width / ((that.value.length + 1) * 10 +  startStopLength + quietZoneLength);
@@ -1376,7 +1376,7 @@
             }
         },
         addPattern: function(pattern){
-			var that = this,
+            var that = this,
                 y1;
             for(var i = 0; i < pattern.length; i++){
                 y1 = that.height - that.baseHeight * pattern.charAt(i);
@@ -1389,24 +1389,24 @@
 
     encodings.ean13 = Encoding.extend({
         initValue: function(value, width, height){
-			if(typeof(value)=="number"){
-				value+="";
-			}
-			if(value.length!=12 || /\D/.test(value)){
-				throw new Error('Invalid value provided');
-			}
-			else if(value.length<12){
-				value = new String
-			}
-			var that = this;
+            if(typeof(value)=="number"){
+                value+="";
+            }
+            if(value.length!=12 || /\D/.test(value)){
+                throw new Error('Invalid value provided');
+            }
+            else if(value.length<12){
+                value = new String
+            }
+            var that = this;
             that.pattern = [];
-			that.options.height = height;
+            that.options.height = height;
             that.baseUnit = width /(95 + 2 * this.options.quietZoneLength);
-            that.value = value;			
-			that.checksum = that.calculateChecksum();
-			that.leftKey = value[0];
-			that.leftPart = value.substr(1,6);
-			that.rightPart = value.substr(7)+that.checksum;
+            that.value = value;
+            that.checksum = that.calculateChecksum();
+            that.leftKey = value[0];
+            that.leftPart = value.substr(1,6);
+            that.rightPart = value.substr(7)+that.checksum;
         },
         addData:  function(){
             var that = this;
@@ -1417,28 +1417,28 @@
             that.addPieces(that.characterMap["start"]);
         },
         addSide:function(leftPart,key){
-			var that = this;
+            var that = this;
             for(var i = 0; i < leftPart.length; i++){
-				if(key && parseInt(this.keyTable[key][i])){
-					that.addPieces(Array.prototype.slice.call(this.characterMap['digits'][leftPart[i]]).reverse(),true);
-				}else{
-					that.addPieces(this.characterMap['digits'][leftPart[i]],true);
-				}          
+                if(key && parseInt(this.keyTable[key][i])){
+                    that.addPieces(Array.prototype.slice.call(this.characterMap['digits'][leftPart[i]]).reverse(),true);
+                }else{
+                    that.addPieces(this.characterMap['digits'][leftPart[i]],true);
+                }
             }
         },
-		addPieces:function(arrToAdd,limitedHeight){
-			for(var i=0;i<arrToAdd.length;i++){
-				if(limitedHeight){
-					this.pattern.push({
-						y1:0,
-						y2:this.options.height*0.95,
-						width:arrToAdd[i]
-					});
-				}else{
-					this.pattern.push(arrToAdd[i]);
-				}
-			}			
-		},
+        addPieces:function(arrToAdd,limitedHeight){
+            for(var i=0;i<arrToAdd.length;i++){
+                if(limitedHeight){
+                    this.pattern.push({
+                        y1:0,
+                        y2:this.options.height*0.95,
+                        width:arrToAdd[i]
+                    });
+                }else{
+                    this.pattern.push(arrToAdd[i]);
+                }
+            }
+        },
         calculateChecksum: function (){
             var odd = 0,
                 even = 0,
@@ -1469,16 +1469,16 @@
         ,
         characterMap: {
             digits:[
-				[3,2,1,1],
-				[2,2,2,1],
-				[2,1,2,2],
-				[1,4,1,1],
-				[1,1,3,2],
-				[1,2,3,1],
-				[1,1,1,4],
-				[1,3,1,2],
-				[1,2,1,3],
-				[3,1,1,2]
+                [3,2,1,1],
+                [2,2,2,1],
+                [2,1,2,2],
+                [1,4,1,1],
+                [1,1,3,2],
+                [1,2,3,1],
+                [1,1,1,4],
+                [1,3,1,2],
+                [1,2,1,3],
+                [3,1,1,2]
             ],
             start: [1,1,1],
             middle: [1,1,1,1,1]
@@ -1486,24 +1486,24 @@
     });
 
     encodings.ean8 = encodings.ean13.extend({
-        initValue: function(value, width, height){		
+        initValue: function(value, width, height){
             var that = this;
-			if(value.length!=7 || /\D/.test(value)){
-				throw new Error('Invalid value provided');
-			}
-			that.value = value;
-			that.options.height = height;
-			that.checksum = that.calculateChecksum(that.value);
-			that.leftPart  = that.value.substr(0,4);
-			that.rightPart = that.value.substr(4) + that.checksum;
+            if(value.length!=7 || /\D/.test(value)){
+                throw new Error('Invalid value provided');
+            }
+            that.value = value;
+            that.options.height = height;
+            that.checksum = that.calculateChecksum(that.value);
+            that.leftPart  = that.value.substr(0,4);
+            that.rightPart = that.value.substr(4) + that.checksum;
             that.pattern = [];
-            that.baseUnit = width /(67 + 2 * that.options.quietZoneLength);            
+            that.baseUnit = width /(67 + 2 * that.options.quietZoneLength);
         }
     });
 
     var Barcode = Widget.extend({
         init: function (element, options) {
-			 var that = this;  
+             var that = this;
              Widget.fn.init.call(that, element, options);
              that.element = $(element);
              that.element.addClass("k-barcode");
@@ -1512,7 +1512,7 @@
              that.setOptions(options);
         },
         setOptions: function (options) {
-			var that = this;            
+            var that = this;
             that.type = (options.type || that.options.type).toLowerCase();
             if(that.type=="upca"){
                 that.type = "ean13";
@@ -1523,11 +1523,12 @@
                 options.value = '0' + options.value;
             }
             if(!encodings[that.type]){
-				throw new Error('Encoding ' + that.type + 'is not supported.')
-			}
-            that.encoding = new encodings[that.type]();            
-			
-            that.options = $.extend(true,that.options, options);            
+                throw new Error('Encoding ' + that.type + 'is not supported.')
+            }
+            options.value+='';
+            that.encoding = new encodings[that.type]();
+
+            that.options = $.extend(true,that.options, options);
             that.redraw();
         },
         redraw: function () {
@@ -1538,36 +1539,36 @@
                 encoding = that.encoding,
                 contentBox = Box2D(0, 0, options.width, options.height).unpad(border.width).unpad(options.padding),
                 barHeight = contentBox.height(),
-				result, textToDisplay;
+                result, textToDisplay;
 
-            that.contentBox = contentBox;            
-            that.view.children = [];            
+            that.contentBox = contentBox;
+            that.view.children = [];
             that.addBackground();
             var textHeight = dataviz.measureText( contentBox,{ font: options.text.font }).height;
-            
+
             if (textOptions.visible) {
                 barHeight -= textHeight;
             }
-            
+
             result = encoding.encode(options.value,options.width-(options.padding.left+options.padding.right), barHeight);
-            
+
             if (textOptions.visible) {
-				textToDisplay = options.value;		
-                
-				if(options.checksum && encoding.checksum!==undefined){
-					textToDisplay += " "+encoding.checksum;
-				}
+                textToDisplay = options.value;
+
+                if(options.checksum && encoding.checksum!==undefined){
+                    textToDisplay += " "+encoding.checksum;
+                }
                 that.addTextElement(textToDisplay);
             }
             that.barHeight = barHeight;
-                    
+
             that.view.options.width = that.options.width;
             that.view.options.height = that.options.height;
 
             that.addElements(result.pattern, result.baseUnit);
 
             that.view.renderTo(that.element[0]);
-        },        
+        },
         value: function(value){
             var that = this;
             if(value===undefined){
@@ -1578,50 +1579,50 @@
         },
         addElements: function (pattern, baseUnit) {
             var that = this,
-				position = 0 + that.options.padding.left,
+                position = 0 + that.options.padding.left,
                 step,
                 item;
 
             for (var i = 0; i < pattern.length; i++) {
-                
-				item = isPlainObject(pattern[i]) ? pattern[i] : {
-						width: pattern[i],
-						y1: 0,
-						y2: that.barHeight
-					}; 
+
+                item = isPlainObject(pattern[i]) ? pattern[i] : {
+                        width: pattern[i],
+                        y1: 0,
+                        y2: that.barHeight
+                    };
                 step = item.width * baseUnit;
-                if(i%2){				                     
+                if(i%2){
                     that.view.children.push(that.view.createRect(
                         new Box2D(
-                            position, 
-                            item.y1 + that.contentBox.y1, 
-                            position + step, 
+                            position,
+                            item.y1 + that.contentBox.y1,
+                            position + step,
                             item.y2 + that.contentBox.y1
                         ),
                         {
                             fill: that.options.color
-                        }   
+                        }
                     ));
                 }
                 position+= step;
             }
         },
         addBackground: function () {
-			var that = this,
+            var that = this,
                 options = that.options,
                 border = options.border || {},
                 box = Box2D(0,0, options.width, options.height).unpad(border.width / 2),
-                rect = that.view.createRect(box, { 
+                rect = that.view.createRect(box, {
                     fill: options.background,
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
                     dashType: border.dashType
                 });
-                
-			that.view.children.push(rect);
+
+            that.view.children.push(rect);
         },
-        addTextElement: function (value) {  
-            
+        addTextElement: function (value) {
+
             var that = this,
                 textOptions = that.options.text,
                 text = new Text(value, {
@@ -1630,9 +1631,9 @@
                     align: "center",
                     vAlign: "bottom"
                 });
-                
+
             that.text = text;
-            
+
             text.reflow(that.contentBox);
             text.box.unpad(textOptions.margin);
             that.view.children.push(that.view.createText(value, {
@@ -1644,16 +1645,16 @@
             }));
         },
         options: {
-            name: "Barcode",  
+            name: "Barcode",
             value: "",
             type: "code39",
             checksum: false,
             width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT,            
+            height: DEFAULT_HEIGHT,
             color: "black",
             background: "white",
             text: {
-                visible: true,                
+                visible: true,
                 font: "16px Consolas, Monaco, Sans Mono, monospace, sans-serif",
                 color: "black",
                 margin: {
