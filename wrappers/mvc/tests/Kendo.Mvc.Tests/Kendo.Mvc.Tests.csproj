@@ -88,8 +88,12 @@
     <Compile Include="Infrastructure\Implementation\JavaScriptInitializerTests.cs" />
     <Compile Include="UI\Chart\ChartSelectionMousewheelBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisSelectionBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartSeriesFactoryTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSelectionSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSelectionMousewheelSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartRadarAreaSeriesSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartRadarColumnSeriesSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartRadarLineSeriesSerializerTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
     <Compile Include="UI\Scheduler\SchedulerEventControllerTestHelper.cs" />
     <Compile Include="UI\Scheduler\SchedulerEventControllerTests.cs" />

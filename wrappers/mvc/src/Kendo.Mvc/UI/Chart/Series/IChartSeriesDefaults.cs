@@ -89,5 +89,29 @@ namespace Kendo.Mvc.UI
         {
             get;
         }
+
+        /// <summary>
+        /// The default settings for all radar area series.
+        /// </summary>
+        IChartAreaSeries RadarArea
+        {
+            get;
+        }
+
+        /// <summary>
+        /// The default settings for all radar column series.
+        /// </summary>
+        IChartBarSeries RadarColumn
+        {
+            get;
+        }
+
+        /// <summary>
+        /// The default settings for all radar line series.
+        /// </summary>
+        IChartLineSeries RadarLine
+        {
+            get;
+        }
     }
 }

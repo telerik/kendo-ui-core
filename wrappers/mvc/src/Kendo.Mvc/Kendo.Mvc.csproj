@@ -367,6 +367,9 @@
     <Compile Include="UI\Chart\Serialization\ChartBulletTargetSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSelectionMousewheelSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLegendLabelsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartRadarAreaSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartRadarColumnSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartRadarLineSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
@@ -432,6 +435,9 @@
     <Compile Include="UI\Chart\Series\ChartSeriesHighlight.cs" />
     <Compile Include="UI\Chart\Series\ChartBulletSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartBulletTarget.cs" />
+    <Compile Include="UI\Chart\Series\ChartRadarAreaSeries.cs" />
+    <Compile Include="UI\Chart\Series\ChartRadarColumnSeries.cs" />
+    <Compile Include="UI\Chart\Series\ChartRadarLineSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartBulletSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartCandlestickSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartOHLCSeries.cs" />

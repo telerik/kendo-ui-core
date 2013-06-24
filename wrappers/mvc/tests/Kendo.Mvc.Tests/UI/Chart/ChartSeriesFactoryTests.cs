@@ -498,5 +498,194 @@ namespace Kendo.Mvc.UI.Tests.Chart
             var builder = factory.VerticalArea(new int[] { 1 });
             builder.Series.ShouldBeType<ChartAreaSeries<SalesData, object>>();
         }
+
+        [Fact]
+        public void RadarArea_should_create_bound_area_series_from_expression()
+        {
+            var builder = factory.RadarArea(s => s.RepSales);
+            builder.Series.ShouldBeType<ChartRadarAreaSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarArea_should_create_bound_area_series_from_expression_and_category_expression()
+        {
+            var builder = factory.RadarArea(s => s.RepSales, s => s.Date);
+            builder.Series.ShouldBeType<ChartRadarAreaSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void RadarArea_should_create_area_series_with_horizontal_orientation()
+        {
+            var builder = factory.RadarArea(s => s.RepSales);
+            ((ChartRadarAreaSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Horizontal);
+        }
+
+        [Fact]
+        public void RadarArea_should_create_bound_area_series_from_type_and_member_name()
+        {
+            var builder = factory.RadarArea(typeof(decimal), "RepSales");
+            builder.Series.ShouldBeType<ChartRadarAreaSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarArea_should_create_bound_area_series_from_type_member_and_category_member_name()
+        {
+            var builder = factory.RadarArea(typeof(decimal), "RepSales", "Date");
+            builder.Series.ShouldBeType<ChartRadarAreaSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void RadarArea_should_create_bound_area_series_from_member_name()
+        {
+            var builder = factory.RadarArea("RepSales");
+            builder.Series.ShouldBeType<ChartRadarAreaSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarArea_should_create_bound_area_series_from_member_and_category_member_name()
+        {
+            var builder = factory.RadarArea("RepSales", "Date");
+            builder.Series.ShouldBeType<ChartRadarAreaSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void RadarArea_should_create_unbound_area_series_from_data()
+        {
+            var builder = factory.RadarArea(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartRadarAreaSeries<SalesData, object>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bound_bar_series_from_expression()
+        {
+            var builder = factory.RadarColumn(s => s.RepSales);
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bound_area_series_from_expression_and_category_expression()
+        {
+            var builder = factory.RadarColumn(s => s.RepSales, null, s => s.Date);
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bound_bar_series_from_value_and_color_expression()
+        {
+            var builder = factory.RadarColumn(s => s.RepSales, s => s.Color);
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bar_series_with_horizontal_orientation()
+        {
+            var builder = factory.RadarColumn(s => s.RepSales);
+            ((ChartRadarColumnSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Horizontal);
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bound_bar_series_from_type_and_member_name()
+        {
+            var builder = factory.RadarColumn(typeof(decimal), "RepSales");
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bound_bar_series_from_type_member_and_category_member_name()
+        {
+            var builder = factory.RadarColumn(typeof(decimal), "RepSales", null, "Date");
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bound_bar_series_from_type_member_and_color_member_name()
+        {
+            var builder = factory.RadarColumn(typeof(decimal), "RepSales", "Color");
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bound_bar_series_from_member_name()
+        {
+            var builder = factory.RadarColumn("RepSales");
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bound_bar_series_from_member_and_color_member_name()
+        {
+            var builder = factory.RadarColumn("RepSales", "Color");
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_bound_bar_series_from_member_and_category_member_name()
+        {
+            var builder = factory.RadarColumn("RepSales", null, "Date");
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void RadarColumn_should_create_unbound_bar_series_from_data()
+        {
+            var builder = factory.RadarColumn(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, object>>();
+        }
+
+        [Fact]
+        public void RadarLine_should_create_bound_line_series_from_expression()
+        {
+            var builder = factory.RadarLine(s => s.RepSales);
+            builder.Series.ShouldBeType<ChartRadarLineSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarLine_should_create_bound_area_series_from_expression_and_category_expression()
+        {
+            var builder = factory.RadarLine(s => s.RepSales, s => s.Date);
+            builder.Series.ShouldBeType<ChartRadarLineSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void RadarLine_should_create_line_series_with_horizontal_orientation()
+        {
+            var builder = factory.RadarLine(s => s.RepSales);
+            ((ChartRadarLineSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Horizontal);
+        }
+
+        [Fact]
+        public void RadarLine_should_create_bound_line_series_from_type_and_member_name()
+        {
+            var builder = factory.RadarLine(typeof(decimal), "RepSales");
+            builder.Series.ShouldBeType<ChartRadarLineSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarLine_should_create_bound_area_series_from_type_member_and_category_member_name()
+        {
+            var builder = factory.RadarLine(typeof(decimal), "RepSales", "Date");
+            builder.Series.ShouldBeType<ChartRadarLineSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void RadarLine_should_create_bound_line_series_from_member_name()
+        {
+            var builder = factory.RadarLine("RepSales");
+            builder.Series.ShouldBeType<ChartRadarLineSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void RadarLine_should_create_bound_area_series_from_member_and_category_member_name()
+        {
+            var builder = factory.RadarLine("RepSales", "Date");
+            builder.Series.ShouldBeType<ChartRadarLineSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void RadarLine_should_create_unbound_line_series_from_data()
+        {
+            var builder = factory.RadarLine(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartRadarLineSeries<SalesData, object>>();
+        }
     }
 }

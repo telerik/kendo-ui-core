@@ -112,6 +112,7 @@
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
     <Compile Include="Controllers\DataViz\QRCode\ApiController.cs" />
     <Compile Include="Controllers\DataViz\QRCode\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Radar_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\Local_DataController.cs" />
@@ -775,6 +776,7 @@
     <Content Include="Areas\razor\Views\mobile\drawer\index.cshtml" />
     <Content Include="Areas\razor\Views\mobile\drawer\two_way_drawers.cshtml" />
     <Content Include="Areas\razor\Views\mobile\listview\hierarchical_databinding.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\radar_charts\index.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\qrcode\index.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\qrcode\api.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />

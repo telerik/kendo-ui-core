@@ -47,6 +47,15 @@ namespace Kendo.Mvc.UI
             var ohlcData = seriesDefaults.OHLC.CreateSerializer().Serialize();
             ohlcData.Remove("type");
 
+            var radarAreaData = seriesDefaults.RadarArea.CreateSerializer().Serialize();
+            radarAreaData.Remove("type");
+
+            var radarColumnData = seriesDefaults.RadarColumn.CreateSerializer().Serialize();
+            radarColumnData.Remove("type");
+
+            var radarLineData = seriesDefaults.RadarLine.CreateSerializer().Serialize();
+            radarLineData.Remove("type");
+
             var result = new Dictionary<string, object>();
             FluentDictionary.For(result)
                   .Add("bar", barData, () => barData.Count > 0)
@@ -59,7 +68,10 @@ namespace Kendo.Mvc.UI
                   .Add("donut", donutData, () => donutData.Count > 0)
                   .Add("scatter", scatterData, () => scatterData.Count > 0)
                   .Add("scatterLine", scatterLineData, () => scatterLineData.Count > 0)
-                  .Add("ohlc", ohlcData, () => ohlcData.Count > 0);
+                  .Add("ohlc", ohlcData, () => ohlcData.Count > 0)
+                  .Add("radarArea", radarAreaData, () => radarAreaData.Count > 0)
+                  .Add("radarColumn", radarColumnData, () => radarColumnData.Count > 0)
+                  .Add("radarLine", radarLineData, () => radarLineData.Count > 0);
 
             return result;
         }
