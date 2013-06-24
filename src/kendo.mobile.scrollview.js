@@ -16,6 +16,7 @@ kendo_module({
         PaneDimensions = kendo.ui.PaneDimensions,
         Widget = ui.Widget,
         DataSource = kendo.data.DataSource,
+        Buffer = kendo.data.Buffer,
 
         // Math
         math = Math,
@@ -46,8 +47,8 @@ kendo_module({
 
             scrollView.element.append(element);
 
-            this._changeProxy = $.proxy(that, "_change");
-            this._refreshProxy = $.proxy(that, "_refresh");
+            this._changeProxy = proxy(that, "_change");
+            this._refreshProxy = proxy(that, "_refresh");
             scrollView.bind(CHANGE, this._changeProxy);
             scrollView.bind(REFRESH, this._refreshProxy);
 
@@ -195,7 +196,7 @@ kendo_module({
     kendo.mobile.ui.ScrollViewElasticPane = ElasticPane;
 
     var ScrollViewContent = kendo.Class.extend({
-        init: function (element, pane) {
+        init: function(element, pane) {
             var that = this;
 
             that.element = element;
@@ -269,7 +270,7 @@ kendo_module({
             this.maxSnap = 0;
         },
 
-        _getPages: function () {
+        _getPages: function() {
             this.pageElements = this.element.find("[data-role=page]");
             this._paged = this.pageElements.length > 0;
         }
@@ -318,7 +319,7 @@ kendo_module({
         _dataSource: function() {
             var options = this.options;
 
-            this.dataSource = kendo.data.DataSource.create(options.dataSource);
+            this.dataSource = DataSource.create(options.dataSource);
         },
 
         _buffer: function() {
@@ -330,9 +331,9 @@ kendo_module({
                 this.buffer = new Buffer(this.dataSource, batchSize * 3);
             }
 
-            this._resizeProxy = $.proxy(this, "_onResize");
-            this._resetProxy = $.proxy(this, "_onReset");
-            this._endReachedProxy = $.proxy(this, "_onEndReached");
+            this._resizeProxy = proxy(this, "_onResize");
+            this._resetProxy = proxy(this, "_onReset");
+            this._endReachedProxy = proxy(this, "_onEndReached");
 
             this.buffer.bind({
                 "resize": this._resetProxy,
@@ -371,7 +372,7 @@ kendo_module({
             this.width = width;
         },
 
-        scrollTo: function(page, instant) {
+        scrollTo: function(page) {
             var buffer = this.buffer,
                 pages = this.pages,
                 dataItem;
@@ -402,7 +403,7 @@ kendo_module({
                 delta = 0;
 
             if(swipeType === RIGHT_SWIPE) {
-                if(that.page != 0) {
+                if(that.page !== 0) {
                     delta = -1; //backward
                 }
             } else if(swipeType === LEFT_SWIPE && !isEndReached) {
@@ -410,7 +411,7 @@ kendo_module({
             } else if(offset > 0 && (thresholdPassed && !isEndReached)) {
                 delta = 1; //forward
             } else if(offset < 0 && thresholdPassed) {
-                if(that.page != 0) {
+                if(that.page !== 0) {
                     delta = -1; //backward
                 }
             }
@@ -528,10 +529,6 @@ kendo_module({
 
     kendo.mobile.ui.VirtualScrollViewContent = VirtualScrollViewContent;
 
-    var LEFT_PAGE = -1,
-        CENTER_PAGE = 0,
-        RIGHT_PAGE = 1;
-
     var Page = kendo.Class.extend({
         init: function(container) {
             this.element = $("<div class='virtual-page'></div>");
@@ -579,13 +576,13 @@ kendo_module({
             that.page = 0;
 
             that.inner.css("height", that.options.contentHeight);
-            that.container().bind("show", $.proxy(this, "viewShow")).bind("init", $.proxy(this, "viewInit"));
+            that.container().bind("show", proxy(this, "viewShow")).bind("init", proxy(this, "viewInit"));
 
             that.pane = new ElasticPane(that.inner, {
                 duration: this.options.duration,
-                transitionEnd: $.proxy(this, "_transitionEnd"),
-                dragEnd: $.proxy(this, "_dragEnd"),
-                change: $.proxy(this, REFRESH)
+                transitionEnd: proxy(this, "_transitionEnd"),
+                dragEnd: proxy(this, "_dragEnd"),
+                change: proxy(this, REFRESH)
             });
 
             that.page = that.options.page;
@@ -664,7 +661,7 @@ kendo_module({
             });
         },
 
-        _transitionEnd:  function() {
+        _transitionEnd: function() {
             if (this._content.updatePage()) {
                 this.page = this._content.page;
                 this.trigger(CHANGE, { page: this.page, element: this._content.pages[1].element });
@@ -674,332 +671,8 @@ kendo_module({
 
     ui.plugin(ScrollView);
 
-    var VirtualScrollView = Widget.extend({
-        init: function(element, options) {
-            var that = this;
-
-            Widget.fn.init.call(that, element, options);
-
-            element = that.element;
-            options = that.options;
-
-            element
-                .append("<div/>")
-                .addClass("km-virtual-scrollview");
-
-            that.template = kendo.template(options.template || "");
-            that.emptyTemplate = kendo.template(options.emptyTemplate || "");
-
-            that.inner = element.children().first();
-            that.pages = [];
-            that._needsRefresh = false;
-
-            //that.inner.css("height", that.options.contentHeight);
-
-            var width = element.width();
-
-            that.pane = new ElasticPane(that.inner, {
-                duration: this.options.duration,
-                transitionEnd: $.proxy(this, "_transitionEnd"),
-                dragEnd: $.proxy(this, "_dragEnd"),
-                change: $.proxy(this, REFRESH)
-            });
-
-            that.pane.dimension.forceEnabled();
-
-            $.extend(that, {
-                width: width,
-                offset: 0,
-                _widgetNeedsRefresh: false
-            });
-
-            that._dataSource();
-            that._buffer();
-            that._initPages();
-
-            that.view().bind("show", function() {
-                if(that._widgetNeedsRefresh) {
-                    setTimeout(function() {
-                        that._resetPages();
-                    }, 0);
-                    that._widgetNeedsRefresh = false;
-                }
-            });
-
-            if(that.options.autoBind) {
-                that.dataSource.fetch();
-            }
-        },
-
-        options: {
-            name: "VirtualScrollView",
-            autoBind: true,
-            duration: 300,
-            velocityThreshold: 0.8,
-            contentHeight: "auto",
-            bounceVelocityThreshold: 1.6,
-            batchSize: 1,
-            template: "",
-            emptyTemplate: ""
-        },
-
-        events: [
-            "changed"
-        ],
-
-        _dataSource: function() {
-            var that = this,
-                options = that.options;
-
-            that.dataSource = DataSource.create(options.dataSource);
-        },
-
-        _buffer: function() {
-            var that = this,
-                batchSize = that.options.batchSize;
-
-            if(batchSize > 1) {
-                that.buffer = new BatchBuffer(that.dataSource, batchSize);
-            } else {
-                that.buffer = new kendo.data.Buffer(that.dataSource, batchSize * 3);
-            }
-
-            that.buffer.bind({
-                "resize": proxy(that._onResize, that),
-                "reset": proxy(that._onReset, that),
-                "endreached": proxy(that._onEndReached, that)
-            });
-        },
-
-        _unbindDataSource: function() {
-            var that = this;
-
-            that.buffer
-                .unbind("resize", that._onResize)
-                .unbind("reset", that._onReset)
-                .unbind("endreached", that._onEndReached);
-        },
-
-        setDataSource: function(dataSource) {
-            this.options.dataSource = dataSource;
-            this._dataSource();
-            this._buffer();
-
-            if (this.options.autoBind) {
-                dataSource.fetch();
-            }
-        },
-
-        refresh: function() {
-            var that = this,
-                dimension = that.pane.dimension,
-                pages = that.pages,
-                width = dimension.getSize();
-
-            for(var i = 0; i < pages.length; i++) {
-                pages[i].width = width;
-                pages[i].element.width(width);
-            }
-
-            pages[0].position(-1);
-            pages[1].position(0);
-            pages[2].position(1);
-
-            that.width = width;
-            dimension.update(true);
-        },
-
-        _initPages: function() {
-            var that = this,
-                pages = that.pages,
-                inner = that.inner,
-                page;
-
-            for (var i = 0; i < 3; i++) { //widget works with 3 pages
-                page = new Page(inner);
-                pages.push(page);
-            }
-
-            that.pane.dimension.update(true);
-        },
-
-        _resetPages: function() {
-            var that = this,
-                pages = that.pages;
-
-            for (var i = 0; i < pages.length; i++) {
-                pages[i].position(i-1);
-                that.setPageContent(pages[i], i-1);
-            }
-
-            that.offset = 0;
-
-            that.trigger("changed", {
-                element: pages[1].element,
-                page: pages[1]
-            });
-        },
-
-        // _moveTo: function(location, ease, instant) {
-        //     // this.pane.transition.moveTo({ location: location, duration: (instant ? 1 : this.options.duration), ease: ease });
-        //     this.pane.transitionTo(location, ease, instant);
-        // },
-
-        _resetMovable: function() {
-            this.pane.moveTo(0);
-        },
-
-        forward: function(instant) {
-            // this._moveTo(-this.width, Transition.easeOutExpo, instant);
-            this.pane.transitionTo(-this.width, Transition.easeOutExpo, instant);
-        },
-
-        backward: function(instant) {
-            // this._moveTo(this.width, Transition.easeOutBack, instant);
-            this.pane.transitionTo(this.width, Transition.easeOutExpo, instant);
-        },
-
-        reset: function(ease) {
-            // this._moveTo(0, ease, false);
-            this.pane.transitionTo(0, ease, false);
-        },
-
-        scrollTo: function(offset) {
-            var that = this,
-                buffer = that.buffer,
-                pages = that.pages,
-                dataItem;
-
-            buffer.syncDataSource();
-            dataItem = buffer.at(offset);
-
-            if(!dataItem) {
-                return;
-            }
-
-            for (var i = 0; i < pages.length; i++) {
-                pages[i].position(i-1);
-                that.setPageContent(pages[i], offset + (i-1));
-            }
-
-            that.offset = offset;
-
-            that.trigger("changed", {
-                element: pages[1].element,
-                page: pages[1]
-            });
-        },
-
-        _dragEnd: function(e) {
-            var that = this,
-                velocity = e.x.velocity,
-                width = that.width,
-                velocityThreshold = that.options.velocityThreshold,
-                ease = Transition.easeOutExpo,
-                offset = that.pane.offset(),
-                thresholdPassed = abs(offset) >= width / 3,
-                isEndReached = that.offset + 2 > that.buffer.total;
-
-            if (velocity > velocityThreshold) { //RIGHT_SWIPE
-                if(that.offset === 0) {
-                    that.reset(ease);
-                } else {
-                    that.backward();
-                }
-            } else if(velocity < -velocityThreshold && !isEndReached) { //LEFT_SWIPE
-                that.forward();
-            } else if(offset > 0 && (thresholdPassed  && !isEndReached)) {
-                that.forward();
-            } else if(offset < 0 && thresholdPassed) {
-                if(that.offset === 0) {
-                    that.reset(ease);
-                } else {
-                    that.backward();
-                }
-            } else {
-                that.reset(ease);
-            }
-        },
-
-        _transitionEnd: function() {
-            var that = this,
-                pages = that.pages;
-
-            if(that.pane.movable.x === 0) {
-                return;
-            }
-
-            if(that.pane.movable.x < 0) {
-                pages.push(that.pages.shift());//forward
-                that.offset++;
-                that.setPageContent(pages[2], that.offset + 1);
-            } else {
-                pages.unshift(that.pages.pop()); //back
-                that.offset--;
-                that.setPageContent(pages[0], that.offset - 1);
-            }
-
-            pages[0].position(-1);
-            pages[1].position(0);
-            pages[2].position(1);
-
-            that._resetMovable();
-            that.trigger("changed", {
-                element: pages[1].element,
-                page: pages[1]
-            });
-        },
-
-        _onResize: function() {
-            var that = this,
-                page = that.pages[2],
-                idx = that.offset + 1;
-
-            if(that._needsRefresh) {
-                that.setPageContent(page, idx);
-                that._needsRefresh = false;
-            }
-        },
-
-        _onReset: function() {
-            if(this.element.is(":visible")) {
-                this._resetPages();
-            } else {
-                this._widgetNeedsRefresh = true;
-            }
-        },
-
-        _onEndReached: function() {
-            this._needsRefresh = true;
-        },
-
-        setPageContent: function(page, index) {
-            var buffer = this.buffer,
-                template = this.template,
-                emptyTemplate = this.emptyTemplate,
-                view;
-
-            if(index >= 0) {
-                view = buffer.at(index);
-                if(view) {
-                    page.content(template(view));
-                } else {
-                    page.content(emptyTemplate({}));
-                }
-            } else {
-                page.content(emptyTemplate({}));
-            }
-
-            mobile.init(page.element);
-        }
-
-    });
-
-    ui.plugin(VirtualScrollView);
-
-
     var BatchBuffer = kendo.Observable.extend({
-        init: function (dataSource, batchSize) {
+        init: function(dataSource, batchSize) {
             var batchBuffer = this;
 
             kendo.Observable.fn.init.call(batchBuffer);
@@ -1008,7 +681,7 @@ kendo_module({
             this.batchSize = batchSize;
             this.total = 0;
 
-            this.buffer = new kendo.data.Buffer(dataSource, batchSize * 3);
+            this.buffer = new Buffer(dataSource, batchSize * 3);
 
             this.buffer.bind({
                 "endreached": function (e) {
