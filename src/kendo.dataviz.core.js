@@ -1566,7 +1566,7 @@ kendo_module({
             var note = this;
 
             BoxElement.fn.init.call(note, options);
-            note.options.id = uniqueId();
+            note.enableDiscovery();
 
             note.render();
         },
@@ -1603,8 +1603,9 @@ kendo_module({
                 box = Box2D();
 
             if (defined(label) && label.visible) {
-                note.label = new NoteTextBox(label.text, label);
-                note.label.enableDiscovery();
+                note.label = new TextBox(label.text, deepExtend({}, label, {
+                    data: { modelId: options.modelId }
+                }));
                 note.append(note.label);
 
                 if (label.position === INSIDE) {
@@ -1621,8 +1622,9 @@ kendo_module({
             icon.width = width || size;
             icon.height = height || size;
 
-            marker = new NoteShapeElement(icon);
-            marker.enableDiscovery();
+            marker = new ShapeElement(deepExtend({}, icon, {
+                data: { modelId: options.modelId }
+            }));
 
             note.marker = marker;
             note.append(marker);
@@ -1711,11 +1713,17 @@ kendo_module({
 
         getViewElements: function(view) {
             var note = this,
-                elements = BoxElement.fn.getViewElements.call(note, view);
+                elements = BoxElement.fn.getViewElements.call(note, view),
+                group = view.createGroup({
+                    data: { modelId: note.options.modelId },
+                    zIndex: 1
+                });
 
             append(elements, note.createConnector(view));
 
-            return elements;
+            group.children = elements;
+
+            return [ group ];
         },
 
         createConnector: function(view) {
@@ -1729,10 +1737,8 @@ kendo_module({
                     zIndex: connector.zIndex
                 })
             ];
-        }
-    });
+        },
 
-    var NoteEventMixin = {
         click: function(widget, e) {
             var args = this.eventArgs(e);
 
@@ -1762,7 +1768,7 @@ kendo_module({
                 text: defined(options.label) ? options.label.text : ""
             };
         }
-    };
+    });
 
     var ShapeElement = BoxElement.extend({
         options: {
@@ -1823,12 +1829,6 @@ kendo_module({
             return [ element ];
         }
     });
-
-    var NoteShapeElement = ShapeElement.extend();
-    deepExtend(NoteShapeElement.fn, NoteEventMixin);
-
-    var NoteTextBox = TextBox.extend();
-    deepExtend(NoteTextBox.fn, NoteEventMixin);
 
     var PinElement = BoxElement.extend({
         init: function(options) {
