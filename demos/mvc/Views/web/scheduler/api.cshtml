@@ -19,8 +19,15 @@
 $(function() {
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
+        startTime: new Date("2013/6/13 7:00"),
         height: 400,
-        views: ["day", "week", "month", "agenda"],
+        timezone: "Etc/UTC",
+        views: [
+            "day",
+            { type: "week", selected: true },
+            "month",
+            "agenda"
+        ],
         timezone: "Etc/UTC",
         dataSource: {
             batch: true,
