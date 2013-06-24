@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kendoui.spring.models.DataSourceRequest;
-import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.Meeting;
 import com.kendoui.spring.models.MeetingDao;
 
@@ -33,9 +31,9 @@ public class ResourcesController {
     }
     
     @RequestMapping(value = "/resources/read", method = RequestMethod.POST)
-    public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
+    public @ResponseBody List<Meeting> read() {
 
-        return meeting.getList(request);
+        return meeting.getList();
     }
     
     @RequestMapping(value = "/resources/create", method = RequestMethod.POST)

@@ -19,23 +19,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kendoui.spring.models.Task;
 import com.kendoui.spring.models.TaskDao;
 
-@Controller("scheduler-home-controller")
+@Controller("scheduler-events-controller")
 @RequestMapping(value="/web/scheduler/")
-public class IndexController {
+public class EventsController {
     @Autowired 
     private TaskDao task;
     
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String index(Locale locale, Model model) {        
-        return "web/scheduler/index";
+        return "web/scheduler/events";
     }
     
-    @RequestMapping(value = "/index/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/events/read", method = RequestMethod.POST)
     public @ResponseBody List<Task> read() {
         return task.getList();
     }
     
-    @RequestMapping(value = "/index/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/events/create", method = RequestMethod.POST)
     public @ResponseBody List<Task> create(@RequestBody ArrayList<Map<String, Object>> models) throws ParseException {
         List<Task> tasks = new ArrayList<Task>();
         
@@ -64,7 +64,7 @@ public class IndexController {
         return tasks;
     }
     
-    @RequestMapping(value = "/index/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/events/update", method = RequestMethod.POST)
     public @ResponseBody List<Task> update(@RequestBody ArrayList<Map<String, Object>> models) throws ParseException {
         List<Task> tasks = new ArrayList<Task>();
         
@@ -94,7 +94,7 @@ public class IndexController {
         return tasks;
     }
     
-    @RequestMapping(value = "/index/destroy", method = RequestMethod.POST)
+    @RequestMapping(value = "/events/destroy", method = RequestMethod.POST)
     public @ResponseBody List<Task> destroy(@RequestBody ArrayList<Map<String, Object>> models) {
         List<Task> tasks = new ArrayList<Task>();
         

@@ -62,7 +62,7 @@
            			<kendo:dataSource-filterItem field="ownerId" operator="eq" value="2" />
            		</kendo:dataSource-filterItem>
            	</kendo:dataSource-filter>
-             <kendo:dataSource-schema data="data" total="total">
+             <kendo:dataSource-schema>
                 <kendo:dataSource-schema-model id="taskId">
                      <kendo:dataSource-schema-model-fields>
                          <kendo:dataSource-schema-model-field name="taskId" type="number" />

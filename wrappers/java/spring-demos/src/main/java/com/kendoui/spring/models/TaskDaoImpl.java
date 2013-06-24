@@ -18,8 +18,12 @@ public class TaskDaoImpl implements TaskDao {
     private SessionFactory sessionFactory;
     
     @Override
-    public DataSourceResult getList(DataSourceRequest request) {
-        return request.toDataSourceResult(sessionFactory.getCurrentSession(), Task.class);
+    public List<Task> getList() {
+        Session session = sessionFactory.getCurrentSession();
+        
+        Criteria criteria = session.createCriteria(Task.class);
+        
+        return criteria.list();
     }
 
     @Override

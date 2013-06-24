@@ -21,7 +21,8 @@
 	
 %>
 <demo:header />
-    <kendo:scheduler name="scheduler" eventTemplate="event-template" height="600" date="<%= date %>" editable="false" startTime="<%= startTime %>" endTime="<%= endTime %>">
+    <kendo:scheduler name="scheduler" eventTemplate="event-template" height="600" date="<%= date %>" 
+    	editable="false" startTime="<%= startTime %>" endTime="<%= endTime %>">
     	<kendo:scheduler-views>
     		<kendo:scheduler-view type="day" />
     		<kendo:scheduler-view type="agenda" />

@@ -19,14 +19,17 @@ public class MeetingDaoImpl implements MeetingDao {
     private SessionFactory sessionFactory;
     
     @Override
-    public DataSourceResult getList(DataSourceRequest request) {
-        DataSourceResult result = request.toDataSourceResult(sessionFactory.getCurrentSession(), Meeting.class);
-        List<Meeting> meetings = (List<Meeting>)result.getData();
+    public List<Meeting> getList() {
+        Session session = sessionFactory.getCurrentSession();
+        
+        Criteria criteria = session.createCriteria(Meeting.class);
+        
+        List <Meeting> meetings = criteria.list();
 
         for (Meeting meeting : meetings) {
             List<Integer> atendees = new ArrayList<Integer>();
             
-            Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MeetingAtendee.class);
+            criteria = session.createCriteria(MeetingAtendee.class);
             criteria.add(Restrictions.eq("meetingId", meeting.getMeetingId()));
             
             List<MeetingAtendee> meetingAtendees = criteria.list(); 
@@ -37,7 +40,8 @@ public class MeetingDaoImpl implements MeetingDao {
             
             meeting.setAtendees(atendees);
         }
-        return result;
+        
+        return meetings;
     }
 
     @Override
