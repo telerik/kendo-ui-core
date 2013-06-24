@@ -1633,8 +1633,8 @@ kendo_module({
                 options = note.options,
                 center = targetBox.center(),
                 wrapperBox = note.wrapperBox,
-                width = wrapperBox.width(),
-                height = wrapperBox.height(),
+                width = wrapperBox.width() / 2,
+                height = wrapperBox.height() / 2,
                 distance = options.connector.distance,
                 label = note.label,
                 marker = note.marker,
@@ -1643,12 +1643,12 @@ kendo_module({
             if (inArray(options.position, [TOP, BOTTOM])) {
                 if (options.position === TOP) {
                     contentBox = Box2D(
-                        center.x - width / 2, targetBox.y1 - distance,
-                        center.x + width / 2, targetBox.y1 - (distance + height));
+                        center.x - width, targetBox.y1 - distance,
+                        center.x + width, targetBox.y1 - (distance + height));
                 } else {
                     contentBox = Box2D(
-                        center.x - width / 2, targetBox.y1 + distance,
-                        center.x + width / 2, targetBox.y1 + height + distance);
+                        center.x - width, targetBox.y1 + distance,
+                        center.x + width, targetBox.y1 + height + distance);
                 }
 
                 if (options.connector.visible) {
@@ -1662,8 +1662,8 @@ kendo_module({
             } else {
                 if (options.position === LEFT) {
                     contentBox = Box2D(
-                        targetBox.x1 - (width + distance), center.y - height / 2,
-                        targetBox.x1 - distance, center.y + height / 2);
+                        targetBox.x1 - (width + distance), center.y - height,
+                        targetBox.x1 - distance, center.y + height);
 
                     if (options.connector.visible) {
                         lineStart = Point2D(targetBox.x2, center.y);
@@ -1675,8 +1675,8 @@ kendo_module({
                     }
                 } else {
                     contentBox = Box2D(
-                        targetBox.x1 + distance, center.y - height / 2,
-                        targetBox.x1 + width + distance, center.y + height / 2);
+                        targetBox.x1 + distance, center.y - height,
+                        targetBox.x1 + width + distance, center.y + height);
 
                     if (options.connector.visible) {
                         lineStart = Point2D(targetBox.x2, center.y);
@@ -1702,7 +1702,6 @@ kendo_module({
                     label.reflow(label.box);
                 }
             }
-
             note.contentBox = contentBox;
             note.box = box || contentBox;
         },

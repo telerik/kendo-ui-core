@@ -129,6 +129,7 @@ kendo_module({
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
         NOTE_CLICK = dataviz.NOTE_CLICK,
         NOTE_HOVER = dataviz.NOTE_HOVER,
+        OBJECT = "object",
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
@@ -1287,7 +1288,7 @@ kendo_module({
                     fieldData = pointData.slice(valueFields.length);
                     value = binder._bindFromArray(pointData, valueFields);
                     fields = binder._bindFromArray(fieldData, otherFields);
-                } else if (typeof pointData === "object") {
+                } else if (typeof pointData === OBJECT) {
                     srcValueFields = binder._mapSeriesFields(series, valueFields);
                     srcPointFields = binder._mapSeriesFields(series, otherFields);
 
@@ -2320,6 +2321,20 @@ kendo_module({
             }
 
             return index;
+        },
+
+        getSlot: function(a, b) {
+            var axis = this;
+
+            if (typeof a === OBJECT) {
+                a = axis.categoryIndex(a);
+            }
+
+            if (typeof b === OBJECT) {
+                b = axis.categoryIndex(b);
+            }
+
+            return CategoryAxis.fn.getSlot.call(axis, a, b);
         }
     });
 
@@ -3371,7 +3386,7 @@ kendo_module({
             for (i = 0; i < series.length; i++) {
                 seriesItem = series[i];
                 data = seriesItem.data;
-                if (data && !isArray(data[0]) && typeof(data[0]) != "object") {
+                if (data && !isArray(data[0]) && typeof(data[0]) != OBJECT) {
                     seriesItem.data = [data];
                 }
             }
@@ -8965,7 +8980,7 @@ kendo_module({
             return result;
         }
 
-        if (typeof aggregate === "object") {
+        if (typeof aggregate === OBJECT) {
             result = execComposite(values, aggregate, series);
         } else {
             result = execSimple(values, aggregate, series);
@@ -9500,7 +9515,7 @@ kendo_module({
                 propValue = options[property];
                 if (isFn(propValue)) {
                     options[property] = valueOrDefault(propValue(context), defaults[property]);
-                } else if (typeof propValue === "object") {
+                } else if (typeof propValue === OBJECT) {
                     state.defaults = defaults[property];
                     state.depth++;
                     evalOptions(propValue, context, state);
