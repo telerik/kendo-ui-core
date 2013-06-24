@@ -663,8 +663,7 @@ kendo_module({
 
                 if (date) {
                     if (zone) {
-                        date = timezone.apply(date, "Etc/UTC");
-                        date = timezone.convert(date, "Etc/UTC", zone);
+                        date = timezone.convert(date, date.getTimezoneOffset(), zone);
                     }
 
                     dates.push(date);
@@ -675,8 +674,8 @@ kendo_module({
         return dates;
     }
 
-    function isException(exceptions, date) {
-        var dates = $.isArray(exceptions) ? exceptions : parseExceptions(exceptions),
+    function isException(exceptions, date, zone) {
+        var dates = $.isArray(exceptions) ? exceptions : parseExceptions(exceptions, zone),
             idx = 0, length = dates.length;
 
         for (; idx < length; idx++) {
@@ -792,7 +791,7 @@ kendo_module({
 
         for (; idx < length; idx++) {
             event = events[idx];
-            startTimezon = event.startTimezone || event.endTimezone || zone;
+            startTimezone = event.startTimezone || event.endTimezone || zone;
 
             result = expand(event, start, end, startTimezon);
             resultLength = result.length;
@@ -800,7 +799,7 @@ kendo_module({
 
             if (resultLength) {
                 eventStart = event.start;
-                if (eventStart < start || isException(event.recurrenceException, eventStart, startTimezon)) {
+                if (eventStart < start || isException(event.recurrenceException, eventStart, startTimezone)) {
                     resultLength -= 1;
                     skip = true;
                 }

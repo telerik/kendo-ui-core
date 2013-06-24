@@ -6,6 +6,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.timezones.js"></script>
         <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -20,7 +21,8 @@
                 numberOfWeeks = recurrence.numberOfWeeks,
                 weekInMonth = recurrence.weekInMonth,
                 weekInYear = recurrence.weekInYear,
-                dayInYear = recurrence.dayInYear;
+                dayInYear = recurrence.dayInYear,
+                isException = recurrence.isException;
 
             module("Recurring helper methods");
 
@@ -223,6 +225,29 @@
             test("dayInYear return 366 for (31-12-2012) Leap Year", function() {
                var date = new Date(2012, 11, 31);
                equal(dayInYear(date), 366);
+            });
+
+            module("Exception dates");
+
+            test("isException method finds date in string", function() {
+                var date = new Date(2012, 11, 31),
+                    exception = kendo.toString(kendo.timezone.apply(date, 0), "yyyyMMddTHHmmssZ") + ";";
+
+                ok(isException(exception, date));
+            });
+
+            test("isException method honours UTC timezone", function() {
+                var date = new Date(2012, 11, 31),
+                    exception = kendo.toString(date, "yyyyMMddTHHmmssZ") + ";";
+
+                ok(isException(exception, date, "Etc/UTC"));
+            });
+
+            test("isException method honours America/New_York timezone", function() {
+                var date = new Date(2012, 11, 31),
+                    exception = kendo.toString(kendo.timezone.convert(date, "America/New_York", "Etc/UTC"), "yyyyMMddTHHmmssZ") + ";";
+
+                ok(isException(exception, date, "America/New_York"));
             });
 
         </script>
