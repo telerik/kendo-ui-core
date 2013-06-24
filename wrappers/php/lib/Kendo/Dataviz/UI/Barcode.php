@@ -101,6 +101,15 @@ Any valid CSS color string will work here, including hex and rgb.
     }
 
     /**
+    * The initial value of the Barcode
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\Barcode
+    */
+    public function value($value) {
+        return $this->setProperty('value', $value);
+    }
+
+    /**
     * The width of the barcode in pixels.  By default the width is 300.
     * @param float $value
     * @return \Kendo\Dataviz\UI\Barcode
