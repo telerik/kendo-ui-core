@@ -1619,7 +1619,7 @@ kendo_module({
             that._daily = kendo.format(INTERVAL, daily.repeatEvery, daily.days) + endHtml;
             that._weekly = kendo.format(INTERVAL, weekly.repeatEvery, weekly.weeks) + weekHtml + endHtml;
             that._monthly = kendo.format(INTERVAL, monthly.repeatEvery, monthly.months) + monthHtml + endHtml;
-            that._yearly = kendo.format(INTERVAL, monthly.repeatEvery, monthly.months) + yearHtml + endHtml;
+            that._yearly = kendo.format(INTERVAL, yearly.repeatEvery, yearly.years) + yearHtml + endHtml;
         }
     });
 
