@@ -417,13 +417,14 @@
     <Compile Include="Models\CompensationStats.cs" />
     <Compile Include="Models\DatePoint.cs" />
     <Compile Include="Models\Scheduler\SchedulerEventService.cs" />
-    <Compile Include="Models\Scheduler\Screening.cs" />
-    <Compile Include="Models\Scheduler\Task.cs" />
-    <Compile Include="Models\Scheduler\Tasks.Designer.cs">
+    <Compile Include="Models\Scheduler\SchedulerModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Tasks.edmx</DependentUpon>
+      <DependentUpon>SchedulerModels.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Scheduler\Screening.cs" />
+    <Compile Include="Models\Scheduler\Task.cs" />
+    <Compile Include="Models\Scheduler\TaskViewModel.cs" />
     <Compile Include="Models\SocialBenefitType.cs" />
     <Compile Include="Models\SocialBenefits.cs" />
     <Compile Include="Models\CrimeData.cs" />
@@ -841,9 +842,9 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
-    <EntityDeploy Include="Models\Scheduler\Tasks.edmx">
+    <EntityDeploy Include="Models\Scheduler\SchedulerModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Tasks.Designer.cs</LastGenOutput>
+      <LastGenOutput>SchedulerModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Models\StockData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
