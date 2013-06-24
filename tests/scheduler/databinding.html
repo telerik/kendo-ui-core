@@ -99,15 +99,15 @@
             });
 
             test("expand recurring events before calling render method", function() {
-                var today = new Date(),
+                var today = new Date(2013, 10, 10),
                     year = today.getFullYear(),
                     month = today.getMonth(),
                     day = today.getDate(),
-                    occurrencesLength = (7 - (today.getDay() || 7)) || 1, //find days to the end of week
                     view, events;
 
                 var scheduler = new Scheduler(container, {
                     views: [ "week" ],
+                    date: today,
                     dataSource: [
                         {
                             start: new Date(year, month, day, 10),
@@ -130,7 +130,7 @@
                 scheduler.refresh();
                 events = view.args("render", 0)[0];
 
-                equal(events.length, occurrencesLength + 1);
+                equal(events.length, 8);
             });
 
             test("resetting DataSource rebinds the widget", 2, function() {
@@ -155,15 +155,15 @@
             });
 
             test("persist expanded events as a private field", function() {
-                var today = new Date(),
+                var today = new Date(2013, 10, 10),
                     year = today.getFullYear(),
                     month = today.getMonth(),
                     day = today.getDate(),
-                    occurrencesLength = (7 - (today.getDay() || 7)) || 1, //find days to the end of week
                     view, events;
 
                 var scheduler = new Scheduler(container, {
                     views: [ "week" ],
+                    date: today,
                     dataSource: [
                         {
                             start: new Date(year, month, day, 10),
@@ -180,9 +180,8 @@
 
                 scheduler.refresh();
 
-                equal(scheduler._data.length, occurrencesLength + 1);
+                equal(scheduler._data.length, 8);
             });
-
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
