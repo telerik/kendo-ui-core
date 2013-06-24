@@ -7,12 +7,6 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<c:url value="/web/scheduler/index/read" var="readUrl" />
-<c:url value="/web/scheduler/index/create" var="createUrl" />
-<c:url value="/web/scheduler/index/update" var="updateUrl" />
-<c:url value="/web/scheduler/index/destroy" var="destroyUrl" />
-
 <%
 	Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2013/6/13");
 	
