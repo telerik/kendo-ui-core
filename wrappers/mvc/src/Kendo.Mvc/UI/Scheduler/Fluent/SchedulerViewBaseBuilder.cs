@@ -231,6 +231,42 @@
 
             return this;
         }
+
+        /// <summary>
+        /// If set to true the view will be initially selected by the scheduler widget. Default value is false.
+        /// </summary>
+        /// <param name="isSelected">The isSelected</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.Editable(false);
+        ///             dayView.SelectedDateFormat(&quot;{0:dd-MM-yyyy}&quot;);
+        ///             dayView.Selected(true);
+        ///         });
+        ///         views.AgendaView();
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public ISchedulerViewBuilder Selected(bool isSelected)
+        {
+            resource.Selected = isSelected;
+
+            return this;
+        }
     }
 
 }

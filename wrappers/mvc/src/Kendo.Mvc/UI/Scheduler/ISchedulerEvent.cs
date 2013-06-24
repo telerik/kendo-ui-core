@@ -36,8 +36,13 @@
             set;
         }
 
-        //Recurrence
-        string Recurrence
+        string RecurrenceRule
+        {
+            get;
+            set;
+        }
+
+        string RecurrenceException
         {
             get;
             set;

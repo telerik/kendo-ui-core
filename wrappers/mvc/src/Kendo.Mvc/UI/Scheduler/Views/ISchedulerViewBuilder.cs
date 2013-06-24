@@ -18,5 +18,7 @@
         ISchedulerViewBuilder EventTemplateId(string eventTemplate);
 
         ISchedulerViewBuilder SelectedDateFormat(string selectedDateFormat);
+
+        ISchedulerViewBuilder Selected(bool isSelected);
     }
 }

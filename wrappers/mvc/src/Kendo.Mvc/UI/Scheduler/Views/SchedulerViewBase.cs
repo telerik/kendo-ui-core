@@ -55,6 +55,12 @@
             set;
         }
 
+        public bool Selected
+        {
+            get;
+            set;
+        }
+
         protected void SerializeBaseOptions(IDictionary<string, object> json)
         {
             var idPrefix = "#";
@@ -101,6 +107,11 @@
             if (!string.IsNullOrEmpty(SelectedDateFormat))
             {
                 json["selectedDateFormat"] = SelectedDateFormat;
+            }
+
+            if (Selected != false)
+            {
+                json["selected"] = Selected;
             }
         }
     }

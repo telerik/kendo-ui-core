@@ -54,5 +54,11 @@
             get;
             set;
         }
+
+        bool Selected
+        {
+            get;
+            set;
+        }
     }
 }
