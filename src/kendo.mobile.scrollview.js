@@ -195,9 +195,11 @@ kendo_module({
 
     kendo.mobile.ui.ScrollViewElasticPane = ElasticPane;
 
-    var ScrollViewContent = kendo.Class.extend({
+    var ScrollViewContent = kendo.Observable.extend({
         init: function(element, pane) {
             var that = this;
+
+            kendo.Observable.fn.init.call(this);
 
             that.element = element;
             that.pane = pane;
@@ -278,9 +280,11 @@ kendo_module({
 
     kendo.mobile.ui.ScrollViewContent = ScrollViewContent;
 
-    var VirtualScrollViewContent = kendo.Class.extend({
+    var VirtualScrollViewContent = kendo.Observable.extend({
         init: function(element, pane, options) {
             var that = this;
+
+            kendo.Observable.fn.init.call(this);
 
             that.element = element;
             that.pane = pane;
@@ -483,6 +487,8 @@ kendo_module({
             pages[2].position(RIGHT_PAGE);
 
             this.page = 0;
+
+            this.trigger("reset");
         },
 
         _onResize: function() {
@@ -589,6 +595,10 @@ kendo_module({
 
             that._content = options.dataSource ? new VirtualScrollViewContent(that.inner, that.pane, that.options) : new ScrollViewContent(that.inner, that.pane);
             that._content.page = that.page;
+
+            that._content.bind("reset", function() {
+                that._syncWithContent();
+            });
         },
 
         options: {
@@ -643,6 +653,13 @@ kendo_module({
             this.page = this._content.page;
         },
 
+        _syncWithContent: function() {
+            var pages = this._content.pages;
+
+            this.page = this._content.page;
+            this.trigger(CHANGE, { page: this.page, element: pages ? pages[1].element : undefined });
+        },
+
         _dragEnd: function(e) {
             var that = this,
                 velocity = e.x.velocity,
@@ -663,8 +680,7 @@ kendo_module({
 
         _transitionEnd: function() {
             if (this._content.updatePage()) {
-                this.page = this._content.page;
-                this.trigger(CHANGE, { page: this.page, element: this._content.pages[1].element });
+                this._syncWithContent();
             }
         }
     });
