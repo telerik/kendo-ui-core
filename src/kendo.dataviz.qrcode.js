@@ -532,7 +532,7 @@ kendo_module({
                 var yLength = numberY.toString(2).length,
                     xLength = numberX.toString(2).length;
                 do{                                            
-                    numberX ^= numberY << xLength - yLength;//Math.ceil(Math.log(x / y,2));
+                    numberX ^= numberY << xLength - yLength;
                     xLength = numberX.toString(2).length
                 }
                 while(xLength >= yLength);
@@ -822,7 +822,7 @@ kendo_module({
                 Widget.fn.init.call(that, element, options);
                  
                 that.element = $(element); 
-                that.element.addClass("k-qrcode k-widget");
+                that.element.addClass("k-qrcode");
                 that.view = new defaultView(); 
                 that.setOptions(options);
                 that.redraw(); 
@@ -903,15 +903,13 @@ kendo_module({
             _addMatrix: function(matrix, baseUnit, quietZoneSize){
                 var that = this,
                     view = that.view,
-                    //strokeWidth = baseUnit + 0.5,
                     y,
                     x1,
                     box,
                     column;                           
                 
                 for(var row = 0; row < matrix.length; row++){
-                    y = quietZoneSize + row * baseUnit;
-                    //y = quietZoneSize + row * baseUnit + baseUnit / 2;                    
+                    y = quietZoneSize + row * baseUnit;                 
                     column = 0;
                     while(column < matrix.length){
                         while(matrix[row][column] == 0 && column < matrix.length){
@@ -924,9 +922,7 @@ kendo_module({
                             }
                             box = new Box2D(quietZoneSize + x1 * baseUnit, y, quietZoneSize + column * baseUnit, y + baseUnit);
                             view.children.push(view.createRect(box, 
-                                { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false})); 
-                            //view.children.push(view.createLine(quietZoneSize + x1 * baseUnit, y, quietZoneSize + column * baseUnit, y,
-                            //    {strokeWidth: strokeWidth, stroke: that.options.darkModuleColor, strokeLineCap: "butt", strokeLineJoin: "miter"}));                             
+                                { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false}));                         
                         }
                     }
                 }                 

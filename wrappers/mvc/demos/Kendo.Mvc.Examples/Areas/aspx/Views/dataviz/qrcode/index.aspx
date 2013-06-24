@@ -21,7 +21,7 @@
     
     <%=
         Html.Kendo().QRCode()
-            .Name("qrUrl")
+            .Name("qrTelephone")
             .Value("tel:+1-888-365-2779")
             .ErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
             .Size(170)
