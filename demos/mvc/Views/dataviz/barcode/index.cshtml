@@ -6,50 +6,33 @@
         <li><label> Value: <input  id="value" class="k-textbox" value="1234567"/></label></li>
         <li><label> Encoding: <input  id="type" /></label></li>
         <li><label> Show Text: <input type="checkbox" id="text" checked="checked"/></label></li>
-        <li><label> Show Checksum: <input type="checkbox" id="checksum" checked="checked"/></label></li>
+        <li><label> Show Checksum: <input type="checkbox" id="checksum" /></label></li>
         </ul>
         <script>
-            function createBarcode() {
-                if ($('body').kendoValidator('validate')) {
-                    $("#barcode").kendoBarcode({
-                        border: {
-                            width: 2,
-                            dashType: "solid",
-                            color: "black"
-                        },
+            function setOptions() {
+                try {
+                    var barcode = $('#barcode').data('kendoBarcode');
+                    barcode.setOptions({
                         value: $('#value').val(),
-                        width: 600,
-                        height: 400,
                         checksum: $('#checksum').is(':checked'),
-                        background: "pink",
-                        color: "red",
-                        padding: {
-                            top:25,
-//                            left: 25,
-//                            right: 25,
-                            bottom: 25
-                        },
                         text: {
-                            visible: $('#text').is(':checked'),
-                            color: 'green',
-                            font: "60px consolas",
-                            margin: {
-                                top: 25
-                            }
+                            visible: $('#text').is(':checked')
                         },
                         type: $('#type').kendoDropDownList('value')
-                    });
-                }
+                    })
+                } catch (e) {               
+                    alert(e.message);
+                }               
             }
 
             $('#type').kendoDropDownList({
                 dataSource: [
+                            'Code39',
                             'EAN8',
                             'EAN13',
                             'UPCE',
                             'UPCA',
                             'Code11',
-                            'Code39',
                             'Code39Extended',
                             'Code128',
                             'Code93',
@@ -64,49 +47,18 @@
                             'GS1-128',
                             'POSTNET'
                             ],
-                change: createBarcode
+                change: setOptions
             });
 
             $(document).ready(function () {
-                $('body').kendoValidator({
-                    rules: {
-                        ean13: function (element) {
-                            if ($(element).is('#value')) {
-                                var type = $('#type').val().toLowerCase();
-                                var val = $(element).val();
-                                if (type == 'ean13' && val.length != 12) {
-                                    return false;
-                                }
-                            }
-                            return true;
-                        },
-                        ean8: function (element) {
-                            if ($(element).is('#value')) {
-                                var type = $('#type').val().toLowerCase();
-                                var val = $(element).val();
-                                if (type == 'ean8' && val.length != 7) {
-                                    return false;
-                                }
-                            }
-                            return true;
-                        }
-                    },
-                    messages: {
-                        ean13: "The value of EAN13 should be of 12 numbers",
-                        ean8: "The value of EAN8 should be of 7 numbers"
-                    }
+                $("#barcode").kendoBarcode({
+                    value: "1234567"
                 });
-                $('#value,#checksum,#text').change(createBarcode);
-                createBarcode();
+
+
+                $('#value,#checksum,#text').change(setOptions);
             });
         </script>
 
-        <style scoped>
-            #barcode 
-            {
-               // border : 2px dotted blue;
-                width:600px;
-                }
-        </style>
     </div>
 
