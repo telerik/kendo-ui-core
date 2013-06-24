@@ -230,7 +230,9 @@ kendo_module({
 
             return obj;
         },
+        id: "id",
         fields: {
+            id: { type: "number" },
             title: { defaultValue: "", type: "string" },
             start: { type: "date", validation: { required: true } },
             end: { type: "date", validation: { required: true, dateCompare: { value: dateCompareValidator, message: "End date should be greater than or equal to the start date"}} },

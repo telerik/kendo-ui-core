@@ -42,6 +42,7 @@
 
             test("Occurrence clones original event", function() {
                 var schedulerEvent = new SchedulerEvent({
+                    id: 1,
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
@@ -54,7 +55,7 @@
                 notEqual(event.uid, schedulerEvent.uid);
                 equal(event.title, schedulerEvent.title);
                 equal(event.recurrence, undefined);
-                equal(event.recurrenceID, schedulerEvent.id);
+                equal(event.recurrenceId, schedulerEvent.id);
                 equal(event.start.getTime(), +new Date(2000, 10, 11, 16, 30));
                 equal(event.end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });

@@ -635,8 +635,7 @@
 
                 exception = scheduler.dataSource.at(1);
 
-                equal(exception.id, undefined);
-                equal(exception.recurrenceRule, "");
+                ok(exception.isNew())
             });
 
             test("creating exception adds exception date to event exception property", function() {
@@ -916,7 +915,7 @@
                     dataSource: {
                         data: [
                             { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException},
-                            { id: "2", start: nextDate, end: nextDate, title: "my event", recurrenceId: "1" }
+                            { id: "2", start: nextDate, end: nextDate, title: "my event", recurrenceId: 1 }
                         ]
                     }
                 });
