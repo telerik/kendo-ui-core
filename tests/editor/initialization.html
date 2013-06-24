@@ -53,7 +53,9 @@
                 var defaultPalette = kendo.ui.editor.ColorTool.fn.options.palette;
                 kendo.ui.editor.ColorTool.fn.options.palette = [customColor];
 
-                setup("baz");
+                setup("baz", {
+                    tools: [ "foreColor", "backColor" ]
+                });
 
                 var colorpickers = $("[data-role=colorpicker]");
 

@@ -38,11 +38,10 @@
                     "unlink",
                     "insertImage",
                     "createTable"
-                ],
-                messages: {
-                    unlink: "unlink foo"
-                }
+                ]
             }).data("kendoEditor");
+
+            var inline;
 
             var componentType = kendo.support.browser.msie || kendo.support.touch ? 'kendoDropDownList' : 'kendoComboBox';
 
@@ -81,11 +80,11 @@
                 });
             });
 
-            test('popup buttons do not call exec', function() {
+            test("popup buttons do not call exec", function() {
                 var called;
 
                 withMock(editor, "exec", function() { called = true; }, function() {
-                    $('[data-popup]', editor.wrapper).click();
+                    $("[data-popup]", editor.wrapper).click();
 
                     ok(!called);
                 });
@@ -181,23 +180,173 @@
                 equal(value($('.k-fontSize', editor.wrapper)), '2 (10pt)');
             });
 
-            test('clicking disabled links should not navigate', function() {
-                var isDefaultPrevented = false,
-                navigationListener = function(e) {
+            var toolbar;
+            var dom;
+            var editorNS = kendo.ui.editor;
+
+            module("Tool configuration & rendering", {
+                setup: function() {
+                    dom = $("<ul class='k-editor-toolbar' />").appendTo("body");
+                    toolbar = new editorNS.Toolbar(dom[0]);
+                },
+
+                teardown: function() {
+                    toolbar.destroy();
+                    dom.remove();
+                }
+            });
+
+            function mockEditorTools(array, options) {
+                return {
+                    options: $.extend({
+                        tools: array,
+                        messages: {
+                            bold: "Bold",
+                            italic: "Italic",
+                            underline: "Underline",
+                            strikethrough: "Strikethrough",
+                            superscript: "Superscript",
+                            subscript: "Subscript",
+                            justifyCenter: "Center text",
+                            justifyLeft: "Align text left",
+                            justifyRight: "Align text right",
+                            justifyFull: "Justify"
+                        }
+                    }, options),
+                    bind: $.noop,
+                    exec: $.noop
+                };
+            }
+
+            test("expands tool configuration for default tool", function() {
+                toolbar.bindTo(mockEditorTools([ "bold" ]));
+
+                ok($.isPlainObject(toolbar.tools.bold));
+                equal(toolbar.tools.bold.options.name, "bold");
+                equal(dom.find(".k-bold").length, 1);
+            });
+
+            test("expands tool configuration for custom tool", function() {
+                toolbar.bindTo(mockEditorTools([ { name: "foo" } ]));
+
+                ok($.isPlainObject(toolbar.tools.foo));
+                equal(toolbar.tools.foo.options.name, "foo");
+                equal(toolbar.tools.foo.options.type, "button");
+                equal(dom.find(".k-foo").length, 1);
+            });
+
+            test("expands native tools", function() {
+                toolbar.bindTo(mockEditorTools([]));
+
+                ok(toolbar.tools.undo);
+                ok(toolbar.tools.redo);
+                ok(toolbar.tools.insertParagraph);
+                ok(toolbar.tools.insertLineBreak);
+            });
+
+            test("clicking on tool executes editor command", function() {
+                var editorMock = mockEditorTools([ "bold" ]);
+                var args;
+
+                editorMock.exec = function() { args = arguments; };
+
+                toolbar.bindTo(editorMock);
+
+                dom.find(".k-bold").trigger("click");
+
+                ok(args);
+                equal(args[0], "bold");
+            });
+
+            test("expands configured tools", function() {
+                toolbar.bindTo(mockEditorTools([ {
+                    name: "formatting",
+                    items: [ { text: "foo", tag: "h1" } ]
+                } ]));
+
+                var formatting = dom.find("select.k-formatting");
+
+                ok(formatting.length);
+
+                var dataSource = formatting.data("kendoSelectBox").dataSource;
+                equal(dataSource.data().length, 1);
+                equal(dataSource.data()[0].text, "foo");
+            });
+
+            test("toolById returns tool", function() {
+                toolbar.bindTo(mockEditorTools([ { name: "foo" }, { name: "bar" } ]));
+
+                var tool = toolbar.toolById("bar");
+
+                ok(tool);
+                equal(tool.options.name, "bar");
+            });
+
+            test("snippets tool is not shown if it has no items", function() {
+                toolbar.bindTo(mockEditorTools([]));
+
+                equal(dom.find("li").length, 0);
+            });
+
+            test("unlink tool applies custom title", function() {
+                toolbar.bindTo(mockEditorTools([ "unlink" ], { messages: { unlink: "foo" } }));
+
+                equal(dom.find(".k-unlink").attr("title"), "foo");
+            });
+
+            test("clicking disabled links should not navigate", function() {
+                toolbar.bindTo(mockEditorTools([ "unlink" ]));
+
+                var isDefaultPrevented = false;
+                var navigationListener = function(e) {
                     isDefaultPrevented = e.isDefaultPrevented();
                 };
 
-                editor.wrapper.bind('click', navigationListener);
+                dom.bind("click", navigationListener);
 
-                $('.k-editor-button .k-tool-icon.k-state-disabled').trigger('click');
+                dom.find(".k-editor-button .k-tool-icon.k-state-disabled").trigger("click");
 
-                editor.wrapper.unbind('click', navigationListener);
+                dom.unbind("click", navigationListener);
 
                 ok(isDefaultPrevented);
             });
 
-            test("unlink applies custom title", function() {
-                equal(editor.wrapper.find(".k-unlink").attr("title"), "unlink foo");
+            test("buttons are grouped in default groups", function() {
+                toolbar.bindTo(mockEditorTools([
+                    "bold", "italic", "underline",
+                    "insertImage", "createLink"
+                ]));
+
+                equal(dom.find(".k-group-start").length, 2);
+                equal(dom.find(".k-group-end").length, 2);
+                equal(dom.find(".k-group-start .k-bold").length, 1);
+                equal(dom.find(".k-group-start .k-insertImage").length, 1);
+                equal(dom.find(".k-group-end .k-underline").length, 1);
+                equal(dom.find(".k-group-end .k-createLink").length, 1);
+            });
+
+            test("hidden buttons do not end groups", function() {
+                toolbar.bindTo(mockEditorTools([
+                    "createLink", "unlink"
+                ]));
+
+                dom.find(".k-unlink").addClass(".k-state-disabled");
+                toolbar.updateGroups();
+
+                equal(dom.find(".k-group-end .k-createLink").length, 1);
+            });
+
+            test("space between groups is broken when there's no space for next group", function() {
+                toolbar.bindTo(mockEditorTools([
+                    "bold", "italic",
+                    "insertImage", "createLink"
+                ]));
+
+                dom.width(dom.find(".k-tool-icon").width() * 3);
+
+                toolbar.updateGroups();
+
+                equal(dom.find(".k-group-break").length, 1);
             });
 
         </script>

@@ -413,8 +413,8 @@ html body .k-button-bare.k-upload-button:hover
 
 .k-i-search { .sprite-hoverable(2, 15); }
 .k-i-custom { .sprite-hoverable(-115px, -113px, 26); }
-.k-editor .k-i-custom { background-position: -112px -110px; }
-.k-viewHtml { background-position: -112px -132px; }
+.k-editor .k-i-custom { background-position: -112px -111px; }
+.k-viewHtml { background-position: -288px -120px; }
 
 .k-i-insert-n, .k-insert-top { .sprite-hoverable(10, 2); }
 .k-i-insert-m, .k-insert-middle { .sprite-hoverable(10, 3); }
@@ -2991,6 +2991,7 @@ table.k-editor
     list-style-type: none;
     line-height: 1.3em;
     cursor: default;
+    white-space: nowrap;
 }
 
 .k-editor-toolbar li
@@ -3015,12 +3016,13 @@ table.k-editor
 }
 
 
+.k-group-end,
 .k-editor-toolbar .k-editor-dropdown,
 .k-editor-toolbar .k-editor-combobox,
 .k-editor-toolbar .k-editor-selectbox,
 .k-editor-toolbar .k-editor-colorpicker
 {
-    margin-right: 2px;
+    margin-right: 6px;
 }
 
 .k-editor-toolbar .k-separator
@@ -3052,67 +3054,67 @@ table.k-editor
 
 .k-editor-button .k-tool-icon
 {
-    width: 22px;
-    height: 22px;
-    margin: 1px;
+    width: 24px;
+    height: 24px;
+    margin: 1px 0;
     vertical-align: middle;
 }
 
 .k-i-move { background-position: -160px -288px; }
-.k-bold { background-position: -64px 0; }
-.k-bold.k-state-hover { background-position: -90px 0; }
-.k-italic { background-position: -64px -22px; }
-.k-italic.k-state-hover { background-position: -90px -22px; }
-.k-underline { background-position: -64px -44px; }
-.k-underline.k-state-hover { background-position: -90px -44px; }
-.k-strikethrough { background-position: -64px -66px; }
-.k-strikethrough.k-state-hover { background-position: -90px -66px; }
-.k-foreColor { background-position: -64px -88px; }
-.k-state-hover > .k-foreColor { background-position: -90px -88px; }
-.k-backColor { background-position: -64px -110px; }
-.k-state-hover > .k-backColor { background-position: -90px -110px; }
-.k-justifyLeft { background-position: -64px -132px; }
-.k-justifyLeft.k-state-hover { background-position: -90px -132px; }
-.k-justifyCenter { background-position: -64px -154px; }
-.k-justifyCenter.k-state-hover { background-position: -90px -154px; }
-.k-justifyRight { background-position: -64px -176px; }
-.k-justifyRight.k-state-hover { background-position: -90px -176px; }
-.k-justifyFull { background-position: -64px -198px; }
-.k-justifyFull.k-state-hover { background-position: -90px -198px; }
-.k-insertUnorderedList { background-position: -64px -242px; }
-.k-insertUnorderedList.k-state-hover { background-position: -90px -242px; }
-.k-insertOrderedList { background-position: -64px -264px; }
-.k-insertOrderedList.k-state-hover { background-position: -90px -264px; }
-.k-indent, .k-rtl .k-outdent { background-position: -112px 0; }
-.k-indent.k-state-hover, .k-rtl .k-outdent.k-state-hover { background-position: -138px 0; }
-.k-outdent, .k-rtl .k-indent { background-position: -112px -22px; }
-.k-outdent.k-state-hover, .k-rtl .k-indent.k-state-hover { background-position: -138px -22px; }
-.k-createLink { background-position: -112px -44px; }
-.k-createLink.k-state-hover { background-position: -138px -44px; }
-.k-unlink { background-position: -112px -66px; }
-.k-unlink.k-state-hover { background-position: -138px -66px; }
-.k-insertImage { background-position: -112px -88px; }
-.k-insertImage.k-state-hover { background-position: -138px -88px; }
-.k-subscript { background-position: -112px -154px; }
-.k-subscript.k-state-hover { background-position: -138px -154px; }
-.k-superscript { background-position: -112px -176px; }
-.k-superscript.k-state-hover { background-position: -138px -176px; }
+.k-bold { background-position: -240px 0; }
+.k-bold.k-state-hover { background-position: -264px 0; }
+.k-italic { background-position: -240px -24px; }
+.k-italic.k-state-hover { background-position: -264px -24px; }
+.k-underline { background-position: -240px -48px; }
+.k-underline.k-state-hover { background-position: -264px -48px; }
+.k-strikethrough { background-position: -240px -72px; }
+.k-strikethrough.k-state-hover { background-position: -264px -72px; }
+.k-foreColor { background-position: -240px -96px; }
+.k-state-hover > .k-foreColor { background-position: -264px -96px; }
+.k-backColor { background-position: -240px -120px; }
+.k-state-hover > .k-backColor { background-position: -264px -120px; }
+.k-justifyLeft { background-position: -240px -144px; }
+.k-justifyLeft.k-state-hover { background-position: -264px -144px; }
+.k-justifyCenter { background-position: -240px -168px; }
+.k-justifyCenter.k-state-hover { background-position: -264px -168px; }
+.k-justifyRight { background-position: -240px -192px; }
+.k-justifyRight.k-state-hover { background-position: -264px -192px; }
+.k-justifyFull { background-position: -240px -216px; }
+.k-justifyFull.k-state-hover { background-position: -264px -216px; }
+.k-insertUnorderedList { background-position: -240px -264px; }
+.k-insertUnorderedList.k-state-hover { background-position: -264px -264px; }
+.k-insertOrderedList { background-position: -240px -288px; }
+.k-insertOrderedList.k-state-hover { background-position: -264px -288px; }
+.k-indent, .k-rtl .k-outdent { background-position: -288px 0; }
+.k-indent.k-state-hover, .k-rtl .k-outdent.k-state-hover { background-position: -312px 0; }
+.k-outdent, .k-rtl .k-indent { background-position: -288px -24px; }
+.k-outdent.k-state-hover, .k-rtl .k-indent.k-state-hover { background-position: -312px -24px; }
+.k-createLink { background-position: -288px -48px; }
+.k-createLink.k-state-hover { background-position: -312px -48px; }
+.k-unlink { background-position: -288px -72px; }
+.k-unlink.k-state-hover { background-position: -312px -72px; }
+.k-insertImage { background-position: -288px -96px; }
+.k-insertImage.k-state-hover { background-position: -312px -96px; }
+.k-subscript { background-position: -288px -144px; }
+.k-subscript.k-state-hover { background-position: -312px -144px; }
+.k-superscript { background-position: -288px -168px; }
+.k-superscript.k-state-hover { background-position: -312px -168px; }
 .k-createTable { background-position: -192px 0; }
-.k-createTable.k-state-hover { background-position: -218px 0; }
-.k-addColumnLeft { background-position: -192px -22px; }
-.k-addColumnLeft.k-state-hover { background-position: -218px -22px; }
-.k-addColumnRight { background-position: -192px -44px; }
-.k-addColumnRight.k-state-hover { background-position: -218px -44px; }
-.k-addRowAbove { background-position: -192px -66px; }
-.k-addRowAbove.k-state-hover { background-position: -218px -66px; }
-.k-addRowBelow { background-position: -192px -88px; }
-.k-addRowBelow.k-state-hover { background-position: -218px -88px; }
-.k-deleteRow { background-position: -192px -110px; }
-.k-deleteRow.k-state-hover { background-position: -218px -110px; }
-.k-deleteColumn { background-position: -192px -132px; }
-.k-deleteColumn.k-state-hover { background-position: -218px -132px; }
-.k-mergeCells { background-position: -192px -154px; }
-.k-mergeCells.k-state-hover { background-position: -218px -154px; }
+.k-createTable.k-state-hover { background-position: -216px 0; }
+.k-addColumnLeft { background-position: -192px -24px; }
+.k-addColumnLeft.k-state-hover { background-position: -216px -24px; }
+.k-addColumnRight { background-position: -192px -48px; }
+.k-addColumnRight.k-state-hover { background-position: -216px -48px; }
+.k-addRowAbove { background-position: -192px -72px; }
+.k-addRowAbove.k-state-hover { background-position: -216px -72px; }
+.k-addRowBelow { background-position: -192px -96px; }
+.k-addRowBelow.k-state-hover { background-position: -216px -96px; }
+.k-deleteRow { background-position: -192px -120px; }
+.k-deleteRow.k-state-hover { background-position: -216px -120px; }
+.k-deleteColumn { background-position: -192px -144px; }
+.k-deleteColumn.k-state-hover { background-position: -216px -144px; }
+.k-mergeCells { background-position: -192px -168px; }
+.k-mergeCells.k-state-hover { background-position: -216px -168px; }
 
 /* default tool widths */
 .k-fontName { width: 110px; }
@@ -3125,12 +3127,33 @@ table.k-editor
     margin: 1px 0 0;
 }
 
+.k-editor-toolbar .k-editor-button
+{
+    padding: 1px;
+}
+
+.k-editor-button .k-tool-icon
+{
+    border-style: solid;
+    border-width: 1px 0 1px 1px;
+}
+
+.k-group-end .k-tool-icon
+{
+    border-right-width: 1px;
+}
+
+.k-editor-toolbar li.k-group-break
+{
+    display: block;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
 .k-editor-button .k-state-hover,
 .k-editor-button .k-state-active
 {
-    border-style: solid;
-    border-width: 1px;
-    margin: 0;
     vertical-align: middle;
 }
 
@@ -3607,64 +3630,64 @@ div.k-slider
 .k-scheduler-toolbar,
 .k-scheduler-footer
 {
-	border-style:solid;
+    border-style:solid;
 }
 
 .k-scheduler-toolbar,
 .k-scheduler-footer
 {
-	line-height:28px;
-	padding:6px;
+    line-height:28px;
+    padding:6px;
 }
 
 .k-scheduler-toolbar
 {
-	border-width:0 0 1px;
+    border-width:0 0 1px;
 }
 
 .k-scheduler-header
 {
-	text-align:center;
+    text-align:center;
 }
 
 .k-scheduler-footer
 {
-	border-width:1px 0 0;
+    border-width:1px 0 0;
 }
 
 .k-scheduler-toolbar > ul
 {
-	float:right;
+    float:right;
 }
 
 .k-scheduler-toolbar > ul:first-child
 {
-	float:left;
+    float:left;
 }
 
 .k-scheduler-toolbar > ul > li,
 .k-scheduler-footer > ul > li
 {
-	display:inline-block;
-	border-style:solid;
-	border-width:1px 1px 1px 0;
+    display:inline-block;
+    border-style:solid;
+    border-width:1px 1px 1px 0;
 }
 
 .k-scheduler .k-nav-current
 {
-	border-width:0;
+    border-width:0;
 }
 
 .k-scheduler-toolbar > ul > li:first-child
 {
-	border-left-width:1px;
+    border-left-width:1px;
 }
 
 .k-scheduler-toolbar > ul li:first-child,
 .k-scheduler-toolbar > ul li:first-child .k-link
 {
-	border-top-left-radius:5px;
-	border-bottom-left-radius:5px;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
 }
 
 .k-scheduler-toolbar .k-nav-next,
@@ -3672,57 +3695,57 @@ div.k-slider
 .k-scheduler-toolbar .k-nav-next .k-link,
 .k-scheduler-toolbar ul + ul li:last-child .k-link
 {
-	border-top-right-radius:5px;
-	border-bottom-right-radius:5px;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
 }
 
 .k-scheduler div.k-scheduler-footer ul li
 {
-	margin-right:.6em;
-	border-width:1px;
+    margin-right:.6em;
+    border-width:1px;
 }
 
 .k-scheduler div.k-scheduler-footer ul li,
 .k-scheduler div.k-scheduler-footer .k-link
 {
-	border-radius:5px;
+    border-radius:5px;
 }
 
 .k-scheduler-toolbar .k-link,
 .k-scheduler-footer .k-link
 {
-	display:inline-block;
-	padding:0 1.1em;
+    display:inline-block;
+    padding:0 1.1em;
 }
 
 .k-scheduler-toolbar .k-nav-prev .k-link,
 .k-scheduler-toolbar .k-nav-next .k-link
 {
-	padding-left:.6em;
-	padding-right:.6em;
+    padding-left:.6em;
+    padding-right:.6em;
 }
 
 .k-scheduler-toolbar .k-nav-current .k-link
 {
-	padding:0;
-	margin:0 1.1em;
+    padding:0;
+    margin:0 1.1em;
 }
 
 .k-scheduler-toolbar .k-i-calendar,
 .k-scheduler-footer .k-icon
 {
-	margin:-2px 6px 0 0;
+    margin:-2px 6px 0 0;
 }
 
 .k-scheduler-header,
 .k-scheduler-header-wrap
 {
-	overflow:hidden;
+    overflow:hidden;
 }
 
 .k-scheduler-header-wrap
 {
-	position:relative;
+    position:relative;
     border-style: solid;
     border-width: 0;
 }
@@ -3735,12 +3758,12 @@ div.k-slider
 .k-scheduler-times,
 .k-scheduler-content
 {
-	position:relative;
+    position:relative;
 }
 
 .k-scheduler-times
 {
-	overflow:hidden;
+    overflow:hidden;
     white-space: nowrap;
     border-style:solid;
     border-width:0;
@@ -3748,20 +3771,20 @@ div.k-slider
 
 .k-scheduler-content
 {
-	overflow:auto;
+    overflow:auto;
 }
 
 .k-scheduler-layout,
 .k-scheduler-table
 {
-	border-spacing:0;
-	width:100%;
+    border-spacing:0;
+    width:100%;
 }
 
 .k-scheduler-layout > tbody > tr > td
 {
-	padding: 0;
-	vertical-align: top;
+    padding: 0;
+    vertical-align: top;
 }
 
 /* fix smashed second layout column in iPad */
@@ -3772,59 +3795,59 @@ div.k-slider
 
 .k-scheduler-table
 {
-	table-layout:fixed;
-	margin:0;
+    table-layout:fixed;
+    margin:0;
 }
 
 .k-scheduler-times .k-scheduler-table
 {
-	table-layout:auto;
+    table-layout:auto;
 }
 
 .k-scheduler-monthview .k-scheduler-content .k-scheduler-table
 {
-	height: 100%;
+    height: 100%;
 }
 
 .k-scheduler-table td,
 .k-scheduler-table th
 {
-	height:1.5em;
-	padding:.334em .5em;
+    height:1.5em;
+    padding:.334em .5em;
 }
 
 .k-scheduler-monthview .k-scheduler-table td
 {
-	height: 60px;
-	text-align:right;
+    height: 60px;
+    text-align:right;
 }
 
 .k-scheduler-table td
 {
-	vertical-align:top;
+    vertical-align:top;
 }
 
 .k-scheduler-table td,
 .k-scheduler-header th
 {
-	border-style:solid;
-	border-width:0 0 1px 1px;
+    border-style:solid;
+    border-width:0 0 1px 1px;
 }
 
 .k-scheduler-table td:first-child,
 .k-scheduler-header th:first-child
 {
-	border-left-width:0;
+    border-left-width:0;
 }
 
 .k-scheduler-agenda .k-scheduler-table td:first-child
 {
-	border-left-width:1px;
+    border-left-width:1px;
 }
 
 .k-scheduler-agenda .k-scheduler-table td.k-scheduler-datecolumn
 {
-	border-left-width:0;
+    border-left-width:0;
 }
 
 .k-scheduler-layout tr + tr .k-scheduler-times tr:last-child > th,
@@ -3844,10 +3867,10 @@ div.k-slider
 .k-scheduler-times th
 {
     text-align:right;
-	padding-right:.6em;
+    padding-right:.6em;
     border-style:solid;
-	border-width:0 1px 1px 0;
-	border-color:transparent;
+    border-width:0 1px 1px 0;
+    border-color:transparent;
 }
 
 .k-scheduler-layout tr + tr .k-scheduler-times th
@@ -3862,33 +3885,33 @@ div.k-slider
 
 .k-scheduler-layout tr + tr .k-scheduler-times th:last-child
 {
-	vertical-align:top;
+    vertical-align:top;
 }
 
 .k-scheduler .k-middle-row td
 {
-	border-bottom-style:dotted;
+    border-bottom-style:dotted;
 }
 
 .k-scheduler-now-arrow,
 .k-scheduler-now-line
 {
-	position:absolute;
+    position:absolute;
 }
 
 .k-scheduler-now-arrow
 {
-	width:0;
-	height:0;
-	border:solid 5px transparent;
-	left:0;
+    width:0;
+    height:0;
+    border:solid 5px transparent;
+    left:0;
 }
 
 .k-scheduler-now-line
 {
-	left:5px;
-	right:0;
-	height:1px;
+    left:5px;
+    right:0;
+    height:1px;
 }
 
 .k-task
@@ -3913,41 +3936,41 @@ div.k-more-events
 .k-event,
 .k-more-events
 {
-	position:absolute;
-	border-style:solid;
-	border-width:1px;
-	text-align:left;
-	overflow: hidden;
+    position:absolute;
+    border-style:solid;
+    border-width:1px;
+    text-align:left;
+    overflow: hidden;
 }
 
 .k-event dl,
 .k-event dt,
 .k-event dd
 {
-	margin:0;
-	padding:0;
+    margin:0;
+    padding:0;
 }
 
 .k-event dl
 {
-	padding:.34em 1.8em .34em .6em;
+    padding:.34em 1.8em .34em .6em;
 }
 
 .k-event dt
 {
-	font-size:.9em;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+    font-size:.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .k-event-actions,
 .k-event > .k-link,
 .k-task > .k-link
 {
-	position: absolute;
-	top: 3px;
-	right:4px;
+    position: absolute;
+    top: 3px;
+    right:4px;
     white-space: nowrap;
 }
 
@@ -3988,8 +4011,8 @@ td:hover > .k-task .k-event-delete
 .k-event .k-event-top-actions,
 .k-event .k-event-bottom-actions
 {
-	position: absolute;
-	top: 0;
+    position: absolute;
+    top: 0;
     left: 0;
     width: 100%;
     text-align: center;
@@ -3998,61 +4021,61 @@ td:hover > .k-task .k-event-delete
 .k-event .k-event-bottom-actions
 {
     top: auto;
-	bottom: 0;
+    bottom: 0;
 }
 
 .k-event .k-resize-handle
 {
     display: block;
     margin: 0 auto;
-	width: 20px;
-	height: 5px;
-	background-position: -70px -309px;
-	cursor: n-resize;
+    width: 20px;
+    height: 5px;
+    background-position: -70px -309px;
+    cursor: n-resize;
     visibility: hidden;
 }
 
 .k-event:hover .k-resize-handle
 {
-	visibility: visible;
+    visibility: visible;
 }
 
 .k-scheduler-quickedit .k-textbox
 {
-	width: 200px;
+    width: 200px;
 }
 
 .k-tooltip-bottom
 {
-	text-align: left;
+    text-align: left;
 }
 
 .k-tooltip-bottom .k-button
 {
-	float: left;
-	margin-right: .3em;
+    float: left;
+    margin-right: .3em;
 }
 
 .k-tooltip-bottom .k-quickedit-details
 {
-	float: right;
-	margin-right:0;
+    float: right;
+    margin-right:0;
 }
 
 .k-scheduler-agenda .k-scheduler-table th,
 .k-scheduler-agenda .k-scheduler-table td
 {
-	text-align:left;
+    text-align:left;
 }
 
 .k-scheduler-datecolumn
 {
-	width: 144px;
+    width: 144px;
 }
 
 .k-scheduler-timecolumn
 {
-	width: 130px;
+    width: 130px;
 }
 
 .k-scheduler-timecolumn > div
@@ -4079,32 +4102,32 @@ td:hover > .k-task .k-event-delete
 
 .k-scheduler-mark
 {
-	display:inline-block;
-	width:1em;
-	height:1em;
-	vertical-align:middle;
-	margin-right:.5em;
+    display:inline-block;
+    width:1em;
+    height:1em;
+    vertical-align:middle;
+    margin-right:.5em;
 }
 
 .k-scheduler-agendaday
 {
-	float:left;
-	margin:0 .2em 0 0;
-	font-size:3em;
-	font-weight:normal;
+    float:left;
+    margin:0 .2em 0 0;
+    font-size:3em;
+    font-weight:normal;
 }
 
 .k-scheduler-agendaweek
 {
-	display:block;
-	margin:.3em 0 .1em;
-	font-size:1.1em;
-	font-style:normal;
+    display:block;
+    margin:.3em 0 .1em;
+    font-size:1.1em;
+    font-style:normal;
 }
 
 .k-scheduler-agendadate
 {
-	font-size:.8em;
+    font-size:.8em;
 }
 
 .k-scheduler-timecolumn
