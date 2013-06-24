@@ -21,7 +21,8 @@ namespace Kendo.Mvc.UI.Html
         public IHtmlNode CreateQRCode()
         {
             return new HtmlElement("div")
-                .Attributes(qrCode.HtmlAttributes);
+                .Attributes(qrCode.HtmlAttributes)
+                .AddClass("k-qrcode");
         }
 
         /// <summary>
