@@ -614,7 +614,7 @@ kendo_module({
                 groups = dataSource.group(),
                 groupedMode = groups && groups[0];
 
-            listView.trigger('dataBinding');
+            listView.trigger("dataBinding");
 
             if (action === "itemchange") {
                 listView.setDataItem(listView.findByDataItem(dataItems)[0], dataItems[0]);
@@ -941,6 +941,9 @@ kendo_module({
             var listView = this;
             return this._renderItems(dataItems, function(items) {
                 listView.element[method](items);
+                for (var idx = 0; idx < items.length; idx ++) {
+                    listView.trigger("itemChange", { item: [items[idx]], data: dataItems[idx], ns: ui });
+                }
             });
         },
 
