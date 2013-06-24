@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
-import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.Task;
 import com.kendoui.spring.models.TaskDao;
 

@@ -22,6 +22,10 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 //>> doEndTag
 //<< doEndTag
 
+        if (isSet("eventTemplate")) {
+            setProperty("eventTemplate", new Function("kendo.template($(\"#" + getEventTemplate() + "\").html())"));
+        }
+        
         return super.doEndTag();
     }
 
