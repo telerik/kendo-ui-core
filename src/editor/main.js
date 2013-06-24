@@ -158,8 +158,6 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-            that.tools = deepExtend({}, kendo.ui.Editor.defaultTools);
-
             if (options.popup) {
                 that._initPopup();
             }
@@ -206,7 +204,7 @@ kendo_module({
         },
 
         toolById: function(name) {
-            var id, tools = this.options.tools;
+            var id, tools = this.tools;
 
             for (id in tools) {
                 if (id.toLowerCase() == name) {
@@ -227,9 +225,8 @@ kendo_module({
             that._editor = editor;
 
             // re-initialize the tools
-            that.element.empty();
-
-            that._renderTools();
+            that.tools = that.expandTools(editor.options.tools);
+            that.render();
 
             that.element.find(".k-combobox .k-input").keydown(function(e) {
                 var combobox = $(this).closest(".k-combobox").data("kendoComboBox"),
@@ -247,19 +244,20 @@ kendo_module({
 
             that._attachEvents();
 
-            this.items().each(function () {
+            this.items().each(function initializeTool() {
                 var toolName = that._toolFromClassName(this),
-                    options = that.options,
-                    tool = options.tools[toolName],
-                    description = options.messages[toolName],
+                    tool = that.tools[toolName],
+                    messages = editor.options.messages,
+                    description = messages[toolName],
                     $this = $(this);
 
-                if (!tool) {
+                if (!tool || !tool.initialize) {
                     return;
                 }
 
                 if (toolName == "fontSize" || toolName == "fontName") {
-                    var inheritText = options.messages[toolName + "Inherit"] || messages[toolName + "Inherit"];
+                    var inheritText = messages[toolName + "Inherit"];
+
                     $this.find("input").val(inheritText).end()
                          .find("span.k-input").text(inheritText).end();
                 }
@@ -336,88 +334,97 @@ kendo_module({
             "insertLineBreak",
             "insertParagraph",
             "redo",
-            "undo",
-            "insertHtml"
+            "undo"
         ],
 
         tools: {}, // tools collection is copied from defaultTools during initialization
 
-        _renderTools: function() {
-            var tools = this.options.tools,
-                editorTools = {},
-                currentTool, tool, i,
+        // expand the tools parameter to contain tool options objects
+        expandTools: function(tools) {
+            var currentTool,
+                i,
                 nativeTools = this._nativeTools,
-                template,
-                options;
+                options,
+                defaultTools = deepExtend({}, kendo.ui.Editor.defaultTools),
+                result = {},
+                name;
 
-            if (tools) {
-                for (i = 0; i < tools.length; i++) {
-                    currentTool = tools[i];
-                    options = null;
+            for (i = 0; i < tools.length; i++) {
+                currentTool = tools[i];
+                name = currentTool.name;
 
-                    if ($.isPlainObject(currentTool)) {
-
-                        if (currentTool.name && this.tools[currentTool.name]) {
-                            extend(this.tools[currentTool.name].options, currentTool);
-
-                            editorTools[currentTool.name] = this.tools[currentTool.name];
-                            options = editorTools[currentTool.name].options;
-                        } else {
-                            options = extend({ cssClass: "k-i-custom", type: "button", title: "" }, currentTool);
-
-                            if (options.name) {
-                                options.cssClass = "k-" + (options.name == "custom" ? "i-custom" : options.name);
-                            }
-
-                            if (!options.template) {
-                                if (options.type == "button") {
-                                    options.template = EditorUtils.buttonTemplate;
-                                }
-                            }
+                if ($.isPlainObject(currentTool)) {
+                    if (name && defaultTools[name]) {
+                        // configured tool
+                        result[name] = extend({}, defaultTools[name]);
+                        extend(result[name].options, currentTool);
+                    } else {
+                        // custom tool
+                        options = extend({ cssClass: "k-i-custom", type: "button", title: "" }, currentTool);
+                        if (!options.name) {
+                            options.name = "custom";
                         }
-                    } else if (this.tools[currentTool]) {
-                        editorTools[currentTool] = this.tools[currentTool];
-                        options = editorTools[currentTool].options;
+
+                        options.cssClass = "k-" + (options.name == "custom" ? "i-custom" : options.name);
+
+                        if (!options.template && options.type == "button") {
+                            options.template = EditorUtils.buttonTemplate;
+                        }
+
+                        result[name] = {
+                            options: options
+                        };
                     }
-
-                    if (!options) {
-                        continue;
-                    }
-
-                    template = options.template;
-
-                    if (template) {
-
-                        if (template.getHtml) {
-                            template = template.getHtml();
-                        } else {
-                            if (!$.isFunction(template)) {
-                                template = kendo.template(template);
-                            }
-
-                            template = template(options);
-                        }
-
-                        if (template.indexOf('<li') !== 0) {
-                            template = "<li class='k-editor-template'>" + template + "</li>";
-                        }
-
-                        tool = $(template).appendTo(this.element);
-
-                        if (options.type == "button" && options.exec) {
-                            tool.find(".k-tool-icon").click($.proxy(options.exec, this.element[0]));
-                        }
-                    }
+                } else if (defaultTools[currentTool]) {
+                    // tool by name
+                    result[currentTool] = defaultTools[currentTool];
                 }
             }
 
             for (i = 0; i < nativeTools.length; i++) {
-                if (!editorTools[nativeTools[i]]) {
-                    editorTools[nativeTools[i]] = this.tools[nativeTools[i]];
+                if (!result[nativeTools[i]]) {
+                    result[nativeTools[i]] = defaultTools[nativeTools[i]];
                 }
             }
 
-            this.options.tools = editorTools;
+            return result;
+        },
+
+        render: function() {
+            var tools = this.tools,
+                options, template, toolElement,
+                i;
+
+            this.element.empty();
+
+            for (i in tools) {
+                options = tools[i] && tools[i].options;
+
+                template = options && options.template;
+
+                if (template) {
+
+                    if (template.getHtml) {
+                        template = template.getHtml();
+                    } else {
+                        if (!$.isFunction(template)) {
+                            template = kendo.template(template);
+                        }
+
+                        template = template(options);
+                    }
+
+                    if (template.indexOf('<li') !== 0) {
+                        template = "<li class='k-editor-template'>" + template + "</li>";
+                    }
+
+                    toolElement = $(template).appendTo(this.element);
+
+                    if (options.type == "button" && options.exec) {
+                        toolElement.find(".k-tool-icon").click($.proxy(options.exec, this.element[0]));
+                    }
+                }
+            }
         },
 
         _attachEvents: function() {
@@ -474,7 +481,7 @@ kendo_module({
                     e.stopPropagation();
                     button.removeClass("k-state-hover");
                     if (!button.is("[data-popup]")) {
-                        that.options.editor.exec(that._toolFromClassName(this));
+                        that._editor.exec(that._toolFromClassName(this));
                     }
                 })
                 .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); });
@@ -502,7 +509,7 @@ kendo_module({
             }
 
             that.items().each(function () {
-                var tool = that.options.tools[that._toolFromClassName(this)];
+                var tool = that.tools[that._toolFromClassName(this)];
                 if (tool) {
                     tool.update($(this), nodes);
                 }
@@ -516,7 +523,16 @@ kendo_module({
         }
     });
 
-    var supportedElements = "textarea,div".split(",");
+    var toolGroups = {
+        basic: [ "bold", "italic", "underline" ],
+        alignment: [ "justifyLeft", "justifyCenter", "justifyRight" ],
+        lists: [ "insertUnorderedList", "insertOrderedList" ],
+        indenting: [ "indent", "outdent" ],
+        links: [ "createLink", "unlink" ],
+        tables: [ "createTable", "addColumnLeft", "addColumnRight", "addRowAbove", "addRowBelow", "deleteRow", "deleteColumn" ]
+    };
+
+    var supportedElements = "textarea,main,article,section,aside,nav,header,footer,div".split(",");
 
     var Editor = Widget.extend({
         init: function (element, options) {
@@ -562,7 +578,6 @@ kendo_module({
 
                 toolbarOptions.popup = true;
 
-                // TODO: this should create global toolbar, if it does not exist, and call its bindTo(this);
                 toolbarContainer = $('<ul class="k-editor-toolbar" role="toolbar" />').insertBefore(element);
             }
 
@@ -796,7 +811,7 @@ kendo_module({
                         }
                     }
 
-                    var toolName = editor.keyboard.toolFromShortcut(editor.toolbar.options.tools, e);
+                    var toolName = editor.keyboard.toolFromShortcut(editor.toolbar.tools, e);
 
                     if (toolName) {
                         e.preventDefault();
@@ -918,35 +933,16 @@ kendo_module({
                 { text: "6 (24pt)", value: "x-large" },
                 { text: "7 (36pt)", value: "xx-large" }
             ],
-            tools: [
-                "bold",
-                "italic",
-                "underline",
-                "strikethrough",
-                "fontName",
-                "fontSize",
-                "foreColor",
-                "backColor",
-                "justifyLeft",
-                "justifyCenter",
-                "justifyRight",
-                "justifyFull",
-                "insertUnorderedList",
-                "insertOrderedList",
-                "indent",
-                "outdent",
-                "formatting",
-                "createLink",
-                "unlink",
-                "insertImage",
-                "createTable",
-                "addColumnLeft",
-                "addColumnRight",
-                "addRowAbove",
-                "addRowBelow",
-                "deleteRow",
-                "deleteColumn"
-            ]
+            tools: [].concat.call(
+                toolGroups.basic,
+                toolGroups.alignment,
+                toolGroups.lists,
+                toolGroups.indenting,
+                ["formatting"],
+                toolGroups.links,
+                ["insertImage"],
+                toolGroups.tables
+            )
         },
 
         destroy: function() {
@@ -1139,6 +1135,16 @@ kendo_module({
 
             tool = that.toolbar.toolById(name);
 
+            if (!tool) {
+                // execute non-toolbar tool
+                for (var id in Editor.defaultTools) {
+                    if (id.toLowerCase() == name) {
+                        tool = Editor.defaultTools[id];
+                        break;
+                    }
+                }
+            }
+
             if (tool) {
                 range = that.getRange();
 
@@ -1225,6 +1231,7 @@ kendo_module({
             ToolTemplate: ToolTemplate,
             EditorUtils: EditorUtils,
             Tool: Tool,
+            Toolbar: Toolbar,
             FormatTool: FormatTool,
             _bomFill: browser.msie && browser.version < 9 ? '\ufeff' : '',
             emptyElementContent: !browser.msie ? '<br _moz_dirty="" />' : browser.version < 9 ? '\ufeff' : ''

@@ -15,7 +15,9 @@
         <div><textarea cols="20" rows="4" id="Editor2" name="Editor2"></textarea></div>
 
         <script>
-            $("#Editor1").kendoEditor();
+            $("#Editor1").kendoEditor({
+                tools: [ "foreColor", "backColor" ]
+            });
 
             $("#Editor2").kendoEditor({
                 tools: [
