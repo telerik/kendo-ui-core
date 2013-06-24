@@ -21,7 +21,7 @@
                 model: {
                     fields: {
                         title: {
-                            defaultValue: "eventTitle",
+                            defaultValue: "No title",
                             field: "Title",
                             validation: {
                                 required: true
@@ -41,7 +41,16 @@
                         isAllDay: {
                             type: "boolean",
                             field: "IsAllDay"
-                        }
+                        },
+						recurrenceId: {
+							field: "RecurrenceId"
+						},
+						recurrenceRule: {
+							field: "RecurrenceRule"
+						},
+						recurrenceException: {
+							field: "RecurrenceException"
+						}
                     }
                 }
             }
