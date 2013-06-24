@@ -12,20 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $type = $_GET['type'];
 
-    $columns = array('TaskID', 'Title', 'Start', 'End', 'IsAllDay', 'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException');
+    $columns = array('MeetingID', 'Title', 'Start', 'End', 'IsAllDay', 'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'RoomID');
 
     switch($type) {
         case 'create':
-            $result = $result->create('Tasks', $columns, $request->models, 'TaskID');
+            $result = $result->createWithAssociation('Meetings', 'MeetingAtendees', $columns, $request->models, 'MeetingID', array('Atendees' => 'AtendeeID'));
             break;
         case 'update':
-            $result = $result->update('Tasks', $columns, $request->models, 'TaskID');
+            $result = $result->updateWithAssociation('Meetings', 'MeetingAtendees', $columns, $request->models, 'MeetingID', array('Atendees' => 'AtendeeID'));
             break;
         case 'destroy':
-            $result = $result->destroy('Tasks', $request->models, 'TaskID');
+            $result = $result->destroyWithAssociation('Meetings', 'MeetingAtendees', $request->models, 'MeetingID');
             break;
         default:
-            $result = $result->read('Tasks', array('TaskID'), $request);
+            $result = $result->readWithAssociation('Meetings', 'MeetingAtendees', 'MeetingID', array('AtendeeID' => 'Atendees'), array('MeetingID', 'RoomID'), $request);
             break;
     }
 
@@ -40,25 +40,25 @@ $transport = new \Kendo\Data\DataSourceTransport();
 
 $create = new \Kendo\Data\DataSourceTransportCreate();
 
-$create->url('api.php?type=create')
+$create->url('resources.php?type=create')
      ->contentType('application/json')
      ->type('POST');
 
 $read = new \Kendo\Data\DataSourceTransportRead();
 
-$read->url('api.php?type=read')
+$read->url('resources.php?type=read')
      ->contentType('application/json')
      ->type('POST');
 
 $update = new \Kendo\Data\DataSourceTransportUpdate();
 
-$update->url('api.php?type=update')
+$update->url('resources.php?type=update')
      ->contentType('application/json')
      ->type('POST');
 
 $destroy = new \Kendo\Data\DataSourceTransportDestroy();
 
-$destroy->url('api.php?type=destroy')
+$destroy->url('resources.php?type=destroy')
      ->contentType('application/json')
      ->type('POST');
 
@@ -72,9 +72,9 @@ $transport->create($create)
 
 $model = new \Kendo\Data\DataSourceSchemaModel();
 
-$taskIDField = new \Kendo\Data\DataSourceSchemaModelField('taskID');
-$taskIDField->type('number')
-            ->from('TaskID')
+$meetingIdField = new \Kendo\Data\DataSourceSchemaModelField('meetingID');
+$meetingIdField->type('number')
+            ->from('MeetingID')
             ->nullable(true);
 
 $titleField = new \Kendo\Data\DataSourceSchemaModelField('title');
@@ -107,8 +107,16 @@ $recurrenceRuleField->from('RecurrenceRule');
 $recurrenceExceptionField = new \Kendo\Data\DataSourceSchemaModelField('recurrenceException');
 $recurrenceExceptionField->from('RecurrenceException');
 
-$model->id('taskID')
-    ->addField($taskIDField)
+$roomIdField = new \Kendo\Data\DataSourceSchemaModelField('roomId');
+$roomIdField->from('RoomID')
+        ->nullable(true);
+
+$atendeesField = new \Kendo\Data\DataSourceSchemaModelField('atendees');
+$atendeesField->from('Atendees')
+        ->nullable(true);
+
+$model->id('meetingID')
+    ->addField($meetingIdField)
     ->addField($titleField)
     ->addField($startField)
     ->addField($endField)
@@ -116,6 +124,8 @@ $model->id('taskID')
     ->addField($recurrenceIdField)
     ->addField($recurrenceRuleField)
     ->addField($recurrenceExceptionField)
+    ->addField($roomIdField)
+    ->addField($atendeesField)
     ->addField($isAllDayField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
@@ -129,57 +139,33 @@ $dataSource->transport($transport)
     ->schema($schema)
     ->batch(true);
 
+$roomResource = new \Kendo\UI\SchedulerResource();
+$roomResource->field('roomId')
+    ->title('Room')
+    ->dataSource(array(
+        array('text'=> 'Meeting Room 101', 'value' => 1, 'color' => '#1c9ec4'),
+        array('text'=> 'Meeting Room 201', 'value' => 2, 'color' => '#ff7663')
+    ));
+
+$atendeesResource = new \Kendo\UI\SchedulerResource();
+$atendeesResource->field('atendees')
+    ->title('Atendees')
+    ->multiple(true)
+    ->dataSource(array(
+        array('text'=> 'Alex', 'value' => 1, 'color' => '#ef701d'),
+        array('text'=> 'Bob', 'value' => 2, 'color' => '#5fb1f7'),
+        array('text'=> 'Charlie', 'value' => 3, 'color' => '#35a964')
+    ));
+
 $scheduler = new \Kendo\UI\Scheduler('scheduler');
 $scheduler->timezone("Etc/UTC")
-    ->date(new DateTime('2013/6/13'))
-    ->height(400)
-    ->addView(
-        array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')),
-        array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')),
-        'month', 'agenda')
-    ->dataSource($dataSource);
+        ->date(new DateTime('2013/6/13'))
+        ->height(600)
+        ->addResource($roomResource, $atendeesResource)
+        ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')),
+            array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda')
+        ->dataSource($dataSource);
 
 echo $scheduler->render();
 ?>
-    <div class="demo-section">
-        <p>
-            <label>Current Date:</label>
-            <?php
-                $datePicker = new \Kendo\UI\DatePicker('date');
-                $datePicker->value(new DateTime('2013/6/13'))
-                      ->change('date_change');
-
-                echo $datePicker->render();
-            ?>
-        </p>
-        <p>
-            <label>Current View:</label>
-            <?php
-                $viewsPicker = new \Kendo\UI\DropDownList('views');
-
-                $viewsPicker->change('views_change')
-                      ->dataTextField('text')
-                      ->dataValueField('value')
-                      ->dataSource(array(
-                          array('text' => 'Agenda', 'value' => 'agenda'),
-                          array('text' => 'Day', 'value' => 'day'),
-                          array('text' => 'Month', 'value' => 'month'),
-                          array('text' => 'Week', 'value' => 'week')
-                      ));
-
-                echo $viewsPicker->render();
-            ?>
-       </p>
-    </div>
-
-<script>
-    function views_change() {
-        $("#scheduler").data("kendoScheduler").view(this.value());
-    }
-
-    function date_change() {
-        $("#scheduler").data("kendoScheduler").date(this.value());
-    }
-</script>
-
 <?php require_once '../../include/footer.php'; ?>

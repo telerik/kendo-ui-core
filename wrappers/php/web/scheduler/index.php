@@ -1,5 +1,6 @@
 <?php
 require_once '../../lib/DataSourceResult.php';
+require_once '../../lib/SchedulerDataSourceResult.php';
 require_once '../../lib/Kendo/Autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -7,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $request = json_decode(file_get_contents('php://input'));
 
-    $result = new DataSourceResult('sqlite:../../sample.db');
+    $result = new SchedulerDataSourceResult('sqlite:../../sample.db');
 
     $type = $_GET['type'];
 
@@ -24,8 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $result = $result->destroy('Tasks', $request->models, 'TaskID');
             break;
         default:
-            $result = $result->read('Tasks', array('TaskID', 'Title', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', Start) as Start', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', End) as End', 'IsAllDay',
-'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'OwnerID'), $request);
+            $result = $result->read('Tasks', array('TaskID', 'OwnerID'), $request);
             break;
     }
 

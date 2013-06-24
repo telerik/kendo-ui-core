@@ -535,6 +535,21 @@ class DataSourceResult {
 
         return $result;
     }
+
+    public function readJoin($table, $joinTable, $properties, $key, $column, $request = null) {
+        $result = $this->read($table, $properties, $request);
+
+        for ($index = 0, $count = count($result['data']); $index < $count; $index++) {
+            $sql = sprintf('SELECT %s FROM %s WHERE %s = %s', $column, $joinTable, $key, $result['data'][$index][$key]);
+
+            $statement = $this->db->prepare($sql);
+            $statement->execute();
+            $data = $statement->fetchAll(PDO::FETCH_NUM);
+            $result['data'][$index]['Atendees'] = $data;
+        }
+
+        return $result;
+    }
 }
 
 ?>
