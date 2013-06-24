@@ -34,9 +34,10 @@
             });
 
             test("Parse UNTIL property without timezone", function() {
-                var rrule = parse("FREQ=DaILY;UNTIL=19730429T070000Z");
+                var date = new Date(1973, 3, 29, 10),
+                    rrule = parse("FREQ=DaILY;UNTIL=" + kendo.toString(kendo.timezone.apply(date, "Etc/UTC"), "yyyyMMddTHHmmssZ"));
 
-                equal(+rrule.until, new Date(1973, 3, 29, 10).getTime());
+                equal(rrule.until.getTime(), date.getTime());
             });
 
             test("Parse UNTIL property with UTC timezone", function() {
