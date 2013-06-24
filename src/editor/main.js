@@ -167,9 +167,18 @@ kendo_module({
             "execute"
         ],
 
+        groups: {
+            basic: ["bold", "italic", "underline"],
+            inline: ["strikethrough", "subscripts", "superscript" ],
+            alignment: ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull" ],
+            links: ["createLink", "unlink"],
+            lists: ["insertUnorderedList", "insertOrderedList", "indent", "outdent"],
+            tables: [ "createTable", "addColumnLeft", "addColumnRight", "addRowAbove", "addRowBelow", "deleteRow", "deleteColumn" ]
+        },
+
         _initPopup: function() {
             this.window = $(this.element)
-                .wrap("<div class='editorToolbarWindow' />")
+                .wrap("<div class='editorToolbarWindow k-header' />")
                 .parent()
                 .prepend("<button class='k-button k-button-bare k-editortoolbar-dragHandle'><span class='k-icon k-i-move' /></button>")
                 .kendoWindow({
@@ -213,6 +222,16 @@ kendo_module({
             }
         },
 
+        toolGroupFor: function(toolName) {
+            var i, groups = this.groups;
+
+            for (i in groups) {
+                if ($.inArray(toolName, groups[i]) >= 0) {
+                    return i;
+                }
+            }
+        },
+
         bindTo: function(editor) {
             var that = this,
                 window = that.window;
@@ -227,6 +246,7 @@ kendo_module({
             // re-initialize the tools
             that.tools = that.expandTools(editor.options.tools);
             that.render();
+            that.updateGroups();
 
             that.element.find(".k-combobox .k-input").keydown(function(e) {
                 var combobox = $(this).closest(".k-combobox").data("kendoComboBox"),
@@ -393,12 +413,13 @@ kendo_module({
         render: function() {
             var tools = this.tools,
                 options, template, toolElement,
-                i;
+                toolName,
+                element = this.element.empty();
 
-            this.element.empty();
+            element.empty();
 
-            for (i in tools) {
-                options = tools[i] && tools[i].options;
+            for (toolName in tools) {
+                options = tools[toolName] && tools[toolName].options;
 
                 template = options && options.template;
 
@@ -418,13 +439,42 @@ kendo_module({
                         template = "<li class='k-editor-template'>" + template + "</li>";
                     }
 
-                    toolElement = $(template).appendTo(this.element);
+                    toolElement = $(template)
+                        .appendTo(element);
 
                     if (options.type == "button" && options.exec) {
-                        toolElement.find(".k-tool-icon").click($.proxy(options.exec, this.element[0]));
+                        toolElement.find(".k-tool-icon").click($.proxy(options.exec, element[0]));
                     }
                 }
             }
+        },
+
+        updateGroups: function() {
+            var previous,
+                currentToolGroup,
+                isStart,
+                that = this,
+                enabledTools = that.element.children(":not(.k-state-disabled)");
+
+            enabledTools.each(function(index, li) {
+                li = $(li);
+
+                var toolName = that._toolFromClassName(li.children()[0]);
+                var newToolGroup = that.toolGroupFor(toolName);
+
+                isStart = currentToolGroup != newToolGroup;
+
+                currentToolGroup = newToolGroup;
+
+                if (previous && isStart) {
+                    previous.addClass("k-group-end");
+                }
+
+                li.toggleClass("k-group-start", isStart)
+                  .toggleClass("k-group-end", index == enabledTools.length-1);
+
+                previous = li;
+            });
         },
 
         _attachEvents: function() {

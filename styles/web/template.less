@@ -122,9 +122,17 @@
 }
 
 .selection(@color) {
-    background-color: @color;
-    text-shadow: none;
-    color: #fff;
+    ::selection {
+        background-color: @color;
+        text-shadow: none;
+        color: #fff;
+    }
+
+    ::-moz-selection {
+        background-color: @color;
+        text-shadow: none;
+        color: #fff;
+    }
 }
 
 .k-in,
@@ -183,7 +191,8 @@
 .k-tiles,
 .k-toolbar,
 .k-tooltip,
-.k-progress
+.k-progress,
+.k-editor-button .k-tool-icon
 {
     border-color: @widget-border-color;
 }
@@ -949,11 +958,7 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Selection */
-.k-editor-inline ::-moz-selection {
-    .selection(@selected-border-color);
-}
-
-.k-editor-inline ::selection {
+.k-editor-inline {
     .selection(@selected-border-color);
 }
 
@@ -987,13 +992,26 @@ div.k-imagebrowser-dropzone em
 .k-calendar td,
 .k-calendar .k-link,
 .k-treeview .k-in,
-.k-editor-button .k-state-hover,
-.k-editor-button .k-state-active,
 .k-editor-inline,
 .k-tooltip,
 .k-tile,
 .k-slider-track,
 .k-slider-selection
+{
+    .border-radius(@main-border-radius);
+}
+
+.k-group-start .k-tool-icon
+{
+    .border-radius(@main-border-radius 0 0 @main-border-radius);
+}
+
+.k-group-end .k-tool-icon
+{
+    .border-radius(0 @main-border-radius @main-border-radius 0);
+}
+
+.k-group-start.k-group-end .k-tool-icon
 {
     .border-radius(@main-border-radius);
 }

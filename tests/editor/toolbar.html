@@ -311,6 +311,20 @@
                 ok(isDefaultPrevented);
             });
 
+            test("buttons are grouped in default groups", function() {
+                toolbar.bindTo(mockEditorTools([
+                    "bold", "italic", "underline",
+                    "createLink", "unlink"
+                ]));
+
+                equal(dom.find(".k-group-start").length, 2);
+                equal(dom.find(".k-group-end").length, 2);
+                equal(dom.find(".k-group-start .k-bold").length, 1);
+                equal(dom.find(".k-group-start .k-createLink").length, 1);
+                equal(dom.find(".k-group-end .k-underline").length, 1);
+                equal(dom.find(".k-group-end .k-unlink").length, 1);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
