@@ -45,5 +45,18 @@
             get;
             set;
         }
+
+
+        public string RecurrenceRule
+        {
+            get;
+            set;
+        }
+
+        public string RecurrenceException
+        {
+            get;
+            set;
+        }
     }
 }
