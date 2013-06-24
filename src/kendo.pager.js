@@ -226,7 +226,7 @@ kendo_module({
             }
         },
 
-        refresh: function() {
+        refresh: function(e) {
             var that = this,
                 idx,
                 end,
@@ -240,6 +240,10 @@ kendo_module({
                 totalPages = that.totalPages(),
                 linkTemplate = that.linkTemplate,
                 buttonCount = options.buttonCount;
+
+            if (e && e.action == "itemchange") {
+                return;
+            }
 
             if (options.numeric) {
                 if (page > buttonCount) {
