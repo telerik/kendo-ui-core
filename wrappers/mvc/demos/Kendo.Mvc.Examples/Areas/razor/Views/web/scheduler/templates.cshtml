@@ -16,14 +16,14 @@
                 "<img src='" + Url.Content("~/Content/web/scheduler/") + "#= Image #' style='float:left'>" +
                 "<p>" +
                     "#: kendo.toString(Start, 'hh:mm') # - #: kendo.toString(End, 'hh:mm') #" +
-                "</p>" +
-                "<h3>#: title #</h3>" +
-                    "<a href='#= Imdb #' style='color:white'>Movie in IMDB</a>" +
-            "</div>")
-        .Views(views =>
+                    "</p>" +
+                    "<h3>#: title #</h3>" +
+                        "<a href='#= Imdb #' style='color:white'>Movie in IMDB</a>" +
+                "</div>")
+            .Views(views =>
             {
                 views.DayView();
                 views.AgendaView();
             })
-        .BindTo(Model)
-    )
+            .BindTo(Model)
+        )

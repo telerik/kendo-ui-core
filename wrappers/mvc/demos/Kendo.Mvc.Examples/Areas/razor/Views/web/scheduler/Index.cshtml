@@ -1,41 +1,95 @@
-﻿@(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.Task>()
-    .Name("Scheduler")
-    .Events(e => e.Edit("onEdit"))
-    .Resources(r =>
+﻿<div id="people">
+    <input checked type="checkbox" id="alex" value="1">
+    <input checked type="checkbox" id="bob" value="2">
+    <input type="checkbox" id="charlie" value="3">
+</div>
+@(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
+    .Name("scheduler")
+    .Date(new DateTime(2013, 6, 13))
+    .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
+    .Height(600)
+    .Views(views =>
     {
-        r.Add(m => m.OwnerID)
+        views.DayView();
+        views.WeekView(weekView => weekView.Selected(true));
+        views.MonthView();
+        views.AgendaView();
+    })
+    .Timezone("Etc/UTC")
+    .Resources(resource =>
+    {
+        resource.Add(m => m.OwnerID)
             .Title("Owner")
-            .Multiple(true)
             .DataTextField("Text")
             .DataValueField("Value")
-            //.DataSource(d => d.Read("Attendies", "Scheduler"));
+            .DataColorField("Color")
             .BindTo(new[] { 
-                new { Text = "Alex", Value = 1, color = "red" } ,
-                new { Text = "Bob", Value = 1, color = "green" } ,
-                new { Text = "Charlie", Value = 1, color = "blue" } 
-            });    
+                new { Text = "Alex", Value = 1, Color = "#ef701d" } ,
+                new { Text = "Bob", Value = 2, Color = "#5fb1f7" } ,
+                new { Text = "Charlie", Value = 3, Color = "#35a964" } 
+            });
     })
-    //.BindTo(new List<Kendo.Mvc.Examples.Models.Scheduler.Task>() { 
-    //    new Kendo.Mvc.Examples.Models.Scheduler.Task() {
-    //        TaskID = 1, 
-    //        Title = "Business meeting",
-    //        Description = "Business meeting with colegue.",
-    //        Start = new DateTime(2013,6,12),
-    //        End = new DateTime(2013,6,13)   
-    //    } 
-    //})
     .DataSource(d => d
         .Model(m => m.Id(f => f.TaskID))
-           .Read("Read", "Scheduler")
-           .Create("Create", "Scheduler")
-           .Destroy("Destroy", "Scheduler")
-           .Update("Update", "Scheduler")
+        .Read("Read", "Scheduler")
+        .Create("Create", "Scheduler")
+        .Destroy("Destroy", "Scheduler")
+        .Update("Update", "Scheduler")
+        .Filter(filters => { 
+                filters.Add(model => model.OwnerID).IsEqualTo(1).Or().IsEqualTo(2);
+            })
+        )
 
     )
-)
 
 <script type="text/javascript">
-    function onEdit(e) {
-        console.log("Edit event fired");
-    }
+    $(function () {
+        $("#people :checkbox").change(function (e) {
+            var checked = $.map($("#people :checked"), function (checkbox) {
+                return parseInt($(checkbox).val());
+            });
+
+            var filter = {
+                logic: "or",
+                filters: $.map(checked, function (value) {
+                    return {
+                        operator: "eq",
+                        field: "ownerId",
+                        value: value
+                    };
+                })
+            };
+
+            var scheduler = $("#scheduler").data("kendoScheduler");
+
+            scheduler.dataSource.filter(filter);
+        });
+    })
 </script>
+
+<style scoped>
+    #people 
+    {
+        background: url('@Url.Content("~/Content/web/scheduler/")team-schedule.png') transparent no-repeat;
+        height: 115px;
+        position: relative;
+    }
+    #alex {
+        position: absolute;
+        left: 404px;
+        top: 81px;
+    }
+    #bob {
+        position: absolute;
+        left: 519px;
+        top: 81px;
+    }
+    #charlie {
+        position: absolute;
+        left: 634px;
+        top: 81px;
+    }
+</style>
+
+
+
