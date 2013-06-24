@@ -23,5 +23,9 @@
         public bool IsAllDay { get; set; }
 
         public string Recurrence { get; set; }
+
+        public string RecurrenceRule { get; set; }
+
+        public string RecurrenceException { get; set; }
     }
 }

@@ -13,15 +13,15 @@
         where T : Task
     {
 
-        private SampleEntities db;
+        private SchedulerEntities db;
 
-        public SchedulerEventService(SampleEntities context)
+        public SchedulerEventService(SchedulerEntities context)
         {
             db = context;
         }
 
         public SchedulerEventService()
-            : this(new SampleEntities())
+            : this(new SchedulerEntities())
         {
         }
 
