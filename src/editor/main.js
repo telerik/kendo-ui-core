@@ -246,7 +246,6 @@ kendo_module({
             // re-initialize the tools
             that.tools = that.expandTools(editor.options.tools);
             that.render();
-            that.updateGroups();
 
             that.element.find(".k-combobox .k-input").keydown(function(e) {
                 var combobox = $(this).closest(".k-combobox").data("kendoComboBox"),
@@ -291,6 +290,8 @@ kendo_module({
             editor.bind("select", proxy(that._update, that));
 
             this._updateContext();
+
+            that.updateGroups();
 
             if (window) {
                 window.wrapper.css({top: "", left: "", width: ""});
@@ -454,7 +455,12 @@ kendo_module({
                 currentToolGroup,
                 isStart,
                 that = this,
-                enabledTools = that.element.children(":not(.k-state-disabled)");
+                listItems = that.element.children(),
+                enabledTools = listItems.filter(function() {
+                    return !$(this).children(".k-state-disabled").length;
+                });
+
+            listItems.filter(".k-group-break").remove();
 
             enabledTools.each(function(index, li) {
                 li = $(li);
@@ -474,6 +480,18 @@ kendo_module({
                   .toggleClass("k-group-end", index == enabledTools.length-1);
 
                 previous = li;
+            });
+
+            that.element.children(".k-group-end").each(function() {
+                if (this.offsetLeft + this.offsetWidth > this.parentNode.offsetWidth) {
+                    var node = this;
+
+                    while (node && node.className.indexOf("k-group-start") < 0) {
+                        node = node.previousSibling;
+                    }
+
+                    $(node).before("<li class='k-group-break' />");
+                }
             });
         },
 
@@ -540,6 +558,10 @@ kendo_module({
 
 
         _toolFromClassName: function (element) {
+            if (!element) {
+                return;
+            }
+
             var tool = $.grep(element.className.split(" "), function (x) {
                 return !/^k-(widget|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
             });
@@ -566,6 +588,8 @@ kendo_module({
             });
 
             this._updateContext();
+
+            that.updateGroups();
         },
 
         _updateContext: function() {

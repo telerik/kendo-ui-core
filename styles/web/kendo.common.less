@@ -2991,6 +2991,7 @@ table.k-editor
     list-style-type: none;
     line-height: 1.3em;
     cursor: default;
+    white-space: nowrap;
 }
 
 .k-editor-toolbar li
@@ -3140,6 +3141,14 @@ table.k-editor
 .k-group-end .k-tool-icon
 {
     border-right-width: 1px;
+}
+
+.k-editor-toolbar li.k-group-break
+{
+    display: block;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
 }
 
 .k-editor-button .k-state-hover,

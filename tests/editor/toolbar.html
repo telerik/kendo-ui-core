@@ -186,7 +186,7 @@
 
             module("Tool configuration & rendering", {
                 setup: function() {
-                    dom = $("<div />").appendTo("body");
+                    dom = $("<ul class='k-editor-toolbar' />").appendTo("body");
                     toolbar = new editorNS.Toolbar(dom[0]);
                 },
 
@@ -314,15 +314,39 @@
             test("buttons are grouped in default groups", function() {
                 toolbar.bindTo(mockEditorTools([
                     "bold", "italic", "underline",
-                    "createLink", "unlink"
+                    "insertImage", "createLink"
                 ]));
 
                 equal(dom.find(".k-group-start").length, 2);
                 equal(dom.find(".k-group-end").length, 2);
                 equal(dom.find(".k-group-start .k-bold").length, 1);
-                equal(dom.find(".k-group-start .k-createLink").length, 1);
+                equal(dom.find(".k-group-start .k-insertImage").length, 1);
                 equal(dom.find(".k-group-end .k-underline").length, 1);
-                equal(dom.find(".k-group-end .k-unlink").length, 1);
+                equal(dom.find(".k-group-end .k-createLink").length, 1);
+            });
+
+            test("hidden buttons do not end groups", function() {
+                toolbar.bindTo(mockEditorTools([
+                    "createLink", "unlink"
+                ]));
+
+                dom.find(".k-unlink").addClass(".k-state-disabled");
+                toolbar.updateGroups();
+
+                equal(dom.find(".k-group-end .k-createLink").length, 1);
+            });
+
+            test("space between groups is broken when there's no space for next group", function() {
+                toolbar.bindTo(mockEditorTools([
+                    "bold", "italic",
+                    "insertImage", "createLink"
+                ]));
+
+                dom.width(dom.find(".k-tool-icon").width() * 3);
+
+                toolbar.updateGroups();
+
+                equal(dom.find(".k-group-break").length, 1);
             });
 
         </script>
