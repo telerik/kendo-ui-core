@@ -1642,7 +1642,7 @@
             background: "white",
             text: {
                 visible: true,                
-                font: "16px consolas",
+                font: "16px Consolas, Monaco, Sans Mono, monospace, sans-serif",
                 color: "black",
                 margin: {
                     top: 0,
