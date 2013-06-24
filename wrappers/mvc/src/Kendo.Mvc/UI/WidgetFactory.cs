@@ -404,6 +404,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="Barcode"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Barcode()
+        ///             .For("Container")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual BarcodeBuilder Barcode()
+        {
+            return new BarcodeBuilder(new Barcode(ViewContext, Initializer));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Tooltip"/>.
         /// </summary>
         /// <example>
@@ -1039,6 +1054,22 @@ namespace Kendo.Mvc.UI.Fluent
             SparklineBuilder<object> builder = Sparkline<object>();
 
             return builder;
+        }
+
+        /// <summary>
+        /// Creates a <see cref="QRCode"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().QRCode()
+        ///             .Name("qrCode")
+        ///             .Value("Hello World")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual QRCodeBuilder QRCode()
+        {
+            return new QRCodeBuilder(new QRCode(ViewContext, Initializer));
         }
 
         /// <summary>
@@ -1933,6 +1964,8 @@ namespace Kendo.Mvc.UI.Fluent
                         Convert.ToDouble(value)
                     ));
         }
+
+
 
         private string GetName(LambdaExpression expression)
         {

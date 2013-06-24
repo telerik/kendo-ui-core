@@ -86,6 +86,7 @@
     <Compile Include="Controllers\DataViz\Area_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Stacked_AreaController.cs" />
+    <Compile Include="Controllers\DataViz\Barcode\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Gap_SpacingController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
@@ -108,6 +109,8 @@
     <Compile Include="Controllers\DataViz\Line_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
+    <Compile Include="Controllers\DataViz\QRCode\ApiController.cs" />
+    <Compile Include="Controllers\DataViz\QRCode\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\Local_DataController.cs" />
@@ -513,6 +516,8 @@
     <Content Include="Areas\aspx\Views\dataviz\line_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\multiple_axes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked_line.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\qrcode\api.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\qrcode\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\multiple_axes.aspx" />
@@ -696,6 +701,7 @@
     <Content Include="Areas\razor\Views\dataviz\bar_charts\gap_spacing.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\api\selection.cshtml" />
     <Content Include="Areas\aspx\Views\Shared\Mobile.Master" />
+    <Content Include="Areas\razor\Views\dataviz\barcode\index.cshtml" />
     <None Include="Areas\razor\Views\dataviz\bullet_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\financial\virtualization.cshtml" />
     <Content Include="Areas\aspx\Views\web\colorpicker\api.aspx" />
@@ -764,6 +770,8 @@
     <Content Include="Areas\razor\Views\mobile\drawer\index.cshtml" />
     <Content Include="Areas\razor\Views\mobile\drawer\two_way_drawers.cshtml" />
     <Content Include="Areas\razor\Views\mobile\listview\hierarchical_databinding.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\qrcode\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\qrcode\api.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />

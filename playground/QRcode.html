@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Barcode</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="../src/kendo.dataviz.core.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="../src/kendo.dataviz.svg.js" type="text/javascript" charset="utf-8"></script>		
+        <script src="../src/kendo.dataviz.vml.js" type="text/javascript" charset="utf-8"></script>	
+		<script src="../src/kendo.dataviz.qrcode.js" type="text/javascript" charset="utf-8"></script>	
+        <style type="text/css">
+         div{
+                display:inline-block;
+                margin:10px;
+            }
+        </style>
+    </head>
+    <body style="background: white;">		
+       
+
+<div id="qrCode"></div>      
+<script>             
+$("#qrCode").kendoQRCode({
+    value: "http://demos.kendoui.com/dataviz/overview/index.html",
+    border: {
+        width: 5,
+        color: "#FF7D05"
+    }
+});
+</script>
+        
+        <script>             
+            
+        function printMatrix(matrix){
+            console.log("");
+            var str = "";
+            for(var i = 0; i < matrix.length; i++){              
+                for(var j = 0; j < matrix[i].length; j++){
+                    str += (matrix[i][j] !== undefined ? matrix[i][j]: "x") + " ";
+                }
+                str += "\n";
+            }
+             console.log(str);
+        }   
+            
+            var chars = {"0":0,"1": 1,"2": 2,"3": 3,"4": 4,"5": 5,"6": 6,"7": 7,"8": 8,"9": 9,"A": 10,"B": 11,"C": 12,"D": 13,"E": 14,"F": 15,"G": 16,"H": 17,"I": 18,"J": 19,"K": 20,"L": 21,"M": 22,"N": 23,"O": 24,"P": 25,"Q": 26,"R": 27,"S": 28,"T": 29,"U": 30,"V": 31,"W": 32,"X": 33,"Y": 34,"Z": 35," ": 36,"$": 37,"%": 38,"*": 39,"+": 40,"-": 41,".": 42,"/": 43,":": 44},
+                charArray = [];
+            for(var character in chars){
+                charArray.push(character);            
+            }
+            var start = new Date().getTime();            
+            function randomNum(){
+                var min = 0;
+                var max = 255;
+                var num;
+                    do{
+                        num = Math.floor(Math.random() * (max - min + 1)) + min;
+                    }while(127 < num && num < 160)
+                return num;
+            }
+            
+            function getCodewords(n){
+                var result = [],
+                    code;
+                for(var i =0; i< n;i++){34
+                    code = String.fromCharCode(randomNum());
+                    if(code=='"'){
+                        debugger;
+                        code = '\\\"';
+                    }
+                    if(code == '\\'){
+                        code = "\\\\";
+                    }
+                    result.push(code);
+                }
+                return result
+            }
+         
+
+            //alert("rendering took: " + (new Date().getTime() - start) + " miliseconds");
+        </script>
+    </body>
+</html>

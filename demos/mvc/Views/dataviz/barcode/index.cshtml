@@ -1,0 +1,64 @@
+    <div id="example" class="k-content">
+        <div id="barcode-container">
+            <div id="barcode"></div>
+        </div>
+        <ul class="options">
+        <li><label> Value: <input  id="value" class="k-textbox" value="1234567"/></label></li>
+        <li><label> Encoding: <input  id="type" /></label></li>
+        <li><label> Show Text: <input type="checkbox" id="text" checked="checked"/></label></li>
+        <li><label> Show Checksum: <input type="checkbox" id="checksum" /></label></li>
+        </ul>
+        <script>
+            function setOptions() {
+                try {
+                    var barcode = $('#barcode').data('kendoBarcode');
+                    barcode.setOptions({
+                        value: $('#value').val(),
+                        checksum: $('#checksum').is(':checked'),
+                        text: {
+                            visible: $('#text').is(':checked')
+                        },
+                        type: $('#type').kendoDropDownList('value')
+                    })
+                } catch (e) {               
+                    alert(e.message);
+                }               
+            }
+
+            $('#type').kendoDropDownList({
+                dataSource: [
+                            'Code39',
+                            'EAN8',
+                            'EAN13',
+                            'UPCE',
+                            'UPCA',
+                            'Code11',
+                            'Code39Extended',
+                            'Code128',
+                            'Code93',
+                            'Code93Extended',
+                            'Code128A',                            
+                            'Code128B',
+                            'Code128C',                            
+                            'MSImod10',
+                            'MSImod11',
+                            'MSImod1010',
+                            'MSImod1110',
+                            'GS1-128',
+                            'POSTNET'
+                            ],
+                change: setOptions
+            });
+
+            $(document).ready(function () {
+                $("#barcode").kendoBarcode({
+                    value: "1234567"
+                });
+
+
+                $('#value,#checksum,#text').change(setOptions);
+            });
+        </script>
+
+    </div>
+

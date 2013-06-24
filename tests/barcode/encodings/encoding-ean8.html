@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>code ean8 tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../..//qunit/qunit/qunit.js"></script>
+        <script src="../../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <link href="../../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.dataviz.core.js"></script>
+        <script src="../../../src/kendo.dataviz.barcode.js"></script>
+        <script src="constants.js"></script>
+        <script src="utils.js"></script>
+
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                encodings = dataviz.encodings;
+
+            (function() {
+                var encoding;
+                    
+                module("ean8", {
+                    setup: function() {
+                        encoding = new encodings.ean8();
+                    },
+                    teardown: function(){
+                        encoding = null;
+                    }
+                });
+
+
+                test("test pattern for value 1234567 ", function(){
+                    var result,
+                        value = "1234567",
+                        height = 100,                        
+                        expectedResult = [10,1,1,1,{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":4},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},1,1,1,1,1,{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":4},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},1,1,1,10];
+                        // [10,1,1,1,2,2,2,1,2,1,2,2,1,4,1,1,1,1,3,2,1,1,1,1,1,1,2,3,1,1,1,1,4,1,3,1,2,3,2,1,1,1,1,1,10]   
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				 test("test pattern for value 7248733 ", function(){
+                    var result,
+                        value = "7248733",
+                        expectedResult = [10,1,1,1,{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},1,1,1,1,1,{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":4},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":4},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},1,1,1,10];
+                        //[10,1,1,1,1,3,1,2,2,1,2,2,1,1,3,2,1,2,1,3,1,1,1,1,1,1,3,1,2,1,4,1,1,1,4,1,1,1,1,3,2,1,1,1,10]
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				test("test pattern for value 0000000 ", function(){
+                    var result,
+                        value = "0000000",
+                        expectedResult = [10,1,1,1,{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},1,1,1,1,1,{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},1,1,1,10];
+                        //[10,1,1,1,3,2,1,1,3,2,1,1,3,2,1,1,3,2,1,1,1,1,1,1,1,3,2,1,1,3,2,1,1,3,2,1,1,3,2,1,1,1,1,1,10]
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+
+				
+				test("test pattern for value 9999999 ", function(){
+                    var result,
+                        value = "9999999",
+                        expectedResult = [10,1,1,1,{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},1,1,1,1,1,{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},1,1,1,10];
+                        //[10,1,1,1,3,1,1,2,3,1,1,2,3,1,1,2,3,1,1,2,1,1,1,1,1,3,1,1,2,3,1,1,2,3,1,1,2,1,2,3,1,1,1,1,10]
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				test("test pattern for value 5432167 ", function(){
+                    var result,
+                        value = "5432167",
+                        expectedResult = [10,1,1,1,{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":4},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":2},1,1,1,1,1,{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":4},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":3},{"y1":0,"y2":95,"width":2},{"y1":0,"y2":95,"width":1},{"y1":0,"y2":95,"width":1},1,1,1,10];
+                        //[10,1,1,1,1,2,3,1,1,1,3,2,1,4,1,1,2,1,2,2,1,1,1,1,1,2,2,2,1,1,1,1,4,1,3,1,2,3,2,1,1,1,1,1,10]
+                        result = encoding.encode(value, 300, 100);
+                        ok(comparePatterns(result.pattern,expectedResult ));
+                });
+				
+				test("test checksum of 5432167 ", function(){
+                    var result,
+                        value = "5432167";
+                        expectedChecksum = 0;
+                        encoding.encode(value, 300, 100);
+                        ok(comparePatterns(expectedChecksum,encoding.calculateChecksum()));
+                });
+				
+				test("test checksum of 7248733 ", function(){
+                    var result,
+                        value = "7248733";
+                        expectedChecksum = 4;
+                        encoding.encode(value, 300, 100);
+                        ok(comparePatterns(expectedChecksum,encoding.calculateChecksum()));
+                });
+            })();
+        </script>
+
+        <h1 id="qunit-header">encoding ean8</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+    </body>
+</html>
