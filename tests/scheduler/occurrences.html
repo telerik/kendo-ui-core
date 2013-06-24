@@ -808,6 +808,42 @@
                 equal(events.length, 1);
             });
 
+            test("DAILY occurrences honours DST", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 2, 30, 16, 30),
+                    end: new Date(2013, 2, 30, 17, 0),
+                    recurrenceRule: "FREQ=DAILY"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 2, 30), new Date(2013, 3, 1, 17));
+
+                equal(events.length, 2);
+
+                equal(events[0].start.getTime(), +new Date(2013, 2, 31, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 2, 31, 17, 0));
+
+                equal(events[1].start.getTime(), +new Date(2013, 3, 1, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 3, 1, 17, 0));
+            });
+
+            /*test("DAILY occurrences creates date when it is not possible", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 2, 30, 3, 0),
+                    end: new Date(2013, 2, 30, 4, 0),
+                    recurrenceRule: "FREQ=DAILY"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 2, 30), new Date(2013, 3, 1, 17));
+
+                equal(events.length, 2);
+                equal(events[0].start.getHours(), 3);
+                equal(events[1].start.getHours(), 3);
+            });*/
+
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {
                 var schedulerEvent = {
@@ -1828,18 +1864,18 @@
             });
 
             test("Expand event with recurrence exception in America/Los_Angeles timezone defined as startTimezone", function() {
-                var start = new Date(2013, 0, 1, 0, 0), //"America/Los_Angeles"
-                    end = new Date(2013, 0, 2, 22, 0); //"America/Los_Angeles"
+                var start = new Date(2013, 0, 1, 0, 0),
+                    end = new Date(2013, 0, 2, 22, 0);
 
-                var expDate1 = timezone.convert(new Date(2013, 0, 2, 10, 30), "America/Los_Angeles", "Etc/UTC"); //make it UTC
+                var expDate1 = kendo.timezone.convert(new Date(2013, 0, 2, 10, 30), "America/Los_Angeles", "Etc/UTC");
                 var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
 
                 var events = [{
                     uid: "id",
                     title: "Title",
-                    start: new Date(2013, 0, 1, 10, 30), //"America/Los_Angeles"
+                    start: new Date(2013, 0, 1, 10, 30),
                     startTimezone: "America/Los_Angeles",
-                    end: new Date(2013, 0, 1, 11, 30), //"America/Los_Angeles"
+                    end: new Date(2013, 0, 1, 11, 30),
                     recurrenceRule: "FREQ=DAILY;COUNT=2",
                     recurrenceException: exception
                 }]

@@ -786,14 +786,14 @@ kendo_module({
         var length = events.length,
             idx = 0, event, result,
             resultLength, skip,
-            startTimezon,
+            startTimezone,
             eventStart;
 
         for (; idx < length; idx++) {
             event = events[idx];
             startTimezone = event.startTimezone || event.endTimezone || zone;
 
-            result = expand(event, start, end, startTimezon);
+            result = expand(event, start, end, startTimezone);
             resultLength = result.length;
             skip = false;
 
