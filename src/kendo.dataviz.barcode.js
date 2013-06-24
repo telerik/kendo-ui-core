@@ -26,8 +26,7 @@
         return value.substring(index, index + count);
     }
 
-    var Encoding  = kendo.Class.extend({
-        varyByHeight: false,
+    var Encoding  = kendo.Class.extend({       
         init: function (options) {
             this.setOptions(options);
         },
@@ -47,8 +46,7 @@
 
             return {
                 baseUnit: that.baseUnit,
-                pattern: that.pattern,
-                varyByHeight: that.varyByHeight
+                pattern: that.pattern                
             };
         },
         options: {
@@ -152,8 +150,8 @@
                 }
             },
             function(code){
-				var that = this;
-                var result,
+				var that = this,
+                    result,
                     dataCharacterCode,
                     codes;
                 if(!that.specialAsciiCodes[code]){
@@ -246,9 +244,10 @@
             this.addCharacterGap();
         },
         pushCheckSum: function(){
-            var character = this._findCharacterByValue(this._getCheckValue());
-
-            this.addBase(this.characterMap[character]);
+            var that = this;
+            that.checksum = that._getCheckValue();
+            
+            this.addBase(this.characterMap[that._findCharacterByValue(that.checksum)]);
         },
         _getCheckValue: function(){
             return this.checkSum % this.checkSumMod;
@@ -320,8 +319,10 @@
 
     encodings.code39extended = encodings.code39.extend(code39ExtendedBase).extend({
         pushCheckSum: function(){
-			var that = this;
-            var value = that._getCheckValue();
+			var that = this,
+                value = that._getCheckValue();
+                
+            that.checksum = value;
             if(that.shiftValuesAsciiCodes[value]){
                 that.addExtended(that.shiftValuesAsciiCodes[value]);
             }
@@ -384,16 +385,19 @@
             this.values.push(charData.value);
         },
         pushCheckSum: function(){
-            var checkValues = this._getCheckValues(),
+            var that = this,
+                checkValues = that._getCheckValues(),
                 charData;
+                
+            that.checksum = checkValues.join("");
             for(var i = 0; i < checkValues.length; i++){
                 charData = this.characterMap[this._findCharacterByValue(checkValues[i])];
                 this.addPattern(charData.pattern);
             }
         },
         _getCheckValues: function(){
-			var that = this;
-            var values = that.values.reverse(),
+			var that = this,
+                values = that.values.reverse(),
                 wightedSum = 0,
                 cValue,
                 kValue;
@@ -483,10 +487,12 @@
 
     encodings.code93extended = encodings.code93.extend(code39ExtendedBase).extend({
         pushCheckSum: function(){
-			var that = this;
-            var checkValues = that._getCheckValues(),
+			var that = this,
+                checkValues = that._getCheckValues(),
                 value;
-
+                
+            that.checksum = checkValues.join("");
+            
             for(var i = 0; i < checkValues.length; i++){
                 value = checkValues[i];
                 if(that.shiftValuesAsciiCodes[value]){
@@ -509,7 +515,6 @@
         pushState: function(encodingState){}
     });
 
-    //Investigate the options to move to C if it is in the states and there are 4 or more consecutive digits
     var state128AB = state128.extend({
         FNC4: "FNC4",
         init: function(encoding, states){
@@ -742,9 +747,7 @@
             return result;
         }
     });
-
-
-    //inherit 128 base instead if it is not needed for states A, B
+    
     states128.FNC1 = state128.extend({
         key: "FNC1",
         startState: "C",
@@ -822,19 +825,19 @@
             }
 
             if(ai.type == "alphanumeric" && !alphanumericRegex.test(code)){
-                 throw new Error("AI " + current.id+ " is alphanumeric only but contains non alphanumeric character(s).");
+                 throw new Error("Application identifier " + current.id+ " is alphanumeric only but contains non alphanumeric character(s).");
             }
 
             if(ai.length && ai.length !== code.length){
-                 throw new Error("AI " + current.id + " must be " + ai.length + " characters long.");
+                 throw new Error("Application identifier " + current.id + " must be " + ai.length + " characters long.");
             }
 
             if(ai.min && ai.min > code.length){
-                 throw new Error("AI " + current.id + " must be at least " + ai.min + " characters long.");
+                 throw new Error("Application identifier " + current.id + " must be at least " + ai.min + " characters long.");
             }
 
             if(ai.max && ai.max < code.length){
-                 throw new Error("AI " + current.id + " must be at most " + ai.max + " characters long.");
+                 throw new Error("Application identifier " + current.id + " must be at most " + ai.max + " characters long.");
             }
         },
         getByLength: function(value, index){
@@ -980,8 +983,8 @@
            that.position = 1;
         },
         addData: function(){
-			var that = this;
-            var encodingState = {
+			var that = this,
+                encodingState = {
                     value: that.value,
                     index: 0,
                     state: ""
@@ -1002,14 +1005,15 @@
             that.setBaseUnit();
         },
         pushData: function(encodingState, states){
+            var that = this;
             while(true){
-                this[encodingState.state].pushState(encodingState);
+                that[encodingState.state].pushState(encodingState);
                 if(encodingState.index >= encodingState.value.length){
                     break;
                 }
                 encodingState.previousState = encodingState.state;
-                encodingState.state  = this.getNextState(encodingState, states);
-                this[encodingState.state].move(encodingState);
+                encodingState.state  = that.getNextState(encodingState, states);
+                that[encodingState.state].move(encodingState);
             }
         },
         addStart: function(encodingState){
@@ -1017,8 +1021,10 @@
             this.position = 1;
         },
         addCheckSum: function(){
-            var checkValue = this.checkSum % 103;
-            this.addPattern(checkValue);
+            var that = this;
+            
+            that.checksum = this.checkSum % 103;
+            that.addPattern(that.checksum);
         },
         addStop: function(){
             this.addPattern(this.STOP);
@@ -1132,11 +1138,13 @@
             }
         },
         addCheckSum: function(){
-			var that = this;
-            var checkSumFunction = that.checkSums[that.checkSumType],
+			var that = this,
+                checkSumFunction = that.checkSums[that.checkSumType],
                 checkValues;
             
             checkValues = checkSumFunction.call(that.checkSums, that.value);
+            
+            that.checksum = checkValues.join("");
             for(var i = 0; i < checkValues.length; i++){
                 that.checkSumLength++;
                 that.addPattern(that.characterMap[checkValues[i]]);
@@ -1253,17 +1261,19 @@
             this.baseUnit = this.width / (this.totalUnits + quietZoneLength);
         },
         addCheckSum: function(){
-			var that = this;
-            var value = that.value,
+			var that = this,
+                value = that.value,
                 length = value.length,
                 cValue;
-
+            
             cValue = that.getWeightedSum(value, length, that.cCheckSumTotal) % that.checkSumMod;
+            that.checksum = cValue + "";
             that.addPattern(that.characterMap[cValue]);
-
+            
             length++;
             if(length >= that.kCheckSumMinLength){
                 var kValue = (cValue + that.getWeightedSum(value, length, that.kCheckSumTotal)) % that.checkSumMod;
+                that.checksum += kValue;
                 that.addPattern(that.characterMap[kValue]);
             }
         },
@@ -1346,12 +1356,13 @@
             this.addPattern(pattern);
         },
         addCheckSum: function(){
-            var checkValue = (10 - (this.checkSum % 10)) % 10;
-            this.addCharacter(checkValue);
+            var that = this;
+            that.checksum = (10 - (that.checkSum % 10)) % 10;
+            that.addCharacter(that.checksum);
         },
         setBaseUnit: function(){
-			var that=this;
-            var quietZoneLength = that.options.addQuietZone ? 2 * that.options.quietZoneLength : 0,
+			var that=this,
+                quietZoneLength = that.options.addQuietZone ? 2 * that.options.quietZoneLength : 0,
                 startStopLength = 3;
             that.baseUnit = that.width / ((that.value.length + 1) * 10 +  startStopLength + quietZoneLength);
         },
@@ -1365,8 +1376,8 @@
             }
         },
         addPattern: function(pattern){
-			var that = this;
-            var y1;
+			var that = this,
+                y1;
             for(var i = 0; i < pattern.length; i++){
                 y1 = that.height - that.baseHeight * pattern.charAt(i);
                 that.pattern.push({width: 1, y1: y1, y2: that.height});
