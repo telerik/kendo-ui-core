@@ -537,6 +537,22 @@
                 equal(scheduler._recurringDialog, null);
             });
 
+            test("Set timezone to the RecurrenceEditor", function() {
+                var scheduler = setup({
+                    views: ["week"],
+                    timezone: "Etc/UTC",
+                    dataSource: {
+                        data: [ { start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
+                    }
+                });
+
+                scheduler.editEvent(scheduler.element.find(".k-event:last").data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                var editor = scheduler._editContainer.find("[data-role=recurrenceeditor]").data("kendoRecurrenceEditor");
+
+                equal(editor.options.timezone, "Etc/UTC");
+            });
+
             test("create exception", function() {
                 var scheduler = setup({
                     views: ["week"],

@@ -709,6 +709,7 @@ kendo_module({
         if (event.toJSON) {
             event = event.toJSON();
 
+            delete event.recurrenceException;
             delete event.recurrenceRule;
             delete event[idField];
             delete event.id;

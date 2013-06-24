@@ -83,7 +83,8 @@ kendo_module({
                 })
                 .appendTo(container)
                 .kendoRecurrenceEditor({
-                    start: options.model.start
+                    start: options.model.start,
+                    timezone: options.timezone
                 });
         };
 
@@ -636,7 +637,8 @@ kendo_module({
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 editableFields = [],
-                paramName = settings.paramName;
+                paramName = settings.paramName,
+                timezone;
 
            if (template) {
                 if (typeof template === STRING) {
@@ -645,7 +647,8 @@ kendo_module({
                 html += (kendo.template(template, settings))(model);
             } else {
                 if (!model.recurrenceId) {
-                    fields.push({ field: "recurrenceRule", title: "Repeat", editor: RECURRENCEEDITOR });
+                    timezone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone;
+                    fields.push({ field: "recurrenceRule", title: "Repeat", editor: RECURRENCEEDITOR, timezone: timezone });
                 }
 
                 if ("description" in model) {
