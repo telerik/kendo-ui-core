@@ -793,23 +793,26 @@ kendo_module({
 
         _addExceptionDate: function(model) {
             var origin = this.dataSource.get(model.recurrenceId),
+                zone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone,
                 exception = origin.recurrenceException || "",
-                date = model.start;
+                start = model.start;
 
-            if (!recurrence.isException(exception, date)) {
-                date = kendo.timezone.apply(date, 0);
-                exception += kendo.toString(date, RECURRENCE_DATE_FORMAT) + ";";
+            if (!recurrence.isException(exception, start, zone)) {
+                start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
+                exception += kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
 
                 origin.set("recurrenceException", exception);
             }
         },
 
         _removeExceptionDate: function(model) {
-            var origin, start, exceptionDate, exception;
+            var origin, exceptionDate, exception,
+                zone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone,
+                start = model.start;
 
             if (model.recurrenceId) {
                 origin = this.dataSource.get(model.recurrenceId);
-                start = kendo.timezone.apply(model.start, 0);
+                start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
 
                 if (origin) {
                     exceptionDate = kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";

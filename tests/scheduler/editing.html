@@ -559,6 +559,28 @@
                 equal(scheduler.calls("addEvent"), 1);
             });
 
+            test("creating exception using UTC timezone", function() {
+                var scheduler = setup({
+                    timezone: "Etc/UTC",
+                    views: ["week"],
+                    dataSource: {
+                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
+                    }
+                });
+
+                var eventUID = scheduler.element.find(".k-event:last").data("uid"),
+                    origin = scheduler.dataSource.at(0),
+                    exception;
+
+                scheduler.editEvent(eventUID);
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                exception = scheduler.dataSource.at(1);
+
+                ok(origin.recurrenceException);
+                equal(origin.recurrenceException, kendo.toString(exception.start, "yyyyMMddTHHmmssZ") + ";");
+            });
+
             test("creating exception sets event exception property", function() {
                 var scheduler = setup({
                     views: ["week"],
@@ -831,6 +853,27 @@
 
                 var scheduler = setup({
                     views: ["week"],
+                    date: date,
+                    dataSource: {
+                        data: [ { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY" } ]
+                    }
+                });
+
+                scheduler.removeEvent(scheduler.element.find(".k-event").eq(2).data("uid"));
+                scheduler._recurringDialog.element.find("button:first").triggerHandler("click"); //delete current occurrence
+                $(document.body).find("[data-role=window]:visible").find(".k-button:last").click(); //cancel deletion
+
+                var model = scheduler.dataSource.at(0);
+
+                ok(!model.recurrenceException);
+            });
+
+            test("canceling deletion of occurrence removes applied recurrenceException (UTC timezone)", function() {
+                var date = new Date(2013, 10, 10, 15, 0, 0);
+
+                var scheduler = setup({
+                    views: ["week"],
+                    timezone: "Etc/UTC",
                     date: date,
                     dataSource: {
                         data: [ { id: "1", start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY" } ]
