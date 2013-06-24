@@ -1,9 +1,9 @@
 <div id="example">
-    <div id="panel" class="demo-section k-widget k-header">
+    <div id="panel" class="demo-section">
         <ul>
             <li>
                 <label for="blog-title">Title:</label>
-                <input type="text" id="blog-title" value="Demo Title" class="k-textbox" />
+                <input type="text" id="blog-title" value="To Navigate, Or Not To Navigate?" class="k-textbox" />
             </li>
             <li>
                 <label for="blog-twitter">Twitter handle:</label>
@@ -11,22 +11,22 @@
             </li>
             <li>
                 <label for="blog-content">Content:</label>
-                <textarea id="blog-content" rows="4" cols="60" class="k-textbox">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
+                <textarea id="blog-content" rows="4" cols="60" class="k-textbox">Routers are powerful tools in Single Page Applications, and Kendo UI's router provides an API to wrap up this power.</textarea>
             </li>
         </ul>
 
         <button id="preview" class="k-button">Preview</button>
     </div>
 
-    <div id="blog-preview"></div>
+    <div id="blog-preview" class="demo-section"></div>
 </div>
 
 <script type="text/x-kendo-template" id="template">
-    <h3 class="k-widget k-header">#= title #</h3>
+    <h3>#= title #</h3>
+    <h4>posted on <time>#= new Date().toLocaleDateString() #</time> by <strong>#= twitter #</strong></h4>
     <article>
     <img alt="#= twitter #" title="#= twitter #" width="73" height="73" class="t-widget"
     src="http://api.twitter.com/1/users/profile_image?screen_name=#= twitter #&size=bigger" />
-    <h4>posted on <time>#= new Date().toLocaleDateString() #</time> by <strong>#= twitter #</strong></h4>
     <p>#= content #</p>
     </article>
 </script>
@@ -48,79 +48,69 @@
 </script>
 
 <style scoped>
-    #panel
-    {
-        background-image: none;
-        margin: -16px 0 30px;
-        padding: 30px 0 25px;
+    #panel, #blog-preview {
+        display: inline-block;
+        vertical-align: top;
+        width: 310px;
+        margin: 10px;
+        padding: 30px 15px 20px 15px;
+        min-height: 200px;
+    }
+    
+    #blog-preview {
+        width: 310px;
     }
 
     #panel input,
-    #panel textarea
-    {
+    #panel textarea {
         font: inherit;
-        margin: -5px 0 5px;
+        width: 210px;
+        margin: 0;
+        padding: 2px 0.3em;
     }
 
-    #exampleWrap ul h3
-    {
+    #exampleWrap ul h3 {
         margin-bottom: 0.6em;
         padding: 0;
     }
 
-    #exampleWrap ul
-    {
+    #exampleWrap ul {
         list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    #example ul label
-    {
+    #example ul label {
         display: inline-block;
         vertical-align: top;
-        width: 110px;
-        padding: 0 8px;
+        line-height: 26px;
+        width: 80px;
+        padding: 0 3px;
         text-align: right;
     }
 
-    #preview
-    {
-        margin-left: 129px;
-    }
-
-    #preview
-    {
+    #preview {
+        margin-left: 89px;
         height: 26px;
-        width: 140px;
+        width: 148px;
     }
 
-    #example li
-    {
+    #example li {
         margin: 0.4em 0;
     }
 
-    #example h3.k-header
-    {
+    #example h3.k-header {
         margin: 1.4em 0 1em;
         padding: .4em 1.4em;
         font-size: 1.4em;
         border-radius: 2px;
     }
 
-    #blog-content
-    {
+    #blog-content {
         height: 100px;
     }
 
-    #blog-preview
-    {
-        width: 84%;
-        margin: 0 auto 40px;
-    }
-
-    #blog-preview img
-    {
+    #blog-preview img {
         float: left;
         margin: 0 14px 0 0;
         border: 3px solid #dedede;
@@ -129,24 +119,20 @@
         border-radius: 3px;
     }
 
-    #blog-preview h4
-    {
-        font-size: 10px;
+    #blog-preview h4 {
+        font-size: 9px;
         font-weight: normal;
         text-transform: uppercase;
         color: #8d8d8d;
-        margin-top: 0;
-        border-bottom: 1px solid #dedede;
+        margin-top: 3px;
+        width: 100%;
     }
 
-    #blog-preview h4 strong
-    {
+    #blog-preview h4 strong {
         color: #ed662e;
     }
 
-    #blog-preview p,
-    #blog-preview h4
-    {
+    #blog-preview p {
         margin-left: 93px;
     }
 </style>
