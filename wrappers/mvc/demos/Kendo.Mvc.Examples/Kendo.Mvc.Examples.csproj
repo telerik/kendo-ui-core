@@ -86,6 +86,7 @@
     <Compile Include="Controllers\DataViz\Area_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Stacked_AreaController.cs" />
+    <Compile Include="Controllers\DataViz\Barcode\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Gap_SpacingController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
@@ -700,6 +701,7 @@
     <Content Include="Areas\razor\Views\dataviz\bar_charts\gap_spacing.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\api\selection.cshtml" />
     <Content Include="Areas\aspx\Views\Shared\Mobile.Master" />
+    <Content Include="Areas\razor\Views\dataviz\barcode\index.cshtml" />
     <None Include="Areas\razor\Views\dataviz\bullet_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\financial\virtualization.cshtml" />
     <Content Include="Areas\aspx\Views\web\colorpicker\api.aspx" />

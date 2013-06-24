@@ -16,11 +16,14 @@
         Code128C,
         EAN13,
         EAN8,
+        UPCA,
+        UPCE,
         MSI,
         POSTNET,
         MSImod10,
         MSImod11,
         MSImod1010,
+        GS1128,
         MSImod1110 
     }
 }

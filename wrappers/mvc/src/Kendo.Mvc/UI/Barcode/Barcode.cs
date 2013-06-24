@@ -18,11 +18,30 @@
             : base(viewContext, javaScriptInitializer)
         {
             this.Encoding = BarcodeSymbology.Code128;
+            this.Border = new BarcodeElementBorder();
+            this.Padding = new BarcodeSpacing();
+            this.Text = new BarcodeTextElement();
         }
 
         public string Value { get; set; }
 
+        public string Background { get; set; }
+
         public BarcodeSymbology Encoding { get; set; }
+
+        public BarcodeElementBorder Border { get; set; }
+
+        public BarcodeSpacing Padding { get; set; }
+
+        public BarcodeTextElement Text { get; set; }
+
+        public int? Height { get; set; }
+
+        public int? Width { get; set; }
+
+        public string Color { get; set; }
+
+        public bool Checksum { get; set; }
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
@@ -37,11 +56,57 @@
         {
             var options = new Dictionary<string, object>(Events);
 
-            options["encoding"] = new { name = this.Encoding }.ToDictionary();
+            options["type"] = this.Encoding;
+
+            if (this.Encoding == BarcodeSymbology.GS1128)
+            {
+                options["type"] = "gs1-128";
+            }
+
+            if (this.Checksum == false)
+            {
+                options["checksum"] = this.Checksum;
+            }
 
             if (Value.HasValue())
             {
                 options["value"] = Value;
+            }
+
+            if (Background.HasValue())
+            {
+                options["background"] = Background;
+            }
+
+            if (Color.HasValue())
+            {
+                options["color"] = Color;
+            }
+
+            if (Height.HasValue)
+            {
+                options["height"] = Height;
+            }
+
+            if (Width.HasValue)
+            {
+                options["width"] = Width;
+            }
+
+            if (this.Border.Color.HasValue() || this.Border.DashType !=  null || 
+                this.Border.Width.HasValue)
+            {
+                options["border"] = new BarcodeElementBorderSerializer(this.Border).Serialize();
+            }
+
+            if (this.Padding.ShouldSerialize())
+            {
+                options["padding"] = this.Padding.CreateSerializer().Serialize();
+            }
+
+            if (this.Text.ShouldSerialize())
+            {
+                options["text"] = this.Text.ToJson();
             }
 
             writer.Write(Initializer.Initialize(Selector, "Barcode", options));

@@ -32,7 +32,7 @@
             return new HtmlElement("div")
                             .Attribute("id", Barcode.Id)
                             .Attributes(Barcode.HtmlAttributes)
-                            .PrependClass(UIPrimitives.Widget, "k-barcode");
+                            .PrependClass("k-barcode");
         }
     }
 }

@@ -1,0 +1,14 @@
+@section HeadContent {
+    
+}
+
+<div class="chart-wrapper">
+    @(
+        Html.Kendo().Barcode().Name("barcode").Value("1234567").Encoding(BarcodeSymbology.EAN8)
+        .Background("pink")
+        .Border(b=>b.Color("red").Width(5).DashType(ChartDashType.LongDashDot))
+        .Padding(20) 
+        
+        .Checksum(true)       
+        .Text(t=>t.Visible(true).Color("red").Margin(m=>m.Top(20)))
+    )

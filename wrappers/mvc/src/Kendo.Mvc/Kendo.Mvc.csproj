@@ -222,9 +222,16 @@
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteEventBuilder.cs" />
     <Compile Include="UI\Barcode\Barcode.cs" />
+    <Compile Include="UI\Barcode\BarcodePadding.cs" />
     <Compile Include="UI\Barcode\BarcodeSymbology.cs" />
+    <Compile Include="UI\Barcode\BarcodeElementBorder.cs" />
+    <Compile Include="UI\Barcode\BarcodeTextElement.cs" />
     <Compile Include="UI\Barcode\Fluent\BarcodeBuilder.cs" />
+    <Compile Include="UI\Barcode\Fluent\BarcodeBorderBuilder.cs" />
+    <Compile Include="UI\Barcode\Fluent\BarcodeSpacingBuilder.cs" />
+    <Compile Include="UI\Barcode\Fluent\BarcodeTextBuilder.cs" />
     <Compile Include="UI\Barcode\Html\BarcodeHtmlBuilder.cs" />
+    <Compile Include="UI\Barcode\Serialization\BarcodeElementBorderSerializer.cs" />
     <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarEventBuilder.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarSelectionSettingsBuilder.cs" />
