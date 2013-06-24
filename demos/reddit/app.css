@@ -59,18 +59,13 @@
     padding: 0;
 }
 
-.km-virtual-scrollview {
-    overflow-x: hidden;
-    white-space: nowrap;
-    width: 100%;
-    position: relative;
-
+.km-scrollview {
     display: flex;
     display: -webkit-flex;
     display: -webkit-box;
 }
 
-.km-virtual-scrollview > div {
+.km-scrollview > div {
     position: relative;
     flex: 1;
     -webkit-flex: 1;

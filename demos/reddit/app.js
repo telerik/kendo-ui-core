@@ -63,26 +63,6 @@ var canvasDataSource = new kendo.data.DataSource({
     }
 });
 
-// var ds = new kendo.data.DataSource({
-//     transport: {
-//         read: function(options) {
-//
-//             var results = [], data = options.data;
-//             for (var i = data.skip; i < data.skip + data.take; i ++) {
-//                 results.push({ foo: i });
-//             }
-//             setTimeout(function(){
-//                 options.success(results);
-//             }, 4000);
-//         }
-//     },
-//     pageSize: 36,
-//     serverPaging: true,
-//     schema: {
-//         total: function() { return 100000; }
-//     }
-// });
-
 function isImage(url) {
     return imgExtensionRegex.test(url) || (/http:\/\/(.+)?imgur.com\/.[^\/]+$/i).test(url);
 }
@@ -183,7 +163,6 @@ function renderThumbs(element) {
 
 function canvasInit(e) {
     canvasScrollView = $("#canvas-scrollview").kendoMobileScrollView({
-        contentHeight: 500,
         dataSource: canvasDataSource,
         batchSize: 6,
         template: kendo.template($("#canvas-template").html()),
@@ -203,7 +182,7 @@ function canvasInit(e) {
 
 function canvasShow(e) {
     var offset = parseInt(e.view.params.offset),
-        canvasScrollView = $("#canvas-scrollview").data("kendoMobileVirtualScrollView");
+        canvasScrollView = $("#canvas-scrollview").data("kendoMobileScrollView");
 
     if(!isNaN(offset)) {
         canvasScrollView.scrollTo(offset);
@@ -211,8 +190,8 @@ function canvasShow(e) {
 }
 
 function goToCanvas(e) {
-    var detailScrollView = $("#detail-scrollview").data("kendoMobileVirtualScrollView"),
-        canvasScrollView = $("#canvas-scrollview").data("kendoMobileVirtualScrollView"),
+    var detailScrollView = $("#detail-scrollview").data("kendoMobileScrollView"),
+        canvasScrollView = $("#canvas-scrollview").data("kendoMobileScrollView"),
         offset = detailScrollView.offset,
         canvasPage;
 
@@ -221,16 +200,16 @@ function goToCanvas(e) {
 }
 
 function canvasDetailInit(e) {
-    $("#detail-scrollview").kendoMobileVirtualScrollView({
+    $("#detail-scrollview").kendoMobileScrollView({
         dataSource: canvasDataSource,
         autoBind: false,
         template: kendo.template($("#canvas-detail-tmp").html())
-    }).data("kendoMobileVirtualScrollView");
+    }).data("kendoMobileScrollView");
 }
 
 function canvasDetailShow(e) {
     var offset = parseInt(e.view.params.offset),
-        detailScrollView = $("#detail-scrollview").data("kendoMobileVirtualScrollView");
+        detailScrollView = $("#detail-scrollview").data("kendoMobileScrollView");
 
     if(!isNaN(offset)) {
         detailScrollView.scrollTo(offset);
