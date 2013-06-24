@@ -20,7 +20,7 @@
             this.Encoding = BarcodeSymbology.Code128;
             this.Border = new BarcodeElementBorder();
             this.Padding = new BarcodeSpacing();
-            this.Text = new BarcodeTextElement();
+            this.Text = new BarcodeTextElement() { Visible = true};
         }
 
         public string Value { get; set; }
