@@ -1661,6 +1661,86 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartLineSeriesBuilder<TModel>(radarLineSeries);
         }
 
+        /// <summary>
+        /// Defines bound polar area series.
+        /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarArea<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
+        {
+            var polarAreaSeries = new ChartPolarAreaSeries<TModel, TXValue, TYValue>(xValueExpression, yValueExpression);
+
+            Container.Series.Add(polarAreaSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarAreaSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar area series.
+        /// </summary>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarArea(string xMemberName, string yMemberName)
+        {
+            return PolarArea(null, xMemberName, yMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound polar area series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value members.
+        /// </param>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarArea(Type memberType, string xMemberName, string yMemberName)
+        {
+            var expressionX = BuildMemberExpression(memberType, xMemberName);
+            var expressionY = BuildMemberExpression(memberType, yMemberName);
+
+            var seriesType = typeof(ChartPolarAreaSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
+            var series = (IChartScatterSeries)BuildSeries(seriesType, expressionX, expressionY);
+
+            series.XMember = xMemberName;
+            series.YMember = yMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = xMemberName.AsTitle() + ", " + yMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartScatterSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines polar area series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarArea(IEnumerable data)
+        {
+            ChartPolarAreaSeries<TModel, object, object> polarAreaSeries = new ChartPolarAreaSeries<TModel, object, object>(data);
+
+            Container.Series.Add(polarAreaSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarAreaSeries);
+        }
+
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
         {
             const bool liftMemberAccess = false;

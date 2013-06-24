@@ -113,5 +113,13 @@ namespace Kendo.Mvc.UI
         {
             get;
         }
+
+        /// <summary>
+        /// The default settings for all polar area series.
+        /// </summary>
+        IChartScatterSeries PolarArea
+        {
+            get;
+        }
     }
 }

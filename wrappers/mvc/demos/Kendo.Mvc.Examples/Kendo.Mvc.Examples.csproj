@@ -523,6 +523,7 @@
     <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\qrcode\api.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\qrcode\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\radar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\multiple_axes.aspx" />

@@ -687,5 +687,33 @@ namespace Kendo.Mvc.UI.Tests.Chart
             var builder = factory.RadarLine(new int[] { 1 });
             builder.Series.ShouldBeType<ChartRadarLineSeries<SalesData, object>>();
         }
+
+        [Fact]
+        public void PolarArea_should_create_bound_scatter_series_from_expression()
+        {
+            var builder = factory.PolarArea(s => s.RepSales, s => s.TotalSales);
+            builder.Series.ShouldBeType<ChartPolarAreaSeries<SalesData, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void PolarArea_should_create_bound_scatter_series_from_type_and_member_name()
+        {
+            var builder = factory.PolarArea(typeof(decimal), "RepSales", "TotalSales");
+            builder.Series.ShouldBeType<ChartPolarAreaSeries<SalesData, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void PolarArea_should_create_bound_scatter_series_from_member_name()
+        {
+            var builder = factory.PolarArea("RepSales", "TotalSales");
+            builder.Series.ShouldBeType<ChartPolarAreaSeries<SalesData, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void PolarArea_should_create_unbound_scatter_series_from_data()
+        {
+            var builder = factory.PolarArea(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartPolarAreaSeries<SalesData, object, object>>();
+        }
     }
 }
