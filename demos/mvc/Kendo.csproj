@@ -766,10 +766,11 @@
     <Content Include="Views\dataviz\radar-charts\grouped-data.cshtml" />
     <Content Include="Views\dataviz\polar-charts\remote-data.cshtml" />
     <Content Include="Views\dataviz\polar-charts\local-data.cshtml" />
-    <Content Include="Views\dataviz\barcode\index.cshtml" />
+    <Content Include="Views\dataviz\barcode\API.cshtml" />
     <Content Include="Views\dataviz\qrcode\index.cshtml" />
     <Content Include="Views\dataviz\qrcode\api.cshtml" />
     <Content Include="Views\dataviz\qrcode\character-capacities.cshtml" />
+    <None Include="Views\dataviz\barcode\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

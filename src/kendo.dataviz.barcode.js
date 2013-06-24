@@ -1647,7 +1647,7 @@
             name: "Barcode",  
             value: "",
             type: "code39",
-            checksum: true,
+            checksum: false,
             width: DEFAULT_WIDTH,
             height: DEFAULT_HEIGHT,            
             color: "black",

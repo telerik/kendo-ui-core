@@ -459,7 +459,7 @@
             "name": "linear-gauge"
         }
     ],
-    "codes": [
+    "Bar & QR Codes": [
         {
             "text": "Barcode",
             "documentation": "dataviz/barcode",
@@ -468,6 +468,12 @@
                 "url": "barcode/index.html",
                 "title": "Kendo UI Barcode Demo",
                 "meta": "This sample demonstrates the core functionality of Kendo UI Barcode which helps you easily encode data in machine readable format."
+            },
+            {
+                "text": "API",
+                "url": "barcode/api.html",
+                "title": "Kendo UI Barcode API Demo",
+                "meta": "This sample demonstrates the different symbologies the Barcode support and the different options that could be set"
             }],
             "name": "barcode"
         }, {
