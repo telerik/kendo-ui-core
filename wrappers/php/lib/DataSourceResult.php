@@ -1,7 +1,7 @@
 <?php
 
 class DataSourceResult {
-    private $db;
+    protected $db;
 
     private $stringOperators = array(
         'eq' => 'LIKE',
@@ -313,7 +313,7 @@ class DataSourceResult {
         return !is_bool($value) && !is_numeric($value) && !$this->isDate($value);
     }
 
-    private function propertyNames($properties) {
+    protected function propertyNames($properties) {
         $names = array();
 
         foreach ($properties as $key => $value) {

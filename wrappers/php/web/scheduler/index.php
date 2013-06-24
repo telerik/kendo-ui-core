@@ -9,8 +9,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Tasks', array('TaskID', 'Title', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', Start) as Start', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', End) as End', 'IsAllDay',
-'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'OwnerID'), $request), JSON_NUMERIC_CHECK);
+    $type = $_GET['type'];
+
+    $columns = array('TaskID', 'Title', 'Start', 'End', 'IsAllDay', 'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'OwnerID');
+
+    switch($type) {
+        case 'create':
+            $result = $result->create('Tasks', $columns, $request->models, 'TaskID');
+            break;
+        case 'update':
+            $result = $result->update('Tasks', $columns, $request->models, 'TaskID');
+            break;
+        case 'destroy':
+            $result = $result->destroy('Tasks', $request->models, 'TaskID');
+            break;
+        default:
+            $result = $result->read('Tasks', array('TaskID', 'Title', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', Start) as Start', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', End) as End', 'IsAllDay',
+'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'OwnerID'), $request);
+            break;
+    }
+
+    echo json_encode($result, JSON_NUMERIC_CHECK);
 
     exit;
 }
@@ -19,16 +38,38 @@ require_once '../../include/header.php';
 
 $transport = new \Kendo\Data\DataSourceTransport();
 
-$read = new \Kendo\Data\DataSourceTransportRead();
+$create = new \Kendo\Data\DataSourceTransportCreate();
 
-$read->url('index.php')
+$create->url('index.php?type=create')
      ->contentType('application/json')
      ->type('POST');
 
-$transport ->read($read)
+$read = new \Kendo\Data\DataSourceTransportRead();
+
+$read->url('index.php?type=read')
+     ->contentType('application/json')
+     ->type('POST');
+
+$update = new \Kendo\Data\DataSourceTransportUpdate();
+
+$update->url('index.php?type=update')
+     ->contentType('application/json')
+     ->type('POST');
+
+$destroy = new \Kendo\Data\DataSourceTransportDestroy();
+
+$destroy->url('index.php?type=destroy')
+     ->contentType('application/json')
+     ->type('POST');
+
+$transport->create($create)
+          ->read($read)
+          ->update($update)
+          ->destroy($destroy)
           ->parameterMap('function(data) {
               return kendo.stringify(data);
           }');
+
 $model = new \Kendo\Data\DataSourceSchemaModel();
 
 $taskIDField = new \Kendo\Data\DataSourceSchemaModelField('taskID');
@@ -64,7 +105,7 @@ $recurrenceRuleField = new \Kendo\Data\DataSourceSchemaModelField('recurrenceRul
 $recurrenceRuleField->from('RecurrenceRule');
 
 $recurrenceExceptionField = new \Kendo\Data\DataSourceSchemaModelField('recurrenceException');
-$recurrenceIdField->from('RecurrenceException');
+$recurrenceExceptionField->from('RecurrenceException');
 
 $ownerIdField = new \Kendo\Data\DataSourceSchemaModelField('ownerId');
 $ownerIdField->from('OwnerID')
@@ -91,6 +132,7 @@ $dataSource = new \Kendo\Data\DataSource();
 
 $dataSource->transport($transport)
     ->schema($schema)
+    ->batch(true)
     ->addFilterItem(array(
         'logic' => 'or',
         'filters' => array(
@@ -118,7 +160,6 @@ $scheduler->timezone("Etc/UTC")
         ->dataSource($dataSource);
 
 ?>
-<?= json_encode(date('2013/6/13'))?>
 <div id="people">
     <input checked type="checkbox" id="alex" value="1">
     <input checked type="checkbox" id="bob" value="2">
