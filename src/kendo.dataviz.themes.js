@@ -148,6 +148,22 @@ kendo_module({
                     target: {
                         color: "#ff0000"
                     }
+                },
+                noteDefaults: {
+                    icon: {
+                        border: {
+                            width: 2
+                        },
+                        padding: 3,
+                        size: 1
+                    },
+                    label: {
+                        font: SANS12
+                    },
+                    connector: {
+                        distance: 10,
+                        width: 1
+                    }
                 }
             },
             categoryAxis: {
@@ -166,6 +182,22 @@ kendo_module({
                 crosshair: {
                     tooltip: {
                         font: SANS12
+                    }
+                },
+                noteDefaults: {
+                    icon: {
+                        border: {
+                            width: 2
+                        },
+                        padding: 3,
+                        size: 1
+                    },
+                    label: {
+                        font: SANS12
+                    },
+                    connector: {
+                        distance: 10,
+                        width: 1
                     }
                 }
             },
@@ -229,6 +261,11 @@ kendo_module({
             seriesDefaults: {
                 labels: {
                     color: WHITE
+                },
+                noteDefaults: {
+                    label: {
+                        color: WHITE
+                    }
                 },
                 pie: {
                     overlay: {
@@ -299,6 +336,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#8e8e8e"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#8e8e8e",
+                        border: {
+                            color: "#8e8e8e"
+                        }
+                    },
+                    label: {
+                        color: WHITE
+                    },
+                    connector: {
+                        color: "#8e8e8e"
+                    }
                 }
             }
         },
@@ -354,6 +405,11 @@ kendo_module({
                     line: {
                         color: "#9aabb2"
                     }
+                },
+                noteDefaults: {
+                    label: {
+                        color: BLACK
+                    }
                 }
             },
             seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
@@ -375,6 +431,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#9aabb2"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#9aabb2",
+                        border: {
+                            color: "#9aabb2"
+                        }
+                    },
+                    label: {
+                        color: "#293135"
+                    },
+                    connector: {
+                        color: "#9aabb2"
+                    }
                 }
             }
         },
@@ -422,6 +492,11 @@ kendo_module({
             seriesDefaults: {
                 labels: {
                     color: "#ffffff"
+                },
+                noteDefaults: {
+                    label: {
+                        color: "#ffffff"
+                    }
                 },
                 pie: {
                     overlay: {
@@ -495,6 +570,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#ffffff"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#ffffff",
+                        border: {
+                            color: "#ffffff"
+                        }
+                    },
+                    label: {
+                        color: "#ffffff"
+                    },
+                    connector: {
+                        color: "#ffffff"
+                    }
                 }
             }
         },
@@ -550,6 +639,11 @@ kendo_module({
                     line: {
                         color: "#8d8d8d"
                     }
+                },
+                noteDefaults: {
+                    label: {
+                        color: BLACK
+                    }
                 }
             },
             seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
@@ -571,6 +665,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#8e8e8e"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#8e8e8e",
+                        border: {
+                            color: "#8e8e8e"
+                        }
+                    },
+                    label: {
+                        color: "#232323"
+                    },
+                    connector: {
+                        color: "#8e8e8e"
+                    }
                 }
             }
         },
@@ -620,6 +728,11 @@ kendo_module({
                     color: "#293135",
                     background: "#eaeaec",
                     opacity: 0.5
+                },
+                noteDefaults: {
+                    label: {
+                        color: "#293135"
+                    }
                 },
                 line: {
                     markers: {
@@ -672,6 +785,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#a6b1c0"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#a6b1c0",
+                        border: {
+                            color: "#a6b1c0"
+                        }
+                    },
+                    label: {
+                        color: "#4e5968"
+                    },
+                    connector: {
+                        color: "#a6b1c0"
+                    }
                 }
             }
         },
@@ -720,6 +847,11 @@ kendo_module({
                 labels: {
                     color: BLACK
                 },
+                noteDefaults: {
+                    label: {
+                        color: BLACK
+                    }
+                },
                 candlestick: {
                     downColor: "#c7c7c7",
                     line: {
@@ -752,6 +884,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#c7c7c7"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#c7c7c7",
+                        border: {
+                            color: "#c7c7c7"
+                        }
+                    },
+                    label: {
+                        color: "#777777"
+                    },
+                    connector: {
+                        color: "#c7c7c7"
+                    }
                 }
             }
         },
@@ -803,6 +949,11 @@ kendo_module({
                 labels: {
                     color: "#ffffff"
                 },
+                noteDefaults: {
+                    label: {
+                        color: "#ffffff"
+                    }
+                },
                 line: {
                     markers: {
                         background: "#0e0e0e"
@@ -853,6 +1004,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#cecece"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#cecece",
+                        border: {
+                            color: "#cecece"
+                        }
+                    },
+                    label: {
+                        color: "#ffffff"
+                    },
+                    connector: {
+                        color: "#cecece"
+                    }
                 }
             }
         },
@@ -900,6 +1065,11 @@ kendo_module({
             seriesDefaults: {
                 labels: {
                     color: "#ffffff"
+                },
+                noteDefaults: {
+                    label: {
+                        color: "#ffffff"
+                    }
                 },
                 pie: {
                     overlay: {
@@ -982,6 +1152,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#8c909e"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#8c909e",
+                        border: {
+                            color: "#8c909e"
+                        }
+                    },
+                    label: {
+                        color: "#ffffff"
+                    },
+                    connector: {
+                        color: "#8c909e"
+                    }
                 }
             }
         },
@@ -1028,6 +1212,11 @@ kendo_module({
             seriesDefaults: {
                 labels: {
                     color: "#686868"
+                },
+                noteDefaults: {
+                    label: {
+                        color: "#686868"
+                    }
                 },
                 pie: {
                     overlay: {
@@ -1110,6 +1299,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#9e9e9e"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#9e9e9e",
+                        border: {
+                            color: "#9e9e9e"
+                        }
+                    },
+                    label: {
+                        color: "#686868"
+                    },
+                    connector: {
+                        color: "#9e9e9e"
+                    }
                 }
             }
         },
@@ -1157,6 +1360,11 @@ kendo_module({
             seriesDefaults: {
                 labels: {
                     color: "#343434"
+                },
+                noteDefaults: {
+                    label: {
+                        color: "#343434"
+                    }
                 },
                 pie: {
                     overlay: {
@@ -1239,6 +1447,20 @@ kendo_module({
                 },
                 crosshair: {
                     color: "#b8b8b8"
+                },
+                noteDefaults: {
+                    icon: {
+                        background: "#b8b8b8",
+                        border: {
+                            color: "#b8b8b8"
+                        }
+                    },
+                    label: {
+                        color: "#343434"
+                    },
+                    connector: {
+                        color: "#b8b8b8"
+                    }
                 }
             }
         },

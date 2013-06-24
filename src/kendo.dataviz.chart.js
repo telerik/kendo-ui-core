@@ -45,6 +45,7 @@ kendo_module({
         Point2D = dataviz.Point2D,
         RootElement = dataviz.RootElement,
         Ring = dataviz.Ring,
+        ShapeElement = dataviz.ShapeElement,
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
@@ -126,6 +127,8 @@ kendo_module({
         MOUSEMOVE_THROTTLE = 20,
         MOUSEWHEEL_DELAY = 150,
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
+        NOTE_CLICK = dataviz.NOTE_CLICK,
+        NOTE_HOVER = dataviz.NOTE_HOVER,
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
@@ -165,7 +168,6 @@ kendo_module({
         TOOLTIP_HIDE_DELAY = 100,
         TOOLTIP_INVERSE = "tooltip-inverse",
         TOUCH_START_NS = "touchstart" + NS,
-        TRIANGLE = "triangle",
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
@@ -283,7 +285,9 @@ kendo_module({
             ZOOM_END,
             SELECT_START,
             SELECT,
-            SELECT_END
+            SELECT_END,
+            NOTE_CLICK,
+            NOTE_HOVER
         ],
 
         items: function() {
@@ -901,7 +905,8 @@ kendo_module({
         _unsetActivePoint: function() {
             var chart = this,
                 tooltip = chart._tooltip,
-                highlight = chart._highlight;
+                highlight = chart._highlight,
+                noteHighlight = chart._noteHighlight;
 
             chart._activePoint = null;
 
@@ -911,6 +916,10 @@ kendo_module({
 
             if (highlight) {
                 highlight.hide();
+            }
+
+            if (noteHighlight) {
+                noteHighlight.hide();
             }
         },
 
@@ -3628,63 +3637,6 @@ kendo_module({
     });
     deepExtend(Bullet.fn, PointEventsMixin);
 
-    var ShapeElement = BoxElement.extend({
-        options: {
-            type: CIRCLE,
-            align: CENTER,
-            vAlign: CENTER
-        },
-
-        getViewElements: function(view, renderOptions) {
-            var marker = this,
-                options = marker.options,
-                type = options.type,
-                rotation = options.rotation,
-                box = marker.paddingBox,
-                element,
-                elementOptions,
-                center = box.center(),
-                halfWidth = box.width() / 2,
-                points,
-                i;
-
-            if (!options.visible || !marker.hasBox()) {
-                return [];
-            }
-
-            elementOptions = deepExtend(marker.elementStyle(), renderOptions);
-
-            if (type === CIRCLE) {
-                element = view.createCircle(new Point2D(
-                    round(box.x1 + halfWidth, COORD_PRECISION),
-                    round(box.y1 + box.height() / 2, COORD_PRECISION)
-                ), halfWidth, elementOptions);
-            } else if (type === TRIANGLE) {
-                points = [
-                    new Point2D(box.x1 + halfWidth, box.y1),
-                    new Point2D(box.x1, box.y2),
-                    new Point2D(box.x2, box.y2)
-                ];
-            } else {
-                points = box.points();
-            }
-
-            if (points) {
-                if (rotation) {
-                    for (i = 0; i < points.length; i++) {
-                        points[i].rotate(center, rotation);
-                    }
-                }
-
-                element = view.createPolyline(
-                    points, true, elementOptions
-                );
-            }
-
-            return [ element ];
-        }
-    });
-
     var Target = ShapeElement.extend();
     deepExtend(Target.fn, PointEventsMixin);
 
@@ -5026,12 +4978,12 @@ kendo_module({
 
             mid = lhSlot.center().x;
 
-            oPoints.push(new Point2D(oSlot.x1, oSlot.y1));
-            oPoints.push(new Point2D(mid, oSlot.y1));
-            cPoints.push(new Point2D(mid, cSlot.y1));
-            cPoints.push(new Point2D(cSlot.x2, cSlot.y1));
-            lhPoints.push(new Point2D(mid, lhSlot.y1));
-            lhPoints.push(new Point2D(mid, lhSlot.y2));
+            oPoints.push(Point2D(oSlot.x1, oSlot.y1));
+            oPoints.push(Point2D(mid, oSlot.y1));
+            cPoints.push(Point2D(mid, cSlot.y1));
+            cPoints.push(Point2D(cSlot.x2, cSlot.y1));
+            lhPoints.push(Point2D(mid, lhSlot.y1));
+            lhPoints.push(Point2D(mid, lhSlot.y2));
 
             point.oPoints = oPoints;
             point.cPoints = cPoints;
