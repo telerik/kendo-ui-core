@@ -95,7 +95,7 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerBuilder<TModel> Height(int? height)
+        public SchedulerBuilder<TModel> Height(int height)
         {
             Component.Height = height;
 
@@ -379,7 +379,7 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerBuilder<TModel> Width(int? width)
+        public SchedulerBuilder<TModel> Width(int width)
         {
             Component.Width = width;
 

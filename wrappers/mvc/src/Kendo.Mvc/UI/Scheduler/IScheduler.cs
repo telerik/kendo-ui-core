@@ -82,7 +82,7 @@
             get;
         }
 
-        int MajorTick
+        int? MajorTick
         {
             get;
         }
@@ -97,7 +97,7 @@
             get;
         }
 
-        int MinorTickCount
+        int? MinorTickCount
         {
             get;
         }

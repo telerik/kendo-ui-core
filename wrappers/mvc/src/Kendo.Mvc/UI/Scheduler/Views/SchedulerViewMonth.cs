@@ -10,8 +10,6 @@
         public SchedulerViewMonth()
         {
             this.Type = SchedulerViewType.Month;
-
-            this.EventHeight = 25;
         }
 
         public string DayTemplate 
@@ -26,7 +24,7 @@
             set;
         }
 
-        public int EventHeight 
+        public int? EventHeight 
         { 
             get; 
             set; 
@@ -49,7 +47,7 @@
                 json["dayTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, DayTemplateId) };
             }
 
-            if (EventHeight != 25)
+            if (EventHeight != null)
             {
                 json["eventHeight"] = EventHeight;
             }

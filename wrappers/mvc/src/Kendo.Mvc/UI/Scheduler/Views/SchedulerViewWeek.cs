@@ -12,8 +12,6 @@
             this.Type = SchedulerViewType.Week;
 
             this.AllDaySlot = true;
-
-            this.MajorTick = 60;
         }
     }
 }

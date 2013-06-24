@@ -37,7 +37,7 @@
             set;
         }
 
-        public int MajorTick
+        public int? MajorTick
         {
             get;
             set;
@@ -55,7 +55,7 @@
             set;
         }
 
-        public int MinorTickCount
+        public int? MinorTickCount
         {
             get;
             set;
@@ -100,7 +100,7 @@
                 json["dateHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, DateHeaderTemplateId) };
             }
 
-            if (MajorTick != 60)
+            if (MajorTick != null)
             {
                 json["majorTick"] = MajorTick;
             }
@@ -115,7 +115,7 @@
                 json["majorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MajorTimeHeaderTemplateId) };
             }
 
-            if (MinorTickCount != 2)
+            if (MinorTickCount != null)
             {
                 json["minorTickCount"] = MinorTickCount;
             }

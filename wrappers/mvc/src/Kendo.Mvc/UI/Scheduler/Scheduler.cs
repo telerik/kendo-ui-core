@@ -32,10 +32,6 @@ using System;
             Views = new List<SchedulerViewBase>();
 
             AllDaySlot = true;
-
-            MajorTick = 60;
-
-            MinorTickCount = 2;
         }
 
         public DataSource DataSource
@@ -116,7 +112,7 @@ using System;
             set;
         }
 
-        public int MajorTick
+        public int? MajorTick
         {
             get;
             set;
@@ -134,7 +130,7 @@ using System;
             set;
         }
 
-        public int MinorTickCount
+        public int? MinorTickCount
         {
             get;
             set;
@@ -265,7 +261,7 @@ using System;
                 options["dateHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, DateHeaderTemplateId) };
             }
 
-            if (MajorTick != 60)
+            if (MajorTick != null)
             {
                 options["majorTick"] = MajorTick;
             }
@@ -290,7 +286,7 @@ using System;
                 options["minorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MinorTimeHeaderTemplateId) };
             }
 
-            if (MinorTickCount != 2)
+            if (MinorTickCount != null)
             {
                 options["minorTickCount"] = MinorTickCount;
             }

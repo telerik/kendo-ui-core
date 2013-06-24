@@ -12,10 +12,6 @@
             this.Type = SchedulerViewType.Day;
 
             this.AllDaySlot = true;
-
-            this.MajorTick = 60;
-
-            this.MinorTickCount = 2;
         }
     }
 }
