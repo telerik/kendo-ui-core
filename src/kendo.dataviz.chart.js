@@ -905,7 +905,8 @@ kendo_module({
         _unsetActivePoint: function() {
             var chart = this,
                 tooltip = chart._tooltip,
-                highlight = chart._highlight;
+                highlight = chart._highlight,
+                noteHighlight = chart._noteHighlight;
 
             chart._activePoint = null;
 
@@ -915,6 +916,10 @@ kendo_module({
 
             if (highlight) {
                 highlight.hide();
+            }
+
+            if (noteHighlight) {
+                noteHighlight.hide();
             }
         },
 
@@ -4973,12 +4978,12 @@ kendo_module({
 
             mid = lhSlot.center().x;
 
-            oPoints.push(new Point2D(oSlot.x1, oSlot.y1));
-            oPoints.push(new Point2D(mid, oSlot.y1));
-            cPoints.push(new Point2D(mid, cSlot.y1));
-            cPoints.push(new Point2D(cSlot.x2, cSlot.y1));
-            lhPoints.push(new Point2D(mid, lhSlot.y1));
-            lhPoints.push(new Point2D(mid, lhSlot.y2));
+            oPoints.push(Point2D(oSlot.x1, oSlot.y1));
+            oPoints.push(Point2D(mid, oSlot.y1));
+            cPoints.push(Point2D(mid, cSlot.y1));
+            cPoints.push(Point2D(cSlot.x2, cSlot.y1));
+            lhPoints.push(Point2D(mid, lhSlot.y1));
+            lhPoints.push(Point2D(mid, lhSlot.y2));
 
             point.oPoints = oPoints;
             point.cPoints = cPoints;

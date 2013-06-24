@@ -1587,8 +1587,7 @@ kendo_module({
             },
             connector: {
                 visible: true,
-                zIndex: 2,
-                color: "fff"
+                zIndex: 2
             },
             visible: true
         },
@@ -1599,13 +1598,12 @@ kendo_module({
                 label = options.label,
                 icon = options.icon,
                 size = icon.size,
+                dataModelId = { data: { modelId: options.modelId } },
                 marker, width, height,
                 box = Box2D();
 
             if (defined(label) && label.visible) {
-                note.label = new TextBox(label.text, deepExtend({}, label, {
-                    data: { modelId: options.modelId }
-                }));
+                note.label = new TextBox(label.text, deepExtend({}, label, dataModelId));
                 note.append(note.label);
 
                 if (label.position === INSIDE) {
@@ -1622,9 +1620,7 @@ kendo_module({
             icon.width = width || size;
             icon.height = height || size;
 
-            marker = new ShapeElement(deepExtend({}, icon, {
-                data: { modelId: options.modelId }
-            }));
+            marker = new ShapeElement(deepExtend({}, icon, dataModelId));
 
             note.marker = marker;
             note.append(marker);
