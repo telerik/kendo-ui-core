@@ -570,4 +570,63 @@ function chart_wind_data() {
     );
 }
 
+function chart_antenna_gain() {
+    return array(
+        array('azimuth' => 0, 'gain' => 0),
+        array('azimuth' => 10, 'gain' => 0),
+        array('azimuth' => 20, 'gain' => 0),
+        array('azimuth' => 30, 'gain' => -1),
+        array('azimuth' => 40, 'gain' => -2),
+        array('azimuth' => 50, 'gain' => -3),
+        array('azimuth' => 60, 'gain' => -5),
+        array('azimuth' => 70, 'gain' => -7),
+        array('azimuth' => 80, 'gain' => -10),
+        array('azimuth' => 90, 'gain' => -13),
+        array('azimuth' => 100, 'gain' => -16),
+        array('azimuth' => 110, 'gain' => -20),
+        array('azimuth' => 120, 'gain' => -19),
+        array('azimuth' => 130, 'gain' => -18),
+        array('azimuth' => 140, 'gain' => -17),
+        array('azimuth' => 150, 'gain' => -16),
+        array('azimuth' => 160, 'gain' => -15),
+        array('azimuth' => 170, 'gain' => -14),
+        array('azimuth' => 180, 'gain' => -13),
+        array('azimuth' => 190, 'gain' => -14),
+        array('azimuth' => 200, 'gain' => -15),
+        array('azimuth' => 210, 'gain' => -16),
+        array('azimuth' => 220, 'gain' => -17),
+        array('azimuth' => 230, 'gain' => -18),
+        array('azimuth' => 240, 'gain' => -19),
+        array('azimuth' => 250, 'gain' => -20),
+        array('azimuth' => 260, 'gain' => -16),
+        array('azimuth' => 270, 'gain' => -13),
+        array('azimuth' => 280, 'gain' => -10),
+        array('azimuth' => 290, 'gain' => -7),
+        array('azimuth' => 300, 'gain' => -5),
+        array('azimuth' => 310, 'gain' => -3),
+        array('azimuth' => 320, 'gain' => -2),
+        array('azimuth' => 330, 'gain' => -1),
+        array('azimuth' => 340, 'gain' => 0),
+        array('azimuth' => 350, 'gain' => 0),
+        array('azimuth' => 0, 'gain' => 0)
+    );
+}
+
+function chart_sun_position() {
+    return array(
+        array('time' => '08:00', 'altitude' => 4.9, 'azimuth' => 92.7),
+        array('time' => '09:00', 'altitude' => 17.6, 'azimuth' => 100.6),
+        array('time' => '10:00', 'altitude' => 30.1, 'azimuth' => 109.7),
+        array('time' => '11:00', 'altitude' => 41.8, 'azimuth' => 121.3),
+        array('time' => '12:00', 'altitude' => 51.8, 'azimuth' => 137.7),
+        array('time' => '13:00', 'altitude' => 58.5, 'azimuth' => 161.5),
+        array('time' => '14:00', 'altitude' => 59.4, 'azimuth' => 190.7),
+        array('time' => '15:00', 'altitude' => 54.1, 'azimuth' => 216.6),
+        array('time' => '16:00', 'altitude' => 44.8, 'azimuth' => 234.8),
+        array('time' => '17:00', 'altitude' => 33.5, 'azimuth' => 247.6),
+        array('time' => '18:00', 'altitude' => 21.2, 'azimuth' => 257.2),
+        array('time' => '19:00', 'altitude' => 8.4, 'azimuth' => 265.3)
+    );
+}
+
 ?>
