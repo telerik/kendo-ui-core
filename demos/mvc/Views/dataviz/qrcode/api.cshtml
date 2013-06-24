@@ -55,8 +55,7 @@
                     </ul>
                 </div>
             </div>
-            <div id="test">
-            </div>
+
             <script type="text/javascript">
                 $(document).ready(function () {
                     var qrCode = $("#qrCode").kendoQRCode({
@@ -76,9 +75,8 @@
                             }
                         },
                         setOptions: function () {
-                            qrCode.setOptions(this.qrOptions.toJSON());
                             this.setElementWidth();
-                            qrCode.redraw();
+                            qrCode.setOptions(this.qrOptions.toJSON());
                         },
                         setValue: function () {                            
                             qrCode.value(this.qrValue);
@@ -97,8 +95,7 @@
 
             <style scoped>                
                 
-                .k-qrcode {
-                    border: none;                    
+                .k-qrcode {                 
                     margin: 0 auto;                 
                 }
                      

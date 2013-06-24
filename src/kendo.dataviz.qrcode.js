@@ -825,7 +825,6 @@ kendo_module({
                 that.element.addClass("k-qrcode");
                 that.view = new defaultView(); 
                 that.setOptions(options);
-                that.redraw(); 
             },
             redraw: function(){                
                 var that = this,
@@ -943,6 +942,7 @@ kendo_module({
                 if (options.value !== undefined) {
                     that._value = that.options.value + "";
                 }
+                that.redraw(); 
             },	
             value: function(value){
                 var that = this;

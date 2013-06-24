@@ -79,9 +79,8 @@
                 }
             },
             setOptions: function () {
-                qrCode.setOptions(this.qrOptions.toJSON());
                 this.setElementWidth();
-                qrCode.redraw();
+                qrCode.setOptions(this.qrOptions.toJSON());
             },
             setValue: function () {
                 qrCode.value(this.qrValue);
