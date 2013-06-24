@@ -3250,9 +3250,14 @@ kendo_module({
                 extend(childrenOptions, that.children);
             }
 
+            var transport = childrenOptions.transport;
 
-            if (childrenOptions.transport) {
-                childrenOptions.transport.parameterMap = function(data) {
+            if (transport) {
+                transport.parameterMap = function(data) {
+                    if (that.parentParameterMap) {
+                        data = that.parentParameterMap.call(this, data);
+                    }
+
                     data[that.idField || "id"] = that.id;
                     return data;
                 };
@@ -3399,6 +3404,10 @@ kendo_module({
             });
 
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
+
+            if (this.transport) {
+                node.fn.parentParameterMap = this.transport.parameterMap;
+            }
 
             this._attachBubbleHandlers();
         },
