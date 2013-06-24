@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SchedulerModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SchedulerModelsStoreContainer">
+          <EntitySet Name="MeetingAtendees" EntityType="SchedulerModels.Store.MeetingAtendees" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Meetings" EntityType="SchedulerModels.Store.Meetings" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tasks" EntityType="SchedulerModels.Store.Tasks" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_MeetingAtendee_Meeting" Association="SchedulerModels.Store.FK_MeetingAtendee_Meeting">
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="MeetingAtendees" EntitySet="MeetingAtendees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meetings_Meetings" Association="SchedulerModels.Store.FK_Meetings_Meetings">
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="Meetings1" EntitySet="Meetings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Tasks" Association="SchedulerModels.Store.FK_Tasks_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Tasks1" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MeetingAtendees">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+            <PropertyRef Name="AtendeeID" />
+          </Key>
+          <Property Name="MeetingID" Type="int" Nullable="false" />
+          <Property Name="AtendeeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meetings">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+          </Key>
+          <Property Name="MeetingID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" Nullable="false" />
+          <Property Name="Title" Type="ntext" Nullable="false" />
+          <Property Name="Description" Type="ntext" Nullable="false" />
+          <Property Name="RoomID" Type="int" />
+          <Property Name="IsAllDay" Type="bit" Nullable="false" />
+          <Property Name="RecurrenceRule" Type="ntext" />
+          <Property Name="RecurrenceID" Type="int" />
+          <Property Name="RecurrenceException" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" Nullable="false" />
+          <Property Name="Title" Type="ntext" Nullable="false" />
+          <Property Name="Description" Type="ntext" />
+          <Property Name="OwnerID" Type="int" />
+          <Property Name="IsAllDay" Type="bit" Nullable="false" />
+          <Property Name="RecurrenceRule" Type="ntext" />
+          <Property Name="RecurrenceID" Type="int" />
+          <Property Name="RecurrenceException" Type="ntext" />
+        </EntityType>
+        <Association Name="FK_MeetingAtendee_Meeting">
+          <End Role="Meetings" Type="SchedulerModels.Store.Meetings" Multiplicity="1" />
+          <End Role="MeetingAtendees" Type="SchedulerModels.Store.MeetingAtendees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetings">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="MeetingAtendees">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meetings_Meetings">
+          <End Role="Meetings" Type="SchedulerModels.Store.Meetings" Multiplicity="0..1" />
+          <End Role="Meetings1" Type="SchedulerModels.Store.Meetings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetings">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="Meetings1">
+              <PropertyRef Name="RecurrenceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Tasks">
+          <End Role="Tasks" Type="SchedulerModels.Store.Tasks" Multiplicity="0..1" />
+          <End Role="Tasks1" Type="SchedulerModels.Store.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Tasks1">
+              <PropertyRef Name="RecurrenceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchedulerModels" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SchedulerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MeetingAtendees" EntityType="SchedulerModels.MeetingAtendee" />
+          <EntitySet Name="Meetings" EntityType="SchedulerModels.Meeting" />
+          <EntitySet Name="Tasks" EntityType="SchedulerModels.Task" />
+          <AssociationSet Name="FK_MeetingAtendee_Meeting" Association="SchedulerModels.FK_MeetingAtendee_Meeting">
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="MeetingAtendees" EntitySet="MeetingAtendees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meetings_Meetings" Association="SchedulerModels.FK_Meetings_Meetings">
+            <End Role="Meetings" EntitySet="Meetings" />
+            <End Role="Meetings1" EntitySet="Meetings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Tasks" Association="SchedulerModels.FK_Tasks_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Tasks1" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MeetingAtendee">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+            <PropertyRef Name="AtendeeID" />
+          </Key>
+          <Property Name="MeetingID" Type="Int32" Nullable="false" />
+          <Property Name="AtendeeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Meeting" Relationship="SchedulerModels.FK_MeetingAtendee_Meeting" FromRole="MeetingAtendees" ToRole="Meetings" />
+        </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+          </Key>
+          <Property Name="MeetingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="End" Type="DateTime" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RoomID" Type="Int32" />
+          <Property Name="IsAllDay" Type="Boolean" Nullable="false" />
+          <Property Name="RecurrenceRule" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RecurrenceID" Type="Int32" />
+          <Property Name="RecurrenceException" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="MeetingAtendees" Relationship="SchedulerModels.FK_MeetingAtendee_Meeting" FromRole="Meetings" ToRole="MeetingAtendees" />
+          <NavigationProperty Name="Meetings1" Relationship="SchedulerModels.FK_Meetings_Meetings" FromRole="Meetings" ToRole="Meetings1" />
+          <NavigationProperty Name="Meeting1" Relationship="SchedulerModels.FK_Meetings_Meetings" FromRole="Meetings1" ToRole="Meetings" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="End" Type="DateTime" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="OwnerID" Type="Int32" />
+          <Property Name="IsAllDay" Type="Boolean" Nullable="false" />
+          <Property Name="RecurrenceRule" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RecurrenceID" Type="Int32" />
+          <Property Name="RecurrenceException" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Tasks1" Relationship="SchedulerModels.FK_Tasks_Tasks" FromRole="Tasks" ToRole="Tasks1" />
+          <NavigationProperty Name="Task1" Relationship="SchedulerModels.FK_Tasks_Tasks" FromRole="Tasks1" ToRole="Tasks" />
+        </EntityType>
+        <Association Name="FK_MeetingAtendee_Meeting">
+          <End Role="Meetings" Type="SchedulerModels.Meeting" Multiplicity="1" />
+          <End Role="MeetingAtendees" Type="SchedulerModels.MeetingAtendee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetings">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="MeetingAtendees">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meetings_Meetings">
+          <End Role="Meetings" Type="SchedulerModels.Meeting" Multiplicity="0..1" />
+          <End Role="Meetings1" Type="SchedulerModels.Meeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetings">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="Meetings1">
+              <PropertyRef Name="RecurrenceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Tasks">
+          <End Role="Tasks" Type="SchedulerModels.Task" Multiplicity="0..1" />
+          <End Role="Tasks1" Type="SchedulerModels.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Tasks1">
+              <PropertyRef Name="RecurrenceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchedulerModelsStoreContainer" CdmEntityContainer="SchedulerEntities">
+          <EntitySetMapping Name="MeetingAtendees">
+            <EntityTypeMapping TypeName="SchedulerModels.MeetingAtendee">
+              <MappingFragment StoreEntitySet="MeetingAtendees">
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+                <ScalarProperty Name="AtendeeID" ColumnName="AtendeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meetings">
+            <EntityTypeMapping TypeName="SchedulerModels.Meeting">
+              <MappingFragment StoreEntitySet="Meetings">
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+                <ScalarProperty Name="RecurrenceRule" ColumnName="RecurrenceRule" />
+                <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
+                <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="SchedulerModels.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+                <ScalarProperty Name="RecurrenceRule" ColumnName="RecurrenceRule" />
+                <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
+                <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="SchedulerModels">
+        <EntityTypeShape EntityType="SchedulerModels.MeetingAtendee" Width="1.5" PointX="3" PointY="1.75" Height="1.4279589843749998" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModels.Meeting" Width="1.5" PointX="0.75" PointY="1" Height="3.0714322916666661" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModels.Task" Width="1.5" PointX="2.75" PointY="4.75" Height="2.9070849609374996" IsExpanded="true" />
+        <AssociationConnector Association="SchedulerModels.FK_MeetingAtendee_Meeting" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.4639794921875" />
+          <ConnectorPoint PointX="3" PointY="2.4639794921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="SchedulerModels.FK_Meetings_Meetings" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.2819230769230767" PointY="4.0714322916666656" />
+          <ConnectorPoint PointX="1.2819230769230767" PointY="4.3214322916666656" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="4.3214322916666656" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="4.0714322916666656" />
+        </AssociationConnector>
+        <AssociationConnector Association="SchedulerModels.FK_Tasks_Tasks" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.2819230769230767" PointY="7.6570849609375" />
+          <ConnectorPoint PointX="3.2819230769230767" PointY="7.9070849609375" />
+          <ConnectorPoint PointX="3.7284615384615383" PointY="7.9070849609375" />
+          <ConnectorPoint PointX="3.7284615384615383" PointY="7.6570849609375" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -969,6 +969,7 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewEditableSettingsBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewMultiDayBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewWeekBuilder.cs" />
+    <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
     <Compile Include="UI\Scheduler\Settings\ISchedulerEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettingsBase.cs" />
@@ -984,14 +985,12 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewFactory.cs" />
     <Compile Include="UI\Scheduler\Html\SchedulerHtmlBuilder.cs" />
     <Compile Include="UI\Scheduler\IScheduler.cs" />
-    <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEvent.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventService.cs" />
     <Compile Include="UI\Scheduler\ISchedulerResource.cs" />
     <Compile Include="UI\Scheduler\Views\ISchedulerView.cs" />
     <Compile Include="UI\Scheduler\Scheduler.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewDay.cs" />
-    <Compile Include="UI\Scheduler\SchedulerEventController.cs" />
     <Compile Include="UI\Scheduler\SchedulerResource.cs" />
     <Compile Include="UI\Scheduler\SchedulerViewType.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewMultiDay.cs" />
