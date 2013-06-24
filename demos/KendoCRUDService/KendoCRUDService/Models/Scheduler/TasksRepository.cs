@@ -24,8 +24,8 @@ namespace KendoCRUDService.Models
                     {
                         TaskID = task.TaskID,
                         Title = task.Title,
-                        Start = task.Start,
-                        End = task.End,
+                        Start = DateTime.SpecifyKind(task.Start, DateTimeKind.Utc),
+                        End = DateTime.SpecifyKind(task.End, DateTimeKind.Utc),
                         Description = task.Description,
                         IsAllDay = task.IsAllDay,
                         RecurrenceRule = task.RecurrenceRule,

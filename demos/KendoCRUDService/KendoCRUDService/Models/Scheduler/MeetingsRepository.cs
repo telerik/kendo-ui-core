@@ -24,8 +24,8 @@ namespace KendoCRUDService.Models
                     {
                         MeetingID = meeting.MeetingID,
                         Title = meeting.Title,
-                        Start = meeting.Start,
-                        End = meeting.End,
+                        Start = DateTime.SpecifyKind(meeting.Start, DateTimeKind.Utc),
+                        End = DateTime.SpecifyKind(meeting.End, DateTimeKind.Utc),
                         Description = meeting.Description,
                         IsAllDay = meeting.IsAllDay,
                         RoomID = meeting.RoomID,

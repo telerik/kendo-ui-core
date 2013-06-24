@@ -11,6 +11,7 @@ namespace KendoCRUDService.Models
         public int MeetingID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
         private DateTime start;
         public DateTime Start
         {
@@ -20,7 +21,7 @@ namespace KendoCRUDService.Models
             }
             set
             {
-                start = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+                start = value.ToUniversalTime();
             }
         }
 
@@ -34,9 +35,10 @@ namespace KendoCRUDService.Models
             }
             set
             {
-                end = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+                end = value.ToUniversalTime();
             }
         }
+
         public string RecurrenceRule { get; set; }
         public int? RecurrenceID { get; set; }
         public string RecurrenceException { get; set; }

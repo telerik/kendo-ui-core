@@ -21,7 +21,7 @@ namespace KendoCRUDService.Models
             }
             set
             {
-                start = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+                start = value.ToUniversalTime();
             }
         }
 
@@ -35,7 +35,7 @@ namespace KendoCRUDService.Models
             }
             set
             {
-                end = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+                end = value.ToUniversalTime();
             }
         }
 
