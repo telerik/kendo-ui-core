@@ -169,9 +169,9 @@ kendo_module({
 
         groups: {
             basic: ["bold", "italic", "underline"],
-            inline: ["strikethrough", "subscripts", "superscript" ],
+            inline: ["strikethrough", "subscript", "superscript" ],
             alignment: ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull" ],
-            links: ["createLink", "unlink"],
+            links: ["insertImage", "createLink", "unlink"],
             lists: ["insertUnorderedList", "insertOrderedList", "indent", "outdent"],
             tables: [ "createTable", "addColumnLeft", "addColumnRight", "addRowAbove", "addRowBelow", "deleteRow", "deleteColumn" ]
         },
@@ -984,11 +984,11 @@ kendo_module({
                 { text: "7 (36pt)", value: "xx-large" }
             ],
             tools: [].concat.call(
+                ["formatting"],
                 toolGroups.basic,
                 toolGroups.alignment,
                 toolGroups.lists,
                 toolGroups.indenting,
-                ["formatting"],
                 toolGroups.links,
                 ["insertImage"],
                 toolGroups.tables
