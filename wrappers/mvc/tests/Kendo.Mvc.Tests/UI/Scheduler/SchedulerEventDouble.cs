@@ -5,11 +5,9 @@
     using System.Linq;
     using System.Text;
     using Kendo.Mvc.UI;
-    using System.ComponentModel.DataAnnotations;
 
     public class SchedulerEventDouble : ISchedulerEvent
     {
-        [Key]
         public int Id { get; set; }
 
         public string Title
