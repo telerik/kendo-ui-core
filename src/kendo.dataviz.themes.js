@@ -1514,6 +1514,9 @@ kendo_module({
                         color: "#787878"
                     }
                 },
+				area: {
+                    opacity: 0.9
+                },
                 overlay: {
                     gradient: "none"
                 },
