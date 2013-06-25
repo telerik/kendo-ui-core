@@ -173,7 +173,8 @@ kendo_module({
             alignment: ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull" ],
             links: ["insertImage", "createLink", "unlink"],
             lists: ["insertUnorderedList", "insertOrderedList", "indent", "outdent"],
-            tables: [ "createTable", "addColumnLeft", "addColumnRight", "addRowAbove", "addRowBelow", "deleteRow", "deleteColumn" ]
+            tables: [ "createTable", "addColumnLeft", "addColumnRight", "addRowAbove", "addRowBelow", "deleteRow", "deleteColumn" ],
+            advanced: [ "viewHtml" ]
         },
 
         _initPopup: function() {
