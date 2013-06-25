@@ -1703,7 +1703,7 @@ p#copy
     bottom: 0;
     left: 0;
     width: 84px;
-    height: 60px;
+    height: 80px;
     margin: 0 auto;
     background: no-repeat url(../../mobile/shared/sprite.devices.png);
     background-size: auto 100%;
@@ -1717,19 +1717,19 @@ p#copy
     transition: all 0.1s ease 0s;
 }
 
-#deviceList .iosThumb{background-position: 0 18px;}
-#deviceList .androidThumb{background-position: 33.3% 18px;}
-#deviceList .blackberryThumb{background-position: 66.6% 18px;}
-#deviceList .meegoThumb{background-position: 100% 18px;}
-#deviceList .wpThumb{background-position: 100% 16px;}
-#deviceList .flatThumb{background-position: 0 18px;}
+#deviceList .iosThumb{background-position: 0 30px;}
+#deviceList .androidThumb{background-position: 25% 30px;}
+#deviceList .blackberryThumb{background-position: 50% 30px;}
+#deviceList .meegoThumb{background-position: 100% 30px;}
+#deviceList .wpThumb{background-position: 75% 30px;}
+#deviceList .flatThumb{background-position: 100% 30px;}
 
 #deviceList .selectedThumb .iosThumb,#deviceList li:hover .iosThumb{background-position: 0 0;}
-#deviceList .selectedThumb .androidThumb,#deviceList li:hover .androidThumb{background-position: 33.3% 0;}
-#deviceList .selectedThumb .blackberryThumb,#deviceList li:hover .blackberryThumb{background-position: 66.6% 0;}
+#deviceList .selectedThumb .androidThumb,#deviceList li:hover .androidThumb{background-position: 25% 0;}
+#deviceList .selectedThumb .blackberryThumb,#deviceList li:hover .blackberryThumb{background-position: 50% 0;}
 #deviceList .selectedThumb .meegoThumb,#deviceList li:hover .meegoThumb{background-position: 100% 0;}
-#deviceList .selectedThumb .wpThumb,#deviceList li:hover .wpThumb{background-position: 100% 0;}
-#deviceList .selectedThumb .flatThumb,#deviceList li:hover .flatThumb{background-position: 0 0;}
+#deviceList .selectedThumb .wpThumb,#deviceList li:hover .wpThumb{background-position: 75% 0;}
+#deviceList .selectedThumb .flatThumb,#deviceList li:hover .flatThumb{background-position: 100% 0;}
 
 #deviceList .selectedThumb,
 #deviceList li:hover
