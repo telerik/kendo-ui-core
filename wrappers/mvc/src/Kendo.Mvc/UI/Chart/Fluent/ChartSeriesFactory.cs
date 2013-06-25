@@ -1741,6 +1741,166 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartScatterSeriesBuilder<TModel>(polarAreaSeries);
         }
 
+        /// <summary>
+        /// Defines bound polar line series.
+        /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarLine<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
+        {
+            var polarLineSeries = new ChartPolarLineSeries<TModel, TXValue, TYValue>(xValueExpression, yValueExpression);
+
+            Container.Series.Add(polarLineSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarLineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar line series.
+        /// </summary>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarLine(string xMemberName, string yMemberName)
+        {
+            return PolarLine(null, xMemberName, yMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound polar line series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value members.
+        /// </param>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarLine(Type memberType, string xMemberName, string yMemberName)
+        {
+            var expressionX = BuildMemberExpression(memberType, xMemberName);
+            var expressionY = BuildMemberExpression(memberType, yMemberName);
+
+            var seriesType = typeof(ChartPolarLineSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
+            var series = (IChartScatterSeries)BuildSeries(seriesType, expressionX, expressionY);
+
+            series.XMember = xMemberName;
+            series.YMember = yMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = xMemberName.AsTitle() + ", " + yMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartScatterSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines polar line series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarLine(IEnumerable data)
+        {
+            ChartPolarLineSeries<TModel, object, object> polarLineSeries = new ChartPolarLineSeries<TModel, object, object>(data);
+
+            Container.Series.Add(polarLineSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarLineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar scatter series.
+        /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarScatter<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
+        {
+            var polarScatterSeries = new ChartPolarScatterSeries<TModel, TXValue, TYValue>(xValueExpression, yValueExpression);
+
+            Container.Series.Add(polarScatterSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarScatterSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar scatter series.
+        /// </summary>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarScatter(string xMemberName, string yMemberName)
+        {
+            return PolarScatter(null, xMemberName, yMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound polar scatter series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value members.
+        /// </param>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarScatter(Type memberType, string xMemberName, string yMemberName)
+        {
+            var expressionX = BuildMemberExpression(memberType, xMemberName);
+            var expressionY = BuildMemberExpression(memberType, yMemberName);
+
+            var seriesType = typeof(ChartPolarScatterSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
+            var series = (IChartScatterSeries)BuildSeries(seriesType, expressionX, expressionY);
+
+            series.XMember = xMemberName;
+            series.YMember = yMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = xMemberName.AsTitle() + ", " + yMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartScatterSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines polar scatter series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarScatter(IEnumerable data)
+        {
+            ChartPolarScatterSeries<TModel, object, object> polarScatterSeries = new ChartPolarScatterSeries<TModel, object, object>(data);
+
+            Container.Series.Add(polarScatterSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarScatterSeries);
+        }
+
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
         {
             const bool liftMemberAccess = false;

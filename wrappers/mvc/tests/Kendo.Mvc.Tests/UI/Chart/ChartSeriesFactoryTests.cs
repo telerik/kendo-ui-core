@@ -715,5 +715,61 @@ namespace Kendo.Mvc.UI.Tests.Chart
             var builder = factory.PolarArea(new int[] { 1 });
             builder.Series.ShouldBeType<ChartPolarAreaSeries<SalesData, object, object>>();
         }
+
+        [Fact]
+        public void PolarLine_should_create_bound_scatter_series_from_expression()
+        {
+            var builder = factory.PolarLine(s => s.RepSales, s => s.TotalSales);
+            builder.Series.ShouldBeType<ChartPolarLineSeries<SalesData, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void PolarLine_should_create_bound_scatter_series_from_type_and_member_name()
+        {
+            var builder = factory.PolarLine(typeof(decimal), "RepSales", "TotalSales");
+            builder.Series.ShouldBeType<ChartPolarLineSeries<SalesData, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void PolarLine_should_create_bound_scatter_series_from_member_name()
+        {
+            var builder = factory.PolarLine("RepSales", "TotalSales");
+            builder.Series.ShouldBeType<ChartPolarLineSeries<SalesData, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void PolarLine_should_create_unbound_scatter_series_from_data()
+        {
+            var builder = factory.PolarLine(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartPolarLineSeries<SalesData, object, object>>();
+        }
+
+        [Fact]
+        public void PolarScatter_should_create_bound_scatter_series_from_expression()
+        {
+            var builder = factory.PolarScatter(s => s.RepSales, s => s.TotalSales);
+            builder.Series.ShouldBeType<ChartPolarScatterSeries<SalesData, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void PolarScatter_should_create_bound_scatter_series_from_type_and_member_name()
+        {
+            var builder = factory.PolarScatter(typeof(decimal), "RepSales", "TotalSales");
+            builder.Series.ShouldBeType<ChartPolarScatterSeries<SalesData, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void PolarScatter_should_create_bound_scatter_series_from_member_name()
+        {
+            var builder = factory.PolarScatter("RepSales", "TotalSales");
+            builder.Series.ShouldBeType<ChartPolarScatterSeries<SalesData, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void PolarScatter_should_create_unbound_scatter_series_from_data()
+        {
+            var builder = factory.PolarScatter(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartPolarScatterSeries<SalesData, object, object>>();
+        }
     }
 }

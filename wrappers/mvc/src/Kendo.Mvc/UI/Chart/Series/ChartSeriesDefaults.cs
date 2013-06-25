@@ -23,6 +23,8 @@ namespace Kendo.Mvc.UI
             RadarColumn = new ChartRadarColumnSeries<T, object>();
             RadarLine = new ChartRadarLineSeries<T, object>();
             PolarArea = new ChartPolarAreaSeries<T, object, object>();
+            PolarLine = new ChartPolarLineSeries<T, object, object>();
+            PolarScatter = new ChartPolarScatterSeries<T, object, object>();
         }
 
         /// <summary>
@@ -155,6 +157,24 @@ namespace Kendo.Mvc.UI
         /// The default settings for all polar area series.
         /// </summary>
         public IChartScatterSeries PolarArea
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all polar line series.
+        /// </summary>
+        public IChartScatterSeries PolarLine
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all polar scatter series.
+        /// </summary>
+        public IChartScatterSeries PolarScatter
         {
             get;
             private set;

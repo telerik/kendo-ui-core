@@ -121,5 +121,21 @@ namespace Kendo.Mvc.UI
         {
             get;
         }
+
+        /// <summary>
+        /// The default settings for all polar line series.
+        /// </summary>
+        IChartScatterSeries PolarLine
+        {
+            get;
+        }
+
+        /// <summary>
+        /// The default settings for all polar scatter series.
+        /// </summary>
+        IChartScatterSeries PolarScatter
+        {
+            get;
+        }
     }
 }
