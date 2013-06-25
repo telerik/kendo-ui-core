@@ -26,10 +26,10 @@
 	         	<kendo:editor-tool-item value="16px" text="16px" />
 	         </kendo:editor-tool-items>
          </kendo:editor-tool>
-         <kendo:editor-tool name="formatBlock">
+         <kendo:editor-tool name="formatting">
 	         <kendo:editor-tool-items>
 	         	<kendo:editor-tool-item value="p" text="Paragraph" />
-	         	<kendo:editor-tool-item value="Fieldset" text="fieldset" />
+	         	<kendo:editor-tool-item value="fieldset" text="fieldset" />
 	         </kendo:editor-tool-items>
          </kendo:editor-tool>
           <kendo:editor-tool template="<label for='templateTool' style='vertical-align:middle;'>Background:</label> <select id='templateTool'><option value=''>none</option><option value='\\#ff9'>yellow</option><option value='\\#dfd'>green</option></select>">
