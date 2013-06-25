@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet/less" href="../../styles/web/kendo.common.less"/>
         <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less" />
-        <link rel="stylesheet/less" href="../../styles/web/kendo.default.less"/>
 
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
 
@@ -33,31 +31,11 @@
         <script src="../../src/kendo.treeview.js"></script>
         <!-- App stuff -->
         <link rel="stylesheet" href="app.css" />
-        <style>
-            [data-icon=comments] {
-                width: 50px;
-            }
-            [data-icon=comments] span {
-                display: block;
-                text-align: center;
-                margin-top: 3px;
-            }
-
-            [data-icon=comments] .km-icon {
-                margin: 0;
-            }
-
-            .km-comments:after,
-            .km-comments:before
-            {
-                content: "\E091";
-                color: #d4d4d4;
-            }
-        </style>
     </head>
     <body>
+        <div class="splash"></div>
 
-        <div data-role="view" data-init="showThumbsOnScrollComplete" data-title="Reddit: The Front Page" id="list">
+        <div data-role="view" data-init="showThumbsOnScrollComplete" data-title="The Front Page" id="list" data-show="showApp">
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>

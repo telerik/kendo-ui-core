@@ -1,9 +1,10 @@
-var PAGE_SIZE = 25,
+var PAGE_SIZE = 25, firstRun = true,
     imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
     imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/i,
-    DEFAULTIMAGEURL = "reddit-default.png";
+    DEFAULTIMAGEURL = "reddit-default.png",
+    canvasScrollView;
 
 var awwDataSource = new kendo.data.DataSource({
     transport: {
@@ -121,13 +122,13 @@ function renderDetail(e) {
             var url = data.data.children[0].data.url;
             if(!imgExtensionRegex.test(url)) {
                 url += '.jpg';
-            };
+            }
 
-        var img = element.find('img');
-        img.css('visibility', 'hidden').attr('src', url).one('load', function() {
-            img.css('visibility', 'visible');
-            view.scroller.zoomOut();
-        });
+            var img = element.find('img');
+            img.css('visibility', 'hidden').attr('src', url).one('load', function() {
+                img.css('visibility', 'visible');
+                view.scroller.zoomOut();
+            });
         }
     });
 }
@@ -140,6 +141,13 @@ function renderThumbs(element) {
         }
         $(this).removeClass("loading-thumb").addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
     });
+}
+
+function showApp() {
+    if (firstRun) {
+        setTimeout(function () { kendo.fx(".splash").fadeOut().duration(400).play() }, 1000);
+        firstRun = false;
+    }
 }
 
 function showThumbsOnScrollComplete(e) {
