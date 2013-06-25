@@ -970,7 +970,6 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewMultiDayBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewWeekBuilder.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
-    <Compile Include="UI\Scheduler\Settings\ISchedulerEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettingsBase.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewBase.cs" />

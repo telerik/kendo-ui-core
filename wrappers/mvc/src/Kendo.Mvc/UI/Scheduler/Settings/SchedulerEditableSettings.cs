@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Kendo.Mvc.Resources;
 
     public class SchedulerEditableSettings : SchedulerEditableSettingsBase
@@ -26,7 +24,7 @@
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            SerializeBaseOptions(json);
+            base.Serialize(json);
 
             if (!string.IsNullOrEmpty(Template))
             {

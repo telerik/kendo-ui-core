@@ -1,18 +1,12 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
-    public abstract class SchedulerEditableSettingsBase : JsonObject, ISchedulerEditableSettings
+    public abstract class SchedulerEditableSettingsBase : JsonObject
     {
-        public SchedulerEditableSettingsBase()
+        protected SchedulerEditableSettingsBase()
         {
-            this.Create = true;
-            this.Destroy = true;
-            this.Update = true;
-            this.Enable = true;
+            Create = Destroy = Update = Enable = true;
         }
 
         public bool Create 
@@ -39,19 +33,19 @@
             set;
         }
 
-        protected void SerializeBaseOptions(IDictionary<string, object> json)
+        protected override void Serialize(IDictionary<string, object> json)
         {
-            if (Create != true)
+            if (!Create)
             {
                 json["create"] = Create;
             }
 
-            if (Destroy != true)
+            if (!Destroy)
             {
                 json["destroy"] = Destroy;
             }
 
-            if (Update != true)
+            if (!Update)
             {
                 json["update"] = Update;
             }
