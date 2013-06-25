@@ -259,14 +259,14 @@
             test("progress bar is rendered on first update", function() {
                 simulateFileSelect();
                 uploadInstance._module.onRequestProgress({ loaded: 1, total: 1}, $(".k-file", uploadInstance.wrapper));
-                equal($(".k-upload-files .k-file .k-filename .k-progress", uploadInstance.wrapper).length, 1);
+                equal($(".k-upload-files .k-file .k-progress", uploadInstance.wrapper).length, 1);
             })
 
             test("progress indicator is updated", function() {
                 simulateFileSelect();
 
                 uploadInstance._module.onRequestProgress({ loaded: 10, total: 100}, $(".k-file", uploadInstance.wrapper));
-                equal($(".k-state-selected.k-progress-status", uploadInstance.wrapper)[0].style.width, "10%");
+                equal($(".k-progress", uploadInstance.wrapper)[0].style.width, "10%");
             });
 
             test("postFormData is issued when clicking retry", function() {
@@ -738,6 +738,133 @@
 
                 uploadInstance._module.inputFiles = function () { return getFileListMock() };
                 simulateFileSelect();
+            });
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / FormDataUpload / Templates / autoUpload = false", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ 
+                        async: {"saveUrl": 'javascript:;', "removeUrl": 'javascript:;', autoUpload: false },
+                        template: "<div class='myTemplate'><span class='k-progress'></span><span class='fileInfo'>#=name# #=size# #=files[0].extension#</span><button type='button' class='k-upload-action'></button></div>"
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("k-upload-action button should contain remove icon", function() {
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($(".k-file button.k-upload-action > span.k-delete", uploadInstance.wrapper).length, 1);
+            });
+
+            test("progress bar is rendered in the template", function() {
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($('.k-progress', uploadInstance.wrapper).length, 1);
+            });
+
+            test("separate template is rendered for each of the selected files", function() {
+                simulateMultipleFileSelect();
+                equal($('.k-file > .myTemplate', uploadInstance.wrapper).length, 2);
+            });
+
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / FormDataUpload / Templates / autoUpload = false / batch = true", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ 
+                        async: {"saveUrl": 'javascript:;', "removeUrl": 'javascript:;', autoUpload: false, batch: true },
+                        template: "<div class='myTemplate'>" +
+                                  "<span class='fileInfo'><span class='fileName'>#=name#</span><span class='fileSize'>#=size#</span>" +
+                                  "#=files[0].extension#</span>" +
+                                  "<button type='button' class='k-upload-action'></button><span class='k-progress'></span></div>"
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("single template is rendered when selecting multiple files", function() {
+                simulateMultipleFileSelect();
+                equal($('.k-file > .myTemplate', uploadInstance.wrapper).length, 1);
+            });
+
+            test("file name represents the concatenated file names", function() {
+                simulateMultipleFileSelect();
+                equal($('.k-file .fileName', uploadInstance.wrapper).text(), "first.txt, second.txt");
+            });
+
+            test("size represents the total size of the files", function() {
+                simulateMultipleFileSelect();
+                equal($('.k-file .fileSize', uploadInstance.wrapper).text(), "3");
+            });
+
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / FormDataUpload / Templates / autoUpload = true", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ 
+                        async: {"saveUrl": 'javascript:;', "removeUrl": 'javascript:;' },
+                        template: "<div class='myTemplate'><span class='k-icon'></span><span class='fileInfo'>#=name# #=size# #=files[0].extension#</span><button type='button' class='k-upload-action'></button><span class='k-progress'></span></div>"
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("k-upload-action button should contain retry icon on unsuccessful upload", function(){
+                simulateUploadWithResponse(errorResponse);
+                equal($(".k-file button.k-upload-action > span.k-retry", uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain retry title on unsuccessful upload", function(){
+                simulateUploadWithResponse(errorResponse);
+                equal($(".k-file button.k-upload-action .k-icon", uploadInstance.wrapper).attr("title"), "Retry");
+            });
+
+            test("k-upload-action button should contain remove icon on successful upload", function(){
+                simulateUpload();
+                equal($(".k-file button.k-upload-action > span.k-delete", uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain remove title on successful upload", function(){
+                simulateUpload();
+                equal($(".k-file button.k-upload-action .k-icon", uploadInstance.wrapper).attr("title"), "Remove");
+            });
+
+            test("k-progress should have 100% width on successful upload", function(){
+                simulateUpload();
+                equal($(".k-file .k-progress", uploadInstance.wrapper)[0].style.width, "100%");
+            });
+
+            test("loading status icon is rendered while uploading", function(){
+                var requestStopped = false;
+                uploadInstance._module.stopUploadRequest = function() { requestStopped = true; };
+                simulateFileSelect();
+                equal($('.k-icon.k-loading', uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain cancel icon while uploading", function(){
+                var requestStopped = false;
+                uploadInstance._module.stopUploadRequest = function() { requestStopped = true; };
+                simulateFileSelect();
+                equal($(".k-file button.k-upload-action > span.k-cancel", uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain cancel title while uploading", function(){
+                var requestStopped = false;
+                uploadInstance._module.stopUploadRequest = function() { requestStopped = true; };
+                simulateFileSelect();
+                equal($(".k-file button.k-upload-action .k-icon", uploadInstance.wrapper).attr("title"), "Cancel");
+            });
+
+            test("progress bar is rendered in the template", function() {
+                var requestStopped = false;
+                uploadInstance._module.stopUploadRequest = function() { requestStopped = true; };
+                simulateFileSelect();
+                equal($('.k-progress', uploadInstance.wrapper).length, 1);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

@@ -521,6 +521,105 @@
         <script src="error.js"></script>
         <script src="cancel.js"></script>
         <script src="remove.js"></script>
+
+        <script type="text/javascript">
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / IframeUpload / Templates / autoUpload = false", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ 
+                        async: {"saveUrl": 'javascript:;', "removeUrl": 'javascript:;', autoUpload: false },
+                        template: "<span class='k-progress'></span><div class='myTemplate'>" +
+                                  "<span class='fileInfo'><span class='fileName'>#=name#</span><span class='fileSize'>#=size#</span>" +
+                                  "#=files[0].extension#</span>" +
+                                  "<button type='button' class='k-upload-action'></button></div>"
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("k-upload-action button should contain remove icon", function() {
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($(".k-file button.k-upload-action > span.k-delete", uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain remove title", function(){
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($(".k-file button.k-upload-action .k-icon", uploadInstance.wrapper).attr("title"), "Remove");
+            });
+
+            test("progress bar is rendered in the template", function() {
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($('.k-progress', uploadInstance.wrapper).length, 1);
+            });
+
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / IframeUpload / Templates / autoUpload = true", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ 
+                        async: {"saveUrl": 'javascript:;', "removeUrl": 'javascript:;' },
+                        template: "<div class='myTemplate'><span class='k-icon'></span>" +
+                                  "<span class='fileInfo'><span class='fileName'>#=name#</span><span class='fileSize'>#=size#</span>" +
+                                  "#=files[0].extension#</span>" +
+                                  "<button type='button' class='k-upload-action'></button><span class='k-progress'></span></div>"
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("loading status icon is rendered while uploading", function(){
+                uploadInstance._module.onIframeLoad = function() { };
+                simulateFileSelect();
+                equal($('.k-icon.k-loading', uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain cancel icon while uploading", function(){
+                uploadInstance._module.onIframeLoad = function() { };
+                simulateFileSelect();
+                equal($(".k-file button.k-upload-action > span.k-cancel", uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain cancel title while uploading", function(){
+                uploadInstance._module.onIframeLoad = function() { };
+                simulateFileSelect();
+                equal($(".k-file button.k-upload-action .k-icon", uploadInstance.wrapper).attr("title"), "Cancel");
+            });
+
+            test("progress bar is rendered in the template", function() {
+                uploadInstance._module.onIframeLoad = function() { };
+                simulateFileSelect();
+                equal($('.k-progress', uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain retry icon on unsuccessful upload", function(){
+                simulateUploadWithResponse(errorResponse);
+                equal($(".k-file button.k-upload-action > span.k-retry", uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain retry title on unsuccessful upload", function(){
+                simulateUploadWithResponse(errorResponse);
+                equal($(".k-file button.k-upload-action .k-icon", uploadInstance.wrapper).attr("title"), "Retry");
+            });
+
+            test("k-upload-action button should contain remove icon on successful upload", function(){
+                simulateUpload();
+                equal($(".k-file button.k-upload-action > span.k-delete", uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain remove title on successful upload", function(){
+                simulateUpload();
+                equal($(".k-file button.k-upload-action .k-icon", uploadInstance.wrapper).attr("title"), "Remove");
+            });
+
+            test("k-progress-status should have 100% width on successful upload", function(){
+                simulateUpload();
+                equal($(".k-file .k-progress", uploadInstance.wrapper)[0].style.width, "100%");
+            });
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

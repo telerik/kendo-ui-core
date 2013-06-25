@@ -7,7 +7,7 @@ function copyUploadPrototype() {
 
 function createHTML() {
    var html = '<div id="testbed_container"><div id="prototype" style="display:none">' +
-        '<div class="k-widget k-upload">' +
+        '<div class="k-widget k-upload k-header k-upload-empty">' +
             '<div class="k-button k-upload-button">' +
                 '<span>Select...</span>' +
                 '<input id="uploadPrototype" name="uploadPrototype" type="file" />' +
@@ -24,12 +24,22 @@ function createHTML() {
 function removeHTML() {
     $("#testbed_container").remove();
 }
+
 function simulateFileSelect(fileName) {
     var clickEvent = $.Event("click");
     $("#uploadInstance").trigger(clickEvent);
     if (!clickEvent.isDefaultPrevented()) {
         $("#uploadInstance").val(fileName || "first.txt").trigger("change");
     }
+}
+
+function simulateSingleFileSelect(fileName, fileSize) {
+    uploadInstance._onInputChange({ target: {
+            files: [
+                { name: fileName || "first.txt", size: fileSize || 100 }
+            ]}
+        }
+    );
 }
 
 function simulateMultipleFileSelect() {
