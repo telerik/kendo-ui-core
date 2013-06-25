@@ -11,12 +11,17 @@ require_once '../../lib/Kendo/Autoload.php';
     // enable all tools
     $editor->addTool(
         "bold", "italic", "underline", "strikethrough",
-        "fontName", "fontSize", "foreColor", "backColor",
         "justifyLeft", "justifyCenter", "justifyRight", "justifyFull",
-        "insertUnorderedList", "insertOrderedList",
-        "indent", "outdent", "formatBlock",
+        "insertUnorderedList", "insertOrderedList", "indent", "outdent",
         "createLink", "unlink", "insertImage",
-        "subscript", "superscript", "viewHtml"
+        "subscript", "superscript",
+        "createTable", "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn",
+        "viewHtml",
+        "formatting",
+        "fontName",
+        "fontSize",
+        "foreColor",
+        "backColor"
     );
 
     $editor
