@@ -1071,7 +1071,7 @@ function pad(number, digits, end) {
     }
 
     //if date's day is different than the typed one - adjust
-    function adjustForBrazillianTimezone(date, hours) {
+    function adjustDST(date, hours) {
         if (!hours && date.getHours() === 23) {
             date.setHours(date.getHours() + 2);
         }
@@ -1362,7 +1362,7 @@ function pad(number, digits, end) {
             value = new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds));
         } else {
             value = new Date(year, month, day, hours, minutes, seconds, milliseconds);
-            adjustForBrazillianTimezone(value, hours);
+            adjustDST(value, hours);
         }
 
         if (year < 100) {
@@ -1375,8 +1375,6 @@ function pad(number, digits, end) {
 
         return value;
     }
-
-    kendo._adjustDate = adjustForBrazillianTimezone;
 
     kendo.parseDate = function(value, formats, culture) {
         if (objectToString.call(value) === "[object Date]") {
@@ -3196,17 +3194,23 @@ function pad(number, digits, end) {
         var MS_PER_MINUTE = 60000,
             MS_PER_DAY = 86400000;
 
-        function adjustForBrazillianTimezone(date, hours) {
+        function adjustDST(date, hours) {
             if (hours === 0 && date.getHours() === 23) {
                 date.setHours(date.getHours() + 2);
+                return true;
             }
+
+            return false;
         }
 
         function setDayOfWeek(date, day, dir) {
+            var hours = date.getHours();
+
             dir = dir || 1;
             day = ((day - date.getDay()) + (7 * dir)) % 7;
 
             date.setDate(date.getDate() + day);
+            adjustDST(date, hours);
         }
 
         function dayOfWeek(date, day, dir) {
@@ -3237,7 +3241,7 @@ function pad(number, digits, end) {
 
         function getDate(date) {
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
-            adjustForBrazillianTimezone(date, 0);
+            adjustDST(date, 0);
             return date;
         }
 
@@ -3290,7 +3294,7 @@ function pad(number, digits, end) {
                 date = new Date(date);
 
             setTime(date, offset * MS_PER_DAY);
-            adjustForBrazillianTimezone(date, hours);
+            adjustDST(date, hours);
             return date;
         }
 
@@ -3315,7 +3319,7 @@ function pad(number, digits, end) {
         }
 
         return {
-            adjustForBrazillianTimezone: adjustForBrazillianTimezone,
+            adjustDST: adjustDST,
             dayOfWeek: dayOfWeek,
             setDayOfWeek: setDayOfWeek,
             getDate: getDate,

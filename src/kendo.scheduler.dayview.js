@@ -594,8 +594,8 @@ kendo_module({
         },
 
         _positionEvent: function(event, element, slots, dateSlotIndex) {
-            var startIndex = Math.max(Math.floor(this._timeSlotIndex(event.start)), 0),
-                endIndex = Math.min(Math.ceil(this._timeSlotIndex(event.end)), slots.length),
+            var startIndex = Math.max(Math.floor(this._timeSlotIndex(event.startTime || event.start)), 0),
+                endIndex = Math.min(Math.ceil(this._timeSlotIndex(event.endTime || event.end)), slots.length),
                 timeSlot = slots.eq(Math.floor(startIndex)),
                 bottomOffset = 4,
                 dateSlot = timeSlot.children().eq(dateSlotIndex);
@@ -646,6 +646,8 @@ kendo_module({
                 endDate = getDate(this.endDate()),
                 startTime = getMilliseconds(options.startTime),
                 endTime = getMilliseconds(options.endTime),
+                eventStartTime = getMilliseconds(event.startTime || event.start),
+                eventEndTime = getMilliseconds(event.endTime || event.end),
                 middle,
                 head,
                 tail;
@@ -655,11 +657,11 @@ kendo_module({
             }
 
             if (!isInDateRange(getDate(event.start), startDate, endDate) ||
-                (isOneDayEvent && getMilliseconds(event.start) < startTime && getMilliseconds(event.end) > endTime)) {
+                (isOneDayEvent && eventStartTime < startTime && eventEndTime > endTime)) {
                 middle = true;
-            } else if (getDate(event.start) < startDate || (isOneDayEvent && getMilliseconds(event.start) < startTime)) {
+            } else if (getDate(event.start) < startDate || (isOneDayEvent && eventStartTime < startTime)) {
                 tail = true;
-            } else if (getDate(event.end) > endDate || (isOneDayEvent && getMilliseconds(event.end) > endTime)) {
+            } else if (getDate(event.end) > endDate || (isOneDayEvent && eventEndTime > endTime)) {
                 head = true;
             }
 
@@ -670,17 +672,22 @@ kendo_module({
                 head: head,
                 tail: tail,
                 resources: this.eventResources(event)
-            }, event)));
+            }, event, {
+                start: event.startTime || event.start,
+                end: event.endTime || event.end
+            })));
         },
 
         _isInTimeSlot: function(event) {
             var slotStartTime = this.options.startTime,
-                slotEndTime = this.options.endTime;
+                slotEndTime = this.options.endTime,
+                startTime = event.startTime || event.start,
+                endTime = event.endTime || event.end;
 
-            return isInTimeRange(event.start, slotStartTime, slotEndTime) ||
-                isInTimeRange(event.end, slotStartTime, slotEndTime) ||
-                isInTimeRange(slotStartTime, event.start, event.end) ||
-                isInTimeRange(slotEndTime, event.start, event.end);
+            return isInTimeRange(startTime, slotStartTime, slotEndTime) ||
+                isInTimeRange(endTime, slotStartTime, slotEndTime) ||
+                isInTimeRange(slotStartTime, startTime, endTime) ||
+                isInTimeRange(slotEndTime, startTime, endTime);
         },
 
         _isInDateSlot: function(event) {
