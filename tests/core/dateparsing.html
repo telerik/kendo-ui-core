@@ -758,7 +758,7 @@
             test("adjustDate adjusts Brasil date with DST", function() {
                 var date = new Date(2012, 9, 20, 23, 0, 0);
 
-                kendo._adjustDate(date, 0);
+                kendo.date.adjustDST(date, 0);
 
                 equal(+date, +new Date(2012, 9, 21, 1, 0, 0));
             });
