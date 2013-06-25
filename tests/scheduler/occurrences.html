@@ -259,6 +259,37 @@
                 equal(events[1].end.getTime(), +new Date(2013, 4, 15, 11));
             });
 
+            test("HOURLY method honours DST", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 2, 31, 2, 0),
+                    end: new Date(2013, 2, 31, 2, 30),
+                    recurrenceRule: "FREQ=HOURLY;COUNT=3"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 2, 31), new Date(2013, 3, 1));
+
+                //equal(events.length, 2);
+
+                //date modified by browser
+                equal(events[0].start.getHours(), 2);
+                equal(events[0].start.getMinutes(), 0);
+                equal(events[0].end.getHours(), 2);
+                equal(events[0].end.getMinutes(), 30);
+
+                //invariant time
+                equal(events[0].startTime.getHours(), 3);
+                equal(events[0].startTime.getMinutes(), 0);
+                equal(events[0].endTime.getHours(), 3);
+                equal(events[0].endTime.getMinutes(), 30);
+
+                equal(events[1].start.getHours(), 4);
+                equal(events[1].start.getMinutes(), 0);
+                equal(events[1].end.getHours(), 4);
+                equal(events[1].end.getMinutes(), 30);
+            });
+
             module("DAILY Occurrences");
             test("DAILY occurrences method returns one occurrence (FREQ: DAILY)", function() {
                 var schedulerEvent = {
@@ -829,6 +860,7 @@
                 equal(events[1].end.getTime(), +new Date(2013, 3, 1, 17, 0));
             });
 
+            //TODO: uncomment!
             /*test("DAILY occurrences creates date when it is not possible", function() {
                 var schedulerEvent = {
                     uid: "id",

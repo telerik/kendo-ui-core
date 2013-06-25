@@ -3199,9 +3199,13 @@ function pad(number, digits, end) {
         function adjustForBrazillianTimezone(date, hours) {
             if (hours === 0 && date.getHours() === 23) {
                 date.setHours(date.getHours() + 2);
+                return true;
             }
+
+            return false;
         }
 
+        //TODO: add adjustForBrazillianTimezone here too!!!
         function setDayOfWeek(date, day, dir) {
             dir = dir || 1;
             day = ((day - date.getDay()) + (7 * dir)) % 7;
