@@ -276,5 +276,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
             axis.PlotBands[0].To.ShouldEqual(2.0);
             axis.PlotBands[0].Opacity.ShouldEqual(0.5);
         }
+
+        [Fact]
+        public void StartAngle_should_set_StartAngle()
+        {
+            builder.StartAngle(10);
+            axis.StartAngle.ShouldEqual(10);
+        }
+
+        [Fact]
+        public void StartAngle_should_return_builder()
+        {
+            builder.StartAngle(10).ShouldBeSameAs(builder);
+        }
     }
 }

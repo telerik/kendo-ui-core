@@ -84,5 +84,26 @@ namespace Kendo.Mvc.UI.Tests.Chart
             builder.Donut().StartAngle(42);
             chart.SeriesDefaults.Donut.StartAngle.ShouldEqual(42);
         }
+
+        [Fact]
+        public void RadarArea_sets_RadarAreaSeries_options()
+        {
+            builder.RadarArea().Color("color");
+            chart.SeriesDefaults.RadarArea.Color.ShouldEqual("color");
+        }
+
+        [Fact]
+        public void RadarColumn_sets_RadarColumnSeries_options()
+        {
+            builder.RadarColumn().Color("color");
+            chart.SeriesDefaults.RadarColumn.Color.ShouldEqual("color");
+        }
+
+        [Fact]
+        public void RadarLine_sets_RadarLineSeries_options()
+        {
+            builder.RadarLine().Color("color");
+            chart.SeriesDefaults.RadarLine.Color.ShouldEqual("color");
+        }
     }
 }

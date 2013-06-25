@@ -1370,6 +1370,537 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartBulletSeriesBuilder<TModel>(bulletSeries);
         }
 
+        /// <summary>
+        /// Defines bound radar area series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> RadarArea<TValue>(Expression<Func<TModel, TValue>> valueExpression)
+        {
+            return RadarArea<TValue, string>(valueExpression, null);
+        }
+
+        /// <summary>
+        /// Defines bound radar area series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the point category from the chart model
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> RadarArea<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression = null)
+        {
+            var radarAreaSeries = new ChartRadarAreaSeries<TModel, TValue, TCategory>(valueExpression, categoryExpression);
+
+            Container.Series.Add(radarAreaSeries);
+
+            return new ChartAreaSeriesBuilder<TModel>(radarAreaSeries);
+        }
+
+        /// <summary>
+        /// Defines bound radar area series.
+        /// </summary>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> RadarArea(string valueMemberName, string categoryMemberName = null)
+        {
+            return RadarArea(null, valueMemberName, categoryMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound radar area series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> RadarArea(Type memberType, string valueMemberName, string categoryMemberName = null)
+        {
+            var valueExpr = BuildMemberExpression(memberType, valueMemberName);
+            var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
+            var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+            var seriesType = typeof(ChartRadarAreaSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
+            var series = (IChartAreaSeries)BuildSeries(seriesType, valueExpr, categoryExpr);
+
+            series.Member = valueMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = valueMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartAreaSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines radar area series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> RadarArea(IEnumerable data)
+        {
+            ChartRadarAreaSeries<TModel, object> radarAreaSeries = new ChartRadarAreaSeries<TModel, object>(data);
+
+            Container.Series.Add(radarAreaSeries);
+
+            return new ChartAreaSeriesBuilder<TModel>(radarAreaSeries);
+        }
+
+        /// <summary>
+        /// Defines bound radar column series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the point category from the chart model
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> RadarColumn<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, TCategory>> categoryExpression = null)
+        {
+            var radarColumnSeries = new ChartRadarColumnSeries<TModel, TValue, TCategory>(valueExpression, colorExpression, categoryExpression);
+
+            Container.Series.Add(radarColumnSeries);
+
+            return new ChartBarSeriesBuilder<TModel>(radarColumnSeries);
+        }
+
+        /// <summary>
+        /// Defines bound radar column series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> RadarColumn<TValue>(Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression = null)
+        {
+            return RadarColumn<TValue, string>(valueExpression, colorExpression, null);
+        }
+
+        /// <summary>
+        /// Defines bound radar column series.
+        /// </summary>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> RadarColumn(string valueMemberName, string colorMemberName = null, string categoryMemberName = null)
+        {
+            return RadarColumn(null, valueMemberName, colorMemberName, categoryMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound radar column series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> RadarColumn(Type memberType, string valueMemberName, string colorMemberName = null, string categoryMemberName = null)
+        {
+            var valueExpr = BuildMemberExpression(memberType, valueMemberName);
+            var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
+            var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
+            var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+            var seriesType = typeof(ChartRadarColumnSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
+            var series = (IChartBarSeries)BuildSeries(seriesType, valueExpr, colorExpr, categoryExpr);
+
+            series.Member = valueMemberName;
+            series.ColorMember = colorMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = valueMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartBarSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines radar column series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to.
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> RadarColumn(IEnumerable data)
+        {
+            ChartRadarColumnSeries<TModel, object> radarColumnSeries = new ChartRadarColumnSeries<TModel, object>(data);
+
+            Container.Series.Add(radarColumnSeries);
+
+            return new ChartBarSeriesBuilder<TModel>(radarColumnSeries);
+        }
+
+        /// <summary>
+        /// Defines bound radar line series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> RadarLine<TValue>(Expression<Func<TModel, TValue>> valueExpression)
+        {
+            return RadarLine<TValue, string>(valueExpression, null);
+        }
+
+        /// <summary>
+        /// Defines bound radar line series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the point category from the chart model
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> RadarLine<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression)
+        {
+            var radarLineSeries = new ChartRadarLineSeries<TModel, TValue, TCategory>(valueExpression, categoryExpression);
+
+            Container.Series.Add(radarLineSeries);
+
+            return new ChartLineSeriesBuilder<TModel>(radarLineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound radar line series.
+        /// </summary>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> RadarLine(string valueMemberName, string categoryMemberName = null)
+        {
+            return RadarLine(null, valueMemberName, categoryMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound radar line series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> RadarLine(Type memberType, string valueMemberName, string categoryMemberName = null)
+        {
+            var valueExpr = BuildMemberExpression(memberType, valueMemberName);
+            var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
+            var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+            var seriesType = typeof(ChartRadarLineSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
+            var series = (IChartLineSeries)BuildSeries(seriesType, valueExpr, categoryExpr);
+
+            series.Member = valueMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = valueMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartLineSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines radar line series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> RadarLine(IEnumerable data)
+        {
+            ChartRadarLineSeries<TModel, object> radarLineSeries = new ChartRadarLineSeries<TModel, object>(data);
+
+            Container.Series.Add(radarLineSeries);
+
+            return new ChartLineSeriesBuilder<TModel>(radarLineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar area series.
+        /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarArea<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
+        {
+            var polarAreaSeries = new ChartPolarAreaSeries<TModel, TXValue, TYValue>(xValueExpression, yValueExpression);
+
+            Container.Series.Add(polarAreaSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarAreaSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar area series.
+        /// </summary>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarArea(string xMemberName, string yMemberName)
+        {
+            return PolarArea(null, xMemberName, yMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound polar area series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value members.
+        /// </param>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarArea(Type memberType, string xMemberName, string yMemberName)
+        {
+            var expressionX = BuildMemberExpression(memberType, xMemberName);
+            var expressionY = BuildMemberExpression(memberType, yMemberName);
+
+            var seriesType = typeof(ChartPolarAreaSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
+            var series = (IChartScatterSeries)BuildSeries(seriesType, expressionX, expressionY);
+
+            series.XMember = xMemberName;
+            series.YMember = yMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = xMemberName.AsTitle() + ", " + yMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartScatterSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines polar area series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarArea(IEnumerable data)
+        {
+            ChartPolarAreaSeries<TModel, object, object> polarAreaSeries = new ChartPolarAreaSeries<TModel, object, object>(data);
+
+            Container.Series.Add(polarAreaSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarAreaSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar line series.
+        /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarLine<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
+        {
+            var polarLineSeries = new ChartPolarLineSeries<TModel, TXValue, TYValue>(xValueExpression, yValueExpression);
+
+            Container.Series.Add(polarLineSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarLineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar line series.
+        /// </summary>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarLine(string xMemberName, string yMemberName)
+        {
+            return PolarLine(null, xMemberName, yMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound polar line series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value members.
+        /// </param>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarLine(Type memberType, string xMemberName, string yMemberName)
+        {
+            var expressionX = BuildMemberExpression(memberType, xMemberName);
+            var expressionY = BuildMemberExpression(memberType, yMemberName);
+
+            var seriesType = typeof(ChartPolarLineSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
+            var series = (IChartScatterSeries)BuildSeries(seriesType, expressionX, expressionY);
+
+            series.XMember = xMemberName;
+            series.YMember = yMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = xMemberName.AsTitle() + ", " + yMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartScatterSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines polar line series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarLine(IEnumerable data)
+        {
+            ChartPolarLineSeries<TModel, object, object> polarLineSeries = new ChartPolarLineSeries<TModel, object, object>(data);
+
+            Container.Series.Add(polarLineSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarLineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar scatter series.
+        /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarScatter<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
+        {
+            var polarScatterSeries = new ChartPolarScatterSeries<TModel, TXValue, TYValue>(xValueExpression, yValueExpression);
+
+            Container.Series.Add(polarScatterSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarScatterSeries);
+        }
+
+        /// <summary>
+        /// Defines bound polar scatter series.
+        /// </summary>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarScatter(string xMemberName, string yMemberName)
+        {
+            return PolarScatter(null, xMemberName, yMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound polar scatter series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value members.
+        /// </param>
+        /// <param name="xMemberName">
+        /// The name of the X value member.
+        /// </param>
+        /// <param name="yMemberName">
+        /// The name of the Y value member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarScatter(Type memberType, string xMemberName, string yMemberName)
+        {
+            var expressionX = BuildMemberExpression(memberType, xMemberName);
+            var expressionY = BuildMemberExpression(memberType, yMemberName);
+
+            var seriesType = typeof(ChartPolarScatterSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
+            var series = (IChartScatterSeries)BuildSeries(seriesType, expressionX, expressionY);
+
+            series.XMember = xMemberName;
+            series.YMember = yMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = xMemberName.AsTitle() + ", " + yMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartScatterSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines polar scatter series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> PolarScatter(IEnumerable data)
+        {
+            ChartPolarScatterSeries<TModel, object, object> polarScatterSeries = new ChartPolarScatterSeries<TModel, object, object>(data);
+
+            Container.Series.Add(polarScatterSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(polarScatterSeries);
+        }
+
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
         {
             const bool liftMemberAccess = false;

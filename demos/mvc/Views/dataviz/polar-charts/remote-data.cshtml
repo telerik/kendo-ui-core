@@ -5,7 +5,6 @@
     <script>
         function createChart() {
             $("#chart").kendoChart({
-
                 title: {
                     text: "Antenna Gain (dB)"
                 },
@@ -19,8 +18,8 @@
                 },
                 series: [{
                     type: "polarLine",
-                    xField: "Azimuth",
-                    yField: "Gain"
+                    xField: "azimuth",
+                    yField: "gain"
                 }],
                 xAxis: {
                     majorUnit: 30

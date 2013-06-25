@@ -484,6 +484,18 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// The angle (degrees) where the 0 value is placed.
+        /// It defaults to 0.
+        /// </summary>
+        /// <param name="startAngle">Angles increase counterclockwise and 0 is to the right. Negative values are acceptable.</param>
+        public TAxisBuilder StartAngle(double startAngle)
+        {
+            Axis.StartAngle = startAngle;
+
+            return this as TAxisBuilder;
+        }
+
+        /// <summary>
         /// A value indicating if the automatic axis range should snap to 0.
         /// </summary>
         /// <param name="narrowRange">The narrowRange value.</param>

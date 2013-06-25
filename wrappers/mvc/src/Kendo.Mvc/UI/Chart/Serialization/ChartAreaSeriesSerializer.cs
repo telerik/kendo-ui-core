@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
 
     internal class ChartAreaSeriesSerializer : ChartSeriesSerializerBase
     {
-        private readonly IChartAreaSeries series;
+        protected readonly IChartAreaSeries series;
 
         public ChartAreaSeriesSerializer(IChartAreaSeries series)
             : base(series)

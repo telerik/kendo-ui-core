@@ -23,7 +23,8 @@ namespace Kendo.Mvc.UI
                 .Add("color", axis.Color, string.Empty)
                 .Add("visible", axis.Visible, () => axis.Visible.HasValue)
                 .Add("narrowRange", axis.NarrowRange, () => axis.NarrowRange.HasValue)
-                .Add("reverse", axis.Reverse, () => axis.Reverse.HasValue);
+                .Add("reverse", axis.Reverse, () => axis.Reverse.HasValue)
+                .Add("startAngle", axis.StartAngle, () => axis.StartAngle.HasValue);
 
             var labelsData = axis.Labels.CreateSerializer().Serialize();
             if (labelsData.Count > 0)

@@ -157,6 +157,96 @@ namespace Kendo.Mvc.UI.Tests
             ((IDictionary<string, object>)scatterLineData).ContainsKey("type").ShouldBeFalse();
         }
 
+        [Fact]
+        public void Serializes_radarArea_defaults()
+        {
+            seriesDefaults.RadarArea.Stacked = true;
+            GetJson(seriesDefaults).ContainsKey("radarArea");
+        }
+
+        [Fact]
+        public void Strips_type_from_radarArea_defaults()
+        {
+            seriesDefaults.RadarArea.Stacked = true;
+            var radarAreaData = GetJson(seriesDefaults)["radarArea"];
+            ((IDictionary<string, object>)radarAreaData).ContainsKey("type").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_radarColumn_defaults()
+        {
+            seriesDefaults.RadarColumn.Stacked = true;
+            GetJson(seriesDefaults).ContainsKey("radarColumn");
+        }
+
+        [Fact]
+        public void Strips_type_from_radarColumn_defaults()
+        {
+            seriesDefaults.RadarColumn.Stacked = true;
+            var radarColumnData = GetJson(seriesDefaults)["radarColumn"];
+            ((IDictionary<string, object>)radarColumnData).ContainsKey("type").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_radarLine_defaults()
+        {
+            seriesDefaults.RadarLine.Stacked = true;
+            GetJson(seriesDefaults).ContainsKey("radarLine");
+        }
+
+        [Fact]
+        public void Strips_type_from_radarLine_defaults()
+        {
+            seriesDefaults.RadarLine.Stacked = true;
+            var radarLineData = GetJson(seriesDefaults)["radarLine"];
+            ((IDictionary<string, object>)radarLineData).ContainsKey("type").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_polarArea_defaults()
+        {
+            seriesDefaults.PolarArea.Opacity = 0.5;
+            GetJson(seriesDefaults).ContainsKey("polarArea");
+        }
+
+        [Fact]
+        public void Strips_type_from_polarArea_defaults()
+        {
+            seriesDefaults.PolarArea.Opacity = 0.5;
+            var polarAreaData = GetJson(seriesDefaults)["polarArea"];
+            ((IDictionary<string, object>)polarAreaData).ContainsKey("type").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_polarLine_defaults()
+        {
+            seriesDefaults.PolarLine.Opacity = 0.5;
+            GetJson(seriesDefaults).ContainsKey("polarLine");
+        }
+
+        [Fact]
+        public void Strips_type_from_polarLine_defaults()
+        {
+            seriesDefaults.PolarLine.Opacity = 0.5;
+            var polarLineData = GetJson(seriesDefaults)["polarLine"];
+            ((IDictionary<string, object>)polarLineData).ContainsKey("type").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_polarScatter_defaults()
+        {
+            seriesDefaults.PolarScatter.Opacity = 0.5;
+            GetJson(seriesDefaults).ContainsKey("polarScatter");
+        }
+
+        [Fact]
+        public void Strips_type_from_polarScatter_defaults()
+        {
+            seriesDefaults.PolarScatter.Opacity = 0.5;
+            var polarScatterData = GetJson(seriesDefaults)["polarScatter"];
+            ((IDictionary<string, object>)polarScatterData).ContainsKey("type").ShouldBeFalse();
+        }
+
         private static IDictionary<string, object> GetJson(IChartSeriesDefaults seriesDefaults)
         {
             return seriesDefaults.CreateSerializer().Serialize();

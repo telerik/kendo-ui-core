@@ -100,5 +100,29 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new ChartOHLCSeriesBuilder<TModel>(chart.SeriesDefaults.OHLC);
         }
+
+        /// <summary>
+        /// Defines the default settings for radar area series.
+        /// </summary>
+        public virtual ChartAreaSeriesBuilder<TModel> RadarArea()
+        {
+            return new ChartAreaSeriesBuilder<TModel>(chart.SeriesDefaults.RadarArea);
+        }
+
+        /// <summary>
+        /// Defines the default settings for radar column series.
+        /// </summary>
+        public virtual ChartBarSeriesBuilder<TModel> RadarColumn()
+        {
+            return new ChartBarSeriesBuilder<TModel>(chart.SeriesDefaults.RadarColumn);
+        }
+
+        /// <summary>
+        /// Defines the default settings for radar line series.
+        /// </summary>
+        public virtual ChartLineSeriesBuilder<TModel> RadarLine()
+        {
+            return new ChartLineSeriesBuilder<TModel>(chart.SeriesDefaults.RadarLine);
+        }
     }
 }
