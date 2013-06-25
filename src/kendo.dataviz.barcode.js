@@ -1419,26 +1419,26 @@
         addSide:function(leftPart,key){
             var that = this;
             for(var i = 0; i < leftPart.length; i++){
-				if(key && parseInt(this.keyTable[key][i])){
-					that.addPieces(Array.prototype.slice.call(this.characterMap['digits'][leftPart.charAt(i)]).reverse(),true);
-				}else{
-					that.addPieces(this.characterMap['digits'][leftPart.charAt(i)],true);
-				}          
+                if(key && parseInt(this.keyTable[key][i])){
+                    that.addPieces(Array.prototype.slice.call(this.characterMap['digits'][leftPart.charAt(i)]).reverse(),true);
+                }else{
+                    that.addPieces(this.characterMap['digits'][leftPart.charAt(i)],true);
+                }
             }
         },
-	addPieces:function(arrToAdd,limitedHeight){
-		for(var i=0;i<arrToAdd.length;i++){
-			if(limitedHeight){
-				this.pattern.push({
-					y1:0,
-					y2:this.options.height*0.95,
-					width:arrToAdd[i]
-				});
-			}else{
-				this.pattern.push(arrToAdd[i]);
-			}
-		}			
-	},
+        addPieces:function(arrToAdd,limitedHeight){
+            for(var i=0;i<arrToAdd.length;i++){
+                if(limitedHeight){
+                    this.pattern.push({
+                        y1:0,
+                        y2:this.options.height*0.95,
+                        width:arrToAdd[i]
+                    });
+                }else{
+                    this.pattern.push(arrToAdd[i]);
+                }
+            }
+        },
         calculateChecksum: function (){
             var odd = 0,
                 even = 0,
