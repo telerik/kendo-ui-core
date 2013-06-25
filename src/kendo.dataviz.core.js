@@ -1085,6 +1085,7 @@ kendo_module({
             visible: true,
             reverse: false,
             justified: true,
+            note: {},
 
             _alignLines: true
         },
@@ -1174,13 +1175,14 @@ kendo_module({
         createNotes: function() {
             var axis = this,
                 options = axis.options,
-                notes = options.notes || [],
+                note = options.note,
+                items = note.items || [],
                 i, item, note;
 
             axis.notes = [];
 
-            for (i = 0; i < notes.length; i++) {
-                item = deepExtend({}, options.noteDefaults, notes[i]);
+            for (i = 0; i < items.length; i++) {
+                item = deepExtend({}, options.note, items[i]);
                 note = new Note(item);
                 if (note.options.visible) {
                     if (defined(note.options.position)) {
@@ -1603,7 +1605,7 @@ kendo_module({
                 box = Box2D();
 
             if (defined(label) && label.visible) {
-                note.label = new TextBox(label.text, deepExtend({}, label, dataModelId));
+                note.label = new TextBox(label.text || options.value, deepExtend({}, label, dataModelId));
                 note.append(note.label);
 
                 if (label.position === INSIDE) {
