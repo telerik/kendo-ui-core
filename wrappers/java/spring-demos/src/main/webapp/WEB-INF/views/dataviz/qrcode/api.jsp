@@ -2,11 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
 <demo:header />   
-
-	<div class="demo-section">
- 		<kendo:qRCode name="qrCode" size="200" >
- 		</kendo:qRCode> 		    
-	</div>
+		    
 	<div class="configuration-horizontal" id="qrConfig">
 	    <div class="config-section">
 	        <span class="configHead">Value</span>
@@ -20,38 +16,47 @@
 	        <span class="configHead">Options</span>
 	        <ul class="options">
 	            <li>
+	               <label for="errorCorrectionLevel">Error correction level:</label>
 	               <select id="errorCorrectionLevel" data-role="dropdownlist" data-bind="value: qrOptions.errorCorrectionLevel">
 	                    <option value="L">L</option>
 	                    <option value="M">M</option>
 	                    <option value="Q">Q</option>
 	                    <option value="H">H</option>
 	                </select>
-	                <label for="errorCorrectionLevel">Error correction level</label>
 	            </li>
 	            <li>
+	                <label for="size">Size:</label>
 	                <input id="size" data-bind="value: qrOptions.size" data-role="numerictextbox"
 	                    data-format="n0" data-decimals="0" />
-	                <label for="size">Size</label>
 	            </li>
 	            <li>
+	                <label for="borderWidth">Border width:</label>
 	                <input id="borderWidth" data-bind="value: qrOptions.border.width" data-role="numerictextbox"
 	                    data-format="n0" data-decimals="0"/>
-	                <label for="borderWidth">Border width</label>
-	            </li>
-	            <li>
-	                <input id="borderColor" data-role="colorpicker" data-bind="value: qrOptions.border.color" />
-	                <label for="borderColor">Border color</label>
-	            </li>
-	            <li>
-	                <input id="backgroundColor" data-role="colorpicker" data-bind="value: qrOptions.background"  />
-	                <label for="backgroundColor">Background color</label>
-	            </li>                                               
-	            <li>
-	                <input id="moduleColor" data-role="colorpicker" data-bind="value: qrOptions.darkModuleColor" />
-	                <label for="moduleColor">Module color</label>
 	            </li>
 	        </ul>
 	    </div>
+	    <div class="config-section">
+	        <span class="configHead">Colors</span>
+	        <ul class="options">
+	            <li>
+	                <label for="borderColor">Border color:</label>
+	                <input id="borderColor" data-role="colorpicker" data-bind="value: qrOptions.border.color" />
+	            </li>
+	            <li>
+	                <label for="backgroundColor">Background color:</label>
+	                <input id="backgroundColor" data-role="colorpicker" data-bind="value: qrOptions.background"  />
+	            </li>                                               
+	            <li>
+	                <label for="moduleColor">Module color:</label>
+	                <input id="moduleColor" data-role="colorpicker" data-bind="value: qrOptions.darkModuleColor" />
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+	<div class="demo-section">
+ 		<kendo:qRCode name="qrCode" size="200" >
+ 		</kendo:qRCode> 
 	</div>
 	
 	<script type="text/javascript">
@@ -99,13 +104,13 @@
 	
 	<style scoped>                
 	    
-	    .k-qrcode {	                        
-	        margin: 0 auto;                 
+	    .k-qrcode {                 
+	        margin: 20px auto;                 
 	    }
 	         
 	    #qrValue{
-	        width: 300px;
-	        max-width:300px;
+	        width: 190px;
+	        max-width:190px;
 	        height: 100px;
 	    }
 	
@@ -115,6 +120,14 @@
 	              
 	    .configuration-horizontal .k-textbox {
 	         margin-left: 0;
+	    }
+	    .options label {
+	         display: inline-block;
+	         width: 120px;
+	    }
+	    .options .k-dropdown,
+	    .options .k-numerictextbox {
+	         width: 60px;
 	    }
 	</style>
 
