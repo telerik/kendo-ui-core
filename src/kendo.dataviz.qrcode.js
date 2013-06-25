@@ -1,4 +1,4 @@
-kendo_module({  
+kendo_module({
     id: "dataviz.qrcode",
     name: "QRCode",
     category: "dataviz",
@@ -9,7 +9,7 @@ kendo_module({
 
 (function ($, undefined) {
     var kendo = window.kendo,
-		extend = $.extend,
+        extend = $.extend,
         dataviz = kendo.dataviz,
         Widget = kendo.ui.Widget,
         Box2D = dataviz.Box2D,
@@ -31,12 +31,12 @@ kendo_module({
         paddingCodewords = ["11101100", "00010001"],
         finderPatternValue = 93,
         maskPatternConditions = [
-            function(row,column){return (row + column) % 2 == 0}, 
-            function(row,column){return row % 2 == 0}, 
+            function(row,column){return (row + column) % 2 == 0},
+            function(row,column){return row % 2 == 0},
             function(row,column){return column % 3 == 0},
-            function(row,column){return (row + column) % 3 == 0}, 
+            function(row,column){return (row + column) % 3 == 0},
             function(row,column){return (Math.floor(row/2) + Math.floor(column/3)) % 2 == 0},
-            function(row,column){return ((row * column) % 2) + ((row * column) % 3) == 0}, 
+            function(row,column){return ((row * column) % 2) + ((row * column) % 3) == 0},
             function(row,column){return (((row * column) % 2) + ((row * column) % 3)) % 2 == 0},
             function(row,column){return (((row + column) % 2) + ((row * column) % 3)) % 2 == 0}
         ],
@@ -51,12 +51,13 @@ kendo_module({
         initMinAlphaBeforeByte = 8,
         minNumericBeforeAlpha = 17,
         minNumericBeforeByte = 9,
-        minAlphaBeforeByte =  16;
-                
+        minAlphaBeforeByte =  16,
+        round = Math.round;
+
         function toDecimal(value){
             return parseInt(value, 2);
         }
-        
+
         function toBitsString(value, length){
             var result = Number(value).toString(2);
             if(result.length < length){
@@ -64,7 +65,7 @@ kendo_module({
             }
             return result;
         }
-        
+
         function splitInto(str, n){
             var result = [],
                 idx = 0;
@@ -74,7 +75,7 @@ kendo_module({
             }
             return result;
         }
-        
+
         var QRDataMode = kendo.Class.extend({
             getVersionIndex: function(version){
                 if(version < 10){
@@ -83,7 +84,7 @@ kendo_module({
                 else if(version > 26){
                     return 2;
                 }
-                
+
                 return 1;
             },
             getBitsCharacterCount: function(version){
@@ -99,8 +100,8 @@ kendo_module({
             getValue: function(character){},
             modeIndicator: "",
             bitsInCharacterCount: []
-        });        
-        
+        });
+
         var modes = {};
         modes[NUMERIC] = QRDataMode.extend({
             bitsInCharacterCount: [10, 12, 14],
@@ -112,7 +113,7 @@ kendo_module({
                 var mode = this,
                     parts = splitInto(str, 3),
                     result = mode._getModeCountString(str, version);
-                    
+
                 for(var i = 0; i < parts.length - 1; i++){
                     result += toBitsString(parts[i], 10);
                 }
@@ -140,7 +141,7 @@ kendo_module({
                     value = 45 * mode.getValue(parts[i].charAt(0)) + mode.getValue(parts[i].charAt(1));
                     result += toBitsString(value, 11);
                 }
-                value = parts[i].length == 2 ? 
+                value = parts[i].length == 2 ?
                     45 * mode.getValue(parts[i].charAt(0)) + mode.getValue(parts[i].charAt(1)) :
                     mode.getValue(parts[i].charAt(0));
                 return result + toBitsString(value, 1 + 5 * parts[i].length);
@@ -165,31 +166,31 @@ kendo_module({
             encode: function(str, version){
                 var mode = this,
                     result = mode._getModeCountString(str, version);
-                    
+
                 for(var i = 0; i < str.length; i++){
                     result += toBitsString(mode.getValue(str.charAt(i)), 8);
                 }
-                return result; 
+                return result;
             },
             getStringBitsLength: function(inputLength, version){
                 return 4 + this.getBitsCharacterCount(version) + 8 * inputLength;
             }
-        });        
-        
+        });
+
         var modeInstances = {};
         for(var mode in modes){
             modeInstances[mode] = new modes[mode]();
         }
-        
+
         var FreeCellVisitor = function (matrix){
-            var that = this,                
+            var that = this,
                 row = matrix.length - 1,
                 column = matrix.length - 1,
-                startColumn = column,                
+                startColumn = column,
                 dir = -1,
-                c = 0;     
+                c = 0;
             that.move = function(){
-                row += dir * c;                        
+                row += dir * c;
                 c^=1;
                 column = startColumn - c;
             };
@@ -197,9 +198,9 @@ kendo_module({
                 while(matrix[row][column] !== undefined){
                     that.move();
                     if(row < 0 || row >= matrix.length){
-                        dir = -dir;     
+                        dir = -dir;
                         startColumn-= startColumn != 8 ? 2 : 3;
-                        column = startColumn;                        
+                        column = startColumn;
                         row = dir < 0 ? matrix.length - 1 : 0;
                     }
                 }
@@ -212,71 +213,71 @@ kendo_module({
                 }
             };
         }
-        
+
         function fillFunctionCell(matrices, bit, x, y){
             for(var i = 0; i< matrices.length;i++){
                 matrices[i][x][y] = bit;
             }
         }
-        
+
         function fillDataCell(matrices, bit, x, y){
             for(var i = 0; i < maskPatternConditions.length;i++){
                 matrices[i][x][y] = maskPatternConditions[i](x,y) ? bit ^ 1 : parseInt(bit);
             }
-        }   
-        
+        }
+
         var fillData = function (matrices, blocks){
             var cellVisitor = new FreeCellVisitor(matrices[0]),
                 block,
                 codewordIdx,
                 cell;
-                   
+
             for(var blockIdx = 0; blockIdx < blocks.length;blockIdx++){
                 block = blocks[blockIdx];
                 codewordIdx = 0;
                 while(block.length > 0){
-                    for(var i = 0; i< block.length; i++){                        
+                    for(var i = 0; i< block.length; i++){
                          for(var j = 0; j < 8;j++){
                             cell = cellVisitor.getNextCell();
-                            fillDataCell(matrices, block[i][codewordIdx].charAt(j), cell.row, cell.column);                               
-                        }                                             
+                            fillDataCell(matrices, block[i][codewordIdx].charAt(j), cell.row, cell.column);
+                        }
                     }
-                    
+
                     codewordIdx++;
                     while(block[0] && codewordIdx == block[0].length){
                         block.splice(0,1);
                     }
                 }
-            }   
-            
+            }
+
             while((cell = cellVisitor.getNextRemainderCell())){
                 fillDataCell(matrices, 0, cell.row, cell.column);
             }
         }
-        
-        var padDataString = function (dataString, totalDataCodewords){            
+
+        var padDataString = function (dataString, totalDataCodewords){
             var dataBitsCount = totalDataCodewords * 8,
                 terminatorIndex = 0,
                 paddingCodewordIndex = 0;
             while(dataString.length < dataBitsCount && terminatorIndex < terminator.length){
                 dataString+=terminator.charAt(terminatorIndex++);
             }
-     
+
             if(dataString.length % 8 !== 0){
                 dataString+= new Array(9 - dataString.length % 8).join("0");
             }
-            
+
             while(dataString.length < dataBitsCount){
                 dataString+= paddingCodewords[paddingCodewordIndex];
-                paddingCodewordIndex ^= 1;                
+                paddingCodewordIndex ^= 1;
             }
             return dataString;
         }
-        
+
         function generatePowersOfTwo(){
             var result;
             for(var power = 1, result; power < 255; power++){
-                
+
                 result =  powersOfTwoResult[power - 1] * 2;
                 if(result > 255){
                     result = result ^ 285;
@@ -289,83 +290,83 @@ kendo_module({
             result = (powersOfTwoResult[power - 1] * 2) ^ 285;
             powersOfTwoResult[power] =   result;
             powersOfTwoResult[-1] = 0;
-        }       
+        }
 
         var xorPolynomials = function (x,y){
             var result = [],
                 idx = x.length - 2;
             for(var i = idx; i>=0; i--){
                  result[i] = x[i] ^ y[i];
-            }  
-     
+            }
+
             return result;
-        }                                      
-        
+        }
+
         var multiplyPolynomials = function (x, y){
             var result = [];
             for(var i = 0; i < x.length; i++){
-                for(var j = 0; j < y.length; j++){                        
+                for(var j = 0; j < y.length; j++){
                     if(result[i+j] === undefined){
-                         result[i+j] = (x[i] + (y[j] >= 0 ? y[j] : 0)) % 255;                               
+                         result[i+j] = (x[i] + (y[j] >= 0 ? y[j] : 0)) % 255;
                     }
                     else{
                        result[i+j] = powersOfTwo[powersOfTwoResult[result[i+j]] ^ powersOfTwoResult[(x[i] + y[j]) % 255]];
-                    }                            
+                    }
                 }
             }
-            
+
             return result;
-        }        
-                
-        function generateGeneratorPolynomials(){              
-            var maxErrorCorrectionCodeWordsCount = 68;                    
+        }
+
+        function generateGeneratorPolynomials(){
+            var maxErrorCorrectionCodeWordsCount = 68;
             for(var idx = 2; idx <= maxErrorCorrectionCodeWordsCount; idx++){
                 var firstPolynomial = generatorPolynomials[idx - 1],
                     secondPolynomial = [idx, 0];
-                generatorPolynomials[idx] =  multiplyPolynomials(firstPolynomial, secondPolynomial);                   
+                generatorPolynomials[idx] =  multiplyPolynomials(firstPolynomial, secondPolynomial);
             }
-        }           
-        
+        }
+
         //possibly generate on demand
         generatePowersOfTwo();
-        generateGeneratorPolynomials();        
+        generateGeneratorPolynomials();
 
         function multiplyByConstant(polynomial, power){
-            var result = [],    
-                idx = polynomial.length - 1;                
+            var result = [],
+                idx = polynomial.length - 1;
             do{
                 result[idx] = powersOfTwoResult[(polynomial[idx] + power) % 255];
                 idx--;
             }while(polynomial[idx] != undefined);
- 
+
             return result;
-        }        
-        
-        var generateErrorCodewords = function (data, errorCodewordsCount){    
-            var generator = generatorPolynomials[errorCodewordsCount - 1],                    
+        }
+
+        var generateErrorCodewords = function (data, errorCodewordsCount){
+            var generator = generatorPolynomials[errorCodewordsCount - 1],
                 result = new Array(errorCodewordsCount).concat(data),
                 generatorPolynomial = new Array(result.length - generator.length).concat(generator),
                 steps = data.length,
                 divisor,
                 errorCodewords = [];
-                         
+
             for(var i = 0; i < steps; i++){
                 divisor = multiplyByConstant(generatorPolynomial, powersOfTwo[result[result.length - 1]]);
                 generatorPolynomial.splice(0,1);
-             
+
                 result = xorPolynomials(divisor, result);
-            }     
-            
+            }
+
             for(var i = result.length - 1; i >= 0;i--){
                 errorCodewords[errorCodewordsCount - 1 - i] = toBitsString(result[i], 8);
             }
-       
+
             return errorCodewords;
-        }                    
-        
+        }
+
         var getBlocks = function (dataStream, versionCodewordsInformation){
-            var codewordStart = 0,                    
-                dataBlocks = [],                    
+            var codewordStart = 0,
+                dataBlocks = [],
                 errorBlocks = [],
                 dataBlock,
                 versionGroups = versionCodewordsInformation.groups,
@@ -373,7 +374,7 @@ kendo_module({
                 groupBlocksCount,
                 messagePolynomial,
                 codeword;
-                
+
             for(var groupIdx = 0; groupIdx < versionGroups.length; groupIdx++){
                 groupBlocksCount = versionGroups[groupIdx][0];
                 for(var blockIdx = 0; blockIdx < groupBlocksCount;blockIdx++){
@@ -386,51 +387,51 @@ kendo_module({
                         messagePolynomial[blockCodewordsCount - codewordIdx] = toDecimal(codeword);
                         codewordStart+=8;
                     }
-                    dataBlocks.push(dataBlock);                    
-                    errorBlocks.push(generateErrorCodewords(messagePolynomial, 
+                    dataBlocks.push(dataBlock);
+                    errorBlocks.push(generateErrorCodewords(messagePolynomial,
                         versionCodewordsInformation.errorCodewordsPerBlock));
                 }
             }
             return [dataBlocks, errorBlocks];
-        }  
+        }
 
         var chooseMode = function (str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode){
              var numeric = numberRegex.exec(str),
                 numericMatch = numeric ? numeric[0] : "",
                 alpha = alphaRegex.exec(str),
-                alphaMatch = alpha ? alpha[0] : "",  
+                alphaMatch = alpha ? alpha[0] : "",
                 alphaNumeric = alphaNumericRegex.exec(str),
                 alphaNumericMatch = alphaNumeric ? alphaNumeric[0] : "",
                 mode,
                 modeString;
-               
-             if(numericMatch && (numericMatch.length >= minNumericBeforeAlpha || 
-                     str.length == numericMatch.length || (numericMatch.length >= minNumericBeforeByte && 
+
+             if(numericMatch && (numericMatch.length >= minNumericBeforeAlpha ||
+                     str.length == numericMatch.length || (numericMatch.length >= minNumericBeforeByte &&
                      !alphaNumericRegex.test(str.charAt(numericMatch.length))))){
                 mode = NUMERIC;
                 modeString = numericMatch;
              }
-             else if(alphaNumericMatch && (str.length == alphaNumericMatch.length || 
+             else if(alphaNumericMatch && (str.length == alphaNumericMatch.length ||
                 alphaNumericMatch.length >= minAlphaBeforeByte || previousMode == ALPHA_NUMERIC)){
-                mode = ALPHA_NUMERIC;  
-                modeString =  numericMatch || alphaMatch;                                     
+                mode = ALPHA_NUMERIC;
+                modeString =  numericMatch || alphaMatch;
              }
              else {
                 mode = BYTE;
                 if(alphaNumericMatch){
                     modeString = alphaNumericMatch + byteRegex.exec(str.substring(alphaNumericMatch.length))[0];
-                } 
+                }
                 else{
                     modeString = byteRegex.exec(str)[0];
                 }
              }
-             
+
              return {
                 mode: mode,
                 modeString: modeString
              };
         }
-            
+
         var getModes = function (str){
             var modes = [],
                 previousMode;
@@ -438,11 +439,11 @@ kendo_module({
             previousMode = modes[0].mode;
             str = str.substr(modes[0].modeString.length),
             idx = 0;
-            
+
             while(str.length > 0){
-               var nextMode = chooseMode(str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode);                
+               var nextMode = chooseMode(str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode);
                if(nextMode.mode != previousMode){
-                    previousMode = nextMode.mode;   
+                    previousMode = nextMode.mode;
                     modes.push(nextMode);
                     idx++;
                }
@@ -450,11 +451,11 @@ kendo_module({
                     modes[idx].modeString += nextMode.modeString;
                }
                str = str.substr(nextMode.modeString.length);
-            } 
-            
+            }
+
             return modes;
         }
-        
+
         var getDataCodewordsCount = function (modes){
             var length = 0,
                 mode;
@@ -462,7 +463,7 @@ kendo_module({
                 mode = modeInstances[modes[i].mode];
                 length+= mode.getStringBitsLength(modes[i].modeString.length);
             }
-                
+
             return Math.ceil(length / 8);
         }
 
@@ -470,8 +471,8 @@ kendo_module({
             var x = 0,
                 y = versionsCodewordsInformation.length - 1,
                 version = Math.floor(versionsCodewordsInformation.length / 2);
-         
-            do{                                       
+
+            do{
                 if(dataCodewordsCount < versionsCodewordsInformation[version][errorCorrectionLevel].totalDataCodewords){
                     y = version;
                 }
@@ -479,14 +480,14 @@ kendo_module({
                     x = version;
                 }
                 version = x + Math.floor((y - x) / 2);
-                
+
             }while(y - x > 1);
-            
-            if(dataCodewordsCount <= versionsCodewordsInformation[x][errorCorrectionLevel].totalDataCodewords){         
+
+            if(dataCodewordsCount <= versionsCodewordsInformation[x][errorCorrectionLevel].totalDataCodewords){
                 return version + 1;
             }
             return y + 1;
-        }    
+        }
 
         var getDataString = function (modes, version){
             var dataString = "",
@@ -495,12 +496,12 @@ kendo_module({
                 mode = modeInstances[modes[i].mode];
                 dataString+= mode.encode(modes[i].modeString, version);
             }
-            
+
             return dataString;
         }
-        
+
         //fix case all zeros
-        var encodeFormatInformation = function (format){       
+        var encodeFormatInformation = function (format){
             var formatNumber = toDecimal(format),
                 encodedString,
                 result = "";
@@ -513,11 +514,11 @@ kendo_module({
             for(var i = 0; i < encodedString.length; i++){
                 result += encodedString.charAt(i) ^ formatMaskPattern.charAt(i);
             }
-            
+
             return result;
         }
-        
-        var encodeBCH =function (value, generatorPolynomial, codeLength){     
+
+        var encodeBCH =function (value, generatorPolynomial, codeLength){
             var generatorNumber = toDecimal(generatorPolynomial),
                 polynomialLength = generatorPolynomial.length - 1,
                 valueNumber = value << polynomialLength,
@@ -525,25 +526,25 @@ kendo_module({
                 valueString = toBitsString(value, length),
                 result = dividePolynomials(valueNumber, generatorNumber);
             result = valueString + toBitsString(result, polynomialLength);
-            return result;    
-        }                       
-        
+            return result;
+        }
+
         var dividePolynomials = function (numberX,numberY){
                 var yLength = numberY.toString(2).length,
                     xLength = numberX.toString(2).length;
-                do{                                            
+                do{
                     numberX ^= numberY << xLength - yLength;
                     xLength = numberX.toString(2).length
                 }
                 while(xLength >= yLength);
-                
+
                 return numberX;
-        }        
-        
+        }
+
         function getNumberAt(str, idx){
             return parseInt(str.charAt(idx));
         }
-        
+
         var initMatrices = function (version){
             var matrices = [],
                 modules =  17 + 4 * version;
@@ -553,23 +554,23 @@ kendo_module({
                     matrices[i][j] = new Array(modules);
                 }
             }
-            
+
             return matrices;
         }
-            
+
         var addFormatInformation =function (matrices, formatString){
             var matrix = matrices[0],
                 x,
                 y,
                 idx = 0,
                 length = formatString.length;
-     
+
             for(x=0, y=8; x <= 8;x++){
                 if(x!== 6){
                     fillFunctionCell(matrices, getNumberAt(formatString, length - 1 - idx++), x, y);
                 }
-            } 
-            
+            }
+
             for(x=8, y=7; y>=0;y--){
                 if(y!== 6){
                     fillFunctionCell(matrices, getNumberAt(formatString, length - 1 - idx++), x, y);
@@ -578,19 +579,19 @@ kendo_module({
             idx=0;
             for(y = matrix.length - 1, x = 8; y >= matrix.length - 8;y--){
                 fillFunctionCell(matrices,getNumberAt(formatString, length - 1 - idx++), x, y);
-            }       
+            }
 
             fillFunctionCell(matrices, 1, matrix.length - 8, 8);
-            
+
             for(x = matrix.length - 7, y = 8; x < matrix.length;x++){
                 fillFunctionCell(matrices, getNumberAt(formatString, length - 1 - idx++), x, y);
-            }                
+            }
         }
-        
+
         var encodeVersionInformation = function (version){
             return encodeBCH(version, versionGeneratorPolynomial, 18);
-        }                       
-        
+        }
+
         var addVersionInformation = function (matrices, dataString){
             var matrix = matrices[0],
                 modules = matrix.length,
@@ -601,7 +602,7 @@ kendo_module({
                 quotient,
                 mod,
                 value;
-             
+
             for(var idx =0; idx < dataString.length; idx++){
                 quotient = Math.floor(idx / 3);
                 mod = idx % 3;
@@ -609,37 +610,37 @@ kendo_module({
                 fillFunctionCell(matrices, value, x1 + quotient, y1 + mod);
                 fillFunctionCell(matrices, value, x2 + mod, y2 + quotient);
             }
-        }                         
-        
+        }
+
         var addCentricPattern = function (matrices, pattern, x, y){
             var size = pattern.length + 2,
                 length = pattern.length + 1,
                 value;
-           
+
             for(var i = 0; i < pattern.length; i++){
-                for(var j = i; j < size - i; j++){    
+                for(var j = i; j < size - i; j++){
                     value = pattern[i];
                     fillFunctionCell(matrices, value, x + j, y + i);
                     fillFunctionCell(matrices, value, x + i, y + j);
                     fillFunctionCell(matrices, value, x + length - j, y + length - i);
-                    fillFunctionCell(matrices, value, x + length - i, y + length - j);                   
-                }                    
+                    fillFunctionCell(matrices, value, x + length - i, y + length - j);
+                }
             }
         }
-        
+
         var addFinderSeparator = function (matrices, direction, x, y){
             var nextX = x,
                 nextY = y,
-                matrix = matrices[0];                   
-            do{                    
+                matrix = matrices[0];
+            do{
                 fillFunctionCell(matrices, 0, nextX, y);
                 fillFunctionCell(matrices, 0, x, nextY);
                 nextX+= direction[0];
                 nextY+= direction[1];
             }
-            while(nextX >=0 && nextX < matrix.length);                  
-        }        
-        
+            while(nextX >=0 && nextX < matrix.length);
+        }
+
         var addFinderPatterns = function (matrices){
             var modules = matrices[0].length;
             addCentricPattern(matrices, finderPattern, 0, 0);
@@ -649,12 +650,12 @@ kendo_module({
             addCentricPattern(matrices, finderPattern, 0 , modules - 7);
             addFinderSeparator(matrices, [-1,1],7, modules - 8);
         }
-        
+
         var addAlignmentPatterns = function (matrices, version){
             if(version < 2) {
                 return;
             }
-            
+
             var matrix = matrices[0],
                 modules = matrix.length,
                 pointsCount = Math.floor(version / 7),
@@ -662,8 +663,8 @@ kendo_module({
                 startDistance,
                 distance,
                 idx = 0;
-                
-            if((startDistance = irregularAlignmentPatternsStartDistance[version])){                    
+
+            if((startDistance = irregularAlignmentPatternsStartDistance[version])){
                 distance = (modules - 13 - startDistance) / pointsCount;
             }
             else{
@@ -680,8 +681,8 @@ kendo_module({
                     }
                 }
             }
-        }                
-        
+        }
+
         var addTimingFunctions = function (matrices){
             var row = 6,
                 column = 6,
@@ -689,11 +690,11 @@ kendo_module({
                 modules = matrices[0].length;
             for(var i = 8; i < modules - 8;i++){
                 fillFunctionCell(matrices, value, row, i);
-                fillFunctionCell(matrices, value, i, column);               
+                fillFunctionCell(matrices, value, i, column);
                 value ^= 1;
             }
-        }        
-        
+        }
+
         var scoreMaskMatrixes = function (matrices){
             var scores = [],
                 previousBits = [],
@@ -719,18 +720,18 @@ kendo_module({
                         if(previousBits[k][row] === matrix[i][j] && i + 1 < modules && j - 1 >= 0 &&
                             matrix[i + 1][j] == previousBits[k][row] && matrix[i + 1][j - 1] == previousBits[k][row]){
                             scores[k]+=3;
-                        }                        
+                        }
                         scoreFinderPatternOccurance(k, patterns, scores, row, matrix[i][j]);
-                        scoreFinderPatternOccurance(k, patterns, scores, column, matrix[j][i]);                                                                       
+                        scoreFinderPatternOccurance(k, patterns, scores, column, matrix[j][i]);
                         scoreAdjacentSameBits(k,scores,previousBits,matrix[i][j],adjacentSameBits,row);
-                        scoreAdjacentSameBits(k,scores,previousBits,matrix[j][i],adjacentSameBits,column);                              
+                        scoreAdjacentSameBits(k,scores,previousBits,matrix[j][i],adjacentSameBits,column);
                     }
                 }
             }
             var total = modules * modules,
                 minIdx,
                 min = Number.MAX_VALUE;
- 
+
             for(var i = 0; i < scores.length; i++){
                 scores[i]+= calculateDarkModulesRatioScore(darkModules[i], total);
                 if(scores[i] < min){
@@ -740,11 +741,11 @@ kendo_module({
             }
 
             return minIdx;
-        }      
+        }
 
         function scoreFinderPatternOccurance(idx, patterns, scores, rowColumn, bit){
             patterns[idx][rowColumn] = ((patterns[idx][rowColumn] << 1) ^ bit) % 128;
-            if(patterns[idx][rowColumn] == finderPatternValue){ 
+            if(patterns[idx][rowColumn] == finderPatternValue){
                 scores[idx] += 40;
             }
         }
@@ -761,7 +762,7 @@ kendo_module({
                 adjacentBits[idx][rowColumn] = 1;
             }
         }
-         
+
         function calculateDarkModulesRatioScore(darkModules, total){
             var percent = Math.floor((darkModules / total) * 100),
                 mod5 = percent % 5,
@@ -769,9 +770,9 @@ kendo_module({
                 next = Math.abs(percent +  5 - mod5 - 50),
                 score = 10 * Math.min(previous / 5, next / 5);
             return score;
-        }           
-        
-        var encodeData = function (inputString, errorCorrectionLevel){            
+        }
+
+        var encodeData = function (inputString, errorCorrectionLevel){
             var modes = getModes(inputString),
                 dataCodewordsCount = getDataCodewordsCount(modes),
                 version = getVersion(dataCodewordsCount, errorCorrectionLevel),
@@ -780,31 +781,31 @@ kendo_module({
                 dataString = padDataString(dataString, versionInformation.totalDataCodewords),
                 blocks = getBlocks(dataString, versionInformation),
                 matrices = initMatrices(version);
-                
+
             addFinderPatterns(matrices);
-            addAlignmentPatterns(matrices, version);    
-            addTimingFunctions(matrices);   
-            
+            addAlignmentPatterns(matrices, version);
+            addTimingFunctions(matrices);
+
             if(version >= 7){
                 addVersionInformation(matrices, toBitsString(0, 18));
-            }   
-           
+            }
+
             addFormatInformation(matrices, toBitsString(0, 15));
-            fillData(matrices, blocks);                    
-            
+            fillData(matrices, blocks);
+
             var minIdx = scoreMaskMatrixes(matrices),
                 optimalMatrix = matrices[minIdx];
 
             if(version >= 7){
                 addVersionInformation([optimalMatrix], encodeVersionInformation(version));
-            }    
-            
+            }
+
             var formatString = errorCorrectionPatterns[errorCorrectionLevel] + toBitsString(minIdx, 3);
             addFormatInformation([optimalMatrix], encodeFormatInformation(formatString));
-           
+
             return optimalMatrix;
         }
-        
+
         var QRCodeDefaults= {
             DEFAULT_SIZE: 200,
             QUIET_ZONE_LENGTH: 4,
@@ -813,20 +814,20 @@ kendo_module({
             DEFAULT_DARK_MODULE_COLOR: "#000",
             MIN_BASE_UNIT_SIZE: 1
         };
-            
-        var QRCode = Widget.extend({ 
-            init: function (element, options) { 
+
+        var QRCode = Widget.extend({
+            init: function (element, options) {
                 var that = this,
                     defaultView = dataviz.ui.defaultView();
-                     
+
                 Widget.fn.init.call(that, element, options);
-                 
-                that.element = $(element); 
+
+                that.element = $(element);
                 that.element.addClass("k-qrcode");
-                that.view = new defaultView(); 
+                that.view = new defaultView();
                 that.setOptions(options);
             },
-            redraw: function(){                
+            redraw: function(){
                 var that = this,
                     value = that._value,
                     baseUnit,
@@ -839,111 +840,117 @@ kendo_module({
                     size,
                     dataSize,
                     contentSize;
-                    
+
                 border.width = borderWidth;
-                
-                if(!value){                    
+
+                if(!value){
                     return;
                 }
-                
+
                 matrix = encodeData(value, that.options.errorCorrectionLevel);
                 size = that._getSize();
-                contentSize = size - 2 * borderWidth;                
+                contentSize = size - 2 * borderWidth;
                 baseUnit = that._calculateBaseUnit(contentSize, matrix.length);
                 dataSize =  matrix.length * baseUnit;
-                
+
                 quietZoneSize = that._calculateQuietZone(dataSize, contentSize, borderWidth);
-                
+
                 view.children = [];
                 view.options.width = size;
-                view.options.height = size;       
-                that._addBackground(size, border);                
+                view.options.height = size;
+                that._addBackground(size, border);
                 that._addMatrix(matrix, baseUnit, quietZoneSize);
-                
+
                 view.renderTo(that.element[0]);
             },
             _getSize: function(){
-                var that = this,                  
-                    size;                 
+                var that = this,
+                    size;
                 if(that.options.size){
                    size = parseInt(that.options.size);
                 }
                 else {
                     var element = that.element,
                         min = Math.min(element.width(), element.height());
-                        
+
                     if(min > 0){
                         size =  min;
                     }
-                    else{                    
+                    else{
                         size = QRCodeDefaults.DEFAULT_SIZE;
                     }
                 }
-          
+
                 return size;
             },
             _calculateBaseUnit: function(size, matrixSize){
                 var baseUnit = Math.floor(size/ matrixSize);
-                
+
                 if(baseUnit < QRCodeDefaults.MIN_BASE_UNIT_SIZE){
                     throw new Error("Insufficient size.");
-                }   
-                
-                if(baseUnit * matrixSize >= size && 
+                }
+
+                if(baseUnit * matrixSize >= size &&
                     baseUnit - 1 >= QRCodeDefaults.MIN_BASE_UNIT_SIZE){
                     baseUnit--;
                 }
-                
+
                 return baseUnit;
             },
-            _calculateQuietZone: function(dataSize, contentSize, border){                                                    
+            _calculateQuietZone: function(dataSize, contentSize, border){
                 return border + (contentSize - dataSize) / 2;
-            },            
+            },
             _addMatrix: function(matrix, baseUnit, quietZoneSize){
                 var that = this,
                     view = that.view,
                     y,
                     x1,
                     box,
-                    column;                           
-                
+                    column;
+
                 for(var row = 0; row < matrix.length; row++){
-                    y = quietZoneSize + row * baseUnit;                 
+                    y = quietZoneSize + row * baseUnit;
                     column = 0;
                     while(column < matrix.length){
                         while(matrix[row][column] == 0 && column < matrix.length){
                             column++;
-                        }       
+                        }
                         if(column < matrix.length){
                             x1 = column;
                             while(matrix[row][column] == 1){
                                 column++;
                             }
-                            box = new Box2D(quietZoneSize + x1 * baseUnit, y, quietZoneSize + column * baseUnit, y + baseUnit);
-                            view.children.push(view.createRect(box, 
-                                { fill: that.options.darkModuleColor, strokeWidth: 0.2, stroke: that.options.darkModuleColor, strokeLineJoin: "miter", align: false}));                         
+                            box = new Box2D(
+                                round(quietZoneSize + x1 * baseUnit), round(y),
+                                round(quietZoneSize + column * baseUnit), round(y + baseUnit));
+
+                            view.children.push(view.createRect(box, {
+                                fill: that.options.darkModuleColor,
+                                stroke: that.options.darkModuleColor, strokeWidth: 0.2,
+                                strokeLineJoin: "miter", align: false
+                            }));
                         }
                     }
-                }                 
-            }, 
+                }
+            },
             _addBackground: function (size, border) {
                 var that = this;
                 that.view.children.push(that.view.createRect(Box2D(0,0, size, size).unpad(border.width / 2),
-                    {   
-                        fill: that.options.background, 
+                    {
+                        fill: that.options.background,
                         stroke: border.color,
                         strokeWidth: border.width
                     }));
             },
-            setOptions: function (options) { 		
+            setOptions: function (options) {
                 var that = this;
                 options = options || {};
-                that.options = extend(that.options, options);  
+                that.options = extend(that.options, options);
                 if (options.value !== undefined) {
                     that._value = that.options.value + "";
                 }
-                that.redraw(); 
-            },	
+                that.redraw();
+            },
             value: function(value){
                 var that = this;
                 if (value === undefined) {
@@ -965,10 +972,10 @@ kendo_module({
                 }
             }
         });
-        
+
       dataviz.ui.plugin(QRCode);
-      
-      kendo.deepExtend(dataviz, {          
+
+      kendo.deepExtend(dataviz, {
             QRCode: QRCode,
             QRCodeDefaults: QRCodeDefaults,
             QRCodeFunctions: {
@@ -1004,7 +1011,7 @@ kendo_module({
                 powersOfTwo: powersOfTwo,
                 powersOfTwoResult: powersOfTwoResult,
                 generatorPolynomials: generatorPolynomials
-            }          
+            }
       });
-      
-})(window.kendo.jQuery);                  
+
+})(window.kendo.jQuery);
