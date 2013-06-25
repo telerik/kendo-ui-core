@@ -39,19 +39,85 @@
 
             html
             {
-	            font:12px sans-serif;
-	            overflow-y:scroll;
+                font:12px sans-serif;
+                overflow-y:scroll;
             }
 
         </style>
     </head>
     <body>
+            <div id="scheduler"></div>
+    <script>
+        function createLayoutConfiguration(name, resources, inner) {
+            var resource = resources[0];
+            if (resource) {
+                var configuration = [];
+                var field = resource.field;
 
-        <div id="win">
-            <div id="scheduler" style="width:800px"></div>
-        </div>
+                var data = resource.dataSource.view();
 
-   <script>
+                for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
+                    configuration.push({
+                        text: kendo.getter(resource.dataTextField)(data[dataIndex]),
+                        columns: createLayoutConfiguration(name, resources.slice(1), inner)
+                    });
+                }
+                return configuration;
+            }
+            return inner;
+        }
+
+        var CustomView = kendo.ui.WeekView.extend({
+            _createColumns: function(resources, inner) {
+               return createLayoutConfiguration("columns", resources, inner);
+            },
+            _createRows: function(resources, inner) {
+               return createLayoutConfiguration("rows", resources, inner);
+            },
+            _layout: function(dates) {
+                var layout = kendo.ui.WeekView.fn._layout.call(this, dates);
+                var columns = this._createColumns(this.options.resources, layout.columns);
+                var rows = this._createRows(this.options.resources, layout.rows);
+
+                return $.extend(layout, {
+                    columns: columns,
+                });
+            },
+
+            _content: function(dates) {
+                var that = this,
+                    options = that.options,
+                    start = options.startTime,
+                    end = options.endTime,
+                    html = '';
+
+                html += '<tbody>';
+
+                html += this._forTimeRange(start, end, function(date, majorTick) {
+                    var content = "",
+                        idx,
+                        length;
+
+                    content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
+
+                    for (var columnIdx = 0; columnIdx < that.columnCount; columnIdx++) {
+                        for (idx = 0, length = dates.length; idx < length; idx++) {
+                            content += "<td" + (kendo.date.isToday(dates[idx]) ? ' class="k-today"' : "") + ">";
+                            content += "&nbsp;</td>";
+                        }
+                    }
+                    content += "</tr>";
+                    return content;
+                });
+
+                html += '</tbody>';
+
+                this.content.find("table").append(html);
+            },
+            render: function(events) {
+            }
+        });
+
        $("#scheduler").kendoScheduler({
             height: 800,
             date: new Date("2013/6/6"),
@@ -69,25 +135,33 @@
                         { text: "Charlie", value: 3, color: "blue" }
                     ],
                     title: "Owner"
+                },{
+                    field: "ownerId",
+                    dataSource: [
+                        { text: "Alex", value: 1, color: "red" },
+                        { text: "Bob", value: 2, color: "green" },
+                        { text: "Charlie", value: 3, color: "blue" }
+                    ],
+                    title: "Owner"
                 }
             ],
             dataSource: {
                 batch: true,
                 transport: {
                     read: {
-                        url: "http://korchev:8080/service/tasks",
+                        url: "http://demos.kendoui.com/service/tasks",
                         dataType: "jsonp"
                     },
                     update: {
-                        url: "http://korchev:8080/service/tasks/update",
+                        url: "http://demos.kendoui.com/service/tasks/update",
                         dataType: "jsonp"
                     },
                     create: {
-                        url: "http://korchev:8080/service/tasks/create",
+                        url: "http://demos.kendoui.com/service/tasks/create",
                         dataType: "jsonp"
                     },
                     destroy: {
-                        url: "http://korchev:8080/service/tasks/destroy",
+                        url: "http://demos.kendoui.com/service/tasks/destroy",
                         dataType: "jsonp"
                     },
                     parameterMap: function(options, operation) {
