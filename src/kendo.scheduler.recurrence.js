@@ -15,7 +15,7 @@ kendo_module({
         date = kendo.date,
         setTime = date.setTime,
         setDayOfWeek = date.setDayOfWeek,
-        adjustForBrazillianTimezone = date.adjustForBrazillianTimezone,
+        adjustDST = date.adjustDST,
         DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
@@ -96,7 +96,7 @@ kendo_module({
 
                     if (days.length) {
                         date.setMonth(month, days.sort(numberSortPredicate)[0]);
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
 
                         if (month === date.getMonth()) {
                             break;
@@ -133,7 +133,7 @@ kendo_module({
 
                     if (yearDays.length) {
                         date.setFullYear(year, 0, yearDays.sort(numberSortPredicate)[0]);
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
                         break;
                     } else {
                         date.setFullYear(year + 1, 0, 1);
@@ -171,7 +171,7 @@ kendo_module({
                         date.setFullYear(year, 0, day);
                         setDayOfWeek(date, weekStart, -1);
 
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
                         break;
                     } else {
                         date.setFullYear(year + 1, 0, 1);
@@ -200,7 +200,7 @@ kendo_module({
 
                     if (rule._weekDayFound && interval > 1) {
                         date.setDate(date.getDate() + ((interval - 1) * 7));
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
                     }
                 }
 
@@ -211,7 +211,7 @@ kendo_module({
                 if (offset) {
                     while (date <= end && !isInWeek(date, offset, weekStart)) {
                         date.setDate(date.getDate() + 7);
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
 
                         setDayOfWeek(date, weekStart, -1);
                     }
@@ -235,7 +235,7 @@ kendo_module({
                     changed = true;
 
                     date.setHours(startHours);
-                    adjustForBrazillianTimezone(date, startHours);
+                    adjustDST(date, startHours);
 
                     if (hours.length) {
                         hours = hours[0];
@@ -243,11 +243,11 @@ kendo_module({
                     } else {
                         hours = date.getHours();
                         date.setDate(date.getDate() + 1);
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
 
                         hours = hourRules[0];
                         date.setHours(hours);
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
                     }
 
                     if (rule.minutes) {
@@ -284,7 +284,7 @@ kendo_module({
                     date.setHours(hours, minutes);
 
                     hours = hours % 24;
-                    adjustForBrazillianTimezone(date, hours);
+                    adjustDST(date, hours);
                     rule._startTime.setHours(hours, minutes, date.getSeconds());
                 }
 
@@ -397,14 +397,14 @@ kendo_module({
 
                 hours = hours % 24;
                 startTime.setHours(hours);
-                adjustForBrazillianTimezone(date, hours);
+                adjustDST(date, hours);
             },
 
             _date: function(date, rule, interval) {
                 var hours = date.getHours();
 
                 date.setDate(date.getDate() + interval);
-                if (!adjustForBrazillianTimezone(date, hours)) {
+                if (!adjustDST(date, hours)) {
                     this._hour(date, rule);
                 }
             }
@@ -468,11 +468,11 @@ kendo_module({
                         hours = date.getHours();
 
                         date.setMonth(date.getMonth() + 1);
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
 
                         while(date.getDate() !== day) {
                             date.setDate(day);
-                            adjustForBrazillianTimezone(date, hours);
+                            adjustDST(date, hours);
                         }
 
                         this._hour(date, rule);
@@ -486,7 +486,7 @@ kendo_module({
 
                 if (options.idx === 0 && !rule.monthDays && !rule.weekDays) {
                     date.setDate(options.day);
-                    adjustForBrazillianTimezone(date, hours);
+                    adjustDST(date, hours);
                 } else {
                     BaseFrequency.fn.normalize(options);
                 }
@@ -511,17 +511,17 @@ kendo_module({
                         day = date.getDate();
 
                         date.setMonth(date.getMonth() + 1);
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
 
                         while(date.getDate() !== day) {
                             date.setDate(day);
-                            adjustForBrazillianTimezone(date, hours);
+                            adjustDST(date, hours);
                         }
 
                         this._hour(date, rule);
                     } else {
                         date.setFullYear(date.getFullYear() + 1);
-                        adjustForBrazillianTimezone(date, hours);
+                        adjustDST(date, hours);
 
                         this._hour(date, rule);
                     }
@@ -548,7 +548,7 @@ kendo_module({
         var year, days;
 
         date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        adjustForBrazillianTimezone(date, 0);
+        adjustDST(date, 0);
 
         year = date.getFullYear();
 
@@ -559,8 +559,7 @@ kendo_module({
             date.setDate(date.getDate() + (4 - (date.getDay() || 7)));
         }
 
-        adjustForBrazillianTimezone(date, 0);
-
+        adjustDST(date, 0);
         days = Math.floor((date.getTime() - new Date(year, 0, 1, -6)) / 86400000);
 
         return 1 + Math.floor(days / 7);
