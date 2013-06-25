@@ -6,6 +6,7 @@
         <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
         <script src="../jquery-loader.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
@@ -35,6 +36,10 @@
 
             function setup(options) {
                 return new MonthView(container, $.extend(true, { eventHeight: 10, date: new Date(2013, 1, 2) }, options));
+            }
+
+            function equalWithRound(value, expected) {
+                QUnit.close(value, expected, 1);
             }
 
             function removeDefaultHorizontalOffset(value) {
@@ -122,9 +127,9 @@
                 var slot = view.content.find("td").eq(9);
                 var slotOffset = slot.offset();
 
-                equal(view.content.find(".k-event").length, 1);
-                equal(removeDefaultHorizontalOffset(eventOffset.left), slotOffset.left);
-                equal(eventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
+                equalWithRound(view.content.find(".k-event").length, 1);
+                equalWithRound(removeDefaultHorizontalOffset(eventOffset.left), slotOffset.left);
+                equalWithRound(eventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
             });
 
             test("position multiple events in a single slot", function() {
@@ -141,13 +146,13 @@
                 var slot = view.content.find("td").eq(9);
                 var slotOffset = slot.offset();
 
-                equal(view.content.find(".k-event").length, 2);
-                equal(removeDefaultHorizontalOffset(firstEventOffset.left), slotOffset.left);
-                equal(removeDefaultHorizontalOffset(secondEventOffset.left), slotOffset.left);
+                equalWithRound(view.content.find(".k-event").length, 2);
+                equalWithRound(removeDefaultHorizontalOffset(firstEventOffset.left), slotOffset.left);
+                equalWithRound(removeDefaultHorizontalOffset(secondEventOffset.left), slotOffset.left);
 
-                equal(firstEventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
+                equalWithRound(firstEventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
 
-                equal(secondEventOffset.top, 10 + firstEventOffset.top + 3);
+                equalWithRound(secondEventOffset.top, 10 + firstEventOffset.top + 3);
             });
 
             test("width of single day event is same as the slot", function() {
@@ -192,8 +197,8 @@
                 var firstSlot = view.content.find("td").eq(9).offset();
                 var secondSlot = view.content.find("td").eq(14).offset();
 
-                equal(removeDefaultHorizontalOffset(firstEventOffset.left), firstSlot.left);
-                equal(removeDefaultHorizontalOffset(secondEventOffset.left), secondSlot.left);
+                equalWithRound(removeDefaultHorizontalOffset(firstEventOffset.left), firstSlot.left);
+                equalWithRound(removeDefaultHorizontalOffset(secondEventOffset.left), secondSlot.left);
             });
 
             test("event on two rows has arrows added", function() {
