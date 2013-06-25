@@ -18,7 +18,8 @@ namespace Kendo.Mvc.UI
             Area = new ChartAreaSeries<T, object>();
             VerticalArea = new ChartAreaSeries<T, object>();
             OHLC = new ChartOHLCSeries<T, object>();
-            // TODO: Bullet, VerticalBullet
+            Bullet = new ChartBulletSeries<T, object>();
+            VerticalBullet = new ChartBulletSeries<T, object>();
             RadarArea = new ChartRadarAreaSeries<T, object>();
             RadarColumn = new ChartRadarColumnSeries<T, object>();
             RadarLine = new ChartRadarLineSeries<T, object>();
@@ -121,6 +122,24 @@ namespace Kendo.Mvc.UI
         /// The default settings for all ohlc series.
         /// </summary>
         public IChartOHLCSeries OHLC
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all bullet series.
+        /// </summary>
+        public IChartBulletSeries Bullet
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all vertical bullet series.
+        /// </summary>
+        public IChartBulletSeries VerticalBullet
         {
             get;
             private set;

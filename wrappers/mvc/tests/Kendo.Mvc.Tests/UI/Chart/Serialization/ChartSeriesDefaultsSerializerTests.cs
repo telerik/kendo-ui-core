@@ -247,6 +247,36 @@ namespace Kendo.Mvc.UI.Tests
             ((IDictionary<string, object>)polarScatterData).ContainsKey("type").ShouldBeFalse();
         }
 
+        [Fact]
+        public void Serializes_bullet_defaults()
+        {
+            seriesDefaults.Bullet.Color = "red";
+            GetJson(seriesDefaults).ContainsKey("bullet");
+        }
+
+        [Fact]
+        public void Strips_type_from_bullet_defaults()
+        {
+            seriesDefaults.Bullet.Color = "red";
+            var bulletData = GetJson(seriesDefaults)["bullet"];
+            ((IDictionary<string, object>)bulletData).ContainsKey("type").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_verticalBullet_defaults()
+        {
+            seriesDefaults.VerticalBullet.Color = "red";
+            GetJson(seriesDefaults).ContainsKey("verticalBullet");
+        }
+
+        [Fact]
+        public void Strips_type_from_vertical_bullet_defaults()
+        {
+            seriesDefaults.VerticalBullet.Color = "red";
+            var bulletData = GetJson(seriesDefaults)["verticalBullet"];
+            ((IDictionary<string, object>)bulletData).ContainsKey("type").ShouldBeFalse();
+        }
+
         private static IDictionary<string, object> GetJson(IChartSeriesDefaults seriesDefaults)
         {
             return seriesDefaults.CreateSerializer().Serialize();

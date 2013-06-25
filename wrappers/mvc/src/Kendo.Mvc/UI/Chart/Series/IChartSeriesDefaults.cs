@@ -91,6 +91,22 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The default settings for all bullet series.
+        /// </summary>
+        IChartBulletSeries Bullet
+        {
+            get;
+        }
+
+        /// <summary>
+        /// The default settings for all vertical bullet series.
+        /// </summary>
+        IChartBulletSeries VerticalBullet
+        {
+            get;
+        }
+
+        /// <summary>
         /// The default settings for all radar area series.
         /// </summary>
         IChartAreaSeries RadarArea

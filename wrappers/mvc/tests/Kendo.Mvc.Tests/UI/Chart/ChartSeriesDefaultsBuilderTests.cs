@@ -86,6 +86,20 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Bullet_sets_BulletSeries_options()
+        {
+            builder.Bullet().Color("color");
+            chart.SeriesDefaults.Bullet.Color.ShouldEqual("color");
+        }
+
+        [Fact]
+        public void VerticalBullet_sets_VerticalBulletSeries_options()
+        {
+            builder.VerticalBullet().Color("color");
+            chart.SeriesDefaults.VerticalBullet.Color.ShouldEqual("color");
+        }
+
+        [Fact]
         public void RadarArea_sets_RadarAreaSeries_options()
         {
             builder.RadarArea().Color("color");

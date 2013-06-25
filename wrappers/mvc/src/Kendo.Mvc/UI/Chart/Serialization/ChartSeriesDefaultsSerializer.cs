@@ -47,6 +47,12 @@ namespace Kendo.Mvc.UI
             var ohlcData = seriesDefaults.OHLC.CreateSerializer().Serialize();
             ohlcData.Remove("type");
 
+            var bulletData = seriesDefaults.Bullet.CreateSerializer().Serialize();
+            bulletData.Remove("type");
+
+            var verticalBulletData = seriesDefaults.VerticalBullet.CreateSerializer().Serialize();
+            verticalBulletData.Remove("type");
+
             var radarAreaData = seriesDefaults.RadarArea.CreateSerializer().Serialize();
             radarAreaData.Remove("type");
 
@@ -78,6 +84,8 @@ namespace Kendo.Mvc.UI
                   .Add("scatter", scatterData, () => scatterData.Count > 0)
                   .Add("scatterLine", scatterLineData, () => scatterLineData.Count > 0)
                   .Add("ohlc", ohlcData, () => ohlcData.Count > 0)
+                  .Add("bullet", bulletData, () => bulletData.Count > 0)
+                  .Add("verticalBullet", verticalBulletData, () => verticalBulletData.Count > 0)
                   .Add("radarArea", radarAreaData, () => radarAreaData.Count > 0)
                   .Add("radarColumn", radarColumnData, () => radarColumnData.Count > 0)
                   .Add("radarLine", radarLineData, () => radarLineData.Count > 0)

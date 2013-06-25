@@ -102,6 +102,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the default settings for bullet series.
+        /// </summary>
+        public virtual ChartBulletSeriesBuilder<TModel> Bullet()
+        {
+            return new ChartBulletSeriesBuilder<TModel>(chart.SeriesDefaults.Bullet);
+        }
+
+        /// <summary>
+        /// Defines the default settings for vertical bullet series.
+        /// </summary>
+        public virtual ChartBulletSeriesBuilder<TModel> VerticalBullet()
+        {
+            return new ChartBulletSeriesBuilder<TModel>(chart.SeriesDefaults.VerticalBullet);
+        }
+
+        /// <summary>
         /// Defines the default settings for radar area series.
         /// </summary>
         public virtual ChartAreaSeriesBuilder<TModel> RadarArea()
