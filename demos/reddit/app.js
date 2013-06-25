@@ -3,7 +3,7 @@ var PAGE_SIZE = 25, firstRun = true,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
     imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/i,
-    DEFAULTIMAGEURL = "reddit-default.png",
+    DEFAULTIMAGEURL = "images/reddit-default.png",
     canvasScrollView;
 
 var awwDataSource = new kendo.data.DataSource({
@@ -137,7 +137,7 @@ function renderThumbs(element) {
     element.find(".loading-thumb").each(function() {
         var thumb = $(this).data("thumb");
         if (thumb === "default") {
-            thumb = "missing-thumb.png";
+            thumb = "images/missing-thumb.png";
         }
         $(this).removeClass("loading-thumb").addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
     });
