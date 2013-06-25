@@ -1576,9 +1576,8 @@ kendo_module({
         options: {
             icon: {
                 zIndex: 1,
-                padding: 3,
-                size: 1,
-                visible: true
+                visible: true,
+                type: CIRCLE
             },
             label: {
                 zIndex: 2,
@@ -1601,8 +1600,8 @@ kendo_module({
                 icon = options.icon,
                 size = icon.size,
                 dataModelId = { data: { modelId: options.modelId } },
-                marker, width, height,
-                box = Box2D();
+                box = Box2D(),
+                marker, width, height;
 
             if (defined(label) && label.visible) {
                 note.label = new TextBox(label.text || options.value, deepExtend({}, label, dataModelId));
@@ -1615,8 +1614,8 @@ kendo_module({
                         width = note.label.box.width();
                         height = note.label.box.height();
                     }
+                    box.wrap(note.label.box);
                 }
-                box.wrap(note.label.box);
             }
 
             icon.width = width || size;
@@ -1627,7 +1626,7 @@ kendo_module({
             note.marker = marker;
             note.append(marker);
             marker.reflow(Box2D());
-            note.wrapperBox = box.wrap(marker.paddingBox);
+            note.wrapperBox = box.wrap(marker.box);
         },
 
         reflow: function(targetBox) {
@@ -1635,65 +1634,56 @@ kendo_module({
                 options = note.options,
                 center = targetBox.center(),
                 wrapperBox = note.wrapperBox,
-                width = wrapperBox.width() / 2,
-                height = wrapperBox.height() / 2,
                 distance = options.connector.distance,
+                position = options.position,
                 label = note.label,
                 marker = note.marker,
                 lineStart, box, contentBox;
 
-            if (inArray(options.position, [LEFT, RIGHT])) {
-                if (options.position === LEFT) {
-                    contentBox = Box2D(
-                        targetBox.x1 - (width + distance), center.y - height,
-                        targetBox.x1 - distance, center.y + height);
+            if (inArray(position, [LEFT, RIGHT])) {
+                if (position === LEFT) {
+                    contentBox = wrapperBox.alignTo(targetBox, position).translate(-distance, targetBox.center().y - wrapperBox.center().y);
 
                     if (options.connector.visible) {
-                        lineStart = Point2D(targetBox.x1, center.y);
+                        lineStart = Point2D(math.floor(targetBox.x1), center.y);
                         note.connectorPoints = [
                             lineStart,
-                            Point2D(contentBox.x2, center.y)
+                            Point2D(math.floor(contentBox.x2), center.y)
                         ];
                         box = contentBox.clone().wrapPoint(lineStart);
                     }
                 } else {
-                    contentBox = Box2D(
-                        targetBox.x2 + distance, center.y - height,
-                        targetBox.x2 + width + distance, center.y + height);
+                    contentBox = wrapperBox.alignTo(targetBox, position).translate(distance, targetBox.center().y - wrapperBox.center().y);
 
                     if (options.connector.visible) {
-                        lineStart = Point2D(targetBox.x2, center.y);
+                        lineStart = Point2D(math.floor(targetBox.x2), center.y);
                         note.connectorPoints = [
                             lineStart,
-                            Point2D(contentBox.x1, center.y)
+                            Point2D(math.floor(contentBox.x1), center.y)
                         ];
                         box = contentBox.clone().wrapPoint(lineStart);
                     }
                 }
             } else {
-                if (options.position === BOTTOM) {
-                    contentBox = Box2D(
-                        center.x - width, targetBox.y2 + distance,
-                        center.x + width, targetBox.y2 + height + distance);
+                if (position === BOTTOM) {
+                    contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, distance);
 
                     if (options.connector.visible) {
-                        lineStart = Point2D(center.x, targetBox.y2);
+                        lineStart = Point2D(math.floor(center.x), math.floor(targetBox.y2));
                         note.connectorPoints = [
                             lineStart,
-                            Point2D(center.x, contentBox.y1)
+                            Point2D(math.floor(center.x), math.floor(contentBox.y1))
                         ];
                         box = contentBox.clone().wrapPoint(lineStart);
                     }
                 } else {
-                    contentBox = Box2D(
-                        center.x - width, targetBox.y1 - distance,
-                        center.x + width, targetBox.y1 - (distance + height));
+                    contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, -distance);
 
                     if (options.connector.visible) {
-                        lineStart = Point2D(center.x, targetBox.y1);
+                        lineStart = Point2D(math.floor(center.x), math.floor(targetBox.y1));
                         note.connectorPoints = [
                             lineStart,
-                            Point2D(center.x, contentBox.y1)
+                            Point2D(math.floor(center.x), math.floor(contentBox.y2))
                         ];
                         box = contentBox.clone().wrapPoint(lineStart);
                     }
@@ -1707,8 +1697,8 @@ kendo_module({
             if (label) {
                 label.reflow(contentBox);
                 if (marker) {
-                    if (label.options.position === OUTSIDE) {
-                        label.box.alignTo(marker.box, options.position);
+                    if (options.label.position === OUTSIDE) {
+                        label.box.alignTo(marker.box, position);
                     }
                     label.reflow(label.box);
                 }

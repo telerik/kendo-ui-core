@@ -151,13 +151,13 @@ kendo_module({
                 },
                 note: {
                     icon: {
+                        size: 7,
                         border: {
                             width: 1
-                        },
-                        padding: 5,
-                        size: 1
+                        }
                     },
                     label: {
+                        padding: 3,
                         font: SANS12
                     },
                     connector: {
@@ -187,19 +187,20 @@ kendo_module({
                 },
                 note: {
                     icon: {
+                        size: 7,
                         border: {
                             width: 1
-                        },
-                        padding: 5,
-                        size: 1
+                        }
                     },
                     label: {
+                        padding: 3,
                         font: SANS12
                     },
                     connector: {
                         distance: 10,
                         width: 1
-                    }
+                    },
+                    visible: true
                 }
             },
             tooltip: {
