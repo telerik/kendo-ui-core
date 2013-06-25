@@ -69,7 +69,7 @@ kendo_module({
 
             function capture(e) {
                 if (that.transitioning) {
-                    e.stopPropagation();
+                    e.preventDefault();
                 }
             }
 

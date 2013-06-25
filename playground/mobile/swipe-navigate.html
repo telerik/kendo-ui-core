@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.touch.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.modalview.js"></script>
+        <script src="../../src/kendo.mobile.tabstrip.js"></script>
+    </head>
+    <body>
+        <div data-role="view" id="tabstrip-profile" data-title="Profile" data-layout="mobile-tabstrip">
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li>Profile
+                    <ul>
+                        <li>
+                            <h2>Carine <span>Callahan</span></h2>
+                            <img src="http://demos.kendoui.com/content/mobile/overview/carine.jpg" /></li>
+                        <li>Weekly average sales <span class="sales-up">$ 8,250</span></li>
+                        <li>Monthly average sales <span class="sales-up">$ 32,000</span></li>
+                    </ul>
+                </li>
+                <li>Languages
+                    <ul>
+                        <li>English <span class="value">Native</span></li>
+                        <li>Hungarian <span class="value">Advanced</span></li>
+                        <li>French <span class="value">Advanced</span></li>
+                        <li>Chinese <span class="value">Beginner</span></li>
+                    </ul>
+                </li>
+                <li>Sales commodity
+                    <ul>
+                        <li>Beverages</li>
+                        <li>Condiments</li>
+                        <li>Confections</li>
+                        <li>Diary Products</li>
+                        <li>Grains/Cereals</li>
+                        <li>Meat/Poultry</li>
+                        <li>Produce</li>
+                        <li>Seafood</li>
+                    </ul>
+                </li>
+                <li>PC Skills
+                    <ul>
+                        <li>MS Word</li>
+                        <li>MS Excel</li>
+                        <li>MS Outlook</li>
+                        <li>MS PowerPoint</li>
+                        <li>MS Project</li>
+                        <li>Windows (XP, Vista)</li>
+                        <li>Internet</li>
+                        <li>SAP - Sales and Marketing Module</li>
+                        <li>MS Visual Studio</li>
+                        <li>Adobe Acrobat</li>
+                        <li>CorelDraw</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="view" id="tabstrip-sales" data-title="Sales History" data-layout="mobile-tabstrip">
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li>Sales 2011
+                    <ul>
+                        <li>January <span class="sales-up">&uarr; $ 35,000</span></li>
+                        <li>February <span class="sales-down">&darr; $ 25,000</span></li>
+                        <li>March <span class="sales-down">&darr; $ 23,000</span></li>
+                        <li>April <span class="sales-up">&uarr; $ 30,000</span></li>
+                        <li>May <span class="sales-up">&uarr; $ 31,000</span></li>
+                        <li>June <span class="sales-down">&darr; $ 29,000</span></li>
+                        <li>July <span class="sales-up">&uarr; $ 35,000</span></li>
+                        <li>August <span class="sales-up">&uarr; $ 37,000</span></li>
+                        <li>September <span class="sales-hold">&rarr; $ 37,000</span></li>
+                        <li>October <span class="sales-hold">&rarr; $ 37,000</span></li>
+                        <li>November <span class="sales-up">&uarr; $ 38,000</span></li>
+                        <li>December <span class="sales-up">&uarr; $ 40,000</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="view" id="tabstrip-rating" data-title="Rating" data-layout="mobile-tabstrip">
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li>Sales Representatives
+                    <ul>
+                        <li data-icon="toprated">1. Andrew Fuller</li>
+                        <li data-icon="toprated">2. Janet Leverling</li>
+                        <li data-icon="toprated" style="background-color: #3589e7; color: #fff;">3. Carine Callahan</li>
+                        <li data-icon="toprated">4. Margaret Johnson</li>
+                        <li data-icon="toprated">5. Steve Collins</li>
+                        <li data-icon="toprated">6. Maria Steward</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="view" id="tabstrip-settings" data-title="Settings" data-layout="mobile-tabstrip">
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li>Carine Callahan
+                    <ul>
+                        <li>Notify when online
+                            <input type="checkbox" data-role="switch" checked></li>
+                        <li>Administrator
+                            <input type="checkbox" data-role="switch"></li>
+                        <li>Access to stats
+                            <input type="checkbox" data-role="switch" checked></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="layout" data-id="mobile-tabstrip">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <!--<a class="nav-button" data-align="left" data-role="backbutton">Back</a>-->
+                    <span data-role="view-title"></span>
+                    <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+                </div>
+            </header>
+
+            <p>TabStrip</p>
+
+            <div data-role="footer">
+                <div data-role="tabstrip">
+                    <a href="#tabstrip-profile" data-icon="contacts">Profile
+                        </a><a href="#tabstrip-sales" data-icon="history">Sales
+                        </a><a href="#tabstrip-rating" data-icon="favorites">Rating
+                    </a><a href="#tabstrip-settings" data-icon="settings">Settings</a>
+                </div>
+            </div>
+        </div>
+
+        <style scoped>
+            #tabstrip-profile h2 {
+                display: inline-block;
+                font-size: 1.1em;
+                margin: 1.5em 0 0 1em;
+            }
+
+            #tabstrip-profile h2 span {
+                display: block;
+                clear: both;
+                font-size: 2em;
+                margin: .2em 0 0 0;
+            }
+
+            #tabstrip-profile img {
+                width: 5em;
+                height: 5em;
+                float: left;
+                margin: 1em;
+                -webkit-box-shadow: 0 1px 3px #333;
+                box-shadow: 0 1px 3px #333;
+                -webkit-border-radius: 8px;
+                border-radius: 8px;
+            }
+
+            .sales-down,
+            .sales-hold,
+            .sales-up,
+            .value {
+                float: right;
+            }
+
+            .sales-up {
+                color: green;
+            }
+
+            .sales-down {
+                color: red;
+            }
+
+            .sales-hold {
+                color: blue;
+            }
+
+            .value {
+                color: #bbb;
+            }
+        </style>
+        <script>
+            $(document.body).kendoTouch({
+                enableSwipe: true,
+                minXDelta: 20,
+                swipe: function (e) {
+                    console.log("swipe " + e.direction);
+                    if (e.direction == "right") {
+                        if (app.pane.history.length > 1) {
+                            app.navigate("#:back");
+                        }
+                    }
+                }
+            });
+        </script>
+        <script>
+            var app = new kendo.mobile.Application(document.body, { transition: "slide" });
+        </script>
+    </body>
+</html>
