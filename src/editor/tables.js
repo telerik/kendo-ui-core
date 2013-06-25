@@ -267,6 +267,8 @@ var DeleteRowCommand = Command.extend({
             focusElement;
 
         if (rowCount == 1 || (rowCount == 2 && table._editor)) {
+            focusElement = dom.next(table) || dom.prev(table);
+
             dom.remove(table);
         } else {
             dom.removeTextSiblings(row);
@@ -275,7 +277,9 @@ var DeleteRowCommand = Command.extend({
             focusElement = focusElement.cells[0];
 
             dom.remove(row);
+        }
 
+        if (focusElement) {
             range.setStart(focusElement, 0);
             range.collapse(true);
             this.editor.selectRange(range);
