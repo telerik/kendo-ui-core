@@ -280,6 +280,12 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The initial value of the Barcode</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The width of the barcode in pixels.  By default the width is 300.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
