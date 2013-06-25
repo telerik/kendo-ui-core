@@ -68,12 +68,13 @@
 
             asyncTest("scheduler binds when resources and events are loaded", 2, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     dataSource:  {
                         transport: {
                             read: function(options) {
                                 setTimeout(function() {
                                     options.success([
-                                        { start: new Date(), end: new Date(), title: "foo" }
+                                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:00"), title: "foo" }
                                     ]);
                                 }, 1);
                             }
@@ -174,6 +175,7 @@
 
             test("resource color is applied as the background of the event in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -184,8 +186,8 @@
                         }
                     ],
                     dataSource: [
-                        { start: new Date(), end: new Date(), title: "", foo: 2 },
-                        { start: new Date(), end: new Date(), title: "", foo: 1 },
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:33"), title: "", foo: 1 }
                     ],
                     views: [ "day" ]
                 });
@@ -198,6 +200,7 @@
 
             test("resource color is applied as the background of the event in day view when using valuePrimitive is false", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -209,8 +212,8 @@
                         }
                     ],
                     dataSource: [
-                        { start: new Date(), end: new Date(), title: "", foo: { value: 2 } },
-                        { start: new Date(), end: new Date(), title: "", foo: { value: 1 } },
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: { value: 2 }},
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:33"), title: "", foo: { value: 1 }}
                     ],
                     views: [ "day" ]
                 });
@@ -223,6 +226,7 @@
 
             test("resource color is applied as the background of the event in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -233,8 +237,8 @@
                         }
                     ],
                     dataSource: [
-                        { start: new Date(), end: new Date(), title: "", foo: 2 },
-                        { start: new Date(), end: new Date(), title: "", foo: 1 },
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:33"), title: "", foo: 1 }
                     ],
                     views: [ "week" ]
                 });
@@ -247,6 +251,7 @@
 
             test("background is not changed if the event doesn't have a resource in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -257,7 +262,7 @@
                         }
                     ],
                     dataSource: [
-                        { start: new Date(), end: new Date(), title:"" },
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "" }
                     ],
                     views: [ "week" ]
                 });
@@ -269,6 +274,7 @@
 
             test("resource color is applied as the background of the event in month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -279,8 +285,8 @@
                         }
                     ],
                     dataSource: [
-                        { start: new Date(), end: new Date(), title: "", foo: 2 },
-                        { start: new Date(), end: new Date(), title: "", foo: 1 },
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: "", foo: 1 }
                     ],
                     views: [ "month" ]
                 });
@@ -293,6 +299,7 @@
 
             test("background is not changed if the event doesn't have a resource in month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -303,7 +310,7 @@
                         }
                     ],
                     dataSource: [
-                        { start: new Date(), end: new Date(), title:"" },
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: "" }
                     ],
                     views: [ "month" ]
                 });
@@ -315,6 +322,7 @@
 
             test("resource color is applied as the background of the event in agenda view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -325,8 +333,8 @@
                         }
                     ],
                     dataSource: [
-                        { start: new Date(), end: new Date(), title: "", foo: 2 },
-                        { start: new Date(), end: new Date(), title: "", foo: 1 },
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:30"), title: "", foo: 1 }
                     ],
                     views: [ "agenda" ]
                 });
@@ -339,6 +347,7 @@
 
             test("multiple resources are passed to template", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -350,7 +359,7 @@
                         }
                     ],
                     dataSource: [
-                        { start: new Date(), end: new Date(), title: "", foo: [2, 1] },
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "", foo: [2, 1] }
                     ],
                     views: [{
                         type: "agenda",
@@ -366,6 +375,7 @@
 
             test("the first resource color is used when multiple resources are present", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -377,7 +387,7 @@
                         }
                     ],
                     dataSource: [
-                        { start: new Date(), end: new Date(), title: "", foo: [2, 1] },
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "", foo: [2, 1] }
                     ],
                     views: ["agenda"]
                 });
@@ -393,6 +403,7 @@
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -418,10 +429,11 @@
 
             test("scheduler creates a multiselect in the popup form for resources which allow multiple values", function() {
                 var event = new kendo.data.SchedulerEvent({
-                    start: new Date(), end: new Date(), title: ""
+                    start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: ""
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -446,10 +458,11 @@
 
             test("the dropdownlist items have the color of the event", function() {
                 var event = new kendo.data.SchedulerEvent({
-                    start: new Date(), end: new Date(), title: ""
+                    start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: ""
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -474,10 +487,11 @@
 
             test("the multiselect items have the color of the event", function() {
                 var event = new kendo.data.SchedulerEvent({
-                    start: new Date(), end: new Date(), title: ""
+                    start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: ""
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -503,10 +517,11 @@
 
             test("selecting a value from the resource dropdownlist sets the resource field of the event", function() {
                 var event = new kendo.data.SchedulerEvent({
-                    start: new Date(), end: new Date(), title: ""
+                    start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: ""
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -532,10 +547,11 @@
 
             test("selecting a value from the resource multiselect sets the resource field of the event", function() {
                 var event = new kendo.data.SchedulerEvent({
-                    start: new Date(), end: new Date(), title: ""
+                    start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: ""
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -562,11 +578,12 @@
 
             test("the current resource is selected in the dropdownlist", function() {
                 var event = new kendo.data.SchedulerEvent({
-                    start: new Date(), end: new Date(), title: "",
+                    start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: "",
                     foo: {  value: 2 }
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -589,11 +606,12 @@
 
             test("the current resource is selected in the multiselect", function() {
                 var event = new kendo.data.SchedulerEvent({
-                    start: new Date(), end: new Date(), title: "",
+                    start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: "",
                     foo: [{  value: 2 }]
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -617,11 +635,12 @@
 
             test("selecting an item from the multiselect adds a resource item to the current resources array of the event", function() {
                 var event = new kendo.data.SchedulerEvent({
-                    start: new Date(), end: new Date(), title: "",
+                    start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: "",
                     foo: [ 2 ]
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
@@ -649,11 +668,12 @@
 
             test("selecting the option label sets the resource field of the event to null", function() {
                 var event = new kendo.data.SchedulerEvent({
-                    start: new Date(), end: new Date(), title: "",
+                    start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:30"), title: "",
                     foo: {  value: 2 }
                 });
 
                 var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
                     resources: [
                         {
                             field: "foo",
