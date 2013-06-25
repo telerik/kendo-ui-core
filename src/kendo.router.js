@@ -112,7 +112,7 @@ kendo_module({
             }
         },
 
-        _checkUrl: function(e) {
+        _checkUrl: function() {
             var that = this,
                 current = that._currentLocation().replace(hashStrip, ''),
                 back = current === that.locations[that.locations.length - 2];
