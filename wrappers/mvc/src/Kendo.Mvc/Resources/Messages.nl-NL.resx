@@ -193,7 +193,7 @@
     <value>Toon items met waarde</value>
   </data>
   <data name="Filter_StringEndsWith" xml:space="preserve">
-    <value>Eindigd op</value>
+    <value>EindigT op</value>
   </data>
   <data name="Filter_StringIsEqualTo" xml:space="preserve">
     <value>Is gelijk aan</value>
