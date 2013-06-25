@@ -49,6 +49,8 @@ kendo_module({
         TODAY = getDate(new Date()),
         RECURRENCE_DATE_FORMAT = "yyyyMMddTHHmmssZ",
         DELETECONFIRM = "Are you sure you want to delete this event?",
+        DELETERECURRING = "Do you want to delete only this event occurrence or the whole series?",
+        EDITRECURRING = "Do you want to edit only this event occurrence or the whole series?",
         COMMANDBUTTONTMPL = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>',
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
@@ -460,15 +462,15 @@ kendo_module({
 
         _showMessage: function(text, callback) {
             var that = this,
-                html = kendo.format("<div><span>{0}</span>", text),
+                html = kendo.format("<div class='k-popup-edit-form'><div class='k-edit-form-container'><p class='k-popup-message'>{0}</p>", text),
                 messages = this.options.messages,
                 destroyText = messages.destroy,
                 cancelText = messages.cancel,
                 attr;
 
-            html += '<div class="k-edit-buttons">';
+            html += '<div class="k-edit-buttons k-state-default">';
             html += that._createButton({ name: "destroy", text: destroyText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
-            html += '</div></div>';
+            html += '</div></div></div>';
 
             var wnd = $(html).appendTo(this.wrapper).eq(0)
                 .on("click", ".k-button", function(e) {
@@ -731,7 +733,10 @@ kendo_module({
 
         _editRecurringDialog: function(model, uid) {
             var that = this,
-                wnd = $('<div><button class="k-button">Edit current occurrence</button><button class="k-button">Edit the series</button></div>'),
+                wnd = $('<div class="k-popup-edit-form k-scheduler-dialog"><div class="k-edit-form-container">' +
+                        '<p class="k-popup-message">' + EDITRECURRING + '</p>' +
+                        '<div class="k-edit-buttons k-state-default"><button class="k-button">Edit current occurrence</button><button class="k-button">Edit the series</button></div>' +
+                        '</div></div>'),
                 buttons = wnd.find("button"),
                 id, idField;
 
@@ -880,7 +885,10 @@ kendo_module({
         _deleteRecurringDialog: function(model, uid) {
             var that = this,
                 isException = !model,
-                wnd = $('<div><button class="k-button">Delete current occurrence</button><button class="k-button">Delete the series</button></div>'),
+                wnd = $('<div class="k-popup-edit-form k-scheduler-dialog"><div class="k-edit-form-container">' +
+                        '<p class="k-popup-message">' + DELETERECURRING + '</p>' +
+                        '<div class="k-edit-buttons k-state-default"><button class="k-button">Delete current occurrence</button><button class="k-button">Delete the series</button></div>' +
+                        '</div></div>'),
                 buttons = wnd.find("button"),
                 id, idField;
 
