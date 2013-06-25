@@ -693,6 +693,11 @@
     <Content Include="Areas\aspx\Views\dataviz\radial_gauge\scale_options.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\panelbar\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\scheduler\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\scheduler\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\scheduler\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\scheduler\resources.aspx" />
+    <Content Include="Areas\aspx\Views\web\scheduler\templates.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\api.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\events.aspx" />
