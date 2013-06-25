@@ -17,6 +17,7 @@ namespace Kendo.Mvc.UI
             var result = new Dictionary<string, object>();
 
             FluentDictionary.For(result)
+                .Add("seconds", baseUnits.Seconds, () => baseUnits.Seconds != null)
                 .Add("minutes", baseUnits.Minutes, () => baseUnits.Minutes != null)
                 .Add("hours", baseUnits.Hours, () => baseUnits.Hours != null)
                 .Add("days", baseUnits.Days, () => baseUnits.Days != null)

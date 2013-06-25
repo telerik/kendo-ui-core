@@ -144,13 +144,15 @@ kendo_module({
         ROUNDED_GLASS = "roundedGlass",
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
+        SECONDS = "seconds",
         SELECT_START = "selectStart",
         SELECT = "select",
         SELECT_END = "selectEnd",
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
         STRING = "string",
-        TIME_PER_MINUTE = 60000,
+        TIME_PER_SECOND = 1000,
+        TIME_PER_MINUTE = 60 * TIME_PER_SECOND,
         TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
         TIME_PER_DAY = 24 * TIME_PER_HOUR,
         TIME_PER_WEEK = 7 * TIME_PER_DAY,
@@ -162,7 +164,8 @@ kendo_module({
             "weeks": TIME_PER_WEEK,
             "days": TIME_PER_DAY,
             "hours": TIME_PER_HOUR,
-            "minutes": TIME_PER_MINUTE
+            "minutes": TIME_PER_MINUTE,
+            "seconds": TIME_PER_SECOND
         },
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
@@ -186,10 +189,11 @@ kendo_module({
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd",
         BASE_UNITS = [
-            MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
+            SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ];
 
     var DateLabelFormats = {
+        seconds: "HH:mm:ss",
         minutes: "HH:mm",
         hours: "HH:mm",
         days: "M/d",
@@ -2056,6 +2060,7 @@ kendo_module({
                 dateFormats: DateLabelFormats
             },
             autoBaseUnitSteps: {
+                seconds: [1, 2, 5, 15, 30],
                 minutes: [1, 2, 5, 15, 30],
                 hours: [1, 2, 3],
                 days: [1, 2, 3],
@@ -2134,8 +2139,10 @@ kendo_module({
                             unit = DAYS;
                         } else if (minDiff >= TIME_PER_HOUR) {
                             unit = HOURS;
-                        } else {
+                        } else if (minDiff >= TIME_PER_MINUTE) {
                             unit = MINUTES;
+                        } else {
+                            unit = SECONDS;
                         }
                     }
                 }
@@ -9359,7 +9366,11 @@ kendo_module({
             } else if (unit === MINUTES) {
                 result = new Date(date.getTime() + value * TIME_PER_MINUTE);
                 result.setSeconds(0);
+            } else if (unit === SECONDS) {
+                result = new Date(date.getTime() + value * TIME_PER_SECOND);
             }
+
+            result.setMilliseconds(0);
         }
 
         return result;

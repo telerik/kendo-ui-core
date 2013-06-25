@@ -835,6 +835,12 @@ categoryAxis.baseUnitStep is set to "auto".</description>
             <type>Object</type>
         </attribute>
         <attribute>
+            <description>The seconds unit steps.</description>
+            <name>seconds</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
             <description>The weeks unit steps.</description>
             <name>weeks</name>
             <rtexprvalue>true</rtexprvalue>

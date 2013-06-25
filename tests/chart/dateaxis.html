@@ -532,6 +532,118 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Seconds");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 11:00:00"), new Date("2012/02/05 11:00:05")
+                        ]
+                    });
+
+                    equal(dateAxis.options.baseUnit, "seconds");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:00:02")
+                        ]
+                    });
+
+                    deepEqual($.map(view.log.text, function(text) { return text.content }),
+                         ["10:00:00", "10:00:01", "10:00:02"]);
+                });
+
+                test("automatic base unit step is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:00:10")
+                        ],
+                        baseUnitStep: "auto",
+                        maxDateGroups: 6
+                    });
+
+                    equal(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("automatic base unit step is increased to satisfy maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:00:10")
+                        ],
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { seconds: [1] },
+                        maxDateGroups: 6
+                    });
+
+                    equal(dateAxis.options.baseUnitStep, 2);
+                });
+
+                test("base unit step is limited to specified value", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:00:05")
+                        ],
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { seconds: [10] }
+                    });
+
+                    equal(dateAxis.options.baseUnitStep, 10);
+                });
+
+                test("base unit is not chosen if it has no valid automatic steps", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:00:05")
+                        ],
+                        baseUnit: "fit",
+                        baseUnitStep: "auto",
+                        autoBaseUnitSteps: { seconds: [] }
+                    });
+
+                    equal(dateAxis.options.baseUnit, "minutes");
+                });
+
+                test("automatic base unit (minutes) is chosen according to maxDateGroups", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:00:50")
+                        ],
+                        baseUnit: "fit",
+                        autoBaseUnitSteps: { seconds: [1] },
+                        maxDateGroups: 5
+                    });
+
+                    equal(dateAxis.options.baseUnit, "minutes");
+                });
+
+                test("maxDateGroups keeps user set base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:00:50")
+                        ],
+                        autoBaseUnitSteps: { seconds: [1] },
+                        baseUnit: "seconds",
+                        maxDateGroups: 5
+                    });
+
+                    equal(dateAxis.options.baseUnit, "seconds");
+                });
+
+                test("maxDateGroups constraint has lower priority than base unit step", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:00:10")
+                        ],
+                        maxDateGroups: 6,
+                        baseUnitStep: 1
+                    });
+
+                    equal(dateAxis.options.baseUnitStep, 1);
+                });
+
+                // ------------------------------------------------------------
                 module("Date CategoryAxis / No Rounding");
 
                 test("Major ticks are positioned at exact time", function() {

@@ -6,21 +6,12 @@ class ChartCategoryAxisItemAutoBaseUnitSteps extends \kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The days unit steps.
+    * The seconds unit steps.
     * @param array $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemAutoBaseUnitSteps
     */
-    public function days($value) {
-        return $this->setProperty('days', $value);
-    }
-
-    /**
-    * The hours unit steps.
-    * @param array $value
-    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemAutoBaseUnitSteps
-    */
-    public function hours($value) {
-        return $this->setProperty('hours', $value);
+    public function seconds($value) {
+        return $this->setProperty('seconds', $value);
     }
 
     /**
@@ -33,12 +24,21 @@ class ChartCategoryAxisItemAutoBaseUnitSteps extends \kendo\SerializableObject {
     }
 
     /**
-    * The months unit steps.
+    * The hours unit steps.
     * @param array $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemAutoBaseUnitSteps
     */
-    public function months($value) {
-        return $this->setProperty('months', $value);
+    public function hours($value) {
+        return $this->setProperty('hours', $value);
+    }
+
+    /**
+    * The days unit steps.
+    * @param array $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemAutoBaseUnitSteps
+    */
+    public function days($value) {
+        return $this->setProperty('days', $value);
     }
 
     /**
@@ -48,6 +48,15 @@ class ChartCategoryAxisItemAutoBaseUnitSteps extends \kendo\SerializableObject {
     */
     public function weeks($value) {
         return $this->setProperty('weeks', $value);
+    }
+
+    /**
+    * The months unit steps.
+    * @param array $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemAutoBaseUnitSteps
+    */
+    public function months($value) {
+        return $this->setProperty('months', $value);
     }
 
     /**

@@ -621,7 +621,7 @@
 
             module("Date helpers / floorDate", {
                 setup: function() {
-                    date = new Date("2012/03/29 17:40:10");
+                    date = new Date("2012/03/29 17:40:10.100");
                 }
             });
 
@@ -653,6 +653,10 @@
                 deepEqual(floorDate(date, "minutes"), new Date("2012/03/29 17:40"));
             });
 
+            test("floorDate rounds date down to seconds", function() {
+                deepEqual(floorDate(date, "seconds"), new Date("2012/03/29 17:40:10"));
+            });
+
             test("floorDate returns undefined when no date is specified", function() {
                 equal(floorDate(), undefined);
             });
@@ -664,7 +668,7 @@
             // ------------------------------------------------------------
             module("Date helpers / ceilDate", {
                 setup: function() {
-                    date = new Date("2012/03/29 17:40:10");
+                    date = new Date("2012/03/29 17:40:10.100");
                 }
             });
 
@@ -731,10 +735,21 @@
                 deepEqual(ceilDate(date, "minutes"), new Date("2012/03/29 17:41"));
             });
 
-            test("ceilDate does not increment minute for dates divisable by the baseUnit", function() {
+            test("ceilDate rounds date up to seconds", function() {
+                deepEqual(ceilDate(date, "seconds"), new Date("2012/03/29 17:40:11"));
+            });
+
+            test("ceilDate does not increment minutes for exact minutes", function() {
                 deepEqual(
                     ceilDate(new Date("2013/01/01 00:00"), "minutes"),
                     new Date("2013/01/01 00:00")
+                );
+            });
+
+            test("ceilDate does not increment seconds for exact seconds", function() {
+                deepEqual(
+                    ceilDate(new Date("2013/01/01 00:00"), "seconds"),
+                    new Date("2013/01/01 00:00:00")
                 );
             });
 
@@ -789,6 +804,10 @@
 
             test("calculates duration in minutes", function() {
                 equal(duration(dateA, dateB, "minutes"), 610860);
+            });
+
+            test("calculates duration in seconds", function() {
+                equal(duration(dateA, dateB, "seconds"), 610860 * 60);
             });
 
             // ------------------------------------------------------------
@@ -858,20 +877,36 @@
                 );
             });
 
+            test("Adding seconds skips DST start", function() {
+                deepEqual(addDuration(new Date("2012/03/25 02:59"), 60, "seconds"),
+                     new Date("2012/03/25 04:00:00")
+                );
+            });
+
             test("Adding hours skips DST end", function() {
-                deepEqual(addDuration(new Date("2012/10/28 03:00"), 1, "hours"),
+                deepEqual(addDuration(new Date("2012/10/28 02:00"), 2, "hours"),
                      new Date("2012/10/28 04:00:00")
                 );
             });
 
-            test("Adding minutes repeats DST end", function() {
-                deepEqual(addDuration(new Date("2012/10/28 02:00"), 150, "minutes"),
-                     new Date("2012/10/28 03:30:00")
+            test("Adding minutes includes duplicate DST end", function() {
+                deepEqual(addDuration(new Date("2012/10/28 02:00"), 180, "minutes"),
+                     new Date("2012/10/28 04:00:00")
+                );
+            });
+
+            test("Adding seconds includes duplicate DST end", function() {
+                deepEqual(addDuration(new Date("2012/10/28 02:00"), 180 * 60, "seconds"),
+                     new Date("2012/10/28 04:00:00")
                 );
             });
 
             test("rounds date to minutes", function() {
-                deepEqual(addDuration(dateA, 75, "minutes"), new Date("2010/01/01 11:15"));
+                deepEqual(addDuration(dateA, 75.1, "minutes"), new Date("2010/01/01 11:15"));
+            });
+
+            test("rounds date to seconds", function() {
+                deepEqual(addDuration(dateA, 75.1, "seconds"), new Date("2010/01/01 10:01:15"));
             });
 
             // ------------------------------------------------------------

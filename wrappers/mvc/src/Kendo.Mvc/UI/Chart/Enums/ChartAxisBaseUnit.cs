@@ -6,32 +6,37 @@ namespace Kendo.Mvc.UI
     public enum ChartAxisBaseUnit
     {
         /// <summary>
-        /// Hours.
+        /// Seconds
         /// </summary>
-        Hours,
+        Seconds,
 
         /// <summary>
-        /// Days.
-        /// </summary>
-        Days,
-
-        /// <summary>
-        /// Minutes.
+        /// Minutes
         /// </summary>
         Minutes,
 
         /// <summary>
-        /// Months.
+        /// Hours
+        /// </summary>
+        Hours,
+
+        /// <summary>
+        /// Days
+        /// </summary>
+        Days,
+
+        /// <summary>
+        /// Months
         /// </summary>
         Months,
 
         /// <summary>
-        /// Weeks.
+        /// Weeks
         /// </summary>
         Weeks,
 
         /// <summary>
-        /// Years.
+        /// Years
         /// </summary>
         Years,
 

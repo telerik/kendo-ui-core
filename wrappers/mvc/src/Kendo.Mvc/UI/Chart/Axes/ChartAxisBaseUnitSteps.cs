@@ -5,6 +5,16 @@ namespace Kendo.Mvc.UI
     public class ChartAxisBaseUnitSteps
     {
         /// <summary>
+        /// The discrete baseUnitStep values when baseUnit is set to Seconds and
+        /// baseUnitStep is set to Auto.
+        /// </summary>
+        public int[] Seconds
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The discrete baseUnitStep values when baseUnit is set to Minutes and
         /// baseUnitStep is set to Auto.
         /// </summary>
