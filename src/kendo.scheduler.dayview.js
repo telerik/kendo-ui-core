@@ -743,7 +743,7 @@ kendo_module({
                            element.appendTo(container);
                        }
 
-                   } else {
+                   } else if (allDaySlots.length) {
                        if (dateSlotIndex < 0) {
                            dateSlotIndex = 0;
                        }
