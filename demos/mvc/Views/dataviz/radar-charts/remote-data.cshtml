@@ -5,7 +5,6 @@
     <script>
         function createChart() {
             $("#chart").kendoChart({
-
                 title: {
                     text: "Budget report"
                 },
@@ -21,8 +20,10 @@
                     type: "radarLine",
                 },
                 series: [{
+                    name: "Budget",
                     field: "budget"
                 }, {
+                    name: "Spending",
                     field: "spending"
                 }],
                 categoryAxis: {
