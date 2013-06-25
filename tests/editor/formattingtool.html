@@ -161,6 +161,22 @@
             ok(tool.wrapper.is(".k-state-disabled"));
         });
 
+        test("tool shows current format", function() {
+            setFormattingItems(inline, [
+                { text: "red", value: "h1.red" },
+                { text: "blue", value: "p.blue" },
+                { text: "heading 2", value: "h2" }
+            ]);
+
+            var tool = formattingTool(inline);
+
+            selectFromValue(inline, '<p>f|o|o</p>');
+            equal(tool.text(), tool.options.title);
+
+            selectFromValue(inline, '<h2>f|o|o</h2>');
+            equal(tool.text(), "heading 2");
+        });
+
 
     </script>
 

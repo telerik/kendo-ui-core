@@ -32,9 +32,7 @@ var FormattingTool = DelayedExecutionTool.extend({
         var blockFinder = new BlockFormatFinder([{ tags: dom.blockElements }]);
 
         that.finder = {
-            getFormat: function(nodes) {
-                return inlineFinder.getFormat(nodes) || blockFinder.getFormat(nodes);
-            }
+            getFormat: function() { return ""; }
         };
     },
 
@@ -123,8 +121,6 @@ var FormattingTool = DelayedExecutionTool.extend({
                 for (i = 0; i < items.length; i++) {
                     items[i] = that.toFormattingItem(items[i]);
                 }
-
-                this.decorate(ui[0].ownerDocument);
             },
             highlightFirst: false,
             template: kendo.template(
@@ -137,6 +133,35 @@ var FormattingTool = DelayedExecutionTool.extend({
                 .removeClass("k-" + toolName)
                 .find("*").addBack()
                     .attr("unselectable", "on");
+    },
+
+    getFormattingValue: function(items, nodes) {
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            var tag = item.tag || item.context || "";
+            var className = item.className ? "."+item.className : "";
+            var selector = tag + className;
+
+            var element = $(nodes[0]).closest(selector)[0];
+
+            if (!element) {
+                continue;
+            }
+
+            if (nodes.length == 1) {
+                return item.value;
+            }
+
+            for (var n = 1; n < nodes.length; n++) {
+                if ($(nodes[n]).closest(selector)[0] != element) {
+                    break;
+                } else if (n == nodes.length - 1) {
+                    return item.value;
+                }
+            }
+        }
+
+        return "";
     },
 
     update: function(ui, nodes) {
@@ -161,6 +186,8 @@ var FormattingTool = DelayedExecutionTool.extend({
         dataSource.filter([{ field: "visible", operator: "eq", value: true }]);
 
         DelayedExecutionTool.fn.update.call(this, ui, nodes);
+
+        selectBox.value(this.getFormattingValue(dataSource.view(), nodes));
 
         selectBox.wrapper.toggleClass("k-state-disabled", !dataSource.view().length);
     }
