@@ -2060,7 +2060,7 @@ kendo_module({
                 dateFormats: DateLabelFormats
             },
             autoBaseUnitSteps: {
-                seconds: [1, 2, 10, 30],
+                seconds: [1, 2, 5, 15, 30],
                 minutes: [1, 2, 5, 15, 30],
                 hours: [1, 2, 3],
                 days: [1, 2, 3],
