@@ -17,6 +17,35 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// The discrete BaseUnitStep values when BaseUnit is set to Seconds and
+        /// BaseUnitStep is set to 0 (auto).
+        /// </summary>
+        /// <param name="steps">The discrete steps when BaseUnit is set to Seconds.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///     .Name("chart")
+        ///     .Title("Units sold")
+        ///     .Series(series => {
+        ///         series
+        ///             .Column(new int[] { 20, 40, 45, 30, 50 });
+        ///     })
+        ///     .CategoryAxis(axis => axis
+        ///         .Date()
+        ///         .BaseUnit(ChartAxisBaseUnit.Fit)
+        ///         .AutoBaseUnitSteps(steps => steps.Seconds(1, 2))
+        ///     )
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartAxisBaseUnitStepsBuilder Seconds(params int[] steps)
+        {
+            baseUnitSteps.Seconds = steps;
+
+            return this;
+        }
+
+        /// <summary>
         /// The discrete BaseUnitStep values when BaseUnit is set to Minutes and
         /// BaseUnitStep is set to 0 (auto).
         /// </summary>

@@ -10,6 +10,24 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Date format to use when the base date unit is <see cref="ChartAxisBaseUnit.Seconds"/>.
+        /// </summary>
+        public string Seconds
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Date format to use when the base date unit is <see cref="ChartAxisBaseUnit.Minutes"/>.
+        /// </summary>
+        public string Minutes
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Date format to use when the base date unit is <see cref="ChartAxisBaseUnit.Hours"/>.
         /// </summary>
         public string Hours
@@ -22,15 +40,6 @@ namespace Kendo.Mvc.UI
         /// Date format to use when the base date unit is <see cref="ChartAxisBaseUnit.Days"/>.
         /// </summary>
         public string Days
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Date format to use when the base date unit is <see cref="ChartAxisBaseUnit.Minutes"/>.
-        /// </summary>
-        public string Minutes
         {
             get;
             set;
