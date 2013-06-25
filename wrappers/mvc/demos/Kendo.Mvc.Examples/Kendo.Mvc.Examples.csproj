@@ -539,7 +539,13 @@
     <Content Include="Areas\aspx\Views\dataviz\line_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\multiple_axes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked_line.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\polar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\polar_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\polar_charts\polar_area.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\polar_charts\polar_scatter.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\polar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\qrcode\api.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\qrcode\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radar_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radar_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radar_charts\remote_data.aspx" />
