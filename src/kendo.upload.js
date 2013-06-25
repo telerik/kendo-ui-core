@@ -85,7 +85,7 @@ kendo_module({
                 autoUpload: true
             },
             localization: {
-                "select": "Select...",
+                "select": "Select files...",
                 "cancel": "Cancel",
                 "retry": "Retry",
                 "remove": "Remove",
@@ -93,7 +93,9 @@ kendo_module({
                 "dropFilesHere": "drop files here to upload",
                 "statusUploading": "uploading",
                 "statusUploaded": "uploaded",
-                "statusFailed": "failed"
+                "statusFailed": "failed",
+                "headerStatusUploading": "Uploading...",
+                "headerStatusUploaded": "Done"
             }
         },
 
@@ -226,8 +228,20 @@ kendo_module({
             return templateData;
         },
 
-        _buildFileEntryTemplate: function() {
+        _prepareDefaultFileEntryTemplate: function(name, data) {
+            var extension = "";
+            var defaultTemplate = $("<li class='k-file'>" +
+                    "<span class='k-progress'></span>" +
+                    "<span class='k-icon'></span>" +
+                    "<span class='k-filename' title='" + name + "'>" + name + "</span>" +
+                    "<strong class='k-upload-status'></strong>" +
+                    "</li>");
 
+            if (data.fileNames.length == 1 && !!data.fileNames[0].extension) {
+                extension = data.fileNames[0].extension.substring(1);
+                $('.k-icon', defaultTemplate).addClass('k-i-' + extension);
+            }
+            return defaultTemplate;
         },
 
         _enqueueFile: function(name, data) {
@@ -238,50 +252,34 @@ kendo_module({
             var options = that.options;
             var template = options.template;
             var templateData;
-            var stateIcon;
-            var progressBar;
 
             if (fileList.length === 0) {
                 fileList = $("<ul class='k-upload-files k-reset'></ul>").appendTo(that.wrapper);
                 if (!that.options.showFileList) {
                     fileList.hide();
                 }
+
+                that.wrapper.removeClass("k-upload-empty");
             }
 
             existingFileEntries = $(".k-file", fileList);
 
             if (!template) {
-                fileEntry = $("<li class='k-file'><span class='k-filename' title='" + name + "'>" + name + "</span></li>");
+                fileEntry = that._prepareDefaultFileEntryTemplate(name, data);
             } else {
                 templateData = that._prepareTemplateData(name, data);
                 template = kendo.template(template);
 
                 fileEntry = $("<li class='k-file'>" + template(templateData) + "</li>");
-                fileEntry.find(".k-upload-action").addClass("k-button k-button-icontext");
-
-                progressBar = $(".k-progress", fileEntry);
-                if (that._async && !that.options.async.autoUpload && progressBar.length > 0) {
-                    progressBar.remove();
-                }
-
-                stateIcon = $(".k-icon", fileEntry);
-                if (!that._async) {
-                    if (progressBar.length > 0) {
-                        progressBar.remove();
-                    }
-
-                    if (stateIcon.length > 0) {
-                        stateIcon.remove();
-                    }
-                }
+                fileEntry.find(".k-upload-action").addClass("k-button k-button-bare");
             }
 
             fileEntry
                 .appendTo(fileList)
                 .data(data);
 
-            if (that._async && !template) {
-                fileEntry.prepend("<span class='k-icon'></span>");
+            if (!that._async) {
+                $(".k-progress", fileEntry).width('100%');
             }
 
             if (!that.multiple && existingFileEntries.length > 0) {
@@ -292,23 +290,30 @@ kendo_module({
         },
 
         _removeFileEntry: function(fileEntry) {
-            var fileList = fileEntry.closest(".k-upload-files"),
-                allFiles;
+            var that = this;
+            var fileList = fileEntry.closest(".k-upload-files");
+            var allFiles;
+            var allFailedFiles;
 
             fileEntry.remove();
             allFiles = $(".k-file", fileList);
+            allFailedFiles = $(".k-file.k-file-error", fileList);
 
-            if (allFiles.find("> .k-fail").length === allFiles.length) {
+            if (allFailedFiles.length === allFiles.length) {
                 this._hideUploadButton();
             }
 
             if (allFiles.length === 0) {
                 fileList.remove();
+                that.wrapper.addClass("k-upload-empty");
+                that._hideHeaderUploadstatus();
             }
         },
 
         _fileAction: function(fileElement, actionKey) {
             var classDictionary = { remove: "k-delete", cancel: "k-cancel", retry: "k-retry" };
+            var iconsClassDictionary = {remove: "k-i-close", cancel: "k-i-close", retry: "k-i-refresh"};
+
             if (!classDictionary.hasOwnProperty(actionKey)) {
                 return;
             }
@@ -316,13 +321,15 @@ kendo_module({
             this._clearFileAction(fileElement);
 
             if (!this.options.template) {
-                fileElement.append(
-                    this._renderAction(classDictionary[actionKey], this.localization[actionKey])
+                fileElement.find(".k-upload-status .k-upload-action").remove();
+                fileElement.find(".k-upload-status").append(
+                    this._renderAction(classDictionary[actionKey], this.localization[actionKey], iconsClassDictionary[actionKey])
                 );
             } else {
                 fileElement.find(".k-upload-action")
-                           .addClass("k-button k-button-icontext")
-                           .append("<span class='k-icon " + classDictionary[actionKey] + "'></span>" + this.localization[actionKey])
+                           .addClass("k-button k-button-bare")
+                           .append("<span class='k-icon " + iconsClassDictionary[actionKey] + " " + classDictionary[actionKey] +
+                                   "' title='" + this.localization[actionKey] + "'></span>")
                            .show();
             }
         },
@@ -331,32 +338,27 @@ kendo_module({
             var localization = this.localization,
                 states = {
                     uploading: {
-                        cssClass: "k-loading",
                         text : localization.statusUploading
                     },
                     uploaded: {
-                        cssClass: "k-success",
                         text : localization.statusUploaded
                     },
                     failed: {
-                        cssClass: "k-fail",
                         text : localization.statusFailed
                     }
                 },
                 currentState = states[stateKey];
 
             if (currentState) {
-                var icon = fileEntry.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").text(currentState.text);
-                icon[0].className = "k-icon " + currentState.cssClass;
+                $(".k-icon:not(.k-delete, .k-cancel, .k-retry)", fileEntry).text(currentState.text);
             }
         },
 
-        _renderAction: function (actionClass, actionText) {
+        _renderAction: function (actionClass, actionText, iconClass) {
             if (actionClass !== "") {
                 return $(
-                "<button type='button' class='k-button k-button-icontext k-upload-action'>" +
-                    "<span class='k-icon " + actionClass + "'></span>" +
-                    actionText +
+                "<button type='button' class='k-button k-button-bare k-upload-action'>" +
+                    "<span class='k-icon "+ iconClass + " " + actionClass + "' title='" + actionText + "'></span>" +
                 "</button>"
                 );
             }
@@ -370,10 +372,7 @@ kendo_module({
         },
 
         _clearFileAction: function(fileElement) {
-            fileElement
-                .find(".k-upload-action")
-                .empty()
-                .hide();
+            $(".k-upload-action", fileElement).empty().hide();
         },
 
         _onFileAction: function(e) {
@@ -394,6 +393,7 @@ kendo_module({
                     that._module.onCancel({ target: $(fileEntry, that.wrapper) });
                     this._checkAllComplete();
                 } else if (icon.hasClass("k-retry")) {
+                    $(".k-warning", fileEntry).remove();
                     that._module.onRetry({ target: $(fileEntry, that.wrapper) });
                 }
             }
@@ -407,24 +407,18 @@ kendo_module({
         },
 
         _onFileProgress: function(e, percentComplete) {
-            var progressBar;
+            var progressPct;
 
             if (!this.options.template) {
-                progressBar = $(".k-progress-status", e.target);
-                if (progressBar.length === 0) {
-                    progressBar =
-                        $("<span class='k-progress'><span class='k-state-selected k-progress-status' style='width: 0;'></span></span>")
-                            .appendTo($(".k-filename", e.target))
-                            .find(".k-progress-status");
+                progressPct = $(".k-upload-pct", e.target);
+                if (progressPct.length === 0) {
+                    $(".k-upload-status", e.target).prepend("<span class='k-upload-pct'></span>");
                 }
 
-                progressBar.width(percentComplete + "%");
+                $(".k-upload-pct", e.target).text(percentComplete + "%");
+                $(".k-progress", e.target).width(percentComplete + "%");
             } else {
-                progressBar = $(".k-progress", e.target);
-                if (progressBar.is(':empty')) {
-                    progressBar.append("<span class='k-state-selected k-progress-status' style='width: 0;'></span>");
-                }
-                $(".k-progress-status", e.target).width(percentComplete + "%");
+                $(".k-progress", e.target).width(percentComplete + "%");
             }
 
             this.trigger(PROGRESS, {
@@ -437,6 +431,8 @@ kendo_module({
             var fileEntry = getFileEntry(e);
 
             this._fileState(fileEntry, "uploaded");
+            fileEntry.removeClass('k-file-progress').addClass('k-file-success');
+            this._updateHeaderUploadStatus();
 
             this.trigger(SUCCESS, {
                 files: fileEntry.data("fileNames"),
@@ -456,8 +452,19 @@ kendo_module({
 
         _onUploadError: function(e, xhr) {
             var fileEntry = getFileEntry(e);
+            var uploadPercentage = $('.k-upload-pct', fileEntry);
 
             this._fileState(fileEntry, "failed");
+            fileEntry.removeClass('k-file-progress').addClass('k-file-error');
+            $('.k-progress', fileEntry).width("100%");
+
+            if (uploadPercentage.length > 0) {
+                uploadPercentage.empty().removeClass('k-upload-pct').addClass('k-icon k-warning');
+            } else {
+                $('.k-upload-status', fileEntry).prepend("<span class='k-icon k-warning'></span>");
+            }
+
+            this._updateHeaderUploadStatus();
             this._fileAction(fileEntry, "retry");
 
             this.trigger(ERROR, {
@@ -484,6 +491,44 @@ kendo_module({
 
         _hideUploadButton: function() {
             $(".k-upload-selected", this.wrapper).remove();
+        },
+
+        _showHeaderUploadStatus: function() {
+            var localization = this.localization;
+            var dropZone = $(".k-dropzone", this.wrapper);
+            var headerUploadStatus = $('.k-upload-status-total', this.wrapper);
+
+            if (headerUploadStatus.length !== 0) {
+                headerUploadStatus.remove();
+            }
+
+            headerUploadStatus = '<strong class="k-upload-status k-upload-status-total">' + localization.headerStatusUploading +
+            '<span class="k-icon k-loading">' + localization.statusUploading + '</span>' +
+            '</strong>';
+
+            if (dropZone.length > 0) {
+                dropZone.append(headerUploadStatus);
+            } else {
+                $('.k-upload-button', this.wrapper).after(headerUploadStatus);
+            }
+        },
+
+        _updateHeaderUploadStatus: function() {
+            var currentlyUploading = $('.k-file', this.wrapper).not('.k-file-success, .k-file-error');
+            if (currentlyUploading.length === 0) {
+                var headerUploadStatus = $('.k-upload-status-total', this.wrapper);
+                var headerUploadStatusIcon = $('.k-icon', headerUploadStatus)
+                                              .removeClass('k-loading')
+                                              .addClass('k-warning')
+                                              .text(this.localization.statusUploaded);
+
+                headerUploadStatus.text(this.localization.headerStatusUploaded)
+                                  .append(headerUploadStatusIcon);
+            }
+        },
+
+        _hideHeaderUploadstatus: function() {
+            $('.k-upload-status-total', this.wrapper).remove();
         },
 
         _onParentFormSubmit: function() {
@@ -554,8 +599,16 @@ kendo_module({
                 function() { dropZone.removeClass("k-dropzone-hovered"); });
 
             bindDragEventWrappers($(document), ns,
-                function() { dropZone.addClass("k-dropzone-active"); },
-                function() { dropZone.removeClass("k-dropzone-active"); });
+                function() {
+                    dropZone.addClass("k-dropzone-active");
+                    dropZone.closest('.k-upload').removeClass('k-upload-empty');
+                },
+                function() {
+                    dropZone.removeClass("k-dropzone-active");
+                    if ($('li.k-file', dropZone.closest('.k-upload')).length === 0) {
+                        dropZone.closest('.k-upload').addClass('k-upload-empty');
+                    }
+                });
         },
 
         _supportsRemove: function() {
@@ -582,7 +635,16 @@ kendo_module({
         },
 
         _wrapInput: function(input) {
-            input.wrap("<div class='k-widget k-upload'><div class='k-button k-upload-button'></div></div>");
+            var that = this;
+            var options = that.options;
+
+            input.wrap("<div class='k-widget k-upload k-header'><div class='k-button k-upload-button'></div></div>");
+            
+            if(!options.async.saveUrl) {
+                input.closest(".k-upload").addClass("k-upload-sync");
+            }
+
+            input.closest(".k-upload").addClass("k-upload-empty");
 
             input.closest(".k-button")
                 .append("<span>" + this.localization.select + "</span>");
@@ -591,7 +653,7 @@ kendo_module({
         },
 
         _checkAllComplete: function() {
-            if ($(".k-file .k-icon.k-loading", this.wrapper).length === 0) {
+            if ($(".k-file.k-file-progress", this.wrapper).length === 0) {
                 this.trigger(COMPLETE);
             }
         }
@@ -690,6 +752,7 @@ kendo_module({
 
             if (!upload.trigger(UPLOAD, e)) {
                 upload._hideUploadButton();
+                upload._showHeaderUploadStatus();
 
                 iframe.appendTo(document.body);
 
@@ -708,6 +771,7 @@ kendo_module({
 
                 upload._fileAction(fileEntry, CANCEL);
                 upload._fileState(fileEntry, "uploading");
+                $(fileEntry).addClass("k-file-progress");
 
                 iframe
                     .one("load", $.proxy(this.onIframeLoad, this));
@@ -945,6 +1009,7 @@ kendo_module({
             if (!upload.trigger(UPLOAD, e)) {
                 upload._fileAction(fileEntry, CANCEL);
                 upload._hideUploadButton();
+                upload._showHeaderUploadStatus();
 
                 e.data = $.extend({ }, e.data, getAntiForgeryTokens());
                 for (var key in e.data) {
@@ -952,6 +1017,7 @@ kendo_module({
                 }
 
                 upload._fileState(fileEntry, "uploading");
+                $(fileEntry).addClass("k-file-progress");
 
                 this.postFormData(upload.options.async.saveUrl, formData, fileEntry, xhr);
             } else {
@@ -986,7 +1052,7 @@ kendo_module({
         onRemove: function(e, data) {
             var fileEntry = getFileEntry(e);
 
-            if (fileEntry.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").is(".k-success")) {
+            if (fileEntry.hasClass("k-file-success")) {
                 removeUploadedFile(fileEntry, this.upload, data);
             } else {
                 this.removeFileEntry(fileEntry);
@@ -1066,7 +1132,9 @@ kendo_module({
                 $.each(relatedInput.data("relatedFileEntries") || [], function() {
                     // Exclude removed file entries and self
                     if (this.parent().length > 0 && this[0] != fileEntry[0]) {
-                        uploadComplete = uploadComplete && this.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").is(".k-success");
+                        //uploadComplete = uploadComplete && this.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").is(".k-success");
+                        //uploadComplete = uploadComplete && this.find(".k-icon:not(.k-delete, .k-cancel, .k-retry):contains('uploaded')");
+                        uploadComplete = uploadComplete && this.hasClass("k-file-success");
                     }
                 });
 
@@ -1224,7 +1292,7 @@ kendo_module({
     }
 
     function isFileUploadStarted(fileEntry) {
-        return fileEntry.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").is(".k-loading, .k-success, .k-fail");
+        return fileEntry.is(".k-file-progress, .k-file-success, .k-file-error");
     }
 
     function getFileEntry(e) {
