@@ -3146,10 +3146,10 @@ kendo_module({
                 vertical: !options.invertAxes,
                 overlay: series.overlay,
                 labels: labelOptions,
-                isStacked: isStacked,
-                note: { label: { text: data.fields.noteText } }
+                isStacked: isStacked
             }, series, {
-                color: data.fields.color || undefined
+                color: data.fields.color || undefined,
+                note: { label: { text: data.fields.noteText } }
             });
 
             if (value < 0 && pointOptions.negativeColor) {
@@ -3720,6 +3720,7 @@ kendo_module({
                 labels = options.labels,
                 markerBackground = markers.background,
                 markerBorder = deepExtend({}, markers.border),
+                noteOptions = options.note,
                 labelText = point.value;
 
             if (point._rendered) {
@@ -3774,6 +3775,11 @@ kendo_module({
                 );
                 point.append(point.label);
             }
+
+            if (noteOptions.visible && defined(noteOptions.label.text)) {
+                point.note = new Note(noteOptions);
+                point.append(point.note);
+            }
         },
 
         markerBox: function() {
@@ -3785,7 +3791,7 @@ kendo_module({
                 options = point.options,
                 vertical = options.vertical,
                 aboveAxis = options.aboveAxis,
-                childBox;
+                childBox, noteTargetBox, center;
 
             point.render();
 
@@ -3808,6 +3814,16 @@ kendo_module({
 
             point.marker.reflow(childBox);
             point.reflowLabel(childBox);
+
+            if (point.note) {
+                if (point.marker.options.visible) {
+                    noteTargetBox = point.marker.box;
+                } else {
+                    center = point.marker.box.center();
+                    noteTargetBox = Box2D(center.x, center.y, center.x, center.y)
+                }
+                point.note.reflow(noteTargetBox);
+            }
         },
 
         reflowLabel: function(box) {
@@ -4123,9 +4139,10 @@ kendo_module({
             }
 
             pointOptions = deepExtend({
-                vertical: !options.invertAxes
+                vertical: !options.invertAxes,
             }, series, {
-                color: fields.color
+                color: fields.color,
+                note: { label: { text: data.fields.noteText } }
             });
 
             chart.evalPointOptions(
@@ -4414,7 +4431,8 @@ kendo_module({
                     format: chart.options.labels.format
                 }
             }, series, {
-                color: fields.color
+                color: fields.color,
+                note: { label: { text: data.fields.noteText } }
             });
 
             chart.evalPointOptions(pointOptions, value, fields);
@@ -4614,7 +4632,8 @@ kendo_module({
                     border: series.border,
                     opacity: series.opacity,
                     animation: animationOptions
-                }
+                },
+                note: { label: { text: data.fields.noteText } }
             });
 
             chart.evalPointOptions(pointOptions, value, fields);

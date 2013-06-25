@@ -1627,7 +1627,6 @@ kendo_module({
             note.marker = marker;
             note.append(marker);
             marker.reflow(Box2D());
-            debugger;
             note.wrapperBox = box.wrap(marker.paddingBox);
         },
 
