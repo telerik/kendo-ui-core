@@ -168,8 +168,8 @@ kendo_module({
         ],
 
         groups: {
-            basic: ["bold", "italic", "underline"],
-            inline: ["strikethrough", "subscript", "superscript" ],
+            basic: ["bold", "italic", "underline", "strikethrough"],
+            scripts: ["subscript", "superscript" ],
             alignment: ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull" ],
             links: ["insertImage", "createLink", "unlink"],
             lists: ["insertUnorderedList", "insertOrderedList", "indent", "outdent"],
