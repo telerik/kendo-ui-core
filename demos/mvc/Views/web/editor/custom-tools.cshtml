@@ -50,15 +50,24 @@
             tools: [
                 {
                     name: "fontName",
-                    items: [].concat(kendo.ui.Editor.prototype.options.fontName[8], [{ text: "Garamond", value: "Garamond, serif" }])
+                    items: [].concat(
+                        kendo.ui.Editor.prototype.options.fontName[8],
+                        [{ text: "Garamond", value: "Garamond, serif" }]
+                    )
                 },
                 {
                     name: "fontSize",
-                    items: [].concat(kendo.ui.Editor.prototype.options.fontSize[0], [{ text: "16px", value: "16px" }])
+                    items: [].concat(
+                        kendo.ui.Editor.prototype.options.fontSize[0],
+                        [{ text: "16px", value: "16px" }]
+                    )
                 },
                 {
-                    name: "formatBlock",
-                    items: [].concat(kendo.ui.Editor.prototype.options.formatBlock[0], [{ text: "Fieldset", value: "fieldset" }])
+                    name: "formatting",
+                    items: [].concat(
+                        kendo.ui.editor.FormattingTool.prototype.options.items[0],
+                        [{ text: "Fieldset", value: "fieldset" }]
+                    )
                 },
                 {
                     name: "customTemplate",

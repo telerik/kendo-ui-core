@@ -415,6 +415,7 @@ kendo_module({
             var tools = this.tools,
                 options, template, toolElement,
                 toolName,
+                editorElement = this._editor.element,
                 element = this.element.empty();
 
             element.empty();
@@ -444,7 +445,7 @@ kendo_module({
                         .appendTo(element);
 
                     if (options.type == "button" && options.exec) {
-                        toolElement.find(".k-tool-icon").click($.proxy(options.exec, element[0]));
+                        toolElement.find(".k-tool-icon").click($.proxy(options.exec, editorElement[0]));
                     }
                 }
             }
@@ -458,7 +459,8 @@ kendo_module({
                 listItems = that.element.children(),
                 enabledTools = listItems.filter(function() {
                     return !$(this).children(".k-state-disabled").length;
-                });
+                }),
+                started = false;
 
             listItems.filter(".k-group-break").remove();
 
@@ -467,6 +469,7 @@ kendo_module({
 
                 var toolName = that._toolFromClassName(li.children()[0]);
                 var newToolGroup = that.toolGroupFor(toolName);
+                var last = index == enabledTools.length-1;
 
                 isStart = currentToolGroup != newToolGroup;
 
@@ -476,8 +479,10 @@ kendo_module({
                     previous.addClass("k-group-end");
                 }
 
-                li.toggleClass("k-group-start", isStart)
-                  .toggleClass("k-group-end", index == enabledTools.length-1);
+                started = started || isStart;
+
+                li.toggleClass("k-group-start", isStart || (!started && last))
+                  .toggleClass("k-group-end", last);
 
                 previous = li;
             });
@@ -582,7 +587,7 @@ kendo_module({
 
             that.items().each(function () {
                 var tool = that.tools[that._toolFromClassName(this)];
-                if (tool) {
+                if (tool && tool.update) {
                     tool.update($(this), nodes);
                 }
             });
@@ -1006,6 +1011,16 @@ kendo_module({
                 { text: "5 (18pt)", value: "large" },
                 { text: "6 (24pt)", value: "x-large" },
                 { text: "7 (36pt)", value: "xx-large" }
+            ],
+            formatBlock: [
+                { text: "Paragraph", value: "p" },
+                { text: "Quotation", value: "blockquote" },
+                { text: "Heading 1", value: "h1" },
+                { text: "Heading 2", value: "h2" },
+                { text: "Heading 3", value: "h3" },
+                { text: "Heading 4", value: "h4" },
+                { text: "Heading 5", value: "h5" },
+                { text: "Heading 6", value: "h6" }
             ],
             tools: [].concat.call(
                 ["formatting"],
