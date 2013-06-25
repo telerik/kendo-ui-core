@@ -26,7 +26,7 @@
             .kendoEditor({
                 tools: [
                     { name: "formatting", items: [
-                        { text: "red", className: "red" }
+                        { text: "red", value: ".red" }
                     ] }
                 ]
             })
@@ -59,8 +59,8 @@
         module("FormattingTool", {
             setup: function() {
                 setFormattingItems(inline, [
-                    { text: "red", tag: "h1", className: "red", context: "h1" },
-                    { text: "blue", tag: "p", className: "blue", context: "p" }
+                    { text: "red", value: "h1.red", context: "h1" },
+                    { text: "blue", value: "p.blue", context: "p" }
                 ]);
             }
         });
@@ -87,7 +87,7 @@
 
             var tool = formattingTool(inline);
 
-            tool.value("red");
+            tool.value("h1.red");
             tool.trigger("change");
 
             equal(inline.value(), '<h1 class="red">foo</h1>');

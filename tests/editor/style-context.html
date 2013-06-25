@@ -50,7 +50,7 @@
                 data: array
             });
 
-            tool.decorateItems(editor.document);
+            tool.decorate(editor.document);
         }
 
         function selectFromValue(editor, value) {
@@ -101,7 +101,6 @@
 
             var tool = styleTool(inline);
 
-            console.log(tool.wrapper);
             ok(tool.wrapper.is(".k-state-disabled"));
         });
 

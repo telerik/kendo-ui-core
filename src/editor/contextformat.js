@@ -51,13 +51,32 @@ var FormattingTool = DelayedExecutionTool.extend({
         ]
     },
 
+    toFormattingItem: function(item) {
+        var value = item.value;
+
+        if (!value) {
+            return item;
+        }
+
+        var dot = value.indexOf(".");
+
+        if (dot === 0) {
+            item.className = value.substring(1);
+        } else if (dot == -1) {
+            item.tag = value;
+        } else {
+            item.tag = value.substring(0, dot);
+            item.className = value.substring(dot + 1);
+        }
+
+        return item;
+    },
+
     command: function (args) {
         var spanTag = this._spanTag,
             item = args.value;
 
-        if (!$.isPlainObject(item)) {
-            item = { className: item };
-        }
+        item = this.toFormattingItem(item);
 
         return new Editor.FormatCommand({
             range: args.range,
@@ -133,12 +152,26 @@ var FormattingTool = DelayedExecutionTool.extend({
     }
 });
 
-function deprecatedFormattingTool(name, finder) {
+function deprecatedFormattingTool(name, property, finder) {
     return FormattingTool.extend({
         init: function(options) {
             FormattingTool.fn.init.call(this, options);
 
             this.finder = finder;
+        },
+
+        command: function(args) {
+            var item = args.value;
+
+            if (!$.isPlainObject(item)) {
+                args.value = {};
+                args.value[property] = item;
+            } else {
+                item.value = "." + item.value;
+                item.tag = item.context;
+            }
+
+            return FormattingTool.fn.command.call(this, args);
         },
 
         initialize: function(ui, initOptions) {
@@ -153,8 +186,8 @@ function deprecatedFormattingTool(name, finder) {
     });
 }
 
-var StyleTool = deprecatedFormattingTool("style", new GreedyInlineFormatFinder([{ tags: ["span"] }], "className"));
-var FormatBlockTool = deprecatedFormattingTool("formatBlock", new BlockFormatFinder([{ tags: dom.blockElements }]));
+var StyleTool = deprecatedFormattingTool("style", "className", new GreedyInlineFormatFinder([{ tags: ["span"] }], "className"));
+var FormatBlockTool = deprecatedFormattingTool("formatBlock", "tag", new BlockFormatFinder([{ tags: dom.blockElements }]));
 
 extend(Editor, {
     FormattingTool: FormattingTool,
