@@ -8,7 +8,7 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
 
-    public class SchedulerResource<TModel> : JsonObject, IHideObjectMembers, ISchedulerResource<TModel>
+    public class SchedulerResource<TModel> : JsonObject, IHideObjectMembers
         where TModel : class
     {
         public SchedulerResource(string field)

@@ -998,7 +998,6 @@
     <Compile Include="UI\Scheduler\IScheduler.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEvent.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventService.cs" />
-    <Compile Include="UI\Scheduler\ISchedulerResource.cs" />
     <Compile Include="UI\Scheduler\Views\ISchedulerView.cs" />
     <Compile Include="UI\Scheduler\Scheduler.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewDay.cs" />
