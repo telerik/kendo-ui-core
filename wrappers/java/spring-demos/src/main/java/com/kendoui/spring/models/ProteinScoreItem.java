@@ -1,11 +1,11 @@
 package com.kendoui.spring.models;
 
-public class ProteinScore {
+public class ProteinScoreItem {
     private String name;
     private String abbr;
     private int score;
     
-    public ProteinScore(String name, String abbr, int score) {
+    public ProteinScoreItem(String name, String abbr, int score) {
         setName(name);
         setAbbr(abbr);
         setScore(score);

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kendoui.spring.models.ChartDataRepository;
-import com.kendoui.spring.models.AntennaGainPoint;
+import com.kendoui.spring.models.AntennaGainItem;
 
 @Controller("dataviz-polar_charts_remote_data-controller")
 @RequestMapping(value="/dataviz/polar-charts/")
@@ -19,7 +19,7 @@ public class RemoteDataController {
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
-    public @ResponseBody List<AntennaGainPoint> read() {
+    public @ResponseBody List<AntennaGainItem> read() {
         return ChartDataRepository.AntennaGain();
     }
 }

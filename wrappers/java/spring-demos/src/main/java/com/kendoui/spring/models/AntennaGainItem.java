@@ -1,10 +1,10 @@
 package com.kendoui.spring.models;
 
-public class AntennaGainPoint {
+public class AntennaGainItem {
     private double azimuth;
     private double gain;
     
-    public AntennaGainPoint(double azimuth, double gain) {
+    public AntennaGainItem(double azimuth, double gain) {
         setAzimuth(azimuth);
         setGain(gain);
     }

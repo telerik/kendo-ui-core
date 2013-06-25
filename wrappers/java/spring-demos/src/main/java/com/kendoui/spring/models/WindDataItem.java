@@ -1,13 +1,13 @@
 package com.kendoui.spring.models;
 
-public class WindSpeedItem {
+public class WindDataItem {
     private int dir;
     private String dirText;
     private int category;
     private String categoryText;
     private double frequency;
     
-    public WindSpeedItem(int dir, String dirText, int category, String categoryText, double frequency)
+    public WindDataItem(int dir, String dirText, int category, String categoryText, double frequency)
     {
         this.setDir(dir);
         this.setDirText(dirText);

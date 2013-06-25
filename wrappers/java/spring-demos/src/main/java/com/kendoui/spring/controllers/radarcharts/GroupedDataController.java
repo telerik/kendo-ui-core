@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kendoui.spring.models.ChartDataRepository;
-import com.kendoui.spring.models.WindSpeedItem;
+import com.kendoui.spring.models.WindDataItem;
 
 @Controller("dataviz-radar_charts-grouped_data-controller")
 @RequestMapping(value="/dataviz/radar-charts/")
@@ -19,7 +19,7 @@ public class GroupedDataController {
     }
     
     @RequestMapping(value = "/grouped-data/read", method = RequestMethod.POST)
-    public @ResponseBody List<WindSpeedItem> read() {
+    public @ResponseBody List<WindDataItem> read() {
         return ChartDataRepository.WindData();
     }
 }

@@ -1,11 +1,11 @@
 package com.kendoui.spring.models;
 
-public class SunPositionPoint {
+public class SunPositionItem {
     private String time;
     private double altitude;
     private double azimuth;
     
-    public SunPositionPoint(String time, double altitude, double azimuth) {
+    public SunPositionItem(String time, double altitude, double azimuth) {
         setTime(time);
         setAltitude(altitude);
         setAzimuth(azimuth);
