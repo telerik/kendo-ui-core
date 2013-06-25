@@ -860,22 +860,62 @@
                 equal(events[1].end.getTime(), +new Date(2013, 3, 1, 17, 0));
             });
 
-            //TODO: uncomment!
-            /*test("DAILY occurrences creates date when it is not possible", function() {
+            test("DAILY occurrences creates date when it is not possible", function() {
                 var schedulerEvent = {
                     uid: "id",
                     title: "Title",
-                    start: new Date(2013, 2, 30, 3, 0),
-                    end: new Date(2013, 2, 30, 4, 0),
+                    start: new Date(2013, 2, 29, 3, 0),
+                    end: new Date(2013, 2, 29, 4, 0),
                     recurrenceRule: "FREQ=DAILY"
                 }
 
-                var events = occurrences(schedulerEvent, new Date(2013, 2, 30), new Date(2013, 3, 1, 17));
+                var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
 
-                equal(events.length, 2);
                 equal(events[0].start.getHours(), 3);
-                equal(events[1].start.getHours(), 3);
-            });*/
+                equal(events[0].startTime.getHours(), 3);
+
+                equal(events[1].start.getHours(), 2);
+                equal(events[1].startTime.getHours(), 3);
+
+                equal(events[2].start.getHours(), 3);
+                equal(events[2].startTime.getHours(), 3);
+            });
+
+            test("DAILY method honours EEST when calculate duration", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 9, 27, 0, 0),
+                    end: new Date(2013, 9, 27, 10, 0),
+                    recurrenceRule: "FREQ=DAILY"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 9, 27), new Date(2013, 9, 28, 17));
+
+                equal(events[0].start.getHours(), 0);
+                equal(events[0].startTime.getHours(), 0);
+
+                equal(events[0].end.getHours(), 10);
+                equal(events[0].endTime.getHours(), 10);
+            });
+
+            test("DAILY method honours EST when calculate duration", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 2, 31, 0, 0),
+                    end: new Date(2013, 2, 31, 10, 0),
+                    recurrenceRule: "FREQ=DAILY"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
+
+                equal(events[0].start.getHours(), 0);
+                equal(events[0].startTime.getHours(), 0);
+
+                equal(events[0].end.getHours(), 10);
+                equal(events[0].endTime.getHours(), 10);
+            });
 
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {

@@ -829,11 +829,11 @@ kendo_module({
     function expand(event, start, end, zone) {
         var eventStart = event.start,
             eventStartMS = eventStart.getTime(),
-            durationMS = event.end - eventStartMS,
             rule = parseRule(event.recurrenceRule),
             idField = event.idField,
             id = event[idField] || event.id,
             exceptionDates,
+            durationMS,
             current = 1,
             events = [],
             periodStart,
@@ -876,7 +876,7 @@ kendo_module({
             start.setHours(eventStart.getHours(), eventStart.getMinutes(), eventStart.getSeconds(), eventStart.getMilliseconds());
         }
 
-        //calculate duration here!!!
+        durationMS = (event.end - eventStartMS) - ((event.end.getTimezoneOffset() - event.start.getTimezoneOffset()) * date.MS_PER_MINUTE);
         rule._startTime = new Date(1980, 0, 1, start.getHours(), start.getMinutes(), start.getSeconds(), start.getMilliseconds());
 
         if (freq.setup) {
@@ -887,7 +887,6 @@ kendo_module({
 
         while (start <= end) {
             if (start >= periodStart && !isException(exceptionDates, start, zone)) {
-                //TODO: DST check
                 eventEnd = new Date(start);
                 setTime(eventEnd, durationMS);
 
