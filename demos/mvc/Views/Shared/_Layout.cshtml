@@ -31,7 +31,7 @@
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().Contains("application") ? "dashboards" : "")@(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")@(category.ToLower().Equals("framework") ? "framework" : "")@(category.ToLower().Contains("mobile widgets") ? "mobile-widgets" : "")@(category.ToLower().Contains("mobile framework") ? "mobile-framework" : "")@(category.ToLower().Contains("chart") ? "chart" : "")@(category.ToLower().Contains("gauges") ? "gauges" : "")@(category.ToLower().Contains("financial") ? "financial" : "")">
+                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().Contains("application") ? "dashboards" : "")@(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")@(category.ToLower().Equals("framework") ? "framework" : "")@(category.ToLower().Contains("mobile widgets") ? "mobile-widgets" : "")@(category.ToLower().Contains("mobile framework") ? "mobile-framework" : "")@(category.ToLower().Contains("chart") ? "chart" : "")@(category.ToLower().Contains("gauges") ? "gauges" : "")@(category.ToLower().Contains("qr codes") ? "qrcodes" : "")@(category.ToLower().Contains("financial") ? "financial" : "")">
                     <h2>@category</h2>
                     @{ var idx = 0; }
                     <ul>

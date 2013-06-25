@@ -1601,8 +1601,23 @@ p#copy
 .widgetGrid .gauges
 {
     width:180px;
-    min-height: 159px;
+    min-height: 78px;
     background:rgba(221, 221, 221, 0.33);
+}
+
+.widgetGrid .qrcodes
+{
+    width:180px;
+    min-height: 78px;
+    background:rgba(221, 221, 221, 0.33);
+    margin-left: -180px;
+    margin-top: 78px;
+}
+
+.widgetGrid .gauges ul,
+.widgetGrid .qrcodes ul
+{
+    padding-bottom: 8px;
 }
 
 .widgetGrid .financial
