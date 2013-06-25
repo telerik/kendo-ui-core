@@ -26,6 +26,7 @@
                 copyUploadPrototype();
 
                 $('#uploadInstance').kendoUpload(options);
+                $('#uploadInstance').closest(".k-upload").addClass("k-upload-sync");
                 return $('#uploadInstance').data("kendoUpload");
             }
 
@@ -48,6 +49,25 @@
                 teardown: moduleTeardown
             });
 
+            test("upload wrapper contains k-upload-empty class", function() {
+                ok($(uploadInstance.wrapper).is(".k-upload-empty"));
+            });
+
+            test("upload wrapper contains k-upload-sync class", function() {
+                ok($(uploadInstance.wrapper).is(".k-upload-sync"));
+            });
+
+            test("k-upload-empty class is removed when file is selected", function() {
+                simulateFileSelect();
+                ok(!$(uploadInstance.wrapper).is(".k-upload-empty"));
+            });
+
+            test("k-upload-empty class is added again when file list is empty", function() {
+                simulateFileSelect();
+                simulateRemoveClick();
+                ok($(uploadInstance.wrapper).is(".k-upload-empty"));
+            });
+
             test("current input is hidden after choosing a file", function() {
                 simulateFileSelect();
                 equal($("input:not(:visible)", uploadInstance.wrapper).length, 1);
@@ -58,9 +78,9 @@
                 equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
             });
 
-            test("status icon is not rendered", function() {
+            test("status icon is rendered always", function() {
                 simulateFileSelect();
-                equal($(".k-upload-files li.k-file > .k-icon", uploadInstance.wrapper).length, 0);
+                equal($(".k-upload-files li.k-file > .k-icon", uploadInstance.wrapper).length, 1);
             });
 
             test("clicking remove should remove file entry", function() {
@@ -157,6 +177,46 @@
             });
         </script>
         <script src="select.js"></script>
+
+        <script type="text/javascript">
+
+             // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / SyncUpload / Templates", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ 
+                        template: "<span class='k-progress'></span><div class='myTemplate'><span class='fileInfo'>#=name# #=size# #=files[0].extension#</span><button type='button' class='k-upload-action'></button></div>"
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("rendered template should be wrapped as a list item", function() {
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($(".k-file > .myTemplate").length, 1);
+            });
+
+            test("rendered template should contain file name, size and extension", function() {
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($(".k-file .fileInfo", uploadInstance.wrapper).text(), "image.jpg 500 .jpg");
+            });
+
+            test("rendered template should contain k-upload-action button", function() {
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($(".k-file button.k-upload-action", uploadInstance.wrapper).length, 1);
+            });
+
+            test("k-upload-action button should contain remove icon", function() {
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($(".k-file button.k-upload-action > span.k-delete", uploadInstance.wrapper).length, 1);
+            });
+
+            test("progress bar is rendered in the template", function() {
+                simulateSingleFileSelect("image.jpg", 500);
+                equal($('.k-progress', uploadInstance.wrapper).length, 1);
+            });
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

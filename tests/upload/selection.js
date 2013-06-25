@@ -40,9 +40,9 @@
         equal($(".k-upload-files .k-file .k-filename", uploadInstance.wrapper).text(), "first.txt");
     });
 
-    test("progress bar is not rendered", function() {
+    test("empty progress bar is rendered", function() {
         simulateFileSelect();
-        equal($(".k-upload-files li.k-file .k-progress", uploadInstance.wrapper).length, 0);
+        equal($(".k-upload-files li.k-file .k-progress", uploadInstance.wrapper).length, 1);
     })
 
     test("disable prevents selection", function () {
@@ -76,4 +76,10 @@
         $("#parentForm").trigger("reset");
 
         equal($(".k-upload-files", uploadInstance.wrapper).length, 0);
+    });
+
+    test("k-upload-empty is removed when a file is selected", function() {
+        simulateFileSelect();
+
+        ok(!$(uploadInstance.wrapper).is(".k-upload-empty"));
     });

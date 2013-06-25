@@ -74,3 +74,16 @@
 
         equal($(".k-upload-selected", uploadInstance.wrapper).length, 1);
     });
+
+    test("k-upload-status-total is not rendered before upload is started", function() {
+        simulateFileSelect();
+
+        equal($(".k-upload-status-total", uploadInstance.wrapper).length, 0);
+    });
+
+    test("k-upload-status-total is rendered when upload is started", function() {
+        simulateFileSelect();
+        $(".k-upload-selected").click();
+        
+        equal($(".k-upload-status-total", uploadInstance.wrapper).length, 1);
+    });
