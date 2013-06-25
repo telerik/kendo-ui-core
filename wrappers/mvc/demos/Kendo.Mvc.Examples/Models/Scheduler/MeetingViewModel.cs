@@ -6,9 +6,9 @@
     using System.Web;
     using Kendo.Mvc.UI;
 
-    public class TaskViewModel : ISchedulerEvent
+    public class MeetingViewModel : ISchedulerEvent
     {
-        public int TaskID { get; set; }
+        public int MeetingID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -26,6 +26,7 @@
         }
 
         private DateTime end;
+
         public DateTime End
         {
             get
@@ -42,22 +43,24 @@
         public int? RecurrenceID { get; set; }
         public string RecurrenceException { get; set; }
         public bool IsAllDay { get; set; }
-        public int? OwnerID { get; set; }
+        public string Timezone { get; set; }
+        public int? RoomID { get; set; }
+        public IEnumerable<int> Atendees { get; set; }
 
-        public Task ToEntity()
+        public Meeting ToEntity()
         {
-            return new Task
+            return new Meeting
             {
-                TaskID = TaskID,
+                MeetingID = MeetingID,
                 Title = Title,
                 Start = Start,
                 End = End,
                 Description = Description,
+                IsAllDay = IsAllDay,
                 RecurrenceRule = RecurrenceRule,
                 RecurrenceException = RecurrenceException,
                 RecurrenceID = RecurrenceID,
-                IsAllDay = IsAllDay,
-                OwnerID = OwnerID
+                RoomID = RoomID
             };
         }
     }

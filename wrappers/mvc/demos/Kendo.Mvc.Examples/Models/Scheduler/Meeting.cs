@@ -3,7 +3,7 @@
     using Kendo.Mvc.UI;
     using System.Data;
 
-    public partial class Task : ISchedulerEvent
+    public partial class Meeting : ISchedulerEvent
     {
         private new EntityKey EntityKey { get; set; }
 

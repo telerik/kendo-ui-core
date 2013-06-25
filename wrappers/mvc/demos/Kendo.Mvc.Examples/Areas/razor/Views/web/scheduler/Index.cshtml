@@ -8,7 +8,6 @@
     .Date(new DateTime(2013, 6, 13))
     .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
     .Height(600)
-    .Width(727)
     .Views(views =>
     {
         views.DayView();
@@ -25,9 +24,9 @@
             .DataValueField("Value")
             .DataColorField("Color")
             .BindTo(new[] { 
-                new { Text = "Alex", Value = 1, Color = "#ef701d" } ,
-                new { Text = "Bob", Value = 2, Color = "#5fb1f7" } ,
-                new { Text = "Charlie", Value = 3, Color = "#35a964" } 
+                new { Text = "Alex", Value = 1, Color = "#ff7663" } ,
+                new { Text = "Bob", Value = 2, Color = "#3a8bd8" } ,
+                new { Text = "Charlie", Value = 3, Color = "#3ba96a" } 
             });
     })
     .DataSource(d => d
@@ -37,11 +36,10 @@
         .Destroy("Destroy", "Scheduler")
         .Update("Update", "Scheduler")
         .Filter(filters => { 
-                filters.Add(model => model.OwnerID).IsEqualTo(1).Or().IsEqualTo(2);
+            filters.Add(model => model.OwnerID).IsEqualTo(1).Or().IsEqualTo(2);
             })
-        )
-
     )
+)
 
 <script type="text/javascript">
     $(function () {
@@ -55,7 +53,7 @@
                 filters: $.map(checked, function (value) {
                     return {
                         operator: "eq",
-                        field: "ownerId",
+                        field: "OwnerID",
                         value: value
                     };
                 })

@@ -6,7 +6,7 @@
     using System.Web;
     using Kendo.Mvc.UI;
 
-    public class Screening : ISchedulerEvent
+    public class Projection : ISchedulerEvent
     {
         public string Title { get; set; }
 
