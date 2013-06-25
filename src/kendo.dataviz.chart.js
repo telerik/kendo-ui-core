@@ -41,6 +41,7 @@ kendo_module({
         ChartElement = dataviz.ChartElement,
         Color = dataviz.Color,
         ElementAnimation = dataviz.ElementAnimation,
+        Note = dataviz.Note,
         NumericAxis = dataviz.NumericAxis,
         Point2D = dataviz.Point2D,
         RootElement = dataviz.RootElement,
@@ -129,6 +130,7 @@ kendo_module({
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
         NOTE_CLICK = dataviz.NOTE_CLICK,
         NOTE_HOVER = dataviz.NOTE_HOVER,
+        NOTE_TEXT = "noteText",
         OBJECT = "object",
         OHLC = "ohlc",
         OUTSIDE_END = "outsideEnd",
@@ -2678,7 +2680,8 @@ kendo_module({
             animation: {
                 type: BAR
             },
-            opacity: 1
+            opacity: 1,
+            note: {}
         },
 
         render: function() {
@@ -2686,6 +2689,7 @@ kendo_module({
                 value = bar.value,
                 options = bar.options,
                 labels = options.labels,
+                noteOptions = options.note,
                 labelText = value,
                 labelTemplate;
 
@@ -2718,6 +2722,11 @@ kendo_module({
                     ))
                 );
             }
+
+            if (noteOptions.visible && defined(noteOptions.label.text)) {
+                bar.note = new Note(noteOptions);
+                bar.append(bar.note);
+            }
         },
 
         reflow: function(targetBox) {
@@ -2733,6 +2742,10 @@ kendo_module({
             if (label) {
                 label.options.aboveAxis = options.aboveAxis;
                 label.reflow(targetBox);
+            }
+
+            if (bar.note) {
+                bar.note.reflow(targetBox);
             }
         },
 
@@ -3133,7 +3146,8 @@ kendo_module({
                 vertical: !options.invertAxes,
                 overlay: series.overlay,
                 labels: labelOptions,
-                isStacked: isStacked
+                isStacked: isStacked,
+                note: { label: { text: data.fields.noteText } }
             }, series, {
                 color: data.fields.color || undefined
             });
@@ -9664,26 +9678,26 @@ kendo_module({
 
     SeriesBinder.current.register(
         [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
-        [VALUE], [CATEGORY, COLOR]
+        [VALUE], [CATEGORY, COLOR, NOTE_TEXT]
     );
 
     SeriesBinder.current.register(
         [SCATTER, SCATTER_LINE, BUBBLE],
-        [X, Y], [COLOR]
+        [X, Y], [COLOR, NOTE_TEXT]
     );
 
     SeriesBinder.current.register(
-        [BUBBLE], [X, Y, "size"], [COLOR, CATEGORY]
+        [BUBBLE], [X, Y, "size"], [COLOR, CATEGORY, NOTE_TEXT]
     );
 
     SeriesBinder.current.register(
         [CANDLESTICK, OHLC],
-        ["open", "high", "low", "close"], [CATEGORY, COLOR, "downColor"]
+        ["open", "high", "low", "close"], [CATEGORY, COLOR, "downColor", NOTE_TEXT]
     );
 
     SeriesBinder.current.register(
         [BULLET, VERTICAL_BULLET],
-        ["current", "target"], [CATEGORY, COLOR, "visibleInLegend"]
+        ["current", "target"], [CATEGORY, COLOR, "visibleInLegend", NOTE_TEXT]
     );
 
     SeriesBinder.current.register(

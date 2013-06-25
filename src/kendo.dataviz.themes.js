@@ -154,7 +154,7 @@ kendo_module({
                         border: {
                             width: 1
                         },
-                        padding: 3,
+                        padding: 5,
                         size: 1
                     },
                     label: {
@@ -163,7 +163,8 @@ kendo_module({
                     connector: {
                         distance: 10,
                         width: 1
-                    }
+                    },
+                    visible: true
                 }
             },
             categoryAxis: {
@@ -189,7 +190,7 @@ kendo_module({
                         border: {
                             width: 1
                         },
-                        padding: 3,
+                        padding: 5,
                         size: 1
                     },
                     label: {
@@ -263,8 +264,17 @@ kendo_module({
                     color: WHITE
                 },
                 note: {
+                    icon: {
+                        background: "#3b3b3b",
+                        border: {
+                            color: "#8e8e8e"
+                        }
+                    },
                     label: {
                         color: WHITE
+                    },
+                    connector: {
+                        color: "#8e8e8e"
                     }
                 },
                 pie: {
@@ -407,8 +417,17 @@ kendo_module({
                     }
                 },
                 note: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#9aabb2"
+                        }
+                    },
                     label: {
-                        color: BLACK
+                        color: "#293135"
+                    },
+                    connector: {
+                        color: "#9aabb2"
                     }
                 }
             },
@@ -494,7 +513,16 @@ kendo_module({
                     color: "#ffffff"
                 },
                 note: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#ffffff"
+                        }
+                    },
                     label: {
+                        color: "#ffffff"
+                    },
+                    connector: {
                         color: "#ffffff"
                     }
                 },
@@ -641,8 +669,17 @@ kendo_module({
                     }
                 },
                 note: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#8e8e8e"
+                        }
+                    },
                     label: {
-                        color: BLACK
+                        color: "#232323"
+                    },
+                    connector: {
+                        color: "#8e8e8e"
                     }
                 }
             },
@@ -730,8 +767,17 @@ kendo_module({
                     opacity: 0.5
                 },
                 note: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#4e5968"
+                        }
+                    },
                     label: {
-                        color: "#293135"
+                        color: "#4e5968"
+                    },
+                    connector: {
+                        color: "#4e5968"
                     }
                 },
                 line: {
@@ -848,8 +894,17 @@ kendo_module({
                     color: BLACK
                 },
                 note: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#777777"
+                        }
+                    },
                     label: {
-                        color: BLACK
+                        color: "#777777"
+                    },
+                    connector: {
+                        color: "#777777"
                     }
                 },
                 candlestick: {

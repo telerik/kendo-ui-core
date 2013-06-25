@@ -1177,7 +1177,7 @@ kendo_module({
                 options = axis.options,
                 note = options.note,
                 items = note.items || [],
-                i, item, note;
+                i, item;
 
             axis.notes = [];
 
@@ -1642,26 +1642,7 @@ kendo_module({
                 marker = note.marker,
                 lineStart, box, contentBox;
 
-            if (inArray(options.position, [TOP, BOTTOM])) {
-                if (options.position === TOP) {
-                    contentBox = Box2D(
-                        center.x - width, targetBox.y1 - distance,
-                        center.x + width, targetBox.y1 - (distance + height));
-                } else {
-                    contentBox = Box2D(
-                        center.x - width, targetBox.y1 + distance,
-                        center.x + width, targetBox.y1 + height + distance);
-                }
-
-                if (options.connector.visible) {
-                    lineStart = Point2D(center.x, targetBox.y1);
-                    note.connectorPoints = [
-                        lineStart,
-                        Point2D(center.x, contentBox.y1)
-                    ];
-                    box = contentBox.clone().wrapPoint(lineStart);
-                }
-            } else {
+            if (inArray(options.position, [LEFT, RIGHT])) {
                 if (options.position === LEFT) {
                     contentBox = Box2D(
                         targetBox.x1 - (width + distance), center.y - height,
@@ -1688,6 +1669,25 @@ kendo_module({
                         ];
                         box = contentBox.clone().wrapPoint(lineStart);
                     }
+                }
+            } else {
+                if (options.position === BOTTOM) {
+                    contentBox = Box2D(
+                        center.x - width, targetBox.y1 + distance,
+                        center.x + width, targetBox.y1 + height + distance);
+                } else {
+                    contentBox = Box2D(
+                        center.x - width, targetBox.y1 - distance,
+                        center.x + width, targetBox.y1 - (distance + height));
+                }
+
+                if (options.connector.visible) {
+                    lineStart = Point2D(center.x, targetBox.y1);
+                    note.connectorPoints = [
+                        lineStart,
+                        Point2D(center.x, contentBox.y1)
+                    ];
+                    box = contentBox.clone().wrapPoint(lineStart);
                 }
             }
 
@@ -3430,6 +3430,7 @@ kendo_module({
         FadeAnimationDecorator: FadeAnimationDecorator,
         IDPool: IDPool,
         LRUCache: LRUCache,
+        Note: Note,
         NumericAxis: NumericAxis,
         Point2D: Point2D,
         PinElement: PinElement,
