@@ -45,7 +45,7 @@
     <div data-id="examples" data-role="layout" data-show="triggerIndexButton">
         <header data-role="header">
             <div data-role="navbar">
-                <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat Skin</a>
+                <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
                 <a class="nav-button" data-align="left" data-role="backbutton" href="" data-transition="slide:right">Back</a>
                 <span data-role="view-title"></span>
                 <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
@@ -63,18 +63,16 @@
         }
 
         function changeSkin(e) {
-            document.body.className = "";
-            if (e.sender.element.text() == "Flat Skin") {
+            $(document.body).removeClass("km-ios km-android km-blackberry km-ios4 km-ios5 km-ios6 km-wp km-flat");
+            if (e.sender.element.text() == "Flat") {
                 window.kendoMobileApplication.options.skin = "flat";
-                window.kendoMobileApplication._setupPlatform();
-                window.kendoMobileApplication._setupElementClass();
                 e.sender.element.text("Native");
             } else {
                 window.kendoMobileApplication.options.skin = null;
-                window.kendoMobileApplication._setupPlatform();
-                window.kendoMobileApplication._setupElementClass();
-                e.sender.element.text("Flat Skin");
+                e.sender.element.text("Flat");
             }
+            window.kendoMobileApplication._setupPlatform();
+            window.kendoMobileApplication._setupElementClass();
         }
 
         window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {
