@@ -833,8 +833,9 @@ kendo_module({
             end = new Date(rule.until);
         }
 
-        if (start < eventStartMS || (count && start > eventStartMS)) {
+        if (start < eventStartMS || count || rule.interval > 1) {
             start = new Date(eventStartMS);
+            hours = start.getHours();
         } else {
             hours = start.getHours();
             minutes = start.getMinutes();
@@ -855,7 +856,7 @@ kendo_module({
             start.setHours(hours, minutes, seconds, eventStart.getMilliseconds());
         }
 
-        rule._startTime = startTime = new Date(1980, 0, 1, start.getHours(), start.getMinutes(), start.getSeconds(), start.getMilliseconds());
+        rule._startTime = startTime = new Date(1980, 0, 1, hours, start.getMinutes(), start.getSeconds(), start.getMilliseconds());
         offset = (eventEnd.getTimezoneOffset() - eventStart.getTimezoneOffset()) * date.MS_PER_MINUTE;
         durationMS = eventEnd - eventStartMS - offset;
 

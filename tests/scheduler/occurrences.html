@@ -608,6 +608,21 @@
                 equal(events[3].end.getTime(), +new Date(2013, 5, 6, 17, 0));
             });
 
+            test("DAILY occurrences with INTERVAL starts recurring from event.start", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2000, 10, 10, 16, 30),
+                    end: new Date(2000, 10, 10, 17, 0),
+                    recurrenceRule: "FREQ=DAILY;INTERVAL=6"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2000, 10, 12), new Date(2000, 10, 18));
+
+                equal(events.length, 1);
+                equal(events[0].start.getTime(), new Date(2000, 10, 16, 16, 30).getTime());
+            });
+
             test("DAILY limit by BYMONTH and BYDAY", function() {
                 var schedulerEvent = {
                     uid: "id",
