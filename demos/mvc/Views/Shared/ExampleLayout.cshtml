@@ -133,14 +133,19 @@
 
             $(function() {
                 applyCurrentMobileOS("#mobile-application-container");
+                var skin = kendoMobileOS != "flat" ? {} : {
+                        platform: "ios",
+                        skin: "flat"
+                    };
 
                 if (!(kendo.support.browser.msie && kendo.support.browser.version < 10) && !kendo.support.browser.opera) {
                     window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"),
-                    {
-                        layout: "examples",
-                        platform: kendoMobileOS,
-                        updateDocumentTitle: false
-                    });
+                        $.extend({
+                            layout: "examples",
+                            platform: kendoMobileOS,
+                            updateDocumentTitle: false,
+                            hideAddressBar: false
+                        }, skin));
                 }
             });
         </text>

@@ -23,7 +23,7 @@
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
 </head>
 <body>
-    <div data-role="view" data-title="Kendo Mobile &ndash; Overview" id="index">
+    <div data-role="view" data-title="Kendo UI Mobile" id="index">
     @foreach (string category in ViewBag.Navigation.Keys)
     {
         <ul data-role="listview" data-type="group" data-style="inset">
@@ -45,6 +45,7 @@
     <div data-id="examples" data-role="layout" data-show="triggerIndexButton">
         <header data-role="header">
             <div data-role="navbar">
+                <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat Skin</a>
                 <a class="nav-button" data-align="left" data-role="backbutton" href="" data-transition="slide:right">Back</a>
                 <span data-role="view-title"></span>
                 <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
@@ -57,7 +58,23 @@
 
         function triggerIndexButton(e) {
             var viewID = e.view.element.attr("id");
+            e.layout.header.find(".index-button").css({display: viewID != "index" ? "none" : ""});
             e.layout.header.find(".nav-button").css({display: viewID != "index" ? "" : "none"});
+        }
+
+        function changeSkin(e) {
+            document.body.className = "";
+            if (e.sender.element.text() == "Flat Skin") {
+                window.kendoMobileApplication.options.skin = "flat";
+                window.kendoMobileApplication._setupPlatform();
+                window.kendoMobileApplication._setupElementClass();
+                e.sender.element.text("Native");
+            } else {
+                window.kendoMobileApplication.options.skin = null;
+                window.kendoMobileApplication._setupPlatform();
+                window.kendoMobileApplication._setupElementClass();
+                e.sender.element.text("Flat Skin");
+            }
         }
 
         window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {

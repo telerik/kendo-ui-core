@@ -454,7 +454,7 @@
 
     $(Application.init);
 
-    var mobileClasses = "km-ios km-android km-blackberry km-ios4 km-wp";
+    var mobileClasses = "km-ios km-android km-blackberry km-ios4 km-wp km-flat";
 
     function applyCurrentTheme() {
         if (supports.sessionStorage) {
@@ -474,7 +474,7 @@
         }
 
         $(container).removeClass(mobileClasses).addClass("km-" + kendoMobileOS);
-        $("#device-wrapper").removeClass("ios android blackberry wp").addClass(kendoMobileOS);
+        $("#device-wrapper").removeClass("ios android blackberry wp flat").addClass(kendoMobileOS);
         $("#deviceList .selectedThumb").removeClass("selectedThumb");
         $("#deviceList ." + kendoMobileOS + "Thumb").parent().addClass("selectedThumb");
     }
@@ -508,7 +508,8 @@
                 { text: "iOS", value: "ios" },
                 { text: "Android", value: "android" },
                 { text: "Blackberry", value: "blackberry" },
-                { text: "Windows Phone", value: "wp" }
+                { text: "WP8", value: "wp" },
+                { text: "Flat Skin", value: "flat" }
             ]
         });
 
