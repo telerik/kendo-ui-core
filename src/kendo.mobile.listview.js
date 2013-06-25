@@ -1075,6 +1075,8 @@ kendo_module({
             if (grouped) {
                 this._styleGroups();
             }
+
+            this.trigger(STYLED);
         },
 
         _enhanceItems: function(items) {
