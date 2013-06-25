@@ -406,7 +406,8 @@
                     "text": "Inline editing",
                     "url": "editor/inline-editing.html",
                     "title": "Inline editing functionality of Kendo UI WYSIWYG jQuery Editor",
-                    "meta": "This example shows how to use the Kendo UI Editor to edit parts of the page inline, allowing authors to see the page in its final state."
+                    "meta": "This example shows how to use the Kendo UI Editor to edit parts of the page inline, allowing authors to see the page in its final state.",
+                    "packages": [ "offline" ]
                 },
                 {
                     "text": "Custom tools",
@@ -526,7 +527,8 @@
                     "text": "Inline editing",
                     "url": "grid/editing-inline.html",
                     "title": "Applying inline editing in Kendo UI Grid",
-                    "meta": "This sample demonstrates how the values in the cells of KendoGrid can be easily changed. Try the demo source code to find how inline data grid can be deleted and modified."
+                    "meta": "This sample demonstrates how the values in the cells of KendoGrid can be easily changed. Try the demo source code to find how inline data grid can be deleted and modified.",
+                    "packages": ["!mvc", "!jsp"]
                 },
                 {
                     "text": "Popup editing",

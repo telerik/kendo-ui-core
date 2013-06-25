@@ -10,10 +10,10 @@
       .HtmlAttributes(new { style = "width: 740px;height:440px" })
       .Tools(tools => tools
         .Clear()
-        .Styles(styles => styles
-            .Add("Highlight Error", "hlError")
-            .Add("Highlight OK", "hlOK")
-            .Add("Inline Code", "inlineCode")
+        .Formatting(formatting => formatting
+            .Add("Highlight Error", ".hlError")
+            .Add("Highlight OK", ".hlOK")
+            .Add("Inline Code", ".inlineCode")
         )
       )
       .StyleSheets(css => css

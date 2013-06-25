@@ -24,16 +24,14 @@ namespace Kendo.Mvc.UI
             StyleSheets = new List<string>();
 
             new EditorToolFactory(DefaultToolGroup)
-                .Bold().Italic().Underline().Strikethrough()
-                .FontName()
-                .FontSize()
-                .FontColor().BackColor()
-                .JustifyLeft().JustifyCenter().JustifyRight().JustifyFull()
+                .Formatting()
+                .Bold().Italic().Underline()
+                .JustifyLeft().JustifyCenter().JustifyRight()
                 .InsertUnorderedList().InsertOrderedList()
                 .Outdent().Indent()
-                .FormatBlock()
                 .CreateLink().Unlink()
-                .InsertImage();
+                .InsertImage()
+                .TableEditing();
 
             ImageBrowserSettings = new EditorImageBrowserSettings(Messages.ImageBrowserMessages);
         }
