@@ -7,9 +7,8 @@
 
     public class SchedulerViewMonth : SchedulerViewBase
     {
-        public SchedulerViewMonth()
-        {
-            this.Type = SchedulerViewType.Month;
+        public SchedulerViewMonth() : base(SchedulerViewType.Month)
+        {            
         }
 
         public string DayTemplate 
@@ -32,8 +31,7 @@
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            //TODO: implement serialize method.
-            SerializeBaseOptions(json);
+            base.Serialize(json);
 
             var idPrefix = "#";
 

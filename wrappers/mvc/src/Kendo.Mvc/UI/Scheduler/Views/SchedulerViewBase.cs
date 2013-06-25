@@ -2,11 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     public abstract class SchedulerViewBase : JsonObject, ISchedulerView
     {
+        protected SchedulerViewBase(SchedulerViewType type)
+	    {
+            Type = type;
+	    }
+        
         public string Title
         { 
             get; 
@@ -61,7 +64,7 @@
             set;
         }
 
-        protected void SerializeBaseOptions(IDictionary<string, object> json)
+        protected override void Serialize(IDictionary<string, object> json)
         {
             var idPrefix = "#";
 
@@ -79,7 +82,7 @@
             {
                 json["endTime"] = EndTime;
             }
-            
+
             json["type"] = Type;
 
             if (Editable != null)
@@ -96,7 +99,7 @@
 
             if (!string.IsNullOrEmpty(EventTemplate))
             {
-                json["eventTemplate"] = EventTemplate;   
+                json["eventTemplate"] = EventTemplate;
             }
 
             if (!string.IsNullOrEmpty(EventTemplateId))

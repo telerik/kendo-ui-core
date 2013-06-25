@@ -2,14 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     public class SchedulerViewAgenda : SchedulerViewBase
     {
-        public SchedulerViewAgenda()
-        {
-            this.Type = SchedulerViewType.Agenda;
+        public SchedulerViewAgenda() : base (SchedulerViewType.Agenda)
+        {            
         }
 
         public string EventDateTemplate 
@@ -38,8 +35,7 @@
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            //TODO: implement serialize method.
-            SerializeBaseOptions(json);
+            base.Serialize(json);
 
             var idPrefix = "#";
 

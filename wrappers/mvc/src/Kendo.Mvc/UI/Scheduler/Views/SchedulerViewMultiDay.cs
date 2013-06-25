@@ -2,11 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     public abstract class SchedulerViewMultiDay : SchedulerViewBase
     {
+        protected SchedulerViewMultiDay(SchedulerViewType type) : base(type)
+        {
+            AllDaySlot = true;
+        }
+
         public string AllDayEventTemplate
         {
             get;
@@ -76,7 +79,7 @@
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            SerializeBaseOptions(json);
+            base.Serialize(json);
 
             var idPrefix = "#";
 
