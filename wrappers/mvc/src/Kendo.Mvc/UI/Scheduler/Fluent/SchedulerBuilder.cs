@@ -32,7 +32,7 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerBuilder<TModel> Date(DateTime? date)
+        public SchedulerBuilder<TModel> Date(DateTime date)
         {
             Component.Date = date;
 
@@ -53,7 +53,7 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerBuilder<TModel> StartTime(DateTime? startTime)
+        public SchedulerBuilder<TModel> StartTime(DateTime startTime)
         {
             Component.StartTime = startTime;
 
@@ -74,7 +74,7 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerBuilder<TModel> EndTime(DateTime? endTime)
+        public SchedulerBuilder<TModel> EndTime(DateTime endTime)
         {
             Component.EndTime = endTime;
 
