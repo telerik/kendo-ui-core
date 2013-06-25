@@ -112,7 +112,11 @@
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
     <Compile Include="Controllers\DataViz\QRCode\ApiController.cs" />
     <Compile Include="Controllers\DataViz\QRCode\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Radar_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Radar_Charts\Radar_ColumnController.cs" />
+    <Compile Include="Controllers\DataViz\Radar_Charts\Radar_AreaController.cs" />
     <Compile Include="Controllers\DataViz\Radar_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Radar_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\Local_DataController.cs" />
@@ -416,6 +420,9 @@
     <Compile Include="Models\BulletChartLocalDataViewModel.cs" />
     <Compile Include="Models\AprilSales.cs" />
     <Compile Include="Models\CompensationStats.cs" />
+    <Compile Include="Models\BudgetReportItem.cs" />
+    <Compile Include="Models\ChartDataRepository.Radar.cs" />
+    <Compile Include="Models\ProteinScoreItem.cs" />
     <Compile Include="Models\DatePoint.cs" />
     <Compile Include="Models\Scheduler\SchedulerEventService.cs" />
     <Compile Include="Models\Scheduler\SchedulerModels.Designer.cs">
@@ -523,6 +530,9 @@
     <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\qrcode\api.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\qrcode\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\radar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\radar_charts\radar_column.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\radar_charts\radar_area.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\grouped_data.aspx" />
@@ -780,6 +790,10 @@
     <Content Include="Areas\razor\Views\dataviz\radar_charts\index.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\qrcode\index.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\qrcode\api.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\radar_charts\radar_area.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\radar_charts\radar_column.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\radar_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\radar_charts\local_data.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
