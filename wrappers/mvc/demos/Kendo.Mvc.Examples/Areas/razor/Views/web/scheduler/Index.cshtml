@@ -30,14 +30,18 @@
             });
     })
     .DataSource(d => d
-        .Model(m => m.Id(f => f.TaskID))
+        .Model(m => {
+            m.Id(f => f.TaskID);
+            m.Field(f => f.OwnerID).DefaultValue(1);
+        })
         .Read("Read", "Scheduler")
         .Create("Create", "Scheduler")
         .Destroy("Destroy", "Scheduler")
         .Update("Update", "Scheduler")
-        .Filter(filters => { 
+        .Filter(filters =>
+        {
             filters.Add(model => model.OwnerID).IsEqualTo(1).Or().IsEqualTo(2);
-            })
+        })
     )
 )
 
