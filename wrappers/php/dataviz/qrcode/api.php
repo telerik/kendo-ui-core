@@ -18,9 +18,6 @@ require_once '../../include/header.php';
             <li>
                 <textarea id="qrValue" class="k-textbox" data-bind="value: qrValue" rows="5" cols="20"></textarea>                            
             </li>
-            <li>
-                <button data-bind="click: setValue" class="k-button">Set Value</button>
-            </li>
         </ul>
     </div>
     <div class="config-section">
@@ -57,16 +54,15 @@ require_once '../../include/header.php';
                 <input id="moduleColor" data-role="colorpicker" data-bind="value: qrOptions.darkModuleColor" />
                 <label for="moduleColor">Module color</label>
             </li>
-            <li>
-                <button id="setOptions" data-bind="click: setOptions" class="k-button">Set options</button>
-            </li>
         </ul>
     </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var qrCode = $("#qrCode").data("kendoQRCode");
+        var qrCode = $("#qrCode").kendoQRCode({
+            size: 200
+        }).data("kendoQRCode");
 
         var viewModel = kendo.observable({
             qrValue: "Hello World",
@@ -80,16 +76,21 @@ require_once '../../include/header.php';
                     width: 0
                 }
             },
-            setOptions: function () {
-                qrCode.setOptions(this.qrOptions.toJSON());
-                this.setElementWidth();
-                qrCode.redraw();
-            },
-            setValue: function () {                            
+            setValue: function () {
                 qrCode.value(this.qrValue);
             },
             setElementWidth: function () {
                 qrCode.element.width(this.qrOptions.size);
+            }
+        });
+
+        viewModel.bind("change", function (e) {
+            if (e.field == "qrValue") {
+                this.setValue();
+            }
+            else {
+                this.setElementWidth();
+                qrCode.setOptions(this.qrOptions.toJSON());
             }
         });
 
