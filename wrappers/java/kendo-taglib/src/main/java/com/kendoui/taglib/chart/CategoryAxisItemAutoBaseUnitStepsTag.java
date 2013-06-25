@@ -83,6 +83,14 @@ public class CategoryAxisItemAutoBaseUnitStepsTag extends  BaseTag  /* interface
         setProperty("months", value);
     }
 
+    public Object getSeconds() {
+        return (Object)getProperty("seconds");
+    }
+
+    public void setSeconds(Object value) {
+        setProperty("seconds", value);
+    }
+
     public Object getWeeks() {
         return (Object)getProperty("weeks");
     }
