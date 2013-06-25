@@ -731,7 +731,7 @@ kendo_module({
 
         _editRecurringDialog: function(model, uid) {
             var that = this,
-                wnd = $('<div><button>Edit current occurrence</button><button>Edit the series</button></div>'),
+                wnd = $('<div><button class="k-button">Edit current occurrence</button><button class="k-button">Edit the series</button></div>'),
                 buttons = wnd.find("button"),
                 id, idField;
 
@@ -880,7 +880,7 @@ kendo_module({
         _deleteRecurringDialog: function(model, uid) {
             var that = this,
                 isException = !model,
-                wnd = $('<div><button>Delete current occurrence</button><button>Delete the series</button></div>'),
+                wnd = $('<div><button class="k-button">Delete current occurrence</button><button class="k-button">Delete the series</button></div>'),
                 buttons = wnd.find("button"),
                 id, idField;
 
