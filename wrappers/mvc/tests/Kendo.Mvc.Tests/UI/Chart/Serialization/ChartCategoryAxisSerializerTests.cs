@@ -323,6 +323,20 @@ namespace Kendo.Mvc.UI.Tests
             serializer.Serialize().ContainsKey("select").ShouldBeTrue();
         }
 
+        [Fact]
+        public void Should_serialize_StartAngle()
+        {
+            axisMock.SetupGet(a => a.StartAngle).Returns(10);
+            serializer.Serialize()["startAngle"].ShouldEqual(10.0);
+        }
+
+        [Fact]
+        public void Should_not_serialize_StartAngle_if_not_set()
+        {
+            axisMock.SetupGet(a => a.StartAngle).Returns((double?)null);
+            serializer.Serialize().ContainsKey("startAngle").ShouldBeFalse();
+        }
+
         private void AssertCategories(params string[] categories)
         {
             var expectedCategories = new Queue<string>(categories);

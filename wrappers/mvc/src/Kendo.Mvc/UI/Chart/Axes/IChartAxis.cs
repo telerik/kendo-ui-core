@@ -23,5 +23,15 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// The angle (degrees) where the 0 value is placed. It defaults to 0.
+        /// Angles increase counterclockwise and zero is to the right. Negative values are acceptable.
+        /// </summary>
+        double? StartAngle
+        {
+            get;
+            set;
+        }
     }
 }

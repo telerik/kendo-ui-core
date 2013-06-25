@@ -169,6 +169,16 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// The angle (degrees) where the 0 value is placed. It defaults to 0.
+        /// Angles increase counterclockwise and zero is to the right. Negative values are acceptable.
+        /// </summary>
+        public double? StartAngle
+        {
+            get;
+            set;
+        }
+
         public abstract IChartSerializer CreateSerializer();
     }
 }

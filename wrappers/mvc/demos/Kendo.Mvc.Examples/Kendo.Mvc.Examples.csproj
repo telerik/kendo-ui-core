@@ -112,6 +112,11 @@
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
     <Compile Include="Controllers\DataViz\QRCode\ApiController.cs" />
     <Compile Include="Controllers\DataViz\QRCode\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Polar_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Polar_Charts\Polar_AreaController.cs" />
+    <Compile Include="Controllers\DataViz\Polar_Charts\Polar_ScatterController.cs" />
+    <Compile Include="Controllers\DataViz\Polar_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Polar_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Radar_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Radar_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Radar_Charts\Radar_ColumnController.cs" />
@@ -409,6 +414,9 @@
     <Compile Include="Models\BlogComments.cs" />
     <Compile Include="Models\BubbleChartsGroupedDataViewModel.cs" />
     <Compile Include="Models\CategoryItem.cs" />
+    <Compile Include="Models\Chart\AntennaGainItem.cs" />
+    <Compile Include="Models\Chart\ChartDataRepository.Polar.cs" />
+    <Compile Include="Models\Chart\SunPositionItem.cs" />
     <Compile Include="Models\ClientCategoryViewModel.cs" />
     <Compile Include="Models\ClientProductViewModel.cs" />
     <Compile Include="Models\ClientTreeViewItemModel.cs" />
@@ -530,8 +538,6 @@
     <Content Include="Areas\aspx\Views\dataviz\line_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\multiple_axes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\qrcode\api.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\qrcode\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radar_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radar_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radar_charts\remote_data.aspx" />
@@ -799,6 +805,11 @@
     <Content Include="Areas\razor\Views\dataviz\radar_charts\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\radar_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\radar_charts\grouped_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\polar_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\polar_charts\polar_scatter.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\polar_charts\polar_area.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\polar_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\polar_charts\local_data.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />

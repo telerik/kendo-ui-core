@@ -14,7 +14,7 @@ namespace Kendo.Mvc.Examples.Models
                 new BudgetReportItem("Customer Support", 30000, 28500),
                 new BudgetReportItem("IT", 25000, 18900),
                 new BudgetReportItem("Administration", 10000, 11100)
-            }
+            };
         }
 
         public static IList<ProteinScoreItem> ProteinQualityData()
