@@ -1,5 +1,5 @@
     <div id="example" class="k-content">
-        
+
         <div class="configuration-horizontal">
             <div class="config-section">
                 <span class="configHead">Options</span>
@@ -22,7 +22,7 @@
         <div class="demo-section">
             <div id="barcode"></div>
         </div>
-        
+
         <script>
             function setOptions(e) {
                 var validValue = $('#validValue');
@@ -42,7 +42,7 @@
                     validValue.hide();
                 } catch (e) {
                     validValue.text(e.message).show();
-                }               
+                }
             }
 
             $(document).ready(function () {
@@ -76,7 +76,8 @@
 
                 $("#barcode").kendoBarcode({
                     value: "1234567",
-                    type: "ean8"
+                    type: "ean8",
+                    background: "transparent"
                 });
 
                 $('#value,#checksum,#text').change(setOptions);
@@ -87,17 +88,17 @@
                 width: 300px;
                 margin: 20px auto;
             }
-            
+
             .configuration-horizontal .config-section {
                 min-width: 100px;
                 line-height: 30px;
             }
-            
+
             .configuration-horizontal .k-textbox {
                 width:150px;
                 margin-left: 0;
             }
-            
+
             #validValue {
                 display:none;
             }
