@@ -1627,7 +1627,8 @@ kendo_module({
             note.marker = marker;
             note.append(marker);
             marker.reflow(Box2D());
-            note.wrapperBox = box.wrap(marker.box);
+            debugger;
+            note.wrapperBox = box.wrap(marker.paddingBox);
         },
 
         reflow: function(targetBox) {
@@ -1649,7 +1650,7 @@ kendo_module({
                         targetBox.x1 - distance, center.y + height);
 
                     if (options.connector.visible) {
-                        lineStart = Point2D(targetBox.x2, center.y);
+                        lineStart = Point2D(targetBox.x1, center.y);
                         note.connectorPoints = [
                             lineStart,
                             Point2D(contentBox.x2, center.y)
@@ -1658,8 +1659,8 @@ kendo_module({
                     }
                 } else {
                     contentBox = Box2D(
-                        targetBox.x1 + distance, center.y - height,
-                        targetBox.x1 + width + distance, center.y + height);
+                        targetBox.x2 + distance, center.y - height,
+                        targetBox.x2 + width + distance, center.y + height);
 
                     if (options.connector.visible) {
                         lineStart = Point2D(targetBox.x2, center.y);
@@ -1673,21 +1674,30 @@ kendo_module({
             } else {
                 if (options.position === BOTTOM) {
                     contentBox = Box2D(
-                        center.x - width, targetBox.y1 + distance,
-                        center.x + width, targetBox.y1 + height + distance);
+                        center.x - width, targetBox.y2 + distance,
+                        center.x + width, targetBox.y2 + height + distance);
+
+                    if (options.connector.visible) {
+                        lineStart = Point2D(center.x, targetBox.y2);
+                        note.connectorPoints = [
+                            lineStart,
+                            Point2D(center.x, contentBox.y1)
+                        ];
+                        box = contentBox.clone().wrapPoint(lineStart);
+                    }
                 } else {
                     contentBox = Box2D(
                         center.x - width, targetBox.y1 - distance,
                         center.x + width, targetBox.y1 - (distance + height));
-                }
 
-                if (options.connector.visible) {
-                    lineStart = Point2D(center.x, targetBox.y1);
-                    note.connectorPoints = [
-                        lineStart,
-                        Point2D(center.x, contentBox.y1)
-                    ];
-                    box = contentBox.clone().wrapPoint(lineStart);
+                    if (options.connector.visible) {
+                        lineStart = Point2D(center.x, targetBox.y1);
+                        note.connectorPoints = [
+                            lineStart,
+                            Point2D(center.x, contentBox.y1)
+                        ];
+                        box = contentBox.clone().wrapPoint(lineStart);
+                    }
                 }
             }
 
