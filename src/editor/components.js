@@ -36,8 +36,6 @@ var SelectBox = DropDownList.extend({
     },
 
     decorate: function(doc) {
-        console.log("decorate");
-        console.trace();
         var items = this.dataSource.data(),
             i, tag, className;
 
