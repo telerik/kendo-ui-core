@@ -1,13 +1,6 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Linq.Expressions;
-    using System.Web.Mvc;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Resources;
 
     /// <summary>
     /// Creates views for the <see cref="Scheduler" /> class.

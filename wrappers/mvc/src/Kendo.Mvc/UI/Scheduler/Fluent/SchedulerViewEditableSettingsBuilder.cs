@@ -1,10 +1,5 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="SchedulerViewEditableSettings"/>.
     /// </summary>
