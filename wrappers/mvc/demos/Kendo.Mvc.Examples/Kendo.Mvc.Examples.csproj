@@ -34,10 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\references\mvc3\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
@@ -335,7 +331,10 @@
     <Compile Include="Controllers\Web\PanelBar\EventsController.cs" />
     <Compile Include="Controllers\Web\PanelBar\ImagesController.cs" />
     <Compile Include="Controllers\Web\PanelBar\IndexController.cs" />
+    <Compile Include="Controllers\Web\Scheduler\ApiController.cs" />
+    <Compile Include="Controllers\Web\Scheduler\EventsController.cs" />
     <Compile Include="Controllers\Web\Scheduler\IndexController.cs" />
+    <Compile Include="Controllers\Web\Scheduler\ResourcesController.cs" />
     <Compile Include="Controllers\Web\Scheduler\TemplatesController.cs" />
     <Compile Include="Controllers\Web\Slider\NavigationController.cs" />
     <Compile Include="Controllers\Web\Slider\RtlController.cs" />
@@ -435,13 +434,17 @@
     <Compile Include="Models\Chart\WindDataItem.cs" />
     <Compile Include="Models\Chart\ProteinScoreItem.cs" />
     <Compile Include="Models\Chart\DatePoint.cs" />
-    <Compile Include="Models\Scheduler\SchedulerEventService.cs" />
+    <Compile Include="Models\DatePoint.cs" />
+    <Compile Include="Models\Scheduler\Meeting.cs" />
+    <Compile Include="Models\Scheduler\MeetingViewModel.cs" />
+    <Compile Include="Models\Scheduler\SchedulerMeetingService.cs" />
+    <Compile Include="Models\Scheduler\SchedulerTaskService.cs" />
     <Compile Include="Models\Scheduler\SchedulerModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SchedulerModels.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Scheduler\Screening.cs" />
+    <Compile Include="Models\Scheduler\Projection.cs" />
     <Compile Include="Models\Scheduler\Task.cs" />
     <Compile Include="Models\Scheduler\TaskViewModel.cs" />
     <Compile Include="Models\SocialBenefitType.cs" />
@@ -877,6 +880,9 @@
     <Content Include="Areas\razor\Views\web\tooltip\api.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\index.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\templates.cshtml" />
+    <Content Include="Areas\razor\Views\web\scheduler\resources.cshtml" />
+    <Content Include="Areas\razor\Views\web\scheduler\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\scheduler\api.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.designer.cs</LastGenOutput>
@@ -1303,12 +1309,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53702</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/Scheduler</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
