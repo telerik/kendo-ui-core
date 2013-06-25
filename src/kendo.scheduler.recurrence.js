@@ -792,23 +792,20 @@ kendo_module({
     }
 
     function expand(event, start, end, zone) {
-        var eventStart = event.start,
+        var idField = event.idField,
+            eventEnd = event.end,
+            eventStart = event.start,
             eventStartMS = eventStart.getTime(),
             rule = parseRule(event.recurrenceRule),
-            idField = event.idField,
             id = event[idField] || event.id,
+            startTime, endTime, endDate,
             hours, minutes, seconds,
+            durationMS, startPeriod,
+            first, count, freq,
             exceptionDates,
-            durationMS,
             current = 1,
             events = [],
-            periodStart,
-            startTime,
-            eventEnd,
-            endTime,
-            first,
-            count,
-            freq;
+            offset;
 
         zone = event.startTimezone || event.endTimezone || zone;
         exceptionDates = parseExceptions(event.recurrenceException, zone);
@@ -822,7 +819,7 @@ kendo_module({
             delete event.id;
         }
 
-        periodStart = start = new Date(start);
+        startPeriod = start = new Date(start);
         end = new Date(end);
 
         if (!rule || event.start > end) {
@@ -858,8 +855,9 @@ kendo_module({
             start.setHours(hours, minutes, seconds, eventStart.getMilliseconds());
         }
 
-        durationMS = (event.end - eventStartMS) - ((event.end.getTimezoneOffset() - event.start.getTimezoneOffset()) * date.MS_PER_MINUTE);
         rule._startTime = startTime = new Date(1980, 0, 1, start.getHours(), start.getMinutes(), start.getSeconds(), start.getMilliseconds());
+        offset = (eventEnd.getTimezoneOffset() - eventStart.getTimezoneOffset()) * date.MS_PER_MINUTE;
+        durationMS = eventEnd - eventStartMS - offset;
 
         if (freq.setup) {
             freq.setup(rule, start, eventStart);
@@ -868,9 +866,9 @@ kendo_module({
         freq.limit(start, end, rule);
 
         while (start <= end) {
-            if (start >= periodStart && !isException(exceptionDates, start, zone)) {
-                eventEnd = new Date(start);
-                setTime(eventEnd, durationMS);
+            if (start >= startPeriod && !isException(exceptionDates, start, zone)) {
+                endDate = new Date(start);
+                setTime(endDate, durationMS);
 
                 endTime = new Date(rule._startTime);
                 setTime(endTime, durationMS);
@@ -879,8 +877,8 @@ kendo_module({
                     uid: kendo.guid(),
                     recurrenceId: id,
                     start: new Date(start),
-                    startTime: new Date(rule._startTime),
-                    end: eventEnd,
+                    startTime: new Date(startTime),
+                    end: endDate,
                     endTime: endTime
                 }));
             }
