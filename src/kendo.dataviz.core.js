@@ -1085,7 +1085,7 @@ kendo_module({
             visible: true,
             reverse: false,
             justified: true,
-            note: {},
+            notes: {},
 
             _alignLines: true
         },
@@ -1175,14 +1175,14 @@ kendo_module({
         createNotes: function() {
             var axis = this,
                 options = axis.options,
-                note = options.note,
-                items = note.items || [],
-                i, item;
+                notes = options.notes,
+                items = notes.items || [],
+                i, item, note;
 
             axis.notes = [];
 
             for (i = 0; i < items.length; i++) {
-                item = deepExtend({}, options.note, items[i]);
+                item = deepExtend({}, notes, items[i]);
                 note = new Note(item);
                 if (note.options.visible) {
                     if (defined(note.options.position)) {
@@ -1586,7 +1586,7 @@ kendo_module({
                 align: CENTER,
                 vAlign: CENTER
             },
-            connector: {
+            line: {
                 visible: true,
                 zIndex: 2
             },
@@ -1634,7 +1634,7 @@ kendo_module({
                 options = note.options,
                 center = targetBox.center(),
                 wrapperBox = note.wrapperBox,
-                distance = options.connector.distance,
+                length = options.line.length,
                 position = options.position,
                 label = note.label,
                 marker = note.marker,
@@ -1642,22 +1642,22 @@ kendo_module({
 
             if (inArray(position, [LEFT, RIGHT])) {
                 if (position === LEFT) {
-                    contentBox = wrapperBox.alignTo(targetBox, position).translate(-distance, targetBox.center().y - wrapperBox.center().y);
+                    contentBox = wrapperBox.alignTo(targetBox, position).translate(-length, targetBox.center().y - wrapperBox.center().y);
 
-                    if (options.connector.visible) {
+                    if (options.line.visible) {
                         lineStart = Point2D(math.floor(targetBox.x1), center.y);
-                        note.connectorPoints = [
+                        note.linePoints = [
                             lineStart,
                             Point2D(math.floor(contentBox.x2), center.y)
                         ];
                         box = contentBox.clone().wrapPoint(lineStart);
                     }
                 } else {
-                    contentBox = wrapperBox.alignTo(targetBox, position).translate(distance, targetBox.center().y - wrapperBox.center().y);
+                    contentBox = wrapperBox.alignTo(targetBox, position).translate(length, targetBox.center().y - wrapperBox.center().y);
 
-                    if (options.connector.visible) {
+                    if (options.line.visible) {
                         lineStart = Point2D(math.floor(targetBox.x2), center.y);
-                        note.connectorPoints = [
+                        note.linePoints = [
                             lineStart,
                             Point2D(math.floor(contentBox.x1), center.y)
                         ];
@@ -1666,22 +1666,22 @@ kendo_module({
                 }
             } else {
                 if (position === BOTTOM) {
-                    contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, distance);
+                    contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, length);
 
-                    if (options.connector.visible) {
+                    if (options.line.visible) {
                         lineStart = Point2D(math.floor(center.x), math.floor(targetBox.y2));
-                        note.connectorPoints = [
+                        note.linePoints = [
                             lineStart,
                             Point2D(math.floor(center.x), math.floor(contentBox.y1))
                         ];
                         box = contentBox.clone().wrapPoint(lineStart);
                     }
                 } else {
-                    contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, -distance);
+                    contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, -length);
 
-                    if (options.connector.visible) {
+                    if (options.line.visible) {
                         lineStart = Point2D(math.floor(center.x), math.floor(targetBox.y1));
-                        note.connectorPoints = [
+                        note.linePoints = [
                             lineStart,
                             Point2D(math.floor(center.x), math.floor(contentBox.y2))
                         ];
@@ -1715,23 +1715,23 @@ kendo_module({
                     zIndex: 1
                 });
 
-            append(elements, note.createConnector(view));
+            append(elements, note.createLine(view));
 
             group.children = elements;
 
             return [ group ];
         },
 
-        createConnector: function(view) {
+        createLine: function(view) {
             var note = this,
-                connector = note.options.connector;
+                line = note.options.line;
 
             return [
-                view.createPolyline(note.connectorPoints, false, {
-                    stroke: connector.color,
-                    strokeWidth: connector.width,
-                    dashType: connector.dashType,
-                    zIndex: connector.zIndex
+                view.createPolyline(note.linePoints, false, {
+                    stroke: line.color,
+                    strokeWidth: line.width,
+                    dashType: line.dashType,
+                    zIndex: line.zIndex
                 })
             ];
         },

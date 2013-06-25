@@ -149,7 +149,7 @@ kendo_module({
                         color: "#ff0000"
                     }
                 },
-                note: {
+                notes: {
                     icon: {
                         size: 7,
                         border: {
@@ -160,7 +160,7 @@ kendo_module({
                         padding: 3,
                         font: SANS12
                     },
-                    connector: {
+                    line: {
                         length: 10,
                         width: 1
                     },
@@ -185,7 +185,7 @@ kendo_module({
                         font: SANS12
                     }
                 },
-                note: {
+                notes: {
                     icon: {
                         size: 7,
                         border: {
@@ -196,7 +196,7 @@ kendo_module({
                         padding: 3,
                         font: SANS12
                     },
-                    connector: {
+                    line: {
                         length: 10,
                         width: 1
                     },
@@ -264,7 +264,7 @@ kendo_module({
                 labels: {
                     color: WHITE
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "#3b3b3b",
                         border: {
@@ -274,7 +274,7 @@ kendo_module({
                     label: {
                         color: WHITE
                     },
-                    connector: {
+                    line: {
                         color: "#8e8e8e"
                     }
                 },
@@ -348,7 +348,7 @@ kendo_module({
                 crosshair: {
                     color: "#8e8e8e"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "#3b3b3b",
                         border: {
@@ -358,7 +358,7 @@ kendo_module({
                     label: {
                         color: WHITE
                     },
-                    connector: {
+                    line: {
                         color: "#8e8e8e"
                     }
                 }
@@ -417,7 +417,7 @@ kendo_module({
                         color: "#9aabb2"
                     }
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -427,7 +427,7 @@ kendo_module({
                     label: {
                         color: "#293135"
                     },
-                    connector: {
+                    line: {
                         color: "#9aabb2"
                     }
                 }
@@ -452,7 +452,7 @@ kendo_module({
                 crosshair: {
                     color: "#9aabb2"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -462,7 +462,7 @@ kendo_module({
                     label: {
                         color: "#293135"
                     },
-                    connector: {
+                    line: {
                         color: "#9aabb2"
                     }
                 }
@@ -513,7 +513,7 @@ kendo_module({
                 labels: {
                     color: "#ffffff"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -523,7 +523,7 @@ kendo_module({
                     label: {
                         color: "#ffffff"
                     },
-                    connector: {
+                    line: {
                         color: "#ffffff"
                     }
                 },
@@ -600,7 +600,7 @@ kendo_module({
                 crosshair: {
                     color: "#ffffff"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -610,7 +610,7 @@ kendo_module({
                     label: {
                         color: "#ffffff"
                     },
-                    connector: {
+                    line: {
                         color: "#ffffff"
                     }
                 }
@@ -669,7 +669,7 @@ kendo_module({
                         color: "#8d8d8d"
                     }
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -679,7 +679,7 @@ kendo_module({
                     label: {
                         color: "#232323"
                     },
-                    connector: {
+                    line: {
                         color: "#8e8e8e"
                     }
                 }
@@ -704,7 +704,7 @@ kendo_module({
                 crosshair: {
                     color: "#8e8e8e"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -714,7 +714,7 @@ kendo_module({
                     label: {
                         color: "#232323"
                     },
-                    connector: {
+                    line: {
                         color: "#8e8e8e"
                     }
                 }
@@ -767,7 +767,7 @@ kendo_module({
                     background: "#eaeaec",
                     opacity: 0.5
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -777,7 +777,7 @@ kendo_module({
                     label: {
                         color: "#4e5968"
                     },
-                    connector: {
+                    line: {
                         color: "#4e5968"
                     }
                 },
@@ -833,7 +833,7 @@ kendo_module({
                 crosshair: {
                     color: "#a6b1c0"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -843,7 +843,7 @@ kendo_module({
                     label: {
                         color: "#4e5968"
                     },
-                    connector: {
+                    line: {
                         color: "#4e5968"
                     }
                 }
@@ -894,7 +894,7 @@ kendo_module({
                 labels: {
                     color: BLACK
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -904,7 +904,7 @@ kendo_module({
                     label: {
                         color: "#777777"
                     },
-                    connector: {
+                    line: {
                         color: "#777777"
                     }
                 },
@@ -941,7 +941,7 @@ kendo_module({
                 crosshair: {
                     color: "#c7c7c7"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -951,7 +951,7 @@ kendo_module({
                     label: {
                         color: "#777777"
                     },
-                    connector: {
+                    line: {
                         color: "#777777"
                     }
                 }
@@ -1005,9 +1005,18 @@ kendo_module({
                 labels: {
                     color: "#ffffff"
                 },
-                note: {
+                notes: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#cecece"
+                        }
+                    },
                     label: {
                         color: "#ffffff"
+                    },
+                    line: {
+                        color: "#cecece"
                     }
                 },
                 line: {
@@ -1061,7 +1070,7 @@ kendo_module({
                 crosshair: {
                     color: "#cecece"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -1071,7 +1080,7 @@ kendo_module({
                     label: {
                         color: "#ffffff"
                     },
-                    connector: {
+                    line: {
                         color: "#cecece"
                     }
                 }
@@ -1122,9 +1131,18 @@ kendo_module({
                 labels: {
                     color: "#ffffff"
                 },
-                note: {
+                notes: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#8c909e"
+                        }
+                    },
                     label: {
                         color: "#ffffff"
+                    },
+                    line: {
+                        color: "#8c909e"
                     }
                 },
                 pie: {
@@ -1209,7 +1227,7 @@ kendo_module({
                 crosshair: {
                     color: "#8c909e"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -1219,7 +1237,7 @@ kendo_module({
                     label: {
                         color: "#ffffff"
                     },
-                    connector: {
+                    line: {
                         color: "#8c909e"
                     }
                 }
@@ -1269,9 +1287,18 @@ kendo_module({
                 labels: {
                     color: "#686868"
                 },
-                note: {
+                notes: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#9e9e9e"
+                        }
+                    },
                     label: {
                         color: "#686868"
+                    },
+                    line: {
+                        color: "#9e9e9e"
                     }
                 },
                 pie: {
@@ -1356,7 +1383,7 @@ kendo_module({
                 crosshair: {
                     color: "#9e9e9e"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -1366,7 +1393,7 @@ kendo_module({
                     label: {
                         color: "#686868"
                     },
-                    connector: {
+                    line: {
                         color: "#9e9e9e"
                     }
                 }
@@ -1417,9 +1444,18 @@ kendo_module({
                 labels: {
                     color: "#343434"
                 },
-                note: {
+                notes: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#b8b8b8"
+                        }
+                    },
                     label: {
                         color: "#343434"
+                    },
+                    line: {
+                        color: "#b8b8b8"
                     }
                 },
                 pie: {
@@ -1504,7 +1540,7 @@ kendo_module({
                 crosshair: {
                     color: "#b8b8b8"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -1514,7 +1550,7 @@ kendo_module({
                     label: {
                         color: "#343434"
                     },
-                    connector: {
+                    line: {
                         color: "#b8b8b8"
                     }
                 }
@@ -1564,9 +1600,18 @@ kendo_module({
                 labels: {
                     color: "#4c5356"
                 },
-                note: {
+                notes: {
+                    icon: {
+                        background: "transparent",
+                        border: {
+                            color: "#cdcdcd"
+                        }
+                    },
                     label: {
                         color: "#4c5356"
+                    },
+                    line: {
+                        color: "#cdcdcd"
                     }
                 },
                 candlestick: {
@@ -1605,7 +1650,7 @@ kendo_module({
                 crosshair: {
                     color: "#cdcdcd"
                 },
-                note: {
+                notes: {
                     icon: {
                         background: "transparent",
                         border: {
@@ -1615,7 +1660,7 @@ kendo_module({
                     label: {
                         color: "#4c5356"
                     },
-                    connector: {
+                    line: {
                         color: "#cdcdcd"
                     }
                 }
