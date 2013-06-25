@@ -94,6 +94,7 @@ kendo_module({
             this._shouldFixHeaders();
 
             var headerFixer = this;
+
             var cacheHeaders = function() {
                 headerFixer._cacheHeaders();
             };
@@ -101,7 +102,6 @@ kendo_module({
             kendo.onResize(cacheHeaders);
 
             listView.bind(STYLED, cacheHeaders);
-
 
             scroller.bind("scroll", function(e) {
                 headerFixer._fixHeader(e);
@@ -496,6 +496,12 @@ kendo_module({
             this.configure();
         },
 
+        destroy: function() {
+            this.list.unbind();
+            this.buffer.unbind();
+            kendo.unbindResize(this._resizeHandler);
+        },
+
         configure: function() {
             var options = this.options,
                 listView = this.listView,
@@ -549,7 +555,7 @@ kendo_module({
                     footer.disable();
                 });
 
-                kendo.onResize(function() {
+                this._resizeHandler = kendo.onResize(function() {
                     scroller.reset();
 
                     if (listView.element.is(":visible")) {
@@ -602,6 +608,9 @@ kendo_module({
             };
 
             this.configure();
+        },
+
+        destroy: function() {
         },
 
         refresh: function(e) {
@@ -847,6 +856,9 @@ kendo_module({
             Widget.fn.destroy.call(this);
             kendo.destroy(this.element);
             this._userEvents.destroy();
+            if (this._itemBinder) {
+                this._itemBinder.destroy();
+            }
 
             delete this.element;
             delete this.wrapper;

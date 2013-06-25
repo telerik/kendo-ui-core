@@ -2739,6 +2739,11 @@ function pad(number, digits, end) {
         }
 
         $(window).on(support.resize, handler);
+        return handler;
+    };
+
+    kendo.unbindResize = function(callback) {
+        $(window).off(support.resize, callback);
     };
 
     kendo.attrValue = function(element, key) {
