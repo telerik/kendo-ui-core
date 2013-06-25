@@ -3422,7 +3422,7 @@ kendo_module({
 
             chart.updateRange(data.value, categoryIx, series);
 
-            point = chart.createPoint(data.value, category, categoryIx, series);
+            point = chart.createPoint(data, category, categoryIx, series);
             if (point) {
                 point.category = category;
                 point.series = series;
@@ -3449,6 +3449,7 @@ kendo_module({
 
         createPoint: function(data, category, categoryIx, series) {
             var chart = this,
+                value = data.value,
                 options = chart.options,
                 children = chart.children,
                 bullet,
@@ -3460,13 +3461,15 @@ kendo_module({
                 overlay: series.overlay,
                 categoryIx: categoryIx,
                 invertAxes: options.invertAxes
-            }, series);
+            }, series, {
+                note: { label: { text: data.fields.noteText } }
+            });
 
             chart.evalPointOptions(
-                bulletOptions, data, category, categoryIx, series
+                bulletOptions, value, category, categoryIx, series
             );
 
-            bullet = new Bullet(data, bulletOptions);
+            bullet = new Bullet(value, bulletOptions);
 
             cluster = children[categoryIx];
             if (!cluster) {
@@ -3547,7 +3550,8 @@ kendo_module({
 
         render: function() {
             var bullet = this,
-                options = bullet.options;
+                options = bullet.options,
+                noteOptions = options.note;
 
             bullet.target = new Target({
                 id: bullet.options.id,
@@ -3561,6 +3565,11 @@ kendo_module({
             });
 
             bullet.append(bullet.target);
+
+            if (noteOptions.visible && defined(noteOptions.label.text)) {
+                bullet.note = new Note(noteOptions);
+                bullet.append(bullet.note);
+            }
         },
 
         reflow: function(box) {
@@ -3582,6 +3591,10 @@ kendo_module({
             target.options.height = invertAxes ? targetSlot.height() : options.target.line.width;
             target.options.width = invertAxes ? options.target.line.width : targetSlot.width();
             target.reflow(targetSlot);
+
+            if (bullet.note) {
+                bullet.note.reflow(box);
+            }
 
             bullet.box = box;
         },
@@ -4432,7 +4445,7 @@ kendo_module({
                 }
             }, series, {
                 color: fields.color,
-                note: { label: { text: data.fields.noteText } }
+                note: { label: { text: fields.noteText } }
             });
 
             chart.evalPointOptions(pointOptions, value, fields);
@@ -4633,7 +4646,7 @@ kendo_module({
                     opacity: series.opacity,
                     animation: animationOptions
                 },
-                note: { label: { text: data.fields.noteText } }
+                note: { label: { text: fields.noteText } }
             });
 
             chart.evalPointOptions(pointOptions, value, fields);
