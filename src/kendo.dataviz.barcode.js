@@ -136,17 +136,17 @@
         extendedMappings: [
             function(code){
                 if(97 <= code && code <= 122){
-                    return [this.characterMap[this.shiftCharacters[0]], this.characterMap[String.fromCharCode(code - 32)]]
+                    return [this.characterMap[this.shiftCharacters[0]], this.characterMap[String.fromCharCode(code - 32)]];
                 }
             },
             function(code){
                 if(33 <= code && code <= 58){
-                    return [this.characterMap[this.shiftCharacters[1]], this.characterMap[String.fromCharCode(code + 32)]]
+                    return [this.characterMap[this.shiftCharacters[1]], this.characterMap[String.fromCharCode(code + 32)]];
                 }
             },
             function(code){
                 if(1 <= code && code <= 26){
-                    return [this.characterMap[this.shiftCharacters[2]], this.characterMap[String.fromCharCode(code + 64)]]
+                    return [this.characterMap[this.shiftCharacters[2]], this.characterMap[String.fromCharCode(code + 64)]];
                 }
             },
             function(code){
@@ -424,7 +424,7 @@
                 value;
 
             for(var i = 0; i < pattern.length; i++){
-                value = parseInt(pattern.charAt(i));
+                value = parseInt(pattern.charAt(i),10);
                 this.pattern.push(value);
             }
         },
@@ -1040,7 +1040,7 @@
                 value;
 
             for(var i = 0; i < pattern.length; i++){
-                value = parseInt(pattern.charAt(i));
+                value = parseInt(pattern.charAt(i),10);
                 that.pattern.push(value);
                 that.totalUnits += value;
             }
@@ -1134,7 +1134,7 @@
         },
         addPattern: function(pattern){
             for(var i = 0; i < pattern.length; i++){
-                this.pattern.push(parseInt(pattern.charAt(i)));
+                this.pattern.push(parseInt(pattern.charAt(i),10));
             }
         },
         addCheckSum: function(){
@@ -1158,14 +1158,14 @@
                 odd = value.length % 2;
 
                 for(var i = 0; i < value.length; i++){
-                    checkValues[(i + odd) % 2] += parseInt(value.charAt(i));
+                    checkValues[(i + odd) % 2] += parseInt(value.charAt(i),10);
                 }
 
                 oddSum = checkValues[0];
                 evenSum = (checkValues[1] * 2).toString();
 
                 for(var i = 0; i < evenSum.length; i++){
-                    oddSum += parseInt(evenSum.charAt(i));
+                    oddSum += parseInt(evenSum.charAt(i),10);
                 }
 
                 return [(10 - (oddSum % 10)) % 10];
@@ -1291,7 +1291,7 @@
         },
         getValue: function(character){
             if(!isNaN(character)){
-                return parseInt(character);
+                return parseInt(character,10);
             }
             else if(character !== this.DASH){
                 this.invalidCharacterError(character);
@@ -1307,7 +1307,7 @@
             var symbol,
                 value;
             for(var i = 0; i < pattern.length; i++){
-                value = parseInt(pattern.charAt(i));
+                value = parseInt(pattern.charAt(i),10);
                 this.pattern.push(value);
                 this.totalUnits+=value;
             }
@@ -1352,7 +1352,7 @@
         },
         addCharacter: function(character){
             var pattern = this.characterMap[character];
-            this.checkSum+= parseInt(character);
+            this.checkSum+= parseInt(character,10);
             this.addPattern(pattern);
         },
         addCheckSum: function(){
@@ -1396,7 +1396,7 @@
                 throw new Error('Invalid value provided');
             }
             else if(value.length<12){
-                value = new String
+                value = '';
             }
             var that = this;
             that.pattern = [];
@@ -1419,7 +1419,7 @@
         addSide:function(leftPart,key){
             var that = this;
             for(var i = 0; i < leftPart.length; i++){
-                if(key && parseInt(this.keyTable[key][i])){
+                if(key && parseInt(this.keyTable[key][i],10)){
                     that.addPieces(Array.prototype.slice.call(this.characterMap['digits'][leftPart.charAt(i)]).reverse(),true);
                 }else{
                     that.addPieces(this.characterMap['digits'][leftPart.charAt(i)],true);
@@ -1445,10 +1445,10 @@
                 value = this.value.split("").reverse().join("");
             for(var i = 0;i < value.length;i++){
                 if(i%2){
-                    even += parseInt(value.charAt(i));
+                    even += parseInt(value.charAt(i),10);
                 }
                 else{
-                    odd += parseInt(value.charAt(i));
+                    odd += parseInt(value.charAt(i),10);
                 }
             }
             var checksum = (10 - ((3*odd + even)%10))%10;
@@ -1465,8 +1465,7 @@
             '010101',
             '010110',
             '011010'
-        ]
-        ,
+        ],
         characterMap: {
             digits:[
                 [3,2,1,1],
@@ -1523,7 +1522,7 @@
                 options.value = '0' + options.value;
             }
             if(!encodings[that.type]){
-                throw new Error('Encoding ' + that.type + 'is not supported.')
+                throw new Error('Encoding ' + that.type + 'is not supported.');
             }
             options.value+='';
             that.encoding = new encodings[that.type]();
