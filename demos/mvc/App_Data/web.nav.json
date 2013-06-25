@@ -1364,6 +1364,12 @@
                     "title": "API example for Kendo UI File Upload Control",
                     "meta": "This demo shows API Functions of Kendo UI Upload component. Try the sample to see how to enable, disable the upload option and toggle the enabled state."
                 },
+				{
+					"text": "Templates",
+					"url": "upload/templates.html",
+					"title": "Example of templates for Kendo UI Upload",
+					"meta": "This demo illustrates how to use templates with the Kendo UI Upload widget."
+				},
                 {
                     "text": "RTL support",
                     "url": "upload/rtl.html",
