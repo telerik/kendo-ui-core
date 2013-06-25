@@ -3723,6 +3723,10 @@ kendo_module({
                     type: FADEIN,
                     delay: INITIAL_ANIMATION_DURATION
                 }
+            },
+            note: {
+                visible: true,
+                label: {}
             }
         },
 
@@ -3833,7 +3837,7 @@ kendo_module({
                     noteTargetBox = point.marker.box;
                 } else {
                     center = point.marker.box.center();
-                    noteTargetBox = Box2D(center.x, center.y, center.x, center.y)
+                    noteTargetBox = Box2D(center.x, center.y, center.x, center.y);
                 }
                 point.note.reflow(noteTargetBox);
             }
@@ -4152,7 +4156,7 @@ kendo_module({
             }
 
             pointOptions = deepExtend({
-                vertical: !options.invertAxes,
+                vertical: !options.invertAxes
             }, series, {
                 color: fields.color,
                 note: { label: { text: data.fields.noteText } }
@@ -4767,6 +4771,10 @@ kendo_module({
                     width: 1,
                     opacity: 1
                 }
+            },
+            note: {
+                visible: true,
+                label: {}
             }
         },
 
@@ -4776,7 +4784,6 @@ kendo_module({
                 chart = point.owner,
                 value = point.value,
                 valueAxis = chart.seriesValueAxis(options),
-                noteOptions = options.note,
                 points = [], mid, ocSlot, lhSlot;
 
             ocSlot = valueAxis.getSlot(value.open, value.close);
@@ -4801,7 +4808,9 @@ kendo_module({
         reflowNote: function() {
             var point = this;
 
-            point.note.reflow(point.box);
+            if (point.note) {
+                point.note.reflow(point.box);
+            }
         },
 
         createNote: function() {
@@ -5076,7 +5085,7 @@ kendo_module({
 
             point.box = lhSlot.clone().wrap(oSlot.clone().wrap(cSlot));
 
-            point.note.reflow(point.box);
+            point.reflowNote();
         },
 
         getViewElements: function(view) {
