@@ -3205,12 +3205,14 @@ function pad(number, digits, end) {
             return false;
         }
 
-        //TODO: add adjustForBrazillianTimezone here too!!!
         function setDayOfWeek(date, day, dir) {
+            var hours = date.getHours();
+
             dir = dir || 1;
             day = ((day - date.getDay()) + (7 * dir)) % 7;
 
             date.setDate(date.getDate() + day);
+            adjustForBrazillianTimezone(date, hours);
         }
 
         function dayOfWeek(date, day, dir) {
