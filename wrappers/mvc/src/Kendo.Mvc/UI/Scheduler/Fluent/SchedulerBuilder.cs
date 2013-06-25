@@ -61,6 +61,31 @@
         }
 
         /// <summary>
+        /// The start time of the week and day views. The scheduler will display events starting after the startTime.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .StartTime(10, 0, 0)
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> StartTime(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            Component.StartTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
+
+            return this;
+        }
+
+        /// <summary>
         /// The end time of the week and day views. The scheduler will display events ending before the endTime.
         /// </summary>
         /// <param name="endTime">The endTime.</param>
@@ -77,6 +102,31 @@
         public SchedulerBuilder<TModel> EndTime(DateTime endTime)
         {
             Component.EndTime = endTime;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The end time of the week and day views. The scheduler will display events ending before the endTime.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .EndTime(10,0,0)
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> EndTime(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            Component.EndTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
 
             return this;
         }

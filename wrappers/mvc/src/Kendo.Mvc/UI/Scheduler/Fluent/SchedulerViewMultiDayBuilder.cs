@@ -168,6 +168,44 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// The start time of the view. The scheduler will display events starting after the startTime.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.StartTime(10,0,0);
+        ///             dayView.EndTime(new DateTime(2013, 6, 13, 23, 00, 00));
+        ///         });
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public ISchedulerViewBuilder StartTime(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            resource.StartTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
+
+            return this;
+        }
+
+        /// <summary>
         /// The end time of the view. The scheduler will display events ending before the endTime.
         /// </summary>
         /// <param name="endTime">The endTime</param>
@@ -197,6 +235,44 @@ namespace Kendo.Mvc.UI.Fluent
         public ISchedulerViewBuilder EndTime(DateTime endTime)
         {
             resource.EndTime = endTime;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The end time of the view. The scheduler will display events ending before the endTime.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.StartTime(new DateTime(2013, 6, 13, 10, 00, 00));
+        ///             dayView.EndTime(23,0,0);
+        ///         });
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public ISchedulerViewBuilder EndTime(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            resource.EndTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
 
             return this;
         }
