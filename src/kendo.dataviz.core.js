@@ -1730,6 +1730,7 @@ kendo_module({
                 view.createPolyline(note.connectorPoints, false, {
                     stroke: connector.color,
                     strokeWidth: connector.width,
+                    dashType: connector.dashType,
                     zIndex: connector.zIndex
                 })
             ];
