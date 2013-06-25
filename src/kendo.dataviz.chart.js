@@ -4734,6 +4734,8 @@ kendo_module({
             point.value = value;
             point.options.id = uniqueId();
             point.enableDiscovery();
+
+            point.createNote();
         },
 
         options: {
@@ -4774,6 +4776,7 @@ kendo_module({
                 chart = point.owner,
                 value = point.value,
                 valueAxis = chart.seriesValueAxis(options),
+                noteOptions = options.note,
                 points = [], mid, ocSlot, lhSlot;
 
             ocSlot = valueAxis.getSlot(value.open, value.close);
@@ -4785,12 +4788,30 @@ kendo_module({
             point.realBody = ocSlot;
 
             mid = lhSlot.center().x;
-            points.push([ new Point2D(mid, lhSlot.y1), new Point2D(mid, ocSlot.y1) ]);
-            points.push([ new Point2D(mid, ocSlot.y2), new Point2D(mid, lhSlot.y2) ]);
+            points.push([ Point2D(mid, lhSlot.y1), Point2D(mid, ocSlot.y1) ]);
+            points.push([ Point2D(mid, ocSlot.y2), Point2D(mid, lhSlot.y2) ]);
 
             point.lowHighLinePoints = points;
 
             point.box = lhSlot.clone().wrap(ocSlot);
+
+            point.reflowNote();
+        },
+
+        reflowNote: function() {
+            var point = this;
+
+            point.note.reflow(point.box);
+        },
+
+        createNote: function() {
+            var point = this,
+                noteOptions = point.options.note;
+
+            if (noteOptions.visible && defined(noteOptions.label.text)) {
+                point.note = new Note(noteOptions);
+                point.append(point.note);
+            }
         },
 
         getViewElements: function(view) {
@@ -4943,7 +4964,7 @@ kendo_module({
                 }
 
                 point = chart.createPoint(
-                    value, category, categoryIx,
+                    data, category, categoryIx,
                     deepExtend({}, series, { color: pointColor })
                 );
             }
@@ -4979,9 +5000,12 @@ kendo_module({
             return Candlestick;
         },
 
-        createPoint: function(value, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series) {
             var chart = this,
-                pointOptions = deepExtend({}, series),
+                value = data.value,
+                pointOptions = deepExtend({}, series, {
+                    note: { label: { text: data.fields.noteText } }
+                }),
                 pointType = chart.pointType();
 
             chart.evalPointOptions(
@@ -5051,6 +5075,8 @@ kendo_module({
             point.lhPoints = lhPoints;
 
             point.box = lhSlot.clone().wrap(oSlot.clone().wrap(cSlot));
+
+            point.note.reflow(point.box);
         },
 
         getViewElements: function(view) {
