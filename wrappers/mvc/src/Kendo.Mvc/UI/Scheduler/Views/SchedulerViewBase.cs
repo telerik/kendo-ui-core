@@ -16,18 +16,6 @@
             set; 
         }
 
-        public DateTime? StartTime
-        {
-            get;
-            set;
-        }
-
-        public DateTime? EndTime
-        {
-            get;
-            set;
-        }
-
         public SchedulerViewType Type
         {
             get;
@@ -72,17 +60,6 @@
             {
                 json["title"] = Title;
             }
-
-            if (StartTime != null)
-            {
-                json["startTime"] = StartTime;
-            }
-
-            if (EndTime != null)
-            {
-                json["endTime"] = EndTime;
-            }
-
             json["type"] = Type;
 
             if (Editable != null)

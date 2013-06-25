@@ -77,6 +77,18 @@
             set;
         }
 
+        public DateTime? StartTime
+        {
+            get;
+            set;
+        }
+
+        public DateTime? EndTime
+        {
+            get;
+            set;
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             base.Serialize(json);
@@ -131,6 +143,16 @@
             if (!string.IsNullOrEmpty(MinorTimeHeaderTemplateId))
             {
                 json["minorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MinorTimeHeaderTemplateId) };
+            }
+            
+            if (StartTime != null)
+            {
+                json["startTime"] = StartTime;
+            }
+
+            if (EndTime != null)
+            {
+                json["endTime"] = EndTime;
             }
         }
     }

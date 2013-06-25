@@ -131,5 +131,73 @@
 
             return this;
         }
+
+        /// <summary>
+        /// The start time of the view. The scheduler will display events starting after the startTime.
+        /// </summary>
+        /// <param name="starTime">The startTime</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.StartTime(new DateTime(2013, 6, 13, 10, 00, 00));
+        ///             dayView.EndTime(new DateTime(2013, 6, 13, 23, 00, 00));
+        ///         });
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public ISchedulerViewBuilder StartTime(DateTime startTime)
+        {
+            resource.StartTime = startTime;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The end time of the view. The scheduler will display events ending before the endTime.
+        /// </summary>
+        /// <param name="endTime">The endTime</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.StartTime(new DateTime(2013, 6, 13, 10, 00, 00));
+        ///             dayView.EndTime(new DateTime(2013, 6, 13, 23, 00, 00));
+        ///         });
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public ISchedulerViewBuilder EndTime(DateTime endTime)
+        {
+            resource.EndTime = endTime;
+
+            return this;
+        }
     }
 }
