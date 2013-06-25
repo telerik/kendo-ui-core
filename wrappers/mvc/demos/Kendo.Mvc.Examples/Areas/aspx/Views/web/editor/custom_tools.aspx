@@ -26,7 +26,7 @@
             .Add("1 (8pt)", "xx-small")
             .Add("16px", "16px")
         )
-        .FormatBlock(items => items
+        .Formatting(items => items
             .Add("Paragraph", "p")
             .Add("Fieldset", "fieldset")
         )
