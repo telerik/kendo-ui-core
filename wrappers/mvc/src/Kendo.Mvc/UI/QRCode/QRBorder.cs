@@ -5,7 +5,14 @@
 
     public class QRBorder : JsonObject
     {
+        /// <summary>
+        /// Gets or sets the color of the border.
+        /// </summary>
         public string Color { get; set; }
+
+        /// <summary>
+        /// Gets or sets the width of the border.
+        /// </summary>
         public int? Width { get; set; }
 
         public bool ShouldSerialize()
