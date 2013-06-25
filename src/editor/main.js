@@ -937,17 +937,21 @@ kendo_module({
                 .on("cut" + NS + " paste" + NS, function (e) {
                     editor.clipboard["on" + e.type](e);
                 })
-                .on("focus" + NS, function() {
+                .on("focusin" + NS, function() {
                     $(this).addClass("k-state-active");
                     editor.toolbar.show();
                 })
-                .on("blur" + NS, function() {
+                .on("focusout" + NS, function() {
                     setTimeout(function() {
-                        if (!$(kendo._activeElement()).is(editor.body) && !editor.toolbar.focused()) {
-                            $(editor.body).removeClass("k-state-active");
-                            editor.toolbar.hide();
+                        var active = kendo._activeElement();
+                        var body = editor.body;
+                        var toolbar = editor.toolbar;
+
+                        if (active != body && !$.contains(body, active) && !toolbar.focused()) {
+                            $(body).removeClass("k-state-active");
+                            toolbar.hide();
                         }
-                    }, 1);
+                    }, 10);
                 });
         },
 
