@@ -8613,7 +8613,7 @@ as a collection of required properties, while the insertHtml tool requires a col
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The mandatory name of the tool. The built-in tools are "bold", "italic", "underline", "strikethrough", "fontName", "fontSize", "foreColor", "backColor", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "formatBlock", "createLink", "unlink", "insertImage", "insertHtml", "viewHtml".</description>
+            <description>The mandatory name of the tool.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -8633,18 +8633,24 @@ as a collection of required properties, while the insertHtml tool requires a col
     </tag>
 
     <tag>
-        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
+        <description>For tools that display a list of items (fontName, fontSize, formatting), this option specifies the items in the shown list.</description>
         <name>editor-tool-items</name>
         <tag-class>com.kendoui.taglib.editor.ToolItemsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
+        <description>For tools that display a list of items (fontName, fontSize, formatting), this option specifies the items in the shown list.</description>
         <name>editor-tool-item</name>
         <tag-class>com.kendoui.taglib.editor.ToolItemTag</tag-class>
 
         <body-content>empty</body-content>
+        <attribute>
+            <description>Only applicable for the formatting tool. Specifies the context in which the option will be available.</description>
+            <name>context</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
         <attribute>
             <description>The string that the popup item will show.</description>
             <name>text</name>
