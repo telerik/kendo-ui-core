@@ -102,7 +102,7 @@ require_once '../../include/header.php';
             #validValue
             {
                 display:none;
-                }
+            }
         </style>
     </div>
 
