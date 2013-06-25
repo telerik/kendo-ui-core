@@ -37,6 +37,7 @@ kendo_module({
             }
 
             that.current = that._currentLocation();
+            that.locations = [that.current];
             that._listenToLocationChange();
         },
 
@@ -77,6 +78,8 @@ kendo_module({
             } else {
                 location.hash = that.current = to;
             }
+
+            that.locations.push(that.current);
         },
 
         _normalizeUrl: function() {
@@ -109,19 +112,31 @@ kendo_module({
             }
         },
 
-        _checkUrl: function() {
-            var that = this, current = that._currentLocation().replace(hashStrip, '');
+        _checkUrl: function(e) {
+            var that = this,
+                current = that._currentLocation().replace(hashStrip, ''),
+                back = current === that.locations[that.locations.length - 2];
 
             if (that.current === current || that.current === decodeURIComponent(current)) {
                 return;
             }
 
             if (that.trigger("change", { url: current })) {
-                history.back();
+                if (back) {
+                    history.forward();
+                } else {
+                    history.back();
+                }
                 return;
             }
 
             that.current = current;
+
+            if (back) {
+                that.locations.pop();
+            } else {
+                that.locations.push(current);
+            }
         },
 
         _stripRoot: function(url) {

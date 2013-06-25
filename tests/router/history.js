@@ -45,6 +45,12 @@ test("uses hashbang by default", function() {
     url(initial + "#/new-location");
 });
 
+test("keeps track of locations", 2, function() {
+    startWithHash();
+    equal(kendoHistory.locations.length, 1);
+    equal(kendoHistory.locations[0], "");
+});
+
 test("uses pushState if possible and asked to", function() {
     startWithPushState();
     kendoHistory.navigate("/new-location");
@@ -153,6 +159,23 @@ test("Allows prevention of hash change if preventDefault called", 1, function() 
     url(initial);
 });
 
+asyncTest("Allows prevention of back if preventDefault called", 1, function() {
+    startWithHash();
+
+    kendoHistory.navigate("/new-location");
+
+    kendoHistory.change(function(e) {
+        e.preventDefault();
+    });
+
+    _history.back();
+
+    setTimeout(function() {
+        start();
+        url(initial + "#/new-location");
+    });
+});
+
 asyncTest("Allows prevention of hash change by clicked link if preventDefault called", 1, function() {
     startWithHash();
 
@@ -220,5 +243,16 @@ asyncTest("supports #:back pseudo url for going back", 1, function() {
     setTimeout(function() {
         start();
         equal(loc.hash, '');
+    }, 300);
+});
+
+asyncTest("stays in sync after back is called", 2, function() {
+    startWithHash();
+    kendoHistory.navigate("/new-location");
+    kendoHistory.navigate("#:back");
+    setTimeout(function() {
+        start();
+        equal(kendoHistory.locations.length, 1);
+        equal(kendoHistory.locations[0], "");
     }, 300);
 });
