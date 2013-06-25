@@ -272,7 +272,7 @@ var DeleteRowCommand = Command.extend({
             dom.removeTextSiblings(row);
 
             focusElement = dom.next(row) || dom.prev(row);
-            focusElement = focusElement.cells[1] || focusElement.cells[0];
+            focusElement = focusElement.cells[0];
 
             dom.remove(row);
 
