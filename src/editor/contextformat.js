@@ -58,6 +58,10 @@ var FormattingTool = DelayedExecutionTool.extend({
             return item;
         }
 
+        if (item.tag || item.className) {
+            return item;
+        }
+
         var dot = value.indexOf(".");
 
         if (dot === 0) {
@@ -82,7 +86,7 @@ var FormattingTool = DelayedExecutionTool.extend({
             range: args.range,
             formatter: function () {
                 var formatter,
-                    tags = (item.tag || "span").split(","),
+                    tags = (item.tag || item.context || "span").split(","),
                     format = [{
                         tags: tags,
                         attr: { className: item.className || "" }
@@ -102,7 +106,8 @@ var FormattingTool = DelayedExecutionTool.extend({
     initialize: function(ui, initOptions) {
         var editor = initOptions.editor,
             options = this.options,
-            toolName = options.name;
+            toolName = options.name,
+            that = this;
 
         new Editor.SelectBox(ui, {
             dataTextField: "text",
@@ -111,6 +116,15 @@ var FormattingTool = DelayedExecutionTool.extend({
             title: editor.options.messages[toolName],
             change: function () {
                 Tool.exec(editor, toolName, this.dataItem().toJSON());
+            },
+            dataBound: function() {
+                var i, items = this.dataSource.data();
+
+                for (i = 0; i < items.length; i++) {
+                    items[i] = that.toFormattingItem(items[i]);
+                }
+
+                this.decorate(ui[0].ownerDocument);
             },
             highlightFirst: false,
             template: kendo.template(
@@ -163,19 +177,24 @@ function deprecatedFormattingTool(name, property, finder) {
         command: function(args) {
             var item = args.value;
 
-            if (!$.isPlainObject(item)) {
+            // pre-process value for backwards compatibility
+            if ($.isPlainObject(item)) {
+                item[property] = item.value;
+            } else {
                 args.value = {};
                 args.value[property] = item;
-            } else {
-                item.value = "." + item.value;
-                item.tag = item.context;
             }
 
             return FormattingTool.fn.command.call(this, args);
         },
 
         initialize: function(ui, initOptions) {
-            var console = window.console;
+            var console = window.console,
+                i, items = this.options.items;
+
+            for (i = 0; i < items.length; i++) {
+                items[i][property] = items[i].value;
+            }
 
             if (console) {
                 console.warn("The `" + this.options.name + "` tool has been deprecated in favor of the `formatting` tool. See http://docs.kendoui.com/getting-started/changes-and-backward-compatibility for more information");

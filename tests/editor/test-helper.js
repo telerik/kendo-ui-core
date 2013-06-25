@@ -34,3 +34,12 @@ function withMock(context, method, mock, callback) {
     }
 }
 
+function propertyFrom(className, property) {
+    var element = $("<b class='" + className + "' />").appendTo("body");
+    var result = element.css(property);
+
+    element.remove();
+
+    return result;
+}
+

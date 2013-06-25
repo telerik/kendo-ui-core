@@ -41,7 +41,7 @@ var SelectBox = DropDownList.extend({
 
         for (i = 0; i < items.length; i++) {
             tag = items[i].tag || "span";
-            className = items[i].className || items[i].value;
+            className = items[i].className;
 
             items[i].style = dom.inlineStyle(doc, tag, { className : className });
         }

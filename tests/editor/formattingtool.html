@@ -82,7 +82,7 @@
             equal(tool.text(), tool.options.title);
         });
 
-        test("styles apply to specified context", function() {
+        test("format is applied to specified context", function() {
             selectFromValue(inline, '<h1>fo||o</h1>');
 
             var tool = formattingTool(inline);
@@ -93,7 +93,7 @@
             equal(inline.value(), '<h1 class="red">foo</h1>');
         });
 
-        test("styles tool is hidden if there are no applicable styles", function() {
+        test("tool is hidden if there are no applicable styles", function() {
             selectFromValue(inline, 'fo||o');
 
             var tool = formattingTool(inline);
@@ -108,6 +108,59 @@
 
             equal(inline.value(), "<h1>foo</h1>");
         });
+
+        test("drop-down items are decorated", function() {
+            selectFromValue(inline, "<h1 class='red'>fo||o</h1>");
+
+            var tool = formattingTool(inline);
+
+            var formatSpan = tool.popup.element.find(".k-item span");
+
+            equal(formatSpan.length, 1);
+            equal(formatSpan.css("color"), propertyFrom("red", "color"));
+        });
+
+        test("styles apply to specified context", function() {
+            setFormattingItems(inline, [
+                { text: "red", value: ".red", context: "h1" },
+                { text: "blue", value: ".blue", context: "p" }
+            ]);
+
+            selectFromValue(inline, '<h1>fo||o</h1>');
+
+            var tool = formattingTool(inline);
+
+            tool.value(".red");
+            tool.trigger("change");
+
+            equal(inline.value(), '<h1 class="red">foo</h1>');
+        });
+
+        test("tool items are filtered depending on selection", function() {
+            selectFromValue(inline, '<h1>fo||o</h1><p>bar</p>');
+
+            var tool = formattingTool(inline);
+            var popup = tool.popup.element;
+
+            equal(popup.find(".k-item").length, 1);
+            equal(popup.find(".k-item").text(), "red");
+            equal(tool.text(), tool.options.title);
+
+            selectFromValue(inline, '<h1>foo</h1><p>ba||r</p>');
+
+            equal(popup.find(".k-item").length, 1);
+            equal(popup.find(".k-item").text(), "blue");
+            equal(tool.text(), tool.options.title);
+        });
+
+        test("styles tool is hidden if there are no applicable styles", function() {
+            selectFromValue(inline, 'fo||o');
+
+            var tool = formattingTool(inline);
+
+            ok(tool.wrapper.is(".k-state-disabled"));
+        });
+
 
     </script>
 

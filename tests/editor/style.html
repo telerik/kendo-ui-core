@@ -96,15 +96,6 @@
             equal(inline.value(), '<span class="bar">foo</span>');
         });
 
-        function propertyFrom(className, property) {
-            var element = $("<b class='foo' />").appendTo("body");
-            var result = element.css("color");
-
-            element.remove();
-
-            return result;
-        }
-
         test("tool items are styled for inline editor", function() {
             var range = createRangeFromText(inline, '<p class="foo">f||oo</p>');
             inline.selectRange(range);
