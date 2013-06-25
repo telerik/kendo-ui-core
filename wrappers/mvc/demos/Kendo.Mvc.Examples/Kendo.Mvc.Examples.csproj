@@ -434,7 +434,6 @@
     <Compile Include="Models\Chart\WindDataItem.cs" />
     <Compile Include="Models\Chart\ProteinScoreItem.cs" />
     <Compile Include="Models\Chart\DatePoint.cs" />
-    <Compile Include="Models\DatePoint.cs" />
     <Compile Include="Models\Scheduler\Meeting.cs" />
     <Compile Include="Models\Scheduler\MeetingViewModel.cs" />
     <Compile Include="Models\Scheduler\SchedulerMeetingService.cs" />

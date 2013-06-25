@@ -1,4 +1,5 @@
-﻿namespace Kendo.Mvc.UI.Fluent
+﻿using System;
+namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="SchedulerViewWeek"/>.
