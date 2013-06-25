@@ -161,7 +161,7 @@ kendo_module({
                         font: SANS12
                     },
                     connector: {
-                        distance: 10,
+                        length: 10,
                         width: 1
                     },
                     visible: true
@@ -197,7 +197,7 @@ kendo_module({
                         font: SANS12
                     },
                     connector: {
-                        distance: 10,
+                        length: 10,
                         width: 1
                     },
                     visible: true
