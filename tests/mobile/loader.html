@@ -78,11 +78,11 @@
                 element[0].dispatchEvent(evt);
             }
 
-            test("prevents events during transitions", 1, function() {
+            test("prevents events during transitions", 2, function() {
                 loader.transition();
                 var foo = root.find("#foo");
 
-                foo.on("mouseup", function() { ok(false); });
+                foo.on("mouseup", function(e) { ok(e.isDefaultPrevented()); });
 
                 dispatchClick(foo);
                 loader.transitionDone();
