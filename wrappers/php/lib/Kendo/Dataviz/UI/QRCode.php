@@ -40,8 +40,8 @@ class QRCode extends \Kendo\UI\Widget {
     * @param string $value
     * @return \Kendo\Dataviz\UI\QRCode
     */
-    public function errorCorrectionLevel($value) {
-        return $this->setProperty('errorCorrectionLevel', $value);
+    public function errorCorrection($value) {
+        return $this->setProperty('errorCorrection', $value);
     }
 
     /**

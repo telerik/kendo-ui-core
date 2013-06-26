@@ -25,7 +25,7 @@ require_once '../../include/header.php';
         $qrUrl = new \Kendo\Dataviz\UI\QRCode('qrUrl');
         $qrUrl->value("http://demos.kendoui.com/dataviz/overview/index.html")
             ->size(120)
-            ->errorCorrectionLevel("M")
+            ->errorCorrection("M")
             ->border($qrUrlBorder);
 
         echo $qrUrl->render();
@@ -41,7 +41,7 @@ require_once '../../include/header.php';
         $qrTelephone = new \Kendo\Dataviz\UI\QRCode('qrTelephone');
         $qrTelephone->value("tel:+1-888-365-2779")
             ->size(120)
-            ->errorCorrectionLevel("Q")
+            ->errorCorrection("Q")
             ->color("#67a814")
             ->border($qrTelephoneBorder);
 
@@ -53,7 +53,7 @@ require_once '../../include/header.php';
     <?php
         $qrGeoLocation = new \Kendo\Dataviz\UI\QRCode('qrGeoLocation');
         $qrGeoLocation->value("geo:42.65049,23.37925,100")
-            ->errorCorrectionLevel("H")
+            ->errorCorrection("H")
             ->size(120)
             ->color("#166a83");
 

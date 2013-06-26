@@ -131,24 +131,24 @@
         /// <summary>
         /// Sets the error correction level of the QR code.
         /// </summary>
-        /// <param name="errorCorrectionLevel">The QR code error correction level.</param>
+        /// <param name="errorCorrection">The QR code error correction level.</param>
         /// <example>
         /// <code lang="Razor">
         /// @(Html.Kendo().QRCode()
         ///     .Name(&quot;qrCode&quot;)
-        ///     .ErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
+        ///     .ErrorCorrection(QRErrorCorrectionLevel.Q)
         /// )
         /// </code>
         /// <code lang="ASPX">
         /// &lt;%:Html.Kendo().QRCode()
         ///     .Name(&quot;qrCode&quot;)
-        ///     .ErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
+        ///     .ErrorCorrection(QRErrorCorrectionLevel.Q)
         /// %&gt;
         /// </code>
         /// </example>
-        public QRCodeBuilder ErrorCorrectionLevel(QRErrorCorrectionLevel errorCorrectionLevel)
+        public QRCodeBuilder ErrorCorrection(QRErrorCorrectionLevel errorCorrection)
         {
-            Component.ErrorCorrectionLevel = errorCorrectionLevel;
+            Component.ErrorCorrection = errorCorrection;
 
             return this;
         }

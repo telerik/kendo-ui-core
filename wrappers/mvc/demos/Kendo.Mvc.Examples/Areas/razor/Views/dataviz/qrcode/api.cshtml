@@ -11,8 +11,8 @@
         <span class="configHead">Options</span>
         <ul class="options">
             <li>
-                <label for="errorCorrectionLevel">Error correction level:</label>
-                <select id="errorCorrectionLevel" data-role="dropdownlist" data-bind="value: qrOptions.errorCorrectionLevel">
+                <label for="errorCorrection">Error correction level:</label>
+                <select id="errorCorrection" data-role="dropdownlist" data-bind="value: qrOptions.errorCorrection">
                     <option value="L">L</option>
                     <option value="M">M</option>
                     <option value="Q">Q</option>
@@ -66,7 +66,7 @@
         var viewModel = kendo.observable({
             qrValue: "Hello World",
             qrOptions: {
-                errorCorrectionLevel: "L",
+                errorCorrection: "L",
                 background: "#FFFFFF",
                 color: "#000000",
                 size: 200,

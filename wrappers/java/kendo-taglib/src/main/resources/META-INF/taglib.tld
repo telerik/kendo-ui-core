@@ -11682,7 +11682,7 @@ is closed. Options include "fadeOut".</description>
         </attribute>
         <attribute>
             <description>The error correction level used to encode the value.The possible values are:</description>
-            <name>errorCorrectionLevel</name>
+            <name>errorCorrection</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>

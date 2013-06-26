@@ -847,7 +847,7 @@ kendo_module({
                     return;
                 }
 
-                matrix = encodeData(value, that.options.errorCorrectionLevel);
+                matrix = encodeData(value, that.options.errorCorrection);
                 size = that._getSize();
                 contentSize = size - 2 * borderWidth;
                 baseUnit = that._calculateBaseUnit(contentSize, matrix.length);
@@ -962,7 +962,7 @@ kendo_module({
             options: {
                 name: "QRCode",
                 value: "",
-                errorCorrectionLevel: QRCodeDefaults.DEFAULT_ERROR_CORRECTION_LEVEL,
+                errorCorrection: QRCodeDefaults.DEFAULT_ERROR_CORRECTION_LEVEL,
                 background: QRCodeDefaults.DEFAULT_BACKGROUND,
                 color: QRCodeDefaults.DEFAULT_DARK_MODULE_COLOR,
                 size: "",

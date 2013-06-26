@@ -13,7 +13,7 @@
         public QRCode(ViewContext viewContext, IJavaScriptInitializer initializer)
             : base(viewContext, initializer)
         {
-            this.ErrorCorrectionLevel = QRErrorCorrectionLevel.L;
+            this.ErrorCorrection = QRErrorCorrectionLevel.L;
             this.Border = new QRBorder();
             this.Options = new Dictionary<string, object>();
         }
@@ -77,7 +77,7 @@
         /// Gets or sets the QRCode error correction level.
         /// </summary>
         /// <value>The QRCode error correction level.</value>
-        public QRErrorCorrectionLevel ErrorCorrectionLevel
+        public QRErrorCorrectionLevel ErrorCorrection
         {
             get;
             set;
@@ -85,9 +85,9 @@
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            if (ErrorCorrectionLevel != DefaultErrorCorrectionLevel)
+            if (ErrorCorrection != DefaultErrorCorrection)
             {
-                Options["errorCorrectionLevel"] = ErrorCorrectionLevel.ToString();
+                Options["errorCorrection"] = ErrorCorrection.ToString();
             }
 
             if (!string.IsNullOrEmpty(Value))
@@ -134,6 +134,6 @@
             base.WriteHtml(writer);
         }
 
-        private const QRErrorCorrectionLevel DefaultErrorCorrectionLevel = QRErrorCorrectionLevel.L;
+        private const QRErrorCorrectionLevel DefaultErrorCorrection = QRErrorCorrectionLevel.L;
     }
 }

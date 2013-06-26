@@ -65,12 +65,12 @@ public class QRCodeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("color", value);
     }
 
-    public String getErrorCorrectionLevel() {
-        return (String)getProperty("errorCorrectionLevel");
+    public String getErrorCorrection() {
+        return (String)getProperty("errorCorrection");
     }
 
-    public void setErrorCorrectionLevel(String value) {
-        setProperty("errorCorrectionLevel", value);
+    public void setErrorCorrection(String value) {
+        setProperty("errorCorrection", value);
     }
 
     public Object getSize() {
