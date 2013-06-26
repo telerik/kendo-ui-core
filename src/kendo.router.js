@@ -143,7 +143,7 @@ kendo_module({
             var that = this;
 
             if (url.indexOf(that.root) === 0) {
-                return ('/' + url.substr(that.root.length)).replace(/\/\//g, '/');
+                return (url.substr(that.root.length)).replace(/\/\//g, '/');
             } else {
                 return url;
             }
@@ -242,6 +242,9 @@ kendo_module({
             Observable.fn.init.call(this);
             this.routes = [];
             this.pushState = options ? options.pushState : false;
+            if (options && options.root) {
+                this.root = options.root;
+            }
             this.bind([INIT, ROUTE_MISSING, CHANGE], options);
         },
 
@@ -258,7 +261,8 @@ kendo_module({
 
             history.start({
                 change: urlChangedProxy,
-                pushState: that.pushState
+                pushState: that.pushState,
+                root: that.root
             });
 
             var initEventObject = { url: history.current || "/" };

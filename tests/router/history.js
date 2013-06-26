@@ -10,7 +10,7 @@ var win,
 module("History", {
     setup: function() {
         QUnit.stop();
-        $("#iframe-container").html('<iframe src="sandbox/"></iframe>');
+        $("#iframe-container").empty().html('<iframe src="sandbox/"></iframe>');
         win = window.frames[0].window;
 
         $(win).one('load', function() {
@@ -25,6 +25,7 @@ module("History", {
     teardown: function() {
         if (win.kendo) {
             win.kendo.support.pushState = pushStateSupported;
+            kendoHistory.stop();
         }
     }
 });
@@ -81,7 +82,7 @@ asyncTest("transforms pushState to non-push state when needed", 1, function() {
 
     startWithPushState();
 
-    kendoHistory.navigate("/new-location");
+    kendoHistory.navigate("new-location");
 
     var currentLocation = loc.href;
 
@@ -89,7 +90,7 @@ asyncTest("transforms pushState to non-push state when needed", 1, function() {
         var newLocation = frames[0].window.location.href;
         if (newLocation != currentLocation) {
             start();
-            equal(newLocation, initial + "#/new-location");
+            equal(newLocation, initial + "#new-location");
         } else {
             setTimeout(check, 100);
         }
