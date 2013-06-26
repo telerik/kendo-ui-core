@@ -40,6 +40,12 @@ namespace Kendo.Mvc.UI
                 result.Add("axisCrossingValue", crossingValues.ToArray());
             }
 
+            var notes = axis.Notes.CreateSerializer().Serialize();
+            if (notes.Count > 0)
+            {
+                result.Add("notes", notes);
+            }
+
             return result;
         }
     }

@@ -17,9 +17,9 @@ namespace Kendo.Mvc.UI
         public override IDictionary<string, object> Serialize()
         {
             var result = base.Serialize();
-
+            
             FluentDictionary.For(result)
-                .Add("position", label.Position.ToString().ToCamelCase(), () => label.Position.HasValue)
+                .Add("position", label.Position.ToString().ToLowerInvariant(), () => label.Position.HasValue)
                 .Add("text", label.Text, () => label.Text.HasValue());
 
             return result;

@@ -22,6 +22,7 @@ namespace Kendo.Mvc.UI
             MajorTicks = new ChartAxisTicks();
             MinorTicks = new ChartAxisTicks();
             Crosshair = new ChartAxisCrosshair();
+            Notes = new ChartAxisNotes<TValue>();
         }
 
         /// <summary>
@@ -174,6 +175,15 @@ namespace Kendo.Mvc.UI
         /// Angles increase counterclockwise and zero is to the right. Negative values are acceptable.
         /// </summary>
         public double? StartAngle
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The axis notes.
+        /// </summary>
+        public ChartAxisNotes<TValue> Notes
         {
             get;
             set;

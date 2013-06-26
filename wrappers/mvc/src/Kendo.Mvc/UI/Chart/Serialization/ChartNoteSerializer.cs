@@ -16,9 +16,9 @@ namespace Kendo.Mvc.UI
         public virtual IDictionary<string, object> Serialize()
         {
             var result = new Dictionary<string, object>();
-
+            
             FluentDictionary.For(result)
-                .Add("position", note.Position.ToString().ToCamelCase(), () => note.Position.HasValue);
+                .Add("position", note.Position.ToString().ToLowerInvariant(), () => note.Position.HasValue);
 
             var labelData = note.Label.CreateSerializer().Serialize();
             if (labelData.Count > 0)
