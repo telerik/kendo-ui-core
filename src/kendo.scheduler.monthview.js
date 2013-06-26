@@ -16,7 +16,7 @@ kendo_module({
         getDate = kendo.date.getDate,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
         DAY_TEMPLATE = kendo.template('<span class="k-link k-nav-day">#=kendo.toString(date, "dd")#</span>'),
-        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#" data#=ns#-start-end-idx="#=startIndex#-#=endIndex#"' +
+        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#" data-#=ns#start-end-idx="#=startIndex#-#=endIndex#"' +
                 '#if (resources[0]) { #' +
                 'style="background-color:#=resources[0].color #"' +
                 '#}#' +
@@ -42,11 +42,11 @@ kendo_module({
                 '</span>' +
                 '</div>',
         EVENT_TEMPLATE = kendo.template('<div title="#=title#">' +
-                    '<dl><dd>${title}</dd></dl>' +
+                    '<dl><dd>#:title#</dd></dl>' +
                 '</div>');
 
     var MORE_BUTTON_TEMPLATE = kendo.template(
-        '<div style="width:#=width#px;left:#=left#px;top:#=top#px" class="k-more-events k-button" data#=ns#-start-end-idx=#=start#-#=end#><span>...</span></div>'
+        '<div style="width:#=width#px;left:#=left#px;top:#=top#px" class="k-more-events k-button" data-#=ns#start-end-idx=#=start#-#=end#><span>...</span></div>'
     );
 
     ui.MonthView = SchedulerView.extend({
