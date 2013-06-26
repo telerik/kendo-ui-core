@@ -46,7 +46,8 @@ var FormattingTool = DelayedExecutionTool.extend({
             { text: "Heading 4", value: "h4" },
             { text: "Heading 5", value: "h5" },
             { text: "Heading 6", value: "h6" }
-        ]
+        ],
+        width: 90
     },
 
     toFormattingItem: function(item) {
@@ -107,11 +108,14 @@ var FormattingTool = DelayedExecutionTool.extend({
             toolName = options.name,
             that = this;
 
+        ui.width(options.width);
+
         new Editor.SelectBox(ui, {
             dataTextField: "text",
             dataValueField: "value",
             dataSource: options.items || editor.options[toolName],
             title: editor.options.messages[toolName],
+            autoSize: true,
             change: function () {
                 Tool.exec(editor, toolName, this.dataItem().toJSON());
             },

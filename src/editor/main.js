@@ -753,12 +753,10 @@ kendo_module({
             wnd = iframe.contentWindow || iframe;
             doc = wnd.document || iframe.contentDocument;
 
-            if (stylesheets.length > 0) {
-                $(iframe).one("load", function() {
-                    var styleTools = editor.toolbar.items().filter(".k-decorated");
-                    styleTools.kendoSelectBox("decorate", doc);
-                });
-            }
+            $(iframe).one("load", function() {
+                var styleTools = editor.toolbar.items().filter(".k-decorated");
+                styleTools.kendoSelectBox("decorate", doc);
+            });
 
             doc.open();
             doc.write(
