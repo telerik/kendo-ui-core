@@ -119,11 +119,13 @@ def file_copy(options)
             $stderr.puts "cp #{from} #{to}" if VERBOSE
 
             File.open(to, "w") do |file|
+                contents = File.read(from)
                 if license && subject_to_license?(to)
                     file.write(File.read(license))
+                    contents.sub!("$KENDO_VERSION", VERSION)
                 end
 
-                file.write(File.read(from))
+                file.write(contents)
             end
         else
             cp from, to, :verbose => VERBOSE

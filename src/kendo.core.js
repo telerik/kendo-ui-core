@@ -25,6 +25,8 @@
         slice = [].slice,
         globalize = window.Globalize;
 
+    kendo.version = "$KENDO_VERSION";
+
     function Class() {}
 
     Class.extend = function(proto) {
