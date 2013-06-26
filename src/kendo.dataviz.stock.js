@@ -398,14 +398,22 @@ kendo_module({
                 baseUnit = axis.options.baseUnit,
                 range = e.axisRanges[axis.options.name],
                 selection = navi.selection,
-                selectionDuration = duration(
-                    selection.options.from, selection.options.to, axis.options.baseUnit
-                ),
+                selectionDuration,
                 from,
                 to;
 
             if (!range || inNavigator) {
                 return;
+            }
+
+            if (axis.options.min && axis.options.max) {
+                selectionDuration = duration(
+                    axis.options.min, axis.options.max, baseUnit
+                );
+            } else {
+                selectionDuration = duration(
+                    selection.options.from, selection.options.to, baseUnit
+                );
             }
 
             from = toDate(math.min(
