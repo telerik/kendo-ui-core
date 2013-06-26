@@ -258,6 +258,7 @@
     <Compile Include="UI\Chart\Axes\IChartValueAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartCategoryAxis.cs" />
     <Compile Include="UI\Chart\Chart.cs" />
+    <Compile Include="UI\Chart\ChartNoteLine.cs" />
     <Compile Include="UI\Chart\ChartTitle.cs" />
     <Compile Include="UI\Chart\ChartLegend.cs" />
     <Compile Include="UI\Chart\ChartSpacing.cs" />
@@ -269,7 +270,10 @@
     <Compile Include="UI\Chart\ChartTooltipBase.cs" />
     <Compile Include="UI\Chart\ChartLineBase.cs" />
     <Compile Include="UI\Chart\ChartLegendLabels.cs" />
+    <Compile Include="UI\Chart\ChartNoteItem.cs" />
     <Compile Include="UI\Chart\Enums\ChartZoomDireciton.cs" />
+    <Compile Include="UI\Chart\Enums\ChartNoteLabelPosition.cs" />
+    <Compile Include="UI\Chart\Enums\ChartNotePosition.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisBaseUnitStepsBuilder.cs" />
@@ -285,6 +289,11 @@
     <Compile Include="UI\Chart\Fluent\ChartAxisSelectionBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartSelectionMousewheelBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLegendLabelsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartNoteLabelBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartNoteLineBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartNoteBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartNoteItemFactory.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartNoteItemBuilder.cs" />
     <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
@@ -373,6 +382,10 @@
     <Compile Include="UI\Chart\Serialization\ChartPolarAreaSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPolarScatterSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPolarLineSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartNoteLabelSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartNoteSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartNoteLineSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartNoteItemSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
@@ -444,6 +457,8 @@
     <Compile Include="UI\Chart\Series\ChartPolarAreaSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartPolarScatterSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartPolarLineSeries.cs" />
+    <Compile Include="UI\Chart\ChartNote.cs" />
+    <Compile Include="UI\Chart\ChartNoteLabel.cs" />
     <Compile Include="UI\Chart\Series\IChartBulletSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartCandlestickSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartOHLCSeries.cs" />
