@@ -45,7 +45,8 @@ def bundle(options)
     if eula
         license_agreements_path = File.join(path, "license-agreements")
         third_party_path = File.join(license_agreements_path, "third-party")
-        source_path = File.join(legal_dir, eula + "-eula")
+        eula_dir = beta ? "eula" : eula + "-eula"
+        source_path = File.join(legal_dir, eula_dir)
 
         tree :to => license_agreements_path,
              :from =>  File.join(source_path, "*"),
