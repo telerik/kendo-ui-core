@@ -621,7 +621,8 @@
 
             module("Date helpers / floorDate", {
                 setup: function() {
-                    date = new Date("2012/03/29 17:40:10.100");
+                    date = new Date("2012/03/29 17:40:10");
+                    date.setMilliseconds(100);
                 }
             });
 
@@ -668,7 +669,8 @@
             // ------------------------------------------------------------
             module("Date helpers / ceilDate", {
                 setup: function() {
-                    date = new Date("2012/03/29 17:40:10.100");
+                    date = new Date("2012/03/29 17:40:10");
+                    date.setMilliseconds(100);
                 }
             });
 
