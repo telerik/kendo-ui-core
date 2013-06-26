@@ -1524,13 +1524,12 @@ kendo_module({
             var that = this,
                 input = that.container.find(".k-recur-until"),
                 start = that.options.start,
-                rule = that._value;
+                rule = that._value,
+                until = rule.until;
 
-            //TODO: How to define value of the until option
-            //
             that.untilDatePicker = input.kendoDatePicker({
-                value: rule.until || start,
-                //TODO: SET MIN
+                min: until && until < start ? until : start,
+                value: until || start,
                 change: function() {
                     rule.until = this.value();
                     that.trigger("change");
