@@ -11,6 +11,21 @@ var SelectBox = DropDownList.extend({
         DropDownList.fn.init.call(that, element, options);
 
         that.value(that.options.title);
+
+        that.bind("open", function() {
+            if (that.options.autoSize) {
+                var list = that.list;
+
+                list.css({
+                        whiteSpace: "nowrap",
+                        width: "auto"
+                    });
+
+                that._width = list.width() || that._width;
+
+                list.css("width", that._width + kendo.support.scrollbar());
+            }
+        });
     },
     options: {
         name: "SelectBox"
@@ -43,7 +58,7 @@ var SelectBox = DropDownList.extend({
             tag = items[i].tag || "span";
             className = items[i].className;
 
-            items[i].style = dom.inlineStyle(doc, tag, { className : className });
+            items[i].style = dom.inlineStyle(doc, tag, { className : className }) + ";display:inline-block";
         }
 
         this.dataSource.trigger("change");

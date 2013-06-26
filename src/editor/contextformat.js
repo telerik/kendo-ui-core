@@ -112,6 +112,7 @@ var FormattingTool = DelayedExecutionTool.extend({
             dataValueField: "value",
             dataSource: options.items || editor.options[toolName],
             title: editor.options.messages[toolName],
+            autoSize: true,
             change: function () {
                 Tool.exec(editor, toolName, this.dataItem().toJSON());
             },
