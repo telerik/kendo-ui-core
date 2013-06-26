@@ -661,6 +661,27 @@
 
                 ok($(".k-overlay").is(":visible"));
             });
+
+            asyncTest("opening a closing animated window leaves it in an intermediate state", function() {
+                var dialog = $("<div />").appendTo("body").kendoWindow({
+                    animation: {
+                        open: {
+                            duration: 50
+                        },
+                        close: {
+                            duration: 50
+                        }
+                    }
+                }).data("kendoWindow");
+
+                dialog.close().open();
+
+                setTimeout(function() {
+                    start();
+
+                    ok(dialog.wrapper.is(":visible"));
+                }, 100);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

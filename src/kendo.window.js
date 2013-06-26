@@ -533,6 +533,10 @@ kendo_module({
                 overlay;
 
             if (!that.trigger(OPEN)) {
+                if (that._closing) {
+                    wrapper.kendoStop(true, true);
+                }
+
                 that._closing = false;
 
                 that.toFront();
