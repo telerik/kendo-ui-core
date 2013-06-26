@@ -151,8 +151,9 @@ kendo_module({
 
         _makePushStateUrl: function(address) {
             var that = this;
+            var regEx = new RegExp("^" + that.root, "i");
 
-            if (address.indexOf(that.root) !== 0) {
+            if (!regEx.test(address)) {
                 address = (that.root + address).replace(/\/\//g, '/');
             }
 
