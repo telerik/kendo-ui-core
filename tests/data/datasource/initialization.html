@@ -373,6 +373,21 @@
                 ok(dataSource.data()[0].items[0].items[0] instanceof MyModel);
             });
 
+            test("reseting data unbind change from the previous data", 1, function() {
+                var dataSource = new DataSource({
+                    data: []
+                });
+                var originalData = dataSource.data();
+
+                dataSource.bind("change", function() {
+                    ok(true);
+                });
+
+                dataSource.data([{}]);
+
+                originalData.push({});
+            });
+
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
