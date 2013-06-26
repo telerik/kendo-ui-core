@@ -2370,7 +2370,13 @@ kendo_module({
                 wrapGroupItems(data, model);
             }
 
-            return data.bind(CHANGE, proxy(that._change, that));
+            if (that._changeHandler && that._data && that._data instanceof ObservableArray) {
+                that._data.unbind(CHANGE, that._changeHandler);
+            } else {
+                that._changeHandler = proxy(that._change, that);
+            }
+
+            return data.bind(CHANGE, that._changeHandler);
         },
 
         _change: function(e) {
