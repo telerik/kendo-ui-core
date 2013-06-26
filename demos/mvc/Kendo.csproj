@@ -773,6 +773,7 @@
     <Content Include="Views\dataviz\barcode\index.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\web\upload\templates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
