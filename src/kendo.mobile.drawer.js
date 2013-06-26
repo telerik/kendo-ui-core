@@ -51,7 +51,7 @@ kendo_module({
             this.leftPositioned = this.options.position === "left";
 
             this.visible = false;
-            this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer").css("display", "");
+            this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer");
         },
 
         options: {
