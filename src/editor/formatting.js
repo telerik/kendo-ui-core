@@ -1,24 +1,13 @@
 (function($) {
 
 var kendo = window.kendo,
-    Class = kendo.Class,
     Editor = kendo.ui.editor,
-    formats = kendo.ui.Editor.fn.options.formats,
-    EditorUtils = Editor.EditorUtils,
     Tool = Editor.Tool,
     ToolTemplate = Editor.ToolTemplate,
     DelayedExecutionTool = Editor.DelayedExecutionTool,
-    FormatTool = Editor.FormatTool,
     dom = Editor.Dom,
-    RangeUtils = Editor.RangeUtils,
-    extend = $.extend,
-    GreedyInlineFormatter = Editor.GreedyInlineFormatter,
-    GreedyInlineFormatFinder = Editor.GreedyInlineFormatFinder,
-    GreedyBlockFormatter = Editor.GreedyBlockFormatter,
-    BlockFormatFinder = Editor.BlockFormatFinder,
-    registerTool = Editor.EditorUtils.registerTool,
-    registerFormat = Editor.EditorUtils.registerFormat,
-    KMARKER = "k-marker";
+    dropDownListTemplate = Editor.EditorUtils.dropDownListTemplate,
+    registerTool = Editor.EditorUtils.registerTool;
 
 
 var FormattingTool = DelayedExecutionTool.extend({
@@ -27,9 +16,6 @@ var FormattingTool = DelayedExecutionTool.extend({
         Tool.fn.init.call(that, kendo.deepExtend({}, that.options, options));
 
         that.type = "kendoSelectBox";
-        that._spanTag = [{ tags: ["span"] }];
-        var inlineFinder = new GreedyInlineFormatFinder(that._spanTag, "className");
-        var blockFinder = new BlockFormatFinder([{ tags: dom.blockElements }]);
 
         that.finder = {
             getFormat: function() { return ""; }
@@ -76,8 +62,7 @@ var FormattingTool = DelayedExecutionTool.extend({
     },
 
     command: function (args) {
-        var spanTag = this._spanTag,
-            item = args.value;
+        var item = args.value;
 
         item = this.toFormattingItem(item);
 
@@ -92,9 +77,9 @@ var FormattingTool = DelayedExecutionTool.extend({
                     }];
 
                 if (dom.inlineElements.indexOf(tags[0]) >= 0) {
-                    formatter = new GreedyInlineFormatter(format);
+                    formatter = new Editor.GreedyInlineFormatter(format);
                 } else {
-                    formatter = new GreedyBlockFormatter(format);
+                    formatter = new Editor.GreedyBlockFormatter(format);
                 }
 
                 return formatter;
@@ -236,18 +221,18 @@ function deprecatedFormattingTool(name, property, finder) {
     });
 }
 
-var StyleTool = deprecatedFormattingTool("style", "className", new GreedyInlineFormatFinder([{ tags: ["span"] }], "className"));
-var FormatBlockTool = deprecatedFormattingTool("formatBlock", "tag", new BlockFormatFinder([{ tags: dom.blockElements }]));
+var StyleTool = deprecatedFormattingTool("style", "className", new Editor.GreedyInlineFormatFinder([{ tags: ["span"] }], "className"));
+var FormatBlockTool = deprecatedFormattingTool("formatBlock", "tag", new Editor.BlockFormatFinder([{ tags: dom.blockElements }]));
 
-extend(Editor, {
+$.extend(Editor, {
     FormattingTool: FormattingTool,
     StyleTool: StyleTool,
     FormatBlockTool: FormatBlockTool
 });
 
-registerTool("formatting", new FormattingTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Format"})}));
+registerTool("formatting", new FormattingTool({template: new ToolTemplate({template: dropDownListTemplate, title: "Format"})}));
 
-registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Styles"})}));
-registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate})}));
+registerTool("style", new StyleTool({template: new ToolTemplate({template: dropDownListTemplate, title: "Styles"})}));
+registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: dropDownListTemplate})}));
 
 })(window.kendo.jQuery);
