@@ -77,7 +77,7 @@ kendo_module({
                     '#}#' +
                 '</span>' +
                 '<span class="k-event-bottom-actions">' +
-                    //'<span class="k-icon k-resize-handle"></span>' +
+                    '<span class="k-icon k-resize-handle"></span>' +
                     '# if(data.head || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-s"></span>' +
                     '#}#' +
@@ -139,6 +139,51 @@ kendo_module({
             that._editable();
 
             that.calculateDateRange();
+
+            var hint = $('<div style="position:absolute;border:1px solid black; background:black; opacity: 0.5">' +
+                    '<div style="position:absolute;top:2px;left:2px;color:white"></div>' +
+                    '<div style="position:absolute;bottom:2px;right:2px;color:white"></div>' +
+                '</div>'
+            );
+
+            that.content.kendoDraggable({
+                distance: 0,
+                filter: ".k-resize-handle",
+                drag: function(e) {
+                    var eventElement = $(e.currentTarget).closest(".k-event");
+
+                    hint.css( {
+                        height: hint[0].clientHeight + e.y.delta
+                    });
+                },
+                dragstart: function(e) {
+                    var eventElement = $(e.currentTarget).closest(".k-event");
+
+                    var index = SchedulerView.rangeIndex(eventElement);
+
+                    var date = kendo.date.getDate(that._slotIndexDate(+eventElement.attr(kendo.attr("slot-idx"))));
+
+                    var time = that._slotIndexTime(index.start);
+
+                    kendo.date.setTime(date, time);
+
+                    console.log(date);
+
+                    hint.find("div:first").text(kendo.toString(date, "t"));
+
+                    hint.css({
+                        left: eventElement[0].offsetLeft,
+                        top: eventElement[0].offsetTop,
+                        width: eventElement[0].clientWidth,
+                        height: eventElement[0].clientHeight
+                    });
+
+                    hint.appendTo(that.content);
+                },
+                dragend: function() {
+                    hint.remove();
+                }
+            });
        },
 
         options: {
