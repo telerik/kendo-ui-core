@@ -373,7 +373,7 @@ kendo_module({
                 isMaximized = that.options.isMaximized,
                 newWidth, newHeight;
 
-            if (e.target != e.currentTarget) {
+            if (e.target != e.currentTarget || that._closing) {
                 return;
             }
 

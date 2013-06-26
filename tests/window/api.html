@@ -662,15 +662,11 @@
                 ok($(".k-overlay").is(":visible"));
             });
 
-            asyncTest("opening a closing animated window leaves it in an intermediate state", function() {
+            asyncTest("opening a closing animated window leaves it in opened state", function() {
                 var dialog = $("<div />").appendTo("body").kendoWindow({
                     animation: {
-                        open: {
-                            duration: 50
-                        },
-                        close: {
-                            duration: 50
-                        }
+                        open: { duration: 50 },
+                        close: { duration: 50 }
                     }
                 }).data("kendoWindow");
 

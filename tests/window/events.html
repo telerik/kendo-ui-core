@@ -131,11 +131,6 @@
 
             test("destroy can be called in close event", function() {
                 var dialog = createWindow({
-                    draggable: true,
-                    title: "Search - Location Hierarchy",
-                    content: "/Location/LocationHierarchy",
-                    height: "379px",
-                    width: "398px",
                     close: function() {
                         this.destroy();
                     }
@@ -170,6 +165,21 @@
                 });
 
                 dialog.press(keys.ESC);
+            });
+
+            test("hitting escape in closing window does trigger new close", function() {
+                var calls = 0;
+
+                createWindow({
+                    close: function() {
+                        calls++;
+                    },
+                    animation: { close: { duration: 50 } }
+                });
+
+                dialog.press(keys.ESC).press(keys.ESC);
+
+                equal(calls, 1);
             });
 
             test("up arrow moves window up", function() {
