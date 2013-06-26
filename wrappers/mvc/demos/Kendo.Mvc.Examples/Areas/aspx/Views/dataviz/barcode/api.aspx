@@ -5,7 +5,12 @@
        <div id="example" class="k-content">
         
         <div class="demo-section">
-            <%=Html.Kendo().Barcode().Name("barcode").Value("1234567").Encoding(BarcodeSymbology.EAN8) %>
+            <%=Html.Kendo().Barcode()
+                .Name("barcode")
+                .Value("1234567")
+                .Encoding(BarcodeSymbology.EAN8)
+                .Background("transparent")
+            %>
         </div>
         <div class="configuration-horizontal">
             <div class="config-section">

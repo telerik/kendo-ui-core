@@ -9,9 +9,9 @@ require_once '../../include/header.php';
         $qrMail = new \Kendo\Dataviz\UI\QRCode('qrMail');
         $qrMail->value("mailto:clientservice@kendoui.com")
             ->size(120)
-            ->darkModuleColor("#e15613")
+            ->color("#e15613")
             ->background("transparent");
-               
+
         echo $qrMail->render();
      ?>
 </div>
@@ -21,14 +21,14 @@ require_once '../../include/header.php';
         $qrUrlBorder =  new \Kendo\Dataviz\UI\QRCodeBorder();
         $qrUrlBorder->color("#000000")
             ->width(5);
-        
+
         $qrUrl = new \Kendo\Dataviz\UI\QRCode('qrUrl');
         $qrUrl->value("http://demos.kendoui.com/dataviz/overview/index.html")
             ->size(120)
-            ->errorCorrectionLevel("M")
+            ->errorCorrection("M")
             ->border($qrUrlBorder);
-               
-        echo $qrUrl->render();       
+
+        echo $qrUrl->render();
     ?>
 </div>
 <div class="demo-section">
@@ -37,15 +37,15 @@ require_once '../../include/header.php';
         $qrTelephoneBorder =  new \Kendo\Dataviz\UI\QRCodeBorder();
         $qrTelephoneBorder->color("#67a814")
             ->width(5);
-        
+
         $qrTelephone = new \Kendo\Dataviz\UI\QRCode('qrTelephone');
         $qrTelephone->value("tel:+1-888-365-2779")
             ->size(120)
-            ->errorCorrectionLevel("Q")
-            ->darkModuleColor("#67a814")
+            ->errorCorrection("Q")
+            ->color("#67a814")
             ->border($qrTelephoneBorder);
-               
-        echo $qrTelephone->render();    
+
+        echo $qrTelephone->render();
     ?>
 </div>
 <div class="demo-section">
@@ -53,11 +53,11 @@ require_once '../../include/header.php';
     <?php
         $qrGeoLocation = new \Kendo\Dataviz\UI\QRCode('qrGeoLocation');
         $qrGeoLocation->value("geo:42.65049,23.37925,100")
-            ->errorCorrectionLevel("H")
+            ->errorCorrection("H")
             ->size(120)
-            ->darkModuleColor("#166a83");
-               
-        echo $qrGeoLocation->render();       
+            ->color("#166a83");
+
+        echo $qrGeoLocation->render();
     ?>
 </div>
 

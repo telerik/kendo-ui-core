@@ -27,21 +27,21 @@ class QRCode extends \Kendo\UI\Widget {
     }
 
     /**
-    * The dark module color of the QR code. Accepts a valid CSS color string, including hex and rgb.
+    * The color of the QR code. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\QRCode
     */
-    public function darkModuleColor($value) {
-        return $this->setProperty('darkModuleColor', $value);
+    public function color($value) {
+        return $this->setProperty('color', $value);
     }
 
     /**
-    * The error correction level used to encode the value. The possible values are:
+    * The error correction level used to encode the value.The possible values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\QRCode
     */
-    public function errorCorrectionLevel($value) {
-        return $this->setProperty('errorCorrectionLevel', $value);
+    public function errorCorrection($value) {
+        return $this->setProperty('errorCorrection', $value);
     }
 
     /**

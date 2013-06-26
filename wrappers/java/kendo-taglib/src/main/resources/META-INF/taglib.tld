@@ -11675,14 +11675,14 @@ is closed. Options include "fadeOut".</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The dark module color of the QR code. Accepts a valid CSS color string, including hex and rgb.</description>
-            <name>darkModuleColor</name>
+            <description>The color of the QR code. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The error correction level used to encode the value. The possible values are:</description>
-            <name>errorCorrectionLevel</name>
+            <description>The error correction level used to encode the value.The possible values are:</description>
+            <name>errorCorrection</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>

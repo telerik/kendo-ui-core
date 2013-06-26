@@ -8,7 +8,7 @@ require_once '../../include/header.php';
         <span class="configHead">Value</span>
         <ul class="options">
             <li>
-                <textarea id="qrValue" class="k-textbox" data-bind="value: qrValue" rows="5" cols="20"></textarea>                            
+                <textarea id="qrValue" class="k-textbox" data-bind="value: qrValue" rows="5" cols="20"></textarea>
             </li>
         </ul>
     </div>
@@ -16,8 +16,8 @@ require_once '../../include/header.php';
         <span class="configHead">Options</span>
         <ul class="options">
             <li>
-               <label for="errorCorrectionLevel">Error correction level:</label>
-               <select id="errorCorrectionLevel" data-role="dropdownlist" data-bind="value: qrOptions.errorCorrectionLevel">
+               <label for="errorCorrection">Error correction level:</label>
+               <select id="errorCorrection" data-role="dropdownlist" data-bind="value: qrOptions.errorCorrection">
                     <option value="L">L</option>
                     <option value="M">M</option>
                     <option value="Q">Q</option>
@@ -46,21 +46,21 @@ require_once '../../include/header.php';
             <li>
                 <label for="backgroundColor">Background color:</label>
                 <input id="backgroundColor" data-role="colorpicker" data-bind="value: qrOptions.background"  />
-            </li>                                               
+            </li>
             <li>
                 <label for="moduleColor">Module color:</label>
-                <input id="moduleColor" data-role="colorpicker" data-bind="value: qrOptions.darkModuleColor" />
+                <input id="moduleColor" data-role="colorpicker" data-bind="value: qrOptions.color" />
             </li>
         </ul>
     </div>
 </div>
 <div class="demo-section">
-    <?php   
+    <?php
         $qrCode = new \Kendo\Dataviz\UI\QRCode('qrCode');
         $qrCode->size(200);
-               
+
         echo $qrCode->render();
-    ?>	
+    ?>
 </div>
 
 <script type="text/javascript">
@@ -72,9 +72,9 @@ require_once '../../include/header.php';
         var viewModel = kendo.observable({
             qrValue: "Hello World",
             qrOptions: {
-                errorCorrectionLevel: "L",
+                errorCorrection: "L",
                 background: "#FFFFFF",
-                darkModuleColor: "#000000",
+                color: "#000000",
                 size: 200,
                 border: {
                     color: "#FFFFFF",
@@ -103,15 +103,15 @@ require_once '../../include/header.php';
         viewModel.setElementWidth();
         viewModel.setValue();
     });
-    
+
 </script>
 
-<style scoped>                
-                
-    .k-qrcode {                 
-        margin: 20px auto;                 
+<style scoped>
+
+    .k-qrcode {
+        margin: 20px auto;
     }
-                     
+
     #qrValue{
         width: 190px;
         max-width:190px;
@@ -121,7 +121,7 @@ require_once '../../include/header.php';
     .configuration-horizontal .options li {
         padding: 3px 0;
     }
-                          
+
     .configuration-horizontal .k-textbox {
             margin-left: 0;
     }

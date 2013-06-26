@@ -4,14 +4,15 @@ require_once '../../include/header.php';
 ?>
 
     <div id="example" class="k-content">
-        
+
         <div class="demo-section">
             <?php
-		$barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
-		$barcode->value("1234567");
-		$barcode->type("ean8");
-		echo $barcode->render();  
-	    ?>
+        $barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
+        $barcode->value("1234567");
+        $barcode->type("ean8");
+        $barcode->background("transparent");
+        echo $barcode->render();
+        ?>
         </div>
         <div class="configuration-horizontal">
             <div class="config-section">
@@ -26,7 +27,7 @@ require_once '../../include/header.php';
                 </ul>
             </div>
         </div>
-        
+
         <script>
             function setOptions(e) {
                 var validValue = $('#validValue');
@@ -46,7 +47,7 @@ require_once '../../include/header.php';
                     validValue.hide();
                 } catch (e) {
                     validValue.text(e.message).show();
-                }               
+                }
             }
 
             $(document).ready(function () {
@@ -87,18 +88,18 @@ require_once '../../include/header.php';
                 width: 300px;
                 margin: 0 auto;
             }
-            
+
             .configuration-horizontal .options li
             {
                 padding: 3px 0;
             }
-            
+
             .configuration-horizontal .k-textbox
             {
                 width:150px;
                 margin-left: 0;
             }
-            
+
             #validValue
             {
                 display:none;

@@ -57,20 +57,20 @@ public class QRCodeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("background", value);
     }
 
-    public String getDarkModuleColor() {
-        return (String)getProperty("darkModuleColor");
+    public String getColor() {
+        return (String)getProperty("color");
     }
 
-    public void setDarkModuleColor(String value) {
-        setProperty("darkModuleColor", value);
+    public void setColor(String value) {
+        setProperty("color", value);
     }
 
-    public String getErrorCorrectionLevel() {
-        return (String)getProperty("errorCorrectionLevel");
+    public String getErrorCorrection() {
+        return (String)getProperty("errorCorrection");
     }
 
-    public void setErrorCorrectionLevel(String value) {
-        setProperty("errorCorrectionLevel", value);
+    public void setErrorCorrection(String value) {
+        setProperty("errorCorrection", value);
     }
 
     public Object getSize() {

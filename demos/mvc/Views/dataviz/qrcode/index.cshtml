@@ -22,13 +22,13 @@
                     $("#qrMail").kendoQRCode({
                         value: "mailto:clientservice@kendoui.com",
                         size: 120,
-                        darkModuleColor: "#e15613",
+                        color: "#e15613",
                         background: "transparent"
                     });
 
                     $("#qrUrl").kendoQRCode({
                         value: "http://demos.kendoui.com/dataviz/overview/index.html",
-                        errorCorrectionLevel: "M",
+                        errorCorrection: "M",
                         size: 120,
                         border: {
                             color: "#000000",
@@ -38,9 +38,9 @@
 
                     $("#qrTelephone").kendoQRCode({
                         value: "tel:+1-888-365-2779",
-                        errorCorrectionLevel: "Q",
+                        errorCorrection: "Q",
                         size: 120,
-                        darkModuleColor: "#67a814",
+                        color: "#67a814",
                         border: {
                             color: "#67a814",
                             width: 5
@@ -49,9 +49,9 @@
 
                     $("#qrGeoLocation").kendoQRCode({
                         value: "geo:42.65049,23.37925,100",
-                        errorCorrectionLevel: "H",
+                        errorCorrection: "H",
                         size: 120,
-                        darkModuleColor: "#166a83"
+                        color: "#166a83"
                     });
                 });
 
