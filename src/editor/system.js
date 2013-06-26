@@ -514,8 +514,9 @@ var Clipboard = Class.extend({
 
         var parent = this.splittableParent(block, caret);
         var unwrap = false;
+        var splittable = parent != editor.body && !dom.is(parent, "td");
 
-        if (!/body|td/.test(dom.name(parent)) && (block || dom.isInline(parent))) {
+        if (splittable && (block || dom.isInline(parent))) {
             range.selectNode(caret);
             RangeUtils.split(range, parent, true);
             unwrap = true;
