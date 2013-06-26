@@ -84,7 +84,7 @@ $(function() {
     });
 
     $("#views").kendoDropDownList({
-        value: scheduler.view(),
+        value: scheduler.view().name,
         change: function() {
             scheduler.view(this.value());
         }
