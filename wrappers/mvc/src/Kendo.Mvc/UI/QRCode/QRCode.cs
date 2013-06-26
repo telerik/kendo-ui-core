@@ -28,10 +28,10 @@
         /// Gets or sets the QRCode value.
         /// </summary>
         /// <value>The QRCode value.</value>
-        public string Value 
-        { 
-            get; 
-            set; 
+        public string Value
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -54,10 +54,10 @@
         }
 
         /// <summary>
-        /// Gets or sets the QRCode dark module color.
+        /// Gets or sets the QRCode color.
         /// </summary>
-        /// <value>The QRCode dark module color.</value>
-        public string DarkModuleColor
+        /// <value>The QRCode color.</value>
+        public string Color
         {
             get;
             set;
@@ -67,10 +67,10 @@
         /// Gets or sets the QRCode background.
         /// </summary>
         /// <value>The QRCode background.</value>
-        public string Background 
+        public string Background
         {
-            get; 
-            set; 
+            get;
+            set;
         }
 
         /// <summary>
@@ -88,7 +88,7 @@
             if (ErrorCorrectionLevel != DefaultErrorCorrectionLevel)
             {
                 Options["errorCorrectionLevel"] = ErrorCorrectionLevel.ToString();
-            }            
+            }
 
             if (!string.IsNullOrEmpty(Value))
             {
@@ -100,9 +100,9 @@
                 Options["background"] =Background;
             }
 
-            if (!string.IsNullOrEmpty(DarkModuleColor))
+            if (!string.IsNullOrEmpty(Color))
             {
-                Options["darkModuleColor"] = DarkModuleColor;
+                Options["color"] = Color;
             }
 
             if (this.Size.HasValue)
@@ -117,7 +117,7 @@
 
             writer.Write(Initializer.Initialize(Selector, "QRCode", Options));
             base.WriteInitializationScript(writer);
-        }        
+        }
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {

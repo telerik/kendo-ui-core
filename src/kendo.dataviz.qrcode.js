@@ -925,8 +925,8 @@ kendo_module({
                                 round(quietZoneSize + column * baseUnit), round(y + baseUnit));
 
                             view.children.push(view.createRect(box, {
-                                fill: that.options.darkModuleColor,
-                                stroke: that.options.darkModuleColor, strokeWidth: 0.2,
+                                fill: that.options.color,
+                                stroke: that.options.color, strokeWidth: 0.2,
                                 strokeLineJoin: "miter", align: false
                             }));
                         }
@@ -964,7 +964,7 @@ kendo_module({
                 value: "",
                 errorCorrectionLevel: QRCodeDefaults.DEFAULT_ERROR_CORRECTION_LEVEL,
                 background: QRCodeDefaults.DEFAULT_BACKGROUND,
-                darkModuleColor: QRCodeDefaults.DEFAULT_DARK_MODULE_COLOR,
+                color: QRCodeDefaults.DEFAULT_DARK_MODULE_COLOR,
                 size: "",
                 border: {
                     color: "",

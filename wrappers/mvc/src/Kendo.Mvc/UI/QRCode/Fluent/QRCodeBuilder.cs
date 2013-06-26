@@ -104,26 +104,26 @@
         }
 
         /// <summary>
-        /// Sets the dark module color of the QR code.
+        /// Sets the color of the QR code.
         /// </summary>
-        /// <param name="color">The QR code dark module color.</param>
+        /// <param name="color">The QR code color.</param>
         /// <example>
         /// <code lang="Razor">
         /// @(Html.Kendo().QRCode()
         ///     .Name(&quot;qrCode&quot;)
-        ///     .DarkModuleColor(&quot;blue&quot;)
+        ///     .Color(&quot;blue&quot;)
         /// )
         /// </code>
         /// <code lang="ASPX">
         /// &lt;%:Html.Kendo().QRCode()
         ///     .Name(&quot;qrCode&quot;)
-        ///     .DarkModuleColor(&quot;blue&quot;)
+        ///     .Color(&quot;blue&quot;)
         /// %&gt;
         /// </code>
         /// </example>
-        public QRCodeBuilder DarkModuleColor(string color)
+        public QRCodeBuilder Color(string color)
         {
-            Component.DarkModuleColor = color;
+            Component.Color = color;
 
             return this;
         }

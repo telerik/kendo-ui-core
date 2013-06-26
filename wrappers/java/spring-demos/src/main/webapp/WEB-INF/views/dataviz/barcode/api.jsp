@@ -4,7 +4,7 @@
 <demo:header />                        
 	<div class="demo-section">
 	    <div id="barcode"></div>
-	    <kendo:barcode name="barcode" value="1234567" type="ean8">
+	    <kendo:barcode name="barcode" value="1234567" type="ean8" background="transparent">
 	    </kendo:barcode>
 	</div>
 	<div class="configuration-horizontal">
