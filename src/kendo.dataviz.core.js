@@ -1590,7 +1590,8 @@ kendo_module({
                 visible: true,
                 zIndex: 2
             },
-            visible: true
+            visible: true,
+            position: TOP
         },
 
         render: function() {
