@@ -176,7 +176,7 @@ asyncTest("Allows prevention of back if preventDefault called", 1, function() {
     setTimeout(function() {
         start();
         url(initial + "#/new-location");
-    });
+    }, 300);
 });
 
 asyncTest("Allows prevention of hash change by clicked link if preventDefault called", 1, function() {
