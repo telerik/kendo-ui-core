@@ -3,13 +3,13 @@
 </div>
 
 <script id="event-template" type="text/x-kendo-template">
-    <div>
-        <img src="#= image #" style="float:left; margin: 0 8px;">
-        <p style="margin: 5px 0 0;">
+    <div class="movie-template">
+        <img src="#= image #">
+        <p>
             #: kendo.toString(start, "hh:mm") # - #: kendo.toString(end, "hh:mm") #
         </p>
-        <h3 style="padding: 0 8px 5px; font-size: 12px;">#: title #</h3>
-        <a href="#= imdb #" style="color:\#e15613; text-decoration: none;">Movie in IMDB</a>
+        <h3>#: title #</h3>
+        <a href="#= imdb #">Movie in IMDB</a>
     </div>
 </script>
 
@@ -99,4 +99,19 @@ $(function() {
 });
 </script>
 <style scoped>
+    .movie-template img {
+        float: left;
+        margin: 0 8px;
+    }
+    .movie-template p {
+        margin: 5px 0 0;
+    }
+    .movie-template h3 {
+        padding: 0 8px 5px;
+        font-size: 12px;
+    }
+    .movie-template a {
+        color: #e15613;
+        text-decoration: none;
+    }
 </style>
