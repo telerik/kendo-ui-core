@@ -138,6 +138,10 @@ kendo_module({
     }
 
     kendo.ui.SchedulerView = Widget.extend({
+        init: function(element, options) {
+            Widget.fn.init.call(this, element, options);
+            this._scrollbar = kendo.support.scrollbar();
+        },
         dateForTitle: function() {
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
         },
@@ -234,8 +238,8 @@ kendo_module({
             var that = this,
                 toolbar = that.element.find(">.k-scheduler-toolbar"),
                 height = that.element.innerHeight(),
-                headerHeight = 0,
-                scrollbar = kendo.support.scrollbar();
+                scrollbar = this._scrollbar,
+                headerHeight = 0;
 
             if (toolbar.length) {
                 height -= toolbar.outerHeight();
