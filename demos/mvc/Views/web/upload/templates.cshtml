@@ -6,8 +6,8 @@
                 <span class='k-progress'></span>
                 <div class='file-wrapper'>
                     <span class='file-icon #=addExtensionClass(files[0].extension)#'></span>
-                    <h4 class='file-name-heading'>Name: #=name#</h4>
-                    <h4 class='file-size-heading'>Size: #=size# bytes</h4>
+                    <h4 class='file-heading file-name-heading'>Name: #=name#</h4>
+                    <h4 class='file-heading file-size-heading'>Size: #=size# bytes</h4>
                     <button type='button' class='k-upload-action'></button>
                 </div>
             </script>
@@ -67,13 +67,13 @@
                 .zip-file { background-image: url(../../content/web/upload/zip.png) }
                 .default-file { background-image: url(../../content/web/upload/default.png) }
 
-                li.k-file h4
+                #example .file-heading
                 {
                     font-family: Arial;
                     font-size: 1.1em;
                     display: inline-block;
                     float: left;
-                    width: 300px;
+                    width: 450px;
                     margin: 0 0 0 20px;
                     height: 25px;
                     -ms-text-overflow: ellipsis;
@@ -83,12 +83,12 @@
                     white-space:nowrap;
                 }
 
-                    li.k-file h4.file-name-heading
+                    #example .file-name-heading
                     {
                         font-weight: bold;
                     }
 
-                    li.k-file h4.file-size-heading
+                     #example .file-size-heading
                     {
                         font-weight: normal;
                         font-style: italic;
