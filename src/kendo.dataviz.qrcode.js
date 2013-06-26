@@ -939,7 +939,8 @@ kendo_module({
                     {
                         fill: that.options.background,
                         stroke: border.color,
-                        strokeWidth: border.width
+                        strokeWidth: border.width,
+                        align: false
                     }));
             },
             setOptions: function (options) {
