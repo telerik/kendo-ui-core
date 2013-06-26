@@ -9375,15 +9375,17 @@ kendo_module({
         var day = date.getDay(),
             daysToSubtract = 0;
 
-        weekStartDay = weekStartDay || 0;
-        while (day !== weekStartDay) {
-            if (day === 0) {
-                day = 6;
-            } else {
-                day--;
-            }
+        if (!isNaN(day)) {
+            weekStartDay = weekStartDay || 0;
+            while (day !== weekStartDay) {
+                if (day === 0) {
+                    day = 6;
+                } else {
+                    day--;
+                }
 
-            daysToSubtract++;
+                daysToSubtract++;
+            }
         }
 
         return addTicks(date, -daysToSubtract * TIME_PER_DAY);
@@ -9843,6 +9845,7 @@ kendo_module({
         singleItemOrArray: singleItemOrArray,
         sortDates: sortDates,
         sparseArrayLimits: sparseArrayLimits,
+        startOfWeek: startOfWeek,
         transpose: transpose,
         toDate: toDate,
         toTime: toTime,

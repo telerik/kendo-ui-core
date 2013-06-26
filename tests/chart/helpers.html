@@ -971,6 +971,14 @@
             });
 
             // ------------------------------------------------------------
+            module("Date Helpers / startOfWeek");
+
+            test("does not hang with invalid dates", function() {
+                dataviz.startOfWeek(new Date("foo"));
+                ok(true);
+            });
+
+            // ------------------------------------------------------------
             var autoFormat = dataviz.autoFormat;
 
             module("autoFormat");
