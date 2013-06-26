@@ -255,7 +255,8 @@ var Dom = {
     encode: function (value) {
         return value.replace(entityRe, function(c) {
             var charCode = c.charCodeAt(0);
-            return '&' + (entityTable[charCode] || '#'+charCode) + ';';
+            var entity = entityTable[charCode];
+            return entity ? '&'+entity+';' : c;
         });
     },
 
