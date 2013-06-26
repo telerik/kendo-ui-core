@@ -452,11 +452,9 @@ kendo_module({
             if (current !== value) {
 
                 if (!that.trigger("set", { field: field, value: value })) {
-
-                    if (!that._set(field, that.wrap(value, field, function() { return that; })) || field.indexOf("(") >= 0) {
+                    if (!that._set(field, that.wrap(value, field, function() { return that; })) || field.indexOf("(") >= 0 || field.indexOf("[") >= 0) {
                         that.trigger(CHANGE, { field: field });
                     }
-
                 }
             }
         },
