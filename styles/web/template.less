@@ -187,12 +187,11 @@
 .k-slider-track,
 .k-splitbar,
 .k-dropzone-active,
-.k-upload-files,
 .k-tiles,
 .k-toolbar,
 .k-tooltip,
-.k-progress,
-.k-editor-button .k-tool-icon
+.k-editor-button .k-tool-icon,
+.k-upload-files
 {
     border-color: @widget-border-color;
 }
@@ -209,7 +208,6 @@
 td.k-group-cell,
 .k-calendar th,
 .k-dropzone-hovered,
-.k-upload-files,
 .k-widget.k-popup
 {
     background-color: @group-background-color;
@@ -424,6 +422,7 @@ textarea.k-textbox:hover,
 .k-scheduler-datecolumn
 {
     background-color: @scheduler-background-color;
+    color: @widget-text-color;
 }
 
 .k-scheduler-times tr,
@@ -454,7 +453,7 @@ textarea.k-textbox:hover,
 
 .k-event
 {
-    border-color: rgba(0,0,0,.3); /* appointment-background-color calculate rgba black or white*/
+    border-color: rgba(0,0,0,.13);
     background: @event-background-color 0 -257px @tooltip-texture;
 }
 
@@ -770,6 +769,7 @@ div.k-imagebrowser-dropzone em
 .k-other-month,
 .k-other-month .k-link,
 .k-dropzone em,
+.k-dropzone .k-upload-status,
 .k-tile-empty strong,
 .k-slider .k-draghandle
 {
@@ -854,9 +854,41 @@ div.k-imagebrowser-dropzone em
 }
 
 /* Upload */
-.k-progress-status
+
+.k-file
 {
-    border-color: @hover-border-color transparent;
+    background-color: @active-background-color;
+    border-color: @cell-border-color;
+}
+
+.k-file-progress
+{
+    color: @upload-progress-text-color;
+}
+
+.k-file-progress .k-progress
+{
+    background-color: @upload-progress-background-color;
+}
+
+.k-file-success
+{
+    color: @upload-success-text-color;
+}
+
+.k-file-success .k-progress
+{
+    background-color: @upload-success-background-color;
+}
+
+.k-file-error
+{
+    color: @upload-error-text-color;
+}
+
+.k-file-error .k-progress
+{
+    background-color: @upload-error-background-color;
 }
 
 /* ImageBrowser */
@@ -996,7 +1028,8 @@ div.k-imagebrowser-dropzone em
 .k-tooltip,
 .k-tile,
 .k-slider-track,
-.k-slider-selection
+.k-slider-selection,
+.k-upload
 {
     .border-radius(@main-border-radius);
 }
@@ -1127,8 +1160,6 @@ div.k-imagebrowser-dropzone em
 
 .k-textbox > input,
 .k-autocomplete .k-input,
-.k-progress,
-.k-progress-status,
 .k-numeric-wrap.k-expand-padding .k-input,
 .k-multiselect-wrap
 {
@@ -1139,8 +1170,7 @@ div.k-imagebrowser-dropzone em
 .k-list .k-state-focused,
 .k-list .k-state-highlight,
 .k-list .k-state-selected,
-.k-dropzone,
-.k-upload-files
+.k-dropzone
 {
     .guarded-border-radius(@list-border-radius);
 }

@@ -399,6 +399,7 @@ html body .k-button-bare.k-upload-button:hover
 .k-i-funnel-clear, .k-clear-filter { .sprite-hoverable(2, 6); }
 
 .k-i-refresh { .sprite-hoverable(2, 7); }
+.k-i-exception { .sprite-hoverable(10, 19); }
 .k-i-restore { .sprite-hoverable(2, 8); }
 .k-i-maximize { .sprite-hoverable(2, 9); }
 .k-i-minimize { .sprite-hoverable(4, 18); }
@@ -432,6 +433,11 @@ html body .k-button-bare.k-upload-button:hover
 .k-file { .sprite-hoverable(0, 0); }
 .k-i-folder-add, .k-addfolder { .sprite-hoverable(2, 17); }
 .k-i-folder-up, .k-goup { .sprite-hoverable(2, 18); }
+
+.k-file > .k-icon
+{
+    background-position:-115px -91px;
+}
 
 .k-image
 {
@@ -4009,7 +4015,7 @@ div.k-more-events
 }
 
 .k-event:hover .k-event-delete,
-td:hover > .k-task .k-event-delete
+tr:hover > td > .k-task .k-event-delete
 {
     display: inline-block;
 }
@@ -4441,6 +4447,10 @@ span.k-tooltip
 html .k-upload
 {
     position: relative;
+}
+
+html .k-upload-empty
+{
     border-width: 0;
     background: none;
 }
@@ -4453,11 +4463,17 @@ html .k-upload
 
 .k-ie7 .k-dropzone em, .k-ie7 .k-upload-button { vertical-align: baseline; }
 
+.k-dropzone,
+.k-file
+{
+    position: relative;
+}
+
 .k-dropzone
 {
     border-style: solid;
     border-width: 0;
-    padding: 4px;
+    padding: .8em;
     background-color: transparent;
 }
 
@@ -4465,12 +4481,6 @@ html .k-upload
 {
     visibility: hidden;
     margin-left: .6em;
-}
-
-.k-dropzone-active
-{
-    border-width: 1px;
-    padding: 3px;
 }
 
 .k-dropzone-active em
@@ -4484,6 +4494,11 @@ html .k-upload
     width: 86px;
     overflow: hidden !important; /* important required by IE7 */
     direction: ltr;
+}
+
+.k-upload-sync .k-upload-button
+{
+    margin: .8em;
 }
 
 .k-upload-button input
@@ -4502,47 +4517,45 @@ html .k-upload
 
 .k-upload-files
 {
+    margin: 0 0 .6em;
+    line-height: 2.66;
     border-style: solid;
-    border-width: 1px;
-    margin: .2em 0 0;
-    padding: .3em .7em .5em;
-    line-height: 1.9em;
+    border-width: 1px 0 0;
 }
 
 .k-upload-files .k-button
 {
-    position: relative;
-    top: 1px;
+    padding: 0;
+}
+
+.k-upload-files .k-button,
+.k-upload-status-total .k-icon
+{
     margin-left: 8px;
-    padding-top: 0;
-    padding-bottom: 0;
-    font-size: 84%;
 }
 
 .k-ie7 .k-upload-files .k-button{line-height: 1;} /*IE7*/
-
-.k-upload .k-upload-action .k-icon
-{
-    width: 8px;
-    height: 8px;
-    vertical-align: baseline;
-}
-
-.k-upload .k-upload-files .k-delete,
-.k-upload .k-upload-files .k-cancel
-{
-    background-position: -164px -116px;
-}
 
 .k-upload .k-fail
 {
     background-position: -161px -111px;
 }
 
-.k-retry { background-position: -164px -132px; }
 .k-si-refresh { .sprite-hoverable(10, 8); }
 .k-si-tick, .k-success { .sprite-hoverable(10, 6); }
 .k-si-cancel { .sprite-hoverable(10, 7); }
+
+.k-file
+{
+    border-style: solid;
+    border-width: 0 0 1px;
+    padding: .167em .167em .167em .8em;
+}
+
+.k-file .k-icon
+{
+    position: relative;
+}
 
 .k-filename
 {
@@ -4551,6 +4564,7 @@ html .k-upload
     min-width: 120px;
     max-width: 200px;
     vertical-align: middle;
+    margin-left: 1em;
     padding-bottom: 2px;
 
     overflow: hidden;
@@ -4559,24 +4573,31 @@ html .k-upload
     white-space: nowrap;
 }
 
-.k-progress,
-.k-progress-status
+.k-upload-status
 {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 118px;
-    height: 2px;
-    border-style: solid;
-    border-width: 1px;
-    background-repeat: repeat-x;
+    right: 12px;
+    top: .6em;
+    line-height: .7em;
 }
 
-.k-progress-status
+.k-upload-status .k-button,
+.k-upload-status .k-warning
 {
-    left: -1px;
-    bottom: -1px;
-    width: 50%;
+    vertical-align: text-bottom;
+}
+
+.k-dropzone .k-upload-status
+{
+    line-height: 2.4;
+}
+
+.k-progress
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .k-upload-selected
@@ -4589,6 +4610,18 @@ html .k-upload
     box-sizing: content-box;
 }
 .k-ie7 .k-upload-selected { min-width: 100px; }
+
+.k-upload-submit,
+.k-upload-cancel
+{
+    margin-bottom: .8em;
+}
+
+.k-upload-submit
+{
+    margin-left: .8em;
+    margin-right: .2em;
+}
 
 /* ImageBrowser */
 
