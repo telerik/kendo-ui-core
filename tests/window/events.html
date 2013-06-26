@@ -35,39 +35,40 @@
 
             asyncTest("loading of iframe triggers load event", 1, function() {
                 var triggered = false;
+                var timeout = setTimeout(start, 2000);
 
                 createWindow({
                     content: "blank.html",
                     iframe: true,
                     refresh: function() {
+                        clearTimeout(timeout);
+                        start();
                         ok(true);
                     }
                 });
-
-                setTimeout(function() {
-                    start();
-                }, 2000);
             });
 
             asyncTest("multiple loading of iframe triggers one refresh per load", function() {
                 var triggers = 0;
+                var first = true;
+                var timeout = setTimeout(start, 4000);
 
                 var dialog = createWindow({
                     content: "blank.html",
                     iframe: true,
                     refresh: function() {
                         triggers++;
+
+                        if (first) {
+                            dialog.refresh("blank.html?v2");
+                            first = false;
+                        } else {
+                            start();
+                            clearTimeout(timeout);
+                            equal(triggers, 2);
+                        }
                     }
                 });
-
-                setTimeout(function() {
-                    dialog.refresh("blank.html?v2");
-
-                    setTimeout(function() {
-                        start();
-                        equal(triggers, 2);
-                    }, 2000);
-                }, 2000);
             });
 
             test("clicking the refresh button on a static window triggers refresh event", function() {
@@ -189,7 +190,7 @@
 
                 dialog.press(keys.UP);
 
-                QUnit.close(dialogObject.wrapper.offset().top, offset.top - 10, .1);
+                QUnit.close(dialogObject.wrapper.offset().top, offset.top - 10, 1);
             });
 
             test("down arrow moves window down", function() {
@@ -199,7 +200,7 @@
 
                 dialog.press(keys.DOWN);
 
-                QUnit.close(dialogObject.wrapper.offset().top, offset.top + 10, .1);
+                QUnit.close(dialogObject.wrapper.offset().top, offset.top + 10, 1);
             });
 
             test("left arrow moves window left", function() {
