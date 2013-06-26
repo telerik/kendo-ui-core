@@ -2156,6 +2156,7 @@
 
                 var event = new kendo.data.SchedulerEvent({
                     uid: "id",
+                    id: 10,
                     title: "Title",
                     start: new Date(2013, 0, 1, 10, 30),
                     startTimezone: "America/Los_Angeles",
@@ -2174,6 +2175,7 @@
 
                 var events = [new kendo.data.SchedulerEvent({
                     uid: "id",
+                    id: 10,
                     title: "Title",
                     start: new Date(2013, 0, 1, 10, 30),
                     startTimezone: "America/Los_Angeles",
@@ -2184,6 +2186,7 @@
                 events = expandAll(events, start, end);
 
                 ok(!events[0].toJSON);
+                ok(events[0].id);
             });
 
         </script>

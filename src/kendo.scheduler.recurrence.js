@@ -906,7 +906,8 @@ kendo_module({
             idx = 0, event, result,
             startTimezone,
             eventStart,
-            data = [];
+            data = [],
+            id;
 
         for (; idx < length; idx++) {
             event = events[idx];
@@ -916,7 +917,9 @@ kendo_module({
             result = expand(event, start, end, startTimezone);
 
             if (event.toJSON) {
+                id = event.id;
                 event = event.toJSON();
+                event.id = id;
             }
 
             if (eventStart >= start && !isException(event.recurrenceException, eventStart, startTimezone)) {
