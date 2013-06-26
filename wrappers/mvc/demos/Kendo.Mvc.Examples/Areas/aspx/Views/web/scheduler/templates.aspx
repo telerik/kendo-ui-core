@@ -15,13 +15,13 @@
         })
         .Height(600)
         .EventTemplate(
-            "<div style='color:white'>" +
-                "<img src='" + Url.Content("~/Content/web/scheduler/") + "#= Image #' style='float:left'>" +
-                "<p>" +
-                    "#: kendo.toString(Start, 'hh:mm') # - #: kendo.toString(End, 'hh:mm') #" +
-                    "</p>" +
-                    "<h3>#: title #</h3>" +
-                        "<a href='#= Imdb #' style='color:white'>Movie in IMDB</a>" +
+                "<div class='movie-template'>" +
+                    "<img src='" + Url.Content("~/Content/web/scheduler/") + "#= Image #' />" +
+                    "<p>" + 
+                        "#= kendo.toString(start, 'hh:mm') # - #= kendo.toString(end, 'hh:mm') #" + 
+                    "</p>" + 
+                    "<h3>#= title #</h3>" +
+                    "<a href='#= Imdb #'>Movie in IMDB</a>" +
                 "</div>")
             .Views(views =>
             {
@@ -30,5 +30,24 @@
             })
             .BindTo(Model)
  %>
+
+<style scoped>
+    .movie-template img {
+        float: left;
+        margin: 0 8px;
+    }
+    .movie-template p {
+        margin: 5px 0 0;
+    }
+    .movie-template h3 {
+        padding: 0 8px 5px;
+        margin: 0px;
+        font-size: 12px;
+    }
+    .movie-template a {
+        color: #e15613;
+        text-decoration: none;
+    }
+</style>
 
 </asp:Content>
