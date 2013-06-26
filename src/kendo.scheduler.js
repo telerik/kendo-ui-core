@@ -643,7 +643,8 @@ kendo_module({
                 editableFields = [],
                 paramName = settings.paramName,
                 startTime = model.startTime,
-                endTime = model.endTime;
+                endTime = model.endTime,
+                timezone;
 
            if (template) {
                 if (typeof template === STRING) {
@@ -711,12 +712,12 @@ kendo_module({
                     close: function(e) {
                         if (e.userTriggered) {
                             if (that.trigger(CANCEL, { container: container, event: model })) {
-                                model.startTime = startTime;
-                                model.endTime = endTime;
-
                                 e.preventDefault();
                                 return;
                             }
+
+                            model.startTime = startTime;
+                            model.endTime = endTime;
                             that.cancelEvent();
                         }
                     }

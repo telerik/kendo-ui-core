@@ -954,6 +954,35 @@
                 ok(scheduler.dataSource.at(0).recurrenceRule);
             });
 
+            test("editEvent deletes startTime and endTime", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
+                    model = scheduler.dataSource.getByUid(uid);
+
+                model.startTime = new Date();
+                model.endTime = new Date();
+
+                scheduler.editEvent(uid);
+
+                ok(!model.startTime);
+                ok(!model.endTime);
+            });
+
+            test("editEvent returns startTime and endTime on cancel button", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
+                    model = scheduler.dataSource.getByUid(uid);
+
+                model.startTime = new Date();
+                model.endTime = new Date();
+
+                scheduler.editEvent(uid);
+                scheduler._editContainer.data("kendoWindow").wrapper.find(".k-window-action").click();
+
+                ok(model.startTime);
+                ok(model.endTime);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
