@@ -2909,3 +2909,29 @@ ul.keyboard-legend li a {
         background-size: 18px 9px;
     }
 }
+
+#betabutton
+{
+    position:absolute;
+    line-height:36px;
+    padding:0 14px;
+    color:#fff;
+    border-radius:0 0 5px 5px;
+    bottom:-36px;
+    right:0;
+    text-decoration:none;
+    
+    background: #e05b17; /* Old browsers */
+    background: -moz-linear-gradient(top, #e46217 0%, #e05b17 50%, #db5116 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e46217), color-stop(50%,#e05b17), color-stop(100%,#db5116)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e46217 0%,#e05b17 50%,#db5116 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e46217 0%,#e05b17 50%,#db5116 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #e46217 0%,#e05b17 50%,#db5116 100%); /* IE10+ */
+    background: linear-gradient(top, #e46217 0%,#e05b17 50%,#db5116 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e46217', endColorstr='#db5116',GradientType=0 ); /* IE6-9 */
+}
+
+#betabutton:hover
+{
+    opacity:.9;
+}
