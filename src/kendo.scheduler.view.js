@@ -383,7 +383,10 @@ kendo_module({
     }
 
     function rangeIndex(eventElement) {
-        var index = $(eventElement).attr(kendo.attr("start-end-idx")).split("-");
+        var element = eventElement.length ? eventElement[0] : eventElement;
+
+        var index = element.getAttribute(kendo.attr("start-end-idx")).split("-");
+
         return {
             start: +index[0],
             end: +index[1]
