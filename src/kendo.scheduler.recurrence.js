@@ -750,10 +750,6 @@ kendo_module({
         return a - b;
     }
 
-    function insertAt(origin, list, idx, skip) {
-        return origin.slice(0, skip ? idx - 1 : idx).concat(list).concat(origin.slice(idx));
-    }
-
     function parseExceptions(exceptions, zone) {
         var idx = 0, length, date,
             dates = [];
@@ -908,32 +904,31 @@ kendo_module({
     function expandAll(events, start, end, zone) {
         var length = events.length,
             idx = 0, event, result,
-            resultLength, skip,
             startTimezone,
-            eventStart;
+            eventStart,
+            data = [];
 
         for (; idx < length; idx++) {
             event = events[idx];
+            eventStart = event.start;
             startTimezone = event.startTimezone || event.endTimezone || zone;
 
             result = expand(event, start, end, startTimezone);
-            resultLength = result.length;
-            skip = false;
 
-            if (resultLength) {
-                eventStart = event.start;
-                if (eventStart < start || isException(event.recurrenceException, eventStart, startTimezone)) {
-                    resultLength -= 1;
-                    skip = true;
-                }
+            if (event.toJSON) {
+                event = event.toJSON();
+            }
 
-                events = insertAt(events, result, idx + 1, skip);
-                length += resultLength;
-                idx += resultLength;
+            if (eventStart >= start && !isException(event.recurrenceException, eventStart, startTimezone)) {
+                data.push(event);
+            }
+
+            if (result[0]) {
+                data = data.concat(result);
             }
         }
 
-        return events;
+        return data;
     }
 
     function parseRule(rule, zone) {

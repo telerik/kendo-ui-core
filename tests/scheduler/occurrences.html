@@ -2150,6 +2150,42 @@
                 equal(expandAll(events, start, end).length, 1);
             });
 
+            test("Expand method strips SchedulerEvent instance before expand", function() {
+                var start = new Date(2013, 0, 1, 0, 0),
+                    end = new Date(2013, 0, 2, 22, 0);
+
+                var event = new kendo.data.SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30),
+                    startTimezone: "America/Los_Angeles",
+                    end: new Date(2013, 0, 1, 11, 30),
+                    recurrenceRule: "FREQ=DAILY;COUNT=2"
+                });
+
+                var events = occurrences(event, start, end);
+
+                ok(!events[0].toJSON);
+            });
+
+            test("ExpandAll method strips SchedulerEvent instances", function() {
+                var start = new Date(2013, 0, 1, 0, 0),
+                    end = new Date(2013, 0, 2, 22, 0);
+
+                var events = [new kendo.data.SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30),
+                    startTimezone: "America/Los_Angeles",
+                    end: new Date(2013, 0, 1, 11, 30),
+                    recurrenceRule: "FREQ=DAILY;COUNT=2"
+                })];
+
+                events = expandAll(events, start, end);
+
+                ok(!events[0].toJSON);
+            });
+
         </script>
     </body>
 </html>
