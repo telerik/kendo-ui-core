@@ -28,6 +28,7 @@ ICENIUM_MIN_CSS = FileList['styles/mobile/kendo.icenium.min.css']
 file_merge 'styles/web/kendo.winjs.css' => [
     'styles/web/kendo.common.css',
     'styles/dataviz/kendo.dataviz.css',
+    'styles/dataviz/kendo.dataviz.default.css'
 ]
 
 file 'styles/web/kendo.winjs.css' => 'build/css.rb'
