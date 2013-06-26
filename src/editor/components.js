@@ -45,6 +45,8 @@ var SelectBox = DropDownList.extend({
 
             items[i].style = dom.inlineStyle(doc, tag, { className : className });
         }
+
+        this.dataSource.trigger("change");
     }
 });
 
