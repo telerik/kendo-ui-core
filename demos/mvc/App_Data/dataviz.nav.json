@@ -463,6 +463,7 @@
         {
             "text": "Barcode",
             "new": true,
+            "spriteCssClass": "barcodeIcon",
             "documentation": "dataviz/barcode",
             "items": [{
                 "text": "Basic usage",
@@ -480,6 +481,7 @@
         }, {
             "text": "QR code",
             "new": true,
+            "spriteCssClass": "qrcodeIcon",
             "documentation": "dataviz/qrcode",
             "items": [{
                 "text": "Basic usage",
