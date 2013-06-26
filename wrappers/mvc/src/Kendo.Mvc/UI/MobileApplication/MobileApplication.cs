@@ -8,6 +8,7 @@ namespace Kendo.Mvc.UI
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Resources;
 
     public class MobileApplication : WidgetBase
     {
@@ -45,6 +46,8 @@ namespace Kendo.Mvc.UI
         
         public string Transition { get; set; }
         
+        public bool PushState { get; set; }
+        
         //<< Fields
 
         public override void WriteInitializationScript(TextWriter writer)
@@ -55,7 +58,7 @@ namespace Kendo.Mvc.UI
 
             options.Add("hideAddressBar", HideAddressBar);
             options.Add("updateDocumentTitle", UpdateDocumentTitle);
-            options.Add("serverNavigation", ServerNavigation);
+            options.Add("serverNavigation", ServerNavigation);            
 
             if (Layout.HasValue())
             {
@@ -82,6 +85,15 @@ namespace Kendo.Mvc.UI
                 container = "\"" + Selector + "\"";
             }
 
+            if (PushState)
+            {
+                options.Add("pushState", PushState);
+                var url = new System.Web.Mvc.UrlHelper(ViewContext.RequestContext);
+                var routeData = ViewContext.RequestContext.RouteData.Values;
+                
+                options.Add("root", url.Action(string.Empty, routeData) + "/");                        
+            }
+
             writer.Write(String.Format("jQuery(function(){{ new kendo.mobile.Application(jQuery({0}), {1}); }});", container, Initializer.Serialize(options)));
 
             base.WriteInitializationScript(writer);
@@ -91,6 +103,11 @@ namespace Kendo.Mvc.UI
         {
             //Name is not mandatory for MobilApplication
             //base.VerifySettings();
+
+            if (ServerNavigation && PushState)
+            {
+                throw new NotSupportedException(Exceptions.CannotUsePushStateWithServerNavigation);                
+            }
         }       
     }
 }

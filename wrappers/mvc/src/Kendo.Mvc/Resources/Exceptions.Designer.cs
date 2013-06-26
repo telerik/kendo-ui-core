@@ -169,6 +169,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot use PushState with server navigation..
+        /// </summary>
+        internal static string CannotUsePushStateWithServerNavigation {
+            get {
+                return ResourceManager.GetString("CannotUsePushStateWithServerNavigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot use only server templates in Ajax or WebService binding mode. Please specify a client template as well..
         /// </summary>
         internal static string CannotUseTemplatesInAjaxOrWebService {

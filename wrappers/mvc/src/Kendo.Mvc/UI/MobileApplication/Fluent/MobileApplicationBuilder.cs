@@ -110,6 +110,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Specifies how history should be handled
+        /// </summary>
+        /// <param name="value">The value that configures the pushstate.</param>
+        public MobileApplicationBuilder PushState(bool value)
+        {
+            container.PushState = value;
+
+            return this;
+        }
+        
         //<< Fields
 
 
