@@ -14,16 +14,25 @@ var SelectBox = DropDownList.extend({
 
         that.bind("open", function() {
             if (that.options.autoSize) {
-                var list = that.list;
+                var list = that.list,
+                    listWidth;
 
                 list.css({
                         whiteSpace: "nowrap",
                         width: "auto"
                     });
 
-                that._width = list.width() || that._width;
+                listWidth = list.width();
 
-                list.css("width", that._width + kendo.support.scrollbar());
+                if (listWidth) {
+                    listWidth += 20;
+                } else {
+                    listWidth = that._listWidth;
+                }
+
+                list.css("width", listWidth + kendo.support.scrollbar());
+
+                that._listWidth = listWidth;
             }
         });
     },
