@@ -281,6 +281,15 @@ The axis will be rendered in the first (default) pane if not set.
         return $this->setProperty('weekStartDay', $value);
     }
 
+    /**
+    * The category axis notes configuration.
+    * @param \Kendo\Dataviz\UI\ChartCategoryAxisItemNotes|array $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
+    */
+    public function notes($value) {
+        return $this->setProperty('notes', $value);
+    }
+
 //<< Properties
 }
 

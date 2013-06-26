@@ -11,9 +11,9 @@ kendo_module({
         support = kendo.support,
         ui = kendo.ui,
         Widget = ui.Widget,
-        parse = kendo.parseDate,
-        adjustDate = kendo._adjustDate,
         keys = kendo.keys,
+        parse = kendo.parseDate,
+        adjustDST = kendo.date.adjustDST,
         extractFormat = kendo._extractFormat,
         template = kendo.template,
         getCulture = kendo.getCulture,
@@ -597,7 +597,7 @@ kendo_module({
 
             //Safari cannot create correctly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
-            adjustDate(value);
+            adjustDST(value);
 
             that._view.setDate(currentValue, value);
 
@@ -847,7 +847,7 @@ kendo_module({
                 }
 
                 today = new DATE(today.getFullYear(), today.getMonth(), today.getDate());
-                adjustDate(today);
+                adjustDST(today);
                 today = +today;
 
                 return view({
@@ -935,7 +935,7 @@ kendo_module({
                 } else {
                     calendar.setTime(date, value * MS_PER_DAY);
                 }
-                adjustDate(date, hours);
+                adjustDST(date, hours);
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
@@ -1002,7 +1002,7 @@ kendo_module({
                     }
                 }
 
-                adjustDate(date, hours);
+                adjustDST(date, hours);
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/1";

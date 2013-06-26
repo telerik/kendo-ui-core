@@ -65,6 +65,12 @@ namespace Kendo.Mvc.UI
                 result.Add("select", selectData);
             }
 
+            var notes = axis.Notes.CreateSerializer().Serialize();
+            if (notes.Count > 0)
+            {
+                result.Add("notes", notes);
+            }
+
             return result;
         }
 

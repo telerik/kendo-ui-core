@@ -64,12 +64,21 @@
                 equal($("#k-editor-link-text").val(), "foo bar");
             });
 
-            test("text is removed if more than one text node is selected", function() {
+            test("text is filled if more than one text node is selected", function() {
                 var range = createRangeFromText(editor, "|foo <strong>bar</strong>|");
                 execLinkCommandOnRange(range);
 
-                equal($("label[for=k-editor-link-text]").length, 0)
-                equal($("#k-editor-link-text").length, 0);
+                equal($("#k-editor-link-text").val(), "foo bar");
+            });
+
+            test("selection is replaced by text if more than one node is selected", function() {
+                var range = createRangeFromText(editor, "|foo <strong>bar</strong>|");
+                execLinkCommandOnRange(range);
+
+                $("#k-editor-link-text").val("foo");
+                $("#k-editor-link-url").val("bar");
+                $(".k-dialog-insert").click();
+                equal(editor.value(), '<a href="bar">foo</a>');
             });
 
             test("collapsed range is expanded", function() {

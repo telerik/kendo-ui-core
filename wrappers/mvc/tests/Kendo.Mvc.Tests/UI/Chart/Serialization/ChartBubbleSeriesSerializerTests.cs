@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             chart = ChartTestHelper.CreateChart<BubbleData>();
             chart.Data = BubbleDataBuilder.GetCollection();
-            series = new ChartBubbleSeries<BubbleData, float, float, float>(s => s.X, s => s.Y, s => s.Size, null, null, null);
+            series = new ChartBubbleSeries<BubbleData, float, float, float>(s => s.X, s => s.Y, s => s.Size, null, null, null, null);
         }
 
         [Fact]

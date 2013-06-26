@@ -32,6 +32,11 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
+        <script id="items-template" type="text/x-kendo-template">
+            <span></span>
+            <a data-role="button">Button</a>
+        </script>
+
         <script>
             var View = kendo.mobile.ui.View,
                 root,
@@ -58,7 +63,8 @@
                 ok(root.find("#foo").data("kendoDropDownList"));
             });
 
-            var viewModel = {foo: "bar"};
+            var viewModel = {foo: "bar", items: [ 1, 2, 3] };
+
             test("binds to model", 1, function() {
                 setup('<div data-model="viewModel" data-role="view"><i data-bind="text: foo"></i></div>');
                 equal(root.find("i").text(), "bar");
@@ -67,6 +73,11 @@
             test("initializes web widgets when binding", 1, function() {
                 setup('<div data-model="viewModel" data-role="view"><select data-role="dropdownlist" id="foo"><option></option></select></div>');
                 ok(root.find("#foo").data("kendoDropDownList"));
+            });
+
+            test("initializes mobile widgets in given templates when binding", 1, function() {
+                setup('<div data-model="viewModel" data-role="view"><div data-bind="source: items" data-template="items-template"></div></div>');
+                ok(root.find("a").eq(0).data("kendoMobileButton"));
             });
 
             test("View parses json data model", function() {

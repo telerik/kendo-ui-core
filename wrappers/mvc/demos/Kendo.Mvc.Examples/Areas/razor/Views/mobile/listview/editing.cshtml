@@ -85,6 +85,7 @@
         right: .5em;
         width: 60px;
         background-color: #bd2729;
+        color: #fff;
     }
 </style>
 

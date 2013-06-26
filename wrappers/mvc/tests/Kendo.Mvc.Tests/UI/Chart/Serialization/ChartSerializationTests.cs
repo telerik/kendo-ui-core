@@ -73,6 +73,23 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void RenderAs_false_serialized()
+        {
+            chart.RenderAs = RenderingMode.Canvas;
+            chart.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"renderAs\":\"canvas\"}");
+        }
+
+        [Fact]
+        public void RenderAs_default_not_serialized()
+        {
+            chart.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldNotContain("renderAs");
+        }
+
+        [Fact]
         public void Legend_serialized()
         {
             chart.Legend.Visible = false;

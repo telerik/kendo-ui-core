@@ -1664,7 +1664,7 @@ kendo_module({
                         toolbar = proxy(kendo.template(toolbar), that);
                     }
 
-                    container = $('<div class="k-toolbar k-grid-toolbar k-secondary" />')
+                    container = $('<div class="k-toolbar k-grid-toolbar" />')
                         .html(toolbar({}))
                         .prependTo(wrapper);
                 }
@@ -1694,7 +1694,8 @@ kendo_module({
         _createButton: function(command) {
             var template = command.template || COMMANDBUTTONTMPL,
                 commandName = typeof command === STRING ? command : command.name || command.text,
-                options = { className: "k-grid-" + (commandName || "").replace(/\s/g, ""), text: commandName, imageClass: "", attr: "", iconClass: "" };
+                className = defaultCommands[commandName] ? defaultCommands[commandName].className : "k-grid-" + (commandName || "").replace(/\s/g, ""),
+                options = { className: className, text: commandName, imageClass: "", attr: "", iconClass: "" };
 
             if (!commandName && !(isPlainObject(command) && command.template))  {
                 throw new Error("Custom commands should have name specified");
@@ -2215,7 +2216,7 @@ kendo_module({
                wrapper = wrapper.wrap("<div/>").parent();
             }
 
-            that.wrapper = wrapper.addClass("k-grid k-widget");/*
+            that.wrapper = wrapper.addClass("k-grid k-widget k-secondary");/*
                                   .attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
 
             table.removeAttr(TABINDEX);
@@ -3041,7 +3042,25 @@ kendo_module({
         },
 
         dataItem: function(tr) {
-            return this._data[this.tbody.find('> tr:not(.k-grouping-row,.k-detail-row,.k-group-footer)').index($(tr))];
+            tr = $(tr)[0];
+            if (!tr) {
+                return null;
+            }
+
+            var rows = this.tbody.children(),
+                classesRegEx = /k-grouping-row|k-detail-row|k-group-footer/,
+                idx = tr.sectionRowIndex,
+                j, correctIdx;
+            
+            correctIdx = idx;
+
+            for (j = 0; j < idx; j++) {
+                if (classesRegEx.test(rows[j].className)) {
+                    correctIdx--;
+                }
+            }
+
+            return this._data[correctIdx];
         },
 
         expandRow: function(tr) {

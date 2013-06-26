@@ -23,7 +23,13 @@ kendo_module({
         init: function(element, options) {
             // move the drawer to the top, in order hide it
             $(element).parent().prepend(element);
-            ui.View.fn.init.call(this, element, options);
+
+            mobile.ui.Widget.fn.init.call(this, element, options);
+
+            this._layout();
+            this._scroller();
+            this._model();
+
             this.pane = this.element.closest(roleSelector("pane")).data("kendoMobilePane");
 
             var drawer = this;
@@ -38,6 +44,7 @@ kendo_module({
 
             this.userEvents = new kendo.UserEvents(this.pane.element, {
                 filter: roleSelector("view"),
+                allowSelection: true,
                 start: function(e) { drawer._start(e); },
                 move: function(e) { drawer._update(e); },
                 end: function(e) { drawer._end(e); },
@@ -51,7 +58,7 @@ kendo_module({
             this.leftPositioned = this.options.position === "left";
 
             this.visible = false;
-            this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer").css("display", "");
+            this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer");
         },
 
         options: {
@@ -158,7 +165,7 @@ kendo_module({
             var userEvents = e.sender;
 
             // ignore non-horizontal swipes
-            if (Math.abs(e.x.velocity) < Math.abs(e.y.velocity)) {
+            if (Math.abs(e.x.velocity) < Math.abs(e.y.velocity) || kendo.triggeredByInput(e.event)) {
                 userEvents.cancel();
                 return;
             }

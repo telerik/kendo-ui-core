@@ -75,7 +75,6 @@ $orderID->field('OrderID')
 
 $freight = new \Kendo\UI\GridColumn();
 $freight->field('Freight')
-          ->format('{0:c}')
           ->title('Freight');
 
 $orderDate = new \Kendo\UI\GridColumn();

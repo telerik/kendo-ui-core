@@ -143,6 +143,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets the model data note text member name.
+        /// </summary>
+        /// <value>The model data note text member name.</value>
+        public string NoteTextMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets a function which returns the category of the property to which the column is bound to.
         /// </summary>
         public Func<TModel, string> Category

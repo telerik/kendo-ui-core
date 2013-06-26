@@ -1,22 +1,28 @@
     <div id="example" class="k-content">
-        
-        <div class="demo-section">
-            <div id="barcode"></div>
-        </div>
+
         <div class="configuration-horizontal">
             <div class="config-section">
+                <span class="configHead">Options</span>
                 <ul class="options">
+                    <li><input type="checkbox" id="text" checked="checked"/><label for="text">Show Text </label></li>
+                    <li><input type="checkbox" id="checksum" /><label for="checksum">Show Checksum</label></li>
+                </ul>
+            </div>
+            <div class="config-section">
+                <span class="configHead">Types</span>
+                <ul class="options second-col">
+                    <li><label for="type">Encoding:</label><input  id="type" /></li>
                     <li>
-                        <label><input  id="value" class="k-textbox" value="1234567"/> Value </label>
+                        <label for="value">Value:</label><input  id="value" class="k-textbox" value="1234567"/>
                         <span id="validValue" class="k-widget k-tooltip k-tooltip-validation k-invalid-msg"></span>
                     </li>
-                    <li><label><input  id="type" /> Encoding </label></li>
-                    <li><label><input type="checkbox" id="text" checked="checked"/> Show Text </label></li>
-                    <li><label><input type="checkbox" id="checksum" /> Show Checksum </label></li>
                 </ul>
             </div>
         </div>
-        
+        <div class="demo-section">
+            <div id="barcode"></div>
+        </div>
+
         <script>
             function setOptions(e) {
                 var validValue = $('#validValue');
@@ -36,7 +42,7 @@
                     validValue.hide();
                 } catch (e) {
                     validValue.text(e.message).show();
-                }               
+                }
             }
 
             $(document).ready(function () {
@@ -55,7 +61,7 @@
                      { type: 'Code93Extended', value: "Hello" },
                      { type: 'Code128A', value: "HELLO" },
                      { type: 'Code128B', value: "Hello" },
-                     { type: 'Code128C', value: "1234567" },
+                     { type: 'Code128C', value: "123456" },
                      { type: 'MSImod10', value: "1234567" },
                      { type: 'MSImod11', value: "1234567" },
                      { type: 'MSImod1010', value: "1234567" },
@@ -70,34 +76,40 @@
 
                 $("#barcode").kendoBarcode({
                     value: "1234567",
-                    type: "ean8"
+                    type: "ean8",
+                    background: "transparent"
                 });
 
                 $('#value,#checksum,#text').change(setOptions);
             });
         </script>
         <style type="text/css">
-            #barcode
-            {
+            #barcode {
                 width: 300px;
-                margin: 0 auto;
+                margin: 20px auto;
             }
-            
-            .configuration-horizontal .options li
-            {
-                padding: 3px 0;
+
+            .configuration-horizontal .config-section {
+                min-width: 100px;
+                line-height: 30px;
             }
-            
-            .configuration-horizontal .k-textbox
-            {
+
+            .configuration-horizontal .k-textbox {
                 width:150px;
                 margin-left: 0;
             }
-            
-            #validValue
-            {
+
+            #validValue {
                 display:none;
-                }
+            }
+            .first-col {
+                width: 120px;
+                min-width: 120px;
+            }
+            .second-col label {
+                display: inline-block;
+                width: 60px;
+            }
         </style>
     </div>
 

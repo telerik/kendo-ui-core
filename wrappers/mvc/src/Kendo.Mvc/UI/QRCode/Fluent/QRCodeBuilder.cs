@@ -104,26 +104,51 @@
         }
 
         /// <summary>
-        /// Sets the dark module color of the QR code.
+        /// Sets the color of the QR code.
         /// </summary>
-        /// <param name="color">The QR code dark module color.</param>
+        /// <param name="color">The QR code color.</param>
         /// <example>
         /// <code lang="Razor">
         /// @(Html.Kendo().QRCode()
         ///     .Name(&quot;qrCode&quot;)
-        ///     .DarkModuleColor(&quot;blue&quot;)
+        ///     .Color(&quot;blue&quot;)
         /// )
         /// </code>
         /// <code lang="ASPX">
         /// &lt;%:Html.Kendo().QRCode()
         ///     .Name(&quot;qrCode&quot;)
-        ///     .DarkModuleColor(&quot;blue&quot;)
+        ///     .Color(&quot;blue&quot;)
         /// %&gt;
         /// </code>
         /// </example>
-        public QRCodeBuilder DarkModuleColor(string color)
+        public QRCodeBuilder Color(string color)
         {
-            Component.DarkModuleColor = color;
+            Component.Color = color;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the encoding of the QR code.
+        /// </summary>
+        /// <param name="encoding">The QR code encoding.</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().QRCode()
+        ///     .Name(&quot;qrCode&quot;)
+        ///     .Encoding(QREncoding.UTF_8)
+        /// )
+        /// </code>
+        /// <code lang="ASPX">
+        /// &lt;%:Html.Kendo().QRCode()
+        ///     .Name(&quot;qrCode&quot;)
+        ///     .Encoding(QREncoding.UTF_8)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public QRCodeBuilder Encoding(QREncoding encoding)
+        {
+            Component.Encoding = encoding;
 
             return this;
         }
@@ -131,24 +156,24 @@
         /// <summary>
         /// Sets the error correction level of the QR code.
         /// </summary>
-        /// <param name="errorCorrectionLevel">The QR code error correction level.</param>
+        /// <param name="errorCorrection">The QR code error correction level.</param>
         /// <example>
         /// <code lang="Razor">
         /// @(Html.Kendo().QRCode()
         ///     .Name(&quot;qrCode&quot;)
-        ///     .ErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
+        ///     .ErrorCorrection(QRErrorCorrectionLevel.Q)
         /// )
         /// </code>
         /// <code lang="ASPX">
         /// &lt;%:Html.Kendo().QRCode()
         ///     .Name(&quot;qrCode&quot;)
-        ///     .ErrorCorrectionLevel(QRErrorCorrectionLevel.Q)
+        ///     .ErrorCorrection(QRErrorCorrectionLevel.Q)
         /// %&gt;
         /// </code>
         /// </example>
-        public QRCodeBuilder ErrorCorrectionLevel(QRErrorCorrectionLevel errorCorrectionLevel)
+        public QRCodeBuilder ErrorCorrection(QRErrorCorrectionLevel errorCorrection)
         {
-            Component.ErrorCorrectionLevel = errorCorrectionLevel;
+            Component.ErrorCorrection = errorCorrection;
 
             return this;
         }
@@ -201,6 +226,17 @@
         {
             Component.Value = value;
 
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the preferred rendering engine.
+        /// If it is not supported by the browser, the Chart will switch to the first available mode.
+        /// </summary>
+        /// <param name="renderAs">The preferred rendering engine.</param>
+        public QRCodeBuilder RenderAs(RenderingMode renderAs)
+        {
+            Component.RenderAs = renderAs;
             return this;
         }
     }

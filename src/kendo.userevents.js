@@ -273,7 +273,7 @@ kendo_module({
         parent.trigger($.Event(e.type, fakeEventData));
     }
 
-    function withEachDownEvent(callback) {
+    function withEachUpEvent(callback) {
         var downEvents = kendo.eventMap.up.split(" "),
             idx = 0,
             length = downEvents.length;
@@ -295,6 +295,7 @@ kendo_module({
             that.touches = [];
             that._maxTouches = options.multiTouch ? 2 : 1;
             that.allowSelection = options.allowSelection;
+            that.captureUpIfMoved = options.captureUpIfMoved;
             that.eventNS = ns;
 
             element = $(element).handler(that);
@@ -323,11 +324,11 @@ kendo_module({
 
             element.on(kendo.applyEventMap("mousedown selectstart", ns), filter, { root: element }, "_select");
 
-            if (support.eventCapture) {
+            if (that.captureUpIfMoved && support.eventCapture) {
                 var surfaceElement = that.surface[0],
                     preventIfMovingProxy = $.proxy(that.preventIfMoving, that);
 
-                withEachDownEvent(function(eventName) {
+                withEachUpEvent(function(eventName) {
                     surfaceElement.addEventListener(eventName, preventIfMovingProxy, true);
                 });
             }
@@ -363,9 +364,9 @@ kendo_module({
 
             that._destroyed = true;
 
-            if (support.eventCapture) {
+            if (that.captureUpIfMoved && support.eventCapture) {
                 var surfaceElement = that.surface[0];
-                withEachDownEvent(function(eventName) {
+                withEachUpEvent(function(eventName) {
                     surfaceElement.removeEventListener(eventName, that.preventIfMoving);
                 });
             }

@@ -185,7 +185,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="UI.ListView{T}"/> bound to the specified data item type.
+        /// Creates a new <see cref="Kendo.Mvc.UI.ListView{T}"/> bound to the specified data item type.
         /// </summary>
         /// <example>
         /// <typeparam name="T">The type of the data item</typeparam>
@@ -202,7 +202,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="ListView{T}"/> bound to the specified data source.
+        /// Creates a new <see cref="Kendo.Mvc.UI.ListView{T}"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
         /// <param name="dataSource">The data source.</param>
@@ -223,7 +223,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="ListView{T}"/> bound an item in ViewData.
+        /// Creates a new <see cref="Kendo.Mvc.UI.ListView{T}"/> bound an item in ViewData.
         /// </summary>
         /// <typeparam name="T">Type of the data item</typeparam>
         /// <param name="dataSourceViewDataKey">The data source view data key.</param>
@@ -244,7 +244,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="UI.MobileListView{T}"/> bound to the specified data item type.
+        /// Creates a new <see cref="Kendo.Mvc.UI.MobileListView{T}"/> bound to the specified data item type.
         /// </summary>
         /// <example>
         /// <typeparam name="T">The type of the data item</typeparam>
@@ -261,7 +261,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="UI.MobileListView"/>.
+        /// Creates a new <see cref="MobileListView"/>.
         /// </summary>
         /// <example>        
         /// <code lang="CS">
@@ -281,7 +281,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="MobileListView{T}"/> bound to the specified data source.
+        /// Creates a new <see cref="Kendo.Mvc.UI.MobileListView{T}"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
         /// <param name="dataSource">The data source.</param>
@@ -302,7 +302,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="MobileListView{T}"/> bound an item in ViewData.
+        /// Creates a new <see cref="Kendo.Mvc.UI.MobileListView{T}"/> bound an item in ViewData.
         /// </summary>
         /// <typeparam name="T">Type of the data item</typeparam>
         /// <param name="dataSourceViewDataKey">The data source view data key.</param>
@@ -514,7 +514,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Scheduler"/>.
+        /// Creates a new <see cref="Scheduler{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -522,8 +522,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///             .Name("Scheduler")
         /// %&gt;
         /// </code>
-        /// </example><T>
-        /// 
+        /// </example>
         public virtual SchedulerBuilder<T> Scheduler<T>() where T : class, ISchedulerEvent
         {
             return new SchedulerBuilder<T>(new Scheduler<T>(ViewContext, Initializer, UrlGenerator));

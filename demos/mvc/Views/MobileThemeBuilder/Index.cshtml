@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ThemeBuilder for Kendo UI Mobile</title>
+    <title>Kendo UI Mobile ThemeBuilder</title>
+    <meta content="With Kendo UI Mobile ThemeBuilder you can modify the themes of all widgets in the framework so that they can match the look and feel of your mobile app." name="description" />
     @foreach (string styleName in ViewBag.styles) {
     <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }
@@ -272,7 +273,7 @@
                 </div>
 
 
-                <style scoped="scoped">
+                <style scoped>
                     [id^="overview-contacts"] h2,
                     [id^="overview-cities"] h2 {
                         display: inline-block;

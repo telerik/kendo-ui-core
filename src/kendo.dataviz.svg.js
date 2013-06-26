@@ -32,6 +32,7 @@ kendo_module({
     var BUTT = "butt",
         CLIP = dataviz.CLIP,
         COORD_PRECISION = dataviz.COORD_PRECISION,
+        DASH_ARRAYS = dataviz.DASH_ARRAYS,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
@@ -40,14 +41,6 @@ kendo_module({
         SOLID = "solid",
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
-        SVG_DASH_TYPE = {
-            dot: [1.5, 3.5],
-            dash: [4, 3.5],
-            longdash: [8, 3.5],
-            dashdot: [3.5, 3.5, 1.5, 3.5],
-            longdashdot: [8, 3.5, 1.5, 3.5],
-            longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
-        },
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
@@ -241,18 +234,6 @@ kendo_module({
         }
     });
 
-    SVGView.fromModel = function(model) {
-        var view = new SVGView(model.options);
-        [].push.apply(view.children, model.getViewElements(view));
-
-        return view;
-    };
-
-    SVGView.available = dataviz.supportsSVG;
-    SVGView.preference = 100;
-
-    dataviz.ui.registerView(SVGView);
-
     var SVGText = ViewElement.extend({
         init: function(content, options) {
             var text = this;
@@ -302,6 +283,7 @@ kendo_module({
             return new SVGText(text.content, deepExtend({}, text.options));
         },
 
+        // TODO: Extract in ViewElement
         renderCursor: function() {
             var options = this.options,
                 result = "";
@@ -986,7 +968,7 @@ kendo_module({
         dashType = dashType ? dashType.toLowerCase() : null;
 
         if (dashType && dashType != SOLID) {
-            dashTypeArray = SVG_DASH_TYPE[dashType];
+            dashTypeArray = DASH_ARRAYS[dashType];
             for (i = 0; i < dashTypeArray.length; i++) {
                 result.push(dashTypeArray[i] * (strokeWidth || 1));
             }
@@ -1021,6 +1003,10 @@ kendo_module({
     })();
 
     // Exports ================================================================
+    if (dataviz.supportsSVG()) {
+        dataviz.ViewFactory.current.register("svg", SVGView, 10);
+    }
+
     deepExtend(dataviz, {
         renderSVG: renderSVG,
         SVGCircle: SVGCircle,

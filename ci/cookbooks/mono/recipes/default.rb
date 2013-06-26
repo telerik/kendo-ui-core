@@ -5,8 +5,12 @@ package "mono-xbuild"
 bash "setup moz certificates" do
     code "mozroots --import --sync --machine"
 end
+
+remote_directory '/usr/lib/mono/4.0' do
+    source 'assemblies'
+end
+
 remote_directory '/usr/lib/mono/xbuild/Microsoft/VisualStudio/v10.0' do
     source 'v10.0'
 end
-
 

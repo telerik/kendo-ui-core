@@ -11,7 +11,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
 
         public ChartBulletSeriesBuilderTests()
         {
-            series = new ChartBulletSeries<SalesData, decimal>(s => s.RepSales, s => s.TotalSales, null);
+            series = new ChartBulletSeries<SalesData, decimal, string>(s => s.RepSales, s => s.TotalSales, null, null, null);
             builder = new ChartBulletSeriesBuilder<SalesData>(series);
         }
 

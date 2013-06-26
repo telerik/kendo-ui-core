@@ -1,20 +1,13 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Web.Mvc;
-    using System.Collections;
-
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="SchedulerViewAgenda"/>.
     /// </summary>
-    public class SchedulerViewAgendaBuilder<T> : SchedulerViewBaseBuilder<T>, ISchedulerViewBuilder
+    public class SchedulerViewAgendaBuilder<T> : SchedulerViewBaseBuilder<T>
         where T : SchedulerViewAgenda
     {
-        public SchedulerViewAgendaBuilder(T resource)
-            : base(resource)
+        public SchedulerViewAgendaBuilder(T view)
+            : base(view)
         { 
         }
 
@@ -24,7 +17,7 @@
         /// <param name="eventDateTemplate">The eventDateTemplate</param>
         public ISchedulerViewBuilder EventDateTemplate(string eventDateTemplate)
         {
-            resource.EventDateTemplate = eventDateTemplate;
+            view.EventDateTemplate = eventDateTemplate;
 
             return this;
         }
@@ -35,7 +28,7 @@
         /// <param name="eventDateTemplateId">The eventDateTemplateId</param>
         public ISchedulerViewBuilder EventDateTemplateId(string eventDateTemplateId)
         {
-            resource.EventDateTemplateId = eventDateTemplateId;
+            view.EventDateTemplateId = eventDateTemplateId;
 
             return this;
         }
@@ -46,7 +39,7 @@
         /// <param name="eventTimeTemplate">The eventTimeTemplate</param>
         public ISchedulerViewBuilder EventTimeTemplate(string eventTimeTemplate)
         {
-            resource.EventTimeTemplate = eventTimeTemplate;
+            view.EventTimeTemplate = eventTimeTemplate;
 
             return this;
         }
@@ -57,9 +50,9 @@
         /// <param name="eventTimeTemplateId">The eventTimeTemplateId</param>
         public ISchedulerViewBuilder EventTimeTemplateId(string eventTimeTemplateId)
         {
-            resource.EventTimeTemplateId = eventTimeTemplateId;
+            view.EventTimeTemplateId = eventTimeTemplateId;
 
             return this;
-        }
+        }        
     }
 }

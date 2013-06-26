@@ -6,6 +6,8 @@
 
     public class SchedulerEditableSettings : SchedulerEditableSettingsBase
     {
+        private const string DefaultConfirmation = "Are you sure you want to delete this event?";
+
         public SchedulerEditableSettings()
             :base()
         {
@@ -42,7 +44,7 @@
             {
                 json["confirmation"] = false;
             }
-            else if (!string.IsNullOrEmpty(Confirmation))
+            else if (!string.IsNullOrEmpty(Confirmation) && Confirmation != DefaultConfirmation)
             {
                 json["confirmation"] = Confirmation;
             }

@@ -11,6 +11,7 @@ namespace Kendo.Mvc.UI
         {
             Tooltip = new ChartTooltip();
             Highlight = new ChartSeriesHighlight();
+            Notes = new ChartNote();
         }
 
         /// <summary>
@@ -92,6 +93,15 @@ namespace Kendo.Mvc.UI
         /// Gets or sets a value indicating if the series is visible
         /// </summary>
         public bool? Visible
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the series notes options
+        /// </summary>
+        public ChartNote Notes
         {
             get;
             set;

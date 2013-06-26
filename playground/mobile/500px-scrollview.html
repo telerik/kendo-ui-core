@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
+    <script src="../../demos/mvc/content/shared/js/less.js"></script>
+
+    <script src="../../src/jquery.js"></script>
+    
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.router.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../src/kendo.mobile.view.js"></script>
+    <script src="../../src/kendo.mobile.loader.js"></script>
+    <script src="../../src/kendo.mobile.pane.js"></script>
+    <script src="../../src/kendo.mobile.application.js"></script>
+    <script src="../../src/kendo.mobile.navbar.js"></script>
+    <script src="../../src/kendo.mobile.scrollview.js"></script>
+
+    <script src="500px.js"></script>
+
+    <style>
+        .km-virtual-scrollview {
+            overflow-x: hidden;
+            white-space: nowrap;
+            width: 100%;
+            position: relative;
+
+            display: flex;
+            display: -webkit-flex;
+            display: -webkit-box;
+        }
+
+        .km-virtual-scrollview > div {
+            position: relative;
+            flex: 1;
+            -webkit-flex: 1;
+            -webkit-box-flex: 1;
+        }
+
+        .virtual-page {
+            min-height: 1px;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-block;
+        }
+
+        .tile {
+            width: 50%;
+            height: 33%;
+            background-color: #c5c5c5;
+            display: inline-block;
+            float: left;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            border: 1px solid #000;
+        }
+
+        .item-img {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="home" data-role="view" data-title="500px Popular" data-stretch="true">
+        <header data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+            </div>
+        </header>
+        <div id="scrollview"
+            data-role="scrollview" 
+            data-source="photos" 
+            data-template="template">
+        </div>
+    </div>
+
+    <script id="template" type="text/x-kendo-template">
+        #console.log(data)#
+        <div class="page">
+            <p class="title">#: name #</p>
+            <img class="image" src="#: image_url #" />
+        </div>
+    </script>
+
+    <script>
+        _500px.init({
+            sdk_key: 'a3be03a8a98d6e05af17f60d2cf4bf696eb47555'
+        });
+
+        var app = new kendo.mobile.Application();
+
+        var photos = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    var params = { 
+                        feature: "popular",
+                        image_size: 3,
+                        page: options.data.page,
+                        rpp: options.data.pageSize
+                    };
+
+                    _500px.api("/photos", params, function(response) {
+                        options.success(response.data);
+                    });
+                }
+            },
+            serverPaging: true,
+            pageSize: 10,
+            schema: {
+                data: "photos",
+                total: "total_items"
+            }
+        });
+
+    </script>
+
+    <style>
+
+    .virtual-page {
+        min-height: 1px;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+    }
+
+    .title {
+        font-style: italic;
+        text-align: center;
+        margin: 0;
+    }
+
+    .image {
+        display: block;
+        margin: 3em auto;
+    }
+
+    .empty-page {
+        height: 100%;
+        width: 100%;
+        background-color: #FF0000;
+    }
+    </style>
+
+</body>
+</html>

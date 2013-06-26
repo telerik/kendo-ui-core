@@ -666,7 +666,7 @@
             options: {
                 name: "ThemeChooser",
                 label: "Choose theme:",
-                theme: "default",
+                theme: "silver",
                 listContainer: "#mainWrapInner",
                 itemTemplate: kendo.template(
                     "<li class='tc-theme'>" +

@@ -89,6 +89,14 @@ public class BarcodeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("height", value);
     }
 
+    public String getRenderAs() {
+        return (String)getProperty("renderAs");
+    }
+
+    public void setRenderAs(String value) {
+        setProperty("renderAs", value);
+    }
+
     public String getType() {
         return (String)getProperty("type");
     }

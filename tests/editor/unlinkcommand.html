@@ -18,24 +18,33 @@
 
         var editor = $("#Editor1").kendoEditor().data("kendoEditor");
 
+        function execUnlinkCommand(range) {
+            var command = new UnlinkCommand({ range: range });
+            command.editor = editor;
+            command.exec();
+        }
+
         test('exec removes link', function() {
             var range = createRangeFromText(editor, '<a>|foo|</a>');
-            var command = new UnlinkCommand({range:range});
-            command.exec();
+
+            execUnlinkCommand(range);
+
             equal(editor.value(), 'foo');
         });
 
         test('exec removes link with mixed selection', function() {
             var range = createRangeFromText(editor, '|foo<a>bar</a>baz|');
-            var command = new UnlinkCommand({range:range});
-            command.exec();
+
+            execUnlinkCommand(range);
+
             equal(editor.value(), 'foobarbaz');
         });
 
         test('exec maintains selection', function() {
             var range = createRangeFromText(editor, '<a>|foo|</a>');
-            var command = new UnlinkCommand({range:range});
-            command.exec();
+
+            execUnlinkCommand(range);
+
             range = editor.getRange();
             equal(range.startOffset, 0);
             equal(range.endOffset, 3);
@@ -47,8 +56,7 @@
             range.setStart(editor.body.firstChild.firstChild, 1);
             range.collapse(true);
 
-            var command = new UnlinkCommand({range:range});
-            command.exec();
+            execUnlinkCommand(range);
 
             equal(editor.value(), 'foo');
         });

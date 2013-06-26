@@ -131,6 +131,23 @@ kendo_module({
             pointWidth: 5
         },
 
+        _applyDefaults: function(options) {
+            var chart = this,
+                view = dataviz.ViewFactory.current.create({}, options.renderAs);
+
+            if (dataviz.CanvasView && view instanceof dataviz.CanvasView) {
+                deepExtend(options, {
+                    categoryAxis: {
+                        crosshair: {
+                            visible: false
+                        }
+                    }
+                });
+            }
+
+            Chart.fn._applyDefaults.apply(chart, arguments);
+        },
+
         _modelOptions: function() {
             var chart = this,
                 chartOptions = chart.options,

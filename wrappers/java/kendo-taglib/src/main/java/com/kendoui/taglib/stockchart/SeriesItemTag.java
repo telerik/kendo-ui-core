@@ -105,6 +105,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("axis", value);
     }
 
+    public String getCategoryField() {
+        return (String)getProperty("categoryField");
+    }
+
+    public void setCategoryField(String value) {
+        setProperty("categoryField", value);
+    }
+
     public String getCloseField() {
         return (String)getProperty("closeField");
     }

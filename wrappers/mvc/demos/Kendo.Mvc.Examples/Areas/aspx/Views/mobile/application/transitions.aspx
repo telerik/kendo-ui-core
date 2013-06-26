@@ -115,15 +115,19 @@
     #view-transitions .km-content,
     #view-transitions-login .km-content,
     #view-transitions-welcome .km-content {
-        background: url(<%= Url.Content("~/content/shared/images/patterns/pattern1.png") %>) repeat 0 0;
+        background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
     }
 
-    .km-ios #view-transitions-welcome .km-button {
+    .km-ios #view-transitions-welcome .km-button,
+    .km-flat #view-transitions-welcome .km-content .km-button {
         background-color: DarkRed;
+	    color: #fff;
     }
     
-    .km-ios #view-transitions-login .km-button {
+    .km-ios #view-transitions-login .km-button,
+    .km-flat #view-transitions-login .km-content .km-button {
         background-color: Green;
+	    color: #fff;
     }
     
     .km-ios #view-transitions .km-button,
@@ -131,10 +135,20 @@
         background-color: #000;
     }
     
+    .km-flat #view-transitions .km-button,
+    .km-flat #view-transitions-login .km-content .transitions-cancel {
+        background-color: #000;
+	    color: #fff;
+    }
+    
     .km-ios #view-transitions .km-navbar,
     .km-ios #view-transitions-login .km-navbar,
-    .km-ios #view-transitions-welcome .km-navbar {
+    .km-ios #view-transitions-welcome .km-navbar,
+    .km-flat #view-transitions .km-navbar,
+    .km-flat #view-transitions-login .km-navbar,
+    .km-flat #view-transitions-welcome .km-navbar {
         background-color: #000;
+	    color: #fff;
     }
 </style>
 

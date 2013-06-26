@@ -3,8 +3,6 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections;
     using System.Linq.Expressions;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Resources;
 
     public class ChartRadarColumnSeries<TModel, TValue, TCategory> : ChartBarSeries<TModel, TValue, TCategory> where TModel : class
     {
@@ -14,8 +12,8 @@ namespace Kendo.Mvc.UI
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
         /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
-        public ChartRadarColumnSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, string>> colorExpression, Expression<Func<TModel, TCategory>> categoryExpression)
-            : base(expression, colorExpression, categoryExpression)
+        public ChartRadarColumnSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, string>> colorExpression, Expression<Func<TModel, TCategory>> categoryExpression, Expression<Func<TModel, string>> noteTextExpression)
+            : base(expression, colorExpression, categoryExpression, noteTextExpression)
         {
         }
 
@@ -49,7 +47,7 @@ namespace Kendo.Mvc.UI
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
         public ChartRadarColumnSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, string>> colorExpression)
-            : base(expression, colorExpression, null)
+            : base(expression, colorExpression, null, null)
         {
         }
 

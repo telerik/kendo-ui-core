@@ -69,6 +69,16 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the render type.
+        /// </summary>
+        /// <value>The render type.</value>
+        public RenderingMode? RenderAs
+        {
+            get;
+            set;
+        }
+
         public void SerializeData(string key, IDictionary<string, object> data, IDictionary<string, object> options)
         {
             if (data.Count > 0)

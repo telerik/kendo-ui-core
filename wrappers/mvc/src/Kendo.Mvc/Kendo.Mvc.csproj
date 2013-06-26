@@ -238,6 +238,7 @@
     <Compile Include="UI\Chart\Axes\ChartAxisLabels.cs" />
     <Compile Include="UI\Chart\Axes\ChartCategoryAxis.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisBase.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisNotes.cs" />
     <Compile Include="UI\Chart\Axes\ChartNumericAxis.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisDefaults.cs" />
     <Compile Include="UI\Chart\Axes\ChartPlotBand.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="UI\Chart\Axes\IChartValueAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartCategoryAxis.cs" />
     <Compile Include="UI\Chart\Chart.cs" />
+    <Compile Include="UI\Chart\ChartNoteLine.cs" />
     <Compile Include="UI\Chart\ChartTitle.cs" />
     <Compile Include="UI\Chart\ChartLegend.cs" />
     <Compile Include="UI\Chart\ChartSpacing.cs" />
@@ -269,7 +271,11 @@
     <Compile Include="UI\Chart\ChartTooltipBase.cs" />
     <Compile Include="UI\Chart\ChartLineBase.cs" />
     <Compile Include="UI\Chart\ChartLegendLabels.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisNoteItem.cs" />
     <Compile Include="UI\Chart\Enums\ChartZoomDireciton.cs" />
+    <Compile Include="UI\Chart\Enums\ChartNoteLabelPosition.cs" />
+    <Compile Include="UI\Chart\Enums\ChartNotePosition.cs" />
+    <Compile Include="UI\Chart\Enums\RenderingMode.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisBaseUnitStepsBuilder.cs" />
@@ -285,6 +291,12 @@
     <Compile Include="UI\Chart\Fluent\ChartAxisSelectionBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartSelectionMousewheelBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLegendLabelsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartNoteLabelBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartNoteLineBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartNoteBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisNotesFactory.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisNoteItemBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisNotesBuilder.cs" />
     <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
@@ -373,6 +385,11 @@
     <Compile Include="UI\Chart\Serialization\ChartPolarAreaSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPolarScatterSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPolarLineSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartNoteLabelSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartNoteSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartNoteLineSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisNoteItemSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisNoteSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
@@ -444,6 +461,8 @@
     <Compile Include="UI\Chart\Series\ChartPolarAreaSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartPolarScatterSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartPolarLineSeries.cs" />
+    <Compile Include="UI\Chart\ChartNote.cs" />
+    <Compile Include="UI\Chart\ChartNoteLabel.cs" />
     <Compile Include="UI\Chart\Series\IChartBulletSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartCandlestickSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartOHLCSeries.cs" />
@@ -530,6 +549,7 @@
     <Compile Include="UI\Editor\ImageBrowser\ImageSize.cs" />
     <Compile Include="UI\Editor\ImageBrowser\IThumbnailCreator.cs" />
     <Compile Include="UI\Editor\ImageBrowser\ThumbnailCreator.cs" />
+    <Compile Include="UI\Editor\Tools\EditorColorPickerTool.cs" />
     <Compile Include="UI\Editor\Tools\EditorListTool.cs" />
     <Compile Include="UI\Effects\ExpandableAnimation.cs" />
     <Compile Include="UI\Effects\Fluent\ExpandableAnimationBuilder.cs" />
@@ -967,23 +987,52 @@
     <Compile Include="Infrastructure\Implementation\ControllerTypeCache.cs" />
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
     <Compile Include="UI\QRCode\Html\QRCodeHtmlBuilder.cs" />
+    <Compile Include="UI\QRCode\QREncoding.cs" />
     <Compile Include="UI\QRCode\QRErrorCorrectionLevel.cs" />
     <Compile Include="UI\QRCode\Fluent\QRBorderBuilder.cs" />
     <Compile Include="UI\QRCode\Fluent\QRCodeBuilder.cs" />
     <Compile Include="UI\QRCode\QRBorder.cs" />
     <Compile Include="UI\QRCode\QRCode.cs" />
     <Compile Include="UI\RequestSettings.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerGroupBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerEditorMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorDailyMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorEndMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorFrequenciesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorMonthlyMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorOffsetPositionsMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorWeeklyMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorYearlyMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewAgendaBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewDayBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEditableSettingsBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerViewMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewMonthBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewBaseBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewEditableSettingsBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewMultiDayBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewWeekBuilder.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
+    <Compile Include="UI\Scheduler\SchedulerGroupOrientation.cs" />
+    <Compile Include="UI\Scheduler\SchedulerMessages.cs" />
+    <Compile Include="UI\Scheduler\SchedulerModelDescriptor.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerGroupSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettingsBase.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerEditorMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorDailyMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorEndMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorFrequenciesMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorMonthlyMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorOffsetPositionsMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorWeeklyMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorYearlyMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerViewMessages.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewBase.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerViewEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewAgenda.cs" />
@@ -1483,5 +1532,8 @@
     <Compile Include="UI\MobileDrawer\Fluent\MobileDrawerBuilder.cs" />
     <Compile Include="UI\MobileDrawer\Fluent\MobileDrawerEventBuilder.cs" />
     <Compile Include="UI\MobileDrawer\Html\MobileDrawerHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\MobileApplication\Fluent\MobileApplicationEventBuilder.cs" />
   </ItemGroup>
 </Project>

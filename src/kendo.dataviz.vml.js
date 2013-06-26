@@ -196,21 +196,6 @@ kendo_module({
         }
     });
 
-    VMLView.fromModel = function(model) {
-        var view = new VMLView(model.options);
-        [].push.apply(view.children, model.getViewElements(view));
-
-        return view;
-    };
-
-    VMLView.available = function() {
-        return kendo.support.browser.msie;
-    };
-
-    VMLView.preference = 50;
-
-    dataviz.ui.registerView(VMLView);
-
     // Primitives =============================================================
     var VMLText = ViewElement.extend({
         init: function(content, options) {
@@ -325,7 +310,7 @@ kendo_module({
             stroke.template = VMLStroke.template;
             if (!stroke.template) {
                 stroke.template = VMLStroke.template = renderTemplate(
-                    "<kvml:stroke on='#= !!d.options.stroke #' " +
+                    "<kvml:stroke on='#= !!d.options.stroke && !!d.options.strokeWidth #' " +
                     "#= d.renderAttr(\"color\", d.options.stroke) #" +
                     "#= d.renderAttr(\"weight\", d.options.strokeWidth) #" +
                     "#= d.renderAttr(\"dashstyle\", d.options.dashType) #" +
@@ -981,6 +966,11 @@ kendo_module({
     }
 
     // Exports ================================================================
+
+    if (kendo.support.browser.msie) {
+        dataviz.ViewFactory.current.register("vml", VMLView, 20);
+    }
+
     deepExtend(dataviz, {
         VMLCircle: VMLCircle,
         VMLClipAnimationDecorator: VMLClipAnimationDecorator,

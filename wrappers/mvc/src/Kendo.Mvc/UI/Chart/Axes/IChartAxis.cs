@@ -11,6 +11,11 @@ namespace Kendo.Mvc.UI
         IList<ChartPlotBand<TValue>> PlotBands { get; set; }
 
         /// <summary>
+        /// The axis notes configuration.
+        /// </summary>
+        ChartAxisNotes<TValue> Notes { get; set; }
+
+        /// <summary>
         /// The name of the pane that the axis should be rendered in.
         /// </summary>
         string Pane { get; set; }

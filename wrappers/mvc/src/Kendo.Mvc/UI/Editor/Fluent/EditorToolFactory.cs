@@ -218,9 +218,19 @@ namespace Kendo.Mvc.UI.Fluent
             return ColorPicker("foreColor");
         }
 
+        public EditorToolFactory FontColor(Action<EditorColorPickerToolBuilder> configurator)
+        {
+            return ColorPicker("foreColor", configurator);
+        }
+
         public EditorToolFactory BackColor()
         {
             return ColorPicker("backColor");
+        }
+
+        public EditorToolFactory BackColor(Action<EditorColorPickerToolBuilder> configurator)
+        {
+            return ColorPicker("backColor", configurator);
         }
 
         public EditorToolFactory TableEditing()
@@ -267,6 +277,17 @@ namespace Kendo.Mvc.UI.Fluent
         private EditorToolFactory ColorPicker(string identifier)
         {
             group.Tools.Add(new EditorTool(identifier));
+
+            return this;
+        }
+
+        private EditorToolFactory ColorPicker(string identifier, Action<EditorColorPickerToolBuilder> configurator)
+        {
+            var tool = new EditorColorPickerTool(identifier);
+
+            configurator(new EditorColorPickerToolBuilder(tool));
+
+            group.Tools.Add(tool);
 
             return this;
         }

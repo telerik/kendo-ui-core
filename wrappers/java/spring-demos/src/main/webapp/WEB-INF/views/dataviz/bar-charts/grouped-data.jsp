@@ -28,7 +28,7 @@
                  </kendo:dataSource-schema>
              </kendo:dataSource>
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="column" field="close" name="close" groupNameTemplate="#= group.value # (#= series.name #)" />
+                <kendo:chart-seriesItem type="column" field="close" name="#= group.value # (close)" />
              </kendo:chart-series>
               <kendo:chart-categoryAxis>
                 <kendo:chart-categoryAxisItem field="date">

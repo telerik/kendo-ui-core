@@ -16,6 +16,7 @@
         <script src="../../src/kendo.dataviz.chart.js"></script>
         <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.canvas.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
@@ -295,6 +296,217 @@
                 });
 
             })();
+
+            (function() {
+                var chart;
+
+                function createChart() {
+                    $("#container").kendoChart({
+                        series: [{
+                            type: "bar",
+                            data: [1, 2]
+                        }]
+                    });
+
+                    chart = $("#container").data("kendoChart");
+                }
+
+                // ------------------------------------------------------------
+                var SVGView,
+                    CanvasView,
+                    supportsCanvas;
+
+                module("Export", {
+                    setup: function() {
+                        createChart();
+
+                        SVGView = dataviz.SVGView;
+                        CanvasView = dataviz.CanvasView;
+                        supportsCanvas = dataviz.supportsCanvas;
+                    },
+                    teardown: function() {
+                        dataviz.SVGView = SVGView;
+                        dataviz.CanvasView = CanvasView;
+                        dataviz.supportsCanvas = supportsCanvas;
+                    }
+                });
+
+                test("svg() exports SVG", function() {
+                    ok(chart.svg().match(/<svg.*<\/svg>/));
+                });
+
+                test("svg() throws error if SVGView is not loaded", function() {
+                    dataviz.SVGView = undefined;
+
+                    throws(function() { chart.svg() },
+                           "Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+                });
+
+                test("svg() does not replace model", function() {
+                    var oldModel = chart._model;
+                    chart.svg();
+                    ok(oldModel === chart._model);
+                });
+
+                test("svg() does not replace view", function() {
+                    var oldView = chart._view;
+                    chart.svg();
+                    ok(oldView === chart._view);
+                });
+
+                test("imageDataURL() exports image/png", function() {
+                    ok(chart.imageDataURL().match(/image\/png/));
+                });
+
+                test("imageDataURL() throws error if CanvasView is not loaded", function() {
+                    dataviz.CanvasView = undefined;
+
+                    throws(function() { chart.imageDataURL() },
+                           "Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+                });
+
+                test("imageDataURL() returns null if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    equal(chart.imageDataURL(), null);
+                });
+
+                asyncTest("imageDataURL logs warning if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    stubMethod(kendo, "logToConsole", function(message) {
+                        ok(message.indexOf("Warning: Unable to generate image.") > -1);
+                        start();
+                    }, function() {
+                        chart.imageDataURL();
+                    });
+                });
+
+                test("imageDataURL() does not replace model", function() {
+                    var oldModel = chart._model;
+                    chart.imageDataURL();
+                    ok(oldModel === chart._model);
+                });
+
+                test("imageDataURL() does not replace view", function() {
+                    var oldView = chart._view;
+                    chart.imageDataURL();
+                    ok(oldView === chart._view);
+                });
+
+            })();
+
+            (function() {
+                var chart;
+                dataviz.ui.themes.foo = {
+                    chart: {
+                        foo: true,
+                        seriesDefaults: {
+                            foo: true
+                        },
+                        seriesColors: ["#f00"]
+                    }
+                };
+
+                function createChart(options) {
+                    chart = $("#container").kendoChart(options)
+                                           .data("kendoChart");
+                }
+
+                // ------------------------------------------------------------
+                module("setOptions");
+
+                test("extends original options", function() {
+                    createChart();
+
+                    chart.setOptions({
+                        foo: true
+                    });
+
+                    ok(chart._originalOptions.foo);
+                });
+
+                test("applies theme", function() {
+                    createChart();
+                    chart.setOptions({ theme: "foo" });
+
+                    ok(chart.options.foo);
+                });
+
+                test("does not taint original options with theme", function() {
+                    createChart({ theme: "foo" });
+
+                    chart.setOptions({ theme: "" });
+
+                    ok(!chart.options.foo);
+                });
+
+                test("does not taint series options with theme", function() {
+                    createChart({
+                        theme: "foo",
+                        series: [{ }]
+                    });
+
+                    chart.setOptions({ theme: "" });
+
+                    ok(!chart.options.series[0].foo);
+                });
+
+                test("does not taint series colors with theme", function() {
+                    createChart({
+                        series: [{ }]
+                    });
+
+                    chart.setOptions({ theme: "foo" });
+                    chart.setOptions({ theme: "" });
+
+                    ok(!chart.options.series[0].color);
+                });
+
+                test("resets series after grouping", function() {
+                    createChart({
+                        dataSource: {
+                            data: [{
+                                value: 1,
+                                group: "A"
+                            }, {
+                                value: 1,
+                                group: "B"
+                            }],
+                            group: {
+                                field: "group"
+                            }
+                        },
+                        series: [{
+                            field: "value"
+                        }]
+                    });
+
+                    chart.setOptions({
+                        series: [{
+                            data: [1, 2, 3]
+                        }]
+                    });
+
+                    chart.dataSource.read();
+
+                    equal(chart.options.series.length, 1);
+                });
+
+                test("sets data source", function() {
+                    createChart({
+                        series: [{ field: "foo" }]
+                    });
+
+                    chart.setOptions({
+                        dataSource: { data: [{ "foo": 1 }] }
+                    });
+
+                    equal(chart.options.series[0].data.length, 1);
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

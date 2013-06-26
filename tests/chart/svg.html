@@ -605,11 +605,6 @@
                     ok(text.render().indexOf("id='id'") > -1);
                 });
 
-                test("renders id", function() {
-                    text.options.id = "id";
-                    ok(text.render().indexOf("id='id'") > -1);
-                });
-
                 test("renders data attributes", function() {
                     text.options.data = { testId: 1 };
                     ok(text.render().indexOf("data-test-id='1'") > -1);
@@ -724,6 +719,41 @@
                     ok(path.render().indexOf("data-test-id='1'") > -1);
                 });
 
+                test("clone returns different instance", function() {
+                    notEqual(path.clone(), path);
+                });
+
+                test("clone returns SVGPath", function() {
+                    ok(path.clone() instanceof dataviz.SVGPath);
+                });
+
+                test("clone copies options", function() {
+                    path.options.id = "1";
+                    equal(path.clone().options.id, "1");
+                });
+
+                test("refresh updates fill-opacity attribute", function() {
+                    var domElement = $("<div />");
+                    path.options.fillOpacity = 0.4;
+                    path.refresh(domElement);
+                    equal(domElement.attr("fill-opacity"), "0.4");
+                });
+
+                test("refresh updates stroke-opacity attribute", function() {
+                    var domElement = $("<div />");
+                    path.options.strokeOpacity = 0.4;
+                    path.refresh(domElement);
+                    equal(domElement.attr("stroke-opacity"), "0.4");
+                });
+
+                test("refresh updates display style property", function() {
+                    var domElement = $("<div />");
+                    path.options.visible = false;
+                    path.refresh(domElement);
+                    equal(domElement.css("display"), "none");
+                });
+
+                // ------------------------------------------------------------
                 module("SVGPath / Dash", {
                     setup: function() {
                         path = new dataviz.SVGPath({ strokeWidth: 1 });
@@ -769,40 +799,6 @@
                 test("sets stroke linecap to butt", function() {
                     path.options.dashType = "dot";
                     ok(path.render().indexOf("stroke-linecap='butt'") > -1);
-                });
-
-                test("clone returns different instance", function() {
-                    notEqual(path.clone(), path);
-                });
-
-                test("clone returns SVGPath", function() {
-                    ok(path.clone() instanceof dataviz.SVGPath);
-                });
-
-                test("clone copies options", function() {
-                    path.options.id = "1";
-                    equal(path.clone().options.id, "1");
-                });
-
-                test("refresh updates fill-opacity attribute", function() {
-                    var domElement = $("<div />");
-                    path.options.fillOpacity = 0.4;
-                    path.refresh(domElement);
-                    equal(domElement.attr("fill-opacity"), "0.4");
-                });
-
-                test("refresh updates stroke-opacity attribute", function() {
-                    var domElement = $("<div />");
-                    path.options.strokeOpacity = 0.4;
-                    path.refresh(domElement);
-                    equal(domElement.attr("stroke-opacity"), "0.4");
-                });
-
-                test("refresh updates display style property", function() {
-                    var domElement = $("<div />");
-                    path.options.visible = false;
-                    path.refresh(domElement);
-                    equal(domElement.css("display"), "none");
                 });
 
             })();
@@ -1361,56 +1357,6 @@
                 test("registers clip animation", function() {
                     decorator.decorate(rect);
                     ok(view.animations[0] instanceof dataviz.ExpandAnimation);
-                });
-
-            })();
-
-            (function() {
-                var chart;
-
-                function createChart() {
-                    $("#container").kendoChart({
-                        series: [{
-                            type: "bar",
-                            data: [1, 2]
-                        }]
-                    });
-
-                    chart = $("#container").data("kendoChart");
-                }
-
-                // ------------------------------------------------------------
-                module("SVG Export", {
-                    setup: function() {
-                        createChart();
-                    }
-                });
-
-                test("svg() exports SVG", function() {
-                    ok(chart.svg().match(/<svg.*<\/svg>/));
-                });
-
-                test("svg() exports to SVG when the browser does not support SVG and VML", function() {
-                    function unavailable() { return false; }
-
-                    stubMethod(dataviz.SVGView, "available", unavailable, function() {
-                        stubMethod(dataviz.VMLView, "available", unavailable, function() {
-                            createChart();
-                            ok(chart.svg().match(/<svg.*<\/svg>/));
-                        });
-                    });
-                });
-
-                test("svg() does not replace model", function() {
-                    var oldModel = chart._model;
-                    chart.svg();
-                    ok(oldModel === chart._model);
-                });
-
-                test("svg() does not replace view", function() {
-                    var oldView = chart._view;
-                    chart.svg();
-                    ok(oldView === chart._view);
                 });
 
             })();

@@ -3,7 +3,7 @@
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="SchedulerViewMonth"/>.
     /// </summary>
-    public class SchedulerViewMonthBuilder<T> : SchedulerViewBaseBuilder<T>, ISchedulerViewBuilder
+    public class SchedulerViewMonthBuilder<T> : SchedulerViewBaseBuilder<T>
         where T : SchedulerViewMonth
     {
         public SchedulerViewMonthBuilder(T resource)
@@ -17,7 +17,7 @@
         /// <param name="dayTemplate">The dayTemplate</param>
         public ISchedulerViewBuilder DayTemplate(string dayTemplate)
         {
-            resource.DayTemplate = dayTemplate;
+            view.DayTemplate = dayTemplate;
 
             return this;
         }
@@ -28,7 +28,7 @@
         /// <param name="dayTemplateId">The dayTemplateId</param>
         public ISchedulerViewBuilder DayTemplateId(string dayTemplateId)
         {
-            resource.DayTemplateId = dayTemplateId;
+            view.DayTemplateId = dayTemplateId;
 
             return this;
         }
@@ -39,7 +39,7 @@
         /// <param name="eventHeight">The eventHeight</param>
         public ISchedulerViewBuilder EventHeight(int eventHeight)
         {
-            resource.EventHeight = eventHeight;
+            view.EventHeight = eventHeight;
 
             return this;
         }

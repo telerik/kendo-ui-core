@@ -23,6 +23,15 @@ class EditorToolItem extends \kendo\SerializableObject {
         return $this->setProperty('value', $value);
     }
 
+    /**
+    * Only applicable for the formatting tool. Specifies the context in which the option will be available.
+    * @param string $value
+    * @return \Kendo\UI\EditorToolItem
+    */
+    public function context($value) {
+        return $this->setProperty('context', $value);
+    }
+
 //<< Properties
 }
 

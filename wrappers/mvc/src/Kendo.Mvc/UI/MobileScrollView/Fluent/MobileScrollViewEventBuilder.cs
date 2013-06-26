@@ -37,6 +37,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Fires when widget refreshes
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the refresh event.</param>
+        public MobileScrollViewEventBuilder Refresh(string handler)
+        {
+            Handler("refresh", handler);
+
+            return this;
+        }
+        
         //<< Handlers
     }
 }

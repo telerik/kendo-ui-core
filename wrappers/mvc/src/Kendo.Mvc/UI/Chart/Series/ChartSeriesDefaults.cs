@@ -17,9 +17,9 @@ namespace Kendo.Mvc.UI
             ScatterLine = new ChartScatterLineSeries<T, object, object>();
             Area = new ChartAreaSeries<T, object>();
             VerticalArea = new ChartAreaSeries<T, object>();
-            OHLC = new ChartOHLCSeries<T, object>();
-            Bullet = new ChartBulletSeries<T, object>();
-            VerticalBullet = new ChartBulletSeries<T, object>();
+            OHLC = new ChartOHLCSeries<T, object, string>();
+            Bullet = new ChartBulletSeries<T, object, string>();
+            VerticalBullet = new ChartBulletSeries<T, object, string>();
             RadarArea = new ChartRadarAreaSeries<T, object>();
             RadarColumn = new ChartRadarColumnSeries<T, object>();
             RadarLine = new ChartRadarLineSeries<T, object>();

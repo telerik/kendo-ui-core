@@ -91,6 +91,9 @@
         margin: 0 3em;
         padding: .5em;
     }
+    .km-flat #modalview-open-button {
+        color: #fff;
+    }
 
     #modalview-camera {
         text-align: center;
@@ -103,7 +106,7 @@
 
     #modalview-camera .km-content,
     .km-ios #modalview-login .km-content {
-        background: url(<%=Url.Content("~/content/shared/images/patterns/pattern1.png")%>) repeat 0 0;
+        background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
     }
 
     .km-ios #modalview-camera .km-button,
@@ -120,8 +123,10 @@
         background-color: #2e2e2e;
     }
 
-    .km-ios #modalview-login #modalview-login-button {
+    .km-ios #modalview-login #modalview-login-button,
+    .km-flat #modalview-login #modalview-login-button {
         background-color: Green;
+        color: #fff;
     }
 
     .km-tablet .km-ios #modalview-camera .km-view-title, .km-tablet .km-ios #modalview-login .km-view-title {

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler navigation</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler navigation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Scheduler = kendo.ui.Scheduler,
+                keys = kendo.keys,
+                scheduler,
+                container,
+                now;
+
+            module("Selection", {
+                setup: function() {
+                    now = new Date();
+                    container = $("<div />");
+                    $(document.body).append(container);
+                    scheduler = new Scheduler(container, {
+                        views: [
+                            "day",
+                            { type: "week", selected: true }
+                        ],
+                        dataSource: [
+                            { start: now, end: new Date(now + (60 * 60 * 1000)), title: "Test" }
+                        ]
+                    });
+
+                    container.focus();
+                },
+
+                teardown: function() {
+                   container.closest(".k-scheduler").kendoScheduler("destroy").remove();
+                }
+            });
+
+            function keydown(keyCode, options) {
+                var e = $.extend({
+                    type: "keydown"
+                }, options);
+
+                if (typeof keyCode == "string") {
+                    keyCode = keyCode.charCodeAt(0);
+                }
+
+                if (keyCode) {
+                    e.keyCode = keyCode;
+                }
+
+                container.trigger(e);
+            }
+
+            test("scheduler wrapper is focusable", function() {
+                equal(container.attr("tabindex"), 0);
+            });
+
+            test("scheduler creates selection on mousedown", function() {
+                var td = container.find(".k-scheduler-content td:first");
+
+                td.trigger({
+                    type: "mousedown",
+                    curentTarget: td
+                });
+
+                ok(td.hasClass("k-state-selected"));
+            });
+
+            test("scheduler sets selection range based on clicked cell", function() {
+                var td = container.find(".k-scheduler-content td").eq(5),
+                slot = scheduler.view().selectionByElement(td),
+                selection;
+
+                td.trigger({
+                    type: "mousedown",
+                    curentTarget: td
+                });
+
+                selection = scheduler._selection;
+
+                deepEqual(selection.start, slot.start);
+                deepEqual(selection.end, slot.end);
+                equal(selection.isAllDay, slot.isAllDay);
+                equal(selection.groupIndex, slot.groupIndex);
+            });
+
+            test("scheduler sets selection range based on clicked event", function() {
+                createSampleEvent();
+                var event = container.find(".k-event").eq(0),
+                    dataItem = scheduler.dataSource.getByUid(event.data("uid")),
+                    slot = scheduler.view().selectionByElement(event);
+
+                event.trigger({
+                    type: "mousedown",
+                    curentTarget: event
+                });
+
+                selection = scheduler._selection;
+
+                equal(selection.start.getTime(), dataItem.start.getTime());
+                equal(selection.end.getTime(), dataItem.end.getTime());
+                equal(selection.isAllDay, slot.isAllDay);
+                equal(selection.groupIndex, slot.groupIndex);
+            });
+
+            test("scheduler focuses wrapper on mousedown", function() {
+                var td = container.find(".k-scheduler-content td:first");
+
+                td.trigger({
+                    type: "mousedown",
+                    curentTarget: td
+                });
+
+                equal(container[0], document.activeElement);
+            });
+
+            test("scheduler removes selected state on blur", function() {
+                var td = container.find(".k-scheduler-content td:first");
+
+                td.trigger({
+                    type: "mousedown",
+                    curentTarget: td
+                });
+
+                container.focusout();
+
+                ok(!td.hasClass("k-state-selected"));
+            });
+
+            test("scheduler selects first cell on focus", function() {
+                var td = container.find(".k-scheduler-content td:first");
+
+                ok(td.hasClass("k-state-selected"));
+            });
+
+            test("scheduler restores previous selected state on focus", function() {
+                var td = container.find(".k-scheduler-content td").eq(1);
+
+                td.trigger({
+                    type: "mousedown",
+                    curentTarget: td
+                });
+
+                container.focusout();
+                container.focus();
+
+                ok(td.hasClass("k-state-selected"));
+                equal(container.find(".k-scheduler-content .k-state-selected").length, 1);
+            });
+
+            test("scheduler updates selected date on mousedown", function() {
+                var date = new Date(2013, 6, 10);
+
+                scheduler.date(date);
+
+                var td = container.find(".k-scheduler-content td").eq(0);
+
+                td.trigger({
+                    type: "mousedown",
+                    curentTarget: td
+                });
+
+                deepEqual(scheduler.date(), new Date(2013, 6, 7));
+            });
+
+            test("scheduler offsets selection on view change", function() {
+                var date = new Date(2013, 6, 10);
+
+                scheduler.date(date);
+
+                var td = container.find(".k-scheduler-content td").eq(0);
+
+                td.trigger({
+                    type: "mousedown",
+                    curentTarget: td
+                });
+
+                scheduler.view("day");
+
+                ok(container.find(".k-scheduler-content td").eq(0).hasClass("k-state-selected"));
+                deepEqual(scheduler.date(), new Date(2013, 6, 7));
+            });
+
+            test("scheduler offsets selection on view change", function() {
+                var date = new Date(2013, 6, 10);
+
+                scheduler.date(date);
+
+                var td = container.find(".k-scheduler-content td").eq(0);
+
+                td.trigger({
+                    type: "mousedown",
+                    curentTarget: td
+                });
+
+                scheduler.view("day");
+
+                ok(container.find(".k-scheduler-content td").eq(0).hasClass("k-state-selected"));
+                deepEqual(scheduler.date(), new Date(2013, 6, 7));
+            });
+
+            test("scheduler calls view.move method with specific direction", function() {
+                var view = scheduler.view();
+
+                stub(view, {
+                    move: view.move
+                });
+
+                keydown(keys.DOWN);
+
+                equal(view.calls("move"), 1);
+                equal(view.args("move")[1], keys.DOWN);
+            });
+
+            test("scheduler calls view.move method with information for key modifiers", function() {
+                var view = scheduler.view();
+
+                stub(view, {
+                    move: view.move
+                });
+
+                keydown(keys.DOWN, { shiftKey: true });
+
+                equal(view.calls("move"), 1);
+                equal(view.args("move")[1], keys.DOWN);
+                equal(view.args("move")[2], true);
+            });
+
+            test("scheduler calls preventDefault if view.move supports pressed key", 1, function() {
+                var view = scheduler.view();
+
+                keydown(keys.DOWN, {
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
+            });
+
+            test("scheduler sets selectedDate when selection.start is less than view.startDate()", 1, function() {
+                var view = scheduler.view(),
+                    start = kendo.date.addDays(view.startDate(), -1);
+
+                scheduler._selection.start = start;
+                scheduler._selection.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 0, 30);;
+
+                keydown(keys.DOWN);
+
+                deepEqual(kendo.date.getDate(scheduler.date()), kendo.date.getDate(scheduler._selection.start));
+            });
+
+            test("scheduler sets selectedDate when selection.start is bigger than view.endDate()", 1, function() {
+                var view = scheduler.view(),
+                    start = kendo.date.addDays(view.endDate(), 1);
+
+                scheduler._selection.start = start;
+                scheduler._selection.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 0, 30);
+
+                keydown(keys.DOWN);
+
+                deepEqual(kendo.date.getDate(scheduler.date()), kendo.date.getDate(scheduler._selection.start));
+            });
+
+            test("scheduler selects on move", 1, function() {
+                var view = scheduler.view();
+                stub(view, {
+                    select: view.select
+                });
+
+                keydown(keys.DOWN);
+
+                ok(view.calls("select"));
+            });
+
+            test("scheduler calls moveToEvent on TAB", 2, function() {
+                var view = scheduler.view();
+                stub(view, {
+                    moveToEvent: view.moveToEvent
+                });
+
+                keydown(keys.TAB);
+
+                ok(view.calls("moveToEvent"));
+                equal(view.args("moveToEvent").length, 2);
+            });
+
+            test("scheduler calls preventDefault on TAB", 1, function() {
+                createSampleEvent();
+                scheduler.wrapper.focus();
+                keydown(keys.TAB, {
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
+            });
+
+            test("scheduler calls moveToEvent on TAB + Shift", 2, function() {
+                var view = scheduler.view();
+                stub(view, {
+                    moveToEvent: view.moveToEvent
+                });
+
+                keydown(keys.TAB, { shiftKey: true });
+
+                ok(view.calls("moveToEvent"));
+                equal(view.args("moveToEvent")[1], true);
+            });
+
+            test("scheduler selects on moveToEvent", 1, function() {
+                createSampleEvent();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                stub(view, {
+                    select: view.select
+                });
+
+                keydown(keys.TAB);
+
+                ok(view.calls("select"));
+            });
+
+            test("scheduler doesn't call move on TAB", 2, function() {
+                var view = scheduler.view();
+                stub(view, {
+                    moveToEvent: view.moveToEvent,
+                    move: view.move
+                });
+
+                keydown(keys.TAB);
+
+                ok(view.calls("moveToEvent"));
+                ok(!view.calls("move"));
+            });
+
+            test("scheduler adjusts selected date on keydown", 1, function() {
+                var date = new Date(2012, 10, 10);
+
+                scheduler._selection.start = date;
+                scheduler._selection.end = date;
+
+                keydown();
+
+                deepEqual(scheduler.date(), date);
+            });
+
+            function createSampleEvent() {
+                return scheduler.dataSource.add({
+                    title: "Foo",
+                    start: new Date(now.setHours(10)),
+                    end: new Date(now.setHours(11))
+                });
+            }
+
+            function selectEvent(evt) {
+                scheduler._selection.events = [evt];
+            }
+
+            test("enter key opens selected event for editing", function() {
+                var e = createSampleEvent();
+
+                stub(scheduler, "editEvent");
+
+                selectEvent(e);
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("editEvent"), 1);
+                equal(scheduler.args("editEvent")[0], e);
+            });
+
+            test("enter key adds a new event in empty selection", function() {
+                var start = new Date(now.setHours(10));
+                var end = new Date(now.setHours(11));
+
+                stub(scheduler, "addEvent");
+
+                $.extend(scheduler._selection, { start: start, end: end });
+
+                keydown(keys.ENTER);
+
+                var eventInfo = scheduler.args("addEvent")[0];
+                equal(scheduler.calls("addEvent"), 1);
+                equal(eventInfo.start, start);
+                equal(eventInfo.end, end);
+            });
+
+            test("enter key adds an all-day event in all-day selection", function() {
+                stub(scheduler, "addEvent");
+
+                $.extend(scheduler._selection, { isAllDay: true, start: now, end: now });
+
+                keydown(keys.ENTER);
+
+                var eventInfo = scheduler.args("addEvent")[0];
+                equal(scheduler.calls("addEvent"), 1);
+                ok(eventInfo.isAllDay);
+            });
+
+            test("enter key does not add event in view with editable=false", function() {
+                var start = new Date(now.setHours(10));
+                var end = new Date(now.setHours(11));
+
+                stub(scheduler, "addEvent");
+
+                scheduler.view().options.editable = false;
+
+                $.extend(scheduler._selection, { start: start, end: end });
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("addEvent"), 0);
+            });
+
+            test("enter key does not add event in view with editable.create=false", function() {
+                var start = new Date(now.setHours(10));
+                var end = new Date(now.setHours(11));
+
+                stub(scheduler, "addEvent");
+
+                scheduler.view().options.editable = { create: false };
+
+                $.extend(scheduler._selection, { start: start, end: end });
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("addEvent"), 0);
+            });
+
+            test("enter key does not edit event in view with editable=false", function() {
+                var e = createSampleEvent();
+
+                stub(scheduler, "editEvent");
+
+                scheduler.view().options.editable = false;
+
+                selectEvent(e);
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("editEvent"), 0);
+            });
+
+            test("enter key does not edit event in view with editable.update=false", function() {
+                var e = createSampleEvent();
+
+                stub(scheduler, "editEvent");
+
+                scheduler.view().options.editable = { update: false };
+
+                selectEvent(e);
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("editEvent"), 0);
+            });
+
+            test("1 switches to day view", function() {
+                keydown("1");
+
+                equal(scheduler.view().title, "Day");
+            });
+
+            test("2 switches to week view", function() {
+                scheduler.view("day");
+
+                keydown("2");
+
+                equal(scheduler.view().title, "Week");
+            });
+
+            test("delete key triggers delete of event", function() {
+                var e = createSampleEvent();
+
+                stub(scheduler, "removeEvent");
+
+                selectEvent(e);
+
+                keydown(keys.DELETE);
+
+                equal(scheduler.calls("removeEvent"), 1);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

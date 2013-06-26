@@ -1,15 +1,30 @@
 require 'nokogiri'
 
 PLAYGROUND_SCRIPTS = %w(
-    js/jquery.min.js
     js/kendo.all.min.js
+    js/jquery.min.js
 )
 
 PLAYGROUND_STYLES = %w(
-        styles/kendo.common.min.css
+        styles/kendo.mobile.flat.min.css
         styles/kendo.default.min.css
-        styles/kendo.mobile.all.min.css
+        styles/kendo.common.min.css
 )
+
+def patched_file_contents(source)
+    source = Nokogiri::HTML(File.read(source))
+    source.css('script[src^=".."]').each { |script| script.remove }
+    source.css('link[href^=".."]').each { |script| script.remove }
+    PLAYGROUND_SCRIPTS.each do |script|
+        source.at_css('head').first_element_child.add_previous_sibling  "<script src='#{script}'></script>"
+    end
+
+    PLAYGROUND_STYLES.each do |style|
+        source.at_css('head').first_element_child.add_previous_sibling "<link rel='stylesheet' href='#{style}'>"
+    end
+
+    source
+end
 
 FileList['playground/*.html'].each do |source|
     path = File.join("dist", "playground", source.pathmap("%n"))
@@ -31,20 +46,51 @@ FileList['playground/*.html'].each do |source|
 
     file dist_file do |t|
         ensure_path(t.name)
+
         File.open(t.name, "w") do |f|
-            source = Nokogiri::HTML(File.read(source))
-            source.css('script[src^=".."]').each { |script| script.remove }
-            source.css('link[href^=".."]').each { |script| script.remove }
-            PLAYGROUND_SCRIPTS.each do |script|
-                source.at_css('head') << "<script src='#{script}'></script>"
-            end
-
-            PLAYGROUND_STYLES.each do |style|
-                source.at_css('head') << "<link rel='stylesheet' href='#{style}'>"
-            end
-
-            f.write(source)
+            f.write(patched_file_contents(source))
             sh "open #{t.name}"
         end
+    end
+end
+
+namespace "demos:reddit" do
+    path = "dist/demos/reddit/"
+
+    task :sync do
+        sh <<-SH
+            mkdir -p #{path} && \
+            rsync -av demos/reddit/ #{path}
+        SH
+    end
+
+    task :deploy => :sync
+
+    (PLAYGROUND_SCRIPTS + PLAYGROUND_STYLES).each do |resource|
+        file_copy :from => File.join("dist/bundles/cdn.commercial", resource),
+                :to => File.join(path, resource)
+        task :deploy => File.join(path, resource)
+    end
+
+    tree :to => File.join(path, 'styles', 'images'),
+         :from => FileList["styles/mobile/images/*"],
+         :root => "styles/mobile/images"
+
+    task :deploy => File.join(path, 'styles', 'images')
+
+    task :patch_index do
+        File.open(File.join(path, "index.html"), "w") do |file|
+            file.write(patched_file_contents("demos/reddit/index.html"))
+        end
+    end
+
+    desc "deploy and compile reddit app to dist"
+    task :deploy => :patch_index
+
+    desc "upload to kendoorigin"
+    task :upload => :deploy do
+        sh <<-SH
+            rsync -av #{path} #{KENDO_ORIGIN_HOST}:/usr/share/nginx/html/demos/reddit/
+        SH
     end
 end

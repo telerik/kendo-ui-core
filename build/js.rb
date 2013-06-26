@@ -50,7 +50,8 @@ file_merge "src/kendo.editor.js" => [
     "src/editor/components.js",
     "src/editor/indent.js",
     "src/editor/viewhtml.js",
-    "src/editor/contextformat.js",
+    "src/editor/formatting.js",
+    "src/editor/toolbar.js",
     "src/editor/tables.js"
 ]
 file "src/kendo.editor.js" => JS_BUILDFILE
@@ -60,8 +61,7 @@ file_merge "src/kendo.aspnetmvc.js" => [
     "src/aspnetmvc/kendo.combobox.aspnetmvc.js",
     "src/aspnetmvc/kendo.multiselect.aspnetmvc.js",
     "src/aspnetmvc/kendo.imagebrowser.aspnetmvc.js",
-    "src/aspnetmvc/kendo.validator.aspnetmvc.js",
-    "src/aspnetmvc/kendo.scheduler.aspnetmvc.js"
+    "src/aspnetmvc/kendo.validator.aspnetmvc.js"
 ]
 file "src/kendo.aspnetmvc.js" => JS_BUILDFILE
 
@@ -130,7 +130,7 @@ DATAVIZ_JS = FileList[
     "src/kendo.view.js",
     "src/kendo.data.odata.js",
     "src/kendo.data.xml.js",
-    "src/kendo.data.js",    
+    "src/kendo.data.js",
     "src/kendo.binder.js",
     "src/kendo.userevents.js",
     "src/kendo.dataviz.core.js",
@@ -143,7 +143,8 @@ DATAVIZ_JS = FileList[
     "src/kendo.dataviz.stock.js",
     "src/kendo.dataviz.sparkline.js",
     "src/kendo.dataviz.svg.js",
-    "src/kendo.dataviz.vml.js"
+    "src/kendo.dataviz.vml.js",
+    "src/kendo.dataviz.canvas.js"
 ]
 
 DATAVIZ_SRC_JS = FileList[DATAVIZ_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.dataviz.js').exclude('**/*.min.js')
@@ -217,6 +218,7 @@ WIN_JS = FileList[
     "src/kendo.list.js",
     "src/kendo.multiselect.js",
     "src/kendo.calendar.js",
+    "src/kendo.colorpicker.js",
     "src/kendo.datepicker.js",
     "src/kendo.autocomplete.js",
     "src/kendo.dropdownlist.js",
@@ -236,7 +238,8 @@ WIN_JS = FileList[
     "src/kendo.dataviz.barcode.js",
     "src/kendo.dataviz.stock.js",
     "src/kendo.dataviz.sparkline.js",
-    "src/kendo.dataviz.svg.js"
+    "src/kendo.dataviz.svg.js",
+    "src/kendo.dataviz.canvas.js"
 ]
 
 WIN_MIN_JS = FileList['src/kendo.winjs.min.js']

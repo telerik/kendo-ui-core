@@ -1,10 +1,11 @@
-﻿using System;
-namespace Kendo.Mvc.UI.Fluent
+﻿namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="SchedulerViewWeek"/>.
     /// </summary>
-    public class SchedulerViewMultiDayBuilder<T> : SchedulerViewBaseBuilder<T>, ISchedulerViewBuilder
+    public class SchedulerViewMultiDayBuilder<T> : SchedulerViewBaseBuilder<T>
         where T : SchedulerViewMultiDay
     {
         public SchedulerViewMultiDayBuilder(T resource)
@@ -18,7 +19,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="allDayEventTemplate">The allDayEventTemplate</param>
         public ISchedulerViewBuilder AllDayEventTemplate(string allDayEventTemplate)
         {
-            resource.AllDayEventTemplate = allDayEventTemplate;
+            view.AllDayEventTemplate = allDayEventTemplate;
 
             return this;
         }
@@ -29,7 +30,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="allDayEventTemplateId">The allDayEventTemplateId</param>
         public ISchedulerViewBuilder AllDayEventTemplateId(string allDayEventTemplateId)
         {
-            resource.AllDayEventTemplateId = allDayEventTemplateId;
+            view.AllDayEventTemplateId = allDayEventTemplateId;
 
             return this;
         }
@@ -40,7 +41,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="allDaySlot">The allDaySlot</param>
         public ISchedulerViewBuilder AllDaySlot(bool allDaySlot)
         {
-            resource.AllDaySlot = allDaySlot;
+            view.AllDaySlot = allDaySlot;
 
             return this;
         }
@@ -51,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dateHeaderTemplate">The dateHeaderTemplate</param>
         public ISchedulerViewBuilder DateHeaderTemplate(string dateHeaderTemplate)
         {
-            resource.DateHeaderTemplate = dateHeaderTemplate;
+            view.DateHeaderTemplate = dateHeaderTemplate;
 
             return this;
         }
@@ -62,7 +63,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dateHeaderTemplateId">The dateHeaderTemplateId</param>
         public ISchedulerViewBuilder DateHeaderTemplateId(string dateHeaderTemplateId)
         {
-            resource.DateHeaderTemplateId = dateHeaderTemplateId;
+            view.DateHeaderTemplateId = dateHeaderTemplateId;
 
             return this;
         }
@@ -73,7 +74,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="majorTick">The majorTick</param>
         public ISchedulerViewBuilder MajorTick(int majorTick)
         {
-            resource.MajorTick = majorTick;
+            view.MajorTick = majorTick;
 
             return this;
         }
@@ -84,7 +85,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="majorTimeHeaderTemplate">The majorTimeHeaderTemplate</param>
         public ISchedulerViewBuilder MajorTimeHeaderTemplate(string majorTimeHeaderTemplate)
         {
-            resource.MajorTimeHeaderTemplate = majorTimeHeaderTemplate;
+            view.MajorTimeHeaderTemplate = majorTimeHeaderTemplate;
 
             return this;
         }
@@ -95,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="majorTimeHeaderTemplateId">The majorTimeHeaderTemplateId</param>
         public ISchedulerViewBuilder MajorTimeHeaderTemplateId(string majorTimeHeaderTemplateId)
         {
-            resource.MajorTimeHeaderTemplateId = majorTimeHeaderTemplateId;
+            view.MajorTimeHeaderTemplateId = majorTimeHeaderTemplateId;
 
             return this;
         }
@@ -106,7 +107,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="minorTickCount">The minorTickCount</param>
         public ISchedulerViewBuilder MinorTickCount(int minorTickCount)
         {
-            resource.MinorTickCount = minorTickCount;
+            view.MinorTickCount = minorTickCount;
 
             return this;
         }
@@ -117,7 +118,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="minorTimeHeaderTemplate">The minorTimeHeaderTemplate</param>
         public ISchedulerViewBuilder MinorTimeHeaderTemplate(string minorTimeHeaderTemplate)
         {
-            resource.MinorTimeHeaderTemplate = minorTimeHeaderTemplate;
+            view.MinorTimeHeaderTemplate = minorTimeHeaderTemplate;
 
             return this;
         }
@@ -128,7 +129,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="minorTimeHeaderTemplateId">The minorTimeHeaderTemplateId</param>
         public ISchedulerViewBuilder MinorTimeHeaderTemplateId(string minorTimeHeaderTemplateId)
         {
-            resource.MinorTimeHeaderTemplateId = minorTimeHeaderTemplateId;
+            view.MinorTimeHeaderTemplateId = minorTimeHeaderTemplateId;
 
             return this;
         }
@@ -136,7 +137,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The start time of the view. The scheduler will display events starting after the startTime.
         /// </summary>
-        /// <param name="starTime">The startTime</param>
+        /// <param name="startTime">The startTime</param>
         /// <example>
         /// <code lang="Razor">
         /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
@@ -162,7 +163,45 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ISchedulerViewBuilder StartTime(DateTime startTime)
         {
-            resource.StartTime = startTime;
+            view.StartTime = startTime;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The start time of the view. The scheduler will display events starting after the startTime.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.StartTime(10,0,0);
+        ///             dayView.EndTime(new DateTime(2013, 6, 13, 23, 00, 00));
+        ///         });
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public ISchedulerViewBuilder StartTime(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            view.StartTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
 
             return this;
         }
@@ -196,7 +235,45 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ISchedulerViewBuilder EndTime(DateTime endTime)
         {
-            resource.EndTime = endTime;
+            view.EndTime = endTime;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The end time of the view. The scheduler will display events ending before the endTime.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Views(views =&gt;
+        ///     {
+        ///         views.DayView(dayView =&gt; {
+        ///             dayView.Title(&quot;Day&quot;);
+        ///             dayView.StartTime(new DateTime(2013, 6, 13, 10, 00, 00));
+        ///             dayView.EndTime(23,0,0);
+        ///         });
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public ISchedulerViewBuilder EndTime(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            view.EndTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
 
             return this;
         }

@@ -366,18 +366,31 @@
                     equal(categoriesCount(series.options.series), 3);
                 });
 
+                test("bar bottoms are aligned to category axis", 6, function() {
+                    $.each(series.points, function() {
+                        equal(this.box.y2, CATEGORY_AXIS_Y);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Missing values", {
+                    setup: function() {
+                        setupBarChart(plotArea, {
+                            series: [{ data: [1, 2, null] }]
+                        });
+                    }
+                });
+
                 test("Missing values are represented as bars with zero height", function() {
                     var barHeights = $.map(series.points, function(bar) {
                         return bar.box.height();
                     });
 
-                    deepEqual(barHeights, [1, 1, 2, 2, 3, 0]);
+                    deepEqual(barHeights, [1, 2, 0]);
                 });
 
-                test("bar bottoms are aligned to category axis", 6, function() {
-                    $.each(series.points, function() {
-                        equal(this.box.y2, CATEGORY_AXIS_Y);
-                    });
+                test("ignores null values when reporting minimum series value", function() {
+                    equal(series.valueAxisRanges[undefined].min, 1);
                 });
 
                 // ------------------------------------------------------------
@@ -733,8 +746,8 @@
                 test("groups with no stack are assigned to first stack", function() {
                     setupBarChart(plotArea, {
                         series: [
-                            $.extend({ stack: "a" }, positiveSeries),
-                            positiveSeries,
+                            $.extend(true, { stack: "a" }, positiveSeries),
+                            positiveSeries
                         ],
                         isStacked: true
                     });

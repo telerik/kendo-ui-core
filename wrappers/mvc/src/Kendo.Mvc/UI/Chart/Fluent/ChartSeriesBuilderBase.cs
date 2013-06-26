@@ -73,6 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
+        [Obsolete("GroupNameTemplate is obsolete. Please specify the template as Name.")]
         public TSeriesBuilder GroupNameTemplate(string groupNameTemplate)
         {
             Series.GroupNameTemplate = groupNameTemplate;
@@ -259,6 +260,16 @@ namespace Kendo.Mvc.UI.Fluent
         public TSeriesBuilder Visible(bool visible)
         {
             Series.Visible = visible;
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Configures the series notes
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>
+        public TSeriesBuilder Notes(Action<ChartNoteBuilder> configurator)
+        {
+            configurator(new ChartNoteBuilder(Series.Notes));
             return this as TSeriesBuilder;
         }
     }

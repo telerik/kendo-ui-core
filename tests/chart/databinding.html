@@ -597,7 +597,8 @@
                             sales: 100
                         }, null],
                         series: [{
-                            field: "sales"
+                            field: "sales",
+                            sales: null
                         }],
                         dataBound: function() {
                             equal(this.options.series[0].data.length, 2);
@@ -625,7 +626,8 @@
                 asyncTest("series points are populated if field is null", 1, function() {
                     chart = createChart({
                         dataSource: [{
-                            period: "Jan"
+                            period: "Jan",
+                            sales: null
                         }, {
                             period: "Feb",
                             sales: 100
@@ -643,7 +645,8 @@
                 asyncTest("series points order is preserved if field is null", 1, function() {
                     chart = createChart({
                         dataSource: [{
-                            period: "Jan"
+                            period: "Jan",
+                            sales: null
                         }, {
                             period: "Feb",
                             sales: 100
@@ -819,21 +822,21 @@
                     });
                 });
 
-                asyncTest("sets source series name to default groupNameTemplate", 1, function() {
+                asyncTest("sets source series name to default group name template", 1, function() {
                     createGroupedChart(function() {
                         equal(this.options.series[0].name, "Foo: Sales");
                         start();
                     });
                 });
 
-                asyncTest("default groupNameTemplate renders only group name when no series name is defined", 1, function() {
+                asyncTest("default group name template renders only group name when no series name is defined", 1, function() {
                     createGroupedChart(function() {
                         equal(this.options.series[0].name, "Foo");
                         start();
                     }, [{ field: "sales" }]);
                 });
 
-                asyncTest("sets cloned series name to default groupNameTemplate", 1, function() {
+                asyncTest("sets cloned series name to default group name template", 1, function() {
                     createGroupedChart(function() {
                         equal(this.options.series[1].name, "Bar: Sales");
                         start();
@@ -847,18 +850,17 @@
                     });
                 });
 
-                asyncTest("sets cloned series name to groupNameTemplate", 1, function() {
+                asyncTest("evaluates name as group name template", 1, function() {
                     createGroupedChart(function() {
                         equal(this.options.series[1].name, "Sales for product Bar");
                         start();
                     }, [{
-                        name: "Sales",
-                        field: "sales",
-                        groupNameTemplate: "#= series.name # for #= group.field # #= group.value #"
+                        name: "Sales for #= group.field # #= group.value #",
+                        field: "sales"
                     }]);
                 });
 
-                asyncTest("does not overwrite name with empty groupNameTemplate", 1, function() {
+                asyncTest("does not overwrite name with empty groupNameTemplate (legacy)", 1, function() {
                     createGroupedChart(function() {
                         equal(this.options.series[1].name, "Sales");
                         start();
@@ -869,6 +871,17 @@
                     }]);
                 });
 
+                test("Warns about legacy template usage", function() {
+                    stubMethod(kendo, "logToConsole", function(msg) {
+                        ok(msg.indexOf("obsolete"));
+                    }, function() {
+                        createGroupedChart($.noop, [{
+                            name: "Sales",
+                            field: "sales",
+                            groupNameTemplate: "Foo"
+                        }]);
+                    });
+                });
             })();
 
             (function() {
@@ -915,6 +928,16 @@
                     );
                 });
 
+                test("sets value fields from null", function() {
+                    binder.register(["bar"], ["x", "y"]);
+                    series.data = [null];
+                    series.type = "bar";
+
+                    deepEqual(binder.bindPoint(series, 0),
+                        { value: { x: null, y: null }, fields: {} }
+                    );
+                });
+
                 test("binds value using field name", function() {
                     series.field = "aValue";
                     series.data = [{ aValue: 1 }];
@@ -957,6 +980,15 @@
                     deepEqual(binder.bindPoint(series, 0).fields,
                         { color: "red" }
                     );
+                });
+
+                test("other fields are empty if data item is null", function() {
+                    binder.register(["bar"], ["value"], ["color"]);
+
+                    series.data = [null];
+                    series.type = "bar";
+
+                    deepEqual(binder.bindPoint(series, 0).fields, { });
                 });
             })();
         </script>

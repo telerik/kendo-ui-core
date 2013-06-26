@@ -9,10 +9,11 @@ namespace Kendo.Mvc.UI.Tests.Chart
     {
         protected IChartCategoryAxis axis;
         protected ChartCategoryAxisBuilder<SalesData> builder;
+        protected Chart<SalesData> chart;
 
         public ChartCategoryAxisBuilderTests()
         {
-            var chart = ChartTestHelper.CreateChart<SalesData>();
+            chart = ChartTestHelper.CreateChart<SalesData>();
             axis = new ChartCategoryAxis<SalesData>(chart);
             chart.CategoryAxes.Add(axis);
             chart.Data = SalesDataBuilder.GetCollection();
@@ -207,27 +208,23 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Categories_should_bind_categories_with_expression()
+        public void Categories_should_not_bind_categories_from_expression()
         {
             builder.Categories(s => s.DateString);
+            axis.Categories.ShouldBeNull();
+        }
 
-            AssertCategories(new string[] { "Aug 2010", string.Empty, "Sept 2010" });
+        [Fact]
+        public void Categories_set_member_field_with_expression()
+        {
+            builder.Categories(s => s.Date);
+            axis.Member.ShouldEqual("Date");
         }
 
         [Fact]
         public void Categories_should_return_builder_with_expression()
         {
             builder.Categories(s => s.DateString).ShouldBeSameAs(builder);
-        }
-
-        [Fact]
-        public void Categories_set_member_field_with_expression()
-        {
-            builder.Container.Data = null;
-            builder.Categories(s => s.Date);
-            builder.Container.Data = SalesDataBuilder.GetCollection();
-
-            axis.Member.ShouldEqual("Date");
         }
 
         [Fact]

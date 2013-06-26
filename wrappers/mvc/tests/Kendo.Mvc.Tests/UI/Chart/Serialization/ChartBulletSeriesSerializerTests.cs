@@ -7,13 +7,13 @@ namespace Kendo.Mvc.UI.Tests
 
     public class ChartBulletSeriesSerializerTests
     {
-        protected ChartBulletSeries<SalesData, decimal> series;
+        protected ChartBulletSeries<SalesData, decimal, string> series;
 
         public ChartBulletSeriesSerializerTests()
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
             chart.Data = SalesDataBuilder.GetCollection();
-            series = new ChartBulletSeries<SalesData, decimal>(s => s.RepSales, s => s.TotalSales, s => s.Color);
+            series = new ChartBulletSeries<SalesData, decimal, string>(s => s.RepSales, s => s.TotalSales, s => s.Color, null, s => s.NoteText);
         }
 
         [Fact]
@@ -211,6 +211,20 @@ namespace Kendo.Mvc.UI.Tests
         {
             series.TargetMember = null;
             GetJson(series).ContainsKey("targetField").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_categoryField_if_member_is_set()
+        {
+            series.CategoryMember = "RepSales";
+            GetJson(series)["categoryField"].ShouldEqual("RepSales");
+        }
+
+        [Fact]
+        public void Should_not_serialize_categoryField_if_member_is_not_set()
+        {
+            series.CategoryMember = null;
+            GetJson(series).ContainsKey("categoryField").ShouldBeFalse();
         }
 
         [Fact]

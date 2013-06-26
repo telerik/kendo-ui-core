@@ -82,6 +82,16 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Sets the preferred rendering engine.
+If it is not supported by the browser, the Chart will switch to the first available mode.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\Chart
+    */
+    public function renderAs($value) {
+        return $this->setProperty('renderAs', $value);
+    }
+
+    /**
     * Adds ChartSeriesItem to the Chart.
     * @param \Kendo\Dataviz\UI\ChartSeriesItem|array,... $value one or more ChartSeriesItem to add.
     * @return \Kendo\Dataviz\UI\Chart

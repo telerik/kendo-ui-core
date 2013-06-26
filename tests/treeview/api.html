@@ -930,6 +930,26 @@
                 equal(calls, 1);
             });
 
+            test("updateIndeterminate updates indeterminate state", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" },
+                            { text: "baz" }
+                        ] }
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                treeview.find(":checkbox:last").prop("checked", true);
+
+                treeviewObject.updateIndeterminate();
+
+                ok(treeview.find(":checkbox:first").prop("indeterminate"));
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

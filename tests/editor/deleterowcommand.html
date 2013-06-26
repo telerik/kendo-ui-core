@@ -51,16 +51,24 @@
                 equal(editor.value(), "");
             });
 
-            test("deleting last row removes table when table editor is shown", function() {
-                range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table>");
-
-                // show table editor
-                editor.selectRange(range);
-                editor.trigger("select");
+            test("deleting last row focuses next paragraph", function() {
+                range = createRangeFromText(editor, "<table><tr><td>f||oo</td></tr></table><p>bar</p>");
 
                 execDeleteRowCommand({ range:range });
 
-                equal(editor.value(), "");
+                editor.getRange().insertNode(editor.document.createElement("a"));
+
+                equal(editor.value(), "<p><a></a>bar</p>");
+            });
+
+            test("deleting last row focuses previous paragraph, if table was at end of document", function() {
+                range = createRangeFromText(editor, "<p>bar</p><table><tr><td>f||oo</td></tr></table>");
+
+                execDeleteRowCommand({ range:range });
+
+                editor.getRange().insertNode(editor.document.createElement("a"));
+
+                equal(editor.value(), "<p><a></a>bar</p>");
             });
 
             test("selection is moved to bottom row after deleting a row", function() {

@@ -177,6 +177,21 @@
             equal(tool.text(), "heading 2");
         });
 
+        test("applying format does not replace outer wrapper", function() {
+            setFormattingItems(inline, [
+                { text: "heading", value: "h1" }
+            ]);
+
+            selectFromValue(inline, "f|o|o");
+
+            var tool = formattingTool(inline);
+
+            tool.value("h1");
+            tool.trigger("change");
+
+            equal(inline.value(), "<h1>foo</h1>");
+        });
+
 
     </script>
 

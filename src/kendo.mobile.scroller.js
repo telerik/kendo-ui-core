@@ -215,7 +215,8 @@ kendo_module({
 
             element = that.element;
 
-            if (that.options.useNative && kendo.support.hasNativeScrolling) {
+            that._native = that.options.useNative && kendo.support.hasNativeScrolling;
+            if (that._native) {
                 element.addClass("km-native-scroller")
                     .prepend('<div class="km-scroll-header"/>');
 
@@ -248,9 +249,12 @@ kendo_module({
                     }
                 }),
 
+                avoidScrolling = this.options.avoidScrolling,
+
                 userEvents = new kendo.UserEvents(element, {
                     allowSelection: true,
                     preventDragEvent: true,
+                    captureUpIfMoved: true,
                     multiTouch: that.options.zoom,
                     start: function(e) {
                         dimensions.refresh();
@@ -260,7 +264,7 @@ kendo_module({
                             horizontalSwipe  = velocityX * 2 >= velocityY,
                             verticalSwipe = velocityY * 2 >= velocityX;
 
-                        if (that.enabled && (dimensions.x.enabled && horizontalSwipe || dimensions.y.enabled && verticalSwipe)) {
+                        if (!avoidScrolling(e) && that.enabled && (dimensions.x.enabled && horizontalSwipe || dimensions.y.enabled && verticalSwipe)) {
                             userEvents.capture();
                         } else {
                             userEvents.cancel();
@@ -302,6 +306,8 @@ kendo_module({
                 pulled: false,
                 enabled: true,
                 scrollElement: inner,
+                scrollTop: 0,
+                scrollLeft: 0,
                 fixedContainer: element.children().first()
             });
 
@@ -343,6 +349,7 @@ kendo_module({
             pullOffset: 140,
             elastic: true,
             useNative: false,
+            avoidScrolling: function() { return false; },
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing"
@@ -363,8 +370,12 @@ kendo_module({
         },
 
         reset: function() {
-            this.movable.moveTo({x: 0, y: 0});
-            this._scale(1);
+            if (this._native) {
+                this.scrollElement.scrollTop(0);
+            } else {
+                this.movable.moveTo({x: 0, y: 0});
+                this._scale(1);
+            }
         },
 
         zoomOut: function() {

@@ -62,12 +62,7 @@
                         expectedResult.push(characters.GAP);
                     }
 
-                    if(options.checkCharacter){
-                        expectedResult.pushArray(characters[options.checkCharacter](ratio));
-                        expectedResult.push(characters.GAP);
-                    }
-
-                    expectedResult.pushArray(characters.START(encoding.ratio));
+                    expectedResult.pushArray(characters.START(ratio));
 
                     if(options.quietZoneLength){
                         expectedResult.push(options.quietZoneLength);
@@ -93,113 +88,32 @@
                     }
                 });
 
-                test("test value TEST8052 with quiet zone without checksum", function() {
-                    encoding.options.addCheckSum = false;
-                    encoding.options.addQuietZone = true;
+                test("test value TEST8052 is correctly encoded", function() {
                     var value = "TEST8052",
                         result = encoding.encode(value, 300, 100),
                         expectedResult = generateResult(value, encoding.ratio,
-                            {quietZoneLength: encoding.quietZoneLength});
+                            {quietZoneLength: encoding.options.quietZoneLength});
 
                     ok(comparePatterns(result.pattern, expectedResult));
                 });
 
-                test("test value TEST8052 with quiet zone with checksum", function() {
-                    encoding.options.addCheckSum = true;
-                    encoding.options.addQuietZone = true;
-                    var value = "TEST8052",
-                        result = encoding.encode(value, 300, 100),
-                        expectedResult = generateResult(value, encoding.ratio,
-                            {quietZoneLength:  encoding.quietZoneLength, checkCharacter: "T"});
-
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-
-                test("test value TEST8052 without quiet zone without checksum", function() {
-                    encoding.options.addCheckSum = false;
-                    encoding.options.addQuietZone = false;
-
-                    var value = "TEST8052",
-                        result = encoding.encode(value, 300, 100),
-                        expectedResult = generateResult(value, encoding.ratio, {});
-
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-
-                test("test value TEST8052 without quiet zone with checksum", function() {
-                    encoding.options.addCheckSum = true;
-                    encoding.options.addQuietZone = false;
-
-                    var value = "TEST8052",
-                        result = encoding.encode(value, 300, 100),
-                        expectedResult = generateResult(value, encoding.ratio, { checkCharacter: "T"});
-
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-
-                //-----------------------------------------------------------------------------------------------------------------
-
-                test("test value HI345678 with quiet zone without checksum", function() {
-                    encoding.options.addCheckSum = false;
-                    encoding.options.addQuietZone = true;
+                test("test value HI345678 is correctly encoded", function() {
                     var value = "HI345678",
                         result = encoding.encode(value, 300, 100),
                         expectedResult = generateResult(value, encoding.ratio,
-                            {quietZoneLength:  encoding.quietZoneLength});
+                            {quietZoneLength:  encoding.options.quietZoneLength});
 
                     ok(comparePatterns(result.pattern, expectedResult));
                 });
 
-                test("test value HI345678 with quiet zone with checksum", function() {
-                    encoding.options.addCheckSum = true;
-                    encoding.options.addQuietZone = true;
-                    var value = "HI345678",
-                        result = encoding.encode(value, 300, 100),
-                        expectedResult = generateResult(value, encoding.ratio,
-                            {quietZoneLength:  encoding.quietZoneLength, checkCharacter: "P"});
-
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-
-                //-----------------------------------------------------------------------------------------------------------------
-
-                test("test value ' 0.1-2$3/4+%' with quiet zone without checksum", function() {
-                    encoding.options.addCheckSum = false;
-                    encoding.options.addQuietZone = true;
+                test("test value ' 0.1-2$3/4+%' is correctly encoded", function() {
                     var value = " 0.1-2$3/4+%",
                         result = encoding.encode(value, 300, 100),
                         expectedResult = generateResult(value, encoding.ratio,
-                            {quietZoneLength:  encoding.quietZoneLength});
+                            {quietZoneLength:  encoding.options.quietZoneLength});
 
                     ok(comparePatterns(result.pattern, expectedResult));
-                });
-
-                test("test value ' 0.1-2$3/4+%' with quiet zone with checksum", function() {
-                    encoding.options.addCheckSum = true;
-                    encoding.options.addQuietZone = true;
-                    var value = " 0.1-2$3/4+%",
-                        result = encoding.encode(value, 300, 100),
-                        expectedResult = generateResult(value, encoding.ratio,
-                            {quietZoneLength:  encoding.quietZoneLength, checkCharacter: "P"});
-
-                    ok(comparePatterns(result.pattern, expectedResult));
-                });
-
-                //-----------------------------------------------------------------------------------------------------------------
-
-                test("test find character by value", function() {
-                    var result1 = encoding._findCharacterByValue(38),
-                        expectedResult1 = " ",
-                        result2 = encoding._findCharacterByValue(0),
-                        expectedResult2 = "0",
-                        result3 = encoding._findCharacterByValue(42),
-                        expectedResult3 = "%";
-                    equal(result1, expectedResult1);
-                    equal(result2, expectedResult2);
-                    equal(result3, expectedResult3);
-                });
-
-                //-----------------------------------------------------------------------------------------------------------------
+                });      
 
                 test("test invalid character error", function() {
                     var thrownError = false;
@@ -242,38 +156,17 @@
                     ok(thrownError);
                 });
 
-
-                //-----------------------------------------------------------------------------------------------------------------
-
                 test("test base unit calculation", function() {
                     var width = 200,
                         height = 100,
                         value = "HI345678",
                         quietZoneLength = encoding.options.quietZoneLength,
                         result,
-                        resultWithoutQuietZone,
-                        resultWithCheckSum,
-                        expectedResult,
-                        expectedResultWithoutQuietZone,
-                        expectedResultWithCheckSum;
+                        expectedResult;
 
-                        encoding.options.addCheckSum = false;
-                        encoding.options.addQuietZone = true;
                         result = encoding.encode(value, width, height).baseUnit;
                         expectedResult = calculateBaseUnit(width, value.length, encoding.ratio, quietZoneLength, 0, encoding.gapWidth);
                         equal(result, expectedResult);
-
-                        encoding.options.addCheckSum = false;
-                        encoding.options.addQuietZone = false;
-                        resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
-                        expectedResultWithoutQuietZone = calculateBaseUnit(width, value.length, encoding.ratio, 0, 0, encoding.gapWidth);
-                        equal(resultWithoutQuietZone, expectedResultWithoutQuietZone);
-
-                        encoding.options.addCheckSum = true;
-                        encoding.options.addQuietZone = true;
-                        resultWithCheckSum = encoding.encode(value, width, height).baseUnit;
-                        expectedResultWithCheckSum = calculateBaseUnit(width, value.length, encoding.ratio, quietZoneLength, 1, encoding.gapWidth);
-                        equal(resultWithCheckSum, expectedResultWithCheckSum);
                 });
 
                 test("test ratio calculation", function() {

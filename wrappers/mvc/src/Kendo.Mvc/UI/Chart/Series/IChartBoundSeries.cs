@@ -24,6 +24,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets the model data note text member name.
+        /// </summary>
+        /// <value>The model data note text member name.</value>
+        string NoteTextMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The data used for binding.
         /// </summary>
         IEnumerable Data

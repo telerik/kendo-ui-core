@@ -1,16 +1,16 @@
 ﻿namespace Kendo.Mvc.UI
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Web.Mvc;
     using Kendo.Mvc.Infrastructure;
-    using System.IO;
-using System;
 
     /// <summary>
     /// The server side wrapper for Kendo UI Scheduler
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
-    public class Scheduler<TModel> : WidgetBase, IScheduler<TModel> 
+    public class Scheduler<TModel> : WidgetBase, IScheduler<TModel>
         where TModel : class, ISchedulerEvent
     {
         public Scheduler(ViewContext viewContext,
@@ -23,8 +23,8 @@ using System;
 
             DataSource.Type = DataSourceType.Ajax;
 
-            DataSource.ModelType(typeof(TModel));
-
+            DataSource.Schema.Model = new SchedulerModelDescriptor(typeof(TModel));
+         
             UrlGenerator = urlGenerator;
 
             Resources = new List<SchedulerResource<TModel>>();
@@ -32,6 +32,9 @@ using System;
             Views = new List<SchedulerViewBase>();
 
             AllDaySlot = true;
+
+            Messages = new SchedulerMessages();
+            Group = new SchedulerGroupSettings();
         }
 
         public DataSource DataSource
@@ -83,9 +86,9 @@ using System;
         }
 
         public string AllDayEventTemplate
-        { 
+        {
             get;
-            set; 
+            set;
         }
 
         public string AllDayEventTemplateId
@@ -179,6 +182,18 @@ using System;
             private set;
         }
 
+        public SchedulerMessages Messages
+        {
+            get;
+            private set;
+        }
+
+        public SchedulerGroupSettings Group
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
@@ -220,9 +235,13 @@ using System;
                 {
                     options["editable"] = false;
                 }
-                else if (Editable.ToJson().Count > 0)
+                else
                 {
-                    options["editable"] = Editable.ToJson();
+                    IDictionary<string, object> editable = Editable.ToJson();
+                    if (editable.Count > 0)
+                    {
+                        options["editable"] = editable;
+                    }
                 }
             }
 
@@ -233,7 +252,7 @@ using System;
 
             if (!string.IsNullOrEmpty(EventTemplateId))
             {
-                options["eventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, EventTemplateId) };      
+                options["eventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, EventTemplateId) };
             }
 
             if (!string.IsNullOrEmpty(AllDayEventTemplate))
@@ -311,9 +330,19 @@ using System;
                 options["views"] = Views.ToJson();
             }
 
-            Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
+            var messages = Messages.ToJson();
+            if (messages.Count > 0)
+            {
+                options["messages"] = messages;
+            }
 
-            dataSource["type"] = "scheduler-aspnetmvc";
+            var group = Group.ToJson();
+            if (group.Count > 0)
+            {
+                options["group"] = group;
+            }
+
+            Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
 
             //TODO: update logic
             if (DataSource.Data != null)

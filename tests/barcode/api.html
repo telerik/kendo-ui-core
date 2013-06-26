@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Barcode API</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.barcode.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.canvas.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../chart/util.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz,
+                Barcode = dataviz.ui.Barcode;
+
+            (function() {
+                var barcode;
+
+                function createBarcode() {
+                    $("#container").kendoBarcode({
+                        value: "2346722",
+                        type: "ean8"
+                    });
+
+                    barcode = $("#container").data("kendoBarcode");
+                }
+
+                // ------------------------------------------------------------
+                var SVGView,
+                    CanvasView,
+                    supportsCanvas;
+
+                module("Export", {
+                    setup: function() {
+                        createBarcode();
+
+                        SVGView = dataviz.SVGView;
+                        CanvasView = dataviz.CanvasView;
+                        supportsCanvas = dataviz.supportsCanvas;
+                    },
+                    teardown: function() {
+                        dataviz.SVGView = SVGView;
+                        dataviz.CanvasView = CanvasView;
+                        dataviz.supportsCanvas = supportsCanvas;
+                    }
+                });
+
+                test("svg() exports SVG", function() {
+                    ok(barcode.svg().match(/<svg.*<\/svg>/));
+                });
+
+                test("svg() throws error if SVGView is not loaded", function() {
+                    dataviz.SVGView = undefined;
+
+                    throws(function() { barcode.svg() },
+                           "Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+                });
+
+                test("svg() does not replace view", function() {
+                    var oldView = barcode._view;
+                    barcode.svg();
+                    ok(oldView === barcode._view);
+                });
+
+                test("imageDataURL() exports image/png", function() {
+                    ok(barcode.imageDataURL().match(/image\/png/));
+                });
+
+                test("imageDataURL() throws error if CanvasView is not loaded", function() {
+                    dataviz.CanvasView = undefined;
+
+                    throws(function() { barcode.imageDataURL() },
+                           "Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+                });
+
+                test("imageDataURL() returns null if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    equal(barcode.imageDataURL(), null);
+                });
+
+                asyncTest("imageDataURL logs warning if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    stubMethod(kendo, "logToConsole", function(message) {
+                        ok(message.indexOf("Warning: Unable to generate image.") > -1);
+                        start();
+                    }, function() {
+                        barcode.imageDataURL();
+                    });
+                });
+
+                test("imageDataURL() does not replace view", function() {
+                    var oldView = barcode._view;
+                    barcode.imageDataURL();
+                    ok(oldView === barcode._view);
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.barcode</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container" style="width: 600px; height: 400px">
+        </div>
+    </body>
+</html>

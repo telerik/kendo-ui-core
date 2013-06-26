@@ -54,6 +54,7 @@ kendo_module({
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
+        dateComparer = dataviz.dateComparer,
         getElement = dataviz.getElement,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
@@ -92,7 +93,6 @@ kendo_module({
         CSS_PREFIX = "k-",
         DATABOUND = "dataBound",
         DATE = "date",
-        DATE_REGEXP = /^\/Date\((.*?)\)\/$/,
         DAYS = "days",
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
@@ -144,13 +144,15 @@ kendo_module({
         ROUNDED_GLASS = "roundedGlass",
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
+        SECONDS = "seconds",
         SELECT_START = "selectStart",
         SELECT = "select",
         SELECT_END = "selectEnd",
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
         STRING = "string",
-        TIME_PER_MINUTE = 60000,
+        TIME_PER_SECOND = 1000,
+        TIME_PER_MINUTE = 60 * TIME_PER_SECOND,
         TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
         TIME_PER_DAY = 24 * TIME_PER_HOUR,
         TIME_PER_WEEK = 7 * TIME_PER_DAY,
@@ -162,7 +164,8 @@ kendo_module({
             "weeks": TIME_PER_WEEK,
             "days": TIME_PER_DAY,
             "hours": TIME_PER_HOUR,
-            "minutes": TIME_PER_MINUTE
+            "minutes": TIME_PER_MINUTE,
+            "seconds": TIME_PER_SECOND
         },
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
@@ -186,10 +189,11 @@ kendo_module({
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd",
         BASE_UNITS = [
-            MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
+            SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ];
 
     var DateLabelFormats = {
+        seconds: "HH:mm:ss",
         minutes: "HH:mm",
         hours: "HH:mm",
         days: "M/d",
@@ -202,10 +206,7 @@ kendo_module({
     var Chart = Widget.extend({
         init: function(element, userOptions) {
             var chart = this,
-                options,
-                themeOptions,
-                themes = dataviz.ui.themes || {},
-                theme, themeName;
+                options;
 
             kendo.destroy(element);
 
@@ -216,19 +217,9 @@ kendo_module({
                 .addClass(CSS_PREFIX + options.name.toLowerCase())
                 .css("position", "relative");
 
-            // Used by the ThemeBuilder
             chart._originalOptions = deepExtend({}, options);
 
-            themeName = options.theme;
-            theme = themes[themeName] || themes[themeName.toLowerCase()];
-            themeOptions = themeName && theme ? theme.chart : {};
-
-            resolveAxisAliases(options);
-            chart._applyDefaults(options, themeOptions);
-
-            chart.options = deepExtend({}, themeOptions, options);
-
-            applySeriesColors(chart.options);
+            chart._initTheme(options);
 
             chart.bind(chart.events, chart.options);
 
@@ -237,6 +228,28 @@ kendo_module({
             chart._initDataSource(userOptions);
 
             kendo.notify(chart, dataviz.ui);
+        },
+
+        _initTheme: function(options) {
+            var chart = this,
+                themes = dataviz.ui.themes || {},
+                themeName = options.theme,
+                theme = themes[themeName] || themes[themeName.toLowerCase()],
+                themeOptions = themeName && theme ? theme.chart : {},
+                seriesCopies = [],
+                series = options.series || [],
+                i;
+
+            for (i = 0; i < series.length; i++) {
+                seriesCopies.push($.extend({}, series[i]));
+            }
+            options.series = seriesCopies;
+
+            resolveAxisAliases(options);
+            chart._applyDefaults(options, themeOptions);
+
+            chart.options = deepExtend({}, themeOptions, options);
+            applySeriesColors(chart.options);
         },
 
         _initDataSource: function(userOptions) {
@@ -313,8 +326,10 @@ kendo_module({
                 highlight: {
                     visible: true
                 },
-                groupNameTemplate: "#= group.value + (kendo.dataviz.defined(series.name) ? ': ' + series.name : '') #",
-                labels: {}
+                labels: {},
+                negativeValues: {
+                    visible: false
+                }
             },
             series: [],
             tooltip: {
@@ -361,7 +376,6 @@ kendo_module({
         _redraw: function() {
             var chart = this,
                 model = chart._getModel(),
-                viewType = dataviz.ui.defaultView(),
                 view;
 
             chart._destroyView();
@@ -369,8 +383,11 @@ kendo_module({
             chart._model = model;
             chart._plotArea = model._plotArea;
 
-            if (viewType) {
-                view = chart._view = viewType.fromModel(model);
+            view = chart._view =
+                dataviz.ViewFactory.current.create(model.options, chart.options.renderAs);
+
+            if (view) {
+                view.load(model);
                 chart._viewElement = chart._renderView(view);
                 chart._tooltip = chart._createTooltip();
                 chart._highlight = new Highlight(view, chart._viewElement);
@@ -403,13 +420,6 @@ kendo_module({
         _renderView: function() {
             var chart = this;
             return chart._view.renderTo(chart.element[0]);
-        },
-
-        svg: function() {
-            var model = this._getModel(),
-                view = dataviz.SVGView.fromModel(model);
-
-            return view.render();
         },
 
         _applyDefaults: function(options, themeOptions) {
@@ -908,8 +918,7 @@ kendo_module({
         _unsetActivePoint: function() {
             var chart = this,
                 tooltip = chart._tooltip,
-                highlight = chart._highlight,
-                noteHighlight = chart._noteHighlight;
+                highlight = chart._highlight;
 
             chart._activePoint = null;
 
@@ -919,10 +928,6 @@ kendo_module({
 
             if (highlight) {
                 highlight.hide();
-            }
-
-            if (noteHighlight) {
-                noteHighlight.hide();
             }
         },
 
@@ -1048,27 +1053,22 @@ kendo_module({
                 dataRow,
                 category,
                 uniqueCategories = {},
-                dateAxis = null;
+                getFn,
+                dateAxis;
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 s = series[seriesIx];
                 onAxis = s.categoryAxis === axis.name || (!s.categoryAxis && axisIx === 0);
+                data = s.data;
+                dataLength = data.length;
 
-                if (s.categoryField && onAxis) {
-                    data = s.data;
-                    dataLength = data.length;
+                if (s.categoryField && onAxis && dataLength > 0) {
+                    dateAxis = isDateAxis(axis, getField(s.categoryField, data[0]));
+                    getFn = dateAxis ? getDateField : getField;
 
                     for (dataIx = 0; dataIx < dataLength; dataIx++) {
                         dataRow = data[dataIx];
-                        category = getField(s.categoryField, dataRow);
-
-                        if (dateAxis === null) {
-                            dateAxis = isDateAxis(axis, category);
-                        }
-
-                        if (dateAxis) {
-                            category = toDate(category);
-                        }
+                        category = getFn(s.categoryField, dataRow);
 
                         if (dateAxis || !uniqueCategories[category]) {
                             items.push([category, dataRow]);
@@ -1170,6 +1170,24 @@ kendo_module({
             highlight.show(items);
         },
 
+        setOptions: function(options) {
+            var chart = this;
+
+            chart._originalOptions = deepExtend(chart._originalOptions, options);
+            chart.options = deepExtend({}, chart._originalOptions);
+            chart._sourceSeries = null;
+
+            Widget.fn.setOptions.call(chart, options);
+
+            chart._initTheme(chart.options);
+
+            if (options.dataSource) {
+                chart.setDataSource(
+                    DataSource.create(options.dataSource)
+                );
+            }
+        },
+
         destroy: function() {
             var chart = this,
                 dataSource = chart.dataSource;
@@ -1200,6 +1218,12 @@ kendo_module({
             }
 
             if (view) {
+                view.traverse(function(element) {
+                    var id = element.options.id;
+                    if (id) {
+                        pool.free(id);
+                    }
+                });
                 view.destroy();
             }
 
@@ -1209,6 +1233,7 @@ kendo_module({
                 });
             }
 
+
             if (selections) {
                 while (selections.length > 0) {
                     selections.shift().destroy();
@@ -1216,6 +1241,7 @@ kendo_module({
             }
         }
     });
+    deepExtend(Chart.fn, dataviz.ExportMixin);
 
     var PlotAreaFactory = Class.extend({
         init: function() {
@@ -1255,16 +1281,22 @@ kendo_module({
         init: function() {
             this._valueFields = {};
             this._otherFields = {};
+            this._nullValues = {};
         },
 
         register: function(seriesTypes, valueFields, otherFields) {
-            var i, type;
+            var binder = this,
+                i,
+                type;
+
+            valueFields = valueFields || [VALUE];
 
             for (i = 0; i < seriesTypes.length; i++) {
                 type = seriesTypes[i];
 
-                this._valueFields[type] = valueFields;
-                this._otherFields[type] = otherFields;
+                binder._valueFields[type] = valueFields;
+                binder._otherFields[type] = otherFields;
+                binder._nullValues[type] = binder._makeNullValue(valueFields);
             }
         },
 
@@ -1272,33 +1304,35 @@ kendo_module({
             return this._valueFields[series.type] || [VALUE];
         },
 
+        otherFields: function(series) {
+            return this._otherFields[series.type] || [VALUE];
+        },
+
         bindPoint: function(series, pointIx) {
             var binder = this,
                 data = series.data,
                 pointData = data[pointIx],
+                result = { value: pointData },
+                fields,
                 fieldData,
-                fields = {},
                 srcValueFields,
                 srcPointFields,
                 valueFields = binder.valueFields(series),
                 otherFields = binder._otherFields[series.type],
-                value,
-                result = { value: pointData };
+                value;
 
-            if (defined(pointData)) {
-                if (isArray(pointData)) {
-                    fieldData = pointData.slice(valueFields.length);
-                    value = binder._bindFromArray(pointData, valueFields);
-                    fields = binder._bindFromArray(fieldData, otherFields);
-                } else if (typeof pointData === OBJECT) {
-                    srcValueFields = binder._mapSeriesFields(series, valueFields);
-                    srcPointFields = binder._mapSeriesFields(series, otherFields);
+            if (pointData === null || !defined(pointData)) {
+                value = binder._nullValues[series.type];
+            } else if (isArray(pointData)) {
+                fieldData = pointData.slice(valueFields.length);
+                value = binder._bindFromArray(pointData, valueFields);
+                fields = binder._bindFromArray(fieldData, otherFields);
+            } else if (typeof pointData === OBJECT) {
+                srcValueFields = binder._mapSeriesFieldsByIndex(series, valueFields);
+                srcPointFields = binder._mapSeriesFieldsByIndex(series, otherFields);
 
-                    value = binder._bindFromObject(pointData, valueFields, srcValueFields);
-                    fields = binder._bindFromObject(pointData, otherFields, srcPointFields);
-                }
-            } else {
-                value = binder._bindFromObject({}, valueFields);
+                value = binder._bindFromObject(pointData, valueFields, srcValueFields);
+                fields = binder._bindFromObject(pointData, otherFields, srcPointFields);
             }
 
             if (defined(value)) {
@@ -1309,9 +1343,23 @@ kendo_module({
                 result.value = value;
             }
 
-            result.fields = fields;
+            result.fields = fields || {};
 
             return result;
+        },
+
+        _makeNullValue: function(fields) {
+            var value = {},
+                i,
+                length = fields.length,
+                fieldName;
+
+            for (i = 0; i < length; i++) {
+                fieldName = fields[i];
+                value[fieldName] = null;
+            }
+
+            return value;
         },
 
         _bindFromArray: function(array, fields) {
@@ -1351,12 +1399,9 @@ kendo_module({
             return value;
         },
 
-        _mapSeriesFields: function(series, fields) {
-            var i,
-                length,
-                fieldName,
-                sourceFields,
-                sourceFieldName;
+        _mapSeriesFieldsByIndex: function(series, fields) {
+            var i, length, fieldName,
+                sourceFields, sourceFieldName;
 
             if (fields) {
                 length = fields.length;
@@ -1367,6 +1412,25 @@ kendo_module({
                     sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
 
                     sourceFields.push(series[sourceFieldName] || fieldName);
+                }
+            }
+
+            return sourceFields;
+        },
+
+        _mapSeriesFields: function(series, fields) {
+            var i, length, fieldName,
+                sourceFields, sourceFieldName;
+
+            if (fields) {
+                length = fields.length;
+                sourceFields = {};
+
+                for (i = 0; i < length; i++) {
+                    fieldName = fields[i];
+                    sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
+
+                    sourceFields[fieldName] = series[sourceFieldName] || fieldName;
                 }
             }
 
@@ -1883,7 +1947,7 @@ kendo_module({
             // (one can never be too sure)
             to = math.max(from, to);
 
-            p1 = from === 0 ? lineStart : majorTicks[from];
+            p1 = from === 0 ? lineStart : (majorTicks[from] || lineEnd);
             p2 = justified ? p1 : majorTicks[to];
             slotSize = to - from;
 
@@ -2056,6 +2120,7 @@ kendo_module({
                 dateFormats: DateLabelFormats
             },
             autoBaseUnitSteps: {
+                seconds: [1, 2, 5, 15, 30],
                 minutes: [1, 2, 5, 15, 30],
                 hours: [1, 2, 3],
                 days: [1, 2, 3],
@@ -2064,6 +2129,18 @@ kendo_module({
                 years: [1, 2, 3, 5, 10, 25, 50]
             },
             maxDateGroups: 10
+        },
+
+        shouldRenderNote: function(value) {
+            var axis = this,
+                range = axis.range(),
+                categories = axis.options.categories || [];
+
+            return dateComparer(value, range.min) >= 0 && dateComparer(value, range.max) <= 0 && categories.length;
+        },
+
+        parseNoteValue: function(value) {
+            return toDate(value);
         },
 
         translateRange: function(delta) {
@@ -2134,8 +2211,10 @@ kendo_module({
                             unit = DAYS;
                         } else if (minDiff >= TIME_PER_HOUR) {
                             unit = HOURS;
-                        } else {
+                        } else if (minDiff >= TIME_PER_MINUTE) {
                             unit = MINUTES;
+                        } else {
+                            unit = SECONDS;
                         }
                     }
                 }
@@ -2681,7 +2760,9 @@ kendo_module({
                 type: BAR
             },
             opacity: 1,
-            note: {}
+            notes: {
+                label: {}
+            }
         },
 
         render: function() {
@@ -2689,7 +2770,6 @@ kendo_module({
                 value = bar.value,
                 options = bar.options,
                 labels = options.labels,
-                noteOptions = options.note,
                 labelText = value,
                 labelTemplate;
 
@@ -2723,8 +2803,29 @@ kendo_module({
                 );
             }
 
-            if (noteOptions.visible && defined(noteOptions.label.text)) {
-                bar.note = new Note(noteOptions);
+            bar.creteNote();
+        },
+
+        creteNote: function() {
+            var bar = this,
+                options = bar.options.notes,
+                text = options.label.text,
+                noteTemplate;
+
+            if (options.visible && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: bar.dataItem,
+                        category: bar.category,
+                        value: bar.value,
+                        series: bar.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                bar.note = new Note(deepExtend({}, options, { label: { text: text }}));
                 bar.append(bar.note);
             }
         },
@@ -2925,7 +3026,7 @@ kendo_module({
                 axisName = series.axis,
                 axisRange = chart.valueAxisRanges[axisName];
 
-            if (defined(value) && !isNaN(value)) {
+            if (isNumber(value)) {
                 axisRange = chart.valueAxisRanges[axisName] =
                     axisRange || { min: MAX_VALUE, max: MIN_VALUE };
 
@@ -3090,6 +3191,10 @@ kendo_module({
 
         pointValue: function(data) {
             return data.value;
+        },
+
+        shouldRenderNote: function() {
+            return this.options.categories.length;
         }
     });
 
@@ -3149,7 +3254,7 @@ kendo_module({
                 isStacked: isStacked
             }, series, {
                 color: data.fields.color || undefined,
-                note: { label: { text: data.fields.noteText } }
+                notes: { label: { text: data.fields.noteText } }
             });
 
             if (value < 0 && pointOptions.negativeColor) {
@@ -3462,7 +3567,7 @@ kendo_module({
                 categoryIx: categoryIx,
                 invertAxes: options.invertAxes
             }, series, {
-                note: { label: { text: data.fields.noteText } }
+                notes: { label: { text: data.fields.noteText } }
             });
 
             chart.evalPointOptions(
@@ -3550,8 +3655,7 @@ kendo_module({
 
         render: function() {
             var bullet = this,
-                options = bullet.options,
-                noteOptions = options.note;
+                options = bullet.options;
 
             bullet.target = new Target({
                 id: bullet.options.id,
@@ -3566,8 +3670,29 @@ kendo_module({
 
             bullet.append(bullet.target);
 
-            if (noteOptions.visible && defined(noteOptions.label.text)) {
-                bullet.note = new Note(noteOptions);
+            bullet.creteNote();
+        },
+
+        creteNote: function() {
+            var bullet = this,
+                options = bullet.options.notes,
+                text = options.label.text,
+                noteTemplate;
+
+            if (options.visible && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: bullet.dataItem,
+                        category: bullet.category,
+                        value: bullet.value,
+                        series: bullet.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                bullet.note = new Note(deepExtend({}, options, { label: { text: text }}));
                 bullet.append(bullet.note);
             }
         },
@@ -3724,8 +3849,7 @@ kendo_module({
                     delay: INITIAL_ANIMATION_DURATION
                 }
             },
-            note: {
-                visible: true,
+            notes: {
                 label: {}
             }
         },
@@ -3737,7 +3861,6 @@ kendo_module({
                 labels = options.labels,
                 markerBackground = markers.background,
                 markerBorder = deepExtend({}, markers.border),
-                noteOptions = options.note,
                 labelText = point.value;
 
             if (point._rendered) {
@@ -3793,8 +3916,29 @@ kendo_module({
                 point.append(point.label);
             }
 
-            if (noteOptions.visible && defined(noteOptions.label.text)) {
-                point.note = new Note(noteOptions);
+            point.creteNote();
+        },
+
+        creteNote: function() {
+            var point = this,
+                options = point.options.notes,
+                text = options.label.text,
+                noteTemplate;
+
+            if (options.visible && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: point.dataItem,
+                        category: point.category,
+                        value: point.value,
+                        series: point.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                point.note = new Note(deepExtend({}, options, { label: { text: text }}));
                 point.append(point.note);
             }
         },
@@ -3879,7 +4023,7 @@ kendo_module({
                 markerBox = point.marker.box,
                 aboveAxis = point.options.aboveAxis;
 
-            return new Point2D(
+            return Point2D(
                 markerBox.x2 + TOOLTIP_OFFSET,
                 aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2
             );
@@ -3979,7 +4123,7 @@ kendo_module({
             for (i = 0; i < length; i++) {
                 pointCenter = linePoints[i].markerBox().center();
 
-                points.push(new Point2D(pointCenter.x, pointCenter.y));
+                points.push(Point2D(pointCenter.x, pointCenter.y));
             }
 
             return points;
@@ -4075,7 +4219,7 @@ kendo_module({
             var missingValues = series.missingValues,
                 assumeZero = !missingValues && this.options.isStacked;
 
-            return assumeZero ? ZERO : missingValues;
+            return assumeZero ? ZERO : missingValues || INTERPOLATE;
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
@@ -4159,7 +4303,7 @@ kendo_module({
                 vertical: !options.invertAxes
             }, series, {
                 color: fields.color,
-                note: { label: { text: data.fields.noteText } }
+                notes: { label: { text: data.fields.noteText } }
             });
 
             chart.evalPointOptions(
@@ -4449,7 +4593,7 @@ kendo_module({
                 }
             }, series, {
                 color: fields.color,
-                note: { label: { text: fields.noteText } }
+                notes: { label: { text: fields.noteText } }
             });
 
             chart.evalPointOptions(pointOptions, value, fields);
@@ -4650,7 +4794,7 @@ kendo_module({
                     opacity: series.opacity,
                     animation: animationOptions
                 },
-                note: { label: { text: fields.noteText } }
+                notes: { label: { text: fields.noteText } }
             });
 
             chart.evalPointOptions(pointOptions, value, fields);
@@ -4772,7 +4916,7 @@ kendo_module({
                     opacity: 1
                 }
             },
-            note: {
+            notes: {
                 visible: true,
                 label: {}
             }
@@ -4815,10 +4959,24 @@ kendo_module({
 
         createNote: function() {
             var point = this,
-                noteOptions = point.options.note;
+                options = point.options.notes,
+                text = options.label.text,
+                noteTemplate;
 
-            if (noteOptions.visible && defined(noteOptions.label.text)) {
-                point.note = new Note(noteOptions);
+            if (options.visible && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: point.dataItem,
+                        category: point.category,
+                        value: point.value,
+                        series: point.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                point.note = new Note(deepExtend({}, options, { label: { text: text }}));
                 point.append(point.note);
             }
         },
@@ -4955,7 +5113,7 @@ kendo_module({
                 children = chart.children,
                 pointColor = data.fields.color || series.color,
                 valueParts = this.splitValue(value),
-                hasValue = validNumbers(valueParts),
+                hasValue = areNumbers(valueParts),
                 categoryPoints = chart.categoryPoints[categoryIx],
                 point,
                 cluster,
@@ -4968,7 +5126,7 @@ kendo_module({
             if (hasValue) {
                 if (series.type == CANDLESTICK) {
                     if (value.open > value.close) {
-                        pointColor = data.fields.downColor || series.downColor;
+                        pointColor = data.fields.downColor || series.downColor || series.color;
                     }
                 }
 
@@ -5013,7 +5171,7 @@ kendo_module({
             var chart = this,
                 value = data.value,
                 pointOptions = deepExtend({}, series, {
-                    note: { label: { text: data.fields.noteText } }
+                    notes: { label: { text: data.fields.noteText } }
                 }),
                 pointType = chart.pointType();
 
@@ -5152,9 +5310,11 @@ kendo_module({
 
             segment.value = value;
             segment.sector = sector;
-            segment.enableDiscovery();
 
             ChartElement.fn.init.call(segment, options);
+
+            segment.options.id = uniqueId();
+            segment.enableDiscovery();
         },
 
         options: {
@@ -5488,7 +5648,6 @@ kendo_module({
             chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new PieSegment(value, sector, segmentOptions);
-            segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);
             chart.points.push(segment);
@@ -5542,6 +5701,10 @@ kendo_module({
             for (i = 0; i < length; i++) {
                 pointData = SeriesBinder.current.bindPoint(series, i);
                 value = pointData.value;
+                if (typeof value === "string") {
+                    value = parseFloat(value);
+                }
+
                 if (value && pointData.fields.visible !== false) {
                     sum += value;
                 }
@@ -5939,7 +6102,6 @@ kendo_module({
             chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new DonutSegment(value, sector, segmentOptions);
-            segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);
             chart.points.push(segment);
@@ -6151,11 +6313,16 @@ kendo_module({
                 view = pane.view,
                 element = getElement(pane.options.id);
 
-            if (view && element) {
-                element.parentNode.replaceChild(
-                    view.renderElement(pane.getViewElements(view)[0]),
-                    element
-                );
+            if (view) {
+                var content = pane.getViewElements(view)[0];
+                if (element) {
+                    element.parentNode.replaceChild(
+                        view.renderElement(content),
+                        element
+                    );
+                } else if (view.replace) {
+                    view.replace(content, pane.box);
+                }
             }
         }
     });
@@ -7047,26 +7214,29 @@ kendo_module({
 
         aggregateSeries: function(series, categoryAxis) {
             var axisOptions = categoryAxis.options,
+                dateAxis = equalsIgnoreCase(categoryAxis.options.type, DATE),
                 categories = axisOptions.categories,
                 srcCategories = axisOptions.srcCategories || categories,
                 srcData = series.data,
                 srcValues = [],
                 srcDataItems = [],
                 range = categoryAxis.range(),
-                i,
-                category,
-                categoryIx,
-                data,
-                pointData,
-                result = deepExtend({}, series);
+                i, category, categoryIx,
+                data, pointData,
+                result = deepExtend({}, series),
+                getFn = getField;
 
             result.data = data = [];
 
+            if (dateAxis) {
+                getFn = getDateField;
+            }
+
             for (i = 0; i < srcData.length; i++) {
                 if (series.categoryField) {
-                   category = getField(series.categoryField, srcData[i]);
+                    category = getFn(series.categoryField, srcData[i]);
                 } else {
-                   category = srcCategories[i];
+                    category = srcCategories[i];
                 }
 
                 categoryIx = categoryAxis.categoryIndex(category, range);
@@ -7074,7 +7244,7 @@ kendo_module({
                     pointData = SeriesBinder.current.bindPoint(series, i);
 
                     srcValues[categoryIx] = srcValues[categoryIx] || [];
-                    srcValues[categoryIx].push(pointData.value);
+                    srcValues[categoryIx].push(pointData);
 
                     srcDataItems[categoryIx] = srcDataItems[categoryIx] || [];
                     srcDataItems[categoryIx].push(srcData[i]);
@@ -8527,6 +8697,10 @@ kendo_module({
             }
 
             return result;
+        },
+
+        first: function(values) {
+            return values[0];
         }
     };
 
@@ -9020,52 +9194,75 @@ kendo_module({
         }
     });
 
-    function calculateAggregates(values, series, dataItems, group) {
+    function execSimple(data, aggregate, series, dataItems, group) {
+        var result,
+            aggregateType = typeof aggregate;
+
+        if (aggregateType === STRING) {
+            result = Aggregates[aggregate](data);
+        } else if (aggregateType === "function") {
+            result = aggregate(data, series, dataItems, group);
+        } else {
+            result = Aggregates.max(data);
+        }
+
+        return result;
+    }
+
+    function execComposite(data, aggregate, series, dataItems, group) {
+        var valueFields = SeriesBinder.current.valueFields(series),
+            otherFields = SeriesBinder.current.otherFields(series),
+            count = data.length,
+            fields = [], result = {},
+            i, j, item, originalField, field, originalFields, value, values;
+
+        append(fields, valueFields);
+        append(fields, otherFields);
+        originalFields = SeriesBinder.current._mapSeriesFields(series, fields);
+
+        for (i = 0; i < count; i++) {
+            item = data[i];
+            for (j = 0; j < fields.length; j++) {
+                field = fields[j];
+                if (item !== null && defined(item)) {
+                    value = defined(item.value) && defined(item.value[field]) ? item.value[field] : item.fields[field];
+                    if (typeof item.value === "number" && field === "value") {
+                        value = item.value;
+                    }
+                    originalField = originalFields[field];
+                    if (defined(value)) {
+                        if (!defined(result[originalField])) {
+                            result[originalField] = [];
+                        }
+                        result[originalField].push(value);
+                    }
+                }
+            }
+        }
+
+        for (j = 0; j < fields.length; j++) {
+            field = fields[j];
+            originalField = originalFields[field];
+            values = result[originalField];
+            if (defined(values) && defined(aggregate[field])) {
+                result[originalField] = execSimple(values, aggregate[field], series, dataItems, group);
+            }
+        }
+
+        return result;
+    }
+
+    function calculateAggregates(data, series, dataItems, group) {
         var aggregate = series.aggregate,
             result;
 
-        function execSimple(values, aggregate, series) {
-            var result,
-                aggregateType = typeof aggregate;
-
-            if (aggregateType === STRING) {
-                result = Aggregates[aggregate](values);
-            } else if (aggregateType === "function") {
-                result = aggregate(values, series, dataItems, group);
-            } else {
-                result = Aggregates.max(values);
-            }
-
-            return result;
+        if (typeof aggregate === STRING || typeof aggregate === "function") {
+            aggregate = { value: aggregate };
+        } else if (!defined(aggregate)) {
+            aggregate = { value: "max" };
         }
 
-        function execComposite(values, aggregate, series) {
-            var valueFields = SeriesBinder.current.valueFields(series),
-                valueFieldsCount = valueFields.length,
-                count = values.length,
-                i,
-                j,
-                field,
-                result = [],
-                data = [];
-
-            for (i = 0; i < valueFieldsCount; i++) {
-                field = valueFields[i];
-                for (j = 0; j < count; j++) {
-                    data.push(values[j][field]);
-                }
-                result.push(execSimple(data, aggregate[field], series));
-                data = [];
-            }
-
-            return result;
-        }
-
-        if (typeof aggregate === OBJECT) {
-            result = execComposite(values, aggregate, series);
-        } else {
-            result = execSimple(values, aggregate, series);
-        }
+        result = execComposite(data, aggregate, series, dataItems, group);
 
         return result;
     }
@@ -9305,16 +9502,33 @@ kendo_module({
         return get(row);
     }
 
+    function getDateField(field, row) {
+        if (row === null) {
+            return row;
+        }
+
+        var key = "_date_" + field,
+            value = row[key];
+
+        if (!value) {
+            value = toDate(getter(field, true)(row));
+            row[key] = value;
+        }
+
+        return value;
+    }
+
     function toDate(value) {
         var result,
-            aspDate,
             i;
 
         if (value instanceof Date) {
             result = value;
         } else if (typeof value === STRING) {
-            aspDate = DATE_REGEXP.exec(value);
-            result = new Date(aspDate ? parseInt(aspDate[1], 10) : value);
+            result = new Date(value);
+            if (isNaN(result.getTime())) {
+                result = kendo.parseDate(value);
+            }
         } else if (value) {
             if (isArray(value)) {
                 result = [];
@@ -9359,7 +9573,11 @@ kendo_module({
             } else if (unit === MINUTES) {
                 result = new Date(date.getTime() + value * TIME_PER_MINUTE);
                 result.setSeconds(0);
+            } else if (unit === SECONDS) {
+                result = new Date(date.getTime() + value * TIME_PER_SECOND);
             }
+
+            result.setMilliseconds(0);
         }
 
         return result;
@@ -9369,15 +9587,17 @@ kendo_module({
         var day = date.getDay(),
             daysToSubtract = 0;
 
-        weekStartDay = weekStartDay || 0;
-        while (day !== weekStartDay) {
-            if (day === 0) {
-                day = 6;
-            } else {
-                day--;
-            }
+        if (!isNaN(day)) {
+            weekStartDay = weekStartDay || 0;
+            while (day !== weekStartDay) {
+                if (day === 0) {
+                    day = 6;
+                } else {
+                    day--;
+                }
 
-            daysToSubtract++;
+                daysToSubtract++;
+            }
         }
 
         return addTicks(date, -daysToSubtract * TIME_PER_DAY);
@@ -9525,21 +9745,21 @@ kendo_module({
         }
     }
 
-    function validNumbers(values) {
-        var valid = true,
-            i,
-            val,
+    function areNumbers(values) {
+        var i,
             length = values.length;
 
         for (i = 0; i < length; i++) {
-            val = values[i];
-            if (typeof val !== "number" || isNaN(val)) {
-                valid = false;
-                break;
+            if (!isNumber(values[i])) {
+                return false;
             }
         }
 
-        return valid;
+        return true;
+    }
+
+    function isNumber(val) {
+        return typeof val === "number" && !isNaN(val);
     }
 
     function axisRanges(axes) {
@@ -9609,12 +9829,28 @@ kendo_module({
     function groupSeries(series, data) {
         var result = [],
             nameTemplate,
+            legacyTemplate = series.groupNameTemplate,
             groupIx,
             dataLength = data.length,
             seriesClone;
 
-        if (series.groupNameTemplate) {
-            nameTemplate = template(series.groupNameTemplate);
+        if (defined(legacyTemplate)) {
+            kendo.logToConsole(
+                "'groupNameTemplate' is obsolete and will be removed in future versions. " +
+                "Specify the group name template as 'series.name'"
+            );
+
+            if (legacyTemplate) {
+                nameTemplate = template(legacyTemplate);
+            }
+        } else {
+            nameTemplate = template(series.name || "");
+            if (nameTemplate._slotCount === 0) {
+                nameTemplate = template(defined(series.name) ?
+                    "#= group.value #: #= series.name #" :
+                    "#= group.value #"
+                );
+            }
         }
 
         for (groupIx = 0; groupIx < dataLength; groupIx++) {
@@ -9660,14 +9896,6 @@ kendo_module({
          } else {
              return $.inArray(item, arr);
          }
-    }
-
-    function dateComparer(a, b) {
-         if (a && b) {
-             return a.getTime() - b.getTime();
-         }
-
-         return 0;
     }
 
     function sortDates(dates, comparer) {
@@ -9823,12 +10051,13 @@ kendo_module({
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
+        areNumbers: areNumbers,
         axisGroupBox: axisGroupBox,
-        validNumbers: validNumbers,
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
         duration: duration,
         indexOf: indexOf,
+        isNumber: isNumber,
         floorDate: floorDate,
         filterSeriesByType: filterSeriesByType,
         limitValue: limitValue,
@@ -9837,6 +10066,7 @@ kendo_module({
         singleItemOrArray: singleItemOrArray,
         sortDates: sortDates,
         sparseArrayLimits: sparseArrayLimits,
+        startOfWeek: startOfWeek,
         transpose: transpose,
         toDate: toDate,
         toTime: toTime,

@@ -6,6 +6,10 @@ class DropDownList extends \Kendo\UI\Widget {
     protected function name() {
         return 'DropDownList';
     }
+    
+    protected function createElement() {
+        return new \Kendo\Html\Element('input', true);
+    }    
 //>> Properties
 
     /**

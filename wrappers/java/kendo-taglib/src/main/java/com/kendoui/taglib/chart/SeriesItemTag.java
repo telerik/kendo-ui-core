@@ -81,6 +81,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("negativeValues", value);
     }
 
+    public void setNotes(com.kendoui.taglib.chart.SeriesItemNotesTag value) {
+        setProperty("notes", value);
+    }
+
     public void setOverlay(com.kendoui.taglib.chart.SeriesItemOverlayTag value) {
         setProperty("overlay", value);
     }
@@ -299,6 +303,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setNegativeColor(String value) {
         setProperty("negativeColor", value);
+    }
+
+    public String getNoteTextField() {
+        return (String)getProperty("noteTextField");
+    }
+
+    public void setNoteTextField(String value) {
+        setProperty("noteTextField", value);
     }
 
     public float getOpacity() {

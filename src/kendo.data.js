@@ -452,11 +452,9 @@ kendo_module({
             if (current !== value) {
 
                 if (!that.trigger("set", { field: field, value: value })) {
-
-                    if (!that._set(field, that.wrap(value, field, function() { return that; })) || field.indexOf("(") >= 0) {
+                    if (!that._set(field, that.wrap(value, field, function() { return that; })) || field.indexOf("(") >= 0 || field.indexOf("[") >= 0) {
                         that.trigger(CHANGE, { field: field });
                     }
-
                 }
             }
         },
@@ -2414,8 +2412,8 @@ kendo_module({
 
             that._addRange(that._data);
 
-            that._dequeueRequest();
             that._process(that._data);
+            that._dequeueRequest();
         },
 
         _addRange: function(data) {
@@ -2532,7 +2530,13 @@ kendo_module({
                 wrapGroupItems(data, model);
             }
 
-            return data.bind(CHANGE, proxy(that._change, that));
+            if (that._changeHandler && that._data && that._data instanceof ObservableArray) {
+                that._data.unbind(CHANGE, that._changeHandler);
+            } else {
+                that._changeHandler = proxy(that._change, that);
+            }
+
+            return data.bind(CHANGE, that._changeHandler);
         },
 
         _change: function(e) {
@@ -2854,7 +2858,12 @@ kendo_module({
 
         lastRange: function() {
             var ranges = this._ranges;
-            return ranges[ranges.length - 1];
+            return ranges[ranges.length - 1] || { start: 0, end: 0, data: [] };
+        },
+
+        firstItemUid: function() {
+            var ranges = this._ranges;
+            return ranges.length && ranges[0].data.length && ranges[0].data[0].uid;
         },
 
         range: function(skip, take) {
@@ -3425,7 +3434,7 @@ kendo_module({
                 dataSource = this,
                 result;
 
-            if (parentNode) {
+            if (parentNode && parentNode._initChildren) {
                 dataSource = parentNode.children;
             }
 
@@ -3604,6 +3613,11 @@ kendo_module({
         at: function(index)  {
             var pageSize = this.pageSize;
 
+            if (index >= this.total()) {
+                this.trigger("endreached", {index: index });
+                return;
+            }
+
             // out of range request
             if (index < this.dataOffset || index > this.skip + pageSize) {
                 var offset = Math.floor(index / pageSize) * pageSize;
@@ -3717,7 +3731,7 @@ kendo_module({
 
         _change: function() {
             var dataSource = this.dataSource,
-                firstItemUid = dataSource._ranges[0].data[0].uid;
+                firstItemUid = dataSource.firstItemUid();
 
             this.length = dataSource.lastRange().end;
 
@@ -3739,9 +3753,7 @@ kendo_module({
         _syncWithDataSource: function() {
             var dataSource = this.dataSource;
 
-            if (dataSource._ranges.length) {
-                this._firstItemUid = dataSource._ranges[0].data[0].uid;
-            }
+            this._firstItemUid = dataSource.firstItemUid();
             this.dataOffset = this.offset = dataSource.skip();
             this.pageSize = dataSource.pageSize();
         },
@@ -3765,6 +3777,72 @@ kendo_module({
         }
     });
 
+    var BatchBuffer = kendo.Observable.extend({
+        init: function(dataSource, batchSize) {
+            var batchBuffer = this;
+
+            kendo.Observable.fn.init.call(batchBuffer);
+
+            this.dataSource = dataSource;
+            this.batchSize = batchSize;
+            this._total = 0;
+
+            this.buffer = new Buffer(dataSource, batchSize * 3);
+
+            this.buffer.bind({
+                "endreached": function (e) {
+                    batchBuffer.trigger("endreached", { index: e.index });
+                },
+                "prefetching": function (e) {
+                    batchBuffer.trigger("prefetching", { skip: e.skip, take: e.take });
+                },
+                "prefetched": function (e) {
+                    batchBuffer.trigger("prefetched", { skip: e.skip, take: e.take });
+                },
+                "reset": function () {
+                    batchBuffer._total = 0;
+                    batchBuffer.trigger("reset");
+                },
+                "resize": function () {
+                    batchBuffer._total = this.length / batchBuffer.batchSize;
+                    batchBuffer.trigger("resize", { total: batchBuffer.total(), offset: this.offset });
+                }
+            });
+        },
+
+        syncDataSource: function() {
+            this.buffer.syncDataSource();
+        },
+
+        at: function(index) {
+            var buffer = this.buffer,
+                skip = index * this.batchSize,
+                take = this.batchSize,
+                view = [],
+                item;
+
+            if (buffer.offset > skip) {
+                buffer.at(buffer.offset - 1);
+            }
+
+            for (var i = 0; i < take; i++) {
+                item = buffer.at(skip + i);
+
+                if (item === undefined) {
+                    return;
+                }
+
+                view.push(item);
+            }
+
+            return view;
+        },
+
+        total: function() {
+            return this._total;
+        }
+    });
+
     extend(true, kendo.data, {
         readers: {
             json: DataReader
@@ -3780,6 +3858,7 @@ kendo_module({
         Cache: Cache,
         DataReader: DataReader,
         Model: Model,
-        Buffer: Buffer
+        Buffer: Buffer,
+        BatchBuffer: BatchBuffer
     });
 })(window.kendo.jQuery);

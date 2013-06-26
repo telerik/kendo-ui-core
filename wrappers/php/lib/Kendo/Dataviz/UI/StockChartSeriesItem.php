@@ -51,6 +51,15 @@ class StockChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
+    * The data item field which contains the category name or date.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
+    */
+    public function categoryField($value) {
+        return $this->setProperty('categoryField', $value);
+    }
+
+    /**
     * The data field containing the current value.** Available for bullet and verticalBullet series. **
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
@@ -66,28 +75,6 @@ class StockChartSeriesItem extends \Kendo\SerializableObject {
     */
     public function targetField($value) {
         return $this->setProperty('targetField', $value);
-    }
-
-    /**
-    * Sets the groupNameTemplate option of the StockChartSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
-    * @param string $value The id of the element which represents the kendo template.
-    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
-    */
-    public function groupNameTemplateId($value) {
-        $value = new \Kendo\Template($value);
-
-        return $this->setProperty('groupNameTemplate', $value);
-    }
-
-    /**
-    * Sets the groupNameTemplate option of the StockChartSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
-    * @param string $value The template content.
-    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
-    */
-    public function groupNameTemplate($value) {
-        return $this->setProperty('groupNameTemplate', $value);
     }
 
     /**
@@ -227,7 +214,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * Configures the behavior for handling missing values.** Applicable for area and line series. **
+    * The behavior for handling missing values. The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem
     */

@@ -1,7 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring <see cref="ChartLine"/>.
+    /// Defines the fluent interface for configuring <see cref="ChartAxisLabelsDateFormatsBuilder"/>.
     /// </summary>
     public class ChartAxisLabelsDateFormatsBuilder
     {
@@ -14,6 +14,56 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartAxisLabelsDateFormatsBuilder(ChartAxisLabelsDateFormats dateFormats)
         {
             this.dateFormats = dateFormats;
+        }
+
+        /// <summary>
+        /// Sets the date format when the base date unit is <see cref="ChartAxisBaseUnit.Seconds"/>
+        /// </summary>
+        /// <param name="format">The date format.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .CategoryAxis(axis => axis
+        ///               .Date()
+        ///               .Labels(labels => labels
+        ///                   .DateFormats(formats => formats
+        ///                       .Seconds("HH:mm:ss")
+        ///                   )
+        ///               )
+        ///            );
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartAxisLabelsDateFormatsBuilder Seconds(string format)
+        {
+            dateFormats.Seconds = format;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the date format when the base date unit is <see cref="ChartAxisBaseUnit.Minutes"/>
+        /// </summary>
+        /// <param name="format">The date format.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .CategoryAxis(axis => axis
+        ///               .Date()
+        ///               .Labels(labels => labels
+        ///                   .DateFormats(formats => formats
+        ///                       .Minutes("ss")
+        ///                   )
+        ///               )
+        ///            );
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartAxisLabelsDateFormatsBuilder Minutes(string format)
+        {
+            dateFormats.Minutes = format;
+            return this;
         }
 
         /// <summary>
@@ -63,31 +113,6 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartAxisLabelsDateFormatsBuilder Days(string format)
         {
             dateFormats.Days = format;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the date format when the base date unit is <see cref="ChartAxisBaseUnit.Minutes"/>
-        /// </summary>
-        /// <param name="format">The date format.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .CategoryAxis(axis => axis
-        ///               .Date()
-        ///               .Labels(labels => labels
-        ///                   .DateFormats(formats => formats
-        ///                       .Minutes("ss")
-        ///                   )
-        ///               )
-        ///            );
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public ChartAxisLabelsDateFormatsBuilder Minutes(string format)
-        {
-            dateFormats.Minutes = format;
             return this;
         }
 

@@ -13,6 +13,19 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_seconds()
+        {
+            baseUnitSteps.Seconds = new int[] { 1, 2 };
+            GetJson()["seconds"].ShouldEqual(new int[] { 1, 2 });
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_seconds()
+        {
+            GetJson().ContainsKey("seconds").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Serializes_minutes()
         {
             baseUnitSteps.Minutes = new int[] { 1, 2 };

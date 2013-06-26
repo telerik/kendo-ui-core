@@ -32,13 +32,14 @@ namespace Kendo.Models
             "kendo.list.js",
             "kendo.autocomplete.js",
             "kendo.calendar.js",
-            "kendo.colorpicker.js",            
+            "kendo.colorpicker.js",
             "kendo.dataviz.core.js",
             "kendo.dataviz.chart.js",
             "kendo.dataviz.chart.polar.js",
             "kendo.dataviz.themes.js",
             "kendo.dataviz.svg.js",
             "kendo.dataviz.vml.js",
+            "kendo.dataviz.canvas.js",
             "kendo.dataviz.barcode.js",
             "kendo.dataviz.gauge.js",
             "kendo.dataviz.barcode.js",
@@ -75,6 +76,7 @@ namespace Kendo.Models
             "kendo.imagebrowser.js",
             "kendo.editor.js",
             "kendo.multiselect.js",
+            "kendo.timezones.js",
             "kendo.scheduler.view.js",
             "kendo.scheduler.dayview.js",
             "kendo.scheduler.monthview.js",
@@ -83,7 +85,8 @@ namespace Kendo.Models
             "kendo.scheduler.js"
 #else
             jQueryPath,
-            "kendo.all.min.js"
+            "kendo.all.min.js",
+            "kendo.timezones.min.js"
 #endif
         };
 

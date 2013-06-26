@@ -3,16 +3,14 @@
     // Imports ================================================================
     var kendo = window.kendo,
         Class = kendo.Class,
-        Editor = kendo.ui.editor,
-        EditorUtils = Editor.EditorUtils,
+        editorNS = kendo.ui.editor,
+        EditorUtils = editorNS.EditorUtils,
         registerTool = EditorUtils.registerTool,
-        dom = Editor.Dom,
-        RangeUtils = Editor.RangeUtils,
-        selectRange = RangeUtils.selectRange,
-        Tool = Editor.Tool,
-        ToolTemplate = Editor.ToolTemplate,
-        RestorePoint = Editor.RestorePoint,
-        Marker = Editor.Marker,
+        dom = editorNS.Dom,
+        Tool = editorNS.Tool,
+        ToolTemplate = editorNS.ToolTemplate,
+        RestorePoint = editorNS.RestorePoint,
+        Marker = editorNS.Marker,
         extend = $.extend;
 
 var Command = Class.extend({
@@ -34,13 +32,13 @@ var Command = Class.extend({
 
     releaseRange: function (range) {
         this.marker.remove(range);
-        selectRange(range);
+        this.editor.selectRange(range);
     },
 
     undo: function () {
         var point = this.restorePoint;
         point.restoreHtml();
-        selectRange(point.toRange());
+        this.editor.selectRange(point.toRange());
     },
 
     redo: function () {
@@ -73,12 +71,12 @@ var GenericCommand = Class.extend({
 
     redo: function () {
         this.body.innerHTML = this.endRestorePoint.html;
-        selectRange(this.endRestorePoint.toRange());
+        this.editor.selectRange(this.endRestorePoint.toRange());
     },
 
     undo: function () {
         this.body.innerHTML = this.startRestorePoint.html;
-        selectRange(this.startRestorePoint.toRange());
+        this.editor.selectRange(this.startRestorePoint.toRange());
     }
 });
 
@@ -91,8 +89,10 @@ var InsertHtmlCommand = Command.extend({
 
     exec: function() {
         var editor = this.editor;
-        var range = editor.getRange();
+        var range = this.options.range;
         var startRestorePoint = new RestorePoint(range);
+
+        editor.selectRange(range);
 
         editor.clipboard.paste(this.options.value || '');
         editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
@@ -107,7 +107,7 @@ var InsertHtmlTool = Tool.extend({
             options = this.options,
             dataSource = options.items ? options.items : editor.options.insertHtml;
 
-        new Editor.SelectBox(ui, {
+        new editorNS.SelectBox(ui, {
             dataSource: dataSource,
             dataTextField: "text",
             dataValueField: "value",
@@ -427,7 +427,7 @@ var Clipboard = Class.extend({
         } else {
             var clipboardRange = editor.createRange();
             clipboardRange.selectNodeContents(clipboardNode);
-            selectRange(clipboardRange);
+            editor.selectRange(clipboardRange);
         }
 
         range.deleteContents();
@@ -435,7 +435,7 @@ var Clipboard = Class.extend({
         setTimeout(function() {
             var html = "", args = { html: "" }, containers;
 
-            selectRange(range);
+            editor.selectRange(range);
 
             containers = $(editor.body).children(".k-paste-container");
 
@@ -502,6 +502,7 @@ var Clipboard = Class.extend({
 
         var block = this.isBlock(html);
 
+        editor.focus();
         var range = editor.getRange();
         range.deleteContents();
 
@@ -514,10 +515,11 @@ var Clipboard = Class.extend({
 
         var parent = this.splittableParent(block, caret);
         var unwrap = false;
+        var splittable = parent != editor.body && !dom.is(parent, "td");
 
-        if (!/body|td/.test(dom.name(parent)) && (block || dom.isInline(parent))) {
+        if (splittable && (block || dom.isInline(parent))) {
             range.selectNode(caret);
-            RangeUtils.split(range, parent, true);
+            editorNS.RangeUtils.split(range, parent, true);
             unwrap = true;
         }
 
@@ -548,7 +550,7 @@ var Clipboard = Class.extend({
         dom.restoreScrollTop(editor.document);
         dom.scrollTo(caret);
         marker.removeCaret(range);
-        selectRange(range);
+        editor.selectRange(range);
     }
 });
 
@@ -814,7 +816,7 @@ var WebkitFormatCleaner = Cleaner.extend({
     }
 });
 
-extend(Editor, {
+extend(editorNS, {
     Command: Command,
     GenericCommand: GenericCommand,
     InsertHtmlCommand: InsertHtmlCommand,

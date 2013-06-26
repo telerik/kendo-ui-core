@@ -2,18 +2,18 @@
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
-            <a data-align="right" data-icon="add" data-role="button"  data-rel="modalview" href="#modalview-add"></a>
+            <a data-align="left" data-icon="add" data-role="button"  data-rel="modalview" href="#modalview-add"></a>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
         </div>
     </header>
 
-    <ul id="listview"></ul>
+    <ul id="pull-with-endless-listview"></ul>
 </div>
 
 <div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;" >
     <div data-role="header">
         <div data-role="navbar">
-            <span>Add New Product</span>
+            <span>Add Product</span>
             <a data-click="closeModalViewAdd" data-role="button" data-align="right">Cancel</a>
         </div>
     </div>
@@ -24,8 +24,8 @@
     <a data-click="addNew" class="addNew" type="button" data-role="button">Add New Product</a>
 </div>
 
-<script type="text/x-kendo-tmpl" id="template">
-    <div class="product">        
+<script type="text/x-kendo-tmpl" id="pull-with-endless-template">
+    <div class="product-item">        
         <h3>#:ProductName#</h3>
         <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
@@ -44,12 +44,12 @@
                 total: function () { return 77; }
             },
             serverPaging: true,
-            pageSize: 40
+            pageSize: 50
         });
 
-        $("#listview").kendoMobileListView({
+        $("#pull-with-endless-listview").kendoMobileListView({
             dataSource: dataSource,
-            template: $("#template").text(),                    
+            template: $("#pull-with-endless-template").text(),                    
             pullToRefresh: true,                          
             endlessScroll: true            
         });
@@ -106,21 +106,21 @@
 </script>
 
 <style scoped>
-    .product {
-        font-size: 1.2;
+    .product-item {
+        font-size: 1.2;
     }
-    .product h3 {
-        float: left;
-        margin: 0;
-        padding: .7em 0 0;
-        height: 1.3em;
-        overflow: hidden;
+    .product-item h3 {
+        float: left;
+        margin: 0;
+        height: 1.3em;
+        overflow: hidden;
     }
-    .product p {
-        float: right;
-        margin: 0;
+    .product-item p {
+        float: right;
+        margin: 0;
         padding: .3em 0 0;
     }
+
     .pullImage {
         width: 64px;
         height: 64px;
@@ -128,12 +128,19 @@
         float: left;
         margin-right: 10px;
     }
-    
-    .addNew {
-        display: block;
-        text-align: center;
-        margin: 0 3em;
-        padding: .5em;
-        font-size: 1.2em;
+    .addNew {
+        display: block;
+        text-align: center;
+        margin: 0 3em;
+        padding: .5em;
+        font-size: 1.2em;
+    }
+
+    #pull-with-endless-listview li{
+        padding: 2em;
+    }
+
+    .km-tablet #pull-with-endless-listview li{
+        padding: 2em;
     }
 </style>

@@ -150,8 +150,7 @@
         }, {
             "text": "Bullet Charts",
             "documentation": "dataviz/chart",
-            "spriteCssClass": "chartBulletIcon",
-            "new": true,
+            "spriteCssClass": "chartBulletIcon",            
             "items": [{
                     "text": "Basic usage",
                     "url": "bullet-charts/index.html",
@@ -192,6 +191,11 @@
                     "url": "line-charts/multiple-axes.html",
                     "title": "Multi-axes feature example | Kendo UI Line Charts widget",
                     "meta": "This demo shows how easily Kendo UI Line Charts can be customized to achieve what you want in your app. Apply multiple axes to your Kendo UI Line Charts."
+                }, {
+                    "text": "Notes",
+                    "url": "line-charts/notes.html",
+                    "title": "Notes feature example | Kendo UI Line Charts widget",
+                    "meta": "This demo shows how to place annotations in your Kendo UI Charts."
                 }, {
                     "text": "Binding to remote data",
                     "url": "line-charts/remote-data.html",
@@ -310,6 +314,7 @@
             "name": "scatter-charts"
         }, {
             "text": "Radar Charts",
+            "new": true,
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartRadarIcon",
             "items": [{
@@ -346,6 +351,7 @@
             "name": "radar-charts"
         }, {
             "text": "Polar Charts",
+            "new": true,
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartPolarIcon",
             "items": [{
@@ -378,8 +384,7 @@
         }, {
             "text": "Sparklines",
             "documentation": "dataviz/sparkline",
-            "spriteCssClass": "sparklineIcon",
-            "new": true,
+            "spriteCssClass": "sparklineIcon",            
             "items": [{
                 "text": "Basic usage",
                 "url": "sparklines/index.html",
@@ -462,6 +467,8 @@
     "Bar & QR Codes": [
         {
             "text": "Barcode",
+            "new": true,
+            "spriteCssClass": "barcodeIcon",
             "documentation": "dataviz/barcode",
             "items": [{
                 "text": "Basic usage",
@@ -478,6 +485,8 @@
             "name": "barcode"
         }, {
             "text": "QR code",
+            "new": true,
+            "spriteCssClass": "qrcodeIcon",
             "documentation": "dataviz/qrcode",
             "items": [{
                 "text": "Basic usage",

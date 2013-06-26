@@ -37,6 +37,7 @@ kendo_module({
             }
 
             that.current = that._currentLocation();
+            that.locations = [that.current];
             that._listenToLocationChange();
         },
 
@@ -77,6 +78,8 @@ kendo_module({
             } else {
                 location.hash = that.current = to;
             }
+
+            that.locations.push(that.current);
         },
 
         _normalizeUrl: function() {
@@ -110,25 +113,37 @@ kendo_module({
         },
 
         _checkUrl: function() {
-            var that = this, current = that._currentLocation().replace(hashStrip, '');
+            var that = this,
+                current = that._currentLocation().replace(hashStrip, ''),
+                back = current === that.locations[that.locations.length - 2];
 
             if (that.current === current || that.current === decodeURIComponent(current)) {
                 return;
             }
 
             if (that.trigger("change", { url: current })) {
-                history.back();
+                if (back) {
+                    history.forward();
+                } else {
+                    history.back();
+                }
                 return;
             }
 
             that.current = current;
+
+            if (back) {
+                that.locations.pop();
+            } else {
+                that.locations.push(current);
+            }
         },
 
         _stripRoot: function(url) {
             var that = this;
 
             if (url.indexOf(that.root) === 0) {
-                return ('/' + url.substr(that.root.length)).replace(/\/\//g, '/');
+                return (url.substr(that.root.length)).replace(/\/\//g, '/');
             } else {
                 return url;
             }
@@ -136,8 +151,9 @@ kendo_module({
 
         _makePushStateUrl: function(address) {
             var that = this;
+            var regEx = new RegExp("^" + that.root, "i");
 
-            if (address.indexOf(that.root) !== 0) {
+            if (!regEx.test(address)) {
                 address = (that.root + address).replace(/\/\//g, '/');
             }
 
@@ -227,6 +243,9 @@ kendo_module({
             Observable.fn.init.call(this);
             this.routes = [];
             this.pushState = options ? options.pushState : false;
+            if (options && options.root) {
+                this.root = options.root;
+            }
             this.bind([INIT, ROUTE_MISSING, CHANGE], options);
         },
 
@@ -243,7 +262,8 @@ kendo_module({
 
             history.start({
                 change: urlChangedProxy,
-                pushState: that.pushState
+                pushState: that.pushState,
+                root: that.root
             });
 
             var initEventObject = { url: history.current || "/" };

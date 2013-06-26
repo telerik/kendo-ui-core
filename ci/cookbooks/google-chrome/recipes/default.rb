@@ -4,5 +4,8 @@ apt_repository "google" do
   key "https://dl-ssl.google.com/linux/linux_signing_key.pub"
 end
 
-package "google-chrome-stable"
+package "google-chrome-stable" do
+    version "28.0.*"
+end
+
 

@@ -5,7 +5,7 @@
     using System.Web.Mvc;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="SchedulerResource"/>.
+    /// Defines the fluent interface for configuring the <see cref="SchedulerResource{TModel}"/>.
     /// </summary>
     public class SchedulerResourceBuilder<TModel>
         where TModel : class, ISchedulerEvent
@@ -16,10 +16,11 @@
         private readonly IUrlGenerator urlGenerator;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchedulerResourceBuilder"/> class.
+        /// Initializes a new instance of the <see cref="SchedulerResourceBuilder{TModel}"/> class.
         /// </summary>
-        /// <param name="resource">The resource.</param>
-        /// 
+        /// <param name="resource">The resource</param>
+        /// <param name="viewContext">The viewContext</param>
+        /// <param name="urlGenerator">The resource</param>
         public SchedulerResourceBuilder(SchedulerResource<TModel> resource, ViewContext viewContext, IUrlGenerator urlGenerator)
         {
             this.resource = resource;
@@ -46,6 +47,15 @@
         {
             resource.Multiple = isMultiple;
 
+            return this;
+        }
+
+        /// <summary>
+        /// The name of the resource.
+        /// </summary>        
+        public SchedulerResourceBuilder<TModel> Name(string value)
+        {
+            resource.Name = value;
             return this;
         }
 

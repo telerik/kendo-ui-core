@@ -24,6 +24,7 @@ namespace KendoCRUDService.Models
                 start = value.ToUniversalTime();
             }
         }
+        public string StartTimezone { get; set; }
 
         private DateTime end;
 
@@ -39,6 +40,8 @@ namespace KendoCRUDService.Models
             }
         }
 
+        public string EndTimezone { get; set; }
+
         public string RecurrenceRule { get; set; }
         public int? RecurrenceID { get; set; }
         public string RecurrenceException { get; set; }
@@ -52,7 +55,9 @@ namespace KendoCRUDService.Models
                 TaskID = TaskID,
                 Title = Title,
                 Start = Start,
+                StartTimezone = StartTimezone,
                 End = End,
+                EndTimezone = EndTimezone,
                 Description = Description,
                 RecurrenceRule = RecurrenceRule,
                 RecurrenceException = RecurrenceException,

@@ -2,19 +2,12 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
-<div class="demo-section">
-    <%=
-        Html.Kendo().QRCode()
-            .Name("qrCode")
-            .Size(200)
-    %>   
-</div>
 <div class="configuration-horizontal" id="qrConfig">
     <div class="config-section">
         <span class="configHead">Value</span>
         <ul class="options">
             <li>
-                <textarea id="qrValue" class="k-textbox" data-bind="value: qrValue" rows="5" cols="20"></textarea>       
+                <textarea id="qrValue" class="k-textbox" data-bind="value: qrValue" rows="5" cols="20"></textarea>
             </li>
         </ul>
     </div>
@@ -22,38 +15,57 @@
         <span class="configHead">Options</span>
         <ul class="options">
             <li>
-                <select id="errorCorrectionLevel" data-role="dropdownlist" data-bind="value: qrOptions.errorCorrectionLevel">
+                <label for="errorCorrection">Error correction level:</label>
+                <select id="errorCorrection" data-role="dropdownlist" data-bind="value: qrOptions.errorCorrection">
                     <option value="L">L</option>
                     <option value="M">M</option>
                     <option value="Q">Q</option>
                     <option value="H">H</option>
                 </select>
-                <label for="errorCorrectionLevel">Error correction level</label>
             </li>
             <li>
+                <label for="encoding">Encoding:</label>
+                <select id="encoding" data-role="dropdownlist" data-bind="value: qrOptions.encoding">
+                    <option value="ISO_8859_1">ISO_8859_1</option>
+                    <option value="UTF_8">UTF_8</option>
+                </select>
+            </li>
+            <li>
+                <label for="size">Size:</label>
                 <input id="size" data-bind="value: qrOptions.size" data-role="numerictextbox"
                     data-format="n0" data-decimals="0" />
-                <label for="size">Size</label>
             </li>
             <li>
+                <label for="borderWidth">Border width:</label>
                 <input id="borderWidth" data-bind="value: qrOptions.border.width" data-role="numerictextbox"
                     data-format="n0" data-decimals="0"/>
-                <label for="borderWidth">Border width</label>
-            </li>
-            <li>
-                <input id="borderColor" data-role="colorpicker" data-bind="value: qrOptions.border.color" />
-                <label for="borderColor">Border color</label>
-            </li>
-            <li>
-                <input id="backgroundColor" data-role="colorpicker" data-bind="value: qrOptions.background"  />
-                <label for="backgroundColor">Background color</label>
-            </li>                                               
-            <li>
-                <input id="moduleColor" data-role="colorpicker" data-bind="value: qrOptions.darkModuleColor" />
-                <label for="moduleColor">Module color</label>
             </li>
         </ul>
     </div>
+    <div class="config-section">
+        <span class="configHead">Colors</span>
+        <ul class="options">
+            <li>
+                <label for="borderColor">Border color:</label>
+                <input id="borderColor" data-role="colorpicker" data-bind="value: qrOptions.border.color" />
+            </li>
+            <li>
+                <label for="backgroundColor">Background color:</label>
+                <input id="backgroundColor" data-role="colorpicker" data-bind="value: qrOptions.background"  />
+            </li>
+            <li>
+                <label for="moduleColor">Module color:</label>
+                <input id="moduleColor" data-role="colorpicker" data-bind="value: qrOptions.color" />
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="demo-section">
+    <%=
+        Html.Kendo().QRCode()
+            .Name("qrCode")
+            .Size(200)
+    %>
 </div>
 
 <script type="text/javascript">
@@ -65,9 +77,10 @@
         var viewModel = kendo.observable({
             qrValue: "Hello World",
             qrOptions: {
-                errorCorrectionLevel: "L",
+                errorCorrection: "L",
+                encoding: "ISO_8859_1",
                 background: "#FFFFFF",
-                darkModuleColor: "#000000",
+                color: "#000000",
                 size: 200,
                 border: {
                     color: "#FFFFFF",
@@ -96,27 +109,40 @@
         viewModel.setElementWidth();
         viewModel.setValue();
     });
-                
+
 </script>
 
-<style scoped>                
-                
-    .k-qrcode {                         
-        margin: 0 auto;                 
+<style scoped>
+
+    .k-qrcode {
+        margin: 20px auto;
     }
-                     
+
     #qrValue{
-        width: 300px;
-        max-width:300px;
+        width: 190px;
+        max-width:190px;
         height: 100px;
     }
 
     .configuration-horizontal .options li {
         padding: 3px 0;
     }
-                          
+
+    .configuration-horizontal .config-section
+    {
+        min-width: 100px;
+    }
+
     .configuration-horizontal .k-textbox {
-            margin-left: 0;
+         margin-left: 0;
+    }
+    .options label {
+         display: inline-block;
+         width: 120px;
+    }
+    .options .k-dropdown,
+    .options .k-numerictextbox {
+         width: 100px;
     }
 </style>
 

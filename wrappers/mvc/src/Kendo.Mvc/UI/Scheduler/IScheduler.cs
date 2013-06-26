@@ -131,5 +131,15 @@
         {
             get;
         }
+
+        SchedulerMessages Messages
+        {
+            get;
+        }
+
+        SchedulerGroupSettings Group
+        {
+            get;
+        }
     }
 }

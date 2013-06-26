@@ -15,7 +15,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * The series line dash type.** Applicable only to line series **
+    * The dash type of line chart.The following dash types are supported:
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
@@ -51,29 +51,16 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the groupNameTemplate option of the StockChartNavigatorSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
-    * @param string $value The id of the element which represents the kendo template.
+    * The data item field which contains the category name or date.
+    * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
-    public function groupNameTemplateId($value) {
-        $value = new \Kendo\Template($value);
-
-        return $this->setProperty('groupNameTemplate', $value);
+    public function categoryField($value) {
+        return $this->setProperty('categoryField', $value);
     }
 
     /**
-    * Sets the groupNameTemplate option of the StockChartNavigatorSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
-    * @param string $value The template content.
-    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
-    */
-    public function groupNameTemplate($value) {
-        return $this->setProperty('groupNameTemplate', $value);
-    }
-
-    /**
-    * The series name visible in the legend.
+    * The navigator series name.
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
@@ -209,7 +196,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * Configures the behavior for handling missing values.** Applicable for area and line series. **
+    * The behavior for handling missing values. The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */

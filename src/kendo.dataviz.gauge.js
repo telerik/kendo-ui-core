@@ -1228,35 +1228,37 @@ kendo_module({
         },
 
         value: function(value) {
+            var gauge = this,
+                pointer = gauge._pointers[0];
+
             if (arguments.length === 0) {
-                return this._pointers[0].value();
+                return pointer.value();
             }
 
-            this._pointers[0].value(value);
+            gauge.options.pointer.value = value;
+
+            if (gauge._view.renderElement) {
+                pointer.value(value);
+            } else {
+                gauge.redraw();
+            }
         },
 
         redraw: function() {
             var gauge = this,
                 element = gauge.element,
                 model = gauge._model = gauge._getModel(),
-                viewType = dataviz.ui.defaultView(),
                 view;
 
             gauge._plotArea = model._plotArea;
 
-            if (viewType) {
-                view = gauge._view = viewType.fromModel(model);
+            view = gauge._view =
+                dataviz.ViewFactory.current.create(model.options, gauge.options.renderAs);
 
-                element.css("position", "relative");
+            if (view) {
+                view.load(model);
                 gauge._viewElement = view.renderTo(element[0]);
             }
-        },
-
-        svg: function() {
-            var model = this._getModel(),
-                view = dataviz.SVGView.fromModel(model);
-
-            return view.render();
         },
 
         _createModel: function() {
@@ -1288,6 +1290,7 @@ kendo_module({
             return { width: width, height: height };
         }
     });
+    deepExtend(Gauge.fn, dataviz.ExportMixin);
 
     var RadialGauge = Gauge.extend({
         init: function(element, options) {

@@ -46,9 +46,9 @@ require_once '../../lib/Kendo/Autoload.php';
     $fieldset = new \Kendo\UI\EditorToolItem();
     $fieldset->text("Fieldset")->value("fieldset");
 
-    $formatBlock = new \Kendo\UI\EditorTool();
-    $formatBlock->name("formatBlock");
-    $formatBlock->addItem($paragraph, $fieldset);
+    $formatting = new \Kendo\UI\EditorTool();
+    $formatting->name("formatting");
+    $formatting->addItem($paragraph, $fieldset);
 
     // - tool with custom template
     $customTemplate = new \Kendo\UI\EditorTool();
@@ -66,7 +66,7 @@ require_once '../../lib/Kendo/Autoload.php';
         ->exec("insertHr");
 
     // add all custom tools to the toolbar
-    $editor->addTool($fontName, $fontSize, $formatBlock, $customTemplate, $hr);
+    $editor->addTool($fontName, $fontSize, $formatting, $customTemplate, $hr);
 
     $editor
         ->attr('style', 'width:100%;height:400px')

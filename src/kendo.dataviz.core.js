@@ -823,7 +823,7 @@ kendo_module({
 
             ChartElement.fn.init.call(text, options);
 
-            text.content = content;
+            text.content = decodeEntities(content);
 
             // Calculate size
             text.reflow(Box2D());
@@ -1085,7 +1085,7 @@ kendo_module({
             visible: true,
             reverse: false,
             justified: true,
-            note: {},
+            notes: {},
 
             _alignLines: true
         },
@@ -1175,15 +1175,27 @@ kendo_module({
         createNotes: function() {
             var axis = this,
                 options = axis.options,
-                note = options.note,
-                items = note.items || [],
-                i, item;
+                notes = options.notes,
+                items = notes.data || [],
+                noteTemplate, i, text, item, note;
 
             axis.notes = [];
 
             for (i = 0; i < items.length; i++) {
-                item = deepExtend({}, options.note, items[i]);
-                note = new Note(item);
+                item = deepExtend({}, notes, items[i]);
+                item.value = axis.parseNoteValue(item.value);
+                text = item.label.text || item.value;
+                if (item.label.template) {
+                    noteTemplate = template(item.label.template);
+                    text = noteTemplate({
+                        value: text
+                    });
+                } else if (item.label.format) {
+                    text = autoFormat(item.label.format, text);
+                }
+
+                note = new Note(deepExtend({}, item, { label: { text: text }}));
+
                 if (note.options.visible) {
                     if (defined(note.options.position)) {
                         if (options.vertical && !inArray(note.options.position, [LEFT, RIGHT])) {
@@ -1202,6 +1214,10 @@ kendo_module({
                     axis.notes.push(note);
                 }
             }
+        },
+
+        parseNoteValue: function(value) {
+            return value;
         },
 
         renderTicks: function(view) {
@@ -1539,6 +1555,12 @@ kendo_module({
                 item = axis.notes[i];
                 value = item.options.value;
                 if (defined(value)) {
+                    if (axis.shouldRenderNote(value)) {
+                        item.show();
+                    } else {
+                        item.hide();
+                    }
+
                     slot = axis.getSlot(value);
                 }
 
@@ -1576,9 +1598,8 @@ kendo_module({
         options: {
             icon: {
                 zIndex: 1,
-                padding: 3,
-                size: 1,
-                visible: true
+                visible: true,
+                type: CIRCLE
             },
             label: {
                 zIndex: 2,
@@ -1587,11 +1608,20 @@ kendo_module({
                 align: CENTER,
                 vAlign: CENTER
             },
-            connector: {
+            line: {
                 visible: true,
                 zIndex: 2
             },
-            visible: true
+            visible: true,
+            position: TOP
+        },
+
+        hide: function() {
+            this.options.visible = false;
+        },
+
+        show: function() {
+            this.options.visible = true;
         },
 
         render: function() {
@@ -1601,33 +1631,35 @@ kendo_module({
                 icon = options.icon,
                 size = icon.size,
                 dataModelId = { data: { modelId: options.modelId } },
-                marker, width, height,
-                box = Box2D();
+                box = Box2D(),
+                marker, width, height;
 
-            if (defined(label) && label.visible) {
-                note.label = new TextBox(label.text || options.value, deepExtend({}, label, dataModelId));
-                note.append(note.label);
+            if (options.visible) {
+                if (defined(label) && label.visible) {
+                    note.label = new TextBox(label.text || options.value, deepExtend({}, label, dataModelId));
+                    note.append(note.label);
 
-                if (label.position === INSIDE) {
-                    if (icon.type === CIRCLE) {
-                        size = math.max(note.label.box.width(), note.label.box.height());
-                    } else {
-                        width = note.label.box.width();
-                        height = note.label.box.height();
+                    if (label.position === INSIDE) {
+                        if (icon.type === CIRCLE) {
+                            size = math.max(note.label.box.width(), note.label.box.height());
+                        } else {
+                            width = note.label.box.width();
+                            height = note.label.box.height();
+                        }
+                        box.wrap(note.label.box);
                     }
                 }
-                box.wrap(note.label.box);
+
+                icon.width = width || size;
+                icon.height = height || size;
+
+                marker = new ShapeElement(deepExtend({}, icon, dataModelId));
+
+                note.marker = marker;
+                note.append(marker);
+                marker.reflow(Box2D());
+                note.wrapperBox = box.wrap(marker.box);
             }
-
-            icon.width = width || size;
-            icon.height = height || size;
-
-            marker = new ShapeElement(deepExtend({}, icon, dataModelId));
-
-            note.marker = marker;
-            note.append(marker);
-            marker.reflow(Box2D());
-            note.wrapperBox = box.wrap(marker.paddingBox);
         },
 
         reflow: function(targetBox) {
@@ -1635,86 +1667,79 @@ kendo_module({
                 options = note.options,
                 center = targetBox.center(),
                 wrapperBox = note.wrapperBox,
-                width = wrapperBox.width() / 2,
-                height = wrapperBox.height() / 2,
-                distance = options.connector.distance,
+                length = options.line.length,
+                position = options.position,
                 label = note.label,
                 marker = note.marker,
                 lineStart, box, contentBox;
 
-            if (inArray(options.position, [LEFT, RIGHT])) {
-                if (options.position === LEFT) {
-                    contentBox = Box2D(
-                        targetBox.x1 - (width + distance), center.y - height,
-                        targetBox.x1 - distance, center.y + height);
+            if (options.visible) {
+                if (inArray(position, [LEFT, RIGHT])) {
+                    if (position === LEFT) {
+                        contentBox = wrapperBox.alignTo(targetBox, position).translate(-length, targetBox.center().y - wrapperBox.center().y);
 
-                    if (options.connector.visible) {
-                        lineStart = Point2D(targetBox.x1, center.y);
-                        note.connectorPoints = [
-                            lineStart,
-                            Point2D(contentBox.x2, center.y)
-                        ];
-                        box = contentBox.clone().wrapPoint(lineStart);
+                        if (options.line.visible) {
+                            lineStart = Point2D(math.floor(targetBox.x1), center.y);
+                            note.linePoints = [
+                                lineStart,
+                                Point2D(math.floor(contentBox.x2), center.y)
+                            ];
+                            box = contentBox.clone().wrapPoint(lineStart);
+                        }
+                    } else {
+                        contentBox = wrapperBox.alignTo(targetBox, position).translate(length, targetBox.center().y - wrapperBox.center().y);
+
+                        if (options.line.visible) {
+                            lineStart = Point2D(math.floor(targetBox.x2), center.y);
+                            note.linePoints = [
+                                lineStart,
+                                Point2D(math.floor(contentBox.x1), center.y)
+                            ];
+                            box = contentBox.clone().wrapPoint(lineStart);
+                        }
                     }
                 } else {
-                    contentBox = Box2D(
-                        targetBox.x2 + distance, center.y - height,
-                        targetBox.x2 + width + distance, center.y + height);
+                    if (position === BOTTOM) {
+                        contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, length);
 
-                    if (options.connector.visible) {
-                        lineStart = Point2D(targetBox.x2, center.y);
-                        note.connectorPoints = [
-                            lineStart,
-                            Point2D(contentBox.x1, center.y)
-                        ];
-                        box = contentBox.clone().wrapPoint(lineStart);
+                        if (options.line.visible) {
+                            lineStart = Point2D(math.floor(center.x), math.floor(targetBox.y2));
+                            note.linePoints = [
+                                lineStart,
+                                Point2D(math.floor(center.x), math.floor(contentBox.y1))
+                            ];
+                            box = contentBox.clone().wrapPoint(lineStart);
+                        }
+                    } else {
+                        contentBox = wrapperBox.alignTo(targetBox, position).translate(targetBox.center().x - wrapperBox.center().x, -length);
+
+                        if (options.line.visible) {
+                            lineStart = Point2D(math.floor(center.x), math.floor(targetBox.y1));
+                            note.linePoints = [
+                                lineStart,
+                                Point2D(math.floor(center.x), math.floor(contentBox.y2))
+                            ];
+                            box = contentBox.clone().wrapPoint(lineStart);
+                        }
                     }
                 }
-            } else {
-                if (options.position === BOTTOM) {
-                    contentBox = Box2D(
-                        center.x - width, targetBox.y2 + distance,
-                        center.x + width, targetBox.y2 + height + distance);
 
-                    if (options.connector.visible) {
-                        lineStart = Point2D(center.x, targetBox.y2);
-                        note.connectorPoints = [
-                            lineStart,
-                            Point2D(center.x, contentBox.y1)
-                        ];
-                        box = contentBox.clone().wrapPoint(lineStart);
-                    }
-                } else {
-                    contentBox = Box2D(
-                        center.x - width, targetBox.y1 - distance,
-                        center.x + width, targetBox.y1 - (distance + height));
-
-                    if (options.connector.visible) {
-                        lineStart = Point2D(center.x, targetBox.y1);
-                        note.connectorPoints = [
-                            lineStart,
-                            Point2D(center.x, contentBox.y1)
-                        ];
-                        box = contentBox.clone().wrapPoint(lineStart);
-                    }
-                }
-            }
-
-            if (marker) {
-                marker.reflow(contentBox);
-            }
-
-            if (label) {
-                label.reflow(contentBox);
                 if (marker) {
-                    if (label.options.position === OUTSIDE) {
-                        label.box.alignTo(marker.box, options.position);
-                    }
-                    label.reflow(label.box);
+                    marker.reflow(contentBox);
                 }
+
+                if (label) {
+                    label.reflow(contentBox);
+                    if (marker) {
+                        if (options.label.position === OUTSIDE) {
+                            label.box.alignTo(marker.box, position);
+                        }
+                        label.reflow(label.box);
+                    }
+                }
+                note.contentBox = contentBox;
+                note.box = box || contentBox;
             }
-            note.contentBox = contentBox;
-            note.box = box || contentBox;
         },
 
         getViewElements: function(view) {
@@ -1725,22 +1750,25 @@ kendo_module({
                     zIndex: 1
                 });
 
-            append(elements, note.createConnector(view));
+            if (note.options.visible) {
+                append(elements, note.createLine(view));
+            }
 
             group.children = elements;
 
             return [ group ];
         },
 
-        createConnector: function(view) {
+        createLine: function(view) {
             var note = this,
-                connector = note.options.connector;
+                line = note.options.line;
 
             return [
-                view.createPolyline(note.connectorPoints, false, {
-                    stroke: connector.color,
-                    strokeWidth: connector.width,
-                    zIndex: connector.zIndex
+                view.createPolyline(note.linePoints, false, {
+                    stroke: line.color,
+                    strokeWidth: line.width,
+                    dashType: line.dashType,
+                    zIndex: line.zIndex
                 })
             ];
         },
@@ -2194,6 +2222,11 @@ kendo_module({
                 value = round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
 
             return new AxisLabel(value, index, null, labelOptions);
+        },
+
+        shouldRenderNote: function(value) {
+            var range = this.range();
+            return range.min <= value && value <= range.max;
         }
     });
 
@@ -2237,6 +2270,19 @@ kendo_module({
         },
 
         refresh: $.noop,
+
+        traverse: function(callback) {
+            var element = this,
+                children = element.children,
+                length,
+                i;
+
+            callback(element);
+
+            for (i = 0, length = children.length; i < length; i++) {
+                children[i].traverse(callback);
+            }
+        },
 
         compareChildren: function(a, b) {
             var aValue = a.options.zIndex || 0,
@@ -2295,6 +2341,11 @@ kendo_module({
             while (animations.length > 0) {
                 animations.shift().destroy();
             }
+        },
+
+        load: function(model) {
+            var view = this;
+            view.children = model.getViewElements(view);
         },
 
         renderDefinitions: function() {
@@ -3031,6 +3082,7 @@ kendo_module({
 
             if (pool.length < that._size && !freed[id]) {
                 pool.push(id);
+
                 freed[id] = true;
             }
         }
@@ -3095,6 +3147,91 @@ kendo_module({
             }
         }
     });
+
+    var ViewFactory = function() {
+        this._views = [];
+    };
+
+    ViewFactory.prototype = {
+        register: function(name, type, order) {
+            var views = this._views,
+                defaultView = views[0],
+                entry = {
+                    name: name,
+                    type: type,
+                    order: order
+                };
+
+            if (!defaultView || order < defaultView.order) {
+                views.unshift(entry);
+            } else {
+                views.push(entry);
+            }
+        },
+
+        create: function(options, preferred) {
+            var views = this._views,
+                match = views[0];
+
+            if (preferred) {
+                preferred = preferred.toLowerCase();
+                for (var i = 0; i < views.length; i++) {
+                    if (views[i].name === preferred) {
+                        match = views[i];
+                        break;
+                    }
+                }
+            }
+
+            if (match) {
+                return new match.type(options);
+            }
+
+            kendo.logToConsole(
+                "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
+                "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
+                "- The kendo.dataviz.(svg|vml|canvas).js scripts are not loaded");
+        }
+    };
+
+    ViewFactory.current = new ViewFactory();
+
+    var ExportMixin = {
+        svg: function() {
+            if (dataviz.SVGView) {
+                var model = this._getModel(),
+                    view = new dataviz.SVGView(model.options);
+
+                view.load(model);
+
+                return view.render();
+            } else {
+                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+            }
+        },
+
+        imageDataURL: function() {
+            if (dataviz.CanvasView) {
+                if (dataviz.supportsCanvas()) {
+                    var model = this._getModel(),
+                        container = document.createElement("div"),
+                        view = new dataviz.CanvasView(model.options);
+
+                    view.load(model);
+
+                    return view.renderTo(container).toDataURL();
+                } else {
+                    kendo.logToConsole(
+                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
+                        "User agent: " + navigator.userAgent);
+
+                    return null;
+                }
+            } else {
+                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+            }
+        }
+    };
 
     function measureText(text, style, rotation) {
         var styleHash = getHash(style),
@@ -3266,6 +3403,10 @@ kendo_module({
             "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
     }
 
+    function supportsCanvas() {
+        return !!doc.createElement("canvas").getContext;
+    }
+
     var requestFrameFn =
         window.requestAnimationFrame       ||
         window.webkitRequestAnimationFrame ||
@@ -3366,48 +3507,34 @@ kendo_module({
         return -v1.x * v2.y + v1.y * v2.x < 0;
     }
 
+    function decodeEntities(text) {
+        if (!text || !text.indexOf || text.indexOf("&") < 0) {
+            return text;
+        } else {
+            var element = decodeEntities._element;
+            element.innerHTML = text;
+            return element.textContent || element.innerText;
+        }
+    }
+    decodeEntities._element = doc.createElement("span");
+
+    function dateComparer(a, b) {
+         if (a && b) {
+             return a.getTime() - b.getTime();
+         }
+
+         return 0;
+    }
+
     // Exports ================================================================
-    /**
-     * @name kendo.dataviz
-     * @namespace Contains Kendo DataViz.
-     */
     deepExtend(kendo.dataviz, {
         init: function(element) {
             kendo.init(element, kendo.dataviz.ui);
         },
-
-        /**
-         * @name kendo.dataviz.ui
-         * @namespace Contains Kendo DataViz UI widgets.
-         */
         ui: {
             roles: {},
             themes: {},
             views: [],
-            defaultView: function() {
-                var i,
-                    views = dataviz.ui.views,
-                    length = views.length;
-
-                for (i = 0; i < length; i++) {
-                    if (views[i].available()) {
-                        return views[i];
-                    }
-                }
-
-                kendo.logToConsole("Warning: KendoUI DataViz cannot render. Possible causes:\n" +
-                                    "- The browser does not support SVG or VML. User agent: " + navigator.userAgent + "\n" +
-                                    "- The kendo.dataviz.svg.js or kendo.dataviz.vml.js scripts are not loaded");
-            },
-            registerView: function(viewType) {
-                var defaultView = dataviz.ui.views[0];
-
-                if (!defaultView || viewType.preference > defaultView.preference) {
-                    dataviz.ui.views.unshift(viewType);
-                } else {
-                    dataviz.ui.views.push(viewType);
-                }
-            },
             plugin: function(widget) {
                 kendo.ui.plugin(widget, dataviz.ui);
             }
@@ -3423,6 +3550,14 @@ kendo_module({
         NOTE_CLICK: NOTE_CLICK,
         NOTE_HOVER: NOTE_HOVER,
         CLIP: CLIP,
+        DASH_ARRAYS: {
+            dot: [1.5, 3.5],
+            dash: [4, 3.5],
+            longdash: [8, 3.5],
+            dashdot: [3.5, 3.5, 1.5, 3.5],
+            longdashdot: [8, 3.5, 1.5, 3.5],
+            longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
+        },
 
         Axis: Axis,
         AxisLabel: AxisLabel,
@@ -3432,6 +3567,7 @@ kendo_module({
         Color: Color,
         ElementAnimation:ElementAnimation,
         ExpandAnimation: ExpandAnimation,
+        ExportMixin: ExportMixin,
         ArrowAnimation: ArrowAnimation,
         BarAnimation: BarAnimation,
         BarIndicatorAnimatin: BarIndicatorAnimatin,
@@ -3454,6 +3590,7 @@ kendo_module({
         Title: Title,
         ViewBase: ViewBase,
         ViewElement: ViewElement,
+        ViewFactory: ViewFactory,
 
         animationDecorator: animationDecorator,
         append: append,
@@ -3461,6 +3598,8 @@ kendo_module({
         autoMajorUnit: autoMajorUnit,
         boxDiff: boxDiff,
         defined: defined,
+        decodeEntities: decodeEntities,
+        dateComparer: dateComparer,
         getElement: getElement,
         getSpacing: getSpacing,
         inArray: inArray,
@@ -3471,6 +3610,7 @@ kendo_module({
         round: round,
         ceil: ceil,
         floor: floor,
+        supportsCanvas: supportsCanvas,
         supportsSVG: supportsSVG,
         renderTemplate: renderTemplate,
         uniqueId: uniqueId,

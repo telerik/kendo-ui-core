@@ -28,6 +28,7 @@ kendo_module({
         date = kendo.date,
         getDate = date.getDate,
         recurrence = kendo.recurrence,
+        keys = kendo.keys,
         ui = kendo.ui,
         Widget = ui.Widget,
         STRING = "string",
@@ -49,8 +50,10 @@ kendo_module({
         TODAY = getDate(new Date()),
         RECURRENCE_DATE_FORMAT = "yyyyMMddTHHmmssZ",
         DELETECONFIRM = "Are you sure you want to delete this event?",
+        DELETERECURRING = "Do you want to delete only this event occurrence or the whole series?",
+        EDITRECURRING = "Do you want to edit only this event occurrence or the whole series?",
         COMMANDBUTTONTMPL = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>',
-        TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
+        TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar k-secondary">' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
                '<li class="k-state-default k-nav-today"><a href="\\#" class="k-link">${messages.today}</a></li>' +
                '<li class="k-state-default k-nav-prev"><a href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li>' +
@@ -74,8 +77,15 @@ kendo_module({
             $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' '  + kendo.attr("role") + '="datepicker" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
             .attr(attr).appendTo(container);
 
+            $('<span ' + kendo.attr("bind") + '="text: ' + options.field + 'Timezone"></span>').appendTo(container);
+
+            if (options.field === "end") {
+                $('<span ' + kendo.attr("bind") + '="text: startTimezone, invisible: endTimezone"></span>').appendTo(container);
+            }
+
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
+        getMilliseconds = kendo.date.getMilliseconds,
         RECURRENCEEDITOR = function(container, options) {
             $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
                 .attr({
@@ -84,8 +94,21 @@ kendo_module({
                 .appendTo(container)
                 .kendoRecurrenceEditor({
                     start: options.model.start,
-                    timezone: options.timezone
+                    timezone: options.timezone,
+                    messages: options.messages
                 });
+        },
+        TIMEZONEPOPUP = function(container, options) {
+            $('<a href="#" class="k-button">' + options.messages.timezoneEditorButton + '<a/>').click(options.click).appendTo(container);
+        },
+        TIMEZONEEDITOR = function(container, options) {
+            $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
+                .attr({
+                    name: options.field
+                })
+                .toggle(options.visible)
+                .appendTo(container)
+                .kendoTimezoneEditor();
         };
 
     function appendDateCompareValidator(attrs, options) {
@@ -230,12 +253,22 @@ kendo_module({
 
             return obj;
         },
+        set: function(key, value) {
+            kendo.data.Model.fn.set.call(this, key, value);
+
+            if (key == "isAllDay" && value === true) {
+                this.set("start", kendo.date.getDate(this.start));
+                this.set("end", kendo.date.getDate(this.end));
+            }
+        },
         id: "id",
         fields: {
             id: { type: "number" },
             title: { defaultValue: "", type: "string" },
             start: { type: "date", validation: { required: true } },
+            startTimezone: { type: "string" },
             end: { type: "date", validation: { required: true, dateCompare: { value: dateCompareValidator, message: "End date should be greater than or equal to the start date"}} },
+            endTimezone: { type: "string" },
             recurrenceRule: { defaultValue: "", type: "string" },
             recurrenceException: { defaultValue: "", type: "string" },
             isAllDay: { type: "boolean", defaultValue: false },
@@ -373,7 +406,168 @@ kendo_module({
                 e.preventDefault();
             });
 
+            if (that.options.editable && that.options.editable.resize !== false) {
+                that._resizable();
+            }
+
+            if (that.options.editable && that.options.editable.move !== false) {
+                that._movable();
+            }
+
             $(window).on("resize" + NS, that._resizeHandler);
+
+            if(that.options.messages && that.options.messages.recurrence) {
+                recurrence.options = that.options.messages.recurrence;
+            }
+
+            that._selectable();
+        },
+
+        _selectable: function() {
+            var that = this,
+                selectEvent = kendo.support.mobileOS ? "touchend" : "mousedown";
+
+            that._tabindex();
+
+            that.wrapper.on(selectEvent, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
+                that._createSelection(e.currentTarget);
+                that.wrapper.focus();
+            });
+
+            that.wrapper.on("focus" + NS, function() {
+                if (!that._selection) {
+                    that._createSelection($(".k-scheduler-content").find("td:first"));
+                }
+
+                that.view().select(that._selection);
+            });
+
+            that.wrapper.on("focusout" + NS, function() {
+                that.view().clearSelection();
+            });
+
+            that.wrapper.on("keydown" + NS, proxy(that._keydown, that));
+
+            that.wrapper.on("keyup" + NS, function(e) {
+                that._ctrlKey = e.ctrlKey;
+                that._shiftKey = e.shiftKey;
+            });
+
+        },
+
+        _viewByIndex: function(index) {
+            var view, views = this.views;
+
+            for (view in views) {
+                if (!index) {
+                    return view;
+                }
+
+                index--;
+            }
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                view = that.view(),
+                editable = view.options.editable,
+                selection = that._selection,
+                shiftKey = e.shiftKey,
+                start;
+
+            that._ctrlKey = e.ctrlKey;
+            that._shiftKey = e.shiftKey;
+
+            if (key === keys.TAB) {
+                if (view.moveToEvent(selection, shiftKey)) {
+                    view.select(selection);
+                    e.preventDefault();
+                }
+            } else if (editable && key === keys.ENTER) {
+                // add/edit event
+                if (selection.events.length) {
+                    if (editable.update !== false) {
+                        that.editEvent(selection.events[0]);
+                    }
+                } else if (editable.create !== false) {
+                    that.addEvent(selection);
+                }
+            } else if (key === keys.DELETE) {
+                that.removeEvent(selection.events[0]);
+            } else if (key >= 49 && key <= 57) {
+                // switch to view 1-9
+                that.view(that._viewByIndex(key - 49));
+            } else if (view.move(selection, key, shiftKey)) {
+                start = selection.start;
+
+                if (view.isInRange(start)) {
+                    view.select(selection);
+                } else {
+                    that.date(start);
+                }
+
+                e.preventDefault();
+            }
+
+            that._adjustSelectedDate();
+        },
+
+        _createSelection: function(item) {
+            var uid, slot, selection;
+
+            if (!this._selection || (!this._ctrlKey && !this._shiftKey)) {
+                this._selection = {
+                    events: []
+                };
+            }
+
+
+            item = $(item);
+            selection = this._selection;
+            uid = item.attr(kendo.attr("uid"));
+            slot = this.view().selectionByElement(item);
+
+            if (slot) {
+                selection.groupIndex = slot.groupIndex;
+            }
+
+            if (uid) {
+                slot = getOccurrenceByUid(this._data, uid);
+            }
+
+            if (slot && slot.uid) {
+                uid = [slot.uid];
+            }
+
+            this._updateSelection(slot, uid);
+            this._adjustSelectedDate();
+        },
+
+        _updateSelection: function(dataItem, events) {
+            var selection = this._selection;
+
+            if (dataItem && selection) {
+                if (this._shiftKey && selection.start && selection.end) {
+                    var backward = dataItem.end < selection.end;
+                    selection.end = new Date(dataItem.end);
+
+                    if (backward) {
+                        kendo.date.setTime(selection.end, - this.view()._timeSlotInterval());
+                    }
+                } else {
+                    selection.start = new Date(dataItem.start.getTime());
+                    selection.end = new Date(dataItem.end.getTime());
+                }
+
+                selection.isAllDay = dataItem.isAllDay;
+                selection.index = dataItem.index;
+                if (this._ctrlKey) {
+                    selection.events = selection.events.concat(events || []);
+                } else {
+                    selection.events = events || [];
+                }
+            }
         },
 
         options: {
@@ -386,11 +580,44 @@ kendo_module({
                 today: "Today",
                 save: "Save",
                 cancel: "Cancel",
-                destroy: "Delete"
+                destroy: "Delete",
+                views: {
+                    day: "Day",
+                    week: "Week",
+                    agenda: "Agenda",
+                    month: "Month"
+                },
+                recurrenceMessages: {
+                    deleteWindowTitle: "Delete Recurring Item",
+                    deleteWindowOccurrence: "Delete current occurrence",
+                    deleteWindowSeries: "Delete the series",
+                    editWindowTitle: "Edit Recurring Item",
+                    editWindowOccurrence: "Edit current occurrence",
+                    editWindowSeries: "Edit the series"
+                },
+                editor: {
+                    title: "Title",
+                    start: "Start",
+                    end: "End",
+                    allDayEvent: "All day event",
+                    description: "Description",
+                    repeat: "Repeat",
+                    timezone: " ",
+                    startTimezone: "Start timezone",
+                    endTimezone: "End timezone",
+                    separateTimezones: "Use separate start and end time zones",
+                    timezoneEditorTitle: "Timezones",
+                    timezoneEditorButton: "Time zone",
+                    editorTitle: "Event"
+                }
             },
             height: null,
             width: null,
             resources: [],
+            group: {
+                resources: [],
+                direction: "horizontal"
+            },
             views: []
         },
 
@@ -450,6 +677,281 @@ kendo_module({
             return this.wrapper.children(".k-event, .k-task");
         },
 
+        _movable: function() {
+            var startSlot;
+            var endSlot;
+            var event;
+            var that = this;
+
+            that._moveDraggable = new kendo.ui.Draggable(that.element, {
+                distance: 0,
+                filter: ".k-event",
+                dragstart: function(e) {
+                    var eventElement = e.currentTarget;
+
+                    var uid = eventElement.attr(kendo.attr("uid"));
+
+                    var view = that.view();
+
+                    event = getOccurrenceByUid(that._data, uid);
+
+                    startSlot = view._slotByPosition(e.x.location, e.y.location);
+
+                    endSlot = startSlot;
+                },
+                drag: function(e) {
+                    var view = that.view();
+
+                    var slot = view._slotByPosition(e.x.location, e.y.location);
+
+                    if (!slot) {
+                        return;
+                    }
+
+                    endSlot = slot;
+
+                    view._updateMoveHint(event, startSlot, endSlot);
+                },
+                dragend: function() {
+                    that.view()._removeMoveHint();
+
+                    var distance = endSlot.start.getTime() - startSlot.start.getTime();
+
+                    var duration = event.end.getTime() - event.start.getTime();
+
+                    var start = new Date(event.start.getTime());
+
+                    kendo.date.setTime(start, distance);
+
+                    var end = new Date(start.getTime());
+
+                    kendo.date.setTime(end, duration);
+
+                    var endResources = that.view()._resourceBySlot(endSlot);
+                    var startResources = that.view()._resourceBySlot(startSlot);
+
+                    if (event.start.getTime() != start.getTime() ||
+                        event.end.getTime() != end.getTime() ||
+                        kendo.stringify(endResources) != kendo.stringify(startResources))  {
+                        that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
+                    }
+                }
+            });
+        },
+
+        _resizable: function() {
+            var startSlot;
+            var endSlot;
+            var event;
+            var that = this;
+
+            function direction(handle) {
+                var directions = {
+                    "k-resize-e": "east",
+                    "k-resize-w": "west",
+                    "k-resize-n": "north",
+                    "k-resize-s": "south"
+                };
+
+                for (var key in directions) {
+                    if (handle.hasClass(key)) {
+                        return directions[key];
+                    }
+                }
+            }
+
+            that._resizeDraggable = new kendo.ui.Draggable(that.element, {
+                distance: 0,
+                filter: ".k-resize-handle",
+                dragstart: function(e) {
+                    var dragHandle = $(e.currentTarget);
+
+                    var eventElement = dragHandle.closest(".k-event");
+
+                    var uid = eventElement.attr(kendo.attr("uid"));
+
+                    event = getOccurrenceByUid(that._data, uid);
+                    var view = that.view();
+
+                    var events = this.element.find(kendo.format(".k-event[{0}={1}]", kendo.attr("uid"), uid));
+
+                    eventElement = events.first();
+
+                    var offset = eventElement.offset();
+
+                    startSlot = view._slotByPosition(offset.left, offset.top);
+
+                    eventElement = events.last();
+
+                    offset = eventElement.offset();
+
+                    offset.left += eventElement[0].clientWidth;
+
+                    offset.top += eventElement[0].clientHeight;
+
+                    endSlot = view._slotByPosition(offset.left, offset.top);
+                },
+                drag: function(e) {
+                    var dragHandle = $(e.currentTarget);
+
+                    var dir = direction(dragHandle);
+
+                    var view = that.view();
+
+                    var slot = view._slotByPosition(e.x.location, e.y.location);
+
+                    if (!slot) {
+                        return;
+                    }
+
+                    var update = false;
+
+                    if (dir == "south") {
+                        if (startSlot.groupIndex == slot.groupIndex && slot.end - event.start >= view._timeSlotInterval()) {
+                            endSlot = slot;
+                            update = true;
+                        }
+                    } else if (dir == "north") {
+                        if (endSlot.groupIndex == slot.groupIndex && event.end - slot.start >= view._timeSlotInterval()) {
+                            startSlot = slot;
+                            update = true;
+                        }
+                    } else if (dir == "east") {
+                        if (startSlot.groupIndex == slot.groupIndex && kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
+                            endSlot = slot;
+                            update = true;
+                        }
+                    } else if (dir == "west") {
+                        if (endSlot.groupIndex == slot.groupIndex && kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
+                            startSlot = slot;
+                            update = true;
+                        }
+                    }
+
+                    if (update) {
+                        view._updateResizeHint(dir, startSlot, endSlot);
+                    }
+                },
+                dragend: function(e) {
+                    var dragHandle = $(e.currentTarget);
+                    var start = new Date(event.start.getTime());
+                    var end = new Date(event.end.getTime());
+                    var dir = direction(dragHandle);
+
+                    that.view()._removeResizeHint();
+
+                    if (dir == "south") {
+                        end = endSlot.end;
+                    } else if (dir == "north") {
+                        start = startSlot.start;
+                    } else if (dir == "east") {
+                        end = new Date(endSlot.end.getTime());
+                        end.setHours(0);
+                        end.setMinutes(0);
+                    } else if (dir == "west") {
+                        start = new Date(startSlot.start.getTime());
+                        start.setHours(0);
+                        start.setMinutes(0);
+                    }
+
+                    if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
+                        that._updateEvent(dir, event, { start: start, end: end });
+                    }
+                }
+            });
+        },
+
+        _updateEvent: function(dir, event, eventInfo) {
+            var that = this;
+
+            var updateEvent = function(event) {
+                if (event.recurrenceId) {
+                    that._removeExceptionDate(event);
+                }
+
+                for (var field in eventInfo) {
+                    event.set(field, eventInfo[field]);
+                }
+
+                if (event.recurrenceId) {
+                    that._addExceptionDate(event);
+                }
+
+                if (!that.trigger(SAVE, { model: event })) {
+                    that._updateSelection(event);
+                    that.dataSource.sync();
+                }
+            };
+
+            var recurrenceHead = function(event) {
+                if (event.recurrenceRule) {
+                    return that.dataSource.getByUid(event.uid);
+                } else {
+                    return that.dataSource.get(event.recurrenceId);
+                }
+            };
+
+            var updateSeries = function() {
+                var head = recurrenceHead(event);
+
+                if (dir == "south" || dir == "north") {
+                    if (eventInfo.start) {
+                        var start = kendo.date.getDate(head.start);
+                        kendo.date.setTime(start, getMilliseconds(eventInfo.start));
+                        eventInfo.start = start;
+                    }
+                    if (eventInfo.end) {
+                        var end = kendo.date.getDate(head.end);
+                        kendo.date.setTime(end, getMilliseconds(eventInfo.end));
+                        eventInfo.end = end;
+                    }
+                }
+
+                updateEvent(head);
+            };
+
+            var updateOcurrence = function() {
+                var head = recurrenceHead(event);
+
+                var exception = head.toJSON();
+
+                delete exception[head.idField];
+                delete exception.recurrenceRule;
+                delete exception.id;
+
+                exception.recurrenceId = head.id;
+                exception.start = event.start;
+                exception.end = event.end;
+
+                exception = that.dataSource.add(exception);
+
+                that._addExceptionDate(exception);
+
+                for (var field in eventInfo) {
+                    exception.set(field, eventInfo[field]);
+                }
+
+                if (!that.trigger(SAVE, { model: exception })) {
+                    that._updateSelection(event);
+                    that.dataSource.sync();
+                }
+            };
+
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
+            if (event.recurrenceRule || (event.recurrenceId && !event.id)) {
+                that.showDialog({
+                    title: recurrenceMessages.editWindowTitle,
+                    text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
+                    buttons: [
+                        { text: recurrenceMessages.editWindowOccurrence, click: updateOcurrence },
+                        { text: recurrenceMessages.editWindowSeries, click: updateSeries }
+                    ]
+                });
+            } else {
+                updateEvent(that.dataSource.getByUid(event.uid));
+            }
+        },
+
         _modelForContainer: function(container) {
             container = $(container).closest("[" + kendo.attr("uid") + "]");
 
@@ -458,47 +960,65 @@ kendo_module({
             return this.dataSource.getByUid(id);
         },
 
-        _showMessage: function(text, callback) {
-            var that = this,
-                html = kendo.format("<div><span>{0}</span>", text),
-                messages = this.options.messages,
-                destroyText = messages.destroy,
-                cancelText = messages.cancel,
-                attr;
+        showDialog: function(options) {
+            var html = kendo.format("<div class='k-popup-edit-form'><div class='k-edit-form-container'><p class='k-popup-message'>{0}</p>", options.text);
+            var scheduler = this;
 
-            html += '<div class="k-edit-buttons">';
-            html += that._createButton({ name: "destroy", text: destroyText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
-            html += '</div></div>';
+            html += '<div class="k-edit-buttons k-state-default">';
 
-            var wnd = $(html).appendTo(this.wrapper).eq(0)
-                .on("click", ".k-button", function(e) {
-                    e.preventDefault();
-                    if ($(this).hasClass("k-grid-delete")) {
-                        callback();
-                    } else if ($(this).hasClass("k-scheduler-cancel")) {
-                        callback(true);
-                    }
+            for (var buttonIndex = 0; buttonIndex < options.buttons.length; buttonIndex++) {
+                html+= scheduler._createButton(options.buttons[buttonIndex]);
+            }
 
-                    wnd.close();
-                })
-                .kendoWindow({
-                    modal: true,
-                    resizable: false,
-                    draggable: true,
-                    title: "Delete Event",
-                    visible: false
-                }).data("kendoWindow");
+            html += '</div></div></div>';
 
-            wnd.center().open();
+            var popup = $(html).appendTo(scheduler.wrapper)
+                               .eq(0)
+                               .on("click", ".k-button", function(e) {
+                                    e.preventDefault();
+
+                                    popup.close();
+
+                                    var buttonIndex = $(e.currentTarget).index();
+
+                                    options.buttons[buttonIndex].click();
+                               })
+                               .kendoWindow({
+                                   modal: true,
+                                   resizable: false,
+                                   draggable: false,
+                                   title: options.title,
+                                   visible: false,
+                                   close: function() {
+                                       this.destroy();
+                                       scheduler.focus();
+                                   }
+                               })
+                               .getKendoWindow();
+
+            popup.center().open();
+        },
+
+        focus: function() {
+            this.wrapper.focus();
         },
 
         _confirmation: function(callback) {
-            var that = this,
-                editable = that.options.editable,
-                confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
+            var editable = this.options.editable;
 
-            if (confirmation !== false && confirmation != null) {
-                that._showMessage(confirmation, callback);
+            if (editable === true || editable.confirmation) {
+                var messages = this.options.messages;
+
+                var text = typeof editable.confirmation === STRING ? editable.confirmation : DELETECONFIRM;
+
+                this.showDialog({
+                    text: text,
+                    title: "Delete Event",
+                    buttons: [
+                        { name: "destroy", text: messages.destroy, click: function() { callback(); } },
+                        { name: "canceledit", text: messages.cancel, click: function() { callback(true); } }
+                    ]
+                });
             } else {
                 callback();
             }
@@ -621,6 +1141,66 @@ kendo_module({
             return kendo.template(template)(options);
         },
 
+        _revertTimezones: function(model) {
+            model.set("startTimezone", this._startTimezone);
+            model.set("endTimezone", this._endTimezone);
+        },
+
+        _createTimezonePopup: function(model, activator) {
+            var that = this,
+                container = that._editContainer.find(".k-scheduler-timezones"),
+                checkbox = container.find(".k-timezone-toggle"),
+                endTimezoneRow = container.find(".k-edit-label:last").add(container.find(".k-edit-field:last")),
+                saveButton = container.find(".k-scheduler-savetimezone"),
+                cancelButton = container.find(".k-scheduler-canceltimezone"),
+                timezonePopup = that._timezonePopup,
+                wnd;
+
+            that._startTimezone = model.startTimezone;
+            that._endTimezone = model.endTimezone;
+
+            if (!timezonePopup) {
+                that._timezonePopup = timezonePopup = container.kendoWindow({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: that.options.messages.editor.timezoneEditorTitle,
+                    visible: false,
+                    close: function(e) {
+                        if (e.userTriggered) {
+                            that._revertTimezones(model);
+                        }
+
+                        if (activator) {
+                            activator.focus();
+                        }
+                    }
+                });
+
+                checkbox.click(function() {
+                    endTimezoneRow.toggle($(this).prop("checked"));
+                    model.set("endTimezone", "");
+                });
+
+                saveButton.click(function(e) {
+                    e.preventDefault();
+                    wnd.close();
+                });
+
+                cancelButton.click(function(e) {
+                    e.preventDefault();
+                    that._revertTimezones(model);
+                    wnd.close();
+                });
+            }
+
+            checkbox.prop("checked", model.endTimezone);
+            endTimezoneRow.toggle(model.endTimezone);
+
+            wnd = timezonePopup.data("kendoWindow");
+            wnd.center().open();
+        },
+
         _createPopupEditor: function(model) {
             var that = this,
                 editable = that.options.editable,
@@ -629,17 +1209,23 @@ kendo_module({
                 messages = that.options.messages,
                 updateText = messages.save,
                 cancelText = messages.cancel,
+                click = function(e) {
+                    e.preventDefault();
+                    that._createTimezonePopup(model, this);
+                },
                 fields = [
-                    { field: "title", title: "Title" /*, format: field.format, editor: field.editor, values: field.values*/ },
-                    { field: "start", title: "Start", editor: DATERANGEEDITOR },
-                    { field: "end", title: "End", editor: DATERANGEEDITOR },
-                    { field: "isAllDay", title: "All day event" }
+                    { field: "title", title: messages.editor.title /*, format: field.format, editor: field.editor, values: field.values*/ },
+                    { field: "start", title: messages.editor.start, editor: DATERANGEEDITOR },
+                    { field: "end", title: messages.editor.end, editor: DATERANGEEDITOR },
+                    { field: "isAllDay", title: messages.editor.allDayEvent }
                 ],
                 attr,
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings),
-                editableFields = [],
                 paramName = settings.paramName,
+                startTime = model.startTime,
+                endTime = model.endTime,
+                editableFields = [],
                 timezone;
 
            if (template) {
@@ -648,13 +1234,19 @@ kendo_module({
                 }
                 html += (kendo.template(template, settings))(model);
             } else {
+                if (kendo.timezone.windows_zones) {
+                    fields.push({ field: "timezone", title: messages.editor.timezone, editor: TIMEZONEPOPUP, click: click, messages: messages.editor });
+                    fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: TIMEZONEEDITOR });
+                    fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: TIMEZONEEDITOR });
+                }
+
                 if (!model.recurrenceId) {
                     timezone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone;
-                    fields.push({ field: "recurrenceRule", title: "Repeat", editor: RECURRENCEEDITOR, timezone: timezone });
+                    fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: RECURRENCEEDITOR, timezone: timezone, messages: messages.recurrenceEditor });
                 }
 
                 if ("description" in model) {
-                    fields.push({ field: "description", title: "Description", editor: '<textarea name="description" class="k-textbox"/>' });
+                    fields.push({ field: "description", title: messages.editor.description, editor: '<textarea name="description" class="k-textbox"/>' });
                 }
 
                 for (var resourceIndex = 0; resourceIndex < that.resources.length; resourceIndex++) {
@@ -668,6 +1260,13 @@ kendo_module({
 
                 for (var idx = 0, length = fields.length; idx < length; idx++) {
                     var field = fields[idx];
+
+                    if (field.field === "startTimezone") {
+                        html += '<div class="k-popup-edit-form k-scheduler-edit-form k-scheduler-timezones" style="display:none">';
+                        html += '<div class="k-edit-form-container">';
+                        html += '<div class="k-edit-label"></div>';
+                        html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />' + messages.editor.separateTimezones +'</label></div>';
+                    }
 
                     html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
 
@@ -690,6 +1289,12 @@ kendo_module({
 
                         html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
                     }
+
+                    if (field.field === "endTimezone") {
+                        html += '<div class="k-edit-buttons k-state-default">';
+                        html += that._createButton({ name: "savetimezone", text: messages.save }) + that._createButton({ name: "canceltimezone", text: messages.cancel });
+                        html += '</div></div></div>';
+                    }
                 }
             }
 
@@ -703,7 +1308,7 @@ kendo_module({
                     modal: true,
                     resizable: false,
                     draggable: true,
-                    title: "Event",
+                    title: messages.editor.editorTitle,
                     visible: false,
                     close: function(e) {
                         if (e.userTriggered) {
@@ -711,10 +1316,18 @@ kendo_module({
                                 e.preventDefault();
                                 return;
                             }
+
+                            model.startTime = startTime;
+                            model.endTime = endTime;
                             that.cancelEvent();
+
+                            that.focus();
                         }
                     }
                 }, options));
+
+            delete model.startTime;
+            delete model.endTime;
 
             that.editable = that._editContainer
                 .kendoEditable({
@@ -724,16 +1337,17 @@ kendo_module({
                     validateOnBlur: true
                 }).data("kendoEditable");
 
-            container.data("kendoWindow").center().open();
-
-            that.trigger(EDIT, { container: container, event: model });
+            if (that.trigger(EDIT, { container: container, event: model })) {
+                that.cancelEvent();
+            } else {
+                container.data("kendoWindow").center().open();
+            }
         },
 
         _editRecurringDialog: function(model, uid) {
-            var that = this,
-                wnd = $('<div><button class="k-button">Edit current occurrence</button><button class="k-button">Edit the series</button></div>'),
-                buttons = wnd.find("button"),
-                id, idField;
+            var that = this;
+            var id;
+            var idField;
 
             if (!model) {
                 model = getOccurrenceByUid(that._data, uid);
@@ -742,58 +1356,50 @@ kendo_module({
                 }
             }
 
-            if (model) {
-                that._recurringDialog = wnd.appendTo(that.wrapper).kendoWindow({
-                    modal: true,
-                    resizable: false,
-                    draggable: true,
-                    title: "Edit Recurring Item",
-                    visible: false,
-                    deactivate: function() {
-                        that._recurringDialog.destroy();
-                    }
-                }).data("kendoWindow");
+            var editOcurrence = function() {
+                if (model.id && model.recurrenceId) {
+                    that._editEvent(model); //edit existing exception
+                } else {
+                    if (!model.recurrenceId) { //create exception eventInfo from origin
+                        id = model.id;
+                        idField = model.idField;
 
-                buttons.eq(0).on("click", function() {
-                    that._recurringDialog.close();
-
-                    if (model.id && model.recurrenceId) {
-                        that._editEvent(model); //edit existing exception
-                    } else {
-                        if (!model.recurrenceId) { //create exception eventInfo from origin
-                            id = model.id;
-                            idField = model.idField;
-
-                            if (model.toJSON) {
-                                model = model.toJSON();
-                            }
-
-                            delete model[idField];
-                            delete model.recurrenceRule;
-                            delete model.id;
-
-                            model.uid = kendo.guid();
-                            model.recurrenceId = id;
+                        if (model.toJSON) {
+                            model = model.toJSON();
                         }
 
-                        that._addExceptionDate(model);
-                        that.addEvent(model);
-                    }
-                });
+                        delete model[idField];
+                        delete model.recurrenceRule;
+                        delete model.id;
 
-                buttons.eq(1).on("click", function() {
-                    if (model.recurrenceId) {
-                        model = that.dataSource.get(model.recurrenceId);
+                        model.uid = kendo.guid();
+                        model.recurrenceId = id;
                     }
 
-                    that._recurringDialog.close();
-                    that._removeExcetionEvents(model);
-                    model.set("recurrenceException", "");
-                    that._editEvent(model);
-                });
+                    that._addExceptionDate(model);
+                    that.addEvent(model);
+                }
+            };
 
-                that._recurringDialog.center().open();
-            }
+            var editSeries = function() {
+                if (model.recurrenceId) {
+                    model = that.dataSource.get(model.recurrenceId);
+                }
+
+                that._removeExceptions(model);
+                model.set("recurrenceException", "");
+                that._editEvent(model);
+            };
+
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
+            that.showDialog({
+                title: recurrenceMessages.editWindowTitle,
+                text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
+                buttons: [
+                    { text: recurrenceMessages.editWindowOccurrence, click: editOcurrence },
+                    { text: recurrenceMessages.editWindowSeries, click: editSeries }
+                ]
+            });
         },
 
         _addExceptionDate: function(model) {
@@ -840,12 +1446,12 @@ kendo_module({
             };
 
             if (that.editable) {
-                that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
-            }
+                if (that._timezonePopup && that._timezonePopup.data("kendoWindow")) {
+                    that._timezonePopup.data("kendoWindow").destroy();
+                    that._timezonePopup = null;
+                }
 
-            if (that._recurringDialog) {
-                that._recurringDialog.destroy();
-                that._recurringDialog = null;
+                that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
             }
         },
 
@@ -867,7 +1473,7 @@ kendo_module({
                     that._removeExceptionDate(model);
                 } else if (!that.trigger(REMOVE, { event: model })) {
                     if (removeExceptions) {
-                        that._removeExcetionEvents(model);
+                        that._removeExceptions(model);
                     }
 
                     if (that.dataSource.remove(model)) {
@@ -878,11 +1484,10 @@ kendo_module({
         },
 
         _deleteRecurringDialog: function(model, uid) {
-            var that = this,
-                isException = !model,
-                wnd = $('<div><button class="k-button">Delete current occurrence</button><button class="k-button">Delete the series</button></div>'),
-                buttons = wnd.find("button"),
-                id, idField;
+            var that = this;
+            var id;
+            var idField;
+            var isException = !model;
 
             if (isException) {
                 model = getOccurrenceByUid(that._data, uid);
@@ -891,53 +1496,44 @@ kendo_module({
                 }
             }
 
-            if (model) {
-                that._recurringDialog = wnd.appendTo(that.wrapper).kendoWindow({
-                    modal: true,
-                    resizable: false,
-                    draggable: true,
-                    title: "Delete Recurring Item",
-                    visible: false,
-                    deactivate: function() {
-                        that._recurringDialog.destroy();
-                        that._recurringDialog = null;
-                    }
-                }).data("kendoWindow");
+            var deleteOcurrence = function() {
+                if (!model.recurrenceId) {
+                    id = model.id;
+                    idField = model.idField;
 
-                buttons.eq(0).on("click", function() {
-                    if (!model.recurrenceId) {
-                        id = model.id;
-                        idField = model.idField;
+                    model = model.toJSON();
 
-                        model = model.toJSON();
+                    delete model[idField];
+                    delete model.recurrenceRule;
+                    delete model.id;
 
-                        delete model[idField];
-                        delete model.recurrenceRule;
-                        delete model.id;
+                    model.uid = kendo.guid();
+                    model.recurrenceId = id;
+                }
 
-                        model.uid = kendo.guid();
-                        model.recurrenceId = id;
-                    }
+                that._addExceptionDate(model);
+                that._removeEvent(model);
+            };
 
-                    that._recurringDialog.close();
-                    that._addExceptionDate(model);
-                    that._removeEvent(model);
-                });
+            var deleteSeries = function() {
+                if (model.recurrenceId) {
+                    model = that.dataSource.get(model.recurrenceId);
+                }
+                that._removeEvent(model, true);
+            };
 
-                buttons.eq(1).on("click", function() {
-                    if (model.recurrenceId) {
-                        model = that.dataSource.get(model.recurrenceId);
-                    }
-
-                    that._recurringDialog.close();
-                    that._removeEvent(model, true);
-                });
-
-                that._recurringDialog.center().open();
-            }
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
+            that.showDialog({
+                title: recurrenceMessages.deleteWindowTitle,
+                text: recurrenceMessages.deleteRecurring ? recurrenceMessages.deleteRecurring : DELETERECURRING,
+                buttons: [
+                   { text: recurrenceMessages.deleteWindowOccurrence, click: deleteOcurrence },
+                   { text: recurrenceMessages.deleteWindowSeries, click: deleteSeries }
+                ]
+            });
         },
 
-        _removeExcetionEvents: function(model) {
+        _removeExceptions: function(model) {
             var dataSource = this.dataSource,
                 data = dataSource.data(),
                 length = data.length,
@@ -1005,6 +1601,18 @@ kendo_module({
                 };
 
                 view.bind("navigate", that._viewNavigateHandler);
+
+                that._viewActivateHandler = function() {
+                    var view = this;
+                    if (that._selection) {
+                        view.moveSelectionToPeriod(that._selection);
+                        view.select(that._selection);
+
+                        that._adjustSelectedDate();
+                    }
+                };
+
+                view.bind("activate", that._viewActivateHandler);
             }
         },
 
@@ -1058,6 +1666,16 @@ kendo_module({
             this.refresh();
         },
 
+        _adjustSelectedDate: function() {
+            var date = this._model.selectedDate,
+                selection = this._selection,
+                start = selection.start;
+
+            if (start && !kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
+                date.setFullYear(start.getFullYear(), start.getMonth(), start.getDate());
+            }
+        },
+
         _initializeView: function(name) {
             var view = this.views[name];
 
@@ -1070,7 +1688,7 @@ kendo_module({
                 }
 
                 if (type) {
-                    view = new type(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date() })));
+                    view = new type(this.wrapper, trimOptions(extend(true, {}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date() })));
                 } else {
                     throw new Error("There is no such view");
                 }
@@ -1110,6 +1728,16 @@ kendo_module({
 
                 if (defaultView) {
                     view.type = defaultView.type;
+                    defaultView.title = this.options.messages.views[name];
+                    if (defaultView.type === "day") {
+                        defaultView.messages = { allDay: this.options.messages.allDay };
+                    } else if (defaultView.type === "agenda") {
+                        defaultView.messages = {
+                            event: this.options.messages.event,
+                            date: this.options.messages.date,
+                            time: this.options.messages.time
+                        };
+                    }
                 }
 
                 view = extend({ title: name }, defaultView, isSettings ? view : {});
@@ -1172,6 +1800,7 @@ kendo_module({
 
                 that.resources.push({
                     field: field,
+                    name: resource.name || field,
                     title: resource.title || field,
                     dataTextField: resource.dataTextField || "text",
                     dataValueField: resource.dataValueField || "value",
@@ -1268,6 +1897,12 @@ kendo_module({
                 that.view($(this).attr(kendo.attr("name")));
                 e.preventDefault();
             });
+
+            toolbar.find("li").hover(function(){
+                    $(this).addClass("k-state-hover");
+                }, function(){
+                    $(this).removeClass("k-state-hover");
+                });
         },
 
         _showCalendar: function() {
@@ -1370,23 +2005,121 @@ kendo_module({
 
     var defaultViews = {
         day: {
-            type: "kendo.ui.DayView",
-            title: "Day"
+            type: "kendo.ui.DayView"
         },
         week: {
-            type: "kendo.ui.WeekView",
-            title: "Week"
+            type: "kendo.ui.WeekView"
         },
         agenda: {
-            type: "kendo.ui.AgendaView",
-            title: "Agenda"
+            type: "kendo.ui.AgendaView"
         },
         month: {
-            type: "kendo.ui.MonthView",
-            title: "Month"
+            type: "kendo.ui.MonthView"
         }
     };
 
     ui.plugin(Scheduler);
+
+    var TimezoneEditor = Widget.extend({
+        init: function(element, options) {
+            var that = this,
+                zones = kendo.timezone.windows_zones;
+
+            if (!zones || !kendo.timezone.zones_titles) {
+                throw new Error('kendo.timezones.min.js is not included.');
+            }
+
+            Widget.fn.init.call(that, element, options);
+
+            that.wrapper = that.element;
+
+            that._zonesQuery = new kendo.data.Query(zones);
+            that._zoneTitleId = kendo.guid();
+            that._zoneTitlePicker();
+            that._zonePicker();
+
+            that.value(that.options.value);
+        },
+        options: {
+            name: "TimezoneEditor",
+            value: "",
+            optionLabel: "No timezone"
+        },
+        events: [ "change" ],
+
+        _zoneTitlePicker: function() {
+            var that = this,
+                zoneTitle = $('<input id="' + that._zoneTitleId + '"/>').appendTo(that.wrapper);
+
+            that._zoneTitle = new kendo.ui.DropDownList(zoneTitle, {
+                dataSource: kendo.timezone.zones_titles,
+                dataValueField: "other_zone",
+                dataTextField: "name",
+                optionLabel: that.options.optionLabel,
+                cascade: function() {
+                    if (!this.value()) {
+                        that._zone.wrapper.hide();
+                    }
+                }
+            });
+        },
+
+        _zonePicker: function() {
+            var that = this,
+                zone = $('<input />').appendTo(this.wrapper);
+
+            that._zone = new kendo.ui.DropDownList(zone, {
+                dataValueField: "zone",
+                dataTextField: "territory",
+                dataSource: that._zonesQuery.data,
+                cascadeFrom: that._zoneTitleId,
+                cascade: function() {
+                    that._value = this.value();
+                    that.trigger("change");
+                },
+                dataBound: function() {
+                    that._value = this.value();
+                    this.wrapper.toggle(this.dataSource.view().length > 1);
+                }
+            });
+
+            that._zone.wrapper.hide();
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            if (this._moveDraggable) {
+                this._moveDraggable.destroy();
+            }
+
+            if (this._resizeDraggable) {
+                this._resizeDraggable.destroy();
+            }
+
+            kendo.destroy(this.wrapper);
+        },
+
+        value: function(value) {
+            var that = this,
+                zone;
+
+            if (value === undefined) {
+                return that._value;
+            }
+
+            zone = that._zonesQuery.filter({ field: "zone", operator: "eq", value: value }).data[0];
+
+            if (zone) {
+                that._zoneTitle.value(zone.other_zone);
+                that._zone.value(zone.zone);
+            } else {
+                that._zoneTitle.value("");
+            }
+
+        }
+    });
+
+    ui.plugin(TimezoneEditor);
 
 })(window.kendo.jQuery);

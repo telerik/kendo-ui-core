@@ -1,0 +1,73 @@
+﻿<div data-role="view" id="scrollview-template" data-title="Gallery 500px" data-stretch="true">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+    <div data-role="scrollview" 
+        data-source="_500pxBatchDS" 
+        data-template="scrollview-batch-template"
+        data-items-per-page="4"
+        data-content-height="100%"
+        data-enable-pager="false">
+    </div>
+</div>
+
+<script id="scrollview-batch-template" type="text/x-kendo-template">
+    <div class="batch-page">
+        <div class="tile" data-id="#: data[0].id #" style="background: url('#: data[0].image_url #') no-repeat center center;"></div>
+        <div class="tile" data-id="#: data[1].id #" style="background: url('#: data[1].image_url #') no-repeat center center;"></div>
+        <div class="tile" data-id="#: data[2].id #" style="background: url('#: data[2].image_url #') no-repeat center center;"></div>
+        <div class="tile" data-id="#: data[3].id #" style="background: url('#: data[3].image_url #') no-repeat center center;"></div>
+    </div>
+</script>
+
+<script src="@Url.Content("~/content/spa/aeroviewr/js/500px.js")"></script>
+
+<script>
+    _500px.init({
+        sdk_key: 'a3be03a8a98d6e05af17f60d2cf4bf696eb47555'
+    });
+
+    var _500pxBatchDS = new kendo.data.DataSource({
+        transport: {
+            read: function (options) {
+                var params = {
+                    feature: "popular",
+                    image_size: 3,
+                    page: options.data.page,
+                    rpp: options.data.pageSize
+                };
+
+                _500px.api("/photos", params, function (response) {
+                    options.success(response.data);
+                });
+            }
+        },
+        serverPaging: true,
+        pageSize: 36,
+        schema: {
+            data: "photos",
+            total: "total_items"
+        }
+    });
+</script>
+
+<style scoped>
+    .batch-page {
+        height: 100%;
+        width: 100%;
+    }
+
+    .tile {
+        height: 50%;
+        width: 50%;
+        float: left;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+</style>

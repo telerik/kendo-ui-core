@@ -180,6 +180,14 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("dataSource", dataSource);
     }
 
+    public String getRenderAs() {
+        return (String)getProperty("renderAs");
+    }
+
+    public void setRenderAs(String value) {
+        setProperty("renderAs", value);
+    }
+
     public Object getSeriesColors() {
         return (Object)getProperty("seriesColors");
     }

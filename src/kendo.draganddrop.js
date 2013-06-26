@@ -249,7 +249,7 @@ kendo_module({
         },
 
         centerCoordinates: function() {
-            return { x: Math.max(0, -this.x.centerOffset), y: Math.max(0, -this.y.centerOffset) };
+            return { x: Math.min(0, -this.x.centerOffset), y: Math.min(0, -this.y.centerOffset) };
         },
 
         refresh: function() {
@@ -376,16 +376,16 @@ kendo_module({
     });
 
     var TRANSFORM_STYLE = support.transitions.prefix + "Transform",
-        round = Math.round,
         translate;
+
 
     if (support.hasHW3D) {
         translate = function(x, y, scale) {
-            return "translate3d(" + round(x) + "px," + round(y) +"px,0) scale(" + scale + ")";
+            return "translate3d(" + x + "px," + y +"px,0) scale(" + scale + ")";
         };
     } else {
         translate = function(x, y, scale) {
-            return "translate(" + round(x) + "px," + round(y) +"px) scale(" + scale + ")";
+            return "translate(" + x + "px," + y +"px) scale(" + scale + ")";
         };
     }
 

@@ -121,7 +121,7 @@
                         result = encoding.encode(value, 300, 100),
                         expectedResult = generateResult(value, "K",
                             {quietZoneLength: encoding.options.quietZoneLength });
-
+                    
                     ok(comparePatterns(result.pattern, expectedResult));
                 });
 
@@ -152,17 +152,11 @@
                         value = "_730" + String.fromCharCode(17) + "#'",
                         quietZoneLength = encoding.options.quietZoneLength,
                         result,
-                        resultWithoutQuietZone,
-                        expectedResult = fixed(width / (112 + 2 * quietZoneLength), 2),
-                        expectedResultWithoutQuietZone = 1.79;
+                        expectedResult = fixed(width / (112 + 2 * quietZoneLength), 2);
 
-                        encoding.options.addQuietZone = true;
                         result = encoding.encode(value, width, height).baseUnit;
                         equal(fixed(result, 2), expectedResult);
 
-                        encoding.options.addQuietZone = false;
-                        resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
-                        equal(fixed(resultWithoutQuietZone, 2), expectedResultWithoutQuietZone);
                 });
 
             })();

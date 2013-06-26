@@ -1310,6 +1310,7 @@
 
                 test("Accepts capitalized type", function() {
                     createPlotArea([{
+                            type: "bar",
                             data: [100, 200, 300]
                         }], {
                         categoryAxis: {
@@ -1323,6 +1324,7 @@
 
                 test("Automatically detects date category axis", function() {
                     createPlotArea([{
+                            type: "bar",
                             data: [100, 200, 300]
                         }], {
                         categoryAxis: {
@@ -1335,11 +1337,12 @@
                     });
 
                     deepEqual(plotArea.categoryAxis.options.type, "date");
-                    deepEqual(plotArea.series[0].data, [100, 200, undefined, 300]);
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }, { value: 200 }, {}, { value: 300 }]);
                 });
 
                 test("User can override automatic category axis type", function() {
                     createPlotArea([{
+                            type: "bar",
                             data: [100, 200, 300]
                         }], {
                         categoryAxis: {
@@ -1358,26 +1361,18 @@
 
                 test("Does not alter data points when no grouping is done", function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, 200, 300]
                     }], {
                         categoryAxis: dateCategoryAxis
                     });
 
-                    deepEqual(plotArea.series[0].data, [100, 200, undefined, 300]);
-                });
-
-                test("Does not alter data items when no grouping is done", function() {
-                    createPlotArea([{
-                        data: ["a", "b", "c"]
-                    }], {
-                        categoryAxis: dateCategoryAxis
-                    });
-
-                    deepEqual(plotArea.series[0].data, ["a", "b", undefined, "c"]);
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }, { value: 200 }, {}, { value: 300 }]);
                 });
 
                 test("Does not alter original series data", function() {
                     var series = [{
+                        type: "bar",
                         data: [100, 200, 300]
                     }];
 
@@ -1392,6 +1387,7 @@
 
                 test("Does not alter original series data items", function() {
                     var series = [{
+                        type: "bar",
                         data: [100, 200, 300],
                         dataItems: ["a", "b", "c"]
                     }];
@@ -1410,6 +1406,7 @@
 
                 test("Aggregates series data using max by default", function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, 200, 300]
                     }], {
                         categoryAxis: kendo.deepExtend({
@@ -1417,11 +1414,12 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [300]);
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
                 });
 
                 test("Aggregates are calculated for single values", 1, function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100],
                         aggregate: function() { ok(true); }
                     }], {
@@ -1433,6 +1431,7 @@
 
                 test("max ignores NaN values", function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, NaN, 300],
                         aggregate: "max"
                     }], {
@@ -1441,11 +1440,12 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [300]);
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
                 });
 
                 test("min ignores NaN values", function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, NaN, 300],
                         aggregate: "min"
                     }], {
@@ -1454,11 +1454,12 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [100]);
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }]);
                 });
 
                 test("sum ignores NaN values", function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, NaN, 300],
                         aggregate: "sum"
                     }], {
@@ -1467,11 +1468,12 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [400]);
+                    deepEqual(plotArea.series[0].data, [{ value: 400 }]);
                 });
 
                 test("Aggregates bound series data", function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [{ value: 100 }, { value: 200 }, { value: 300 }]
                     }], {
                         categoryAxis: kendo.deepExtend({
@@ -1479,7 +1481,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [300]);
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
                 });
 
                 test("Aggregates bound series data with custom field names", function() {
@@ -1502,11 +1504,12 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [[200, 200, 200, 200]]);
+                    deepEqual(plotArea.series[0].data, [{ o: 200, h: 200, l: 200, c: 200 }]);
                 });
 
                 test("Aggregates series data with predefined function", function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, 200, 300],
                         aggregate: "min"
                     }], {
@@ -1515,11 +1518,12 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [100]);
+                deepEqual(plotArea.series[0].data, [{ value: 100 }]);
                 });
 
                 test("Aggregates series data with user function", 1, function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, 200, 300],
                         aggregate: function(values, series) {
                             deepEqual(values, series.data);
@@ -1534,6 +1538,7 @@
 
                 test("User aggregate function receives dataItems", 1, function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, 200, 300],
                         aggregate: function(values, series, dataItems) {
                             deepEqual(dataItems, series.data);
@@ -1548,6 +1553,7 @@
 
                 test("User aggregate function receives group", 1, function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, 200, 300],
                         aggregate: function(values, series, dataItems, group) {
                             deepEqual(group, new Date("2012/02/01"));
@@ -1569,6 +1575,7 @@
 
                 test("Aggregates series on secondary axis", function() {
                     createPlotArea([{
+                        type: "bar",
                         data: [100, 200, 300],
                         categoryAxis: "b"
                     }], {
@@ -1580,12 +1587,13 @@
                         ]
                     });
 
-                    deepEqual(plotArea.series[0].data, [300]);
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
                 });
 
                 test("Throws error when unable to locate category axis", function() {
                     raises(function() {
                         createPlotArea([{
+                            type: "bar",
                             data: [100, 200, 300],
                             categoryAxis: "b"
                         }], {
@@ -1607,7 +1615,7 @@
                             "open": "max",
                             "high": "max",
                             "low": "min",
-                            "close": "max",
+                            "close": "max"
                         },
                         data: [[1,4,0,2], [2,5,1,3], [3,6,2,4]]
                     }], {
@@ -1617,7 +1625,7 @@
                     }),
                     point = plotArea.series[0].data[0];
 
-                    deepEqual(point, [3,6,0,4]);
+                    deepEqual(point, { open: 3, high: 6, low: 0, close: 4 });
                 });
 
                 test("Series data with predefined function", function() {
@@ -1627,7 +1635,7 @@
                             "open": "min",
                             "high": "min",
                             "low": "min",
-                            "close": "min",
+                            "close": "min"
                         },
                         data: [[1,4,0,2], [2,5,1,3], [3,6,2,4]]
                     }], {
@@ -1637,7 +1645,7 @@
                     }),
                     point = plotArea.series[0].data[0];
 
-                    deepEqual(point, [1,4,0,2]);
+                    deepEqual(point, { open: 1, high: 4, low: 0, close: 2 });
                 });
 
                 test("Series data with user function", 1, function() {
@@ -1667,19 +1675,19 @@
                         categoryField: "date",
                         data: [{
                             value: 1,
-                            date: new Date("2013-06-01")
+                            date: new Date("2013/06/01")
                         }, {
                             value: 2,
-                            date: new Date("2013-06-02")
+                            date: new Date("2013/06/02")
                         }, {
                             value: 3,
-                            date: new Date("2013-07-01")
+                            date: new Date("2013/07/01")
                         }]
                     }], {
                         categoryAxis: {
                             categories: [
-                                new Date("2013-06-01"), new Date("2013-06-02"),
-                                new Date("2013-07-01")
+                                new Date("2013/06/01"), new Date("2013/06/02"),
+                                new Date("2013/07/01")
                             ],
                             baseUnit: "months"
                         }
@@ -1687,7 +1695,7 @@
 
                     point = plotArea.series[0].data[0];
 
-                    equal(point, 2);
+                    equal(point.value, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -1715,7 +1723,7 @@
 
                     var data = plotArea.series[0].data;
 
-                    equal(data[0], 2);
+                    equal(data[0].value, 2);
                     equal(data.length, 2);
                 });
 
@@ -2117,7 +2125,7 @@
                         categoryAxis: {
                             categories: ["A"]
                         },
-                        valueAxis: { },
+                        valueAxis: { }
                     }, options));
 
                     plotArea.reflow(chartBox);
@@ -2365,7 +2373,7 @@
                 test("value axis is rendered in the first pane by default", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }]
@@ -2377,7 +2385,7 @@
                 test("category axis is rendered in the first pane by default", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }]
@@ -2389,7 +2397,7 @@
                 test("value axis is moved to the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2404,7 +2412,7 @@
                 test("value axis height matches the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2423,7 +2431,7 @@
                 test("category axis remains in the first pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2438,7 +2446,7 @@
                 test("category axis fits in the first pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2453,7 +2461,7 @@
                 test("category axis fits in the second pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2468,7 +2476,7 @@
                 test("right aligned value axis fits in the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2487,7 +2495,7 @@
                 test("right aligned value axis height matches the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2509,7 +2517,7 @@
                 test("secondary value axis is positioned in the designated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2526,7 +2534,7 @@
                 test("secondary value axis is aligned to category axis", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2547,7 +2555,7 @@
                 test("secondary value axis is aligned to category axis end", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2568,7 +2576,7 @@
                 test("right aligned secondary value axis fits in the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2589,7 +2597,7 @@
                 test("left anchor axis is assigned per pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2633,7 +2641,7 @@
                         axis: "b"
                     }], {
                         panes: [{
-                            name: "top",
+                            name: "top"
                         }, {
                             name: "bottom"
                         }],

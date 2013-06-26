@@ -2208,6 +2208,54 @@ namespace KendoCRUDService.Models.EF
         private global::System.String _RecurrenceException;
         partial void OnRecurrenceExceptionChanging(global::System.String value);
         partial void OnRecurrenceExceptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String StartTimezone
+        {
+            get
+            {
+                return _StartTimezone;
+            }
+            set
+            {
+                OnStartTimezoneChanging(value);
+                ReportPropertyChanging("StartTimezone");
+                _StartTimezone = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("StartTimezone");
+                OnStartTimezoneChanged();
+            }
+        }
+        private global::System.String _StartTimezone;
+        partial void OnStartTimezoneChanging(global::System.String value);
+        partial void OnStartTimezoneChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String EndTimezone
+        {
+            get
+            {
+                return _EndTimezone;
+            }
+            set
+            {
+                OnEndTimezoneChanging(value);
+                ReportPropertyChanging("EndTimezone");
+                _EndTimezone = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("EndTimezone");
+                OnEndTimezoneChanged();
+            }
+        }
+        private global::System.String _EndTimezone;
+        partial void OnEndTimezoneChanging(global::System.String value);
+        partial void OnEndTimezoneChanged();
 
         #endregion
 
@@ -4426,6 +4474,54 @@ namespace KendoCRUDService.Models.EF
         private global::System.String _RecurrenceException;
         partial void OnRecurrenceExceptionChanging(global::System.String value);
         partial void OnRecurrenceExceptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String StartTimezone
+        {
+            get
+            {
+                return _StartTimezone;
+            }
+            set
+            {
+                OnStartTimezoneChanging(value);
+                ReportPropertyChanging("StartTimezone");
+                _StartTimezone = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("StartTimezone");
+                OnStartTimezoneChanged();
+            }
+        }
+        private global::System.String _StartTimezone;
+        partial void OnStartTimezoneChanging(global::System.String value);
+        partial void OnStartTimezoneChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String EndTimezone
+        {
+            get
+            {
+                return _EndTimezone;
+            }
+            set
+            {
+                OnEndTimezoneChanging(value);
+                ReportPropertyChanging("EndTimezone");
+                _EndTimezone = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("EndTimezone");
+                OnEndTimezoneChanged();
+            }
+        }
+        private global::System.String _EndTimezone;
+        partial void OnEndTimezoneChanging(global::System.String value);
+        partial void OnEndTimezoneChanged();
 
         #endregion
 

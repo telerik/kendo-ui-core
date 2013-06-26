@@ -8,6 +8,8 @@ namespace Kendo.Mvc.UI
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Resources;
+    using System.Text.RegularExpressions;
 
     public class MobileApplication : WidgetBase
     {
@@ -21,6 +23,8 @@ namespace Kendo.Mvc.UI
             HideAddressBar = true;
 
             UpdateDocumentTitle = true;
+
+            WebAppCapable = true;
 
         //>> Initialization
         
@@ -43,7 +47,13 @@ namespace Kendo.Mvc.UI
         
         public bool ServerNavigation { get; set; }
         
+        public string Skin { get; set; }
+        
         public string Transition { get; set; }
+        
+        public bool WebAppCapable { get; set; }
+        
+        public bool PushState { get; set; }
         
         //<< Fields
 
@@ -51,11 +61,21 @@ namespace Kendo.Mvc.UI
         {
             var container = "document.body";
 
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(Events);
 
             options.Add("hideAddressBar", HideAddressBar);
             options.Add("updateDocumentTitle", UpdateDocumentTitle);
             options.Add("serverNavigation", ServerNavigation);
+
+            if (Skin.HasValue())
+            {
+                options.Add("skin", Skin);
+            }
+
+            if (!WebAppCapable)
+            {
+                options.Add("webAppCapable", false);
+            }
 
             if (Layout.HasValue())
             {
@@ -82,6 +102,16 @@ namespace Kendo.Mvc.UI
                 container = "\"" + Selector + "\"";
             }
 
+            if (PushState)
+            {
+                options.Add("pushState", PushState);
+                var url = new System.Web.Mvc.UrlHelper(ViewContext.RequestContext);
+                var routeData = ViewContext.RequestContext.RouteData.Values;
+                var root = url.Action(string.Empty, routeData);                
+                
+                options.Add("root",  Regex.Replace(root, "/$", "/"));                        
+            }
+
             writer.Write(String.Format("jQuery(function(){{ new kendo.mobile.Application(jQuery({0}), {1}); }});", container, Initializer.Serialize(options)));
 
             base.WriteInitializationScript(writer);
@@ -91,6 +121,11 @@ namespace Kendo.Mvc.UI
         {
             //Name is not mandatory for MobilApplication
             //base.VerifySettings();
+
+            if (ServerNavigation && PushState)
+            {
+                throw new NotSupportedException(Exceptions.CannotUsePushStateWithServerNavigation);                
+            }
         }       
     }
 }

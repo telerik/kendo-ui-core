@@ -142,34 +142,21 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
+    * The data item field which contains the series note text.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function noteTextField($value) {
+        return $this->setProperty('noteTextField', $value);
+    }
+
+    /**
     * The distance between the category clusters.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
     public function gap($value) {
         return $this->setProperty('gap', $value);
-    }
-
-    /**
-    * Sets the groupNameTemplate option of the ChartSeriesItem.
-    * The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
-    * @param string $value The id of the element which represents the kendo template.
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function groupNameTemplateId($value) {
-        $value = new \Kendo\Template($value);
-
-        return $this->setProperty('groupNameTemplate', $value);
-    }
-
-    /**
-    * Sets the groupNameTemplate option of the ChartSeriesItem.
-    * The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
-    * @param string $value The template content.
-    * @return \Kendo\Dataviz\UI\ChartSeriesItem
-    */
-    public function groupNameTemplate($value) {
-        return $this->setProperty('groupNameTemplate', $value);
     }
 
     /**
@@ -263,7 +250,7 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
-    * The behavior for handling missing values.The supported values are:
+    * The behavior for handling missing values. The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
@@ -477,6 +464,15 @@ or series name (for other available series types) in the legend.
     */
     public function yField($value) {
         return $this->setProperty('yField', $value);
+    }
+
+    /**
+    * The series notes configuration.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemNotes|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function notes($value) {
+        return $this->setProperty('notes', $value);
     }
 
 //<< Properties

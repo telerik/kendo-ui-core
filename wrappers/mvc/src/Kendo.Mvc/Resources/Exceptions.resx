@@ -325,4 +325,7 @@ The request for '{0}' has found the following matching controllers:{2}</value>
   <data name="TooltipContainerShouldBeSet" xml:space="preserve">
     <value>You should set Tooltip container. Tooltip.For(container)</value>
   </data>
+  <data name="CannotUsePushStateWithServerNavigation" xml:space="preserve">
+    <value>Cannot use PushState with server navigation.</value>
+  </data>
 </root>

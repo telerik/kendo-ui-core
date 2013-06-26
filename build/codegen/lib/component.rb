@@ -1,4 +1,5 @@
 require 'string'
+require 'field'
 require 'method'
 require 'composite_option'
 require 'array_option'
@@ -17,19 +18,24 @@ module CodeGen
     class Component
         include Options
 
-        attr_reader :full_name, :name, :options, :events, :methods
+        attr_reader :full_name, :name, :options, :events, :methods, :fields
 
         def initialize(settings)
             @full_name = settings[:name]
             @name = @full_name.split('.').last
             @options = []
             @events = []
+            @fields = []
             @methods = []
             @content = false
         end
 
         def method_class
             Method
+        end
+
+        def field_class
+            Field
         end
 
         def api_link
@@ -59,6 +65,16 @@ module CodeGen
                 add_option(option)
 
             end
+        end
+
+        def add_field(settings)
+            settings[:owner] = self
+
+            field = field_class.new(settings)
+
+            @fields.push(field)
+
+            field
         end
 
         def add_method(settings)

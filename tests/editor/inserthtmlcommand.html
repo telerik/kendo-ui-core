@@ -11,47 +11,48 @@
 </head>
 <body>
 
-    <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+    <div><textarea cols="20" rows="4" id="editor" name="editor"></textarea></div>
 
     <script>
 
-        var InsertHtmlCommand = kendo.ui.editor.InsertHtmlCommand;
+        var editor = $("#editor").kendoEditor().data("kendoEditor");
 
-        $("#Editor1").kendoEditor();
+        module("InsertHtmlCommand");
 
-        module("InsertHtmlCommand", {
-            setup: function() {
-                editor = getEditor();
-            }
-        });
-
-        test('exec calls clipboard paste', function() {
-            var range = createRangeFromText(editor, 'f|o|o');
-
-            var oldPaste = editor.clipboard.paste;
-            var argument;
-
-            try {
-                editor.clipboard.paste = function() { argument = arguments[0]; }
-
-                var command = new InsertHtmlCommand({ range:range, value: '<span class="test-icon"></span>' });
-                command.editor = editor;
-                command.exec();
-                equal(argument, '<span class="test-icon"></span>');
-
-                } finally {
-                editor.clipboard.paste = oldPaste;
-            }
-        });
-
-        test('exec inserts html parameter', function() {
-            var range = createRangeFromText(editor, 'fo||o');
-            editor.selectRange(range);
-
-            var command = new InsertHtmlCommand({ range:range, value: '<span class="test-icon"></span>' });
+        function execInsertHtmlCommand(range, value) {
+            var command = new kendo.ui.editor.InsertHtmlCommand({ range: range, value: value });
             command.editor = editor;
             command.exec();
-            equal(editor.value(), 'fo<span class="test-icon"></span>o');
+        }
+
+        test("exec calls clipboard paste", function() {
+            var argument;
+
+            withMock(editor.clipboard, "paste", function() { argument = arguments[0]; }, function() {
+                var range = createRangeFromText(editor, 'f|o|o');
+
+                execInsertHtmlCommand(range, '<span class="bar"></span>');
+
+                equal(argument, '<span class="bar"></span>');
+            });
+        });
+
+        test("exec inserts html parameter", function() {
+            var range = createRangeFromText(editor, 'fo||o');
+
+            execInsertHtmlCommand(range, '<span class="bar"></span>');
+
+            equal(editor.value(), 'fo<span class="bar"></span>o');
+        });
+
+        test("exec places cursor after inserted text", function() {
+            var range = createRangeFromText(editor, 'foo||');
+            editor.selectRange(range);
+
+            execInsertHtmlCommand(editor.getRange(), 'bar');
+            execInsertHtmlCommand(editor.getRange(), 'baz');
+
+            equal(editor.value(), "foobarbaz");
         });
 
         test("insertHtml tool gets snippets from its items collection", function() {

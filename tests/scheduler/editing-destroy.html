@@ -6,6 +6,9 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.window.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -35,7 +38,8 @@
                     document.body.appendChild(container);
                 },
                 teardown: function() {
-                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                    kendo.destroy($(container).closest(".k-scheduler"));
+                    $(".k-widget").remove();
                 }
             });
 
@@ -68,7 +72,7 @@
                     remove = stub(dataSource, "remove"),
                     uid = dataSource.at(0).uid;
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
 
                 equal(remove.calls("remove"), 1);
                 equal(remove.args("remove")[0].uid, uid);
@@ -79,7 +83,7 @@
                     dataSource = scheduler.dataSource,
                     remove = stub(dataSource, "remove");
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
 
                 equal(remove.calls("remove"), 0);
             });
@@ -89,7 +93,7 @@
                 dataSource = scheduler.dataSource,
                 sync = stub(dataSource, "sync");
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
 
                 equal(sync.calls("sync"), 1);
             });
@@ -132,26 +136,21 @@
                 scheduler.removeEvent(scheduler.wrapper.find(".k-event").data("uid"));
             });
 
-            test("_confirmation use the text set through the options", function() {
+            test("the destroy confirmation uses the text set through the options", function() {
                 var scheduler = setup({ editable: { confirmation: "foo" } }),
                     text;
 
-                scheduler._showMessage = function(text) {
-                    equal(text, "foo");
-                }
-
                 scheduler.removeEvent(scheduler.wrapper.find(".k-event").data("uid"));
+
+                equal($(".k-popup-message").text(), "foo");
             });
 
-            test("_confirmation use the default text if not set", 1, function() {
-                var scheduler = setup({ editable: true }),
-                    text;
-
-                scheduler._showMessage = function(text) {
-                    equal(text, "Are you sure you want to delete this event?");
-                }
+            test("the destroy confirmation uses default text if not set", 1, function() {
+                var scheduler = setup({ editable: true });
 
                 scheduler.removeEvent(scheduler.wrapper.find(".k-event").data("uid"));
+
+                equal($(".k-popup-message").text(), "Are you sure you want to delete this event?");
             });
 
             test("switching views does not trigger multiple remove events", 1, function() {
@@ -161,7 +160,7 @@
                 scheduler.view("week");
                 scheduler.view("day");
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
 
                 equal(removeEvent.calls("removeEvent"), 1);
             });
@@ -173,7 +172,7 @@
                 scheduler.view("day");
                 scheduler.view("day");
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
                 equal(removeEvent.calls("removeEvent"), 1);
             });
 

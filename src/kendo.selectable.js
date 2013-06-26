@@ -40,7 +40,7 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-            that._marquee = $("<div class='k-marquee'></div>");
+            that._marquee = $("<div class='k-marquee'><div class='k-marquee-color'></div></div>");
             that._lastActive = null;
             that.element.addClass(SELECTABLE);
 

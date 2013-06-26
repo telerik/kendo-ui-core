@@ -33,6 +33,7 @@
                 var endRestorePoint = new RestorePoint(range);
 
                 var command = new GenericCommand(startRestorePoint, endRestorePoint);
+                command.editor = editor;
                 command.undo();
 
                 equal(editor.value(), 'foo');
@@ -51,6 +52,7 @@
                 var endRestorePoint = new RestorePoint(range);
 
                 var command = new GenericCommand(startRestorePoint, endRestorePoint);
+                command.editor = editor;
                 command.undo();
                 command.redo();
                 equal(editor.value(), '');
@@ -68,6 +70,7 @@
                 editor.value('');
 
                 var command = new GenericCommand(restorePoint, restorePoint);
+                command.editor = editor;
                 command.undo();
                 var selectedRange = editor.getRange();
                 equal(selectedRange.startOffset, 1);
@@ -87,6 +90,7 @@
                 var restorePoint = new RestorePoint(range);
 
                 var command = new GenericCommand(restorePoint, restorePoint);
+                command.editor = editor;
 
                 command.redo();
 

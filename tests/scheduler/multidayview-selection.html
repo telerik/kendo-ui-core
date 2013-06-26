@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler MultidayView selection</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler MultidayView selection</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var MultiDayView = kendo.ui.MultiDayView,
+                keys = kendo.keys,
+                container;
+
+            var MyDayView = MultiDayView.extend({
+                init: function(element, options) {
+                    var that = this;
+
+                    MultiDayView.fn.init.call(that, element, options);
+                },
+                calculateDateRange: function() {
+                    this._render(this.options.dates);
+                }
+            });
+
+            function setup(options) {
+                options = options || [];
+                return new MyDayView(container, $.extend({ majorTick: 120 }, options));
+            }
+
+            function createSelection(options) {
+                var start, end;
+                if (options instanceof Date) {
+                    start = new Date(options);
+                    end = new Date(start.getTime() + (30 * kendo.date.MS_PER_MINUTE));
+                    options = {
+                        start: start,
+                        end: end
+                    };
+                }
+
+                return $.extend({ events: [] }, options);
+            }
+
+            module("Multi Day View selection", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container).addClass("k-scheduler").css({
+                        width: 1000,
+                        height: 800
+                    });
+                },
+                teardown: function() {
+                    $(container).remove();
+                }
+            });
+
+            test("View moves selection by week length offset when navigate to future period", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] });
+                var selection = {
+                    start: new Date(2013, 6, 6),
+                    end: new Date(2013, 6, 6, 0, 30)
+                };
+
+                view.moveSelectionToPeriod(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 8));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 30));
+            });
+
+            test("View moves selection by week length offset when navigate to past period", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] });
+                var selection = {
+                    start: new Date(2013, 6, 9),
+                    end: new Date(2013, 6, 9, 0, 30)
+                };
+
+                view.moveSelectionToPeriod(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 0, 30));
+            });
+
+            test("View move last selected slot when navigate to future period", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 6, 23, 30),
+                    end: new Date(2013, 6, 7, 0, 0)
+                };
+
+                view.moveSelectionToPeriod(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
+            });
+
+            test("View move last selected slot when navigate to past period", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 8, 23, 30),
+                    end: new Date(2013, 6, 9, 0, 0)
+                };
+
+                view.moveSelectionToPeriod(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
+            });
+
+            test("View moveSelectionToPeriod clears selected events", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 8, 23, 30),
+                    end: new Date(2013, 6, 9, 0, 0),
+                    events: ["1"]
+                };
+
+                view.moveSelectionToPeriod(selection);
+
+                equal(selection.events.length, 0);
+            });
+
+            test("View moveSelectionToPeriod normalizes dates if they have correct column index", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)], startTime: new Date(2013, 6, 7, 7) });
+                var selection = {
+                    start: new Date(2013, 6, 7, 0),
+                    end: new Date(2013, 6, 7, 0)
+                };
+
+                view.moveSelectionToPeriod(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 8));
+            });
+
+            test("View adjust start/end date based on view.startDate/view.endDate when navigate to future", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 6, 23, 30),
+                    end: new Date(2013, 6, 9, 0, 0)
+                };
+
+                view.normalizeSelection(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 0, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1, 0));
+            });
+
+            test("View adjust start/end date based on view.startDate/view.endDate when navigate to past", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 6, 23, 30),
+                    end: new Date(2013, 6, 8, 0, 0)
+                };
+
+                view.normalizeSelection(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 0, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1, 0));
+            });
+
+            test("View selects cell", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection(new Date(2013, 6, 7));
+
+                view.select(selection);
+
+                ok(view.content.find("table td:first").hasClass("k-state-selected"));
+            });
+
+            test("View selects multiple cells", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 7, 2, 30) });
+
+                view.select(selection);
+
+                var allCells = view.content.find("table td"),
+                    cells = allCells.filter("td.k-state-selected");
+
+                equal(cells.length, 3);
+                equal(cells[0], allCells[0]);
+                equal(cells[1], allCells[1]);
+                equal(cells[2], allCells[2]);
+
+            });
+
+            test("View selects selection bigger than current column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 8, 2, 30) });
+
+                view.select(selection);
+
+                var allCells = view.content.find("table td"),
+                    cells = allCells.filter("td.k-state-selected");
+
+                equal(cells.length, 27);
+            });
+
+            test("View selects selection between 3 columns", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8), new Date(2013, 6, 9)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 1), end: new Date(2013, 6, 9, 2, 30) });
+
+                view.select(selection);
+
+                var allCells = view.content.find("table td"),
+                    cells = allCells.filter("td.k-state-selected");
+
+                equal(cells.length, 50);
+            });
+
+            test("View does not select allday if only last cell is selected", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8), new Date(2013, 6, 9)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 23, 30), end: new Date(2013, 6, 8) });
+
+                view.select(selection);
+
+                var cell = view.content.find("table td").filter("td.k-state-selected");
+
+                equal(cell.length, 1);
+                equal(view.datesHeader.find("td.k-state-selected").length, 0);
+            });
+
+            test("View does not select header cells if onlu one column is selected", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 7, 2, 30) });
+
+                view.select(selection);
+
+                var cells = view.datesHeader.find("td.k-state-selected");
+
+                equal(cells.length, 0);
+            });
+
+            test("View clear selection before new select", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+
+                view.select(createSelection(new Date(2013, 6, 7)));
+                view.select(createSelection(new Date(2013, 6, 7, 0, 30)));
+
+                equal(view.content.find(".k-state-selected").length, 1);
+            });
+
+            test("View does not select content cells if selection starts from allDayEvent", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 8, 0, 30), isAllDay: true });
+
+                view.select(selection);
+
+                var cells = view.datesHeader.find("td.k-state-selected");
+
+                equal(cells.length, 2);
+                equal(view.content.find("table td.k-state-selected").length, 0);
+            });
+
+            test("View select event by uid", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid = kendo.guid();
+
+                view.render([
+                    { uid: uid, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 4),
+                    events: [uid]
+                });
+
+                view.select(selection);
+
+                equal(view.content.find("td.k-state-selected").length, 0);
+                equal(view.content.find(".k-event").filter(".k-state-selected").length, 1);
+            });
+
+            test("View select multiple events by UIDs", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid1, uid2]
+                });
+
+                view.select(selection);
+
+                equal(view.content.find("td.k-state-selected").length, 0);
+                equal(view.content.find(".k-event").filter(".k-state-selected").length, 2);
+            });
+
+            test("View select cells if cannot find one of the selected events", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: kendo.guid(), start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid1, uid2]
+                });
+
+                view.select(selection);
+
+                equal(view.content.find("td.k-state-selected").length, 2);
+                equal(view.content.find(".k-event").filter(".k-state-selected").length, 0);
+            });
+
+            test("View scrolls to the last selected event", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid1, uid2]
+                });
+
+                view.select(selection);
+
+                stub(view, {
+                    _scrollTo: view._scrollTo
+                });
+
+                view.select(selection);
+
+                equal(view.calls("_scrollTo"), 1);
+                equal(view.args("_scrollTo")[0], view.content.find(".k-event:last")[0]);
+            });
+
+            test("View select method supports end date before start date", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 2, 0), end: new Date(2013, 6, 7) });
+
+                view.select(selection);
+
+                var allCells = view.content.find("table td"),
+                    cells = allCells.filter("td.k-state-selected");
+
+                equal(cells.length, 27);
+            });
+
+            test("View select method scrolls to the first cell when start is bigger than end", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 2, 0), end: new Date(2013, 6, 7) });
+
+                stub(view, {
+                    _scrollTo: view._scrollTo
+                });
+
+                view.select(selection);
+
+                var allCells = view.content.find("table td"),
+                    cells = allCells.filter("td.k-state-selected").eq(0);
+
+                equal(view.args("_scrollTo")[0], cells[0]);
+            });
+
+            test("View selects last two cells", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 22), end: new Date(2013, 6, 8) });
+
+                view.select(selection);
+
+                var cells = view.content.find("table td").filter("td.k-state-selected");
+
+                equal(cells.length, 2);
+            });
+
+            test("View selects negative range and persists start cell", 1, function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 10), end: new Date(2013, 6, 7, 11) });
+
+                view.select(selection);
+
+                ok($(view._columns[1].slots[10].element).hasClass("k-state-selected"));
+            });
+
+            test("View selects last cell in view", 1, function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 23, 30), end: new Date(2013, 6, 9) });
+
+                view.select(selection);
+
+                var slots = view._columns[1].slots;
+                ok($(slots[slots.length - 1].element).hasClass("k-state-selected"));
+            });
+
+            test("View does not throw exception when pass invalid selection", 1, function() {
+                var view = setup({ dates: [new Date(2013, 6, 6), new Date(2013, 6, 6)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 23, 30), end: new Date(2013, 6, 9) });
+
+                view.select(selection);
+                ok(true);
+            });
+
+            module("Multi Day View navigation", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container).addClass("k-scheduler").css({
+                        width: 1000,
+                        height: 800
+                    });
+                },
+                teardown: function() {
+                    $(container).remove();
+                }
+            });
+
+            test("View moves selection with one day on right arrow", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 0, 30) });
+
+                view.move(selection, keys.RIGHT);
+
+                deepEqual(selection.start, new Date(2013, 6, 8));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 30));
+            });
+
+            test("View clears selected events on right arrow", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 2, 30), events:["1"] });
+
+                view.move(selection, keys.RIGHT);
+
+                equal(selection.events.length, 0);
+            });
+
+            test("View moves selection with one day on left arrow", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 2, 30) });
+
+                view.move(selection, keys.LEFT);
+
+                deepEqual(selection.start, new Date(2013, 6, 6));
+                deepEqual(selection.end, new Date(2013, 6, 6, 2, 30));
+            });
+
+            test("View clears selected events on left arrow", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 2, 30), events:["1"] });
+
+                view.move(selection, keys.LEFT);
+
+                equal(selection.events.length, 0);
+            });
+
+            test("View correctly selects range on SHIFT + LEFT", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 10), end: new Date(2013, 6, 8, 11) });
+
+                view.move(selection, keys.LEFT, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 8, 10));
+                deepEqual(selection.end, new Date(2013, 6, 7, 11));
+            });
+
+            test("View moves selection with one slot on down arrow", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 1, 0) });
+
+                view.move(selection, keys.DOWN);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 1, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 2, 0));
+            });
+
+            test("View increases selection on DOWN arrow", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 1) });
+
+                view.move(selection, keys.DOWN, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 2));
+            });
+
+            test("View decreases selection on DOWN arrow", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 10), end: new Date(2013, 6, 7, 8) });
+
+                view.move(selection, keys.DOWN, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 10));
+                deepEqual(selection.end, new Date(2013, 6, 7, 9));
+            });
+
+            test("View do nothing if Shift + DOWN when isAllDay", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7), end: new Date(2013, 6, 7), isAllDay: true });
+
+                view.move(selection, keys.DOWN, true);
+
+                ok(selection.isAllDay);
+            });
+
+            test("View shrink selection up to one slot on down arrow (selected events)", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid1, uid2]
+                });
+
+                view.move(selection, keys.DOWN);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 8, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 9, 0));
+            });
+
+            test("View selects first slot if isAllDay", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 0, 0), isAllDay: true });
+
+                view.move(selection, keys.DOWN);
+
+                ok(!selection.isAllDay);
+                deepEqual(selection.start, new Date(2013, 6, 7, 0, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1, 0));
+            });
+
+            /*test("View selects the first slot below the last selected allDay event", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 8, 0, 0), isAllDay: true });
+
+                view.move(selection, keys.DOWN);
+
+                ok(!selection.isAllDay);
+                deepEqual(selection.start, new Date(2013, 6, 8, 0, 0));
+                deepEqual(selection.end, new Date(2013, 6, 8, 1, 0));
+            });*/
+
+            test("View moves selection to allDay if first slot was selected", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 0) });
+
+                view.move(selection, keys.UP);
+
+                ok(selection.isAllDay);
+                deepEqual(selection.start, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+            });
+
+            test("View moves selection to upper slot", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 1), end: new Date(2013, 6, 7, 2) });
+
+                view.move(selection, keys.UP);
+
+                deepEqual(selection.start, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+            });
+
+            test("View shrinks selection on up arrow", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 1), end: new Date(2013, 6, 7, 5) });
+
+                view.move(selection, keys.UP);
+
+                deepEqual(selection.start, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+            });
+
+            test("View shrinks selection on up arrow (when expanding down)", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 1), end: new Date(2013, 6, 7, 5) });
+
+                view.move(selection, keys.DOWN, true);
+                view.move(selection, keys.UP);
+
+                deepEqual(selection.start, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+            });
+
+            test("View shrinks selection on up arrow (when expanding up)", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 4), end: new Date(2013, 6, 7, 5) });
+
+                view.move(selection, keys.UP, true);
+                view.move(selection, keys.UP);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+                deepEqual(selection.end, new Date(2013, 6, 7, 3));
+            });
+
+            test("View does not select allDay event when shift key is pressed", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 0) });
+
+                view.move(selection, keys.UP, true);
+
+                ok(!selection.isAllDay);
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+                deepEqual(selection.end, new Date(2013, 6, 7, 0));
+            });
+
+            test("View decreases selection on UP", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0), end: new Date(2013, 6, 7, 1) });
+
+                view.move(selection, keys.UP, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+            });
+
+            test("View increases selection on UP", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 1) });
+
+                view.move(selection, keys.UP, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+                deepEqual(selection.end, new Date(2013, 6, 7, 0));
+            });
+
+            test("View moves selection before first selected events", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid1, uid2]
+                });
+
+                view.move(selection, keys.UP);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 1));
+                deepEqual(selection.end, new Date(2013, 6, 7, 2));
+            });
+
+            test("View does not allow to move selection if end of column is reached", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 23, 30),
+                    end: new Date(2013, 6, 8)
+                });
+
+                view.move(selection, keys.DOWN);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
+                deepEqual(selection.end, new Date(2013, 6, 8));
+            });
+
+            test("View expand selection with one interval", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7),
+                    end: new Date(2013, 6, 7, 1)
+                });
+                var shiftKey = true;
+
+                view.move(selection, keys.DOWN, shiftKey);
+
+                deepEqual(selection.start, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 2));
+            });
+
+            test("View expand selection to end of the column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 22),
+                    end: new Date(2013, 6, 7, 23)
+                });
+                var shiftKey = true;
+
+                view.move(selection, keys.DOWN, shiftKey);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 22));
+                deepEqual(selection.end, new Date(2013, 6, 8));
+            });
+
+            test("View moves selection with one slot on down arrow (ShiftKey)", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 5, 0), end: new Date(2013, 6, 7, 6, 0) });
+
+                view.move(selection, keys.DOWN, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 5, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 7, 0));
+            });
+
+            test("View expand selection with one interval in upper direction", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 1),
+                    end: new Date(2013, 6, 7, 2)
+                });
+                var shiftKey = true;
+
+                view.move(selection, keys.UP, shiftKey);
+
+                deepEqual(selection.end, new Date(2013, 6, 7));
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+            });
+
+            test("View support shift up + down multiple selection", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 3),
+                    end: new Date(2013, 6, 7, 4)
+                });
+                var shiftKey = true;
+
+                view.move(selection, keys.UP, shiftKey);
+                deepEqual(selection.end, new Date(2013, 6, 7, 2));
+                deepEqual(selection.start, new Date(2013, 6, 7, 4));
+
+                view.move(selection, keys.DOWN, shiftKey);
+                deepEqual(selection.end, new Date(2013, 6, 7, 3));
+                deepEqual(selection.start, new Date(2013, 6, 7, 4));
+
+                view.move(selection, keys.DOWN, shiftKey);
+                deepEqual(selection.start, new Date(2013, 6, 7, 3));
+                deepEqual(selection.end, new Date(2013, 6, 7, 5));
+
+            });
+
+            test("View backward selection does not allow to select isAllDay", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 0)
+                });
+                var shiftKey = true;
+
+                view.move(selection, keys.UP, shiftKey);
+
+                deepEqual(selection.end, new Date(2013, 6, 7));
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+            });
+
+            test("View moveToEvent method returns true if find an event", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7),
+                    end: new Date(2013, 6, 7, 1)
+                });
+
+
+                ok(view.moveToEvent(selection));
+            });
+
+            test("View moves to the first event after current slot", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7),
+                    end: new Date(2013, 6, 7, 1)
+                });
+
+
+                view.moveToEvent(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+                deepEqual(selection.end, new Date(2013, 6, 7, 4));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid1);
+            });
+
+            test("View moves to the next event in the column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 4),
+                    events: [uid1]
+                });
+
+
+                view.moveToEvent(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 6));
+                deepEqual(selection.end, new Date(2013, 6, 7, 8));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid2);
+            });
+
+            test("View moves to the first column in the next column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 8, 6), end: new Date(2013, 6, 8, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 4),
+                    events: [uid1]
+                });
+
+
+                view.moveToEvent(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 8, 6));
+                deepEqual(selection.end, new Date(2013, 6, 8, 8));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid2);
+            });
+
+            test("View moves to the next allDay event", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 8, 0), end: new Date(2013, 6, 8, 0), title: "Test", isAllDay: true }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 4),
+                    events: [uid1]
+                });
+
+
+                view.moveToEvent(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 8));
+                deepEqual(selection.end, new Date(2013, 6, 8, 1));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid2);
+                equal(selection.isAllDay, true);
+            });
+
+            test("View moves to the first event before current slot", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 10),
+                    end: new Date(2013, 6, 7, 11)
+                });
+
+
+                view.moveToEvent(selection, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 6));
+                deepEqual(selection.end, new Date(2013, 6, 7, 8));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid2);
+            });
+
+            test("View moves to the previous event", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid2]
+                });
+
+
+                view.moveToEvent(selection, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+                deepEqual(selection.end, new Date(2013, 6, 7, 4));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid1);
+            });
+
+            test("View moves to the last event in previous column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 8, 6), end: new Date(2013, 6, 8, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 8, 6),
+                    end: new Date(2013, 6, 8, 8),
+                    events: [uid2]
+                });
+
+
+                view.moveToEvent(selection, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+                deepEqual(selection.end, new Date(2013, 6, 7, 4));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid1);
+            });
+
+            test("View moves to the previous all day event", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 0), end: new Date(2013, 6, 7, 1), title: "Test", isAllDay: true },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid2]
+                });
+
+
+                view.moveToEvent(selection, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid1);
+                equal(selection.isAllDay, true);
+            });
+
+            function setupGroupedScheduler(orientation) {
+                orientation = orientation || "horizontal";
+
+                scheduler = new kendo.ui.Scheduler(container, {
+                    date: new Date("2013/6/8"),
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"],
+                        orientation: orientation
+                    },
+                    resources: [
+                        {
+                            field: "rooms",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Room1", value: 1 },
+                                { text: "Room2", value: 2 }
+                            ]
+                        },
+                        {
+                            field: "persons",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Fred", value: 1 },
+                                { text: "Barny", value: 2 }
+                            ]
+                        }
+                    ],
+                    views: [ "week" ]
+                });
+            }
+
+            module("Horizontally grouped Multi Day View selection", {
+                setup: function() {
+                    container = $("<div />");
+                    $(document.body).append(container);
+                },
+                teardown: function() {
+                    scheduler.destroy();
+                    container.remove();
+                }
+            });
+
+            test("View select method selects cell in first group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 1),
+                    end: new Date(2013, 5, 8, 1, 30),
+                    events: [],
+                    groupIndex: 0
+                };
+
+                view.select(selection);
+
+                var td = view.content.find(".k-state-selected")[0];
+
+                equal(td, view._columns[6].slots[2].element);
+            });
+
+            test("View select method selects cell in second group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 1),
+                    end: new Date(2013, 5, 8, 1, 30),
+                    events: [],
+                    groupIndex: 1
+                };
+
+                view.select(selection);
+
+                var td = view.content.find(".k-state-selected")[0];
+
+                equal(td, view._columns[13].slots[2].element);
+            });
+
+            test("View select method selects multiple columns in second group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 7, 1),
+                    end: new Date(2013, 5, 8, 1, 30),
+                    events: [],
+                    groupIndex: 1
+                };
+
+                view.select(selection);
+
+                var cells = view.content.find(".k-state-selected");
+
+                equal(cells.length, 49);
+            });
+
+            test("View select method selects only in view range", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 1),
+                    end: new Date(2013, 5, 10),
+                    events: [],
+                    groupIndex: 1
+                };
+
+                view.select(selection);
+
+                var cells = view.content.find(".k-state-selected");
+
+                equal(cells.length, 46);
+            });
+
+            test("View select method selects cells in three columns", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 6, 1),
+                    end: new Date(2013, 5, 10),
+                    events: [],
+                    groupIndex: 1
+                };
+
+                view.select(selection);
+
+                var cells = view.content.find(".k-state-selected");
+
+                equal(cells.length, 142);
+            });
+
+            test("View selects allDay cell in first group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.datesHeader.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[0].slots[6].element);
+            });
+
+            test("View selects allDay cell in second group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 1,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.datesHeader.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[0].slots[13].element);
+            });
+
+            module("Vertically grouped Multi Day View selection", {
+                setup: function() {
+                    container = $("<div />");
+                    $(document.body).append(container);
+                },
+                teardown: function() {
+                    scheduler.destroy();
+                    container.remove();
+                }
+            });
+
+            test("View select method selects cell in the first group", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 23, 30),
+                    end: new Date(2013, 5, 9),
+                    events: [],
+                    groupIndex: 0
+                };
+
+                view.select(selection);
+
+                var td = view.content.find(".k-state-selected")[0];
+
+                equal(td, view._columns[6].slots[47].element);
+            });
+
+            test("View select method selects cell in the second group", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 23, 30),
+                    end: new Date(2013, 5, 9),
+                    events: [],
+                    groupIndex: 1
+                };
+
+                view.select(selection);
+
+                var td = view.content.find(".k-state-selected")[0];
+
+                equal(td, view._columns[6].slots[95].element);
+            });
+
+            test("View select method selects multiple columns only in one group", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 7, 23, 30),
+                    end: new Date(2013, 5, 9),
+                    events: [],
+                    groupIndex: 1
+                };
+
+                view.select(selection);
+                var cells = view.content.find(".k-state-selected");
+
+                equal(cells.length, 49);
+                equal(cells[47], view._columns[5].slots[95].element);
+                equal(cells[48], view._columns[6].slots[95].element);
+            });
+
+            test("View selects allDay cell in first group", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.content.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[0].slots[6].element);
+            });
+
+            test("View selects allDay cell in second group", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 1,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.content.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[1].slots[6].element);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

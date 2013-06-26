@@ -69,6 +69,10 @@ public class XAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("majorTicks", value);
     }
 
+    public void setNotes(com.kendoui.taglib.chart.XAxisItemNotesTag value) {
+        setProperty("notes", value);
+    }
+
     public void setPlotBands(XAxisItemPlotBandsTag value) {
 
         setProperty("plotBands", value.plotBands());

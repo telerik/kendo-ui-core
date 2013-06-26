@@ -373,7 +373,7 @@ kendo_module({
                 isMaximized = that.options.isMaximized,
                 newWidth, newHeight;
 
-            if (e.target != e.currentTarget) {
+            if (e.target != e.currentTarget || that._closing) {
                 return;
             }
 
@@ -467,15 +467,20 @@ kendo_module({
         },
 
         center: function () {
-            var wrapper = this.wrapper,
+            var that = this,
+                wrapper = that.wrapper,
                 documentWindow = $(window);
+
+            if (that.options.isMaximized) {
+                return that;
+            }
 
             wrapper.css({
                 left: documentWindow.scrollLeft() + Math.max(0, (documentWindow.width() - wrapper.width()) / 2),
                 top: documentWindow.scrollTop() + Math.max(0, (documentWindow.height() - wrapper.height()) / 2)
             });
 
-            return this;
+            return that;
         },
 
         title: function (text) {
@@ -533,6 +538,10 @@ kendo_module({
                 overlay;
 
             if (!that.trigger(OPEN)) {
+                if (that._closing) {
+                    wrapper.kendoStop(true, true);
+                }
+
                 that._closing = false;
 
                 that.toFront();
@@ -979,6 +988,14 @@ kendo_module({
                 .css(isRtl ? "left" : "right", wrapper.find(".k-window-actions").outerWidth() + 10);
 
             contentHtml.show();
+
+            contentHtml.find("[data-role=editor]").each(function() {
+                var editor = $(this).data("kendoEditor");
+
+                if (editor) {
+                    editor.refresh();
+                }
+            });
         }
     });
 

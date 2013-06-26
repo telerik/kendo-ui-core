@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public ChartScatterSeriesBuilderTests()
         {
             var chart = ChartTestHelper.CreateChart<XYData>();
-            series = new ChartScatterSeries<XYData, float, float>(s => s.X, s => s.Y);
+            series = new ChartScatterSeries<XYData, float, float>(s => s.X, s => s.Y, s => s.NoteText);
             builder = new ChartScatterSeriesBuilder<XYData>(series);
         }
 
@@ -21,19 +21,6 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Name("Series");
             series.Name.ShouldEqual("Series");
-        }
-
-        [Fact]
-        public void GroupNameTemplate_should_set_name()
-        {
-            builder.GroupNameTemplate("#= series.name #");
-            series.GroupNameTemplate.ShouldEqual("#= series.name #");
-        }
-
-        [Fact]
-        public void GroupNameTemplate_should_return_builder()
-        {
-            builder.GroupNameTemplate("#= series.name #").ShouldBeSameAs(builder);
         }
 
         [Fact]

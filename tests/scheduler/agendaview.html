@@ -365,7 +365,7 @@
 
                 var table = agenda.element.find(".k-scheduler-table");
 
-                table.find(".k-i-close").click();
+                table.find(".k-si-close").click();
             });
 
             test("agenda wraps time cells in a div", function() {
@@ -518,6 +518,25 @@
 
                 equal(taskCell.find(".k-i-exception").length, 1);
                 equal(taskCell.find(".k-i-refresh").length, 0);
+            });
+
+            test("editable:true allows only deletion of events", function() {
+                var agenda = agendaView({ editable: true, date: new Date("2013/06/06 00:00") });
+
+                var editable = agenda.options.editable;
+
+                ok(editable);
+                ok(editable.delete === true);
+                ok(editable.create === false);
+                ok(editable.update === false);
+            });
+
+            test("editable.delete:false disallows deletion", function() {
+                var agenda = agendaView({ editable: { delete: false }, date: new Date("2013/06/06 00:00") });
+
+                var editable = agenda.options.editable;
+
+                ok(editable.delete === false);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

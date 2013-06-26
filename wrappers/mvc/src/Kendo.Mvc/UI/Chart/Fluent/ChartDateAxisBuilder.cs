@@ -201,5 +201,37 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return this;
         }
+
+        /// <summary>
+        /// Defines the items.
+        /// </summary>
+        /// <param name="Items">The items of the notes.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ValueAxis(a => a.Numeric()
+        ///               .Note(note => note
+        ///                    .Data(items =>
+        ///                    {
+        ///                        data.Add().Value(1);
+        ///                        data.Add().Value(2);
+        ///                    })
+        ///               )
+        ///            )
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example> 
+        /// </code>
+        /// </example>
+        public ChartDateAxisBuilder Notes(Action<ChartAxisNotesBuilder<DateTime>> configurator)
+        {
+            var factory = new ChartAxisNotesBuilder<DateTime>(Axis.Notes);
+
+            configurator(factory);
+
+            return this;
+        }
     }
 }

@@ -24,6 +24,15 @@ class StockChartNavigatorSeriesItemMarkers extends \Kendo\SerializableObject {
     }
 
     /**
+    * The rotation angle of the markers.
+    * @param float|\Kendo\JavaScriptFunction $value
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers
+    */
+    public function rotation($value) {
+        return $this->setProperty('rotation', $value);
+    }
+
+    /**
     * The marker size.
     * @param float $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItemMarkers

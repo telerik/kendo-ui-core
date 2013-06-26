@@ -23,6 +23,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets the note text member of the series.
+        /// </summary>
+        string NoteTextMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the scatter chart data labels configuration
         /// </summary>
         ChartPointLabels Labels

@@ -15,15 +15,9 @@
 
     <script>
 
-        var InlineFormatFinder,
-            enumerator;
+        var InlineFormatFinder = kendo.ui.editor.InlineFormatFinder;
 
-        $("#Editor1").kendoEditor();
-
-        QUnit.config.testStart.push(function() {
-            editor = getEditor();
-            InlineFormatFinder = kendo.ui.editor.InlineFormatFinder;
-        });
+        var editor = $("#Editor1").kendoEditor().data("kendoEditor");
 
         test('findSuitable() does not return for single text node', function() {
             editor.value('foo');

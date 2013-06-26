@@ -19,8 +19,8 @@
                             <%: Html.Kendo().MobileButtonGroup()
                                     .Index(0)
                                     .Items(items => {
-                                        items.Add().Text("Green").HtmlAttributes(new { style = "background-color: green" });
-                                        items.Add().Text("Red").HtmlAttributes(new { style = "background-color: darkred" });
+                                        items.Add().Text("Green").HtmlAttributes(new { style = "background-color: green; color: white;" });
+                                        items.Add().Text("Red").HtmlAttributes(new { style = "background-color: darkred; color: white;" });
                                     })
                             %>
                             <%

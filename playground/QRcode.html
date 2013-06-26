@@ -23,16 +23,59 @@
 <div id="qrCode"></div>      
 <script>             
 $("#qrCode").kendoQRCode({
-    value: "http://demos.kendoui.com/dataviz/overview/index.html",
-    border: {
-        width: 5,
-        color: "#FF7D05"
-    }
+    value: "Ай готово. Aко остане време и еси-то ще направя.",
+    value: new Array(500).join("A"),
+    erroCorrection: "L",
+    size: 400,
+    //encoding: "utf-8"
 });
 </script>
         
         <script>             
+           var utf8Encoder = function(){}
             
+            utf8Encoder.fn = utf8Encoder.prototype = {
+                encode: function(character){
+                    var code = character.charCodeAt(0),
+                        bytesCount = this.getBytesCount(code),
+                        bc = bytesCount - 1,
+                        result = "";
+
+                    if(bytesCount == 1){
+                        result = toBitsString(code, 8);
+                    }       
+                    else{
+                        var significantOnes = 8 - bytesCount;                
+                        
+                        for(var i = 0; i < bc; i++){
+                            result = toBitsString(code >> (i * 6) & 63 | 128, 8) + result;
+                        }
+                        
+                        result = ((code >> bc * 6) | ((255 >> significantOnes) << significantOnes)).toString(2) + result;
+                    }
+                    return result;
+                },
+                getBytesCount: function(code){
+                    var ranges = this.ranges;
+                    for(var i = 0; i < ranges.length;i++){
+                        if(code < ranges[i]){
+                            return i + 1;
+                        }
+                    }
+                },
+                ranges: [128,2048,65536,2097152,67108864]
+            };
+            var encoder = new utf8Encoder(); 
+          
+
+        function toBitsString(value, length){
+            var result = Number(value).toString(2);
+            if(result.length < length){
+                result = new Array(length - result.length + 1).join(0) + result;
+            }
+            return result;
+        }
+          
         function printMatrix(matrix){
             console.log("");
             var str = "";

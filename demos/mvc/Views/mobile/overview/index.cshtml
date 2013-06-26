@@ -211,18 +211,18 @@
 #overview-account h2 {
     display: inline-block;
     font-size: 1.1em;
-    margin: 1.5em 0 0 1em;
+    margin: 1.5em 0 0 .6em;
 }
 #overview-account h2 span {
     display: block;
     clear: both;
-    font-size: 2em;
-    margin: .2em 0 0 0;
+    font-size: 1.8em;
+    margin: .1em 0 0 0;
 }
 #overview-contacts img,
 #overview-cities img,
 #overview-account img {
-	float: left;
+    float: left;
     width: 4em;
     height: 4em;
     margin: 0;
@@ -231,17 +231,27 @@
     -webkit-border-radius: 8px;
     border-radius: 8px;
 }
+
+.km-flat #overview-contacts img,
+.km-flat #overview-cities img,
+.km-flat #overview-account img {
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
 #overview-account img {
     width: 5em;
     height: 5em;
     margin: 1em;
 }
 #overview-account .value {
-	float: right;
-	color: #ccc;
+    float: right;
+    color: #ccc;
 }
 #settings-view {
-	margin: 1em auto .4em auto;
+    margin: 1em auto .4em auto;
 }
 #overview-gallery .photo {
     width: 277px;
@@ -276,6 +286,11 @@
     border: 1px solid rgba(0,0,0,.3);
     border-width: 1px 0;
     box-shadow: 0 1px 1px rgba(255,255,255,.3);
+}
+.km-flat #scrollview-container {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
 }
 #overview-gallery .km-ios .km-content {
     background: #bbb;

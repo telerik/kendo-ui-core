@@ -12,6 +12,8 @@
         <script src="../../src/kendo.editable.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.listview.js"></script>
         <script src="../../src/kendo.upload.js"></script>
@@ -91,29 +93,33 @@
 
             test("toolbar texts", function() {
                 var browser = setup({
-                    transport: {
-                        uploadUrl: "foo"
-                    }
-                });
+                        transport: {
+                            uploadUrl: "foo"
+                        }
+                    }),
+                    toolbar = browser.toolbar;
 
                 equal(browser.toolbar.find("div.k-upload .k-upload-button").text(), "Upload");
-                equal(browser.toolbar.find("div.k-tiles-arrange").text(), "Arrange by: Name");
+                equal(toolbar.find(".k-tiles-arrange").text().indexOf("Arrange by:"), 0);
+                equal(toolbar.find(".k-tiles-arrange .k-input").text(), "Name");
             });
 
             test("toolbar texts are loaded from messages", function() {
                 var browser = setup({
-                    transport: {
-                        uploadUrl: "foo"
-                    },
-                    messages: {
-                        uploadFile: "foo",
-                        orderBy: "bar",
-                        orderByName: "baz"
-                    }
-                });
+                        transport: {
+                            uploadUrl: "foo"
+                        },
+                        messages: {
+                            uploadFile: "foo",
+                            orderBy: "bar",
+                            orderByName: "baz"
+                        }
+                    }),
+                    toolbar = browser.toolbar;
 
-                equal(browser.toolbar.find("div.k-upload .k-upload-button").text(), "foo");
-                equal(browser.toolbar.find("div.k-tiles-arrange").text(), "bar: baz");
+                equal(toolbar.find("div.k-upload .k-upload-button").text(), "foo");
+                equal(toolbar.find(".k-tiles-arrange").text().indexOf("bar"), 0);
+                equal(toolbar.find(".k-tiles-arrange .k-input").text(), "baz");
             });
 
             test("Upload widget is attached", function() {
@@ -137,13 +143,13 @@
                     upload.trigger("error", { XMLHttpRequest: { } });
             });
 
-            test("selecting item from arrangeby popup change the text", function() {
+            test("selecting item from arrangeby popup changes the text", function() {
                 var browser = setup(),
                     toolbar = browser.toolbar;
 
-                toolbar.find(".k-tiles-arrange a").click();
-                browser.arrangeByPopup.element.find("li:last").click();
-                equal(toolbar.find(".k-tiles-arrange a span:first").html(), "Size");
+                browser.arrangeBy.value("size");
+
+                equal(toolbar.find(".k-tiles-arrange .k-input").text(), "Size");
             });
 
             test("items are sorted by type and name", function() {
@@ -228,7 +234,8 @@
                     toolbar = browser.toolbar;
 
                 toolbar.find(".k-tiles-arrange a").click();
-                browser.arrangeByPopup.element.find("li:last").click();
+                browser.arrangeBy.value("size");
+                browser.arrangeBy.trigger("change");
 
                 var sortDescriptors = browser.dataSource.sort();
 
@@ -770,7 +777,7 @@
 
             test("destroy calls nested popup destroy", function() {
                 var browser = setup(),
-                    destroy = stub(browser.arrangeByPopup, "destroy")
+                    destroy = stub(browser.arrangeBy, "destroy")
 
                 browser.destroy();
                 ok(destroy.calls("destroy"));

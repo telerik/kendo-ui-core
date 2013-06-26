@@ -152,6 +152,15 @@ class SchedulerView extends \kendo\SerializableObject {
     }
 
     /**
+    * The configuration of the view resource(s) grouping.
+    * @param \Kendo\UI\SchedulerViewGroup|array $value
+    * @return \Kendo\UI\SchedulerView
+    */
+    public function group($value) {
+        return $this->setProperty('group', $value);
+    }
+
+    /**
     * The number of minutes represented by a major tick.
     * @param float $value
     * @return \Kendo\UI\SchedulerView

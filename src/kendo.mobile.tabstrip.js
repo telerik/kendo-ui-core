@@ -70,7 +70,7 @@ kendo_module({
             }
 
             item = tabstrip.find(item);
-            badge = $(item.find(".km-badge")[0] || createBadge(value).appendTo(item.children(".km-icon")));
+            badge = $(item.find(".km-badge")[0] || createBadge(value).insertAfter(item.children(".km-icon")));
 
             if (value) {
                 badge.html(value);
@@ -132,7 +132,7 @@ kendo_module({
                 if (icon) {
                     iconSpan.addClass("km-" + icon);
                     if (badge) {
-                        createBadge(badge).appendTo(iconSpan);
+                        createBadge(badge).insertAfter(iconSpan);
                     }
                 }
             }

@@ -44,6 +44,12 @@ namespace Kendo.Mvc.UI
                 result.Add("color", series.Color);
             }
 
+            var notesData = series.Notes.CreateSerializer().Serialize();
+            if (notesData.Count > 0)
+            {
+                result.Add("notes", notesData);
+            }
+
             return result;
         }
     }

@@ -78,6 +78,26 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets the model data category member name.
+        /// </summary>
+        /// <value>The model data category member name.</value>
+        string CategoryMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the model note text member name.
+        /// </summary>
+        /// <value>The model note text member name.</value>
+        string NoteTextMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the model open member name.
         /// </summary>
         /// <value>The model open member name.</value>

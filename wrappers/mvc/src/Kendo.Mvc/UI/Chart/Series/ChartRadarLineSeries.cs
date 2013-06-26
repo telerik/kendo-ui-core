@@ -11,8 +11,9 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
-        public ChartRadarLineSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> categoryExpression)
-            : base(expression, categoryExpression)
+        /// <param name="noteTextExpression">The expression used to extract the point note text from the chart model.</param>
+        public ChartRadarLineSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> categoryExpression, Expression<Func<TModel, string>> noteTextExpression)
+            : base(expression, categoryExpression, noteTextExpression)
         {
         }
 
@@ -46,7 +47,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         public ChartRadarLineSeries(Expression<Func<TModel, TValue>> expression)
-            : base(expression, null)
+            : base(expression, null, null)
         {
         }
 

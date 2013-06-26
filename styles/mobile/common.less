@@ -325,6 +325,7 @@
     line-height: 2em;
     text-align: center;
     position: absolute;
+    text-transform: uppercase;
 }
 
 .km-switch-label-off
@@ -363,6 +364,13 @@
     padding: 0 .55em;
     -webkit-background-clip: padding-box;
     .background-clip(padding-box);
+}
+
+.km-tabstrip .km-badge
+{
+    top: -.2em;
+    right: auto;
+    margin-left: -1em;
 }
 
 .km-detail
@@ -496,6 +504,15 @@
     min-height: 1px;
 }
 
+.km-scrollview .km-virtual-page
+{
+    min-height: 1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+}
+
 :-moz-any(.k-ff18,.k-ff19,.k-ff20,.k-ff21) .km-scrollview > div
 {
     width: 0;
@@ -505,7 +522,7 @@
 {
     text-align: center;
     margin: 0;
-    padding: 0;
+    padding: .6em 0 0;
 }
 
 .km-pages li
@@ -703,15 +720,24 @@
     overflow: hidden;
 }
 
-.km-virtual-list  {
-    position: absolute;
+.km-virtual-list
+{
+    position: relative;
     width: 100%;
+    -webkit-transform: translateZ(0);
 }
 
-.km-virtual-list > li {
+.km-virtual-list > li
+{
     width: 100%;
     position: absolute;
     top: 0;
+    -webkit-transform: translateZ(0);
+}
+
+.km-root .km-list .km-load-more
+{
+    border-bottom: 0;
 }
 
 .km-list > li > *
@@ -932,6 +958,12 @@
     background-size: auto 100%;
 }
 
+.km-button .km-icon
+{
+    margin-top: -.1em;
+    margin-bottom: -.1em;
+}
+
 .km-root .km-view .km-notext
 {
     margin-left: 0;
@@ -990,6 +1022,11 @@
 .km-tabstrip .km-button .km-icon
 {
     margin: .1rem auto 0;
+    display: inline-block;
+}
+
+.km-tabstrip .km-text
+{
     display: block;
 }
 
@@ -1059,6 +1096,7 @@
 
 .km-root .k-slider .k-draghandle
 {
+    text-indent: -3333px;
     top: -.35em;
     left: 0;
     width: 1.2em;
@@ -1216,7 +1254,7 @@
 
 .km-loader h1
 {
-    font-size: 1.6em;
+    font-size: 1rem;
     color: white;
     text-align: center;
     margin-top: 10px;
@@ -1268,35 +1306,6 @@
 {
     from { -o-transform: rotate(0deg); }
     to { -o-transform: rotate(360deg); }
-}
-
-@-webkit-keyframes km-ios-spin
-{
-    0% { -webkit-transform: rotate(0deg); }
-    8.32% { -webkit-transform: rotate(0deg); }
-    8.33% { -webkit-transform: rotate(30deg); }
-    16.65% { -webkit-transform: rotate(30deg); }
-    16.66% { -webkit-transform: rotate(60deg); }
-    24.99% { -webkit-transform: rotate(60deg); }
-    25% { -webkit-transform: rotate(90deg); }
-    33.32% { -webkit-transform: rotate(90deg); }
-    33.33% { -webkit-transform: rotate(120deg); }
-    41.65% { -webkit-transform: rotate(120deg); }
-    41.66% { -webkit-transform: rotate(150deg); }
-    49.99% { -webkit-transform: rotate(150deg); }
-    50% { -webkit-transform: rotate(180deg); }
-    58.32% { -webkit-transform: rotate(180deg); }
-    58.33% { -webkit-transform: rotate(210deg); }
-    66.65% { -webkit-transform: rotate(210deg); }
-    66.66% { -webkit-transform: rotate(240deg); }
-    74.99% { -webkit-transform: rotate(240deg); }
-    75% { -webkit-transform: rotate(270deg); }
-    83.32% { -webkit-transform: rotate(270deg); }
-    83.33% { -webkit-transform: rotate(300deg); }
-    91.65% { -webkit-transform: rotate(300deg); }
-    91.66% { -webkit-transform: rotate(330deg); }
-    99.99% { -webkit-transform: rotate(330deg); }
-    100% { -webkit-transform: rotate(360deg); }
 }
 
 /* Form elements */
@@ -1496,7 +1505,7 @@
 {
     display: block;
     padding: .3em 0 1.2em;
-    height: 2.6em;
+    height: 3.2em;
     text-align: center;
 }
 
@@ -1721,22 +1730,10 @@
     -webkit-backface-visibility: hidden;
 }
 
-.km-on-android.km-4 // Fix for Galaxy S3 3D acceleration issue.
-{
-    -webkit-transition: -webkit-transform .0001ms;
-}
-
 // Fix for the Android input duplication issue
 .km-on-android.km-4 input
 {
     -webkit-user-modify: read-write-plaintext-only;
-}
-
-.km-on-android.km-2 .km-list > li,
-.km-on-android.km-3 .km-list > li
-{
-    bottom: 10000px;
-    .transform(translatey(10000px));
 }
 
 .km-overlay

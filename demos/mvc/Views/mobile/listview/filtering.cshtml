@@ -1,4 +1,4 @@
-<div data-role="view" data-init="mobileListViewEndlessScrolling" data-title="Scroll down to load">
+<div data-role="view" data-init="mobileListViewFiltering" data-title="Scroll down to load">
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
@@ -6,10 +6,10 @@
         </div>
     </header>
 
-    <ul id="endless-scrolling"></ul>
+    <ul id="filterable-listview"></ul>
 </div>
 
-<script type="text/x-kendo-tmpl" id="template">
+<script type="text/x-kendo-tmpl" id="mobile-listview-filtering-template">
     <div class="product">
         <img src="../../content/web/foods/#=ProductID#.jpg" alt="#=ProductName# image" class="pullImage"/>
         <h3>#:ProductName#</h3>
@@ -18,7 +18,7 @@
 </script>
 
 <script>
-    function mobileListViewEndlessScrolling() {
+    function mobileListViewFiltering() {
         var dataSource = new kendo.data.DataSource({
             type: "odata",
             transport: {
@@ -33,12 +33,12 @@
             serverPaging: true,
             serverFiltering: true,
             serverSorting: true,
-            pageSize: 30
+            pageSize: 50
         });
 
-        $("#endless-scrolling").kendoMobileListView({
+        $("#filterable-listview").kendoMobileListView({
             dataSource: dataSource,
-            template: $("#template").text(),
+            template: $("#mobile-listview-filtering-template").text(),
             filterable: {
                 field: "ProductName",
                 operator: "startswith"
@@ -53,7 +53,7 @@
         font-size: 1.3em;
         line-height: 1.4em;
         margin: 0;
-        padding: .7em 0 0;
+        padding: 0;
         height: 1.3em;
         overflow: hidden;
     }
@@ -68,5 +68,5 @@
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }    
+    }
 </style>

@@ -16,6 +16,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Seconds_sets_minutes()
+        {
+            builder.Seconds(1, 2);
+            baseUnitSteps.Seconds.Equals(new int[] { 1, 2 });
+        }
+
+        [Fact]
+        public void Seconds_returns_builder()
+        {
+            builder.Seconds(1, 2).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Minutes_sets_minutes()
         {
             builder.Minutes(1, 2);

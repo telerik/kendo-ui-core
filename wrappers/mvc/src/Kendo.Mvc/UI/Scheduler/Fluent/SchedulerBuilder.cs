@@ -5,13 +5,13 @@
     using System.Linq;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="Scheduler"/>.
+    /// Defines the fluent interface for configuring the <see cref="Scheduler{TModel}"/>.
     /// </summary>
     public class SchedulerBuilder<TModel> : WidgetBuilderBase<Scheduler<TModel>, SchedulerBuilder<TModel>> where TModel : class, ISchedulerEvent
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Scheduler"/> class.
+        /// Initializes a new instance of the <see cref="SchedulerBuilder{TModel}"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
         public SchedulerBuilder(Scheduler<TModel> component)
@@ -61,6 +61,31 @@
         }
 
         /// <summary>
+        /// The start time of the week and day views. The scheduler will display events starting after the startTime.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .StartTime(10, 0, 0)
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> StartTime(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            Component.StartTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
+
+            return this;
+        }
+
+        /// <summary>
         /// The end time of the week and day views. The scheduler will display events ending before the endTime.
         /// </summary>
         /// <param name="endTime">The endTime.</param>
@@ -77,6 +102,31 @@
         public SchedulerBuilder<TModel> EndTime(DateTime endTime)
         {
             Component.EndTime = endTime;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The end time of the week and day views. The scheduler will display events ending before the endTime.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .EndTime(10,0,0)
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> EndTime(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            Component.EndTime = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
 
             return this;
         }
@@ -389,7 +439,7 @@
         /// <summary>
         /// Sets the editing configuration of the scheduler.
         /// </summary>
-        /// <param name="editableSettings">The lambda which configures the editing</param>
+        /// <param name="configurator">The lambda which configures the editing</param>
         /// <example>
         /// <code lang="Razor">
         /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
@@ -441,6 +491,37 @@
             Component.Editable = new SchedulerEditableSettings();
 
             Component.Editable.Enable = isEditable;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the resources grouping configuration of the scheduler.
+        /// </summary>
+        /// <param name="addResourceAction">The lambda which configures the scheduler grouping</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///    .Name(&quot;Scheduler&quot;)
+        ///    .Resources(resource =&gt;
+        ///    {
+        ///        resource.Add(m =&gt; m.TaskID)
+        ///            .Title(&quot;Color&quot;)
+        ///            .Multiple(true)
+        ///            .DataTextField(&quot;Text&quot;)
+        ///            .DataValueField(&quot;Value&quot;)
+        ///            .DataSource(d =&gt; d.Read(&quot;Attendies&quot;, &quot;Scheduler&quot;));
+        ///    })
+        ///    .DataSource(dataSource =&gt; dataSource
+        ///        .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///    ))
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Group(Action<SchedulerGroupBuilder<TModel>> configucation)
+        {
+            var factory = new SchedulerGroupBuilder<TModel>(Component);
+
+            configucation(factory);
 
             return this;
         }
@@ -498,6 +579,19 @@
             SchedulerViewFactory<TModel> factory = new SchedulerViewFactory<TModel>(Component);
 
             addViewAction(factory);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the messages of the scheduler.
+        /// </summary>
+        /// <param name="addViewAction">The lambda which configures the scheduler messages</param>
+        public SchedulerBuilder<TModel> Messages(Action<SchedulerMessagesBuilder> addViewAction)
+        {
+            SchedulerMessagesBuilder builder = new SchedulerMessagesBuilder(Component.Messages);
+
+            addViewAction(builder);
 
             return this;
         }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SchedulerModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SchedulerModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SchedulerModelsStoreContainer">
           <EntitySet Name="MeetingAtendees" EntityType="SchedulerModels.Store.MeetingAtendees" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Meetings" EntityType="SchedulerModels.Store.Meetings" store:Type="Tables" Schema="dbo" />
@@ -44,6 +44,8 @@
           <Property Name="RecurrenceRule" Type="ntext" />
           <Property Name="RecurrenceID" Type="int" />
           <Property Name="RecurrenceException" Type="ntext" />
+          <Property Name="StartTimezone" Type="ntext" />
+          <Property Name="EndTimezone" Type="ntext" />
         </EntityType>
         <EntityType Name="Tasks">
           <Key>
@@ -59,6 +61,8 @@
           <Property Name="RecurrenceRule" Type="ntext" />
           <Property Name="RecurrenceID" Type="int" />
           <Property Name="RecurrenceException" Type="ntext" />
+          <Property Name="StartTimezone" Type="ntext" />
+          <Property Name="EndTimezone" Type="ntext" />
         </EntityType>
         <Association Name="FK_MeetingAtendee_Meeting">
           <End Role="Meetings" Type="SchedulerModels.Store.Meetings" Multiplicity="1" />
@@ -96,8 +100,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SchedulerModels" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -144,6 +147,8 @@
           <NavigationProperty Name="MeetingAtendees" Relationship="SchedulerModels.FK_MeetingAtendee_Meeting" FromRole="Meetings" ToRole="MeetingAtendees" />
           <NavigationProperty Name="Meetings1" Relationship="SchedulerModels.FK_Meetings_Meetings" FromRole="Meetings" ToRole="Meetings1" />
           <NavigationProperty Name="Meeting1" Relationship="SchedulerModels.FK_Meetings_Meetings" FromRole="Meetings1" ToRole="Meetings" />
+          <Property Type="String" Name="StartTimezone" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EndTimezone" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Task">
           <Key>
@@ -161,6 +166,8 @@
           <Property Name="RecurrenceException" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Tasks1" Relationship="SchedulerModels.FK_Tasks_Tasks" FromRole="Tasks" ToRole="Tasks1" />
           <NavigationProperty Name="Task1" Relationship="SchedulerModels.FK_Tasks_Tasks" FromRole="Tasks1" ToRole="Tasks" />
+          <Property Type="String" Name="StartTimezone" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EndTimezone" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_MeetingAtendee_Meeting">
           <End Role="Meetings" Type="SchedulerModels.Meeting" Multiplicity="1" />
@@ -215,6 +222,8 @@
           <EntitySetMapping Name="Meetings">
             <EntityTypeMapping TypeName="SchedulerModels.Meeting">
               <MappingFragment StoreEntitySet="Meetings">
+                <ScalarProperty Name="EndTimezone" ColumnName="EndTimezone" />
+                <ScalarProperty Name="StartTimezone" ColumnName="StartTimezone" />
                 <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
                 <ScalarProperty Name="Start" ColumnName="Start" />
                 <ScalarProperty Name="End" ColumnName="End" />
@@ -231,6 +240,8 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="SchedulerModels.Task">
               <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="EndTimezone" ColumnName="EndTimezone" />
+                <ScalarProperty Name="StartTimezone" ColumnName="StartTimezone" />
                 <ScalarProperty Name="TaskID" ColumnName="TaskID" />
                 <ScalarProperty Name="Start" ColumnName="Start" />
                 <ScalarProperty Name="End" ColumnName="End" />

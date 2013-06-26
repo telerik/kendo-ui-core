@@ -83,15 +83,7 @@
 
 .km-flat .km-tabstrip .km-button
 {
-    color: @flat-active-color;
     background: none;
-}
-
-.km-flat .km-state-active,
-.km-flat .km-tabstrip .km-state-active
-{
-    color: @flat-active-color;
-    background: @flat-active-background;
 }
 
 .km-flat .km-state-active[style*=background]
@@ -108,8 +100,6 @@
     min-width: 1.8em;
     height: 1.8em;
     line-height: 1.8em;
-    color: @flat-active-color;
-    background-color: @flat-second-active-background;
     .border-radius(5em);
 }
 
@@ -135,18 +125,6 @@
 {
     left: .1em;
     top: 0.35em;
-}
-
-.km-flat .km-rowinsert
-{
-    color: @flat-active-color;
-    background-color: @flat-active-background;
-}
-
-.km-flat .km-rowdelete
-{
-    color: @flat-active-color;
-    background-color: @flat-second-active-background;
 }
 
 .km-flat .km-detail:active,
@@ -207,7 +185,7 @@
 .km-flat .km-switch-background,
 .km-flat .k-slider-selection
 {
-    background: 4.25em 0 no-repeat @flat-active-background;
+    background: 4.25em 0 no-repeat currentcolor;
     .linear-gradient-image(top, @flat-second-color, @flat-second-color);
     margin-left: -3.4rem;
 }
@@ -224,8 +202,8 @@
     width: 1.6em;
     margin: 0 4px 0 0;
     border: 1px solid rgba(0,0,0,.1);
-    -webkit-box-shadow: 0 1px 0 1px @flat-active-background, 0 -1px 0 1px @flat-active-background;
-    box-shadow:0 1px 0 1px @flat-active-background, 0 -1px 0 1px @flat-active-background;
+    -webkit-box-shadow: 0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
+    box-shadow:0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
 }
 
 .km-flat .km-switch-off .km-switch-handle
@@ -247,7 +225,6 @@
 .km-flat .km-switch-label-on,
 .km-flat .km-switch-label-off
 {
-    color: @flat-active-color;
     text-shadow: none;
     width: 185%;
     font-size: 1em;
@@ -282,13 +259,7 @@
 {
     border: 0;
     .border-radius(5em);
-    background: @flat-active-background;
-    .box-shadow(0 0 0 3px @flat-active-color);
-}
-
-.km-flat .k-slider-selection
-{
-    background: @flat-active-background;
+    .box-shadow(0 0 0 3px currentcolor);
 }
 
 .km-flat .k-slider-track
@@ -341,13 +312,6 @@
     .border-radius(@flat-border-radius);
 }
 
-.km-flat li.km-state-active .km-listview-link,
-.km-flat li.km-state-active .km-listview-label
-{
-    color: @flat-active-color;
-    background: @flat-active-background;
-}
-
 .km-flat .km-listview-link:after
 {
     color: lighten(@flat-main-color, 30);
@@ -355,11 +319,6 @@
     height: .64rem;
     border-width: 0;
     box-shadow: inset -.2rem .2rem 0;
-}
-
-.km-flat .km-state-active .km-listview-link:after
-{
-    color: @flat-active-color;
 }
 
 .km-flat .km-listinset li:first-child > .km-listview-link,
@@ -434,7 +393,6 @@
 
 .km-flat .km-touch-scrollbar
 {
-    background-color: @flat-active-background;
     border: 0;
     .box-sizing(border-box);
     .border-radius(1em);
@@ -451,11 +409,6 @@
 {
     background: @flat-border-color;
     .border-radius(1em);
-}
-
-.km-flat .km-pages .km-current-page
-{
-    background: @flat-active-background;
 }
 
 /* Filter box */
@@ -491,13 +444,12 @@
 {
     color: @flat-main-color;
     .border-radius(@flat-border-radius);
-    background: @flat-active-color;
     border: 1px solid @flat-border-color;
 }
 
-.km-flat .km-filter-wrap > input:focus,
+.km-flat .km-filter-wrap > input:focus
 {
-    border: 1px solid @flat-active-background;
+    border: 1px solid #000;
 }
 
 /* Forms */
@@ -522,7 +474,7 @@
 {
     .appearance(none);
     font-size: 1.1rem;
-    color: #385487;
+    color: @flat-main-color;
     min-width: 6em;
     border: 0;
     padding: .4em;
@@ -537,7 +489,7 @@
 
 .km-flat .km-list .k-dropdown-wrap .k-input
 {
-    color: #385487;
+    color: @flat-main-color;
 }
 
 .km-flat .km-list .k-dropdown
@@ -624,15 +576,8 @@
     height: 76%;
 }
 
-.km-flat .km-listview-label input[type=radio]:checked,
-.km-flat .km-listview-label input[type=checkbox]:checked
-{
-    background-color: @flat-active-background;
-}
-
 .km-flat .km-listview-label input[type=checkbox]:checked:after
 {
-    background: @flat-active-color;
     -webkit-mask-box-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAsBJREFUeNrsmzFIAzEUhlMLgtCpUBBcC05CwUnoKgidBEHo5FpwFQqCUBBcnQpOTgWh4CQIroLgdOAkFJw6CU6dCkK9SCyK9fr+5CV39+qDN/bC+5I/l/9dWphMJmqRY0kteghaAcU4I10SIUdxVj5rFwTggFi8zvZ08oUAKMU5JBb/EueyNAAdYPabP+QvAMCa0TSl+Ptf+58AAD1g9rekAajF+U4svjfzDZhzAPfE4sdGKqIA7AJL/+zPM1BOAejX2IBY/NC8JkUBOAJmv5V4Cs4hgHKcb8TiI3NEFgWgC8z+zlwflDMAVeC1d0MygjkDcEMsXkNalwZgG1j6XXIrICcAEK//ZjZKUQBaqNeXBADx+oMvry8JwBkw+3vIg6cAbDOQ1x/beH0pABCvX5MGYAsovmczQNYBUL3+aJbXzzuAJjD7p7aDZBUAi9fPM4A2MPsHLgNlEUBZ0VvciV4fPQhdAS5rMyNev+462HcAmvwrceAn5LgJxAan17c5Cu8B9Dspev2xaYywA9DRT0kKDQD+OdegswCkIYWieRar13dxg6GlgHj9Q07NJdnhPqBHFymUgBb3gHvzTQJQCSQFxOs3uHfdeQ0R31Ko+vT6XB0hRAqoH6d6/Xcbr88FoAJoFJFCHVhdl76OndSeoA8pPPr2+txNUU4pIF7/2GfTAQGASCFKkMIK0OJ28vo+2uIcUkC8ftN3z83mu4CLFJDrbFGIlrMNABcpXIT0+r4A6NgHCjkxv0Gus/VVoHD5NIZK4S601/cNAJWC03W2LAJApRDc64cAoOOaEUBLBQ4OAIgUkvLZtcWdFgAuKTRUCsF5QcJFCrcqpeAEsGopBW9ePzQAWyl0VYrh444QIoWRWTmiACBSaKuUw9ctMUrDY6j8fF/MBACKFJoqA+ETQJIUHlRGQtde+P/3+ILHhwADAA2kPASxM5juAAAAAElFTkSuQmCC');
 }
 
@@ -669,31 +614,15 @@
     text-decoration: none;
     background: @flat-dark-background;
     padding: .5em 0 .5em .6em;
-    color: @flat-active-color;
     border: 0;
     .border-radius(0);
     border-bottom: 1px solid @flat-light-shadow;
     .box-sizing(border-box);
 }
 
-//.km-root .km-flat .km-popup .k-item
-//{
-//    border: 1px solid @flat-light-shadow;
-//}
-
 .km-flat li.km-actionsheet-cancel > a
 {
     color: @flat-second-color;
-}
-
-.km-flat .km-popup .k-state-hover,
-.km-flat .km-popup .k-state-focused,
-.km-flat .km-popup .k-state-selected,
-.km-flat .km-actionsheet > li > a:active,
-.km-flat .km-actionsheet > li > a:hover
-{
-    color: @flat-active-color;
-    background: @flat-active-background;
 }
 
 .km-flat .km-popup
@@ -786,7 +715,6 @@
 .km-flat .km-popup.km-pane .km-tabstrip
 {
     background: none;
-    color: @flat-active-color;
 }
 
 .km-flat .km-popup.km-pane .km-header
@@ -845,6 +773,11 @@
 
 /* Loader & Pull-to-refresh */
 
+.km-flat .km-load-more
+{
+    height: 3.4em;
+}
+
 .km-flat .km-load-more .km-button
 {
     margin: 0 .8em;
@@ -857,7 +790,6 @@
 {
     .border-radius(20em);
     overflow: visible;
-    background: @flat-active-background;
 }
 
 .km-flat .km-loader
@@ -919,7 +851,7 @@
 .km-flat .km-load-more.km-scroller-refresh .km-icon,
 .km-flat .km-scroller-pull.km-scroller-refresh .km-icon,
 .km-flat .km-scroller-refresh .km-loading-left,
-.km-flat .km-scroller-refresh .km-loading-right,
+.km-flat .km-scroller-refresh .km-loading-right
 {
     font-size: 1em;
     display: block;
@@ -930,7 +862,6 @@
     left: 50%;
     margin-left: -.8em;
     margin-top: -.5em;
-    background: @flat-active-color;
     .border-radius(1em);
     .animation(km-flatload .6s infinite linear);
     -webkit-background-clip: none;
@@ -938,7 +869,6 @@
 
 .km-flat .km-scroller-pull .km-icon
 {
-    color: @flat-active-color;
     margin-right: 0;
     display: block;
     position: absolute;
@@ -946,6 +876,18 @@
     left: 50%;
     margin-left: -1rem;
     margin-top: -1rem;
+}
+
+.km-flat .km-load-more.km-scroller-refresh .km-icon,
+.km-flat .km-scroller-pull.km-scroller-refresh .km-icon,
+.km-flat .km-scroller-refresh .km-loading-left,
+.km-flat .km-scroller-refresh .km-loading-right
+{
+    height: .6em;
+    margin-top: -.3em;
+    margin-left: -.6em;
+    width: .25em;
+    .animation(km-flatrefresh .6s infinite linear);
 }
 
 .km-flat .km-scroller-pull .km-icon:after
@@ -971,6 +913,16 @@
     .animation-delay(.4s);
 }
 
+.km-flat .km-scroller-refresh .km-loading-left
+{
+    margin-left: -.18em;
+}
+
+.km-flat .km-scroller-refresh .km-loading-right
+{
+    margin-left: .28em;
+}
+
 @keyframes km-flatload
 {
     0% { height: 1em; margin-top: -.5em; }
@@ -992,3 +944,115 @@
     66% { height: 1em; margin-top: -.5em; }
 }
 
+@keyframes km-flatrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+@-moz-keyframes km-flatrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+@-webkit-keyframes km-flatrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+/* Tablet Styles */
+
+.km-tablet .km-flat.km-horizontal .km-navbar .km-button,
+.km-tablet .km-flat.km-horizontal .km-toolbar .km-button
+{
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
+
+
+
+/* Active States */
+
+.km-flat .km-badge,
+.km-flat .km-rowinsert,
+.km-flat .km-rowdelete,
+.km-flat .km-state-active,
+.km-flat .km-switch-label-on,
+.km-flat .km-switch-label-off,
+.km-flat .km-tabstrip .km-button,
+.km-flat .km-popup .k-item,
+.km-flat .km-actionsheet > li > a,
+.km-flat .km-tabstrip .km-state-active,
+.km-flat .k-slider .k-draghandle,
+.km-flat .k-slider .k-draghandle:hover,
+.km-flat .km-scroller-pull .km-icon,
+.km-flat .km-popup.km-pane .km-navbar,
+.km-flat .km-popup.km-pane .km-toolbar,
+.km-flat .km-popup.km-pane .km-tabstrip,
+.km-flat .km-popup .k-state-hover,
+.km-flat .km-popup .k-state-focused,
+.km-flat .km-popup .k-state-selected,
+.km-flat .km-actionsheet > li > a:active,
+.km-flat .km-actionsheet > li > a:hover,
+.km-flat li.km-state-active .km-listview-link,
+.km-flat li.km-state-active .km-listview-label,
+.km-flat .km-state-active .km-listview-link:after
+{
+    color: @flat-active-color;
+}
+
+.km-flat .km-loader > *:not(h1),
+.km-flat .km-filter-wrap > input,
+.km-flat .km-switch-handle.km-state-active,
+.km-flat .km-load-more.km-scroller-refresh > *:not(.km-template),
+.km-flat .km-listview-label input[type=checkbox]:checked:after
+{
+    background: @flat-active-color;
+}
+
+.km-flat .km-switch-handle,
+.km-flat .k-slider-selection,
+.km-flat .km-switch-background
+{
+    color: @flat-active-background;
+}
+
+.km-flat .km-loader,
+.km-flat .km-rowinsert,
+.km-flat .km-state-active,
+.km-flat .km-scroller-pull,
+.km-flat .k-slider-selection,
+.km-flat .km-touch-scrollbar,
+.km-flat .km-pages .km-current-page,
+.km-flat .k-slider .k-draghandle,
+.km-flat .k-slider .k-draghandle:hover,
+.km-flat .km-tabstrip .km-state-active,
+.km-flat .km-scroller-refresh.km-load-more,
+.km-flat .km-popup .k-state-hover,
+.km-flat .km-popup .k-state-focused,
+.km-flat .km-popup .k-state-selected,
+.km-flat .km-actionsheet > li > a:active,
+.km-flat .km-actionsheet > li > a:hover,
+.km-flat li.km-state-active .km-listview-link,
+.km-flat li.km-state-active .km-listview-label,
+.km-flat .km-listview-label input[type=radio]:checked,
+.km-flat .km-listview-label input[type=checkbox]:checked
+{
+    background: @flat-active-background;
+}
+
+.km-flat .km-filter-wrap > input:focus
+{
+    border-color: @flat-active-background;
+}
+
+.km-flat .km-badge,
+.km-flat .km-rowdelete
+{
+    background: @flat-second-active-background;
+}

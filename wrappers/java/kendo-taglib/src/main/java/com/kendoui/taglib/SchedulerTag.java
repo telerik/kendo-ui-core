@@ -55,6 +55,10 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("editable", value);
     }
 
+    public void setGroup(com.kendoui.taglib.scheduler.GroupTag value) {
+        setProperty("group", value);
+    }
+
     public void setResources(ResourcesTag value) {
 
         setProperty("resources", value.resources());

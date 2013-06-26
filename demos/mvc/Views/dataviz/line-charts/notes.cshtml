@@ -1,0 +1,109 @@
+
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+            </div>
+            <script>
+                var grandSlam = [{
+                    "year": "2003",
+                    "win": 13,
+                    "extremum": "MIN: 13",
+                    "loss": 3
+                },{
+                    "year": "2004",
+                    "win": 22,
+                    "loss": 1
+                },{
+                    "year": "2005",
+                    "win": 24,
+                    "loss": 2
+                },{
+                    "year": "2006",
+                    "win": 27,
+                    "extremum": "MAX: 27",
+                    "loss": 1
+                },{
+                    "year": "2007",
+                    "win": 26,
+                    "loss": 1
+                },{
+                    "year": "2008",
+                    "win": 24,
+                    "loss": 3
+                },{
+                    "year": "2009",
+                    "win": 26,
+                    "loss": 2
+                },{
+                    "year": "2010",
+                    "win": 20,
+                    "loss": 3
+                },{
+                    "year": "2011",
+                    "win": 20,
+                    "loss": 4
+                },{
+                    "year": "2012",
+                    "win": 19,
+                    "loss": 3
+                }];
+                
+                function createChart() {
+                    $("#chart").kendoChart({
+                        dataSource: {
+                            data: grandSlam
+                        },
+                        title: {
+                            text: "Roger Federer Grand Slam tournament performance"
+                        },
+                        legend: {
+                            position: "bottom"
+                        },                        
+                        seriesDefaults: {
+                            type: "line"
+                        },
+                        series: [{
+                            field: "win",
+                            name: "Wins",
+                            noteTextField: "extremum",
+                            notes: {
+                                label: {
+                                    position: "outside"
+                                },
+                                position: "bottom"
+                            }
+                        },{
+                            field: "loss",
+                            name: "Losses"
+                        }],
+                        valueAxis: {
+                            line: {
+                                visible: false
+                            }
+                        },
+                        categoryAxis: {
+                            field: "year",
+                            majorGridLines: {
+                                visible: false
+                            }
+                        },
+                        tooltip: {
+                            visible: true,
+                            template: "#= series.name #: #= value #"
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                        createChart();
+
+                        $("#example").bind("kendo:skinChange", function(e) {
+                            createChart();
+                        });
+                    }, 400);
+                });
+            </script>
+        </div>

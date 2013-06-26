@@ -21,20 +21,13 @@
         <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.buttongroup.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
         <style>
-            .km-listview, .km-listview-wrapper {
-                -webkit-transform: translatez(0);
-            }
-
             .km-listview li {
-                position: absolute;
-                -webkit-transform: translatez(0);
                 line-height: 100px;
-                width: 100%;
                 border-bottom: 1px solid #eee;
                 border-top: 1px solid #fff;
-                background: #f4f4f4;
             }
 
             #detail .km-content {
@@ -44,8 +37,17 @@
     </head>
     <body>
         <div data-role="view">
-            <ul data-role="listview" data-endless-scroll="true" data-source="foo" data-template="listview-template">
+
+            <ul data-role="buttongroup">
+                <li>Foo</li>
+                <li>Bar</li>
+                <li>Baz</li>
             </ul>
+
+            <div data-role="scroller" style="height:300px">
+                <ul data-role="listview" data-endless-scroll="true" data-source="foo" data-template="listview-template">
+                </ul>
+            </div>
         </div>
 
         <div data-role="view" data-transition="slide" data-show="showParam" id="detail">
@@ -67,7 +69,9 @@
                     read: function(options) {
                         var results = [], data = options.data;
                         for (var i = data.skip; i < data.skip + data.take; i ++) {
-                            results.push(i);
+                            if (i < 50) {
+                                results.push(i);
+                            }
                         }
 
                         setTimeout(function() {
@@ -75,14 +79,14 @@
                         }, 2000);
                     }
                 },
-                pageSize: 50,
+                pageSize: 20,
                 serverPaging: true,
                 schema: {
-                    total: function() { return 100; }
+                    total: function() { return 50; }
                 }
             });
 
-            new kendo.mobile.Application();
+            new kendo.mobile.Application(document.body, { skin: "flat" });
         </script>
     </body>
 </html>

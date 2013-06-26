@@ -113,6 +113,42 @@
                 equal(testwidget.options.foo, "foo");
             });
 
+            test("parses number options from data attributes", function() {
+                var dom = $('<div data-role="testwidget" data-foo="100" />');
+                kendo.init(dom);
+
+                var testwidget = dom.data("kendoTestWidget");
+
+                ok(testwidget.options.foo === 100);
+            });
+
+            test("parses signed number options from data attributes", function() {
+                var dom = $('<div data-role="testwidget" data-foo="-100" />');
+                kendo.init(dom);
+
+                var testwidget = dom.data("kendoTestWidget");
+
+                ok(testwidget.options.foo === -100);
+            });
+
+            test("parses float options from data attributes", function() {
+                var dom = $('<div data-role="testwidget" data-foo="100.10" />');
+                kendo.init(dom);
+
+                var testwidget = dom.data("kendoTestWidget");
+
+                ok(testwidget.options.foo === 100.10);
+            });
+
+            test("parses percentage options from data attributes", function() {
+                var dom = $('<div data-role="testwidget" data-foo="100%" />');
+                kendo.init(dom);
+
+                var testwidget = dom.data("kendoTestWidget");
+
+                equal(testwidget.options.foo, "100%");
+            });
+
             test("parses options which start with data", function() {
                 var dom = $('<div data-role="testwidget" data-bar="bar" />');
 

@@ -63,16 +63,10 @@
         }
 
         function changeSkin(e) {
-            $(document.body).removeClass("km-ios km-android km-blackberry km-ios4 km-ios5 km-ios6 km-wp km-flat");
-            if (e.sender.element.text() == "Flat") {
-                window.kendoMobileApplication.options.skin = "flat";
-                e.sender.element.text("Native");
-            } else {
-                window.kendoMobileApplication.options.skin = null;
-                e.sender.element.text("Flat");
-            }
-            window.kendoMobileApplication._setupPlatform();
-            window.kendoMobileApplication._setupElementClass();
+            var nextSkin = e.sender.element.text() == "Flat" ? "flat" : "";
+
+            window.kendoMobileApplication.skin(nextSkin.toLowerCase());
+            e.sender.element.find(".km-text").text(nextSkin ? "Native" : "Flat");
         }
 
         window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {

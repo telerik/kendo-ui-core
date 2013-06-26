@@ -197,6 +197,40 @@
     left: 0;
 }
 
+/* Editing */
+
+.k-rtl .k-edit-label,
+.k-rtl .k-edit-form-container .editor-label
+{
+    float:right;
+    clear:both;
+    margin-left: 0;
+    margin-right: 2%;
+    text-align: left;
+}
+
+.k-rtl .k-edit-field,
+.k-rtl .k-edit-form-container .editor-field
+{
+    float:left;
+    clear:left;
+    margin-right: 0;
+    margin-left: 2%;
+}
+
+.k-rtl .k-edit-field > input[type="checkbox"]:first-child,
+.k-rtl .k-edit-field > input[type="radio"]:first-child,
+.k-rtl .k-edit-field > label:first-child > input[type="checkbox"],
+.k-rtl .k-edit-field > .k-button:first-child
+{
+    margin-right: 0;
+}
+
+.k-rtl .k-edit-form-container .k-edit-buttons
+{
+    text-align: left;
+}
+
 /* Pager */
 
 .k-rtl .k-pager-info
@@ -281,6 +315,245 @@
     float: right;
     margin-right: 0;
     margin-left: 5px;
+}
+
+/* Scheduler */
+
+.k-rtl .k-scheduler-toolbar > ul
+{
+    float:left;
+}
+
+.k-rtl .k-scheduler-toolbar > ul:first-child
+{
+    float:right;
+}
+
+.k-rtl .k-scheduler-toolbar > ul > li,
+.k-rtl .k-scheduler-footer > ul > li
+{
+    border-width:1px 0 1px 1px;
+}
+
+.k-rtl .k-scheduler-toolbar > ul > li:first-child
+{
+    border-right-width:1px;
+}
+
+.k-rtl .k-scheduler div.k-scheduler-footer ul li
+{
+    margin-right: 0;
+    margin-left: .6em;
+}
+
+.k-rtl .k-scheduler-toolbar .k-i-calendar,
+.k-rtl .k-scheduler-footer .k-icon
+{
+    margin-right: 0;
+    margin-left: 6px;
+}
+
+.k-rtl .k-scheduler .k-scrollbar-v .k-scheduler-header-wrap
+{
+    border-right-width: 0;
+    border-left-width: 1px;
+}
+
+.k-rtl .k-scheduler-monthview .k-scheduler-table td
+{
+    text-align: left;
+}
+
+.k-rtl .k-scheduler-table td,
+.k-rtl .k-scheduler-header th
+{
+    border-left-width: 0;
+    border-right-width: 1px;
+}
+
+.k-rtl .k-scheduler-table td:first-child,
+.k-rtl .k-scheduler-header th:first-child
+{
+    border-right-width: 0;
+}
+
+.k-rtl .k-scheduler-agenda .k-scheduler-table td:first-child
+{
+    border-left-width: 0;
+    border-right-width: 1px;
+}
+
+.k-rtl .k-scheduler-agenda .k-scheduler-table td.k-scheduler-datecolumn
+{
+    border-right-width: 0;
+}
+
+.k-rtl .k-scheduler-times th
+{
+    text-align: left;
+    padding-right: .5em;
+    padding-left: .6em;
+    border-right-width: 0;
+    border-left-width: 1px;
+}
+
+.k-rtl .k-scheduler-now-arrow
+{
+    left:auto;
+    right:0;
+}
+
+.k-rtl .k-scheduler-now-line
+{
+    left:0;
+    right:5px;
+}
+
+.k-rtl .k-event,
+.k-rtl .k-more-events
+{
+    text-align:right;
+}
+
+.k-rtl .k-event dl
+{
+    padding-left: 1.8em;
+    padding-right: .6em;
+}
+
+.k-rtl .k-event-actions,
+.k-rtl .k-event > .k-link,
+.k-rtl .k-task > .k-link
+{
+    right: auto;
+    left:4px;
+}
+
+.k-rtl .k-scheduler-agenda .k-task > .k-link
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-event-actions:first-child
+{
+    float: right;
+    margin-left: 2px;
+    margin-right: 4px;
+}
+
+.k-rtl .k-event .k-event-top-actions,
+.k-rtl .k-event .k-event-bottom-actions
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-event > .k-resize-e
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-event > .k-resize-w
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-event > .k-resize-e:after,
+.k-rtl .k-event > .k-resize-w:after
+{
+    left: auto;
+    right: 1px;
+}
+
+.k-rtl .k-event > .k-resize-e:after
+{
+    right: auto;
+    left: 1px;
+}
+
+.k-rtl .k-scheduler-marquee .k-label-top
+{
+    left: auto;
+    right: .8em;
+}
+
+.k-rtl .k-scheduler-marquee .k-label-bottom
+{
+    right: auto;
+    left: .81em;
+}
+
+.k-rtl .k-tooltip-bottom
+{
+    text-align: right;
+}
+
+.k-rtl .k-tooltip-bottom .k-button
+{
+    float: right;
+    margin-right: 0;
+    margin-left: .3em;
+}
+
+.k-rtl .k-tooltip-bottom .k-quickedit-details
+{
+    float: left;
+    margin-left: 0;
+}
+
+.k-rtl .k-scheduler-agenda .k-scheduler-table th,
+.k-rtl .k-scheduler-agenda .k-scheduler-table td
+{
+    text-align: right;
+}
+
+.k-rtl .k-scheduler-timecolumn > div > .k-i-arrow-e
+{
+    right: auto;
+    left: -4px;
+}
+
+.k-rtl .k-scheduler-timecolumn .k-i-arrow-w
+{
+    margin-left: 0;
+    margin-right: -4px;
+}
+
+.k-rtl .k-scheduler-mark
+{
+    margin-right: 0;
+    margin-left: .5em;
+}
+
+.k-rtl .k-scheduler-agendaday
+{
+    float: right;
+    margin:0 0 0 .2em;
+}
+
+.k-rtl .k-scheduler-edit-form > .k-edit-box:first-child .k-datetimepicker
+{
+    margin-right: 0;
+    margin-left: 1em;
+}
+
+.k-rtl .k-edit-box
+{
+    float: right;
+}
+
+.k-rtl .k-edit-box + .k-edit-box
+{
+    float: left;
+}
+
+.k-rtl .k-scheduler-edit-form label + input
+{
+    margin-left: 0;
+    margin-right: 1em;
 }
 
 /* Slider */
@@ -388,17 +661,47 @@
 
 /* Upload */
 
-.k-rtl .k-progress,
-.k-rtl .k-progress-status
+.k-rtl .k-dropzone em
+{
+    margin-left: 0;
+    margin-right: .6em;
+}
+
+.k-rtl .k-upload-files .k-button,
+.k-rtl .k-upload-status-total .k-icon
+{
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+.k-rtl .k-file
+{
+    padding-right: .8em;
+    padding-left: .167em;
+}
+
+.k-rtl .k-filename
+{
+    margin-left: 0;
+    margin-right: 1em;
+}
+
+.k-rtl .k-upload-status
+{
+    right: auto;
+    left: 12px;
+}
+
+.k-rtl .k-progress
 {
     left: auto;
     right: 0;
 }
 
-.k-rtl .k-upload-files .k-button
+.k-rtl .k-upload-selected
 {
-    margin-left: 0;
-    margin-right: 8px;
+    margin-right: .8em;
+    margin-left: .2em;
 }
 
 /* Window */

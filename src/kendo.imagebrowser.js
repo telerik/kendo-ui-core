@@ -4,7 +4,7 @@ kendo_module({
     category: "web",
     description: "",
     hidden: true,
-    depends: [ "listview", "upload" ]
+    depends: [ "listview", "dropdownlist", "upload" ]
 });
 
 (function($, undefined) {
@@ -28,22 +28,24 @@ kendo_module({
         SIZEFIELD = "size",
         TYPEFIELD = "type",
         DEFAULTSORTORDER = { field: TYPEFIELD, dir: "asc" },
-        ARRANGEBYTMPL = kendo.template('<li data-#=ns#value="#=value#" class="k-item">${text}</li>'),
         EMPTYTILE = kendo.template('<li class="k-tile-empty"><strong>${text}</strong></li>'),
-        TOOLBARTMPL = '<div class="k-widget k-toolbar k-floatwrap">' +
+        TOOLBARTMPL = '<div class="k-widget k-toolbar k-header k-floatwrap">' +
                             '<div class="k-toolbar-wrap">' +
-                                '#if(showUpload) { # ' +
-                                    '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-button-bare k-upload-button">' +
+                                '# if (showUpload) { # ' +
+                                    '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-upload-button">' +
                                         '<span class="k-icon k-add"></span>#=messages.uploadFile#<input type="file" name="file" /></div></div>' +
-                                '#}#' +
-                                '#if(showCreate) {#' +
-                                    '<button type="button" class="k-button k-button-icon k-button-bare"><span class="k-icon k-addfolder"></span></button>' +
-                                '#}#' +
-                                '#if(showDelete) {#' +
-                                    '<button type="button" class="k-button k-button-icon k-button-bare k-state-disabled"><span class="k-icon k-delete"></span></button>&nbsp;' +
-                                '#}#' +
+                                '# } #' +
+
+                                '# if (showCreate) { #' +
+                                     '<button type="button" class="k-button k-button-icon"><span class="k-icon k-addfolder" /></button>' +
+                                '# } #' +
+
+                                '# if (showDelete) { #' +
+                                    '<button type="button" class="k-button k-button-icon k-state-disabled"><span class="k-icon k-delete" /></button>&nbsp;' +
+                                '# } #' +
                             '</div>' +
-                            '<div class="k-tiles-arrange">#=messages.orderBy#: <a href="\\#" class="k-link"><span>#=messages.orderByName#</span><span class="k-icon k-i-arrow-s"></span></a>' +
+                            '<div class="k-tiles-arrange">' +
+                                '<label>#=messages.orderBy#: <select /></label></a>' +
                             '</div>' +
                         '</div>';
 
@@ -182,7 +184,7 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("k-imagebrowser");
+            that.element.addClass("k-imagebrowser k-secondary");
 
             that.element
                 .on(CLICK + NS, ".k-toolbar button:not(.k-state-disabled):has(.k-delete)", proxy(that._deleteClick, that))
@@ -232,8 +234,8 @@ kendo_module({
                 .add(that.toolbar)
                 .off(NS);
 
-            if (that.arrangeByPopup) {
-                that.arrangeByPopup.destroy();
+            if (that.arrangeBy) {
+                that.arrangeBy.destroy();
             }
 
             kendo.destroy(that.element);
@@ -267,10 +269,10 @@ kendo_module({
             var that = this,
                 template = kendo.template(TOOLBARTMPL),
                 messages = that.options.messages,
-                link,
-                popup,
-                arrangeBy = [{ text: messages.orderByName, value: "name", ns: kendo.ns },
-                    { text: messages.orderBySize, value: "size", ns: kendo.ns }];
+                arrangeBy = [
+                    { text: messages.orderByName, value: "name" },
+                    { text: messages.orderBySize, value: "size" }
+                ];
 
             that.toolbar = $(template({
                     messages: messages,
@@ -299,27 +301,16 @@ kendo_module({
                 .find(".k-upload input")
                 .data("kendoUpload");
 
-            link = that.toolbar.find(".k-tiles-arrange a");
-
-            that.arrangeByPopup = popup = $("<ul>" + kendo.render(ARRANGEBYTMPL, arrangeBy) + "</ul>")
-                .kendoPopup({
-                    anchor: link
+            that.arrangeBy = that.toolbar.find(".k-tiles-arrange select")
+                .kendoDropDownList({
+                    dataSource: arrangeBy,
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    change: function() {
+                        that.orderBy(this.value());
+                    }
                 })
-                .on(CLICK + NS, "li", function() {
-                    var item = $(this),
-                        field = item.attr(kendo.attr("value"));
-
-                    that.toolbar.find(".k-tiles-arrange a span:first").html(item.text());
-                    popup.close();
-
-                    that.orderBy(field);
-
-                }).data("kendoPopup");
-
-            link.on(CLICK + NS, function(e) {
-                e.preventDefault();
-                popup.toggle();
-            });
+                .data("kendoDropDownList");
 
             that._attachDropzoneEvents();
         },
@@ -736,16 +727,16 @@ kendo_module({
                 dataItem = that.dataSource.getByUid(element.attr(kendo.attr("uid"))),
                 name = dataItem.get(NAMEFIELD),
                 thumbnailUrl = that.options.transport.thumbnailUrl,
-                img = $("<img />", {
-                    alt: name
-                })
-                .hide()
-                .on("load" + NS, function() {
-                    $(this).prev().remove().end().addClass("k-image").fadeIn();
-                }),
+                img = $("<img />", { alt: name }),
                 urlJoin = "?";
 
+            img.hide()
+               .on("load" + NS, function() {
+                   $(this).prev().remove().end().addClass("k-image").fadeIn();
+               });
+
             element.find(".k-loading").after(img);
+
             if (isFunction(thumbnailUrl)) {
                 thumbnailUrl = thumbnailUrl(that.path(), encodeURIComponent(name));
             } else {
@@ -755,7 +746,8 @@ kendo_module({
 
                 thumbnailUrl = thumbnailUrl + urlJoin + "path=" + that.path() + encodeURIComponent(name);
             }
-            // IE8 will trigger the load event immediately when the src is assign
+
+            // IE8 will trigger the load event immediately when the src is assigned
             // if the image is loaded from the cache
             img.attr("src", thumbnailUrl);
 
@@ -937,7 +929,7 @@ kendo_module({
                 wrapper = element.parents(".k-search-wrap");
 
             element[0].style.width = "";
-            element.addClass("k-input k-textbox");
+            element.addClass("k-input");
 
             if (!wrapper.length) {
                 wrapper = element.wrap($('<div class="k-widget k-search-wrap k-textbox"/>')).parent();
@@ -1067,7 +1059,7 @@ kendo_module({
             element.addClass("k-input");
 
             if (!wrapper.length) {
-                wrapper = element.wrap($('<div class="k-widget k-breadcrumbs k-header k-state-default"/>')).parent();
+                wrapper = element.wrap($('<div class="k-widget k-breadcrumbs k-textbox"/>')).parent();
             }
 
             overlay = wrapper.find(".k-breadcrumbs-wrap");

@@ -798,7 +798,8 @@ div.submenu-box ol {
     margin-top:10px;
 }
 
-.new .imgPlate:after
+.new .imgPlate:after,
+.beta .imgPlate:after
 {
     content:"NEW";
     padding:3px 7px 4px;
@@ -814,6 +815,10 @@ div.submenu-box ol {
     border-radius:0 0 4px 4px;
 }
 
+.beta .imgPlate:after
+{
+    content:"BETA";
+}
 .launchButton
 {
     display: inline-block;
@@ -1154,7 +1159,10 @@ p#copy
 .sparklineIcon{background-position:-80px -120px;}
 .chartBulletIcon{background-position:-100px -120px;}
 .schedulerIcon{background-position:0 -140px;}
-
+.barcodeIcon{background-position:-20px -140px;}
+.qrcodeIcon{background-position:-40px -140px;}
+.chartRadarIcon{background-position:-60px -140px;}
+.chartPolarIcon{background-position:-80px -140px;}
 
 #mainWrapInner
 {
@@ -1581,6 +1589,12 @@ p#copy
     background: url(tag-new.png) no-repeat right center;
 }
 
+.widgetGrid .beta-widget
+{
+    padding-right: 25px;
+    background: url(tag-beta.png) no-repeat right center;
+}
+
 /*DataViz dashboard navigation*/
 
 .widgetGrid .chart
@@ -1601,8 +1615,23 @@ p#copy
 .widgetGrid .gauges
 {
     width:180px;
-    min-height: 159px;
+    min-height: 78px;
     background:rgba(221, 221, 221, 0.33);
+}
+
+.widgetGrid .qrcodes
+{
+    width:180px;
+    min-height: 78px;
+    background:rgba(221, 221, 221, 0.33);
+    margin-left: -180px;
+    margin-top: 78px;
+}
+
+.widgetGrid .gauges ul,
+.widgetGrid .qrcodes ul
+{
+    padding-bottom: 8px;
 }
 
 .widgetGrid .financial
@@ -1703,7 +1732,7 @@ p#copy
     bottom: 0;
     left: 0;
     width: 84px;
-    height: 60px;
+    height: 80px;
     margin: 0 auto;
     background: no-repeat url(../../mobile/shared/sprite.devices.png);
     background-size: auto 100%;
@@ -1717,19 +1746,19 @@ p#copy
     transition: all 0.1s ease 0s;
 }
 
-#deviceList .iosThumb{background-position: 0 18px;}
-#deviceList .androidThumb{background-position: 33.3% 18px;}
-#deviceList .blackberryThumb{background-position: 66.6% 18px;}
-#deviceList .meegoThumb{background-position: 100% 18px;}
-#deviceList .wpThumb{background-position: 100% 16px;}
-#deviceList .flatThumb{background-position: 0 18px;}
+#deviceList .iosThumb{background-position: 0 30px;}
+#deviceList .androidThumb{background-position: 25% 30px;}
+#deviceList .blackberryThumb{background-position: 50% 30px;}
+#deviceList .meegoThumb{background-position: 100% 30px;}
+#deviceList .wpThumb{background-position: 75% 30px;}
+#deviceList .flatThumb{background-position: 100% 30px;}
 
 #deviceList .selectedThumb .iosThumb,#deviceList li:hover .iosThumb{background-position: 0 0;}
-#deviceList .selectedThumb .androidThumb,#deviceList li:hover .androidThumb{background-position: 33.3% 0;}
-#deviceList .selectedThumb .blackberryThumb,#deviceList li:hover .blackberryThumb{background-position: 66.6% 0;}
+#deviceList .selectedThumb .androidThumb,#deviceList li:hover .androidThumb{background-position: 25% 0;}
+#deviceList .selectedThumb .blackberryThumb,#deviceList li:hover .blackberryThumb{background-position: 50% 0;}
 #deviceList .selectedThumb .meegoThumb,#deviceList li:hover .meegoThumb{background-position: 100% 0;}
-#deviceList .selectedThumb .wpThumb,#deviceList li:hover .wpThumb{background-position: 100% 0;}
-#deviceList .selectedThumb .flatThumb,#deviceList li:hover .flatThumb{background-position: 0 0;}
+#deviceList .selectedThumb .wpThumb,#deviceList li:hover .wpThumb{background-position: 75% 0;}
+#deviceList .selectedThumb .flatThumb,#deviceList li:hover .flatThumb{background-position: 100% 0;}
 
 #deviceList .selectedThumb,
 #deviceList li:hover
@@ -2892,4 +2921,34 @@ ul.keyboard-legend li a {
         background-image: url('tag-new@2x.png');
         background-size: 18px 9px;
     }
+    .widgetGrid .beta-widget {
+        background-image: url('tag-beta@2x.png');
+        background-size: 18px 9px;
+    }
+}
+
+#betabutton
+{
+    position:absolute;
+    line-height:36px;
+    padding:0 14px;
+    color:#fff;
+    border-radius:0 0 5px 5px;
+    bottom:-36px;
+    right:0;
+    text-decoration:none;
+    
+    background: #e05b17; /* Old browsers */
+    background: -moz-linear-gradient(top, #e46217 0%, #e05b17 50%, #db5116 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e46217), color-stop(50%,#e05b17), color-stop(100%,#db5116)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e46217 0%,#e05b17 50%,#db5116 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e46217 0%,#e05b17 50%,#db5116 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #e46217 0%,#e05b17 50%,#db5116 100%); /* IE10+ */
+    background: linear-gradient(top, #e46217 0%,#e05b17 50%,#db5116 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e46217', endColorstr='#db5116',GradientType=0 ); /* IE6-9 */
+}
+
+#betabutton:hover
+{
+    opacity:.9;
 }

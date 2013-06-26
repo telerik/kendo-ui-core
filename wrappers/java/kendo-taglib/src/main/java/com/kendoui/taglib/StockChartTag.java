@@ -91,18 +91,6 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     }
 
-    public void setXAxis(XAxisTag value) {
-
-        setProperty("xAxis", value.xAxis());
-
-    }
-
-    public void setYAxis(YAxisTag value) {
-
-        setProperty("yAxis", value.yAxis());
-
-    }
-
     public void setAxisLabelClick(AxisLabelClickFunctionTag value) {
         setEvent("axisLabelClick", value.getBody());
     }
@@ -185,6 +173,14 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     public void setDateField(String value) {
         setProperty("dateField", value);
+    }
+
+    public String getRenderAs() {
+        return (String)getProperty("renderAs");
+    }
+
+    public void setRenderAs(String value) {
+        setProperty("renderAs", value);
     }
 
     public Object getSeriesColors() {

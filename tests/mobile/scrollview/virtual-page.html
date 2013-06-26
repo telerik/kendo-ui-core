@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileScrollView.Tests</title>
+        <script src="../../jquery-loader.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../kendo-test-helpers.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.userevents.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.router.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../../src/kendo.mobile.scrollview.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.ScrollView Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            QUnit.config.reorder = false;
+
+            var Page = kendo.mobile.ui.VirtualPage;
+
+            var element,
+                page,
+                LEFT_PAGE = -1,
+                CENTER_PAGE = 0,
+                RIGHT_PAGE = 1;
+
+            module("ScrollView VirtualPage", {
+                setup: function() {
+                    element = $("<div style='width: 400px;'></div>");
+                    page = new Page(element);
+                }
+            });
+
+            function transformOffset(element) {
+                style = element[0].style;
+                return (style.transform || style.webkitTransform).split(/\(|,/)[1];
+            }
+
+            test("page resizes to the width of its parent container", 2, function() {
+                equal(page.width, 400);
+                equal(page.element.width(), 400);
+            });
+
+            test("page is positioned correctly", 3, function() {
+                page.position(LEFT_PAGE);
+                equal(transformOffset(page.element), "-400px");
+
+                page.position(CENTER_PAGE);
+                equal(transformOffset(page.element), "0px");
+
+                page.position(RIGHT_PAGE);
+                equal(transformOffset(page.element), "400px");
+            });
+
+            test("page width is set correctly", 3, function() {
+                equal(page.width, 400);
+
+                page.setWidth(300);
+                equal(page.width, 300);
+                equal(page.element.width(), 300);
+            });
+        </script>
+    </body>
+</html>
+

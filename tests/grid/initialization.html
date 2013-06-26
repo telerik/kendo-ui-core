@@ -819,6 +819,17 @@
                 ok(button.hasClass("k-grid-foo"));
                 ok(button.hasClass("bar"));
             });
+			
+			test("destroy command always adds default class when className is defined", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { command: { className: "bar", name: "destroy" } }]
+                });
+
+                var button = grid.tbody.find("tr:first > td:first a");
+                ok(button.hasClass("k-grid-delete"));
+                ok(button.hasClass("bar"));
+            });
 
             test("text is used if no name is set", function() {
                 var grid = new Grid($("<table/>"), {

@@ -25,6 +25,13 @@ namespace Kendo.Mvc.UI
                 .Add("majorUnit", axis.MajorUnit, () => axis.MajorUnit.HasValue)
                 .Add("minorUnit", axis.MinorUnit, () => axis.MinorUnit.HasValue);
 
+
+            var notes = axis.Notes.CreateSerializer().Serialize();
+            if (notes.Count > 0)
+            {
+                result.Add("notes", notes);
+            }
+
             return result;
         }
     }

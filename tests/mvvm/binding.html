@@ -927,6 +927,20 @@
                 equal(dom.find("li").text(), viewModel.foo);
             });
 
+            test("binding template to a primitive field", function() {
+                var viewModel = {
+                    foo: {
+                        bar: "bar"
+                    }
+                };
+
+                var dom = $('<div data-bind="source: foo.bar" data-template="primitive-template">');
+
+                kendo.bind(dom, viewModel);
+
+                equal($.trim(dom.text()), "bar");
+            });
+
             /*
 
             Unsuported!!!
@@ -1358,6 +1372,9 @@
         </script>
         <script id="parent-nested-function-template" type="text/x-kendo-template">
             <li data-bind="text: foo.foo"></li>
+        </script>
+        <script id="primitive-template" type="text/x-kendo-template">
+            <span>#= data #</span>
         </script>
     </body>
 </html>

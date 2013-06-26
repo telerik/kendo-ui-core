@@ -81,6 +81,14 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("destroy", value);
     }
 
+    public boolean getResize() {
+        return (boolean)getProperty("resize");
+    }
+
+    public void setResize(boolean value) {
+        setProperty("resize", value);
+    }
+
     public String getTemplate() {
         return (String)getProperty("template");
     }

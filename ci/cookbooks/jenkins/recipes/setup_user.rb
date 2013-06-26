@@ -25,3 +25,13 @@ end
         mode "0600"
     end
 end
+
+cron "cleanup_firefox_profile" do
+    minute "0"
+    hour "23"
+    day "*"
+    month "*"
+    weekday "*"
+    command "find /var/lib/jenkins/.mozilla/firefox -maxdepth 1 -type d -mtime +3 -exec rm -r {} \\\;"
+    action :create
+end

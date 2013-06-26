@@ -95,6 +95,14 @@ public class ResourceTag extends  BaseTag implements DataBoundWidget /* interfac
         setProperty("multiple", value);
     }
 
+    public String getName() {
+        return (String)getProperty("name");
+    }
+
+    public void setName(String value) {
+        setProperty("name", value);
+    }
+
     public String getTitle() {
         return (String)getProperty("title");
     }

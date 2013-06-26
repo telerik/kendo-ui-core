@@ -79,7 +79,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_serialize_Series()
         {
-            navigator.Series.Add(new ChartOHLCSeries<OHLCData, decimal>());
+            navigator.Series.Add(new ChartOHLCSeries<OHLCData, decimal, string>());
             serializer.Serialize().Keys.ShouldContain("series");
         }
 

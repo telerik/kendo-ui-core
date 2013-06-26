@@ -13,11 +13,15 @@
 
         <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
+        <div contentEditable id="inline"></div>
+
         <script>
 
             var clipboard;
 
             $("#Editor1").kendoEditor();
+
+            var inline = $("#inline").kendoEditor().data("kendoEditor");
 
             module("Clipboard", {
                 setup: function() {
@@ -151,6 +155,15 @@
                 editor.value("");
                 clipboard.paste("π");
                 equal(editor.value(), '&pi;');
+            });
+
+            test("paste in root of inline editor does not replace its body", function() {
+                var range = createRangeFromText(inline, 'f||oo');
+                inline.selectRange(range);
+
+                inline.clipboard.paste("<p>bar</p>");
+
+                equal(inline.value(), 'f<p>bar</p>oo');
             });
 
         </script>

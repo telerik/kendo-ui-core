@@ -6,7 +6,7 @@
 /* Widget Base Styles */
 @widget-text-color: #515967;
 @widget-gradient: "rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 100%";
-@widget-background-color: #eaeaec;
+@widget-background-color: #ffffff;
 @widget-border-color: #dbdbde;
 @widget-shadow: none;
 
@@ -52,6 +52,7 @@
 @focused-border-color: @hover-border-color;
 @focused-shadow: 0 0 3px 0 @shadow-color;
 @focused-item-shadow: inset 0 0 3px 1px @hover-border-color;
+@focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
 
 /* Selected State */
 @selected-text-color: #fff;
@@ -98,7 +99,7 @@
 @draghandle-hover-shadow: none;
 
 /* Grid */
-@alt-background-color: #f4f4f4;
+@alt-background-color: #f9f9f9;
 @cell-border-color: #dbdbde;
 @column-highlight-background-color: #fbfbfb;
 
@@ -106,18 +107,27 @@
 @scheduler-background-color: #fff;
 @current-time-color: @error-border-color;
 @event-background-color: #b2e1ff;
+@event-text-color: @widget-text-color;
+
+/* Upload */
+@upload-progress-background-color: #d0f8ff;
+@upload-progress-text-color: #06c;
+@upload-success-background-color: #ddffd0;
+@upload-success-text-color: #28760b;
+@upload-error-background-color: #ffded7;
+@upload-error-text-color: #c00;
 
 /* Loading Indicators */
 @loading-panel-color: #fff;
 
 /* Shadows */
-@shadow-color: rgba(166, 175, 190, .8);
-@shadow-inset-color: rgba(166, 175, 190, .8);
+@shadow-color: rgba(82, 90, 104, .2);
+@shadow-inset-color: rgba(82, 90, 104, .2);
 
 /* Border Radii */
 @main-border-radius: 4px;
 @list-border-radius: @main-border-radius - 1;
-@inner-border-radius: @main-border-radius - 2;
+@inner-border-radius: @main-border-radius - 1;
 @slider-border-radius: 13px;
 
 /* Icons */
@@ -150,6 +160,8 @@
 @panelbar-items-border: @widget-border-color;
 @panelbar-content-background: @content-background-color;
 @panelbar-content-color: @widget-text-color;
-@window-shadow-style: 1px 1px 7px 1px;
+@window-shadow-style: 0 0 6px 0;
+@filter-menu-content-background: @content-background-color;
+@icon-background-color: transparent;
 
 @import "template.less";

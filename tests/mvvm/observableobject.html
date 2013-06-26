@@ -383,6 +383,23 @@
                 observable.set("foo.bar.baz", "baz");
             });
 
+
+            test("change event bubbles to top", 2, function() {
+                var observable = kendo.observable({
+                    foo: [
+                        { bar: "bar" }
+                    ]
+                });
+
+                var expected = ["foo", "foo[0].bar"];
+
+                observable.bind("change", function(e) {
+                    equal(e.field, expected.shift());
+                });
+
+                observable.set("foo[0].bar", "foo");
+            });
+
             test("undefined is not wrapped", function() {
                 var observable = new kendo.observable( {
                     empty: undefined

@@ -18,20 +18,20 @@ require_once '../../lib/Kendo/Autoload.php';
 
     // declare styles
     $highlight_error = new \Kendo\UI\EditorToolItem();
-    $highlight_error->text("Highlight Error")->value("hlError");
+    $highlight_error->text("Highlight Error")->value(".hlError");
 
     $highlight_ok = new \Kendo\UI\EditorToolItem();
-    $highlight_ok->text("Highlight OK")->value("hlOK");
+    $highlight_ok->text("Highlight OK")->value(".hlOK");
 
     $inline_code = new \Kendo\UI\EditorToolItem();
-    $inline_code->text("Inline Code")->value("inlineCode");
+    $inline_code->text("Inline Code")->value(".inlineCode");
 
-    // add styles to style tool
-    $style = new \Kendo\UI\EditorTool();
-    $style->name("style");
-    $style->addItem($highlight_error, $highlight_ok, $inline_code);
+    // add styles to formatting tool
+    $formatting = new \Kendo\UI\EditorTool();
+    $formatting->name("formatting");
+    $formatting->addItem($highlight_error, $highlight_ok, $inline_code);
 
-    $editor->addTool($style);
+    $editor->addTool($formatting);
 
     // add custom stylesheet to show custom styles
     $editor->stylesheets(array("../../content/web/editor/editorStyles.css"));

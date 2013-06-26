@@ -52,23 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
                 throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
             }
 
-            var value = expression.Compile();
-
-            if (Container.Data != null)
-            {
-                var dataList = new ArrayList();
-
-                foreach (var dataPoint in Container.Data)
-                {
-                    dataList.Add(dataPoint != null ? value(dataPoint).ToString() : string.Empty);
-                }
-
-                Axis.Categories = dataList;
-            }
-            else
-            {
-                Axis.Member = expression.MemberWithoutInstance();
-            }
+            Axis.Member = expression.MemberWithoutInstance();
 
             return this;
         }
@@ -230,6 +214,38 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartCategoryAxisBuilder<TModel> Select(Action<ChartAxisSelectionBuilder> configurator)
         {
             configurator(new ChartAxisSelectionBuilder(Axis.Select));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the items.
+        /// </summary>
+        /// <param name="Items">The items of the notes.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ValueAxis(a => a.Numeric()
+        ///               .Note(note => note
+        ///                    .Data(data =>
+        ///                    {
+        ///                        data.Add().Value(1);
+        ///                        data.Add().Value(2);
+        ///                    })
+        ///               )
+        ///            )
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example> 
+        /// </code>
+        /// </example>
+        public ChartCategoryAxisBuilder<TModel> Notes(Action<ChartAxisNotesBuilder<int>> configurator)
+        {
+            var factory = new ChartAxisNotesBuilder<int>(Axis.Notes);
+
+            configurator(factory);
 
             return this;
         }

@@ -2,7 +2,7 @@
         <div id="example" class="k-content">
 
 
-            <div class="configuration k-widget k-header">
+            <div class="configuration">
                 <span class="configHead">Configure</span>
                 <ul class="options">
                     <li>
@@ -12,10 +12,9 @@
                     <li>
                         <label for="order">Order by:</label>
                         <select id="order" style="width:115px;float:right;margin-top: -3px;">
-                            <option value="Id">Id</option>
-                            <option value="Name">Name</option>
-                            <option value="AverageRating">Rating</option>
-                            <option value="ReleaseYear">Release Year</option>
+                            <option value="ProductID">ID</option>
+                            <option value="ProductName">Name</option>
+                            <option value="UnitPrice">Price</option>
                         </select>
                     </li>
                     <li>
@@ -31,17 +30,15 @@
                 </ul>
             </div>
 
-            <div id="movies-container">
-                <ul id="movies"></ul>
+            <div class="demo-section">
+                <ul id="products"></ul>
             </div>
 
             <script id="template" type="text/x-kendo-template">
-                <li class="title">
-                    # if (BoxArt.LargeUrl) { #
-                        <img src="#= BoxArt.LargeUrl #" />
-                    # } #
-                    <h4>#= Name #</h4>
-                    <p>Rating: #= AverageRating #</p>
+                <li class="product">
+                    <img src="../../content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
+                    <h3>#:ProductName#</h3>
+                    <p>#:kendo.toString(UnitPrice, "c")#</p>
                 </li>
             </script>
 
@@ -54,22 +51,22 @@
                         type: "odata",
                         serverPaging: true,
                         serverSorting: true,
-                        pageSize: 10,
+                        pageSize: 12,
                         transport: {
-                            read: "http://odata.netflix.com/Catalog/Titles"
+                            read: "http://demos.kendoui.com/service/Northwind.svc/Products"
                         },
                         change: function() { // subscribe to the CHANGE event of the data source
                             // update the max attribute of the "page" input
                             $("#page").attr("max", this.totalPages());
 
-                            $("#movies").html(kendo.render(template, this.view()));
+                            $("#products").html(kendo.render(template, this.view()));
                         }
                     });
 
                     // read data from the remote service
                     dataSource.read();
 
-                    $("#apply").live("click", function() {
+                    $("#apply").on("click", function() {
                         var page = parseInt($("#page").val(), 10);
 
                         // validate the page - it must be a number within the allowed range
@@ -96,52 +93,66 @@
             </script>
 
             <style scoped>
-                #movies-container {
-                    margin: 0 5px;
-                    overflow: auto;
-                    padding: 10px;
+                .demo-section {
                     width: 492px;
-                    height: 500px;
-                    border: 1px solid #bbb;
-                    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-                    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-                    box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
-                    -webkit-border-radius: 8px;
-                    -moz-border-radius: 8px;
-                    border-radius: 8px;
+                    margin: 0;
                 }
-
-                #movies {
-                    padding: 0 1%;
+                #products {
+                    padding: 10px;
+                    margin-bottom: -1px;
+                    min-height: 510px;                    
                 }
-
-                .title {
+                .product {
                     float: left;
-                    padding: 1%;
-                    width: 47%;
-                    list-style-type: none;
-                    margin: 0 0 20px;
+                    position: relative;
+                    width: 111px;
                     height: 170px;
+                    margin: 0;
+                    padding: 0;
+                    list-style:none;
+                }
+                .product img {
+                    width: 110px;
+                    height: 110px;
+                }
+                .product h3 {
+                    margin: 0;
+                    padding: 3px 5px 0 0;
+                    max-width: 96px;
                     overflow: hidden;
+                    line-height: 1.1em;
+                    font-size: .9em;
+                    font-weight: normal;
+                    text-transform: uppercase;
+                    color: #999;
                 }
-
-                .title img {
-                    float: left;
-                    height: 150px;
-                    -webkit-border-radius: 13px;
-                    -moz-border-radius: 13px;
-                    border-radius: 13px;
-                    box-shadow: 0 0 4px #CCCCFF;
-                    border: 5px solid transparent;
+                .product p {
+                    visibility: hidden;
                 }
-                
-                .title h4, .title p {
-                    margin-left: 133px;
+                .product:hover p {
+                    visibility: visible;
+                    position: absolute;
+                    width: 110px;
+                    height: 110px;
+                    top: 0;
+                    margin: 0;
+                    padding: 0;
+                    line-height: 110px;
+                    vertical-align: middle;
+                    text-align: center;
+                    color: #fff;
+                    background-color: rgba(0,0,0,0.75);
+                    transition: background .2s linear, color .2s linear;
+                    -moz-transition: background .2s linear, color .2s linear;
+                    -webkit-transition: background .2s linear, color .2s linear;
+                    -o-transition: background .2s linear, color .2s linear;
                 }
-                
-                .title h4 {
-                   font-size: 1.1em;
-                   color: #e26b1d;
+                #products:after {
+                    content: ".";
+                    display: block;
+                    height: 0;
+                    clear: both;
+                    visibility: hidden;
                 }
             </style>
         </div>

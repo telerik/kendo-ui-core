@@ -52,6 +52,7 @@
 @focused-border-color: @hover-border-color;
 @focused-shadow: 0 0 3px 0 @shadow-color;
 @focused-item-shadow: inset 0 0 3px 1px @hover-border-color;
+@focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
 
 /* Selected State */
 @selected-text-color: #fff;
@@ -106,6 +107,15 @@
 @scheduler-background-color: @widget-background-color;
 @current-time-color: @error-border-color;
 @event-background-color: #92daf7;
+@event-text-color: @widget-text-color;
+
+/* Upload */
+@upload-progress-background-color: #d0f8ff;
+@upload-progress-text-color: #06c;
+@upload-success-background-color: #ddffd0;
+@upload-success-text-color: #28760b;
+@upload-error-background-color: #ffded7;
+@upload-error-text-color: #c00;
 
 /* Loading Indicators */
 @loading-panel-color: #fff;
@@ -117,7 +127,7 @@
 /* Border Radii */
 @main-border-radius: 4px;
 @list-border-radius: @main-border-radius - 1;
-@inner-border-radius: @main-border-radius - 2;
+@inner-border-radius: @main-border-radius - 1;
 @slider-border-radius: 13px;
 
 /* Icons */
@@ -151,5 +161,7 @@
 @panelbar-content-background: @content-background-color;
 @panelbar-content-color: @widget-text-color;
 @window-shadow-style: 1px 1px 7px 1px;
+@filter-menu-content-background: @content-background-color;
+@icon-background-color: transparent;
 
 @import "template.less";

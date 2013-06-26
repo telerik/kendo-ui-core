@@ -8,6 +8,7 @@
         protected SchedulerViewBase(SchedulerViewType type)
 	    {
             Type = type;
+            Group = new SchedulerGroupSettings();
 	    }
         
         public string Title
@@ -23,6 +24,12 @@
         }
 
         public SchedulerViewEditableSettings Editable
+        {
+            get;
+            set;
+        }
+
+        public SchedulerGroupSettings Group
         {
             get;
             set;
@@ -92,6 +99,12 @@
             if (Selected != false)
             {
                 json["selected"] = Selected;
+            }
+
+            var group = Group.ToJson();
+            if (group.Count > 0)
+            {
+                json["group"] = group;
             }
         }
     }

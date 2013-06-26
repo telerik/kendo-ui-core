@@ -568,6 +568,26 @@
                 ok(!dataSource._pending);
             });
 
+            test("requests are dequeued after change event", function() {
+                var timesCalled = 0;
+                var dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            timesCalled ++;
+                            if (timesCalled == 1) {
+                                dataSource.read();
+                                options.success([]);
+                            }
+                        }
+                    },
+                    change: function() {
+                        ok(dataSource._pending, "Second request is not pending");
+                    }
+                });
+
+                dataSource.read();
+            });
+
             test("setting data should trigger change event", function() {
                 var called = false,
                     dataSource = new DataSource({

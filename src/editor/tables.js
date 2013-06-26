@@ -164,6 +164,7 @@ var InsertTableTool = PopupTool.extend({
                 cells.removeClass(SELECTEDSTATE);
                 status.text("Cancel");
             })
+            .on("mousedown" + NS, false)
             .on("mouseup" + NS, function(e) {
                 var t = tableFromLocation(e);
 
@@ -265,16 +266,20 @@ var DeleteRowCommand = Command.extend({
             rowCount = table.rows.length,
             focusElement;
 
-        if (rowCount == 1 || (rowCount == 2 && table._editor)) {
+        if (rowCount == 1) {
+            focusElement = dom.next(table) || dom.prev(table);
+
             dom.remove(table);
         } else {
             dom.removeTextSiblings(row);
 
             focusElement = dom.next(row) || dom.prev(row);
-            focusElement = focusElement.cells[1] || focusElement.cells[0];
+            focusElement = focusElement.cells[0];
 
             dom.remove(row);
+        }
 
+        if (focusElement) {
             range.setStart(focusElement, 0);
             range.collapse(true);
             this.editor.selectRange(range);
@@ -292,7 +297,9 @@ var DeleteColumnCommand = Command.extend({
             columnCount = rows[0].cells.length,
             focusElement, i;
 
-        if (columnCount == 1 || (columnCount == 2 && table._editor)) {
+        if (columnCount == 1) {
+            focusElement = dom.next(table) || dom.prev(table);
+
             dom.remove(table);
         } else {
             dom.removeTextSiblings(td);
@@ -302,7 +309,9 @@ var DeleteColumnCommand = Command.extend({
             for (i = 0; i < rows.length; i++) {
                 dom.remove(rows[i].cells[columnIndex]);
             }
+        }
 
+        if (focusElement) {
             range.setStart(focusElement, 0);
             range.collapse(true);
             this.editor.selectRange(range);

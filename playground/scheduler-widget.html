@@ -39,27 +39,36 @@
 
             html
             {
-	            font:12px sans-serif;
-	            overflow-y:scroll;
+                font:12px sans-serif;
+                overflow-y:scroll;
             }
-
+/*
+            .k-scheduler-header-wrap .k-scheduler-table,
+            .k-scheduler-content .k-scheduler-table
+            {
+                width:140%;
+            }
+*/
         </style>
     </head>
     <body>
-
-        <div id="win">
-            <div id="scheduler" style="width:800px"></div>
-        </div>
-
-   <script>
+            <div id="scheduler"></div>
+    <script>
        $("#scheduler").kendoScheduler({
-            height: 800,
-           // majorTick: 30,
-//            startTime: new Date(2013, 4, 14, 11, 0,0),
- //           endTime: new Date(2013, 4, 14, 18, 0,0),
-            views: ["day", { type: "week", selected: true }, "month", "agenda"],
+           startTime: new Date(2013, 1,1, 7,0,0),
+            views: ["week"],
+            date: new Date(2013, 5, 26),
             resources: [
                 {
+                    field: "ownerId",
+                    name: "Owner",
+                    dataSource: [
+                        { text: "Alex", value: 1, color: "red" },
+                        { text: "Bob", value: 2, color: "green" },
+                        { text: "Charlie", value: 3, color: "blue" }
+                    ],
+                    title: "Owner"
+                }/*,{
                     field: "ownerId",
                     dataSource: [
                         { text: "Alex", value: 1, color: "red" },
@@ -67,25 +76,26 @@
                         { text: "Charlie", value: 3, color: "blue" }
                     ],
                     title: "Owner"
-                }
+                }*/
             ],
+            timezone: "Etc/UTC",
             dataSource: {
                 batch: true,
                 transport: {
                     read: {
-                        url: "http://korchev:8080/service/tasks",
+                        url: "http://demos.kendoui.com/service/tasks",
                         dataType: "jsonp"
                     },
                     update: {
-                        url: "http://korchev:8080/service/tasks/update",
+                        url: "http://demos.kendoui.com/service/tasks/update",
                         dataType: "jsonp"
                     },
                     create: {
-                        url: "http://korchev:8080/service/tasks/create",
+                        url: "http://demos.kendoui.com/service/tasks/create",
                         dataType: "jsonp"
                     },
                     destroy: {
-                        url: "http://korchev:8080/service/tasks/destroy",
+                        url: "http://demos.kendoui.com/service/tasks/destroy",
                         dataType: "jsonp"
                     },
                     parameterMap: function(options, operation) {
@@ -95,7 +105,6 @@
                     }
                 },
                 schema: {
-                    timezone: "Etc/UTC",
                     model: {
                         id: "TaskID",
                         fields: {

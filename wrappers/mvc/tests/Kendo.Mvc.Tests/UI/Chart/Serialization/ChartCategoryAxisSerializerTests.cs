@@ -27,6 +27,7 @@ namespace Kendo.Mvc.UI.Tests
             axisMock.SetupGet(a => a.AutoBaseUnitSteps).Returns(new ChartAxisBaseUnitSteps());
             axisMock.SetupGet(a => a.Crosshair).Returns(new ChartAxisCrosshair());
             axisMock.SetupGet(a => a.Select).Returns(new ChartAxisSelection());
+            axisMock.SetupGet(a => a.Notes).Returns(new ChartAxisNotes<int>());
         }
 
         [Fact]

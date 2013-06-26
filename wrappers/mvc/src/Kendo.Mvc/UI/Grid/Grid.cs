@@ -1339,10 +1339,16 @@ namespace Kendo.Mvc.UI
                 VisibleColumns.Each(column =>
                 {
                     var cellBuilder = cellBuilderFactory.CreateEditCellBuilder(column, htmlHelper);
-                    
                     var editor = cellBuilder.CreateCell(dataItem);
-
-                    column.EditorHtml = editor.InnerHtml;
+                    var editorHtml = editor.InnerHtml;
+                    if (IsInClientTemplate)
+                    {
+                        editorHtml = popupSlashes.Replace(editorHtml, match =>
+                        {
+                            return match.Groups[0].Value.Replace("\\", "\\\\");
+                        });
+                    }
+                    column.EditorHtml = editorHtml;
                 });
             }
 

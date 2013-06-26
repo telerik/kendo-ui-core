@@ -30,7 +30,7 @@
             });
 
         treeview.Add().Text("Decor")
-            .Expanded(true)
+            .Expanded(false)
             .Items(furniture =>
             {
                 furniture.Add().Text("Bed Linen");

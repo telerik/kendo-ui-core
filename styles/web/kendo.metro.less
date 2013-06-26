@@ -30,6 +30,7 @@
 @focused-border-color: @hover-border-color;
 @focused-shadow: none;
 @focused-item-shadow: inset 0 0 0 1px @hover-border-color;
+@focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
 @selected-background-color: #7ea700;
 @selected-border-color: #7ea700;
 @selected-text-color: #ffffff;
@@ -61,6 +62,7 @@
 @cell-border-color: @widget-border-color;
 @column-highlight-background-color: #fbfbfb;
 @scheduler-background-color: @widget-background-color;
+@event-text-color: @selected-text-color;
 @current-time-color: @error-border-color;
 @event-background-color: #7ea700;
 @input-background-color: #ffffff;
@@ -68,6 +70,12 @@
 @shadow-color: rgba(0, 0, 0, 0.3);
 @shadow-inset-color: transparent;
 @link-text-color: #787878;
+@upload-progress-background-color: #d0f8ff;
+@upload-progress-text-color: #06c;
+@upload-success-background-color: #ddffd0;
+@upload-success-text-color: #28760b;
+@upload-error-background-color: #ffded7;
+@upload-error-text-color: #c00;
 @loading-panel-color: #ffffff;
 @splitbar-background-color: #dadada;
 @default-icon-opacity: 1;
@@ -89,8 +97,8 @@
 @tabstrip-tabs-color: @widget-text-color;
 @form-widget-color: @widget-text-color;
 @drop-down-border-color: @widget-border-color;
-@drop-down-hover-border-color: @hover-border-color;
-@drop-down-focused-border-color: @focused-border-color;
+@drop-down-hover-border-color: @widget-border-color;
+@drop-down-focused-border-color: @widget-border-color;
 @drop-down-background: #ffffff;
 @drop-down-text-color: @widget-text-color;
 @secondary-border-color: @widget-border-color;
@@ -100,5 +108,7 @@
 @panelbar-content-background: @content-background-color;
 @panelbar-content-color: @widget-text-color;
 @window-shadow-style: 1px 1px 7px 1px;
+@filter-menu-content-background: @content-background-color;
+@icon-background-color: transparent;
 
 @import "template.less";

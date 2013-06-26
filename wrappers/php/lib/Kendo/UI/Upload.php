@@ -70,6 +70,28 @@ client-side events to build your own UI.
     }
 
     /**
+    * Sets the template option of the Upload.
+    * The template used to render the files in the list
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\Upload
+    */
+    public function templateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('template', $value);
+    }
+
+    /**
+    * Sets the template option of the Upload.
+    * The template used to render the files in the list
+    * @param string $value The template content.
+    * @return \Kendo\UI\Upload
+    */
+    public function template($value) {
+        return $this->setProperty('template', $value);
+    }
+
+    /**
     * Sets the cancel event of the Upload.
     * Fires when the upload has been cancelled while in progress.Note: The cancel event fires only when the upload is in
 async mode.
@@ -117,7 +139,8 @@ async mode.
     /**
     * Sets the progress event of the Upload.
     * Fires when upload progress data is available.Note: The progress event fires only when the upload is in
-async mode.
+async mode.Note: The progress event is not fired in IE.
+See Supported Browsers
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Upload
     */

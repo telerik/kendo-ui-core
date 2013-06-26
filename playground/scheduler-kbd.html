@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>editable</title>
+        <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../styles/web/kendo.default.min.css" rel="stylesheet" />
+
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.recurrence.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.view.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.dayview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.monthview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.agendaview.js" type="text/javascript" charset="utf-8"></script>
+   </head>
+    <body>
+        <div id="scheduler"></div>
+
+        <script>
+            $(function() {
+                $("#scheduler").kendoScheduler({
+                    date: new Date("2013/6/13"),
+                    startTime: new Date("2013/6/13 07:00 AM"),
+                    height: 600,
+                    views: [
+                    "day",
+                    { type: "week", selected: false },
+                    { type: "month", selected: true },
+                    "agenda"
+                    ],
+                    timezone: "Etc/UTC",
+                    dataSource: {
+                        batch: true,
+                        transport: {
+                            read: {
+                                url: "http://demos.kendoui.com/service/tasks",
+                                dataType: "jsonp"
+                            },
+                            update: {
+                                url: "http://demos.kendoui.com/service/tasks/update",
+                                dataType: "jsonp"
+                            },
+                            create: {
+                                url: "http://demos.kendoui.com/service/tasks/create",
+                                dataType: "jsonp"
+                            },
+                            destroy: {
+                                url: "http://demos.kendoui.com/service/tasks/destroy",
+                                dataType: "jsonp"
+                            },
+                            parameterMap: function(options, operation) {
+                                if (operation !== "read" && options.models) {
+                                    return {models: kendo.stringify(options.models)};
+                                }
+                            }
+                        },
+                        schema: {
+                            model: {
+                                id: "taskId",
+                                fields: {
+                                    taskId: { from: "TaskID", type: "number" },
+                                    title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                                    start: { type: "date", from: "Start" },
+                                    end: { type: "date", from: "End" },
+                                    description: { from: "Description" },
+                                    recurrenceId: { from: "RecurrenceID" },
+                                    recurrenceRule: { from: "RecurrenceRule" },
+                                    recurrenceException: { from: "RecurrenceException" },
+                                    ownerId: { from: "OwnerID", defaultValue: 1 },
+                                    isAllDay: { type: "boolean", from: "IsAllDay" }
+                                }
+                            }
+                        },
+                        filter: {
+                            logic: "or",
+                            filters: [
+                            { field: "ownerId", operator: "eq", value: 1 },
+                            { field: "ownerId", operator: "eq", value: 2 }
+                            ]
+                        }
+                    },
+                    resources: [
+                    {
+                        field: "ownerId",
+                        title: "Owner",
+                        dataSource: [
+                        { text: "Alex", value: 1, color: "#ef701d" },
+                        { text: "Bob", value: 2, color: "#5fb1f7" },
+                        { text: "Charlie", value: 3, color: "#35a964" }
+                        ]
+                    }
+                    ]
+                });
+
+            });
+
+            function kbd() {
+                $("#scheduler").data("kendoScheduler")._navigatable();
+            }
+
+            $.extend(kendo.ui.Scheduler.prototype, {
+                _aria: function() {
+                    var id = this.element.attr("id") || "aria";
+
+                    if (id) {
+                        this._cellId = id + "_active_cell";
+                    }
+                },
+                _navigatable: function() {
+                    var that = this;
+                    var wrapper = that.wrapper;
+
+                    that._aria();
+
+                    wrapper.attr("tabindex", 0)
+                    .attr("aria-multiselectable", true)
+                    .attr("role", "grid")
+                    .find("td").attr("aria-label", "Scheduler cell").attr("role", "gridcell")
+                    .end().find("tr").attr("role", "row");
+
+                    //.attr("title", kendo.toString(today, "D", that.options.culture));
+                    //console.log($(that.view().content).find("table"));
+
+
+
+                    wrapper.on("mousedown", ".k-event", function(e) {
+                        var event = $(e.currentTarget);
+                        var data = that.dataSource.getByUid(event.data("uid"));
+                        var start = that.view()._timeSlotIndex(data.start);
+                        var end = that.view()._timeSlotIndex(data.end);
+                        var colIndex = that.view()._dateSlotIndex(data.start);
+
+                        //var startSlot = view._slotByPosition();
+
+
+                        var view = that.view();
+                        var events = view._columns[colIndex].events,
+                            eventIndex;
+
+                        for (var i = 0, length = events.length; i < length; i++) {
+                            if (events[i].element[0] === event[0]) {
+                                eventIndex = i;
+                            }
+                        }
+
+                        console.log(event, start, end, colIndex, eventIndex);
+
+                        /*that._createRange();
+                        that._select();
+                        wrapper.focus();*/
+                    });
+
+                    wrapper.on("focus", function(e) {
+                        that.view().createSelection();
+                        that.view().select();
+                        /*if (!that._range) {
+                            that._createRange(that.view().table.find(".k-scheduler-table").find("td:first"));
+                        }
+
+                        that._select();*/
+                    });
+
+                    wrapper.on("focusout", function(e) {
+                        that._removeSelection();
+                    });
+
+                    wrapper.on("keydown", function(e) {
+                        var selection = $.extend(true, {}, that.view()._selection);
+
+                        if (e.keyCode == kendo.keys.RIGHT) {
+                            selection.start.column++;
+                            e.preventDefault();
+                        } else if (e.keyCode == kendo.keys.LEFT) {
+                            selection.start.column--;
+                            e.preventDefault();
+                        } else if (e.keyCode == kendo.keys.UP) {
+                            selection.start.row--;
+                            e.preventDefault();
+                        } else if (e.keyCode == kendo.keys.DOWN) {
+                            selection.start.row++;
+                            e.preventDefault();
+                        }
+
+                        that.view().select(selection);
+                    });
+                },
+
+                _createRange: function(cell) {
+                    this._selected = $(cell);
+                    this._range = {
+                        start: cell.index(),
+                        end: cell.closest("tr").index()
+                    };
+                },
+
+                _select: function() {
+                    var that = this,
+                        range = that._range,
+                        view = that.view(),
+                        columns = view._columns;
+
+                    if (!range) {
+                        //remove selection?
+                    }
+
+                    var view = that.view();
+                    //view.select(range);
+
+                    var column = columns[range.start];
+                    if (!column) {
+                        column = columns[0];
+                        range.start = 0;
+                        range.end++;
+                    }
+
+                    var slot = column.slots[range.end];
+
+                    if (slot) {
+                        that._removeSelection();
+
+                        var table = view.table.find(".k-scheduler-table:last");
+                        var row = table[0].rows[range.end];
+                        var cell = row.cells[range.start];
+
+                        that._selected = $(cell);
+
+                        $(cell)
+                            .addClass("k-state-selected")
+                            .attr("id", that._cellId)
+                            .attr("aria-selected", true)
+                            .attr("aria-label", "scheduler cell - " + kendo.toString(slot.start, "yyy/MM/dd HH:mm"));
+                    }
+                },
+
+                /*_select: function(item) {
+                    if (!item) {
+                        if (!this._selected) {
+                            this._selected = wrapper.find(".k-scheduler-table td:first");
+                        }
+
+                        } else if (!this._selected || item[0] !== this._selected[0]) {
+                        this._removeSelection();
+                        this._selected = item;
+                    }
+
+                    if (!this._selected.hasClass("k-state-selected")) {
+                        this._selected
+                        .addClass("k-state-selected")
+                        .attr("id", this._cellId)
+                        .attr("aria-selected", true);
+
+                        this.wrapper
+                        .removeAttr("aria-activedescendant")
+                        .attr("aria-activedescendant", this._cellId);
+                    }
+                },*/
+
+                _removeSelection: function() {
+                    var view = this.view();
+                    var range = this._range;
+
+                    if (range) {
+                        var table = view.table.find(".k-scheduler-table:last");
+                        var row = table[0].rows[range.end];
+                        var cell = row.cells[range.start];
+
+                        $(cell)
+                            .removeClass("k-state-selected")
+                            .removeAttr("id")
+                            .attr("aria-selected", false);
+                    }
+
+                    /*if (this._selected) {
+                        this._selected
+                        .removeClass("k-state-selected")
+                        .removeAttr("id")
+                        .attr("aria-selected", false);
+                    }*/
+                }
+            });
+
+            $.extend(kendo.ui.SchedulerView.prototype, {
+                _moveLeft: function() {
+                }
+            });
+        </script>
+    </body>
+</html>

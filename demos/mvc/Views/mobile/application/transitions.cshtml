@@ -19,12 +19,18 @@
 
 
 <style scoped>
-    .transitions-button,
-    .transitions-cancel {
+    .km-root .transitions-button,
+    .km-root .transitions-cancel {
         display: block;
         text-align: center;
         margin: .6em .8em 0;
         font-size: 1.2em;
+        background-color: #369;
+    }
+
+    .km-blackberry .transitions-button,
+    .km-blackberry .transitions-cancel {
+        margin: .6em 1.8em 0;
     }
 
     #view-transitions,
@@ -45,22 +51,48 @@
         background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
     }
 
-    .km-ios #view-transitions-welcome .km-button {
+    .km-ios #view-transitions-welcome .km-button,
+    .km-blackberry #view-transitions-welcome .km-content .km-button,
+    .km-flat #view-transitions-welcome .km-content .km-button {
         background-color: DarkRed;
+	    color: #fff;
     }
     
-    .km-ios #view-transitions-login .km-button {
+    .km-ios #view-transitions-login .transitions-button,
+    .km-blackberry #view-transitions-login .km-content .transitions-button,
+    .km-flat #view-transitions-login .km-content .transitions-button {
         background-color: Green;
+	    color: #fff;
     }
-    
+
+    .km-blackberry #view-transitions *,
+    .km-blackberry #view-transitions-login *,
+    .km-blackberry #view-transitions-welcome *
+    {
+        color: #fff;
+    }
+
     .km-ios #view-transitions .km-button,
     .km-ios #view-transitions-login .transitions-cancel {
         background-color: #000;
     }
     
+    .km-flat #view-transitions .km-button,
+    .km-flat #view-transitions-login .km-content .transitions-cancel {
+        background-color: #000;
+    	color: #fff;
+    }
+    
     .km-ios #view-transitions .km-navbar,
     .km-ios #view-transitions-login .km-navbar,
-    .km-ios #view-transitions-welcome .km-navbar {
+    .km-ios #view-transitions-welcome .km-navbar,
+    .km-blackberry #view-transitions .km-navbar,
+    .km-blackberry #view-transitions-login .km-navbar,
+    .km-blackberry #view-transitions-welcome .km-navbar,
+    .km-flat #view-transitions .km-navbar,
+    .km-flat #view-transitions-login .km-navbar,
+    .km-flat #view-transitions-welcome .km-navbar {
         background-color: #000;
+	    color: #fff;
     }
 </style>

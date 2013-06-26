@@ -84,6 +84,15 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets the series notes options
+        /// </summary>
+        ChartNote Notes
+        {
+            get;
+            set;
+        }
         
         IChartSerializer CreateSerializer();
     }

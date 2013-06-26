@@ -235,6 +235,53 @@
                 ok($("#qunit-fixture").hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
             });
 
+            test("Sets web-app-capable meta to yes by default", 1, function() {
+                setup('<div data-role="view" />', {});
+
+                ok($("meta[name=apple-mobile-web-app-capable]").attr("content") == "yes");
+            });
+
+            test("Sets web-app-capable meta to no if disabled explicitly", 1, function() {
+                setup('<div data-role="view" />', {
+                    webAppCapable: false
+                });
+
+                ok($("meta[name=apple-mobile-web-app-capable]").attr("content") == "no");
+            });
+
+            test("skin method returns the current skin", 1, function() {
+                setup('<div data-role="view" />', {
+                    skin: "flat"
+                });
+
+                ok(application.skin() == "flat");
+            });
+
+            test("Setting the skin changes the Application styling", 3, function() {
+                setup('<div data-role="view" />', {
+                    platform: "ios"
+                });
+
+                application.skin("flat");
+
+                ok(application.skin() == "flat");
+                ok(!application.element.hasClass("km-ios"));
+                ok(application.element.hasClass("km-flat"));
+            });
+
+            test("Setting the skin to empty changes the Application styling", 3, function() {
+                setup('<div data-role="view" />', {
+                    platform: "ios",
+                    skin: "flat"
+                });
+
+                application.skin("");
+
+                ok(application.skin() == "");
+                ok(application.element.hasClass("km-ios"));
+                ok(!application.element.hasClass("km-flat"));
+            });
+
             test("Force platform layout", 1, function() {
                 setup('<div data-role="view" />', {
                     platform: "android"
@@ -264,9 +311,21 @@
                 });
             }
 
+            asyncTest("Triggers init event handler", 1, function() {
+                new kendo.mobile.Application(
+                    $("<div><div data-role='view' /></div>"),
+                    {
+                        init: function() {
+                            start();
+                            ok(true);
+                        }
+                    }
+                );
+            });
+
             test("Raises meaningful error when the app can't find views", 1, function() {
                 try {
-                new kendo.mobile.Application($("<div />"));
+                    new kendo.mobile.Application($("<div />"));
                 } catch (e) {
                     equal(e.message, 'Your kendo mobile application element does not contain any direct child elements with data-role="view" attribute set. Make sure that you instantiate the mobile application using the correct container.');
                 }

@@ -24,6 +24,7 @@ namespace Kendo.Mvc.UI
                 .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member.HasValue(); })
                 .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
+                .Add("noteTextField", series.NoteTextMember, () => { return series.Data == null && series.NoteTextMember.HasValue(); })
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("missingValues", series.MissingValues.ToString().ToLowerInvariant(),
                                       () => series.MissingValues.HasValue);

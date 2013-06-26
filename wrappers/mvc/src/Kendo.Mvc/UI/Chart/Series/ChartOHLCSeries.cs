@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using System.Collections;
 
-    public class ChartOHLCSeries<TModel, TValue> : ChartSeriesBase<TModel>, IChartOHLCSeries where TModel : class
+    public class ChartOHLCSeries<TModel, TValue, TCategory> : ChartSeriesBase<TModel>, IChartOHLCSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartOHLCSeries{TModel, TValue}" /> class.
@@ -15,13 +15,16 @@ namespace Kendo.Mvc.UI
         /// <param name="highExpression">The high expression.</param>
         /// <param name="lowExpression">The low expression.</param>
         /// <param name="closeExpression">The close expression.</param>
+        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
         /// <param name="colorExpression">The color expression.</param>
         public ChartOHLCSeries(
             Expression<Func<TModel, TValue>> openExpression,
             Expression<Func<TModel, TValue>> highExpression,
             Expression<Func<TModel, TValue>> lowExpression,
             Expression<Func<TModel, TValue>> closeExpression,
-            Expression<Func<TModel, string>> colorExpression
+            Expression<Func<TModel, string>> colorExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, string>> noteTextExpression
             )
             : base()
         {
@@ -38,6 +41,17 @@ namespace Kendo.Mvc.UI
             if (colorExpression != null)
             {
                 ColorMember = colorExpression.MemberWithoutInstance();
+            }
+
+            if (categoryExpression != null)
+            {
+                Category = categoryExpression.Compile();
+                CategoryMember = categoryExpression.MemberWithoutInstance();
+            }
+
+            if (noteTextExpression != null)
+            {
+                NoteTextMember = noteTextExpression.MemberWithoutInstance();
             }
 
             Initialize();
@@ -97,6 +111,31 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <value>The model data color member name.</value>
         public string ColorMember { get; set; }
+
+        /// <summary>
+        /// Gets the model data category member name.
+        /// </summary>
+        /// <value>The model data category member name.</value>
+        public string CategoryMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets a function which returns the category of the property to which the column is bound to.
+        /// </summary>
+        public Func<TModel, TCategory> Category
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the model data note text member name.
+        /// </summary>
+        /// <value>The model data note text member name.</value>
+        public string NoteTextMember { get; set; }
 
         /// <summary>
         /// Gets or sets the point border

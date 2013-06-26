@@ -535,22 +535,33 @@ function adoptContainer(textRange, range, start) {
         isData = isDataNode(container),
         anchorNode = isData ? container : container.childNodes[offset] || null,
         anchorParent = isData ? container.parentNode : container,
-        cursor, cursorNode;
+        doc = range.ownerDocument,
+        cursor = doc.body.createTextRange(),
+        cursorNode;
 
     // visible data nodes need a text offset
     if (container.nodeType == 3 || container.nodeType == 4) {
         textOffset = offset;
     }
 
-    // create a cursor element node to position range (since we can"t select text nodes)
-    cursorNode = anchorParent.insertBefore(dom.create(range.ownerDocument, "a"), anchorNode);
+    if (!anchorParent) {
+        anchorParent = doc.body;
+    }
 
-    cursor = range.ownerDocument.body.createTextRange();
-    cursor.moveToElementText(cursorNode);
-    dom.remove(cursorNode);
-    cursor[start ? "moveStart" : "moveEnd"]("character", textOffset);
-    cursor.collapse(false);
-    textRange.setEndPoint(start ? "StartToStart" : "EndToStart", cursor);
+    if (anchorParent.nodeName.toLowerCase() == "img") {
+        cursor.moveToElementText(anchorParent);
+        cursor.collapse(false);
+        textRange.setEndPoint(start ? "StartToStart" : "EndToStart", cursor);
+    } else {
+        // create a cursor element node to position range (since we can't select text nodes)
+        cursorNode = anchorParent.insertBefore(dom.create(doc, "a"), anchorNode);
+
+        cursor.moveToElementText(cursorNode);
+        dom.remove(cursorNode);
+        cursor[start ? "moveStart" : "moveEnd"]("character", textOffset);
+        cursor.collapse(false);
+        textRange.setEndPoint(start ? "StartToStart" : "EndToStart", cursor);
+    }
 }
 
 function adoptEndPoint(textRange, range, commonAncestor, start) {
@@ -978,6 +989,14 @@ var RangeUtils = {
         var selection = SelectionUtils.selectionFromRange(range);
         selection.removeAllRanges();
         selection.addRange(range);
+    },
+
+    stringify: function(range) {
+        return kendo.format(
+            "{0}:{1} - {2}:{3}",
+            dom.name(range.startContainer), range.startOffset,
+            dom.name(range.endContainer), range.endOffset
+        );
     },
 
     split: function(range, node, trim) {

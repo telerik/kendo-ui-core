@@ -256,25 +256,14 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The symbology (encoding) the barcode will use.The supported values are:*EAN8
-*EAN13
-*UPCE
-*UPCA
-*Code11
-*Code39
-*Code39Extended
-*Code128
-*Code93
-*Code93Extended
-*Code128A
-*Code128B
-*Code128C
-*MSImod10
-*MSImod11
-*MSImod1010
-*MSImod1110
-*GS1-128
-*POSTNET</description>
+            <description>Sets the preferred rendering engine.
+If it is not supported by the browser, the Barcode will switch to the first available mode.The supported values are:</description>
+            <name>renderAs</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The symbology (encoding) the barcode will use.The supported values are:</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -562,6 +551,13 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>Object</type>
         </attribute>
         <attribute>
+            <description>Sets the preferred rendering engine.
+If it is not supported by the browser, the Chart will switch to the first available mode.The supported values are:</description>
+            <name>renderAs</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
             <name>seriesColors</name>
             <rtexprvalue>true</rtexprvalue>
@@ -831,6 +827,12 @@ categoryAxis.baseUnitStep is set to "auto".</description>
         <attribute>
             <description>The months unit steps.</description>
             <name>months</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The seconds unit steps.</description>
+            <name>seconds</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
@@ -1404,6 +1406,402 @@ body of the chart.</description>
         </attribute>
 
     </tag>
+
+
+    <tag>
+        <description>The category axis notes configuration.</description>
+        <name>chart-categoryAxisItem-notes</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>chart-categoryAxisItem-notes-data</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesDataTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>chart-categoryAxisItem-notes-dataItem</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesDataItemTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The value of the note.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>The icon of the note.</description>
+        <name>chart-categoryAxisItem-notes-dataItem-icon</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesDataItemIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the note icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>chart-categoryAxisItem-notes-dataItem-icon-border</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesDataItemIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the note.</description>
+        <name>chart-categoryAxisItem-notes-dataItem-label</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesDataItemLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the note label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the note label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the note label. Uses kendo.format. Contains one placeholder ("{0}") which represents the category value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the category axis note label.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The label note text.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category notes label. By default the category notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>chart-categoryAxisItem-notes-dataItem-label-border</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesDataItemLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>chart-categoryAxisItem-notes-dataItem-label-template</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesDataItemLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the note.</description>
+        <name>chart-categoryAxisItem-notes-dataItem-line</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesDataItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the note.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the note.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the note.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The icon of the notes.</description>
+        <name>chart-categoryAxisItem-notes-icon</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the notes icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>chart-categoryAxisItem-notes-icon-border</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the notes.</description>
+        <name>chart-categoryAxisItem-notes-label</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the notes label. Uses kendo.format. Contains one placeholder ("{0}") which represents the category value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the labels.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category notes label. By default the category notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>chart-categoryAxisItem-notes-label-border</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>chart-categoryAxisItem-notes-label-template</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the notes.</description>
+        <name>chart-categoryAxisItem-notes-line</name>
+        <tag-class>com.kendoui.taglib.chart.CategoryAxisItemNotesLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the notes.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the notes.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the notes.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>
@@ -2543,7 +2941,7 @@ The function return value is displayed instead of the individual points.The supp
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The behavior for handling missing values.The supported values are:</description>
+            <description>The behavior for handling missing values. The supported values are:</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -2557,6 +2955,12 @@ The function return value is displayed instead of the individual points.The supp
         <attribute>
             <description>The color to use for bar or column series with negative values. Accepts a valid CSS color string, including hex and rgb.</description>
             <name>negativeColor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series note text.</description>
+            <name>noteTextField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
@@ -3266,6 +3670,195 @@ By default chart series highlighting is enabled.</description>
         </attribute>
 
     </tag>
+
+
+    <tag>
+        <description>The series notes configuration.</description>
+        <name>chart-seriesItem-notes</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemNotesTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The icon of the notes.</description>
+        <name>chart-seriesItem-notes-icon</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemNotesIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the notes icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>chart-seriesItem-notes-icon-border</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemNotesIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the notes.</description>
+        <name>chart-seriesItem-notes-label</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemNotesLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the notes label. Uses kendo.format. Contains one placeholder ("{0}") which represents the axis value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the labels.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the series notes label. By default the series notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>chart-seriesItem-notes-label-border</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemNotesLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>chart-seriesItem-notes-label-template</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemNotesLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the notes.</description>
+        <name>chart-seriesItem-notes-line</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemNotesLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the notes.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the notes.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the notes.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>
@@ -4396,6 +4989,402 @@ body of the chart.</description>
 
 
     <tag>
+        <description>The value axis notes configuration.</description>
+        <name>chart-valueAxisItem-notes</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>chart-valueAxisItem-notes-data</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesDataTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>chart-valueAxisItem-notes-dataItem</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesDataItemTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The value of the note.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>The icon of the note.</description>
+        <name>chart-valueAxisItem-notes-dataItem-icon</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesDataItemIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the note icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>chart-valueAxisItem-notes-dataItem-icon-border</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesDataItemIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the note.</description>
+        <name>chart-valueAxisItem-notes-dataItem-label</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesDataItemLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the note label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the note label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the note label. Uses kendo.format. Contains one placeholder ("{0}") which represents the axis value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the value axis note label.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The label note text.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the value axis notes label. By default the value axis notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>chart-valueAxisItem-notes-dataItem-label-border</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesDataItemLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>chart-valueAxisItem-notes-dataItem-label-template</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesDataItemLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the note.</description>
+        <name>chart-valueAxisItem-notes-dataItem-line</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesDataItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the note.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the note.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the note.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The icon of the notes.</description>
+        <name>chart-valueAxisItem-notes-icon</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the notes icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>chart-valueAxisItem-notes-icon-border</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the notes.</description>
+        <name>chart-valueAxisItem-notes-label</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the notes label. Uses kendo.format. Contains one placeholder ("{0}") which represents the axis value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the labels.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the value axis notes label. By default the value axis notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>chart-valueAxisItem-notes-label-border</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>chart-valueAxisItem-notes-label-template</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the notes.</description>
+        <name>chart-valueAxisItem-notes-line</name>
+        <tag-class>com.kendoui.taglib.chart.ValueAxisItemNotesLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the notes.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the notes.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the notes.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The plot bands of the value axis.</description>
         <name>chart-valueAxisItem-plotBands</name>
         <tag-class>com.kendoui.taglib.chart.ValueAxisItemPlotBandsTag</tag-class>
@@ -5187,6 +6176,402 @@ body of the chart.</description>
 
 
     <tag>
+        <description>The x axis notes configuration.</description>
+        <name>chart-xAxisItem-notes</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>chart-xAxisItem-notes-data</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesDataTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>chart-xAxisItem-notes-dataItem</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesDataItemTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The value of the note.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>The icon of the note.</description>
+        <name>chart-xAxisItem-notes-dataItem-icon</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesDataItemIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the note icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>chart-xAxisItem-notes-dataItem-icon-border</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesDataItemIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the note.</description>
+        <name>chart-xAxisItem-notes-dataItem-label</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesDataItemLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the note label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the note label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the note label. Uses kendo.format. Contains one placeholder ("{0}") which represents the axis value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the x axis note label.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The label note text.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the x axis notes label. By default the x axis notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>chart-xAxisItem-notes-dataItem-label-border</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesDataItemLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>chart-xAxisItem-notes-dataItem-label-template</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesDataItemLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the note.</description>
+        <name>chart-xAxisItem-notes-dataItem-line</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesDataItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the note.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the note.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the note.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The icon of the notes.</description>
+        <name>chart-xAxisItem-notes-icon</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the notes icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>chart-xAxisItem-notes-icon-border</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the notes.</description>
+        <name>chart-xAxisItem-notes-label</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the notes label. Uses kendo.format. Contains one placeholder ("{0}") which represents the axis value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the labels.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the x axis notes label. By default the x axis notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>chart-xAxisItem-notes-label-border</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>chart-xAxisItem-notes-label-template</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the notes.</description>
+        <name>chart-xAxisItem-notes-line</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemNotesLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the notes.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the notes.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the notes.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The plot bands of the x axis.</description>
         <name>chart-xAxisItem-plotBands</name>
         <tag-class>com.kendoui.taglib.chart.XAxisItemPlotBandsTag</tag-class>
@@ -5969,6 +7354,402 @@ body of the chart.</description>
         </attribute>
 
     </tag>
+
+
+    <tag>
+        <description>The y axis notes configuration.</description>
+        <name>chart-yAxisItem-notes</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>chart-yAxisItem-notes-data</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesDataTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>chart-yAxisItem-notes-dataItem</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesDataItemTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The value of the note.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>The icon of the note.</description>
+        <name>chart-yAxisItem-notes-dataItem-icon</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesDataItemIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the note icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>chart-yAxisItem-notes-dataItem-icon-border</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesDataItemIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the note.</description>
+        <name>chart-yAxisItem-notes-dataItem-label</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesDataItemLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the note label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the note label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the note label. Uses kendo.format. Contains one placeholder ("{0}") which represents the axis value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the y axis note label.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The label note text.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the y axis notes label. By default the y axis notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>chart-yAxisItem-notes-dataItem-label-border</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesDataItemLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>chart-yAxisItem-notes-dataItem-label-template</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesDataItemLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the note.</description>
+        <name>chart-yAxisItem-notes-dataItem-line</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesDataItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the note.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the note.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the note.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The icon of the notes.</description>
+        <name>chart-yAxisItem-notes-icon</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the notes icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>chart-yAxisItem-notes-icon-border</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the notes.</description>
+        <name>chart-yAxisItem-notes-label</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the notes label. Uses kendo.format. Contains one placeholder ("{0}") which represents the axis value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the labels.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the y axis notes label. By default the y axis notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>chart-yAxisItem-notes-label-border</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>chart-yAxisItem-notes-label-template</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the notes.</description>
+        <name>chart-yAxisItem-notes-line</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemNotesLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the notes.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the notes.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the notes.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>
@@ -8390,7 +10171,7 @@ the minimum and maximum values.</description>
         </attribute>
         <attribute>
             <description>The URL for retrieving the thumbnail version of the image. If not specified a default image icon will be shown.
-If function is assign, the current path and image name will be provided.</description>
+If function is assigned, the current path and image name will be provided.</description>
             <name>thumbnailUrl</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -8578,7 +10359,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
 
     <tag>
         <description>The URL for retrieving the thumbnail version of the image. If not specified a default image icon will be shown.
-If function is assign, the current path and image name will be provided.</description>
+If function is assigned, the current path and image name will be provided.</description>
         <name>editor-imageBrowser-transport-thumbnailUrl</name>
         <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportThumbnailUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -8613,7 +10394,7 @@ as a collection of required properties, while the insertHtml tool requires a col
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The mandatory name of the tool. The built-in tools are "bold", "italic", "underline", "strikethrough", "fontName", "fontSize", "foreColor", "backColor", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "formatBlock", "createLink", "unlink", "insertImage", "insertHtml", "viewHtml".</description>
+            <description>The mandatory name of the tool.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -8633,18 +10414,24 @@ as a collection of required properties, while the insertHtml tool requires a col
     </tag>
 
     <tag>
-        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
+        <description>For tools that display a list of items (fontName, fontSize, formatting), this option specifies the items in the shown list.</description>
         <name>editor-tool-items</name>
         <tag-class>com.kendoui.taglib.editor.ToolItemsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>For tools that display a list of items (fontName, fontSize, formatBlock), this option specifies the items in the shown list.</description>
+        <description>For tools that display a list of items (fontName, fontSize, formatting), this option specifies the items in the shown list.</description>
         <name>editor-tool-item</name>
         <tag-class>com.kendoui.taglib.editor.ToolItemTag</tag-class>
 
         <body-content>empty</body-content>
+        <attribute>
+            <description>Only applicable for the formatting tool. Specifies the context in which the option will be available.</description>
+            <name>context</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
         <attribute>
             <description>The string that the popup item will show.</description>
             <name>text</name>
@@ -9933,6 +11720,13 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the preferred rendering engine.
+If it is not supported by the browser, the Gauge will switch to the first available mode.The supported values are:</description>
+            <name>renderAs</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>A value indicating if transition animations should be played.</description>
@@ -11663,14 +13457,21 @@ is closed. Options include "fadeOut".</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The dark module color of the QR code. Accepts a valid CSS color string, including hex and rgb.</description>
-            <name>darkModuleColor</name>
+            <description>The color of the QR code. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The error correction level used to encode the value. The possible values are:</description>
-            <name>errorCorrectionLevel</name>
+            <description>The error correction level used to encode the value.The possible values are:</description>
+            <name>errorCorrection</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the preferred rendering engine.
+If it is not supported by the browser, the QRCode will switch to the first available mode.The supported values are:</description>
+            <name>renderAs</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
@@ -11735,6 +13536,13 @@ is closed. Options include "fadeOut".</description>
             <name>rangeSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Sets the preferred rendering engine.
+If it is not supported by the browser, the Gauge will switch to the first available mode.The supported values are:</description>
+            <name>renderAs</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>A value indicating if transition animations should be played.</description>
@@ -12424,6 +14232,12 @@ That way all users would see the same dates and times no matter their configured
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>If set to true the scheduler allows event resizing. Dragging the resize handles changes the start or end time of the event.</description>
+            <name>resize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
             <name>template</name>
@@ -12447,6 +14261,29 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <tag-class>com.kendoui.taglib.scheduler.EditableTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+
+    <tag>
+        <description>The configuration of the scheduler resource(s) grouping.</description>
+        <name>scheduler-group</name>
+        <tag-class>com.kendoui.taglib.scheduler.GroupTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The orientation of the group headers. Supported values are horizontal or vertical. Note that the agenda view is always in vertical orientation.</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>An array of resource names by which the scheduler events will be grouped.</description>
+            <name>resources</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
 
     <tag>
         <description>The configuration of the scheduler resource(s). A scheduler resource is optional metadata that can be associated
@@ -12500,6 +14337,12 @@ By default only one resource instance can be assigned to an event.</description>
             <name>multiple</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Tha name of the resource used to distinguish resource. If not set the value of the field option is used.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The user friendly title of the resource displayed in the scheduler edit form. If not set the value of the field option is used.</description>
@@ -12666,6 +14509,22 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <name>update</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the view resource(s) grouping.</description>
+        <name>scheduler-view-group</name>
+        <tag-class>com.kendoui.taglib.scheduler.ViewGroupTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The orientation of the group headers. Supported values are horizontal or vertical. Note that the agenda view is always in vertical orientation.</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
 
     </tag>
@@ -12927,6 +14786,13 @@ tick labels.</description>
             <type>float</type>
         </attribute>
         <attribute>
+            <description>Sets the preferred rendering engine.
+If it is not supported by the browser, the Sparkline will switch to the first available mode.The supported values are:</description>
+            <name>renderAs</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.</description>
             <name>seriesColors</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12956,23 +14822,23 @@ tick labels.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the chart has received data from the data source
+            <description>Fires when the sparkline has received data from the data source
 and is about to render it.</description>
             <name>dataBound</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the user has used the mouse or a swipe gesture to drag the chart.The drag operation can be aborted by calling e.preventDefault().</description>
+            <description>Fires when the user has used the mouse or a swipe gesture to drag the sparkline.The drag operation can be aborted by calling e.preventDefault().</description>
             <name>dragStart</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires as long as the user is dragging the chart using the mouse or swipe gestures.</description>
+            <description>Fires as long as the user is dragging the sparkline using the mouse or swipe gestures.</description>
             <name>drag</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the user stops dragging the chart.</description>
+            <description>Fires when the user stops dragging the sparkline.</description>
             <name>dragEnd</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -13907,7 +15773,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Configures the behavior for handling missing values.** Available for area and line series **</description>
+            <description>The behavior for handling missing values. The supported values are:</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -15605,26 +17471,26 @@ hex and rgb.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the chart has received data from the data source
+        <description>Fires when the sparkline has received data from the data source
 and is about to render it.</description>
         <name>sparkline-dataBound</name>
         <tag-class>com.kendoui.taglib.sparkline.DataBoundFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the user has used the mouse or a swipe gesture to drag the chart.The drag operation can be aborted by calling e.preventDefault().</description>
+        <description>Fires when the user has used the mouse or a swipe gesture to drag the sparkline.The drag operation can be aborted by calling e.preventDefault().</description>
         <name>sparkline-dragStart</name>
         <tag-class>com.kendoui.taglib.sparkline.DragStartFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires as long as the user is dragging the chart using the mouse or swipe gestures.</description>
+        <description>Fires as long as the user is dragging the sparkline using the mouse or swipe gestures.</description>
         <name>sparkline-drag</name>
         <tag-class>com.kendoui.taglib.sparkline.DragFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the user stops dragging the chart.</description>
+        <description>Fires when the user stops dragging the sparkline.</description>
         <name>sparkline-dragEnd</name>
         <tag-class>com.kendoui.taglib.sparkline.DragEndFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -15833,8 +17699,15 @@ and is about to render it.</description>
         </attribute>
         <attribute>
             <description>The field containing the point date.
-It is used as a default field for all date axes, including the navigator pane.The data item field value must be either:</description>
+It is used as a default categoryField for all series.The data item field value must be either:</description>
             <name>dateField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the preferred rendering engine.
+If it is not supported by the browser, the Chart will switch to the first available mode.The supported values are:</description>
+            <name>renderAs</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
@@ -17089,6 +18962,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The data item field which contains the category name or date.</description>
+            <name>categoryField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The data field containing the close value.** Available for candlestick and ohlc series only **</description>
             <name>closeField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -17107,7 +18986,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The series line dash type.** Applicable only to line series **</description>
+            <description>The dash type of line chart.The following dash types are supported:</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -17143,7 +19022,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Name template for auto-generated series when binding to grouped data.Template variables:</description>
+            <description>The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:</description>
             <name>groupNameTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -17167,7 +19046,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Configures the behavior for handling missing values.** Applicable for area and line series. **</description>
+            <description>The behavior for handling missing values. The supported values are:</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -17468,6 +19347,12 @@ Available for column series.</description>
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The rotation angle of the markers.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The marker size.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
@@ -17511,6 +19396,12 @@ Available for column series.</description>
 
 
 
+    <tag>
+        <description>The rotation angle of the markers.</description>
+        <name>stockChart-navigator-seriesItem-markers-rotation</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemMarkersRotationFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The effects overlay.</description>
         <name>stockChart-navigator-seriesItem-overlay</name>
@@ -17863,6 +19754,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The data item field which contains the category name or date.</description>
+            <name>categoryField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The data field containing the close value.** Available for candlestick and ohlc series only **</description>
             <name>closeField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -17947,7 +19844,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Configures the behavior for handling missing values.** Applicable for area and line series. **</description>
+            <description>The behavior for handling missing values. The supported values are:</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -18430,6 +20327,12 @@ Available for column series.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>The rotation angle of the markers.</description>
+        <name>stockChart-seriesItem-markers-rotation</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersRotationFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>Configures the markers shape type.</description>
         <name>stockChart-seriesItem-markers-type</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersTypeFunctionTag</tag-class>
@@ -18439,12 +20342,6 @@ Available for column series.</description>
         <description>The markers visibility.</description>
         <name>stockChart-seriesItem-markers-visible</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersVisibleFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
-        <description>The rotation angle of the markers.</description>
-        <name>stockChart-seriesItem-markers-rotation</name>
-        <tag-class>com.kendoui.taglib.stockchart.SeriesItemMarkersRotationFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -19450,1172 +21347,6 @@ hex and rgb.</description>
 
 
     <tag>
-        <description>Scatter charts X-axis configuration options.
-Includes all valueAxis options in addition to:</description>
-        <name>stockChart-xAxis</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>Scatter charts X-axis configuration options.
-Includes all valueAxis options in addition to:</description>
-        <name>stockChart-xAxisItem</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemTag</tag-class>
-
-        <body-content>JSP</body-content>
-        <attribute>
-            <description>Value at which the Y axis crosses this axis. (Only for object)Value indicies at which the Y axes cross the value axis. (Only for array)Date at which the Y axis crosses this axis. (Only for date)Note: Specify a value greater than or equal to the
-axis maximum value to denote the far end of the axis.</description>
-            <name>axisCrossingValue</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The base time interval for the axis labels.
-The default baseUnit is determined automatically from the value range. Available options:</description>
-            <name>baseUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Color to apply to all axis elements.
-Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The interval between major divisions in base units.</description>
-            <name>majorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The end date of the axis.
-This is often used in combination with the min configuration option.</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The maximum value of the axis.
-This is often used in combination with the max configuration option.</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The interval between minor divisions in base units.
-It defaults to 1/5th of the majorUnit.</description>
-            <name>minorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The unique axis name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>Prevents the automatic axis range from snapping to 0.</description>
-            <name>narrowRange</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The name of the pane that the axis should be rendered in.
-The axis will be rendered in the first (default) pane if not set.</description>
-            <name>pane</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Reverses the axis direction -
-values increase from right to left and from top to bottom.</description>
-            <name>reverse</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The axis type.Note: The Chart will automatically switch to a date axis if the series X value
-is of type Date. Specify type explicitly when such behavior is undesired.</description>
-            <name>type</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the axis.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-    </tag>
-
-    <tag>
-        <description>The crosshair configuration options.</description>
-        <name>stockChart-xAxisItem-crosshair</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemCrosshairTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The color of the crosshair.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the crosshair.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The opacity of the crosshair.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the crosshair.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The width of the crosshair.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>The crosshar tooltip configuration options.</description>
-        <name>stockChart-xAxisItem-crosshair-tooltip</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemCrosshairTooltipTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The background color of the tooltip.</description>
-            <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The text color of the tooltip.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The tooltip font.</description>
-            <name>font</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The tooltip format.</description>
-            <name>format</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The padding of the tooltip.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The tooltip template.
-Template variables:</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>A value indicating if the tooltip should be displayed.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>The border configuration options.</description>
-        <name>stockChart-xAxisItem-crosshair-tooltip-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemCrosshairTooltipBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the border.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-
-    <tag>
-        <description>The tooltip template.
-Template variables:</description>
-        <name>stockChart-xAxisItem-crosshair-tooltip-template</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>Configures the axis labels.</description>
-        <name>stockChart-xAxisItem-labels</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemLabelsTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The background color of the labels. Any valid CSS color string will work here, including
-hex and rgb</description>
-            <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The text color of the labels. Any valid CSS color string will work here, including hex and rgb.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Culture to use for formatting the dates. See Globalization for more information.
-By default it uses the global culture.</description>
-            <name>culture</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Date format strings</description>
-            <name>dateFormats</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The font style of the labels.</description>
-            <name>font</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The format of the labels.</description>
-            <name>format</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The margin of the labels.</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>Mirrors the axis labels and ticks.
-If the labels are normally on the left side of the axis,
-mirroring the axis will render them to the right.</description>
-            <name>mirror</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The padding of the labels.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The rotation angle of the labels.</description>
-            <name>rotation</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>Number of labels to skip.
-Skips rendering the first n labels.</description>
-            <name>skip</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>Label rendering step.
-Every n-th label is rendered where n is the step</description>
-            <name>step</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The label template.</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the labels.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>The border of the labels.</description>
-        <name>stockChart-xAxisItem-labels-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemLabelsBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the border. Any valid CSS color string will work here, including
-hex and rgb.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the border.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-
-    <tag>
-        <description>The label template.</description>
-        <name>stockChart-xAxisItem-labels-template</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemLabelsTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
-        <description>Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.</description>
-        <name>stockChart-xAxisItem-line</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemLineTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the line. This will also effect the major and minor ticks, but
-not the grid lines.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the line.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the line.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The width of the line. This will also effect the major and minor ticks, but
-not the grid lines.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Configures the major grid lines. These are the lines that are an extension of the major ticks through the
-body of the chart.</description>
-        <name>stockChart-xAxisItem-majorGridLines</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemMajorGridLinesTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the lines.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the lines.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The width of the lines.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The major ticks of the axis.</description>
-        <name>stockChart-xAxisItem-majorTicks</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemMajorTicksTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
-            <name>size</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the major ticks.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The plot bands of the xAxis.</description>
-        <name>stockChart-xAxisItem-plotBands</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemPlotBandsTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>The plot bands of the xAxis.</description>
-        <name>stockChart-xAxisItem-plotBand</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemPlotBandTag</tag-class>
-
-        <body-content>empty</body-content>
-        <attribute>
-            <description>The color of the plot band.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The start position of the plot band in axis units.</description>
-            <name>from</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The opacity of the plot band.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The end position of the plot band in axis units.</description>
-            <name>to</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-    </tag>
-
-
-    <tag>
-        <description>The title of the value axis.</description>
-        <name>stockChart-xAxisItem-title</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemTitleTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The background color of the title. Any valid CSS color string will work here, including
-hex and rgb.</description>
-            <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The text color of the title. Any valid CSS color string will work here, including hex and rgb.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The font style of the title.</description>
-            <name>font</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The margin of the title.</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The padding of the title.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The position of the title.</description>
-            <name>position</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The rotation angle of the title.</description>
-            <name>rotation</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The text of the title.</description>
-            <name>text</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the title.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>The border of the title.</description>
-        <name>stockChart-xAxisItem-title-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.XAxisItemTitleBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the border.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the border.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-
-
-
-    <tag>
-        <description>Scatter charts Y-axis configuration options.
-Includes all valueAxis options in addition to:</description>
-        <name>stockChart-yAxis</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>Scatter charts Y-axis configuration options.
-Includes all valueAxis options in addition to:</description>
-        <name>stockChart-yAxisItem</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemTag</tag-class>
-
-        <body-content>JSP</body-content>
-        <attribute>
-            <description>Value at which the Y axis crosses this axis. (Only for object)Value indicies at which the Y axes cross the value axis. (Only for array)Date at which the Y axis crosses this axis. (Only for date)Note: Specify a value greater than or equal to the
-axis maximum value to denote the far end of the axis.</description>
-            <name>axisCrossingValue</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The base time interval for the axis labels.
-The default baseUnit is determined automatically from the value range. Available options:</description>
-            <name>baseUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Color to apply to all axis elements.
-Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The interval between major divisions in base units.</description>
-            <name>majorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The end date of the axis.
-This is often used in combination with the min configuration option.</description>
-            <name>max</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The maximum value of the axis.
-This is often used in combination with the max configuration option.</description>
-            <name>min</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The interval between minor divisions in base units.
-It defaults to 1/5th of the majorUnit.</description>
-            <name>minorUnit</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The unique axis name.</description>
-            <name>name</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>Prevents the automatic axis range from snapping to 0.</description>
-            <name>narrowRange</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The name of the pane that the axis should be rendered in.
-The axis will be rendered in the first (default) pane if not set.</description>
-            <name>pane</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Reverses the axis direction -
-values increase from right to left and from top to bottom.</description>
-            <name>reverse</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The axis type.Note: The Chart will automatically switch to a date axis if the series X value
-is of type Date. Specify type explicitly when such behavior is undesired.</description>
-            <name>type</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the axis.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-    </tag>
-
-    <tag>
-        <description>The crosshair configuration options.</description>
-        <name>stockChart-yAxisItem-crosshair</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemCrosshairTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The color of the crosshair.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the crosshair.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The opacity of the crosshair.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the crosshair.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The width of the crosshair.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>The crosshar tooltip configuration options.</description>
-        <name>stockChart-yAxisItem-crosshair-tooltip</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemCrosshairTooltipTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The background color of the tooltip.</description>
-            <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The text color of the tooltip.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The tooltip font.</description>
-            <name>font</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The tooltip format.</description>
-            <name>format</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The padding of the tooltip.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The tooltip template.
-Template variables:</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>A value indicating if the tooltip should be displayed.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>The border configuration options.</description>
-        <name>stockChart-yAxisItem-crosshair-tooltip-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemCrosshairTooltipBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the border.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-
-    <tag>
-        <description>The tooltip template.
-Template variables:</description>
-        <name>stockChart-yAxisItem-crosshair-tooltip-template</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>Configures the axis labels.</description>
-        <name>stockChart-yAxisItem-labels</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemLabelsTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The background color of the labels. Any valid CSS color string will work here, including
-hex and rgb</description>
-            <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The text color of the labels. Any valid CSS color string will work here, including hex and rgb.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Culture to use for formatting the dates. See Globalization for more information.
-It defaults to the global culture.</description>
-            <name>culture</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Date format strings</description>
-            <name>dateFormats</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The font style of the labels.</description>
-            <name>font</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The format of the labels.</description>
-            <name>format</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The margin of the labels.</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>Mirrors the axis labels and ticks.
-If the labels are normally on the left side of the axis,
-mirroring the axis will render them to the right.</description>
-            <name>mirror</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The padding of the labels.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The rotation angle of the labels.</description>
-            <name>rotation</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>Number of labels to skip.
-Skips rendering the first n labels.</description>
-            <name>skip</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>Label rendering step.
-Every n-th label is rendered where n is the step</description>
-            <name>step</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The label template.</description>
-            <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the labels.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>The border of the labels.</description>
-        <name>stockChart-yAxisItem-labels-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemLabelsBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the border. Any valid CSS color string will work here, including
-hex and rgb.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the border.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-
-    <tag>
-        <description>The label template.</description>
-        <name>stockChart-yAxisItem-labels-template</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemLabelsTemplateFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
-        <description>Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.</description>
-        <name>stockChart-yAxisItem-line</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemLineTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the line. This will also effect the major and minor ticks, but
-not the grid lines.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the line.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the line.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The width of the line. This will also effect the major and minor ticks, but
-not the grid lines.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Configures the major grid lines. These are the lines that are an extension of the major ticks through the
-body of the chart.</description>
-        <name>stockChart-yAxisItem-majorGridLines</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemMajorGridLinesTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the lines.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the lines.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>The width of the lines.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The major ticks of the axis.</description>
-        <name>stockChart-yAxisItem-majorTicks</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemMajorTicksTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
-            <name>size</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the major ticks.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>The plot bands of the yAxis.</description>
-        <name>stockChart-yAxisItem-plotBands</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemPlotBandsTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>The plot bands of the yAxis.</description>
-        <name>stockChart-yAxisItem-plotBand</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemPlotBandTag</tag-class>
-
-        <body-content>empty</body-content>
-        <attribute>
-            <description>The color of the plot band.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The start position of the plot band in axis units.</description>
-            <name>from</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The opacity of the plot band.</description>
-            <name>opacity</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The end position of the plot band in axis units.</description>
-            <name>to</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-    </tag>
-
-
-    <tag>
-        <description>The title of the value axis.</description>
-        <name>stockChart-yAxisItem-title</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemTitleTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The background color of the title. Any valid CSS color string will work here, including
-hex and rgb.</description>
-            <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The text color of the title. Any valid CSS color string will work here, including hex and rgb.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The font style of the title.</description>
-            <name>font</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The margin of the title.</description>
-            <name>margin</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The padding of the title.</description>
-            <name>padding</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
-        </attribute>
-        <attribute>
-            <description>The position of the title.</description>
-            <name>position</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The rotation angle of the title.</description>
-            <name>rotation</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The text of the title.</description>
-            <name>text</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The visibility of the title.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>The border of the title.</description>
-        <name>stockChart-yAxisItem-title-border</name>
-        <tag-class>com.kendoui.taglib.stockchart.YAxisItemTitleBorderTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>The color of the border.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the border.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The width of the border.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
-
-
-
-
-
-    <tag>
         <description>Fires when an axis label is clicked.</description>
         <name>stockChart-axisLabelClick</name>
         <tag-class>com.kendoui.taglib.stockchart.AxisLabelClickFunctionTag</tag-class>
@@ -21099,7 +21830,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip.</description>
+            <description>Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.</description>
             <name>autoHide</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -21633,6 +22364,12 @@ Upload may be re-enabled via enable().</description>
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>List of files to be initially rendered in the Upload widget files list.</description>
+            <name>files</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
             <description>Enables (true) or disables (false) the ability to select multiple files.
 If false, users will be able to select only one file at a time. Note: This option does not
 limit the total number of uploaded files in an asynchronous configuration.</description>
@@ -21647,6 +22384,12 @@ client-side events to build your own UI.</description>
             <name>showFileList</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The template used to render the files in the list</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>Fires when the upload has been cancelled while in progress.Note: The cancel event fires only when the upload is in

@@ -1,0 +1,5 @@
+:options:
+    - :name: pushState
+      :type: Boolean
+      :description: Specifies how history should be handled
+

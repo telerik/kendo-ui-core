@@ -166,7 +166,8 @@
                 });                
                 
                 test("test generated generator polynomials", function(){          
-                    var result = fields
+                    var result,
+                        expectedResult;
                     for(var i in generatorPolynomials){  
                         result = dataviz.QRCodeFields.generatorPolynomials[i - 1];
                         expectedResult = generatorPolynomials[i];                        

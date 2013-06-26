@@ -6,11 +6,11 @@
 <kendo:editor name="editor" stylesheets="<%= new String[]{request.getContextPath() + \"/resources/web/editor/editorStyles.css\"}%>" 
 	style="width:740px;height:440px">
     <kendo:editor-tools>
-   		 <kendo:editor-tool name="style">
+   		 <kendo:editor-tool name="formatting">
 	         <kendo:editor-tool-items>
-	         	<kendo:editor-tool-item value="hlError" text="Highlight Error" />
-	         	<kendo:editor-tool-item value="hlOK" text="Highlight OK" />
-	         	<kendo:editor-tool-item value="inlineCode" text="Inline Code" />
+	         	<kendo:editor-tool-item value=".hlError" text="Highlight Error" />
+	         	<kendo:editor-tool-item value=".hlOK" text="Highlight OK" />
+	         	<kendo:editor-tool-item value=".inlineCode" text="Inline Code" />
 	         </kendo:editor-tool-items>
          </kendo:editor-tool>     
     </kendo:editor-tools>

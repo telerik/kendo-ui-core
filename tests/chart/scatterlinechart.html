@@ -335,7 +335,7 @@
                 test("line stops before missing value", function() {
                     setupScatterLineChart(plotArea, {
                         series: [
-                            sparseSeries
+                            $.extend({ missingValues: "gap" }, sparseSeries)
                         ]
                     });
 
@@ -370,7 +370,7 @@
                 test("line is drawn between existing points", function() {
                     setupScatterLineChart(plotArea, {
                         series: [
-                            $.extend({ missingValues: "interpolate" }, sparseSeries)
+                            sparseSeries
                         ]
                     });
 

@@ -2,54 +2,75 @@
 require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/header.php';
 ?>
- <div class="demo-section">
-    <?php
+
+<div class="demo-section">
+    <h3>E-mail</h3>
+     <?php
         $qrMail = new \Kendo\Dataviz\UI\QRCode('qrMail');
         $qrMail->value("mailto:clientservice@kendoui.com")
-            ->size(100);
-               
+            ->size(120)
+            ->color("#e15613")
+            ->background("transparent");
+
         echo $qrMail->render();
-                
+     ?>
+</div>
+<div class="demo-section">
+    <h3>URL</h3>
+    <?php
         $qrUrlBorder =  new \Kendo\Dataviz\UI\QRCodeBorder();
-        $qrUrlBorder->color("#d11717")
+        $qrUrlBorder->color("#000000")
             ->width(5);
-        
+
         $qrUrl = new \Kendo\Dataviz\UI\QRCode('qrUrl');
         $qrUrl->value("http://demos.kendoui.com/dataviz/overview/index.html")
-            ->size(130)
-            ->errorCorrectionLevel("M")
+            ->size(120)
+            ->errorCorrection("M")
             ->border($qrUrlBorder);
-               
+
         echo $qrUrl->render();
-        
+    ?>
+</div>
+<div class="demo-section">
+    <h3>Telephone</h3>
+    <?php
         $qrTelephoneBorder =  new \Kendo\Dataviz\UI\QRCodeBorder();
-        $qrTelephoneBorder->color("#FF321C")
+        $qrTelephoneBorder->color("#67a814")
             ->width(5);
-        
+
         $qrTelephone = new \Kendo\Dataviz\UI\QRCode('qrTelephone');
         $qrTelephone->value("tel:+1-888-365-2779")
-            ->size(170)
-            ->errorCorrectionLevel("Q")
-            ->darkModuleColor("#FF321C")
+            ->size(120)
+            ->errorCorrection("Q")
+            ->color("#67a814")
             ->border($qrTelephoneBorder);
-               
-        echo $qrTelephone->render();
 
+        echo $qrTelephone->render();
+    ?>
+</div>
+<div class="demo-section">
+    <h3>Geo Location</h3>
+    <?php
         $qrGeoLocation = new \Kendo\Dataviz\UI\QRCode('qrGeoLocation');
         $qrGeoLocation->value("geo:42.65049,23.37925,100")
-            ->errorCorrectionLevel("H")
-            ->size(190)
-            ->background("#ACD608");
-               
-        echo $qrGeoLocation->render();        
-        
+            ->errorCorrection("H")
+            ->size(120)
+            ->color("#166a83");
+
+        echo $qrGeoLocation->render();
     ?>
 </div>
 
 <style scoped>
+    .demo-section {
+        display: inline-block;
+        margin: 17px;
+    }
     .k-qrcode {
         display:inline-block;
-        margin: 10px;                    
-    }               
+        margin: 10px 0 0;
+        border: none;
+    }
 </style>
+
 <?php require_once '../../include/footer.php'; ?>

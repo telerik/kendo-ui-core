@@ -27,17 +27,22 @@ kendo_module({
         },
 
         viewportTemplate = kendo.template('<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no#=data.height#" name="viewport" />', {usedWithBlock: false}),
-        systemMeta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +
+        systemMeta = kendo.template('<meta name="apple-mobile-web-app-capable" content="#= data.webAppCapable === false ? \'no\' : \'yes\' #" /> ' +
                      '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ' +
-                     '<meta name="msapplication-tap-highlight" content="no" /> ',
+                     '<meta name="msapplication-tap-highlight" content="no" /> ', {usedWithBlock: false}),
+        clipTemplate = kendo.template('<style>.km-view { clip: rect(0 #= data.width #px #= data.height #px 0); }</style>', {usedWithBlock: false}),
+        ENABLE_CLIP = OS.android || OS.blackberry || OS.meego,
         viewportMeta = viewportTemplate({ height: "" }),
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
-        HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.browser == "mobilesafari",
-        BARCOMPENSATION = 60,
+        HIDEBAR = (OS.device == "iphone" || OS.device == "ipod"),
+        BARCOMPENSATION = OS.browser == "mobilesafari" ? 60 : 0,
         WINDOW = $(window),
         HEAD = $("head"),
+
+        // mobile app events
+        INIT = "init",
         proxy = $.proxy;
 
     function osCssClass(os) {
@@ -100,7 +105,9 @@ kendo_module({
                 transition: "",
                 updateDocumentTitle: true
             }, options);
+
             kendo.Observable.fn.init.call(that, that.options);
+            that.bind(that.events, that.options);
 
             $(function(){
                 that.element = $(element ? element : document.body);
@@ -108,6 +115,7 @@ kendo_module({
                 that._setupElementClass();
                 that._attachHideBarHandlers();
                 that.pane = new Pane(that.element, that.options);
+                that.pane.navigateToInitial();
                 that._attachMeta();
 
                 if (that.options.updateDocumentTitle) {
@@ -115,8 +123,13 @@ kendo_module({
                 }
 
                 that._startHistory();
+                that.trigger(INIT);
             });
         },
+
+        events: [
+            INIT
+        ],
 
         navigate: function(url, transition) {
             this.pane.navigate(url, transition);
@@ -127,15 +140,38 @@ kendo_module({
         },
 
         hideLoading: function() {
-            this.pane.hideLoading();
+            if (this.pane) {
+                this.pane.hideLoading();
+            } else {
+                throw new Error("The mobile application instance is not fully instantiated. Please consider activating loading in the application init event handler.");
+            }
         },
 
         showLoading: function() {
-            this.pane.showLoading();
+            if (this.pane) {
+                this.pane.showLoading();
+            } else {
+                throw new Error("The mobile application instance is not fully instantiated. Please consider activating loading in the application init event handler.");
+            }
         },
 
         view: function() {
             return this.pane.view();
+        },
+
+        skin: function(skin) {
+            var that = this;
+
+            if (!arguments.length) {
+                return that.options.skin;
+            }
+
+            that.options.skin = skin || "";
+            that.element[0].className = "km-pane";
+            that._setupPlatform();
+            that._setupElementClass();
+
+            return that.options.skin;
         },
 
         _setupPlatform: function() {
@@ -178,6 +214,7 @@ kendo_module({
                 initial = that.options.initial,
                 router = new kendo.Router({
                     pushState: that.options.pushState,
+                    root: that.options.root,
                     init: function(e) {
                         var url = e.url;
 
@@ -202,7 +239,7 @@ kendo_module({
         },
 
         _setupElementClass: function() {
-            var that = this,
+            var that = this, size,
                 element = that.element;
 
             element.parent().addClass("km-root km-" + (that.os.tablet ? "tablet" : "phone"));
@@ -216,8 +253,14 @@ kendo_module({
                 applyViewportHeight();
             }
 
+            if (ENABLE_CLIP) {
+                size = (window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight) + 100;
+                $(clipTemplate({ width: size, height: size })).appendTo(HEAD);
+            }
+
             kendo.onResize(function() {
-                element.removeClass("km-horizontal km-vertical")
+                element
+                    .removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass(element));
 
                 if (BERRYPHONEGAP) {
@@ -233,7 +276,7 @@ kendo_module({
                 HEAD.prepend(viewportMeta);
             }
 
-            HEAD.prepend(systemMeta);
+            HEAD.prepend(systemMeta(this.options));
 
             if (icon) {
                 if (typeof icon === "string") {
@@ -292,6 +335,7 @@ kendo_module({
 
             if (newHeight != element.height()) {
                 element.height(newHeight);
+                $(window).trigger(kendo.support.resize);
             }
 
             setTimeout(window.scrollTo, 0, 0, 1);

@@ -1,9 +1,10 @@
-var PAGE_SIZE = 25, firstRun = true,
+var os = kendo.support.mobileOS ,
+    PAGE_SIZE = os ? ( os.tablet ? 40 : 26) : 80,
     imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
     imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/i,
-    DEFAULTIMAGEURL = "images/reddit-default.png",
+    DEFAULTIMAGEURL = "images/foxie.png",
     canvasScrollView;
 
 var awwDataSource = new kendo.data.DataSource({
@@ -30,6 +31,7 @@ var awwDataSource = new kendo.data.DataSource({
     pageSize: PAGE_SIZE,
     schema: {
         data: "data.children",
+        model: { id: "data.name" },
         total: function() { return 100000; }
     }
 });
@@ -49,38 +51,18 @@ var canvasDataSource = new kendo.data.DataSource({
                 data.after = items[items.length - 1].data.name;
             }
 
-            data.limit = PAGE_SIZE;
+            data.limit = 36;
             return data;
         }
     },
 
     serverPaging: true,
-    pageSize: PAGE_SIZE,
+    pageSize: 36,
     schema: {
         data: "data.children",
         total: function() { return 100000; }
     }
 });
-
-// var ds = new kendo.data.DataSource({
-//     transport: {
-//         read: function(options) {
-// 
-//             var results = [], data = options.data;
-//             for (var i = data.skip; i < data.skip + data.take; i ++) {
-//                 results.push({ foo: i });
-//             }
-//             setTimeout(function(){
-//                 options.success(results);
-//             }, 4000);
-//         }
-//     },
-//     pageSize: 36,
-//     serverPaging: true,
-//     schema: {
-//         total: function() { return 100000; }
-//     }
-// });
 
 function isImage(url) {
     return imgExtensionRegex.test(url) || (/http:\/\/(.+)?imgur.com\/.[^\/]+$/i).test(url);
@@ -101,78 +83,96 @@ function navigateTo(dataItem) {
     if (isImage(url)) {
         app.navigate("#detail?id=" + dataItem.data.name);
     } else {
-        window.open(url, "_detail");
+        $("<a/>").attr("href", url)[0].click();
     }
 }
 
 function resetDetail(e) {
-    e.view.element.find("img").attr("src", '');
+    var element = e.view.element;
+
+    element.find(".detail-text").empty();
+    element.find("img").attr("src", '');
+    app.hideLoading();
+}
+
+var DETAIL_TEMPLATE = kendo.template("<div><p>#=data.title#</p><span>by <a target='_blank' href='http://www.reddit.com/user/#=data.author#'>#=data.author#</a> | <a target='_blank' href='http://www.reddit.com#=data.permalink#'>#=data.num_comments# comments</a></span></div>");
+
+function displayDetail(element, item) {
+    var url = item.url,
+        text = element.find(".detail-text"),
+        img = element.find('img');
+
+    if(!imgExtensionRegex.test(url)) {
+        url += '.jpg';
+    }
+
+    text.html(DETAIL_TEMPLATE(item));
+    kendo.fx(text).fadeIn().play();
+
+    img.css('visibility', 'hidden').attr('src', url).one('load', function() {
+        element.find(".detail-image").data("kendoMobileScroller").zoomOut();
+        img.css({
+            'visibility': 'visible',
+            'display': 'none'
+        }).width("100%");
+        app.hideLoading();
+
+        kendo.fx(img).fadeIn().play();
+    });
+}
+
+function fetchItem(id, callback) {
+    $.ajax('http://reddit.com/api/info.json', {
+        data: { id: id },
+        dataType: 'jsonp',
+        jsonp: 'jsonp',
+
+        success: function(data) {
+            callback(data.data.children[0].data);
+        }
+    });
 }
 
 function renderDetail(e) {
     var view = e.view,
         id = view.params.id,
+        item = awwDataSource.get(id),
         element = view.element;
 
-    $.ajax('http://reddit.com/api/info.json', {
-        data: { id: id },
-        dataType: 'jsonp',
-        jsonp: 'jsonp',
-        success: function(data) {
-            var url = data.data.children[0].data.url;
-            if(!imgExtensionRegex.test(url)) {
-                url += '.jpg';
-            }
+    app.showLoading();
 
-            var img = element.find('img');
-            img.css('visibility', 'hidden').attr('src', url).one('load', function() {
-                img.css('visibility', 'visible');
-                view.scroller.zoomOut();
-            });
-        }
-    });
+    if (item) {
+        displayDetail(element, item.data);
+    } else {
+        fetchItem(id, function(item) {
+            displayDetail(element, item);
+        });
+    }
 }
 
 function renderThumbs(element) {
     element.find(".loading-thumb").each(function() {
         var thumb = $(this).data("thumb");
         if (thumb === "default") {
-            thumb = "images/missing-thumb.png";
+            thumb = DEFAULTIMAGEURL;
+        } else {
+            $(this).removeClass("loading-thumb");
         }
-        $(this).removeClass("loading-thumb").addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
+        $(this).addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
     });
 }
 
-function showApp() {
-    if (firstRun) {
-        setTimeout(function () { kendo.fx(".splash").fadeOut().duration(400).play() }, 1000);
-        firstRun = false;
-    }
-}
-
-function showThumbsOnScrollComplete(e) {
-    var view = e.view;
-    var renderThumbsForView = function() {
-        renderThumbs(view.element);
-    };
-
-    awwDataSource.bind('change', renderThumbsForView);
-    view.scroller.bind('scrollEnd', renderThumbsForView);
-    view.bind("afterShow", renderThumbsForView);
-    kendo.onResize(renderThumbsForView);
-}
-
 function canvasInit(e) {
-    canvasScrollView = $("#canvas-scrollview").kendoMobileVirtualScrollView({
-        contentHeight: 500,
+    canvasScrollView = $("#canvas-scrollview").kendoMobileScrollView({
         dataSource: canvasDataSource,
-        batchSize: 6,
+        enablePager: false,
+        itemsPerPage: 6,
+        contentHeight: "100%",
         template: kendo.template($("#canvas-template").html()),
-        emptyTemplate: kendo.template($("#empty-template").html()),
-        changed: updateSrc
-    }).data("kendoMobileVirtualScrollView");
+        change: updateSrc
+    }).data("kendoMobileScrollView");
 
-    canvasScrollView.element.find(".virtual-page").kendoTouch({
+    canvasScrollView.element.find(".km-virtual-page").kendoTouch({
         tap: function (e) {
             var tile = $(e.event.target).closest("div.tile"),
                 offset = tile.data("offset");
@@ -184,7 +184,7 @@ function canvasInit(e) {
 
 function canvasShow(e) {
     var offset = parseInt(e.view.params.offset),
-        canvasScrollView = $("#canvas-scrollview").data("kendoMobileVirtualScrollView");
+        canvasScrollView = $("#canvas-scrollview").data("kendoMobileScrollView");
 
     if(!isNaN(offset)) {
         canvasScrollView.scrollTo(offset);
@@ -192,26 +192,32 @@ function canvasShow(e) {
 }
 
 function goToCanvas(e) {
-    var detailScrollView = $("#detail-scrollview").data("kendoMobileVirtualScrollView"),
-        canvasScrollView = $("#canvas-scrollview").data("kendoMobileVirtualScrollView"),
-        offset = detailScrollView.offset,
+    var detailScrollView = $("#detail-scrollview").data("kendoMobileScrollView"),
+        canvasScrollView = $("#canvas-scrollview").data("kendoMobileScrollView"),
+        offset = detailScrollView.page,
         canvasPage;
 
-    canvasPage = Math.floor(offset / canvasScrollView.options.batchSize);
-    app.navigate("#canvas?offset=" + canvasPage);
+    canvasPage = Math.floor(offset / canvasScrollView.options.itemsPerPage);
+    app.navigate("#canvas?offset=" + canvasPage, "overlay:up reverse");
 }
 
 function canvasDetailInit(e) {
-    $("#detail-scrollview").kendoMobileVirtualScrollView({
+    $("#detail-scrollview").kendoMobileScrollView({
+        enablePager: false,
+        contentHeight: "100%",
         dataSource: canvasDataSource,
         autoBind: false,
-        template: kendo.template($("#canvas-detail-tmp").html())
-    }).data("kendoMobileVirtualScrollView");
+        template: kendo.template($("#canvas-detail-tmp").html()),
+        change: function(e) {
+            var title = e.data[0].data.title;
+            this.view().element.find(".title-bar > p > span").text(title);
+        }
+    }).data("kendoMobileScrollView");
 }
 
 function canvasDetailShow(e) {
     var offset = parseInt(e.view.params.offset),
-        detailScrollView = $("#detail-scrollview").data("kendoMobileVirtualScrollView");
+        detailScrollView = $("#detail-scrollview").data("kendoMobileScrollView");
 
     if(!isNaN(offset)) {
         detailScrollView.scrollTo(offset);
@@ -219,29 +225,30 @@ function canvasDetailShow(e) {
 }
 
 function calculateOffset(dataItem) {
-    var index = $("#canvas-scrollview").data("kendoMobileVirtualScrollView").buffer.buffer.indexOf(dataItem);
-    //console.log("index ", index, " dataItem ", dataItem.foo);
+    var index = $("#canvas-scrollview").data("kendoMobileScrollView")._content.buffer.buffer.indexOf(dataItem);
     return index;
+}
+
+
+function urlProxy(url) {
+    return "http://demos.kendoui.com/service/RedditImages?url=" + escape(url) + "&width=160&height=160";
 }
 
 function updateSrc(e) {
     var element = e.element,
-        images,
         image;
 
     element.find(".item-img").each(function(idx, item) {
+        var url = $(item).data("url");
         image = $("<img />");
-        image.one("load", onImageLoad);
-        image.attr("src", $(item).data("url"));
 
-        //$(item).css("background-image", "url(" + $(item).data("url") + ")");
+        image.one("load", function() {
+            $(item).css("background-image", "url(" + url + ")");
+            $(item).addClass("loaded").removeClass("faded");
+        });
+
+        image.attr("src", url);
     });
-}
-
-function onImageLoad(e) {
-    var element = $("[data-url='" + e.target.src + "']");
-    element.css("background-image", "url(" + e.target.src + ")");
-    element.addClass("loaded");
 }
 
 function createImage(data) {
@@ -249,7 +256,7 @@ function createImage(data) {
         subreddit = data.subreddit,
         thumbnail = data.thumbnail,
         url = data.url,
-        imageTemplate = kendo.template('<div class="item-img faded" style="background-image: url(' + DEFAULTIMAGEURL + ');" data-url="#= data #"></div>');
+        imageTemplate = kendo.template('<div class="item-img faded" data-url="#= urlProxy(data) #"></div>');
 
     if(url.match(imgExtensionRegex)) {
         return imageTemplate(url);
@@ -269,7 +276,7 @@ function createImage(data) {
 function createTile(data) {
     var url = data.url,
         imageTemplate = kendo.template('<div class="item-img" style="background-image: url(#= data #);"></div>'),
-        nonImageTemplate = kendo.template('<div><p>Image cannot be loaded</p><a data-role="button" data-rel="external" href="#= data #" target="_blank">Btn</a></div>');
+        nonImageTemplate = kendo.template('<div class="content"><p>Unable to load image<span>#= data #</span></p><a data-role="button" data-rel="external" href="#= data #" target="_blank">Open URL</a></div>');
 
     if(url.match(imgExtensionRegex)) {
         return imageTemplate(url);
@@ -286,4 +293,11 @@ function createTile(data) {
     return nonImageTemplate(url);
 }
 
-var app = new kendo.mobile.Application(document.body, { skin: 'flat' });
+var app = new kendo.mobile.Application(document.body, {
+    skin: "flat",
+    init: function() {
+        setTimeout(function() {
+            kendo.fx(".splash").fadeOut().duration(700).play();
+        }, 1000)
+    }
+});

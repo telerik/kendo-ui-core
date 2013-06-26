@@ -28,12 +28,19 @@
 
             var boldTool = kendo.ui.Editor.defaultTools.bold;
 
+            function getBoldCommand(range) {
+                var command = boldTool.command({range:range});
+                command.editor = editor;
+
+                return command;
+            }
+
             test('undo restores original content', function() {
                 editor.value('foo');
                 var range = editor.createRange();
                 range.selectNode(editor.body.firstChild);
 
-                var command = boldTool.command({range:range});
+                var command = getBoldCommand(range);
                 command.exec();
                 equal(editor.value(), '<strong>foo</strong>');
                 command.undo();
@@ -46,7 +53,7 @@
                 range.setStart(editor.body.firstChild, 1);
                 range.setEnd(editor.body.firstChild, 2);
 
-                var command = boldTool.command({range:range});
+                var command = getBoldCommand(range);
                 command.exec();
                 command.undo();
 
@@ -62,7 +69,7 @@
                 var range = editor.createRange();
                 range.selectNode(editor.body.firstChild);
 
-                var command = boldTool.command({range:range});
+                var command = getBoldCommand(range);
                 command.exec();
                 equal(editor.value(), '<strong>foo</strong>');
                 command.undo();

@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using System.Collections;
 
-    public class ChartCandlestickSeries<TModel, TValue> : ChartOHLCSeries<TModel, TValue>, IChartCandlestickSeries where TModel : class
+    public class ChartCandlestickSeries<TModel, TValue, TCategory> : ChartOHLCSeries<TModel, TValue, TCategory>, IChartCandlestickSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartCandlestickSeries{TModel, TValue}" /> class.
@@ -16,15 +16,20 @@ namespace Kendo.Mvc.UI
         /// <param name="closeExpression">The close expression.</param>
         /// <param name="colorExpression">The color expression.</param>
         /// <param name="downColorExpression">The down color expression.</param>
+        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
+        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
+        /// <param name="noteTextExpression">The down color expression.</param>
         public ChartCandlestickSeries(
             Expression<Func<TModel, TValue>> openExpression,
             Expression<Func<TModel, TValue>> highExpression,
             Expression<Func<TModel, TValue>> lowExpression,
             Expression<Func<TModel, TValue>> closeExpression,
             Expression<Func<TModel, string>> colorExpression,
-            Expression<Func<TModel, string>> downColorExpression
+            Expression<Func<TModel, string>> downColorExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, string>> noteTextExpression
             )
-            : base(openExpression, highExpression, lowExpression, closeExpression, colorExpression)
+            : base(openExpression, highExpression, lowExpression, closeExpression, colorExpression, categoryExpression, noteTextExpression)
         {
             if (downColorExpression != null)
             {

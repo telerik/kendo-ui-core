@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
@@ -153,6 +154,38 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartNumericAxisBuilder AxisCrossingValue(IEnumerable<double> axisCrossingValues)
         {
             Axis.AxisCrossingValues = axisCrossingValues;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the items.
+        /// </summary>
+        /// <param name="Items">The items of the notes.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ValueAxis(a => a.Numeric()
+        ///               .Note(note => note
+        ///                    .Data(data =>
+        ///                    {
+        ///                        data.Add().Value(1);
+        ///                        data.Add().Value(2);
+        ///                    })
+        ///               )
+        ///            )
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example> 
+        /// </code>
+        /// </example>
+        public ChartNumericAxisBuilder Notes(Action<ChartAxisNotesBuilder<double>> configurator)
+        {
+            var factory = new ChartAxisNotesBuilder<double>(Axis.Notes);
+
+            configurator(factory);
 
             return this;
         }

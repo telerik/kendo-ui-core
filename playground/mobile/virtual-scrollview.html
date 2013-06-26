@@ -23,6 +23,8 @@
     <script src="../../src/kendo.mobile.scrollview.js"></script>
     <script src="../../src/kendo.touch.js"></script>
 
+    <script src="http://demos.kendoui.com/content/spa/aeroviewr/js/500px.js"></script>
+
     <style>
         .km-virtual-scrollview {
             overflow-x: hidden;
@@ -73,201 +75,106 @@
     </style>
 </head>
 <body>
-    <div id="home" data-role="view" data-init="onInit" data-title="Canvas View" data-stretch="true">
+
+    <div id="home" data-role="view" data-title="Canvas View">
         <header data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title"></span>
             </div>
         </header>
-        <div id="virtual" class="km-virtual-scrollview">
+        <div id="virtual" 
+            data-role="scrollview" 
+            data-source="ds" 
+            data-template="tmp"
+            data-empty-template="tmp-empty"
+            data-content-height="300"
+            data-batch-size="6">
         </div>
     </div>
-    <div id="detail" data-role="view" data-init="detailInit" data-show="detailShow" data-stretch="true">
-        <div id="album"></div>
-    </div>
-    
-    <script type="text/x-kendo-template" id="item-template">
-        <div data-offset="#= getOffset(data[0]) #" class="tile">#= data[0] #</div>
-        <div data-offset="#= getOffset(data[1]) #" class="tile">#= data[1] #</div>
-        <div data-offset="#= getOffset(data[2]) #" class="tile">#= data[2] #</div>
-        <div data-offset="#= getOffset(data[3]) #" class="tile">#= data[3] #</div>
-        <div data-offset="#= getOffset(data[4]) #" class="tile">#= data[4] #</div>
-        <div data-offset="#= getOffset(data[5]) #" class="tile">#= data[5] #</div>
+
+    <script id="tmp" type="text/x-kendo-template">
+        <div data-uid="#: data[0].uid #" data-offset="#: calculateOffset(data[0]) #" class="tile">
+            #= data[0].foo #
+        </div>
+        <div data-uid="#: data[1].uid #" data-offset="#: calculateOffset(data[1]) #" class="tile">
+            #= data[1].foo #
+        </div>
+        <div data-uid="#: data[2].uid #" data-offset="#: calculateOffset(data[2]) #" class="tile">
+            #= data[2].foo #
+        </div>
+        <div data-uid="#: data[3].uid #" data-offset="#: calculateOffset(data[3]) #" class="tile">
+            #= data[3].foo #
+        </div>
+        <div data-uid="#: data[4].uid #" data-offset="#: calculateOffset(data[4]) #" class="tile">
+            #= data[4].foo #
+        </div>
+        <div data-uid="#: data[5].uid #" data-offset="#: calculateOffset(data[5]) #" class="tile">
+            #= data[5].foo #
+        </div>
     </script>
 
-    <!--
-    <script type="text/x-kendo-template" id="item-template">
-        <div data-uid="#: data[0].uid #" class="tile">
-            #= createImage(data[0].data) #
-        </div>
-        <div data-uid="#: data[1].uid #" class="tile">
-            #= createImage(data[1].data) #
-        </div>
-        <div data-uid="#: data[2].uid #" class="tile">
-            #= createImage(data[2].data) #
-        </div>
-        <div data-uid="#: data[3].uid #" class="tile">
-            #= createImage(data[3].data) #
-        </div>
-        <div data-uid="#: data[4].uid #" class="tile">
-            #= createImage(data[4].data) #
-        </div>
-        <div data-uid="#: data[5].uid #" class="tile">
-            #= createImage(data[5].data) #
-        </div>
-    </script>
-    -->
-
-    <script type="text/x-kendo-template" id="empty-template">
-        <div style="background-color: \\#FF0000;">empty</div>
+    <script id="tmp-empty" type="text/x-kendo-template">
+        <div class="empty-page"></div>
     </script>
 
     <script>
-        var app = new kendo.mobile.Application(),
-            virtualScrollView,
-            PAGE_SIZE = 36,
-            imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
-            imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
-            imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
-            imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/,
-            DEFAULTIMAGEURL = "reddit-default.png",
-            ds = new kendo.data.DataSource({
-                transport: {
-                    read: function(options) {
+        var app = new kendo.mobile.Application();
 
-                        var results = [], data = options.data;
-                        for (var i = data.skip; i < data.skip + data.take; i ++) {
-                            results.push(i);
-                        }
-                        setTimeout(function () {
-                            options.success(results);
-                        }, 400);
+        var ds = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+
+                    var results = [], data = options.data, o = options;
+                    for (var i = data.skip; i < data.skip + data.take; i ++) {
+                        results.push({ foo: i });
                     }
-                },
-                serverPaging: true,
-                pageSize: PAGE_SIZE,
-                schema: {
-                    total: function() { return 100000; }
+                    setTimeout(function() {
+                        o.success(results);
+                    }, 1200);
                 }
-            });
-
-            /*
-            ds = new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        url: 'http://www.reddit.com/r/aww.json',
-                        dataType: 'jsonp',
-                        jsonp: 'jsonp',
-                        cache: true,
-                    },
-
-                    parameterMap: function(data, type) {
-                        var items = ds.data();
-                        if (items.length) {
-                            data.after = items[items.length - 1].data.name;
-                        }
-
-                        data.limit = PAGE_SIZE;
-                        return data;
-                    }
-                },
-                serverPaging: true,
-                pageSize: PAGE_SIZE,
-                schema: {
-                    data: "data.children",
-                    total: function() { return 100000; }
-                },
-                change: function (e) {
-                    console.log(this.data());
-                }
-            });
-            */
-
-
-        function onInit(e) {
-            virtualScrollView = $("#virtual").kendoMobileVirtualScrollView({
-                contentHeight: 500,
-                dataSource: ds,
-                batchSize: 6,
-                template: kendo.template($("#item-template").html()),
-                emptyTemplate: kendo.template($("#empty-template").html()),
-                changed: updateSrc
-            }).data("kendoMobileVirtualScrollView");
-
-            virtualScrollView.element.find(".virtual-page").kendoTouch({
-                tap: function (e) {
-                    var tile = $(e.event.target).closest("div.tile"),
-                    index = tile.data("offset");
-
-                    app.navigate("#detail?id=" + index);
-                }
-            });
-        }
-
-        function detailInit() {
-            $("#album").kendoMobileVirtualScrollView({
-                dataSource: ds,
-                autoBind: false,
-                batchSize: 1,
-                template: kendo.template("<div class='tile'>#= data #</div>")
-            });
-        }
-
-        function detailShow(e) {
-            $("#album").data("kendoMobileVirtualScrollView").scrollTo(parseInt(e.view.params.id));
-        }
-
-        function getOffset(data) {
-            return virtualScrollView.batchBuffer.buffer.indexOf(data);
-        }
-
-        function buildUrl(url) {
-            var link = url;
-
-            if(!link.match(imgExtensionRegex)) {
-                link = link.concat(".jpg");
+            },
+            pageSize: 36,
+            serverPaging: true,
+            schema: {
+                total: function() { return 100000; }
             }
+        });
 
-            if(link.match(imgurAlbumRegex)) {
-                return '<span style="color: red">Imgur Album...</span>'
-            }
-
-            if(link.match(imgurGalleryRegex)) {
-                return '<span style="color: red">Imgur Gallery...</span>'
-            }
-
-            return '<img class="item-image" src="' + link + '" />';
-        }
-
-        function updateSrc(e) {
-            var element = e.element;
-
-            element.find(".item-img").each(function(idx, item) {
-                $(item).css("background-image", "url(" + $(item).data("url") + ")");
-            });
-        }
-
-        function createImage(data) {
-            var domain = data.domain,
-                subreddit = data.subreddit,
-                thumbnail = data.thumbnail,
-                url = data.url,
-                imageTemplate = kendo.template('<div class="item-img" style="background-image: url(' + DEFAULTIMAGEURL + ');" data-url="#= data #"></div>');
-
-            if(url.match(imgExtensionRegex)) {
-                return imageTemplate(url);
-            }
-
-            if(url.match(imgurAlbumRegex) || url.match(imgurGalleryRegex)) {
-                return imageTemplate(DEFAULTIMAGEURL);
-            }
-
-            if(url.match(imgurSingleRegex)) {
-                return imageTemplate(url.concat(".jpg"));
-            }
-
-            return imageTemplate(DEFAULTIMAGEURL);
+        function calculateOffset(dataItem) {
+            return undefined;
         }
     </script>
+
+    <style>
+
+    .virtual-page {
+        min-height: 1px;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+    }
+
+    .tile {
+        width: 50%;
+        height: 33%;
+        background-color: #c5c5c5;
+        display: inline-block;
+        float: left;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        border: 1px solid #000;
+        overflow: hidden;
+    }
+
+    .empty-page {
+        height: 100%;
+        width: 100%;
+        background-color: #FF0000;
+    }
+    </style>
+
 </body>
 </html>

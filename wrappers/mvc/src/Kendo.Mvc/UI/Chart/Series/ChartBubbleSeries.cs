@@ -17,14 +17,16 @@ namespace Kendo.Mvc.UI
         /// <param name="categoryExpression">The Category expression.</param>
         /// <param name="colorExpression">The Color expression.</param>
         /// <param name="visibleInLegendExpression">The VisibleInLegend expression.</param>
+        /// <param name="noteTextExpression">The note text expression.</param>
         public ChartBubbleSeries(
             Expression<Func<TModel, TXValue>> xValueExpression,
             Expression<Func<TModel, TYValue>> yValueExpression,
             Expression<Func<TModel, TSizeValue>> sizeExpression,
             Expression<Func<TModel, string>> categoryExpression,
             Expression<Func<TModel, string>> colorExpression,
-            Expression<Func<TModel, bool>> visibleInLegendExpression)
-            : base(xValueExpression, yValueExpression)
+            Expression<Func<TModel, bool>> visibleInLegendExpression,
+            Expression<Func<TModel, string>> noteTextExpression)
+            : base(xValueExpression, yValueExpression, noteTextExpression)
         {
             if (typeof(TModel).IsPlainType() && !sizeExpression.IsBindable())
             {

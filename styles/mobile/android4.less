@@ -43,8 +43,8 @@
 {
     text-align: center;
     color: #fff;
-    font-size: 1.5em;
-    line-height: 2.5em;
+    font-size: 1.4em;
+    line-height: 2.4em;
     font-weight: bold;
 }
 
@@ -386,7 +386,17 @@
 {
     font-size: .8em;
     font-size: .8rem;
+}
+
+.km-android .km-navbar,
+.km-android .km-toolbar
+{
     padding: 0 .5em;
+}
+
+.km-android .km-header
+{
+    .box-shadow(~"0 2px 0 #222, 0 -2px 0 #222");
 }
 
 .km-android .km-navbar .km-button,
@@ -487,8 +497,7 @@
 
 .km-android .km-tabstrip .km-badge
 {
-    top: -.5em;
-    right: -1.5em;
+    top: 0;
 }
 
 .km-android .km-tabstrip .km-button:active,
@@ -514,9 +523,9 @@
     margin: 0;
 }
 
-.km-android .km-listview
+.km-android .km-listview-wrapper
 {
-    margin: 0 1em;
+    padding: 0 1em;
 }
 
 .km-android .km-list > li
@@ -533,6 +542,7 @@
 .km-android .km-list
 {
     margin-bottom: 1em;
+    -webkit-margin-collapse: separate;
 }
 
 .km-android .km-group-title
@@ -638,10 +648,22 @@
     color: rgba(255,255,255,.8);
 }
 
+.km-android .km-notext
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .km-android .km-navbar .km-icon
 {
     margin-left: .5rem;
     margin-right: -.3rem;
+}
+
+.km-android .km-navbar .km-notext
+{
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 .km-android .km-navbar .km-icon
@@ -670,17 +692,29 @@
 
 /* Pull To Refresh */
 
+.km-root .km-android .km-load-more,
+.km-android .km-scroller-pull
+{
+    font-size: 1.2em;
+}
+
 .km-android .km-scroller-pull .km-icon
 {
     color: #fff;
 }
 
 /* Load more */
-.km-android .km-load-more .km-icon
+.km-android .km-load-more .km-icon,
+.km-android .km-scroller-pull .km-icon
 {
-    width: 2rem;
-    height: 2rem;
-    font-size: 2rem;
+    width: 1em;
+    height: 1em;
+    font-size: 1.7em;
+}
+
+.km-android .km-scroller-pull .km-template
+{
+    min-width: 0;
 }
 
 /* ScrollView */

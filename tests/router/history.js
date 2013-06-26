@@ -10,7 +10,7 @@ var win,
 module("History", {
     setup: function() {
         QUnit.stop();
-        $("#iframe-container").html('<iframe src="sandbox/"></iframe>');
+        $("#iframe-container").empty().html('<iframe src="sandbox/"></iframe>');
         win = window.frames[0].window;
 
         $(win).one('load', function() {
@@ -25,6 +25,7 @@ module("History", {
     teardown: function() {
         if (win.kendo) {
             win.kendo.support.pushState = pushStateSupported;
+            kendoHistory.stop();
         }
     }
 });
@@ -45,6 +46,12 @@ test("uses hashbang by default", function() {
     startWithHash();
     kendoHistory.navigate("/new-location");
     url(initial + "#/new-location");
+});
+
+test("keeps track of locations", 2, function() {
+    startWithHash();
+    equal(kendoHistory.locations.length, 1);
+    equal(kendoHistory.locations[0], "");
 });
 
 test("uses pushState if possible and asked to", function() {
@@ -75,7 +82,7 @@ asyncTest("transforms pushState to non-push state when needed", 1, function() {
 
     startWithPushState();
 
-    kendoHistory.navigate("/new-location");
+    kendoHistory.navigate("new-location");
 
     var currentLocation = loc.href;
 
@@ -83,7 +90,7 @@ asyncTest("transforms pushState to non-push state when needed", 1, function() {
         var newLocation = frames[0].window.location.href;
         if (newLocation != currentLocation) {
             start();
-            equal(newLocation, initial + "#/new-location");
+            equal(newLocation, initial + "#new-location");
         } else {
             setTimeout(check, 100);
         }
@@ -155,6 +162,23 @@ test("Allows prevention of hash change if preventDefault called", 1, function() 
     url(initial);
 });
 
+asyncTest("Allows prevention of back if preventDefault called", 1, function() {
+    startWithHash();
+
+    kendoHistory.navigate("/new-location");
+
+    kendoHistory.change(function(e) {
+        e.preventDefault();
+    });
+
+    _history.back();
+
+    setTimeout(function() {
+        start();
+        url(initial + "#/new-location");
+    }, 300);
+});
+
 asyncTest("Allows prevention of hash change by clicked link if preventDefault called", 1, function() {
     startWithHash();
 
@@ -222,5 +246,16 @@ asyncTest("supports #:back pseudo url for going back", 1, function() {
     setTimeout(function() {
         start();
         equal(loc.hash, '');
+    }, 300);
+});
+
+asyncTest("stays in sync after back is called", 2, function() {
+    startWithHash();
+    kendoHistory.navigate("/new-location");
+    kendoHistory.navigate("#:back");
+    setTimeout(function() {
+        start();
+        equal(kendoHistory.locations.length, 1);
+        equal(kendoHistory.locations[0], "");
     }, 300);
 });

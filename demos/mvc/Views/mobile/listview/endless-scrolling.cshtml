@@ -9,7 +9,7 @@
     <ul id="endless-scrolling"></ul>
 </div>
 
-<script type="text/x-kendo-tmpl" id="template">
+<script type="text/x-kendo-tmpl" id="endless-scrolling-template">
     <div class="product">
         <img src="../../content/web/foods/#=ProductID#.jpg" alt="#=ProductName# image" class="pullImage"/>
         <h3>#:ProductName#</h3>
@@ -35,12 +35,12 @@
             },
             serverPaging: true,
             serverSorting: true,
-            pageSize: 30
+            pageSize: 50
         });
 
         $("#endless-scrolling").kendoMobileListView({
             dataSource: dataSource,
-            template: $("#template").text(),
+            template: $("#endless-scrolling-template").text(),
             endlessScroll: true
         });
     }
@@ -51,7 +51,7 @@
         font-size: 1.3em;
         line-height: 1.4em;
         margin: 0;
-        padding: .7em 0 0;
+        padding: 0;
         height: 1.3em;
         overflow: hidden;
     }

@@ -102,6 +102,14 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("enabled", value);
     }
 
+    public Object getFiles() {
+        return (Object)getProperty("files");
+    }
+
+    public void setFiles(Object value) {
+        setProperty("files", value);
+    }
+
     public boolean getMultiple() {
         return (boolean)getProperty("multiple");
     }
@@ -116,6 +124,14 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setShowFileList(boolean value) {
         setProperty("showFileList", value);
+    }
+
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
     }
 
     public String getCancel() {

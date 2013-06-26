@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Timezone picker</title>
+        <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../styles/web/kendo.silver.min.css" rel="stylesheet" />
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.multiselect.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timezones.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <div id="tzeditor"></div>
+
+        <script>
+            $(function() {
+                $("#tzeditor").kendoTimezoneEditor({
+                    value: "Antarctica/Vostok"
+                });
+            });
+        </script>
+    </body>
+</html>

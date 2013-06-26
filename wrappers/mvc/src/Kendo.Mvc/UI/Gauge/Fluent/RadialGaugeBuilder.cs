@@ -35,6 +35,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the preferred rendering engine.
+        /// If it is not supported by the browser, the Chart will switch to the first available mode.
+        /// </summary>
+        /// <param name="renderAs">The preferred rendering engine.</param>
+        public RadialGaugeBuilder RenderAs(RenderingMode renderAs)
+        {
+            Component.RenderAs = renderAs;
+            return this;
+        }
+
+        /// <summary>
         /// Sets the radial gauge area.
         /// </summary>
         /// <param name="configurator">The radial gauge area.</param>

@@ -28,7 +28,7 @@
                  </kendo:dataSource-schema>
              </kendo:dataSource>
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="scatterLine" xfield="date" yfield="close" name="close" groupNameTemplate="#= group.value # (#= series.name #)" />
+                <kendo:chart-seriesItem type="scatterLine" xfield="date" yfield="close" name="#= group.value # (close)" />
              </kendo:chart-series>
              <kendo:chart-xAxis>
                 <kendo:chart-xAxisItem>

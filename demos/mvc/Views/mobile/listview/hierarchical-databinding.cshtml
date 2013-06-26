@@ -26,16 +26,28 @@
         -webkit-transform: translatez(0);
         vertical-align: middle;
     }
+    
+    .km-flat #hierarchical-listview .employee-image {
+        -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+        box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+    }
 
     #hierarchical-listview h2 {
         display: inline-block;
         margin: .5em;
         font-size: 1.1em;
     }
+    
+    .km-android #hierarchical-listview .parent:after {
+        display: inline-block;
+        border-color: #ffffff;
+    }
 </style>
 <script id="hierarchicalMobileListViewTemplate" type="text/x-kendo-template">
     # if (data.HasEmployees) { #
-        <a href="\#hierarchical-view?parent=#: data.id #">
+        <a href="\#hierarchical-view?parent=#: data.id #" class="parent">
             <span class="employee-image" style="background-image: url('../../content/web/Employees/#: id #.jpg')"></span>
             <h2> #: FullName # </h2>
         </a>

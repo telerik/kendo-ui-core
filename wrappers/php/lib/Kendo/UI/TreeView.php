@@ -37,6 +37,16 @@ Setting this option to false will disable all animations.
     }
 
     /**
+    * If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
+data source is fired. By default the widget will bind to the data source specified in the configuration.
+    * @param boolean $value
+    * @return \Kendo\UI\TreeView
+    */
+    public function autoBind($value) {
+        return $this->setProperty('autoBind', $value);
+    }
+
+    /**
     * If true or an object, renders checkboxes within each treeview item.
     * @param boolean|\Kendo\UI\TreeViewCheckboxes|array $value
     * @return \Kendo\UI\TreeView

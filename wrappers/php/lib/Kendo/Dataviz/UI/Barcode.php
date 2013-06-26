@@ -65,6 +65,16 @@ Any valid CSS color string will work here, including hex and rgb.
     }
 
     /**
+    * Sets the preferred rendering engine.
+If it is not supported by the browser, the BarCode will switch to the first available mode.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\Barcode
+    */
+    public function renderAs($value) {
+        return $this->setProperty('renderAs', $value);
+    }
+
+    /**
     * Can be set to a JavaScript object which represents the text configuration.
     * @param \Kendo\Dataviz\UI\BarcodeText|array $value
     * @return \Kendo\Dataviz\UI\Barcode

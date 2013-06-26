@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// Creates views for the <see cref="Scheduler" /> class.
+    /// Creates views for the <see cref="Scheduler{TModel}" /> class.
     /// </summary>
     public class SchedulerViewFactory<TModel> : IHideObjectMembers
          where TModel : class, ISchedulerEvent
@@ -11,7 +11,7 @@
         private readonly IScheduler<TModel> container;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchedulerViewFactory"/> class.
+        /// Initializes a new instance of the <see cref="SchedulerViewFactory{TModel}"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
         public SchedulerViewFactory(Scheduler<TModel> container)

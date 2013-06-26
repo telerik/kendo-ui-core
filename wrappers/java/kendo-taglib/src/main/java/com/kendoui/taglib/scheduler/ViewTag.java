@@ -53,6 +53,10 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("editable", value);
     }
 
+    public void setGroup(com.kendoui.taglib.scheduler.ViewGroupTag value) {
+        setProperty("group", value);
+    }
+
     public void setAllDayEventTemplate(ViewAllDayEventTemplateFunctionTag value) {
         setEvent("allDayEventTemplate", value.getBody());
     }

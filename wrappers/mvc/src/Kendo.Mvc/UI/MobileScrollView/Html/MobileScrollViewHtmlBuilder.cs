@@ -55,6 +55,38 @@ namespace Kendo.Mvc.UI
 
             AddEventAttributes(html, component.Events);
 
+            if (!component.EnablePager)
+            {
+                html.Attribute("data-enable-pager", "false");
+            }
+
+            if (component.ContentHeight.HasValue())
+            {
+                html.Attribute("data-content-height", component.ContentHeight);
+            }
+
+            if (component.DataSource.Data != null || component.DataSource.Transport.Read.Url.HasValue())
+            {
+                html.Attribute("data-source", component.Initializer.Serialize(component.DataSource.ToJson()));
+
+                if (!component.AutoBind)
+                {
+                    html.Attribute("data-auto-bind", "false");
+                }
+
+                if (component.TemplateId.HasValue())
+                {
+                    html.Attribute("data-template", component.TemplateId);
+                }
+
+                if (component.EmptyTemplateId.HasValue())
+                {
+                    html.Attribute("data-empty-template", component.EmptyTemplateId);
+                }
+
+                html.Attribute("data-items-per-page", component.ItemsPerPage.ToString());
+            }
+
             html.Attributes(component.HtmlAttributes);            
 
             foreach (var item in component.Items)

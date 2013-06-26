@@ -20,9 +20,10 @@ kendo_module({
                 app = kendo.mobile.application,
                 osname = app ? app.os.name : kendo.support.mobileOS.name,
                 ioswp = osname === "ios" || osname === "wp" || app.os.skin,
-                align = options.align || (ioswp ?  "bottom center" : "center center"),
-                position = options.position || (ioswp ? "bottom center" : "center center"),
-                effect = options.effect || (ioswp ? "slideIn:up" : "fade:in"),
+                bb = osname === "blackberry",
+                align = options.align || (ioswp ?  "bottom center" : bb ? "center right" : "center center"),
+                position = options.position || (ioswp ? "bottom center" : bb ? "center right" : "center center"),
+                effect = options.effect || (ioswp ? "slideIn:up" : bb ? "slideIn:left" : "fade:in"),
                 shim = $(SHIM).handler(that).hide();
 
             Widget.fn.init.call(that, element, options);
@@ -84,6 +85,7 @@ kendo_module({
             Widget.fn.destroy.call(this);
             this.shim.kendoDestroy();
             this.popup.destroy();
+            this.shim.remove();
         }
     });
 

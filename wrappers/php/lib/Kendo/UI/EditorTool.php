@@ -6,7 +6,7 @@ class EditorTool extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The mandatory name of the tool. The built-in tools are "bold", "italic", "underline", "strikethrough", "fontName", "fontSize", "foreColor", "backColor", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "formatBlock", "createLink", "unlink", "insertImage", "insertHtml", "viewHtml".
+    * The mandatory name of the tool.
     * @param string $value
     * @return \Kendo\UI\EditorTool
     */

@@ -18,7 +18,7 @@
                                 %>
                                 <i></i> 
                                 <%= Html.Kendo().MobileButton()
-                                        .HtmlAttributes(new { style = "background-color: green" })
+                                        .HtmlAttributes(new { style = "background-color: green; color: white;" })
                                         .Text("Green")
                                 %>
                                 <%
@@ -29,7 +29,7 @@
                                 %>
                                 <i></i> 
                                 <%= Html.Kendo().MobileButton()
-                                    .HtmlAttributes(new { style = "background-color: darkred" })
+                                    .HtmlAttributes(new { style = "background-color: darkred; color: white;" })
                                     .Text("Red")
                                 %> 
                                 <%

@@ -1,14 +1,14 @@
 <html>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title>Scrollview</title>
         <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.router.js"></script>
-        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
@@ -22,50 +22,72 @@
     </head>
     <body>
 
-<div data-role="view" data-show="rebindListView" id="hierarchical-view" data-transition="slide">
-    <ul id="hierarchical-listview" data-role="listview" data-template="hierarchicalMobileListViewTemplate"></ul>
-</div>
+        <div data-role="view" id="my-favourites" data-init="mobileListViewHeadersInit" data-title="My Favourites" data-model="vm">
+            <div data-role='header'>
+                <div data-role='navbar'>
+                </div>
+            </div>
+            <ul id="myfavlist"></ul>
+        </div>
 
-<script id="hierarchicalMobileListViewTemplate" type="text/x-kendo-template">
-    # if (data.HasEmployees) { #
-        <a href="\#hierarchical-view?parent=#: data.uid #">#: FullName #</a>
-    # } else { #
-    #: FullName #
-    # } #
-</script>
+        <script type="text/x-kendo-template" id="myfavlistTemplate">
+            test
+        </script>
 
-    <script>
-        var serviceRoot = "http://demos.kendoui.com/service";
+        <script>
+            var jsonObj = [];
 
-        var employees = new kendo.data.HierarchicalDataSource({
-            transport: {
-                read: {
-                    url: serviceRoot + "/Employees",
-                    dataType: "jsonp"
+            function populateList() {
+
+                var letters = "a,b,c,d,e,f,g,h,i,j,k,l,m,m,x,w,q".split(',');
+
+
+                for (var x = 0; x < letters.length; x++) {
+                    for (var y = 0; y < 3; y++) {
+                        jsonObj.push({
+                            id: x,
+                            name: "Item 1",
+                            letter: letters[x]
+                        });
+                    }
                 }
-            },
 
-            schema: {
-                model: {
-                    id: "EmployeeId",
-                    hasChildren: "HasEmployees"
-                }
-            }
-        });
-
-        function rebindListView(e) {
-            var parentID = e.view.params.parent,
-            ds = employees;
-
-            if (parentID) {
-                var ds = employees.getByUid(parentID).children;
             }
 
-            e.view.element.find("#hierarchical-listview").data('kendoMobileListView').setDataSource(ds);
-        }
+            populateList();
 
-        new kendo.mobile.Application();
-    </script>
+            var dataSource = kendo.data.DataSource.create({
+                data: jsonObj,
+                group: "letter"
+            });
+
+            function mobileListViewHeadersInit() {
+
+                $("#myfavlist").kendoMobileListView({
+                    dataSource: dataSource,
+                    template: $("#myfavlistTemplate").html(),
+                    headerTemplate: "${value}",
+                    fixedHeaders: true
+                });
+
+            }
+
+
+            var vm = kendo.observable({
+                refresh: function () {
+                    alert("Should be fubbared now if youve scrolled");
+                    dataSource.fetch();
+                }
+            });
+            //For some reason init was not calling this.. so fudge it
+            setTimeout(mobileListViewHeadersInit,1000);
+            setTimeout(vm.refresh,5000);
+
+
+            window.kendoMobileApplication = new kendo.mobile.Application($(document).body, {
+                transition: "slide"
+            });
+        </script>
 
     </body>
 </html>

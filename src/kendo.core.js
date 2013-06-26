@@ -13,6 +13,7 @@
         percentRegExp = /%/,
         formatRegExp = /\{(\d+)(:[^\}]+)?\}/g,
         boxShadowRegExp = /(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i,
+        numberRegExp = /^(\+|-?)\d+(\.?)\d*$/,
         FUNCTION = "function",
         STRING = "string",
         NUMBER = "number",
@@ -24,6 +25,8 @@
         setterCache = {},
         slice = [].slice,
         globalize = window.Globalize;
+
+    kendo.version = "$KENDO_VERSION";
 
     function Class() {}
 
@@ -235,6 +238,7 @@
                 argumentName = paramName.match(argumentNameRegExp)[0],
                 useWithBlock = settings.useWithBlock,
                 functionBody = "var o,e=kendo.htmlEncode;",
+                fn,
                 parts,
                 idx;
 
@@ -270,7 +274,9 @@
             functionBody = functionBody.replace(sharpRegExp, "#");
 
             try {
-                return new Function(argumentName, functionBody);
+                fn = new Function(argumentName, functionBody);
+                fn._slotCount = Math.floor(parts.length / 2);
+                return fn;
             } catch(e) {
                 throw new Error(kendo.format("Invalid template:'{0}' Generated code:'{1}'", template, functionBody));
             }
@@ -1071,7 +1077,7 @@ function pad(number, digits, end) {
     }
 
     //if date's day is different than the typed one - adjust
-    function adjustForBrazillianTimezone(date, hours) {
+    function adjustDST(date, hours) {
         if (!hours && date.getHours() === 23) {
             date.setHours(date.getHours() + 2);
         }
@@ -1362,7 +1368,7 @@ function pad(number, digits, end) {
             value = new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds));
         } else {
             value = new Date(year, month, day, hours, minutes, seconds, milliseconds);
-            adjustForBrazillianTimezone(value, hours);
+            adjustDST(value, hours);
         }
 
         if (year < 100) {
@@ -1375,8 +1381,6 @@ function pad(number, digits, end) {
 
         return value;
     }
-
-    kendo._adjustDate = adjustForBrazillianTimezone;
 
     kendo.parseDate = function(value, formats, culture) {
         if (objectToString.call(value) === "[object Date]") {
@@ -1404,17 +1408,25 @@ function pad(number, digits, end) {
             for (; idx < length; idx++) {
                 formats[idx] = patterns[formatsSequence[idx]];
             }
-            formats[idx] = "ddd MMM dd yyyy HH:mm:ss";
-            formats[++idx] = "yyyy-MM-ddTHH:mm:ss.fffffffzzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mm:ss.fffzzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mm:sszzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mmzzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mmzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mm:ss";
-            formats[++idx] = "yyyy-MM-ddTHH:mm";
-            formats[++idx] = "yyyy-MM-dd";
 
             idx = 0;
+
+            formats.push(
+                "yyyy/MM/dd HH:mm:ss",
+                "yyyy/MM/dd HH:mm",
+                "yyyy/MM/dd",
+                "ddd MMM dd yyyy HH:mm:ss",
+                "yyyy-MM-ddTHH:mm:ss.fffffffzzz",
+                "yyyy-MM-ddTHH:mm:ss.fffzzz",
+                "yyyy-MM-ddTHH:mm:sszzz",
+                "yyyy-MM-ddTHH:mmzzz",
+                "yyyy-MM-ddTHH:mmzz",
+                "yyyy-MM-ddTHH:mm:ss",
+                "yyyy-MM-ddTHH:mm",
+                "yyyy-MM-dd HH:mm:ss",
+                "yyyy-MM-dd HH:mm",
+                "yyyy-MM-dd"
+            );
         }
 
         formats = isArray(formats) ? formats: [formats];
@@ -1598,9 +1610,8 @@ function pad(number, digits, end) {
         }
 
         if (browser.msie && math.floor(browser.version) <= 7) {
-            element.css({
-                zoom: 1
-            });
+            element.css({ zoom: 1 });
+            element.children(".k-menu").width(element.width());
         }
 
         return element.parent();
@@ -1700,6 +1711,8 @@ function pad(number, digits, end) {
             document.body.removeChild(div);
             return result;
         };
+
+        support.cssBorderSpacing = typeof document.documentElement.style.borderSpacing != "undefined";
 
         support.isRtl = function(element) {
             return $(element).closest(".k-rtl").length > 0;
@@ -2150,13 +2163,10 @@ function pad(number, digits, end) {
 
     if (support.touch) {
 
-        var mobileChrome = (support.mobileOS.browser == "chrome" && !support.mobileOS.ios);
-
         eventTarget = function(e) {
-            var touches = "originalEvent" in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null,
-                property = mobileChrome ? "screen" : "client";
+            var touches = "originalEvent" in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null;
 
-            return touches ? document.elementFromPoint(touches[0][property + "X"], touches[0][property + "Y"]) : e.target;
+            return touches ? document.elementFromPoint(touches[0].clientX, touches[0].clientY) : e.target;
         };
 
         each(["swipe", "swipeLeft", "swipeRight", "swipeUp", "swipeDown", "doubleTap", "tap"], function(m, value) {
@@ -2441,7 +2451,7 @@ function pad(number, digits, end) {
             value = true;
         } else if (value === "false") {
             value = false;
-        } else if (!isNaN(parseFloat(value))) {
+        } else if (numberRegExp.test(value)) {
             value = parseFloat(value);
         } else if (jsonRegExp.test(value) && !jsonFormatRegExp.test(value)) {
             value = evil("(" + value + ")");
@@ -3196,17 +3206,23 @@ function pad(number, digits, end) {
         var MS_PER_MINUTE = 60000,
             MS_PER_DAY = 86400000;
 
-        function adjustForBrazillianTimezone(date, hours) {
+        function adjustDST(date, hours) {
             if (hours === 0 && date.getHours() === 23) {
                 date.setHours(date.getHours() + 2);
+                return true;
             }
+
+            return false;
         }
 
         function setDayOfWeek(date, day, dir) {
+            var hours = date.getHours();
+
             dir = dir || 1;
             day = ((day - date.getDay()) + (7 * dir)) % 7;
 
             date.setDate(date.getDate() + day);
+            adjustDST(date, hours);
         }
 
         function dayOfWeek(date, day, dir) {
@@ -3237,7 +3253,7 @@ function pad(number, digits, end) {
 
         function getDate(date) {
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
-            adjustForBrazillianTimezone(date, 0);
+            adjustDST(date, 0);
             return date;
         }
 
@@ -3290,7 +3306,7 @@ function pad(number, digits, end) {
                 date = new Date(date);
 
             setTime(date, offset * MS_PER_DAY);
-            adjustForBrazillianTimezone(date, hours);
+            adjustDST(date, hours);
             return date;
         }
 
@@ -3315,7 +3331,7 @@ function pad(number, digits, end) {
         }
 
         return {
-            adjustForBrazillianTimezone: adjustForBrazillianTimezone,
+            adjustDST: adjustDST,
             dayOfWeek: dayOfWeek,
             setDayOfWeek: setDayOfWeek,
             getDate: getDate,

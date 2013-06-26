@@ -220,7 +220,7 @@
                         {
                             items.Add().Text("1. Andrew Fuller").Icon("toprated");
                             items.Add().Text("2. Janet Leverling").Icon("toprated");
-                            items.Add().Text("3. Carine Callahan").Icon("toprated").HtmlAttributes(new { style="background-color: #3589e7; color: #fff;" });
+                            items.Add().Text("3. Carine Callahan").Icon("toprated").HtmlAttributes(new { style="background-color: Green; color: #fff;" });
                             items.Add().Text("4. Margaret Johnson").Icon("toprated");
                             items.Add().Text("5. Steve Collins").Icon("toprated");
                             items.Add().Text("6. Maria Steward").Icon("toprated");
@@ -317,13 +317,13 @@
     #tabstrip-profile h2 {
         display: inline-block;
         font-size: 1.1em;
-        margin: 1.5em 0 0 1em;
+        margin: 1.5em 0 0 .7em;
     }
     #tabstrip-profile h2 span {
         display: block;
         clear: both;
-        font-size: 2em;
-        margin: .2em 0 0 0;
+        font-size: 1.8em;
+        margin: .1em 0 0 0;
     }
     #tabstrip-profile img {
         width: 5em;
@@ -335,6 +335,14 @@
         -webkit-border-radius: 8px;
         border-radius: 8px;
     }
+    
+    .km-flat #tabstrip-profile img {
+        webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+        box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+    }
+    
     .sales-down,
     .sales-hold,
     .sales-up,

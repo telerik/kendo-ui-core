@@ -6,4 +6,4 @@ bash "Add nodejs PPA" do
 end
 
 package "nodejs"
-package "npm"
+# package "npm"

@@ -20,8 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         /// <summary>
         /// Binds the MobileListView to a list of objects
-        /// </summary>
-        /// <typeparam name="T">The type of the data item</typeparam>
+        /// </summary>        
         /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">
@@ -40,8 +39,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         /// <summary>
         /// Binds the MobileListView to a list of objects
-        /// </summary>
-        /// <typeparam name="T">The type of the data item</typeparam>
+        /// </summary>        
         /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">
@@ -83,7 +81,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Instance of DataSource or the data that the mobile ListView will be bound to.
         /// </summary>
-        /// <param name="value">The value that configures the datasource.</param>
+        /// <param name="configurator">The value that configures the datasource.</param>
         public MobileListViewBuilder<T> DataSource(Action<AjaxDataSourceBuilder<T>> configurator)
         {
             configurator(new AjaxDataSourceBuilder<T>(Component.DataSource, Component.ViewContext, Component.UrlGenerator));

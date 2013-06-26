@@ -184,6 +184,28 @@
                 equal(dom.find(".k-item:last").text(), "bar");
             });
 
+            test("removing items from root level when datasource is in observable object", function() {
+                var dom = $('<div data-bind="source: src" data-role="treeview" />');
+
+                var viewModel = kendo.observable({
+                    src: new kendo.data.HierarchicalDataSource({
+                        data: [
+                            { text: "foo" },
+                            { text: "bar" }
+                        ]
+                    })
+                })
+
+                kendo.bind(dom, viewModel);
+
+                var bar = viewModel.src.data()[1];
+
+                viewModel.src.remove(bar);
+
+                equal(dom.find(".k-item").length, 1);
+                equal(dom.find(".k-item:last").text(), "foo");
+            });
+
 
 
             (function() {

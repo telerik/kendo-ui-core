@@ -91,7 +91,6 @@
         /// If set to true the scheduler will display a confirmation dialog when the user clicks the "destroy" button. Confirmation dialog is enabled by default.
         /// </summary>
         /// <param name="enable">The confirmation.</param>
-        /// <example>
         public SchedulerEditableSettingsBuilder Confirmation(bool enable)
         {
             container.DisplayDeleteConfirmation = enable;

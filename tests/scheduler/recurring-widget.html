@@ -191,6 +191,15 @@
                 equal(editor.value(), "FREQ=DAILY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ"));
             });
 
+            test("Until datepicker uses start value as min", function() {
+                var date = kendo.date.today();
+                var editor = new RecurrenceEditor(div, { start: date });
+
+                editor.setView("daily");
+
+                equal(editor.untilDatePicker.min().getTime(), date.getTime());
+            });
+
             test("Select until radio sets until value (Etc/UTC zone)", function() {
                 var editor = new RecurrenceEditor(div, {
                         timezone: "Etc/UTC"

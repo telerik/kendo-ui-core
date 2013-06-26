@@ -3,21 +3,21 @@
     using System;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="SchedulerViewBaseBuilder"/>.
+    /// Defines the fluent interface for configuring the <see cref="SchedulerViewBaseBuilder{T}"/>.
     /// </summary>
     public class SchedulerViewBaseBuilder<T> : ISchedulerViewBuilder
         where T : class, ISchedulerView
     {
-        protected readonly T resource;
+        protected readonly T view;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchedulerViewDayBuilder"/> class.
+        /// Initializes a new instance of the <see cref="SchedulerViewBaseBuilder{T}"/> class.
         /// </summary>
-        /// <param name="resource">The resource</param>
+        /// <param name="view">The resource</param>
         /// 
-        public SchedulerViewBaseBuilder(T resource)
+        public SchedulerViewBaseBuilder(T view)
         {
-            this.resource = resource;
+            this.view = view;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@
         /// </example>
         public ISchedulerViewBuilder Title(string title)
         {
-            resource.Title = title;
+            view.Title = title;
 
             return this;
         }
@@ -58,9 +58,9 @@
         /// <param name="configurator">The lambda which configures the editing</param>
         public ISchedulerViewBuilder Editable(Action<SchedulerViewEditableSettingsBuilder> configurator)
         {
-            resource.Editable = new SchedulerViewEditableSettings();
+            view.Editable = new SchedulerViewEditableSettings();
 
-            configurator(new SchedulerViewEditableSettingsBuilder(resource.Editable));
+            configurator(new SchedulerViewEditableSettingsBuilder(view.Editable));
 
             return this;
         }
@@ -94,9 +94,9 @@
         /// </example>
         public ISchedulerViewBuilder Editable(bool isEditable)
         {
-            resource.Editable = new SchedulerViewEditableSettings();
+            view.Editable = new SchedulerViewEditableSettings();
 
-            resource.Editable.Enable = isEditable;
+            view.Editable.Enable = isEditable;
 
             return this;
         }
@@ -107,7 +107,7 @@
         /// <param name="eventTemplate">The eventTemplate.</param>
         public ISchedulerViewBuilder EventTemplate(string eventTemplate)
         {
-            resource.EventTemplate = eventTemplate;
+            view.EventTemplate = eventTemplate;
 
             return this;
         }
@@ -118,7 +118,7 @@
         /// <param name="eventTemplateId">The eventTemplateId</param>
         public ISchedulerViewBuilder EventTemplateId(string eventTemplateId)
         {
-            resource.EventTemplateId = eventTemplateId;
+            view.EventTemplateId = eventTemplateId;
 
             return this;
         }
@@ -154,7 +154,7 @@
         /// </example>
         public ISchedulerViewBuilder SelectedDateFormat(string selectedDateFormat)
         {
-            resource.SelectedDateFormat = selectedDateFormat;
+            view.SelectedDateFormat = selectedDateFormat;
 
             return this;
         }
@@ -190,7 +190,18 @@
         /// </example>
         public ISchedulerViewBuilder Selected(bool isSelected)
         {
-            resource.Selected = isSelected;
+            view.Selected = isSelected;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the orientation of the group headers
+        /// </summary>
+        /// <param name="orientation">The orientation</param>        
+        public ISchedulerViewBuilder Groups(SchedulerGroupOrientation orientation)
+        {
+            view.Group.Orientation = orientation;
 
             return this;
         }

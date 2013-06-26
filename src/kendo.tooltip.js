@@ -73,8 +73,8 @@ kendo_module({
             center: "n"
         },
         DIMENSIONS = {
-            "horizontal": { offset: "top", size: "height" },
-            "vertical": { offset: "left", size: "width" }
+            "horizontal": { offset: "top", size: "outerHeight" },
+            "vertical": { offset: "left", size: "outerWidth" }
         },
         DEFAULTCONTENT = function(e) {
             return e.target.data(kendo.ns + "title");

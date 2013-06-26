@@ -81,6 +81,10 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("minorTicks", value);
     }
 
+    public void setNotes(com.kendoui.taglib.chart.CategoryAxisItemNotesTag value) {
+        setProperty("notes", value);
+    }
+
     public void setPlotBands(CategoryAxisItemPlotBandsTag value) {
 
         setProperty("plotBands", value.plotBands());

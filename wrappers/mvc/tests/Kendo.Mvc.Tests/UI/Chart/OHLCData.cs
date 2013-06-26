@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI.Tests
         public decimal Close { get; set; }
         public string Color { get; set; }
         public string DownColor { get; set; }
+        public DateTime Date { get; set; }
+        public string NoteText { get; set; }
     }
 
     public static class OHLCDataBuilder
@@ -27,7 +29,9 @@ namespace Kendo.Mvc.UI.Tests
                     Low = 0,
                     Close = 1,
                     Color = "Color",
-                    DownColor = "DownColor"
+                    DownColor = "DownColor",
+                    Date = new DateTime(2012, 1, 1),
+                    NoteText = "NoteText"
                 },
 
                 new OHLCData
@@ -37,7 +41,9 @@ namespace Kendo.Mvc.UI.Tests
                     Low = 1,
                     Close = 2,
                     Color = "Color1",
-                    DownColor = "DownColor1"
+                    DownColor = "DownColor1",
+                    Date = new DateTime(2012, 1, 1),
+                    NoteText = "NoteText1"
                 }
             };
         }

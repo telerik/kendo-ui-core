@@ -61,7 +61,7 @@ kendo_module({
             var parents = this.parents;
             var value = this.get();
 
-            if (value) {
+            if (value && typeof value.parent == "function") {
                 var parent = value.parent();
 
                 if ($.inArray(parent, parents) < 0) {

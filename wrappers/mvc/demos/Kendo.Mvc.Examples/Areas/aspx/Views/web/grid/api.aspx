@@ -6,17 +6,14 @@
     <ul class="options">
         <li>
             <input type="text" value="0" id="selectRow" class="k-textbox" />
-            <button class="selectRow k-button">
-                Select row</button>
+            <button class="selectRow k-button">Select row</button>
         </li>
         <li>
-            <button class="clearSelection k-button">
-                Clear selected rows</button>
+            <button class="clearSelection k-button">Clear selected rows</button>
         </li>
         <li>
             <input type="text" value="0" id="groupRow" class="k-textbox" />
-            <button class="toggleGroup k-button">
-                Collapse/Expand group</button>
+            <button class="toggleGroup k-button">Collapse/Expand group</button>
         </li>
     </ul>
 </div>

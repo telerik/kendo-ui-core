@@ -849,6 +849,12 @@
                     equal(slot.x2, lineBox.x2);
                 });
 
+                test("positions last slot at line end (no categories)", function() {
+                    createCategoryAxis({ categories: []});
+                    var slot = categoryAxis.getSlot(Number.MAX_VALUE);
+                    arrayClose([slot.x1, slot.x2], [lineBox.x2, lineBox.x2], TOLERANCE);
+                });
+
                 // ------------------------------------------------------------
                 module("Category Axis / Vertical / Slots", {
                     setup: function() {
@@ -947,6 +953,12 @@
                 test("slot width is 0", function() {
                     var slot = categoryAxis.getSlot(0);
                     deepEqual(slot.width(), 0);
+                });
+
+                test("positions last slot at line end (no categories)", function() {
+                    createCategoryAxis({ vertical: true, categories: []});
+                    var slot = categoryAxis.getSlot(Number.MAX_VALUE);
+                    arrayClose([slot.y1, slot.y2], [lineBox.y2, lineBox.y2], TOLERANCE);
                 });
 
             })();

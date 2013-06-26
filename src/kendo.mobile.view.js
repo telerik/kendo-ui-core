@@ -123,17 +123,14 @@ kendo_module({
 
         updateParams: function(transition, params, callback) {
             // the newly passed parameters equal the last parameters of the view - we are going back
-            if (this.equalToPreviousParams(params)) {
+            // 1 -> 2 -> 1 is considered back navigation to self
+            if (this._paramsHistory[this._paramsHistory.length - 2] === JSON.stringify(params)) {
+                this._paramsHistory.pop();
                 this.nextViewID = this.id;
                 this.backTransition = this.transition;
             }
 
             this.switchWith(new ViewClone(this), transition, params, callback);
-        },
-
-
-        equalToPreviousParams: function(params) {
-            return this._paramsHistory[this._paramsHistory.length - 2] === JSON.stringify(params);
         },
 
         switchWith: function(view, transition, params, callback) {
@@ -148,12 +145,10 @@ kendo_module({
                 return;
             }
 
-            if (this.equalToPreviousParams(params)) {
-                paramsHistory.pop();
-                that._back = true;
-            } else {
+            that._back = paramsHistory[paramsHistory.length - 1] === JSON.stringify(params);
+
+            if (!that._back) {
                 paramsHistory.push(JSON.stringify(params));
-                that._back = false;
             }
 
             that.params = params;

@@ -18,6 +18,7 @@
         <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/kendo.dataviz.canvas.js"></script>
         <script type="text/javascript">
 
             var dataviz = kendo.dataviz,
@@ -66,6 +67,44 @@
 
                 test("transitions are disabled", function() {
                     ok(!sparkline.options.transitions);
+                });
+
+                // ------------------------------------------------------------
+                var factory;
+
+                module("Options / Canvas view", {
+                    setup: function() {
+                        factory = dataviz.ViewFactory.current;
+
+                        dataviz.ViewFactory.current = {
+                            create: function() {
+                                var view = new dataviz.CanvasView();
+                                view.renderTo = function () { };
+                                return view;
+                            }
+                        };
+                    },
+
+                    teardown: function() {
+                        dataviz.ViewFactory.current = factory;
+                    }
+                });
+
+                test("crosshair is disabled for non-interactive (canvas) view", function() {
+                    createSparkline();
+                    equal(sparkline.options.categoryAxis.crosshair.visible, false);
+                });
+
+                test("crosshair can't be enabled for canvas view", function() {
+                    createSparkline({
+                        categoryAxis: {
+                            crosshair: {
+                                visible: true
+                            }
+                        }
+                    });
+
+                    equal(sparkline.options.categoryAxis.crosshair.visible, false);
                 });
 
                 // ------------------------------------------------------------
