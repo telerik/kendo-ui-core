@@ -266,13 +266,14 @@
                     start: new Date(2013, 2, 31, 2, 0),
                     end: new Date(2013, 2, 31, 2, 30),
                     recurrenceRule: "FREQ=HOURLY;COUNT=3"
-                }
+                },
+                afterDstDate = new Date(2013, 2, 31, 3);
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 31), new Date(2013, 3, 1));
 
-                equal(events[0].start.getHours(), 2);
+                equal(events[0].start.getHours(), afterDstDate.getHours());
                 equal(events[0].start.getMinutes(), 0);
-                equal(events[0].end.getHours(), 2);
+                equal(events[0].end.getHours(), afterDstDate.getHours());
                 equal(events[0].end.getMinutes(), 30);
 
                 equal(events[0].startTime.getHours(), 3);
@@ -913,14 +914,15 @@
                     start: new Date(2013, 2, 29, 3, 0),
                     end: new Date(2013, 2, 29, 4, 0),
                     recurrenceRule: "FREQ=DAILY"
-                }
+                },
+                afterDstDate = new Date(2013, 2, 31, 3);
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
 
                 equal(events[0].start.getHours(), 3);
                 equal(events[0].startTime.getHours(), 3);
 
-                equal(events[1].start.getHours(), 2);
+                equal(events[1].start.getHours(), afterDstDate.getHours());
                 equal(events[1].startTime.getHours(), 3);
 
                 equal(events[2].start.getHours(), 3);
@@ -1289,14 +1291,16 @@
                     start: new Date(2013, 2, 24, 3, 0),
                     end: new Date(2013, 2, 24, 4, 0),
                     recurrenceRule: "FREQ=WEEKLY"
-                }
+                },
+                afterDstDate = new Date(2013, 2, 31, 3),
+                endHour = afterDstDate.getHours() < 3 ? 2 : 5;
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 20), new Date(2013, 3, 10));
 
-                equal(events[0].start.getHours(), 2);
+                equal(events[0].start.getHours(), afterDstDate.getHours());
                 equal(events[0].startTime.getHours(), 3);
 
-                equal(events[0].end.getHours(), 2);
+                equal(events[0].end.getHours(), endHour);
                 equal(events[0].endTime.getHours(), 4);
 
                 equal(events[1].start.getHours(), 3);
@@ -1510,14 +1514,18 @@
                     start: new Date(2013, 0, 31, 3, 0),
                     end: new Date(2013, 0, 31, 4, 0),
                     recurrenceRule: "FREQ=MONTHLY"
-                }
+                },
+                afterDstDate = new Date(2013, 2, 31, 3),
+                endHour = afterDstDate.getHours() < 3 ? 2 : 5;
+
+
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 5, 10));
 
-                equal(events[0].start.getHours(), 2);
+                equal(events[0].start.getHours(), afterDstDate.getHours());
                 equal(events[0].startTime.getHours(), 3);
 
-                equal(events[0].end.getHours(), 2);
+                equal(events[0].end.getHours(), endHour);
                 equal(events[0].endTime.getHours(), 4);
 
                 equal(events[1].start.getHours(), 3);
@@ -1797,14 +1805,16 @@
                     start: new Date(2012, 2, 31, 3, 0),
                     end: new Date(2012, 2, 31, 4, 0),
                     recurrenceRule: "FREQ=YEARLY"
-                }
+                },
+                afterDstDate = new Date(2013, 2, 31, 3),
+                endHour = afterDstDate.getHours() < 3 ? 2 : 5;
 
                 var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2014, 5, 10));
 
-                equal(events[0].start.getHours(), 2);
+                equal(events[0].start.getHours(), afterDstDate.getHours());
                 equal(events[0].startTime.getHours(), 3);
 
-                equal(events[0].end.getHours(), 2);
+                equal(events[0].end.getHours(), endHour);
                 equal(events[0].endTime.getHours(), 4);
 
                 equal(events[1].start.getHours(), 3);
