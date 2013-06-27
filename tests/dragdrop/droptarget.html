@@ -75,7 +75,7 @@
                         }
                     });
 
-                trigger("mousemove", { pageX: 1, pageY: 1 });
+                trigger("mousemove", { pageX: 1, pageY: 1, clientX: 1, clientY: 1 });
             });
 
             test("drop is raised", 1, function() {
