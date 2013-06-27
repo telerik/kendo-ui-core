@@ -53,7 +53,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>./run-all.sh &quot;http://127.0.0.1/staging/&quot;</command>
+      <command>./run-all.sh &quot;http://127.0.0.1/staging/&quot; Framework,UIWidgets,DataViz,ThemeBuilder,KendoCustom,Sushi,AeroViewr</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
