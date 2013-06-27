@@ -3,7 +3,7 @@ var PAGE_SIZE = 25, firstRun = true,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
     imgExtensionRegex = /\.(png|jpg|gif|jpeg)$/i,
-    DEFAULTIMAGEURL = "images/reddit-default.png",
+    DEFAULTIMAGEURL = "images/foxie.png",
     canvasScrollView;
 
 var awwDataSource = new kendo.data.DataSource({
@@ -137,7 +137,7 @@ function renderThumbs(element) {
     element.find(".loading-thumb").each(function() {
         var thumb = $(this).data("thumb");
         if (thumb === "default") {
-            thumb = "images/missing-thumb.png";
+            thumb = "images/foxie.png";
         }
         $(this).removeClass("loading-thumb").addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
     });
@@ -241,7 +241,7 @@ function updateSrc(e) {
 function onImageLoad(e) {
     var element = $("[data-url='" + e.target.src + "']");
     element.css("background-image", "url(" + e.target.src + ")");
-    element.addClass("loaded");
+    element.addClass("loaded").removeClass("faded");
 }
 
 function createImage(data) {
@@ -249,7 +249,7 @@ function createImage(data) {
         subreddit = data.subreddit,
         thumbnail = data.thumbnail,
         url = data.url,
-        imageTemplate = kendo.template('<div class="item-img faded" style="background-image: url(' + DEFAULTIMAGEURL + ');" data-url="#= data #"></div>');
+        imageTemplate = kendo.template('<div class="item-img faded" data-url="#= data #"></div>');
 
     if(url.match(imgExtensionRegex)) {
         return imageTemplate(url);
@@ -269,7 +269,7 @@ function createImage(data) {
 function createTile(data) {
     var url = data.url,
         imageTemplate = kendo.template('<div class="item-img" style="background-image: url(#= data #);"></div>'),
-        nonImageTemplate = kendo.template('<div><p>Image cannot be loaded</p><a data-role="button" data-rel="external" href="#= data #" target="_blank">Btn</a></div>');
+        nonImageTemplate = kendo.template('<div class="content"><p>Unable to load image<span>#= data #</span></p><a data-role="button" data-rel="external" href="#= data #" target="_blank">Open URL</a></div>');
 
     if(url.match(imgExtensionRegex)) {
         return imageTemplate(url);
