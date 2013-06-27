@@ -403,6 +403,16 @@ textarea.k-textbox:hover,
     background-color: @hover-background-color;
 }
 
+.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:hover,
+.k-button.k-state-disabled:active,
+.k-state-disabled .k-button:active
+{
+    color: @disabled-text-color;
+    border-color: @widget-border-color;
+    .composite-background(@widget-gradient);
+}
+
 .k-draghandle
 {
     border-color: @draghandle-border-color;
@@ -1408,6 +1418,11 @@ div.k-imagebrowser-dropzone em
     {
         color: @secondary-text-color;
     }
+	
+	&.k-popup.k-group
+	{
+		border-color: @group-border-color;
+	} 
 }
 
 .k-grid .k-grouping-header,
