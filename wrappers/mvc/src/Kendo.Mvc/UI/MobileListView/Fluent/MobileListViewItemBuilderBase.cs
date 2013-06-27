@@ -27,7 +27,7 @@
         /// <summary>
         /// Sets the text of the item.
         /// </summary>
-        /// <param name="attributes">Sets the text of the item.</param>
+        /// <param name="value">Sets the text of the item.</param>
         /// <returns></returns>
         public virtual TItemBuilder Text(string value)
         {

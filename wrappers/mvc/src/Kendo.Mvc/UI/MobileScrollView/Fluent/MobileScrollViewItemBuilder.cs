@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                   @&lt;text&gt;
         ///                           Some text
         ///                           &lt;strong&gt; View Content &lt;/strong&gt;
-        ///                   &lt;/text&gt      
+        ///                   &lt;/text&gt;      
         ///             )
         ///       )
         ///  )

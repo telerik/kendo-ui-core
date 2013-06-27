@@ -59,7 +59,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// (available since Q1 2013)
 		/// If set to true, the view will use the native scrolling available in the current platform. This should help with form issues on some platforms (namely Android and WP8).
-		/// Native scrolling is only enabled on platforms that support it: iOS > 4, Android > 2, WP8. BlackBerry devices do support it, but the native scroller is flaky.
+		/// Native scrolling is only enabled on platforms that support it: iOS &gt; 4, Android &gt; 2, WP8. BlackBerry devices do support it, but the native scroller is flaky.
         /// </summary>
         /// <param name="value">The value that configures the usenativescrolling.</param>
         public MobileViewBuilder UseNativeScrolling(bool value)

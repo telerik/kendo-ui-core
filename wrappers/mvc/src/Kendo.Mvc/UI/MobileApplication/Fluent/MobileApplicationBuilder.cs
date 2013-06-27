@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The text displayed in the loading popup. Setting this value to false will disable the loading popup.Note: The text should be wrapped inside <h1> tag.
+        /// The text displayed in the loading popup. Setting this value to false will disable the loading popup.Note: The text should be wrapped inside &lt;h1&gt; tag.
         /// </summary>
         /// <param name="value">The value that configures the loading.</param>
         public MobileApplicationBuilder Loading(string value)

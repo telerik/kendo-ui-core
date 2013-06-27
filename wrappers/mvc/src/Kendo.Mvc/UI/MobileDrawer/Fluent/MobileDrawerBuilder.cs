@@ -46,6 +46,7 @@ namespace Kendo.Mvc.UI.Fluent
         
         //<< Fields
 
+        /// <summary>
         /// Sets the HTML content which the header should display.
         /// </summary>
         /// <param name="value">The action which renders the header.</param>
