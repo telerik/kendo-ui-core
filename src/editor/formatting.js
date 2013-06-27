@@ -88,14 +88,14 @@ var FormattingTool = DelayedExecutionTool.extend({
     },
 
     initialize: function(ui, initOptions) {
-        var editor = initOptions.editor,
-            options = this.options,
-            toolName = options.name,
-            that = this;
+        var editor = initOptions.editor;
+        var options = this.options;
+        var toolName = options.name;
+        var that = this;
 
         ui.width(options.width);
 
-        new Editor.SelectBox(ui, {
+        ui.kendoSelectBox({
             dataTextField: "text",
             dataValueField: "value",
             dataSource: options.items || editor.options[toolName],

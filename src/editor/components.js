@@ -12,6 +12,11 @@ var SelectBox = DropDownList.extend({
 
         that.value(that.options.title);
 
+        // overlay drop-down with popout for snappier interaction
+        if (kendo.support.mobileOS.ios) {
+            that._initSelectOverlay(element);
+        }
+
         that.bind("open", function() {
             if (that.options.autoSize) {
                 var list = that.list,
@@ -39,6 +44,43 @@ var SelectBox = DropDownList.extend({
     options: {
         name: "SelectBox"
     },
+
+    _initSelectOverlay: function(element) {
+        element = $(element);
+
+        var select = $("<select class='k-select-overlay' />");
+        var wrapper = element.closest(".k-widget");
+        var selectBox = element.data(this.type).kendoSelectBox;
+
+        select.on("change", function(e) {
+            selectBox.value(this.value);
+            selectBox.trigger("change");
+        });
+
+        this.bind("dataBound", function() {
+            var value = selectBox.value();
+            var view = this.dataSource.view();
+            var item;
+            var html = "";
+
+            for (var i = 0; i < view.length; i++) {
+                item = view[i];
+
+                html += "<option value='" + item.value + "'";
+
+                if (item.value == value) {
+                    html += " selected";
+                }
+
+                html += ">" + item.text + "</option>";
+            }
+
+            select.html(html);
+        });
+
+        select.insertAfter(wrapper);
+    },
+
     value: function(value) {
         var that = this,
             result = DropDownList.fn.value.call(that, value);
