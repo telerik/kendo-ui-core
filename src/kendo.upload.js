@@ -392,6 +392,7 @@ kendo_module({
                     that.trigger(CANCEL, eventArgs);
                     that._module.onCancel({ target: $(fileEntry, that.wrapper) });
                     this._checkAllComplete();
+                    that._updateHeaderUploadStatus();
                 } else if (icon.hasClass("k-retry")) {
                     $(".k-warning", fileEntry).remove();
                     that._module.onRetry({ target: $(fileEntry, that.wrapper) });
