@@ -275,7 +275,7 @@ kendo_module({
                 editArea = editorWrap.find(".k-editable-area");
 
             textarea.attr("autocomplete", "off")
-                .appendTo(editArea).addClass("k-content k-raw-content").hide();
+                .appendTo(editArea).addClass("k-content k-raw-content").css("display", "none");
 
             $(document).on("DOMNodeInserted", proxy(that._DOMNodeInserted, that));
 
