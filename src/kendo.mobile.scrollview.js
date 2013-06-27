@@ -311,7 +311,6 @@ kendo_module({
 
         _viewShow: function() {
             var that = this;
-
             if(that._pendingWidgetRefresh) {
                 setTimeout(function() {
                     that._resetPages();
@@ -340,7 +339,7 @@ kendo_module({
             this._endReachedProxy = proxy(this, "_onEndReached");
 
             this.buffer.bind({
-                "resize": this._resetProxy,
+                "resize": this._resizeProxy,
                 "reset": this._resetProxy,
                 "endreached": this._endReachedProxy
             });
@@ -580,7 +579,6 @@ kendo_module({
 
             that.inner = element.children().first();
             that.page = 0;
-
             that.inner.css("height", that.options.contentHeight);
             that.container().bind("show", proxy(this, "viewShow")).bind("init", proxy(this, "viewInit"));
 
