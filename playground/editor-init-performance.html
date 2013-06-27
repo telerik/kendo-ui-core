@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Editor playground</title>
+
+    <meta name="viewport" content="width=device-width,user-scalable=1,initial-scale=1.0" />
+
+    <link rel="stylesheet/less" href="../styles/web/kendo.common.less" />
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less">
+    <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css">
+
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+    <script src="../src/jquery.js"></script>
+    <script src="../src/module.js"></script>
+    <!-- <script src="../src/kendo.core.js"></script> -->
+    <!-- <script src="../src/kendo.data.js"></script> -->
+    <!-- <script src="../src/kendo.draganddrop.js"></script> -->
+    <!-- <script src="../src/kendo.binder.js"></script> -->
+    <!-- <script src="../src/kendo.popup.js"></script> -->
+    <!-- <script src="../src/kendo.list.js"></script> -->
+    <!-- <script src="../src/kendo.dropdownlist.js"></script> -->
+    <!-- <script src="../src/kendo.combobox.js"></script> -->
+    <!-- <script src="../src/kendo.fx.js"></script> -->
+    <!-- <script src="../src/kendo.window.js"></script> -->
+
+    <!-- <script src="../src/kendo.editor.js"></script> -->
+
+    <script src="../src/editor/main.js"></script>
+    <script src="../src/editor/dom.js"></script>
+    <script src="../src/editor/serializer.js"></script>
+    <script src="../src/editor/range.js"></script>
+    <script src="../src/editor/system.js"></script>
+    <script src="../src/editor/inlineformat.js"></script>
+    <script src="../src/editor/formatblock.js"></script>
+    <script src="../src/editor/linebreak.js"></script>
+    <script src="../src/editor/lists.js"></script>
+    <script src="../src/editor/link.js"></script>
+    <script src="../src/editor/image.js"></script>
+    <script src="../src/editor/components.js"></script>
+    <script src="../src/editor/indent.js"></script>
+    <script src="../src/editor/viewhtml.js"></script>
+    <script src="../src/editor/formatting.js"></script>
+    <script src="../src/editor/toolbar.js"></script>
+    <script src="../src/editor/tables.js"></script>
+
+    <style>
+        html, body {
+            font: 12px/1.5 Tahoma,sans-serif;
+        }
+
+        .foo { display: inline-block; }
+    </style>
+</head>
+<body>
+    <div id="page">
+        <textarea id="comment" style="display:none"></textarea>
+
+        <div id="content"></div>
+    </div>
+
+    <script>
+        var editor;
+
+        var body = document.body;
+
+        for (var i = 0; i < 10000; i++) {
+            $("<div class='foo'>text</div>").appendTo(body);
+        }
+
+        var start = new Date();
+        console.profile("editor init");
+        for (var i = 0; i < 10; i++) {
+            $("#comment").clone().appendTo(body).kendoEditor({
+                value: "<p>foo bar baz</p>"
+            });
+        }
+        console.profileEnd();
+        console.log("elapsed:", new Date().getTime() - start.getTime());
+
+    </script>
+</body>
+</html>
