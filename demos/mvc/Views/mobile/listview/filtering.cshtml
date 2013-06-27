@@ -1,4 +1,4 @@
-<div data-role="view" data-init="mobileListViewEndlessScrolling" data-title="Scroll down to load">
+<div data-role="view" data-init="mobileListViewFiltering" data-title="Scroll down to load">
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
@@ -6,7 +6,7 @@
         </div>
     </header>
 
-    <ul id="endless-scrolling"></ul>
+    <ul id="filterable-listview"></ul>
 </div>
 
 <script type="text/x-kendo-tmpl" id="template">
@@ -18,7 +18,7 @@
 </script>
 
 <script>
-    function mobileListViewEndlessScrolling() {
+    function mobileListViewFiltering() {
         var dataSource = new kendo.data.DataSource({
             type: "odata",
             transport: {
@@ -36,7 +36,7 @@
             pageSize: 30
         });
 
-        $("#endless-scrolling").kendoMobileListView({
+        $("#filterable-listview").kendoMobileListView({
             dataSource: dataSource,
             template: $("#template").text(),
             filterable: {
@@ -68,5 +68,5 @@
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }    
+    }
 </style>
