@@ -48,7 +48,7 @@
 
             function startDrag() {
                 var offset = kendo.getOffset(targetElement);
-                trigger("mousedown", { pageX: 1, pageY: 1 });
+                trigger("mousedown", { pageX: 1, pageY: 1, clientX: 1, clientY: 1 });
 
                 trigger("mousemove", {
                     pageX: offset.left,
@@ -83,7 +83,7 @@
                         }
                     });
 
-                trigger("mousemove", { pageX: 0, pageY: 0 });
+                trigger("mousemove", { pageX: 0, pageY: 0, clientY: 0, clientX: 0 });
             });
 
             test("drop is raised and the dropTarget", 2, function() {
