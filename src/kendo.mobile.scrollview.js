@@ -84,6 +84,7 @@ kendo_module({
     kendo.mobile.ui.ScrollViewPager = Pager;
 
     var TRANSITION_END = "transitionEnd",
+        DRAG_START = "dragStart",
         DRAG_END = "dragEnd";
 
     var ElasticPane = kendo.Observable.extend({
@@ -120,10 +121,10 @@ kendo_module({
                         userEvents.cancel();
                     }
 
+                    that.trigger(DRAG_START, e);
                     transition.cancel();
                 },
                 allowSelection: true,
-
                 end: function(e) {
                     that.trigger(DRAG_END, e);
                 }
@@ -157,7 +158,7 @@ kendo_module({
                 pane: pane
             });
 
-            this.bind([TRANSITION_END, DRAG_END, CHANGE], options);
+            this.bind([TRANSITION_END, DRAG_START, DRAG_END, CHANGE], options);
         },
 
         size: function() {
@@ -251,6 +252,10 @@ kendo_module({
             }
 
             return false;
+        },
+
+        forcePageUpdate: function() {
+            return this.updatePage();
         },
 
         resizeTo: function(width) {
@@ -458,6 +463,18 @@ kendo_module({
             return true;
         },
 
+        forcePageUpdate: function() {
+            var page = this.page,
+                offset = this.pane.offset(),
+                threshold = this.pane.size() - this.pane.size() / 4;
+
+            if(abs(offset) > threshold) {
+                return this.updatePage();
+            }
+
+            return false;
+        },
+
         _resetMovable: function() {
             this.pane.moveTo(0);
         },
@@ -546,8 +563,11 @@ kendo_module({
             this.element.html(theContent);
         },
 
-        position: function(position) { //position can be -1, 0, 1
-            this.element.css("transform", "translate3d(" + this.width * position + "px, 0, 0)");
+        position: function(position, offset) { //position can be -1, 0, 1
+            var offset = offset || 0;
+                x = this.width * position + offset;
+
+            this.element.css("transform", "translate3d(" + x + "px, 0, 0)");
         },
 
         setWidth: function(width) {
@@ -585,6 +605,7 @@ kendo_module({
             that.pane = new ElasticPane(that.inner, {
                 duration: this.options.duration,
                 transitionEnd: proxy(this, "_transitionEnd"),
+                dragStart: proxy(this, "_dragStart"),
                 dragEnd: proxy(this, "_dragEnd"),
                 change: proxy(this, REFRESH)
             });
@@ -656,6 +677,12 @@ kendo_module({
 
             this.page = this._content.page;
             this.trigger(CHANGE, { page: this.page, element: pages ? pages[1].element : undefined });
+        },
+
+        _dragStart: function(e) {
+            if (this._content.forcePageUpdate()) {
+                this._syncWithContent();
+            }
         },
 
         _dragEnd: function(e) {
