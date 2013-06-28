@@ -514,7 +514,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Scheduler"/>.
+        /// Creates a new <see cref="Scheduler{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -522,8 +522,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///             .Name("Scheduler")
         /// %&gt;
         /// </code>
-        /// </example><T>
-        /// 
+        /// </example>
         public virtual SchedulerBuilder<T> Scheduler<T>() where T : class, ISchedulerEvent
         {
             return new SchedulerBuilder<T>(new Scheduler<T>(ViewContext, Initializer, UrlGenerator));

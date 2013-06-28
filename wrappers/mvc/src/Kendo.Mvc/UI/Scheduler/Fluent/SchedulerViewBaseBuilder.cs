@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="SchedulerViewBaseBuilder"/>.
+    /// Defines the fluent interface for configuring the <see cref="SchedulerViewBaseBuilder{T}"/>.
     /// </summary>
     public class SchedulerViewBaseBuilder<T> : ISchedulerViewBuilder
         where T : class, ISchedulerView
@@ -11,7 +11,7 @@
         protected readonly T resource;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchedulerViewDayBuilder"/> class.
+        /// Initializes a new instance of the <see cref="SchedulerViewBaseBuilder{T}"/> class.
         /// </summary>
         /// <param name="resource">The resource</param>
         /// 

@@ -5,13 +5,13 @@
     using System.Linq;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="Scheduler"/>.
+    /// Defines the fluent interface for configuring the <see cref="Scheduler{TModel}"/>.
     /// </summary>
     public class SchedulerBuilder<TModel> : WidgetBuilderBase<Scheduler<TModel>, SchedulerBuilder<TModel>> where TModel : class, ISchedulerEvent
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Scheduler"/> class.
+        /// Initializes a new instance of the <see cref="SchedulerBuilder{TModel}"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
         public SchedulerBuilder(Scheduler<TModel> component)
@@ -439,7 +439,7 @@
         /// <summary>
         /// Sets the editing configuration of the scheduler.
         /// </summary>
-        /// <param name="editableSettings">The lambda which configures the editing</param>
+        /// <param name="configurator">The lambda which configures the editing</param>
         /// <example>
         /// <code lang="Razor">
         /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()

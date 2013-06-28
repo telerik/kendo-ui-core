@@ -136,7 +136,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The start time of the view. The scheduler will display events starting after the startTime.
         /// </summary>
-        /// <param name="starTime">The startTime</param>
+        /// <param name="startTime">The startTime</param>
         /// <example>
         /// <code lang="Razor">
         /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
