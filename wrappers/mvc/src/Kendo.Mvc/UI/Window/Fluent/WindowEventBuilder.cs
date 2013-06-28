@@ -328,7 +328,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowEventBuilder Error(string handler)
         {
-            Handler("refresh", handler);
+            Handler("error", handler);
 
             return this;
         }
@@ -347,7 +347,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowEventBuilder Error(Func<object, object> handler)
         {
-            Handler("refresh", handler);
+            Handler("error", handler);
 
             return this;
         }
