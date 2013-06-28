@@ -9,6 +9,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
+    using System.Text.RegularExpressions;
 
     public class MobileApplication : WidgetBase
     {
@@ -90,8 +91,9 @@ namespace Kendo.Mvc.UI
                 options.Add("pushState", PushState);
                 var url = new System.Web.Mvc.UrlHelper(ViewContext.RequestContext);
                 var routeData = ViewContext.RequestContext.RouteData.Values;
+                var root = url.Action(string.Empty, routeData);                
                 
-                options.Add("root", url.Action(string.Empty, routeData) + "/");                        
+                options.Add("root",  Regex.Replace(root, "/$", "/"));                        
             }
 
             writer.Write(String.Format("jQuery(function(){{ new kendo.mobile.Application(jQuery({0}), {1}); }});", container, Initializer.Serialize(options)));
