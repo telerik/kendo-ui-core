@@ -375,6 +375,8 @@ kendo_module({
                 e.preventDefault();
             });
 
+            that._resizable();
+
             $(window).on("resize" + NS, that._resizeHandler);
         },
 
@@ -450,6 +452,99 @@ kendo_module({
 
         items: function() {
             return this.wrapper.children(".k-event, .k-task");
+        },
+
+        _resizable: function() {
+            var startSlot;
+            var event;
+            var that = this;
+
+            var hint = $('<div style="position:absolute;border:1px solid black; background:black; opacity: 0.5">' +
+                    '<div style="position:absolute;top:2px;left:2px;color:white"></div>' +
+                    '<div style="position:absolute;bottom:2px;right:2px;color:white"></div>' +
+                '</div>'
+            );
+
+            that.element.kendoDraggable({
+                distance: 0,
+                filter: ".k-resize-handle",
+                dragstart: function(e) {
+                    var dragHandle = $(e.currentTarget);
+
+                    var eventElement = dragHandle.closest(".k-event");
+
+                    event = that.dataSource.getByUid(eventElement.attr(kendo.attr("uid")));
+
+                    startSlot = that.view()._slotByPosition(e.x.location, e.y.location);
+
+                    hint.css({
+                        left: startSlot.offsetLeft + 1,
+                        top: eventElement[0].offsetTop,
+                        width: startSlot.clientWidth - 3,
+                        height: eventElement[0].clientHeight
+                    })
+                    .find("div:first").text(kendo.toString(event.start, "t"))
+                    .end()
+                    .find("div:last").text(kendo.toString(event.end, "t"))
+                    .end()
+                    .appendTo(that.view().content);
+                },
+                drag: function(e) {
+                    var dragHint = $(e.currentTarget);
+                    var eventElement = dragHint.closest(".k-event");
+
+                    var slot = that.view()._slotByPosition(e.x.location, e.y.location);
+
+                    var height = eventElement[0].clientHeight;
+
+                    if (dragHint.is(".k-resize-s")) {
+                        height += slot.offsetTop - startSlot.offsetTop;
+
+                        hint.css({
+                                height: height
+                            })
+                            .find("div:last")
+                            .text(kendo.toString(slot.end, "t"));
+                    } else if (dragHint.is(".k-resize-n")){
+                        height += startSlot.offsetTop - slot.offsetTop;
+                        hint.css({
+                                top: slot.offsetTop,
+                                height: height
+                            })
+                            .find("div:first")
+                            .text(kendo.toString(slot.start, "t"));
+                    }
+                },
+                dragend: function(e) {
+                    var dragHandle = $(e.currentTarget);
+
+                    var endSlot = that.view()._slotByPosition(e.x.location, e.y.location);
+                    var start = event.start;
+                    var end = event.end;
+
+                    if (dragHandle.is(".k-resize-s")) {
+                        end = endSlot.end;
+                    } else if (dragHandle.is(".k-resize-n")) {
+                        start = endSlot.start;
+                    }
+
+                    hint.remove();
+
+                    if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
+                        that._updateEvent(event, { start: start, end: end });
+                    }
+                }
+            });
+        },
+
+        _updateEvent: function(event, eventInfo) {
+            for (var field in eventInfo) {
+                event.set(field, eventInfo[field]);
+            }
+
+            if (!this.trigger(SAVE, { model: event })) {
+                this.dataSource.sync();
+            }
         },
 
         _modelForContainer: function(container) {
