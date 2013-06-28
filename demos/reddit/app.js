@@ -65,7 +65,7 @@ var canvasDataSource = new kendo.data.DataSource({
 // var ds = new kendo.data.DataSource({
 //     transport: {
 //         read: function(options) {
-//
+// 
 //             var results = [], data = options.data;
 //             for (var i = data.skip; i < data.skip + data.take; i ++) {
 //                 results.push({ foo: i });
@@ -106,30 +106,61 @@ function navigateTo(dataItem) {
 }
 
 function resetDetail(e) {
-    e.view.element.find("img").attr("src", '');
+    var element = e.view.element;
+
+    element.find(".detail-text").empty();
+    element.find("img").attr("src", '');
+    app.hideLoading();
 }
 
 function renderDetail(e) {
     var view = e.view,
         id = view.params.id,
-        element = view.element;
+        element = view.element,
+        template = kendo.template("#=data.title#<br/><br/><span>by <a target='_blank' href='http://www.reddit.com/user/#=data.author#'>#=data.author#</a> | <a target='_blank' href='http://www.reddit.com#=data.permalink#'>#=data.num_comments# comments</a></span>");
 
+    app.showLoading();
     $.ajax('http://reddit.com/api/info.json', {
         data: { id: id },
         dataType: 'jsonp',
         jsonp: 'jsonp',
         success: function(data) {
-            var url = data.data.children[0].data.url;
+            data = data.data.children[0].data;
+
+            var url = data.url,
+                text = element.find(".detail-text"),
+                img = element.find('img');
+
             if(!imgExtensionRegex.test(url)) {
                 url += '.jpg';
             }
 
-            var img = element.find('img');
+            text.html(template(data));
+            kendo.fx(text).fadeIn().play();
+
             img.css('visibility', 'hidden').attr('src', url).one('load', function() {
-                img.css('visibility', 'visible');
-                view.scroller.zoomOut();
+                view.element.find(".detail-image").data("kendoMobileScroller").zoomOut();
+                img.css({
+                    'visibility': 'visible',
+                    'display': 'none'
+                }).width("100%");
+                app.hideLoading();
+
+                kendo.fx(img).fadeIn().play();
             });
         }
+    });
+}
+
+function renderThumbs(element) {
+    element.find(".loading-thumb").each(function() {
+        var thumb = $(this).data("thumb");
+        if (thumb === "default") {
+            thumb = DEFAULTIMAGEURL;
+        } else {
+            $(this).removeClass("loading-thumb");
+        }
+        $(this).addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
     });
 }
 

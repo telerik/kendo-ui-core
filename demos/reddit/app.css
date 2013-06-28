@@ -50,6 +50,11 @@
     display: inline-block;
 }
 
+.loading-thumb {
+    background-color: #ccc;
+    background-size: 70% 70%;
+}
+
 #aww li:not(.press-to-load-more) {
     padding: 0;
 }
@@ -103,6 +108,7 @@
     -webkit-backface-visibility: hidden;
 }
 
+#detail .km-content,
 #canvas .km-content,
 #canvas-detail .km-content {
     background: #363940;
@@ -156,6 +162,26 @@
 .detailed-img .km-button {
     color: #fff;
     background-color: #10c4b2;
+}
+
+.detail-image {
+    width: 100%;
+    height: 85%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.detail-image img {
+    width: 100%;
+}
+
+.detail-text {
+    width: 100%;
+    height: 15%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 [data-icon=comments] {

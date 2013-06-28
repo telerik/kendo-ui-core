@@ -47,7 +47,7 @@
             </ul>
         </div>
 
-        <div data-role="view" id="detail" data-transition="slide" data-after-show="renderDetail" data-zoom="true" data-title="" data-hide="resetDetail">
+        <div data-role="view" id="detail" data-transition="slide" data-after-show="renderDetail" data-title="" data-hide="resetDetail" data-stretch="true">
             <header data-role="header">
                 <div data-role="navbar">
                     <button data-role="backbutton" data-align="left" href="#list">Back</button>
@@ -55,7 +55,8 @@
                 </div>
             </header>
 
-            <img />
+            <div class="detail-image" data-role="scroller" data-zoom="true"><img /></div>
+            <div class="detail-text"></div>
         </div>
 
         <div data-role="view" id="canvas" data-transition="slide" data-stretch="true" data-title="Canvas View" data-init="canvasInit" data-show="canvasShow">
