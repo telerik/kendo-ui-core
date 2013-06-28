@@ -222,6 +222,11 @@ var GreedyBlockFormatter = Class.extend({
             i, len, list, formatter, range,
             element;
 
+        if (blocks.length && blocks[0].attributes.contentEditable) {
+            // do not break out of contentEditable elements
+            blocks = [];
+        }
+
         if (blocks.length) {
             for (i = 0, len = blocks.length; i < len; i++) {
                 if (dom.is(blocks[i], "li")) {
