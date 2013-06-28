@@ -89,7 +89,7 @@ var LinkCommand = Command.extend({
         }
     },
 
-    _dialogTemplate: function(showText) {
+    _dialogTemplate: function() {
         return kendo.template(
             '<div class="k-editor-dialog">' +
                 "<ol>" +
@@ -97,12 +97,10 @@ var LinkCommand = Command.extend({
                         "<label for='k-editor-link-url'>#: messages.linkWebAddress #</label>" +
                         "<input type='text' class='k-input' id='k-editor-link-url'>" +
                     "</li>" +
-                    "# if (showText) { #" +
-                        "<li class='k-form-text-row'>" +
-                            "<label for='k-editor-link-text'>#: messages.linkText #</label>" +
-                            "<input type='text' class='k-input' id='k-editor-link-text'>" +
-                        "</li>" +
-                    "# } #" +
+                    "<li class='k-form-text-row'>" +
+                        "<label for='k-editor-link-text'>#: messages.linkText #</label>" +
+                        "<input type='text' class='k-input' id='k-editor-link-text'>" +
+                    "</li>" +
                     "<li class='k-form-text-row'>" +
                         "<label for='k-editor-link-title'>#: messages.linkToolTip #</label>" +
                         "<input type='text' class='k-input' id='k-editor-link-title'>" +
@@ -119,8 +117,7 @@ var LinkCommand = Command.extend({
                 "</div>" +
             "</div>"
         )({
-            messages: this.editor.options.messages,
-            showText: showText
+            messages: this.editor.options.messages
         });
     },
 
@@ -182,9 +179,7 @@ var LinkCommand = Command.extend({
 
         var a = nodes.length ? that.formatter.finder.findSuitable(nodes[0]) : null;
 
-        var showText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
-
-        var dialog = this.createDialog(that._dialogTemplate(showText), {
+        var dialog = this.createDialog(that._dialogTemplate(), {
             title: messages.createLink,
             close: close,
             visible: false
@@ -207,7 +202,7 @@ var LinkCommand = Command.extend({
             .data("kendoWindow")
             .center().open();
 
-        if (showText && nodes.length > 0 && !collapsed) {
+        if (nodes.length > 0 && !collapsed) {
             initialText = $("#k-editor-link-text", dialog.element).val();
         }
 
