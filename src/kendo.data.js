@@ -3232,7 +3232,7 @@ kendo_module({
                 dataSource = this,
                 result;
 
-            if (parentNode) {
+            if (parentNode && parentNode._initChildren) {
                 dataSource = parentNode.children;
             }
 
