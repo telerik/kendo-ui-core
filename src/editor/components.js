@@ -52,7 +52,7 @@ var SelectBox = DropDownList.extend({
         var wrapper = element.closest(".k-widget");
         var selectBox = element.data(this.type).kendoSelectBox;
 
-        select.on("change", function(e) {
+        select.on("change", function() {
             selectBox.value(this.value);
             selectBox.trigger("change");
         });
