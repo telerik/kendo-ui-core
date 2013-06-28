@@ -45,6 +45,8 @@ $multiselect = new \Kendo\UI\MultiSelect('products');
 $multiselect->dataSource($dataSource)
             ->dataTextField('ProductName')
             ->dataValueField('ProductID')
+            ->value(array(array("ProductName"=>"Chang","ProductID"=>"2"),array("ProductName"=>"Uncle Bob's Organic Dried Pears","ProductID"=>"7")))
+            ->autoBind(false)
             ->filter('contains')
             ->ignoreCase(false);
 
