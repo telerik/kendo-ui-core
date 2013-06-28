@@ -450,15 +450,20 @@ kendo_module({
         },
 
         center: function () {
-            var wrapper = this.wrapper,
+            var that = this,
+                wrapper = that.wrapper,
                 documentWindow = $(window);
+
+            if (that.options.isMaximized) {
+                return that;
+            }
 
             wrapper.css({
                 left: documentWindow.scrollLeft() + Math.max(0, (documentWindow.width() - wrapper.width()) / 2),
                 top: documentWindow.scrollTop() + Math.max(0, (documentWindow.height() - wrapper.height()) / 2)
             });
 
-            return this;
+            return that;
         },
 
         title: function (text) {
