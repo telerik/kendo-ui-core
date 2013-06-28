@@ -464,8 +464,7 @@ kendo_module({
         },
 
         forcePageUpdate: function() {
-            var page = this.page,
-                offset = this.pane.offset(),
+            var offset = this.pane.offset(),
                 threshold = this.pane.size() - this.pane.size() / 4;
 
             if(abs(offset) > threshold) {
@@ -563,11 +562,8 @@ kendo_module({
             this.element.html(theContent);
         },
 
-        position: function(position, offset) { //position can be -1, 0, 1
-            var offset = offset || 0;
-                x = this.width * position + offset;
-
-            this.element.css("transform", "translate3d(" + x + "px, 0, 0)");
+        position: function(position) { //position can be -1, 0, 1
+            this.element.css("transform", "translate3d(" + this.width * position + "px, 0, 0)");
         },
 
         setWidth: function(width) {
@@ -679,7 +675,7 @@ kendo_module({
             this.trigger(CHANGE, { page: this.page, element: pages ? pages[1].element : undefined });
         },
 
-        _dragStart: function(e) {
+        _dragStart: function() {
             if (this._content.forcePageUpdate()) {
                 this._syncWithContent();
             }
