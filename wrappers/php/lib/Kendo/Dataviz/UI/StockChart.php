@@ -10,7 +10,7 @@ class StockChart extends \Kendo\UI\Widget {
 
     /**
     * The field containing the point date.
-It is used as a default field for all date axes, including the navigator pane.The data item field value must be either:
+It is used as a default categoryField for all series.The data item field value must be either:
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChart
     */
@@ -170,24 +170,6 @@ This is the entire visible area of the chart.
     */
     public function addValueAxisItem($value) {
         return $this->add('valueAxis', func_get_args());
-    }
-
-    /**
-    * Adds StockChartXAxisItem to the StockChart.
-    * @param \Kendo\Dataviz\UI\StockChartXAxisItem|array,... $value one or more StockChartXAxisItem to add.
-    * @return \Kendo\Dataviz\UI\StockChart
-    */
-    public function addXAxisItem($value) {
-        return $this->add('xAxis', func_get_args());
-    }
-
-    /**
-    * Adds StockChartYAxisItem to the StockChart.
-    * @param \Kendo\Dataviz\UI\StockChartYAxisItem|array,... $value one or more StockChartYAxisItem to add.
-    * @return \Kendo\Dataviz\UI\StockChart
-    */
-    public function addYAxisItem($value) {
-        return $this->add('yAxis', func_get_args());
     }
 
     /**

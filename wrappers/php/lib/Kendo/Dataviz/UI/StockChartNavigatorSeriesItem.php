@@ -15,7 +15,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * The series line dash type.** Applicable only to line series **
+    * The dash type of line chart.The following dash types are supported:
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
@@ -52,7 +52,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
 
     /**
     * Sets the groupNameTemplate option of the StockChartNavigatorSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
+    * The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
@@ -64,7 +64,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
 
     /**
     * Sets the groupNameTemplate option of the StockChartNavigatorSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
+    * The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
