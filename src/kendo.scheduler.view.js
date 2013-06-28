@@ -387,21 +387,24 @@ kendo_module({
     }
 
     function rangeIndex(eventElement) {
-        var element = eventElement.length ? eventElement[0] : eventElement;
-
-        var index = element.getAttribute(kendo.attr("start-end-idx")).split("-");
-
         return {
-            start: +index[0],
-            end: +index[1]
+            start: eventElement.start,
+            end: eventElement.end
         };
     }
 
     function eventsForSlot(elements, slotStart, slotEnd) {
-        return elements.filter(function() {
-            var event = rangeIndex(this);
-            return (event.start < slotStart && event.end > slotStart) || (event.start >= slotStart && event.end <= slotEnd);
-        });
+        var events = [];
+
+        for (var idx = 0; idx < elements.length; idx++) {
+            var event = rangeIndex(elements[idx]);
+
+            if ((event.start < slotStart && event.end > slotStart) || (event.start >= slotStart && event.end <= slotEnd)) {
+                events.push(elements[idx]);
+            }
+        }
+
+        return events;
     }
 
     function createColumns(eventElements) {
@@ -415,10 +418,10 @@ kendo_module({
     function _createColumns(eventElements, isHorizontal) {
         var columns = [];
 
-        eventElements.each(function() {
-            var event = this,
-                eventRange = rangeIndex(event),
-                column;
+        for (var idx = 0; idx < eventElements.length; idx++) {
+            var event = eventElements[idx];
+            var eventRange = rangeIndex(event);
+            var column = null;
 
             for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
                 var endOverlaps = isHorizontal ? eventRange.start > columns[j].end : eventRange.start >= columns[j].end;
@@ -441,7 +444,7 @@ kendo_module({
             }
 
             column.events.push(event);
-        });
+        }
 
         return columns;
     }
