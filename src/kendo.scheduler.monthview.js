@@ -16,7 +16,7 @@ kendo_module({
         getDate = kendo.date.getDate,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
         DAY_TEMPLATE = kendo.template('<span class="k-link k-nav-day">#=kendo.toString(date, "dd")#</span>'),
-        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#" data-#=ns#start-end-idx="#=startIndex#-#=endIndex#"' +
+        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                 'style="background-color:#=resources[0].color #"' +
                 '#}#' +
@@ -46,7 +46,7 @@ kendo_module({
                 '</div>');
 
     var MORE_BUTTON_TEMPLATE = kendo.template(
-        '<div style="width:#=width#px;left:#=left#px;top:#=top#px" class="k-more-events k-button" data-#=ns#start-end-idx=#=start#-#=end#><span>...</span></div>'
+        '<div style="width:#=width#px;left:#=left#px;top:#=top#px" class="k-more-events k-button"><span>...</span></div>'
     );
 
     ui.MonthView = SchedulerView.extend({
@@ -62,6 +62,8 @@ kendo_module({
             that._editable();
 
             that._renderLayout(that.options.date);
+
+            that._slots();
         },
 
         _templates: function() {
@@ -109,16 +111,11 @@ kendo_module({
 
             this.refreshLayout();
 
-            this.content.on("click" + NS, ".k-nav-day", function(e) {
-               var cell = $(e.currentTarget).closest("td");
-               that.trigger("navigate", { view: "day", date: that._rangeToDates(cell).start });
-            });
+            this.content.on("click" + NS, ".k-nav-day,.k-more-events", function(e) {
+               var offset = $(e.currentTarget).offset();
+               var slot = that._slotByPosition(offset.left, offset.top);
 
-            this.content.on("click" + NS, ".k-more-events", function(e) {
-               var index = SchedulerView.rangeIndex($(e.currentTarget)).start,
-                   date = kendo.date.addDays(that.startDate(), index);
-
-               that.trigger("navigate", { view: "day", date: date });
+               that.trigger("navigate", { view: "day", date: slot.start });
             });
         },
 
@@ -286,17 +283,19 @@ kendo_module({
             var eventHeight = this.options.eventHeight;
             var startSlot = slots[startIndex];
             var eventCount = startSlot.eventCount;
-            var events = SchedulerView.collidingHorizontallyEvents(this.content.find(".k-event"), startIndex, endIndex).add(element);
+            var events = SchedulerView.collidingHorizontallyEvents(this._row.events, startIndex, endIndex);
             var rightOffset = startIndex !== endIndex ? 5 : 4;
+
+            events.push({element: element, start: startIndex, end: endIndex });
 
             var rows = SchedulerView.createRows(events);
 
             for (var idx = 0, length = Math.min(rows.length, eventCount); idx < length; idx++) {
                 var rowEvents = rows[idx].events;
-                var eventTop = startSlot.top + idx * eventHeight + 3 * idx + "px";
+                var eventTop = startSlot.offsetTop + startSlot.firstChildHeight + idx * eventHeight + 3 * idx + "px";
 
                 for (var j = 0, eventLength = rowEvents.length; j < eventLength; j++) {
-                    rowEvents[j].style.top = eventTop;
+                    rowEvents[j].element[0].style.top = eventTop;
                 }
             }
 
@@ -310,12 +309,14 @@ kendo_module({
                     start: startIndex,
                     end: endIndex,
                     width: startSlot.clientWidth - 2,
-                    left: startSlot.left,
-                    top: startSlot.top + eventCount * eventHeight + 3 * eventCount
+                    left: startSlot.offsetLeft,
+                    top: startSlot.offsetTop + startSlot.firstChildHeight + eventCount * eventHeight + 3 * eventCount
                 }));
             } else {
+                this._row.events.push({element: element, start: startIndex, end: endIndex });
+
                 element[0].style.width = this._calculateAllDayEventWidth(slots, startIndex, endIndex) - rightOffset + "px";
-                element[0].style.left = startSlot.left + "px";
+                element[0].style.left = startSlot.offsetLeft + "px";
                 element[0].style.height = eventHeight + "px";
             }
 
@@ -381,6 +382,60 @@ kendo_module({
             return result;
         },
 
+       _slotByPosition: function(x, y) {
+           var column;
+
+           var offset = this.content.offset();
+
+           x -= offset.left;
+           y -= offset.top;
+           y += this.content[0].scrollTop;
+           x += this.content[0].scrollLeft;
+
+           var slots = this._row.slots;
+
+           for (var slotIndex = 0; slotIndex < slots.length; slotIndex++) {
+               var slot = slots[slotIndex];
+
+               if (y >= slot.offsetTop && y <= slot.offsetTop + slot.clientHeight &&
+                   x >= slot.offsetLeft && x < slot.offsetLeft + slot.clientWidth) {
+                   return slot;
+               }
+           }
+       },
+
+       _slots: function() {
+            var row = {
+                slots: [],
+                events: []
+            };
+
+            var cells = this.content[0].getElementsByTagName("td");
+            var eventHeight = this.options.eventHeight;
+            var scrollTop = this.content[0].scrollTop;
+            var slots = [];
+
+            for (var idx = 0, length = cells.length; idx < length; idx++) {
+                var cell = cells[idx];
+                var clientHeight = cell.clientHeight;
+                var firstChildHeight = cell.firstChild.offsetHeight + 3;
+
+                row.slots.push({
+                   clientWidth: cell.clientWidth,
+                   clientHeight: clientHeight,
+                   offsetWidth: cell.offsetWidth,
+                   offsetTop: cell.offsetTop,
+                   firstChildHeight: firstChildHeight + scrollTop,
+                   offsetLeft: cell.offsetLeft + 2,
+                   eventCount: Math.floor((clientHeight - firstChildHeight) / (eventHeight + 3)),
+                   start: kendo.date.addDays(this.startDate(), idx),
+                   element: cell
+                });
+            }
+
+            this._row = row;
+        },
+
         render: function(events) {
             var event;
             var idx;
@@ -388,26 +443,7 @@ kendo_module({
 
             this.content.children(".k-event,.k-more-events").remove();
 
-            var cells = this.content[0].getElementsByTagName("td");
-            var eventHeight = this.options.eventHeight;
-            var scrollTop = this.content[0].scrollTop;
-            var slots = [];
-
-            for (idx = 0, length = cells.length; idx < length; idx++) {
-                var cell = cells[idx];
-                var clientHeight = cell.clientHeight;
-                var firstChildHeight = cell.firstChild.offsetHeight + 3;
-
-                slots.push({
-                   clientWidth: cell.clientWidth,
-                   clientHeight: clientHeight,
-                   offsetWidth: cell.offsetWidth,
-                   top: cell.offsetTop + firstChildHeight + scrollTop,
-                   left: cell.offsetLeft + 2,
-                   eventCount: Math.floor((clientHeight - firstChildHeight) / (eventHeight + 3)),
-                   element: cell
-                });
-            }
+            this._slots();
 
             events = new kendo.data.Query(this._splitEvents(events)).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
 
@@ -427,13 +463,13 @@ kendo_module({
                     }
 
                     if (endSlotIndex < 0 || !endSlotIndex) {
-                        endSlotIndex = slots.length - 1;
+                        endSlotIndex = this._row.slots.length - 1;
                     }
 
                     event.startIndex = startSlotIndex;
                     event.endIndex = endSlotIndex;
 
-                    this._positionEvent(slots, this._createEventElement(event), startSlotIndex, endSlotIndex);
+                    this._positionEvent(this._row.slots, this._createEventElement(event), startSlotIndex, endSlotIndex);
 
                 }
             }

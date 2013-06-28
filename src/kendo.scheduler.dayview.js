@@ -887,7 +887,6 @@ kendo_module({
         },
 
         render: function(events) {
-            console.profile("render");
             var eventTemplate = this.eventTemplate,
                 allDayEventTemplate = this.allDayEventTemplate,
                 allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
@@ -943,8 +942,6 @@ kendo_module({
             }
 
             this.refreshLayout();
-
-            console.profileEnd();
         }
     });
 
