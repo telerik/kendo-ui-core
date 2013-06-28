@@ -1,3 +1,5 @@
+require('country_timezones')
+
 namespace :timezone do
     desc 'Sync the Olsen timezone database'
     task :sync do
@@ -9,6 +11,7 @@ namespace :timezone do
 TIMEZONE_TEMPLATE = ERB.new(
 %{kendo.timezone.zones=<%= zones.to_json.gsub(/,null\\]/, ']') %>;
 kendo.timezone.rules=<%= rules.to_json.gsub(/,null\\]/, ']') %>;
+kendo.timezone.countries=<%= countries.to_json %>;
 }, 0, '<%>')
 
     desc 'Generate timezone JavaScript files'
@@ -20,6 +23,8 @@ kendo.timezone.rules=<%= rules.to_json.gsub(/,null\\]/, ']') %>;
         zones = timezone_info['zones']
 
         rules = timezone_info['rules']
+
+        countries = parse_countries()
 
         File.write('src/kendo.timezones.js', TIMEZONE_TEMPLATE.result(binding))
     end
