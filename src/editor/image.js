@@ -24,9 +24,11 @@ var ImageCommand = Command.extend({
 
     insertImage: function(img, range) {
         var attributes = this.attributes;
+        var doc = RangeUtils.documentFromRange(range);
+
         if (attributes.src && attributes.src != "http://") {
             if (!img) {
-                img = dom.create(RangeUtils.documentFromRange(range), "img", attributes);
+                img = dom.create(doc, "img", attributes);
                 img.onload = img.onerror = function () {
                         img.removeAttribute("complete");
                         img.removeAttribute("width");
@@ -35,6 +37,11 @@ var ImageCommand = Command.extend({
 
                 range.deleteContents();
                 range.insertNode(img);
+
+                if (!img.nextSibling) {
+                    dom.insertAfter(doc.createTextNode("\ufeff"), img);
+                }
+
                 range.setStartAfter(img);
                 range.setEndAfter(img);
                 RangeUtils.selectRange(range);
