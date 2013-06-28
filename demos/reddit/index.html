@@ -35,7 +35,7 @@
     <body>
         <div class="splash"></div>
 
-        <div data-role="view" data-init="showThumbsOnScrollComplete" data-title="The Front Page" id="list" data-show="showApp">
+        <div data-role="view" data-title="The Front Page" id="list" data-show="showApp">
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
@@ -82,7 +82,7 @@
         <script type="text/x-kendo-template" id="item-template">
             <div class="item">
                 <div class="item-thumb">
-                    <span class='loading-thumb' data-thumb='#: data.thumbnail #'></span>
+                    <img class='loading-thumb' src='#: data.thumbnail #' />
                 </div>
                 <div class="item-summary">
                    <h3>#: data.title #</h3>

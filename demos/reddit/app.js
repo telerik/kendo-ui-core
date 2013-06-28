@@ -65,7 +65,7 @@ var canvasDataSource = new kendo.data.DataSource({
 // var ds = new kendo.data.DataSource({
 //     transport: {
 //         read: function(options) {
-// 
+//
 //             var results = [], data = options.data;
 //             for (var i = data.skip; i < data.skip + data.take; i ++) {
 //                 results.push({ foo: i });
@@ -133,33 +133,11 @@ function renderDetail(e) {
     });
 }
 
-function renderThumbs(element) {
-    element.find(".loading-thumb").each(function() {
-        var thumb = $(this).data("thumb");
-        if (thumb === "default") {
-            thumb = "images/foxie.png";
-        }
-        $(this).removeClass("loading-thumb").addClass("thumb").css("backgroundImage", "url(" + thumb + ")");
-    });
-}
-
 function showApp() {
     if (firstRun) {
         setTimeout(function () { kendo.fx(".splash").fadeOut().duration(400).play() }, 1000);
         firstRun = false;
     }
-}
-
-function showThumbsOnScrollComplete(e) {
-    var view = e.view;
-    var renderThumbsForView = function() {
-        renderThumbs(view.element);
-    };
-
-    awwDataSource.bind('change', renderThumbsForView);
-    view.scroller.bind('scrollEnd', renderThumbsForView);
-    view.bind("afterShow", renderThumbsForView);
-    kendo.onResize(renderThumbsForView);
 }
 
 function canvasInit(e) {
