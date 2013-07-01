@@ -10,7 +10,7 @@ class Template extends JavaScriptFunction {
     }
 
     public function value() {
-        return "kendo.template($('#".$this->value."').html())";
+        return "kendo.template($('\\#".$this->value."').html())";
     }
 }
 ?>
