@@ -93,6 +93,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets the template Id for the files
+        /// </summary>
+        /// <value>The template for the files list</value>
+        public string TemplateId
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Writes the initialization script.
         /// </summary>
         /// <param name="writer">The writer object.</param>
@@ -120,6 +130,17 @@ namespace Kendo.Mvc.UI
             if (messagesData.Keys.Count > 0)
             {
                 options.Add("localization", messagesData);
+            }
+
+            var idPrefix = "#";
+            if (IsInClientTemplate)
+            {
+                idPrefix = "\\" + idPrefix;
+            }
+
+            if (!string.IsNullOrEmpty(TemplateId))
+            {
+                options.Add("template", new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, TemplateId) });
             }
 
             Async.SerializeTo("async", options);

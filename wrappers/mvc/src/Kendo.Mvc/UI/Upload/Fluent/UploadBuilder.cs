@@ -131,5 +131,24 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Id of the template element to be used for rendering the files in the list
+        /// </summary>
+        /// <param name="templateId">The id of the template</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// 
+        /// </code>
+        /// <code lang="ASPX">
+        /// 
+        /// </code>
+        /// </example>
+        public UploadBuilder TemplateId(string templateId)
+        {
+            Component.TemplateId = templateId;
+
+            return this;
+        }
     }
 }
