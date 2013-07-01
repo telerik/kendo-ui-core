@@ -1052,7 +1052,7 @@ kendo_module({
         },
 
         _click: function(e) {
-            if (e.event.which > 1 || e.isDefaultPrevented()) {
+            if (e.event.which > 1 || e.event.isDefaultPrevented()) {
                 return;
             }
 
