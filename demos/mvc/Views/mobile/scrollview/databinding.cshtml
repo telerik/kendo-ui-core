@@ -1,0 +1,81 @@
+<div data-role="view" id="scrollview-binding" data-title="Gallery 500px" data-stretch="true">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <div data-role="scrollview" 
+        data-source="_500pxDS" 
+        data-template="template"
+        data-enable-pager="false">
+    </div>
+</div>
+
+<script id="template" type="text/x-kendo-template">
+    <div class="page">
+        <p class="title">#: name #</p>
+        <img class="image" src="#: image_url #" />
+    </div>
+</script>
+
+<script src="@Url.Content("~/content/spa/aeroviewr/js/500px.js")"></script>
+
+<script>
+    _500px.init({
+        sdk_key: 'a3be03a8a98d6e05af17f60d2cf4bf696eb47555'
+    });
+
+    var _500pxDS = new kendo.data.DataSource({
+        transport: {
+            read: function(options) {
+                var params = { 
+                    feature: "popular",
+                    image_size: 3,
+                    page: options.data.page,
+                    rpp: options.data.pageSize
+                };
+
+                _500px.api("/photos", params, function(response) {
+                    options.success(response.data);
+                });
+            }
+        },
+        serverPaging: true,
+        pageSize: 30,
+        schema: {
+            data: "photos",
+            total: "total_items"
+        }
+    });
+</script>
+
+<style scoped>
+    .virtual-page {
+        min-height: 1px;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+    }
+
+    .title {
+        font-style: italic;
+        text-align: center;
+        margin: 0;
+    }
+
+    .page {
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+    .image {
+        display: block;
+        margin: 3em auto;
+    }
+</style>
