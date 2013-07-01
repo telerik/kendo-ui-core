@@ -397,6 +397,75 @@
                 equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
             });
 
+            test("dragging and dropping the east resize handle changes the end of the event", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 11:00"), end: new Date("2013/6/2 11:30"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-header-all-day td");
+
+                dragdrop(scheduler, handle, slots.eq(1));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+                equal(scheduler.dataSource.at(0).end.getDate(), 3);
+            });
+
+            test("dragging the east resize handle is restricted", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 11:00"), end: new Date("2013/6/2 11:30"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-header-all-day td");
+
+                dragstart(scheduler, handle);
+
+                var offset = slots.last().offset();
+                drag(scheduler, handle, offset);
+
+                offset.left += 100;
+
+                drag(scheduler, handle, offset);
+
+                dragend(scheduler, handle, offset);
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+                equal(scheduler.dataSource.at(0).end.getDate(), 8);
+            });
+
+            test("a scheduler all day event can't be less than a day long", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/3 11:00"), end: new Date("2013/6/3 11:30"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-header-all-day td");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+                equal(scheduler.dataSource.at(0).end.getDate(), 3);
+            });
+
             function dragdrop(scheduler, target, to) {
                 var offset = to.offset();
 

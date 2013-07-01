@@ -480,20 +480,29 @@ kendo_module({
                     startSlot = endSlot = that.view()._slotByPosition(e.x.location, e.y.location);
 
                     hint.css({
-                        left: startSlot.offsetLeft + 1,
+                        left: eventElement[0].offsetLeft,
                         top: eventElement[0].offsetTop,
                         width: startSlot.clientWidth - 3,
                         height: eventElement[0].clientHeight
-                    })
-                    .find("div:first").text(kendo.toString(event.start, "t"))
-                    .end()
-                    .find("div:last").text(kendo.toString(event.end, "t"))
-                    .end()
-                    .appendTo(that.view().content);
+                    });
+
+                    if (dragHandle.is(".k-resize-s,.k-resize-n")) {
+                        hint.find("div:first").text(kendo.toString(event.start, "t"))
+                            .end()
+                            .find("div:last").text(kendo.toString(event.end, "t"))
+                            .end()
+                            .appendTo(that.view().content);
+                    } else {
+                        hint.find("div:first").text(kendo.toString(event.start, "M/dd"))
+                            .end()
+                            .find("div:last").text(kendo.toString(event.end, "M/dd"))
+                            .end()
+                            .appendTo(that.element.find(".k-scheduler-header-wrap"));
+                    }
                 },
                 drag: function(e) {
-                    var dragHint = $(e.currentTarget);
-                    var eventElement = dragHint.closest(".k-event");
+                    var dragHandle = $(e.currentTarget);
+                    var eventElement = dragHandle.closest(".k-event");
 
                     var slot = that.view()._slotByPosition(e.x.location, e.y.location);
 
@@ -501,9 +510,14 @@ kendo_module({
                         return;
                     }
 
-                    var height = eventElement[0].clientHeight;
+                    if (slot.isAllDay && dragHandle.is(".k-resize-s,.k-resize-n")) {
+                        return;
+                    }
 
-                    if (dragHint.is(".k-resize-s")) {
+                    var height = eventElement[0].clientHeight;
+                    var width = eventElement[0].clientWidth;
+
+                    if (dragHandle.is(".k-resize-s")) {
                         if (getMilliseconds(slot.end) - getMilliseconds(event.start) >= kendo.date.MS_PER_MINUTE * 30) {
                             endSlot = slot;
 
@@ -515,7 +529,7 @@ kendo_module({
                                 .find("div:last")
                                 .text(kendo.toString(slot.end, "t"));
                         }
-                    } else if (dragHint.is(".k-resize-n")) {
+                    } else if (dragHandle.is(".k-resize-n")) {
                         if (getMilliseconds(event.end) - getMilliseconds(slot.start) >= kendo.date.MS_PER_MINUTE * 30) {
                             endSlot = slot;
 
@@ -528,12 +542,24 @@ kendo_module({
                                 .find("div:first")
                                 .text(kendo.toString(slot.start, "t"));
                         }
+                    } else if (dragHandle.is(".k-resize-e")) {
+                        if (slot.end.getDate() >= event.start.getDate()) {
+                            endSlot = slot;
+
+                            width += slot.offsetLeft - startSlot.offsetLeft;
+
+                            hint.css({
+                                    width: width
+                                })
+                                .find("div:last")
+                                .text(kendo.toString(slot.end, "M/dd"));
+                        }
                     }
                 },
                 dragend: function(e) {
                     var dragHandle = $(e.currentTarget);
-                    var start = event.start;
-                    var end = event.end;
+                    var start = new Date(event.start.getTime());
+                    var end = new Date(event.end.getTime());
 
                     if (dragHandle.is(".k-resize-s")) {
                         end = kendo.date.getDate(end);
@@ -541,6 +567,8 @@ kendo_module({
                     } else if (dragHandle.is(".k-resize-n")) {
                         start = kendo.date.getDate(start);
                         kendo.date.setTime(start, getMilliseconds(endSlot.start));
+                    } else if (dragHandle.is(".k-resize-e")) {
+                        end.setDate(endSlot.end.getDate());
                     }
 
                     hint.remove();
