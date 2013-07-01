@@ -52,23 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
                 throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
             }
 
-            var value = expression.Compile();
-
-            if (Container.Data != null)
-            {
-                var dataList = new ArrayList();
-
-                foreach (var dataPoint in Container.Data)
-                {
-                    dataList.Add(dataPoint != null ? value(dataPoint).ToString() : string.Empty);
-                }
-
-                Axis.Categories = dataList;
-            }
-            else
-            {
-                Axis.Member = expression.MemberWithoutInstance();
-            }
+            Axis.Member = expression.MemberWithoutInstance();
 
             return this;
         }
