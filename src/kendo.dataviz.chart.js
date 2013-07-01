@@ -92,7 +92,6 @@ kendo_module({
         CSS_PREFIX = "k-",
         DATABOUND = "dataBound",
         DATE = "date",
-        DATE_REGEXP = /^\/Date\((.*?)\)\/$/,
         DAYS = "days",
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
@@ -9309,14 +9308,12 @@ kendo_module({
 
     function toDate(value) {
         var result,
-            aspDate,
             i;
 
         if (value instanceof Date) {
             result = value;
         } else if (typeof value === STRING) {
-            aspDate = DATE_REGEXP.exec(value);
-            result = new Date(aspDate ? parseInt(aspDate[1], 10) : value);
+            result = kendo.parseDate(value);
         } else if (value) {
             if (isArray(value)) {
                 result = [];
