@@ -51,6 +51,15 @@ class StockChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
+    * The data item field which contains the category name or date.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
+    */
+    public function categoryField($value) {
+        return $this->setProperty('categoryField', $value);
+    }
+
+    /**
     * The data field containing the current value.** Available for bullet and verticalBullet series. **
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem

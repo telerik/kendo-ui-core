@@ -33,6 +33,15 @@ class StockChartSeriesItemMarkers extends \Kendo\SerializableObject {
     }
 
     /**
+    * The rotation angle of the markers.
+    * @param float|\Kendo\JavaScriptFunction $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkers
+    */
+    public function rotation($value) {
+        return $this->setProperty('rotation', $value);
+    }
+
+    /**
     * Configures the markers shape type.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkers
@@ -48,15 +57,6 @@ class StockChartSeriesItemMarkers extends \Kendo\SerializableObject {
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
-    }
-
-    /**
-    * The rotation angle of the markers.
-    * @param float|\Kendo\JavaScriptFunction $value
-    * @return \Kendo\Dataviz\UI\StockChartSeriesItemMarkers
-    */
-    public function rotation($value) {
-        return $this->setProperty('rotation', $value);
     }
 
 //<< Properties

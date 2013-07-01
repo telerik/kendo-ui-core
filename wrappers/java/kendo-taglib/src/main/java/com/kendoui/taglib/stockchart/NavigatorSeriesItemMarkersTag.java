@@ -55,12 +55,24 @@ public class NavigatorSeriesItemMarkersTag extends  BaseTag  /* interfaces *//* 
         setProperty("border", value);
     }
 
+    public void setRotation(NavigatorSeriesItemMarkersRotationFunctionTag value) {
+        setEvent("rotation", value.getBody());
+    }
+
     public String getBackground() {
         return (String)getProperty("background");
     }
 
     public void setBackground(String value) {
         setProperty("background", value);
+    }
+
+    public float getRotation() {
+        return (float)getProperty("rotation");
+    }
+
+    public void setRotation(float value) {
+        setProperty("rotation", value);
     }
 
     public float getSize() {

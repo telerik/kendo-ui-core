@@ -51,6 +51,15 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
+    * The data item field which contains the category name or date.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
+    */
+    public function categoryField($value) {
+        return $this->setProperty('categoryField', $value);
+    }
+
+    /**
     * Sets the groupNameTemplate option of the StockChartNavigatorSeriesItem.
     * The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.

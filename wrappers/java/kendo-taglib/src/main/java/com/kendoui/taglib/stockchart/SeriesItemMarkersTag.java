@@ -64,16 +64,16 @@ public class SeriesItemMarkersTag extends  BaseTag  /* interfaces *//* interface
         setEvent("size", value.getBody());
     }
 
+    public void setRotation(SeriesItemMarkersRotationFunctionTag value) {
+        setEvent("rotation", value.getBody());
+    }
+
     public void setType(SeriesItemMarkersTypeFunctionTag value) {
         setEvent("type", value.getBody());
     }
 
     public void setVisible(SeriesItemMarkersVisibleFunctionTag value) {
         setEvent("visible", value.getBody());
-    }
-
-    public void setRotation(SeriesItemMarkersRotationFunctionTag value) {
-        setEvent("rotation", value.getBody());
     }
 
     public String getBackground() {
