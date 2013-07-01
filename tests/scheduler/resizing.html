@@ -58,6 +58,18 @@
                 equal(div.find(".k-event .k-resize-s").length, 1);
             });
 
+            test("week view renders east resize handle for all day events", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/7 11:00"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event .k-resize-e").length, 1);
+            });
+
             test("day view renders north resize handle for events which start in the current day", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -69,6 +81,40 @@
                 equal(div.find(".k-event .k-resize-n").length, 1);
             });
 
+            test("day view does not render east resize handle", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event .k-resize-e").length, 0);
+            });
+
+            test("day view does not render west resize handle", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event .k-resize-w").length, 0);
+            });
+
+            test("week view renders west resize handle for all day events", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/7 11:00"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event .k-resize-w").length, 1);
+            });
+
             test("day view does not render south resize handle for events which don't end in the current day", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -78,6 +124,54 @@
                 });
 
                 equal(div.find(".k-event .k-resize-s").length, 0);
+            });
+
+            test("week view does not render east resize handle for all day events which dont end in the current week", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/10 11:00"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event .k-resize-e").length, 0);
+            });
+
+            test("week view does not render east resize handle for all day events which end in the last day of the week", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/8 11:00"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event .k-resize-e").length, 0);
+            });
+
+            test("week view does not render west resize handle for all day events which start in the first day of the week", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/8 11:00"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event .k-resize-w").length, 0);
+            });
+
+            test("week view does not render west resize handle for all day events which dont start in the current week", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/1 10:00"), end: new Date("2013/6/6 11:00"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event .k-resize-w").length, 0);
             });
 
             test("day view does not render north resize handle for events which don't start in the current day", function() {

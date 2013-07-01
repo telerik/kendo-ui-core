@@ -34,6 +34,9 @@ kendo_module({
                 '#}#' +
                 '>' +
                 '<span class="k-event-actions">' +
+                    '#if(!first){#' +
+                    '<span class="k-icon k-resize-handle k-resize-w"></span>' +
+                    '#}#' +
                     '# if(data.tail || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-w"></span>' +
                     '#}#' +
@@ -47,6 +50,9 @@ kendo_module({
                 '<span class="k-event-actions">' +
                     '#if (showDelete) {#' +
                         '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
+                    '#}#' +
+                    '#if(!last){#' +
+                    '<span class="k-icon k-resize-handle k-resize-e"></span>' +
                     '#}#' +
                     '# if(data.head || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-e"></span>' +
@@ -768,6 +774,8 @@ kendo_module({
                 eventStartTime = getMilliseconds(event.startTime || event.start),
                 eventEndTime = getMilliseconds(event.endTime || event.end),
                 middle,
+                first,
+                last,
                 head,
                 tail;
 
@@ -784,12 +792,17 @@ kendo_module({
                 head = true;
             }
 
+            last = getDate(event.end).getTime() >= endDate.getTime();
+            first = getDate(event.start).getTime() <= startDate.getTime();
+
             return $(template(extend({}, {
                 ns: kendo.ns,
                 showDelete: showDelete,
                 middle: middle,
                 head: head,
                 tail: tail,
+                first: first,
+                last: last,
                 resources: this.eventResources(event)
             }, event, {
                 start: event.startTime || event.start,
