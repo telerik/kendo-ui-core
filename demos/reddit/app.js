@@ -181,13 +181,6 @@ function renderThumbs(element) {
     });
 }
 
-function showApp() {
-    if (firstRun) {
-        setTimeout(function () { kendo.fx(".splash").fadeOut().duration(400).play() }, 1000);
-        firstRun = false;
-    }
-}
-
 function canvasInit(e) {
     canvasScrollView = $("#canvas-scrollview").kendoMobileVirtualScrollView({
         contentHeight: 500,
@@ -312,4 +305,9 @@ function createTile(data) {
     return nonImageTemplate(url);
 }
 
-var app = new kendo.mobile.Application(document.body, { skin: 'flat' });
+var app = new kendo.mobile.Application(document.body, {
+    skin: "flat",
+    init: function() {
+        kendo.fx(".splash").fadeOut().duration(400).play();
+    }
+});
