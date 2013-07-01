@@ -383,8 +383,6 @@ kendo_module({
         },
 
        _slotByPosition: function(x, y) {
-           var column;
-
            var offset = this.content.offset();
 
            x -= offset.left;
@@ -413,7 +411,6 @@ kendo_module({
             var cells = this.content[0].getElementsByTagName("td");
             var eventHeight = this.options.eventHeight;
             var scrollTop = this.content[0].scrollTop;
-            var slots = [];
 
             for (var idx = 0, length = cells.length; idx < length; idx++) {
                 var cell = cells[idx];

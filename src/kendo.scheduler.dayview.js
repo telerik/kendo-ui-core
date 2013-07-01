@@ -143,68 +143,7 @@ kendo_module({
 
             that.calculateDateRange();
 
-            var hint = $('<div style="position:absolute;border:1px solid black; background:black; opacity: 0.5">' +
-                    '<div style="position:absolute;top:2px;left:2px;color:white"></div>' +
-                    '<div style="position:absolute;bottom:2px;right:2px;color:white"></div>' +
-                '</div>'
-            );
-
-            var startCell;
-
             that._slots();
-
-            /*
-            that.content.kendoDraggable({
-                distance: 0,
-                filter: ".k-resize-handle",
-                drag: function(e) {
-                    var eventElement = $(e.currentTarget).closest(".k-event");
-
-                    var cell = that._slotByPosition(e.x.location, e.y.location);
-
-                    var height = eventElement[0].clientHeight;
-
-                    if ($(e.currentTarget).is(".k-resize-s")) {
-                        height += cell.offsetTop - startCell.offsetTop;
-
-                        hint.css({
-                                height: height
-                            })
-                            .find("div:last")
-                            .text(kendo.toString(cell.end, "t"));
-                    } else {
-                        height += startCell.offsetTop - cell.offsetTop;
-                        hint.css({
-                                top: cell.offsetTop,
-                                height: height
-                            })
-                            .find("div:first")
-                            .text(kendo.toString(cell.start, "t"));
-                    }
-                },
-                dragstart: function(e) {
-                    var eventElement = $(e.currentTarget).closest(".k-event");
-
-                    startCell = that._slotByPosition(e.x.location, e.y.location);
-
-                    hint.css({
-                        left: eventElement[0].offsetLeft,
-                        top: eventElement[0].offsetTop,
-                        width: eventElement[0].clientWidth,
-                        height: eventElement[0].clientHeight
-                    });
-
-                    hint.appendTo(that.content);
-                },
-                dragend: function(e) {
-                    var eventElement = $(e.currentTarget).closest(".k-event");
-
-                    var cell = that._slotByPosition(e.x.location, e.y.location);
-
-                    hint.remove();
-                }
-            });
-            */
        },
 
        _slotByPosition: function(x, y) {
@@ -252,18 +191,22 @@ kendo_module({
             }
 
             var tableCells;
+            var cellIndex;
+            var td;
+            var range;
+            var cell;
 
             for (var rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
                 var tr = tableRows[rowIndex];
 
                 tableCells = tr.children;
 
-                for (var cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
-                    var td = tableCells[cellIndex];
+                for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
+                    td = tableCells[cellIndex];
 
-                    var range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length - 1);
+                    range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length - 1);
 
-                    var cell = {
+                    cell = {
                         offsetTop: td.offsetTop,
                         offsetLeft: td.offsetLeft,
                         clientHeight: td.clientHeight,
@@ -288,12 +231,12 @@ kendo_module({
 
             tableCells = this.element.find(".k-scheduler-header-all-day td");
 
-            for (var cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
-                var td = tableCells[cellIndex];
+            for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
+                td = tableCells[cellIndex];
 
-                var range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length - 1);
+                range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length - 1);
 
-                var cell = {
+                cell = {
                     offsetTop: td.parentNode.parentNode.parentNode.offsetTop,
                     offsetLeft: td.offsetLeft,
                     clientHeight: td.clientHeight,
