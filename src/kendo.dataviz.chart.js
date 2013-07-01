@@ -2724,7 +2724,7 @@ kendo_module({
                 );
             }
 
-            if (notesOptions.visible && defined(notesOptions.label.text)) {
+            if (notesOptions.visible && (defined(notesOptions.label.text) && notesOptions.label.text !== null)) {
                 bar.note = new Note(notesOptions);
                 bar.append(bar.note);
             }
@@ -3567,7 +3567,7 @@ kendo_module({
 
             bullet.append(bullet.target);
 
-            if (notesOptions.visible && defined(notesOptions.label.text)) {
+            if (notesOptions.visible && (defined(notesOptions.label.text) && notesOptions.label.text !== null)) {
                 bullet.note = new Note(notesOptions);
                 bullet.append(bullet.note);
             }
@@ -3726,7 +3726,6 @@ kendo_module({
                 }
             },
             notes: {
-                visible: true,
                 label: {}
             }
         },
@@ -3794,7 +3793,7 @@ kendo_module({
                 point.append(point.label);
             }
 
-            if (notesOptions.visible && defined(notesOptions.label.text)) {
+            if (notesOptions.visible && (defined(notesOptions.label.text) && notesOptions.label.text !== null)) {
                 point.note = new Note(notesOptions);
                 point.append(point.note);
             }
@@ -4818,7 +4817,7 @@ kendo_module({
             var point = this,
                 notesOptions = point.options.notes;
 
-            if (notesOptions.visible && defined(notesOptions.label.text)) {
+            if (notesOptions.visible && (defined(notesOptions.label.text) && notesOptions.label.text !== null)) {
                 point.note = new Note(notesOptions);
                 point.append(point.note);
             }
