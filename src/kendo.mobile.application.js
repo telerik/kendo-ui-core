@@ -38,6 +38,9 @@ kendo_module({
         BARCOMPENSATION = 60,
         WINDOW = $(window),
         HEAD = $("head"),
+
+        // mobile app events
+        INIT = "init",
         proxy = $.proxy;
 
     function osCssClass(os) {
@@ -100,7 +103,9 @@ kendo_module({
                 transition: "",
                 updateDocumentTitle: true
             }, options);
+
             kendo.Observable.fn.init.call(that, that.options);
+            that.bind(that.events, that.options);
 
             $(function(){
                 that.element = $(element ? element : document.body);
@@ -115,8 +120,13 @@ kendo_module({
                 }
 
                 that._startHistory();
+                that.trigger(INIT);
             });
         },
+
+        events: [
+            INIT
+        ],
 
         navigate: function(url, transition) {
             this.pane.navigate(url, transition);
