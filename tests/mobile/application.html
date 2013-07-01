@@ -264,23 +264,24 @@
                 });
             }
 
-            test("Raises meaningful error when the app can't find views", 1, function() {
-                try {
-                new kendo.mobile.Application($("<div />"));
-                } catch (e) {
-                    equal(e.message, 'Your kendo mobile application element does not contain any direct child elements with data-role="view" attribute set. Make sure that you instantiate the mobile application using the correct container.');
-                }
-            });
-
-            test("Triggers init event handler", 1, function() {
+            asyncTest("Triggers init event handler", 1, function() {
                 new kendo.mobile.Application(
                     $("<div><div data-role='view' /></div>"),
                     {
                         init: function() {
+                            start();
                             ok(true);
                         }
                     }
                 );
+            });
+
+            test("Raises meaningful error when the app can't find views", 1, function() {
+                try {
+                    new kendo.mobile.Application($("<div />"));
+                } catch (e) {
+                    equal(e.message, 'Your kendo mobile application element does not contain any direct child elements with data-role="view" attribute set. Make sure that you instantiate the mobile application using the correct container.');
+                }
             });
         </script>
     </body>
