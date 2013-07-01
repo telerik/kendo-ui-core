@@ -697,6 +697,239 @@
                 equal(scheduler.dataSource.at(0).foo, null);
             });
 
+            test("headers are rendered for groups in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+                var headerRows = view.datesHeader.find("tr");
+
+                equal(headerRows.length, 3);
+                equal(headerRows.eq(0).find("th").length, 2);
+                equal(headerRows.eq(1).find("th").length, 2);
+                equal(headerRows.eq(2).find("td").length, 2);
+            });
+
+            test("headers are rendered for multi level groups in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName1", "ResourceName2" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+                var headerRows = view.datesHeader.find("tr");
+
+                equal(headerRows.length, 4);
+                equal(headerRows.eq(0).find("th").length, 2);
+                equal(headerRows.eq(1).find("th").length, 6);
+                equal(headerRows.eq(2).find("th").length, 6);
+                equal(headerRows.eq(3).find("td").length, 6);
+            });
+
+            test("row headers are rendered for groups in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName" ],
+                    groupOrientation: "vertical",
+                    allDaySlot: false,
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+                equal(view.times.find("tr:first th:first").attr("rowspan"), 48);
+                equal(view.times.find("tr:eq(48) th:first").attr("rowspan"), 48);
+            });
+
+            test("events are position in the correct group in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 12:00"), title:"foo", foo: 2 } ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view.content.find(".k-event").length, 1);
+                equal(view._columns[1].events.length, 1);
+            });
+
+            test("events are position in the correct group in day view in vertical orientation", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName" ],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 12:00"), title:"foo", foo: 2 },
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 12:00"), title:"foo", foo: 1 }
+                    ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+                equal(view.content.find(".k-event").length, 2);
+                equal(view._columns[0].events.length, 2);
+            });
+
+            test("multi day events are position in the correct group in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/8 12:00"), isAllDay: true, title:"foo", foo: 1 }
+                    ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+                var event = view._row.events[0];
+                equal(view.datesHeader.find(".k-event").length, 1);
+                equal(view._row.events.length, 1);
+                equal(event.start, 0);
+                equal(event.end, 0);
+            });
+
+            test("multiple copies of the event are position in the correct group in day view when multiple resources matched", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName", "ResourceName2" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+
+                    ],
+                    dataSource: [ { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 12:00"), title:"foo", foo: 2, bar: [ 1, 2] } ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view.content.find(".k-event").length, 2);
+                equal(view._columns[2].events.length, 1);
+                equal(view._columns[3].events.length, 1);
+            });
+
+            test("double clicking a day view cell triggers add event with grouping", 2, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date(2013, 5, 6, 2, 0, 0));
+                    deepEqual(event.end, new Date(2013, 5, 6, 2, 30, 0));
+                });
+
+                view.content.find("tr:eq(4) td:eq(1)").trigger("dblclick");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
