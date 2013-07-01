@@ -1070,24 +1070,41 @@
 
             (function() {
                 // ------------------------------------------------------------
-                var validNumbers = kendo.dataviz.validNumbers;
+                var areNumbers = kendo.dataviz.areNumbers,
+                    isNumber = kendo.dataviz.isNumber;
 
                 module("Misc");
 
-                test("validNumbers returns true if all numbers are finite", function() {
-                    ok(validNumbers([1, 2, 3]));
+                test("isNumber returns true if number is finite", function() {
+                    ok(isNumber(1));
                 });
 
-                test("validNumbers returns false if array contains null", function() {
-                    ok(!validNumbers([1, 2, null]));
+                test("isNumber returns false if number is null", function() {
+                    ok(!isNumber(null));
                 });
 
-                test("validNumbers returns false if array contains undefined", function() {
-                    ok(!validNumbers([1, 2, undefined]));
+                test("isNumber returns false if number is undefined", function() {
+                    ok(!isNumber(undefined));
                 });
 
-                test("validNumbers returns false if array contains NaN", function() {
-                    ok(!validNumbers([1, 2, NaN]));
+                test("isNumber returns false if number is NaN", function() {
+                    ok(!isNumber(NaN));
+                });
+
+                test("areNumbers returns true if all numbers are finite", function() {
+                    ok(areNumbers([1, 2, 3]));
+                });
+
+                test("areNumbers returns false if array contains null", function() {
+                    ok(!areNumbers([1, 2, null]));
+                });
+
+                test("areNumbers returns false if array contains undefined", function() {
+                    ok(!areNumbers([1, 2, undefined]));
+                });
+
+                test("areNumbers returns false if array contains NaN", function() {
+                    ok(!areNumbers([1, 2, NaN]));
                 });
 
                 test("sparseArrayLimits ignores undefined values", function() {
