@@ -188,6 +188,14 @@
     vertical-align: middle;
 }
 
+.km-horizontal .detail-image {
+    bottom: 60px;
+}
+
+.km-horizontal .detail-text {
+    height: 60px;
+}
+
 .detail-text:before {
     content: "\a0";
     width: 0;
@@ -197,6 +205,7 @@
 }
 
 .detail-text > div {
+    width: 100%;
     display: inline-block;
     vertical-align: middle;
 }
@@ -211,6 +220,23 @@
     width: 100%;
     overflow: hidden;
     -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+}
+
+.km-horizontal .detail-image {
+    bottom: 60px;
+}
+
+.km-horizontal .detail-text {
+    height: 60px;
+}
+
+.km-horizontal .detail-text p {
+    width: 100%;
+    display: block;
+    max-height: 24px;
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
