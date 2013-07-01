@@ -2120,10 +2120,9 @@ function pad(number, digits, end) {
         var mobileChrome = (support.mobileOS.browser == "chrome" && !support.mobileOS.ios);
 
         eventTarget = function(e) {
-            var touches = "originalEvent" in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null,
-                property = mobileChrome ? "screen" : "client";
+            var touches = "originalEvent" in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null;
 
-            return touches ? document.elementFromPoint(touches[0][property + "X"], touches[0][property + "Y"]) : e.target;
+            return touches ? document.elementFromPoint(touches[0].clientX, touches[0].clientY) : e.target;
         };
 
         each(["swipe", "swipeLeft", "swipeRight", "swipeUp", "swipeDown", "doubleTap", "tap"], function(m, value) {
