@@ -1882,7 +1882,7 @@ kendo_module({
             // (one can never be too sure)
             to = math.max(from, to);
 
-            p1 = from === 0 ? lineStart : majorTicks[from];
+            p1 = from === 0 ? lineStart : (majorTicks[from] || lineEnd);
             p2 = justified ? p1 : majorTicks[to];
             slotSize = to - from;
 
