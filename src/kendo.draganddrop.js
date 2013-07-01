@@ -249,7 +249,7 @@ kendo_module({
         },
 
         centerCoordinates: function() {
-            return { x: Math.max(0, -this.x.centerOffset), y: Math.max(0, -this.y.centerOffset) };
+            return { x: Math.min(0, -this.x.centerOffset), y: Math.min(0, -this.y.centerOffset) };
         },
 
         refresh: function() {
