@@ -243,9 +243,9 @@ kendo_module({
                 layout.rows.splice(allDayIndex, 1);
             }
 
-            var columnLevels = levels(layout, "columns");
+            var columnLevels = this.columnLevels = levels(layout, "columns");
 
-            var rowLevels = levels(layout, "rows");
+            var rowLevels = this.rowLevels = levels(layout, "rows");
 
             this.table = $('<table class="k-scheduler-layout">');
 

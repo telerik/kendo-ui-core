@@ -43,15 +43,26 @@
 	            overflow-y:scroll;
             }
 
+            .k-scheduler-header-wrap .k-scheduler-table,
+            .k-scheduler-content .k-scheduler-table
+            {
+                width:140%;
+            }
+
         </style>
     </head>
     <body>
         <div id="scheduler"></div>
 
         <script>
+
         $("#scheduler").kendoScheduler({
             height: 800,
-            views: ["day", { name: "week", selected: true }, "month", "agenda"],
+            startTime: new Date(2013, 1,1, 11,0,0),
+            views: ["day", { type: "week", selected: true }, "month", "agenda"],
+            groupBy: ["roomId", "atendees"],
+            date: new Date(2013, 5, 26),
+//            groupOrientation: "vertical",
             resources: [
                 {
                     field: "roomId",

@@ -1464,6 +1464,7 @@ kendo_module({
 
                 that.resources.push({
                     field: field,
+                    name: resource.name || field,
                     title: resource.title || field,
                     dataTextField: resource.dataTextField || "text",
                     dataValueField: resource.dataValueField || "value",
