@@ -114,6 +114,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RedditImagesController.cs" />
     <Compile Include="Controllers\StockDataController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\TwitterController.cs" />
