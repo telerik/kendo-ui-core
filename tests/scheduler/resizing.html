@@ -91,7 +91,7 @@
                 equal(div.find(".k-event .k-resize-n").length, 0);
             });
 
-            test("dragging and dropping the south resize handle changes the end of the event", function() {
+            test("dragging and dropping the south resize handle changes the end time of the event", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 10:00"),
@@ -108,6 +108,27 @@
 
                 equal(scheduler.dataSource.at(0).end.getHours(), 11);
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+            });
+
+            test("dragging and dropping the south resize handle over the next day changes the end time of the event but stays on the same date", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/3 10:00"), end: new Date("2013/6/3 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(1).next());
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 3);
             });
 
             test("dragging and dropping the north resize handle changes the start of the event", function() {
@@ -127,6 +148,159 @@
 
                 equal(scheduler.dataSource.at(0).start.getHours(), 10);
                 equal(scheduler.dataSource.at(0).start.getMinutes(), 30);
+            });
+
+            test("dragging and dropping the north resize handle over the previous day changes the start time of the event but stays on the same date", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/3 10:00"), end: new Date("2013/6/3 11:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-n");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(1).prev());
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 30);
+                equal(scheduler.dataSource.at(0).start.getDate(), 3);
+            });
+
+            test("a scheduler event can't be less than half an hour long after resizing via the south resize handle", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(1));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+            });
+
+            test("a scheduler event can't be less than half an hour long in week view when the cursor is over the next day", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/3 10:00"), end: new Date("2013/6/3 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-n");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(1).prev());
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+            });
+
+            test("a scheduler event can't be less than half an hour long in week view when the cursor is over the previous day", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/2 10:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 11:00"), end: new Date("2013/6/2 11:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(1).next());
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+            });
+
+            test("a scheduler event can't be less than half an hour long after resizing via the north resize handle", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-n");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(1));
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+            });
+
+            test("dragging the south handle is restricted", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle);
+
+                var offset = slots.last().offset();
+                drag(scheduler, handle, offset);
+
+                offset.top += slots.last().outerHeight() + 10;
+
+                drag(scheduler, handle, offset);
+                dragend(scheduler, handle, offset);
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+            });
+
+            test("dragging the north handle is restricted", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-n");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle);
+
+                var offset = slots.first().offset();
+                drag(scheduler, handle, offset);
+
+                offset.top -= 10;
+
+                drag(scheduler, handle, offset);
+                dragend(scheduler, handle, offset);
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
             });
 
             function dragdrop(scheduler, target, to) {

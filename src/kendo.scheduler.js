@@ -78,6 +78,7 @@ kendo_module({
 
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
+        getMilliseconds = kendo.date.getMilliseconds,
         RECURRENCEEDITOR = function(container, options) {
             $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
                 .attr({
@@ -456,6 +457,7 @@ kendo_module({
 
         _resizable: function() {
             var startSlot;
+            var endSlot;
             var event;
             var that = this;
 
@@ -475,7 +477,7 @@ kendo_module({
 
                     event = that.dataSource.getByUid(eventElement.attr(kendo.attr("uid")));
 
-                    startSlot = that.view()._slotByPosition(e.x.location, e.y.location);
+                    startSlot = endSlot = that.view()._slotByPosition(e.x.location, e.y.location);
 
                     hint.css({
                         left: startSlot.offsetLeft + 1,
@@ -495,37 +497,50 @@ kendo_module({
 
                     var slot = that.view()._slotByPosition(e.x.location, e.y.location);
 
+                    if (!slot) {
+                        return;
+                    }
+
                     var height = eventElement[0].clientHeight;
 
                     if (dragHint.is(".k-resize-s")) {
-                        height += slot.offsetTop - startSlot.offsetTop;
+                        if (getMilliseconds(slot.end) - getMilliseconds(event.start) >= kendo.date.MS_PER_MINUTE * 30) {
+                            endSlot = slot;
 
-                        hint.css({
-                                height: height
-                            })
-                            .find("div:last")
-                            .text(kendo.toString(slot.end, "t"));
-                    } else if (dragHint.is(".k-resize-n")){
-                        height += startSlot.offsetTop - slot.offsetTop;
-                        hint.css({
-                                top: slot.offsetTop,
-                                height: height
-                            })
-                            .find("div:first")
-                            .text(kendo.toString(slot.start, "t"));
+                            height += slot.offsetTop - startSlot.offsetTop;
+
+                            hint.css({
+                                    height: height
+                                })
+                                .find("div:last")
+                                .text(kendo.toString(slot.end, "t"));
+                        }
+                    } else if (dragHint.is(".k-resize-n")) {
+                        if (getMilliseconds(event.end) - getMilliseconds(slot.start) >= kendo.date.MS_PER_MINUTE * 30) {
+                            endSlot = slot;
+
+                            height += startSlot.offsetTop - slot.offsetTop;
+
+                            hint.css({
+                                    top: slot.offsetTop,
+                                    height: height
+                                })
+                                .find("div:first")
+                                .text(kendo.toString(slot.start, "t"));
+                        }
                     }
                 },
                 dragend: function(e) {
                     var dragHandle = $(e.currentTarget);
-
-                    var endSlot = that.view()._slotByPosition(e.x.location, e.y.location);
                     var start = event.start;
                     var end = event.end;
 
                     if (dragHandle.is(".k-resize-s")) {
-                        end = endSlot.end;
+                        end = kendo.date.getDate(end);
+                        kendo.date.setTime(end, getMilliseconds(endSlot.end));
                     } else if (dragHandle.is(".k-resize-n")) {
-                        start = endSlot.start;
+                        start = kendo.date.getDate(start);
+                        kendo.date.setTime(start, getMilliseconds(endSlot.start));
                     }
 
                     hint.remove();
