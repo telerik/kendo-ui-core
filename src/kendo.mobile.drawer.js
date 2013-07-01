@@ -23,7 +23,13 @@ kendo_module({
         init: function(element, options) {
             // move the drawer to the top, in order hide it
             $(element).parent().prepend(element);
-            ui.View.fn.init.call(this, element, options);
+
+            mobile.ui.Widget.fn.init.call(this, element, options);
+
+            this._layout();
+            this._scroller();
+            this._model();
+
             this.pane = this.element.closest(roleSelector("pane")).data("kendoMobilePane");
 
             var drawer = this;
