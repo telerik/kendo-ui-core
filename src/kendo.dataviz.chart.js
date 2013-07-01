@@ -4957,7 +4957,7 @@ kendo_module({
                 children = chart.children,
                 pointColor = data.fields.color || series.color,
                 valueParts = this.splitValue(value),
-                hasValue = validNumbers(valueParts),
+                hasValue = areNumbers(valueParts),
                 categoryPoints = chart.categoryPoints[categoryIx],
                 point,
                 cluster,
@@ -9533,21 +9533,21 @@ kendo_module({
         }
     }
 
-    function validNumbers(values) {
-        var valid = true,
-            i,
-            val,
+    function areNumbers(values) {
+        var i,
             length = values.length;
 
         for (i = 0; i < length; i++) {
-            val = values[i];
-            if (typeof val !== "number" || isNaN(val)) {
-                valid = false;
-                break;
+            if (!isNumber(values[i])) {
+                return false;
             }
         }
 
-        return valid;
+        return true;
+    }
+
+    function isNumber(val) {
+        return typeof val === "number" && !isNaN(val);
     }
 
     function axisRanges(axes) {
@@ -9831,12 +9831,13 @@ kendo_module({
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
+        areNumbers: areNumbers,
         axisGroupBox: axisGroupBox,
-        validNumbers: validNumbers,
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
         duration: duration,
         indexOf: indexOf,
+        isNumber: isNumber,
         floorDate: floorDate,
         filterSeriesByType: filterSeriesByType,
         limitValue: limitValue,
