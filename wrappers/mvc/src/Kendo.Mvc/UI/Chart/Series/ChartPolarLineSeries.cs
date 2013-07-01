@@ -11,8 +11,12 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="xValueExpression">The X expression.</param>
         /// <param name="yValueExpression">The Y expression.</param>
-        public ChartPolarLineSeries(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
-            : base(xValueExpression, yValueExpression)
+        /// <param name="noteTextExpression">The note text expression.</param>
+        public ChartPolarLineSeries(
+            Expression<Func<TModel, TXValue>> xValueExpression,
+            Expression<Func<TModel, TYValue>> yValueExpression,
+            Expression<Func<TModel, string>> noteTextExpression)
+            : base(xValueExpression, yValueExpression, noteTextExpression)
         {
         }
 

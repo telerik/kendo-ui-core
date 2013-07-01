@@ -20,6 +20,8 @@ namespace Kendo.Mvc.UI.Tests
         public bool VisibleInLegend { get; set; }
 
         public string Color { get; set; }
+
+        public string NoteText { get; set; }
     }
 
     public static class SalesDataBuilder
@@ -37,7 +39,8 @@ namespace Kendo.Mvc.UI.Tests
                     RepSales = 2015,
                     Explode = true,
                     VisibleInLegend = true,
-                    Color = "red"
+                    Color = "red",
+                    NoteText = "NoteText"
                 },
 
                 null,
@@ -50,7 +53,8 @@ namespace Kendo.Mvc.UI.Tests
                     TotalSales = 26598,
                     RepSales = 6003,
                     Explode = false,
-                    VisibleInLegend = true
+                    VisibleInLegend = true,
+                    NoteText = "NoteText"
                 }
             };
         }

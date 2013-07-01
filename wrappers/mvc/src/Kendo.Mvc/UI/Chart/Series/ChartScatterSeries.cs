@@ -13,7 +13,11 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="xValueExpression">The X expression.</param>
         /// <param name="yValueExpression">The Y expression.</param>
-        public ChartScatterSeries(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
+        /// <param name="noteTextExpression">The note text expression.</param>
+        public ChartScatterSeries(
+            Expression<Func<TModel, TXValue>> xValueExpression,
+            Expression<Func<TModel, TYValue>> yValueExpression,
+            Expression<Func<TModel, string>> noteTextExpression)
             : base()
         {
             if (typeof(TModel).IsPlainType() && !(xValueExpression.IsBindable() || yValueExpression.IsBindable()))
@@ -23,6 +27,16 @@ namespace Kendo.Mvc.UI
 
             XMember = xValueExpression.MemberWithoutInstance();
             YMember = yValueExpression.MemberWithoutInstance();
+
+            if (noteTextExpression != null)
+            {
+                if (typeof(TModel).IsPlainType() && !noteTextExpression.IsBindable())
+                {
+                    throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
+                }
+
+                NoteTextMember = noteTextExpression.MemberWithoutInstance();
+            }
 
             Initialize();
         }
@@ -62,6 +76,16 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <value>The model Y data member name.</value>
         public string YMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the model note text member name.
+        /// </summary>
+        /// <value>The model note text member name.</value>
+        public string NoteTextMember
         {
             get;
             set;

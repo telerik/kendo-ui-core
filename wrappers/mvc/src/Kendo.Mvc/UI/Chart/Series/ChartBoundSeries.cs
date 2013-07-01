@@ -13,7 +13,8 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
-        protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> categoryExpression)
+        /// <param name="noteTextExpression">The expression used to extract the point note text from the chart model.</param>
+        protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> categoryExpression, Expression<Func<TModel, string>> noteTextExpression)
         {
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
@@ -26,6 +27,11 @@ namespace Kendo.Mvc.UI
             {
                 Category = categoryExpression.Compile();
                 CategoryMember = categoryExpression.MemberWithoutInstance();
+            }
+
+            if (noteTextExpression != null)
+            {
+                NoteTextMember = noteTextExpression.MemberWithoutInstance();
             }
 
             if (string.IsNullOrEmpty(Name))
@@ -54,6 +60,16 @@ namespace Kendo.Mvc.UI
         /// The data used for binding.
         /// </summary>
         public IEnumerable Data
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the model data note text member name.
+        /// </summary>
+        /// <value>The model data note text member name.</value>
+        public string NoteTextMember
         {
             get;
             set;
@@ -96,7 +112,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression)
-            : base(expression, null)
+            : base(expression, null, null)
         {
         }
 

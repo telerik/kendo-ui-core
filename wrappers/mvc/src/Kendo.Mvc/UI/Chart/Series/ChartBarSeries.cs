@@ -14,8 +14,13 @@ namespace Kendo.Mvc.UI
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
         /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
-        public ChartBarSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, string>> colorExpression, Expression<Func<TModel, TCategory>> categoryExpression)
-            : base(expression, categoryExpression)
+        /// <param name="noteTextExpression">The expression used to extract the point note text from the chart model.</param>
+        public ChartBarSeries(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, string>> colorExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, string>> noteTextExpression)
+            : base(expression, categoryExpression, noteTextExpression)
         {
             if (colorExpression != null) {
                 if (typeof(TModel).IsPlainType() && !colorExpression.IsBindable())
@@ -182,7 +187,7 @@ namespace Kendo.Mvc.UI
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
         public ChartBarSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, string>> colorExpression)
-            : base(expression, colorExpression, null)
+            : base(expression, colorExpression, null, null)
         {
         }
 

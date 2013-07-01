@@ -21,7 +21,8 @@ namespace Kendo.Mvc.UI
             Expression<Func<TModel, TValue>> highExpression,
             Expression<Func<TModel, TValue>> lowExpression,
             Expression<Func<TModel, TValue>> closeExpression,
-            Expression<Func<TModel, string>> colorExpression
+            Expression<Func<TModel, string>> colorExpression,
+            Expression<Func<TModel, string>> noteTextExpression
             )
             : base()
         {
@@ -38,6 +39,11 @@ namespace Kendo.Mvc.UI
             if (colorExpression != null)
             {
                 ColorMember = colorExpression.MemberWithoutInstance();
+            }
+
+            if (noteTextExpression != null)
+            {
+                NoteTextMember = noteTextExpression.MemberWithoutInstance();
             }
 
             Initialize();
@@ -97,6 +103,12 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <value>The model data color member name.</value>
         public string ColorMember { get; set; }
+
+        /// <summary>
+        /// Gets the model data note text member name.
+        /// </summary>
+        /// <value>The model data note text member name.</value>
+        public string NoteTextMember { get; set; }
 
         /// <summary>
         /// Gets or sets the point border

@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Bar_should_create_bound_bar_series_from_expression()
         {
-            var builder = factory.Bar(s => s.RepSales);
+            var builder = factory.Bar(s => s.RepSales, null);
             builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal, string>>();
         }
 
@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Bar_should_create_bar_series_with_horizontal_orientation()
         {
-            var builder = factory.Bar(s => s.RepSales);
+            var builder = factory.Bar(s => s.RepSales, null);
             ((ChartBarSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Horizontal);
         }
 
@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Column_should_create_bound_bar_series_from_expression()
         {
-            var builder = factory.Column(s => s.RepSales);
+            var builder = factory.Column(s => s.RepSales, null);
             builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal, string>>();
         }
 
@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Column_should_create_bar_series_with_vertical_orientation()
         {
-            var builder = factory.Column(s => s.RepSales);
+            var builder = factory.Column(s => s.RepSales, null);
             ((ChartBarSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Vertical);
         }
 
@@ -180,7 +180,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Line_should_create_bound_area_series_from_expression_and_category_expression()
         {
-            var builder = factory.Line(s => s.RepSales, s => s.Date);
+            var builder = factory.Line(s => s.RepSales, s => s.Date, null);
             builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, DateTime>>();
         }
 
@@ -236,7 +236,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void VerticalLine_should_create_bound_area_series_from_expression_and_category_expression()
         {
-            var builder = factory.VerticalLine(s => s.RepSales, s => s.Date);
+            var builder = factory.VerticalLine(s => s.RepSales, s => s.Date, null);
             builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, DateTime>>();
         }
 
@@ -397,7 +397,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Area_should_create_bound_area_series_from_expression_and_category_expression()
         {
-            var builder = factory.Area(s => s.RepSales, s => s.Date);
+            var builder = factory.Area(s => s.RepSales, s => s.Date, null);
             builder.Series.ShouldBeType<ChartAreaSeries<SalesData, decimal, DateTime>>();
         }
 
@@ -453,7 +453,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void VerticalArea_should_create_bound_area_series_from_expression_and_category_expression()
         {
-            var builder = factory.VerticalArea(s => s.RepSales, s => s.Date);
+            var builder = factory.VerticalArea(s => s.RepSales, s => s.Date, null);
             builder.Series.ShouldBeType<ChartAreaSeries<SalesData, decimal, DateTime>>();
         }
 
@@ -558,7 +558,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void RadarColumn_should_create_bound_bar_series_from_expression()
         {
-            var builder = factory.RadarColumn(s => s.RepSales);
+            var builder = factory.RadarColumn(s => s.RepSales, null);
             builder.Series.ShouldBeType<ChartRadarColumnSeries<SalesData, decimal, string>>();
         }
 
@@ -579,7 +579,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void RadarColumn_should_create_bar_series_with_horizontal_orientation()
         {
-            var builder = factory.RadarColumn(s => s.RepSales);
+            var builder = factory.RadarColumn(s => s.RepSales, null);
             ((ChartRadarColumnSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Horizontal);
         }
 
@@ -642,7 +642,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void RadarLine_should_create_bound_area_series_from_expression_and_category_expression()
         {
-            var builder = factory.RadarLine(s => s.RepSales, s => s.Date);
+            var builder = factory.RadarLine(s => s.RepSales, s => s.Date, null);
             builder.Series.ShouldBeType<ChartRadarLineSeries<SalesData, decimal, DateTime>>();
         }
 

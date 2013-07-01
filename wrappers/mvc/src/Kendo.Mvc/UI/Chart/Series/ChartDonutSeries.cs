@@ -64,6 +64,7 @@ namespace Kendo.Mvc.UI
         private void Initialize()
         {
             Type = "donut";
+            Notes = new ChartNote();
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
             chart.Data = SalesDataBuilder.GetCollection();
-            series = new ChartBulletSeries<SalesData, decimal>(s => s.RepSales, s => s.TotalSales, s => s.Color);
+            series = new ChartBulletSeries<SalesData, decimal>(s => s.RepSales, s => s.TotalSales, s => s.Color, s => s.NoteText);
         }
 
         [Fact]

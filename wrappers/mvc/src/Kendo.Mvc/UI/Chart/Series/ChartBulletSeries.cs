@@ -14,10 +14,12 @@ namespace Kendo.Mvc.UI
         /// <param name="targetExpression">The expression used to extract the point target from the chart model.</param>
         /// <param name="currentExpression">The expression used to extract the point current from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
+        /// <param name="noteTextExpression">The expression used to extract the point note text from the chart model.</param>
         public ChartBulletSeries(
             Expression<Func<TModel, TValue>> currentExpression,
             Expression<Func<TModel, TValue>> targetExpression,
-            Expression<Func<TModel, string>> colorExpression)
+            Expression<Func<TModel, string>> colorExpression,
+            Expression<Func<TModel, string>> noteTextExpression)
         {
             if (typeof(TModel).IsPlainType() && !currentExpression.IsBindable())
             {
@@ -40,6 +42,15 @@ namespace Kendo.Mvc.UI
                 }
 
                 ColorMember = colorExpression.MemberWithoutInstance();
+            }
+
+            if (noteTextExpression != null) {
+                if (typeof(TModel).IsPlainType() && !noteTextExpression.IsBindable())
+                {
+                    throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
+                }
+
+                NoteTextMember = noteTextExpression.MemberWithoutInstance();
             }
 
             if (string.IsNullOrEmpty(Name))
@@ -211,6 +222,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets the model note text member name.
+        /// </summary>
+        /// <value>The model note text member name.</value>
+        public string NoteTextMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the model target member name.
         /// </summary>
         /// <value>The model target member name.</value>
@@ -257,6 +278,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the series notes options
+        /// </summary>
+        public ChartNote Notes
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartBulletSeriesSerializer(this);
@@ -268,6 +298,7 @@ namespace Kendo.Mvc.UI
             Border = new ChartElementBorder();
             Tooltip = new ChartTooltip();
             Target = new ChartBulletTarget();
+            Notes = new ChartNote();
         }
     }
 }

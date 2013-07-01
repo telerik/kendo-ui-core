@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             chart = ChartTestHelper.CreateChart<XYData>();
             chart.Data = XYDataBuilder.GetCollection();
-            series = new ChartPolarLineSeries<XYData, float, float>(s => s.X, s => s.Y);
+            series = new ChartPolarLineSeries<XYData, float, float>(s => s.X, s => s.Y, s => s.X.ToString());
         }
 
         [Fact]

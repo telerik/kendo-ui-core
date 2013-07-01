@@ -21,6 +21,7 @@ namespace Kendo.Mvc.UI
                 .Add("type", "scatter")
                 .Add("xField", series.XMember, () => { return series.Data == null && series.XMember != null; })
                 .Add("yField", series.YMember, () => { return series.Data == null && series.YMember != null; })
+                .Add("noteTextField", series.NoteTextMember, () => { return series.Data == null && series.NoteTextMember != null; })
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("xAxis", series.XAxis, () => !string.IsNullOrEmpty(series.XAxis))
                 .Add("yAxis", series.YAxis, () => !string.IsNullOrEmpty(series.YAxis));

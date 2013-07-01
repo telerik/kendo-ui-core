@@ -16,15 +16,17 @@ namespace Kendo.Mvc.UI
         /// <param name="closeExpression">The close expression.</param>
         /// <param name="colorExpression">The color expression.</param>
         /// <param name="downColorExpression">The down color expression.</param>
+        /// <param name="noteTextExpression">The down color expression.</param>
         public ChartCandlestickSeries(
             Expression<Func<TModel, TValue>> openExpression,
             Expression<Func<TModel, TValue>> highExpression,
             Expression<Func<TModel, TValue>> lowExpression,
             Expression<Func<TModel, TValue>> closeExpression,
             Expression<Func<TModel, string>> colorExpression,
-            Expression<Func<TModel, string>> downColorExpression
+            Expression<Func<TModel, string>> downColorExpression,
+            Expression<Func<TModel, string>> noteTextExpression
             )
-            : base(openExpression, highExpression, lowExpression, closeExpression, colorExpression)
+            : base(openExpression, highExpression, lowExpression, closeExpression, colorExpression, noteTextExpression)
         {
             if (downColorExpression != null)
             {

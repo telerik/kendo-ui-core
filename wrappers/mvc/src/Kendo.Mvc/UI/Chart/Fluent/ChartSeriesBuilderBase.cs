@@ -261,5 +261,15 @@ namespace Kendo.Mvc.UI.Fluent
             Series.Visible = visible;
             return this as TSeriesBuilder;
         }
+
+        /// <summary>
+        /// Configures the series notes
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>
+        public TSeriesBuilder Notes(Action<ChartNoteBuilder> configurator)
+        {
+            configurator(new ChartNoteBuilder(Series.Notes));
+            return this as TSeriesBuilder;
+        }
     }
 }
