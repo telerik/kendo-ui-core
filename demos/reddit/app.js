@@ -30,6 +30,7 @@ var awwDataSource = new kendo.data.DataSource({
     pageSize: PAGE_SIZE,
     schema: {
         data: "data.children",
+        model: { id: "data.name" },
         total: function() { return 100000; }
     }
 });
@@ -65,7 +66,7 @@ var canvasDataSource = new kendo.data.DataSource({
 // var ds = new kendo.data.DataSource({
 //     transport: {
 //         read: function(options) {
-// 
+//
 //             var results = [], data = options.data;
 //             for (var i = data.skip; i < data.skip + data.take; i ++) {
 //                 results.push({ foo: i });
@@ -113,43 +114,59 @@ function resetDetail(e) {
     app.hideLoading();
 }
 
-function renderDetail(e) {
-    var view = e.view,
-        id = view.params.id,
-        element = view.element,
-        template = kendo.template("#=data.title#<br/><br/><span>by <a target='_blank' href='http://www.reddit.com/user/#=data.author#'>#=data.author#</a> | <a target='_blank' href='http://www.reddit.com#=data.permalink#'>#=data.num_comments# comments</a></span>");
+var DETAIL_TEMPLATE = kendo.template("#=data.title#<br/><br/><span>by <a target='_blank' href='http://www.reddit.com/user/#=data.author#'>#=data.author#</a> | <a target='_blank' href='http://www.reddit.com#=data.permalink#'>#=data.num_comments# comments</a></span>");
 
-    app.showLoading();
+function displayDetail(element, item) {
+    var url = item.url,
+        text = element.find(".detail-text"),
+        img = element.find('img');
+
+    if(!imgExtensionRegex.test(url)) {
+        url += '.jpg';
+    }
+
+    text.html(DETAIL_TEMPLATE(item));
+    kendo.fx(text).fadeIn().play();
+
+    img.css('visibility', 'hidden').attr('src', url).one('load', function() {
+        element.find(".detail-image").data("kendoMobileScroller").zoomOut();
+        img.css({
+            'visibility': 'visible',
+            'display': 'none'
+        }).width("100%");
+        app.hideLoading();
+
+        kendo.fx(img).fadeIn().play();
+    });
+}
+
+function fetchItem(id, callback) {
     $.ajax('http://reddit.com/api/info.json', {
         data: { id: id },
         dataType: 'jsonp',
         jsonp: 'jsonp',
+
         success: function(data) {
-            data = data.data.children[0].data;
-
-            var url = data.url,
-                text = element.find(".detail-text"),
-                img = element.find('img');
-
-            if(!imgExtensionRegex.test(url)) {
-                url += '.jpg';
-            }
-
-            text.html(template(data));
-            kendo.fx(text).fadeIn().play();
-
-            img.css('visibility', 'hidden').attr('src', url).one('load', function() {
-                view.element.find(".detail-image").data("kendoMobileScroller").zoomOut();
-                img.css({
-                    'visibility': 'visible',
-                    'display': 'none'
-                }).width("100%");
-                app.hideLoading();
-
-                kendo.fx(img).fadeIn().play();
-            });
+            callback(data.data.children[0].data);
         }
     });
+}
+
+function renderDetail(e) {
+    var view = e.view,
+        id = view.params.id,
+        item = awwDataSource.get(id),
+        element = view.element;
+
+    app.showLoading();
+
+    if (item) {
+        displayDetail(element, item.data);
+    } else {
+        fetchItem(id, function(item) {
+            displayDetail(element, item);
+        });
+    }
 }
 
 function renderThumbs(element) {
