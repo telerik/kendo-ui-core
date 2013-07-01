@@ -114,7 +114,7 @@ function resetDetail(e) {
     app.hideLoading();
 }
 
-var DETAIL_TEMPLATE = kendo.template("#=data.title#<br/><br/><span>by <a target='_blank' href='http://www.reddit.com/user/#=data.author#'>#=data.author#</a> | <a target='_blank' href='http://www.reddit.com#=data.permalink#'>#=data.num_comments# comments</a></span>");
+var DETAIL_TEMPLATE = kendo.template("<div><p>#=data.title#</p><span>by <a target='_blank' href='http://www.reddit.com/user/#=data.author#'>#=data.author#</a> | <a target='_blank' href='http://www.reddit.com#=data.permalink#'>#=data.num_comments# comments</a></span></div>");
 
 function displayDetail(element, item) {
     var url = item.url,

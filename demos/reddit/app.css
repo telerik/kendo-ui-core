@@ -166,10 +166,10 @@
 
 .detail-image {
     width: 100%;
-    height: 85%;
     position: absolute;
     top: 0;
     left: 0;
+    bottom: 120px;
 }
 
 .detail-image img {
@@ -178,10 +178,56 @@
 
 .detail-text {
     width: 100%;
-    height: 15%;
+    height: 120px;
     position: absolute;
     bottom: 0;
     left: 0;
+    font-size: 20px;
+    color: #fff;
+    padding: 0 20px;
+    vertical-align: middle;
+}
+
+.detail-text:before {
+    content: "\a0";
+    width: 0;
+    height: 95%;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.detail-text > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.detail-text p {
+    padding: 0;
+    margin: 0;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    max-height: 72px;
+    width: 100%;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+}
+
+.detail-text span {
+    color: #c1c1c1;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
+.detail-text a {
+    color: #10c4b2;
+    text-decoration: none;
+}
+
+.detail-text a:hover {
+    text-decoration: underline;
 }
 
 [data-icon=comments] {
