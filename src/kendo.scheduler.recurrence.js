@@ -905,13 +905,11 @@ kendo_module({
         var length = events.length,
             idx = 0, event, result,
             startTimezone,
-            eventStart,
             data = [],
             id;
 
         for (; idx < length; idx++) {
             event = events[idx];
-            eventStart = event.start;
             startTimezone = event.startTimezone || event.endTimezone || zone;
 
             result = expand(event, start, end, startTimezone);
@@ -922,7 +920,7 @@ kendo_module({
                 event.id = id;
             }
 
-            if (eventStart >= start && !isException(event.recurrenceException, eventStart, startTimezone)) {
+            if (!event.recurrenceRule || !isException(event.recurrenceException, event.start, startTimezone)) {
                 data.push(event);
             }
 
