@@ -83,7 +83,7 @@
         <script type="text/x-kendo-template" id="item-template">
             <div class="item">
                 <div class="item-thumb">
-                    <img class='loading-thumb' src='#: data.thumbnail #' />
+                    <img class='loading-thumb' src='#: data.thumbnail != "default" ? data.thumbnail : "images/foxie_thumb.png" #' />
                 </div>
                 <div class="item-summary">
                    <h3>#: data.title #</h3>
