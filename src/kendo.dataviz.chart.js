@@ -4076,7 +4076,7 @@ kendo_module({
             var missingValues = series.missingValues,
                 assumeZero = !missingValues && this.options.isStacked;
 
-            return assumeZero ? ZERO : missingValues;
+            return assumeZero ? ZERO : missingValues || INTERPOLATE;
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
