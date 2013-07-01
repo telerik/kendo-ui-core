@@ -308,12 +308,19 @@
                     }
                 });
 
-                test("Reports minimum series value for default axis", function() {
-                    deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
+                test("reports minimum series value for default axis", function() {
+                    equal(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
-                test("Reports maximum series value for default axis", function() {
-                    deepEqual(lineChart.valueAxisRanges[undefined].max, 2);
+                test("reports maximum series value for default axis", function() {
+                    equal(lineChart.valueAxisRanges[undefined].max, 2);
+                });
+
+                test("ignores null values when reporting minimum series value", function() {
+                    setupLineChart(plotArea, {
+                        series: [{ data: [1, 2, null] }]
+                    });
+                    equal(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("omits missing points by default", function() {

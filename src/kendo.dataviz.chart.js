@@ -2927,7 +2927,7 @@ kendo_module({
                 axisName = series.axis,
                 axisRange = chart.valueAxisRanges[axisName];
 
-            if (defined(value) && !isNaN(value)) {
+            if (isNumber(value)) {
                 axisRange = chart.valueAxisRanges[axisName] =
                     axisRange || { min: MAX_VALUE, max: MIN_VALUE };
 
