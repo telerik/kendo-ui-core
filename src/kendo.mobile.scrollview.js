@@ -27,10 +27,12 @@ kendo_module({
         max = math.max,
         min = math.min,
         floor = math.floor,
+
         CHANGE = "change",
         CHANGING = "changing",
         REFRESH = "refresh",
         CURRENT_PAGE_CLASS = "km-current-page",
+        FUNCTION = "function",
 
         VIRTUAL_PAGE_COUNT = 3,
         LEFT_PAGE = -1,
@@ -295,8 +297,7 @@ kendo_module({
             that.element = element;
             that.pane = pane;
             that.options = options;
-            that.template = kendo.template(options.template || ""),
-            that.emptyTemplate = kendo.template(options.emptyTemplate || ""),
+            that._templates();
             that.page = 0;
             that.pages = [];
             that._initPages();
@@ -345,6 +346,27 @@ kendo_module({
             });
         },
 
+        _templates: function() {
+            var template = this.options.template,
+                emptyTemplate = this.options.emptyTemplate,
+                templateProxy = {},
+                emptyTemplateProxy = {};
+
+            if(typeof template === FUNCTION) {
+                templateProxy.template = template;
+                template = "#=this.template(data)#";
+            }
+
+            this.template = proxy(kendo.template(template), templateProxy);
+
+            if(typeof emptyTemplate === FUNCTION) {
+                emptyTemplateProxy.emptyTemplate = emptyTemplate;
+                emptyTemplate = "#=this.emptyTemplate(data)#";
+            }
+
+            this.emptyTemplate = proxy(kendo.template(emptyTemplate), emptyTemplateProxy);
+        },
+
         _initPages: function() {
             var pages = this.pages,
                 element = this.element,
@@ -375,7 +397,6 @@ kendo_module({
 
         scrollTo: function(page) {
             var buffer = this.buffer,
-                pages = this.pages,
                 dataItem;
 
             buffer.syncDataSource();
@@ -480,8 +501,6 @@ kendo_module({
         },
 
         _resetPages: function() {
-            var pages = this.pages;
-
             this._updatePagesContent();
             this._repositionPages();
 

@@ -96,7 +96,7 @@
             test("re-calculates the pages width on pane resize", 2, function() {
                 element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
                 pane = new ElasticPane(element);
-                content = new VirtualScrollViewContent(element, pane, {});
+                content = new VirtualScrollViewContent(element, pane, { template: "", emptyTemplate: "" });
 
                 equal(content.pages[0].element.width(), 500);
 
@@ -105,10 +105,10 @@
             });
 
             test("creates buffer correctly", 2, function() {
-                var content = new VirtualScrollViewContent(element, new ElasticPane(element), {});
+                var content = new VirtualScrollViewContent(element, new ElasticPane(element), { itemsPerPage: 1, template: "", emptyTemplate: "" });
                 ok(content.buffer instanceof kendo.data.Buffer);
 
-                content = new VirtualScrollViewContent(element, new ElasticPane(element), { itemsPerPage: 6 });
+                content = new VirtualScrollViewContent(element, new ElasticPane(element), { itemsPerPage: 6, template: "", emptyTemplate: "" });
                 ok(content.buffer instanceof BatchBuffer);
             });
 
