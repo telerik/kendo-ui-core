@@ -161,7 +161,7 @@ kendo_module({
     function allDaySlotByPosition(rows, x, y) {
        for (var rowIndex = 0; rowIndex < rows.length; rowIndex++) {
            for (var slotIndex = 0; slotIndex < rows[rowIndex].slots.length; slotIndex++) {
-               slot = rows[rowIndex].slots[slotIndex];
+               var slot = rows[rowIndex].slots[slotIndex];
 
                if (x >= slot.offsetLeft && x < slot.offsetLeft + slot.clientWidth &&
                    y >= slot.offsetTop && y < slot.offsetTop + slot.clientHeight) {
@@ -263,6 +263,7 @@ kendo_module({
            }
 
            var column;
+
            for (var columnIndex = 0; columnIndex < this._columns.length; columnIndex++) {
                column = this._columns[columnIndex];
 
@@ -274,7 +275,7 @@ kendo_module({
            }
 
            if (column) {
-               for (slotIndex = 0; slotIndex < column.slots.length; slotIndex++) {
+               for (var slotIndex = 0; slotIndex < column.slots.length; slotIndex++) {
                    slot = column.slots[slotIndex];
 
                    if (y >= slot.offsetTop && y <= slot.offsetTop + slot.clientHeight) {
@@ -339,7 +340,7 @@ kendo_module({
 
             var allDaySelector = ".k-scheduler-header-all-day tr";
 
-            if (this.groupedResources.length && this.options.groupOrientation === "vertical") {
+            if (this._isVerticallyGrouped()) {
                allDaySelector = ".k-scheduler-header-all-day";
             }
 
@@ -347,16 +348,12 @@ kendo_module({
 
             var rows = [];
 
+            var row = { slots: [], events: [] };
             if (!tableRows.length) {
-                var row = {
-                    slots: [],
-                    events: []
-                };
-
                 rows.push(row);
             } else {
                 for (rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
-                    var row = { slots: [], events: [] };
+                    row = { slots: [], events: [] };
 
                     tableCells = tableRows[rowIndex].children;
 
@@ -619,6 +616,7 @@ kendo_module({
                     return content;
                 });
             }
+
             html += '</tbody>';
 
             this.content.find("table").append(html);
@@ -722,10 +720,7 @@ kendo_module({
             var startTime = getMilliseconds(options.startTime);
             var timeSlotInterval = ((options.majorTick/options.minorTickCount) * MS_PER_MINUTE);
 
-            var resources = this.groupedResources;
-            var isVertical = this.options.groupOrientation === "vertical";
-
-            if (resources.length && isVertical) {
+            if (this._isVerticallyGrouped()) {
                 var rowCount = this._rowsCountInGroup();
                 index = index - (rowCount*Math.floor(index/rowCount));
             }
@@ -920,16 +915,21 @@ kendo_module({
             }
         },
 
+        _isVerticallyGrouped: function() {
+            return this.groupedResources.length && this.options.groupOrientation === "vertical";
+        },
+
         _positionEvent: function(event, element, dateSlotIndex, timeResouceOffset) {
             var dateSlot = this._columns[dateSlotIndex];
+            var maxSlotCount = this._isVerticallyGrouped() ? this._rowsCountInGroup() + timeResouceOffset : dateSlot.slots.length;
             var startIndex = Math.max(Math.floor(this._timeSlotIndex(event.startTime || event.start)) + timeResouceOffset, 0);
-            var endIndex = Math.min(Math.ceil(this._timeSlotIndex(event.endTime || event.end)) + timeResouceOffset, dateSlot.slots.length);
+            var endIndex = Math.min(Math.ceil(this._timeSlotIndex(event.endTime || event.end)) + timeResouceOffset, maxSlotCount);
             var bottomOffset = 4;
 
             var timeSlot = dateSlot.slots[Math.floor(startIndex)];
 
             if (startIndex >= 0 && endIndex === 0) {
-                endIndex = dateSlot.slots.length;
+                endIndex = maxSlotCount;
             }
 
             element.css({
@@ -1056,6 +1056,7 @@ kendo_module({
             if (this.groupedResources.length) {
                 if (isVertical) {
                     timeOffset = resourceOffset;
+                    allDayEventContainer = this.content;
                 } else {
                     dateOffset = resourceOffset;
                 }

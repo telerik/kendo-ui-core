@@ -865,6 +865,34 @@
                 equal(event.end, 0);
             });
 
+            test("event pass the endTime in vertical resource grouping", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    endTime: new Date("2013/6/6 14:00"),
+                    groups: [ "ResourceName" ],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 16:00"), title:"foo", foo: 1 }
+                    ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+                var event = view._columns[0].events[0];
+                equal(event.start, 20);
+                equal(event.end, 28);
+            });
+
             test("multiple copies of the event are position in the correct group in day view when multiple resources matched", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -1070,6 +1098,29 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
+            test("all day events are added in the content when vertical grouping is applyed", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/6 10:00 AM"), end: new Date("2013/6/6 11:00 AM"), isAllDay: true, title: "", foo: 2 }],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view.content.find(".k-event").length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
