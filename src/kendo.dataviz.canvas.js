@@ -117,7 +117,7 @@ kendo_module({
 
         createRect: function(box, style) {
             return this.decorate(
-                new DummyElement(style)
+                new CanvasLine(box.points(), true, style)
             );
         },
 
@@ -236,7 +236,7 @@ kendo_module({
                 shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
                 align = shouldAlign ? alignToPixel : round;
 
-            if (points.length === 0) {
+            if (points.length === 0 || !(options.fill || options.stroke)) {
                 return;
             }
 
@@ -269,12 +269,19 @@ kendo_module({
 
             line.setLineCap(context);
 
-            context.strokeStyle = options.stroke;
-            context.lineWidth = options.strokeWidth;
-            context.lineJoin = "round";
-            context.globalAlpha = options.strokeOpacity;
+            if (options.fill) {
+                context.fillStyle = options.fill;
+                context.globalAlpha = options.fillOpacity;
+                context.fill();
+            }
 
-            context.stroke();
+            if (options.stroke) {
+                context.strokeStyle = options.stroke;
+                context.lineWidth = options.strokeWidth;
+                context.lineJoin = "round";
+                context.globalAlpha = options.strokeOpacity;
+                context.stroke();
+            }
 
             context.restore();
         }
