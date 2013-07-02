@@ -1214,7 +1214,8 @@
                         ]
                     });
 
-                view.content.find("td").eq(2).trigger("dblclick");
+                var cell = view.content.find("td").eq(2);
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
             test("double clicking a cell in the datesHeader triggers add event", 3, function() {
@@ -1233,7 +1234,8 @@
                         ]
                     });
 
-                view.datesHeader.find(".k-scheduler-header-all-day td").trigger("dblclick");
+                var cell = view.datesHeader.find(".k-scheduler-header-all-day td");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
             test("double clicking an all day event triggers edit event", 1, function() {

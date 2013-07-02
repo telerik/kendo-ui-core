@@ -77,7 +77,8 @@
                     dataSource = scheduler.dataSource,
                     addEvent = stub(scheduler, "addEvent");
 
-                scheduler.view().content.find("td").first().dblclick();
+                var cell = scheduler.view().content.find("td").first();
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
 
                 equal(addEvent.calls("addEvent"), 1);
                 ok(addEvent.args("addEvent")[0].start);
