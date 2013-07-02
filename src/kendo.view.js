@@ -62,9 +62,12 @@ kendo_module({
         },
 
         destroy: function() {
-            if (this.element) {
-                kendo.unbind(this.element);
-                this.element.remove();
+            var element = this.element;
+
+            if (element) {
+                kendo.unbind(element);
+                kendo.destroy(element);
+                element.remove();
             }
         },
 
