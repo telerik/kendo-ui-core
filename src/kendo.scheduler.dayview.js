@@ -46,7 +46,7 @@ kendo_module({
                 '{0}' +
                 '<span class="k-event-actions">' +
                     '#if (showDelete) {#' +
-                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
+                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
                     '#}#' +
                     '# if(data.head || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-e"></span>' +
@@ -74,7 +74,7 @@ kendo_module({
                 '{0}' +
                 '<span class="k-event-actions">' +
                     '#if (showDelete) {#' +
-                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
+                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
                     '#}#' +
                 '</span>' +
                 '<span class="k-event-top-actions">' +
@@ -315,7 +315,7 @@ kendo_module({
             var that = this;
             if (that.options.editable) {
 
-                that.element.on("click" + NS, ".k-event a:has(.k-i-close)", function(e) {
+                that.element.on("click" + NS, ".k-event a:has(.k-si-close)", function(e) {
                     that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
                     e.preventDefault();
                 });

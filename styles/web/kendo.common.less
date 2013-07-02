@@ -390,6 +390,7 @@ html body .k-button-bare.k-upload-button:hover
 
 .k-i-pencil, .k-edit { .sprite-hoverable(2, 0); }
 .k-i-close, .k-delete, .k-group-delete { .sprite-hoverable(2, 1); }
+.k-si-close { .sprite-hoverable(10, 5); }
 .k-multiselect .k-delete { .sprite-position(10, 5); }
 .k-multiselect .k-state-hover .k-delete { .sprite-position(11, 5); }
 .k-i-tick, .k-insert, .k-update { .sprite-hoverable(2, 2); }
@@ -4059,6 +4060,7 @@ tr:hover > td > .k-task .k-event-delete
     position: absolute;
     visibility: hidden;
     background: rgba(0, 0, 0, .2);
+    z-index: 2;
 }
 
 .k-event:hover .k-resize-handle
