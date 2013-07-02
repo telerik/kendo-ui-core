@@ -554,6 +554,19 @@ kendo_module({
                                 .find("div:last")
                                 .text(kendo.toString(slot.end, "M/dd"));
                         }
+                    } else if (dragHandle.is(".k-resize-w")) {
+                        if (event.end.getDate() >= slot.start.getDate()) {
+                            endSlot = slot;
+
+                            width += startSlot.offsetLeft - slot.offsetLeft;
+
+                            hint.css({
+                                    left: slot.offsetLeft,
+                                    width: width
+                                })
+                                .find("div:first")
+                                .text(kendo.toString(slot.start, "M/dd"));
+                        }
                     }
                 },
                 dragend: function(e) {
@@ -569,6 +582,8 @@ kendo_module({
                         kendo.date.setTime(start, getMilliseconds(endSlot.start));
                     } else if (dragHandle.is(".k-resize-e")) {
                         end.setDate(endSlot.end.getDate());
+                    } else if (dragHandle.is(".k-resize-w")) {
+                        start.setDate(endSlot.start.getDate());
                     }
 
                     hint.remove();

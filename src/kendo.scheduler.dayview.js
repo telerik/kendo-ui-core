@@ -52,10 +52,10 @@ kendo_module({
                         '<span class="k-icon k-i-arrow-e"></span>' +
                     '#}#' +
                 '</span>' +
-                '#if(!first){#' +
+                '#if(!singleDay){#' +
                 '<span class="k-resize-handle k-resize-w"></span>' +
                 '#}#' +
-                '#if(!last){#' +
+                '#if(!singleDay && !data.head && !data.middle){#' +
                 '<span class="k-resize-handle k-resize-e"></span>' +
                 '#}#' +
                 '</div>',
@@ -260,7 +260,7 @@ kendo_module({
             for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
                 td = tableCells[cellIndex];
 
-                range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length - 1);
+                range = this._rangeByIndex(0, cellIndex, tableRows.length - 1);
 
                 cell = {
                     offsetTop: td.parentNode.parentNode.parentNode.offsetTop,
@@ -795,8 +795,6 @@ kendo_module({
                 eventStartTime = getMilliseconds(event.startTime || event.start),
                 eventEndTime = getMilliseconds(event.endTime || event.end),
                 middle,
-                first,
-                last,
                 head,
                 tail;
 
@@ -813,17 +811,13 @@ kendo_module({
                 head = true;
             }
 
-            last = getDate(event.end).getTime() >= endDate.getTime();
-            first = getDate(event.start).getTime() <= startDate.getTime();
-
             return $(template(extend({}, {
                 ns: kendo.ns,
                 showDelete: showDelete,
                 middle: middle,
                 head: head,
                 tail: tail,
-                first: first,
-                last: last,
+                singleDay: this._dates.length == 1,
                 resources: this.eventResources(event)
             }, event, {
                 start: event.startTime || event.start,
