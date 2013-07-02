@@ -100,7 +100,8 @@ model = kendo.observable({
     },
 
     searchFor: function(query, showFirst) {
-        var currentQuery = this.get("currentQuery");
+        var that = this,
+            currentQuery = this.get("currentQuery");
 
         if (currentQuery !== query) {
             this.set("currentQuery", query);
@@ -113,7 +114,13 @@ model = kendo.observable({
 
             if (showFirst) {
                 photos.one("change", function() {
-                    model.show(this.data()[0].id);
+                    var data = this.data();
+                    if (data.length) {
+                        model.show(data[0].id);
+                    } else {
+                        alert('No results found, how about some kittens instead?');
+                        router.navigate("search/kittens");
+                    }
                 })
             }
         }
