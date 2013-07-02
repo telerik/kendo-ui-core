@@ -17,6 +17,7 @@ kendo_module({
         Widget = ui.Widget,
         DataSource = kendo.data.DataSource,
         Buffer = kendo.data.Buffer,
+        BatchBuffer = kendo.data.BatchBuffer,
 
         // Math
         math = Math,
@@ -709,70 +710,5 @@ kendo_module({
     });
 
     ui.plugin(ScrollView);
-
-    var BatchBuffer = kendo.Observable.extend({
-        init: function(dataSource, batchSize) {
-            var batchBuffer = this;
-
-            kendo.Observable.fn.init.call(batchBuffer);
-
-            this.dataSource = dataSource;
-            this.batchSize = batchSize;
-            this.total = 0;
-
-            this.buffer = new Buffer(dataSource, batchSize * 3);
-
-            this.buffer.bind({
-                "endreached": function (e) {
-                    batchBuffer.trigger("endreached", { index: e.index });
-                },
-                "prefetching": function (e) {
-                    batchBuffer.trigger("prefetching", { skip: e.skip, take: e.take });
-                },
-                "prefetched": function (e) {
-                    batchBuffer.trigger("prefetched", { skip: e.skip, take: e.take });
-                },
-                "reset": function () {
-                    batchBuffer.total = 0;
-                    batchBuffer.trigger("reset");
-                },
-                "resize": function () {
-                    batchBuffer.total = this.length / batchBuffer.batchSize;
-                    batchBuffer.trigger("resize", { total: batchBuffer.total, offset: this.offset });
-                }
-            });
-        },
-
-        syncDataSource: function() {
-            this.buffer.syncDataSource();
-        },
-
-        at: function(index) {
-            var buffer = this.buffer,
-                skip = index * this.batchSize,
-                take = this.batchSize,
-                view = [],
-                item;
-
-            if (buffer.offset > skip) {
-                buffer.at(buffer.offset - 1);
-            }
-
-            for (var i = 0; i < take; i++) {
-                item = buffer.at(skip + i);
-
-                if (item === undefined) {
-                    return;
-                }
-
-                view.push(item);
-            }
-
-            return view;
-        }
-    });
-
-
-    kendo.mobile.ui.BatchBuffer = BatchBuffer;
 
 })(window.kendo.jQuery);
