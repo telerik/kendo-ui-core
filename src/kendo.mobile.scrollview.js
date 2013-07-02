@@ -555,7 +555,7 @@ kendo_module({
 
     var Page = kendo.Class.extend({
         init: function(container) {
-            this.element = $("<div class='virtual-page'></div>");
+            this.element = $("<div class='km-virtual-page'></div>");
             this.width = container.width();
             this.element.width(this.width);
             container.append(this.element);

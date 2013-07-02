@@ -170,7 +170,7 @@ function canvasInit(e) {
         change: updateSrc
     }).data("kendoMobileScrollView");
 
-    canvasScrollView.element.find(".virtual-page").kendoTouch({
+    canvasScrollView.element.find(".km-virtual-page").kendoTouch({
         tap: function (e) {
             var tile = $(e.event.target).closest("div.tile"),
                 offset = tile.data("offset");
