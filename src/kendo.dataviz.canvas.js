@@ -72,17 +72,24 @@ kendo_module({
 
         renderTo: function(container) {
             var view = this,
-                viewElement;
+                canvas;
 
-            var canvas = $(CANVAS_TEMPLATE(this));
-            $(container).empty().append(canvas);
+            canvas = container.firstElementChild;
+            if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
+                var canvas = $(CANVAS_TEMPLATE(this));
+                $(container).empty().append(canvas);
 
-            viewElement = container.firstElementChild;
+                canvas = container.firstElementChild;
+            } else {
+                $(canvas).siblings().remove();
+            }
 
-            var context = viewElement.getContext("2d");
+            canvas.width = canvas.width;
+
+            var context = canvas.getContext("2d");
             view.renderContent(context);
 
-            return viewElement;
+            return canvas;
         },
 
         render: function() {

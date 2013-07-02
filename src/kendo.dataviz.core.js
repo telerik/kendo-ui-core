@@ -3034,6 +3034,8 @@ kendo_module({
 
             if (pool.length < that._size && !freed[id]) {
                 pool.push(id);
+
+                // TODO: Freed is constantly growing with canvas rendering
                 freed[id] = true;
             }
         }
