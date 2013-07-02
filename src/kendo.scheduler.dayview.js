@@ -1118,7 +1118,7 @@ kendo_module({
             var resources = this.groupedResources;
 
             if (resources.length) {
-                this._renderForGroups(events, resources, 0, 1);
+                this._renderGroups(events, resources, 0, 1);
             } else {
                 this._renderEvents(events, 0);
             }
@@ -1144,7 +1144,7 @@ kendo_module({
             this.groupedResources = result;
         },
 
-        _renderForGroups: function(events, resources, offset, columnLevel) {
+        _renderGroups: function(events, resources, offset, columnLevel) {
             var resource = resources[0];
 
             var offsetCount;
@@ -1167,13 +1167,10 @@ kendo_module({
                         value = kendo.getter(resource.dataValueField)(value);
                     }
 
-                    var tmp = new kendo.data.Query(events)
-                        .filter({ field: resource.field,
-                            operator: arrayEqFilter,
-                        value: value }).toArray();
+                    var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: arrayEqFilter, value: value }).toArray();
 
                     if (resources.length > 1) {
-                        this._renderForGroups(tmp, resources.slice(1), offsetCount * itemIdx, columnLevel + 1);
+                        this._renderGroups(tmp, resources.slice(1), offsetCount * itemIdx, columnLevel + 1);
                     } else {
                         this._renderEvents(tmp, offsetCount * (itemIdx + offset));
                     }
