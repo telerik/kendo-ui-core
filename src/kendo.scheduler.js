@@ -549,8 +549,15 @@ kendo_module({
                         kendo.date.setTime(start, getMilliseconds(endSlot.start));
                     } else if (dragHandle.is(".k-resize-e")) {
                         end.setDate(endSlot.end.getDate());
+                        end.setHours(0);
+                        end.setMinutes(0);
+                        if (end < start) {
+                            end = kendo.date.addDays(end, 1);
+                        }
                     } else if (dragHandle.is(".k-resize-w")) {
                         start.setDate(endSlot.start.getDate());
+                        start.setHours(0);
+                        start.setMinutes(0);
                     }
 
                     hint.remove();
