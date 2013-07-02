@@ -373,7 +373,7 @@
                 equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
             });
 
-            test("dragging and dropping the east resize handle changes the end of the event", function() {
+            test("dragging and dropping the east resize handle changes the end time of the event", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["week"],

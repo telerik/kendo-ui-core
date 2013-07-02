@@ -136,6 +136,10 @@ kendo_module({
             '</div>'
         );
     }
+    var HINT = '<div class="k-marquee k-scheduler-marquee">' +
+                    '<div class="k-label-top"></div>' +
+                    '<div class="k-label-bottom"></div>' +
+                '</div>';
 
     kendo.ui.SchedulerView = Widget.extend({
         init: function(element, options) {
@@ -145,6 +149,46 @@ kendo_module({
         dateForTitle: function() {
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
         },
+
+        _updateResizeHint: function(hint, direction, startSlot, endSlot, width, height) {
+            var css = {};
+            var selector;
+            var text;
+
+            if (direction == "south") {
+                css.height = height + endSlot.offsetTop - startSlot.offsetTop;
+                selector = "div:last";
+                text = kendo.toString(endSlot.end, "t");
+            } else if (direction == "north") {
+                css.top = endSlot.offsetTop;
+                css.height = height + startSlot.offsetTop - endSlot.offsetTop;
+                selector = "div:first";
+                text = kendo.toString(endSlot.start, "t");
+            } else if (direction == "west") {
+                css.left = endSlot.offsetLeft;
+                css.width = width + startSlot.offsetLeft - endSlot.offsetLeft;
+                selector = "div:first";
+                text = kendo.toString(endSlot.end, "M/dd");
+            } else if (direction == "east") {
+                css.width = width + endSlot.offsetLeft - startSlot.offsetLeft;
+                selector = "div:last";
+                text = kendo.toString(endSlot.start, "M/dd");
+            }
+
+            hint.find(selector).text(text);
+
+            return hint.css(css);
+        },
+
+        _createResizeHint: function(left, top, width, height) {
+            return $(HINT).css({
+                left: left,
+                top: top,
+                width: width,
+                height: height
+            });
+        },
+
         eventResources: function(event) {
             var resources = [],
                 options = this.options;

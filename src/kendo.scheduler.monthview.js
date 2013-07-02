@@ -40,6 +40,8 @@ kendo_module({
                         '<span class="k-icon k-i-arrow-e"></span>' +
                     '#}#' +
                 '</span>' +
+                '<span class="k-resize-handle k-resize-w"></span>' +
+                '<span class="k-resize-handle k-resize-e"></span>' +
                 '</div>',
         EVENT_TEMPLATE = kendo.template('<div title="#=title#">' +
                     '<dl><dd>#:title#</dd></dl>' +
@@ -309,14 +311,14 @@ kendo_module({
                     start: startIndex,
                     end: endIndex,
                     width: startSlot.clientWidth - 2,
-                    left: startSlot.offsetLeft,
+                    left: startSlot.offsetLeft + 2,
                     top: startSlot.offsetTop + startSlot.firstChildHeight + eventCount * eventHeight + 3 * eventCount
                 }));
             } else {
                 this._row.events.push({element: element, start: startIndex, end: endIndex });
 
                 element[0].style.width = this._calculateAllDayEventWidth(slots, startIndex, endIndex) - rightOffset + "px";
-                element[0].style.left = startSlot.offsetLeft + "px";
+                element[0].style.left = startSlot.offsetLeft + 2 + "px";
                 element[0].style.height = eventHeight + "px";
             }
 
@@ -402,6 +404,11 @@ kendo_module({
            }
        },
 
+       _createEastWestResizeHint: function(left, top, width, height) {
+            var hint = SchedulerView.fn._createEastWestResizeHint.call(this, left, top, width, height);
+            return hint.appendTo(this.content);
+       },
+
        _slots: function() {
             var row = {
                 slots: [],
@@ -416,6 +423,7 @@ kendo_module({
                 var cell = cells[idx];
                 var clientHeight = cell.clientHeight;
                 var firstChildHeight = cell.firstChild.offsetHeight + 3;
+                var start = kendo.date.addDays(this.startDate(), idx);
 
                 row.slots.push({
                    clientWidth: cell.clientWidth,
@@ -423,9 +431,10 @@ kendo_module({
                    offsetWidth: cell.offsetWidth,
                    offsetTop: cell.offsetTop,
                    firstChildHeight: firstChildHeight + scrollTop,
-                   offsetLeft: cell.offsetLeft + 2,
+                   offsetLeft: cell.offsetLeft,
                    eventCount: Math.floor((clientHeight - firstChildHeight) / (eventHeight + 3)),
-                   start: kendo.date.addDays(this.startDate(), idx),
+                   start: start,
+                   end: start,
                    element: cell
                 });
             }

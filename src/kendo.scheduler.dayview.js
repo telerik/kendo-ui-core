@@ -154,6 +154,18 @@ kendo_module({
             that._slots();
        },
 
+       _createEastWestResizeHint: function(left, top, width, height) {
+            var hint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
+
+            return hint.appendTo(this.element.find(".k-scheduler-header-wrap"));
+       },
+
+       _createSouthNorthResizeHint: function(left, top, width, height) {
+            var hint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
+
+            return hint.appendTo(this.content);
+       },
+
        _slotByPosition: function(x, y) {
            var slot;
 
