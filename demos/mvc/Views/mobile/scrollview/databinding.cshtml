@@ -14,7 +14,7 @@
 <script id="template" type="text/x-kendo-template">
     <div class="page">
         <p class="title">#: name #</p>
-        <img class="image" src="#: image_url #" />
+        <div class="image" style="background-image: url(#: image_url #);"></div>
     </div>
 </script>
 
@@ -77,5 +77,7 @@
     .image {
         display: block;
         margin: 3em auto;
+        height: 280px;
+        width: 280px;
     }
 </style>
