@@ -930,6 +930,85 @@
                 view.content.find("tr:eq(4) td:eq(1)").trigger("dblclick");
             });
 
+            test("all day slot is rendered for each resource group when orientation is vertical in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view.content.find(".k-scheduler-header-all-day").length, 2);
+                equal(view.content.find(".k-scheduler-header-all-day td").length, 2); // the sum of the both header row cells
+            });
+
+            test("all day slots are not rendered for each resource group when orientation is vertical in day view if disabled", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName"],
+                    allDaySlot: false,
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                ok(!view.content.find(".k-scheduler-header-all-day").length);
+            });
+
+            test("all day slots are skipped during event time slot calculation with vertical orientation in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 9:00:00"),
+                    endTime: new Date("2013/6/6 14:00:00"),
+                    groups: [ "ResourceName"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/6 10:00 AM"), end: new Date("2013/6/6 11:00 AM"), title: "", foo: 2 }],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                var slotEvents = view._columns[0].events;
+                equal(slotEvents.length, 1);
+                equal(slotEvents[0].start, 12);
+                equal(slotEvents[0].end, 14);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

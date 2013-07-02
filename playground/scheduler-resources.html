@@ -63,7 +63,7 @@
             groups: ["roomId", "atendees"],
             date: new Date(2013, 5, 26),
             //allDaySlot: false,
-            //groupOrientation: "vertical",
+         //   groupOrientation: "vertical",
             resources: [
                 {
                     field: "roomId",
@@ -88,19 +88,19 @@
                 batch: true,
                 transport: {
                     read: {
-                        url: "http://korchev:8080/service/meetings",
+                        url: "http://demos.kendoui.com/service/meetings",
                         dataType: "jsonp"
                     },
                     update: {
-                        url: "http://korchev:8080/service/meetings/update",
+                        url: "http://demos.kendoui.com/service/meetings/update",
                         dataType: "jsonp"
                     },
                     create: {
-                        url: "http://korchev:8080/service/meetings/create",
+                        url: "http://demos.kendoui.com/service/meetings/create",
                         dataType: "jsonp"
                     },
                     destroy: {
-                        url: "http://korchev:8080/service/meetings/destroy",
+                        url: "http://demos.kendoui.com/service/meetings/destroy",
                         dataType: "jsonp"
                     },
                     parameterMap: function(options, operation) {

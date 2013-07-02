@@ -113,9 +113,16 @@ kendo_module({
         for (var rowLevelIndex = 0; rowLevelIndex < rowLevels.length; rowLevelIndex++) {
             var level = rowLevels[rowLevelIndex];
             var rowspan = rowCount / level.length;
+            var className;
 
             for (rowIndex = 0; rowIndex < level.length; rowIndex++) {
-                rows[rowspan * rowIndex] += '<th class="' + level[rowIndex].className + '" rowspan="' + rowspan + '">' + level[rowIndex].text + "</th>";
+                className = level[rowIndex].className || "";
+
+                if (level[rowIndex].allDay) {
+                    className = "k-scheduler-times-all-day";
+                }
+
+                rows[rowspan * rowIndex] += '<th class="' + className + '" rowspan="' + rowspan + '">' + level[rowIndex].text + "</th>";
             }
         }
 

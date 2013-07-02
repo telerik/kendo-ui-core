@@ -289,12 +289,16 @@ kendo_module({
             for (var rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
                 var tr = tableRows[rowIndex];
 
+                if (tr.className && tr.className.indexOf("k-scheduler-header-all-day") > -1) {
+                    continue;
+                }
+
                 tableCells = tr.children;
 
                 for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
-                    var td = tableCells[cellIndex];
+                    td = tableCells[cellIndex];
 
-                    var range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length - 1);
+                    range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length - 1);
 
                     cell = {
                         offsetTop: td.offsetTop,
@@ -321,12 +325,12 @@ kendo_module({
                 events: []
             };
 
-            tableCells = this.element.find(".k-scheduler-header-all-day td");
+            tableCells = this.element.find(".k-scheduler-header-all-day:first td");
 
             for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
-                var td = tableCells[cellIndex];
+                td = tableCells[cellIndex];
 
-                var range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length - 1);
+                range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length - 1);
 
                 cell = {
                     offsetTop: td.parentNode.parentNode.parentNode.offsetTop,
@@ -542,10 +546,14 @@ kendo_module({
             var rowCount = 1;
             var html = '';
             var resources = this.groupedResources;
+            var allDayVerticalGroupRow = "";
 
             if (resources.length) {
                 if (that.options.groupOrientation === "vertical") {
                     rowCount = this.rowLevels[this.rowLevels.length - 2].length;
+                    if (options.allDaySlot) {
+                        allDayVerticalGroupRow = '<tr class="k-scheduler-header-all-day">' + new Array(dates.length + 1).join("<td>&nbsp;</td>") + '</tr>';
+                    }
                 } else {
                     columnCount = this.columnLevels[this.columnLevels.length - 2].length;
                 }
@@ -554,6 +562,8 @@ kendo_module({
             html += '<tbody>';
 
             for (var rowIdx = 0; rowIdx < rowCount; rowIdx++) {
+                html += allDayVerticalGroupRow;
+
                 html += this._forTimeRange(start, end, function(date, majorTick) {
                     var content = "",
                     idx,
@@ -742,8 +752,9 @@ kendo_module({
 
         _rowsCountInGroup: function() {
             var resources = this.groupedResources;
+            var allDaySlotOffset = this.options.allDaySlot ? this.rowLevels[resources.length - 1].length : 0;
 
-            return this.rowLevels[resources.length].length / this.rowLevels[resources.length - 1].length;
+            return (this.rowLevels[resources.length].length - allDaySlotOffset) / this.rowLevels[resources.length - 1].length;
         },
 
         _timeSlotIndex: function(date) {
@@ -993,17 +1004,19 @@ kendo_module({
         },
 
         _renderEvents: function(events, resourceOffset) {
-            var eventTemplate = this.eventTemplate,
-                allDayEventTemplate = this.allDayEventTemplate,
-                allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap"),
-                timeOffset = 0,
-                dateOffset = 0,
-                event,
-                idx,
-                length;
+            var eventTemplate = this.eventTemplate;
+            var allDayEventTemplate = this.allDayEventTemplate;
+            var allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap");
+            var timeOffset = 0;
+            var dateOffset = 0;
+            var event;
+
+            var idx;
+            var length;
+            var isVertical = this.options.groupOrientation === "vertical";
 
             if (this.groupedResources.length) {
-                if (this.options.groupOrientation === "vertical") {
+                if (isVertical) {
                     timeOffset = resourceOffset;
                 } else {
                     dateOffset = resourceOffset;
@@ -1040,7 +1053,7 @@ kendo_module({
                        }
 
                        if (endDateSlotIndex < 0) {
-                           endDateSlotIndex = (this.groupedResources.length ? this._columnCountInGroup() : this._row.slots.length) - 1;
+                           endDateSlotIndex = (this.groupedResources.length && !isVertical ? this._columnCountInGroup() : this._row.slots.length) - 1;
                        }
 
                        this._positionAllDayEvent(element, dateSlotIndex + dateOffset, endDateSlotIndex + dateOffset);
@@ -1095,12 +1108,14 @@ kendo_module({
         _renderForGroups: function(events, resources, offset, columnLevel) {
             var resource = resources[0];
 
-            var columnCount;
+            var offsetCount;
 
             if (this.options.groupOrientation === "vertical") {
-                columnCount = this.rowLevels[columnLevel].length / this.rowLevels[columnLevel - 1].length;
+                var allDaySlotOffset = resources.length === 1 && this.options.allDaySlot ? this.rowLevels[columnLevel - 1].length : 0;
+
+                offsetCount = (this.rowLevels[columnLevel].length - allDaySlotOffset) / this.rowLevels[columnLevel - 1].length;
             } else {
-                columnCount = this.columnLevels[columnLevel].length / this.columnLevels[columnLevel - 1].length;
+                offsetCount = this.columnLevels[columnLevel].length / this.columnLevels[columnLevel - 1].length;
             }
 
             if (resource) {
@@ -1119,9 +1134,9 @@ kendo_module({
                         value: value }).toArray();
 
                     if (resources.length > 1) {
-                        this._renderForGroups(tmp, resources.slice(1), columnCount * itemIdx, columnLevel + 1);
+                        this._renderForGroups(tmp, resources.slice(1), offsetCount * itemIdx, columnLevel + 1);
                     } else {
-                        this._renderEvents(tmp, columnCount * (itemIdx + offset));
+                        this._renderEvents(tmp, offsetCount * (itemIdx + offset));
                     }
                 }
             }
