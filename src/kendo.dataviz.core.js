@@ -3264,6 +3264,10 @@ kendo_module({
         })[0];
     }
 
+    function supportsCanvas() {
+        return !!doc.createElement('canvas').getContext;
+    }
+
     function supportsSVG() {
         return doc.implementation.hasFeature(
             "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
@@ -3474,6 +3478,7 @@ kendo_module({
         round: round,
         ceil: ceil,
         floor: floor,
+        supportsCanvas: supportsCanvas,
         supportsSVG: supportsSVG,
         renderTemplate: renderTemplate,
         uniqueId: uniqueId,

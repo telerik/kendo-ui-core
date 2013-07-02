@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Canvas sandbox</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.canvas.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet"></script>
+        <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet"></script>
+    </head>
+    <body>
+        <div id="chart"></div>
+        <script>
+            $("#chart").kendoChart({
+                series: [{
+                    type: "line",
+                    data: [1, 2, 3]
+                }]
+            });
+
+            /*
+            $(function() {
+                var container = $("#chart")[0];
+                var view = new kendo.dataviz.CanvasView();
+
+                var root = view.createLine(0, 0, 300, 300);
+                view.children.push(root);
+
+                view.renderTo(container);
+            });
+            */
+        </script>
+    </body>
+</html>
+
