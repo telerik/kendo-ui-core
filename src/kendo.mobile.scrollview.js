@@ -444,7 +444,7 @@ kendo_module({
                 return false;
             }
 
-            if(this.pane.movable.x < 0) {
+            if(this.pane.offset() > 0) {
                 pages.push(this.pages.shift());//forward
                 this.page++;
                 this.setPageContent(pages[2], this.page + 1);
