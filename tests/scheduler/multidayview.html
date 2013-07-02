@@ -1096,8 +1096,8 @@
 
                 view.render(events);
 
-                equal(view.content.find(".k-event a>.k-i-close").length, 1);
-                equal(view.datesHeader.find(".k-event a>.k-i-close").length, 1);
+                equal(view.content.find(".k-event a>.k-si-close").length, 1);
+                equal(view.datesHeader.find(".k-event a>.k-si-close").length, 1);
             });
 
             test("close button is not rendered if editable.destroy is false", function() {
@@ -1116,8 +1116,8 @@
 
                 view.render(events);
 
-                ok(!view.content.find(".k-event a>.k-i-close").length);
-                ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
+                ok(!view.content.find(".k-event a>.k-si-close").length);
+                ok(!view.datesHeader.find(".k-event a>.k-si-close").length);
             });
 
             test("close button is not visible by default if set as editable", function() {
@@ -1136,8 +1136,8 @@
 
                 view.render(events);
 
-                equal(view.content.find(".k-event a:has(.k-i-close)").css("display"), "none");
-                equal(view.datesHeader.find(".k-event a:has(.k-i-close)").css("display"), "none");
+                equal(view.content.find(".k-event a:has(.k-si-close)").css("display"), "none");
+                equal(view.datesHeader.find(".k-event a:has(.k-si-close)").css("display"), "none");
             });
 
             test("close button is rendered if set as editable", function() {
@@ -1155,7 +1155,7 @@
 
                 view.render(events);
 
-                equal(view.datesHeader.find(".k-event a:has(.k-i-close)").length, 1);
+                equal(view.datesHeader.find(".k-event a:has(.k-si-close)").length, 1);
             });
 
             test("close button is not rendered if set to not editable", function() {
@@ -1174,8 +1174,8 @@
 
                 view.render(events);
 
-                ok(!view.content.find(".k-event a>.k-i-close").length);
-                ok(!view.datesHeader.find(".k-event a>.k-i-close").length);
+                ok(!view.content.find(".k-event a>.k-si-close").length);
+                ok(!view.datesHeader.find(".k-event a>.k-si-close").length);
             });
 
             test("clicking on close button triggers destroy event", 1, function() {
@@ -1196,7 +1196,7 @@
 
                 view.render(events);
 
-                view.content.find(".k-event a:has(.k-i-close)").click();
+                view.content.find(".k-event a:has(.k-si-close)").click();
             });
 
             test("double clicking a cell triggers add event", 2, function() {

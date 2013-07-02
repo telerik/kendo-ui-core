@@ -70,7 +70,7 @@
                     remove = stub(dataSource, "remove"),
                     uid = dataSource.at(0).uid;
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
 
                 equal(remove.calls("remove"), 1);
                 equal(remove.args("remove")[0].uid, uid);
@@ -81,7 +81,7 @@
                     dataSource = scheduler.dataSource,
                     remove = stub(dataSource, "remove");
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
 
                 equal(remove.calls("remove"), 0);
             });
@@ -91,7 +91,7 @@
                 dataSource = scheduler.dataSource,
                 sync = stub(dataSource, "sync");
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
 
                 equal(sync.calls("sync"), 1);
             });
@@ -163,7 +163,7 @@
                 scheduler.view("week");
                 scheduler.view("day");
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
 
                 equal(removeEvent.calls("removeEvent"), 1);
             });
@@ -175,7 +175,7 @@
                 scheduler.view("day");
                 scheduler.view("day");
 
-                scheduler.wrapper.find(".k-event a:has(.k-i-close)").click();
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
                 equal(removeEvent.calls("removeEvent"), 1);
             });
 
