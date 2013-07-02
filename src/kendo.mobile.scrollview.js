@@ -326,12 +326,12 @@ kendo_module({
         },
 
         _buffer: function() {
-            var batchSize = this.options.batchSize;
+            var itemsPerPage = this.options.itemsPerPage;
 
-            if(batchSize > 1) {
-                this.buffer = new BatchBuffer(this.dataSource, batchSize);
+            if(itemsPerPage > 1) {
+                this.buffer = new BatchBuffer(this.dataSource, itemsPerPage);
             } else {
-                this.buffer = new Buffer(this.dataSource, batchSize * 3);
+                this.buffer = new Buffer(this.dataSource, itemsPerPage * 3);
             }
 
             this._resizeProxy = proxy(this, "_onResize");
@@ -620,7 +620,7 @@ kendo_module({
             velocityThreshold: 0.8,
             contentHeight: "auto",
             pageSize: 1,
-            batchSize: 1,
+            itemsPerPage: 1,
             bounceVelocityThreshold: 1.6,
             enablePager: true,
             autoBind: true,

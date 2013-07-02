@@ -164,7 +164,7 @@ function renderThumbs(element) {
 function canvasInit(e) {
     canvasScrollView = $("#canvas-scrollview").kendoMobileScrollView({
         dataSource: canvasDataSource,
-        batchSize: 6,
+        itemsPerPage: 6,
         template: kendo.template($("#canvas-template").html()),
         emptyTemplate: kendo.template($("#empty-template").html()),
         change: updateSrc
@@ -195,7 +195,7 @@ function goToCanvas(e) {
         offset = detailScrollView.page,
         canvasPage;
 
-    canvasPage = Math.floor(offset / canvasScrollView.options.batchSize);
+    canvasPage = Math.floor(offset / canvasScrollView.options.itemsPerPage);
     app.navigate("#canvas?offset=" + canvasPage);
 }
 

@@ -108,7 +108,7 @@
                 var content = new VirtualScrollViewContent(element, new ElasticPane(element), {});
                 ok(content.buffer instanceof kendo.data.Buffer);
 
-                content = new VirtualScrollViewContent(element, new ElasticPane(element), { batchSize: 6 });
+                content = new VirtualScrollViewContent(element, new ElasticPane(element), { itemsPerPage: 6 });
                 ok(content.buffer instanceof BatchBuffer);
             });
 
