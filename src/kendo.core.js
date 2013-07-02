@@ -2155,8 +2155,6 @@ function pad(number, digits, end) {
 
     if (support.touch) {
 
-        var mobileChrome = (support.mobileOS.browser == "chrome" && !support.mobileOS.ios);
-
         eventTarget = function(e) {
             var touches = "originalEvent" in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null;
 
