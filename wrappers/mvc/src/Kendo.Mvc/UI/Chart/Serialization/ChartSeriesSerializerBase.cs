@@ -44,15 +44,6 @@ namespace Kendo.Mvc.UI
                 result.Add("color", series.Color);
             }
 
-            if (series.ColorHandler != null)
-            {
-                result.Add("color", series.ColorHandler);
-            }
-            else if (series.Color.HasValue())
-            {
-                result.Add("color", series.Color);
-            }
-
             var notesData = series.Notes.CreateSerializer().Serialize();
             if (notesData.Count > 0)
             {

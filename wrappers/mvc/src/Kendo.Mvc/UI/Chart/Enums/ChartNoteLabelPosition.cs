@@ -6,12 +6,12 @@ namespace Kendo.Mvc.UI
     public enum ChartNoteLabelPosition
     {
         /// <summary>
-        /// The label is positioned inside of the note.
+        /// The label is positioned inside of the icon.
         /// </summary>
         Inside,
 
         /// <summary>
-        /// The label is positioned outside of the note.
+        /// The label is positioned outside of the icon.
         /// </summary>
         Outside
     }

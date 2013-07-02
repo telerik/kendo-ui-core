@@ -6,6 +6,7 @@ namespace Kendo.Mvc.UI.Tests
     {
         public float X { get; set; }
         public float Y { get; set; }
+        public string NoteText { get; set; }
     }
 
     public static class XYDataBuilder
@@ -17,13 +18,15 @@ namespace Kendo.Mvc.UI.Tests
                 new XYData
                 {
                     X = 1, 
-                    Y = 2
+                    Y = 2, 
+                    NoteText = "A"
                 },
 
                 new XYData
                 {
                     X = 3, 
-                    Y = 4
+                    Y = 4, 
+                    NoteText = "B"
                 }
             };
         }

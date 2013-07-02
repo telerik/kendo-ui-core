@@ -23,6 +23,7 @@ namespace Kendo.Mvc.UI.Tests
             axisMock.SetupGet(a => a.PlotBands).Returns(new List<ChartPlotBand<double>>());
             axisMock.SetupGet(a => a.Title).Returns(new ChartAxisTitle());
             axisMock.SetupGet(a => a.Crosshair).Returns(new ChartAxisCrosshair());
+            axisMock.SetupGet(a => a.Notes).Returns(new ChartAxisNotes<double>());
         }
 
         [Fact]
