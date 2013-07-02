@@ -34,9 +34,6 @@ kendo_module({
                 '#}#' +
                 '>' +
                 '<span class="k-event-actions">' +
-                    '#if(!first){#' +
-                    '<span class="k-icon k-resize-handle k-resize-w"></span>' +
-                    '#}#' +
                     '# if(data.tail || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-w"></span>' +
                     '#}#' +
@@ -51,13 +48,16 @@ kendo_module({
                     '#if (showDelete) {#' +
                         '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
                     '#}#' +
-                    '#if(!last){#' +
-                    '<span class="k-icon k-resize-handle k-resize-e"></span>' +
-                    '#}#' +
                     '# if(data.head || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-e"></span>' +
                     '#}#' +
                 '</span>' +
+                '#if(!first){#' +
+                '<span class="k-resize-handle k-resize-w"></span>' +
+                '#}#' +
+                '#if(!last){#' +
+                '<span class="k-resize-handle k-resize-e"></span>' +
+                '#}#' +
                 '</div>',
         EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
@@ -80,17 +80,19 @@ kendo_module({
                 '<span class="k-event-top-actions">' +
                     '# if(data.tail || data.middle) {#' +
                     '<span class="k-icon k-i-arrow-n"></span>' +
-                    '#} else { #' +
-                        '<span class="k-icon k-resize-handle k-resize-n"></span>' +
-                    '#}#' +
+                    '# } #' +
                 '</span>' +
                 '<span class="k-event-bottom-actions">' +
                     '# if(data.head || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-s"></span>' +
-                    '#} else {#' +
-                        '<span class="k-icon k-resize-handle k-resize-s"></span>' +
-                    '#}#' +
+                    '# } #' +
                 '</span>' +
+                '# if(!(data.tail && data.middle)) {#' +
+                '<span class="k-resize-handle k-resize-n"></span>' +
+                '# } #' +
+                '# if(!(data.head && data.middle)) {#' +
+                    '<span class="k-resize-handle k-resize-s"></span>' +
+                '# } #' +
                 '</div>';
 
     function toInvariantTime(date) {

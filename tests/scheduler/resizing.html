@@ -55,7 +55,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-s").length, 1);
+                equal(div.find(".k-event > .k-resize-s").length, 1);
             });
 
             test("week view renders east resize handle for all day events", function() {
@@ -67,7 +67,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-e").length, 1);
+                equal(div.find(".k-event > .k-resize-e").length, 1);
             });
 
             test("day view renders north resize handle for events which start in the current day", function() {
@@ -78,7 +78,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-n").length, 1);
+                equal(div.find(".k-event > .k-resize-n").length, 1);
             });
 
             test("day view does not render east resize handle", function() {
@@ -89,7 +89,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-e").length, 0);
+                equal(div.find(".k-event > .k-resize-e").length, 0);
             });
 
             test("day view does not render west resize handle", function() {
@@ -100,7 +100,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-w").length, 0);
+                equal(div.find(".k-event > .k-resize-w").length, 0);
             });
 
             test("week view renders west resize handle for all day events", function() {
@@ -112,7 +112,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-w").length, 1);
+                equal(div.find(".k-event > .k-resize-w").length, 1);
             });
 
             test("day view does not render south resize handle for events which don't end in the current day", function() {
@@ -123,7 +123,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-s").length, 0);
+                equal(div.find(".k-event > .k-resize-s").length, 0);
             });
 
             test("week view does not render east resize handle for all day events which dont end in the current week", function() {
@@ -135,7 +135,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-e").length, 0);
+                equal(div.find(".k-event > .k-resize-e").length, 0);
             });
 
             test("week view does not render east resize handle for all day events which end in the last day of the week", function() {
@@ -147,7 +147,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-e").length, 0);
+                equal(div.find(".k-event > .k-resize-e").length, 0);
             });
 
             test("week view does not render west resize handle for all day events which start in the first day of the week", function() {
@@ -159,7 +159,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-w").length, 0);
+                equal(div.find(".k-event > .k-resize-w").length, 0);
             });
 
             test("week view does not render west resize handle for all day events which dont start in the current week", function() {
@@ -171,7 +171,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-w").length, 0);
+                equal(div.find(".k-event > .k-resize-w").length, 0);
             });
 
             test("day view does not render north resize handle for events which don't start in the current day", function() {
@@ -182,7 +182,7 @@
                     ]
                 });
 
-                equal(div.find(".k-event .k-resize-n").length, 0);
+                equal(div.find(".k-event > .k-resize-n").length, 0);
             });
 
             test("dragging and dropping the south resize handle changes the end time of the event", function() {
