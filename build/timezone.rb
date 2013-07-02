@@ -12,6 +12,7 @@ TIMEZONE_TEMPLATE = ERB.new(
 %{kendo.timezone.zones=<%= zones.to_json.gsub(/,null\\]/, ']') %>;
 kendo.timezone.rules=<%= rules.to_json.gsub(/,null\\]/, ']') %>;
 kendo.timezone.countries=<%= countries.to_json %>;
+kendo.timezone.countryZones=<%= country_zones.to_json %>;
 }, 0, '<%>')
 
     desc 'Generate timezone JavaScript files'
@@ -25,6 +26,8 @@ kendo.timezone.countries=<%= countries.to_json %>;
         rules = timezone_info['rules']
 
         countries = parse_countries()
+
+        country_zones = parse_country_zones()
 
         File.write('src/kendo.timezones.js', TIMEZONE_TEMPLATE.result(binding))
     end
