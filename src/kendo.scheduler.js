@@ -530,6 +530,7 @@ kendo_module({
                         }
                     } else if (dragHandle.is(".k-resize-w")) {
                         if (event.end.getDate() >= slot.start.getDate()) {
+
                             endSlot = slot;
 
                             hint = view._updateResizeHint(hint, "west", startSlot, slot, width, height);

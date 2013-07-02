@@ -174,6 +174,9 @@ kendo_module({
            x -= offset.left;
            y -= offset.top;
 
+           x = Math.ceil(x);
+           y = Math.ceil(y);
+
            for (var slotIndex = 0; slotIndex < this._row.slots.length; slotIndex++) {
                slot = this._row.slots[slotIndex];
 
@@ -192,6 +195,9 @@ kendo_module({
            y -= offset.top;
            y += this.content[0].scrollTop;
            x += this.content[0].scrollLeft;
+
+           x = Math.ceil(x);
+           y = Math.ceil(y);
 
            var column;
            for (var columnIndex = 0; columnIndex < this._columns.length; columnIndex++) {

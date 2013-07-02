@@ -405,7 +405,7 @@ kendo_module({
        },
 
        _createEastWestResizeHint: function(left, top, width, height) {
-            var hint = SchedulerView.fn._createEastWestResizeHint.call(this, left, top, width, height);
+            var hint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
             return hint.appendTo(this.content);
        },
 
