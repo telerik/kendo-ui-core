@@ -526,7 +526,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartLineSeriesBuilder<TModel> VerticalLine(IEnumerable data)
         {
-            var builder = Line(data);
+            ChartLineSeries<TModel, object> verticalLineSeries = new ChartLineSeries<TModel, object>(data);
+
+            Container.Series.Add(verticalLineSeries);
+
+            var builder = new ChartLineSeriesBuilder<TModel>(verticalLineSeries);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -755,7 +759,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartAreaSeriesBuilder<TModel> VerticalArea(IEnumerable data)
         {
-            var builder = Area(data);
+            ChartAreaSeries<TModel, object> verticalAreaseries = new ChartAreaSeries<TModel, object>(data);
+
+            Container.Series.Add(verticalAreaseries);
+
+            var builder = new ChartAreaSeriesBuilder<TModel>(verticalAreaseries);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
