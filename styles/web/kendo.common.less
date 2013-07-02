@@ -4059,7 +4059,6 @@ tr:hover > td > .k-task .k-event-delete
 {
     position: absolute;
     visibility: hidden;
-    background: rgba(0, 0, 0, .2);
     z-index: 2;
 }
 
@@ -4068,12 +4067,20 @@ tr:hover > td > .k-task .k-event-delete
     visibility: visible;
 }
 
+.k-event .k-resize-handle:after
+{
+    content: "";
+    position: absolute;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
 .k-event > .k-resize-n
 {
     top: 0;
     left: 0;
     right: 0;
-    height: .25em;
+    height: .3em;
 }
 
 .k-event > .k-resize-s
@@ -4081,7 +4088,7 @@ tr:hover > td > .k-task .k-event-delete
     bottom: 0;
     left: 0;
     right: 0;
-    height: .25em;
+    height: .3em;
 }
 
 .k-event > .k-resize-e
@@ -4089,7 +4096,7 @@ tr:hover > td > .k-task .k-event-delete
     right: 0;
     top: 0;
     bottom: 0;
-    width: .25em;
+    width: .3em;
 }
 
 .k-event > .k-resize-w
@@ -4097,7 +4104,39 @@ tr:hover > td > .k-task .k-event-delete
     left: 0;
     top: 0;
     bottom: 0;
-    width: .25em;
+    width: .3em;
+}
+
+.k-event > .k-resize-n:after,
+.k-event > .k-resize-s:after
+{
+    top: 1px;
+    left: 50%;
+    margin-left: -1em;
+    width: 2em;
+    height: 1px;
+}
+
+.k-event > .k-resize-s:after
+{
+    top: auto;
+    bottom: 1px;
+}
+
+.k-event > .k-resize-e:after,
+.k-event > .k-resize-w:after
+{
+    left: 1px;
+    top: 50%;
+    margin-top: -.7em;
+    height: 1.4em;
+    width: 1px;
+}
+
+.k-event > .k-resize-e:after
+{
+    left: auto;
+    right: 1px;
 }
 
 .k-scheduler-marquee
