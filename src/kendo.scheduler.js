@@ -76,6 +76,8 @@ kendo_module({
             $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' '  + kendo.attr("role") + '="datepicker" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
             .attr(attr).appendTo(container);
 
+            $('<span ' + kendo.attr("bind") + '="text: ' + options.field + 'Timezone"></span>').appendTo(container);
+
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         getMilliseconds = kendo.date.getMilliseconds,
@@ -89,6 +91,18 @@ kendo_module({
                     start: options.model.start,
                     timezone: options.timezone
                 });
+        },
+        TIMEZONEPOPUP = function(container, options) {
+            $('<a href="#"> Time zone <a/>').click(options.click).appendTo(container);
+        },
+        TIMEZONEEDITOR = function(container, options) {
+            $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
+                .attr({
+                    name: options.field
+                })
+                .toggle(options.visible)
+                .appendTo(container)
+                .kendoTimezoneEditor();
         };
 
     function appendDateCompareValidator(attrs, options) {
@@ -238,7 +252,9 @@ kendo_module({
             id: { type: "number" },
             title: { defaultValue: "", type: "string" },
             start: { type: "date", validation: { required: true } },
+            startTimezone: { type: "string" },
             end: { type: "date", validation: { required: true, dateCompare: { value: dateCompareValidator, message: "End date should be greater than or equal to the start date"}} },
+            endTimezone: { type: "string" },
             recurrenceRule: { defaultValue: "", type: "string" },
             recurrenceException: { defaultValue: "", type: "string" },
             isAllDay: { type: "boolean", defaultValue: false },
@@ -740,6 +756,55 @@ kendo_module({
             return kendo.template(template)(options);
         },
 
+        _createTimezonePopup: function(model) {
+            var that = this,
+                container = this._editContainer.find(".k-scheduler-timezones"),
+                checkbox = container.find(".k-timezone-toggle"),
+                endTimezoneRow = container.find(".k-edit-label:last").add(container.find(".k-edit-field:last")),
+                saveButton = container.find(".k-scheduler-savetimezone"),
+                cancelButton = container.find(".k-scheduler-canceltimezone"),
+                startTimezone = model.startTimezone,
+                endTimezone = model.endTimezone;
+
+            if (!this._timezonePopup) {
+                this._timezonePopup = container.kendoWindow({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: "Timezones",
+                    visible: false,
+                    close: function(e) {
+                        if (e.userTriggered) {
+                            model.set("endTimezone", endTimezone);
+                            model.set("startTimezone", startTimezone);
+                        }
+                    }
+                });
+
+                checkbox.click(function() {
+                    var checked = $(this).prop("checked");
+                    endTimezoneRow.toggle(checked);
+                });
+
+                saveButton.click(function(e) {
+                    e.preventDefault();
+                    that._timezonePopup.data("kendoWindow").close();
+                });
+
+                cancelButton.click(function(e) {
+                    e.preventDefault();
+                    model.set("endTimezone", endTimezone);
+                    model.set("startTimezone", startTimezone);
+                    that._timezonePopup.data("kendoWindow").close();
+                });
+            }
+
+            checkbox.prop("checked", model.endTimezone);
+            endTimezoneRow.toggle(model.endTimezone);
+
+            this._timezonePopup.data("kendoWindow").center().open();
+        },
+
         _createPopupEditor: function(model) {
             var that = this,
                 editable = that.options.editable,
@@ -748,19 +813,26 @@ kendo_module({
                 messages = that.options.messages,
                 updateText = messages.save,
                 cancelText = messages.cancel,
+                click = function(e) {
+                    e.preventDefault();
+                    that._createTimezonePopup(model);
+                },
                 fields = [
                     { field: "title", title: "Title" /*, format: field.format, editor: field.editor, values: field.values*/ },
                     { field: "start", title: "Start", editor: DATERANGEEDITOR },
                     { field: "end", title: "End", editor: DATERANGEEDITOR },
+                    { field: "timezone", title: "Time zone", editor: TIMEZONEPOPUP, click: click },
+                    { field: "startTimezone", title: "Start timezone", editor: TIMEZONEEDITOR },
+                    { field: "endTimezone", title: "End timezone", editor: TIMEZONEEDITOR },
                     { field: "isAllDay", title: "All day event" }
                 ],
                 attr,
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings),
-                editableFields = [],
                 paramName = settings.paramName,
                 startTime = model.startTime,
                 endTime = model.endTime,
+                editableFields = [],
                 timezone;
 
            if (template) {
@@ -790,6 +862,13 @@ kendo_module({
                 for (var idx = 0, length = fields.length; idx < length; idx++) {
                     var field = fields[idx];
 
+                    if (field.field === "startTimezone") {
+                        html += '<div class="k-scheduler-timezones" style="display:none">';
+                        html += '<div class="k-edit-form-container">';
+                        html += '<div class="k-edit-label"></div>';
+                        html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />Use separate start and end time zones</label></div>';
+                    }
+
                     html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
 
                     if ((!model.editable || model.editable(field.field))) {
@@ -810,6 +889,12 @@ kendo_module({
                         tmpl = kendo.template(tmpl, settings);
 
                         html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
+                    }
+
+                    if (field.field === "endTimezone") {
+                        html += '<div class="k-edit-buttons k-state-default">';
+                        html += that._createButton({ name: "savetimezone", text: "Done" }) + that._createButton({ name: "canceltimezone", text: "Cancel" });
+                        html += '</div></div></div>';
                     }
                 }
             }
@@ -970,6 +1055,10 @@ kendo_module({
             };
 
             if (that.editable) {
+                if (that._timezonePopup && that._timezonePopup.data("kendoWindow")) {
+                    that._timezonePopup.data("kendoWindow").destroy();
+                }
+
                 that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
             }
 
@@ -1521,5 +1610,87 @@ kendo_module({
     };
 
     ui.plugin(Scheduler);
+
+    var TimezoneEditor = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Widget.fn.init.call(that, element, options);
+
+            that.wrapper = that.element;
+
+            that._zonesQuery = new kendo.data.Query(kendo.timezone.countryZones);
+
+            that._countryId = kendo.guid();
+            that._countryPicker();
+            that._zonePicker();
+
+            that.value(that.options.value);
+        },
+        options: {
+            name: "TimezoneEditor",
+            value: "",
+            optionLabel: "No timezone"
+        },
+        events: [ "change" ],
+
+        _countryPicker: function() {
+            var that = this,
+                country = $('<input id="' + that._countryId + '"/>').appendTo(that.wrapper);
+
+            that._country = new kendo.ui.DropDownList(country, {
+                dataSource: new kendo.data.Query(kendo.timezone.countries).sort({ field: "name", dir: "asc" }).toArray(),
+                dataValueField: "code",
+                dataTextField: "name",
+                optionLabel: that.options.optionLabel,
+                cascade: function() {
+                    var value = this.value();
+                    if (!value) {
+                        that._zone.wrapper.hide();
+                        that._value = value;
+                    }
+                }
+            });
+        },
+
+        _zonePicker: function() {
+            var that = this,
+                zone = $('<input id="' + that._id + '"/>').appendTo(this.wrapper);
+
+            that._zone = new kendo.ui.DropDownList(zone, {
+                dataValueField: "zone",
+                dataTextField: "name",
+                dataSource: that._zonesQuery.data,
+                cascadeFrom: that._countryId,
+                dataBound: function() {
+                    this.wrapper.toggle(this.dataSource.view().length > 1);
+                    that._value = this.value();
+                    that.trigger("change");
+                },
+                change: function() {
+                    that._value = this.value();
+                    that.trigger("change");
+                }
+            });
+
+            that._zone.wrapper.hide();
+        },
+
+        value: function(value) {
+            var that = this;
+
+            if (value === undefined) {
+                return that._value;
+            }
+
+            var zone = that._zonesQuery.filter({ field: "zone", operator: "eq", value: value }).data[0];
+
+            if (zone) {
+                that._country.value(zone.code);
+            }
+        }
+    });
+
+    ui.plugin(TimezoneEditor);
 
 })(window.kendo.jQuery);
