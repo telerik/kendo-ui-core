@@ -263,7 +263,7 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
-    * The behavior for handling missing values.The supported values are:
+    * The behavior for handling missing values. The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */

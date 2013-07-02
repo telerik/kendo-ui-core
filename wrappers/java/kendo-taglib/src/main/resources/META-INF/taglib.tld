@@ -2549,7 +2549,7 @@ The function return value is displayed instead of the individual points.The supp
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The behavior for handling missing values.The supported values are:</description>
+            <description>The behavior for handling missing values. The supported values are:</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -13919,7 +13919,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Configures the behavior for handling missing values.** Available for area and line series **</description>
+            <description>The behavior for handling missing values. The supported values are:</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -17185,7 +17185,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Configures the behavior for handling missing values.** Applicable for area and line series. **</description>
+            <description>The behavior for handling missing values. The supported values are:</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -17983,7 +17983,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Configures the behavior for handling missing values.** Applicable for area and line series. **</description>
+            <description>The behavior for handling missing values. The supported values are:</description>
             <name>missingValues</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>

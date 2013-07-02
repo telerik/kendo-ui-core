@@ -209,7 +209,7 @@ The function return value is displayed instead of the individual points.
     }
 
     /**
-    * Configures the behavior for handling missing values.** Available for area and line series **
+    * The behavior for handling missing values. The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItem
     */
