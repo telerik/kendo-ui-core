@@ -32,6 +32,7 @@ kendo_module({
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
+        DEG_TO_RAD = math.PI / 180,
         NONE = "none",
         RADIAL = "radial",
         SOLID = "solid",
@@ -110,7 +111,7 @@ kendo_module({
 
         createText: function(content, options) {
             return this.decorate(
-                new DummyElement(options)
+                new CanvasText(content, options)
             );
         },
 
@@ -130,7 +131,7 @@ kendo_module({
 
         createPolyline: function(points, closed, options) {
             return this.decorate(
-                new DummyElement(options)
+                new CanvasLine(points, false, options)
             );
         },
 
@@ -209,8 +210,8 @@ kendo_module({
                 dashType = options.dashType,
                 strokeLineCap = options.strokeLineCap;
 
-            context.lineCap =
-                (dashType && dashType != SOLID) ? BUTT : strokeLineCap;
+            context.lineCap = (dashType && dashType != SOLID) ?
+                BUTT : strokeLineCap;
         }
     });
 
@@ -239,6 +240,8 @@ kendo_module({
                 return;
             }
 
+            context.save();
+
             context.beginPath();
             var p = points[0];
             context.moveTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
@@ -252,9 +255,7 @@ kendo_module({
                 context.closePath();
             }
 
-            context.strokeStyle = options.stroke;
-            context.lineWidth = options.strokeWidth;
-
+            // TODO: Manual dash rendering for IE
             var dashType = dashType ? dashType.toLowerCase() : null;
             if (dashType && dashType != SOLID) {
                 var dashArray = DASH_ARRAYS[dashType];
@@ -264,18 +265,77 @@ kendo_module({
                     context.mozDash = dashArray;
                     context.webkitLineDash = dashArray;
                 }
-                // TODO: Manual dash rendering for IE
             }
 
             line.setLineCap(context);
 
+            context.strokeStyle = options.stroke;
+            context.lineWidth = options.strokeWidth;
             context.lineJoin = "round";
-
             context.globalAlpha = options.strokeOpacity;
 
             context.stroke();
 
-            context.globalAlpha = 1;
+            context.restore();
+        }
+    });
+
+    var CanvasText = ViewElement.extend({
+        init: function(content, options) {
+            var text = this;
+            ViewElement.fn.init.call(text, options);
+
+            text.content = content;
+        },
+
+        options: {
+            x: 0,
+            y: 0,
+            baseline: 0,
+            font: DEFAULT_FONT,
+            size: {
+                width: 0,
+                height: 0
+            },
+            fillOpacity: 1,
+            cursor: {}
+        },
+
+        render: function(context) {
+            var text = this,
+                options = text.options,
+                content = text.content,
+                x = Math.round(options.x),
+                y = Math.round(options.y + options.baseline);
+
+            context.save();
+
+            text.setRotation(context);
+
+            context.font = options.font;
+            context.fillStyle = options.color;
+            context.globalAlpha = options.fillOpacity;
+
+            context.fillText(content, x, y);
+
+            context.restore();
+        },
+
+        setRotation: function(context) {
+            var text = this,
+                options = text.options,
+                size = options.size,
+                cx = round(options.x + size.normalWidth / 2, COORD_PRECISION),
+                cy = round(options.y + size.normalHeight / 2, COORD_PRECISION),
+                rcx = round(options.x + size.width / 2, COORD_PRECISION),
+                rcy = round(options.y + size.height / 2, COORD_PRECISION),
+                offsetX = round(rcx - cx, COORD_PRECISION),
+                offsetY = round(rcy - cy, COORD_PRECISION);
+
+            context.translate(cx, cy);
+            context.rotate(options.rotation * DEG_TO_RAD);
+            context.translate(-cx, -cy);
+            context.translate(offsetX, offsetY);
         }
     });
 

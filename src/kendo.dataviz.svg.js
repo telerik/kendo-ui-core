@@ -302,6 +302,7 @@ kendo_module({
             return new SVGText(text.content, deepExtend({}, text.options));
         },
 
+        // TODO: Extract in ViewElement
         renderCursor: function() {
             var options = this.options,
                 result = "";
