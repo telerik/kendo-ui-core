@@ -178,13 +178,13 @@
     <value>Is groter of gelijk aan</value>
   </data>
   <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
-    <value>Is groter aan</value>
+    <value>Is groter dan</value>
   </data>
   <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
     <value>Is kleiner of gelijk aan</value>
   </data>
   <data name="Filter_NumberIsLessThan" xml:space="preserve">
-    <value>Is kleiner aan</value>
+    <value>Is kleiner dan</value>
   </data>
   <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
     <value>Is ongelijk aan</value>
