@@ -667,7 +667,7 @@ kendo_module({
 
         scrollTo: function(page, instant) {
             this._content.scrollTo(page, instant);
-            this.page = this._content.page;
+            this._syncWithContent();
         },
 
         _syncWithContent: function() {
