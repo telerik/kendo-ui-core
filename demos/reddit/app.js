@@ -192,7 +192,7 @@ function canvasShow(e) {
 function goToCanvas(e) {
     var detailScrollView = $("#detail-scrollview").data("kendoMobileScrollView"),
         canvasScrollView = $("#canvas-scrollview").data("kendoMobileScrollView"),
-        offset = detailScrollView.offset,
+        offset = detailScrollView.page,
         canvasPage;
 
     canvasPage = Math.floor(offset / canvasScrollView.options.batchSize);
@@ -218,26 +218,22 @@ function canvasDetailShow(e) {
 
 function calculateOffset(dataItem) {
     var index = $("#canvas-scrollview").data("kendoMobileScrollView")._content.buffer.buffer.indexOf(dataItem);
-    //console.log("index ", index, " dataItem ", dataItem.foo);
     return index;
 }
 
 function updateSrc(e) {
     var element = e.element,
-        images,
         image;
 
     element.find(".item-img").each(function(idx, item) {
         image = $("<img />");
         image.one("load", onImageLoad);
-        image.attr("src", $(item).data("url"));
-
-        //$(item).css("background-image", "url(" + $(item).data("url") + ")");
+        image.attr("src", "http://valchev/KendoCRUDService/RedditImages?url=" + $(item).data("url"));
     });
 }
 
 function onImageLoad(e) {
-    var element = $("[data-url='" + e.target.src + "']");
+    var element = $("[data-url='" + e.target.src.split("?url=")[1] + "']");
     element.css("background-image", "url(" + e.target.src + ")");
     element.addClass("loaded").removeClass("faded");
 }
