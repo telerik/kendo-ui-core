@@ -1253,16 +1253,22 @@ kendo_module({
         init: function() {
             this._valueFields = {};
             this._otherFields = {};
+            this._nullValues = {};
         },
 
         register: function(seriesTypes, valueFields, otherFields) {
-            var i, type;
+            var binder = this,
+                i,
+                type;
+
+            valueFields = valueFields || [VALUE];
 
             for (i = 0; i < seriesTypes.length; i++) {
                 type = seriesTypes[i];
 
-                this._valueFields[type] = valueFields;
-                this._otherFields[type] = otherFields;
+                binder._valueFields[type] = valueFields;
+                binder._otherFields[type] = otherFields;
+                binder._nullValues[type] = binder._makeNullValue(valueFields);
             }
         },
 
@@ -1274,29 +1280,27 @@ kendo_module({
             var binder = this,
                 data = series.data,
                 pointData = data[pointIx],
+                result = { value: pointData },
+                fields,
                 fieldData,
-                fields = {},
                 srcValueFields,
                 srcPointFields,
                 valueFields = binder.valueFields(series),
                 otherFields = binder._otherFields[series.type],
-                value,
-                result = { value: pointData };
+                value;
 
-            if (defined(pointData)) {
-                if (isArray(pointData)) {
-                    fieldData = pointData.slice(valueFields.length);
-                    value = binder._bindFromArray(pointData, valueFields);
-                    fields = binder._bindFromArray(fieldData, otherFields);
-                } else if (typeof pointData === OBJECT) {
-                    srcValueFields = binder._mapSeriesFields(series, valueFields);
-                    srcPointFields = binder._mapSeriesFields(series, otherFields);
+            if (pointData === null || !defined(pointData)) {
+                value = binder._nullValues[series.type];
+            } else if (isArray(pointData)) {
+                fieldData = pointData.slice(valueFields.length);
+                value = binder._bindFromArray(pointData, valueFields);
+                fields = binder._bindFromArray(fieldData, otherFields);
+            } else if (typeof pointData === OBJECT) {
+                srcValueFields = binder._mapSeriesFields(series, valueFields);
+                srcPointFields = binder._mapSeriesFields(series, otherFields);
 
-                    value = binder._bindFromObject(pointData, valueFields, srcValueFields);
-                    fields = binder._bindFromObject(pointData, otherFields, srcPointFields);
-                }
-            } else {
-                value = binder._bindFromObject({}, valueFields);
+                value = binder._bindFromObject(pointData, valueFields, srcValueFields);
+                fields = binder._bindFromObject(pointData, otherFields, srcPointFields);
             }
 
             if (defined(value)) {
@@ -1307,9 +1311,23 @@ kendo_module({
                 result.value = value;
             }
 
-            result.fields = fields;
+            result.fields = fields || {};
 
             return result;
+        },
+
+        _makeNullValue: function(fields) {
+            var value = {},
+                i,
+                length = fields.length,
+                fieldName;
+
+            for (i = 0; i < length; i++) {
+                fieldName = fields[i];
+                value[fieldName] = null;
+            }
+
+            return value;
         },
 
         _bindFromArray: function(array, fields) {

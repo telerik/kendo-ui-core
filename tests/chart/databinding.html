@@ -597,7 +597,8 @@
                             sales: 100
                         }, null],
                         series: [{
-                            field: "sales"
+                            field: "sales",
+                            sales: null
                         }],
                         dataBound: function() {
                             equal(this.options.series[0].data.length, 2);
@@ -625,7 +626,8 @@
                 asyncTest("series points are populated if field is null", 1, function() {
                     chart = createChart({
                         dataSource: [{
-                            period: "Jan"
+                            period: "Jan",
+                            sales: null
                         }, {
                             period: "Feb",
                             sales: 100
@@ -643,7 +645,8 @@
                 asyncTest("series points order is preserved if field is null", 1, function() {
                     chart = createChart({
                         dataSource: [{
-                            period: "Jan"
+                            period: "Jan",
+                            sales: null
                         }, {
                             period: "Feb",
                             sales: 100
@@ -915,6 +918,16 @@
                     );
                 });
 
+                test("sets value fields from null", function() {
+                    binder.register(["bar"], ["x", "y"]);
+                    series.data = [null];
+                    series.type = "bar";
+
+                    deepEqual(binder.bindPoint(series, 0),
+                        { value: { x: null, y: null }, fields: {} }
+                    );
+                });
+
                 test("binds value using field name", function() {
                     series.field = "aValue";
                     series.data = [{ aValue: 1 }];
@@ -957,6 +970,15 @@
                     deepEqual(binder.bindPoint(series, 0).fields,
                         { color: "red" }
                     );
+                });
+
+                test("other fields are empty if data item is null", function() {
+                    binder.register(["bar"], ["value"], ["color"]);
+
+                    series.data = [null];
+                    series.type = "bar";
+
+                    deepEqual(binder.bindPoint(series, 0).fields, { });
                 });
             })();
         </script>
