@@ -121,11 +121,19 @@ kendo_module({
         },
 
         hideLoading: function() {
-            this.pane.hideLoading();
+            if (this.pane) {
+                this.pane.hideLoading();
+            } else {
+                throw new Error("The mobile application instance is not fully instantiated. Please consider activating loading in the application init event handler.");
+            }
         },
 
         showLoading: function() {
-            this.pane.showLoading();
+            if (this.pane) {
+                this.pane.showLoading();
+            } else {
+                throw new Error("The mobile application instance is not fully instantiated. Please consider activating loading in the application init event handler.");
+            }
         },
 
         view: function() {
