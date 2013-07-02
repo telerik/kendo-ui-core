@@ -461,11 +461,7 @@ kendo_module({
             var event;
             var that = this;
 
-            var hint = $('<div class="k-marquee k-scheduler-marquee">' +
-                    '<div class="k-label-top"></div>' +
-                    '<div class="k-label-bottom"></div>' +
-                '</div>'
-            );
+            var hint;
 
             that.element.kendoDraggable({
                 distance: 0,
@@ -473,38 +469,35 @@ kendo_module({
                 dragstart: function(e) {
                     var dragHandle = $(e.currentTarget);
 
+                    var view = that.view();
                     var eventElement = dragHandle.closest(".k-event");
 
                     event = that.dataSource.getByUid(eventElement.attr(kendo.attr("uid")));
 
-                    startSlot = endSlot = that.view()._slotByPosition(e.x.location, e.y.location);
-
-                    hint.css({
-                        left: eventElement[0].offsetLeft,
-                        top: eventElement[0].offsetTop,
-                        width: startSlot.clientWidth - 3,
-                        height: eventElement[0].clientHeight
-                    });
+                    startSlot = endSlot = view._slotByPosition(e.x.location, e.y.location);
 
                     if (dragHandle.is(".k-resize-s,.k-resize-n")) {
+                        hint = view._createSouthNorthResizeHint(eventElement[0].offsetLeft, eventElement[0].offsetTop, startSlot.clientWidth - 3, eventElement[0].clientHeight);
+
                         hint.find("div:first").text(kendo.toString(event.start, "t"))
                             .end()
                             .find("div:last").text(kendo.toString(event.end, "t"))
-                            .end()
-                            .appendTo(that.view().content);
+                            .end();
                     } else {
+                        hint = view._createEastWestResizeHint(eventElement[0].offsetLeft, eventElement[0].offsetTop, startSlot.clientWidth - 3, eventElement[0].clientHeight);
+
                         hint.find("div:first").text(kendo.toString(event.start, "M/dd"))
                             .end()
                             .find("div:last").text(kendo.toString(event.end, "M/dd"))
-                            .end()
-                            .appendTo(that.element.find(".k-scheduler-header-wrap"));
+                            .end();
                     }
                 },
                 drag: function(e) {
                     var dragHandle = $(e.currentTarget);
                     var eventElement = dragHandle.closest(".k-event");
+                    var view = that.view();
 
-                    var slot = that.view()._slotByPosition(e.x.location, e.y.location);
+                    var slot = view._slotByPosition(e.x.location, e.y.location);
 
                     if (!slot) {
                         return;
@@ -521,51 +514,25 @@ kendo_module({
                         if (getMilliseconds(slot.end) - getMilliseconds(event.start) >= kendo.date.MS_PER_MINUTE * 30) {
                             endSlot = slot;
 
-                            height += slot.offsetTop - startSlot.offsetTop;
-
-                            hint.css({
-                                    height: height
-                                })
-                                .find("div:last")
-                                .text(kendo.toString(slot.end, "t"));
+                            hint = view._updateResizeHint(hint, "south", startSlot, slot, width, height);
                         }
                     } else if (dragHandle.is(".k-resize-n")) {
                         if (getMilliseconds(event.end) - getMilliseconds(slot.start) >= kendo.date.MS_PER_MINUTE * 30) {
                             endSlot = slot;
 
-                            height += startSlot.offsetTop - slot.offsetTop;
-
-                            hint.css({
-                                    top: slot.offsetTop,
-                                    height: height
-                                })
-                                .find("div:first")
-                                .text(kendo.toString(slot.start, "t"));
+                            hint = view._updateResizeHint(hint, "north", startSlot, slot, width, height);
                         }
                     } else if (dragHandle.is(".k-resize-e")) {
                         if (slot.end.getDate() >= event.start.getDate()) {
                             endSlot = slot;
 
-                            width += slot.offsetLeft - startSlot.offsetLeft;
-
-                            hint.css({
-                                    width: width
-                                })
-                                .find("div:last")
-                                .text(kendo.toString(slot.end, "M/dd"));
+                            hint = view._updateResizeHint(hint, "east", startSlot, slot, width, height);
                         }
                     } else if (dragHandle.is(".k-resize-w")) {
                         if (event.end.getDate() >= slot.start.getDate()) {
                             endSlot = slot;
 
-                            width += startSlot.offsetLeft - slot.offsetLeft;
-
-                            hint.css({
-                                    left: slot.offsetLeft,
-                                    width: width
-                                })
-                                .find("div:first")
-                                .text(kendo.toString(slot.start, "M/dd"));
+                            hint = view._updateResizeHint(hint, "west", startSlot, slot, width, height);
                         }
                     }
                 },

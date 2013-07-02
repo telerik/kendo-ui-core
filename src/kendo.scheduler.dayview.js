@@ -137,6 +137,11 @@ kendo_module({
         return msValue > msMin && msValue < msMax;
     }
 
+    var HINT = '<div style="position:absolute;border:1px solid black; background:black; opacity: 0.5">' +
+                    '<div style="position:absolute;top:2px;left:2px;color:white"></div>' +
+                    '<div style="position:absolute;bottom:2px;right:2px;color:white"></div>' +
+               '</div>';
+
     var MultiDayView = SchedulerView.extend({
         init: function(element, options) {
             var that = this;
@@ -152,6 +157,46 @@ kendo_module({
             that.calculateDateRange();
 
             that._slots();
+       },
+
+       _positionSouthResizeHint: function(hint, startSlot, endSlot, width, height) {
+           return hint.css("height", height + endSlot.offsetTop - startSlot.offsetTop);
+       },
+
+       _positionNorthResizeHint: function(hint, startSlot, endSlot, width, height) {
+           return hint.css({
+               top: endSlot.offsetTop,
+               height: height + startSlot.offsetTop - endSlot.offsetTop
+           });
+       },
+
+       _positionEastResizeHint: function(hint, startSlot, endSlot, width, height) {
+           return hint.css("width", width + endSlot.offsetLeft - startSlot.offsetLeft);
+       },
+
+       _positionWestResizeHint: function(hint, startSlot, endSlot, width, height) {
+           return hint.css({
+               left: endSlot.offsetLeft,
+               width: width + startSlot.offsetLeft - endSlot.offsetLeft
+           });
+       },
+
+       _createEastWestResizeHint: function(left, top, width, height) {
+            return $(HINT).css({
+                left: left,
+                top: top,
+                width: width,
+                height: height
+            }).appendTo(this.element.find(".k-scheduler-header-wrap"));
+       },
+
+       _createSouthNorthResizeHint: function(left, top, width, height) {
+            return $(HINT).css({
+                left: left,
+                top: top,
+                width: width,
+                height: height
+            }).appendTo(this.content);
        },
 
        _slotByPosition: function(x, y) {
