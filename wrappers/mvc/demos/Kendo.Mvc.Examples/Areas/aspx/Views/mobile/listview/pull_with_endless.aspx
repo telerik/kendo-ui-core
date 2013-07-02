@@ -88,7 +88,7 @@
             %>
 
             <%: Html.Kendo().MobileButton()
-                    .Text("Add New Product")
+                    .Text("Add Product")
                     .HtmlAttributes(new { @class = "addNew" })
                                 .Events(events => events.Click("addNew"))
             %>            
@@ -142,29 +142,29 @@
     });
 </script>
 
-<style scoped>
-    .product {
+<style scoped>
+    .product-item {
         font-size: 1.2;
-    }
-    .product h3 {
+    }
+    .product-item h3 {
         float: left;
         margin: 0;
-        padding: .7em 0 0;
         height: 1.3em;
         overflow: hidden;
-    }
-    .product p {
+    }
+    .product-item p {
         float: right;
         margin: 0;
-        padding: .3em 0 0;
+        padding: .3em 0 0;
     }
+    
     .pullImage {
         width: 64px;
         height: 64px;
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }
+    }
     .addNew {
         display: block;
         text-align: center;

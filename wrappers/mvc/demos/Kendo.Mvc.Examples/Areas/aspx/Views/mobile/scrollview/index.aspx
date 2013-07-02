@@ -69,6 +69,12 @@
         border-width: 1px 0;
         box-shadow: 0 1px 1px rgba(255,255,255,.3);
     }
+    
+    .km-flat #scrollview-container {
+        background: transparent;
+        border-width: 0;
+        box-shadow: none;
+    }
 
     .km-ios #scrollview-container {
         background: url(<%= Url.Content("~/content/shared/images/patterns/pattern1.png")%>);

@@ -287,6 +287,14 @@
         -webkit-border-radius: 8px;
         border-radius: 8px;
     }
+    
+    .km-flat #navbar-home img,
+    .km-flat #navbar-grouped img {
+        -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+        box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+    }
 
     .km-ios #navbar-home .km-listview,
     .km-ios #navbar-grouped .km-list {

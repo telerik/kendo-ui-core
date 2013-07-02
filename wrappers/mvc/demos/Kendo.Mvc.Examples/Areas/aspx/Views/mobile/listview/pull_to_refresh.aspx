@@ -87,7 +87,7 @@
             %>
 
             <%: Html.Kendo().MobileButton()
-                    .Text("Add New Product")
+                    .Text("Add Product")
                     .HtmlAttributes(new { @class = "addNew" })
                                 .Events(events => events.Click("addNew"))
             %>            
@@ -98,7 +98,7 @@
 %>
 
 <script type="text/x-kendo-tmpl" id="pull-to-refresh-template">
-    <div class="product">        
+    <div class="product-item">        
         <h3>#:ProductName#</h3>
         <p>#:kendo.toString(UnitPrice, "c")#</p>
     </div>
@@ -142,17 +142,17 @@
 </script>
 
 <style scoped>
-    .product {
+    .product-item {
         font-size: 1.2;
     }
-    .product h3 {
+    .product-item h3 {
         float: left;
         margin: 0;
         padding: 0;
         height: 1.3em;
         overflow: hidden;
     }
-    .product p {
+    .product-item p {
         float: right;
         margin: 0;
         padding: 0;
