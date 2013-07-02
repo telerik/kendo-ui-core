@@ -301,7 +301,7 @@ kendo_module({
             that.pages = [];
             that._initPages();
             that.resizeTo(that.element.width());
-            that._dataSource();
+            that.dataSource = DataSource.create(options.dataSource);
             that._buffer();
             that._pendingPageRefresh = false;
             that._pendingWidgetRefresh = false;
@@ -323,12 +323,6 @@ kendo_module({
                 }, 0);
                 that._pendingWidgetRefresh= false;
             }
-        },
-
-        _dataSource: function() {
-            var options = this.options;
-
-            this.dataSource = DataSource.create(options.dataSource);
         },
 
         _buffer: function() {
