@@ -461,9 +461,9 @@ kendo_module({
             var event;
             var that = this;
 
-            var hint = $('<div style="position:absolute;border:1px solid black; background:black; opacity: 0.5">' +
-                    '<div style="position:absolute;top:2px;left:2px;color:white"></div>' +
-                    '<div style="position:absolute;bottom:2px;right:2px;color:white"></div>' +
+            var hint = $('<div class="k-marquee k-scheduler-marquee">' +
+                    '<div class="k-label-top"></div>' +
+                    '<div class="k-label-bottom"></div>' +
                 '</div>'
             );
 
