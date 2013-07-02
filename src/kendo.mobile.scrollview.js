@@ -368,9 +368,7 @@ kendo_module({
 
             pane.updateDimension();
 
-            pages[0].position(LEFT_PAGE);
-            pages[1].position(CETER_PAGE);
-            pages[2].position(RIGHT_PAGE);
+            this._repositionPages();
 
             this.width = width;
         },
@@ -387,10 +385,8 @@ kendo_module({
                 return;
             }
 
-            for (var i = 0; i < pages.length; i++) {
-                pages[i].position(i-1);
-                this.setPageContent(pages[i], page + (i-1));
-            }
+            this._updatePagesContent(page);
+            this._repositionPages();
 
             this.page = page;
         },
@@ -449,9 +445,7 @@ kendo_module({
                 this.setPageContent(pages[0], this.page - 1);
             }
 
-            pages[0].position(LEFT_PAGE);
-            pages[1].position(CETER_PAGE);
-            pages[2].position(RIGHT_PAGE);
+            this._repositionPages();
 
             this._resetMovable();
 
@@ -488,13 +482,8 @@ kendo_module({
         _resetPages: function() {
             var pages = this.pages;
 
-            for (var i = 0; i < pages.length; i++) {
-                this.setPageContent(pages[i], i-1);
-            }
-
-            pages[0].position(LEFT_PAGE);
-            pages[1].position(CETER_PAGE);
-            pages[2].position(RIGHT_PAGE);
+            this._updatePagesContent();
+            this._repositionPages();
 
             this.page = 0;
 
@@ -523,6 +512,23 @@ kendo_module({
 
         _onEndReached: function() {
             this._pendingPageRefresh = true;
+        },
+
+        _repositionPages: function() {
+            var pages = this.pages;
+
+            pages[0].position(LEFT_PAGE);
+            pages[1].position(CETER_PAGE);
+            pages[2].position(RIGHT_PAGE);
+        },
+
+        _updatePagesContent: function(offset) {
+            var pages = this.pages,
+                currentPage = offset || 0;
+
+            this.setPageContent(pages[0], currentPage - 1);
+            this.setPageContent(pages[1], currentPage);
+            this.setPageContent(pages[2], currentPage + 1);
         },
 
         setPageContent: function(page, index) {
