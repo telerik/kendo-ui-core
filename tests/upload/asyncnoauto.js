@@ -47,7 +47,7 @@
         simulateUploadWithResponse(errorResponse, function() {
             $(".k-upload-selected").click();
         });
-debugger;
+
         simulateFileSelect();
         simulateRemoveClick();
         equal($(".k-upload-selected", uploadInstance.wrapper).length, 0);

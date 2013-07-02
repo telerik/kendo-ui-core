@@ -1,0 +1,81 @@
+﻿<script id="fileTemplate" type="text/x-kendo-template">
+    <span class='k-progress'></span>
+    <div class='file-wrapper'>
+        <h4 class='file-heading file-name-heading'>Name: #=name#</h4>
+        <h4 class='file-heading file-size-heading'>Size: #=size# bytes</h4>
+        <button type='button' class='k-upload-action'></button>
+    </div>
+</script>
+
+<div style="width:45%">
+    <div class="demo-section">
+        @(Html.Kendo().Upload()
+            .Name("files")
+            .TemplateId("fileTemplate")
+            .Async(a => a
+                .Save("Save", "Upload")
+                .Remove("Remove", "Upload")
+                .AutoUpload(true)
+            )
+        )
+    </div>
+</div>
+
+<style scoped>
+   .file-icon
+   {
+       display: inline-block;
+       float: left;
+       width: 48px;
+       height: 48px;
+       margin-left: 10px;
+       margin-top: 13.5px;
+   }
+
+   .img-file { background-image: url(../../content/web/upload/jpg.png) }
+   .doc-file { background-image: url(../../content/web/upload/doc.png) }
+   .pdf-file { background-image: url(../../content/web/upload/pdf.png) }
+   .xls-file { background-image: url(../../content/web/upload/xls.png) }
+   .zip-file { background-image: url(../../content/web/upload/zip.png) }
+   .default-file { background-image: url(../../content/web/upload/default.png) }
+
+   #example .file-heading
+   {
+       font-family: Arial;
+       font-size: 1.1em;
+       display: inline-block;
+       float: left;
+       width: 450px;
+       margin: 0 0 0 20px;
+       height: 25px;
+       -ms-text-overflow: ellipsis;
+       -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+       overflow:hidden;
+       white-space:nowrap;
+   }
+
+       #example .file-name-heading
+       {
+           font-weight: bold;
+       }
+
+        #example .file-size-heading
+       {
+           font-weight: normal;
+           font-style: italic;
+       }
+
+   li.k-file .file-wrapper .k-upload-action
+   {
+       position: absolute;
+       top: 0;
+       right: 0;
+   }
+
+   li.k-file div.file-wrapper
+   {
+       position: relative;
+       height: 75px;
+   }
+</style>

@@ -133,7 +133,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Id of the template element to be used for rendering the files in the list
+        /// The template element to be used for rendering the files in the list
         /// </summary>
         /// <param name="templateId">The id of the template</param>
         /// <example>
