@@ -23,7 +23,13 @@
             $("#chart").kendoChart({
                 series: [{
                     type: "line",
-                    data: [1, 2, 3]
+                    data: [1, 2, 3],
+                    markers: {
+                        border: {
+                            color: "red",
+                            width: 2
+                        }
+                    }
                 }],
                 categoryAxis: {
                     categories: ["Foo", "Bar", "Baz"],

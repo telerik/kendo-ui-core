@@ -137,7 +137,7 @@ kendo_module({
 
         createCircle: function(center, radius, options) {
             return this.decorate(
-                new DummyElement(options)
+                new CanvasCircle(center, radius, options)
             );
         },
 
@@ -272,6 +272,45 @@ kendo_module({
             context.strokeStyle = options.stroke;
             context.lineWidth = options.strokeWidth;
             context.lineJoin = "round";
+            context.globalAlpha = options.strokeOpacity;
+
+            context.stroke();
+
+            context.restore();
+        }
+    });
+
+    var CanvasCircle = ViewElement.extend({
+        init: function(c, r, options) {
+            var circle = this;
+            ViewElement.fn.init.call(circle, options);
+
+            circle.c = c;
+            circle.r = r;
+        },
+
+        options: {
+            fill: "",
+            fillOpacity: 1,
+            strokeOpacity: 1
+        },
+
+        render: function(context) {
+            var circle = this,
+                options = circle.options,
+                c = circle.c;
+
+            context.save();
+
+            context.beginPath();
+            context.arc(c.x, c.y, circle.r, 0, 2 * Math.PI, false);
+
+            context.fillStyle = options.fill;
+            context.globalAlpha = options.fillOpacity;
+            context.fill();
+
+            context.strokeStyle = options.stroke;
+            context.lineWidth = options.strokeWidth;
             context.globalAlpha = options.strokeOpacity;
 
             context.stroke();
