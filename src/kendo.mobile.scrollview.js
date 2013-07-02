@@ -517,6 +517,8 @@ kendo_module({
         },
 
         _onReset: function() {
+            this.pageCount = this.dataSource.total();
+
             if(this.element.is(":visible")) {
                 this._resetPages();
             } else {
