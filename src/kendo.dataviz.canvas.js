@@ -17,6 +17,7 @@ kendo_module({
         Class = kendo.Class,
         dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
+        Color = dataviz.Color,
         Point2D = dataviz.Point2D,
         ViewBase = dataviz.ViewBase,
         ViewElement = dataviz.ViewElement,
@@ -61,6 +62,11 @@ kendo_module({
             var view = this;
 
             ViewBase.fn.init.call(view, options);
+
+            view.decorators.push(
+                new CanvasOverlayDecorator(view),
+                new CanvasGradientDecorator(view)
+            );
 
             view.display = view.options.inline ? "inline" : "block";
         },
@@ -128,6 +134,9 @@ kendo_module({
         },
 
         createRect: function(box, style) {
+            if (style.overlay) {
+                style.overlay.bbox = box;
+            }
             return this.decorate(
                 new CanvasLine(box.points(), true, style)
             );
@@ -169,6 +178,18 @@ kendo_module({
             return this.decorate(
                 new DummyElement(options)
             );
+        },
+
+        createGradient: function(options) {
+            if (options.type === RADIAL) {
+                if (defined(options.ir)){
+                    return new CanvasDonutGradient(options);
+                } else {
+                    return new CanvasRadialGradient(options);
+                }
+            } else {
+                return new CanvasLinearGradient(options);
+            }
         }
     });
 
@@ -201,7 +222,19 @@ kendo_module({
         }
     });
 
-    var CanvasPath = ViewElement.extend({
+    var CanvasViewElement = ViewElement.extend({
+        setFill: function(context) {
+            var fill = this.options.fill;
+
+            if (fill.bindToContext) {
+                fill = fill.bindToContext(context, this.options.overlay);
+            }
+
+            context.fillStyle = fill;
+        }
+    });
+
+    var CanvasPath = CanvasViewElement.extend({
         init: function(options) {
             var path = this;
             ViewElement.fn.init.call(path, options);
@@ -282,7 +315,7 @@ kendo_module({
             line.setLineCap(context);
 
             if (options.fill) {
-                context.fillStyle = options.fill;
+                line.setFill(context);
                 context.globalAlpha = options.fillOpacity;
                 context.fill();
             }
@@ -296,13 +329,21 @@ kendo_module({
             }
 
             context.restore();
+        },
+
+        clone: function() {
+            var line = this;
+            return new CanvasLine(
+                deepExtend([], line.points), line.closed,
+                deepExtend({}, line.options)
+            );
         }
     });
 
-    var CanvasCircle = ViewElement.extend({
+    var CanvasCircle = CanvasViewElement.extend({
         init: function(c, r, options) {
             var circle = this;
-            ViewElement.fn.init.call(circle, options);
+            CanvasViewElement.fn.init.call(circle, options);
 
             circle.c = c;
             circle.r = r;
@@ -397,7 +438,160 @@ kendo_module({
         }
     });
 
+    var CanvasGradient = ViewElement.extend({
+        options: {
+            id: ""
+        },
+
+        addStops: function(target) {
+            var gradient = this,
+                stops = gradient.options.stops,
+                i,
+                length = stops.length,
+                currentStop;
+
+            for (i = 0; i < length; i++) {
+                currentStop = stops[i];
+                var color = new Color(currentStop.color);
+                target.addColorStop(currentStop.offset,
+                    "rgba(" + color.r + "," + color.g + "," + color.b + "," + currentStop.opacity + ")");
+            }
+        }
+    });
+
+    var CanvasLinearGradient = CanvasGradient.extend({
+        options: {
+            rotation: 0
+        },
+
+        bindToContext: function(context, options) {
+            var rotation = options.rotation,
+                bbox = options.bbox,
+                x = bbox.x2,
+                y = bbox.y1;
+
+            if (rotation === 90) {
+                x = bbox.x1;
+                y = bbox.y2;
+            }
+
+            var result = context.createLinearGradient(bbox.x1, bbox.y1, x, y);
+            this.addStops(result);
+
+            return result;
+        }
+    });
+
+    var CanvasRadialGradient = CanvasGradient.extend({
+        bindToContext: function(context) {
+            var options = this.options;
+
+            var gradient = context.createRadialGradient(
+                options.cx, options.cy, 0,
+                options.cx, options.cy, r);
+
+            this.addStops(gradient);
+
+            return gradient;
+        }
+    });
+
+    var CanvasDonutGradient = CanvasRadialGradient.extend({
+        addStops: function(target) {
+            var gradient = this,
+                options = gradient.options,
+                stops = options.stops,
+                stopTemplate = gradient.stopTemplate,
+                usedSpace = ((options.ir / options.r) * 100),
+                i,
+                length = stops.length,
+                currentStop;
+
+            currentStop = deepExtend({}, stops[0]);
+            currentStop.offset = usedSpace;
+            output += stopTemplate(currentStop);
+
+            for (i = 1; i < length; i++) {
+                currentStop = deepExtend({}, stops[i]);
+                currentStop.offset = currentStop.offset * (100 -  usedSpace) + usedSpace;
+
+                // TODO: Opacity (rgba)
+                target.addColorStop(currentStop.offset, currentStop.color);
+            }
+
+            return output;
+        }
+    });
+
     // Decorators =============================================================
+    function CanvasOverlayDecorator(view) {
+        this.view = view;
+    }
+
+    CanvasOverlayDecorator.prototype = {
+        decorate: function(element) {
+            var decorator = this,
+                view = decorator.view,
+                options = element.options,
+                group,
+                overlay;
+
+            if (options.overlay) {
+                group = view.createGroup();
+                overlay = element.clone();
+
+                group.children.push(element, overlay);
+
+                overlay.options.fill = options.overlay;
+
+                return group;
+            } else {
+                return element;
+            }
+        }
+    };
+
+    function CanvasGradientDecorator(view) {
+        this.view = view;
+    }
+
+    CanvasGradientDecorator.prototype = {
+        decorate: function(element) {
+            var decorator = this,
+                options = element.options;
+
+            options.fill = decorator.getPaint(options.fill);
+
+            return element;
+        },
+
+        getPaint: function(paint) {
+            var decorator = this,
+                view = decorator.view,
+                definitions = view.definitions,
+                overlay,
+                overlayId,
+                gradient;
+
+            if (paint && defined(paint.gradient)) {
+                overlay = view.buildGradient(paint);
+                if (overlay) {
+                    overlayId = overlay.id;
+                    gradient = definitions[overlayId];
+                    if (!gradient) {
+                        gradient = view.createGradient(overlay);
+                        definitions[overlayId] = gradient;
+                    }
+
+                    return gradient;
+                } else {
+                    return NONE;
+                }
+            } else {
+                return paint;
+            }
+        }
+    };
 
     // Helpers ================================================================
     function alignToPixel(coord) {
