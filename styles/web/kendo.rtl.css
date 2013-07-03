@@ -283,6 +283,137 @@
     margin-left: 5px;
 }
 
+/* Scheduler */
+
+.k-rtl .k-scheduler-toolbar > ul
+{
+    float:left;
+}
+
+.k-rtl .k-scheduler-toolbar > ul:first-child
+{
+    float:right;
+}
+
+.k-rtl .k-scheduler-toolbar > ul > li,
+.k-rtl .k-scheduler-footer > ul > li
+{
+    border-width:1px 0 1px 1px;
+}
+
+.k-rtl .k-scheduler-toolbar > ul > li:first-child
+{
+    border-right-width:1px;
+}
+
+.k-rtl .k-scheduler div.k-scheduler-footer ul li
+{
+    margin-right: 0;
+    margin-left: .6em;
+}
+
+.k-rtl .k-scheduler-toolbar .k-i-calendar,
+.k-rtl .k-scheduler-footer .k-icon
+{
+    margin-right: 0;
+    margin-left: 6px;
+}
+
+.k-rtl .k-scheduler .k-scrollbar-v .k-scheduler-header-wrap
+{
+    border-right-width: 0;
+    border-left-width: 1px;
+}
+
+.k-rtl .k-scheduler-monthview .k-scheduler-table td
+{
+    text-align: left;
+}
+
+.k-rtl .k-scheduler-table td,
+.k-rtl .k-scheduler-header th
+{
+    border-left-width: 0;
+    border-right-width: 1px;
+}
+
+.k-rtl .k-scheduler-table td:first-child,
+.k-rtl .k-scheduler-header th:first-child
+{
+    border-right-width:0;
+}
+
+.k-rtl .k-scheduler-agenda .k-scheduler-table td:first-child
+{
+    border-right-width:1px;
+}
+
+.k-rtl .k-scheduler-agenda .k-scheduler-table td.k-scheduler-datecolumn
+{
+    border-right-width:0;
+}
+
+.k-rtl .k-scheduler-times th
+{
+    text-align: left;
+    padding-right: .5em;
+    padding-left: .6em;
+    border-right-width: 0;
+    border-left-width: 1px;
+}
+
+.k-rtl .k-scheduler-now-arrow
+{
+    left:auto;
+    right:0;
+}
+
+.k-rtl .k-scheduler-now-line
+{
+    left:0;
+    right:5px;
+}
+
+.k-rtl .k-event,
+.k-rtl .k-more-events
+{
+    text-align:right;
+}
+
+.k-rtl .k-event dl
+{
+    padding-left: 1.8em;
+    padding-right: .6em;
+}
+
+.k-rtl .k-event-actions,
+.k-rtl .k-event > .k-link,
+.k-rtl .k-task > .k-link
+{
+    right: auto;
+    left:4px;
+}
+
+.k-rtl .k-scheduler-agenda .k-task > .k-link
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-event-actions:first-child
+{
+    float: right;
+    margin-left: 2px;
+    margin-right: 4px;
+}
+
+.k-rtl .k-event .k-event-top-actions,
+.k-rtl .k-event .k-event-bottom-actions
+{
+    left: auto;
+    right: 0;
+}
+
 /* Slider */
 
 .k-rtl .k-slider .k-button-decrease

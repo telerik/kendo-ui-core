@@ -464,7 +464,7 @@ textarea.k-textbox:hover,
 .k-event
 {
     border-color: rgba(0,0,0,.13);
-    background: @event-background-color 0 -257px @tooltip-texture;
+    background: @event-background-color 0 -257px @tooltip-texture repeat-x;
 }
 
 .k-ie7 .k-event .k-resize-handle,
@@ -1212,6 +1212,42 @@ div.k-imagebrowser-dropzone em
 .k-draghandle
 {
     .border-radius(@draghandle-border-radius);
+}
+
+.k-scheduler-toolbar > ul li:first-child,
+.k-scheduler-toolbar > ul li:first-child .k-link
+{
+    border-top-left-radius: @main-border-radius;
+    border-bottom-left-radius: @main-border-radius;
+}
+
+.k-rtl .k-scheduler-toolbar > ul li:first-child,
+.k-rtl .k-scheduler-toolbar > ul li:first-child .k-link
+{
+    border-radius: 0 @main-border-radius @main-border-radius 0;
+}
+
+.k-scheduler-toolbar .k-nav-next,
+.k-scheduler-toolbar ul + ul li:last-child,
+.k-scheduler-toolbar .k-nav-next .k-link,
+.k-scheduler-toolbar ul + ul li:last-child .k-link
+{
+    border-top-right-radius: @main-border-radius;
+    border-bottom-right-radius: @main-border-radius;
+}
+
+.k-rtl .k-scheduler-toolbar .k-nav-next,
+.k-rtl .k-scheduler-toolbar ul + ul li:last-child,
+.k-rtl .k-scheduler-toolbar .k-nav-next .k-link,
+.k-rtl .k-scheduler-toolbar ul + ul li:last-child .k-link
+{
+    border-radius: @main-border-radius 0 0 @main-border-radius;
+}
+
+.k-scheduler div.k-scheduler-footer ul li,
+.k-scheduler div.k-scheduler-footer .k-link
+{
+    border-radius: @main-border-radius;
 }
 
 .k-more-events,

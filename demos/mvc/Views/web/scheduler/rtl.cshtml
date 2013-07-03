@@ -1,0 +1,77 @@
+<div id="example" class="k-content">
+
+    <div class="k-rtl">
+        <div id="scheduler"></div>
+    </div>
+
+</div>
+
+<style>
+
+.k-scheduler *
+{
+    border-color: Red !important;
+}
+
+</style>
+
+<script>
+$(function() {
+    $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/13"),
+        startTime: new Date("2013/6/13 7:00"),
+        height: 400,
+        timezone: "Etc/UTC",
+        views: [
+            "day",
+            { type: "week", selected: true },
+            "month",
+            "agenda"
+        ],
+        timezone: "Etc/UTC",
+        dataSource: {
+            batch: true,
+            transport: {
+                read: {
+                    url: "http://demos.kendoui.com/service/tasks",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: "http://demos.kendoui.com/service/tasks/update",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: "http://demos.kendoui.com/service/tasks/create",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: "http://demos.kendoui.com/service/tasks/destroy",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            schema: {
+                model: {
+                    id: "taskID",
+                    fields: {
+                        taskID: { from: "TaskID", type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        description: { from: "Description" },
+                        recurrenceId: { from: "RecurrenceID" },
+                        recurrenceRule: { from: "RecurrenceRule" },
+                        recurrenceException: { from: "RecurrenceException" },
+                        ownerId: { from: "OwnerID", defaultValue: 1 },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
