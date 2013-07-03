@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
-    <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
     <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
     <script src="../../demos/mvc/content/shared/js/less.js"></script>
 
@@ -21,9 +19,8 @@
     <script src="../../src/kendo.mobile.application.js"></script>
     <script src="../../src/kendo.mobile.navbar.js"></script>
     <script src="../../src/kendo.mobile.scrollview.js"></script>
-    <script src="../../src/kendo.touch.js"></script>
 
-    <script src="http://demos.kendoui.com/content/spa/aeroviewr/js/500px.js"></script>
+    <script src="500px.js"></script>
 
     <style>
         .km-virtual-scrollview {
@@ -76,73 +73,57 @@
 </head>
 <body>
 
-    <div id="home" data-role="view" data-title="Canvas View">
+    <div id="home" data-role="view" data-title="500px Popular" data-stretch="true">
         <header data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title"></span>
             </div>
         </header>
-        <div id="virtual" 
+        <div id="scrollview"
             data-role="scrollview" 
-            data-source="ds" 
-            data-template="tmp"
-            data-empty-template="tmp-empty"
-            data-content-height="300"
-            data-batch-size="6">
+            data-source="photos" 
+            data-template="template">
         </div>
     </div>
 
-    <script id="tmp" type="text/x-kendo-template">
-        <div data-uid="#: data[0].uid #" data-offset="#: calculateOffset(data[0]) #" class="tile">
-            #= data[0].foo #
+    <script id="template" type="text/x-kendo-template">
+        #console.log(data)#
+        <div class="page">
+            <p class="title">#: name #</p>
+            <img class="image" src="#: image_url #" />
         </div>
-        <div data-uid="#: data[1].uid #" data-offset="#: calculateOffset(data[1]) #" class="tile">
-            #= data[1].foo #
-        </div>
-        <div data-uid="#: data[2].uid #" data-offset="#: calculateOffset(data[2]) #" class="tile">
-            #= data[2].foo #
-        </div>
-        <div data-uid="#: data[3].uid #" data-offset="#: calculateOffset(data[3]) #" class="tile">
-            #= data[3].foo #
-        </div>
-        <div data-uid="#: data[4].uid #" data-offset="#: calculateOffset(data[4]) #" class="tile">
-            #= data[4].foo #
-        </div>
-        <div data-uid="#: data[5].uid #" data-offset="#: calculateOffset(data[5]) #" class="tile">
-            #= data[5].foo #
-        </div>
-    </script>
-
-    <script id="tmp-empty" type="text/x-kendo-template">
-        <div class="empty-page"></div>
     </script>
 
     <script>
+        _500px.init({
+            sdk_key: 'a3be03a8a98d6e05af17f60d2cf4bf696eb47555'
+        });
+
         var app = new kendo.mobile.Application();
 
-        var ds = new kendo.data.DataSource({
+        var photos = new kendo.data.DataSource({
             transport: {
                 read: function(options) {
+                    var params = { 
+                        feature: "popular",
+                        image_size: 3,
+                        page: options.data.page,
+                        rpp: options.data.pageSize
+                    };
 
-                    var results = [], data = options.data, o = options;
-                    for (var i = data.skip; i < data.skip + data.take; i ++) {
-                        results.push({ foo: i });
-                    }
-                    setTimeout(function() {
-                        o.success(results);
-                    }, 1200);
+                    _500px.api("/photos", params, function(response) {
+                        options.success(response.data);
+                    });
                 }
             },
-            pageSize: 36,
             serverPaging: true,
+            pageSize: 10,
             schema: {
-                total: function() { return 100000; }
+                data: "photos",
+                total: "total_items"
             }
         });
 
-        function calculateOffset(dataItem) {
-            return undefined;
-        }
     </script>
 
     <style>
@@ -157,16 +138,15 @@
         display: inline-block;
     }
 
-    .tile {
-        width: 50%;
-        height: 33%;
-        background-color: #c5c5c5;
-        display: inline-block;
-        float: left;
-        box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        border: 1px solid #000;
-        overflow: hidden;
+    .title {
+        font-style: italic;
+        text-align: center;
+        margin: 0;
+    }
+
+    .image {
+        display: block;
+        margin: 3em auto;
     }
 
     .empty-page {

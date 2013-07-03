@@ -611,6 +611,8 @@
     <Content Include="Views\mobile\buttongroup\index.cshtml" />
     <Content Include="Views\mobile\buttongroup\appearance.cshtml" />
     <Content Include="Views\mobile\scrollview\index.cshtml" />
+    <Content Include="Views\mobile\scrollview\databinding.cshtml" />
+    <Content Include="Views\mobile\scrollview\custom-template.cshtml" />
     <Content Include="Views\mobile\tabstrip\appearance.cshtml" />
     <Content Include="Views\dataviz\area-charts\index.cshtml" />
     <Content Include="Views\dataviz\area-charts\local-data.cshtml" />

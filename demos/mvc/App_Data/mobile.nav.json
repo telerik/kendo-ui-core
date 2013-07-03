@@ -281,6 +281,20 @@
                     "url": "scrollview/index.html",
                     "title": "Kendo UI Mobile ScrollView Example",
                     "meta": "This demo illustrates the intuitive scrolling on a touch device by using Kendo UI ScrollView widget in your HTML5 app."
+                }, 
+                {
+                    "text": "Data binding",
+                    "url": "scrollview/databinding.html",
+                    "title": "Kendo UI Mobile ScrollView DataBinding Example",
+                    "packages": ["!mvc"],
+                    "meta": "This demo illustrates the data virtualization on a touch device by using Kendo UI ScrollView widget in your HTML5 app."
+                },
+				{
+                    "text": "Custom template",
+                    "url": "scrollview/custom-template.html",
+                    "title": "Kendo UI Mobile ScrollView Template Customization Example",
+                    "packages": ["!mvc"],
+                    "meta": "This demo illustrates the data virtualization on a touch device by using Kendo UI ScrollView widget in your HTML5 app."
                 }
             ]
         },
