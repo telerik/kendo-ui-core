@@ -1621,14 +1621,18 @@ kendo_module({
 
     var TimezoneEditor = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                zones = kendo.timezone.countries_zones;
+
+            if (!zones || !kendo.timezone.countries) {
+                throw new Error('kendo.timezones.min.js is not included.');
+            }
 
             Widget.fn.init.call(that, element, options);
 
             that.wrapper = that.element;
 
-            that._zonesQuery = new kendo.data.Query(kendo.timezone.countryZones);
-
+            that._zonesQuery = new kendo.data.Query(zones);
             that._countryId = kendo.guid();
             that._countryPicker();
             that._zonePicker();
@@ -1647,16 +1651,13 @@ kendo_module({
                 country = $('<input id="' + that._countryId + '"/>').appendTo(that.wrapper);
 
             that._country = new kendo.ui.DropDownList(country, {
-                dataSource: new kendo.data.Query(kendo.timezone.countries).sort({ field: "name", dir: "asc" }).toArray(),
+                dataSource: kendo.timezone.countries,
                 dataValueField: "code",
                 dataTextField: "name",
                 optionLabel: that.options.optionLabel,
                 cascade: function() {
-                    var value = this.value();
-                    if (!value) {
+                    if (!this.value()) {
                         that._zone.wrapper.hide();
-                        that._value = value;
-                        that.trigger("change");
                     }
                 }
             });
@@ -1671,18 +1672,22 @@ kendo_module({
                 dataTextField: "name",
                 dataSource: that._zonesQuery.data,
                 cascadeFrom: that._countryId,
-                dataBound: function() {
-                    this.wrapper.toggle(this.dataSource.view().length > 1);
+                cascade: function() {
                     that._value = this.value();
                     that.trigger("change");
                 },
-                change: function() {
+                dataBound: function() {
                     that._value = this.value();
-                    that.trigger("change");
+                    this.wrapper.toggle(this.dataSource.view().length > 1);
                 }
             });
 
             that._zone.wrapper.hide();
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            kendo.destroy(this.wrapper);
         },
 
         value: function(value) {
@@ -1695,7 +1700,13 @@ kendo_module({
 
             zone = that._zonesQuery.filter({ field: "zone", operator: "eq", value: value }).data[0];
 
-            that._country.value(zone ? zone.code : "");
+            if (zone) {
+                that._country.value(zone.code);
+                that._zone.value(zone.zone);
+            } else {
+                that._country.value("");
+            }
+
         }
     });
 
