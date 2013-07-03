@@ -163,9 +163,10 @@ kendo_module({
             );
         },
 
+        // TODO: Obsolete across all views?
         createSector: function(sector, options) {
             return this.decorate(
-                new DummyElement(options)
+                new CanvasRing(sector, options)
             );
         },
 
@@ -446,6 +447,13 @@ kendo_module({
             ring.config = config || {};
         },
 
+        options: {
+            fill: "",
+            fillOpacity: 1,
+            strokeOpacity: 1,
+            strokeLineCap: SQUARE
+        },
+
         renderPoints: function(context) {
             var ring = this,
                 ringConfig = ring.config,
@@ -469,10 +477,13 @@ kendo_module({
 
             context.moveTo(firstOuterPoint.x, firstOuterPoint.y);
             context.arc(center.x, center.y, r, startRadians, endRadians);
-            context.lineTo(secondInnerPoint.x, secondInnerPoint.y);
-            context.arc(center.x, center.y, ir, endRadians, startRadians, true);
 
-            context.closePath();
+            if (ir > 0) {
+                context.lineTo(secondInnerPoint.x, secondInnerPoint.y);
+                context.arc(center.x, center.y, ir, endRadians, startRadians, true);
+            } else {
+                context.lineTo(center.x, center.y);
+            }
         },
 
         clone: function() {
@@ -542,39 +553,6 @@ kendo_module({
                 r: r,
                 isReflexAngle: arcAngle > 180
             });
-        }
-    });
-
-    var CanvasSector = CanvasRing.extend({
-        init: function(config, options) {
-            var sector = this;
-            CanvasRing.fn.init.call(sector, config, options);
-
-            sector.pathTemplate = CanvasSector.pathTemplate;
-            if (!sector.pathTemplate) {
-                sector.pathTemplate = CanvasSector.pathTemplate = renderTemplate(
-                    "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
-                    "A#= d.r # #= d.r # " +
-                    "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
-                    "#= d.secondOuterPoint.x # #= d.secondOuterPoint.y # " +
-                    "L #= d.cx # #= d.cy # z"
-                );
-            }
-        },
-
-        options: {
-            fill: "",
-            fillOpacity: 1,
-            strokeOpacity: 1,
-            strokeLineCap: SQUARE
-        },
-
-        clone: function() {
-            var sector = this;
-            return new CanvasSector(
-                deepExtend({}, sector.config),
-                deepExtend({}, sector.options)
-            );
         }
     });
 
