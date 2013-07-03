@@ -87,6 +87,7 @@ kendo_module({
 
                 canvas = container.firstElementChild;
             } else {
+                // TODO: Introduce "stage" wrapper to avoid messy cleanup
                 $(canvas)
                     .attr({
                         width: view.options.width,
@@ -170,7 +171,7 @@ kendo_module({
 
         createRing: function(ring, options) {
             return this.decorate(
-                new CanvasRing(options)
+                new CanvasRing(ring, options)
             );
         },
 
@@ -181,7 +182,7 @@ kendo_module({
         },
 
         createGradient: function(options) {
-            if (options.type === RADIAL) {
+            if (false && options.type === RADIAL) {
                 if (defined(options.ir)){
                     return new CanvasDonutGradient(options);
                 } else {
@@ -236,7 +237,6 @@ kendo_module({
             fill: "",
             fillOpacity: 1,
             strokeOpacity: 1,
-            rotation: [0,0,0],
             strokeLineCap: SQUARE
         },
 
@@ -310,6 +310,10 @@ kendo_module({
 
             line.points = points;
             line.closed = closed;
+        },
+
+        options: {
+            rotation: [0,0,0]
         },
 
         renderPoints: function(context) {
@@ -442,37 +446,33 @@ kendo_module({
             ring.config = config || {};
         },
 
-        render: function(context) {
+        renderPoints: function(context) {
             var ring = this,
                 ringConfig = ring.config,
                 startAngle = ringConfig.startAngle,
                 endAngle = ringConfig.angle + startAngle,
-                isReflexAngle = (endAngle - startAngle) > 180,
                 r = math.max(ringConfig.r, 0),
                 ir = math.max(ringConfig.ir, 0),
                 center = ringConfig.c,
-                firstOuterPoint = ringConfig.point(startAngle),
-                firstInnerPoint = ringConfig.point(startAngle, true),
-                secondOuterPoint,
-                secondInnerPoint;
+                startRadians = toRadians(startAngle),
+                endRadians = toRadians(endAngle);
 
-            if (round(startAngle) % 360 === round(endAngle) % 360) {
-                endAngle -= 0.05;
+            if (startRadians === endRadians) {
+                startAngle = 0;
+                endAngle = 360;
+                startRadians = 0;
+                endRadians = 2 * Math.PI;
             }
-            secondOuterPoint = ringConfig.point(endAngle);
-            secondInnerPoint = ringConfig.point(endAngle, true);
 
-            return ring.pathTemplate({
-                firstOuterPoint: firstOuterPoint,
-                secondOuterPoint: secondOuterPoint,
-                isReflexAngle: isReflexAngle,
-                r: r,
-                ir: ir,
-                cx: center.x,
-                cy: center.y,
-                firstInnerPoint: firstInnerPoint,
-                secondInnerPoint: secondInnerPoint
-            });
+            var firstOuterPoint = ringConfig.point(startAngle),
+                secondInnerPoint = ringConfig.point(endAngle, true);
+
+            context.moveTo(firstOuterPoint.x, firstOuterPoint.y);
+            context.arc(center.x, center.y, r, startRadians, endRadians);
+            context.lineTo(secondInnerPoint.x, secondInnerPoint.y);
+            context.arc(center.x, center.y, ir, endRadians, startRadians, true);
+
+            context.closePath();
         },
 
         clone: function() {
@@ -483,6 +483,10 @@ kendo_module({
             );
         }
     });
+
+    function toRadians(degrees) {
+        return ((degrees + 540) % 360) * DEG_TO_RAD;
+    }
 
     var CanvasPin = CanvasPath.extend({
         init: function(config, options) {
@@ -625,7 +629,7 @@ kendo_module({
 
             var gradient = context.createRadialGradient(
                 options.cx, options.cy, 0,
-                options.cx, options.cy, r);
+                options.cx, options.cy, options.r);
 
             this.addStops(gradient);
 
@@ -639,24 +643,23 @@ kendo_module({
                 options = gradient.options,
                 stops = options.stops,
                 stopTemplate = gradient.stopTemplate,
-                usedSpace = ((options.ir / options.r) * 100),
+                usedSpace = (options.ir / options.r),
                 i,
                 length = stops.length,
                 currentStop;
 
             currentStop = deepExtend({}, stops[0]);
             currentStop.offset = usedSpace;
-            output += stopTemplate(currentStop);
+            target.addColorStop(currentStop.offset, currentStop.color);
 
             for (i = 1; i < length; i++) {
                 currentStop = deepExtend({}, stops[i]);
-                currentStop.offset = currentStop.offset * (100 -  usedSpace) + usedSpace;
+                currentStop.offset = currentStop.offset * usedSpace;
 
-                // TODO: Opacity (rgba)
-                target.addColorStop(currentStop.offset, currentStop.color);
+                var color = new Color(currentStop.color);
+                target.addColorStop(currentStop.offset,
+                    "rgba(" + color.r + "," + color.g + "," + color.b + "," + currentStop.opacity + ")");
             }
-
-            return output;
         }
     });
 
