@@ -572,6 +572,27 @@
                 equal(scheduler.dataSource.at(0).end.getDate(), 28);
             });
 
+            test("dragging the east handle moves the end of the event in month view and updates its month", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/26 11:00"), end: new Date("2013/5/27 11:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-content td.k-other-month");
+
+                dragdrop(scheduler, handle, slots.last());
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 6);
+                equal(scheduler.dataSource.at(0).end.getMonth(), 6);
+            });
+
             test("dragging the west handle moves the start of the event in month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -592,6 +613,71 @@
                 equal(scheduler.dataSource.at(0).start.getDate(), 27);
             });
 
+            test("dragging the west handle moves the start of the event in month view and updates its month", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/7 11:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-content td.k-other-month");
+
+                dragdrop(scheduler, handle, slots.first());
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 0);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).start.getDate(), 26);
+                equal(scheduler.dataSource.at(0).start.getMonth(), 4);
+            });
+
+            test("month view doesn't render east resize handle for events which end in the next week", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/9 11:30"), title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event:first .k-resize-e").length, 0);
+            });
+
+            test("month view doesn't render west resize handle for events which start in the previous week", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/9 11:30"), title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-event:last .k-resize-w").length, 0);
+            });
+
+            test("dragging the west handle moves the start of the recurrence event in month view and updates its month", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:30"), title: "", recurrenceRule: "FREQ=DAILY;COUNT=2" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-content td.k-other-month");
+
+                dragdrop(scheduler, handle, slots.first());
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 0);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).start.getDate(), 26);
+                equal(scheduler.dataSource.at(0).start.getMonth(), 4);
+            });
             function dragdrop(scheduler, target, to) {
                 var offset = to.offset();
 

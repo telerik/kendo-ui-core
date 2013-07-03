@@ -512,13 +512,13 @@ kendo_module({
                             view._updateResizeHint("north", startSlot, slot, width, height);
                         }
                     } else if (dragHandle.is(".k-resize-e")) {
-                        if (slot.end.getDate() >= event.start.getDate()) {
+                        if (kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
                             endSlot = slot;
 
                             view._updateResizeHint("east", startSlot, slot, width, height);
                         }
                     } else if (dragHandle.is(".k-resize-w")) {
-                        if (event.end.getDate() >= slot.start.getDate()) {
+                        if (kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
 
                             endSlot = slot;
 
@@ -538,14 +538,14 @@ kendo_module({
                         start = kendo.date.getDate(start);
                         kendo.date.setTime(start, getMilliseconds(endSlot.start));
                     } else if (dragHandle.is(".k-resize-e")) {
-                        end.setDate(endSlot.end.getDate());
+                        end.setTime(endSlot.end.getTime());
                         end.setHours(0);
                         end.setMinutes(0);
                         if (end < start) {
                             end = kendo.date.addDays(end, 1);
                         }
                     } else if (dragHandle.is(".k-resize-w")) {
-                        start.setDate(endSlot.start.getDate());
+                        start.setTime(endSlot.start.getTime());
                         start.setHours(0);
                         start.setMinutes(0);
                     }
