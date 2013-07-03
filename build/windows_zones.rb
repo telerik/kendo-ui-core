@@ -32,7 +32,7 @@ def parse_windows_zones()
         types.each do |type|
             name = type.split('/')[1]
             if name && type != defaultType
-                result.push({:other_zone=>other, :zone=>type, :territory=>name.gsub('/_/', ' ')})
+                result.push({:other_zone=>other, :zone=>type, :territory=>name.gsub(/_/, ' ')})
             end
 
             if territory == '001'
