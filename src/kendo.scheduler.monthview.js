@@ -392,6 +392,9 @@ kendo_module({
            y += this.content[0].scrollTop;
            x += this.content[0].scrollLeft;
 
+           x = Math.ceil(x);
+           y = Math.ceil(y);
+
            var slots = this._row.slots;
 
            for (var slotIndex = 0; slotIndex < slots.length; slotIndex++) {
