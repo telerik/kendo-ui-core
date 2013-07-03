@@ -832,7 +832,7 @@ kendo_module({
                     { field: "title", title: "Title" /*, format: field.format, editor: field.editor, values: field.values*/ },
                     { field: "start", title: "Start", editor: DATERANGEEDITOR },
                     { field: "end", title: "End", editor: DATERANGEEDITOR },
-                    { field: "isAllDay", title: "All day event" },
+                    { field: "isAllDay", title: "All day event" }
                 ],
                 attr,
                 options = isPlainObject(editable) ? editable.window : {},
