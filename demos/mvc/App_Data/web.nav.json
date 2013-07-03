@@ -1575,8 +1575,8 @@
                 {
                     "text": "Launch",
                     "url": "spa/index.html",
-                    "title": "Kendo UI Single-Page application",
-                    "meta": "This example demonstrates the basic usage and functionality of Kendo UI Single-Page Application."
+                    "title": "Build Single-Page app with Kendo UI Web framework | Kendo UI Demos",
+                    "meta": "In this example we will demonstrate the basic usage and functionality of Kendo UI Web for building single-page applications."
                 }
             ]
         },
