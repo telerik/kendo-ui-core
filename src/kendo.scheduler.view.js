@@ -153,7 +153,7 @@ kendo_module({
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
         },
 
-        _updateResizeHint: function(hint, direction, startSlot, endSlot, width, height) {
+        _updateResizeHint: function(direction, startSlot, endSlot, width, height) {
             var css = {};
             var selector;
             var text;
@@ -178,9 +178,7 @@ kendo_module({
                 text = kendo.toString(endSlot.start, "M/dd");
             }
 
-            hint.find(selector).text(text);
-
-            return hint.css(css);
+            this._resizeHint.css(css).find(selector).text(text);
         },
 
         _createResizeHint: function(left, top, width, height) {
@@ -190,6 +188,10 @@ kendo_module({
                 width: width,
                 height: height
             });
+        },
+
+        _removeResizeHint: function() {
+            this._resizeHint.remove();
         },
 
         eventResources: function(event) {

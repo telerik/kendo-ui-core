@@ -154,16 +154,34 @@ kendo_module({
             that._slots();
        },
 
-       _createEastWestResizeHint: function(left, top, width, height) {
-            var hint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
+       _createEastWestResizeHint: function(event, eventElement) {
+            var left = eventElement.offsetLeft;
+            var top = eventElement.offsetTop;
+            var width = eventElement.clientWidth;
+            var height = eventElement.clientHeight;
 
-            return hint.appendTo(this.element.find(".k-scheduler-header-wrap"));
+            this._resizeHint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
+
+            this._resizeHint.find(".k-label-top").text(kendo.toString(event.start, "M/dd"))
+                            .end()
+                            .find(".k-label-bottom").text(kendo.toString(event.end, "M/dd"));
+
+            this._resizeHint.appendTo(this.element.find(".k-scheduler-header-wrap"));
        },
 
-       _createSouthNorthResizeHint: function(left, top, width, height) {
-            var hint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
+       _createSouthNorthResizeHint: function(event, eventElement) {
+            var left = eventElement.offsetLeft;
+            var top = eventElement.offsetTop;
+            var width = eventElement.clientWidth;
+            var height = eventElement.clientHeight;
 
-            return hint.appendTo(this.content);
+            this._resizeHint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
+
+            this._resizeHint.find(".k-label-top").text(kendo.toString(event.start, "t"))
+                            .end()
+                            .find(".k-label-bottom").text(kendo.toString(event.end, "t"));
+
+            this._resizeHint.appendTo(this.content);
        },
 
        _slotByPosition: function(x, y) {
