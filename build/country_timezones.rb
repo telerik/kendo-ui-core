@@ -13,7 +13,7 @@ def parse_countries()
         end
     end
 
-    return result
+    return result.sort_by { |k,v| v }
 end
 
 def parse_country_zones()
