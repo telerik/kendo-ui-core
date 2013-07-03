@@ -165,7 +165,7 @@ kendo_module({
         },
 
         size: function() {
-            return this.dimension.getSize();
+            return { width: this.dimensions.x.getSize(), height: this.dimensions.y.getSize() };
         },
 
         total: function() {
@@ -214,13 +214,13 @@ kendo_module({
 
         scrollTo: function(page, instant) {
             this.page = page;
-            this.pane.transitionTo(- page * this.pane.size(), Transition.easeOutExpo, instant);
+            this.pane.transitionTo(- page * this.pane.size().width, Transition.easeOutExpo, instant);
         },
 
         paneMoved: function(swipeType, bounce, callback) {
             var that = this,
                 pane = that.pane,
-                width = pane.size() * that.pageSize,
+                width = pane.size().width * that.pageSize,
                 approx = round,
                 ease = bounce ? Transition.easeOutBack : Transition.easeOutExpo,
                 snap,
@@ -238,7 +238,7 @@ kendo_module({
 
             if (nextPage != that.page) {
                 if (callback && callback({ currentPage: that.page, nextPage: nextPage })) {
-                    snap = -that.page * pane.size();
+                    snap = -that.page * pane.size().width;
                 }
             }
 
@@ -247,7 +247,7 @@ kendo_module({
 
         updatePage: function() {
             var pane = this.pane,
-                page = round(pane.offset() / pane.size());
+                page = round(pane.offset() / pane.size().width);
 
             if (page != this.page) {
                 this.page = page;
@@ -261,8 +261,9 @@ kendo_module({
             return this.updatePage();
         },
 
-        resizeTo: function(width) {
-            var pane = this.pane;
+        resizeTo: function(size) {
+            var pane = this.pane,
+                width = size.width;
 
             this.pageElements.width(width);
 
@@ -378,19 +379,31 @@ kendo_module({
             this.pane.updateDimension();
         },
 
-        resizeTo: function(width) {
+        resizeTo: function(size) {
             var pages = this.pages,
                 pane = this.pane;
 
             for (var i = 0; i < pages.length; i++) {
-                pages[i].setWidth(width);
+                pages[i].setWidth(size.width);
+            }
+
+            if (this.options.contentHeight === "auto") {
+                this.element.css("height", this.pages[1].element.height());
+            }
+
+            else if (this.options.contentHeight === "100%") {
+                var containerHeight = this.element.parent().height();
+                this.element.css("height", containerHeight);
+                pages[0].element.css("height", containerHeight);
+                pages[1].element.css("height", containerHeight);
+                pages[2].element.css("height", containerHeight);
             }
 
             pane.updateDimension();
 
             this._repositionPages();
 
-            this.width = width;
+            this.width = size.width;
         },
 
         scrollTo: function(page) {
@@ -413,7 +426,7 @@ kendo_module({
         paneMoved: function(swipeType, bounce, callback) {
             var that = this,
                 pane = that.pane,
-                width = pane.size(),
+                width = pane.size().width,
                 offset = pane.offset(),
                 thresholdPassed = Math.abs(offset) >= width / 3,
                 ease = bounce ? kendo.effects.Transition.easeOutBack : kendo.effects.Transition. easeOutExpo,
@@ -473,7 +486,7 @@ kendo_module({
 
         forcePageUpdate: function() {
             var offset = this.pane.offset(),
-                threshold = this.pane.size() - this.pane.size() / 4;
+                threshold  = this.pane.size().width * 3/4;
 
             if(abs(offset) > threshold) {
                 return this.updatePage();
