@@ -312,6 +312,7 @@ kendo_module({
 
             if (newHeight != element.height()) {
                 element.height(newHeight);
+                $(window).trigger(kendo.support.resize);
             }
 
             setTimeout(window.scrollTo, 0, 0, 1);
