@@ -2858,7 +2858,12 @@ kendo_module({
 
         lastRange: function() {
             var ranges = this._ranges;
-            return ranges[ranges.length - 1];
+            return ranges[ranges.length - 1] || { start: 0, end: 0, data: [] };
+        },
+
+        firstItemUid: function() {
+            var ranges = this._ranges;
+            return ranges.length && ranges[0].data.length && ranges[0].data[0].uid;
         },
 
         range: function(skip, take) {
@@ -3721,7 +3726,7 @@ kendo_module({
 
         _change: function() {
             var dataSource = this.dataSource,
-                firstItemUid = dataSource._ranges[0].data[0].uid;
+                firstItemUid = dataSource.firstItemUid();
 
             this.length = dataSource.lastRange().end;
 
@@ -3743,9 +3748,7 @@ kendo_module({
         _syncWithDataSource: function() {
             var dataSource = this.dataSource;
 
-            if (dataSource._ranges.length) {
-                this._firstItemUid = dataSource._ranges[0].data[0].uid;
-            }
+            this._firstItemUid = dataSource.firstItemUid();
             this.dataOffset = this.offset = dataSource.skip();
             this.pageSize = dataSource.pageSize();
         },

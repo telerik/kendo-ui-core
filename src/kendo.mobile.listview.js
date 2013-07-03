@@ -242,10 +242,6 @@ kendo_module({
             var buffer = this.buffer,
                 items = this.items;
 
-            if (!buffer.length) {
-                return;
-            }
-
             while(items.length) {
                 items.pop().destroy();
             }
