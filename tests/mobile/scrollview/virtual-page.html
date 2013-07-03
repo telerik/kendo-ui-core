@@ -41,29 +41,33 @@
                 CENTER_PAGE = 0,
                 RIGHT_PAGE = 1;
 
-            module("ScrollView VirtualPage", { 
+            module("ScrollView VirtualPage", {
                 setup: function() {
                     element = $("<div style='width: 400px;'></div>");
                     page = new Page(element);
                 }
             });
 
+            function transformOffset(element) {
+                style = element[0].style;
+                return (style.transform || style.webkitTransform).split(/\(|,/)[1];
+
+            }
+
             test("page resizes to the width of its parent container", 2, function() {
                 equal(page.width, 400);
                 equal(page.element.width(), 400);
             });
 
-            test("page is positioned correctly", 4, function() {
-                equal(page.element.css("-webkit-transform"), "");
-
+            test("page is positioned correctly", 3, function() {
                 page.position(LEFT_PAGE);
-                equal(page.element.css("-webkit-transform"), "translate3d(-400px, 0, 0)");
+                equal(transformOffset(page.element), "-400px");
 
                 page.position(CENTER_PAGE);
-                equal(page.element.css("-webkit-transform"), "translate3d(0px, 0, 0)");
+                equal(transformOffset(page.element), "0px");
 
                 page.position(RIGHT_PAGE);
-                equal(page.element.css("-webkit-transform"), "translate3d(400px, 0, 0)");
+                equal(transformOffset(page.element), "400px");
             });
 
             test("page width is set correctly", 3, function() {
