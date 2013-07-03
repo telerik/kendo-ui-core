@@ -58,7 +58,7 @@
 
                 content = new ScrollViewContent(element, new ElasticPane(element));
 
-                content.resizeTo(200);
+                content.resizeTo({ width: 200 });
                 equal(content.pageCount, 3);
             });
 
@@ -67,7 +67,7 @@
 
                 content = new ScrollViewContent(element, new ElasticPane(element));
 
-                content.resizeTo(200);
+                content.resizeTo({ width: 200 });
                 equal(content.element.width(), 400);
                 equal(content.element.find("[data-role=page]").eq(0).width(), 200);
             });
@@ -95,7 +95,7 @@
                 equal(content.page, 0);
                 content.scrollTo(1, true);
 
-                content.resizeTo(100);
+                content.resizeTo({ width: 100 });
                 equal(content.page, 2);
             });
 
@@ -108,7 +108,7 @@
                 equal(content.page, 0);
                 content.scrollTo(1, true);
 
-                content.resizeTo(100);
+                content.resizeTo({ width: 100 });
                 equal(content.page, 1);
             });
 
@@ -118,7 +118,7 @@
                 var pane = new ElasticPane(element);
                 content = new ScrollViewContent(element, pane);
                 content.page = 1;
-                content.resizeTo(200);
+                content.resizeTo({ width: 200 });
 
                 equal(pane.offset(), 200);
             });
@@ -129,11 +129,11 @@
                 var pane = new ElasticPane(element);
                 content = new ScrollViewContent(element, pane);
                 content.page = 1;
-                content.resizeTo(200);
+                content.resizeTo({ width: 200 });
 
                 element.parent().width(100);
                 pane.refresh();
-                content.resizeTo(100);
+                content.resizeTo({ width: 100 });
 
                 equal(pane.offset(), 100);
             });
@@ -145,7 +145,7 @@
                     element = $("<div style='position: absolute;'><div data-role=page></div><div data-role=page></div></div>").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
                     pane = new ElasticPane(element);
                     content = new ScrollViewContent(element, pane);
-                    content.resizeTo(200);
+                    content.resizeTo({ width: 200 });
                 }
             });
 
