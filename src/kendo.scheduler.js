@@ -479,16 +479,16 @@ kendo_module({
                     if (dragHandle.is(".k-resize-s,.k-resize-n")) {
                         hint = view._createSouthNorthResizeHint(eventElement[0].offsetLeft, eventElement[0].offsetTop, startSlot.clientWidth - 3, eventElement[0].clientHeight);
 
-                        hint.find("div:first").text(kendo.toString(event.start, "t"))
+                        hint.find(".k-label-top").text(kendo.toString(event.start, "t"))
                             .end()
-                            .find("div:last").text(kendo.toString(event.end, "t"))
+                            .find(".k-label-bottom").text(kendo.toString(event.end, "t"))
                             .end();
                     } else {
                         hint = view._createEastWestResizeHint(eventElement[0].offsetLeft, eventElement[0].offsetTop, startSlot.clientWidth - 3, eventElement[0].clientHeight);
 
-                        hint.find("div:first").text(kendo.toString(event.start, "M/dd"))
+                        hint.find(".k-label-top").text(kendo.toString(event.start, "M/dd"))
                             .end()
-                            .find("div:last").text(kendo.toString(event.end, "M/dd"))
+                            .find(".k-label-bottom").text(kendo.toString(event.end, "M/dd"))
                             .end();
                     }
                 },
