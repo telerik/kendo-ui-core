@@ -137,8 +137,11 @@ kendo_module({
         );
     }
     var HINT = '<div class="k-marquee k-scheduler-marquee">' +
-                    '<div class="k-label-top"></div>' +
-                    '<div class="k-label-bottom"></div>' +
+                    '<div class="k-marquee-color"></div>' +
+                    '<div class="k-marquee-text">' +
+                        '<div class="k-label-top"></div>' +
+                        '<div class="k-label-bottom"></div>' +
+                    '</div>' +
                 '</div>';
 
     kendo.ui.SchedulerView = Widget.extend({
@@ -157,21 +160,21 @@ kendo_module({
 
             if (direction == "south") {
                 css.height = height + endSlot.offsetTop - startSlot.offsetTop;
-                selector = "div:last";
+                selector = ".k-label-bottom";
                 text = kendo.toString(endSlot.end, "t");
             } else if (direction == "north") {
                 css.top = endSlot.offsetTop;
                 css.height = height + startSlot.offsetTop - endSlot.offsetTop;
-                selector = "div:first";
+                selector = ".k-label-top";
                 text = kendo.toString(endSlot.start, "t");
             } else if (direction == "west") {
                 css.left = endSlot.offsetLeft;
                 css.width = width + startSlot.offsetLeft - endSlot.offsetLeft;
-                selector = "div:first";
+                selector = ".k-label-top";
                 text = kendo.toString(endSlot.end, "M/dd");
             } else if (direction == "east") {
                 css.width = width + endSlot.offsetLeft - startSlot.offsetLeft;
-                selector = "div:last";
+                selector = ".k-label-bottom";
                 text = kendo.toString(endSlot.start, "M/dd");
             }
 

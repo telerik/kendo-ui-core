@@ -1884,8 +1884,22 @@ html .k-grid-edit-row .k-tooltip
 .k-marquee
 {
     position: absolute;
-    filter: alpha(opacity=30);
-    opacity: .3;
+}
+
+.k-marquee-color,
+.k-marquee-text
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.k-marquee-color
+{
+    filter: alpha(opacity=10);
+    opacity: .1;
 }
 
 .k-column-menu
@@ -4080,7 +4094,7 @@ tr:hover > td > .k-task .k-event-delete
     top: 0;
     left: 0;
     right: 0;
-    height: .3em;
+    height: .4em;
 }
 
 .k-event > .k-resize-s
@@ -4088,7 +4102,7 @@ tr:hover > td > .k-task .k-event-delete
     bottom: 0;
     left: 0;
     right: 0;
-    height: .3em;
+    height: .4em;
 }
 
 .k-event > .k-resize-e
@@ -4096,7 +4110,7 @@ tr:hover > td > .k-task .k-event-delete
     right: 0;
     top: 0;
     bottom: 0;
-    width: .3em;
+    width: .4em;
 }
 
 .k-event > .k-resize-w
@@ -4104,7 +4118,7 @@ tr:hover > td > .k-task .k-event-delete
     left: 0;
     top: 0;
     bottom: 0;
-    width: .3em;
+    width: .4em;
 }
 
 .k-event > .k-resize-n:after,
@@ -4141,22 +4155,51 @@ tr:hover > td > .k-task .k-event-delete
 
 .k-scheduler-marquee
 {
-    filter: alpha(opacity=50);
-    opacity: .5;
+    border-style: solid;
+    border-width: 1px 0;
 }
 
-.k-marquee > .k-label-top
+.k-scheduler-marquee:before,
+.k-scheduler-marquee:after
 {
-    position:absolute;
-    top:2px;
-    left:2px;
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3px;
 }
 
-.k-marquee > .k-label-bottom
+div.k-scheduler-marquee:before
 {
-    position:absolute;
-    bottom:2px;
-    right:2px;
+    top: 0;
+    left: 0;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+}
+
+div.k-scheduler-marquee:after
+{
+    bottom: 0;
+    right: 0;    
+    border-top-color: transparent;
+    border-left-color: transparent;
+}
+
+.k-scheduler-marquee .k-label-top
+{
+    position: absolute;
+    top: .3em;
+    left: .8em;
+    font-size: .8em;
+}
+
+.k-scheduler-marquee .k-label-bottom
+{
+    position: absolute;
+    bottom: .3em;
+    right: .81em;
+    font-size: .8em;
 }
 
 .k-scheduler-quickedit .k-textbox

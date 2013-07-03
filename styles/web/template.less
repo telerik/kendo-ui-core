@@ -467,9 +467,17 @@ textarea.k-textbox:hover,
     background: @event-background-color 0 -257px @tooltip-texture;
 }
 
+.k-ie7 .k-event .k-resize-handle,
 .k-event .k-resize-handle:after
 {
     background-color: @widget-text-color;
+}
+
+.k-scheduler-marquee,
+.k-scheduler-marquee:before,
+.k-scheduler-marquee:after
+{
+    border-color: @selected-background-color;
 }
 
 .k-panelbar .k-content,
@@ -597,11 +605,17 @@ textarea.k-textbox:hover,
 .k-button:active,
 .k-ghost-splitbar-vertical,
 .k-ghost-splitbar-horizontal,
-.k-draghandle.k-state-selected:hover
+.k-draghandle.k-state-selected:hover,
+.k-marquee-color
 {
     color: @selected-text-color;
     background-color: @selected-background-color;
     border-color: @selected-border-color;
+}
+
+.k-marquee-text
+{
+    color: @selected-background-color;
 }
 
 .k-state-focused,
@@ -658,7 +672,6 @@ td.k-state-focused,
 .k-splitbar-horizontal-hover:hover,
 .k-splitbar-vertical-hover:hover,
 .k-list>.k-state-hover,
-.k-marquee,
 .k-pager-wrap .k-link:hover,
 .k-dropdown .k-state-focused,
 .k-imagebrowser-dropzone
@@ -1203,8 +1216,7 @@ div.k-imagebrowser-dropzone em
 
 .k-more-events,
 .k-event,
-.k-event .k-link,
-.k-scheduler-marquee
+.k-event .k-link
 {
     .border-radius(@inner-border-radius);
 }
