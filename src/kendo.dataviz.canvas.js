@@ -178,7 +178,7 @@ kendo_module({
 
         createPin: function(pin, options) {
             return this.decorate(
-                new DummyElement(options)
+                new CanvasPin(pin, options)
             );
         },
 
@@ -333,7 +333,7 @@ kendo_module({
                 return;
             }
 
-            var p = points[0];
+            var p = points[0].clone().rotate(rCenter, rAmount);
             context.moveTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
 
             for (i = 0; i < points.length; i++) {
@@ -505,54 +505,29 @@ kendo_module({
 
             CanvasPath.fn.init.call(pin, options);
 
-            pin.pathTemplate = CanvasPin.pathTemplate;
-            if (!pin.pathTemplate) {
-                pin.pathTemplate = CanvasPin.pathTemplate = renderTemplate(
-                    "M #= d.origin.x # #= d.origin.y # " +
-                    "#= d.as.x # #= d.as.y # " +
-                    "A#= d.r # #= d.r # " +
-                    "0 #= d.isReflexAngle ? '1' : '0' #,0 " +
-                    "#= d.ae.x # #= d.ae.y # " +
-                    "z"
-                );
-            }
-
-            pin.config = config || new dataviz.Pin();
+            pin.config = config;
         },
 
-        renderPoints: function() {
+        renderPoints: function(context) {
             var pin = this,
                 config = pin.config,
                 r = config.radius,
                 degrees = math.PI / 180,
                 arcAngle = config.arcAngle,
-                halfChordLength = r * math.sin(arcAngle * degrees / 2),
                 height = config.height - r * (1 - math.cos(arcAngle * degrees / 2)),
-                origin = config.origin,
-                arcStart = { x: origin.x + halfChordLength, y: origin.y - height },
-                arcEnd = { x: origin.x - halfChordLength, y: origin.y - height },
-                rotate = function(point, inclinedPoint) {
-                    var rotation = pin.options.rotation,
-                        inclination = config.rotation;
+                origin = config.origin;
 
-                    point = rotatePoint(point.x, point.y, rotation[1], rotation[2], -rotation[0]);
+            var rotation = pin.options.rotation;
+            console.log(pin.options, pin.config)
+            context.translate(rotation[1], rotation[2]);
+            context.rotate(toRadians(rotation[0]));
+            context.translate(rotation[1] - origin.x, rotation[2] - origin.y);
+            context.rotate(toRadians(-pin.config.rotation));
 
-                    if (inclinedPoint) {
-                        point = rotatePoint(point.x, point.y, origin.x, origin.y, inclination);
-                    }
-
-                    return point;
-                };
-
-            origin = rotate(origin);
-
-            return pin.pathTemplate({
-                origin: origin,
-                as: rotate(arcStart, true),
-                ae: rotate(arcEnd, true),
-                r: r,
-                isReflexAngle: arcAngle > 180
-            });
+            context.moveTo(0, 0);
+            context.arc(0, -height, r, toRadians(90 - arcAngle / 2), toRadians(90 + arcAngle / 2));
+            context.lineTo(0, 0);
+            context.closePath();
         }
     });
 

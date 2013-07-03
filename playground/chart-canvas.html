@@ -9,6 +9,7 @@
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.chart.js"></script>
         <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.gauge.js"></script>
         <script src="../src/kendo.dataviz.stock.js"></script>
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
@@ -19,31 +20,33 @@
     </head>
     <body>
         <div id="chart"></div>
+        <div id="gauge"></div>
         <script>
             $("#chart").kendoChart({
                 series: [{
-                    type: "column",
-                    data: [1, 2, 3]
+                    type: "pie",
+                    data: [1, 2]
                 }],
                 categoryAxis: {
-                    categories: ["Foo", "Bar", "Baz"],
+                    categories: ["Foo", "Bar"],
                     labels: {
                         rotation: -45
                     }
                 }
             });
 
-            /*
-            $(function() {
-                var container = $("#chart")[0];
-                var view = new kendo.dataviz.CanvasView();
-
-                var root = view.createLine(0, 0, 300, 300);
-                view.children.push(root);
-
-                view.renderTo(container);
+            $("#gauge").kendoRadialGauge({
+                pointer: {
+                    shape: "arrow",
+                    value: 100
+                },
+                scale: {
+                    minorUnit: 5,
+                    startAngle: -30,
+                    endAngle: 210,
+                    max: 180
+                }
             });
-            */
         </script>
     </body>
 </html>
