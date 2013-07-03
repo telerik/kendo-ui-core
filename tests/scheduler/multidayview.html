@@ -1223,9 +1223,8 @@
                     view = setup({
                         add: function(e) {
                             var event = e.eventInfo;
-
-                            equal(event.start.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
-                            equal(event.end.getTime(), new Date(2013, 1, 26, 0, 0, 0).getTime());
+                            deepEqual(event.start, new Date(2013, 1, 26, 0, 0, 0));
+                            deepEqual(event.end, new Date(2013, 1, 26, 0, 0, 0));
                             equal(event.isAllDay, true);
                         },
                         editable: true,
@@ -1336,18 +1335,6 @@
                 equal(result.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());
             });
 
-            test("_dateSlotIndex returns correct index if date midnight", function() {
-                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-                    view = setup({
-                        dates: [
-                            selectedDate,
-                            new Date(2013, 1, 27, 0, 0, 0)
-                        ]
-                    });
-
-                equal(view._dateSlotIndex(new Date(2013,1,27,0,0,0)), 1);
-            });
-
             test("_dateSlotIndex returns correct index if date is same as endTime", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                 view = setup({
@@ -1423,6 +1410,15 @@
                 equal(view.content.find(".k-event .k-i-arrow-n").length, 1);
             });
 
+            test("arrows are not shown if event ends in the midnight", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+                view.render([{ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 3, 0, 0, 0) }]);
+
+                equal(view.content.find(".k-event .k-i-arrow-s").length, 0);
+                equal(view.content.find(".k-event .k-i-arrow-n").length, 0);
+            });
+
             test("refresh icon is shown if multiday event has recurring rule", function() {
                 var view = setup({ dates: [new Date(2013, 1, 2)] });
 
@@ -1454,6 +1450,83 @@
                 equal(view.datesHeader.find(".k-event .k-i-refresh").length, 0);
             });
 
+            test("same day event which end at midnight is rendered in the day slot", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+                view.render([{
+                    uid: "foo", title: "",
+                    start: new Date(2013, 1, 2, 10, 0, 0),
+                    end: new Date(2013, 1, 3, 0, 0, 0),
+                    id: "2"
+                }]);
+
+                equal(view._columns[0].events[0].start, 10);
+                equal(view._columns[0].events[0].end, 24);
+
+                ok(view.content.find(".k-event").length);
+            });
+
+            test("same day event which starts and end at the startTime is rendered as one cell duration", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+                view.render([{
+                    uid: "foo", title: "",
+                    start: new Date(2013, 1, 2, 0, 0, 0),
+                    end: new Date(2013, 1, 2, 0, 0, 0),
+                    id: "2"
+                }]);
+
+                equal(view._columns[0].events[0].start, 0);
+                equal(view._columns[0].events[0].end, 0);
+
+                ok(view.content.find(".k-event").length);
+            });
+
+            test("same day event which starts and ends before the startTime is not rendered when week view", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2), new Date(2013, 1, 3)], startTime: new Date(2013, 1, 2, 7, 0, 0) });
+
+                view.render([{
+                    uid: "foo", title: "",
+                    start: new Date(2013, 1, 2, 0, 0, 0),
+                    end: new Date(2013, 1, 2, 0, 0, 0),
+                    id: "2"
+                }]);
+
+                ok(!view.content.find(".k-event").length);
+            });
+
+            test("same day event which starts before the startTime and ends at midnight is rendered", function() {
+                var view = setup({ dates: [new Date(2013, 1, 2)], startTime: new Date(2013, 1, 2, 7, 0, 0) });
+
+                view.render([{
+                    uid: "foo", title: "",
+                    start: new Date(2013, 1, 2, 6, 0, 0),
+                    end: new Date(2013, 1, 3, 0, 0, 0),
+                    id: "2"
+                }]);
+
+                ok(view.content.find(".k-event").length);
+
+                equal(view._columns[0].events[0].start, 0);
+                equal(view._columns[0].events[0].end, 17);
+            });
+
+            test("two day all day event is render correctly", function() {
+                var view = setup({ dates: [ new Date(2013, 1, 2), new Date(2013, 1, 3) ] });
+
+                view.render([{
+                    uid: "foo", title: "",
+                    start: new Date(2013, 1, 2, 0, 0, 0),
+                    end: new Date(2013, 1, 3, 0, 0, 0),
+                    isAllDay: true,
+                    id: "2"
+                }]);
+
+                equal(view._rows[0].events[0].start, 0);
+                equal(view._rows[0].events[0].end, 1);
+
+                ok(view.datesHeader.find(".k-event").length);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

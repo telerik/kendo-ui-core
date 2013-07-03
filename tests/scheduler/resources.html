@@ -1121,6 +1121,118 @@
 
                 equal(view.content.find(".k-event").length, 1);
             });
+
+            test("all day events are added in allday slot when horizontal grouping is applyed", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/6 10:00 AM"), end: new Date("2013/6/6 11:00 AM"), isAllDay: true, title: "", foo: 2 }],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view._rows[0].events.length, 1);
+            });
+
+            test("all day events are added in the correct group allday slot when vertical grouping is applyed", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/6 10:00 AM"), end: new Date("2013/6/6 11:00 AM"), isAllDay: true, title: "", foo: 2 }],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view._rows[1].events.length, 1);
+            });
+
+            test("slots offsetTop is updated when all day event is inserted when vertical grouping is applyed", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+                var slots = view._columns[0].slots;
+
+                var initialHeight = view._allDayHeaderHeight;
+                var firstSlotTop = slots[0].offsetTop;
+                var lastSlotTop = slots[slots.length - 1].offsetTop;
+
+                scheduler.dataSource.add({ start: new Date("2013/6/6 10:00 AM"), end: new Date("2013/6/6 11:00 AM"), isAllDay: true, title: "", foo: 1 });
+
+                var offset = view.element.find(".k-scheduler-header-all-day").first()[0].clientHeight - initialHeight;
+
+                slots = view._columns[0].slots;
+
+                equal(slots[0].offsetTop, firstSlotTop + offset);
+                equal(slots[slots.length - 1].offsetTop, lastSlotTop + offset * 2);  // there are two headers before this
+            });
+
+            test("slotByPosition returns correct date for slot for the last group with vertical orientation", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    groups: [ "ResourceName"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+                var slot = view.content.find("td:last");
+
+                var info = view._slotByPosition(slot.offset().left, slot.offset().top);
+
+                deepEqual(info.start, new Date("2013/6/6 11:30 PM"));
+                deepEqual(info.end, new Date("2013/6/7 00:00 AM"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
