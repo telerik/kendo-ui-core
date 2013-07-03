@@ -124,7 +124,7 @@ kendo_module({
 
         createGroup: function(options) {
             return this.decorate(
-                new DummyElement(options)
+                new CanvasGroup(options)
             );
         },
 
@@ -207,7 +207,7 @@ kendo_module({
 
     dataviz.ui.registerView(CanvasView);
 
-    var DummyElement = ViewElement.extend({
+    var CanvasGroup = ViewElement.extend({
         render: function(context) {
             this.renderContent(context);
         },
@@ -224,7 +224,7 @@ kendo_module({
         },
 
         clone: function() {
-            return new DummyElement();
+            return new CanvasGroup();
         }
     });
 
