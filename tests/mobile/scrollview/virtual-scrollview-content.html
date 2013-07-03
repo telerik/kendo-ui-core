@@ -32,6 +32,11 @@
         <script>
             QUnit.config.reorder = false;
 
+            function transformOffset(element) {
+                style = element[0].style;
+                return (style.transform || style.webkitTransform).split(/\(|,/)[1];
+            }
+
             var ElasticPane = kendo.mobile.ui.ScrollViewElasticPane,
                 Page = kendo.mobile.ui.VirtualPage,
                 BatchBuffer = kendo.data.BatchBuffer,
@@ -46,7 +51,7 @@
                 element,
                 pane;
 
-            module("VirtualScrollView content", { 
+            module("VirtualScrollView content", {
                 setup: function() {
 
                     var dataSourceConfig = {
@@ -88,9 +93,9 @@
             test("positions pages correctly after refresh", 3, function() {
                 var pages = content.pages;
 
-                equal(pages[0].element.get(0).style["-webkit-transform"], "translate3d(-400px, 0, 0)");
-                equal(pages[1].element.get(0).style["-webkit-transform"], "translate3d(0px, 0, 0)");
-                equal(pages[2].element.get(0).style["-webkit-transform"], "translate3d(400px, 0, 0)");
+                equal(transformOffset(pages[0].element), "-400px");
+                equal(transformOffset(pages[1].element), "0px");
+                equal(transformOffset(pages[2].element), "400px");
             });
 
             test("re-calculates the pages width on pane resize", 2, function() {
@@ -98,9 +103,9 @@
                 pane = new ElasticPane(element);
                 content = new VirtualScrollViewContent(element, pane, { template: "", emptyTemplate: "" });
 
-                equal(content.pages[0].element.width(), 500);
+                equal(content.pages[0].element.width(), 200);
 
-                content.resizeTo(300);
+                content.resizeTo({width: 300, height: 300 });
                 equal(content.pages[0].element.width(), 300);
             });
 
@@ -200,7 +205,7 @@
 
                     pane = new ElasticPane(element);
                     content = new VirtualScrollViewContent(element, pane, options);
-                    content.resizeTo(400);
+                    content.resizeTo({width: 400 });
                 }
             });
 

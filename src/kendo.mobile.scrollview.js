@@ -302,7 +302,7 @@ kendo_module({
             that.page = 0;
             that.pages = [];
             that._initPages();
-            that.resizeTo(that.element.width());
+            that.resizeTo(that.pane.size());
             that.dataSource = DataSource.create(options.dataSource);
             that._buffer();
             that._pendingPageRefresh = false;

@@ -51,7 +51,6 @@
             function transformOffset(element) {
                 style = element[0].style;
                 return (style.transform || style.webkitTransform).split(/\(|,/)[1];
-
             }
 
             test("page resizes to the width of its parent container", 2, function() {
