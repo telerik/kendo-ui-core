@@ -487,7 +487,7 @@ kendo_module({
                     css.width = endSlot.offsetLeft - startSlot.offsetLeft;
                 }
 
-                if (groupIndex == 0) {
+                if (groupIndex === 0) {
                     css.width += width;
                 } else {
                     css.width += endSlot.clientWidth;
