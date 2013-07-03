@@ -10,7 +10,7 @@ def parse_zones_titles()
     for i in 0..zones.length
         zone = zones[i]
         if zone
-            result.push({:title=>zone['text'], :zone=>zone['value']})
+            result.push({:name=>zone['text'], :other_zone=>zone['value']})
         end
     end
 
@@ -32,7 +32,7 @@ def parse_windows_zones()
         types.each do |type|
             name = type.split('/')[1]
             if name && type != defaultType
-                result.push({:zone=>other, :type=>type, :name=>name.gsub('/_/', ' ')})
+                result.push({:other_zone=>other, :zone=>type, :territory=>name.gsub('/_/', ' ')})
             end
 
             if territory == '001'
