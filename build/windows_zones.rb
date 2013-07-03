@@ -19,7 +19,7 @@ end
 
 def parse_windows_zones()
     xml_doc = Nokogiri::XML(File.read("build/windows-zones/windows-zones.xml"))
-    map_zones = xml_doc.xpath('.//mapZone').take(10)
+    map_zones = xml_doc.xpath('.//mapZone')
 
     defaultType = ''
     result = []
@@ -30,9 +30,9 @@ def parse_windows_zones()
         territory = zone.attr('territory')
 
         types.each do |type|
-            if type != defaultType
-                name = type.split('/')[1].gsub('/_/', ' ')
-                result.push({:zone=>other, :type=>type, :name=>name})
+            name = type.split('/')[1]
+            if name && type != defaultType
+                result.push({:zone=>other, :type=>type, :name=>name.gsub('/_/', ' ')})
             end
 
             if territory == '001'
