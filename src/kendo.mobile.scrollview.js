@@ -307,8 +307,6 @@ kendo_module({
             that._pendingPageRefresh = false;
             that._pendingWidgetRefresh = false;
 
-            //that.view().bind("show", that._viewShow);
-
             if(that.options.autoBind) {
                 that.dataSource.fetch();
             }
