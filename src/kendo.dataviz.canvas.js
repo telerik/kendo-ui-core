@@ -81,7 +81,12 @@ kendo_module({
 
                 canvas = container.firstElementChild;
             } else {
-                $(canvas).siblings().remove();
+                $(canvas)
+                    .attr({
+                        width: view.options.width,
+                        height: view.options.height
+                    })
+                    .siblings().remove();
             }
 
             canvas.width = canvas.width;
