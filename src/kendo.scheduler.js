@@ -828,7 +828,7 @@ kendo_module({
                     { field: "title", title: "Title" /*, format: field.format, editor: field.editor, values: field.values*/ },
                     { field: "start", title: "Start", editor: DATERANGEEDITOR },
                     { field: "end", title: "End", editor: DATERANGEEDITOR },
-                    { field: "timezone", title: "Time zone", editor: TIMEZONEPOPUP, click: click },
+                    { field: "timezone", title: " ", editor: TIMEZONEPOPUP, click: click },
                     { field: "startTimezone", title: "Start timezone", editor: TIMEZONEEDITOR },
                     { field: "endTimezone", title: "End timezone", editor: TIMEZONEEDITOR },
                     { field: "isAllDay", title: "All day event" }
@@ -1622,9 +1622,9 @@ kendo_module({
     var TimezoneEditor = Widget.extend({
         init: function(element, options) {
             var that = this,
-                zones = kendo.timezone.countries_zones;
+                zones = kendo.timezone.windows_zones;
 
-            if (!zones || !kendo.timezone.countries) {
+            if (!zones || !kendo.timezone.zones_titles) {
                 throw new Error('kendo.timezones.min.js is not included.');
             }
 
@@ -1633,8 +1633,8 @@ kendo_module({
             that.wrapper = that.element;
 
             that._zonesQuery = new kendo.data.Query(zones);
-            that._countryId = kendo.guid();
-            that._countryPicker();
+            that._zoneTitleId = kendo.guid();
+            that._zoneTitlePicker();
             that._zonePicker();
 
             that.value(that.options.value);
@@ -1646,13 +1646,13 @@ kendo_module({
         },
         events: [ "change" ],
 
-        _countryPicker: function() {
+        _zoneTitlePicker: function() {
             var that = this,
-                country = $('<input id="' + that._countryId + '"/>').appendTo(that.wrapper);
+                zoneTitle = $('<input id="' + that._zoneTitleId + '"/>').appendTo(that.wrapper);
 
-            that._country = new kendo.ui.DropDownList(country, {
-                dataSource: kendo.timezone.countries,
-                dataValueField: "code",
+            that._zoneTitle = new kendo.ui.DropDownList(zoneTitle, {
+                dataSource: kendo.timezone.zones_titles,
+                dataValueField: "other_zone",
                 dataTextField: "name",
                 optionLabel: that.options.optionLabel,
                 cascade: function() {
@@ -1665,13 +1665,13 @@ kendo_module({
 
         _zonePicker: function() {
             var that = this,
-                zone = $('<input id="' + that._id + '"/>').appendTo(this.wrapper);
+                zone = $('<input />').appendTo(this.wrapper);
 
             that._zone = new kendo.ui.DropDownList(zone, {
                 dataValueField: "zone",
-                dataTextField: "name",
+                dataTextField: "territory",
                 dataSource: that._zonesQuery.data,
-                cascadeFrom: that._countryId,
+                cascadeFrom: that._zoneTitleId,
                 cascade: function() {
                     that._value = this.value();
                     that.trigger("change");
@@ -1701,10 +1701,10 @@ kendo_module({
             zone = that._zonesQuery.filter({ field: "zone", operator: "eq", value: value }).data[0];
 
             if (zone) {
-                that._country.value(zone.code);
+                that._zoneTitle.value(zone.other_zone);
                 that._zone.value(zone.zone);
             } else {
-                that._country.value("");
+                that._zoneTitle.value("");
             }
 
         }

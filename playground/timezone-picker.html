@@ -6,51 +6,23 @@
         <link href="../styles/web/kendo.silver.min.css" rel="stylesheet" />
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.timezones.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.multiselect.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timezones.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-        <select id="countries"
-            data-role="dropdownlist"
-            data-value-field="code"
-            data-text-field="name"
-            data-bind="source: countries, value: country, events: { change: countryChange }">
-        </select>
-        <select
-            data-role="dropdownlist"
-            data-value-field="zone"
-            data-text-field="name"
-            data-bind="source: zones, visible, value: zoneName, visible: visible">
-        </select>
-
-        <div data-bind="html: zoneName"></div>
+        <div id="tzeditor"></div>
 
         <script>
             $(function() {
-                var zoneDDL,
-                    model = kendo.observable({
-                    countries: new kendo.data.Query(kendo.timezone.countries).sort({ field: "name", dir: "asc" }).toArray(),
-                    zones: [],
-                    country: "US",
-                    zoneName: "America/Phoenix",
-                    visible: function(e) {
-                        return e.get("zones").length > 1;
-                    },
-                    countryChange: function(e) {
-                        var zones = e.sender.dataItem().zones || [],
-                            zoneName = zones[0];
-
-                        e.data.set("zones", zones);
-                        e.data.set("zoneName", zoneName = zoneName ? zoneName.zone : "");
-                    }
+                $("#tzeditor").kendoTimezoneEditor({
+                    value: "Antarctica/Vostok"
                 });
-
-                kendo.bind(document.body, model);
-                model.set("zones", $("#countries").data("kendoDropDownList").dataItem().zones || []);
             });
         </script>
     </body>
