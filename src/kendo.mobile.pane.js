@@ -39,7 +39,7 @@ kendo_module({
 
     var Pane = Widget.extend({
         init: function(element, options) {
-            var that = this, initial;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
@@ -71,13 +71,16 @@ kendo_module({
                 }
             });
 
-            initial = that.options.initial;
-
-            if (initial) {
-                that.navigate(initial);
-            }
 
             that._setupAppLinks();
+        },
+
+        navigateToInitial: function() {
+            var initial = this.options.initial;
+
+            if (initial) {
+                this.navigate(initial);
+            }
         },
 
         options: {

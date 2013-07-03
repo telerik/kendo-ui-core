@@ -14,7 +14,7 @@ kendo_module({
 
     var SplitView = View.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, pane;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
@@ -26,7 +26,9 @@ kendo_module({
 
             that.panes = [];
             that.element.children(kendo.roleSelector("pane")).each(function() {
-                that.panes.push(kendo.initWidget(this, {}, ui.roles));
+                pane = kendo.initWidget(this, {}, ui.roles);
+                that.panes.push(pane);
+                pane.navigateToInitial();
             });
         },
 

@@ -179,6 +179,7 @@ kendo_module({
             that.popup = new Popup(that.element, popupOptions);
 
             that.pane = new ui.Pane(that.element, this.options.pane);
+            that.pane.navigateToInitial();
 
             kendo.notify(that, ui);
         },

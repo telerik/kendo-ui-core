@@ -102,6 +102,7 @@ kendo_module({
                 that._setupElementClass();
                 that._attachHideBarHandlers();
                 that.pane = new Pane(that.element, that.options);
+                that.pane.navigateToInitial();
                 that._attachMeta();
 
                 if (that.options.updateDocumentTitle) {
