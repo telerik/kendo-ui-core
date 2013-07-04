@@ -1421,6 +1421,13 @@ div.k-imagebrowser-dropzone em
         background-color: @header-background-color;
         border-color: @secondary-border-color;
     }
+
+	.k-editor-button .k-tool-icon
+	{
+		border-color: @secondary-border-color;
+	}
+
+	
     .k-editor-button .k-state-active
     {
         background-color: @header-background-color;
@@ -1505,6 +1512,7 @@ div.k-imagebrowser-dropzone em
     &.k-toolbar
     {
         color: @secondary-text-color;
+		border-color: @secondary-border-color;
     }
 
     &.k-popup.k-group
@@ -1521,13 +1529,11 @@ div.k-imagebrowser-dropzone em
 
 .k-grid td.k-state-focused
 {
-    border-color: @focused-border-color;
-    -webkit-box-shadow: inset 0 0 0 1px #363940;
-    box-shadow: inset 0 0 0 1px #363940;
+    -webkit-box-shadow: inset 0 0 0 1px @focused-item-shadow;
+    box-shadow: inset 0 0 0 1px @focused-item-shadow;
 }
 
 .k-header,
-.k-grid,
 .k-grid .k-grouping-header,
 .k-grid-header,
 .k-pager-wrap,
