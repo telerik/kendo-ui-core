@@ -73,80 +73,47 @@
                     equal(viewFactory._views[0].name, "foo");
                 });
 
+                test("instantiates view with options", function() {
+                    viewFactory.register("foo", function(options) { ok(options.bar); }, 0);
+
+                    viewFactory.create({ bar: true });
+                });
+
                 test("instantiates default view", function() {
                     viewFactory.register("foo", function() { ok(true); }, 0);
                     viewFactory.register("bar", Object, 1);
 
-                    viewFactory.create();
+                    viewFactory.create({});
                 });
 
                 test("instantiates preferred view", function() {
                     viewFactory.register("foo", Object, 0);
                     viewFactory.register("bar", function() { ok(true); }, 1);
 
-                    viewFactory.create("bar");
+                    viewFactory.create({}, "bar");
                 });
 
                 test("instantiates default view if the preferred is unavailable", function() {
                     viewFactory.register("foo", function() { ok(true); }, 0);
                     viewFactory.register("bar", Object, 1);
 
-                    viewFactory.create("baz");
+                    viewFactory.create({}, "baz");
                 });
 
-                // ------------------------------------------------------------
-                module("View", {
-                    setup: function() {
-                        dataviz.SVGView._available = dataviz.SVGView.available;
-                        dataviz.VMLView._available = dataviz.VMLView.available;
-
-                        createChart();
-                    },
-                    teardown: function() {
-                        dataviz.SVGView.available = dataviz.SVGView._available;
-                        dataviz.VMLView.available = dataviz.VMLView._available;
-                    }
-                });
-
-                test("SVGView is created if browser supports SVG", function() {
-                    dataviz.SVGView.available = function() { return true; };
-                    createChart();
-                    ok(chart._view instanceof dataviz.SVGView);
-                });
-
-                test("VMLView is created if browser does not support SVG, but supports VML", function() {
-                    dataviz.SVGView.available = function() { return false; };
-                    dataviz.VMLView.available = function() { return true; };
-                    createChart();
-                    ok(chart._view instanceof dataviz.VMLView);
-                });
-
-                test("SVGView is created if browser does supports both SVG and VML", function() {
-                    dataviz.SVGView.available = function() { return true; };
-                    dataviz.VMLView.available = function() { return true; };
-                    createChart();
-                    ok(chart._view instanceof dataviz.SVGView);
-                });
-
-                test("CanvasView is created if browser does support only canvas", function() {
-                    dataviz.SVGView.available = function() { return false; };
-                    dataviz.VMLView.available = function() { return false; };
-                    dataviz.CanvasView.available = function() { return true; };
-                    createChart();
-                    ok(chart._view instanceof dataviz.CanvasView);
-                });
-
-                asyncTest("logs warning if the browser does not support any view", 1, function() {
-                    dataviz.SVGView.available = function() { return false; };
-                    dataviz.VMLView.available = function() { return false; };
-                    dataviz.CanvasView.available = function() { return false; };
-
+                asyncTest("logs warning if no views are registered", 1, function() {
                     stubMethod(kendo, "logToConsole", function(message) {
                         ok(message.indexOf("Warning: KendoUI DataViz cannot render.") > -1);
                         start();
                     }, function() {
-                        createChart();
+                        viewFactory.create({});
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("Views", {
+                    setup: function() {
+                        createChart();
+                    }
                 });
 
                 test("sets dimensions on view element", 2, function() {

@@ -191,18 +191,6 @@ kendo_module({
         }
     });
 
-    CanvasView.fromModel = function(model) {
-        var view = new CanvasView(model.options);
-        [].push.apply(view.children, model.getViewElements(view));
-
-        return view;
-    };
-
-    CanvasView.available = dataviz.supportsCanvas;
-    CanvasView.preference = 25;
-
-    dataviz.ui.registerView(CanvasView);
-
     var CanvasGroup = ViewElement.extend({
         render: function(context) {
             this.renderContent(context);
@@ -659,6 +647,10 @@ kendo_module({
     }
 
     // Exports ================================================================
+    if (doc.createElement("canvas").getContext) {
+        dataviz.ViewFactory.current.register("canvas", CanvasView, 30);
+    }
+
     deepExtend(dataviz, {
         CanvasView: CanvasView
     });

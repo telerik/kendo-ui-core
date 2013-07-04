@@ -364,16 +364,15 @@ kendo_module({
         _redraw: function() {
             var chart = this,
                 model = chart._getModel(),
-                viewType = dataviz.ui.defaultView(),
-                view;
+                view = chart._view = dataviz.ViewFactory.current.create(model.options);
 
             chart._destroyView();
 
             chart._model = model;
             chart._plotArea = model._plotArea;
 
-            if (viewType) {
-                view = chart._view = viewType.fromModel(model);
+            if (view) {
+                view.load(model);
                 chart._viewElement = chart._renderView(view);
                 chart._tooltip = chart._createTooltip();
                 chart._highlight = new Highlight(view, chart._viewElement);
@@ -410,7 +409,10 @@ kendo_module({
 
         svg: function() {
             var model = this._getModel(),
-                view = dataviz.SVGView.fromModel(model);
+                view = new dataviz.SVGView(model.options);
+
+            // TODO: Throw meaningful error message if SVGView is not loaded
+            view.load(model);
 
             return view.render();
         },

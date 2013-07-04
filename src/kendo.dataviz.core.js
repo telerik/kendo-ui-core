@@ -2300,6 +2300,11 @@ kendo_module({
             }
         },
 
+        load: function(model) {
+            var view = this;
+            view.children = model.getViewElements(view);
+        },
+
         renderDefinitions: function() {
             var definitions = this.definitions,
                 definitionId,
@@ -3266,10 +3271,6 @@ kendo_module({
         })[0];
     }
 
-    function supportsCanvas() {
-        return !!doc.createElement('canvas').getContext;
-    }
-
     function supportsSVG() {
         return doc.implementation.hasFeature(
             "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
@@ -3375,9 +3376,9 @@ kendo_module({
         return -v1.x * v2.y + v1.y * v2.x < 0;
     }
 
-    ViewFactory = function() {
+    var ViewFactory = function() {
         this._views = [];
-    }
+    };
 
     ViewFactory.prototype = {
         register: function(name, type, order) {
@@ -3396,7 +3397,7 @@ kendo_module({
             }
         },
 
-        create: function(preferred) {
+        create: function(options, preferred) {
             var views = this._views,
                 match = views[0];
 
@@ -3410,7 +3411,7 @@ kendo_module({
             }
 
             if (match) {
-                return new match.type();
+                return new match.type(options);
             }
 
             kendo.logToConsole(
@@ -3420,48 +3421,17 @@ kendo_module({
         }
     };
 
+    ViewFactory.current = new ViewFactory();
+
     // Exports ================================================================
-    /**
-     * @name kendo.dataviz
-     * @namespace Contains Kendo DataViz.
-     */
     deepExtend(kendo.dataviz, {
         init: function(element) {
             kendo.init(element, kendo.dataviz.ui);
         },
-
-        /**
-         * @name kendo.dataviz.ui
-         * @namespace Contains Kendo DataViz UI widgets.
-         */
         ui: {
             roles: {},
             themes: {},
             views: [],
-            defaultView: function() {
-                var i,
-                    views = dataviz.ui.views,
-                    length = views.length;
-
-                for (i = 0; i < length; i++) {
-                    if (views[i].available()) {
-                        return views[i];
-                    }
-                }
-
-                kendo.logToConsole("Warning: KendoUI DataViz cannot render. Possible causes:\n" +
-                                    "- The browser does not support SVG or VML. User agent: " + navigator.userAgent + "\n" +
-                                    "- The kendo.dataviz.svg.js or kendo.dataviz.vml.js scripts are not loaded");
-            },
-            registerView: function(viewType) {
-                var defaultView = dataviz.ui.views[0];
-
-                if (!defaultView || viewType.preference > defaultView.preference) {
-                    dataviz.ui.views.unshift(viewType);
-                } else {
-                    dataviz.ui.views.push(viewType);
-                }
-            },
             plugin: function(widget) {
                 kendo.ui.plugin(widget, dataviz.ui);
             }
@@ -3526,7 +3496,6 @@ kendo_module({
         round: round,
         ceil: ceil,
         floor: floor,
-        supportsCanvas: supportsCanvas,
         supportsSVG: supportsSVG,
         renderTemplate: renderTemplate,
         uniqueId: uniqueId,

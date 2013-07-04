@@ -1239,13 +1239,13 @@ kendo_module({
             var gauge = this,
                 element = gauge.element,
                 model = gauge._model = gauge._getModel(),
-                viewType = dataviz.ui.defaultView(),
+                view = gauge._view = dataviz.ViewFactory.current.create(model.options);
                 view;
 
             gauge._plotArea = model._plotArea;
 
-            if (viewType) {
-                view = gauge._view = viewType.fromModel(model);
+            if (view) {
+                view.load(model);
 
                 element.css("position", "relative");
                 gauge._viewElement = view.renderTo(element[0]);

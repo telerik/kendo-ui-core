@@ -1517,8 +1517,7 @@
              Widget.fn.init.call(that, element, options);
              that.element = $(element);
              that.element.addClass("k-barcode");
-             var defaultView = dataviz.ui.defaultView();
-             that.view = new defaultView();
+             that.view = dataviz.ViewFactory.current.create({}, "canvas");
              that.setOptions(options);
         },
         setOptions: function (options) {

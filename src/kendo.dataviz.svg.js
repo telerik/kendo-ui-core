@@ -241,18 +241,6 @@ kendo_module({
         }
     });
 
-    SVGView.fromModel = function(model) {
-        var view = new SVGView(model.options);
-        [].push.apply(view.children, model.getViewElements(view));
-
-        return view;
-    };
-
-    SVGView.available = dataviz.supportsSVG;
-    SVGView.preference = 100;
-
-    dataviz.ui.registerView(SVGView);
-
     var SVGText = ViewElement.extend({
         init: function(content, options) {
             var text = this;
@@ -1022,6 +1010,10 @@ kendo_module({
     })();
 
     // Exports ================================================================
+    if (dataviz.supportsSVG()) {
+        dataviz.ViewFactory.current.register("svg", SVGView, 10);
+    }
+
     deepExtend(dataviz, {
         renderSVG: renderSVG,
         SVGCircle: SVGCircle,
