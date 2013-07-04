@@ -197,6 +197,32 @@
     left: 0;
 }
 
+/* Editing */
+
+.k-rtl .k-edit-label,
+.k-rtl .k-edit-form-container .editor-label
+{
+    float:right;
+    clear:both;
+    margin-left: 0;
+    margin-right: 2%;
+    text-align: left;
+}
+
+.k-rtl .k-edit-field,
+.k-rtl .k-edit-form-container .editor-field
+{
+    float:left;
+    clear:left;
+    margin-right: 0;
+    margin-left: 2%;
+}
+
+.k-rtl .k-edit-form-container .k-edit-buttons
+{
+    text-align: left;
+}
+
 /* Pager */
 
 .k-rtl .k-pager-info
