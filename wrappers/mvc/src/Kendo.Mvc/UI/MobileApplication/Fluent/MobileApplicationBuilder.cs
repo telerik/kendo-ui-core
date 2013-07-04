@@ -100,6 +100,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// The skin to apply to the application. Currently, Kendo UI Mobile ships with a flat skin in addition to the native looking ones.
+        /// </summary>
+        /// <param name="value">The value that configures the skin.</param>
+        public MobileApplicationBuilder Skin(string value)
+        {
+            container.Skin = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The default View transition.
         /// </summary>
         /// <param name="value">The value that configures the transition.</param>

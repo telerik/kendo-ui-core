@@ -45,6 +45,8 @@ namespace Kendo.Mvc.UI
         
         public bool ServerNavigation { get; set; }
         
+        public string Skin { get; set; }
+        
         public string Transition { get; set; }
         
         public bool PushState { get; set; }
@@ -59,7 +61,12 @@ namespace Kendo.Mvc.UI
 
             options.Add("hideAddressBar", HideAddressBar);
             options.Add("updateDocumentTitle", UpdateDocumentTitle);
-            options.Add("serverNavigation", ServerNavigation);            
+            options.Add("serverNavigation", ServerNavigation);
+
+            if (Skin.HasValue())
+            {
+                options.Add("skin", Skin);
+            }
 
             if (Layout.HasValue())
             {
