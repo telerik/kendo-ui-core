@@ -183,12 +183,8 @@ kendo_module({
         },
 
         createGradient: function(options) {
-            if (false && options.type === RADIAL) {
-                if (defined(options.ir)){
-                    return new CanvasDonutGradient(options);
-                } else {
-                    return new CanvasRadialGradient(options);
-                }
+            if (options.type === RADIAL) {
+                return new CanvasRadialGradient(options);
             } else {
                 return new CanvasLinearGradient(options);
             }
@@ -518,7 +514,6 @@ kendo_module({
                 origin = config.origin;
 
             var rotation = pin.options.rotation;
-            console.log(pin.options, pin.config)
             context.translate(rotation[1], rotation[2]);
             context.rotate(toRadians(rotation[0]));
             context.translate(rotation[1] - origin.x, rotation[2] - origin.y);
@@ -577,42 +572,14 @@ kendo_module({
     });
 
     var CanvasRadialGradient = CanvasGradient.extend({
-        bindToContext: function(context) {
-            var options = this.options;
-
+        bindToContext: function(context, options) {
             var gradient = context.createRadialGradient(
-                options.cx, options.cy, 0,
+                options.cx, options.cy, options.ir,
                 options.cx, options.cy, options.r);
 
-            this.addStops(gradient);
+            this.addStops(gradient, options);
 
             return gradient;
-        }
-    });
-
-    var CanvasDonutGradient = CanvasRadialGradient.extend({
-        addStops: function(target) {
-            var gradient = this,
-                options = gradient.options,
-                stops = options.stops,
-                stopTemplate = gradient.stopTemplate,
-                usedSpace = (options.ir / options.r),
-                i,
-                length = stops.length,
-                currentStop;
-
-            currentStop = deepExtend({}, stops[0]);
-            currentStop.offset = usedSpace;
-            target.addColorStop(currentStop.offset, currentStop.color);
-
-            for (i = 1; i < length; i++) {
-                currentStop = deepExtend({}, stops[i]);
-                currentStop.offset = currentStop.offset * usedSpace;
-
-                var color = new Color(currentStop.color);
-                target.addColorStop(currentStop.offset,
-                    "rgba(" + color.r + "," + color.g + "," + color.b + "," + currentStop.opacity + ")");
-            }
         }
     });
 
