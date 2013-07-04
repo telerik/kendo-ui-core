@@ -50,8 +50,10 @@
                     recurrenceRule: "FREQ=DAILY"
                 });
 
-                var event = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17))[0];
+                var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17)),
+                    event = events[1];
 
+                equal(events.length, 2);
                 notEqual(event.uid, schedulerEvent.uid);
                 equal(event.title, schedulerEvent.title);
                 equal(event.recurrence, undefined);
@@ -72,13 +74,13 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 18));
 
-                equal(events.length, 2);
+                equal(events.length, 3);
 
-                equal(events[0].start.getTime(), +new Date(2000, 10, 10, 17, 0));
-                equal(events[0].end.getTime(), +new Date(2000, 10, 10, 18, 0));
+                equal(events[1].start.getTime(), +new Date(2000, 10, 10, 17, 0));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 10, 18, 0));
 
-                equal(events[1].start.getTime(), +new Date(2000, 10, 10, 18, 0));
-                equal(events[1].end.getTime(), +new Date(2000, 10, 10, 19, 0));
+                equal(events[2].start.getTime(), +new Date(2000, 10, 10, 18, 0));
+                equal(events[2].end.getTime(), +new Date(2000, 10, 10, 19, 0));
             });
 
             test("HOURLY occurrences method repeat event every 3 hours", function() {
@@ -92,9 +94,9 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
 
-                equal(events.length, 1);
-                equal(events[0].start.getTime(), +new Date(2000, 10, 10, 19, 0));
-                equal(events[0].end.getTime(), +new Date(2000, 10, 10, 20, 0));
+                equal(events.length, 2);
+                equal(events[1].start.getTime(), +new Date(2000, 10, 10, 19, 0));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 10, 20, 0));
             });
 
             test("HOURLY method limits BYHOUR", function() {
@@ -271,20 +273,20 @@
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 31), new Date(2013, 3, 1));
 
-                equal(events[0].start.getHours(), afterDstDate.getHours());
-                equal(events[0].start.getMinutes(), 0);
-                equal(events[0].end.getHours(), afterDstDate.getHours());
-                equal(events[0].end.getMinutes(), 30);
-
-                equal(events[0].startTime.getHours(), 3);
-                equal(events[0].startTime.getMinutes(), 0);
-                equal(events[0].endTime.getHours(), 3);
-                equal(events[0].endTime.getMinutes(), 30);
-
-                equal(events[1].start.getHours(), 4);
+                equal(events[1].start.getHours(), afterDstDate.getHours());
                 equal(events[1].start.getMinutes(), 0);
-                equal(events[1].end.getHours(), 4);
+                equal(events[1].end.getHours(), afterDstDate.getHours());
                 equal(events[1].end.getMinutes(), 30);
+
+                equal(events[1].startTime.getHours(), 3);
+                equal(events[1].startTime.getMinutes(), 0);
+                equal(events[1].endTime.getHours(), 3);
+                equal(events[1].endTime.getMinutes(), 30);
+
+                equal(events[2].start.getHours(), 4);
+                equal(events[2].start.getMinutes(), 0);
+                equal(events[2].end.getHours(), 4);
+                equal(events[2].end.getMinutes(), 30);
             });
 
             /*
@@ -319,9 +321,9 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17));
 
-                equal(events.length, 1);
-                equal(events[0].start.getTime(), +new Date(2000, 10, 11, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
+                equal(events.length, 2);
+                equal(events[1].start.getTime(), +new Date(2000, 10, 11, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });
             test("DAILY occurrences method returns multiple occurrences (FREQ: DAILY)", function() {
                 var schedulerEvent = {
@@ -334,12 +336,12 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16, 17));
 
-                equal(events.length, 6);
-                equal(events[0].start.getTime(), +new Date(2000, 10, 11, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
+                equal(events.length, 7);
+                equal(events[1].start.getTime(), +new Date(2000, 10, 11, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 11, 17, 0));
 
-                equal(events[5].start.getTime(), +new Date(2000, 10, 16, 16, 30));
-                equal(events[5].end.getTime(), +new Date(2000, 10, 16, 17, 0));
+                equal(events[6].start.getTime(), +new Date(2000, 10, 16, 16, 30));
+                equal(events[6].end.getTime(), +new Date(2000, 10, 16, 17, 0));
             });
 
             test("DAILY occurrences method honours interval recurrence (FREQ: DAILY)", function() {
@@ -353,13 +355,13 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16, 17));
 
-                equal(events.length, 3);
+                equal(events.length, 4);
 
-                equal(events[0].start.getTime(), +new Date(2000, 10, 12, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 10, 12, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2000, 10, 12, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 12, 17, 0));
 
-                equal(events[2].start.getTime(), +new Date(2000, 10, 16, 16, 30));
-                equal(events[2].end.getTime(), +new Date(2000, 10, 16, 17, 0));
+                equal(events[3].start.getTime(), +new Date(2000, 10, 16, 16, 30));
+                equal(events[3].end.getTime(), +new Date(2000, 10, 16, 17, 0));
             });
 
             test("DAILY occurrences method honours COUNT", function() {
@@ -373,10 +375,10 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
 
-                equal(events.length, 1);
+                equal(events.length, 2);
 
-                equal(events[0].start.getTime(), +new Date(2000, 10, 11, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 10, 11, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2000, 10, 11, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });
 
             test("DAILY occurrences with COUNT return empty array", function() {
@@ -464,13 +466,13 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
 
-                equal(events.length, 2);
+                equal(events.length, 3);
 
-                equal(events[0].start.getTime(), +new Date(2000, 10, 13, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 10, 13, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2000, 10, 13, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 13, 17, 0));
 
-                equal(events[1].start.getTime(), +new Date(2000, 10, 15, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2000, 10, 15, 17, 0));
+                equal(events[2].start.getTime(), +new Date(2000, 10, 15, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 10, 15, 17, 0));
             });
 
             test("DAILY occurrences method limits BYMONTHDAY (-3, 10)", function() {
@@ -484,10 +486,10 @@
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 1), new Date(2013, 4, 30));
 
-                equal(events.length, 1);
+                equal(events.length, 2);
 
-                equal(events[0].start.getTime(), +new Date(2013, 4, 27, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 4, 27, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2013, 4, 27, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 4, 27, 17, 0));
             });
 
             test("DAILY occurrences method limits BYDAY", function() {
@@ -581,7 +583,7 @@
                 }
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10), new Date(2013, 4, 17));
-                equal(events.length, 3);
+                equal(events.length, 4);
             });
 
             test("DAILY occurrences method honours BYDAY and INTERVAL", function() {
@@ -884,7 +886,7 @@
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 0, 4, 17));
 
-                equal(events.length, 1);
+                equal(events.length, 2);
             });
 
             test("DAILY occurrences honours DST", function() {
@@ -898,13 +900,13 @@
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 30), new Date(2013, 3, 1, 17));
 
-                equal(events.length, 2);
+                equal(events.length, 3);
 
-                equal(events[0].start.getTime(), +new Date(2013, 2, 31, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 2, 31, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2013, 2, 31, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 2, 31, 17, 0));
 
-                equal(events[1].start.getTime(), +new Date(2013, 3, 1, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2013, 3, 1, 17, 0));
+                equal(events[2].start.getTime(), +new Date(2013, 3, 1, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2013, 3, 1, 17, 0));
             });
 
             test("DAILY occurrences creates date when it is not possible", function() {
@@ -919,14 +921,14 @@
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
 
-                equal(events[0].start.getHours(), 3);
-                equal(events[0].startTime.getHours(), 3);
-
-                equal(events[1].start.getHours(), afterDstDate.getHours());
+                equal(events[1].start.getHours(), 3);
                 equal(events[1].startTime.getHours(), 3);
 
-                equal(events[2].start.getHours(), 3);
+                equal(events[2].start.getHours(), afterDstDate.getHours());
                 equal(events[2].startTime.getHours(), 3);
+
+                equal(events[3].start.getHours(), 3);
+                equal(events[3].startTime.getHours(), 3);
             });
 
             test("DAILY method honours EEST when calculate duration", function() {
@@ -1027,19 +1029,19 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 11, 10));
 
-                equal(events.length, 4);
+                equal(events.length, 5);
 
-                equal(events[0].start.getTime(), +new Date(2000, 10, 17, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 10, 17, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2000, 10, 17, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 10, 17, 17, 0));
 
-                equal(events[1].start.getTime(), +new Date(2000, 10, 24, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2000, 10, 24, 17, 0));
+                equal(events[2].start.getTime(), +new Date(2000, 10, 24, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 10, 24, 17, 0));
 
-                equal(events[2].start.getTime(), +new Date(2000, 11, 1, 16, 30));
-                equal(events[2].end.getTime(), +new Date(2000, 11, 1, 17, 0));
+                equal(events[3].start.getTime(), +new Date(2000, 11, 1, 16, 30));
+                equal(events[3].end.getTime(), +new Date(2000, 11, 1, 17, 0));
 
-                equal(events[3].start.getTime(), +new Date(2000, 11, 8, 16, 30));
-                equal(events[3].end.getTime(), +new Date(2000, 11, 8, 17, 0));
+                equal(events[4].start.getTime(), +new Date(2000, 11, 8, 16, 30));
+                equal(events[4].end.getTime(), +new Date(2000, 11, 8, 17, 0));
             });
 
             test("WEEKLY occurrences method honours BYDAY", function() {
@@ -1311,17 +1313,17 @@
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 20), new Date(2013, 3, 10));
 
-                equal(events[0].start.getHours(), afterDstDate.getHours());
-                equal(events[0].startTime.getHours(), 3);
-
-                equal(events[0].end.getHours(), endHour);
-                equal(events[0].endTime.getHours(), 4);
-
-                equal(events[1].start.getHours(), 3);
+                equal(events[1].start.getHours(), afterDstDate.getHours());
                 equal(events[1].startTime.getHours(), 3);
 
-                equal(events[1].end.getHours(), 4);
+                equal(events[1].end.getHours(), endHour);
                 equal(events[1].endTime.getHours(), 4);
+
+                equal(events[2].start.getHours(), 3);
+                equal(events[2].startTime.getHours(), 3);
+
+                equal(events[2].end.getHours(), 4);
+                equal(events[2].endTime.getHours(), 4);
             });
 
             module("MONTHLY Occurrences");
@@ -1336,19 +1338,19 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 9, 10, 17));
 
-                equal(events.length, 4);
+                equal(events.length, 5);
 
-                equal(events[0].start.getTime(), +new Date(2000, 6, 10, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 6, 10, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2000, 6, 10, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 6, 10, 17, 0));
 
-                equal(events[1].start.getTime(), +new Date(2000, 7, 10, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2000, 7, 10, 17, 0));
+                equal(events[2].start.getTime(), +new Date(2000, 7, 10, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 7, 10, 17, 0));
 
-                equal(events[2].start.getTime(), +new Date(2000, 8, 10, 16, 30));
-                equal(events[2].end.getTime(), +new Date(2000, 8, 10, 17, 0));
+                equal(events[3].start.getTime(), +new Date(2000, 8, 10, 16, 30));
+                equal(events[3].end.getTime(), +new Date(2000, 8, 10, 17, 0));
 
-                equal(events[3].start.getTime(), +new Date(2000, 9, 10, 16, 30));
-                equal(events[3].end.getTime(), +new Date(2000, 9, 10, 17, 0));
+                equal(events[4].start.getTime(), +new Date(2000, 9, 10, 16, 30));
+                equal(events[4].end.getTime(), +new Date(2000, 9, 10, 17, 0));
             });
 
             test("MONTHLY occurrence sets date to event.start if NO BYMONTHDAYS and BYDAY", function() {
@@ -1362,11 +1364,11 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 0, 10), new Date(2000, 5, 10, 17));
 
-                equal(events.length, 2);
-                equal(events[0].start.getDate(), 31);
-                equal(events[0].start.getMonth(), 2);
+                equal(events.length, 3);
                 equal(events[1].start.getDate(), 31);
-                equal(events[1].start.getMonth(), 4);
+                equal(events[1].start.getMonth(), 2);
+                equal(events[2].start.getDate(), 31);
+                equal(events[2].start.getMonth(), 4);
             });
 
             test("MONTHLY method returns only if date is available in current month", function() {
@@ -1380,9 +1382,9 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 0, 10), new Date(2000, 5, 10, 17));
 
-                equal(events.length, 2);
-                equal(events[0].start.getMonth(), 2);
-                equal(events[1].start.getMonth(), 4);
+                equal(events.length, 3);
+                equal(events[1].start.getMonth(), 2);
+                equal(events[2].start.getMonth(), 4);
             });
 
             test("MONTHLY method limits by month", function() {
@@ -1396,13 +1398,13 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 9, 10, 17));
 
-                equal(events.length, 2);
+                equal(events.length, 3);
 
-                equal(events[0].start.getTime(), +new Date(2000, 7, 10, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 7, 10, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2000, 7, 10, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 7, 10, 17, 0));
 
-                equal(events[1].start.getTime(), +new Date(2000, 9, 10, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2000, 9, 10, 17, 0));
+                equal(events[2].start.getTime(), +new Date(2000, 9, 10, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 9, 10, 17, 0));
             });
 
             test("MONTHLY method limits by month and return empty array", function() {
@@ -1429,13 +1431,13 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 6, 10, 17));
 
-                equal(events.length, 2);
+                equal(events.length, 3);
 
-                equal(events[0].start.getTime(), +new Date(2000, 6, 6, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2000, 6, 6, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2000, 6, 6, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2000, 6, 6, 17, 0));
 
-                equal(events[1].start.getTime(), +new Date(2000, 6, 10, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2000, 6, 10, 17, 0));
+                equal(events[2].start.getTime(), +new Date(2000, 6, 10, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2000, 6, 10, 17, 0));
             });
 
             test("MONTHLY method expands by BYDAY", function() {
@@ -1587,17 +1589,17 @@
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 5, 10));
 
-                equal(events[0].start.getHours(), afterDstDate.getHours());
-                equal(events[0].startTime.getHours(), 3);
-
-                equal(events[0].end.getHours(), endHour);
-                equal(events[0].endTime.getHours(), 4);
-
-                equal(events[1].start.getHours(), 3);
+                equal(events[1].start.getHours(), afterDstDate.getHours());
                 equal(events[1].startTime.getHours(), 3);
 
-                equal(events[1].end.getHours(), 4);
+                equal(events[1].end.getHours(), endHour);
                 equal(events[1].endTime.getHours(), 4);
+
+                equal(events[2].start.getHours(), 3);
+                equal(events[2].startTime.getHours(), 3);
+
+                equal(events[2].end.getHours(), 4);
+                equal(events[2].endTime.getHours(), 4);
             });
 
             module("YEARLY Occurrences");
@@ -1612,13 +1614,13 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2002, 9, 10, 17));
 
-                equal(events.length, 2);
+                equal(events.length, 3);
 
-                equal(events[0].start.getTime(), +new Date(2001, 5, 10, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2001, 5, 10, 17, 0));
+                equal(events[1].start.getTime(), +new Date(2001, 5, 10, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2001, 5, 10, 17, 0));
 
-                equal(events[1].start.getTime(), +new Date(2002, 5, 10, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2002, 5, 10, 17, 0));
+                equal(events[2].start.getTime(), +new Date(2002, 5, 10, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2002, 5, 10, 17, 0));
             });
 
             test("YEARLY method expands BYMONTH", function() {
@@ -1876,17 +1878,17 @@
 
                 var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2014, 5, 10));
 
-                equal(events[0].start.getHours(), afterDstDate.getHours());
-                equal(events[0].startTime.getHours(), 3);
-
-                equal(events[0].end.getHours(), endHour);
-                equal(events[0].endTime.getHours(), 4);
-
-                equal(events[1].start.getHours(), 3);
+                equal(events[1].start.getHours(), afterDstDate.getHours());
                 equal(events[1].startTime.getHours(), 3);
 
-                equal(events[1].end.getHours(), 4);
+                equal(events[1].end.getHours(), endHour);
                 equal(events[1].endTime.getHours(), 4);
+
+                equal(events[2].start.getHours(), 3);
+                equal(events[2].startTime.getHours(), 3);
+
+                equal(events[2].end.getHours(), 4);
+                equal(events[2].endTime.getHours(), 4);
             });
 
             /*
@@ -1935,24 +1937,41 @@
 
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
-                equal(events.length, 5);
+                equal(events.length, 3);
 
-                equal(events[0].start.getTime(), +new Date(2013, 0, 1, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 0, 1, 17, 0));
+                equal(events[0].start.getTime(), +new Date(2013, 1, 1, 17, 40));
+                equal(events[0].end.getTime(), +new Date(2013, 1, 1, 18, 10));
 
-                equal(events[1].start.getTime(), +new Date(2013, 1, 1, 17, 40));
-                equal(events[1].end.getTime(), +new Date(2013, 1, 1, 18, 10));
+                equal(events[1].start.getTime(), +new Date(2013, 1, 1, 18, 40));
+                equal(events[1].end.getTime(), +new Date(2013, 1, 1, 19, 10));
 
-                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 18, 40));
-                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 19, 10));
-
-                equal(events[3].start.getTime(), +new Date(2013, 0, 1, 10, 30));
-                equal(events[3].end.getTime(), +new Date(2013, 0, 1, 11, 30));
-
-                equal(events[4].start.getTime(), +new Date(2013, 1, 1, 10, 30));
-                equal(events[4].end.getTime(), +new Date(2013, 1, 1, 11, 30));
+                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 10, 30));
+                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 11, 30));
             });
 
+            test("Expand recurring events (origin event satisfies recurring rule)", function() {
+                var events = [new SchedulerEvent({
+                        id: "id1",
+                        title: "Title",
+                        start: new Date(2013, 0, 1, 16, 30),
+                        end: new Date(2013, 0, 1, 17, 0),
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=1,2;BYMONTHDAY=1, 29"
+                    })];
+
+                var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
+                console.log(events);
+
+                equal(events.length, 3);
+
+                equal(events[0].start.getTime(), +new Date(2013, 0, 1, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 0, 1, 17, 00));
+
+                equal(events[1].start.getTime(), +new Date(2013, 0, 29, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 0, 29, 17, 00));
+
+                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 17, 00));
+            });
 
             test("Expand recurring events which are outside of period", function() {
                 var events = [new SchedulerEvent({
@@ -1972,21 +1991,19 @@
 
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
-                equal(events.length, 5);
-                equal(events[0].recurrenceId, undefined);
+                equal(events.length, 3);
+                equal(events[0].recurrenceId, "Test1");
                 equal(events[1].recurrenceId, "Test1");
-                equal(events[2].recurrenceId, "Test1");
-                equal(events[3].recurrenceId, undefined);
-                equal(events[4].recurrenceId, "Test2");
+                equal(events[2].recurrenceId, "Test2");
 
-                equal(events[1].start.getTime(), +new Date(2013, 1, 1, 17, 40));
-                equal(events[1].end.getTime(), +new Date(2013, 1, 1, 18, 10));
+                equal(events[0].start.getTime(), +new Date(2013, 1, 1, 17, 40));
+                equal(events[0].end.getTime(), +new Date(2013, 1, 1, 18, 10));
 
-                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 18, 40));
-                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 19, 10));
+                equal(events[1].start.getTime(), +new Date(2013, 1, 1, 18, 40));
+                equal(events[1].end.getTime(), +new Date(2013, 1, 1, 19, 10));
 
-                equal(events[4].start.getTime(), +new Date(2013, 1, 1, 10, 30));
-                equal(events[4].end.getTime(), +new Date(2013, 1, 1, 11, 30));
+                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 10, 30));
+                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 11, 30));
             });
 
             test("ExpandAll does not modify array if no recurring events", function() {
@@ -2039,18 +2056,15 @@
 
                 var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
-                equal(events.length, 4);
+                equal(events.length, 3);
                 deepEqual(events[0].start, new Date(2013, 0, 1, 16, 30));
                 deepEqual(events[0].end, new Date(2013, 0, 1, 17, 0));
 
-                deepEqual(events[1].start, new Date(2012, 0, 1, 10, 30));
-                deepEqual(events[1].end, new Date(2012, 0, 1, 11, 30));
+                deepEqual(events[1].start, new Date(2013, 1, 1, 10, 30));
+                deepEqual(events[1].end, new Date(2013, 1, 1, 11, 30));
 
-                deepEqual(events[2].start, new Date(2013, 1, 1, 10, 30));
-                deepEqual(events[2].end, new Date(2013, 1, 1, 11, 30));
-
-                deepEqual(events[3].start, new Date(2013, 0, 3, 16, 30));
-                deepEqual(events[3].end, new Date(2013, 0, 3, 17, 0));
+                deepEqual(events[2].start, new Date(2013, 0, 3, 16, 30));
+                deepEqual(events[2].end, new Date(2013, 0, 3, 17, 0));
             });
 
             module("Exception recurring dates");

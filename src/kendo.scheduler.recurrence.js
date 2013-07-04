@@ -918,8 +918,8 @@ kendo_module({
         }
 
         first = events[0];
-        if (first && first.start.getTime() === eventStartMS) {
-            events = events.slice(1);
+        if (first) {
+            first.id = id;
         }
 
         if (rule.setPositions) {
@@ -939,20 +939,17 @@ kendo_module({
         for (; idx < length; idx++) {
             event = events[idx];
             startTimezone = event.startTimezone || event.endTimezone || zone;
-
             result = expand(event, start, end, startTimezone);
 
-            if (event.toJSON) {
-                id = event.id;
-                event = event.toJSON();
-                event.id = id;
-            }
+            if (!event.recurrenceRule) {
+                if (event.toJSON) {
+                    id = event.id;
+                    event = event.toJSON();
+                    event.id = id;
+                }
 
-            if (!event.recurrenceRule || !isException(event.recurrenceException, event.start, startTimezone)) {
                 data.push(event);
-            }
-
-            if (result[0]) {
+            } else {
                 data = data.concat(result);
             }
         }
