@@ -216,7 +216,7 @@
                     start();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
            asyncTest("slow drag to right snaps the content back to the current page when ScrollView is at the first page", 2, function() {
@@ -226,7 +226,7 @@
                     start();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
            asyncTest("slow drag to right snaps the content back to the previous page when ScrollView is NOT at the first page", 3, function() {
@@ -241,7 +241,7 @@
                     content.updatePage();
                     equal(content.page, 6);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
            asyncTest("slow drag to left snaps the content back to the next page when ScrollView", 2, function() {
@@ -253,17 +253,18 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("swift swipe to right snaps the content back to the current page when ScrollView is at the first page", 2, function() {
                 pane.moveTo(50);
                 content.paneMoved(RIGHT_SWIPE);
+
                 setTimeout(function() {
                     start();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("swift swipe to right snaps the content back to the previous page when ScrollView is not at the first page", 2, function() {
@@ -275,7 +276,7 @@
                     content.updatePage();
                     equal(content.page, 6);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("swift swipe to left snaps the content to the next page if buffer end is NOT reached", 2, function() {
@@ -286,7 +287,7 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("swift swipe to left snaps the content back to the current page if buffer end is reached", 2, function() {
@@ -297,7 +298,7 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("preventing default reverts back to the previous page", 2, function() {
@@ -311,7 +312,7 @@
                     content.updatePage();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
         </script>

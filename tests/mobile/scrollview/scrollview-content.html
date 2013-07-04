@@ -156,7 +156,7 @@
                     start();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("swift drag moves the content to the next page", 2, function() {
@@ -167,7 +167,7 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 200);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("preventing default reverts back to the previous page", 2, function() {
@@ -181,7 +181,7 @@
                     content.updatePage();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("swift right drag moves the content to the previous page", 2, function() {
@@ -194,7 +194,7 @@
                     content.updatePage();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("long drag snaps the content to the next page", 2, function() {
@@ -205,7 +205,7 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 200);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("drag left side of the boundaries snaps the content to the next page", 2, function() {
@@ -216,7 +216,7 @@
                     content.updatePage();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 50);
+                }, 300);
             });
 
             asyncTest("drag right side of the boundaries snaps the content to the next page", 2, function() {
@@ -228,7 +228,7 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 200);
-                }, 50);
+                }, 300);
             });
         </script>
     </body>
