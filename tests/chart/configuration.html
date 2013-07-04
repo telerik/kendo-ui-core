@@ -83,7 +83,7 @@
                     viewFactory.register("foo", function() { ok(true); }, 0);
                     viewFactory.register("bar", Object, 1);
 
-                    viewFactory.create({});
+                    viewFactory.create();
                 });
 
                 test("instantiates preferred view", function() {
@@ -91,6 +91,13 @@
                     viewFactory.register("bar", function() { ok(true); }, 1);
 
                     viewFactory.create({}, "bar");
+                });
+
+                test("ignores case of preferred view", function() {
+                    viewFactory.register("foo", Object, 0);
+                    viewFactory.register("bar", function() { ok(true); }, 1);
+
+                    viewFactory.create({}, "Bar");
                 });
 
                 test("instantiates default view if the preferred is unavailable", function() {
@@ -105,7 +112,7 @@
                         ok(message.indexOf("Warning: KendoUI DataViz cannot render.") > -1);
                         start();
                     }, function() {
-                        viewFactory.create({});
+                        viewFactory.create();
                     });
                 });
 

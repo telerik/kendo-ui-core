@@ -3402,6 +3402,7 @@ kendo_module({
                 match = views[0];
 
             if (preferred) {
+                preferred = preferred.toLowerCase();
                 for (var i = 0; i < views.length; i++) {
                     if (views[i].name === preferred) {
                         match = views[i];
