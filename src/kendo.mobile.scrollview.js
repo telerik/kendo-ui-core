@@ -418,7 +418,6 @@ kendo_module({
             }
 
             this._updatePagesContent(page);
-            this._repositionPages();
 
             this.page = page;
         },
