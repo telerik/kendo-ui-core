@@ -267,7 +267,7 @@ kendo_module({
                 context.fill();
             }
 
-            if (options.stroke) {
+            if (options.stroke && options.strokeWidth) {
                 context.strokeStyle = options.stroke;
                 context.lineWidth = options.strokeWidth;
                 context.lineJoin = "round";
