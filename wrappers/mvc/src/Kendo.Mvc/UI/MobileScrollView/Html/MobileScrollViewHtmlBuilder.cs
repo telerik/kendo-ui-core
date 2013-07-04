@@ -83,6 +83,8 @@ namespace Kendo.Mvc.UI
                 {
                     html.Attribute("data-empty-template", component.EmptyTemplateId);
                 }
+
+                html.Attribute("data-items-per-page", component.ItemsPerPage.ToString());
             }
 
             html.Attributes(component.HtmlAttributes);            

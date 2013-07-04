@@ -34,17 +34,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The size of the buffer. Determines how many data items will be displayed on a single page.Applicable only in data bound mode.
-        /// </summary>
-        /// <param name="value">The value that configures the batchsize.</param>
-        public MobileScrollViewBuilder BatchSize(int value)
-        {
-            container.BatchSize = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// The milliseconds that take the ScrollView to snap to the current page after released.
         /// </summary>
         /// <param name="value">The value that configures the duration.</param>
@@ -73,6 +62,17 @@ namespace Kendo.Mvc.UI.Fluent
         public MobileScrollViewBuilder EnablePager(bool value)
         {
             container.EnablePager = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Determines how many data items will be passed to the page template.Applicable only in data bound mode.
+        /// </summary>
+        /// <param name="value">The value that configures the itemsperpage.</param>
+        public MobileScrollViewBuilder ItemsPerPage(int value)
+        {
+            container.ItemsPerPage = value;
 
             return this;
         }

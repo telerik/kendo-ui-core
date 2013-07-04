@@ -31,6 +31,8 @@ namespace Kendo.Mvc.UI
 
             AutoBind = true;
 
+            ItemsPerPage = 1;
+
             DataSource = new DataSource()
             {
                 Type = DataSourceType.Ajax,
@@ -50,13 +52,13 @@ namespace Kendo.Mvc.UI
         
         public bool AutoBind { get; set; }
         
-        public int BatchSize { get; set; }
-        
         public int Duration { get; set; }
         
         public string EmptyTemplateId { get; set; }
         
         public bool EnablePager { get; set; }
+        
+        public int ItemsPerPage { get; set; }
         
         public int Page { get; set; }
         
