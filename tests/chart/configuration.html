@@ -15,6 +15,7 @@
         <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/kendo.dataviz.canvas.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
 
@@ -91,9 +92,18 @@
                     ok(chart._view instanceof dataviz.SVGView);
                 });
 
-                asyncTest("logs warning if the browser does not support neither VML nor SVG", 1, function() {
+                test("CanvasView is created if browser does support only canvas", function() {
                     dataviz.SVGView.available = function() { return false; };
                     dataviz.VMLView.available = function() { return false; };
+                    dataviz.CanvasView.available = function() { return true; };
+                    createChart();
+                    ok(chart._view instanceof dataviz.CanvasView);
+                });
+
+                asyncTest("logs warning if the browser does not support any view", 1, function() {
+                    dataviz.SVGView.available = function() { return false; };
+                    dataviz.VMLView.available = function() { return false; };
+                    dataviz.CanvasView.available = function() { return false; };
 
                     stubMethod(kendo, "logToConsole", function(message) {
                         ok(message.indexOf("Warning: KendoUI DataViz cannot render.") > -1);

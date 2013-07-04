@@ -199,7 +199,7 @@ kendo_module({
     };
 
     CanvasView.available = dataviz.supportsCanvas;
-    CanvasView.preference = 1000 /*25*/;
+    CanvasView.preference = 25;
 
     dataviz.ui.registerView(CanvasView);
 
