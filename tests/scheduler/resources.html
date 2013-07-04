@@ -700,7 +700,7 @@
             test("headers are rendered for groups in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName" ],
+                    resourcesGroups: [ "ResourceName" ],
                     resources: [
                         {
                             field: "foo",
@@ -727,7 +727,7 @@
             test("headers are rendered for multi level groups in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName1", "ResourceName2" ],
+                    resourcesGroups: [ "ResourceName1", "ResourceName2" ],
                     resources: [
                         {
                             field: "foo",
@@ -764,7 +764,7 @@
             test("row headers are rendered for groups in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName" ],
+                    resourcesGroups: [ "ResourceName" ],
                     groupOrientation: "vertical",
                     allDaySlot: false,
                     resources: [
@@ -789,7 +789,7 @@
             test("events are position in the correct group in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName" ],
+                    resourcesGroups: [ "ResourceName" ],
                     resources: [
                         {
                             field: "foo",
@@ -813,7 +813,7 @@
             test("events are position in the correct group in day view in vertical orientation", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName" ],
+                    resourcesGroups: [ "ResourceName" ],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -840,7 +840,7 @@
             test("multi day events are position in the correct group in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName" ],
+                    resourcesGroups: [ "ResourceName" ],
                     resources: [
                         {
                             field: "foo",
@@ -869,7 +869,7 @@
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     endTime: new Date("2013/6/6 14:00"),
-                    groups: [ "ResourceName" ],
+                    resourcesGroups: [ "ResourceName" ],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -896,7 +896,7 @@
             test("multiple copies of the event are position in the correct group in day view when multiple resources matched", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName", "ResourceName2" ],
+                    resourcesGroups: [ "ResourceName", "ResourceName2" ],
                     resources: [
                         {
                             field: "foo",
@@ -931,7 +931,7 @@
             test("double clicking a day view cell triggers add event with grouping", 2, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     resources: [
                         {
                             field: "foo",
@@ -962,7 +962,7 @@
             test("all day slot is rendered for each resource group when orientation is vertical in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -987,7 +987,7 @@
             test("all day slots are not rendered for each resource group when orientation is vertical in day view if disabled", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     allDaySlot: false,
                     groupOrientation: "vertical",
                     resources: [
@@ -1014,7 +1014,7 @@
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 9:00:00"),
                     endTime: new Date("2013/6/6 14:00:00"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -1041,7 +1041,7 @@
             test("double clicking the first all day slot triggers add event in day view with vertical orientation", 1, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -1071,7 +1071,7 @@
             test("double clicking the all day slot triggers add event in day view with vertical orientation", 1, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -1101,7 +1101,7 @@
             test("all day events are added in the content when vertical grouping is applyed", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -1125,7 +1125,7 @@
             test("all day events are added in allday slot when horizontal grouping is applyed", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     resources: [
                         {
                             field: "foo",
@@ -1148,7 +1148,7 @@
             test("all day events are added in the correct group allday slot when vertical grouping is applyed", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -1172,7 +1172,7 @@
             test("slots offsetTop is updated when all day event is inserted when vertical grouping is applyed", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -1208,7 +1208,7 @@
             test("slotByPosition returns correct date for slot for the last group with vertical orientation", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -1236,7 +1236,7 @@
             test("events are repositioned after all day slot is resized when vertically grouped", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -1269,7 +1269,7 @@
             test("all day events are repositioned after all day slot is resized when vertically grouped", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    groups: [ "ResourceName"],
+                    resourcesGroups: [ "ResourceName"],
                     groupOrientation: "vertical",
                     resources: [
                         {
@@ -1297,6 +1297,33 @@
                 var offset = view.element.find(".k-scheduler-header-all-day").first()[0].clientHeight - initialHeight;
 
                 equal(view.content.find(".k-event:last")[0].offsetTop, eventInitialTop + offset);
+            });
+
+            test("last slot in the group has correct date when groupped vertically", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date(2013, 1,1, 11,0,0),
+                    resourcesGroups: [ "ResourceName"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                var slot = view._columns[0].slots[25];
+                deepEqual(slot.start, new Date("2013/6/6 23:30"));
+                deepEqual(slot.end, new Date("2013/6/7 00:00"));
             });
 
         </script>

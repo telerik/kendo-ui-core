@@ -721,6 +721,11 @@ kendo_module({
 
             kendo.date.setTime(slotDate, this._slotIndexTime(rowIndex));
 
+            if (this._isVerticallyGrouped()) {
+                var rowCount = this._rowsCountInGroup();
+                maxTimeSlotIndex = maxTimeSlotIndex - (rowCount*Math.floor(maxTimeSlotIndex/rowCount));
+            }
+
             if (rowIndex + 1 > maxTimeSlotIndex) {
                 slotEndDate = kendo.date.nextDay(slotEndDate);
             } else {
@@ -1194,7 +1199,7 @@ kendo_module({
 
         _resourcesForGroups: function() {
             var result = [];
-            var groups = this.options.groups;
+            var groups = this.options.resourcesGroups;
             var resources = this.options.resources;
 
             if (groups && resources && groups.length) {
@@ -1217,7 +1222,6 @@ kendo_module({
 
             if (isVertical) {
                 var allDaySlotOffset = resources.length === 1 && this.options.allDaySlot ? this.rowLevels[columnLevel - 1].length : 0;
-
                 offsetCount = (this.rowLevels[columnLevel].length - allDaySlotOffset) / this.rowLevels[columnLevel - 1].length;
             } else {
                 offsetCount = this.columnLevels[columnLevel].length / this.columnLevels[columnLevel - 1].length;
