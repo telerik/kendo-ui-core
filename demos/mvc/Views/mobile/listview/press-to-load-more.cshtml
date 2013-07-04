@@ -1,4 +1,4 @@
-<div data-role="view" data-init="mobileListViewPressToLoadMore" data-title="Twitter">
+<div data-role="view" data-init="mobileListViewPressToLoadMore" data-title="My Menu">
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
@@ -17,7 +17,7 @@
     </div>
 </script>
 
-<script>    
+<script>
     function mobileListViewPressToLoadMore() {
         var dataSource = new kendo.data.DataSource({
             type: "odata",
@@ -27,7 +27,7 @@
                 }
             },
             serverPaging: true,            
-            pageSize: 20
+            pageSize: 30
         });
 
         $("#load-more").kendoMobileListView({
@@ -58,5 +58,5 @@
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }    
+    }
 </style>
