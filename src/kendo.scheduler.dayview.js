@@ -52,7 +52,7 @@ kendo_module({
                         '<span class="k-icon k-i-arrow-e"></span>' +
                     '#}#' +
                 '</span>' +
-                '#if(!singleDay){#' +
+                '#if(!singleDay && !data.tail && !data.middle){#' +
                 '<span class="k-resize-handle k-resize-w"></span>' +
                 '#}#' +
                 '#if(!singleDay && !data.head && !data.middle){#' +
