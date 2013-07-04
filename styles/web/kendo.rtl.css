@@ -340,17 +340,18 @@
 .k-rtl .k-scheduler-table td:first-child,
 .k-rtl .k-scheduler-header th:first-child
 {
-    border-right-width:0;
+    border-right-width: 0;
 }
 
 .k-rtl .k-scheduler-agenda .k-scheduler-table td:first-child
 {
-    border-right-width:1px;
+    border-left-width: 0;
+    border-right-width: 1px;
 }
 
 .k-rtl .k-scheduler-agenda .k-scheduler-table td.k-scheduler-datecolumn
 {
-    border-right-width:0;
+    border-right-width: 0;
 }
 
 .k-rtl .k-scheduler-times th
@@ -412,6 +413,113 @@
 {
     left: auto;
     right: 0;
+}
+
+.k-rtl .k-event > .k-resize-e
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-event > .k-resize-w
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-event > .k-resize-e:after,
+.k-rtl .k-event > .k-resize-w:after
+{
+    left: auto;
+    right: 1px;
+}
+
+.k-rtl .k-event > .k-resize-e:after
+{
+    right: auto;
+    left: 1px;
+}
+
+.k-rtl .k-scheduler-marquee .k-label-top
+{
+    left: auto;
+    right: .8em;
+}
+
+.k-rtl .k-scheduler-marquee .k-label-bottom
+{
+    right: auto;
+    left: .81em;
+}
+
+.k-rtl .k-tooltip-bottom
+{
+    text-align: right;
+}
+
+.k-rtl .k-tooltip-bottom .k-button
+{
+    float: right;
+    margin-right: 0;
+    margin-left: .3em;
+}
+
+.k-rtl .k-tooltip-bottom .k-quickedit-details
+{
+    float: left;
+    margin-left: 0;
+}
+
+.k-rtl .k-scheduler-agenda .k-scheduler-table th,
+.k-rtl .k-scheduler-agenda .k-scheduler-table td
+{
+    text-align: right;
+}
+
+.k-rtl .k-scheduler-timecolumn > div > .k-i-arrow-e
+{
+    right: auto;
+    left: -4px;
+}
+
+.k-rtl .k-scheduler-timecolumn .k-i-arrow-w
+{
+    margin-left: 0;
+    margin-right: -4px;
+}
+
+.k-rtl .k-scheduler-mark
+{
+    margin-right: 0;
+    margin-left: .5em;
+}
+
+.k-rtl .k-scheduler-agendaday
+{
+    float: right;
+    margin:0 0 0 .2em;
+}
+
+.k-rtl .k-scheduler-edit-form > .k-edit-box:first-child .k-datetimepicker
+{
+    margin-right: 0;
+    margin-left: 1em;
+}
+
+.k-rtl .k-edit-box
+{
+    float: right;
+}
+
+.k-rtl .k-edit-box + .k-edit-box
+{
+    float: left;
+}
+
+.k-rtl .k-scheduler-edit-form label + input
+{
+    margin-left: 0;
+    margin-right: 1em;
 }
 
 /* Slider */

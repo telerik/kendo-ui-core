@@ -7,10 +7,11 @@ kendo_module({
 });
 
 (function($) {
-    var kendo = window.kendo;
-    var ui = kendo.ui;
-    var Widget = ui.Widget;
-    var NS = ".kendoSchedulerView";
+    var kendo = window.kendo,
+        ui = kendo.ui,
+        Widget = ui.Widget,
+        NS = ".kendoSchedulerView",
+        isRtl;
 
     function levels(values, key) {
         var result = [];
@@ -148,6 +149,7 @@ kendo_module({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
             this._scrollbar = kendo.support.scrollbar();
+            isRtl = kendo.support.isRtl(element);
         },
         dateForTitle: function() {
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
@@ -288,7 +290,8 @@ kendo_module({
                 toolbar = that.element.find(">.k-scheduler-toolbar"),
                 height = that.element.innerHeight(),
                 scrollbar = this._scrollbar,
-                headerHeight = 0;
+                headerHeight = 0,
+                paddingDirection = isRtl ? "left" : "right";
 
             if (toolbar.length) {
                 height -= toolbar.outerHeight();
@@ -343,7 +346,7 @@ kendo_module({
 
             if (contentDiv.offsetWidth - contentDiv.clientWidth > 0) {
                 that.table.addClass("k-scrollbar-v");
-                that.datesHeader.css("padding-right", scrollbarWidth - parseInt(that.datesHeader.children().css("border-right-width"), 10));
+                that.datesHeader.css("padding-" + paddingDirection, scrollbarWidth - parseInt(that.datesHeader.children().css("border-" + paddingDirection + "-width"), 10));
             }
             if (contentDiv.offsetHeight - contentDiv.clientHeight > 0 || contentDiv.clientHeight > that.content.children(".k-scheduler-table").height()) {
                 that.table.addClass("k-scrollbar-h");
