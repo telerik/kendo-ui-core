@@ -24,6 +24,7 @@
         <script src="../../src/kendo.scheduler.dayview.js"></script>
         <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
+        <script src="../../src/kendo.timezones.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -418,7 +419,7 @@
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 var elements = container.children("div").not(".k-edit-buttons").not(".k-recur-view");
 
-                equal(elements.length, 12);
+                equal(elements.length, 15);
                 ok(elements.eq(0).hasClass("k-edit-label"));
                 equal(elements.eq(0).find("label").attr("for"), "title");
                 equal(elements.eq(1).data("container-for"), "title");
@@ -438,7 +439,7 @@
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 var elements = container.children("div").not(".k-edit-buttons").not(".k-recur-view");
 
-                equal(elements.length, 10);
+                equal(elements.length, 13);
                 ok(elements.eq(0).hasClass("k-edit-label"));
                 equal(elements.eq(0).find("label").attr("for"), "title");
                 equal(elements.eq(1).text(), "my event");
@@ -981,6 +982,130 @@
 
                 ok(model.startTime);
                 ok(model.endTime);
+            });
+
+            module("Timezone editing", {
+                setup: function() {
+                    var scriptTag = $("script:last");
+
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                },
+                teardown: function() {
+                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                }
+            });
+
+            test("Render Timezone field", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+
+                scheduler.editEvent(uid);
+                var anchor = scheduler._editContainer.find(".k-edit-field > a");
+
+                ok(anchor[0]);
+                equal(anchor.text(), "Time zone");
+            });
+
+            test("Render start and end timezone editors", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+
+                scheduler.editEvent(uid);
+                var editors = scheduler._editContainer.find("[data-role=timezoneeditor]");
+
+                equal(editors.length, 2);
+                equal(editors.eq(0).attr("data-bind"), "value:startTimezone");
+                equal(editors.eq(1).attr("data-bind"), "value:endTimezone");
+            });
+
+            test("Click Timezone anchor creates timezone popup", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+
+                scheduler.editEvent(uid);
+                var editors = scheduler._editContainer.find(".k-edit-field > a").click();
+
+                ok(scheduler._timezonePopup);
+                ok(scheduler._timezonePopup.is(":visible"));
+                ok(!scheduler._timezonePopup.find(".k-edit-field:last").is(":visible"));
+            });
+
+            test("Show second TimezoneEditor if model.endTimezone is defined", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
+                    model = scheduler.dataSource.getByUid(uid);
+
+                model.set("endTimezone", "America/Toronto");
+
+                scheduler.editEvent(uid);
+                var editors = scheduler._editContainer.find(".k-edit-field > a").click();
+
+                ok(scheduler._timezonePopup.find("input[type=checkbox]").prop("checked"))
+            });
+
+            test("Select correct timezone if startTimezone is defined", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
+                    model = scheduler.dataSource.getByUid(uid);
+
+                model.set("startTimezone", "America/Toronto");
+
+                scheduler.editEvent(uid);
+                var editor = scheduler._editContainer.find("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+
+                equal(editor.value(), "America/Toronto");
+            });
+
+            test("Click done closes timezone popup", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+
+                scheduler.editEvent(uid);
+                scheduler._editContainer.find(".k-edit-field > a").click();
+                scheduler._timezonePopup.find(".k-scheduler-savetimezone").click();
+
+                ok(!scheduler._timezonePopup.is(":visible"));
+            });
+
+            test("Click close reverts timezones to last selected", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
+                    model = scheduler.dataSource.getByUid(uid);
+
+                scheduler.editEvent(uid);
+                scheduler._editContainer.find(".k-edit-field > a").click();
+
+                var editor = scheduler._timezonePopup.find("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                editor.value("America/Toronto");
+
+                equal(model.startTimezone, "America/Toronto");
+
+                scheduler._timezonePopup.find(".k-scheduler-canceltimezone").click();
+
+                ok(!model.startTimezone);
+            });
+
+            test("Click checkbox toggles endTimezone editor widget", function() {
+                var scheduler = setup(),
+                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
+                    model = scheduler.dataSource.getByUid(uid);
+
+                scheduler.editEvent(uid);
+                scheduler._editContainer.find(".k-edit-field > a").click();
+
+                var editor = scheduler._timezonePopup.find("[data-role=timezoneeditor]:last").data("kendoTimezoneEditor");
+                    checkbox = scheduler._timezonePopup.find("input[type=checkbox]");
+
+                checkbox.click();
+                editor.value("America/Toronto");
+
+                equal(model.endTimezone, "America/Toronto");
+
+                checkbox.click();
+
+                ok(!editor.wrapper.closest(".k-edit-field").is(":visible"));
+                ok(!model.endTimezone);
             });
 
         </script>

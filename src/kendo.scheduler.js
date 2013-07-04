@@ -76,6 +76,12 @@ kendo_module({
             $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' '  + kendo.attr("role") + '="datepicker" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
             .attr(attr).appendTo(container);
 
+            $('<span ' + kendo.attr("bind") + '="text: ' + options.field + 'Timezone"></span>').appendTo(container);
+
+            if (options.field === "end") {
+                $('<span ' + kendo.attr("bind") + '="text: startTimezone, invisible: endTimezone"></span>').appendTo(container);
+            }
+
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         getMilliseconds = kendo.date.getMilliseconds,
@@ -89,6 +95,18 @@ kendo_module({
                     start: options.model.start,
                     timezone: options.timezone
                 });
+        },
+        TIMEZONEPOPUP = function(container, options) {
+            $('<a href="#">Time zone<a/>').click(options.click).appendTo(container);
+        },
+        TIMEZONEEDITOR = function(container, options) {
+            $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
+                .attr({
+                    name: options.field
+                })
+                .toggle(options.visible)
+                .appendTo(container)
+                .kendoTimezoneEditor();
         };
 
     function appendDateCompareValidator(attrs, options) {
@@ -238,7 +256,9 @@ kendo_module({
             id: { type: "number" },
             title: { defaultValue: "", type: "string" },
             start: { type: "date", validation: { required: true } },
+            startTimezone: { type: "string" },
             end: { type: "date", validation: { required: true, dateCompare: { value: dateCompareValidator, message: "End date should be greater than or equal to the start date"}} },
+            endTimezone: { type: "string" },
             recurrenceRule: { defaultValue: "", type: "string" },
             recurrenceException: { defaultValue: "", type: "string" },
             isAllDay: { type: "boolean", defaultValue: false },
@@ -740,6 +760,62 @@ kendo_module({
             return kendo.template(template)(options);
         },
 
+        _revertTimezones: function(model) {
+            model.set("startTimezone", this._startTimezone);
+            model.set("endTimezone", this._endTimezone);
+        },
+
+        _createTimezonePopup: function(model) {
+            var that = this,
+                container = that._editContainer.find(".k-scheduler-timezones"),
+                checkbox = container.find(".k-timezone-toggle"),
+                endTimezoneRow = container.find(".k-edit-label:last").add(container.find(".k-edit-field:last")),
+                saveButton = container.find(".k-scheduler-savetimezone"),
+                cancelButton = container.find(".k-scheduler-canceltimezone"),
+                timezonePopup = that._timezonePopup,
+                wnd;
+
+            that._startTimezone = model.startTimezone;
+            that._endTimezone = model.endTimezone;
+
+            if (!timezonePopup) {
+                that._timezonePopup = timezonePopup = container.kendoWindow({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: "Timezones",
+                    visible: false,
+                    close: function(e) {
+                        if (e.userTriggered) {
+                            that._revertTimezones(model);
+                        }
+                    }
+                });
+
+                checkbox.click(function() {
+                    endTimezoneRow.toggle($(this).prop("checked"));
+                    model.set("endTimezone", "");
+                });
+
+                saveButton.click(function(e) {
+                    e.preventDefault();
+                    wnd.close();
+                });
+
+                cancelButton.click(function(e) {
+                    e.preventDefault();
+                    that._revertTimezones(model);
+                    wnd.close();
+                });
+            }
+
+            checkbox.prop("checked", model.endTimezone);
+            endTimezoneRow.toggle(model.endTimezone);
+
+            wnd = timezonePopup.data("kendoWindow");
+            wnd.center().open();
+        },
+
         _createPopupEditor: function(model) {
             var that = this,
                 editable = that.options.editable,
@@ -748,6 +824,10 @@ kendo_module({
                 messages = that.options.messages,
                 updateText = messages.save,
                 cancelText = messages.cancel,
+                click = function(e) {
+                    e.preventDefault();
+                    that._createTimezonePopup(model);
+                },
                 fields = [
                     { field: "title", title: "Title" /*, format: field.format, editor: field.editor, values: field.values*/ },
                     { field: "start", title: "Start", editor: DATERANGEEDITOR },
@@ -757,10 +837,10 @@ kendo_module({
                 attr,
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings),
-                editableFields = [],
                 paramName = settings.paramName,
                 startTime = model.startTime,
                 endTime = model.endTime,
+                editableFields = [],
                 timezone;
 
            if (template) {
@@ -769,6 +849,12 @@ kendo_module({
                 }
                 html += (kendo.template(template, settings))(model);
             } else {
+                if (kendo.timezone.windows_zones) {
+                    fields.push({ field: "timezone", title: " ", editor: TIMEZONEPOPUP, click: click });
+                    fields.push({ field: "startTimezone", title: "Start timezone", editor: TIMEZONEEDITOR });
+                    fields.push({ field: "endTimezone", title: "End timezone", editor: TIMEZONEEDITOR });
+                }
+
                 if (!model.recurrenceId) {
                     timezone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone;
                     fields.push({ field: "recurrenceRule", title: "Repeat", editor: RECURRENCEEDITOR, timezone: timezone });
@@ -790,6 +876,13 @@ kendo_module({
                 for (var idx = 0, length = fields.length; idx < length; idx++) {
                     var field = fields[idx];
 
+                    if (field.field === "startTimezone") {
+                        html += '<div class="k-scheduler-timezones" style="display:none">';
+                        html += '<div class="k-edit-form-container">';
+                        html += '<div class="k-edit-label"></div>';
+                        html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />Use separate start and end time zones</label></div>';
+                    }
+
                     html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
 
                     if ((!model.editable || model.editable(field.field))) {
@@ -810,6 +903,12 @@ kendo_module({
                         tmpl = kendo.template(tmpl, settings);
 
                         html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
+                    }
+
+                    if (field.field === "endTimezone") {
+                        html += '<div class="k-edit-buttons k-state-default">';
+                        html += that._createButton({ name: "savetimezone", text: "Done" }) + that._createButton({ name: "canceltimezone", text: "Cancel" });
+                        html += '</div></div></div>';
                     }
                 }
             }
@@ -970,6 +1069,11 @@ kendo_module({
             };
 
             if (that.editable) {
+                if (that._timezonePopup && that._timezonePopup.data("kendoWindow")) {
+                    that._timezonePopup.data("kendoWindow").destroy();
+                    that._timezonePopup = null;
+                }
+
                 that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
             }
 
@@ -1521,5 +1625,98 @@ kendo_module({
     };
 
     ui.plugin(Scheduler);
+
+    var TimezoneEditor = Widget.extend({
+        init: function(element, options) {
+            var that = this,
+                zones = kendo.timezone.windows_zones;
+
+            if (!zones || !kendo.timezone.zones_titles) {
+                throw new Error('kendo.timezones.min.js is not included.');
+            }
+
+            Widget.fn.init.call(that, element, options);
+
+            that.wrapper = that.element;
+
+            that._zonesQuery = new kendo.data.Query(zones);
+            that._zoneTitleId = kendo.guid();
+            that._zoneTitlePicker();
+            that._zonePicker();
+
+            that.value(that.options.value);
+        },
+        options: {
+            name: "TimezoneEditor",
+            value: "",
+            optionLabel: "No timezone"
+        },
+        events: [ "change" ],
+
+        _zoneTitlePicker: function() {
+            var that = this,
+                zoneTitle = $('<input id="' + that._zoneTitleId + '"/>').appendTo(that.wrapper);
+
+            that._zoneTitle = new kendo.ui.DropDownList(zoneTitle, {
+                dataSource: kendo.timezone.zones_titles,
+                dataValueField: "other_zone",
+                dataTextField: "name",
+                optionLabel: that.options.optionLabel,
+                cascade: function() {
+                    if (!this.value()) {
+                        that._zone.wrapper.hide();
+                    }
+                }
+            });
+        },
+
+        _zonePicker: function() {
+            var that = this,
+                zone = $('<input />').appendTo(this.wrapper);
+
+            that._zone = new kendo.ui.DropDownList(zone, {
+                dataValueField: "zone",
+                dataTextField: "territory",
+                dataSource: that._zonesQuery.data,
+                cascadeFrom: that._zoneTitleId,
+                cascade: function() {
+                    that._value = this.value();
+                    that.trigger("change");
+                },
+                dataBound: function() {
+                    that._value = this.value();
+                    this.wrapper.toggle(this.dataSource.view().length > 1);
+                }
+            });
+
+            that._zone.wrapper.hide();
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            kendo.destroy(this.wrapper);
+        },
+
+        value: function(value) {
+            var that = this,
+                zone;
+
+            if (value === undefined) {
+                return that._value;
+            }
+
+            zone = that._zonesQuery.filter({ field: "zone", operator: "eq", value: value }).data[0];
+
+            if (zone) {
+                that._zoneTitle.value(zone.other_zone);
+                that._zone.value(zone.zone);
+            } else {
+                that._zoneTitle.value("");
+            }
+
+        }
+    });
+
+    ui.plugin(TimezoneEditor);
 
 })(window.kendo.jQuery);
