@@ -1224,6 +1224,20 @@
                 equal(events[1].end.getTime(), +new Date(2013, 10, 29, 17, 0));
             });
 
+            test("WEEKLY method expands by BYDAY and offset (future period)", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 6, 7, 16, 30),
+                    end: new Date(2013, 6, 7, 17, 0),
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=2SU;WKST=SU"
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2013, 7, 4), new Date(2013, 7, 11));
+
+                equal(events.length, 0);
+            });
+
             test("WEEKLY occurrences expand BYHOUR", function() {
                 var schedulerEvent = {
                     uid: "id",
