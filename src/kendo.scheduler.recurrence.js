@@ -821,8 +821,7 @@ kendo_module({
             eventStart = event.start,
             eventStartMS = eventStart.getTime(),
             rule = parseRule(event.recurrenceRule),
-            id = event[idField] || event.id,
-            uid = event.uid,
+            id, uid, recurrenceRule, recurrenceException,
             startTime, endTime, endDate,
             hours, minutes, seconds,
             durationMS, startPeriod,
@@ -834,6 +833,11 @@ kendo_module({
 
         zone = event.startTimezone || event.endTimezone || zone;
         exceptionDates = parseExceptions(event.recurrenceException, zone);
+
+        recurrenceException = event.recurrenceException;
+        recurrenceRule = event.recurrenceRule;
+        id = event[idField] || event.id;
+        uid = event.uid;
 
         if (event.toJSON) {
             event = event.toJSON();
@@ -920,6 +924,10 @@ kendo_module({
 
         first = events[0];
         if (first && first.start.getTime() === eventStartMS) {
+            delete first.recurrenceId;
+
+            first.recurrenceException = recurrenceException;
+            first.recurrenceRule = recurrenceRule;
             first.uid = uid;
             first.id = id;
         }
