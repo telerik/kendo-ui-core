@@ -572,7 +572,7 @@ kendo_module({
         return Math.ceil((date.getDate() - firstWeekLength) / 7) + 1;
     }
 
-    function offsetWeek(date, offset, weekStart) {
+    function normalizeOffset(date, offset, weekStart) {
         if (offset < 0) {
             offset = numberOfWeeks(date, weekStart) + (offset + 1);
         }
@@ -591,7 +591,7 @@ kendo_module({
             weekNumber -= 1;
         }
 
-        return weekNumber === offsetWeek(date, offset, weekStart);
+        return weekNumber === normalizeOffset(date, offset, weekStart);
     }
 
     function allowFirstWeek(date, weekDayRule, weekStart) {
@@ -613,7 +613,7 @@ kendo_module({
         }
 
         allow = day >= firstDay;
-        if (!allow && offset < 0 && offsetWeek(date, offset, weekStart) !== 1) {
+        if (!allow && offset < 0 && normalizeOffset(date, offset, weekStart) !== 1) {
             allow = true;
         }
 
@@ -642,7 +642,7 @@ kendo_module({
             }
 
             weekNumber = weekInMonth(date, weekStart);
-            offset = offset ? offsetWeek(date, offset, weekStart) : weekNumber;
+            offset = offset ? normalizeOffset(date, offset, weekStart) : weekNumber;
 
             if (weekNumber < offset) {
                 result.push(weekDay);
