@@ -164,6 +164,7 @@ function renderThumbs(element) {
 function canvasInit(e) {
     canvasScrollView = $("#canvas-scrollview").kendoMobileScrollView({
         dataSource: canvasDataSource,
+        enablePager: false,
         itemsPerPage: 6,
         template: kendo.template($("#canvas-template").html()),
         emptyTemplate: kendo.template($("#empty-template").html()),
@@ -201,6 +202,7 @@ function goToCanvas(e) {
 
 function canvasDetailInit(e) {
     $("#detail-scrollview").kendoMobileScrollView({
+        enablePager: false,
         dataSource: canvasDataSource,
         autoBind: false,
         template: kendo.template($("#canvas-detail-tmp").html())
