@@ -1502,4 +1502,4 @@
     <Compile Include="UI\MobileDrawer\Fluent\MobileDrawerEventBuilder.cs" />
     <Compile Include="UI\MobileDrawer\Html\MobileDrawerHtmlBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\MobileApplication\Fluent\MobileApplicationEventBuilder.cs" /></ItemGroup></Project>

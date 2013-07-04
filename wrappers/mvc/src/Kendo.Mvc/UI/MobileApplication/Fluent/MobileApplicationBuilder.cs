@@ -123,7 +123,26 @@ namespace Kendo.Mvc.UI.Fluent
         
         //<< Fields
 
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="configurator">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MobileApplication()        
+        ///             .Events(events => events
+        ///                 .Init("onInit")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MobileApplicationBuilder Events(Action<MobileApplicationEventBuilder> configurator)
+        {
 
+            configurator(new MobileApplicationEventBuilder(Component.Events));
+
+            return this;
+        }
         
     }
 }

@@ -55,7 +55,7 @@ namespace Kendo.Mvc.UI
         {
             var container = "document.body";
 
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(Events);
 
             options.Add("hideAddressBar", HideAddressBar);
             options.Add("updateDocumentTitle", UpdateDocumentTitle);
