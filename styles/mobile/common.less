@@ -703,17 +703,25 @@
     overflow: hidden;
 }
 
-.km-virtual-list  {
+.km-virtual-list
+{
     position: relative;
     width: 100%;
     -webkit-transform: translateZ(0);
 }
 
-.km-virtual-list > li {
+.km-virtual-list > li
+{
     width: 100%;
     position: absolute;
     top: 0;
     -webkit-transform: translateZ(0);
+}
+
+.km-root .km-list .km-press-to-load-more,
+.km-root .km-list .km-endless-scroll-loading
+{
+    border-bottom: 0;
 }
 
 .km-list > li > *

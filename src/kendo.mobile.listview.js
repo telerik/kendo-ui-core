@@ -447,7 +447,7 @@ kendo_module({
 
     var VirtualListViewLoadingIndicator = kendo.Class.extend({
         init: function(listView) {
-            this.element = $('<li class="endless-scroll-loading"></li>').appendTo(listView.element);
+            this.element = $('<li class="km-endless-scroll-loading"></li>').appendTo(listView.element);
             this._loadIcon = $('<span style="display:none" class="km-icon"></span>').appendTo(this.element);
             $('<span class="km-loading-left"></span><span class="km-loading-right"></span>').appendTo(this.element);
             this.height = this.element.outerHeight(true);
@@ -480,7 +480,7 @@ kendo_module({
 
             this._loadWrapper.append(this._loadIcon).append(this._loadButton).append(this._helpers);
 
-            this.element = $('<li class="press-to-load-more"></li>').append(this._loadWrapper).appendTo(listView.element);
+            this.element = $('<li class="km-press-to-load-more"></li>').append(this._loadWrapper).appendTo(listView.element);
 
             var loadMore = this;
             this._loadButton.kendoMobileButton().data("kendoMobileButton").bind("click", function() {
