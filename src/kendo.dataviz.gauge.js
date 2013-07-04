@@ -1254,7 +1254,11 @@ kendo_module({
 
         svg: function() {
             var model = this._getModel(),
-                view = dataviz.SVGView.fromModel(model);
+                view = new dataviz.SVGView(model.options);
+
+            // TODO: Throw meaningful error message if SVGView is not loaded
+            // TODO: Add as static method to share between Chart/Gauge?
+            view.load(model);
 
             return view.render();
         },
