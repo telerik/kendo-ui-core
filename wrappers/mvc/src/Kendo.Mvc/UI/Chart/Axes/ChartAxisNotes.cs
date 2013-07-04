@@ -12,12 +12,12 @@ namespace Kendo.Mvc.UI
             Icon = new ChartMarkers();
             Label = new ChartNoteLabel();
             Line = new ChartNoteLine();
-            Items = new List<ChartAxisNoteItem<T>>();
+            Data = new List<ChartAxisNoteItem<T>>();
         }
         /// <summary>
         /// Gets or sets the note position.
         /// </summary>
-        public IList<ChartAxisNoteItem<T>> Items
+        public IList<ChartAxisNoteItem<T>> Data
         {
             get;
             set;

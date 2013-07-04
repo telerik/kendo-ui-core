@@ -212,10 +212,10 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Name("Chart")
         ///           .ValueAxis(a => a.Numeric()
         ///               .Note(note => note
-        ///                    .Items(items =>
+        ///                    .Data(items =>
         ///                    {
-        ///                        items.Add().Value(1);
-        ///                        items.Add().Value(2);
+        ///                        data.Add().Value(1);
+        ///                        data.Add().Value(2);
         ///                    })
         ///               )
         ///            )

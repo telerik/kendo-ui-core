@@ -1,8 +1,6 @@
 namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
-    using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.Extensions;
 
     internal class ChartAxisNoteSerializer<T> : ChartNoteSerializer
         where T : struct
@@ -19,16 +17,16 @@ namespace Kendo.Mvc.UI
         {
             var result = base.Serialize();
 
-            if (note.Items.Count > 0)
+            if (note.Data.Count > 0)
             {
                 var dataList = new List<IDictionary<string, object>>();
 
-                foreach (var item in note.Items)
+                foreach (var item in note.Data)
                 {
                     dataList.Add(item.CreateSerializer().Serialize());
                 }
 
-                result.Add("items", dataList);
+                result.Add("data", dataList);
             }
 
             return result;
