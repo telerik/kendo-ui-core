@@ -822,6 +822,7 @@ kendo_module({
             eventStartMS = eventStart.getTime(),
             rule = parseRule(event.recurrenceRule),
             id = event[idField] || event.id,
+            uid = event.uid,
             startTime, endTime, endDate,
             hours, minutes, seconds,
             durationMS, startPeriod,
@@ -918,7 +919,8 @@ kendo_module({
         }
 
         first = events[0];
-        if (first) {
+        if (first && first.start.getTime() === eventStartMS) {
+            first.uid = uid;
             first.id = id;
         }
 
