@@ -574,7 +574,7 @@ kendo_module({
                         startSlotIndex = 0;
                     }
 
-                    if (endSlotIndex < 0 || !endSlotIndex) {
+                    if ((endSlotIndex < 0 || !endSlotIndex) && startSlotIndex !== endSlotIndex) {
                         endSlotIndex = this._row.slots.length - 1;
                     }
 
@@ -582,7 +582,6 @@ kendo_module({
                     event.endIndex = endSlotIndex;
 
                     this._positionEvent(this._row.slots, this._createEventElement(event), startSlotIndex, endSlotIndex);
-
                 }
             }
         },

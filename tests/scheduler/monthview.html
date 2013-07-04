@@ -354,6 +354,17 @@
                 equal(view.content.find(".k-event .k-i-refresh").length, 0);
             });
 
+            test("event in the first slot is correctly positioned", function() {
+                var view = setup();
+
+                view.render([
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/27 10:00"), end: new Date("2013/1/27 10:00"),  title: "day event" })
+                ]);
+
+                equal(view._row.events[0].start, 0);
+                equal(view._row.events[0].end, 0);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
