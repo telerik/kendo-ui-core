@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chrome disappearing canvas demo</title>
+</head>
+<body>
+    <p>
+        <a href="">Open me in new (background) tab</a>
+    </p>
+    <div>
+        <canvas id="c1" width="100px" height="100px"></canvas>
+        <canvas id="c2" width="300px" height="300px"></canvas>
+    </div>
+    <script>
+        function draw(ctx) {
+            ctx.save();
+            ctx.fillStyle = "#aaa";
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.restore();
+        }
+
+        var ctx1 = document.getElementById("c1").getContext("2d");
+        draw(ctx1);
+
+        var ctx2 = document.getElementById("c2").getContext("2d");
+        draw(ctx2);
+    </script>
+</body>
+</html>
+
+
