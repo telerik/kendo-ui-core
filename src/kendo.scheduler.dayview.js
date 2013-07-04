@@ -154,35 +154,64 @@ kendo_module({
             that._slots();
        },
 
-       _createEastWestResizeHint: function(event, eventElement) {
-            var left = eventElement.offsetLeft;
-            var top = eventElement.offsetTop;
-            var width = eventElement.clientWidth;
-            var height = eventElement.clientHeight;
+       _createResizeHint: function(direction, event, startSlot, endSlot) {
+            var left = startSlot.offsetLeft + parseInt($(startSlot.element).css("borderLeftWidth"));
+            var top = startSlot.offsetTop;
+            var width = startSlot.clientWidth;
+            var height = startSlot.clientHeight;
+            var container = this.content;
+            var format;
+
+            if (direction == "south" || direction == "north") {
+                var dateSlotIndex = this._dateSlotIndex(startSlot.start);
+
+                height = this._calculateEventHeight(this._columns[dateSlotIndex].slots, startSlot.index, endSlot.index + 1) - 3;
+
+                format = "t";
+            } else {
+                width = this._calculateAllDayEventWidth(this._row.slots, startSlot.index, endSlot.index);
+
+                container = this.element.find(".k-scheduler-header-wrap")
+
+                format = "M/dd";
+            }
 
             this._resizeHint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
 
-            this._resizeHint.find(".k-label-top").text(kendo.toString(event.start, "M/dd"))
+            this._resizeHint.appendTo(container)
+                            .find(".k-label-top").text(kendo.toString(event.start, format))
                             .end()
-                            .find(".k-label-bottom").text(kendo.toString(event.end, "M/dd"));
-
-            this._resizeHint.appendTo(this.element.find(".k-scheduler-header-wrap"));
+                            .find(".k-label-bottom").text(kendo.toString(event.end, format));
        },
 
-       _createSouthNorthResizeHint: function(event, eventElement) {
-            var left = eventElement.offsetLeft;
-            var top = eventElement.offsetTop;
-            var width = eventElement.clientWidth;
-            var height = eventElement.clientHeight;
+        _updateResizeHint: function(direction, startSlot, endSlot) {
+            var css = {};
+            var selector;
+            var text;
+            var dateSlotIndex = this._dateSlotIndex(startSlot.start);
 
-            this._resizeHint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
+            if (direction == "south") {
+                css.height = this._calculateEventHeight(this._columns[dateSlotIndex].slots, startSlot.index, endSlot.index + 1) - 3;
+                selector = ".k-label-bottom";
+                text = kendo.toString(endSlot.end, "t");
+            } else if (direction == "north") {
+                css.top = startSlot.offsetTop;
+                css.height = this._calculateEventHeight(this._columns[dateSlotIndex].slots, startSlot.index, endSlot.index + 1) - 3;
+                selector = ".k-label-top";
+                text = kendo.toString(endSlot.start, "t");
+            } else if (direction == "west") {
+                css.left = startSlot.offsetLeft;
+                css.width = this._calculateAllDayEventWidth(this._row.slots, startSlot.index, endSlot.index);
+                selector = ".k-label-top";
+                text = kendo.toString(startSlot.start, "M/dd");
+            } else if (direction == "east") {
+                css.width = this._calculateAllDayEventWidth(this._row.slots, startSlot.index, endSlot.index);
+                selector = ".k-label-bottom";
+                text = kendo.toString(endSlot.end, "M/dd");
+            }
 
-            this._resizeHint.find(".k-label-top").text(kendo.toString(event.start, "t"))
-                            .end()
-                            .find(".k-label-bottom").text(kendo.toString(event.end, "t"));
-
-            this._resizeHint.appendTo(this.content);
-       },
+            this._resizeHint.css(css).find(selector).text(text);
+        },
 
        _slotByPosition: function(x, y) {
            var slot;
@@ -274,10 +303,12 @@ kendo_module({
                         clientHeight: td.clientHeight,
                         offsetHeight: td.offsetHeight,
                         clientWidth: td.clientWidth,
+                        element: td,
                         start: range.start,
                         end: range.end
                     };
 
+                    cell.index = columns[cellIndex].slots.length;
                     columns[cellIndex].slots.push(cell);
                     columns[cellIndex].offsetLeft = cell.offsetLeft;
                     columns[cellIndex].clientWidth = cell.clientWidth;
@@ -305,9 +336,11 @@ kendo_module({
                     offsetHeight: td.offsetHeight,
                     offsetWidth: td.offsetWidth,
                     clientWidth: td.clientWidth,
+                    element: td,
                     isAllDay: true,
                     start: range.start,
-                    end: range.end
+                    end: range.end,
+                    index: cellIndex
                 };
 
                 row.slots.push(cell);

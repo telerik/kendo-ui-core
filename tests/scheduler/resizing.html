@@ -3,6 +3,7 @@
     <head>
         <title>Scheduler Resizing</title>
         <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
         <script src="../jquery-loader.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
@@ -178,6 +179,48 @@
 
                 equal(scheduler.dataSource.at(0).end.getHours(), 11);
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+            });
+
+            test("the south/north resize hint starts from the beginning of the slot that contains the event", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" },
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s").last();
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle);
+
+                drag(scheduler, handle, slots.eq(1).offset());
+
+                equal(div.find(".k-marquee").offset().left, slots.eq(1).offset().left);
+            });
+
+            test("the south/north resize hint is as wide as the slot that contains the event", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" },
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s").last();
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle);
+
+                drag(scheduler, handle, slots.eq(1).offset());
+
+                equal(div.find(".k-marquee").outerWidth(), slots.eq(1).outerWidth());
             });
 
             test("dragging and dropping the south resize handle over the next day changes the end time of the event but stays on the same date", function() {

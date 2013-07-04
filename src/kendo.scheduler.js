@@ -481,29 +481,53 @@ kendo_module({
             var event;
             var that = this;
 
+            function direction(handle) {
+                var directions = {
+                    "k-resize-e": "east",
+                    "k-resize-w": "west",
+                    "k-resize-n": "north",
+                    "k-resize-s": "south"
+                };
+
+                for (var key in directions) {
+                    if (handle.hasClass(key)) {
+                        return directions[key];
+                    }
+                }
+            }
+
             that.element.kendoDraggable({
                 distance: 0,
                 filter: ".k-resize-handle",
                 dragstart: function(e) {
                     var dragHandle = $(e.currentTarget);
 
-                    var view = that.view();
+                    var dir = direction(dragHandle);
 
                     var eventElement = dragHandle.closest(".k-event");
+
+                    var offset = eventElement.offset();
+
+                    var view = that.view();
+
+                    startSlot = view._slotByPosition(offset.left, offset.top);
+
+                    offset.left += eventElement[0].clientWidth;
+                    offset.top += eventElement[0].clientHeight;
+
+                    endSlot = view._slotByPosition(offset.left, offset.top);
 
                     event = that.dataSource.getByUid(eventElement.attr(kendo.attr("uid")));
 
-                    startSlot = endSlot = view._slotByPosition(e.x.location, e.y.location);
-
-                    if (dragHandle.is(".k-resize-s,.k-resize-n")) {
-                        view._createSouthNorthResizeHint(event, eventElement[0]);
-                    } else {
-                        view._createEastWestResizeHint(event, eventElement[0]);
-                    }
+                    view._createResizeHint(dir, event, startSlot, endSlot);
                 },
                 drag: function(e) {
                     var dragHandle = $(e.currentTarget);
+
+                    var dir = direction(dragHandle);
+
                     var eventElement = dragHandle.closest(".k-event");
+
                     var view = that.view();
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
@@ -512,60 +536,51 @@ kendo_module({
                         return;
                     }
 
-                    if (slot.isAllDay && dragHandle.is(".k-resize-s,.k-resize-n")) {
+                    if (slot.isAllDay && (dir == "south" || dir == "north")) {
                         return;
                     }
 
-                    var height = eventElement[0].clientHeight;
-                    var width = eventElement[0].clientWidth;
-
-                    if (dragHandle.is(".k-resize-s")) {
+                    if (dir == "south") {
                         if (getMilliseconds(slot.end) - getMilliseconds(event.start) >= kendo.date.MS_PER_MINUTE * 30) {
                             endSlot = slot;
-
-                            view._updateResizeHint("south", startSlot, slot, width, height);
                         }
-                    } else if (dragHandle.is(".k-resize-n")) {
+                    } else if (dir == "north") {
                         if (getMilliseconds(event.end) - getMilliseconds(slot.start) >= kendo.date.MS_PER_MINUTE * 30) {
-                            endSlot = slot;
-
-                            view._updateResizeHint("north", startSlot, slot, width, height);
+                            startSlot = slot;
                         }
-                    } else if (dragHandle.is(".k-resize-e")) {
+                    } else if (dir == "east") {
                         if (kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
                             endSlot = slot;
-
-                            view._updateResizeHint("east", startSlot, slot, width, height);
                         }
-                    } else if (dragHandle.is(".k-resize-w")) {
+                    } else if (dir == "west") {
                         if (kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
-
-                            endSlot = slot;
-
-                            view._updateResizeHint("west", startSlot, slot, width, height);
+                            startSlot = slot;
                         }
                     }
+
+                    view._updateResizeHint(dir, startSlot, endSlot);
                 },
                 dragend: function(e) {
                     var dragHandle = $(e.currentTarget);
                     var start = new Date(event.start.getTime());
                     var end = new Date(event.end.getTime());
+                    var dir = direction(dragHandle);
 
-                    if (dragHandle.is(".k-resize-s")) {
+                    if (dir == "south") {
                         end = kendo.date.getDate(end);
                         kendo.date.setTime(end, getMilliseconds(endSlot.end));
-                    } else if (dragHandle.is(".k-resize-n")) {
+                    } else if (dir == "north") {
                         start = kendo.date.getDate(start);
-                        kendo.date.setTime(start, getMilliseconds(endSlot.start));
-                    } else if (dragHandle.is(".k-resize-e")) {
+                        kendo.date.setTime(start, getMilliseconds(startSlot.start));
+                    } else if (dir == "east") {
                         end.setTime(endSlot.end.getTime());
                         end.setHours(0);
                         end.setMinutes(0);
                         if (end < start) {
                             end = kendo.date.addDays(end, 1);
                         }
-                    } else if (dragHandle.is(".k-resize-w")) {
-                        start.setTime(endSlot.start.getTime());
+                    } else if (dir == "west") {
+                        start.setTime(startSlot.start.getTime());
                         start.setHours(0);
                         start.setMinutes(0);
                     }

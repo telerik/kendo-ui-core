@@ -155,34 +155,6 @@ kendo_module({
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
         },
 
-        _updateResizeHint: function(direction, startSlot, endSlot, width, height) {
-            var css = {};
-            var selector;
-            var text;
-
-            if (direction == "south") {
-                css.height = height + endSlot.offsetTop - startSlot.offsetTop;
-                selector = ".k-label-bottom";
-                text = kendo.toString(endSlot.end, "t");
-            } else if (direction == "north") {
-                css.top = endSlot.offsetTop;
-                css.height = height + startSlot.offsetTop - endSlot.offsetTop;
-                selector = ".k-label-top";
-                text = kendo.toString(endSlot.start, "t");
-            } else if (direction == "west") {
-                css.left = endSlot.offsetLeft;
-                css.width = width + startSlot.offsetLeft - endSlot.offsetLeft;
-                selector = ".k-label-top";
-                text = kendo.toString(endSlot.end, "M/dd");
-            } else if (direction == "east") {
-                css.width = width + endSlot.offsetLeft - startSlot.offsetLeft;
-                selector = ".k-label-bottom";
-                text = kendo.toString(endSlot.start, "M/dd");
-            }
-
-            this._resizeHint.css(css).find(selector).text(text);
-        },
-
         _createResizeHint: function(left, top, width, height) {
             return $(HINT).css({
                 left: left,
