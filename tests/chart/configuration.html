@@ -59,6 +59,42 @@
                 }
 
                 // ------------------------------------------------------------
+                var viewFactory;
+                module("Views / View Factory", {
+                    setup: function() {
+                        viewFactory = new dataviz.ViewFactory;
+                    }
+                });
+
+                test("registers views in ascending order", function() {
+                    viewFactory.register("bar", Object, 1);
+                    viewFactory.register("foo", Object, 0);
+
+                    equal(viewFactory._views[0].name, "foo");
+                });
+
+                test("instantiates default view", function() {
+                    viewFactory.register("foo", function() { ok(true); }, 0);
+                    viewFactory.register("bar", Object, 1);
+
+                    viewFactory.create();
+                });
+
+                test("instantiates preferred view", function() {
+                    viewFactory.register("foo", Object, 0);
+                    viewFactory.register("bar", function() { ok(true); }, 1);
+
+                    viewFactory.create("bar");
+                });
+
+                test("instantiates default view if the preferred is unavailable", function() {
+                    viewFactory.register("foo", function() { ok(true); }, 0);
+                    viewFactory.register("bar", Object, 1);
+
+                    viewFactory.create("baz");
+                });
+
+                // ------------------------------------------------------------
                 module("View", {
                     setup: function() {
                         dataviz.SVGView._available = dataviz.SVGView.available;

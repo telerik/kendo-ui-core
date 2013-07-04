@@ -3375,6 +3375,51 @@ kendo_module({
         return -v1.x * v2.y + v1.y * v2.x < 0;
     }
 
+    ViewFactory = function() {
+        this._views = [];
+    }
+
+    ViewFactory.prototype = {
+        register: function(name, type, order) {
+            var views = this._views,
+                defaultView = views[0],
+                entry = {
+                    name: name,
+                    type: type,
+                    order: order
+                };
+
+            if (!defaultView || order < defaultView.order) {
+                views.unshift(entry);
+            } else {
+                views.push(entry);
+            }
+        },
+
+        create: function(preferred) {
+            var views = this._views,
+                match = views[0];
+
+            if (preferred) {
+                for (var i = 0; i < views.length; i++) {
+                    if (views[i].name === preferred) {
+                        match = views[i];
+                        break;
+                    }
+                }
+            }
+
+            if (match) {
+                return new match.type();
+            }
+
+            kendo.logToConsole(
+                "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
+                "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
+                "- The kendo.dataviz.(svg|vml|canvas).js scripts are not loaded");
+        }
+    };
+
     // Exports ================================================================
     /**
      * @name kendo.dataviz
@@ -3463,6 +3508,7 @@ kendo_module({
         Title: Title,
         ViewBase: ViewBase,
         ViewElement: ViewElement,
+        ViewFactory: ViewFactory,
 
         animationDecorator: animationDecorator,
         append: append,
