@@ -38,6 +38,7 @@
         <script>
             QUnit.config.reorder = false;
 
+            var TIMEOUT = 500;
             var ElasticPane = kendo.mobile.ui.ScrollViewElasticPane;
             var ScrollViewContent = kendo.mobile.ui.ScrollViewContent;
 
@@ -156,7 +157,7 @@
                     start();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 300);
+                }, TIMEOUT);
             });
 
             asyncTest("swift drag moves the content to the next page", 2, function() {
@@ -167,7 +168,7 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 200);
-                }, 300);
+                }, TIMEOUT);
             });
 
             asyncTest("preventing default reverts back to the previous page", 2, function() {
@@ -181,7 +182,7 @@
                     content.updatePage();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 300);
+                }, TIMEOUT);
             });
 
             asyncTest("swift right drag moves the content to the previous page", 2, function() {
@@ -194,7 +195,7 @@
                     content.updatePage();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 300);
+                }, TIMEOUT);
             });
 
             asyncTest("long drag snaps the content to the next page", 2, function() {
@@ -205,7 +206,7 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 200);
-                }, 300);
+                }, TIMEOUT);
             });
 
             asyncTest("drag left side of the boundaries snaps the content to the next page", 2, function() {
@@ -216,7 +217,7 @@
                     content.updatePage();
                     equal(content.page, 0);
                     equal(pane.offset(), 0);
-                }, 300);
+                }, TIMEOUT);
             });
 
             asyncTest("drag right side of the boundaries snaps the content to the next page", 2, function() {
@@ -228,7 +229,7 @@
                     content.updatePage();
                     equal(content.page, 1);
                     equal(pane.offset(), 200);
-                }, 300);
+                }, TIMEOUT);
             });
         </script>
     </body>
