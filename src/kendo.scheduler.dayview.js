@@ -427,11 +427,11 @@ kendo_module({
                 }
             }
         },
-        _createColumns: function(resources, inner) {
+        _createColumnsLayout: function(resources, inner) {
             return createLayoutConfiguration("columns", resources, inner);
         },
 
-        _createRows: function(resources, inner) {
+        _createRowsLayout: function(resources, inner) {
             return createLayoutConfiguration("rows", resources, inner);
         },
 
@@ -472,9 +472,9 @@ kendo_module({
 
             if (resources.length) {
                 if (options.groupOrientation === "vertical") {
-                    rows = this._createRows(resources, rows);
+                    rows = this._createRowsLayout(resources, rows);
                 } else {
-                    columns = this._createColumns(resources, columns);
+                    columns = this._createColumnsLayout(resources, columns);
                 }
             }
 
@@ -576,25 +576,27 @@ kendo_module({
 
             html += '<tbody>';
 
-            for (var rowIdx = 0; rowIdx < rowCount; rowIdx++) {
-                html += allDayVerticalGroupRow;
-
-                html += this._forTimeRange(start, end, function(date, majorTick) {
-                    var content = "",
+            var appendRow = function(date, majorTick) {
+                var content = "",
                     idx,
                     length;
 
-                    content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
+                content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
 
-                    for (var columnIdx = 0; columnIdx < columnCount; columnIdx++) {
-                        for (idx = 0, length = dates.length; idx < length; idx++) {
-                            content += "<td" + (kendo.date.isToday(dates[idx]) ? ' class="k-today"' : "") + ">";
-                            content += "&nbsp;</td>";
-                        }
+                for (var columnIdx = 0; columnIdx < columnCount; columnIdx++) {
+                    for (idx = 0, length = dates.length; idx < length; idx++) {
+                        content += "<td" + (kendo.date.isToday(dates[idx]) ? ' class="k-today"' : "") + ">";
+                        content += "&nbsp;</td>";
                     }
-                    content += "</tr>";
-                    return content;
-                });
+                }
+                content += "</tr>";
+                return content;
+            };
+
+            for (var rowIdx = 0; rowIdx < rowCount; rowIdx++) {
+                html += allDayVerticalGroupRow;
+
+                html += this._forTimeRange(start, end, appendRow);
             }
 
             html += '</tbody>';
@@ -1057,13 +1059,47 @@ kendo_module({
                     }
                 }
 
-                if (offset && this._isVerticallyGrouped()) {
-                    var groupRowCount = this._rowsCountInGroup();
-                    for (var columnIndex = 0; columnIndex < this._columns.length; columnIndex++) {
-                        slots = this._columns[columnIndex].slots;
+                this._updateSlotsPosition(offset);
+            }
+        },
 
-                        for (cellIndex = 0; cellIndex < slots.length; cellIndex++) {
-                            slots[cellIndex].offsetTop = slots[cellIndex].offsetTop + Math.ceil(offset * (cellIndex/groupRowCount || 1));
+        _updateSlotsPosition: function(offset) {
+            if (offset && this._isVerticallyGrouped()) {
+                var slots;
+                var events;
+                var cellIndex;
+                var eventIndex;
+                var event;
+
+                var groupRowCount = this._rowsCountInGroup();
+
+                for (var columnIndex = 0; columnIndex < this._columns.length; columnIndex++) {
+                    slots = this._columns[columnIndex].slots;
+                    events = this._columns[columnIndex].events;
+
+                    for (cellIndex = 0; cellIndex < slots.length; cellIndex++) {
+                        slots[cellIndex].offsetTop = slots[cellIndex].offsetTop + offset*Math.ceil(cellIndex/groupRowCount || 1);
+                    }
+
+                    for (eventIndex = 0; eventIndex < events.length; eventIndex++) {
+                        event = events[eventIndex];
+                        event.element.css("top", event.element[0].offsetTop + offset*Math.ceil(event.start/groupRowCount || 1));
+                    }
+                }
+
+                for (var rowIndex = 0; rowIndex < this._rows.length; rowIndex++) {
+                    events = this._rows[rowIndex].events;
+                    slots = this._rows[rowIndex].slots;
+
+                    for (cellIndex = 0; cellIndex < slots.length; cellIndex++) {
+                        slots[cellIndex].offsetTop = slots[cellIndex].offsetTop + offset*rowIndex;
+                    }
+
+                    for (eventIndex = 0; eventIndex < events.length; eventIndex++) {
+                        event = events[eventIndex];
+                        var top = event.element[0].offsetTop;
+                        if (top) {
+                            event.element.css("top", top + offset*rowIndex);
                         }
                     }
                 }
