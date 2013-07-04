@@ -1390,17 +1390,6 @@
                     ok(chart.svg().match(/<svg.*<\/svg>/));
                 });
 
-                test("svg() exports to SVG when the browser does not support SVG and VML", function() {
-                    function unavailable() { return false; }
-
-                    stubMethod(dataviz.SVGView, "available", unavailable, function() {
-                        stubMethod(dataviz.VMLView, "available", unavailable, function() {
-                            createChart();
-                            ok(chart.svg().match(/<svg.*<\/svg>/));
-                        });
-                    });
-                });
-
                 test("svg() does not replace model", function() {
                     var oldModel = chart._model;
                     chart.svg();

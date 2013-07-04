@@ -234,6 +234,7 @@ var tests = [
     "fx/animation.html",
     "fx/new.html",
     "fx/lint.html",
+    "gauge/configuration.html",
     "gauge/radialscale.html",
     "gauge/radialpointer.html",
     "gauge/radialplotarea.html",

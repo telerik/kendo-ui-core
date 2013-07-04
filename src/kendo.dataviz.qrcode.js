@@ -913,7 +913,7 @@ kendo_module({
 
                 that.element = $(element);
                 that.element.addClass("k-qrcode");
-                that.view = dataviz.ViewFactory.current.create({}, "canvas");
+                that.view = dataviz.ViewFactory.current.create({}, that.options.render);
                 that.setOptions(options);
             },
             redraw: function(){
@@ -1050,6 +1050,7 @@ kendo_module({
             },
             options: {
                 name: "QRCode",
+                render: "canvas",
                 encoding: "ISO_8859_1",
                 value: "",
                 errorCorrection: QRCodeDefaults.DEFAULT_ERROR_CORRECTION_LEVEL,

@@ -129,6 +129,15 @@
                     equal(view.options.height, 400);
                 });
 
+                asyncTest("uses preferred view specified in 'render'", 1, function() {
+                    stubMethod(dataviz.ViewFactory.prototype, "create", function(options, preferred) {
+                        equal(preferred, "foo");
+                        start();
+                    }, function() {
+                        createChart({ render: "foo" });
+                    });
+                });
+
                 // ------------------------------------------------------------
                 module("Category Axis Configuration", {
                     teardown: destroyChart

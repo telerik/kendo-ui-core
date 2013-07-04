@@ -1239,10 +1239,12 @@ kendo_module({
             var gauge = this,
                 element = gauge.element,
                 model = gauge._model = gauge._getModel(),
-                view = gauge._view = dataviz.ViewFactory.current.create(model.options);
                 view;
 
             gauge._plotArea = model._plotArea;
+
+            view = gauge._view =
+                dataviz.ViewFactory.current.create(model.options, gauge.options.render);
 
             if (view) {
                 view.load(model);

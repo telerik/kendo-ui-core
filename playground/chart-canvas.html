@@ -23,6 +23,7 @@
         <div id="gauge"></div>
         <script>
             $("#chart").kendoChart({
+                render: "canvas",
                 series: [{
                     type: "pie",
                     data: [1, 2]
@@ -36,6 +37,7 @@
             });
 
             $("#gauge").kendoRadialGauge({
+                render: "canvas",
                 pointer: {
                     shape: "arrow",
                     value: 100

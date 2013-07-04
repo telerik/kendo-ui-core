@@ -364,12 +364,15 @@ kendo_module({
         _redraw: function() {
             var chart = this,
                 model = chart._getModel(),
-                view = chart._view = dataviz.ViewFactory.current.create(model.options);
+                view;
 
             chart._destroyView();
 
             chart._model = model;
             chart._plotArea = model._plotArea;
+
+            view = chart._view =
+                dataviz.ViewFactory.current.create(model.options, chart.options.render);
 
             if (view) {
                 view.load(model);

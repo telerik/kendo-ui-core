@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gauge Configuration</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.gauge.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../chart/util.js"></script>
+        <script>
+            var dataviz = kendo.dataviz,
+                gaugeElement,
+                gauge;
+
+            (function() {
+                function createGauge(options) {
+                    gaugeElement = $("<div />").kendoRadialGauge(kendo.deepExtend({
+                        pointer: {
+                            value: 50
+                        },
+
+                        scale: {
+                            min: 0,
+                            max: 100
+                        }
+                    }, options));
+
+                    gauge = gaugeElement.data("kendoRadialGauge");
+                }
+
+                // ------------------------------------------------------------
+                module("Radial Gauge / View", {
+                    setup: function() {
+                        createGauge();
+                    }
+                });
+
+                asyncTest("uses preferred view specified in 'render'", 1, function() {
+                    stubMethod(dataviz.ViewFactory.prototype, "create", function(options, preferred) {
+                        equal(preferred, "foo");
+                        start();
+                    }, function() {
+                        createGauge({ render: "foo" });
+                    });
+                });
+
+            })();
+
+            (function() {
+                function createGauge(options) {
+                    gaugeElement = $("<div />").kendoRadialGauge(kendo.deepExtend({
+                        pointer: {
+                            value: 50
+                        },
+
+                        scale: {
+                            min: 0,
+                            max: 100
+                        }
+                    }, options));
+
+                    gauge = gaugeElement.data("kendoRadialGauge");
+                }
+
+
+                // ------------------------------------------------------------
+                module("Radial Gauge / View", {
+                    setup: function() {
+                        createGauge();
+                    }
+                });
+
+                asyncTest("uses preferred view specified in 'render'", 1, function() {
+                    stubMethod(dataviz.ViewFactory.prototype, "create", function(options, preferred) {
+                        equal(preferred, "foo");
+                        start();
+                    }, function() {
+                        createGauge({ render: "foo" });
+                    });
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.gauge</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>

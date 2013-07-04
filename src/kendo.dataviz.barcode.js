@@ -1517,7 +1517,7 @@
              Widget.fn.init.call(that, element, options);
              that.element = $(element);
              that.element.addClass("k-barcode");
-             that.view = dataviz.ViewFactory.current.create({}, "canvas");
+             that.view = dataviz.ViewFactory.current.create({}, that.options.render);
              that.setOptions(options);
         },
         setOptions: function (options) {
@@ -1678,6 +1678,7 @@
         },
         options: {
             name: "Barcode",
+            render: "canvas",
             value: "",
             type: "code39",
             checksum: false,
