@@ -27,9 +27,9 @@ kendo_module({
         },
 
         viewportTemplate = kendo.template('<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no#=data.height#" name="viewport" />', {usedWithBlock: false}),
-        systemMeta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +
+        systemMeta = kendo.template('<meta name="apple-mobile-web-app-capable" content="#= data.webAppCapable === false ? \'no\' : \'yes\' #" /> ' +
                      '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ' +
-                     '<meta name="msapplication-tap-highlight" content="no" /> ',
+                     '<meta name="msapplication-tap-highlight" content="no" /> ', {usedWithBlock: false}),
         viewportMeta = viewportTemplate({ height: "" }),
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
@@ -253,7 +253,7 @@ kendo_module({
                 HEAD.prepend(viewportMeta);
             }
 
-            HEAD.prepend(systemMeta);
+            HEAD.prepend(systemMeta(this.options));
 
             if (icon) {
                 if (typeof icon === "string") {

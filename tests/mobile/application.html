@@ -235,6 +235,20 @@
                 ok($("#qunit-fixture").hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
             });
 
+            test("Sets web-app-capable meta to yes by default", 1, function() {
+                setup('<div data-role="view" />', {});
+
+                ok($("meta[name=apple-mobile-web-app-capable]").attr("content") == "yes");
+            });
+
+            test("Sets web-app-capable meta to no if disabled explicitly", 1, function() {
+                setup('<div data-role="view" />', {
+                    webAppCapable: false
+                });
+
+                ok($("meta[name=apple-mobile-web-app-capable]").attr("content") == "no");
+            });
+
             test("Force platform layout", 1, function() {
                 setup('<div data-role="view" />', {
                     platform: "android"
