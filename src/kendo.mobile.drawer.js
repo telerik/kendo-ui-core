@@ -44,6 +44,7 @@ kendo_module({
 
             this.userEvents = new kendo.UserEvents(this.pane.element, {
                 filter: roleSelector("view"),
+                allowSelection: true,
                 start: function(e) { drawer._start(e); },
                 move: function(e) { drawer._update(e); },
                 end: function(e) { drawer._end(e); },
@@ -164,7 +165,7 @@ kendo_module({
             var userEvents = e.sender;
 
             // ignore non-horizontal swipes
-            if (Math.abs(e.x.velocity) < Math.abs(e.y.velocity)) {
+            if (Math.abs(e.x.velocity) < Math.abs(e.y.velocity) || kendo.triggeredByInput(e.event)) {
                 userEvents.cancel();
                 return;
             }
