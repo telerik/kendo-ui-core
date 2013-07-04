@@ -1156,6 +1156,8 @@ p#copy
 .schedulerIcon{background-position:0 -140px;}
 .barcodeIcon{background-position:-20px -140px;}
 .qrcodeIcon{background-position:-40px -140px;}
+.chartRadarIcon{background-position:-60px -140px;}
+.chartPolarIcon{background-position:-80px -140px;}
 
 #mainWrapInner
 {
