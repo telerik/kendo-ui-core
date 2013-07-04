@@ -24,6 +24,8 @@ namespace Kendo.Mvc.UI
 
             UpdateDocumentTitle = true;
 
+            WebAppCapable = true;
+
         //>> Initialization
         
         //<< Initialization
@@ -49,6 +51,8 @@ namespace Kendo.Mvc.UI
         
         public string Transition { get; set; }
         
+        public bool WebAppCapable { get; set; }
+        
         public bool PushState { get; set; }
         
         //<< Fields
@@ -66,6 +70,11 @@ namespace Kendo.Mvc.UI
             if (Skin.HasValue())
             {
                 options.Add("skin", Skin);
+            }
+
+            if (!WebAppCapable)
+            {
+                options.Add("webAppCapable", false);
             }
 
             if (Layout.HasValue())

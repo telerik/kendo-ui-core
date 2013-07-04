@@ -122,6 +122,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Disables the default behavior of Kendo UI Mobile apps to be web app capable (open in a chromeless browser). Introduced in Q2 2013.
+        /// </summary>
+        /// <param name="value">The value that configures the webappcapable.</param>
+        public MobileApplicationBuilder WebAppCapable(bool value)
+        {
+            container.WebAppCapable = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// Specifies how history should be handled
         /// </summary>
         /// <param name="value">The value that configures the pushstate.</param>
