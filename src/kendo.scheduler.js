@@ -1505,6 +1505,12 @@ kendo_module({
                 that.view($(this).attr(kendo.attr("name")));
                 e.preventDefault();
             });
+
+            toolbar.find("li").hover(function(){
+                    $(this).addClass("k-state-hover");
+                }, function(){
+                    $(this).removeClass("k-state-hover");
+                });
         },
 
         _showCalendar: function() {

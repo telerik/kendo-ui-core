@@ -3746,7 +3746,17 @@ div.k-slider
 .k-scheduler-toolbar .k-nav-current .k-link
 {
     padding:0;
+}
+
+.k-scheduler-toolbar .k-nav-current
+{
     margin:0 1.1em;
+}
+
+.k-scheduler .k-scheduler-toolbar .k-nav-current,
+.k-scheduler .k-nav-current > .k-state-active
+{
+    background: none;
 }
 
 .k-scheduler-toolbar .k-i-calendar,
@@ -4265,7 +4275,7 @@ div.k-scheduler-marquee:after
 .k-scheduler-agendaweek
 {
     display:block;
-    margin:.3em 0 .1em;
+    margin:.4em 0 0;
     font-size:1.1em;
     font-style:normal;
 }

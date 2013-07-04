@@ -24,7 +24,7 @@ kendo_module({
 
             this.element.on("mouseenter" + NS, ".k-scheduler-agenda .k-scheduler-content tr", "_mouseenter")
                         .on("mouseleave" + NS, ".k-scheduler-agenda .k-scheduler-content tr", "_mouseleave")
-                        .on("click" + NS, ".k-scheduler-agenda .k-scheduler-content .k-link:has(.k-i-close)", "_remove");
+                        .on("click" + NS, ".k-scheduler-agenda .k-scheduler-content .k-link:has(.k-si-close)", "_remove");
 
             this._renderLayout(this.options.date);
         },
@@ -206,7 +206,7 @@ kendo_module({
                                '<span class="k-icon k-i-refresh"></span>' +
                                "# } #" +
                                '#:title#' +
-                               '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-i-close"></span></a>' +
+                               '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
                            '</div>',
             eventTimeTemplate: "#if(data.isAllDay) {#" +
                             "all day" +
