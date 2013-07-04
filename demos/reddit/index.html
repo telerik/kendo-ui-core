@@ -39,7 +39,7 @@
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
-                    <a href="#canvas" data-role="button" data-align="right">Canvas</a>
+                    <a href="#canvas" data-role="button" data-transition="slide" data-align="right">Canvas</a>
                 </div>
             </header>
 
@@ -59,17 +59,17 @@
             <div class="detail-text"></div>
         </div>
 
-        <div data-role="view" id="canvas" data-transition="slide" data-stretch="true" data-title="Canvas View" data-init="canvasInit" data-show="canvasShow">
+        <div data-role="view" id="canvas" data-stretch="true" data-title="Canvas View" data-init="canvasInit" data-show="canvasShow">
             <header data-role="header">
                 <div data-role="navbar">
-                    <a data-role="backbutton" data-align="left">Back</a>
+                    <a data-role="backbutton" href="#list" data-transition="slide:left reverse" data-align="left">Back</a>
                     <span data-role="view-title">&nbsp;</span>
                 </div>
             </header>
             <div id="canvas-scrollview"></div>
         </div>
 
-        <div id="canvas-detail" data-role="view" data-transition="slide:up" data-stretch="true" data-init="canvasDetailInit" data-show="canvasDetailShow">
+        <div id="canvas-detail" data-role="view" data-transition="overlay:up" data-stretch="true" data-init="canvasDetailInit" data-show="canvasDetailShow">
             <header data-role="header">
                 <div data-role="navbar">
                     <a data-role="button" data-click="goToCanvas" data-align="left">Canvas</a>

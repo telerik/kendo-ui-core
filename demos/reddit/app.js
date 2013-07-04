@@ -197,7 +197,7 @@ function goToCanvas(e) {
         canvasPage;
 
     canvasPage = Math.floor(offset / canvasScrollView.options.itemsPerPage);
-    app.navigate("#canvas?offset=" + canvasPage);
+    app.navigate("#canvas?offset=" + canvasPage, "overlay:up reverse");
 }
 
 function canvasDetailInit(e) {
