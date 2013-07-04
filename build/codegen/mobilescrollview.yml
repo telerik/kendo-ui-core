@@ -6,3 +6,7 @@
     - :name: fitItemPerPage
       :type: Boolean
       :description: Specifies whether exactly one item per page must be shown
+
+    - :name: contentHeight
+      :type: String
+      :description: The height of the ScrollView content.

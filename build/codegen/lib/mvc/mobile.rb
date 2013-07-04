@@ -32,6 +32,7 @@ module CodeGen::MVC::Mobile
             'scrollview.pagesize',
             'scrollview.velocitythreshold',
             'scrollview.bouncevelocitythreshold',
+            'scrollview.datasource',
             'drawer.views'
         ]
 
@@ -166,7 +167,8 @@ module CodeGen::MVC::Mobile
             end
 
             def csharp_name
-                name.slice(0,1).capitalize + name.slice(1..-1)
+                postfix = name[/template$/i].nil? ? "" : "Id"
+                name.slice(0,1).capitalize + name.slice(1..-1) + postfix
             end
 
             def full_name

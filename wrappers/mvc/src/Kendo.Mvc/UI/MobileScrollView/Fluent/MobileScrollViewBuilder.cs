@@ -23,6 +23,28 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the data source is fired. By default the widget will bind to the data source specified in the configuration.Applicable only in data bound mode.
+        /// </summary>
+        /// <param name="value">The value that configures the autobind.</param>
+        public MobileScrollViewBuilder AutoBind(bool value)
+        {
+            container.AutoBind = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The size of the buffer. Determines how many data items will be displayed on a single page.Applicable only in data bound mode.
+        /// </summary>
+        /// <param name="value">The value that configures the batchsize.</param>
+        public MobileScrollViewBuilder BatchSize(int value)
+        {
+            container.BatchSize = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The milliseconds that take the ScrollView to snap to the current page after released.
         /// </summary>
         /// <param name="value">The value that configures the duration.</param>
@@ -34,12 +56,45 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// The template which is used to render the pages without content. By default the ScrollView renders a blank page.Applicable only in data bound mode.
+        /// </summary>
+        /// <param name="value">The value that configures the emptytemplateid.</param>
+        public MobileScrollViewBuilder EmptyTemplateId(string value)
+        {
+            container.EmptyTemplateId = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// If set to true the ScrollView will display a pager. By default pager is enabled.
+        /// </summary>
+        /// <param name="value">The value that configures the enablepager.</param>
+        public MobileScrollViewBuilder EnablePager(bool value)
+        {
+            container.EnablePager = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The initial page to display.
         /// </summary>
         /// <param name="value">The value that configures the page.</param>
         public MobileScrollViewBuilder Page(int value)
         {
             container.Page = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The template which is used to render the content of pages. By default the ScrollView renders a div element for every page.Applicable only in data bound mode.
+        /// </summary>
+        /// <param name="value">The value that configures the templateid.</param>
+        public MobileScrollViewBuilder TemplateId(string value)
+        {
+            container.TemplateId = value;
 
             return this;
         }
@@ -62,6 +117,17 @@ namespace Kendo.Mvc.UI.Fluent
         public MobileScrollViewBuilder FitItemPerPage(bool value)
         {
             container.FitItemPerPage = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The height of the ScrollView content.
+        /// </summary>
+        /// <param name="value">The value that configures the contentheight.</param>
+        public MobileScrollViewBuilder ContentHeight(string value)
+        {
+            container.ContentHeight = value;
 
             return this;
         }
@@ -111,7 +177,29 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new MobileScrollViewItemFactory(container.Items));
             return this;
         }
-        
+
+        /// <summary>
+        /// The height of the ScrollView content.
+        /// </summary>
+        /// <param name="value">The value that configures the contentheight.</param>
+        public MobileScrollViewBuilder ContentHeight(int value)
+        {
+            container.ContentHeight = value + "px";
+
+            return this;
+        }
+
+        /// <summary>
+        /// Instance of DataSource or the data that the mobile ScrollView will be bound to.
+        /// </summary>
+        /// <param name="configurator">The value that configures the datasource.</param>
+        public MobileScrollViewBuilder DataSource(Action<ReadOnlyDataSourceBuilder> configurator)
+        {
+            configurator(new ReadOnlyDataSourceBuilder(Component.DataSource, Component.ViewContext, Component.UrlGenerator));
+
+            return this;
+        }
+
         /// <summary>
         /// Configures the client-side events.
         /// </summary>

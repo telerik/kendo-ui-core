@@ -27,6 +27,20 @@ namespace Kendo.Mvc.UI
 
             VelocityThreshold = 0.8;
 
+            EnablePager = true;
+
+            AutoBind = true;
+
+            DataSource = new DataSource()
+            {
+                Type = DataSourceType.Ajax,
+                ServerAggregates = true,
+                ServerFiltering = true,
+                ServerGrouping = true,
+                ServerPaging = true,
+                ServerSorting = true
+            };            
+
 //>> Initialization
         
         //<< Initialization
@@ -34,13 +48,25 @@ namespace Kendo.Mvc.UI
 
 //>> Fields
         
+        public bool AutoBind { get; set; }
+        
+        public int BatchSize { get; set; }
+        
         public int Duration { get; set; }
         
+        public string EmptyTemplateId { get; set; }
+        
+        public bool EnablePager { get; set; }
+        
         public int Page { get; set; }
+        
+        public string TemplateId { get; set; }
         
         public string ItemTagName { get; set; }
         
         public bool FitItemPerPage { get; set; }
+        
+        public string ContentHeight { get; set; }
         
         //<< Fields
 
@@ -54,6 +80,20 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
+        }
+
+        public DataSource DataSource
+        {
+            get;
+            private set;
+        }
+
+        public IUrlGenerator UrlGenerator
+        {
+            get
+            {
+                return urlGenerator;
+            }
         }
 
         public override void WriteInitializationScript(TextWriter writer)
