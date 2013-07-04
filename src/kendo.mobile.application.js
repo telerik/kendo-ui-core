@@ -157,6 +157,21 @@ kendo_module({
             return this.pane.view();
         },
 
+        skin: function(skin) {
+            var that = this;
+
+            if (!arguments.length) {
+                return that.options.skin;
+            }
+
+            that.options.skin = skin || "";
+            that.element[0].className = "km-pane";
+            that._setupPlatform();
+            that._setupElementClass();
+
+            return that.options.skin;
+        },
+
         _setupPlatform: function() {
             var that = this,
                 platform = that.options.platform,

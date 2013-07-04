@@ -249,6 +249,39 @@
                 ok($("meta[name=apple-mobile-web-app-capable]").attr("content") == "no");
             });
 
+            test("skin method returns the current skin", 1, function() {
+                setup('<div data-role="view" />', {
+                    skin: "flat"
+                });
+
+                ok(application.skin() == "flat");
+            });
+
+            test("Setting the skin changes the Application styling", 3, function() {
+                setup('<div data-role="view" />', {
+                    platform: "ios"
+                });
+
+                application.skin("flat");
+
+                ok(application.skin() == "flat");
+                ok(!application.element.hasClass("km-ios"));
+                ok(application.element.hasClass("km-flat"));
+            });
+
+            test("Setting the skin to empty changes the Application styling", 3, function() {
+                setup('<div data-role="view" />', {
+                    platform: "ios",
+                    skin: "flat"
+                });
+
+                application.skin("");
+
+                ok(application.skin() == "");
+                ok(application.element.hasClass("km-ios"));
+                ok(!application.element.hasClass("km-flat"));
+            });
+
             test("Force platform layout", 1, function() {
                 setup('<div data-role="view" />', {
                     platform: "android"
