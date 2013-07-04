@@ -150,7 +150,9 @@ kendo_module({
             Widget.fn.init.call(this, element, options);
             this._scrollbar = kendo.support.scrollbar();
             isRtl = kendo.support.isRtl(element);
+            this._resizeHint = $();
         },
+
         dateForTitle: function() {
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
         },
@@ -166,6 +168,7 @@ kendo_module({
 
         _removeResizeHint: function() {
             this._resizeHint.remove();
+            this._resizeHint = $();
         },
 
         eventResources: function(event) {

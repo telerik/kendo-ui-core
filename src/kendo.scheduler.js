@@ -502,31 +502,36 @@ kendo_module({
                 dragstart: function(e) {
                     var dragHandle = $(e.currentTarget);
 
-                    var dir = direction(dragHandle);
-
                     var eventElement = dragHandle.closest(".k-event");
 
-                    var offset = eventElement.offset();
+                    var uid = eventElement.attr(kendo.attr("uid"));
 
                     var view = that.view();
 
+                    var events = this.element.find(kendo.format(".k-event[{0}={1}]", kendo.attr("uid"), uid));
+
+                    eventElement = events.first();
+
+                    var offset = eventElement.offset();
+
                     startSlot = view._slotByPosition(offset.left, offset.top);
 
+                    eventElement = events.last();
+
+                    offset = eventElement.offset();
+
                     offset.left += eventElement[0].clientWidth;
+
                     offset.top += eventElement[0].clientHeight;
 
                     endSlot = view._slotByPosition(offset.left, offset.top);
 
-                    event = that.dataSource.getByUid(eventElement.attr(kendo.attr("uid")));
-
-                    view._createResizeHint(dir, event, startSlot, endSlot);
+                    event = that.dataSource.getByUid(uid);
                 },
                 drag: function(e) {
                     var dragHandle = $(e.currentTarget);
 
                     var dir = direction(dragHandle);
-
-                    var eventElement = dragHandle.closest(".k-event");
 
                     var view = that.view();
 
