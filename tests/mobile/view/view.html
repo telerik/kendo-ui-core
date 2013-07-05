@@ -77,7 +77,6 @@
 
             test("initializes mobile widgets in given templates when binding", 1, function() {
                 setup('<div data-model="viewModel" data-role="view"><div data-bind="source: items" data-template="items-template"></div></div>');
-                debugger;
                 ok(root.find("a").eq(0).data("kendoMobileButton"));
             });
 
