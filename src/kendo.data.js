@@ -3785,7 +3785,7 @@ kendo_module({
 
             this.dataSource = dataSource;
             this.batchSize = batchSize;
-            this.total = 0;
+            this._total = 0;
 
             this.buffer = new Buffer(dataSource, batchSize * 3);
 
@@ -3800,12 +3800,12 @@ kendo_module({
                     batchBuffer.trigger("prefetched", { skip: e.skip, take: e.take });
                 },
                 "reset": function () {
-                    batchBuffer.total = 0;
+                    batchBuffer._total = 0;
                     batchBuffer.trigger("reset");
                 },
                 "resize": function () {
-                    batchBuffer.total = this.length / batchBuffer.batchSize;
-                    batchBuffer.trigger("resize", { total: batchBuffer.total, offset: this.offset });
+                    batchBuffer._total = this.length / batchBuffer.batchSize;
+                    batchBuffer.trigger("resize", { total: batchBuffer.total(), offset: this.offset });
                 }
             });
         },
@@ -3836,6 +3836,10 @@ kendo_module({
             }
 
             return view;
+        },
+
+        total: function() {
+            return this._total;
         }
     });
 
