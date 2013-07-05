@@ -1158,7 +1158,7 @@ div.k-imagebrowser-dropzone em
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input
 {
-    .border-radius(@main-border-radius 0 0 @main-border-radius);
+    .border-radius(@inner-border-radius 0 0 @inner-border-radius);
 }
 
 .k-numeric-wrap .k-link
@@ -1407,6 +1407,19 @@ div.k-imagebrowser-dropzone em
     border-color: @menu-border-color;
 }
 
+.k-column-menu,
+.k-column-menu .k-item
+{
+	border-color: @secondary-border-color;
+}
+
+
+.k-column-menu .k-separator
+{
+	border-color: @secondary-border-color;
+	background-color: transparent;
+}
+
 .k-menu .k-group
 {
     border-color: @group-border-color;
@@ -1537,6 +1550,7 @@ div.k-imagebrowser-dropzone em
 .k-grid .k-grouping-header,
 .k-grid-header,
 .k-pager-wrap,
+.k-pager-wrap .k-link,
 .k-grouping-header .k-group-indicator
 {
     border-color: @secondary-border-color;
@@ -1557,4 +1571,11 @@ div.k-imagebrowser-dropzone em
         background-image: url('@{image-folder}/sprite_2x.png');
         background-size: 340px 336px;
     }
+	.k-dropdown-wrap .k-input,
+	.k-picker-wrap .k-input,
+	.k-numeric-wrap .k-input
+	{
+		.border-radius(@inner-border-radius 0 0 @inner-border-radius);
+	}
+	
 }
