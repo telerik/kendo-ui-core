@@ -2263,8 +2263,8 @@ kendo_module({
 
             that._addRange(that._data);
 
-            that._dequeueRequest();
             that._process(that._data);
+            that._dequeueRequest();
         },
 
         _addRange: function(data) {
