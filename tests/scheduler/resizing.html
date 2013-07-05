@@ -706,11 +706,11 @@
                     date: new Date("2013/6/6"),
                     views: ["month"],
                     dataSource: [
-                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:30"), title: "", recurrenceRule: "FREQ=DAILY;COUNT=2" }
+                        { id: 1, start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:30"), title: "", recurrenceRule: "FREQ=DAILY;COUNT=2" }
                     ]
                 });
 
-                var handle = div.find(".k-resize-w");
+                var handle = div.find(".k-resize-w:last");
 
                 var slots = div.find(".k-scheduler-content td.k-other-month");
 

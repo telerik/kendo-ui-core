@@ -47,7 +47,8 @@
                     document.body.appendChild(container);
                 },
                 teardown: function() {
-                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                    kendo.destroy($(container).closest(".k-scheduler"));
+                    $(".k-widget").remove();
                 }
             });
 
@@ -497,7 +498,8 @@
                     document.body.appendChild(container);
                 },
                 teardown: function() {
-                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                    kendo.destroy($(container).closest(".k-scheduler"));
+                    $(".k-widget").remove();
                 }
             });
 
@@ -512,11 +514,10 @@
                 var eventUID = scheduler.element.find(".k-event:last").data("uid");
                 scheduler.editEvent(eventUID);
 
-                ok(scheduler._recurringDialog);
-                ok(scheduler._recurringDialog.element.is(":visible"));
+                ok($(".k-window").find(".k-window-title").text(), "Edit Recurring Item");
             });
 
-            test("close recurring dialog on button click", function() {
+            test("close recurring dialog on button click", 1, function() {
                 var scheduler = setup({
                     views: ["week"],
                     dataSource: {
@@ -532,10 +533,11 @@
 
                 scheduler.editEvent(eventUID);
 
-                //edit current instance
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                var popup = $(".k-window");
 
-                equal(scheduler._recurringDialog, null);
+                popup.find(".k-button:first").click();
+
+                equal(popup.is(":visible"), false);
             });
 
             test("Set timezone to the RecurrenceEditor", function() {
@@ -548,7 +550,9 @@
                 });
 
                 scheduler.editEvent(scheduler.element.find(".k-event:last").data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                $(".k-window .k-button:first").click();
+
                 var editor = scheduler._editContainer.find("[data-role=recurrenceeditor]").data("kendoRecurrenceEditor");
 
                 equal(editor.options.timezone, "Etc/UTC");
@@ -571,7 +575,7 @@
                 scheduler.editEvent(eventUID);
 
                 //edit current instance
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                $(".k-window .k-button:first").click();
 
                 equal(scheduler.calls("addEvent"), 1);
             });
@@ -590,7 +594,7 @@
                     exception;
 
                 scheduler.editEvent(eventUID);
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                $(".k-window .k-button:first").click();
 
                 exception = scheduler.dataSource.at(1);
 
@@ -611,7 +615,8 @@
                     exception;
 
                 scheduler.editEvent(eventUID);
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                $(".k-window .k-button:first").click();
 
                 exception = scheduler.dataSource.at(1);
 
@@ -632,7 +637,8 @@
                     exception;
 
                 scheduler.editEvent(eventUID);
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                $(".k-window .k-button:first").click();
 
                 exception = scheduler.dataSource.at(1);
 
@@ -654,41 +660,22 @@
                     origin = scheduler.dataSource.at(0);
 
                 scheduler.editEvent(events.last().data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                $(".k-window .k-button:first").click();
                 scheduler._editContainer.find("a.k-scheduler-update").click();
 
                 events = scheduler.element.find(".k-event");
 
                 scheduler.editEvent(events.first().data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                $(".k-window .k-button:first").click();
+
                 scheduler._editContainer.find("a.k-scheduler-update").click();
 
                 var result = kendo.toString(kendo.timezone.apply(scheduler.dataSource.at(1).start, 0), "yyyyMMddTHHmmssZ") + ";" +
                              kendo.toString(kendo.timezone.apply(scheduler.dataSource.at(2).start, 0), "yyyyMMddTHHmmssZ") + ";";
 
                 equal(origin.recurrenceException, result);
-            });
-
-            test("create exception does not open recurring window twice", function() {
-                var scheduler = setup({
-                    views: ["week"],
-                    dataSource: {
-                        data: [ { id: "1", start: new Date(), end: new Date(), title: "my event", recurrenceRule: "FREQ=DAILY"} ]
-                    }
-                });
-
-                var eventUID = scheduler.element.find(".k-event:last").data("uid");
-
-                stub(scheduler, {
-                    addEvent: scheduler.addEvent
-                });
-
-                scheduler.editEvent(eventUID);
-
-                //edit current instance
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
-
-                ok(!scheduler._recurringDialog);
             });
 
             test("Editing exception opens recurring dialog", function() {
@@ -703,7 +690,9 @@
                     origin = scheduler.dataSource.at(0);
 
                 scheduler.editEvent(events.last().data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                $(".k-window .k-button:first").click();
+
                 scheduler._editContainer.find("a.k-scheduler-update").click();
 
                 events = scheduler.element.find(".k-event");
@@ -716,7 +705,8 @@
                 scheduler.dataSource.at(1).set("id", 2);
                 scheduler.editEvent(events.last().data("uid"));
 
-                ok(scheduler._recurringDialog.element.is(":visible"));
+                ok($(".k-window").find(".k-window-title").text(), "Edit Recurring Item");
+                ok($(".k-window").is(":visible"));
             });
 
             test("open recurring window if editing old exception", function() {
@@ -732,7 +722,7 @@
                     exception;
 
                 scheduler.editEvent(eventUID);
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+                $(".k-window .k-button:first").click();
 
                 exception = scheduler.dataSource.at(1);
 
@@ -753,7 +743,8 @@
                     exception;
 
                 scheduler.editEvent(eventUID);
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                $(".k-window .k-button:first").click();
 
                 exception = scheduler.dataSource.at(1);
 
@@ -779,7 +770,7 @@
                 scheduler.editEvent(eventUID);
 
                 //edit current instance
-                scheduler._recurringDialog.element.find("button:last").triggerHandler("click");
+                $(".k-window .k-button:last").click();
 
                 var model = scheduler.args("_editEvent", 0)[0];
 
@@ -798,7 +789,9 @@
                 var event = scheduler.element.find(".k-event:last");
 
                 scheduler.editEvent(event.data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                $(".k-window .k-button:first").click();
+
                 scheduler._editContainer.find("a.k-scheduler-update").click();
                 scheduler.dataSource.at(1).set("id", 2);
 
@@ -806,7 +799,7 @@
                 scheduler.editEvent(eventUID);
 
                 //edit current instance
-                scheduler._recurringDialog.element.find("button:last").triggerHandler("click");
+                $(".k-window .k-button:last").click();
 
                 var model = scheduler.dataSource.at(0);
 
@@ -829,7 +822,9 @@
                 });
 
                 scheduler.removeEvent(scheduler.element.find(".k-event").eq(2).data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click");
+
+                $(".k-window .k-button:first").click();
+
                 $(document.body).find("[data-role=window]:visible").data("kendoWindow").destroy();
 
                 var model = scheduler.dataSource.at(0);
@@ -857,7 +852,8 @@
                     origin = scheduler.dataSource.at(0);
 
                 scheduler.removeEvent(event.data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click"); //delete current occurrence
+
+                $(".k-window .k-button:first").click(); //delete current occurrence
                 $(document.body).find("[data-role=window]:visible").find(".k-button:first").click(); //accept deletion
 
                 equal(scheduler.dataSource.data().length, 1);
@@ -876,7 +872,7 @@
                 });
 
                 scheduler.removeEvent(scheduler.element.find(".k-event").eq(2).data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click"); //delete current occurrence
+                $(".k-window .k-button:first").click(); //delete current occurrence
                 $(document.body).find("[data-role=window]:visible").find(".k-button:last").click(); //cancel deletion
 
                 var model = scheduler.dataSource.at(0);
@@ -897,7 +893,7 @@
                 });
 
                 scheduler.removeEvent(scheduler.element.find(".k-event").eq(2).data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click"); //delete current occurrence
+                $(".k-window .k-button:first").click(); //delete current occurrence
                 $(document.body).find("[data-role=window]:visible").find(".k-button:last").click(); //cancel deletion
 
                 var model = scheduler.dataSource.at(0);
@@ -924,7 +920,9 @@
                 var event = scheduler.element.find(".k-event").eq(1);
 
                 scheduler.removeEvent(event.data("uid"));
-                scheduler._recurringDialog.element.find("button:last").triggerHandler("click"); //delete series
+
+                $(".k-window .k-button:last").click(); //delete series
+
                 $(document.body).find("[data-role=window]:visible").find(".k-button:first").click(); //accept deletion
 
                 equal(scheduler.dataSource.data().length, 0);
@@ -949,7 +947,7 @@
                 var event = scheduler.element.find(".k-event").eq(2);
 
                 scheduler.removeEvent(event.data("uid"));
-                scheduler._recurringDialog.element.find("button:first").triggerHandler("click"); //delete current occurrence
+                $(".k-window .k-button:first").click(); //delete current occurrence
                 $(document.body).find("[data-role=window]:visible").find(".k-button:last").click(); //cancel deletion
 
                 ok(scheduler.dataSource.at(0).recurrenceRule);
@@ -992,7 +990,8 @@
                     document.body.appendChild(container);
                 },
                 teardown: function() {
-                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                    kendo.destroy($(container).closest(".k-scheduler"));
+                    $(".k-widget").remove();
                 }
             });
 
