@@ -546,11 +546,11 @@ kendo_module({
                     }
 
                     if (dir == "south") {
-                        if (getMilliseconds(slot.end) - getMilliseconds(event.start) >= kendo.date.MS_PER_MINUTE * 30) {
+                        if (getMilliseconds(slot.end) - getMilliseconds(event.start) >= view._timeSlotInterval()) {
                             endSlot = slot;
                         }
                     } else if (dir == "north") {
-                        if (getMilliseconds(event.end) - getMilliseconds(slot.start) >= kendo.date.MS_PER_MINUTE * 30) {
+                        if (getMilliseconds(event.end) - getMilliseconds(slot.start) >= view._timeSlotInterval()) {
                             startSlot = slot;
                         }
                     } else if (dir == "east") {
@@ -600,18 +600,65 @@ kendo_module({
         },
 
         _updateEvent: function(event, eventInfo) {
-            if (event.recurrenceId) {
-                event = this.dataSource.get(event.recurrenceId);
+            var that = this;
+
+            var updateEvent = function(event) {
+                if (event.recurrenceId) {
+                    that._removeExceptionDate(event);
+                }
+
+                for (var field in eventInfo) {
+                    event.set(field, eventInfo[field]);
+                }
+
+                if (event.recurrenceId) {
+                    that._addExceptionDate(event);
+                }
+
+                if (!that.trigger(SAVE, { model: event })) {
+                    that.dataSource.sync();
+                }
+            };
+
+            var updateSeries = function() {
+                updateEvent(that.dataSource.get(event.recurrenceId));
+            };
+
+            var updateOcurrence = function() {
+                var head = that.dataSource.get(event.recurrenceId);
+
+                var exception = head.toJSON();
+
+                delete exception[head.idField];
+                delete exception.recurrenceRule;
+                delete exception.id;
+
+                exception.recurrenceId = head.id;
+
+                exception = that.dataSource.add(exception);
+
+                for (var field in eventInfo) {
+                    exception.set(field, eventInfo[field]);
+                }
+
+                that._addExceptionDate(exception);
+
+                if (!that.trigger(SAVE, { model: exception })) {
+                    that.dataSource.sync();
+                }
+            };
+
+            if (event.recurrenceId && !event.id) {
+                that.showDialog({
+                    title: "Edit Recurring Item",
+                    text: EDITRECURRING,
+                    buttons: [
+                        { text: "Edit current occurrence", click: updateOcurrence },
+                        { text: "Edit the series", click: updateSeries }
+                    ]
+                });
             } else {
-                event = this.dataSource.getByUid(event.uid);
-            }
-
-            for (var field in eventInfo) {
-                event.set(field, eventInfo[field]);
-            }
-
-            if (!this.trigger(SAVE, { model: event })) {
-                this.dataSource.sync();
+                updateEvent(that.dataSource.getByUid(event.uid));
             }
         },
 
@@ -1035,7 +1082,7 @@ kendo_module({
                     model = that.dataSource.get(model.recurrenceId);
                 }
 
-                that._removeExcetionEvents(model);
+                that._removeExceptions(model);
                 model.set("recurrenceException", "");
                 that._editEvent(model);
             };
@@ -1121,7 +1168,7 @@ kendo_module({
                     that._removeExceptionDate(model);
                 } else if (!that.trigger(REMOVE, { event: model })) {
                     if (removeExceptions) {
-                        that._removeExcetionEvents(model);
+                        that._removeExceptions(model);
                     }
 
                     if (that.dataSource.remove(model)) {
@@ -1180,7 +1227,7 @@ kendo_module({
             });
         },
 
-        _removeExcetionEvents: function(model) {
+        _removeExceptions: function(model) {
             var dataSource = this.dataSource,
                 data = dataSource.data(),
                 length = data.length,

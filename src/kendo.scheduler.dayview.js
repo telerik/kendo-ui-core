@@ -617,11 +617,13 @@ kendo_module({
         },
 
         _slotIndexTime: function(index) {
-            var options = this.options,
-                startTime = getMilliseconds(options.startTime),
-                timeSlotInterval = ((options.majorTick/options.minorTickCount) * MS_PER_MINUTE);
+            return getMilliseconds(this.options.startTime) + this._timeSlotInterval() * index;
+        },
 
-            return startTime + timeSlotInterval * index;
+        _timeSlotInterval: function() {
+            var options = this.options;
+
+            return (options.majorTick/options.minorTickCount) * MS_PER_MINUTE;
         },
 
         _rangeByIndex: function(rowIndex, cellIndex, maxTimeSlotIndex) {
