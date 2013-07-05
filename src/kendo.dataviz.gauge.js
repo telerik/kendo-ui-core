@@ -1254,17 +1254,6 @@ kendo_module({
             }
         },
 
-        svg: function() {
-            var model = this._getModel(),
-                view = new dataviz.SVGView(model.options);
-
-            // TODO: Throw meaningful error message if SVGView is not loaded
-            // TODO: Add as static method to share between Chart/Gauge?
-            view.load(model);
-
-            return view.render();
-        },
-
         _createModel: function() {
             var gauge = this,
                 options = gauge.options,
@@ -1294,6 +1283,7 @@ kendo_module({
             return { width: width, height: height };
         }
     });
+    deepExtend(Gauge.fn, dataviz.ExportMixin);
 
     var RadialGauge = Gauge.extend({
         init: function(element, options) {

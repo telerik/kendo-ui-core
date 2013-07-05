@@ -3449,7 +3449,7 @@ kendo_module({
 
                 return view.renderTo(container).toDataURL();
             } else {
-                throw new Error("Unable to create CanvasView. Check that kendo.canvas.svg.js is loaded.");
+                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
             }
         }
     };

@@ -12,6 +12,7 @@
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.gauge.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.canvas.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="../chart/util.js"></script>
         <script>
@@ -20,7 +21,7 @@
                 gauge;
 
             (function() {
-                function createRadialGauge(options) {
+                function createGauge(options) {
                     gaugeElement = $("<div />").kendoRadialGauge(kendo.deepExtend({
                         pointer: {
                             value: 50
@@ -35,9 +36,10 @@
                     gauge = gaugeElement.data("kendoRadialGauge");
                 }
 
-                module("Gauge API / Radial", {
+                // ------------------------------------------------------------
+                module("Radial Gauge / API", {
                     setup: function() {
-                        createRadialGauge();
+                        createGauge();
                     }
                 });
 
@@ -57,7 +59,7 @@
                 });
 
                 test("value(x) does not fail with transitions disabled", function() {
-                    createRadialGauge({ transitions: false });
+                    createGauge({ transitions: false });
                     gauge.value(10);
                     ok(true);
                 });
@@ -68,8 +70,29 @@
                     equal(gauge.value(), 11);
                 });
 
+                // ------------------------------------------------------------
+                module("Radial Gauge / API / Export", {
+                    setup: function() {
+                        createGauge();
+
+                        SVGView = dataviz.SVGView;
+                        CanvasView = dataviz.CanvasView;
+                    },
+                    teardown: function() {
+                        dataviz.SVGView = SVGView;
+                        dataviz.CanvasView = CanvasView;
+                    }
+                });
+
                 test("svg() exports SVG", function() {
                     ok(gauge.svg().match(/<svg.*<\/svg>/));
+                });
+
+                test("svg() throws error if SVGView is not loaded", function() {
+                    dataviz.SVGView = undefined;
+
+                    throws(function() { gauge.svg() },
+                           "Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
                 });
 
                 test("svg() does not replace model", function() {
@@ -81,6 +104,29 @@
                 test("svg() does not replace view", function() {
                     var oldView = gauge._view;
                     gauge.svg();
+                    ok(oldView === gauge._view);
+                });
+
+                test("imageDataURL() exports image/png", function() {
+                    ok(gauge.imageDataURL().match(/image\/png/));
+                });
+
+                test("imageDataURL() throws error if CanvasView is not loaded", function() {
+                    dataviz.CanvasView = undefined;
+
+                    throws(function() { gauge.imageDataURL() },
+                           "Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+                });
+
+                test("imageDataURL() does not replace model", function() {
+                    var oldModel = gauge._model;
+                    gauge.imageDataURL();
+                    ok(oldModel === gauge._model);
+                });
+
+                test("imageDataURL() does not replace view", function() {
+                    var oldView = gauge._view;
+                    gauge.imageDataURL();
                     ok(oldView === gauge._view);
                 });
 
@@ -102,7 +148,7 @@
                     gauge = gaugeElement.data("kendoRadialGauge");
                 }
 
-                module("Gauge API / Linear", {
+                module("Linear Gauge / API", {
                     setup: function() {
                         gaugeElement = $("<div />").kendoLinearGauge({
                             pointer: {

@@ -1,7 +1,7 @@
 kendo_module({
     id: "dataviz.canvas",
     name: "Output: Canvas",
-    description: "Support for Canvas rendering",
+    description: "Support for Canvas rendering and image export",
     category: "dataviz",
     depends: [ "dataviz.core" ]
 });
