@@ -427,7 +427,19 @@ kendo_module({
                 }
             }
         },
+
+        _isGroupedByDate: function() {
+            return $.inArray("date", this.options.resourcesGroups) > -1;
+        },
+
         _createColumnsLayout: function(resources, inner) {
+            if (this._isGroupedByDate()) {
+                for (var idx = 0, length = inner.length; idx < length; idx++) {
+                    inner[idx].columns = createLayoutConfiguration("columns", resources);
+                }
+                return inner;
+            }
+
             return createLayoutConfiguration("columns", resources, inner);
         },
 
@@ -557,8 +569,9 @@ kendo_module({
             var options = that.options;
             var start = options.startTime;
             var end = options.endTime;
-            var columnCount = 1;
+            var groupsCount = 1;
             var rowCount = 1;
+            var columnCount = dates.length;
             var html = '';
             var resources = this.groupedResources;
             var allDayVerticalGroupRow = "";
@@ -570,8 +583,14 @@ kendo_module({
                         allDayVerticalGroupRow = '<tr class="k-scheduler-header-all-day">' + new Array(dates.length + 1).join("<td>&nbsp;</td>") + '</tr>';
                     }
                 } else {
-                    columnCount = this.columnLevels[this.columnLevels.length - 2].length;
+                    groupsCount = this._columnCountForLevel(this.columnLevels.length - 2);
+
+                    if (this._isGroupedByDate()) {
+                        groupsCount = this._columnCountForLevel(resources.length);
+                        columnCount = 1;
+                    }
                 }
+
             }
 
             html += '<tbody>';
@@ -583,13 +602,15 @@ kendo_module({
 
                 content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
 
-                for (var columnIdx = 0; columnIdx < columnCount; columnIdx++) {
-                    for (idx = 0, length = dates.length; idx < length; idx++) {
+                for (var groupIdx = 0; groupIdx < groupsCount; groupIdx++) {
+                    for (idx = 0, length = columnCount; idx < length; idx++) {
                         content += "<td" + (kendo.date.isToday(dates[idx]) ? ' class="k-today"' : "") + ">";
                         content += "&nbsp;</td>";
                     }
                 }
+
                 content += "</tr>";
+
                 return content;
             };
 
@@ -702,10 +723,8 @@ kendo_module({
             var startTime = getMilliseconds(options.startTime);
             var timeSlotInterval = ((options.majorTick/options.minorTickCount) * MS_PER_MINUTE);
 
-            if (this._isVerticallyGrouped()) {
-                var rowCount = this._rowsCountInGroup();
-                index = index - (rowCount*Math.floor(index/rowCount));
-            }
+            index = this._adjustSlotIndex(index);
+
             return getMilliseconds(this.options.startTime) + this._timeSlotInterval() * index;
         },
 
@@ -721,10 +740,7 @@ kendo_module({
 
             kendo.date.setTime(slotDate, this._slotIndexTime(rowIndex));
 
-            if (this._isVerticallyGrouped()) {
-                var rowCount = this._rowsCountInGroup();
-                maxTimeSlotIndex = maxTimeSlotIndex - (rowCount*Math.floor(maxTimeSlotIndex/rowCount));
-            }
+            maxTimeSlotIndex = this._adjustSlotIndex(maxTimeSlotIndex);
 
             if (rowIndex + 1 > maxTimeSlotIndex) {
                 slotEndDate = kendo.date.nextDay(slotEndDate);
@@ -754,8 +770,7 @@ kendo_module({
             var isVertical = this.options.groupOrientation === "vertical";
 
             if (resources.length && !isVertical) {
-                var columnCount = this._columnCountInGroup();
-                index = index - (columnCount*Math.floor(index/columnCount));
+                index = this._adjustColumnIndex(index);
             }
 
             for (idx = 0, length = slots.length; idx < length; idx++) {
@@ -769,10 +784,32 @@ kendo_module({
             return null;
         },
 
+        _adjustSlotIndex: function(index) {
+            if (this._isVerticallyGrouped()) {
+                var rowCount = this._rowsCountInGroup();
+                return index - (rowCount*Math.floor(index/rowCount));
+            }
+            return index;
+        },
+
+        _adjustColumnIndex: function(index) {
+            var columnCount = this._columnCountInGroup();
+
+            if (this._isGroupedByDate()) {
+                return Math.floor(index/columnCount);
+            }
+
+            return index - columnCount*Math.floor(index/columnCount);
+        },
+
         _columnCountInGroup: function() {
             var resources = this.groupedResources;
 
-            return this.columnLevels[resources.length].length / this.columnLevels[resources.length - 1].length;
+            if (this._isGroupedByDate()) {
+                return this._columnCountForLevel(resources.length)/this._columnCountForLevel(0);
+            }
+
+            return this._columnOffsetForResource(resources.length);
         },
 
         _rowsCountInGroup: function() {
@@ -792,19 +829,23 @@ kendo_module({
         },
 
         _dateSlotIndex: function(date, overlaps) {
-            var idx,
-                length,
-                slots = this._dates || [],
-                slotStart,
-                slotEnd;
+            var idx;
+            var length;
+            var slots = this._dates || [];
+            var slotStart;
+            var slotEnd;
+            var offset = 1;
 
+            if (this._isGroupedByDate()) {
+                offset = this._columnCountInGroup();
+            }
 
             for (idx = 0, length = slots.length; idx < length; idx++) {
                 slotStart = kendo.date.getDate(slots[idx]);
                 slotEnd = new Date(kendo.date.getDate(slots[idx]).getTime() + MS_PER_DAY - (overlaps ? 0 : 1));
 
                 if (isInDateRange(date, slotStart, slotEnd)) {
-                    return idx;
+                    return idx * offset;
                 }
             }
             return -1;
@@ -1189,7 +1230,18 @@ kendo_module({
             var resources = this.groupedResources;
 
             if (resources.length) {
-                this._renderGroups(events, resources, 0, 1);
+                var initialLevel = 1;
+
+                if (this._isGroupedByDate()) {
+                    if (this._isVerticallyGrouped()) {
+                        this.rowLevels.push(new Array(this.rowLevels[this.rowLevels.length - 1].length));
+                    } else {
+                        this.columnLevels.push(new Array(this._columnCountForLevel(this.columnLevels.length - 1)));
+                        initialLevel = 2;
+                    }
+                }
+
+                this._renderGroups(events, resources, 0, initialLevel);
             } else {
                 this._renderEvents(events, 0, 0);
             }
@@ -1224,7 +1276,7 @@ kendo_module({
                 var allDaySlotOffset = resources.length === 1 && this.options.allDaySlot ? this.rowLevels[columnLevel - 1].length : 0;
                 offsetCount = (this.rowLevels[columnLevel].length - allDaySlotOffset) / this.rowLevels[columnLevel - 1].length;
             } else {
-                offsetCount = this.columnLevels[columnLevel].length / this.columnLevels[columnLevel - 1].length;
+                offsetCount = this._columnOffsetForResource(columnLevel);
             }
 
             if (resource) {
@@ -1246,6 +1298,15 @@ kendo_module({
                     }
                 }
             }
+        },
+
+        _columnOffsetForResource: function(index) {
+            return this._columnCountForLevel(index) / this._columnCountForLevel(index - 1);
+        },
+
+        _columnCountForLevel: function(level) {
+            var columnLevel = this.columnLevels[level];
+            return columnLevel ? columnLevel.length : 0;
         }
 
     });
