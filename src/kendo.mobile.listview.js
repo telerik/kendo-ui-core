@@ -15,6 +15,7 @@ kendo_module({
         Widget = ui.Widget,
         ITEM_SELECTOR = ".km-list > li, > li:not(.km-group-container)",
         HIGHLIGHT_SELECTOR = ".km-listview-link, .km-listview-label",
+        ICON_SELECTOR = "[" + kendo.attr("icon") + "]",
         proxy = $.proxy,
         attrValue = kendo.attrValue,
         GROUP_CLASS = "km-group-title",
@@ -38,13 +39,14 @@ kendo_module({
     }
 
     function addIcon(item, icon) {
-        if (icon) {
+        if (icon && !item[0].querySelector(".km-icon")) {
             item.prepend('<span class="km-icon km-' + icon + '"/>');
         }
     }
 
     function enhanceItem(item) {
         addIcon(item, attrValue(item, "icon"));
+        addIcon(item, attrValue(item.children(ICON_SELECTOR), "icon"));
     }
 
     function enhanceLinkItem(item) {
@@ -60,10 +62,11 @@ kendo_module({
             .attr(kendo.attr("role"), "listview-link");
 
         addIcon(item, attrValue(parent, "icon"));
+        addIcon(item, attrValue(item, "icon"));
     }
 
     function enhanceCheckBoxItem(label) {
-        if (!label.children("input[type=checkbox],input[type=radio]").length) {
+        if (!label[0].querySelector("input[type=checkbox],input[type=radio]")) {
             return;
         }
 
@@ -1128,8 +1131,8 @@ kendo_module({
                         enhanceLinkItem(child);
                         enhanced = true;
                     } else if (child.is("label")) {
-                       enhanceCheckBoxItem(child);
-                       enhanced = true;
+                        enhanceCheckBoxItem(child);
+                        enhanced = true;
                     }
                 });
 

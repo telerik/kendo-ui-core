@@ -96,6 +96,39 @@
                 equal(dom.children().first().text(), "foo");
             });
 
+            test("anchor with data-icon in template renders an icon", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [ { text: "foo" } ],
+                    template: "<a data-icon='home'>#= text #</a>"
+                });
+
+                ok(dom.children().first().children(".km-listview-link").has(".km-icon.km-home"));
+            });
+
+            test("other element with data-icon in template renders an icon", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [ { text: "foo" } ],
+                    template: "<span data-icon='home'>#= text #</span>"
+                });
+
+                ok(dom.children().first().has(".km-icon.km-home"));
+            });
+
+            test("template with icons renders only one icon", function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [ { text: "foo" } ],
+                    template: "<span data-icon='home'>#= text #</span><span data-icon='favorites'>#= text #</span>"
+                });
+
+                ok(dom.children().first().children(".km-icon.km-home").length == 1);
+            });
+
             test("does not rebind when item in the datasource changes", function() {
                 var dom = $("<ul/>");
 
