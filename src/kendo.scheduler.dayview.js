@@ -183,7 +183,7 @@ kendo_module({
 
                 format = "t";
             } else {
-                width = this._calculateAllDayEventWidth(this._row.slots, startSlot.index, endSlot.index);
+                width = this._calculateAllDayEventWidth(this._rows[0].slots, startSlot.index, endSlot.index);
 
                 container = this.element.find(".k-scheduler-header-wrap");
 
@@ -719,12 +719,7 @@ kendo_module({
         },
 
         _slotIndexTime: function(index) {
-            var options = this.options;
-            var startTime = getMilliseconds(options.startTime);
-            var timeSlotInterval = ((options.majorTick/options.minorTickCount) * MS_PER_MINUTE);
-
             index = this._adjustSlotIndex(index);
-
             return getMilliseconds(this.options.startTime) + this._timeSlotInterval() * index;
         },
 
