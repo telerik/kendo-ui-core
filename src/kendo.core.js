@@ -1604,9 +1604,8 @@ function pad(number, digits, end) {
         }
 
         if (browser.msie && math.floor(browser.version) <= 7) {
-            element.css({
-                zoom: 1
-            });
+            element.css({ zoom: 1 });
+            element.children(".k-menu").width(element.width());
         }
 
         return element.parent();
