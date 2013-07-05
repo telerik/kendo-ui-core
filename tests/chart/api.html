@@ -313,7 +313,8 @@
 
                 // ------------------------------------------------------------
                 var SVGView,
-                    CanvasView;
+                    CanvasView,
+                    supportsCanvas;
 
                 module("Export", {
                     setup: function() {
@@ -321,10 +322,12 @@
 
                         SVGView = dataviz.SVGView;
                         CanvasView = dataviz.CanvasView;
+                        supportsCanvas = dataviz.supportsCanvas;
                     },
                     teardown: function() {
                         dataviz.SVGView = SVGView;
                         dataviz.CanvasView = CanvasView;
+                        dataviz.supportsCanvas = supportsCanvas;
                     }
                 });
 
@@ -360,6 +363,23 @@
 
                     throws(function() { chart.imageDataURL() },
                            "Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+                });
+
+                test("imageDataURL() returns null if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    equal(chart.imageDataURL(), null);
+                });
+
+                asyncTest("imageDataURL logs warning if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    stubMethod(kendo, "logToConsole", function(message) {
+                        ok(message.indexOf("Warning: Unable to generate image.") > -1);
+                        start();
+                    }, function() {
+                        chart.imageDataURL();
+                    });
                 });
 
                 test("imageDataURL() does not replace model", function() {

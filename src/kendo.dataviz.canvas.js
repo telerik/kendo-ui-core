@@ -646,13 +646,18 @@ kendo_module({
         return math.round(coord) + 0.5;
     }
 
+    function supportsCanvas() {
+        return !!doc.createElement("canvas").getContext;
+    }
+
     // Exports ================================================================
-    if (doc.createElement("canvas").getContext) {
+    if (supportsCanvas) {
         dataviz.ViewFactory.current.register("canvas", CanvasView, 30);
     }
 
     deepExtend(dataviz, {
-        CanvasView: CanvasView
+        CanvasView: CanvasView,
+        supportsCanvas: supportsCanvas
     });
 
 })(window.kendo.jQuery);

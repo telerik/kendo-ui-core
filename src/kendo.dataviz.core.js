@@ -3441,13 +3441,21 @@ kendo_module({
 
         imageDataURL: function() {
             if (dataviz.CanvasView) {
-                var model = this._getModel(),
-                    container = document.createElement("div"),
-                    view = new dataviz.CanvasView(model.options);
+                if (dataviz.supportsCanvas()) {
+                    var model = this._getModel(),
+                        container = document.createElement("div"),
+                        view = new dataviz.CanvasView(model.options);
 
-                view.load(model);
+                    view.load(model);
 
-                return view.renderTo(container).toDataURL();
+                    return view.renderTo(container).toDataURL();
+                } else {
+                    kendo.logToConsole(
+                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
+                        "User agent: " + navigator.userAgent);
+
+                    return null;
+                }
             } else {
                 throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
             }

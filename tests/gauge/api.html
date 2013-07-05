@@ -71,16 +71,22 @@
                 });
 
                 // ------------------------------------------------------------
+                var SVGView,
+                    CanvasView,
+                    supportsCanvas;
+
                 module("Radial Gauge / API / Export", {
                     setup: function() {
                         createGauge();
 
                         SVGView = dataviz.SVGView;
                         CanvasView = dataviz.CanvasView;
+                        supportsCanvas = dataviz.supportsCanvas;
                     },
                     teardown: function() {
                         dataviz.SVGView = SVGView;
                         dataviz.CanvasView = CanvasView;
+                        dataviz.supportsCanvas = supportsCanvas;
                     }
                 });
 
@@ -116,6 +122,23 @@
 
                     throws(function() { gauge.imageDataURL() },
                            "Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+                });
+
+                test("imageDataURL() returns null if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    equal(gauge.imageDataURL(), null);
+                });
+
+                asyncTest("imageDataURL logs warning if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    stubMethod(kendo, "logToConsole", function(message) {
+                        ok(message.indexOf("Warning: Unable to generate image.") > -1);
+                        start();
+                    }, function() {
+                        gauge.imageDataURL();
+                    });
                 });
 
                 test("imageDataURL() does not replace model", function() {
