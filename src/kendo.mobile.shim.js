@@ -84,6 +84,7 @@ kendo_module({
             Widget.fn.destroy.call(this);
             this.shim.kendoDestroy();
             this.popup.destroy();
+            this.shim.remove();
         }
     });
 
