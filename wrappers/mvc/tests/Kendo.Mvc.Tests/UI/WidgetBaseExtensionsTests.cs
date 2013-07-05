@@ -51,6 +51,12 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void SanitizeId_replaces_brackets()
+        {
+            baseComponent.SanitizeId("Name[0].Property").ShouldEqual("Name_0__Property");
+        }
+
+        [Fact]
         public void SanitizeId_replaces_sharps()
         {
             baseComponent.SanitizeId("Name?#").ShouldEqual("Name__");
