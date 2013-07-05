@@ -35,6 +35,16 @@
         }
 
         /// <summary>
+        /// Gets or sets the render type.
+        /// </summary>
+        /// <value>The render type.</value>
+        public RenderingMode? RenderAs
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the border configuration.
         /// </summary>
         public QRBorder Border
@@ -93,6 +103,10 @@
             if (!string.IsNullOrEmpty(Value))
             {
                 Options["value"] = Value;
+            }
+
+            if (RenderAs.HasValue) {
+                Options["renderAs"] = RenderAs.ToString().ToLowerInvariant();
             }
 
             if (!string.IsNullOrEmpty(Background))

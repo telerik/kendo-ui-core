@@ -275,6 +275,7 @@
     <Compile Include="UI\Chart\Enums\ChartZoomDireciton.cs" />
     <Compile Include="UI\Chart\Enums\ChartNoteLabelPosition.cs" />
     <Compile Include="UI\Chart\Enums\ChartNotePosition.cs" />
+    <Compile Include="UI\Chart\Enums\RenderingMode.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisBaseUnitStepsBuilder.cs" />
@@ -1503,4 +1504,7 @@
     <Compile Include="UI\MobileDrawer\Fluent\MobileDrawerEventBuilder.cs" />
     <Compile Include="UI\MobileDrawer\Html\MobileDrawerHtmlBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\MobileApplication\Fluent\MobileApplicationEventBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\MobileApplication\Fluent\MobileApplicationEventBuilder.cs" />
+  </ItemGroup>
+</Project>

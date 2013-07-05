@@ -92,6 +92,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets the render type.
+        /// </summary>
+        /// <value>The render type.</value>
+        public RenderingMode? RenderAs
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the Chart title.
         /// </summary>
         /// <value>
@@ -260,6 +270,10 @@ namespace Kendo.Mvc.UI
             SerializeData("plotArea", PlotArea.CreateSerializer().Serialize(), options);
 
             SerializeTheme(options);
+
+            if (RenderAs.HasValue) {
+                options.Add("renderAs", RenderAs.ToString().ToLowerInvariant());
+            }
 
             SerializeData("title", Title.CreateSerializer().Serialize(), options);
 
