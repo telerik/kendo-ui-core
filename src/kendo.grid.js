@@ -1694,7 +1694,8 @@ kendo_module({
         _createButton: function(command) {
             var template = command.template || COMMANDBUTTONTMPL,
                 commandName = typeof command === STRING ? command : command.name || command.text,
-                options = { className: "k-grid-" + (commandName || "").replace(/\s/g, ""), text: commandName, imageClass: "", attr: "", iconClass: "" };
+                className = defaultCommands[commandName] ? defaultCommands[commandName].className : "k-grid-" + (commandName || "").replace(/\s/g, ""),
+                options = { className: className, text: commandName, imageClass: "", attr: "", iconClass: "" };
 
             if (!commandName && !(isPlainObject(command) && command.template))  {
                 throw new Error("Custom commands should have name specified");
