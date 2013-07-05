@@ -81,6 +81,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("negativeValues", value);
     }
 
+    public void setNotes(com.kendoui.taglib.chart.SeriesItemNotesTag value) {
+        setProperty("notes", value);
+    }
+
     public void setOverlay(com.kendoui.taglib.chart.SeriesItemOverlayTag value) {
         setProperty("overlay", value);
     }

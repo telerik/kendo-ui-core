@@ -479,6 +479,15 @@ or series name (for other available series types) in the legend.
         return $this->setProperty('yField', $value);
     }
 
+    /**
+    * The series notes configuration.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemNotes|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function notes($value) {
+        return $this->setProperty('notes', $value);
+    }
+
 //<< Properties
 }
 
