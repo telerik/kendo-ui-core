@@ -39,10 +39,15 @@
         margin: .5em;
         font-size: 1.1em;
     }
+    
+    .km-android #hierarchical-listview .parent:after {
+        display: inline-block;
+        border-color: #ffffff;
+    }
 </style>
 <script id="hierarchicalMobileListViewTemplate" type="text/x-kendo-template">
     # if (data.HasEmployees) { #
-        <a href="\#hierarchical-view?parent=#: data.id #">
+        <a href="\#hierarchical-view?parent=#: data.id #" class="parent">
             <span class="employee-image" style="background-image: url('../../content/web/Employees/#: id #.jpg')"></span>
             <h2> #: FullName # </h2>
         </a>
