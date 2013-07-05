@@ -429,7 +429,7 @@ kendo_module({
                 offset = pane.offset(),
                 thresholdPassed = Math.abs(offset) >= width / 3,
                 ease = bounce ? kendo.effects.Transition.easeOutBack : kendo.effects.Transition. easeOutExpo,
-                isEndReached = that.page + 2 > that.buffer.total,
+                isEndReached = that.page + 2 > that.buffer.total(),
                 delta = 0;
 
             if(swipeType === RIGHT_SWIPE) {
