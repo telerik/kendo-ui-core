@@ -152,7 +152,7 @@ kendo_module({
                 return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
             },
             tag: function(item) {
-                return item.url ? "a" : "span";
+                return item.url || item.contentUrl ? "a" : "span";
             },
             groupAttributes: function(group) {
                 return group.expanded !== true ? " style='display:none'" : "";
@@ -167,7 +167,7 @@ kendo_module({
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
             },
             contentUrl: function(item) {
-                return item.contentUrl ? kendo.attr("content-url") + '="' + item.contentUrl + '"' : "";
+                return item.contentUrl ? 'href="' + item.contentUrl + '"' : "";
             }
         };
 
