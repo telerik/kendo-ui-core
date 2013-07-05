@@ -3613,6 +3613,11 @@ kendo_module({
         at: function(index)  {
             var pageSize = this.pageSize;
 
+            if (index >= this.total()) {
+                this.trigger("endreached", {index: index });
+                return;
+            }
+
             // out of range request
             if (index < this.dataOffset || index > this.skip + pageSize) {
                 var offset = Math.floor(index / pageSize) * pageSize;
