@@ -1,19 +1,20 @@
 <div id="example" class="k-content">
-    <div id="scheduler"></div>
-    <div class="demo-section">
-        <p>
-            <label>Current Date:</label> <input id="date" />
-        </p>
-        <p>
-            <label>Current View:</label>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Current Date</span>
+            <input id="date" />
+        </div>
+        <div class="config-section">
+            <span class="configHead">Current View</span>
             <select id="views">
                 <option value="agenda">Agenda</option>
                 <option value="day">Day</option>
                 <option value="month">Month</option>
                 <option value="week">Week</option>
             </select>
-        </p>
+        </div>
     </div>
+    <div id="scheduler"></div>
 </div>
 <script>
 $(function() {
