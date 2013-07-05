@@ -616,6 +616,10 @@ kendo_module({
             });
         },
 
+        refresh: function() {
+            this.list.refresh();
+        },
+
         _unbindDataSource: function() {
             // TODO:
         }
@@ -643,8 +647,8 @@ kendo_module({
         },
 
         refresh: function(e) {
-            var action = e.action,
-                dataItems = e.items,
+            var action = e && e.action,
+                dataItems = e && e.items,
                 listView = this.listView,
                 dataSource = this.dataSource,
                 prependOnRefresh = this.options.appendOnRefresh,
@@ -865,6 +869,10 @@ kendo_module({
             refreshTemplate: "Refreshing",
             pullOffset: 140,
             filterable: false
+        },
+
+        refresh: function() {
+            this._itemBinder.refresh();
         },
 
         setOptions: function(options) {
