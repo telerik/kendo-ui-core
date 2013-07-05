@@ -1,0 +1,29 @@
+<?php
+
+namespace Kendo\Dataviz\UI;
+
+class ChartYAxisItemNotesIconBorder extends \kendo\SerializableObject {
+//>> Properties
+
+    /**
+    * The border color of the icon.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemNotesIconBorder
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
+    /**
+    * The border width of the icon.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemNotesIconBorder
+    */
+    public function width($value) {
+        return $this->setProperty('width', $value);
+    }
+
+//<< Properties
+}
+
+?>

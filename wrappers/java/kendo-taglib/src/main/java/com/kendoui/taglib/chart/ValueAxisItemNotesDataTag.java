@@ -14,14 +14,15 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class CategoryAxisItemNotesDataTag extends BaseTag /* interfaces */ /* interfaces */ {
+public class ValueAxisItemNotesDataTag extends BaseTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
-        CategoryAxisItemNotesTag parent = (CategoryAxisItemNotesTag)findParentWithClass(CategoryAxisItemNotesTag.class);
-
+        
+        ValueAxisItemNotesTag parent = (ValueAxisItemNotesTag)findParentWithClass(ValueAxisItemNotesTag.class);
+        
         parent.setData(this);
 
         return super.doEndTag();
@@ -55,10 +56,10 @@ public class CategoryAxisItemNotesDataTag extends BaseTag /* interfaces */ /* in
     }
 
     public static String tagName() {
-        return "chart-categoryAxisItem-notes-data";
+        return "chart-valueAxisItem-notes-data";
     }
 
-    public void addDataItem(CategoryAxisItemNotesDataItemTag value) {
+    public void addDataItem(ValueAxisItemNotesDataItemTag value) {
         data.add(value.properties());
     }
 

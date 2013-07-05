@@ -196,6 +196,15 @@ The axis will be rendered in the first (default) pane if not set.
         return $this->setProperty('visible', $value);
     }
 
+    /**
+    * The x axis notes configuration.
+    * @param \Kendo\Dataviz\UI\ChartXAxisItemNotes|array $value
+    * @return \Kendo\Dataviz\UI\ChartXAxisItem
+    */
+    public function notes($value) {
+        return $this->setProperty('notes', $value);
+    }
+
 //<< Properties
 }
 
