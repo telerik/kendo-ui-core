@@ -396,7 +396,9 @@ kendo_module({
                 e.preventDefault();
             });
 
-            that._resizable();
+            if (that.options.editable && that.options.editable.resize !== false) {
+                that._resizable();
+            }
 
             $(window).on("resize" + NS, that._resizeHandler);
         },

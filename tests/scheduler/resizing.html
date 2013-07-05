@@ -182,6 +182,46 @@
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
             });
 
+            test("dragging and dropping doesn't change the event time if editable is set to false", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    editable: false,
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+            });
+
+            test("dragging and dropping doesn't change the event time if editable.resize is set to false", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    editable: { resize: false },
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+            });
+
             test("the south/north resize hint starts from the beginning of the slot that contains the event", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -784,6 +824,11 @@
 
             function dragstart(scheduler, target) {
                 var draggable = scheduler.element.data("kendoDraggable");
+
+                if (!draggable) {
+                    return;
+                }
+
                 var offset = target.offset();
 
                 draggable.trigger("dragstart", {
@@ -796,6 +841,10 @@
             function drag(scheduler, target, offset) {
                 var draggable = scheduler.element.data("kendoDraggable");
 
+                if (!draggable) {
+                    return;
+                }
+
                 draggable.trigger("drag", {
                     currentTarget: target,
                     x: { location: offset.left },
@@ -805,6 +854,10 @@
 
             function dragend(scheduler, target, offset) {
                 var draggable = scheduler.element.data("kendoDraggable");
+
+                if (!draggable) {
+                    return;
+                }
 
                 draggable.trigger("dragend", {
                     currentTarget: target,
