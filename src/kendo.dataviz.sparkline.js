@@ -136,7 +136,11 @@ kendo_module({
                 view = dataviz.ViewFactory.current.create({}, options.renderAs);
 
             if (dataviz.CanvasView && view instanceof dataviz.CanvasView) {
-                options.categoryAxis.crosshair.visible = false;
+                deepExtend(options, {
+                    categoryAxis: {
+                        visible: false
+                    }
+                });
             }
 
             Chart.fn._applyDefaults.apply(chart, arguments);
