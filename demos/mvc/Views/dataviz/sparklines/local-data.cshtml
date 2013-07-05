@@ -42,6 +42,7 @@
 
                 $(".bar-hourly", row).kendoSparkline({
                     type: "bar",
+                    renderAs: "canvas",
                     data: [rowData.hourly],
                     valueAxis: {
                         max: 50
@@ -50,6 +51,7 @@
 
                 $(".bar-change", row).kendoSparkline({
                     type: "bar",
+                    renderAs: "canvas",
                     series: [{
                         data: [rowData.change],
                         negativeColor: "#808080"
@@ -68,6 +70,7 @@
 
                 $(".bar-direct", row).kendoSparkline({
                     type: "bar",
+                    renderAs: "canvas",
                     data: [rowData.direct],
                     valueAxis: {
                         max: 50
@@ -76,6 +79,7 @@
 
                 $(".bar-benefits", row).kendoSparkline({
                     type: "bar",
+                    renderAs: "canvas",
                     dataSource: {
                         data: rowData.benefits,
                         group: {
