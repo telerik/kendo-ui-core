@@ -42,12 +42,12 @@
                     }
                 });
 
-                asyncTest("uses preferred view specified in 'render'", 1, function() {
+                asyncTest("uses preferred view specified in 'renderAs'", 1, function() {
                     stubMethod(dataviz.ViewFactory.prototype, "create", function(options, preferred) {
                         equal(preferred, "foo");
                         start();
                     }, function() {
-                        createGauge({ render: "foo" });
+                        createGauge({ renderAs: "foo" });
                     });
                 });
 
@@ -77,12 +77,12 @@
                     }
                 });
 
-                asyncTest("uses preferred view specified in 'render'", 1, function() {
+                asyncTest("uses preferred view specified in 'renderAs'", 1, function() {
                     stubMethod(dataviz.ViewFactory.prototype, "create", function(options, preferred) {
                         equal(preferred, "foo");
                         start();
                     }, function() {
-                        createGauge({ render: "foo" });
+                        createGauge({ renderAs: "foo" });
                     });
                 });
 

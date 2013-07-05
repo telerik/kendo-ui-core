@@ -133,7 +133,7 @@ kendo_module({
 
         _applyDefaults: function(options) {
             var chart = this,
-                view = dataviz.ViewFactory.current.create({}, options.render);
+                view = dataviz.ViewFactory.current.create({}, options.renderAs);
 
             if (dataviz.CanvasView && view instanceof dataviz.CanvasView) {
                 options.categoryAxis.crosshair.visible = false;

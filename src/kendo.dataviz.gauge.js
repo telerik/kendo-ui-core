@@ -1244,7 +1244,7 @@ kendo_module({
             gauge._plotArea = model._plotArea;
 
             view = gauge._view =
-                dataviz.ViewFactory.current.create(model.options, gauge.options.render);
+                dataviz.ViewFactory.current.create(model.options, gauge.options.renderAs);
 
             if (view) {
                 view.load(model);

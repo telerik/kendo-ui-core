@@ -372,7 +372,7 @@ kendo_module({
             chart._plotArea = model._plotArea;
 
             view = chart._view =
-                dataviz.ViewFactory.current.create(model.options, chart.options.render);
+                dataviz.ViewFactory.current.create(model.options, chart.options.renderAs);
 
             if (view) {
                 view.load(model);
