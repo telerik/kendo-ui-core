@@ -2872,6 +2872,7 @@ kendo_module({
     var FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
 
     // Helper functions========================================================
+    // TODO: Merge with Color class from Colorpicker
     var Color = function(value) {
         var color = this,
             formats = Color.formats,
@@ -3424,6 +3425,35 @@ kendo_module({
 
     ViewFactory.current = new ViewFactory();
 
+    var ExportMixin = {
+        svg: function() {
+            if (dataviz.SVGView) {
+                var model = this._getModel(),
+                    view = new dataviz.SVGView(model.options);
+
+                view.load(model);
+
+                return view.render();
+            } else {
+                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+            }
+        },
+
+        imageDataURL: function() {
+            if (dataviz.CanvasView) {
+                var model = this._getModel(),
+                    container = document.createElement("div"),
+                    view = new dataviz.CanvasView(model.options);
+
+                view.load(model);
+
+                return view.renderTo(container).toDataURL();
+            } else {
+                throw new Error("Unable to create CanvasView. Check that kendo.canvas.svg.js is loaded.");
+            }
+        }
+    };
+
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
         init: function(element) {
@@ -3457,6 +3487,7 @@ kendo_module({
         Color: Color,
         ElementAnimation:ElementAnimation,
         ExpandAnimation: ExpandAnimation,
+        ExportMixin: ExportMixin,
         ArrowAnimation: ArrowAnimation,
         BarAnimation: BarAnimation,
         BarIndicatorAnimatin: BarIndicatorAnimatin,

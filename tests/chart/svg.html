@@ -1365,45 +1365,6 @@
 
             })();
 
-            (function() {
-                var chart;
-
-                function createChart() {
-                    $("#container").kendoChart({
-                        series: [{
-                            type: "bar",
-                            data: [1, 2]
-                        }]
-                    });
-
-                    chart = $("#container").data("kendoChart");
-                }
-
-                // ------------------------------------------------------------
-                module("SVG Export", {
-                    setup: function() {
-                        createChart();
-                    }
-                });
-
-                test("svg() exports SVG", function() {
-                    ok(chart.svg().match(/<svg.*<\/svg>/));
-                });
-
-                test("svg() does not replace model", function() {
-                    var oldModel = chart._model;
-                    chart.svg();
-                    ok(oldModel === chart._model);
-                });
-
-                test("svg() does not replace view", function() {
-                    var oldView = chart._view;
-                    chart.svg();
-                    ok(oldView === chart._view);
-                });
-
-            })();
-
        </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

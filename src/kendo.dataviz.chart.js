@@ -410,17 +410,6 @@ kendo_module({
             return chart._view.renderTo(chart.element[0]);
         },
 
-        svg: function() {
-            var model = this._getModel(),
-                view = new dataviz.SVGView(model.options);
-
-            // TODO: Throw meaningful error message if SVGView is not loaded
-            // TODO: Add as static method to share between Chart/Gauge?
-            view.load(model);
-
-            return view.render();
-        },
-
         _applyDefaults: function(options, themeOptions) {
             applyAxisDefaults(options, themeOptions);
             applySeriesDefaults(options, themeOptions);
@@ -1220,6 +1209,7 @@ kendo_module({
             }
         }
     });
+    deepExtend(Chart.fn, dataviz.ExportMixin);
 
     var PlotAreaFactory = Class.extend({
         init: function() {
