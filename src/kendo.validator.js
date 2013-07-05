@@ -134,7 +134,7 @@ kendo_module({
                 min: function(input) {
                     if (input.filter(NUMBERINPUTSELECTOR + ",[" + kendo.attr("type") + "=number]").filter("[min]").length && input.val() !== "") {
                         var min = parseFloat(input.attr("min")) || 0,
-                            val = parseFloat(input.val());
+                            val = kendo.parseFloat(input.val());
 
                         return min <= val;
                     }
@@ -143,7 +143,7 @@ kendo_module({
                 max: function(input) {
                     if (input.filter(NUMBERINPUTSELECTOR + ",[" + kendo.attr("type") + "=number]").filter("[max]").length && input.val() !== "") {
                         var max = parseFloat(input.attr("max")) || 0,
-                            val = parseFloat(input.val());
+                            val = kendo.parseFloat(input.val());
 
                         return max >= val;
                     }

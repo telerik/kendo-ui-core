@@ -142,13 +142,13 @@
         },
         min: function(input, params) {
             var min = parseFloat(params.min) || 0,
-                val = parseFloat(input.val());
+                val = kendo.parseFloat(input.val());
 
             return min <= val;
         },
         max: function(input, params) {
             var max = parseFloat(params.max) || 0,
-                val = parseFloat(input.val());
+                val = kendo.parseFloat(input.val());
 
             return val <= max;
         },
