@@ -239,7 +239,8 @@ WIN_JS = FileList[
     "src/kendo.dataviz.barcode.js",
     "src/kendo.dataviz.stock.js",
     "src/kendo.dataviz.sparkline.js",
-    "src/kendo.dataviz.svg.js"
+    "src/kendo.dataviz.svg.js",
+    "src/kendo.dataviz.canvas.js"
 ]
 
 WIN_MIN_JS = FileList['src/kendo.winjs.min.js']
