@@ -118,6 +118,14 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("showFileList", value);
     }
 
+    public String getTemplate() {
+        return (String)getProperty("template");
+    }
+
+    public void setTemplate(String value) {
+        setProperty("template", value);
+    }
+
     public String getCancel() {
         Function property = ((Function)getProperty("cancel"));
         if (property != null) {
