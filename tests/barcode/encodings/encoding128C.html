@@ -195,23 +195,16 @@
                         value = "63231916810307",
                         quietZoneLength = encoding.options.quietZoneLength,
                         result,
-                        resultWithoutQuietZone,
-                        expectedResult = fixed(width / (112 + 2 * quietZoneLength), 2),
-                        expectedResultWithoutQuietZone = 1.79;
+                        expectedResult = fixed(width / (112 + 2 * quietZoneLength), 2);
 
-                        encoding.options.addQuietZone = true;
                         result = encoding.encode(value, width, height).baseUnit;
                         equal(fixed(result, 2), expectedResult);
-
-                        encoding.options.addQuietZone = false;
-                        resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
-                        equal(fixed(resultWithoutQuietZone, 2), expectedResultWithoutQuietZone);
                 });
 
             })();
         </script>
 
-        <h1 id="qunit-header">encoding 128A</h1>
+        <h1 id="qunit-header">encoding 128C</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>

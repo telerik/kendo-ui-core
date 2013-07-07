@@ -16,10 +16,10 @@
 		<div id="postnet"></div>
 		<h3>gs1-128</h3>
 		<div id="gs1"></div>
-		<h3>code93</h3>
-		<div id="code93"></div>
-		<h3>code93extended</h3>
-		<div id="code93extended"></div>
+		<h3>code39</h3>
+		<div id="code39"></div>
+		<h3>code39extended</h3>
+		<div id="code39extended"></div>
 		<h3>code128A</h3>
 		<div id="code128A"></div>
 		<h3>code128B</h3>
@@ -35,60 +35,60 @@
 				value+= "T"
 			}
 			
-			$('#postnet').kendoBarcode({
-				value: "01234",
-				type: "postnet",
-				width: 200,
-				height: 100
-			});
+			// $('#postnet').kendoBarcode({
+				// value: "01234",
+				// type: "postnet",
+				// width: 200,
+				// height: 100
+			// });
 			
-			$('#gs1').kendoBarcode({
-				value: "21 a123 (12)121212",
-				type: "gs1-128",
-				width: 200,
-				height: 100
-			});
+			// $('#gs1').kendoBarcode({
+				// value: "21 a123 (12)121212",
+				// type: "gs1-128",
+				// width: 200,
+				// height: 100
+			// });
 			
-			$('#code93').kendoBarcode({
-				value: "TEST93",
-				type: "code93",
-				width: 300,
-				height: 100
-			});
+			// $('#code39').kendoBarcode({
+				// value: "TEST93",
+				// type: "code39",
+				// width: 300,
+				// height: 100
+			// });
+
+			// $('#code39extended').kendoBarcode({
+				// value: ">a12Asdas;" + String.fromCharCode(127),
+				// type: "code39extended",
+				// width: 300,
+				// height: 100
+			// });
 			
-			$('#code93extended').kendoBarcode({
-				value: ">a12Asdas;" + String.fromCharCode(127),
-				type: "code93extended",
-				width: 300,
-				height: 100
-			});
-			
-			$('#code128A').kendoBarcode({
-				value: "TESTA",
-                type: "code128A",
-				width: 300,
-				height: 100
-			});	
+			// $('#code128A').kendoBarcode({
+				// value: "TESTA",
+                // type: "code128A",
+				// width: 300,
+				// height: 100
+			// });	
 
 	
-			$('#code128B').kendoBarcode({
-				value: "ABASD",
-                type: "code128B",
-				width: 300,
-				height: 100
-			});	
+			// $('#code128B').kendoBarcode({
+				// value: "ABASD",
+                // type: "code128B",
+				// width: 300,
+				// height: 100
+			// });	
 
-			$('#code128C').kendoBarcode({
-				value: "121314",
-                type: "code128C",
-				width: 300,
-				height: 100
-			});	
+			// $('#code128C').kendoBarcode({
+				// value: "121314",
+                // type: "code128C",
+				// width: 300,
+				// height: 100
+			// });	
 
 			$('#code128').kendoBarcode({
-				value: String.fromCharCode(198) +  "Aba1213",
-                type: "code128",
-				width: 300,
+				value: "10abc1234",
+                type: "gs1-128",
+				width: 400,
 				height: 100
 			});				
 			

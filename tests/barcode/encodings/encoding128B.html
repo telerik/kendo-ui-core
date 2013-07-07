@@ -163,17 +163,10 @@
                         value = " a@cz^KL" + String.fromCharCode(127),
                         quietZoneLength = encoding.options.quietZoneLength,
                         result,
-                        resultWithoutQuietZone,
-                        expectedResult = fixed(width / (134 + 2 * quietZoneLength), 2),
-                        expectedResultWithoutQuietZone = 1.49;
+                        expectedResult = fixed(width / (134 + 2 * quietZoneLength), 2);
 
-                        encoding.options.addQuietZone = true;
                         result = encoding.encode(value, width, height).baseUnit;
                         equal(fixed(result, 2), expectedResult);
-
-                        encoding.options.addQuietZone = false;
-                        resultWithoutQuietZone = encoding.encode(value, width, height).baseUnit;
-                        equal(fixed(resultWithoutQuietZone, 2), expectedResultWithoutQuietZone);
                 });
 
             })();
