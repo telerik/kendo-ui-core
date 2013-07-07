@@ -31,14 +31,14 @@ kendo_module({
         paddingCodewords = ["11101100", "00010001"],
         finderPatternValue = 93,
         maskPatternConditions = [
-            function(row,column){return (row + column) % 2 == 0},
-            function(row,column){return row % 2 == 0},
-            function(row,column){return column % 3 == 0},
-            function(row,column){return (row + column) % 3 == 0},
-            function(row,column){return (Math.floor(row/2) + Math.floor(column/3)) % 2 == 0},
-            function(row,column){return ((row * column) % 2) + ((row * column) % 3) == 0},
-            function(row,column){return (((row * column) % 2) + ((row * column) % 3)) % 2 == 0},
-            function(row,column){return (((row + column) % 2) + ((row * column) % 3)) % 2 == 0}
+            function(row,column){return (row + column) % 2 === 0;},
+            function(row){return row % 2 === 0;},
+            function(row,column){return column % 3 === 0;},
+            function(row,column){return (row + column) % 3 === 0;},
+            function(row,column){return (Math.floor(row/2) + Math.floor(column/3)) % 2 === 0;},
+            function(row,column){return ((row * column) % 2) + ((row * column) % 3) === 0;},
+            function(row,column){return (((row * column) % 2) + ((row * column) % 3)) % 2 === 0;},
+            function(row,column){return (((row + column) % 2) + ((row * column) % 3)) % 2 === 0;}
         ],
         numberRegex = /^\d+/,
         alphaPattern = "A-Z0-9 $%*+./:-",
@@ -91,13 +91,13 @@ kendo_module({
                 var mode = this;
                 return mode.bitsInCharacterCount[mode.getVersionIndex(version || 40)];
             },
-            _getModeCountString: function(value, version){
+            getModeCountString: function(length, version){
                 var mode = this;
-                return mode.modeIndicator + toBitsString(value.length, mode.getBitsCharacterCount(version));
+                return mode.modeIndicator + toBitsString(length, mode.getBitsCharacterCount(version));
             },
-            encode: function(str, version){},
-            getStringBitsLength: function(str, version){},
-            getValue: function(character){},
+            encode: function(){},
+            getStringBitsLength: function(){},
+            getValue: function(){},
             modeIndicator: "",
             bitsInCharacterCount: []
         });
@@ -107,12 +107,12 @@ kendo_module({
             bitsInCharacterCount: [10, 12, 14],
             modeIndicator: "0001",
             getValue: function(character){
-                return parseInt(character);
+                return parseInt(character, 10);
             },
             encode: function(str, version){
                 var mode = this,
                     parts = splitInto(str, 3),
-                    result = mode._getModeCountString(str, version);
+                    result = mode.getModeCountString(str.length, version);
 
                 for(var i = 0; i < parts.length - 1; i++){
                     result += toBitsString(parts[i], 10);
@@ -121,7 +121,7 @@ kendo_module({
             },
             getStringBitsLength: function(inputLength, version){
                 var mod3 = inputLength % 3;
-                return 4 + this.getBitsCharacterCount(version) + 10 * Math.floor(inputLength / 3) + 3 * mod3 + (mod3 == 0 ? 0 : 1);
+                return 4 + this.getBitsCharacterCount(version) + 10 * Math.floor(inputLength / 3) + 3 * mod3 + (mod3 === 0 ? 0 : 1);
             }
         });
 
@@ -135,7 +135,7 @@ kendo_module({
             encode: function(str, version){
                 var mode = this,
                     parts = splitInto(str, 2),
-                    result = mode._getModeCountString(str, version),
+                    result = mode.getModeCountString(str.length, version),
                     value;
                 for(var i = 0; i < parts.length - 1; i++){
                     value = 45 * mode.getValue(parts[i].charAt(0)) + mode.getValue(parts[i].charAt(1));
@@ -165,7 +165,7 @@ kendo_module({
             },
             encode: function(str, version){
                 var mode = this,
-                    result = mode._getModeCountString(str, version);
+                    result = mode.getModeCountString(str.length, version);
 
                 for(var i = 0; i < str.length; i++){
                     result += toBitsString(mode.getValue(str.charAt(i)), 8);
@@ -212,7 +212,7 @@ kendo_module({
                      return {row: row, column: column};
                 }
             };
-        }
+        };
 
         function fillFunctionCell(matrices, bit, x, y){
             for(var i = 0; i< matrices.length;i++){
@@ -222,7 +222,7 @@ kendo_module({
 
         function fillDataCell(matrices, bit, x, y){
             for(var i = 0; i < maskPatternConditions.length;i++){
-                matrices[i][x][y] = maskPatternConditions[i](x,y) ? bit ^ 1 : parseInt(bit);
+                matrices[i][x][y] = maskPatternConditions[i](x,y) ? bit ^ 1 : parseInt(bit, 10);
             }
         }
 
@@ -253,7 +253,7 @@ kendo_module({
             while((cell = cellVisitor.getNextRemainderCell())){
                 fillDataCell(matrices, 0, cell.row, cell.column);
             }
-        }
+        };
 
         var padDataString = function (dataString, totalDataCodewords){
             var dataBitsCount = totalDataCodewords * 8,
@@ -272,11 +272,11 @@ kendo_module({
                 paddingCodewordIndex ^= 1;
             }
             return dataString;
-        }
+        };
 
         function generatePowersOfTwo(){
             var result;
-            for(var power = 1, result; power < 255; power++){
+            for(var power = 1; power < 255; power++){
 
                 result =  powersOfTwoResult[power - 1] * 2;
                 if(result > 255){
@@ -300,7 +300,7 @@ kendo_module({
             }
 
             return result;
-        }
+        };
 
         var multiplyPolynomials = function (x, y){
             var result = [];
@@ -316,7 +316,7 @@ kendo_module({
             }
 
             return result;
-        }
+        };
 
         function generateGeneratorPolynomials(){
             var maxErrorCorrectionCodeWordsCount = 68;
@@ -337,7 +337,7 @@ kendo_module({
             do{
                 result[idx] = powersOfTwoResult[(polynomial[idx] + power) % 255];
                 idx--;
-            }while(polynomial[idx] != undefined);
+            }while(polynomial[idx] !== undefined);
 
             return result;
         }
@@ -347,22 +347,23 @@ kendo_module({
                 result = new Array(errorCodewordsCount).concat(data),
                 generatorPolynomial = new Array(result.length - generator.length).concat(generator),
                 steps = data.length,
+                errorCodewords = [],
                 divisor,
-                errorCodewords = [];
+                idx;
 
-            for(var i = 0; i < steps; i++){
+            for(idx = 0; idx < steps; idx++){
                 divisor = multiplyByConstant(generatorPolynomial, powersOfTwo[result[result.length - 1]]);
                 generatorPolynomial.splice(0,1);
 
                 result = xorPolynomials(divisor, result);
             }
 
-            for(var i = result.length - 1; i >= 0;i--){
-                errorCodewords[errorCodewordsCount - 1 - i] = toBitsString(result[i], 8);
+            for(idx = result.length - 1; idx >= 0;idx--){
+                errorCodewords[errorCodewordsCount - 1 - idx] = toBitsString(result[idx], 8);
             }
 
             return errorCodewords;
-        }
+        };
 
         var getBlocks = function (dataStream, versionCodewordsInformation){
             var codewordStart = 0,
@@ -393,7 +394,7 @@ kendo_module({
                 }
             }
             return [dataBlocks, errorBlocks];
-        }
+        };
 
         var chooseMode = function (str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode){
              var numeric = numberRegex.exec(str),
@@ -430,15 +431,15 @@ kendo_module({
                 mode: mode,
                 modeString: modeString
              };
-        }
+        };
 
         var getModes = function (str){
             var modes = [],
-                previousMode;
+                previousMode,
+                idx = 0;
             modes.push(chooseMode(str, initMinNumericBeforeAlpha, initMinNumericBeforeByte, initMinAlphaBeforeByte, previousMode));
             previousMode = modes[0].mode;
-            str = str.substr(modes[0].modeString.length),
-            idx = 0;
+            str = str.substr(modes[0].modeString.length);
 
             while(str.length > 0){
                var nextMode = chooseMode(str, minNumericBeforeAlpha, minNumericBeforeByte, minAlphaBeforeByte, previousMode);
@@ -454,7 +455,7 @@ kendo_module({
             }
 
             return modes;
-        }
+        };
 
         var getDataCodewordsCount = function (modes){
             var length = 0,
@@ -465,7 +466,7 @@ kendo_module({
             }
 
             return Math.ceil(length / 8);
-        }
+        };
 
         var getVersion = function (dataCodewordsCount, errorCorrectionLevel){
             var x = 0,
@@ -487,7 +488,7 @@ kendo_module({
                 return version + 1;
             }
             return y + 1;
-        }
+        };
 
         var getDataString = function (modes, version){
             var dataString = "",
@@ -498,27 +499,27 @@ kendo_module({
             }
 
             return dataString;
-        }
+        };
 
         //fix case all zeros
         var encodeFormatInformation = function (format){
             var formatNumber = toDecimal(format),
                 encodedString,
                 result = "";
-            if(formatNumber == 0){
+            if(formatNumber === 0){
                 return "101010000010010";
             }
             else{
-                encodedString = encodeBCH(toDecimal(format), formatGeneratorPolynomial, 15)
+                encodedString = encodeBCH(toDecimal(format), formatGeneratorPolynomial, 15);
             }
             for(var i = 0; i < encodedString.length; i++){
                 result += encodedString.charAt(i) ^ formatMaskPattern.charAt(i);
             }
 
             return result;
-        }
+        };
 
-        var encodeBCH =function (value, generatorPolynomial, codeLength){
+        var encodeBCH = function (value, generatorPolynomial, codeLength){
             var generatorNumber = toDecimal(generatorPolynomial),
                 polynomialLength = generatorPolynomial.length - 1,
                 valueNumber = value << polynomialLength,
@@ -527,22 +528,22 @@ kendo_module({
                 result = dividePolynomials(valueNumber, generatorNumber);
             result = valueString + toBitsString(result, polynomialLength);
             return result;
-        }
+        };
 
         var dividePolynomials = function (numberX,numberY){
                 var yLength = numberY.toString(2).length,
                     xLength = numberX.toString(2).length;
                 do{
                     numberX ^= numberY << xLength - yLength;
-                    xLength = numberX.toString(2).length
+                    xLength = numberX.toString(2).length;
                 }
                 while(xLength >= yLength);
 
                 return numberX;
-        }
+        };
 
         function getNumberAt(str, idx){
-            return parseInt(str.charAt(idx));
+            return parseInt(str.charAt(idx), 10);
         }
 
         var initMatrices = function (version){
@@ -556,7 +557,7 @@ kendo_module({
             }
 
             return matrices;
-        }
+        };
 
         var addFormatInformation =function (matrices, formatString){
             var matrix = matrices[0],
@@ -586,18 +587,18 @@ kendo_module({
             for(x = matrix.length - 7, y = 8; x < matrix.length;x++){
                 fillFunctionCell(matrices, getNumberAt(formatString, length - 1 - idx++), x, y);
             }
-        }
+        };
 
         var encodeVersionInformation = function (version){
             return encodeBCH(version, versionGeneratorPolynomial, 18);
-        }
+        };
 
         var addVersionInformation = function (matrices, dataString){
             var matrix = matrices[0],
                 modules = matrix.length,
                 x1 = 0,
-                y1 = matrix.length - 11,
-                x2 = matrix.length - 11,
+                y1 = modules - 11,
+                x2 = modules - 11,
                 y2 = 0,
                 quotient,
                 mod,
@@ -610,7 +611,7 @@ kendo_module({
                 fillFunctionCell(matrices, value, x1 + quotient, y1 + mod);
                 fillFunctionCell(matrices, value, x2 + mod, y2 + quotient);
             }
-        }
+        };
 
         var addCentricPattern = function (matrices, pattern, x, y){
             var size = pattern.length + 2,
@@ -626,7 +627,7 @@ kendo_module({
                     fillFunctionCell(matrices, value, x + length - i, y + length - j);
                 }
             }
-        }
+        };
 
         var addFinderSeparator = function (matrices, direction, x, y){
             var nextX = x,
@@ -639,7 +640,7 @@ kendo_module({
                 nextY+= direction[1];
             }
             while(nextX >=0 && nextX < matrix.length);
-        }
+        };
 
         var addFinderPatterns = function (matrices){
             var modules = matrices[0].length;
@@ -649,7 +650,7 @@ kendo_module({
             addFinderSeparator(matrices, [1,-1], modules - 8, 7);
             addCentricPattern(matrices, finderPattern, 0 , modules - 7);
             addFinderSeparator(matrices, [-1,1],7, modules - 8);
-        }
+        };
 
         var addAlignmentPatterns = function (matrices, version){
             if(version < 2) {
@@ -676,12 +677,12 @@ kendo_module({
             }
             for(var i = 0; i < points.length;i++){
                 for(var j = 0; j < points.length; j++){
-                    if(matrix[points[i]][points[j]] == undefined){
+                    if(matrix[points[i]][points[j]] === undefined){
                         addCentricPattern(matrices, alignmentPattern, points[i] - 2, points[j] - 2);
                     }
                 }
             }
-        }
+        };
 
         var addTimingFunctions = function (matrices){
             var row = 6,
@@ -693,7 +694,7 @@ kendo_module({
                 fillFunctionCell(matrices, value, i, column);
                 value ^= 1;
             }
-        }
+        };
 
         var scoreMaskMatrixes = function (matrices){
             var scores = [],
@@ -702,21 +703,24 @@ kendo_module({
                 patterns = [],
                 adjacentSameBits = [],
                 matrix,
+                i,
                 row = 0,
-                column = 1;
+                column = 1,
                 modules = matrices[0].length;
-            for(var i = 0; i < matrices.length; i++){
+
+
+            for(i = 0; i < matrices.length; i++){
                 scores[i] = 0;
                 darkModules[i] = 0;
                 adjacentSameBits[i] = [0,0];
                 patterns[i] = [0, 0];
                 previousBits[i] = [];
             }
-            for(var i = 0; i < modules; i++){
+            for(i = 0; i < modules; i++){
                 for(var j = 0; j < modules; j++){
                     for(var k = 0; k < matrices.length; k++){
                         matrix = matrices[k];
-                        darkModules[k]+= parseInt(matrix[i][j]);
+                        darkModules[k]+= parseInt(matrix[i][j], 10);
                         if(previousBits[k][row] === matrix[i][j] && i + 1 < modules && j - 1 >= 0 &&
                             matrix[i + 1][j] == previousBits[k][row] && matrix[i + 1][j - 1] == previousBits[k][row]){
                             scores[k]+=3;
@@ -732,7 +736,7 @@ kendo_module({
                 minIdx,
                 min = Number.MAX_VALUE;
 
-            for(var i = 0; i < scores.length; i++){
+            for(i = 0; i < scores.length; i++){
                 scores[i]+= calculateDarkModulesRatioScore(darkModules[i], total);
                 if(scores[i] < min){
                     min = scores[i];
@@ -741,7 +745,7 @@ kendo_module({
             }
 
             return minIdx;
-        }
+        };
 
         function scoreFinderPatternOccurance(idx, patterns, scores, rowColumn, bit){
             patterns[idx][rowColumn] = ((patterns[idx][rowColumn] << 1) ^ bit) % 128;
@@ -772,13 +776,99 @@ kendo_module({
             return score;
         }
 
-        var encodeData = function (inputString, errorCorrectionLevel){
-            var modes = getModes(inputString),
+        var EncodingResult = function(dataString, version){
+            this.dataString = dataString;
+            this.version = version;
+        };
+
+        var IsoEncoder = function(){
+            this.getEncodingResult = function(inputString, errorCorrectionLevel){
+                var modes = getModes(inputString),
                 dataCodewordsCount = getDataCodewordsCount(modes),
                 version = getVersion(dataCodewordsCount, errorCorrectionLevel),
-                dataString = getDataString(modes, version),
+                dataString = getDataString(modes, version);
+
+                return new EncodingResult(dataString, version);
+            };
+        };
+
+        var UTF8Encoder = function(){
+            this.mode = modeInstances[this.encodingMode];
+        };
+
+        UTF8Encoder.fn = UTF8Encoder.prototype = {
+            encodingMode: BYTE,
+            utfBOM: "111011111011101110111111",
+            initialModeCountStringLength: 20,
+            getEncodingResult: function(inputString, errorCorrectionLevel){
+                var that = this,
+                    data = that.encode(inputString),
+                    dataCodewordsCount = that.getDataCodewordsCount(data),
+                    version = getVersion(dataCodewordsCount, errorCorrectionLevel),
+                    dataString = that.mode.getModeCountString(data.length / 8, version) + data;
+
+                return new EncodingResult(dataString, version);
+            },
+            getDataCodewordsCount: function(data){
+                var that = this,
+                    dataLength = data.length,
+                    dataCodewordsCount = Math.ceil(( that.initialModeCountStringLength + dataLength) / 8);
+
+                return dataCodewordsCount;
+            },
+            encode: function(str){
+                var that = this,
+                    result = that.utfBOM;
+                for(var i = 0; i < str.length; i++){
+                    result += that.encodeCharacter(str.charCodeAt(i));
+                }
+                return result;
+            },
+            encodeCharacter: function(code){
+                var bytesCount = this.getBytesCount(code),
+                    bc = bytesCount - 1,
+                    result = "";
+
+                if(bytesCount == 1){
+                    result = toBitsString(code, 8);
+                }
+                else{
+                    var significantOnes = 8 - bytesCount;
+
+                    for(var i = 0; i < bc; i++){
+                        result = toBitsString(code >> (i * 6) & 63 | 128, 8) + result;
+                    }
+
+                    result = ((code >> bc * 6) | ((255 >> significantOnes) << significantOnes)).toString(2) + result;
+                }
+                return result;
+            },
+            getBytesCount: function(code){
+                var ranges = this.ranges;
+                for(var i = 0; i < ranges.length;i++){
+                    if(code < ranges[i]){
+                        return i + 1;
+                    }
+                }
+            },
+            ranges: [128,2048,65536,2097152,67108864]
+        };
+
+        var QRCodeDataEncoder = function(encoding){
+            if(encoding && encoding.indexOf("utf") >= 0){
+                return new UTF8Encoder();
+            }
+            else{
+                return new IsoEncoder();
+            }
+        };
+
+        var encodeData = function (inputString, errorCorrectionLevel, encoding){
+            var encoder = new QRCodeDataEncoder(encoding),
+                encodingResult = encoder.getEncodingResult(inputString, errorCorrectionLevel),
+                version = encodingResult.version,
                 versionInformation = versionsCodewordsInformation[version - 1][errorCorrectionLevel],
-                dataString = padDataString(dataString, versionInformation.totalDataCodewords),
+                dataString = padDataString(encodingResult.dataString, versionInformation.totalDataCodewords),
                 blocks = getBlocks(dataString, versionInformation),
                 matrices = initMatrices(version);
 
@@ -804,7 +894,7 @@ kendo_module({
             addFormatInformation([optimalMatrix], encodeFormatInformation(formatString));
 
             return optimalMatrix;
-        }
+        };
 
         var QRCodeDefaults= {
             DEFAULT_SIZE: 200,
@@ -833,7 +923,6 @@ kendo_module({
                     baseUnit,
                     border = that.options.border || {},
                     borderWidth = border.width || 0,
-                    dataLength,
                     quietZoneSize,
                     view = that.view,
                     matrix,
@@ -847,7 +936,7 @@ kendo_module({
                     return;
                 }
 
-                matrix = encodeData(value, that.options.errorCorrection);
+                matrix = encodeData(value, that.options.errorCorrection, that.options.encoding);
                 size = that._getSize();
                 contentSize = size - 2 * borderWidth;
                 baseUnit = that._calculateBaseUnit(contentSize, matrix.length);
@@ -867,7 +956,7 @@ kendo_module({
                 var that = this,
                     size;
                 if(that.options.size){
-                   size = parseInt(that.options.size);
+                   size = parseInt(that.options.size, 10);
                 }
                 else {
                     var element = that.element,
@@ -907,12 +996,12 @@ kendo_module({
                     x1,
                     box,
                     column;
-
+                
                 for(var row = 0; row < matrix.length; row++){
                     y = quietZoneSize + row * baseUnit;
                     column = 0;
                     while(column < matrix.length){
-                        while(matrix[row][column] == 0 && column < matrix.length){
+                        while(matrix[row][column] === 0 && column < matrix.length){
                             column++;
                         }
                         if(column < matrix.length){
@@ -962,6 +1051,7 @@ kendo_module({
             },
             options: {
                 name: "QRCode",
+                encoding: "ISO_8859_1",
                 value: "",
                 errorCorrection: QRCodeDefaults.DEFAULT_ERROR_CORRECTION_LEVEL,
                 background: QRCodeDefaults.DEFAULT_BACKGROUND,
