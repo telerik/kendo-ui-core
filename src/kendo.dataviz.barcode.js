@@ -32,7 +32,7 @@
             this.setOptions(options);
         },
         setOptions: function(options){
-            var that = this;            
+            var that = this;
             that.options = extend({}, that.options, options);
             that.quietZoneLength = that.options.addQuietZone ? 2 * that.options.quietZoneLength : 0;
         },
@@ -57,9 +57,8 @@
             addQuietZone: true,
             addCheckSum: true
         },
-        initValue: function (value, width, height) {
-        },
-        addQuietZone: function () {           
+        initValue: function () {},
+        addQuietZone: function () {
             this.pattern.push(this.options.quietZoneLength || DEFAULT_QUIETZONE_LENGTH);
         },
         addData: function () {
@@ -82,11 +81,11 @@
             for(var idx = 0; idx < value.length; idx++){
                 that.addCharacter(value.charAt(idx));
             }
-            
+
             if(that.options.addCheckSum){
                 that.pushCheckSum();
             }
-            
+
             that.addStop();
             that.prepareValues();
         },
@@ -98,7 +97,7 @@
             }
             that.addBase(charData);
         },
-        addBase: function(character){}
+        addBase: function(){}
     });
 
     var code39ExtendedBase = {
@@ -118,7 +117,7 @@
             var that = this,
                 patterns;
             for(var i = 0; i < that.extendedMappings.length; i++){
-                if(patterns = that.extendedMappings[i].call(that, code)){
+                if((patterns = that.extendedMappings[i].call(that, code))){
                     for(var j = 0; j < patterns.length; j++){
                         that.addBase(patterns[j]);
                     }
@@ -149,8 +148,7 @@
             function(code){
                 var that = this,
                     result,
-                    dataCharacterCode,
-                    codes;
+                    dataCharacter;
                 if(!that.specialAsciiCodes[code]){
                     dataCharacter =  Math.floor(code / 32) * 6 + (code - 27) % 32 + 64;
                     result = [that.characterMap[that.shiftCharacters[3]], that.characterMap[String.fromCharCode(dataCharacter)]];
@@ -213,19 +211,19 @@
             if (that.height < minHeight) {
                 throw new Error("Insufficient Height. The minimum height for value: " + that.value + " is: " + minHeight);
             }
-            
+
             while((baseUnit = that.getBaseUnit(ratio)) < minBaseUnit && ratio > minRatio){
                 ratio = parseFloat((ratio - 0.1).toFixed(1));
             }
 
-            if(baseUnit < minBaseUnit){                     
+            if(baseUnit < minBaseUnit){
                 var minWidth = Math.ceil(that.getBaseWidth(minRatio) * minBaseUnit);
                 throw new Error("Insufficient width. The minimum width for value: " + that.value + " is: " + minWidth);
             }
-         
+
             that.ratio = ratio;
             that.baseUnit = baseUnit;
-            that.patternString = that.patternString.substring(0, that.patternString.length - 1);         
+            that.patternString = that.patternString.substring(0, that.patternString.length - 1);
             that.pattern = that.pattern.concat(that.patternString.replace(/ratio/g, ratio).split(that.splitCharacter));
         },
         getBaseUnit: function(ratio){
@@ -386,16 +384,17 @@
                 length = values.length,
                 wightedSum = 0,
                 cValue,
-                kValue;
+                kValue,
+                idx;
 
-            for(var i = length - 1; i >= 0; i--){
-                wightedSum += that.weightedValue(values[i],length - i, that.cCheckSumTotal);
+            for(idx = length - 1; idx >= 0; idx--){
+                wightedSum += that.weightedValue(values[idx],length - idx, that.cCheckSumTotal);
             }
             cValue = wightedSum % that.checkSumMod;
 
             wightedSum = that.weightedValue(cValue, 1, that.kCheckSumTotal);
-            for(var i = length - 1; i >= 0; i--){
-                wightedSum += that.weightedValue(values[i], length - i + 1, that.kCheckSumTotal);
+            for(idx = length - 1; idx >= 0; idx--){
+                wightedSum += that.weightedValue(values[idx], length - idx + 1, that.kCheckSumTotal);
             }
 
             kValue = wightedSum % that.checkSumMod;
@@ -412,8 +411,7 @@
             return (index % total || total) * value;
         },
         addPattern: function(pattern){
-            var symbol,
-                value;
+            var value;
 
             for(var i = 0; i < pattern.length; i++){
                 value = parseInt(pattern.charAt(i),10);
@@ -495,13 +493,13 @@
     }));
 
     var state128 = kendo.Class.extend({
-        init: function(encoding, states){
+        init: function(encoding){
             this.encoding = encoding;
         },
         addStart: function(){},
-        is: function (value, index){},
-        move: function (encodingState){},
-        pushState: function(encodingState){}
+        is: function (){},
+        move: function (){},
+        pushState: function(){}
     });
 
     var state128AB = state128.extend({
@@ -541,8 +539,8 @@
                 }
             }
 
-            while((code = encodingState.value.charCodeAt(encodingState.index)) >= 0 
-                && that.isCode(code) && encodingState.index < maxLength){
+            while((code = encodingState.value.charCodeAt(encodingState.index)) >= 0 &&
+                that.isCode(code) && encodingState.index < maxLength){
                 that.encoding.addPattern(that.getValue(code));
                 encodingState.index++;
             }
@@ -569,14 +567,14 @@
         _shiftState: function(encodingState){
             var that = this;
             if(encodingState.previousState == that.shiftKey &&
-                (encodingState.index + 1 >= encodingState.value.length || 
+                (encodingState.index + 1 >= encodingState.value.length ||
                     that.encoding[that.shiftKey].is(encodingState.value, encodingState.index + 1))){
                 that.encoding.addPattern(that.SHIFT);
                 encodingState.shifted = true;
                 return true;
             }
         },
-        _moveState: function(encodingState){
+        _moveState: function(){
             this.encoding.addPattern(this.MOVE);
             return true;
         },
@@ -624,13 +622,13 @@
             var next4 = getNext(value, index, 4);
             return (index + 4 <= value.length || value.length == 2) && numberRegex.test(next4);
         },
-        move: function (encodingState){
+        move: function (){
             this.encoding.addPattern(this.MOVE);
         },
         pushState: function(encodingState){
             var code;
-            while(( code = getNext(encodingState.value, encodingState.index, 2))
-                && numberRegex.test(code) && code.length == 2)
+            while(( code = getNext(encodingState.value, encodingState.index, 2)) &&
+                numberRegex.test(code) && code.length == 2)
             {
                 this.encoding.addPattern(parseInt(code, 10));
                 encodingState.index+=2;
@@ -750,10 +748,10 @@
             this.encoding = encoding;
             this.states = states;
         },
-        addStart: function(encodingState){
+        addStart: function(){
             this.encoding[this.startState].addStart();
         },
-        is: function(value, index){
+        is: function(){
             return inArray(this.key, this.states) >= 0;
         },
         pushState: function(encodingState){
@@ -767,9 +765,8 @@
                 },
                 current,
                 nextStart,
-                separatorLength,
-                codeLength;
-         
+                separatorLength;
+
             encoding.addPattern(that.START);
 
             while(true){
@@ -790,7 +787,7 @@
                     }
                 }
                 subState.value = value.substring(index, nextStart).replace(regexSeparators, "");
-                that.validate(current, subState.value);                
+                that.validate(current, subState.value);
 
                 encoding.pushData(subState, that.dependentStates);
 
@@ -799,12 +796,12 @@
                 }
 
                 index = nextStart;
-                
+
                 if(subState.state != that.startState){
                     encoding[that.startState].move(subState);
                     subState.state = that.startState;
                 }
-                
+
                 if(!current.ai.length){
                     encoding.addPattern(that.START);
                 }
@@ -836,7 +833,6 @@
         },
         getByLength: function(value, index){
             var that = this,
-                idx = 2,
                 id,
                 ai;
             for(var i = 2; i <= 4; i++){
@@ -867,7 +863,7 @@
             return {
                 ai: ai,
                 id: id
-            }
+            };
         },
         getAI: function(id){
             var ai = this.applicationIdentifiers,
@@ -984,7 +980,7 @@
                     index: 0,
                     state: ""
                 };
-            if(that.value.length == 0){
+            if(that.value.length === 0){
                 return;
             }
 
@@ -1006,17 +1002,17 @@
                 if(encodingState.index >= encodingState.value.length){
                     break;
                 }
-               
+
                 if(!encodingState.shifted){
                     encodingState.previousState = encodingState.state;
-                    encodingState.state  = that.getNextState(encodingState, states);                
+                    encodingState.state  = that.getNextState(encodingState, states);
                     that[encodingState.state].move(encodingState);
-                }    
+                }
                 else{
                    var temp = encodingState.state;
                    encodingState.state = encodingState.previousState;
                    encodingState.previousState = temp;
-                   encodingState.shifted = false; 
+                   encodingState.shifted = false;
                 }
             }
         },
@@ -1040,7 +1036,6 @@
         addPattern: function(code){
             var that = this,
                 pattern = that.characterMap[code].toString(),
-                symbol,
                 value;
 
             for(var i = 0; i < pattern.length; i++){
@@ -1101,7 +1096,7 @@
     });
 
     var msiBase = Encoding.extend({
-        initValue: function(value, width, height){
+        initValue: function(value, width){
             var that = this;
             that.pattern = [];
             that.value = value;
@@ -1160,19 +1155,20 @@
         checkSums: {
             Modulo10: function(value){
                 var checkValues = [0, ""],
+                odd = value.length % 2,
+                idx,
                 evenSum,
-                oddSum,
-                odd = value.length % 2;
+                oddSum;
 
-                for(var i = 0; i < value.length; i++){
-                    checkValues[(i + odd) % 2] += parseInt(value.charAt(i),10);
+                for(idx = 0; idx < value.length; idx++){
+                    checkValues[(idx + odd) % 2] += parseInt(value.charAt(idx),10);
                 }
 
                 oddSum = checkValues[0];
                 evenSum = (checkValues[1] * 2).toString();
 
-                for(var i = 0; i < evenSum.length; i++){
-                    oddSum += parseInt(evenSum.charAt(i),10);
+                for(idx = 0; idx < evenSum.length; idx++){
+                    oddSum += parseInt(evenSum.charAt(idx),10);
                 }
 
                 return [(10 - (oddSum % 10)) % 10];
@@ -1188,7 +1184,7 @@
                     weight = ((length - i) % 6 || 6) + 1;
                     weightedSum +=  weight * value.charAt(i);
                 }
-                var checkValue = (mod - weightedSum % mod) % mod;
+                checkValue = (mod - weightedSum % mod) % mod;
                 if(checkValue != 10){
                     return [checkValue];
                 }
@@ -1245,7 +1241,7 @@
         DASH: "-",
         START: "112211",
         STOP: "11221",
-        initValue: function(value, width, height){
+        initValue: function(value, width){
             var that = this;
             that.pattern = [];
             that.value = value;
@@ -1318,8 +1314,7 @@
             that.addPattern(pattern);
         },
         addPattern: function(pattern){
-            var symbol,
-                value;
+            var value;
             for(var i = 0; i < pattern.length; i++){
                 value = parseInt(pattern.charAt(i),10);
                 this.pattern.push(value);
@@ -1382,7 +1377,7 @@
         },
         validate: function(value){
             var that = this;
-            
+
             if(!numberRegex.test(value)){
                 that.invalidCharacterError(value.match(/[^0-9]/)[0]);
             }
@@ -1425,19 +1420,19 @@
         },
         addData:  function(){
             var that = this;
-            that.addPieces(that.characterMap["start"]);
+            that.addPieces(that.characterMap.start);
             that.addSide(that.leftPart,that.leftKey);
-            that.addPieces(that.characterMap["middle"]);
+            that.addPieces(that.characterMap.middle);
             that.addSide(that.rightPart);
-            that.addPieces(that.characterMap["start"]);
+            that.addPieces(that.characterMap.start);
         },
         addSide:function(leftPart,key){
             var that = this;
             for(var i = 0; i < leftPart.length; i++){
                 if(key && parseInt(that.keyTable[key].charAt(i),10)){
-                    that.addPieces(Array.prototype.slice.call(that.characterMap['digits'][leftPart.charAt(i)]).reverse(),true);
+                    that.addPieces(Array.prototype.slice.call(that.characterMap.digits[leftPart.charAt(i)]).reverse(),true);
                 }else{
-                    that.addPieces(that.characterMap['digits'][leftPart.charAt(i)],true);
+                    that.addPieces(that.characterMap.digits[leftPart.charAt(i)],true);
                 }
             }
         },
@@ -1555,7 +1550,7 @@
                 contentBox = Box2D(0, 0, options.width, options.height).unpad(border.width).unpad(options.padding),
                 barHeight = contentBox.height(),
                 result, textToDisplay;
-           
+
             that.contentBox = contentBox;
             that.view.children = [];
             that.addBackground();
