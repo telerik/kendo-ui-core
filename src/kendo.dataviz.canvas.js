@@ -14,9 +14,7 @@ kendo_module({
         math = Math,
 
         kendo = window.kendo,
-        Class = kendo.Class,
         dataviz = kendo.dataviz,
-        Box2D = dataviz.Box2D,
         Color = dataviz.Color,
         Point2D = dataviz.Point2D,
         ViewBase = dataviz.ViewBase,
@@ -24,12 +22,11 @@ kendo_module({
         deepExtend = kendo.deepExtend,
         defined = dataviz.defined,
         round = dataviz.round,
-        renderTemplate = dataviz.renderTemplate,
-        rotatePoint = dataviz.rotatePoint,
-        uniqueId = dataviz.uniqueId;
+        renderTemplate = dataviz.renderTemplate;
 
     // Constants ==============================================================
-    var COORD_PRECISION = dataviz.COORD_PRECISION,
+    var BUTT = "butt",
+        COORD_PRECISION = dataviz.COORD_PRECISION,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
@@ -38,9 +35,7 @@ kendo_module({
         NONE = "none",
         RADIAL = "radial",
         SOLID = "solid",
-        SQUARE = "square",
-        TRANSPARENT = "transparent",
-        UNDEFINED = "undefined";
+        SQUARE = "square";
 
     var CANVAS_TEMPLATE = renderTemplate(
         "<canvas width='#= d.options.width #px' height='#= d.options.height #px' " +
@@ -95,9 +90,6 @@ kendo_module({
             return canvas;
         },
 
-        render: function() {
-        },
-
         renderContent: function(context) {
             var element = this,
                 sortedChildren = element.sortChildren(),
@@ -109,17 +101,15 @@ kendo_module({
             }
         },
 
-        renderElement: function(element) {
-            return $("<div />")[0];
-        },
-
         createGroup: function(options) {
+            // TODO: Should we decorate?
             return this.decorate(
                 new CanvasGroup(options)
             );
         },
 
         createText: function(content, options) {
+            // TODO: Should we decorate?
             return this.decorate(
                 new CanvasText(content, options)
             );
@@ -136,6 +126,7 @@ kendo_module({
 
         // TODO: Refactor to (p1, p2, options)
         createLine: function(x1, y1, x2, y2, options) {
+            // TODO: Should we decorate?
             return this.decorate(
                 new CanvasLine([new Point2D(x1, y1),
                              new Point2D(x2, y2)], false, options)
@@ -143,6 +134,7 @@ kendo_module({
         },
 
         createPolyline: function(points, closed, options) {
+            // TODO: Should we decorate?
             return this.decorate(
                 new CanvasLine(points, false, options)
             );
@@ -347,7 +339,6 @@ kendo_module({
 
         renderPoints: function(context) {
             var circle = this,
-                options = circle.options,
                 c = circle.c;
 
             context.arc(c.x, c.y, circle.r, 0, 2 * Math.PI, false);
