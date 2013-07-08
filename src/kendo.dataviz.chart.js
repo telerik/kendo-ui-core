@@ -4351,6 +4351,9 @@ kendo_module({
     var StepLineSegment = LineSegment.extend({
         points: function(visualPoints) {
             var segment = this,
+                chart = segment.parent,
+                plotArea = chart.plotArea,
+                categoryAxis = plotArea.seriesCategoryAxis(segment.series),
                 linePoints = segment.linePoints.concat(visualPoints || []),
                 length = linePoints.length,
                 points = [],
@@ -4360,16 +4363,20 @@ kendo_module({
             for (i = 1; i < length; i++) {
                 prevPoint = linePoints[i - 1];
                 point = linePoints[i];
-                console.log(point, this);
-
-                //points.push(point2d(prevpoint.box.center().x, prevpoint.markerbox().center().y));
-                //points.push(point2d(prevpoint.box.center().x + prevpoint.box.width() / 2, prevpoint.markerbox().center().y));
-                //points.push(point2d(point.box.center().x - point.box.width() / 2, point.markerbox().center().y));
-                //points.push(point2d(point.box.center().x, point.markerbox().center().y));
-
-                points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.markerBox().center().y));
-                points.push(Point2D(point.markerBox().center().x, prevPoint.markerBox().center().y));
-                points.push(Point2D(point.markerBox().center().x, point.markerBox().center().y));
+                if (categoryAxis.options. justified) {
+                    points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.markerBox().center().y));
+                    points.push(Point2D(point.markerBox().center().x, prevPoint.markerBox().center().y));
+                    points.push(Point2D(point.markerBox().center().x, point.markerBox().center().y));
+                } else {
+                    points.push(Point2D(prevPoint.box.x1, prevPoint.markerBox().center().y));
+                    points.push(Point2D(prevPoint.box.x2, prevPoint.markerBox().center().y));
+                    if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
+                        points.push(Point2D(prevPoint.box.x2 + (point.box.x1 - prevPoint.box.x2) / 2, prevPoint.markerBox().center().y));
+                        points.push(Point2D(prevPoint.box.x2 + (point.box.x1 - prevPoint.box.x2) / 2, point.markerBox().center().y));
+                    }
+                    points.push(Point2D(point.box.x1, point.markerBox().center().y));
+                    points.push(Point2D(point.box.x2, point.markerBox().center().y));
+                }
             }
 
             return points;
