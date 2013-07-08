@@ -167,11 +167,6 @@ kendo_module({
     });
 
     var CanvasPath = ViewElement.extend({
-        init: function(options) {
-            var path = this;
-            ViewElement.fn.init.call(path, options);
-        },
-
         options: {
             fill: "",
             fillOpacity: 1,
@@ -190,7 +185,7 @@ kendo_module({
             this.renderPoints(context);
 
             // TODO: Manual dash rendering for IE
-            var dashType = dashType ? dashType.toLowerCase() : null;
+            var dashType = options.dashType ? options.dashType.toLowerCase() : null;
             if (dashType && dashType != SOLID) {
                 var dashArray = DASH_ARRAYS[dashType];
                 if (context.setLineDash) {
@@ -613,6 +608,7 @@ kendo_module({
         CanvasLinearGradient: CanvasLinearGradient,
         CanvasGroup: CanvasGroup,
         CanvasLine: CanvasLine,
+        CanvasPath: CanvasPath,
         CanvasRing: CanvasRing,
         CanvasText: CanvasText,
         CanvasView: CanvasView,

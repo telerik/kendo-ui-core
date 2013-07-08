@@ -54,11 +54,15 @@
                 };
 
             var ContextStub = makeStub([
-                ["save"],
-                ["restore"],
+                ["beginPath"],
+                ["closePath"],
+                ["fill"],
                 ["fillText", ["content", "x", "y"]],
-                ["translate", ["x", "y"]],
-                ["rotate", ["angle"]]
+                ["restore"],
+                ["rotate", ["angle"]],
+                ["save"],
+                ["stroke"],
+                ["translate", ["x", "y"]]
             ]);
 
             (function() {
@@ -529,162 +533,107 @@
             })();
 
             (function() {
-                var path;
+                var path,
+                    ctx;
 
-                module("SVGPath", {
+                module("CanvasPath", {
                     setup: function() {
-                        path = new dataviz.SVGPath();
+                        path = new dataviz.CanvasPath();
+                        ctx = new ContextStub();
                     }
-                });
-
-                test("renders id", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = false;
-
-                    path = new dataviz.SVGPath({ id: "1" });
-                    ok(path.render().indexOf(" id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders path tag", function() {
-                    equal(path.render().replace(/\<path.*?\>/, "<path>"),
-                        "<path></path>");
                 });
 
                 test("renders fill color", function() {
                     path.options.fill = "#f00";
-                    ok(path.render().indexOf("fill='#f00'") > -1);
+                    path.render(ctx);
+
+                    equal(ctx.fillStyle, path.options.fill);
                 });
 
-                test("renders display", function() {
-                    path.options.visible = false;
-                    ok(path.render().indexOf("display: none") > -1);
-                });
-
-                test("renders empty fill when no fill is set", function() {
+                test("does not render fill when no set", function() {
                     path.options.fill = "";
-                    ok(path.render().indexOf("fill='none") > -1);
-                });
-
-                test("renders empty fill when fill is set to 'transparent'", function() {
-                    path.options.fill = "transparent";
-                    ok(path.render().indexOf("fill='none") > -1);
+                    path.render(ctx);
+                    ok(!ctx.fillStyle);
                 });
 
                 test("renders stroke color", function() {
                     path.options.stroke = "#f00";
-                    ok(path.render().indexOf("stroke='#f00'") > -1);
+                    path.options.strokeWidth = 1;
+                    path.render(ctx);
+
+                    equal(ctx.strokeStyle, path.options.stroke);
                 });
 
                 test("renders stroke width", function() {
-                    path.options.strokeWidth = "2";
-                    ok(path.render().indexOf("stroke-width='2'") > -1);
+                    path.options.stroke = "#f00";
+                    path.options.strokeWidth = 2;
+                    path.render(ctx);
+
+                    equal(ctx.lineWidth, path.options.strokeWidth);
                 });
 
                 test("renders stroke linecap", function() {
-                    ok(path.render().indexOf("stroke-linecap='square'") > -1);
+                    path.options.stroke = "#f00";
+                    path.options.strokeWidth = 2;
+                    path.render(ctx);
+
+                    equal(ctx.lineCap, "square");
                 });
 
                 test("renders stroke opacity", function() {
                     path.options.strokeOpacity = 0.5;
-                    ok(path.render().indexOf("stroke-opacity='0.5'") > -1);
+                    path.options.stroke = "#f00";
+                    path.options.strokeWidth = 2;
+                    path.render(ctx);
+
+                    equal(ctx.globalAlpha, 0.5);
                 });
 
                 test("renders fill opacity", function() {
+                    path.options.fill = "#f00";
                     path.options.fillOpacity = 0.5;
-                    ok(path.render().indexOf("fill-opacity='0.5'") > -1);
+                    path.render(ctx);
+
+                    equal(ctx.globalAlpha, 0.5);
                 });
 
-                test("renders id", function() {
-                    path.options.id = "id";
-                    ok(path.render().indexOf("id='id'") > -1);
+                test("saves/restores style stack", function() {
+                    path.render(ctx);
+                    equal(ctx.log.save.length, 1);
+                    equal(ctx.log.restore.length, 1);
                 });
 
-                test("renders data attributes", function() {
-                    path.options.data = { testId: 1 };
-                    ok(path.render().indexOf("data-test-id='1'") > -1);
-                });
-
-                module("SVGPath / Dash", {
+                // ------------------------------------------------------------
+                module("CanvasPath / Dash", {
                     setup: function() {
-                        path = new dataviz.SVGPath({ strokeWidth: 1 });
+                        path = new dataviz.CanvasPath({
+                            strokeWidth: 1,
+                            dashType: "dot"
+                        });
+                        ctx = new ContextStub();
                     }
                 });
 
-                test("defaults to 1 px stroke width", function() {
-                    path.options.strokeWidth = undefined;
-                    path.options.dashType = "dot";
-                    ok(path.render().indexOf("stroke-dasharray='1.5 3.5'") > -1);
-                });
-
-                test("renders dot", function() {
-                    path.options.dashType = "dot";
-                    ok(path.render().indexOf("stroke-dasharray='1.5 3.5'") > -1);
-                });
-
-                test("renders dash", function() {
-                    path.options.dashType = "dash";
-                    ok(path.render().indexOf("stroke-dasharray='4 3.5'") > -1);
-                });
-
-                test("renders longdash", function() {
-                    path.options.dashType = "longdash";
-                    ok(path.render().indexOf("stroke-dasharray='8 3.5'") > -1);
-                });
-
-                test("renders dashdot", function() {
-                    path.options.dashType = "dashdot";
-                    ok(path.render().indexOf("stroke-dasharray='3.5 3.5 1.5 3.5'") > -1);
-                });
-
-                test("renders longdashdot", function() {
-                    path.options.dashType = "longdashdot";
-                    ok(path.render().indexOf("stroke-dasharray='8 3.5 1.5 3.5'") > -1);
-                });
-
-                test("renders longdashdotdot", function() {
-                    path.options.dashType = "longdashdotdot";
-                    ok(path.render().indexOf("stroke-dasharray='8 3.5 1.5 3.5 1.5 3.5'") > -1);
-                });
-
                 test("sets stroke linecap to butt", function() {
-                    path.options.dashType = "dot";
-                    ok(path.render().indexOf("stroke-linecap='butt'") > -1);
+                    path.render(ctx);
+                    equal(ctx.lineCap, "butt");
                 });
 
-                test("clone returns different instance", function() {
-                    notEqual(path.clone(), path);
+                test("calls setLineDash if available", function() {
+                    ctx.setLineDash = function(dashArray) {
+                        deepEqual(dashArray, dataviz.DASH_ARRAYS.dot);
+                    }
+                    path.render(ctx);
                 });
 
-                test("clone returns SVGPath", function() {
-                    ok(path.clone() instanceof dataviz.SVGPath);
+                test("sets mozDash if setLineDash is not available", function() {
+                    path.render(ctx);
+                    deepEqual(ctx.mozDash, dataviz.DASH_ARRAYS.dot);
                 });
 
-                test("clone copies options", function() {
-                    path.options.id = "1";
-                    equal(path.clone().options.id, "1");
-                });
-
-                test("refresh updates fill-opacity attribute", function() {
-                    var domElement = $("<div />");
-                    path.options.fillOpacity = 0.4;
-                    path.refresh(domElement);
-                    equal(domElement.attr("fill-opacity"), "0.4");
-                });
-
-                test("refresh updates stroke-opacity attribute", function() {
-                    var domElement = $("<div />");
-                    path.options.strokeOpacity = 0.4;
-                    path.refresh(domElement);
-                    equal(domElement.attr("stroke-opacity"), "0.4");
-                });
-
-                test("refresh updates display style property", function() {
-                    var domElement = $("<div />");
-                    path.options.visible = false;
-                    path.refresh(domElement);
-                    equal(domElement.css("display"), "none");
+                test("sets webkitLineDash if setLineDash is not available", function() {
+                    path.render(ctx);
+                    deepEqual(ctx.mozDash, dataviz.DASH_ARRAYS.dot);
                 });
 
             })();
