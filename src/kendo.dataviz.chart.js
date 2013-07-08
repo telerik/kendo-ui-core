@@ -5636,6 +5636,10 @@ kendo_module({
             for (i = 0; i < length; i++) {
                 pointData = SeriesBinder.current.bindPoint(series, i);
                 value = pointData.value;
+                if (typeof value === "string") {
+                    value = parseFloat(value);
+                }
+
                 if (value && pointData.fields.visible !== false) {
                     sum += value;
                 }
