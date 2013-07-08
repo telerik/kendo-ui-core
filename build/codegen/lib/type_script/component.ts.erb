@@ -18,6 +18,11 @@
 % methods.each do |method|
         <%= method.type_script_declaration %>
 % end
+% fields.each do |field|
+% if (field.name != 'dataSource' && field.name != "options")
+        <%= field.type_script_declaration %>
+% end
+% end
     }
 % composite_options.each do |option|
 <%= option.type_script_interface %>

@@ -81,6 +81,10 @@ module CodeGen::TypeScript
     module Options
         include Declaration
 
+        def field_class
+            Field
+        end
+
         def option_class
             Option
         end
@@ -129,6 +133,14 @@ module CodeGen::TypeScript
             return @owner.type_script_type + @name.pascalize + 'Event' if @options.size > 0
 
             @owner.type_script_type + 'Event'
+        end
+    end
+
+    class Field < CodeGen::Field
+        include Declaration
+        def type_script_declaration
+
+            "#{name}: #{type_script_type};"
         end
     end
 

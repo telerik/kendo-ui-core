@@ -1,4 +1,5 @@
 require 'codegen/lib/options'
+require 'codegen/lib/field'
 require 'codegen/lib/markdown_parser'
 require 'codegen/lib/component'
 

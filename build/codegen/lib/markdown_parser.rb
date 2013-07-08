@@ -35,6 +35,16 @@ class MarkdownParser
                                  :description => section_description(index, configuration))
         end
 
+        fields = fields_section(root)
+
+        each_section(fields) do |field, index|
+
+            component.add_field(:name => section_name(field),
+                                :type => option_type(field),
+                                :description => section_description(index, fields))
+
+        end
+
         methods = methods_section(root)
 
         each_section(methods) do |method, index|
@@ -132,6 +142,14 @@ class MarkdownParser
         end_index = child_index(element, 'Methods')
 
         end_index = child_index(element, 'Events') if end_index == element.children.size
+
+        element.children.slice(start_index..end_index)
+    end
+
+    def fields_section(element)
+        start_index = child_index(element, 'Fields')
+
+        end_index = child_index(element, 'Methods')
 
         element.children.slice(start_index..end_index)
     end
