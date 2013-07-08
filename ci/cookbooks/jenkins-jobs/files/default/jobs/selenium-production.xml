@@ -53,7 +53,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>./run-all.sh –proxyInjectionMode –userContentTransformation &quot;staging&quot; &quot;production&quot;</command>
+      <command>./run-all.sh &quot;http://127.0.0.1/production/&quot; Framework,UIWidgets,DataViz</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
