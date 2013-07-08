@@ -988,6 +988,8 @@ kendo_module({
                 .css(isRtl ? "left" : "right", wrapper.find(".k-window-actions").outerWidth() + 10);
 
             contentHtml.show();
+
+            contentHtml.find("[data-role=editor]").kendoEditor("refresh");
         }
     });
 

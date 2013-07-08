@@ -251,14 +251,6 @@ kendo_module({
             } catch (e) { }
         },
 
-        _DOMNodeInserted: function(e) {
-            var wrapper = this.wrapper;
-
-            if ($.contains(e.target, wrapper[0]) || wrapper[0] == e.target) {
-                this.refresh();
-            }
-        },
-
         _selectionChange: function() {
             this._selectionStarted = false;
             this.saveSelection();
@@ -276,8 +268,6 @@ kendo_module({
 
             textarea.attr("autocomplete", "off")
                 .appendTo(editArea).addClass("k-content k-raw-content").css("display", "none");
-
-            $(document).on("DOMNodeInserted", proxy(that._DOMNodeInserted, that));
 
             that.textarea = textarea;
             that.wrapper = editorWrap;
@@ -581,8 +571,7 @@ kendo_module({
                 .add(that.element.closest("form"))
                 .off(NS);
 
-            $(document).off("DOMNodeInserted", proxy(that._DOMNodeInserted, that))
-                       .off("mousedown", proxy(that._endTyping, that))
+            $(document).off("mousedown", proxy(that._endTyping, that))
                        .off("mouseup", proxy(that._mouseup, that));
 
             kendo.destroy(that.wrapper);
