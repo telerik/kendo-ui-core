@@ -64,28 +64,22 @@ kendo_module({
 
         renderTo: function(container) {
             var view = this,
-                canvas;
+                options = view.options,
+                canvas,
+                ctx;
 
             canvas = container.firstElementChild;
             if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
-                var canvas = $(CANVAS_TEMPLATE(this));
-                $(container).empty().append(canvas);
-
+                container.innerHTML = CANVAS_TEMPLATE(this);
                 canvas = container.firstElementChild;
             } else {
-                // TODO: Introduce "stage" wrapper to avoid messy cleanup
-                $(canvas)
-                    .attr({
-                        width: view.options.width,
-                        height: view.options.height
-                    })
-                    .siblings().remove();
+                $(canvas).siblings().remove();
+                canvas.width = options.width;
+                canvas.height = options.height;
             }
 
-            canvas.width = canvas.width;
-
-            var context = canvas.getContext("2d");
-            view.renderContent(context);
+            ctx = canvas.getContext("2d");
+            view.renderContent(ctx);
 
             return canvas;
         },
@@ -116,11 +110,11 @@ kendo_module({
         },
 
         createRect: function(box, style) {
-            if (style.overlay) {
+            if (style && style.overlay) {
                 style.overlay.bbox = box;
             }
             return this.decorate(
-                new CanvasLine(box.points(), true, style)
+                new CanvasLine(box.points(), true, this.setDefaults(style))
             );
         },
 
@@ -129,14 +123,14 @@ kendo_module({
             // TODO: Should we decorate?
             return this.decorate(
                 new CanvasLine([new Point2D(x1, y1),
-                             new Point2D(x2, y2)], false, options)
+                             new Point2D(x2, y2)], false, this.setDefaults(options))
             );
         },
 
         createPolyline: function(points, closed, options) {
             // TODO: Should we decorate?
             return this.decorate(
-                new CanvasLine(points, false, options)
+                new CanvasLine(points, closed, this.setDefaults(options))
             );
         },
 
@@ -634,11 +628,18 @@ kendo_module({
 
     // Exports ================================================================
     if (supportsCanvas) {
-        dataviz.ViewFactory.current.register("canvas", CanvasView, 30);
+        //dataviz.ViewFactory.current.register("canvas", CanvasView, 30);
+        dataviz.ViewFactory.current.register("canvas", CanvasView, 0);
     }
 
     deepExtend(dataviz, {
+        CanvasCircle: CanvasCircle,
+        CanvasGroup: CanvasGroup,
+        CanvasLine: CanvasLine,
+        CanvasRing: CanvasRing,
+        CanvasText: CanvasText,
         CanvasView: CanvasView,
+
         supportsCanvas: supportsCanvas
     });
 

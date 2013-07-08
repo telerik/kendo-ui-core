@@ -41,6 +41,7 @@ var tests = [
     "chart/rendering.html",
     "chart/svg.html",
     "chart/vml.html",
+    "chart/canvas.html",
     "chart/plotarea.html",
     "chart/barchart.html",
     "chart/numericaxis.html",
