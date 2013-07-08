@@ -902,6 +902,10 @@ kendo_module({
                 nextItem,
                 parentItem;
 
+            if (item.hasClass(DISABLEDSTATE)) {
+                return;
+            }
+
             if (!belongsToVertical) {
                 nextItem = item.nextAll(nextSelector);
                 if (!nextItem.length) {
