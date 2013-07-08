@@ -18,7 +18,7 @@
                 modes = dataviz.QRCodeFields.modes;
 
             (function() {
-                
+
                 var NUMERIC = "numeric",
                     ALPHA_NUMERIC = "alphanumeric",
                     BYTE = "byte",
@@ -47,23 +47,23 @@
                     byteTestValues = [
                         "bRX[T9p.CF'E`oHi62T:r%8MAro!GTR7>9cb981@O$sk|#JV3^",
                         "SzvOmw'I2Vp ~?Wu_LP@`wo+)n7jn8%er_YH~;gBf3ge-aP`jj)KK~JR/h)%*:ME.T!i@5{\\s&U{;y`KmoLb*\\p(h_e{iiY\\o='E)ZhwrBbQa728Ski0M'd3#)q']Rdq64'_t\"</98|3YC&8y:>RyUhj|VQJ`C4zOs4oVxy%sc2v%;y7YRl5-(w[{5Y9MZMYp9$zT$L1'dmDu O>}8&7$F`nG<&7cIl'{j!iev#$PTmbcg[Z[sd[a/",
-                        "���*:\"�}OQ��qc���x��m��F5'��*r~dg���D�P�o�+}�B��D7U��JO��t�7��2�>{L�!��a_%�n�,�28D�8��JM���Qy��-c������E�(w������\"#IF9i�L�a�r���\\��,�X;#o�IK�j&���U�bM�3 5����� �=�Y�K�?:^Y*���B�$ �4�w)��ݭ,���E��SD�:��e�o��T�K��ly�P|�x�Lp.=M�;�{����U�42�\"yQ�a2f��'�(�X$6�_��Nf���h�(zco�M�k�d��ܵ]a2�O�\\�S\"ک�ܺ	��-Ǽ�NH�}�n%G���Yv#4z%� p��>j@�*��J���j^���u���$NTj��E����GP��~^��Q<\\p�����i<8I� y��SrZ.*w��C����d�N��O.~A� aN|6�ZedUn����<�\"}��{io���\"cY?�����Wt��j94Fs����\"�>��^��we�S�bf��{����i.\\	>�y ��L,��>B�bH`[�3��2��^`B6�6��~���2��J��M���6��{���NzQDCu�Vp9���\"XY*���;�vR�|;�8�����!��kE���]i+!Χd��a��H�U���ԡYߨ#$O2��+]b5�",
-                        "��2�g�jX<�h�[M(�����g�/xj4N6*`�F��$kk��>����C0�=kC���O�^밷^~8G�E}����Cg	bM��.J�8yt�V��i�bC�f��6���Hl@0:%pVeϴ��V�:o/iOͭ��+URXť��^/��/���$8�5S򪥸W�9�2+=R�{�r\\H�^>\\��*�[e����7fγS$�S��tҰia�Z`I��n�� ����1)oHv�}�#��������j(:D���_\\q������)��pL����3����2�Q!��y�2I�f��9U-e�Q�Tj!/(�[��]�X��ZЦU��r<���I1\"NE@�#w�M3�3�Jq�)�w��Gl��� ��S]�4�4bN��S�\"]#�/h��j�N�E�RE%�����o7wϣ�_����ú�ȿ�<�9j]q�q� ]��^�vD)���s������[�&<�⶧��9A/Q��kj�Y��3R�{h121���d�����!���r��z�wyZ eѫ�Y���@L���[������{�	0*c	I���a]�$��\\��2�z&��?H�>�Nk��kO��0\\�AleP�s�XG0 �!,�f.�r \\�n,At�ew]�c?LZ�:��'��p�-մ����Fvcq������=LUd�:洭FN,[�>��&�=�j@� ��I�'<�ﺴm�O��rDi�!�_w�1w�(_W�˼���Y�/���- aa6���tA�\"VC��V�����6��ryPQU�e�s���,b�FWV>9����d4�8�u���q�����M���\\�Y�q|��NX۪I=��a�M8Ml �I��!� ��`fͭj7��Ƨӻ�\"���\";��R�$�p0�9o�zT�$ǥU��V�9���I���uyU\"1/�o*�_�7{%�{M�|I�T'eB���'=[�?|\"$���)�Ye�;uix90�\"v���j#zC#(N�[vh����iL���Axs�5h^�.{/��;�a�Zײ_�-G�D�}g���eAy�륵+������@&.��0Q��Y�$uw�W�?l\"?�.Ix������Rw�<J)��U�@�-� N#����?W=P�'���'	GU�&\\� EKW��\"T�������j�y�6 v�-���5�jW�C��l-�6� �� �t�si\"�d�pQ����=��T_j@��2��d�@��i,m>Ϥ$�.T��2���/S2 -��W���{`(pR�	I;��q�t]�~�;Y]64^`� H��ի�#&3K���s>ۡ�`VYcY6��D����Tg�RR�o��-��mq��L�=�B~��W믢�&r����Lh{J{t�Sn!��8ɩ���F�R 1M��;�Y|��LZC=�C��E��.&jY%۫�b��}�S��I&k50D�r�>u��Zp8kB��jϫq�/h�005Hm�c$�NJpX���n�����&�͸f� \\ �/1K;����%o90ִrp�v�X7|��e�6,<��p�S�4#��Z\"w,u��4�Z/\"�>6��*��l�?5�16�	���B>N�Hr�&S�}	��k}��G�F�@�3-���=�ԦYZFv.3�G�:�ԯ���",
-                        "�SC�O��@s�=}��yW�v9��b/C�M/R�Z}�Un*�rcCp�ru�Y �Vl���;5Op��o��r8����@s5�?��:��Ic谰T���_����	����IR}s'4)�zK�/�l�dc1�v#�����ʽ�s���*$��G�-ex��_Oj#0T*�У��vR�9�JX�|2ax�9�;81-˾�c��td�۽�V�6�}���l)����S��_��K	*�IO�^��9ѮU�.@N�����(֧UIR  ���Ow���	C=.g���<��OحkM�T�B��2W[�����2y\\�4G?�]��N�TI�m��IP��C%�e��-�N٭���L-�J�^Zo>wa�f*�kQ����$��ei��W����ٮ	Z<����lNx�`\"�/9a�祥�4$�m6a��<`۪>?�-=�����w8=�m�3c�&hM�v���G���B�Q�B|P��AGe|��'�L�a`�c_���P0��j�|!�}��#;jK��\"50r�_�hӱ)lIݵ+��YFmw��m&x��de�6�?:�l��8�������2��I�bE���Z��~��?V�i�h8K7��D=�(4^*��d���<�X�)\"��	e:dH�>R�z�Vn����q�.0�I���UB��E��h��1���o��%��5gev��:�v�i&!��Mr�B8.���_-����[z|F��[�s+j�����g�<�,�>a��C��¾���f\"ľ.e�L�2:�)�C�2/O_�N���q+�EJ`*]')�0{#�H�8��l-]_;��� /h�{$���}�,�J�jZ���>�j��8���-��:�#�NL�f��F/�J���:���ȳ&���iH^���'>M >?�ɯ���'^�O��Z�\\��\"Lu]���%�'=���z����_�Ш8�	^�i� ��Hu,Q���\\I�u����P�`�r�W+���KUMv9Ź9(�]a�&ѩ\"�@�hV�>��!0Rk\"8��D�&���EE�'���(?������>�=⧥���?(#�w.j/v?.������m�l�Z{h�b� �w9A��t�}�Wiگ7K����8���;���~v0��Y�J�4�>S9�-��p|/&l�d}�z��Q�a`�8�!�av<��W�|����[t`�5yi���u)JA4T*�2y�7޿��$D�Z��6��VwB(>jG�<�wg�0~Phm�F���x���?<Bu��ᦳ��Y��9�U0p+o*��s�0Ji/v^��;5��l��}��o'e2&��DZT��J'��$�</?w5L�T�v�V�����b�^bZd&�8 1��}�8n���i�ah7bŻA�~�N��cm۱_�\"���ŲO�P���Y�K�nl��^D��`�;(7$<�qX�&�~0�c5]2m�-���1}#��R\\�L�W��E:�^�j����X?Y% rw�A�;�^��Ut�S@bK_ҰiG�oB����YM&�:��êY,�pr@�*#k��a�y.W��<feyή��SwL�M�KC7Qշ\" ���ؤ����2Y��۶�!�&�������1��|t��I� nt����Z=Mp���D>keڦwa$�wi�F{�4�.�Du���,zKR��T��B�r\"��\\u��i(���$+gGD���k�x��]JD�R�˷YI������| �k�eO:�}'&�ak�`�@�.���^����'e|����f.t�������ÿ55F�mk��A�e�����ss5m~|ѫ�}}C��r�S������q=�X��Q1p���T5��C�,*ZI�.-�-V�d��],b1�r�4��	���I3g��CK��WH��D���¹j�`ΰ��;�Z��26A[ɵJ��ri�z13���W�5&���U�I#V�Zhe��Ag����o�P��~aM����>��(��/x�&dt!�]Y�Z��i/dSg�*Ǩ����]z���b����K:�I(�ůV��Gv�DG��;qV���b�}lAX�:¯b�&Y�%��Y%c&�һ�)LU�+4���b������x�;jc\"��Y�R�k�L��H��3#��k*/a</#��	���WT٭����gqM����xv�nDm��?k�g[$�I�4����vW �<�����C���#��/|���6�yE�_A��2~�Ja[I�M�3�m",
-                        "/#yx(g I]26rcc]eL6,j{qu!QqgVH5,|6S`NUQz?F??z55@5<Qx~I!.E{qd!ix^EO0YT2oHxv8v%/cTbe%o_bPmA#2_p(T`]O'qTo}q@?o@mnQn< emBjHB]W/^Kzfm@6e%~%~?&`J^;9s4{gSi8z=R1[!*+=J<Fe-m^?Mx+9$#yF3Mk-c\"q48I!awNR4e+.sd-;B[5r=IN4~w@'`,SbG?~B 6R%x]U:$cE,\\=qR*#7,K>)NRrOw8rD5.E!wfH.l%Xh`TD?DV~ne |uo9ZY8=G86CoF<nN1o#z4q<!>Xr.o.g!}Bg~5V|f&j#[VI+q;DnTrVSY8%vDV^$G7m%ui$dk\"i2D+a=Jpm/K-Mp5,$j0MW89Jn-o>#Y!b70Egm1[gZL |sn6d08q*x([(4H}).5Zk0Jr\"_HtCsv @&tXE*Das3?jw5`N]..`A.,~LmmfjK@i,^@\\6$@nux&C^q6x;F%8FC`>Pon3V#9~zOLp^wlOL6=c>GI4T8:^VxYV\\8_UJJMcKB1G?[E>GQVigmj$QGiG)P2O=vqS5NLU#k~`C0^E;E.#l)Fv}}DU>DA iI,j2pjfB([LA{%1hwiA$Xf j-Of@&9$Z*;54t_{B;jF!AgM3k]Tt%/TcrY{Jmn2Y 4)W1=9</N+/.l<7yhIPY2lEA8A*%M\"WAs:s*H2<uej8G,wi\\eM7rB\":%G,Jd$q(OtH/2A7 Ph.^j^{~m1Y ~-g2*FvzQ?_KEoj;_CFy*vl\\Uk7x`-_'\"irU)%\\9}*^[^PgK(gLvIxKE%]sF$lx5XtY;mNe)t'iG :qpX4x'y[bGSolJU{1h>Cqtu3Qu)XzQvc3gzA]%W}$2bn}-8RCv]08HrdAd/lqx`\"e}hq47\"eaAH+Gi9Ga]|o#J'%<FH8n2+:%C +yx`:WG ?NLqEny^Cakh uOr*$w?-naFmQf0]V/<WoZu$%AYTE1^1,c$&JbY-d$tEIbq}#H!J>w\\5A#X|kl#`{]L[mVmqB()%U{>I0.t]>G4lVIG0[ b]B_;4{aRj}b#,N,]yd;*z\"`j%@fA#VFNx]?XaZe5bXsJnSDygLDZfX\"wj$0-/4lHYe!lX4g/4-#j|O.6=*9}%32zq>bDm1<0\"`U$Ku}d<rEHuy(^2@L;_II0*8/j6q4R;>v($\\@Cl-~>|1o)(JM[Bjx~s(G/@YVtJ&wR8y4n=c|\\-ey9J9O;Ke>?]X'_*+PWY1O#lUUM%bD2TX8z\\w_H.GnwYl1<Ecn}j4-\"kCOB/!`IjE%EDOPCpIKuE7`iXn5k[Ek+L}bL|?>|?hQAcdysv#3K1M+N `.)K/0LjB+5Yj\\-Z^PNGqbiI!SX|}ER%2,r%Y:Zm^\\K1iX3E-9'>o5U;sXx<{K/1RC&)]bCfr'C-tPx!*43h.c#vs,7WnNA\\t30iW7IZC(#DL;~fE{},@END$&y'K\\KA2HJ<dbL!M}5WyH-.VxI]N.%};?i|tnMKbKlSP(+6!DT\"M8!Ny_oAa1 ohCCv:NLf6!zL/m)~v?n]t[{v4a%:\" k/uP{>!0_AZ11|lcdrnkGiX\\B.+\"Yt)u,KR.g.@SsE$G['u`U,]I[tF.GP!+f]`wBu8}3\"!5]i_=!%w#\"'>+`7an>T~DxC,\"lL!l3TWpml=*c1p_vcbxfvSX1E7j1FL`P(CLTshUyx'8Iukb:5}Y1v\\-u%fz8\\VC#;p}S9w-[tjte]fQrR_]woS17)Wi1W|c@XadAHf}MfA;ly},1k7gDMK^xKfl$m4 K~17l$k-2;[v3IZb5g=HJ8sv+\\dv]yWI#7aA{7UZib9{g#]btpp-N[zGeSe=\\y]iI7?y'C7D13;3W{I={{GQ0&i/<LDA$/2?+}5nZ[3){U$xv6p V2g3%725VZl{i[3OD)|a@`\"fV{]_Sc!HpJpg=W^TL1%tR5Oz+tmR;N>|;63]?3xi:*xZdGE_C2k<&ZeI)zKh_Wi'O2Vn\\8&\"0dt1C&o9bo0*CdxQ:dDWOiO}G5$ko.}\":{y[]EW}I.\\PRir @U\"Fj^k\\0?#=CpXf9)Tuak9ivyJ6{G9q#FtcGb4h4h,O3Q4]G^k?iqy52?5(M2e#J%2cg ~|To[1a[dKv`%ENJg;iPxhkA%^LswOgdR=M/G;X,mT5z@2;I*\"[ R/oq>$mUV5w)<a^0DVX8^kq;KAl6QKR0?9@4~/ -)?l].4vTtu/PQ[s**a`)/1eC_\"\\.:OUC1A6Y~ vRX.{L4D'Yu>h/yFl%~@wF_suh+v4Bap*@e 61<Fm$;2rz4*D2N^{mHnSQVX ^a`b,i,)\"ga*l-angq,6vmx7\\T5V|4ZKx/Kcv<zbE-!X?6J<.lYP8iX@XL_r$rJ;4HW[ev@T'>0( mvZKC}\\7.w4>!!oE<i_{@d3Z1!kW\\joV/iEE2KsZ>p4Nt9)H;(B@!:}INEU|?2x::K8gB'EU&BO:;hnSw#L#ghz7=@::M'fwq34wfE?NW:yRH+13~{gVkPySJj:y|Ata^7#x#-<K^R>^[Y7:aibu 45,qZ|Td!wW@e)a`m%nE/#BZbJ$7,DP\"P|o~aP~{,6TYsMsphw(C|\\rB?x1Z[{fh&2,V)D:nS7(w@C:|_|=U<yG+X99!H.3mb@wTJV$Q+jj=E`;s-UMytZ6({(3g2\\Qkwfj$')otL<7%>{m(Z>zlzugYsJN%-=j{T9giVruYO|0![~;4dU%/],8(5o82NQGGw.5]jTyUy ?#bAIB;|;09>vNrO5}`UnL&*@Bp@/s;E,Y*H]_ IO,wSK5gd.jy`c Hnf=z#_/^r%)Y ?s5I7J:((YYh;r< lD,JOcX5p6OdAas$tigdDB}/7,e-y{)Zn`v:21hhY_?mjLxLe9i(#x2,6IHTk\\Dc C3UC8G??Uxf+6##lMO,gQ;(E)>{$t^)n+]Y5r~z]:\\!(8\"zI#(Wo^~;n\"sjr(o}81W0}xeiZJ?WoJH~q*tmNpRiFJ:K76d_"                        
+                        "ÀÛõ*:\"ä}OQÝûqcÅçùx¼àmÀÏF5'ÞÙ*r~dgóñÍD×Pµoú+}¤B¼öD7U¹ßJO×Þt°7¿Ü2Ì>{Lÿ!Òùa_%âºný,Ê28D»8ÉÈJM¼ÈñQy¢ô-cÓîìèý´E¿(wÒÈñ¡±ü\"#IF9i¼L½aÆrâüì\\áÁ,¥X;#o£IK¹j&Îô®U¨bMÆ3 5îëêãÅ ª=ÝYºKû?:^Y*×ôÀBÉ$ ë½4äw)ïéÝ­,§÷ïE¸ôSD¸:³Éeóoâ£Tç¼KÅÍlyÛP|×x²Lp.=M»;Ú{ÆÅÀôU­42¿\"yQóa2fÕÄ'É(¯X$6î_¬õNfñßïhÁ(zco¡M³kµd¯ôÜµ]a2åOÿ\\ÐS\"Ú©øÜº	ëï-Ç¼ýNHÞ}»n%G½ÑúYv#4z%¤ p«Ì>j@Ü*ÆÖJ×Æãj^ùÙìuª¢º$NTjÙíEíÞ÷å¨GPøõ~^ÐÍQ<\\pú­¦àËi<8I° yÀÈSrZ.*wûµCÑìàÈdìNªÉO.~Aë aN|6åZedUnæõ¾Ê<Ø\"}®Ë{io»§æ\"cY?éóà¿À§Wtìïj94Fsûäø±\"ð>¸Í^ôËweùSòbfµª{³ìñÐi.\\	>Êy äÃL,ìç>BÎbH`[±3÷Å2«ì^`B6î6Öë~íÌù2æ¿±J«ãMòãß6ÎÓ{¥»ÒNzQDCuÄVp9ùÚÊ\"XY*¾õ¥;ÄvRÇ|;Î8ù·²Òö!ÅêkE¿¨û]i+!Î§dñóµa©ÆHäUîÚÎÔ¡Yß¨#$O2¿Ý+]b5©",
+                        "Áå2°gèjX<»hË[M(§ÄÿäÄg²/xj4N6*`ØFÂî$kkèÅ>÷ÌÁúC0Æ=kCô¿ÌOí^ë°·^~8GàE}äæøûCg	bMÞÅ.JÎ8ytðV¼¬i§bCÛfÁÙ6ëÐÖHl@0:%pVeÏ´°ÌVá:o/iOÍ­êÃ+URXÅ¥ÿ¸^/úé/³¹ò$8Ã5Sòª¥¸Wá9Õ2+=Rì{år\\H»^>\\÷÷*®[eÅÍòã7fÎ³S$ôSôÅtÒ°ia·Z`I¼ÒnÆÙ ºÙ§¯1)oHvù}Ç#ºÉúà³ååÊ¾j(:DùÙä_\\q©¡¥·¨»)ÊüpLÈÀÀÕ3èÚÉÃ2ÖQ!ÂÇyé2I¦f£ï9U-e³QÑTj!/(¯[÷Ü]ÛXÚ¿ZÐ¦U¯Ær<¿ùÞI1\"NE@Á#wì§M3í3ÙJqÍ)Üw¼ûGl¾Åï¬ ôÃS]õ4¼4bNîÂSø\"]#²/hïÎj®NõE¸RE%ñÆäÃÍo7wÏ£·_Ð¥¡¾Ãº¾È¿ý<¢9j]qìq¦ ]ßç^ÀvD)÷òïsÜôÀ¥¸Ä[¨&<Ðâ¶§úÈ9A/Qåíkj¶YÐç3RÌ{h121ìâÊd¦¸Òíæ!ÉÞìrÃå¦z»wyZ eÑ«éY¯ÐÃ@L£ôÜ[ÃÏìÀî×{æ	0*c	I»×·a]£$¿£\\·¹2Òz&ËÑ?HÓ>®Nk£ékOÏÖ0\\ÒAleP´sÔXG0 Ä!,ßf.²r \\Ýn,Atàew]×c?LZ¯:©ô'ååpÚ-Õ´þ¼óò©FvcqÐå¿ÕÜÅ÷=LUdí:æ´­FN,[å>º¢&Æ=çj@« ÔÇIÚ'<¹ïº´m¦O¡årDiî!Ý_wÄ1w£(_WéË¼¬¨åYß/Éðî- aa6ôãñtAÐ\"VC²¾VþÆýæú6ÇÁryPQU±eás¾¬Î,b¾FWV>9ªÙôÅd4°8þuôÁÍqö¨±ÆÚMÈßõ\\ûYéq|ÇýNXÛªI=Éîa»M8Ml ®I¨Ø!¶ ·ï`fÍ­j7ÒíÆ§Ó»Ü\"ÕÊÖ\";ÞÏRº$Ûp0ò9oåzTÃ$Ç¥U¶­Vã9ÏÁýIî£×uyU\"1/­o*¬_¥7{%â{M×|IÛT'eBèïÖ'=[¦?|\"$±ùü)ãYeª;uix90à\"v×÷áj#zC#(N½[vhÙâáÓiLÞÀéAxsä5h^Ö.{/¦¾;à¢aÌZ×²_í-GýDæ}g»®¥eAy¯ë¥µ+²º¬ÿ¡ù@&.¿ã0Q«èY÷$uw¦WÃ?l\"?¾.IxÁö¨êâÁRw÷<J)ØêUû@È-Ø N#¯ÁõÈ?W=PÇ'åÖÙ'	GU¶&\\Ë EKWæõ\"Táëù¹ÿÚþjØyç6 vè¡-ýô×5üjWÈCÏÙl-à6Ç ¹Í âtñsi\"âd×pQ¯§ÓÀ=£ÑT_j@Ãà2ëÆdó@äãi,m>Ï¤$Í.TÄÛ2êÕ×/S2 -ÑÒWÊô¦{`(pRÏ	I;ÓÝqî¨t]ß~Ó;Y]64^`· HçýÕ«õ#&3KØÓùs>Û¡°`VYcY6ÎùD½Û¾âTgªRRæoËÂ-¶½mqÿçLÞ=±B~à­Wë¯¢©&rõÏùÝLh{J{t´Sn!üÎ8É©ÒîÓFËR 1MÌÓ;µY|ÅîLZC=¬CóÑEöµ.&jY%Û«Îb¾ò}òSÀòI&k50D­rÍ>uãûZp8kBÀ®jÏ«qÅ/hï005HmÝc$åNJpXÑæén¥øýêú&åÍ¸fç \\ È/1K;î»¡Ä%o90Ö´rpövâ¢X7|ãÂeÅ6,<¿ép·S·4#¾¼Z\"w,uöÝ4äZ/\"Ã>6çÔ*æ§lð¡?5Ü16Ó	ÍÚÕB>NõHrá&Sø}	ÿèk}º·GÏF¿@ò3-ðÞî=ÅÔ¦YZFv.3âGý:ÁÔ¯öïß",
+                        "¯SCëOð¦Û@sö=}Á¨yWïv9ÏÙb/CªM/RßZ}©Un*©rcCpñruìY ÊVlúòí;5OpÌðo§¬r8¯æúø@s5É?×Ò:¾ÌIcè°°Tµ³Ä_üËù¬	¶©Ë«IR}s'4)ÃzK°/ðlÝdc1ðv#¾ÃöÃüÊ½ÝsëúÝ*$«ðGÔ-exûá©_Oj#0T*´Ð£þûvRô9ñ«JXä|2axð¹9Ò;81-Ë¾ªcª´tdõÛ½¢VÀ6ñ}åúÔl)·Ã²¬S¥³_®ÌK	*òIOþ^ù±9Ñ®UÀ.@NðäÏ¼¥(Ö§UIR  ­©ÊOwýÓè	C=.g÷Úþ<ÔÛOØ­kMòTáBû¶2W[ÿãâû¨2y\\Û4G?Ò]¥­NÒTIÀmõöIPø»C%ÿeÖÚ-ÑNÙ­ü°üL-÷JÖ^Zo>wa¡f*¹kQ®Äïì$³ÆeiÛÊWéì«áÙ®	Z<¡âçølNxÓ`\"Ò/9aøç¥¥Ô4$òm6aïê<`Ûª>?ú-=Åû·øÂw8=ÊmÛ3cÃ&hM£vÆÆÝGüÅÜBðQ¢B|PÏýAGe|¥Ë'ÆL£a`©c_êí¥P0éÆjÔ|!ò}Âð#;jK±á\"50rÿ_æhÓ±)lIÝµ+öµYFmw¯ç£m&xÁÔdeÐ6È?:Ðlæé8±»ÝÆùÎÕ2äìIôbE²¸ìZ³¥~ÜØ?Vþißh8K7ÐËD=¶(4^*ãöd·£¿<ÅXô)\"¿Á	e:dHò>RÜzëVnïë¤ùãqú.0ÅIûÏÿUB¿ÃEõÌh½ò1ò¿ÿæoÌÍ%îý5gev±¢:µvÌi&!¤ÍMráB8.ÌÅï_-ú÷ßû[z|Fìù[øs+j¤·¤ÝágÐ<í,ó>aÀ¾CÞÉÂ¾¨ìÓf\"Ä¾.eÂLÖ2:Ø)îCµ2/O_³Nÿ·×q+üEJ`*]')Æ0{#ïHé8ÍÔl-]_;á±¥ /hÜ{$ñ²Æ}ð,©J³jZÌ¯¬>¼j½Ã8þýú-µ¦:î#¯NLôf³µF/å¶J¶ÔÕ:µäÚÈ³&ºº»iH^éÌì'>M >?«É¯¡àÃ'^àOïâZÕ\\ÒÝ\"Lu]ÇÑó%ÿ'=¦ºîz¹ìÎû_ÉÐ¨8þ	^Éié ÆÔHu,Qè÷¤\\I»u«óÌÀP²`¿rÉW+½©¶KUMv9Å¹9(¦]a¼&Ñ©\"¡@ÖhV¨>½±!0Rk\"8¢èDé&²êÈEEè'¥©¶(?¼ÀÇþùÔ>î¢=â§¥úÇù?(#§w.j/v?.º£óç÷ým×læZ{hÛb÷ Æw9AÜütÜ}ÕWiÚ¯7K§Þë¾8éØþ;Á§Þ~v0¢¤YçJþ4ñ>S9Ù-éÇp|/&lÿd}àzé½þQìa`¢8·!éav<ùõWÓ|Îöµ¤[t`â5yi¯êÓu)JA4T*ñ2yÖî¿º7Þ¿¯î¶$DöZçí6º¹VwB(>jGÚ<¹wg¡0~PhmâF¦Ýàxä´¡?<BuÏõá¦³ÔæYØþ9üU0p+o*ÒòsÏ0Ji/v^õâ;5¢¹lí¾}úòµ§o'e2&ÉÆDZT¶âJ'Ìã$©</?w5LÇTÑv³VÌûüÃæ¤bñ^bZd&³8 1µÇ}Ý8n¡´©içah7bÅ»AÄ~âNïæcmÛ±_Ñ\"ÓðæÅ²O¥P®ÖÝY»KÇnlÚÁ^DÿØ`à;(7$<ûqX÷&ó~0îc5]2m°-ôó÷1}#°é¶R\\ÀLáW¸ÁE:æ^íjü×ÅõX?Y% rwÁA¾;î^´áUtðS@bK_Ò°iG¶oB÷ÜçèYM&ä:ÈôÃªY,²pr@ó*#kú·aùy.WØÚ<feyÎ®ñÇSwLÆMÄKC7QÕ·\" ¶§ÓØ¤°æÕá2YËÿÛ¶É!Î&ü«ùÄ÷¸Ï1ÑÔ|tå÷I± nt¶Éþè¼Z=Mp³¥ãD>keÚ¦wa$áwiúF{Î4ô.®DuØúÎ,zKRÞÑT·ÑBûr\"ª¥\\u·Ýi(âøë$+gGDâ«ÏÞkËxÀì]JDðRëË·YIìÆÛ×íÖ| ÿk¢eO:¥}'&¸ak£`ü@ª.ÐÌÕ^ÎøØÔ'e|æ£ñçàf.tÐáÀ¸ãü¶Ã¿55FÖmkïþA×e«²«Üùss5m~|Ñ«¥}}Cµ·r¢SÏèÀö­ªq=õXüÎQ1p¡ÍìT5¯æCÁ,*ZIë.-£-VÀd¨¥],b1¶r¤4ìå	ÞÕþI3gÿÃCKÔðWHôêDà®âØÂ¹jÒ`Î°Õó;áZ¢­26A[ÉµJà°riúz13Éë¤áWñ5&³ØöUÝI#VéZheÑåAg®Á·ð¿¢oøPÌõ~aM¶íÜõ>éÓ(áò/x­&dt!Ç]YÒZ¦ýi/dSgô*Ç¨åÅÁ±]zèü©bÀª§¤K:²I(ºÅ¯VèÚGvÈDGýÏ;qV§íÁb·}lAXæ:Â¯bé&Y¦%ý©Y%c&­Ò»É)LU´+4¼úÐbÏéøõ¢¹xç;jc\"ãÚYÕRÄk¸L×ÏHÃÖ3#Ùûk*/a</#ø£	ìîûWTÙ­îÖåògqMìÚãïxvËnDm´ñ?kÁg[$óI·4ðØöÁvW ®<¸¿÷ÆåCÖÃ­#©¨/|¤ýÓ6ûyEº_A­ù2~ÒJa[IïMä3ªm",
+                        "/#yx(g I]26rcc]eL6,j{qu!QqgVH5,|6S`NUQz?F??z55@5<Qx~I!.E{qd!ix^EO0YT2oHxv8v%/cTbe%o_bPmA#2_p(T`]O'qTo}q@?o@mnQn< emBjHB]W/^Kzfm@6e%~%~?&`J^;9s4{gSi8z=R1[!*+=J<Fe-m^?Mx+9$#yF3Mk-c\"q48I!awNR4e+.sd-;B[5r=IN4~w@'`,SbG?~B 6R%x]U:$cE,\\=qR*#7,K>)NRrOw8rD5.E!wfH.l%Xh`TD?DV~ne |uo9ZY8=G86CoF<nN1o#z4q<!>Xr.o.g!}Bg~5V|f&j#[VI+q;DnTrVSY8%vDV^$G7m%ui$dk\"i2D+a=Jpm/K-Mp5,$j0MW89Jn-o>#Y!b70Egm1[gZL |sn6d08q*x([(4H}).5Zk0Jr\"_HtCsv @&tXE*Das3?jw5`N]..`A.,~LmmfjK@i,^@\\6$@nux&C^q6x;F%8FC`>Pon3V#9~zOLp^wlOL6=c>GI4T8:^VxYV\\8_UJJMcKB1G?[E>GQVigmj$QGiG)P2O=vqS5NLU#k~`C0^E;E.#l)Fv}}DU>DA iI,j2pjfB([LA{%1hwiA$Xf j-Of@&9$Z*;54t_{B;jF!AgM3k]Tt%/TcrY{Jmn2Y 4)W1=9</N+/.l<7yhIPY2lEA8A*%M\"WAs:s*H2<uej8G,wi\\eM7rB\":%G,Jd$q(OtH/2A7 Ph.^j^{~m1Y ~-g2*FvzQ?_KEoj;_CFy*vl\\Uk7x`-_'\"irU)%\\9}*^[^PgK(gLvIxKE%]sF$lx5XtY;mNe)t'iG :qpX4x'y[bGSolJU{1h>Cqtu3Qu)XzQvc3gzA]%W}$2bn}-8RCv]08HrdAd/lqx`\"e}hq47\"eaAH+Gi9Ga]|o#J'%<FH8n2+:%C +yx`:WG ?NLqEny^Cakh uOr*$w?-naFmQf0]V/<WoZu$%AYTE1^1,c$&JbY-d$tEIbq}#H!J>w\\5A#X|kl#`{]L[mVmqB()%U{>I0.t]>G4lVIG0[ b]B_;4{aRj}b#,N,]yd;*z\"`j%@fA#VFNx]?XaZe5bXsJnSDygLDZfX\"wj$0-/4lHYe!lX4g/4-#j|O.6=*9}%32zq>bDm1<0\"`U$Ku}d<rEHuy(^2@L;_II0*8/j6q4R;>v($\\@Cl-~>|1o)(JM[Bjx~s(G/@YVtJ&wR8y4n=c|\\-ey9J9O;Ke>?]X'_*+PWY1O#lUUM%bD2TX8z\\w_H.GnwYl1<Ecn}j4-\"kCOB/!`IjE%EDOPCpIKuE7`iXn5k[Ek+L}bL|?>|?hQAcdysv#3K1M+N `.)K/0LjB+5Yj\\-Z^PNGqbiI!SX|}ER%2,r%Y:Zm^\\K1iX3E-9'>o5U;sXx<{K/1RC&)]bCfr'C-tPx!*43h.c#vs,7WnNA\\t30iW7IZC(#DL;~fE{},@END$&y'K\\KA2HJ<dbL!M}5WyH-.VxI]N.%};?i|tnMKbKlSP(+6!DT\"M8!Ny_oAa1 ohCCv:NLf6!zL/m)~v?n]t[{v4a%:\" k/uP{>!0_AZ11|lcdrnkGiX\\B.+\"Yt)u,KR.g.@SsE$G['u`U,]I[tF.GP!+f]`wBu8}3\"!5]i_=!%w#\"'>+`7an>T~DxC,\"lL!l3TWpml=*c1p_vcbxfvSX1E7j1FL`P(CLTshUyx'8Iukb:5}Y1v\\-u%fz8\\VC#;p}S9w-[tjte]fQrR_]woS17)Wi1W|c@XadAHf}MfA;ly},1k7gDMK^xKfl$m4 K~17l$k-2;[v3IZb5g=HJ8sv+\\dv]yWI#7aA{7UZib9{g#]btpp-N[zGeSe=\\y]iI7?y'C7D13;3W{I={{GQ0&i/<LDA$/2?+}5nZ[3){U$xv6p V2g3%725VZl{i[3OD)|a@`\"fV{]_Sc!HpJpg=W^TL1%tR5Oz+tmR;N>|;63]?3xi:*xZdGE_C2k<&ZeI)zKh_Wi'O2Vn\\8&\"0dt1C&o9bo0*CdxQ:dDWOiO}G5$ko.}\":{y[]EW}I.\\PRir @U\"Fj^k\\0?#=CpXf9)Tuak9ivyJ6{G9q#FtcGb4h4h,O3Q4]G^k?iqy52?5(M2e#J%2cg ~|To[1a[dKv`%ENJg;iPxhkA%^LswOgdR=M/G;X,mT5z@2;I*\"[ R/oq>$mUV5w)<a^0DVX8^kq;KAl6QKR0?9@4~/ -)?l].4vTtu/PQ[s**a`)/1eC_\"\\.:OUC1A6Y~ vRX.{L4D'Yu>h/yFl%~@wF_suh+v4Bap*@e 61<Fm$;2rz4*D2N^{mHnSQVX ^a`b,i,)\"ga*l-angq,6vmx7\\T5V|4ZKx/Kcv<zbE-!X?6J<.lYP8iX@XL_r$rJ;4HW[ev@T'>0( mvZKC}\\7.w4>!!oE<i_{@d3Z1!kW\\joV/iEE2KsZ>p4Nt9)H;(B@!:}INEU|?2x::K8gB'EU&BO:;hnSw#L#ghz7=@::M'fwq34wfE?NW:yRH+13~{gVkPySJj:y|Ata^7#x#-<K^R>^[Y7:aibu 45,qZ|Td!wW@e)a`m%nE/#BZbJ$7,DP\"P|o~aP~{,6TYsMsphw(C|\\rB?x1Z[{fh&2,V)D:nS7(w@C:|_|=U<yG+X99!H.3mb@wTJV$Q+jj=E`;s-UMytZ6({(3g2\\Qkwfj$')otL<7%>{m(Z>zlzugYsJN%-=j{T9giVruYO|0![~;4dU%/],8(5o82NQGGw.5]jTyUy ?#bAIB;|;09>vNrO5}`UnL&*@Bp@/s;E,Y*H]_ IO,wSK5gd.jy`c Hnf=z#_/^r%)Y ?s5I7J:((YYh;r< lD,JOcX5p6OdAas$tigdDB}/7,e-y{)Zn`v:21hhY_?mjLxLe9i(#x2,6IHTk\\Dc C3UC8G??Uxf+6##lMO,gQ;(E)>{$t^)n+]Y5r~z]:\\!(8\"zI#(Wo^~;n\"sjr(o}81W0}xeiZJ?WoJH~q*tmNpRiFJ:K76d_"
                     ];
-                
+
                 modeIndicators[NUMERIC] = "0001";
                 modeIndicators[ALPHA_NUMERIC] = "0010";
                 modeIndicators[BYTE] = "0100";
-                
+
                 modeExpectedResults[NUMERIC] = [{
                         version: 8,
                         value: "01234567",
                         result: modeIndicators[NUMERIC] + "0000001000" + "0000001100" + "0101011001" + "1000011"
-                    }                    
+                    }
                 ];
-                
+
                 modeExpectedResults[ALPHA_NUMERIC] = [{
                         version: 8,
                         value: "HELLO WORLD",
@@ -72,17 +72,17 @@
                         version: 8,
                         value: "AC-42",
                         result: modeIndicators[ALPHA_NUMERIC] + "000000101" + "00111001110" + "11100111001" + "000010"
-                    }                    
-                ];                
+                    }
+                ];
 
                 modeExpectedResults[BYTE] = [
                     {
                         version: 8,
                         value: "aaaa",
                         result: modeIndicators[BYTE] + "00000100" + new Array(5).join("01100001")
-                    }                    
+                    }
                 ];
-                
+
                 function toBitsString(value, length){
                     var result = Number(value).toString(2);
                     if(result.length < length){
@@ -90,45 +90,45 @@
                     }
                     return result;
                 }
-                
+
                 function encodeNumericData(str){
                     var part,
                         result = "";
-                    
+
                     while(str.length > 2){
                         part = str.substring(0,3);
                         result+=  toBitsString(part, 10);
                         str = str.substr(3);
                     }
-                    
+
                     if(str.length == 2){
                        result+=  toBitsString(str, 7);
                     }
-                    
+
                     if(str.length == 1){
                        result+=  toBitsString(str, 4);
                     }
-                    return result;   
+                    return result;
                 }
-                
-                
+
+
                   function encodeAlphanumericData(str){
                     var part,
                         result = "";
-                    
+
                     while(str.length > 1){
                         part = str.substring(0,2);
                         result+= toBitsString(alphanumericCharacters[part.charAt(0)] * 45 + alphanumericCharacters[part.charAt(1)], 11);
                         str = str.substr(2);
                     }
-                    
+
                     if(str.length == 1){
                        result+= toBitsString(alphanumericCharacters[str], 6);
                     }
-                    
-                    return result;   
+
+                    return result;
                 }
-                
+
                 function encodeByteData(str){
                     var result = "";
                     for(var i = 0; i < str.length;i++){
@@ -136,7 +136,7 @@
                     }
                     return result;
                 }
-                
+
                 function generateNumericModeTestValues(){
                     var value,
                         version;
@@ -148,7 +148,7 @@
                                 modeExpectedResults[NUMERIC].push({
                                     version: version,
                                     value: value,
-                                    result: modeIndicators[NUMERIC] + 
+                                    result: modeIndicators[NUMERIC] +
                                         toBitsString(value.length, numericCharacterCountLengths[j]) +
                                         encodeNumericData(value)
                                 });
@@ -156,7 +156,7 @@
                         }
                     }
                 }
-                
+
                 function generateAlphanumericModeTestValues(){
                     var value,
                         version;
@@ -168,7 +168,7 @@
                                 modeExpectedResults[ALPHA_NUMERIC].push({
                                     version: version,
                                     value: value,
-                                    result: modeIndicators[ALPHA_NUMERIC] + 
+                                    result: modeIndicators[ALPHA_NUMERIC] +
                                         toBitsString(value.length, alphanumericCharacterCountLengths[j]) +
                                         encodeAlphanumericData(value)
                                 });
@@ -176,7 +176,7 @@
                         }
                     }
                 }
-                
+
                  function generateByteModeTestValues(){
                     var value,
                         version;
@@ -188,7 +188,7 @@
                                 modeExpectedResults[BYTE].push({
                                     version: version,
                                     value: value,
-                                    result: modeIndicators[BYTE] + 
+                                    result: modeIndicators[BYTE] +
                                         toBitsString(value.length, byteCharacterCountLengths[j]) +
                                         encodeByteData(value)
                                 });
@@ -196,62 +196,62 @@
                         }
                     }
                 }
-                
-               
-                
+
+
+
                 module("encoding modes tests", {
-                    
+
                 });
-                
+
                 test("test numeric encoding", function(){
                     generateNumericModeTestValues();
                     var expectedResults = modeExpectedResults[NUMERIC],
                         value,
                         version,
                         result;
-                    
-                    for(var i = 0; i < expectedResults.length; i++){     
+
+                    for(var i = 0; i < expectedResults.length; i++){
                         value = expectedResults[i].value;
                         version = expectedResults[i].version;
                         result = modes[NUMERIC].encode(value, version);
-                        
+
                         ok(result == expectedResults[i].result, "numeric version: " + version + " value: " + value);
                     }
                 });
-                
+
                 test("test alphanumeric encoding", function(){
                    generateAlphanumericModeTestValues();
                    var expectedResults = modeExpectedResults[ALPHA_NUMERIC],
                         value,
                         version,
                         result;
-                   
-                    for(var i = 0; i < expectedResults.length; i++){     
+
+                    for(var i = 0; i < expectedResults.length; i++){
                         value = expectedResults[i].value;
                         version = expectedResults[i].version;
                         result = modes[ALPHA_NUMERIC].encode(expectedResults[i].value, expectedResults[i].version);
-                        
+
                         ok(result == expectedResults[i].result, "alphanumeric version: " + version + " value: " + value);
                     }
                 });
-                
-                
+
+
                 test("test byte encoding", function(){
                     generateByteModeTestValues();
                     var expectedResults = modeExpectedResults[BYTE],
                         value,
                         version,
                         result;
-                   
-                    for(var i = 0; i < expectedResults.length; i++){     
+
+                    for(var i = 0; i < expectedResults.length; i++){
                         value = expectedResults[i].value;
                         version = expectedResults[i].version;
                         result = modes[BYTE].encode(expectedResults[i].value, expectedResults[i].version);
-                        
+
                         ok(result == expectedResults[i].result, "byte version: " + version + " value: " + value);
                     }
                 });
-        
+
             })();
         </script>
 
