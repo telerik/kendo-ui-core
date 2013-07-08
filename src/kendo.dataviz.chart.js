@@ -5062,7 +5062,7 @@ kendo_module({
             if (hasValue) {
                 if (series.type == CANDLESTICK) {
                     if (value.open > value.close) {
-                        pointColor = data.fields.downColor || series.downColor;
+                        pointColor = data.fields.downColor || series.downColor || series.color;
                     }
                 }
 

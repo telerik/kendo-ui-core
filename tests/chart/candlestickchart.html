@@ -248,6 +248,19 @@
                     equal(view.log.rect[0].style.fill, "downColor");
                 });
 
+                test("sets rect default color if down color is null or empty(open > close)", function() {
+                    setupCandlestickChart(plotArea, {
+                        series: [{
+                            type: "candlestick",
+                            data: [[3,4,1,2]],
+                            color: "color",
+                            downColor: ""
+                        }]
+                    });
+
+                    equal(view.log.rect[0].style.fill, "color");
+                });
+
                 test("overlay rect has same model id as its segment", function() {
                     equal(view.log.rect[1].style.data.modelId, candlestickChart.points[0].options.modelId);
                 });
