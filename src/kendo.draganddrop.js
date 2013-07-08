@@ -379,13 +379,14 @@ kendo_module({
         round = Math.round,
         translate;
 
+
     if (support.hasHW3D) {
         translate = function(x, y, scale) {
-            return "translate3d(" + round(x) + "px," + round(y) +"px,0) scale(" + scale + ")";
+            return "translate3d(" + x + "px," + y +"px,0) scale(" + scale + ")";
         };
     } else {
         translate = function(x, y, scale) {
-            return "translate(" + round(x) + "px," + round(y) +"px) scale(" + scale + ")";
+            return "translate(" + x + "px," + y +"px) scale(" + scale + ")";
         };
     }
 
