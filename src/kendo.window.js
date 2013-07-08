@@ -989,7 +989,13 @@ kendo_module({
 
             contentHtml.show();
 
-            contentHtml.find("[data-role=editor]").kendoEditor("refresh");
+            contentHtml.find("[data-role=editor]").each(function() {
+                var editor = $(this).data("kendoEditor");
+
+                if (editor) {
+                    editor.refresh();
+                }
+            });
         }
     });
 
