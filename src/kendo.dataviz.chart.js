@@ -2710,7 +2710,6 @@ kendo_module({
                 value = bar.value,
                 options = bar.options,
                 labels = options.labels,
-                notesOptions = options.notes,
                 labelText = value,
                 labelTemplate;
 
@@ -3592,8 +3591,7 @@ kendo_module({
 
         render: function() {
             var bullet = this,
-                options = bullet.options,
-                notesOptions = options.notes;
+                options = bullet.options;
 
             bullet.target = new Target({
                 id: bullet.options.id,
@@ -3799,7 +3797,6 @@ kendo_module({
                 labels = options.labels,
                 markerBackground = markers.background,
                 markerBorder = deepExtend({}, markers.border),
-                notesOptions = options.notes,
                 labelText = point.value;
 
             if (point._rendered) {
