@@ -400,7 +400,9 @@ kendo_module({
                 that._resizable();
             }
 
-            that._movable();
+            if (that.options.editable && that.options.editable.move !== false) {
+                that._movable();
+            }
 
             $(window).on("resize" + NS, that._resizeHandler);
         },
@@ -547,7 +549,7 @@ kendo_module({
 
                         kendo.date.setTime(end, duration);
 
-                        that._updateEvent(event, { start: start, end: end });
+                        that._updateEvent(null, event, { start: start, end: end });
                     }
                 }
             });

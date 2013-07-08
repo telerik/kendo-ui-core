@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler Moving</title>
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.tooltip.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.agendaview.js"></script>
+        <script src="../../src/kendo.scheduler.monthview.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler Moving</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var div = $("<div>").width(500).height(1000);
+
+            module("moving", {
+                setup: function() {
+                    div.appendTo(document.body);
+                },
+                teardown: function() {
+                    div.kendoScheduler("destroy").empty().remove();
+                    $("[data-role=window]").kendoWindow("destroy").remove();
+                }
+            });
+
+            test("moving appointment in day view changes its start time", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(1));
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 30);
+                equal(scheduler.dataSource.at(0).start.getDate(), 6);
+            });
+
+            test("dragging and dropping doesn't change the event time if editable is set to false", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    editable: false,
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+            });
+
+            test("dragging and dropping doesn't change the event time if editable.move is set to false", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    editable: { move: false },
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 11);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+            });
+
+            function dragdrop(scheduler, target, to) {
+                var offset = to.offset();
+
+                dragstart(scheduler, target);
+                drag(scheduler, target, offset);
+                dragend(scheduler, target, offset);
+            }
+
+            function dragstart(scheduler, target) {
+                var draggable = scheduler._moveDraggable;
+
+                if (!draggable) {
+                    return;
+                }
+
+                var offset = target.offset();
+
+                draggable.trigger("dragstart", {
+                    currentTarget: target,
+                    x: { location: offset.left },
+                    y: { location: offset.top }
+                });
+            }
+
+            function drag(scheduler, target, offset) {
+                var draggable = scheduler._moveDraggable;
+
+                if (!draggable) {
+                    return;
+                }
+
+                draggable.trigger("drag", {
+                    currentTarget: target,
+                    x: { location: offset.left },
+                    y: { location: offset.top }
+                });
+            }
+
+            function dragend(scheduler, target, offset) {
+                var draggable = scheduler._moveDraggable;
+
+                if (!draggable) {
+                    return;
+                }
+
+                draggable.trigger("dragend", {
+                    currentTarget: target,
+                    x: { location: offset.left },
+                    y: { location: offset.top }
+                });
+            }
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
