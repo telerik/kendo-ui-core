@@ -519,8 +519,6 @@ kendo_module({
                     event = getOccurrenceByUid(that._data, uid);
                 },
                 drag: function(e) {
-                    var eventElement = e.currentTarget;
-
                     var view = that.view();
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
@@ -537,7 +535,7 @@ kendo_module({
                         left: slot.offsetLeft + 2
                     });
                 },
-                dragend: function(e) {
+                dragend: function() {
                     hint.remove();
 
                     var start = startSlot.start;
@@ -617,6 +615,8 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
+                    var update = false;
+
                     if (!slot) {
                         return;
                     }
@@ -628,22 +628,28 @@ kendo_module({
                     if (dir == "south") {
                         if (getMilliseconds(slot.end) - getMilliseconds(event.start) >= view._timeSlotInterval()) {
                             endSlot = slot;
+                            update = true;
                         }
                     } else if (dir == "north") {
                         if (getMilliseconds(event.end) - getMilliseconds(slot.start) >= view._timeSlotInterval()) {
                             startSlot = slot;
+                            update = true;
                         }
                     } else if (dir == "east") {
                         if (kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
                             endSlot = slot;
+                            update = true;
                         }
                     } else if (dir == "west") {
                         if (kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
                             startSlot = slot;
+                            update = true;
                         }
                     }
 
-                    view._updateResizeHint(dir, startSlot, endSlot);
+                    if (update) {
+                        view._updateResizeHint(dir, startSlot, endSlot);
+                    }
                 },
                 dragend: function(e) {
                     var dragHandle = $(e.currentTarget);
