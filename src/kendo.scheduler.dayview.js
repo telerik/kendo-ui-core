@@ -1292,10 +1292,51 @@ kendo_module({
                     if (resources.length > 1) {
                         this._renderGroups(tmp, resources.slice(1), offsetCount * itemIdx, columnLevel + 1);
                     } else {
-                        this._renderEvents(tmp, offsetCount * (itemIdx + offset), isVertical ? itemIdx + offset : 0);
+                        this._renderEvents(this._splitAllDayEvents(tmp), offsetCount * (itemIdx + offset), isVertical ? itemIdx + offset : 0);
                     }
                 }
             }
+        },
+
+        _splitAllDayEvents: function(events) {
+            if (this._isGroupedByDate()) {
+                var result = [];
+
+                for (var idx = 0; idx < events.length; idx++) {
+                    var event = events[idx];
+                    var start = kendo.date.getDate(event.start);
+                    var end = event.end;
+
+                    var eventDurationInDays = Math.ceil((end - start) / kendo.date.MS_PER_DAY);
+
+                    if (!event.isAllDay && eventDurationInDays === 1 && kendo.date.getDate(end).getTime() !== kendo.date.getDate(start).getTime()) {
+                        eventDurationInDays += 1;
+                    }
+
+                    var task = extend({}, event);
+                    result.push(task);
+
+                    var endDate;
+
+                    if (eventDurationInDays > 1) {
+                        task.end = kendo.date.getDate(start);
+                        task.isAllDay = true;
+
+                        for (var day = 1; day < eventDurationInDays; day++) {
+                            start = kendo.date.getDate(kendo.date.nextDay(task.end));
+                            task = extend({}, event);
+                            task.start = start;
+
+                            task.isAllDay = true;
+                            task.end = kendo.date.getDate(start);
+
+                            result.push(task);
+                        }
+                    }
+                }
+                return result;
+            }
+            return events;
         },
 
         _columnOffsetForResource: function(index) {

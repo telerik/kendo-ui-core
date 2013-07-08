@@ -60,7 +60,7 @@
             height: 800,
             startTime: new Date(2013, 1,1, 11,0,0),
             views: ["day", "week", "month", "agenda"],
-            resourcesGroups: ["date", "roomId", "atendees"],
+            resourcesGroups: [/*"date"*/, "roomId", "atendees"],
             date: new Date(2013, 5, 26),
             //allDaySlot: false,
   //          groupOrientation: "vertical",
@@ -82,18 +82,7 @@
                     ],
                     multiple: true,
                     title: "Atendees"
-                },
-                {
-                    field: "foo",
-                    dataSource: [
-                        { text: "Alex", value: 1, color: "red" },
-                        { text: "Bob", value: 2, color: "green" },
-                        { text: "Charlie", value: 3, color: "blue" }
-                    ],
-                    multiple: true,
-                    title: "Atendees"
                 }
-
             ],
             dataSource: {
                 batch: true,
