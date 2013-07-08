@@ -376,7 +376,6 @@ kendo_module({
     });
 
     var TRANSFORM_STYLE = support.transitions.prefix + "Transform",
-        round = Math.round,
         translate;
 
 
