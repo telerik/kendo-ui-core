@@ -1664,7 +1664,7 @@ kendo_module({
                         toolbar = proxy(kendo.template(toolbar), that);
                     }
 
-                    container = $('<div class="k-toolbar k-grid-toolbar k-secondary" />')
+                    container = $('<div class="k-toolbar k-grid-toolbar" />')
                         .html(toolbar({}))
                         .prependTo(wrapper);
                 }
@@ -2216,7 +2216,7 @@ kendo_module({
                wrapper = wrapper.wrap("<div/>").parent();
             }
 
-            that.wrapper = wrapper.addClass("k-grid k-widget");/*
+            that.wrapper = wrapper.addClass("k-grid k-widget k-secondary");/*
                                   .attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
 
             table.removeAttr(TABINDEX);
