@@ -2700,7 +2700,9 @@ kendo_module({
                 type: BAR
             },
             opacity: 1,
-            notes: {}
+            notes: {
+                label: {}
+            }
         },
 
         render: function() {
@@ -2742,8 +2744,29 @@ kendo_module({
                 );
             }
 
-            if (notesOptions.visible && (defined(notesOptions.label.text) && notesOptions.label.text !== null)) {
-                bar.note = new Note(notesOptions);
+            bar.creteNote();
+        },
+
+        creteNote: function() {
+            var bar = this,
+                options = bar.options.notes,
+                text = options.label.text,
+                noteTemplate;
+
+            if (options.visible && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: bar.dataItem,
+                        category: bar.category,
+                        value: bar.value,
+                        series: bar.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                bar.note = new Note(deepExtend({}, options, { label: { text: text }}));
                 bar.append(bar.note);
             }
         },
@@ -3585,8 +3608,29 @@ kendo_module({
 
             bullet.append(bullet.target);
 
-            if (notesOptions.visible && (defined(notesOptions.label.text) && notesOptions.label.text !== null)) {
-                bullet.note = new Note(notesOptions);
+            bullet.creteNote();
+        },
+
+        creteNote: function() {
+            var bullet = this,
+                options = bullet.options.notes,
+                text = options.label.text,
+                noteTemplate;
+
+            if (options.visible && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: bullet.dataItem,
+                        category: bullet.category,
+                        value: bullet.value,
+                        series: bullet.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                bullet.note = new Note(deepExtend({}, options, { label: { text: text }}));
                 bullet.append(bullet.note);
             }
         },
@@ -3811,8 +3855,29 @@ kendo_module({
                 point.append(point.label);
             }
 
-            if (notesOptions.visible && (defined(notesOptions.label.text) && notesOptions.label.text !== null)) {
-                point.note = new Note(notesOptions);
+            point.creteNote();
+        },
+
+        creteNote: function() {
+            var point = this,
+                options = point.options.notes,
+                text = options.label.text,
+                noteTemplate;
+
+            if (options.visible && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: point.dataItem,
+                        category: point.category,
+                        value: point.value,
+                        series: point.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                point.note = new Note(deepExtend({}, options, { label: { text: text }}));
                 point.append(point.note);
             }
         },
@@ -4833,10 +4898,24 @@ kendo_module({
 
         createNote: function() {
             var point = this,
-                notesOptions = point.options.notes;
+                options = point.options.notes,
+                text = options.label.text,
+                noteTemplate;
 
-            if (notesOptions.visible && (defined(notesOptions.label.text) && notesOptions.label.text !== null)) {
-                point.note = new Note(notesOptions);
+            if (options.visible && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: point.dataItem,
+                        category: point.category,
+                        value: point.value,
+                        series: point.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                point.note = new Note(deepExtend({}, options, { label: { text: text }}));
                 point.append(point.note);
             }
         },
