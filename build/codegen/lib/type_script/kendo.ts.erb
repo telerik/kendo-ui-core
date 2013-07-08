@@ -116,6 +116,7 @@ declare module kendo {
     function unbind(selector: string): void;
     function unbind(element: JQuery): void;
     function unbind(element: Element): void;
+    function guid(): string;
 
     var ns: string;
 
@@ -192,6 +193,15 @@ declare module kendo {
         tagName?: string;
         wrap?: bool;
         model?: Object;
+        init?: (e: ViewEvent) => void;
+        show?: (e: ViewEvent) => void;
+        hide?: (e: ViewEvent) => void;
+    }
+
+    interface ViewEvent {
+        sender: View;
+        isDefaultPrevented(): bool;
+        preventDefault: Function;
     }
 
     class View extends Observable {
@@ -201,16 +211,45 @@ declare module kendo {
         init(element: string, options?: ViewOptions): void;
         render(container?: any): JQuery;
         destroy(): void;
+        element: JQuery;
+        content: any;
+        tagName: string;
+        model: Object;
     }
 
     class Layout extends View {
         showIn(selector: string, view: View);
+        regions: { [selector: string]: View; };
     }
 
+    class History extends Observable {
+        start(options): void;
+        stop(): void;
+        current: string;
+        root: string;
+        change(callback): void;
+        navigate(location: string, silent?: bool);
+    }
+
+    var history: History;
+
     interface RouterOptions {
-        init?: Function;
-        routeMissing?: Function;
-        change?: Function;
+        init?: (e: RouterEvent) => void;
+        routeMissing?: (e: RouterEvent) => void;
+        change?: (e: RouterEvent) => void;
+    }
+
+    interface RouterEvent {
+        sender: Router;
+        isDefaultPrevented(): bool;
+        preventDefault: Function;
+        url: string;
+    }
+
+    class Route extends Class {
+        route: RegExp;
+        callback(url: string): void;
+        worksWith(url: string): void;
     }
 
     class Router extends Observable {
@@ -220,6 +259,7 @@ declare module kendo {
         destroy(): void;
         route(route: string, callback: Function): void;
         navigate(location: string, silent?: bool);
+        routes: Route[];
     }
 
 }
@@ -333,12 +373,32 @@ declare module kendo.data {
         preventDefault?: Function;
     }
 
+
     class Binding extends Observable {
-        get(): any;
-        set(value: any): void;
+        source: any;
+        parents: any[];
+        path: string;
+        dependencies: { [path: string]: bool; };
+        observable: bool;
+        constructor(parents: any[], path: string);
+        change(e): void;
+        start(source): void;
+        stop(source): void;
+        get (): any;
+        set (value: any): void;
+        destroy(): void;
     }
 
-    var binders: Object;
+    class EventBinding extends Binding {
+        get (): void;
+    }
+
+    class TemplateBinding extends Binding {
+        constructor(source, path, template);
+        render(value): string;
+    }
+
+    module binders { };
 
     class Binder extends Class {
         static fn: Binder;
@@ -350,6 +410,24 @@ declare module kendo.data {
         init(element: Element, bindings: { [key: string]: Binding; }, options?: any): void;
         destroy(): void;
         refresh(): void;
+    }
+
+    class Binder extends Class {
+        static fn: Binder;
+        static extend(prototype: Object): Binder;
+
+        element: any;
+        bindings: { [key: string]: Binding; };
+        constructor(element: any, bindings: { [key: string]: Binding; }, options?: BinderOptions);
+        init(element: any, bindings: { [key: string]: Binding; }, options?: BinderOptions): void;
+        bind(binding: Binding, attribute: string);
+        destroy(): void;
+        refresh(): void;
+        refresh(attribute: string): void;
+        options: BinderOptions;
+    }
+
+    interface BinderOptions {
     }
 
     class ObservableObject extends Observable{
@@ -373,6 +451,8 @@ declare module kendo.data {
         id: any;
         editable(field: string): bool;
         isNew(): bool;
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
         static define(options: DataSourceSchemaModelWithFieldsObject): {
             idField: string;
             fields: DataSourceSchemaModelFields;
@@ -518,6 +598,23 @@ declare module kendo.data {
         shift(): any;
         toJSON(): any[];
         unshift(...items: any[]): number;
+        wrapAll(source, target): any;
+        wrap(object, parent): any;
+        indexOf(item: any): number;
+        forEach(callback: (item, index: number, source: ObservableArray) => void ): void;
+        map(callback: (item, index: number, source: ObservableArray) => any): any[];
+        filter(callback: (item, index: number, source: ObservableArray) => bool): any[];
+        find(callback: (item, index: number, source: ObservableArray) => bool): any;
+        every(callback: (item, index: number, source: ObservableArray) => bool): bool;
+        some(callback: (item, index: number, source: ObservableArray) => bool): bool;
+        remove(item): void;
+    }
+
+    interface ObservableArrayEvent {
+        field?: string;
+        action?: string;
+        index?: number;
+        items?: kendo.data.Model[];
     }
 
     class DataSource extends Observable{
@@ -719,12 +816,24 @@ declare module kendo.data {
         sender?: DataSource;
     }
 
+    interface DataSourceItemOrGroup {
+    }
+
+    interface DataSourceGroup extends DataSourceItemOrGroup {
+        aggregates: any[];
+        field: string;
+        hasSubgroups: bool;
+        items: DataSourceItemOrGroup[];
+        value: any;
+    }
+
     interface DataSourceChangeEvent extends DataSourceEvent {
         field?: string;
         value?: Model;
         action?: string;
         index?: number;
-        items?: Model[];
+        items?: DataSourceItemOrGroup[];
+        node?: any;
     }
 
     interface DataSourceErrorEvent extends DataSourceEvent {
@@ -756,13 +865,18 @@ declare module kendo.ui {
 
         constructor(element: Element, options?: any);
         constructor(element: JQuery, options?: any);
+        constructor(selector: String, options?: any);
         init(element: Element, options?: any): void;
         init(element: JQuery, options?: any): void;
         init(selector: String, options: Object): void;
         destroy(): void;
+        element: JQuery;
+        setOptions(options: Object): void;
     }
 
     function plugin(widget: kendo.ui.Widget, register?: Object, prefix?: String);
+    function plugin(widget: any, register?: Object, prefix?: String);
+    function plugin(widget: new (element: Element, options: Object) => kendo.ui.Widget, register?: Object, prefix?: String);
 
     class Draggable extends kendo.ui.Widget{
         element: JQuery;
@@ -919,6 +1033,8 @@ declare module kendo.mobile.ui {
 
 declare module kendo.dataviz.ui {
     function registerTheme(name: string, options: any);
+
+    function plugin(widget: new (element: Element, options: Object) => kendo.ui.Widget);
 }
 
 % namespaces.keys.each do |key|
