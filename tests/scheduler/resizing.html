@@ -823,7 +823,7 @@
             }
 
             function dragstart(scheduler, target) {
-                var draggable = scheduler.element.data("kendoDraggable");
+                var draggable = scheduler._resizeDraggable;
 
                 if (!draggable) {
                     return;
@@ -839,7 +839,7 @@
             }
 
             function drag(scheduler, target, offset) {
-                var draggable = scheduler.element.data("kendoDraggable");
+                var draggable = scheduler._resizeDraggable;
 
                 if (!draggable) {
                     return;
@@ -853,7 +853,7 @@
             }
 
             function dragend(scheduler, target, offset) {
-                var draggable = scheduler.element.data("kendoDraggable");
+                var draggable = scheduler._resizeDraggable;
 
                 if (!draggable) {
                     return;

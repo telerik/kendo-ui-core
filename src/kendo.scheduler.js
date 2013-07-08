@@ -400,6 +400,8 @@ kendo_module({
                 that._resizable();
             }
 
+            that._movable();
+
             $(window).on("resize" + NS, that._resizeHandler);
         },
 
@@ -477,6 +479,82 @@ kendo_module({
             return this.wrapper.children(".k-event, .k-task");
         },
 
+        _movable: function() {
+            var startSlot;
+            var endSlot;
+            var event;
+            var that = this;
+            var hint;
+
+            that._moveDraggable = new kendo.ui.Draggable(that.element, {
+                distance: 0,
+                filter: ".k-event",
+                dragstart: function(e) {
+                    var eventElement = e.currentTarget;
+
+                    hint = eventElement.clone();
+
+                    var uid = eventElement.attr(kendo.attr("uid"));
+
+                    var view = that.view();
+
+                    var events = this.element.find(kendo.format(".k-event[{0}={1}]", kendo.attr("uid"), uid));
+
+                    eventElement = events.first();
+
+                    var offset = eventElement.offset();
+
+                    startSlot = view._slotByPosition(offset.left, offset.top);
+
+                    eventElement = events.last();
+
+                    offset = eventElement.offset();
+
+                    offset.left += eventElement[0].clientWidth;
+
+                    offset.top += eventElement[0].clientHeight;
+
+                    endSlot = view._slotByPosition(offset.left, offset.top);
+
+                    event = getOccurrenceByUid(that._data, uid);
+                },
+                drag: function(e) {
+                    var eventElement = e.currentTarget;
+
+                    var view = that.view();
+
+                    var slot = view._slotByPosition(e.x.location, e.y.location);
+
+                    if (!slot || (slot.isAllDay && !event.isAllDay)) {
+                        return;
+                    }
+
+                    startSlot = slot;
+
+                    hint.appendTo(view.content);
+                    hint.css( {
+                        top: slot.offsetTop,
+                        left: slot.offsetLeft + 2
+                    });
+                },
+                dragend: function(e) {
+                    hint.remove();
+
+                    var start = startSlot.start;
+
+                    if (event.start.getTime() != start.getTime()) {
+                        var duration = event.end.getTime() - event.start.getTime();
+
+                        var end = new Date(start.getTime());
+
+                        kendo.date.setTime(end, duration);
+
+                        that._updateEvent(event, { start: start, end: end });
+                    }
+                }
+            });
+        },
+
         _resizable: function() {
             var startSlot;
             var endSlot;
@@ -498,7 +576,7 @@ kendo_module({
                 }
             }
 
-            that.element.kendoDraggable({
+            that._resizeDraggable = new kendo.ui.Draggable(that.element, {
                 distance: 0,
                 filter: ".k-resize-handle",
                 dragstart: function(e) {
@@ -1756,6 +1834,15 @@ kendo_module({
 
         destroy: function() {
             Widget.fn.destroy.call(this);
+
+            if (this._moveDraggable) {
+                this._moveDraggable.destroy();
+            }
+
+            if (this._resizeDraggable) {
+                this._resizeDraggable.destroy();
+            }
+
             kendo.destroy(this.wrapper);
         },
 
