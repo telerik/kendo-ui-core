@@ -30,6 +30,7 @@ kendo_module({
 
     // Constants ==============================================================
     var COORD_PRECISION = dataviz.COORD_PRECISION,
+        DASH_ARRAYS = dataviz.DASH_ARRAYS,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
@@ -40,16 +41,6 @@ kendo_module({
         SQUARE = "square",
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
-
-    // TODO: Extract in core if shared with SVG
-    var DASH_ARRAYS = {
-            dot: [1.5, 3.5],
-            dash: [4, 3.5],
-            longdash: [8, 3.5],
-            dashdot: [3.5, 3.5, 1.5, 3.5],
-            longdashdot: [8, 3.5, 1.5, 3.5],
-            longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
-        };
 
     var CANVAS_TEMPLATE = renderTemplate(
         "<canvas width='#= d.options.width #px' height='#= d.options.height #px' " +
