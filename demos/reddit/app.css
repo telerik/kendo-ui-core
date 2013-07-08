@@ -271,6 +271,18 @@
     color: #d4d4d4;
 }
 
+.km-canvas:after,
+.km-canvas:before
+{
+    content: "\E0AC";
+}
+
+.km-list-icon:after,
+.km-list-icon:before
+{
+    content: "\E055";
+}
+
 .splash
 {
     z-index: 10;
