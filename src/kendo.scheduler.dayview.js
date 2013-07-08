@@ -1515,6 +1515,95 @@ kendo_module({
         _rowCountForLevel: function(level) {
             var rowLevel = this.rowLevels[level];
             return rowLevel ? rowLevel.length : 0;
+        },
+
+        //navigation
+        clearSelection: function() {
+            this.content.add(this.datesHeader).find(".k-state-selected").removeClass("k-state-selected");
+        },
+
+        select: function(selection) {
+            var that = this,
+                col = that._dateSlotIndex(selection.start),
+                row = that._timeSlotIndex(selection.start),
+                table = that.content.children("table")[0];
+
+            that.clearSelection();
+
+            if (selection.events && selection.events.length) {
+                var event = that.content.add(that.datesHeader.children()).children("[data-uid=" + selection.events[0] + "]").addClass("k-state-selected");
+
+                //TODO: refactor
+                if (!event[0]) {
+                    if (selection.isAllDay) {
+                        table = that.datesHeader.find("table.k-scheduler-header-all-day")[0];
+                    }
+                    $(table.rows[row].cells[col]).addClass("k-state-selected");
+                }
+            } else {
+                if (selection.isAllDay) {
+                    table = that.datesHeader.find("table.k-scheduler-header-all-day")[0];
+                }
+                $(table.rows[row].cells[col]).addClass("k-state-selected");
+            }
+        },
+
+        right: function(selection) {
+            selection.start = kendo.date.addDays(selection.start, 1);
+            selection.end = kendo.date.addDays(selection.end, 1);
+        },
+
+        left: function(selection) {
+            selection.start = kendo.date.addDays(selection.start, -1);
+            selection.end = kendo.date.addDays(selection.end, -1);
+        },
+
+        down: function(selection) {
+            var interval = (this.options.majorTick * MS_PER_MINUTE) / (this.options.minorTickCount || 1),
+                startTime = this.options.startTime,
+                endTime = this.options.endTime,
+                start = new Date(selection.start),
+                end = new Date(selection.end),
+                day = end.getDate();
+
+            if (selection.isAllDay) {
+                start = new Date(start.getFullYear(), start.getMonth(), start.getDate(), startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
+                end = new Date(start);
+
+                kendo.date.setTime(end, interval);
+                selection.isAllDay = false;
+            } else {
+                endTime = new Date(end.getFullYear(), end.getMonth(), end.getDate(), endTime.getHours(), endTime.getMinutes(), endTime.getSeconds(), endTime.getMilliseconds());
+                if ((end.getDate() === start.getDate()) && !kendo.date.getMilliseconds(endTime)) {
+                    kendo.date.setTime(endTime, MS_PER_DAY);
+                }
+
+                kendo.date.setTime(start, interval);
+                kendo.date.setTime(end, interval);
+            }
+
+            if (end <= endTime) {
+                selection.start = start;
+                selection.end = end;
+            }
+        },
+
+        up: function(selection) {
+            var interval = (this.options.majorTick * MS_PER_MINUTE) / (this.options.minorTickCount || 1),
+                startTime = this.options.startTime,
+                endTime = this.options.endTime,
+                start = new Date(selection.start),
+                end = new Date(selection.end);
+
+            kendo.date.setTime(start, -interval);
+            kendo.date.setTime(end, -interval);
+
+            if (kendo.date.getMilliseconds(start) >= kendo.date.getMilliseconds(startTime)) {
+                selection.start = start;
+                selection.end = end;
+            } else if (!selection.isAllDay) {
+                selection.isAllDay = true;
+            }
         }
     });
 

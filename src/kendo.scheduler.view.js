@@ -159,6 +159,7 @@ kendo_module({
             isRtl = kendo.support.isRtl(element);
             this._resizeHint = $();
             this._moveHint = $();
+            this._cellId = kendo.guid();
         },
 
         dateForTitle: function() {

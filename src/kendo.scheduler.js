@@ -28,6 +28,7 @@ kendo_module({
         date = kendo.date,
         getDate = date.getDate,
         recurrence = kendo.recurrence,
+        keys = kendo.keys,
         ui = kendo.ui,
         Widget = ui.Widget,
         STRING = "string",
@@ -410,6 +411,85 @@ kendo_module({
             if(that.options.messages && that.options.messages.recurrence) {
                 recurrence.options = that.options.messages.recurrence;
             }
+
+            that._selectable();
+        },
+
+        _selectable: function() {
+            var that = this;
+            that._tabindex();
+            that.element.on("mousedown" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
+                that._createSelection(e.currentTarget);
+                that.wrapper.focus();
+            });
+
+            that.wrapper.on("focus" + NS, function() {
+                if (!that._selection) {
+                    that._createSelection($(".k-scheduler-content").find("td:first"));
+                }
+
+                that.view().select(that._selection);
+            });
+
+            that.wrapper.on("blur" + NS, function() {
+                that.view().clearSelection();
+            });
+
+            that.wrapper.on("keydown" + NS, function(e) {
+                var key = e.keyCode,
+                    view = that.view();
+
+                if (key === keys.RIGHT) {
+                    view.right(that._selection);
+
+                    if (that._selection.start > view.endDate()) {
+                        that.date(that._selection.start);
+                        view = that.view();
+                    }
+
+                    view.select(that._selection);
+                } else if (key === keys.LEFT) {
+                    view.left(that._selection);
+
+                    if (that._selection.start < view.startDate()) {
+                        that.date(that._selection.start);
+                        view = that.view();
+                    }
+                    view.select(that._selection);
+                } else if (key === keys.DOWN) {
+                    view.down(that._selection);
+                    view.select(that._selection);
+                } else if (key === keys.UP) {
+                    view.up(that._selection);
+                    view.select(that._selection);
+                }
+            });
+        },
+
+        _createSelection: function(item) {
+            var uid, selection = {
+                events: []
+            };
+
+            item = $(item);
+            uid = item.data("uid");
+
+            if (uid) {
+                item = getOccurrenceByUid(this._data, uid);
+                selection.start = new Date(item.start);
+                selection.end = new Date(item.end);
+                selection.isAllDay = item.isAllDay;
+                selection.events = [uid];
+            } else {
+                selection = this.view()._rangeToDates(item);
+                selection.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
+            }
+
+            //TODO: calculate cell offset
+            //selection.offset = 0;
+
+            this._selection = selection;
+>>>>>>> Initial implementation of DayView/MultiDay view keyboard nav
         },
 
         options: {
@@ -1339,7 +1419,7 @@ kendo_module({
                 that._removeEvent(model, true);
             };
 
-			var recurrenceMessages = that.options.messages.recurrenceMessages;
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
             that.showDialog({
                 title: recurrenceMessages.deleteWindowTitle,
                 text: recurrenceMessages.deleteRecurring ? recurrenceMessages.deleteRecurring : DELETERECURRING,
@@ -1509,7 +1589,7 @@ kendo_module({
                 view = views[idx];
 
                 isSettings = isPlainObject(view);
-                
+
                 if (isSettings) {
                     type = name = view.type ? view.type : view;
                     if (typeof type !== STRING) {
@@ -1797,7 +1877,7 @@ kendo_module({
             this.trigger("dataBound");
         }
     });
-    
+
     var defaultViews = {
         day: {
             type: "kendo.ui.DayView"
