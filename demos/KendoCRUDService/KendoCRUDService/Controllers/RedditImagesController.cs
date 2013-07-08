@@ -26,8 +26,8 @@ namespace KendoCRUDService.Controllers
             thumbnailCreator = new ThumbnailCreator();
         }
 
-        [OutputCache(Duration = 3600, VaryByParam = "url")]
-        public virtual ActionResult Index(string url)
+        [OutputCache(Duration = 3600, VaryByParam = "*")]
+        public virtual ActionResult Index(string url, int width, int height)
         {
             string path = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("n"));
 
@@ -45,7 +45,7 @@ namespace KendoCRUDService.Controllers
                     WebClient imageReader = new WebClient();
                     imageReader.DownloadFile(url, physicalPath);
 
-                    return CreateThumbnail(physicalPath);
+                    return CreateThumbnail(physicalPath, width, height);
                 }
                 else
                 {
@@ -58,14 +58,14 @@ namespace KendoCRUDService.Controllers
             }
         }
 
-        private FileContentResult CreateThumbnail(string physicalPath)
+        private FileContentResult CreateThumbnail(string physicalPath, int width, int height)
         {
             using (var fileStream = System.IO.File.OpenRead(physicalPath))
             {
                 var desiredSize = new ImageSize
                 {
-                    Width = 100,
-                    Height = 100
+                    Width = width,
+                    Height = height
                 };
 
                 const string contentType = "image/png";
