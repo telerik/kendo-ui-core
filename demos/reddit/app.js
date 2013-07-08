@@ -169,7 +169,6 @@ function canvasInit(e) {
         itemsPerPage: 6,
         contentHeight: "100%",
         template: kendo.template($("#canvas-template").html()),
-        emptyTemplate: kendo.template($("#empty-template").html()),
         change: updateSrc
     }).data("kendoMobileScrollView");
 
@@ -226,21 +225,26 @@ function calculateOffset(dataItem) {
     return index;
 }
 
+
+function urlProxy(url) {
+    return "http://demos.kendoui.com/service/RedditImages?url=" + escape(url) + "&width=160&height=160";
+}
+
 function updateSrc(e) {
     var element = e.element,
         image;
 
     element.find(".item-img").each(function(idx, item) {
+        var url = $(item).data("url");
         image = $("<img />");
-        image.one("load", onImageLoad);
-        image.attr("src", "http://valchev/KendoCRUDService/RedditImages?url=" + $(item).data("url"));
-    });
-}
 
-function onImageLoad(e) {
-    var element = $("[data-url='" + e.target.src.split("?url=")[1] + "']");
-    element.css("background-image", "url(" + e.target.src + ")");
-    element.addClass("loaded").removeClass("faded");
+        image.one("load", function() {
+            $(item).css("background-image", "url(" + url + ")");
+            $(item).addClass("loaded").removeClass("faded");
+        });
+
+        image.attr("src", url);
+    });
 }
 
 function createImage(data) {
@@ -248,7 +252,7 @@ function createImage(data) {
         subreddit = data.subreddit,
         thumbnail = data.thumbnail,
         url = data.url,
-        imageTemplate = kendo.template('<div class="item-img faded" data-url="#= data #"></div>');
+        imageTemplate = kendo.template('<div class="item-img faded" data-url="#= urlProxy(data) #"></div>');
 
     if(url.match(imgExtensionRegex)) {
         return imageTemplate(url);
@@ -288,6 +292,8 @@ function createTile(data) {
 var app = new kendo.mobile.Application(document.body, {
     skin: "flat",
     init: function() {
-        kendo.fx(".splash").fadeOut().duration(400).play();
+        setTimeout(function() {
+            kendo.fx(".splash").fadeOut().duration(700).play();
+        }, 1000)
     }
 });
