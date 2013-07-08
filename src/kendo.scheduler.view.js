@@ -158,6 +158,7 @@ kendo_module({
             this._scrollbar = kendo.support.scrollbar();
             isRtl = kendo.support.isRtl(element);
             this._resizeHint = $();
+            this._moveHint = $();
         },
 
         dateForTitle: function() {
@@ -176,6 +177,11 @@ kendo_module({
         _removeResizeHint: function() {
             this._resizeHint.remove();
             this._resizeHint = $();
+        },
+
+        _removeMoveHint: function() {
+            this._moveHint.remove();
+            this._moveHint = $();
         },
 
         eventResources: function(event) {

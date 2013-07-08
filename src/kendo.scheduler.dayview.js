@@ -168,14 +168,40 @@ kendo_module({
             that._slots();
        },
 
+       _allDaySlotToDaySlot: function(slot) {
+            if (!slot.isAllDay) {
+                return slot;
+            }
+
+            var dateSlotIndex = this._dateSlotIndex(slot.start);
+            return this._columns[dateSlotIndex].slots[0];
+       },
+
+       _daySlotToAllDaySlot: function(slot) {
+            if (slot.isAllDay) {
+                return slot;
+            }
+
+            return this._rows[0].slots[this._dateSlotIndex(slot.start)];
+       },
+
        _updateResizeHint: function(direction, startSlot, endSlot) {
+            var vertical = direction == "south" || direction == "north";
+
+            if (vertical) {
+                startSlot = this._allDaySlotToDaySlot(startSlot);
+                endSlot = this._allDaySlotToDaySlot(endSlot);
+            } else {
+                startSlot = this._daySlotToAllDaySlot(startSlot);
+                endSlot = this._daySlotToAllDaySlot(endSlot);
+            }
+
             var left = startSlot.offsetLeft + parseInt($(startSlot.element).css("borderLeftWidth"), 10);
             var top = startSlot.offsetTop;
             var width = startSlot.clientWidth;
             var height = startSlot.clientHeight;
             var container = this.content;
             var format;
-            var vertical = direction == "south" || direction == "north";
 
             if (vertical) {
                 var dateSlotIndex = this._dateSlotIndex(startSlot.start);
@@ -204,6 +230,44 @@ kendo_module({
             this._resizeHint.find(".k-label-top").text(kendo.toString(startSlot.start, format))
                             .end()
                             .find(".k-label-bottom").text(kendo.toString(endSlot.end, format));
+        },
+
+        _updateMoveHint: function(event, startSlot) {
+            var isAllDay = startSlot.isAllDay;
+
+            if (!this._moveHint.length) {
+                this._moveHint = this._createEventElement(event, !isAllDay);
+                this._moveHint.appendTo(isAllDay ? this.element.find(".k-scheduler-header-wrap") : this.content);
+            }
+
+            var css = {
+                left: startSlot.offsetLeft + 2,
+                top: startSlot.offsetTop
+            };
+
+            var duration = event.end.getTime() - event.start.getTime();
+
+            var end = new Date(startSlot.start.getTime());
+
+            kendo.date.setTime(end, duration);
+
+            var columnIndex = this._dateSlotIndex(end);
+
+            if (isAllDay) {
+                if (columnIndex < 0) {
+                    columnIndex = startSlot.index + 1;
+                }
+
+                css.width = this._calculateAllDayEventWidth(this._rows[0].slots, startSlot.index, columnIndex) - 4;
+            } else {
+                var timeIndex = this._timeSlotIndex(end);
+
+                css.height = this._calculateEventHeight(this._columns[columnIndex].slots, startSlot.index, timeIndex) - 4;
+
+                css.width = startSlot.clientWidth * 0.9 - 4;
+            }
+
+            this._moveHint.css(css);
         },
 
        _slotByPosition: function(x, y) {
@@ -1028,7 +1092,8 @@ kendo_module({
             return tmpl;
        },
 
-       _createEventElement: function(event, template, isOneDayEvent) {
+       _createEventElement: function(event, isOneDayEvent) {
+            var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
             var options = this.options;
             var showDelete = options.editable && options.editable.destroy !== false;
             var startDate = getDate(this.startDate());
@@ -1179,8 +1244,6 @@ kendo_module({
         },
 
         _renderEvents: function(events, resourceOffset, groupIdx) {
-            var eventTemplate = this.eventTemplate;
-            var allDayEventTemplate = this.allDayEventTemplate;
             var allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap");
             var timeOffset = 0;
             var dateOffset = 0;
@@ -1208,7 +1271,7 @@ kendo_module({
                         endDateSlotIndex = this._dateSlotIndex(event.end, !event.isAllDay),
                         isOneDayEvent = !event.isAllDay && event.end.getTime() - event.start.getTime() < MS_PER_DAY && dateSlotIndex === endDateSlotIndex,
                         container = isOneDayEvent ? this.content : allDayEventContainer,
-                        element = this._createEventElement(event,isOneDayEvent ? eventTemplate : allDayEventTemplate, isOneDayEvent);
+                        element = this._createEventElement(event, isOneDayEvent);
 
                     if (isOneDayEvent) {
 

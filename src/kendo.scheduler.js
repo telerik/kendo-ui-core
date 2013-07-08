@@ -486,15 +486,12 @@ kendo_module({
             var endSlot;
             var event;
             var that = this;
-            var hint;
 
             that._moveDraggable = new kendo.ui.Draggable(that.element, {
                 distance: 0,
                 filter: ".k-event",
                 dragstart: function(e) {
                     var eventElement = e.currentTarget;
-
-                    hint = eventElement.clone();
 
                     var uid = eventElement.attr(kendo.attr("uid"));
 
@@ -525,22 +522,14 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    if (!slot || (slot.isAllDay && !event.isAllDay)) {
-                        return;
-                    }
-
                     startSlot = slot;
 
-                    hint.appendTo(view.content);
-                    hint.css( {
-                        top: slot.offsetTop,
-                        left: slot.offsetLeft + 2
-                    });
+                    view._updateMoveHint(event, slot);
                 },
                 dragend: function() {
-                    hint.remove();
-
                     var start = startSlot.start;
+
+                    that.view()._removeMoveHint();
 
                     if (event.start.getTime() != start.getTime()) {
                         var duration = event.end.getTime() - event.start.getTime();
@@ -586,6 +575,7 @@ kendo_module({
 
                     var uid = eventElement.attr(kendo.attr("uid"));
 
+                    event = getOccurrenceByUid(that._data, uid);
                     var view = that.view();
 
                     var events = this.element.find(kendo.format(".k-event[{0}={1}]", kendo.attr("uid"), uid));
@@ -606,7 +596,6 @@ kendo_module({
 
                     endSlot = view._slotByPosition(offset.left, offset.top);
 
-                    event = getOccurrenceByUid(that._data, uid);
                 },
                 drag: function(e) {
                     var dragHandle = $(e.currentTarget);
@@ -617,15 +606,11 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    var update = false;
-
                     if (!slot) {
                         return;
                     }
 
-                    if (slot.isAllDay && (dir == "south" || dir == "north")) {
-                        return;
-                    }
+                    var update = false;
 
                     if (dir == "south") {
                         if (getMilliseconds(slot.end) - getMilliseconds(event.start) >= view._timeSlotInterval()) {

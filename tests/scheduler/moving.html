@@ -69,6 +69,26 @@
                 equal(scheduler.dataSource.at(0).start.getDate(), 6);
             });
 
+            test("moving appointment in day view changes its end time", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:10"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(1));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 10);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 40);
+                equal(scheduler.dataSource.at(0).end.getDate(), 6);
+            });
+
             test("dragging and dropping doesn't change the event time if editable is set to false", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
