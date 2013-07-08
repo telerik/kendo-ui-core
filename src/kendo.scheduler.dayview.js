@@ -1316,8 +1316,6 @@ kendo_module({
                     var task = extend({}, event);
                     result.push(task);
 
-                    var endDate;
-
                     if (eventDurationInDays > 1) {
                         task.end = kendo.date.getDate(start);
                         task.isAllDay = true;
