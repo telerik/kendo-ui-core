@@ -154,6 +154,7 @@ kendo_module({
         SELECT_END = "selectEnd",
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
+        STEP_LINE = "stepLine",
         STRING = "string",
         TIME_PER_SECOND = 1000,
         TIME_PER_MINUTE = 60 * TIME_PER_SECOND,
@@ -182,6 +183,7 @@ kendo_module({
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
         VERTICAL_LINE = "verticalLine",
+        VERTICAL_STEP_LINE = "verticalStepLine",
         WEEKS = "weeks",
         WHITE = "#fff",
         X = "x",
@@ -829,7 +831,7 @@ kendo_module({
                 tooltipOptions, owner, seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords)) {
-                if (point && point.series && (point.series.type === LINE || point.series.type === AREA)) {
+                if (point && point.series && inArray(point.series.type, [ LINE, STEP_LINE, AREA ])) {
                     owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
@@ -4340,6 +4342,40 @@ kendo_module({
     });
     deepExtend(LineChart.fn, LineChartMixin);
 
+    var StepLineChart = LineChart.extend({
+        createSegment: function(linePoints, currentSeries, seriesIx) {
+            return new StepLineSegment(linePoints, currentSeries, seriesIx);
+        }
+    });
+
+    var StepLineSegment = LineSegment.extend({
+        points: function(visualPoints) {
+            var segment = this,
+                linePoints = segment.linePoints.concat(visualPoints || []),
+                length = linePoints.length,
+                points = [],
+                prevPoint, point,
+                i, pointCenter;
+
+            for (i = 1; i < length; i++) {
+                prevPoint = linePoints[i - 1];
+                point = linePoints[i];
+                console.log(point, this);
+
+                //points.push(point2d(prevpoint.box.center().x, prevpoint.markerbox().center().y));
+                //points.push(point2d(prevpoint.box.center().x + prevpoint.box.width() / 2, prevpoint.markerbox().center().y));
+                //points.push(point2d(point.box.center().x - point.box.width() / 2, point.markerbox().center().y));
+                //points.push(point2d(point.box.center().x, point.markerbox().center().y));
+
+                points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.markerBox().center().y));
+                points.push(Point2D(point.markerBox().center().x, prevPoint.markerBox().center().y));
+                points.push(Point2D(point.markerBox().center().x, point.markerBox().center().y));
+            }
+
+            return points;
+        }
+    });
+
     var AreaSegment = LineSegment.extend({
         init: function(linePoints, stackPoints, currentSeries, seriesIx) {
             var segment = this;
@@ -7133,6 +7169,11 @@ kendo_module({
                     pane
                 );
 
+                plotArea.createStepLineChart(
+                    filterSeriesByType(filteredSeries, [STEP_LINE, VERTICAL_STEP_LINE]),
+                    pane
+                );
+
                 plotArea.createCandlestickChart(
                     filterSeriesByType(filteredSeries, CANDLESTICK),
                     pane
@@ -7310,6 +7351,22 @@ kendo_module({
             var plotArea = this,
                 firstSeries = series[0],
                 lineChart = new LineChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    isStacked: firstSeries.stack && series.length > 1,
+                    series: series
+                });
+
+            plotArea.appendChart(lineChart, pane);
+        },
+
+        createStepLineChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                lineChart = new StepLineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
                     isStacked: firstSeries.stack && series.length > 1,
                     series: series
@@ -9391,6 +9448,8 @@ kendo_module({
         delete seriesDefaults.column;
         delete seriesDefaults.line;
         delete seriesDefaults.verticalLine;
+        delete seriesDefaults.stepLine;
+        delete seriesDefaults.verticalStepLine;
         delete seriesDefaults.pie;
         delete seriesDefaults.donut;
         delete seriesDefaults.area;
@@ -9990,7 +10049,7 @@ kendo_module({
     dataviz.ui.plugin(Chart);
 
     PlotAreaFactory.current.register(CategoricalPlotArea, [
-        BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
+        BAR, COLUMN, LINE, VERTICAL_LINE, STEP_LINE, VERTICAL_STEP_LINE, AREA, VERTICAL_AREA,
         CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
     ]);
 
@@ -10002,7 +10061,7 @@ kendo_module({
     PlotAreaFactory.current.register(DonutPlotArea, [DONUT]);
 
     SeriesBinder.current.register(
-        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+        [BAR, COLUMN, LINE, STEP_LINE, VERTICAL_STEP_LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
         [VALUE], [CATEGORY, COLOR, NOTE_TEXT]
     );
 
