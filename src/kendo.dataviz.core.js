@@ -1177,13 +1177,24 @@ kendo_module({
                 options = axis.options,
                 notes = options.notes,
                 items = notes.items || [],
-                i, item, note;
+                noteTemplate, i, text, item, note;
 
             axis.notes = [];
 
             for (i = 0; i < items.length; i++) {
                 item = deepExtend({}, notes, items[i]);
-                note = new Note(item);
+                text = item.label.text || item.value;
+                if (item.label.template) {
+                    noteTemplate = template(item.label.template);
+                    text = noteTemplate({
+                        value: text
+                    });
+                } else if (item.label.format) {
+                    text = autoFormat(item.label.format, text);
+                }
+
+                note = new Note(deepExtend({}, item, { label: { text: text }}));
+
                 if (note.options.visible) {
                     if (defined(note.options.position)) {
                         if (options.vertical && !inArray(note.options.position, [LEFT, RIGHT])) {
