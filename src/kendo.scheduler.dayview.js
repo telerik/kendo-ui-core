@@ -285,6 +285,7 @@ kendo_module({
             var range;
             var cell;
             var allDayRowCount = 0;
+            var isVertical = this.options.groupOrientation === "vertical";
 
             for (var rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
                 var tr = tableRows[rowIndex];
@@ -313,6 +314,13 @@ kendo_module({
                     };
 
                     cell.index = columns[cellIndex].slots.length;
+
+                    if (isVertical) {
+                        cell.groupIndex = this._groupVerticalIndex(rowIndex);
+                    } else {
+                        cell.groupIndex = this._groupHorizontalIndex(cellIndex);
+                    }
+
                     columns[cellIndex].slots.push(cell);
                     columns[cellIndex].offsetLeft = cell.offsetLeft;
                     columns[cellIndex].clientWidth = cell.clientWidth;
@@ -788,6 +796,20 @@ kendo_module({
                 return index - (rowCount*Math.floor(index/rowCount));
             }
             return index;
+        },
+
+        _groupHorizontalIndex: function(cellIndex) {
+            if (this.groupedResources) {
+                return Math.floor(cellIndex/this._columnCountInGroup());
+            }
+            return 0;
+        },
+
+        _groupVerticalIndex: function(rowIndex) {
+            if (this.groupedResources) {
+                return Math.floor(rowIndex/this._rowsCountInGroup());
+            }
+            return 0;
         },
 
         _adjustColumnIndex: function(index) {

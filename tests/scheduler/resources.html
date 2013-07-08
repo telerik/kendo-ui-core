@@ -1605,6 +1605,133 @@
                 equal(view._rows[0].events[2].end, 12);
             });
 
+            test("group index is set to the slot with horizontal grouping in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+
+                    ],
+                    dataSource: [ ],
+                    views: ["week"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view._columns[0].slots[0].groupIndex, 0);
+                equal(view._columns[1].slots[0].groupIndex, 0);
+                equal(view._columns[2].slots[0].groupIndex, 0);
+                equal(view._columns[3].slots[0].groupIndex, 0);
+                equal(view._columns[6].slots[0].groupIndex, 0);
+
+                equal(view._columns[7].slots[0].groupIndex, 1);
+                equal(view._columns[8].slots[0].groupIndex, 1);
+                equal(view._columns[9].slots[0].groupIndex, 1);
+                equal(view._columns[10].slots[0].groupIndex, 1);
+                equal(view._columns[13].slots[0].groupIndex, 1);
+
+                equal(view._columns[14].slots[0].groupIndex, 2);
+                equal(view._columns[20].slots[0].groupIndex, 2);
+
+                equal(view._columns[21].slots[0].groupIndex, 3);
+            });
+
+            test("group index is set to the slot with vertical grouping in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                var slots = view._columns[0].slots;
+                equal(slots[0].groupIndex, 0);
+                equal(slots[48].groupIndex, 1);
+                equal(slots[49].groupIndex, 1);
+            });
+
+            test("group index is set to the slot with horizontal grouping on date in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["date", "ResourceName", "ResourceName2"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+
+                    ],
+                    dataSource: [ ],
+                    views: ["week"]
+                });
+
+                var view = scheduler.view();
+                equal(view._columns.length, 28);
+                equal(view._columns[0].slots[0].groupIndex, 0);
+                equal(view._columns[1].slots[0].groupIndex, 0);
+                equal(view._columns[2].slots[0].groupIndex, 0);
+                equal(view._columns[3].slots[0].groupIndex, 0);
+
+                equal(view._columns[4].slots[0].groupIndex, 1);
+                equal(view._columns[5].slots[0].groupIndex, 1);
+                equal(view._columns[6].slots[0].groupIndex, 1);
+                equal(view._columns[7].slots[0].groupIndex, 1);
+
+                equal(view._columns[8].slots[0].groupIndex, 2);
+                equal(view._columns[9].slots[0].groupIndex, 2);
+                equal(view._columns[10].slots[0].groupIndex, 2);
+                equal(view._columns[11].slots[0].groupIndex, 2);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
