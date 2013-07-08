@@ -145,12 +145,12 @@ var ParagraphCommand = Command.extend({
             node = node.parentNode;
         }
 
-        if (node && !dom.is(node, 'img')) {
+        if (node) {
             while (node.firstChild && node.firstChild.nodeType == 1) {
                 node = node.firstChild;
             }
 
-            if (/^\s*$/.test(node.innerHTML)) {
+            if (!dom.is(node, 'img') && /^\s*$/.test(node.innerHTML)) {
                 node.innerHTML = editorNS.emptyElementContent;
             }
         }
