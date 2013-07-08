@@ -554,6 +554,11 @@ kendo_module({
                                     if (!that.trigger(CLOSE, { item: li[0] })) {
                                         li.css(ZINDEX, li.data(ZINDEX));
                                         li.removeData(ZINDEX);
+
+                                        if (mobile) {
+                                            li.removeClass(HOVERSTATE);
+                                            that._removeHoverItem();
+                                        }
                                     } else {
                                         e.preventDefault();
                                     }
@@ -743,7 +748,7 @@ kendo_module({
                 return;
             }
 
-            if ((!element.parent().hasClass(MENU) || !options.openOnClick) && mobile) {
+            if ((!element.parent().hasClass(MENU) || !options.openOnClick) && !kendo.support.touch) {
                 return;
             }
 
