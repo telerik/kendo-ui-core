@@ -1,4 +1,4 @@
-var PAGE_SIZE = 25,
+var PAGE_SIZE = kendo.support.mobileOS ? 26 : 80,
     imgurAlbumRegex = /http:\/\/imgur.com\/a\//,
     imgurGalleryRegex = /http:\/\/imgur.com\/gallery\//,
     imgurSingleRegex = /http:\/\/imgur.com\/.[^\/]/,
