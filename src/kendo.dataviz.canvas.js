@@ -333,16 +333,15 @@ kendo_module({
                 width: 0,
                 height: 0
             },
-            fillOpacity: 1,
-            cursor: {}
+            fillOpacity: 1
         },
 
         render: function(context) {
             var text = this,
                 options = text.options,
                 content = text.content,
-                x = Math.round(options.x),
-                y = Math.round(options.y + options.baseline);
+                x = options.x,
+                y = options.y + options.baseline;
 
             context.save();
 
@@ -361,12 +360,12 @@ kendo_module({
             var text = this,
                 options = text.options,
                 size = options.size,
-                cx = round(options.x + size.normalWidth / 2, COORD_PRECISION),
-                cy = round(options.y + size.normalHeight / 2, COORD_PRECISION),
-                rcx = round(options.x + size.width / 2, COORD_PRECISION),
-                rcy = round(options.y + size.height / 2, COORD_PRECISION),
-                offsetX = round(rcx - cx, COORD_PRECISION),
-                offsetY = round(rcy - cy, COORD_PRECISION);
+                cx = options.x + size.normalWidth / 2,
+                cy = options.y + size.normalHeight / 2,
+                rcx = options.x + size.width / 2,
+                rcy = options.y + size.height / 2,
+                offsetX = rcx - cx,
+                offsetY = rcy - cy;
 
             context.translate(cx, cy);
             context.rotate(options.rotation * DEG_TO_RAD);

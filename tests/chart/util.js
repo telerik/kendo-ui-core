@@ -91,6 +91,30 @@ function ViewElementStub() {
     this.children = [];
 }
 
+function makeStub(methods) {
+    var stub = function() {
+        this.log = {};
+    };
+
+    $.each(methods, function(i, m) {
+        var name = m[0] || m;
+        var argNames = m[1] || [];
+
+        stub.prototype[name] = function() {
+            var entry = {};
+            var args = arguments || [];
+            $.each(argNames, function(i, argName) {
+                 entry[argName] = args[i];
+            });
+
+            var log = this.log[name] = this.log[name] || [];
+            log.push(entry);
+        }
+    });
+
+    return stub;
+}
+
 function arrayClose(a, b, tolerance) {
     if (a.length != b.length) {
         ok(false, "Arrays differ in size " + "(expected " + b.length + ", got " + a.length + " elements)");

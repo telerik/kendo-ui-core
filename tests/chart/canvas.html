@@ -19,6 +19,7 @@
             var dataviz = kendo.dataviz,
                 browser = kendo.support.browser,
                 Box2D = dataviz.Box2D,
+                DEG_TO_RAD = Math.PI / 180,
                 Point2D = dataviz.Point2D,
                 view = new ViewElementStub(),
                 linearGradient = {
@@ -51,6 +52,14 @@
                         opacity: 1
                     }]
                 };
+
+            var ContextStub = makeStub([
+                ["save"],
+                ["restore"],
+                ["fillText", ["content", "x", "y"]],
+                ["translate", ["x", "y"]],
+                ["rotate", ["angle"]]
+            ]);
 
             (function() {
                 var view;
@@ -385,7 +394,8 @@
             })();
 
             (function() {
-                var text;
+                var text,
+                    ctx;
 
                 function createText(options) {
                     options = $.extend({
@@ -393,47 +403,35 @@
                         }, options
                     );
 
-                    text = new dataviz.SVGText(
+                    text = new dataviz.CanvasText(
                         "Text",
                         options
                     );
                 }
 
-                module("SVGText", {
+                module("CanvasText", {
                     setup: function() {
                         createText();
+                        ctx = new ContextStub();
                     }
                 });
 
-                test("renders id", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = false;
-
-                    createText({ id: "1" });
-                    ok(text.render().indexOf(" id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
                 test("renders content", function() {
-                    equal(text.render().replace(/\<text.*?\>/, "<text>"),
-                            "<text>Text</text>");
+                    text.render(ctx);
+                    equal(ctx.log.fillText[0].content, "Text");
                 });
 
                 test("baseline is added to y", function() {
                     text.options.y = 5;
                     text.options.baseline = 5;
-                    ok(text.render().indexOf("y='10'") > -1);
+                    text.render(ctx);
+                    equal(ctx.log.fillText[0].y, 10);
                 });
 
                 test("sets font", function() {
                     text.options.font = "12px sans-serif";
-                    ok(text.render().indexOf("font: " + text.options.font) > -1);
-                });
-
-                test("sets cursor style", function() {
-                    text.options.cursor.style = "pointer";
-                    ok(text.render().indexOf("cursor: " + text.options.cursor.style) > -1);
+                    text.render(ctx);
+                    equal(ctx.font, text.options.font);
                 });
 
                 test("sets rotation transform for 45 degrees", function() {
@@ -447,10 +445,11 @@
                             width: 28
                         }
                     });
-                    ok(text.render().indexOf(
-                        "transform='translate(0.5,7) rotate(45,13.5,7)'")
-                        != -1
-                    );
+                    text.render(ctx);
+
+                    equal(ctx.log.translate[2].x, 0.5);
+                    equal(ctx.log.translate[2].y, 7);
+                    equal(ctx.log.rotate[0].angle, 45 * DEG_TO_RAD);
                 });
 
                 test("sets rotation transform for 90 degrees", function() {
@@ -464,10 +463,11 @@
                             width: 14
                         }
                     });
-                    ok(text.render().indexOf(
-                        "transform='translate(-6.5,6.5) rotate(90,13.5,7)'")
-                        != -1
-                    );
+                    text.render(ctx);
+
+                    equal(ctx.log.translate[2].x, -6.5);
+                    equal(ctx.log.translate[2].y, 6.5);
+                    equal(ctx.log.rotate[0].angle, 90 * DEG_TO_RAD);
                 });
 
                 test("sets rotation transform for -45 degrees", function() {
@@ -481,10 +481,11 @@
                             width: 28
                         }
                     });
-                    ok(text.render().indexOf(
-                        "transform='translate(0.5,7) rotate(-45,13.5,7)'")
-                        != -1
-                    );
+                    text.render(ctx);
+
+                    equal(ctx.log.translate[2].x, 0.5);
+                    equal(ctx.log.translate[2].y, 7);
+                    equal(ctx.log.rotate[0].angle, -45 * DEG_TO_RAD);
                 });
 
                 test("sets rotation transform for -90 degrees", function() {
@@ -498,59 +499,31 @@
                             width: 14
                         }
                     });
-                    ok(text.render().indexOf(
-                        "transform='translate(-6.5,6.5) rotate(-90,13.5,7)'")
-                        != -1
-                    );
+                    text.render(ctx);
+
+                    equal(ctx.log.translate[2].x, -6.5);
+                    equal(ctx.log.translate[2].y, 6.5);
+                    equal(ctx.log.rotate[0].angle, -90 * DEG_TO_RAD);
                 });
 
                 test("sets color", function() {
                     text.options.color = "#cf0";
-                    ok(text.render().indexOf("fill='" + text.options.color + "'") > -1);
-                });
+                    text.render(ctx);
 
-                test("renders id", function() {
-                    text.options.id = "id";
-                    ok(text.render().indexOf("id='id'") > -1);
-                });
-
-                test("renders id", function() {
-                    text.options.id = "id";
-                    ok(text.render().indexOf("id='id'") > -1);
-                });
-
-                test("renders data attributes", function() {
-                    text.options.data = { testId: 1 };
-                    ok(text.render().indexOf("data-test-id='1'") > -1);
+                    equal(ctx.fillStyle, text.options.color);
                 });
 
                 test("renders fill-opacity", function() {
                     text.options.fillOpacity = .4;
-                    ok(text.render().indexOf("fill-opacity='0.4'") > -1);
+                    text.render(ctx);
+
+                    equal(ctx.globalAlpha, text.options.fillOpacity);
                 });
 
-                test("clone returns different instance", function() {
-                    notEqual(text.clone(), text);
-                });
-
-                test("clone returns SVGText", function() {
-                    ok(text.clone() instanceof dataviz.SVGText);
-                });
-
-                test("clone copies text", function() {
-                    equal(text.clone().content, text.content);
-                });
-
-                test("clone copies options", function() {
-                    createText({ id: "1" });
-                    equal(text.clone().options.id, "1");
-                });
-
-                test("refresh updates fill-opacity attribute", function() {
-                    var domElement = $("<div />");
-                    text.options.fillOpacity = 0.4;
-                    text.refresh(domElement);
-                    equal(domElement.attr("fill-opacity"), "0.4");
+                test("saves/restores style stack", function() {
+                    text.render(ctx);
+                    equal(ctx.log.save.length, 1);
+                    equal(ctx.log.restore.length, 1);
                 });
 
             })();

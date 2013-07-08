@@ -605,11 +605,6 @@
                     ok(text.render().indexOf("id='id'") > -1);
                 });
 
-                test("renders id", function() {
-                    text.options.id = "id";
-                    ok(text.render().indexOf("id='id'") > -1);
-                });
-
                 test("renders data attributes", function() {
                     text.options.data = { testId: 1 };
                     ok(text.render().indexOf("data-test-id='1'") > -1);
