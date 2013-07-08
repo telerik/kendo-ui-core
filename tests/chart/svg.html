@@ -719,6 +719,41 @@
                     ok(path.render().indexOf("data-test-id='1'") > -1);
                 });
 
+                test("clone returns different instance", function() {
+                    notEqual(path.clone(), path);
+                });
+
+                test("clone returns SVGPath", function() {
+                    ok(path.clone() instanceof dataviz.SVGPath);
+                });
+
+                test("clone copies options", function() {
+                    path.options.id = "1";
+                    equal(path.clone().options.id, "1");
+                });
+
+                test("refresh updates fill-opacity attribute", function() {
+                    var domElement = $("<div />");
+                    path.options.fillOpacity = 0.4;
+                    path.refresh(domElement);
+                    equal(domElement.attr("fill-opacity"), "0.4");
+                });
+
+                test("refresh updates stroke-opacity attribute", function() {
+                    var domElement = $("<div />");
+                    path.options.strokeOpacity = 0.4;
+                    path.refresh(domElement);
+                    equal(domElement.attr("stroke-opacity"), "0.4");
+                });
+
+                test("refresh updates display style property", function() {
+                    var domElement = $("<div />");
+                    path.options.visible = false;
+                    path.refresh(domElement);
+                    equal(domElement.css("display"), "none");
+                });
+
+                // ------------------------------------------------------------
                 module("SVGPath / Dash", {
                     setup: function() {
                         path = new dataviz.SVGPath({ strokeWidth: 1 });
@@ -764,40 +799,6 @@
                 test("sets stroke linecap to butt", function() {
                     path.options.dashType = "dot";
                     ok(path.render().indexOf("stroke-linecap='butt'") > -1);
-                });
-
-                test("clone returns different instance", function() {
-                    notEqual(path.clone(), path);
-                });
-
-                test("clone returns SVGPath", function() {
-                    ok(path.clone() instanceof dataviz.SVGPath);
-                });
-
-                test("clone copies options", function() {
-                    path.options.id = "1";
-                    equal(path.clone().options.id, "1");
-                });
-
-                test("refresh updates fill-opacity attribute", function() {
-                    var domElement = $("<div />");
-                    path.options.fillOpacity = 0.4;
-                    path.refresh(domElement);
-                    equal(domElement.attr("fill-opacity"), "0.4");
-                });
-
-                test("refresh updates stroke-opacity attribute", function() {
-                    var domElement = $("<div />");
-                    path.options.strokeOpacity = 0.4;
-                    path.refresh(domElement);
-                    equal(domElement.attr("stroke-opacity"), "0.4");
-                });
-
-                test("refresh updates display style property", function() {
-                    var domElement = $("<div />");
-                    path.options.visible = false;
-                    path.refresh(domElement);
-                    equal(domElement.css("display"), "none");
                 });
 
             })();
