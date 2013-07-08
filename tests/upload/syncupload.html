@@ -191,7 +191,7 @@
 
         <script type="text/javascript">
 
-             // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("Upload / SyncUpload / Templates", {
                 setup: function() {
@@ -226,6 +226,25 @@
             test("progress bar is rendered in the template", function() {
                 simulateSingleFileSelect("image.jpg", 500);
                 equal($('.k-progress', uploadInstance.wrapper).length, 1);
+            });
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / SyncUpload / Initial Files", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ 
+                        files: [
+                            { name: "test.doc", size: 50, extension: ".doc"},
+                            { name: "test1.jpg", size: 60, extension: ".jpg" }
+                        ]
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("initial files are not rendered even if they are passed in the configuration", function(){
+                equal($('.k-file', uploadInstance.wrapper).length, 0);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
