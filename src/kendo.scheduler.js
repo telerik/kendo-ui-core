@@ -679,13 +679,13 @@ kendo_module({
                     that.view()._removeResizeHint();
 
                     if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
-                        that._updateEvent(event, { start: start, end: end });
+                        that._updateEvent(dir, event, { start: start, end: end });
                     }
                 }
             });
         },
 
-        _updateEvent: function(event, eventInfo) {
+        _updateEvent: function(dir, event, eventInfo) {
             var that = this;
 
             var updateEvent = function(event) {
@@ -707,7 +707,22 @@ kendo_module({
             };
 
             var updateSeries = function() {
-                updateEvent(that.dataSource.get(event.recurrenceId));
+                var head = that.dataSource.get(event.recurrenceId);
+
+                if (dir == "south" || dir == "north") {
+                    if (eventInfo.start) {
+                        var start = kendo.date.getDate(head.start);
+                        kendo.date.setTime(start, getMilliseconds(eventInfo.start));
+                        eventInfo.start = start;
+                    }
+                    if (eventInfo.end) {
+                        var end = kendo.date.getDate(head.end);
+                        kendo.date.setTime(end, getMilliseconds(eventInfo.end));
+                        eventInfo.end = end;
+                    }
+                }
+
+                updateEvent(head);
             };
 
             var updateOcurrence = function() {
@@ -720,14 +735,16 @@ kendo_module({
                 delete exception.id;
 
                 exception.recurrenceId = head.id;
+                exception.start = event.start;
+                exception.end = event.end;
 
                 exception = that.dataSource.add(exception);
+
+                that._addExceptionDate(exception);
 
                 for (var field in eventInfo) {
                     exception.set(field, eventInfo[field]);
                 }
-
-                that._addExceptionDate(exception);
 
                 if (!that.trigger(SAVE, { model: exception })) {
                     that.dataSource.sync();
