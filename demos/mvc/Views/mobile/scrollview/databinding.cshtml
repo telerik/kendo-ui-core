@@ -7,6 +7,7 @@
     <div data-role="scrollview" 
         data-source="_500pxDS" 
         data-template="template"
+        data-content-height="100%"
         data-enable-pager="false">
     </div>
 </div>
@@ -50,20 +51,11 @@
 </script>
 
 <style scoped>
-    .km-virtual-page {
-        min-height: 1px;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: inline-block;
-    }
-
     .title {
         font-style: italic;
         text-align: center;
         margin: 0;
+        padding: 0;
     }
 
     .page {
