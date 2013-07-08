@@ -367,6 +367,12 @@ kendo_module({
                             index: cellIndex
                         };
 
+                        if (isVertical) {
+                            cell.groupIndex = rowIndex;
+                        } else {
+                            cell.groupIndex = this._groupHorizontalIndex(cellIndex);
+                        }
+
                         row.slots.push(cell);
                     }
                     rows.push(row);
