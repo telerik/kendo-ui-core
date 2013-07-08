@@ -167,6 +167,7 @@ function canvasInit(e) {
         dataSource: canvasDataSource,
         enablePager: false,
         itemsPerPage: 6,
+        contentHeight: "100%",
         template: kendo.template($("#canvas-template").html()),
         emptyTemplate: kendo.template($("#empty-template").html()),
         change: updateSrc
@@ -204,6 +205,7 @@ function goToCanvas(e) {
 function canvasDetailInit(e) {
     $("#detail-scrollview").kendoMobileScrollView({
         enablePager: false,
+        contentHeight: "100%",
         dataSource: canvasDataSource,
         autoBind: false,
         template: kendo.template($("#canvas-detail-tmp").html())
