@@ -13,6 +13,8 @@ module CodeGen::TypeScript
         'docs/api/framework/view.md',
         'docs/api/framework/layout.md',
         'docs/api/framework/hierarchicaldatasource.md',
+        'docs/api/framework/schedulerdatasource.md',
+        'docs/api/framework/schedulerevent.md',
         'docs/api/framework/datasource.md',
         'docs/api/framework/binder.md',
         'docs/api/framework/model.md',
@@ -26,7 +28,8 @@ module CodeGen::TypeScript
         'docs/api/framework/droptarget.md',
         'docs/api/framework/droptargetarea.md',
         'docs/api/mobile/application.md',
-        'docs/api/web/ui.md'
+        'docs/api/web/ui.md',
+        'docs/api/web/scheduler.md'
     ]
 
     TYPES = {
