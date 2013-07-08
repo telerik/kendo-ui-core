@@ -55,7 +55,7 @@
     background-size: 70% 70%;
 }
 
-#aww li:not(.press-to-load-more) {
+#aww li:not(.km-press-to-load-more) {
     padding: 0;
 }
 
