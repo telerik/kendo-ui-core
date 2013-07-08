@@ -85,7 +85,10 @@
                 
                 function toBitsString(value, length){
                     var result = Number(value).toString(2);
-                    return new Array(length - result.length + 1).join(0) + result;
+                    if(result.length < length){
+                        result = new Array(length - result.length + 1).join(0) + result;
+                    }
+                    return result;
                 }
                 
                 function encodeNumericData(str){
