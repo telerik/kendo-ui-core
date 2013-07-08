@@ -142,6 +142,15 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
+    * The data item field which contains the series note text.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function noteTextField($value) {
+        return $this->setProperty('noteTextField', $value);
+    }
+
+    /**
     * The distance between the category clusters.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem

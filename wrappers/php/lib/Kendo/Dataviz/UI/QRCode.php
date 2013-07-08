@@ -45,6 +45,16 @@ class QRCode extends \Kendo\UI\Widget {
     }
 
     /**
+    * Sets the preferred rendering engine.
+If it is not supported by the browser, the QRCode will switch to the first available mode.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\QRCode
+    */
+    public function renderAs($value) {
+        return $this->setProperty('renderAs', $value);
+    }
+
+    /**
     * Specifies the size of a QR code in pixels (i.e. "200px"). Numeric values are treated as pixels. If no size is specified, it will be determined from the element width and height. In case the element does not have width or height bigger than zero, a default value of 200 pixels will be used.
     * @param float|string $value
     * @return \Kendo\Dataviz\UI\QRCode

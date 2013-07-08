@@ -53,6 +53,14 @@ public class LinearGaugeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("scale", value);
     }
 
+    public String getRenderAs() {
+        return (String)getProperty("renderAs");
+    }
+
+    public void setRenderAs(String value) {
+        setProperty("renderAs", value);
+    }
+
     public boolean getTransitions() {
         return (boolean)getProperty("transitions");
     }

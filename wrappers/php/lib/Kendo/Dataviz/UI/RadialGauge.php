@@ -28,6 +28,16 @@ This is the entire visible area of the gauge.
     }
 
     /**
+    * Sets the preferred rendering engine.
+If it is not supported by the browser, the Gauge will switch to the first available mode.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\RadialGauge
+    */
+    public function renderAs($value) {
+        return $this->setProperty('renderAs', $value);
+    }
+
+    /**
     * The width of the range indicators.
     * @param float $value
     * @return \Kendo\Dataviz\UI\RadialGauge

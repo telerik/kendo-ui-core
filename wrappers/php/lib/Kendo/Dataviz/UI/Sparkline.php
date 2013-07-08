@@ -92,6 +92,16 @@ This is the entire visible area of the chart.
     }
 
     /**
+    * Sets the preferred rendering engine.
+If it is not supported by the browser, the Sparkline will switch to the first available mode.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\Sparkline
+    */
+    public function renderAs($value) {
+        return $this->setProperty('renderAs', $value);
+    }
+
+    /**
     * Adds SparklineSeriesItem to the Sparkline.
     * @param \Kendo\Dataviz\UI\SparklineSeriesItem|array,... $value one or more SparklineSeriesItem to add.
     * @return \Kendo\Dataviz\UI\Sparkline
@@ -179,7 +189,7 @@ This is the entire visible area of the chart.
 
     /**
     * Sets the dataBound event of the Sparkline.
-    * Fires when the chart has received data from the data source
+    * Fires when the sparkline has received data from the data source
 and is about to render it.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Sparkline
@@ -194,7 +204,7 @@ and is about to render it.
 
     /**
     * Sets the dragStart event of the Sparkline.
-    * Fires when the user has used the mouse or a swipe gesture to drag the chart.The drag operation can be aborted by calling e.preventDefault().
+    * Fires when the user has used the mouse or a swipe gesture to drag the sparkline.The drag operation can be aborted by calling e.preventDefault().
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Sparkline
     */
@@ -208,7 +218,7 @@ and is about to render it.
 
     /**
     * Sets the drag event of the Sparkline.
-    * Fires as long as the user is dragging the chart using the mouse or swipe gestures.
+    * Fires as long as the user is dragging the sparkline using the mouse or swipe gestures.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Sparkline
     */
@@ -222,7 +232,7 @@ and is about to render it.
 
     /**
     * Sets the dragEnd event of the Sparkline.
-    * Fires when the user stops dragging the chart.
+    * Fires when the user stops dragging the sparkline.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Sparkline
     */

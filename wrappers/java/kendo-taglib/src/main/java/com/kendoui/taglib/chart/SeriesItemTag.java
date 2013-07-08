@@ -305,6 +305,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("negativeColor", value);
     }
 
+    public String getNoteTextField() {
+        return (String)getProperty("noteTextField");
+    }
+
+    public void setNoteTextField(String value) {
+        setProperty("noteTextField", value);
+    }
+
     public float getOpacity() {
         return (float)getProperty("opacity");
     }

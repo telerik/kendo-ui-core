@@ -101,6 +101,16 @@ This is the entire visible area of the chart.
     }
 
     /**
+    * Sets the preferred rendering engine.
+If it is not supported by the browser, the Chart will switch to the first available mode.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChart
+    */
+    public function renderAs($value) {
+        return $this->setProperty('renderAs', $value);
+    }
+
+    /**
     * Adds StockChartSeriesItem to the StockChart.
     * @param \Kendo\Dataviz\UI\StockChartSeriesItem|array,... $value one or more StockChartSeriesItem to add.
     * @return \Kendo\Dataviz\UI\StockChart

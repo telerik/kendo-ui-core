@@ -185,6 +185,15 @@ class ChartSeriesDefaults extends \Kendo\SerializableObject {
         return $this->setProperty('verticalLine', $value);
     }
 
+    /**
+    * The seriesDefaults notes configuration.
+    * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsNotes|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
+    */
+    public function notes($value) {
+        return $this->setProperty('notes', $value);
+    }
+
 //<< Properties
 }
 

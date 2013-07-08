@@ -73,6 +73,14 @@ public class QRCodeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("errorCorrection", value);
     }
 
+    public String getRenderAs() {
+        return (String)getProperty("renderAs");
+    }
+
+    public void setRenderAs(String value) {
+        setProperty("renderAs", value);
+    }
+
     public Object getSize() {
         return (Object)getProperty("size");
     }
