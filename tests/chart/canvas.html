@@ -303,11 +303,10 @@
                     $(inlineElement).remove();
                 });
 
-                /*
                 // ------------------------------------------------------------
-                module("SVGView / Gradient fill", {
+                module("CanvasView / Gradient fill", {
                     setup: function() {
-                        view = new dataviz.SVGView();
+                        view = new dataviz.CanvasView();
                         dataviz.Gradients.test = linearGradient;
                     },
                     teardown: function() {
@@ -317,7 +316,7 @@
 
                 test("applies gradient fill", function() {
                     var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
-                    equal(path.options.fill, "url(#testGradient)");
+                    ok(path.options.fill instanceof dataviz.CanvasLinearGradient);
                 });
 
                 test("sets non-existent gradient fill to none", function() {
@@ -335,18 +334,10 @@
                     ok(view.definitions[linearGradient.id]);
                 });
 
-                test("reuses existing gradient definition", function() {
-                    var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
-                    view.definitions[linearGradient.id] = { options: { id: "existingGradient" } };
-                    path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
-
-                    equal(path.options.fill, "url(#existingGradient)");
-                });
-
                 // ------------------------------------------------------------
-                module("SVG View / Decorators", {
+                module("Canvas View / Decorators", {
                     setup: function() {
-                        view = new dataviz.SVGView();
+                        view = new dataviz.CanvasView();
 
                         view.decorators.push({
                             decorate: function(element) {
@@ -357,24 +348,8 @@
                     }
                 });
 
-                test("createGroup applies registered decorators", 1, function() {
-                    view.createGroup();
-                });
-
-                test("createText applies registered decorators", 1, function() {
-                    view.createText();
-                });
-
                 test("createRect applies registered decorators", 1, function() {
                     view.createRect(new Box2D());
-                });
-
-                test("createLine applies registered decorators", 1, function() {
-                    view.createLine();
-                });
-
-                test("createPolyline applies registered decorators", 1, function() {
-                    view.createPolyline();
                 });
 
                 test("createCircle applies registered decorators", 1, function() {
@@ -384,46 +359,27 @@
                 test("createSector applies registered decorators", 1, function() {
                     view.createSector();
                 });
-                */
 
             })();
 
             (function() {
                 var group;
 
-                module("SVGGroup", {
+                module("CanvasGroup", {
                     setup: function() {
-                        group = new dataviz.SVGGroup();
+                        group = new dataviz.CanvasGroup();
                     }
                 });
 
-                test("renders id", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = false;
+                test("calls render with context on children", function() {
+                    var ctx = {};
+                    group.children.push({
+                        render: function(context) {
+                            equal(context, ctx);
+                        }
+                    });
 
-                    group = new dataviz.SVGGroup({ id: "1" });
-                    ok(group.render().indexOf(" id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders g tag", function() {
-                    equal(group.render(), "<g></g>");
-                });
-
-                test("renders children", function() {
-                    group.children.push(contentElementStub);
-                    equal(group.render(), "<g>Content</g>");
-                });
-
-                test("renders id", function() {
-                    group.options.id = "id";
-                    ok(group.render().indexOf("id='id'") > -1);
-                });
-
-                test("renders data attributes", function() {
-                    group.options.data = { testId: 1 };
-                    ok(group.render().indexOf("data-test-id='1'") > -1);
+                    group.render(ctx);
                 });
 
             })();

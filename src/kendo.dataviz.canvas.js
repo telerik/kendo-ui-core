@@ -42,6 +42,8 @@ kendo_module({
         "style='position: relative; display: #= d.display #;'></canvas>"
     );
 
+    window.rects = 0;
+
     // View ===================================================================
     var CanvasView = ViewBase.extend({
         init: function(options) {
@@ -84,6 +86,7 @@ kendo_module({
             return canvas;
         },
 
+        // TODO: Sort by zIndex in append
         renderContent: function(context) {
             var element = this,
                 sortedChildren = element.sortChildren(),
@@ -96,17 +99,11 @@ kendo_module({
         },
 
         createGroup: function(options) {
-            // TODO: Should we decorate?
-            return this.decorate(
-                new CanvasGroup(options)
-            );
+            return new CanvasGroup(options);
         },
 
         createText: function(content, options) {
-            // TODO: Should we decorate?
-            return this.decorate(
-                new CanvasText(content, options)
-            );
+            return new CanvasText(content, options);
         },
 
         createRect: function(box, style) {
@@ -118,20 +115,13 @@ kendo_module({
             );
         },
 
-        // TODO: Refactor to (p1, p2, options)
         createLine: function(x1, y1, x2, y2, options) {
-            // TODO: Should we decorate?
-            return this.decorate(
-                new CanvasLine([new Point2D(x1, y1),
-                             new Point2D(x2, y2)], false, this.setDefaults(options))
-            );
+            return new CanvasLine([new Point2D(x1, y1), new Point2D(x2, y2)],
+                false, this.setDefaults(options));
         },
 
         createPolyline: function(points, closed, options) {
-            // TODO: Should we decorate?
-            return this.decorate(
-                new CanvasLine(points, closed, this.setDefaults(options))
-            );
+            return new CanvasLine(points, closed, this.setDefaults(options));
         },
 
         createCircle: function(center, radius, options) {
@@ -173,20 +163,7 @@ kendo_module({
             this.renderContent(context);
         },
 
-        renderContent: function(context) {
-            var element = this,
-                sortedChildren = element.sortChildren(),
-                childrenCount = sortedChildren.length,
-                i;
-
-            for (i = 0; i < childrenCount; i++) {
-                sortedChildren[i].render(context);
-            }
-        },
-
-        clone: function() {
-            return new CanvasGroup();
-        }
+        renderContent: CanvasView.fn.renderContent
     });
 
     var CanvasPath = ViewElement.extend({
@@ -634,6 +611,7 @@ kendo_module({
 
     deepExtend(dataviz, {
         CanvasCircle: CanvasCircle,
+        CanvasLinearGradient: CanvasLinearGradient,
         CanvasGroup: CanvasGroup,
         CanvasLine: CanvasLine,
         CanvasRing: CanvasRing,
