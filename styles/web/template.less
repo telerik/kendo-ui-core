@@ -391,7 +391,7 @@ textarea.k-textbox:hover,
 .k-button
 {
     color: @button-text-color;
-    border-color: @widget-border-color;
+    //border-color: @widget-border-color;
     background-color: @button-background-color;
 }
 
@@ -407,6 +407,8 @@ textarea.k-textbox:hover,
     background-color: @hover-background-color;
 }
 
+.k-state-disabled .k-button,
+.k-state-disabled .k-button:hover,
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:hover,
 .k-button.k-state-disabled:active,
@@ -414,7 +416,8 @@ textarea.k-textbox:hover,
 {
     color: @disabled-text-color;
     border-color: @widget-border-color;
-    .composite-background(@widget-gradient);
+	.composite-background(@widget-gradient);
+	background-color: transparent;
 }
 
 .k-draghandle
@@ -1449,7 +1452,7 @@ div.k-imagebrowser-dropzone em
     .k-dropdown .k-dropdown-wrap.k-state-hover .k-input,
     .k-dropdown .k-dropdown-wrap.k-state-focused .k-input
     {
-        color: @form-widget-color;
+       // color: @form-widget-color;
     }
 
     &.k-splitbar
@@ -1532,12 +1535,21 @@ div.k-imagebrowser-dropzone em
     {
         border-color: @group-border-color;
     }
+	
+	&.k-filter-menu
+	{
+		background-color: @filter-menu-content-background;
+		color: @secondary-text-color;
+	}
 }
 
-.k-grid .k-grouping-header,
-.k-grid .k-grid-content tr.k-grouping-row
+.k-grouping-row td,
+.k-group-footer td,
+.k-grid-footer td
 {
-    color: @header-text-color;
+	color: @secondary-text-color;
+	border-color: @secondary-border-color;
+	font-weight: bold;
 }
 
 .k-grid td.k-state-focused
@@ -1554,6 +1566,18 @@ div.k-imagebrowser-dropzone em
 .k-grouping-header .k-group-indicator
 {
     border-color: @secondary-border-color;
+}
+
+.k-treeview .k-icon,
+.k-scheduler-table .k-icon
+{
+	background-color: @icon-background-color;
+	border-radius: @calendar-border-radius;
+}
+
+.k-scheduler-table .k-state-hover .k-icon
+{
+	background-color: transparent;
 }
 
 // Retina sprite
