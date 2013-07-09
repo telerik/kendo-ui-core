@@ -426,4 +426,10 @@
   <data name="Editor_Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="Filter_Or" xml:space="preserve">
+    <value>Of</value>
+  </data>
+  <data name="Filter_StringDoesNotContain" xml:space="preserve">
+    <value>Bevat niet</value>
+  </data>
 </root>
