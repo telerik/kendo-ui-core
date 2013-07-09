@@ -235,11 +235,15 @@ kendo_module({
             var options = this.options,
                 fill = options.fill;
 
-            if (fill.bindToContext) {
-                fill = fill.bindToContext(ctx, options.overlay);
+            if (fill.applyGradient) {
+                fill = fill.applyGradient(ctx, options.overlay);
             }
 
             ctx.fillStyle = fill;
+        },
+
+        clone: function() {
+            return new CanvasPath(deepExtend({}, this.options));
         }
     });
 
@@ -456,13 +460,16 @@ kendo_module({
                 stops = gradient.options.stops,
                 i,
                 length = stops.length,
-                currentStop;
+                currentStop,
+                color;
 
             for (i = 0; i < length; i++) {
                 currentStop = stops[i];
-                var color = new Color(currentStop.color);
-                target.addColorStop(currentStop.offset,
-                    "rgba(" + color.r + "," + color.g + "," + color.b + "," + currentStop.opacity + ")");
+                color = new Color(currentStop.color);
+                target.addColorStop(
+                    currentStop.offset,
+                    "rgba(" + color.r + "," + color.g + "," + color.b + "," + currentStop.opacity + ")"
+                );
             }
         }
     });
@@ -472,7 +479,7 @@ kendo_module({
             rotation: 0
         },
 
-        bindToContext: function(context, options) {
+        applyGradient: function(context, options) {
             var rotation = options.rotation,
                 bbox = options.bbox,
                 x = bbox.x2,
@@ -491,7 +498,7 @@ kendo_module({
     });
 
     var CanvasRadialGradient = CanvasGradient.extend({
-        bindToContext: function(context, options) {
+        applyGradient: function(context, options) {
             var gradient = context.createRadialGradient(
                 options.cx, options.cy, options.ir,
                 options.cx, options.cy, options.r);
@@ -594,10 +601,12 @@ kendo_module({
 
     deepExtend(dataviz, {
         CanvasCircle: CanvasCircle,
-        CanvasLinearGradient: CanvasLinearGradient,
         CanvasGroup: CanvasGroup,
         CanvasLine: CanvasLine,
+        CanvasLinearGradient: CanvasLinearGradient,
+        CanvasOverlayDecorator: CanvasOverlayDecorator,
         CanvasPath: CanvasPath,
+        CanvasRadialGradient: CanvasRadialGradient,
         CanvasRing: CanvasRing,
         CanvasText: CanvasText,
         CanvasView: CanvasView,

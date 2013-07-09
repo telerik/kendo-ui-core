@@ -68,6 +68,10 @@
                 ["translate", ["x", "y"]]
             ]);
 
+            var GradientStub = makeStub([
+                ["addColorStop", ["offset", "color"]]
+            ]);
+
             (function() {
                 var view;
 
@@ -879,70 +883,57 @@
             })();
 
             (function() {
-                var view,
-                    rect,
-                    group,
-                    overlay,
-                    decorator,
-                    ID = "1";
-
-                module("SVGOverlayDecorator", {
-                    setup: function() {
-                        view = new dataviz.SVGView();
-                        rect = new dataviz.SVGPath({
-                            id: ID,
-                            overlay: {
-                                gradient: "glass"
-                            }
-                        });
-                        decorator = new dataviz.SVGOverlayDecorator(view);
-                        group = decorator.decorate(rect);
-                        overlay = group.children[1];
-                    }
-                });
-
-                test("creates overlay group", function() {
-                    ok(group instanceof dataviz.SVGGroup);
-                });
-
-                test("moves id to overlay", function() {
-                    equal(overlay.options.id, ID);
-                });
-
-                test("generates id for decorated element", function() {
-                    ok(rect.options.id.length > 0);
-                });
-
-                test("does not decorate element if no overlay specified", function() {
-                    var rect = view.createRect(new Box2D());
-                    ok(rect instanceof dataviz.SVGPath);
-                });
-
-            })();
-
-            (function() {
-                var gradient;
+                var gradient,
+                    gradientStub,
+                    options,
+                    ctx;
 
                 // ------------------------------------------------------------
-                module("SVGLinearGradient", {
+                module("CanvasLinearGradient", {
                     setup: function() {
-                        gradient = new dataviz.SVGLinearGradient(linearGradient);
+                        gradient = new dataviz.CanvasLinearGradient(linearGradient);
+                        options = {
+                            rotation: 0,
+                            bbox: new Box2D(0, 0, 100, 100)
+                        };
+
+                        ctx = new ContextStub();
+                        ctx.log.createLinearGradient = [];
+                        ctx.createLinearGradient = function(x1, y1, x2, y2) {
+                            var stub = new GradientStub();
+                            this.log.createLinearGradient.push({
+                                x1: x1, y1: y1, x2: x2, y2: y2,
+                                stub: stub
+                            });
+
+                            return stub;
+                        }
                     }
                 });
 
-                test("renders id", function() {
-                    ok(gradient.render().indexOf("id='testGradient'") > -1);
+                test("default rotation is 0 degrees", function() {
+                    gradient.applyGradient(ctx, options);
+                    equal(ctx.log.createLinearGradient[0].x2, 100);
+                    equal(ctx.log.createLinearGradient[0].y2, 0);
                 });
 
-                test("renders rotation", function() {
-                    ok(gradient.render().indexOf("gradientTransform='rotate(0)'") > -1);
+                test("rotates gradient by 90 degrees", function() {
+                    options.rotation = 90;
+                    gradient.applyGradient(ctx, options);
+                    equal(ctx.log.createLinearGradient[0].x2, 0);
+                    equal(ctx.log.createLinearGradient[0].y2, 100);
                 });
 
                 test("renders stops", function() {
-                    ok(gradient.render().indexOf(
-                        "<stop offset='0%' style='stop-color:#f00;stop-opacity:1' />" +
-                        "<stop offset='100%' style='stop-color:#00f;stop-opacity:1' />") > -1
-                    );
+                    gradient.applyGradient(ctx, options);
+                    var stub = ctx.log.createLinearGradient[0].stub
+                    deepEqual(stub.log.addColorStop, [{
+                        offset: 0,
+                        color: "rgba(255,0,0,1)"
+                    }, {
+                        offset: 1,
+                        color: "rgba(0,0,255,1)"
+                    }]);
                 });
 
             })();
@@ -951,9 +942,9 @@
                 var gradient;
 
                 // ------------------------------------------------------------
-                module("SVGRadialGradient", {
+                module("CanvasRadialGradient", {
                     setup: function() {
-                        gradient = new dataviz.SVGRadialGradient(radialGradient);
+                        gradient = new dataviz.CanvasRadialGradient(radialGradient);
                     }
                 });
 
@@ -986,6 +977,40 @@
 
                 test("renders r", function() {
                     ok(gradient.render().indexOf("r='100'") > -1);
+                });
+
+            })();
+
+            (function() {
+                var view,
+                    rect,
+                    group,
+                    overlay,
+                    decorator,
+                    ID = "1";
+
+                module("CanvasOverlayDecorator", {
+                    setup: function() {
+                        view = new dataviz.CanvasView();
+                        rect = new dataviz.CanvasPath({
+                            id: ID,
+                            overlay: {
+                                gradient: "glass"
+                            }
+                        });
+                        decorator = new dataviz.CanvasOverlayDecorator(view);
+                        group = decorator.decorate(rect);
+                        overlay = group.children[1];
+                    }
+                });
+
+                test("creates overlay group", function() {
+                    ok(group instanceof dataviz.CanvasGroup);
+                });
+
+                test("does not decorate element if no overlay specified", function() {
+                    var rect = view.createRect(new Box2D());
+                    ok(rect instanceof dataviz.CanvasPath);
                 });
 
             })();
