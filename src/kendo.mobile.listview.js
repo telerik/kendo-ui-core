@@ -343,6 +343,8 @@ kendo_module({
             var list = this,
                 items = this.items,
                 item,
+                firstItem,
+                lastItem,
                 height = this.height(),
                 itemCount = this.itemCount,
                 padding = height / 2,
@@ -361,11 +363,12 @@ kendo_module({
                {
                     this.offset --;
                     item = items.pop();
+                    firstItem = items[0];
                     item.update(this.content(this.offset));
+                    items.unshift(item);
 
                     kendo.effects.animationFrame(function() {
-                        item.above(items[0]);
-                        items.unshift(item);
+                        item.above(firstItem);
                         list.top = items[0].top;
                         list.bottom = items[items.length - 1].bottom;
                         list.trigger("resize", { top: list.top, bottom: list.bottom });
@@ -383,12 +386,13 @@ kendo_module({
                         this.trigger("endReached");
                     } else if (nextIndex !== this.buffer.length) {
                         item = items.shift();
+                        lastItem = items[items.length - 1];
+                        items.push(item);
                         item.update(this.content(this.offset + this.itemCount));
                         list.offset ++;
 
                         kendo.effects.animationFrame(function() {
-                            item.below(items[items.length - 1]);
-                            items.push(item);
+                            item.below(lastItem);
                             list.top = items[0].top;
                             list.bottom = items[items.length - 1].bottom;
                             list.trigger("resize", { top: list.top, bottom: list.bottom });
