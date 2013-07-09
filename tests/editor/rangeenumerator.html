@@ -1,102 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <meta charset="utf-8" />
+    <title>kendo.ui.Editor Tests</title>
 
     <script src="../jquery-loader.js"></script>
-        <script src="test-scripts.js"></script>
+    <script src="test-scripts.js"></script>
 
-<style> html { font-size: 12px; } </style>
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+    <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+    <script>
 
-$("#Editor1").kendoEditor();
+        var editor = $("#Editor1").kendoEditor().data("kendoEditor");
 
-var RangeEnumerator,
-    enumerator;
+        function enumerateRange(range) {
+            return new kendo.ui.editor.RangeEnumerator(range).enumerate();
+        }
 
-function assertArrayEquals(actual, expected) {
-    equal(actual.length, expected.length);
+        function assertArrayEquals(actual, expected) {
+            equal(actual.length, expected.length);
 
-    for (var i = 0; i < expected.length; i++)
-        equal(actual[i], expected[i]);
-}
+            for (var i = 0; i < expected.length; i++)
+                equal(actual[i], expected[i]);
+        }
 
-QUnit.config.testStart.push(function() {
-    editor = getEditor();
-    RangeEnumerator = kendo.ui.editor.RangeEnumerator;
-});
+        test('enumerate returns text node when all content selected', function() {
+            var range = createRangeFromText(editor, '|foo|');
 
-test('enumerate returns text node when all content selected', function() {
-    var range = createRangeFromText(editor, '|foo|');
+            var result = enumerateRange(range);
 
-    var result = new RangeEnumerator(range).enumerate();
+            assertArrayEquals(result, [editor.body.firstChild]);
+        });
 
-    assertArrayEquals(result, [editor.body.firstChild]);
-});
+        test('enumerate returns text nodes when inline node is selected', function() {
+            var range = createRangeFromText(editor, '|<span><span>foo</span></span>|');
 
-test('enumerate returns text nodes when inline node is selected', function() {
-    var range = createRangeFromText(editor, '|<span><span>foo</span></span>|');
+            var result = enumerateRange(range);
 
-    var result = new RangeEnumerator(range).enumerate();
+            assertArrayEquals(result, [editor.body.firstChild.firstChild.firstChild]);
+        });
 
-    assertArrayEquals(result, [editor.body.firstChild.firstChild.firstChild]);
-});
+        test('enumerate returns does not return comments', function() {
+            var range = createRangeFromText(editor, '|foo<!-- comment -->|');
 
-test('enumerate returns does not return comments', function() {
-    var range = createRangeFromText(editor, '|foo<!-- comment -->|');
+            var result = enumerateRange(range);
 
-    var result = new RangeEnumerator(range).enumerate();
+            assertArrayEquals(result, [editor.body.firstChild]);
+        });
 
-    assertArrayEquals(result, [editor.body.firstChild]);
-});
+        test('enumerate returns the text contents when more than one node is selected', function() {
+            var range = createRangeFromText(editor, '|<span>foo</span><span>bar</span>|');
 
-test('enumerate returns the text contents when more than one node is selected', function() {
-    var range = createRangeFromText(editor, '|<span>foo</span><span>bar</span>|');
+            var result = enumerateRange(range);
 
-    var result = new RangeEnumerator(range).enumerate();
+            assertArrayEquals(result, [editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
+        });
 
-    assertArrayEquals(result, [editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
-});
+        test('enumerate returns the text contents in case of partial selection', function() {
+            var range = createRangeFromText(editor, '<span>f|oo</span><span>b|ar</span>');
 
-test('enumerate returns the text contents in case of partial selection', function() {
-    var range = createRangeFromText(editor, '<span>f|oo</span><span>b|ar</span>');
+            var result = enumerateRange(range);
 
-    var result = new RangeEnumerator(range).enumerate();
+            assertArrayEquals(result, [editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
+        });
 
-    assertArrayEquals(result, [editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
-});
+        test('enumerate skips white space nodes', function() {
+            var range = createRangeFromText(editor, '|\r\t<p>test</p>\r\n|');
 
-test('enumerate skips white space nodes', function() {
-    var range = createRangeFromText(editor, '|\r\t<p>test</p>\r\n|');
+            var p = $('p', editor.body)[0];
+            var result = enumerateRange(range);
 
-    var p = $('p', editor.body)[0];
-    var result = new RangeEnumerator(range).enumerate();
+            assertArrayEquals(result, [p.firstChild]);
+        });
 
-    assertArrayEquals(result, [p.firstChild]);
-});
+        test('enumerate returns images', function() {
+            var range = createRangeFromText(editor, '|<img />|');
+            var result = enumerateRange(range);
 
-test('enumerate returns images', function() {
-    var range = createRangeFromText(editor, '|<img />|');
-    var result = new RangeEnumerator(range).enumerate();
+            assertArrayEquals(result, [editor.body.firstChild]);
+        });
 
-    assertArrayEquals(result, [editor.body.firstChild]);
-});
+        </script>
 
-</script>
-
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+    <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
 
 </body>
 </html>

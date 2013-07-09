@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <meta charset="utf-8" />
+    <title>kendo.ui.Editor Tests</title>
 
     <script src="../jquery-loader.js"></script>
-        <script src="test-scripts.js"></script>
+    <script src="test-scripts.js"></script>
 
-<style> html { font-size: 12px; } </style>
+    <style> html { font-size: 12px; } </style>
 </head>
 <body>
 
-<div class="k-rtl">
-    <textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea>
-</div>
+    <div class="k-rtl">
+        <textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea>
+    </div>
 
-<script>
+    <script>
 
-$("#Editor1").kendoEditor();
+        var editor = $("#Editor1").kendoEditor().data("kendoEditor");
 
-QUnit.config.testStart.push(function() {
-    editor = getEditor();
-});
+        test('content iframe inherits rtl direction', function() {
+            equal($(editor.body, editor.document).css('direction'), 'rtl');
+        });
 
-test('content iframe inherits rtl direction', function() {
-    equal($(editor.body, editor.document).css('direction'), 'rtl');
-});
+    </script>
 
-</script>
-
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+    <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
 
 </body>
 </html>
