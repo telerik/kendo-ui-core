@@ -211,8 +211,6 @@ var tests = [
     "editor/paragraph.html",
     "editor/range.html",
     "editor/rangeenumerator.html",
-    "editor/remove-block-formats.html",
-    "editor/remove-inline-formats.html",
     "editor/restorepoint.html",
     "editor/rtl.html",
     "editor/selection.html",

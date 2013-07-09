@@ -991,6 +991,14 @@ var RangeUtils = {
         selection.addRange(range);
     },
 
+    stringify: function(range) {
+        return kendo.format(
+            "{0}:{1} - {2}:{3}",
+            dom.name(range.startContainer), range.startOffset,
+            dom.name(range.endContainer), range.endOffset
+        );
+    },
+
     split: function(range, node, trim) {
         function partition(start) {
             var partitionRange = range.cloneRange();

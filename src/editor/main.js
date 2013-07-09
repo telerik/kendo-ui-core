@@ -740,6 +740,10 @@ kendo_module({
                 range,
                 tool, command = null;
 
+            if (!name) {
+                throw new Error("kendoEditor.exec(): `name` parameter cannot be empty");
+            }
+
             name = name.toLowerCase();
 
             // restore selection
