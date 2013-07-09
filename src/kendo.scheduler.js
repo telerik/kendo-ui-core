@@ -481,7 +481,9 @@ kendo_module({
         },
 
         _createSelection: function(item) {
-            var uid, selection = {
+            var uid, selection;
+
+            this._selection = selection = {
                 events: []
             };
 
@@ -490,9 +492,7 @@ kendo_module({
 
             if (uid) {
                 item = getOccurrenceByUid(this._data, uid);
-                selection.start = new Date(item.start);
-                selection.end = new Date(item.end);
-                selection.isAllDay = item.isAllDay;
+                this._updateSelection(item);
                 selection.events = [uid];
             } else {
                 selection = this.view()._rangeToDates(item);
@@ -505,6 +505,14 @@ kendo_module({
             this._selection = selection;
 
             this._adjustSelectedDate();
+        },
+
+        _updateSelection: function(dataItem) {
+            var selection = this._selection;
+
+            selection.start = new Date(dataItem.start);
+            selection.end = new Date(dataItem.end);
+            selection.isAllDay = dataItem.isAllDay;
         },
 
         options: {
@@ -806,6 +814,7 @@ kendo_module({
                 }
 
                 if (!that.trigger(SAVE, { model: event })) {
+                    that._updateSelection(event);
                     that.dataSource.sync();
                 }
             };
@@ -859,6 +868,7 @@ kendo_module({
                 }
 
                 if (!that.trigger(SAVE, { model: exception })) {
+                    that._updateSelection(event);
                     that.dataSource.sync();
                 }
             };
