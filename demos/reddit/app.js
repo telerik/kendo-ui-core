@@ -83,7 +83,7 @@ function navigateTo(dataItem) {
     if (isImage(url)) {
         app.navigate("#detail?id=" + dataItem.data.name);
     } else {
-        window.open(url, "_detail");
+        $("<a/>").attr("href", url)[0].click();
     }
 }
 
