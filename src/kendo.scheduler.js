@@ -1514,10 +1514,11 @@ kendo_module({
 
                 view.bind("navigate", that._viewNavigateHandler);
 
-                that._viewRenderHandler = function(e) {
+                that._viewRenderHandler = function() {
+                    var view = this;
                     if (that._selection) {
-                        this.offsetSelection(that._selection);
-                        this.select(that._selection);
+                        view.offsetSelection(that._selection);
+                        view.select(that._selection);
                         that._adjustSelectedDate();
                     }
                 };
@@ -1579,14 +1580,11 @@ kendo_module({
         _adjustSelectedDate: function() {
             var date = this._model.selectedDate,
                 selection = this._selection,
-                start;
-
-            //if (selection) {
                 start = selection.start;
-                if (!kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
-                    date.setFullYear(start.getFullYear(), start.getMonth(), start.getDate());
-                }
-            //}
+
+            if (!kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
+                date.setFullYear(start.getFullYear(), start.getMonth(), start.getDate());
+            }
         },
 
         _initializeView: function(name) {

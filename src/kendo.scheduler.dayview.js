@@ -1557,7 +1557,6 @@ kendo_module({
             var that = this,
                 col = that._dateSlotIndex(selection.start),
                 row = that._timeSlotIndex(selection.start),
-                table = that.content.children("table")[0],
                 isAllDay = selection.isAllDay,
                 event;
 
@@ -1630,8 +1629,7 @@ kendo_module({
                 startTime = this.options.startTime,
                 endTime = this.options.endTime,
                 start = new Date(selection.start),
-                end = new Date(selection.end),
-                day = end.getDate();
+                end = new Date(selection.end);
 
             if (selection.isAllDay) {
                 start = new Date(start.getFullYear(), start.getMonth(), start.getDate(), startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
@@ -1658,7 +1656,6 @@ kendo_module({
         up: function(selection) {
             var interval = (this.options.majorTick * MS_PER_MINUTE) / (this.options.minorTickCount || 1),
                 startTime = this.options.startTime,
-                endTime = this.options.endTime,
                 start = new Date(selection.start),
                 end = new Date(selection.end);
 
