@@ -548,6 +548,7 @@
     <Compile Include="UI\Editor\ImageBrowser\ImageSize.cs" />
     <Compile Include="UI\Editor\ImageBrowser\IThumbnailCreator.cs" />
     <Compile Include="UI\Editor\ImageBrowser\ThumbnailCreator.cs" />
+    <Compile Include="UI\Editor\Tools\EditorColorPickerTool.cs" />
     <Compile Include="UI\Editor\Tools\EditorListTool.cs" />
     <Compile Include="UI\Effects\ExpandableAnimation.cs" />
     <Compile Include="UI\Effects\Fluent\ExpandableAnimationBuilder.cs" />

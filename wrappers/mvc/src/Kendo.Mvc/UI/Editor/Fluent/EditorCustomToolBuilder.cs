@@ -29,17 +29,6 @@ namespace Kendo.Mvc.UI.Fluent
             this.tool = tool;
         }
 
-        //public EditorCustomButtonToolBuilder HtmlAttributes(object attributes)
-        //{
-        //    return HtmlAttributes(attributes.ToDictionary());
-        //}
-
-        //public EditorCustomButtonToolBuilder HtmlAttributes(IDictionary<string, object> attributes)
-        //{
-        //    tool.HtmlAttributes.Merge(attributes);
-        //    return this;
-        //}
-
         public EditorCustomButtonToolBuilder Name(string value)
         {
             tool.Name = value;
@@ -63,6 +52,56 @@ namespace Kendo.Mvc.UI.Fluent
         public EditorCustomButtonToolBuilder ToolTip(string value)
         {
             tool.ToolTip = value;
+            return this;
+        }
+    }
+
+    public class EditorColorPickerToolBuilder : IHideObjectMembers
+    {
+        private readonly EditorColorPickerTool tool;
+
+        public EditorColorPickerToolBuilder(EditorColorPickerTool tool)
+        {
+            this.tool = tool;
+        }
+
+        /// <summary>
+        /// Sets the range of colors that the user can pick from.
+        /// </summary>
+        /// <param name="palette">A list of colors.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPicker()
+        ///             .Name("ColorPicker")
+        ///             .Palette(new List&lt;string&gt; { "#ff0000", "#00ff00", "#0000ff" })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public EditorColorPickerToolBuilder Palette(IEnumerable<string> palette)
+        {
+            tool.PaletteColors = palette;
+            tool.Palette = ColorPickerPalette.None;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the range of colors that the user can pick from.
+        /// </summary>
+        /// <param name="palette">One of the preset palettes of colors</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ColorPicker()
+        ///             .Name("ColorPicker")
+        ///             .Palette(ColorPickerPalette.WebSafe)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public EditorColorPickerToolBuilder Palette(ColorPickerPalette palette)
+        {
+            tool.PaletteColors = null;
+            tool.Palette = palette;
+
             return this;
         }
     }
