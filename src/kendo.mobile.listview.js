@@ -903,8 +903,7 @@ kendo_module({
 
         scroller: function() {
             if (!this._scrollerInstance) {
-                var view = this.view();
-                this._scrollerInstance = view && view.scroller;
+                this._scrollerInstance = this.element.closest(".km-scroll-wrapper").data("kendoMobileScroller");
             }
 
             return this._scrollerInstance;
