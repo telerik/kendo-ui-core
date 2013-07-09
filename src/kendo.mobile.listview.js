@@ -448,20 +448,21 @@ kendo_module({
         }
     });
 
+    var LOAD_ICON = '<div><span class="km-icon"></span><span class="km-loading-left"></span><span class="km-loading-right"></span></div>';
     var VirtualListViewLoadingIndicator = kendo.Class.extend({
         init: function(listView) {
-            this.element = $('<li class="km-endless-scroll-loading"></li>').appendTo(listView.element);
-            this._loadIcon = $('<span style="display:none" class="km-icon"></span>').appendTo(this.element);
-            $('<span class="km-loading-left"></span><span class="km-loading-right"></span>').appendTo(this.element);
-            this.height = this.element.outerHeight(true);
+            this.element = $('<li class="km-load-more km-scroller-refresh" style="display: none"></li>').appendTo(listView.element);
+            this._loadIcon = $(LOAD_ICON).appendTo(this.element);
         },
 
         enable: function() {
-            this._loadIcon.show();
+            this.element.show();
+            this.height = this.element.outerHeight(true);
         },
 
         disable: function() {
-            this._loadIcon.hide();
+            this.element.hide();
+            this.height = this.element.outerHeight(true);
         },
 
         below: function(item) {
@@ -476,16 +477,12 @@ kendo_module({
     var VirtualListViewPressToLoadMore = VirtualListViewLoadingIndicator.extend({
         init: function(listView, buffer) {
 
-            this._loadWrapper = $('<span class="km-load-more"></span>');
-            this._loadIcon = $('<span style="display:none" class="km-icon"></span>');
+            this._loadIcon = $(LOAD_ICON).hide();
             this._loadButton = $('<a class="km-load">' + listView.options.loadMoreText + '</a>').hide();
-            this._helpers = $('<span class="km-loading-left"></span><span class="km-loading-right"></span>');
-
-            this._loadWrapper.append(this._loadIcon).append(this._loadButton).append(this._helpers);
-
-            this.element = $('<li class="km-press-to-load-more"></li>').append(this._loadWrapper).appendTo(listView.element);
+            this.element = $('<li class="km-load-more" style="display: none"></li>').append(this._loadIcon).append(this._loadButton).appendTo(listView.element);
 
             var loadMore = this;
+
             this._loadButton.kendoMobileButton().data("kendoMobileButton").bind("click", function() {
                 loadMore._hideShowButton();
                 buffer.next();
@@ -496,28 +493,19 @@ kendo_module({
             });
 
             this.height = this.element.outerHeight(true);
-        },
-
-        enable: function() {
-            this._showLoadButton();
-        },
-
-        disable: function() {
-            this._loadButton.hide();
-            this._loadIcon.hide();
-            this.element.find(".km-load-more").removeClass("km-scroller-refresh");
+            this.disable();
         },
 
         _hideShowButton: function() {
             this._loadButton.hide();
+            this.element.addClass("km-scroller-refresh");
             this._loadIcon.css('display', 'block');
-            this.element.find('.km-load-more').addClass('km-scroller-refresh');
         },
 
         _showLoadButton: function() {
             this._loadButton.show();
+            this.element.removeClass("km-scroller-refresh");
             this._loadIcon.hide();
-            this.element.find('.km-load-more').removeClass('km-scroller-refresh');
         }
     });
 
