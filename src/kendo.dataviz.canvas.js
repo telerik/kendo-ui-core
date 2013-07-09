@@ -15,12 +15,13 @@ kendo_module({
 
         kendo = window.kendo,
         dataviz = kendo.dataviz,
+        Box2D = dataviz.Box2D,
         Color = dataviz.Color,
         Point2D = dataviz.Point2D,
+        Ring = dataviz.Ring,
         ViewBase = dataviz.ViewBase,
         ViewElement = dataviz.ViewElement,
         deepExtend = kendo.deepExtend,
-        defined = dataviz.defined,
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate;
 
@@ -33,7 +34,7 @@ kendo_module({
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         DEG_TO_RAD = math.PI / 180,
         TWO_PI = math.PI * 2,
-        NONE = "none",
+        LINEAR = "linear",
         RADIAL = "radial",
         SOLID = "solid",
         SQUARE = "square";
@@ -43,19 +44,12 @@ kendo_module({
         "style='position: relative; display: #= d.display #;'></canvas>"
     );
 
-    window.rects = 0;
-
     // View ===================================================================
     var CanvasView = ViewBase.extend({
         init: function(options) {
             var view = this;
 
             ViewBase.fn.init.call(view, options);
-
-            view.decorators.push(
-                new CanvasOverlayDecorator(view),
-                new CanvasGradientDecorator(view)
-            );
 
             view.display = view.options.inline ? "inline" : "block";
         },
@@ -108,12 +102,7 @@ kendo_module({
         },
 
         createRect: function(box, style) {
-            if (style && style.overlay) {
-                style.overlay.bbox = box;
-            }
-            return this.decorate(
-                new CanvasLine(box.points(), true, this.setDefaults(style))
-            );
+            return new CanvasLine(box.points(), true, this.setDefaults(style));
         },
 
         createLine: function(x1, y1, x2, y2, options) {
@@ -126,36 +115,20 @@ kendo_module({
         },
 
         createCircle: function(center, radius, options) {
-            return this.decorate(
-                new CanvasCircle(center, radius, options)
-            );
+            return new CanvasCircle(center, radius, options);
         },
 
         // TODO: Obsolete across all views?
         createSector: function(sector, options) {
-            return this.decorate(
-                new CanvasRing(sector, options)
-            );
+            return new CanvasRing(sector, options);
         },
 
         createRing: function(ring, options) {
-            return this.decorate(
-                new CanvasRing(ring, options)
-            );
+            return new CanvasRing(ring, options);
         },
 
         createPin: function(pin, options) {
-            return this.decorate(
-                new CanvasPin(pin, options)
-            );
-        },
-
-        createGradient: function(options) {
-            if (options.type === RADIAL) {
-                return new CanvasRadialGradient(options);
-            } else {
-                return new CanvasLinearGradient(options);
-            }
+            return new CanvasPin(pin, options);
         }
     });
 
@@ -201,10 +174,10 @@ kendo_module({
                 ctx.stroke();
             }
 
+            path.renderOverlay(ctx);
+
             ctx.restore();
         },
-
-        renderPoints: $.noop,
 
         setLineDash: function(ctx) {
             var dashType = this.options.dashType,
@@ -235,16 +208,27 @@ kendo_module({
             var options = this.options,
                 fill = options.fill;
 
-            if (fill.applyGradient) {
-                fill = fill.applyGradient(ctx, options.overlay);
-            }
-
             ctx.fillStyle = fill;
         },
 
-        clone: function() {
-            return new CanvasPath(deepExtend({}, this.options));
-        }
+        renderOverlay: function(ctx) {
+            var options = this.options,
+                overlay = options.overlay,
+                gradient,
+                def;
+
+            if (overlay && overlay.gradient) {
+                def = dataviz.Gradients[overlay.gradient];
+                gradient = this.buildGradient(ctx, def);
+                if (gradient) {
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                }
+            }
+        },
+
+        renderPoints: $.noop,
+        buildGradient: $.noop
     });
 
     var CanvasLine = CanvasPath.extend({
@@ -288,6 +272,103 @@ kendo_module({
             if (line.closed) {
                 ctx.closePath();
             }
+        },
+
+        buildGradient: function(ctx, definition) {
+            var bbox = this.bbox(),
+                rotation = this.options.overlay.rotation,
+                x = bbox.x2,
+                y = bbox.y1,
+                gradient;
+
+            if (rotation === 90) {
+                x = bbox.x1;
+                y = bbox.y2;
+            }
+
+            if (definition && definition.type === LINEAR) {
+                gradient = ctx.createLinearGradient(bbox.x1, bbox.y1, x, y);
+                addGradientStops(gradient, definition.stops);
+            }
+
+            return gradient;
+        },
+
+        bbox: function() {
+            var points = this.points,
+                bbox = new Box2D(),
+                i;
+
+            if (points.length > 0) {
+                bbox.move(points[0].x, points[0].y);
+                for (i = 1; i < points.length; i++) {
+                    bbox.wrapPoint(points[i]);
+                }
+            }
+
+            return bbox;
+        }
+    });
+
+    var CanvasRing = CanvasPath.extend({
+        init: function(config, options) {
+            var ring = this;
+
+            CanvasPath.fn.init.call(ring, options);
+
+            ring.config = config || {};
+        },
+
+        options: {
+            strokeLineCap: SQUARE
+        },
+
+        renderPoints: function(ctx) {
+            var ring = this,
+                config = ring.config,
+                startAngle = config.startAngle,
+                endAngle = config.angle + startAngle,
+                r = math.max(config.r, 0),
+                ir = math.max(config.ir, 0),
+                c = config.c,
+                startRadians = toRadians(startAngle),
+                endRadians = toRadians(endAngle);
+
+            if (startRadians === endRadians) {
+                startAngle = 0;
+                endAngle = 360;
+                startRadians = 0;
+                endRadians = 2 * Math.PI;
+            }
+
+            var firstOuterPoint = config.point(startAngle),
+                secondInnerPoint = config.point(endAngle, true);
+
+            ctx.moveTo(firstOuterPoint.x, firstOuterPoint.y);
+            ctx.arc(c.x, c.y, r, startRadians, endRadians);
+
+            if (ir > 0) {
+                ctx.lineTo(secondInnerPoint.x, secondInnerPoint.y);
+                ctx.arc(c.x, c.y, ir, endRadians, startRadians, true);
+            } else {
+                ctx.lineTo(c.x, c.y);
+            }
+        },
+
+        buildGradient: function(ctx, definition) {
+            var config = this.config,
+                c = config.c,
+                gradient;
+
+            if (definition && definition.type === RADIAL) {
+                gradient = ctx.createRadialGradient(
+                    c.x, c.y, config.ir,
+                    c.x, c.y, config.r
+                );
+                addGradientStops(gradient, definition.stops);
+            }
+
+            return gradient;
         }
     });
 
@@ -296,14 +377,47 @@ kendo_module({
             var circle = this;
             CanvasPath.fn.init.call(circle, options);
 
-            circle.c = c;
-            circle.r = r;
+            circle.config = new Ring(c, 0, r);
         },
 
         renderPoints: function(context) {
-            var c = this.c;
+            var config = this.config,
+                c = config.c;
 
-            context.arc(c.x, c.y, this.r, 0, TWO_PI, false);
+            context.arc(c.x, c.y, config.r, 0, TWO_PI, false);
+        },
+
+        buildGradient: CanvasRing.fn.buildGradient
+    });
+
+    var CanvasPin = CanvasPath.extend({
+        init: function(config, options) {
+            var pin = this;
+
+            CanvasPath.fn.init.call(pin, options);
+
+            pin.config = config;
+        },
+
+        renderPoints: function(context) {
+            var pin = this,
+                config = pin.config,
+                r = config.radius,
+                degrees = math.PI / 180,
+                arcAngle = config.arcAngle,
+                height = config.height - r * (1 - math.cos(arcAngle * degrees / 2)),
+                origin = config.origin;
+
+            var rotation = pin.options.rotation;
+            context.translate(rotation[1], rotation[2]);
+            context.rotate(toRadians(rotation[0]));
+            context.translate(rotation[1] - origin.x, rotation[2] - origin.y);
+            context.rotate(toRadians(-pin.config.rotation));
+
+            context.moveTo(0, 0);
+            context.arc(0, -height, r, toRadians(90 - arcAngle / 2), toRadians(90 + arcAngle / 2));
+            context.lineTo(0, 0);
+            context.closePath();
         }
     });
 
@@ -365,220 +479,6 @@ kendo_module({
         }
     });
 
-    var CanvasRing = CanvasPath.extend({
-        init: function(config, options) {
-            var ring = this;
-
-            CanvasPath.fn.init.call(ring, options);
-
-            ring.config = config || {};
-        },
-
-        options: {
-            strokeLineCap: SQUARE
-        },
-
-        renderPoints: function(ctx) {
-            var ring = this,
-                config = ring.config,
-                startAngle = config.startAngle,
-                endAngle = config.angle + startAngle,
-                r = math.max(config.r, 0),
-                ir = math.max(config.ir, 0),
-                c = config.c,
-                startRadians = toRadians(startAngle),
-                endRadians = toRadians(endAngle);
-
-            if (startRadians === endRadians) {
-                startAngle = 0;
-                endAngle = 360;
-                startRadians = 0;
-                endRadians = 2 * Math.PI;
-            }
-
-            var firstOuterPoint = config.point(startAngle),
-                secondInnerPoint = config.point(endAngle, true);
-
-            ctx.moveTo(firstOuterPoint.x, firstOuterPoint.y);
-            ctx.arc(c.x, c.y, r, startRadians, endRadians);
-
-            if (ir > 0) {
-                ctx.lineTo(secondInnerPoint.x, secondInnerPoint.y);
-                ctx.arc(c.x, c.y, ir, endRadians, startRadians, true);
-            } else {
-                ctx.lineTo(c.x, c.y);
-            }
-        },
-
-        clone: function() {
-            return new CanvasRing(
-                deepExtend({}, this.config),
-                deepExtend({}, this.options)
-            );
-        }
-    });
-
-    var CanvasPin = CanvasPath.extend({
-        init: function(config, options) {
-            var pin = this;
-
-            CanvasPath.fn.init.call(pin, options);
-
-            pin.config = config;
-        },
-
-        renderPoints: function(context) {
-            var pin = this,
-                config = pin.config,
-                r = config.radius,
-                degrees = math.PI / 180,
-                arcAngle = config.arcAngle,
-                height = config.height - r * (1 - math.cos(arcAngle * degrees / 2)),
-                origin = config.origin;
-
-            var rotation = pin.options.rotation;
-            context.translate(rotation[1], rotation[2]);
-            context.rotate(toRadians(rotation[0]));
-            context.translate(rotation[1] - origin.x, rotation[2] - origin.y);
-            context.rotate(toRadians(-pin.config.rotation));
-
-            context.moveTo(0, 0);
-            context.arc(0, -height, r, toRadians(90 - arcAngle / 2), toRadians(90 + arcAngle / 2));
-            context.lineTo(0, 0);
-            context.closePath();
-        }
-    });
-
-    // Gradients ==============================================================
-    var CanvasGradient = ViewElement.extend({
-        options: {
-            id: ""
-        },
-
-        addStops: function(target) {
-            var gradient = this,
-                stops = gradient.options.stops,
-                i,
-                length = stops.length,
-                currentStop,
-                color;
-
-            for (i = 0; i < length; i++) {
-                currentStop = stops[i];
-                color = new Color(currentStop.color);
-                target.addColorStop(
-                    currentStop.offset,
-                    "rgba(" + color.r + "," + color.g + "," + color.b + "," + currentStop.opacity + ")"
-                );
-            }
-        }
-    });
-
-    var CanvasLinearGradient = CanvasGradient.extend({
-        options: {
-            rotation: 0
-        },
-
-        applyGradient: function(context, options) {
-            var rotation = options.rotation,
-                bbox = options.bbox,
-                x = bbox.x2,
-                y = bbox.y1;
-
-            if (rotation === 90) {
-                x = bbox.x1;
-                y = bbox.y2;
-            }
-
-            var result = context.createLinearGradient(bbox.x1, bbox.y1, x, y);
-            this.addStops(result);
-
-            return result;
-        }
-    });
-
-    var CanvasRadialGradient = CanvasGradient.extend({
-        applyGradient: function(context, options) {
-            var gradient = context.createRadialGradient(
-                options.cx, options.cy, options.ir,
-                options.cx, options.cy, options.r);
-
-            this.addStops(gradient, options);
-
-            return gradient;
-        }
-    });
-
-    // Decorators =============================================================
-    function CanvasOverlayDecorator(view) {
-        this.view = view;
-    }
-
-    CanvasOverlayDecorator.prototype = {
-        decorate: function(element) {
-            var decorator = this,
-                view = decorator.view,
-                options = element.options,
-                group,
-                overlay;
-
-            if (options.overlay) {
-                group = view.createGroup();
-                overlay = element.clone();
-
-                group.children.push(element, overlay);
-
-                overlay.options.fill = options.overlay;
-
-                return group;
-            } else {
-                return element;
-            }
-        }
-    };
-
-    function CanvasGradientDecorator(view) {
-        this.view = view;
-    }
-
-    CanvasGradientDecorator.prototype = {
-        decorate: function(element) {
-            var decorator = this,
-                options = element.options;
-
-            options.fill = decorator.getPaint(options.fill);
-
-            return element;
-        },
-
-        getPaint: function(paint) {
-            var decorator = this,
-                view = decorator.view,
-                definitions = view.definitions,
-                overlay,
-                overlayId,
-                gradient;
-
-            if (paint && defined(paint.gradient)) {
-                overlay = view.buildGradient(paint);
-                if (overlay) {
-                    overlayId = overlay.id;
-                    gradient = definitions[overlayId];
-                    if (!gradient) {
-                        gradient = view.createGradient(overlay);
-                        definitions[overlayId] = gradient;
-                    }
-
-                    return gradient;
-                } else {
-                    return NONE;
-                }
-            } else {
-                return paint;
-            }
-        }
-    };
-
     // Helpers ================================================================
     // TODO: Move to dataviz.core?
     function toRadians(degrees) {
@@ -593,20 +493,32 @@ kendo_module({
         return !!doc.createElement("canvas").getContext;
     }
 
+    function addGradientStops(gradient, stops) {
+        var i,
+            length = stops.length,
+            currentStop,
+            color;
+
+        for (i = 0; i < length; i++) {
+            currentStop = stops[i];
+            color = new Color(currentStop.color);
+            gradient.addColorStop(
+                currentStop.offset,
+                "rgba(" + color.r + "," + color.g + "," + color.b + "," + currentStop.opacity + ")"
+            );
+        }
+    }
+
     // Exports ================================================================
     if (supportsCanvas) {
-        //dataviz.ViewFactory.current.register("canvas", CanvasView, 30);
-        dataviz.ViewFactory.current.register("canvas", CanvasView, 0);
+        dataviz.ViewFactory.current.register("canvas", CanvasView, 30);
     }
 
     deepExtend(dataviz, {
         CanvasCircle: CanvasCircle,
         CanvasGroup: CanvasGroup,
         CanvasLine: CanvasLine,
-        CanvasLinearGradient: CanvasLinearGradient,
-        CanvasOverlayDecorator: CanvasOverlayDecorator,
         CanvasPath: CanvasPath,
-        CanvasRadialGradient: CanvasRadialGradient,
         CanvasRing: CanvasRing,
         CanvasText: CanvasText,
         CanvasView: CanvasView,

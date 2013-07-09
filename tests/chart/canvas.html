@@ -17,6 +17,7 @@
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
+                deepExtend = kendo.deepExtend,
                 browser = kendo.support.browser,
                 Box2D = dataviz.Box2D,
                 DEG_TO_RAD = Math.PI / 180,
@@ -53,6 +54,10 @@
                     }]
                 };
 
+            var GradientStub = makeStub([
+                ["addColorStop", ["offset", "color"]]
+            ]);
+
             var ContextStub = makeStub([
                 ["arc", ["x", "y", "r", "startAngle", "endAngle", "anticlockwise"]],
                 ["beginPath"],
@@ -68,9 +73,30 @@
                 ["translate", ["x", "y"]]
             ]);
 
-            var GradientStub = makeStub([
-                ["addColorStop", ["offset", "color"]]
-            ]);
+            ContextStub.prototype.createRadialGradient = function(cx1, cy1, ir, cx2, cy2, r) {
+                var stub = new GradientStub();
+                var log = this.log.createRadialGradient = this.log.createRadialGradient || [];
+
+                log.push({
+                    cx1: cx1, cy1: cy1, cx2: cx2, cy2: cy2,
+                    ir: ir, r: r,
+                    stub: stub
+                });
+
+                return stub;
+            };
+
+            ContextStub.prototype.createLinearGradient = function(x1, y1, x2, y2) {
+                var stub = new GradientStub();
+                var log = this.log.createLinearGradient = this.log.createLinearGradient || [];
+
+                log.push({
+                    x1: x1, y1: y1, x2: x2, y2: y2,
+                    stub: stub
+                });
+
+                return stub;
+            };
 
             (function() {
                 var view;
@@ -213,13 +239,13 @@
 
                 test("createCircle sets center point", function() {
                     var circle = view.createCircle(new Point2D(10, 10));
-                    deepEqual(circle.c.x, 10);
-                    deepEqual(circle.c.y, 10);
+                    deepEqual(circle.config.c.x, 10);
+                    deepEqual(circle.config.c.y, 10);
                 });
 
                 test("createCircle sets radius", function() {
                     var circle = view.createCircle(new Point2D(10, 10), 10);
-                    deepEqual(circle.r, 10);
+                    deepEqual(circle.config.r, 10);
                 });
 
                 test("createCircle sets fill color", function() {
@@ -321,63 +347,6 @@
                     stage = view.renderTo(inlineElement);
                     equal($(stage).css("display"), "inline");
                     $(inlineElement).remove();
-                });
-
-                // ------------------------------------------------------------
-                module("CanvasView / Gradient fill", {
-                    setup: function() {
-                        view = new dataviz.CanvasView();
-                        dataviz.Gradients.test = linearGradient;
-                    },
-                    teardown: function() {
-                        dataviz.Gradients.test = null;
-                    }
-                });
-
-                test("applies gradient fill", function() {
-                    var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
-                    ok(path.options.fill instanceof dataviz.CanvasLinearGradient);
-                });
-
-                test("sets non-existent gradient fill to none", function() {
-                    var path = view.createRect(new Box2D(), { fill: { gradient: "NA" } });
-                    equal(path.options.fill, "none");
-                });
-
-                test("preserves solid fill", function() {
-                    var path = view.createRect(new Box2D(), { fill: "#f00" });
-                    equal(path.options.fill, "#f00");
-                });
-
-                test("defines gradient", function() {
-                    var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
-                    ok(view.definitions[linearGradient.id]);
-                });
-
-                // ------------------------------------------------------------
-                module("Canvas View / Decorators", {
-                    setup: function() {
-                        view = new dataviz.CanvasView();
-
-                        view.decorators.push({
-                            decorate: function(element) {
-                                ok(true);
-                                return element;
-                            }
-                        });
-                    }
-                });
-
-                test("createRect applies registered decorators", 1, function() {
-                    view.createRect(new Box2D());
-                });
-
-                test("createCircle applies registered decorators", 1, function() {
-                    view.createCircle();
-                });
-
-                test("createSector applies registered decorators", 1, function() {
-                    view.createSector();
                 });
 
             })();
@@ -694,6 +663,50 @@
                     equal(ctx.log.restore.length, 1);
                 });
 
+                // ------------------------------------------------------------
+                module("CanvasLine / Linear Gradient", {
+                    setup: function() {
+                        dataviz.Gradients.test = deepExtend({}, linearGradient);
+
+                        line = new dataviz.CanvasLine([
+                                new Point2D(10, 20),
+                                new Point2D(20, 30)
+                            ], false, {
+                                overlay: {
+                                    gradient: "test"
+                                }
+                            }
+                        );
+
+                        ctx = new ContextStub();
+                    }
+                });
+
+                test("default rotation is 0 degrees", function() {
+                    line.render(ctx);
+                    equal(ctx.log.createLinearGradient[0].x2, 20);
+                    equal(ctx.log.createLinearGradient[0].y2, 20);
+                });
+
+                test("rotates gradient by 90 degrees", function() {
+                    dataviz.Gradients.test.rotation = 90;
+                    line.render(ctx);
+                    equal(ctx.log.createLinearGradient[0].x2, 10);
+                    equal(ctx.log.createLinearGradient[0].y2, 30);
+                });
+
+                test("renders stops", function() {
+                    line.render(ctx);
+                    var stub = ctx.log.createLinearGradient[0].stub;
+                    deepEqual(stub.log.addColorStop, [{
+                        offset: 0,
+                        color: "rgba(255,0,0,1)"
+                    }, {
+                        offset: 1,
+                        color: "rgba(0,0,255,1)"
+                    }]);
+                });
+
             })();
 
             (function() {
@@ -747,6 +760,51 @@
                     equal(ctx.log.save.length, 1);
                     equal(ctx.log.restore.length, 1);
                 });
+
+                // ------------------------------------------------------------
+                module("CanvasCircle / Radial Gradient", {
+                    setup: function() {
+                        dataviz.Gradients.test = deepExtend({}, radialGradient);
+
+                        createCircle({
+                            overlay: {
+                                gradient: "test"
+                            }
+                        });
+
+                        ctx = new ContextStub();
+
+                        circle.render(ctx);
+                    }
+                });
+
+                test("sets center", function() {
+                    var gradient = ctx.log.createRadialGradient[0];
+                    equal(gradient.cx1, 10);
+                    equal(gradient.cy1, 20);
+                    equal(gradient.cx2, 10);
+                    equal(gradient.cy2, 20);
+                });
+
+                test("sets inner radius", function() {
+                    equal(ctx.log.createRadialGradient[0].ir, 0);
+                });
+
+                test("sets radius", function() {
+                    equal(ctx.log.createRadialGradient[0].r, 30);
+                });
+
+                test("renders stops", function() {
+                    var stub = ctx.log.createRadialGradient[0].stub;
+                    deepEqual(stub.log.addColorStop, [{
+                        offset: 0,
+                        color: "rgba(255,0,0,1)"
+                    }, {
+                        offset: 1,
+                        color: "rgba(0,0,255,1)"
+                    }]);
+                });
+
 
             })();
 
@@ -857,76 +915,51 @@
                     });
                 });
 
-                test("clone returns different instance", function() {
-                    notEqual(ring.clone(), ring);
-                });
-
-                test("clone returns CanvasRing", function() {
-                    ok(ring.clone() instanceof dataviz.CanvasRing);
-                });
-
-                test("clone copies config", function() {
-                    deepEqual(ring.clone().config, ring.config);
-                });
-
-                test("clone copies options", function() {
-                    ring.options.id = "1";
-                    equal(ring.clone().options.id, "1");
-                });
-
                 test("saves/restores style stack", function() {
                     ring.render(ctx);
                     equal(ctx.log.save.length, 1);
                     equal(ctx.log.restore.length, 1);
                 });
 
-            })();
-
-            (function() {
-                var gradient,
-                    gradientStub,
-                    options,
-                    ctx;
-
                 // ------------------------------------------------------------
-                module("CanvasLinearGradient", {
+                module("CanvasRing / Radial Gradient", {
                     setup: function() {
-                        gradient = new dataviz.CanvasLinearGradient(linearGradient);
-                        options = {
-                            rotation: 0,
-                            bbox: new Box2D(0, 0, 100, 100)
-                        };
+                        dataviz.Gradients.test = deepExtend({}, radialGradient);
+
+                        ring = new dataviz.CanvasRing(
+                            new dataviz.Ring(
+                                new Point2D(135, 135), 10, 135, 90, 20
+                            ), {
+                                overlay: {
+                                    gradient: "test"
+                                }
+                            }
+                        );
 
                         ctx = new ContextStub();
-                        ctx.log.createLinearGradient = [];
-                        ctx.createLinearGradient = function(x1, y1, x2, y2) {
-                            var stub = new GradientStub();
-                            this.log.createLinearGradient.push({
-                                x1: x1, y1: y1, x2: x2, y2: y2,
-                                stub: stub
-                            });
 
-                            return stub;
-                        }
+                        ring.render(ctx);
                     }
                 });
 
-                test("default rotation is 0 degrees", function() {
-                    gradient.applyGradient(ctx, options);
-                    equal(ctx.log.createLinearGradient[0].x2, 100);
-                    equal(ctx.log.createLinearGradient[0].y2, 0);
+                test("sets center", function() {
+                    var gradient = ctx.log.createRadialGradient[0];
+                    equal(gradient.cx1, 135);
+                    equal(gradient.cy1, 135);
+                    equal(gradient.cx2, 135);
+                    equal(gradient.cy2, 135);
                 });
 
-                test("rotates gradient by 90 degrees", function() {
-                    options.rotation = 90;
-                    gradient.applyGradient(ctx, options);
-                    equal(ctx.log.createLinearGradient[0].x2, 0);
-                    equal(ctx.log.createLinearGradient[0].y2, 100);
+                test("sets inner radius", function() {
+                    equal(ctx.log.createRadialGradient[0].ir, 10);
+                });
+
+                test("sets radius", function() {
+                    equal(ctx.log.createRadialGradient[0].r, 135);
                 });
 
                 test("renders stops", function() {
-                    gradient.applyGradient(ctx, options);
-                    var stub = ctx.log.createLinearGradient[0].stub
+                    var stub = ctx.log.createRadialGradient[0].stub;
                     deepEqual(stub.log.addColorStop, [{
                         offset: 0,
                         color: "rgba(255,0,0,1)"
@@ -934,172 +967,6 @@
                         offset: 1,
                         color: "rgba(0,0,255,1)"
                     }]);
-                });
-
-            })();
-
-            (function() {
-                var gradient;
-
-                // ------------------------------------------------------------
-                module("CanvasRadialGradient", {
-                    setup: function() {
-                        gradient = new dataviz.CanvasRadialGradient(radialGradient);
-                    }
-                });
-
-                test("renders id", function() {
-                    ok(gradient.render().indexOf("id='testGradient'") > -1);
-                });
-
-                test("renders stops", function() {
-                    ok(gradient.render().indexOf(
-                        "<stop offset='0%' style='stop-color:#f00;stop-opacity:1' />" +
-                        "<stop offset='100%' style='stop-color:#00f;stop-opacity:1' />") > -1
-                    );
-                });
-
-                test("renders cx", function() {
-                    ok(gradient.render().indexOf("cx='25'") > -1);
-                });
-
-                test("renders cy", function() {
-                    ok(gradient.render().indexOf("cy='50'") > -1);
-                });
-
-                test("renders fx", function() {
-                    ok(gradient.render().indexOf("fx='25'") > -1);
-                });
-
-                test("renders fy", function() {
-                    ok(gradient.render().indexOf("fy='50'") > -1);
-                });
-
-                test("renders r", function() {
-                    ok(gradient.render().indexOf("r='100'") > -1);
-                });
-
-            })();
-
-            (function() {
-                var view,
-                    rect,
-                    group,
-                    overlay,
-                    decorator,
-                    ID = "1";
-
-                module("CanvasOverlayDecorator", {
-                    setup: function() {
-                        view = new dataviz.CanvasView();
-                        rect = new dataviz.CanvasPath({
-                            id: ID,
-                            overlay: {
-                                gradient: "glass"
-                            }
-                        });
-                        decorator = new dataviz.CanvasOverlayDecorator(view);
-                        group = decorator.decorate(rect);
-                        overlay = group.children[1];
-                    }
-                });
-
-                test("creates overlay group", function() {
-                    ok(group instanceof dataviz.CanvasGroup);
-                });
-
-                test("does not decorate element if no overlay specified", function() {
-                    var rect = view.createRect(new Box2D());
-                    ok(rect instanceof dataviz.CanvasPath);
-                });
-
-            })();
-
-            (function() {
-                var view,
-                    rect,
-                    decorator;
-
-                function hrefNoHash() {
-                    var href = window.location.href;
-                    var hashIndex = href.indexOf("#");
-
-                    if (hashIndex !== -1) {
-                        href = href.substring(0, hashIndex);
-                    }
-
-                    return href;
-                }
-
-                module("SVGGradientDecorator", {
-                    setup: function() {
-                        view = new dataviz.SVGView();
-                        rect = new dataviz.SVGPath({
-                            fill: {
-                                gradient: "glass",
-                                id: "fillId"
-                            }
-                        });
-                        decorator = new dataviz.SVGGradientDecorator(view);
-                    }
-                });
-
-                test("sets fill id", function() {
-                    decorator.decorate(rect);
-                    equal(rect.options.fill, "url(#fillId)");
-                });
-
-                test("sets absolute url if the page has a base tag (non-IE)", function() {
-                    var msie = browser.msie;
-                    browser.msie = false;
-
-                    $("head").append($("<base href='http://foo' />"));
-
-                    decorator.decorate(rect);
-
-                    equal(rect.options.fill, "url(" + hrefNoHash() + "#fillId)");
-
-                    $("base").remove();
-                    browser.msie = msie;
-                });
-
-                test("does not set absolute url if the page has a base tag in IE", function() {
-                    var msie = browser.msie;
-                    browser.msie = true;
-
-                    $("head").append($("<base href='http://foo' />"));
-
-                    decorator.decorate(rect);
-
-                    equal(rect.options.fill, "url(#fillId)");
-
-                    $("base").remove();
-                    browser.msie = msie;
-                });
-
-                test("sets absolute url if the page has a base tag and hash (non-IE)", function() {
-                    var msie = browser.msie;
-                    browser.msie = false;
-
-                    window.location.hash = "test";
-                    $("head").append($("<base href='http://foo' />"));
-
-                    decorator.decorate(rect);
-                    equal(rect.options.fill, "url(" + hrefNoHash() + "#fillId)");
-
-                    $("base").remove();
-                    browser.msie = msie;
-                });
-
-                test("registers gradient definition", function() {
-                    decorator.decorate(rect);
-                    ok(view.definitions.fillId);
-                });
-
-                test("sets transparent fill if gradient is invalid", function() {
-                    var rect = new dataviz.SVGPath({ fill: { gradient: "" } });
-                    decorator.decorate(rect);
-                    equal(rect.options.fill, "none");
                 });
 
             })();
