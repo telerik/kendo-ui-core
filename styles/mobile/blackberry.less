@@ -6,6 +6,7 @@
 @blackberry-active-color: #fff;
 @blackberry-active-background: #00aae7;
 @blackberry-border-color: rgba(180,180,180,.3);
+@blackberry-light-border-color: lighten(@blackberry-border-color, 100%);
 @blackberry-border-radius: 3px;
 @blackberry-switch-radius: 2em;
 @blackberry-light-background: #e6e6e6;
@@ -51,9 +52,10 @@
     border: 1px solid rgba(0,0,0,.2);
 }
 
-.km-blackberry .km-button ~ .km-button
+.km-blackberry .km-button
 {
-    margin-left: 6px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 .km-blackberry .km-button .km-icon
@@ -243,23 +245,29 @@
 
 .km-blackberry .km-switch-container
 {
-    padding: 1px 0 1px 0;
+    padding: 1px 0 1px 1px;
     .box-sizing(border-box);
-    border: 1px solid @blackberry-border-color;
-    background-color: @blackberry-second-background;
+    .border-radius(3em);
+    border: 1px solid darken(@blackberry-border-color, 30%);
+    background-color: fade(@blackberry-border-color, 50%);
+    .box-shadow(inset 0 1px 3px darken(@blackberry-border-color, 60%));
 }
 
 .km-blackberry .km-switch-handle
 {
-    border: 1px solid @blackberry-border-color;
-    background: @blackberry-main-background;
+    background: fade(@blackberry-light-border-color, 90%);
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.15));
+    .border-radius(@blackberry-switch-radius);
+    -webkit-box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px darken(@blackberry-border-color, 60%);
+    box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px darken(@blackberry-border-color, 60%);
     width: 1.7em;
-    margin: -1px 2px 0 0;
-    border: 1px solid rgba(0,0,0,.1);
+    height: 1.7em;
+    margin: 0 4px 0 0;
 }
 
-.km-blackberry .km-switch-off .km-switch-handle
+.km-blackberry .km-switch-on .km-switch-handle
 {
+    background-color: #0879c6;
 }
 
 .km-blackberry .km-switch-label-off
@@ -281,17 +289,6 @@
     width: 240%;
     line-height: 1.8em;
     vertical-align: middle;
-}
-
-.km-blackberry .km-switch-container,
-.km-blackberry .km-switch-background
-{
-    .border-radius(@blackberry-switch-radius + 1px);
-}
-
-.km-blackberry .km-switch-handle
-{
-    .border-radius(@blackberry-switch-radius);
 }
 
 /* ButtonGroup */
@@ -1317,6 +1314,7 @@
 
 .km-blackberry .km-modalview
 {
+    .border-radius(@blackberry-border-radius);
     background-color: #7185a2;
     .box-sizing(border-box);
     .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
@@ -1331,6 +1329,27 @@
 .km-blackberry .km-modalview > :first-child
 {
     border: 0;
+}
+
+.km-blackberry .km-modalview .km-navbar,
+.km-blackberry .km-modalview .km-toolbar,
+.km-blackberry .km-splitview .km-navbar,
+.km-blackberry .km-splitview .km-toolbar,
+.km-blackberry .km-modalview > :first-child,
+.km-blackberry .km-splitview .km-view > :first-child
+{
+    .border-radius(@blackberry-border-radius @blackberry-border-radius 0 0);
+    -webkit-border-top-left-radius: @blackberry-border-radius;
+    -webkit-border-top-right-radius: @blackberry-border-radius;
+}
+
+.km-blackberry .km-splitview .km-tabstrip,
+.km-blackberry .km-modalview > :last-child,
+.km-blackberry .km-splitview .km-view > :last-child
+{
+    .border-radius(0 0 @blackberry-border-radius @blackberry-border-radius);
+    -webkit-border-bottom-left-radius: @blackberry-border-radius;
+    -webkit-border-bottom-right-radius: @blackberry-border-radius;
 }
 
 /* Tablet Styles */
