@@ -2,12 +2,12 @@
 
 @blackberry-active-color: #00aae7;
 @blackberry-border-color: #f0f0f0;
-@blackberry-border-radius: 2px;
+@blackberry-border-radius: 3px;
 @blackberry-light-background: #e6e6e6;
 
 .km-blackberry
 {
-    font: .9em Slate, Helvetica, sans-serif;
+    font: 1em Slate, Helvetica, sans-serif;
 }
 
 .km-blackberry,
@@ -34,6 +34,52 @@
     .box-shadow(~"0 1px 4px 0 rgba(0,0,0,.3)");
 }
 
+.km-blackberry .km-button
+{
+    text-align: center;
+    padding: .44em 1em;
+    min-width: 2.6em;
+    .box-shadow(none);
+    background-color: transparent;
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.1));
+    border: 1px solid rgba(0,0,0,.2);
+}
+
+.km-blackberry .km-navbar .km-button
+{
+    color: #fff;
+    .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,0));
+}
+
+.km-blackberry .km-button:after,
+.km-blackberry .km-button:before
+{
+    content: "\a0";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    top: -3px;
+    left: -3px;
+    background-color: inherit;
+    border: inherit;
+    .border-radius(inherit);
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.2), inset 0 0 0 2px rgba(0,0,0,.1)");
+    z-index: -1;
+}
+
+.km-blackberry .km-button:before
+{
+    z-index: 0;
+    display: none;
+}
+
+.km-blackberry .km-button .km-text
+{
+    position: relative;
+}
+
 .km-blackberry .km-view-title
 {
     visibility: visible;
@@ -44,15 +90,16 @@
 .km-blackberry .km-dialog-title
 {
     text-align: center;
-    color: #222;
+    color: #fff;
+    text-shadow: 0 1px 0 #000;
     font-size: 1.2em;
     line-height: 2.4em;
     font-weight: bold;
 }
 
-.km-blackberry.km-horizontal .km-view-title
+.km-blackberry.km-vertical .km-view-title
 {
-    line-height: 2.74em;
+    line-height: 2.6em;
 }
 
 .km-blackberry .km-badge,
@@ -134,34 +181,27 @@
 .km-blackberry li.km-actionsheet-cancel > a:hover,
 .km-blackberry li.km-actionsheet-cancel > a:active
 {
-    color: #FFF;
-    background-color: #057fe4;
-    .linear-gradient-image(top, rgba(255,255,255,.3), rgba(255,255,255,0));
-    .box-shadow(~"inset 0 0 0 1px rgba(255,255,255,.2), 0 1px 4px 1px rgba(0,0,0,.2)");
+    color: #fff;
+    background-color: rgba(0,0,0,.2);
 }
 
-.km-blackberry .km-content .km-button
+.km-blackberry .km-button:active:before,
+.km-blackberry .km-button.km-state-active:before
 {
-    padding: .4rem 1.6rem;
+    display: block;
+    background-color: rgba(0,0,0,.2);
+    .box-shadow(~"inset 0 4px 6px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.2)");
 }
 
-.km-blackberry .km-back:before
+.km-blackberry .km-content .km-button:active,
+.km-blackberry .km-content .km-button.km-state-active
 {
-    width: .4rem;
-    height: .4rem;
-    content: "\a0";
-    display: inline-block;
-    vertical-align: middle;
-    margin: ~"-.35rem .3rem 0 0";
-    border: 0 solid #000;
-    border-width: .24rem 0 0 .24rem;
-    .transform(rotate(-45deg));
+    background-color: @blackberry-active-color;
 }
 
-.km-blackberry .km-back:active:before,
-.km-blackberry .km-back.km-state-active:before
+.km-blackberry .km-content .km-button:after
 {
-    border-color: #fff;
+    background-color: transparent;
 }
 
 .km-blackberry .km-switch
@@ -344,9 +384,8 @@
 .km-blackberry a.km-listview-link:active,
 .km-blackberry .km-state-active a.km-listview-link
 {
-    color: #fff;
-    background-color: #057fe4;
-    .linear-gradient-image(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+    .box-shadow(inset 0 0 0 2px @blackberry-active-color);
+    background: fade(@blackberry-active-color, 50%);
 }
 
 .km-blackberry .km-listview-link:after
@@ -375,34 +414,35 @@
 .km-blackberry .km-navbar,
 .km-blackberry .km-popup.km-pane .km-header
 {
-    background-color: #D8D8D8;
-    .linear-gradient-image(top, rgba(255,255,255,.9), rgba(255,255,255,0));
+    background-color: #015e98;
+    .linear-gradient-image(top, rgba(255,255,255,.2) 40%, rgba(255,255,255,0),
+                           left, rgba(255,255,255,0) 0, rgba(255,255,255,.3));
 }
 
 .km-blackberry .km-toolbar .km-button,
 .km-blackberry .km-navbar [class*=item] .km-button
 {
-    margin-top: .54rem;
-    margin-bottom: .54rem;
+    margin-top: .44rem;
+    margin-bottom: .44rem;
 }
 
 .km-blackberry.km-vertical .km-toolbar .km-button,
 .km-blackberry.km-vertical .km-navbar [class*=item] .km-button
 {
-    margin-top: .34rem;
-    margin-bottom: .34rem;
+    margin-top: .54rem;
+    margin-bottom: .54rem;
 }
 
-.km-blackberry.km-horizontal .km-no-title
+.km-blackberry .km-no-title
 {
-    padding-top: .45rem;
-    padding-bottom: .35rem;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
 }
 
 .km-blackberry.km-vertical .km-no-title
 {
     padding-top: .3rem;
-    padding-bottom: .2rem;
+    padding-bottom: .3rem;
 }
 
 .km-phone .km-blackberry .km-tabstrip
@@ -420,7 +460,7 @@
 
 .km-blackberry .km-tabstrip
 {
-    font-size: .9em;
+    font-size: .7em;
     padding: 0;
     .box-shadow(inset 0 2px 0 rgba(0,0,0,.3));
     background-color: #1A1A1A;
@@ -438,6 +478,11 @@
     border-top: 2px solid transparent;
     .box-shadow(~"-1px 0 0 rgba(0,0,0,.5)");
     .box-sizing(border-box);
+}
+
+.km-root .km-blackberry .km-tabstrip .km-button:before
+{
+    display: none;
 }
 
 .km-blackberry .km-tabstrip .km-button:first-child,
