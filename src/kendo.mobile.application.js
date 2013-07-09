@@ -30,7 +30,8 @@ kendo_module({
         systemMeta = kendo.template('<meta name="apple-mobile-web-app-capable" content="#= data.webAppCapable === false ? \'no\' : \'yes\' #" /> ' +
                      '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ' +
                      '<meta name="msapplication-tap-highlight" content="no" /> ', {usedWithBlock: false}),
-        clipTemplate = kendo.template('<style>.km-content,.km-view { clip: rect(0 #=data.width#px #=data.height#px 0); }</style>', {usedWithBlock: false}),
+        clipTemplate = kendo.template('<style>.km-view { clip: rect(0 #= data.width #px #= data.height #px 0); }</style>', {usedWithBlock: false}),
+        ENABLE_CLIP = OS.android || OS.blackberry || OS.meego,
         viewportMeta = viewportTemplate({ height: "" }),
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
@@ -238,7 +239,7 @@ kendo_module({
         },
 
         _setupElementClass: function() {
-            var that = this, clip,
+            var that = this, size,
                 element = that.element;
 
             element.parent().addClass("km-root km-" + (that.os.tablet ? "tablet" : "phone"));
@@ -252,15 +253,15 @@ kendo_module({
                 applyViewportHeight();
             }
 
-            clip = $(clipTemplate({ width: window.innerWidth, height: window.innerHeight })).appendTo(HEAD);
+            if (ENABLE_CLIP) {
+                size = window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight;
+                $(clipTemplate({ width: size, height: size })).appendTo(HEAD);
+            }
 
             kendo.onResize(function() {
                 element
                     .removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass(element));
-
-                clip.remove();
-                clip = $(clipTemplate({ width: window.innerWidth, height: window.innerHeight })).appendTo(HEAD);
 
                 if (BERRYPHONEGAP) {
                     applyViewportHeight();
