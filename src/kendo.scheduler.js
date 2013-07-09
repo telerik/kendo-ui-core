@@ -467,7 +467,16 @@ kendo_module({
                     view.up(that._selection);
                     view.select(that._selection);
                     e.preventDefault();
+                } else if (key === keys.TAB) {
+                    var prevent = view.nextEvent(that._selection);
+                    view.select(that._selection);
+
+                    if (prevent) {
+                        e.preventDefault();
+                    }
                 }
+
+                that._adjustSelectedDate();
             });
         },
 
@@ -494,7 +503,8 @@ kendo_module({
             //selection.offset = 0;
 
             this._selection = selection;
->>>>>>> Initial implementation of DayView/MultiDay view keyboard nav
+
+            this._adjustSelectedDate();
         },
 
         options: {
@@ -1508,6 +1518,7 @@ kendo_module({
                     if (that._selection) {
                         this.offsetSelection(that._selection);
                         this.select(that._selection);
+                        that._adjustSelectedDate();
                     }
                 };
 
@@ -1565,18 +1576,17 @@ kendo_module({
             this.refresh();
         },
 
-        _adjustSelectedDate: function(date) {
-            var selection = this._selection, start;
+        _adjustSelectedDate: function() {
+            var date = this._model.selectedDate,
+                selection = this._selection,
+                start;
 
-            if (selection) {
+            //if (selection) {
                 start = selection.start;
                 if (!kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
-                    this._model.selectedDate = date = new Date(date);
                     date.setFullYear(start.getFullYear(), start.getMonth(), start.getDate());
                 }
-            }
-
-            return date;
+            //}
         },
 
         _initializeView: function(name) {
@@ -1591,7 +1601,7 @@ kendo_module({
                 }
 
                 if (type) {
-                    view = new type(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {}, { resources: this.resources, date: this._adjustSelectedDate(this.date()) })));
+                    view = new type(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date() })));
                 } else {
                     throw new Error("There is no such view");
                 }

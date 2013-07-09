@@ -795,36 +795,6 @@ kendo_module({
             return kendo.date.nextDay(this.endDate());
         },
 
-        offsetSelection: function(selection) {
-            var offset = this._dates.length,
-                startDate = this._startDate,
-                endDate = this._endDate,
-                start = selection.start,
-                end = selection.end;
-
-            if (getMilliseconds(endDate) === 0) {
-                endDate = kendo.date.addDays(endDate, 1);
-            }
-
-            if (start <= startDate || end >= endDate) {
-                if (start > endDate) {
-                    offset = -offset;
-                }
-
-                start.setDate(start.getDate() + offset);
-                if (start < startDate) {
-                    start.setFullYear(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
-                }
-
-                end.setDate(end.getDate() + offset);
-                if (end > endDate) {
-                    end.setFullYear(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
-                }
-
-                selection.events = [];
-            }
-        },
-
         previousDate: function() {
             return kendo.date.previousDay(this.startDate());
         },
@@ -1549,6 +1519,36 @@ kendo_module({
         },
 
         //navigation
+        offsetSelection: function(selection) {
+            var offset = this._dates.length,
+                startDate = this._startDate,
+                endDate = this._endDate,
+                start = selection.start,
+                end = selection.end;
+
+            if (getMilliseconds(endDate) === 0) {
+                endDate = kendo.date.addDays(endDate, 1);
+            }
+
+            if (start <= startDate || end >= endDate) {
+                if (start > endDate) {
+                    offset = -offset;
+                }
+
+                start.setDate(start.getDate() + offset);
+                if (start < startDate) {
+                    start.setFullYear(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+                }
+
+                end.setDate(end.getDate() + offset);
+                if (end > endDate) {
+                    end.setFullYear(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+                }
+
+                selection.events = [];
+            }
+        },
+
         clearSelection: function() {
             this.content.add(this.datesHeader).find(".k-state-selected").removeClass("k-state-selected");
         },
@@ -1570,11 +1570,14 @@ kendo_module({
 
                 if (!event[0]) {
                     that._selectCell(row, col, isAllDay);
+                } else {
+                    that._scrollTo(event[0], that.content[0]);
                 }
             } else {
                 that._selectCell(row, col, isAllDay);
             }
         },
+
         _selectCell: function(row, col, isAllDay) {
             var that = this,
                 table = that.content.children("table")[0],
@@ -1668,6 +1671,83 @@ kendo_module({
             } else if (!selection.isAllDay) {
                 selection.isAllDay = true;
             }
+        },
+
+        _getAllDayEvents: function(col, selected) {
+            var allDayRow = this._rows[0],
+                events = allDayRow.events,
+                result,
+                event;
+
+            for (var i = eventIndex(events, selected), length = events.length; i < length; i++) {
+                event = events[i];
+
+                if (event.start === col) {
+                    result = event;
+                    break;
+                }
+            }
+
+            return result;
+        },
+
+        nextEvent: function(selection) {
+            var that = this,
+                col = that._dateSlotIndex(selection.start),
+                row = that._timeSlotIndex(selection.start),
+                columns = that._columns,
+                columnsLength = columns.length,
+                eventsLength, events, event,
+                isSlot = !selection.events || !selection.events[0],
+                i = col, j = 0, found = false, isAllDay = false,
+                modified = false;
+
+            while (i < columnsLength) {
+                events = columns[i].events;
+                eventsLength = events.length;
+
+                for (j = eventIndex(events, selection.events); j < eventsLength; j++) {
+                    event = events[j];
+
+                    if (event.start >= row) {
+
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    break;
+                } else {
+                    event = that._getAllDayEvents(i + 1, selection.events);
+                    if (event) {
+                        isAllDay = found = true;
+                        break;
+                    }
+                }
+
+                row = 0;
+                i++;
+
+                if (i === columnsLength && isSlot && !modified) {
+                    columnsLength = col;
+                    i = 0;
+                    modified = true;
+                }
+            }
+
+            if (found) {
+                var slots = isAllDay ? that._rows[0].slots : columns[i].slots,
+                    startSlot = slots[event.start],
+                    endSlot = slots[event.end - (isAllDay ? 0 : 1)];
+
+                selection.start = new Date(startSlot.start);
+                selection.end = new Date(endSlot.end);
+                selection.isAllDay = isAllDay;
+                selection.events = [event.element.data("uid")];
+            }
+
+            return found;
         }
     });
 
@@ -1676,6 +1756,18 @@ kendo_module({
             item = kendo.getter(resource.dataValueField)(item);
         }
         return item;
+    }
+
+    function eventIndex(events, selected) {
+        if (!selected || !selected.length) {
+            return 0;
+        }
+
+        selected = selected[selected.length - 1];
+
+        events = $.map(events, function(item) { return item.element.data("uid"); });
+
+        return $.inArray(selected, events) + 1;
     }
 
     function arrayEqFilter(item, value) {
