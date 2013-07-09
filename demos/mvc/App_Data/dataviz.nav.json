@@ -192,6 +192,11 @@
                     "title": "Multi-axes feature example | Kendo UI Line Charts widget",
                     "meta": "This demo shows how easily Kendo UI Line Charts can be customized to achieve what you want in your app. Apply multiple axes to your Kendo UI Line Charts."
                 }, {
+                    "text": "Notes",
+                    "url": "line-charts/notes.html",
+                    "title": "Notes feature example | Kendo UI Line Charts widget",
+                    "meta": "This demo shows how to place annotations in your Kendo UI Charts."
+                }, {
                     "text": "Binding to remote data",
                     "url": "line-charts/remote-data.html",
                     "title": "Binding to remote data example | Kendo UI Line Charts features",
