@@ -54,6 +54,7 @@
                 };
 
             var ContextStub = makeStub([
+                ["arc", ["x", "y", "r"]],
                 ["beginPath"],
                 ["closePath"],
                 ["fill"],
@@ -692,7 +693,8 @@
             })();
 
             (function() {
-                var circle;
+                var circle,
+                    ctx;
 
                 function createCircle(options) {
                     circle = new dataviz.CanvasCircle(new Point2D(10, 20), 30, options);
@@ -701,78 +703,33 @@
                 module("CanvasCircle", {
                     setup: function() {
                         createCircle();
+                        ctx = new ContextStub();
                     }
                 });
 
-                test("renders id", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = false;
-
-                    createCircle({ id: "1" });
-                    ok(circle.render().indexOf(" id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders circle tag", function() {
-                    equal(circle.render().replace(/\<circle.*?\>/, "<circle>"),
-                        "<circle></circle>");
-                });
-
-                test("renders center x", function() {
-                    ok(circle.render().indexOf("cx='10'") > -1);
-                });
-
-                test("renders center y", function() {
-                    ok(circle.render().indexOf("cy='20'") > -1);
-                });
-
-                test("renders radius", function() {
-                    ok(circle.render().indexOf("r='30'") > -1);
+                test("renders circle", function() {
+                    circle.render(ctx);
+                    deepEqual(ctx.log.arc[0], { x: 10, y: 20, r: 30 });
                 });
 
                 test("renders fill color", function() {
                     circle.options.fill = "#f00";
-                    ok(circle.render().indexOf("fill='#f00'") > -1);
-                });
-
-                test("renders empty fill when no fill is set", function() {
-                    circle.options.fill = "";
-                    ok(circle.render().indexOf("fill='none") > -1);
+                    circle.render(ctx);
+                    equal(ctx.fillStyle, "#f00");
                 });
 
                 test("renders stroke color", function() {
                     circle.options.stroke = "#f00";
-                    ok(circle.render().indexOf("stroke='#f00'") > -1);
+                    circle.options.strokeWidth = 1;
+                    circle.render(ctx);
+                    equal(ctx.strokeStyle, "#f00");
                 });
 
                 test("renders stroke width", function() {
-                    circle.options.strokeWidth = "2";
-                    ok(circle.render().indexOf("stroke-width='2'") > -1);
-                });
-
-                test("renders id", function() {
-                    circle.options.id = "id";
-                    ok(circle.render().indexOf("id='id'") > -1);
-                });
-
-                test("renders data attributes", function() {
-                    circle.options.data = { testId: 1 };
-                    ok(circle.render().indexOf("data-test-id='1'") > -1);
-                });
-
-                test("refresh updates r attribute", function() {
-                    var domElement = $("<div />");
-                    circle.r = 4;
-                    circle.refresh(domElement);
-                    equal(domElement.attr("r"), "4");
-                });
-
-                test("refresh updates fill-opacity attribute", function() {
-                    var domElement = $("<div />");
-                    circle.options.fillOpacity = 0.4;
-                    circle.refresh(domElement);
-                    equal(domElement.attr("fill-opacity"), "0.4");
+                    circle.options.stroke = "#f00";
+                    circle.options.strokeWidth = 2;
+                    circle.render(ctx);
+                    equal(ctx.lineWidth, 2);
                 });
 
             })();

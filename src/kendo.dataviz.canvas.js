@@ -32,6 +32,7 @@ kendo_module({
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         DEG_TO_RAD = math.PI / 180,
+        TWO_PI = math.PI * 2,
         NONE = "none",
         RADIAL = "radial",
         SOLID = "solid",
@@ -295,17 +296,10 @@ kendo_module({
             circle.r = r;
         },
 
-        options: {
-            fill: "",
-            fillOpacity: 1,
-            strokeOpacity: 1
-        },
-
         renderPoints: function(context) {
-            var circle = this,
-                c = circle.c;
+            var c = this.c;
 
-            context.arc(c.x, c.y, circle.r, 0, 2 * Math.PI, false);
+            context.arc(c.x, c.y, this.r, 0, TWO_PI, false);
         }
     });
 
