@@ -802,6 +802,10 @@ kendo_module({
                 start = selection.start,
                 end = selection.end;
 
+            if (getMilliseconds(endDate) === 0) {
+                endDate = kendo.date.addDays(endDate, 1);
+            }
+
             if (start <= startDate || end >= endDate) {
                 if (start > endDate) {
                     offset = -offset;

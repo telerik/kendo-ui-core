@@ -444,19 +444,20 @@ kendo_module({
 
                     if (that._selection.start > view.endDate()) {
                         that.date(that._selection.start);
-                        view = that.view();
+                    } else {
+                        view.select(that._selection);
                     }
 
-                    view.select(that._selection);
                     e.preventDefault();
                 } else if (key === keys.LEFT) {
                     view.left(that._selection);
 
                     if (that._selection.start < view.startDate()) {
                         that.date(that._selection.start);
-                        view = that.view();
+                    } else {
+                        view.select(that._selection);
                     }
-                    view.select(that._selection);
+
                     e.preventDefault();
                 } else if (key === keys.DOWN) {
                     view.down(that._selection);
@@ -1506,7 +1507,6 @@ kendo_module({
                 that._viewRenderHandler = function(e) {
                     if (that._selection) {
                         this.offsetSelection(that._selection);
-                        console.log(that._selection.start);
                         this.select(that._selection);
                     }
                 };
@@ -1570,7 +1570,7 @@ kendo_module({
 
             if (selection) {
                 start = selection.start;
-                if (!kendo.date.isInDateRange(date, start, selection.end)) {
+                if (!kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
                     this._model.selectedDate = date = new Date(date);
                     date.setFullYear(start.getFullYear(), start.getMonth(), start.getDate());
                 }
