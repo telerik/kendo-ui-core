@@ -378,6 +378,7 @@ kendo_module({
                     };
 
                     cell.index = columns[cellIndex].slots.length;
+                    cell.columnIndex = cellIndex;
 
                     if (isVertical) {
                         cell.groupIndex = this._groupVerticalIndex(rowIndex);
@@ -428,7 +429,8 @@ kendo_module({
                             isAllDay: true,
                             start: range.start,
                             end: range.end,
-                            index: cellIndex
+                            index: cellIndex,
+                            columnIndex: cellIndex
                         };
 
                         if (isVertical) {
@@ -490,12 +492,19 @@ kendo_module({
                     that.element.on("dblclick" + NS, ".k-scheduler-content td", function(e) {
                         if (!$(this).parent().hasClass("k-scheduler-header-all-day")) {
                             var slot = that._slotByPosition(e.pageX, e.pageY);
-                            that.trigger("add", { eventInfo: { start: slot.start, end: slot.end } });
+
+                            var resourceInfo = that._resourceBySlot(slot);
+
+                            that.trigger("add", { eventInfo: extend({ start: slot.start, end: slot.end }, resourceInfo) });
+
                             e.preventDefault();
                         }
                     }).on("dblclick" + NS, ".k-scheduler-header-all-day td", function(e) {
                         var slot = that._slotByPosition(e.pageX, e.pageY);
-                        that.trigger("add", { eventInfo: { isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.end) } });
+                        var resourceInfo = that._resourceBySlot(slot);
+
+                        that.trigger("add", { eventInfo: extend({ isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.end) }, resourceInfo) });
+
                         e.preventDefault();
                     });
                 }
@@ -869,14 +878,14 @@ kendo_module({
         },
 
         _groupHorizontalIndex: function(cellIndex) {
-            if (this.groupedResources) {
+            if (this.groupedResources.length) {
                 return Math.floor(cellIndex/this._columnCountInGroup());
             }
             return 0;
         },
 
         _groupVerticalIndex: function(rowIndex) {
-            if (this.groupedResources) {
+            if (this.groupedResources.length) {
                 return Math.floor(rowIndex/this._rowsCountInGroup());
             }
             return 0;
@@ -1356,6 +1365,31 @@ kendo_module({
             this.groupedResources = result;
         },
 
+        _resourceBySlot: function(slot) {
+            var resources = this.groupedResources;
+            var result = {};
+
+            if (resources.length) {
+                var index = slot.columnIndex;
+
+                for (var idx = 0, length = resources.length; idx < length; idx++) {
+                    var resource = resources[idx];
+
+                    var columnCount = this._columnCountForLevel(resources.length) / this._columnCountForLevel(idx);
+
+                    var groupIndex = Math.floor(index/columnCount);
+                    index -= groupIndex*columnCount;
+
+                    var setter = kendo.setter(resource.field);
+                    var value = resourceValue(resource, resource.dataSource.at(groupIndex));
+
+                    setter(result, value);
+                }
+            }
+
+            return result;
+        },
+
         _renderGroups: function(events, resources, offset, columnLevel) {
             var resource = resources[0];
             var offsetCount;
@@ -1372,11 +1406,7 @@ kendo_module({
                 var view = resource.dataSource.view();
 
                 for (var itemIdx = 0; itemIdx < view.length; itemIdx++) {
-                    var value = view[itemIdx];
-
-                    if (resource.valuePrimitive) {
-                        value = kendo.getter(resource.dataValueField)(value);
-                    }
+                    var value = resourceValue(resource, view[itemIdx]);
 
                     var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: arrayEqFilter, value: value }).toArray();
 
@@ -1438,6 +1468,13 @@ kendo_module({
         }
 
     });
+
+    function resourceValue(resource, item) {
+        if (resource.valuePrimitive) {
+            item = kendo.getter(resource.dataValueField)(item);
+        }
+        return item;
+    }
 
     function arrayEqFilter(item, value) {
         if ($.isArray(item)) {
