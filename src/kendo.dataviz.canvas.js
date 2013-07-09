@@ -174,66 +174,71 @@ kendo_module({
             strokeLineCap: SQUARE
         },
 
-        render: function(context) {
+        render: function(ctx) {
             var path = this,
                 options = path.options;
 
-            context.save();
+            ctx.save();
 
-            context.beginPath();
+            ctx.beginPath();
+            path.renderPoints(ctx);
 
-            this.renderPoints(context);
-
-            // TODO: Manual dash rendering for IE
-            var dashType = options.dashType ? options.dashType.toLowerCase() : null;
-            if (dashType && dashType != SOLID) {
-                var dashArray = DASH_ARRAYS[dashType];
-                if (context.setLineDash) {
-                    context.setLineDash(dashArray);
-                } else {
-                    context.mozDash = dashArray;
-                    context.webkitLineDash = dashArray;
-                }
-            }
-
-            path.setLineCap(context);
+            path.setLineDash(ctx);
+            path.setLineCap(ctx);
 
             if (options.fill) {
-                path.setFill(context);
-                context.globalAlpha = options.fillOpacity;
-                context.fill();
+                path.setFill(ctx);
+                ctx.globalAlpha = options.fillOpacity;
+                ctx.fill();
             }
 
             if (options.stroke && options.strokeWidth) {
-                context.strokeStyle = options.stroke;
-                context.lineWidth = options.strokeWidth;
-                context.lineJoin = "round";
-                context.globalAlpha = options.strokeOpacity;
-                context.stroke();
+                ctx.strokeStyle = options.stroke;
+                ctx.lineWidth = options.strokeWidth;
+                ctx.lineJoin = "round";
+                ctx.globalAlpha = options.strokeOpacity;
+                ctx.stroke();
             }
 
-            context.restore();
+            ctx.restore();
         },
 
         renderPoints: $.noop,
 
-        setLineCap: function(context) {
-            var options = this.options,
-                dashType = options.dashType,
-                strokeLineCap = options.strokeLineCap;
+        setLineDash: function(ctx) {
+            var dashType = this.options.dashType,
+                dashArray;
 
-            context.lineCap = (dashType && dashType != SOLID) ?
-                BUTT : strokeLineCap;
+            // TODO: Manual dash rendering for IE
+            dashType = dashType ? dashType.toLowerCase() : null;
+            if (dashType && dashType != SOLID) {
+                dashArray = DASH_ARRAYS[dashType];
+                if (ctx.setLineDash) {
+                    ctx.setLineDash(dashArray);
+                } else {
+                    ctx.mozDash = dashArray;
+                    ctx.webkitLineDash = dashArray;
+                }
+            }
         },
 
-        setFill: function(context) {
-            var fill = this.options.fill;
+        setLineCap: function(ctx) {
+            var options = this.options,
+                dashType = options.dashType;
+
+            ctx.lineCap = (dashType && dashType !== SOLID) ?
+                BUTT : options.strokeLineCap;
+        },
+
+        setFill: function(ctx) {
+            var options = this.options,
+                fill = options.fill;
 
             if (fill.bindToContext) {
-                fill = fill.bindToContext(context, this.options.overlay);
+                fill = fill.bindToContext(ctx, options.overlay);
             }
 
-            context.fillStyle = fill;
+            ctx.fillStyle = fill;
         }
     });
 
@@ -247,10 +252,11 @@ kendo_module({
         },
 
         options: {
-            rotation: [0,0,0]
+            // TODO: Remove and do the rotation in the model
+            rotation: [0, 0, 0]
         },
 
-        renderPoints: function(context) {
+        renderPoints: function(ctx) {
             var line = this,
                 points = line.points,
                 rotation = line.options.rotation,
@@ -267,24 +273,16 @@ kendo_module({
             }
 
             var p = points[0].clone().rotate(rCenter, rAmount);
-            context.moveTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
+            ctx.moveTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
 
-            for (i = 0; i < points.length; i++) {
+            for (i = 1; i < points.length; i++) {
                 p = points[i].clone().rotate(rCenter, rAmount);
-                context.lineTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
+                ctx.lineTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
             }
 
             if (line.closed) {
-                context.closePath();
+                ctx.closePath();
             }
-        },
-
-        clone: function() {
-            var line = this;
-            return new CanvasLine(
-                deepExtend([], line.points), line.closed,
-                deepExtend({}, line.options)
-            );
         }
     });
 

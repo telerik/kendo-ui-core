@@ -58,6 +58,8 @@
                 ["closePath"],
                 ["fill"],
                 ["fillText", ["content", "x", "y"]],
+                ["lineTo", ["x", "y"]],
+                ["moveTo", ["x", "y"]],
                 ["restore"],
                 ["rotate", ["angle"]],
                 ["save"],
@@ -639,74 +641,64 @@
             })();
 
             (function() {
-                var line;
+                var line,
+                    ctx;
 
-                module("SVGLine", {
+                module("CanvasLine", {
                     setup: function() {
-                        line = new dataviz.SVGLine([
-                            new Point2D(10, 20),
-                            new Point2D(20, 30)
-                        ], false);
+                        line = new dataviz.CanvasLine([
+                                new Point2D(10, 20),
+                                new Point2D(20, 30)
+                            ], false, { stroke: "black" }
+                        );
+                        ctx = new ContextStub();
                     }
                 });
 
-                test("draws line", function() {
-                    line = new dataviz.SVGLine([
-                        new Point2D(10, 20),
-                        new Point2D(20, 30)
-                    ], false);
-                    equal(line.renderPoints(), "M10 20 20 30");
+                test("moves to start point", function() {
+                    line.render(ctx);
+                    deepEqual(ctx.log.moveTo[0], { x: 10, y: 20 });
                 });
 
-                test("draws closed line", function() {
-                    line = new dataviz.SVGLine([
-                        new Point2D(10, 20),
-                        new Point2D(20, 30)
-                    ], true);
-                    equal(line.renderPoints(), "M10 20 20 30 z");
+                test("line to end point", function() {
+                    line.render(ctx);
+                    deepEqual(ctx.log.lineTo[0], { x: 20, y: 30 });
                 });
 
-                test("clone returns different instance", function() {
-                    notEqual(line.clone(), line);
+                test("closes path", function() {
+                    line.closed = true;
+                    line.render(ctx);
+                    equal(ctx.log.closePath.length, 1);
                 });
 
-                test("clone returns SVGLine", function() {
-                    ok(line.clone() instanceof dataviz.SVGLine);
-                });
-
-                test("clone copies points", function() {
-                    line.points = [ 1, 2 ];
-                    deepEqual(line.clone().points, line.points);
-                });
-
-                test("clone copies options", function() {
-                    line.options.id = "1";
-                    equal(line.clone().options.id, "1");
-                });
-
-                test("align=false skips point coordinate rounding", function() {
-                    line = new dataviz.SVGLine([
+                test("'align: false' skips point coordinate rounding", function() {
+                    line = new dataviz.CanvasLine([
                         new Point2D(1.503, 2.103),
                         new Point2D(2.506, 3.801)
-                    ], false, { align: false })
+                    ], false, { align: false, stroke: "black" })
 
-                    equal(line.renderPoints(), "M1.503 2.103 2.506 3.801");
+                    line.render(ctx);
+
+                    deepEqual(ctx.log.moveTo[0], { x: 1.503, y: 2.103 });
+                    deepEqual(ctx.log.lineTo[0], { x: 2.506, y: 3.801 });
                 });
 
-                test("renders data attributes", function() {
-                    line.options.data = { testId: 1 };
-                    ok(line.render().indexOf("data-test-id='1'") > -1);
+                test("saves/restores style stack", function() {
+                    line.render(ctx);
+                    equal(ctx.log.save.length, 1);
+                    equal(ctx.log.restore.length, 1);
                 });
+
             })();
 
             (function() {
                 var circle;
 
                 function createCircle(options) {
-                    circle = new dataviz.SVGCircle(new Point2D(10, 20), 30, options);
+                    circle = new dataviz.CanvasCircle(new Point2D(10, 20), 30, options);
                 }
 
-                module("SVGCircle", {
+                module("CanvasCircle", {
                     setup: function() {
                         createCircle();
                     }
