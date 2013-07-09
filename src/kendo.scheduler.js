@@ -448,6 +448,7 @@ kendo_module({
                     }
 
                     view.select(that._selection);
+                    e.preventDefault();
                 } else if (key === keys.LEFT) {
                     view.left(that._selection);
 
@@ -456,12 +457,15 @@ kendo_module({
                         view = that.view();
                     }
                     view.select(that._selection);
+                    e.preventDefault();
                 } else if (key === keys.DOWN) {
                     view.down(that._selection);
                     view.select(that._selection);
+                    e.preventDefault();
                 } else if (key === keys.UP) {
                     view.up(that._selection);
                     view.select(that._selection);
+                    e.preventDefault();
                 }
             });
         },

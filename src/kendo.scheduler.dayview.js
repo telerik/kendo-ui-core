@@ -1526,26 +1526,59 @@ kendo_module({
             var that = this,
                 col = that._dateSlotIndex(selection.start),
                 row = that._timeSlotIndex(selection.start),
-                table = that.content.children("table")[0];
+                table = that.content.children("table")[0],
+                isAllDay = selection.isAllDay,
+                event;
 
             that.clearSelection();
 
             if (selection.events && selection.events.length) {
-                var event = that.content.add(that.datesHeader.children()).children("[data-uid=" + selection.events[0] + "]").addClass("k-state-selected");
+                event = that.content.add(that.datesHeader.children())
+                            .children("[data-uid=" + selection.events[0] + "]")
+                            .addClass("k-state-selected");
 
-                //TODO: refactor
                 if (!event[0]) {
-                    if (selection.isAllDay) {
-                        table = that.datesHeader.find("table.k-scheduler-header-all-day")[0];
-                    }
-                    $(table.rows[row].cells[col]).addClass("k-state-selected");
+                    that._selectCell(row, col, isAllDay);
                 }
             } else {
-                if (selection.isAllDay) {
-                    table = that.datesHeader.find("table.k-scheduler-header-all-day")[0];
-                }
-                $(table.rows[row].cells[col]).addClass("k-state-selected");
+                that._selectCell(row, col, isAllDay);
             }
+        },
+        _selectCell: function(row, col, isAllDay) {
+            var that = this,
+                table = that.content.children("table")[0],
+                cell;
+
+            if (isAllDay) {
+                table = that.datesHeader.find("table.k-scheduler-header-all-day")[0];
+            }
+
+            cell = table.rows[row].cells[col];
+            $(cell).addClass("k-state-selected");
+
+            that._scrollTo(cell, that.content[0]);
+        },
+
+        _scrollTo: function(element, container) {
+            var elementOffset = element.offsetTop,
+                elementOffsetDir = element.offsetHeight,
+                containerScroll = container.scrollTop,
+                containerOffsetDir = container.clientHeight,
+                bottomDistance = elementOffset + elementOffsetDir,
+                result = 0;
+
+                if (containerScroll > elementOffset) {
+                    result = elementOffset;
+                } else if (bottomDistance > (containerScroll + containerOffsetDir)) {
+                    if (elementOffsetDir <= containerOffsetDir) {
+                        result = (bottomDistance - containerOffsetDir);
+                    } else {
+                        result = elementOffset;
+                    }
+                } else {
+                    result = containerScroll;
+                }
+                container.scrollTop = result;
         },
 
         right: function(selection) {
