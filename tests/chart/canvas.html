@@ -54,7 +54,7 @@
                 };
 
             var ContextStub = makeStub([
-                ["arc", ["x", "y", "r"]],
+                ["arc", ["x", "y", "r", "startAngle", "endAngle", "anticlockwise"]],
                 ["beginPath"],
                 ["closePath"],
                 ["fill"],
@@ -709,7 +709,13 @@
 
                 test("renders circle", function() {
                     circle.render(ctx);
-                    deepEqual(ctx.log.arc[0], { x: 10, y: 20, r: 30 });
+                    deepEqual(ctx.log.arc[0], {
+                        x: 10, y: 20,
+                        r: 30,
+                        startAngle: 0,
+                        endAngle: Math.PI * 2,
+                        anticlockwise: false
+                    });
                 });
 
                 test("renders fill color", function() {
@@ -732,168 +738,142 @@
                     equal(ctx.lineWidth, 2);
                 });
 
-            })();
-
-            (function() {
-                var clipPath;
-
-                module("SVGClipPath", {
-                    setup: function() {
-                        clipPath = new dataviz.SVGClipPath();
-                    }
-                });
-
-                test("renders id in IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = true;
-
-                    clipPath = new dataviz.SVGClipPath({ id: "1" });
-                    ok(clipPath.render().indexOf(" id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders id in non-IE", function() {
-                    var msie = kendo.support.browser.msie;
-                    kendo.support.browser.msie = false;
-
-                    clipPath = new dataviz.SVGClipPath({ id: "1" });
-                    ok(clipPath.render().indexOf(" id='1'") > -1);
-
-                    kendo.support.browser.msie = msie;
-                });
-
-                test("renders clipPath tag", function() {
-                    equal(clipPath.render().replace(/\<clipPath.*?\>/, "<clipPath>"),
-                        "<clipPath></clipPath>");
-                });
-
-                test("renders id", function() {
-                    clipPath.options.id = "id";
-                    ok(clipPath.render().indexOf("id='id'") > -1);
+                test("saves/restores style stack", function() {
+                    circle.render(ctx);
+                    equal(ctx.log.save.length, 1);
+                    equal(ctx.log.restore.length, 1);
                 });
 
             })();
 
             (function() {
-                var sector;
+                var ring,
+                    ctx;
 
-                module("SVGSector", {
+                module("CanvasRing", {
                     setup: function() {
-                        sector = new dataviz.SVGSector(
-                            new dataviz.Sector(
-                                new Point2D(135, 135), 135, 90, 20
+                        ring = new dataviz.CanvasRing(
+                            new dataviz.Ring(
+                                new Point2D(135, 135), 10, 135, 90, 20
                             )
                         );
+                        ctx = new ContextStub();
                     }
                 });
 
-                test("renders sector tag", function() {
-                    equal(sector.render().replace(/\<path.*?\>/, "<path>"),
-                        "<path></path>");
+                test("renders inner arc", function() {
+                    ring.render(ctx);
+
+                    deepEqual(ctx.log.arc[1], {
+                        x: 135, y: 135,
+                        r: 10,
+                        startAngle: 290 * DEG_TO_RAD,
+                        endAngle: 270 * DEG_TO_RAD,
+                        anticlockwise: true
+                    });
                 });
 
-                test("renders radius", function() {
-                    ok(sector.render().indexOf("A135 135") > -1);
+                test("renders connector to outer arc", function() {
+                    ring.render(ctx);
+
+                    deepEqual(ctx.log.lineTo[0], {
+                        x: 138.42, y: 125.603
+                    });
+                });
+
+                test("renders outer arc", function() {
+                    ring.render(ctx);
+
+                    var arc = ctx.log.arc[0];
+                    delete arc.anticlockwise;
+
+                    deepEqual(arc, {
+                        x: 135, y: 135,
+                        r: 135,
+                        startAngle: 270 * DEG_TO_RAD,
+                        endAngle: 290 * DEG_TO_RAD
+                    });
+                });
+
+                test("does not render inner arc if inner radius is 0", function() {
+                    ring.config.ir = 0;
+                    ring.render(ctx);
+
+                    equal(ctx.log.arc.length, 1);
+                });
+
+                test("renders connector to center if inner radius is 0", function() {
+                    ring.config.ir = 0;
+                    ring.render(ctx);
+
+                    deepEqual(ctx.log.lineTo[0], {
+                        x: 135, y: 135
+                    });
                 });
 
                 test("renders fill color", function() {
-                    sector.options.fill = "#f00";
-                    ok(sector.render().indexOf("fill='#f00'") > -1);
-                });
+                    ring.options.fill = "#f00";
+                    ring.render(ctx);
 
-                test("renders empty fill when no fill is set", function() {
-                    sector.options.fill = "";
-                    ok(sector.render().indexOf("fill='none") > -1);
+                    equal(ctx.fillStyle, "#f00");
                 });
 
                 test("renders stroke color", function() {
-                    sector.options.stroke = "#f00";
-                    ok(sector.render().indexOf("stroke='#f00'") > -1);
-                });
+                    ring.options.strokeWidth = 1;
+                    ring.options.stroke = "#f00";
+                    ring.render(ctx);
 
-                test("renders single pie sector with angle 360", function() {
-                    sector = new dataviz.SVGSector(
-                            new dataviz.Sector(
-                                new Point2D(135, 135), 135, 90, 360
-                            )
-                        );
-
-                    ok(sector.render().indexOf("d='M 135 0 A135 135 0 1,1 134.882 0 L 135 135 z'") > -1);
+                    equal(ctx.strokeStyle, "#f00");
                 });
 
                 test("renders stroke width", function() {
-                    sector.options.strokeWidth = "2";
-                    ok(sector.render().indexOf("stroke-width='2'") > -1);
+                    ring.options.strokeWidth = 2;
+                    ring.options.stroke = "#f00";
+                    ring.render(ctx);
+
+                    equal(ctx.lineWidth, 2);
                 });
 
-                test("renders id", function() {
-                    sector.options.id = "id";
-                    ok(sector.render().indexOf("id='id'") > -1);
-                });
-
-                test("renders data attributes", function() {
-                    sector.options.data = { testId: 1 };
-                    ok(sector.render().indexOf("data-test-id='1'") > -1);
-                });
-
-                test("renders render curve with angle < 180 degrese", function() {
-                    ok(sector.render().indexOf("A135 135 0 0,1 181.173 8.141") > -1);
-                });
-
-                test("renders render curve with angle > 180 degrese", function() {
-                    sector = new dataviz.SVGSector(
-                        new dataviz.Sector(
-                            new Point2D(135, 135), 135, 90, 200
+                test("renders arc from 0 to 2*PI if angle is 360", function() {
+                    ring = new dataviz.CanvasRing(
+                        new dataviz.Ring(
+                            new Point2D(135, 135), 0, 135, 90, 360
                         )
                     );
+                    ring.render(ctx);
 
-                    ok(sector.render().indexOf("A135 135 0 1,1 88.827 261.859") > -1);
+                    var arc = ctx.log.arc[0];
+                    delete arc.anticlockwise;
+
+                    deepEqual(arc, {
+                        x: 135, y: 135,
+                        r: 135,
+                        startAngle: 0,
+                        endAngle: Math.PI * 2
+                    });
                 });
 
                 test("clone returns different instance", function() {
-                    notEqual(sector.clone(), sector);
+                    notEqual(ring.clone(), ring);
                 });
 
-                test("clone returns SVGSector", function() {
-                    ok(sector.clone() instanceof dataviz.SVGSector);
+                test("clone returns CanvasRing", function() {
+                    ok(ring.clone() instanceof dataviz.CanvasRing);
                 });
 
-                test("clone copies circleSector", function() {
-                    deepEqual(sector.clone().cricleSector, sector.cricleSector);
+                test("clone copies config", function() {
+                    deepEqual(ring.clone().config, ring.config);
                 });
 
                 test("clone copies options", function() {
-                    sector.options.id = "1";
-                    equal(sector.clone().options.id, "1");
+                    ring.options.id = "1";
+                    equal(ring.clone().options.id, "1");
                 });
 
-            })();
-
-            (function() {
-                var ring;
-
-                module("SVGRing", {
-                    setup: function() {
-                        var ringConfig = new dataviz.Ring(
-                                new Point2D(135, 135), 100, 135, -30, 240
-                            );
-                        ring = new dataviz.SVGRing(ringConfig);
-                    }
-                });
-
-                test("renders path", function() {
-                    equal(ring.render().replace(/\<path.*?\>/, "<path>"),
-                        "<path></path>");
-                });
-
-                test("renders radius", function() {
-                    ok(ring.render().indexOf("A135 135") > -1);
-                });
-
-                test("renders data attributes", function() {
-                    ring.options.data = { testId: 1 };
-                    ok(ring.render().indexOf("data-test-id='1'") > -1);
+                test("saves/restores style stack", function() {
+                    ring.render(ctx);
+                    equal(ctx.log.save.length, 1);
+                    equal(ctx.log.restore.length, 1);
                 });
 
             })();

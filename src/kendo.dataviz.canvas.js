@@ -371,20 +371,17 @@ kendo_module({
         },
 
         options: {
-            fill: "",
-            fillOpacity: 1,
-            strokeOpacity: 1,
             strokeLineCap: SQUARE
         },
 
-        renderPoints: function(context) {
+        renderPoints: function(ctx) {
             var ring = this,
-                ringConfig = ring.config,
-                startAngle = ringConfig.startAngle,
-                endAngle = ringConfig.angle + startAngle,
-                r = math.max(ringConfig.r, 0),
-                ir = math.max(ringConfig.ir, 0),
-                center = ringConfig.c,
+                config = ring.config,
+                startAngle = config.startAngle,
+                endAngle = config.angle + startAngle,
+                r = math.max(config.r, 0),
+                ir = math.max(config.ir, 0),
+                c = config.c,
                 startRadians = toRadians(startAngle),
                 endRadians = toRadians(endAngle);
 
@@ -395,32 +392,27 @@ kendo_module({
                 endRadians = 2 * Math.PI;
             }
 
-            var firstOuterPoint = ringConfig.point(startAngle),
-                secondInnerPoint = ringConfig.point(endAngle, true);
+            var firstOuterPoint = config.point(startAngle),
+                secondInnerPoint = config.point(endAngle, true);
 
-            context.moveTo(firstOuterPoint.x, firstOuterPoint.y);
-            context.arc(center.x, center.y, r, startRadians, endRadians);
+            ctx.moveTo(firstOuterPoint.x, firstOuterPoint.y);
+            ctx.arc(c.x, c.y, r, startRadians, endRadians);
 
             if (ir > 0) {
-                context.lineTo(secondInnerPoint.x, secondInnerPoint.y);
-                context.arc(center.x, center.y, ir, endRadians, startRadians, true);
+                ctx.lineTo(secondInnerPoint.x, secondInnerPoint.y);
+                ctx.arc(c.x, c.y, ir, endRadians, startRadians, true);
             } else {
-                context.lineTo(center.x, center.y);
+                ctx.lineTo(c.x, c.y);
             }
         },
 
         clone: function() {
-            var ring = this;
             return new CanvasRing(
-                deepExtend({}, ring.config),
-                deepExtend({}, ring.options)
+                deepExtend({}, this.config),
+                deepExtend({}, this.options)
             );
         }
     });
-
-    function toRadians(degrees) {
-        return ((degrees + 540) % 360) * DEG_TO_RAD;
-    }
 
     var CanvasPin = CanvasPath.extend({
         init: function(config, options) {
@@ -581,6 +573,11 @@ kendo_module({
     };
 
     // Helpers ================================================================
+    // TODO: Move to dataviz.core?
+    function toRadians(degrees) {
+        return ((degrees + 540) % 360) * DEG_TO_RAD;
+    }
+
     function alignToPixel(coord) {
         return math.round(coord) + 0.5;
     }
