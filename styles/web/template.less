@@ -630,6 +630,15 @@ td.k-state-focused,
     .box-shadow(@focused-item-shadow);
 }
 
+.k-state-focused.k-state-selected,
+.k-list>.k-state-focused.k-state-selected,
+.k-listview>.k-state-focused.k-state-selected,
+td.k-state-focused.k-state-selected,
+.k-button:focus:active
+{
+    .box-shadow(@focused-active-item-shadow);
+}
+
 .k-ie8 .k-panelbar span.k-state-focused,
 .k-ie8 .k-menu li.k-state-focused,
 .k-ie8 .k-listview>.k-state-focused,
