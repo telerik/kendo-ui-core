@@ -1400,7 +1400,7 @@ kendo_module({
 
                     var eventDurationInDays = Math.ceil((end - start) / kendo.date.MS_PER_DAY);
 
-                    if (!event.isAllDay && eventDurationInDays === 1 && kendo.date.getDate(end).getTime() !== kendo.date.getDate(start).getTime()) {
+                    if (eventDurationInDays === 1 && kendo.date.getDate(end).getTime() !== kendo.date.getDate(start).getTime()) {
                         eventDurationInDays += 1;
                     }
 

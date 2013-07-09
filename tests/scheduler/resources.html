@@ -1605,6 +1605,36 @@
                 equal(view._rows[0].events[2].end, 12);
             });
 
+            test("one day event is split in the correct slots when grouped by date in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "date", "ResourceName", "ResourceName2"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/7 00:00"), isAllDay: true, title: "Event 1", foo: 1 }
+                    ],
+                    views: ["week"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view._rows[0].events.length, 2);
+                equal(view._rows[0].events[0].start, 8);
+                equal(view._rows[0].events[0].end, 8);
+                equal(view._rows[0].events[1].end, 10);
+                equal(view._rows[0].events[1].end, 10);
+            });
+
+
             test("group index is set to the row slot with horizontal grouping in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
