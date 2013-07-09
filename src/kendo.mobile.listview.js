@@ -583,6 +583,7 @@ kendo_module({
                     scroller.reset();
 
                     if (listView.element.is(":visible")) {
+                        buffer.range(0);
                         list.refresh();
                     } else {
                         list._needsRefresh = true;
