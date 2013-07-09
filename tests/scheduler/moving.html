@@ -116,7 +116,7 @@
             test("moving all day event in week view changes its start and end time", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    startTime: new Date("2013/6/6 10:00"),
+                    startTime: new Date("2013/6/6 8:00"),
                     views: ["week"],
                     dataSource: [
                         { isAllDay: true, start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 10:10"), title: "" }
@@ -163,6 +163,110 @@
                 equal(scheduler.dataSource.at(0).end.getHours(), 10);
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 10);
                 equal(scheduler.dataSource.at(0).end.getDate(), 5);
+            });
+
+            test("moving event in month view changes its start and end time", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 10:10"), title: "" }
+                    ]
+                });
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+                var handle = div.find(".k-event");
+
+                dragdrop(scheduler, handle, slots.eq(1));
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 00);
+                equal(scheduler.dataSource.at(0).start.getDate(), 3);
+                equal(scheduler.dataSource.at(0).end.getHours(), 10);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 10);
+                equal(scheduler.dataSource.at(0).end.getDate(), 3);
+            });
+
+            test("moving event in month view changes its start and end time relatively to the current slot", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/4 10:10"), title: "" }
+                    ]
+                });
+
+                var slots = div.find(".k-scheduler-content td:nth-child(3)");
+                var handle = div.find(".k-event");
+
+                var offset = handle.offset();
+
+                offset.left += slots.first().outerWidth() + 10;
+
+                dragdrop(scheduler, handle, offset, slots.eq(1));
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 00);
+                equal(scheduler.dataSource.at(0).start.getDate(), 3);
+                equal(scheduler.dataSource.at(0).end.getHours(), 10);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 10);
+                equal(scheduler.dataSource.at(0).end.getDate(), 5);
+            });
+
+            test("moving event in month view before the view start", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/26 10:00"), end: new Date("2013/5/27 10:10"), title: "" }
+                    ]
+                });
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+                var handle = div.find(".k-event");
+
+                var offset = handle.offset();
+
+                offset.left += slots.first().outerWidth() + 10;
+
+                dragdrop(scheduler, handle, offset, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 00);
+                equal(scheduler.dataSource.at(0).start.getDate(), 25);
+                equal(scheduler.dataSource.at(0).start.getMonth(), 4);
+                equal(scheduler.dataSource.at(0).end.getHours(), 10);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 10);
+                equal(scheduler.dataSource.at(0).end.getDate(), 26);
+                equal(scheduler.dataSource.at(0).end.getMonth(), 4);
+            });
+
+            test("moving event in month view after the view start", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/7/5 10:00"), end: new Date("2013/7/6 10:10"), title: "" }
+                    ]
+                });
+
+                var slots = div.find(".k-scheduler-content td:nth-child(7)");
+                var handle = div.find(".k-event");
+
+                dragdrop(scheduler, handle, slots.eq(5));
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 00);
+                equal(scheduler.dataSource.at(0).start.getDate(), 6);
+                equal(scheduler.dataSource.at(0).start.getMonth(), 6);
+                equal(scheduler.dataSource.at(0).end.getHours(), 10);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 10);
+                equal(scheduler.dataSource.at(0).end.getDate(), 7);
+                equal(scheduler.dataSource.at(0).end.getMonth(), 6);
             });
 
             test("moving event in week view changes its start and end time relatively to the current slot", function() {

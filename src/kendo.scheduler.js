@@ -531,20 +531,36 @@ kendo_module({
                         return;
                     }
 
-                    startSlot = view._updateMoveHint(event, slot, slotOffset);
+                    startSlot = slot;
+
+                    view._updateMoveHint(event, slot, slotOffset);
                 },
                 dragend: function() {
-                    var start = startSlot.start;
-
                     that.view()._removeMoveHint();
 
-                    if (event.start.getTime() != start.getTime()) {
-                        var duration = event.end.getTime() - event.start.getTime();
+                    var duration = event.end.getTime() - event.start.getTime();
 
-                        var end = new Date(start.getTime());
+                    var start = new Date(startSlot.start.getTime());
 
-                        kendo.date.setTime(end, duration);
+                    var slotDuration = startSlot.end.getTime() - start.getTime();
 
+                    if (slotDuration === 0) {
+                        slotDuration = kendo.date.MS_PER_DAY;
+                    }
+
+                    kendo.date.setTime(start, -slotOffset * slotDuration);
+
+                    if (startSlot.isAllDay) {
+                        start = kendo.date.getDate(start);
+
+                        kendo.date.setTime(start, getMilliseconds(event.start));
+                    }
+
+                    var end = new Date(start.getTime());
+
+                    kendo.date.setTime(end, duration);
+
+                    if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
                         that._updateEvent(null, event, { start: start, end: end });
                     }
                 }

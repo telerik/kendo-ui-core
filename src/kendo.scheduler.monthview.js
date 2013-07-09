@@ -466,6 +466,82 @@ kendo_module({
             this._resizeHint.last().find(".k-label-bottom").text(kendo.toString(endSlot.start, "M/dd"));
         },
 
+       _updateMoveHint: function(event, startSlot, slotOffset) {
+            var duration = event.end.getTime() - event.start.getTime();
+
+            var start = new Date(startSlot.start.getTime());
+
+            var slotDuration = kendo.date.MS_PER_DAY;
+
+            kendo.date.setTime(start, -slotOffset * slotDuration);
+
+            start = kendo.date.getDate(start);
+
+            kendo.date.setTime(start, kendo.date.getMilliseconds(event.start));
+
+            var end = new Date(start.getTime());
+
+            kendo.date.setTime(end, duration);
+
+            var startSlotIndex = this._slotIndex(start);
+            var endSlotIndex = this._slotIndex(end);
+
+            if (startSlotIndex == null) {
+                startSlotIndex = endSlotIndex;
+            }
+
+            if (endSlotIndex == null) {
+                endSlotIndex = startSlotIndex;
+            }
+
+            var slots = this._row.slots;
+
+            startSlot = slots[startSlotIndex];
+
+            var endSlot = slots[endSlotIndex];
+
+            var slotGroup = {
+               startSlot: startSlot,
+               endSlot: endSlot
+            };
+
+            var slotGroups = [slotGroup];
+
+            for (var slotIndex = startSlot.index; slotIndex <= endSlot.index; slotIndex++) {
+                var currentSlot = slots[slotIndex];
+
+                if (currentSlot.offsetTop > slotGroup.endSlot.offsetTop) {
+                    slotGroup = {
+                        startSlot: currentSlot,
+                        endSlot: currentSlot
+                    };
+                    slotGroups.push(slotGroup);
+                } else {
+                    slotGroup.endSlot = currentSlot;
+                }
+            }
+
+            this._removeMoveHint();
+
+            for (var groupIndex = 0; groupIndex < slotGroups.length; groupIndex++) {
+                slotGroup = slotGroups[groupIndex];
+
+                startSlot = slotGroup.startSlot;
+
+                endSlot = slotGroup.endSlot;
+
+                var hint = this._createEventElement(event);
+
+                hint.css({
+                    left: startSlot.offsetLeft + 2,
+                    top: startSlot.offsetTop + startSlot.firstChildHeight,
+                    height: this.options.eventHeight,
+                    width: this._calculateAllDayEventWidth(this._row.slots, startSlot.index, endSlot.index) - (startSlot.index !== endSlot.index ? 5 : 4)
+                });
+                hint.appendTo(this.content);
+                this._moveHint = this._moveHint.add(hint);
+            }
+       },
        _slots: function() {
             var row = {
                 slots: [],
@@ -493,6 +569,7 @@ kendo_module({
                    start: start,
                    end: start,
                    element: cell,
+                   isAllDay: true,
                    index: idx
                 });
             }
