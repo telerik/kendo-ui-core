@@ -52,10 +52,10 @@ kendo_module({
                         '<span class="k-icon k-i-arrow-e"></span>' +
                     '#}#' +
                 '</span>' +
-                '#if(!singleDay && !data.tail && !data.middle){#' +
+                '#if(resizable && !singleDay && !data.tail && !data.middle){#' +
                 '<span class="k-resize-handle k-resize-w"></span>' +
                 '#}#' +
-                '#if(!singleDay && !data.head && !data.middle){#' +
+                '#if(resizable && !singleDay && !data.head && !data.middle){#' +
                 '<span class="k-resize-handle k-resize-e"></span>' +
                 '#}#' +
                 '</div>',
@@ -87,10 +87,10 @@ kendo_module({
                         '<span class="k-icon k-i-arrow-s"></span>' +
                     '# } #' +
                 '</span>' +
-                '# if(!(data.tail && data.middle)) {#' +
+                '# if(resizable && !data.tail && !data.middle) {#' +
                 '<span class="k-resize-handle k-resize-n"></span>' +
                 '# } #' +
-                '# if(!(data.head && data.middle)) {#' +
+                '# if(resizable && !data.head && !data.middle) {#' +
                     '<span class="k-resize-handle k-resize-s"></span>' +
                 '# } #' +
                 '</div>';
@@ -1117,7 +1117,9 @@ kendo_module({
        _createEventElement: function(event, isOneDayEvent) {
             var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
             var options = this.options;
-            var showDelete = options.editable && options.editable.destroy !== false;
+            var editable = options.editable;
+            var showDelete = editable && editable.destroy !== false;
+            var resizable = editable && editable.resize !== false;
             var startDate = getDate(this.startDate());
             var endDate = getDate(this.endDate());
             var startTime = getMilliseconds(options.startTime);
@@ -1143,6 +1145,7 @@ kendo_module({
 
             return $(template(extend({}, {
                 ns: kendo.ns,
+                resizable: resizable,
                 showDelete: showDelete,
                 middle: middle,
                 head: head,

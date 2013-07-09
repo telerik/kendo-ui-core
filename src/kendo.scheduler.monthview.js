@@ -40,10 +40,10 @@ kendo_module({
                         '<span class="k-icon k-i-arrow-e"></span>' +
                     '#}#' +
                 '</span>' +
-                '# if(!data.tail && !data.middle) {#' +
+                '# if(resizable && !data.tail && !data.middle) {#' +
                 '<span class="k-resize-handle k-resize-w"></span>' +
                 '#}#' +
-                '# if(!data.head && !data.middle) {#' +
+                '# if(resizable && !data.head && !data.middle) {#' +
                 '<span class="k-resize-handle k-resize-e"></span>' +
                 '#}#' +
                 '</div>',
@@ -252,8 +252,10 @@ kendo_module({
 
        _createEventElement: function(event) {
             var options = this.options;
+            var editable = options.editable;
 
-            event.showDelete = options.editable && options.editable.destroy !== false;
+            event.showDelete = editable && editable.destroy !== false;
+            event.resizable = editable && editable.resize !== false;
             event.ns = kendo.ns;
             event.resources = this.eventResources(event);
 

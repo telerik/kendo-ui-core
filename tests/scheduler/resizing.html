@@ -94,6 +94,60 @@
                 equal(div.find(".k-event > .k-resize-e").length, 0);
             });
 
+            test("week view does not render resize handles when editable is set to false", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    editable: false,
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), isAllDay: true, title: "" },
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-resize-e,.k-resize-w,.k-resize-s,.k-resize-n").length, 0);
+            });
+
+            test("month view does not render resize handles when editable is set to false", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    editable: false,
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-resize-e,.k-resize-w").length, 0);
+            });
+
+            test("week view does not render resize handles when editable.resize is set to false", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    editable: { resize: false },
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), isAllDay: true, title: "" },
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-resize-e,.k-resize-w,.k-resize-s,.k-resize-n").length, 0);
+            });
+
+            test("month view does not render resize handles when editable.resize is set to false", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    editable: { resize: false },
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                equal(div.find(".k-resize-e,.k-resize-w").length, 0);
+            });
+
             test("day view does not render west resize handle", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
