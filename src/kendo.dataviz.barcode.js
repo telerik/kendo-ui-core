@@ -1541,9 +1541,9 @@
             that.options = $.extend(true,that.options, options);
             that.redraw();
         },
-                
+
         redraw: function () {
-            
+
             var that = this,
                 options = that.options,
                 textOptions = options.text,
@@ -1582,17 +1582,17 @@
 
             that.view.renderTo(that.element[0]);
         },
-        _getSize: function(){            
+        _getSize: function(){
             var that = this,
                 element = that.element,
                 size = {width:DEFAULT_WIDTH,height:DEFAULT_HEIGHT};
-            
+
             if(element.width()>0){
                 size.width = element.width();
             }
             if(element.height()>0){
                 size.height = element.height();
-            }            
+            }
             if(that.options.width){
                size.width = that.options.width;
             }
