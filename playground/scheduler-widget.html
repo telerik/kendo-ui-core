@@ -57,7 +57,6 @@
        $("#scheduler").kendoScheduler({
            startTime: new Date(2013, 1,1, 7,0,0),
             endTime: new Date(2013, 1,1, 16,0,0),
-            allDaySlot: false,
             views: ["week"],
             groupBy: ["Owner"],
             groupOrientation: "horizontal",
@@ -83,7 +82,6 @@
                 }*/
             ],
             timezone: "Etc/UTC",
-            editable:false,
             dataSource: {
                 batch: true,
                 transport: {

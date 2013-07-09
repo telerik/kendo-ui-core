@@ -486,6 +486,7 @@ kendo_module({
             var endSlot;
             var event;
             var that = this;
+            var slotOffset;
 
             that._moveDraggable = new kendo.ui.Draggable(that.element, {
                 distance: 0,
@@ -505,6 +506,10 @@ kendo_module({
 
                     startSlot = view._slotByPosition(offset.left, offset.top);
 
+                    var slot = view._slotByPosition(e.x.location, e.y.location);
+
+                    slotOffset = slot.index - startSlot.index;
+
                     eventElement = events.last();
 
                     offset = eventElement.offset();
@@ -522,9 +527,11 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    startSlot = slot;
+                    if (!slot) {
+                        return;
+                    }
 
-                    view._updateMoveHint(event, slot);
+                    startSlot = view._updateMoveHint(event, slot, slotOffset);
                 },
                 dragend: function() {
                     var start = startSlot.start;

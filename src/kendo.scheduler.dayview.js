@@ -168,7 +168,7 @@ kendo_module({
             that._slots();
        },
 
-       _allDaySlotToDaySlot: function(slot) {
+       _toDaySlot: function(slot) {
             if (!slot.isAllDay) {
                 return slot;
             }
@@ -177,7 +177,7 @@ kendo_module({
             return this._columns[dateSlotIndex].slots[0];
        },
 
-       _daySlotToAllDaySlot: function(slot) {
+       _toAllDaySlot: function(slot) {
             if (slot.isAllDay) {
                 return slot;
             }
@@ -189,11 +189,11 @@ kendo_module({
             var vertical = direction == "south" || direction == "north";
 
             if (vertical) {
-                startSlot = this._allDaySlotToDaySlot(startSlot);
-                endSlot = this._allDaySlotToDaySlot(endSlot);
+                startSlot = this._toDaySlot(startSlot);
+                endSlot = this._toDaySlot(endSlot);
             } else {
-                startSlot = this._daySlotToAllDaySlot(startSlot);
-                endSlot = this._daySlotToAllDaySlot(endSlot);
+                startSlot = this._toAllDaySlot(startSlot);
+                endSlot = this._toAllDaySlot(endSlot);
             }
 
             var left = startSlot.offsetLeft + parseInt($(startSlot.element).css("borderLeftWidth"), 10);
@@ -232,8 +232,19 @@ kendo_module({
                             .find(".k-label-bottom").text(kendo.toString(endSlot.end, format));
         },
 
-        _updateMoveHint: function(event, startSlot) {
-            var isAllDay = startSlot.isAllDay;
+        _updateMoveHint: function(event, startSlot, slotOffset) {
+            var isAllDay = event.isAllDay || event.end.getTime() - event.start.getTime() > MS_PER_DAY;
+            var slots;
+
+            if (isAllDay) {
+                startSlot = this._toAllDaySlot(startSlot);
+                slots = this._rows[0].slots;
+            } else {
+                startSlot = this._toDaySlot(startSlot);
+                slots = this._columns[this._dateSlotIndex(startSlot.start)].slots;
+            }
+
+            startSlot = slots[startSlot.index - slotOffset];
 
             if (!this._moveHint.length) {
                 this._moveHint = this._createEventElement(event, !isAllDay);
@@ -268,6 +279,8 @@ kendo_module({
             }
 
             this._moveHint.css(css);
+
+            return startSlot;
         },
 
        _slotByPosition: function(x, y) {
