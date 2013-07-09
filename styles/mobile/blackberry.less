@@ -1,6 +1,9 @@
 /* Platform specific BlackBerry CSS */
 
-@blackberry-active-color: #00aae7;
+@blackberry-main-color: #000;
+@blackberry-main-background: #fff;
+@blackberry-active-color: #fff;
+@blackberry-active-background: #00aae7;
 @blackberry-border-color: #f0f0f0;
 @blackberry-border-radius: 3px;
 @blackberry-light-background: #e6e6e6;
@@ -13,8 +16,8 @@
 .km-blackberry,
 .km-blackberry .km-content
 {
-    color: #000;
-    background: #fff;
+    color: @blackberry-main-color;
+    background: @blackberry-main-background;
 }
 
 .km-blackberry .km-navbar,
@@ -26,7 +29,7 @@
 .km-blackberry li.km-actionsheet-cancel > a
 {
     font-weight: normal;
-    color: #000;
+    color: @blackberry-main-color;
     border: 0;
     .border-radius(@blackberry-border-radius);
     background-color: @blackberry-light-background;
@@ -34,7 +37,8 @@
     .box-shadow(~"0 1px 4px 0 rgba(0,0,0,.3)");
 }
 
-.km-blackberry .km-button
+.km-blackberry .km-button,
+.km-blackberry .km-buttongroup
 {
     text-align: center;
     padding: .44em 1em;
@@ -47,7 +51,7 @@
 
 .km-blackberry .km-navbar .km-button
 {
-    color: #fff;
+    color: @blackberry-active-color;
     .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,0));
 }
 
@@ -65,8 +69,14 @@
     background-color: inherit;
     border: inherit;
     .border-radius(inherit);
-    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.2), inset 0 0 0 2px rgba(0,0,0,.1)");
     z-index: -1;
+}
+
+.km-blackberry .km-button:after,
+.km-blackberry .km-buttongroup,
+.km-blackberry .km-button:before
+{
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.2), inset 0 0 0 2px rgba(0,0,0,.1)");
 }
 
 .km-blackberry .km-button:before
@@ -90,8 +100,8 @@
 .km-blackberry .km-dialog-title
 {
     text-align: center;
-    color: #fff;
-    text-shadow: 0 1px 0 #000;
+    color: @blackberry-active-color;
+    text-shadow: 0 1px 0 @blackberry-main-color;
     font-size: 1.2em;
     line-height: 2.4em;
     font-weight: bold;
@@ -105,8 +115,8 @@
 .km-blackberry .km-badge,
 .km-blackberry .km-detail
 {
-    color: #FFF;
-    background-color: #057fe4;
+    color: @blackberry-active-color;
+    background-color: @blackberry-active-background;
 }
 
 .km-blackberry .km-badge
@@ -114,7 +124,7 @@
     min-width: 1em;
     font-size: .7rem;
     .border-radius(~"2rem");
-    .box-shadow(0 0 0 1px #fff);
+    .box-shadow(0 0 0 1px @blackberry-active-color);
 }
 
 .km-blackberry .km-detail
@@ -173,15 +183,15 @@
     display: none;
 }
 
-.km-blackberry .km-button:not([disabled]):active,
-.km-blackberry .km-button.km-state-active:not([disabled]),
+.km-blackberry .km-button:active,
+.km-blackberry .km-button.km-state-active,
 .km-blackberry .km-buttongroup .km-state-active,
 .km-blackberry input[type=file]:active,
 .km-blackberry input[type=file]:focus,
 .km-blackberry li.km-actionsheet-cancel > a:hover,
 .km-blackberry li.km-actionsheet-cancel > a:active
 {
-    color: #fff;
+    color: @blackberry-active-color;
     background-color: rgba(0,0,0,.2);
 }
 
@@ -196,7 +206,7 @@
 .km-blackberry .km-content .km-button:active,
 .km-blackberry .km-content .km-button.km-state-active
 {
-    background-color: @blackberry-active-color;
+    background-color: @blackberry-active-background;
 }
 
 .km-blackberry .km-content .km-button:after
@@ -259,13 +269,13 @@
 
 .km-blackberry .km-switch-label-off
 {
-    color: #000;
+    color: @blackberry-main-color;
     left: 3.6em;
 }
 
 .km-blackberry .km-switch-label-on
 {
-    color: #fff;
+    color: @blackberry-active-color;
     left: -3.6em;
 }
 
@@ -280,41 +290,55 @@
 
 .km-blackberry .km-buttongroup
 {
+    padding: .2em;
     .border-radius(@blackberry-border-radius);
-    border: 0;
-    font-size: 1em;
     border-collapse: separate;
-    .box-shadow(~"inset 0 0 0 1px rgba(0,0,0,.2), 0 1px 0 0 rgba(0,0,0,.1)");
+    background-image: none;
+    border: transparent;
 }
 
 .km-blackberry .km-navbar .km-buttongroup
 {
     font-size: .8em;
+    text-shadow: none;
     top: 0;
-    margin-bottom: .3em;
+    margin-top: .16em;
     height: auto;
-    line-height: 1.4rem;
+    line-height: 1.2em;
 }
 
 .km-blackberry .km-buttongroup > .km-button
 {
+    color: @blackberry-active-color;
     display: inline-block;
     border-right-width: 1px;
-    margin: 0 5px 0 0;
     float: left;
     .box-shadow(none);
+}
+
+.km-blackberry .km-content .km-buttongroup > .km-button
+{
+    margin: 0 5px 0 0;
+    color: @blackberry-main-color;
+}
+
+.km-blackberry .km-buttongroup > .km-button:after,
+.km-blackberry .km-buttongroup > .km-button:before
+{
+    display: none;
 }
 
 .km-blackberry .km-header > .km-buttongroup .km-button,
 .km-blackberry .km-footer > .km-buttongroup .km-button,
 .km-blackberry .km-content .km-buttongroup .km-button
 {
-    padding: .6rem 1.6rem;
+    padding: .3em 1.5em;
 }
 
 .km-root .km-blackberry .km-view .km-buttongroup > .km-state-active
 {
     .border-radius(@blackberry-border-radius);
+    background: transparent;
 }
 
 .km-blackberry .km-buttongroup > .km-button:not(.km-state-active)
@@ -344,12 +368,12 @@
     margin-top: 0;
     padding: .2em 0;
     border-top: 1px solid @blackberry-border-color;
-    border-bottom: 2px solid @blackberry-active-color;
+    border-bottom: 2px solid @blackberry-active-background;
 }
 
 .km-blackberry .km-scroll-header .km-group-title
 {
-    background-color: #fff;
+    background-color: @blackberry-main-background;
 }
 
 .km-blackberry .km-list > li
@@ -384,8 +408,8 @@
 .km-blackberry a.km-listview-link:active,
 .km-blackberry .km-state-active a.km-listview-link
 {
-    .box-shadow(inset 0 0 0 2px @blackberry-active-color);
-    background: fade(@blackberry-active-color, 50%);
+    .box-shadow(inset 0 0 0 2px @blackberry-active-background);
+    background: fade(@blackberry-active-background, 50%);
 }
 
 .km-blackberry .km-listview-link:after
@@ -433,10 +457,10 @@
     margin-bottom: .54rem;
 }
 
-.km-blackberry .km-no-title
+.km-blackberry.km-horizontal .km-no-title
 {
-    padding-top: .4rem;
-    padding-bottom: .4rem;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
 }
 
 .km-blackberry.km-vertical .km-no-title
@@ -497,7 +521,7 @@
 {
     background: rgba(255,255,255,.1);
     border-top: 2px solid #057fe4;
-    .box-shadow(~"0 1px 5px #000");
+    .box-shadow(0 1px 5px @blackberry-main-color);
 }
 
 .km-blackberry .km-tabstrip.km-vertical .km-button
@@ -556,9 +580,17 @@
     margin: .2rem auto .1rem;
 }
 
-.km-blackberry .km-button .km-icon
+.km-blackberry .km-button .km-icon,
+.km-blackberry .km-buttongroup .km-button:active .km-icon,
+.km-blackberry .km-buttongroup .km-state-active .km-icon
 {
     color: #057fe4;
+}
+
+.km-blackberry .km-buttongroup *:active .km-icon:before,
+.km-blackberry .km-buttongroup .km-state-active .km-icon:before
+{
+    display: none;
 }
 
 .km-blackberry .km-listview-link .km-icon
@@ -872,8 +904,8 @@
 .km-blackberry select:not([multiple]):focus,
 .km-blackberry .k-dropdown .k-state-focused
 {
-    color: #fff;
-    background-color: #45bfff;
+    color: @blackberry-active-color;
+    background-color: @blackberry-active-background;
 }
 
 .km-blackberry .km-list .k-dropdown .k-input
@@ -883,21 +915,21 @@
 
 .km-blackberry .k-dropdown .k-state-focused .k-input
 {
-    color: #fff;
+    color: @blackberry-active-color;
 }
 
 .km-blackberry select:not([multiple]):focus option
 {
-    color: #000;
-    background-color: #fff;
+    color: @blackberry-main-color;
+    background-color: @blackberry-main-background;
 }
 
 /* PopUp */
 
 .km-blackberry .km-popup .k-item
 {
-    color: #000;
-    background: #fff;
+    color: @blackberry-main-color;
+    background: @blackberry-main-background;
     padding: 0 1em;
     border: 0;
 }
@@ -906,19 +938,19 @@
 .km-blackberry .km-popup .k-state-focused,
 .km-blackberry .km-popup .k-state-selected
 {
-    color: #fff;
-    background: #0990e9;
+    color: @blackberry-active-color;
+    background: @blackberry-active-background;
     .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.2));
 }
 
 .km-blackberry .km-popup .k-state-hover
 {
-    background-color: rgba(9,144,233,.8);
+    background-color: fade(@blackberry-active-background, 80%);
 }
 
 .km-blackberry .km-popup .k-list-container
 {
-    background: #fff;
+    background: @blackberry-main-background;
     margin-right: 1px;
     margin-bottom: 1px;
     border: 1px solid #777;
@@ -1072,7 +1104,7 @@
     max-height: 80%;
     border: 0;
     background-color: @blackberry-light-background;
-    color: #fff;
+    color: @blackberry-active-color;
     vertical-align: middle;
     padding: .5em;
     .border-radius(@blackberry-border-radius);
@@ -1367,7 +1399,7 @@
     padding: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: @blackberry-main-background;
     .border-radius(0);
     .box-shadow(none);
 }
@@ -1398,8 +1430,8 @@
 .km-tablet .km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:focus,
 .km-tablet .km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:active
 {
-    color: #fff;
-    background: #0868b2;
+    color: @blackberry-active-color;
+    background: @blackberry-active-background;
     .linear-gradient-image(top, rgba(255,255,255,.3), rgba(255,255,255,0));
 }
 

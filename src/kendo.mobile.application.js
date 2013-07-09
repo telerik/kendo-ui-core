@@ -254,7 +254,7 @@ kendo_module({
             }
 
             if (ENABLE_CLIP) {
-                size = window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight;
+                size = (window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight) + 100;
                 $(clipTemplate({ width: size, height: size })).appendTo(HEAD);
             }
 
