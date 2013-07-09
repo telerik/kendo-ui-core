@@ -1541,26 +1541,29 @@
             that.options = $.extend(true,that.options, options);
             that.redraw();
         },
+                
         redraw: function () {
+            
             var that = this,
                 options = that.options,
                 textOptions = options.text,
+                size = that._getSize(),
                 border = options.border || {},
                 encoding = that.encoding,
-                contentBox = Box2D(0, 0, options.width, options.height).unpad(border.width).unpad(options.padding),
+                contentBox = Box2D(0, 0, size.width, size.height).unpad(border.width).unpad(options.padding),
                 barHeight = contentBox.height(),
                 result, textToDisplay;
 
             that.contentBox = contentBox;
             that.view.children = [];
-            that.addBackground();
+            that.addBackground(size);
             var textHeight = dataviz.measureText( contentBox,{ font: options.text.font }).height;
 
             if (textOptions.visible) {
                 barHeight -= textHeight;
             }
 
-            result = encoding.encode(options.value,options.width-(options.padding.left+options.padding.right), barHeight);
+            result = encoding.encode(options.value,size.width-(options.padding.left+options.padding.right), barHeight);
 
             if (textOptions.visible) {
                 textToDisplay = options.value;
@@ -1572,12 +1575,32 @@
             }
             that.barHeight = barHeight;
 
-            that.view.options.width = that.options.width;
-            that.view.options.height = that.options.height;
+            that.view.options.width = size.width;
+            that.view.options.height = size.height;
 
             that.addElements(result.pattern, result.baseUnit);
 
             that.view.renderTo(that.element[0]);
+        },
+        _getSize: function(){            
+            var that = this,
+                element = that.element,
+                size = {width:DEFAULT_WIDTH,height:DEFAULT_HEIGHT};
+            
+            if(element.width()>0){
+                size.width = element.width();
+            }
+            if(element.height()>0){
+                size.height = element.height();
+            }            
+            if(that.options.width){
+               size.width = that.options.width;
+            }
+            if(that.options.height){
+               size.height = that.options.height;
+            }
+
+            return size;
         },
         value: function(value){
             var that = this;
@@ -1617,11 +1640,11 @@
                 position+= step;
             }
         },
-        addBackground: function () {
+        addBackground: function (size) {
             var that = this,
                 options = that.options,
                 border = options.border || {},
-                box = Box2D(0,0, options.width, options.height).unpad(border.width / 2),
+                box = Box2D(0,0, size.width, size.height).unpad(border.width / 2),
                 rect = that.view.createRect(box, {
                     fill: options.background,
                     stroke: border.width ? border.color : "",
@@ -1659,8 +1682,8 @@
             value: "",
             type: "code39",
             checksum: false,
-            width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT,
+            width: 0,
+            height: 0,
             color: "black",
             background: "white",
             text: {
