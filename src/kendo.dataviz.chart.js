@@ -4371,8 +4371,7 @@ kendo_module({
                     points.push(Point2D(prevPoint.box.x1, prevPoint.markerBox().center().y));
                     points.push(Point2D(prevPoint.box.x2, prevPoint.markerBox().center().y));
                     if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
-                        points.push(Point2D(prevPoint.box.x2 + (point.box.x1 - prevPoint.box.x2) / 2, prevPoint.markerBox().center().y));
-                        points.push(Point2D(prevPoint.box.x2 + (point.box.x1 - prevPoint.box.x2) / 2, point.markerBox().center().y));
+                        points.push(Point2D(prevPoint.box.x2, point.markerBox().center().y));
                     }
                     points.push(Point2D(point.box.x1, point.markerBox().center().y));
                     points.push(Point2D(point.box.x2, point.markerBox().center().y));
