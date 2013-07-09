@@ -1334,19 +1334,14 @@
 
 .km-blackberry .km-modalview .km-navbar,
 .km-blackberry .km-modalview .km-toolbar,
-.km-blackberry .km-splitview .km-navbar,
-.km-blackberry .km-splitview .km-toolbar,
-.km-blackberry .km-modalview > :first-child,
-.km-blackberry .km-splitview .km-view > :first-child
+.km-blackberry .km-modalview > :first-child
 {
     .border-radius(@blackberry-border-radius @blackberry-border-radius 0 0);
     -webkit-border-top-left-radius: @blackberry-border-radius;
     -webkit-border-top-right-radius: @blackberry-border-radius;
 }
 
-.km-blackberry .km-splitview .km-tabstrip,
-.km-blackberry .km-modalview > :last-child,
-.km-blackberry .km-splitview .km-view > :last-child
+.km-blackberry .km-modalview > :last-child
 {
     .border-radius(0 0 @blackberry-border-radius @blackberry-border-radius);
     -webkit-border-bottom-left-radius: @blackberry-border-radius;
