@@ -1502,6 +1502,16 @@ kendo_module({
                 };
 
                 view.bind("navigate", that._viewNavigateHandler);
+
+                that._viewRenderHandler = function(e) {
+                    if (that._selection) {
+                        this.offsetSelection(that._selection);
+                        console.log(that._selection.start);
+                        this.select(that._selection);
+                    }
+                };
+
+                view.bind("render", that._viewRenderHandler);
             }
         },
 
@@ -1555,6 +1565,20 @@ kendo_module({
             this.refresh();
         },
 
+        _adjustSelectedDate: function(date) {
+            var selection = this._selection, start;
+
+            if (selection) {
+                start = selection.start;
+                if (!kendo.date.isInDateRange(date, start, selection.end)) {
+                    this._model.selectedDate = date = new Date(date);
+                    date.setFullYear(start.getFullYear(), start.getMonth(), start.getDate());
+                }
+            }
+
+            return date;
+        },
+
         _initializeView: function(name) {
             var view = this.views[name];
 
@@ -1567,7 +1591,7 @@ kendo_module({
                 }
 
                 if (type) {
-                    view = new type(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date() })));
+                    view = new type(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {}, { resources: this.resources, date: this._adjustSelectedDate(this.date()) })));
                 } else {
                     throw new Error("There is no such view");
                 }

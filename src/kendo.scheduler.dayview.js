@@ -795,6 +795,32 @@ kendo_module({
             return kendo.date.nextDay(this.endDate());
         },
 
+        offsetSelection: function(selection) {
+            var offset = this._dates.length,
+                startDate = this._startDate,
+                endDate = this._endDate,
+                start = selection.start,
+                end = selection.end;
+
+            if (start <= startDate || end >= endDate) {
+                if (start > endDate) {
+                    offset = -offset;
+                }
+
+                start.setDate(start.getDate() + offset);
+                if (start < startDate) {
+                    start.setFullYear(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+                }
+
+                end.setDate(end.getDate() + offset);
+                if (end > endDate) {
+                    end.setFullYear(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+                }
+
+                selection.events = [];
+            }
+        },
+
         previousDate: function() {
             return kendo.date.previousDay(this.startDate());
         },
@@ -1389,6 +1415,7 @@ kendo_module({
             }
 
             this.refreshLayout();
+            this.trigger("render");
         },
 
         _resourceBySlot: function(slot) {
