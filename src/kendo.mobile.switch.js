@@ -74,8 +74,8 @@ kendo_module({
 
         options: {
             name: "Switch",
-            onLabel: "ON",
-            offLabel: "OFF",
+            onLabel: "on",
+            offLabel: "off",
             checked: null
         },
 

@@ -2,10 +2,12 @@
 
 @blackberry-main-color: #000;
 @blackberry-main-background: #fff;
+@blackberry-second-background: #f0f0f0;
 @blackberry-active-color: #fff;
 @blackberry-active-background: #00aae7;
 @blackberry-border-color: rgba(180,180,180,.3);
 @blackberry-border-radius: 3px;
+@blackberry-switch-radius: 2em;
 @blackberry-light-background: #e6e6e6;
 
 .km-blackberry
@@ -225,79 +227,74 @@
     background-color: transparent;
 }
 
+/* Switch */
+
 .km-blackberry .km-switch
 {
-    font-weight: normal;
-    font-family: HelveticaNeue, Arial, sans-serif;
-    height: 2em;
-    line-height: 2em;
-    width: 8em;
+    width: 6rem;
+    height: 2rem;
+    line-height: 2rem;
 }
 
 .km-blackberry .km-switch-wrapper
 {
-    border-radius: 6px;
-}
-
-.km-blackberry .km-switch-background,
-.km-blackberry .km-slider-background
-{
-    margin-left: -7em;
-    background: 8.5em 0 no-repeat #0074dc;
-    .linear-gradient-image(top, rgb(219,219,219), rgb(238,238,238) 50%);
-}
-
-.km-blackberry .km-switch-background:after
-{
-    content: "\a0";
-    display: inline-block;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    line-height: 100%;
-    vertical-align: bottom;
-    .linear-gradient-image(top,  rgba(255,255,255,.3), rgba(255,255,255,0));
+    display: none;
 }
 
 .km-blackberry .km-switch-container
 {
-    .border-radius(4px);
-    border: 1px solid #888;
-    .linear-gradient-image(top, rgba(0,0,0,.2), rgba(0,0,0,0) 5%, rgba(0,0,0,0));
+    padding: 1px 0 1px 0;
+    .box-sizing(border-box);
+    border: 1px solid @blackberry-border-color;
+    background-color: @blackberry-second-background;
 }
 
 .km-blackberry .km-switch-handle
 {
-    margin: 0;
-    width: 4em;
-    height: 100%;
-    background: #cfd3d6;
-    .linear-gradient-image(top, rgba(255,255,255,.95), rgba(255,255,255,.85) 50%, rgba(255,255,255,.5));
-    .border-radius(4px);
-    .box-shadow(~"inset 0 0 0 1px #fff, 0 0 5px rgba(0,0,0,.5)");
-    margin-right: 2px;
+    border: 1px solid @blackberry-border-color;
+    background: @blackberry-main-background;
+    width: 1.7em;
+    margin: -1px 2px 0 0;
+    border: 1px solid rgba(0,0,0,.1);
+}
+
+.km-blackberry .km-switch-off .km-switch-handle
+{
 }
 
 .km-blackberry .km-switch-label-off
 {
-    color: @blackberry-main-color;
-    left: 3.6em;
+    left: 1.7em;
 }
 
 .km-blackberry .km-switch-label-on
 {
-    color: @blackberry-active-color;
-    left: -3.6em;
+    left: -4.1em;
 }
 
 .km-blackberry .km-switch-label-on,
 .km-blackberry .km-switch-label-off
 {
+    color: @blackberry-main-color;
+    text-transform: capitalize;
     text-shadow: none;
-    font-size: 1.1em;
-    width: 100%;
-    line-height: 1.9em;
+    width: 240%;
+    line-height: 1.8em;
+    vertical-align: middle;
 }
+
+.km-blackberry .km-switch-container,
+.km-blackberry .km-switch-background
+{
+    .border-radius(@blackberry-switch-radius + 1px);
+}
+
+.km-blackberry .km-switch-handle
+{
+    .border-radius(@blackberry-switch-radius);
+}
+
+/* ButtonGroup */
 
 .km-blackberry .km-buttongroup
 {
