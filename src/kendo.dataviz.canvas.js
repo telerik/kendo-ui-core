@@ -258,7 +258,9 @@ kendo_module({
                 return;
             }
 
-            line.setRotation(ctx);
+            if (options.rotation[0] !== 0) {
+                line.setRotation(ctx);
+            }
 
             p = points[0];
             ctx.moveTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
@@ -493,7 +495,6 @@ kendo_module({
     });
 
     // Helpers ================================================================
-    // TODO: Move to dataviz.core?
     function toRadians(degrees) {
         return ((degrees + 540) % 360) * DEG_TO_RAD;
     }
