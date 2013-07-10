@@ -1615,11 +1615,17 @@ kendo_module({
         },
 
         right: function(selection) {
+            if (selection.events[0]) {
+                selection.events = [];
+            }
             selection.start = kendo.date.addDays(selection.start, 1);
             selection.end = kendo.date.addDays(selection.end, 1);
         },
 
         left: function(selection) {
+            if (selection.events[0]) {
+                selection.events = [];
+            }
             selection.start = kendo.date.addDays(selection.start, -1);
             selection.end = kendo.date.addDays(selection.end, -1);
         },
@@ -1630,6 +1636,15 @@ kendo_module({
                 endTime = this.options.endTime,
                 start = new Date(selection.start),
                 end = new Date(selection.end);
+
+            if (selection.events[0]) {
+                start = new Date(end);
+                end = new Date(start);
+
+                kendo.date.setTime(start, -interval);
+
+                selection.events = [];
+            }
 
             if (selection.isAllDay) {
                 start = new Date(start.getFullYear(), start.getMonth(), start.getDate(), startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
@@ -1658,6 +1673,10 @@ kendo_module({
                 startTime = this.options.startTime,
                 start = new Date(selection.start),
                 end = new Date(selection.end);
+
+            if (selection.events[0]) {
+                selection.events = [];
+            }
 
             kendo.date.setTime(start, -interval);
             kendo.date.setTime(end, -interval);
