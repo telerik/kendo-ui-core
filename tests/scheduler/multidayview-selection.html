@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler MultidayView selection</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler MultidayView selection</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var MultiDayView = kendo.ui.MultiDayView,
+                container;
+
+            var MyDayView = MultiDayView.extend({
+                init: function(element, options) {
+                    var that = this;
+
+                    MultiDayView.fn.init.call(that, element, options);
+                },
+                calculateDateRange: function() {
+                    this._render(this.options.dates);
+                }
+            });
+
+            function setup(options) {
+                options = options || [];
+                return new MyDayView(container, $.extend({ majorTick: 120 }, options));
+            }
+
+            module("Multi Day View selection", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container).addClass("k-scheduler").css({
+                        width: 1000,
+                        height: 800
+                    });
+                },
+                teardown: function() {
+                    $(container).remove();
+                }
+            });
+
+            test("View moves selection using week length as offset", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] });
+                var selection = {
+                    start: new Date(2013, 6, 6),
+                    end: new Date(2013, 6, 6, 0, 30)
+                };
+
+                view.moveSelectionByOffset(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 8));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 30));
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

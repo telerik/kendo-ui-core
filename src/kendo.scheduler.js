@@ -1510,7 +1510,7 @@ kendo_module({
                 that._viewRenderHandler = function() {
                     var view = this;
                     if (that._selection) {
-                        view.adjustSelection(that._selection);
+                        view.moveSelectionByOffset(that._selection);
                         view.select(that._selection);
 
                         that._adjustSelectedDate();

@@ -1519,8 +1519,12 @@ kendo_module({
             return rowLevel ? rowLevel.length : 0;
         },
 
-        adjustSelection: function(selection) {
-            var offset = this._dates.length,
+        _selectionOffset: function() {
+            return this._dates.length;
+        },
+
+        moveSelectionByOffset: function(selection) {
+            var offset = this._selectionOffset(),
                 startDate = this._startDate,
                 endDate = this._endDate,
                 start = selection.start,
