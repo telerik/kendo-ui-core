@@ -213,6 +213,15 @@
                 equal(cells.length, 50);
             });
 
+            test("View clear selection before new select", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+
+                view.select(createSelection(new Date(2013, 6, 7)));
+                view.select(createSelection(new Date(2013, 6, 7, 0, 30)));
+
+                equal(view.content.find(".k-state-selected").length, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -1561,19 +1561,20 @@ kendo_module({
 
         select: function(selection) {
             var that = this,
-                startCol = Math.ceil(that._dateSlotIndex(selection.start)),
                 startRow = Math.ceil(that._timeSlotIndex(selection.start)),
-                endCol = Math.ceil(that._dateSlotIndex(selection.end)),
                 endRow = Math.ceil(that._timeSlotIndex(selection.end)),
-                isAllDay = selection.isAllDay,
-                event,
+                startCol = that._dateSlotIndex(selection.start),
+                endCol = that._dateSlotIndex(selection.end),
+                //isAllDay = selection.isAllDay,
+                table = that.content.children("table")[0],
+                event, cell,
                 end;
 
-            if (endRow > 0) {
+            if (startRow !== endRow && endRow > 0) {
                 endRow -= 1;
             }
 
-            //that.clearSelection();
+            that.clearSelection();
 
             /*if (selection.events && selection.events.length) {
                 event = that.content.add(that.datesHeader.children())
@@ -1599,14 +1600,17 @@ kendo_module({
                 }
 
                 for (; startRow <= end; startRow++) {
-                    that._selectCell(startRow, startCol); //, isAllDay);
+                    cell = table.rows[startRow].cells[startCol];
+                    cell.className = addSelectedState(cell.className);
                 }
 
                 startRow = 0;
             }
+
+            that._scrollTo(cell, that.content[0]);
         },
 
-        _selectCell: function(row, col, isAllDay) {
+        /*_selectCell: function(row, col, isAllDay) {
             var that = this,
                 table = that.content.children("table")[0],
                 cell;
@@ -1619,7 +1623,7 @@ kendo_module({
             $(cell).addClass("k-state-selected");
 
             that._scrollTo(cell, that.content[0]);
-        },
+        },*/
 
         _scrollTo: function(element, container) {
             var elementOffset = element.offsetTop,
@@ -1809,6 +1813,11 @@ kendo_module({
             return found;
         }
     });
+
+    var selectedStateRegExp = /\s*k-state-selected/;
+    function addSelectedState(className) {
+        return className.replace(selectedStateRegExp, "") + " k-state-selected";
+    }
 
     function setDate(date1, date2) {
         date1.setFullYear(date2.getFullYear(), date2.getMonth(), date2.getDate());
