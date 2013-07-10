@@ -1400,17 +1400,23 @@ kendo_module({
 
             if (resources.length) {
                 var index = isVertical ? slot.index : slot.columnIndex;
+                var offset = 0;
+
+                if (this._isGroupedByDate()) {
+                    offset = 1; // skip the date header in the levels calculation
+                    //offset the index as we are not the first header
+                    index -= Math.floor(index/this._columnCountInGroup())*this._columnCountInGroup();
+                }
 
                 for (var idx = 0, length = resources.length; idx < length; idx++) {
                     var resource = resources[idx];
 
                     var columnCount;
-
                     if (isVertical) {
                         var allDaySlotOffset = this.options.allDaySlot ? this._rowCountForLevel(resources.length - 1) : 0;
                         columnCount = (this._rowCountForLevel(resources.length) - allDaySlotOffset) / this._rowCountForLevel(idx);
                     } else {
-                        columnCount = this._columnCountForLevel(resources.length) / this._columnCountForLevel(idx);
+                        columnCount = this._columnCountForLevel(resources.length) / this._columnCountForLevel(idx + offset);
                     }
 
                     var groupIndex = Math.floor(index/columnCount);

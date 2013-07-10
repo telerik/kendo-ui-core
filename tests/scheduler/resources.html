@@ -2154,6 +2154,94 @@
                 equal(view._columns[0].events[0].end, 96);
             });
 
+            test("double clicking a week view cell triggers add event with resources information and horizontal grouped by date", 4, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["date", "ResourceName", "ResourceName2"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+
+                    ],
+                    dataSource: [ ],
+                    views: ["week"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date(2013, 5, 3, 2, 0, 0));
+                    deepEqual(event.end, new Date(2013, 5, 3, 2, 30, 0));
+
+                    equal(event.foo, 2);
+                    equal(event.bar[0], 1);
+                });
+
+                var cell = view.content.find("tr:eq(4) td:eq(6)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+            test("double clicking a week view all day cell triggers add event with resources information and horizontal grouped by date", 4, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["date", "ResourceName", "ResourceName2"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+
+                    ],
+                    dataSource: [ ],
+                    views: ["week"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date(2013, 5, 3, 0, 0, 0));
+                    deepEqual(event.end, new Date(2013, 5, 3, 0, 0, 0));
+
+                    equal(event.foo, 2);
+                    equal(event.bar[0], 1);
+                });
+
+                var cell = view.datesHeader.find(".k-scheduler-header-all-day td:eq(6)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
