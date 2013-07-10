@@ -513,7 +513,7 @@ kendo_module({
 
     // Exports ================================================================
     if (supportsCanvas) {
-        dataviz.ViewFactory.current.register("canvas", CanvasView, 0);
+        dataviz.ViewFactory.current.register("canvas", CanvasView, 30);
     }
 
     deepExtend(dataviz, {
