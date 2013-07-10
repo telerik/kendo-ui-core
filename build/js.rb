@@ -144,7 +144,8 @@ DATAVIZ_JS = FileList[
     "src/kendo.dataviz.stock.js",
     "src/kendo.dataviz.sparkline.js",
     "src/kendo.dataviz.svg.js",
-    "src/kendo.dataviz.vml.js"
+    "src/kendo.dataviz.vml.js",
+    "src/kendo.dataviz.canvas.js"
 ]
 
 DATAVIZ_SRC_JS = FileList[DATAVIZ_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.dataviz.js').exclude('**/*.min.js')
@@ -238,7 +239,8 @@ WIN_JS = FileList[
     "src/kendo.dataviz.barcode.js",
     "src/kendo.dataviz.stock.js",
     "src/kendo.dataviz.sparkline.js",
-    "src/kendo.dataviz.svg.js"
+    "src/kendo.dataviz.svg.js",
+    "src/kendo.dataviz.canvas.js"
 ]
 
 WIN_MIN_JS = FileList['src/kendo.winjs.min.js']

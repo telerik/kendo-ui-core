@@ -15,6 +15,7 @@
         <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/kendo.dataviz.canvas.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
 
@@ -58,55 +59,83 @@
                 }
 
                 // ------------------------------------------------------------
-                module("View", {
+                var viewFactory;
+                module("Views / View Factory", {
                     setup: function() {
-                        dataviz.SVGView._available = dataviz.SVGView.available;
-                        dataviz.VMLView._available = dataviz.VMLView.available;
-
-                        createChart();
-                    },
-                    teardown: function() {
-                        dataviz.SVGView.available = dataviz.SVGView._available;
-                        dataviz.VMLView.available = dataviz.VMLView._available;
+                        viewFactory = new dataviz.ViewFactory;
                     }
                 });
 
-                test("SVGView is created if browser supports SVG", function() {
-                    dataviz.SVGView.available = function() { return true; };
-                    createChart();
-                    ok(chart._view instanceof dataviz.SVGView);
+                test("registers views in ascending order", function() {
+                    viewFactory.register("bar", Object, 1);
+                    viewFactory.register("foo", Object, 0);
+
+                    equal(viewFactory._views[0].name, "foo");
                 });
 
-                test("VMLView is created if browser does not support SVG, but supports VML", function() {
-                    dataviz.SVGView.available = function() { return false; };
-                    dataviz.VMLView.available = function() { return true; };
-                    createChart();
-                    ok(chart._view instanceof dataviz.VMLView);
+                test("instantiates view with options", function() {
+                    viewFactory.register("foo", function(options) { ok(options.bar); }, 0);
+
+                    viewFactory.create({ bar: true });
                 });
 
-                test("SVGView is created if browser does supports both SVG and VML", function() {
-                    dataviz.SVGView.available = function() { return true; };
-                    dataviz.VMLView.available = function() { return true; };
-                    createChart();
-                    ok(chart._view instanceof dataviz.SVGView);
+                test("instantiates default view", function() {
+                    viewFactory.register("foo", function() { ok(true); }, 0);
+                    viewFactory.register("bar", Object, 1);
+
+                    viewFactory.create();
                 });
 
-                asyncTest("logs warning if the browser does not support neither VML nor SVG", 1, function() {
-                    dataviz.SVGView.available = function() { return false; };
-                    dataviz.VMLView.available = function() { return false; };
+                test("instantiates preferred view", function() {
+                    viewFactory.register("foo", Object, 0);
+                    viewFactory.register("bar", function() { ok(true); }, 1);
 
+                    viewFactory.create({}, "bar");
+                });
+
+                test("ignores case of preferred view", function() {
+                    viewFactory.register("foo", Object, 0);
+                    viewFactory.register("bar", function() { ok(true); }, 1);
+
+                    viewFactory.create({}, "Bar");
+                });
+
+                test("instantiates default view if the preferred is unavailable", function() {
+                    viewFactory.register("foo", function() { ok(true); }, 0);
+                    viewFactory.register("bar", Object, 1);
+
+                    viewFactory.create({}, "baz");
+                });
+
+                asyncTest("logs warning if no views are registered", 1, function() {
                     stubMethod(kendo, "logToConsole", function(message) {
                         ok(message.indexOf("Warning: KendoUI DataViz cannot render.") > -1);
                         start();
                     }, function() {
-                        createChart();
+                        viewFactory.create();
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("Views", {
+                    setup: function() {
+                        createChart();
+                    }
                 });
 
                 test("sets dimensions on view element", 2, function() {
                     var view = chart._view;
                     equal(view.options.width, 600);
                     equal(view.options.height, 400);
+                });
+
+                asyncTest("uses preferred view specified in 'renderAs'", 1, function() {
+                    stubMethod(dataviz.ViewFactory.prototype, "create", function(options, preferred) {
+                        equal(preferred, "foo");
+                        start();
+                    }, function() {
+                        createChart({ renderAs: "foo" });
+                    });
                 });
 
                 // ------------------------------------------------------------

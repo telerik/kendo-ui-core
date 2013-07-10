@@ -35,6 +35,7 @@ for ($i = 0; $i < count($data); $i++) {
     $sparkline = new \Kendo\Dataviz\UI\Sparkline("bar-hourly-$i");
 
     $sparkline->type('bar')
+         ->renderAs('canvas')
          ->data($row['hourly'])
          ->addValueAxisItem($valueAxis)
          ->attr('style', 'width: 130px');
@@ -63,6 +64,7 @@ for ($i = 0; $i < count($data); $i++) {
     $sparkline = new \Kendo\Dataviz\UI\Sparkline("bar-change-$i");
 
     $sparkline
+         ->renderAs('canvas')
          ->addSeriesItem($series)
          ->addValueAxisItem($valueAxis)
          ->addCategoryAxisItem($categoryAxis)
@@ -80,6 +82,7 @@ for ($i = 0; $i < count($data); $i++) {
     $sparkline = new \Kendo\Dataviz\UI\Sparkline("bar-direct-$i");
 
     $sparkline->type('bar')
+         ->renderAs('canvas')
          ->data($row['direct'])
          ->addValueAxisItem($valueAxis)
          ->attr('style', 'width: 130px');
@@ -103,6 +106,7 @@ for ($i = 0; $i < count($data); $i++) {
     $sparkline = new \Kendo\Dataviz\UI\Sparkline("bar-benefits-$i");
 
     $sparkline
+         ->renderAs('canvas')
          ->dataSource($dataSource)
          ->addSeriesItem($series)
          ->addValueAxisItem($valueAxis)

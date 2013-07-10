@@ -364,7 +364,6 @@ kendo_module({
         _redraw: function() {
             var chart = this,
                 model = chart._getModel(),
-                viewType = dataviz.ui.defaultView(),
                 view;
 
             chart._destroyView();
@@ -372,8 +371,11 @@ kendo_module({
             chart._model = model;
             chart._plotArea = model._plotArea;
 
-            if (viewType) {
-                view = chart._view = viewType.fromModel(model);
+            view = chart._view =
+                dataviz.ViewFactory.current.create(model.options, chart.options.renderAs);
+
+            if (view) {
+                view.load(model);
                 chart._viewElement = chart._renderView(view);
                 chart._tooltip = chart._createTooltip();
                 chart._highlight = new Highlight(view, chart._viewElement);
@@ -406,13 +408,6 @@ kendo_module({
         _renderView: function() {
             var chart = this;
             return chart._view.renderTo(chart.element[0]);
-        },
-
-        svg: function() {
-            var model = this._getModel(),
-                view = dataviz.SVGView.fromModel(model);
-
-            return view.render();
         },
 
         _applyDefaults: function(options, themeOptions) {
@@ -1198,6 +1193,12 @@ kendo_module({
             }
 
             if (view) {
+                view.traverse(function(element) {
+                    var id = element.options.id;
+                    if (id) {
+                        pool.free(id);
+                    }
+                });
                 view.destroy();
             }
 
@@ -1207,6 +1208,7 @@ kendo_module({
                 });
             }
 
+
             if (selections) {
                 while (selections.length > 0) {
                     selections.shift().destroy();
@@ -1214,6 +1216,7 @@ kendo_module({
             }
         }
     });
+    deepExtend(Chart.fn, dataviz.ExportMixin);
 
     var PlotAreaFactory = Class.extend({
         init: function() {
@@ -6249,11 +6252,16 @@ kendo_module({
                 view = pane.view,
                 element = getElement(pane.options.id);
 
-            if (view && element) {
-                element.parentNode.replaceChild(
-                    view.renderElement(pane.getViewElements(view)[0]),
-                    element
-                );
+            if (view) {
+                var content = pane.getViewElements(view)[0];
+                if (element) {
+                    element.parentNode.replaceChild(
+                        view.renderElement(content),
+                        element
+                    );
+                } else if (view.replace) {
+                    view.replace(content, pane.box);
+                }
             }
         }
     });

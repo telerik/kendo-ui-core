@@ -12,6 +12,7 @@
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.gauge.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.canvas.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="../chart/util.js"></script>
         <script>
@@ -20,7 +21,7 @@
                 gauge;
 
             (function() {
-                function createRadialGauge(options) {
+                function createGauge(options) {
                     gaugeElement = $("<div />").kendoRadialGauge(kendo.deepExtend({
                         pointer: {
                             value: 50
@@ -35,9 +36,10 @@
                     gauge = gaugeElement.data("kendoRadialGauge");
                 }
 
-                module("Gauge API / Radial", {
+                // ------------------------------------------------------------
+                module("Radial Gauge / API", {
                     setup: function() {
-                        createRadialGauge();
+                        createGauge();
                     }
                 });
 
@@ -45,6 +47,7 @@
                     var calls = 0,
                         usedValue;
 
+                    gauge._view.renderElement = function() { };
                     gauge._pointers[0].value = function(value) {
                         calls++;
                         usedValue = value;
@@ -57,7 +60,7 @@
                 });
 
                 test("value(x) does not fail with transitions disabled", function() {
-                    createRadialGauge({ transitions: false });
+                    createGauge({ transitions: false });
                     gauge.value(10);
                     ok(true);
                 });
@@ -68,19 +71,47 @@
                     equal(gauge.value(), 11);
                 });
 
+                test("value(x) updates value in options", function() {
+                    gauge.value(11);
+
+                    equal(gauge.options.pointer.value, 11);
+                });
+
+                test("value(x) calls redraw if view does not support updates", function() {
+                    gauge._view.renderElement = undefined;
+                    gauge.redraw = function() { ok(true); };
+                    gauge.value(11);
+                });
+
+                // ------------------------------------------------------------
+                var SVGView,
+                    CanvasView,
+                    supportsCanvas;
+
+                module("Radial Gauge / API / Export", {
+                    setup: function() {
+                        createGauge();
+
+                        SVGView = dataviz.SVGView;
+                        CanvasView = dataviz.CanvasView;
+                        supportsCanvas = dataviz.supportsCanvas;
+                    },
+                    teardown: function() {
+                        dataviz.SVGView = SVGView;
+                        dataviz.CanvasView = CanvasView;
+                        dataviz.supportsCanvas = supportsCanvas;
+                    }
+                });
+
                 test("svg() exports SVG", function() {
                     ok(gauge.svg().match(/<svg.*<\/svg>/));
                 });
 
-                test("svg() exports to SVG when the browser does not support SVG and VML", function() {
-                    function unavailable() { return false; }
+                test("svg() throws error if SVGView is not loaded", function() {
+                    dataviz.SVGView = undefined;
 
-                    stubMethod(dataviz.SVGView, "available", unavailable, function() {
-                        stubMethod(dataviz.VMLView, "available", unavailable, function() {
-                            createRadialGauge();
-                            ok(gauge.svg().match(/<svg.*<\/svg>/));
-                        });
-                    });
+                    throws(function() { gauge.svg() },
+                           "Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
                 });
 
                 test("svg() does not replace model", function() {
@@ -92,6 +123,46 @@
                 test("svg() does not replace view", function() {
                     var oldView = gauge._view;
                     gauge.svg();
+                    ok(oldView === gauge._view);
+                });
+
+                test("imageDataURL() exports image/png", function() {
+                    ok(gauge.imageDataURL().match(/image\/png/));
+                });
+
+                test("imageDataURL() throws error if CanvasView is not loaded", function() {
+                    dataviz.CanvasView = undefined;
+
+                    throws(function() { gauge.imageDataURL() },
+                           "Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+                });
+
+                test("imageDataURL() returns null if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    equal(gauge.imageDataURL(), null);
+                });
+
+                asyncTest("imageDataURL logs warning if Canvas is not supported", function() {
+                    dataviz.supportsCanvas = function() { return false; }
+
+                    stubMethod(kendo, "logToConsole", function(message) {
+                        ok(message.indexOf("Warning: Unable to generate image.") > -1);
+                        start();
+                    }, function() {
+                        gauge.imageDataURL();
+                    });
+                });
+
+                test("imageDataURL() does not replace model", function() {
+                    var oldModel = gauge._model;
+                    gauge.imageDataURL();
+                    ok(oldModel === gauge._model);
+                });
+
+                test("imageDataURL() does not replace view", function() {
+                    var oldView = gauge._view;
+                    gauge.imageDataURL();
                     ok(oldView === gauge._view);
                 });
 
@@ -113,7 +184,7 @@
                     gauge = gaugeElement.data("kendoRadialGauge");
                 }
 
-                module("Gauge API / Linear", {
+                module("Linear Gauge / API", {
                     setup: function() {
                         gaugeElement = $("<div />").kendoLinearGauge({
                             pointer: {
@@ -129,6 +200,7 @@
                     var calls = 0,
                         usedValue;
 
+                    gauge._view.renderElement = function() { };
                     gauge._pointers[0].value = function(value) {
                         calls++;
                         usedValue = value;
@@ -151,6 +223,19 @@
 
                     equal(gauge.value(), 11);
                 });
+
+                test("value(x) updates value in options", function() {
+                    gauge.value(11);
+
+                    equal(gauge.options.pointer.value, 11);
+                });
+
+                test("value(x) calls redraw if view does not support updates", function() {
+                    gauge._view.renderElement = undefined;
+                    gauge.redraw = function() { ok(true); };
+                    gauge.value(11);
+                });
+
             })();
 
         </script>

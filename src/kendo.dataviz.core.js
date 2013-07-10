@@ -2241,6 +2241,19 @@ kendo_module({
 
         refresh: $.noop,
 
+        traverse: function(callback) {
+            var element = this,
+                children = element.children,
+                length,
+                i;
+
+            callback(element);
+
+            for (i = 0, length = children.length; i < length; i++) {
+                children[i].traverse(callback);
+            }
+        },
+
         compareChildren: function(a, b) {
             var aValue = a.options.zIndex || 0,
                 bValue = b.options.zIndex || 0;
@@ -2298,6 +2311,11 @@ kendo_module({
             while (animations.length > 0) {
                 animations.shift().destroy();
             }
+        },
+
+        load: function(model) {
+            var view = this;
+            view.children = model.getViewElements(view);
         },
 
         renderDefinitions: function() {
@@ -3034,6 +3052,7 @@ kendo_module({
 
             if (pool.length < that._size && !freed[id]) {
                 pool.push(id);
+
                 freed[id] = true;
             }
         }
@@ -3369,48 +3388,100 @@ kendo_module({
         return -v1.x * v2.y + v1.y * v2.x < 0;
     }
 
+    var ViewFactory = function() {
+        this._views = [];
+    };
+
+    ViewFactory.prototype = {
+        register: function(name, type, order) {
+            var views = this._views,
+                defaultView = views[0],
+                entry = {
+                    name: name,
+                    type: type,
+                    order: order
+                };
+
+            if (!defaultView || order < defaultView.order) {
+                views.unshift(entry);
+            } else {
+                views.push(entry);
+            }
+        },
+
+        create: function(options, preferred) {
+            var views = this._views,
+                match = views[0];
+
+            if (preferred) {
+                preferred = preferred.toLowerCase();
+                for (var i = 0; i < views.length; i++) {
+                    if (views[i].name === preferred) {
+                        match = views[i];
+                        break;
+                    }
+                }
+            }
+
+            if (match) {
+                return new match.type(options);
+            }
+
+            kendo.logToConsole(
+                "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
+                "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
+                "- The kendo.dataviz.(svg|vml|canvas).js scripts are not loaded");
+        }
+    };
+
+    ViewFactory.current = new ViewFactory();
+
+    var ExportMixin = {
+        svg: function() {
+            if (dataviz.SVGView) {
+                var model = this._getModel(),
+                    view = new dataviz.SVGView(model.options);
+
+                view.load(model);
+
+                return view.render();
+            } else {
+                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+            }
+        },
+
+        imageDataURL: function() {
+            if (dataviz.CanvasView) {
+                if (dataviz.supportsCanvas()) {
+                    var model = this._getModel(),
+                        container = document.createElement("div"),
+                        view = new dataviz.CanvasView(model.options);
+
+                    view.load(model);
+
+                    return view.renderTo(container).toDataURL();
+                } else {
+                    kendo.logToConsole(
+                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
+                        "User agent: " + navigator.userAgent);
+
+                    return null;
+                }
+            } else {
+                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+            }
+        }
+    };
+
     // Exports ================================================================
-    /**
-     * @name kendo.dataviz
-     * @namespace Contains Kendo DataViz.
-     */
     deepExtend(kendo.dataviz, {
         init: function(element) {
             kendo.init(element, kendo.dataviz.ui);
         },
-
-        /**
-         * @name kendo.dataviz.ui
-         * @namespace Contains Kendo DataViz UI widgets.
-         */
         ui: {
             roles: {},
             themes: {},
             views: [],
-            defaultView: function() {
-                var i,
-                    views = dataviz.ui.views,
-                    length = views.length;
-
-                for (i = 0; i < length; i++) {
-                    if (views[i].available()) {
-                        return views[i];
-                    }
-                }
-
-                kendo.logToConsole("Warning: KendoUI DataViz cannot render. Possible causes:\n" +
-                                    "- The browser does not support SVG or VML. User agent: " + navigator.userAgent + "\n" +
-                                    "- The kendo.dataviz.svg.js or kendo.dataviz.vml.js scripts are not loaded");
-            },
-            registerView: function(viewType) {
-                var defaultView = dataviz.ui.views[0];
-
-                if (!defaultView || viewType.preference > defaultView.preference) {
-                    dataviz.ui.views.unshift(viewType);
-                } else {
-                    dataviz.ui.views.push(viewType);
-                }
-            },
             plugin: function(widget) {
                 kendo.ui.plugin(widget, dataviz.ui);
             }
@@ -3426,6 +3497,14 @@ kendo_module({
         NOTE_CLICK: NOTE_CLICK,
         NOTE_HOVER: NOTE_HOVER,
         CLIP: CLIP,
+        DASH_ARRAYS: {
+            dot: [1.5, 3.5],
+            dash: [4, 3.5],
+            longdash: [8, 3.5],
+            dashdot: [3.5, 3.5, 1.5, 3.5],
+            longdashdot: [8, 3.5, 1.5, 3.5],
+            longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
+        },
 
         Axis: Axis,
         AxisLabel: AxisLabel,
@@ -3435,6 +3514,7 @@ kendo_module({
         Color: Color,
         ElementAnimation:ElementAnimation,
         ExpandAnimation: ExpandAnimation,
+        ExportMixin: ExportMixin,
         ArrowAnimation: ArrowAnimation,
         BarAnimation: BarAnimation,
         BarIndicatorAnimatin: BarIndicatorAnimatin,
@@ -3457,6 +3537,7 @@ kendo_module({
         Title: Title,
         ViewBase: ViewBase,
         ViewElement: ViewElement,
+        ViewFactory: ViewFactory,
 
         animationDecorator: animationDecorator,
         append: append,

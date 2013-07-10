@@ -25,6 +25,16 @@
 
         public string Value { get; set; }
 
+        /// <summary>
+        /// Gets or sets the render type.
+        /// </summary>
+        /// <value>The render type.</value>
+        public RenderingMode? RenderAs
+        {
+            get;
+            set;
+        }
+
         public string Background { get; set; }
 
         public BarcodeSymbology Encoding { get; set; }
@@ -71,6 +81,11 @@
             if (Value.HasValue())
             {
                 options["value"] = Value;
+            }
+
+            if (RenderAs.HasValue)
+            {
+                options["renderAs"] = RenderAs.ToString().ToLowerInvariant();
             }
 
             if (Background.HasValue())

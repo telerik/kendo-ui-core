@@ -91,5 +91,22 @@ namespace Kendo.Mvc.UI.Tests.Chart
 
             output.ShouldNotContain("\"data\"");
         }
+
+        [Fact]
+        public void RenderAs_false_serialized()
+        {
+            sparkline.RenderAs = RenderingMode.Canvas;
+            sparkline.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"renderAs\":\"canvas\"}");
+        }
+
+        [Fact]
+        public void RenderAs_default_not_serialized()
+        {
+            sparkline.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldNotContain("renderAs");
+        }
     }
 }

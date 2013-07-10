@@ -45,6 +45,10 @@ namespace Kendo.Mvc.UI
             SerializeData("gaugeArea", this.GaugeArea.CreateSerializer().Serialize(), options);
             SerializeData("pointer", this.Pointer.CreateSerializer().Serialize(), options);
             SerializeData("scale", this.Scale.CreateSerializer().Serialize(), options);
+            
+            if (RenderAs.HasValue) {
+                options.Add("renderAs", RenderAs.ToString().ToLowerInvariant());
+            }
 
             SerializeTheme(options);
             SerializeTransitions(options);

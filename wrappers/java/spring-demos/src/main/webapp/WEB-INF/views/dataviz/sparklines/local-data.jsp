@@ -27,14 +27,14 @@ for (int i = 0; i < model.size(); i++) {
             <td class="year"><%= row.getYear() %></td>
             <td class="hourly">
             	<kendo:sparkline name="<%= \"bar-hourly-\" + i %>" type="bar" data="<%= row.getHourly() %>"
-            					 style="width: 130px;">
+            					 renderAs="canvas" style="width: 130px;">
             		<kendo:sparkline-valueAxis>
             			<kendo:sparkline-valueAxisItem max="50"></kendo:sparkline-valueAxisItem>
             		</kendo:sparkline-valueAxis>
             	</kendo:sparkline>
             </td>
             <td class="change">
-            	<kendo:sparkline name="<%= \"bar-change-\" + i %>" style="width: 130px;">
+            	<kendo:sparkline name="<%= \"bar-change-\" + i %>" renderAs="canvas" style="width: 130px;">
             		<kendo:sparkline-series>
             			<kendo:sparkline-seriesItem type="bar" data="<%= new double[] { row.getChange() } %>"
             										negativeColor="#808080">
@@ -53,14 +53,14 @@ for (int i = 0; i < model.size(); i++) {
             </td>
             <td class="direct">
             	<kendo:sparkline name="<%= \"bar-direct-\" + i %>" type="bar"  data="<%= row.getDirect() %>"
-            					 style="width: 130px;">
+            					 renderAs="canvas" style="width: 130px;">
             		<kendo:sparkline-valueAxis>
             			<kendo:sparkline-valueAxisItem max="50"></kendo:sparkline-valueAxisItem>
             		</kendo:sparkline-valueAxis>
             	</kendo:sparkline>
             </td>
             <td class="benefits">
-            	<kendo:sparkline name="<%= \"bar-benefits-\" + i %>" style="width: 130px;">
+            	<kendo:sparkline name="<%= \"bar-benefits-\" + i %>" renderAs="canvas" style="width: 130px;">
 					<kendo:dataSource data="<%= row.getBenefits() %>">
 						<kendo:dataSource-group>
 							<kendo:dataSource-groupItem field="type" dir="asc" />

@@ -39,6 +39,7 @@ namespace Kendo.Models
             "kendo.dataviz.themes.js",
             "kendo.dataviz.svg.js",
             "kendo.dataviz.vml.js",
+            "kendo.dataviz.canvas.js",
             "kendo.dataviz.barcode.js",
             "kendo.dataviz.gauge.js",
             "kendo.dataviz.barcode.js",
