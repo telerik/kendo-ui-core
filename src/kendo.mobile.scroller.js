@@ -215,7 +215,8 @@ kendo_module({
 
             element = that.element;
 
-            if (that.options.useNative && kendo.support.hasNativeScrolling) {
+            that._native = that.options.useNative && kendo.support.hasNativeScrolling;
+            if (that._native) {
                 element.addClass("km-native-scroller")
                     .prepend('<div class="km-scroll-header"/>');
 
@@ -363,8 +364,12 @@ kendo_module({
         },
 
         reset: function() {
-            this.movable.moveTo({x: 0, y: 0});
-            this._scale(1);
+            if (this._native) {
+                this.scrollElement.scrollTop(0);
+            } else {
+                this.movable.moveTo({x: 0, y: 0});
+                this._scale(1);
+            }
         },
 
         zoomOut: function() {
