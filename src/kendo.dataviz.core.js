@@ -2872,7 +2872,6 @@ kendo_module({
     var FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
 
     // Helper functions========================================================
-    // TODO: Merge with Color class from Colorpicker
     var Color = function(value) {
         var color = this,
             formats = Color.formats,

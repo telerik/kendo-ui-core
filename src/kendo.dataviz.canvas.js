@@ -89,7 +89,13 @@ kendo_module({
             element.render(ctx);
         },
 
-        // TODO: Sort by zIndex in append
+        destroy: function() {
+            var view = this;
+
+            ViewBase.fn.destroy.call(view);
+            view._ctx = null;
+        },
+
         renderContent: function(context) {
             var element = this,
                 sortedChildren = element.sortChildren(),
@@ -126,7 +132,6 @@ kendo_module({
             return new CanvasCircle(center, radius, options);
         },
 
-        // TODO: Obsolete across all views?
         createSector: function(sector, options) {
             return new CanvasRing(sector, options);
         },
@@ -190,7 +195,6 @@ kendo_module({
             var dashType = this.options.dashType,
                 dashArray;
 
-            // TODO: Manual dash rendering for IE
             dashType = dashType ? dashType.toLowerCase() : null;
             if (dashType && dashType != SOLID) {
                 dashArray = DASH_ARRAYS[dashType];
