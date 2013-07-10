@@ -687,8 +687,16 @@ kendo_module({
                 }
             };
 
+            var recurrenceHead = function(event) {
+                if (event.recurrenceRule) {
+                    return that.dataSource.getByUid(event.uid);
+                } else {
+                    return that.dataSource.get(event.recurrenceId);
+                }
+            };
+
             var updateSeries = function() {
-                var head = that.dataSource.get(event.recurrenceId);
+                var head = recurrenceHead(event);
 
                 if (dir == "south" || dir == "north") {
                     if (eventInfo.start) {
@@ -707,7 +715,7 @@ kendo_module({
             };
 
             var updateOcurrence = function() {
-                var head = that.dataSource.get(event.recurrenceId);
+                var head = recurrenceHead(event);
 
                 var exception = head.toJSON();
 
@@ -732,7 +740,7 @@ kendo_module({
                 }
             };
 
-            if (event.recurrenceId && !event.id) {
+            if (event.recurrenceRule || (event.recurrenceId && !event.id)) {
                 that.showDialog({
                     title: "Edit Recurring Item",
                     text: EDITRECURRING,

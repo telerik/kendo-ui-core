@@ -796,7 +796,7 @@
                 equal(div.find(".k-event:last .k-resize-w").length, 0);
             });
 
-            test("dragging the west handle of the ocurrence moves the start of the series if the resize series button is clicked", function() {
+            test("dragging the west handle of the ocurrence moves the start of the series if the edit series button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -819,7 +819,71 @@
                 equal(scheduler.dataSource.at(0).start.getMonth(), 4);
             });
 
-            test("dragging the south handle of the ocurrence moves the end time of the series if the resize series button is clicked", function() {
+            test("dragging the west handle of the ocurrence head shows the edit recurrence dialog", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { id: 1, start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:30"), title: "", recurrenceRule: "FREQ=DAILY;COUNT=2" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-w:first");
+
+                var slots = div.find(".k-scheduler-content td.k-other-month");
+
+                dragdrop(scheduler, handle, slots.first());
+
+                equal($(".k-window").length, 1);
+            });
+
+            test("dragging the west handle of the ocurrence head moves the start of the series if the edit series button is clicked", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { id: 1, start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:30"), title: "", recurrenceRule: "FREQ=DAILY;COUNT=2" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-w:first");
+
+                var slots = div.find(".k-scheduler-content td.k-other-month");
+
+                dragdrop(scheduler, handle, slots.first());
+
+                $(".k-window .k-button:last").click();
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 0);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).start.getDate(), 26);
+                equal(scheduler.dataSource.at(0).start.getMonth(), 4);
+            });
+
+            test("dragging the west handle of the ocurrence head moves the start of the exception if the edit ocurrence button is clicked", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { id: 1, start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:30"), title: "", recurrenceRule: "FREQ=DAILY;COUNT=2" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-w:first");
+
+                var slots = div.find(".k-scheduler-content td.k-other-month");
+
+                dragdrop(scheduler, handle, slots.first());
+
+                $(".k-window .k-button:first").click();
+
+                equal(scheduler.dataSource.at(1).start.getHours(), 0);
+                equal(scheduler.dataSource.at(1).start.getMinutes(), 0);
+                equal(scheduler.dataSource.at(1).start.getDate(), 26);
+                equal(scheduler.dataSource.at(1).start.getMonth(), 4);
+            });
+
+            test("dragging the south handle of the ocurrence moves the end time of the series if the edit series button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -844,7 +908,7 @@
                 equal(scheduler.dataSource.at(0).end.getMonth(), 5);
             });
 
-            test("dragging the south handle of the ocurrence moves the end time of the exception if the resize ocurrence button is clicked", function() {
+            test("dragging the south handle of the ocurrence moves the end time of the exception if the edit ocurrence button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -869,7 +933,7 @@
                 equal(scheduler.dataSource.at(1).end.getMonth(), 5);
             });
 
-            test("dragging the north handle of the ocurrence moves the start time of the series if the resize series button is clicked", function() {
+            test("dragging the north handle of the ocurrence moves the start time of the series if the edit series button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -894,7 +958,7 @@
                 equal(scheduler.dataSource.at(0).start.getMonth(), 5);
             });
 
-            test("dragging the north handle of the ocurrence moves the start time of the exception if the resize ocurrence button is clicked", function() {
+            test("dragging the north handle of the ocurrence moves the start time of the exception if the edit ocurrence button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -919,7 +983,7 @@
                 equal(scheduler.dataSource.at(1).start.getMonth(), 5);
             });
 
-            test("dragging the north handle of the ocurrence updates the recurrenceException field if the resize ocurrence button is clicked", function() {
+            test("dragging the north handle of the ocurrence updates the recurrenceException field if the edit ocurrence button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -944,7 +1008,7 @@
                 equal(scheduler.dataSource.at(0).recurrenceException, kendo.toString(kendo.timezone.apply(new Date("2013/6/3 11:30"), 0), "yyyyMMddTHHmmssZ") + ";");
             });
 
-            test("dragging the west handle of the ocurrence creates an exception if the resize ocurrence button is clicked", function() {
+            test("dragging the west handle of the ocurrence creates an exception if the edit ocurrence button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],

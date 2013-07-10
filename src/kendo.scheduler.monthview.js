@@ -511,16 +511,16 @@ kendo_module({
             var slotGroups = [slotGroup];
 
             for (var slotIndex = startSlot.index; slotIndex <= endSlot.index; slotIndex++) {
-                var currentSlot = slots[slotIndex];
+                var slot = slots[slotIndex];
 
-                if (currentSlot.offsetTop > slotGroup.endSlot.offsetTop) {
+                if (slot.offsetTop > slotGroup.endSlot.offsetTop) {
                     slotGroup = {
-                        startSlot: currentSlot,
-                        endSlot: currentSlot
+                        startSlot: slot,
+                        endSlot: slot
                     };
                     slotGroups.push(slotGroup);
                 } else {
-                    slotGroup.endSlot = currentSlot;
+                    slotGroup.endSlot = slot;
                 }
             }
 
