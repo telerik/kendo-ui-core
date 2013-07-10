@@ -91,29 +91,33 @@ var LinkCommand = Command.extend({
 
     _dialogTemplate: function() {
         return kendo.template(
-            '<div class="k-editor-dialog">' +
-                "<ol>" +
-                    "<li class='k-form-text-row'>" +
-                        "<label for='k-editor-link-url'>#: messages.linkWebAddress #</label>" +
-                        "<input type='text' class='k-input' id='k-editor-link-url'>" +
-                    "</li>" +
-                    "<li class='k-form-text-row'>" +
-                        "<label for='k-editor-link-text'>#: messages.linkText #</label>" +
-                        "<input type='text' class='k-input' id='k-editor-link-text'>" +
-                    "</li>" +
-                    "<li class='k-form-text-row'>" +
-                        "<label for='k-editor-link-title'>#: messages.linkToolTip #</label>" +
-                        "<input type='text' class='k-input' id='k-editor-link-title'>" +
-                    "</li>" +
-                    "<li class='k-form-checkbox-row'>" +
-                        "<input type='checkbox' id='k-editor-link-target'>" +
-                        "<label for='k-editor-link-target'>#: messages.linkOpenInNewWindow #</label>" +
-                    "</li>" +
-                "</ol>" +
-                "<div class='k-button-wrapper'>" +
+            '<div class="k-editor-dialog k-popup-edit-form k-edit-form-container">' +
+                "<div class='k-edit-label'>" +
+                    "<label for='k-editor-link-url'>#: messages.linkWebAddress #</label>" +
+                "</div>" +
+                "<div class='k-edit-field'>" +
+                    "<input type='text' class='k-input k-textbox' id='k-editor-link-url'>" +
+                "</div>" +
+                "<div class='k-edit-label'>" +
+                    "<label for='k-editor-link-text'>#: messages.linkText #</label>" +
+                "</div>" +
+                "<div class='k-edit-field'>" +
+                    "<input type='text' class='k-input k-textbox' id='k-editor-link-text'>" +
+                "</div>" +
+                "<div class='k-edit-label'>" +
+                    "<label for='k-editor-link-title'>#: messages.linkToolTip #</label>" +
+                "</div>" +
+                "<div class='k-edit-field'>" +
+                    "<input type='text' class='k-input k-textbox' id='k-editor-link-title'>" +
+                "</div>" +
+                "<div class='k-edit-label'></div>" +
+                "<div class='k-edit-field'>" +
+                    "<input type='checkbox' class='k-checkbox' id='k-editor-link-target'>" +
+                    "<label for='k-editor-link-target'>#: messages.linkOpenInNewWindow #</label>" +
+                "</div>" +
+                "<div class='k-edit-buttons k-state-default'>" +
                     '<button class="k-dialog-insert k-button">#: messages.dialogInsert #</button>' +
-                    '&nbsp;#: messages.dialogButtonSeparator #&nbsp;' +
-                    '<a href="\\#" class="k-dialog-close k-link">#: messages.dialogCancel #</a>' +
+                    '<a href="\\#" class="k-dialog-close k-button k-secondary">#: messages.dialogCancel #</a>' +
                 "</div>" +
             "</div>"
         )({
@@ -186,7 +190,7 @@ var LinkCommand = Command.extend({
         })
             .find(".k-dialog-insert").click(apply).end()
             .find(".k-dialog-close").click(close).end()
-            .find(".k-form-text-row input").keydown(function (e) {
+            .find(".k-edit-field input").keydown(function (e) {
                 var keys = kendo.keys;
                 if (e.keyCode == keys.ENTER) {
                     apply(e);

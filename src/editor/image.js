@@ -56,24 +56,25 @@ var ImageCommand = Command.extend({
 
     _dialogTemplate: function(showBrowser) {
         return kendo.template(
-            '<div class="k-editor-dialog">' +
+            '<div class="k-editor-dialog k-popup-edit-form k-edit-form-container">' +
                 '# if (showBrowser) { #' +
                     '<div class="k-imagebrowser"></div>' +
                 '# } #' +
-                '<ol>' +
-                    '<li class="k-form-text-row">' +
-                        '<label for="k-editor-image-url">#: messages.imageWebAddress #</label>' +
-                        '<input type="text" class="k-input" id="k-editor-image-url">' +
-                    '</li>' +
-                    '<li class="k-form-text-row">' +
-                        '<label for="k-editor-image-title">#: messages.imageAltText #</label>' +
-                        '<input type="text" class="k-input" id="k-editor-image-title">' +
-                    '</li>' +
-                '</ol>' +
-                '<div class="k-button-wrapper">' +
+                "<div class='k-edit-label'>" +
+                    '<label for="k-editor-image-url">#: messages.imageWebAddress #</label>' +
+                "</div>" +
+                "<div class='k-edit-field'>" +
+                    '<input type="text" class="k-input k-textbox" id="k-editor-image-url">' +
+                "</div>" +
+                "<div class='k-edit-label'>" +
+                    '<label for="k-editor-image-title">#: messages.imageAltText #</label>' +
+                "</div>" +
+                "<div class='k-edit-field'>" +
+                    '<input type="text" class="k-input k-textbox" id="k-editor-image-title">' +
+                "</div>" +
+                '<div class="k-edit-buttons k-state-default">' +
                     '<button class="k-dialog-insert k-button">#: messages.dialogInsert #</button>' +
-                    '&nbsp;#: messages.dialogButtonSeparator #&nbsp;' +
-                    '<a href="\\#" class="k-dialog-close k-link">#: messages.dialogCancel #</a>' +
+                    '<a href="\\#" class="k-dialog-close k-button k-secondary">#: messages.dialogCancel #</a>' +
                 '</div>' +
             '</div>'
         )({
@@ -162,7 +163,7 @@ var ImageCommand = Command.extend({
         }))
                 .find(".k-dialog-insert").click(apply).end()
                 .find(".k-dialog-close").click(close).end()
-                .find(".k-form-text-row input").keydown(keyDown).end()
+                .find(".k-edit-field input").keydown(keyDown).end()
                 // IE < 8 returns absolute url if getAttribute is not used
                 .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
                 .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()
