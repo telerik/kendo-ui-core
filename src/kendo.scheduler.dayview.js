@@ -1561,20 +1561,21 @@ kendo_module({
 
         select: function(selection) {
             var that = this,
+                headerTable = that.datesHeader.find("table.k-scheduler-header-all-day")[0],
                 startRow = Math.ceil(that._timeSlotIndex(selection.start)),
                 endRow = Math.ceil(that._timeSlotIndex(selection.end)),
                 startCol = that._dateSlotIndex(selection.start),
                 endCol = that._dateSlotIndex(selection.end),
-                //isAllDay = selection.isAllDay,
                 table = that.content.children("table")[0],
+                selectAllDay = false,
                 event, cell,
                 end;
+
+            that.clearSelection();
 
             if (startRow !== endRow && endRow > 0) {
                 endRow -= 1;
             }
-
-            that.clearSelection();
 
             /*if (selection.events && selection.events.length) {
                 event = that.content.add(that.datesHeader.children())
@@ -1592,6 +1593,9 @@ kendo_module({
 
             if (startCol !== endCol) {
                 end = that._columns[startCol].slots.length - 1;
+                if (headerTable) {
+                    selectAllDay = true;
+                }
             }
 
             for (; startCol <= endCol; startCol++) {
@@ -1601,10 +1605,15 @@ kendo_module({
 
                 for (; startRow <= end; startRow++) {
                     cell = table.rows[startRow].cells[startCol];
-                    cell.className = addSelectedState(cell.className);
+                    addSelectedState(cell);
                 }
 
                 startRow = 0;
+
+                if (selectAllDay) {
+                    cell = headerTable.rows[startRow].cells[startCol];
+                    addSelectedState(cell);
+                }
             }
 
             that._scrollTo(cell, that.content[0]);
@@ -1815,8 +1824,8 @@ kendo_module({
     });
 
     var selectedStateRegExp = /\s*k-state-selected/;
-    function addSelectedState(className) {
-        return className.replace(selectedStateRegExp, "") + " k-state-selected";
+    function addSelectedState(cell) {
+        cell.className = cell.className.replace(selectedStateRegExp, "") + " k-state-selected";
     }
 
     function setDate(date1, date2) {

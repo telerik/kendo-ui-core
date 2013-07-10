@@ -213,6 +213,28 @@
                 equal(cells.length, 50);
             });
 
+            test("View selects header cells if multiple columns are selected", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8), new Date(2013, 6, 9)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 9, 2, 30) });
+
+                view.select(selection);
+
+                var cells = view.datesHeader.find("td.k-state-selected");
+
+                equal(cells.length, 3);
+            });
+
+            test("View does not select header cells if onlu one column is selected", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 7, 2, 30) });
+
+                view.select(selection);
+
+                var cells = view.datesHeader.find("td.k-state-selected");
+
+                equal(cells.length, 0);
+            });
+
             test("View clear selection before new select", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] });
 
