@@ -2,6 +2,8 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using Kendo.Mvc.Infrastructure;
+    using System.Collections;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Upload"/> component.
@@ -147,6 +149,27 @@ namespace Kendo.Mvc.UI.Fluent
         public UploadBuilder TemplateId(string templateId)
         {
             Component.TemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the initially rendered files
+        /// </summary>
+        /// <param name="configurator">The lambda which configures initial files</param>
+        /// <example>
+        /// <code lang="ASPX">
+        ///
+        /// </code>
+        /// <code lang="Razor">
+        ///
+        /// </code>
+        /// </example>
+        public UploadBuilder Files(Action<UploadFileFactory> configurator)
+        {
+            UploadFileFactory factory = new UploadFileFactory(Component);
+
+            configurator(factory);
 
             return this;
         }

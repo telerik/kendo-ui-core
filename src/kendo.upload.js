@@ -1157,8 +1157,6 @@ kendo_module({
                 $.each(relatedInput.data("relatedFileEntries") || [], function() {
                     // Exclude removed file entries and self
                     if (this.parent().length > 0 && this[0] != fileEntry[0]) {
-                        //uploadComplete = uploadComplete && this.find(".k-icon:not(.k-delete, .k-cancel, .k-retry)").is(".k-success");
-                        //uploadComplete = uploadComplete && this.find(".k-icon:not(.k-delete, .k-cancel, .k-retry):contains('uploaded')");
                         uploadComplete = uploadComplete && this.hasClass("k-file-success");
                     }
                 });

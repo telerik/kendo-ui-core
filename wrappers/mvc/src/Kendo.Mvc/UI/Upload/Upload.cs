@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Web.Mvc;
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
@@ -23,6 +24,8 @@ namespace Kendo.Mvc.UI
             ShowFileList = true;
             Async = new UploadAsyncSettings(this);
             Messages = new UploadMessages();
+            TemplateId = string.Empty;
+            Files = new List<UploadFile>();
 
             UrlGenerator = urlGenerator;
         }
@@ -103,6 +106,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets the initially rendered files
+        /// </summary>
+        public IList<UploadFile> Files
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Writes the initialization script.
         /// </summary>
         /// <param name="writer">The writer object.</param>
@@ -144,6 +156,13 @@ namespace Kendo.Mvc.UI
             }
 
             Async.SerializeTo("async", options);
+
+            var initialFiles = Files.Select(f => f.ToJson());
+
+            if (initialFiles.Any())
+            {
+                options.Add("files", initialFiles);
+            }
 
             writer.Write(Initializer.Initialize(Selector, "Upload", options));
 
