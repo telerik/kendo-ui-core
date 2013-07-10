@@ -4,7 +4,11 @@
         <div id="example" class="k-content">
             <div class="chart-wrapper">
                 <div id="chart"></div>
-                <button id="playButton" class="k-button" onclick="playButtonClick()">Start update</button>
+                <div id="canvasSelector">
+                    <input id="useCanvas" type="checkbox" checked="checked" />
+                    <label for="useCanvas">Use Canvas</label>
+                </div>
+                <button id="playButton" class="k-button">Start update</button>
                 <div id="fpsCount">-- FPS / (-- ms per frame)</div>
             </div>
             <script>
@@ -18,6 +22,7 @@
 
                 function createChart() {
                     $("#chart").kendoChart({
+                        renderAs: "canvas",
                         title: {
                             text: "Stock prices"
                         },
@@ -79,18 +84,6 @@
                     }
                 }
 
-                function playButtonClick(button) {
-                    var button = $("#playButton");
-
-                    if (playInterval) {
-                        stop();
-                        button.text("Start update");
-                    } else {
-                        play();
-                        button.html("Pause update");
-                    }
-                }
-
                 function play() {
                     var frames = 0,
                         start = new Date();
@@ -147,15 +140,47 @@
                         }
                     }
                 }
+
+                $("#playButton").click(function() {
+                    var button = $(this);
+
+                    if (playInterval) {
+                        stop();
+                        button.text("Start update");
+                    } else {
+                        play();
+                        button.html("Pause update");
+                    }
+                });
+
+                if (kendo.dataviz.supportsCanvas()) {
+                    $("#useCanvas").click(function() {
+                        var checked = $(this).prop("checked");
+
+                        var chart = $("#chart").data("kendoChart");
+                        chart.options.renderAs = checked ? "canvas" : "";
+                        chart.redraw();
+                    });
+                } else {
+                    $("#useCanvas").prop("checked", false).attr("disabled", true);
+                }
+
             </script>
             <style scoped>
                 .chart-wrapper .k-chart {
                     height: 390px;
                 }
+
                 .chart-wrapper #playButton {
                     position: absolute;
                     right: 15px;
                     bottom: 15px;
+                }
+
+                .chart-wrapper #canvasSelector {
+                    position: absolute;
+                    right: 110px;
+                    bottom: 19px;
                 }
 
                 .chart-wrapper #fpsCount {
