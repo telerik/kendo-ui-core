@@ -241,17 +241,14 @@ kendo_module({
         },
 
         options: {
-            // TODO: Remove and do the rotation in the model
             rotation: [0, 0, 0]
         },
 
         renderPoints: function(ctx) {
             var line = this,
                 points = line.points,
-                rotation = line.options.rotation,
-                rCenter = new Point2D(rotation[1], rotation[2]),
-                rAmount = -rotation[0],
                 i,
+                p,
                 options = line.options,
                 strokeWidth = options.strokeWidth,
                 shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
@@ -261,11 +258,13 @@ kendo_module({
                 return;
             }
 
-            var p = points[0].clone().rotate(rCenter, rAmount);
+            line.setRotation(ctx);
+
+            p = points[0];
             ctx.moveTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
 
             for (i = 1; i < points.length; i++) {
-                p = points[i].clone().rotate(rCenter, rAmount);
+                p = points[i];
                 ctx.lineTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
             }
 
@@ -307,6 +306,18 @@ kendo_module({
             }
 
             return bbox;
+        },
+
+        setRotation: function(context) {
+            var text = this,
+                options = text.options,
+                rotation = options.rotation,
+                cx = rotation[1],
+                cy = rotation[2];
+
+            context.translate(cx, cy);
+            context.rotate(rotation[0] * DEG_TO_RAD);
+            context.translate(-cx, -cy);
         }
     });
 

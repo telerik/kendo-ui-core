@@ -657,6 +657,18 @@
                     deepEqual(ctx.log.lineTo[0], { x: 2.506, y: 3.801 });
                 });
 
+                test("sets rotation", function() {
+                    line = new dataviz.CanvasLine([
+                        new Point2D(1, 2),
+                        new Point2D(2, 3)
+                    ], false, { stroke: "black", rotation: [45, 10, 20] })
+                    line.render(ctx);
+
+                    equal(ctx.log.translate[0].x, 10);
+                    equal(ctx.log.translate[0].y, 20);
+                    equal(ctx.log.rotate[0].angle, 45 * DEG_TO_RAD);
+                });
+
                 test("saves/restores style stack", function() {
                     line.render(ctx);
                     equal(ctx.log.save.length, 1);
