@@ -1528,6 +1528,17 @@
                 ok(view.datesHeader.find(".k-event").length);
             });
 
+            test("last slot end date is set correctly when view end is restricted", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    endTime: new Date("2013/6/6 20:00")
+                });
+
+                var slots = view._columns[0].slots;
+                deepEqual(slots[slots.length - 1].start, new Date("2013/6/6 19:00"));
+                deepEqual(slots[slots.length - 1].end, new Date("2013/6/6 20:00"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

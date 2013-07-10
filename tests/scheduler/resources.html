@@ -2046,10 +2046,11 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
-            test("slot end date is set when group vertically", function() {
+            test("slot end date is set when grouped vertically", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     resourcesGroups: ["ResourceName", "ResourceName2"],
+                    groupOrientation: "vertical",
                     resources: [
                         {
                             field: "foo",
@@ -2077,6 +2078,40 @@
                 deepEqual(view._columns[0].slots[12].start, new Date("2013/6/6 6:00"));
                 deepEqual(view._columns[0].slots[12].end, new Date("2013/6/6 6:30"));
             });
+
+            test("event in the last slot is position correctly when grouped vertically", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+
+                    ],
+                    dataSource: [ { start: new Date("2013/6/6 23:30"), end: new Date("2013/6/7 00:00"), title: "foo", foo: 1, bar: 2 } ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+                equal(view._columns[0].events[0].start, 95);
+                equal(view._columns[0].events[0].end, 96);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

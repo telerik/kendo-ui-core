@@ -841,9 +841,11 @@ kendo_module({
             kendo.date.setTime(slotDate, this._slotIndexTime(rowIndex));
 
             maxTimeSlotIndex = this._adjustSlotIndex(maxTimeSlotIndex);
-
             if (this._adjustSlotIndex(rowIndex) >= maxTimeSlotIndex) {
-                slotEndDate = kendo.date.nextDay(slotEndDate);
+                kendo.date.setTime(slotEndDate, getMilliseconds(this.options.endTime));
+                if (kendo.date.getDate(slotEndDate).getTime() === slotEndDate.getTime()) {
+                    slotEndDate = kendo.date.nextDay(slotEndDate);
+                }
             } else {
                 kendo.date.setTime(slotEndDate, this._slotIndexTime(rowIndex + 1));
             }
@@ -1068,11 +1070,10 @@ kendo_module({
 
         _positionEvent: function(event, element, dateSlotIndex, timeResouceOffset) {
             var dateSlot = this._columns[dateSlotIndex];
-            var maxSlotCount = this._isVerticallyGrouped() ? this._rowsCountInGroup() + timeResouceOffset : dateSlot.slots.length;
+            var maxSlotCount = this._isVerticallyGrouped() ? this._rowsCountInGroup() : dateSlot.slots.length;
             var startIndex = Math.floor(this._timeSlotIndex(event.startTime || event.start)) + timeResouceOffset;
-            var endIndex = Math.min(Math.ceil(this._timeSlotIndex(event.endTime || event.end)) + timeResouceOffset, maxSlotCount);
+            var endIndex = Math.ceil(this._timeSlotIndex(event.endTime || event.end));
             var bottomOffset = 4;
-
 
             if ((startIndex > 0 || startIndex < 0) && endIndex <= 0) {
                 endIndex = maxSlotCount;
@@ -1081,6 +1082,12 @@ kendo_module({
             if (startIndex < 0 ) {
                 startIndex = 0;
             }
+
+            if (endIndex > maxSlotCount) {
+                endIndex = maxSlotCount;
+            }
+
+            endIndex += timeResouceOffset;
 
             var timeSlot = dateSlot.slots[Math.floor(startIndex)];
 
@@ -1394,7 +1401,7 @@ kendo_module({
                 for (var idx = 0, length = resources.length; idx < length; idx++) {
                     var resource = resources[idx];
 
-                    var columnCount
+                    var columnCount;
                     if (isVertical) {
                         columnCount = this._rowCountForLevel(resources.length) / this._rowCountForLevel(idx);
                     } else {
