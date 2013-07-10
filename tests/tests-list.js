@@ -378,6 +378,7 @@ var tests = [
     "scheduler/recurring-widget.html",
     "scheduler/occurrences.html",
     "scheduler/mvvm.html",
+    "scheduler/selection.html",
     "scheduler/lint.html",
     "searchbox/searchbox.html",
     "searchbox/lint.html",

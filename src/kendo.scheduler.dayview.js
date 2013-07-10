@@ -9,6 +9,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         SchedulerView = ui.SchedulerView,
         extend = $.extend,
         proxy = $.proxy,
@@ -1518,8 +1519,7 @@ kendo_module({
             return rowLevel ? rowLevel.length : 0;
         },
 
-        //navigation
-        offsetSelection: function(selection) {
+        adjustSelection: function(selection) {
             var offset = this._dates.length,
                 startDate = this._startDate,
                 endDate = this._endDate,
@@ -1530,7 +1530,7 @@ kendo_module({
                 endDate = kendo.date.addDays(endDate, 1);
             }
 
-            if (start <= startDate || end >= endDate) {
+            if (start < startDate || end >= endDate) { //requies >= - navigate to next view and move down
                 if (start > endDate) {
                     offset = -offset;
                 }
@@ -1612,6 +1612,20 @@ kendo_module({
                     result = containerScroll;
                 }
                 container.scrollTop = result;
+        },
+
+        move: function(selection, key) {
+            var prevent = false;
+
+            if (key === keys.DOWN) {
+                prevent = true;
+            }
+
+            return prevent;
+        },
+
+        moveToEvent: function(selection, previous) {
+            return true;
         },
 
         right: function(selection) {

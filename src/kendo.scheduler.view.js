@@ -166,6 +166,14 @@ kendo_module({
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
         },
 
+        move: function() {
+            return false;
+        },
+
+        moveToEvent: function() {
+            return false;
+        },
+
         _createResizeHint: function(left, top, width, height) {
             return $(HINT).css({
                 left: left,
