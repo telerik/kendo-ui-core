@@ -6245,11 +6245,16 @@ kendo_module({
                 view = pane.view,
                 element = getElement(pane.options.id);
 
-            if (view && element) {
-                element.parentNode.replaceChild(
-                    view.renderElement(pane.getViewElements(view)[0]),
-                    element
-                );
+            if (view) {
+                var content = pane.getViewElements(view)[0];
+                if (element) {
+                    element.parentNode.replaceChild(
+                        view.renderElement(content),
+                        element
+                    );
+                } else if (view.replace) {
+                    view.replace(content, pane.box);
+                }
             }
         }
     });

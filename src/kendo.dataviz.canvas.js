@@ -75,10 +75,18 @@ kendo_module({
                 canvas.height = options.height;
             }
 
-            ctx = canvas.getContext("2d");
+            view._ctx = ctx = canvas.getContext("2d");
             view.renderContent(ctx);
 
             return canvas;
+        },
+
+        replace: function(element, bbox) {
+            var view = this,
+                ctx = view._ctx;
+
+            ctx.clearRect(bbox.x1, bbox.y1, bbox.width(), bbox.height());
+            element.render(ctx);
         },
 
         // TODO: Sort by zIndex in append
