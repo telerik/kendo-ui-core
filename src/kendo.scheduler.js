@@ -431,7 +431,7 @@ kendo_module({
                 that.view().select(that._selection);
             });
 
-            that.wrapper.on("blur" + NS, function() {
+            that.wrapper.on("focusout" + NS, function() {
                 that.view().clearSelection();
             });
 
@@ -481,9 +481,9 @@ kendo_module({
         },
 
         _createSelection: function(item) {
-            var uid, selection;
+            var uid, dates;
 
-            this._selection = selection = {
+            this._selection = {
                 events: []
             };
 
@@ -492,11 +492,12 @@ kendo_module({
 
             if (uid) {
                 item = getOccurrenceByUid(this._data, uid);
-                this._updateSelection(item);
-                selection.events = [uid];
+                this._updateSelection(item, [uid]);
             } else {
-                selection = this.view()._rangeToDates(item);
-                selection.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
+                dates = this.view()._rangeToDates(item);
+                dates.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
+
+                this._updateSelection(dates);
             }
 
             //TODO: calculate cell offset
@@ -507,12 +508,13 @@ kendo_module({
             this._adjustSelectedDate();
         },
 
-        _updateSelection: function(dataItem) {
+        _updateSelection: function(dataItem, events) {
             var selection = this._selection;
 
             selection.start = new Date(dataItem.start);
             selection.end = new Date(dataItem.end);
             selection.isAllDay = dataItem.isAllDay;
+            selection.events = events || [];
         },
 
         options: {
