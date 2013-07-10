@@ -271,8 +271,11 @@ kendo_module({
                startSlotIndex = 0;
             }
 
+            var height = 0;
+
             if (endSlotIndex < 0) {
                 endSlotIndex = slots.length - 1;
+                height = slots[endSlotIndex].offsetHeight;
             }
 
             var startSlot = slots[startSlotIndex];
@@ -285,7 +288,8 @@ kendo_module({
             if (isAllDay) {
                 css.width = this._calculateAllDayEventWidth(slots, startSlotIndex, endSlotIndex) - 4;
             } else {
-                css.height = this._calculateEventHeight(slots, startSlotIndex, endSlotIndex) - 4;
+                css.height = height + this._calculateEventHeight(slots, startSlotIndex, endSlotIndex) - 4;
+
                 css.width = startSlot.clientWidth * 0.9 - 4;
             }
 

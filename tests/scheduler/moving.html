@@ -305,6 +305,29 @@
                 equal(scheduler.dataSource.at(0).start.getDate(), 6);
             });
 
+            test("moving event pass the end of the view when the view ends at 12:00 AM", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 17:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00 PM"), end: new Date("2013/6/7 12:00 AM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.last());
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 23);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 30);
+                equal(scheduler.dataSource.at(0).start.getDate(), 6);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+                equal(scheduler.dataSource.at(0).end.getDate(), 7);
+            });
+
             test("moving event in day view changes its end time", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),

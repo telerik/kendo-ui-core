@@ -420,7 +420,7 @@ kendo_module({
 
             var width = this._calculateAllDayEventWidth(this._row.slots, startSlot.index, endSlot.index);
 
-            var height = startSlot.clientHeight;
+            var height = startSlot.clientHeight - 2;
 
             var hint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
 
