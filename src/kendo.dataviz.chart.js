@@ -54,6 +54,7 @@ kendo_module({
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
+        dateComparer = dataviz.dateComparer,
         getElement = dataviz.getElement,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
@@ -2111,6 +2112,14 @@ kendo_module({
             maxDateGroups: 10
         },
 
+        shouldRenderNote: function(value) {
+            var axis = this,
+                range = axis.range(),
+                categories = axis.options.categories || [];
+
+            return (dateComparer(value, range.min) >= 0 || dateComparer(value, range.max) <= 0) && categories.length;
+        },
+
         translateRange: function(delta) {
             var axis = this,
                 range = CategoryAxis.fn.translateRange.call(axis, delta),
@@ -3159,6 +3168,10 @@ kendo_module({
 
         pointValue: function(data) {
             return data.value;
+        },
+
+        shouldRenderNote: function() {
+            return this.options.categories.length;
         }
     });
 
@@ -3987,7 +4000,7 @@ kendo_module({
                 markerBox = point.marker.box,
                 aboveAxis = point.options.aboveAxis;
 
-            return new Point2D(
+            return Point2D(
                 markerBox.x2 + TOOLTIP_OFFSET,
                 aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2
             );
@@ -4087,7 +4100,7 @@ kendo_module({
             for (i = 0; i < length; i++) {
                 pointCenter = linePoints[i].markerBox().center();
 
-                points.push(new Point2D(pointCenter.x, pointCenter.y));
+                points.push(Point2D(pointCenter.x, pointCenter.y));
             }
 
             return points;
@@ -9817,14 +9830,6 @@ kendo_module({
          } else {
              return $.inArray(item, arr);
          }
-    }
-
-    function dateComparer(a, b) {
-         if (a && b) {
-             return a.getTime() - b.getTime();
-         }
-
-         return 0;
     }
 
     function sortDates(dates, comparer) {
