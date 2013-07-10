@@ -1193,6 +1193,12 @@ kendo_module({
             }
 
             if (view) {
+                view.traverse(function(element) {
+                    var id = element.options.id;
+                    if (id) {
+                        pool.free(id);
+                    }
+                });
                 view.destroy();
             }
 
@@ -1201,6 +1207,7 @@ kendo_module({
                     pool.free($(this).attr("id"));
                 });
             }
+
 
             if (selections) {
                 while (selections.length > 0) {

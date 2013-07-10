@@ -2241,6 +2241,19 @@ kendo_module({
 
         refresh: $.noop,
 
+        traverse: function(callback) {
+            var element = this,
+                children = element.children,
+                length,
+                i;
+
+            callback(element);
+
+            for (i = 0, length = children.length; i < length; i++) {
+                children[i].traverse(callback);
+            }
+        },
+
         compareChildren: function(a, b) {
             var aValue = a.options.zIndex || 0,
                 bValue = b.options.zIndex || 0;
@@ -3040,7 +3053,6 @@ kendo_module({
             if (pool.length < that._size && !freed[id]) {
                 pool.push(id);
 
-                // TODO: Freed is constantly growing with canvas rendering
                 freed[id] = true;
             }
         }
