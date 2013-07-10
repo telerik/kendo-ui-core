@@ -18,6 +18,7 @@ span.k-sparkline,
 .k-gauge
 {
     text-align: left;
+    position: relative;
 }
 
 .k-baseline-marker {

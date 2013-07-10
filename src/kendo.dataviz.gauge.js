@@ -1228,11 +1228,20 @@ kendo_module({
         },
 
         value: function(value) {
+            var gauge = this,
+                pointer = gauge._pointers[0];
+
             if (arguments.length === 0) {
-                return this._pointers[0].value();
+                return pointer.value();
             }
 
-            this._pointers[0].value(value);
+            gauge.options.pointer.value = value;
+
+            if (gauge._view.renderElement) {
+                pointer.value(value);
+            } else {
+                gauge.redraw();
+            }
         },
 
         redraw: function() {
@@ -1248,8 +1257,6 @@ kendo_module({
 
             if (view) {
                 view.load(model);
-
-                element.css("position", "relative");
                 gauge._viewElement = view.renderTo(element[0]);
             }
         },

@@ -47,6 +47,7 @@
                     var calls = 0,
                         usedValue;
 
+                    gauge._view.renderElement = function() { };
                     gauge._pointers[0].value = function(value) {
                         calls++;
                         usedValue = value;
@@ -68,6 +69,18 @@
                     gauge.value(11);
 
                     equal(gauge.value(), 11);
+                });
+
+                test("value(x) updates value in options", function() {
+                    gauge.value(11);
+
+                    equal(gauge.options.pointer.value, 11);
+                });
+
+                test("value(x) calls redraw if view does not support updates", function() {
+                    gauge._view.renderElement = undefined;
+                    gauge.redraw = function() { ok(true); };
+                    gauge.value(11);
                 });
 
                 // ------------------------------------------------------------
@@ -187,6 +200,7 @@
                     var calls = 0,
                         usedValue;
 
+                    gauge._view.renderElement = function() { };
                     gauge._pointers[0].value = function(value) {
                         calls++;
                         usedValue = value;
@@ -209,6 +223,19 @@
 
                     equal(gauge.value(), 11);
                 });
+
+                test("value(x) updates value in options", function() {
+                    gauge.value(11);
+
+                    equal(gauge.options.pointer.value, 11);
+                });
+
+                test("value(x) calls redraw if view does not support updates", function() {
+                    gauge._view.renderElement = undefined;
+                    gauge.redraw = function() { ok(true); };
+                    gauge.value(11);
+                });
+
             })();
 
         </script>
