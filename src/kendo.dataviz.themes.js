@@ -43,6 +43,9 @@ kendo_module({
                 line: {
                     width: 4
                 },
+                scatterLine: {
+                    width: 1
+                },
                 area: {
                     opacity: 0.4,
                     markers: {

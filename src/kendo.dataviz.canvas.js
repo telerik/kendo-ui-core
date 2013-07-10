@@ -142,7 +142,6 @@ kendo_module({
 
     var CanvasPath = ViewElement.extend({
         options: {
-            fill: "",
             fillOpacity: 1,
             strokeOpacity: 1,
             strokeLineCap: SQUARE
