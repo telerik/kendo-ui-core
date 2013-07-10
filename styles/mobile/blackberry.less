@@ -12,6 +12,17 @@
 @blackberry-switch-radius: 2em;
 @blackberry-light-background: #e6e6e6;
 
+.km-root .km-blackberry.km-pane,
+.km-root .km-blackberry .km-view,
+.km-root .km-blackberry .km-slider,
+.km-root .km-blackberry .km-switch,
+.km-root .km-blackberry .km-group-title,
+.km-root .km-blackberry .km-filter-reset,
+.km-root .km-blackberry .km-shim .k-animation-container
+{
+    -webkit-transform: none;
+}
+
 .km-blackberry
 {
     font: 1em Slate, Helvetica, sans-serif;
@@ -430,7 +441,7 @@
 
 .km-blackberry .km-listview .km-switch
 {
-    margin-top: ~"-1.1em";
+    margin-top: -1em;
 }
 
 .km-blackberry .km-toolbar,
