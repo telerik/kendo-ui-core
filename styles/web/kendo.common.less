@@ -1564,7 +1564,7 @@ form.k-filter-menu .k-textbox
 
 .k-grouping-row .k-icon
 {
-    margin: 0 4px 0 0;
+    margin: -3px 4px 0 2px;
 }
 
 .k-grouping-row p
@@ -1575,8 +1575,18 @@ form.k-filter-menu .k-textbox
     padding: 0 .6em;
 }
 
-.k-grid > table > tbody .k-group-cell+td,
-.k-grid > .k-grid-content .k-group-cell+td,
+.k-grouping-row td,
+.k-grouping-row+tr td
+{
+    border-top-width: 1px;
+}
+
+.k-grouping-row .k-group-cell,
+.k-grouping-row+tr .k-group-cell
+{
+    border-top-width: 0;
+}
+
 .k-grid .k-hierarchy-cell+td
 {
     border-left-width: 0;
@@ -1585,7 +1595,7 @@ form.k-filter-menu .k-textbox
 .k-grid .k-group-col,
 .k-grid .k-hierarchy-col
 {
-    width: 30px;
+    width: 27px;
 }
 
 .k-grouping-header
