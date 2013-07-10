@@ -5,7 +5,7 @@ apt_repository "google" do
 end
 
 package "google-chrome-stable" do
-    version "28.0.1500.52-r207119"
+    version "28.0.*"
 end
 
 
