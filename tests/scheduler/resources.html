@@ -1958,6 +1958,51 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
+            test("double clicking a week view cell triggers add event with resources information and horizontal multiple grouping - resource set as multiple", 4, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            multiple: true,
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+
+                    ],
+                    dataSource: [ ],
+                    views: ["week"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date(2013, 5, 6, 2, 0, 0));
+                    deepEqual(event.end, new Date(2013, 5, 6, 2, 30, 0));
+
+                    equal(event.foo, 2);
+                    equal(event.bar[0], 2);
+                });
+
+                var cell = view.content.find("tr:eq(4) td:eq(25)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+
             test("double clicking a week view all day cell triggers add event with resources information with horizontal multiple grouping", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -2001,8 +2046,37 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
+            test("slot end date is set when group vertically", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
 
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
 
+                var view = scheduler.view();
+                deepEqual(view._columns[0].slots[12].start, new Date("2013/6/6 6:00"));
+                deepEqual(view._columns[0].slots[12].end, new Date("2013/6/6 6:30"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

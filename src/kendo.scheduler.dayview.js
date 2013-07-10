@@ -364,6 +364,14 @@ kendo_module({
             var allDayRowCount = 0;
             var isVertical = this.options.groupOrientation === "vertical";
 
+            var allDaySelector = ".k-scheduler-header-all-day tr";
+
+            if (this._isVerticallyGrouped()) {
+               allDaySelector = ".k-scheduler-header-all-day";
+            }
+
+            var allDayRows = this.element.find(allDaySelector);
+
             for (var rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
                 var tr = tableRows[rowIndex];
 
@@ -377,7 +385,7 @@ kendo_module({
                 for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
                     td = tableCells[cellIndex];
 
-                    range = this._rangeByIndex(rowIndex - allDayRowCount, cellIndex, tableRows.length - allDayRowCount - 1);
+                    range = this._rangeByIndex(rowIndex - allDayRowCount, cellIndex, tableRows.length - 1 - allDayRows.length);
 
                     cell = {
                         offsetTop: td.offsetTop,
@@ -407,13 +415,7 @@ kendo_module({
 
             this._columns = columns;
 
-            var allDaySelector = ".k-scheduler-header-all-day tr";
-
-            if (this._isVerticallyGrouped()) {
-               allDaySelector = ".k-scheduler-header-all-day";
-            }
-
-            tableRows = this.element.find(allDaySelector);
+            tableRows = allDayRows;
 
             var rows = [];
 
@@ -840,7 +842,7 @@ kendo_module({
 
             maxTimeSlotIndex = this._adjustSlotIndex(maxTimeSlotIndex);
 
-            if (rowIndex + 1 > maxTimeSlotIndex) {
+            if (this._adjustSlotIndex(rowIndex) >= maxTimeSlotIndex) {
                 slotEndDate = kendo.date.nextDay(slotEndDate);
             } else {
                 kendo.date.setTime(slotEndDate, this._slotIndexTime(rowIndex + 1));
@@ -1384,21 +1386,31 @@ kendo_module({
         _resourceBySlot: function(slot) {
             var resources = this.groupedResources;
             var result = {};
+            var isVertical = this._isVerticallyGrouped();
 
             if (resources.length) {
-                var index = slot.columnIndex;
+                var index = isVertical ? slot.index : slot.columnIndex;
 
                 for (var idx = 0, length = resources.length; idx < length; idx++) {
                     var resource = resources[idx];
 
-                    var columnCount = this._columnCountForLevel(resources.length) / this._columnCountForLevel(idx);
+                    var columnCount
+                    if (isVertical) {
+                        columnCount = this._rowCountForLevel(resources.length) / this._rowCountForLevel(idx);
+                    } else {
+                        columnCount = this._columnCountForLevel(resources.length) / this._columnCountForLevel(idx);
+                    }
 
                     var groupIndex = Math.floor(index/columnCount);
                     index -= groupIndex*columnCount;
 
-                    var setter = kendo.setter(resource.field);
                     var value = resourceValue(resource, resource.dataSource.at(groupIndex));
 
+                    if (resource.multiple) {
+                        value = [value];
+                    }
+
+                    var setter = kendo.setter(resource.field);
                     setter(result, value);
                 }
             }
@@ -1481,8 +1493,12 @@ kendo_module({
         _columnCountForLevel: function(level) {
             var columnLevel = this.columnLevels[level];
             return columnLevel ? columnLevel.length : 0;
-        }
+        },
 
+        _rowCountForLevel: function(level) {
+            var rowLevel = this.rowLevels[level];
+            return rowLevel ? rowLevel.length : 0;
+        }
     });
 
     function resourceValue(resource, item) {
