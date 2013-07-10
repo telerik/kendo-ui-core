@@ -7,15 +7,15 @@
     </header>
     <div data-role="scrollview" 
         data-source="_500pxBatchDS" 
-        data-template="template"
+        data-template="scrollview-batch-template"
         data-items-per-page="4"
         data-content-height="100%"
         data-enable-pager="false">
     </div>
 </div>
 
-<script id="template" type="text/x-kendo-template">
-    <div class="page">
+<script id="scrollview-batch-template" type="text/x-kendo-template">
+    <div class="batch-page">
         <div class="tile" data-id="#: data[0].id #" style="background: url('#: data[0].image_url #') no-repeat center center;"></div>
         <div class="tile" data-id="#: data[1].id #" style="background: url('#: data[1].image_url #') no-repeat center center;"></div>
         <div class="tile" data-id="#: data[2].id #" style="background: url('#: data[2].image_url #') no-repeat center center;"></div>
@@ -55,7 +55,7 @@
 </script>
 
 <style scoped>
-    .page {
+    .batch-page {
         height: 100%;
         width: 100%;
     }

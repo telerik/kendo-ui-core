@@ -7,14 +7,14 @@
     </header>
     <div data-role="scrollview" 
         data-source="_500pxDS" 
-        data-template="template"
+        data-template="scrollview-binding-template"
         data-content-height="100%"
         data-enable-pager="false">
     </div>
 </div>
 
-<script id="template" type="text/x-kendo-template">
-    <div class="page">
+<script id="scrollview-binding-template" type="text/x-kendo-template">
+    <div>
         <p class="title">#: name #</p>
         <div class="image" style="background-image: url(#: image_url #);"></div>
     </div>
@@ -57,14 +57,6 @@
         text-align: center;
         margin: 0;
         padding: 0;
-    }
-
-    .page {
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -o-user-select: none;
-        user-select: none;
     }
 
     .image {
