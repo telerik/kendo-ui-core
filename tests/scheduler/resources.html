@@ -2002,7 +2002,6 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
-
             test("double clicking a week view all day cell triggers add event with resources information with horizontal multiple grouping", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -2043,6 +2042,49 @@
                 });
 
                 var cell = view.datesHeader.find(".k-scheduler-header-all-day td:eq(25)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+            test("double clicking a day view all day cell triggers add event with resources information with vertical multiple grouping", 4, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        },
+                        {
+                            field: "bar",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date(2013, 5, 6, 0, 0, 0));
+                    deepEqual(event.end, new Date(2013, 5, 6, 0, 0, 0));
+
+                    equal(event.foo, 2);
+                    equal(event.bar, 1);
+                });
+                var cell = view.content.find(".k-scheduler-header-all-day:eq(2) td:first");
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
