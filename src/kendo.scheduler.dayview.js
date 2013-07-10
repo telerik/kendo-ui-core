@@ -210,7 +210,8 @@ kendo_module({
 
                 format = "t";
             } else {
-                width = this._calculateAllDayEventWidth(this._rows[0].slots, startSlot.index, endSlot.index);
+
+                width = this._calculateAllDayEventWidth(this._rows[0].slots, startSlot.columnIndex, endSlot.columnIndex);
 
                 container = this.element.find(".k-scheduler-header-wrap");
 
