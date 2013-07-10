@@ -172,7 +172,7 @@ kendo_module({
             path.setLineDash(ctx);
             path.setLineCap(ctx);
 
-            if (options.fill) {
+            if (options.fill && options.fill !== "transparent") {
                 path.setFill(ctx);
                 ctx.globalAlpha = options.fillOpacity;
                 ctx.fill();
