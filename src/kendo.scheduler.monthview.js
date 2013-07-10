@@ -463,41 +463,38 @@ kendo_module({
             this._resizeHint.find(".k-label-top,.k-label-bottom").text("");
 
             this._resizeHint.first().find(".k-label-top").text(kendo.toString(startSlot.start, "M/dd"));
+
             this._resizeHint.last().find(".k-label-bottom").text(kendo.toString(endSlot.start, "M/dd"));
         },
 
-       _updateMoveHint: function(event, startSlot, slotOffset) {
+       _updateMoveHint: function(event, initialSlot, currentSlot) {
+            var slots = this._row.slots;
+
+            var distance = currentSlot.start.getTime() - initialSlot.start.getTime();
+
             var duration = event.end.getTime() - event.start.getTime();
 
-            var start = new Date(startSlot.start.getTime());
+            var start = new Date(event.start.getTime());
 
-            var slotDuration = kendo.date.MS_PER_DAY;
-
-            kendo.date.setTime(start, -slotOffset * slotDuration);
-
-            start = kendo.date.getDate(start);
-
-            kendo.date.setTime(start, kendo.date.getMilliseconds(event.start));
+            kendo.date.setTime(start, distance);
 
             var end = new Date(start.getTime());
 
             kendo.date.setTime(end, duration);
 
             var startSlotIndex = this._slotIndex(start);
-            var endSlotIndex = this._slotIndex(end);
 
             if (startSlotIndex == null) {
-                startSlotIndex = endSlotIndex;
+                startSlotIndex = 0;
             }
+
+            var endSlotIndex = this._slotIndex(end);
 
             if (endSlotIndex == null) {
-                endSlotIndex = startSlotIndex;
+                endSlotIndex = slots.length - 1;
             }
 
-            var slots = this._row.slots;
-
-            startSlot = slots[startSlotIndex];
-
+            var startSlot = slots[startSlotIndex];
             var endSlot = slots[endSlotIndex];
 
             var slotGroup = {

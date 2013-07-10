@@ -486,7 +486,6 @@ kendo_module({
             var endSlot;
             var event;
             var that = this;
-            var slotOffset;
 
             that._moveDraggable = new kendo.ui.Draggable(that.element, {
                 distance: 0,
@@ -498,29 +497,11 @@ kendo_module({
 
                     var view = that.view();
 
-                    var events = this.element.find(kendo.format(".k-event[{0}={1}]", kendo.attr("uid"), uid));
-
-                    eventElement = events.first();
-
-                    var offset = eventElement.offset();
-
-                    startSlot = view._slotByPosition(offset.left, offset.top);
-
-                    var slot = view._slotByPosition(e.x.location, e.y.location);
-
-                    slotOffset = slot.index - startSlot.index;
-
-                    eventElement = events.last();
-
-                    offset = eventElement.offset();
-
-                    offset.left += eventElement[0].clientWidth;
-
-                    offset.top += eventElement[0].clientHeight;
-
-                    endSlot = view._slotByPosition(offset.left, offset.top);
-
                     event = getOccurrenceByUid(that._data, uid);
+
+                    startSlot = view._slotByPosition(e.x.location, e.y.location);
+
+                    endSlot = startSlot;
                 },
                 drag: function(e) {
                     var view = that.view();
@@ -531,30 +512,20 @@ kendo_module({
                         return;
                     }
 
-                    startSlot = slot;
+                    endSlot = slot;
 
-                    view._updateMoveHint(event, slot, slotOffset);
+                    view._updateMoveHint(event, startSlot, endSlot);
                 },
                 dragend: function() {
                     that.view()._removeMoveHint();
 
+                    var distance = endSlot.start.getTime() - startSlot.start.getTime();
+
                     var duration = event.end.getTime() - event.start.getTime();
 
-                    var start = new Date(startSlot.start.getTime());
+                    var start = new Date(event.start.getTime());
 
-                    var slotDuration = startSlot.end.getTime() - start.getTime();
-
-                    if (slotDuration === 0) {
-                        slotDuration = kendo.date.MS_PER_DAY;
-                    }
-
-                    kendo.date.setTime(start, -slotOffset * slotDuration);
-
-                    if (startSlot.isAllDay) {
-                        start = kendo.date.getDate(start);
-
-                        kendo.date.setTime(start, getMilliseconds(event.start));
-                    }
+                    kendo.date.setTime(start, distance);
 
                     var end = new Date(start.getTime());
 

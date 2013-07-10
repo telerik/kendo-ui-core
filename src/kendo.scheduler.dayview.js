@@ -232,50 +232,66 @@ kendo_module({
                             .find(".k-label-bottom").text(kendo.toString(endSlot.end, format));
         },
 
-        _updateMoveHint: function(event, startSlot, slotOffset) {
+        _updateMoveHint: function(event, initialSlot, currentSlot) {
             var isAllDay = event.isAllDay || event.end.getTime() - event.start.getTime() > MS_PER_DAY;
             var slots;
 
             if (isAllDay) {
-                startSlot = this._toAllDaySlot(startSlot);
+                currentSlot = this._toAllDaySlot(currentSlot);
                 slots = this._rows[0].slots;
             } else {
-                startSlot = this._toDaySlot(startSlot);
-                slots = this._columns[this._dateSlotIndex(startSlot.start)].slots;
+                currentSlot = this._toDaySlot(currentSlot);
+                slots = this._columns[this._dateSlotIndex(currentSlot.start)].slots;
             }
 
-            startSlot = slots[startSlot.index - slotOffset];
+            var distance = currentSlot.start.getTime() - initialSlot.start.getTime();
 
-            if (!this._moveHint.length) {
-                this._moveHint = this._createEventElement(event, !isAllDay);
-                this._moveHint.appendTo(isAllDay ? this.element.find(".k-scheduler-header-wrap") : this.content);
+            var duration = event.end.getTime() - event.start.getTime();
+
+            var start = new Date(event.start.getTime());
+
+            kendo.date.setTime(start, distance);
+
+            var end = new Date(start.getTime());
+
+            kendo.date.setTime(end, duration);
+
+            var startSlotIndex;
+            var endSlotIndex;
+
+            if (isAllDay) {
+                startSlotIndex = this._dateSlotIndex(start);
+                endSlotIndex = this._dateSlotIndex(end);
+            } else {
+                startSlotIndex = this._timeSlotIndex(start);
+                endSlotIndex = this._timeSlotIndex(end);
             }
+
+            if (startSlotIndex < 0) {
+               startSlotIndex = 0;
+            }
+
+            if (endSlotIndex < 0) {
+                endSlotIndex = slots.length - 1;
+            }
+
+            var startSlot = slots[startSlotIndex];
 
             var css = {
                 left: startSlot.offsetLeft + 2,
                 top: startSlot.offsetTop
             };
 
-            var duration = event.end.getTime() - event.start.getTime();
-
-            var end = new Date(startSlot.start.getTime());
-
-            kendo.date.setTime(end, duration);
-
-            var columnIndex = this._dateSlotIndex(end);
-
             if (isAllDay) {
-                if (columnIndex < 0) {
-                    columnIndex = startSlot.index + 1;
-                }
-
-                css.width = this._calculateAllDayEventWidth(this._rows[0].slots, startSlot.index, columnIndex) - 4;
+                css.width = this._calculateAllDayEventWidth(slots, startSlotIndex, endSlotIndex) - 4;
             } else {
-                var timeIndex = this._timeSlotIndex(end);
-
-                css.height = this._calculateEventHeight(this._columns[columnIndex].slots, startSlot.index, timeIndex) - 4;
-
+                css.height = this._calculateEventHeight(slots, startSlotIndex, endSlotIndex) - 4;
                 css.width = startSlot.clientWidth * 0.9 - 4;
+            }
+
+            if (!this._moveHint.length) {
+                this._moveHint = this._createEventElement(event, !isAllDay);
+                this._moveHint.appendTo(isAllDay ? this.element.find(".k-scheduler-header-wrap") : this.content);
             }
 
             this._moveHint.css(css);
