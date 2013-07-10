@@ -1539,6 +1539,17 @@
                 deepEqual(slots[slots.length - 1].end, new Date("2013/6/6 20:00"));
             });
 
+            test("next to last slot end date is set correctly", function() {
+                var view = setup({
+                    majorTick: 60,
+                    dates: [new Date("2013/6/6")]
+                });
+
+                var slots = view._columns[0].slots;
+                deepEqual(slots[slots.length - 2].start, new Date("2013/6/6 23:00"));
+                deepEqual(slots[slots.length - 2].end, new Date("2013/6/6 23:30"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

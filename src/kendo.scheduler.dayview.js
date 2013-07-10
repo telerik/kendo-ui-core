@@ -361,7 +361,7 @@ kendo_module({
             var td;
             var range;
             var cell;
-            var allDayRowCount = 0;
+            var visibleAllDayRowCount = 0;
             var isVertical = this.options.groupOrientation === "vertical";
 
             var allDaySelector = ".k-scheduler-header-all-day tr";
@@ -372,11 +372,13 @@ kendo_module({
 
             var allDayRows = this.element.find(allDaySelector);
 
+            var allDayRowCount = this._isVerticallyGrouped() ? allDayRows.length : 0;
+
             for (var rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
                 var tr = tableRows[rowIndex];
 
                 if (tr.className && tr.className.indexOf("k-scheduler-header-all-day") > -1) {
-                    allDayRowCount++;
+                    visibleAllDayRowCount++;
                     continue;
                 }
 
@@ -385,7 +387,7 @@ kendo_module({
                 for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
                     td = tableCells[cellIndex];
 
-                    range = this._rangeByIndex(rowIndex - allDayRowCount, cellIndex, tableRows.length - 1 - allDayRows.length);
+                    range = this._rangeByIndex(rowIndex - visibleAllDayRowCount, cellIndex, tableRows.length - 1 - allDayRowCount);
 
                     cell = {
                         offsetTop: td.offsetTop,
@@ -415,12 +417,12 @@ kendo_module({
 
             this._columns = columns;
 
-            tableRows = allDayRows;
+            //tableRows = allDayRows;
 
             var rows = [];
 
             var row = { slots: [], events: [] };
-            if (!tableRows.length) {
+            if (!allDayRows.length) {
                 rows.push(row);
             } else {
                 var rowsInGroup = 0;
@@ -428,18 +430,18 @@ kendo_module({
                     rowsInGroup = this._rowCountInGroup();
                 }
 
-                for (rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
+                for (rowIndex = 0; rowIndex < allDayRows.length; rowIndex++) {
                     row = { slots: [], events: [] };
 
-                    tableCells = tableRows[rowIndex].children;
+                    tableCells = allDayRows[rowIndex].children;
 
                     for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
                         td = tableCells[cellIndex];
 
-                        range = this._rangeByIndex(rowIndex, cellIndex, tableRows.length);
+                        range = this._rangeByIndex(rowIndex, cellIndex, allDayRows.length);
 
                         cell = {
-                            offsetTop: tableRows.length > 1 ? td.offsetTop : td.parentNode.parentNode.parentNode.offsetTop,
+                            offsetTop: allDayRows.length > 1 ? td.offsetTop : td.parentNode.parentNode.parentNode.offsetTop,
                             offsetLeft: td.offsetLeft,
                             clientHeight: td.clientHeight,
                             offsetHeight: td.offsetHeight,
