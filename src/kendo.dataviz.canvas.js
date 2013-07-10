@@ -450,7 +450,9 @@ kendo_module({
 
             context.save();
 
-            text.setRotation(context);
+            if (options.rotation !== 0) {
+                text.setRotation(context);
+            }
 
             context.font = options.font;
             context.fillStyle = options.color;
@@ -472,10 +474,10 @@ kendo_module({
                 offsetX = rcx - cx,
                 offsetY = rcy - cy;
 
+            context.translate(offsetX, offsetY);
             context.translate(cx, cy);
             context.rotate(options.rotation * DEG_TO_RAD);
             context.translate(-cx, -cy);
-            context.translate(offsetX, offsetY);
         }
     });
 
@@ -511,7 +513,7 @@ kendo_module({
 
     // Exports ================================================================
     if (supportsCanvas) {
-        dataviz.ViewFactory.current.register("canvas", CanvasView, 30);
+        dataviz.ViewFactory.current.register("canvas", CanvasView, 0);
     }
 
     deepExtend(dataviz, {

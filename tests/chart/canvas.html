@@ -427,8 +427,8 @@
                     });
                     text.render(ctx);
 
-                    equal(ctx.log.translate[2].x, 0.5);
-                    equal(ctx.log.translate[2].y, 7);
+                    equal(ctx.log.translate[0].x, 0.5);
+                    equal(ctx.log.translate[0].y, 7);
                     equal(ctx.log.rotate[0].angle, 45 * DEG_TO_RAD);
                 });
 
@@ -445,8 +445,8 @@
                     });
                     text.render(ctx);
 
-                    equal(ctx.log.translate[2].x, -6.5);
-                    equal(ctx.log.translate[2].y, 6.5);
+                    equal(ctx.log.translate[0].x, -6.5);
+                    equal(ctx.log.translate[0].y, 6.5);
                     equal(ctx.log.rotate[0].angle, 90 * DEG_TO_RAD);
                 });
 
@@ -463,8 +463,8 @@
                     });
                     text.render(ctx);
 
-                    equal(ctx.log.translate[2].x, 0.5);
-                    equal(ctx.log.translate[2].y, 7);
+                    equal(ctx.log.translate[0].x, 0.5);
+                    equal(ctx.log.translate[0].y, 7);
                     equal(ctx.log.rotate[0].angle, -45 * DEG_TO_RAD);
                 });
 
@@ -481,8 +481,8 @@
                     });
                     text.render(ctx);
 
-                    equal(ctx.log.translate[2].x, -6.5);
-                    equal(ctx.log.translate[2].y, 6.5);
+                    equal(ctx.log.translate[0].x, -6.5);
+                    equal(ctx.log.translate[0].y, 6.5);
                     equal(ctx.log.rotate[0].angle, -90 * DEG_TO_RAD);
                 });
 
@@ -689,7 +689,7 @@
                 });
 
                 test("rotates gradient by 90 degrees", function() {
-                    dataviz.Gradients.test.rotation = 90;
+                    line.options.overlay.rotation = 90;
                     line.render(ctx);
                     equal(ctx.log.createLinearGradient[0].x2, 10);
                     equal(ctx.log.createLinearGradient[0].y2, 30);
