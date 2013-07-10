@@ -589,7 +589,6 @@ kendo_module({
                     offset.top += eventElement[0].clientHeight;
 
                     endSlot = view._slotByPosition(offset.left, offset.top);
-
                 },
                 drag: function(e) {
                     var dragHandle = $(e.currentTarget);
@@ -607,7 +606,11 @@ kendo_module({
                     var update = false;
 
                     if (dir == "south") {
-                        if (getMilliseconds(slot.end) - getMilliseconds(event.start) >= view._timeSlotInterval()) {
+                        var start = kendo.date.getDate(event.start);
+
+                        kendo.date.setTime(start, slot.end - event.start);
+
+                        if (getMilliseconds(start) >= view._timeSlotInterval()) {
                             endSlot = slot;
                             update = true;
                         }

@@ -236,6 +236,44 @@
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
             });
 
+            test("resize event till the end of the day", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 17:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30 PM"), end: new Date("2013/6/6 11:00 PM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.last());
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+            });
+
+            test("resize event till the last but one slot", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 17:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30 PM"), end: new Date("2013/6/6 11:00 PM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(slots.length - 2));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 23);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+            });
+
             test("dragging and dropping doesn't change the event time if editable is set to false", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
