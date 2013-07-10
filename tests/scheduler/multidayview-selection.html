@@ -17,6 +17,8 @@
         <script src="../../src/kendo.scheduler.dayview.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
     </head>
     <body>
         <h1 id="qunit-header">Scheduler MultidayView selection</h1>
@@ -44,6 +46,20 @@
                 return new MyDayView(container, $.extend({ majorTick: 120 }, options));
             }
 
+            function createSelection(options) {
+                var start, end;
+                if (options instanceof Date) {
+                    start = new Date(options);
+                    end = new Date(start.getTime() + (30 * kendo.date.MS_PER_MINUTE));
+                    options = {
+                        start: start,
+                        end: end
+                    };
+                }
+
+                return $.extend({ events: [] }, options);
+            }
+
             module("Multi Day View selection", {
                 setup: function() {
                     container = document.createElement("div");
@@ -58,7 +74,7 @@
                 }
             });
 
-            test("View moves selection using week length as offset", function() {
+            test("View moves selection by week length offset when navigate to future period", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] });
                 var selection = {
                     start: new Date(2013, 6, 6),
@@ -70,6 +86,133 @@
                 deepEqual(selection.start, new Date(2013, 6, 8));
                 deepEqual(selection.end, new Date(2013, 6, 8, 0, 30));
             });
+
+            test("View moves selection by week length offset when navigate to past period", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] });
+                var selection = {
+                    start: new Date(2013, 6, 9),
+                    end: new Date(2013, 6, 9, 0, 30)
+                };
+
+                view.moveSelectionByOffset(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 0, 30));
+            });
+
+            test("View move last selected slot when navigate to future period", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 6, 23, 30),
+                    end: new Date(2013, 6, 7, 0, 0)
+                };
+
+                view.moveSelectionByOffset(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
+            });
+
+            test("View move last selected slot when navigate to past period", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 8, 23, 30),
+                    end: new Date(2013, 6, 9, 0, 0)
+                };
+
+                view.moveSelectionByOffset(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
+            });
+
+            test("View moveSelectionByOffset clears selected events", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 8, 23, 30),
+                    end: new Date(2013, 6, 9, 0, 0),
+                    events: ["1"]
+                };
+
+                view.moveSelectionByOffset(selection);
+
+                equal(selection.events.length, 0);
+            });
+
+            test("View adjust start/end date based on view.startDate/view.endDate when navigate to future", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 6, 23, 30),
+                    end: new Date(2013, 6, 9, 0, 0)
+                };
+
+                view.moveSelectionByOffset(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
+            });
+
+            test("View adjust start/end date based on view.startDate/view.endDate when navigate to past", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = {
+                    start: new Date(2013, 6, 6, 23, 30),
+                    end: new Date(2013, 6, 8, 0, 0)
+                };
+
+                view.moveSelectionByOffset(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
+            });
+
+            test("View selects cell", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection(new Date(2013, 6, 7));
+
+                view.select(selection);
+
+                ok(view.content.find("table td:first").hasClass("k-state-selected"));
+            });
+
+            test("View selects multiple cells", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 7, 2, 30) });
+
+                view.select(selection);
+
+                var allCells = view.content.find("table td"),
+                    cells = allCells.filter("td.k-state-selected");
+
+                equal(cells.length, 2);
+                equal(cells[0], allCells[1]);
+                equal(cells[1], allCells[2]);
+
+            });
+
+            test("View selects selection bigger than current column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 8, 2, 30) });
+
+                view.select(selection);
+
+                var allCells = view.content.find("table td"),
+                    cells = allCells.filter("td.k-state-selected");
+
+                equal(cells.length, 26);
+            });
+
+            test("View selects selection between 3 columns", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8), new Date(2013, 6, 9)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 9, 2, 30) });
+
+                view.select(selection);
+
+                var allCells = view.content.find("table td"),
+                    cells = allCells.filter("td.k-state-selected");
+
+                equal(cells.length, 50);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

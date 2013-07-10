@@ -1523,6 +1523,7 @@ kendo_module({
             return this._dates.length;
         },
 
+        //TODO: refactor
         moveSelectionByOffset: function(selection) {
             var offset = this._selectionOffset(),
                 startDate = this._startDate,
@@ -1535,18 +1536,19 @@ kendo_module({
             }
 
             if (start < startDate || end >= endDate) { //requies >= - navigate to next view and move down
-                if (start > endDate) {
+                if (start >= endDate) {
                     offset = -offset;
                 }
 
                 start.setDate(start.getDate() + offset);
+                end.setDate(end.getDate() + offset);
+
                 if (start < startDate) {
-                    start.setFullYear(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+                    setDate(start, startDate);
                 }
 
-                end.setDate(end.getDate() + offset);
                 if (end > endDate) {
-                    end.setFullYear(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+                    setDate(end, endDate);
                 }
 
                 selection.events = [];
@@ -1559,14 +1561,21 @@ kendo_module({
 
         select: function(selection) {
             var that = this,
-                col = that._dateSlotIndex(selection.start),
-                row = that._timeSlotIndex(selection.start),
+                startCol = Math.ceil(that._dateSlotIndex(selection.start)),
+                startRow = Math.ceil(that._timeSlotIndex(selection.start)),
+                endCol = Math.ceil(that._dateSlotIndex(selection.end)),
+                endRow = Math.ceil(that._timeSlotIndex(selection.end)),
                 isAllDay = selection.isAllDay,
-                event;
+                event,
+                end;
 
-            that.clearSelection();
+            if (endRow > 0) {
+                endRow -= 1;
+            }
 
-            if (selection.events && selection.events.length) {
+            //that.clearSelection();
+
+            /*if (selection.events && selection.events.length) {
                 event = that.content.add(that.datesHeader.children())
                             .children("[data-uid=" + selection.events[0] + "]")
                             .addClass("k-state-selected");
@@ -1578,6 +1587,22 @@ kendo_module({
                 }
             } else {
                 that._selectCell(row, col, isAllDay);
+            }*/
+
+            if (startCol !== endCol) {
+                end = that._columns[startCol].slots.length - 1;
+            }
+
+            for (; startCol <= endCol; startCol++) {
+                if (startCol === endCol) {
+                    end = endRow;
+                }
+
+                for (; startRow <= end; startRow++) {
+                    that._selectCell(startRow, startCol); //, isAllDay);
+                }
+
+                startRow = 0;
             }
         },
 
@@ -1784,6 +1809,10 @@ kendo_module({
             return found;
         }
     });
+
+    function setDate(date1, date2) {
+        date1.setFullYear(date2.getFullYear(), date2.getMonth(), date2.getDate());
+    }
 
     function resourceValue(resource, item) {
         if (resource.valuePrimitive) {
