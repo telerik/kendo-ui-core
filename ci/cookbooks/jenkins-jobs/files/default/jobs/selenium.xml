@@ -4,11 +4,11 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.5">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.6">
       <projectUrl>https://github.com/telerik/kendo-selenium/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.3.0">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.4.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
