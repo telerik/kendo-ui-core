@@ -484,14 +484,20 @@ kendo_module({
 
             var startSlotIndex = this._slotIndex(start);
 
+            var head = false;
+
+            var tail = false;
+
             if (startSlotIndex == null) {
                 startSlotIndex = 0;
+                head = true;
             }
 
             var endSlotIndex = this._slotIndex(end);
 
             if (endSlotIndex == null) {
                 endSlotIndex = slots.length - 1;
+                tail = true;
             }
 
             var startSlot = slots[startSlotIndex];
@@ -527,7 +533,7 @@ kendo_module({
 
                 endSlot = slotGroup.endSlot;
 
-                var hint = this._createEventElement(event);
+                var hint = this._createEventElement($.extend({}, event, { head: head, tail: tail }));
 
                 hint.css({
                     left: startSlot.offsetLeft + 2,
