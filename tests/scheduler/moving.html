@@ -49,6 +49,25 @@
                 }
             });
 
+            test("hint shows start and end time when moving event in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle, handle.offset());
+                drag(scheduler, handle, slots.eq(1).offset());
+
+                equal($(".k-event-drag-hint dt").text(), "10:30 AM - 11:30 AM");
+            });
+
             test("moving event in day view changes its start time", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),

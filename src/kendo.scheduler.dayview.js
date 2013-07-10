@@ -289,12 +289,12 @@ kendo_module({
                 css.width = startSlot.clientWidth * 0.9 - 4;
             }
 
-            if (!this._moveHint.length) {
-                this._moveHint = this._createEventElement(event, !isAllDay);
-                this._moveHint.appendTo(isAllDay ? this.element.find(".k-scheduler-header-wrap") : this.content);
-            }
+            this._removeMoveHint();
 
+            this._moveHint = this._createEventElement($.extend({}, event, { start: start, end: end }), !isAllDay);
+            this._moveHint.addClass("k-event-drag-hint");
             this._moveHint.css(css);
+            this._moveHint.appendTo(isAllDay ? this.element.find(".k-scheduler-header-wrap") : this.content);
 
             return startSlot;
         },

@@ -535,6 +535,9 @@ kendo_module({
                     height: this.options.eventHeight,
                     width: this._calculateAllDayEventWidth(this._row.slots, startSlot.index, endSlot.index) - (startSlot.index !== endSlot.index ? 5 : 4)
                 });
+
+                hint.addClass("k-event-drag-hint");
+
                 hint.appendTo(this.content);
                 this._moveHint = this._moveHint.add(hint);
             }
