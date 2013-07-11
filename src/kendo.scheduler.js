@@ -439,9 +439,15 @@ kendo_module({
                 var key = e.keyCode,
                     view = that.view(),
                     selection = that._selection,
+                    shiftKey = e.shiftKey,
                     start;
 
-                if (view.move(selection, key)) {
+                if (key === keys.TAB) {
+                    if (view.moveToEvent(selection, shiftKey)) {
+                        view.select(selection);
+                        e.preventDefault();
+                    }
+                } else if (view.move(selection, key, shiftKey)) {
                     start = selection.start;
 
                     if (start < view.startDate() || start > view.endDate()) {
@@ -450,11 +456,6 @@ kendo_module({
                         view.select(selection);
                     }
                     e.preventDefault();
-                } else if (key === keys.TAB) {
-                    if (view.moveToEvent(selection, e.shiftKey)) {
-                        view.select(selection);
-                        e.preventDefault();
-                    }
                 }
 
                 that._adjustSelectedDate();

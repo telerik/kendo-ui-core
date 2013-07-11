@@ -176,6 +176,24 @@
                 equal(view.args("move")[1], keys.DOWN);
             });
 
+            test("scheduler calls view.move method with information for key modifiers", function() {
+                var view = scheduler.view();
+
+                stub(view, {
+                    move: view.move
+                });
+
+                scheduler.wrapper.focus().trigger({
+                    type: "keydown",
+                    keyCode: keys.DOWN,
+                    shiftKey: true
+                });
+
+                equal(view.calls("move"), 1);
+                equal(view.args("move")[1], keys.DOWN);
+                equal(view.args("move")[2], true);
+            });
+
             test("scheduler calls preventDefault if view.move supports pressed key", 1, function() {
                 var view = scheduler.view();
 
@@ -298,6 +316,24 @@
                 });
 
                 ok(view.calls("select"));
+            });
+
+            test("scheduler doesn't call move on TAB", 2, function() {
+                container.focus();
+
+                var view = scheduler.view();
+                stub(view, {
+                    moveToEvent: view.moveToEvent,
+                    move: view.move
+                });
+
+                scheduler.wrapper.trigger({
+                    type: "keydown",
+                    keyCode: keys.TAB
+                });
+
+                ok(view.calls("moveToEvent"));
+                ok(!view.calls("move"));
             });
 
             test("scheduler adjusts selected date on keydown", 1, function() {
