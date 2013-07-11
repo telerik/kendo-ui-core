@@ -825,26 +825,8 @@ kendo_module({
         },
 
         _rangeToDates: function(cell) {
-            var parentRow = cell.closest("tr"),
-                tableRows = parentRow.closest("table").find("tr"),
-                maxTimeSlotIndex = tableRows.length - 1,
-                dateIndex = parentRow.find("td").index(cell),
-                timeIndex = tableRows.index(parentRow),
-                slotDate = kendo.date.getDate(this._slotIndexDate(dateIndex)),
-                slotEndDate;
-
-            if (slotDate) {
-                slotEndDate = kendo.date.getDate(slotDate);
-
-                setTime(slotDate, this._slotIndexTime(timeIndex));
-                setTime(slotEndDate, this._slotIndexTime(Math.min(timeIndex + 1, maxTimeSlotIndex)));
-
-                return {
-                    start: slotDate,
-                    end: slotEndDate
-                };
-            }
-            return null;
+            var offset = cell.offset();
+            return this._slotByPosition(offset.left, offset.top);
         },
 
         _slotIndexTime: function(index) {
