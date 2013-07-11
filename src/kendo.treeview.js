@@ -215,7 +215,7 @@ kendo_module({
             }
 
             if (options.checkboxes && options.checkboxes.checkChildren) {
-                that._updateIndeterminateInitial(that.wrapper);
+                that.updateIndeterminate();
             }
 
             if (that.element[0].id) {
@@ -661,19 +661,23 @@ kendo_module({
                 .prop(CHECKED, all && siblings[0].checked);
         },
 
-        _updateIndeterminateInitial: function(node) {
+        updateIndeterminate: function(node) {
+            // top-down update of inital indeterminate state for all nodes
+            node = node || this.wrapper;
+
             var subnodes = subGroup(node).children(), i;
 
             if (subnodes.length) {
                 for (i = 0; i < subnodes.length; i++) {
-                    this._updateIndeterminateInitial(subnodes.eq(i));
+                    this.updateIndeterminate(subnodes.eq(i));
                 }
 
                 this._setIndeterminate(node);
             }
         },
 
-        _updateIndeterminate: function(node) {
+        _bubbleIndeterminate: function(node) {
+            // bottom-up setting of indeterminate state of parent nodes
             var parentNode = this.parent(node),
                 checkbox;
 
@@ -687,7 +691,7 @@ kendo_module({
                     this.dataItem(parentNode).checked = false;
                 }
 
-                this._updateIndeterminate(parentNode);
+                this._bubbleIndeterminate(parentNode);
             }
         },
 
@@ -1217,7 +1221,7 @@ kendo_module({
 
                             that._setChecked(item.children, isChecked);
 
-                            that._updateIndeterminate(node);
+                            that._bubbleIndeterminate(node);
                         }
                     } else if (field == "expanded") {
                         that._toggle(that.findByUid(item.uid), item, item[field]);
