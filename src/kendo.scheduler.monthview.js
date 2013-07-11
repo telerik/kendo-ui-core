@@ -123,6 +123,7 @@ kendo_module({
                var offset = $(e.currentTarget).offset();
                var slot = that._slotByPosition(offset.left, offset.top);
 
+               e.preventDefault();
                that.trigger("navigate", { view: "day", date: slot.start });
             });
         },
@@ -138,8 +139,10 @@ kendo_module({
 
                 if (that.options.editable.create !== false) {
                     that.element.on("dblclick" + NS, ".k-scheduler-monthview .k-scheduler-content td", function(e) {
-                        var element = $(this);
-                        that.trigger("add", { eventInfo: extend({ isAllDay: true }, that._rangeToDates(element)) });
+                        var offset = $(e.currentTarget).offset();
+                        var slot = that._slotByPosition(offset.left, offset.top);
+
+                        that.trigger("add", { eventInfo: { isAllDay: true, start: slot.start, end: slot.end } });
                         e.preventDefault();
                     });
                 }
@@ -154,16 +157,8 @@ kendo_module({
         },
 
         _rangeToDates: function(cell) {
-            var index = this.content.find("table td").index(cell),
-                slotDate = kendo.date.addDays(this.startDate(), index);
-
-            if (slotDate) {
-                 return {
-                    start: slotDate,
-                    end: new Date(slotDate)
-                };
-            }
-            return null;
+            var offset = $(cell).offset();
+            return this._slotByPosition(offset.left, offset.top);
         },
 
         _columnCountForLevel: function(level) {
@@ -583,6 +578,7 @@ kendo_module({
                 this._moveHint = this._moveHint.add(hint);
             }
        },
+
        _slots: function() {
             var row = {
                 slots: [],
@@ -597,7 +593,9 @@ kendo_module({
                 var cell = cells[idx];
                 var clientHeight = cell.clientHeight;
                 var firstChildHeight = cell.firstChild.offsetHeight + 3;
-                var start = kendo.date.addDays(this.startDate(), idx);
+                var groupIndex = this._groupHorizontalIndex(idx);
+                var originalIndex = this._removeOffset(idx, groupIndex);
+                var start = kendo.date.addDays(this.startDate(), originalIndex);
 
                 row.slots.push({
                    clientWidth: cell.clientWidth,
@@ -611,7 +609,8 @@ kendo_module({
                    end: start,
                    element: cell,
                    isAllDay: true,
-                   index: idx
+                   index: idx,
+                   groupIndex: groupIndex
                 });
             }
 
@@ -695,6 +694,25 @@ kendo_module({
             return 1;
         },
 
+        _removeOffset: function(slotIndex, groupIndex) {
+            var resources = this.groupedResources;
+            var offset = 0;
+
+            if (resources.length) {
+                var columnCount = this._columnOffsetForResource(resources.length);
+                var groupCount = this._groupCount();
+                var cellsPerRow = columnCount * groupCount;
+
+                var rowIndex = Math.floor(slotIndex / cellsPerRow);
+
+                offset = (columnCount * (groupCount - 1) * rowIndex);
+
+                offset += columnCount * groupIndex;
+            }
+
+            return slotIndex - offset;
+        },
+
         _applyOffset: function(slotIndex, groupIndex) {
             var resources = this.groupedResources;
             var offset = 0;
@@ -709,6 +727,21 @@ kendo_module({
             }
 
             return slotIndex + offset;
+        },
+
+        _groupHorizontalIndex: function(slotIndex) {
+            var resources = this.groupedResources;
+            if (resources.length) {
+                var columnCount = this._columnOffsetForResource(resources.length);
+                var groupCount = this._groupCount();
+                var cellsPerRow = columnCount * groupCount;
+
+                var rowIndex = Math.floor(slotIndex / cellsPerRow);
+
+                var offset = (columnCount * groupCount * rowIndex);
+                return Math.floor((slotIndex - offset) / columnCount);
+            }
+            return 0;
         },
 
         _columnOffsetForResource: function(index) {
