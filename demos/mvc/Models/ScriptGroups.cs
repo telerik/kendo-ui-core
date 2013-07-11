@@ -85,7 +85,8 @@ namespace Kendo.Models
             "kendo.scheduler.js"
 #else
             jQueryPath,
-            "kendo.all.min.js"
+            "kendo.all.min.js",
+            "kendo.timezones.js"
 #endif
         };
 
