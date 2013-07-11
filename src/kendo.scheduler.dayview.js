@@ -10,6 +10,8 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.ui,
         keys = kendo.keys,
+        addDays = kendo.date.addDays,
+        setTime = kendo.date.setTime,
         SchedulerView = ui.SchedulerView,
         extend = $.extend,
         proxy = $.proxy,
@@ -98,7 +100,7 @@ kendo_module({
 
     function toInvariantTime(date) {
         var staticDate = new Date(1980, 1, 1, 0, 0, 0);
-        kendo.date.setTime(staticDate, getMilliseconds(date));
+        setTime(staticDate, getMilliseconds(date));
         return staticDate;
     }
 
@@ -261,7 +263,7 @@ kendo_module({
 
             var end = new Date(start.getTime());
 
-            kendo.date.setTime(end, duration);
+            setTime(end, duration);
 
             var startSlotIndex;
             var endSlotIndex;
@@ -670,7 +672,7 @@ kendo_module({
 
                 html += action(start, isMajorTickRow, isMiddleRow, isLastSlotRow);
 
-                kendo.date.setTime(start, msInterval, false);
+                setTime(start, msInterval, false);
             }
 
             if (msMax) {
@@ -834,8 +836,8 @@ kendo_module({
             if (slotDate) {
                 slotEndDate = kendo.date.getDate(slotDate);
 
-                kendo.date.setTime(slotDate, this._slotIndexTime(timeIndex));
-                kendo.date.setTime(slotEndDate, this._slotIndexTime(Math.min(timeIndex + 1, maxTimeSlotIndex)));
+                setTime(slotDate, this._slotIndexTime(timeIndex));
+                setTime(slotEndDate, this._slotIndexTime(Math.min(timeIndex + 1, maxTimeSlotIndex)));
 
                 return {
                     start: slotDate,
@@ -860,16 +862,16 @@ kendo_module({
 
             var slotEndDate = kendo.date.getDate(slotDate);
 
-            kendo.date.setTime(slotDate, this._slotIndexTime(rowIndex));
+            setTime(slotDate, this._slotIndexTime(rowIndex));
 
             maxTimeSlotIndex = this._adjustSlotIndex(maxTimeSlotIndex);
             if (this._adjustSlotIndex(rowIndex) >= maxTimeSlotIndex) {
-                kendo.date.setTime(slotEndDate, getMilliseconds(this.options.endTime));
+                setTime(slotEndDate, getMilliseconds(this.options.endTime));
                 if (kendo.date.getDate(slotEndDate).getTime() === slotEndDate.getTime()) {
                     slotEndDate = kendo.date.nextDay(slotEndDate);
                 }
             } else {
-                kendo.date.setTime(slotEndDate, this._slotIndexTime(rowIndex + 1));
+                setTime(slotEndDate, this._slotIndexTime(rowIndex + 1));
             }
 
             return {
@@ -899,7 +901,7 @@ kendo_module({
 
             for (idx = 0, length = slots.length; idx < length; idx++) {
                 slotStart = new Date(+slots[idx]);
-                kendo.date.setTime(slotStart, startTime);
+                setTime(slotStart, startTime);
 
                 if (index === idx) {
                     return slotStart;
@@ -1197,12 +1199,12 @@ kendo_module({
 
             if (getMilliseconds(slotEndTime) === getMilliseconds(kendo.date.getDate(slotEndTime))) {
                 slotEndTime = kendo.date.getDate(slotEndTime);
-                kendo.date.setTime(slotEndTime, MS_PER_DAY - 1);
+                setTime(slotEndTime, MS_PER_DAY - 1);
             }
 
             if (getMilliseconds(endTime) === getMilliseconds(kendo.date.getDate(endTime)) && endTime.getTime() > startTime.getTime()) {
                 endTime = kendo.date.getDate(endTime);
-                kendo.date.setTime(endTime, MS_PER_DAY - 1);
+                setTime(endTime, MS_PER_DAY - 1);
             }
 
             endTime = getMilliseconds(endTime);
@@ -1668,13 +1670,71 @@ kendo_module({
         },
 
         move: function(selection, key) {
-            var prevent = false;
+            var options = this.options,
+                startTime = options.startTime,
+                interval = (options.majorTick * MS_PER_MINUTE) / (options.minorTickCount || 1),
+                isAllDay = selection.isAllDay,
+                events = selection.events,
+                start = selection.start,
+                end = selection.end,
+                handled = false,
+                event;
 
-            if (key === keys.DOWN) {
-                prevent = true;
+            if (key === keys.RIGHT) {
+                handled = true;
+
+                start = addDays(start, 1);
+                end = addDays(end, 1);
+            } else if (key === keys.LEFT) {
+                handled = true;
+
+                start = addDays(start, -1);
+                end = addDays(end, -1);
+            } else if (key === keys.DOWN) {
+                handled = true;
+
+                if (events[0]) {
+                    start = new Date(end);
+                    setTime(start, -interval);
+                }
+
+                if (isAllDay) {
+                    end.setHours(startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
+                    start = new Date(end);
+                    isAllDay = false;
+                } else {
+                    setTime(start, interval);
+                    if (end - start > 0) {
+                        end = new Date(start);
+                    }
+                }
+
+                setTime(end, interval);
+            } else if (key === keys.UP) {
+                handled = true;
+                if (!isAllDay) {
+                    if ((getMilliseconds(start) - interval) < getMilliseconds(startTime)) {
+                        isAllDay = true;
+                    } else {
+                        if (end - start > interval) {
+                            end = new Date(start);
+                        } else {
+                            setTime(end, -interval);
+                        }
+
+                        setTime(start, -interval);
+                    }
+                }
             }
 
-            return prevent;
+            if (handled) {
+                selection.events = [];
+                selection.isAllDay = isAllDay;
+                selection.start = start;
+                selection.end = end;
+            }
+
+            return handled;
         },
 
         moveToEvent: function(selection, previous) {
