@@ -1507,7 +1507,7 @@ kendo_module({
             return this._dates.length;
         },
 
-        //TODO: refactor
+        //TODO: refactor... very buggy!!!
         moveSelectionByOffset: function(selection) {
             var offset = this._selectionOffset(),
                 startDate = this._startDate,
@@ -1519,7 +1519,7 @@ kendo_module({
                 endDate = kendo.date.addDays(endDate, 1);
             }
 
-            if (start < startDate || end >= endDate) { //requies >= - navigate to next view and move down
+            if (start < startDate || end >= endDate) {
                 if (start >= endDate) {
                     offset = -offset;
                 }
@@ -1544,15 +1544,17 @@ kendo_module({
         },
 
         select: function(selection) {
-            this.clearSelection();
+            if (selection) {
+                this.clearSelection();
 
-            if (selection.events[0]) {
-                if (this._selectEvents(selection)) {
-                    return;
+                if (selection.events[0]) {
+                    if (this._selectEvents(selection)) {
+                        return;
+                    }
                 }
-            }
 
-            this._selectCells(selection);
+                this._selectCells(selection);
+            }
         },
 
         _selectEvents: function(selection) {
@@ -1692,24 +1694,25 @@ kendo_module({
                 end = addDays(end, -1);
             } else if (key === keys.DOWN) {
                 handled = true;
-
-                if (events[0]) {
-                    start = new Date(end);
-                    setTime(start, -interval);
-                }
-
-                if (isAllDay) {
-                    end.setHours(startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
-                    start = new Date(end);
-                    isAllDay = false;
-                } else {
-                    setTime(start, interval);
-                    if (end - start > 0) {
-                        end = new Date(start);
+                if (isAllDay || getMilliseconds(end) !== getMilliseconds(options.endTime)) { //TODO: what about start === end ???
+                    if (events[0]) {
+                        start = new Date(end);
+                        setTime(start, -interval);
                     }
-                }
 
-                setTime(end, interval);
+                    if (isAllDay) {
+                        end.setHours(startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
+                        start = new Date(end);
+                        isAllDay = false;
+                    } else {
+                        setTime(start, interval);
+                        if (end - start > 0) {
+                            end = new Date(start);
+                        }
+                    }
+
+                    setTime(end, interval);
+                }
             } else if (key === keys.UP) {
                 handled = true;
                 if (!isAllDay) {

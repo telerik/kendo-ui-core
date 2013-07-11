@@ -569,6 +569,19 @@
                 deepEqual(selection.end, new Date(2013, 6, 7, 2));
             });
 
+            test("View does not allow to move selection if end of column is reached", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 23, 30),
+                    end: new Date(2013, 6, 8)
+                });
+
+                view.move(selection, keys.DOWN);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
+                deepEqual(selection.end, new Date(2013, 6, 8));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
