@@ -1590,8 +1590,6 @@ kendo_module({
 
             var that = this,
                 headerTable = that.datesHeader.find("table.k-scheduler-header-all-day")[0], //TODO: Add support for grouped widget
-                startTime = getMilliseconds(this.options.startTime),
-                endTime = getMilliseconds(this.options.endTime),
                 startRow = Math.floor(that._timeSlotIndex(startDate)),
                 endRow = Math.ceil(that._timeSlotIndex(endDate)),
                 startCol = that._dateSlotIndex(startDate),
@@ -1601,7 +1599,7 @@ kendo_module({
                 event, cell, table,
                 firstCell, end;
 
-            if (getMilliseconds(endDate) === endTime) {
+            if (getMilliseconds(endDate) === getMilliseconds(this.options.endTime)) {
                 endCol -= 1;
             }
 
