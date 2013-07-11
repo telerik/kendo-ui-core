@@ -60,5 +60,6 @@ wrappers/java/target
 wrappers/php/content
 *-test-results.xml
 .listen_test
+.tern-port
 kendo-cdn
 src/.tern-port
