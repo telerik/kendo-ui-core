@@ -654,7 +654,7 @@ kendo_module({
                     }
 
                     if ((endSlotIndex < 0 || !endSlotIndex) && startSlotIndex !== endSlotIndex) {
-                        endSlotIndex = (this._row.slots.length/ this._groupCount()) - 1;
+                        endSlotIndex = (this._row.slots.length/this._groupCount()) - 1;
                     }
 
                     event.startIndex = this._applyOffset(startSlotIndex, groupIndex);
@@ -677,12 +677,13 @@ kendo_module({
                     var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: arrayEqFilter, value: value }).toArray();
 
                     if (resources.length > 1) {
-                        this._renderGroups(tmp, resources.slice(1), itemIdx, columnLevel + 1);
+                        offset = this._renderGroups(tmp, resources.slice(1), offset++, columnLevel + 1);
                     } else {
-                        this._renderEvents(tmp, itemIdx + offset);
+                        this._renderEvents(tmp, offset++);
                     }
                 }
             }
+            return offset;
         },
 
         _groupCount: function() {
@@ -702,16 +703,12 @@ kendo_module({
 
             if (resources.length) {
                 var columnCount = this._columnOffsetForResource(resources.length);
-                offset = columnCount * groupIndex;
+                offset = (columnCount * (this._groupCount() - 1) * rowIndex);
 
-                if (groupIndex === 0 && rowIndex > 0) {
-                    offset = columnCount * (this._groupCount() - 1);
-                } else {
-                    rowIndex++;
-                }
+                offset += columnCount * groupIndex;
             }
 
-            return slotIndex + offset*rowIndex;
+            return slotIndex + offset;
         },
 
         _columnOffsetForResource: function(index) {
