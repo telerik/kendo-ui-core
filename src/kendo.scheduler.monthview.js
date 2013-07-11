@@ -9,6 +9,7 @@ kendo_module({
 (function($){
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         SchedulerView = ui.SchedulerView,
         NS = ".kendoMonthView",
         extend = $.extend,
