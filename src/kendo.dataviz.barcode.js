@@ -1542,7 +1542,47 @@
         },
 
         redraw: function () {
+            var that = this,
+                view = that.view;
 
+            that._redraw(view);
+            view.renderTo(that.element[0]);
+        },
+
+        svg: function() {
+            if (dataviz.SVGView) {
+                var view = new dataviz.SVGView();
+
+                this._redraw(view);
+
+                return view.render();
+            } else {
+                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+            }
+        },
+
+        imageDataURL: function() {
+            if (dataviz.CanvasView) {
+                if (dataviz.supportsCanvas()) {
+                    var container = document.createElement("div"),
+                        view = new dataviz.CanvasView();
+
+                    this._redraw(view);
+
+                    return view.renderTo(container).toDataURL();
+                } else {
+                    kendo.logToConsole(
+                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
+                        "User agent: " + navigator.userAgent);
+
+                    return null;
+                }
+            } else {
+                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+            }
+        },
+
+        _redraw: function(view) {
             var that = this,
                 options = that.options,
                 textOptions = options.text,
@@ -1554,8 +1594,8 @@
                 result, textToDisplay;
 
             that.contentBox = contentBox;
-            that.view.children = [];
-            that.addBackground(size);
+            view.children = [];
+            that._renderBackground(view, size);
             var textHeight = dataviz.measureText( contentBox,{ font: options.text.font }).height;
 
             if (textOptions.visible) {
@@ -1570,17 +1610,16 @@
                 if(options.checksum && encoding.checksum!==undefined){
                     textToDisplay += " "+encoding.checksum;
                 }
-                that.addTextElement(textToDisplay);
+                that._renderTextElement(view, textToDisplay);
             }
             that.barHeight = barHeight;
 
-            that.view.options.width = size.width;
-            that.view.options.height = size.height;
+            view.options.width = size.width;
+            view.options.height = size.height;
 
-            that.addElements(result.pattern, result.baseUnit);
-
-            that.view.renderTo(that.element[0]);
+            that._renderElements(view, result.pattern, result.baseUnit);
         },
+
         _getSize: function(){
             var that = this,
                 element = that.element,
@@ -1609,7 +1648,8 @@
             that.options.value = value + '';
             that.redraw();
         },
-        addElements: function (pattern, baseUnit) {
+
+        _renderElements: function (view, pattern, baseUnit) {
             var that = this,
                 position = 0 + that.options.padding.left,
                 step,
@@ -1624,7 +1664,7 @@
                     };
                 step = item.width * baseUnit;
                 if(i%2){
-                    that.view.children.push(that.view.createRect(
+                    view.children.push(view.createRect(
                         new Box2D(
                             position,
                             item.y1 + that.contentBox.y1,
@@ -1639,22 +1679,23 @@
                 position+= step;
             }
         },
-        addBackground: function (size) {
+
+        _renderBackground: function (view, size) {
             var that = this,
                 options = that.options,
                 border = options.border || {},
                 box = Box2D(0,0, size.width, size.height).unpad(border.width / 2),
-                rect = that.view.createRect(box, {
+                rect = view.createRect(box, {
                     fill: options.background,
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
                     dashType: border.dashType
                 });
 
-            that.view.children.push(rect);
+            view.children.push(rect);
         },
-        addTextElement: function (value) {
 
+        _renderTextElement: function (view, value) {
             var that = this,
                 textOptions = that.options.text,
                 text = new Text(value, {
@@ -1668,7 +1709,7 @@
 
             text.reflow(that.contentBox);
             text.box.unpad(textOptions.margin);
-            that.view.children.push(that.view.createText(value, {
+            view.children.push(view.createText(value, {
                 baseline: text.baseline,
                 x: text.box.x1,
                 y: text.box.y1,
