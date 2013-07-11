@@ -1560,42 +1560,68 @@ kendo_module({
         },
 
         select: function(selection) {
+            this.clearSelection();
+
+            if (selection.events[0]) {
+                if (this._selectEvents(selection)) {
+                    return;
+                }
+            }
+
+            this._selectCells(selection);
+        },
+
+        _selectEvents: function(selection) {
+            var container = this.content.add(this.datesHeader.children()),
+                events = selection.events,
+                length = events.length,
+                idx = 0,
+                event;
+
+            for (; idx < length; idx++) {
+                event = container.children("[data-uid=" + events[idx] + "]").addClass("k-state-selected");
+                event = event[event.length - 1];
+
+                if (!event) {
+                    this.clearSelection();
+                    return;
+                }
+            }
+
+            if (event) {
+                this._scrollTo(event, this.content[0]);
+                return true;
+            }
+        },
+
+        _selectCells: function(selection) {
             var that = this,
                 headerTable = that.datesHeader.find("table.k-scheduler-header-all-day")[0],
                 startRow = Math.ceil(that._timeSlotIndex(selection.start)),
                 endRow = Math.ceil(that._timeSlotIndex(selection.end)),
                 startCol = that._dateSlotIndex(selection.start),
                 endCol = that._dateSlotIndex(selection.end),
-                table = that.content.children("table")[0],
+                isAllDay = selection.isAllDay && headerTable,
                 selectAllDay = false,
-                event, cell,
+                event, cell, table,
                 end;
 
-            that.clearSelection();
+            if (!isAllDay) {
+                table = that.content.children("table")[0];
+                if (startCol !== endCol) {
+                    end = that._columns[startCol].slots.length - 1;
+                    if (headerTable) {
+                        selectAllDay = true;
+                    }
+                }
+            } else {
+                end = startRow = endRow = 0;
+                table = headerTable;
+                headerTable = null;
+            }
 
             if (startRow !== endRow && endRow > 0) {
                 endRow -= 1;
-            }
-
-            /*if (selection.events && selection.events.length) {
-                event = that.content.add(that.datesHeader.children())
-                            .children("[data-uid=" + selection.events[0] + "]")
-                            .addClass("k-state-selected");
-
-                if (!event[0]) {
-                    that._selectCell(row, col, isAllDay);
-                } else {
-                    that._scrollTo(event[0], that.content[0]);
-                }
-            } else {
-                that._selectCell(row, col, isAllDay);
-            }*/
-
-            if (startCol !== endCol) {
-                end = that._columns[startCol].slots.length - 1;
-                if (headerTable) {
-                    selectAllDay = true;
-                }
             }
 
             for (; startCol <= endCol; startCol++) {
@@ -1618,21 +1644,6 @@ kendo_module({
 
             that._scrollTo(cell, that.content[0]);
         },
-
-        /*_selectCell: function(row, col, isAllDay) {
-            var that = this,
-                table = that.content.children("table")[0],
-                cell;
-
-            if (isAllDay) {
-                table = that.datesHeader.find("table.k-scheduler-header-all-day")[0];
-            }
-
-            cell = table.rows[row].cells[col];
-            $(cell).addClass("k-state-selected");
-
-            that._scrollTo(cell, that.content[0]);
-        },*/
 
         _scrollTo: function(element, container) {
             var elementOffset = element.offsetTop,

@@ -244,6 +244,110 @@
                 equal(view.content.find(".k-state-selected").length, 1);
             });
 
+            test("View does not select content cells if selection starts from allDayEvent", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 8, 0, 30), isAllDay: true });
+
+                view.select(selection);
+
+                var cells = view.datesHeader.find("td.k-state-selected");
+
+                equal(cells.length, 2);
+                equal(view.content.find("table td.k-state-selected").length, 0);
+            });
+
+            test("View select event by uid", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid = kendo.guid();
+
+                view.render([
+                    { uid: uid, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 4),
+                    events: [uid]
+                });
+
+                view.select(selection);
+
+                equal(view.content.find("td.k-state-selected").length, 0);
+                equal(view.content.find(".k-event").filter(".k-state-selected").length, 1);
+            });
+
+            test("View select multiple events by UIDs", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid1, uid2]
+                });
+
+                view.select(selection);
+
+                equal(view.content.find("td.k-state-selected").length, 0);
+                equal(view.content.find(".k-event").filter(".k-state-selected").length, 2);
+            });
+
+            test("View select cells if cannot find one of the selected events", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: kendo.guid(), start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid1, uid2]
+                });
+
+                view.select(selection);
+
+                equal(view.content.find("td.k-state-selected").length, 2);
+                equal(view.content.find(".k-event").filter(".k-state-selected").length, 0);
+            });
+
+            test("View scrolls to the last selected event", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    uid1 = kendo.guid(),
+                    uid2 = kendo.guid();
+
+                view.render([
+                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
+                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [uid1, uid2]
+                });
+
+                view.select(selection);
+
+                stub(view, {
+                    _scrollTo: view._scrollTo
+                });
+
+                view.select(selection);
+
+                equal(view.calls("_scrollTo"), 1);
+                equal(view.args("_scrollTo")[0], view.content.find(".k-event:last")[0]);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
