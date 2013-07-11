@@ -402,7 +402,7 @@ kendo_module({
                 from,
                 to;
 
-            if (!range || inNavigator) {
+            if (!range || inNavigator || !selection) {
                 return;
             }
 
@@ -552,8 +552,15 @@ kendo_module({
                 select = navi.options.select,
                 selection = navi.selection,
                 categories = navi.mainAxis().options.categories,
-                fromIx = lteDateIndex(selection.options.from, categories),
-                toIx = lteDateIndex(selection.options.to, categories);
+                fromIx,
+                toIx;
+
+            if (!selection) {
+                return;
+            }
+
+            fromIx = lteDateIndex(selection.options.from, categories);
+            toIx = lteDateIndex(selection.options.to, categories);
 
             e.originalEvent.preventDefault();
 
