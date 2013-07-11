@@ -67,6 +67,8 @@ kendo_module({
 
             that._editable();
 
+            that._resourcesForGroups();
+
             that._renderLayout(that.options.date);
 
             that._slots();
@@ -164,34 +166,65 @@ kendo_module({
             return null;
         },
 
+        _columnCountForLevel: function(level) {
+            var columnLevel = this.columnLevels[level];
+            return columnLevel ? columnLevel.length : 0;
+        },
+
         _content: function() {
-            var start = this.startDate(),
-                min = this._firstDayOfMonth,
-                max = this._lastDayOfMonth,
-                idx = 0,
-                length = 42,
-                cellsPerRow = 7,
-                content = this.dayTemplate,
-                classes = "",
-                slotIndices = {},
-                weekStartDates = [start],
-                html = '<tbody><tr>';
+            var start = this.startDate();
+            var cellCount = 42;
+            var cellsPerRow = 7;
+            var weekStartDates = [start];
+            var html = '<tbody>';
+            var groupCount = 1;
 
+            var resources = this.groupedResources;
 
-            for(; idx < length; idx++) {
-                if (idx > 0 && idx % cellsPerRow === 0) {
-                    weekStartDates.push(start);
+            if (resources.length) {
+                groupCount = this._columnCountForLevel(resources.length - 1);
+            }
 
-                    html += '</tr><tr>';
+            this._slotIndices = {};
+
+            for (var rowIdx = 0; rowIdx < cellCount / cellsPerRow; rowIdx++) {
+                html += "<tr>";
+
+                weekStartDates.push(start);
+
+                var startIdx = rowIdx*cellsPerRow;
+
+                for (var groupIdx = 0; groupIdx < groupCount; groupIdx++) {
+                    html += this._createRow(start, startIdx, cellsPerRow);
                 }
 
+                start = kendo.date.addDays(start, cellsPerRow);
+
+                html += "</tr>";
+            }
+
+            html += "</tbody>";
+
+            this._weekStartDates = weekStartDates;
+            this._endDate = kendo.date.previousDay(start);
+            this.content.find("table").html(html);
+        },
+
+        _createRow: function(startDate, startIdx, cellsPerRow) {
+            var min = this._firstDayOfMonth;
+            var max = this._lastDayOfMonth;
+            var content = this.dayTemplate;
+            var classes = "";
+            var html = "";
+
+            for (var cellIdx = 0; cellIdx < cellsPerRow; cellIdx++) {
                 classes = "";
 
-                if (kendo.date.isToday(start)) {
+                if (kendo.date.isToday(startDate)) {
                     classes += "k-today";
                 }
 
-                if (!kendo.date.isInDateRange(start, min, max)) {
+                if (!kendo.date.isInDateRange(startDate, min, max)) {
                     classes += " k-other-month";
                 }
 
@@ -202,27 +235,29 @@ kendo_module({
                 }
 
                 html += ">";
-                html += content({ date: start });
+                html += content({ date: startDate });
                 html += "</td>";
 
-                slotIndices[getDate(start).getTime()] = idx;
+                this._slotIndices[getDate(startDate).getTime()] = startIdx + cellIdx;
 
-                start = kendo.date.nextDay(start);
+                startDate = kendo.date.nextDay(startDate);
             }
 
-            html += "</tr></tbody>";
-
-            this._slotIndices = slotIndices;
-            this._weekStartDates = weekStartDates;
-            this._endDate = kendo.date.previousDay(start);
-            this.content.find("table").html(html);
+            return html;
         },
 
         _layout: function() {
             var names = getCalendarInfo().days.names;
+            var columns = $.map(names, function(value) { return { text: value }; });
+            var resources = this.groupedResources;
+
+            if (resources.length) {
+                columns = this._createColumnsLayout(resources, columns);
+            }
+
 
             return {
-                columns: $.map(names, function(value) { return { text: value }; })
+                columns: columns
             };
         },
 
@@ -584,15 +619,19 @@ kendo_module({
         },
 
         render: function(events) {
-            var event;
-            var idx;
-            var length;
-
             this.content.children(".k-event,.k-more-events").remove();
 
             this._slots();
 
             events = new kendo.data.Query(this._splitEvents(events)).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
+
+            this._renderEvents(events);
+       },
+
+        _renderEvents: function(events) {
+            var event;
+            var idx;
+            var length;
 
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];

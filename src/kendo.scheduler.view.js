@@ -381,6 +381,44 @@ kendo_module({
                 });
             }
         },
+
+        _resourcesForGroups: function() {
+            var result = [];
+            var groups = this.options.resourcesGroups;
+            var resources = this.options.resources;
+
+            if (groups && resources && groups.length) {
+                for (var idx = 0, length = resources.length; idx < length; idx++) {
+                    for (var groupIdx = 0, groupLength = groups.length; groupIdx < groupLength; groupIdx++) {
+                        if (resources[idx].name === groups[groupIdx]) {
+                            result.push(resources[idx]);
+                        }
+                    }
+                }
+            }
+
+            this.groupedResources = result;
+        },
+
+        _isGroupedByDate: function() {
+            return $.inArray("date", this.options.resourcesGroups) > -1;
+        },
+
+        _createColumnsLayout: function(resources, inner) {
+            if (this._isGroupedByDate()) {
+                for (var idx = 0, length = inner.length; idx < length; idx++) {
+                    inner[idx].columns = createLayoutConfiguration("columns", resources);
+                }
+                return inner;
+            }
+
+            return createLayoutConfiguration("columns", resources, inner);
+        },
+
+        _createRowsLayout: function(resources, inner) {
+            return createLayoutConfiguration("rows", resources, inner);
+        },
+
         destroy: function() {
             var that = this;
 
@@ -487,6 +525,27 @@ kendo_module({
         }
 
         return columns;
+    }
+
+    function createLayoutConfiguration(name, resources, inner) {
+        var resource = resources[0];
+        if (resource) {
+            var configuration = [];
+
+            var data = resource.dataSource.view();
+
+            for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
+                var obj = {
+                    text: kendo.getter(resource.dataTextField)(data[dataIndex]),
+                    className: "k-slot-cell"
+                };
+                obj[name] = createLayoutConfiguration(name, resources.slice(1), inner);
+
+                configuration.push(obj);
+            }
+            return configuration;
+        }
+        return inner;
     }
 
     $.extend(ui.SchedulerView, {

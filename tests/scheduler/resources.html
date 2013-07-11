@@ -2242,6 +2242,54 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
+            test("headers are rendered for groups in month view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+                equal(view.datesHeader.find("tr").length, 2);
+                equal(view.datesHeader.find("tr:first th").length, 2);
+                equal(view.datesHeader.find("tr:last th").length, 14);
+            });
+
+            test("individual calenders are rendered for each groups in month view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view.content.find("td").length, 42 * 2);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
