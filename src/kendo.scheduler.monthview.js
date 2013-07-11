@@ -625,10 +625,15 @@ kendo_module({
 
             events = new kendo.data.Query(this._splitEvents(events)).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
 
-            this._renderEvents(events);
+            var resources = this.groupedResources;
+            if (resources.length) {
+                this._renderGroups(events, resources, 0, 1);
+            } else {
+                this._renderEvents(events, 0);
+            }
        },
 
-        _renderEvents: function(events) {
+       _renderEvents: function(events, groupIndex) {
             var event;
             var idx;
             var length;
@@ -649,15 +654,68 @@ kendo_module({
                     }
 
                     if ((endSlotIndex < 0 || !endSlotIndex) && startSlotIndex !== endSlotIndex) {
-                        endSlotIndex = this._row.slots.length - 1;
+                        endSlotIndex = (this._row.slots.length/ this._groupCount()) - 1;
                     }
 
-                    event.startIndex = startSlotIndex;
-                    event.endIndex = endSlotIndex;
+                    event.startIndex = this._applyOffset(startSlotIndex, groupIndex);
+                    event.endIndex = this._applyOffset(endSlotIndex, groupIndex);
 
-                    this._positionEvent(this._row.slots, this._createEventElement(event), startSlotIndex, endSlotIndex);
+                    this._positionEvent(this._row.slots, this._createEventElement(event), event.startIndex, event.endIndex);
                 }
             }
+        },
+
+        _renderGroups: function(events, resources, offset, columnLevel) {
+            var resource = resources[0];
+
+            if (resource) {
+                var view = resource.dataSource.view();
+
+                for (var itemIdx = 0; itemIdx < view.length; itemIdx++) {
+                    var value = resourceValue(resource, view[itemIdx]);
+
+                    var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: arrayEqFilter, value: value }).toArray();
+
+                    if (resources.length > 1) {
+                        this._renderGroups(tmp, resources.slice(1), itemIdx, columnLevel + 1);
+                    } else {
+                        this._renderEvents(tmp, itemIdx + offset);
+                    }
+                }
+            }
+        },
+
+        _groupCount: function() {
+            var resources = this.groupedResources;
+
+            if (resources.length) {
+                return this._columnCountForLevel(resources.length) / this._columnOffsetForResource(resources.length);
+            }
+            return 1;
+        },
+
+        _applyOffset: function(slotIndex, groupIndex) {
+            var resources = this.groupedResources;
+            var offset = 0;
+            var cellsPerRow = 7;
+            var rowIndex = Math.floor(slotIndex / cellsPerRow);
+
+            if (resources.length) {
+                var columnCount = this._columnOffsetForResource(resources.length);
+                offset = columnCount * groupIndex;
+
+                if (groupIndex === 0 && rowIndex > 0) {
+                    offset = columnCount * (this._groupCount() - 1);
+                } else {
+                    rowIndex++;
+                }
+            }
+
+            return slotIndex + offset*rowIndex;
+        },
+
+        _columnOffsetForResource: function(index) {
+            return this._columnCountForLevel(index) / this._columnCountForLevel(index - 1);
         },
 
         destroy: function(){
@@ -688,6 +746,25 @@ kendo_module({
             eventTemplate: EVENT_TEMPLATE
         }
     });
+
+    function resourceValue(resource, item) {
+        if (resource.valuePrimitive) {
+            item = kendo.getter(resource.dataValueField)(item);
+        }
+        return item;
+    }
+
+    function arrayEqFilter(item, value) {
+        if ($.isArray(item)) {
+            for (var idx = 0; idx < item.length; idx++) {
+                if (item[idx] == value) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return item == value;
+    }
 
     function getCalendarInfo() {
         return kendo.culture().calendars.standard;

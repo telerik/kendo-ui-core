@@ -2289,6 +2289,213 @@
                 equal(view.content.find("td").length, 42 * 2);
             });
 
+            test("event is position based on the group in horizontally oriented group month view - event in the second group", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/6"), end: new Date("2013/6/6"), isAllDay: true, title: "", foo: 2 } ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view._row.events.length, 1);
+                equal(view._row.events[0].start, 25);
+                equal(view._row.events[0].end, 25);
+            });
+
+            test("event is position based on the group in horizontally oriented group month view - event in the first group", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/6"), end: new Date("2013/6/6"), isAllDay: true, title: "", foo: 1 } ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view._row.events.length, 1);
+                equal(view._row.events[0].start, 18);
+                equal(view._row.events[0].end, 18);
+            });
+
+            test("event is position based on the group in horizontally oriented group month view - event in the first group first row", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/1"), end: new Date("2013/6/1"), isAllDay: true, title: "", foo: 1 } ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view._row.events.length, 1);
+                equal(view._row.events[0].start, 6);
+                equal(view._row.events[0].end, 6);
+            });
+
+            test("event is position based on the group in horizontally oriented group month view - event in the second group first row", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/1"), end: new Date("2013/6/1"), isAllDay: true, title: "", foo: 2 } ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view._row.events.length, 1);
+                equal(view._row.events[0].start, 13);
+                equal(view._row.events[0].end, 13);
+            });
+
+            test("event passing the end of the month is position based on the group in horizontally oriented group month view - event in the second group", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/1"), end: new Date("2013/7/13"), isAllDay: true, title: "", foo: 2 } ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                var events = view._row.events;
+                equal(events.length, 6);
+                equal(events[events.length - 1].start, 77);
+                equal(events[events.length - 1].end, 83);
+            });
+
+            test("event starting before the month start is position based on the group in horizontally oriented group month view - event in the second group", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/5/1"), end: new Date("2013/6/6"), isAllDay: true, title: "", foo: 2 } ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                var events = view._row.events;
+                equal(events.length, 2);
+                equal(events[0].start, 7);
+                equal(events[0].end, 13);
+                equal(events[events.length - 1].start, 21);
+                equal(events[events.length - 1].end, 25);
+            });
+
+            test("event starting before the month start is position based on the group in horizontally oriented group month view - event in the first group", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/5/1"), end: new Date("2013/6/6"), isAllDay: true, title: "", foo: 1 } ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                var events = view._row.events;
+                equal(events.length, 2);
+                equal(events[0].start, 0);
+                equal(events[0].end, 6);
+                equal(events[events.length - 1].start, 14);
+                equal(events[events.length - 1].end, 18);
+            });
+
+            test("event passing the end of the month is position based on the group in horizontally oriented group month view - event in the first group", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: [ "ResourceName" ],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ { start: new Date("2013/6/1"), end: new Date("2013/7/13"), isAllDay: true, title: "", foo: 1 } ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                var events = view._row.events;
+                equal(events.length, 6);
+                equal(events[events.length - 1].start, 70);
+                equal(events[events.length - 1].end, 76);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
