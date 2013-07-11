@@ -218,6 +218,14 @@
     margin-left: 2%;
 }
 
+.k-rtl .k-edit-field > input[type="checkbox"]:first-child,
+.k-rtl .k-edit-field > input[type="radio"]:first-child,
+.k-rtl .k-edit-field > label:first-child > input[type="checkbox"],
+.k-rtl .k-edit-field > .k-button:first-child
+{
+    margin-right: 0;
+}
+
 .k-rtl .k-edit-form-container .k-edit-buttons
 {
     text-align: left;

@@ -1757,6 +1757,14 @@ form.k-filter-menu .k-textbox
     margin-top: .4em;
 }
 
+.k-edit-field > input[type="checkbox"]:first-child,
+.k-edit-field > input[type="radio"]:first-child,
+.k-edit-field > label:first-child > input[type="checkbox"],
+.k-edit-field > .k-button:first-child
+{
+    margin-left: 0;
+}
+
 .k-edit-form-container .k-edit-buttons
 {
     clear: both;
@@ -4349,7 +4357,8 @@ div.k-scheduler-marquee:after
     white-space:nowrap;
 }
 
-.k-scheduler-edit-form .k-edit-form-container
+.k-scheduler-edit-form .k-edit-form-container,
+.k-scheduler-timezones .k-edit-form-container
 {
     width: 520px;
 }
@@ -4424,6 +4433,16 @@ div[name="recurrenceRule"] > .k-dropdown
     margin:0;
     padding: 1em 0 2em;
     text-align: center;
+}
+
+.k-scheduler-timezones .k-dropdown:first-child
+{
+    width: 100%;
+}
+
+.k-scheduler-timezones .k-dropdown + .k-dropdown
+{
+    margin: .5em 0 .7em;
 }
 
 /* Tooltip */
