@@ -74,6 +74,81 @@ kendo_module({
             that._slots();
         },
 
+        select: function(selection) {
+            var that = this;
+
+            that.clearSelection();
+
+            if (!that._selectEvents(selection.events)) {
+                that._selectSlots(
+                    that._slotIndex(selection.start),
+                    that._slotIndex(selection.end),
+                    that._row.slots
+                );
+            }
+        },
+
+        _selectEvents: function(events) {
+            var found = false;
+            var uidAttr = kendo.attr("uid");
+
+            if (!events[0]) {
+                return found;
+            }
+
+            var elements = this.table.find("[" + uidAttr + "=" + events.join("],[" + uidAttr + "=") + "]");
+            if (elements.length == events.length) {
+                found = true;
+                elements.addClass("k-state-selected");
+            }
+
+            return found;
+        },
+
+        _selectSlots: function(startIndex, endIndex, slots) {
+            var idx = startIndex;
+            if (startIndex > endIndex) {
+                startIndex =  endIndex;
+                endIndex = idx;
+            }
+
+            for (idx = startIndex; idx <= endIndex; idx ++) {
+                $(slots[idx].element).addClass("k-state-selected");
+            }
+        },
+
+        clearSelection: function() {
+            this.table.find(".k-state-selected").removeClass("k-state-selected");
+        },
+
+        move: function(selection, key, keep) {
+            var handled = false,
+                date = selection.end;
+
+            if (key == keys.LEFT) {
+                date = kendo.date.addDays(date, -1);
+                handled = true;
+            } else if (key == keys.RIGHT) {
+                date = kendo.date.addDays(date, 1);
+                handled = true;
+            } else if (key == keys.DOWN) {
+                date = kendo.date.addDays(date, 7);
+                handled = true;
+            } else if (key == keys.UP) {
+                date = kendo.date.addDays(date, -7);
+                handled = true;
+            }
+
+            if (handled) {
+                if (!keep) {
+                    selection.start = date;
+                }
+                selection.end = date;
+            }
+
+            return handled;
+        },
+
         _templates: function() {
             var options = this.options,
                 settings = extend({}, kendo.Template, options.templateSettings);
