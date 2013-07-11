@@ -353,6 +353,7 @@ var tests = [
     "panelbar/aria.html",
     "popup/popup.html",
     "popup/lint.html",
+    "qrcode/api.html",
     "qrcode/encoding.html",
     "qrcode/helperFunctions.html",
     "qrcode/lint.html",
