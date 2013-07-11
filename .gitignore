@@ -11,6 +11,7 @@ bin/
 !**/References/*.dll
 .DS_Store
 .JustCode
+.bundle/
 .livereload
 deploy/
 dist/

@@ -93,9 +93,9 @@
 @upload-error-text-color: #c00;
 
 /* Border Radii */
-@main-border-radius: 2px;
+@main-border-radius: 3px;
 @list-border-radius: @main-border-radius - 1;
-@inner-border-radius: @main-border-radius - 2;
+@inner-border-radius: @main-border-radius - 1.2;
 @slider-border-radius: 13px;
 
 /* Headers */
@@ -105,7 +105,7 @@
 /*Focused State*/
 @focused-border-color: #363940;
 @focused-shadow: none;
-@focused-item-shadow: none;
+@focused-item-shadow: #363940;
 @focused-active-item-shadow: none;
 
 //Added new var-s
@@ -138,5 +138,8 @@
 @panelbar-content-background: #363940;
 @panelbar-content-color: #ffffff;
 @window-shadow-style: 0 0 0 1px;
+@filter-menu-content-background: #363940; 
+@icon-background-color: #cdcdcd;
+
 
 @import "template.less";

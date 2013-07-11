@@ -49,7 +49,7 @@
 @tooltip-text-color: #ffffff;
 @main-border-radius: 13px;
 @list-border-radius: @main-border-radius - 1;
-@inner-border-radius: @main-border-radius - 2;
+@inner-border-radius: @main-border-radius - 1;
 @slider-border-radius: 13px;
 @draghandle-border-radius: 0;
 @draghandle-border-color: none;
@@ -96,8 +96,8 @@
 @tabstrip-tabs-color: @widget-text-color;
 @form-widget-color: @widget-text-color;
 @drop-down-border-color: @widget-border-color;
-@drop-down-hover-border-color: @hover-border-color;
-@drop-down-focused-border-color: @focused-border-color;
+@drop-down-hover-border-color: @widget-border-color;
+@drop-down-focused-border-color: @widget-border-color;
 @drop-down-background: #2c232b;
 @drop-down-text-color: @widget-text-color;
 @secondary-border-color: @widget-border-color;
@@ -107,5 +107,7 @@
 @panelbar-content-background: @content-background-color;
 @panelbar-content-color: @widget-text-color;
 @window-shadow-style: 1px 1px 7px 1px;
+@filter-menu-content-background: @content-background-color;
+@icon-background-color: transparent;
 
 @import "template.less";
