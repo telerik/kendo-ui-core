@@ -314,8 +314,8 @@
                 });
 
                 test("renderTo sets default size", function() {
-                    equal(stage.getAttribute("width"), "600px");
-                    equal(stage.getAttribute("height"), "400px");
+                    equal(parseInt(stage.getAttribute("width"), 10), 600);
+                    equal(parseInt(stage.getAttribute("height"), 10), 400);
                 });
 
                 test("renderTo reuses canvas", function() {
