@@ -1564,14 +1564,6 @@ kendo_module({
             }
         },
 
-        shouldRenderNote: function(value) {
-            var axis = this,
-                range = axis.range(),
-                categories = axis.options.cateogries || [];
-
-            return (dateComparer(value, range.min) > 0 || dateComparer(value, range.max) < 0) && categories.length;
-        },
-
         alignTo: function(secondAxis) {
             var axis = this,
                 lineBox = secondAxis.lineBox(),

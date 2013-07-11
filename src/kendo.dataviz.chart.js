@@ -2117,7 +2117,9 @@ kendo_module({
                 range = axis.range(),
                 categories = axis.options.categories || [];
 
-            return (dateComparer(value, range.min) >= 0 || dateComparer(value, range.max) <= 0) && categories.length;
+            console.log(dateComparer(value, range.min), dateComparer(value, range.max));
+
+            return dateComparer(value, range.min) >= 0 && dateComparer(value, range.max) <= 0 && categories.length;
         },
 
         translateRange: function(delta) {
