@@ -202,7 +202,7 @@
                     keyCode: keys.DOWN
                 });
 
-                deepEqual(scheduler.date(), start);
+                deepEqual(kendo.date.getDate(scheduler.date()), kendo.date.getDate(scheduler._selection.start));
             });
 
             test("scheduler sets selectedDate when selection.start is bigger than view.endDate()", 1, function() {
@@ -212,14 +212,14 @@
                     start = kendo.date.addDays(view.endDate(), 1);
 
                 scheduler._selection.start = start;
-                scheduler._selection.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 0, 30);;
+                scheduler._selection.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 0, 30);
 
                 scheduler.wrapper.trigger({
                     type: "keydown",
                     keyCode: keys.DOWN
                 });
 
-                deepEqual(scheduler.date(), start);
+                deepEqual(kendo.date.getDate(scheduler.date()), kendo.date.getDate(scheduler._selection.start));
             });
 
             test("scheduler selects on move", 1, function() {

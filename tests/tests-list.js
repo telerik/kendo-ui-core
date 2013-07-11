@@ -379,6 +379,8 @@ var tests = [
     "scheduler/occurrences.html",
     "scheduler/mvvm.html",
     "scheduler/selection.html",
+    "scheduler/monthview-selection.html",
+    "scheduler/multidayview-selection.html",
     "scheduler/lint.html",
     "searchbox/searchbox.html",
     "searchbox/lint.html",
