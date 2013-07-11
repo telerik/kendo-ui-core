@@ -1041,27 +1041,22 @@ kendo_module({
                 dataRow,
                 category,
                 uniqueCategories = {},
-                dateAxis = null;
+                getFn,
+                dateAxis;
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
                 s = series[seriesIx];
                 onAxis = s.categoryAxis === axis.name || (!s.categoryAxis && axisIx === 0);
+                data = s.data;
+                dataLength = data.length;
 
-                if (s.categoryField && onAxis) {
-                    data = s.data;
-                    dataLength = data.length;
+                if (s.categoryField && onAxis && dataLength > 0) {
+                    dateAxis = isDateAxis(axis, getField(s.categoryField, data[0]));
+                    getFn = dateAxis ? getDateField : getField;
 
                     for (dataIx = 0; dataIx < dataLength; dataIx++) {
                         dataRow = data[dataIx];
-                        category = getField(s.categoryField, dataRow);
-
-                        if (dateAxis === null) {
-                            dateAxis = isDateAxis(axis, category);
-                        }
-
-                        if (dateAxis) {
-                            category = toDate(category);
-                        }
+                        category = getFn(s.categoryField, dataRow);
 
                         if (dateAxis || !uniqueCategories[category]) {
                             items.push([category, dataRow]);
