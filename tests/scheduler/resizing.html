@@ -49,7 +49,7 @@
                     div.appendTo(document.body);
                 },
                 teardown: function() {
-                    div.kendoScheduler("destroy").empty().remove();
+                    div.kendoScheduler("destroy").remove();
                     $("[data-role=window]").kendoWindow("destroy").remove();
                 }
             });
@@ -258,6 +258,7 @@
 
                 equal(scheduler.dataSource.at(0).end.getHours(), 0);
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 7);
             });
 
             test("resize event till the last but one slot", function() {

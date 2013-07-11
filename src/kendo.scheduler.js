@@ -665,6 +665,8 @@ kendo_module({
                     var end = new Date(event.end.getTime());
                     var dir = direction(dragHandle);
 
+                    that.view()._removeResizeHint();
+
                     if (dir == "south") {
                         end = kendo.date.getDate(end);
                         kendo.date.setTime(end, getMilliseconds(endSlot.end));
@@ -675,16 +677,15 @@ kendo_module({
                         end.setTime(endSlot.end.getTime());
                         end.setHours(0);
                         end.setMinutes(0);
-                        if (end < start) {
-                            end = kendo.date.addDays(end, 1);
-                        }
                     } else if (dir == "west") {
                         start.setTime(startSlot.start.getTime());
                         start.setHours(0);
                         start.setMinutes(0);
                     }
 
-                    that.view()._removeResizeHint();
+                    if (end < start) {
+                        end = kendo.date.addDays(end, 1);
+                    }
 
                     if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
                         that._updateEvent(dir, event, { start: start, end: end });
