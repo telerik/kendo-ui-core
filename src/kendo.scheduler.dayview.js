@@ -1597,16 +1597,25 @@ kendo_module({
         },
 
         _selectCells: function(selection) {
+            var start = selection.start,
+                end = selection.end,
+                backwardSelection = start > end;
+
+            if (backwardSelection) {
+                start = new Date(end);
+                end = selection.start;
+            }
+
             var that = this,
-                headerTable = that.datesHeader.find("table.k-scheduler-header-all-day")[0],
-                startRow = Math.ceil(that._timeSlotIndex(selection.start)),
-                endRow = Math.ceil(that._timeSlotIndex(selection.end)),
-                startCol = that._dateSlotIndex(selection.start),
-                endCol = that._dateSlotIndex(selection.end),
+                headerTable = that.datesHeader.find("table.k-scheduler-header-all-day")[0], //TODO: Add support for grouped widget
+                startRow = Math.ceil(that._timeSlotIndex(start)),
+                endRow = Math.ceil(that._timeSlotIndex(end)),
+                startCol = that._dateSlotIndex(start),
+                endCol = that._dateSlotIndex(end),
                 isAllDay = selection.isAllDay && headerTable,
                 selectAllDay = false,
                 event, cell, table,
-                end;
+                firstCell, end;
 
             if (!isAllDay) {
                 table = that.content.children("table")[0];
@@ -1634,6 +1643,9 @@ kendo_module({
                 for (; startRow <= end; startRow++) {
                     cell = table.rows[startRow].cells[startCol];
                     addSelectedState(cell);
+                    if (!firstCell) {
+                        firstCell = cell;
+                    }
                 }
 
                 startRow = 0;
@@ -1644,7 +1656,7 @@ kendo_module({
                 }
             }
 
-            that._scrollTo(cell, that.content[0]);
+            that._scrollTo(backwardSelection ? firstCell : cell, that.content[0]);
         },
 
         _scrollTo: function(element, container) {
