@@ -3035,7 +3035,25 @@ kendo_module({
         },
 
         dataItem: function(tr) {
-            return this._data[this.tbody.find('> tr:not(.k-grouping-row,.k-detail-row,.k-group-footer)').index($(tr))];
+            tr = $(tr)[0];
+            if (!tr) {
+                return null;
+            }
+
+            var rows = this.tbody.children(),
+                classesRegEx = /k-grouping-row|k-detail-row|k-group-footer/,
+                idx = tr.sectionRowIndex,
+                j, correctIdx;
+            
+            correctIdx = idx;
+
+            for (j = 0; j < idx; j++) {
+                if (classesRegEx.test(rows[j].className)) {
+                    correctIdx--;
+                }
+            }
+
+            return this._data[correctIdx];
         },
 
         expandRow: function(tr) {
