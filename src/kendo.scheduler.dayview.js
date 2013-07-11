@@ -1579,25 +1579,31 @@ kendo_module({
         },
 
         _selectCells: function(selection) {
-            var start = selection.start,
-                end = selection.end,
-                backwardSelection = start > end;
+            var startDate = selection.start,
+                endDate = selection.end,
+                backwardSelection = startDate > endDate;
 
             if (backwardSelection) {
-                start = new Date(end);
-                end = selection.start;
+                startDate = new Date(endDate);
+                endDate = selection.start;
             }
 
             var that = this,
                 headerTable = that.datesHeader.find("table.k-scheduler-header-all-day")[0], //TODO: Add support for grouped widget
-                startRow = Math.ceil(that._timeSlotIndex(start)),
-                endRow = Math.ceil(that._timeSlotIndex(end)),
-                startCol = that._dateSlotIndex(start),
-                endCol = that._dateSlotIndex(end),
+                startTime = getMilliseconds(this.options.startTime),
+                endTime = getMilliseconds(this.options.endTime),
+                startRow = Math.floor(that._timeSlotIndex(startDate)),
+                endRow = Math.ceil(that._timeSlotIndex(endDate)),
+                startCol = that._dateSlotIndex(startDate),
+                endCol = that._dateSlotIndex(endDate),
                 isAllDay = selection.isAllDay && headerTable,
                 selectAllDay = false,
                 event, cell, table,
                 firstCell, end;
+
+            if (getMilliseconds(endDate) === endTime) {
+                endCol -= 1;
+            }
 
             if (!isAllDay) {
                 table = that.content.children("table")[0];
@@ -1606,15 +1612,17 @@ kendo_module({
                     if (headerTable) {
                         selectAllDay = true;
                     }
+                } else if (endRow < startRow) {
+                    endRow = startRow;
+                }
+
+                if (startRow !== endRow && endRow > 0) {
+                    endRow -= 1;
                 }
             } else {
                 end = startRow = endRow = 0;
                 table = headerTable;
                 headerTable = null;
-            }
-
-            if (startRow !== endRow && endRow > 0) {
-                endRow -= 1;
             }
 
             for (; startCol <= endCol; startCol++) {

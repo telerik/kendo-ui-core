@@ -184,9 +184,10 @@
                 var allCells = view.content.find("table td"),
                     cells = allCells.filter("td.k-state-selected");
 
-                equal(cells.length, 2);
-                equal(cells[0], allCells[1]);
-                equal(cells[1], allCells[2]);
+                equal(cells.length, 3);
+                equal(cells[0], allCells[0]);
+                equal(cells[1], allCells[1]);
+                equal(cells[2], allCells[2]);
 
             });
 
@@ -199,12 +200,12 @@
                 var allCells = view.content.find("table td"),
                     cells = allCells.filter("td.k-state-selected");
 
-                equal(cells.length, 26);
+                equal(cells.length, 27);
             });
 
             test("View selects selection between 3 columns", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8), new Date(2013, 6, 9)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 9, 2, 30) });
+                    selection = createSelection({ start: new Date(2013, 6, 7, 1), end: new Date(2013, 6, 9, 2, 30) });
 
                 view.select(selection);
 
@@ -212,6 +213,18 @@
                     cells = allCells.filter("td.k-state-selected");
 
                 equal(cells.length, 50);
+            });
+
+            test("View does not select allday if only last cell is selected", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8), new Date(2013, 6, 9)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 23, 30), end: new Date(2013, 6, 8) });
+
+                view.select(selection);
+
+                var cell = view.content.find("table td").filter("td.k-state-selected");
+
+                equal(cell.length, 1);
+                equal(view.datesHeader.find("td.k-state-selected").length, 0);
             });
 
             test("View selects header cells if multiple columns are selected", function() {
@@ -449,15 +462,15 @@
                 deepEqual(selection.end, new Date(2013, 6, 7, 2, 0));
             });
 
-            test("View moves selection to the last slot", function() {
+            /*test("View moves selection to the last slot", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7, 23, 0), end: new Date(2013, 6, 7, 5, 0) });
+                    selection = createSelection({ start: new Date(2013, 6, 7, 23, 0), end: new Date(2013, 6, 7, 0, 0) });
 
                 view.move(selection, keys.DOWN);
 
                 deepEqual(selection.start, new Date(2013, 6, 7, 1, 0));
                 deepEqual(selection.end, new Date(2013, 6, 7, 2, 0));
-            });
+            });*/
 
             test("View shrink selection up to one slot on down arrow", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
