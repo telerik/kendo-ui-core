@@ -7153,6 +7153,7 @@ kendo_module({
 
         aggregateSeries: function(series, categoryAxis) {
             var axisOptions = categoryAxis.options,
+                dateAxis = equalsIgnoreCase(categoryAxis.options.type, DATE),
                 categories = axisOptions.categories,
                 srcCategories = axisOptions.srcCategories || categories,
                 srcData = series.data,
@@ -7164,15 +7165,20 @@ kendo_module({
                 categoryIx,
                 data,
                 pointData,
-                result = deepExtend({}, series);
+                result = deepExtend({}, series),
+                getFn = getField;
 
             result.data = data = [];
 
+            if (dateAxis) {
+                getFn = getDateField;
+            }
+
             for (i = 0; i < srcData.length; i++) {
                 if (series.categoryField) {
-                   category = getField(series.categoryField, srcData[i]);
+                    category = getFn(series.categoryField, srcData[i]);
                 } else {
-                   category = srcCategories[i];
+                    category = srcCategories[i];
                 }
 
                 categoryIx = categoryAxis.categoryIndex(category, range);
@@ -9409,6 +9415,22 @@ kendo_module({
 
         var get = getter(field, true);
         return get(row);
+    }
+
+    function getDateField(field, row) {
+        if (row === null) {
+            return row;
+        }
+
+        var key = "_date_" + field,
+            value = row[key];
+
+        if (!value) {
+            value = toDate(getter(field, true)(row));
+            row[key] = value;
+        }
+
+        return value;
     }
 
     function toDate(value) {
