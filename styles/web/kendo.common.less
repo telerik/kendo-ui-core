@@ -1716,7 +1716,7 @@ form.k-filter-menu .k-textbox
 
 .k-window > div.k-popup-edit-form
 {
-    padding: 1em 0 0;
+    padding: 1em 0;
 }
 
 .k-grid-edit-row .k-edit-form td
@@ -1733,8 +1733,8 @@ form.k-filter-menu .k-textbox
 .k-edit-label,
 .k-edit-form-container .editor-label
 {
-    float:left;
-    clear:both;
+    float: left;
+    clear: both;
     width: 30%;
     padding: .4em 0 1em;
     margin-left: 2%;
@@ -1744,8 +1744,8 @@ form.k-filter-menu .k-textbox
 .k-edit-field,
 .k-edit-form-container .editor-field
 {
-    float:right;
-    clear:right;
+    float: right;
+    clear: right;
     width: 60%;
     margin-right: 2%;
     padding: 0 0 .6em;
@@ -1754,16 +1754,18 @@ form.k-filter-menu .k-textbox
 .k-edit-field > input[type="checkbox"],
 .k-edit-field > input[type="radio"]
 {
-    margin-top:.4em;
+    margin-top: .4em;
 }
 
 .k-edit-form-container .k-edit-buttons
 {
     clear: both;
     text-align: right;
-    border-width:1px 0 0;
+    border-width: 1px 0 0;
     border-style: solid;
-    padding:.6em;
+    position: relative;
+    bottom: -1em;
+    padding: .6em;
 }
 
 .k-grid .field-validation-error
@@ -3261,6 +3263,7 @@ table.k-editor
 .k-editor-dialog
 {
     padding: 1em;
+    width: 400px;
 
     .k-edit-label
     {
@@ -3269,7 +3272,7 @@ table.k-editor
 
     .k-edit-field
     {
-        width: 68%;
+        width: 64%;
 
         .k-textbox
         {
@@ -3279,6 +3282,31 @@ table.k-editor
         .k-checkbox
         {
             margin: 0 .4em 0 0;
+        }
+    }
+}
+
+.k-imagebrowser-dialog
+{
+    width: 960px;
+
+    .k-imagebrowser
+    {
+        margin: 0 .44em;
+    }
+
+    .k-edit-label
+    {
+        width: 34%;
+    }
+
+    .k-edit-field
+    {
+        width: 60%;
+
+        .k-textbox
+        {
+            width: 60%;
         }
     }
 }
@@ -4856,6 +4884,12 @@ html .k-upload-empty
 .k-toolbar-wrap .k-dropzone-active .k-upload-button
 {
     display: none;
+}
+
+.k-imagebrowser .k-upload
+{
+    border-width: 0;
+    background-color: transparent;
 }
 
 .k-imagebrowser-dropzone

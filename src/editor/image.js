@@ -74,7 +74,7 @@ var ImageCommand = Command.extend({
                 "</div>" +
                 '<div class="k-edit-buttons k-state-default">' +
                     '<button class="k-dialog-insert k-button">#: messages.dialogInsert #</button>' +
-                    '<a href="\\#" class="k-dialog-close k-button k-secondary">#: messages.dialogCancel #</a>' +
+                    '<button class="k-dialog-close k-button k-secondary">#: messages.dialogCancel #</button>' +
                 '</div>' +
             '</div>'
         )({
@@ -97,7 +97,7 @@ var ImageCommand = Command.extend({
             range = that.lockRange(),
             applied = false,
             img = RangeUtils.image(range),
-            dialog, dialogWidth,
+            dialog,
             options = that.editor.options,
             messages = options.messages,
             imageBrowser = options.imageBrowser,
@@ -138,9 +138,7 @@ var ImageCommand = Command.extend({
             }
         }
 
-        dialogWidth = showBrowser ? { width: "960px", height: "650px" } : {};
-
-        dialog = this.createDialog(that._dialogTemplate(showBrowser), extend(dialogWidth, {
+        dialog = this.createDialog(that._dialogTemplate(showBrowser), {
             title: messages.insertImage,
             close: close,
             visible: false,
@@ -160,7 +158,8 @@ var ImageCommand = Command.extend({
                     );
                 }
             }
-        }))
+        })
+                .toggleClass("k-imagebrowser-dialog", showBrowser)
                 .find(".k-dialog-insert").click(apply).end()
                 .find(".k-dialog-close").click(close).end()
                 .find(".k-edit-field input").keydown(keyDown).end()
