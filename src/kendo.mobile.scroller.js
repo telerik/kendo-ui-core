@@ -252,6 +252,7 @@ kendo_module({
                 userEvents = new kendo.UserEvents(element, {
                     allowSelection: true,
                     preventDragEvent: true,
+                    captureUpIfMoved: true,
                     multiTouch: that.options.zoom,
                     start: function(e) {
                         dimensions.refresh();

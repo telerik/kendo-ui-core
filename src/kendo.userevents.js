@@ -295,6 +295,7 @@ kendo_module({
             that.touches = [];
             that._maxTouches = options.multiTouch ? 2 : 1;
             that.allowSelection = options.allowSelection;
+            that.captureUpIfMoved = options.captureUpIfMoved;
             that.eventNS = ns;
 
             element = $(element).handler(that);
@@ -323,7 +324,7 @@ kendo_module({
 
             element.on(kendo.applyEventMap("mousedown selectstart", ns), filter, { root: element }, "_select");
 
-            if (support.eventCapture) {
+            if (that.captureUpIfMoved && support.eventCapture) {
                 var surfaceElement = that.surface[0],
                     preventIfMovingProxy = $.proxy(that.preventIfMoving, that);
 
@@ -363,7 +364,7 @@ kendo_module({
 
             that._destroyed = true;
 
-            if (support.eventCapture) {
+            if (that.captureUpIfMoved && support.eventCapture) {
                 var surfaceElement = that.surface[0];
                 withEachUpEvent(function(eventName) {
                     surfaceElement.removeEventListener(eventName, that.preventIfMoving);
