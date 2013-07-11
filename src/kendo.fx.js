@@ -1008,7 +1008,7 @@ kendo_module({
             },
 
             shouldHide: function() {
-               return (this._direction === "out" && this._end() === endValue) ? !this._reverse : this._reverse;
+               return (this._direction === "out") ? !this._reverse : this._reverse;
             },
 
             _end: function() {

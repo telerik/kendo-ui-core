@@ -31,13 +31,7 @@
 
 
         <script>
-        $("#play").click(function() {
-            $("#target").kendoStop().kendoAnimate({ effects: "slideMargin", axis: "left", offset: 500, duration: 3000  });
-        });
-
-        $("#reverse").click(function() {
-            $("#target").kendoStop().kendoAnimate({ effects: "slideMargin", axis: "left", offset: 500 , reverse: true, duration: 3000 });
-        });
+            kendo.fx($("#container")).fadeOut().endValue(0.5).duration(2000).play();
         </script>
     </body>
 </html>
