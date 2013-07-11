@@ -1405,22 +1405,25 @@ function pad(number, digits, end) {
             for (; idx < length; idx++) {
                 formats[idx] = patterns[formatsSequence[idx]];
             }
-            formats[idx] = "ddd MMM dd yyyy HH:mm:ss";
-            formats[++idx] = "yyyy-MM-ddTHH:mm:ss.fffffffzzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mm:ss.fffzzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mm:sszzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mmzzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mmzz";
-            formats[++idx] = "yyyy-MM-ddTHH:mm:ss";
-            formats[++idx] = "yyyy-MM-ddTHH:mm";
-            formats[++idx] = "yyyy-MM-dd HH:mm:ss";
-            formats[++idx] = "yyyy-MM-dd HH:mm";
-            formats[++idx] = "yyyy-MM-dd";
-            formats[++idx] = "yyyy/MM/dd HH:mm:ss";
-            formats[++idx] = "yyyy/MM/dd HH:mm";
-            formats[++idx] = "yyyy/MM/dd";
 
             idx = 0;
+
+            formats.push(
+                "yyyy/MM/dd HH:mm:ss",
+                "yyyy/MM/dd HH:mm",
+                "yyyy/MM/dd",
+                "ddd MMM dd yyyy HH:mm:ss",
+                "yyyy-MM-ddTHH:mm:ss.fffffffzzz",
+                "yyyy-MM-ddTHH:mm:ss.fffzzz",
+                "yyyy-MM-ddTHH:mm:sszzz",
+                "yyyy-MM-ddTHH:mmzzz",
+                "yyyy-MM-ddTHH:mmzz",
+                "yyyy-MM-ddTHH:mm:ss",
+                "yyyy-MM-ddTHH:mm",
+                "yyyy-MM-dd HH:mm:ss",
+                "yyyy-MM-dd HH:mm",
+                "yyyy-MM-dd"
+            );
         }
 
         formats = isArray(formats) ? formats: [formats];
