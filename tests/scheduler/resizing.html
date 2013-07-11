@@ -38,7 +38,7 @@
         <ol id="qunit-tests"></ol>
         <script>
 
-            var div = $("<div>").width(500).height(1000);
+            var div = $("<div>").width(1000).height(1000);
 
             function equalWithRound(value, expected) {
                 QUnit.close(value, expected, 2);
@@ -49,7 +49,7 @@
                     div.appendTo(document.body);
                 },
                 teardown: function() {
-                    div.kendoScheduler("destroy").remove();
+                    div.kendoScheduler("destroy").empty().remove();
                     $("[data-role=window]").kendoWindow("destroy").remove();
                 }
             });
@@ -1124,10 +1124,173 @@
                 equal(scheduler.dataSource.at(0).recurrenceException, kendo.toString(kendo.timezone.apply(new Date("2013/5/26 00:00"), 0), "yyyyMMddTHHmmssZ") + ";");
             });
 
-            function dragdrop(scheduler, target, to) {
+            test("east resizing is restricted by resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/7 11:30"), ownerId: 1, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-header-all-day td");
+
+                dragdrop(scheduler, handle, slots.eq(6), slots.eq(slots.length -2));
+
+                equal(scheduler.dataSource.at(0).end.getDate(), 8);
+            });
+
+            test("west resizing is restricted by resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/7 11:30"), ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-header-all-day td");
+
+                dragdrop(scheduler, handle, slots.eq(7), slots.eq(1));
+
+                equal(scheduler.dataSource.at(0).start.getDate(), 2);
+            });
+
+            test("south resizing is restricted by resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 12:00 PM"),
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 11:00"), end: new Date("2013/6/2 11:30"), ownerId: 1, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(4), slots.eq(6));
+
+                equal(scheduler.dataSource.at(0).end.getHours(), 12);
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+            });
+
+            test("north resizing is restricted by resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 12:00 PM"),
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 11:30"), end: new Date("2013/6/2 12:00 PM"), ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-resize-n");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(6), slots.eq(2));
+
+                equal(scheduler.dataSource.at(0).start.getHours(), 10);
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+            });
+
+            test("east and west resizing is disabled when grouped by date", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 12:00 PM"),
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 11:30"), end: new Date("2013/6/3 12:00 PM"), ownerId: 1, title: "" }
+                    ],
+                    resourcesGroups: ["date", "Owner"],
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                equal(div.find(".k-resize-e,.k-resize-w").length, 0);
+            });
+
+            function dragdrop(scheduler, target, via, to) {
+                if (!to) {
+                    to = via;
+                    via = null;
+                }
                 var offset = to.offset();
 
                 dragstart(scheduler, target);
+
+                if (via) {
+                    drag(scheduler, target, via.offset());
+                }
+
                 drag(scheduler, target, offset);
                 dragend(scheduler, target, offset);
             }

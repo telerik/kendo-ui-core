@@ -94,7 +94,7 @@ kendo_module({
                 .kendoRecurrenceEditor({
                     start: options.model.start,
                     timezone: options.timezone,
-					messages: options.messages
+                    messages: options.messages
                 });
         },
         TIMEZONEPOPUP = function(container, options) {
@@ -406,10 +406,10 @@ kendo_module({
             }
 
             $(window).on("resize" + NS, that._resizeHandler);
-			
-			if(that.options.messages && that.options.messages.recurrence) {
-				recurrence.options = that.options.messages.recurrence;
-			}
+
+            if(that.options.messages && that.options.messages.recurrence) {
+                recurrence.options = that.options.messages.recurrence;
+            }
         },
 
         options: {
@@ -423,25 +423,25 @@ kendo_module({
                 save: "Save",
                 cancel: "Cancel",
                 destroy: "Delete",
-				recurrenceMessages: {
-					deleteWindowTitle: "Delete Recurring Item",
-					deleteWindowOccurrence: "Delete current occurrence",
-					deleteWindowSeries: "Delete the series",
-					editWindowTitle: "Edit Recurring Item",
-					editWindowOccurrence: "Edit current occurrence",
-					editWindowSeries: "Edit the series"
-				},
-				editor: {
-					title: "Title",
-					start: "Start",
-					end: "End",
-					allDayEvent: "All day event",
-					description: "Description",
-					repeat: "Repeat",
-					timezone: " ",
-					startTimezone: "Start timezone",
-					endTimezone: "End timezone"
-				}
+                recurrenceMessages: {
+                    deleteWindowTitle: "Delete Recurring Item",
+                    deleteWindowOccurrence: "Delete current occurrence",
+                    deleteWindowSeries: "Delete the series",
+                    editWindowTitle: "Edit Recurring Item",
+                    editWindowOccurrence: "Edit current occurrence",
+                    editWindowSeries: "Edit the series"
+                },
+                editor: {
+                    title: "Title",
+                    start: "Start",
+                    end: "End",
+                    allDayEvent: "All day event",
+                    description: "Description",
+                    repeat: "Repeat",
+                    timezone: " ",
+                    startTimezone: "Start timezone",
+                    endTimezone: "End timezone"
+                }
             },
             height: null,
             width: null,
@@ -634,22 +634,22 @@ kendo_module({
 
                         kendo.date.setTime(start, slot.end - event.start);
 
-                        if (getMilliseconds(start) >= view._timeSlotInterval()) {
+                        if (startSlot.groupIndex == slot.groupIndex && getMilliseconds(start) >= view._timeSlotInterval()) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "north") {
-                        if (getMilliseconds(event.end) - getMilliseconds(slot.start) >= view._timeSlotInterval()) {
+                        if (endSlot.groupIndex == slot.groupIndex && getMilliseconds(event.end) - getMilliseconds(slot.start) >= view._timeSlotInterval()) {
                             startSlot = slot;
                             update = true;
                         }
                     } else if (dir == "east") {
-                        if (kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
+                        if (startSlot.groupIndex == slot.groupIndex && kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "west") {
-                        if (kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
+                        if (endSlot.groupIndex == slot.groupIndex && kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
                             startSlot = slot;
                             update = true;
                         }
@@ -768,11 +768,11 @@ kendo_module({
                 }
             };
 
-			var recurrenceMessages = this.options.messages.recurrenceMessages;
+            var recurrenceMessages = this.options.messages.recurrenceMessages;
             if (event.recurrenceRule || (event.recurrenceId && !event.id)) {
                 that.showDialog({
                     title: recurrenceMessages.editWindowTitle,
-					text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
+                    text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
                     buttons: [
                         { text: recurrenceMessages.editWindowOccurrence, click: updateOcurrence },
                         { text: recurrenceMessages.editWindowSeries, click: updateSeries }
@@ -1060,7 +1060,7 @@ kendo_module({
                     fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: TIMEZONEEDITOR });
                     fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: TIMEZONEEDITOR });
                 }
-				
+
                 if (!model.recurrenceId) {
                     timezone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone;
                     fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: RECURRENCEEDITOR, timezone: timezone, messages: messages.recurrenceEditor });
@@ -1208,7 +1208,7 @@ kendo_module({
                 that._editEvent(model);
             };
 
-			var recurrenceMessages = this.options.messages.recurrenceMessages;
+            var recurrenceMessages = this.options.messages.recurrenceMessages;
             that.showDialog({
                 title: recurrenceMessages.editWindowTitle,
                 text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
@@ -1338,8 +1338,9 @@ kendo_module({
                 }
                 that._removeEvent(model, true);
             };
-		
-			var recurrenceMessages = this.options.messages.recurrenceMessages;
+
+            var recurrenceMessages = this.options.messages.recurrenceMessages;
+
             that.showDialog({
                 title: recurrenceMessages.deleteWindowTitle,
                 text: recurrenceMessages.deleteRecurring ? recurrenceMessages.deleteRecurring : DELETERECURRING,

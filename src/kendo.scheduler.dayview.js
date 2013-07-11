@@ -306,10 +306,12 @@ kendo_module({
 
        _slotByPosition: function(x, y) {
            var slot;
-           var offset = this.element.find(".k-scheduler-header-wrap").offset();
+           var offset = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day)").offset();
 
-           x -= offset.left;
-           y -= offset.top;
+           if (offset) {
+               x -= offset.left;
+               y -= offset.top;
+           }
 
            x = Math.ceil(x);
            y = Math.ceil(y);
@@ -320,8 +322,10 @@ kendo_module({
                 return slot;
            }
 
-           x += offset.left;
-           y += offset.top;
+           if (offset) {
+               x += offset.left;
+               y += offset.top;
+           }
 
            offset = this.content.offset();
 
@@ -425,7 +429,7 @@ kendo_module({
                     cell.columnIndex = cellIndex;
 
                     if (isVertical) {
-                        cell.groupIndex = this._groupVerticalIndex(rowIndex);
+                        cell.groupIndex = this._groupVerticalIndex(rowIndex - visibleAllDayRowCount);
                     } else {
                         cell.groupIndex = this._groupHorizontalIndex(cellIndex);
                     }
@@ -1187,7 +1191,7 @@ kendo_module({
                 middle: middle,
                 head: head,
                 tail: tail,
-                singleDay: this._dates.length == 1,
+                singleDay: this._dates.length == 1 || this._isGroupedByDate(),
                 resources: this.eventResources(event)
             }, event, {
                 start: event.startTime || event.start,
