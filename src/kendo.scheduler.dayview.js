@@ -509,7 +509,10 @@ kendo_module({
             eventTemplate: DAY_VIEW_EVENT_TEMPLATE,
             allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE,
             dateHeaderTemplate: DATA_HEADER_TEMPLATE,
-            editable: true
+            editable: true,
+            messages: {
+                allDay: "all day"
+            }
         },
 
         events: ["remove", "add", "edit"],
@@ -601,9 +604,9 @@ kendo_module({
 
                 columns.push(column);
             }
-
+        
             if (options.allDaySlot) {
-                rows.push( { text: "all day", allDay: true });
+                rows.push( { text: options.messages.allDay, allDay: true });
             }
 
             this._forTimeRange(options.startTime, options.endTime, function(date, majorTick, middleRow, lastSlotRow) {

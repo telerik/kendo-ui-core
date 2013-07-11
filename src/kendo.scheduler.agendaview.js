@@ -71,9 +71,9 @@ kendo_module({
         _layout: function() {
             return {
                 columns: [
-                    { text: "Date", className: "k-scheduler-datecolumn" },
-                    { text: "Time", className: "k-scheduler-timecolumn" },
-                    { text: "Event" }
+                    { text: this.options.messages.date, className: "k-scheduler-datecolumn" },
+                    { text: this.options.messages.time, className: "k-scheduler-timecolumn" },
+                    { text: this.options.messages.event }
                 ]
             };
         },
@@ -221,7 +221,12 @@ kendo_module({
                           '</em>' +
                           '<span class="k-scheduler-agendadate">' +
                               '#=kendo.toString(date, "y")#' +
-                          '</span>'
+                          '</span>',
+            messages: {
+                event: "Event",
+                date: "Date",
+                time: "Time"
+            }
         }
     });
 

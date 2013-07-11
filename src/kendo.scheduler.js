@@ -98,7 +98,7 @@ kendo_module({
                 });
         },
         TIMEZONEPOPUP = function(container, options) {
-            $('<a href="#">Time zone<a/>').click(options.click).appendTo(container);
+            $('<a href="#">' + options.messages.timezoneEditorButton + '<a/>').click(options.click).appendTo(container);
         },
         TIMEZONEEDITOR = function(container, options) {
             $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
@@ -423,25 +423,35 @@ kendo_module({
                 save: "Save",
                 cancel: "Cancel",
                 destroy: "Delete",
-                recurrenceMessages: {
-                    deleteWindowTitle: "Delete Recurring Item",
-                    deleteWindowOccurrence: "Delete current occurrence",
-                    deleteWindowSeries: "Delete the series",
-                    editWindowTitle: "Edit Recurring Item",
-                    editWindowOccurrence: "Edit current occurrence",
-                    editWindowSeries: "Edit the series"
+                views: {
+                    day: "Day",
+                    week: "Week",
+                    agenda: "Agenda",
+                    month: "Month"
                 },
-                editor: {
-                    title: "Title",
-                    start: "Start",
-                    end: "End",
-                    allDayEvent: "All day event",
-                    description: "Description",
-                    repeat: "Repeat",
-                    timezone: " ",
-                    startTimezone: "Start timezone",
-                    endTimezone: "End timezone"
-                }
+				recurrenceMessages: {
+					deleteWindowTitle: "Delete Recurring Item",
+					deleteWindowOccurrence: "Delete current occurrence",
+					deleteWindowSeries: "Delete the series",
+					editWindowTitle: "Edit Recurring Item",
+					editWindowOccurrence: "Edit current occurrence",
+					editWindowSeries: "Edit the series"
+				},
+				editor: {
+					title: "Title",
+					start: "Start",
+					end: "End",
+					allDayEvent: "All day event",
+					description: "Description",
+					repeat: "Repeat",
+					timezone: " ",
+					startTimezone: "Start timezone",
+					endTimezone: "End timezone",
+                    separateTimezones: "Use separate start and end time zones",
+                    timezoneEditorTitle: "Timezones",
+                    timezoneEditorButton: "Time zone",
+                    editorTitle: "Event"
+				}
             },
             height: null,
             width: null,
@@ -768,7 +778,7 @@ kendo_module({
                 }
             };
 
-            var recurrenceMessages = this.options.messages.recurrenceMessages;
+			var recurrenceMessages = that.options.messages.recurrenceMessages;
             if (event.recurrenceRule || (event.recurrenceId && !event.id)) {
                 that.showDialog({
                     title: recurrenceMessages.editWindowTitle,
@@ -989,7 +999,7 @@ kendo_module({
                     modal: true,
                     resizable: false,
                     draggable: true,
-                    title: "Timezones",
+                    title: that.options.messages.editor.timezoneEditorTitle,
                     visible: false,
                     close: function(e) {
                         if (e.userTriggered) {
@@ -1056,7 +1066,7 @@ kendo_module({
                 html += (kendo.template(template, settings))(model);
             } else {
                 if (kendo.timezone.windows_zones) {
-                    fields.push({ field: "timezone", title: messages.editor.timezone, editor: TIMEZONEPOPUP, click: click });
+                    fields.push({ field: "timezone", title: messages.editor.timezone, editor: TIMEZONEPOPUP, click: click, messages: messages.editor });
                     fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: TIMEZONEEDITOR });
                     fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: TIMEZONEEDITOR });
                 }
@@ -1086,7 +1096,7 @@ kendo_module({
                         html += '<div class="k-scheduler-timezones" style="display:none">';
                         html += '<div class="k-edit-form-container">';
                         html += '<div class="k-edit-label"></div>';
-                        html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />Use separate start and end time zones</label></div>';
+                        html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />' + messages.editor.separateTimezones +'</label></div>';
                     }
 
                     html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
@@ -1113,7 +1123,7 @@ kendo_module({
 
                     if (field.field === "endTimezone") {
                         html += '<div class="k-edit-buttons k-state-default">';
-                        html += that._createButton({ name: "savetimezone", text: "Done" }) + that._createButton({ name: "canceltimezone", text: "Cancel" });
+                        html += that._createButton({ name: "savetimezone", text: messages.save }) + that._createButton({ name: "canceltimezone", text: messages.cancel });
                         html += '</div></div></div>';
                     }
                 }
@@ -1129,7 +1139,7 @@ kendo_module({
                     modal: true,
                     resizable: false,
                     draggable: true,
-                    title: "Event",
+                    title: messages.editor.editorTitle,
                     visible: false,
                     close: function(e) {
                         if (e.userTriggered) {
@@ -1208,7 +1218,7 @@ kendo_module({
                 that._editEvent(model);
             };
 
-            var recurrenceMessages = this.options.messages.recurrenceMessages;
+			var recurrenceMessages = that.options.messages.recurrenceMessages;
             that.showDialog({
                 title: recurrenceMessages.editWindowTitle,
                 text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
@@ -1339,8 +1349,7 @@ kendo_module({
                 that._removeEvent(model, true);
             };
 
-            var recurrenceMessages = this.options.messages.recurrenceMessages;
-
+			var recurrenceMessages = that.options.messages.recurrenceMessages;
             that.showDialog({
                 title: recurrenceMessages.deleteWindowTitle,
                 text: recurrenceMessages.deleteRecurring ? recurrenceMessages.deleteRecurring : DELETERECURRING,
@@ -1510,7 +1519,7 @@ kendo_module({
                 view = views[idx];
 
                 isSettings = isPlainObject(view);
-
+                
                 if (isSettings) {
                     type = name = view.type ? view.type : view;
                     if (typeof type !== STRING) {
@@ -1524,6 +1533,16 @@ kendo_module({
 
                 if (defaultView) {
                     view.type = defaultView.type;
+                    defaultView.title = this.options.messages.views[name];
+                    if (defaultView.type === "day") {
+                        defaultView.messages = { allDay: this.options.messages.allDay };
+                    } else if (defaultView.type === "agenda") {
+                        defaultView.messages = {
+                            event: this.options.messages.event,
+                            date: this.options.messages.date,
+                            time: this.options.messages.time
+                        };
+                    }
                 }
 
                 view = extend({ title: name }, defaultView, isSettings ? view : {});
@@ -1788,23 +1807,19 @@ kendo_module({
             this.trigger("dataBound");
         }
     });
-
+    
     var defaultViews = {
         day: {
-            type: "kendo.ui.DayView",
-            title: "Day"
+            type: "kendo.ui.DayView"
         },
         week: {
-            type: "kendo.ui.WeekView",
-            title: "Week"
+            type: "kendo.ui.WeekView"
         },
         agenda: {
-            type: "kendo.ui.AgendaView",
-            title: "Agenda"
+            type: "kendo.ui.AgendaView"
         },
         month: {
-            type: "kendo.ui.MonthView",
-            title: "Month"
+            type: "kendo.ui.MonthView"
         }
     };
 
