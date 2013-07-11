@@ -913,17 +913,58 @@ kendo_module({
 
                 that.element = $(element);
                 that.element.addClass("k-qrcode");
-                that.view = dataviz.ViewFactory.current.create({}, that.options.renderAs);
+                that._view = dataviz.ViewFactory.current.create({}, that.options.renderAs);
                 that.setOptions(options);
             },
+
             redraw: function(){
+                var that = this,
+                    view = that._view;
+
+                that._redraw(view);
+                view.renderTo(that.element[0]);
+            },
+
+            svg: function() {
+                if (dataviz.SVGView) {
+                    var view = new dataviz.SVGView();
+
+                    this._redraw(view);
+
+                    return view.render();
+                } else {
+                    throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+                }
+            },
+
+            imageDataURL: function() {
+                if (dataviz.CanvasView) {
+                    if (dataviz.supportsCanvas()) {
+                        var container = document.createElement("div"),
+                            view = new dataviz.CanvasView();
+
+                        this._redraw(view);
+
+                        return view.renderTo(container).toDataURL();
+                    } else {
+                        kendo.logToConsole(
+                            "Warning: Unable to generate image. The browser does not support Canvas.\n" +
+                            "User agent: " + navigator.userAgent);
+
+                        return null;
+                    }
+                } else {
+                    throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+                }
+            },
+
+            _redraw: function(view) {
                 var that = this,
                     value = that._value,
                     baseUnit,
                     border = that.options.border || {},
                     borderWidth = border.width || 0,
                     quietZoneSize,
-                    view = that.view,
                     matrix,
                     size,
                     dataSize,
@@ -946,11 +987,10 @@ kendo_module({
                 view.children = [];
                 view.options.width = size;
                 view.options.height = size;
-                that._addBackground(size, border);
-                that._addMatrix(matrix, baseUnit, quietZoneSize);
-
-                view.renderTo(that.element[0]);
+                that._renderBackground(view, size, border);
+                that._renderMatrix(view, matrix, baseUnit, quietZoneSize);
             },
+
             _getSize: function(){
                 var that = this,
                     size;
@@ -988,14 +1028,14 @@ kendo_module({
             _calculateQuietZone: function(dataSize, contentSize, border){
                 return border + (contentSize - dataSize) / 2;
             },
-            _addMatrix: function(matrix, baseUnit, quietZoneSize){
+
+            _renderMatrix: function(view, matrix, baseUnit, quietZoneSize){
                 var that = this,
-                    view = that.view,
                     y,
                     x1,
                     box,
                     column;
-                
+
                 for(var row = 0; row < matrix.length; row++){
                     y = quietZoneSize + row * baseUnit;
                     column = 0;
@@ -1021,9 +1061,10 @@ kendo_module({
                     }
                 }
             },
-            _addBackground: function (size, border) {
+
+            _renderBackground: function (view, size, border) {
                 var that = this;
-                that.view.children.push(that.view.createRect(Box2D(0,0, size, size).unpad(border.width / 2),
+                view.children.push(view.createRect(Box2D(0,0, size, size).unpad(border.width / 2),
                     {
                         fill: that.options.background,
                         stroke: border.color,
@@ -1031,6 +1072,7 @@ kendo_module({
                         align: false
                     }));
             },
+
             setOptions: function (options) {
                 var that = this;
                 options = options || {};
