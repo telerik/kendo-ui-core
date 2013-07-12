@@ -9,6 +9,9 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
+        addDays = kendo.date.addDays,
+        setTime = kendo.date.setTime,
         SchedulerView = ui.SchedulerView,
         extend = $.extend,
         proxy = $.proxy,
@@ -97,7 +100,7 @@ kendo_module({
 
     function toInvariantTime(date) {
         var staticDate = new Date(1980, 1, 1, 0, 0, 0);
-        kendo.date.setTime(staticDate, getMilliseconds(date));
+        setTime(staticDate, getMilliseconds(date));
         return staticDate;
     }
 
@@ -260,7 +263,7 @@ kendo_module({
 
             var end = new Date(start.getTime());
 
-            kendo.date.setTime(end, duration);
+            setTime(end, duration);
 
             var startSlotIndex;
             var endSlotIndex;
@@ -669,7 +672,7 @@ kendo_module({
 
                 html += action(start, isMajorTickRow, isMiddleRow, isLastSlotRow);
 
-                kendo.date.setTime(start, msInterval, false);
+                setTime(start, msInterval, false);
             }
 
             if (msMax) {
@@ -822,26 +825,8 @@ kendo_module({
         },
 
         _rangeToDates: function(cell) {
-            var parentRow = cell.closest("tr"),
-                tableRows = parentRow.closest("table").find("tr"),
-                maxTimeSlotIndex = tableRows.length - 1,
-                dateIndex = parentRow.find("td").index(cell),
-                timeIndex = tableRows.index(parentRow),
-                slotDate = kendo.date.getDate(this._slotIndexDate(dateIndex)),
-                slotEndDate;
-
-            if (slotDate) {
-                slotEndDate = kendo.date.getDate(slotDate);
-
-                kendo.date.setTime(slotDate, this._slotIndexTime(timeIndex));
-                kendo.date.setTime(slotEndDate, this._slotIndexTime(Math.min(timeIndex + 1, maxTimeSlotIndex)));
-
-                return {
-                    start: slotDate,
-                    end: slotEndDate
-                };
-            }
-            return null;
+            var offset = cell.offset();
+            return this._slotByPosition(offset.left, offset.top);
         },
 
         _slotIndexTime: function(index) {
@@ -859,16 +844,16 @@ kendo_module({
 
             var slotEndDate = kendo.date.getDate(slotDate);
 
-            kendo.date.setTime(slotDate, this._slotIndexTime(rowIndex));
+            setTime(slotDate, this._slotIndexTime(rowIndex));
 
             maxTimeSlotIndex = this._adjustSlotIndex(maxTimeSlotIndex);
             if (this._adjustSlotIndex(rowIndex) >= maxTimeSlotIndex) {
-                kendo.date.setTime(slotEndDate, getMilliseconds(this.options.endTime));
+                setTime(slotEndDate, getMilliseconds(this.options.endTime));
                 if (kendo.date.getDate(slotEndDate).getTime() === slotEndDate.getTime()) {
                     slotEndDate = kendo.date.nextDay(slotEndDate);
                 }
             } else {
-                kendo.date.setTime(slotEndDate, this._slotIndexTime(rowIndex + 1));
+                setTime(slotEndDate, this._slotIndexTime(rowIndex + 1));
             }
 
             return {
@@ -898,7 +883,7 @@ kendo_module({
 
             for (idx = 0, length = slots.length; idx < length; idx++) {
                 slotStart = new Date(+slots[idx]);
-                kendo.date.setTime(slotStart, startTime);
+                setTime(slotStart, startTime);
 
                 if (index === idx) {
                     return slotStart;
@@ -1196,12 +1181,12 @@ kendo_module({
 
             if (getMilliseconds(slotEndTime) === getMilliseconds(kendo.date.getDate(slotEndTime))) {
                 slotEndTime = kendo.date.getDate(slotEndTime);
-                kendo.date.setTime(slotEndTime, MS_PER_DAY - 1);
+                setTime(slotEndTime, MS_PER_DAY - 1);
             }
 
             if (getMilliseconds(endTime) === getMilliseconds(kendo.date.getDate(endTime)) && endTime.getTime() > startTime.getTime()) {
                 endTime = kendo.date.getDate(endTime);
-                kendo.date.setTime(endTime, MS_PER_DAY - 1);
+                setTime(endTime, MS_PER_DAY - 1);
             }
 
             endTime = getMilliseconds(endTime);
@@ -1389,6 +1374,7 @@ kendo_module({
             }
 
             this.refreshLayout();
+            this.trigger("render");
         },
 
         _resourceBySlot: function(slot) {
@@ -1515,14 +1501,527 @@ kendo_module({
         _rowCountForLevel: function(level) {
             var rowLevel = this.rowLevels[level];
             return rowLevel ? rowLevel.length : 0;
+        },
+
+        _selectionOffset: function() {
+            return this._dates.length;
+        },
+
+        normalizeSelection: function(selection) {
+            if (!this.isInRange(selection.start) || !this.isInRange(selection.end)) {
+                var slot = this._slotByDate(this.startDate());
+                selection.start = new Date(slot.start);
+                selection.end = new Date(slot.end);
+            }
+        },
+
+        isInRange: function(date) {
+            return this._slotByDate(date);
+        },
+
+        moveSelectionToPeriod: function(selection) {
+            var offset = this._selectionOffset(),
+                start = selection.start,
+                end = selection.end;
+
+            if (!this._slotByDate(start) || !this._slotByDate(end)) {
+                if (start >= this.endDate()) {
+                    offset = -offset;
+                }
+                selection.start = addDays(start, offset);
+                selection.end = addDays(end, offset);
+                selection.events = [];
+            } else {
+                 this.normalizeSelection(selection);
+            }
+        },
+
+        clearSelection: function() {
+            this.content.add(this.datesHeader).find(".k-state-selected").removeClass("k-state-selected");
+        },
+
+        select: function(selection) {
+            if (selection) {
+                this.clearSelection();
+
+                if (selection.events[0]) {
+                    if (this._selectEvents(selection)) {
+                        return;
+                    }
+                }
+
+                this._selectCells(selection);
+            }
+        },
+
+        _selectEvents: function(selection) {
+            var container = this.content.add(this.datesHeader.children()),
+                events = selection.events,
+                length = events.length,
+                idx = 0,
+                event;
+
+            for (; idx < length; idx++) {
+                event = container.children("[data-uid=" + events[idx] + "]").addClass("k-state-selected");
+                event = event[event.length - 1];
+
+                if (!event) {
+                    this.clearSelection();
+                    return;
+                }
+            }
+
+            if (event) {
+                this._scrollTo(event, this.content[0]);
+                return true;
+            }
+        },
+
+        _selectCells: function(selection) {
+            var startDate = selection.start,
+                endDate = selection.end,
+                backwardSelection = startDate > endDate;
+
+            if (backwardSelection) {
+                startDate = new Date(endDate);
+                endDate = selection.start;
+            }
+
+            var that = this,
+                columns = that._columns,
+                startRow = Math.floor(that._timeSlotIndex(startDate)),
+                endRow = Math.ceil(that._timeSlotIndex(endDate)),
+                startCol = that._dateSlotIndex(startDate),
+                endCol = that._dateSlotIndex(endDate),
+                endTime = getMilliseconds(this.options.endTime),
+                endDateTime = getMilliseconds(endDate),
+                dayDiff = endDate.getDate() - startDate.getDate(),
+                slots, firstCell, cell,
+                end;
+
+            if (startRow < 0) {
+                startRow = 0;
+            }
+
+            if (endRow < 0) {
+                endRow = 0;
+            }
+
+            if (!selection.isAllDay) {
+                if (endDateTime === 0 && endDateTime === endTime && dayDiff > 0) {
+                    endCol -= 1;
+                    endRow = columns[endCol].slots.length;
+                }
+
+                end = endRow;
+                if (endCol > startCol) {
+                    end = columns[endCol].slots.length;
+                }
+
+                for (; startCol <= endCol; startCol++) {
+                    if (startCol === endCol) {
+                        end = endRow;
+                    }
+
+                    slots = columns[startCol].slots;
+
+                    for (; startRow < end; startRow++) {
+                        cell = slots[startRow].element;
+                        addSelectedState(cell);
+                        if (!firstCell) {
+                            firstCell = cell;
+                        }
+                    }
+
+                    startRow = 0;
+                }
+            } else {
+                slots = that._rows[0].slots;
+
+                for (; startCol <= endCol; startCol++) {
+                    cell = slots[startCol].element;
+                    addSelectedState(cell);
+                }
+            }
+
+            that._scrollTo(backwardSelection ? firstCell : cell, that.content[0]);
+        },
+
+        _scrollTo: function(element, container) {
+            var elementOffset = element.offsetTop,
+                elementOffsetDir = element.offsetHeight,
+                containerScroll = container.scrollTop,
+                containerOffsetDir = container.clientHeight,
+                bottomDistance = elementOffset + elementOffsetDir,
+                result = 0;
+
+                if (containerScroll > elementOffset) {
+                    result = elementOffset;
+                } else if (bottomDistance > (containerScroll + containerOffsetDir)) {
+                    if (elementOffsetDir <= containerOffsetDir) {
+                        result = (bottomDistance - containerOffsetDir);
+                    } else {
+                        result = elementOffset;
+                    }
+                } else {
+                    result = containerScroll;
+                }
+                container.scrollTop = result;
+        },
+
+        move: function(selection, key, shiftKey) {
+            var options = this.options,
+                interval = (options.majorTick * MS_PER_MINUTE) / (options.minorTickCount || 1),
+                start = new Date(selection.start),
+                end = new Date(selection.end),
+                multipleSelection = Math.abs(start - end) > interval,
+                isAllDay = selection.isAllDay,
+                //events = selection.events,
+                startSlotIndex, endSlotIndex,
+                startSlot, endSlot,
+                offsetColumn = true,
+                handled = false;
+
+            if (key === keys.DOWN) {
+                handled = true;
+                if (isAllDay) {
+                    isAllDay = false;
+                    startSlotIndex = 0;
+                    endSlotIndex = -1;
+                } else {
+                    startSlotIndex = 1;
+                    endSlotIndex = 0;
+                }
+
+                if (multipleSelection) {
+                    endSlotIndex = startSlotIndex = 0;
+                    offsetColumn = false;
+                    start = end;
+                }
+
+                startSlot = this._slotByDate(start, startSlotIndex, offsetColumn);
+                endSlot = this._slotByDate(end, endSlotIndex, offsetColumn);
+                endSlot = endSlot || startSlot;
+            } else if (key === keys.UP) {
+                handled = true;
+
+                startSlotIndex = -1;
+                endSlotIndex = -2;
+
+                if (multipleSelection) {
+                    endSlotIndex = startSlotIndex;
+                    end = start;
+                }
+
+                startSlot = this._slotByDate(start, startSlotIndex);
+                endSlot = this._slotByDate(end, endSlotIndex);
+
+                if (options.allDaySlot && !startSlot) {
+                    isAllDay = true;
+                    startSlot = this._slotByDate(start);
+                    endSlot = this._slotByDate(end, -1);
+                }
+
+                endSlot = endSlot || startSlot;
+            } else if (key === keys.RIGHT) {
+                handled = true;
+                startSlot = endSlot = {
+                    start: addDays(start, 1),
+                    end: addDays(end, 1)
+                };
+            } else if (key === keys.LEFT) {
+                handled = true;
+                startSlot = endSlot = {
+                    start: addDays(start, -1),
+                    end: addDays(end, -1)
+                };
+            }
+
+            if (handled) {
+                selection.events = [];
+                if (startSlot && endSlot) {
+                    selection.isAllDay = isAllDay;
+                    if (!shiftKey) {
+                        selection.start = startSlot.start;
+                    }
+
+                    selection.end = endSlot.end;
+                }
+            }
+
+            return handled;
+        },
+
+        _slotByDate: function(date, offsetIndex, offsetColumn) {
+            var column = this._dateSlotIndex(date);
+
+            offsetIndex = offsetIndex || 0;
+
+            //TODO: Probably check whether the start is different than end
+            if (offsetColumn !== false && getMilliseconds(date) === getMilliseconds(this.options.endTime) && column > 0) {
+                column -= 1;
+            }
+
+            column = this._columns[column];
+            if (column) {
+                return column.slots[this._timeSlotIndex(date) + offsetIndex];
+            }
+
+            return null;
+        },
+
+        /*move: function(selection, key, shiftKey) {
+            var options = this.options,
+                startTime = options.startTime,
+                interval = (options.majorTick * MS_PER_MINUTE) / (options.minorTickCount || 1),
+                isAllDay = selection.isAllDay,
+                events = selection.events,
+                start = selection.start,
+                end = selection.end,
+                handled = false,
+                event;
+
+            if (key === keys.RIGHT) {
+                handled = true;
+
+                start = addDays(start, 1);
+                end = addDays(end, 1);
+            } else if (key === keys.LEFT) {
+                handled = true;
+
+                start = addDays(start, -1);
+                end = addDays(end, -1);
+            } else if (key === keys.DOWN) {
+                handled = true;
+                if (isAllDay || getMilliseconds(end) !== getMilliseconds(options.endTime)) { //TODO: what about start === end ???
+                    if (events[0]) {
+                        start = new Date(end);
+                        setTime(start, -interval);
+                    }
+
+                    if (isAllDay) {
+                        end.setHours(startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
+                        start = new Date(end);
+                        isAllDay = false;
+                    } else if (!shiftKey) {
+                        setTime(start, interval);
+                        if (end - start > 0) {
+                            end = new Date(start);
+                        }
+                    }
+
+                    setTime(end, interval);
+                }
+            } else if (key === keys.UP) {
+                handled = true;
+                if (!isAllDay) {
+                    if (!shiftKey && (getMilliseconds(start) - interval) < getMilliseconds(startTime)) {
+                        isAllDay = true;
+                    } else {
+                        if (!shiftKey) {
+                            if (end - start > interval) {
+                                end = new Date(start);
+                            } else {
+                                setTime(end, -interval);
+                            }
+                        }
+
+                        setTime(start, -interval);
+                    }
+                }
+            }
+
+            if (handled) {
+                selection.events = [];
+                selection.isAllDay = isAllDay;
+                selection.start = start;
+                selection.end = end;
+            }
+
+            return handled;
+        },*/
+
+        moveToEvent: function(selection, previous) {
+            selection = selection;
+            previous = previous;
+            return true;
+        },
+
+        right: function(selection) {
+            if (selection.events[0]) {
+                selection.events = [];
+            }
+            selection.start = kendo.date.addDays(selection.start, 1);
+            selection.end = kendo.date.addDays(selection.end, 1);
+        },
+
+        left: function(selection) {
+            if (selection.events[0]) {
+                selection.events = [];
+            }
+            selection.start = kendo.date.addDays(selection.start, -1);
+            selection.end = kendo.date.addDays(selection.end, -1);
+        },
+
+        down: function(selection) {
+            var interval = (this.options.majorTick * MS_PER_MINUTE) / (this.options.minorTickCount || 1),
+                startTime = this.options.startTime,
+                endTime = this.options.endTime,
+                start = new Date(selection.start),
+                end = new Date(selection.end);
+
+            if (selection.events[0]) {
+                start = new Date(end);
+                end = new Date(start);
+
+                kendo.date.setTime(start, -interval);
+
+                selection.events = [];
+            }
+
+            if (selection.isAllDay) {
+                start = new Date(start.getFullYear(), start.getMonth(), start.getDate(), startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
+                end = new Date(start);
+
+                kendo.date.setTime(end, interval);
+                selection.isAllDay = false;
+            } else {
+                endTime = new Date(end.getFullYear(), end.getMonth(), end.getDate(), endTime.getHours(), endTime.getMinutes(), endTime.getSeconds(), endTime.getMilliseconds());
+                if ((end.getDate() === start.getDate()) && !kendo.date.getMilliseconds(endTime)) {
+                    kendo.date.setTime(endTime, MS_PER_DAY);
+                }
+
+                kendo.date.setTime(start, interval);
+                kendo.date.setTime(end, interval);
+            }
+
+            if (end <= endTime) {
+                selection.start = start;
+                selection.end = end;
+            }
+        },
+
+        up: function(selection) {
+            var interval = (this.options.majorTick * MS_PER_MINUTE) / (this.options.minorTickCount || 1),
+                startTime = this.options.startTime,
+                start = new Date(selection.start),
+                end = new Date(selection.end);
+
+            if (selection.events[0]) {
+                selection.events = [];
+            }
+
+            kendo.date.setTime(start, -interval);
+            kendo.date.setTime(end, -interval);
+
+            if (kendo.date.getMilliseconds(start) >= kendo.date.getMilliseconds(startTime)) {
+                selection.start = start;
+                selection.end = end;
+            } else if (!selection.isAllDay) {
+                selection.isAllDay = true;
+            }
+        },
+
+        _getAllDayEvents: function(col, selected) {
+            var allDayRow = this._rows[0],
+                events = allDayRow.events,
+                result,
+                event;
+
+            for (var i = eventIndex(events, selected), length = events.length; i < length; i++) {
+                event = events[i];
+
+                if (event.start === col) {
+                    result = event;
+                    break;
+                }
+            }
+
+            return result;
+        },
+
+        nextEvent: function(selection) {
+            var that = this,
+                col = that._dateSlotIndex(selection.start),
+                row = that._timeSlotIndex(selection.start),
+                columns = that._columns,
+                columnsLength = columns.length,
+                eventsLength, events, event,
+                isSlot = !selection.events || !selection.events[0],
+                i = col, j = 0, found = false, isAllDay = false,
+                modified = false;
+
+            while (i < columnsLength) {
+                events = columns[i].events;
+                eventsLength = events.length;
+
+                for (j = eventIndex(events, selection.events); j < eventsLength; j++) {
+                    event = events[j];
+
+                    if (event.start >= row) {
+
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    break;
+                } else {
+                    event = that._getAllDayEvents(i + 1, selection.events);
+                    if (event) {
+                        isAllDay = found = true;
+                        break;
+                    }
+                }
+
+                row = 0;
+                i++;
+
+                if (i === columnsLength && isSlot && !modified) {
+                    columnsLength = col;
+                    i = 0;
+                    modified = true;
+                }
+            }
+
+            if (found) {
+                var slots = isAllDay ? that._rows[0].slots : columns[i].slots,
+                    startSlot = slots[event.start],
+                    endSlot = slots[event.end - (isAllDay ? 0 : 1)];
+
+                selection.start = new Date(startSlot.start);
+                selection.end = new Date(endSlot.end);
+                selection.isAllDay = isAllDay;
+                selection.events = [event.element.data("uid")];
+            }
+
+            return found;
         }
     });
+
+    var selectedStateRegExp = /\s*k-state-selected/;
+    function addSelectedState(cell) {
+        cell.className = cell.className.replace(selectedStateRegExp, "") + " k-state-selected";
+    }
 
     function resourceValue(resource, item) {
         if (resource.valuePrimitive) {
             item = kendo.getter(resource.dataValueField)(item);
         }
         return item;
+    }
+
+    function eventIndex(events, selected) {
+        if (!selected || !selected.length) {
+            return 0;
+        }
+
+        selected = selected[selected.length - 1];
+
+        events = $.map(events, function(item) { return item.element.data("uid"); });
+
+        return $.inArray(selected, events) + 1;
     }
 
     function arrayEqFilter(item, value) {

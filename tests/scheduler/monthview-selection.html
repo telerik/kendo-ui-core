@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler MonthView selection</title>
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.monthview.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler Month View selection</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <style>
+
+            html
+            {
+                font:12px sans-serif;
+                overflow-y:scroll;
+            }
+
+        </style>
+        <script>
+            var MonthView = kendo.ui.MonthView,
+                keys = kendo.keys,
+                container;
+
+            function setup(options) {
+                return new MonthView(container, $.extend(true, { eventHeight: 10, date: new Date(2013, 1, 2) }, options));
+            }
+
+            function createSelection(options) {
+                return $.extend(true, {
+                        events: [],
+                        start: new Date(2013, 1, 2),
+                        end: new Date(2013, 1, 2)
+                    },
+                    options
+                );
+            }
+
+            module("Month View selection", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container).addClass("k-scheduler");
+                },
+                teardown: function() {
+                    $(container).remove();
+                }
+            });
+
+            test("view select: selects the selection start slot", function() {
+                var view = setup();
+                var selection = createSelection();
+
+                view.select(selection);
+
+                equal(view.table.find("td.k-state-selected").index(), 6);
+            });
+
+            test("view select: selects the selection end slot", function() {
+                var view = setup();
+                var selection = createSelection();
+
+                view.select(selection);
+
+                equal(view.table.find("td.k-state-selected").index(), 6);
+            });
+
+            test("view select: selects slots between selection start/end", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 5)
+
+                });
+
+                view.select(selection);
+
+                equal(view.table.find("td.k-state-selected").length, 3);
+                equal(view.table.find("td.k-state-selected").eq(0).index(), 0);
+                equal(view.table.find("td.k-state-selected").eq(1).index(), 1);
+                equal(view.table.find("td.k-state-selected").eq(2).index(), 2);
+            });
+
+            test("view select: clears previous selected items", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1)
+                });
+
+                view.select(createSelection());
+                view.select(selection);
+
+                equal(view.table.find("td.k-state-selected").length, 1);
+                equal(view.table.find("td.k-state-selected").eq(0).index(), 5);
+            });
+
+            test("view select: selects event", function() {
+                var view = setup();
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    events: [ event.uid ]
+                });
+
+                view.render([
+                    event
+                ]);
+
+                view.select(selection);
+
+                equal(view.table.find(".k-state-selected").data("uid"), event.uid);
+            });
+
+            test("view select: slot is not selected if event is found", function() {
+                var view = setup();
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    events: [ event.uid ]
+                });
+
+                view.render([
+                    event
+                ]);
+
+                view.select(selection);
+
+                equal(view.table.find(".k-state-selected").data("uid"), event.uid);
+                ok(!view.table.find(".k-scheduler-table:last td").eq(5).hasClass("k-state-selected"));
+            });
+
+            test("view select: slot is selected if event is not found", function() {
+                var view = setup();
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    events: [ event.uid ]
+                });
+
+                view.render([
+                    event
+                ]);
+                view.table.find(".k-event").remove();
+
+                view.select(selection);
+
+                equal(view.table.find(".k-state-selected").length, 1);
+                equal(view.table.find("td.k-state-selected").eq(0).index(), 5);
+            });
+
+            test("view select: selects multiple events", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 2),
+                    title: "one day event"
+                });
+
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    events: [ firstEvent.uid, secondEvent.uid ]
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                view.select(selection);
+
+                var selected = view.table.find(".k-state-selected");
+                equal(selected.length, 2);
+                equal(selected.eq(0).data("uid"), firstEvent.uid);
+                equal(selected.eq(1).data("uid"), secondEvent.uid);
+            });
+
+            test("view select: clear previous selected event", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 2),
+                    title: "one day event"
+                });
+
+                view.render([
+                    firstEvent
+                ]);
+
+                view.select(createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    events: [ firstEvent.uid ]
+                }));
+
+                view.render([
+                    secondEvent
+                ]);
+
+                view.select(createSelection({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 2),
+                    events: [ secondEvent.uid ]
+                }));
+
+                var selected = view.table.find(".k-state-selected");
+                equal(selected.length, 1);
+                equal(selected.data("uid"), secondEvent.uid);
+            });
+
+            test("view move: right key move selection to next day", function() {
+                var view = setup();
+                var selection = createSelection();
+                var nextDay = new Date(2013, 1, 3);
+
+                view.move(selection, keys.RIGHT);
+
+                deepEqual(selection.start, nextDay);
+                deepEqual(selection.end, nextDay);
+            });
+
+            test("view move: right key move range selection to the day after selection.end", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 2)
+                });
+                var nextDay = new Date(2013, 1, 3);
+
+                view.move(selection, keys.RIGHT);
+
+                deepEqual(selection.start, nextDay);
+                deepEqual(selection.end, nextDay);
+            });
+
+            test("view move: on right key returns true", function() {
+                var view = setup();
+                var selection = createSelection();
+
+                ok(view.move(selection, keys.RIGHT), "RIGHT key is not handled");
+            });
+
+            test("view move: on left key returns true", function() {
+                var view = setup();
+                var selection = createSelection();
+
+                ok(view.move(selection, keys.LEFT), "LEFT key is not handled");
+            });
+
+            test("view move: left key move selection to the day before selection.end", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 3)
+                });
+                var prevDay = new Date(2013, 1, 2);
+
+                view.move(selection, keys.LEFT);
+
+                deepEqual(selection.start, prevDay);
+                deepEqual(selection.end, prevDay);
+            });
+
+            test("view move: on down key returns true", function() {
+                var view = setup();
+                var selection = createSelection();
+
+                ok(view.move(selection, keys.DOWN), "DOWN key is not handled");
+            });
+
+            test("view move: down key move range selection to next week same day as selection.end", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 2)
+                });
+                var nextDay = new Date(2013, 1, 9);
+
+                view.move(selection, keys.DOWN);
+
+                deepEqual(selection.start, nextDay);
+                deepEqual(selection.end, nextDay);
+            });
+
+            test("view move: on up key returns true", function() {
+                var view = setup();
+                var selection = createSelection();
+
+                ok(view.move(selection, keys.UP), "UP key is not handled");
+            });
+
+            test("view move: up key move range selection to previous week same day as selection.end", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 7),
+                    end: new Date(2013, 1, 9)
+                });
+                var prevDay = new Date(2013, 1, 2);
+
+                view.move(selection, keys.UP);
+
+                deepEqual(selection.start, prevDay);
+                deepEqual(selection.end, prevDay);
+            });
+
+            test("view move: right key with shift move end selection to next day", function() {
+                var view = setup();
+                var startDate = new Date(2013, 1, 2);
+                var endDate = new Date(2013, 1, 3);
+                var selection = createSelection({
+                    start: startDate,
+                    end: startDate
+                });
+
+                view.move(selection, keys.RIGHT, true);
+
+                deepEqual(selection.start, startDate);
+                deepEqual(selection.end, endDate);
+            });
+
+            test("view move: left key with shift move start selection to previous day", function() {
+                var view = setup();
+                var startDate = new Date(2013, 1, 2);
+                var endDate = new Date(2013, 1, 1);
+                var selection = createSelection({
+                    start: startDate,
+                    end: startDate
+                });
+
+                view.move(selection, keys.LEFT, true);
+
+                deepEqual(selection.start, startDate);
+                deepEqual(selection.end, endDate);
+            });
+
+            test("view move: left key with shift twice move end selection to previous day", function() {
+                var view = setup();
+                var startDate = new Date(2013, 1, 3);
+                var finalDate = new Date(2013, 1, 1);
+                var selection = createSelection({
+                    start: startDate,
+                    end: startDate
+                });
+
+                view.move(selection, keys.LEFT, true);
+                view.move(selection, keys.LEFT, true);
+
+                deepEqual(selection.start, startDate);
+                deepEqual(selection.end, finalDate);
+            });
+
+            test("view move: left with shift with previous range selection", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 4)
+                });
+
+                view.move(selection, keys.LEFT, true);
+
+                deepEqual(selection.start, new Date(2013, 1, 2));
+                deepEqual(selection.end, new Date(2013, 1, 3));
+            });
+
+            test("view move: up key with shift move end selection to previous week same day", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013,1,9),
+                    end: new Date(2013,1,9)
+                });
+
+                view.move(selection, keys.UP, true);
+
+                deepEqual(selection.start, new Date(2013,1,9));
+                deepEqual(selection.end, new Date(2013,1,2));
+            });
+
+            test("view move: down key with shift move end selection to next week same day", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013,1,2),
+                    end: new Date(2013,1,2)
+                });
+
+                view.move(selection, keys.DOWN, true);
+
+                deepEqual(selection.start, new Date(2013,1,2));
+                deepEqual(selection.end, new Date(2013,1,9));
+            });
+
+            test("view move: clears selected event when key is handled", function() {
+                var view = setup();
+                var date = new Date(2013, 1, 2);
+                var event = new kendo.data.SchedulerEvent({
+                    start: date,
+                    end: date,
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: date,
+                    end: date,
+                    events: [ event.uid ]
+                });
+
+                view.render([
+                    event
+                ]);
+
+                ok(view.move(selection, keys.LEFT));
+                equal(selection.events.length, 0);
+            });
+
+            test("view moveToEvent: finds next closest event", function() {
+                var view = setup();
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1)
+                });
+
+                view.render([
+                    event
+                ]);
+
+                var found = view.moveToEvent(selection);
+
+                equal(selection.events.length, 1);
+                equal(selection.events[0], event.uid);
+                ok(found);
+            });
+
+            test("view moveToEvent: returns false if event is not found", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1)
+                });
+
+                ok(!view.moveToEvent(selection));
+            });
+
+            test("view moveToEvent: updates selection to event slot", function() {
+                var view = setup();
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 2),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1)
+                });
+
+                view.render([
+                    event
+                ]);
+
+                var found = view.moveToEvent(selection);
+
+                equal(selection.events[0], event.uid);
+                deepEqual(selection.start, event.start);
+                deepEqual(selection.end, event.end);
+            });
+
+            test("view moveToEvent: move selection from current event to next", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    events: [ firstEvent.uid ]
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], secondEvent.uid);
+            });
+
+            test("view moveToEvent: with shift finds previous closest event", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 2),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3)
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection, true));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], secondEvent.uid);
+            });
+
+            test("view moveToEvent: with shift finds previous closest event when selection is between events", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 2)
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection, true));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], firstEvent.uid);
+            });
+
+            test("view moveToEvent: move selection from current event to previous", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3),
+                    events: [ secondEvent.uid ]
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection, true));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], firstEvent.uid);
+            });
+
+            test("view moveToEvent: move selection from event to previous event in same slot", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "first event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "second event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    events: [ secondEvent.uid ]
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection, true));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], firstEvent.uid);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

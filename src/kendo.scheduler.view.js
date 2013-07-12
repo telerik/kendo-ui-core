@@ -159,10 +159,23 @@ kendo_module({
             isRtl = kendo.support.isRtl(element);
             this._resizeHint = $();
             this._moveHint = $();
+            this._cellId = kendo.guid();
         },
 
         dateForTitle: function() {
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
+        },
+
+        move: function() {
+            return false;
+        },
+
+        moveToEvent: function() {
+            return false;
+        },
+
+        isInRange: function(date) {
+            return this.startDate() <= date && date <= this.endDate();
         },
 
         _createResizeHint: function(left, top, width, height) {

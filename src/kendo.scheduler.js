@@ -28,6 +28,7 @@ kendo_module({
         date = kendo.date,
         getDate = date.getDate,
         recurrence = kendo.recurrence,
+        keys = kendo.keys,
         ui = kendo.ui,
         Widget = ui.Widget,
         STRING = "string",
@@ -410,6 +411,93 @@ kendo_module({
             if(that.options.messages && that.options.messages.recurrence) {
                 recurrence.options = that.options.messages.recurrence;
             }
+
+            that._selectable();
+        },
+
+        _selectable: function() {
+            var that = this;
+            that._tabindex();
+            that.wrapper.on("mousedown" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
+                that._createSelection(e.currentTarget);
+                that.wrapper.focus();
+            });
+
+            that.wrapper.on("focus" + NS, function() {
+                if (!that._selection) {
+                    that._createSelection($(".k-scheduler-content").find("td:first"));
+                }
+
+                that.view().select(that._selection);
+            });
+
+            that.wrapper.on("focusout" + NS, function() {
+                that.view().clearSelection();
+            });
+
+            that.wrapper.on("keydown" + NS, function(e) {
+                var key = e.keyCode,
+                    view = that.view(),
+                    selection = that._selection,
+                    shiftKey = e.shiftKey,
+                    start;
+
+                if (key === keys.TAB) {
+                    if (view.moveToEvent(selection, shiftKey)) {
+                        view.select(selection);
+                        e.preventDefault();
+                    }
+                } else if (view.move(selection, key, shiftKey)) {
+                    start = selection.start;
+
+                    if (view.isInRange(start)) {
+                        view.select(selection);
+                    } else {
+                        that.date(start);
+                    }
+
+                    e.preventDefault();
+                }
+
+                that._adjustSelectedDate();
+            });
+        },
+
+        _createSelection: function(item) {
+            var uid, dates;
+
+            this._selection = {
+                events: []
+            };
+
+            item = $(item);
+            uid = item.data("uid");
+
+            if (uid) {
+                item = getOccurrenceByUid(this._data, uid);
+                this._updateSelection(item, [uid]);
+            } else {
+                dates = this.view()._rangeToDates(item);
+                dates.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
+
+                this._updateSelection(dates);
+            }
+
+            //TODO: calculate cell offset
+            //selection.offset = 0;
+
+            this._adjustSelectedDate();
+        },
+
+        _updateSelection: function(dataItem, events) {
+            var selection = this._selection;
+
+            if (selection) {
+                selection.start = new Date(dataItem.start);
+                selection.end = new Date(dataItem.end);
+                selection.isAllDay = dataItem.isAllDay;
+                selection.events = events || [];
+            }
         },
 
         options: {
@@ -429,29 +517,29 @@ kendo_module({
                     agenda: "Agenda",
                     month: "Month"
                 },
-				recurrenceMessages: {
-					deleteWindowTitle: "Delete Recurring Item",
-					deleteWindowOccurrence: "Delete current occurrence",
-					deleteWindowSeries: "Delete the series",
-					editWindowTitle: "Edit Recurring Item",
-					editWindowOccurrence: "Edit current occurrence",
-					editWindowSeries: "Edit the series"
-				},
-				editor: {
-					title: "Title",
-					start: "Start",
-					end: "End",
-					allDayEvent: "All day event",
-					description: "Description",
-					repeat: "Repeat",
-					timezone: " ",
-					startTimezone: "Start timezone",
-					endTimezone: "End timezone",
+                recurrenceMessages: {
+                    deleteWindowTitle: "Delete Recurring Item",
+                    deleteWindowOccurrence: "Delete current occurrence",
+                    deleteWindowSeries: "Delete the series",
+                    editWindowTitle: "Edit Recurring Item",
+                    editWindowOccurrence: "Edit current occurrence",
+                    editWindowSeries: "Edit the series"
+                },
+                editor: {
+                    title: "Title",
+                    start: "Start",
+                    end: "End",
+                    allDayEvent: "All day event",
+                    description: "Description",
+                    repeat: "Repeat",
+                    timezone: " ",
+                    startTimezone: "Start timezone",
+                    endTimezone: "End timezone",
                     separateTimezones: "Use separate start and end time zones",
                     timezoneEditorTitle: "Timezones",
                     timezoneEditorButton: "Time zone",
                     editorTitle: "Event"
-				}
+                }
             },
             height: null,
             width: null,
@@ -711,6 +799,7 @@ kendo_module({
                 }
 
                 if (!that.trigger(SAVE, { model: event })) {
+                    that._updateSelection(event);
                     that.dataSource.sync();
                 }
             };
@@ -764,6 +853,7 @@ kendo_module({
                 }
 
                 if (!that.trigger(SAVE, { model: exception })) {
+                    that._updateSelection(event);
                     that.dataSource.sync();
                 }
             };
@@ -1339,7 +1429,7 @@ kendo_module({
                 that._removeEvent(model, true);
             };
 
-			var recurrenceMessages = that.options.messages.recurrenceMessages;
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
             that.showDialog({
                 title: recurrenceMessages.deleteWindowTitle,
                 text: recurrenceMessages.deleteRecurring ? recurrenceMessages.deleteRecurring : DELETERECURRING,
@@ -1418,6 +1508,18 @@ kendo_module({
                 };
 
                 view.bind("navigate", that._viewNavigateHandler);
+
+                that._viewRenderHandler = function() {
+                    var view = this;
+                    if (that._selection) {
+                        view.moveSelectionToPeriod(that._selection);
+                        view.select(that._selection);
+
+                        that._adjustSelectedDate();
+                    }
+                };
+
+                view.bind("render", that._viewRenderHandler);
             }
         },
 
@@ -1471,6 +1573,16 @@ kendo_module({
             this.refresh();
         },
 
+        _adjustSelectedDate: function() {
+            var date = this._model.selectedDate,
+                selection = this._selection,
+                start = selection.start;
+
+            if (!kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
+                date.setFullYear(start.getFullYear(), start.getMonth(), start.getDate());
+            }
+        },
+
         _initializeView: function(name) {
             var view = this.views[name];
 
@@ -1509,7 +1621,7 @@ kendo_module({
                 view = views[idx];
 
                 isSettings = isPlainObject(view);
-                
+
                 if (isSettings) {
                     type = name = view.type ? view.type : view;
                     if (typeof type !== STRING) {
@@ -1797,7 +1909,7 @@ kendo_module({
             this.trigger("dataBound");
         }
     });
-    
+
     var defaultViews = {
         day: {
             type: "kendo.ui.DayView"

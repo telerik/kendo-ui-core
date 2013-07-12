@@ -9,6 +9,7 @@ kendo_module({
 (function($){
     var kendo = window.kendo,
         ui = kendo.ui,
+        keys = kendo.keys,
         SchedulerView = ui.SchedulerView,
         NS = ".kendoMonthView",
         extend = $.extend,
@@ -72,6 +73,128 @@ kendo_module({
             that._renderLayout(that.options.date);
 
             that._slots();
+        },
+
+        select: function(selection) {
+            var that = this;
+
+            that.clearSelection();
+
+            if (!that._selectEvents(selection.events)) {
+                that._selectSlots(
+                    that._slotIndex(selection.start),
+                    that._slotIndex(selection.end),
+                    that._row.slots
+                );
+            }
+        },
+
+        _selectEvents: function(events) {
+            var found = false;
+            var uidAttr = kendo.attr("uid");
+
+            if (!events[0]) {
+                return found;
+            }
+
+            var elements = this.table.find("[" + uidAttr + "=" + events.join("],[" + uidAttr + "=") + "]");
+            if (elements.length == events.length) {
+                found = true;
+                elements.addClass("k-state-selected");
+            }
+
+            return found;
+        },
+
+        _selectSlots: function(startIndex, endIndex, slots) {
+            var idx = startIndex;
+            if (startIndex > endIndex) {
+                startIndex =  endIndex;
+                endIndex = idx;
+            }
+
+            for (idx = startIndex; idx <= endIndex; idx ++) {
+                $(slots[idx].element).addClass("k-state-selected");
+            }
+        },
+
+        clearSelection: function() {
+            this.table.find(".k-state-selected").removeClass("k-state-selected");
+        },
+
+        move: function(selection, key, keep) {
+            var handled = false,
+                date = selection.end;
+
+            if (key == keys.LEFT) {
+                date = kendo.date.addDays(date, -1);
+                handled = true;
+            } else if (key == keys.RIGHT) {
+                date = kendo.date.addDays(date, 1);
+                handled = true;
+            } else if (key == keys.DOWN) {
+                date = kendo.date.addDays(date, 7);
+                handled = true;
+            } else if (key == keys.UP) {
+                date = kendo.date.addDays(date, -7);
+                handled = true;
+            }
+
+            if (handled) {
+                if (!keep) {
+                    selection.start = date;
+                }
+                selection.end = date;
+                selection.events = [];
+            }
+
+            return handled;
+        },
+
+        moveToEvent: function(selection, prev) {
+            var that = this,
+                event,
+                pad = prev ? -1 : 1,
+                startSlotIndex = that._slotIndex(selection.start),
+                events = that._row.events,
+                idx = eventIndex(events, selection.events),
+                slots = that._row.slots,
+                length = events.length;
+
+
+            if (prev) {
+                if (idx < 0) {
+                    for (idx = 0; idx < length; idx ++) {
+                        if (events[idx].start < startSlotIndex) {
+                            event = events[idx];
+                        } else {
+                            break;
+                        }
+                    }
+                } else {
+                    for (idx += pad; idx > -1; idx --) {
+                        if (events[idx].start <= startSlotIndex) {
+                            event = events[idx];
+                            break;
+                        }
+                    }
+                }
+            } else {
+                for (idx += pad; idx < length; idx ++) {
+                    if (events[idx].start >= startSlotIndex) {
+                        event = events[idx];
+                        break;
+                    }
+                }
+            }
+
+            if (event) {
+                selection.events = [ event.element.attr(kendo.attr("uid")) ];
+                selection.start = slots[event.start].start;
+                selection.end = slots[event.end].end;
+            }
+
+            return event;
         },
 
         _templates: function() {
@@ -849,5 +972,18 @@ kendo_module({
 
         return msValue >= msMin && msValue <= msMax;
     }
+
+    function eventIndex(events, selected) {
+        if (!selected || !selected.length) {
+            return -1;
+        }
+
+        selected = selected[selected.length - 1];
+
+        events = $.map(events, function(item) { return item.element.attr(kendo.attr("uid")); });
+
+        return $.inArray(selected, events);
+    }
+
 
 })(window.kendo.jQuery);

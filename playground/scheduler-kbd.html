@@ -42,8 +42,8 @@
                     height: 600,
                     views: [
                     "day",
-                    { type: "week", selected: true },
-                    "month",
+                    { type: "week", selected: false },
+                    { type: "month", selected: true },
                     "agenda"
                     ],
                     timezone: "Etc/UTC",
@@ -110,7 +110,6 @@
                     ]
                 });
 
-                kbd();
             });
 
             function kbd() {
@@ -138,16 +137,9 @@
                     .end().find("tr").attr("role", "row");
 
                     //.attr("title", kendo.toString(today, "D", that.options.culture));
-                    console.log($(that.view().content).find("table"));
+                    //console.log($(that.view().content).find("table"));
 
-                    wrapper.on("mousedown", ".k-scheduler-table td", function(e) {
-                        that._createRange($(e.currentTarget));
 
-                        console.log(that._selected);
-
-                        that._select();
-                        wrapper.focus();
-                    });
 
                     wrapper.on("mousedown", ".k-event", function(e) {
                         var event = $(e.currentTarget);
@@ -177,11 +169,13 @@
                     });
 
                     wrapper.on("focus", function(e) {
-                        if (!that._range) {
+                        that.view().createSelection();
+                        that.view().select();
+                        /*if (!that._range) {
                             that._createRange(that.view().table.find(".k-scheduler-table").find("td:first"));
                         }
 
-                        that._select();
+                        that._select();*/
                     });
 
                     wrapper.on("focusout", function(e) {
@@ -189,29 +183,23 @@
                     });
 
                     wrapper.on("keydown", function(e) {
-                        var range = that._range;
+                        var selection = $.extend(true, {}, that.view()._selection);
 
                         if (e.keyCode == kendo.keys.RIGHT) {
-                            that._range.start++;
-                            that._select();
-
+                            selection.start.column++;
                             e.preventDefault();
                         } else if (e.keyCode == kendo.keys.LEFT) {
-                            that._range.start--;
-                            that._select();
+                            selection.start.column--;
                             e.preventDefault();
-                        }
-
-                        if (e.keyCode == kendo.keys.UP) {
-                            that._range.end--;
-                            that._select();
-
+                        } else if (e.keyCode == kendo.keys.UP) {
+                            selection.start.row--;
                             e.preventDefault();
                         } else if (e.keyCode == kendo.keys.DOWN) {
-                            that._range.end++;
-                            that._select();
+                            selection.start.row++;
                             e.preventDefault();
                         }
+
+                        that.view().select(selection);
                     });
                 },
 
