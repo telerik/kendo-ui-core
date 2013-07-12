@@ -373,6 +373,22 @@
                 equal(eventInfo.start, start);
                 equal(eventInfo.end, end);
             });
+
+            test("scheduler adds an all-day event on enter in all-day selection", function() {
+                var now = new Date();
+
+                stub(scheduler, "addEvent");
+
+                container.focus();
+
+                $.extend(scheduler._selection, { isAllDay: true, start: now, end: now });
+
+                keydown(keys.ENTER);
+
+                var eventInfo = scheduler.args("addEvent")[0];
+                equal(scheduler.calls("addEvent"), 1);
+                ok(eventInfo.isAllDay);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

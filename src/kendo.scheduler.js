@@ -458,10 +458,7 @@ kendo_module({
                 if (selection.events.length) {
                     that.editEvent(selection.events[0]);
                 } else {
-                    that.addEvent({
-                        start: selection.start,
-                        end: selection.end
-                    });
+                    that.addEvent(selection);
                 }
             } else if (view.move(selection, key, shiftKey)) {
                 start = selection.start;
