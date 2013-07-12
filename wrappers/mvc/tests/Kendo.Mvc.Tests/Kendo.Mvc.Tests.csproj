@@ -88,7 +88,6 @@
     <Compile Include="Infrastructure\Implementation\JavaScriptInitializerTests.cs" />
     <Compile Include="UI\Chart\ChartSelectionMousewheelBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisSelectionBuilderTests.cs" />
-    <Compile Include="UI\Chart\ChartSeriesFactoryTests.cs" />
     <Compile Include="UI\StockChart\StockChartSeriesFactoryTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSelectionSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSelectionMousewheelSerializerTests.cs" />
@@ -197,7 +196,6 @@
     <Compile Include="UI\ListView\ListViewWorkingConditionsTests.cs" />
     <Compile Include="UI\ListView\ListViewTestHelper.cs" />
     <Compile Include="UI\ListView\ListViewBuilderTests.cs" />
-    <Compile Include="UI\Sparkline\SparklineSeriesFactoryTests.cs" />
     <Compile Include="UI\StockChart\ChartNavigatorBuilderTests.cs" />
     <Compile Include="UI\StockChart\StockChartTestHelper.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorSerializerTests.cs" />

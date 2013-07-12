@@ -97,7 +97,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="categoryMemberName">
         /// The name of the category member.
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Bar(string valueMemberName, string colorMemberName = null, string categoryMemberName = null, string noteTextMemberName = null)
+        public virtual ChartBarSeriesBuilder<TModel> Bar(
+            string valueMemberName,
+            string colorMemberName = null,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
         {
             return Bar(null, valueMemberName, colorMemberName, categoryMemberName, noteTextMemberName);
         }
@@ -120,7 +124,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Bar(Type memberType, string valueMemberName, string colorMemberName = null, string categoryMemberName = null, string noteTextMemberName = null)
+        public virtual ChartBarSeriesBuilder<TModel> Bar(
+            Type memberType,
+            string valueMemberName,
+            string colorMemberName = null,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
         {           
             var valueExpr = BuildMemberExpression(memberType, valueMemberName);
             var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
@@ -224,7 +233,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Column(string valueMemberName, string colorMemberName = null, string categoryMemberName = null, string noteTextMemberName = null)
+        public virtual ChartBarSeriesBuilder<TModel> Column(
+            string valueMemberName,
+            string colorMemberName = null,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
         {
             return Column(null, valueMemberName, colorMemberName, categoryMemberName, noteTextMemberName);
         }
@@ -247,7 +260,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Column(Type memberType, string valueMemberName, string colorMemberName = null, string categoryMemberName = null, string noteTextMemberName = null)
+        public virtual ChartBarSeriesBuilder<TModel> Column(
+            Type memberType,
+            string valueMemberName,
+            string colorMemberName = null,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
         {
             var builder = Bar(memberType, valueMemberName, colorMemberName, categoryMemberName, noteTextMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
@@ -460,7 +478,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartLineSeriesBuilder<TModel> VerticalLine(Type memberType, string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        public virtual ChartLineSeriesBuilder<TModel> VerticalLine(
+            Type memberType,
+            string memberName,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
         {
             var builder = Line(memberType, memberName, categoryMemberName, noteTextMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
@@ -671,7 +693,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartAreaSeriesBuilder<TModel> VerticalArea(Type memberType, string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        public virtual ChartAreaSeriesBuilder<TModel> VerticalArea(
+            Type memberType,
+            string memberName,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
         {
             var builder = Area(memberType, memberName, categoryMemberName, noteTextMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
@@ -1254,22 +1280,22 @@ namespace Kendo.Mvc.UI.Fluent
             string categoryMemberName = null,
             string noteTextMemberName = null)
         {
-            var expressionOpen = BuildMemberExpression(memberType, openMemberName);
-            var expressionHigh = BuildMemberExpression(memberType, highMemberName);
-            var expressionLow = BuildMemberExpression(memberType, lowMemberName);
-            var expressionClose = BuildMemberExpression(memberType, closeMemberName);
-            var expressionColor = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
-            var expressionCategory = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
-            var categoryType = expressionCategory == null ? typeof(string) : expressionCategory.Body.Type;
-            var expressionNoteText = noteTextMemberName.HasValue() ? BuildMemberExpression(memberType, noteTextMemberName) : null;
+            var openExpr = BuildMemberExpression(memberType, openMemberName);
+            var highExpr = BuildMemberExpression(memberType, highMemberName);
+            var lowExpr = BuildMemberExpression(memberType, lowMemberName);
+            var closeExpr = BuildMemberExpression(memberType, closeMemberName);
+            var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
+            var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
+            var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(memberType, noteTextMemberName) : null;
 
             var seriesType = typeof(ChartOHLCSeries<,,>).MakeGenericType(
-                typeof(TModel), expressionOpen.Body.Type, categoryType
+                typeof(TModel), openExpr.Body.Type, categoryType
             );
 
             var series = (IChartOHLCSeries)BuildSeries(
-                seriesType, expressionOpen, expressionHigh, expressionLow,
-                expressionClose, expressionColor, expressionCategory, expressionNoteText
+                seriesType, openExpr, highExpr, lowExpr,
+                closeExpr, colorExpr, categoryExpr, noteTextExpr
             );
 
             if (!series.Name.HasValue())
@@ -1369,22 +1395,23 @@ namespace Kendo.Mvc.UI.Fluent
             string categoryMemberName = null,
             string noteTextMemberName = null)
         {
-            var expressionOpen = BuildMemberExpression(memberType, openMemberName);
-            var expressionHigh = BuildMemberExpression(memberType, highMemberName);
-            var expressionLow = BuildMemberExpression(memberType, lowMemberName);
-            var expressionClose = BuildMemberExpression(memberType, closeMemberName);
-            var expressionColor = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
-            var expressionDownColor = downColorMemberName.HasValue() ? BuildMemberExpression(memberType, downColorMemberName) : null;
-            var expressionCategory = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
-            var categoryType = expressionCategory == null ? typeof(string) : expressionCategory.Body.Type;
-            var expressionNoteText = noteTextMemberName.HasValue() ? BuildMemberExpression(memberType, noteTextMemberName) : null;
+            var openExpr = BuildMemberExpression(memberType, openMemberName);
+            var highExpr = BuildMemberExpression(memberType, highMemberName);
+            var lowExpr = BuildMemberExpression(memberType, lowMemberName);
+            var closeExpr = BuildMemberExpression(memberType, closeMemberName);
+            var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
+            var downColorExpr = downColorMemberName.HasValue() ? BuildMemberExpression(memberType, downColorMemberName) : null;
+            var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
+            var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(memberType, noteTextMemberName) : null;
 
             var seriesType = typeof(ChartCandlestickSeries<,,>).MakeGenericType(
-                typeof(TModel), expressionOpen.Body.Type, categoryType
+                typeof(TModel), openExpr.Body.Type, categoryType
             );
+
             var series = (IChartCandlestickSeries)BuildSeries(
-                seriesType, expressionOpen, expressionHigh, expressionLow,
-                expressionClose, expressionColor, expressionDownColor, expressionCategory, expressionNoteText
+                seriesType, openExpr, highExpr, lowExpr,
+                closeExpr, colorExpr, downColorExpr, categoryExpr, noteTextExpr
             );
 
             if (!series.Name.HasValue())
@@ -1424,6 +1451,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="colorExpression">
         /// The expression used to extract the point color from the chart model
         /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the point category from the chart model
+        /// </param>
         /// <param name="noteTextExpression">
         /// The expression used to extract the point note text from the chart model
         /// </param>
@@ -1434,7 +1464,9 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, TCategory>> categoryExpression = null,
             Expression<Func<TModel, string>> noteTextExpression = null)
         {
-            var bulletSeries = new ChartBulletSeries<TModel, TValue, TCategory>(currentExpression, targetExpression, colorExpression, categoryExpression, noteTextExpression);
+            var bulletSeries = new ChartBulletSeries<TModel, TValue, TCategory>(
+                currentExpression, targetExpression, colorExpression, categoryExpression, noteTextExpression
+            );
 
             Container.Series.Add(bulletSeries);
 
@@ -1477,7 +1509,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="colorMemberName">
         /// The name of the color member.
         /// </param>
-        /// <param name="noteTextExpression">
+        /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
         public virtual ChartBulletSeriesBuilder<TModel> Bullet(
