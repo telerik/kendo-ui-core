@@ -426,6 +426,201 @@
                 deepEqual(selection.start, new Date(2013,1,2));
                 deepEqual(selection.end, new Date(2013,1,9));
             });
+
+            test("view moveToEvent: finds next closest event", function() {
+                var view = setup();
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1)
+                });
+
+                view.render([
+                    event
+                ]);
+
+                var found = view.moveToEvent(selection);
+
+                equal(selection.events.length, 1);
+                equal(selection.events[0], event.uid);
+                ok(found);
+            });
+
+            test("view moveToEvent: returns false if event is not found", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1)
+                });
+
+                ok(!view.moveToEvent(selection));
+            });
+
+            test("view moveToEvent: updates selection to event slot", function() {
+                var view = setup();
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 2),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1)
+                });
+
+                view.render([
+                    event
+                ]);
+
+                var found = view.moveToEvent(selection);
+
+                equal(selection.events[0], event.uid);
+                deepEqual(selection.start, event.start);
+                deepEqual(selection.end, event.end);
+            });
+
+            test("view moveToEvent: move selection from current event to next", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    events: [ firstEvent.uid ]
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], secondEvent.uid);
+            });
+
+            test("view moveToEvent: with shift finds previous closest event", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 2),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3)
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection, true));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], secondEvent.uid);
+            });
+
+            test("view moveToEvent: with shift finds previous closest event when selection is between events", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 2),
+                    end: new Date(2013, 1, 2)
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection, true));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], firstEvent.uid);
+            });
+
+            test("view moveToEvent: move selection from current event to previous", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "one day event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3),
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 3),
+                    end: new Date(2013, 1, 3),
+                    events: [ secondEvent.uid ]
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection, true));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], firstEvent.uid);
+            });
+
+            test("view moveToEvent: move selection from event to previous event in same slot", function() {
+                var view = setup();
+                var firstEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "first event"
+                });
+                var secondEvent = new kendo.data.SchedulerEvent({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    title: "second event"
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 1),
+                    events: [ secondEvent.uid ]
+                });
+
+                view.render([
+                    firstEvent,
+                    secondEvent
+                ]);
+
+                ok(view.moveToEvent(selection, true));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], firstEvent.uid);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

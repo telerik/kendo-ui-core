@@ -150,6 +150,52 @@ kendo_module({
             return handled;
         },
 
+        moveToEvent: function(selection, prev) {
+            var that = this,
+                event,
+                pad = prev ? -1 : 1,
+                startSlotIndex = that._slotIndex(selection.start),
+                events = that._row.events,
+                idx = eventIndex(events, selection.events),
+                slots = that._row.slots,
+                length = events.length;
+
+
+            if (prev) {
+                if (idx < 0) {
+                    for (idx = 0; idx < length; idx ++) {
+                        if (events[idx].start < startSlotIndex) {
+                            event = events[idx];
+                        } else {
+                            break;
+                        }
+                    }
+                } else {
+                    for (idx += pad; idx > -1; idx --) {
+                        if (events[idx].start <= startSlotIndex) {
+                            event = events[idx];
+                            break;
+                        }
+                    }
+                }
+            } else {
+                for (idx += pad; idx < length; idx ++) {
+                    if (events[idx].start >= startSlotIndex) {
+                        event = events[idx];
+                        break;
+                    }
+                }
+            }
+
+            if (event) {
+                selection.events = [ event.element.attr(kendo.attr("uid")) ];
+                selection.start = slots[event.start].start;
+                selection.end = slots[event.end].end;
+            }
+
+            return event;
+        },
+
         _templates: function() {
             var options = this.options,
                 settings = extend({}, kendo.Template, options.templateSettings);
@@ -925,5 +971,18 @@ kendo_module({
 
         return msValue >= msMin && msValue <= msMax;
     }
+
+    function eventIndex(events, selected) {
+        if (!selected || !selected.length) {
+            return -1;
+        }
+
+        selected = selected[selected.length - 1];
+
+        events = $.map(events, function(item) { return item.element.attr(kendo.attr("uid")); });
+
+        return $.inArray(selected, events);
+    }
+
 
 })(window.kendo.jQuery);
