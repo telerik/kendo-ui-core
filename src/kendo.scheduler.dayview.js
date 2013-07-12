@@ -1521,13 +1521,11 @@ kendo_module({
 
         moveSelectionToPeriod: function(selection) {
             var offset = this._selectionOffset(),
-                startDate = this.startDate(),
-                endDate = this.endDate(),
                 start = selection.start,
                 end = selection.end;
 
             if (!this._slotByDate(start) || !this._slotByDate(end)) {
-                if (start >= endDate) {
+                if (start >= this.endDate()) {
                     offset = -offset;
                 }
                 selection.start = addDays(start, offset);
@@ -1673,7 +1671,6 @@ kendo_module({
 
         move: function(selection, key, shiftKey) {
             var options = this.options,
-                endTime = new Date(options.endTime),
                 interval = (options.majorTick * MS_PER_MINUTE) / (options.minorTickCount || 1),
                 start = new Date(selection.start),
                 end = new Date(selection.end),
@@ -1845,6 +1842,8 @@ kendo_module({
         },*/
 
         moveToEvent: function(selection, previous) {
+            selection = selection;
+            previous = previous;
             return true;
         },
 
@@ -2004,10 +2003,6 @@ kendo_module({
     var selectedStateRegExp = /\s*k-state-selected/;
     function addSelectedState(cell) {
         cell.className = cell.className.replace(selectedStateRegExp, "") + " k-state-selected";
-    }
-
-    function setDate(date1, date2) {
-        date1.setFullYear(date2.getFullYear(), date2.getMonth(), date2.getDate());
     }
 
     function resourceValue(resource, item) {
