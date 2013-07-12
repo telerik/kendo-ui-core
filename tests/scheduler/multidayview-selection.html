@@ -82,7 +82,7 @@
                     end: new Date(2013, 6, 6, 0, 30)
                 };
 
-                view.moveSelectionByOffset(selection);
+                view.moveSelection(selection);
 
                 deepEqual(selection.start, new Date(2013, 6, 8));
                 deepEqual(selection.end, new Date(2013, 6, 8, 0, 30));
@@ -95,7 +95,7 @@
                     end: new Date(2013, 6, 9, 0, 30)
                 };
 
-                view.moveSelectionByOffset(selection);
+                view.moveSelection(selection);
 
                 deepEqual(selection.start, new Date(2013, 6, 7));
                 deepEqual(selection.end, new Date(2013, 6, 7, 0, 30));
@@ -108,7 +108,7 @@
                     end: new Date(2013, 6, 7, 0, 0)
                 };
 
-                view.moveSelectionByOffset(selection);
+                view.moveSelection(selection);
 
                 deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
                 deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
@@ -121,13 +121,13 @@
                     end: new Date(2013, 6, 9, 0, 0)
                 };
 
-                view.moveSelectionByOffset(selection);
+                view.moveSelection(selection);
 
                 deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
                 deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
             });
 
-            test("View moveSelectionByOffset clears selected events", function() {
+            test("View moveSelection clears selected events", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] });
                 var selection = {
                     start: new Date(2013, 6, 8, 23, 30),
@@ -135,7 +135,7 @@
                     events: ["1"]
                 };
 
-                view.moveSelectionByOffset(selection);
+                view.moveSelection(selection);
 
                 equal(selection.events.length, 0);
             });
@@ -147,10 +147,10 @@
                     end: new Date(2013, 6, 9, 0, 0)
                 };
 
-                view.moveSelectionByOffset(selection);
+                view.adjustSelection(selection);
 
-                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
-                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
+                deepEqual(selection.start, new Date(2013, 6, 7, 0, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1, 0));
             });
 
             test("View adjust start/end date based on view.startDate/view.endDate when navigate to past", function() {
@@ -160,10 +160,10 @@
                     end: new Date(2013, 6, 8, 0, 0)
                 };
 
-                view.moveSelectionByOffset(selection);
+                view.adjustSelection(selection);
 
-                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
-                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
+                deepEqual(selection.start, new Date(2013, 6, 7, 0, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1, 0));
             });
 
             test("View selects cell", function() {

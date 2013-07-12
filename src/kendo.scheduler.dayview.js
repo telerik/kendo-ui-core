@@ -1507,34 +1507,31 @@ kendo_module({
             return this._dates.length;
         },
 
-        //TODO: refactor... very buggy!!!
-        moveSelectionByOffset: function(selection) {
+        adjustSelection: function(selection) {
+            if (!this.isInRange(selection.start) || !this.isInRange(selection.end)) {
+                var slot = this._slotByDate(this.startDate());
+                selection.start = new Date(slot.start);
+                selection.end = new Date(slot.end);
+            }
+        },
+
+        isInRange: function(date) {
+            return this._slotByDate(date);
+        },
+
+        moveSelection: function(selection) {
             var offset = this._selectionOffset(),
-                startDate = this._startDate,
-                endDate = this._endDate,
+                startDate = this.startDate(),
+                endDate = this.endDate(),
                 start = selection.start,
                 end = selection.end;
 
-            if (getMilliseconds(endDate) === 0) {
-                endDate = kendo.date.addDays(endDate, 1);
-            }
-
-            if (start < startDate || end >= endDate) {
+            if (!this._slotByDate(start) || !this._slotByDate(end)) {
                 if (start >= endDate) {
                     offset = -offset;
                 }
-
-                start.setDate(start.getDate() + offset);
-                end.setDate(end.getDate() + offset);
-
-                if (start < startDate) {
-                    setDate(start, startDate);
-                }
-
-                if (end > endDate) {
-                    setDate(end, endDate);
-                }
-
+                selection.start = addDays(start, offset);
+                selection.end = addDays(end, offset);
                 selection.events = [];
             }
         },
@@ -1649,79 +1646,6 @@ kendo_module({
 
             that._scrollTo(backwardSelection ? firstCell : cell, that.content[0]);
         },
-
-        /*_selectCells: function(selection) {
-            var startDate = selection.start,
-                endDate = selection.end,
-                backwardSelection = startDate > endDate;
-
-            if (backwardSelection) {
-                startDate = new Date(endDate);
-                endDate = selection.start;
-            }
-
-            var that = this,
-                headerTable = that.datesHeader.find("table.k-scheduler-header-all-day")[0], //TODO: Add support for grouped widget
-                startRow = Math.floor(that._timeSlotIndex(startDate)),
-                endRow = Math.ceil(that._timeSlotIndex(endDate)),
-                startCol = that._dateSlotIndex(startDate),
-                endCol = that._dateSlotIndex(endDate),
-                isAllDay = selection.isAllDay && headerTable,
-                selectAllDay = false,
-                event, cell, table,
-                firstCell, end;
-
-            if (startRow < 0) {
-                startRow = 0;
-            }
-
-            if (endRow < 0) {
-                endRow = 0;
-            }
-
-            if (!isAllDay) {
-                table = that.content.children("table")[0];
-                if (startCol !== endCol) {
-                    end = that._columns[startCol].slots.length - 1;
-                    if (headerTable) {
-                        selectAllDay = true;
-                    }
-                } else if (endRow === 0 && endRow <= startRow) {
-                    endRow = that._columns[startCol].slots.length;
-                }
-
-                if (startRow !== endRow && endRow > 0) {
-                    endRow -= 1;
-                }
-            } else {
-                end = startRow = endRow = 0;
-                table = headerTable;
-                headerTable = null;
-            }
-
-            for (; startCol <= endCol; startCol++) {
-                if (startCol === endCol) {
-                    end = endRow;
-                }
-
-                for (; startRow <= end; startRow++) {
-                    cell = table.rows[startRow].cells[startCol];
-                    addSelectedState(cell);
-                    if (!firstCell) {
-                        firstCell = cell;
-                    }
-                }
-
-                startRow = 0;
-
-                if (selectAllDay) {
-                    cell = headerTable.rows[startRow].cells[startCol];
-                    addSelectedState(cell);
-                }
-            }
-
-            that._scrollTo(backwardSelection ? firstCell : cell, that.content[0]);
-        },*/
 
         _scrollTo: function(element, container) {
             var elementOffset = element.offsetTop,

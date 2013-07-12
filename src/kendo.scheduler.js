@@ -450,11 +450,12 @@ kendo_module({
                 } else if (view.move(selection, key, shiftKey)) {
                     start = selection.start;
 
-                    if (start < view.startDate() || start > view.endDate()) {
-                        that.date(start);
-                    } else {
+                    if (view.isInRange(start)) {
                         view.select(selection);
+                    } else {
+                        that.date(start);
                     }
+
                     e.preventDefault();
                 }
 
@@ -1511,7 +1512,8 @@ kendo_module({
                 that._viewRenderHandler = function() {
                     var view = this;
                     if (that._selection) {
-                        view.moveSelectionByOffset(that._selection);
+                        view.moveSelection(that._selection);
+                        view.adjustSelection(that._selection);
                         view.select(that._selection);
 
                         that._adjustSelectedDate();
