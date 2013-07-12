@@ -492,6 +492,19 @@
 
                     equal(chart.options.series.length, 1);
                 });
+
+                test("sets data source", function() {
+                    createChart({
+                        series: [{ field: "foo" }]
+                    });
+
+                    chart.setOptions({
+                        dataSource: { data: [{ "foo": 1 }] }
+                    });
+
+                    equal(chart.options.series[0].data.length, 1);
+                });
+
             })();
 
         </script>

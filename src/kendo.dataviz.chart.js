@@ -1180,6 +1180,12 @@ kendo_module({
             Widget.fn.setOptions.call(chart, options);
 
             chart._initTheme(chart.options);
+
+            if (options.dataSource) {
+                chart.setDataSource(
+                    DataSource.create(options.dataSource)
+                );
+            }
         },
 
         destroy: function() {
