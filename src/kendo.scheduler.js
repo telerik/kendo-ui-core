@@ -481,9 +481,11 @@ kendo_module({
                 this._updateSelection(item, [uid]);
             } else {
                 dates = this.view().slotByCell(item);
-                dates.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
+                if (dates) {
+                    dates.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
 
-                this._updateSelection(dates);
+                    this._updateSelection(dates);
+                }
             }
 
             //TODO: calculate cell offset
@@ -1586,7 +1588,7 @@ kendo_module({
                 selection = this._selection,
                 start = selection.start;
 
-            if (!kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
+            if (start && !kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
                 date.setFullYear(start.getFullYear(), start.getMonth(), start.getDate());
             }
         },

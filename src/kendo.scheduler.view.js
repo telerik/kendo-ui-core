@@ -436,6 +436,18 @@ kendo_module({
             return createLayoutConfiguration("rows", resources, inner);
         },
 
+        slotByCell: function() {
+            return null;
+        },
+
+        clearSelection: function() {
+            this.content.find(".k-state-selected").removeClass("k-state-selected");
+        },
+
+        select: function() {
+            //must be implemented by every SchedulerView
+        },
+
         destroy: function() {
             var that = this;
 
