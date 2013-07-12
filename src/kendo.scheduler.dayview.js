@@ -220,7 +220,12 @@ kendo_module({
             } else {
                 startSlot = this._toAllDaySlot(startSlot);
                 endSlot = this._toAllDaySlot(endSlot);
-                container = this.element.find(".k-scheduler-header-wrap");
+
+                container = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day)");
+
+                if (!container.length) {
+                    container = this.content;
+                }
 
                 this._resizeHint = SchedulerView.fn._createResizeHint.call(this,
                     startSlot.offsetLeft + parseInt($(startSlot.element).css("borderLeftWidth"), 10),
