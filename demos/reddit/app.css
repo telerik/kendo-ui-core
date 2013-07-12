@@ -82,6 +82,11 @@
     display: inline-block;
 }
 
+.title-bar {
+    height: 42px;
+    color: #FFFFFF;
+}
+
 .tile {
     width: 50%;
     height: 33%;

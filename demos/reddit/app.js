@@ -207,7 +207,12 @@ function canvasDetailInit(e) {
         contentHeight: "100%",
         dataSource: canvasDataSource,
         autoBind: false,
-        template: kendo.template($("#canvas-detail-tmp").html())
+        template: kendo.template($("#canvas-detail-tmp").html()),
+        change: function(e) {
+            var title = e.data[0].data.title;
+            console.log(title);
+            this.view().footer.find(".title-bar > p").text(title);
+        }
     }).data("kendoMobileScrollView");
 }
 
