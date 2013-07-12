@@ -439,6 +439,12 @@ kendo_module({
             });
 
             that.wrapper.on("keydown" + NS, proxy(that._keydown, that));
+
+            that.wrapper.on("keyup" + NS, function(e) {
+                that._ctrlKey = e.ctrlKey;
+                that._shiftKey = e.shiftKey;
+            });
+
         },
 
         _keydown: function(e) {
@@ -449,6 +455,9 @@ kendo_module({
                 selection = that._selection,
                 shiftKey = e.shiftKey,
                 start;
+
+            that._ctrlKey = e.ctrlKey;
+            that._shiftKey = e.shiftKey;
 
             if (key === keys.TAB) {
                 if (view.moveToEvent(selection, shiftKey)) {
@@ -481,9 +490,11 @@ kendo_module({
         _createSelection: function(item) {
             var uid, dates;
 
-            this._selection = {
-                events: []
-            };
+            if (!this._selection || (!this._ctrlKey && !this._shiftKey)) {
+                this._selection = {
+                    events: []
+                };
+            }
 
             item = $(item);
             uid = item.data("uid");
@@ -510,10 +521,24 @@ kendo_module({
             var selection = this._selection;
 
             if (selection) {
-                selection.start = new Date(dataItem.start);
-                selection.end = new Date(dataItem.end);
+                if (this._shiftKey && selection.start && selection.end) {
+                    var backward = dataItem.end < selection.end;
+                    selection.end = new Date(dataItem.end);
+
+                    if (backward) {
+                        kendo.date.setTime(selection.end, - this.view()._timeSlotInterval());
+                    }
+                } else {
+                    selection.start = new Date(dataItem.start);
+                    selection.end = new Date(dataItem.end);
+                }
+
                 selection.isAllDay = dataItem.isAllDay;
-                selection.events = events || [];
+                if (this._ctrlKey) {
+                    selection.events = selection.events.concat(events || []);
+                } else {
+                    selection.events = events || [];
+                }
             }
         },
 
