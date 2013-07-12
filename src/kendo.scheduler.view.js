@@ -343,6 +343,11 @@ kendo_module({
                     that.content.height(scrollbar * 2 + 1);
                 }
                 that.times.height(contentDiv.clientHeight);
+
+                var timesTable = that.times.find("table");
+                if (timesTable.length) {
+                    timesTable.height(that.content.find("table")[0].clientHeight);
+                }
             }
 
             if (contentDiv.offsetWidth - contentDiv.clientWidth > 0) {
@@ -382,7 +387,7 @@ kendo_module({
 
             var touchScroller = kendo.touchScroller(this.content, {
                 avoidScrolling: function(e) {
-                    return $(e.event.target).closest(".k-event").length > 0;
+                    return $(e.event.target).closest(".k-event.k-state-selected").length > 0;
                 }
             });
 
@@ -432,8 +437,24 @@ kendo_module({
             return createLayoutConfiguration("columns", resources, inner);
         },
 
+        _isVerticallyGrouped: function() {
+            return this.groupedResources.length && this.options.groupOrientation === "vertical";
+        },
+
         _createRowsLayout: function(resources, inner) {
             return createLayoutConfiguration("rows", resources, inner);
+        },
+
+        slotByCell: function() {
+            return null;
+        },
+
+        clearSelection: function() {
+            this.content.find(".k-state-selected").removeClass("k-state-selected");
+        },
+
+        select: function() {
+            //must be implemented by every SchedulerView
         },
 
         destroy: function() {

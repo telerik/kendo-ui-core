@@ -416,9 +416,12 @@ kendo_module({
         },
 
         _selectable: function() {
-            var that = this;
+            var that = this,
+                selectEvent = kendo.support.mobileOS ? "touchend" : "mousedown";
+
             that._tabindex();
-            that.wrapper.on("mousedown" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
+
+            that.wrapper.on(selectEvent, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
                 that._createSelection(e.currentTarget);
                 that.wrapper.focus();
             });
@@ -435,32 +438,41 @@ kendo_module({
                 that.view().clearSelection();
             });
 
-            that.wrapper.on("keydown" + NS, function(e) {
-                var key = e.keyCode,
-                    view = that.view(),
-                    selection = that._selection,
-                    shiftKey = e.shiftKey,
-                    start;
+            that.wrapper.on("keydown" + NS, proxy(that._keydown, that));
+        },
 
-                if (key === keys.TAB) {
-                    if (view.moveToEvent(selection, shiftKey)) {
-                        view.select(selection);
-                        e.preventDefault();
-                    }
-                } else if (view.move(selection, key, shiftKey)) {
-                    start = selection.start;
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                view = that.view(),
+                selection = that._selection,
+                shiftKey = e.shiftKey,
+                start;
 
-                    if (view.isInRange(start)) {
-                        view.select(selection);
-                    } else {
-                        that.date(start);
-                    }
-
+            if (key === keys.TAB) {
+                if (view.moveToEvent(selection, shiftKey)) {
+                    view.select(selection);
                     e.preventDefault();
                 }
+            } else if (key === keys.ENTER) {
+                if (selection.events.length) {
+                    that.editEvent(selection.events[0]);
+                } else {
+                    that.addEvent(selection);
+                }
+            } else if (view.move(selection, key, shiftKey)) {
+                start = selection.start;
 
-                that._adjustSelectedDate();
-            });
+                if (view.isInRange(start)) {
+                    view.select(selection);
+                } else {
+                    that.date(start);
+                }
+
+                e.preventDefault();
+            }
+
+            that._adjustSelectedDate();
         },
 
         _createSelection: function(item) {
@@ -477,10 +489,12 @@ kendo_module({
                 item = getOccurrenceByUid(this._data, uid);
                 this._updateSelection(item, [uid]);
             } else {
-                dates = this.view()._rangeToDates(item);
-                dates.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
+                dates = this.view().slotByCell(item);
+                if (dates) {
+                    dates.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
 
-                this._updateSelection(dates);
+                    this._updateSelection(dates);
+                }
             }
 
             //TODO: calculate cell offset
@@ -653,8 +667,13 @@ kendo_module({
 
                     kendo.date.setTime(end, duration);
 
-                    if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
-                        that._updateEvent(null, event, { start: start, end: end });
+                    var endResources = that.view()._resourceBySlot(endSlot);
+                    var startResources = that.view()._resourceBySlot(startSlot);
+
+                    if (event.start.getTime() != start.getTime() ||
+                        event.end.getTime() != end.getTime() ||
+                        kendo.stringify(endResources) != kendo.stringify(startResources))  {
+                        that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
                     }
                 }
             });
@@ -858,7 +877,7 @@ kendo_module({
                 }
             };
 
-			var recurrenceMessages = that.options.messages.recurrenceMessages;
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
             if (event.recurrenceRule || (event.recurrenceId && !event.id)) {
                 that.showDialog({
                     title: recurrenceMessages.editWindowTitle,
@@ -1298,7 +1317,7 @@ kendo_module({
                 that._editEvent(model);
             };
 
-			var recurrenceMessages = that.options.messages.recurrenceMessages;
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
             that.showDialog({
                 title: recurrenceMessages.editWindowTitle,
                 text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
@@ -1578,7 +1597,7 @@ kendo_module({
                 selection = this._selection,
                 start = selection.start;
 
-            if (!kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
+            if (start && !kendo.date.isInDateRange(date, getDate(start), getDate(selection.end))) {
                 date.setFullYear(start.getFullYear(), start.getMonth(), start.getDate());
             }
         },

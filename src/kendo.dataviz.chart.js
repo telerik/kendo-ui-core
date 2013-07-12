@@ -54,6 +54,7 @@ kendo_module({
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
+        dateComparer = dataviz.dateComparer,
         getElement = dataviz.getElement,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
@@ -205,10 +206,7 @@ kendo_module({
     var Chart = Widget.extend({
         init: function(element, userOptions) {
             var chart = this,
-                options,
-                themeOptions,
-                themes = dataviz.ui.themes || {},
-                theme, themeName;
+                options;
 
             kendo.destroy(element);
 
@@ -219,19 +217,9 @@ kendo_module({
                 .addClass(CSS_PREFIX + options.name.toLowerCase())
                 .css("position", "relative");
 
-            // Used by the ThemeBuilder
             chart._originalOptions = deepExtend({}, options);
 
-            themeName = options.theme;
-            theme = themes[themeName] || themes[themeName.toLowerCase()];
-            themeOptions = themeName && theme ? theme.chart : {};
-
-            resolveAxisAliases(options);
-            chart._applyDefaults(options, themeOptions);
-
-            chart.options = deepExtend({}, themeOptions, options);
-
-            applySeriesColors(chart.options);
+            chart._initTheme(options);
 
             chart.bind(chart.events, chart.options);
 
@@ -240,6 +228,28 @@ kendo_module({
             chart._initDataSource(userOptions);
 
             kendo.notify(chart, dataviz.ui);
+        },
+
+        _initTheme: function(options) {
+            var chart = this,
+                themes = dataviz.ui.themes || {},
+                themeName = options.theme,
+                theme = themes[themeName] || themes[themeName.toLowerCase()],
+                themeOptions = themeName && theme ? theme.chart : {},
+                seriesCopies = [],
+                series = options.series || [],
+                i;
+
+            for (i = 0; i < series.length; i++) {
+                seriesCopies.push($.extend({}, series[i]));
+            }
+            options.series = seriesCopies;
+
+            resolveAxisAliases(options);
+            chart._applyDefaults(options, themeOptions);
+
+            chart.options = deepExtend({}, themeOptions, options);
+            applySeriesColors(chart.options);
         },
 
         _initDataSource: function(userOptions) {
@@ -1161,6 +1171,24 @@ kendo_module({
             highlight.show(items);
         },
 
+        setOptions: function(options) {
+            var chart = this;
+
+            chart._originalOptions = deepExtend(chart._originalOptions, options);
+            chart.options = deepExtend({}, chart._originalOptions);
+            chart._sourceSeries = null;
+
+            Widget.fn.setOptions.call(chart, options);
+
+            chart._initTheme(chart.options);
+
+            if (options.dataSource) {
+                chart.setDataSource(
+                    DataSource.create(options.dataSource)
+                );
+            }
+        },
+
         destroy: function() {
             var chart = this,
                 dataSource = chart.dataSource;
@@ -1277,6 +1305,10 @@ kendo_module({
             return this._valueFields[series.type] || [VALUE];
         },
 
+        otherFields: function(series) {
+            return this._otherFields[series.type] || [VALUE];
+        },
+
         bindPoint: function(series, pointIx) {
             var binder = this,
                 data = series.data,
@@ -1297,8 +1329,8 @@ kendo_module({
                 value = binder._bindFromArray(pointData, valueFields);
                 fields = binder._bindFromArray(fieldData, otherFields);
             } else if (typeof pointData === OBJECT) {
-                srcValueFields = binder._mapSeriesFields(series, valueFields);
-                srcPointFields = binder._mapSeriesFields(series, otherFields);
+                srcValueFields = binder._mapSeriesFieldsByIndex(series, valueFields);
+                srcPointFields = binder._mapSeriesFieldsByIndex(series, otherFields);
 
                 value = binder._bindFromObject(pointData, valueFields, srcValueFields);
                 fields = binder._bindFromObject(pointData, otherFields, srcPointFields);
@@ -1368,12 +1400,9 @@ kendo_module({
             return value;
         },
 
-        _mapSeriesFields: function(series, fields) {
-            var i,
-                length,
-                fieldName,
-                sourceFields,
-                sourceFieldName;
+        _mapSeriesFieldsByIndex: function(series, fields) {
+            var i, length, fieldName,
+                sourceFields, sourceFieldName;
 
             if (fields) {
                 length = fields.length;
@@ -1384,6 +1413,25 @@ kendo_module({
                     sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
 
                     sourceFields.push(series[sourceFieldName] || fieldName);
+                }
+            }
+
+            return sourceFields;
+        },
+
+        _mapSeriesFields: function(series, fields) {
+            var i, length, fieldName,
+                sourceFields, sourceFieldName;
+
+            if (fields) {
+                length = fields.length;
+                sourceFields = {};
+
+                for (i = 0; i < length; i++) {
+                    fieldName = fields[i];
+                    sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
+
+                    sourceFields[fieldName] = series[sourceFieldName] || fieldName;
                 }
             }
 
@@ -2082,6 +2130,14 @@ kendo_module({
                 years: [1, 2, 3, 5, 10, 25, 50]
             },
             maxDateGroups: 10
+        },
+
+        shouldRenderNote: function(value) {
+            var axis = this,
+                range = axis.range(),
+                categories = axis.options.categories || [];
+
+            return dateComparer(value, range.min) >= 0 && dateComparer(value, range.max) <= 0 && categories.length;
         },
 
         translateRange: function(delta) {
@@ -3132,6 +3188,10 @@ kendo_module({
 
         pointValue: function(data) {
             return data.value;
+        },
+
+        shouldRenderNote: function() {
+            return this.options.categories.length;
         }
     });
 
@@ -3960,7 +4020,7 @@ kendo_module({
                 markerBox = point.marker.box,
                 aboveAxis = point.options.aboveAxis;
 
-            return new Point2D(
+            return Point2D(
                 markerBox.x2 + TOOLTIP_OFFSET,
                 aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2
             );
@@ -4060,7 +4120,7 @@ kendo_module({
             for (i = 0; i < length; i++) {
                 pointCenter = linePoints[i].markerBox().center();
 
-                points.push(new Point2D(pointCenter.x, pointCenter.y));
+                points.push(Point2D(pointCenter.x, pointCenter.y));
             }
 
             return points;
@@ -7158,11 +7218,8 @@ kendo_module({
                 srcValues = [],
                 srcDataItems = [],
                 range = categoryAxis.range(),
-                i,
-                category,
-                categoryIx,
-                data,
-                pointData,
+                i, category, categoryIx,
+                data, pointData,
                 result = deepExtend({}, series),
                 getFn = getField;
 
@@ -7184,7 +7241,7 @@ kendo_module({
                     pointData = SeriesBinder.current.bindPoint(series, i);
 
                     srcValues[categoryIx] = srcValues[categoryIx] || [];
-                    srcValues[categoryIx].push(pointData.value);
+                    srcValues[categoryIx].push(pointData);
 
                     srcDataItems[categoryIx] = srcDataItems[categoryIx] || [];
                     srcDataItems[categoryIx].push(srcData[i]);
@@ -8637,6 +8694,10 @@ kendo_module({
             }
 
             return result;
+        },
+
+        first: function(values) {
+            return values[0];
         }
     };
 
@@ -9130,52 +9191,73 @@ kendo_module({
         }
     });
 
-    function calculateAggregates(values, series, dataItems, group) {
+    function execSimple(data, aggregate, series, dataItems, group) {
+        var result,
+            aggregateType = typeof aggregate;
+
+        if (aggregateType === STRING) {
+            result = Aggregates[aggregate](data);
+        } else if (aggregateType === "function") {
+            result = aggregate(data, series, dataItems, group);
+        } else {
+            result = Aggregates.max(data);
+        }
+
+        return result;
+    }
+
+    function execComposite(data, aggregate, series, dataItems, group) {
+        var valueFields = SeriesBinder.current.valueFields(series),
+            otherFields = SeriesBinder.current.otherFields(series),
+            count = data.length,
+            fields = [], result = {},
+            i, j, item, originalField, field, originalFields, value, values;
+
+        append(fields, valueFields);
+        append(fields, otherFields);
+        originalFields = SeriesBinder.current._mapSeriesFields(series, fields);
+
+        for (i = 0; i < count; i++) {
+            item = data[i];
+            for (j = 0; j < fields.length; j++) {
+                field = fields[j];
+                value = item.value[field] || item.fields[field];
+                if (typeof item.value === "number" && field === "value") {
+                    value = item.value;
+                }
+                originalField = originalFields[field];
+                if (defined(value)) {
+                    if (!defined(result[originalField])) {
+                        result[originalField] = [];
+                    }
+                    result[originalField].push(value);
+                }
+            }
+        }
+
+        for (j = 0; j < fields.length; j++) {
+            field = fields[j];
+            originalField = originalFields[field];
+            values = result[originalField];
+            if (defined(values)) {
+                result[originalField] = execSimple(values, aggregate[field], series, dataItems, group);
+            }
+        }
+
+        return result;
+    }
+
+    function calculateAggregates(data, series, dataItems, group) {
         var aggregate = series.aggregate,
             result;
 
-        function execSimple(values, aggregate, series) {
-            var result,
-                aggregateType = typeof aggregate;
-
-            if (aggregateType === STRING) {
-                result = Aggregates[aggregate](values);
-            } else if (aggregateType === "function") {
-                result = aggregate(values, series, dataItems, group);
-            } else {
-                result = Aggregates.max(values);
-            }
-
-            return result;
+        if (typeof aggregate === STRING) {
+            aggregate = { value: aggregate };
+        } else if (!defined(aggregate)) {
+            aggregate = { value: "max" };
         }
 
-        function execComposite(values, aggregate, series) {
-            var valueFields = SeriesBinder.current.valueFields(series),
-                valueFieldsCount = valueFields.length,
-                count = values.length,
-                i,
-                j,
-                field,
-                result = [],
-                data = [];
-
-            for (i = 0; i < valueFieldsCount; i++) {
-                field = valueFields[i];
-                for (j = 0; j < count; j++) {
-                    data.push(values[j][field]);
-                }
-                result.push(execSimple(data, aggregate[field], series));
-                data = [];
-            }
-
-            return result;
-        }
-
-        if (typeof aggregate === OBJECT) {
-            result = execComposite(values, aggregate, series);
-        } else {
-            result = execSimple(values, aggregate, series);
-        }
+        result = execComposite(data, aggregate, series, dataItems, group);
 
         return result;
     }
@@ -9790,14 +9872,6 @@ kendo_module({
          } else {
              return $.inArray(item, arr);
          }
-    }
-
-    function dateComparer(a, b) {
-         if (a && b) {
-             return a.getTime() - b.getTime();
-         }
-
-         return 0;
     }
 
     function sortDates(dates, comparer) {

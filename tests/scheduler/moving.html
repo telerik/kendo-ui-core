@@ -5,7 +5,8 @@
         <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
         <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
         <script src="../jquery-loader.js"></script>
-        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
@@ -36,8 +37,11 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-
             var div = $("<div>").width(500).height(1000);
+
+            function equalWithRound(value, expected) {
+                QUnit.close(value, expected, 3);
+            }
 
             module("moving", {
                 setup: function() {
@@ -766,6 +770,210 @@
 
                 equal(scheduler.dataSource.at(0).end.getHours(), 11);
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+            });
+
+            test("the move hint is in the right resource group", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 10:30"), ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(8)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(1).offset());
+
+                equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(1).offset().left);
+                equalWithRound(div.find(".k-event-drag-hint").offset().top, slots.eq(1).offset().top);
+            });
+
+            test("the move hint is in the right resource group when moving all day event", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 10:30"), isAllDay: true, ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-header-all-day td");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(8).offset());
+
+                equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(8).offset().left);
+                equalWithRound(div.find(".k-event-drag-hint").offset().top, slots.eq(8).offset().top);
+            });
+
+            test("the move hint is in the right vertical resource group when moving all day event", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 11:00"),
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 10:30"), isAllDay: true, ownerId: 1, title: "" },
+                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 10:30"), isAllDay: true, ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event:last");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(3).offset());
+
+                equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(3).offset().left);
+                equalWithRound(div.find(".k-event-drag-hint").offset().top, slots.eq(3).offset().top);
+            });
+
+            test("the move hint is in the right vertical resource group when moving events", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 11:00"),
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 10:30"), ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event:last");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(4).offset());
+
+                equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(4).offset().left);
+                equalWithRound(div.find(".k-event-drag-hint").offset().top, slots.eq(4).offset().top);
+            });
+
+            test("moving event between groups changes its resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 11:00"),
+                    date: new Date("2013/6/6"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event:last");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(0).prev());
+
+                equal(scheduler.dataSource.at(0).ownerId, 1);
+            });
+
+            test("moving event between vertical groups changes its resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 11:00"),
+                    date: new Date("2013/6/6"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event:last");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+
+                equal(scheduler.dataSource.at(0).ownerId, 1);
             });
 
             function dragdrop(scheduler, target, offset, to) {

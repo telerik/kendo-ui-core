@@ -55,7 +55,10 @@
                     minHeight: 42,
                     visible: false,
                     autoFocus: false,
-                    actions: []
+                    actions: [],
+                    dragend: function() {
+                        this._moved = true;
+                    }
                 })
                 .on("mousedown", function(e){
                     if (!$(e.target).is(".k-icon")) {
@@ -124,12 +127,12 @@
 
             that._attachEvents();
 
-            this.items().each(function initializeTool() {
+            that.items().each(function initializeTool() {
                 var toolName = that._toolFromClassName(this),
                     tool = that.tools[toolName],
                     messages = editor.options.messages,
                     description = messages[toolName],
-                    $this = $(this);
+                    ui = $(this);
 
                 if (!tool || !tool.initialize) {
                     return;
@@ -138,11 +141,11 @@
                 if (toolName == "fontSize" || toolName == "fontName") {
                     var inheritText = messages[toolName + "Inherit"];
 
-                    $this.find("input").val(inheritText).end()
-                         .find("span.k-input").text(inheritText).end();
+                    ui.find("input").val(inheritText).end()
+                      .find("span.k-input").text(inheritText).end();
                 }
 
-                tool.initialize($this, {
+                tool.initialize(ui, {
                     title: that._appendShortcutSequence(description, tool),
                     editor: that._editor
                 });
@@ -150,7 +153,7 @@
 
             editor.bind("select", proxy(that._update, that));
 
-            this._updateContext();
+            that._updateContext();
 
             that.updateGroups();
 
@@ -173,6 +176,10 @@
 
                     if (!wrapper[0].style.width) {
                         wrapper.width(editorElement.outerWidth() - parseInt(wrapper.css("border-left-width"), 10) - parseInt(wrapper.css("border-right-width"), 10));
+                    }
+
+                    // track content position when other parts of page change
+                    if (!window._moved) {
                         wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight() - parseInt(that.window.element.css("padding-bottom"), 10));
                         wrapper.css("left", parseInt(editorElement.offset().left, 10));
                     }
@@ -330,13 +337,16 @@
                 currentToolGroup,
                 isStart,
                 that = this,
-                listItems = that.element.children(),
-                enabledTools = listItems.filter(function() {
-                    return !$(this).children(".k-state-disabled").length;
-                }),
+                element = that.element,
+                enabledTools,
+                groupEnd = /k-group-end/,
                 started = false;
 
-            listItems.filter(".k-group-break").remove();
+            element.children().filter(".k-group-break").remove();
+
+            enabledTools = element.children().filter(function() {
+                return !$(this).children(".k-state-disabled").length;
+            });
 
             enabledTools.each(function(index, li) {
                 li = $(li);
@@ -361,15 +371,17 @@
                 previous = li;
             });
 
-            that.element.children(".k-group-end").each(function() {
-                if (this.offsetLeft + this.offsetWidth > this.parentNode.offsetWidth) {
-                    var node = this;
+            that.element.children(".k-group-start").each(function() {
+                var node = this;
+                var groupEndOffset;
 
-                    while (node && node.className.indexOf("k-group-start") < 0) {
-                        node = node.previousSibling;
-                    }
+                while (!groupEnd.test(node.className)) {
+                    node = node.nextSibling;
+                    groupEndOffset = node.offsetLeft + node.offsetWidth;
+                }
 
-                    $(node).before("<li class='k-group-break' />");
+                if (groupEndOffset > this.parentNode.offsetWidth) {
+                    $(this).before("<li class='k-group-break' />");
                 }
             });
         },

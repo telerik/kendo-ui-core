@@ -297,7 +297,8 @@ textarea.k-textbox:hover,
 }
 
 .k-link:link,
-.k-link:visited
+.k-link:visited,
+.k-nav-current.k-state-hover .k-link
 {
     color: @link-text-color;
 }
@@ -609,6 +610,7 @@ textarea.k-textbox:hover,
 .k-ghost-splitbar-vertical,
 .k-ghost-splitbar-horizontal,
 .k-draghandle.k-state-selected:hover,
+.k-scheduler .k-scheduler-toolbar .k-state-selected,
 .k-marquee-color
 {
     color: @selected-text-color;
@@ -618,7 +620,7 @@ textarea.k-textbox:hover,
 
 .k-marquee-text
 {
-    color: @selected-background-color;
+    color: @selected-text-color;
 }
 
 .k-state-focused,
@@ -762,17 +764,6 @@ div.k-imagebrowser-dropzone em
     background-position: 50% 50%;
     border-color: @select-border-color;
 }
-
-.k-calendar .k-state-selected
-{
-    background-color: transparent;
-}
-
-.k-calendar .k-state-selected
-{
-    background-color: @selected-background-color;
-}
-
 
 .k-dropdown .k-state-focused .k-input
 {
@@ -1196,7 +1187,7 @@ div.k-imagebrowser-dropzone em
 
 .k-multiselect.k-state-border-down .k-multiselect-wrap,
 {
-    .border-radius(@main-border-radius @main-border-radius 0 0);
+    .border-radius(@inner-border-radius @inner-border-radius 0 0);
 }
 
 .k-dropdown-wrap .k-select,
@@ -1219,15 +1210,14 @@ div.k-imagebrowser-dropzone em
     .border-radius(@main-border-radius 0 0 @main-border-radius);
 }
 
-.k-textbox > input,
-.k-autocomplete .k-input,
-.k-numeric-wrap.k-expand-padding .k-input,
-.k-multiselect-wrap
+.k-numeric-wrap.k-expand-padding .k-input
 {
     .guarded-border-radius(@main-border-radius);
 }
 
-.k-autocomplete .k-input
+.k-textbox > input,
+.k-autocomplete .k-input,
+.k-multiselect-wrap
 {
 	.guarded-border-radius(@inner-border-radius);
 }
@@ -1499,7 +1489,8 @@ div.k-imagebrowser-dropzone em
         border-color: @secondary-border-color;
     }
 
-    .k-button:hover
+    .k-button:hover,
+	&.k-button:hover
     {
         color: @hover-text-color;
         border-color: @hover-border-color;
@@ -1520,7 +1511,7 @@ div.k-imagebrowser-dropzone em
         color: @secondary-text-color;
     }
 
-    &.k-toolbar
+    .k-toolbar
     {
         color: @secondary-text-color;
 		border-color: @secondary-border-color;
@@ -1559,9 +1550,11 @@ div.k-imagebrowser-dropzone em
 }
 
 .k-header,
+.k-grid-header-wrap,
 .k-grid .k-grouping-header,
 .k-grid-header,
 .k-pager-wrap,
+.k-pager-wrap .k-textbox,
 .k-pager-wrap .k-link,
 .k-grouping-header .k-group-indicator
 {

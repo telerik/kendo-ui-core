@@ -8,13 +8,18 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
         <script src="../../src/kendo.window.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -46,6 +51,18 @@
                    container.closest(".k-scheduler").kendoScheduler("destroy").remove();
                 }
             });
+
+            function keydown(keyCode, options) {
+                var e = $.extend({
+                    type: "keydown"
+                }, options);
+
+                if (keyCode) {
+                    e.keyCode = keyCode;
+                }
+
+                container.trigger(e);
+            }
 
             test("scheduler wrapper is focusable", function() {
                 equal(container.attr("tabindex"), 0);
@@ -167,10 +184,8 @@
                     move: view.move
                 });
 
-                scheduler.wrapper.focus().trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN
-                });
+                container.focus();
+                keydown(keys.DOWN);
 
                 equal(view.calls("move"), 1);
                 equal(view.args("move")[1], keys.DOWN);
@@ -183,11 +198,8 @@
                     move: view.move
                 });
 
-                scheduler.wrapper.focus().trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN,
-                    shiftKey: true
-                });
+                container.focus();
+                keydown(keys.DOWN, { shiftKey: true });
 
                 equal(view.calls("move"), 1);
                 equal(view.args("move")[1], keys.DOWN);
@@ -197,9 +209,9 @@
             test("scheduler calls preventDefault if view.move supports pressed key", 1, function() {
                 var view = scheduler.view();
 
-                scheduler.wrapper.focus().trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN,
+                container.focus();
+
+                keydown(keys.DOWN, {
                     preventDefault: function() {
                         ok(true);
                     }
@@ -215,10 +227,7 @@
                 scheduler._selection.start = start;
                 scheduler._selection.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 0, 30);;
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN
-                });
+                keydown(keys.DOWN);
 
                 deepEqual(kendo.date.getDate(scheduler.date()), kendo.date.getDate(scheduler._selection.start));
             });
@@ -232,10 +241,7 @@
                 scheduler._selection.start = start;
                 scheduler._selection.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 0, 30);
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN
-                });
+                keydown(keys.DOWN);
 
                 deepEqual(kendo.date.getDate(scheduler.date()), kendo.date.getDate(scheduler._selection.start));
             });
@@ -248,10 +254,7 @@
                     select: view.select
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN
-                });
+                keydown(keys.DOWN);
 
                 ok(view.calls("select"));
             });
@@ -264,10 +267,7 @@
                     moveToEvent: view.moveToEvent
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB
-                });
+                keydown(keys.TAB);
 
                 ok(view.calls("moveToEvent"));
                 equal(view.args("moveToEvent").length, 2);
@@ -275,9 +275,7 @@
 
             test("scheduler calls preventDefault on TAB", 1, function() {
                 container.focus();
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB,
+                keydown(keys.TAB, {
                     preventDefault: function() {
                         ok(true);
                     }
@@ -292,11 +290,7 @@
                     moveToEvent: view.moveToEvent
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB,
-                    shiftKey: true
-                });
+                keydown(keys.TAB, { shiftKey: true });
 
                 ok(view.calls("moveToEvent"));
                 equal(view.args("moveToEvent")[1], true);
@@ -310,10 +304,7 @@
                     select: view.select
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB
-                });
+                keydown(keys.TAB);
 
                 ok(view.calls("select"));
             });
@@ -327,10 +318,7 @@
                     move: view.move
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB
-                });
+                keydown(keys.TAB);
 
                 ok(view.calls("moveToEvent"));
                 ok(!view.calls("move"));
@@ -343,11 +331,63 @@
                 scheduler._selection.start = date;
                 scheduler._selection.end = date;
 
-                scheduler.wrapper.trigger({
-                    type: "keydown"
-                });
+                keydown();
 
                 deepEqual(scheduler.date(), date);
+            });
+
+            test("scheduler opens selected event for editing on enter", function() {
+                var now = new Date();
+                var e = scheduler.dataSource.add({
+                    title: "Foo",
+                    start: new Date(now.setHours(10)),
+                    end: new Date(now.setHours(11))
+                });
+
+                stub(scheduler, "editEvent");
+
+                container.focus();
+                scheduler._selection.events = [e];
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("editEvent"), 1);
+                equal(scheduler.args("editEvent")[0], e);
+            });
+
+            test("scheduler adds a new event in empty selection on enter", function() {
+                var now = new Date();
+                var start = new Date(now.setHours(10));
+                var end = new Date(now.setHours(11));
+
+                stub(scheduler, "addEvent");
+
+                container.focus();
+                scheduler._selection.start = start;
+                scheduler._selection.end = end;
+
+                keydown(keys.ENTER);
+
+                var eventInfo = scheduler.args("addEvent")[0];
+                equal(scheduler.calls("addEvent"), 1);
+                equal(eventInfo.start, start);
+                equal(eventInfo.end, end);
+            });
+
+            test("scheduler adds an all-day event on enter in all-day selection", function() {
+                var now = new Date();
+
+                stub(scheduler, "addEvent");
+
+                container.focus();
+
+                $.extend(scheduler._selection, { isAllDay: true, start: now, end: now });
+
+                keydown(keys.ENTER);
+
+                var eventInfo = scheduler.args("addEvent")[0];
+                equal(scheduler.calls("addEvent"), 1);
+                ok(eventInfo.isAllDay);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
