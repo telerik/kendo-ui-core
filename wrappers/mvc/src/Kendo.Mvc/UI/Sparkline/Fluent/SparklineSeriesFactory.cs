@@ -558,17 +558,45 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="colorExpression">
         /// The expression used to extract the point color from the chart model
         /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the point note text from the chart model
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> Bullet<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> currentExpression,
+            Expression<Func<TModel, TValue>> targetExpression,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, TCategory>> categoryExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var bulletSeries = new ChartBulletSeries<TModel, TValue, TCategory>(currentExpression, targetExpression, colorExpression, categoryExpression, noteTextExpression);
+
+            Container.Series.Add(bulletSeries);
+
+            return new ChartBulletSeriesBuilder<TModel>(bulletSeries);
+        }
+
+        /// <summary>
+        /// Defines bound bullet series.
+        /// </summary>
+        /// <param name="currentExpression">
+        /// The expression used to extract the point current value from the chart model
+        /// </param>
+        /// <param name="targetExpression">
+        /// The expression used to extract the point target value from the chart model
+        /// </param>
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the point note text from the chart model
+        /// </param>
         public virtual ChartBulletSeriesBuilder<TModel> Bullet<TValue>(
             Expression<Func<TModel, TValue>> currentExpression,
             Expression<Func<TModel, TValue>> targetExpression,
             Expression<Func<TModel, string>> colorExpression = null,
             Expression<Func<TModel, string>> noteTextExpression = null)
         {
-            var bulletSeries = new ChartBulletSeries<TModel, TValue>(currentExpression, targetExpression, colorExpression, noteTextExpression);
-
-            Container.Series.Add(bulletSeries);
-
-            return new ChartBulletSeriesBuilder<TModel>(bulletSeries);
+            return Bullet<TValue, string>(currentExpression, targetExpression, colorExpression, null, noteTextExpression);
         }
 
         /// <summary>
@@ -583,9 +611,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="colorMemberName">
         /// The name of the color member.
         /// </param>
-        public virtual ChartBulletSeriesBuilder<TModel> Bullet(string currentMemberName, string targetMemberName, string colorMemberName = null)
+        /// <param name="noteTextExpression">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> Bullet(
+            string currentMemberName,
+            string targetMemberName,
+            string colorMemberName = null,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
         {
-            return Bullet(null, currentMemberName, targetMemberName, colorMemberName);
+            return Bullet(null, currentMemberName, targetMemberName, colorMemberName, categoryMemberName, noteTextMemberName);
         }
 
         /// <summary>
@@ -600,17 +636,30 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="colorMemberName">
         /// The name of the color member.
         /// </param>
-        public virtual ChartBulletSeriesBuilder<TModel> Bullet(Type memberType, string currentMemberName, string targetMemberName, string colorMemberName = null)
+        /// <param name="noteTextExpression">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartBulletSeriesBuilder<TModel> Bullet(
+            Type memberType,
+            string currentMemberName,
+            string targetMemberName,
+            string colorMemberName = null,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
         {
             var currentExpr = BuildMemberExpression(memberType, currentMemberName);
             var targetExpr = BuildMemberExpression(memberType, targetMemberName);
             var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
-            var seriesType = typeof(ChartBulletSeries<,>).MakeGenericType(typeof(TModel), currentExpr.Body.Type);
-            var series = (IChartBulletSeries)BuildSeries(seriesType, currentExpr, targetExpr, colorExpr);
+            var expressionCategory = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
+            var seriesType = typeof(ChartBulletSeries<,,>).MakeGenericType(typeof(TModel), typeof(string), currentExpr.Body.Type);
+            var series = (IChartBulletSeries)BuildSeries(seriesType, currentExpr, targetExpr, colorExpr, expressionCategory, noteTextExpr);
 
             series.CurrentMember = currentMemberName;
             series.TargetMember = targetMemberName;
             series.ColorMember = colorMemberName;
+            series.CategoryMember = categoryMemberName;
+            series.NoteTextMember = noteTextMemberName;
 
             if (!series.Name.HasValue())
             {
@@ -620,21 +669,6 @@ namespace Kendo.Mvc.UI.Fluent
             Container.Series.Add((ChartSeriesBase<TModel>)series);
 
             return new ChartBulletSeriesBuilder<TModel>(series);
-        }
-
-        /// <summary>
-        /// Defines bar series bound to inline data.
-        /// </summary>
-        /// <param name="data">
-        /// The data to bind to.
-        /// </param>
-        public virtual ChartBulletSeriesBuilder<TModel> Bullet(IEnumerable data)
-        {
-            ChartBulletSeries<TModel, object> bulletSeries = new ChartBulletSeries<TModel, object>(data);
-
-            Container.Series.Add(bulletSeries);
-
-            return new ChartBulletSeriesBuilder<TModel>(bulletSeries);
         }
 
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)

@@ -12,6 +12,7 @@ namespace Kendo.Mvc.UI.Tests
         public decimal Close { get; set; }
         public string Color { get; set; }
         public string DownColor { get; set; }
+        public DateTime Date { get; set; }
         public string NoteText { get; set; }
     }
 
@@ -29,6 +30,7 @@ namespace Kendo.Mvc.UI.Tests
                     Close = 1,
                     Color = "Color",
                     DownColor = "DownColor",
+                    Date = new DateTime(2012, 1, 1),
                     NoteText = "NoteText"
                 },
 
@@ -40,6 +42,7 @@ namespace Kendo.Mvc.UI.Tests
                     Close = 2,
                     Color = "Color1",
                     DownColor = "DownColor1",
+                    Date = new DateTime(2012, 1, 1),
                     NoteText = "NoteText1"
                 }
             };

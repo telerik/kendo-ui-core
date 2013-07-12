@@ -771,5 +771,82 @@ namespace Kendo.Mvc.UI.Tests.Chart
             var builder = factory.PolarScatter(new int[] { 1 });
             builder.Series.ShouldBeType<ChartPolarScatterSeries<SalesData, object, object>>();
         }
+
+        [Fact]
+        public void Bullet_should_create_bound_bullet_series_from_expression()
+        {
+            var builder = factory.Bullet(s => s.RepSales, s => s.RepSales, null);
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Bullet_should_create_bound_area_series_from_expression_and_category_expression()
+        {
+            var builder = factory.Bullet(s => s.RepSales, s => s.RepSales, null, s => s.Date);
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void Bullet_should_create_bound_bullet_series_from_value_and_color_expression()
+        {
+            var builder = factory.Bullet(s => s.RepSales, s => s.RepSales, s => s.Color);
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Bullet_should_create_bullet_series_with_horizontal_orientation()
+        {
+            var builder = factory.Bullet(s => s.RepSales, s => s.RepSales, null);
+            ((ChartBulletSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Horizontal);
+        }
+
+        [Fact]
+        public void Bullet_should_create_bound_bullet_series_from_type_and_member_name()
+        {
+            var builder = factory.Bullet(typeof(decimal), "RepSales", "RepSales");
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Bullet_should_create_bound_bullet_series_from_type_member_and_category_member_name()
+        {
+            var builder = factory.Bullet(typeof(decimal), "RepSales", "RepSales", null, "Date");
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void Bullet_should_create_bound_bullet_series_from_type_member_and_color_member_name()
+        {
+            var builder = factory.Bullet(typeof(decimal), "RepSales", "RepSales", "Color");
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Bullet_should_create_bound_bullet_series_from_member_name()
+        {
+            var builder = factory.Bullet("RepSales", "RepSales");
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Bullet_should_create_bound_bullet_series_from_member_and_color_member_name()
+        {
+            var builder = factory.Bullet("RepSales", "RepSales", "Color");
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Bullet_should_create_bound_bullet_series_from_member_and_category_member_name()
+        {
+            var builder = factory.Bullet("RepSales", "RepSales", null, "Date");
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void Bullet_should_create_unbound_bullet_series_from_data()
+        {
+            var builder = factory.Bullet(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartBulletSeries<SalesData, object, string>>();
+        }
     }
 }

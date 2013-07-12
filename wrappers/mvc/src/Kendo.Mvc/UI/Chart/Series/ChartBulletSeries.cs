@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
 
-    public class ChartBulletSeries<TModel, TValue> : IChartBulletSeries where TModel : class
+    public class ChartBulletSeries<TModel, TValue, TCategory> : IChartBulletSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBulletSeries{TModel, TCurrent, TTarget}"/> class.
@@ -14,11 +14,13 @@ namespace Kendo.Mvc.UI
         /// <param name="targetExpression">The expression used to extract the point target from the chart model.</param>
         /// <param name="currentExpression">The expression used to extract the point current from the chart model.</param>
         /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
+        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
         /// <param name="noteTextExpression">The expression used to extract the point note text from the chart model.</param>
         public ChartBulletSeries(
             Expression<Func<TModel, TValue>> currentExpression,
             Expression<Func<TModel, TValue>> targetExpression,
             Expression<Func<TModel, string>> colorExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
             Expression<Func<TModel, string>> noteTextExpression)
         {
             if (typeof(TModel).IsPlainType() && !currentExpression.IsBindable())
@@ -42,6 +44,17 @@ namespace Kendo.Mvc.UI
                 }
 
                 ColorMember = colorExpression.MemberWithoutInstance();
+            }
+
+            if (categoryExpression != null)
+            {
+                if (typeof(TModel).IsPlainType() && !categoryExpression.IsBindable())
+                {
+                    throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
+                }
+
+                Category = categoryExpression.Compile();
+                CategoryMember = categoryExpression.MemberWithoutInstance();
             }
 
             if (noteTextExpression != null) {
@@ -276,6 +289,25 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Gets the model data category member name.
+        /// </summary>
+        /// <value>The model data category member name.</value>
+        public string CategoryMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets a function which returns the category of the property to which the column is bound to.
+        /// </summary>
+        public Func<TModel, TCategory> Category
+        {
+            get;
+            private set;
         }
 
         /// <summary>

@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI.Tests
 
     public class ChartCandlestickSeriesSerializerTests
     {
-        protected ChartCandlestickSeries<OHLCData, decimal> series;
+        protected ChartCandlestickSeries<OHLCData, decimal, string> series;
 
         public ChartCandlestickSeriesSerializerTests()
         {
             var chart = ChartTestHelper.CreateChart<OHLCData>();
             chart.Data = OHLCDataBuilder.GetCollection();
-            series = new ChartCandlestickSeries<OHLCData, decimal>(d => d.Open, d => d.High, d => d.Low, d => d.Close, d => d.Color, d => d.DownColor, s => s.NoteText);
+            series = new ChartCandlestickSeries<OHLCData, decimal, string>(d => d.Open, d => d.High, d => d.Low, d => d.Close, d => d.Color, d => d.DownColor, null, s => s.NoteText);
         }
 
         [Fact]

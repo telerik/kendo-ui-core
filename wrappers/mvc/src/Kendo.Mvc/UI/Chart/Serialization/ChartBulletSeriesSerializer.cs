@@ -31,6 +31,7 @@ namespace Kendo.Mvc.UI
                 .Add("opacity", series.Opacity, () => series.Opacity.HasValue)
                 .Add("axis", series.Axis, string.Empty)
                 .Add("colorField", series.ColorMember, () => series.ColorMember.HasValue())
+                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
                 .Add("noteTextField", series.NoteTextMember, () => series.NoteTextMember.HasValue());
 
             if (series.Overlay != null)

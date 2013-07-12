@@ -31,6 +31,7 @@ namespace Kendo.Mvc.UI
                 .Add("highField", series.HighMember, () => series.HighMember.HasValue())
                 .Add("lowField", series.LowMember, () => series.LowMember.HasValue())
                 .Add("closeField", series.CloseMember, () => series.CloseMember.HasValue())
+                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
                 .Add("noteTextField", series.NoteTextMember, () => series.NoteTextMember.HasValue());
 
             var line = series.Line.CreateSerializer().Serialize();

@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI.Tests
 
     public class ChartOHLCSeriesSerializerTests
     {
-        protected ChartOHLCSeries<OHLCData, decimal> series;
+        protected ChartOHLCSeries<OHLCData, decimal, string> series;
 
         public ChartOHLCSeriesSerializerTests()
         {
             var chart = ChartTestHelper.CreateChart<OHLCData>();
             chart.Data = OHLCDataBuilder.GetCollection();
-            series = new ChartOHLCSeries<OHLCData, decimal>(s => s.Open, s => s.High, s => s.Low, s => s.Close, s => s.Color, s => s.NoteText);
+            series = new ChartOHLCSeries<OHLCData, decimal, string>(s => s.Open, s => s.High, s => s.Low, s => s.Close, s => s.Color, null, s => s.NoteText);
         }
 
         [Fact]
@@ -266,6 +266,20 @@ namespace Kendo.Mvc.UI.Tests
         {
             series.ColorMember = null;
             GetJson(series).ContainsKey("colorField").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_categoryField_if_member_is_set()
+        {
+            series.CategoryMember = "RepSales";
+            GetJson(series)["categoryField"].ShouldEqual("RepSales");
+        }
+
+        [Fact]
+        public void Should_not_serialize_categoryField_if_member_is_not_set()
+        {
+            series.CategoryMember = null;
+            GetJson(series).ContainsKey("categoryField").ShouldBeFalse();
         }
 
         protected static IDictionary<string, object> GetJson(IChartOHLCSeries series)
