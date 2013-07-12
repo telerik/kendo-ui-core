@@ -701,10 +701,20 @@ kendo_module({
         },
 
         _syncWithContent: function() {
-            var pages = this._content.pages;
+            var pages = this._content.pages,
+                buffer = this._content.buffer,
+                data,
+                element;
 
             this.page = this._content.page;
-            this.trigger(CHANGE, { page: this.page, element: pages ? pages[1].element : undefined });
+
+            data = buffer ? buffer.at(this.page) : undefined;
+            if(!(data instanceof Array)) {
+                data = [data];
+            }
+            element = pages ? pages[1].element : undefined;
+
+            this.trigger(CHANGE, { page: this.page, element: element, data: data });
         },
 
         _dragStart: function() {
