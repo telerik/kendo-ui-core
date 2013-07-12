@@ -633,7 +633,7 @@ kendo_module({
                         start: slotIndex,
                         end: slotIndex,
                         width: slot.clientWidth - 2,
-                        left: slot.offsetLeft + 2,
+                        left: this._scrollbarOffset(slot.offsetLeft + 2),
                         top: slot.offsetTop + slot.firstChildHeight + eventCount * eventHeight + 3 * eventCount
                     }));
 
@@ -643,7 +643,7 @@ kendo_module({
                 slotRange.addEvent({element: element, start: startIndex, end: endIndex, groupIndex: startSlot.groupIndex });
 
                 element[0].style.width = slotRange.innerWidth() - rightOffset + "px";
-                element[0].style.left = startSlot.offsetLeft + 2 + "px";
+                element[0].style.left = this._scrollbarOffset(startSlot.offsetLeft + 2) + "px";
                 element[0].style.height = eventHeight + "px";
 
                 this.content[0].appendChild(element[0]);

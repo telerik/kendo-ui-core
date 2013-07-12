@@ -1029,12 +1029,17 @@
                     "text": "Globalization",
                     "url": "scheduler/globalization.html",
                     "packages": ["mvc"]
-				} , {
-					"text": "Selection",
+                }, {
+                    "text": "Selection",
                     "url": "scheduler/selection.html",
                     "title": "Selection and Keyboard navigation in Kendo UI Scheduler",
                     "meta": "This demo shows the selection and the different keyboard combinations that could be used to navigate in Kendo UI Scheduler."
-				}
+                }, {
+                    "text": "RTL Support",
+                    "url": "scheduler/rtl.html",
+                    "title": "Right-to-left (RTL) support of Kendo UI Scheduler",
+                    "meta": "This demo shows the Right-to-left (RTL) support of Kendo UI Scheduler."
+                }
             ]
         },
         {
