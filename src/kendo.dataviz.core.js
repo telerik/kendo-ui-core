@@ -823,7 +823,7 @@ kendo_module({
 
             ChartElement.fn.init.call(text, options);
 
-            text.content = content;
+            text.content = decodeEntities(content);
 
             // Calculate size
             text.reflow(Box2D());
@@ -3118,6 +3118,91 @@ kendo_module({
         }
     });
 
+    var ViewFactory = function() {
+        this._views = [];
+    };
+
+    ViewFactory.prototype = {
+        register: function(name, type, order) {
+            var views = this._views,
+                defaultView = views[0],
+                entry = {
+                    name: name,
+                    type: type,
+                    order: order
+                };
+
+            if (!defaultView || order < defaultView.order) {
+                views.unshift(entry);
+            } else {
+                views.push(entry);
+            }
+        },
+
+        create: function(options, preferred) {
+            var views = this._views,
+                match = views[0];
+
+            if (preferred) {
+                preferred = preferred.toLowerCase();
+                for (var i = 0; i < views.length; i++) {
+                    if (views[i].name === preferred) {
+                        match = views[i];
+                        break;
+                    }
+                }
+            }
+
+            if (match) {
+                return new match.type(options);
+            }
+
+            kendo.logToConsole(
+                "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
+                "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
+                "- The kendo.dataviz.(svg|vml|canvas).js scripts are not loaded");
+        }
+    };
+
+    ViewFactory.current = new ViewFactory();
+
+    var ExportMixin = {
+        svg: function() {
+            if (dataviz.SVGView) {
+                var model = this._getModel(),
+                    view = new dataviz.SVGView(model.options);
+
+                view.load(model);
+
+                return view.render();
+            } else {
+                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
+            }
+        },
+
+        imageDataURL: function() {
+            if (dataviz.CanvasView) {
+                if (dataviz.supportsCanvas()) {
+                    var model = this._getModel(),
+                        container = document.createElement("div"),
+                        view = new dataviz.CanvasView(model.options);
+
+                    view.load(model);
+
+                    return view.renderTo(container).toDataURL();
+                } else {
+                    kendo.logToConsole(
+                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
+                        "User agent: " + navigator.userAgent);
+
+                    return null;
+                }
+            } else {
+                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
+            }
+        }
+    };
+
     function measureText(text, style, rotation) {
         var styleHash = getHash(style),
             cacheKey = text + styleHash + rotation,
@@ -3388,90 +3473,16 @@ kendo_module({
         return -v1.x * v2.y + v1.y * v2.x < 0;
     }
 
-    var ViewFactory = function() {
-        this._views = [];
-    };
-
-    ViewFactory.prototype = {
-        register: function(name, type, order) {
-            var views = this._views,
-                defaultView = views[0],
-                entry = {
-                    name: name,
-                    type: type,
-                    order: order
-                };
-
-            if (!defaultView || order < defaultView.order) {
-                views.unshift(entry);
-            } else {
-                views.push(entry);
-            }
-        },
-
-        create: function(options, preferred) {
-            var views = this._views,
-                match = views[0];
-
-            if (preferred) {
-                preferred = preferred.toLowerCase();
-                for (var i = 0; i < views.length; i++) {
-                    if (views[i].name === preferred) {
-                        match = views[i];
-                        break;
-                    }
-                }
-            }
-
-            if (match) {
-                return new match.type(options);
-            }
-
-            kendo.logToConsole(
-                "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
-                "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
-                "- The kendo.dataviz.(svg|vml|canvas).js scripts are not loaded");
+    function decodeEntities(text) {
+        if (!text || !text.indexOf || text.indexOf("&") < 0) {
+            return text;
+        } else {
+            var element = decodeEntities._element;
+            element.innerHTML = text;
+            return element.textContent || element.innerText;
         }
-    };
-
-    ViewFactory.current = new ViewFactory();
-
-    var ExportMixin = {
-        svg: function() {
-            if (dataviz.SVGView) {
-                var model = this._getModel(),
-                    view = new dataviz.SVGView(model.options);
-
-                view.load(model);
-
-                return view.render();
-            } else {
-                throw new Error("Unable to create SVGView. Check that kendo.dataviz.svg.js is loaded.");
-            }
-        },
-
-        imageDataURL: function() {
-            if (dataviz.CanvasView) {
-                if (dataviz.supportsCanvas()) {
-                    var model = this._getModel(),
-                        container = document.createElement("div"),
-                        view = new dataviz.CanvasView(model.options);
-
-                    view.load(model);
-
-                    return view.renderTo(container).toDataURL();
-                } else {
-                    kendo.logToConsole(
-                        "Warning: Unable to generate image. The browser does not support Canvas.\n" +
-                        "User agent: " + navigator.userAgent);
-
-                    return null;
-                }
-            } else {
-                throw new Error("Unable to create CanvasView. Check that kendo.dataviz.canvas.js is loaded.");
-            }
-        }
-    };
+    }
+    decodeEntities._element = doc.createElement("span");
 
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
@@ -3545,6 +3556,7 @@ kendo_module({
         autoMajorUnit: autoMajorUnit,
         boxDiff: boxDiff,
         defined: defined,
+        decodeEntities: decodeEntities,
         getElement: getElement,
         getSpacing: getSpacing,
         inArray: inArray,
