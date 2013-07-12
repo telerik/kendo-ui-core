@@ -4,7 +4,7 @@ kendo_module({
     category: "web",
     description: "",
     hidden: true,
-    depends: [ "listview", "upload" ]
+    depends: [ "listview", "dropdownlist", "upload" ]
 });
 
 (function($, undefined) {
@@ -28,9 +28,8 @@ kendo_module({
         SIZEFIELD = "size",
         TYPEFIELD = "type",
         DEFAULTSORTORDER = { field: TYPEFIELD, dir: "asc" },
-        ARRANGEBYTMPL = kendo.template('<li data-#=ns#value="#=value#" class="k-item">${text}</li>'),
         EMPTYTILE = kendo.template('<li class="k-tile-empty"><strong>${text}</strong></li>'),
-        TOOLBARTMPL = '<div class="k-widget k-toolbar k-floatwrap">' +
+        TOOLBARTMPL = '<div class="k-widget k-toolbar k-header k-floatwrap">' +
                             '<div class="k-toolbar-wrap">' +
                                 '# if (showUpload) { # ' +
                                     '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-upload-button">' +
@@ -42,11 +41,11 @@ kendo_module({
                                 '# } #' +
 
                                 '# if (showDelete) { #' +
-                                    '<button type="button" class="k-button k-button-icon"><span class="k-icon k-delete" /></button>&nbsp;' +
+                                    '<button type="button" class="k-button k-button-icon k-state-disabled"><span class="k-icon k-delete" /></button>&nbsp;' +
                                 '# } #' +
                             '</div>' +
                             '<div class="k-tiles-arrange">' +
-                                '#=messages.orderBy#: <a href="\\#" class="k-link"><span>#=messages.orderByName#</span><span class="k-icon k-i-arrow-s" /></a>' +
+                                '<label>#=messages.orderBy#: <select /></label></a>' +
                             '</div>' +
                         '</div>';
 
@@ -235,8 +234,8 @@ kendo_module({
                 .add(that.toolbar)
                 .off(NS);
 
-            if (that.arrangeByPopup) {
-                that.arrangeByPopup.destroy();
+            if (that.arrangeBy) {
+                that.arrangeBy.destroy();
             }
 
             kendo.destroy(that.element);
@@ -270,10 +269,10 @@ kendo_module({
             var that = this,
                 template = kendo.template(TOOLBARTMPL),
                 messages = that.options.messages,
-                link,
-                popup,
-                arrangeBy = [{ text: messages.orderByName, value: "name", ns: kendo.ns },
-                    { text: messages.orderBySize, value: "size", ns: kendo.ns }];
+                arrangeBy = [
+                    { text: messages.orderByName, value: "name" },
+                    { text: messages.orderBySize, value: "size" }
+                ];
 
             that.toolbar = $(template({
                     messages: messages,
@@ -302,27 +301,16 @@ kendo_module({
                 .find(".k-upload input")
                 .data("kendoUpload");
 
-            link = that.toolbar.find(".k-tiles-arrange a");
-
-            that.arrangeByPopup = popup = $("<ul>" + kendo.render(ARRANGEBYTMPL, arrangeBy) + "</ul>")
-                .kendoPopup({
-                    anchor: link
+            that.arrangeBy = that.toolbar.find(".k-tiles-arrange select")
+                .kendoDropDownList({
+                    dataSource: arrangeBy,
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    change: function() {
+                        that.orderBy(this.value());
+                    }
                 })
-                .on(CLICK + NS, "li", function() {
-                    var item = $(this),
-                        field = item.attr(kendo.attr("value"));
-
-                    that.toolbar.find(".k-tiles-arrange a span:first").html(item.text());
-                    popup.close();
-
-                    that.orderBy(field);
-
-                }).data("kendoPopup");
-
-            link.on(CLICK + NS, function(e) {
-                e.preventDefault();
-                popup.toggle();
-            });
+                .data("kendoDropDownList");
 
             that._attachDropzoneEvents();
         },

@@ -4915,33 +4915,12 @@ html .k-upload-empty
     display: none;
 }
 
-.k-imagebrowser .k-upload
-{
-    border-width: 0;
-    background-color: transparent;
-}
-
 .k-imagebrowser-dropzone
 {
     z-index: 10010;
     filter: alpha(opacity=40);
     opacity: .4;
     position: fixed;
-}
-
-.k-imagebrowser .k-upload-button .k-add
-{
-    background-position: -32px -64px;
-}
-
-.k-imagebrowser .k-button-bare span.k-addfolder
-{
-    background-position: -32px -272px;
-}
-
-.k-imagebrowser .k-button-bare span.k-delete
-{
-    background-position: -32px -16px;
 }
 
 .k-search-wrap
@@ -4979,8 +4958,8 @@ html .k-upload-empty
 {
     position: relative;
     float: left;
-    width: 78%;
-    padding-right:2px;
+    width: 79%;
+    padding-right: 2px;
 }
 
 .k-breadcrumbs-wrap
@@ -5015,43 +4994,68 @@ html .k-upload-empty
     text-decoration: underline;
 }
 
-.k-imagebrowser .k-breadcrumbs .k-i-seek-w
+.k-imagebrowser
 {
-    text-decoration: none;
-    cursor: default;
-}
+    .k-breadcrumbs .k-i-seek-w
+    {
+        text-decoration: none;
+        cursor: default;
+    }
 
-.k-imagebrowser .k-toolbar
-{
-    clear: both;
-    border-style: solid;
-    border-width: 1px;
-    margin: 8px 0 0;
-    padding: 2px 0 3px;
-    background-repeat: repeat-x;
-    line-height: 23px;
-    white-space: nowrap; /*required by WebKit*/
-}
+    .k-toolbar
+    {
+        border-style: solid;
+        border-width: 1px;
+        margin: 8px 0 0;
+        padding: .25em;
+        line-height: 23px;
+        white-space: nowrap; /*required by WebKit*/
 
-.k-imagebrowser .k-upload
-{
-    float: left;
-    z-index: 10010;
-}
+        .k-button.k-state-disabled
+        {
+            display: none;
+        }
+    }
 
-.k-imagebrowser .k-upload-status {
-    display: none;
-}
+    .k-toolbar-wrap
+    {
+        float: left;
+    }
 
-.k-imagebrowser .k-upload-button
-{
-    width: auto;
-    vertical-align: top;
-}
+    .k-tiles-arrange
+    {
+        float: right;
 
-.k-imagebrowser .k-upload .k-icon
-{
-    vertical-align: bottom;
+        .k-dropdown
+        {
+            width: 75px;
+        }
+    }
+
+    .k-upload
+    {
+        float: left;
+        z-index: 10010;
+        border-width: 0;
+        background-color: transparent;
+
+        .k-upload-status
+        {
+            display: none;
+        }
+
+        .k-upload-button
+        {
+            width: auto;
+            margin-left: 0;
+            vertical-align: top;
+        }
+
+        .k-icon
+        {
+            vertical-align: bottom;
+        }
+    }
 }
 
 .k-ie7 .k-imagebrowser .k-upload-button, .k-ie7 .k-imagebrowser .k-upload .k-icon { vertical-align: baseline; position: relative; top: 1px; }
@@ -5059,33 +5063,6 @@ html .k-upload-empty
 .k-ie7 .k-imagebrowser .k-upload .k-icon { top: 2px; }
 
 .k-ie7 .k-imagebrowser .k-toolbar .k-button-icon { vertical-align: middle; }
-
-.k-toolbar .k-state-disabled,
-.k-plus-disabled, .k-minus-disabled
-{
-    filter: alpha(opacity=50);
-    opacity: .5;
-}
-
-.k-toolbar-wrap
-{
-    float: left;
-}
-
-.k-tiles-arrange
-{
-    float: right;
-}
-
-.k-tiles-arrange .k-i-arrow-s
-{
-    margin: 0 2px 0 3px;
-}
-
-.k-tiles-arrange a
-{
-    text-decoration: none;
-}
 
 .k-tiles
 {
