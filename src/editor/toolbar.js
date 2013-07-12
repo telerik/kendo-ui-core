@@ -330,13 +330,16 @@
                 currentToolGroup,
                 isStart,
                 that = this,
-                listItems = that.element.children(),
-                enabledTools = listItems.filter(function() {
-                    return !$(this).children(".k-state-disabled").length;
-                }),
+                element = that.element,
+                enabledTools,
+                groupEnd = /k-group-end/,
                 started = false;
 
-            listItems.filter(".k-group-break").remove();
+            element.children().filter(".k-group-break").remove();
+
+            enabledTools = element.children().filter(function() {
+                return !$(this).children(".k-state-disabled").length;
+            });
 
             enabledTools.each(function(index, li) {
                 li = $(li);
@@ -361,15 +364,17 @@
                 previous = li;
             });
 
-            that.element.children(".k-group-end").each(function() {
-                if (this.offsetLeft + this.offsetWidth > this.parentNode.offsetWidth) {
-                    var node = this;
+            that.element.children(".k-group-start").each(function() {
+                var node = this;
+                var groupEndOffset;
 
-                    while (node && node.className.indexOf("k-group-start") < 0) {
-                        node = node.previousSibling;
-                    }
+                while (!groupEnd.test(node.className)) {
+                    node = node.nextSibling;
+                    groupEndOffset = node.offsetLeft + node.offsetWidth;
+                }
 
-                    $(node).before("<li class='k-group-break' />");
+                if (groupEndOffset > this.parentNode.offsetWidth) {
+                    $(this).before("<li class='k-group-break' />");
                 }
             });
         },
