@@ -653,8 +653,13 @@ kendo_module({
 
                     kendo.date.setTime(end, duration);
 
-                    if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
-                        that._updateEvent(null, event, { start: start, end: end });
+                    var endResources = that.view()._resourceBySlot(endSlot);
+                    var startResources = that.view()._resourceBySlot(startSlot);
+
+                    if (event.start.getTime() != start.getTime() ||
+                        event.end.getTime() != end.getTime() ||
+                        kendo.stringify(endResources) != kendo.stringify(startResources))  {
+                        that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
                     }
                 }
             });
@@ -858,7 +863,7 @@ kendo_module({
                 }
             };
 
-			var recurrenceMessages = that.options.messages.recurrenceMessages;
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
             if (event.recurrenceRule || (event.recurrenceId && !event.id)) {
                 that.showDialog({
                     title: recurrenceMessages.editWindowTitle,
@@ -1298,7 +1303,7 @@ kendo_module({
                 that._editEvent(model);
             };
 
-			var recurrenceMessages = that.options.messages.recurrenceMessages;
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
             that.showDialog({
                 title: recurrenceMessages.editWindowTitle,
                 text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,

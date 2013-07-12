@@ -913,6 +913,69 @@
                 equalWithRound(div.find(".k-event-drag-hint").offset().top, slots.eq(4).offset().top);
             });
 
+            test("moving event between groups changes its resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 11:00"),
+                    date: new Date("2013/6/6"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event:last");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(0).prev());
+
+                equal(scheduler.dataSource.at(0).ownerId, 1);
+            });
+
+            test("moving event between vertical groups changes its resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 11:00"),
+                    date: new Date("2013/6/6"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), ownerId: 2, title: "" }
+                    ],
+                    resourcesGroups: ["Owner"],
+                    groupOrientation: "vertical",
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event:last");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+
+                equal(scheduler.dataSource.at(0).ownerId, 1);
+            });
+
             function dragdrop(scheduler, target, offset, to) {
                 if (!to) {
                     to = offset;
