@@ -640,26 +640,22 @@ kendo_module({
                     var update = false;
 
                     if (dir == "south") {
-                        var start = kendo.date.getDate(event.start);
-
-                        kendo.date.setTime(start, slot.end - event.start);
-
-                        if (startSlot.groupIndex == slot.groupIndex && getMilliseconds(start) >= view._timeSlotInterval()) {
+                        if (startSlot.groupIndex == slot.groupIndex && slot.end - event.start >= view._timeSlotInterval()) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "north") {
-                        if (endSlot.groupIndex == slot.groupIndex && getMilliseconds(event.end) - getMilliseconds(slot.start) >= view._timeSlotInterval()) {
+                        if (endSlot.groupIndex == slot.groupIndex && event.end - slot.start >= view._timeSlotInterval()) {
                             startSlot = slot;
                             update = true;
                         }
                     } else if (dir == "east") {
-                        if (startSlot.groupIndex == slot.groupIndex && kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
+                        if (startSlot.groupIndex == slot.groupIndex && slot.end.getTime() >= event.start.getTime()) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "west") {
-                        if (endSlot.groupIndex == slot.groupIndex && kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
+                        if (endSlot.groupIndex == slot.groupIndex && event.end.getTime() >= slot.start.getTime()) {
                             startSlot = slot;
                             update = true;
                         }
@@ -678,23 +674,17 @@ kendo_module({
                     that.view()._removeResizeHint();
 
                     if (dir == "south") {
-                        end = kendo.date.getDate(end);
-                        kendo.date.setTime(end, getMilliseconds(endSlot.end));
+                        end = endSlot.end;
                     } else if (dir == "north") {
-                        start = kendo.date.getDate(start);
-                        kendo.date.setTime(start, getMilliseconds(startSlot.start));
+                        start = startSlot.start;
                     } else if (dir == "east") {
-                        end.setTime(endSlot.end.getTime());
+                        end = new Date(endSlot.end.getTime());
                         end.setHours(0);
                         end.setMinutes(0);
                     } else if (dir == "west") {
-                        start.setTime(startSlot.start.getTime());
+                        start = new Date(startSlot.start.getTime());
                         start.setHours(0);
                         start.setMinutes(0);
-                    }
-
-                    if (end < start) {
-                        end = kendo.date.addDays(end, 1);
                     }
 
                     if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {

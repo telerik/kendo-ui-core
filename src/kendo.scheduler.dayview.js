@@ -166,50 +166,76 @@ kendo_module({
 
        _updateResizeHint: function(direction, startSlot, endSlot) {
             var vertical = direction == "south" || direction == "north";
+            var container = this.content;
+            var format;
+
+            this._removeResizeHint();
 
             if (vertical) {
                 startSlot = this._toDaySlot(startSlot);
                 endSlot = this._toDaySlot(endSlot);
-            } else {
-                startSlot = this._toAllDaySlot(startSlot);
-                endSlot = this._toAllDaySlot(endSlot);
-            }
 
-            var left = startSlot.offsetLeft + parseInt($(startSlot.element).css("borderLeftWidth"), 10);
-            var top = startSlot.offsetTop;
-            var width = startSlot.clientWidth;
-            var height = startSlot.clientHeight;
-            var container = this.content;
-            var format;
+                var slotGroups = [];
 
-            if (vertical) {
-                var dateSlotIndex = this._dateSlotIndex(startSlot.start);
+                for (var columnIndex = startSlot.columnIndex; columnIndex <= endSlot.columnIndex; columnIndex++) {
+                    var slots = this._columns[columnIndex].slots;
+                    var first = slots[0];
+                    var last = slots[slots.length - 1];
 
-                height = this._calculateEventHeight(this._columns[dateSlotIndex].slots, startSlot.index, endSlot.index + 1) - 3;
+                    if (first.start < startSlot.start) {
+                        first = startSlot;
+                    }
+
+                    if (last.start > endSlot.start) {
+                        last = endSlot;
+                    }
+
+                    slotGroups.push( {
+                        startSlot: first,
+                        endSlot: last
+                    });
+                }
+
+                for (var groupIndex = 0; groupIndex < slotGroups.length; groupIndex++) {
+                    var slotGroup = slotGroups[groupIndex];
+                    startSlot = slotGroup.startSlot;
+                    endSlot = slotGroup.endSlot;
+
+                    var hint = SchedulerView.fn._createResizeHint.call(this,
+                        startSlot.offsetLeft + parseInt($(startSlot.element).css("borderLeftWidth"), 10),
+                        startSlot.offsetTop,
+                        startSlot.clientWidth,
+                        this._calculateEventHeight(this._columns[startSlot.columnIndex].slots, startSlot.index, endSlot.index + 1) - 3
+                    );
+
+                    hint.appendTo(container);
+
+                    this._resizeHint = this._resizeHint.add(hint);
+                }
 
                 format = "t";
             } else {
-
-                width = this._calculateAllDayEventWidth(this._rows[0].slots, startSlot.columnIndex, endSlot.columnIndex);
-
+                startSlot = this._toAllDaySlot(startSlot);
+                endSlot = this._toAllDaySlot(endSlot);
                 container = this.element.find(".k-scheduler-header-wrap");
+
+                this._resizeHint = SchedulerView.fn._createResizeHint.call(this,
+                    startSlot.offsetLeft + parseInt($(startSlot.element).css("borderLeftWidth"), 10),
+                    startSlot.offsetTop,
+                    this._calculateAllDayEventWidth(this._rows[0].slots, startSlot.columnIndex, endSlot.columnIndex),
+                    startSlot.clientHeight
+                );
+
+                this._resizeHint.appendTo(container);
 
                 format = "M/dd";
             }
 
-            if (!this._resizeHint.length) {
-                this._resizeHint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
+            this._resizeHint.find(".k-label-top,.k-label-bottom").text("");
 
-                this._resizeHint.appendTo(container);
-            } else if (vertical) {
-                this._resizeHint.css({ top: top, height: height });
-            } else {
-                this._resizeHint.css({ left: left, width: width });
-            }
+            this._resizeHint.first().addClass(".k-first").find(".k-label-top").text(kendo.toString(startSlot.start, format));
 
-            this._resizeHint.find(".k-label-top").text(kendo.toString(startSlot.start, format))
-                            .end()
-                            .find(".k-label-bottom").text(kendo.toString(endSlot.end, format));
+            this._resizeHint.last().addClass(".k-last").find(".k-label-bottom").text(kendo.toString(endSlot.end, format));
         },
 
         _updateMoveHint: function(event, initialSlot, currentSlot) {
