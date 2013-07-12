@@ -1231,7 +1231,7 @@ kendo_module({
             return tmpl;
        },
 
-       _createEventElement: function(event, isOneDayEvent) {
+       _createEventElement: function(event, isOneDayEvent, head, tail) {
             var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
             var options = this.options;
             var editable = options.editable;
@@ -1244,8 +1244,6 @@ kendo_module({
             var eventStartTime = getMilliseconds(event.startTime || event.start);
             var eventEndTime = getMilliseconds(event.endTime || event.end);
             var middle;
-            var head;
-            var tail;
 
             if (startTime >= endTime) {
                 endTime = getMilliseconds(new Date(options.endTime.getTime() + MS_PER_DAY - 1));
@@ -1409,13 +1407,13 @@ kendo_module({
 
                 if (this._isInDateSlot(event)) {
 
-                    var dateSlotIndex = this._dateSlotIndex(event.start),
-                        endDateSlotIndex = this._dateSlotIndex(event.end, !event.isAllDay),
-                        isOneDayEvent = !event.isAllDay && event.end.getTime() - event.start.getTime() < MS_PER_DAY && dateSlotIndex === endDateSlotIndex,
-                        container = isOneDayEvent ? this.content : allDayEventContainer,
-                        element = this._createEventElement(event, isOneDayEvent);
+                    var dateSlotIndex = this._dateSlotIndex(event.start);
+                    var endDateSlotIndex = this._dateSlotIndex(event.end, !event.isAllDay);
+                    var isMultiDayEvent = event.isAllDay || event.end.getTime() - event.start.getTime() >= MS_PER_DAY;
+                    var container = isMultiDayEvent ? allDayEventContainer : this.content;
+                    var element;
 
-                    if (isOneDayEvent) {
+                    if (!isMultiDayEvent) {
 
                         if (this._isInTimeSlot(event)) {
 
@@ -1423,9 +1421,44 @@ kendo_module({
                                 dateSlotIndex = endDateSlotIndex;
                             }
 
-                            this._positionEvent(event, element, dateSlotIndex + dateOffset, timeOffset);
+                            for (var columnIndex = dateSlotIndex; columnIndex <= endDateSlotIndex; columnIndex++) {
+                                var start = event.start;
+                                var end = event.end;
+                                var head = false;
+                                var tail = false;
 
-                            element.appendTo(container);
+                                if (columnIndex > dateSlotIndex) {
+                                    start = kendo.date.getDate(end);
+
+                                    kendo.date.setTime(start, getMilliseconds(this.options.startTime));
+
+                                    if (end < start) {
+                                       start = kendo.date.addDays(start, -1);
+                                    }
+
+                                    tail = true;
+                                }
+
+                                if (columnIndex < endDateSlotIndex) {
+                                   end = kendo.date.getDate(start);
+
+                                   kendo.date.setTime(end, getMilliseconds(this.options.endTime));
+
+                                   if (end < start) {
+                                       end = kendo.date.addDays(end, 1);
+                                   }
+
+                                   head = true;
+                                }
+
+                                element = this._createEventElement(event, !isMultiDayEvent, head, tail);
+
+                                var occurrence = extend({}, event, { start: start, end: end });
+
+                                this._positionEvent(occurrence, element, columnIndex + dateOffset, timeOffset);
+
+                                element.appendTo(container);
+                            }
                         }
 
                    } else if (this.options.allDaySlot) {
@@ -1437,6 +1470,7 @@ kendo_module({
                            endDateSlotIndex = (this.groupedResources.length && !isVertical ? this._columnCountInGroup() : this._rows[0].slots.length) - 1;
                        }
 
+                       element = this._createEventElement(event, !isMultiDayEvent);
                        this._positionAllDayEvent(this._rows[groupIdx], element, dateSlotIndex + dateOffset, endDateSlotIndex + dateOffset);
 
                        element.appendTo(container);

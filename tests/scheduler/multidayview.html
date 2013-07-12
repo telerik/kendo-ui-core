@@ -282,6 +282,15 @@
                 equal(view.content.find(".k-event:last dd").text(), "event2");
             });
 
+            test("cross-midnight events are split", function() {
+                var view = setup({
+                    dates: [ new Date("2013/6/6"), new Date("2013/6/7") ]
+                });
+
+                view.render([{ uid: "uid", title: "", start: new Date("2013/6/6 10:00"), end: new Date("2013/6/7 9:00") }]);
+                equal(view.content.find("div.k-event").length, 2);
+            });
+
             test("old events are removed on multiple databind calls", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
@@ -621,21 +630,6 @@
                 var eventElement = view.content.find("div.k-event");
 
                 equal(eventElement.length, 0);
-            });
-
-            test("position a multiday event which is shorter than one day", function() {
-                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-                    view = setup({
-                        dates: [
-                            selectedDate,
-                            new Date(2013, 1, 27, 0, 0, 0)
-                        ]
-                    });
-
-                var events = [{uid:"uid", start: new Date(2013, 1, 26, 19, 0, 0), end: new Date(2013, 1, 27, 12, 0, 0), title: "my event" }];
-
-                view.render(events);
-                equal(view.datesHeader.find(".k-event").length, 1);
             });
 
             test("position day event which ends after the slot end time", function() {
