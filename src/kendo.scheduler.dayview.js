@@ -538,41 +538,98 @@ kendo_module({
         },
 
         _editable: function() {
-            var that = this;
-            if (that.options.editable) {
+            if (this.options.editable) {
+                if (kendo.support.mobileOS) {
+                    this._touchEditable();
+                } else {
+                    this._mouseEditable();
+                }
+            }
+        },
 
-                that.element.on("click" + NS, ".k-event a:has(.k-si-close)", function(e) {
-                    that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+        _mouseEditable: function() {
+            var that = this;
+            that.element.on("click" + NS, ".k-event a:has(.k-si-close)", function(e) {
+                that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+                e.preventDefault();
+            });
+
+            if (that.options.editable.create !== false) {
+                that.element.on("dblclick" + NS, ".k-scheduler-content td", function(e) {
+                    if (!$(this).parent().hasClass("k-scheduler-header-all-day")) {
+                        var slot = that._slotByPosition(e.pageX, e.pageY);
+
+                        var resourceInfo = that._resourceBySlot(slot);
+
+                        that.trigger("add", { eventInfo: extend({ start: slot.start, end: slot.end }, resourceInfo) });
+
+                        e.preventDefault();
+                    }
+                }).on("dblclick" + NS, ".k-scheduler-header-all-day td", function(e) {
+                    var slot = that._slotByPosition(e.pageX, e.pageY);
+                    var resourceInfo = that._resourceBySlot(slot);
+
+                    that.trigger("add", { eventInfo: extend({ isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.end) }, resourceInfo) });
+
                     e.preventDefault();
                 });
+            }
 
-                if (that.options.editable.create !== false) {
-                    that.element.on("dblclick" + NS, ".k-scheduler-content td", function(e) {
-                        if (!$(this).parent().hasClass("k-scheduler-header-all-day")) {
-                            var slot = that._slotByPosition(e.pageX, e.pageY);
+            if (that.options.editable.update !== false) {
+                that.element.on("dblclick" + NS, ".k-event", function(e) {
+                    that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+                    e.preventDefault();
+                });
+            }
+        },
 
+        _touchEditable: function() {
+            var that = this;
+
+            that._closeUserEvents = new kendo.UserEvents(that.element, {
+               filter: ".k-event a:has(.k-si-close)",
+               tap: function(e) {
+                    that.trigger("remove", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
+                    e.preventDefault();
+               }
+            });
+
+            if (that.options.editable.create !== false) {
+                that._addUserEvents = new kendo.UserEvents(that.element, {
+                    filter:  ".k-scheduler-content td",
+                    tap: function(e) {
+                        if (!$(e.target).parent().hasClass("k-scheduler-header-all-day")) {
+                            var slot = that._slotByPosition(e.x.location, e.y.location);
                             var resourceInfo = that._resourceBySlot(slot);
-
                             that.trigger("add", { eventInfo: extend({ start: slot.start, end: slot.end }, resourceInfo) });
-
                             e.preventDefault();
                         }
-                    }).on("dblclick" + NS, ".k-scheduler-header-all-day td", function(e) {
-                        var slot = that._slotByPosition(e.pageX, e.pageY);
+                    }
+                });
+
+                that._allDayUserEvents = new kendo.UserEvents(that.element, {
+                    filter: ".k-scheduler-header-all-day td",
+                    tap: function(e) {
+                        var slot = that._slotByPosition(e.x.location, e.y.location);
                         var resourceInfo = that._resourceBySlot(slot);
 
                         that.trigger("add", { eventInfo: extend({ isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.end) }, resourceInfo) });
 
                         e.preventDefault();
-                    });
-                }
+                    }
+                });
+            }
 
-                if (that.options.editable.update !== false) {
-                    that.element.on("dblclick" + NS, ".k-event", function(e) {
-                        that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
-                        e.preventDefault();
-                    });
-                }
+            if (that.options.editable.update !== false) {
+                that._editUserEvents = new kendo.UserEvents(that.element, {
+                    filter: ".k-event",
+                    tap: function(e) {
+                        if ($(e.event.target).closest("a:has(.k-si-close)").length === 0) {
+                            that.trigger("edit", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
+                            e.preventDefault();
+                        }
+                    }
+                });
             }
         },
 
@@ -593,7 +650,7 @@ kendo_module({
 
                 columns.push(column);
             }
-        
+
             if (options.allDaySlot) {
                 rows.push( { text: options.messages.allDay, allDay: true });
             }
@@ -821,6 +878,19 @@ kendo_module({
 
             if (that.footer) {
                 that.footer.remove();
+            }
+
+            if (kendo.support.mobileOS) {
+                that._closeUserEvents.destroy();
+
+                if (that.options.editable.create !== false) {
+                    that._addUserEvents.destroy();
+                    that._allDayUserEvents.destroy();
+                }
+
+                if (that.options.editable.update !== false) {
+                    that._editUserEvents.destroy();
+                }
             }
         },
 
