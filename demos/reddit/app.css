@@ -83,8 +83,38 @@
 }
 
 .title-bar {
+    position: absolute;
+    position: fixed;
+    left: 0;
+    bottom: 0;
     height: 42px;
+    background: rgba(0,0,0,.5);
     color: #FFFFFF;
+}
+
+.title-bar:before {
+    margin-left: -5px;
+}
+
+.title-bar p {
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.title-bar span {
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    max-height: 42px;
+    width: 100%;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
 }
 
 .tile {
@@ -196,6 +226,7 @@
     height: 60px;
 }
 
+.title-bar:before,
 .detail-text:before {
     content: "\a0";
     width: 0;
