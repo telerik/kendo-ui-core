@@ -1725,7 +1725,8 @@ kendo_module({
 
             if (backwardSelection) {
                 startDate = new Date(endDate);
-                endDate = selection.start;
+                endDate = new Date(selection.start);
+
             }
 
             var that = this,
@@ -1746,6 +1747,10 @@ kendo_module({
 
             if (endRow < 0) {
                 endRow = 0;
+            }
+
+            if (backwardSelection) {
+                endRow += 1;
             }
 
             if (!selection.isAllDay) {

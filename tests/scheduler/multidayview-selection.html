@@ -371,7 +371,7 @@
                 var allCells = view.content.find("table td"),
                     cells = allCells.filter("td.k-state-selected");
 
-                equal(cells.length, 26);
+                equal(cells.length, 27);
             });
 
             test("View select method scrolls to the first cell when start is bigger than end", function() {
@@ -399,6 +399,15 @@
                 var cells = view.content.find("table td").filter("td.k-state-selected");
 
                 equal(cells.length, 2);
+            });
+
+            test("View selects negative range and persists start cell", 1, function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 10), end: new Date(2013, 6, 7, 11) });
+
+                view.select(selection);
+
+                ok($(view._columns[1].slots[10].element).hasClass("k-state-selected"));
             });
 
             module("Multi Day View navigation", {
@@ -451,6 +460,16 @@
                 view.move(selection, keys.LEFT);
 
                 equal(selection.events.length, 0);
+            });
+
+            test("View correctly selects range on SHIFT + LEFT", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 10), end: new Date(2013, 6, 8, 11) });
+
+                view.move(selection, keys.LEFT, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 8, 10));
+                deepEqual(selection.end, new Date(2013, 6, 7, 11));
             });
 
             test("View moves selection with one slot on down arrow", function() {
