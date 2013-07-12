@@ -41,8 +41,7 @@ kendo_module({
                 return input[0].attributes[name] != null;
             }
             return false;
-        },
-        nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g;
+        };
 
     if (!kendo.ui.validator) {
         kendo.ui.validator = { rules: {}, messages: {} };
@@ -244,6 +243,7 @@ kendo_module({
                         invalid = true;
                     }
                 }
+
                 return !invalid;
             }
             return that.validateInput(that.element);
@@ -298,7 +298,18 @@ kendo_module({
         _findMessageContainer: function(fieldName) {
             var locators = kendo.ui.validator.messageLocators,
                 name,
-                containers = this.element.find("." + INVALIDMSG + "[" + kendo.attr("for") +"=" + fieldName.replace(nameSpecialCharRegExp, "\\$1") + "]");
+                containers = $(),
+                children = this.element[0].getElementsByTagName("*");
+
+            for (var idx = 0, length = children.length; idx < length; idx++) {
+                var element = children[idx];
+                if (element.className.indexOf(INVALIDMSG) > -1) {
+                    var attr = element.getAttribute(kendo.attr("for"));
+                    if (attr === fieldName) {
+                        containers = containers.add(element);
+                    }
+                }
+            }
 
             for (name in locators) {
                 containers = containers.add(locators[name].locate(this.element, fieldName));
