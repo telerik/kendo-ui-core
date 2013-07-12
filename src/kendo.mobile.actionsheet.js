@@ -37,7 +37,7 @@ kendo_module({
                 .on("click", BUTTONS, kendo.preventDefault);
 
             that.wrapper = element.parent();
-            that.shim = new ShimClass(that.wrapper, $.extend({modal: !(os.android || os.meego || os.wp)}, that.options.popup) );
+            that.shim = new ShimClass(that.wrapper, $.extend({modal: !(os.android || os.meego || os.wp || os.blackberry)}, that.options.popup) );
 
             kendo.notify(that, ui);
 

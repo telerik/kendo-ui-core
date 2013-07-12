@@ -1098,35 +1098,41 @@
 
 /* ActionSheet */
 
-.km-blackberry .km-shim,
-.km-phone .km-blackberry .km-actionsheet-wrapper
+.km-blackberry .km-shim
 {
-    background: rgba(0,0,0,.5);
+    background: darken(@blackberry-border-color, 100%);
+}
+
+.km-blackberry .km-shim > .k-animation-container
+{
+    width: 80% !important;
 }
 
 .km-blackberry .km-actionsheet-wrapper
 {
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background-color: @blackberry-main-color;
 }
 
 .km-blackberry .km-actionsheet
 {
-    position: static;
-    margin-left: 5%;
-    width: 90%;
+    position: relative;
     display: inline-block;
-    max-height: 80%;
+    width: 100%;
     border: 0;
-    background-color: @blackberry-light-background;
-    color: @blackberry-active-color;
     vertical-align: middle;
-    padding: .5em;
-    .border-radius(@blackberry-border-radius);
+    padding: 0;
+    .border-radius(0);
     .box-sizing(border-box);
-    .box-shadow(~"3px -3px 10px rgba(0,0,0,.3)");
+}
+
+.km-blackberry .km-actionsheet-title,
+.km-blackberry .km-actionsheet-cancel
+{
+    display: none;
 }
 
 .km-blackberry .km-actionsheet-wrapper:before
@@ -1138,8 +1144,7 @@
     width: 0;
 }
 
-.km-blackberry .km-actionsheet-title,
-.km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a
+.km-blackberry .km-actionsheet > li > a
 {
     font-size: 1.2em;
     font-weight: normal;
@@ -1147,56 +1152,23 @@
     display: block;
     line-height: 3rem;
     padding: 0 1em;
-    .border-radius(@blackberry-border-radius);
+    .border-radius(0);
+    color: @blackberry-main-background;
+    border-bottom: 1px solid @blackberry-border-color;
     text-decoration: none;
+}
+
+.km-blackberry .km-actionsheet > li:nth-child(2) > a
+{
+    border-top: 1px solid @blackberry-border-color;
 }
 
 .km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:hover,
 .km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:focus,
 .km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:active
 {
-    background: #a0a0a0;
-    .box-shadow(~"inset 0 1px 2px rgba(0,0,0,.3)");
-}
-
-.km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:hover
-{
-    background: rgba(160,160,160,.7);
-}
-
-.km-blackberry .km-actionsheet-title,
-.km-blackberry li.km-actionsheet-cancel
-{
-    background: @blackberry-light-background;
-    .linear-gradient-image(top, rgba(255,255,255,.5), rgba(255,255,255,0));
-    margin: .5em -.5em -.5em;
-    text-align: center;
-    line-height: 3.6rem;
-    border-top: 1px solid #d0d0d0;
-    .border-radius(0 0 @blackberry-border-radius @blackberry-border-radius);
-}
-
-.km-blackberry li.km-actionsheet-cancel > a
-{
-    text-align: center;
-    font-size: 1em;
-    line-height: 1.5rem;
-    padding-left: 2.5em;
-    padding-right: 2.5em;
-}
-
-.km-blackberry .km-actionsheet-title
-{
-    font-weight: bold;
-    font-size: 1.05em;
-    height: 3.6rem;
-    margin: -.5em -.5em .5em -.5em;
-    border-bottom: 1px solid #d0d0d0;
-    border-top: 0;
-    .border-radius(@blackberry-border-radius @blackberry-border-radius 0 0);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    background: @blackberry-active-background;
+    color: @blackberry-active-color;
 }
 
 /* SplitView */
