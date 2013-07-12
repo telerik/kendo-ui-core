@@ -463,14 +463,33 @@
                 deepEqual(selection.end, new Date(2013, 6, 7, 2, 0));
             });
 
-            test("View shrink selection up to one slot on down arrow", function() {
+            test("View increases selection on DOWN arrow", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 5, 0) });
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 1) });
 
-                view.move(selection, keys.DOWN);
+                view.move(selection, keys.DOWN, true);
 
-                deepEqual(selection.start, new Date(2013, 6, 7, 5, 0));
-                deepEqual(selection.end, new Date(2013, 6, 7, 6, 0));
+                deepEqual(selection.start, new Date(2013, 6, 7, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 2));
+            });
+
+            test("View decreases selection on DOWN arrow", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 10), end: new Date(2013, 6, 7, 8) });
+
+                view.move(selection, keys.DOWN, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 10));
+                deepEqual(selection.end, new Date(2013, 6, 7, 9));
+            });
+
+            test("View do nothing if Shift + DOWN when isAllDay", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 7), end: new Date(2013, 6, 7), isAllDay: true });
+
+                view.move(selection, keys.DOWN, true);
+
+                ok(selection.isAllDay);
             });
 
             test("View shrink selection up to one slot on down arrow (selected events)", function() {
@@ -525,7 +544,7 @@
 
                 ok(selection.isAllDay);
                 deepEqual(selection.start, new Date(2013, 6, 7));
-                deepEqual(selection.end, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
             });
 
             test("View moves selection to upper slot", function() {
