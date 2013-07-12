@@ -396,6 +396,104 @@
 
             })();
 
+            (function() {
+                var chart;
+                dataviz.ui.themes.foo = {
+                    chart: {
+                        foo: true,
+                        seriesDefaults: {
+                            foo: true
+                        },
+                        seriesColors: ["#f00"]
+                    }
+                };
+
+                function createChart(options) {
+                    chart = $("#container").kendoChart(options)
+                                           .data("kendoChart");
+                }
+
+                // ------------------------------------------------------------
+                module("setOptions");
+
+                test("extends original options", function() {
+                    createChart();
+
+                    chart.setOptions({
+                        foo: true
+                    });
+
+                    ok(chart._originalOptions.foo);
+                });
+
+                test("applies theme", function() {
+                    createChart();
+                    chart.setOptions({ theme: "foo" });
+
+                    ok(chart.options.foo);
+                });
+
+                test("does not taint original options with theme", function() {
+                    createChart({ theme: "foo" });
+
+                    chart.setOptions({ theme: "" });
+
+                    ok(!chart.options.foo);
+                });
+
+                test("does not taint series options with theme", function() {
+                    createChart({
+                        theme: "foo",
+                        series: [{ }]
+                    });
+
+                    chart.setOptions({ theme: "" });
+
+                    ok(!chart.options.series[0].foo);
+                });
+
+                test("does not taint series colors with theme", function() {
+                    createChart({
+                        series: [{ }]
+                    });
+
+                    chart.setOptions({ theme: "foo" });
+                    chart.setOptions({ theme: "" });
+
+                    ok(!chart.options.series[0].color);
+                });
+
+                test("resets series after grouping", function() {
+                    createChart({
+                        dataSource: {
+                            data: [{
+                                value: 1,
+                                group: "A"
+                            }, {
+                                value: 1,
+                                group: "B"
+                            }],
+                            group: {
+                                field: "group"
+                            }
+                        },
+                        series: [{
+                            field: "value"
+                        }]
+                    });
+
+                    chart.setOptions({
+                        series: [{
+                            data: [1, 2, 3]
+                        }]
+                    });
+
+                    chart.dataSource.read();
+
+                    equal(chart.options.series.length, 1);
+                });
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

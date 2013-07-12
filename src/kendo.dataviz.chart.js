@@ -205,10 +205,7 @@ kendo_module({
     var Chart = Widget.extend({
         init: function(element, userOptions) {
             var chart = this,
-                options,
-                themeOptions,
-                themes = dataviz.ui.themes || {},
-                theme, themeName;
+                options;
 
             kendo.destroy(element);
 
@@ -219,19 +216,9 @@ kendo_module({
                 .addClass(CSS_PREFIX + options.name.toLowerCase())
                 .css("position", "relative");
 
-            // Used by the ThemeBuilder
             chart._originalOptions = deepExtend({}, options);
 
-            themeName = options.theme;
-            theme = themes[themeName] || themes[themeName.toLowerCase()];
-            themeOptions = themeName && theme ? theme.chart : {};
-
-            resolveAxisAliases(options);
-            chart._applyDefaults(options, themeOptions);
-
-            chart.options = deepExtend({}, themeOptions, options);
-
-            applySeriesColors(chart.options);
+            chart._initTheme(options);
 
             chart.bind(chart.events, chart.options);
 
@@ -240,6 +227,28 @@ kendo_module({
             chart._initDataSource(userOptions);
 
             kendo.notify(chart, dataviz.ui);
+        },
+
+        _initTheme: function(options) {
+            var chart = this,
+                themes = dataviz.ui.themes || {},
+                themeName = options.theme,
+                theme = themes[themeName] || themes[themeName.toLowerCase()],
+                themeOptions = themeName && theme ? theme.chart : {},
+                seriesCopies = [],
+                series = options.series || [],
+                i;
+
+            for (i = 0; i < series.length; i++) {
+                seriesCopies.push($.extend({}, series[i]));
+            }
+            options.series = seriesCopies;
+
+            resolveAxisAliases(options);
+            chart._applyDefaults(options, themeOptions);
+
+            chart.options = deepExtend({}, themeOptions, options);
+            applySeriesColors(chart.options);
         },
 
         _initDataSource: function(userOptions) {
@@ -1159,6 +1168,18 @@ kendo_module({
 
             items = plotArea.pointsBySeriesIndex(index);
             highlight.show(items);
+        },
+
+        setOptions: function(options) {
+            var chart = this;
+
+            chart._originalOptions = deepExtend(chart._originalOptions, options);
+            chart.options = deepExtend({}, chart._originalOptions);
+            chart._sourceSeries = null;
+
+            Widget.fn.setOptions.call(chart, options);
+
+            chart._initTheme(chart.options);
         },
 
         destroy: function() {
