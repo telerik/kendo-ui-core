@@ -684,6 +684,7 @@ td.k-state-focused.k-state-selected,
 .k-splitbar-horizontal-hover:hover,
 .k-splitbar-vertical-hover:hover,
 .k-list>.k-state-hover,
+.k-scheduler .k-scheduler-toolbar ul li.k-state-hover,
 .k-pager-wrap .k-link:hover,
 .k-dropdown .k-state-focused,
 .k-imagebrowser-dropzone
@@ -1428,21 +1429,21 @@ div.k-imagebrowser-dropzone em
     border-color: @group-border-color;
 }
 
+.k-secondary .k-picker-wrap,
+.k-secondary .k-dropdown-wrap,
+.k-secondary .k-numeric-wrap,
+.k-secondary.k-scheduler-toolbar > ul > li
+{
+    background-color: @header-background-color;
+    border-color: @secondary-border-color;
+}
+
 .k-secondary
 {
-    .k-picker-wrap,
-    .k-dropdown-wrap,
-    .k-numeric-wrap
-    {
-        background-color: @header-background-color;
-        border-color: @secondary-border-color;
-    }
-
 	.k-editor-button .k-tool-icon
 	{
 		border-color: @secondary-border-color;
 	}
-
 	
     .k-editor-button .k-state-active
     {
