@@ -10,7 +10,6 @@ kendo_module({
 
     // Imports ================================================================
     var $ = jQuery,
-        doc = document,
         math = Math,
 
         kendo = window.kendo,
@@ -514,10 +513,6 @@ kendo_module({
         return math.round(coord) + 0.5;
     }
 
-    function supportsCanvas() {
-        return !!doc.createElement("canvas").getContext;
-    }
-
     function addGradientStops(gradient, stops) {
         var i,
             length = stops.length,
@@ -535,7 +530,7 @@ kendo_module({
     }
 
     // Exports ================================================================
-    if (supportsCanvas) {
+    if (dataviz.supportsCanvas()) {
         dataviz.ViewFactory.current.register("canvas", CanvasView, 30);
     }
 
@@ -546,9 +541,7 @@ kendo_module({
         CanvasPath: CanvasPath,
         CanvasRing: CanvasRing,
         CanvasText: CanvasText,
-        CanvasView: CanvasView,
-
-        supportsCanvas: supportsCanvas
+        CanvasView: CanvasView
     });
 
 })(window.kendo.jQuery);
