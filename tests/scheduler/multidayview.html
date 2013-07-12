@@ -1321,7 +1321,7 @@
                 view.content.find(".k-event").trigger("dblclick");
             });
 
-            test("_rangeToDates returns date for slot", function() {
+            test("slotByCell returns date for slot", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
                         dates: [
@@ -1329,7 +1329,7 @@
                         ]
                     });
 
-                var result = view._rangeToDates(view.content.find("td").eq(2));
+                var result = view.slotByCell(view.content.find("td").eq(2));
 
                 equal(result.start.getTime(), new Date(2013, 1, 26, 2, 0, 0).getTime());
                 equal(result.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());

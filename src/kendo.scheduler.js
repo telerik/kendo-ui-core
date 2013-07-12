@@ -480,7 +480,7 @@ kendo_module({
                 item = getOccurrenceByUid(this._data, uid);
                 this._updateSelection(item, [uid]);
             } else {
-                dates = this.view()._rangeToDates(item);
+                dates = this.view().slotByCell(item);
                 dates.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
 
                 this._updateSelection(dates);

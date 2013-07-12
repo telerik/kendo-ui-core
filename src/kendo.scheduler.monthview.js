@@ -344,7 +344,7 @@ kendo_module({
             }
         },
 
-        _rangeToDates: function(cell) {
+        slotByCell: function(cell) {
             var offset = $(cell).offset();
             return this._slotByPosition(offset.left, offset.top);
         },
