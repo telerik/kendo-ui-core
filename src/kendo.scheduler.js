@@ -98,7 +98,7 @@ kendo_module({
                 });
         },
         TIMEZONEPOPUP = function(container, options) {
-            $('<a href="#">' + options.messages.timezoneEditorButton + '<a/>').click(options.click).appendTo(container);
+            $('<a href="#" class="k-button">' + options.messages.timezoneEditorButton + '<a/>').click(options.click).appendTo(container);
         },
         TIMEZONEEDITOR = function(container, options) {
             $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
