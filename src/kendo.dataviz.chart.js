@@ -234,9 +234,15 @@ kendo_module({
                 themes = dataviz.ui.themes || {},
                 themeName = options.theme,
                 theme = themes[themeName] || themes[themeName.toLowerCase()],
-                themeOptions = themeName && theme ? theme.chart : {};
+                themeOptions = themeName && theme ? theme.chart : {},
+                seriesCopies = [],
+                series = options.series || [],
+                i;
 
-            options.series = $.extend(true, [], options.series);
+            for (i = 0; i < series.length; i++) {
+                seriesCopies.push($.extend({}, series[i]));
+            }
+            options.series = seriesCopies;
 
             resolveAxisAliases(options);
             chart._applyDefaults(options, themeOptions);
