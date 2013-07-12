@@ -987,14 +987,14 @@ kendo_module({
             SchedulerView.fn.destroy.call(this);
 
             if (kendo.support.mobileOS) {
-                that._closeUserEvents.destroy();
+                this._closeUserEvents.destroy();
 
-                if (that.options.editable.create !== false) {
-                    that._addUserEvents.destroy();
+                if (this.options.editable.create !== false) {
+                    this._addUserEvents.destroy();
                 }
 
-                if (that.options.editable.update !== false) {
-                    that._editUserEvents.destroy();
+                if (this.options.editable.update !== false) {
+                    this._editUserEvents.destroy();
                 }
             }
         },
