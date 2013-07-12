@@ -138,7 +138,9 @@ kendo_module({
             if (dataviz.CanvasView && view instanceof dataviz.CanvasView) {
                 deepExtend(options, {
                     categoryAxis: {
-                        visible: false
+                        crosshair: {
+                            visible: false
+                        }
                     }
                 });
             }
