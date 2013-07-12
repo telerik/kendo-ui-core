@@ -9225,6 +9225,9 @@ kendo_module({
             for (j = 0; j < fields.length; j++) {
                 field = fields[j];
                 value = item.value[field] || item.fields[field];
+                if (typeof item.value === "number" && field === "value") {
+                    value = item.value;
+                }
                 originalField = originalFields[field];
                 if (defined(value)) {
                     if (!defined(result[originalField])) {
@@ -9251,11 +9254,13 @@ kendo_module({
         var aggregate = series.aggregate,
             result;
 
-        if (typeof aggregate === OBJECT) {
-            result = execComposite(data, aggregate, series, dataItems, group);
-        } else {
-            result = execSimple(data, aggregate, series. dateItems, group);
+        if (typeof aggregate === STRING) {
+            aggregate = { value: aggregate };
+        } else if (!defined(aggregate)) {
+            aggregate = { value: "max" };
         }
+
+        result = execComposite(data, aggregate, series, dataItems, group);
 
         return result;
     }
