@@ -877,12 +877,19 @@ kendo_module({
             var result = {};
 
             if (resources.length) {
-                var index = slot.groupIndex;
+                var index = slot.index;
+                var cellsPerRow = this._columnOffsetForResource(resources.length) * this._groupCount();
 
                 for (var idx = 0, length = resources.length; idx < length; idx++) {
                     var resource = resources[idx];
 
-                    var groupIndex = Math.floor(index%resource.dataSource.view().length);
+                    var groupCount = resource.dataSource.view().length;
+                    var columnCount = cellsPerRow / groupCount;
+                    var rowIndex = Math.floor(index / cellsPerRow);
+                    var offset = (columnCount * groupCount * rowIndex);
+                    var groupIndex = Math.floor((index - offset) / columnCount);
+
+                    cellsPerRow /= groupCount;
 
                     var value = resourceValue(resource, resource.dataSource.at(groupIndex));
 
