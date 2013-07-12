@@ -8,6 +8,7 @@
 @blackberry-navbar-background: #015e98;
 @blackberry-border-color: rgba(180,180,180,.3);
 @blackberry-light-border-color: lighten(@blackberry-border-color, 100%);
+@blackberry-dark-border-color: darken(@blackberry-border-color, 60%);
 @blackberry-border-radius: 3px;
 @blackberry-switch-radius: 2em;
 @blackberry-light-background: #e6e6e6;
@@ -262,7 +263,7 @@
     .border-radius(3em);
     border: 1px solid darken(@blackberry-border-color, 30%);
     background-color: fade(@blackberry-border-color, 50%);
-    .box-shadow(inset 0 1px 3px darken(@blackberry-border-color, 60%));
+    .box-shadow(inset 0 1px 3px @blackberry-dark-border-color);
 }
 
 .km-blackberry .km-switch-handle
@@ -270,8 +271,8 @@
     background: fade(@blackberry-light-border-color, 90%);
     .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.15));
     .border-radius(@blackberry-switch-radius);
-    -webkit-box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px darken(@blackberry-border-color, 60%);
-    box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px darken(@blackberry-border-color, 60%);
+    -webkit-box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px @blackberry-dark-border-color;
+    box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px @blackberry-dark-border-color;
     width: 1.7em;
     height: 1.7em;
     margin: 0 4px 0 0;
@@ -678,7 +679,7 @@
 .km-blackberry .k-slider .k-draghandle,
 .km-blackberry .k-slider .k-draghandle:hover
 {
-    top: -.32em;
+    top: -.34em;
     border: 0;
     background-color: #eee;
     .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,0));
@@ -767,30 +768,36 @@
 {
     font-size: 1em;
     .appearance(none);
-    border: 1px solid rgba(0,0,0,.5);
+    border: 1px solid @blackberry-dark-border-color;
     padding: .4em;
     outline: none;
+    background: fade(@blackberry-dark-border-color, 3%);
     .border-radius(@blackberry-border-radius);
 }
 
+.km-phone .km-blackberry .km-list input[type=text]:not(.k-input),
 .km-phone .km-blackberry .km-list input[type=password],
 .km-phone .km-blackberry .km-list input[type=search],
 .km-phone .km-blackberry .km-list input[type=number],
 .km-phone .km-blackberry .km-list input[type=tel],
 .km-phone .km-blackberry .km-list input[type=url],
-.km-phone .km-blackberry .km-list input[type=email],
-.km-phone .km-blackberry .km-list input[type=month],
+.km-phone .km-blackberry .km-list input[type=email]
+.km-phone .km-blackberry .km-list input[type=datetime],
+.km-blackberry .k-dropdown
+{
+    margin-top: -1em;
+}
+
 .km-phone .km-blackberry .km-list input[type=color],
+.km-phone .km-blackberry .km-list input[type=month],
 .km-phone .km-blackberry .km-list input[type=week],
 .km-phone .km-blackberry .km-list input[type=date],
 .km-phone .km-blackberry .km-list input[type=time],
-.km-phone .km-blackberry .km-list input[type=datetime],
 .km-phone .km-blackberry .km-list input[type=datetime-local],
-.km-phone .km-blackberry .km-list input[type=text]:not(.k-input),
 .km-phone .km-blackberry .km-list select:not([multiple]),
 .km-blackberry .k-dropdown
 {
-    margin-top: -1.1em;
+    margin-top: -1.2em;
 }
 
 .km-blackberry .km-list input[type=password],
@@ -835,7 +842,7 @@
 {
     display: block;
     padding: .05em 2em .05em .4em;
-    border: 1px solid rgba(0,0,0,.5);
+    border: 1px solid @blackberry-dark-border-color;
     .border-radius(@blackberry-border-radius);
 }
 
@@ -854,7 +861,7 @@
 .km-blackberry input[type=text]:not(.k-input),
 .km-blackberry textarea
 {
-    .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
+    .box-shadow(inset 0 1px 1px @blackberry-border-color);
 }
 
 .km-blackberry input[type=password]:focus,
@@ -866,20 +873,10 @@
 .km-blackberry input[type=text]:not(.k-input):focus,
 .km-blackberry textarea:focus
 {
-    border: 1px solid rgba(0,50,100,.7);
-    .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 0 2px rgba(5,127,228,.6)");
-}
-
-.km-blackberry input[type=color],
-.km-blackberry input[type=week],
-.km-blackberry input[type=date],
-.km-blackberry input[type=time],
-.km-blackberry input[type=month],
-.km-blackberry input[type=datetime],
-.km-blackberry input[type=datetime-local],
-.km-blackberry select:not([multiple])
-{
-    margin-top: -1.05em;
+    border: 2px solid @blackberry-active-background;
+    padding: ~"-webkit-calc(.4em - 1px)";
+    padding: ~"-moz-calc(.4em - 1px)";
+    padding: ~"calc(.4em - 1px)";
 }
 
 .km-blackberry input[type=color],
@@ -892,16 +889,15 @@
 .km-blackberry select:not([multiple]),
 .km-blackberry .k-dropdown-wrap
 {
-    .linear-gradient-image(left, rgba(0,0,0,.3), rgba(0,0,0,.3),
-                           top, rgba(0,0,0,0), rgba(0,0,0,.2));
+    background-color: transparent;
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.1));
     background-position: 100% 0;
     background-repeat: no-repeat;
     background-size: 1.8em 100%, auto;
 
-    background: 100% 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAMAAAB28zu6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIVBMVEX////19fT19fX19fX19fT19fT19fX19fP19fT19fT19fRLB2KYAAAACnRSTlMA7xBQr5/PMN+AkwDcBAAAANFJREFUeF7t2LuVwzAAA0HKpPxh/wVfiFS+SPCbqQDBRhg/BAAAAAAAAAAAAAAAAACA13Nf93yNW3jvb7zHLezvGP1v5/7GOW7hcezrjse4h7mvm+Mu1r5qjSgIJHHcxSyKI1ZTHAmkJ46YRXHEaoojgfTEEbMojlhNcSSQnjhiFsURqymOBNITR8yiOGI1xZFAeuKIWRRHrKY4EkhPHDGL4ojVFkcCSRwdZlEcsZriSCCJo8dMHEXOPKRFPsc+PuO3AQAAAAAAAAAAAAAAAADwB5LFJn8OLOPPAAAAAElFTkSuQmCC"),
-                100% 0 no-repeat -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0,0,0,.3)), to(rgba(0,0,0,.3))), -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(0,0,0,.2))) #eee;
-    -webkit-background-size: auto 100%, 1.8em 100%, auto;
-    .box-shadow(~"inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.2)");
+    background: ~"-webkit-calc(100% - 5px)" 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAQAAADrJAMDAAABG2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS4xLjIiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+MahxaQAAA/RJREFUeF7t1OlqVVcYh/HnIiz0LrYedWs8UXGc5yGKsxXtVVjwSryOFnoFxYq1TgQVhwQVT+KE0fihhRJ6IHkXGc7Jztr7PO/z8f9l82Oz+KeSrGcAE1pooU1ooU1ooYU2oYU2oYUW2oQW2oQWWmgTWmgTWmihTWihTWihhTahhTahhRbahBbahBZaaBNaaBNaaKFNaKFNaKGFNqGFNqGFFtqEFtqEFlpoE1poE1pooU1ooU1ooYU2oYVmFTf4lRusmlmo13W/H8gXmhE6M8MYW2sIvZWxGYAOI9lC8wOd7sD0f9T1Yv7eBaDDj7lC/zJrmGZLjaC3MD0L4Gau0L/NGb6xmXrcZr7NAfg9/z+621eGyf+G+RoA3Mz3jR4PhimGa8n8Jos3Oo5t4TBFm3yvzVQIsA1yhU5Tf8mWus2XFHM20HFsD4fPWVK3+RwCbIesoOPYEQ6fsqNu8yk02QF1gE5Tf8yKus3HUGQnZAkdx85w+MAm8rhNfEgxZwsdx65weM9QBsxDvA81dkF10M2nHmIytNgN2UPHsTscJtnIyt3GBPMeyB46HXvCYYINrMxtYCLFXBvoOPaGQ2dFqEs6ocJeqD90mrqsnPldirkJ0Gnqd5QZMO+D5kDDvnB8Wxl1ydtQYD80Cxr2h/ObSqhLXqeYmwadpn697NQl46HAAWgmNBwIqccpq2fmIDQXGg6G1GOsZ3luPWOhwCFoNjQcqpB6Ha9SzE2HTlO/Yh39vbW8DAUOw2BAw+EQ4CVrK2A+AoMDDUdChBd9o27xIhQ4CoMFnaZu9YX5eYp58KDhaIjxvGfqFs9CgWMwmNBwLAR51hN1i6ehwHEYXGg4HqI8XTJ1iyehwAkYZOg09ZMlUbcYTTELDSdCnNFFU7d4HAqcBKEB4GQI9HhR1Gt4FAqcAqG7nUpR98g8AkIvhPoRa5j/VvNwocxCw0iI9ZDV83gUPAgFToPQcadDsAdpaqDgfihwBoROdyZBXSSZ/w4FzoLQS6G+H1IX3AsFzoHQ83c2xLs3h7rgbi/MQsO5EPCvLjVQcCcUOA9CL7zzIeLd/6kL/gwFLoDQ/aC+QwEU3A7XiyD04rsQYt6m4I9+MgsNF2PqUOASCL30LgWkUZdB6OWnvgJC997lapiFhitpZq7StxMafkowX6OvJzRcDZiv0/cTGq7NYv6ZZTmh4Xo1zEJDyS1GuUUJQluV0Ca00EKb0EKb0EILbUILbUILLbQJLbQJLbTQJrTQJrTQQpvQQpvQQgttQgttQgsttAkttAkttNAmtNAmtNBCm9BCm9BCC21CC21CCy20CS20CS200Ca00Ca00EKb0EKb0EILbUILbf8CmhlC4QhCFjcAAAAASUVORK5CYII="),
+                -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(0,0,0,.1))) transparent;
+    -webkit-background-size: auto 90%, auto;
 }
 
 .km-blackberry input[type=color]:active,
@@ -923,6 +919,9 @@
 {
     color: @blackberry-active-color;
     background-color: @blackberry-active-background;
+    background: ~"-webkit-calc(100% - 5px)" 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAQAAADrJAMDAAADrUlEQVR4Xu3a6UocWQCG4bqJhrkL933Lvu9LK25JJpjchTA3MhcSmCsIg4i4ZCSImjSJ2GpCcMuPbwwFdoIfpklOl6e63+/l/C8eDvWjqESZRPEDAE1AAw00AQ00AQ000AQ00AQ00EAT0EAT0EADTUADTUADDTQBDTQBDTTQBDTQBDTQQBPQQBPQQANNQANNQAMNNAENNAENNNAENNAENNBAE9BAE9BAA01AA01AAw00AQ00AQ000AR0h/7Wf0enA+ha9kKVvQS6Vk3px70AuhY918lNAR26P+X3HOiQPZNZaGqgn+r0PQM6RE/08z0FOjyz7wnQv9Ok3P4NSw30hNxm1KTXcpsE+lcal9usmpQcHX+rJ4AOyfytJs3IbRxon29MbnMpcyhqoEflNn/MXKGeldsY0NU0IreFlPkE9ZzcRoEOyZxSz8ttBOjTGpbboppTgDDUQBfltqSWnwA0aUFuw0C7HntmtVYB0KxFuRWBro75jWH2tWhJbo+B/r5Hclv2zD616s3p1EA/lNvblDkA9SOgv/UgEHNKvSy3h0B75hXDXC31W7k9aGzo+3JbtczVU6946saFvie3NcMchvp+Y0LfDcTsqVfldq/xoD3zutoCAbRqTW53Gwv6jtzeqT0gQJvWPXXjQN/2zMH/EG3XO7ndaQxoz/w+Zc6I+nb9Q9+SW0mdNfuf+r3cbtU39E25fTDM4epUyVPXL/SNDJg99Qe53axPaM+8YZizo75Rf9DX5baZMmdCvSG36/UFfU1u5ZQ5M+rNs6SuV2ZPXZbbtfqA9sxb6lKSeV3a8tT5h74qt211pwDRUF/NN/QVz6weJWdWt7Y9dX6hL8ttxzBnW4925HYln9Ce+ZN6lZx5vfokt8v5g74kt8/qMwAxUV/KF/TFqJh9ffqcJXV2zF9S5qiov8jtYj6gL8ht1zDHQL0rtwvxQ5+X255hjoV6T27nI4AOwxw/dbzQBfuJfV/9SqKuX/sG+qP+iBV62jAfaEBJ9A3owFD/FSv0K8M8qCQXDerwBPQ/ebnRh445fur4b3RBZVX2VUNKctWQvqqychzvaF/xmLqkc0py1zmVjpmLcX/rKGhar45OIU/A/vmzhKb4oQlooIEmoIEmoIEGmoAGmoAGGmgCGmgCGmigCWigCWiggSaggSaggQaagAaagAYaaAIaaAIaaKAJaKAJaKCBJqCBJqCBBpqABpqABhpoAhpoAhpooAlooAlooIEmoIEmoIEGmoAGmv4H0vCT+B5BT60AAAAASUVORK5CYII="),
+                -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(0,0,0,.1))), @blackberry-active-background;
+    -webkit-background-size: auto 90%, auto;
 }
 
 .km-blackberry .km-list .k-dropdown .k-input
@@ -1100,7 +1099,7 @@
 
 .km-blackberry .km-shim
 {
-    background: darken(@blackberry-border-color, 100%);
+    background: @blackberry-dark-border-color;
 }
 
 .km-blackberry .km-shim > .k-animation-container
