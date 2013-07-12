@@ -32,18 +32,21 @@ kendo_module({
         EMPTYTILE = kendo.template('<li class="k-tile-empty"><strong>${text}</strong></li>'),
         TOOLBARTMPL = '<div class="k-widget k-toolbar k-floatwrap">' +
                             '<div class="k-toolbar-wrap">' +
-                                '#if(showUpload) { # ' +
-                                    '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-button-bare k-upload-button">' +
+                                '# if (showUpload) { # ' +
+                                    '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-upload-button">' +
                                         '<span class="k-icon k-add"></span>#=messages.uploadFile#<input type="file" name="file" /></div></div>' +
-                                '#}#' +
-                                '#if(showCreate) {#' +
-                                    '<button type="button" class="k-button k-button-icon k-button-bare"><span class="k-icon k-addfolder"></span></button>' +
-                                '#}#' +
-                                '#if(showDelete) {#' +
-                                    '<button type="button" class="k-button k-button-icon k-button-bare k-state-disabled"><span class="k-icon k-delete"></span></button>&nbsp;' +
-                                '#}#' +
+                                '# } #' +
+
+                                '# if (showCreate) { #' +
+                                     '<button type="button" class="k-button k-button-icon"><span class="k-icon k-addfolder" /></button>' +
+                                '# } #' +
+
+                                '# if (showDelete) { #' +
+                                    '<button type="button" class="k-button k-button-icon"><span class="k-icon k-delete" /></button>&nbsp;' +
+                                '# } #' +
                             '</div>' +
-                            '<div class="k-tiles-arrange">#=messages.orderBy#: <a href="\\#" class="k-link"><span>#=messages.orderByName#</span><span class="k-icon k-i-arrow-s"></span></a>' +
+                            '<div class="k-tiles-arrange">' +
+                                '#=messages.orderBy#: <a href="\\#" class="k-link"><span>#=messages.orderByName#</span><span class="k-icon k-i-arrow-s" /></a>' +
                             '</div>' +
                         '</div>';
 
@@ -182,7 +185,7 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("k-imagebrowser");
+            that.element.addClass("k-imagebrowser k-secondary");
 
             that.element
                 .on(CLICK + NS, ".k-toolbar button:not(.k-state-disabled):has(.k-delete)", proxy(that._deleteClick, that))
