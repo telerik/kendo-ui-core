@@ -197,6 +197,19 @@ kendo_module({
             return event;
         },
 
+        moveSelectionToPeriod: function(selection) {
+            var date = new Date(selection.start);
+            var lastDayOfMonth = this._lastDayOfMonth;
+            var month = lastDayOfMonth.getMonth();
+
+            date.setFullYear(lastDayOfMonth.getFullYear(), month);
+            if (date.getMonth() != month) {
+                date = new Date(lastDayOfMonth);
+            }
+
+            selection.start = selection.end = date;
+        },
+
         _templates: function() {
             var options = this.options,
                 settings = extend({}, kendo.Template, options.templateSettings);
@@ -754,6 +767,8 @@ kendo_module({
             } else {
                 this._renderEvents(events, 0);
             }
+
+            this.trigger("render");
        },
 
        _renderEvents: function(events, groupIndex) {

@@ -643,6 +643,47 @@
                 equal(selection.events[0], firstEvent.uid);
             });
 
+            test("moveSelectionToPeriod updates selection start/end to current month", function() {
+                var view = setup();
+                var date = new Date(2013, 2, 1);
+                var selection = createSelection({
+                    start: date,
+                    end: date
+                });
+
+                view.moveSelectionToPeriod(selection);
+
+                equal(selection.start.getMonth(), 1);
+                equal(selection.end.getMonth(), 1);
+            });
+
+            test("moveSelectionToPeriod updates selection start/end to current year", function() {
+                var view = setup();
+                var date = new Date(2014, 2, 1);
+                var selection = createSelection({
+                    start: date,
+                    end: date
+                });
+
+                view.moveSelectionToPeriod(selection);
+
+                equal(selection.start.getFullYear(), 2013);
+                equal(selection.end.getFullYear(), 2013);
+            });
+
+            test("moveSelectionToPeriod updates selection start/end to last day of month", function() {
+                var view = setup();
+                var date = new Date(2013, 2, 31);
+                var selection = createSelection({
+                    start: date,
+                    end: date
+                });
+
+                view.moveSelectionToPeriod(selection);
+
+                deepEqual(selection.start, new Date(2013, 1, 28));
+                deepEqual(selection.end, new Date(2013, 1, 28));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
