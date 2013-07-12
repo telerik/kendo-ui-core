@@ -343,6 +343,11 @@ kendo_module({
                     that.content.height(scrollbar * 2 + 1);
                 }
                 that.times.height(contentDiv.clientHeight);
+
+                var timesTable = that.times.find("table");
+                if (timesTable.length) {
+                    timesTable.height(that.content.find("table")[0].clientHeight);
+                }
             }
 
             if (contentDiv.offsetWidth - contentDiv.clientWidth > 0) {
@@ -430,6 +435,10 @@ kendo_module({
             }
 
             return createLayoutConfiguration("columns", resources, inner);
+        },
+
+        _isVerticallyGrouped: function() {
+            return this.groupedResources.length && this.options.groupOrientation === "vertical";
         },
 
         _createRowsLayout: function(resources, inner) {

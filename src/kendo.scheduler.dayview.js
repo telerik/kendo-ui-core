@@ -480,8 +480,6 @@ kendo_module({
 
             this._columns = columns;
 
-            //tableRows = allDayRows;
-
             var rows = [];
 
             var row = { slots: [], events: [] };
@@ -870,7 +868,6 @@ kendo_module({
 
                 that.trigger("navigate", { view: "day", date: that._slotIndexDate(cell.index()) });
             });
-
         },
 
         startDate: function() {
@@ -1177,10 +1174,6 @@ kendo_module({
                     });
                 }
             }
-        },
-
-        _isVerticallyGrouped: function() {
-            return this.groupedResources.length && this.options.groupOrientation === "vertical";
         },
 
         _positionEvent: function(event, element, dateSlotIndex, timeResouceOffset) {
