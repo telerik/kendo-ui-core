@@ -416,9 +416,12 @@ kendo_module({
         },
 
         _selectable: function() {
-            var that = this;
+            var that = this,
+                selectEvent = kendo.support.mobileOS ? "touchend" : "mousedown";
+
             that._tabindex();
-            that.wrapper.on("mousedown" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
+
+            that.wrapper.on(selectEvent, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
                 that._createSelection(e.currentTarget);
                 that.wrapper.focus();
             });

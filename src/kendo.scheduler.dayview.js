@@ -652,7 +652,7 @@ kendo_module({
 
             if (that.options.editable.update !== false) {
                 that._editUserEvents = new kendo.UserEvents(that.element, {
-                    filter: ".k-event",
+                    filter: ".k-event.k-state-selected",
                     tap: function(e) {
                         if ($(e.event.target).closest("a:has(.k-si-close)").length === 0) {
                             that.trigger("edit", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });

@@ -265,31 +265,77 @@ kendo_module({
         },
 
         _editable: function() {
-            var that = this;
-            if (that.options.editable) {
+            if (this.options.editable) {
+                if (kendo.support.mobileOS) {
+                    this._touchEditable();
+                } else {
+                    this._mouseEditable();
+                }
 
-                that.element.on("click" + NS, ".k-scheduler-monthview .k-event a:has(.k-si-close)", function(e) {
-                    that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+            }
+        },
+
+        _mouseEditable: function() {
+            var that = this;
+            that.element.on("click" + NS, ".k-scheduler-monthview .k-event a:has(.k-si-close)", function(e) {
+                that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+                e.preventDefault();
+            });
+
+            if (that.options.editable.create !== false) {
+                that.element.on("dblclick" + NS, ".k-scheduler-monthview .k-scheduler-content td", function(e) {
+                    var offset = $(e.currentTarget).offset();
+                    var slot = that._slotByPosition(offset.left, offset.top);
+                    var resourceInfo = that._resourceBySlot(slot);
+
+                    that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.start, end: slot.end }, resourceInfo ) });
                     e.preventDefault();
                 });
+            }
 
-                if (that.options.editable.create !== false) {
-                    that.element.on("dblclick" + NS, ".k-scheduler-monthview .k-scheduler-content td", function(e) {
-                        var offset = $(e.currentTarget).offset();
+            if (that.options.editable.update !== false) {
+                that.element.on("dblclick" + NS, ".k-scheduler-monthview .k-event", function(e) {
+                    that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+                    e.preventDefault();
+                });
+            }
+        },
+
+        _touchEditable: function() {
+            var that = this;
+
+            that._closeUserEvents = new kendo.UserEvents(that.element, {
+               filter: ".k-scheduler-monthview .k-event a:has(.k-si-close)",
+               tap: function(e) {
+                    that.trigger("remove", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
+                    e.preventDefault();
+               }
+            });
+
+            if (that.options.editable.create !== false) {
+                that._addUserEvents = new kendo.UserEvents(that.element, {
+                    filter: ".k-scheduler-monthview .k-scheduler-content td",
+                    tap: function(e) {
+                        var offset = $(e.target).offset();
                         var slot = that._slotByPosition(offset.left, offset.top);
                         var resourceInfo = that._resourceBySlot(slot);
 
                         that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.start, end: slot.end }, resourceInfo ) });
                         e.preventDefault();
-                    });
-                }
+                    }
+                });
+            }
 
-                if (that.options.editable.update !== false) {
-                    that.element.on("dblclick" + NS, ".k-scheduler-monthview .k-event", function(e) {
-                        that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
-                        e.preventDefault();
-                    });
-                }
+            if (that.options.editable.update !== false) {
+                that._editUserEvents = new kendo.UserEvents(that.element, {
+                    filter:  ".k-scheduler-monthview .k-event.k-state-selected",
+                    tap: function(e) {
+                        if ($(e.event.target).closest("a:has(.k-si-close)").length === 0) {
+                            that.trigger("edit", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
+                            e.preventDefault();
+                        }
+                    }
+                });
             }
         },
 
@@ -934,6 +980,18 @@ kendo_module({
             }
 
             SchedulerView.fn.destroy.call(this);
+
+            if (kendo.support.mobileOS) {
+                that._closeUserEvents.destroy();
+
+                if (that.options.editable.create !== false) {
+                    that._addUserEvents.destroy();
+                }
+
+                if (that.options.editable.update !== false) {
+                    that._editUserEvents.destroy();
+                }
+            }
         },
 
         events: ["remove", "add", "edit", "navigate"],
