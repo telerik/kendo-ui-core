@@ -994,8 +994,8 @@ kendo_module({
         _renderItems: function(dataItems, callback) {
             var items = $(kendo.render(this.template, dataItems));
             callback(items);
-            this._enhanceItems(items);
             mobile.init(items);
+            this._enhanceItems(items);
 
             return items;
         },
