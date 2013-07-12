@@ -453,6 +453,11 @@ kendo_module({
                 } else if (key === keys.ENTER) {
                     if (selection.events.length) {
                         that.editEvent(selection.events[0]);
+                    } else {
+                        that.addEvent({
+                            start: selection.start,
+                            end: selection.end
+                        });
                     }
                 } else if (view.move(selection, key, shiftKey)) {
                     start = selection.start;

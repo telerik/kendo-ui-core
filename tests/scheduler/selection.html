@@ -354,6 +354,25 @@
                 equal(scheduler.calls("editEvent"), 1);
                 equal(scheduler.args("editEvent")[0], e);
             });
+
+            test("scheduler adds a new event in empty selection on enter", function() {
+                var now = new Date();
+                var start = new Date(now.setHours(10));
+                var end = new Date(now.setHours(11));
+
+                stub(scheduler, "addEvent");
+
+                container.focus();
+                scheduler._selection.start = start;
+                scheduler._selection.end = end;
+
+                keydown(keys.ENTER);
+
+                var eventInfo = scheduler.args("addEvent")[0];
+                equal(scheduler.calls("addEvent"), 1);
+                equal(eventInfo.start, start);
+                equal(eventInfo.end, end);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
