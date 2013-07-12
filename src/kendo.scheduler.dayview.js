@@ -1812,12 +1812,12 @@ kendo_module({
 
         move: function(selection, key, shiftKey) {
             var options = this.options,
+                startTime = options.startTime,
                 interval = (options.majorTick * MS_PER_MINUTE) / (options.minorTickCount || 1),
                 start = new Date(selection.start),
                 end = new Date(selection.end),
                 multipleSelection = Math.abs(start - end) > interval,
                 isAllDay = selection.isAllDay,
-                //events = selection.events,
                 startSlotIndex, endSlotIndex,
                 startSlot, endSlot,
                 offsetColumn = true,
@@ -1825,69 +1825,94 @@ kendo_module({
 
             if (key === keys.DOWN) {
                 handled = true;
+
                 if (isAllDay) {
-                    isAllDay = false;
-                    startSlotIndex = 0;
-                    endSlotIndex = -1;
+                    selection.isAllDay = false;
+                    start.setHours(startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
+                    end = new Date(start);
+                    setTime(end, interval);
                 } else {
-                    startSlotIndex = 1;
-                    endSlotIndex = 0;
+                    if (!shiftKey) {
+                        if (multipleSelection) {
+                            start = new Date(end);
+                        } else {
+                            setTime(start, interval);
+                        }
+                    }
+
+                    setTime(end, interval);
+                    if (start.getTime() === end.getTime()) {
+                        setTime(start, -interval);
+                        setTime(end, interval);
+                    }
                 }
 
-                if (multipleSelection) {
-                    endSlotIndex = startSlotIndex = 0;
-                    offsetColumn = false;
-                    start = end;
+                if ((Math.abs(start - end) > interval && !this._slotByDate(new Date(end - interval))) || !this._slotByDate(start)) {
+                    start = selection.start;
+                    end = selection.end;
                 }
-
-                startSlot = this._slotByDate(start, startSlotIndex, offsetColumn);
-                endSlot = this._slotByDate(end, endSlotIndex, offsetColumn);
-                endSlot = endSlot || startSlot;
             } else if (key === keys.UP) {
                 handled = true;
+                if (!shiftKey) {
+                    if (multipleSelection) {
+                        if (end < start) {
+                            start = new Date(end);
+                        }
 
-                startSlotIndex = -1;
-                endSlotIndex = -2;
-
-                if (multipleSelection) {
-                    endSlotIndex = startSlotIndex;
-                    end = start;
+                        end = new Date(start);
+                    }
+                    setTime(start, -interval);
+                } else {
+                    //TODO: handle decrease of selection
                 }
 
-                startSlot = this._slotByDate(start, startSlotIndex);
-                endSlot = this._slotByDate(end, endSlotIndex);
+                setTime(end, -interval);
 
-                if (options.allDaySlot && !startSlot) {
-                    isAllDay = true;
-                    startSlot = this._slotByDate(start);
-                    endSlot = this._slotByDate(end, -1);
+                if (start.getTime() === end.getTime()) {
+                    if (!shiftKey) {
+                        setTime(end, interval);
+                    } else {
+                        setTime(start, interval);
+                        setTime(end, -interval);
+                    }
                 }
 
-                endSlot = endSlot || startSlot;
+                if (shiftKey && !this._slotByDate(end < start ? end : start)) {
+                    selection.events = [];
+                    return handled;
+                } else if (!shiftKey && !this._slotByDate(start)) {
+                    selection.isAllDay = true;
+                    start = kendo.date.getDate(new Date(selection.start));
+                    setTime(start, getMilliseconds(startTime));
+                    end = new Date(start);
+                }
+
             } else if (key === keys.RIGHT) {
                 handled = true;
-                startSlot = endSlot = {
-                    start: addDays(start, 1),
-                    end: addDays(end, 1)
-                };
+                if (!shiftKey) {
+                    start = addDays(start, 1);
+                }
+                end = addDays(end, 1);
+
+                if (start.getTime() === end.getTime()) {
+                    setTime(end, interval);
+                }
             } else if (key === keys.LEFT) {
                 handled = true;
-                startSlot = endSlot = {
-                    start: addDays(start, -1),
-                    end: addDays(end, -1)
-                };
+                if (!shiftKey) {
+                    start = addDays(start, -1);
+                }
+                end = addDays(end, -1);
+
+                if (start.getTime() === end.getTime()) {
+                    setTime(end, interval);
+                }
             }
 
             if (handled) {
                 selection.events = [];
-                if (startSlot && endSlot) {
-                    selection.isAllDay = isAllDay;
-                    if (!shiftKey) {
-                        selection.start = startSlot.start;
-                    }
-
-                    selection.end = endSlot.end;
-                }
+                selection.start = start;
+                selection.end = end;
             }
 
             return handled;
@@ -1982,87 +2007,6 @@ kendo_module({
             return handled;
         },*/
 
-        moveToEvent: function(selection, previous) {
-            selection = selection;
-            previous = previous;
-            return true;
-        },
-
-        right: function(selection) {
-            if (selection.events[0]) {
-                selection.events = [];
-            }
-            selection.start = kendo.date.addDays(selection.start, 1);
-            selection.end = kendo.date.addDays(selection.end, 1);
-        },
-
-        left: function(selection) {
-            if (selection.events[0]) {
-                selection.events = [];
-            }
-            selection.start = kendo.date.addDays(selection.start, -1);
-            selection.end = kendo.date.addDays(selection.end, -1);
-        },
-
-        down: function(selection) {
-            var interval = (this.options.majorTick * MS_PER_MINUTE) / (this.options.minorTickCount || 1),
-                startTime = this.options.startTime,
-                endTime = this.options.endTime,
-                start = new Date(selection.start),
-                end = new Date(selection.end);
-
-            if (selection.events[0]) {
-                start = new Date(end);
-                end = new Date(start);
-
-                kendo.date.setTime(start, -interval);
-
-                selection.events = [];
-            }
-
-            if (selection.isAllDay) {
-                start = new Date(start.getFullYear(), start.getMonth(), start.getDate(), startTime.getHours(), startTime.getMinutes(), startTime.getSeconds(), startTime.getMilliseconds());
-                end = new Date(start);
-
-                kendo.date.setTime(end, interval);
-                selection.isAllDay = false;
-            } else {
-                endTime = new Date(end.getFullYear(), end.getMonth(), end.getDate(), endTime.getHours(), endTime.getMinutes(), endTime.getSeconds(), endTime.getMilliseconds());
-                if ((end.getDate() === start.getDate()) && !kendo.date.getMilliseconds(endTime)) {
-                    kendo.date.setTime(endTime, MS_PER_DAY);
-                }
-
-                kendo.date.setTime(start, interval);
-                kendo.date.setTime(end, interval);
-            }
-
-            if (end <= endTime) {
-                selection.start = start;
-                selection.end = end;
-            }
-        },
-
-        up: function(selection) {
-            var interval = (this.options.majorTick * MS_PER_MINUTE) / (this.options.minorTickCount || 1),
-                startTime = this.options.startTime,
-                start = new Date(selection.start),
-                end = new Date(selection.end);
-
-            if (selection.events[0]) {
-                selection.events = [];
-            }
-
-            kendo.date.setTime(start, -interval);
-            kendo.date.setTime(end, -interval);
-
-            if (kendo.date.getMilliseconds(start) >= kendo.date.getMilliseconds(startTime)) {
-                selection.start = start;
-                selection.end = end;
-            } else if (!selection.isAllDay) {
-                selection.isAllDay = true;
-            }
-        },
-
         _getAllDayEvents: function(col, selected) {
             var allDayRow = this._rows[0],
                 events = allDayRow.events,
@@ -2138,8 +2082,122 @@ kendo_module({
             }
 
             return found;
+        },
+
+        moveToEvent: function(selection, prev) {
+            var selectedEventsLength = selection.events.length,
+                length = this._columns.length,
+                slot,
+                columnIndex,
+                column;
+
+            //if multiple events use selection.end
+            slot = this._slotByDate(selection.start);
+            columnIndex = slot.columnIndex;
+
+            if (prev) {
+                for (; columnIndex >= 0; columnIndex--) {
+                    column = this._columns[columnIndex];
+                    var events = filterEvents(column.slots, column.events, function(slot) {
+                        return slot.start < selection.end;
+                    });
+
+                    if (events[0]) {
+                        var index = -1;
+                        if (selectedEventsLength) {
+                            index = eventIndex(events, selection.events, prev);
+                            selectedEventsLength = 0;
+                        } else {
+                            index = events.length - 1;
+                        }
+                        var event = events[index];
+
+                        if (event) {
+                            selection.start = column.slots[event.start].start;
+                            selection.end = column.slots[event.end - 1].end;
+                            selection.events = [event.element.data("uid")];
+                            return true;
+                        }
+                    }
+
+                    events = filterEvents(this._rows[0].slots, this._rows[0].events, function(slot) {
+                        return slot.start <= selection.start;
+                    });
+
+                    if (events[0]) {
+                        var index = -1;
+                        if (selectedEventsLength) {
+                            index = eventIndex(events, selection.events, prev);
+                            selectedEventsLength = 0;
+                        } else {
+                            index = events.length - 1;
+                        }
+
+                        var event = events[index];
+
+                        if (event) {
+                            selection.start = this._rows[0].slots[event.start].start;
+                            selection.end = this._rows[0].slots[event.end].end;
+                            selection.events = [event.element.data("uid")];
+                            selection.isAllDay = true;
+                            return true;
+                        }
+                    }
+                }
+            } else {
+                for (; columnIndex < length; columnIndex++) {
+                    column = this._columns[columnIndex];
+                    var events = filterEvents(column.slots, column.events, function(slot) {
+                        return slot.start >= selection.start;
+                    });
+
+                    if (events[0]) {
+                        var index = selectedEventsLength ? eventIndex(events, selection.events) : 0;
+                        var event = events[index];
+
+                        if (event) {
+                            selection.start = column.slots[event.start].start;
+                            selection.end = column.slots[event.end - 1].end;
+                            selection.events = [event.element.data("uid")];
+                            return true;
+                        }
+                    } else {
+                        events = filterEvents(this._rows[0].slots, this._rows[0].events, function(slot) {
+                            return slot.start >= selection.start;
+                        });
+
+                        if (events[0]) {
+                            index = selectedEventsLength ? eventIndex(events, selection.events) : 0;
+                            var event = events[index];
+
+                            if (event) {
+                                selection.start = this._rows[0].slots[event.start].start;
+                                selection.end = this._rows[0].slots[event.end].end;
+                                selection.events = [event.element.data("uid")];
+                                selection.isAllDay = true;
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
         }
     });
+
+    function filterEvents(slots, events, predicate) {
+        var idx = 0, length = events.length,
+            data = [],
+            event;
+
+        for (; idx < length; idx++) {
+            event = events[idx];
+            if (predicate(slots[event.start])) {
+                data.push(event);
+            }
+        }
+
+        return data;
+    }
 
     var selectedStateRegExp = /\s*k-state-selected/;
     function addSelectedState(cell) {
@@ -2153,8 +2211,12 @@ kendo_module({
         return item;
     }
 
-    function eventIndex(events, selected) {
+    function eventIndex(events, selected, prev) {
         if (!selected || !selected.length) {
+            if (prev && selected) {
+                return selected.length - 1;
+            }
+
             return 0;
         }
 
@@ -2162,7 +2224,7 @@ kendo_module({
 
         events = $.map(events, function(item) { return item.element.data("uid"); });
 
-        return $.inArray(selected, events) + 1;
+        return $.inArray(selected, events) + (prev ? -1 : 1);
     }
 
     function arrayEqFilter(item, value) {
