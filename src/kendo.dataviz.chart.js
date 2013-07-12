@@ -1401,11 +1401,8 @@ kendo_module({
         },
 
         _mapSeriesFieldsByIndex: function(series, fields) {
-            var i,
-                length,
-                fieldName,
-                sourceFields,
-                sourceFieldName;
+            var i, length, fieldName,
+                sourceFields, sourceFieldName;
 
             if (fields) {
                 length = fields.length;
@@ -1422,13 +1419,13 @@ kendo_module({
             return sourceFields;
         },
 
-        _mapSeriesFieldsByField: function(series, fields) {
+        _mapSeriesFields: function(series, fields) {
             var i, length, fieldName,
                 sourceFields, sourceFieldName;
 
             if (fields) {
                 length = fields.length;
-                sourceFields = [];
+                sourceFields = {};
 
                 for (i = 0; i < length; i++) {
                     fieldName = fields[i];
@@ -9218,7 +9215,7 @@ kendo_module({
 
         append(fields, valueFields);
         append(fields, otherFields);
-        originalFields = SeriesBinder.current._mapSeriesFieldsByField(series, fields);
+        originalFields = SeriesBinder.current._mapSeriesFields(series, fields);
 
         for (i = 0; i < count; i++) {
             item = data[i];
