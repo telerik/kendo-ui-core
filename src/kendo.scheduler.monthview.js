@@ -124,6 +124,7 @@ kendo_module({
 
         move: function(selection, key, keep) {
             var handled = false,
+                isInRange = true,
                 date = selection.end;
 
             if (key == keys.LEFT) {
@@ -140,7 +141,11 @@ kendo_module({
                 handled = true;
             }
 
-            if (handled) {
+            if (keep) {
+                isInRange = this._isInDateSlot({start: date, end: date });
+            }
+
+            if (handled && isInRange) {
                 if (!keep) {
                     selection.start = date;
                 }
