@@ -184,7 +184,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Line_should_create_bound_area_series_from_expression_and_category_expression()
         {
-            var builder = factory.Line(s => s.RepSales, s => s.Date);
+            var builder = factory.Line(s => s.RepSales, s => s.Date, null);
             builder.Series.ShouldBeType<ChartLineSeries<SalesData, decimal, DateTime>>();
         }
 
@@ -268,7 +268,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Area_should_create_bound_area_series_from_expression_and_category_expression()
         {
-            var builder = factory.Area(s => s.RepSales, s => s.Date);
+            var builder = factory.Area(s => s.RepSales, s => s.Date, null);
             builder.Series.ShouldBeType<ChartAreaSeries<SalesData, decimal, DateTime>>();
         }
 

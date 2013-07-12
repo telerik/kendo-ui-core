@@ -116,7 +116,7 @@ namespace Kendo.Mvc.UI.Fluent
             var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
-            var noteTextExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
             var seriesType = typeof(ChartBarSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
             var series = (IChartBarSeries)BuildSeries(seriesType, valueExpr, colorExpr, categoryExpr, noteTextExpr);
 
@@ -310,13 +310,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="categoryMemberName">
         /// The name of the category member.
         /// </param>
-        public virtual ChartLineSeriesBuilder<TModel> Line(Type memberType, string memberName, string categoryMemberName = null)
+        public virtual ChartLineSeriesBuilder<TModel> Line(Type memberType, string memberName, string categoryMemberName = null, string noteTextMemberName = null)
         {
             var valueExpr = BuildMemberExpression(memberType, memberName);
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
             var seriesType = typeof(ChartLineSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
-            var series = (IChartLineSeries)BuildSeries(seriesType, valueExpr, categoryExpr);
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
+            var series = (IChartLineSeries)BuildSeries(seriesType, valueExpr, categoryExpr, noteTextExpr);
 
             series.Member = memberName;
 
@@ -406,13 +407,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="categoryMemberName">
         /// The name of the category member.
         /// </param>
-        public virtual ChartAreaSeriesBuilder<TModel> Area(Type memberType, string memberName, string categoryMemberName = null)
+        public virtual ChartAreaSeriesBuilder<TModel> Area(Type memberType, string memberName, string categoryMemberName = null, string noteTextMemberName = null)
         {
             var valueExpr = BuildMemberExpression(memberType, memberName);
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
             var seriesType = typeof(ChartAreaSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
-            var series = (IChartAreaSeries)BuildSeries(seriesType, valueExpr, categoryExpr);
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
+            var series = (IChartAreaSeries)BuildSeries(seriesType, valueExpr, categoryExpr, noteTextExpr);
 
             series.Member = memberName;
 
