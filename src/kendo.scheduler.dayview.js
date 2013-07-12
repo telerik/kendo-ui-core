@@ -1822,11 +1822,8 @@ kendo_module({
                 end = new Date(selection.end),
                 multipleSelection = Math.abs(start - end) > interval,
                 isAllDay = selection.isAllDay,
-                startSlotIndex, endSlotIndex,
-                startSlot, endSlot,
-                slot,
-                offsetColumn = true,
-                handled = false;
+                handled = false,
+                slot;
 
             if (key === keys.DOWN) {
                 handled = true;
@@ -2109,9 +2106,28 @@ kendo_module({
         moveToEvent: function(selection, prev) {
             var selectedEventsLength = selection.events.length,
                 length = this._columns.length,
-                slot,
                 columnIndex,
-                column;
+                column,
+                events,
+                event,
+                index,
+                slot;
+
+            var prevPredicate = function(slot) {
+                return slot.start < selection.end;
+            };
+
+            var prevAllDayPredicate = function(slot) {
+                return slot.start <= selection.start;
+            };
+
+            var nextPredicate = function(slot) {
+                return slot.start >= selection.start;
+            };
+
+            var nextAllDayPredicate = function(slot) {
+                return slot.start >= selection.start;
+            };
 
             //if multiple events use selection.end
             slot = this._slotByDate(selection.start);
@@ -2120,19 +2136,17 @@ kendo_module({
             if (prev) {
                 for (; columnIndex >= 0; columnIndex--) {
                     column = this._columns[columnIndex];
-                    var events = filterEvents(column.slots, column.events, function(slot) {
-                        return slot.start < selection.end;
-                    });
+                    events = filterEvents(column.slots, column.events, prevPredicate);
 
                     if (events[0]) {
-                        var index = -1;
+                        index = -1;
                         if (selectedEventsLength) {
                             index = eventIndex(events, selection.events, prev);
                             selectedEventsLength = 0;
                         } else {
                             index = events.length - 1;
                         }
-                        var event = events[index];
+                        event = events[index];
 
                         if (event) {
                             selection.start = column.slots[event.start].start;
@@ -2142,12 +2156,10 @@ kendo_module({
                         }
                     }
 
-                    events = filterEvents(this._rows[0].slots, this._rows[0].events, function(slot) {
-                        return slot.start <= selection.start;
-                    });
+                    events = filterEvents(this._rows[0].slots, this._rows[0].events, prevAllDayPredicate);
 
                     if (events[0]) {
-                        var index = -1;
+                        index = -1;
                         if (selectedEventsLength) {
                             index = eventIndex(events, selection.events, prev);
                             selectedEventsLength = 0;
@@ -2155,7 +2167,7 @@ kendo_module({
                             index = events.length - 1;
                         }
 
-                        var event = events[index];
+                        event = events[index];
 
                         if (event) {
                             selection.start = this._rows[0].slots[event.start].start;
@@ -2169,13 +2181,11 @@ kendo_module({
             } else {
                 for (; columnIndex < length; columnIndex++) {
                     column = this._columns[columnIndex];
-                    var events = filterEvents(column.slots, column.events, function(slot) {
-                        return slot.start >= selection.start;
-                    });
+                    events = filterEvents(column.slots, column.events, nextPredicate);
 
                     if (events[0]) {
-                        var index = selectedEventsLength ? eventIndex(events, selection.events) : 0;
-                        var event = events[index];
+                        index = selectedEventsLength ? eventIndex(events, selection.events) : 0;
+                        event = events[index];
 
                         if (event) {
                             selection.start = column.slots[event.start].start;
@@ -2184,13 +2194,11 @@ kendo_module({
                             return true;
                         }
                     } else {
-                        events = filterEvents(this._rows[0].slots, this._rows[0].events, function(slot) {
-                            return slot.start >= selection.start;
-                        });
+                        events = filterEvents(this._rows[0].slots, this._rows[0].events, nextAllDayPredicate);
 
                         if (events[0]) {
                             index = selectedEventsLength ? eventIndex(events, selection.events) : 0;
-                            var event = events[index];
+                            event = events[index];
 
                             if (event) {
                                 selection.start = this._rows[0].slots[event.start].start;
