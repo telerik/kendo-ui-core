@@ -317,7 +317,10 @@ kendo_module({
                     visible: true
                 },
                 groupNameTemplate: "#= group.value + (kendo.dataviz.defined(series.name) ? ': ' + series.name : '') #",
-                labels: {}
+                labels: {},
+                negativeValues: {
+                    visible: false
+                }
             },
             series: [],
             tooltip: {

@@ -466,6 +466,18 @@
                     });
                 });
 
+                test("negative values are hidden by default", function() {
+                    createBubbleChart({
+                        series: [{
+                            type: "bubble",
+                            name: "series 1",
+                            data: [[1, 10, -100]]
+                        }]
+                    });
+
+                    equal(points.length, 0);
+                });
+
             })();
 
         </script>
