@@ -1015,11 +1015,6 @@
                     "url": "scheduler/api.html",
                     "title": "API in Kendo UI Scheduler",
                     "meta": "This demo shows the API of Kendo UI Scheduler."
-                }, {
-                    "text": "RTL Support",
-                    "url": "scheduler/rtl.html",
-                    "title": "Right-to-left (RTL) support of Kendo UI Scheduler",
-                    "meta": "This demo shows the Right-to-left (RTL) support of Kendo UI Scheduler."
                 }
             ]
         },
