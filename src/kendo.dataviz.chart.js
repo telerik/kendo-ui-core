@@ -1305,6 +1305,10 @@ kendo_module({
             return this._valueFields[series.type] || [VALUE];
         },
 
+        otherFields: function(series) {
+            return this._otherFields[series.type] || [VALUE];
+        },
+
         bindPoint: function(series, pointIx) {
             var binder = this,
                 data = series.data,
@@ -1325,8 +1329,8 @@ kendo_module({
                 value = binder._bindFromArray(pointData, valueFields);
                 fields = binder._bindFromArray(fieldData, otherFields);
             } else if (typeof pointData === OBJECT) {
-                srcValueFields = binder._mapSeriesFields(series, valueFields);
-                srcPointFields = binder._mapSeriesFields(series, otherFields);
+                srcValueFields = binder._mapSeriesFieldsByIndex(series, valueFields);
+                srcPointFields = binder._mapSeriesFieldsByIndex(series, otherFields);
 
                 value = binder._bindFromObject(pointData, valueFields, srcValueFields);
                 fields = binder._bindFromObject(pointData, otherFields, srcPointFields);
@@ -1396,7 +1400,7 @@ kendo_module({
             return value;
         },
 
-        _mapSeriesFields: function(series, fields) {
+        _mapSeriesFieldsByIndex: function(series, fields) {
             var i,
                 length,
                 fieldName,
@@ -1412,6 +1416,25 @@ kendo_module({
                     sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
 
                     sourceFields.push(series[sourceFieldName] || fieldName);
+                }
+            }
+
+            return sourceFields;
+        },
+
+        _mapSeriesFieldsByField: function(series, fields) {
+            var i, length, fieldName,
+                sourceFields, sourceFieldName;
+
+            if (fields) {
+                length = fields.length;
+                sourceFields = [];
+
+                for (i = 0; i < length; i++) {
+                    fieldName = fields[i];
+                    sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
+
+                    sourceFields[fieldName] = series[sourceFieldName] || fieldName;
                 }
             }
 
@@ -2116,8 +2139,6 @@ kendo_module({
             var axis = this,
                 range = axis.range(),
                 categories = axis.options.categories || [];
-
-            console.log(dateComparer(value, range.min), dateComparer(value, range.max));
 
             return dateComparer(value, range.min) >= 0 && dateComparer(value, range.max) <= 0 && categories.length;
         },
@@ -7200,11 +7221,8 @@ kendo_module({
                 srcValues = [],
                 srcDataItems = [],
                 range = categoryAxis.range(),
-                i,
-                category,
-                categoryIx,
-                data,
-                pointData,
+                i, category, categoryIx,
+                data, pointData,
                 result = deepExtend({}, series),
                 getFn = getField;
 
@@ -7226,7 +7244,7 @@ kendo_module({
                     pointData = SeriesBinder.current.bindPoint(series, i);
 
                     srcValues[categoryIx] = srcValues[categoryIx] || [];
-                    srcValues[categoryIx].push(pointData.value);
+                    srcValues[categoryIx].push(pointData);
 
                     srcDataItems[categoryIx] = srcDataItems[categoryIx] || [];
                     srcDataItems[categoryIx].push(srcData[i]);
@@ -8679,6 +8697,10 @@ kendo_module({
             }
 
             return result;
+        },
+
+        first: function(values) {
+            return values[0];
         }
     };
 
@@ -9172,51 +9194,67 @@ kendo_module({
         }
     });
 
-    function calculateAggregates(values, series, dataItems, group) {
+    function execSimple(data, aggregate, series, dataItems, group) {
+        var result,
+            aggregateType = typeof aggregate;
+
+        if (aggregateType === STRING) {
+            result = Aggregates[aggregate](data);
+        } else if (aggregateType === "function") {
+            result = aggregate(data, series, dataItems, group);
+        } else {
+            result = Aggregates.max(data);
+        }
+
+        return result;
+    }
+
+    function execComposite(data, aggregate, series, dataItems, group) {
+        var valueFields = SeriesBinder.current.valueFields(series),
+            otherFields = SeriesBinder.current.otherFields(series),
+            count = data.length,
+            fields = [], result = {},
+            i, j, item, originalField, field, originalFields, value, values;
+
+        append(fields, valueFields);
+        append(fields, otherFields);
+        originalFields = SeriesBinder.current._mapSeriesFieldsByField(series, fields);
+
+        for (i = 0; i < count; i++) {
+            item = data[i];
+            for (j = 0; j < fields.length; j++) {
+                field = fields[j];
+                value = item.value[field] || item.fields[field];
+                originalField = originalFields[field];
+                if (defined(value)) {
+                    if (!defined(result[originalField])) {
+                        result[originalField] = [];
+                    }
+                    result[originalField].push(value);
+                }
+            }
+        }
+
+        for (j = 0; j < fields.length; j++) {
+            field = fields[j];
+            originalField = originalFields[field];
+            values = result[originalField];
+            if (defined(values)) {
+                result[originalField] = execSimple(values, aggregate[field], series, dataItems, group);
+            }
+        }
+
+        return result;
+    }
+
+    function calculateAggregates(data, series, dataItems, group) {
         var aggregate = series.aggregate,
             result;
 
-        function execSimple(values, aggregate, series) {
-            var result,
-                aggregateType = typeof aggregate;
-
-            if (aggregateType === STRING) {
-                result = Aggregates[aggregate](values);
-            } else if (aggregateType === "function") {
-                result = aggregate(values, series, dataItems, group);
-            } else {
-                result = Aggregates.max(values);
-            }
-
-            return result;
-        }
-
-        function execComposite(values, aggregate, series) {
-            var valueFields = SeriesBinder.current.valueFields(series),
-                valueFieldsCount = valueFields.length,
-                count = values.length,
-                i,
-                j,
-                field,
-                result = [],
-                data = [];
-
-            for (i = 0; i < valueFieldsCount; i++) {
-                field = valueFields[i];
-                for (j = 0; j < count; j++) {
-                    data.push(values[j][field]);
-                }
-                result.push(execSimple(data, aggregate[field], series));
-                data = [];
-            }
-
-            return result;
-        }
-
         if (typeof aggregate === OBJECT) {
-            result = execComposite(values, aggregate, series);
+            result = execComposite(data, aggregate, series, dataItems, group);
         } else {
-            result = execSimple(values, aggregate, series);
+            result = execSimple(data, aggregate, series. dateItems, group);
         }
 
         return result;

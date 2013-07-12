@@ -90,7 +90,8 @@ kendo_module({
                         "open": "max",
                         "high": "max",
                         "low": "min",
-                        "close": "max"
+                        "close": "max",
+                        "noteText": "first"
                     },
                     highlight: {
                         line: {
