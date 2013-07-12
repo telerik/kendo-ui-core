@@ -486,18 +486,18 @@ kendo_module({
             //TODO: calculate cell offset
             //selection.offset = 0;
 
-            this._selection = selection;
-
             this._adjustSelectedDate();
         },
 
         _updateSelection: function(dataItem, events) {
             var selection = this._selection;
 
-            selection.start = new Date(dataItem.start);
-            selection.end = new Date(dataItem.end);
-            selection.isAllDay = dataItem.isAllDay;
-            selection.events = events || [];
+            if (selection) {
+                selection.start = new Date(dataItem.start);
+                selection.end = new Date(dataItem.end);
+                selection.isAllDay = dataItem.isAllDay;
+                selection.events = events || [];
+            }
         },
 
         options: {
