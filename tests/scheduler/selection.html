@@ -52,6 +52,18 @@
                 }
             });
 
+            function keydown(keyCode, options) {
+                var e = $.extend({
+                    type: "keydown"
+                }, options);
+
+                if (keyCode) {
+                    e.keyCode = keyCode;
+                }
+
+                container.trigger(e);
+            }
+
             test("scheduler wrapper is focusable", function() {
                 equal(container.attr("tabindex"), 0);
             });
@@ -172,10 +184,8 @@
                     move: view.move
                 });
 
-                scheduler.wrapper.focus().trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN
-                });
+                container.focus();
+                keydown(keys.DOWN);
 
                 equal(view.calls("move"), 1);
                 equal(view.args("move")[1], keys.DOWN);
@@ -188,11 +198,8 @@
                     move: view.move
                 });
 
-                scheduler.wrapper.focus().trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN,
-                    shiftKey: true
-                });
+                container.focus();
+                keydown(keys.DOWN, { shiftKey: true });
 
                 equal(view.calls("move"), 1);
                 equal(view.args("move")[1], keys.DOWN);
@@ -202,9 +209,9 @@
             test("scheduler calls preventDefault if view.move supports pressed key", 1, function() {
                 var view = scheduler.view();
 
-                scheduler.wrapper.focus().trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN,
+                container.focus();
+
+                keydown(keys.DOWN, {
                     preventDefault: function() {
                         ok(true);
                     }
@@ -220,10 +227,7 @@
                 scheduler._selection.start = start;
                 scheduler._selection.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 0, 30);;
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN
-                });
+                keydown(keys.DOWN);
 
                 deepEqual(kendo.date.getDate(scheduler.date()), kendo.date.getDate(scheduler._selection.start));
             });
@@ -237,10 +241,7 @@
                 scheduler._selection.start = start;
                 scheduler._selection.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 0, 30);
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN
-                });
+                keydown(keys.DOWN);
 
                 deepEqual(kendo.date.getDate(scheduler.date()), kendo.date.getDate(scheduler._selection.start));
             });
@@ -253,10 +254,7 @@
                     select: view.select
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.DOWN
-                });
+                keydown(keys.DOWN);
 
                 ok(view.calls("select"));
             });
@@ -269,10 +267,7 @@
                     moveToEvent: view.moveToEvent
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB
-                });
+                keydown(keys.TAB);
 
                 ok(view.calls("moveToEvent"));
                 equal(view.args("moveToEvent").length, 2);
@@ -280,9 +275,7 @@
 
             test("scheduler calls preventDefault on TAB", 1, function() {
                 container.focus();
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB,
+                keydown(keys.TAB, {
                     preventDefault: function() {
                         ok(true);
                     }
@@ -297,11 +290,7 @@
                     moveToEvent: view.moveToEvent
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB,
-                    shiftKey: true
-                });
+                keydown(keys.TAB, { shiftKey: true });
 
                 ok(view.calls("moveToEvent"));
                 equal(view.args("moveToEvent")[1], true);
@@ -315,10 +304,7 @@
                     select: view.select
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB
-                });
+                keydown(keys.TAB);
 
                 ok(view.calls("select"));
             });
@@ -332,10 +318,7 @@
                     move: view.move
                 });
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.TAB
-                });
+                keydown(keys.TAB);
 
                 ok(view.calls("moveToEvent"));
                 ok(!view.calls("move"));
@@ -348,9 +331,7 @@
                 scheduler._selection.start = date;
                 scheduler._selection.end = date;
 
-                scheduler.wrapper.trigger({
-                    type: "keydown"
-                });
+                keydown();
 
                 deepEqual(scheduler.date(), date);
             });
@@ -358,11 +339,9 @@
             test("scheduler opens selected event for editing on enter", function() {
                 var now = new Date();
                 var e = scheduler.dataSource.add({
-                    id: 1,
                     title: "Foo",
                     start: new Date(now.setHours(10)),
-                    end: new Date(now.setHours(11)),
-                    description: "bar"
+                    end: new Date(now.setHours(11))
                 });
 
                 stub(scheduler, "editEvent");
@@ -370,13 +349,10 @@
                 container.focus();
                 scheduler._selection.events = [e];
 
-                scheduler.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: keys.ENTER
-                });
+                keydown(keys.ENTER);
 
                 equal(scheduler.calls("editEvent"), 1);
-                equal(scheduler.args("editEvent")[0].uid, e.uid);
+                equal(scheduler.args("editEvent")[0], e);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
