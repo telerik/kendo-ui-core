@@ -249,6 +249,8 @@ kendo_module({
                     }
                 }),
 
+                avoidScrolling = this.options.avoidScrolling,
+
                 userEvents = new kendo.UserEvents(element, {
                     allowSelection: true,
                     preventDragEvent: true,
@@ -262,7 +264,7 @@ kendo_module({
                             horizontalSwipe  = velocityX * 2 >= velocityY,
                             verticalSwipe = velocityY * 2 >= velocityX;
 
-                        if (that.enabled && (dimensions.x.enabled && horizontalSwipe || dimensions.y.enabled && verticalSwipe)) {
+                        if (!avoidScrolling(e) && that.enabled && (dimensions.x.enabled && horizontalSwipe || dimensions.y.enabled && verticalSwipe)) {
                             userEvents.capture();
                         } else {
                             userEvents.cancel();
@@ -345,6 +347,7 @@ kendo_module({
             pullOffset: 140,
             elastic: true,
             useNative: false,
+            avoidScrolling: function() { return false; },
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing"

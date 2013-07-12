@@ -367,7 +367,11 @@ kendo_module({
                 that.times.scrollTop(this.scrollTop);
             });
 
-            var touchScroller = kendo.touchScroller(this.content);
+            var touchScroller = kendo.touchScroller(this.content, {
+                avoidScrolling: function(e) {
+                    return $(e.event.target).closest(".k-event").length > 0;
+                }
+            });
 
             if (touchScroller && touchScroller.movable) {
 
