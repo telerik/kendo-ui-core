@@ -517,29 +517,29 @@ kendo_module({
                     agenda: "Agenda",
                     month: "Month"
                 },
-				recurrenceMessages: {
-					deleteWindowTitle: "Delete Recurring Item",
-					deleteWindowOccurrence: "Delete current occurrence",
-					deleteWindowSeries: "Delete the series",
-					editWindowTitle: "Edit Recurring Item",
-					editWindowOccurrence: "Edit current occurrence",
-					editWindowSeries: "Edit the series"
-				},
-				editor: {
-					title: "Title",
-					start: "Start",
-					end: "End",
-					allDayEvent: "All day event",
-					description: "Description",
-					repeat: "Repeat",
-					timezone: " ",
-					startTimezone: "Start timezone",
-					endTimezone: "End timezone",
+                recurrenceMessages: {
+                    deleteWindowTitle: "Delete Recurring Item",
+                    deleteWindowOccurrence: "Delete current occurrence",
+                    deleteWindowSeries: "Delete the series",
+                    editWindowTitle: "Edit Recurring Item",
+                    editWindowOccurrence: "Edit current occurrence",
+                    editWindowSeries: "Edit the series"
+                },
+                editor: {
+                    title: "Title",
+                    start: "Start",
+                    end: "End",
+                    allDayEvent: "All day event",
+                    description: "Description",
+                    repeat: "Repeat",
+                    timezone: " ",
+                    startTimezone: "Start timezone",
+                    endTimezone: "End timezone",
                     separateTimezones: "Use separate start and end time zones",
                     timezoneEditorTitle: "Timezones",
                     timezoneEditorButton: "Time zone",
                     editorTitle: "Event"
-				}
+                }
             },
             height: null,
             width: null,
@@ -1512,8 +1512,7 @@ kendo_module({
                 that._viewRenderHandler = function() {
                     var view = this;
                     if (that._selection) {
-                        view.moveSelection(that._selection);
-                        view.adjustSelection(that._selection);
+                        view.moveSelectionToPeriod(that._selection);
                         view.select(that._selection);
 
                         that._adjustSelectedDate();

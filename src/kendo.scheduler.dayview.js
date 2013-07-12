@@ -1507,7 +1507,7 @@ kendo_module({
             return this._dates.length;
         },
 
-        adjustSelection: function(selection) {
+        normalizeSelection: function(selection) {
             if (!this.isInRange(selection.start) || !this.isInRange(selection.end)) {
                 var slot = this._slotByDate(this.startDate());
                 selection.start = new Date(slot.start);
@@ -1519,7 +1519,7 @@ kendo_module({
             return this._slotByDate(date);
         },
 
-        moveSelection: function(selection) {
+        moveSelectionToPeriod: function(selection) {
             var offset = this._selectionOffset(),
                 startDate = this.startDate(),
                 endDate = this.endDate(),
@@ -1533,6 +1533,8 @@ kendo_module({
                 selection.start = addDays(start, offset);
                 selection.end = addDays(end, offset);
                 selection.events = [];
+            } else {
+                 this.normalizeSelection(selection);
             }
         },
 

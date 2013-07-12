@@ -174,6 +174,10 @@ kendo_module({
             return false;
         },
 
+        isInRange: function(date) {
+            return this.startDate() <= date && date <= this.endDate();
+        },
+
         _createResizeHint: function(left, top, width, height) {
             return $(HINT).css({
                 left: left,
