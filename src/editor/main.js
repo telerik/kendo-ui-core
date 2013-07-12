@@ -203,7 +203,7 @@ kendo_module({
 
                 toolbarOptions.popup = true;
 
-                toolbarContainer = $('<ul class="k-editor-toolbar" role="toolbar" />').insertBefore(element);
+                toolbarContainer = $('<ul class="k-editor-toolbar k-secondary" role="toolbar" />').insertBefore(element);
             }
 
             that.toolbar = new editorNS.Toolbar(toolbarContainer[0], toolbarOptions);

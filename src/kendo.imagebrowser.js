@@ -938,7 +938,7 @@ kendo_module({
                 wrapper = element.parents(".k-search-wrap");
 
             element[0].style.width = "";
-            element.addClass("k-input k-textbox");
+            element.addClass("k-input");
 
             if (!wrapper.length) {
                 wrapper = element.wrap($('<div class="k-widget k-search-wrap k-textbox"/>')).parent();
@@ -1068,7 +1068,7 @@ kendo_module({
             element.addClass("k-input");
 
             if (!wrapper.length) {
-                wrapper = element.wrap($('<div class="k-widget k-breadcrumbs k-header k-state-default"/>')).parent();
+                wrapper = element.wrap($('<div class="k-widget k-breadcrumbs k-textbox"/>')).parent();
             }
 
             overlay = wrapper.find(".k-breadcrumbs-wrap");
