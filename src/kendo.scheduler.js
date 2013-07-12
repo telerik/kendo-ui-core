@@ -438,41 +438,44 @@ kendo_module({
                 that.view().clearSelection();
             });
 
-            that.wrapper.on("keydown" + NS, function(e) {
-                var key = e.keyCode,
-                    view = that.view(),
-                    selection = that._selection,
-                    shiftKey = e.shiftKey,
-                    start;
+            that.wrapper.on("keydown" + NS, proxy(that._keydown, that));
+        },
 
-                if (key === keys.TAB) {
-                    if (view.moveToEvent(selection, shiftKey)) {
-                        view.select(selection);
-                        e.preventDefault();
-                    }
-                } else if (key === keys.ENTER) {
-                    if (selection.events.length) {
-                        that.editEvent(selection.events[0]);
-                    } else {
-                        that.addEvent({
-                            start: selection.start,
-                            end: selection.end
-                        });
-                    }
-                } else if (view.move(selection, key, shiftKey)) {
-                    start = selection.start;
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                view = that.view(),
+                selection = that._selection,
+                shiftKey = e.shiftKey,
+                start;
 
-                    if (view.isInRange(start)) {
-                        view.select(selection);
-                    } else {
-                        that.date(start);
-                    }
-
+            if (key === keys.TAB) {
+                if (view.moveToEvent(selection, shiftKey)) {
+                    view.select(selection);
                     e.preventDefault();
                 }
+            } else if (key === keys.ENTER) {
+                if (selection.events.length) {
+                    that.editEvent(selection.events[0]);
+                } else {
+                    that.addEvent({
+                        start: selection.start,
+                        end: selection.end
+                    });
+                }
+            } else if (view.move(selection, key, shiftKey)) {
+                start = selection.start;
 
-                that._adjustSelectedDate();
-            });
+                if (view.isInRange(start)) {
+                    view.select(selection);
+                } else {
+                    that.date(start);
+                }
+
+                e.preventDefault();
+            }
+
+            that._adjustSelectedDate();
         },
 
         _createSelection: function(item) {
