@@ -393,6 +393,7 @@
     <Compile Include="Controllers\Web\TreeView\TemplatesController.cs" />
     <Compile Include="Controllers\Web\Upload\AsyncController.cs" />
     <Compile Include="Controllers\Web\Upload\ApiController.cs" />
+    <Compile Include="Controllers\Web\Upload\InitialFilesController.cs" />
     <Compile Include="Controllers\Web\Upload\RtlController.cs" />
     <Compile Include="Controllers\Web\Upload\EventsController.cs" />
     <Compile Include="Controllers\Web\Upload\IndexController.cs" />
@@ -449,6 +450,7 @@
     <Compile Include="Models\Scheduler\Projection.cs" />
     <Compile Include="Models\Scheduler\Task.cs" />
     <Compile Include="Models\Scheduler\TaskViewModel.cs" />
+    <Compile Include="Models\SessionUploadInitialFilesRepository.cs" />
     <Compile Include="Models\SocialBenefitType.cs" />
     <Compile Include="Models\SocialBenefits.cs" />
     <Compile Include="Models\CrimeData.cs" />
@@ -490,6 +492,7 @@
     <Compile Include="Models\SessionProductRepository.cs" />
     <Compile Include="Models\SubCategoryItem.cs" />
     <Compile Include="Models\TreeViewRepository.cs" />
+    <Compile Include="Models\UploadInitialFile.cs" />
     <Compile Include="Models\Weather.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -731,6 +734,7 @@
     <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\index.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\upload\initialFiles.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\navigation.aspx" />
@@ -741,6 +745,7 @@
     <Content Include="Areas\aspx\Views\web\slider\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\upload\templates.aspx" />
     <Content Include="Areas\aspx\Views\web\window\ajaxcontent1.ascx" />
     <Content Include="Areas\aspx\Views\web\window\animation.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bullet_charts\remote_data.aspx" />
@@ -895,6 +900,9 @@
     <Content Include="Areas\razor\Views\web\scheduler\resources_grouping_horizontal.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\resources_grouping_vertical.cshtml" />
     <Content Include="Areas\razor\Views\web\upload\templates.cshtml" />
+    <Content Include="Areas\razor\Views\web\scheduler\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\upload\templates.cshtml" />
+    <Content Include="Areas\razor\Views\web\upload\initialFiles.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.designer.cs</LastGenOutput>

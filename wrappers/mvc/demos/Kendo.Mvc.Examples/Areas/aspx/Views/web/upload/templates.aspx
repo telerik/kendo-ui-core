@@ -1,4 +1,11 @@
-﻿<script id="fileTemplate" type="text/x-kendo-template">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+
+<script id="fileTemplate" type="text/x-kendo-template">
     <span class='k-progress'></span>
     <div class='file-wrapper'>
         <span class='file-icon #=addExtensionClass(files[0].extension)#'></span>
@@ -8,15 +15,15 @@
     </div>
 </script>
 
- @(Html.Kendo().Upload()
-            .Name("files")
-            .TemplateId("fileTemplate")
-            .Async(a => a
-                .Save("Save", "Upload")
-                .Remove("Remove", "Upload")
-                .AutoUpload(false)
-            )
-  )
+<%= Html.Kendo().Upload()
+    .Name("files")
+    .TemplateId("fileTemplate")
+    .Async(a => a
+        .Save("Save", "Upload")
+        .Remove("Remove", "Upload")
+        .AutoUpload(false)
+    )
+%>
 
 <script type="text/javascript">
     function addExtensionClass(extension) {
@@ -101,3 +108,5 @@
        height: 75px;
    }
 </style>
+
+</asp:Content>

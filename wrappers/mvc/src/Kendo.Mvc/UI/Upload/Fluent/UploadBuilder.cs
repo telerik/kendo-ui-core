@@ -140,10 +140,25 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="templateId">The id of the template</param>
         /// <example>
         /// <code lang="Razor">
-        /// 
+        /// @(Html.Kendo().Upload()
+        ///     .Name(&quot;files&quot;)
+        ///     .TemplateId(&quot;fileTemplate&quot;)
+        ///     .Async(a =&gt; a
+        ///         .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///         .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///         .AutoUpload(true)
+        ///     )
+        /// )
         /// </code>
         /// <code lang="ASPX">
-        /// 
+        /// &lt;%= Html.Kendo().Upload()
+        ///             .Name(&quot;Upload&quot;)
+        ///             .TemplateId(&quot;fileTemplate&quot;)
+        ///             .Async(async =&gt; async
+        ///                 .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///                 .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///             )
+        /// %&gt;
         /// </code>
         /// </example>
         public UploadBuilder TemplateId(string templateId)
@@ -159,10 +174,26 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The lambda which configures initial files</param>
         /// <example>
         /// <code lang="ASPX">
-        ///
+        /// &lt;%= Html.Kendo().Upload()
+        ///     .Name(&quot;files&quot;)
+        ///     .Files(files =&gt; files.Add().Name(&quot;file.txt&quot;).Size(500).Extension(&quot;.txt&quot;))
+        ///     .Async(a =&gt; a
+        ///         .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///         .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///         .AutoUpload(true)
+        ///     )
+        /// %&gt;
         /// </code>
         /// <code lang="Razor">
-        ///
+        /// @(Html.Kendo().Upload()
+        ///     .Name(&quot;files&quot;)
+        ///     .Files(files =&gt; files.Add().Name(&quot;file.txt&quot;).Size(500).Extension(&quot;.txt&quot;))
+        ///     .Async(a =&gt; a
+        ///         .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///         .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///         .AutoUpload(true)
+        ///     )
+        /// )
         /// </code>
         /// </example>
         public UploadBuilder Files(Action<UploadFileFactory> configurator)

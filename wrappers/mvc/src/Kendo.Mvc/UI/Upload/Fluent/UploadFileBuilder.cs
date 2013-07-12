@@ -22,11 +22,16 @@
         /// </summary>
         /// <param name="name">The file name</param>
         /// <example>
-        /// <code lang="Razor">
-        /// 
-        /// </code>
-        /// <code lang="ASPX">
-        /// 
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Upload()
+        ///     .Name(&quot;files&quot;)
+        ///     .Files(files =&gt; files.Add().Name(&quot;file.txt&quot;).Size(500).Extension(&quot;.txt&quot;))
+        ///     .Async(a =&gt; a
+        ///         .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///         .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///         .AutoUpload(true)
+        ///     )
+        /// %&gt;
         /// </code>
         /// </example>
         public UploadFileBuilder Name(string name) 
@@ -41,11 +46,16 @@
         /// </summary>
         /// <param name="size">The file size</param>
         /// <example>
-        /// <code lang="Razor">
-        /// 
-        /// </code>
-        /// <code lang="ASPX">
-        /// 
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Upload()
+        ///     .Name(&quot;files&quot;)
+        ///     .Files(files =&gt; files.Add().Name(&quot;file.txt&quot;).Size(500).Extension(&quot;.txt&quot;))
+        ///     .Async(a =&gt; a
+        ///         .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///         .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///         .AutoUpload(true)
+        ///     )
+        /// %&gt;
         /// </code>
         /// </example>
         public UploadFileBuilder Size(long size)
@@ -60,11 +70,16 @@
         /// </summary>
         /// <param name="extension">The file extension</param>
         /// <example>
-        /// <code lang="Razor">
-        /// 
-        /// </code>
-        /// <code lang="ASPX">
-        /// 
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Upload()
+        ///     .Name(&quot;files&quot;)
+        ///     .Files(files =&gt; files.Add().Name(&quot;file.txt&quot;).Size(500).Extension(&quot;.txt&quot;))
+        ///     .Async(a =&gt; a
+        ///         .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///         .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///         .AutoUpload(true)
+        ///     )
+        /// %&gt;
         /// </code>
         /// </example>
         public UploadFileBuilder Extension(string extension)
