@@ -427,6 +427,28 @@
                 deepEqual(selection.end, new Date(2013,1,9));
             });
 
+            test("view move: clears selected event when key is handled", function() {
+                var view = setup();
+                var date = new Date(2013, 1, 2);
+                var event = new kendo.data.SchedulerEvent({
+                    start: date,
+                    end: date,
+                    title: "one day event"
+                });
+                var selection = createSelection({
+                    start: date,
+                    end: date,
+                    events: [ event.uid ]
+                });
+
+                view.render([
+                    event
+                ]);
+
+                ok(view.move(selection, keys.LEFT));
+                equal(selection.events.length, 0);
+            });
+
             test("view moveToEvent: finds next closest event", function() {
                 var view = setup();
                 var event = new kendo.data.SchedulerEvent({

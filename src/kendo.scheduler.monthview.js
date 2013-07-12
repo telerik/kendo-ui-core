@@ -145,6 +145,7 @@ kendo_module({
                     selection.start = date;
                 }
                 selection.end = date;
+                selection.events = [];
             }
 
             return handled;
