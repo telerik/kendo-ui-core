@@ -141,8 +141,9 @@ kendo_module({
                     that.element.on("dblclick" + NS, ".k-scheduler-monthview .k-scheduler-content td", function(e) {
                         var offset = $(e.currentTarget).offset();
                         var slot = that._slotByPosition(offset.left, offset.top);
+                        var resourceInfo = that._resourceBySlot(slot);
 
-                        that.trigger("add", { eventInfo: { isAllDay: true, start: slot.start, end: slot.end } });
+                        that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.start, end: slot.end }, resourceInfo ) });
                         e.preventDefault();
                     });
                 }
@@ -746,6 +747,32 @@ kendo_module({
 
         _columnOffsetForResource: function(index) {
             return this._columnCountForLevel(index) / this._columnCountForLevel(index - 1);
+        },
+
+        _resourceBySlot: function(slot) {
+            var resources = this.groupedResources;
+            var result = {};
+
+            if (resources.length) {
+                var index = slot.groupIndex;
+
+                for (var idx = 0, length = resources.length; idx < length; idx++) {
+                    var resource = resources[idx];
+
+                    var groupIndex = Math.floor(index%resource.dataSource.view().length);
+
+                    var value = resourceValue(resource, resource.dataSource.at(groupIndex));
+
+                    if (resource.multiple) {
+                        value = [value];
+                    }
+
+                    var setter = kendo.setter(resource.field);
+                    setter(result, value);
+                }
+            }
+
+            return result;
         },
 
         destroy: function(){

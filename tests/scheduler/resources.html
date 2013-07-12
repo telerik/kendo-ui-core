@@ -2700,8 +2700,269 @@
                 equal(events[events.length - 1].end, 153);
             });
 
+            test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - first row first group", 3, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
 
+                var view = scheduler.view();
 
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date("2013/5/30"));
+                    deepEqual(event.end, new Date("2013/5/30"));
+
+                    equal(event.foo, 1);
+                });
+
+                var cell = view.content.find("td:eq(4)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+            test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - second row first group", 3, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date("2013/6/6"));
+                    deepEqual(event.end, new Date("2013/6/6"));
+
+                    equal(event.foo, 1);
+                });
+
+                var cell = view.content.find("td:eq(18)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+            test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - third row first group", 3, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date("2013/6/13"));
+                    deepEqual(event.end, new Date("2013/6/13"));
+
+                    equal(event.foo, 1);
+                });
+
+                var cell = view.content.find("td:eq(32)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+            test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - last row first group", 3, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date("2013/7/4"));
+                    deepEqual(event.end, new Date("2013/7/4"));
+
+                    equal(event.foo, 1);
+                });
+
+                var cell = view.content.find("td:eq(74)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+            test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - first row second group", 3, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date("2013/5/30"));
+                    deepEqual(event.end, new Date("2013/5/30"));
+
+                    equal(event.foo, 2);
+                });
+
+                var cell = view.content.find("td:eq(11)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+            test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - second row first group", 3, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date("2013/6/6"));
+                    deepEqual(event.end, new Date("2013/6/6"));
+
+                    equal(event.foo, 2);
+                });
+
+                var cell = view.content.find("td:eq(25)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+            test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - third row first group", 3, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date("2013/6/13"));
+                    deepEqual(event.end, new Date("2013/6/13"));
+
+                    equal(event.foo, 2);
+                });
+
+                var cell = view.content.find("td:eq(39)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
+
+            test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - last row first group", 3, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resourcesGroups: ["ResourceName"],
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                view.bind("add", function(e) {
+                    var event = e.eventInfo;
+
+                    deepEqual(event.start, new Date("2013/7/4"));
+                    deepEqual(event.end, new Date("2013/7/4"));
+
+                    equal(event.foo, 2);
+                });
+
+                var cell = view.content.find("td:eq(81)");
+                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
