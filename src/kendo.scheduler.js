@@ -450,6 +450,10 @@ kendo_module({
                         view.select(selection);
                         e.preventDefault();
                     }
+                } else if (key === keys.ENTER) {
+                    if (selection.events.length) {
+                        that.editEvent(selection.events[0]);
+                    }
                 } else if (view.move(selection, key, shiftKey)) {
                     start = selection.start;
 
