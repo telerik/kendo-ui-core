@@ -9221,16 +9221,18 @@ kendo_module({
             item = data[i];
             for (j = 0; j < fields.length; j++) {
                 field = fields[j];
-                value = item.value[field] || item.fields[field];
-                if (typeof item.value === "number" && field === "value") {
-                    value = item.value;
-                }
-                originalField = originalFields[field];
-                if (defined(value)) {
-                    if (!defined(result[originalField])) {
-                        result[originalField] = [];
+                if (item !== null) {
+                    value = defined(item.value[field]) ? item.value[field] : item.fields[field];
+                    if (typeof item.value === "number" && field === "value") {
+                        value = item.value;
                     }
-                    result[originalField].push(value);
+                    originalField = originalFields[field];
+                    if (defined(value)) {
+                        if (!defined(result[originalField])) {
+                            result[originalField] = [];
+                        }
+                        result[originalField].push(value);
+                    }
                 }
             }
         }
@@ -9239,7 +9241,7 @@ kendo_module({
             field = fields[j];
             originalField = originalFields[field];
             values = result[originalField];
-            if (defined(values)) {
+            if (defined(values) && defined(aggregate[field])) {
                 result[originalField] = execSimple(values, aggregate[field], series, dataItems, group);
             }
         }
@@ -9251,7 +9253,7 @@ kendo_module({
         var aggregate = series.aggregate,
             result;
 
-        if (typeof aggregate === STRING) {
+        if (typeof aggregate === STRING || typeof aggregate === "function") {
             aggregate = { value: aggregate };
         } else if (!defined(aggregate)) {
             aggregate = { value: "max" };

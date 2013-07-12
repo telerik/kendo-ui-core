@@ -572,6 +572,9 @@
                 module("Selection / Date axis / Configuration", {
                     setup: function() {
                         setup({
+                            series: [{
+                                data: [1,2,3]
+                            }],
                             categoryAxis: {
                                 categories: [
                                     new Date("2012/01/01 00:00"),
@@ -618,19 +621,19 @@
                     setup({
                         series: [{
                             type: "column",
-                            data: new Array(10)
+                            data: [1,2,3]
                         }],
-                            categoryAxis: {
-                                categories: [
-                                    new Date("2012/01/01 00:00"),
-                                    new Date("2012/01/10 00:00")
-                                ],
-                                baseUnit: "days",
-                                select: {
-                                    from: "2012/01/01 00:00",
-                                    to: "2012/01/11 00:00"
-                                }
+                        categoryAxis: {
+                            categories: [
+                                new Date("2012/01/01 00:00"),
+                                new Date("2012/01/10 00:00")
+                            ],
+                            baseUnit: "days",
+                            select: {
+                                from: "2012/01/01 00:00",
+                                to: "2012/01/11 00:00"
                             }
+                        }
                     });
 
                     close(selection.selection.width(), selection.categoryAxis.lineBox().width(), 1);
@@ -640,7 +643,7 @@
                     setup({
                         series: [{
                             type: "area",
-                            data: new Array(10)
+                            data: [1,2,3]
                         }],
                             categoryAxis: {
                                 categories: [
@@ -737,19 +740,19 @@
                     setup({
                         series: [{
                             type: "area",
-                            data: new Array(10)
+                            data: [1,2,3]
                         }],
-                            categoryAxis: {
-                                categories: [
-                                    new Date("2012/01/01 00:00"),
-                                    new Date("2012/01/10 00:00")
-                                ],
-                                baseUnit: "days",
-                                select: {
-                                    from: "2012/01/01 00:00",
-                                    to: "2012/01/02 00:00"
-                                }
+                        categoryAxis: {
+                            categories: [
+                                new Date("2012/01/01 00:00"),
+                                new Date("2012/01/10 00:00")
+                            ],
+                            baseUnit: "days",
+                            select: {
+                                from: "2012/01/01 00:00",
+                                to: "2012/01/02 00:00"
                             }
+                        }
                     });
 
                     triggerMousewheel(20);
@@ -760,6 +763,10 @@
 
                 test("selection does not expand beyond min/max range", function() {
                     setup({
+                        series: [{
+                            type: "area",
+                            data: [1,2,3]
+                        }],
                         categoryAxis: {
                             categories: [
                                 new Date("2012/01/01 00:00"),
