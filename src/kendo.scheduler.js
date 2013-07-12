@@ -445,6 +445,7 @@ kendo_module({
             var that = this,
                 key = e.keyCode,
                 view = that.view(),
+                editable = view.options.editable,
                 selection = that._selection,
                 shiftKey = e.shiftKey,
                 start;
@@ -454,10 +455,12 @@ kendo_module({
                     view.select(selection);
                     e.preventDefault();
                 }
-            } else if (key === keys.ENTER) {
+            } else if (editable && key === keys.ENTER) {
                 if (selection.events.length) {
-                    that.editEvent(selection.events[0]);
-                } else {
+                    if (editable.update !== false) {
+                        that.editEvent(selection.events[0]);
+                    }
+                } else if (editable.create !== false) {
                     that.addEvent(selection);
                 }
             } else if (view.move(selection, key, shiftKey)) {

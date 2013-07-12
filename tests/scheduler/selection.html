@@ -33,10 +33,12 @@
             var Scheduler = kendo.ui.Scheduler,
                 keys = kendo.keys,
                 scheduler,
-                container;
+                container,
+                now;
 
             module("Selection", {
                 setup: function() {
+                    now = new Date();
                     container = $("<div />");
                     $(document.body).append(container);
                     scheduler = new Scheduler(container, {
@@ -45,6 +47,8 @@
                             { type: "week", selected: true }
                         ]
                     });
+
+                    container.focus();
                 },
 
                 teardown: function() {
@@ -105,8 +109,6 @@
 
             test("scheduler selects first cell on focus", function() {
                 var td = container.find(".k-scheduler-content td:first");
-
-                container.focus();
 
                 ok(td.hasClass("k-state-selected"));
             });
@@ -184,7 +186,6 @@
                     move: view.move
                 });
 
-                container.focus();
                 keydown(keys.DOWN);
 
                 equal(view.calls("move"), 1);
@@ -198,7 +199,6 @@
                     move: view.move
                 });
 
-                container.focus();
                 keydown(keys.DOWN, { shiftKey: true });
 
                 equal(view.calls("move"), 1);
@@ -209,8 +209,6 @@
             test("scheduler calls preventDefault if view.move supports pressed key", 1, function() {
                 var view = scheduler.view();
 
-                container.focus();
-
                 keydown(keys.DOWN, {
                     preventDefault: function() {
                         ok(true);
@@ -219,8 +217,6 @@
             });
 
             test("scheduler sets selectedDate when selection.start is less than view.startDate()", 1, function() {
-                container.focus();
-
                 var view = scheduler.view(),
                     start = kendo.date.addDays(view.startDate(), -1);
 
@@ -233,8 +229,6 @@
             });
 
             test("scheduler sets selectedDate when selection.start is bigger than view.endDate()", 1, function() {
-                container.focus();
-
                 var view = scheduler.view(),
                     start = kendo.date.addDays(view.endDate(), 1);
 
@@ -247,8 +241,6 @@
             });
 
             test("scheduler selects on move", 1, function() {
-                container.focus();
-
                 var view = scheduler.view();
                 stub(view, {
                     select: view.select
@@ -260,8 +252,6 @@
             });
 
             test("scheduler calls moveToEvent on TAB", 2, function() {
-                container.focus();
-
                 var view = scheduler.view();
                 stub(view, {
                     moveToEvent: view.moveToEvent
@@ -274,7 +264,6 @@
             });
 
             test("scheduler calls preventDefault on TAB", 1, function() {
-                container.focus();
                 keydown(keys.TAB, {
                     preventDefault: function() {
                         ok(true);
@@ -283,8 +272,6 @@
             });
 
             test("scheduler calls moveToEvent on TAB + Shift", 2, function() {
-                container.focus();
-
                 var view = scheduler.view();
                 stub(view, {
                     moveToEvent: view.moveToEvent
@@ -297,8 +284,6 @@
             });
 
             test("scheduler selects on moveToEvent", 1, function() {
-                container.focus();
-
                 var view = scheduler.view();
                 stub(view, {
                     select: view.select
@@ -310,8 +295,6 @@
             });
 
             test("scheduler doesn't call move on TAB", 2, function() {
-                container.focus();
-
                 var view = scheduler.view();
                 stub(view, {
                     moveToEvent: view.moveToEvent,
@@ -327,7 +310,6 @@
             test("scheduler adjusts selected date on keydown", 1, function() {
                 var date = new Date(2012, 10, 10);
 
-                container.focus();
                 scheduler._selection.start = date;
                 scheduler._selection.end = date;
 
@@ -336,18 +318,24 @@
                 deepEqual(scheduler.date(), date);
             });
 
-            test("scheduler opens selected event for editing on enter", function() {
-                var now = new Date();
-                var e = scheduler.dataSource.add({
+            function createSampleEvent() {
+                return scheduler.dataSource.add({
                     title: "Foo",
                     start: new Date(now.setHours(10)),
                     end: new Date(now.setHours(11))
                 });
+            }
+
+            function selectEvent(evt) {
+                scheduler._selection.events = [evt];
+            }
+
+            test("enter key opens selected event for editing", function() {
+                var e = createSampleEvent();
 
                 stub(scheduler, "editEvent");
 
-                container.focus();
-                scheduler._selection.events = [e];
+                selectEvent(e);
 
                 keydown(keys.ENTER);
 
@@ -355,16 +343,13 @@
                 equal(scheduler.args("editEvent")[0], e);
             });
 
-            test("scheduler adds a new event in empty selection on enter", function() {
-                var now = new Date();
+            test("enter key adds a new event in empty selection", function() {
                 var start = new Date(now.setHours(10));
                 var end = new Date(now.setHours(11));
 
                 stub(scheduler, "addEvent");
 
-                container.focus();
-                scheduler._selection.start = start;
-                scheduler._selection.end = end;
+                $.extend(scheduler._selection, { start: start, end: end });
 
                 keydown(keys.ENTER);
 
@@ -374,12 +359,8 @@
                 equal(eventInfo.end, end);
             });
 
-            test("scheduler adds an all-day event on enter in all-day selection", function() {
-                var now = new Date();
-
+            test("enter key adds an all-day event in all-day selection", function() {
                 stub(scheduler, "addEvent");
-
-                container.focus();
 
                 $.extend(scheduler._selection, { isAllDay: true, start: now, end: now });
 
@@ -388,6 +369,64 @@
                 var eventInfo = scheduler.args("addEvent")[0];
                 equal(scheduler.calls("addEvent"), 1);
                 ok(eventInfo.isAllDay);
+            });
+
+            test("enter key does not add event in view with editable=false", function() {
+                var start = new Date(now.setHours(10));
+                var end = new Date(now.setHours(11));
+
+                stub(scheduler, "addEvent");
+
+                scheduler.view().options.editable = false;
+
+                $.extend(scheduler._selection, { start: start, end: end });
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("addEvent"), 0);
+            });
+
+            test("enter key does not add event in view with editable.create=false", function() {
+                var start = new Date(now.setHours(10));
+                var end = new Date(now.setHours(11));
+
+                stub(scheduler, "addEvent");
+
+                scheduler.view().options.editable = { create: false };
+
+                $.extend(scheduler._selection, { start: start, end: end });
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("addEvent"), 0);
+            });
+
+            test("enter key does not edit event in view with editable=false", function() {
+                var e = createSampleEvent();
+
+                stub(scheduler, "editEvent");
+
+                scheduler.view().options.editable = false;
+
+                selectEvent(e);
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("editEvent"), 0);
+            });
+
+            test("enter key does not edit event in view with editable.update=false", function() {
+                var e = createSampleEvent();
+
+                stub(scheduler, "editEvent");
+
+                scheduler.view().options.editable = { update: false };
+
+                selectEvent(e);
+
+                keydown(keys.ENTER);
+
+                equal(scheduler.calls("editEvent"), 0);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
