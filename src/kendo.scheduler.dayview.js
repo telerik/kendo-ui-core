@@ -597,7 +597,7 @@ kendo_module({
                     var slot = that._slotByPosition(e.pageX, e.pageY);
                     var resourceInfo = that._resourceBySlot(slot);
 
-                    that.trigger("add", { eventInfo: extend({ isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.end) }, resourceInfo) });
+                    that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.end) }, resourceInfo) });
 
                     e.preventDefault();
                 });
@@ -641,7 +641,7 @@ kendo_module({
                         var slot = that._slotByPosition(e.x.location, e.y.location);
                         var resourceInfo = that._resourceBySlot(slot);
 
-                        that.trigger("add", { eventInfo: extend({ isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.end) }, resourceInfo) });
+                        that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.end) }, resourceInfo) });
 
                         e.preventDefault();
                     }
@@ -1111,14 +1111,13 @@ kendo_module({
         },
 
         _positionAllDayEvent: function(row, element, startIndex, endIndex) {
-            var dateSlot = row.slots[startIndex],
-                slotWidth = this._calculateAllDayEventWidth(row.slots, startIndex, endIndex),
-                allDayEvents = SchedulerView.collidingHorizontallyEvents(row.events, startIndex, endIndex),
-                top = dateSlot.offsetTop,
-                currentColumnCount = this._headerColumnCount || 0,
-                leftOffset = 2,
-                rightOffset = startIndex !== endIndex ? 5 : 4,
-                eventHeight = this._allDayHeaderHeight;
+            var dateSlot = row.slots[startIndex];
+            var slotWidth = this._calculateAllDayEventWidth(row.slots, startIndex, endIndex);
+            var allDayEvents = SchedulerView.collidingHorizontallyEvents(row.events, startIndex, endIndex);
+            var currentColumnCount = this._headerColumnCount || 0;
+            var leftOffset = 2;
+            var rightOffset = startIndex !== endIndex ? 5 : 4;
+            var eventHeight = this._allDayHeaderHeight;
 
             element
                 .css({
@@ -1132,6 +1131,13 @@ kendo_module({
 
             var rows = SchedulerView.createRows(allDayEvents);
 
+            if (rows.length && rows.length > currentColumnCount) {
+                this._updateAllDayHeaderHeight(eventHeight * rows.length + eventHeight);
+                this._headerColumnCount = rows.length;
+            }
+
+            var top = dateSlot.offsetTop;
+
             for (var idx = 0, length = rows.length; idx < length; idx++) {
                 var rowEvents = rows[idx].events;
 
@@ -1140,11 +1146,6 @@ kendo_module({
                         top: top + idx * eventHeight
                     });
                 }
-            }
-
-            if (rows.length && rows.length > currentColumnCount) {
-                this._updateAllDayHeaderHeight(eventHeight * rows.length + eventHeight);
-                this._headerColumnCount = rows.length;
             }
         },
 
