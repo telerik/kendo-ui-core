@@ -972,7 +972,7 @@
                 equal(div.find(".k-event:last .k-resize-w").length, 0);
             });
 
-            test("dragging the west handle of the ocurrence moves the start of the series if the edit series button is clicked", function() {
+            test("dragging the west handle of the occurrence moves the start of the series if the edit series button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -995,7 +995,7 @@
                 equal(scheduler.dataSource.at(0).start.getMonth(), 4);
             });
 
-            test("dragging the west handle of the ocurrence head shows the edit recurrence dialog", function() {
+            test("dragging the west handle of the occurrence head shows the edit recurrence dialog", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -1013,7 +1013,7 @@
                 equal($(".k-window").length, 1);
             });
 
-            test("dragging the west handle of the ocurrence head moves the start of the series if the edit series button is clicked", function() {
+            test("dragging the west handle of the occurrence head moves the start of the series if the edit series button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -1036,7 +1036,7 @@
                 equal(scheduler.dataSource.at(0).start.getMonth(), 4);
             });
 
-            test("dragging the west handle of the ocurrence head moves the start of the exception if the edit ocurrence button is clicked", function() {
+            test("dragging the west handle of the occurrence head moves the start of the exception if the edit occurrence button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -1059,7 +1059,7 @@
                 equal(scheduler.dataSource.at(1).start.getMonth(), 4);
             });
 
-            test("dragging the south handle of the ocurrence moves the end time of the series if the edit series button is clicked", function() {
+            test("dragging the south handle of the occurrence moves the end time of the series if the edit series button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -1084,7 +1084,7 @@
                 equal(scheduler.dataSource.at(0).end.getMonth(), 5);
             });
 
-            test("dragging the south handle of the ocurrence moves the end time of the exception if the edit ocurrence button is clicked", function() {
+            test("dragging the south handle of the occurrence moves the end time of the exception if the edit occurrence button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -1109,7 +1109,7 @@
                 equal(scheduler.dataSource.at(1).end.getMonth(), 5);
             });
 
-            test("dragging the north handle of the ocurrence moves the start time of the series if the edit series button is clicked", function() {
+            test("dragging the north handle of the occurrence moves the start time of the series if the edit series button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -1134,7 +1134,7 @@
                 equal(scheduler.dataSource.at(0).start.getMonth(), 5);
             });
 
-            test("dragging the north handle of the ocurrence moves the start time of the exception if the edit ocurrence button is clicked", function() {
+            test("dragging the north handle of the occurrence moves the start time of the exception if the edit occurrence button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -1159,7 +1159,7 @@
                 equal(scheduler.dataSource.at(1).start.getMonth(), 5);
             });
 
-            test("dragging the north handle of the ocurrence updates the recurrenceException field if the edit ocurrence button is clicked", function() {
+            test("dragging the north handle of the occurrence updates the recurrenceException field if the edit occurrence button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 11:00"),
@@ -1184,7 +1184,7 @@
                 equal(scheduler.dataSource.at(0).recurrenceException, kendo.toString(kendo.timezone.apply(new Date("2013/6/3 11:30"), 0), "yyyyMMddTHHmmssZ") + ";");
             });
 
-            test("dragging the west handle of the ocurrence creates an exception if the edit ocurrence button is clicked", function() {
+            test("dragging the west handle of the occurrence creates an exception if the edit occurrence button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -1395,6 +1395,146 @@
                 });
 
                 equal(div.find(".k-resize-e,.k-resize-w").length, 0);
+            });
+
+            test("east resizing hint in month view is restricted by resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/1 11:30"), end: new Date("2013/6/1 12:00 PM"), ownerId: 1, title: "" }
+                    ],
+                    group: {
+                        resources: ["Owner"]
+                    },
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(7)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(1).offset());
+
+                equalWithRound(div.find(".k-marquee:first").outerWidth(), slots.eq(1).outerWidth());
+            });
+
+            test("west resizing hint in month view is restricted by resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/8 11:30"), end: new Date("2013/6/8 12:00 PM"), ownerId: 1, title: "" }
+                    ],
+                    group: {
+                        resources: ["Owner"]
+                    },
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(7)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(0).offset());
+
+                equalWithRound(div.find(".k-marquee:first").outerWidth(), slots.eq(0).outerWidth());
+            });
+
+            test("east resizing hint in vertically grouped month view is restricted by resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/7/5 11:30"), end: new Date("2013/7/5 12:00 PM"), ownerId: 1, title: "" }
+                    ],
+                    group: {
+                        resources: ["Owner"],
+                        direction: "vertical"
+                    },
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(7)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(5).offset());
+                drag(scheduler, handle, slots.eq(6).offset());
+
+                equal(div.find(".k-marquee").length, 1);
+            });
+
+            test("west resizing hint in vertically grouped month view is restricted by resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/1 11:30"), end: new Date("2013/6/1 12:00 PM"), ownerId: 2, title: "" }
+                    ],
+                    group: {
+                        resources: ["Owner"],
+                        direction: "vertical"
+                    },
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(6)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(6).offset());
+                drag(scheduler, handle, slots.eq(5).offset());
+
+                equal(div.find(".k-marquee").length, 1);
             });
 
             function dragdrop(scheduler, target, via, to) {

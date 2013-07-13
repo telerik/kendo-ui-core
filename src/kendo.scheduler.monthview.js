@@ -694,6 +694,10 @@ kendo_module({
             for (var slotIndex = startSlot.index; slotIndex <= endSlot.index; slotIndex++) {
                 var currentSlot = slots[slotIndex];
 
+                if (currentSlot.groupIndex != startSlot.groupIndex) {
+                    continue;
+                }
+
                 if (currentSlot.offsetTop > slotGroup.endSlot.offsetTop) {
                     slotGroup = {
                         startSlot: currentSlot,
