@@ -442,13 +442,13 @@ kendo_module({
             return createLayoutConfiguration("columns", resources, inner);
         },
 
-        _groupsDirecton: function() {
+        _groupOrientation: function() {
             var groups = this.options.group;
-            return groups && groups.resources ? groups.direction : "horizontal";
+            return groups && groups.resources ? groups.orientation : "horizontal";
         },
 
         _isVerticallyGrouped: function() {
-            return this.groupedResources.length && this._groupsDirecton() === "vertical";
+            return this.groupedResources.length && this._groupOrientation() === "vertical";
         },
 
         _createRowsLayout: function(resources, inner) {
