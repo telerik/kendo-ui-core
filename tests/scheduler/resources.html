@@ -1307,41 +1307,6 @@
                 equal(view.content.find(".k-event:last")[0].offsetTop, eventInitialTop + offset * 2);
             });
 
-            test("all day events are repositioned after all day slot is resized when vertically grouped", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "ResourceName"],
-                        direction: "vertical"
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [ { start: new Date("2013/6/6 10:00 AM"), end: new Date("2013/6/6 11:00 AM"), isAllDay: true, title: "", foo: 2 }],
-                    views: ["day"]
-                });
-
-                var view = scheduler.view();
-                var slots = view._columns[0].slots;
-
-                var eventInitialTop = view.content.find(".k-event")[0].offsetTop;
-
-                var initialHeight = view._allDayHeaderHeight;
-
-                scheduler.dataSource.add({ start: new Date("2013/6/6 00:00"), end: new Date("2013/6/6 00:00"), isAllDay: true, title: "", foo: 1 });
-
-                var offset = view.element.find(".k-scheduler-header-all-day").first()[0].clientHeight - initialHeight;
-
-                QUnit.close(view.content.find(".k-event:last")[0].offsetTop, eventInitialTop + offset, 1);
-            });
-
             test("last slot in the group has correct date when groupped vertically", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),

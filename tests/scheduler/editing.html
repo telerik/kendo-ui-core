@@ -647,7 +647,7 @@
             });
 
             test("creating exception adds exception date to event exception property", function() {
-                var now = new Date();
+                var now = new Date("2013/6/6 10:00");
                 now.setMilliseconds(0);
 
                 var scheduler = setup({
