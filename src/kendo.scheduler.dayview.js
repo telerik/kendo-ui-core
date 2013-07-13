@@ -425,7 +425,7 @@ kendo_module({
             var range;
             var cell;
             var visibleAllDayRowCount = 0;
-            var isVertical = this.options.groupOrientation === "vertical";
+            var isVertical = this._groupsDirecton() === "vertical";
 
             var allDaySelector = ".k-scheduler-header-all-day tr";
 
@@ -697,7 +697,7 @@ kendo_module({
             var resources = this.groupedResources;
 
             if (resources.length) {
-                if (options.groupOrientation === "vertical") {
+                if (this._groupsDirecton() === "vertical") {
                     rows = this._createRowsLayout(resources, rows);
                 } else {
                     columns = this._createColumnsLayout(resources, columns);
@@ -791,7 +791,7 @@ kendo_module({
             var allDayVerticalGroupRow = "";
 
             if (resources.length) {
-                if (that.options.groupOrientation === "vertical") {
+                if (that._groupsDirecton() === "vertical") {
                     rowCount = this._rowCountForLevel(this.rowLevels.length - 2);
                     if (options.allDaySlot) {
                         allDayVerticalGroupRow = '<tr class="k-scheduler-header-all-day">' + new Array(dates.length + 1).join("<td>&nbsp;</td>") + '</tr>';
@@ -972,7 +972,7 @@ kendo_module({
             }
 
             var resources = this.groupedResources;
-            var isVertical = this.options.groupOrientation === "vertical";
+            var isVertical = this._groupsDirecton() === "vertical";
 
             if (resources.length && !isVertical) {
                 index = this._adjustColumnIndex(index);
@@ -1391,7 +1391,7 @@ kendo_module({
 
             var idx;
             var length;
-            var isVertical = this.options.groupOrientation === "vertical";
+            var isVertical = this._groupsDirecton() === "vertical";
 
             if (this.groupedResources.length) {
                 if (isVertical) {
@@ -1565,7 +1565,7 @@ kendo_module({
         _renderGroups: function(events, resources, offset, columnLevel) {
             var resource = resources[0];
             var offsetCount;
-            var isVertical = this.options.groupOrientation === "vertical";
+            var isVertical = this._groupsDirecton() === "vertical";
 
             if (isVertical) {
                 var allDaySlotOffset = resources.length === 1 && this.options.allDaySlot ? this._rowCountForLevel(columnLevel - 1) : 0;

@@ -406,10 +406,12 @@ kendo_module({
 
         _resourcesForGroups: function() {
             var result = [];
-            var groups = this.options.resourcesGroups;
+            var groups = this.options.group;
             var resources = this.options.resources;
 
-            if (groups && resources && groups.length) {
+            groups = groups && groups.resources ? groups.resources : [];
+
+            if (resources && groups.length) {
                 for (var idx = 0, length = resources.length; idx < length; idx++) {
                     for (var groupIdx = 0, groupLength = groups.length; groupIdx < groupLength; groupIdx++) {
                         if (resources[idx].name === groups[groupIdx]) {
@@ -423,7 +425,10 @@ kendo_module({
         },
 
         _isGroupedByDate: function() {
-            return $.inArray("date", this.options.resourcesGroups) > -1;
+            var groups = this.options.group;
+            groups = groups && groups.resources ? groups.resources : [];
+
+            return $.inArray("date", groups) > -1;
         },
 
         _createColumnsLayout: function(resources, inner) {
@@ -437,8 +442,13 @@ kendo_module({
             return createLayoutConfiguration("columns", resources, inner);
         },
 
+        _groupsDirecton: function() {
+            var groups = this.options.group;
+            return groups && groups.resources ? groups.direction : "horizontal";
+        },
+
         _isVerticallyGrouped: function() {
-            return this.groupedResources.length && this.options.groupOrientation === "vertical";
+            return this.groupedResources.length && this._groupsDirecton() === "vertical";
         },
 
         _createRowsLayout: function(resources, inner) {

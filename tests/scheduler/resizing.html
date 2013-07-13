@@ -1240,7 +1240,9 @@
                     dataSource: [
                         { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/7 11:30"), ownerId: 1, title: "" }
                     ],
-                    resourcesGroups: ["Owner"],
+                    group: {
+                        resources: ["Owner"]
+                    },
                     resources: [
                         {
                             field: "ownerId",
@@ -1270,7 +1272,9 @@
                     dataSource: [
                         { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/7 11:30"), ownerId: 2, title: "" }
                     ],
-                    resourcesGroups: ["Owner"],
+                    group: {
+                        resources: ["Owner"]
+                    },
                     resources: [
                         {
                             field: "ownerId",
@@ -1302,8 +1306,10 @@
                     dataSource: [
                         { start: new Date("2013/6/2 11:00"), end: new Date("2013/6/2 11:30"), ownerId: 1, title: "" }
                     ],
-                    resourcesGroups: ["Owner"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["Owner"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "ownerId",
@@ -1336,8 +1342,10 @@
                     dataSource: [
                         { start: new Date("2013/6/2 11:30"), end: new Date("2013/6/2 12:00 PM"), ownerId: 2, title: "" }
                     ],
-                    resourcesGroups: ["Owner"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["Owner"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "ownerId",
@@ -1370,7 +1378,9 @@
                     dataSource: [
                         { start: new Date("2013/6/2 11:30"), end: new Date("2013/6/3 12:00 PM"), ownerId: 1, title: "" }
                     ],
-                    resourcesGroups: ["date", "Owner"],
+                    group: {
+                        resources: ["date", "Owner"]
+                    },
                     resources: [
                         {
                             field: "ownerId",

@@ -42,12 +42,12 @@
 	            font:12px sans-serif;
 	            overflow-y:scroll;
             }
-
+/*
             .k-scheduler-content .k-scheduler-table
             {
                 height:300%!important;
             }
-
+*/
         </style>
     </head>
     <body>
@@ -60,10 +60,14 @@
             startTime: new Date(2013, 1,1, 11,0,0),
             endTime: new Date(2013, 1,1, 20,0,0),
             views: ["day", "week", "month", "agenda"],
-            resourcesGroups: [/*"date"*/, "roomId", "atendees"],
+ //           resourcesGroups: [/*"date"*/, "roomId", "atendees"],
             date: new Date(2013, 5, 26),
             //allDaySlot: false,
-            groupOrientation: "vertical",
+  //          groupOrientation: "vertical",
+            group: {
+                resources: [/*"date"*/, "roomId", "atendees"],
+                direction: "vertical"
+            },
             resources: [
                 {
                     field: "roomId",

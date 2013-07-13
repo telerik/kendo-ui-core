@@ -701,7 +701,9 @@
             test("headers are rendered for groups in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -728,7 +730,9 @@
             test("headers are rendered for multi level groups in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName1", "ResourceName2" ],
+                    group: {
+                        resources: [ "ResourceName1", "ResourceName2" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -765,8 +769,10 @@
             test("row headers are rendered for groups in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     allDaySlot: false,
                     resources: [
                         {
@@ -790,7 +796,9 @@
             test("events are position in the correct group in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ],
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -814,8 +822,10 @@
             test("events are position in the correct group in day view in vertical orientation", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -841,7 +851,9 @@
             test("multi day events are position in the correct group in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ],
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -870,8 +882,10 @@
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     endTime: new Date("2013/6/6 14:00"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -897,7 +911,9 @@
             test("multiple copies of the event are position in the correct group in day view when multiple resources matched", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName", "ResourceName2" ],
+                    group: {
+                        resources: [ "ResourceName", "ResourceName2" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -932,7 +948,9 @@
             test("double clicking a day view cell triggers add event with grouping", 2, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
+                    group: {
+                        resources: [ "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -963,8 +981,10 @@
             test("all day slot is rendered for each resource group when orientation is vertical in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -988,9 +1008,11 @@
             test("all day slots are not rendered for each resource group when orientation is vertical in day view if disabled", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     allDaySlot: false,
-                    groupOrientation: "vertical",
                     resources: [
                         {
                             field: "foo",
@@ -1015,8 +1037,10 @@
                     date: new Date("2013/6/6"),
                     startTime: new Date("2013/6/6 9:00:00"),
                     endTime: new Date("2013/6/6 14:00:00"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1042,8 +1066,10 @@
             test("double clicking the first all day slot triggers add event in day view with vertical orientation", 1, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1072,8 +1098,10 @@
             test("double clicking the all day slot triggers add event in day view with vertical orientation", 1, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1102,8 +1130,10 @@
             test("all day events are added in the content when vertical grouping is applyed", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1126,7 +1156,9 @@
             test("all day events are added in allday slot when horizontal grouping is applyed", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
+                    group: {
+                        resources: [ "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1149,8 +1181,10 @@
             test("all day events are added in the correct group allday slot when vertical grouping is applyed", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1173,8 +1207,10 @@
             test("slots offsetTop is updated when all day event is inserted when vertical grouping is applyed", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1209,8 +1245,10 @@
             test("slotByPosition returns correct date for slot for the last group with vertical orientation", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1237,8 +1275,10 @@
             test("events are repositioned after all day slot is resized when vertically grouped", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1270,8 +1310,10 @@
             test("all day events are repositioned after all day slot is resized when vertically grouped", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1304,8 +1346,10 @@
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     startTime: new Date(2013, 1,1, 11,0,0),
-                    resourcesGroups: [ "ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1330,7 +1374,9 @@
             test("date header is at the top when group by date", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName"],
+                    group: {
+                        resources: [ "date", "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1353,7 +1399,9 @@
             test("slots for the same date but in diffrent groups as correct start and end date set", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName"],
+                    group: {
+                        resources: [ "date", "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1386,7 +1434,9 @@
             test("slots for the same date but in diffrent groups as correct start and end date set in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName"],
+                    group: {
+                        resources: [ "date", "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1432,7 +1482,9 @@
             test("event on the same date but in diffrent groups are position correctly in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName"],
+                    group: {
+                        resources: [ "date", "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1461,7 +1513,9 @@
             test("event on diffrent dates from same group are position correctly", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName"],
+                    group: {
+                        resources: [ "date", "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1490,7 +1544,9 @@
             test("correct number of header are render when grouped by date in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName"],
+                    group: {
+                        resources: [ "date", "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1515,7 +1571,9 @@
             test("all day event is split in the correct slots when grouped by date in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName"],
+                    group: {
+                        resources: [ "date", "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1546,7 +1604,9 @@
             test("multiple day event (in the end of the week) is split in the correct slots when grouped by date in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName"],
+                    group: {
+                        resources: [ "date", "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1577,7 +1637,9 @@
             test("multiple day event (in the end of the week) is split in the correct slots when grouped by date in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName"],
+                    group: {
+                        resources: [ "date", "ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1608,7 +1670,9 @@
             test("one day event is split in the correct slots when grouped by date in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "date", "ResourceName", "ResourceName2"],
+                    group: {
+                        resources: [ "date", "ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1637,7 +1701,9 @@
             test("group index is set to the row slot with horizontal grouping in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1675,8 +1741,10 @@
             test("group index is set to the row slot with vertical grouping in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1713,7 +1781,9 @@
             test("group index is set to the slot with horizontal grouping in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1760,8 +1830,10 @@
             test("group index is set to the slot with vertical grouping in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1796,7 +1868,9 @@
             test("group index is set to the slot with horizontal grouping on date in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["date", "ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["date", "ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1841,7 +1915,9 @@
             test("double clicking a day view cell triggers add event with resources information with horizontal single grouping", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
+                    group: {
+                        resources: ["ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1874,7 +1950,9 @@
             test("double clicking a day view cell triggers add event with resources information with horizontal multiple grouping", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1917,7 +1995,9 @@
             test("double clicking a week view cell triggers add event with resources information with horizontal multiple grouping", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -1960,7 +2040,9 @@
             test("double clicking a week view cell triggers add event with resources information and horizontal multiple grouping - resource set as multiple", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2004,7 +2086,9 @@
             test("double clicking a week view all day cell triggers add event with resources information with horizontal multiple grouping", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2047,8 +2131,10 @@
             test("double clicking a day view all day cell triggers add event with resources information with vertical multiple grouping", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2090,8 +2176,10 @@
             test("slot end date is set when grouped vertically", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2123,8 +2211,10 @@
             test("event in the last slot is position correctly when grouped vertically", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2156,7 +2246,9 @@
             test("double clicking a week view cell triggers add event with resources information and horizontal grouped by date", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["date", "ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["date", "ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2200,7 +2292,9 @@
             test("double clicking a week view all day cell triggers add event with resources information and horizontal grouped by date", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["date", "ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["date", "ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2244,7 +2338,9 @@
             test("headers are rendered for groups in month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2268,7 +2364,9 @@
             test("individual calenders are rendered for each groups in month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2291,7 +2389,9 @@
             test("event is position based on the group in horizontally oriented group month view - event in the first group first row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2316,7 +2416,9 @@
             test("event is position based on the group in horizontally oriented group month view - event in the first group second row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2341,7 +2443,9 @@
             test("event is position based on the group in horizontally oriented group month view - event in the first group third row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2366,7 +2470,9 @@
             test("event is position based on the group in horizontally oriented group month view - event in the first group last row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2391,7 +2497,9 @@
             test("event is position based on the group in horizontally oriented group month view - event in the second group first row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2416,7 +2524,9 @@
             test("event is position based on the group in horizontally oriented group month view - event in the second group second row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2441,7 +2551,9 @@
             test("event is position based on the group in horizontally oriented group month view - event in the second group third row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2466,7 +2578,9 @@
             test("event is position based on the group in horizontally oriented group month view - event in the second group last row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2491,7 +2605,9 @@
             test("event passing the end of the month is position based on the group in horizontally oriented group month view - event in the second group", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2517,7 +2633,9 @@
             test("event starting before the month start is position based on the group in horizontally oriented group month view - event in the second group", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2545,7 +2663,9 @@
             test("event starting before the month start is position based on the group in horizontally oriented group month view - event in the first group", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2573,7 +2693,9 @@
             test("event passing the end of the month is position based on the group in horizontally oriented group month view - event in the first group", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2599,7 +2721,9 @@
             test("event is position based on the group in horizontally oriented multiple group month view - event in the second group", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName", "ResourceName2" ],
+                    group: {
+                        resources: [ "ResourceName", "ResourceName2" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2633,7 +2757,9 @@
             test("event is position based on the group in horizontally oriented multiple group month view - event in the first group", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName", "ResourceName2" ],
+                    group: {
+                        resources: [ "ResourceName", "ResourceName2" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2667,7 +2793,9 @@
             test("event passing the end of the month is position based on the group in horizontally oriented multiple group month view - event in the first group", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName", "ResourceName2" ],
+                    group: {
+                        resources: [ "ResourceName", "ResourceName2" ]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2702,7 +2830,9 @@
             test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - first row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
+                    group: {
+                        resources: ["ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2735,7 +2865,9 @@
             test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - second row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
+                    group: {
+                        resources: ["ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2768,7 +2900,9 @@
             test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - third row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
+                    group: {
+                        resources: ["ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2801,7 +2935,9 @@
             test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - last row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
+                    group: {
+                        resources: ["ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2834,7 +2970,9 @@
             test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - first row second group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
+                    group: {
+                        resources: ["ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2867,7 +3005,9 @@
             test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - second row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
+                    group: {
+                        resources: ["ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2900,7 +3040,9 @@
             test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - third row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
+                    group: {
+                        resources: ["ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2933,7 +3075,9 @@
             test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - last row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
+                    group: {
+                        resources: ["ResourceName"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -2966,7 +3110,9 @@
             test("double clicking a month view slot triggers add event with resources information with horizontal multiple grouping - first row first group", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"]
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3008,8 +3154,10 @@
             test("event is position based on the group in vertically oriented group month view - event in the first group first row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3035,8 +3183,10 @@
             test("event is position based on the group in vertically oriented group month view - event in the first group second row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3062,8 +3212,10 @@
             test("event is position based on the group in vertically oriented group month view - event in the first group third row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3089,8 +3241,10 @@
             test("event is position based on the group in vertically oriented group month view - event in the first group last row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3116,8 +3270,10 @@
             test("event is position based on the group in vertically oriented group month view - event in the second group first row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3143,8 +3299,10 @@
             test("event is position based on the group in vertically oriented group month view - event in the second group second row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3170,8 +3328,10 @@
             test("event is position based on the group in vertically oriented group month view - event in the second group third row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3197,8 +3357,10 @@
             test("event is position based on the group in vertically oriented group month view - event in the second group last row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: [ "ResourceName" ],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: [ "ResourceName" ],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3220,12 +3382,14 @@
                 equal(view._row.events[0].end, 81);
                 equal(view._row.slots[81].groupIndex, 1);
             });
-///////////////////////////
+
             test("double clicking a month view slot triggers add event with resources information with vertical single grouping - first row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3258,8 +3422,10 @@
             test("double clicking a month view slot triggers add event with resources information with vertically single grouping - second row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3292,8 +3458,10 @@
             test("double clicking a month view slot triggers add event with resources information with vertically single grouping - third row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3326,8 +3494,10 @@
             test("double clicking a month view slot triggers add event with resources information with vertically single grouping - last row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3360,8 +3530,10 @@
             test("double clicking a month view slot triggers add event with resources information with vertically single grouping - first row second group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3394,8 +3566,10 @@
             test("double clicking a month view slot triggers add event with resources information with vertically single grouping - second row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3428,8 +3602,10 @@
             test("double clicking a month view slot triggers add event with resources information with vertically single grouping - third row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3462,8 +3638,10 @@
             test("double clicking a month view slot triggers add event with resources information with vertically single grouping - last row first group", 3, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
@@ -3496,8 +3674,10 @@
             test("double clicking a month view slot triggers add event with resources information with vertically multiple grouping - first row first group", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
-                    resourcesGroups: ["ResourceName", "ResourceName2"],
-                    groupOrientation: "vertical",
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"],
+                        direction: "vertical"
+                    },
                     resources: [
                         {
                             field: "foo",
