@@ -20,6 +20,7 @@ kendo_module({
             this.name = this.options.name;
             this._eventTemplate = kendo.template(this.options.eventTemplate);
             this._dateTemplate = kendo.template(this.options.eventDateTemplate);
+            this._groupTemplate = kendo.template(this.options.eventGroupTemplate);
             this._timeTemplate = kendo.template(this.options.eventTimeTemplate);
 
             this.element.on("mouseenter" + NS, ".k-scheduler-agenda .k-scheduler-content tr", "_mouseenter")
@@ -74,17 +75,15 @@ kendo_module({
                     { text: this.options.messages.time, className: "k-scheduler-timecolumn" },
                     { text: this.options.messages.event }
                 ];
-
             var resources = this.groupedResources;
-
             if (resources.length) {
-                if (this._isVerticallyGrouped()) {
-       //             rows = this._createRowsLayout(resources);
-                } else {
-                    columns = this._createColumnsLayout(resources, columns);
+                var groupHeaders = [];
+                for (var idx = 0; idx < resources.length; idx++) {
+                    groupHeaders.push({ text: "", className: "k-scheduler-groupcolumn"});
                 }
-            }
 
+                columns = groupHeaders.concat(columns);
+            }
 
             return {
                 columns: columns
@@ -140,61 +139,129 @@ kendo_module({
             return new kendo.data.Query(tasks).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "asc" }]).groupBy({field: "startDate"}).toArray();
         },
 
+        _renderTaskGroups: function(tasksGroups, groups) {
+            var tableRows = [];
+
+            for (var taskGroupIndex = 0; taskGroupIndex < tasksGroups.length; taskGroupIndex++) {
+                var date = tasksGroups[taskGroupIndex].value;
+
+                var tasks = tasksGroups[taskGroupIndex].items;
+
+                var today = kendo.date.isToday(date);
+
+                for (var taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
+                    var task = tasks[taskIndex];
+
+                    var tableRow = [];
+
+                    if (taskGroupIndex === 0 && taskIndex === 0 && groups.length) {
+                        for (var idx = 0; idx < groups.length; idx++) {
+                            tableRow.push(kendo.format(
+                                '<td class="k-scheduler-groupcolumn{2}" rowspan="{0}">{1}</td>',
+                                groups[idx].rowSpan,
+                                this._groupTemplate({ value: groups[idx].text })
+                            ));
+                        }
+                    }
+
+                    if (taskIndex === 0) {
+                        tableRow.push(kendo.format(
+                            '<td class="k-scheduler-datecolumn{2}" rowspan="{0}">{1}</td>',
+                            tasks.length,
+                            this._dateTemplate({ date: date }),
+                            taskGroupIndex == tasksGroups.length - 1 ? " k-last" : ""
+                        ));
+                    }
+
+                    if (task.head) {
+                        task.format = "{0:t}";
+                    } else if (task.tail) {
+                        task.format = "{1:t}";
+                    } else {
+                        task.format = "{0:t}-{1:t}";
+                    }
+
+                    task.resources = this.eventResources(task);
+
+                    tableRow.push(kendo.format(
+                        '<td class="k-scheduler-timecolumn"><div>{0}{1}{2}</div></td><td>{3}</td>',
+                        task.tail || task.middle ? '<span class="k-icon k-i-arrow-w"></span>' : "",
+                        this._timeTemplate(extend({}, task, { start: task.startTime || task.start, end: task.endTime || task.end })),
+                        task.head || task.middle ? '<span class="k-icon k-i-arrow-e"></span>' : "",
+                        this._eventTemplate(task)
+                    ));
+
+                    tableRows.push("<tr" + (today ? ' class="k-today">' : ">") + tableRow.join("") + "</tr>");
+                }
+            }
+
+            return tableRows.join("");
+        },
+
         render: function(events) {
             var table = this.content.find("table").empty();
 
             if (events.length > 0) {
-                var tasksGroups = this._tasks(events);
+                var resources = this.groupedResources;
 
-                var tableRows = [];
-
-                for (var taskGroupIndex = 0; taskGroupIndex < tasksGroups.length; taskGroupIndex++) {
-                    var date = tasksGroups[taskGroupIndex].value;
-
-                    var tasks = tasksGroups[taskGroupIndex].items;
-
-                    var today = kendo.date.isToday(date);
-
-                    for (var taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
-                        var task = tasks[taskIndex];
-
-                        var tableRow = [];
-
-                        if (taskIndex === 0) {
-                            tableRow.push(kendo.format(
-                                '<td class="k-scheduler-datecolumn{2}" rowspan="{0}">{1}</td>',
-                                tasks.length,
-                                this._dateTemplate({ date: date }),
-                                taskGroupIndex == tasksGroups.length - 1 ? " k-last" : ""
-                            ));
-                        }
-
-                        if (task.head) {
-                           task.format = "{0:t}";
-                        } else if (task.tail) {
-                           task.format = "{1:t}";
-                        } else {
-                           task.format = "{0:t}-{1:t}";
-                        }
-
-                        task.resources = this.eventResources(task);
-
-                        tableRow.push(kendo.format(
-                            '<td class="k-scheduler-timecolumn"><div>{0}{1}{2}</div></td><td>{3}</td>',
-                            task.tail || task.middle ? '<span class="k-icon k-i-arrow-w"></span>' : "",
-                            this._timeTemplate(extend({}, task, { start: task.startTime || task.start, end: task.endTime || task.end })),
-                            task.head || task.middle ? '<span class="k-icon k-i-arrow-e"></span>' : "",
-                            this._eventTemplate(task)
-                        ));
-
-                        tableRows.push("<tr" + (today ? ' class="k-today">' : ">") + tableRow.join("") + "</tr>");
-                    }
+                if (resources.length) {
+                    var groups = this._createGroupConfiguration(events, resources, {rowSpan: 0});
+                    this._renderGroups(groups, table, []);
+                } else {
+                    var tasksGroups = this._tasks(events);
+                    table.append(this._renderTaskGroups(tasksGroups, []));
                 }
-
-                table.append(tableRows.join(""));
             }
 
             this.refreshLayout();
+        },
+
+        _renderGroups: function(groups, table, parentGroups) {
+            for (var idx = 0, length = groups.length; idx < length; idx++) {
+                var parents = parentGroups.splice(0);
+                parents.push(groups[idx]);
+
+                if (groups[idx].groups) {
+                    this._renderGroups(groups[idx].groups, table, parents);
+                } else {
+                    table.append(this._renderTaskGroups(groups[idx].items, parents));
+                }
+            }
+        },
+
+        _createGroupConfiguration: function(events, resources, parent) {
+            var resource = resources[0];
+            var configuration = [];
+            var data = resource.dataSource.view();
+
+            for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
+                var value = resourceValue(resource, data[dataIndex]);
+
+                var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: ui.SchedulerView.groupEqFilter, value: value }).toArray();
+
+                if (tmp.length) {
+                    var tasks = this._tasks(tmp);
+
+                    var obj = {
+                        text: kendo.getter(resource.dataTextField)(data[dataIndex]),
+                        value: value,
+                        rowSpan: 0
+                    };
+
+                    if (resources.length > 1) {
+                        obj.groups = this._createGroupConfiguration(tmp, resources.slice(1), obj);
+                        parent.rowSpan += obj.rowSpan;
+                    } else {
+                        obj.items = tasks;
+                        var span = rowSpan(obj.items)
+                        obj.rowSpan = span;
+                        parent.rowSpan += span;
+                    }
+                    configuration.push(obj);
+                }
+            }
+
+            return configuration;
         },
 
         destroy: function(){
@@ -234,7 +301,10 @@ kendo_module({
                           '</em>' +
                           '<span class="k-scheduler-agendadate">' +
                               '#=kendo.toString(date, "y")#' +
-                          '</span>',
+                              '</span>',
+            eventGroupTemplate: '<strong class="k-scheduler-adgendagroup">' +
+                            '#=value#' +
+                          '</strong>',
             messages: {
                 event: "Event",
                 date: "Date",
@@ -242,5 +312,22 @@ kendo_module({
             }
         }
     });
+
+    function rowSpan(tasks) {
+        var result = 0;
+
+        for (var idx = 0, length = tasks.length; idx < length; idx++) {
+            result += tasks[idx].items.length;
+        }
+
+        return result;
+    }
+
+    function resourceValue(resource, item) {
+        if (resource.valuePrimitive) {
+            item = kendo.getter(resource.dataValueField)(item);
+        }
+        return item;
+    }
 
 })(window.kendo.jQuery);

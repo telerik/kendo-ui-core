@@ -42,6 +42,16 @@
 	            font:12px sans-serif;
 	            overflow-y:scroll;
             }
+
+            th.k-scheduler-groupcolumn {
+                width: 144px;
+            }
+
+            td.k-scheduler-groupcolumn {
+                width: 144px;
+                border-right-width: 1px;
+                border-left-width: 0px !important;
+            }
 /*
             .k-scheduler-content .k-scheduler-table
             {
@@ -63,8 +73,7 @@
             date: new Date(2013, 5, 26),
             //allDaySlot: false,
             group: {
-                resources: [/*"date"*/, "roomId", "atendees"],
-            //    orientation: "vertical"
+                resources: [/*"date"*/, "roomId", "atendees"]
             },
             resources: [
                 {

@@ -598,12 +598,25 @@ kendo_module({
         return inner;
     }
 
+    function groupEqFilter(item, value) {
+        if ($.isArray(item)) {
+            for (var idx = 0; idx < item.length; idx++) {
+                if (item[idx] == value) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return item == value;
+    }
+
     $.extend(ui.SchedulerView, {
         createColumns: createColumns,
         createRows: createRows,
         rangeIndex: rangeIndex,
         collidingEvents: collidingEvents,
-        collidingHorizontallyEvents: collidingHorizontallyEvents
+        collidingHorizontallyEvents: collidingHorizontallyEvents,
+        groupEqFilter: groupEqFilter
     });
 
 })(window.kendo.jQuery);

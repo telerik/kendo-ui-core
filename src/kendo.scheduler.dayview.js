@@ -1648,7 +1648,7 @@ kendo_module({
                 for (var itemIdx = 0; itemIdx < view.length; itemIdx++) {
                     var value = resourceValue(resource, view[itemIdx]);
 
-                    var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: arrayEqFilter, value: value }).toArray();
+                    var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: SchedulerView.groupEqFilter, value: value }).toArray();
 
                     if (resources.length > 1) {
                         this._renderGroups(tmp, resources.slice(1), offsetCount * itemIdx, columnLevel + 1);
@@ -2325,19 +2325,7 @@ kendo_module({
         return $.inArray(selected, events) + (prev ? -1 : 1);
     }
 
-    function arrayEqFilter(item, value) {
-        if ($.isArray(item)) {
-            for (var idx = 0; idx < item.length; idx++) {
-                if (item[idx] == value) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return item == value;
-    }
-
-    extend(true, ui, {
+   extend(true, ui, {
        MultiDayView: MultiDayView,
        DayView: MultiDayView.extend({
            options: {
