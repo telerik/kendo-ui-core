@@ -1380,6 +1380,12 @@
 					"title": "Example of templates for Kendo UI Upload",
 					"meta": "This demo illustrates how to use templates with the Kendo UI Upload widget."
 				},
+				{
+					"text": "Initial Files",
+					"url": "upload/initialFiles.html",
+					"title": "Example of initial files for Kendo UI Upload",
+					"meta": "This demo illustrates how to render initial files with the Kendo UI Upload widget."
+				},
                 {
                     "text": "RTL support",
                     "url": "upload/rtl.html",
