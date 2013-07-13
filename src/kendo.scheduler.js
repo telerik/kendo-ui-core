@@ -586,6 +586,10 @@ kendo_module({
             height: null,
             width: null,
             resources: [],
+            group: {
+                resources: [],
+                direction: "horizontal"
+            },
             views: []
         },
 
@@ -1642,7 +1646,7 @@ kendo_module({
                 }
 
                 if (type) {
-                    view = new type(this.wrapper, trimOptions(extend({}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date() })));
+                    view = new type(this.wrapper, trimOptions(extend(true, {}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date() })));
                 } else {
                     throw new Error("There is no such view");
                 }
