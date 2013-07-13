@@ -69,12 +69,25 @@ kendo_module({
         },
 
         _layout: function() {
-            return {
-                columns: [
+            var columns = [
                     { text: this.options.messages.date, className: "k-scheduler-datecolumn" },
                     { text: this.options.messages.time, className: "k-scheduler-timecolumn" },
                     { text: this.options.messages.event }
-                ]
+                ];
+
+            var resources = this.groupedResources;
+
+            if (resources.length) {
+                if (this._isVerticallyGrouped()) {
+       //             rows = this._createRowsLayout(resources);
+                } else {
+                    columns = this._createColumnsLayout(resources, columns);
+                }
+            }
+
+
+            return {
+                columns: columns
             };
         },
 

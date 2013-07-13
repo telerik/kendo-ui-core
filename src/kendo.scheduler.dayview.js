@@ -143,8 +143,6 @@ kendo_module({
 
             that._editable();
 
-            that._resourcesForGroups();
-
             that.calculateDateRange();
 
             that._slots();

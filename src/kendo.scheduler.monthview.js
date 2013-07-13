@@ -70,8 +70,6 @@ kendo_module({
 
             that._editable();
 
-            that._resourcesForGroups();
-
             that._renderLayout(that.options.date);
 
             that._slots();

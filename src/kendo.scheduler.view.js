@@ -160,6 +160,8 @@ kendo_module({
             this._resizeHint = $();
             this._moveHint = $();
             this._cellId = kendo.guid();
+
+            this._resourcesForGroups();
         },
 
         dateForTitle: function() {
