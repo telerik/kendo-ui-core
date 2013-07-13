@@ -851,7 +851,6 @@
                     date: new Date("2013/6/6"),
                     views: ["week"],
                     dataSource: [
-                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 10:30"), isAllDay: true, ownerId: 1, title: "" },
                         { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 10:30"), isAllDay: true, ownerId: 2, title: "" }
                     ],
                     group: {
@@ -877,9 +876,13 @@
 
                 dragstart(scheduler, handle, handle.offset());
 
-                drag(scheduler, handle, slots.eq(3).offset());
+                var offset = slots.eq(3).offset();
+                offset.top += 10;
+
+                drag(scheduler, handle, offset);
 
                 equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(3).offset().left);
+
                 equalWithRound(div.find(".k-event-drag-hint").offset().top, slots.eq(3).offset().top);
             });
 
@@ -1055,6 +1058,69 @@
                 drag(scheduler, handle, slots.eq(5).offset());
 
                 equalWithRound(div.find(".k-event-drag-hint").outerWidth(), slots.eq(5).outerWidth());
+            });
+
+            test("moving multiday event creates two hints", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 11:30"), end: new Date("2013/6/7 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event:first");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(4)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(4).offset());
+
+                equal(div.find(".k-event-drag-hint").length, 2);
+            });
+
+            test("moving one day event to 12:00 AM creates only one hint", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/2 11:30 PM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(slots.length-2).offset());
+
+                equal(div.find(".k-event-drag-hint").length, 1);
+            });
+
+            test("moving one day event creates only one hint if the end time is before the start time of the view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(slots.length-2).offset());
+
+                equal(div.find(".k-event-drag-hint").length, 1);
             });
 
             function dragdrop(scheduler, target, offset, to) {

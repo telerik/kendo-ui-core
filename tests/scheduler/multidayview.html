@@ -291,6 +291,16 @@
                 equal(view.content.find("div.k-event").length, 2);
             });
 
+            test("cross-midnight events are not split if the end time is before the start time of the view", function() {
+                var view = setup({
+                    startTime: new Date("2013/6/6 9:00"),
+                    dates: [ new Date("2013/6/6"), new Date("2013/6/7") ]
+                });
+
+                view.render([{ uid: "uid", title: "", start: new Date("2013/6/6 10:00"), end: new Date("2013/6/7 8:00") }]);
+                equal(view.content.find("div.k-event").length, 1);
+            });
+
             test("old events are removed on multiple databind calls", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
