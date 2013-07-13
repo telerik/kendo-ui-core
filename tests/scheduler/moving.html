@@ -988,6 +988,75 @@
                 equal(scheduler.dataSource.at(0).ownerId, 1);
             });
 
+            test("hint when moving event in month view to another resource group", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/6/1 11:30"), end: new Date("2013/6/1 12:00 PM"), ownerId: 1, title: "" }
+                    ],
+                    group: {
+                        resources: ["Owner"]
+                    },
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(8)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(0).offset());
+
+                equalWithRound(div.find(".k-event-drag-hint").outerWidth(), slots.eq(0).outerWidth());
+                equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(0).offset().left);
+            });
+
+            test("moving long event at the end of the month view is restricted by resource", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/7/5 11:30"), end: new Date("2013/7/6 12:00 PM"), ownerId: 1, title: "" }
+                    ],
+                    group: {
+                        resources: ["Owner"]
+                    },
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(7)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(5).offset());
+
+                equalWithRound(div.find(".k-event-drag-hint").outerWidth(), slots.eq(5).outerWidth());
+            });
+
             function dragdrop(scheduler, target, offset, to) {
                 if (!to) {
                     to = offset;

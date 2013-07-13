@@ -752,9 +752,12 @@ kendo_module({
             var endSlotIndex = this._slotIndex(end);
 
             if (endSlotIndex == null) {
-                endSlotIndex = slots.length - 1;
+                endSlotIndex = NUMBER_OF_COLUMNS * NUMBER_OF_ROWS - 1;
                 tail = true;
             }
+
+            startSlotIndex = this._applyOffset(startSlotIndex, currentSlot.groupIndex);
+            endSlotIndex = this._applyOffset(endSlotIndex, currentSlot.groupIndex);
 
             var startSlot = slots[startSlotIndex];
             var endSlot = slots[endSlotIndex];
@@ -768,6 +771,10 @@ kendo_module({
 
             for (var slotIndex = startSlot.index; slotIndex <= endSlot.index; slotIndex++) {
                 var slot = slots[slotIndex];
+
+                if (slot.groupIndex != currentSlot.groupIndex) {
+                    continue;
+                }
 
                 if (slot.offsetTop > slotGroup.endSlot.offsetTop) {
                     slotGroup = {
