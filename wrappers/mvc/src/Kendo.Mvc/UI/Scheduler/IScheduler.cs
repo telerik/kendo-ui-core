@@ -131,5 +131,10 @@
         {
             get;
         }
+
+        SchedulerMessages Messages
+        {
+            get;
+        }
     }
 }

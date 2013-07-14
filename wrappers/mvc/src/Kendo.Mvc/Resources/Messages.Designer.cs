@@ -932,15 +932,562 @@ namespace Kendo.Mvc.Resources {
                 return ResourceManager.GetString("Pager_Refresh", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to all day.
+        /// </summary>
+        public static string Scheduler_AllDay {
+            get {
+                return ResourceManager.GetString("Scheduler_AllDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Scheduler_Cancel {
+            get {
+                return ResourceManager.GetString("Scheduler_Cancel", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete this event?.
         /// </summary>
-        public static string Scheduler_Confirmation
-        {
-            get
-            {
+        public static string Scheduler_Confirmation {
+            get {
                 return ResourceManager.GetString("Scheduler_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Scheduler_Date {
+            get {
+                return ResourceManager.GetString("Scheduler_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Scheduler_Destroy {
+            get {
+                return ResourceManager.GetString("Scheduler_Destroy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All day event.
+        /// </summary>
+        public static string Scheduler_Editor_AllDayEvent {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_AllDayEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Scheduler_Editor_Description {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event.
+        /// </summary>
+        public static string Scheduler_Editor_EditorTitle {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_EditorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End.
+        /// </summary>
+        public static string Scheduler_Editor_End {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End timezone.
+        /// </summary>
+        public static string Scheduler_Editor_EndTimezone {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_EndTimezone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat.
+        /// </summary>
+        public static string Scheduler_Editor_Repeat {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_Repeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use separate start and end time zones.
+        /// </summary>
+        public static string Scheduler_Editor_SeparateTimezones {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_SeparateTimezones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string Scheduler_Editor_Start {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start timezone.
+        /// </summary>
+        public static string Scheduler_Editor_StartTimezone {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_StartTimezone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  .
+        /// </summary>
+        public static string Scheduler_Editor_Timezone {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_Timezone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time zone.
+        /// </summary>
+        public static string Scheduler_Editor_TimezoneEditorButton {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_TimezoneEditorButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timezones.
+        /// </summary>
+        public static string Scheduler_Editor_TimezoneEditorTitle {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_TimezoneEditorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Scheduler_Editor_Title {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event.
+        /// </summary>
+        public static string Scheduler_Event {
+            get {
+                return ResourceManager.GetString("Scheduler_Event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to delete only this event occurrence or the whole series?.
+        /// </summary>
+        public static string Scheduler_Recurrence_DeleteRecurring {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_DeleteRecurring", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete current occurrence.
+        /// </summary>
+        public static string Scheduler_Recurrence_DeleteWindowOccurrence {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_DeleteWindowOccurrence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the series.
+        /// </summary>
+        public static string Scheduler_Recurrence_DeleteWindowSeries {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_DeleteWindowSeries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Recurring Item.
+        /// </summary>
+        public static string Scheduler_Recurrence_DeleteWindowTitle {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_DeleteWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  days(s).
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Daily_Days {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Daily_Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat every: .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Daily_RepeatEvery {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Daily_RepeatEvery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to After .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_End_EndCountAfter {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndCountAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  occurrence(s).
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_End_EndCountOccurrence {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndCountOccurrence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End:.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_End_EndLabel {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_End_EndNever {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndNever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_End_EndUntilOn {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndUntilOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Frequencies_Daily {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Frequencies_Daily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Frequencies_Monthly {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Frequencies_Monthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Frequencies_Never {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Frequencies_Never", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekly.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Frequencies_Weekly {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Frequencies_Weekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yearly.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Frequencies_Yearly {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Frequencies_Yearly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Monthly_Day {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Monthly_Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  month(s).
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Monthly_Months {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Monthly_Months", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat every: .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Monthly_RepeatEvery {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Monthly_RepeatEvery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat on: .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Monthly_RepeatOn {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Monthly_RepeatOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to first.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_OffsetPositions_First {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_OffsetPositions_First", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fourth.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_OffsetPositions_Fourth {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_OffsetPositions_Fourth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to last.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_OffsetPositions_Last {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_OffsetPositions_Last", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to second.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_OffsetPositions_Second {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_OffsetPositions_Second", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to third.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_OffsetPositions_Third {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_OffsetPositions_Third", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat every: .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Weekly_RepeatEvery {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Weekly_RepeatEvery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat on: .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Weekly_RepeatOn {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Weekly_RepeatOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  week(s).
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Weekly_Weeks {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Weekly_Weeks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  of .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Yearly_Of {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Yearly_Of", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat every: .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Yearly_RepeatEvery {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Yearly_RepeatEvery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat on: .
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Yearly_RepeatOn {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Yearly_RepeatOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  year(s).
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Yearly_Years {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Yearly_Years", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to edit only this event occurrence or the whole series?.
+        /// </summary>
+        public static string Scheduler_Recurrence_EditRecurring {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_EditRecurring", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit current occurrence.
+        /// </summary>
+        public static string Scheduler_Recurrence_EditWindowOccurrence {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_EditWindowOccurrence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit the series.
+        /// </summary>
+        public static string Scheduler_Recurrence_EditWindowSeries {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_EditWindowSeries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Recurring Item.
+        /// </summary>
+        public static string Scheduler_Recurrence_EditWindowTitle {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_EditWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Scheduler_Save {
+            get {
+                return ResourceManager.GetString("Scheduler_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string Scheduler_Time {
+            get {
+                return ResourceManager.GetString("Scheduler_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today.
+        /// </summary>
+        public static string Scheduler_Today {
+            get {
+                return ResourceManager.GetString("Scheduler_Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agenda.
+        /// </summary>
+        public static string Scheduler_View_Agenda {
+            get {
+                return ResourceManager.GetString("Scheduler_View_Agenda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string Scheduler_View_Day {
+            get {
+                return ResourceManager.GetString("Scheduler_View_Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string Scheduler_View_Month {
+            get {
+                return ResourceManager.GetString("Scheduler_View_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Week.
+        /// </summary>
+        public static string Scheduler_View_Week {
+            get {
+                return ResourceManager.GetString("Scheduler_View_Week", resourceCulture);
             }
         }
         

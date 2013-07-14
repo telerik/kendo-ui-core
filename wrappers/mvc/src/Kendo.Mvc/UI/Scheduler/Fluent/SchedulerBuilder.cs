@@ -553,6 +553,19 @@
         }
 
         /// <summary>
+        /// Sets the messages of the scheduler.
+        /// </summary>
+        /// <param name="addViewAction">The lambda which configures the scheduler messages</param>
+        public SchedulerBuilder<TModel> Messages(Action<SchedulerMessagesBuilder> addViewAction)
+        {
+            SchedulerMessagesBuilder builder = new SchedulerMessagesBuilder(Component.Messages);
+
+            addViewAction(builder);
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the events configuration of the scheduler.
         /// </summary>
         /// <param name="clientEventsAction">The lambda which configures the scheduler events</param>
