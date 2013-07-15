@@ -73,6 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
+        [Obsolete("GroupNameTemplate is obsolete. Please specify the template as Name.")]
         public TSeriesBuilder GroupNameTemplate(string groupNameTemplate)
         {
             Series.GroupNameTemplate = groupNameTemplate;

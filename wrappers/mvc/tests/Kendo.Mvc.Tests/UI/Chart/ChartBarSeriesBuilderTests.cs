@@ -27,19 +27,6 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void GroupNameTemplate_should_set_name()
-        {
-            builder.GroupNameTemplate("#= series.name #");
-            series.GroupNameTemplate.ShouldEqual("#= series.name #");
-        }
-
-        [Fact]
-        public void GroupNameTemplate_should_return_builder()
-        {
-            builder.GroupNameTemplate("#= series.name #").ShouldBeSameAs(builder);
-        }
-
-        [Fact]
         public void Opacity_should_set_opacity()
         {
             builder.Opacity(0.5);
