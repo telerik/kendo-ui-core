@@ -78,6 +78,12 @@
             set; 
         }
 
+        public string Name
+        {
+            get;
+            set;
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
@@ -119,6 +125,11 @@
             if (ValuePrimitive != true)
             {
                 json["valuePrimitive"] = ValuePrimitive;
+            }
+
+            if (Name.HasValue())
+            {
+                json["name"] = Name;
             }
         }
     }

@@ -51,6 +51,15 @@
         }
 
         /// <summary>
+        /// The name of the resource.
+        /// </summary>        
+        public SchedulerResourceBuilder<TModel> Name(string value)
+        {
+            resource.Name = value;
+            return this;
+        }
+
+        /// <summary>
         /// Binds the scheduler resource to a list of objects
         /// </summary>
         /// <param name="dataSource">The dataSource</param>

@@ -136,5 +136,10 @@
         {
             get;
         }
+
+        SchedulerGroupSettings Group
+        {
+            get;
+        }
     }
 }

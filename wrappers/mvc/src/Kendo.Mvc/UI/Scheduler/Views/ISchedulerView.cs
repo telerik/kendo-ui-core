@@ -48,5 +48,12 @@
             get;
             set;
         }
+
+        SchedulerGroupSettings Group
+        {
+            get;
+            set;
+        }
+
     }
 }

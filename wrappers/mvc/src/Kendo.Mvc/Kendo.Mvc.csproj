@@ -993,6 +993,7 @@
     <Compile Include="UI\QRCode\QRBorder.cs" />
     <Compile Include="UI\QRCode\QRCode.cs" />
     <Compile Include="UI\RequestSettings.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerGroupBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEditorMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorDailyMessagesBuilder.cs" />
@@ -1014,7 +1015,9 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewMultiDayBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewWeekBuilder.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
+    <Compile Include="UI\Scheduler\SchedulerGroupOrientation.cs" />
     <Compile Include="UI\Scheduler\SchedulerMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerGroupSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettingsBase.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditorMessages.cs" />

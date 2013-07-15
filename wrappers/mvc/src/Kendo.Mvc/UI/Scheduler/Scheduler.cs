@@ -34,6 +34,7 @@
             AllDaySlot = true;
 
             Messages = new SchedulerMessages();
+            Group = new SchedulerGroupSettings();
         }
 
         public DataSource DataSource
@@ -187,6 +188,12 @@
             private set;
         }
 
+        public SchedulerGroupSettings Group
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
@@ -323,10 +330,16 @@
                 options["views"] = Views.ToJson();
             }
 
-            IDictionary<string, object> messages = Messages.ToJson();
+            var messages = Messages.ToJson();
             if (messages.Count > 0)
             {
                 options["messages"] = messages;
+            }
+
+            var group = Group.ToJson();
+            if (group.Count > 0)
+            {
+                options["group"] = group;
             }
 
             Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();

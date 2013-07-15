@@ -496,6 +496,37 @@
         }
 
         /// <summary>
+        /// Sets the resources grouping configuration of the scheduler.
+        /// </summary>
+        /// <param name="addResourceAction">The lambda which configures the scheduler grouping</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///    .Name(&quot;Scheduler&quot;)
+        ///    .Resources(resource =&gt;
+        ///    {
+        ///        resource.Add(m =&gt; m.TaskID)
+        ///            .Title(&quot;Color&quot;)
+        ///            .Multiple(true)
+        ///            .DataTextField(&quot;Text&quot;)
+        ///            .DataValueField(&quot;Value&quot;)
+        ///            .DataSource(d =&gt; d.Read(&quot;Attendies&quot;, &quot;Scheduler&quot;));
+        ///    })
+        ///    .DataSource(dataSource =&gt; dataSource
+        ///        .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///    ))
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Group(Action<SchedulerGroupBuilder<TModel>> configucation)
+        {
+            var factory = new SchedulerGroupBuilder<TModel>(Component);
+
+            configucation(factory);
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the resources configuration of the scheduler.
         /// </summary>
         /// <param name="addResourceAction">The lambda which configures the scheduler resources</param>
