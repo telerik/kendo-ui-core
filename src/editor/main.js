@@ -832,11 +832,11 @@ kendo_module({
                 }));
         },
 
-        update: function($ui, nodes) {
+        update: function(ui, nodes) {
             var isFormatted = this.options.finder.isFormatted(nodes);
 
-            $ui.toggleClass("k-state-active", isFormatted);
-            $ui.attr("aria-pressed", isFormatted);
+            ui.toggleClass("k-state-selected", isFormatted);
+            ui.attr("aria-pressed", isFormatted);
         }
     });
 

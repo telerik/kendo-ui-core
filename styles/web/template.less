@@ -680,6 +680,11 @@ td.k-state-focused.k-state-selected,
 .k-draghandle.k-state-selected:hover
 {
     .composite-background(@selected-gradient);
+}
+
+.k-button:active,
+.k-draghandle.k-state-selected:hover
+{
     background-position: 50% 50%;
 }
 
@@ -740,7 +745,9 @@ div.k-imagebrowser-dropzone em,
 .k-tool-icon,
 .k-tool-icon.k-state-hover,
 .k-tool-icon.k-state-active,
-.k-tool-icon.k-state-active.k-state-hover
+.k-tool-icon.k-state-active.k-state-hover,
+.k-tool-icon.k-state-selected,
+.k-tool-icon.k-state-selected.k-state-hover
 {
     background-image: url('@{image-folder}/sprite.png');
 }
@@ -1586,6 +1593,8 @@ div.k-imagebrowser-dropzone em
     .k-tool-icon.k-state-hover,
     .k-tool-icon.k-state-active,
     .k-tool-icon.k-state-active.k-state-hover,
+    .k-tool-icon.k-state-selected,
+    .k-tool-icon.k-state-selected.k-state-hover,
     .k-column-menu .k-sprite {
         background-image: url('@{image-folder}/sprite_2x.png');
         background-size: 340px 336px;

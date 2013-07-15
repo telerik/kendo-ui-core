@@ -3130,61 +3130,43 @@ table.k-editor
     vertical-align: middle;
 }
 
+.editor-icon(@x, @y) {
+    background-position: @x @y;
+
+    &.k-state-hover,
+    &.k-state-selected {
+        background-position: (@x - 24) @y;
+    }
+}
+
 .k-i-move { background-position: -160px -288px; }
-.k-bold { background-position: -240px 0; }
-.k-bold.k-state-hover { background-position: -264px 0; }
-.k-italic { background-position: -240px -24px; }
-.k-italic.k-state-hover { background-position: -264px -24px; }
-.k-underline { background-position: -240px -48px; }
-.k-underline.k-state-hover { background-position: -264px -48px; }
-.k-strikethrough { background-position: -240px -72px; }
-.k-strikethrough.k-state-hover { background-position: -264px -72px; }
-.k-foreColor { background-position: -240px -96px; }
-.k-state-hover > .k-foreColor { background-position: -264px -96px; }
-.k-backColor { background-position: -240px -120px; }
-.k-state-hover > .k-backColor { background-position: -264px -120px; }
-.k-justifyLeft { background-position: -240px -144px; }
-.k-justifyLeft.k-state-hover { background-position: -264px -144px; }
-.k-justifyCenter { background-position: -240px -168px; }
-.k-justifyCenter.k-state-hover { background-position: -264px -168px; }
-.k-justifyRight { background-position: -240px -192px; }
-.k-justifyRight.k-state-hover { background-position: -264px -192px; }
-.k-justifyFull { background-position: -240px -216px; }
-.k-justifyFull.k-state-hover { background-position: -264px -216px; }
-.k-insertUnorderedList { background-position: -240px -264px; }
-.k-insertUnorderedList.k-state-hover { background-position: -264px -264px; }
-.k-insertOrderedList { background-position: -240px -288px; }
-.k-insertOrderedList.k-state-hover { background-position: -264px -288px; }
-.k-indent, .k-rtl .k-outdent { background-position: -288px 0; }
-.k-indent.k-state-hover, .k-rtl .k-outdent.k-state-hover { background-position: -312px 0; }
-.k-outdent, .k-rtl .k-indent { background-position: -288px -24px; }
-.k-outdent.k-state-hover, .k-rtl .k-indent.k-state-hover { background-position: -312px -24px; }
-.k-createLink { background-position: -288px -48px; }
-.k-createLink.k-state-hover { background-position: -312px -48px; }
-.k-unlink { background-position: -288px -72px; }
-.k-unlink.k-state-hover { background-position: -312px -72px; }
-.k-insertImage { background-position: -288px -96px; }
-.k-insertImage.k-state-hover { background-position: -312px -96px; }
-.k-subscript { background-position: -288px -144px; }
-.k-subscript.k-state-hover { background-position: -312px -144px; }
-.k-superscript { background-position: -288px -168px; }
-.k-superscript.k-state-hover { background-position: -312px -168px; }
-.k-createTable { background-position: -192px 0; }
-.k-createTable.k-state-hover { background-position: -216px 0; }
-.k-addColumnLeft { background-position: -192px -24px; }
-.k-addColumnLeft.k-state-hover { background-position: -216px -24px; }
-.k-addColumnRight { background-position: -192px -48px; }
-.k-addColumnRight.k-state-hover { background-position: -216px -48px; }
-.k-addRowAbove { background-position: -192px -72px; }
-.k-addRowAbove.k-state-hover { background-position: -216px -72px; }
-.k-addRowBelow { background-position: -192px -96px; }
-.k-addRowBelow.k-state-hover { background-position: -216px -96px; }
-.k-deleteRow { background-position: -192px -120px; }
-.k-deleteRow.k-state-hover { background-position: -216px -120px; }
-.k-deleteColumn { background-position: -192px -144px; }
-.k-deleteColumn.k-state-hover { background-position: -216px -144px; }
-.k-mergeCells { background-position: -192px -168px; }
-.k-mergeCells.k-state-hover { background-position: -216px -168px; }
+.k-bold { .editor-icon(-240px, 0); }
+.k-italic { .editor-icon(-240px, -24px); }
+.k-underline { .editor-icon(-240px, -48px); }
+.k-strikethrough { .editor-icon(-240px, -72px); }
+.k-foreColor { .editor-icon(-240px, -96px); }
+.k-backColor { .editor-icon(-240px, -120px); }
+.k-justifyLeft { .editor-icon(-240px, -144px); }
+.k-justifyCenter { .editor-icon(-240px, -168px); }
+.k-justifyRight { .editor-icon(-240px, -192px); }
+.k-justifyFull { .editor-icon(-240px, -216px); }
+.k-insertUnorderedList { .editor-icon(-240px, -264px); }
+.k-insertOrderedList { .editor-icon(-240px, -288px); }
+.k-indent, .k-rtl .k-outdent { .editor-icon(-288px, 0); }
+.k-outdent, .k-rtl .k-indent { .editor-icon(-288px, -24px); }
+.k-createLink { .editor-icon(-288px, -48px); }
+.k-unlink { .editor-icon(-288px, -72px); }
+.k-insertImage { .editor-icon(-288px, -96px); }
+.k-subscript { .editor-icon(-288px, -144px); }
+.k-superscript { .editor-icon(-288px, -168px); }
+.k-createTable { .editor-icon(-192px, 0); }
+.k-addColumnLeft { .editor-icon(-192px, -24px); }
+.k-addColumnRight { .editor-icon(-192px, -48px); }
+.k-addRowAbove { .editor-icon(-192px, -72px); }
+.k-addRowBelow { .editor-icon(-192px, -96px); }
+.k-deleteRow { .editor-icon(-192px, -120px); }
+.k-deleteColumn { .editor-icon(-192px, -144px); }
+.k-mergeCells { .editor-icon(-192px, -168px); }
 
 /* default tool widths */
 .k-fontName { width: 110px; }

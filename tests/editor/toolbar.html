@@ -101,7 +101,7 @@
 
                 editor.trigger('select');
 
-                ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
+                ok($('.k-bold', editor.wrapper).hasClass('k-state-selected'));
             });
 
             test('handle word selection', function() {
@@ -114,7 +114,7 @@
 
                 editor.trigger('select');
 
-                ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
+                ok($('.k-bold', editor.wrapper).hasClass('k-state-selected'));
             });
 
             test('handle mixed selection', function() {
@@ -128,7 +128,7 @@
 
                 editor.trigger('select');
 
-                ok(!$('k-insertUnorderedList', editor.wrapper).hasClass('k-state-active'));
+                ok(!$('k-insertUnorderedList', editor.wrapper).hasClass('k-state-selected'));
             });
 
             test('handle image selection', function() {
@@ -141,7 +141,7 @@
 
                 editor.trigger('select');
 
-                ok($('.k-justifyRight', editor.wrapper).hasClass('k-state-active'));
+                ok($('.k-justifyRight', editor.wrapper).hasClass('k-state-selected'));
             });
 
             if (!kendo.support.browser.msie) {
