@@ -1810,7 +1810,6 @@ kendo_module({
                 endCol = that._dateSlotIndex(endDate),
                 endTime = getMilliseconds(this.options.endTime),
                 endDateTime = getMilliseconds(endDate),
-                dayDiff = endDate.getDate() - startDate.getDate(),
                 slots, firstCell, cell,
                 end;
 
