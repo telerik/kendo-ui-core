@@ -111,7 +111,8 @@
             });
 
             test("scheduler sets selection range based on clicked event", function() {
-                var event = container.find(".k-event"),
+                createSampleEvent();
+                var event = container.find(".k-event").eq(0),
                     dataItem = scheduler.dataSource.getByUid(event.data("uid")),
                     slot = scheduler.view().selectionByElement(event);
 
@@ -122,8 +123,8 @@
 
                 selection = scheduler._selection;
 
-                deepEqual(selection.start, dataItem.start);
-                deepEqual(selection.end, dataItem.end);
+                equal(selection.start.getTime(), dataItem.start.getTime());
+                equal(selection.end.getTime(), dataItem.end.getTime());
                 equal(selection.isAllDay, slot.isAllDay);
                 equal(selection.groupIndex, slot.groupIndex);
             });

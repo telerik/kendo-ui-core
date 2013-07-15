@@ -548,8 +548,8 @@ kendo_module({
                         kendo.date.setTime(selection.end, - this.view()._timeSlotInterval());
                     }
                 } else {
-                    selection.start = new Date(dataItem.start);
-                    selection.end = new Date(dataItem.end);
+                    selection.start = new Date(dataItem.start.getTime());
+                    selection.end = new Date(dataItem.end.getTime());
                 }
 
                 selection.isAllDay = dataItem.isAllDay;
