@@ -1320,9 +1320,9 @@ kendo_module({
                             model.startTime = startTime;
                             model.endTime = endTime;
                             that.cancelEvent();
-                        }
 
-                        that.focus();
+                            that.focus();
+                        }
                     }
                 }, options));
 
