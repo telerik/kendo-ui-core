@@ -1861,28 +1861,6 @@ kendo_module({
             that._scrollTo(backwardSelection ? firstCell : cell, that.content[0]);
         },
 
-        _scrollTo: function(element, container) {
-            var elementOffset = element.offsetTop,
-                elementOffsetDir = element.offsetHeight,
-                containerScroll = container.scrollTop,
-                containerOffsetDir = container.clientHeight,
-                bottomDistance = elementOffset + elementOffsetDir,
-                result = 0;
-
-                if (containerScroll > elementOffset) {
-                    result = elementOffset;
-                } else if (bottomDistance > (containerScroll + containerOffsetDir)) {
-                    if (elementOffsetDir <= containerOffsetDir) {
-                        result = (bottomDistance - containerOffsetDir);
-                    } else {
-                        result = elementOffset;
-                    }
-                } else {
-                    result = containerScroll;
-                }
-                container.scrollTop = result;
-        },
-
         move: function(selection, key, shiftKey) {
             var options = this.options,
                 interval = (options.majorTick * MS_PER_MINUTE) / (options.minorTickCount || 1),

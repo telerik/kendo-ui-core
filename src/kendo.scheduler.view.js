@@ -199,6 +199,28 @@ kendo_module({
             this._moveHint = $();
         },
 
+        _scrollTo: function(element, container) {
+            var elementOffset = element.offsetTop,
+                elementOffsetDir = element.offsetHeight,
+                containerScroll = container.scrollTop,
+                containerOffsetDir = container.clientHeight,
+                bottomDistance = elementOffset + elementOffsetDir,
+                result = 0;
+
+                if (containerScroll > elementOffset) {
+                    result = elementOffset;
+                } else if (bottomDistance > (containerScroll + containerOffsetDir)) {
+                    if (elementOffsetDir <= containerOffsetDir) {
+                        result = (bottomDistance - containerOffsetDir);
+                    } else {
+                        result = elementOffset;
+                    }
+                } else {
+                    result = containerScroll;
+                }
+                container.scrollTop = result;
+        },
+
         eventResources: function(event) {
             var resources = [],
                 options = this.options;
