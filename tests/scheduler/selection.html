@@ -94,7 +94,7 @@
 
             test("scheduler sets selection range based on clicked cell", function() {
                 var td = container.find(".k-scheduler-content td").eq(5),
-                slot = scheduler.view().slotByElement(td),
+                slot = scheduler.view().selectionByElement(td),
                 selection;
 
                 td.trigger({
@@ -113,7 +113,7 @@
             test("scheduler sets selection range based on clicked event", function() {
                 var event = container.find(".k-event"),
                     dataItem = scheduler.dataSource.getByUid(event.data("uid")),
-                    slot = scheduler.view().slotByElement(event);
+                    slot = scheduler.view().selectionByElement(event);
 
                 event.trigger({
                     type: "mousedown",

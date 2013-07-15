@@ -344,7 +344,7 @@ kendo_module({
             }
         },
 
-        slotByElement: function(cell) {
+        selectionByElement: function(cell) {
             var offset = $(cell).offset();
             return this._slotByPosition(offset.left, offset.top);
         },

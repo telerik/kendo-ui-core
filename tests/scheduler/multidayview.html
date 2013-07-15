@@ -1333,7 +1333,7 @@
                         ]
                     });
 
-                var result = view.slotByCell(view.content.find("td").eq(2));
+                var result = view.selectionByElement(view.content.find("td").eq(2));
 
                 equal(result.start.getTime(), new Date(2013, 1, 26, 2, 0, 0).getTime());
                 equal(result.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());

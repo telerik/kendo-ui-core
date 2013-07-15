@@ -518,7 +518,7 @@ kendo_module({
             item = $(item);
             selection = this._selection;
             uid = item.attr(kendo.attr("uid"));
-            slot = this.view().slotByElement(item);
+            slot = this.view().selectionByElement(item);
 
             if (slot) {
                 selection.groupIndex = slot.groupIndex;
