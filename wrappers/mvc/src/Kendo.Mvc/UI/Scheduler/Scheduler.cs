@@ -23,8 +23,8 @@
 
             DataSource.Type = DataSourceType.Ajax;
 
-            DataSource.ModelType(typeof(TModel));
-
+            DataSource.Schema.Model = new SchedulerModelDescriptor(typeof(TModel));
+         
             UrlGenerator = urlGenerator;
 
             Resources = new List<SchedulerResource<TModel>>();
@@ -343,8 +343,6 @@
             }
 
             Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
-
-            dataSource["type"] = "scheduler-aspnetmvc";
 
             //TODO: update logic
             if (DataSource.Data != null)

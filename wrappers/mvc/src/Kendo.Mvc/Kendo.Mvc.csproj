@@ -1017,6 +1017,7 @@
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
     <Compile Include="UI\Scheduler\SchedulerGroupOrientation.cs" />
     <Compile Include="UI\Scheduler\SchedulerMessages.cs" />
+    <Compile Include="UI\Scheduler\SchedulerModelDescriptor.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerGroupSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettingsBase.cs" />
