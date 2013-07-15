@@ -121,6 +121,20 @@
     background-image: @texture,       ~"linear-gradient(to bottom, @{gradient})";
 }
 
+@sprite-image: url('@{image-folder}/sprite.png');
+
+.tool-icon-background(@gradient) when (@gradient = none) {
+    background-image: @sprite-image;
+}
+
+.tool-icon-background(@gradient) when not (@gradient = none) {
+    background-image: @sprite-image;
+    background-image: @sprite-image, -webkit-linear-gradient(top, ~"@{gradient}");
+    background-image: @sprite-image,    -moz-linear-gradient(top, ~"@{gradient}");
+    background-image: @sprite-image,      -o-linear-gradient(top, ~"@{gradient}");
+    background-image: @sprite-image,       ~"linear-gradient(to bottom, @{gradient})";
+}
+
 .selection(@color) {
     ::selection {
         background-color: @color;
@@ -375,7 +389,7 @@ textarea.k-textbox:hover,
 .k-drop-hint,
 .k-column-menu .k-sprite
 {
-    background-image: url('@{image-folder}/sprite.png');
+    background-image: @sprite-image;
     border-color: transparent;
 }
 
@@ -742,14 +756,22 @@ div.k-imagebrowser-dropzone em,
     .composite-background(@active-gradient);
 }
 
-.k-tool-icon,
-.k-tool-icon.k-state-hover,
+.k-tool-icon
+{
+    background-image: @sprite-image;
+}
+
+.k-tool-icon.k-state-hover
+{
+    .tool-icon-background(@hover-gradient);
+}
+
 .k-tool-icon.k-state-active,
 .k-tool-icon.k-state-active.k-state-hover,
 .k-tool-icon.k-state-selected,
 .k-tool-icon.k-state-selected.k-state-hover
 {
-    background-image: url('@{image-folder}/sprite.png');
+    .tool-icon-background(@selected-gradient);
 }
 
 .k-state-hover>.k-link,
