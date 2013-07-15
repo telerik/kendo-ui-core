@@ -27,23 +27,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets title, which appears in the header of the window.
+        /// </summary>
+        public WindowBuilder Title(string title)
+        {
+            Component.Title = title;
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines a selector for the element to which the Window will be appended. By default this is the page body.
         /// </summary>
         /// <param name="selector">A selector of the Window container</param>
         public WindowBuilder AppendTo(string selector)
         {
             Component.AppendTo = selector;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets title, which appears in the header of the window.
-        /// </summary>
-        public WindowBuilder Title(string title)
-        {
-
-            Component.Title = title;
 
             return this;
         }
