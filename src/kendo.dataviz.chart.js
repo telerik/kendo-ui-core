@@ -5310,9 +5310,11 @@ kendo_module({
 
             segment.value = value;
             segment.sector = sector;
-            segment.enableDiscovery();
 
             ChartElement.fn.init.call(segment, options);
+
+            segment.options.id = uniqueId();
+            segment.enableDiscovery();
         },
 
         options: {
@@ -5646,7 +5648,6 @@ kendo_module({
             chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new PieSegment(value, sector, segmentOptions);
-            segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);
             chart.points.push(segment);
@@ -6101,7 +6102,6 @@ kendo_module({
             chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new DonutSegment(value, sector, segmentOptions);
-            segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);
             chart.points.push(segment);
