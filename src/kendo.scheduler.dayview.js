@@ -1809,12 +1809,20 @@ kendo_module({
                 slots, firstCell, cell,
                 end;
 
+            if (startCol < 0) {
+                startCol = 0;
+            }
+
+            if (endCol < 0) {
+                endCol = startCol;
+            }
+
             if (startRow < 0) {
                 startRow = 0;
             }
 
-            if (endRow < 0) {
-                endRow = 0;
+            if (endRow < 0 || (startCol === endCol && endRow < startRow)) {
+                endRow = startRow;
             }
 
             if (backwardSelection) {
@@ -1822,7 +1830,7 @@ kendo_module({
             }
 
             if (!selection.isAllDay) {
-                if (endDateTime === 0 && endDateTime === endTime && dayDiff > 0) {
+                if (endDateTime === 0 && endDateTime === endTime && startCol !== endCol) {
                     endCol -= 1;
                     endRow = columns[endCol].slots.length;
                 }
@@ -1838,8 +1846,11 @@ kendo_module({
                     }
 
                     slots = columns[startCol].slots;
+                    if (startRow !== end) {
+                        end -= 1;
+                    }
 
-                    for (; startRow < end; startRow++) {
+                    for (; startRow <= end; startRow++) {
                         cell = slots[startRow].element;
                         addSelectedState(cell);
                         if (!firstCell) {

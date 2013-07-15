@@ -212,7 +212,7 @@
                 var allCells = view.content.find("table td"),
                     cells = allCells.filter("td.k-state-selected");
 
-                equal(cells.length, 50);
+                equal(cells.length, 49);
             });
 
             test("View does not select allday if only last cell is selected", function() {
@@ -226,17 +226,6 @@
                 equal(cell.length, 1);
                 equal(view.datesHeader.find("td.k-state-selected").length, 0);
             });
-
-            /*test("View selects header cells if multiple columns are selected", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8), new Date(2013, 6, 9)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 30), end: new Date(2013, 6, 9, 2, 30) });
-
-                view.select(selection);
-
-                var cells = view.datesHeader.find("td.k-state-selected");
-
-                equal(cells.length, 3);
-            });*/
 
             test("View does not select header cells if onlu one column is selected", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
@@ -408,6 +397,24 @@
                 view.select(selection);
 
                 ok($(view._columns[1].slots[10].element).hasClass("k-state-selected"));
+            });
+
+            test("View selects last cell in view", 1, function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 23, 30), end: new Date(2013, 6, 9) });
+
+                view.select(selection);
+
+                var slots = view._columns[1].slots;
+                ok($(slots[slots.length - 1].element).hasClass("k-state-selected"));
+            });
+
+            test("View does not throw exception when pass invalid selection", 1, function() {
+                var view = setup({ dates: [new Date(2013, 6, 6), new Date(2013, 6, 6)] }),
+                    selection = createSelection({ start: new Date(2013, 6, 8, 23, 30), end: new Date(2013, 6, 9) });
+
+                view.select(selection);
+                ok(true);
             });
 
             module("Multi Day View navigation", {
