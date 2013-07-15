@@ -332,6 +332,8 @@
     <Compile Include="Controllers\Web\PanelBar\ImagesController.cs" />
     <Compile Include="Controllers\Web\PanelBar\IndexController.cs" />
     <Compile Include="Controllers\Web\Scheduler\ApiController.cs" />
+    <Compile Include="Controllers\Web\Scheduler\Resources_Grouping_VerticalController.cs" />
+    <Compile Include="Controllers\Web\Scheduler\Resources_Grouping_HorizontalController.cs" />
     <Compile Include="Controllers\Web\Scheduler\EventsController.cs" />
     <Compile Include="Controllers\Web\Scheduler\IndexController.cs" />
     <Compile Include="Controllers\Web\Scheduler\ResourcesController.cs" />
@@ -694,6 +696,8 @@
     <Content Include="Areas\aspx\Views\web\numerictextbox\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\panelbar\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\scheduler\resources_grouping_vertical.aspx" />
+    <Content Include="Areas\aspx\Views\web\scheduler\resources_grouping_horizontal.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\events.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\index.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\resources.aspx" />
@@ -887,6 +891,8 @@
     <Content Include="Areas\razor\Views\web\scheduler\resources.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\events.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\scheduler\resources_grouping_horizontal.cshtml" />
+    <Content Include="Areas\razor\Views\web\scheduler\resources_grouping_vertical.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.designer.cs</LastGenOutput>
