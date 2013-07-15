@@ -180,7 +180,7 @@ kendo_module({
                             '<td class="k-scheduler-datecolumn{2}" rowspan="{0}">{1}</td>',
                             tasks.length,
                             this._dateTemplate({ date: date }),
-                            taskGroupIndex == tasksGroups.length - 1 ? " k-last" : ""
+                            taskGroupIndex == tasksGroups.length - 1 && !groups.length ? " k-last" : ""
                         ));
                     }
 
@@ -256,12 +256,17 @@ kendo_module({
 
                 if (tmp.length) {
                     var tasks = this._tasks(tmp);
+                    var className = parent ? "" : " k-first";
+
+                    if (dataIndex === data.length - 1 && (!parent || parent.className.indexOf("k-last") > -1)) {
+                        className += " k-last";
+                    }
 
                     var obj = {
                         text: kendo.getter(resource.dataTextField)(data[dataIndex]),
                         value: value,
                         rowSpan: 0,
-                        className: parent ? "" : " k-first"
+                        className: className
                     };
 
                     if (resources.length > 1) {
