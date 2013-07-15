@@ -88,7 +88,6 @@
     <Compile Include="Infrastructure\Implementation\JavaScriptInitializerTests.cs" />
     <Compile Include="UI\Chart\ChartSelectionMousewheelBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisSelectionBuilderTests.cs" />
-    <Compile Include="UI\StockChart\StockChartSeriesFactoryTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSelectionSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSelectionMousewheelSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartRadarAreaSeriesSerializerTests.cs" />
