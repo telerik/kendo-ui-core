@@ -1176,7 +1176,7 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 notes = options.notes,
-                items = notes.items || [],
+                items = notes.data || [],
                 noteTemplate, i, text, item, note;
 
             axis.notes = [];
