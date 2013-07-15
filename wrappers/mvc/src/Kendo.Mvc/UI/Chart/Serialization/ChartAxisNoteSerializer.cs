@@ -2,12 +2,11 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    internal class ChartAxisNoteSerializer<T> : ChartNoteSerializer
-        where T : struct
+    internal class ChartAxisNoteSerializer : ChartNoteSerializer
     {
-        private readonly ChartAxisNotes<T> note;
+        private readonly ChartAxisNotes note;
 
-        public ChartAxisNoteSerializer(ChartAxisNotes<T> note)
+        public ChartAxisNoteSerializer(ChartAxisNotes note)
             : base(note)
         {
             this.note = note;

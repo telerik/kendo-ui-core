@@ -181,9 +181,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example> 
         /// </code>
         /// </example>
-        public ChartNumericAxisBuilder Notes(Action<ChartAxisNotesBuilder<double>> configurator)
+        public ChartNumericAxisBuilder Notes(Action<ChartAxisNotesBuilder> configurator)
         {
-            var factory = new ChartAxisNotesBuilder<double>(Axis.Notes);
+            var factory = new ChartAxisNotesBuilder(Axis.Notes);
 
             configurator(factory);
 

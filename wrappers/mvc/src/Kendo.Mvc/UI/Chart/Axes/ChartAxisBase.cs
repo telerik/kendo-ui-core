@@ -17,12 +17,12 @@ namespace Kendo.Mvc.UI
             MinorGridLines = new ChartLine();
             Line = new ChartLine();
             Labels = new ChartAxisLabels();
-            PlotBands = new List<ChartPlotBand<TValue>>();
             Title = new ChartAxisTitle();
             MajorTicks = new ChartAxisTicks();
             MinorTicks = new ChartAxisTicks();
             Crosshair = new ChartAxisCrosshair();
-            Notes = new ChartAxisNotes<TValue>();
+            Notes = new ChartAxisNotes();
+            PlotBands = new List<ChartPlotBand>();
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The axis plot bands.
         /// </summary>
-        public IList<ChartPlotBand<TValue>> PlotBands
+        public IList<ChartPlotBand> PlotBands
         {
             get;
             set;
@@ -183,7 +183,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The axis notes.
         /// </summary>
-        public ChartAxisNotes<TValue> Notes
+        public ChartAxisNotes Notes
         {
             get;
             set;

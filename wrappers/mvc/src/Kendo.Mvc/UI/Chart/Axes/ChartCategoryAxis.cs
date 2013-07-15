@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Collections;
     using System.Collections.Generic;
 
-    public class ChartCategoryAxis<T> : ChartAxisBase<T, int>, IChartCategoryAxis where T : class
+    public class ChartCategoryAxis<T> : ChartAxisBase<T, DateTime>, IChartCategoryAxis where T : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartCategoryAxis{T}" /> class.
@@ -19,6 +19,7 @@ namespace Kendo.Mvc.UI
             AxisCrossingValues = new List<double>();
             AutoBaseUnitSteps = new ChartAxisBaseUnitSteps();
             Select = new ChartAxisSelection();
+            PlotBands = new List<ChartPlotBand>();
         }
 
         /// <summary>
@@ -158,6 +159,8 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        public new IList<ChartPlotBand> PlotBands { get; set; }
 
         public override IChartSerializer CreateSerializer()
         {

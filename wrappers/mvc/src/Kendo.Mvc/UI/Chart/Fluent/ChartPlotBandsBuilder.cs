@@ -5,16 +5,15 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring plot band.
     /// </summary>
-    public class ChartPlotBandsBuilder<T>
-        where T : struct
+    public class ChartPlotBandsBuilder
     {
-        private readonly ChartPlotBand<T> item;
+        private readonly ChartPlotBand item;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartPlotBandsBuilder{T}"/> class.
+        /// Initializes a new instance of the <see cref="ChartPlotBandsBuilder"/> class.
         /// </summary>
         /// <param name="item">The plot band.</param>
-        public ChartPlotBandsBuilder(ChartPlotBand<T> item)
+        public ChartPlotBandsBuilder(ChartPlotBand item)
         {
             this.item = item;
         }
@@ -36,7 +35,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartPlotBandsBuilder<T> From(T from)
+        public ChartPlotBandsBuilder From(double from)
         {
             item.From = from;
             return this;
@@ -59,7 +58,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartPlotBandsBuilder<T> To(T to)
+        public ChartPlotBandsBuilder To(double to)
         {
             item.To = to;
             return this;
@@ -82,7 +81,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartPlotBandsBuilder<T> Color(string color)
+        public ChartPlotBandsBuilder Color(string color)
         {
             item.Color = color;
             return this;
@@ -105,7 +104,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartPlotBandsBuilder<T> Opacity(double opacity)
+        public ChartPlotBandsBuilder Opacity(double opacity)
         {
             item.Opacity = opacity;
             return this;

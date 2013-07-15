@@ -6,16 +6,15 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Creates items for the <see cref="ChartAxisNotesFactory" />.
     /// </summary>
-    public class ChartAxisNotesFactory<T> : IHideObjectMembers
-        where T : struct
+    public class ChartAxisNotesFactory : IHideObjectMembers
     {
-        private readonly IList<ChartAxisNoteItem<T>> container;
+        private readonly IList<ChartAxisNoteItem> container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartNoteItemFactory"/> class.
         /// </summary>
         /// <param name="container">The contener of the item.</param>
-        public ChartAxisNotesFactory(IList<ChartAxisNoteItem<T>> container)
+        public ChartAxisNotesFactory(IList<ChartAxisNoteItem> container)
         {
             this.container = container;
         }
@@ -24,13 +23,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines a item.
         /// </summary>
         /// <returns></returns>
-        public ChartAxisNoteItemBuilder<T> Add()
+        public ChartAxisNoteItemBuilder Add()
         {
-            ChartAxisNoteItem<T> item = new ChartAxisNoteItem<T>();
+            ChartAxisNoteItem item = new ChartAxisNoteItem();
 
             container.Add(item);
 
-            return new ChartAxisNoteItemBuilder<T>(item);
+            return new ChartAxisNoteItemBuilder(item);
         }
     }
 }

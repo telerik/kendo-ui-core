@@ -5,26 +5,23 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring notes of the axis.
     /// </summary>
-    /// <typeparam name="TAxis"></typeparam>
-    /// <typeparam name="TValue"></typeparam>
-    public class ChartAxisNotesBuilder<T>
-        where T : struct
+    public class ChartAxisNotesBuilder
     {
         /// <summary>
         /// Gets or sets the axis.
         /// </summary>
         /// <value>The axis.</value>
-        public ChartAxisNotes<T> Notes
+        public ChartAxisNotes Notes
         {
             get;
             private set;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartAxisNotesBuilder{T}"/> class.
+        /// Initializes a new instance of the <see cref="ChartAxisNotesBuilder"/> class.
         /// </summary>
-        /// <param name="axis">The axis.</param>
-        public ChartAxisNotesBuilder(ChartAxisNotes<T> notes)
+        /// <param name="notes">The notes.</param>
+        public ChartAxisNotesBuilder(ChartAxisNotes notes)
         {
             Notes = notes;
         }
@@ -51,9 +48,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example> 
         /// </code>
         /// </example>
-        public ChartAxisNotesBuilder<T> Data(Action<ChartAxisNotesFactory<T>> configurator)
+        public ChartAxisNotesBuilder Data(Action<ChartAxisNotesFactory> configurator)
         {
-            var factory = new ChartAxisNotesFactory<T>(Notes.Data);
+            var factory = new ChartAxisNotesFactory(Notes.Data);
 
             configurator(factory);
 
@@ -77,7 +74,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartAxisNotesBuilder<T> Line(Action<ChartNoteLineBuilder> configurator)
+        public ChartAxisNotesBuilder Line(Action<ChartNoteLineBuilder> configurator)
         {
             configurator(new ChartNoteLineBuilder(Notes.Line));
             return this;
@@ -100,7 +97,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartAxisNotesBuilder<T> Label(Action<ChartNoteLabelBuilder> configurator)
+        public ChartAxisNotesBuilder Label(Action<ChartNoteLabelBuilder> configurator)
         {
             configurator(new ChartNoteLabelBuilder(Notes.Label));
             return this;
@@ -121,7 +118,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartAxisNotesBuilder<T> Icon(Action<ChartMarkersBuilder> configurator)
+        public ChartAxisNotesBuilder Icon(Action<ChartMarkersBuilder> configurator)
         {
             configurator(new ChartMarkersBuilder(Notes.Icon));
             return this;
@@ -142,7 +139,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartAxisNotesBuilder<T> Position(ChartNotePosition? position)
+        public ChartAxisNotesBuilder Position(ChartNotePosition? position)
         {
             Notes.Position = position;
             return this;

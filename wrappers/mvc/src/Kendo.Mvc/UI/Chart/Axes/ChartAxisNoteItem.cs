@@ -1,7 +1,6 @@
 namespace Kendo.Mvc.UI
 {
-    public class ChartAxisNoteItem<T> : ChartNote
-        where T : struct
+    public class ChartAxisNoteItem : ChartNote
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAxisNoteItem" /> class.
@@ -13,7 +12,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets or sets the note value.
         /// </summary>
-        public T? Value
+        public object Value
         {
             get;
             set;
@@ -21,7 +20,7 @@ namespace Kendo.Mvc.UI
 
         public override IChartSerializer CreateSerializer()
         {
-            return new ChartAxisNoteItemSerializer<T>(this);
+            return new ChartAxisNoteItemSerializer(this);
         }
     }
 }

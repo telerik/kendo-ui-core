@@ -3,7 +3,6 @@ namespace Kendo.Mvc.UI.Tests.Chart
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
-using System;
 
     public class ChartPlotBandsFactoryTests
     {
@@ -23,7 +22,7 @@ using System;
         {
             var builder = factory.Add();
             axis.PlotBands.Count.ShouldEqual(1);
-            builder.ShouldBeType<ChartPlotBandsBuilder<double>>();
+            builder.ShouldBeType<ChartPlotBandsBuilder>();
         }
 
         [Fact]

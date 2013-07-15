@@ -23,5 +23,23 @@
                 DateTime.Parse("2011/10/07")
             )
         )
+        .CategoryAxis(categoryAxis => categoryAxis.Date()
+            .Notes(notes => notes
+                .Data(item => {
+                    item.Add().Value(DateTime.Parse("2001/01/01")).Label(label => label.Text("01"));
+                    item.Add().Value(DateTime.Parse("2002/01/01")).Label(label => label.Text("02"));
+                    item.Add().Value(DateTime.Parse("2003/01/01")).Label(label => label.Text("03"));
+                    item.Add().Value(DateTime.Parse("2004/01/01")).Label(label => label.Text("04"));
+                    item.Add().Value(DateTime.Parse("2005/01/01")).Label(label => label.Text("05"));
+                    item.Add().Value(DateTime.Parse("2006/01/01")).Label(label => label.Text("06"));
+                    item.Add().Value(DateTime.Parse("2007/01/01")).Label(label => label.Text("07"));
+                    item.Add().Value(DateTime.Parse("2008/01/01")).Label(label => label.Text("08"));
+                    item.Add().Value(DateTime.Parse("2009/01/01")).Label(label => label.Text("09"));
+                    item.Add().Value(DateTime.Parse("2010/01/01")).Label(label => label.Text("10"));
+                    item.Add().Value(DateTime.Parse("2011/01/01")).Label(label => label.Text("11"));
+                    item.Add().Value(DateTime.Parse("2012/01/01")).Label(label => label.Text("12"));
+                })
+            )
+        )
     %>
 </asp:Content>

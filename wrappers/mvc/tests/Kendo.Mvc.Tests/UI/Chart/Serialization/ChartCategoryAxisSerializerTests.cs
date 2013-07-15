@@ -22,12 +22,12 @@ namespace Kendo.Mvc.UI.Tests
             axisMock.SetupGet(a => a.MinorTicks).Returns(new ChartAxisTicks());
             axisMock.SetupGet(a => a.Line).Returns(new ChartLine());
             axisMock.SetupGet(a => a.Labels).Returns(new ChartAxisLabels());
-            axisMock.SetupGet(a => a.PlotBands).Returns(new List<ChartPlotBand<int>>());
+            axisMock.SetupGet(a => a.PlotBands).Returns(new List<ChartPlotBand>());
             axisMock.SetupGet(a => a.Title).Returns(new ChartAxisTitle());
             axisMock.SetupGet(a => a.AutoBaseUnitSteps).Returns(new ChartAxisBaseUnitSteps());
             axisMock.SetupGet(a => a.Crosshair).Returns(new ChartAxisCrosshair());
             axisMock.SetupGet(a => a.Select).Returns(new ChartAxisSelection());
-            axisMock.SetupGet(a => a.Notes).Returns(new ChartAxisNotes<int>());
+            axisMock.SetupGet(a => a.Notes).Returns(new ChartAxisNotes());
         }
 
         [Fact]
@@ -156,8 +156,8 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_serialize_PlotBands_if_set()
         {
-            var data = new List<ChartPlotBand<int>>();
-            data.Add(new ChartPlotBand<int>() { Color = "red" });
+            var data = new List<ChartPlotBand>();
+            data.Add(new ChartPlotBand() { Color = "red" });
             axisMock.SetupGet(a => a.PlotBands).Returns(data);
 
             serializer.Serialize().ContainsKey("plotBands").ShouldBeTrue();

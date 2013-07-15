@@ -32,29 +32,29 @@ namespace Kendo.Mvc.UI.Fluent
         /// Adds a plot band.
         /// </summary>
         /// <returns></returns>
-        public ChartPlotBandsBuilder<TValue> Add()
+        public ChartPlotBandsBuilder Add()
         {
-            var item = new ChartPlotBand<TValue>();
+            var item = new ChartPlotBand();
 
             Axis.PlotBands.Add(item);
 
-            return new ChartPlotBandsBuilder<TValue>(item);
+            return new ChartPlotBandsBuilder(item);
         }
 
         /// <summary>
         /// Defines a item.
         /// </summary>
         /// <returns></returns>
-        public ChartPlotBandsBuilder<TValue> Add(TValue from, TValue to, string color)
+        public ChartPlotBandsBuilder Add(double from, double to, string color)
         {
-            var item = new ChartPlotBand<TValue>();
+            var item = new ChartPlotBand();
 
             Axis.PlotBands.Add(item);
             item.From = from;
             item.To = to;
             item.Color = color;
 
-            return new ChartPlotBandsBuilder<TValue>(item);
+            return new ChartPlotBandsBuilder(item);
         }
     }
 }

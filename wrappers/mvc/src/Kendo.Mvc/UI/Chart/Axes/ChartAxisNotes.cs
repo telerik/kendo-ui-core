@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 namespace Kendo.Mvc.UI
 {
-    public class ChartAxisNotes<T> : ChartNote
-        where T : struct
+    public class ChartAxisNotes : ChartNote
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAxisNotes" /> class.
@@ -12,12 +11,12 @@ namespace Kendo.Mvc.UI
             Icon = new ChartMarkers();
             Label = new ChartNoteLabel();
             Line = new ChartNoteLine();
-            Data = new List<ChartAxisNoteItem<T>>();
+            Data = new List<ChartAxisNoteItem>();
         }
         /// <summary>
         /// Gets or sets the note position.
         /// </summary>
-        public IList<ChartAxisNoteItem<T>> Data
+        public IList<ChartAxisNoteItem> Data
         {
             get;
             set;
@@ -25,7 +24,7 @@ namespace Kendo.Mvc.UI
 
         public override IChartSerializer CreateSerializer()
         {
-            return new ChartAxisNoteSerializer<T>(this);
+            return new ChartAxisNoteSerializer(this);
         }
     }
 }

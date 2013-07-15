@@ -225,9 +225,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example> 
         /// </code>
         /// </example>
-        public ChartDateAxisBuilder Notes(Action<ChartAxisNotesBuilder<DateTime>> configurator)
+        public ChartDateAxisBuilder Notes(Action<ChartAxisNotesBuilder> configurator)
         {
-            var factory = new ChartAxisNotesBuilder<DateTime>(Axis.Notes);
+            var factory = new ChartAxisNotesBuilder(Axis.Notes);
 
             configurator(factory);
 

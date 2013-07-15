@@ -254,9 +254,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example> 
         /// </code>
         /// </example>
-        public ChartCategoryAxisBuilder<TModel> Notes(Action<ChartAxisNotesBuilder<int>> configurator)
+        public ChartCategoryAxisBuilder<TModel> Notes(Action<ChartAxisNotesBuilder> configurator)
         {
-            var factory = new ChartAxisNotesBuilder<int>(Axis.Notes);
+            var factory = new ChartAxisNotesBuilder(Axis.Notes);
 
             configurator(factory);
 

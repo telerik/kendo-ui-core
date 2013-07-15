@@ -4,12 +4,11 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    internal class ChartPlotBandsSerializer<T> : IChartSerializer
-        where T : struct
+    internal class ChartPlotBandsSerializer : IChartSerializer
     {
-        private readonly ChartPlotBand<T> plotBands;
+        private readonly ChartPlotBand plotBands;
 
-        public ChartPlotBandsSerializer(ChartPlotBand<T> plotBands)
+        public ChartPlotBandsSerializer(ChartPlotBand plotBands)
         {
             this.plotBands = plotBands;
         }
