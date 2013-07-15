@@ -1001,6 +1001,16 @@
                     "title": "Resources in Kendo UI Scheduler",
                     "meta": "This demo shows how to assign resources to scheduler events."
                 }, {
+                    "text": "Horizontal Grouping",
+                    "url": "scheduler/resources-grouping-horizontal.html",
+                    "title": "Horizontal resources grouping in Kendo UI Scheduler",
+                    "meta": "This demo shows how to group resources horizontally in scheduler widget."
+                }, {
+                    "text": "Vertical Grouping",
+                    "url": "scheduler/resources-grouping-vertical.html",
+                    "title": "Vertical resources grouping in Kendo UI Scheduler",
+                    "meta": "This demo shows how to group resources vertically in scheduler widget."
+                },{
                     "text": "Templates",
                     "url": "scheduler/templates.html",
                     "title": "Templates in Kendo UI Scheduler",

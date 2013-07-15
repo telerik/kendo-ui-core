@@ -1,0 +1,97 @@
+<div id="example" class="k-content">
+    <div id="scheduler"></div>
+</div>
+<script>
+$(function() {
+    $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/13"),
+        startTime: new Date("2013/6/13 07:00 AM"),
+        height: 600,
+        views: [
+            "day",
+            { type: "week", selected: true },
+            "month"
+        ],
+        timezone: "Etc/UTC",
+        dataSource: {
+            batch: true,
+            transport: {
+                read: {
+                    url: "http://demos.kendoui.com/service/meetings",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: "http://demos.kendoui.com/service/meetings/update",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: "http://demos.kendoui.com/service/meetings/create",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: "http://demos.kendoui.com/service/meetings/destroy",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            schema: {
+                model: {
+                    id: "meetingID",
+                    fields: {
+                        meetingID: { from: "MeetingID", type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        startTimezone: { from: "StartTimezone" },
+                        endTimezone: { from: "EndTimezone" },
+                        description: { from: "Description" },
+                        recurrenceId: { from: "RecurrenceID" },
+                        recurrenceRule: { from: "RecurrenceRule" },
+                        recurrenceException: { from: "RecurrenceException" },
+                        roomId: { from: "RoomID", nullable: true },
+                        atendees: { from: "Atendees", nullable: true },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            }
+        },
+        group: {
+            resources: ["Rooms"]
+        },
+        resources: [
+            {
+                field: "roomId",
+                name: "Rooms",
+                dataSource: [
+                    { text: "Meeting Room 101", value: 1, color: "#1c9ec4" },
+                    { text: "Meeting Room 201", value: 2, color: "#ff7663" }
+                ],
+                title: "Room"
+            },
+            {
+                field: "atendees",
+                name: "Atendees",
+                dataSource: [
+                    { text: "Alex", value: 1, color: "#ef701d" },
+                    { text: "Bob", value: 2, color: "#5fb1f7" },
+                    { text: "Charlie", value: 3, color: "#35a964" }
+                ],
+                multiple: true,
+                title: "Atendees"
+            }
+        ]
+    });
+});
+</script>
+
+<style>
+    .k-scheduler-header-wrap .k-scheduler-table,
+    .k-scheduler-content .k-scheduler-table
+    {
+        width:145%;
+    }
+</style>
