@@ -200,20 +200,24 @@ kendo_module({
 
         render: function(events) {
             var table = this.content.find("table").empty();
+            var groups = [];
 
             if (events.length > 0) {
                 var resources = this.groupedResources;
 
                 if (resources.length) {
-                    var groups = this._createGroupConfiguration(events, resources, {rowSpan: 0});
+                    groups = this._createGroupConfiguration(events, resources, {rowSpan: 0});
                     this._renderGroups(groups, table, []);
                 } else {
-                    var tasksGroups = this._tasks(events);
-                    table.append(this._renderTaskGroups(tasksGroups, []));
+                    groups = this._tasks(events);
+                    table.append(this._renderTaskGroups(groups, []));
                 }
             }
 
+            this._eventsList = flattenTaskGroups(groups);
+
             this.refreshLayout();
+            this.trigger("render");
         },
 
         _renderGroups: function(groups, table, parentGroups) {
@@ -262,6 +266,69 @@ kendo_module({
             }
 
             return configuration;
+        },
+
+        slotByCell: function(cell) {
+            cell = $(cell);
+            if (cell.hasClass("k-scheduler-datecolumn")) {
+                return;
+            }
+
+            var index = cell.parent().index();
+            var event = this._eventsList[index];
+            event.index = index;
+
+            return event;
+        },
+
+        select: function(selection) {
+            this.clearSelection();
+            this.table
+                .find(".k-task")
+                .eq(selection.index)
+                .closest("tr")
+                .addClass("k-state-selected");
+        },
+
+        move: function(selection, key) {
+            var handled = false;
+            var index = selection.index;
+
+            if (key == kendo.keys.UP) {
+                index --;
+                handled = true;
+            } else  if (key == kendo.keys.DOWN) {
+                index ++;
+                handled = true;
+            }
+
+            if (handled) {
+                var event = this._eventsList[index];
+                if (event) {
+                    selection.start = event.start;
+                    selection.end = event.end;
+                    selection.isAllDay = event.isAllDay;
+                    selection.events = [ event.uid ];
+                    selection.index = index;
+                }
+            }
+
+            return handled;
+        },
+
+        moveSelectionToPeriod: function(selection) {
+            var event = this._eventsList[0];
+            if (event) {
+                selection.start = event.start;
+                selection.end = event.end;
+                selection.isAllDay = event.isAllDay;
+                selection.events = [ event.uid ];
+                selection.index = 0;
+            }
+        },
+
+        isInRange: function() {
+            return true;
         },
 
         destroy: function(){
@@ -328,6 +395,44 @@ kendo_module({
             item = kendo.getter(resource.dataValueField)(item);
         }
         return item;
+    }
+
+    function flattenTaskGroups(groups) {
+        var idx = 0,
+            length = groups.length,
+            item,
+            result = [];
+
+        for ( ; idx < length; idx ++) {
+            item = groups[idx];
+            if (item.groups) {
+                item = flattenGroup(item);
+                result = result.concat(item);
+            } else {
+                result = result.concat(item.items);
+            }
+        }
+
+        return result;
+    }
+
+    function flattenGroup(group) {
+        var items = [].concat(group.groups),
+            item,
+            result = [],
+            push = [].push;
+
+        while (item = items.shift()) {
+            if (item.groups) {
+                push.apply(items, item.groups);
+            } else if (item.items) {
+                push.apply(items, item.items);
+            } else {
+                push.call(result, item);
+            }
+        }
+
+        return result;
     }
 
 })(window.kendo.jQuery);

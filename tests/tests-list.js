@@ -381,6 +381,7 @@ var tests = [
     "scheduler/selection.html",
     "scheduler/monthview-selection.html",
     "scheduler/multidayview-selection.html",
+    "scheduler/agendaview-selection.html",
     "scheduler/lint.html",
     "searchbox/searchbox.html",
     "searchbox/lint.html",

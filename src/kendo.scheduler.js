@@ -553,6 +553,7 @@ kendo_module({
                 }
 
                 selection.isAllDay = dataItem.isAllDay;
+                selection.index = dataItem.index;
                 if (this._ctrlKey) {
                     selection.events = selection.events.concat(events || []);
                 } else {
