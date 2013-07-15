@@ -253,7 +253,7 @@ kendo_module({
                         parent.rowSpan += obj.rowSpan;
                     } else {
                         obj.items = tasks;
-                        var span = rowSpan(obj.items)
+                        var span = rowSpan(obj.items);
                         obj.rowSpan = span;
                         parent.rowSpan += span;
                     }
