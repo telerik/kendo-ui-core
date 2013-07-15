@@ -18,8 +18,7 @@ $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $series->type('scatterLine')
        ->xField('date')
        ->yField('close')
-       ->name('close')
-       ->groupNameTemplate('#= group.value # (#= series.name #)');
+       ->name('#= group.value # (close)');
 
 $xAxis = new \Kendo\Dataviz\UI\ChartXAxisItem();
 

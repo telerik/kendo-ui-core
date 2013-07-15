@@ -60,29 +60,7 @@ class StockChartNavigatorSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the groupNameTemplate option of the StockChartNavigatorSeriesItem.
-    * The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
-    * @param string $value The id of the element which represents the kendo template.
-    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
-    */
-    public function groupNameTemplateId($value) {
-        $value = new \Kendo\Template($value);
-
-        return $this->setProperty('groupNameTemplate', $value);
-    }
-
-    /**
-    * Sets the groupNameTemplate option of the StockChartNavigatorSeriesItem.
-    * The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
-    * @param string $value The template content.
-    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
-    */
-    public function groupNameTemplate($value) {
-        return $this->setProperty('groupNameTemplate', $value);
-    }
-
-    /**
-    * The series name visible in the legend.
+    * The navigator series name.
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */

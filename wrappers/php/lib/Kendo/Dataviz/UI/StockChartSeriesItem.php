@@ -78,28 +78,6 @@ class StockChartSeriesItem extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the groupNameTemplate option of the StockChartSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
-    * @param string $value The id of the element which represents the kendo template.
-    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
-    */
-    public function groupNameTemplateId($value) {
-        $value = new \Kendo\Template($value);
-
-        return $this->setProperty('groupNameTemplate', $value);
-    }
-
-    /**
-    * Sets the groupNameTemplate option of the StockChartSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
-    * @param string $value The template content.
-    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
-    */
-    public function groupNameTemplate($value) {
-        return $this->setProperty('groupNameTemplate', $value);
-    }
-
-    /**
     * The series name visible in the legend.
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem

@@ -177,14 +177,6 @@ public class SeriesItemTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("gap", value);
     }
 
-    public String getGroupNameTemplate() {
-        return (String)getProperty("groupNameTemplate");
-    }
-
-    public void setGroupNameTemplate(String value) {
-        setProperty("groupNameTemplate", value);
-    }
-
     public String getLine() {
         return (String)getProperty("line");
     }

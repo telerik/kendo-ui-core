@@ -17,8 +17,7 @@ require_once '../../include/header.php';
 $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $series->type('area')
        ->field('close')
-       ->name('close')
-       ->groupNameTemplate('#= group.value # (#= series.name #)');
+       ->name('#= group.value # (close)');
 
 $valueAxis = new \Kendo\Dataviz\UI\ChartValueAxisItem();
 
