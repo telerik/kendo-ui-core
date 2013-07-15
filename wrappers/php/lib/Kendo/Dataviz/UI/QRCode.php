@@ -36,6 +36,15 @@ class QRCode extends \Kendo\UI\Widget {
     }
 
     /**
+    * The encoding mode used to encode the value.The possible values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\QRCode
+    */
+    public function encoding($value) {
+        return $this->setProperty('encoding', $value);
+    }
+
+    /**
     * The error correction level used to encode the value.The possible values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\QRCode
