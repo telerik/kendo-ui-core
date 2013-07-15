@@ -1146,7 +1146,7 @@ kendo_module({
             model.set("endTimezone", this._endTimezone);
         },
 
-        _createTimezonePopup: function(model) {
+        _createTimezonePopup: function(model, activator) {
             var that = this,
                 container = that._editContainer.find(".k-scheduler-timezones"),
                 checkbox = container.find(".k-timezone-toggle"),
@@ -1169,6 +1169,10 @@ kendo_module({
                     close: function(e) {
                         if (e.userTriggered) {
                             that._revertTimezones(model);
+                        }
+
+                        if (activator) {
+                            activator.focus();
                         }
                     }
                 });
@@ -1207,7 +1211,7 @@ kendo_module({
                 cancelText = messages.cancel,
                 click = function(e) {
                     e.preventDefault();
-                    that._createTimezonePopup(model);
+                    that._createTimezonePopup(model, this);
                 },
                 fields = [
                     { field: "title", title: messages.editor.title /*, format: field.format, editor: field.editor, values: field.values*/ },
@@ -1317,6 +1321,8 @@ kendo_module({
                             model.endTime = endTime;
                             that.cancelEvent();
                         }
+
+                        that.focus();
                     }
                 }, options));
 
