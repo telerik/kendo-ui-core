@@ -43,8 +43,8 @@
 {
     text-align: center;
     color: #fff;
-    font-size: 1.5em;
-    line-height: 2.5em;
+    font-size: 1.4em;
+    line-height: 2.4em;
     font-weight: bold;
 }
 
@@ -523,9 +523,9 @@
     margin: 0;
 }
 
-.km-android .km-listview
+.km-android .km-listview-wrapper
 {
-    margin: 0 1em;
+    padding: 0 1em;
 }
 
 .km-android .km-list > li
@@ -542,6 +542,7 @@
 .km-android .km-list
 {
     margin-bottom: 1em;
+    -webkit-margin-collapse: separate;
 }
 
 .km-android .km-group-title
@@ -691,17 +692,29 @@
 
 /* Pull To Refresh */
 
+.km-root .km-android .km-load-more,
+.km-android .km-scroller-pull
+{
+    font-size: 1.2em;
+}
+
 .km-android .km-scroller-pull .km-icon
 {
     color: #fff;
 }
 
 /* Load more */
-.km-android .km-load-more .km-icon
+.km-android .km-load-more .km-icon,
+.km-android .km-scroller-pull .km-icon
 {
-    width: 2rem;
-    height: 2rem;
-    font-size: 2rem;
+    width: 1em;
+    height: 1em;
+    font-size: 1.7em;
+}
+
+.km-android .km-scroller-pull .km-template
+{
+    min-width: 0;
 }
 
 /* ScrollView */
