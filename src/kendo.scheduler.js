@@ -488,7 +488,7 @@ kendo_module({
         },
 
         _createSelection: function(item) {
-            var uid, dates;
+            var uid, slot;
 
             if (!this._selection || (!this._ctrlKey && !this._shiftKey)) {
                 this._selection = {
@@ -497,20 +497,19 @@ kendo_module({
             }
 
             item = $(item);
-            uid = item.data("uid");
+            uid = item.attr(kendo.attr("uid"));
 
             if (uid) {
-                item = getOccurrenceByUid(this._data, uid);
-                this._updateSelection(item, [uid]);
+                slot = getOccurrenceByUid(this._data, uid);
+                uid = [slot.uid];
             } else {
-                dates = this.view().slotByCell(item);
-                if (dates) {
-                    dates.isAllDay = item.closest("table").hasClass("k-scheduler-header-all-day");
-
-                    this._updateSelection(dates);
+                slot = this.view().slotByCell(item);
+                if (slot.uid) {
+                    uid = [slot.uid];
                 }
             }
 
+            this._updateSelection(slot, uid);
             //TODO: calculate cell offset
             //selection.offset = 0;
 
@@ -520,7 +519,7 @@ kendo_module({
         _updateSelection: function(dataItem, events) {
             var selection = this._selection;
 
-            if (selection) {
+            if (dataItem && selection) {
                 if (this._shiftKey && selection.start && selection.end) {
                     var backward = dataItem.end < selection.end;
                     selection.end = new Date(dataItem.end);
