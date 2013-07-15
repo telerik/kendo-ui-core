@@ -1133,6 +1133,44 @@
                 equal(cells.length, 142);
             });
 
+            test("View selects allDay cell in first group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.datesHeader.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[0].slots[6].element);
+            });
+
+            test("View selects allDay cell in second group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 1,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.datesHeader.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[0].slots[13].element);
+            });
+
             module("Vertically grouped Multi Day View selection", {
                 setup: function() {
                     container = $("<div />");
@@ -1197,6 +1235,44 @@
                 equal(cells.length, 49);
                 equal(cells[47], view._columns[5].slots[95].element);
                 equal(cells[48], view._columns[6].slots[95].element);
+            });
+
+            test("View selects allDay cell in first group", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.content.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[0].slots[6].element);
+            });
+
+            test("View selects allDay cell in second group", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 1,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.content.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[1].slots[6].element);
             });
 
         </script>

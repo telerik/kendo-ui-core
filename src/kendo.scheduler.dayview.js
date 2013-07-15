@@ -1886,7 +1886,9 @@ kendo_module({
                     startRow = 0 + verticalOffset;
                 }
             } else {
-                slots = that._rows[0].slots;
+                var index = groupOrientation === "vertical" ? selection.groupIndex : 0;
+
+                slots = that._rows[index].slots;
 
                 for (; startCol <= endCol; startCol++) {
                     cell = slots[startCol].element;
