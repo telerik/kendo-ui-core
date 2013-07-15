@@ -953,16 +953,17 @@ kendo_module({
 
         showDialog: function(options) {
             var html = kendo.format("<div class='k-popup-edit-form'><div class='k-edit-form-container'><p class='k-popup-message'>{0}</p>", options.text);
+            var scheduler = this;
 
             html += '<div class="k-edit-buttons k-state-default">';
 
             for (var buttonIndex = 0; buttonIndex < options.buttons.length; buttonIndex++) {
-                html+= this._createButton(options.buttons[buttonIndex]);
+                html+= scheduler._createButton(options.buttons[buttonIndex]);
             }
 
             html += '</div></div></div>';
 
-            var popup = $(html).appendTo(this.wrapper)
+            var popup = $(html).appendTo(scheduler.wrapper)
                                .eq(0)
                                .on("click", ".k-button", function(e) {
                                     e.preventDefault();
@@ -979,13 +980,18 @@ kendo_module({
                                    draggable: false,
                                    title: options.title,
                                    visible: false,
-                                   deactivate: function() {
+                                   close: function() {
                                        this.destroy();
+                                       scheduler.focus();
                                    }
                                })
                                .getKendoWindow();
 
             popup.center().open();
+        },
+
+        focus: function() {
+            this.wrapper.focus();
         },
 
         _confirmation: function(callback) {
