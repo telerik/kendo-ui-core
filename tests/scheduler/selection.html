@@ -64,6 +64,10 @@
                     type: "keydown"
                 }, options);
 
+                if (typeof keyCode == "string") {
+                    keyCode = keyCode.charCodeAt(0);
+                }
+
                 if (keyCode) {
                     e.keyCode = keyCode;
                 }
@@ -434,6 +438,20 @@
                 keydown(keys.ENTER);
 
                 equal(scheduler.calls("editEvent"), 0);
+            });
+
+            test("1 switches to day view", function() {
+                keydown("1");
+
+                equal(scheduler.view().title, "Day");
+            });
+
+            test("2 switches to week view", function() {
+                scheduler.view("day");
+
+                keydown("2");
+
+                equal(scheduler.view().title, "Week");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

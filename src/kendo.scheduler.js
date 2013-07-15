@@ -447,6 +447,18 @@ kendo_module({
 
         },
 
+        _viewByIndex: function(index) {
+            var view, views = this.views;
+
+            for (view in views) {
+                if (!index) {
+                    return view;
+                }
+
+                index--;
+            }
+        },
+
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
@@ -465,6 +477,7 @@ kendo_module({
                     e.preventDefault();
                 }
             } else if (editable && key === keys.ENTER) {
+                // add/edit event
                 if (selection.events.length) {
                     if (editable.update !== false) {
                         that.editEvent(selection.events[0]);
@@ -472,6 +485,9 @@ kendo_module({
                 } else if (editable.create !== false) {
                     that.addEvent(selection);
                 }
+            } else if (key >= 49 && key <= 57) {
+                // switch to view 1-9
+                that.view(that._viewByIndex(key - 49));
             } else if (view.move(selection, key, shiftKey)) {
                 start = selection.start;
 
