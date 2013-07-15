@@ -24,6 +24,13 @@
                         <option value="H">H</option>
                     </select>
                 </li>
+				<li>
+				   <label for="encoding">Encoding:</label>
+				   <select id="encoding" data-role="dropdownlist" data-bind="value: qrOptions.encoding">
+				        <option value="ISO_8859_1">ISO_8859_1</option>
+				        <option value="UTF_8">UTF_8</option>
+				    </select>
+				</li>                
                 <li>
                     <label for="size">Size:</label>
                     <input id="size" data-bind="value: qrOptions.size" data-role="numerictextbox"
@@ -69,6 +76,7 @@
                 qrValue: "Hello World",
                 qrOptions: {
                     errorCorrection: "L",
+                    encoding: "ISO_8859_1",
                     background: "#FFFFFF",
                     color: "#000000",
                     size: 200,
@@ -118,6 +126,11 @@
             padding: 3px 0;
         }
 
+        .configuration-horizontal .config-section
+        {
+            min-width: 100px;
+        }
+
         .configuration-horizontal .k-textbox {
              margin-left: 0;
         }
@@ -127,7 +140,7 @@
         }
         .options .k-dropdown,
         .options .k-numerictextbox {
-             width: 60px;
+             width: 100px;
         }
     </style>
 
