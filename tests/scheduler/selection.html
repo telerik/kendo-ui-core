@@ -267,6 +267,8 @@
             });
 
             test("scheduler calls preventDefault on TAB", 1, function() {
+                createSampleEvent();
+                scheduler.wrapper.focus();
                 keydown(keys.TAB, {
                     preventDefault: function() {
                         ok(true);
@@ -287,6 +289,8 @@
             });
 
             test("scheduler selects on moveToEvent", 1, function() {
+                createSampleEvent();
+                scheduler.wrapper.focus();
                 var view = scheduler.view();
                 stub(view, {
                     select: view.select
