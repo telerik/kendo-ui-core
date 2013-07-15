@@ -68,6 +68,8 @@ module CodeGen::TypeScript
         end
 
         def type_script_type
+            raise "#{name} doesn't have a type specified" unless @type
+
             return 'any' if @type.size > 1
 
             CodeGen::TypeScript.type(@type[0])

@@ -453,6 +453,34 @@ declare module kendo.data {
         };
     }
 
+    class SchedulerEvent extends Model {
+        constructor(data?: any);
+        init(data?: any): void;
+
+        description: string;
+        end: Date;
+        endTimezone: string;
+        isAllDay: bool;
+        id: any;
+        start: Date;
+        startTimezone: string;
+        recurrenceId: any;
+        recurrenceRule: string;
+        recurrenceException: string;
+
+        static define(options: DataSourceSchemaModelWithFieldsObject): {
+            idField: string;
+            fields: DataSourceSchemaModelFields;
+            new (data?: any): SchedulerEvent;
+        };
+
+        static define(options: DataSourceSchemaModelWithFieldsArray): {
+            idField: string;
+            fields: DataSourceSchemaModelFields;
+            new (data?: any): SchedulerEvent;
+        };
+    }
+
     class Node extends Model {
         children: HierarchicalDataSource;
 
@@ -464,10 +492,17 @@ declare module kendo.data {
         parentNode(): Node;
     }
 
-    class SchedulerEvent extends Model {
-    }
-
     class SchedulerDataSource extends DataSource {
+        add(model: Object): kendo.data.SchedulerEvent;
+        add(model: kendo.data.SchedulerEvent): kendo.data.SchedulerEvent;
+        at(index: number): kendo.data.SchedulerEvent;
+        cancelChanges(model?: kendo.data.SchedulerEvent): void;
+        get(id: any): kendo.data.SchedulerEvent;
+        getByUid(uid: string): kendo.data.SchedulerEvent;
+        indexOf(value: kendo.data.SchedulerEvent): number;
+        insert(index: number, model: kendo.data.SchedulerEvent): kendo.data.SchedulerEvent;
+        insert(index: number, model: Object): kendo.data.SchedulerEvent;
+        remove(model: kendo.data.SchedulerEvent): void;
     }
 
     class HierarchicalDataSource extends DataSource {
