@@ -16,18 +16,28 @@ kendo_module({
         init: function(element, options) {
             ui.SchedulerView.fn.init.call(this, element, options);
 
-            this.title = this.options.title;
-            this.name = this.options.name;
-            this._eventTemplate = kendo.template(this.options.eventTemplate);
-            this._dateTemplate = kendo.template(this.options.eventDateTemplate);
-            this._groupTemplate = kendo.template(this.options.eventGroupTemplate);
-            this._timeTemplate = kendo.template(this.options.eventTimeTemplate);
+            options = this.options;
+
+            if (options.editable) {
+                options.editable = extend(
+                    { "delete": true },
+                    options.editable,
+                    { create: false, update: false }
+                );
+            }
+
+            this.title = options.title;
+            this.name = options.name;
+            this._eventTemplate = kendo.template(options.eventTemplate);
+            this._dateTemplate = kendo.template(options.eventDateTemplate);
+            this._groupTemplate = kendo.template(options.eventGroupTemplate);
+            this._timeTemplate = kendo.template(options.eventTimeTemplate);
 
             this.element.on("mouseenter" + NS, ".k-scheduler-agenda .k-scheduler-content tr", "_mouseenter")
                         .on("mouseleave" + NS, ".k-scheduler-agenda .k-scheduler-content tr", "_mouseleave")
                         .on("click" + NS, ".k-scheduler-agenda .k-scheduler-content .k-link:has(.k-si-close)", "_remove");
 
-            this._renderLayout(this.options.date);
+            this._renderLayout(options.date);
         },
 
         _mouseenter: function(e) {
