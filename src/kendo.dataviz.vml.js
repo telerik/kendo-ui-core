@@ -310,7 +310,7 @@ kendo_module({
             stroke.template = VMLStroke.template;
             if (!stroke.template) {
                 stroke.template = VMLStroke.template = renderTemplate(
-                    "<kvml:stroke on='#= !!d.options.stroke #' " +
+                    "<kvml:stroke on='#= !!d.options.stroke && !!d.options.strokeWidth #' " +
                     "#= d.renderAttr(\"color\", d.options.stroke) #" +
                     "#= d.renderAttr(\"weight\", d.options.strokeWidth) #" +
                     "#= d.renderAttr(\"dashstyle\", d.options.dashType) #" +

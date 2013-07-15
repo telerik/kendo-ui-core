@@ -825,9 +825,15 @@
                     "<kvml:stroke/>");
                 });
 
-                test("sets on attribute when stroke color is set", function() {
+                test("sets on attribute when stroke color and width are set", function() {
                     stroke.options.stroke = "#f00";
+                    stroke.options.strokeWidth = 1;
                     ok(stroke.render().indexOf("on='true'") > -1);
+                });
+
+                test("sets on attribute when stroke width is not set", function() {
+                    stroke.options.stroke = "#f00";
+                    ok(stroke.render().indexOf("on='false'") > -1);
                 });
 
                 test("sets on attribute when stroke color is not set", function() {
