@@ -1001,6 +1001,118 @@
                 equal(selection.isAllDay, true);
             });
 
+            module("Horizontally grouped Multi Day View selection", {
+                setup: function() {
+                    container = $("<div />");
+                    $(document.body).append(container);
+                },
+                teardown: function() {
+                    scheduler.destroy();
+                    container.remove();
+                }
+            });
+
+            function setupGroupedScheduler() {
+                scheduler = new kendo.ui.Scheduler(container, {
+                    date: new Date("2013/6/8"),
+                    group: {
+                        resources: ["ResourceName", "ResourceName2"],
+                        orientation: "horizontal"
+                    },
+                    resources: [
+                        {
+                            field: "rooms",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Room1", value: 1 },
+                                { text: "Room2", value: 2 }
+                            ]
+                        },
+                        {
+                            field: "persons",
+                            name: "ResourceName2",
+                            dataSource: [
+                                { text: "Fred", value: 1 },
+                                { text: "Barny", value: 2 }
+                            ]
+                        }
+                    ],
+                    views: [ "week" ]
+                });
+            }
+
+            test("View select method selects cell in first group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 1),
+                    end: new Date(2013, 5, 8, 1, 30),
+                    events: [],
+                    groupIndex: 0
+                };
+
+                view.select(selection);
+
+                var td = view.content.find(".k-state-selected")[0];
+
+                equal(td, view._columns[6].slots[2].element);
+            });
+
+            test("View select method selects cell in second group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 1),
+                    end: new Date(2013, 5, 8, 1, 30),
+                    events: [],
+                    groupIndex: 1
+                };
+
+                view.select(selection);
+
+                var td = view.content.find(".k-state-selected")[0];
+
+                equal(td, view._columns[13].slots[2].element);
+            });
+
+            test("View select method selects multiple columns in second group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 7, 1),
+                    end: new Date(2013, 5, 8, 1, 30),
+                    events: [],
+                    groupIndex: 1
+                };
+
+                view.select(selection);
+
+                var cells = view.content.find(".k-state-selected");
+
+                equal(cells.length, 49);
+            });
+
+            test("View selects only one cell if selection is out of range", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 1),
+                    end: new Date(2013, 5, 10),
+                    events: [],
+                    groupIndex: 1
+                };
+
+                view.select(selection);
+
+                var cells = view.content.find(".k-state-selected");
+
+                equal(cells.length, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

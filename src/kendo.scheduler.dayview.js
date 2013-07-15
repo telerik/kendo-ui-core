@@ -1803,6 +1803,7 @@ kendo_module({
             }
 
             var that = this,
+                resources = this.options.resources,
                 columns = that._columns,
                 startRow = Math.floor(that._timeSlotIndex(startDate)),
                 endRow = Math.ceil(that._timeSlotIndex(endDate)),
@@ -1810,8 +1811,9 @@ kendo_module({
                 endCol = that._dateSlotIndex(endDate),
                 endTime = getMilliseconds(this.options.endTime),
                 endDateTime = getMilliseconds(endDate),
-                slots, firstCell, cell,
-                end;
+                slots, firstCell, cell, end,
+                horizontalOffset = 0,
+                rowOffset = 0;
 
             if (startCol < 0) {
                 startCol = 0;
@@ -1831,6 +1833,14 @@ kendo_module({
 
             if (backwardSelection) {
                 endRow += 1;
+            }
+
+            if (resources) {
+                horizontalOffset = this._columnOffsetForResource(resources.length);
+                horizontalOffset = selection.groupIndex * horizontalOffset;
+
+                startCol = startCol + horizontalOffset;
+                endCol = endCol + horizontalOffset;
             }
 
             if (!selection.isAllDay) {
