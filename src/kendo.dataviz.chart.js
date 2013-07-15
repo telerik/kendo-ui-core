@@ -326,7 +326,6 @@ kendo_module({
                 highlight: {
                     visible: true
                 },
-                groupNameTemplate: "#= group.value + (kendo.dataviz.defined(series.name) ? ': ' + series.name : '') #",
                 labels: {},
                 negativeValues: {
                     visible: false
@@ -9827,12 +9826,28 @@ kendo_module({
     function groupSeries(series, data) {
         var result = [],
             nameTemplate,
+            legacyTemplate = series.groupNameTemplate,
             groupIx,
             dataLength = data.length,
             seriesClone;
 
-        if (series.groupNameTemplate) {
-            nameTemplate = template(series.groupNameTemplate);
+        if (defined(legacyTemplate)) {
+            kendo.logToConsole(
+                "'groupNameTemplate' is obsolete and will be removed in future versions. " +
+                "Specify the group name template as 'series.name'"
+            );
+
+            if (legacyTemplate) {
+                nameTemplate = template(legacyTemplate);
+            }
+        } else {
+            nameTemplate = template(series.name || "");
+            if (nameTemplate._slotCount === 0) {
+                nameTemplate = template(defined(series.name) ?
+                    "#= group.value #: #= series.name #" :
+                    "#= group.value #"
+                );
+            }
         }
 
         for (groupIx = 0; groupIx < dataLength; groupIx++) {

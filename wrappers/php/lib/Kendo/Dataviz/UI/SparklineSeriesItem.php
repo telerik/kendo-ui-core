@@ -69,29 +69,7 @@ class SparklineSeriesItem extends \kendo\SerializableObject {
     }
 
     /**
-    * Sets the groupNameTemplate option of the SparklineSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
-    * @param string $value The id of the element which represents the kendo template.
-    * @return \Kendo\Dataviz\UI\SparklineSeriesItem
-    */
-    public function groupNameTemplateId($value) {
-        $value = new \Kendo\Template($value);
-
-        return $this->setProperty('groupNameTemplate', $value);
-    }
-
-    /**
-    * Sets the groupNameTemplate option of the SparklineSeriesItem.
-    * Name template for auto-generated series when binding to grouped data.Template variables:
-    * @param string $value The template content.
-    * @return \Kendo\Dataviz\UI\SparklineSeriesItem
-    */
-    public function groupNameTemplate($value) {
-        return $this->setProperty('groupNameTemplate', $value);
-    }
-
-    /**
-    * The series name.
+    * The series name.The name can also be a template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItem
     */

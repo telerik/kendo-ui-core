@@ -2911,12 +2911,6 @@ The function return value is displayed instead of the individual points.The supp
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:</description>
-            <name>groupNameTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
             <description>The data field containing the high value.</description>
             <name>highField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15734,12 +15728,6 @@ The function return value is displayed instead of the individual points.</descri
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Name template for auto-generated series when binding to grouped data.Template variables:</description>
-            <name>groupNameTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
             <description>Line options.** Applicable to area series. **</description>
             <name>line</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15752,7 +15740,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The series name.</description>
+            <description>The series name.The name can also be a template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -18995,12 +18983,6 @@ The function return value is displayed instead of the individual points.</descri
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:</description>
-            <name>groupNameTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
             <description>The data field containing the high value.** Available for candlestick and ohlc series only **</description>
             <name>highField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -19025,7 +19007,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The series name visible in the legend.</description>
+            <description>The navigator series name.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -19791,12 +19773,6 @@ The function return value is displayed instead of the individual points.</descri
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
-        </attribute>
-        <attribute>
-            <description>Name template for auto-generated series when binding to grouped data.Template variables:</description>
-            <name>groupNameTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
         </attribute>
         <attribute>
             <description>The data field containing the high value.** Available for candlestick and ohlc series only **</description>
