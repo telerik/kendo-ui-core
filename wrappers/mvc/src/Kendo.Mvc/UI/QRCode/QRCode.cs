@@ -14,6 +14,7 @@
             : base(viewContext, initializer)
         {
             this.ErrorCorrection = QRErrorCorrectionLevel.L;
+            this.Encoding = QREncoding.ISO_8859_1;
             this.Border = new QRBorder();
             this.Options = new Dictionary<string, object>();
         }
@@ -93,11 +94,26 @@
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the QRCode encoding.
+        /// </summary>
+        /// <value>The QRCode encoding.</value>
+        public QREncoding Encoding
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
             if (ErrorCorrection != DefaultErrorCorrection)
             {
                 Options["errorCorrection"] = ErrorCorrection.ToString();
+            }
+
+            if (Encoding != DefaultEncoding)
+            {
+                Options["encoding"] = Encoding.ToString();
             }
 
             if (!string.IsNullOrEmpty(Value))
@@ -149,5 +165,6 @@
         }
 
         private const QRErrorCorrectionLevel DefaultErrorCorrection = QRErrorCorrectionLevel.L;
+        private const QREncoding DefaultEncoding = QREncoding.ISO_8859_1;
     }
 }

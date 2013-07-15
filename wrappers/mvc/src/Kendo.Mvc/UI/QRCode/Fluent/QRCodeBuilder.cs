@@ -129,6 +129,31 @@
         }
 
         /// <summary>
+        /// Sets the encoding of the QR code.
+        /// </summary>
+        /// <param name="encoding">The QR code encoding.</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().QRCode()
+        ///     .Name(&quot;qrCode&quot;)
+        ///     .Encoding(QREncoding.UTF_8)
+        /// )
+        /// </code>
+        /// <code lang="ASPX">
+        /// &lt;%:Html.Kendo().QRCode()
+        ///     .Name(&quot;qrCode&quot;)
+        ///     .Encoding(QREncoding.UTF_8)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public QRCodeBuilder Encoding(QREncoding encoding)
+        {
+            Component.Encoding = encoding;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the error correction level of the QR code.
         /// </summary>
         /// <param name="errorCorrection">The QR code error correction level.</param>

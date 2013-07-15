@@ -987,6 +987,7 @@
     <Compile Include="Infrastructure\Implementation\ControllerTypeCache.cs" />
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
     <Compile Include="UI\QRCode\Html\QRCodeHtmlBuilder.cs" />
+    <Compile Include="UI\QRCode\QREncoding.cs" />
     <Compile Include="UI\QRCode\QRErrorCorrectionLevel.cs" />
     <Compile Include="UI\QRCode\Fluent\QRBorderBuilder.cs" />
     <Compile Include="UI\QRCode\Fluent\QRCodeBuilder.cs" />
