@@ -1316,9 +1316,11 @@ kendo_module({
                     validateOnBlur: true
                 }).data("kendoEditable");
 
-            container.data("kendoWindow").center().open();
-
-            that.trigger(EDIT, { container: container, event: model });
+            if (that.trigger(EDIT, { container: container, event: model })) {
+                that.cancelEvent();
+            } else {
+                container.data("kendoWindow").center().open();
+            }
         },
 
         _editRecurringDialog: function(model, uid) {

@@ -43,12 +43,12 @@
 
             module("editing", {
                 setup: function() {
-                    container = document.createElement("div");
-                    document.body.appendChild(container);
+                    container = $("<div>");
+                    container.appendTo(document.body);
                 },
                 teardown: function() {
-                    kendo.destroy($(container).closest(".k-scheduler"));
-                    $(".k-widget").remove();
+                    container.kendoScheduler("destroy").empty().remove();
+                    $(".k-window").remove();
                 }
             });
 
@@ -194,6 +194,28 @@
                 });
 
                 scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+            });
+
+            test("the popup window is not shown if the edit event is prevented", 1, function() {
+                var scheduler = setup({
+                    edit: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+                equal($(".k-edit-form-container:visible").length, 0);
+            });
+
+            test("the new event is removed if the edit event is prevented", 1, function() {
+                var scheduler = setup({
+                    edit: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                scheduler.addEvent({ start: new Date(), end: new Date() });
+                equal(scheduler.dataSource.data().length, 1);
             });
 
             test("update and cancel buttons are added if template is set", function() {
