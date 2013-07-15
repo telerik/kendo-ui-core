@@ -268,7 +268,7 @@ kendo_module({
             return configuration;
         },
 
-        slotByCell: function(cell) {
+        selectionByElement: function(cell) {
             cell = $(cell);
             if (cell.hasClass("k-scheduler-datecolumn")) {
                 return;

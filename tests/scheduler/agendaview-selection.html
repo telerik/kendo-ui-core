@@ -72,7 +72,7 @@
 
                 view.render([ event ]);
                 var tr = view.table.find(".k-task").closest("tr");
-                var selection = view.slotByCell(tr);
+                var selection = view.selectionByElement(tr);
 
                 deepEqual(selection.start, new Date(2013, 1, 2));
                 deepEqual(selection.end, new Date(2013, 1, 2));
