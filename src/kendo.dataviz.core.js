@@ -1559,7 +1559,6 @@ kendo_module({
                         item.show();
                     } else {
                         item.hide();
-                        return;
                     }
 
                     slot = axis.getSlot(value);
