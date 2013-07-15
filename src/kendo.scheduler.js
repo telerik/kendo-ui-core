@@ -506,7 +506,7 @@ kendo_module({
         },
 
         _createSelection: function(item) {
-            var uid, slot;
+            var uid, slot, selection;
 
             if (!this._selection || (!this._ctrlKey && !this._shiftKey)) {
                 this._selection = {
@@ -514,23 +514,25 @@ kendo_module({
                 };
             }
 
+
             item = $(item);
+            selection = this._selection;
             uid = item.attr(kendo.attr("uid"));
+            slot = this.view().slotByElement(item);
+
+            if (slot) {
+                selection.groupIndex = slot.groupIndex;
+            }
 
             if (uid) {
                 slot = getOccurrenceByUid(this._data, uid);
+            }
+
+            if (slot && slot.uid) {
                 uid = [slot.uid];
-            } else {
-                slot = this.view().slotByElement(item);
-                if (slot.uid) {
-                    uid = [slot.uid];
-                }
             }
 
             this._updateSelection(slot, uid);
-            //TODO: calculate cell offset
-            //selection.offset = 0;
-
             this._adjustSelectedDate();
         },
 
