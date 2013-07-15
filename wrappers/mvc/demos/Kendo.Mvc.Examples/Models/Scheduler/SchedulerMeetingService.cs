@@ -28,6 +28,8 @@
                     Title = meeting.Title,
                     Start = DateTime.SpecifyKind(meeting.Start, DateTimeKind.Utc),
                     End = DateTime.SpecifyKind(meeting.End, DateTimeKind.Utc),
+                    StartTimezone = meeting.StartTimezone,
+                    EndTimezone = meeting.EndTimezone,
                     Description = meeting.Description,
                     IsAllDay = meeting.IsAllDay,
                     RoomID = meeting.RoomID,

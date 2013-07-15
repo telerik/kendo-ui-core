@@ -25,6 +25,8 @@
             }
         }
 
+        public string StartTimezone { get; set; }
+
         private DateTime end;
 
         public DateTime End
@@ -38,6 +40,8 @@
                 end = value.ToUniversalTime();
             }
         }
+
+        public string EndTimezone { get; set; }
 
         public string RecurrenceRule { get; set; }
         public int? RecurrenceID { get; set; }
@@ -54,7 +58,9 @@
                 MeetingID = MeetingID,
                 Title = Title,
                 Start = Start,
+                StartTimezone = StartTimezone,
                 End = End,
+                EndTimezone = EndTimezone,
                 Description = Description,
                 IsAllDay = IsAllDay,
                 RecurrenceRule = RecurrenceRule,

@@ -29,6 +29,8 @@
                 Title = task.Title,
                 Start = DateTime.SpecifyKind(task.Start, DateTimeKind.Utc),
                 End = DateTime.SpecifyKind(task.End, DateTimeKind.Utc),
+                StartTimezone = task.StartTimezone,
+                EndTimezone = task.EndTimezone,
                 Description = task.Description,
                 IsAllDay = task.IsAllDay,
                 RecurrenceRule = task.RecurrenceRule,
