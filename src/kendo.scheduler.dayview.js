@@ -1578,7 +1578,7 @@ kendo_module({
             }
 
             this.refreshLayout();
-            this.trigger("render");
+            this.trigger("activate");
         },
 
         _resourceBySlot: function(slot) {

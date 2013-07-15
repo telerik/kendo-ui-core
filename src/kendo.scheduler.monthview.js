@@ -863,8 +863,8 @@ kendo_module({
                 this._renderEvents(events, 0);
             }
 
-            this.trigger("render");
             this.refreshLayout();
+            this.trigger("activate");
        },
 
        _renderEvents: function(events, groupIndex) {

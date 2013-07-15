@@ -217,7 +217,7 @@ kendo_module({
             this._eventsList = flattenTaskGroups(groups);
 
             this.refreshLayout();
-            this.trigger("render");
+            this.trigger("activate");
         },
 
         _renderGroups: function(groups, table, parentGroups) {
@@ -418,11 +418,10 @@ kendo_module({
 
     function flattenGroup(group) {
         var items = [].concat(group.groups),
-            item,
+            item = items.shift(),
             result = [],
             push = [].push;
-
-        while (item = items.shift()) {
+        while (item) {
             if (item.groups) {
                 push.apply(items, item.groups);
             } else if (item.items) {
@@ -430,6 +429,8 @@ kendo_module({
             } else {
                 push.call(result, item);
             }
+
+            item = items.shift();
         }
 
         return result;

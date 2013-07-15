@@ -1588,7 +1588,7 @@ kendo_module({
 
                 view.bind("navigate", that._viewNavigateHandler);
 
-                that._viewRenderHandler = function() {
+                that._viewActivateHandler = function() {
                     var view = this;
                     if (that._selection) {
                         view.moveSelectionToPeriod(that._selection);
@@ -1598,7 +1598,7 @@ kendo_module({
                     }
                 };
 
-                view.bind("render", that._viewRenderHandler);
+                view.bind("activate", that._viewActivateHandler);
             }
         },
 
