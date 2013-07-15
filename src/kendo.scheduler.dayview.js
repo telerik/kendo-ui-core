@@ -1874,7 +1874,10 @@ kendo_module({
                 }
             }
 
-            that._scrollTo(backwardSelection ? firstCell : cell, that.content[0]);
+            cell = backwardSelection ? firstCell : cell;
+            if (cell) {
+                that._scrollTo(cell, that.content[0]);
+            }
         },
 
         move: function(selection, key, shiftKey) {
