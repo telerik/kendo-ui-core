@@ -283,11 +283,13 @@ kendo_module({
 
         select: function(selection) {
             this.clearSelection();
-            this.table
+            var row = this.table
                 .find(".k-task")
                 .eq(selection.index)
                 .closest("tr")
                 .addClass("k-state-selected");
+
+            this._scrollTo(row[0], this.content[0]);
         },
 
         move: function(selection, key) {
