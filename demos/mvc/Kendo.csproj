@@ -771,7 +771,6 @@
     <Content Include="Views\dataviz\barcode\api.cshtml" />
     <Content Include="Views\dataviz\qrcode\index.cshtml" />
     <Content Include="Views\dataviz\qrcode\api.cshtml" />
-    <Content Include="Views\dataviz\qrcode\character-capacities.cshtml" />
     <Content Include="Views\dataviz\barcode\index.cshtml">
       <SubType>Code</SubType>
     </Content>
