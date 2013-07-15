@@ -1137,7 +1137,8 @@ kendo_module({
                 addAlignmentPatterns: addAlignmentPatterns,
                 addTimingFunctions: addTimingFunctions,
                 scoreMaskMatrixes: scoreMaskMatrixes,
-                encodeData: encodeData
+                encodeData: encodeData,
+                UTF8Encoder: UTF8Encoder
             },
             QRCodeFields: {
                 modes: modeInstances,
