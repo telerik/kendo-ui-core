@@ -1584,6 +1584,12 @@ p#copy
     background: url(tag-new.png) no-repeat right center;
 }
 
+.widgetGrid .beta-widget
+{
+    padding-right: 22px;
+    background: url(tag-beta.png) no-repeat right center;
+}
+
 /*DataViz dashboard navigation*/
 
 .widgetGrid .chart
@@ -2908,6 +2914,10 @@ ul.keyboard-legend li a {
        only screen and (min-device-pixel-ratio: 2) {
     .widgetGrid .new-widget {
         background-image: url('tag-new@2x.png');
+        background-size: 18px 9px;
+    }
+    .widgetGrid .beta-widget {
+        background-image: url('tag-beta@2x.png');
         background-size: 18px 9px;
     }
 }
