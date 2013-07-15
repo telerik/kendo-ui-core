@@ -668,7 +668,21 @@ kendo_module({
 
             var top = startSlot.offsetTop;
 
-            var width = this._calculateAllDayEventWidth(this._row.slots, startSlot.index, endSlot.index);
+            var slots = this._row.slots;
+
+            var hintWidth = function(startIndex, endIndex) {
+                var result = 0;
+
+                for (var slotIndex = startIndex; slotIndex < endIndex; slotIndex++) {
+                    result += slots[slotIndex].offsetWidth;
+                }
+
+                result += slots[endIndex].clientWidth;
+
+                return result;
+            };
+
+            var width = hintWidth(startSlot.index, endSlot.index);
 
             var height = startSlot.clientHeight - 2;
 

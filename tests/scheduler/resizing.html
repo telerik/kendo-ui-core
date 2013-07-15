@@ -884,6 +884,28 @@
                 equal(scheduler.dataSource.at(0).end.getMonth(), 6);
             });
 
+            test("dragging the east handle doesn't create scrollbar", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/29 11:00"), end: new Date("2013/5/29 11:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(7)");
+
+                dragstart(scheduler, handle, handle.offset());
+                drag(scheduler, handle, slots.first().offset());
+
+                var content = div.find(".k-scheduler-content")[0];
+
+                equal(content.offsetWidth, content.scrollWidth);
+                equal(content.offsetHeight, content.offsetHeight);
+            });
+
             test("dragging the west handle moves the start of the event in month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
