@@ -783,6 +783,7 @@
     <Content Include="Views\web\scheduler\resources-grouping-vertical.cshtml" />
     <Content Include="Views\web\scheduler\resources.cshtml" />
     <Content Include="Views\web\scheduler\templates.cshtml" />
+    <Content Include="Views\dataviz\line-charts\notes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

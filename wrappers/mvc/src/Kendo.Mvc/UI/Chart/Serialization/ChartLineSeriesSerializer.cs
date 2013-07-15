@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("width", series.Width, () => series.Width.HasValue)
                 .Add("dashType", series.DashType.ToString().ToLowerInvariant(), () => series.DashType.HasValue)
-                .Add("noteTextMember", series.NoteTextMember, () => series.NoteTextMember.HasValue())
+                .Add("noteTextField", series.NoteTextMember, () => series.NoteTextMember.HasValue())
                 .Add("missingValues", series.MissingValues.ToString().ToLowerInvariant(),
                                       () => series.MissingValues.HasValue);
 

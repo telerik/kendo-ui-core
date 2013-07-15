@@ -190,6 +190,22 @@ namespace Kendo.Mvc.Examples.Models
             };
         }
 
+        public static IList<GrandSlam> GrandSlam()
+        {
+            return new GrandSlam[] {
+                new GrandSlam(2003, 13, 3, "MIN: 13"),
+                new GrandSlam(2004, 22, 1),
+                new GrandSlam(2005, 24, 2),
+                new GrandSlam(2006, 27, 1, "MAX: 27"),
+                new GrandSlam(2007, 26, 1),
+                new GrandSlam(2008, 24, 3),
+                new GrandSlam(2009, 26, 2),
+                new GrandSlam(2010, 20, 3),
+                new GrandSlam(2011, 20, 4),
+                new GrandSlam(2012, 19, 3),
+            };
+        }
+
         public static IEnumerable<ElectricityProduction> SpainElectricityProduction()
         {
             return new ElectricityProduction[] {

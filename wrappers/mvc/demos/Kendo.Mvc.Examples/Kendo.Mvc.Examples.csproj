@@ -102,6 +102,7 @@
     <Compile Include="Controllers\DataViz\Financial\VirtualizationController.cs" />
     <Compile Include="Controllers\DataViz\Financial\PanesController.cs" />
     <Compile Include="Controllers\DataViz\Financial\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Line_Charts\NotesController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Multiple_AxesController.cs" />
@@ -422,6 +423,7 @@
     <Compile Include="Models\Chart\AntennaGainItem.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Polar.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Stock.cs" />
+    <Compile Include="Models\Chart\GrandSlam.cs" />
     <Compile Include="Models\Chart\SunPositionItem.cs" />
     <Compile Include="Models\ClientCategoryViewModel.cs" />
     <Compile Include="Models\ClientProductViewModel.cs" />
@@ -545,6 +547,7 @@
     <Content Include="Areas\aspx\Views\dataviz\financial\virtualization.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\financial\panes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\financial\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\line_charts\notes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\multiple_axes.aspx" />
@@ -839,6 +842,7 @@
     <Content Include="Areas\razor\Views\dataviz\polar_charts\polar_area.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\polar_charts\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\polar_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\line_charts\notes.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
