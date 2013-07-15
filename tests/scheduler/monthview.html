@@ -365,6 +365,30 @@
                 equal(view._row.events[0].end, 0);
             });
 
+            test("more button is shown for every cell with more events than possible to show", function() {
+                var view = setup({
+                    eventHeight: 22
+                });
+
+                view.render([
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/27 10:00"), end: new Date("2013/1/28 10:00"),  title: "day event" }),
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/27 10:00"), end: new Date("2013/1/28 10:00"),  title: "day event" }),
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/27 10:00"), end: new Date("2013/1/28 10:00"),  title: "day event" })
+                ]);
+
+                equal(view.content.find(".k-more-events").length, 2);
+            });
+
+            test("event which ends at 12:00 AM occupies one slot", function() {
+                var view = setup();
+
+                view.render([
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/27 10:00"), end: new Date("2013/1/28 12:00 AM"),  title: "" })
+                ]);
+
+                equal(view.content.find(".k-event").outerWidth(), removeDefaultHorizontalOffset(view.content.find("td").outerWidth()));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -557,28 +557,34 @@ kendo_module({
                 }
             }
 
-            if (rows.length > eventCount) {
-                if (startSlot.more) {
-                   return;
-                }
 
-                startSlot.more = element = $(MORE_BUTTON_TEMPLATE({
-                    ns: kendo.ns,
-                    start: startIndex,
-                    end: endIndex,
-                    width: startSlot.clientWidth - 2,
-                    left: startSlot.offsetLeft + 2,
-                    top: startSlot.offsetTop + startSlot.firstChildHeight + eventCount * eventHeight + 3 * eventCount
-                }));
+            if (rows.length > eventCount) {
+                for (var slotIndex = startIndex; slotIndex <= endIndex; slotIndex++) {
+                    var slot = slots[slotIndex];
+
+                    if (slot.more) {
+                       return;
+                    }
+
+                    slot.more = $(MORE_BUTTON_TEMPLATE({
+                        ns: kendo.ns,
+                        start: slotIndex,
+                        end: slotIndex,
+                        width: slot.clientWidth - 2,
+                        left: slot.offsetLeft + 2,
+                        top: slot.offsetTop + slot.firstChildHeight + eventCount * eventHeight + 3 * eventCount
+                    }));
+
+                    this.content[0].appendChild(slot.more[0]);
+                }
             } else {
                 this._row.events.push({element: element, start: startIndex, end: endIndex });
 
                 element[0].style.width = this._calculateAllDayEventWidth(slots, startIndex, endIndex) - rightOffset + "px";
                 element[0].style.left = startSlot.offsetLeft + 2 + "px";
                 element[0].style.height = eventHeight + "px";
+                this.content[0].appendChild(element[0]);
             }
-
-            this.content[0].appendChild(element[0]);
         },
 
         _splitEvents: function(events) {
@@ -905,8 +911,13 @@ kendo_module({
                         endSlotIndex = (this._row.slots.length/this._groupCount()) - 1;
                     }
 
+                    if (kendo.date.getMilliseconds(event.end) === 0 && event.end - event.start < kendo.date.MS_PER_DAY) {
+                        endSlotIndex = startSlotIndex;
+                    }
+
                     event.startIndex = this._applyOffset(startSlotIndex, groupIndex);
                     event.endIndex = this._applyOffset(endSlotIndex, groupIndex);
+
 
                     this._positionEvent(this._row.slots, this._createEventElement(event), event.startIndex, event.endIndex);
                 }
