@@ -1183,6 +1183,7 @@ kendo_module({
 
             for (i = 0; i < items.length; i++) {
                 item = deepExtend({}, notes, items[i]);
+                item.value = axis.parseNoteValue(item.value);
                 text = item.label.text || item.value;
                 if (item.label.template) {
                     noteTemplate = template(item.label.template);
@@ -1213,6 +1214,10 @@ kendo_module({
                     axis.notes.push(note);
                 }
             }
+        },
+
+        parseNoteValue: function(value) {
+            return value;
         },
 
         renderTicks: function(view) {

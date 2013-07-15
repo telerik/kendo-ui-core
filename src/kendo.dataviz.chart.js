@@ -2140,6 +2140,10 @@ kendo_module({
             return dateComparer(value, range.min) >= 0 && dateComparer(value, range.max) <= 0 && categories.length;
         },
 
+        parseNoteValue: function(value) {
+            return toDate(value);
+        },
+
         translateRange: function(delta) {
             var axis = this,
                 range = CategoryAxis.fn.translateRange.call(axis, delta),
