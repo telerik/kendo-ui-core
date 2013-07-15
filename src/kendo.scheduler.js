@@ -817,12 +817,12 @@ kendo_module({
                             update = true;
                         }
                     } else if (dir == "east") {
-                        if (startSlot.groupIndex == slot.groupIndex && slot.end.getTime() >= event.start.getTime()) {
+                        if (startSlot.groupIndex == slot.groupIndex && kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "west") {
-                        if (endSlot.groupIndex == slot.groupIndex && event.end.getTime() >= slot.start.getTime()) {
+                        if (endSlot.groupIndex == slot.groupIndex && kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
                             startSlot = slot;
                             update = true;
                         }
