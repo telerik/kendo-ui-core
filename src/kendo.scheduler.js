@@ -485,6 +485,8 @@ kendo_module({
                 } else if (editable.create !== false) {
                     that.addEvent(selection);
                 }
+            } else if (key === keys.DELETE) {
+                that.removeEvent(selection.events[0]);
             } else if (key >= 49 && key <= 57) {
                 // switch to view 1-9
                 that.view(that._viewByIndex(key - 49));

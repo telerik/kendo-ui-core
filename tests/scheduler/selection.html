@@ -453,6 +453,18 @@
 
                 equal(scheduler.view().title, "Week");
             });
+
+            test("delete key triggers delete of event", function() {
+                var e = createSampleEvent();
+
+                stub(scheduler, "removeEvent");
+
+                selectEvent(e);
+
+                keydown(keys.DELETE);
+
+                equal(scheduler.calls("removeEvent"), 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
