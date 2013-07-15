@@ -89,6 +89,15 @@ class Scheduler extends \Kendo\UI\Widget {
     }
 
     /**
+    * The end time of the week and day views. The scheduler will display events ending before the endTime.
+    * @param date $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function endTime($value) {
+        return $this->setProperty('endTime', $value);
+    }
+
+    /**
     * Sets the eventTemplate option of the Scheduler.
     * The template used to render the scheduler events.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
@@ -108,6 +117,15 @@ class Scheduler extends \Kendo\UI\Widget {
     */
     public function eventTemplate($value) {
         return $this->setProperty('eventTemplate', $value);
+    }
+
+    /**
+    * The configuration of the scheduler resource(s) grouping.
+    * @param \Kendo\UI\SchedulerGroup|array $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function group($value) {
+        return $this->setProperty('group', $value);
     }
 
     /**
@@ -188,6 +206,15 @@ class Scheduler extends \Kendo\UI\Widget {
     */
     public function addResource($value) {
         return $this->add('resources', func_get_args());
+    }
+
+    /**
+    * The start time of the week and day views. The scheduler will display events starting after the startTime.
+    * @param date $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function startTime($value) {
+        return $this->setProperty('startTime', $value);
     }
 
     /**
