@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $type = $_GET['type'];
 
-    $columns = array('MeetingID', 'Title', 'Start', 'End', 'IsAllDay', 'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'RoomID');
+    $columns = array('MeetingID', 'Title', 'Start', 'End', 'StartTimezone', 'EndTimezone', 'IsAllDay', 'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException', 'RoomID');
 
     switch($type) {
         case 'create':
@@ -86,9 +86,15 @@ $startField = new \Kendo\Data\DataSourceSchemaModelField('start');
 $startField->type('date')
         ->from('Start');
 
+$startTimezoneField = new \Kendo\Data\DataSourceSchemaModelField('startTimezone');
+$startTimezoneField->from('StartTimezone');
+
 $endField = new \Kendo\Data\DataSourceSchemaModelField('end');
 $endField->type('date')
         ->from('End');
+
+$endTimezoneField = new \Kendo\Data\DataSourceSchemaModelField('endTimezone');
+$endTimezoneField->from('EndTimezone');
 
 $isAllDayField = new \Kendo\Data\DataSourceSchemaModelField('isAllDay');
 $isAllDayField->type('boolean')
@@ -120,6 +126,8 @@ $model->id('meetingID')
     ->addField($titleField)
     ->addField($startField)
     ->addField($endField)
+    ->addField($startTimezoneField)
+    ->addField($endTimezoneField)
     ->addField($descriptionField)
     ->addField($recurrenceIdField)
     ->addField($recurrenceRuleField)
