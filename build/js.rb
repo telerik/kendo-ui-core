@@ -61,8 +61,7 @@ file_merge "src/kendo.aspnetmvc.js" => [
     "src/aspnetmvc/kendo.combobox.aspnetmvc.js",
     "src/aspnetmvc/kendo.multiselect.aspnetmvc.js",
     "src/aspnetmvc/kendo.imagebrowser.aspnetmvc.js",
-    "src/aspnetmvc/kendo.validator.aspnetmvc.js",
-    "src/aspnetmvc/kendo.scheduler.aspnetmvc.js"
+    "src/aspnetmvc/kendo.validator.aspnetmvc.js"
 ]
 file "src/kendo.aspnetmvc.js" => JS_BUILDFILE
 
