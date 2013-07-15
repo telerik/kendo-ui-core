@@ -432,4 +432,190 @@
   <data name="Editor_Search" xml:space="preserve">
     <value>Търси</value>
   </data>
+  <data name="Scheduler_AllDay" xml:space="preserve">
+    <value>цял ден</value>
+  </data>
+  <data name="Scheduler_Cancel" xml:space="preserve">
+    <value>Откажи</value>
+  </data>
+  <data name="Scheduler_Confirmation" xml:space="preserve">
+    <value>Сигурен ли сте че искате да изтриете това събитие?</value>
+  </data>
+  <data name="Scheduler_Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="Scheduler_Destroy" xml:space="preserve">
+    <value>Изтрии</value>
+  </data>
+  <data name="Scheduler_Editor_AllDayEvent" xml:space="preserve">
+    <value>Целодневно събитие</value>
+  </data>
+  <data name="Scheduler_Editor_Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Scheduler_Editor_EditorTitle" xml:space="preserve">
+    <value>Събитие</value>
+  </data>
+  <data name="Scheduler_Editor_End" xml:space="preserve">
+    <value>Край</value>
+  </data>
+  <data name="Scheduler_Editor_EndTimezone" xml:space="preserve">
+    <value>Крайна часова зона</value>
+  </data>
+  <data name="Scheduler_Editor_Repeat" xml:space="preserve">
+    <value>Повторение</value>
+  </data>
+  <data name="Scheduler_Editor_SeparateTimezones" xml:space="preserve">
+    <value>Използвай различни часови зони за начало и край</value>
+  </data>
+  <data name="Scheduler_Editor_Start" xml:space="preserve">
+    <value>Начало</value>
+  </data>
+  <data name="Scheduler_Editor_StartTimezone" xml:space="preserve">
+    <value>Начална часова зона</value>
+  </data>
+  <data name="Scheduler_Editor_Timezone" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="Scheduler_Editor_TimezoneEditorButton" xml:space="preserve">
+    <value>Часовa зона</value>
+  </data>
+  <data name="Scheduler_Editor_TimezoneEditorTitle" xml:space="preserve">
+    <value>Часови зони</value>
+  </data>
+  <data name="Scheduler_Editor_Title" xml:space="preserve">
+    <value>Заглавие</value>
+  </data>
+  <data name="Scheduler_Event" xml:space="preserve">
+    <value>Събитие</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteRecurring" xml:space="preserve">
+    <value>Сигурен ли сте че искате да изтриете това събитие или цялата серия?</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteWindowOccurrence" xml:space="preserve">
+    <value>Изтрии единично събитие</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteWindowSeries" xml:space="preserve">
+    <value>Изтрии серията</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteWindowTitle" xml:space="preserve">
+    <value>Изтриване на повтарящо се събитие</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Daily_Days" xml:space="preserve">
+    <value> ден(дни)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Daily_RepeatEvery" xml:space="preserve">
+    <value>Повтаряй всеки: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_EndCountAfter" xml:space="preserve">
+    <value>След </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_EndCountOccurrence" xml:space="preserve">
+    <value> повторение(я)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_EndLabel" xml:space="preserve">
+    <value>Край:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_EndNever" xml:space="preserve">
+    <value>Никога</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_EndUntilOn" xml:space="preserve">
+    <value>На </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Daily" xml:space="preserve">
+    <value>Ежедневно</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Monthly" xml:space="preserve">
+    <value>Месечно</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Never" xml:space="preserve">
+    <value>Никога</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Weekly" xml:space="preserve">
+    <value>Седмично</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Yearly" xml:space="preserve">
+    <value>Годишно</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_Day" xml:space="preserve">
+    <value>Ден </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_Months" xml:space="preserve">
+    <value> месец(и)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_RepeatEvery" xml:space="preserve">
+    <value>Повтаряй всеки: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_RepeatOn" xml:space="preserve">
+    <value>Повтаряй на: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_First" xml:space="preserve">
+    <value>първи(а)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Fourth" xml:space="preserve">
+    <value>четвърти(та)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Last" xml:space="preserve">
+    <value>последен(на)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Second" xml:space="preserve">
+    <value>втори(а)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Third" xml:space="preserve">
+    <value>трети(та)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekly_RepeatEvery" xml:space="preserve">
+    <value>Повтаряй на: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekly_RepeatOn" xml:space="preserve">
+    <value>Повтаряй всеки: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekly_Weeks" xml:space="preserve">
+    <value> седмица(и)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_Of" xml:space="preserve">
+    <value> от </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_RepeatEvery" xml:space="preserve">
+    <value>Повтаряй всеки: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_RepeatOn" xml:space="preserve">
+    <value>Повтаряй на: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_Years" xml:space="preserve">
+    <value> година(ни)</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditRecurring" xml:space="preserve">
+    <value>Сигурен ли сте че искате да промените това събитие или цялата серия?</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditWindowOccurrence" xml:space="preserve">
+    <value>Промени единично събитие</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditWindowSeries" xml:space="preserve">
+    <value>Промени серията</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditWindowTitle" xml:space="preserve">
+    <value>Промяна на повтарящо се действие</value>
+  </data>
+  <data name="Scheduler_Save" xml:space="preserve">
+    <value>Запази</value>
+  </data>
+  <data name="Scheduler_Time" xml:space="preserve">
+    <value>Време</value>
+  </data>
+  <data name="Scheduler_Today" xml:space="preserve">
+    <value>Днес</value>
+  </data>
+  <data name="Scheduler_View_Agenda" xml:space="preserve">
+    <value>Дневен ред</value>
+  </data>
+  <data name="Scheduler_View_Day" xml:space="preserve">
+    <value>Ден</value>
+  </data>
+  <data name="Scheduler_View_Month" xml:space="preserve">
+    <value>Месец</value>
+  </data>
+  <data name="Scheduler_View_Week" xml:space="preserve">
+    <value>Седмица</value>
+  </data>
 </root>
