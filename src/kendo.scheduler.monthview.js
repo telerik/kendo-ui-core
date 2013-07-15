@@ -464,7 +464,7 @@ kendo_module({
 
             if (resources.length) {
                 if (this._isVerticallyGrouped()) {
-                    rows = this._createRowsLayout(resources);
+                    rows = this._createRowsLayout(resources, $.map(names, function() { return { text: "<div>&nbsp;</div>", className: "k-hidden k-slot-cell" }; }));
                 } else {
                     columns = this._createColumnsLayout(resources, columns);
                 }
