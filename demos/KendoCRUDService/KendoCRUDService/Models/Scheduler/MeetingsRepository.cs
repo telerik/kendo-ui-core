@@ -26,6 +26,8 @@ namespace KendoCRUDService.Models
                         Title = meeting.Title,
                         Start = DateTime.SpecifyKind(meeting.Start, DateTimeKind.Utc),
                         End = DateTime.SpecifyKind(meeting.End, DateTimeKind.Utc),
+                        StartTimezone = meeting.StartTimezone,
+                        EndTimezone = meeting.EndTimezone,
                         Description = meeting.Description,
                         IsAllDay = meeting.IsAllDay,
                         RoomID = meeting.RoomID,
@@ -103,6 +105,8 @@ namespace KendoCRUDService.Models
                     target.Timezone = meeting.Timezone;
                     target.Start = meeting.Start;
                     target.End = meeting.End;
+                    target.StartTimezone = meeting.StartTimezone;
+                    target.EndTimezone = meeting.EndTimezone;
                     target.Description = meeting.Description;
                     target.IsAllDay = meeting.IsAllDay;
                     target.RecurrenceRule = meeting.RecurrenceRule;

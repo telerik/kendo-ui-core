@@ -209,6 +209,8 @@
           <Property Name="RecurrenceRule" Type="ntext" />
           <Property Name="RecurrenceID" Type="int" />
           <Property Name="RecurrenceException" Type="ntext" />
+          <Property Name="StartTimezone" Type="ntext" />
+          <Property Name="EndTimezone" Type="ntext" />
         </EntityType>
         <EntityType Name="Order Details">
           <Key>
@@ -301,6 +303,8 @@
           <Property Name="RecurrenceRule" Type="ntext" />
           <Property Name="RecurrenceID" Type="int" />
           <Property Name="RecurrenceException" Type="ntext" />
+          <Property Name="StartTimezone" Type="ntext" />
+          <Property Name="EndTimezone" Type="ntext" />
         </EntityType>
         <EntityType Name="Territories">
           <Key>
@@ -311,7 +315,7 @@
           <Property Name="RegionID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'C:\WORK\GITHUB\KENDO\DEMOS\KENDOCRUDSERVICE\KENDOCRUDSERVICE\APP_DATA\SAMPLE.MDF.dbo.Weather' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'C:\WORK\KENDO\DEMOS\KENDOCRUDSERVICE\KENDOCRUDSERVICE\APP_DATA\SAMPLE.MDF.dbo.Weather' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="Weather">
           <Key>
@@ -943,6 +947,8 @@
           <NavigationProperty Name="MeetingAtendees" Relationship="SampleModel.FK_MeetingAtendee_Meeting" FromRole="Meeting" ToRole="MeetingAtendee" />
           <NavigationProperty Name="Meetings1" Relationship="SampleModel.FK_Meetings_Meetings" FromRole="Meeting" ToRole="Meeting1" />
           <NavigationProperty Name="Meeting1" Relationship="SampleModel.FK_Meetings_Meetings" FromRole="Meeting1" ToRole="Meeting" />
+          <Property Type="String" Name="StartTimezone" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EndTimezone" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Task">
           <Key>
@@ -960,6 +966,8 @@
           <Property Type="String" Name="RecurrenceException" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Tasks1" Relationship="SampleModel.FK_Tasks_Tasks" FromRole="Task" ToRole="Task1" />
           <NavigationProperty Name="Task1" Relationship="SampleModel.FK_Tasks_Tasks" FromRole="Task1" ToRole="Task" />
+          <Property Type="String" Name="StartTimezone" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EndTimezone" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_MeetingAtendee_Meeting">
           <End Type="SampleModel.Meeting" Role="Meeting" Multiplicity="1" />
@@ -1211,6 +1219,8 @@
           <EntitySetMapping Name="Meetings">
             <EntityTypeMapping TypeName="SampleModel.Meeting">
               <MappingFragment StoreEntitySet="Meetings">
+                <ScalarProperty Name="EndTimezone" ColumnName="EndTimezone" />
+                <ScalarProperty Name="StartTimezone" ColumnName="StartTimezone" />
                 <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
                 <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
                 <ScalarProperty Name="RecurrenceRule" ColumnName="RecurrenceRule" />
@@ -1227,6 +1237,8 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="SampleModel.Task">
               <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="EndTimezone" ColumnName="EndTimezone" />
+                <ScalarProperty Name="StartTimezone" ColumnName="StartTimezone" />
                 <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
                 <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
                 <ScalarProperty Name="RecurrenceRule" ColumnName="RecurrenceRule" />
@@ -1336,7 +1348,7 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="SampleModel.MeetingAtendee" Width="1.5" PointX="12.625" PointY="5.5" Height="1.5956835937500031" />
         <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="10.375" PointY="4.5" Height="3.5186979166666674" />
-        <EntityTypeShape EntityType="SampleModel.Task" Width="1.5" PointX="10.375" PointY="9.75" Height="3.326396484374996" />
+        <EntityTypeShape EntityType="SampleModel.Task" Width="1.5" PointX="10.375" PointY="9.75" Height="3.7109993489583335" />
         <AssociationConnector Association="SampleModel.FK_MeetingAtendee_Meeting" >
           <ConnectorPoint PointX="11.875" PointY="6.297841796875" />
           <ConnectorPoint PointX="12.625" PointY="6.297841796875" />
@@ -1348,10 +1360,10 @@
           <ConnectorPoint PointX="11.353461538461538" PointY="8.0186979166666674" />
         </AssociationConnector>
         <AssociationConnector Association="SampleModel.FK_Tasks_Tasks" >
-          <ConnectorPoint PointX="10.906923076923077" PointY="13.076396484374996" />
-          <ConnectorPoint PointX="10.906923076923077" PointY="13.326396484374996" />
-          <ConnectorPoint PointX="11.353461538461538" PointY="13.326396484374996" />
-          <ConnectorPoint PointX="11.353461538461538" PointY="13.076396484374996" />
+          <ConnectorPoint PointX="10.906923076923077" PointY="13.460999348958334" />
+          <ConnectorPoint PointX="10.906923076923077" PointY="13.710999348958332" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="13.710999348958332" />
+          <ConnectorPoint PointX="11.353461538461538" PointY="13.460999348958334" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>
