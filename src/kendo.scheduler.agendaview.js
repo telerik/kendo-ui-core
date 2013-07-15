@@ -308,9 +308,11 @@ kendo_module({
                 .find(".k-task")
                 .eq(selection.index)
                 .closest("tr")
-                .addClass("k-state-selected");
+                .addClass("k-state-selected")[0];
 
-            this._scrollTo(row[0], this.content[0]);
+            if (row) {
+                this._scrollTo(row, this.content[0]);
+            }
         },
 
         move: function(selection, key) {
