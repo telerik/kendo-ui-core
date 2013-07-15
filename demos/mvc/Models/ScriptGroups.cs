@@ -86,7 +86,7 @@ namespace Kendo.Models
 #else
             jQueryPath,
             "kendo.all.min.js",
-            "kendo.timezones.js"
+            "kendo.timezones.min.js"
 #endif
         };
 
