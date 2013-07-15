@@ -1799,11 +1799,10 @@ kendo_module({
             if (backwardSelection) {
                 startDate = new Date(endDate);
                 endDate = new Date(selection.start);
-
             }
 
             var that = this,
-                resources = this.options.resources,
+                resources = this.groupedResources,
                 columns = that._columns,
                 startRow = Math.floor(that._timeSlotIndex(startDate)),
                 endRow = Math.ceil(that._timeSlotIndex(endDate)),
@@ -1811,16 +1810,22 @@ kendo_module({
                 endCol = that._dateSlotIndex(endDate),
                 endTime = getMilliseconds(this.options.endTime),
                 endDateTime = getMilliseconds(endDate),
-                slots, firstCell, cell, end,
+                groupOrientation = this._groupOrientation(),
                 horizontalOffset = 0,
-                rowOffset = 0;
+                verticalOffset = 0,
+                slots, end,
+                firstCell, cell;
 
             if (startCol < 0) {
                 startCol = 0;
             }
 
             if (endCol < 0) {
-                endCol = startCol;
+                if (endTime === getMilliseconds(endDate)) {
+                    endCol = this._columnCountInGroup() || this._columns.length;
+                } else {
+                    endCol = startCol;
+                }
             }
 
             if (startRow < 0) {
@@ -1835,28 +1840,34 @@ kendo_module({
                 endRow += 1;
             }
 
-            if (resources) {
-                horizontalOffset = this._columnOffsetForResource(resources.length);
-                horizontalOffset = selection.groupIndex * horizontalOffset;
+            if (groupOrientation) {
+                if (groupOrientation === "horizontal") {
+                    horizontalOffset = this._columnOffsetForResource(resources.length);
+                    horizontalOffset = selection.groupIndex * horizontalOffset || 0;
 
-                startCol = startCol + horizontalOffset;
-                endCol = endCol + horizontalOffset;
+                    startCol += horizontalOffset;
+                    endCol += horizontalOffset;
+                } else {
+                    verticalOffset = this._rowCountInGroup() || 0;
+                    verticalOffset = selection.groupIndex * verticalOffset;
+
+                    startRow += verticalOffset;
+                    endRow += verticalOffset;
+                }
             }
 
             if (!selection.isAllDay) {
                 if (endDateTime === 0 && endDateTime === endTime && startCol !== endCol) {
                     endCol -= 1;
-                    endRow = columns[endCol].slots.length;
+                    endRow = this._rowCountInGroup() + (this._rowCountInGroup() * selection.groupIndex) || columns[endCol].slots.length;
                 }
 
                 end = endRow;
-                if (endCol > startCol) {
-                    end = columns[endCol].slots.length;
-                }
-
                 for (; startCol <= endCol; startCol++) {
                     if (startCol === endCol) {
                         end = endRow;
+                    } else if (endCol > startCol) {
+                        end = this._rowCountInGroup() + (this._rowCountInGroup() * selection.groupIndex) || columns[endCol].slots.length;
                     }
 
                     slots = columns[startCol].slots;
@@ -1872,7 +1883,7 @@ kendo_module({
                         }
                     }
 
-                    startRow = 0;
+                    startRow = 0 + verticalOffset;
                 }
             } else {
                 slots = that._rows[0].slots;
