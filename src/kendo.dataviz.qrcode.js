@@ -855,7 +855,7 @@ kendo_module({
         };
 
         var QRCodeDataEncoder = function(encoding){
-            if(encoding && encoding.indexOf("utf") >= 0){
+            if(encoding && encoding.toLowerCase().indexOf("utf_8") >= 0){
                 return new UTF8Encoder();
             }
             else{
