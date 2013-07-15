@@ -170,6 +170,31 @@
                 raises(function() { template.compile('<a href="#">link</a>') }, /Invalid template/, "Template does not raise proper error");
             });
 
+            test("slot count is 0 for template without expressions", function() {
+                var t = template.compile("foo");
+                equal(t._slotCount, 0);
+            });
+
+            test("slot count includes #= # expressions", function() {
+                var t = template.compile("foo #= bar #");
+                equal(t._slotCount, 1);
+            });
+
+            test("slot count includes multiple expressions", function() {
+                var t = template.compile("foo #= bar # baz #= zaz #");
+                equal(t._slotCount, 2);
+            });
+
+            test("slot count includes #: # expressions", function() {
+                var t = template.compile("foo #: bar #");
+                equal(t._slotCount, 1);
+            });
+
+            test("slot count includes ${} expressions", function() {
+                var t = template.compile("foo ${ bar }");
+                equal(t._slotCount, 1);
+            });
+
         </script>
         <script id="encoded" type="text/x-jquery-template">
             <strong>${foo}</strong>

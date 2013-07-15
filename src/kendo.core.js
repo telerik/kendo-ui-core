@@ -238,6 +238,7 @@
                 argumentName = paramName.match(argumentNameRegExp)[0],
                 useWithBlock = settings.useWithBlock,
                 functionBody = "var o,e=kendo.htmlEncode;",
+                fn,
                 parts,
                 idx;
 
@@ -273,7 +274,9 @@
             functionBody = functionBody.replace(sharpRegExp, "#");
 
             try {
-                return new Function(argumentName, functionBody);
+                fn = new Function(argumentName, functionBody);
+                fn._slotCount = Math.floor(parts.length / 2);
+                return fn;
             } catch(e) {
                 throw new Error(kendo.format("Invalid template:'{0}' Generated code:'{1}'", template, functionBody));
             }
