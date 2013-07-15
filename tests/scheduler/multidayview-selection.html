@@ -140,6 +140,19 @@
                 equal(selection.events.length, 0);
             });
 
+            test("View moveSelectionToPeriod normalizes dates if they have correct column index", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)], startTime: new Date(2013, 6, 7, 7) });
+                var selection = {
+                    start: new Date(2013, 6, 7, 0),
+                    end: new Date(2013, 6, 7, 0)
+                };
+
+                view.moveSelectionToPeriod(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 8));
+            });
+
             test("View adjust start/end date based on view.startDate/view.endDate when navigate to future", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] });
                 var selection = {

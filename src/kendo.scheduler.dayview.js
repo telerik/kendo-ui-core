@@ -1717,11 +1717,16 @@ kendo_module({
         },
 
         normalizeSelection: function(selection) {
-            if (!this.isInRange(selection.start) || !this.isInRange(selection.end)) {
-                var slot = this._slotByDate(this.startDate());
-                selection.start = new Date(slot.start);
-                selection.end = new Date(slot.end);
+            var columnIndex = this._dateSlotIndex(selection.start),
+                slot;
+
+            if (columnIndex < 0) {
+                columnIndex = 0;
             }
+
+            slot = this._columns[columnIndex].slots[0] || this._slotByDate(this.startDate());
+            selection.start = new Date(slot.start);
+            selection.end = new Date(slot.end);
         },
 
         isInRange: function(date) {
@@ -1733,7 +1738,7 @@ kendo_module({
                 start = selection.start,
                 end = selection.end;
 
-            if (!this._slotByDate(start) || !this._slotByDate(end)) {
+            if (this._dateSlotIndex(start) < 0 || this._dateSlotIndex(end) < 0) {
                 if (start >= this.endDate()) {
                     offset = -offset;
                 }
