@@ -34,12 +34,20 @@ kendo_module({
         return result;
     }
 
+    function cellspacing() {
+        if (kendo.support.cssBorderSpacing) {
+            return "";
+        }
+
+        return 'cellspacing="0"';
+    }
+
     function table(tableRows, className) {
         if (!tableRows.length) {
             return "";
         }
 
-        return '<table class="' + $.trim('k-scheduler-table ' + (className || "")) + '">' +
+        return '<table ' + cellspacing() + ' class="' + $.trim('k-scheduler-table ' + (className || "")) + '">' +
                '<tr>' +
                     tableRows.join("</tr><tr>") +
                '</tr>' +
@@ -140,7 +148,7 @@ kendo_module({
     function content() {
         return $(
             '<div class="k-scheduler-content">' +
-                '<table class="k-scheduler-table"/>' +
+                '<table ' + cellspacing() + ' class="k-scheduler-table"/>' +
             '</div>'
         );
     }
@@ -297,7 +305,7 @@ kendo_module({
 
             var rowLevels = this.rowLevels = levels(layout, "rows");
 
-            this.table = $('<table class="k-scheduler-layout">');
+            this.table = $('<table ' + cellspacing() + ' class="k-scheduler-layout">');
 
             var rowCount = rowLevels[rowLevels.length - 1].length;
 

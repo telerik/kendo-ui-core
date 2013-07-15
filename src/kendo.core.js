@@ -1712,6 +1712,8 @@ function pad(number, digits, end) {
             return result;
         };
 
+        support.cssBorderSpacing = typeof document.documentElement.style.borderSpacing != "undefined";
+
         support.isRtl = function(element) {
             return $(element).closest(".k-rtl").length > 0;
         };
