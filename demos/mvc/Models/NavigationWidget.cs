@@ -11,6 +11,7 @@ namespace Kendo.Models
         public bool Tablet { get; set; }
         public bool Expanded { get; set; }
         public bool New { get; set; }
+        public bool Beta { get; set; }
 
         public NavigationExample[] Items { get; set; }
     }

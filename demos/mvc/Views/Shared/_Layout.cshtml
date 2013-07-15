@@ -65,7 +65,7 @@
                                         <img src="@(Url.Content("~") + widget.ThumbnailUrl)" alt="@widget.Name" />
                                     </a>
                                 }
-                                    <a @Html.Raw(widget.New ? "class=\"new-widget\"" : "") href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)" target="@(category.ToLower().Contains("application") ? "_blank" : "")" >@widget.Text @(widget.Tablet ? "(tablet)" : "")</a>
+                                    <a @Html.Raw(widget.Beta ? "class=\"beta-widget\"" : "") @Html.Raw(widget.New ? "class=\"new-widget\"" : "") href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)" target="@(category.ToLower().Contains("application") ? "_blank" : "")" >@widget.Text @(widget.Tablet ? "(tablet)" : "")</a>
                                 </li>
 
                                 idx++;
