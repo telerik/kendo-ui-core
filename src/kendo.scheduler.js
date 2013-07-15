@@ -253,6 +253,14 @@ kendo_module({
 
             return obj;
         },
+        set: function(key, value) {
+            kendo.data.Model.fn.set.call(this, key, value);
+
+            if (key == "isAllDay" && value === true) {
+                this.set("start", kendo.date.getDate(this.start));
+                this.set("end", kendo.date.getDate(this.end));
+            }
+        },
         id: "id",
         fields: {
             id: { type: "number" },

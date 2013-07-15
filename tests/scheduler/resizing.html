@@ -1537,6 +1537,46 @@
                 equal(div.find(".k-marquee").length, 1);
             });
 
+            test("east resize two day all-day event to one day", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 12:00 AM"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 2);
+            });
+
+            test("west resize two day all-day event to one day", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 8:00"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).start.getHours(), 0);
+                equal(scheduler.dataSource.at(0).start.getDate(), 3);
+            });
+
             function dragdrop(scheduler, target, via, to) {
                 if (!to) {
                     to = via;

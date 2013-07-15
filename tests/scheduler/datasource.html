@@ -39,6 +39,18 @@
                 ok(dataSource.reader instanceof SchedulerDataReader);
             });
 
+            test("setting isAllDay to true sets start and end to 12:00 AM", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 8:30"),
+                    end: new Date("2013/6/7 10:30")
+                });
+
+                event.set("isAllDay", true);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
+            });
+
             test("create instantiate a SchedulerDataSource", function() {
                 var dataSource = SchedulerDataSource.create();
 
