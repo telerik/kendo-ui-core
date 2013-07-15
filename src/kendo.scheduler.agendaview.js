@@ -169,7 +169,8 @@ kendo_module({
                             tableRow.push(kendo.format(
                                 '<td class="k-scheduler-groupcolumn{2}" rowspan="{0}">{1}</td>',
                                 groups[idx].rowSpan,
-                                this._groupTemplate({ value: groups[idx].text })
+                                this._groupTemplate({ value: groups[idx].text }),
+                                groups[idx].className
                             ));
                         }
                     }
@@ -216,7 +217,7 @@ kendo_module({
                 var resources = this.groupedResources;
 
                 if (resources.length) {
-                    groups = this._createGroupConfiguration(events, resources, {rowSpan: 0});
+                    groups = this._createGroupConfiguration(events, resources, null);
                     this._renderGroups(groups, table, []);
                 } else {
                     groups = this._tasks(events);
@@ -259,17 +260,22 @@ kendo_module({
                     var obj = {
                         text: kendo.getter(resource.dataTextField)(data[dataIndex]),
                         value: value,
-                        rowSpan: 0
+                        rowSpan: 0,
+                        className: parent ? "" : " k-first"
                     };
 
                     if (resources.length > 1) {
                         obj.groups = this._createGroupConfiguration(tmp, resources.slice(1), obj);
-                        parent.rowSpan += obj.rowSpan;
+                        if (parent) {
+                            parent.rowSpan += obj.rowSpan;
+                        }
                     } else {
                         obj.items = tasks;
                         var span = rowSpan(obj.items);
                         obj.rowSpan = span;
-                        parent.rowSpan += span;
+                        if (parent) {
+                            parent.rowSpan += span;
+                        }
                     }
                     configuration.push(obj);
                 }
