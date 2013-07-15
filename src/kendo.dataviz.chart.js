@@ -9221,8 +9221,8 @@ kendo_module({
             item = data[i];
             for (j = 0; j < fields.length; j++) {
                 field = fields[j];
-                if (item !== null) {
-                    value = defined(item.value[field]) ? item.value[field] : item.fields[field];
+                if (item !== null && defined(item)) {
+                    value = defined(item.value) && defined(item.value[field]) ? item.value[field] : item.fields[field];
                     if (typeof item.value === "number" && field === "value") {
                         value = item.value;
                     }
