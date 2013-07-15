@@ -330,6 +330,14 @@ kendo_module({
                 headerHeight = that.timesHeader.outerHeight();
             }
 
+            if (that.datesHeader && that.timesHeader) {
+                var datesHeaderRows = that.datesHeader.find("table:first tr");
+
+                that.timesHeader.find("tr").height(function(index) {
+                    $(this).height(datesHeaderRows.eq(index).height());
+                });
+            }
+
             if (headerHeight) {
                 height -= headerHeight;
             }
