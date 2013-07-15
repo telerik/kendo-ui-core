@@ -90,6 +90,18 @@
                 ok(td.hasClass("k-state-selected"));
             });
 
+            test("scheduler sets selection range based on clicked cell", function() {
+                var td = container.find(".k-scheduler-content tr")[1].cells[1],
+                    slot = scheduler.view().slotByElement(td);
+
+                td.trigger({
+                    type: "mousedown",
+                    curentTarget: td
+                });
+
+                ok(td.hasClass("k-state-selected"));
+            });
+
             test("scheduler focuses wrapper on mousedown", function() {
                 var td = container.find(".k-scheduler-content td:first");
 

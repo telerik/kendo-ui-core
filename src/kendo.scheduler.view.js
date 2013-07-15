@@ -479,7 +479,7 @@ kendo_module({
             return createLayoutConfiguration("rows", resources, inner);
         },
 
-        slotByCell: function() {
+        slotByElement: function() {
             return null;
         },
 

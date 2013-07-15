@@ -521,7 +521,7 @@ kendo_module({
                 slot = getOccurrenceByUid(this._data, uid);
                 uid = [slot.uid];
             } else {
-                slot = this.view().slotByCell(item);
+                slot = this.view().slotByElement(item);
                 if (slot.uid) {
                     uid = [slot.uid];
                 }
