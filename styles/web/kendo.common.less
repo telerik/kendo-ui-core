@@ -3910,30 +3910,36 @@ div.k-slider
 
 .k-scheduler-table td
 {
-    vertical-align:top;
+    vertical-align: top;
+}
+
+.k-scheduler-header th
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .k-scheduler-table td,
 .k-scheduler-header th
 {
-    border-style:solid;
-    border-width:0 0 1px 1px;
+    border-style: solid;
+    border-width: 0 0 1px 1px;
 }
 
 .k-scheduler-table td:first-child,
 .k-scheduler-header th:first-child
 {
-    border-left-width:0;
+    border-left-width: 0;
 }
 
 .k-scheduler-agenda .k-scheduler-table td:first-child
 {
-    border-left-width:1px;
+    border-left-width: 1px;
 }
 
-.k-scheduler-agenda .k-scheduler-table td.k-scheduler-datecolumn
+.k-scheduler-agenda .k-scheduler-table td.k-first
 {
-    border-left-width:0;
+    border-left-width: 0;
 }
 
 .k-scheduler-layout tr + tr .k-scheduler-times tr:last-child > th,
@@ -4304,6 +4310,7 @@ div.k-scheduler-marquee:after
     text-align:left;
 }
 
+.k-scheduler-groupcolumn,
 .k-scheduler-datecolumn
 {
     width: 144px;
