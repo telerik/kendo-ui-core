@@ -6,7 +6,7 @@
         </div>
     </header>
 
-    <ul id="listview"></ul>
+    <ul id="list-edit-listview"></ul>
 
     <script id="itemTemplate" type="text/x-kendo-template">
         <a> #=ProductName# </a>
@@ -142,7 +142,7 @@
         });
 
     function listViewInit(e) {
-        e.view.element.find("#listview").kendoMobileListView({
+        e.view.element.find("#list-edit-listview").kendoMobileListView({
             dataSource: dataSource,
             template: $("#itemTemplate").html()
         })
@@ -167,7 +167,7 @@
 
     function touchstart(e) {
         var target = $(e.touch.initialTouch),
-            listview = $("#listview").data("kendoMobileListView"),
+            listview = $("#list-edit-listview").data("kendoMobileListView"),
             model,
             button = $(e.touch.target).find("[data-role=button]:visible");
 
@@ -218,4 +218,3 @@
         });
     }
 </script>
-

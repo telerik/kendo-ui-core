@@ -7,7 +7,7 @@
         </div>
     </header>
 
-    <ul id="listview"></ul>
+    <ul id="pull-with-endless-listview"></ul>
 </div>
 
 <div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;" >
@@ -24,7 +24,7 @@
     <a data-click="addNew" class="addNew" type="button" data-role="button">Add New Product</a>
 </div>
 
-<script type="text/x-kendo-tmpl" id="template">
+<script type="text/x-kendo-tmpl" id="pull-with-endless-template">
     <div class="product-item">        
         <h3>#:ProductName#</h3>
         <p>#:kendo.toString(UnitPrice, "c")#</p>
@@ -44,12 +44,12 @@
                 total: function () { return 77; }
             },
             serverPaging: true,
-            pageSize: 40
+            pageSize: 50
         });
 
-        $("#listview").kendoMobileListView({
+        $("#pull-with-endless-listview").kendoMobileListView({
             dataSource: dataSource,
-            template: $("#template").text(),                    
+            template: $("#pull-with-endless-template").text(),                    
             pullToRefresh: true,                          
             endlessScroll: true            
         });
@@ -120,7 +120,7 @@
         margin: 0;
         padding: .3em 0 0;
     }
-    
+
     .pullImage {
         width: 64px;
         height: 64px;
@@ -134,5 +134,13 @@
         margin: 0 3em;
         padding: .5em;
         font-size: 1.2em;
+    }
+
+    #pull-with-endless-listview li{
+        padding: 2em;
+    }
+
+    .km-tablet #pull-with-endless-listview li{
+        padding: 2em;
     }
 </style>

@@ -9,7 +9,7 @@
     <ul id="filterable-listview"></ul>
 </div>
 
-<script type="text/x-kendo-tmpl" id="template">
+<script type="text/x-kendo-tmpl" id="mobile-listview-filtering-template">
     <div class="product">
         <img src="../../content/web/foods/#=ProductID#.jpg" alt="#=ProductName# image" class="pullImage"/>
         <h3>#:ProductName#</h3>
@@ -33,12 +33,12 @@
             serverPaging: true,
             serverFiltering: true,
             serverSorting: true,
-            pageSize: 30
+            pageSize: 50
         });
 
         $("#filterable-listview").kendoMobileListView({
             dataSource: dataSource,
-            template: $("#template").text(),
+            template: $("#mobile-listview-filtering-template").text(),
             filterable: {
                 field: "ProductName",
                 operator: "startswith"
