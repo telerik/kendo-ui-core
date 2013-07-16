@@ -444,13 +444,12 @@
 {
     color: @flat-main-color;
     .border-radius(@flat-border-radius);
-    background: @flat-active-color;
     border: 1px solid @flat-border-color;
 }
 
-.km-flat .km-filter-wrap > input:focus,
+.km-flat .km-filter-wrap > input:focus
 {
-    border: 1px solid @flat-active-background;
+    border: 1px solid #000;
 }
 
 /* Forms */
@@ -1008,6 +1007,8 @@
 }
 
 .km-flat .km-loader > *:not(h1),
+.km-flat .km-filter-wrap > input,
+.km-flat .km-switch-handle.km-state-active,
 .km-flat .km-load-more.km-scroller-refresh > *:not(.km-template),
 .km-flat .km-listview-label input[type=checkbox]:checked:after
 {
@@ -1043,6 +1044,11 @@
 .km-flat .km-listview-label input[type=checkbox]:checked
 {
     background: @flat-active-background;
+}
+
+.km-flat .km-filter-wrap > input:focus
+{
+    border-color: @flat-active-background;
 }
 
 .km-flat .km-badge,
