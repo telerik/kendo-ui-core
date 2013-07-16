@@ -8,117 +8,212 @@
     </header>
 
     <ul id="pull-with-endless-listview"></ul>
-</div>
-
-<div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;" >
-    <div data-role="header">
-        <div data-role="navbar">
-            <span>Add Product</span>
-            <a data-click="closeModalViewAdd" data-role="button" data-align="right">Cancel</a>
-        </div>
-    </div>
-
-    <ul data-role="listview" data-style="inset">
-        <li><label for="username">Product Name:</label> <input type="text" id="name" /></li>
-    </ul>
-    <a data-click="addNew" class="addNew" type="button" data-role="button">Add New Product</a>
 </div>
 
-<script type="text/x-kendo-tmpl" id="pull-with-endless-template">
-    <div class="product-item">        
-        <h3>#:ProductName#</h3>
-        <p>#:kendo.toString(UnitPrice, "c")#</p>
-    </div>
+
+
+<div data-role="modalview" id="modalview-add" style="width: 95%; height: 12em;" >
+
+    <div data-role="header">
+
+        <div data-role="navbar">
+
+            <span>Add Product</span>
+
+            <a data-click="closeModalViewAdd" data-role="button" data-align="right">Cancel</a>
+
+        </div>
+
+    </div>
+
+
+
+    <ul data-role="listview" data-style="inset">
+
+        <li><label for="username">Product Name:</label> <input type="text" id="name" /></li>
+
+    </ul>
+
+    <a data-click="addNew" class="addNew" type="button" data-role="button">Add New Product</a>
+
+</div>
+
+<script type="text/x-kendo-tmpl" id="pull-with-endless-template">
+
+    <div class="product-item">        
+
+        <h3>#:ProductName#</h3>
+
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
+
+    </div>
+
 </script>
 
-<script>
-    function mobileListViewPullWithEndless(e) {
-        var dataSource = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: "http://demos.kendoui.com/service/Products/Read",
-                    dataType: "jsonp"
-                }
-            },
-            schema: {
-                total: function () { return 77; }
-            },
-            serverPaging: true,
-            pageSize: 50
-        });
-
-        $("#pull-with-endless-listview").kendoMobileListView({
-            dataSource: dataSource,
-            template: $("#pull-with-endless-template").text(),                    
-            pullToRefresh: true,                          
-            endlessScroll: true            
-        });
-
-        $("#addNew").click(function () {            
-            loader.show();
-            addProductDataSource.add({
-                ProductName: $("#name").val(),
-                UnitPrice: Math.floor((Math.random() * 10) + 1)
-            });
-        });
-    }
-    
-    function closeModalViewAdd() {
-        $("#modalview-add").kendoMobileModalView("close");
-    }
-
-    function addNew() {
-        addProductDataSource.add({
-            ProductName: $("#name").val(),
-            UnitPrice: Math.floor((Math.random() * 10) + 1)
-        });
-
-        closeModalViewAdd();
-    }
-
-    var addProductDataSource = new kendo.data.DataSource({
-        transport: {
-            create: {
-                url: "http://demos.kendoui.com/service/Products/Create",
-                dataType: "jsonp"
-            },
-            parameterMap: function (options, operation) {
-                if (operation !== "read" && options.models) {
-                    return { models: kendo.stringify(options.models) };
-                }
-            }
-        },
-        schema: {
-            model: {
-                id: "ProductID",
-                fields: {
-                    ProductID: { editable: false, nullable: true },
-                    ProductName: { type: "string" }
-                }
-            }
-        },
-        autoSync: true,
-        batch: true,
-        requestEnd: function () {
-            $("#name").val("");
-        }
+<script>
+
+    function mobileListViewPullWithEndless(e) {
+
+        var dataSource = new kendo.data.DataSource({
+
+            transport: {
+
+                read: {
+
+                    url: "http://demos.kendoui.com/service/Products/Read",
+
+                    dataType: "jsonp"
+
+                }
+
+            },
+
+            schema: {
+
+                total: function () { return 77; }
+
+            },
+
+            serverPaging: true,
+
+            pageSize: 50
+
+        });
+
+
+
+        $("#pull-with-endless-listview").kendoMobileListView({
+
+            dataSource: dataSource,
+
+            template: $("#pull-with-endless-template").text(),                    
+
+            pullToRefresh: true,                          
+
+            endlessScroll: true            
+
+        });
+
+
+
+        $("#addNew").click(function () {            
+
+            loader.show();
+
+            addProductDataSource.add({
+
+                ProductName: $("#name").val(),
+
+                UnitPrice: Math.floor((Math.random() * 10) + 1)
+
+            });
+
+        });
+
+    }
+
+    
+
+    function closeModalViewAdd() {
+
+        $("#modalview-add").kendoMobileModalView("close");
+
+    }
+
+
+
+    function addNew() {
+
+        addProductDataSource.add({
+
+            ProductName: $("#name").val(),
+
+            UnitPrice: Math.floor((Math.random() * 10) + 1)
+
+        });
+
+
+
+        closeModalViewAdd();
+
+    }
+
+
+
+    var addProductDataSource = new kendo.data.DataSource({
+
+        transport: {
+
+            create: {
+
+                url: "http://demos.kendoui.com/service/Products/Create",
+
+                dataType: "jsonp"
+
+            },
+
+            parameterMap: function (options, operation) {
+
+                if (operation !== "read" && options.models) {
+
+                    return { models: kendo.stringify(options.models) };
+
+                }
+
+            }
+
+        },
+
+        schema: {
+
+            model: {
+
+                id: "ProductID",
+
+                fields: {
+
+                    ProductID: { editable: false, nullable: true },
+
+                    ProductName: { type: "string" }
+
+                }
+
+            }
+
+        },
+
+        autoSync: true,
+
+        batch: true,
+
+        requestEnd: function () {
+
+            $("#name").val("");
+
+        }
+
     });
 </script>
 
-<style scoped>
+<style scoped>
+
     .product-item {
         font-size: 1.2;
-    }
+    }
+
     .product-item h3 {
         float: left;
         margin: 0;
         height: 1.3em;
         overflow: hidden;
-    }
-    .product-item p {
+    }
+
+    .product-item p {
+
         float: right;
         margin: 0;
-        padding: .3em 0 0;
+        padding: .3em 0 0;
+
     }
 
     .pullImage {
@@ -127,7 +222,8 @@
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }
+    }
+
     .addNew {
         display: block;
         text-align: center;
@@ -136,11 +232,13 @@
         font-size: 1.2em;
     }
 
-    #pull-with-endless-listview li{
+    #pull-with-endless-listview li:not(.km-load-more)
+    {
         padding: 2em;
     }
 
-    .km-tablet #pull-with-endless-listview li{
+    .km-tablet #pull-with-endless-listview li:not(.km-load-more)
+    {
         padding: 2em;
     }
 </style>
