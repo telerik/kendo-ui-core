@@ -1779,6 +1779,31 @@
                 equal(scheduler.dataSource.at(0).start.getDate(), 3);
             });
 
+            test("cancelling the drag operation removes the hint", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 8:00"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(2)");
+
+                dragstart(scheduler, handle, handle.offset());
+                drag(scheduler, handle, slots.first().offset());
+                dragcancel(scheduler);
+
+                equal(div.find(".k-marquee").length, 0);
+            });
+
+            function dragcancel(scheduler) {
+                var draggable = scheduler._resizeDraggable;
+                draggable.trigger("dragcancel");
+            }
+
             function dragdrop(scheduler, target, via, to) {
                 if (!to) {
                     to = via;

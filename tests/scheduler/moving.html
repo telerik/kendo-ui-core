@@ -1183,6 +1183,34 @@
                 equal(div.find(".k-event-drag-hint").length, 1);
             });
 
+            test("cancelling the drag operation removes the hint", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(slots.length-2).offset());
+
+                dragcancel(scheduler);
+
+                equal(div.find(".k-event-drag-hint").length, 0);
+            });
+
+            function dragcancel(scheduler) {
+                var draggable = scheduler._moveDraggable;
+                draggable.trigger("dragcancel");
+            }
+
             function dragdrop(scheduler, target, offset, to) {
                 if (!to) {
                     to = offset;

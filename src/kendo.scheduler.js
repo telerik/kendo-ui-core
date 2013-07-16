@@ -741,6 +741,9 @@ kendo_module({
                         kendo.stringify(endResources) != kendo.stringify(startResources))  {
                         that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
                     }
+                },
+                dragcancel: function() {
+                    that.view()._removeMoveHint();
                 }
             });
         },
@@ -865,6 +868,9 @@ kendo_module({
                     if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
                         that._updateEvent(dir, event, { start: start, end: end });
                     }
+                },
+                dragcancel: function() {
+                    that.view()._removeResizeHint();
                 }
             });
         },
