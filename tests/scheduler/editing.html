@@ -37,6 +37,8 @@
             var Scheduler = kendo.ui.Scheduler,
                 container;
 
+            QUnit.config.reorder = false;
+
             function getDate(date) {
                 return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
             }
@@ -978,8 +980,8 @@
 
             test("editEvent deletes startTime and endTime", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
-                    model = scheduler.dataSource.getByUid(uid);
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
 
                 model.startTime = new Date();
                 model.endTime = new Date();
@@ -992,8 +994,8 @@
 
             test("editEvent returns startTime and endTime on cancel button", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
-                    model = scheduler.dataSource.getByUid(uid);
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
 
                 model.startTime = new Date();
                 model.endTime = new Date();
@@ -1020,7 +1022,7 @@
 
             test("Render Timezone field", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+                    uid = scheduler.dataSource.data()[0].uid;
 
                 scheduler.editEvent(uid);
                 var anchor = scheduler._editContainer.find(".k-edit-field > a");
@@ -1031,7 +1033,7 @@
 
             test("Render start and end timezone editors", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+                    uid = scheduler.dataSource.data()[0].uid;
 
                 scheduler.editEvent(uid);
                 var editors = scheduler._editContainer.find("[data-role=timezoneeditor]");
@@ -1043,7 +1045,7 @@
 
             test("Click Timezone anchor creates timezone popup", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+                    uid = scheduler.dataSource.data()[0].uid;
 
                 scheduler.editEvent(uid);
                 var editors = scheduler._editContainer.find(".k-edit-field > a").click();
@@ -1055,8 +1057,8 @@
 
             test("Show second TimezoneEditor if model.endTimezone is defined", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
-                    model = scheduler.dataSource.getByUid(uid);
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
 
                 model.set("endTimezone", "America/Toronto");
 
@@ -1068,8 +1070,8 @@
 
             test("Select correct timezone if startTimezone is defined", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
-                    model = scheduler.dataSource.getByUid(uid);
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
 
                 model.set("startTimezone", "America/Toronto");
 
@@ -1081,7 +1083,8 @@
 
             test("Click done closes timezone popup", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
 
                 scheduler.editEvent(uid);
                 scheduler._editContainer.find(".k-edit-field > a").click();
@@ -1092,8 +1095,8 @@
 
             test("Click close reverts timezones to last selected", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
-                    model = scheduler.dataSource.getByUid(uid);
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
 
                 scheduler.editEvent(uid);
                 scheduler._editContainer.find(".k-edit-field > a").click();
@@ -1110,8 +1113,8 @@
 
             test("Click checkbox toggles endTimezone editor widget", function() {
                 var scheduler = setup(),
-                    uid = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
-                    model = scheduler.dataSource.getByUid(uid);
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
 
                 scheduler.editEvent(uid);
                 scheduler._editContainer.find(".k-edit-field > a").click();
