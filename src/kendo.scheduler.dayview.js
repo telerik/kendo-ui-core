@@ -2034,7 +2034,7 @@ kendo_module({
                 if (shiftKey && !this._slotByDate(end < start ? end : start)) {
                     selection.events = [];
                     return handled;
-                } else if (!shiftKey && !this._slotByDate(start)) {
+                } else if (!shiftKey && !this._slotByDate(start) && this.options.allDaySlot) {
                     selection.isAllDay = true;
                     slot = this._firstSlot(selection.start);
                     start = slot.start;

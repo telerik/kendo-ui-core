@@ -599,6 +599,15 @@
                 deepEqual(selection.end, new Date(2013, 6, 7, 1));
             });
 
+            test("View does nothing if allDaySlot is disabled", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)], allDaySlot: false }),
+                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 0) });
+
+                view.move(selection, keys.UP);
+
+                ok(!selection.isAllDay);
+            });
+
             test("View moves selection to upper slot", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
                     selection = createSelection({ start: new Date(2013, 6, 7, 1), end: new Date(2013, 6, 7, 2) });
