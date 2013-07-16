@@ -82,8 +82,8 @@ kendo_module({
 
             if (!that._selectEvents(selection.events)) {
                 that._selectSlots(
-                    that._slotIndex(selection.start),
-                    that._slotIndex(selection.end),
+                    that._applyOffset(that._slotIndex(selection.start), selection.groupIndex),
+                    that._applyOffset(that._slotIndex(selection.end), selection.groupIndex),
                     that._row.slots
                 );
             }
@@ -124,23 +124,59 @@ kendo_module({
 
         move: function(selection, key, keep) {
             var handled = false,
+                date = selection.end,
                 isInRange = true,
-                date = selection.end;
+                result = {},
+                isGrouped = this.groupedResources.length,
+                isVertical = this._isVerticallyGrouped(),
+                groupCount = this._groupCount(),
+                slotIndex = this._slotIndex(date);
 
             if (key == keys.LEFT) {
-                date = kendo.date.addDays(date, -1);
+                if (!isGrouped) {
+                    result.date = kendo.date.addDays(date, -1);
+                } else if (!isVertical) {
+                    result = moveLeftInHorizontalGroup(slotIndex, selection.groupIndex, groupCount, date);
+                } else {
+                    result = moveLeftInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
+                }
+
                 handled = true;
             } else if (key == keys.RIGHT) {
-                date = kendo.date.addDays(date, 1);
+                if (!isGrouped) {
+                    result.date = kendo.date.addDays(date, 1);
+                } else if (!isVertical) {
+                    result = moveRightInHorizontalGroup(slotIndex, selection.groupIndex, groupCount, date);
+                } else {
+                    result = moveRightInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
+                }
+
                 handled = true;
             } else if (key == keys.DOWN) {
-                date = kendo.date.addDays(date, 7);
+                if (isGrouped && isVertical) {
+                    result = moveDownInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
+                } else {
+                    result = {
+                        date: kendo.date.addDays(date, 7),
+                        groupIndex: selection.groupIndex
+                    };
+                }
+
                 handled = true;
             } else if (key == keys.UP) {
-                date = kendo.date.addDays(date, -7);
+                if (isGrouped && isVertical) {
+                    result = moveUpInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
+                } else {
+                    result = {
+                        date: kendo.date.addDays(date, -7),
+                        groupIndex: selection.groupIndex
+                    };
+                }
+
                 handled = true;
             }
 
+            date = result.date;
             if (keep) {
                 isInRange = this._isInDateSlot({start: date, end: date });
             }
@@ -149,6 +185,7 @@ kendo_module({
                 if (!keep) {
                     selection.start = date;
                 }
+                selection.groupIndex = result.groupIndex;
                 selection.end = date;
                 selection.events = [];
             }
@@ -1147,5 +1184,119 @@ kendo_module({
         return $.inArray(selected, events);
     }
 
+    function moveLeftInHorizontalGroup(slotIndex, groupIndex, groupCount, date) {
+        if (slotIndex % NUMBER_OF_COLUMNS === 0) {
+            if (groupIndex === 0) {
+                date = kendo.date.addDays(date, -1);
+                groupIndex = groupCount - 1;
+            } else {
+                date = kendo.date.addDays(date, 6);
+                groupIndex --;
+            }
+        } else {
+            date = kendo.date.addDays(date, -1);
+        }
+
+        return {
+            date: date,
+            groupIndex: groupIndex
+        };
+    }
+
+    function moveLeftInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
+        if (slotIndex === 0) {
+            if (groupIndex === 0) {
+                date = kendo.date.addDays(date, -1);
+                groupIndex = groupCount - 1;
+            } else {
+                date = kendo.date.addDays(date, NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - 1);
+                groupIndex --;
+            }
+        } else {
+            date = kendo.date.addDays(date, -1);
+        }
+
+        return {
+            date: date,
+            groupIndex: groupIndex
+        };
+    }
+
+    function moveRightInHorizontalGroup(slotIndex, groupIndex, groupCount, date) {
+        if ((slotIndex + 1) % NUMBER_OF_COLUMNS === 0) {
+            if (groupIndex == groupCount - 1) {
+                date = kendo.date.addDays(date, 1);
+                groupIndex = 0;
+            } else {
+                date = kendo.date.addDays(date, -6);
+                groupIndex ++;
+            }
+        } else {
+            date = kendo.date.addDays(date, 1);
+        }
+
+        return {
+            date: date,
+            groupIndex: groupIndex
+        };
+    }
+
+    function moveRightInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
+        if (slotIndex == NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - 1) {
+            if (groupIndex == groupCount - 1) {
+                groupIndex = 0;
+                date = kendo.date.addDays(date, 1);
+            } else {
+                date = kendo.date.addDays(date, - (NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - 1));
+                groupIndex ++;
+            }
+        } else {
+            date = kendo.date.addDays(date, 1);
+        }
+
+        return {
+            date: date,
+            groupIndex: groupIndex
+        };
+    }
+
+    function moveUpInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
+        if (slotIndex <= NUMBER_OF_ROWS) {
+            if (groupIndex === 0) {
+                date = kendo.date.addDays(date, -7);
+                groupIndex = groupCount - 1;
+            } else {
+                date = kendo.date.addDays(date, NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - NUMBER_OF_ROWS -1);
+                groupIndex --;
+            }
+        } else {
+            date = kendo.date.addDays(date, -7);
+        }
+
+        return {
+            date: date,
+            groupIndex: groupIndex
+        };
+    }
+
+
+    function moveDownInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
+        if (slotIndex >= NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - NUMBER_OF_COLUMNS) {
+            if (groupIndex == groupCount -1) {
+                date = kendo.date.addDays(date, 7);
+                groupIndex = 0;
+            } else {
+                date = kendo.date.addDays(date, - (NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - NUMBER_OF_COLUMNS));
+                groupIndex ++;
+            }
+        } else {
+            date = kendo.date.addDays(date, 7);
+        }
+
+        return {
+            date: date,
+            groupIndex: groupIndex
+        };
+    }
 
 })(window.kendo.jQuery);
