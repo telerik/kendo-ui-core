@@ -1027,7 +1027,7 @@
                     "meta": "This demo shows the API of Kendo UI Scheduler."
                 }, {
 					"text": "Globalization",
-					"url": "scheduler/globalization.html"
+					"url": "scheduler/globalization.html",
                     "packages": ["mvc"]
 				}
             ]
