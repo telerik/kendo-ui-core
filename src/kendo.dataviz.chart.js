@@ -4357,44 +4357,40 @@ kendo_module({
                 reverse = categoryAxis.options.reverse,
                 dir = reverse ? 2 : 1,
                 revDir = reverse ? 1 : 2,
+                pos = vertical ? Y : X,
                 vertical = categoryAxis.options.vertical,
                 linePoints = segment.linePoints.concat(visualPoints || []),
                 length = linePoints.length,
                 points = [],
-                prevPoint, point,
-                i, pointCenter;
+                prevPoint, point, i, pointCenter,
+                prevMarkerBoxCenter, markerBoxCenter;
 
             for (i = 1; i < length; i++) {
                 prevPoint = linePoints[i - 1];
                 point = linePoints[i];
-                if (vertical) {
-                    if (categoryAxis.options.justified) {
-                        points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.markerBox().center().y));
-                        points.push(Point2D(point.markerBox().center().x, prevPoint.markerBox().center().y));
-                        points.push(Point2D(point.markerBox().center().x, point.markerBox().center().y));
-                    } else {
-                        points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.box[Y + dir]));
-                        points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.box[Y + revDir]));
-                        if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
-                            points.push(Point2D(point.markerBox().center().x, prevPoint.box[Y + revDir]));
-                        }
-                        points.push(Point2D(point.markerBox().center().x, point.box[Y + dir]));
-                        points.push(Point2D(point.markerBox().center().x, point.box[Y + revDir]));
-                    }
-
+                prevMarkerBoxCenter = prevPoint.markerBox().center();
+                markerBoxCenter = point.markerBox().center();
+                if (categoryAxis.options.justified) {
+                    points.push(Point2D(prevMarkerBoxCenter.x, prevMarkerBoxCenter.y));
+                    points.push(Point2D(markerBoxCenter.x, prevMarkerBoxCenter.y));
+                    points.push(Point2D(markerBoxCenter.x, markerBoxCenter.y));
                 } else {
-                    if (categoryAxis.options.justified) {
-                        points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.markerBox().center().y));
-                        points.push(Point2D(point.markerBox().center().x, prevPoint.markerBox().center().y));
-                        points.push(Point2D(point.markerBox().center().x, point.markerBox().center().y));
-                    } else {
-                        points.push(Point2D(prevPoint.box[X + dir], prevPoint.markerBox().center().y));
-                        points.push(Point2D(prevPoint.box[X + revDir], prevPoint.markerBox().center().y));
+                    if (vertical) {
+                        points.push(Point2D(prevMarkerBoxCenter.x, prevPoint.box[Y + dir]));
+                        points.push(Point2D(prevMarkerBoxCenter.x, prevPoint.box[Y + revDir]));
                         if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
-                            points.push(Point2D(prevPoint.box[X + revDir], point.markerBox().center().y));
+                            points.push(Point2D(markerBoxCenter.x, prevPoint.box[Y + revDir]));
                         }
-                        points.push(Point2D(point.box[X + dir], point.markerBox().center().y));
-                        points.push(Point2D(point.box[X + revDir], point.markerBox().center().y));
+                        points.push(Point2D(markerBoxCenter.x, point.box[Y + dir]));
+                        points.push(Point2D(markerBoxCenter.x, point.box[Y + revDir]));
+                    } else {
+                        points.push(Point2D(prevPoint.box[X + dir], prevMarkerBoxCenter.y));
+                        points.push(Point2D(prevPoint.box[X + revDir], prevMarkerBoxCenter.y));
+                        if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
+                            points.push(Point2D(prevPoint.box[X + revDir], markerBoxCenter.y));
+                        }
+                        points.push(Point2D(point.box[X + dir], markerBoxCenter.y));
+                        points.push(Point2D(point.box[X + revDir], markerBoxCenter.y));
                     }
                 }
             }
