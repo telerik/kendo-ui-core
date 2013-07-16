@@ -68,6 +68,17 @@
                 ok($(uploadInstance.wrapper).is(".k-upload-empty"));
             });
 
+            test("k-i-extension class is added to the file icon if file has extension", function(){
+                simulateFileSelect("test.zip");
+                ok($(".k-upload-files li.k-file > .k-icon", uploadInstance.wrapper).is(".k-i-zip"));
+            })
+
+            test("k-i-extension class is not added to the file icon if file does not have extension", function(){
+                simulateFileSelect("test");
+                var fileIcon = $(".k-upload-files li.k-file > .k-icon", uploadInstance.wrapper);
+                equal(fileIcon.removeClass("k-icon").attr("class"), "");
+            })
+
             test("current input is hidden after choosing a file", function() {
                 simulateFileSelect();
                 equal($("input:not(:visible)", uploadInstance.wrapper).length, 1);
@@ -180,7 +191,7 @@
 
         <script type="text/javascript">
 
-             // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("Upload / SyncUpload / Templates", {
                 setup: function() {
@@ -215,6 +226,25 @@
             test("progress bar is rendered in the template", function() {
                 simulateSingleFileSelect("image.jpg", 500);
                 equal($('.k-progress', uploadInstance.wrapper).length, 1);
+            });
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / SyncUpload / Initial Files", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ 
+                        files: [
+                            { name: "test.doc", size: 50, extension: ".doc"},
+                            { name: "test1.jpg", size: 60, extension: ".jpg" }
+                        ]
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("initial files are not rendered even if they are passed in the configuration", function(){
+                equal($('.k-file', uploadInstance.wrapper).length, 0);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

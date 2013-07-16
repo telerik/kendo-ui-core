@@ -56,6 +56,20 @@
         equal($(".k-upload-status-total", uploadInstance.wrapper).clone().children().remove().end().text(), "Uploading...");
     });
 
+    test("k-upload-status-total text reverts back to Done if upload is canceled and there are other finished uploads", function(){
+        simulateUpload();
+        simulateFileSelect();
+        $(".k-cancel", uploadInstance.wrapper).trigger("click");
+        equal($(".k-upload-status-total", uploadInstance.wrapper).clone().children().remove().end().text(), "Done");
+    });
+
+    test("k-upload-status-total icon reverts back to warning if upload is canceled and there are other finished uploads", function(){
+        simulateUpload();
+        simulateFileSelect();
+        $(".k-cancel", uploadInstance.wrapper).trigger("click");
+        equal($(".k-upload-status-total .k-warning", uploadInstance.wrapper).length, 1);
+    });
+
     test("k-upload-status-total shows warning icon when upload is finished", function(){
         simulateUpload();
 

@@ -208,3 +208,156 @@
         simulateUpload();
         simulateRemoveWithResponse(errorResponse);
     });
+
+
+    // -----------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------
+    //Error tests for initial files
+
+    test("error is raised when remove action returns error code for initially rendered files", function() {
+        stop(1);
+
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            error: function(e) {
+                ok(true);
+                start();
+            }
+        });
+
+        simulateRemoveError();
+    });
+
+    test("error is raised when remove action returns response that is not JSON for initially rendered files", function() {
+        stop(1);
+
+        uploadInstance = createUpload({
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            error: function(e) {
+                ok(true);
+                start();
+            }
+        });
+
+        simulateRemoveWithResponse(errorResponse);
+    });
+
+    asyncTest("error is not fired when remove action returns empty response for initially rendered files", function() {
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            error: function(e) {
+                ok(false);
+            }
+        });
+
+        simulateRemove();
+
+        setTimeout(function() {
+            ok(true);
+            start();
+        }, 100);
+    });
+
+    asyncTest("error is not fired when remove action returns valid JSON for initially rendered files", function() {
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            error: function(e) {
+                ok(false);
+            }
+        });
+
+        simulateRemoveWithResponse(validJSON);
+
+        setTimeout(function() {
+            ok(true);
+            start();
+        }, 100);
+    });
+
+    test("error event arguments contain list of removed files for initially rendered files", function() {
+        stop(1);
+
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            error: function(e) {
+                deepEqual(e.files, [ { name: "test.doc", extension: ".doc", size: 50 } ]);
+                start();
+            }
+        });
+
+        simulateRemoveError();
+    });
+
+    test("error event arguments contain remove operation name for initially rendered files", function() {
+        stop(1);
+
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            error: function(e) {
+                equal(e.operation, "remove");
+                start();
+            }
+        });
+
+        simulateRemoveError();
+    });
+
+    test("error event arguments contains original XHR for remove action for initially rendered files", function() {
+        stop(1);
+
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            error: function(e) {
+                notEqual(e.XMLHttpRequest, null);
+                start();
+            }
+        });
+
+        simulateRemoveWithResponse(errorResponse);
+    });
+
+    test("error event arguments contains XHR with responseText for remove action for initially rendered files", function() {
+        stop(1);
+
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            error: function(e) {
+                equal(e.XMLHttpRequest.responseText, errorResponse);
+                start();
+            }
+        });
+
+        simulateRemoveWithResponse(errorResponse);
+    });
+
+    test("error event arguments contains XHR with status for remove action for initially rendered files", function() {
+        stop(1);
+
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            error: function(e) {
+                equal(e.XMLHttpRequest.status, "200");
+                start();
+            }
+        });
+
+        simulateRemoveWithResponse(errorResponse);
+    });

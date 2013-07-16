@@ -251,3 +251,140 @@
             start();
         }, 100);
     });
+
+
+    // -----------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------
+    //Success tests for initial files
+
+    asyncTest("success is fired when remove action succeeds for initially rendered files", function() {
+        var successFired;
+        uploadInstance = createUpload({
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            success: function(e) {
+                successFired = true;
+            }
+        });
+
+        successFired = false;
+        simulateRemove();
+
+        setTimeout(function() {
+            ok(successFired);
+            start();
+        }, 100);
+    });
+
+    test("success event arguments contain list of removed files for initially rendered files", function() {
+        stop(1);
+
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            success: function(e) {
+                deepEqual(e.files, [ { name: "test.doc", extension: ".doc", size: 50 } ]);
+                start();
+            }
+        });
+
+        simulateRemove();
+    });
+
+    asyncTest("success event arguments contain remove operation name for initially rendered files", function() {
+        var operation = null;
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            success: function(e) {
+                operation = e.operation;
+            }
+        });
+
+        simulateRemove();
+
+        setTimeout(function() {
+            equal(operation, "remove");
+            start();
+        }, 100);
+    });
+
+    asyncTest("success event arguments contain remove action response for initially rendered files", function() {
+        var data = null;
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            success: function(e) {
+                data = e.response;
+            }
+        });
+
+        simulateRemoveWithResponse(validJSON);
+
+        setTimeout(function() {
+            equal(data.status, "OK");
+            start();
+        }, 100);
+    });
+
+    asyncTest("success event arguments contain original XHR for remove action for initially rendered files", function() {
+        var xhr = null;
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            success: function(e) {
+                xhr = e.XMLHttpRequest;
+            }
+        });
+
+        xhr = null;
+        simulateRemove();
+
+        setTimeout(function() {
+            notEqual(xhr, null);
+            start();
+        }, 100);
+    });
+
+    asyncTest("success event arguments contain XHR with responseText for remove action for initially rendered files", function() {
+        var responseText;
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            success: function(e) {
+                responseText = e.XMLHttpRequest.responseText;
+            }
+        });
+
+        simulateRemoveWithResponse(validJSON);
+
+        setTimeout(function() {
+            equal(responseText, validJSON);
+            start();
+        }, 100);
+    });
+
+    asyncTest("success event arguments contain XHR with status for remove action for initially rendered files", function() {
+        var status;
+        uploadInstance = createUpload({ 
+            files: [
+                { name: "test.doc", size: 50, extension: ".doc"}
+            ],
+            success: function(e) {
+                status = e.XMLHttpRequest.status;
+            }
+        });
+
+        simulateRemove();
+
+        setTimeout(function() {
+            equal(status, "200");
+            start();
+        }, 100);
+    });

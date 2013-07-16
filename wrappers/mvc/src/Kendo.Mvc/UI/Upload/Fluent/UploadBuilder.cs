@@ -2,6 +2,8 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using Kendo.Mvc.Infrastructure;
+    using System.Collections;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Upload"/> component.
@@ -128,6 +130,77 @@ namespace Kendo.Mvc.UI.Fluent
         public UploadBuilder Messages(Action<UploadMessagesBuilder> configurator)
         {
             configurator(new UploadMessagesBuilder(Component.Messages));
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template element to be used for rendering the files in the list
+        /// </summary>
+        /// <param name="templateId">The id of the template</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Upload()
+        ///     .Name(&quot;files&quot;)
+        ///     .TemplateId(&quot;fileTemplate&quot;)
+        ///     .Async(a =&gt; a
+        ///         .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///         .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///         .AutoUpload(true)
+        ///     )
+        /// )
+        /// </code>
+        /// <code lang="ASPX">
+        /// &lt;%= Html.Kendo().Upload()
+        ///             .Name(&quot;Upload&quot;)
+        ///             .TemplateId(&quot;fileTemplate&quot;)
+        ///             .Async(async =&gt; async
+        ///                 .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///                 .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadBuilder TemplateId(string templateId)
+        {
+            Component.TemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the initially rendered files
+        /// </summary>
+        /// <param name="configurator">The lambda which configures initial files</param>
+        /// <example>
+        /// <code lang="ASPX">
+        /// &lt;%= Html.Kendo().Upload()
+        ///     .Name(&quot;files&quot;)
+        ///     .Files(files =&gt; files.Add().Name(&quot;file.txt&quot;).Size(500).Extension(&quot;.txt&quot;))
+        ///     .Async(a =&gt; a
+        ///         .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///         .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///         .AutoUpload(true)
+        ///     )
+        /// %&gt;
+        /// </code>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Upload()
+        ///     .Name(&quot;files&quot;)
+        ///     .Files(files =&gt; files.Add().Name(&quot;file.txt&quot;).Size(500).Extension(&quot;.txt&quot;))
+        ///     .Async(a =&gt; a
+        ///         .Save(&quot;Save&quot;, &quot;Compose&quot;)
+        ///         .Remove(&quot;Remove&quot;, &quot;Compose&quot;)
+        ///         .AutoUpload(true)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public UploadBuilder Files(Action<UploadFileFactory> configurator)
+        {
+            UploadFileFactory factory = new UploadFileFactory(Component);
+
+            configurator(factory);
 
             return this;
         }

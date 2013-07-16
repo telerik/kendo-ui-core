@@ -1256,12 +1256,15 @@
     </Compile>
     <Compile Include="UI\TabStrip\Html\TabStripHtmlBuilder.cs" />
     <Compile Include="UI\UiPrimitives.cs" />
+    <Compile Include="UI\Upload\Fluent\UploadFileBuilder.cs" />
+    <Compile Include="UI\Upload\Fluent\UploadFileFactory.cs" />
     <Compile Include="UI\Upload\IUploadMessages.cs" />
     <Compile Include="UI\Upload\Fluent\UploadMessagesBuilder.cs" />
     <Compile Include="UI\Upload\Fluent\UploadAsyncSettingsBuilder.cs" />
     <Compile Include="UI\Upload\Fluent\UploadBuilder.cs" />
     <Compile Include="UI\Upload\Fluent\UploadEventBuilder.cs" />
     <Compile Include="UI\Upload\Html\UploadHtmlBuilder.cs" />
+    <Compile Include="UI\Upload\UploadFile.cs" />
     <Compile Include="UI\Upload\UploadMessages.cs" />
     <Compile Include="UI\Upload\Settings\IUploadAsyncSettings.cs" />
     <Compile Include="UI\Upload\Settings\UploadAsyncSettings.cs" />

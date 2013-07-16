@@ -866,6 +866,58 @@
                 simulateFileSelect();
                 equal($('.k-progress', uploadInstance.wrapper).length, 1);
             });
+
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Upload / FormDataUpload / Initial files", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ 
+                        async: {"saveUrl": 'javascript:;', "removeUrl": 'javascript:;' },
+                        files: [
+                            { name: "test.doc", size: 50, extension: ".doc"},
+                            { name: "test1.jpg", size: 60, extension: ".jpg" }
+                        ]
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("list element is created for each initial file", function(){
+                equal($('.k-file', uploadInstance.wrapper).length, 2);
+            });
+
+            test("list elements contain k-file-success class", function(){
+                ok($('.k-file', uploadInstance.wrapper).is('.k-file-success'));
+            });
+
+            test("file entries contain 'fileNames' data", function(){
+                var firstFileEntry = $('.k-file', uploadInstance.wrapper);
+                var expectedFileNamesData = [ { name: "test.doc", size: 50, extension: ".doc"} ];
+
+                deepEqual(firstFileEntry.data('fileNames'), expectedFileNamesData);
+            });
+
+            test("file entries contain 'files' data", function(){
+                var firstFileEntry = $('.k-file', uploadInstance.wrapper);
+                var expectedFilesData = [ { name: "test.doc", size: 50, extension: ".doc"} ];
+
+                deepEqual(firstFileEntry.data('files'), expectedFilesData);
+            });
+
+            test("remove icon is rendered for each file entry", function() {
+                equal($(".k-delete", uploadInstance.wrapper).length, 2);
+            });
+
+            test("initial file entries have progress-bar with 100% width", function(){
+                equal($(".k-file .k-progress", uploadInstance.wrapper)[0].style.width, "100%");
+            });
+
+            test("k-upload-pct text is '100%'  for each initially rendered file entry", function(){
+                equal($(".k-upload-pct:first", uploadInstance.wrapper).text(), "100%");
+            });
+            
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
