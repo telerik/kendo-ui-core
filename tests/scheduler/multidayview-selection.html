@@ -162,8 +162,8 @@
 
                 view.normalizeSelection(selection);
 
-                deepEqual(selection.start, new Date(2013, 6, 7, 0, 0));
-                deepEqual(selection.end, new Date(2013, 6, 7, 1, 0));
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 0));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
             });
 
             test("View adjust start/end date based on view.startDate/view.endDate when navigate to past", function() {
@@ -175,8 +175,8 @@
 
                 view.normalizeSelection(selection);
 
-                deepEqual(selection.start, new Date(2013, 6, 7, 0, 0));
-                deepEqual(selection.end, new Date(2013, 6, 7, 1, 0));
+                deepEqual(selection.start, new Date(2013, 6, 7, 23, 0));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
             });
 
             test("View selects cell", function() {
@@ -1001,7 +1001,7 @@
                 equal(selection.isAllDay, true);
             });
 
-            function setupGroupedScheduler(orientation) {
+            function setupGroupedScheduler(orientation, view) {
                 orientation = orientation || "horizontal";
 
                 scheduler = new kendo.ui.Scheduler(container, {
@@ -1028,8 +1028,21 @@
                             ]
                         }
                     ],
-                    views: [ "week" ]
+                    views: [ view || "week" ]
                 });
+            }
+
+            function bindGroupedScheduler() {
+                scheduler.dataSource.data([
+                    { title: "Room1 - Fred", start: new Date(2013, 5, 8, 4), end: new Date(2013, 5, 8, 6), rooms: 1, persons: 1 },
+                    { title: "Room1 - Fred", start: new Date(2013, 5, 8, 8), end: new Date(2013, 5, 8, 10), rooms: 1, persons: 1 },
+                    { title: "Room1 - Barny", start: new Date(2013, 5, 8, 4), end: new Date(2013, 5, 8, 6), rooms: 1, persons: 2 },
+                    { title: "Room1 - Barny", start: new Date(2013, 5, 8, 8), end: new Date(2013, 5, 8, 10), rooms: 1, persons: 2 },
+                    { title: "Room2 - Fred", start: new Date(2013, 5, 8, 4), end: new Date(2013, 5, 8, 6), rooms: 2, persons: 1 },
+                    { title: "Room2 - Fred", start: new Date(2013, 5, 8, 8), end: new Date(2013, 5, 8, 10), rooms: 2, persons: 1 },
+                    { title: "Room2 - Barny", start: new Date(2013, 5, 8, 4), end: new Date(2013, 5, 8, 6), rooms: 2, persons: 2 },
+                    { title: "Room2 - Barny", start: new Date(2013, 5, 8, 8), end: new Date(2013, 5, 8, 10), rooms: 2, persons: 2 }
+                ]);
             }
 
             module("Horizontally grouped Multi Day View selection", {
@@ -1171,7 +1184,128 @@
                 equal(cell, view._rows[0].slots[13].element);
             });
 
-            module("Vertically grouped Multi Day View selection", {
+            test("View selects allDay cell in second group", function() {
+                setupGroupedScheduler();
+
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 1,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.datesHeader.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[0].slots[13].element);
+            });
+
+            test("View selects event in first group", function() {
+                setupGroupedScheduler();
+
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 1,
+                    events: []
+                };
+
+                view.select(selection);
+
+                var cell = view.datesHeader.find(".k-state-selected")[0];
+
+                equal(cell, view._rows[0].slots[13].element);
+            });
+
+            test("View selects first event", function() {
+                setupGroupedScheduler();
+                bindGroupedScheduler();
+
+                var model = scheduler.dataSource.data()[0];
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8, 1),
+                    groupIndex: 0,
+                    events: [model.uid]
+                };
+
+                view.select(selection);
+
+                var event = view.content.find("[data-uid=" + model.uid + "]");
+
+                ok(event.hasClass("k-state-selected"));
+            });
+
+            test("View moves the selection to the next group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.select(selection);
+                view.move(selection, keys.RIGHT);
+
+                equal(selection.groupIndex, 1);
+                deepEqual(selection.start, new Date(2013, 5, 2));
+                deepEqual(selection.end, new Date(2013, 5, 2, 0, 30));
+            });
+
+            test("View moves the selection to the next group", function() {
+                setupGroupedScheduler("horizontal", "day");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.select(selection);
+                view.move(selection, keys.RIGHT);
+                view.move(selection, keys.RIGHT);
+
+                equal(selection.groupIndex, 2);
+                deepEqual(selection.start, new Date(2013, 5, 8));
+                deepEqual(selection.end, new Date(2013, 5, 8, 0, 30));
+            });
+
+            test("View navigates to next period of last group has been reached", function() {
+                setupGroupedScheduler("horizontal", "day");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 3,
+                    events: []
+                };
+
+                view.select(selection);
+                view.move(selection, keys.RIGHT);
+
+                equal(selection.groupIndex, 0);
+                deepEqual(selection.start, new Date(2013, 5, 9));
+                deepEqual(selection.end, new Date(2013, 5, 9, 0, 30));
+            });
+
+            module("Vertically grouped Multi Day View selection/navigation", {
                 setup: function() {
                     container = $("<div />");
                     $(document.body).append(container);

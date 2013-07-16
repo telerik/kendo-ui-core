@@ -1723,14 +1723,24 @@ kendo_module({
         },
 
         normalizeSelection: function(selection) {
-            var columnIndex = this._dateSlotIndex(selection.start),
+            var columns = this._columns,
+                columnIndex = this._dateSlotIndex(selection.start),
+                slotIndex = this._timeSlotIndex(selection.start),
                 slot;
 
-            if (columnIndex < 0) {
+            if (columnIndex < 0 || columnIndex >= columns.length) {
                 columnIndex = 0;
             }
 
-            slot = this._columns[columnIndex].slots[0] || this._slotByDate(this.startDate());
+            slot = this._columns[columnIndex].slots;
+
+            if (slotIndex < 0) {
+                slotIndex = 0;
+            } else if (slotIndex > (slot.length - 1)) {
+                slotIndex = slot.length - 1;
+            }
+
+            slot = this._columns[columnIndex].slots[slotIndex];
             selection.start = new Date(slot.start);
             selection.end = new Date(slot.end);
         },
@@ -1908,7 +1918,8 @@ kendo_module({
 
         move: function(selection, key, shiftKey) {
             var options = this.options,
-                interval = (options.majorTick * MS_PER_MINUTE) / (options.minorTickCount || 1),
+                groupedResources = this.groupedResources,
+                interval = this._timeSlotInterval(),
                 start = new Date(selection.start),
                 end = new Date(selection.end),
                 multipleSelection = Math.abs(start - end) > interval,
@@ -1995,6 +2006,7 @@ kendo_module({
                 }
             } else if (key === keys.RIGHT) {
                 handled = true;
+
                 if (!shiftKey) {
                     start = addDays(start, 1);
                 }
@@ -2003,6 +2015,17 @@ kendo_module({
                 if (start.getTime() === end.getTime()) {
                     setTime(end, interval);
                 }
+
+                if (start > this.endDate() && groupedResources.length && !this._isVerticallyGrouped()) {
+                    selection.groupIndex += 1;
+                    if (this._columnCountForLevel(groupedResources.length) > selection.groupIndex) {
+                        start = addDays(start, -this._selectionOffset());
+                        end = addDays(end, -this._selectionOffset());
+                    } else {
+                        selection.groupIndex = 0;
+                    }
+                }
+
             } else if (key === keys.LEFT) {
                 handled = true;
                 if (!shiftKey) {
