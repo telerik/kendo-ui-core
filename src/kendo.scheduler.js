@@ -469,6 +469,7 @@ kendo_module({
 
             that.wrapper.on("focusout" + NS, function() {
                 that.view().clearSelection();
+                that._ctrlKey = that._shiftKey = false;
             });
 
             that.wrapper.on("keydown" + NS, proxy(that._keydown, that));
@@ -575,11 +576,13 @@ kendo_module({
 
             if (dataItem && selection) {
                 if (this._shiftKey && selection.start && selection.end) {
-                    var backward = dataItem.end < selection.end;
+                    var backward = dataItem.end < selection.end,
+                        view = this.view();
+
                     selection.end = new Date(dataItem.end);
 
-                    if (backward) {
-                        kendo.date.setTime(selection.end, - this.view()._timeSlotInterval());
+                    if (backward && view._timeSlotInterval) {
+                        kendo.date.setTime(selection.end, -view._timeSlotInterval());
                     }
                 } else {
                     selection.start = new Date(dataItem.start.getTime());
