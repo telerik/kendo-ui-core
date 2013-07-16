@@ -2136,6 +2136,11 @@ kendo_module({
             return null;
         },
 
+        _slotByAllDay: function(date) {
+            var slot = this._rows[0].slots[this._dateSlotIndex(date)];
+            return slot || null;
+        },
+
         _getAllDayEvents: function(col, selected) {
             var allDayRow = this._rows[0],
                 events = allDayRow.events,
@@ -2169,7 +2174,7 @@ kendo_module({
             };
 
             var prevAllDayPredicate = function(slot) {
-                return slot.start <= selection.start;
+                return kendo.date.getDate(slot.start).getTime() === kendo.date.getDate(selection.start).getTime();
             };
 
             var nextPredicate = function(slot) {
@@ -2180,8 +2185,12 @@ kendo_module({
                 return slot.start >= selection.start;
             };
 
-            //if multiple events use selection.end
-            slot = this._slotByDate(selection.start);
+            if (selection.isAllDay) {
+                slot = this._slotByAllDay(selection.start);
+            } else {
+                slot = this._slotByDate(selection.start);
+            }
+
             columnIndex = slot.columnIndex;
 
             if (prev) {
