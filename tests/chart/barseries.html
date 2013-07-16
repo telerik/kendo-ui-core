@@ -746,8 +746,8 @@
                 test("groups with no stack are assigned to first stack", function() {
                     setupBarChart(plotArea, {
                         series: [
-                            $.extend({ stack: "a" }, positiveSeries),
-                            positiveSeries,
+                            $.extend(true, { stack: "a" }, positiveSeries),
+                            positiveSeries
                         ],
                         isStacked: true
                     });

@@ -1615,7 +1615,7 @@
                             "open": "max",
                             "high": "max",
                             "low": "min",
-                            "close": "max",
+                            "close": "max"
                         },
                         data: [[1,4,0,2], [2,5,1,3], [3,6,2,4]]
                     }], {
@@ -1635,7 +1635,7 @@
                             "open": "min",
                             "high": "min",
                             "low": "min",
-                            "close": "min",
+                            "close": "min"
                         },
                         data: [[1,4,0,2], [2,5,1,3], [3,6,2,4]]
                     }], {
@@ -1675,19 +1675,19 @@
                         categoryField: "date",
                         data: [{
                             value: 1,
-                            date: new Date("2013-06-01")
+                            date: new Date("2013/06/01")
                         }, {
                             value: 2,
-                            date: new Date("2013-06-02")
+                            date: new Date("2013/06/02")
                         }, {
                             value: 3,
-                            date: new Date("2013-07-01")
+                            date: new Date("2013/07/01")
                         }]
                     }], {
                         categoryAxis: {
                             categories: [
-                                new Date("2013-06-01"), new Date("2013-06-02"),
-                                new Date("2013-07-01")
+                                new Date("2013/06/01"), new Date("2013/06/02"),
+                                new Date("2013/07/01")
                             ],
                             baseUnit: "months"
                         }
@@ -2125,7 +2125,7 @@
                         categoryAxis: {
                             categories: ["A"]
                         },
-                        valueAxis: { },
+                        valueAxis: { }
                     }, options));
 
                     plotArea.reflow(chartBox);
@@ -2373,7 +2373,7 @@
                 test("value axis is rendered in the first pane by default", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }]
@@ -2385,7 +2385,7 @@
                 test("category axis is rendered in the first pane by default", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }]
@@ -2397,7 +2397,7 @@
                 test("value axis is moved to the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2412,7 +2412,7 @@
                 test("value axis height matches the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2431,7 +2431,7 @@
                 test("category axis remains in the first pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2446,7 +2446,7 @@
                 test("category axis fits in the first pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2461,7 +2461,7 @@
                 test("category axis fits in the second pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2476,7 +2476,7 @@
                 test("right aligned value axis fits in the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2495,7 +2495,7 @@
                 test("right aligned value axis height matches the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2517,7 +2517,7 @@
                 test("secondary value axis is positioned in the designated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2534,7 +2534,7 @@
                 test("secondary value axis is aligned to category axis", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2555,7 +2555,7 @@
                 test("secondary value axis is aligned to category axis end", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2576,7 +2576,7 @@
                 test("right aligned secondary value axis fits in the associated pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2597,7 +2597,7 @@
                 test("left anchor axis is assigned per pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -2641,7 +2641,7 @@
                         axis: "b"
                     }], {
                         panes: [{
-                            name: "top",
+                            name: "top"
                         }, {
                             name: "bottom"
                         }],
