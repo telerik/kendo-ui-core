@@ -35,6 +35,7 @@ kendo_module({
         ZINDEX = "zIndex",
         ACTIVATE = "activate",
         DEACTIVATE = "deactivate",
+        POINTERDOWN = "touchstart" + NS + " MSPointerDown" + NS,
         MOUSEENTER = kendo.support.pointers ? "MSPointerOver" : "mouseenter",
         MOUSELEAVE = kendo.support.pointers ? "MSPointerOut" : "mouseleave",
         KENDOPOPUP = "kendoPopup",
@@ -267,12 +268,13 @@ kendo_module({
 
             that._focusProxy = proxy(that._focusHandler, that);
 
-            element.on("touchstart MSPointerDown", that._focusProxy)
+            element.on(POINTERDOWN, that._focusProxy)
                    .on(CLICK + NS, disabledSelector, false)
                    .on(CLICK + NS, itemSelector, proxy(that._click , that))
                    .on("keydown" + NS, proxy(that._keydown, that))
                    .on("focus" + NS, proxy(that._focus, that))
                    .on("focus" + NS, ".k-content", proxy(that._focus, that))
+                   .on(POINTERDOWN + " " + MOUSEDOWN + NS, ".k-content", proxy(that._preventClose, that))
                    .on("blur" + NS, proxy(that._removeHoverItem, that))
                    .on("blur" + NS, "[tabindex]", proxy(that._checkActiveElement, that))
                    .on(MOUSEENTER + NS, itemSelector, proxy(that._mouseenter, that))
@@ -628,16 +630,26 @@ kendo_module({
             this._removeHoverItem();
         },
 
+        _preventClose: function() {
+            if (!this.options.closeOnClick) {
+                this._closurePrevented = true;
+            }
+        },
+
         _checkActiveElement: function(e) {
             var that = this,
                 hoverItem = $(this._hoverItem()[0] || (e ? e.currentTarget : {})),
                 target = that._findRootParent(hoverItem)[0];
 
-            setTimeout(function() {
-                if (!document.hasFocus() || !contains(target, kendo._activeElement())) {
-                    that.close(target);
-                }
-            }, 0);
+            if (!this._closurePrevented) {
+                setTimeout(function() {
+                    if (!document.hasFocus() || (!contains(target, kendo._activeElement()) && e && !contains(target, e.currentTarget))) {
+                        that.close(target);
+                    }
+                }, 0);
+            }
+
+            this._closurePrevented = false;
         },
 
         _removeHoverItem: function() {
