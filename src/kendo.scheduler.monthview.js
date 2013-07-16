@@ -784,9 +784,9 @@ kendo_module({
 
             this._resizeHint.find(".k-label-top,.k-label-bottom").text("");
 
-            this._resizeHint.first().find(".k-label-top").text(kendo.toString(startSlot.start, "M/dd"));
+            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(startSlot.start, "M/dd"));
 
-            this._resizeHint.last().find(".k-label-bottom").text(kendo.toString(endSlot.start, "M/dd"));
+            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(endSlot.start, "M/dd"));
         },
 
        _updateMoveHint: function(event, initialSlot, currentSlot) {
