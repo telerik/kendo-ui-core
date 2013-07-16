@@ -431,18 +431,18 @@ kendo_module({
         for ( ; idx < length; idx ++) {
             item = groups[idx];
             if (item.groups) {
-                item = flattenGroup(item);
+                item = flattenGroup(item.groups);
                 result = result.concat(item);
             } else {
-                result = result.concat(item.items);
+                result = result.concat(flattenGroup(item.items));
             }
         }
 
         return result;
     }
 
-    function flattenGroup(group) {
-        var items = [].concat(group.groups),
+    function flattenGroup(groups) {
+        var items = [].concat(groups),
             item = items.shift(),
             result = [],
             push = [].push;
