@@ -1562,6 +1562,8 @@ kendo_module({
                     }
 
                     slot = axis.getSlot(value);
+                } else {
+                    item.hide();
                 }
 
                 item.reflow(slot || axis.lineBox());

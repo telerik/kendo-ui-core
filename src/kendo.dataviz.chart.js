@@ -2072,6 +2072,10 @@ kendo_module({
                 category = valueOrDefault(options.categories[index], "");
 
             return new AxisLabel(category, index, dataItem, labelOptions);
+        },
+
+        shouldRenderNote: function() {
+            return this.options.categories.length;
         }
     });
 
@@ -3191,10 +3195,6 @@ kendo_module({
 
         pointValue: function(data) {
             return data.value;
-        },
-
-        shouldRenderNote: function() {
-            return this.options.categories.length;
         }
     });
 
