@@ -254,11 +254,32 @@ kendo_module({
             return obj;
         },
         set: function(key, value) {
+            var isAllDay = this.isAllDay || false;
+
             kendo.data.Model.fn.set.call(this, key, value);
 
-            if (key == "isAllDay" && value === true) {
-                this.set("start", kendo.date.getDate(this.start));
-                this.set("end", kendo.date.getDate(this.end));
+            if (key == "isAllDay" && value != isAllDay) {
+                var start = kendo.date.getDate(this.start);
+                var end = new Date(this.end);
+                var milliseconds = kendo.date.getMilliseconds(end);
+
+                if (milliseconds === 0 && value) {
+                    milliseconds = kendo.date.MS_PER_DAY;
+                }
+
+                this.set("start", start);
+
+                if (value === true) {
+                    kendo.date.setTime(end, -milliseconds);
+
+                    if (end < start) {
+                        end = start;
+                    }
+                } else {
+                    kendo.date.setTime(end, kendo.date.MS_PER_DAY - milliseconds);
+                }
+
+                this.set("end", end);
             }
         },
         id: "id",

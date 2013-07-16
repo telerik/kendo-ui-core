@@ -39,13 +39,168 @@
                 ok(dataSource.reader instanceof SchedulerDataReader);
             });
 
-            test("setting isAllDay to true sets start and end to 12:00 AM", function() {
+            test("setting isAllDay to true of an all day event doesn't change start and end", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 12:00 AM"),
+                    end: new Date("2013/6/6 12:00 AM"),
+                    isAllDay: true
+                });
+
+                event.set("isAllDay", true);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+            });
+
+            test("setting isAllDay to false of a single day event doesn't change start and end", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 10:00 AM"),
+                    end: new Date("2013/6/6 11:00 AM")
+                });
+
+                event.set("isAllDay", false);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 10:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/6 11:00");
+            });
+
+            test("setting isAllDay of a multi day event to true sets start and end to 12:00 AM", function() {
                 var event = new kendo.data.SchedulerEvent({
                     start: new Date("2013/6/6 8:30"),
                     end: new Date("2013/6/7 10:30")
                 });
 
                 event.set("isAllDay", true);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
+            });
+
+            test("setting isAllDay of a single day event to true sets start and end to 12:00 AM", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 8:30"),
+                    end: new Date("2013/6/6 10:30")
+                });
+
+                event.set("isAllDay", true);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+            });
+
+            test("setting isAllDay of a multi day event to false preserves the interval", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 12:00 AM"),
+                    end: new Date("2013/6/7 12:00 AM"),
+                    isAllDay: true
+                });
+
+                event.set("isAllDay", false);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/8 12:00");
+            });
+
+            test("setting isAllDay of a single day event to false preserves the interval", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 12:00 AM"),
+                    end: new Date("2013/6/6 12:00 AM"),
+                    isAllDay: true
+                });
+
+                event.set("isAllDay", false);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
+            });
+
+            test("toggling isAllDay of a multi day all day event returns to original hours", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 12:00 AM"),
+                    end: new Date("2013/6/7 12:00 AM"),
+                    isAllDay: true
+                });
+
+                event.set("isAllDay", false);
+                event.set("isAllDay", true);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
+            });
+
+            test("toggling isAllDay of a multi day event returns to original hours", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 10:00 AM"),
+                    end: new Date("2013/6/7 11:00 AM")
+                });
+
+                event.set("isAllDay", true);
+                event.set("isAllDay", false);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/8 12:00");
+            });
+
+            test("toggling isAllDay of a multi day event which starts and ends at 12:00 AMreturns to original hours", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 12:00 AM"),
+                    end: new Date("2013/6/7 12:00 AM")
+                });
+
+                event.set("isAllDay", true);
+                event.set("isAllDay", false);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
+            });
+
+            test("toggling isAllDay of a single day all day event returns to original hours", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 12:00 AM"),
+                    end: new Date("2013/6/6 12:00 AM"),
+                    isAllDay: true
+                });
+
+                event.set("isAllDay", false);
+                event.set("isAllDay", true);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+            });
+
+            test("setting isAllDay of a single day event to true", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 12:00 AM"),
+                    end: new Date("2013/6/6 12:00 AM")
+                });
+
+                event.set("isAllDay", true);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+            });
+
+            test("toggling isAllDay of a single day event returns to original hours", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 10:00 AM"),
+                    end: new Date("2013/6/6 11:00 AM")
+                });
+
+                event.set("isAllDay", true);
+                event.set("isAllDay", false);
+
+                equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
+                equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
+            });
+
+            test("toggling isAllDay of a single day event which starts and ends at 12:00 AM returns to original hours", function() {
+                var event = new kendo.data.SchedulerEvent({
+                    start: new Date("2013/6/6 12:00 AM"),
+                    end: new Date("2013/6/6 12:00 AM")
+                });
+
+                event.set("isAllDay", true);
+                event.set("isAllDay", false);
 
                 equal(kendo.toString(event.start, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
                 equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
