@@ -393,7 +393,7 @@
     <Compile Include="Controllers\Web\TreeView\TemplatesController.cs" />
     <Compile Include="Controllers\Web\Upload\AsyncController.cs" />
     <Compile Include="Controllers\Web\Upload\ApiController.cs" />
-    <Compile Include="Controllers\Web\Upload\InitialFilesController.cs" />
+    <Compile Include="Controllers\Web\Upload\InitialfilesController.cs" />
     <Compile Include="Controllers\Web\Upload\RtlController.cs" />
     <Compile Include="Controllers\Web\Upload\EventsController.cs" />
     <Compile Include="Controllers\Web\Upload\IndexController.cs" />
@@ -734,7 +734,7 @@
     <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\index.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\upload\initialFiles.aspx" />
+    <Content Include="Areas\aspx\Views\web\upload\initialfiles.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\navigation.aspx" />
@@ -902,7 +902,7 @@
     <Content Include="Areas\razor\Views\web\upload\templates.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\api.cshtml" />
     <Content Include="Areas\razor\Views\web\upload\templates.cshtml" />
-    <Content Include="Areas\razor\Views\web\upload\initialFiles.cshtml" />
+    <Content Include="Areas\razor\Views\web\upload\initialfiles.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.designer.cs</LastGenOutput>

@@ -1382,7 +1382,7 @@
 				},
 				{
 					"text": "Initial Files",
-					"url": "upload/initialFiles.html",
+					"url": "upload/initialfiles.html",
 					"title": "Example of initial files for Kendo UI Upload",
 					"meta": "This demo illustrates how to render initial files with the Kendo UI Upload widget."
 				},
