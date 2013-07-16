@@ -3783,6 +3783,20 @@ div.k-slider
     padding-right:.6em;
 }
 
+.k-ie7 .k-scheduler-toolbar .k-nav-prev .k-link,
+.k-ie7 .k-scheduler-toolbar .k-nav-next .k-link
+{
+    height: 2.3em;
+    margin-top: -1px;
+    vertical-align: middle;
+}
+
+.k-ie7 .k-scheduler-toolbar .k-nav-prev .k-link .k-icon,
+.k-ie7 .k-scheduler-toolbar .k-nav-next .k-link .k-icon
+{
+    margin-top: .5em;
+}
+
 .k-scheduler-toolbar .k-nav-current .k-link
 {
     padding:0;
@@ -3847,6 +3861,11 @@ div.k-slider
 {
     border-spacing:0;
     width:100%;
+}
+
+.k-ie7 .k-scheduler-content .k-scheduler-table
+{
+    width: auto;
 }
 
 .k-scheduler-layout > tbody > tr > td
@@ -5286,7 +5305,10 @@ html .k-upload-empty
 .k-ie7 .k-scheduler-toolbar > ul > li,
 .k-ie7 .k-scheduler-footer > ul > li,
 .k-ie7 .k-scheduler-toolbar > ul > li,
-.k-ie7 .k-scheduler-footer > ul > li
+.k-ie7 .k-scheduler-footer > ul > li,
+
+.k-ie7 .k-event:hover .k-event-delete,
+.k-ie7 tr:hover > td > .k-task .k-event-delete
 
 { display: inline; zoom: 1; }
 

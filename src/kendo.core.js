@@ -1712,8 +1712,6 @@ function pad(number, digits, end) {
             return result;
         };
 
-        support.cssBorderSpacing = typeof document.documentElement.style.borderSpacing != "undefined";
-
         support.isRtl = function(element) {
             return $(element).closest(".k-rtl").length > 0;
         };
@@ -1890,6 +1888,8 @@ function pad(number, digits, end) {
         }
 
         support.browser = detectBrowser(navigator.userAgent);
+
+        support.cssBorderSpacing = typeof document.documentElement.style.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
 
         (function(browser) {
             // add browser-specific CSS class
