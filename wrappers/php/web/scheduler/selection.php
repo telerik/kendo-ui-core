@@ -169,6 +169,7 @@ $scheduler = new \Kendo\UI\Scheduler('scheduler');
 $scheduler->timezone("Etc/UTC")
         ->date(new DateTime('2013/6/13'))
         ->height(600)
+        ->selectable(true)
         ->addResource($roomResource, $atendeesResource)
         ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')),
             array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda')
