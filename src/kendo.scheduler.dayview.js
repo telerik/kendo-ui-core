@@ -1334,14 +1334,20 @@ kendo_module({
                 endDate = new Date(endDate.getTime() + MS_PER_DAY);
             }
 
+            var eventEndDate = event.end;
+
+            if (event.isAllDay) {
+                eventEndDate = getDate(event.end);
+            }
+
             if ((!isInDateRange(getDate(event.start), startDate, endDate) &&
-                !isInDateRange(event.end, startDate, endDate)) ||
+                !isInDateRange(eventEndDate, startDate, endDate)) ||
                 (isOneDayEvent && eventStartTime < startTime && eventEndTime > endTime)) {
 
                 middle = true;
             } else if (getDate(event.start) < startDate || (isOneDayEvent && eventStartTime < startTime)) {
                 tail = true;
-            } else if ((event.end > endDate && !isOneDayEvent) || (isOneDayEvent && eventEndTime > endTime)) {
+            } else if ((eventEndDate > endDate && !isOneDayEvent) || (isOneDayEvent && eventEndTime > endTime)) {
                 head = true;
             }
 

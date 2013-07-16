@@ -1380,6 +1380,15 @@
                 equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
             });
 
+            test("east arrow is not shown if all day event ends at the end of the view", function() {
+                var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
+
+                view.render([{ uid: "foo", title: "",  start: new Date("2013/6/12"), end: new Date("2013/6/15 10:00"), isAllDay: true }]);
+
+                equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 0);
+                equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
+            });
+
             test("west and east arrow is shown if all day event starts before view's start date and ends at end of the view", function() {
                 var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
 
