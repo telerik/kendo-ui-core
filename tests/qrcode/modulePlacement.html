@@ -21,12 +21,14 @@
             (function() {
                 var matrices,
                     testVersions = [1, 10, 30],
+                    versionInformationTestVersions = [7,10,30],
                     alignmentPatternTestVersions = {
                         "2": [[18, 18]],
                         "7": [[6,22],[22,22],[22,38],[38,22],[38,38]],
                         "15": [[6,26],[6,48],[26,6],[48,6],[26,26],[26,48],[26,70],[48,26],[70,26],[48,48],[48,70],[70,48],[70,70]]
                     },
-                    formatInformationTestValues = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+                    formatInformationTestValue = "101010101010100",
+                    versionInfromationTestValue = "101010101010101010";
                     
                 function printMatrix(matrix){
                     console.log("");
@@ -40,11 +42,11 @@
                      console.log(str);
                 }   
                 
-                function createTestMatrices(){
+                function createTestMatrices(versions){
                     var size,
                         matrices = [];
-                    for(var i =0; i < testVersions.length; i++){
-                        matrices.push(createTestMatrix(17 + 4 * testVersions[i]));
+                    for(var i =0; i < versions.length; i++){
+                        matrices.push(createTestMatrix(17 + 4 * versions[i]));
                     }         
                     
                     return matrices;
@@ -170,12 +172,79 @@
                     return correctlyFilled;
                 }
                 
+                function checkFormatInformation(matrix, valueString){
+                    var size = matrix.length,
+                        values = [],
+                        idx = 0,
+                        valueIdx = 0,
+                        correctPlacement = true;
+                    for(idx; idx < valueString.length; idx++){
+                        values.push(parseInt(valueString.charAt(valueString.length - idx - 1), 10));
+                    }                    
+                    
+                    for(idx=0,valueIdx = 0;idx < 8; idx++){
+                        correctPlacement = correctPlacement && values[valueIdx++] === matrix[8][size - idx - 1];
+                    }
+                    
+                    correctPlacement = correctPlacement && 1 === matrix[size - 8][8];
+                    
+                    for(idx = 0;idx < 7;idx++){
+                         correctPlacement = correctPlacement && values[valueIdx++] === matrix[size - 7 + idx][8];
+                    }
+                    
+                    valueIdx = 0;
+             
+                    for(idx=0;idx < 9; idx++){
+                        if(idx !== 6){
+                             correctPlacement = correctPlacement && values[valueIdx++] === matrix[idx][8]; 
+                        }
+                        else{
+                             correctPlacement = correctPlacement && matrix[idx][8] === undefined; 
+                        }                        
+                    }
+                    
+                    for(idx=0; idx < 8;idx++){
+                        if(7 - idx !== 6){
+                             correctPlacement = correctPlacement && values[valueIdx++] === matrix[8][7 - idx]; 
+                        }
+                        else{
+                             correctPlacement = correctPlacement && matrix[8][7 - idx] === undefined; 
+                        }  
+                    }
+                    return correctPlacement;
+                }
+                
+                function checkVersionInfromation(matrix, valueString){
+                    var size = matrix.length,
+                        x1 = 0,
+                        y1 = size - 11,
+                        x2 = size - 11,
+                        y2 = 0,
+                        quotient,
+                        mod,
+                        correctPlacement = true;
+                        values = [];
+                    for(idx; idx < valueString.length; idx++){
+                        values.push(parseInt(valueString.charAt(valueString.length - idx - 1), 10));
+                    }
+             
+              
+                    for(var idx =0; idx < values.length; idx++){
+                        quotient = Math.floor(idx / 3);
+                        mod = idx % 3;
+                        correctPlacement = correctPlacement && matrix[x1 + quotient, y1 + mod] === values[idx];                        
+                        correctPlacement = correctPlacement && matrix[x1 + mod, y1 + quotient] === values[idx];
+                    }
+                    
+                    return correctPlacement;
+                }
+                
                 module("module placement tests", {
                 });
                 
                 test("test finder pattern placement", function(){
                     var correctFinderPatternPlacement,
-                        matrices = createTestMatrices();
+                        matrices = createTestMatrices(testVersions);
                     for(var i = 0; i < testVersions.length; i++){
                         functions.addFinderPatterns([matrices[i]]);
                         correctFinderPatternPlacement = checkFinderPatterns(matrices[i]);
@@ -185,7 +254,7 @@
                 
                 test("test timing pattern placement", function(){
                     var correctTimingPatternPlacement,
-                        matrices = createTestMatrices();
+                        matrices = createTestMatrices(testVersions);
                     for(var i = 0; i < testVersions.length; i++){
                         fillFinderPatterns(matrices[i]);
                         functions.addTimingFunctions([matrices[i]]);
@@ -226,6 +295,26 @@
                     }
                 });
                 
+                
+                test("test format information placement", function(){
+                    var correctFormatPlacement,
+                        matrices = createTestMatrices(testVersions);
+                    for(var i = 0; i < testVersions.length; i++){                    
+                        functions.addFormatInformation([matrices[i]], formatInformationTestValue);
+                        correctFormatPlacement = checkFormatInformation(matrices[i], formatInformationTestValue);
+                        ok(correctFormatPlacement, "format information version: " + testVersions[i]);
+                    }
+                });
+                
+                 test("test version information placement", function(){
+                    var correctVersionPlacement,
+                        matrices = createTestMatrices(versionInformationTestVersions);
+                    for(var i = 0; i < versionInformationTestVersions.length; i++){                 
+                        functions.addVersionInformation([matrices[i]], versionInfromationTestValue);
+                        correctVersionPlacement = checkVersionInfromation(matrices[i], versionInfromationTestValue);
+                        ok(correctVersionPlacement, "version information version: " + versionInformationTestVersions[i]);
+                    }
+                });
                 
             })();
         </script>

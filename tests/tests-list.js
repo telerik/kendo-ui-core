@@ -357,6 +357,7 @@ var tests = [
     "qrcode/encoding.html",
     "qrcode/helperFunctions.html",
     "qrcode/lint.html",
+    "qrcode/modulePlacement.html",
     "reorderable/reorderable.html",
     "reorderable/lint.html",
     "resizable/resizable.html",
