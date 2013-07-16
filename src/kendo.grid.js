@@ -872,7 +872,7 @@ kendo_module({
                 columnStart,
                 columnWidth,
                 gridWidth,
-                col;
+                col, th;
 
             if (options.resizable) {
                 container = options.scrollable ? that.wrapper.find(".k-grid-header-wrap:first") : that.wrapper;
@@ -887,8 +887,9 @@ kendo_module({
                         });
                     },
                     start: function(e) {
-                        var th = $(e.currentTarget).data("th"),
-                            index = $.inArray(th[0], th.parent().children(":visible")),
+                        th = $(e.currentTarget).data("th");
+
+                        var index = $.inArray(th[0], th.parent().children(":visible")),
                             contentTable = that.tbody.parent(),
                             footer = that.footer || $();
 
@@ -924,9 +925,8 @@ kendo_module({
                             }
                         }
                     },
-                    resizeend: function(e) {
-                        var th = $(e.currentTarget).data("th"),
-                            newWidth = th.outerWidth(),
+                    resizeend: function() {
+                        var newWidth = th.outerWidth(),
                             column;
 
                         cursor(that.wrapper, "");
@@ -943,6 +943,7 @@ kendo_module({
                             });
                         }
                         that.resizeHandle.hide();
+                        th = null;
                     }
                 });
             }
