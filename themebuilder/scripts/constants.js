@@ -146,6 +146,12 @@
                     return cssPropertyFrom("k-state-focused", "box-shadow");
                 }
             },
+            "@focused-active-item-shadow":             {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom("k-state-focused k-state-selected", "box-shadow");
+                }
+            },
             "@focused-shadow": {
                 readonly: true,
                 infer: function() {
@@ -180,13 +186,14 @@
             "@draghandle-hover-background-color": { readonly: true, value: "@hover-background-color" },
             "@draghandle-hover-shadow":           { readonly: true, value: "none" },
 
-            "@default-icon-opacity":            { readonly: true, value: "0.8" },
+            "@default-icon-opacity":              { readonly: true, value: "0.8" },
 
             "@scheduler-background-color":          constant(BGCOLOR, ".k-scheduler"),
             "@cell-border-color":                   constant(BORDERCOLOR, ".k-scheduler-times"),
             "@column-highlight-background-color":   constant(BGCOLOR, ".k-scheduler-table .k-today"),
             "@current-time-color":                  constant(BGCOLOR, ".k-scheduler-now-line"),
             "@event-background-color":              constant(BGCOLOR, ".k-event"),
+            "@event-text-color":                    constant(COLOR, ".k-event"),
 
             "@calendar-border-radius":              constant("border-radius", ".k-window .k-link"),
             "@calendar-content-text-color":         constant(COLOR, ".k-calendar .k-link"),
@@ -200,6 +207,8 @@
             "@calendar-group-background-color":         constant(BGCOLOR, ".k-calendar th"),
             "@button-border-color":                     constant(BORDERCOLOR, ".k-button"),
             "@menu-border-color":                       constant(BORDERCOLOR, ".k-menu .k-item"),
+            "@filter-menu-content-background":          constant(BGCOLOR, ".k-secondary.k-filter-menu"),
+            "@icon-background-color":                   constant(BGCOLOR, ".k-treeview .k-icon"),
             "@tabstrip-items-border":                   constant(BORDERCOLOR, ".k-tabstrip-items .k-state-default"),
             "@tabstrip-active-background":              constant(BGCOLOR, ".k-tabstrip-items .k-state-active"),
             "@tabstrip-tabs-color":                     constant(COLOR, ".k-tabstrip-items .k-state-default .k-link"),
