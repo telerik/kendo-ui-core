@@ -182,6 +182,15 @@ values increase from right to left and from top to bottom.
         return $this->setProperty('crosshair', $value);
     }
 
+    /**
+    * The value axis notes configuration.
+    * @param \Kendo\Dataviz\UI\SparklineValueAxisItemNotes|array $value
+    * @return \Kendo\Dataviz\UI\SparklineValueAxisItem
+    */
+    public function notes($value) {
+        return $this->setProperty('notes', $value);
+    }
+
 //<< Properties
 }
 

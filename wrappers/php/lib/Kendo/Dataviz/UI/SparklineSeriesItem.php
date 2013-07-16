@@ -296,6 +296,15 @@ If not specified, the available space is split evenly between the series.Availab
         return $this->setProperty('target', $value);
     }
 
+    /**
+    * The series notes configuration.
+    * @param \Kendo\Dataviz\UI\SparklineSeriesItemNotes|array $value
+    * @return \Kendo\Dataviz\UI\SparklineSeriesItem
+    */
+    public function notes($value) {
+        return $this->setProperty('notes', $value);
+    }
+
 //<< Properties
 }
 

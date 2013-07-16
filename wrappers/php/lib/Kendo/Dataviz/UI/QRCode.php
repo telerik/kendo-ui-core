@@ -6,6 +6,7 @@ class QRCode extends \Kendo\UI\Widget {
     public function name() {
         return 'QRCode';
     }
+
 //>> Properties
 
     /**
@@ -80,7 +81,6 @@ If it is not supported by the browser, the QRCode will switch to the first avail
     public function value($value) {
         return $this->setProperty('value', $value);
     }
-
 
 //<< Properties
 }

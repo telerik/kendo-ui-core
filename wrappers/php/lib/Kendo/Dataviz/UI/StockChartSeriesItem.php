@@ -313,6 +313,15 @@ Available for column series.
         return $this->setProperty('target', $value);
     }
 
+    /**
+    * The series notes configuration.
+    * @param \Kendo\Dataviz\UI\StockChartSeriesItemNotes|array $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
+    */
+    public function notes($value) {
+        return $this->setProperty('notes', $value);
+    }
+
 //<< Properties
 }
 

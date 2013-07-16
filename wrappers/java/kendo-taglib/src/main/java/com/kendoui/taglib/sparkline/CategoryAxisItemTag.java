@@ -77,6 +77,10 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces */ /* interface
         setProperty("minorTicks", value);
     }
 
+    public void setNotes(com.kendoui.taglib.sparkline.CategoryAxisItemNotesTag value) {
+        setProperty("notes", value);
+    }
+
     public void setPlotBands(CategoryAxisItemPlotBandsTag value) {
 
         setProperty("plotBands", value.plotBands());

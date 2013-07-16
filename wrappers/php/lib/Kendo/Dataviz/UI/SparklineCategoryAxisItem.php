@@ -259,6 +259,15 @@ either baseUnit is set to "fit" or baseUnitStep is set to "auto".This option is 
         return $this->setProperty('crosshair', $value);
     }
 
+    /**
+    * The category axis notes configuration.
+    * @param \Kendo\Dataviz\UI\SparklineCategoryAxisItemNotes|array $value
+    * @return \Kendo\Dataviz\UI\SparklineCategoryAxisItem
+    */
+    public function notes($value) {
+        return $this->setProperty('notes', $value);
+    }
+
 //<< Properties
 }
 

@@ -77,6 +77,10 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("minorTicks", value);
     }
 
+    public void setNotes(com.kendoui.taglib.stockchart.ValueAxisItemNotesTag value) {
+        setProperty("notes", value);
+    }
+
     public void setPlotBands(ValueAxisItemPlotBandsTag value) {
 
         setProperty("plotBands", value.plotBands());

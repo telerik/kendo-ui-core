@@ -73,6 +73,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("markers", value);
     }
 
+    public void setNotes(com.kendoui.taglib.sparkline.SeriesItemNotesTag value) {
+        setProperty("notes", value);
+    }
+
     public void setOverlay(com.kendoui.taglib.sparkline.SeriesItemOverlayTag value) {
         setProperty("overlay", value);
     }
