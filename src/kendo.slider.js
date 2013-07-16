@@ -445,8 +445,10 @@ kendo_module({
         },
 
         _focusWithMouse: function(target) {
+            target = $(target);
+
             var that = this,
-                idx = $(target).is(DRAG_HANDLE) ? $(target).index() : 0;
+                idx = target.is(DRAG_HANDLE) ? target.index() : 0;
 
             window.setTimeout(function(){
                 that.wrapper.find(DRAG_HANDLE)[idx == 2 ? 1 : 0].focus();
@@ -1307,7 +1309,7 @@ kendo_module({
                     dragableArea = that._getDraggableArea(),
                     val = that._getValueFromPosition(mousePosition, dragableArea),
                     target = $(e.target),
-                    idx, from, to, drag;
+                    from, to, drag;
 
                 if (target.hasClass("k-draghandle")) {
                     target.addClass(STATE_SELECTED);
@@ -1318,23 +1320,19 @@ kendo_module({
                     from = val;
                     to = options.selectionEnd;
                     drag = that._firstHandleDrag;
-                    idx = 0;
                 } else if (val > that.selectionEnd) {
                     from = options.selectionStart;
                     to = val;
                     drag = that._lastHandleDrag;
-                    idx = 1;
                 } else {
                     if (val - options.selectionStart <= options.selectionEnd - val) {
                         from = val;
                         to = options.selectionEnd;
                         drag = that._firstHandleDrag;
-                        idx = 0;
                     } else {
                         from = options.selectionStart;
                         to = val;
                         drag = that._lastHandleDrag;
-                        idx = 1;
                     }
                 }
 
