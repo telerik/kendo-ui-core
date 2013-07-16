@@ -56,9 +56,10 @@
             endTime: new Date(2013, 1,1, 20,0,0),
             views: ["day", "week", "month", "agenda"],
             date: new Date(2013, 5, 26),
-            //allDaySlot: false,
+            selectable: true,
             group: {
-                resources: [/*"date"*/, "roomId", "atendees"]
+                resources: [/*"date"*/, "roomId", "atendees"],
+                orientation: "vertical",
             },
             resources: [
                 {
