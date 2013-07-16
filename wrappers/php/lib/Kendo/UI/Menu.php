@@ -115,7 +115,7 @@ its parent horizontally. You can also switch off the screen boundary detection c
 
     /**
     * Sets the close event of the Menu.
-    * Fires after a sub menu gets closed.
+    * Fires before a sub menu gets closed. You can cancel this event to prevent closure.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Menu
     */
@@ -129,7 +129,7 @@ its parent horizontally. You can also switch off the screen boundary detection c
 
     /**
     * Sets the open event of the Menu.
-    * Fires before a sub menu gets opened.
+    * Fires before a sub menu gets opened. You can cancel this event to prevent opening the sub menu.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Menu
     */

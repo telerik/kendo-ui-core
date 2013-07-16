@@ -23,6 +23,28 @@ will disable the animation(s).
     }
 
     /**
+    * Sets the ARIATemplate option of the DatePicker.
+    * Specifies a template used to populate value of the aria-label attribute.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\DatePicker
+    */
+    public function ARIATemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('ARIATemplate', $value);
+    }
+
+    /**
+    * Sets the ARIATemplate option of the DatePicker.
+    * Specifies a template used to populate value of the aria-label attribute.
+    * @param string $value The template content.
+    * @return \Kendo\UI\DatePicker
+    */
+    public function ARIATemplate($value) {
+        return $this->setProperty('ARIATemplate', $value);
+    }
+
+    /**
     * Specifies the culture info used by the widget.
     * @param string $value
     * @return \Kendo\UI\DatePicker

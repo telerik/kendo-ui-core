@@ -209,6 +209,15 @@ class Scheduler extends \Kendo\UI\Widget {
     }
 
     /**
+    * If set to true the user would be able to select scheduler cells and events. By default selection is disabled.
+    * @param boolean $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function selectable($value) {
+        return $this->setProperty('selectable', $value);
+    }
+
+    /**
     * The start time of the week and day views. The scheduler will display events starting after the startTime.
     * @param date $value
     * @return \Kendo\UI\Scheduler

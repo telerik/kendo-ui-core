@@ -46,7 +46,7 @@ will disable all animations in the widget.
     }
 
     /**
-    * The element that the Window will be appended to.
+    * The element that the Window will be appended to. Beneficial if the Window is used together with a form.
 Note that this does not constrain the window dragging within the given element.
     * @param |string $value
     * @return \Kendo\UI\Window
@@ -167,7 +167,7 @@ Window.
 
     /**
     * Specifies width of the window.
-    * @param float $value
+    * @param float|string $value
     * @return \Kendo\UI\Window
     */
     public function width($value) {
@@ -176,7 +176,7 @@ Window.
 
     /**
     * Specifies height of the window.
-    * @param float $value
+    * @param float|string $value
     * @return \Kendo\UI\Window
     */
     public function height($value) {

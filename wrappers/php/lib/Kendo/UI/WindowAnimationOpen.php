@@ -23,6 +23,15 @@ class WindowAnimationOpen extends \Kendo\SerializableObject {
         return $this->setProperty('duration', $value);
     }
 
+    /**
+    * Whether the effect should play backwards, useful when doing the same animation but with the opposite direction, like opening and closing.
+    * @param boolean $value
+    * @return \Kendo\UI\WindowAnimationOpen
+    */
+    public function reverse($value) {
+        return $this->setProperty('reverse', $value);
+    }
+
 //<< Properties
 }
 

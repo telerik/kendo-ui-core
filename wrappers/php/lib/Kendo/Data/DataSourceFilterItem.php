@@ -15,6 +15,24 @@ class DataSourceFilterItem extends \Kendo\SerializableObject {
     }
 
     /**
+    * The nested filter expressions. Suppor the same options as filter. Filters can be nested indefinitely.
+    * @param array $value
+    * @return \Kendo\Data\DataSourceFilterItem
+    */
+    public function filters($value) {
+        return $this->setProperty('filters', $value);
+    }
+
+    /**
+    * The logical operation to use when the filter.filters option is set. The supported values are "and" and "or".
+    * @param string $value
+    * @return \Kendo\Data\DataSourceFilterItem
+    */
+    public function logic($value) {
+        return $this->setProperty('logic', $value);
+    }
+
+    /**
     * The filter operator (comparison). The supported operators are: "eq" (equal to), "neq" (not equal to), "lt" (less than), "lte" (less than or equal to), "gt" (greater than), "gte" (greater than or equal to),
 "startswith", "endswith", "contains". The last three are supported only for string fields.
     * @param string $value

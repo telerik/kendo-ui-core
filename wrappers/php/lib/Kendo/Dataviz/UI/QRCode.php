@@ -82,6 +82,7 @@ If it is not supported by the browser, the QRCode will switch to the first avail
         return $this->setProperty('value', $value);
     }
 
+
 //<< Properties
 }
 
