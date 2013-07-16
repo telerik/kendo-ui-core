@@ -1946,7 +1946,7 @@ kendo_module({
         _showCalendar: function() {
             var that = this,
                 target = that.toolbar.find(".k-nav-current"),
-                html = $('<div><div class="k-scheduler-calendar"/></div>');
+                html = $('<div class="k-calendar-container"><div class="k-scheduler-calendar"/></div>');
 
             if (!that.popup) {
                 that.popup = new Popup(html, {
