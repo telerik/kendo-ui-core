@@ -850,9 +850,11 @@ kendo_module({
                     } else if (dir == "north") {
                         start = startSlot.start;
                     } else if (dir == "east") {
-                        end = new Date(endSlot.end.getTime());
-                        end.setHours(0);
-                        end.setMinutes(0);
+                        end = kendo.date.getDate(endSlot.end);
+
+                        if (!event.isAllDay) {
+                            end = kendo.date.addDays(end, 1);
+                        }
                     } else if (dir == "west") {
                         start = new Date(startSlot.start.getTime());
                         start.setHours(0);

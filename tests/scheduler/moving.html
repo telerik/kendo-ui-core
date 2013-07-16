@@ -175,6 +175,46 @@
                 equal($(".k-event-drag-hint .k-i-arrow-e").length, 1);
             });
 
+            test("move hint in month view is two slots long when the event is two days long", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/26 10:00"), end: new Date("2013/5/28 12:00 AM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(3)");
+
+                dragstart(scheduler, handle, slots.eq(0).prev().offset());
+
+                drag(scheduler, handle, slots.first().offset());
+
+                equalWithRound($(".k-event-drag-hint").outerWidth(), 2 * slots.first().outerWidth());
+            });
+
+            test("move hint in month view is two slots long when the event is all day two days long", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/26 12:00 AM"), end: new Date("2013/5/27 12:00 AM"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(3)");
+
+                dragstart(scheduler, handle, slots.eq(0).prev().offset());
+
+                drag(scheduler, handle, slots.first().offset());
+
+                equalWithRound($(".k-event-drag-hint").outerWidth(), 2 * slots.first().outerWidth());
+            });
+
             test("moving the occurrence changes the start of the series if the edit series button is clicked", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),

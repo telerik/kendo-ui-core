@@ -646,7 +646,7 @@ kendo_module({
                                 if (event.tail) {
                                     event.tail = false;
                                     event.middle = true;
-                                } else {
+                                } else if (eventDurationInDays > 7){
                                     event.head = true;
                                 }
                             }
@@ -661,7 +661,9 @@ kendo_module({
                             }
 
                             tmp.start = event.start;
+
                             tmp.end = kendo.date.previousDay(weekStart);
+
                             result.push(tmp);
 
                             event.start = weekStart;
@@ -675,6 +677,10 @@ kendo_module({
                             event.end = event.end;
                         }
                     }
+                }
+
+                if (event.end > this.endDate()) {
+                    event.head = true;
                 }
 
                 result.push(event);
@@ -817,6 +823,10 @@ kendo_module({
             var startSlot = slots[startSlotIndex];
             var endSlot = slots[endSlotIndex];
 
+            if (!event.isAllDay) {
+                endSlot = slots[Math.max(startSlotIndex, endSlotIndex - 1)];
+            }
+
             var slotGroup = {
                startSlot: startSlot,
                endSlot: endSlot
@@ -948,13 +958,12 @@ kendo_module({
                         endSlotIndex = (this._row.slots.length/this._groupCount()) - 1;
                     }
 
-                    if (kendo.date.getMilliseconds(event.end) === 0 && event.end - event.start < kendo.date.MS_PER_DAY) {
-                        endSlotIndex = startSlotIndex;
-                    }
-
                     event.startIndex = this._applyOffset(startSlotIndex, groupIndex);
                     event.endIndex = this._applyOffset(endSlotIndex, groupIndex);
 
+                    if (kendo.date.getMilliseconds(event.end) === 0 && event.end.getTime() != event.start.getTime() && !event.isAllDay && !event.head && !event.middle) {
+                        event.endIndex = Math.max(event.startIndex, event.endIndex - 1);
+                    }
 
                     this._positionEvent(this._row.slots, this._createEventElement(event), event.startIndex, event.endIndex);
                 }

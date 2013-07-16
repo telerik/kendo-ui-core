@@ -843,26 +843,6 @@
                 equal(scheduler.dataSource.at(0).start.getDate(), 3);
             });
 
-            test("dragging the east handle moves the end of the event in month view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    views: ["month"],
-                    dataSource: [
-                        { start: new Date("2013/5/26 11:00"), end: new Date("2013/5/27 11:30"), title: "" }
-                    ]
-                });
-
-                var handle = div.find(".k-resize-e");
-
-                var slots = div.find(".k-scheduler-content td");
-
-                dragdrop(scheduler, handle, slots.eq(2));
-
-                equal(scheduler.dataSource.at(0).end.getHours(), 0);
-                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
-                equal(scheduler.dataSource.at(0).end.getDate(), 28);
-            });
-
             test("dragging the east handle moves the end of the event in month view and updates its month", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -880,7 +860,7 @@
 
                 equal(scheduler.dataSource.at(0).end.getHours(), 0);
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
-                equal(scheduler.dataSource.at(0).end.getDate(), 6);
+                equal(scheduler.dataSource.at(0).end.getDate(), 7);
                 equal(scheduler.dataSource.at(0).end.getMonth(), 6);
             });
 
@@ -1284,7 +1264,7 @@
 
                 dragdrop(scheduler, handle, slots.eq(6), slots.eq(slots.length -2));
 
-                equal(scheduler.dataSource.at(0).end.getDate(), 8);
+                equal(scheduler.dataSource.at(0).end.getDate(), 9);
             });
 
             test("west resizing is restricted by resource", function() {
@@ -1596,7 +1576,7 @@
 
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
                 equal(scheduler.dataSource.at(0).end.getHours(), 0);
-                equal(scheduler.dataSource.at(0).end.getDate(), 26);
+                equal(scheduler.dataSource.at(0).end.getDate(), 27);
             });
 
             test("west resize two day event to one day in month view", function() {
@@ -1617,6 +1597,166 @@
                 equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
                 equal(scheduler.dataSource.at(0).start.getHours(), 0);
                 equal(scheduler.dataSource.at(0).start.getDate(), 27);
+            });
+
+            test("east resizing sets the end to 12 AM on the next slot date when the end is increased in month view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/26 10:30 AM"), end: new Date("2013/5/27 12:00 AM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 28);
+            });
+
+            test("east resizing sets the end to 12 AM on the next slot date when the end is increased in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 AM"), end: new Date("2013/6/3 11:00 AM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(3)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 5);
+            });
+
+            test("east resizing sets the end to 12 AM on the same slot date when the end is increased in month view and the event is all day", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/26 10:30 AM"), end: new Date("2013/5/27 12:00 AM"), title: "", isAllDay: true }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(3)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 28);
+            });
+
+            test("east resizing sets the end to 12 AM on the same slot date when the end is increased in week view and the event is all day", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 12:00 AM"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(3)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 4);
+            });
+
+            test("east resizing sets the end to 12 AM on the next slot date when the end is decreased in month view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/26 10:30 AM"), end: new Date("2013/5/27 11:00 AM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 27);
+            });
+
+            test("east resizing sets the end to 12 AM on the next slot date when the end is decreased in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 AM"), end: new Date("2013/6/3 11:00 AM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 3);
+            });
+
+            test("east resizing sets the end to 12 AM on the same slot date when the end is decreased in month view and the event is all day", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/26 12:00 AM"), end: new Date("2013/5/27 12:00 AM"), title: "", isAllDay: true }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 26);
+            });
+
+            test("east resizing sets the end to 12 AM on the same slot date when the end is decreased in week view and the event is all day", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 12:00 AM"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-e");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+                equal(scheduler.dataSource.at(0).end.getHours(), 0);
+                equal(scheduler.dataSource.at(0).end.getDate(), 2);
             });
 
             test("west resize two day all-day event to one day", function() {
