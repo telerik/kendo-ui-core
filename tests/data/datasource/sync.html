@@ -548,6 +548,30 @@
                 ok(dataSource.hasChanges());
             });
 
+            test("requestStart is called for each sync request", 3, function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" }
+                    },
+                    data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+                });
+
+                dataSource.read();
+
+                dataSource.bind("requestStart", function() {
+                    ok(true);
+                });
+
+                dataSource.add();
+
+                dataSource.remove(dataSource.get(1));
+
+                dataSource.get(2).set("foo", "moo");
+
+                dataSource.sync();
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -2327,6 +2327,9 @@ kendo_module({
             transport = that.transport;
 
             return $.Deferred(function(deferred) {
+
+                that.trigger(REQUESTSTART);
+
                 transport[type].call(transport, extend({
                     success: function(response) {
                         deferred.resolve({
