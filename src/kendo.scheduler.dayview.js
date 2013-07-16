@@ -1315,12 +1315,18 @@ kendo_module({
                 endTime = getMilliseconds(new Date(options.endTime.getTime() + MS_PER_DAY - 1));
             }
 
-            if (!isInDateRange(getDate(event.start), startDate, endDate) ||
+            if (!isOneDayEvent && !event.isAllDay) {
+                endDate = new Date(endDate.getTime() + MS_PER_DAY);
+            }
+
+            if ((!isInDateRange(getDate(event.start), startDate, endDate) &&
+                !isInDateRange(event.end, startDate, endDate)) ||
                 (isOneDayEvent && eventStartTime < startTime && eventEndTime > endTime)) {
+
                 middle = true;
             } else if (getDate(event.start) < startDate || (isOneDayEvent && eventStartTime < startTime)) {
                 tail = true;
-            } else if ((getDate(event.end) > endDate && !isOneDayEvent) || (isOneDayEvent && eventEndTime > endTime)) {
+            } else if ((event.end > endDate && !isOneDayEvent) || (isOneDayEvent && eventEndTime > endTime)) {
                 head = true;
             }
 

@@ -1362,6 +1362,33 @@
                 view.datesHeader.find("th:first").find(".k-nav-day").click();
             });
 
+            test("west arrow is shown if multiday event starts before view's start date and ends before end of the view", function() {
+                var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
+
+                view.render([{ uid: "foo", title: "",  start: new Date("2013/5/30"), end: new Date("2013/6/15") }]);
+
+                equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+                equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
+            });
+
+            test("west arrow is shown if multiday event starts before view's start date and ends at end of the view", function() {
+                var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
+
+                view.render([{ uid: "foo", title: "",  start: new Date("2013/5/30"), end: new Date("2013/6/16") }]);
+
+                equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+                equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
+            });
+
+            test("west and east arrow is shown if all day event starts before view's start date and ends at end of the view", function() {
+                var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
+
+                view.render([{ uid: "foo", title: "",  start: new Date("2013/5/30"), end: new Date("2013/6/16"), isAllDay: true }]);
+
+                equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+                equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
+            });
+
             test("arrow is shown if multiday event starts before view's start date", function() {
                 var view = setup({ dates: [new Date(2013, 1, 2)] });
 
