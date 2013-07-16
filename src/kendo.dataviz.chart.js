@@ -4354,6 +4354,10 @@ kendo_module({
                 chart = segment.parent,
                 plotArea = chart.plotArea,
                 categoryAxis = plotArea.seriesCategoryAxis(segment.series),
+                reverse = categoryAxis.options.reverse,
+                dir = reverse ? 2 : 1,
+                revDir = reverse ? 1 : 2,
+                vertical = categoryAxis.options.vertical,
                 linePoints = segment.linePoints.concat(visualPoints || []),
                 length = linePoints.length,
                 points = [],
@@ -4363,18 +4367,35 @@ kendo_module({
             for (i = 1; i < length; i++) {
                 prevPoint = linePoints[i - 1];
                 point = linePoints[i];
-                if (categoryAxis.options. justified) {
-                    points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.markerBox().center().y));
-                    points.push(Point2D(point.markerBox().center().x, prevPoint.markerBox().center().y));
-                    points.push(Point2D(point.markerBox().center().x, point.markerBox().center().y));
-                } else {
-                    points.push(Point2D(prevPoint.box.x1, prevPoint.markerBox().center().y));
-                    points.push(Point2D(prevPoint.box.x2, prevPoint.markerBox().center().y));
-                    if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
-                        points.push(Point2D(prevPoint.box.x2, point.markerBox().center().y));
+                if (vertical) {
+                    if (categoryAxis.options.justified) {
+                        points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.markerBox().center().y));
+                        points.push(Point2D(point.markerBox().center().x, prevPoint.markerBox().center().y));
+                        points.push(Point2D(point.markerBox().center().x, point.markerBox().center().y));
+                    } else {
+                        points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.box[Y + dir]));
+                        points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.box[Y + revDir]));
+                        if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
+                            points.push(Point2D(point.markerBox().center().x, prevPoint.box[Y + revDir]));
+                        }
+                        points.push(Point2D(point.markerBox().center().x, point.box[Y + dir]));
+                        points.push(Point2D(point.markerBox().center().x, point.box[Y + revDir]));
                     }
-                    points.push(Point2D(point.box.x1, point.markerBox().center().y));
-                    points.push(Point2D(point.box.x2, point.markerBox().center().y));
+
+                } else {
+                    if (categoryAxis.options.justified) {
+                        points.push(Point2D(prevPoint.markerBox().center().x, prevPoint.markerBox().center().y));
+                        points.push(Point2D(point.markerBox().center().x, prevPoint.markerBox().center().y));
+                        points.push(Point2D(point.markerBox().center().x, point.markerBox().center().y));
+                    } else {
+                        points.push(Point2D(prevPoint.box[X + dir], prevPoint.markerBox().center().y));
+                        points.push(Point2D(prevPoint.box[X + revDir], prevPoint.markerBox().center().y));
+                        if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
+                            points.push(Point2D(prevPoint.box[X + revDir], point.markerBox().center().y));
+                        }
+                        points.push(Point2D(point.box[X + dir], point.markerBox().center().y));
+                        points.push(Point2D(point.box[X + revDir], point.markerBox().center().y));
+                    }
                 }
             }
 
@@ -7098,7 +7119,7 @@ kendo_module({
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
-                    series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_AREA]
+                    series[0].type, [BAR, BULLET, VERTICAL_STEP_LINE, VERTICAL_LINE, VERTICAL_AREA]
                 );
             }
 
