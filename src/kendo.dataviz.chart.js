@@ -9525,7 +9525,10 @@ kendo_module({
         if (value instanceof Date) {
             result = value;
         } else if (typeof value === STRING) {
-            result = kendo.parseDate(value);
+            result = new Date(value);
+            if (isNaN(result.getTime())) {
+                result = kendo.parseDate(value);
+            }
         } else if (value) {
             if (isArray(value)) {
                 result = [];
