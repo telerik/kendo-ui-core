@@ -69,6 +69,14 @@ public class ValueAxisItemNotesTag extends  BaseTag  /* interfaces */ /* interfa
         setProperty("line", value);
     }
 
+    public String getPosition() {
+        return (String)getProperty("position");
+    }
+
+    public void setPosition(String value) {
+        setProperty("position", value);
+    }
+
 //<< Attributes
 
 }

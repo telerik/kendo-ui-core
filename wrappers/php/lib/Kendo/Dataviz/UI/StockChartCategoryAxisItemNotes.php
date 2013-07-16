@@ -6,6 +6,15 @@ class StockChartCategoryAxisItemNotes extends \kendo\SerializableObject {
 //>> Properties
 
     /**
+    * The position of the category axis note.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemNotes
+    */
+    public function position($value) {
+        return $this->setProperty('position', $value);
+    }
+
+    /**
     * The icon of the notes.
     * @param \Kendo\Dataviz\UI\StockChartCategoryAxisItemNotesIcon|array $value
     * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItemNotes

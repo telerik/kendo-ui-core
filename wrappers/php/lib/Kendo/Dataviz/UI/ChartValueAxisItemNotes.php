@@ -6,6 +6,15 @@ class ChartValueAxisItemNotes extends \kendo\SerializableObject {
 //>> Properties
 
     /**
+    * The position of the value axis note.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItemNotes
+    */
+    public function position($value) {
+        return $this->setProperty('position', $value);
+    }
+
+    /**
     * The icon of the notes.
     * @param \Kendo\Dataviz\UI\ChartValueAxisItemNotesIcon|array $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemNotes

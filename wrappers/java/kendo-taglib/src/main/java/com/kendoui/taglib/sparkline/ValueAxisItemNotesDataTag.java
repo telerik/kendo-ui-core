@@ -20,6 +20,9 @@ public class ValueAxisItemNotesDataTag extends BaseTag /* interfaces */ /* inter
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
+        ValueAxisItemNotesTag parent = (ValueAxisItemNotesTag)findParentWithClass(ValueAxisItemNotesTag.class);
+
+        parent.setData(this);
 
         return super.doEndTag();
     }

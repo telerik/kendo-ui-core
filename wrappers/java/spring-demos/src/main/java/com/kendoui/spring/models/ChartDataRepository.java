@@ -144,6 +144,23 @@ public class ChartDataRepository {
         return result;
     }
     
+    public static List<GrandSlam> GrandSlam() {
+        List<GrandSlam> result =  new ArrayList<GrandSlam>();
+        
+        result.add(new GrandSlam(2003, 13, 3, "MIN: 13"));
+        result.add(new GrandSlam(2004, 22, 1, null));
+        result.add(new GrandSlam(2005, 24, 2, null));
+        result.add(new GrandSlam(2006, 27, 1, "MAX: 27"));
+        result.add(new GrandSlam(2007, 26, 1, null));
+        result.add(new GrandSlam(2008, 24, 3, null));
+        result.add(new GrandSlam(2009, 26, 2, null));
+        result.add(new GrandSlam(2010, 20, 3, null));
+        result.add(new GrandSlam(2011, 20, 4, null));
+        result.add(new GrandSlam(2012, 19, 3, null));
+
+        return result;
+    }
+    
     public static List<StockDataPoint> StockData() {
         List<StockDataPoint> result = new ArrayList<StockDataPoint>();
         result.add(new StockDataPoint("12/30/2011", 405, 6414369, 403.51, 406.28, 403.49, "2. AAPL"));

@@ -3,10 +3,7 @@ package com.kendoui.taglib.stockchart;
 
 
 import com.kendoui.taglib.BaseTag;
-
-
-
-
+import com.kendoui.taglib.stockchart.CategoryAxisItemNotesTag;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
@@ -20,6 +17,10 @@ public class CategoryAxisItemNotesDataTag extends BaseTag /* interfaces */ /* in
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
+        
+        CategoryAxisItemNotesTag parent = (CategoryAxisItemNotesTag)findParentWithClass(CategoryAxisItemNotesTag.class);
+
+        parent.setData(this);
 
         return super.doEndTag();
     }

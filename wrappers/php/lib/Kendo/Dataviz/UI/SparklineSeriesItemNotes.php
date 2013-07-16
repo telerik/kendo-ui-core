@@ -6,6 +6,15 @@ class SparklineSeriesItemNotes extends \kendo\SerializableObject {
 //>> Properties
 
     /**
+    * The position of the series note.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\SparklineSeriesItemNotes
+    */
+    public function position($value) {
+        return $this->setProperty('position', $value);
+    }
+
+    /**
     * The icon of the notes.
     * @param \Kendo\Dataviz\UI\SparklineSeriesItemNotesIcon|array $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemNotes

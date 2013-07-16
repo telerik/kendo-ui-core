@@ -61,11 +61,19 @@ public class CategoryAxisItemNotesDataItemTag extends  BaseTag  /* interfaces */
         setProperty("line", value);
     }
 
-    public float getValue() {
-        return (float)getProperty("value");
+    public String getPosition() {
+        return (String)getProperty("position");
     }
 
-    public void setValue(float value) {
+    public void setPosition(String value) {
+        setProperty("position", value);
+    }
+
+    public Object getValue() {
+        return (Object)getProperty("value");
+    }
+
+    public void setValue(Object value) {
         setProperty("value", value);
     }
 
