@@ -1862,7 +1862,7 @@ kendo_module({
                 endRow = startRow;
             }
 
-            if (backwardSelection) {
+            if (backwardSelection) { // && Math.abs(getMilliseconds(endDate) - getMilliseconds(startDate)) === this._timeSlotInterval()) {
                 endRow += 1;
             }
 
@@ -1928,8 +1928,8 @@ kendo_module({
         },
 
         move: function(selection, key, shiftKey) {
-            var options = this.options,
-                groupedResources = this.groupedResources,
+            var groupedResources = this.groupedResources,
+                groupLength = this._columnCountInGroup(),
                 interval = this._timeSlotInterval(),
                 start = new Date(selection.start),
                 end = new Date(selection.end),
@@ -2027,10 +2027,8 @@ kendo_module({
                     setTime(end, interval);
                 }
 
-                if (start > this._end(selection.isAllDay) && groupedResources.length && !this._isVerticallyGrouped()) {
+                if (start > this._end(isAllDay) && groupedResources.length && !this._isVerticallyGrouped()) {
                     selection.groupIndex += 1;
-                    var groupLength = this._columnCountInGroup();
-
                     if (this._columnCountForLevel(groupedResources.length) > (selection.groupIndex * groupLength)) {
                         start = addDays(start, -groupLength);
                         end = addDays(end, -groupLength);
@@ -2052,8 +2050,6 @@ kendo_module({
 
                 if (start < this.startDate() && groupedResources.length && !this._isVerticallyGrouped()) {
                     selection.groupIndex -= 1;
-                    var groupLength = this._columnCountInGroup();
-
                     if (selection.groupIndex > -1) {
                         start = addDays(start, groupLength);
                         end = addDays(end, groupLength);
