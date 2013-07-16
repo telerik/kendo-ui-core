@@ -25,13 +25,41 @@
     </kendo:scheduler>
     
 <script id="event-template" type="text/x-kendo-template">
-    <div style="color:white">
-        <img src="#= image #" style="float:left">
+     <div class='movie-template'>
+        <img src="#= image #">
         <p>
             #: kendo.toString(start, "hh:mm") # - #: kendo.toString(end, "hh:mm") #
         </p>
         <h3>#: title #</h3>
-        <a href="#= imdb #" style="color:white">Movie in IMDB</a>
+        <a href="#= imdb #">Movie in IMDB</a>
     </div>
 </script>
+
+<style scoped>
+    .movie-template img {
+        float: left;
+        margin: 0 8px;
+    }
+    .movie-template p {
+        margin: 5px 0 0;
+    }
+    .movie-template h3 {
+        padding: 0 8px 5px;
+        font-size: 12px;
+    }
+    .movie-template a {
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .k-state-hover .movie-template a,
+    .movie-template a:hover {
+        color: #000000;
+    }
+    
+    body, h1, h2, h3
+    {
+        margin: 0px;        
+    }
+</style>
 <demo:footer />
