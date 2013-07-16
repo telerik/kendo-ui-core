@@ -448,7 +448,7 @@
         }
     };
 
-    var kendoSkin = "default";
+    var kendoSkin = "silver";
 
     window.kendoMobileOS = "ios";
 
