@@ -306,6 +306,8 @@ kendo_module({
                 pulled: false,
                 enabled: true,
                 scrollElement: inner,
+                scrollTop: 0,
+                scrollLeft: 0,
                 fixedContainer: element.children().first()
             });
 

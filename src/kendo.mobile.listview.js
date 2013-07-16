@@ -26,6 +26,7 @@ kendo_module({
         SEARCH_TEMPLATE = kendo.template('<form class="km-filter-form"><div class="km-filter-wrap"><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>'),
         NS = ".kendoMobileListView",
         STYLED = "styled",
+        DATA_BOUND = "dataBound",
         CLICK = "click",
         CHANGE = "change",
         PROGRESS = "progress",
@@ -105,6 +106,7 @@ kendo_module({
             kendo.onResize(cacheHeaders);
 
             listView.bind(STYLED, cacheHeaders);
+            listView.bind(DATA_BOUND, cacheHeaders);
 
             scroller.bind("scroll", function(e) {
                 headerFixer._fixHeader(e);
@@ -151,18 +153,18 @@ kendo_module({
                 return;
             }
 
-            var headers = [];
+            var headers = [], offset = this.scroller.scrollTop;
 
             this.element.find("." + GROUP_CLASS).each(function(_, header) {
                 header = $(header);
                 headers.unshift({
-                    offset: header.position().top,
+                    offset: header.position().top + offset,
                     header: header
                 });
             });
 
             this.headers = headers;
-            this._fixHeader({scrollTop: 0});
+            this._fixHeader({ scrollTop: offset });
         }
     });
 
@@ -674,7 +676,7 @@ kendo_module({
                 listView.hideLoading();
             }
 
-            listView.trigger('dataBound', { ns: ui });
+            listView.trigger(DATA_BOUND, { ns: ui });
         },
 
         configure: function() {
@@ -843,7 +845,7 @@ kendo_module({
 
         events: [
             CLICK,
-            "dataBound"
+            DATA_BOUND
         ],
 
         options: {
