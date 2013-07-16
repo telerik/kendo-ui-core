@@ -676,8 +676,16 @@ kendo_module({
             }
         },
 
+        _focusBody: function() {
+            var body = this.body;
+
+            if (kendo._activeElement() != body) {
+                body.focus();
+            }
+        },
+
         restoreSelection: function() {
-            this.body.focus();
+            this._focusBody();
 
             if (this.selectionRestorePoint) {
                 this.selectRange(this.selectionRestorePoint.toRange());
@@ -707,7 +715,7 @@ kendo_module({
         },
 
         selectRange: function(range) {
-            this.body.focus();
+            this._focusBody();
             var selection = this.getSelection();
             selection.removeAllRanges();
             selection.addRange(range);
