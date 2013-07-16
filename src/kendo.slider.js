@@ -1096,6 +1096,7 @@ kendo_module({
 
             owner.element.on(MOUSE_OVER);
 
+            that.draggable.userEvents.cancel();
             return false;
         },
 
