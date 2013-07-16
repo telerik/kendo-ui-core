@@ -23,17 +23,17 @@
 	HashMap<String, Object> alex = new HashMap<String, Object>();
 	alex.put("text", "Alex");
 	alex.put("value", 1);
-	alex.put("color", "#ef701d");
+	alex.put("color", "#f8a398");
 	people.add(alex);
 	HashMap<String, Object> bob = new HashMap<String, Object>();
 	bob.put("text", "Bob");
 	bob.put("value", 2);
-	bob.put("color", "#5fb1f7");
+	bob.put("color", "#51a0ed");
 	people.add(bob);
 	HashMap<String, Object> charlie = new HashMap<String, Object>();
 	charlie.put("text", "Charlie");
 	charlie.put("value", 3);
-	charlie.put("color", "#35a964");
+	charlie.put("color", "#56ca85");
 	people.add(charlie);
 	
 	ArrayList<HashMap<String, Object>> rooms = new ArrayList<HashMap<String, Object>>();
@@ -41,12 +41,12 @@
 	HashMap<String, Object> room1 = new HashMap<String, Object>();
 	room1.put("text", "Meeting Room 101");
 	room1.put("value", 1);
-	room1.put("color", "#1c9ec4");
+	room1.put("color", "#6eb3fa");
 	rooms.add(room1);
 	HashMap<String, Object> room2 = new HashMap<String, Object>();
 	room2.put("text", "Meeting Room 102");
 	room2.put("value", 2);
-	room2.put("color", "#ff7663");
+	room2.put("color", "#f58a8a");
 	rooms.add(room2);
 
 %>

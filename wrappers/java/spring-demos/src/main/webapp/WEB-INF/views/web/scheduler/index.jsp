@@ -23,17 +23,17 @@
 	HashMap<String, Object> alex = new HashMap<String, Object>();
 	alex.put("text", "Alex");
 	alex.put("value", 1);
-	alex.put("color", "#ef701d");
+	alex.put("color", "#f8a398");
 	resources.add(alex);
 	HashMap<String, Object> bob = new HashMap<String, Object>();
 	bob.put("text", "Bob");
 	bob.put("value", 2);
-	bob.put("color", "#5fb1f7");
+	bob.put("color", "#51a0ed");
 	resources.add(bob);
 	HashMap<String, Object> charlie = new HashMap<String, Object>();
 	charlie.put("text", "Charlie");
 	charlie.put("value", 3);
-	charlie.put("color", "#35a964");
+	charlie.put("color", "#56ca85");
 	resources.add(charlie);
 
 %>

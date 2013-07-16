@@ -151,8 +151,8 @@ $roomResource = new \Kendo\UI\SchedulerResource();
 $roomResource->field('roomId')
     ->title('Room')
     ->dataSource(array(
-        array('text'=> 'Meeting Room 101', 'value' => 1, 'color' => '#1c9ec4'),
-        array('text'=> 'Meeting Room 201', 'value' => 2, 'color' => '#ff7663')
+        array('text'=> 'Meeting Room 101', 'value' => 1, 'color' => '#6eb3fa'),
+        array('text'=> 'Meeting Room 201', 'value' => 2, 'color' => '#f58a8a')
     ));
 
 $atendeesResource = new \Kendo\UI\SchedulerResource();
@@ -160,9 +160,9 @@ $atendeesResource->field('atendees')
     ->title('Atendees')
     ->multiple(true)
     ->dataSource(array(
-        array('text'=> 'Alex', 'value' => 1, 'color' => '#ef701d'),
-        array('text'=> 'Bob', 'value' => 2, 'color' => '#5fb1f7'),
-        array('text'=> 'Charlie', 'value' => 3, 'color' => '#35a964')
+        array('text'=> 'Alex', 'value' => 1, 'color' => '#f8a398'),
+        array('text'=> 'Bob', 'value' => 2, 'color' => '#51a0ed'),
+        array('text'=> 'Charlie', 'value' => 3, 'color' => '#56ca85')
     ));
 
 $scheduler = new \Kendo\UI\Scheduler('scheduler');

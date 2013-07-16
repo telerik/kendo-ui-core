@@ -776,6 +776,13 @@
     </Content>
     <Content Include="Views\web\upload\templates.cshtml" />
     <Content Include="Views\web\upload\initialfiles.cshtml" />
+    <Content Include="Views\web\scheduler\api.cshtml" />
+    <Content Include="Views\web\scheduler\events.cshtml" />
+    <Content Include="Views\web\scheduler\index.cshtml" />
+    <Content Include="Views\web\scheduler\resources-grouping-horizontal.cshtml" />
+    <Content Include="Views\web\scheduler\resources-grouping-vertical.cshtml" />
+    <Content Include="Views\web\scheduler\resources.cshtml" />
+    <Content Include="Views\web\scheduler\templates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
