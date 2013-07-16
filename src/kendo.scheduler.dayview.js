@@ -175,6 +175,18 @@ kendo_module({
             var container = this.content;
             var format;
 
+            var hintSize = function(slots, startIndex, endIndex, size) {
+                var result = 0;
+
+                for (var slotIndex = startIndex; slotIndex < endIndex; slotIndex++) {
+                    result += slots[slotIndex][size];
+                }
+
+                result += slots[endIndex][size];
+
+                return result;
+            };
+
             this._removeResizeHint();
 
             if (vertical) {
@@ -216,10 +228,10 @@ kendo_module({
                     endSlot = slotGroup.endSlot;
 
                     var hint = SchedulerView.fn._createResizeHint.call(this,
-                        startSlot.offsetLeft + parseInt($(startSlot.element).css("borderLeftWidth"), 10),
+                        startSlot.offsetLeft,
                         startSlot.offsetTop,
-                        startSlot.clientWidth,
-                        this._calculateEventHeight(this._columns[startSlot.columnIndex].slots, startSlot.index, endSlot.index + 1) - 3
+                        startSlot.offsetWidth,
+                        hintSize(this._columns[startSlot.columnIndex].slots, startSlot.index, endSlot.index, "offsetHeight")
                     );
 
                     hint.appendTo(container);
@@ -239,9 +251,9 @@ kendo_module({
                 }
 
                 this._resizeHint = SchedulerView.fn._createResizeHint.call(this,
-                    startSlot.offsetLeft + parseInt($(startSlot.element).css("borderLeftWidth"), 10),
+                    startSlot.offsetLeft,
                     startSlot.offsetTop,
-                    this._calculateAllDayEventWidth(this._rows[0].slots, startSlot.columnIndex, endSlot.columnIndex),
+                    hintSize(this._rows[0].slots, startSlot.columnIndex, endSlot.columnIndex, "offsetWidth"),
                     startSlot.clientHeight
                 );
 
@@ -528,6 +540,7 @@ kendo_module({
                         clientHeight: td.clientHeight,
                         offsetHeight: td.offsetHeight,
                         clientWidth: td.clientWidth,
+                        offsetWidth: td.offsetWidth,
                         element: td,
                         start: range.start,
                         end: range.end
