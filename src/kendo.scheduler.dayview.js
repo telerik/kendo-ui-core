@@ -2036,6 +2036,17 @@ kendo_module({
                 if (start.getTime() === end.getTime()) {
                     setTime(end, interval);
                 }
+
+                if (start < this.startDate() && groupedResources.length && !this._isVerticallyGrouped()) {
+                    selection.groupIndex -= 1;
+
+                    if (selection.groupIndex > -1) {
+                        start = addDays(start, this._selectionOffset());
+                        end = addDays(end, this._selectionOffset());
+                    } else {
+                        selection.groupIndex = this._columnCountForLevel(groupedResources.length) - 1;
+                    }
+                }
             }
 
             if (handled) {
