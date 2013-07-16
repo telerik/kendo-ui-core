@@ -1,0 +1,169 @@
+<div id="example" class="k-content">
+    <div id="scheduler"></div>
+    <script>
+        $(function () {
+            $("#scheduler").kendoScheduler({
+                date: new Date("2013/6/13"),
+                startTime: new Date("2013/6/13 07:00 AM"),
+                height: 600,
+                selectable: true,
+                views: [
+                    "day",
+                    { type: "week", selected: true },
+                    "month",
+                    "agenda"
+                ],
+                timezone: "Etc/UTC",
+                dataSource: {
+                    batch: true,
+                    transport: {
+                        read: {
+                            url: "http://demos.kendoui.com/service/meetings",
+                            dataType: "jsonp"
+                        },
+                        update: {
+                            url: "http://demos.kendoui.com/service/meetings/update",
+                            dataType: "jsonp"
+                        },
+                        create: {
+                            url: "http://demos.kendoui.com/service/meetings/create",
+                            dataType: "jsonp"
+                        },
+                        destroy: {
+                            url: "http://demos.kendoui.com/service/meetings/destroy",
+                            dataType: "jsonp"
+                        },
+                        parameterMap: function (options, operation) {
+                            if (operation !== "read" && options.models) {
+                                return { models: kendo.stringify(options.models) };
+                            }
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "meetingID",
+                            fields: {
+                                meetingID: { from: "MeetingID", type: "number" },
+                                title: { from: "Title", defaultValue: "No title", validation: { required: true} },
+                                start: { type: "date", from: "Start" },
+                                end: { type: "date", from: "End" },
+                                startTimezone: { from: "StartTimezone" },
+                                endTimezone: { from: "EndTimezone" },
+                                description: { from: "Description" },
+                                recurrenceId: { from: "RecurrenceID" },
+                                recurrenceRule: { from: "RecurrenceRule" },
+                                recurrenceException: { from: "RecurrenceException" },
+                                roomId: { from: "RoomID", nullable: true },
+                                atendees: { from: "Atendees", nullable: true },
+                                isAllDay: { type: "boolean", from: "IsAllDay" }
+                            }
+                        }
+                    }
+                },
+                resources: [
+                    {
+                        field: "roomId",
+                        dataSource: [
+                            { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                            { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                        ],
+                        title: "Room"
+                    },
+                    {
+                        field: "atendees",
+                        dataSource: [
+                            { text: "Alex", value: 1, color: "#f8a398" },
+                            { text: "Bob", value: 2, color: "#51a0ed" },
+                            { text: "Charlie", value: 3, color: "#56ca85" }
+                        ],
+                        multiple: true,
+                        title: "Atendees"
+                    }
+                ]
+            });
+
+            $(document.body).keydown(function (e) {
+                if (e.altKey && e.keyCode == 87) {
+                    $("#scheduler").data("kendoScheduler").wrapper.focus();
+                }
+            });
+        });
+    </script>
+
+    <ul class="keyboard-legend" style="padding-top: 25px">
+        <li>
+            <span class="button-preview">
+                <span class="key-button leftAlign">Alt</span>
+                +
+                <span class="key-button">w</span>
+            </span>
+            <span class="button-descr">
+                focuses the widget
+            </span>
+        </li>
+    </ul>
+ 
+    <h4>Actions applied on Scheduler table</h4>
+    <ul class="keyboard-legend">
+        <li>
+            <span class="button-preview">
+                <span class="key-button wider">Arrow Keys</span>
+            </span>
+            <span class="button-descr">
+                to navigate over the cells.
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button">Enter</span>
+            </span>
+            <span class="button-descr">
+                creates new event from empty cell or selection. On selected event opens the edit popup window.
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button">Tab</span>
+            </span>
+            <span class="button-descr">
+                moves between available events.
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button leftAlign">Shift</span> 
+                +
+                <span class="key-button">Tab</span>
+            </span>
+            <span class="button-descr">
+                moves between the available events backwards.
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button">1</span> 
+                -
+                <span class="key-button">4</span>
+            </span>
+            <span class="button-descr">
+                moves between the available views.
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                 <span class="key-button">Esc</span>
+            </span>
+            <span class="button-descr">
+                closes the edit popup window.
+            </span>
+        </li>
+        <li>
+            <span class="button-preview">
+                <span class="key-button leftAlign">Shift</span>
+            </span>
+            <span class="button-descr">
+                to create multiple selection.
+            </span>
+        </li>
+    </ul>
+</div>

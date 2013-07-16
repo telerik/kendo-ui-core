@@ -1030,7 +1030,12 @@
                     "text": "Globalization",
                     "url": "scheduler/globalization.html",
                     "packages": ["mvc"]
-                }
+				} , {
+					"text": "Selection",
+                    "url": "scheduler/selection.html",
+                    "title": "Selection and Keyboard navigation in Kendo UI Scheduler",
+                    "meta": "This demo shows the selection and the different keyboard combinations that could be used to navigate in Kendo UI Scheduler."
+				}
             ]
         },
         {
