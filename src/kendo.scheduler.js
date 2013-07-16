@@ -427,6 +427,10 @@ kendo_module({
             var that = this,
                 selectEvent = kendo.support.mobileOS ? "touchend" : "mousedown";
 
+            if (!that.options.selectable) {
+                return;
+            }
+
             that._tabindex();
 
             that.wrapper.on(selectEvent, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
@@ -618,7 +622,8 @@ kendo_module({
                 resources: [],
                 direction: "horizontal"
             },
-            views: []
+            views: [],
+            selectable: false
         },
 
         events: [

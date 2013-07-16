@@ -44,6 +44,7 @@
                     container = $("<div />");
                     $(document.body).append(container);
                     scheduler = new Scheduler(container, {
+                        selectable: true,
                         views: [
                             "day",
                             { type: "week", selected: true }
