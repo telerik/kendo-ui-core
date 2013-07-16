@@ -1,62 +1,52 @@
-
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="chart"></div>
-            </div>
-            <script>
-                function createChart() {
-                    $("#chart").kendoChart({
-                        legend: {
-                            visible: false
-                        },
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: "../../content/dataviz/js/crime-stats.json",
-                                    dataType: "json"
-                                }
-                            }
-                        },
-                        series: [{
-                            type: "bubble",
-                            xField: "murder",
-                            yField: "burglary",
-                            sizeField: "population",
-                            categoryField: "state"
-                        }],
-                        xAxis: {
-                            labels: {
-                                format: "{0:N0}"
-                            },
-                            title: {
-                                text: "Murders per 100,000 population"
-                            }
-                        },
-                        yAxis: {
-                            labels: {
-                                format: "{0:N0}"
-                            },
-                            title: {
-                                text: "Burglaries per 100,000 population"
-                            }
-                        },
-                        tooltip: {
-                            visible: true,
-                            format: "{3}: Population {2:N0}"
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                legend: {
+                    visible: false
+                },
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/crime-stats.json",
+                            dataType: "json"
                         }
-                    });
+                    }
+                },
+                series: [{
+                    type: "bubble",
+                    xField: "murder",
+                    yField: "burglary",
+                    sizeField: "population",
+                    categoryField: "state"
+                }],
+                xAxis: {
+                    labels: {
+                        format: "{0:N0}"
+                    },
+                    title: {
+                        text: "Murders per 100,000 population"
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        format: "{0:N0}"
+                    },
+                    title: {
+                        text: "Burglaries per 100,000 population"
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{3}: Population {2:N0}"
                 }
+            });
+        }
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-                });
-            </script>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

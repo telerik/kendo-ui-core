@@ -1,64 +1,54 @@
-
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="chart" style="background: center no-repeat url('../../content/shared/styles/world-map.png');"></div>
-            </div>
-            <script>
-                function createChart() {
-                    $("#chart").kendoChart({
-                        title: {
-                            text: "Site Visitors Stats /thousands/"
-                        },
-                        legend: {
-                            visible: false
-                        },
-                        seriesDefaults: {
-                            type: "bar"
-                        },
-                        series: [{
-                            name: "Total Visits",
-                            data: [56000, 63000, 74000, 91000, 117000, 138000]
-                        }, {
-                            name: "Unique visitors",
-                            data: [52000, 34000, 23000, 48000, 67000, 83000]
-                        }],
-                        valueAxis: {
-                            max: 140000,
-                            line: {
-                                visible: false
-                            },
-                            minorGridLines: {
-                                visible: true
-                            }
-                        },
-                        categoryAxis: {
-                            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-                            majorGridLines: {
-                                visible: false
-                            }
-                        },
-                        tooltip: {
-                            visible: true,
-                            template: "#= series.name #: #= value #"
-                        }
-                    });
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart" style="background: center no-repeat url('../../content/shared/styles/world-map.png');"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Site Visitors Stats /thousands/"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "bar"
+                },
+                series: [{
+                    name: "Total Visits",
+                    data: [56000, 63000, 74000, 91000, 117000, 138000]
+                }, {
+                    name: "Unique visitors",
+                    data: [52000, 34000, 23000, 48000, 67000, 83000]
+                }],
+                valueAxis: {
+                    max: 140000,
+                    line: {
+                        visible: false
+                    },
+                    minorGridLines: {
+                        visible: true
+                    }
+                },
+                categoryAxis: {
+                    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= series.name #: #= value #"
                 }
+            });
+        }
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-                });
-            </script>
-            <style scoped>
-                .chart-wrapper, .chart-wrapper .k-chart {
-                    height: 350px;
-                }
-            </style>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+    <style scoped>
+        .chart-wrapper, .chart-wrapper .k-chart {
+            height: 350px;
+        }
+    </style>
+</div>

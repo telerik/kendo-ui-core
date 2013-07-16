@@ -1,98 +1,88 @@
-
-        <div id="example" class="k-content absConf">
-            <div class="chart-wrapper" style="margin: auto;">
-                <h3>1024x768 screen resolution trends</h3>
-                <div id="chart2000" class="small-chart"></div>
-                <div id="chart2001" class="small-chart"></div>
-                <div id="chart2002" class="small-chart"></div>
-                <div id="chart2003" class="small-chart"></div>
-                <div id="chart2004" class="small-chart"></div>
-                <div id="chart2005" class="small-chart"></div>
-                <div id="chart2006" class="small-chart"></div>
-                <div id="chart2007" class="small-chart"></div>
-                <div id="chart2008" class="small-chart"></div>
-                <div id="chart2009" class="small-chart"></div>
-            </div>
-            <style scoped>
-                .chart-wrapper {
-                    text-align: center;
-                    height: 340px;
-                }
-                .chart-wrapper h3 {
-                    padding: 1em 0;
-                    font-size: 1.5em;
-                    font-weight: normal;
-                }
-                .k-chart.small-chart {
-                    display: inline-block;
-                    width: 120px;
-                    height: 120px;
-                }
-            </style>
-            <script>
-                function createSmallChart(year) {
-                        $("#chart" + year).kendoChart({
-                                dataSource: {
-                                    transport: {
-                                        read: {
-                                            url: "../../content/dataviz/js/screen_resolution.json",
-                                            dataType: "json"
-                                        }
-                                    },
-                                    filter: {
-                                        field: "year", operator: "eq", value: year
-                                    },
-                                    sort: {
-                                        field: "year",
-                                        dir: "asc"
-                                    }
-                                },
-                                title: {
-                                    text: year
-                                },
-                                legend: {
-                                    position: "top"
-                                },
-                                seriesDefaults: {
-                                    type: "pie"
-                                },
-                                series: [{
-                                    field: "share",
-                                    categoryField: "resolution",
-                                    padding: 0
-                                }],
-                                tooltip: {
-                                    visible: true,
-                                    format: "N0",
-                                    template: "#= category # - #= kendo.format('{0:P}', percentage)#"
+<div id="example" class="k-content absConf">
+    <div class="chart-wrapper" style="margin: auto;">
+        <h3>1024x768 screen resolution trends</h3>
+        <div id="chart2000" class="small-chart"></div>
+        <div id="chart2001" class="small-chart"></div>
+        <div id="chart2002" class="small-chart"></div>
+        <div id="chart2003" class="small-chart"></div>
+        <div id="chart2004" class="small-chart"></div>
+        <div id="chart2005" class="small-chart"></div>
+        <div id="chart2006" class="small-chart"></div>
+        <div id="chart2007" class="small-chart"></div>
+        <div id="chart2008" class="small-chart"></div>
+        <div id="chart2009" class="small-chart"></div>
+    </div>
+    <style scoped>
+        .chart-wrapper {
+            text-align: center;
+            height: 340px;
+        }
+        .chart-wrapper h3 {
+            padding: 1em 0;
+            font-size: 1.5em;
+            font-weight: normal;
+        }
+        .k-chart.small-chart {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+        }
+    </style>
+    <script>
+        function createSmallChart(year) {
+                $("#chart" + year).kendoChart({
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../../content/dataviz/js/screen_resolution.json",
+                                    dataType: "json"
                                 }
-                        });
-                }
-
-
-                function createChart() {
-                        createSmallChart(2000);
-                        createSmallChart(2001);
-                        createSmallChart(2002);
-                        createSmallChart(2003);
-                        createSmallChart(2004);
-                        createSmallChart(2005);
-                        createSmallChart(2006);
-                        createSmallChart(2007);
-                        createSmallChart(2008);
-                        createSmallChart(2009);
-                }
-
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
+                            },
+                            filter: {
+                                field: "year", operator: "eq", value: year
+                            },
+                            sort: {
+                                field: "year",
+                                dir: "asc"
+                            }
+                        },
+                        title: {
+                            text: year
+                        },
+                        legend: {
+                            position: "top"
+                        },
+                        seriesDefaults: {
+                            type: "pie"
+                        },
+                        series: [{
+                            field: "share",
+                            categoryField: "resolution",
+                            padding: 0
+                        }],
+                        tooltip: {
+                            visible: true,
+                            format: "N0",
+                            template: "#= category # - #= kendo.format('{0:P}', percentage)#"
+                        }
                 });
-            </script>
-        </div>
+        }
+
+
+        function createChart() {
+                createSmallChart(2000);
+                createSmallChart(2001);
+                createSmallChart(2002);
+                createSmallChart(2003);
+                createSmallChart(2004);
+                createSmallChart(2005);
+                createSmallChart(2006);
+                createSmallChart(2007);
+                createSmallChart(2008);
+                createSmallChart(2009);
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

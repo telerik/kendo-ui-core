@@ -1,118 +1,108 @@
-
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="stock-chart"></div>
-            </div>
-            <script>
-                function createChart() {
-                    $("#stock-chart").kendoStockChart({
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: "../../content/dataviz/js/boeing-stock.json",
-                                    dataType: "json"
-                                }
-                            }
-                        },
-                        title: {
-                            text: "The Boeing Company (NYSE:BA)"
-                        },
-                        dateField: "Date",
-                        series: [{
-                            type: "candlestick",
-                            openField: "Open",
-                            highField: "High",
-                            lowField: "Low",
-                            closeField: "Close"
-                        }],
-                        navigator: {
-                            series: {
-                                type: "area",
-                                field: "Close"
-                            },
-                            select: {
-                                from: "2009/02/05",
-                                to: "2011/10/07"
-                            }
-                        },
-                        categoryAxis: {
-                            notes: {
-                                items: [{
-                                    value: "2001/01/01",
-                                    label: {
-                                        text: "01"
-                                    }
-                                }, {
-                                    value: "2002/01/01",
-                                    label: {
-                                        text: "02"
-                                    }
-                                }, {
-                                    value: "2003/01/01",
-                                    label: {
-                                        text: "03"
-                                    }
-                                }, {
-                                    value: "2004/01/01",
-                                    label: {
-                                        text: "04"
-                                    }
-                                }, {
-                                    value: "2005/01/01",
-                                    label: {
-                                        text: "05"
-                                    }
-                                }, {
-                                    value: "2006/01/01",
-                                    label: {
-                                        text: "06"
-                                    }
-                                }, {
-                                    value: "2007/01/01",
-                                    label: {
-                                        text: "07"
-                                    }
-                                }, {
-                                    value: "2008/01/01",
-                                    label: {
-                                        text: "08"
-                                    }
-                                }, {
-                                    value: "2009/01/01",
-                                    label: {
-                                        text: "09"
-                                    }
-                                }, {
-                                    value: "2010/01/01",
-                                    label: {
-                                        text: "10"
-                                    }
-                                }, {
-                                    value: "2011/01/01",
-                                    label: {
-                                        text: "11"
-                                    }
-                                }, {
-                                    value: "2012/01/01",
-                                    label: {
-                                        text: "12"
-                                    }
-                                }]
-                            }
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="stock-chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#stock-chart").kendoStockChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/boeing-stock.json",
+                            dataType: "json"
                         }
-                    });
+                    }
+                },
+                title: {
+                    text: "The Boeing Company (NYSE:BA)"
+                },
+                dateField: "Date",
+                series: [{
+                    type: "candlestick",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close"
+                }],
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                },
+                categoryAxis: {
+                    notes: {
+                        items: [{
+                            value: "2001/01/01",
+                            label: {
+                                text: "01"
+                            }
+                        }, {
+                            value: "2002/01/01",
+                            label: {
+                                text: "02"
+                            }
+                        }, {
+                            value: "2003/01/01",
+                            label: {
+                                text: "03"
+                            }
+                        }, {
+                            value: "2004/01/01",
+                            label: {
+                                text: "04"
+                            }
+                        }, {
+                            value: "2005/01/01",
+                            label: {
+                                text: "05"
+                            }
+                        }, {
+                            value: "2006/01/01",
+                            label: {
+                                text: "06"
+                            }
+                        }, {
+                            value: "2007/01/01",
+                            label: {
+                                text: "07"
+                            }
+                        }, {
+                            value: "2008/01/01",
+                            label: {
+                                text: "08"
+                            }
+                        }, {
+                            value: "2009/01/01",
+                            label: {
+                                text: "09"
+                            }
+                        }, {
+                            value: "2010/01/01",
+                            label: {
+                                text: "10"
+                            }
+                        }, {
+                            value: "2011/01/01",
+                            label: {
+                                text: "11"
+                            }
+                        }, {
+                            value: "2012/01/01",
+                            label: {
+                                text: "12"
+                            }
+                        }]
+                    }
                 }
+            });
+        }
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-                });
-            </script>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

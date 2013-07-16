@@ -1,71 +1,61 @@
-
-        <div id="example" class="k-content absConf">
-            <div class="chart-wrapper" style="margin: auto;">
-                <div id="chart"></div>
-            </div>
-            <script>
-                function createChart() {
-                    $("#chart").kendoChart({
-                        title: {
-                            text: "Price-Performance Ratio"
-                        },
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: "../../content/dataviz/js/price-performance.json",
-                                    dataType: "json"
-                                }
-                            },
-                            sort: {
-                                field: "year",
-                                dir: "asc"
-                            }
-                        },
-                        legend: {
-                            visible: false
-                        },
-                        seriesDefaults: {
-                            type: "scatter"
-                        },
-                        series: [{
-                            xField: "price",
-                            yField: "performance"
-                        }],
-                        xAxis: {
-                            max: 1000,
-                            labels: {
-                                format: "${0}"
-                            },
-                            title: {
-                                text: "Price"
-                            }
-                        },
-                        yAxis: {
-                            min: 80,
-                            labels: {
-                                format: "{0}%"
-                            },
-                            title: {
-                                text: "Performance Ratio"
-                            }
-                        },
-                        tooltip: {
-                            visible: true,
-                            template: "#= '<b>$' + value.x + ' / ' + dataItem.family + ' ' + dataItem.model + ': ' + value.y + '%</b>' #"
+<div id="example" class="k-content absConf">
+    <div class="chart-wrapper" style="margin: auto;">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Price-Performance Ratio"
+                },
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/price-performance.json",
+                            dataType: "json"
                         }
-                    });
+                    },
+                    sort: {
+                        field: "year",
+                        dir: "asc"
+                    }
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "scatter"
+                },
+                series: [{
+                    xField: "price",
+                    yField: "performance"
+                }],
+                xAxis: {
+                    max: 1000,
+                    labels: {
+                        format: "${0}"
+                    },
+                    title: {
+                        text: "Price"
+                    }
+                },
+                yAxis: {
+                    min: 80,
+                    labels: {
+                        format: "{0}%"
+                    },
+                    title: {
+                        text: "Performance Ratio"
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= '<b>$' + value.x + ' / ' + dataItem.family + ' ' + dataItem.model + ': ' + value.y + '%</b>' #"
                 }
+            });
+        }
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-                });
-            </script>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

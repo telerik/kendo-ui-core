@@ -1,154 +1,144 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/spain-electricity.json",
+                            dataType: "json"
+                        }
+                    },
+                    sort: {
+                        field: "year",
+                        dir: "asc"
+                    }
+                },
+                title: {
+                    text: "Spain electricity production (GWh)"
+                },
+                legend: {
+                    position: "top"
+                },
+                seriesDefaults: {
+                    type: "column"
+                },
+                series:
+                [{
+                    field: "nuclear",
+                    name: "Nuclear"
+                }, {
+                    field: "hydro",
+                    name: "Hydro"
+                }, {
+                    field: "wind",
+                    name: "Wind"
+                }],
+                categoryAxis: {
+                    field: "year",
+                    labels: {
+                        rotation: -90
+                    }
+                },
+                valueAxis: {
+                    labels: {
+                        format: "{0:N0}"
+                    },
+                    majorUnit: 10000
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0:N0}"
+                },
+                seriesClick: onSeriesClick,
+                seriesHover: onSeriesHover,
+                dataBound: onDataBound,
+                axisLabelClick: onAxisLabelClick,
+                legendItemClick: onLegendItemClick,
+                legendItemHover: onLegendItemHover,
+                plotAreaClick: onPlotAreaClick,
+                dragStart: onDragStart,
+                drag: onDrag,
+                dragEnd: onDragEnd,
+                zoomStart: onZoomStart,
+                zoom: onZoom,
+                zoomEnd: onZoomEnd
+            });
+        }
 
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="chart"></div>
-            </div>
-            <script>
-                function createChart() {
-                    $("#chart").kendoChart({
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: "../../content/dataviz/js/spain-electricity.json",
-                                    dataType: "json"
-                                }
-                            },
-                            sort: {
-                                field: "year",
-                                dir: "asc"
-                            }
-                        },
-                        title: {
-                            text: "Spain electricity production (GWh)"
-                        },
-                        legend: {
-                            position: "top"
-                        },
-                        seriesDefaults: {
-                            type: "column"
-                        },
-                        series:
-                        [{
-                            field: "nuclear",
-                            name: "Nuclear"
-                        }, {
-                            field: "hydro",
-                            name: "Hydro"
-                        }, {
-                            field: "wind",
-                            name: "Wind"
-                        }],
-                        categoryAxis: {
-                            field: "year",
-                            labels: {
-                                rotation: -90
-                            }
-                        },
-                        valueAxis: {
-                            labels: {
-                                format: "{0:N0}"
-                            },
-                            majorUnit: 10000
-                        },
-                        tooltip: {
-                            visible: true,
-                            format: "{0:N0}"
-                        },
-                        seriesClick: onSeriesClick,
-                        seriesHover: onSeriesHover,
-                        dataBound: onDataBound,
-                        axisLabelClick: onAxisLabelClick,
-                        legendItemClick: onLegendItemClick,
-                        legendItemHover: onLegendItemHover,
-                        plotAreaClick: onPlotAreaClick,
-                        dragStart: onDragStart,
-                        drag: onDrag,
-                        dragEnd: onDragEnd,
-                        zoomStart: onZoomStart,
-                        zoom: onZoom,
-                        zoomEnd: onZoomEnd
-                    });
-                }
+        function onSeriesClick(e) {
+            kendoConsole.log(kendo.format("Series click :: {0} ({1}): {2}",
+                e.series.name, e.category, e.value));
+        }
 
-                function onSeriesClick(e) {
-                    kendoConsole.log(kendo.format("Series click :: {0} ({1}): {2}",
-                        e.series.name, e.category, e.value));
-                }
+        function onSeriesHover(e) {
+            kendoConsole.log(kendo.format("Series hover :: {0} ({1}): {2}",
+                e.series.name, e.category, e.value));
+        }
 
-                function onSeriesHover(e) {
-                    kendoConsole.log(kendo.format("Series hover :: {0} ({1}): {2}",
-                        e.series.name, e.category, e.value));
-                }
+        function onDataBound(e) {
+            kendoConsole.log("Data bound");
+        }
 
-                function onDataBound(e) {
-                    kendoConsole.log("Data bound");
-                }
+        function onAxisLabelClick(e) {
+            kendoConsole.log(kendo.format("Axis label click :: {0} axis : {1}",
+                e.axis.type, e.text));
+        }
 
-                function onAxisLabelClick(e) {
-                    kendoConsole.log(kendo.format("Axis label click :: {0} axis : {1}",
-                        e.axis.type, e.text));
-                }
+        function onLegendItemClick(e) {
+            kendoConsole.log(kendo.format("Legend item click :: {0}", e.text));
+        }
 
-                function onLegendItemClick(e) {
-                    kendoConsole.log(kendo.format("Legend item click :: {0}", e.text));
-                }
+        function onLegendItemHover(e) {
+            kendoConsole.log(kendo.format("Legend item hover :: {0}", e.text));
+        }
 
-                function onLegendItemHover(e) {
-                    kendoConsole.log(kendo.format("Legend item hover :: {0}", e.text));
-                }
+        function onPlotAreaClick(e) {
+            kendoConsole.log(kendo.format("Plot area click :: {0} : {1:N0}",
+                e.category, e.value
+            ));
+        }
 
-                function onPlotAreaClick(e) {
-                    kendoConsole.log(kendo.format("Plot area click :: {0} : {1:N0}",
-                        e.category, e.value
-                    ));
-                }
+        function onDragStart(e) {
+            kendoConsole.log("Drag start");
+        }
 
-                function onDragStart(e) {
-                    kendoConsole.log("Drag start");
-                }
+        function onDrag(e) {
+            kendoConsole.log("Drag");
+        }
 
-                function onDrag(e) {
-                    kendoConsole.log("Drag");
-                }
+        function onDragEnd(e) {
+            kendoConsole.log("Drag end");
+        }
 
-                function onDragEnd(e) {
-                    kendoConsole.log("Drag end");
-                }
+        function onZoomStart(e) {
+            kendoConsole.log("Zoom start");
+        }
 
-                function onZoomStart(e) {
-                    kendoConsole.log("Zoom start");
-                }
+        function onZoom(e) {
+            kendoConsole.log(kendo.format("Zoom :: {0}", e.delta));
 
-                function onZoom(e) {
-                    kendoConsole.log(kendo.format("Zoom :: {0}", e.delta));
+            // Prevent scrolling
+            e.originalEvent.preventDefault();
+        }
 
-                    // Prevent scrolling
-                    e.originalEvent.preventDefault();
-                }
+        function onZoomEnd(e) {
+            kendoConsole.log("Zoom end");
+        }
 
-                function onZoomEnd(e) {
-                    kendoConsole.log("Zoom end");
-                }
-
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-                });
-            </script>
-            <div class="demo-section">
-                <h3 class="title">Console log</h3>
-                <div class="console"></div>
-            </div>
-            <style scoped>
-                .demo-section {
-                    width: 700px;
-                }
-            </style>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+    <div class="demo-section">
+        <h3 class="title">Console log</h3>
+        <div class="console"></div>
+    </div>
+    <style scoped>
+        .demo-section {
+            width: 700px;
+        }
+    </style>
+</div>

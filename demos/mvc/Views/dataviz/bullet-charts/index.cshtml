@@ -55,7 +55,7 @@
                     max: 795,
                     minorTicks: {
                         visible: true
-                    }                    
+                    }
                 }],
                 tooltip: {
                     visible: true,
@@ -144,7 +144,7 @@
                     template: "Maximum: #= value.target # <br /> Average: #= value.current #"
                 }
             });
-            
+
             $("#chart-temp").kendoChart({
                 legend: {
                     visible: false
@@ -186,17 +186,8 @@
             });
         }
 
-        $(document).ready(function() {
-            setTimeout(function() {
-                // Initialize the chart with a delay to make sure
-                // the initial animation is visible
-                createChart();
-
-                $("#example").bind("kendo:skinChange", function(e) {
-                    createChart();
-                });
-            }, 400);
-        });
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
     </script>
     <style scoped>
         .history {
@@ -216,10 +207,10 @@
             text-align: right;
             padding-bottom: 22px;
         }
-        
+
         .chart-wrapper  {
             width: 450px;
-            height: 350px;    
+            height: 350px;
         }
     </style>
 </div>

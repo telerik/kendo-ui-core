@@ -1,101 +1,91 @@
-
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="chart"></div>
-            </div>
-            <script>
-                function createChart() {
-                    $("#chart").kendoChart({
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: function() {
-                                        return "../../content/dataviz/js/olympics-japan.json";
-                                    },
-                                    dataType: "json"
-                                }
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: function() {
+                                return "../../content/dataviz/js/olympics-japan.json";
                             },
-                            group: {
-                                field: "country"
-                            }
-                        },
-                        title: {
-                            text: "Olypmic Medals Won by Japan"
-                        },
-                        legend: {
-                            visible: false
-                        },
-                        chartArea: {
-                            background: ""
-                        },
-                        series: [{
-                            type: "bubble",
-                            minSize: 0,
-                            maxSize: 70,
-                            xField: "year",
-                            yField: "standing",
-                            sizeField: "number",
-                            colorField: "medalColor",
-                            opacity: 0.9
-                        }],
-                        xAxis: {
-                            labels: {
-                                skip: 1,
-                                margin: {top: -25}
-                            },
-                            majorUnit: 4,
-                            min: 1980,
-                            max: 2015,
-                            majorGridLines: {
-                                visible: false
-                            },
-                            line: {
-                                visible: false
-                            }
-                        },
-                        yAxis: {
-                            labels: {
-                                step: 1,
-                                skip: 1,
-                                template: "#= value # place",
-                                margin: {right: -30},
-                                padding: {left: 20}
-                            },
-                            majorUnit: 1,
-                            min: 0,
-                            max: 3.7,
-                            majorGridLines: {
-                                visible: false
-                            },
-                            line: {
-                                visible: false
-                            }
-                        },
-                        tooltip: {
-                            visible: true,
-                            template: "#= value.x #: #= value.size # Medals"
+                            dataType: "json"
                         }
-                    });
+                    },
+                    group: {
+                        field: "country"
+                    }
+                },
+                title: {
+                    text: "Olypmic Medals Won by Japan"
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    background: ""
+                },
+                series: [{
+                    type: "bubble",
+                    minSize: 0,
+                    maxSize: 70,
+                    xField: "year",
+                    yField: "standing",
+                    sizeField: "number",
+                    colorField: "medalColor",
+                    opacity: 0.9
+                }],
+                xAxis: {
+                    labels: {
+                        skip: 1,
+                        margin: {top: -25}
+                    },
+                    majorUnit: 4,
+                    min: 1980,
+                    max: 2015,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        step: 1,
+                        skip: 1,
+                        template: "#= value # place",
+                        margin: {right: -30},
+                        padding: {left: 20}
+                    },
+                    majorUnit: 1,
+                    min: 0,
+                    max: 3.7,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= value.x #: #= value.size # Medals"
                 }
+            });
+        }
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-                });
-            </script>
-            <style scoped>
-                .chart-wrapper, .chart-wrapper .k-chart {
-                    height: 350px;
-                }
-                .chart-wrapper .k-chart {
-                    height: 330px;
-                }
-            </style>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+    <style scoped>
+        .chart-wrapper, .chart-wrapper .k-chart {
+            height: 350px;
+        }
+        .chart-wrapper .k-chart {
+            height: 330px;
+        }
+    </style>
+</div>

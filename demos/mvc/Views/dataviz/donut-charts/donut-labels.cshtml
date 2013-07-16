@@ -1,106 +1,97 @@
-
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="chart"></div>
-            </div>
-            <div class="configuration-horizontal">
-                <div class="config-section">
-                    <span class="configHead">Labels Configuration</span>
-                    <ul class="options">
-                        <li>
-                            <input id="labels" checked="checked" type="checkbox" autocomplete="off" />
-                            <label for="labels">Show labels</label>
-                        </li>
-                        <li>
-                            <input id="alignCircle" name="alignType" type="radio"
-                                   value="circle" checked="checked" autocomplete="off" />
-                            <label for="alignCircle">Aligned in circle</label>
-                        </li>
-                        <li>
-                            <input id="alignColumn" name="alignType" type="radio"
-                                   value="column" autocomplete="off" />
-                            <label for="alignColumn">Aligned in columns</label>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <script>
-                function createChart() {
-                    $("#chart").kendoChart({
-                        title: {
-                            text: "What is you favourite sport?"
-                        },
-                        legend: {
-                           position: "top"
-                        },
-                        seriesDefaults: {
-                            labels: {
-                                template: "#= category # - #= kendo.format('{0:P}', percentage)#",
-                                position: "outsideEnd",
-                                visible: true,
-                                background: "transparent"
-                            }
-                        },
-                        series: [{
-                            type: "donut",
-                            data: [{
-                                category: "Football",
-                                value: 35
-                            }, {
-                                category: "Basketball",
-                                value: 25
-                            }, {
-                                category: "Volleyball",
-                                value: 20
-                            }, {
-                                category: "Rugby",
-                                value: 10
-                            }, {
-                                category: "Tennis",
-                                value: 10
-                            }]
-                        }],
-                        tooltip: {
-                            visible: true,
-                            template: "#= category # - #= kendo.format('{0:P}', percentage) #"
-                        }
-                    });
-                }
-
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-
-                    $(".configuration-horizontal").bind("change", refresh);
-                });
-
-                function refresh() {
-                    var chart = $("#chart").data("kendoChart"),
-                        pieSeries = chart.options.series[0],
-                        labels = $("#labels").prop("checked"),
-                        alignInputs = $("input[name='alignType']"),
-                        alignLabels = alignInputs.filter(":checked").val();
-
-                    chart.options.transitions = false;
-                    pieSeries.labels.visible = labels;
-                    pieSeries.labels.align = alignLabels;
-
-                    alignInputs.attr("disabled", !labels);
-
-                    chart.refresh();
-                }
-            </script>
-
-            <style scoped>
-                .chart-wrapper, .chart-wrapper .k-chart {
-                    height: 400px;
-                }
-            </style>
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Labels Configuration</span>
+            <ul class="options">
+                <li>
+                    <input id="labels" checked="checked" type="checkbox" autocomplete="off" />
+                    <label for="labels">Show labels</label>
+                </li>
+                <li>
+                    <input id="alignCircle" name="alignType" type="radio"
+                           value="circle" checked="checked" autocomplete="off" />
+                    <label for="alignCircle">Aligned in circle</label>
+                </li>
+                <li>
+                    <input id="alignColumn" name="alignType" type="radio"
+                           value="column" autocomplete="off" />
+                    <label for="alignColumn">Aligned in columns</label>
+                </li>
+            </ul>
         </div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "What is you favourite sport?"
+                },
+                legend: {
+                   position: "top"
+                },
+                seriesDefaults: {
+                    labels: {
+                        template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+                        position: "outsideEnd",
+                        visible: true,
+                        background: "transparent"
+                    }
+                },
+                series: [{
+                    type: "donut",
+                    data: [{
+                        category: "Football",
+                        value: 35
+                    }, {
+                        category: "Basketball",
+                        value: 25
+                    }, {
+                        category: "Volleyball",
+                        value: 20
+                    }, {
+                        category: "Rugby",
+                        value: 10
+                    }, {
+                        category: "Tennis",
+                        value: 10
+                    }]
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= category # - #= kendo.format('{0:P}', percentage) #"
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            createChart();
+            $(document).bind("kendo:skinChange", createChart);
+            $(".configuration-horizontal").bind("change", refresh);
+        });
+
+        function refresh() {
+            var chart = $("#chart").data("kendoChart"),
+                pieSeries = chart.options.series[0],
+                labels = $("#labels").prop("checked"),
+                alignInputs = $("input[name='alignType']"),
+                alignLabels = alignInputs.filter(":checked").val();
+
+            chart.options.transitions = false;
+            pieSeries.labels.visible = labels;
+            pieSeries.labels.align = alignLabels;
+
+            alignInputs.attr("disabled", !labels);
+
+            chart.refresh();
+        }
+    </script>
+
+    <style scoped>
+        .chart-wrapper, .chart-wrapper .k-chart {
+            height: 400px;
+        }
+    </style>
+</div>

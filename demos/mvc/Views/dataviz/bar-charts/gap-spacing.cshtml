@@ -62,25 +62,22 @@
     }
 
     $(document).ready(function () {
-        setTimeout(function () {
-            // Initialize the chart with a delay to make sure
-            // the initial animation is visible
-            createChart();
-            $("#example").bind("kendo:skinChange", createChart);
+        createChart();
 
-            var chart = $("#chart").data("kendoChart"),
-                firstSeries = chart.options.series;
+        $("#example").bind("kendo:skinChange", createChart);
 
-            $("#getGap").click(function () {
-                firstSeries[0].gap = parseFloat($("#gap").val(), 10);
-                chart.redraw();
-            });
+        var chart = $("#chart").data("kendoChart"),
+            firstSeries = chart.options.series;
 
-            $("#getSpacing").click(function () {
-                firstSeries[0].spacing = parseFloat($("#spacing").val(), 10);
-                chart.redraw();
-            });
-        }, 400);
+        $("#getGap").click(function () {
+            firstSeries[0].gap = parseFloat($("#gap").val(), 10);
+            chart.redraw();
+        });
+
+        $("#getSpacing").click(function () {
+            firstSeries[0].spacing = parseFloat($("#spacing").val(), 10);
+            chart.redraw();
+        });
 
         if (kendo.ui.NumericTextBox) {
             $("#gap").kendoNumericTextBox();

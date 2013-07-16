@@ -1,101 +1,90 @@
-
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="chart"></div>
-            </div>
-            <script>
-                function createChart() {
-                    $("#chart").kendoChart({
-                        title: {
-                            text: "Dyno run results"
-                        },
-                        legend: {
-                            visible: false
-                        },
-                        dataSource: {
-                            data: enginePerformance
-                        },
-                        seriesDefaults: {
-                            type: "scatterLine",
-                            scatterLine: {
-                                width: 2
-                            }
-                        },
-                        series: [{
-                            name: "Power",
-                            xField: "rpm",
-                            yField: "power",
-                            tooltip: {
-                                format: "{1} bhp @@ {0:N0} rpm"
-                            }
-                        }, {
-                            name: "Torque",
-                            xField: "rpm",
-                            yField: "torque",
-                            yAxis: "torque",
-                            tooltip: {
-                                format: "{1} lb-ft @@ {0:N0} rpm"
-                            }
-                        }],
-                        xAxis: {
-                            title: "Engine rpm",
-                            // Align torque axis to the right by specifying
-                            // a crossing value greater than or equal to the axis maximum.
-                            axisCrossingValues: [0, 10000],
-                            labels: {
-                                format: "N0"
-                            }
-                        },
-                        yAxes: [{
-                            title: {
-                                text: "Power (bhp)"
-                            }
-                        }, {
-                            name: "torque",
-                            title: {
-                                text: "Torque (lb-ft)"
-                            }
-                        }],
-                        tooltip: {
-                            visible: true
-                        }
-                    });
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Dyno run results"
+                },
+                legend: {
+                    visible: false
+                },
+                dataSource: {
+                    data: enginePerformance
+                },
+                seriesDefaults: {
+                    type: "scatterLine",
+                    scatterLine: {
+                        width: 2
+                    }
+                },
+                series: [{
+                    name: "Power",
+                    xField: "rpm",
+                    yField: "power",
+                    tooltip: {
+                        format: "{1} bhp @@ {0:N0} rpm"
+                    }
+                }, {
+                    name: "Torque",
+                    xField: "rpm",
+                    yField: "torque",
+                    yAxis: "torque",
+                    tooltip: {
+                        format: "{1} lb-ft @@ {0:N0} rpm"
+                    }
+                }],
+                xAxis: {
+                    title: "Engine rpm",
+                    // Align torque axis to the right by specifying
+                    // a crossing value greater than or equal to the axis maximum.
+                    axisCrossingValues: [0, 10000],
+                    labels: {
+                        format: "N0"
+                    }
+                },
+                yAxes: [{
+                    title: {
+                        text: "Power (bhp)"
+                    }
+                }, {
+                    name: "torque",
+                    title: {
+                        text: "Torque (lb-ft)"
+                    }
+                }],
+                tooltip: {
+                    visible: true
                 }
+            });
+        }
 
-                // Performance sample object
-                function Sample(rpm, torque, power) {
-                    this.rpm = rpm;
-                    this.torque = torque;
-                    this.power = power;
-                }
+        // Performance sample object
+        function Sample(rpm, torque, power) {
+            this.rpm = rpm;
+            this.torque = torque;
+            this.power = power;
+        }
 
-                var enginePerformance = [
-                    new Sample(1000, 50,  10),
-                    new Sample(1500, 65,  19),
-                    new Sample(2000, 80,  30),
-                    new Sample(2500, 92,  44),
-                    new Sample(3000, 104, 59),
-                    new Sample(3500, 114, 76),
-                    new Sample(4000, 120, 91),
-                    new Sample(4500, 125, 107),
-                    new Sample(5000, 130, 124),
-                    new Sample(5500, 133, 139),
-                    new Sample(6000, 130, 149),
-                    new Sample(6500, 122, 151),
-                    new Sample(7000, 110, 147)
-                ];
+        var enginePerformance = [
+            new Sample(1000, 50,  10),
+            new Sample(1500, 65,  19),
+            new Sample(2000, 80,  30),
+            new Sample(2500, 92,  44),
+            new Sample(3000, 104, 59),
+            new Sample(3500, 114, 76),
+            new Sample(4000, 120, 91),
+            new Sample(4500, 125, 107),
+            new Sample(5000, 130, 124),
+            new Sample(5500, 133, 139),
+            new Sample(6000, 130, 149),
+            new Sample(6500, 122, 151),
+            new Sample(7000, 110, 147)
+        ];
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        createChart();
-
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                    }, 400);
-
-                    $(document).bind("kendo:skinChange", function(e) {
-                        createChart();
-                    });
-                });
-            </script>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

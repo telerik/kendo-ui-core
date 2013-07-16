@@ -1,77 +1,67 @@
-
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="chart"></div>
-            </div>
-            <script>
-                var stocksDataSource = new kendo.data.DataSource({
-                    transport: {
-                        read: {
-                            url: function() {
-                                return "../../content/dataviz/dashboards/stock-data-2011.json";
-                            },
-                            dataType: "json"
-                        }
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        var stocksDataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: function() {
+                        return "../../content/dataviz/dashboards/stock-data-2011.json";
                     },
+                    dataType: "json"
+                }
+            },
 
-                    group: {
-                        field: "symbol"
-                    },
+            group: {
+                field: "symbol"
+            },
 
-                    sort: {
-                        field: "date",
-                        dir: "asc"
-                    },
+            sort: {
+                field: "date",
+                dir: "asc"
+            },
 
-                    schema: {
-                        model: {
-                            fields: {
-                                date: {
-                                    type: "date"
-                                }
-                            }
+            schema: {
+                model: {
+                    fields: {
+                        date: {
+                            type: "date"
                         }
                     }
-                });
-
-                function createChart() {
-                    $("#chart").kendoChart({
-                        title: { text: "Stock Prices" },
-                        dataSource: stocksDataSource,
-                        series: [{
-                            type: "line",
-                            field: "close",
-                            name: "#= group.value # (close)"
-                        }],
-                        legend: {
-                            position: "bottom"
-                        },
-                        valueAxis: {
-                            labels: {
-                                format: "${0}",
-                                skip: 2,
-                                step: 2
-                            }
-                        },
-                        categoryAxis: {
-                            field: "date",
-                            labels: {
-                                format: "MMM"
-                            }
-                        }
-                    });
                 }
+            }
+        });
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
+        function createChart() {
+            $("#chart").kendoChart({
+                title: { text: "Stock Prices" },
+                dataSource: stocksDataSource,
+                series: [{
+                    type: "line",
+                    field: "close",
+                    name: "#= group.value # (close)"
+                }],
+                legend: {
+                    position: "bottom"
+                },
+                valueAxis: {
+                    labels: {
+                        format: "${0}",
+                        skip: 2,
+                        step: 2
+                    }
+                },
+                categoryAxis: {
+                    field: "date",
+                    labels: {
+                        format: "MMM"
+                    }
+                }
+            });
+        }
 
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-                });
-            </script>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

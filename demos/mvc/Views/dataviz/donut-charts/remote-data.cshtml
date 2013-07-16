@@ -1,59 +1,49 @@
-
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="chart"></div>
-            </div>
-            <script>
-                function createChart() {
-                    $("#chart").kendoChart({
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    url: "../../content/dataviz/js/screen_resolution.json",
-                                    dataType: "json"
-                                }
-                            },
-                            sort: {
-                                field: "order",
-                                dir: "asc"
-                            },
-                            group: {
-                                field: "year"
-                            }
-                        },
-                        legend: {
-                            position: "top"
-                        },
-                        title: {
-                            text: "1024x768 screen resolution trends"
-                        },
-                        seriesDefaults: {
-                            type: "donut",
-                            startAngle: 270
-                        },
-                        series: [{
-                            field: "share",
-                            categoryField: "resolution",
-                            visibleInLegendField: "visibleInLegend",
-                            padding: 10
-                        }],
-                        tooltip: {
-                            visible: true,
-                            template: "#= dataItem.resolution #: #= value #% (#= dataItem.year #)"
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/screen_resolution.json",
+                            dataType: "json"
                         }
-                    });
+                    },
+                    sort: {
+                        field: "order",
+                        dir: "asc"
+                    },
+                    group: {
+                        field: "year"
+                    }
+                },
+                legend: {
+                    position: "top"
+                },
+                title: {
+                    text: "1024x768 screen resolution trends"
+                },
+                seriesDefaults: {
+                    type: "donut",
+                    startAngle: 270
+                },
+                series: [{
+                    field: "share",
+                    categoryField: "resolution",
+                    visibleInLegendField: "visibleInLegend",
+                    padding: 10
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= dataItem.resolution #: #= value #% (#= dataItem.year #)"
                 }
+            });
+        }
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-                });
-            </script>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

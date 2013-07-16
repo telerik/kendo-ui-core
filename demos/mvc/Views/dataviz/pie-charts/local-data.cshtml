@@ -1,64 +1,54 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        var data = [
+            {
+                "source": "Hydro",
+                "percentage": 22,
+                "explode": true
+            },
+            {
+                "source": "Solar",
+                "percentage": 2
+            },
+            {
+                "source": "Nuclear",
+                "percentage": 49
+            },
+            {
+                "source": "Wind",
+                "percentage": 27
+            }
+        ];
 
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
-                <div id="chart"></div>
-            </div>
-            <script>
-                var data = [
-                    {
-                        "source": "Hydro",
-                        "percentage": 22,
-                        "explode": true
-                    },
-                    {
-                        "source": "Solar",
-                        "percentage": 2
-                    },
-                    {
-                        "source": "Nuclear",
-                        "percentage": 49
-                    },
-                    {
-                        "source": "Wind",
-                        "percentage": 27
-                    }
-                ];
-
-                function createChart() {
-                    $("#chart").kendoChart({
-                        title: {
-                            text: "Break-up of Spain Electricity Production for 2008"
-                        },
-                        legend: {
-                            position: "bottom"
-                        },
-                        dataSource: {
-                            data: data
-                        },
-                        series: [{
-                            type: "pie",
-                            field: "percentage",
-                            categoryField: "source",
-                            explodeField: "explode"
-                        }],
-                        seriesColors: ["#42a7ff", "#666666", "#999999", "#cccccc"],
-                        tooltip: {
-                            visible: true,
-                            template: "${ category } - ${ value }%"
-                        }
-                    });
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Break-up of Spain Electricity Production for 2008"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                dataSource: {
+                    data: data
+                },
+                series: [{
+                    type: "pie",
+                    field: "percentage",
+                    categoryField: "source",
+                    explodeField: "explode"
+                }],
+                seriesColors: ["#42a7ff", "#666666", "#999999", "#cccccc"],
+                tooltip: {
+                    visible: true,
+                    template: "${ category } - ${ value }%"
                 }
+            });
+        }
 
-                $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the chart with a delay to make sure
-                        // the initial animation is visible
-                        createChart();
-
-                        $("#example").bind("kendo:skinChange", function(e) {
-                            createChart();
-                        });
-                    }, 400);
-                });
-            </script>
-        </div>
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>
