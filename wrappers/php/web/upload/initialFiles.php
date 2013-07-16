@@ -71,8 +71,8 @@ require_once '../../include/header.php';
 
 $upload = new \Kendo\UI\Upload('files[]');
 $upload->async(array(
-        'saveUrl' => 'initialFiles.php?type=save',
-        'removeUrl' => 'initialFiles.php?type=remove',
+        'saveUrl' => 'initialfiles.php?type=save',
+        'removeUrl' => 'initialfiles.php?type=remove',
         'autoUpload' => true,
         'removeField' => 'fileNames[]'
        ));

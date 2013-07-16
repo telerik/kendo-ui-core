@@ -1,6 +1,5 @@
 package com.kendoui.spring.controllers.upload;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kendoui.spring.models.UploadInitialFile;
 
 
-@Controller("upload-initialFiles-controller")
+@Controller("upload-initialfiles-controller")
 @RequestMapping(value="/web/upload/")
 @SessionAttributes({"initialFiles"})
-public class InitialFilesController {
+public class InitialfilesController {
     
     @ModelAttribute("initialFiles")
     public List<UploadInitialFile> setInitialFiles(){
@@ -26,15 +25,15 @@ public class InitialFilesController {
         return initialFiles;
     }
     
-    @RequestMapping(value = "/initialFiles", method = RequestMethod.GET)
+    @RequestMapping(value = "/initialfiles", method = RequestMethod.GET)
     public String index(@ModelAttribute("initialFiles") ArrayList<UploadInitialFile> initialFiles, Model model){
 
         model.addAttribute("initialFiles", initialFiles);
         
-        return "web/upload/initialFiles";
+        return "web/upload/initialfiles";
     }
     
-    @RequestMapping(value = "/initialFiles/saveAndPersist", method = RequestMethod.POST)
+    @RequestMapping(value = "/initialfiles/saveAndPersist", method = RequestMethod.POST)
     public @ResponseBody String saveAndPersist(@RequestParam List<MultipartFile> files, Model model,
             @ModelAttribute("initialFiles") ArrayList<UploadInitialFile> initialFiles) {
         //Persist files
@@ -56,7 +55,7 @@ public class InitialFilesController {
         return "";
     }
     
-    @RequestMapping(value = "/initialFiles/removeAndPersist", method = RequestMethod.POST)
+    @RequestMapping(value = "/initialfiles/removeAndPersist", method = RequestMethod.POST)
     public @ResponseBody String removeAndPersist(@RequestParam String[] fileNames, Model model,
             @ModelAttribute("initialFiles") ArrayList<UploadInitialFile> initialFiles) {
         //Persist files
