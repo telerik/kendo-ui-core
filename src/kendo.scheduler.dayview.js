@@ -1816,7 +1816,7 @@ kendo_module({
                 endCol = that._dateSlotIndex(endDate),
                 endTime = getMilliseconds(this.options.endTime),
                 endDateTime = getMilliseconds(endDate),
-                groupOrientation = this._groupOrientation(),
+                groupOrientation = this._groupOrientation() || "horizontal",
                 horizontalOffset = 0,
                 verticalOffset = 0,
                 slots, end,
@@ -1846,20 +1846,18 @@ kendo_module({
                 endRow += 1;
             }
 
-            if (groupOrientation) {
-                if (groupOrientation === "horizontal") {
-                    horizontalOffset = this._columnOffsetForResource(resources.length);
-                    horizontalOffset = selection.groupIndex * horizontalOffset || 0;
+            if (groupOrientation === "horizontal") {
+                horizontalOffset = this._columnOffsetForResource(resources.length);
+                horizontalOffset = selection.groupIndex * horizontalOffset || 0;
 
-                    startCol += horizontalOffset;
-                    endCol += horizontalOffset;
-                } else {
-                    verticalOffset = this._rowCountInGroup() || 0;
-                    verticalOffset = selection.groupIndex * verticalOffset;
+                startCol += horizontalOffset;
+                endCol += horizontalOffset;
+            } else {
+                verticalOffset = this._rowCountInGroup() || 0;
+                verticalOffset = selection.groupIndex * verticalOffset;
 
-                    startRow += verticalOffset;
-                    endRow += verticalOffset;
-                }
+                startRow += verticalOffset;
+                endRow += verticalOffset;
             }
 
             if (!selection.isAllDay) {
