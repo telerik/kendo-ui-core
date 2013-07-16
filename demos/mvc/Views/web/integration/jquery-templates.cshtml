@@ -1,21 +1,26 @@
         <script src="../../content/web/integration/jquery.tmpl.js"></script>
 
         <div id="example" class="k-content">
-            <div class="section-box">
-                <select id="netflixDropDown" style="width:300px"></select>
+            <div class="demo-section">
+                <select id="emplooyeesDropDown" class="employeesDropDownWrap" style="width:300px"></select>
             </div>
-            <div class="section-box">
-                <table id="netflixTable">
+            <div>
+                <table id="employeesTable">
+                    <colgroup>
+                        <col class="photo" />
+                        <col class="details"/>
+                        <col/>
+                    </colgroup>
                     <thead>
-                        <tr>
+                         <tr>
                             <th>
-                                Cover
+                                Picture
                             </th>
                             <th>
-                                Title
+                                Details
                             </th>
                             <th>
-                                Rating
+                                ID
                             </th>
                         </tr>
                     </thead>
@@ -27,102 +32,113 @@
                 </table>
             </div>
 
-            <style scoped>
-
-                .section-box {
-                    padding: 10px;
-                    width: 500px;
-                    margin: 20px auto;
-                    border: 1px solid #bbb;
-                    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.25), inset 0 0 30px rgba(0,0,0,0.07);
-                    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.25), inset 0 0 30px rgba(0,0,0,0.07);
-                    box-shadow: 0 1px 1px rgba(0,0,0,0.25), inset 0 0 30px rgba(0,0,0,0.07);
-                    -webkit-border-radius: 8px;
-                    -moz-border-radius: 8px;
-                    border-radius: 8px;
-                }
-
-                .section-box img, .k-item img {
-                    height: 90px;
-                    -webkit-border-radius: 5px;
-                    -moz-border-radius: 5px;
-                    border-radius: 5px;
-                    margin: 5px;
-                }
-
-                .k-item img {
-                	float: left;
-                    margin-top: 10px;
-                }
-
-                .k-item img {
-                	float: left;
-                	width: auto;
-                    margin-top: 10px;
-                }
-
-                .k-item:after {
-                    content: ".";
-                    display: block;
-                    clear: both;
-                    height: 0;
-                    visibility: hidden;
-                }
-
-                .k-item h4 {
-                   font-size: 1.05em;
-                }
-
-            </style>
-
             <script id="dropDownTemplate" type="text/x-jquery-tmpl">
-                <img src="${ BoxArt.SmallUrl }" alt="${ Name }" /> <h4>${ Name }</h4>
+                <img src="../../content/web/Employees/${EmployeeID}.jpg" alt="${ EmployeeID }" />
+                <h3>${ FirstName} ${ LastName}</h3>
+                <p>${ Title }</p>
             </script>
-            <script id="rowTemplate" type="text/x-jquery-tmpl">
-                <tr>
-                    <td>
-                        <img src="${ BoxArt.SmallUrl }" alt="${ Name }" />
-                    </td>
-                    <td>
-                        ${ Name }
-                    </td>
-                    <td>
-                        ${ AverageRating }
-                    </td>
-                </tr>
+            <script id="rowTemplate" type="text/x-kendo-tmpl">
+	            <tr>
+		            <td class="photo">
+                       <img src="../../content/web/Employees/${EmployeeID}.jpg" alt="${ EmployeeID }" />
+		            </td>
+		            <td class="details">
+			           <span class="title">${ Title }</span>
+			           <span class="description">Name : ${ FirstName} ${ LastName}</span>
+			           <span class="description">Country : ${ Country} </span>
+		            </td>
+		            <td class="employeeID">
+		               ${ EmployeeID }
+		            </td>
+	           </tr>
             </script>
             <script>
                 $(document).ready(function() {
                     var dataSource = new kendo.data.DataSource({
-                        type: "odata",
-                        serverFiltering: true,
-                        filter: [{
-                            field: "Name",
-                            operator: "contains",
-                            value: "Star Wars"
-                            },{
-                            field: "BoxArt.SmallUrl",
-                            operator: "neq",
-                            value: null
-                        }],
-                        transport: {
-                            read: "http://odata.netflix.com/Catalog/Titles"
-                        }
-                    });
+                          type: "odata",
+                          transport: {
+                              read: {	
+                                  url: "http://demos.kendoui.com/service/Northwind.svc/Employees",
+                              }
+                          }
+                        });
 
-                    $("#netflixTable").kendoGrid({
+                    $("#employeesTable").kendoGrid({
                         dataSource: dataSource,
                         rowTemplate: $.template($("#rowTemplate")),
                         height: 370
                     });
 
-                    $("#netflixDropDown").kendoDropDownList({
-                        dataTextField: "Name",
-                        dataValueField: "Id",
+                    $("#emplooyeesDropDown").kendoDropDownList({
+                        dataTextField: "FirstName",
+                        dataValueField: "EmployeeID",
                         template: $.template($("#dropDownTemplate")),
                         dataSource: dataSource,
                         height: 320
                     });
                 });
             </script>
+
+            <style>
+                .photo {
+                    width: 140px;                    
+                }
+                .details {
+                    width: 400px;
+                }                
+                .title {
+                    display: block;
+                    font-size: 1.6em; 
+                }
+                .description {
+                    display: block;
+                    padding-top: 1.6em;
+                }
+                .employeeID {
+                    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+                    font-size: 50px;
+                    font-weight: bold;
+                    color: #898989;
+                }
+                td.photo, .employeeID {
+                    text-align: center;
+                }
+                
+                #employeesTable td {
+                    background: -moz-linear-gradient(top,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.15)));
+                    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+                    background: -o-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+                    background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+                    background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+                    padding: 20px;
+                }
+                
+                .employeesDropDownWrap
+                {
+                    display:block;
+                    margin:0 auto;
+                }
+                
+                #emplooyeesDropDown-list .k-item {
+                    overflow: hidden; 
+                }
+                
+                #emplooyeesDropDown-list img {
+                    -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+                    -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+                    box-shadow: 0 0 2px rgba(0,0,0,.4);
+                    float: left;
+                    margin: 5px 20px 5px 0;
+                }
+                
+                #emplooyeesDropDown-list h3 {
+                    margin: 30px 0 10px 0;
+                    font-size: 2em;
+                }
+                
+                #emplooyeesDropDown-list p {
+                    margin: 0;
+                }
+            </style>
         </div>
