@@ -1886,7 +1886,8 @@ kendo_module({
                 endRow = startRow;
             }
 
-            if (backwardSelection) { // && Math.abs(getMilliseconds(endDate) - getMilliseconds(startDate)) === this._timeSlotInterval()) {
+            var dayLengthMS = Math.abs((getMilliseconds(this.options.endTime) - getMilliseconds(this.options.startTime)) || MS_PER_DAY);
+            if (backwardSelection && Math.abs(endDate - startDate) > dayLengthMS) {
                 endRow += 1;
             }
 
@@ -2039,6 +2040,7 @@ kendo_module({
                     start = slot.start;
                     end = slot.end;
                 }
+
             } else if (key === keys.RIGHT) {
                 handled = true;
 
@@ -2047,7 +2049,8 @@ kendo_module({
                 }
                 end = addDays(end, 1);
 
-                if (start.getTime() === end.getTime()) {
+                if (shiftKey && !multipleSelection) {
+                    end.setHours(start.getHours(), start.getMinutes(), start.getSeconds(), start.getMilliseconds());
                     setTime(end, interval);
                 }
 
@@ -2068,8 +2071,8 @@ kendo_module({
                 }
                 end = addDays(end, -1);
 
-                if (start.getTime() === end.getTime()) {
-                    setTime(end, interval);
+                if (shiftKey && !multipleSelection) {
+                    end.setHours(start.getHours(), start.getMinutes(), start.getSeconds(), start.getMilliseconds());
                 }
 
                 if (start < this.startDate() && groupedResources.length && !this._isVerticallyGrouped()) {

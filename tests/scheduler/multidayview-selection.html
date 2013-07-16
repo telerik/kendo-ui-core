@@ -403,13 +403,14 @@
                 equal(cells.length, 2);
             });
 
-            test("View selects negative range and persists start cell", 1, function() {
+            test("View selects dates with equal time portions", 2, function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 8, 10), end: new Date(2013, 6, 7, 11) });
+                    selection = createSelection({ start: new Date(2013, 6, 8, 10), end: new Date(2013, 6, 7, 10) });
 
                 view.select(selection);
 
-                ok($(view._columns[1].slots[10].element).hasClass("k-state-selected"));
+                ok($(view._columns[1].slots[9].element).hasClass("k-state-selected"));
+                ok($(view._columns[0].slots[10].element).hasClass("k-state-selected"));
             });
 
             test("View selects last cell in view", 1, function() {
@@ -428,6 +429,18 @@
 
                 view.select(selection);
                 ok(true);
+            });
+
+            test("View with backward selection in one column does not increase end slot", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 8, 12),
+                    end: new Date(2013, 6, 8, 10)
+                });
+
+                view.select(selection);
+
+                equal(view.content.find(".k-state-selected").length, 2);
             });
 
             module("Multi Day View navigation", {
@@ -484,12 +497,12 @@
 
             test("View correctly selects range on SHIFT + LEFT", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 8, 10), end: new Date(2013, 6, 8, 11) });
+                    selection = createSelection({ start: new Date(2013, 6, 8, 10), end: new Date(2013, 6, 8, 10) });
 
                 view.move(selection, keys.LEFT, true);
 
                 deepEqual(selection.start, new Date(2013, 6, 8, 10));
-                deepEqual(selection.end, new Date(2013, 6, 7, 11));
+                deepEqual(selection.end, new Date(2013, 6, 7, 10));
             });
 
             test("View moves selection with one slot on down arrow", function() {
@@ -1317,7 +1330,7 @@
 
                 equal(selection.groupIndex, 1);
                 deepEqual(selection.start, new Date(2013, 5, 2));
-                deepEqual(selection.end, new Date(2013, 5, 2, 0, 30));
+                deepEqual(selection.end, new Date(2013, 5, 2));
             });
 
             test("View navigates to next period if last group has been reached", function() {
@@ -1337,7 +1350,7 @@
 
                 equal(selection.groupIndex, 0);
                 deepEqual(selection.start, new Date(2013, 5, 9));
-                deepEqual(selection.end, new Date(2013, 5, 9, 0, 30));
+                deepEqual(selection.end, new Date(2013, 5, 9));
             });
 
             test("View moves the selection to the next group (day view)", function() {
@@ -1358,7 +1371,7 @@
 
                 equal(selection.groupIndex, 2);
                 deepEqual(selection.start, new Date(2013, 5, 8));
-                deepEqual(selection.end, new Date(2013, 5, 8, 0, 30));
+                deepEqual(selection.end, new Date(2013, 5, 8));
             });
 
             test("View navigates to next period if last group has been reached (day view)", function() {
@@ -1378,7 +1391,7 @@
 
                 equal(selection.groupIndex, 0);
                 deepEqual(selection.start, new Date(2013, 5, 9));
-                deepEqual(selection.end, new Date(2013, 5, 9, 0, 30));
+                deepEqual(selection.end, new Date(2013, 5, 9));
             });
 
             test("View selects multiple cells in grouped view", function() {
@@ -1417,7 +1430,7 @@
 
                 equal(selection.groupIndex, 0);
                 deepEqual(selection.start, new Date(2013, 5, 8));
-                deepEqual(selection.end, new Date(2013, 5, 8, 0, 30));
+                deepEqual(selection.end, new Date(2013, 5, 8));
             });
 
             test("View navigates to prev period if first group has been reached", function() {
@@ -1457,7 +1470,7 @@
 
                 equal(selection.groupIndex, 0);
                 deepEqual(selection.start, new Date(2013, 5, 8));
-                deepEqual(selection.end, new Date(2013, 5, 8, 0, 30));
+                deepEqual(selection.end, new Date(2013, 5, 8));
             });
 
             test("View navigates to prev period if first group has been reached (day view)", function() {
@@ -1477,7 +1490,7 @@
 
                 equal(selection.groupIndex, 3);
                 deepEqual(selection.start, new Date(2013, 5, 7));
-                deepEqual(selection.end, new Date(2013, 5, 7, 0, 30));
+                deepEqual(selection.end, new Date(2013, 5, 7));
             });
 
             module("Vertically grouped Multi Day View selection/navigation", {
