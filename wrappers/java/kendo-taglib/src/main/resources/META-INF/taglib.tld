@@ -257,31 +257,13 @@ Any valid CSS color string will work here, including hex and rgb.</description>
         </attribute>
         <attribute>
             <description>Sets the preferred rendering engine.
-If it is not supported by the browser, the BarCode will switch to the first available mode.The supported values are:</description>
+If it is not supported by the browser, the Barcode will switch to the first available mode.The supported values are:</description>
             <name>renderAs</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The symbology (encoding) the barcode will use.The supported values are:*EAN8
-*EAN13
-*UPCE
-*UPCA
-*Code11
-*Code39
-*Code39Extended
-*Code128
-*Code93
-*Code93Extended
-*Code128A
-*Code128B
-*Code128C
-*MSImod10
-*MSImod11
-*MSImod1010
-*MSImod1110
-*GS1-128
-*POSTNET</description>
+            <description>The symbology (encoding) the barcode will use.The supported values are:</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -2909,6 +2891,12 @@ The function return value is displayed instead of the individual points.The supp
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The data field containing the high value.</description>
@@ -10183,7 +10171,7 @@ the minimum and maximum values.</description>
         </attribute>
         <attribute>
             <description>The URL for retrieving the thumbnail version of the image. If not specified a default image icon will be shown.
-If function is assign, the current path and image name will be provided.</description>
+If function is assigned, the current path and image name will be provided.</description>
             <name>thumbnailUrl</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10371,7 +10359,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
 
     <tag>
         <description>The URL for retrieving the thumbnail version of the image. If not specified a default image icon will be shown.
-If function is assign, the current path and image name will be provided.</description>
+If function is assigned, the current path and image name will be provided.</description>
         <name>editor-imageBrowser-transport-thumbnailUrl</name>
         <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportThumbnailUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -14275,6 +14263,29 @@ which field to update. The other option is to use MVVM bindings in order to bind
     </tag>
 
     <tag>
+        <description>The configuration of the scheduler resource(s) grouping.</description>
+        <name>scheduler-group</name>
+        <tag-class>com.kendoui.taglib.scheduler.GroupTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The orientation of the group headers. Supported values are horizontal or vertical. Note that the agenda view is always in vertical orientation.</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>An array of resource names by which the scheduler events will be grouped.</description>
+            <name>resources</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The configuration of the scheduler resource(s). A scheduler resource is optional metadata that can be associated
 with a scheduler event.</description>
         <name>scheduler-resources</name>
@@ -14326,6 +14337,12 @@ By default only one resource instance can be assigned to an event.</description>
             <name>multiple</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Tha name of the resource used to distinguish resource. If not set the value of the field option is used.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The user friendly title of the resource displayed in the scheduler edit form. If not set the value of the field option is used.</description>
@@ -14492,6 +14509,22 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <name>update</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the view resource(s) grouping.</description>
+        <name>scheduler-view-group</name>
+        <tag-class>com.kendoui.taglib.scheduler.ViewGroupTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The orientation of the group headers. Supported values are horizontal or vertical. Note that the agenda view is always in vertical orientation.</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
 
     </tag>
@@ -15728,6 +15761,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>float</type>
         </attribute>
         <attribute>
+            <description>Name template for auto-generated series when binding to grouped data.Template variables:</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>Line options.** Applicable to area series. **</description>
             <name>line</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15740,7 +15779,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The series name.The name can also be a template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:</description>
+            <description>The series name.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -18983,6 +19022,12 @@ The function return value is displayed instead of the individual points.</descri
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The data field containing the high value.** Available for candlestick and ohlc series only **</description>
             <name>highField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -19007,7 +19052,7 @@ The function return value is displayed instead of the individual points.</descri
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The navigator series name.</description>
+            <description>The series name visible in the legend.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -19773,6 +19818,12 @@ The function return value is displayed instead of the individual points.</descri
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Name template for auto-generated series when binding to grouped data.Template variables:</description>
+            <name>groupNameTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
         </attribute>
         <attribute>
             <description>The data field containing the high value.** Available for candlestick and ohlc series only **</description>
@@ -21779,7 +21830,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip.</description>
+            <description>Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.</description>
             <name>autoHide</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -22311,6 +22362,12 @@ Upload may be re-enabled via enable().</description>
             <name>enabled</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>List of files to be initially rendered in the Upload widget files list.</description>
+            <name>files</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
         </attribute>
         <attribute>
             <description>Enables (true) or disables (false) the ability to select multiple files.

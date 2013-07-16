@@ -102,6 +102,14 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("enabled", value);
     }
 
+    public Object getFiles() {
+        return (Object)getProperty("files");
+    }
+
+    public void setFiles(Object value) {
+        setProperty("files", value);
+    }
+
     public boolean getMultiple() {
         return (boolean)getProperty("multiple");
     }
