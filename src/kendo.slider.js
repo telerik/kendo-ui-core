@@ -921,6 +921,7 @@ kendo_module({
             // add reference to the last active drag handle.
             this.owner._activeDragHandle = this;
             // HACK to initiate click on the line
+            this.draggable.userEvents.cancel();
             this.draggable.userEvents._start(e);
         },
 
@@ -1098,7 +1099,6 @@ kendo_module({
 
             owner.element.on(MOUSE_OVER);
 
-            that.draggable.userEvents.cancel();
             return false;
         },
 
