@@ -65,6 +65,14 @@ public class QRCodeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("color", value);
     }
 
+    public String getEncoding() {
+        return (String)getProperty("encoding");
+    }
+
+    public void setEncoding(String value) {
+        setProperty("encoding", value);
+    }
+
     public String getErrorCorrection() {
         return (String)getProperty("errorCorrection");
     }

@@ -2905,12 +2905,6 @@ The function return value is displayed instead of the individual points.The supp
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The template which sets the name of the series when bound to grouped data source.The fields which can be used in the template are:</description>
-            <name>groupNameTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
             <description>The data field containing the high value.</description>
             <name>highField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13517,6 +13511,12 @@ is closed. Options include "fadeOut".</description>
             <type>String</type>
         </attribute>
         <attribute>
+            <description>The encoding mode used to encode the value.The possible values are:</description>
+            <name>encoding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The error correction level used to encode the value.The possible values are:</description>
             <name>errorCorrection</name>
             <rtexprvalue>true</rtexprvalue>
@@ -14207,6 +14207,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <name>minorTimeHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the user would be able to select scheduler cells and events. By default selection is disabled.</description>
+            <name>selectable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>The start time of the week and day views. The scheduler will display events starting after the startTime.</description>
@@ -18173,6 +18179,354 @@ body of the chart.</description>
 
 
 
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>sparkline-valueAxisItem-notes-dataItem-label-template</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemNotesDataItemLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the note.</description>
+        <name>sparkline-valueAxisItem-notes-dataItem-line</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemNotesDataItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the note.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the note.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the note.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The icon of the notes.</description>
+        <name>sparkline-valueAxisItem-notes-icon</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemNotesIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the notes icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>sparkline-valueAxisItem-notes-icon-border</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemNotesIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the notes.</description>
+        <name>sparkline-valueAxisItem-notes-label</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemNotesLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the notes label. Uses kendo.format. Contains one placeholder ("{0}") which represents the axis value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the labels.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the value axis notes label. By default the value axis notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>sparkline-valueAxisItem-notes-label-border</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemNotesLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>sparkline-valueAxisItem-notes-label-template</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemNotesLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the notes.</description>
+        <name>sparkline-valueAxisItem-notes-line</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemNotesLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the notes.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the notes.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the notes.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The plot bands of the value axis.</description>
+        <name>sparkline-valueAxisItem-plotBands</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemPlotBandsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The plot bands of the value axis.</description>
+        <name>sparkline-valueAxisItem-plotBand</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemPlotBandTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The color of the plot band.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The start position of the plot band in axis units.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the plot band.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The end position of the plot band in axis units.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>The title of the value axis.</description>
+        <name>sparkline-valueAxisItem-title</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemTitleTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the title. Any valid CSS color string will work here, including
+hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the title. Any valid CSS color string will work here, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the title.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The margin of the title.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the title.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The position of the title.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the title.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The text of the title.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The visibility of the title.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the title.</description>
+        <name>sparkline-valueAxisItem-title-border</name>
+        <tag-class>com.kendoui.taglib.sparkline.ValueAxisItemTitleBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
 
 
     <tag>
@@ -21978,6 +22332,19 @@ Template variables:</description>
             <type>Object</type>
         </attribute>
         <attribute>
+            <description>A value indicating if the tooltip should be shared.</description>
+            <name>shared</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The shared tooltip template.
+Template variables:</description>
+            <name>sharedTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
             <description>The tooltip template.
 Template variables:</description>
             <name>template</name>
@@ -22211,12 +22578,6 @@ Template variables:</description>
         <attribute>
             <description>The color of the border.</description>
             <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
-        </attribute>
-        <attribute>
-            <description>The dash type of the border.</description>
-            <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
@@ -23027,6 +23388,12 @@ hex and rgb.</description>
         <attribute>
             <description>The color of the border.</description>
             <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.</description>
+            <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
