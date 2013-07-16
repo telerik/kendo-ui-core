@@ -596,7 +596,7 @@
 
                 ok(selection.isAllDay);
                 deepEqual(selection.start, new Date(2013, 6, 7));
-                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+                deepEqual(selection.end, new Date(2013, 6, 7));
             });
 
             test("View does nothing if allDaySlot is disabled", function() {
@@ -1604,6 +1604,87 @@
                 var cell = view.content.find(".k-state-selected")[0];
 
                 equal(cell, view._rows[1].slots[6].element);
+            });
+
+            test("View moves selection to the next group allDay slot", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 23, 30),
+                    end: new Date(2013, 5, 9),
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.move(selection, keys.DOWN);
+
+                equal(selection.groupIndex, 1);
+                equal(selection.isAllDay, true);
+                deepEqual(selection.start, new Date(2013, 5, 8));
+                deepEqual(selection.end, new Date(2013, 5, 8));
+            });
+
+            test("View does nothing when end of the view is reached", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 23, 30),
+                    end: new Date(2013, 5, 9),
+                    groupIndex: 3,
+                    events: []
+                };
+
+                view.move(selection, keys.DOWN);
+
+                equal(selection.groupIndex, 3);
+                deepEqual(selection.start, new Date(2013, 5, 8, 23, 30));
+                deepEqual(selection.end, new Date(2013, 5, 9));
+            });
+
+            test("View moves selection to the prev group", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 1,
+                    events: []
+                };
+
+                view.move(selection, keys.UP);
+
+                equal(selection.groupIndex, 0);
+                equal(selection.isAllDay, false);
+                deepEqual(selection.start, new Date(2013, 5, 8, 23, 30));
+                deepEqual(selection.end, new Date(2013, 5, 9));
+            });
+
+            test("View does nothing if first slot if view is reached", function() {
+                setupGroupedScheduler("vertical");
+                scheduler.wrapper.focus();
+
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.move(selection, keys.UP);
+
+                equal(selection.groupIndex, 0);
+                equal(selection.isAllDay, true);
+                //deepEqual(selection.start, new Date(2013, 5, 8));
+                deepEqual(selection.end, new Date(2013, 5, 8));
             });
 
         </script>
