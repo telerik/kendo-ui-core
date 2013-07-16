@@ -84,7 +84,8 @@ kendo_module({
                 that._selectSlots(
                     that._applyOffset(that._slotIndex(selection.start), selection.groupIndex),
                     that._applyOffset(that._slotIndex(selection.end), selection.groupIndex),
-                    that._row.slots
+                    that._row.slots,
+                    selection.groupIndex || 0
                 );
             }
         },
@@ -106,7 +107,7 @@ kendo_module({
             return found;
         },
 
-        _selectSlots: function(startIndex, endIndex, slots) {
+        _selectSlots: function(startIndex, endIndex, slots, groupIndex) {
             var idx = startIndex;
             if (startIndex > endIndex) {
                 startIndex =  endIndex;
@@ -114,7 +115,9 @@ kendo_module({
             }
 
             for (idx = startIndex; idx <= endIndex; idx ++) {
-                $(slots[idx].element).addClass("k-state-selected");
+                if (groupIndex === slots[idx].groupIndex) {
+                    $(slots[idx].element).addClass("k-state-selected");
+                }
             }
         },
 
@@ -126,8 +129,11 @@ kendo_module({
             var handled = false,
                 date = selection.end,
                 isInRange = true,
-                result = {},
-                isGrouped = this.groupedResources.length,
+                result = {
+                    date: date,
+                    groupIndex: selection.groupIndex || 0
+                },
+                isGrouped = !keep && this.groupedResources.length,
                 isVertical = this._isVerticallyGrouped(),
                 groupCount = this._groupCount(),
                 slotIndex = this._slotIndex(date);
@@ -156,10 +162,7 @@ kendo_module({
                 if (isGrouped && isVertical) {
                     result = moveDownInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
                 } else {
-                    result = {
-                        date: kendo.date.addDays(date, 7),
-                        groupIndex: selection.groupIndex
-                    };
+                    result.date = kendo.date.addDays(date, 7);
                 }
 
                 handled = true;
@@ -167,10 +170,7 @@ kendo_module({
                 if (isGrouped && isVertical) {
                     result = moveUpInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
                 } else {
-                    result = {
-                        date: kendo.date.addDays(date, -7),
-                        groupIndex: selection.groupIndex
-                    };
+                    result.date = kendo.date.addDays(date, -7);
                 }
 
                 handled = true;

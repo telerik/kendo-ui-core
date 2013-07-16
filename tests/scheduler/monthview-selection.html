@@ -1166,6 +1166,77 @@
                 equal(selection.groupIndex, 0);
             });
 
+            test("shift + right key in horizontally grouped view", function() {
+                var scheduler = new kendo.ui.Scheduler(container, {
+                    date: new Date(2013, 5, 6),
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    groupIndex: 0
+                });
+
+                var view = scheduler.view();
+                view.move(selection, keys.RIGHT, true);
+                view.select(selection);
+
+                deepEqual(selection.start, new Date(2013, 5, 8));
+                deepEqual(selection.end, new Date(2013, 5, 9));
+                equal(selection.groupIndex, 0);
+                equal(view.table.find(".k-state-selected").length, 2);
+            });
+
+            test("shift + down key in vertically grouped view is restricted to current group", function() {
+                var scheduler = new kendo.ui.Scheduler(container, {
+                    date: new Date(2013, 5, 6),
+                    group: {
+                        resources: [ "ResourceName" ],
+                        orientation: "vertical"
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 6),
+                    end: new Date(2013, 6, 6),
+                    groupIndex: 0
+                });
+
+                var view = scheduler.view();
+                view.move(selection, keys.DOWN, true);
+                view.select(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 6));
+                deepEqual(selection.end, new Date(2013, 6, 6));
+                equal(selection.groupIndex, 0);
+                equal(view.table.find(".k-state-selected").length, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
