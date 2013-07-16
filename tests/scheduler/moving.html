@@ -195,6 +195,26 @@
                 equalWithRound($(".k-event-drag-hint").outerWidth(), 2 * slots.first().outerWidth());
             });
 
+            test("move hint in week view is two slots long when the event is two days long", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/4 12:00 AM"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(3)");
+
+                dragstart(scheduler, handle, slots.eq(0).prev().offset());
+
+                drag(scheduler, handle, slots.first().offset());
+
+                equalWithRound($(".k-event-drag-hint").outerWidth(), 2 * slots.first().outerWidth());
+            });
+
             test("move hint in month view is two slots long when the event is all day two days long", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),

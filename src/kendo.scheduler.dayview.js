@@ -310,6 +310,10 @@ kendo_module({
                 startSlotIndex = endSlotIndex = currentSlot.columnIndex;
             }
 
+            if (!event.isAllDay) {
+                endSlotIndex = Math.max(startSlotIndex, endSlotIndex - 1);
+            }
+
             var startSlot = slots[startSlotIndex];
 
             this._removeMoveHint();
@@ -324,6 +328,7 @@ kendo_module({
                 slots = this._columns[endDateSlotIndex + groupOffset].slots;
 
                 endSlotIndex = Math.min(slots.length - 1, endSlotIndex);
+
 
                 var endSlot = slots[endSlotIndex];
 
