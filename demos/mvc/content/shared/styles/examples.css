@@ -1373,6 +1373,16 @@ p#copy
     border-radius:3px 0 0 3px;
 }
 
+#examples-list .new-example:before
+{
+    content: "";
+    display: inline-block;
+    background: #fff url(tag-new.png) no-repeat center center;
+    margin-right: 4px;
+    width: 18px;
+    height: 9px;
+}
+
 #examples-list a:hover
 {
     color:#e26b1d;

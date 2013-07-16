@@ -404,6 +404,7 @@
                 },
                 {
                     "text": "Inline editing",
+                    "new": true,
                     "url": "editor/inline-editing.html",
                     "title": "Inline editing functionality of Kendo UI WYSIWYG jQuery Editor",
                     "meta": "This example shows how to use the Kendo UI Editor to edit parts of the page inline, allowing authors to see the page in its final state.",
@@ -1026,10 +1027,10 @@
                     "title": "API in Kendo UI Scheduler",
                     "meta": "This demo shows the API of Kendo UI Scheduler."
                 }, {
-					"text": "Globalization",
-					"url": "scheduler/globalization.html",
+                    "text": "Globalization",
+                    "url": "scheduler/globalization.html",
                     "packages": ["mvc"]
-				}
+                }
             ]
         },
         {
@@ -1112,7 +1113,7 @@
                 }
             ]
         },
-		{
+        {
             "text": "TabStrip",
             "name": "tabstrip",
             "documentation": "web/tabstrip",
@@ -1378,18 +1379,20 @@
                     "title": "API example for Kendo UI File Upload Control",
                     "meta": "This demo shows API Functions of Kendo UI Upload component. Try the sample to see how to enable, disable the upload option and toggle the enabled state."
                 },
-				{
-					"text": "Templates",
-					"url": "upload/templates.html",
-					"title": "Example of templates for Kendo UI Upload",
-					"meta": "This demo illustrates how to use templates with the Kendo UI Upload widget."
-				},
-				{
-					"text": "Initial Files",
-					"url": "upload/initialfiles.html",
-					"title": "Example of initial files for Kendo UI Upload",
-					"meta": "This demo illustrates how to render initial files with the Kendo UI Upload widget."
-				},
+                {
+                    "text": "Templates",
+                    "new": true,
+                    "url": "upload/templates.html",
+                    "title": "Example of templates for Kendo UI Upload",
+                    "meta": "This demo illustrates how to use templates with the Kendo UI Upload widget."
+                },
+                {
+                    "text": "Initial Files",
+                    "new": true,
+                    "url": "upload/initialfiles.html",
+                    "title": "Example of initial files for Kendo UI Upload",
+                    "meta": "This demo illustrates how to render initial files with the Kendo UI Upload widget."
+                },
                 {
                     "text": "RTL support",
                     "url": "upload/rtl.html",
