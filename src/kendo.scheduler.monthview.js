@@ -501,7 +501,12 @@ kendo_module({
 
             if (resources.length) {
                 if (this._isVerticallyGrouped()) {
-                    rows = this._createRowsLayout(resources, $.map(names, function() { return { text: "<div>&nbsp;</div>", className: "k-hidden k-slot-cell" }; }));
+                    var inner = []; //add hidden cells in order to sync the content rows
+                    for (var idx = 0; idx < 6; idx++) {
+                        inner.push({ text: "<div>&nbsp;</div>", className: "k-hidden k-slot-cell" });
+                    }
+
+                    rows = this._createRowsLayout(resources, inner);
                 } else {
                     columns = this._createColumnsLayout(resources, columns);
                 }

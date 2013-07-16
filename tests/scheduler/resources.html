@@ -2351,6 +2351,32 @@
                 equal(view.content.find("td").length, 42 * 2);
             });
 
+            test("additional cell are rendered in the times section for each calendar row", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    group: {
+                        resources: [ "ResourceName" ],
+                        orientation: "vertical"
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+
+                var view = scheduler.view();
+
+                equal(view.times.find("th.k-hidden").length, 6*2);
+            });
+
             test("event is position based on the group in horizontally oriented group month view - event in the first group first row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
