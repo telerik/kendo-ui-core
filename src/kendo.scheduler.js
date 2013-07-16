@@ -522,7 +522,8 @@ kendo_module({
 
             if (!this._selection || (!this._ctrlKey && !this._shiftKey)) {
                 this._selection = {
-                    events: []
+                    events: [],
+                    groupIndex: 0
                 };
             }
 

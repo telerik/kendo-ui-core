@@ -58,7 +58,7 @@
                     };
                 }
 
-                return $.extend({ events: [] }, options);
+                return $.extend({ events: [], groupIndex: 0 }, options);
             }
 
             module("Multi Day View selection", {
@@ -1244,6 +1244,62 @@
                 ok(event.hasClass("k-state-selected"));
             });
 
+            test("View does not select multiple allDay slots in different groups", function() {
+                setupGroupedScheduler("horizontal", "day");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 10),
+                    isAllDay: true,
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.select(selection);
+
+                equal(selection.groupIndex, 0);
+                equal(view.datesHeader.find(".k-state-selected").length, 1);
+            });
+
+            test("View moves to the last cells in the current group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 7, 3),
+                    end: new Date(2013, 5, 7, 4),
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.select(selection);
+                view.move(selection, keys.RIGHT);
+
+                equal(selection.groupIndex, 0);
+                deepEqual(selection.start, new Date(2013, 5, 8, 3));
+                deepEqual(selection.end, new Date(2013, 5, 8, 4));
+            });
+
+            test("View moves to the first cells in the current group", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 3, 3),
+                    end: new Date(2013, 5, 3, 4),
+                    groupIndex: 1,
+                    events: []
+                };
+
+                view.select(selection);
+                view.move(selection, keys.LEFT);
+
+                equal(selection.groupIndex, 1);
+                deepEqual(selection.start, new Date(2013, 5, 2, 3));
+                deepEqual(selection.end, new Date(2013, 5, 2, 4));
+            });
+
             test("View moves the selection to the next group", function() {
                 setupGroupedScheduler();
                 scheduler.wrapper.focus();
@@ -1262,6 +1318,26 @@
                 equal(selection.groupIndex, 1);
                 deepEqual(selection.start, new Date(2013, 5, 2));
                 deepEqual(selection.end, new Date(2013, 5, 2, 0, 30));
+            });
+
+            test("View navigates to next period if last group has been reached", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 3,
+                    events: []
+                };
+
+                view.select(selection);
+                view.move(selection, keys.RIGHT);
+
+                equal(selection.groupIndex, 0);
+                deepEqual(selection.start, new Date(2013, 5, 9));
+                deepEqual(selection.end, new Date(2013, 5, 9, 0, 30));
             });
 
             test("View moves the selection to the next group (day view)", function() {
@@ -1285,7 +1361,7 @@
                 deepEqual(selection.end, new Date(2013, 5, 8, 0, 30));
             });
 
-            test("View navigates to next period if last group has been reached", function() {
+            test("View navigates to next period if last group has been reached (day view)", function() {
                 setupGroupedScheduler("horizontal", "day");
                 scheduler.wrapper.focus();
                 var view = scheduler.view();
@@ -1303,6 +1379,25 @@
                 equal(selection.groupIndex, 0);
                 deepEqual(selection.start, new Date(2013, 5, 9));
                 deepEqual(selection.end, new Date(2013, 5, 9, 0, 30));
+            });
+
+            test("View selects multiple cells in grouped view", function() {
+                setupGroupedScheduler("horizontal", "day");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    isAllDay: true,
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.move(selection, keys.RIGHT, true);
+                view.select(selection);
+
+                equal(selection.groupIndex, 0);
+                equal(view.datesHeader.find(".k-state-selected").length, 1);
             });
 
             test("View moves the selection to the prev group", function() {
@@ -1323,6 +1418,25 @@
                 equal(selection.groupIndex, 0);
                 deepEqual(selection.start, new Date(2013, 5, 8));
                 deepEqual(selection.end, new Date(2013, 5, 8, 0, 30));
+            });
+
+            test("View navigates to prev period if first group has been reached", function() {
+                setupGroupedScheduler();
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 2, 3),
+                    end: new Date(2013, 5, 2, 4),
+                    groupIndex: 0,
+                    events: []
+                };
+
+                view.select(selection);
+                view.move(selection, keys.LEFT);
+
+                equal(selection.groupIndex, 3);
+                deepEqual(selection.start, new Date(2013, 5, 1, 3));
+                deepEqual(selection.end, new Date(2013, 5, 1, 4));
             });
 
             test("View moves the selection to the prev group (day view)", function() {
@@ -1346,7 +1460,7 @@
                 deepEqual(selection.end, new Date(2013, 5, 8, 0, 30));
             });
 
-            test("View navigates to prev period if first group has been reached", function() {
+            test("View navigates to prev period if first group has been reached (day view)", function() {
                 setupGroupedScheduler("horizontal", "day");
                 scheduler.wrapper.focus();
                 var view = scheduler.view();
