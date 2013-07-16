@@ -252,6 +252,17 @@
         }
 
         /// <summary>
+        /// If set to true the scheduler will enable the selection
+        /// </summary>
+        /// <param name="selectable">The selectable.</param>
+        public SchedulerBuilder<TModel> Selectable(bool selectable)
+        {
+            Component.Selectable = selectable;
+
+            return this;
+        }
+
+        /// <summary>
         /// The template used to render the date header cells.
         /// </summary>
         /// <param name="dateHeaderTemplate">The dateHeaderTemplate</param>

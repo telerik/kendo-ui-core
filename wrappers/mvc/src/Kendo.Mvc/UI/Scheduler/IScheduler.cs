@@ -72,6 +72,11 @@
             get;
         }
 
+        bool Selectable
+        {
+            get;
+        }
+
         string DateHeaderTemplate
         {
             get;

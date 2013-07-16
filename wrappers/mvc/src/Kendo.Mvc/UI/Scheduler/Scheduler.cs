@@ -103,6 +103,12 @@
             set;
         }
 
+        public bool Selectable
+        {
+            get;
+            set;
+        }
+
         public string DateHeaderTemplate
         {
             get;
@@ -268,6 +274,11 @@
             if (!AllDaySlot)
             {
                 options["allDaySlot"] = AllDaySlot;
+            }
+
+            if (Selectable)
+            {
+                options["selectable"] = Selectable;
             }
 
             if (!string.IsNullOrEmpty(DateHeaderTemplate))
