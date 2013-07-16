@@ -394,7 +394,7 @@
     <Compile Include="Controllers\Web\TreeView\TemplatesController.cs" />
     <Compile Include="Controllers\Web\Upload\AsyncController.cs" />
     <Compile Include="Controllers\Web\Upload\ApiController.cs" />
-    <Compile Include="Controllers\Web\Upload\InitialfilesController.cs" />
+    <Compile Include="Controllers\Web\Upload\InitialFilesController.cs" />
     <Compile Include="Controllers\Web\Upload\RtlController.cs" />
     <Compile Include="Controllers\Web\Upload\EventsController.cs" />
     <Compile Include="Controllers\Web\Upload\IndexController.cs" />
