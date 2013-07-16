@@ -102,6 +102,8 @@ kendo_module({
             if (elements.length > 0) {
                 found = true;
                 elements.addClass("k-state-selected");
+
+                this._scrollTo(elements.last()[0], this.content[0]);
             }
 
             return found;
@@ -118,6 +120,10 @@ kendo_module({
                 if (groupIndex === slots[idx].groupIndex) {
                     $(slots[idx].element).addClass("k-state-selected");
                 }
+            }
+
+            if (slots[endIndex]) {
+                this._scrollTo(slots[endIndex].element, this.content[0]);
             }
         },
 
