@@ -3934,7 +3934,9 @@ div.k-slider
     text-align:right;
 }
 
-.k-scheduler-table td
+.k-scheduler-table td,
+.k-scheduler-layout tr + tr .k-scheduler-times th:last-child,
+.k-slot-cell
 {
     vertical-align: top;
 }
@@ -4000,11 +4002,6 @@ div.k-slider
 .k-scheduler-layout tr + tr .k-scheduler-times th.k-scheduler-times-all-day
 {
     border-bottom-color: inherit;
-}
-
-.k-scheduler-layout tr + tr .k-scheduler-times th:last-child
-{
-    vertical-align:top;
 }
 
 .k-scheduler .k-middle-row td
