@@ -222,7 +222,7 @@
 #overview-contacts img,
 #overview-cities img,
 #overview-account img {
-	float: left;
+    float: left;
     width: 4em;
     height: 4em;
     margin: 0;
@@ -231,17 +231,27 @@
     -webkit-border-radius: 8px;
     border-radius: 8px;
 }
+
+.km-flat #overview-contacts img,
+.km-flat #overview-cities img,
+.km-flat #overview-account img {
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
 #overview-account img {
     width: 5em;
     height: 5em;
     margin: 1em;
 }
 #overview-account .value {
-	float: right;
-	color: #ccc;
+    float: right;
+    color: #ccc;
 }
 #settings-view {
-	margin: 1em auto .4em auto;
+    margin: 1em auto .4em auto;
 }
 #overview-gallery .photo {
     width: 277px;
