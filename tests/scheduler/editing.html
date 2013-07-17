@@ -1133,6 +1133,105 @@
                 ok(!model.endTimezone);
             });
 
+            test("addEvent converts start/end event date UTC to startTimezone: Americ/New_York", function() {
+                var scheduler = setup({ timezone: "Etc/UTC" }),
+                    start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/New_York";
+
+                scheduler.addEvent({ start: start, end: end, startTimezone: zone });
+
+                var model = scheduler.dataSource.data()[1];
+
+                deepEqual(model.start, kendo.timezone.convert(start, "Etc/UTC", zone));
+                deepEqual(model.end, kendo.timezone.convert(end, "Etc/UTC", zone));
+            });
+
+            test("addEvent converts start/end event date UTC to endTimezone: Americ/New_York", function() {
+                var scheduler = setup({ timezone: "Etc/UTC" }),
+                    start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/New_York";
+
+                scheduler.addEvent({ start: start, end: end, endTimezone: zone });
+
+                var model = scheduler.dataSource.data()[1];
+
+                deepEqual(model.start, kendo.timezone.convert(start, "Etc/UTC", zone));
+                deepEqual(model.end, kendo.timezone.convert(end, "Etc/UTC", zone));
+            });
+
+            test("addEvent converts model.start to startTimezone and model.end to endTimezone", function() {
+                var scheduler = setup({ timezone: "Etc/UTC" }),
+                    start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    startZone = "America/New_York",
+                    endZone = "America/Los_Angeles";
+
+                scheduler.addEvent({ start: start, end: end, startTimezone: startZone, endTimezone: endZone });
+
+                var model = scheduler.dataSource.data()[1];
+
+                deepEqual(model.start, kendo.timezone.convert(start, "Etc/UTC", startZone));
+                deepEqual(model.end, kendo.timezone.convert(end, "Etc/UTC", endZone));
+            });
+
+            test("addEvent applies startTimezone to start and end if no scheduler timezone", function() {
+                var scheduler = setup(),
+                    start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/Los_Angeles";
+
+                scheduler.addEvent({ start: start, end: end, startTimezone: zone });
+
+                var model = scheduler.dataSource.data()[1];
+
+                deepEqual(model.start, kendo.timezone.apply(start, zone));
+                deepEqual(model.end, kendo.timezone.apply(end, zone));
+            });
+
+            test("addEvent applies endTimezone to start and end if no scheduler timezone", function() {
+                var scheduler = setup(),
+                    start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/Los_Angeles";
+
+                scheduler.addEvent({ start: start, end: end, endTimezone: zone });
+
+                var model = scheduler.dataSource.data()[1];
+
+                deepEqual(model.start, kendo.timezone.apply(start, zone));
+                deepEqual(model.end, kendo.timezone.apply(end, zone));
+            });
+
+            test("addEvent applies endTimezone to start and end if no scheduler timezone", function() {
+                var scheduler = setup(),
+                    start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/Los_Angeles";
+
+                scheduler.addEvent({ start: start, end: end, endTimezone: zone });
+
+                var model = scheduler.dataSource.data()[1];
+
+                deepEqual(model.start, kendo.timezone.apply(start, zone));
+                deepEqual(model.end, kendo.timezone.apply(end, zone));
+            });
+
+            /*test("revert converted dates from startTimezone to UTC on cancel", function() {
+                var scheduler = setup({ timezone: "Etc/UTC" }),
+                    start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/Los_Angeles";
+
+                scheduler.addEvent({ start: start, end: end, startTimezone: zone });
+
+                var model = scheduler.dataSource.data()[1];
+
+                deepEqual(model.start, kendo.timezone.apply(start, zone));
+                deepEqual(model.end, kendo.timezone.apply(end, zone));
+            });*/
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

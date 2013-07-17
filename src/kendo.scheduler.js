@@ -1207,6 +1207,25 @@ kendo_module({
             return kendo.template(template)(options);
         },
 
+        _convertDates: function(model, timezone, method) {
+            var startTimezone = model.startTimezone;
+            var endTimezone = model.endTimezone;
+
+            method = method || "apply";
+            startTimezone = startTimezone || endTimezone;
+            endTimezone = endTimezone || startTimezone;
+
+            if (startTimezone) {
+                if (timezone) {
+                    model.start = kendo.timezone.convert(model.start, timezone, startTimezone);
+                    model.end = kendo.timezone.convert(model.end, timezone, endTimezone);
+                } else {
+                    model.start = kendo.timezone[method](model.start, startTimezone);
+                    model.end = kendo.timezone[method](model.end, endTimezone);
+                }
+            }
+        },
+
         _revertTimezones: function(model) {
             model.set("startTimezone", this._startTimezone);
             model.set("endTimezone", this._endTimezone);
@@ -1270,6 +1289,7 @@ kendo_module({
         _createPopupEditor: function(model) {
             var that = this,
                 editable = that.options.editable,
+                timezone = this.dataSource.reader.timezone,
                 html = '<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form k-scheduler-edit-form"><div class="k-edit-form-container">',
                 template = editable.template,
                 messages = that.options.messages,
@@ -1291,8 +1311,7 @@ kendo_module({
                 paramName = settings.paramName,
                 startTime = model.startTime,
                 endTime = model.endTime,
-                editableFields = [],
-                timezone;
+                editableFields = [];
 
            if (template) {
                 if (typeof template === STRING) {
@@ -1307,7 +1326,6 @@ kendo_module({
                 }
 
                 if (!model.recurrenceId) {
-                    timezone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone;
                     fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: RECURRENCEEDITOR, timezone: timezone, messages: messages.recurrenceEditor });
                 }
 
@@ -1394,6 +1412,7 @@ kendo_module({
 
             delete model.startTime;
             delete model.endTime;
+            that._convertDates(model, timezone);
 
             that.editable = that._editContainer
                 .kendoEditable({
