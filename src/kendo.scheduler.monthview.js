@@ -3,7 +3,8 @@ kendo_module({
     name: "Scheduler Month View",
     category: "web",
     description: "The Scheduler Month View",
-    depends: [ "scheduler.view" ]
+    depends: [ "scheduler.view" ],
+    hidden: true
 });
 
 (function($){

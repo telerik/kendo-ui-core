@@ -3,7 +3,8 @@ kendo_module({
     name: "Scheduler View",
     category: "web",
     description: "The Scheduler Common View",
-    depends: [ "core" ]
+    depends: [ "core" ],
+    hidden: true
 });
 
 (function($) {
