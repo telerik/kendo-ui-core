@@ -1132,6 +1132,12 @@ kendo_module({
             if (container) {
                 model = that._modelForContainer(container);
 
+                model.startTime = that._startTime;
+                model.endTime = that._endTime;
+
+                delete that._startTime;
+                delete that._endTime;
+
                 that._removeExceptionDate(model);
                 that.dataSource.cancelChanges(model);
 
@@ -1229,6 +1235,9 @@ kendo_module({
         _revertTimezones: function(model) {
             model.set("startTimezone", this._startTimezone);
             model.set("endTimezone", this._endTimezone);
+
+            delete this._startTimezone;
+            delete this._endTimezone;
         },
 
         _createTimezonePopup: function(model, activator) {
@@ -1309,9 +1318,12 @@ kendo_module({
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 paramName = settings.paramName,
-                startTime = model.startTime,
-                endTime = model.endTime,
                 editableFields = [];
+
+            this._startTime = model.startTime;
+            this._endTime = model.endTime;
+            delete model.startTime;
+            delete model.endTime;
 
            if (template) {
                 if (typeof template === STRING) {
@@ -1401,8 +1413,6 @@ kendo_module({
                                 return;
                             }
 
-                            model.startTime = startTime;
-                            model.endTime = endTime;
                             that.cancelEvent();
 
                             that.focus();
@@ -1410,8 +1420,6 @@ kendo_module({
                     }
                 }, options));
 
-            delete model.startTime;
-            delete model.endTime;
             that._convertDates(model, timezone);
 
             that.editable = that._editContainer
