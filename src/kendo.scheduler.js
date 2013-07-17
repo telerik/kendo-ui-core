@@ -159,9 +159,37 @@ kendo_module({
         for (idx = 0, length = data.length; idx < length; idx++) {
             event = data[idx];
 
-            if (event.startTimezone || event.endTimezone || timezone) {
-                event.start = kendo.timezone[method](event.start, event.startTimezone || event.endTimezone || timezone);
-                event.end = kendo.timezone[method](event.end, event.endTimezone || event.startTimezone || timezone);
+            if (removeUid) {
+                if (event.startTimezone || event.endTimezone) {
+                    if (timezone) {
+                        event.start = kendo.timezone.convert(event.start, event.startTimezone || event.endTimezone, timezone);
+                        event.end = kendo.timezone.convert(event.end, event.endTimezone || event.startTimezone, timezone);
+
+                        event.start = kendo.timezone[method](event.start, timezone);
+                        event.end = kendo.timezone[method](event.end, timezone);
+                    } else {
+                        event.start = kendo.timezone[method](event.start, event.startTimezone || event.endTimezone);
+                        event.end = kendo.timezone[method](event.end, event.endTimezone || event.startTimezone);
+                    }
+
+                } else if (timezone) {
+                    event.start = kendo.timezone[method](event.start, timezone);
+                    event.end = kendo.timezone[method](event.end, timezone);
+                }
+            } else {
+                if (event.startTimezone || event.endTimezone) {
+                    event.start = kendo.timezone[method](event.start, event.startTimezone || event.endTimezone);
+                    event.end = kendo.timezone[method](event.end, event.endTimezone || event.startTimezone);
+
+                    if (timezone) {
+                        event.start = kendo.timezone.convert(event.start, event.startTimezone || event.endTimezone, timezone);
+                        event.end = kendo.timezone.convert(event.end, event.endTimezone || event.startTimezone, timezone);
+                    }
+
+                } else if (timezone) {
+                    event.start = kendo.timezone[method](event.start, timezone);
+                    event.end = kendo.timezone[method](event.end, timezone);
+                }
             }
 
             if (removeUid) {

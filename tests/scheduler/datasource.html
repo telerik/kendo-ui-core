@@ -6,6 +6,7 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.timezones.min.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <script src="../../src/kendo.model.js"></script>
@@ -405,10 +406,80 @@
                 equal(apply.calls("apply"), 0);
             });
 
+            test("start and end time is converted to the given timezone", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({ timezone: "Europe/London" }, originalReader);
+
+                var start = new Date(Date.UTC(2013,5,6,10,0,0));
+                var end = new Date(Date.UTC(2013,5,6,11,0,0));
+
+                var result = dataReader.data([ { start: start, end: end } ]);
+
+                equal(kendo.toString(result[0].start, "MMM dd yyyy HH:mm:ss"), "Jun 06 2013 11:00:00");
+                equal(kendo.toString(result[0].end, "MMM dd yyyy HH:mm:ss"), "Jun 06 2013 12:00:00");
+            });
+
+            test("start and end time is converted to the start timezone if timezone is not defined", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({}, originalReader);
+
+                var start = new Date(Date.UTC(2013,5,6,10,0,0));
+                var end = new Date(Date.UTC(2013,5,6,11,0,0));
+
+                var result = dataReader.data([ { start: start, end: end, startTimezone: "Asia/Yerevan" } ]);
+
+                equal(kendo.toString(result[0].start, "MMM dd yyyy HH:mm:ss"), "Jun 06 2013 14:00:00");
+                equal(kendo.toString(result[0].end, "MMM dd yyyy HH:mm:ss"), "Jun 06 2013 15:00:00");
+            });
+
+            test("start and end time is converted to the timezone if event startTimezone is set", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({ timezone: "Europe/London" }, originalReader);
+
+                var start = new Date(Date.UTC(2013,5,6,10,0,0));
+                var end = new Date(Date.UTC(2013,5,6,11,0,0));
+
+                var result = dataReader.data([ { start: start, end: end, startTimezone: "Asia/Yerevan" } ]);
+
+                equal(kendo.toString(result[0].start, "MMM dd yyyy HH:mm:ss"), "Jun 06 2013 11:00:00");
+                equal(kendo.toString(result[0].end, "MMM dd yyyy HH:mm:ss"), "Jun 06 2013 12:00:00");
+            });
+
+            test("start and end are serialized to UTC based on timezone", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({ timezone: "Asia/Yerevan" }, originalReader);
+                var start = kendo.timezone.apply(new Date(Date.UTC(2013,5,6,10,0,0)), "Asia/Yerevan");
+                var end = kendo.timezone.apply(new Date(Date.UTC(2013,5,6,11,0,0)), "Asia/Yerevan");
+
+                var result = dataReader.serialize([ { start: start, end: end } ]);
+
+                equal(kendo.stringify(result[0].start), "\"2013-06-06T10:00:00.000Z\"");
+                equal(kendo.stringify(result[0].end), "\"2013-06-06T11:00:00.000Z\"");
+            });
+
+            test("start and end are serialized to UTC based on event's startTimezone", function() {
+                var originalReader = new kendo.data.DataReader({ });
+
+                var dataReader = new SchedulerDataReader({ timezone: "Asia/Yerevan" }, originalReader);
+                var start = new Date(Date.UTC(2013,5,6,10,0,0));
+                var end = new Date(Date.UTC(2013,5,6,11,0,0));
+
+                var result = dataReader.data([ { start: start, end: end, startTimezone: "Europe/London" } ]);
+
+                result = dataReader.serialize(result);
+
+                equal(kendo.stringify(result[0].start), "\"2013-06-06T13:00:00.000Z\"");
+                equal(kendo.stringify(result[0].end), "\"2013-06-06T14:00:00.000Z\"");
+            });
+
             test("data pass start and end dates through the timezone conversion", function() {
                 var originalReader = new kendo.data.DataReader({ });
 
-                var dataReader = new SchedulerDataReader({ timezone: "UTC/Etc" }, originalReader);
+                var dataReader = new SchedulerDataReader({ timezone: "Etc/UTC" }, originalReader);
                 var apply = stub(kendo.timezone, "apply");
                 var start = new Date(2013, 1, 1);
                 var end = new Date(2013, 1, 1);
@@ -483,7 +554,7 @@
                 equal(apply.args("apply")[1], "event zone");
             });
 
-            test("serialize timezone is passed", function() {
+            test("serialize timezone if passed", function() {
                 var originalReader = new kendo.data.DataReader({ });
 
                 var dataReader = new SchedulerDataReader({
