@@ -1,0 +1,24 @@
+% categories.each do |name, category|
+## <%= category["name"] %>
+
+<%= category["description"] %>
+
+% category["components"].each do |component|
+% own_file = component["dependencies"].pop
+### <%= component["name"] %>
+1. jquery.js
+% component["dependencies"].each do |dependency|
+1. kendo.<%= dependency %>.js
+% end # deps
+% component["features"].each do |feature|
+% feature["dependencies"].each do |dependency|
+% unless component["dependencies"].include? dependency
+1. kendo.<%= dependency %>.js (<%= feature["name"] %> feature)
+% end # unless
+% end # f/deps
+% end # features
+1. kendo.<%= own_file %>.js
+
+% end # components
+
+% end # categories
