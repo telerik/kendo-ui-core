@@ -51,6 +51,7 @@ var tests = [
     "chart/dateaxis.html",
     "chart/barseries.html",
     "chart/linechart.html",
+    "chart/steplinechart.html",
     "chart/areachart.html",
     "chart/piechart.html",
     "chart/donutchart.html",

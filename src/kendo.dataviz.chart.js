@@ -4357,12 +4357,11 @@ kendo_module({
                 reverse = categoryAxis.options.reverse,
                 dir = reverse ? 2 : 1,
                 revDir = reverse ? 1 : 2,
-                pos = vertical ? Y : X,
                 vertical = categoryAxis.options.vertical,
                 linePoints = segment.linePoints.concat(visualPoints || []),
                 length = linePoints.length,
                 points = [],
-                prevPoint, point, i, pointCenter,
+                prevPoint, point, i,
                 prevMarkerBoxCenter, markerBoxCenter;
 
             for (i = 1; i < length; i++) {
@@ -10177,6 +10176,7 @@ kendo_module({
         SeriesBinder: SeriesBinder,
         ShapeElement: ShapeElement,
         StackLayout: StackLayout,
+        StepLineChart: StepLineChart,
         Tooltip: Tooltip,
         OHLCChart: OHLCChart,
         OHLCPoint: OHLCPoint,
