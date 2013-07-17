@@ -13,7 +13,10 @@ rule /^dist\/download-builder.+\.min\.js$/ =>
     lambda { |t| t.sub(/^dist\/download-builder.+\/js/, 'src').sub('.min.js', '.js') } do |t|
         FileUtils.mkdir_p File.dirname(t.name)
         File.open t.name, 'w' do |f|
-            f.write File.read(t.source);
+            contents = File.read(t.source)
+            contents.sub!("$KENDO_VERSION", VERSION)
+
+            f.write contents;
         end
         compilejs(t.name, "--no-amd")
     end
