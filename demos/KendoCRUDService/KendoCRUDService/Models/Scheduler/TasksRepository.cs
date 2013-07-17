@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using KendoCRUDService.Models.EF;
-using KendoCRUDService.Models;
-using System.Data;
 
 namespace KendoCRUDService.Models
 {
     public static class TasksRepository
     {
         private static bool UpdateDatabase = false;
-
+        
         public static IList<TaskViewModel> All()
         {
             var result = HttpContext.Current.Session["Tasks"] as IList<TaskViewModel>;
@@ -59,16 +58,18 @@ namespace KendoCRUDService.Models
                 if (first != null)
                 {
                     id = first.TaskID;
-                }            
+                }
 
-                task.TaskID = id + 1;
+                task.TaskID = id + 1;                
+                task.ApplyTimezone();
 
                 All().Insert(0, task);
-            } 
-            else 
+            }
+            else
             {
                 using (var db = new SampleEntities())
                 {
+                    task.ApplyTimezone();
                     var entity = task.ToEntity();
 
                     db.Tasks.AddObject(entity);
@@ -77,7 +78,7 @@ namespace KendoCRUDService.Models
                     task.TaskID = entity.TaskID;
                 }
             }
-        }        
+        }
 
         public static void Update(TaskViewModel task)
         {
@@ -88,8 +89,6 @@ namespace KendoCRUDService.Models
                 if (target != null)
                 {
                     target.Title = task.Title;
-                    target.Start = task.Start;
-                    target.End = task.End;
                     target.Description = task.Description;
                     target.IsAllDay = task.IsAllDay;
                     target.RecurrenceRule = task.RecurrenceRule;
@@ -98,12 +97,16 @@ namespace KendoCRUDService.Models
                     target.OwnerID = task.OwnerID;
                     target.StartTimezone = task.StartTimezone;
                     target.EndTimezone = task.EndTimezone;
+
+                    target.ApplyTimezone();
                 }
             }
             else
             {
                 using (var db = new SampleEntities())
                 {
+                    task.ApplyTimezone();
+
                     var entity = task.ToEntity();
                     db.Tasks.Attach(entity);
                     db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);

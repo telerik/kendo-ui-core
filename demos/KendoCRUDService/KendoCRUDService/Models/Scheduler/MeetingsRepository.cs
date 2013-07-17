@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using KendoCRUDService.Models.EF;
-using KendoCRUDService.Models;
-using System.Data;
 
 namespace KendoCRUDService.Models
 {
@@ -60,9 +59,10 @@ namespace KendoCRUDService.Models
                 if (first != null)
                 {
                     id = first.MeetingID;
-                }            
+                }                               
 
                 meeting.MeetingID = id + 1;
+                meeting.ApplyTimezone();
 
                 All().Insert(0, meeting);
             } 
@@ -74,6 +74,8 @@ namespace KendoCRUDService.Models
                     {
                         meeting.Atendees = new int[0];
                     }
+
+                    meeting.ApplyTimezone();
 
                     var entity = meeting.ToEntity();
 
@@ -101,8 +103,7 @@ namespace KendoCRUDService.Models
 
                 if (target != null)
                 {
-                    target.Title = meeting.Title;
-                    target.Timezone = meeting.Timezone;
+                    target.Title = meeting.Title;                    
                     target.Start = meeting.Start;
                     target.End = meeting.End;
                     target.StartTimezone = meeting.StartTimezone;
@@ -114,6 +115,8 @@ namespace KendoCRUDService.Models
                     target.RecurrenceException = meeting.RecurrenceException;
                     target.RecurrenceID = meeting.RecurrenceID;
                     target.Atendees = meeting.Atendees;
+
+                    target.ApplyTimezone();
                 }
             }
             else
@@ -125,6 +128,7 @@ namespace KendoCRUDService.Models
                         meeting.Atendees = new int[0];
                     }
 
+                    meeting.ApplyTimezone();
                     var entity = meeting.ToEntity();
 
                     db.Meetings.Attach(entity);

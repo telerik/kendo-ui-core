@@ -148,6 +148,7 @@
     <Compile Include="Models\ProductRepository.cs" />
     <Compile Include="Models\Scheduler\MeetingsRepository.cs" />
     <Compile Include="Models\Scheduler\MeetingViewModel.cs" />
+    <Compile Include="Models\Scheduler\SchedulerEvent.cs" />
     <Compile Include="Models\Scheduler\TasksRepository.cs" />
     <Compile Include="Models\Scheduler\TaskViewModel.cs" />
     <Compile Include="Models\StockData\BaseUnit.cs" />
