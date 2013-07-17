@@ -1120,6 +1120,7 @@ kendo_module({
 
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
+                that._convertDates(model, "remove");
                 that.dataSource.sync();
             }
         },
@@ -1138,7 +1139,9 @@ kendo_module({
                 delete that._startTime;
                 delete that._endTime;
 
+                that._convertDates(model, "remove");
                 that._removeExceptionDate(model);
+
                 that.dataSource.cancelChanges(model);
 
                 //TODO: handle the cancel in UI
@@ -1213,7 +1216,8 @@ kendo_module({
             return kendo.template(template)(options);
         },
 
-        _convertDates: function(model, timezone, method) {
+        _convertDates: function(model, method) {
+            var timezone = this.dataSource.reader.timezone;
             var startTimezone = model.startTimezone;
             var endTimezone = model.endTimezone;
 
@@ -1223,8 +1227,13 @@ kendo_module({
 
             if (startTimezone) {
                 if (timezone) {
-                    model.start = kendo.timezone.convert(model.start, timezone, startTimezone);
-                    model.end = kendo.timezone.convert(model.end, timezone, endTimezone);
+                    if (method === "remove") {
+                        model.start = kendo.timezone.convert(model.start, startTimezone, timezone);
+                        model.end = kendo.timezone.convert(model.end, endTimezone, timezone);
+                    } else {
+                        model.start = kendo.timezone.convert(model.start, timezone, startTimezone);
+                        model.end = kendo.timezone.convert(model.end, timezone, endTimezone);
+                    }
                 } else {
                     model.start = kendo.timezone[method](model.start, startTimezone);
                     model.end = kendo.timezone[method](model.end, endTimezone);
@@ -1298,7 +1307,6 @@ kendo_module({
         _createPopupEditor: function(model) {
             var that = this,
                 editable = that.options.editable,
-                timezone = this.dataSource.reader.timezone,
                 html = '<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form k-scheduler-edit-form"><div class="k-edit-form-container">',
                 template = editable.template,
                 messages = that.options.messages,
@@ -1338,7 +1346,7 @@ kendo_module({
                 }
 
                 if (!model.recurrenceId) {
-                    fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: RECURRENCEEDITOR, timezone: timezone, messages: messages.recurrenceEditor });
+                    fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: RECURRENCEEDITOR, timezone: this.dataSource.reader.timezone, messages: messages.recurrenceEditor });
                 }
 
                 if ("description" in model) {
@@ -1420,7 +1428,7 @@ kendo_module({
                     }
                 }, options));
 
-            that._convertDates(model, timezone);
+            that._convertDates(model);
 
             that.editable = that._editContainer
                 .kendoEditable({
