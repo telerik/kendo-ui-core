@@ -831,7 +831,6 @@ kendo_module({
             events = [],
             offset;
 
-        zone = event.startTimezone || event.endTimezone || zone;
         exceptionDates = parseExceptions(event.recurrenceException, zone);
 
         recurrenceException = event.recurrenceException;
@@ -942,14 +941,12 @@ kendo_module({
     function expandAll(events, start, end, zone) {
         var length = events.length,
             idx = 0, event, result,
-            startTimezone,
             data = [],
             id;
 
         for (; idx < length; idx++) {
             event = events[idx];
-            startTimezone = event.startTimezone || event.endTimezone || zone;
-            result = expand(event, start, end, startTimezone);
+            result = expand(event, start, end, zone);
 
             if (!event.recurrenceRule) {
                 if (event.toJSON) {
