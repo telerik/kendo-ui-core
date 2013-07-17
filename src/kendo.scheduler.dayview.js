@@ -322,9 +322,6 @@ kendo_module({
                 startSlotIndex = endSlotIndex = currentSlot.columnIndex;
             }
 
-            if (!event.isAllDay) {
-                endSlotIndex = Math.max(startSlotIndex, endSlotIndex - 1);
-            }
 
             var startSlot = slots[startSlotIndex];
 
@@ -402,6 +399,11 @@ kendo_module({
                     this._moveHint = this._moveHint.add(hint);
                 }
             } else {
+
+                if (!event.isAllDay) {
+                    endSlotIndex = Math.max(startSlotIndex, endSlotIndex - 1);
+                }
+
                 this._moveHint = this._createEventElement($.extend({}, event, { start: start, end: end }), false);
                 this._moveHint.addClass("k-event-drag-hint");
 
