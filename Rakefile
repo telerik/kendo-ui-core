@@ -503,6 +503,11 @@ namespace :build do
 
         zip_bundles.push(zip_demos)
 
+        zip_download_builder = "#{ARCHIVE_ROOT}/#{destination}/download-builder.zip"
+        file_copy :to => zip_download_builder,
+                  :from => "dist/download-builder.zip"
+        zip_bundles.push(zip_download_builder)
+
         tree :to => "#{ARCHIVE_ROOT}/WinJS/#{destination}",
              :from => FileList[WIN_JS_RESOURCES].pathmap('dist/bundles/winjs.commercial/%f'),
              :root => 'dist/bundles/winjs.commercial/'
@@ -545,7 +550,7 @@ namespace :build do
         write_changelog changelog, %w(web mobile dataviz framework aspnetmvc)
 
         desc 'Package and publish bundles to the Production directory, and update the changelog'
-        task :bundles => ['bundles:all', 'demos:production',  zip_targets("Production"), changelog].flatten
+        task :bundles => ['bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Production"), changelog].flatten
     end
 
     namespace :master do
@@ -569,7 +574,7 @@ namespace :build do
         end
 
         desc 'Package and publish bundles to the Stable directory'
-        task :bundles => ['bundles:all', 'demos:production', zip_targets("Stable")].flatten
+        task :bundles => ['bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
     end
 end
 
