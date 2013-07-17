@@ -990,7 +990,7 @@ kendo_module({
 
         createCharts: function() {
             var plotArea = this,
-                series = plotArea.series,
+                series = plotArea.filterVisibleSeries(plotArea.series),
                 pane = plotArea.panes[0];
 
             // TODO: Extract createChartByType method
@@ -1130,7 +1130,7 @@ kendo_module({
 
         createCharts: function() {
             var plotArea = this,
-                series = plotArea.series,
+                series = plotArea.filterVisibleSeries(plotArea.series),
                 pane = plotArea.panes[0];
 
             // TODO: Extract createChartByType method
