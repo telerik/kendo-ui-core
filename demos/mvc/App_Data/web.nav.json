@@ -528,8 +528,7 @@
                     "text": "Inline editing",
                     "url": "grid/editing-inline.html",
                     "title": "Applying inline editing in Kendo UI Grid",
-                    "meta": "This sample demonstrates how the values in the cells of KendoGrid can be easily changed. Try the demo source code to find how inline data grid can be deleted and modified.",
-                    "packages": ["!mvc", "!jsp"]
+                    "meta": "This sample demonstrates how the values in the cells of KendoGrid can be easily changed. Try the demo source code to find how inline data grid can be deleted and modified."
                 },
                 {
                     "text": "Popup editing",
