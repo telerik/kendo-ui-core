@@ -161,6 +161,38 @@ kendo_module({
                     '</div>' +
                 '</div>';
 
+    kendo.ui.scheduler = {};
+
+    kendo.ui.scheduler.ResourceView = kendo.Class.extend({
+        init: function() {
+            this._collections = [];
+        },
+
+        addCollection: function(collection) {
+            this._collections.push(collection);
+        }
+    });
+
+    kendo.ui.scheduler.SlotCollection = kendo.Class.extend({
+        init: function() {
+            this._slots = [];
+        },
+        addSlot: function(slot) {
+            this._slots.push(slot);
+        }
+    });
+
+    kendo.ui.scheduler.TimeSlot = kendo.Class.extend({
+        init: function() {
+        }
+    });
+
+    kendo.ui.scheduler.DaySlot = kendo.Class.extend({
+        init: function() {
+
+        }
+    });
+
     kendo.ui.SchedulerView = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);

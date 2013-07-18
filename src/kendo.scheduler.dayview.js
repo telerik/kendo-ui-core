@@ -491,6 +491,9 @@ kendo_module({
            }
        },
 
+       _groups: function() {
+
+       },
        _slots: function() {
             var tableRows = this.content[0].getElementsByTagName("tr");
 
