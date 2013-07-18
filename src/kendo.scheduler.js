@@ -469,6 +469,8 @@ kendo_module({
                 recurrence.options = that.options.messages.recurrence;
             }
 
+            that._modelDatesProxy = $.proxy(that._modelDates, that);
+
             that._selectable();
         },
 
@@ -1120,6 +1122,12 @@ kendo_module({
 
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
+
+                if (!model.isNew() && !that._dateChanged) {
+                    that._convertDates(model, "remove");
+                }
+
+                that._dateChanged = false;
                 that.dataSource.sync();
             }
         },
@@ -1139,6 +1147,7 @@ kendo_module({
                 delete that._endTime;
 
                 that._removeExceptionDate(model);
+                model.unbind("change", that._modelDatesProxy);
 
                 that.dataSource.cancelChanges(model);
 
@@ -1214,27 +1223,39 @@ kendo_module({
             return kendo.template(template)(options);
         },
 
-        _convertDates: function(model) {
+        _convertDates: function(model, method) {
             var timezone = this.dataSource.reader.timezone;
             var startTimezone = model.startTimezone;
             var endTimezone = model.endTimezone;
             var start = model.start;
             var end = model.start;
 
+            method = method || "apply";
             startTimezone = startTimezone || endTimezone;
             endTimezone = endTimezone || startTimezone;
 
             if (startTimezone) {
                 if (timezone) {
-                    start = kendo.timezone.convert(model.start, timezone, startTimezone);
-                    end = kendo.timezone.convert(model.end, timezone, endTimezone);
+                    if (method === "apply") {
+                        start = kendo.timezone.convert(model.start, timezone, startTimezone);
+                        end = kendo.timezone.convert(model.end, timezone, endTimezone);
+                    } else {
+                        start = kendo.timezone.convert(model.start, startTimezone, timezone);
+                        end = kendo.timezone.convert(model.end, endTimezone, timezone);
+                    }
                 } else {
-                    start = kendo.timezone.apply(model.start, startTimezone);
-                    end = kendo.timezone.apply(model.end, endTimezone);
+                    start = kendo.timezone[method](model.start, startTimezone);
+                    end = kendo.timezone[method](model.end, endTimezone);
                 }
 
                 model._set("start", start);
                 model._set("end", end);
+            }
+        },
+
+        _modelDates: function(e) {
+            if (e.field === "start" || e.field === "end") {
+                this._dateChanged = true;
             }
         },
 
@@ -1425,7 +1446,10 @@ kendo_module({
                     }
                 }, options));
 
-            that._convertDates(model);
+            if (!model.isNew()) {
+                that._convertDates(model);
+                model.bind("change", that._modelDatesProxy);
+            }
 
             that.editable = that._editContainer
                 .kendoEditable({
