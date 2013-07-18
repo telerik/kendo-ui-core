@@ -35,6 +35,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             var Scheduler = kendo.ui.Scheduler,
+                timezone = kendo.timezone,
                 container;
 
             QUnit.config.reorder = false;
@@ -1133,6 +1134,134 @@
                 ok(!model.endTimezone);
             });
 
+            test("addEvent converts start/end event date UTC to startTimezone: Americ/New_York", function() {
+                var scheduler = setup({ timezone: "Etc/UTC" }),
+                    start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/New_York";
+
+                scheduler.addEvent({ start: start, end: end, startTimezone: zone });
+
+                var model = scheduler.dataSource.data()[1];
+
+                deepEqual(model.start, start);
+                deepEqual(model.end, end);
+            });
+
+            test("DataSource only converts dates on saveEvent", function() {
+                var scheduler = setup({ timezone: "Etc/UTC" }),
+                    start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/New_York";
+
+                scheduler.addEvent({ start: start, end: end, startTimezone: zone });
+                scheduler.saveEvent();
+
+                var model = scheduler.dataSource.data()[1];
+
+                deepEqual(model.start, timezone.convert(start, zone, "Etc/UTC"));
+                deepEqual(model.end, timezone.convert(end, zone, "Etc/UTC"));
+            });
+
+            test("editEvent converts start/end event date UTC to endTimezone: Americ/New_York", function() {
+                var start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/New_York";
+
+
+                var scheduler = setup({
+                    dataSource: {
+                        data: [
+                            { start: new Date(), end: new Date(), isAllDay: true, title: "my event" },
+                            {
+                                start: new Date(start),
+                                end: new Date(end),
+                                startTimezone: zone,
+                                title: "my event"
+                            }
+                        ]
+                    },
+                    timezone: "Etc/UTC"
+                });
+
+                start.setTime(start.getTime() + (start.getTimezoneOffset() * (60 * 1000))); //simulate UTC
+                end.setTime(end.getTime() + (end.getTimezoneOffset() * (60 * 1000))); //simulate UTC
+
+                var model = scheduler.dataSource.data()[1];
+                scheduler.editEvent(model.uid);
+
+                deepEqual(model.start, timezone.convert(start, "Etc/UTC", zone));
+                deepEqual(model.end, timezone.convert(end, "Etc/UTC", zone));
+            });
+
+            test("saveEvent reverts applied StartTimezone if no changes have been made", function() {
+                var start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/New_York";
+
+                var scheduler = setup({
+                    dataSource: {
+                        data: [
+                            { start: new Date(), end: new Date(), isAllDay: true, title: "my event" },
+                            {
+                                start: new Date(start),
+                                end: new Date(end),
+                                startTimezone: zone,
+                                title: "my event"
+                            }
+                        ]
+                    },
+                    timezone: "Etc/UTC"
+                });
+
+                start.setTime(start.getTime() + (start.getTimezoneOffset() * (60 * 1000))); //simulate UTC
+                end.setTime(end.getTime() + (end.getTimezoneOffset() * (60 * 1000))); //simulate UTC
+
+                var model = scheduler.dataSource.data()[1];
+                scheduler.editEvent(model.uid);
+                scheduler.saveEvent();
+
+                deepEqual(model.start, start);
+                deepEqual(model.end, end);
+            });
+
+            test("saveEvent does not revert applied Start/EndTimezone if start/end was edited", function() {
+                var start = new Date(2013, 10, 10, 10),
+                    end = new Date(2013, 10, 10, 11),
+                    zone = "America/New_York";
+
+                var scheduler = setup({
+                    dataSource: {
+                        data: [
+                            { start: new Date(), end: new Date(), isAllDay: true, title: "my event" },
+                            {
+                                start: new Date(start),
+                                end: new Date(end),
+                                startTimezone: zone,
+                                title: "my event"
+                            }
+                        ]
+                    },
+                    timezone: "Etc/UTC"
+                });
+
+                start.setTime(start.getTime() + (start.getTimezoneOffset() * (60 * 1000))); //simulate UTC
+                end.setTime(end.getTime() + (end.getTimezoneOffset() * (60 * 1000))); //simulate UTC
+
+                var model = scheduler.dataSource.data()[1];
+                scheduler.editEvent(model.uid);
+
+                start.setHours(start.getHours() - 2);
+                model.set("start", start);
+
+                end.setHours(end.getHours() - 2);
+                model.set("end", end);
+
+                scheduler.saveEvent();
+
+                deepEqual(model.start, timezone.convert(start, zone, "Etc/UTC"));
+                deepEqual(model.end, timezone.convert(end, zone, "Etc/UTC"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

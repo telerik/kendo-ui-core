@@ -469,6 +469,8 @@ kendo_module({
                 recurrence.options = that.options.messages.recurrence;
             }
 
+            that._modelDatesProxy = $.proxy(that._modelDates, that);
+
             that._selectable();
         },
 
@@ -1120,6 +1122,12 @@ kendo_module({
 
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
+
+                if (!model.isNew() && !that._dateChanged) {
+                    that._convertDates(model, "remove");
+                }
+
+                that._dateChanged = false;
                 that.dataSource.sync();
             }
         },
@@ -1132,7 +1140,15 @@ kendo_module({
             if (container) {
                 model = that._modelForContainer(container);
 
+                model.startTime = that._startTime;
+                model.endTime = that._endTime;
+
+                delete that._startTime;
+                delete that._endTime;
+
                 that._removeExceptionDate(model);
+                model.unbind("change", that._modelDatesProxy);
+
                 that.dataSource.cancelChanges(model);
 
                 //TODO: handle the cancel in UI
@@ -1207,9 +1223,48 @@ kendo_module({
             return kendo.template(template)(options);
         },
 
+        _convertDates: function(model, method) {
+            var timezone = this.dataSource.reader.timezone;
+            var startTimezone = model.startTimezone;
+            var endTimezone = model.endTimezone;
+            var start = model.start;
+            var end = model.start;
+
+            method = method || "apply";
+            startTimezone = startTimezone || endTimezone;
+            endTimezone = endTimezone || startTimezone;
+
+            if (startTimezone) {
+                if (timezone) {
+                    if (method === "apply") {
+                        start = kendo.timezone.convert(model.start, timezone, startTimezone);
+                        end = kendo.timezone.convert(model.end, timezone, endTimezone);
+                    } else {
+                        start = kendo.timezone.convert(model.start, startTimezone, timezone);
+                        end = kendo.timezone.convert(model.end, endTimezone, timezone);
+                    }
+                } else {
+                    start = kendo.timezone[method](model.start, startTimezone);
+                    end = kendo.timezone[method](model.end, endTimezone);
+                }
+
+                model._set("start", start);
+                model._set("end", end);
+            }
+        },
+
+        _modelDates: function(e) {
+            if (e.field === "start" || e.field === "end") {
+                this._dateChanged = true;
+            }
+        },
+
         _revertTimezones: function(model) {
             model.set("startTimezone", this._startTimezone);
             model.set("endTimezone", this._endTimezone);
+
+            delete this._startTimezone;
+            delete this._endTimezone;
         },
 
         _createTimezonePopup: function(model, activator) {
@@ -1289,10 +1344,12 @@ kendo_module({
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 paramName = settings.paramName,
-                startTime = model.startTime,
-                endTime = model.endTime,
-                editableFields = [],
-                timezone;
+                editableFields = [];
+
+            this._startTime = model.startTime;
+            this._endTime = model.endTime;
+            delete model.startTime;
+            delete model.endTime;
 
            if (template) {
                 if (typeof template === STRING) {
@@ -1307,8 +1364,7 @@ kendo_module({
                 }
 
                 if (!model.recurrenceId) {
-                    timezone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone;
-                    fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: RECURRENCEEDITOR, timezone: timezone, messages: messages.recurrenceEditor });
+                    fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: RECURRENCEEDITOR, timezone: this.dataSource.reader.timezone, messages: messages.recurrenceEditor });
                 }
 
                 if ("description" in model) {
@@ -1383,8 +1439,6 @@ kendo_module({
                                 return;
                             }
 
-                            model.startTime = startTime;
-                            model.endTime = endTime;
                             that.cancelEvent();
 
                             that.focus();
@@ -1392,8 +1446,10 @@ kendo_module({
                     }
                 }, options));
 
-            delete model.startTime;
-            delete model.endTime;
+            if (!model.isNew()) {
+                that._convertDates(model);
+                model.bind("change", that._modelDatesProxy);
+            }
 
             that.editable = that._editContainer
                 .kendoEditable({
