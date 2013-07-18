@@ -1120,7 +1120,6 @@ kendo_module({
 
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
-                that._convertDates(model, "remove");
                 that.dataSource.sync();
             }
         },
@@ -1139,7 +1138,6 @@ kendo_module({
                 delete that._startTime;
                 delete that._endTime;
 
-                that._convertDates(model, "remove");
                 that._removeExceptionDate(model);
 
                 that.dataSource.cancelChanges(model);
@@ -1216,28 +1214,27 @@ kendo_module({
             return kendo.template(template)(options);
         },
 
-        _convertDates: function(model, method) {
+        _convertDates: function(model) {
             var timezone = this.dataSource.reader.timezone;
             var startTimezone = model.startTimezone;
             var endTimezone = model.endTimezone;
+            var start = model.start;
+            var end = model.start;
 
-            method = method || "apply";
             startTimezone = startTimezone || endTimezone;
             endTimezone = endTimezone || startTimezone;
 
             if (startTimezone) {
                 if (timezone) {
-                    if (method === "remove") {
-                        model.start = kendo.timezone.convert(model.start, startTimezone, timezone);
-                        model.end = kendo.timezone.convert(model.end, endTimezone, timezone);
-                    } else {
-                        model.start = kendo.timezone.convert(model.start, timezone, startTimezone);
-                        model.end = kendo.timezone.convert(model.end, timezone, endTimezone);
-                    }
+                    start = kendo.timezone.convert(model.start, timezone, startTimezone);
+                    end = kendo.timezone.convert(model.end, timezone, endTimezone);
                 } else {
-                    model.start = kendo.timezone[method](model.start, startTimezone);
-                    model.end = kendo.timezone[method](model.end, endTimezone);
+                    start = kendo.timezone.apply(model.start, startTimezone);
+                    end = kendo.timezone.apply(model.end, endTimezone);
                 }
+
+                model._set("start", start);
+                model._set("end", end);
             }
         },
 

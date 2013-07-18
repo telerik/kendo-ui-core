@@ -1233,38 +1233,6 @@
                 deepEqual(model.end, end);
             });
 
-            test("saveEvent removes applied startTimezone", function() {
-                var scheduler = setup(),
-                    start = new Date(2013, 10, 10, 10),
-                    end = new Date(2013, 10, 10, 11),
-                    zone = "America/Los_Angeles";
-
-                scheduler.addEvent({ start: new Date(start), end: new Date(end), startTimezone: zone });
-                scheduler.saveEvent();
-
-                var model = scheduler.dataSource.data()[1];
-
-                deepEqual(model.start, start);
-                deepEqual(model.end, end);
-            });
-
-            test("revert converted dates from startTimezone to UTC on cancel", function() {
-                var scheduler = setup({ timezone: "Etc/UTC" }),
-                    start = new Date(2013, 10, 10, 10),
-                    end = new Date(2013, 10, 10, 11),
-                    zone = "America/Los_Angeles";
-
-                scheduler.addEvent({ start: new Date(start), end: new Date(end), startTimezone: zone });
-                scheduler.saveEvent();
-
-                var model = scheduler.dataSource.data()[1];
-                scheduler.editEvent(model.uid);
-                scheduler.cancelEvent();
-
-                deepEqual(model.start, start);
-                deepEqual(model.end, end);
-            })
-
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
