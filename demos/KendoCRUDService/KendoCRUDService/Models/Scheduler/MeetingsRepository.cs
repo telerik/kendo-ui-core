@@ -61,8 +61,7 @@ namespace KendoCRUDService.Models
                     id = first.MeetingID;
                 }                               
 
-                meeting.MeetingID = id + 1;
-                meeting.ApplyTimezone();
+                meeting.MeetingID = id + 1;                
 
                 All().Insert(0, meeting);
             } 
@@ -73,9 +72,7 @@ namespace KendoCRUDService.Models
                     if (meeting.Atendees == null)
                     {
                         meeting.Atendees = new int[0];
-                    }
-
-                    meeting.ApplyTimezone();
+                    }                    
 
                     var entity = meeting.ToEntity();
 
@@ -114,9 +111,7 @@ namespace KendoCRUDService.Models
                     target.RoomID = meeting.RoomID;
                     target.RecurrenceException = meeting.RecurrenceException;
                     target.RecurrenceID = meeting.RecurrenceID;
-                    target.Atendees = meeting.Atendees;
-
-                    target.ApplyTimezone();
+                    target.Atendees = meeting.Atendees;                    
                 }
             }
             else
@@ -127,8 +122,7 @@ namespace KendoCRUDService.Models
                     {
                         meeting.Atendees = new int[0];
                     }
-
-                    meeting.ApplyTimezone();
+                    
                     var entity = meeting.ToEntity();
 
                     db.Meetings.Attach(entity);

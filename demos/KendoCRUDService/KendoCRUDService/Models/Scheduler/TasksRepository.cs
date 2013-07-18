@@ -60,16 +60,14 @@ namespace KendoCRUDService.Models
                     id = first.TaskID;
                 }
 
-                task.TaskID = id + 1;                
-                task.ApplyTimezone();
+                task.TaskID = id + 1;                                
 
                 All().Insert(0, task);
             }
             else
             {
                 using (var db = new SampleEntities())
-                {
-                    task.ApplyTimezone();
+                {                    
                     var entity = task.ToEntity();
 
                     db.Tasks.AddObject(entity);
@@ -96,17 +94,13 @@ namespace KendoCRUDService.Models
                     target.RecurrenceID = task.RecurrenceID;
                     target.OwnerID = task.OwnerID;
                     target.StartTimezone = task.StartTimezone;
-                    target.EndTimezone = task.EndTimezone;
-
-                    target.ApplyTimezone();
+                    target.EndTimezone = task.EndTimezone;                    
                 }
             }
             else
             {
                 using (var db = new SampleEntities())
                 {
-                    task.ApplyTimezone();
-
                     var entity = task.ToEntity();
                     db.Tasks.Attach(entity);
                     db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
