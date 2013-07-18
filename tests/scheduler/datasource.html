@@ -8,8 +8,10 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.timezones.min.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.timezones.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -20,7 +22,8 @@
         <ol id="qunit-tests"></ol>
         <script>
             var SchedulerDataSource = kendo.data.SchedulerDataSource,
-                SchedulerDataReader = kendo.data.SchedulerDataReader;
+                SchedulerDataReader = kendo.data.SchedulerDataReader,
+                SchedulerEvent = kendo.data.SchedulerEvent;
 
             module("SchedulerDataSource initialization", { });
 
@@ -41,7 +44,7 @@
             });
 
             test("setting isAllDay to true of an all day event doesn't change start and end", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 12:00 AM"),
                     end: new Date("2013/6/6 12:00 AM"),
                     isAllDay: true
@@ -54,7 +57,7 @@
             });
 
             test("setting isAllDay to false of a single day event doesn't change start and end", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 10:00 AM"),
                     end: new Date("2013/6/6 11:00 AM")
                 });
@@ -66,7 +69,7 @@
             });
 
             test("setting isAllDay of a multi day event to true sets start and end to 12:00 AM", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 8:30"),
                     end: new Date("2013/6/7 10:30")
                 });
@@ -78,7 +81,7 @@
             });
 
             test("setting isAllDay of a single day event to true sets start and end to 12:00 AM", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 8:30"),
                     end: new Date("2013/6/6 10:30")
                 });
@@ -90,7 +93,7 @@
             });
 
             test("setting isAllDay of a multi day event to false preserves the interval", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 12:00 AM"),
                     end: new Date("2013/6/7 12:00 AM"),
                     isAllDay: true
@@ -103,7 +106,7 @@
             });
 
             test("setting isAllDay of a single day event to false preserves the interval", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 12:00 AM"),
                     end: new Date("2013/6/6 12:00 AM"),
                     isAllDay: true
@@ -116,7 +119,7 @@
             });
 
             test("toggling isAllDay of a multi day all day event returns to original hours", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 12:00 AM"),
                     end: new Date("2013/6/7 12:00 AM"),
                     isAllDay: true
@@ -130,7 +133,7 @@
             });
 
             test("toggling isAllDay of a multi day event returns to original hours", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 10:00 AM"),
                     end: new Date("2013/6/7 11:00 AM")
                 });
@@ -143,7 +146,7 @@
             });
 
             test("toggling isAllDay of a multi day event which starts and ends at 12:00 AMreturns to original hours", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 12:00 AM"),
                     end: new Date("2013/6/7 12:00 AM")
                 });
@@ -156,7 +159,7 @@
             });
 
             test("toggling isAllDay of a single day all day event returns to original hours", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 12:00 AM"),
                     end: new Date("2013/6/6 12:00 AM"),
                     isAllDay: true
@@ -170,7 +173,7 @@
             });
 
             test("setting isAllDay of a single day event to true", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 12:00 AM"),
                     end: new Date("2013/6/6 12:00 AM")
                 });
@@ -182,7 +185,7 @@
             });
 
             test("toggling isAllDay of a single day event returns to original hours", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 10:00 AM"),
                     end: new Date("2013/6/6 11:00 AM")
                 });
@@ -195,7 +198,7 @@
             });
 
             test("toggling isAllDay of a single day event which starts and ends at 12:00 AM returns to original hours", function() {
-                var event = new kendo.data.SchedulerEvent({
+                var event = new SchedulerEvent({
                     start: new Date("2013/6/6 12:00 AM"),
                     end: new Date("2013/6/6 12:00 AM")
                 });
@@ -236,11 +239,11 @@
 
                 dataSource.read();
 
-                ok(dataSource.at(0) instanceof kendo.data.SchedulerEvent);
+                ok(dataSource.at(0) instanceof SchedulerEvent);
             });
 
             test("Existing SchedulerEvent instances are not re-wrapped", function() {
-                var event = new kendo.data.SchedulerEvent({ start: new Date(), end: new Date() });
+                var event = new SchedulerEvent({ start: new Date(), end: new Date() });
 
                 var dataSource = new kendo.data.SchedulerDataSource({
                     data: [event]
@@ -650,6 +653,270 @@
 
                 equal(dataReader.timezone, "my timezone");
             });
+
+            module("SchedulerDataSource expand events", { });
+
+            function createDataSource(data) {
+                var dataSource = SchedulerDataSource.create({
+                    data: data
+                });
+
+                dataSource.fetch();
+
+                return dataSource;
+            }
+
+            test("Scheduler expands recurring events in view", function() {
+                var dataSource = createDataSource([
+                    new SchedulerEvent({
+                        id: "id1",
+                        title: "Title",
+                        start: new Date(2013, 0, 1, 16, 30),
+                        end: new Date(2013, 0, 1, 17, 0),
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
+                    }),
+                    new SchedulerEvent({
+                        id: "id2",
+                        title: "Title",
+                        start: new Date(2013, 0, 1, 10, 30),
+                        end: new Date(2013, 0, 1, 11, 30),
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
+                    })
+                ]);
+
+                var events = dataSource.expand(new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
+
+                equal(events.length, 3);
+
+                equal(events[0].start.getTime(), +new Date(2013, 1, 1, 17, 40));
+                equal(events[0].end.getTime(), +new Date(2013, 1, 1, 18, 10));
+
+                equal(events[1].start.getTime(), +new Date(2013, 1, 1, 18, 40));
+                equal(events[1].end.getTime(), +new Date(2013, 1, 1, 19, 10));
+
+                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 10, 30));
+                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 11, 30));
+            });
+
+            test("Scheduler expands recurring events (origin event satisfies recurring rule)", function() {
+                var dataSource = createDataSource([
+                    new SchedulerEvent({
+                        id: "id1",
+                        title: "Title",
+                        start: new Date(2013, 0, 1, 16, 30),
+                        end: new Date(2013, 0, 1, 17, 0),
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=1,2;BYMONTHDAY=1, 29"
+                    })
+                ]);
+
+                var events = dataSource.expand(new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
+
+                equal(events.length, 3);
+
+                equal(events[0].start.getTime(), +new Date(2013, 0, 1, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 0, 1, 17, 00));
+
+                equal(events[1].start.getTime(), +new Date(2013, 0, 29, 16, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 0, 29, 17, 00));
+
+                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 16, 30));
+                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 17, 00));
+            });
+
+            test("Expand recurring events which are outside of period", function() {
+                var dataSource = createDataSource([new SchedulerEvent({
+                        id: 1,
+                        title: "Title",
+                        start: new Date(2012, 0, 1, 16, 30),
+                        end: new Date(2012, 0, 1, 17, 0),
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
+                    }),
+                    new SchedulerEvent({
+                        id: 2,
+                        title: "Title",
+                        start: new Date(2012, 0, 1, 10, 30),
+                        end: new Date(2012, 0, 1, 11, 30),
+                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
+                    })]);
+
+                var events = dataSource.expand(new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
+
+                equal(events.length, 3);
+                equal(events[0].recurrenceId, 1);
+                equal(events[1].recurrenceId, 1);
+                equal(events[2].recurrenceId, 2);
+
+                equal(events[0].start.getTime(), +new Date(2013, 1, 1, 17, 40));
+                equal(events[0].end.getTime(), +new Date(2013, 1, 1, 18, 10));
+
+                equal(events[1].start.getTime(), +new Date(2013, 1, 1, 18, 40));
+                equal(events[1].end.getTime(), +new Date(2013, 1, 1, 19, 10));
+
+                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 10, 30));
+                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 11, 30));
+            });
+
+            test("Scheduler expand method does not modify data if no recurring events", function() {
+                var dataSource = createDataSource([{
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 16, 30),
+                    end: new Date(2013, 0, 1, 17, 0)
+                },
+                {
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30),
+                    end: new Date(2013, 0, 1, 11, 30)
+                }]);
+
+                var events = dataSource.expand(new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
+
+                equal(events.length, 2);
+                ok(!events[0].recurrenceId);
+                ok(!events[1].recurrenceId);
+
+                equal(events[0].start.getTime(), +new Date(2013, 0, 1, 16, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 0, 1, 17, 0));
+
+                equal(events[1].start.getTime(), +new Date(2013, 0, 1, 10, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 0, 1, 11, 30));
+            });
+
+            test("Scheduler expand method returns recurring events which are outside of period", function() {
+                var dataSource = createDataSource([{
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 16, 30),
+                    end: new Date(2013, 0, 1, 17, 0)
+                },
+                {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2012, 0, 1, 10, 30),
+                    end: new Date(2012, 0, 1, 11, 30),
+                    recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
+                },
+                {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 3, 16, 30),
+                    end: new Date(2013, 0, 3, 17, 0)
+                }]);
+
+                var events = dataSource.expand(new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
+
+                equal(events.length, 3);
+                deepEqual(events[0].start, new Date(2013, 0, 1, 16, 30));
+                deepEqual(events[0].end, new Date(2013, 0, 1, 17, 0));
+
+                deepEqual(events[1].start, new Date(2013, 1, 1, 10, 30));
+                deepEqual(events[1].end, new Date(2013, 1, 1, 11, 30));
+
+                deepEqual(events[2].start, new Date(2013, 0, 3, 16, 30));
+                deepEqual(events[2].end, new Date(2013, 0, 3, 17, 0));
+            });
+
+            test("Scheduler expand method removes original event from series if it is part of exception", function() {
+                var expDate1 = new Date(2013, 0, 1, 10, 30),
+                    expDate2 = new Date(2013, 0, 2, 10, 30);
+
+                expDate1 = kendo.timezone.apply(expDate1, 0);
+                expDate2 = kendo.timezone.apply(expDate2, 0);
+
+                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";" +
+                                kendo.toString(expDate2, "yyyyMMddTHHmmssZ") + ";";
+
+                var dataSource = createDataSource([{
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30),
+                    end: new Date(2013, 0, 1, 11, 30),
+                    recurrenceRule: "FREQ=DAILY",
+                    recurrenceException: exception
+                }]);
+
+                events = dataSource.expand(new Date(2013, 0, 1), new Date(2013, 0, 3, 17));
+
+                equal(events.length, 1);
+                equal(events[0].start.getTime(), +new Date(2013, 0, 3, 10, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 0, 3, 11, 30));
+            });
+
+            test("Scheduler expand method doesn't remove original event if exception is not equal to start date", function() {
+                var expDate1 = new Date(2013, 0, 2, 10, 30);
+                expDate1 = kendo.timezone.apply(expDate1, 0);
+
+                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
+
+                var dataSource = createDataSource([{
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30),
+                    end: new Date(2013, 0, 1, 11, 30),
+                    recurrenceRule: "FREQ=DAILY",
+                    recurrenceException: exception
+                }]);
+
+                var events = dataSource.expand(new Date(2013, 0, 1), new Date(2013, 0, 3, 17));
+
+                equal(events.length, 2);
+                equal(events[0].start.getTime(), +new Date(2013, 0, 1, 10, 30));
+                equal(events[0].end.getTime(), +new Date(2013, 0, 1, 11, 30));
+
+                equal(events[1].start.getTime(), +new Date(2013, 0, 3, 10, 30));
+                equal(events[1].end.getTime(), +new Date(2013, 0, 3, 11, 30));
+            });
+
+            test("Scheduler expands an event with recurrence exception in America/Los_Angeles timezone", function() {
+                var start = new Date(2013, 0, 1, 0, 0), //"America/Los_Angeles"
+                    end = new Date(2013, 0, 2, 22, 0); //"America/Los_Angeles"
+
+                var expDate1 = kendo.timezone.convert(new Date(2013, 0, 2, 10, 30), "America/Los_Angeles", "Etc/UTC"); //make it UTC
+                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
+
+                var dataSource = createDataSource([{
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 0, 1, 10, 30), //"America/Los_Angeles"
+                    end: new Date(2013, 0, 1, 11, 30), //"America/Los_Angeles"
+                    recurrenceRule: "FREQ=DAILY;COUNT=2",
+                    recurrenceException: exception
+                }]);
+
+                dataSource.reader.timezone = "America/Los_Angeles";
+
+                equal(dataSource.expand(start, end).length, 1);
+            });
+
+            test("Scheduler expand method does not add recurring event outside of the period (no recurring)", function() {
+                var dataSource = createDataSource([new SchedulerEvent({
+                        id: 1,
+                        title: "Title",
+                        start: new Date(2012, 0, 1, 16, 30),
+                        end: new Date(2012, 0, 1, 17, 0)
+                    })]);
+
+                var events = dataSource.expand(new Date(2013, 1, 1), new Date(2013, 4, 31, 17));
+
+                equal(events.length, 1);
+            });
+
+            test("Scheduler expand method does not add recurring event outside of the period", function() {
+                var dataSource = createDataSource([new SchedulerEvent({
+                        id: 1,
+                        title: "Title",
+                        start: new Date(2013, 1, 1, 16, 30),
+                        end: new Date(2013, 1, 3, 17, 0),
+                        isAllDay: true,
+                        recurrenceRule: "FREQ=MONTHLY"
+                    })]);
+
+                var data = dataSource.expand(new Date(2013, 1, 2), new Date(2013, 4, 31, 17));
+                var view = dataSource.view();
+
+                deepEqual(data[0].start, view[0].start);
+                deepEqual(data[0].end, view[0].end);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

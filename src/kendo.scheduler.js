@@ -332,6 +332,17 @@ kendo_module({
                 modelBase: SchedulerEvent, model: SchedulerEvent } }, options));
 
             this.reader = new SchedulerDataReader(this.options.schema, this.reader);
+        },
+        expand: function(start, end) {
+            var data = this.view();
+
+            if (recurrence) {
+                data = recurrence.expandAll(data, start, end, this.reader.timezone);
+            } else {
+                //data = convertToPlainObjects(data);
+            }
+
+            return data;
         }
     });
 
