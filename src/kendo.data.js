@@ -1908,7 +1908,7 @@ kendo_module({
             if (isPlainObject(descriptor)) {
                 return descriptor.from || descriptor.field || name;
             }
-            return fields[name];
+            return fields[name] || name;
         }
         return name;
     }

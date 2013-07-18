@@ -576,6 +576,33 @@
                 dataSource.sort({ field: "bar", dir: "asc" });
             });
 
+            test("sort original field name is used if complex field", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.sort[0].field, "foo.bar");
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        model: {
+                            fields: {
+                                foo: { type: "object" }
+                            }
+                        }
+                    },
+                    serverSorting: true,
+                });
+
+                $.mockjax({
+                    url: "foo",
+                });
+
+                dataSource.sort({ field: "foo.bar", dir: "asc" });
+            });
 
             test("next method gets the subsequent page", function() {
                 var dataSource = new DataSource({
