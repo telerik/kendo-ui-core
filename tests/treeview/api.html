@@ -434,6 +434,43 @@
                 }, 200);
             });
 
+            asyncTest("append() to unfetched async parent calls callback", 2, function() {
+                createTreeView({
+                    dataSource: {
+                        data: [
+                            { text: "foo", hasChildren: true }
+                        ],
+                        schema: {
+                            model: {
+                                hasChildren: "hasChildren",
+                                children: {
+                                    transport: {
+                                        read: function(options) {
+                                            setTimeout(function() {
+                                                options.success([ { text: "bar", hasChildren: false } ]);
+                                            }, 100);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                var timeout = setTimeout(start, 1000);
+
+                treeviewObject.append(
+                    { text: "baz", hasChildren: false },
+                    treeview.find(".k-item"),
+                    function(node) {
+                        clearTimeout(timeout);
+                        start();
+                        equal(node[0], treeview.find(".k-item:last")[0]);
+                        equal(treeview.find(".k-item .k-item").length, 2);
+                    }
+                );
+            });
+
             test("detach() removes node and persists data", function() {
                 createTreeView([
                     { text: "foo" },

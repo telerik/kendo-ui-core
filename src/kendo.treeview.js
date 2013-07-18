@@ -1648,15 +1648,19 @@ kendo_module({
 
         insertBefore: insertAction(0),
 
-        append: function (nodeData, parentNode) {
+        append: function (nodeData, parentNode, success) {
             var that = this,
                 group = that.root;
+
+            success = success || $.noop;
 
             if (parentNode) {
                 group = subGroup(parentNode);
             }
 
             return that._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
+                var inserted;
+
                 function add() {
                     if (parentNode) {
                         that._expanded(parentNode, true);
@@ -1669,11 +1673,15 @@ kendo_module({
                 }
 
                 if (!dataSource.data()) {
-                    dataSource.one(CHANGE, add);
+                    dataSource.one(CHANGE, function() {
+                        success(add());
+                    });
 
                     return null;
                 } else {
-                    return add();
+                    inserted = add();
+                    success(inserted);
+                    return inserted;
                 }
             });
         },
@@ -1952,20 +1960,27 @@ kendo_module({
 
             that._draggable.dropped = true;
 
-            // perform reorder / move
-            if (dropPosition == "over") {
-                sourceNode = treeview.append(sourceNode, destinationNode);
-            } else if (dropPosition == "before") {
-                sourceNode = treeview.insertBefore(sourceNode, destinationNode);
-            } else if (dropPosition == "after") {
-                sourceNode = treeview.insertAfter(sourceNode, destinationNode);
+            function triggerDragEnd(sourceNode) {
+                treeview.trigger(DRAGEND, {
+                    sourceNode: sourceNode && sourceNode[0],
+                    destinationNode: destinationNode[0],
+                    dropPosition: dropPosition
+                });
             }
 
-            treeview.trigger(DRAGEND, {
-                sourceNode: sourceNode && sourceNode[0],
-                destinationNode: destinationNode[0],
-                dropPosition: dropPosition
-            });
+            // perform reorder / move
+            // different handling is necessary because append might be async in remote bound tree
+            if (dropPosition == "over") {
+                treeview.append(sourceNode, destinationNode, triggerDragEnd);
+            } else {
+                if (dropPosition == "before") {
+                    sourceNode = treeview.insertBefore(sourceNode, destinationNode);
+                } else if (dropPosition == "after") {
+                    sourceNode = treeview.insertAfter(sourceNode, destinationNode);
+                }
+
+                triggerDragEnd(sourceNode);
+            }
         },
 
         destroy: function() {

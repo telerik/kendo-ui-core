@@ -13,7 +13,7 @@
 
         <script>
             function removeTreeViews() {
-                $(".k-treeview").remove();
+                $(".k-treeview,.k-drag-clue").remove();
             }
 
             module("events", {
@@ -338,10 +338,43 @@
                    change: function() {
                        ok(true);
                    }
-                });
+               });
 
                treeview.find(".k-in").trigger("click");
            });
+
+           asyncTest("moving node to unfetched parent triggers dragend when the source node is available", 2, function () {
+               var timeout = setTimeout(start, 3000);
+               var calls = 0;
+
+               createTreeView({
+                   dragAndDrop: true,
+                   dataSource: {
+                       transport: {
+                           read: function(options) {
+                               calls++;
+                               if (calls == 1) {
+                                   options.success([ { text: "foo", hasChildren: true }, { text: "bar" } ]);
+                               } else {
+                                   setTimeout(function() {
+                                       options.success([ { text: "baz" } ]);
+                                   }, 10);
+                               }
+                           }
+                       }
+                   },
+                   dragend: function(e) {
+                       clearTimeout(timeout);
+                       start();
+
+                       ok(e.sourceNode);
+                       equal(treeviewObject.text(e.sourceNode), "bar");
+                   }
+               });
+
+               moveNode(treeviewObject, "bar", "foo");
+           });
+
         </script>
 
         <div id="qunit-fixture"> </div>
