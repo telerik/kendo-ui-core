@@ -469,8 +469,6 @@ kendo_module({
                 recurrence.options = that.options.messages.recurrence;
             }
 
-            that._modelDatesProxy = $.proxy(that._modelDates, that);
-
             that._selectable();
         },
 
@@ -1123,11 +1121,10 @@ kendo_module({
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
 
-                if (!model.isNew() && !that._dateChanged) {
+                if (!model.dirty) {
                     that._convertDates(model, "remove");
                 }
 
-                that._dateChanged = false;
                 that.dataSource.sync();
             }
         },
@@ -1147,7 +1144,6 @@ kendo_module({
                 delete that._endTime;
 
                 that._removeExceptionDate(model);
-                model.unbind("change", that._modelDatesProxy);
 
                 that.dataSource.cancelChanges(model);
 
@@ -1250,12 +1246,6 @@ kendo_module({
 
                 model._set("start", start);
                 model._set("end", end);
-            }
-        },
-
-        _modelDates: function(e) {
-            if (e.field === "start" || e.field === "end") {
-                this._dateChanged = true;
             }
         },
 
@@ -1448,7 +1438,6 @@ kendo_module({
 
             if (!model.isNew()) {
                 that._convertDates(model);
-                model.bind("change", that._modelDatesProxy);
             }
 
             that.editable = that._editContainer

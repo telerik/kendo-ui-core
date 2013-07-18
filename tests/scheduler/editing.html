@@ -1148,21 +1148,6 @@
                 deepEqual(model.end, end);
             });
 
-            test("DataSource only converts dates on saveEvent", function() {
-                var scheduler = setup({ timezone: "Etc/UTC" }),
-                    start = new Date(2013, 10, 10, 10),
-                    end = new Date(2013, 10, 10, 11),
-                    zone = "America/New_York";
-
-                scheduler.addEvent({ start: start, end: end, startTimezone: zone });
-                scheduler.saveEvent();
-
-                var model = scheduler.dataSource.data()[1];
-
-                deepEqual(model.start, timezone.convert(start, zone, "Etc/UTC"));
-                deepEqual(model.end, timezone.convert(end, zone, "Etc/UTC"));
-            });
-
             test("editEvent converts start/end event date UTC to endTimezone: Americ/New_York", function() {
                 var start = new Date(2013, 10, 10, 10),
                     end = new Date(2013, 10, 10, 11),
