@@ -411,12 +411,12 @@
                 equal(view.calls("render"), 1);
             });
 
-            test("renderEvent is called with events as plain objects", 1, function() {
+            test("renderEvent is called with events as SchedulerEvent", 1, function() {
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         title: "foo",
                         dateForTitle: $.noop,
                         render: function(events) {
-                            ok(!(events[0] instanceof kendo.data.SchedulerEvent));
+                            ok((events[0] instanceof kendo.data.SchedulerEvent));
                         },
                         renderLayout: function() {
                         },

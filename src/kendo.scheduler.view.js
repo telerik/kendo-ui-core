@@ -639,7 +639,7 @@ kendo_module({
 
     function groupEqFilter(value) {
         return function(item) {
-            if ($.isArray(item)) {
+            if ($.isArray(item) || item instanceof kendo.data.ObservableArray) {
                 for (var idx = 0; idx < item.length; idx++) {
                     if (item[idx] == value) {
                         return true;

@@ -816,48 +816,24 @@ kendo_module({
     }
 
     function expand(event, start, end, zone) {
-        var idField = event.idField,
-            eventEnd = event.end,
+        var eventEnd = event.end,
             eventStart = event.start,
             eventStartMS = eventStart.getTime(),
             rule = parseRule(event.recurrenceRule),
-            id, uid, recurrenceRule, recurrenceException,
             startTime, endTime, endDate,
             hours, minutes, seconds,
             durationMS, startPeriod,
-            first, count, freq,
             exceptionDates,
+            count, freq,
             current = 1,
             events = [],
             offset;
 
         exceptionDates = parseExceptions(event.recurrenceException, zone);
-
-        recurrenceException = event.recurrenceException;
-        recurrenceRule = event.recurrenceRule;
-        id = event[idField] || event.id;
-        uid = event.uid;
-
-        if (event.toJSON) {
-            event = event.toJSON();
-
-            delete event.recurrenceException;
-            delete event.recurrenceRule;
-            delete event[idField];
-            delete event.id;
-        }
-
         startPeriod = start = new Date(start);
         end = new Date(end);
 
         if (!rule) {
-            delete event.recurrenceId;
-
-            event.recurrenceException = recurrenceException;
-            event.recurrenceRule = recurrenceRule;
-            event.uid = uid;
-            event.id = id;
-
             return [event];
         }
 
@@ -909,9 +885,7 @@ kendo_module({
                 endTime = new Date(rule._startTime);
                 setTime(endTime, durationMS);
 
-                events.push($.extend({}, event, {
-                    uid: kendo.guid(),
-                    recurrenceId: id,
+                events.push(event.toOccurrence({
                     start: new Date(start),
                     startTime: new Date(startTime),
                     end: endDate,
@@ -926,16 +900,6 @@ kendo_module({
             current++;
             freq.next(start, rule);
             freq.limit(start, end, rule);
-        }
-
-        first = events[0];
-        if (first && first.start.getTime() === eventStartMS) {
-            delete first.recurrenceId;
-
-            first.recurrenceException = recurrenceException;
-            first.recurrenceRule = recurrenceRule;
-            first.uid = uid;
-            first.id = id;
         }
 
         if (rule.setPositions) {

@@ -26,6 +26,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         date = kendo.date,
+        MS_PER_DAY = date.MS_PER_DAY,
         getDate = date.getDate,
         recurrence = kendo.recurrence,
         keys = kendo.keys,
@@ -275,12 +276,47 @@ kendo_module({
             kendo.data.Model.fn.init.call(that, value);
         },
 
+        clone: function() {
+            var event = this.toJSON(),
+                uid = event.uid;
+
+            event = new SchedulerEvent(event);
+            event.uid = uid;
+
+            return event;
+        },
+
+        toOccurrence: function(options) {
+            var event = this.clone(),
+                start = event.start;
+
+            if (start.getTime() !== options.start.getTime() || start.getTime() !== options.startTime.getTime()) {
+                event.recurrenceId = event.id;
+                event.uid = kendo.guid();
+
+                delete event.recurrenceException;
+                delete event.recurrenceRule;
+                delete event[event.idField];
+                delete event.id;
+
+                event = $.extend(event, options);
+            }
+
+            return event;
+        },
+
+        expand: function(start, end, zone) {
+            var event = this.clone();
+            return recurrence ? recurrence.expand(event, start, end, zone) : [event];
+        },
+
         toJSON: function() {
             var obj = kendo.data.Model.fn.toJSON.call(this);
             obj.uid = this.uid;
 
             return obj;
         },
+
         set: function(key, value) {
             var isAllDay = this.isAllDay || false;
 
@@ -292,7 +328,7 @@ kendo_module({
                 var milliseconds = kendo.date.getMilliseconds(end);
 
                 if (milliseconds === 0 && value) {
-                    milliseconds = kendo.date.MS_PER_DAY;
+                    milliseconds = MS_PER_DAY;
                 }
 
                 this.set("start", start);
@@ -304,7 +340,7 @@ kendo_module({
                         end = start;
                     }
                 } else {
-                    kendo.date.setTime(end, kendo.date.MS_PER_DAY - milliseconds);
+                    kendo.date.setTime(end, MS_PER_DAY - milliseconds);
                 }
 
                 this.set("end", end);
@@ -334,17 +370,51 @@ kendo_module({
             this.reader = new SchedulerDataReader(this.options.schema, this.reader);
         },
         expand: function(start, end) {
-            var data = this.view();
+            var data = this.view(),
+                filter = {};
 
-            if (recurrence) {
-                data = recurrence.expandAll(data, start, end, this.reader.timezone);
-            } else {
-                //data = convertToPlainObjects(data);
+            if (start && end) {
+                end = new Date(end.getTime() + MS_PER_DAY - 1);
+
+                filter = {
+                    logic: "or",
+                    filters: [
+                        {
+                            logic: "and",
+                            filters: [
+                                { field: "start", operator: "gte", value: start },
+                                { field: "end", operator: "gte", value: start },
+                                { field: "start", operator: "lte", value: end }
+                            ]
+                        },
+                        {
+                            logic: "and",
+                            filters: [
+                                { field: "start", operator: "lte", value: new Date(start.getTime() + MS_PER_DAY - 1) },
+                                { field: "end", operator: "gte", value: start }
+                            ]
+                        }
+                    ]
+                };
+
+                data = new kendo.data.Query(expandAll(data, start, end, this.reader.timezone)).filter(filter).toArray();
             }
 
             return data;
         }
     });
+
+    function expandAll(events, start, end, zone) {
+        var length = events.length,
+            data = [],
+            idx = 0;
+
+        for (; idx < length; idx++) {
+            data = data.concat(events[idx].expand(start, end, zone));
+        }
+
+        return data;
+    }
 
     SchedulerDataSource.create = function(options) {
         options = options && options.push ? { data: options } : options;
@@ -2081,39 +2151,8 @@ kendo_module({
             return data;
         },
 
-        _createFilter: function(startDate, endDate) {
-            var MS_PER_DAY = kendo.date.MS_PER_DAY,
-                filter = {};
-
-            if (startDate && endDate) {
-                filter = {
-                    logic: "or",
-                    filters: [
-                        {
-                            logic: "and",
-                            filters: [
-                                { field: "start", operator: "gte", value: startDate },
-                                { field: "end", operator: "gte", value: startDate },
-                                { field: "start", operator: "lte", value: new Date(endDate.getTime() + MS_PER_DAY - 1) }
-                            ]
-                        },
-                        {
-                            logic: "and",
-                            filters: [
-                                { field: "start", operator: "lte", value: new Date(startDate.getTime() + MS_PER_DAY - 1) },
-                                { field: "end", operator: "gte", value: startDate }
-                            ]
-                        }
-                    ]
-                };
-            }
-
-            return filter;
-        },
-
         refresh: function(e) {
-            var view = this.view(),
-                data = this.dataSource.view();
+            var view = this.view();
 
             if (e && e.action === "itemchange" && this.editable) { // skip rebinding if editing is in progress
                 return;
@@ -2123,10 +2162,9 @@ kendo_module({
 
             this._destroyEditable();
 
-            this._data = data = this._expandEvents(data, view);
-            data = new kendo.data.Query(data).filter(this._createFilter(view.startDate(), view.endDate())).toArray();
+            this._data = this.dataSource.expand(view.startDate(), view.endDate());
 
-            view.render(data);
+            view.render(this._data);
 
             this.trigger("dataBound");
         }
