@@ -621,16 +621,16 @@ kendo_module({
             }
 
             for (rowIndex = 0; rowIndex < allDayRows.length; rowIndex++) {
-                var groupIndex = rowIndex;
-
-                if (!isVertical) {
-                    groupIndex = this._groupHorizontalIndex(cellIndex);
-                }
-                var group = this.groups[groupIndex];
 
                 tableCells = allDayRows[rowIndex].children;
 
                 for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
+                    var groupIndex = rowIndex;
+
+                    if (!isVertical) {
+                        groupIndex = this._groupHorizontalIndex(cellIndex);
+                    }
+                    var group = this.groups[groupIndex];
                     td = tableCells[cellIndex];
 
                     range = this._rangeByIndex(
@@ -642,7 +642,7 @@ kendo_module({
                     var collection = group.getDaySlotCollection();
 
                     collection.addSlot(new kendo.ui.scheduler.DaySlot( {
-                            offsetTop: allDayRows.length > 1 ? td.offsetTop : td.parentNode.parentNode.parentNode.offsetTop,
+                            offsetTop: td.offsetTop,
                             offsetLeft: td.offsetLeft,
                             clientHeight: td.clientHeight,
                             offsetHeight: td.offsetHeight,
@@ -1605,15 +1605,11 @@ kendo_module({
                 var slots;
                 var cellIndex;
 
-                for (var rowIndex = 0; rowIndex < this._rows.length; rowIndex++) {
-                    slots = this._rows[rowIndex].slots;
-
-                    for (cellIndex = 0; cellIndex < slots.length; cellIndex++) {
-                        slots[cellIndex].clientHeight = allDaySlots[daySlotIndex++].clientHeight;
-                    }
+                for (var groupIndex = 0; groupIndex < this.groups.length; groupIndex++) {
+                    this.groups[groupIndex].refresh();
                 }
 
-                this._updateSlotsPosition(offset);
+                //this._updateSlotsPosition(offset);
             }
         },
 
@@ -1661,14 +1657,13 @@ kendo_module({
         },
 
         _renderEvents: function(events, groupIndex) {
-            var allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap");
+            var allDayEventContainer = this.datesHeader.find(".k-scheduler-header-wrap > div");
             var timeOffset = 0;
             var dateOffset = 0;
             var event;
 
             var idx;
             var length;
-            var isVertical = this._groupOrientation() === "vertical";
 
             var group = this.groups[groupIndex];
 
@@ -1680,7 +1675,7 @@ kendo_module({
                     var dateSlotIndex = this._dateSlotIndex(event.start);
                     var endDateSlotIndex = this._dateSlotIndex(event.end, !event.isAllDay);
                     var isMultiDayEvent = event.isAllDay || event.end.getTime() - event.start.getTime() >= MS_PER_DAY;
-                    var container = isMultiDayEvent ? allDayEventContainer : this.content;
+                    var container = isMultiDayEvent && !this._isVerticallyGrouped() ? allDayEventContainer : this.content;
                     var element;
 
                     if (!isMultiDayEvent) {

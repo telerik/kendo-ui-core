@@ -55,6 +55,14 @@ kendo_module({
                '</table>';
     }
 
+    function allDayTable(tableRows, className) {
+        if (!tableRows.length) {
+            return "";
+        }
+
+        return "<div style='position:relative'>" + table(tableRows, className) + "</div>";
+    }
+
     function timesHeader(columnLevelCount, allDaySlot, rowCount) {
         var tableRows = [];
 
@@ -108,7 +116,7 @@ kendo_module({
             '<div class="k-scheduler-header k-state-default">' +
                 '<div class="k-scheduler-header-wrap">' +
                     table(dateTableRows) +
-                    table(allDayTableRows, "k-scheduler-header-all-day") +
+                    allDayTable(allDayTableRows, "k-scheduler-header-all-day") +
                 '</div>' +
             '</div>'
         );
@@ -172,6 +180,14 @@ kendo_module({
 
         addTimeSlotCollection: function(collection) {
             this._timeSlotCollections.push(collection);
+        },
+
+        refresh: function() {
+            this._daySlotCollection.refresh();
+
+            for (var collectionIndex = 0; collectionIndex < this._timeSlotCollections.length; collectionIndex++) {
+                this._timeSlotCollections[collectionIndex].refresh();
+            }
         },
 
         slotRanges: function(event) {
@@ -351,6 +367,19 @@ kendo_module({
             this._slots = [];
             this._events = [];
         },
+        refresh: function() {
+            for (var slotIndex = 0; slotIndex < this._slots.length; slotIndex++) {
+                this._slots[slotIndex].refresh();
+            }
+
+            for (var eventIndex = 0; eventIndex < this._events.length; eventIndex++) {
+                var event = this._events[eventIndex];
+
+                event.element.css({
+                    top: this._slots[event.start].offsetTop
+                });
+            }
+        },
         events: function() {
             return this._events;
         },
@@ -374,6 +403,9 @@ kendo_module({
         },
         collectionIndex: function() {
             return this.columnIndex;
+        },
+        refresh: function() {
+            this.offsetTop = this.element.offsetTop;
         }
     });
 
@@ -383,6 +415,10 @@ kendo_module({
         },
         collectionIndex: function() {
             return 0;
+        },
+        refresh: function() {
+            this.clientHeight = this.element.clientHeight;
+            this.offsetTop = this.element.offsetTop;
         }
     });
 
