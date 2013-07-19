@@ -914,6 +914,7 @@ kendo_module({
        _groups: function() {
             var groupCount = this._groupCount();
             var columnCount =  NUMBER_OF_COLUMNS;
+            var rowCount =  NUMBER_OF_ROWS;
             var that = this;
 
             var groups = [];
@@ -940,15 +941,26 @@ kendo_module({
 
             for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
                 var cellCount = 0;
+                var rowMultiplier = 0;
 
-                for (var rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
+                if (this._isVerticallyGrouped()) {
+                    rowMultiplier = groupIndex;
+                }
+
+                for (var rowIndex = rowMultiplier*rowCount; rowIndex < (rowMultiplier+1) *rowCount; rowIndex++) {
                     var collection = new kendo.ui.scheduler.SlotCollection();
 
-                    groups[groupIndex].addDaySlotCollection(collection);
+                    var group = groups[groupIndex];
+                    group.addDaySlotCollection(collection);
 
                     var cells = tableRows[rowIndex].children;
+                    var cellMultiplier = 0;
 
-                    for (var cellIndex = groupIndex * columnCount; cellIndex < (groupIndex + 1) * columnCount; cellIndex++) {
+                    if (!this._isVerticallyGrouped()) {
+                        cellMultiplier = groupIndex;
+                    }
+
+                    for (var cellIndex = cellMultiplier * columnCount; cellIndex < (cellMultiplier + 1) * columnCount; cellIndex++) {
                         var cell = cells[cellIndex];
 
                         var clientHeight = cell.clientHeight;
@@ -972,7 +984,7 @@ kendo_module({
                            isAllDay: true,
                            index: collection.count(),
                            groupIndex: groupIndex,
-                           columnIndex: rowIndex
+                           columnIndex: group.daySlotCollectionCount() - 1
                         }));
                     }
                 }

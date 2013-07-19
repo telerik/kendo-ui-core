@@ -178,6 +178,14 @@ kendo_module({
             $.extend(this, options);
         },
 
+        timeSlotCollectionCount: function() {
+            return this._timeSlotCollections.length;
+        },
+
+        daySlotCollectionCount: function() {
+            return this._daySlotCollections.length;
+        },
+
         addTimeSlotCollection: function(collection) {
             this._timeSlotCollections.push(collection);
         },
