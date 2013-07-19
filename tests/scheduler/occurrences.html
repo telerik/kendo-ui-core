@@ -412,7 +412,7 @@
                 equal(events[0].end.getTime(), +new Date(2000, 10, 10, 17, 0));
             });
 
-            test("DAILY occurrences method returns empty array if not valid recurrence", function() {
+            test("DAILY occurrences method returns only the event if not valid recurrence", function() {
                 var schedulerEvent = {
                     uid: "id",
                     start: new Date(2000, 10, 10, 16, 30),
@@ -422,10 +422,10 @@
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
 
-                equal(events.length, 0);
+                equal(events.length, 1);
             });
 
-            test("DAILY occurrences method returns empty array if range is before the event", function() {
+            test("DAILY occurrences method returns and empty array if range is before the event", function() {
                 var schedulerEvent = {
                     uid: "id",
                     title: "Title",
@@ -1148,7 +1148,7 @@
                 equal(events.length, 2);
             });
 
-            test("WEEKLY occurrences method returns empty array if no events", function() {
+            test("WEEKLY occurrences method returns ", function() {
                 var schedulerEvent = {
                     uid: "id",
                     title: "Title",
@@ -1919,6 +1919,32 @@
 
             module("Exception recurring dates");
 
+            test("expand method should return the event if no recurrenceRule", function() {
+                var schedulerEvent = {
+                    id: 1,
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2012, 2, 31, 0, 0),
+                    end: new Date(2012, 2, 31, 1, 0)
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2014, 10, 10));
+
+                equal(events.length, 1);
+                equal(events[0].id, schedulerEvent.id);
+            });
+
+            /*test("expand method should return a clone of the head event", function() {
+                var schedulerEvent = {
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2012, 2, 31, 0, 0),
+                    end: new Date(2012, 2, 31, 1, 0)
+                }
+
+                var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2014, 10, 10));
+            });*/
+
             test("Remove event which exist in RecurrenceException", function() {
                 var expDate1 = new Date(2013, 0, 1, 10, 30),
                     expDate2 = new Date(2013, 0, 3, 10, 30);
@@ -1970,7 +1996,7 @@
                 ok(!events[0].toJSON);
             });
 
-            test("ExpandAll method strips SchedulerEvent instances", function() {
+            /*test("ExpandAll method strips SchedulerEvent instances", function() {
                 var start = new Date(2013, 0, 1, 0, 0),
                     end = new Date(2013, 0, 2, 22, 0);
 
@@ -1988,7 +2014,7 @@
 
                 ok(!events[0].toJSON);
                 ok(events[0].id);
-            });
+            });*/
 
         </script>
     </body>

@@ -850,8 +850,15 @@ kendo_module({
         startPeriod = start = new Date(start);
         end = new Date(end);
 
-        if (!rule || event.start > end) {
-            return events;
+        if (!rule) {
+            delete event.recurrenceId;
+
+            event.recurrenceException = recurrenceException;
+            event.recurrenceRule = recurrenceRule;
+            event.uid = uid;
+            event.id = id;
+
+            return [event];
         }
 
         freq = frequencies[rule.freq];
@@ -938,31 +945,7 @@ kendo_module({
         return events;
     }
 
-    function expandAll(events, start, end, zone) {
-        var length = events.length,
-            idx = 0, event, result,
-            data = [],
-            id;
 
-        for (; idx < length; idx++) {
-            event = events[idx];
-            result = expand(event, start, end, zone);
-
-            if (!event.recurrenceRule) {
-                if (event.toJSON) {
-                    id = event.id;
-                    event = event.toJSON();
-                    event.id = id;
-                }
-
-                data.push(event);
-            } else {
-                data = data.concat(result);
-            }
-        }
-
-        return data;
-    }
 
     function parseRule(rule, zone) {
         var instance = {},
@@ -1140,7 +1123,6 @@ kendo_module({
             serialize: serialize
         },
         expand: expand,
-        expandAll: expandAll,
         dayInYear: dayInYear,
         weekInYear: weekInYear,
         weekInMonth: weekInMonth,
