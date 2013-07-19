@@ -199,11 +199,18 @@ kendo_module({
         slotRanges: function(event) {
             var ranges = [];
 
-            var multiday = event.isAllDay || event.end.getTime() - event.start.getTime() >= kendo.date.MS_PER_DAY;
+            var multiday = this.multiday(event);
 
             var startSlot = this._startSlot(event.start, multiday);
 
             var endSlot = this._endSlot(event.end, multiday);
+
+            if (multiday) {
+                if (kendo.date.getMilliseconds(event.end) === 0 && event.end.getTime() != event.start.getTime() && !event.isAllDay) {
+                    var collection = this._collection(startSlot.collectionIndex(), multiday);
+                    endSlot = collection.at(endSlot.index - 1);
+                }
+            }
 
             if (!startSlot || !endSlot) {
                 return ranges;
@@ -378,6 +385,9 @@ kendo_module({
                 });
             }
         },
+        count: function() {
+            return this._slots.length;
+        },
         events: function() {
             return this._events;
         },
@@ -412,7 +422,7 @@ kendo_module({
             $.extend(this, options);
         },
         collectionIndex: function() {
-            return 0;
+            return this.columnIndex;
         },
         refresh: function() {
             this.clientHeight = this.element.clientHeight;

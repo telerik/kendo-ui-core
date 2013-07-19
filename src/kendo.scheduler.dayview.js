@@ -530,6 +530,9 @@ kendo_module({
             for (var idx = 0; idx < groupCount; idx++) {
 
                 var view = new ui.scheduler.ResourceView({
+                    multiday: function(event) {
+                        return event.isAllDay || event.end.getTime() - event.start.getTime() >= kendo.date.MS_PER_DAY;
+                    },
                     collectionIndex: $.proxy(this._collectionIndex, this),
                     slotIndex: $.proxy(this._slotIndex, this)
                 });
@@ -655,7 +658,7 @@ kendo_module({
                             start: range.start,
                             end: range.end,
                             index: this._adjustColumnIndex(cellIndex),
-                            columnIndex: this._adjustColumnIndex(cellIndex)
+                            columnIndex: 0
                         }
                     ));
                 }
