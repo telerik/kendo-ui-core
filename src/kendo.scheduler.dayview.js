@@ -491,10 +491,113 @@ kendo_module({
            }
        },
 
-       _groups: function() {
+       _groupCount: function() {
+            var resources = this.groupedResources;
 
-       },
-       _slots: function() {
+            if (resources.length) {
+                if (this._groupOrientation() === "vertical") {
+                    return this._rowCountForLevel(resources.length - 1);
+                } else {
+                    return this._columnCountForLevel(resources.length) / this._columnOffsetForResource(resources.length);
+                }
+            }
+            return 1;
+        },
+
+        _columnCountInResourceView: function() {
+            var resources = this.groupedResources;
+
+            if (!resources.length || this._isVerticallyGrouped()) {
+                return this._columnCountForLevel(0);
+            }
+
+            if (this._isGroupedByDate()) {
+                return this._columnCountForLevel(resources.length)/this._columnCountForLevel(0);
+            }
+
+            return this._columnOffsetForResource(resources.length);
+        },
+
+        _groups: function() {
+            var groupCount = this._groupCount();
+            var columnCount = this._columnCountInResourceView();
+
+            var groups = [];
+
+            for (var idx = 0; idx < groupCount; idx++) {
+                var view = new ui.scheduler.ResourceView();
+
+
+                for (var j = 0; j < columnCount; j++) {
+                    view.addCollection(new ui.scheduler.SlotCollection());
+                }
+
+                groups.push(view);
+            }
+
+            this.groups = groups;
+
+            var tableRows = this.content[0].getElementsByTagName("tr");
+            var tableCells;
+            var cellIndex;
+            var td;
+            var range;
+            var cell;
+            var allDayRowCount = 0;
+            var visibleAllDayRowCount = 0;
+            var column;
+            var isVertical = this._isVerticallyGrouped();
+
+            for (var rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
+                var tr = tableRows[rowIndex];
+
+                if (tr.className && tr.className.indexOf("k-scheduler-header-all-day") > -1) {
+                    visibleAllDayRowCount++;
+                    continue;
+                }
+
+                tableCells = tr.children;
+
+                for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
+                    td = tableCells[cellIndex];
+
+                    var groupIndex = this._groupHorizontalIndex(cellIndex);
+
+                    if (isVertical) {
+                        groupIndex = this._groupVerticalIndex(rowIndex - visibleAllDayRowCount);
+                    }
+
+                    var group = this.groups[groupIndex];
+
+                    range = this._rangeByIndex(
+                        this._adjustSlotIndex(rowIndex - visibleAllDayRowCount),
+                        this._adjustColumnIndex(cellIndex),
+                        this._adjustSlotIndex(tableRows.length - 1 - allDayRowCount)
+                    );
+
+                    column = group._collections[this._adjustColumnIndex(cellIndex)];
+
+                    column.offsetLeft = td.offsetLeft;
+                    column.clientWidth = td.clientWidth;
+
+                    column.addSlot(new ui.scheduler.TimeSlot({
+                        offsetTop: td.offsetTop,
+                        offsetLeft: td.offsetLeft,
+                        clientHeight: td.clientHeight,
+                        offsetHeight: td.offsetHeight,
+                        clientWidth: td.clientWidth,
+                        offsetWidth: td.offsetWidth,
+                        element: td,
+                        start: range.start,
+                        end: range.end,
+                        index: column._slots.length,
+                        columnIndex: this._adjustColumnIndex(cellIndex)
+                    }));
+                }
+            }
+        },
+
+        _slots: function() {
             var tableRows = this.content[0].getElementsByTagName("tr");
 
             var columnCount = tableRows[0].children.length;
@@ -1111,13 +1214,16 @@ kendo_module({
         },
 
         _adjustColumnIndex: function(index) {
-            var columnCount = this._columnCountInGroup();
+            if (this.groupedResources.length) {
+                var columnCount = this._columnCountInGroup();
 
-            if (this._isGroupedByDate()) {
-                return Math.floor(index/columnCount);
+                if (this._isGroupedByDate()) {
+                    return Math.floor(index/columnCount);
+                }
+
+                return index - columnCount*Math.floor(index/columnCount);
             }
-
-            return index - columnCount*Math.floor(index/columnCount);
+            return index;
         },
 
         _columnCountInGroup: function() {

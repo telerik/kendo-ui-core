@@ -183,7 +183,8 @@ kendo_module({
     });
 
     kendo.ui.scheduler.TimeSlot = kendo.Class.extend({
-        init: function() {
+        init: function(options) {
+            $.extend(this, options);
         }
     });
 
