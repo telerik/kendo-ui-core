@@ -58,6 +58,19 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Overrides the category axis type.
+        /// </summary>
+        /// <param name="type">
+        /// The axis type. The default is determined by the category items type.
+        /// </param>
+        public ChartCategoryAxisBuilder<TModel> Type(ChartCategoryAxisType type)
+        {
+            Axis.Type = type;
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines categories.
         /// </summary>
         /// <param name="categories">

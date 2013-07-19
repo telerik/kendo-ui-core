@@ -155,6 +155,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Type_should_set_type_text()
+        {
+            builder.Type(ChartCategoryAxisType.Category);
+            axis.Type.ShouldEqual(ChartCategoryAxisType.Category);
+        }
+
+        [Fact]
+        public void Type_should_return_builder()
+        {
+            builder.Type(ChartCategoryAxisType.Category).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Color_should_set_color()
         {
             builder.Color("#f00");

@@ -268,6 +268,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void WeekStartDay_should_set_weekStartDay()
+        {
+            builder.WeekStartDay(DayOfWeek.Monday);
+            axis.WeekStartDay.ShouldEqual(DayOfWeek.Monday);
+        }
+
+        [Fact]
+        public void WeekStartDay_should_return_builder()
+        {
+            builder.WeekStartDay(DayOfWeek.Monday).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Justify_should_set_justified()
         {
             builder.Justify(false);

@@ -56,6 +56,20 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_serialize_type()
+        {
+            axisMock.SetupGet(a => a.Type).Returns(ChartCategoryAxisType.Category);
+            serializer.Serialize()["type"].ShouldEqual("category");
+        }
+
+        [Fact]
+        public void Should_not_serialize_type_if_not_set()
+        {
+            axisMock.SetupGet(a => a.Type).Returns((ChartCategoryAxisType?)null);
+            serializer.Serialize().ContainsKey("type").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Should_serialize_field()
         {
             axisMock.SetupGet(a => a.Member).Returns("RepName");
@@ -168,7 +182,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             axisMock.SetupGet(a => a.Type).Returns(ChartCategoryAxisType.Date);
 
-            serializer.Serialize()["type"].ShouldEqual("Date");
+            serializer.Serialize()["type"].ShouldEqual("date");
         }
 
         [Fact]
@@ -239,6 +253,20 @@ namespace Kendo.Mvc.UI.Tests
         {
             axisMock.SetupGet(a => a.RoundToBaseUnit).Returns((bool?)null);
             serializer.Serialize().ContainsKey("roundToBaseUnit").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_weekStartDay()
+        {
+            axisMock.SetupGet(a => a.WeekStartDay).Returns(DayOfWeek.Monday);
+            serializer.Serialize()["weekStartDay"].ShouldEqual(1);
+        }
+
+        [Fact]
+        public void Should_not_serialize_weekStartDay_if_not_set()
+        {
+            axisMock.SetupGet(a => a.WeekStartDay).Returns((DayOfWeek?)null);
+            serializer.Serialize().ContainsKey("weekStartDay").ShouldBeFalse();
         }
 
         [Fact]
