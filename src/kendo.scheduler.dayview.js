@@ -530,12 +530,12 @@ kendo_module({
             for (var idx = 0; idx < groupCount; idx++) {
 
                 var view = new ui.scheduler.ResourceView({
-                    dateIndex: $.proxy(this._dateSlotIndex, this),
-                    timeIndex: $.proxy(this._timeSlotIndex, this)
+                    collectionIndex: $.proxy(this._dateSlotIndex, this),
+                    slotIndex: $.proxy(this._timeSlotIndex, this)
                 });
 
                 for (var j = 0; j < columnCount; j++) {
-                    view.addCollection(new ui.scheduler.SlotCollection());
+                    view.addTimeSlotCollection(new ui.scheduler.SlotCollection());
                 }
 
                 groups.push(view);
@@ -544,12 +544,22 @@ kendo_module({
             this.groups = groups;
 
             var tableRows = this.content[0].getElementsByTagName("tr");
+
+            var allDaySelector = ".k-scheduler-header-all-day tr";
+
+            if (this._isVerticallyGrouped()) {
+               allDaySelector = ".k-scheduler-header-all-day";
+            }
+
+            var allDayRows = this.element.find(allDaySelector);
+
+            var allDayRowCount = this._isVerticallyGrouped() ? allDayRows.length : 0;
+
             var tableCells;
             var cellIndex;
             var td;
             var range;
             var cell;
-            var allDayRowCount = 0;
             var visibleAllDayRowCount = 0;
             var column;
             var isVertical = this._isVerticallyGrouped();
@@ -599,6 +609,53 @@ kendo_module({
                         index: column._slots.length,
                         columnIndex: this._adjustColumnIndex(cellIndex)
                     }));
+                }
+            }
+
+            var rows = [];
+            var allDayRows = this.element.find(allDaySelector);
+
+            var rowsInGroup = 0;
+            if (this._isVerticallyGrouped()) {
+                rowsInGroup = this._rowCountInGroup();
+            }
+
+            for (rowIndex = 0; rowIndex < allDayRows.length; rowIndex++) {
+                var groupIndex = rowIndex;
+
+                if (!isVertical) {
+                    groupIndex = this._groupHorizontalIndex(cellIndex);
+                }
+                var group = this.groups[groupIndex];
+
+                tableCells = allDayRows[rowIndex].children;
+
+                for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
+                    td = tableCells[cellIndex];
+
+                    range = this._rangeByIndex(
+                        this._adjustSlotIndex(rowIndex),
+                        this._adjustColumnIndex(cellIndex),
+                        this._adjustSlotIndex(allDayRows.length)
+                    );
+
+                    var collection = group.getDaySlotCollection();
+
+                    collection.addSlot(new kendo.ui.scheduler.DaySlot( {
+                            offsetTop: allDayRows.length > 1 ? td.offsetTop : td.parentNode.parentNode.parentNode.offsetTop,
+                            offsetLeft: td.offsetLeft,
+                            clientHeight: td.clientHeight,
+                            offsetHeight: td.offsetHeight,
+                            offsetWidth: td.offsetWidth,
+                            clientWidth: td.clientWidth,
+                            element: td,
+                            isAllDay: true,
+                            start: range.start,
+                            end: range.end,
+                            index: this._adjustColumnIndex(cellIndex),
+                            columnIndex: this._adjustColumnIndex(cellIndex)
+                        }
+                    ));
                 }
             }
         },
@@ -1325,22 +1382,28 @@ kendo_module({
             return result;
         },
 
-        _positionAllDayEvent: function(row, element, startIndex, endIndex) {
-            var dateSlot = row.slots[startIndex];
-            var slotWidth = this._calculateAllDayEventWidth(row.slots, startIndex, endIndex);
-            var allDayEvents = SchedulerView.collidingHorizontallyEvents(row.events, startIndex, endIndex);
+        _positionAllDayEvent: function(element, slotRange) {
+            var slotWidth = slotRange.innerWidth();
+            var startIndex = slotRange.start.index;
+            var endIndex = slotRange.end.index;
+
+            var allDayEvents = SchedulerView.collidingHorizontallyEvents(slotRange.events(), startIndex, endIndex);
+
             var currentColumnCount = this._headerColumnCount || 0;
+
             var leftOffset = 2;
+
             var rightOffset = startIndex !== endIndex ? 5 : 4;
+
             var eventHeight = this._allDayHeaderHeight;
 
             element
                 .css({
-                    left: dateSlot.offsetLeft + leftOffset,
+                    left: slotRange.start.offsetLeft + leftOffset,
                     width: slotWidth - rightOffset
                 });
 
-            row.events.push({ start: startIndex, end: endIndex, element: element });
+            slotRange.addEvent({ start: startIndex, end: endIndex, element: element });
 
             allDayEvents.push({ start: startIndex, end: endIndex, element: element });
 
@@ -1351,7 +1414,7 @@ kendo_module({
                 this._headerColumnCount = rows.length;
             }
 
-            var top = dateSlot.offsetTop;
+            var top = slotRange.start.offsetTop;
 
             for (var idx = 0, length = rows.length; idx < length; idx++) {
                 var rowEvents = rows[idx].events;
@@ -1663,17 +1726,11 @@ kendo_module({
                         }
 
                    } else if (this.options.allDaySlot) {
-                        continue;
-                       if (dateSlotIndex < 0) {
-                           dateSlotIndex = 0;
-                       }
-
-                       if (endDateSlotIndex < 0) {
-                           endDateSlotIndex = (this.groupedResources.length && !isVertical ? this._columnCountInGroup() : this._rows[0].slots.length) - 1;
-                       }
+                       var ranges = group.slotRanges(event);
 
                        element = this._createEventElement(event, !isMultiDayEvent);
-                       this._positionAllDayEvent(this._rows[groupIdx], element, dateSlotIndex + dateOffset, endDateSlotIndex + dateOffset);
+
+                       this._positionAllDayEvent(element, ranges[0]);
 
                        element.appendTo(container);
                     }

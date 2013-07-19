@@ -166,24 +166,29 @@ kendo_module({
     kendo.ui.scheduler.ResourceView = kendo.Class.extend({
         init: function(options) {
             this._timeSlotCollections = [];
+            this._daySlotCollection = new kendo.ui.scheduler.SlotCollection();
             $.extend(this, options);
         },
 
-        addCollection: function(collection) {
+        addTimeSlotCollection: function(collection) {
             this._timeSlotCollections.push(collection);
         },
 
         slotRanges: function(event) {
             var ranges = [];
-            var startSlot = this._startSlot(event.start);
-            var endSlot = this._endSlot(event.end);
+
+            var multiday = event.isAllDay || event.end.getTime() - event.start.getTime() >= kendo.date.MS_PER_DAY;
+
+            var startSlot = this._startSlot(event.start, multiday);
+
+            var endSlot = this._endSlot(event.end, multiday);
 
             if (!startSlot || !endSlot) {
                 return ranges;
             }
 
-            for (var columnIndex = startSlot.columnIndex; columnIndex <= endSlot.columnIndex; columnIndex++) {
-                var collection = this._timeSlotCollections[columnIndex];
+            for (var columnIndex = startSlot.collectionIndex(); columnIndex <= endSlot.collectionIndex(); columnIndex++) {
+                var collection = this._collection(columnIndex, multiday);
 
                 var first = collection.first();
                 var last = collection.last();
@@ -196,26 +201,49 @@ kendo_module({
                     last = endSlot;
                 }
 
-                ranges.push(new kendo.ui.scheduler.TimeSlotRange({
-                    start: first,
-                    end: last,
-                    collection: collection
-                }));
+                if (multiday) {
+                    ranges.push(new kendo.ui.scheduler.DaySlotRange({
+                        start: first,
+                        end: last,
+                        collection: collection
+                    }));
+                } else {
+                    ranges.push(new kendo.ui.scheduler.TimeSlotRange({
+                        start: first,
+                        end: last,
+                        collection: collection
+                    }));
+                }
             }
 
             return ranges;
         },
 
-        _startSlot: function(date) {
-            var collectionIndex = this.dateIndex(date);
+        _collection: function(index, multiday) {
+            var collection = this._daySlotCollection;
 
-            var collection = this._timeSlotCollections[collectionIndex];
+            if (!multiday) {
+                collection = this._timeSlotCollections[index];
+            }
+
+            return collection;
+        },
+        _startSlot: function(date, multiday) {
+            var collectionIndex = this.collectionIndex(date, !multiday);
+
+            var collection = this._collection(collectionIndex, multiday);
 
             if (!collection) {
                 return null;
             }
 
-            var slot = collection.at(this.timeIndex(date));
+            var slotIndex = this.slotIndex(date);
+
+            if (multiday) {
+                slotIndex = collectionIndex;
+            }
+
+            var slot = collection.at(slotIndex);
 
             if (!slot) {
                 slot = collection.first();
@@ -223,16 +251,22 @@ kendo_module({
 
             return slot;
         },
-        _endSlot: function(date) {
-            var collectionIndex = this.dateIndex(date);
+        _endSlot: function(date, multiday) {
+            var collectionIndex = this.collectionIndex(date, !multiday);
 
-            var collection = this._timeSlotCollections[collectionIndex];
+            var collection = this._collection(collectionIndex, multiday);
 
             if (!collection) {
                 return null;
             }
 
-            var slot = collection.at(this.timeIndex(date));
+            var slotIndex = this.slotIndex(date);
+
+            if (multiday) {
+                slotIndex = collectionIndex;
+            }
+
+            var slot = collection.at(slotIndex);
 
             if (!slot) {
                 slot = collection.last();
@@ -243,6 +277,10 @@ kendo_module({
 
         getTimeSlotCollection: function(index) {
             return this._timeSlotCollections[index];
+        },
+
+        getDaySlotCollection: function() {
+            return this._daySlotCollection;
         }
     });
 
@@ -276,6 +314,38 @@ kendo_module({
         }
     });
 
+    kendo.ui.scheduler.DaySlotRange = kendo.Class.extend({
+        init: function(options) {
+            $.extend(this, options);
+        },
+
+        events: function () {
+            return this.collection.events();
+        },
+
+        innerWidth: function() {
+            var collection = this.collection;
+
+            var startIndex = this.start.index;
+
+            var endIndex = this.end.index;
+
+            var result = 0;
+
+            var width = startIndex !== endIndex ? "offsetWidth" : "clientWidth";
+
+            for (var slotIndex = startIndex; slotIndex <= endIndex; slotIndex++) {
+               result += collection.at(slotIndex)[width];
+            }
+
+            return result;
+        },
+
+        addEvent: function(event) {
+            this.events().push(event);
+        }
+    });
+
     kendo.ui.scheduler.SlotCollection = kendo.Class.extend({
         init: function() {
             this._slots = [];
@@ -301,12 +371,18 @@ kendo_module({
     kendo.ui.scheduler.TimeSlot = kendo.Class.extend({
         init: function(options) {
             $.extend(this, options);
+        },
+        collectionIndex: function() {
+            return this.columnIndex;
         }
     });
 
     kendo.ui.scheduler.DaySlot = kendo.Class.extend({
-        init: function() {
-
+        init: function(options) {
+            $.extend(this, options);
+        },
+        collectionIndex: function() {
+            return 0;
         }
     });
 
