@@ -245,7 +245,8 @@ kendo_module({
 
         refresh: function() {
             var buffer = this.buffer,
-                items = this.items;
+                items = this.items,
+                endReached = false;
 
             while(items.length) {
                 items.pop().destroy();
@@ -261,7 +262,7 @@ kendo_module({
 
             for (var idx = 0; idx < buffer.viewSize; idx ++) {
                 if (idx === buffer.total()) {
-                    this.trigger("endReached");
+                    endReached = true;
                     break;
                 }
                 item = itemConstructor(this.content(this.offset + items.length));
@@ -275,6 +276,9 @@ kendo_module({
 
             this.trigger("reset");
             this.trigger("resize", { top: this.top, bottom: this.bottom });
+            if (endReached) {
+                this.trigger("endReached");
+            }
         },
 
         totalHeight: function() {
