@@ -13,6 +13,8 @@
 
         <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
+        <div id="inline" contentEditable></div>
+
         <script>
 
             $("#Editor1").kendoEditor({
@@ -22,22 +24,28 @@
                 execute: onExecute
             });
 
+            var inline = $("#inline").kendoEditor({
+                value: "foo",
+                select: onSelectionChange,
+                change: onChange,
+                execute: onExecute
+            }).data("kendoEditor");
+
             function onSelectionChange() {
-                onSelectionChangeRaised = true;
+                selectionChangeRaised = true;
             }
 
             function onChange() {
-                onChangeRaised = true;
+                changeRaised = true;
             }
 
             function onExecute() {
-                onExecuteRaised = true;
+                executeRaised = true;
             }
 
-            var changeRaised = false,
-            onSelectionChangeRaised = false,
-            onChangeRaised = false,
-            onExecuteRaised = false;
+            var changeRaised = false;
+            var selectionChangeRaised = false;
+            var executeRaised = false;
 
             function type(type, keyCode, ctrl, alt, shift) {
                 var e = $.Event();
@@ -70,11 +78,17 @@
                 }
             });
 
-            test("blurring the editor triggers onchange", function() {
+            test("blurring the editor triggers change event", function() {
                 editor.value('bar');
                 editor.body.innerHTML = 'foo';
                 $(editor.window).trigger('blur');
-                ok(onChangeRaised);
+                ok(changeRaised);
+            });
+
+            test("blurring the inlinline editor triggers change event", function() {
+                inline.body.innerHTML = "bar";
+                $(inline.element).trigger("blur");
+                ok(changeRaised);
             });
 
             test("blurring the editor updates value", function() {
@@ -93,14 +107,14 @@
             });
 
             test('on selection change executed', function() {
-                onSelectionChangeRaised = false;
+                selectionChangeRaised = false;
                 editor.trigger('select');
-                ok(onSelectionChangeRaised);
+                ok(selectionChangeRaised);
             });
 
             test('exec raises onExecute', function() {
                 editor.exec('undo');
-                ok(onExecuteRaised);
+                ok(executeRaised);
             });
 
             test('up arrow raises selection change', function() {

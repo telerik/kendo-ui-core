@@ -326,24 +326,16 @@ kendo_module({
         },
 
         _initializeContentElement: function() {
-            var editor = this, doc;
+            var editor = this;
+            var doc;
+            var blurTrigger;
 
             if (editor.textarea) {
                 editor.window = editor._createContentElement(editor.options.stylesheets);
                 doc = editor.document = editor.window.contentDocument || editor.window.document;
                 editor.body = doc.body;
 
-                $(editor.window)
-                    .on("blur" + NS, function () {
-                        var old = editor.textarea.val(),
-                        value = editor.encodedValue();
-
-                        editor.update();
-
-                        if (value != old) {
-                            editor.trigger("change");
-                        }
-                    });
+                blurTrigger = editor.window;
 
                 $(doc).on("mouseup" + NS, proxy(editor._mouseup, editor));
             } else {
@@ -351,9 +343,23 @@ kendo_module({
                 doc = editor.document = document;
                 editor.body = editor.element[0];
 
+                blurTrigger = editor.body;
+
                 var styleTools = editor.toolbar.items().filter(".k-decorated");
                 styleTools.kendoSelectBox("decorate", doc);
             }
+
+            $(blurTrigger)
+                .on("blur" + NS, function () {
+                    var old = editor.textarea ? editor.textarea.val() : editor._oldValue;
+                    var value = editor.encodedValue();
+
+                    editor.update();
+
+                    if (value != old) {
+                        editor.trigger("change");
+                    }
+                });
 
             try {
                 doc.execCommand("enableObjectResizing", false, "false");
@@ -697,8 +703,12 @@ kendo_module({
         },
 
         update: function (value) {
+            value = value || this.options.encoded ? this.encodedValue() : this.value();
+
             if (this.textarea) {
-                this.textarea.val(value || this.options.encoded ? this.encodedValue() : this.value());
+                this.textarea.val(value);
+            } else {
+                this._oldValue = value;
             }
         },
 
