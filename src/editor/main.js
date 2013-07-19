@@ -46,27 +46,21 @@ kendo_module({
             '</tbody></table>',
 
         buttonTemplate:
-            '<li class="k-editor-button" role="presentation">' +
-                '<a href="" role="button" class="k-tool-icon #= data.cssClass #"' +
-                '#= data.popup ? " data-popup" : "" #' +
-                ' unselectable="on" title="#= data.title #">#= data.title #</a>' +
-            '</li>',
+            '<a href="" role="button" class="k-tool-icon #= data.cssClass #"' +
+            '#= data.popup ? " data-popup" : "" #' +
+            ' unselectable="on" title="#= data.title #">#= data.title #</a>',
 
         colorPickerTemplate:
-            '<li class="k-editor-colorpicker" role="presentation"><div class="k-colorpicker #= data.cssClass #" /></li>',
+            '<div class="k-colorpicker #= data.cssClass #" />',
 
         comboBoxTemplate:
-            '<li class="k-editor-combobox">' +
-                '<select title="#= data.title #" class="#= data.cssClass #" />' +
-            '</li>',
+            '<select title="#= data.title #" class="#= data.cssClass #" />',
 
         dropDownListTemplate:
-            '<li class="k-editor-selectbox">' +
-                '<select title="#= data.title #" class="#= data.cssClass #" />' +
-            '</li>',
+            '<select title="#= data.title #" class="#= data.cssClass #" />',
 
         separatorTemplate:
-            '<li class="k-separator" />',
+            '<span class="k-separator" />',
 
         formatByName: function(name, format) {
             for (var i = 0; i < format.length; i++) {

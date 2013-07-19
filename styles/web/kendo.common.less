@@ -317,7 +317,7 @@ html body .k-button-bare.k-upload-button:hover
 
 .k-icon,
 .k-sprite,
-.k-editor-button .k-tool-icon
+.k-button-group .k-tool-icon
 {
     display: inline-block;
     width: @grid-size;
@@ -333,14 +333,14 @@ html body .k-button-bare.k-upload-button:hover
 /* In IE7 vertical align: middle can't be overridden */
 .k-ie8 .k-icon,
 .k-ie8 .k-sprite,
-.k-ie8 .k-editor-button .k-tool-icon
+.k-ie8 .k-button-group .k-tool-icon
 {
     vertical-align: middle;
 }
 
 :root *> .k-icon,
 :root *> .k-sprite,
-:root *> .k-editor-button .k-tool-icon
+:root *> .k-button-group .k-tool-icon
 {
     vertical-align: middle;
 }
@@ -3042,7 +3042,6 @@ table.k-editor
     list-style-type: none;
     line-height: 1.3em;
     cursor: default;
-    white-space: nowrap;
 }
 
 .k-editor-toolbar li
@@ -3066,13 +3065,8 @@ table.k-editor
     padding: .1em 0;
 }
 
-
-.k-group-end,
-.k-editor-toolbar .k-editor-dropdown,
-.k-editor-toolbar .k-editor-template,
-.k-editor-toolbar .k-editor-combobox,
-.k-editor-toolbar .k-editor-selectbox,
-.k-editor-toolbar .k-editor-colorpicker
+.k-editor-toolbar .k-editor-widget,
+.k-editor-toolbar > li
 {
     margin-right: 6px;
 }
@@ -3122,7 +3116,12 @@ table.k-editor
     vertical-align: middle;
 }
 
-.k-editor-button .k-tool-icon
+.k-button-group
+{
+    white-space: nowrap;
+}
+
+.k-button-group .k-tool-icon
 {
     width: 24px;
     height: 24px;
@@ -3179,20 +3178,25 @@ table.k-editor
     margin: 1px 0 0;
 }
 
-.k-editor-toolbar .k-editor-button
+.k-editor-toolbar .k-button-group
 {
     padding: 1px;
 }
 
-.k-editor-button .k-tool-icon
+.k-button-group .k-tool-icon
 {
     border-style: solid;
     border-width: 1px 0 1px 1px;
 }
 
-.k-group-end .k-tool-icon
+.k-button-group .k-tool-icon.k-group-end
 {
     border-right-width: 1px;
+}
+
+.k-button-group .k-state-disabled
+{
+    display: none;
 }
 
 .k-editor-toolbar li.k-group-break
@@ -3203,13 +3207,13 @@ table.k-editor
     line-height: 0;
 }
 
-.k-editor-button .k-state-hover,
-.k-editor-button .k-state-active
+.k-button-group .k-state-hover,
+.k-button-group .k-state-active
 {
     vertical-align: middle;
 }
 
-.k-editor-button .k-state-disabled
+.k-button-group .k-state-disabled
 {
     filter: alpha(opacity=30);
     opacity: .3;

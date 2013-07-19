@@ -304,25 +304,26 @@
 
                 dom.bind("click", navigationListener);
 
-                dom.find(".k-editor-button .k-tool-icon.k-state-disabled").trigger("click");
+                dom.find(".k-tool-icon.k-state-disabled:first").trigger("click");
 
                 dom.unbind("click", navigationListener);
 
                 ok(isDefaultPrevented);
             });
 
-            test("buttons are grouped in default groups", function() {
+            test("first and last buttons in groups get k-group-start/end classes", function() {
                 toolbar.bindTo(mockEditorTools([
                     "bold", "italic", "underline",
                     "insertImage", "createLink"
                 ]));
 
+                equal(dom.find("li.k-tool-group").length, 2);
                 equal(dom.find(".k-group-start").length, 2);
                 equal(dom.find(".k-group-end").length, 2);
-                equal(dom.find(".k-group-start .k-bold").length, 1);
-                equal(dom.find(".k-group-start .k-insertImage").length, 1);
-                equal(dom.find(".k-group-end .k-underline").length, 1);
-                equal(dom.find(".k-group-end .k-createLink").length, 1);
+                ok(dom.find(".k-bold").hasClass("k-group-start"));
+                ok(dom.find(".k-insertImage").hasClass("k-group-start"));
+                ok(dom.find(".k-underline").hasClass("k-group-end"));
+                ok(dom.find(".k-createLink").hasClass("k-group-end"));
             });
 
             test("hidden buttons do not end groups", function() {
@@ -333,20 +334,7 @@
                 dom.find(".k-unlink").addClass(".k-state-disabled");
                 toolbar.updateGroups();
 
-                equal(dom.find(".k-group-end .k-createLink").length, 1);
-            });
-
-            test("space between groups is broken when there's no space for next group", function() {
-                toolbar.bindTo(mockEditorTools([
-                    "bold", "italic",
-                    "insertImage", "createLink"
-                ]));
-
-                dom.width(dom.find(".k-tool-icon").width() * 3);
-
-                toolbar.updateGroups();
-
-                equal(dom.find(".k-group-break").length, 1);
+                equal(dom.find(".k-createLink.k-group-end").length, 1);
             });
 
         </script>

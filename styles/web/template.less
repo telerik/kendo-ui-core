@@ -204,7 +204,7 @@
 .k-tiles,
 .k-toolbar,
 .k-tooltip,
-.k-editor-button .k-tool-icon,
+.k-button-group .k-tool-icon,
 .k-upload-files
 {
     border-color: @widget-border-color;
@@ -1121,17 +1121,17 @@ div.k-imagebrowser-dropzone em
     .border-radius(@main-border-radius);
 }
 
-.k-group-start .k-tool-icon
+.k-tool-icon.k-group-start
 {
     .border-radius(@main-border-radius 0 0 @main-border-radius);
 }
 
-.k-group-end .k-tool-icon
+.k-tool-icon.k-group-end
 {
     .border-radius(0 @main-border-radius @main-border-radius 0);
 }
 
-.k-group-start.k-group-end .k-tool-icon
+.k-group-start.k-group-end.k-tool-icon
 {
     .border-radius(@main-border-radius);
 }
@@ -1463,7 +1463,7 @@ div.k-imagebrowser-dropzone em
 
 .k-secondary
 {
-    .k-editor-button .k-tool-icon
+    .k-button-group .k-tool-icon
     {
         border-color: @secondary-border-color;
     }

@@ -149,13 +149,15 @@
                     title: that._appendShortcutSequence(description, tool),
                     editor: that._editor
                 });
+
+                ui.closest(".k-widget", that.element).addClass("k-editor-widget");
+
+                ui.closest(".k-colorpicker", that.element).next(".k-colorpicker").addClass("k-editor-widget");
             });
 
             editor.bind("select", proxy(that._update, that));
 
             that._updateContext();
-
-            that.updateGroups();
 
             if (window) {
                 window.wrapper.css({top: "", left: "", width: ""});
@@ -297,98 +299,80 @@
                 options, template, toolElement,
                 toolName,
                 editorElement = this._editor.element,
-                element = this.element.empty();
+                element = this.element.empty(),
+                groupName, newGroupName;
+            var group;
+
+            function stringify(template) {
+                if (template.getHtml) {
+                    return template.getHtml();
+                } else {
+                    if (!$.isFunction(template)) {
+                        template = kendo.template(template);
+                    }
+
+                    return template(options);
+                }
+            }
+
+            function endGroup() {
+                if (group.children().length) {
+                    group.appendTo(element);
+                }
+            }
+
+            function startGroup() {
+                group = $("<li class='k-tool-group' role='presentation' />");
+            }
 
             element.empty();
+
+            startGroup();
 
             for (toolName in tools) {
                 options = tools[toolName] && tools[toolName].options;
 
                 template = options && options.template;
 
-                if (template) {
+                if (!template) {
+                    continue;
+                }
 
-                    if (template.getHtml) {
-                        template = template.getHtml();
-                    } else {
-                        if (!$.isFunction(template)) {
-                            template = kendo.template(template);
-                        }
+                newGroupName = this.toolGroupFor(toolName);
 
-                        template = template(options);
-                    }
+                if (groupName != newGroupName) {
+                    endGroup();
+                    startGroup();
+                    groupName = newGroupName;
+                }
 
-                    if (template.indexOf('<li') !== 0) {
-                        template = "<li class='k-editor-template'>" + template + "</li>";
-                    }
+                template = stringify(template);
 
-                    toolElement = $(template)
-                        .appendTo(element);
+                toolElement = $(template).appendTo(group);
 
-                    if (options.type == "button" && options.exec) {
-                        toolElement.find(".k-tool-icon").click(proxy(options.exec, editorElement[0]));
-                    }
+                if (options.type == "button" && options.exec) {
+                    toolElement.find(".k-tool-icon").click(proxy(options.exec, editorElement[0]));
                 }
             }
+
+            endGroup();
+
+            $(this.element).children(":has(> .k-tool-icon)").addClass("k-button-group");
+
+            this.updateGroups();
         },
 
         updateGroups: function() {
-            var previous,
-                currentToolGroup,
-                isStart,
-                that = this,
-                element = that.element,
-                enabledTools,
-                groupEnd = /k-group-end/,
-                started = false;
-
-            element.children().filter(".k-group-break").remove();
-
-            enabledTools = element.children().filter(function() {
-                return !$(this).children(".k-state-disabled").length;
-            });
-
-            enabledTools.each(function(index, li) {
-                li = $(li);
-
-                var toolName = that._toolFromClassName(li.children()[0]);
-                var newToolGroup = that.toolGroupFor(toolName);
-                var last = index == enabledTools.length-1;
-
-                isStart = currentToolGroup != newToolGroup;
-
-                currentToolGroup = newToolGroup;
-
-                if (previous && isStart) {
-                    previous.addClass("k-group-end");
-                }
-
-                started = started || isStart;
-
-                li.toggleClass("k-group-start", isStart || (!started && last))
-                  .toggleClass("k-group-end", last);
-
-                previous = li;
-            });
-
-            that.element.children(".k-group-start").each(function() {
-                var node = this;
-                var groupEndOffset;
-
-                while (!groupEnd.test(node.className)) {
-                    node = node.nextSibling;
-                    groupEndOffset = node.offsetLeft + node.offsetWidth;
-                }
-
-                if (groupEndOffset > this.parentNode.offsetWidth) {
-                    $(this).before("<li class='k-group-break' />");
-                }
+            $(this.element).children().each(function() {
+                $(this).children(":visible")
+                    .first().addClass("k-group-start").end()
+                    .last().addClass("k-group-end").end();
             });
         },
 
         _attachEvents: function() {
             var that = this,
-                buttons = ".k-editor-button .k-tool-icon",
+                buttons = "[role=button].k-tool-icon",
                 enabledButtons = buttons + ":not(.k-state-disabled)",
                 disabledButtons = buttons + ".k-state-disabled";
 
@@ -479,12 +463,14 @@
             });
 
             this._updateContext();
-
-            that.updateGroups();
         },
 
         _updateContext: function() {
-            this.element.children().show().filter(":has(.k-state-disabled)").hide();
+            this.element.children().children().each(function() {
+                var tool = $(this);
+                tool.css("display", tool.hasClass("k-state-disabled") ? "none" : "");
+            });
+            this.updateGroups();
         }
     });
 
