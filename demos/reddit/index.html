@@ -23,6 +23,7 @@
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.actionsheet.js"></script>
+        <script src="../../src/kendo.mobile.switch.js"></script>
         <script src="../../src/kendo.mobile.tabstrip.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
         <script src="../../src/kendo.mobile.navbar.js"></script>
@@ -41,7 +42,7 @@
     <body>
         <div class="splash"></div>
 
-        <div id="drawer" data-role="drawer" data-views="['list', 'account']">
+        <div id="drawer" data-role="drawer" data-views="['list', 'account', 'settings', 'notifications', 'feedback', 'about']">
             <ul data-role="listview" data-style="inset" data-type="group">
                 <li>
                     Narwhal Bacon
@@ -58,8 +59,8 @@
                 </li>
                 <li>
                     <ul>
-                        <li><a href="#settings">Feedback</a></li>
-                        <li><a href="#notifications">About</a></li>
+                        <li><a href="#feedback">Feedback</a></li>
+                        <li><a href="#about">About</a></li>
                     </ul>
                 </li>
             </ul>
@@ -103,6 +104,79 @@
                     <ul>
                         <li>Link Karma <span class="account-info">54</span></li>
                         <li>Comment Karma <span class="account-info">123</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="view" data-title="Notifications" id="notifications" data-layout="default">
+            <ul data-role="listview" data-type="group" data-style="inset">
+                <li>
+                    Content
+                    <ul>
+                        <li>I receive a message <input type="checkbox" data-role="switch" checked="checked" /></li>
+                        <li>New item is posted <input type="checkbox" data-role="switch" /></li>
+                        <li>New comment is posted <input type="checkbox" data-role="switch" checked="checked" /></li>
+                    </ul>
+                </li>
+                <li>
+                    Karma
+                    <ul>
+                        <li>Someone upvotes me <input type="checkbox" data-role="switch" /></li>
+                        <li>Someone downvotes me <input type="checkbox" checked="checked" data-role="switch" /></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="view" data-title="Notifications" id="notifications" data-layout="default">
+            <ul data-role="listview" data-type="group" data-style="inset">
+                <li>
+                    Content
+                    <ul>
+                        <li>I receive a message <input type="checkbox" data-role="switch" checked="checked" /></li>
+                        <li>New item is posted <input type="checkbox" data-role="switch" /></li>
+                        <li>New comment is posted <input type="checkbox" data-role="switch" checked="checked" /></li>
+                    </ul>
+                </li>
+                <li>
+                    Karma
+                    <ul>
+                        <li>Someone upvotes me <input type="checkbox" data-role="switch" /></li>
+                        <li>Someone downvotes me <input type="checkbox" checked="checked" data-role="switch" /></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div data-role="view" data-title="Settings" id="settings" data-layout="default">
+            <ul data-role="listview" data-type="group" data-style="inset">
+                <li>
+                    Behavior
+                    <ul>
+                        <li><label>Auto-load Posts While Scrolling <input type="checkbox" /></label></li>
+                        <li><label>Enable Tilt Scrolling <input type="checkbox" checked="checked" /></label></li>
+                        <li><label>Reverse Tilt-Scroll Direction <input type="checkbox" checked="checked" /></label></li>
+                        <li><label>Allow rotation <input type="checkbox" /></label></li>
+                    </ul>
+                </li>
+                <li>
+                    Posts
+                    <ul>
+                        <li><label>Show Voting Arrows <input type="checkbox" /></label></li>
+                        <li><label>Show Thumbnails <input type="checkbox" checked="checked" /></label></li>
+                        <li><label>Blog post titles <input type="checkbox" checked="checked" /></label></li>
+                        <li><label>Compact <input type="checkbox" /></label></li>
+                    </ul>
+                </li>
+                <li>
+                    Comments
+                    <ul>
+                        <li><label>Show Voting Arrows <input type="checkbox" /></label></li>
+                        <li><label>Show Thumbnails <input type="checkbox" checked="checked" /></label></li>
+                        <li><label>Blog post titles <input type="checkbox" checked="checked" /></label></li>
+                        <li><label>Compact <input type="checkbox" /></label></li>
+                        <li><label>Auto load image for image links <input type="checkbox" /></label></li>
                     </ul>
                 </li>
             </ul>
