@@ -164,21 +164,137 @@ kendo_module({
     kendo.ui.scheduler = {};
 
     kendo.ui.scheduler.ResourceView = kendo.Class.extend({
-        init: function() {
-            this._collections = [];
+        init: function(options) {
+            this._timeSlotCollections = [];
+            $.extend(this, options);
         },
 
         addCollection: function(collection) {
-            this._collections.push(collection);
+            this._timeSlotCollections.push(collection);
+        },
+
+        slotRanges: function(event) {
+            var ranges = [];
+            var startSlot = this._startSlot(event.start);
+            var endSlot = this._endSlot(event.end);
+
+            if (!startSlot || !endSlot) {
+                return ranges;
+            }
+
+            for (var columnIndex = startSlot.columnIndex; columnIndex <= endSlot.columnIndex; columnIndex++) {
+                var collection = this._timeSlotCollections[columnIndex];
+
+                var first = collection.first();
+                var last = collection.last();
+
+                if (first.start < startSlot.start) {
+                    first = startSlot;
+                }
+
+                if (last.start > endSlot.start) {
+                    last = endSlot;
+                }
+
+                ranges.push(new kendo.ui.scheduler.TimeSlotRange({
+                    start: first,
+                    end: last,
+                    collection: collection
+                }));
+            }
+
+            return ranges;
+        },
+
+        _startSlot: function(date) {
+            var collectionIndex = this.dateIndex(date);
+
+            var collection = this._timeSlotCollections[collectionIndex];
+
+            if (!collection) {
+                return null;
+            }
+
+            var slot = collection.at(this.timeIndex(date));
+
+            if (!slot) {
+                slot = collection.first();
+            }
+
+            return slot;
+        },
+        _endSlot: function(date) {
+            var collectionIndex = this.dateIndex(date);
+
+            var collection = this._timeSlotCollections[collectionIndex];
+
+            if (!collection) {
+                return null;
+            }
+
+            var slot = collection.at(this.timeIndex(date));
+
+            if (!slot) {
+                slot = collection.last();
+            }
+
+            return slot;
+        },
+
+        getTimeSlotCollection: function(index) {
+            return this._timeSlotCollections[index];
+        }
+    });
+
+    kendo.ui.scheduler.TimeSlotRange = kendo.Class.extend({
+        init: function(options) {
+            $.extend(this, options);
+        },
+
+        innerHeight: function() {
+            var collection = this.collection;
+
+            var result = 0;
+
+            for (var slotIndex = this.start.index; slotIndex < this.end.index; slotIndex++) {
+               result += collection.at(slotIndex).offsetHeight;
+            }
+
+            if (this.end == collection.last()) {
+                result += this.end.offsetHeight;
+            }
+
+            return result;
+        },
+
+        events: function () {
+            return this.collection.events();
+        },
+
+        addEvent: function(event) {
+            this.events().push(event);
         }
     });
 
     kendo.ui.scheduler.SlotCollection = kendo.Class.extend({
         init: function() {
             this._slots = [];
+            this._events = [];
+        },
+        events: function() {
+            return this._events;
         },
         addSlot: function(slot) {
             this._slots.push(slot);
+        },
+        first: function() {
+            return this._slots[0];
+        },
+        last: function() {
+            return this._slots[this._slots.length - 1];
+        },
+        at: function(index) {
+            return this._slots[index];
         }
     });
 
