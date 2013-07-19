@@ -29,9 +29,10 @@
         <script src="../../src/kendo.mobile.scrollview.js"></script>
         <script src="../../src/kendo.touch.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
+        <script src="../../src/kendo.mobile.drawer.js"></script>
         <!-- App stuff -->
         <link rel="stylesheet" href="app.css" />
-        
+
         <link rel="apple-touch-icon-precomposed" href="images/57.png" />
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/72.png" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/114.png" />
@@ -40,15 +41,70 @@
     <body>
         <div class="splash"></div>
 
-        <div data-role="view" data-title="Cute.Reader" id="list" data-show="showApp">
+        <div id="drawer" data-role="drawer" data-views="['list', 'account']">
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li>
+                    Narwhal Bacon
+                    <ul>
+                        <li><a href="#list">Home</a></li>
+                        <li><a href="#account">My account</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#settings">Settings</a></li>
+                        <li><a href="#notifications">Notifications</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="#settings">Feedback</a></li>
+                        <li><a href="#notifications">About</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div data-role="layout" data-id="default">
             <header data-role="header">
                 <div data-role="navbar">
+                    <a data-role="button" data-rel="drawer" href="#drawer" data-icon="drawer-button" data-align="left"></a>
+                    <span data-role="view-title"></span>
+                </div>
+            </header>
+        </div>
+
+
+        <div data-role="view" data-title="Cuteness." id="list" data-show="showApp" data-layout="default">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-rel="drawer" href="#drawer" data-icon="drawer-button" data-align="left"></a>
                     <span data-role="view-title"></span>
                     <a href="#canvas" data-role="button" data-icon="canvas" data-transition="slide" data-align="right"></a>
                 </div>
             </header>
 
             <ul data-role="listview" data-template="item-template" data-source="awwDataSource" data-load-more="true" id="aww" data-pull-to-refresh="true" data-click="showDetail">
+            </ul>
+        </div>
+
+        <div data-role="view" data-title="Narwhal" id="account" data-layout="default">
+            <ul data-role="listview" data-type="group" data-style="inset">
+                <li>
+                    Overview
+                    <ul>
+                        <li>Username <span class="account-info">Narwhal</span></li>
+                        <li>Account Age <span class="account-info">432 days</span></li>
+                    </ul>
+                </li>
+                <li>
+                    Karma
+                    <ul>
+                        <li>Link Karma <span class="account-info">54</span></li>
+                        <li>Comment Karma <span class="account-info">123</span></li>
+                    </ul>
+                </li>
             </ul>
         </div>
 

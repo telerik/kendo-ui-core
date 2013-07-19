@@ -138,10 +138,15 @@
     -webkit-backface-visibility: hidden;
 }
 
+#drawer .km-content,
 #detail .km-content,
 #canvas .km-content,
 #canvas-detail .km-content {
     background: #363940;
+}
+
+#drawer .km-group-title {
+    color: #f4f4f4;
 }
 
 .faded,
@@ -354,4 +359,11 @@
     top: auto;
     bottom: 0;
     background-image: url(images/kendo.png);
+}
+
+.km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
+
+.account-info {
+    float: right;
+    font-weight: bold;
 }
