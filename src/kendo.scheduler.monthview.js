@@ -74,6 +74,8 @@ kendo_module({
             that._renderLayout(that.options.date);
 
             that._slots();
+
+            that._groups();
         },
 
         select: function(selection) {
@@ -905,6 +907,26 @@ kendo_module({
             }
        },
 
+       _groups: function() {
+            var groupCount = this._groupCount();
+            var columnCount =  NUMBER_OF_COLUMNS;
+            var that = this;
+
+            var groups = [];
+
+            for (var idx = 0; idx < groupCount; idx++) {
+
+                var view = new ui.scheduler.ResourceView({
+                    collectionIndex: $.proxy(this._dateSlotIndex, this),
+                    slotIndex: $.proxy(this._timeSlotIndex, this)
+                });
+
+                groups.push(view);
+            }
+
+            this.groups = groups;
+       },
+
        _slots: function() {
             var row = {
                 slots: [],
@@ -948,6 +970,8 @@ kendo_module({
             this.content.children(".k-event,.k-more-events").remove();
 
             this._slots();
+
+            this._groups();
 
             events = new kendo.data.Query(this._splitEvents(events)).sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }]).toArray();
 

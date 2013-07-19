@@ -530,13 +530,15 @@ kendo_module({
             for (var idx = 0; idx < groupCount; idx++) {
 
                 var view = new ui.scheduler.ResourceView({
-                    collectionIndex: $.proxy(this._dateSlotIndex, this),
-                    slotIndex: $.proxy(this._timeSlotIndex, this)
+                    collectionIndex: $.proxy(this._collectionIndex, this),
+                    slotIndex: $.proxy(this._slotIndex, this)
                 });
 
                 for (var j = 0; j < columnCount; j++) {
                     view.addTimeSlotCollection(new ui.scheduler.SlotCollection());
                 }
+
+                view.addDaySlotCollection(new ui.scheduler.SlotCollection());
 
                 groups.push(view);
             }
@@ -639,7 +641,7 @@ kendo_module({
                         this._adjustSlotIndex(allDayRows.length)
                     );
 
-                    var collection = group.getDaySlotCollection();
+                    var collection = group.getDaySlotCollection(0);
 
                     collection.addSlot(new kendo.ui.scheduler.DaySlot( {
                             offsetTop: td.offsetTop,
@@ -1326,6 +1328,22 @@ kendo_module({
             var timeSlotInterval = ((options.majorTick/options.minorTickCount) * MS_PER_MINUTE);
 
             return (eventStartTime - startTime) / (timeSlotInterval);
+        },
+
+        _collectionIndex: function(date, multiday) {
+            if (multiday) {
+                return 0;
+            }
+
+            return this._dateSlotIndex(date, true);
+        },
+
+        _slotIndex: function(date, multiday) {
+            if (multiday) {
+                return this._dateSlotIndex(date);
+            }
+
+            return this._timeSlotIndex(date);
         },
 
         _dateSlotIndex: function(date, overlaps) {
