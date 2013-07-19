@@ -417,12 +417,13 @@ kendo_module({
         },
 
         expand: function(start, end) {
-            var data = this.view();
+            var data = this.view(),
+                filter = {};
 
             if (start && end) {
                 end = new Date(end.getTime() + MS_PER_DAY - 1);
 
-                var filter = {
+                filter = {
                     logic: "or",
                     filters: [
                         {
