@@ -81,6 +81,21 @@
                 equal(treeview.find(".k-in").text(), "foo baz");
             });
 
+            test("expands items if expanded attribute is accessed in template", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", expanded: false, items: [
+                            { text: "bar" }
+                        ] }
+                    ],
+                    template: kendo.template("#= item.text # #= item.get('expanded') ? 'a' : 'b' #")
+                });
+
+                treeviewObject.expand(".k-item");
+
+                equal(treeview.find(".k-item:visible").length, 2);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

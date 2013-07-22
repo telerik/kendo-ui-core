@@ -1209,7 +1209,9 @@ kendo_module({
 
                     if (field == "spriteCssClass" || field == "imageUrl" || shouldUpdate) {
                         that.findByUid(item.uid).find(">div>.k-in").html(that.templates.itemContent(context));
-                    } else if (field == CHECKED) {
+                    }
+
+                    if (field == CHECKED) {
                         node = that.findByUid(item.uid);
 
                         isChecked = item[field];
