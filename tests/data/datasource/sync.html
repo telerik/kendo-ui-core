@@ -571,6 +571,77 @@
                 dataSource.sync();
             });
 
+            test("requestStart contains request type for create request", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" }
+                    },
+                    data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+                });
+
+                dataSource.read();
+
+                dataSource.bind("requestStart", function(e) {
+                    equal(e.type, "create");
+                });
+
+                dataSource.add();
+
+                dataSource.sync();
+            });
+
+            test("requestStart contains request type for read request", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" }
+                    },
+                    data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+                });
+
+                dataSource.bind("requestStart", function(e) {
+                    equal(e.type, "read");
+                });
+
+                dataSource.read();
+            });
+
+            test("requestStart contains request type for update request", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" }
+                    },
+                    data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+                });
+
+                dataSource.read();
+
+                dataSource.bind("requestStart", function(e) {
+                    equal(e.type, "update");
+                });
+
+                dataSource.get(2).set("foo", "moo");
+
+                dataSource.sync();
+            });
+
+            test("requestStart contains request type for destroy request", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" }
+                    },
+                    data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+                });
+
+                dataSource.read();
+
+                dataSource.bind("requestStart", function(e) {
+                    equal(e.type, "destroy");
+                });
+
+                dataSource.remove(dataSource.get(1));
+
+                dataSource.sync();
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

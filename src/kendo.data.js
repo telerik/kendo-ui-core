@@ -2328,7 +2328,7 @@ kendo_module({
 
             return $.Deferred(function(deferred) {
 
-                that.trigger(REQUESTSTART);
+                that.trigger(REQUESTSTART, { type: type });
 
                 transport[type].call(transport, extend({
                     success: function(response) {
@@ -2371,7 +2371,7 @@ kendo_module({
             var that = this, params = that._params(data);
 
             that._queueRequest(params, function() {
-                if (!that.trigger(REQUESTSTART)) {
+                if (!that.trigger(REQUESTSTART, { type: "read" })) {
                     that.trigger(PROGRESS);
 
                     that._ranges = [];
@@ -2666,7 +2666,7 @@ kendo_module({
             if (remote || ((that._data === undefined || that._data.length === 0) && !that._destroyed.length)) {
                 that.read(that._mergeState(options));
             } else {
-                if (!that.trigger(REQUESTSTART)) {
+                if (!that.trigger(REQUESTSTART, { })) {
                     that.trigger(PROGRESS);
 
                     result = Query.process(that._data, that._mergeState(options));
@@ -3068,7 +3068,7 @@ kendo_module({
 
                 that._timeout = setTimeout(function() {
                     that._queueRequest(options, function() {
-                        if (!that.trigger(REQUESTSTART)) {
+                        if (!that.trigger(REQUESTSTART, { type: "read" })) {
                             that.transport.read({
                                 data: options,
                                 success: that._prefetchSuccessHandler(skip, size, callback)
