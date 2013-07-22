@@ -232,16 +232,22 @@ kendo_module({
                 .children(":not(script)")
                 .each(function (index, pane) {
                     var config = panesConfig && panesConfig[index];
-
-                    pane = $(pane).attr("role", "group").addClass(KPANE);
-
-                    pane.data(PANE, config ? config : {})
-                        .toggleClass("k-scrollable", config ? config.scrollable !== false : true);
-                    that.ajaxRequest(pane);
+                    that._initPane(pane, config);
                 })
                 .end();
 
             that.trigger(RESIZE);
+        },
+
+        _initPane: function(pane, config) {
+            pane = $(pane)
+                .attr("role", "group")
+                .addClass(KPANE);
+
+            pane.data(PANE, config ? config : {})
+                .toggleClass("k-scrollable", config ? config.scrollable !== false : true);
+
+            this.ajaxRequest(pane);
         },
 
         ajaxRequest: function(pane, url, data) {
@@ -367,6 +373,9 @@ kendo_module({
 
                 that._updateSplitBar(splitbar, previousPane, nextPane);
             });
+        },
+        _removeSplitBars: function() {
+            this.element.children(".k-splitbar").remove();
         },
         _panes: function() {
             return this.element.children(PANECLASS);
@@ -503,6 +512,74 @@ kendo_module({
 
         expand: function(pane) {
             this.toggle(pane, true);
+        },
+
+        _addPane: function(config, idx, paneElement) {
+            var that = this;
+
+            if (paneElement.length) {
+                that.options.panes.splice(idx, 0, config);
+                that._initPane(paneElement, config);
+
+                that._removeSplitBars();
+
+                that.trigger(RESIZE);
+            }
+
+            return paneElement;
+        },
+
+        append: function(config) {
+            config = config || {};
+
+            var that = this,
+                paneElement = $("<div />").appendTo(that.element);
+
+            return that._addPane(config, that.options.panes.length, paneElement);
+        },
+
+        insertBefore: function(config, referencePane) {
+            referencePane = $(referencePane);
+            config = config || {};
+
+            var that = this,
+                idx = referencePane.index(".k-pane"),
+                paneElement = $("<div />").insertBefore($(referencePane));
+
+            return that._addPane(config, idx, paneElement);
+        },
+
+        insertAfter: function(config, referencePane) {
+            referencePane = $(referencePane);
+            config = config || {};
+
+            var that = this,
+                idx = referencePane.index(".k-pane"),
+                paneElement = $("<div />").insertAfter($(referencePane));
+
+            return that._addPane(config, idx + 1, paneElement);
+        },
+
+        remove: function(pane) {
+            pane = $(pane);
+
+            var that = this;
+
+            if (pane.length) {
+                kendo.destroy(pane);
+                pane.each(function(idx, element){
+                    that.options.panes.splice($(element).index(".k-pane"), 1);
+                    $(element).remove();
+                });
+
+                that._removeSplitBars();
+
+                if (that.options.panes.length) {
+                    that.trigger(RESIZE);
+                }
+            }
+
+            return that;
         },
 
         size: panePropertyAccessor("size", true),

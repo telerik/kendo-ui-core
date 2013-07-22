@@ -24,6 +24,18 @@ require_once '../../lib/Kendo/Autoload.php';
         <li>
             <input id="max" type="text" value="150px" class="k-textbox" /> <button id="setMaxSize" class="k-button">Set maximum size</button>
         </li>
+        <li>
+            <button id="appendPane" class="k-button">Append a pane</button>
+        </li>
+        <li>
+            <button id="removePane" class="k-button">Remove pane</button>
+        </li>
+        <li>
+            <button id="insertBefore" class="k-button">Insert before index</button>
+        </li>
+        <li>
+            <button id="insertAfter" class="k-button">Insert after index</button>
+        </li>
     </ul>
 </div>
 
@@ -90,6 +102,18 @@ require_once '../../lib/Kendo/Autoload.php';
 
                 $("#splitter").data("kendoSplitter").max(pane, $("#max").val());
             }
+        },
+        appendPane = function (e) {
+            $("#splitter").data("kendoSplitter").append().html("appended pane");
+        },
+        removePane = function (e) {
+            $("#splitter").data("kendoSplitter").remove($("#splitter").children(".k-pane").eq($("#index").val()));
+        },
+        insertBefore = function (e) {
+            $("#splitter").data("kendoSplitter").insertBefore({}, $("#splitter").children(".k-pane").eq($("#index").val())).html("inserted before");
+        },
+        insertAfter = function (e) {
+            $("#splitter").data("kendoSplitter").insertAfter({}, $("#splitter").children(".k-pane").eq($("#index").val())).html("inserted after");
         };
 
     $("#toggle").click( function (e) {
@@ -107,6 +131,13 @@ require_once '../../lib/Kendo/Autoload.php';
 
     $("#setMaxSize").click(setMaxSize);
     $("#max").keypress(setMaxSize);
+    
+    $("#appendPane").click(appendPane);
+    $("#removePane").click(removePane);
+
+    $("#insertBefore").click(insertBefore);
+    $("#insertAfter").click(insertAfter);
+          
 </script>
 
 <style scoped>

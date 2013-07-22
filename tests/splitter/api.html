@@ -23,6 +23,13 @@
 
             module("Splitter / ClientSideApi", {
                 teardown: function() {
+                    if (splitterObject.destroy) {
+                        splitterObject.destroy();
+                    }
+                    
+                    splitterObject = null;
+                    splitter = null;
+
                     $('.k-splitter').remove();
                 }
             });
@@ -343,17 +350,164 @@
 
             test("ajaxRequest() applies selector context", function() {
                 createSplitter({
-                    panes: [{}, {}]
-                });
-
-                createSplitter({
-                    panes: [{}, {}]
+                    panes: [ {}, {} ]
                 });
 
                 splitterObject.ajaxRequest(".k-pane:first", "http://google.com");
 
                 equal(splitter.find("iframe").length, 1);
             });
+
+            test("append() appends a pane element", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                splitterObject.append();
+
+                equal(splitter.children(".k-pane").length, 3);
+            });
+
+            test("append() returns the pane element", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                var result = splitterObject.append() || $();
+
+                ok(result.is(splitter.children(".k-pane").last()));
+            });
+
+            test("append() appends a pane configuration", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                var config = { foo: "bar" };
+
+                splitterObject.append(config);
+
+                var panes = splitterObject.options.panes;
+
+                equal(panes[panes.length - 1], config);
+            });
+
+            test("insertBefore() inserts a pane element", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                var referencePane = splitter.children(".k-pane").addClass("existing-pane").first();
+
+                splitterObject.insertBefore({}, referencePane);
+
+                equal(splitter.children(".k-pane").length, 3);
+                ok(!splitter.children(".k-pane").first().hasClass("existing-pane"));
+            });
+
+            test("insertBefore() returns the pane element", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                var referencePane = splitter.children(".k-pane").addClass("existing-pane").first();
+
+                var result = splitterObject.insertBefore({}, referencePane) || $();
+
+                ok(result.is(splitter.children(".k-pane").first()));
+            });
+
+            test("insertBefore() inserts a pane configuration", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                var referencePane = splitter.children(".k-pane").addClass("existing-pane").first(),
+                    config = { foo: "bar" };
+
+                splitterObject.insertBefore(config, referencePane);
+
+                equal(splitterObject.options.panes[0], config);
+            });
+
+            test("insertAfter() inserts a pane element", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                var referencePane = splitter.children(".k-pane").addClass("existing-pane").first();
+
+                splitterObject.insertAfter({}, referencePane);
+
+                equal(splitter.children(".k-pane").length, 3);
+                ok(!splitter.children(".k-pane").eq(1).hasClass("existing-pane"));
+            });
+
+            test("insertAfter() returns the pane element", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                var referencePane = splitter.children(".k-pane").addClass("existing-pane").first();
+
+                var result = splitterObject.insertAfter({}, referencePane) || $();
+
+                ok(result.is(splitter.children(".k-pane").eq(1)));
+            });
+
+            test("insertAfter() inserts a pane configuration", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                var referencePane = splitter.children(".k-pane").addClass("existing-pane").first(),
+                    config = { foo: "bar" };
+
+                splitterObject.insertAfter(config, referencePane);
+
+                equal(splitterObject.options.panes[1], config);
+            });
+
+            test("remove() removes a pane element", function() {
+                createSplitter({
+                    panes: [{}, {}, {}]
+                }, 3);
+
+                splitter.children(".k-pane").eq(1).addClass("remaining-pane");
+
+                splitterObject.remove(splitter.children(".k-pane").not(".remaining-pane"));
+
+                equal(splitter.children(".k-pane").length, 1);
+                ok(splitter.children(".k-pane").first().hasClass("remaining-pane"));
+            });
+
+            test("remove() removes a pane configuration", function() {
+                var config = { foo: "bar" };
+                
+                createSplitter({
+                    panes: [{}, config, {}]
+                }, 3);
+
+                splitter.children(".k-pane").eq(1).addClass("remaining-pane");
+
+                splitterObject.remove(splitter.children(".k-pane").not(".remaining-pane"));
+
+                var panes = splitterObject.options.panes;
+                
+                ok(panes[0] && typeof panes[0].foo != "undefined");
+            });
+
+            test("remove() returns the splitter object", function() {
+                createSplitter({
+                    panes: [{}, {}]
+                });
+
+                var result = splitterObject.remove(splitter.children(".k-pane").first());
+
+                ok(result && result.options && result.options.name && result.options.name == "Splitter");
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
