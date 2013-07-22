@@ -207,25 +207,33 @@ kendo_module({
         slotRanges: function(event) {
             var ranges = [];
 
+            var collection;
+
             var multiday = this.multiday(event);
 
             var startSlot = this._startSlot(event.start, multiday);
 
             var endSlot = this._endSlot(event.end, multiday);
 
-            if (multiday) {
-                if (kendo.date.getMilliseconds(event.end) === 0 && event.end.getTime() != event.start.getTime() && !event.isAllDay) {
-                    var collection = this._collection(startSlot.collectionIndex(), multiday);
-                    endSlot = collection.at(endSlot.index - 1);
-                }
-            }
-
             if (!startSlot || !endSlot) {
                 return ranges;
             }
 
+            if (multiday) {
+                if (kendo.date.getMilliseconds(event.end) === 0 && event.end.getTime() != event.start.getTime() && !event.isAllDay) {
+                    collection = this._collection(startSlot.collectionIndex(), multiday);
+
+                    endSlot = collection.at(Math.max(0, endSlot.index - 1));
+                }
+            }
+
+            if (endSlot.end.getTime() < startSlot.start.getTime()) {
+                collection = this._collection(startSlot.collectionIndex(), multiday);
+                endSlot = collection.last();
+            }
+
             for (var columnIndex = startSlot.collectionIndex(); columnIndex <= endSlot.collectionIndex(); columnIndex++) {
-                var collection = this._collection(columnIndex, multiday);
+                collection = this._collection(columnIndex, multiday);
 
                 var first = collection.first();
                 var last = collection.last();
@@ -274,7 +282,7 @@ kendo_module({
                 return null;
             }
 
-            var slotIndex = this.slotIndex(date, multiday);
+            var slotIndex = Math.floor(this.slotIndex(date, multiday));
 
             var slot = collection.at(slotIndex);
 
@@ -293,7 +301,7 @@ kendo_module({
                 return null;
             }
 
-            var slotIndex = this.slotIndex(date, multiday);
+            var slotIndex = Math.ceil(this.slotIndex(date, multiday));
 
             var slot = collection.at(slotIndex);
 
@@ -321,14 +329,22 @@ kendo_module({
         innerHeight: function() {
             var collection = this.collection;
 
+            var startIndex = this.start.index;
+
+            var endIndex = this.end.index;
+
             var result = 0;
 
-            for (var slotIndex = this.start.index; slotIndex < this.end.index; slotIndex++) {
-               result += collection.at(slotIndex).offsetHeight;
-            }
+            if (startIndex == endIndex) {
+                result = collection.at(startIndex).offsetHeight;
+            } else {
+                for (var slotIndex = startIndex; slotIndex < endIndex; slotIndex++) {
+                   result += collection.at(slotIndex).offsetHeight;
+                }
 
-            if (this.end == collection.last()) {
-                result += this.end.offsetHeight;
+                if (this.end == collection.last()) {
+                    result += this.end.offsetHeight;
+                }
             }
 
             return result;

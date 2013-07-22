@@ -464,11 +464,13 @@
             test("set the height of the event when end time is near the end of the slot", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
+                        startTime: new Date("2013/2/26 8:00 AM"),
                         dates: [
                            selectedDate
                         ]
                     }),
-                    events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 40, 0), title: "my event" })];
+
+                    events = [new SchedulerEvent({uid:"uid", start: new Date("2013/2/26 10:00 AM"), end: new Date("2013/2/26 12:40 PM"), title: "my event" })];
 
                 view.render(events);
 
@@ -1550,8 +1552,8 @@
                     id: "2"
                 })]);
 
-                equal(view._columns[0].events[0].start, 10);
-                equal(view._columns[0].events[0].end, 24);
+                equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 10);
+                equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
 
                 ok(view.content.find(".k-event").length);
             });
@@ -1566,8 +1568,8 @@
                     id: "2"
                 })]);
 
-                equal(view._columns[0].events[0].start, 0);
-                equal(view._columns[0].events[0].end, 0);
+                equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
+                equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 0);
 
                 ok(view.content.find(".k-event").length);
             });
@@ -1597,11 +1599,11 @@
 
                 ok(view.content.find(".k-event").length);
 
-                equal(view._columns[0].events[0].start, 0);
-                equal(view._columns[0].events[0].end, 17);
+                equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
+                equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 16);
             });
 
-            test("two day all day event is render correctly", function() {
+            test("two day all day event is rendered correctly", function() {
                 var view = setup({ dates: [ new Date(2013, 1, 2), new Date(2013, 1, 3) ] });
 
                 view.render([new SchedulerEvent({
@@ -1612,8 +1614,8 @@
                     id: "2"
                 })]);
 
-                equal(view._rows[0].events[0].start, 0);
-                equal(view._rows[0].events[0].end, 1);
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].end, 1);
 
                 ok(view.datesHeader.find(".k-event").length);
             });

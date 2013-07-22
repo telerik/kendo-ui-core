@@ -431,7 +431,7 @@ kendo_module({
 
        _slotByPosition: function(x, y) {
            var slot;
-           var offset = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day)").offset();
+           var offset = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day)").find(">div").offset();
 
            if (offset) {
                x -= offset.left;
