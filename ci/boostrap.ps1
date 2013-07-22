@@ -7,7 +7,7 @@ function download([string]$url) {
         [System.Net.GlobalProxySelection]::Select = [System.Net.GlobalProxySelection]::GetEmptyWebProxy()
         trap { $error[0].Exception.ToString() } $client.DownloadFile($url, $fullPath)
     }
-
+    
     return $fullPath
 }
 
@@ -41,7 +41,14 @@ function downloadAndInstall([string]$name, [string]$url, [string[]]$paramList) {
 }
 
 function unzip([string]$archive, [string]$destination) {
-
+    $exists = test-path $destination -pathType container
+    if (!($exists)) {
+        write-host "Unpacking $archive to $destination..."
+        start-process -FilePath "7z" -ArgumentList @("x", "-o$destination", $archive) -Wait
+    } else {
+        write-host "Destination directory $destination exists, skipping archive inflation"
+    }
+    return $exists
 }
 
 downloadAndInstall "git" "https://msysgit.googlecode.com/files/Git-1.8.3-preview20130601.exe" @(
@@ -63,4 +70,11 @@ registerPath "C:\Ruby193\bin"
 downloadAndInstall "7z" "http://downloads.sourceforge.net/project/sevenzip/7-Zip/9.20/7z920.exe?r=&ts=1374160542&use_mirror=garr" @( "/S" )
 registerPath "C:\Program Files (x86)\7-Zip"
 
+$devkitDir = "C:\DevKit\"
 $devkit = download "https://github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe"
+if (!(unzip $devkit $devkitDir)) {
+    write-host "Installing the Ruby DevKit..."
+    cd $devkitDir
+    ruby dk.rb init
+    ruby dk.rb install
+}
