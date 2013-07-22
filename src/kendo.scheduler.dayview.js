@@ -146,9 +146,9 @@ kendo_module({
 
             that.calculateDateRange();
 
-            that._slots();
-
             that._groups();
+
+            that._slots();
        },
 
        _toDaySlot: function(slot) {
@@ -1290,7 +1290,7 @@ kendo_module({
                 var columnCount = this._columnCountInGroup();
 
                 if (this._isGroupedByDate()) {
-                    return Math.floor(index/columnCount);
+                    return Math.floor(index % columnCount);
                 }
 
                 return index - columnCount*Math.floor(index/columnCount);
@@ -1751,9 +1751,9 @@ kendo_module({
         render: function(events) {
             this._headerColumnCount = 0;
 
-            this._slots();
-
             this._groups();
+
+            this._slots();
 
             this.element.find(".k-event").remove();
 

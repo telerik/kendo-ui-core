@@ -43,6 +43,10 @@
                 equal($(element)[0].style.backgroundColor, color);
             }
 
+            function equalWithRound(value, expected) {
+                QUnit.close(value, expected, 3);
+            }
+
             module("resources", {
                 setup: function() {
                     div.appendTo(document.body);
@@ -816,7 +820,7 @@
                 var view = scheduler.view();
 
                 equal(view.content.find(".k-event").length, 1);
-                equal(view._columns[1].events.length, 1);
+                equal(view.groups[1].getTimeSlotCollection(0).events().length, 1);
             });
 
             test("events are position in the correct group in day view in vertical orientation", function() {
@@ -845,7 +849,8 @@
 
                 var view = scheduler.view();
                 equal(view.content.find(".k-event").length, 2);
-                equal(view._columns[0].events.length, 2);
+                equal(view.groups[0].getTimeSlotCollection(0).events().length, 1);
+                equal(view.groups[1].getTimeSlotCollection(0).events().length, 1);
             });
 
             test("multi day events are position in the correct group in day view", function() {
@@ -871,9 +876,9 @@
                 });
 
                 var view = scheduler.view();
-                var event = view._rows[0].events[0];
+                var event = view.groups[0].getDaySlotCollection(0).events()[0];
                 equal(view.datesHeader.find(".k-event").length, 1);
-                equal(view._rows[0].events.length, 1);
+                equal(view.groups[0].getDaySlotCollection(0).events().length, 1);
                 equal(event.start, 0);
                 equal(event.end, 0);
             });
@@ -903,9 +908,9 @@
                 });
 
                 var view = scheduler.view();
-                var event = view._columns[0].events[0];
+                var event = view.groups[0].getTimeSlotCollection(0).events()[0];
                 equal(event.start, 20);
-                equal(event.end, 28);
+                equal(event.end, 27);
             });
 
             test("multiple copies of the event are position in the correct group in day view when multiple resources matched", function() {
@@ -941,8 +946,11 @@
                 var view = scheduler.view();
 
                 equal(view.content.find(".k-event").length, 2);
-                equal(view._columns[2].events.length, 1);
-                equal(view._columns[3].events.length, 1);
+
+                var event = view.groups[0].getTimeSlotCollection(0).events()[0];
+
+                equal(view.groups[2].getTimeSlotCollection(0).events().length, 1);
+                equal(view.groups[3].getTimeSlotCollection(0).events().length, 1);
             });
 
             test("double clicking a day view cell triggers add event with grouping", 2, function() {
@@ -1057,10 +1065,10 @@
 
                 var view = scheduler.view();
 
-                var slotEvents = view._columns[0].events;
+                var slotEvents = view.groups[1].getTimeSlotCollection(0).events();
                 equal(slotEvents.length, 1);
-                equal(slotEvents[0].start, 12);
-                equal(slotEvents[0].end, 14);
+                equal(slotEvents[0].start, 2);
+                equal(slotEvents[0].end, 4);
             });
 
             test("double clicking the first all day slot triggers add event in day view with vertical orientation", 1, function() {
@@ -1175,7 +1183,7 @@
 
                 var view = scheduler.view();
 
-                equal(view._rows[0].events.length, 1);
+                equal(view.groups[1].getDaySlotCollection(0).events().length, 1);
             });
 
             test("all day events are added in the correct group allday slot when vertical grouping is applyed", function() {
@@ -1201,7 +1209,7 @@
 
                 var view = scheduler.view();
 
-                equal(view._rows[1].events.length, 1);
+                equal(view.groups[1].getDaySlotCollection(0).events().length, 1);
             });
 
             test("slots offsetTop is updated when all day event is inserted when vertical grouping is applyed", function() {
@@ -1226,20 +1234,20 @@
                 });
 
                 var view = scheduler.view();
-                var slots = view._columns[0].slots;
+                var slots = view.groups[0].getTimeSlotCollection(0);
 
                 var initialHeight = view._allDayHeaderHeight;
-                var firstSlotTop = slots[0].offsetTop;
-                var lastSlotTop = slots[slots.length - 1].offsetTop;
+                var firstSlotTop = slots.first().offsetTop;
+                var lastSlotTop = slots.last().offsetTop;
 
                 scheduler.dataSource.add({ start: new Date("2013/6/6 10:00 AM"), end: new Date("2013/6/6 11:00 AM"), isAllDay: true, title: "", foo: 1 });
 
                 var offset = view.element.find(".k-scheduler-header-all-day").first()[0].clientHeight - initialHeight;
 
-                slots = view._columns[0].slots;
+                slots = view.groups[0].getTimeSlotCollection(0);
 
-                equal(slots[0].offsetTop, firstSlotTop + offset);
-                equal(slots[slots.length - 1].offsetTop, lastSlotTop + offset * 2);  // there are two headers before this
+                equalWithRound(slots.first().offsetTop, firstSlotTop + offset);
+                equalWithRound(slots.last().offsetTop, lastSlotTop + offset);
             });
 
             test("slotByPosition returns correct date for slot for the last group with vertical orientation", function() {
@@ -1304,7 +1312,7 @@
 
                 var offset = view.element.find(".k-scheduler-header-all-day").first()[0].clientHeight - initialHeight;
 
-                equal(view.content.find(".k-event:last")[0].offsetTop, eventInitialTop + offset * 2);
+                equalWithRound(view.content.find(".k-event:last")[0].offsetTop, eventInitialTop + offset * 2);
             });
 
             test("last slot in the group has correct date when groupped vertically", function() {
@@ -1382,10 +1390,10 @@
                 });
 
                 var view = scheduler.view();
-                var firstGroupSlots = view._columns[0].slots;
-                var secondGroupSlots = view._columns[0].slots;
+                var firstGroupSlots = view.group[0].getTimeSlotCollection(0);
+                var secondGroupSlots = view.group[1].getTimeSlotCollection(0);
 
-                deepEqual(firstGroupSlots[0].start, new Date("2013/6/6 00:00"));
+                deepEqual(firstGroupSlots.first().start, new Date("2013/6/6 00:00"));
                 deepEqual(firstGroupSlots[0].end, new Date("2013/6/6 00:30"));
                 deepEqual(firstGroupSlots[firstGroupSlots.length - 1].start, new Date("2013/6/6 23:30"));
                 deepEqual(firstGroupSlots[firstGroupSlots.length - 1].end, new Date("2013/6/7 00:00"));
@@ -1417,31 +1425,31 @@
                 });
 
                 var view = scheduler.view();
-                var firstGroupSlots = view._columns[0].slots;
-                var secondGroupSlots = view._columns[1].slots;
+                var firstGroupSlots = view.groups[0].getTimeSlotCollection(0);
+                var secondGroupSlots = view.groups[1].getTimeSlotCollection(0);
 
-                var secondDateFirstGroupSlots = view._columns[2].slots;
-                var secondDateSecondGroupSlots = view._columns[3].slots;
+                var secondDateFirstGroupSlots = view.groups[0].getTimeSlotCollection(1);
+                var secondDateSecondGroupSlots = view.groups[1].getTimeSlotCollection(1);
 
-                deepEqual(firstGroupSlots[0].start, new Date("2013/6/2 00:00"));
-                deepEqual(firstGroupSlots[0].end, new Date("2013/6/2 00:30"));
-                deepEqual(firstGroupSlots[firstGroupSlots.length - 1].start, new Date("2013/6/2 23:30"));
-                deepEqual(firstGroupSlots[firstGroupSlots.length - 1].end, new Date("2013/6/3 00:00"));
+                deepEqual(firstGroupSlots.first().start, new Date("2013/6/2 00:00"));
+                deepEqual(firstGroupSlots.first().end, new Date("2013/6/2 00:30"));
+                deepEqual(firstGroupSlots.last().start, new Date("2013/6/2 23:30"));
+                deepEqual(firstGroupSlots.last().end, new Date("2013/6/3 00:00"));
 
-                deepEqual(secondGroupSlots[0].start, new Date("2013/6/2 00:00"));
-                deepEqual(secondGroupSlots[0].end, new Date("2013/6/2 00:30"));
-                deepEqual(secondGroupSlots[secondGroupSlots.length - 1].start, new Date("2013/6/2 23:30"));
-                deepEqual(secondGroupSlots[secondGroupSlots.length - 1].end, new Date("2013/6/3 00:00"));
+                deepEqual(secondGroupSlots.first().start, new Date("2013/6/2 00:00"));
+                deepEqual(secondGroupSlots.first().end, new Date("2013/6/2 00:30"));
+                deepEqual(secondGroupSlots.last().start, new Date("2013/6/2 23:30"));
+                deepEqual(secondGroupSlots.last().end, new Date("2013/6/3 00:00"));
 
-                deepEqual(secondDateFirstGroupSlots[0].start, new Date("2013/6/3 00:00"));
-                deepEqual(secondDateFirstGroupSlots[0].end, new Date("2013/6/3 00:30"));
-                deepEqual(secondDateFirstGroupSlots[secondDateFirstGroupSlots.length - 1].start, new Date("2013/6/3 23:30"));
-                deepEqual(secondDateFirstGroupSlots[secondDateFirstGroupSlots.length - 1].end, new Date("2013/6/4 00:00"));
+                deepEqual(secondDateFirstGroupSlots.first().start, new Date("2013/6/3 00:00"));
+                deepEqual(secondDateFirstGroupSlots.first().end, new Date("2013/6/3 00:30"));
+                deepEqual(secondDateFirstGroupSlots.last().start, new Date("2013/6/3 23:30"));
+                deepEqual(secondDateFirstGroupSlots.last().end, new Date("2013/6/4 00:00"));
 
-                deepEqual(secondDateSecondGroupSlots[0].start, new Date("2013/6/3 00:00"));
-                deepEqual(secondDateSecondGroupSlots[0].end, new Date("2013/6/3 00:30"));
-                deepEqual(secondDateSecondGroupSlots[secondDateSecondGroupSlots.length - 1].start, new Date("2013/6/3 23:30"));
-                deepEqual(secondDateSecondGroupSlots[secondDateSecondGroupSlots.length - 1].end, new Date("2013/6/4 00:00"));
+                deepEqual(secondDateSecondGroupSlots.first().start, new Date("2013/6/3 00:00"));
+                deepEqual(secondDateSecondGroupSlots.first().end, new Date("2013/6/3 00:30"));
+                deepEqual(secondDateSecondGroupSlots.last().start, new Date("2013/6/3 23:30"));
+                deepEqual(secondDateSecondGroupSlots.last().end, new Date("2013/6/4 00:00"));
             });
 
             test("event on the same date but in diffrent groups are position correctly in week view", function() {
