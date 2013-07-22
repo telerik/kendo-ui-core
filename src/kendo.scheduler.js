@@ -276,27 +276,19 @@ kendo_module({
             kendo.data.Model.fn.init.call(that, value);
         },
 
-        clone: function() {
-            var event = this.toJSON(),
-                uid = event.uid;
-
-            event = new SchedulerEvent(event);
-            event.uid = uid;
-
-            return event;
-        },
-
         toOccurrence: function(options) {
-            var event = this.clone(),
+            var event = this,
                 start = event.start;
 
             if (start.getTime() !== options.start.getTime() || start.getTime() !== options.startTime.getTime()) {
-                event.recurrenceId = event.id;
+                event = new event.constructor(event.toJSON());
+
+                event.recurrenceId = this.id;
                 event.uid = kendo.guid();
 
                 delete event.recurrenceException;
                 delete event.recurrenceRule;
-                delete event[event.idField];
+                delete event[this.idField];
                 delete event.id;
 
                 event = $.extend(event, options);
@@ -306,8 +298,7 @@ kendo_module({
         },
 
         expand: function(start, end, zone) {
-            var event = this.clone();
-            return recurrence ? recurrence.expand(event, start, end, zone) : [event];
+            return recurrence ? recurrence.expand(this, start, end, zone) : [this];
         },
 
         toJSON: function() {
@@ -462,18 +453,6 @@ kendo_module({
         delete options.edit;
 
         return options;
-    }
-
-    function convertToPlainObjects(data) {
-        var idx,
-            length,
-            result = [];
-
-        for (idx = 0, length = data.length; idx < length; idx++) {
-            result.push(data[idx].toJSON());
-        }
-
-        return result;
     }
 
     function dropDownResourceEditor(resource) {

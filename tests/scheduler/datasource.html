@@ -210,21 +210,6 @@
                 equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
             });
 
-            test("clone creates new instance of SchedulerEvent", function() {
-                var event = new SchedulerEvent();
-                var clone = event.clone();
-
-                notStrictEqual(event, clone);
-                ok(clone instanceof SchedulerEvent);
-            });
-
-            test("clone preserves the original event uid", function() {
-                var event = new SchedulerEvent();
-                var clone = event.clone();
-
-                equal(event.uid, clone.uid);
-            });
-
             test("toOccurrence creates new SchedulerEvent occurrence object", function() {
                 var event = new SchedulerEvent({
                     id: 1,
@@ -271,18 +256,26 @@
                 equal(occurrence.recurrenceException, event.recurrenceException);
             });
 
-            test("SchedulerEvent expand method should return a clone of the head event", function() {
-                var schedulerEvent = new SchedulerEvent({
-                    uid: "id",
-                    title: "Title",
-                    start: new Date(2012, 2, 31, 0, 0),
-                    end: new Date(2012, 2, 31, 1, 0)
+            test("toOccurrence creates new SchedulerEvent with same field definition", function() {
+                var event = new SchedulerEvent.define({
+                    id: "foo",
+                    fields: {
+                        foo: { type: "string" },
+                        test: "test"
+                    }
                 });
 
-                var events = schedulerEvent.expand(new Date(2012, 0, 1), new Date(2014, 10, 10));
+                var base = new event({
+                    start: new Date(2000, 10, 10)
+                });
 
-                equal(events[0].uid, schedulerEvent.uid);
-                notStrictEqual(events[0], schedulerEvent);
+                var occurrence = base.toOccurrence({
+                    start: new Date(2000, 11, 10)
+                });
+
+                equal(occurrence.idField, base.idField);
+                equal(occurrence.fields.foo.type, "string");
+                ok(occurrence.fields.test);
             });
 
             test("SchedulerEvent expand method should return a clone of the head event", function() {
@@ -296,7 +289,19 @@
                 var events = schedulerEvent.expand(new Date(2012, 0, 1), new Date(2014, 10, 10));
 
                 equal(events[0].uid, schedulerEvent.uid);
-                notStrictEqual(events[0], schedulerEvent);
+            });
+
+            test("SchedulerEvent expand method should return a clone of the head event", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2012, 2, 31, 0, 0),
+                    end: new Date(2012, 2, 31, 1, 0)
+                });
+
+                var events = schedulerEvent.expand(new Date(2012, 0, 1), new Date(2014, 10, 10));
+
+                equal(events[0].uid, schedulerEvent.uid);
             });
 
             test("create instantiate a SchedulerDataSource", function() {
