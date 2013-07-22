@@ -133,6 +133,11 @@
     background-image: @sprite-image,    -moz-linear-gradient(top, ~"@{gradient}");
     background-image: @sprite-image,      -o-linear-gradient(top, ~"@{gradient}");
     background-image: @sprite-image,       ~"linear-gradient(to bottom, @{gradient})";
+
+    .k-ie8 &,
+    .k-ie7 & {
+        background-image: @sprite-image;
+    }
 }
 
 .selection(@color) {
