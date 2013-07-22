@@ -301,3 +301,11 @@ var app = new kendo.mobile.Application(document.body, {
         }, 1000)
     }
 });
+
+function showAbout(e) {
+    if (e.item.text() == "About") {
+        $("#drawer").data("kendoMobileDrawer").hide();
+        setTimeout( function () { kendo.mobile.application.navigate('#about'); }, 230);
+    }
+}
+

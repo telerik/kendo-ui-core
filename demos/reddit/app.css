@@ -59,6 +59,10 @@
     padding: 0;
 }
 
+#about .km-content {
+    background: transparent;
+}
+
 .km-scrollview {
     display: flex;
     display: -webkit-flex;

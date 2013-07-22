@@ -43,7 +43,7 @@
         <div class="splash"></div>
 
         <div id="drawer" data-role="drawer" data-views="['list', 'account', 'settings', 'notifications', 'feedback', 'about']">
-            <ul data-role="listview" data-style="inset" data-type="group">
+            <ul data-role="listview" data-style="inset" data-type="group" data-click="showAbout">
                 <li>
                     Narwhal Bacon
                     <ul>
@@ -60,7 +60,7 @@
                 <li>
                     <ul>
                         <li><a href="#feedback">Feedback</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li><a>About</a></li>
                     </ul>
                 </li>
             </ul>
@@ -191,6 +191,9 @@
                     </ul>
                 </li>
             </ul>
+        </div>
+
+        <div data-role="view" id="about" class="splash" data-transition="fadeIn">
         </div>
 
         <div data-role="view" id="detail" data-transition="slide" data-after-show="renderDetail" data-title="" data-hide="resetDetail" data-stretch="true">
