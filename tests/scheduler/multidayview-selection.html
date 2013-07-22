@@ -28,6 +28,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             var MultiDayView = kendo.ui.MultiDayView,
+                SchedulerEvent = kendo.data.SchedulerEvent,
                 keys = kendo.keys,
                 container;
 
@@ -274,10 +275,11 @@
 
             test("View select event by uid", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    uid = kendo.guid();
+                    event = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    uid = event.uid;
 
                 view.render([
-                    { uid: uid, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }
+                    event
                 ]);
 
                 var selection = createSelection({
@@ -294,12 +296,13 @@
 
             test("View select multiple events by UIDs", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -316,18 +319,19 @@
 
             test("View select cells if cannot find one of the selected events", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: kendo.guid(), start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
                     start: new Date(2013, 6, 7, 6),
                     end: new Date(2013, 6, 7, 8),
-                    events: [uid1, uid2]
+                    events: [uid1, kendo.guid()]
                 });
 
                 view.select(selection);
@@ -338,12 +342,13 @@
 
             test("View scrolls to the last selected event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -546,12 +551,13 @@
 
             test("View shrink selection up to one slot on down arrow (selected events)", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -683,12 +689,13 @@
 
             test("View moves selection before first selected events", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -806,12 +813,13 @@
 
             test("View moveToEvent method returns true if find an event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -825,12 +833,13 @@
 
             test("View moves to the first event after current slot", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -849,12 +858,13 @@
 
             test("View moves to the next event in the column", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -874,12 +884,13 @@
 
             test("View moves to the first column in the next column", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 8, 6), end: new Date(2013, 6, 8, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 8, 6), end: new Date(2013, 6, 8, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -899,12 +910,13 @@
 
             test("View moves to the next allDay event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 8, 0), end: new Date(2013, 6, 8, 0), title: "Test", isAllDay: true }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 8, 0), end: new Date(2013, 6, 8, 0), title: "Test", isAllDay: true }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -925,12 +937,13 @@
 
             test("View moves to the first event before current slot", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -949,12 +962,13 @@
 
             test("View moves to the previous event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -974,12 +988,13 @@
 
             test("View moves to the last event in previous column", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" },
-                    { uid: uid2, start: new Date(2013, 6, 8, 6), end: new Date(2013, 6, 8, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -999,12 +1014,13 @@
 
             test("View moves to the previous all day event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    uid1 = kendo.guid(),
-                    uid2 = kendo.guid();
+                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 0), end: new Date(2013, 6, 7, 1), title: "Test", isAllDay: true }),
+                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
 
                 view.render([
-                    { uid: uid1, start: new Date(2013, 6, 7, 0), end: new Date(2013, 6, 7, 1), title: "Test", isAllDay: true },
-                    { uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }
+                    event1, event2
                 ]);
 
                 var selection = createSelection({
@@ -1012,7 +1028,6 @@
                     end: new Date(2013, 6, 7, 8),
                     events: [uid2]
                 });
-
 
                 view.moveToEvent(selection, true);
 
