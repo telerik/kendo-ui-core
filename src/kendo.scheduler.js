@@ -276,29 +276,29 @@ kendo_module({
             kendo.data.Model.fn.init.call(that, value);
         },
 
-        toOccurrence: function(options) {
-            var event = this,
-                start = event.start;
-
-            if (start.getTime() !== options.start.getTime() || start.getTime() !== options.startTime.getTime()) {
-                event = new event.constructor(event.toJSON());
-
-                event.recurrenceId = this.id;
-                event.uid = kendo.guid();
-
-                delete event.recurrenceException;
-                delete event.recurrenceRule;
-                delete event[this.idField];
-                delete event.id;
-
-                event = $.extend(event, options);
-            }
-
-            return event;
-        },
-
         expand: function(start, end, zone) {
             return recurrence ? recurrence.expand(this, start, end, zone) : [this];
+        },
+
+        isException: function() {
+            return this.id && this.recurrenceId;
+        },
+
+        isRecurring: function() {
+            return !!(this.recurrenceRule || this.recurrenceId);
+        },
+
+        toOccurrence: function(options) {
+            options = $.extend({}, this.toJSON(), options, {
+                recurrenceException: null,
+                recurrenceRule: null,
+                recurrenceId: this.id,
+                id: this.defaults.id
+            });
+
+            delete options[this.idField];
+
+            return new this.constructor(options);
         },
 
         toJSON: function() {

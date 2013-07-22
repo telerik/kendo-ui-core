@@ -17,6 +17,7 @@ kendo_module({
         setDayOfWeek = date.setDayOfWeek,
         adjustDST = date.adjustDST,
         firstDayOfMonth = date.firstDayOfMonth,
+        getMilliseconds = date.getMilliseconds,
         DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
@@ -819,6 +820,7 @@ kendo_module({
         var eventEnd = event.end,
             eventStart = event.start,
             eventStartMS = eventStart.getTime(),
+            eventStartTime = getMilliseconds(eventStart),
             rule = parseRule(event.recurrenceRule),
             startTime, endTime, endDate,
             hours, minutes, seconds,
@@ -885,12 +887,18 @@ kendo_module({
                 endTime = new Date(rule._startTime);
                 setTime(endTime, durationMS);
 
-                events.push(event.toOccurrence({
-                    start: new Date(start),
-                    startTime: new Date(startTime),
-                    end: endDate,
-                    endTime: endTime
-                }));
+                if (eventStartMS !== start.getTime() || eventStartTime !== getMilliseconds(startTime)) {
+                    events.push(event.toOccurrence({
+                        start: new Date(start),
+                        startTime: new Date(startTime),
+                        end: endDate,
+                        endTime: endTime
+                    }));
+                } else {
+                    event.startTime = startTime;
+                    event.endTime = endTime;
+                    events.push(event);
+                }
             }
 
             if (count && count === current) {

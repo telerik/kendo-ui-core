@@ -1951,6 +1951,27 @@
                 equal(events[2].start.getTime(), +new Date(2013, 0, 5, 10, 30));
                 equal(events[2].end.getTime(), +new Date(2013, 0, 5, 11, 30));
             });
+
+            test("expand method returns event directly when if it satisfies recurrence rule", function() {
+                var start = new Date(2010, 10, 10);
+                var event = new SchedulerEvent({
+                    id: 1,
+                    recurrenceRule: "FREQ=DAILY",
+                    recurrenceException: "20001111T090000",
+                    start: start,
+                    end: start
+                });
+
+                var occurrence = event.expand(start, kendo.date.addDays(start, 2))[0];
+
+                ok(!occurrence.recurrenceId);
+                equal(occurrence.uid, event.uid);
+                deepEqual(occurrence.start, start);
+
+                equal(occurrence.id, event.id);
+                equal(occurrence.recurrenceRule, event.recurrenceRule);
+                equal(occurrence.recurrenceException, event.recurrenceException);
+            });
         </script>
     </body>
 </html>

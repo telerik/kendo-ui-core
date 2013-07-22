@@ -233,29 +233,6 @@
                 ok(!occurrence.recurrenceException);
             });
 
-            test("toOccurrence returns event directly when options.start is equal to event.start", function() {
-                var start = new Date(2010, 10, 10);
-                var event = new SchedulerEvent({
-                    id: 1,
-                    recurrenceRule: "FREQ=DAILY",
-                    recurrenceException: "20001111T090000",
-                    start: start
-                });
-
-                var occurrence = event.toOccurrence({
-                    start: start,
-                    startTime: start
-                });
-
-                ok(!occurrence.recurrenceId);
-                equal(occurrence.uid, event.uid);
-                deepEqual(occurrence.start, start);
-
-                equal(occurrence.id, event.id);
-                equal(occurrence.recurrenceRule, event.recurrenceRule);
-                equal(occurrence.recurrenceException, event.recurrenceException);
-            });
-
             test("toOccurrence creates new SchedulerEvent with same field definition", function() {
                 var event = new SchedulerEvent.define({
                     id: "foo",
@@ -276,6 +253,40 @@
                 equal(occurrence.idField, base.idField);
                 equal(occurrence.fields.foo.type, "string");
                 ok(occurrence.fields.test);
+            });
+
+            test("isRecurring method returns true if recurringId is defined", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    recurrenceId: 1,
+                    title: "Title",
+                    start: new Date(2012, 2, 31, 0, 0),
+                    end: new Date(2012, 2, 31, 1, 0),
+                });
+
+                ok(schedulerEvent.isRecurring());
+            });
+
+            test("isRecurring method returns true if recurrenceRule is defined", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    title: "Title",
+                    recurrenceRule: "FREQ:DAILY",
+                    start: new Date(2012, 2, 31, 0, 0),
+                    end: new Date(2012, 2, 31, 1, 0),
+                });
+
+                ok(schedulerEvent.isRecurring());
+            });
+
+            test("isException method returns true if recurrenceId and id fields are defined", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    id: 3,
+                    title: "Title",
+                    recurrenceId: 2,
+                    start: new Date(2012, 2, 31, 0, 0),
+                    end: new Date(2012, 2, 31, 1, 0),
+                });
+
+                ok(schedulerEvent.isException());
             });
 
             test("SchedulerEvent expand method should return a clone of the head event", function() {
