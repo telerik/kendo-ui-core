@@ -330,7 +330,13 @@
 
 .km-wp .km-button .km-icon
 {
-    margin-top: -4px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    vertical-align: text-top;
+}
+
+.km-wp .km-buttongroup .km-icon
+{
     vertical-align: middle;
 }
 
@@ -351,6 +357,11 @@
     margin-top: -3px;
     display: inline-block;
     padding-bottom: 3px;
+}
+
+.km-wp .km-tabstrip .km-text
+{
+    display: block;
 }
 
 .km-wp .km-pages > li
@@ -894,7 +905,6 @@
 
 .km-wp .km-badge
 {
-    .linear-gradient-image(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: @accent-text;
     border: .1em solid @accent-text;
     background-color: @accent-background;
@@ -905,6 +915,7 @@
 
 .km-wp .km-tabstrip .km-badge
 {
+    margin-top: -.7em;
     line-height: 2.1em;
 }
 
