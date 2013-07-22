@@ -367,3 +367,21 @@
     float: right;
     font-weight: bold;
 }
+
+#feedback textarea {
+    float: none;
+    width: 100%;
+    resize: none;
+}
+
+#feedback .km-content [data-role=button] {
+    display: block;
+    margin: 1em;
+}
+
+#feedback .km-content [data-role=button] span {
+    display: block;
+    text-align: center;
+    font-size: 1.2em;
+}
+
