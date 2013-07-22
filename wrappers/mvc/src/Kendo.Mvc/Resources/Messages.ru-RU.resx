@@ -193,13 +193,13 @@
     <value>Строки со значениями</value>
   </data>
   <data name="Filter_StringEndsWith" xml:space="preserve">
-    <value>оканчивающимися на</value>
+    <value>оканчивается на</value>
   </data>
   <data name="Filter_StringIsEqualTo" xml:space="preserve">
-    <value>равными</value>
+    <value>равно</value>
   </data>
   <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
-    <value>не равными</value>
+    <value>не равно</value>
   </data>
   <data name="Filter_StringStartsWith" xml:space="preserve">
     <value>начинающимися на</value>
@@ -241,10 +241,10 @@
     <value>Обновить</value>
   </data>
   <data name="Filter_StringDoesNotContain" xml:space="preserve">
-    <value>Does not contain</value>
+    <value>не содержит</value>
   </data>
   <data name="Filter_Or" xml:space="preserve">
-    <value>Or</value>
+    <value>или</value>
   </data>
   <data name="Editor_Bold" xml:space="preserve">
     <value>Полужирный</value>
@@ -253,19 +253,19 @@
     <value>Вставить гиперссылку</value>
   </data>
   <data name="Editor_FontName" xml:space="preserve">
-    <value>Выбрать шрифт</value>
+    <value>Шрифт</value>
   </data>
   <data name="Editor_FontNameInherit" xml:space="preserve">
-    <value>(inherited font)</value>
+    <value>(шрифт как в документе)</value>
   </data>
   <data name="Editor_FontSize" xml:space="preserve">
     <value>Выбрать размер шрифта</value>
   </data>
   <data name="Editor_FontSizeInherit" xml:space="preserve">
-    <value>(inherited size)</value>
+    <value>(размер как в документе)</value>
   </data>
   <data name="Editor_FormatBlock" xml:space="preserve">
-    <value>Форматирование</value>
+    <value>Текст изображения</value>
   </data>
   <data name="Editor_Indent" xml:space="preserve">
     <value>Увеличить отступ</value>
@@ -274,28 +274,28 @@
     <value>Вставить HTML</value>
   </data>
   <data name="Editor_InsertImage" xml:space="preserve">
-    <value>Вставить изображение</value>
+    <value>Изображение</value>
   </data>
   <data name="Editor_InsertOrderedList" xml:space="preserve">
-    <value>Вставить нумерованный список</value>
+    <value>Нумерованный список</value>
   </data>
   <data name="Editor_InsertUnorderedList" xml:space="preserve">
-    <value>Вставить маркированныйсписок</value>
+    <value>Маркированныйсписок</value>
   </data>
   <data name="Editor_Italic" xml:space="preserve">
     <value>Курсив</value>
   </data>
   <data name="Editor_JustifyCenter" xml:space="preserve">
-    <value>Выровнять по центру</value>
+    <value>По центру</value>
   </data>
   <data name="Editor_JustifyFull" xml:space="preserve">
-    <value>Выровнять по ширине</value>
+    <value>По ширине</value>
   </data>
   <data name="Editor_JustifyLeft" xml:space="preserve">
-    <value>Выровнять по левому краю</value>
+    <value>Влево</value>
   </data>
   <data name="Editor_JustifyRight" xml:space="preserve">
-    <value>Выровнять по правому краю</value>
+    <value>Вправо</value>
   </data>
   <data name="Editor_Outdent" xml:space="preserve">
     <value>Уменьшить отступ</value>
@@ -307,10 +307,10 @@
     <value>Стиль</value>
   </data>
   <data name="Editor_Subscript" xml:space="preserve">
-    <value>Subscript</value>
+    <value>Под строкой</value>
   </data>
   <data name="Editor_Superscript" xml:space="preserve">
-    <value>Superscript</value>
+    <value>Над строкой</value>
   </data>
   <data name="Editor_Underline" xml:space="preserve">
     <value>Подчеркнутый</value>
@@ -334,7 +334,7 @@
     <value>Перейти на предыдущую страницу</value>
   </data>
   <data name="Upload_Cancel" xml:space="preserve">
-    <value>Отмена</value>
+    <value>Отменить загрузку</value>
   </data>
   <data name="Upload_DropFilesHere" xml:space="preserve">
     <value>перетащите сюда файлы для загрузки</value>
@@ -349,7 +349,7 @@
     <value>Выбрать...</value>
   </data>
   <data name="Upload_StatusFailed" xml:space="preserve">
-    <value>неудачно</value>
+    <value>загрузка прервана</value>
   </data>
   <data name="Upload_StatusUploaded" xml:space="preserve">
     <value>загружено</value>
@@ -358,7 +358,7 @@
     <value>загружается</value>
   </data>
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
-    <value>Загрузить файлы</value>
+    <value>Загрузить выбранные файлы</value>
   </data>
   <data name="Grid_Columns" xml:space="preserve">
     <value>Колонны</value>
@@ -370,34 +370,34 @@
     <value>Сортировка по убыванию</value>
   </data>
   <data name="Editor_DialogButtonSeparator" xml:space="preserve">
-    <value>or</value>
+    <value>или</value>
   </data>
   <data name="Editor_DialogCancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отмена</value>
   </data>
   <data name="Editor_DialogInsert" xml:space="preserve">
-    <value>Insert</value>
+    <value>Вставить</value>
   </data>
   <data name="Editor_ImageAltText" xml:space="preserve">
     <value>Alternate text</value>
   </data>
   <data name="Editor_ImageWebAddress" xml:space="preserve">
-    <value>Web address</value>
+    <value>Веб адрес</value>
   </data>
   <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
-    <value>Open link in new window</value>
+    <value>Открыть в новом окне</value>
   </data>
   <data name="Editor_LinkText" xml:space="preserve">
-    <value>Text</value>
+    <value>Текст</value>
   </data>
   <data name="Editor_LinkToolTip" xml:space="preserve">
-    <value>ToolTip</value>
+    <value>Всплывающая подсказка</value>
   </data>
   <data name="Editor_LinkWebAddress" xml:space="preserve">
-    <value>Web address</value>
+    <value>Веб адрес</value>
   </data>
   <data name="Editor_Search" xml:space="preserve">
-    <value>Search</value>
+    <value>Поиск</value>
   </data>
   <data name="Scheduler_AllDay" xml:space="preserve">
     <value>all day</value>
