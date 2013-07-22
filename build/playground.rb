@@ -5,6 +5,8 @@ PLAYGROUND_SCRIPTS = %w(
     js/jquery.min.js
 )
 
+CDN_PREFIX = "http://cdn.kendostatic.com/2013.2.716/"
+
 PLAYGROUND_STYLES = %w(
         styles/kendo.mobile.flat.min.css
         styles/kendo.default.min.css
@@ -16,11 +18,11 @@ def patched_file_contents(source)
     source.css('script[src^=".."]').each { |script| script.remove }
     source.css('link[href^=".."]').each { |script| script.remove }
     PLAYGROUND_SCRIPTS.each do |script|
-        source.at_css('head').first_element_child.add_previous_sibling  "<script src='#{script}'></script>"
+        source.at_css('head').first_element_child.add_previous_sibling  "<script src='#{CDN_PREFIX}#{script}'></script>"
     end
 
     PLAYGROUND_STYLES.each do |style|
-        source.at_css('head').first_element_child.add_previous_sibling "<link rel='stylesheet' href='#{style}'>"
+        source.at_css('head').first_element_child.add_previous_sibling "<link rel='stylesheet' href='#{CDN_PREFIX}#{style}'>"
     end
 
     source
