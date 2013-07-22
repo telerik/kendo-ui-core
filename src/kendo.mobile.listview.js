@@ -179,37 +179,34 @@ kendo_module({
                 dataSource = listView.dataSource,
                 pullParameters = options.pullParameters || DEFAULT_PULL_PARAMETERS;
 
-            this._first = dataSource.view()[0];
+            this._first = dataSource && dataSource.view()[0];
+            this.listView = listView;
             this.scroller = scroller;
-            this.dataSource = dataSource;
 
             var refreshHandler = this;
             scroller.setOptions({
                 pullToRefresh: true,
                 pull: function() {
                     refreshHandler._pulled = true;
-                    dataSource.read(pullParameters.call(listView, refreshHandler._first));
+                    listView.dataSource.one("change", function() { refreshHandler._change(); });
+                    listView.dataSource.read(pullParameters.call(listView, refreshHandler._first));
+
                 },
                 pullTemplate: options.pullTemplate,
                 releaseTemplate: options.releaseTemplate,
                 refreshTemplate: options.refreshTemplate
             });
-
-            dataSource.bind("change", function() {
-                refreshHandler._change();
-            });
         },
 
         _change: function() {
-            var scroller = this.scroller,
-                dataSource = this.dataSource;
+            var scroller = this.scroller;
 
             if (this._pulled) {
                 scroller.pullHandled();
             }
 
             if (this._pulled || !this._first) {
-                var view = dataSource.view();
+                var view = this.listView.dataSource.view();
 
                 if (view[0]) {
                     this._first = view[0];
