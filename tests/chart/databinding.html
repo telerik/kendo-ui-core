@@ -898,53 +898,53 @@
                     }
                 });
 
-                test("sets value field from string", function() {
+                test("sets valueFields from string", function() {
                     series.data = ["abc"];
                     deepEqual(binder.bindPoint(series, 0),
-                        { value: "abc", fields: {} }
+                    { valueFields: { value: "abc" }, fields: {} }
                     );
                 });
 
-                test("sets value field from number", function() {
+                test("sets valueFields from number", function() {
                     series.data = [1];
                     deepEqual(binder.bindPoint(series, 0),
-                        { value: 1, fields: {} }
+                    { valueFields: { value: 1 }, fields: {} }
                     );
                 });
 
-                test("sets value field from undefined", function() {
+                test("sets valueFields from undefined", function() {
                     series.data = [undefined];
 
                     deepEqual(binder.bindPoint(series, 0),
-                        { value: undefined, fields: {} }
+                    { valueFields: { value: undefined }, fields: {} }
                     );
                 });
 
-                test("sets value field from null", function() {
+                test("sets valueFields from null", function() {
                     series.data = [null];
 
                     deepEqual(binder.bindPoint(series, 0),
-                        { value: null, fields: {} }
+                    { valueFields: { value: null }, fields: {} }
                     );
                 });
 
-                test("sets value fields from null", function() {
+                test("sets valueFields from null", function() {
                     binder.register(["bar"], ["x", "y"]);
                     series.data = [null];
                     series.type = "bar";
 
                     deepEqual(binder.bindPoint(series, 0),
-                        { value: { x: null, y: null }, fields: {} }
+                        { valueFields: { x: null, y: null }, fields: {} }
                     );
                 });
 
-                test("binds value using field name", function() {
+                test("binds valueFields using field name", function() {
                     series.field = "aValue";
                     series.data = [{ aValue: 1 }];
                     series.type = "foo";
 
                     deepEqual(binder.bindPoint(series, 0),
-                        { value: 1, fields: {} }
+                    { valueFields: { value:  1 }, fields: {} }
                     );
                 });
 
@@ -955,7 +955,7 @@
                     series.type = "bar";
 
                     deepEqual(binder.bindPoint(series, 0),
-                        { value: { x: 1, y: 2 }, fields: {} }
+                        { valueFields: { x: 1, y: 2 }, fields: {} }
                     );
                 });
 

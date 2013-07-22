@@ -1443,6 +1443,20 @@
                     deepEqual(plotArea.series[0].data, [{ value: 300 }]);
                 });
 
+                test("max ignores null values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, null, 300],
+                        aggregate: "max"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
+                });
+
                 test("min ignores NaN values", function() {
                     createPlotArea([{
                         type: "bar",
@@ -1457,10 +1471,38 @@
                     deepEqual(plotArea.series[0].data, [{ value: 100 }]);
                 });
 
+                test("min ignores null values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, "undefined", 300],
+                        aggregate: "min"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }]);
+                });
+
                 test("sum ignores NaN values", function() {
                     createPlotArea([{
                         type: "bar",
                         data: [100, NaN, 300],
+                        aggregate: "sum"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 400 }]);
+                });
+
+                test("sum ignores null values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, null, 300],
                         aggregate: "sum"
                     }], {
                         categoryAxis: kendo.deepExtend({
@@ -1526,6 +1568,7 @@
                         type: "bar",
                         data: [100, 200, 300],
                         aggregate: function(values, series) {
+                            console.log(values);
                             deepEqual(values, series.data);
                             return 0;
                         }

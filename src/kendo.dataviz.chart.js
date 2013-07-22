@@ -1312,11 +1312,9 @@ kendo_module({
             var binder = this,
                 data = series.data,
                 pointData = data[pointIx],
-                result = { value: pointData },
-                fields,
-                fieldData,
-                srcValueFields,
-                srcPointFields,
+                result = { valueFields: { value: pointData } },
+                fields, fieldData,
+                srcValueFields, srcPointFields,
                 valueFields = binder.valueFields(series),
                 otherFields = binder._otherFields[series.type],
                 value;
@@ -1340,7 +1338,11 @@ kendo_module({
                     value = value[valueFields[0]];
                 }
 
-                result.value = value;
+                if (typeof value === OBJECT && value !== null) {
+                    result = { valueFields: value };
+                } else {
+                    result = { valueFields: { value: value } };
+                }
             }
 
             result.fields = fields || {};
@@ -2986,7 +2988,7 @@ kendo_module({
 
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
-                value = data.value,
+                value = data.valueFields.value,
                 point,
                 categoryPoints = chart.categoryPoints[categoryIx],
                 seriesPoints = chart.seriesPoints[seriesIx];
@@ -3194,7 +3196,7 @@ kendo_module({
         },
 
         pointValue: function(data) {
-            return data.value;
+            return data.valueFields.value;
         }
     });
 
@@ -3229,7 +3231,7 @@ kendo_module({
 
         createPoint: function(data, category, categoryIx, series) {
             var chart = this,
-                value = data.value,
+                value = data.valueFields.value,
                 options = chart.options,
                 children = chart.children,
                 isStacked = chart.options.isStacked,
@@ -3525,7 +3527,7 @@ kendo_module({
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
             }
 
-            chart.updateRange(data.value, categoryIx, series);
+            chart.updateRange(data.valueFields, categoryIx, series);
 
             point = chart.createPoint(data, category, categoryIx, series);
             if (point) {
@@ -3554,7 +3556,7 @@ kendo_module({
 
         createPoint: function(data, category, categoryIx, series) {
             var chart = this,
-                value = data.value,
+                value = data.valueFields,
                 options = chart.options,
                 children = chart.children,
                 bullet,
@@ -3612,7 +3614,7 @@ kendo_module({
         },
 
         pointValue: function(data) {
-            return data.value.current;
+            return data.valueFields.current;
         }
     });
 
@@ -4280,7 +4282,7 @@ kendo_module({
 
         createPoint: function(data, category, categoryIx, series) {
             var chart = this,
-                value = data.value,
+                value = data.valueFields.value,
                 options = chart.options,
                 isStacked = options.isStacked,
                 categoryPoints = chart.categoryPoints[categoryIx],
@@ -4692,7 +4694,7 @@ kendo_module({
 
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
                     pointData = SeriesBinder.current.bindPoint(currentSeries, pointIx);
-                    value = pointData.value;
+                    value = pointData.valueFields;
                     fields = pointData.fields;
 
                    callback(value, deepExtend({
@@ -5109,7 +5111,7 @@ kendo_module({
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
-                value = data.value,
+                value = data.valueFields,
                 children = chart.children,
                 pointColor = data.fields.color || series.color,
                 valueParts = this.splitValue(value),
@@ -5169,7 +5171,7 @@ kendo_module({
 
         createPoint: function(data, category, categoryIx, series) {
             var chart = this,
-                value = data.value,
+                value = data.valueFields,
                 pointOptions = deepExtend({}, series, {
                     notes: { label: { text: data.fields.noteText } }
                 }),
@@ -5587,7 +5589,7 @@ kendo_module({
 
                 for (i = 0; i < data.length; i++) {
                     pointData = SeriesBinder.current.bindPoint(currentSeries, i);
-                    value = pointData.value;
+                    value = pointData.valueFields.value;
                     fields = pointData.fields;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
                     explode = data.length != 1 && !!fields.explode;
@@ -5700,7 +5702,7 @@ kendo_module({
 
             for (i = 0; i < length; i++) {
                 pointData = SeriesBinder.current.bindPoint(series, i);
-                value = pointData.value;
+                value = pointData.valueFields.value;
                 if (typeof value === "string") {
                     value = parseFloat(value);
                 }
@@ -7801,7 +7803,7 @@ kendo_module({
                 currentSeries = series[seriesIx];
                 seriesAxisName = currentSeries[vertical ? "yAxis" : "xAxis"];
                 if ((seriesAxisName == axisOptions.name) || (axisIndex === 0 && !seriesAxisName)) {
-                    firstPointValue = SeriesBinder.current.bindPoint(currentSeries, 0).value;
+                    firstPointValue = SeriesBinder.current.bindPoint(currentSeries, 0).valueFields;
                     typeSamples.push(firstPointValue[vertical ? "y" : "x"]);
 
                     break;
@@ -8647,9 +8649,6 @@ kendo_module({
 
             if (values.length > 1) {
                 result = math.max.apply(math, values);
-                if (isNaN(result)) {
-                    result = sparseArrayMax(values);
-                }
             }
 
             return result;
@@ -8660,37 +8659,30 @@ kendo_module({
 
             if (values.length > 1) {
                 result = math.min.apply(math, values);
-                if (isNaN(result)) {
-                    result = sparseArrayMin(values);
-                }
             }
 
             return result;
         },
 
         sum: function(values) {
-            var i,
-                length = values.length,
-                sum = 0,
-                n;
+            var length = values.length,
+                sum = 0, i, number;
 
             for (i = 0; i < length; i++) {
-                n = values[i];
-                if (defined(n) && !isNaN(n)) {
-                    sum += n;
-                }
+                number = values[i];
+                sum += number;
             }
 
             return sum;
         },
 
         count: function(values) {
-            return sparseArrayCount(values);
+            return values.length;
         },
 
         avg: function(values) {
             var result = values[0],
-                count = sparseArrayCount(values);
+                count = Aggregates.count(values);
 
             if (count > 0) {
                 result = Aggregates.sum(values) / count;
@@ -9194,16 +9186,14 @@ kendo_module({
         }
     });
 
-    function execSimple(data, aggregate, series, dataItems, group) {
+    function execSimple(values, aggregate) {
         var result,
             aggregateType = typeof aggregate;
 
         if (aggregateType === STRING) {
-            result = Aggregates[aggregate](data);
-        } else if (aggregateType === "function") {
-            result = aggregate(data, series, dataItems, group);
+            result = Aggregates[aggregate](values);
         } else {
-            result = Aggregates.max(data);
+            result = Aggregates.max(values);
         }
 
         return result;
@@ -9212,44 +9202,60 @@ kendo_module({
     function execComposite(data, aggregate, series, dataItems, group) {
         var valueFields = SeriesBinder.current.valueFields(series),
             otherFields = SeriesBinder.current.otherFields(series),
-            count = data.length,
-            fields = [], result = {},
-            i, j, item, originalField, field, originalFields, value, values;
+            result = {}, originalValueFields,
+            originalOtherFields;
 
-        append(fields, valueFields);
-        append(fields, otherFields);
-        originalFields = SeriesBinder.current._mapSeriesFields(series, fields);
+        originalValueFields = SeriesBinder.current._mapSeriesFields(series, valueFields);
+        originalOtherFields = SeriesBinder.current._mapSeriesFields(series, otherFields);
 
-        for (i = 0; i < count; i++) {
-            item = data[i];
-            for (j = 0; j < fields.length; j++) {
-                field = fields[j];
-                if (item !== null && defined(item)) {
-                    value = defined(item.value) && defined(item.value[field]) ? item.value[field] : item.fields[field];
-                    if (typeof item.value === "number" && field === "value") {
-                        value = item.value;
-                    }
-                    originalField = originalFields[field];
-                    if (defined(value)) {
-                        if (!defined(result[originalField])) {
-                            result[originalField] = [];
-                        }
-                        result[originalField].push(value);
-                    }
-                }
-            }
-        }
-
-        for (j = 0; j < fields.length; j++) {
-            field = fields[j];
-            originalField = originalFields[field];
-            values = result[originalField];
-            if (defined(values) && defined(aggregate[field])) {
-                result[originalField] = execSimple(values, aggregate[field], series, dataItems, group);
-            }
-        }
+        aggregateValues(result, data, valueFields, originalValueFields, aggregate, series, dataItems, group);
+        aggregateValues(result, data, otherFields, originalOtherFields, aggregate, series, dataItems, group);
 
         return result;
+    }
+
+    function aggregateValues(result, data, fields, originalFields, aggregate, series, dataItems, group) {
+        var count = data.length,
+            values = [],
+            originalValues = [],
+            i, j, field, value, item,
+            originalField, aggregatedValue;
+
+        for (i = 0; i < fields.length; i++) {
+            field = fields[i];
+            originalField = originalFields[field];
+            for (j = 0; j < count; j++) {
+                item = data[j];
+                if (defined(item.valueFields) &&
+                    item.valueFields !== null &&
+                    defined(item.valueFields[field])) {
+                    value = item.valueFields[field];
+                } else if (defined(item.fields)) {
+                    value = item.fields[field];
+                }
+
+                if (item !== null && defined(item)) {
+                    if (value !== null && isFinite(value)) {
+                        values.push(value);
+                    }
+                }
+                originalValues.push(value);
+            }
+
+            if (defined(values) && defined(aggregate[field])) {
+                aggregatedValue = execSimple(values, aggregate[field]);
+                if (defined(aggregatedValue)) {
+                    result[originalField] = aggregatedValue;
+                }
+            }
+
+            if (typeof aggregate[field] === "function" && originalValues.length) {
+                result[originalField] = aggregate[field](originalValues, series, dataItems, group);
+            }
+
+            originalValues = [];
+            values = [];
+        }
     }
 
     function calculateAggregates(data, series, dataItems, group) {
@@ -9294,22 +9300,6 @@ kendo_module({
             min: min === MAX_VALUE ? undefined : min,
             max: max === MIN_VALUE ? undefined : max
         };
-    }
-
-    function sparseArrayCount(arr) {
-        var i,
-            length = arr.length,
-            n,
-            count = 0;
-
-        for (i = 0; i < length; i++) {
-            n = arr[i];
-            if (n !== null && isFinite(n)) {
-                count++;
-            }
-        }
-
-        return count;
     }
 
     function intersection(a1, a2, b1, b2) {
