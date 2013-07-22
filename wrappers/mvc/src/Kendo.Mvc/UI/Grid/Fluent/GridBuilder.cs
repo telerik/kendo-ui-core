@@ -315,6 +315,52 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the client-side alt row template of the grid. The client-side alt row template must contain a table row element (tr).
+        /// </summary>
+        /// <param name="template">The template</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Grid&lt;Product&gt;()
+        ///     .Name(&quot;grid&quot;)
+        ///     .DataSource(dataSource =&gt;
+        ///         // configure the data source
+        ///         dataSource
+        ///             .Ajax()
+        ///             .Read(read =&gt; read.Action(&quot;Products_Read&quot;, &quot;Home&quot;))
+        ///     )
+        ///     .ClientAltRowTemplate(
+        ///     &quot;&lt;tr class='k-alt'&gt;&quot; +
+        ///         &quot;&lt;td&gt;#: ProductName #&lt;/td&gt;&quot; +
+        ///         &quot;&lt;td&gt;#: UnitsInStock #&lt;/td&gt;&quot; +
+        ///     &quot;&lt;/tr&gt;&quot;
+        ///     )
+        /// )
+        /// </code>
+        /// <code lang="ASPX">
+        /// &lt;%:Html.Kendo().Grid&lt;Product&gt;()
+        ///     .Name(&quot;grid&quot;)
+        ///     .DataSource(dataSource =&gt;
+        ///         // configure the data source
+        ///         dataSource
+        ///             .Ajax()
+        ///             .Read(read =&gt; read.Action(&quot;Products_Read&quot;, &quot;Home&quot;))
+        ///     )
+        ///     .ClientAltRowTemplate(
+        ///     &quot;&lt;tr class='k-alt'&gt;&quot; +
+        ///         &quot;&lt;td&gt;#: ProductName #&lt;/td&gt;&quot; +
+        ///         &quot;&lt;td&gt;#: UnitsInStock #&lt;/td&gt;&quot; +
+        ///     &quot;&lt;/tr&gt;&quot;
+        ///     )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GridBuilder<T> ClientAltRowTemplate(string template)
+        {
+            Component.ClientAltRowTemplate = template;
+            return this;
+        }
+
+        /// <summary>
         /// Sets the client-side row template of the grid. The client-side row template must contain a table row element (tr).
         /// </summary>
         /// <param name="template">The template</param>

@@ -6,7 +6,7 @@
 <c:url value="/web/grid/rowtemplate/read" var="transportReadUrl" />
 
 <demo:header />
-    <kendo:grid name="grid" height="430" style="width:750px;" rowTemplate="row-template">
+    <kendo:grid name="grid" height="430" style="width:750px;" rowTemplate="row-template" altRowTemplate="alt-row-template">
         <kendo:grid-columns>
             <kendo:grid-column title="Picture" width="140px" />
             <kendo:grid-column title="Details" field="title" width="400px" />
@@ -25,6 +25,22 @@
     
     <script id="row-template" type="text/x-kendo-template">
         <tr>
+            <td class="photo">
+               <img src="<c:url value='/resources/web/Employees/' />#:data.employeeId#.jpg" alt="#: data.employeeId #" />
+            </td>
+            <td class="details">
+               <span class="title">#: title #</span>
+               <span class="description">Name : #: firstName# #: lastName#</span>
+               <span class="description">Country : #: country# </span>
+            </td>
+            <td class="employeeID">
+               #: employeeId #
+            </td>
+        </tr>
+    </script>
+    
+    <script id="alt-row-template" type="text/x-kendo-template">
+        <tr class="k-alt">
             <td class="photo">
                <img src="<c:url value='/resources/web/Employees/' />#:data.employeeId#.jpg" alt="#: data.employeeId #" />
             </td>
@@ -74,6 +90,14 @@
              background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
              background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
              padding: 20px;
+         }  
+         .k-grid .k-alt td {
+            background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0.1)));
+            background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+            background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+            background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+            background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
          }  
     </style>
 <demo:footer />

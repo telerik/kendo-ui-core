@@ -26,9 +26,24 @@
             "</td>" +
          "</tr>"       
     )
+    .ClientAltRowTemplate(
+        "<tr class='k-alt'>" +
+            "<td class='photo'>" +
+                "<img src='" + Url.Content("~/Content/web/Employees/") + "#:data.EmployeeID#.jpg' alt='#: data.EmployeeID #' />" +
+            "</td>" +
+            "<td class='details'>" +
+                "<span class='title'>#: Title #</span>" +
+                "<span class='description'>Name : #: FirstName# #: LastName#</span>" +
+                "<span class='description'>Country : #: Country# </span>" +
+            "</td>" +
+            "<td class='employeeID'>" +
+                "#: EmployeeID #" +
+            "</td>" +
+            "</tr>"
+    )
     .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("RowTemplate_Read", "Grid"))
+    .Ajax()
+    .Read(read => read.Action("RowTemplate_Read", "Grid"))
     )        
     .Scrollable()
 %>
@@ -65,6 +80,14 @@
             background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
             background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
             padding: 20px;
+        }
+        .k-grid .k-alt td {
+            background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0.1)));
+            background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+            background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+            background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
+            background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.1) 100%);
         }
     </style>
 

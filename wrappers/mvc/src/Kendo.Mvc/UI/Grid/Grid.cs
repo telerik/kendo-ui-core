@@ -31,6 +31,7 @@ namespace Kendo.Mvc.UI
         private IGridDataKeyStore dataKeyStore;
 
         private string clientRowTemplate;
+        private string clientAltRowTemplate;
 
         public Grid(ViewContext viewContext,
                     IJavaScriptInitializer initializer,
@@ -484,6 +485,18 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        public string ClientAltRowTemplate
+        {
+            get
+            {
+                return clientAltRowTemplate;
+            }
+            set
+            {
+                clientAltRowTemplate = HttpUtility.HtmlDecode(value);
+            }
+        }
+
         IEnumerable<IDataKey> IGrid.DataKeys
         {
             get
@@ -772,6 +785,11 @@ namespace Kendo.Mvc.UI
             if (!String.IsNullOrEmpty(ClientRowTemplate))
             {
                 options["rowTemplate"] = ClientRowTemplate;
+            }
+
+            if (!String.IsNullOrEmpty(ClientAltRowTemplate))
+            {
+                options["altRowTemplate"] = ClientAltRowTemplate;
             }
 
             if (Navigatable.Enabled)
@@ -1283,7 +1301,7 @@ namespace Kendo.Mvc.UI
                         throw new NotSupportedException(Exceptions.InCellModeNotSupportedInServerBinding);
                     }
 
-                    if (ClientRowTemplate.HasValue() || RowTemplate.HasValue())
+                    if (ClientRowTemplate.HasValue() || ClientAltRowTemplate.HasValue() || RowTemplate.HasValue())
                     {
                         throw new NotSupportedException(Exceptions.InCellModeNotSupportedWithRowTemplate);
                     }
