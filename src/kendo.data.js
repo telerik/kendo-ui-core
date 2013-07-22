@@ -2666,7 +2666,7 @@ kendo_module({
             if (remote || ((that._data === undefined || that._data.length === 0) && !that._destroyed.length)) {
                 that.read(that._mergeState(options));
             } else {
-                if (!that.trigger(REQUESTSTART, { })) {
+                if (!that.trigger(REQUESTSTART, { type: "read" })) {
                     that.trigger(PROGRESS);
 
                     result = Query.process(that._data, that._mergeState(options));
