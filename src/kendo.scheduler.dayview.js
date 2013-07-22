@@ -41,9 +41,9 @@ kendo_module({
                     '# if(data.tail || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-w"></span>' +
                     '#}#' +
-                    '# if(data.id && data.recurrenceId) {#' +
+                    '# if(data.isException()) {#' +
                         '<span class="k-icon k-i-exception"></span>' +
-                    '# } else if(data.recurrenceRule || data.recurrenceId) {#' +
+                    '# } else if(data.isRecurring()) {#' +
                         '<span class="k-icon k-i-refresh"></span>' +
                     '# } #' +
                 '</span>' +
@@ -69,9 +69,9 @@ kendo_module({
                 '#}#' +
                 '>' +
                  '<span class="k-event-actions">' +
-                    '# if(data.id && data.recurrenceId) {#' +
+                    '# if(data.isException()) {#' +
                         '<span class="k-icon k-i-exception"></span>' +
-                    '# } else if(data.recurrenceRule || data.recurrenceId) {#' +
+                    '# } else if(data.isRecurring()) {#' +
                         '<span class="k-icon k-i-refresh"></span>' +
                     '# } #' +
                 '</span>' +

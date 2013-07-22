@@ -376,9 +376,9 @@ kendo_module({
                                '# if (resources[0]) {#' +
                                '<span class="k-scheduler-mark" style="background-color:#=resources[0].color#"></span>' +
                                "# } #" +
-                               "# if (data.id && data.recurrenceId) { #" +
+                               "# if (data.isException()) { #" +
                                '<span class="k-icon k-i-exception"></span>' +
-                               '# } else if (data.recurrenceRule || data.recurrenceId) {#' +
+                               '# } else if (data.isRecurring()) {#' +
                                '<span class="k-icon k-i-refresh"></span>' +
                                "# } #" +
                                '#:title#' +
