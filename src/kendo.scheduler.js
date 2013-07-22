@@ -288,17 +288,28 @@ kendo_module({
             return !!(this.recurrenceRule || this.recurrenceId);
         },
 
+        clone: function(options, updateUid) {
+            var uid = this.uid,
+                event = new this.constructor($.extend({}, this.toJSON(), options));
+
+            if (!updateUid) {
+                event.uid = uid;
+            }
+
+            return event;
+        },
+
         toOccurrence: function(options) {
-            options = $.extend({}, this.toJSON(), options, {
+            options = $.extend(options, {
                 recurrenceException: null,
                 recurrenceRule: null,
                 recurrenceId: this.id,
                 id: this.defaults.id
             });
 
-            delete options[this.idField];
+            options[this.idField] = this.defaults.id;
 
-            return new this.constructor(options);
+            return this.clone(options, true);
         },
 
         toJSON: function() {

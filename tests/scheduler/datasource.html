@@ -210,6 +210,35 @@
                 equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
             });
 
+            test("clone method creates new instance of SchedulerEvent", function() {
+                var event = new SchedulerEvent({
+                    id: 1,
+                    start: new Date(2000, 10, 10),
+                    end: new Date(2000, 10, 11)
+                });
+
+                var occurrence = event.clone();
+
+                equal(occurrence.uid, event.uid);
+                notStrictEqual(occurrence, event);
+                deepEqual(occurrence.start, event.start);
+                deepEqual(occurrence.end, event.end);
+            });
+
+            test("clone method extends event properties with passed options", function() {
+                var event = new SchedulerEvent({
+                    id: 1,
+                    start: new Date(2000, 10, 10),
+                    end: new Date(2000, 10, 11)
+                });
+
+                var occurrence = event.clone({
+                    id: 2
+                });
+
+                equal(occurrence.id, 2);
+            });
+
             test("toOccurrence creates new SchedulerEvent occurrence object", function() {
                 var event = new SchedulerEvent({
                     id: 1,
