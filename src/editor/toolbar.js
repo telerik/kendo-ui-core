@@ -300,8 +300,9 @@
                 toolName,
                 editorElement = this._editor.element,
                 element = this.element.empty(),
-                groupName, newGroupName;
-            var group;
+                groupName, newGroupName,
+                toolConfig = this._editor.options.tools,
+                group, i;
 
             function stringify(template) {
                 if (template.getHtml) {
@@ -329,10 +330,17 @@
 
             startGroup();
 
-            for (toolName in tools) {
+            for (i = 0; i < toolConfig.length; i++) {
+                toolName = toolConfig[i].name || toolConfig[i];
                 options = tools[toolName] && tools[toolName].options;
 
                 template = options && options.template;
+
+                if (toolName == "break") {
+                    endGroup();
+                    $("<li class='k-row-break' />").appendTo(this.element);
+                    startGroup();
+                }
 
                 if (!template) {
                     continue;

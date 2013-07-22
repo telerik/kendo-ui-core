@@ -337,6 +337,15 @@
                 equal(dom.find(".k-createLink.k-group-end").length, 1);
             });
 
+            test("break tool renders row breaking element", function() {
+                toolbar.bindTo(mockEditorTools([
+                    "bold", "italic", "underline", "break",
+                    "createLink", "unlink"
+                ]));
+
+                equal(dom.find(".k-row-break").length, 1);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
