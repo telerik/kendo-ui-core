@@ -1180,6 +1180,8 @@ kendo_module({
                 var event = dataSource._createNewModel();
 
                 if (event instanceof kendo.data.Model) {
+                    eventInfo = eventInfo && eventInfo.toJSON ? eventInfo.toJSON() : eventInfo;
+
                     event.accept(eventInfo);
                 } else {
                     event = extend({ title: "" }, event, eventInfo);
@@ -2129,26 +2131,6 @@ kendo_module({
             }
 
             that.popup.open();
-        },
-
-        _expandEvents: function(data, view) {
-            var endDate = view.endDate(),
-                endTime = view.endTime;
-
-            if (recurrence) {
-                endDate = new Date(endDate);
-                if (endTime) {
-                    endDate.setHours(endTime.getHours(), endTime.getMinutes(), endTime.getSeconds(), endTime.getMilliseconds());
-                } else {
-                    endDate.setHours(23, 59, 59, 999);
-                }
-
-                data = recurrence.expandAll(data, view.startDate(), endDate, this.dataSource.reader.timezone);
-            } else {
-                data = convertToPlainObjects(data);
-            }
-
-            return data;
         },
 
         refresh: function(e) {
