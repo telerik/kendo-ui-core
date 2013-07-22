@@ -1711,19 +1711,13 @@ kendo_module({
                                 var range = ranges[rangeIndex];
                                 var start = event.start;
                                 var end = event.end;
-                                var head = false;
-                                var tail = false;
 
                                 if (rangeCount > 1) {
                                     if (rangeIndex === 0) {
                                         end = range.end.end;
-                                        head = true;
                                     } else if (rangeIndex == rangeCount - 1) {
                                         start = range.start.start;
-                                        tail = true;
                                     } else {
-                                        head = true;
-                                        tail = true;
                                         start = range.start.start;
                                         end = range.end.end;
                                     }
@@ -1732,7 +1726,7 @@ kendo_module({
                                 var occurrence = extend({}, event, { start: start, end: end });
 
                                 if (this._isInTimeSlot(occurrence)) {
-                                    element = this._createEventElement(event, !isMultiDayEvent, head, tail);
+                                    element = this._createEventElement(event, !isMultiDayEvent, range.head, range.tail);
 
                                     this._positionEvent(occurrence, element, range);
 

@@ -248,6 +248,8 @@
 
                 var firstEvent = view.content.find(".k-event:first");
 
+                ok(firstEvent.length);
+
                 ok(!firstEvent.find(".k-event-actions:first .k-i-arrow-w").length);
                 equal(firstEvent.find(".k-event-actions:last .k-i-arrow-e").length, 1);
            });
@@ -374,8 +376,8 @@
                     new kendo.data.SchedulerEvent({ start: new Date("2013/1/27 10:00"), end: new Date("2013/1/27 10:00"),  title: "day event" })
                 ]);
 
-                equal(view._row.events[0].start, 0);
-                equal(view._row.events[0].end, 0);
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].end, 0);
             });
 
             test("more button is shown for every cell with more events than possible to show", function() {
