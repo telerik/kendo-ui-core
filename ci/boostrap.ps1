@@ -1,5 +1,11 @@
-function download([string]$url) {
-    $filename = $url.split("/")[-1].split("?")[0]
+ns_root = "http://kendobuild/build"
+$jenkins_slave = "kendobuild-winslave1"
+
+function download([string]$url, [string]$filename) {
+    if (!($PSBoundParameters.ContainsKey('filename'))) {
+        $filename = $url.split("/")[-1].split("?")[0]
+    }
+
     $fullPath = "$home\Downloads\$filename"
     if (!(test-path $fullPath)) {
         write-host "Downloading $filename..."
@@ -7,7 +13,7 @@ function download([string]$url) {
         [System.Net.GlobalProxySelection]::Select = [System.Net.GlobalProxySelection]::GetEmptyWebProxy()
         trap { $error[0].Exception.ToString() } $client.DownloadFile($url, $fullPath)
     }
-    
+
     return $fullPath
 }
 
@@ -22,10 +28,10 @@ function registerPath($path) {
     }
 }
 
-function downloadAndInstall([string]$name, [string]$url, [string[]]$paramList) {
+function downloadAndInstall([string]$name, [string]$url, [string[]]$paramList, [string]$filename) {
     if (!(installed $name)) {
         # Download
-        $installer = download($url)
+        $installer = download $url $filename
 
         # Install
         write-host "Installing $name..."
@@ -77,4 +83,12 @@ if (!(unzip $devkit $devkitDir)) {
     cd $devkitDir
     ruby dk.rb init
     ruby dk.rb install
+}
+
+downloadAndInstall "java" "http://javadl.sun.com/webapps/download/AutoDL?BundleId=79063" @( "/s" ) "jre-7u25-windows-i586.exe"
+registerPath "C:\Program Files (x86)\Java\jre7\bin"
+
+if (!($jenkins_slave -eq $false)) {
+    $slaveJar = download "$jenkins_root/jnlpJars/slave.jar"
+    java -jar $slaveJar -jnlpUrl "$jenkins_root/computer/$jenkins_slave/slave-agent.jnlp"
 }
