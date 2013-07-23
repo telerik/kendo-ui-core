@@ -147,7 +147,9 @@ kendo_module({
         },
 
         _viewShow: function(e) {
-            var currentOffset = this.movable && this.movable.x;
+            var movable = this.movable,
+                currentOffset = movable && movable.x,
+                element;
 
             if (this.currentView === e.view) {
                 this.hide();
@@ -156,9 +158,19 @@ kendo_module({
 
             this.currentView = e.view;
 
-            this.movable = new kendo.ui.Movable(e.view.element);
+            element = e.view.element;
 
-            this.transition = new Transition({ axis: AXIS, movable: this.movable });
+            movable = this.movable = new kendo.ui.Movable(element);
+
+            this.transition = new Transition({
+                axis: AXIS,
+                movable: this.movable,
+                onEnd: function() {
+                    if (movable[AXIS] === 0) {
+                        element[0].style.cssText = "";
+                    }
+                }
+            });
 
             if (currentOffset) {
                 this.movable.moveAxis(AXIS, currentOffset);
