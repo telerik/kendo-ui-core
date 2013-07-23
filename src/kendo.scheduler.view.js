@@ -195,11 +195,13 @@ kendo_module({
         },
 
         refresh: function() {
-            for (var collectionIndex = 0; collectionIndex < this._daySlotCollections.length; collectionIndex++) {
+            var collectionIndex;
+
+            for (collectionIndex = 0; collectionIndex < this._daySlotCollections.length; collectionIndex++) {
                 this._daySlotCollections[collectionIndex].refresh();
             }
 
-            for (var collectionIndex = 0; collectionIndex < this._timeSlotCollections.length; collectionIndex++) {
+            for (collectionIndex = 0; collectionIndex < this._timeSlotCollections.length; collectionIndex++) {
                 this._timeSlotCollections[collectionIndex].refresh();
             }
         },

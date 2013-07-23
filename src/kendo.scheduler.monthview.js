@@ -919,17 +919,23 @@ kendo_module({
 
             var groups = [];
 
+            function collectionIndex(date) {
+               return Math.floor(that._slotIndex(date) / columnCount);
+            }
+
+            function slotIndex(date) {
+                return that._slotIndex(date) % columnCount;
+            }
+
+            function multiday() {
+                return true;
+            }
+
             for (var idx = 0; idx < groupCount; idx++) {
                 var view = new ui.scheduler.ResourceView({
-                    multiday: function(event) {
-                        return true;
-                    },
-                    collectionIndex: function(date) {
-                       return Math.floor(that._slotIndex(date) / columnCount);
-                    },
-                    slotIndex: function(date) {
-                       return that._slotIndex(date) % columnCount;
-                    }
+                    multiday: multiday,
+                    collectionIndex: collectionIndex,
+                    slotIndex: slotIndex
                 });
 
                 groups.push(view);
