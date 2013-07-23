@@ -31,6 +31,18 @@
       <nodeProperties/>
       <userId>anonymous</userId>
     </slave>
+    <slave>
+      <name>kendobuild-winslave1</name>
+      <description>Windows slave</description>
+      <remoteFS>C:\Jenkins</remoteFS>
+      <numExecutors>2</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows slave</label>
+      <nodeProperties/>
+      <userId>anonymous</userId>
+    </slave>
   </slaves>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
   <views>
