@@ -305,7 +305,12 @@ var app = new kendo.mobile.Application(document.body, {
 function showAbout(e) {
     if (e.item.text() == "About") {
         $("#drawer").data("kendoMobileDrawer").hide();
-        setTimeout( function () { kendo.mobile.application.navigate('#about'); }, 230);
+        setTimeout( function () {
+            kendo.mobile.application.navigate('#about');
+        }, 230);
     }
 }
 
+function goBack() {
+    history.back();
+}

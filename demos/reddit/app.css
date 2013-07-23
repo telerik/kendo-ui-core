@@ -63,6 +63,26 @@
     background: transparent;
 }
 
+.touchTarget {
+    width: 100%;
+    height: auto;
+}
+
+.touchTarget:after {
+    content: "The Cuteness app is a performance proof of concept, made with Kendo UI Mobile and utilizing its Flat theme";
+    display: block;
+    height: 10%;
+    bottom: 20%;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    padding: 0 10%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+}
+
 .km-scrollview {
     display: flex;
     display: -webkit-flex;

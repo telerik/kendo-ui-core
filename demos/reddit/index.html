@@ -42,7 +42,7 @@
     <body>
         <div class="splash"></div>
 
-        <div id="drawer" data-role="drawer" data-views="['list', 'account', 'settings', 'notifications', 'feedback', 'about']">
+        <div id="drawer" data-role="drawer" data-views="['list', 'account', 'settings', 'notifications', 'feedback']">
             <ul data-role="listview" data-style="inset" data-type="group" data-click="showAbout">
                 <li>
                     Narwhal Bacon
@@ -193,7 +193,8 @@
             </ul>
         </div>
 
-        <div data-role="view" id="about" class="splash" data-transition="fadeIn">
+        <div data-role="view" id="about" class="splash" data-transition="fadeIn" data-stretch="true">
+            <div data-role="touch" data-tap="goBack" class="touchTarget"></div>
         </div>
 
         <div data-role="view" id="detail" data-transition="slide" data-after-show="renderDetail" data-title="" data-hide="resetDetail" data-stretch="true">
