@@ -367,7 +367,7 @@
                     var state = e.originalEvent.state,
                         href;
 
-                    if (state) {
+                    if (state && state.href != window.location.href) {
                         href = state.href.toLowerCase();
 
                         Application.unload();
