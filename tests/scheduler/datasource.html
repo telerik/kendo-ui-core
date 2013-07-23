@@ -210,6 +210,26 @@
                 equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/7 12:00");
             });
 
+            test("update method updates the model properties", function() {
+                var event = new SchedulerEvent({
+                    id: 1,
+                    start: new Date(2000, 10, 10),
+                    end: new Date(2000, 10, 11)
+                });
+
+                var date = new Date();
+                event.update({
+                    id: 1,
+                    start: date,
+                    end: date
+                });
+
+                ok(event.dirty);
+                equal(event.id, 1);
+                deepEqual(event.start, date);
+                deepEqual(event.end, date);
+            });
+
             test("clone method creates new instance of SchedulerEvent", function() {
                 var event = new SchedulerEvent({
                     id: 1,
@@ -316,6 +336,18 @@
                 });
 
                 ok(schedulerEvent.isException());
+            });
+
+            test("isRecurrenceHead method returns true if id and recurrenceRule are defined", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    id: 3,
+                    title: "Title",
+                    recurrenceRule: "FREQ=DAILY",
+                    start: new Date(2012, 2, 31, 0, 0),
+                    end: new Date(2012, 2, 31, 1, 0)
+                });
+
+                ok(schedulerEvent.isRecurrenceHead());
             });
 
             test("SchedulerEvent expand method should return a clone of the head event", function() {

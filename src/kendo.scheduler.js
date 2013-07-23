@@ -280,12 +280,22 @@ kendo_module({
             return recurrence ? recurrence.expand(this, start, end, zone) : [this];
         },
 
+        update: function(eventInfo) {
+            for (var field in eventInfo) {
+                this.set(field, eventInfo[field]);
+            }
+        },
+
         isException: function() {
             return this.id && this.recurrenceId;
         },
 
         isRecurring: function() {
             return !!(this.recurrenceRule || this.recurrenceId);
+        },
+
+        isRecurrenceHead: function() {
+            return !!(this.id && this.recurrenceRule);
         },
 
         clone: function(options, updateUid) {
