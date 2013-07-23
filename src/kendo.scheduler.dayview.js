@@ -497,6 +497,9 @@ kendo_module({
             var resources = this.groupedResources;
 
             if (resources.length) {
+                if (this._isGroupedByDate()) {
+                    return this._columnCountForLevel(resources.length);
+                }
                 if (this._groupOrientation() === "vertical") {
                     return this._rowCountForLevel(resources.length - 1);
                 } else {
@@ -582,7 +585,7 @@ kendo_module({
                 for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
                     td = tableCells[cellIndex];
 
-                    var groupIndex = this._groupHorizontalIndex(cellIndex);
+                    var groupIndex = cellIndex % groupCount; // this._groupHorizontalIndex(cellIndex);
 
                     if (isVertical) {
                         groupIndex = this._groupVerticalIndex(rowIndex - visibleAllDayRowCount);
@@ -592,11 +595,16 @@ kendo_module({
 
                     range = this._rangeByIndex(
                         this._adjustSlotIndex(rowIndex - visibleAllDayRowCount),
-                        this._adjustColumnIndex(cellIndex),
+                        cellIndex,
                         this._adjustSlotIndex(tableRows.length - 1 - allDayRowCount)
                     );
 
+
                     column = group.getTimeSlotCollection(this._adjustColumnIndex(cellIndex));
+
+                    if (this._isGroupedByDate()) {
+                        column = group.getTimeSlotCollection(0);
+                    }
 
                     column.offsetLeft = td.offsetLeft;
                     column.clientWidth = td.clientWidth;
@@ -1290,7 +1298,7 @@ kendo_module({
                 var columnCount = this._columnCountInGroup();
 
                 if (this._isGroupedByDate()) {
-                    return Math.floor(index % columnCount);
+                    return Math.floor(index / columnCount);
                 }
 
                 return index - columnCount*Math.floor(index/columnCount);

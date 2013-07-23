@@ -1390,18 +1390,18 @@
                 });
 
                 var view = scheduler.view();
-                var firstGroupSlots = view.group[0].getTimeSlotCollection(0);
-                var secondGroupSlots = view.group[1].getTimeSlotCollection(0);
+                var firstGroupSlots = view.groups[0].getTimeSlotCollection(0);
+                var secondGroupSlots = view.groups[1].getTimeSlotCollection(0);
 
                 deepEqual(firstGroupSlots.first().start, new Date("2013/6/6 00:00"));
-                deepEqual(firstGroupSlots[0].end, new Date("2013/6/6 00:30"));
-                deepEqual(firstGroupSlots[firstGroupSlots.length - 1].start, new Date("2013/6/6 23:30"));
-                deepEqual(firstGroupSlots[firstGroupSlots.length - 1].end, new Date("2013/6/7 00:00"));
+                deepEqual(firstGroupSlots.first().end, new Date("2013/6/6 00:30"));
+                deepEqual(firstGroupSlots.last().start, new Date("2013/6/6 23:30"));
+                deepEqual(firstGroupSlots.last().end, new Date("2013/6/7 00:00"));
 
-                deepEqual(secondGroupSlots[0].start, new Date("2013/6/6 00:00"));
-                deepEqual(secondGroupSlots[0].end, new Date("2013/6/6 00:30"));
-                deepEqual(secondGroupSlots[secondGroupSlots.length - 1].start, new Date("2013/6/6 23:30"));
-                deepEqual(secondGroupSlots[secondGroupSlots.length - 1].end, new Date("2013/6/7 00:00"));
+                deepEqual(secondGroupSlots.first().start, new Date("2013/6/6 00:00"));
+                deepEqual(secondGroupSlots.first().end, new Date("2013/6/6 00:30"));
+                deepEqual(secondGroupSlots.last().start, new Date("2013/6/6 23:30"));
+                deepEqual(secondGroupSlots.last().end, new Date("2013/6/7 00:00"));
             });
 
             test("slots for the same date but in diffrent groups as correct start and end date set in week view", function() {
@@ -1428,8 +1428,8 @@
                 var firstGroupSlots = view.groups[0].getTimeSlotCollection(0);
                 var secondGroupSlots = view.groups[1].getTimeSlotCollection(0);
 
-                var secondDateFirstGroupSlots = view.groups[0].getTimeSlotCollection(1);
-                var secondDateSecondGroupSlots = view.groups[1].getTimeSlotCollection(1);
+                var secondDateFirstGroupSlots = view.groups[2].getTimeSlotCollection(0);
+                var secondDateSecondGroupSlots = view.groups[3].getTimeSlotCollection(0);
 
                 deepEqual(firstGroupSlots.first().start, new Date("2013/6/2 00:00"));
                 deepEqual(firstGroupSlots.first().end, new Date("2013/6/2 00:30"));
