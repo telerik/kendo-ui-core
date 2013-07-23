@@ -312,7 +312,7 @@ kendo_module({
                 stroke.template = VMLStroke.template = renderTemplate(
                     "<kvml:stroke on='#= !!d.options.stroke && !!d.options.strokeWidth #' " +
                     "#= d.renderAttr(\"color\", d.options.stroke) #" +
-                    "#= d.renderAttr(\"weight\", d.options.strokeWidth) #" +
+                    "weight='#= d.options.strokeWidth || 0 #px' " +
                     "#= d.renderAttr(\"dashstyle\", d.options.dashType) #" +
                     "#= d.renderAttr(\"opacity\", d.options.strokeOpacity) # />"
                 );

@@ -848,7 +848,11 @@
 
                 test("renders width", function() {
                     stroke.options.strokeWidth = "2";
-                    ok(stroke.render().indexOf("weight='2'") > -1);
+                    ok(stroke.render().indexOf("weight='2px'") > -1);
+                });
+
+                test("renders empty width", function() {
+                    ok(stroke.render().indexOf("weight='0px'") > -1);
                 });
 
                 test("renders opacity", function() {
