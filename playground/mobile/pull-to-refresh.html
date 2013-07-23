@@ -6,71 +6,66 @@
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.history.js"></script>
-        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.buttongroup.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
-
-        <script id="template" type="text/x-kendo-template">
-            <div class="tweet k-header">
-                <img width="48" height="48" src="#= profile_image_url #" alt="#= from_user #" />
-                #= text #
-                <div class="metadata">
-                    <a class="k-link" href="http://twitter.com/#= from_user #" rel="nofollow">#= from_user #</a>
-                    |
-                    #= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #
-                </div>
-            </div>
-        </script>
-
-        <script>
-            var dataSource = new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        url: "http://search.twitter.com/search.json", // the remove service url
-                        dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
-                        data: { //additional parameters sent to the remote service
-                            q: "bieber"
-                        }
-                    }
-                },
-
-                schema: { // describe the result format
-                    data: "results" // the data which the data source will be bound to is in the "results" field
-                }
-            });
-
-            function makeListView() {
-                $("#listview").kendoMobileListView({
-                    dataSource: dataSource,
-                    pullToRefresh: true,
-                    appendOnRefresh: true,
-                    template: $("#template").text()
-                });
-            }
-
-            $(function() {
-                new kendo.mobile.Application();
-            });
-        </script>
-        <style>
-            .km-listview-pull-to-refresh {
-                position: absolute;
-                line-height: 40px;
-                -webkit-transform:translatey(-40px);
-                border: 1px solid red;
-            }
-        </style>
     </head>
     <body>
-        <div data-role="view" data-init="makeListView">
-            <ul id="listview"></ul>
+        <div data-role="view" data-title="Pull to refresh" data-model="App.viewModel">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+                </div>
+            </header>
+
+            <ul id="pull-to-refresh-listview" data-role="listview" data-bind="source: products" data-pull-to-refresh="true" data-template="pull-to-refresh-template"></ul>
         </div>
+
+<script type="text/x-kendo-template" id="pull-to-refresh-template">
+    <div class="product-item">
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
+    </div>
+</script>
+
+<script>
+    window.dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "http://demos.kendoui.com/service/Products/Read",
+                dataType: "jsonp"
+            }
+        },
+        schema: {
+            total: function () { return 77; }
+        },
+        serverPaging: true,
+        pageSize: 40
+    });
+
+$(document).ready(function() {
+    window.App = {
+        viewModel: kendo.observable({
+            products: dataSource
+        })
+    };
+
+    window.app = new kendo.mobile.Application(document.body);
+});
+
+</script>
     </body>
 </html>
