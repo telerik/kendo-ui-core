@@ -453,8 +453,6 @@ kendo_module({
                 exception = origin.recurrenceException || "",
                 start = model.start;
 
-            start = new Date(kendo.date.getDate(start).getTime() + getMilliseconds(origin.start));
-
             if (!recurrence.isException(exception, start, zone)) {
                 start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
                 exception += kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
@@ -1059,17 +1057,7 @@ kendo_module({
             var that = this;
 
             var updateEvent = function(event) {
-                if (event.recurrenceId) {
-                    that._removeExceptionDate(event);
-                }
-
-                for (var field in eventInfo) {
-                    event.set(field, eventInfo[field]);
-                }
-
-                if (event.recurrenceId) {
-                    that._addExceptionDate(event);
-                }
+                event.update(eventInfo);
 
                 if (!that.trigger(SAVE, { model: event })) {
                     that._updateSelection(event);
@@ -1105,10 +1093,10 @@ kendo_module({
             };
 
             var updateOcurrence = function() {
-                var exception = recurrenceHead(event).toOccurrence();
+                var exception = recurrenceHead(event).toOccurrence({ start: event.start, end: event.end });
 
-                exception.update(eventInfo);
                 exception = that.dataSource.add(exception);
+                exception.update(eventInfo);
 
                 if (!that.trigger(SAVE, { model: exception })) {
                     that._updateSelection(exception);

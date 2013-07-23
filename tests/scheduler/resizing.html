@@ -1209,7 +1209,7 @@
                 equal(scheduler.dataSource.at(1).start.getMonth(), 4);
             });
 
-            test("dragging the west handle of the exception changes the start of the exception", function() {
+            test("dragging the west handle of the exception preserve recurrenceException of the recurrence head", function() {
                 var recurrenceException = kendo.toString(kendo.timezone.apply(new Date("2013/6/7 11:00"), 0), "yyyyMMddTHHmmssZ") + ";";
 
                 var scheduler = new kendo.ui.Scheduler(div, {
@@ -1232,7 +1232,7 @@
                 equal(scheduler.dataSource.at(1).start.getDate(), 26);
                 equal(scheduler.dataSource.at(1).start.getMonth(), 4);
 
-                equal(scheduler.dataSource.at(0).recurrenceException, kendo.toString(kendo.timezone.apply(new Date("2013/5/26 00:00"), 0), "yyyyMMddTHHmmssZ") + ";");
+                equal(scheduler.dataSource.at(0).recurrenceException, recurrenceException);
             });
 
             test("east resizing is restricted by resource", function() {
