@@ -228,6 +228,8 @@
                 equal(event.id, 1);
                 deepEqual(event.start, date);
                 deepEqual(event.end, date);
+                equal(kendo.date.getMilliseconds(event.startTime), kendo.date.getMilliseconds(date));
+                equal(kendo.date.getMilliseconds(event.endTime), kendo.date.getMilliseconds(date));
             });
 
             test("clone method creates new instance of SchedulerEvent", function() {

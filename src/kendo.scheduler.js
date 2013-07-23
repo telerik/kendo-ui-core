@@ -214,6 +214,12 @@ kendo_module({
         }
     }
 
+    function toInvariantDate(date) {
+        var invariant = new Date(1980, 0, 1);
+        invariant.setHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+        return invariant;
+    }
+
     var SchedulerDataReader = kendo.Class.extend({
         init: function(schema, reader) {
             var timezone = schema.timezone;
@@ -276,6 +282,17 @@ kendo_module({
             kendo.data.Model.fn.init.call(that, value);
         },
 
+        clone: function(options, updateUid) {
+            var uid = this.uid,
+                event = new this.constructor($.extend({}, this.toJSON(), options));
+
+            if (!updateUid) {
+                event.uid = uid;
+            }
+
+            return event;
+        },
+
         expand: function(start, end, zone) {
             return recurrence ? recurrence.expand(this, start, end, zone) : [this];
         },
@@ -284,6 +301,9 @@ kendo_module({
             for (var field in eventInfo) {
                 this.set(field, eventInfo[field]);
             }
+
+            this.set("startTime", toInvariantDate(this.start));
+            this.set("endTime", toInvariantDate(this.end));
         },
 
         isException: function() {
@@ -296,17 +316,6 @@ kendo_module({
 
         isRecurrenceHead: function() {
             return !!(this.id && this.recurrenceRule);
-        },
-
-        clone: function(options, updateUid) {
-            var uid = this.uid,
-                event = new this.constructor($.extend({}, this.toJSON(), options));
-
-            if (!updateUid) {
-                event.uid = uid;
-            }
-
-            return event;
         },
 
         toOccurrence: function(options) {
