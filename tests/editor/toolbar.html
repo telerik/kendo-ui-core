@@ -182,6 +182,7 @@
 
             var toolbar;
             var dom;
+            var editorElement = $("<div />");
             var editorNS = kendo.ui.editor;
 
             module("Tool configuration & rendering", {
@@ -198,6 +199,7 @@
 
             function mockEditorTools(array, options) {
                 return {
+                    element: editorElement,
                     options: $.extend({
                         tools: array,
                         messages: {
@@ -344,6 +346,36 @@
                 ]));
 
                 equal(dom.find(".k-row-break").length, 1);
+            });
+
+            test("custom tools are moved into new groups", function() {
+                toolbar.bindTo(mockEditorTools([
+                    "formatting",
+                    { name: "custom", template: "<b class='foo' />" },
+                    "fontName"
+                ]));
+
+                equal(dom.find(".k-tool-group").length, 3);
+            });
+
+            test("custom tools are moved into separate groups", function() {
+                toolbar.bindTo(mockEditorTools([
+                    { name: "custom1", template: "<b class='foo' />" },
+                    { name: "custom2", template: "<b class='bar' />" }
+                ]));
+
+                equal(dom.find(".k-tool-group").length, 2);
+            });
+
+            test("custom tools exec function is bound to tool click", 2, function() {
+                toolbar.bindTo(mockEditorTools([
+                    { name: "custom1", exec: function() {
+                        ok(true);
+                        equal(this, editorElement[0]);
+                    } }
+                ]));
+
+                dom.find(".k-tool-icon").trigger("click");
             });
 
         </script>

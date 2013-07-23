@@ -89,6 +89,10 @@
         toolGroupFor: function(toolName) {
             var i, groups = this.groups;
 
+            if (this.isCustomTool(toolName)) {
+                return "custom";
+            }
+
             for (i in groups) {
                 if ($.inArray(toolName, groups[i]) >= 0) {
                     return i;
@@ -243,6 +247,10 @@
 
         tools: {}, // tools collection is copied from defaultTools during initialization
 
+        isCustomTool: function(toolName) {
+            return !(toolName in kendo.ui.Editor.defaultTools);
+        },
+
         // expand the tools parameter to contain tool options objects
         expandTools: function(tools) {
             var currentTool,
@@ -305,15 +313,19 @@
                 group, i;
 
             function stringify(template) {
+                var result;
+
                 if (template.getHtml) {
-                    return template.getHtml();
+                    result = template.getHtml();
                 } else {
                     if (!$.isFunction(template)) {
                         template = kendo.template(template);
                     }
 
-                    return template(options);
+                    result = template(options);
                 }
+
+                return $.trim(result);
             }
 
             function endGroup() {
@@ -358,8 +370,13 @@
 
                 toolElement = $(template).appendTo(group);
 
-                if (options.type == "button" && options.exec) {
-                    toolElement.find(".k-tool-icon").click(proxy(options.exec, editorElement[0]));
+                if (newGroupName == "custom") {
+                    endGroup();
+                    startGroup();
+                }
+
+                if (options.exec && toolElement.hasClass("k-tool-icon")) {
+                    toolElement.click(proxy(options.exec, editorElement[0]));
                 }
             }
 
