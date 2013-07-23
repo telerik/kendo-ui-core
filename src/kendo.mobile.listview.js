@@ -699,8 +699,6 @@ kendo_module({
         },
 
         setDataSource: function(dataSource) {
-            var options = this.options;
-
             if (this.dataSource) {
                 this._unbindDataSource();
             }
