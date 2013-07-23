@@ -193,7 +193,7 @@ kendo_module({
             this._removeResizeHint();
 
             if (vertical) {
-                startSlot = this._toDaySlot(startSlot);
+                sgroup.daySlotCollectionCount() - startSlot = this._toDaySlot(startSlot);
                 endSlot = this._toDaySlot(endSlot);
 
                 var slotGroups = [];
@@ -540,7 +540,7 @@ kendo_module({
                     slotIndex: $.proxy(this._slotIndex, this)
                 });
 
-                for (var j = 0; j < columnCount; j++) {
+                for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) {
                     view.addTimeSlotCollection(new ui.scheduler.SlotCollection());
                 }
 
@@ -551,124 +551,135 @@ kendo_module({
 
             this.groups = groups;
 
-            var tableRows = this.content[0].getElementsByTagName("tr");
+            var tableRows = this.content.find("tr:not(.k-scheduler-header-all-day)");
 
-            var allDaySelector = ".k-scheduler-header-all-day tr";
+            var rowCount = tableRows.length;
 
             if (this._isVerticallyGrouped()) {
-               allDaySelector = ".k-scheduler-header-all-day";
+                rowCount = Math.floor(rowCount / groupCount);
             }
 
-            var allDayRows = this.element.find(allDaySelector);
+            var interval = this._timeSlotInterval();
 
-            var allDayRowCount = this._isVerticallyGrouped() ? allDayRows.length : 0;
+            for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
+                var rowMultiplier = 0;
 
-            var tableCells;
-            var cellIndex;
-            var td;
-            var range;
-            var cell;
-            var visibleAllDayRowCount = 0;
-            var column;
-            var isVertical = this._isVerticallyGrouped();
-
-            for (var rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
-                var tr = tableRows[rowIndex];
-
-                if (tr.className && tr.className.indexOf("k-scheduler-header-all-day") > -1) {
-                    visibleAllDayRowCount++;
-                    continue;
+                if (this._isVerticallyGrouped()) {
+                    rowMultiplier = groupIndex;
                 }
 
-                tableCells = tr.children;
-
-                for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
-                    td = tableCells[cellIndex];
-
-                    var groupIndex = cellIndex % groupCount; // this._groupHorizontalIndex(cellIndex);
-
-                    if (isVertical) {
-                        groupIndex = this._groupVerticalIndex(rowIndex - visibleAllDayRowCount);
-                    }
-
+                for (var rowIndex = rowMultiplier*rowCount; rowIndex < (rowMultiplier+1) *rowCount; rowIndex++) {
+                    var cells = tableRows[rowIndex].children;
+                    var cellCount = cells.length;
                     var group = this.groups[groupIndex];
 
-                    range = this._rangeByIndex(
-                        this._adjustSlotIndex(rowIndex - visibleAllDayRowCount),
-                        cellIndex,
-                        this._adjustSlotIndex(tableRows.length - 1 - allDayRowCount)
-                    );
+                    var time;
 
-
-                    column = group.getTimeSlotCollection(this._adjustColumnIndex(cellIndex));
-
-                    if (this._isGroupedByDate()) {
-                        column = group.getTimeSlotCollection(0);
+                    if (rowIndex % rowCount === 0) {
+                        time = getMilliseconds(new Date(+this.options.startTime));
                     }
 
-                    column.offsetLeft = td.offsetLeft;
-                    column.clientWidth = td.clientWidth;
+                    var cellMultiplier = 0;
 
-                    column.addSlot(new ui.scheduler.TimeSlot({
-                        offsetTop: td.offsetTop,
-                        offsetLeft: td.offsetLeft,
-                        clientHeight: td.clientHeight,
-                        offsetHeight: td.offsetHeight,
-                        clientWidth: td.clientWidth,
-                        offsetWidth: td.offsetWidth,
-                        element: td,
-                        start: range.start,
-                        end: range.end,
-                        index: column._slots.length,
-                        columnIndex: this._adjustColumnIndex(cellIndex)
+                    if (!this._isVerticallyGrouped()) {
+                        cellMultiplier = groupIndex;
+                    }
+
+                    for (var cellIndex = cellMultiplier * columnCount; cellIndex < (cellMultiplier + 1) * columnCount; cellIndex++) {
+                        var cell = cells[cellIndex];
+                        var collectionIndex = cellIndex % columnCount;
+
+                        var collection = group.getTimeSlotCollection(collectionIndex);
+
+                        var index = collection.count();
+
+                        var start = kendo.date.getDate(this._dates[collectionIndex]);
+
+                        kendo.date.setTime(start, time);
+
+                        var end = new Date(start);
+
+                        kendo.date.setTime(end, interval);
+
+                        collection.addSlot(new kendo.ui.scheduler.DaySlot({
+                           clientWidth: cell.clientWidth,
+                           clientHeight: cell.clientHeight,
+                           offsetWidth: cell.offsetWidth,
+                           offsetHeight: cell.offsetHeight,
+                           offsetTop: cell.offsetTop,
+                           offsetLeft: cell.offsetLeft,
+                           start: start,
+                           end: end,
+                           element: cell,
+                           index: index,
+                           groupIndex: groupIndex,
+                           columnIndex: collectionIndex
+                        }));
+                    }
+
+                    time += interval;
+                }
+            }
+
+            if (!this.options.allDaySlot) {
+                return;
+            }
+
+            if (this._isVerticallyGrouped()) {
+                tableRows = this.element.find(".k-scheduler-header-all-day");
+            } else {
+                tableRows = this.element.find(".k-scheduler-header-all-day tr");
+            }
+
+            for (groupIndex = 0; groupIndex < groupCount; groupIndex++) {
+                var rowMultiplier = 0;
+
+                if (this._isVerticallyGrouped()) {
+                    rowMultiplier = groupIndex;
+                }
+
+                var group = this.groups[groupIndex];
+
+                var collection = group.getDaySlotCollection(0);
+
+                var cells = tableRows[rowMultiplier].children;
+                var cellMultiplier = 0;
+
+                if (!this._isVerticallyGrouped()) {
+                    cellMultiplier = groupIndex;
+                }
+
+                var cellCount = 0;
+
+                for (var cellIndex = cellMultiplier * columnCount; cellIndex < (cellMultiplier + 1) * columnCount; cellIndex++) {
+                    var cell = cells[cellIndex];
+
+                    var collectionIndex = Math.floor(cellIndex / (cellMultiplier + 1));
+
+                    if (cellIndex % columnCount === 0) {
+                        cellCount = 0;
+                    }
+
+                    var start = kendo.date.addDays(this.startDate(), cellCount);
+
+                    var end = kendo.date.addDays(start, 1);
+
+                    cellCount ++;
+
+                    collection.addSlot(new kendo.ui.scheduler.DaySlot({
+                       clientWidth: cell.clientWidth,
+                       clientHeight: cell.clientHeight,
+                       offsetWidth: cell.offsetWidth,
+                       offsetTop: cell.offsetTop,
+                       offsetLeft: cell.offsetLeft,
+                       start: start,
+                       end: end,
+                       element: cell,
+                       isAllDay: true,
+                       index: collection.count(),
+                       groupIndex: groupIndex,
+                       columnIndex: group.daySlotCollectionCount() - 1
                     }));
-                }
-            }
-
-            var rows = [];
-            var allDayRows = this.element.find(allDaySelector);
-
-            var rowsInGroup = 0;
-            if (this._isVerticallyGrouped()) {
-                rowsInGroup = this._rowCountInGroup();
-            }
-
-            for (rowIndex = 0; rowIndex < allDayRows.length; rowIndex++) {
-
-                tableCells = allDayRows[rowIndex].children;
-
-                for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
-                    var groupIndex = rowIndex;
-
-                    if (!isVertical) {
-                        groupIndex = this._groupHorizontalIndex(cellIndex);
-                    }
-                    var group = this.groups[groupIndex];
-                    td = tableCells[cellIndex];
-
-                    range = this._rangeByIndex(
-                        this._adjustSlotIndex(rowIndex),
-                        this._adjustColumnIndex(cellIndex),
-                        this._adjustSlotIndex(allDayRows.length)
-                    );
-
-                    var collection = group.getDaySlotCollection(0);
-
-                    collection.addSlot(new kendo.ui.scheduler.DaySlot( {
-                            offsetTop: td.offsetTop,
-                            offsetLeft: td.offsetLeft,
-                            clientHeight: td.clientHeight,
-                            offsetHeight: td.offsetHeight,
-                            offsetWidth: td.offsetWidth,
-                            clientWidth: td.clientWidth,
-                            element: td,
-                            isAllDay: true,
-                            start: range.start,
-                            end: range.end,
-                            index: this._adjustColumnIndex(cellIndex),
-                            columnIndex: 0
-                        }
-                    ));
                 }
             }
         },
