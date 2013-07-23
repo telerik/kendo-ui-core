@@ -413,6 +413,45 @@ kendo_module({
             }
 
             return data;
+        },
+
+        //override insert method instead of add
+        add: function(model) {
+            if (!model) {
+                return;
+            }
+
+            if (!(model instanceof SchedulerEvent)) {
+                var eventInfo = model;
+
+                model = this._createNewModel();
+                model.accept(eventInfo);
+            }
+
+            if (model.isRecurrenceHead() || model.recurrenceId) {
+                //Always create exception
+                model = model.recurrenceId ? model : model.toOccurrence();
+                this._addExceptionDate(model);
+            }
+
+            return kendo.data.DataSource.fn.add.call(this, model);
+        },
+
+        //TODO: refactor
+        _addExceptionDate: function(model) {
+            var origin = this.get(model.recurrenceId),
+                zone = model.startTimezone || model.endTimezone || this.reader.timezone,
+                exception = origin.recurrenceException || "",
+                start = model.start;
+
+            start = new Date(kendo.date.getDate(start).getTime() + getMilliseconds(origin.start));
+
+            if (!recurrence.isException(exception, start, zone)) {
+                start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
+                exception += kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
+
+                origin.set("recurrenceException", exception);
+            }
         }
     });
 
@@ -657,7 +696,6 @@ kendo_module({
                     groupIndex: 0
                 };
             }
-
 
             item = $(item);
             selection = this._selection;
@@ -1058,28 +1096,13 @@ kendo_module({
             };
 
             var updateOcurrence = function() {
-                var head = recurrenceHead(event);
+                var exception = recurrenceHead(event).toOccurrence();
 
-                var exception = head.toJSON();
-
-                delete exception[head.idField];
-                delete exception.recurrenceRule;
-                delete exception.id;
-
-                exception.recurrenceId = head.id;
-                exception.start = event.start;
-                exception.end = event.end;
-
+                exception.update(eventInfo);
                 exception = that.dataSource.add(exception);
 
-                that._addExceptionDate(exception);
-
-                for (var field in eventInfo) {
-                    exception.set(field, eventInfo[field]);
-                }
-
                 if (!that.trigger(SAVE, { model: exception })) {
-                    that._updateSelection(event);
+                    that._updateSelection(exception);
                     that.dataSource.sync();
                 }
             };
@@ -1172,22 +1195,19 @@ kendo_module({
         },
 
         addEvent: function(eventInfo) {
-            if ((this.editable && this.editable.end()) || !this.editable) {
+            var editable = this.editable,
+                dataSource = this.dataSource,
+                event;
+
+            if ((editable && editable.end()) || !editable) {
 
                 this.cancelEvent();
 
-                var dataSource = this.dataSource;
-                var event = dataSource._createNewModel();
-
-                if (event instanceof kendo.data.Model) {
-                    eventInfo = eventInfo && eventInfo.toJSON ? eventInfo.toJSON() : eventInfo;
-
-                    event.accept(eventInfo);
-                } else {
-                    event = extend({ title: "" }, event, eventInfo);
+                if (eventInfo && eventInfo.toJSON) {
+                    eventInfo = eventInfo.toJSON();
                 }
 
-                event = this.dataSource.add(event);
+                event = dataSource.add(eventInfo);
 
                 if (event) {
                     this.editEvent(event.uid);
@@ -1540,8 +1560,6 @@ kendo_module({
 
         _editRecurringDialog: function(model, uid) {
             var that = this;
-            var id;
-            var idField;
 
             if (!model) {
                 model = getOccurrenceByUid(that._data, uid);
@@ -1551,26 +1569,9 @@ kendo_module({
             }
 
             var editOcurrence = function() {
-                if (model.id && model.recurrenceId) {
+                if (model.isException()) {
                     that._editEvent(model); //edit existing exception
                 } else {
-                    if (!model.recurrenceId) { //create exception eventInfo from origin
-                        id = model.id;
-                        idField = model.idField;
-
-                        if (model.toJSON) {
-                            model = model.toJSON();
-                        }
-
-                        delete model[idField];
-                        delete model.recurrenceRule;
-                        delete model.id;
-
-                        model.uid = kendo.guid();
-                        model.recurrenceId = id;
-                    }
-
-                    that._addExceptionDate(model);
                     that.addEvent(model);
                 }
             };
