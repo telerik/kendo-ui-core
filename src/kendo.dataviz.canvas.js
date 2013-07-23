@@ -61,8 +61,7 @@ kendo_module({
         renderTo: function(container) {
             var view = this,
                 options = view.options,
-                canvas,
-                ctx;
+                canvas;
 
             canvas = container.firstElementChild;
             if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
@@ -74,25 +73,23 @@ kendo_module({
                 canvas.height = options.height;
             }
 
-            view._ctx = ctx = canvas.getContext("2d");
-            view.renderContent(ctx);
+            view._viewElement = canvas;
+            view.renderContent(canvas.getContext("2d"));
 
             return canvas;
         },
 
-        replace: function(element, bbox) {
+        replace: function(model) {
             var view = this,
-                ctx = view._ctx;
+                canvas = view._viewElement,
+                bbox = model.box,
+                ctx;
 
-            ctx.clearRect(bbox.x1, bbox.y1, bbox.width(), bbox.height());
-            element.render(ctx);
-        },
-
-        destroy: function() {
-            var view = this;
-
-            ViewBase.fn.destroy.call(view);
-            view._ctx = null;
+            if (canvas && bbox) {
+                ctx = canvas.getContext("2d");
+                ctx.clearRect(bbox.x1, bbox.y1, bbox.width(), bbox.height());
+                model.getViewElements(view)[0].render(ctx);
+            }
         },
 
         renderContent: function(context) {

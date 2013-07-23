@@ -101,7 +101,8 @@ kendo_module({
         },
 
         renderTo: function(container) {
-            var view = this;
+            var view = this,
+                viewElement;
 
             if (doc.namespaces) {
                 doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
@@ -111,7 +112,10 @@ kendo_module({
             container.innerHTML = view.render();
             view.playAnimations();
 
-            return container.firstChild;
+            viewElement = container.firstChild;
+            view._viewElement = viewElement;
+
+            return viewElement;
         },
 
         renderElement: function(element) {

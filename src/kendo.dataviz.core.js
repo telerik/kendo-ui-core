@@ -2347,10 +2347,39 @@ kendo_module({
         },
 
         destroy: function() {
-            var animations = this.animations;
+            var view = this,
+                animations = view.animations,
+                viewElement = view._viewElement;
+
+            ViewElement.fn.destroy.call(this);
 
             while (animations.length > 0) {
                 animations.shift().destroy();
+            }
+
+            if (viewElement) {
+                view._freeIds(viewElement);
+                view._viewElement = null;
+            }
+        },
+
+        _freeIds: function(domElement) {
+            $("[id]", domElement).each(function() {
+                IDPool.current.free($(this).attr("id"));
+            });
+        },
+
+        replace: function(model) {
+            var view = this,
+                element = getElement(model.options.id);
+
+            if (element) {
+                view._freeIds(element);
+
+                element.parentNode.replaceChild(
+                    view.renderElement(model.getViewElements(view)[0]),
+                    element
+                );
             }
         },
 
