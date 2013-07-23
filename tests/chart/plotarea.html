@@ -1337,7 +1337,7 @@
                     });
 
                     deepEqual(plotArea.categoryAxis.options.type, "date");
-                    deepEqual(plotArea.series[0].data, [{ value: 100 }, { value: 200 }, {}, { value: 300 }]);
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }, { value: 200 }, { value: undefined }, { value: 300 }]);
                 });
 
                 test("User can override automatic category axis type", function() {
@@ -1367,7 +1367,7 @@
                         categoryAxis: dateCategoryAxis
                     });
 
-                    deepEqual(plotArea.series[0].data, [{ value: 100 }, { value: 200 }, {}, { value: 300 }]);
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }, { value: 200 }, { value: undefined }, { value: 300 }]);
                 });
 
                 test("Does not alter original series data", function() {

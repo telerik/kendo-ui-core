@@ -7223,9 +7223,9 @@ kendo_module({
                 srcValues = [],
                 srcDataItems = [],
                 range = categoryAxis.range(),
-                i, category, categoryIx,
-                data, pointData,
                 result = deepExtend({}, series),
+                i, category, categoryIx,
+                data, pointData, aggregator,
                 getFn = getField;
 
             result.data = data = [];
@@ -7253,14 +7253,14 @@ kendo_module({
                 }
             }
 
+            aggregator = new Aggregator(series);
+
             for (i = 0; i < categories.length; i++) {
-                var aggregator = new Aggregator(
-                    srcValues[i] || [],
-                    series,
-                    srcDataItems[i] || [],
+                data[i] = aggregator.calculate(
+                    srcValues[i],
+                    srcDataItems[i],
                     categories[i]
                 );
-                data[i] = aggregator.aggregatedData;
             }
 
             return result;
@@ -9188,89 +9188,83 @@ kendo_module({
     });
 
     var Aggregator = Class.extend({
-        init: function(data, series, dataItems, group) {
+        init: function(series) {
             var agg = this;
 
-            agg.series = series;
-            agg.dataItems = dataItems;
-            agg.group = group;
-            agg.data = data;
-            agg.aggregatedData = {};
-
-            agg.getFields();
-            agg.getAggregate();
-            agg.calculate();
+            agg._series = series;
+            agg._initFields();
+            agg._initAggregate();
         },
 
-        options: {
-            defaultAggregate: "max"
-        },
-
-        getFields: function() {
+        _initFields: function() {
             var agg = this,
-                series = agg.series;
+                series = agg._series,
+                binder = SeriesBinder.current;
 
-            agg.valueFields = SeriesBinder.current.valueFields(series);
-            agg.otherFields = SeriesBinder.current.otherFields(series);
-            agg.originalValueFields = SeriesBinder.current._mapSeriesFields(series, agg.valueFields);
-            agg.originalOtherFields = SeriesBinder.current._mapSeriesFields(series, agg.otherFields);
+            agg._fields = binder.valueFields(series).concat(
+                binder.otherFields(series)
+            );
+
+            agg._srcFields = binder._mapSeriesFields(series, agg._fields);
         },
 
-        getAggregate: function() {
+        _initAggregate: function() {
             var agg = this,
-                series = agg.series,
-                options = agg.options,
-                aggregate;
+                series = agg._series,
+                fields = agg._fields,
+                aggregate, i, field, fieldAggregate,
+                item = {}, filter, itemOptions = [];
 
-            aggregate = series.aggregate || options.defaultAggregate;
+            aggregate = series.aggregate || "max";
 
             if (typeof aggregate !== OBJECT) {
                 aggregate = { value: aggregate };
             }
 
-            agg.aggregate = aggregate;
-        },
-
-        calculate: function() {
-            var agg = this;
-
-            agg.aggregateValues(agg.valueFields, agg.originalValueFields);
-            agg.aggregateValues(agg.otherFields, agg.originalOtherFields);
-        },
-
-        aggregateValues: function(fields, originalFields) {
-            var agg = this,
-                values = [],
-                aggregate, i, field,
-                customAggregate,
-                originalField, aggregatedValue;
-
             for (i = 0; i < fields.length; i++) {
-                field = fields[i];
-                originalField = originalFields[field];
-                aggregate = agg.aggregate[field];
-                if (aggregate) {
-                    customAggregate = typeof aggregate === "function";
-                    values = agg.valuesByField(field, customAggregate);
-                    if (values.length) {
-                        if (customAggregate) {
-                            aggregatedValue = aggregate(values, agg.series, agg.dataItems, agg.group);
-                        } else {
-                            aggregatedValue = Aggregates[aggregate](values);
-                        }
-                        agg.aggregatedData[originalField] = aggregatedValue;
+                field = item.field = fields[i];
+                fieldAggregate = aggregate[field];
+                if (fieldAggregate) {
+                    filter = true;
+                    if (typeof fieldAggregate !== "function") {
+                        fieldAggregate = Aggregates[fieldAggregate];
+                        filter = false;
                     }
-
-                    values = [];
+                    item.aggregate = fieldAggregate;
+                    item.filter = filter;
+                    itemOptions.push(item);
                 }
+                item = {};
             }
+
+            agg._itemOptions = itemOptions;
         },
 
-        valuesByField: function(field, customAggregate) {
+        calculate: function(data, dataItems, group) {
             var agg = this,
-                data = agg.data,
+                aggregatedData = {},
                 values = [],
-                count = data.length,
+                itemOptions = agg._itemOptions,
+                aggregate, i, field, item,
+                originalField;
+
+            for (i = 0; i < itemOptions.length; i++) {
+                item = itemOptions[i];
+                field = item.field;
+                originalField = agg._srcFields[field];
+                values = agg.valuesByField(data, field, item.filter);
+                aggregate = item.aggregate;
+                aggregatedData[originalField] = aggregate(values, agg._series, dataItems, group);
+
+                values = [];
+            }
+
+            return aggregatedData;
+        },
+
+        valuesByField: function(data, field, filter) {
+            var values = [],
+                count = (data || []).length,
                 i, item, value, valueFields;
 
             for (i = 0; i < count; i++) {
@@ -9278,12 +9272,12 @@ kendo_module({
                 valueFields = item.valueFields;
 
                 if (defined(valueFields) && valueFields !== null && defined(valueFields[field])) {
-                    value = item.valueFields[field];
+                    value = valueFields[field];
                 } else if (defined(item.fields)) {
-                    value = agg.otherFields[field];
+                    value = item.fields[field];
                 }
 
-                if (customAggregate || (value !== null && isFinite(value))) {
+                if (filter || (value !== null && isFinite(value))) {
                     values.push(value);
                 }
             }
