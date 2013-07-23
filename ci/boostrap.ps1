@@ -90,5 +90,8 @@ registerPath "C:\Program Files (x86)\Java\jre7\bin"
 
 if (!($jenkins_slave -eq $false)) {
     $slaveJar = download "$jenkins_root/jnlpJars/slave.jar"
-    java -jar $slaveJar -jnlpUrl "$jenkins_root/computer/$jenkins_slave/slave-agent.jnlp"
+    start-process -FilePath "java" -ArgumentList @(
+        "-jar", $slaveJar,
+        "-jnlpUrl", "$jenkins_root/computer/$jenkins_slave/slave-agent.jnlp"
+    )
 }
