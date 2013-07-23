@@ -1085,6 +1085,74 @@
                 deepEqual(data[0].end, view[0].end);
             });
 
+            test("SchedulerDataSource insert method returns undefined if model is not passed", function() {
+                var dataSource = createDataSource();
+
+                equal(dataSource.insert(), undefined);
+            });
+
+            test("SchedulerDataSource insert method creates SchedulerEvent from plain object", function() {
+                var dataSource = createDataSource(),
+                    date = new Date();
+
+                var event = dataSource.insert(0, { start: date, end: date });
+
+                ok(event);
+                ok(event instanceof SchedulerEvent);
+                deepEqual(event.start, date);
+                deepEqual(event.end, date);
+            });
+
+            test("SchedulerDataSource insert exception event from recurrence head", function() {
+                var dataSource = createDataSource([new SchedulerEvent({
+                        id: 1,
+                        title: "Title",
+                        start: new Date(2013, 1, 1, 16, 30),
+                        end: new Date(2013, 1, 3, 17, 0),
+                        isAllDay: true,
+                        recurrenceRule: "FREQ=MONTHLY"
+                    })]);
+
+                var event = dataSource.insert(1, dataSource.data()[0]);
+
+                ok(event.isNew());
+                ok(event.recurrenceId, 1);
+            });
+
+            test("SchedulerDataSource insert exception event from occurrence", function() {
+                var dataSource = createDataSource([new SchedulerEvent({
+                        id: 1,
+                        title: "Title",
+                        start: new Date(2013, 1, 1, 16, 30),
+                        end: new Date(2013, 1, 3, 17, 0),
+                        isAllDay: true,
+                        recurrenceRule: "FREQ=MONTHLY"
+                    })]);
+
+                var occurrence = dataSource.data()[0].toOccurrence();
+
+                var event = dataSource.insert(1, occurrence);
+
+                ok(event.isNew());
+                ok(event.recurrenceId, 1);
+            });
+
+            test("SchedulerDataSource insert method updates recurrenceException property of the head", function() {
+                var dataSource = createDataSource([new SchedulerEvent({
+                        id: 1,
+                        title: "Title",
+                        start: new Date(2013, 1, 1, 16, 30),
+                        end: new Date(2013, 1, 3, 17, 0),
+                        isAllDay: true,
+                        recurrenceRule: "FREQ=MONTHLY"
+                    })]);
+
+                var event = dataSource.insert(1, dataSource.data()[0]);
+                var head = dataSource.data()[0];
+
+                equal(head.recurrenceException, kendo.toString(kendo.timezone.apply(event.start, 0), "yyyyMMddTHHmmssZ") + ";");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

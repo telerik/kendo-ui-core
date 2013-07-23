@@ -424,8 +424,7 @@ kendo_module({
             return data;
         },
 
-        //override insert method instead of add
-        add: function(model) {
+        insert: function(index, model) {
             if (!model) {
                 return;
             }
@@ -438,12 +437,11 @@ kendo_module({
             }
 
             if (model.isRecurrenceHead() || model.recurrenceId) {
-                //Always create exception
                 model = model.recurrenceId ? model : model.toOccurrence();
                 this._addExceptionDate(model);
             }
 
-            return kendo.data.DataSource.fn.add.call(this, model);
+            return kendo.data.DataSource.fn.insert.call(this, index, model);
         },
 
         //TODO: refactor
