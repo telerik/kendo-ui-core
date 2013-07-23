@@ -174,29 +174,38 @@ kendo_module({
 
     var RefreshHandler = kendo.Class.extend({
         init: function(listView) {
-            var scroller = listView.scroller(),
+            var handler = this,
                 options = listView.options,
-                dataSource = listView.dataSource,
+                scroller = listView.scroller(),
                 pullParameters = options.pullParameters || DEFAULT_PULL_PARAMETERS;
 
-            this._first = dataSource.view()[0];
+            this.listView = listView;
             this.scroller = scroller;
-            this.dataSource = dataSource;
 
-            var refreshHandler = this;
+            listView.bind("_dataSource", function(e) {
+                handler.setDataSource(e.dataSource);
+            });
+
             scroller.setOptions({
                 pullToRefresh: true,
                 pull: function() {
-                    refreshHandler._pulled = true;
-                    dataSource.read(pullParameters.call(listView, refreshHandler._first));
+                    handler._pulled = true;
+                    handler.dataSource.read(pullParameters.call(listView, handler._first));
                 },
                 pullTemplate: options.pullTemplate,
                 releaseTemplate: options.releaseTemplate,
                 refreshTemplate: options.refreshTemplate
             });
+        },
+
+        setDataSource: function(dataSource) {
+            var handler = this;
+
+            this._first = dataSource.view()[0];
+            this.dataSource = dataSource;
 
             dataSource.bind("change", function() {
-                refreshHandler._change();
+                handler._change();
             });
         },
 
@@ -521,9 +530,12 @@ kendo_module({
 
     var VirtualListViewItemBinder = kendo.Class.extend({
         init: function(listView) {
+            var binder = this;
             this.listView = listView;
             this.options = listView.options;
-            this.configure();
+            listView.bind("_dataSource", function(e) {
+                binder.setDataSource(e.dataSource);
+            });
         },
 
         destroy: function() {
@@ -532,7 +544,7 @@ kendo_module({
             kendo.unbindResize(this._resizeHandler);
         },
 
-        configure: function() {
+        setDataSource: function(dataSource) {
             var options = this.options,
                 listView = this.listView,
                 scroller = listView.scroller(),
@@ -543,7 +555,7 @@ kendo_module({
                 this._unbindDataSource();
             }
 
-            var dataSource = this.listView.dataSource = DataSource.create(options.dataSource);
+            this.dataSource = dataSource;
 
             var buffer = new kendo.data.Buffer(dataSource, Math.floor(dataSource.pageSize() / 2), pressToLoadMore);
 
@@ -605,7 +617,7 @@ kendo_module({
                     }
                 });
 
-                buffer.bind('expand', function() {
+                buffer.bind("expand", function() {
                     list.lastDirection = false; // expand down
                     list.batchUpdate(scroller.scrollTop);
                 });
@@ -629,6 +641,7 @@ kendo_module({
 
     var ListViewItemBinder = kendo.Class.extend({
         init: function(listView) {
+            var binder = this;
             this.listView = listView;
             this.options = listView.options;
 
@@ -642,7 +655,9 @@ kendo_module({
                 listView.showLoading();
             };
 
-            this.configure();
+            listView.bind("_dataSource", function(e) {
+                binder.setDataSource(e.dataSource);
+            });
         },
 
         destroy: function() {
@@ -683,14 +698,15 @@ kendo_module({
             listView.trigger(DATA_BOUND, { ns: ui });
         },
 
-        configure: function() {
+        setDataSource: function(dataSource) {
             var options = this.options;
 
             if (this.dataSource) {
                 this._unbindDataSource();
             }
 
-            this.listView.dataSource = this.dataSource = DataSource.create(options.dataSource).bind(CHANGE, this._refreshHandler);
+            this.dataSource = dataSource;
+            dataSource.bind(CHANGE, this._refreshHandler);
 
             if (this._shouldShowLoading()) {
                 this.dataSource.bind(PROGRESS, this._progressHandler);
@@ -830,10 +846,6 @@ kendo_module({
                 this._itemBinder = new ListViewItemBinder(this);
             }
 
-            if (options.dataSource && options.autoBind) {
-                this.dataSource.fetch();
-            }
-
             if (this.options.pullToRefresh) {
                 this._pullToRefreshHandler = new RefreshHandler(this);
             }
@@ -841,6 +853,8 @@ kendo_module({
             if (this.options.filterable) {
                 this._filter = new ListViewFilter(this);
             }
+
+            this.setDataSource(options.dataSource);
 
             this._enhanceItems(this.items());
 
@@ -882,11 +896,14 @@ kendo_module({
         },
 
         setDataSource: function(dataSource) {
-            this.options.dataSource = dataSource;
-            this._itemBinder.configure();
+            // the listView should have a ready datasource for MVVM to function properly. But an empty datasource should not empty the element
+            var emptyDataSource = !dataSource;
+            this.dataSource = DataSource.create(dataSource);
 
-            if (this.options.autoBind) {
-                this.element.empty();
+            this.trigger("_dataSource", { dataSource: this.dataSource });
+
+            if (this.options.autoBind && !emptyDataSource) {
+                this.items().remove();
                 this.dataSource.fetch();
             }
         },
@@ -908,7 +925,7 @@ kendo_module({
             if (this.options.type === "group") {
                 return this.element.find(".km-list").children();
             } else {
-                return this.element.children();
+                return this.element.children().not('.km-load-more');
             }
         },
 
