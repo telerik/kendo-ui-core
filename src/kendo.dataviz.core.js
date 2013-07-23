@@ -577,14 +577,20 @@ kendo_module({
                 children = element.children,
                 root = element.getRoot(),
                 modelId = element.options.modelId,
+                id = element.options.id,
+                pool = IDPool.current,
                 i;
 
-            if (root && modelId) {
-                if (root.modelMap[modelId]) {
-                    IDPool.current.free(modelId);
-                }
+            if (id) {
+                pool.free(id);
+            }
 
-                root.modelMap[modelId] = undefined;
+            if (modelId) {
+                pool.free(modelId);
+
+                if (root && root.modelMap[modelId]) {
+                    root.modelMap[modelId] = undefined;
+                }
             }
 
             for (i = 0; i < children.length; i++) {

@@ -23,6 +23,7 @@
                 Box2D = dataviz.Box2D,
                 getElement = dataviz.getElement,
                 chartBox = new Box2D(5, 5, 1000, 1000),
+                IDPool = dataviz.IDPool,
                 view,
                 TOLERANCE = 2;
 
@@ -110,35 +111,6 @@
                     ok(root.modelMap[chartElement.options.modelId]);
                 });
 
-                test("destroy unregisters model id from root", function() {
-                    var root = new dataviz.RootElement();
-
-                    root.append(chartElement);
-                    chartElement.enableDiscovery();
-                    chartElement.getViewElements(view);
-                    chartElement.destroy();
-
-                    ok(!root.modelMap[chartElement.options.modelId]);
-                })
-
-                test("destroy recurses on children", function() {
-                    var root = new dataviz.RootElement(),
-                        child1 = new dataviz.ChartElement(),
-                        child2 = new dataviz.ChartElement();
-
-                    child2.enableDiscovery();
-
-                    root.append(chartElement);
-                    chartElement.append(child1);
-                    child1.append(child2);
-
-                    chartElement.enableDiscovery();
-                    chartElement.getViewElements(view);
-                    chartElement.destroy();
-
-                    ok(!root.modelMap[child2.options.modelId]);
-                });;
-
                 test("getViewElements associates children with discoverable elements", function() {
                     var child1 = new dataviz.ChartElement(),
                         child2 = new dataviz.ChartElement();
@@ -180,6 +152,64 @@
                     notEqual(chartElement.options.modelId, child1.options.modelId);
                 });
 
+                // ------------------------------------------------------------
+                var pool,
+                    originalPool;
+
+                module("ChartElement / destroy", {
+                    setup: function() {
+                        chartElement = new dataviz.ChartElement();
+
+                        originalPool = IDPool.current;
+                        pool = IDPool.current = new IDPool(10, "", 1);
+                    },
+                    teardown: function() {
+                        IDPool.current = originalPool;
+                    }
+                });
+
+                test("unregisters modelId from root", function() {
+                    var root = new dataviz.RootElement();
+
+                    root.append(chartElement);
+                    chartElement.enableDiscovery();
+                    chartElement.getViewElements(view);
+                    chartElement.destroy();
+
+                    ok(!root.modelMap[chartElement.options.modelId]);
+                });
+
+                test("unregisters modelId from IDPool", function() {
+                    chartElement.enableDiscovery();
+                    chartElement.destroy();
+
+                    equal(pool._pool.length, 1);
+                });
+
+                test("unregisters id from IDPool", function() {
+                    chartElement.options.id = dataviz.uniqueId();
+                    chartElement.destroy();
+
+                    equal(pool._pool.length, 1);
+                });
+
+                test("destroys children", function() {
+                    var root = new dataviz.RootElement(),
+                        child1 = new dataviz.ChartElement(),
+                        child2 = new dataviz.ChartElement();
+
+                    child2.enableDiscovery();
+
+                    root.append(chartElement);
+                    chartElement.append(child1);
+                    child1.append(child2);
+
+                    chartElement.enableDiscovery();
+                    chartElement.getViewElements(view);
+                    chartElement.destroy();
+
+                    ok(!root.modelMap[child2.options.modelId]);
+                });
             })();
 
             (function() {
