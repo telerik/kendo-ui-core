@@ -1724,6 +1724,20 @@ kendo_module({
             return kendo.template(template)(options);
         },
 
+        _hasFooters: function() {
+            var cols = this.columns,
+                len = cols.length,
+                j;
+
+            for (j = 0; j < len; j++) {
+                if (cols[j].footerTemplate !== "" || cols[j].groupFooterTemplate !== "") {
+                    return true;
+                }
+            }
+            
+            return false;
+        },
+
         _groupable: function() {
             var that = this;
 
@@ -1778,14 +1792,28 @@ kendo_module({
             var that = this,
                 multi,
                 cell,
+                notString = [],
                 selectable = that.options.selectable;
 
             if (selectable) {
                 multi = typeof selectable === STRING && selectable.toLowerCase().indexOf("multiple") > -1;
                 cell = typeof selectable === STRING && selectable.toLowerCase().indexOf("cell") > -1;
 
+                if (that._hasDetails()) {
+                    notString[notString.length] = ".k-detail-row";
+                }
+                if (that.options.groupable || that._hasFooters()) {
+                    notString[notString.length] = ".k-grouping-row,.k-group-footer";
+                }
+
+                notString = notString.join(",");
+
+                if (notString !== "") {
+                    notString = ":not(" + notString + ")";
+                }
+
                 that.selectable = new kendo.ui.Selectable(that.table, {
-                    filter: ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr:not(.k-grouping-row,.k-detail-row,.k-group-footer)"),
+                    filter: ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr" + notString),
                     aria: true,
                     multiple: multi,
                     change: function() {
