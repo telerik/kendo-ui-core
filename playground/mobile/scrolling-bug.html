@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lynx Dashboard</title>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.buttongroup.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.drawer.js"></script>
+    </head>
+    <body>
+
+        <div data-role="drawer" id="main-menu">
+            <ul data-role="listview">
+                <li><a href="#settings" data-transition="none">Settings</a></li>
+            </ul>
+        </div>
+
+        <div data-role="view" id="favorites" data-layout="main-item-list" data-title="Favorites">
+            <h1>Favorites</h1>
+        </div>
+
+        <!-- LAYOUTS -->
+
+        <div data-role="layout" data-id="main-item-list">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="button" data-align="left" data-icon="home" href="#main-menu" data-rel="drawer"></span>
+                    <span data-role="view-title"></span>
+                </div>
+            </header>
+        </div>
+
+        <div data-role="view" id="settings" data-layout="main-item-list" data-title="Settings">
+            <ul data-role="listview">
+                <li>
+                    <span class="setting-label">Offline Mode</span>
+                    <input type="checkbox" id="inputOfflineMode" data-role="switch" />
+                </li>
+                <li>
+                    <span class="setting-label">View Scorecards by default</span>
+                    <input type="checkbox" id="inputViewScorecardsByDefault" data-role="switch" />
+                </li>
+                <li>
+                    <span class="setting-label">Days to go back on app startup</span>
+                    <input type="number" class="setting-text-input" id="inputDaysToGoBack" />
+                </li>
+            </ul>
+        </div>
+
+        <!-- END: LAYOUTS -->
+
+        <script>
+            new kendo.mobile.Application(document.body, {
+                transition: "slide",
+                skin: "flat"
+            });
+        </script>
+    </body>
+</html>
