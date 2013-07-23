@@ -20,10 +20,11 @@
         <script type="text/javascript">
 
             var dataviz = kendo.dataviz,
+                IDPool = dataviz.IDPool,
                 Box2D = dataviz.Box2D,
                 getElement = dataviz.getElement,
                 chartBox = new Box2D(5, 5, 1000, 1000),
-                IDPool = dataviz.IDPool,
+                uniqueId = dataviz.uniqueId,
                 view,
                 TOLERANCE = 2;
 
@@ -187,7 +188,7 @@
                 });
 
                 test("unregisters id from IDPool", function() {
-                    chartElement.options.id = dataviz.uniqueId();
+                    chartElement.options.id = uniqueId();
                     chartElement.destroy();
 
                     equal(pool._pool.length, 1);
@@ -1545,6 +1546,45 @@
                     });
                 });
 
+            })();
+
+            (function() {
+                // ------------------------------------------------------------
+                var viewElement,
+                    pool,
+                    originalPool;
+
+                module("ViewElement / destroy", {
+                    setup: function() {
+                        viewElement = new dataviz.ViewElement();
+
+                        originalPool = IDPool.current;
+                        pool = IDPool.current = new IDPool(10, "", 1);
+                    },
+                    teardown: function() {
+                        IDPool.current = originalPool;
+                    }
+                });
+
+                test("unregisters id from IDPool", function() {
+                    viewElement.options.id = uniqueId();
+                    viewElement.destroy();
+
+                    equal(pool._pool.length, 1);
+                });
+
+                test("destroys children", function() {
+                    var root = new dataviz.ViewElement(),
+                        child = new dataviz.ViewElement(),
+                        grandchild = new dataviz.ViewElement();
+
+                    root.children.push(child);
+                    child.children.push(grandchild);
+
+                    grandchild.destroy = function() { ok(true); };
+
+                    root.destroy();
+                });
             })();
 
             (function() {

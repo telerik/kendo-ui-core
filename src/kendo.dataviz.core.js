@@ -2279,16 +2279,19 @@ kendo_module({
 
         refresh: $.noop,
 
-        traverse: function(callback) {
+        destroy: function() {
             var element = this,
+                id = element.options.id,
                 children = element.children,
                 length,
                 i;
 
-            callback(element);
+            if (id) {
+                IDPool.current.free(id);
+            }
 
             for (i = 0, length = children.length; i < length; i++) {
-                children[i].traverse(callback);
+                children[i].destroy();
             }
         },
 
