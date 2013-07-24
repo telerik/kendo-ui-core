@@ -90,8 +90,9 @@ public abstract class WidgetTag extends BaseTag implements Serializable, Dynamic
     public Script script() {
         StringWriter content = new StringWriter();
 
+        Object id = attributes.get("id");
         content.append("jQuery(function(){jQuery(\"#")
-               .append(getName())
+               .append(id != null ? id.toString(): this.getName())
                .append("\").kendo")
                .append(widget)
                .append("(");

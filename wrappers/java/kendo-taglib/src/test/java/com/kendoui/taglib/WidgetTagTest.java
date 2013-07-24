@@ -67,4 +67,10 @@ public class WidgetTagTest {
         tag.setFoo("foo");
         assertEquals("jQuery(function(){jQuery(\"#foo\").kendoFoo({\"foo\":\"foo\"});})", tag.script().html());
     }
+    
+    @Test
+    public void scriptUsesTheElementID() throws IOException {
+        tag.attributes.put("id", "testFoo");
+        assertEquals("jQuery(function(){jQuery(\"#testFoo\").kendoFoo({});})", tag.script().html());
+    }
 }
