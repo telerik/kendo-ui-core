@@ -1280,8 +1280,6 @@ kendo_module({
                 delete that._startTime;
                 delete that._endTime;
 
-                that._removeExceptionDate(model);
-
                 that.dataSource.cancelChanges(model);
 
                 //TODO: handle the cancel in UI
@@ -1627,37 +1625,6 @@ kendo_module({
                     { text: recurrenceMessages.editWindowSeries, click: editSeries }
                 ]
             });
-        },
-
-        /*_addExceptionDate: function(model) {
-            var origin = this.dataSource.get(model.recurrenceId),
-                zone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone,
-                exception = origin.recurrenceException || "",
-                start = model.start;
-
-            if (!recurrence.isException(exception, start, zone)) {
-                start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
-                exception += kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
-
-                origin.set("recurrenceException", exception);
-            }
-        },*/
-
-        _removeExceptionDate: function(model) {
-            var origin, exceptionDate, exception,
-                zone = model.startTimezone || model.endTimezone || this.dataSource.reader.timezone,
-                start = model.start;
-
-            if (model.recurrenceId) {
-                origin = this.dataSource.get(model.recurrenceId);
-                start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
-
-                if (origin) {
-                    exceptionDate = kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
-                    exception = origin.recurrenceException.replace(exceptionDate, "");
-                    origin.set("recurrenceException", exception);
-                }
-            }
         },
 
         _destroyEditable: function() {
