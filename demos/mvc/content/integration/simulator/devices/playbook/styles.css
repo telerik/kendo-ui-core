@@ -1,0 +1,51 @@
+.device-skin
+{
+    font-size: 11px; /* Sets the zoom level */
+}
+
+.device-container.vertical .device-skin
+{
+    background-image: url("images/vertical.png");
+}
+
+.device-container.horizontal .device-skin
+{
+    background-image: url("images/horizontal.png");
+}
+
+.device-container.vertical
+{
+    width: 1193px;
+    height: 988px;
+    padding: 2.1cm 11.1cm 8cm 11.05cm;
+    bottom: -150px;
+}
+
+.device-container.horizontal
+{
+    height: 883px;
+    padding: 2.02cm 11.28cm 11.94cm 11.28cm;
+    width: 1454px;
+    bottom: -150px;
+    left: -100px;
+}
+
+.device-container.vertical iframe
+{
+    height: 605px;
+}
+
+.device-container.horizontal iframe
+{
+    height: 357px;
+}
+
+#address-bar
+{
+    display: none;
+}
+
+.device-container #navigate-back
+{
+    display: none;
+}

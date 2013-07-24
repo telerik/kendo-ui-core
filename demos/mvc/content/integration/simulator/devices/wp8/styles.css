@@ -1,0 +1,51 @@
+.device-skin
+{
+    font-size: 14px; /* Sets the zoom level */
+}
+
+.device-container.vertical .device-skin
+{
+    background-image: url("images/vertical.png");
+}
+
+.device-container.horizontal .device-skin
+{
+    background-image: url("images/horizontal.png");
+}
+
+.device-container.vertical
+{
+    bottom: -350px;
+    width: 1157px;
+    height: 1188px;
+    padding: 2.5cm 12.42cm 16.28cm 10.54cm;
+}
+
+.device-container.horizontal
+{
+    bottom: -450px;
+    width: 1571px;
+    height: 1064px;
+    padding: .94cm 14.26cm 19.56cm 14.66cm;
+    left: -150px
+}
+
+.device-container.vertical iframe
+{
+    height: 480px;
+}
+
+.device-container.horizontal iframe
+{
+    height: 290px;
+}
+
+#address-bar
+{
+    display: none;
+}
+
+.device-container #navigate-back
+{
+    display: none;
+}

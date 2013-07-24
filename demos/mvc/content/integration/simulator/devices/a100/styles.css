@@ -31,6 +31,16 @@
     bottom: -150px;
 }
 
+.device-container.vertical iframe
+{
+    height: 489px;
+}
+
+.device-container.horizontal iframe
+{
+    height: 261px;
+}
+
 #address-bar
 {
     color: #FFFFFF;

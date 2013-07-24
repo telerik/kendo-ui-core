@@ -31,6 +31,16 @@
     padding: 2.34cm 9.69cm 11.78cm;
 }
 
+.device-container.vertical iframe
+{
+    height: 334px;
+}
+
+.device-container.horizontal iframe
+{
+    height: 170px;
+}
+
 #address-bar
 {
     height: 18px;
