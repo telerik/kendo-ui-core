@@ -386,7 +386,7 @@
 
             $(that.element).children(":has(> .k-tool-icon)").addClass("k-button-group");
 
-            if (browser.msie && browser.version < 9) {
+            if (that.options.popup && browser.msie && browser.version < 9) {
                 that.window.wrapper.find("*").attr("unselectable", "on");
             }
 
