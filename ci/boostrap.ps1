@@ -1,4 +1,4 @@
-ns_root = "http://kendobuild/build"
+$jenkins_root = "http://kendobuild/build"
 $jenkins_slave = "kendobuild-winslave1"
 
 function download([string]$url, [string]$filename) {
