@@ -394,13 +394,12 @@
         },
 
         updateGroups: function() {
-            $(this.element).children().each(function(idx, element) {
-                var children = $(element).children(),
-                    firstTool = children.first(),
-                    lastTool = children.last();
-
-                firstTool.toggleClass("k-group-start", firstTool[0].style.display != "none");
-                lastTool.toggleClass("k-group-end", lastTool[0].style.display != "none");
+            $(this.element).children().each(function() {
+                $(this).children().filter(function(){
+                    return this.style.display !== "none";
+                })
+                    .first().addClass("k-group-start").end()
+                    .last().addClass("k-group-end").end();
             });
         },
 

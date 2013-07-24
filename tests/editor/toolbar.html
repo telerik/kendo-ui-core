@@ -334,7 +334,7 @@
                 ]));
 
                 dom.find(".k-unlink").addClass(".k-state-disabled");
-                toolbar.updateGroups();
+                toolbar._updateContext();
 
                 equal(dom.find(".k-createLink.k-group-end").length, 1);
             });
