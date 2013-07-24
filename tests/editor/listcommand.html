@@ -13,9 +13,14 @@
 
     <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
+    <div id="inline" contentEditable></div>
+
     <script>
 
         var editor = $("#Editor1").kendoEditor().data("kendoEditor");
+
+        var inline = $("#inline").kendoEditor().data("kendoEditor");
+
         module("ListCommand");
 
         function createListCommand(options) {
@@ -99,6 +104,19 @@
             command.exec();
             editor.getRange().insertNode(editor.document.createElement('a'));
             equal(editor.value(), '<ul><li><a></a></li></ul>')
+        });
+
+        test("exec does not replace inline editor container", function() {
+            inline.value('foo');
+            var range = inline.createRange();
+            range.setStart(inline.body.firstChild, 1);
+            range.setEnd(inline.body.firstChild, 1);
+            inline.selectRange(range);
+
+            var command = createListCommand({ tag: 'ul', range: inline.getRange() });
+            command.exec();
+
+            equal(inline.value(), "<ul><li>foo</li></ul>");
         });
 
     </script>

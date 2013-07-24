@@ -200,6 +200,14 @@ var ListFormatter = Class.extend({
         }
     },
 
+    breakable: function(node) {
+        return (
+            node != node.ownerDocument.body &&
+            !/table|tbody|tr|td/.test(dom.name(node)) &&
+            !node.attributes.contentEditable
+        );
+    },
+
     applyOnSection: function (section, nodes) {
         var tag = this.tag,
             commonAncestor = dom.closestSplittableParent(nodes);
@@ -235,7 +243,6 @@ var ListFormatter = Class.extend({
 
                 if (formatNode && (nodeName == "ul" || nodeName == "ol")) {
                     // merging lists
-                    //Array.prototype.push.apply(ancestors, $.toArray(child.childNodes));
                     $.each(child.childNodes, pushAncestor);
                     dom.remove(child);
                 } else {
@@ -244,7 +251,7 @@ var ListFormatter = Class.extend({
             }
         }
 
-        if (ancestors.length == childNodes.length && commonAncestor != nodes[0].ownerDocument.body && !/table|tbody|tr|td/.test(dom.name(commonAncestor))) {
+        if (ancestors.length == childNodes.length && this.breakable(commonAncestor)) {
             ancestors = [commonAncestor];
         }
 
