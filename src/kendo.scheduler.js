@@ -395,6 +395,7 @@ kendo_module({
 
             this.reader = new SchedulerDataReader(this.options.schema, this.reader);
         },
+
         expand: function(start, end) {
             var data = this.view(),
                 filter = {};
@@ -427,6 +428,14 @@ kendo_module({
             }
 
             return data;
+        },
+
+        cancelChanges: function(model) {
+            if (model.recurrenceId && !model.id) {
+                this._removeExceptionDate(model);
+            }
+
+            DataSource.fn.cancelChanges.call(this, model);
         },
 
         insert: function(index, model) {
@@ -477,6 +486,24 @@ kendo_module({
             }
 
             model.set("recurrenceException", "");
+        },
+
+        //TODO: refactor
+        _removeExceptionDate: function(model) {
+            var origin, exceptionDate, exception,
+            zone = model.startTimezone || model.endTimezone || this.reader.timezone,
+            start = model.start;
+
+            if (model.recurrenceId) {
+                origin = this.get(model.recurrenceId);
+                start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
+
+                if (origin) {
+                    exceptionDate = kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
+                    exception = origin.recurrenceException.replace(exceptionDate, "");
+                    origin.set("recurrenceException", exception);
+                }
+            }
         },
 
         //TODO: refactor
@@ -1155,9 +1182,7 @@ kendo_module({
         _modelForContainer: function(container) {
             container = $(container).closest("[" + kendo.attr("uid") + "]");
 
-            var id = container.attr(kendo.attr("uid"));
-
-            return this.dataSource.getByUid(id);
+            return this.dataSource.getByUid(container.attr(kendo.attr("uid")));
         },
 
         showDialog: function(options) {
@@ -1240,7 +1265,8 @@ kendo_module({
                 event = dataSource.add(eventInfo);
 
                 if (event) {
-                    this.editEvent(event.uid);
+                    this.cancelEvent();
+                    this._editEvent(event);
                 }
             }
        },
@@ -1289,15 +1315,18 @@ kendo_module({
         },
 
         editEvent: function(uid) {
-            var that = this,
-                model = typeof uid == "string" ? that.dataSource.getByUid(uid) : uid;
+            var model = typeof uid == "string" ? this.getOccurrence(uid) : uid;
 
-            that.cancelEvent();
+            if (!model) {
+                return;
+            }
 
-            if (!model || model.recurrenceRule || (model.id && model.recurrenceId)) {
-                that._editRecurringDialog(model, uid);
+            this.cancelEvent();
+
+            if (model.isRecurring()) {
+                this._editRecurringDialog(model);
             } else {
-                that._editEvent(model);
+                this._editEvent(model);
             }
         },
 
@@ -1324,6 +1353,36 @@ kendo_module({
                 e.stopPropagation();
 
                 that.saveEvent();
+            });
+        },
+
+        _editRecurringDialog: function(model) {
+            var that = this;
+
+            var editOccurrence = function() {
+                if (model.isException()) {
+                    that._editEvent(model);
+                } else {
+                    that.addEvent(model);
+                }
+            };
+
+            var editSeries = function() {
+                if (model.recurrenceId) {
+                    model = that.dataSource.get(model.recurrenceId);
+                }
+
+                that._editEvent(model);
+            };
+
+            var recurrenceMessages = that.options.messages.recurrenceMessages;
+            that.showDialog({
+                title: recurrenceMessages.editWindowTitle,
+                text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
+                buttons: [
+                    { text: recurrenceMessages.editWindowOccurrence, click: editOccurrence },
+                    { text: recurrenceMessages.editWindowSeries, click: editSeries }
+                ]
             });
         },
 
@@ -1588,43 +1647,6 @@ kendo_module({
             } else {
                 container.data("kendoWindow").center().open();
             }
-        },
-
-        _editRecurringDialog: function(model, uid) {
-            var that = this;
-
-            if (!model) {
-                model = getOccurrenceByUid(that._data, uid);
-                if (!model) {
-                    return;
-                }
-            }
-
-            var editOccurrence = function() {
-                if (model.isException()) {
-                    that._editEvent(model); //edit existing exception
-                } else {
-                    that.addEvent(model);
-                }
-            };
-
-            var editSeries = function() {
-                if (model.recurrenceId) {
-                    model = that.dataSource.get(model.recurrenceId);
-                }
-
-                that._editEvent(model);
-            };
-
-            var recurrenceMessages = that.options.messages.recurrenceMessages;
-            that.showDialog({
-                title: recurrenceMessages.editWindowTitle,
-                text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
-                buttons: [
-                    { text: recurrenceMessages.editWindowOccurrence, click: editOccurrence },
-                    { text: recurrenceMessages.editWindowSeries, click: editSeries }
-                ]
-            });
         },
 
         _destroyEditable: function() {
