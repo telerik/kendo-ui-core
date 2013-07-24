@@ -50,7 +50,7 @@
                             confirmation: false
                         },
                         dataSource: {
-                            data: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
+                            data: [ new kendo.data.SchedulerEvent({ start: new Date(), end: new Date(), isAllDay: true, title: "my event" }) ]
                         }
                     }, options)
                 );

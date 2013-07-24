@@ -805,10 +805,11 @@ kendo_module({
 
     function isException(exceptions, date, zone) {
         var dates = $.isArray(exceptions) ? exceptions : parseExceptions(exceptions, zone),
+            dateTime = date.getTime() - date.getMilliseconds(),
             idx = 0, length = dates.length;
 
         for (; idx < length; idx++) {
-            if (dates[idx].getTime() === date.getTime()) {
+            if (dates[idx].getTime() === dateTime) {
                 return true;
             }
         }

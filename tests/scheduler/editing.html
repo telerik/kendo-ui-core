@@ -35,6 +35,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             var Scheduler = kendo.ui.Scheduler,
+                SchedulerEvent = kendo.data.SchedulerEvent,
                 timezone = kendo.timezone,
                 container;
 
@@ -826,6 +827,7 @@
 
                 //edit current instance
                 $(".k-window .k-button:last").click();
+                $(".k-window .k-scheduler-update").click();
 
                 var model = scheduler.dataSource.at(0);
 
@@ -843,7 +845,7 @@
                     views: ["week"],
                     date: date,
                     dataSource: {
-                        data: [ { id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY" } ]
+                        data: [ new SchedulerEvent({ id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY" }) ]
                     }
                 });
 
@@ -851,7 +853,7 @@
 
                 $(".k-window .k-button:first").click();
 
-                $(document.body).find("[data-role=window]:visible").data("kendoWindow").destroy();
+                //$(document.body).find("[data-role=window]:visible").data("kendoWindow").destroy();
 
                 var model = scheduler.dataSource.at(0);
 
@@ -868,8 +870,8 @@
                     date: date,
                     dataSource: {
                         data: [
-                            { id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException},
-                            { id: 2, start: nextDate, end: nextDate, title: "my event", recurrenceId: "1" }
+                            new SchedulerEvent({ id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException}),
+                            new SchedulerEvent({ id: 2, start: nextDate, end: nextDate, title: "my event", recurrenceId: "1" })
                         ]
                     }
                 });
@@ -886,47 +888,6 @@
                 equal(origin.recurrenceException, recurrenceException);
             });
 
-            test("canceling deletion of occurrence removes applied recurrenceException", function() {
-                var date = new Date(2013, 10, 10, 15, 0, 0);
-
-                var scheduler = setup({
-                    views: ["week"],
-                    date: date,
-                    dataSource: {
-                        data: [ { id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY" } ]
-                    }
-                });
-
-                scheduler.removeEvent(scheduler.element.find(".k-event").eq(2).data("uid"));
-                $(".k-window .k-button:first").click(); //delete current occurrence
-                $(document.body).find("[data-role=window]:visible").find(".k-button:last").click(); //cancel deletion
-
-                var model = scheduler.dataSource.at(0);
-
-                ok(!model.recurrenceException);
-            });
-
-            test("canceling deletion of occurrence removes applied recurrenceException (UTC timezone)", function() {
-                var date = new Date(2013, 10, 10, 15, 0, 0);
-
-                var scheduler = setup({
-                    views: ["week"],
-                    timezone: "Etc/UTC",
-                    date: date,
-                    dataSource: {
-                        data: [ { id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY" } ]
-                    }
-                });
-
-                scheduler.removeEvent(scheduler.element.find(".k-event").eq(2).data("uid"));
-                $(".k-window .k-button:first").click(); //delete current occurrence
-                $(document.body).find("[data-role=window]:visible").find(".k-button:last").click(); //cancel deletion
-
-                var model = scheduler.dataSource.at(0);
-
-                ok(!model.recurrenceException);
-            });
-
             test("deleting series wll delete all exceptions", function() {
                 var date = new Date(2013, 10, 10, 15, 0, 0),
                     nextDate = new Date(2013, 10, 11, 15, 0, 0),
@@ -937,8 +898,8 @@
                     date: date,
                     dataSource: {
                         data: [
-                            { id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException},
-                            { id: 2, start: nextDate, end: nextDate, title: "my event", recurrenceId: 1 }
+                            new SchedulerEvent({ id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException}),
+                            new SchedulerEvent({ id: 2, start: nextDate, end: nextDate, title: "my event", recurrenceId: 1 })
                         ]
                     }
                 });
@@ -964,8 +925,8 @@
                     date: date,
                     dataSource: {
                         data: [
-                            { id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException},
-                            { id: 2, start: nextDate, end: nextDate, title: "my event", recurrenceId: "1" }
+                            new SchedulerEvent({ id: 1, start: date, end: date, title: "my event", recurrenceRule: "FREQ=DAILY", recurrenceException: recurrenceException}),
+                            new SchedulerEvent({ id: 2, start: nextDate, end: nextDate, title: "my event", recurrenceId: "1" })
                         ]
                     }
                 });
