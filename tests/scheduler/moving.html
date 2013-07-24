@@ -155,7 +155,7 @@
                 equal($(".k-event-drag-hint .k-i-arrow-s").length, 1);
             });
 
-            test("hint shows east icon when the start time is before the start of the month view", function() {
+            test("hint shows west icon when the start time is before the start of the month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -172,7 +172,7 @@
 
                 drag(scheduler, handle, slots.first().offset());
 
-                equal($(".k-event-drag-hint .k-i-arrow-e").length, 1);
+                equal($(".k-event-drag-hint .k-i-arrow-w").length, 1);
             });
 
             test("move hint in month view is two slots long when the event is two days long", function() {
@@ -329,7 +329,7 @@
                 equal(scheduler.dataSource.at(1).start.getMonth(), 4);
             });
 
-            test("hint shows west icon when the end time is after the end of the month view", function() {
+            test("hint shows east icon when the end time is after the end of the month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -346,7 +346,7 @@
 
                 drag(scheduler, handle, slots.last().offset());
 
-                equal($(".k-event-drag-hint .k-i-arrow-w").length, 1);
+                equal($(".k-event-drag-hint .k-i-arrow-e").length, 1);
             });
 
             test("moving event in day view changes its start time", function() {
@@ -1072,7 +1072,7 @@
                 equal(scheduler.dataSource.at(0).ownerId, 1);
             });
 
-            test("hint when moving event in month view to another resource group", function() {
+            test("the hint is positoned to another resource group in month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -1105,6 +1105,41 @@
 
                 equalWithRound(div.find(".k-event-drag-hint").outerWidth(), slots.eq(0).outerWidth());
                 equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(0).offset().left);
+            });
+
+            test("the hint is positoned to another resource group in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["day"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 1:00"), end: new Date("2013/6/6 1:30"), ownerId: 1, title: "" }
+                    ],
+                    group: {
+                        resources: ["Owner"]
+                    },
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(0).offset());
+
+                equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(0).offset().left);
+                equalWithRound(div.find(".k-event-drag-hint").offset().top, slots.eq(0).offset().top);
             });
 
             test("moving long event at the end of the month view is restricted by resource", function() {

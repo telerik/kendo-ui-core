@@ -229,18 +229,16 @@ kendo_module({
             }
         },
 
-        slotRanges: function(event) {
+        ranges: function(startDate, endDate, multiday, allday) {
             var ranges = [];
 
             var collection;
 
-            var multiday = this.multiday(event);
-
-            var start = this._slot(event.start, multiday, true);
+            var start = this._slot(startDate, multiday, true);
 
             var startSlot = start.slot;
 
-            var end = this._slot(event.end, multiday, false);
+            var end = this._slot(endDate, multiday, false);
 
             var endSlot = end.slot;
 
@@ -287,7 +285,7 @@ kendo_module({
                 }
 
                 if (multiday) {
-                    if (kendo.date.getMilliseconds(event.end) === 0 && event.end.getTime() != event.start.getTime() && !event.isAllDay) {
+                    if (kendo.date.getMilliseconds(endDate) === 0 && endDate.getTime() != startDate.getTime() && !allday) {
                         if (!tail && !head) {
                             last = collection.at(Math.max(0, last.index - 1));
                         }
@@ -312,6 +310,10 @@ kendo_module({
             }
 
             return ranges;
+        },
+
+        slotRanges: function(event) {
+            return this.ranges(event.start, event.end, this.multiday(event), event.isAllDay);
         },
 
         _collection: function(index, multiday) {

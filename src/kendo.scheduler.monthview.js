@@ -818,8 +818,6 @@ kendo_module({
         },
 
        _updateMoveHint: function(event, initialSlot, currentSlot) {
-            var slots = this._row.slots;
-
             var distance = currentSlot.start.getTime() - initialSlot.start.getTime();
 
             var duration = event.end.getTime() - event.start.getTime();
@@ -832,75 +830,26 @@ kendo_module({
 
             kendo.date.setTime(end, duration);
 
-            var startSlotIndex = this._slotIndex(start);
+            var group = this.groups[currentSlot.groupIndex];
 
-            var head = false;
-
-            var tail = false;
-
-            if (startSlotIndex == null) {
-                startSlotIndex = 0;
-                head = true;
-            }
-
-            var endSlotIndex = this._slotIndex(end);
-
-            if (endSlotIndex == null) {
-                endSlotIndex = NUMBER_OF_COLUMNS * NUMBER_OF_ROWS - 1;
-                tail = true;
-            }
-
-            startSlotIndex = this._applyOffset(startSlotIndex, currentSlot.groupIndex);
-            endSlotIndex = this._applyOffset(endSlotIndex, currentSlot.groupIndex);
-
-            var startSlot = slots[startSlotIndex];
-            var endSlot = slots[endSlotIndex];
-
-            if (!event.isAllDay) {
-                endSlot = slots[Math.max(startSlotIndex, endSlotIndex - 1)];
-            }
-
-            var slotGroup = {
-               startSlot: startSlot,
-               endSlot: endSlot
-            };
-
-            var slotGroups = [slotGroup];
-
-            for (var slotIndex = startSlot.index; slotIndex <= endSlot.index; slotIndex++) {
-                var slot = slots[slotIndex];
-
-                if (slot.groupIndex != currentSlot.groupIndex) {
-                    continue;
-                }
-
-                if (slot.offsetTop > slotGroup.endSlot.offsetTop) {
-                    slotGroup = {
-                        startSlot: slot,
-                        endSlot: slot
-                    };
-                    slotGroups.push(slotGroup);
-                } else {
-                    slotGroup.endSlot = slot;
-                }
-            }
+            var ranges = group.ranges(start, end, true, event.isAllDay);
 
             this._removeMoveHint();
 
-            for (var groupIndex = 0; groupIndex < slotGroups.length; groupIndex++) {
-                slotGroup = slotGroups[groupIndex];
+            for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
+                var range = ranges[rangeIndex];
 
-                startSlot = slotGroup.startSlot;
+                var startSlot = range.start;
 
-                endSlot = slotGroup.endSlot;
+                var endSlot = range.end;
 
-                var hint = this._createEventElement($.extend({}, event, { head: head, tail: tail }));
+                var hint = this._createEventElement($.extend({}, event, { head: range.head, tail: range.tail }));
 
                 hint.css({
                     left: startSlot.offsetLeft + 2,
                     top: startSlot.offsetTop + startSlot.firstChildHeight,
                     height: this.options.eventHeight,
-                    width: this._calculateAllDayEventWidth(this._row.slots, startSlot.index, endSlot.index) - (startSlot.index !== endSlot.index ? 5 : 4)
+                    width: range.innerWidth() - (startSlot.index !== endSlot.index ? 5 : 4)
                 });
 
                 hint.addClass("k-event-drag-hint");
