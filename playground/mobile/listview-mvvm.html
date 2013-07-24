@@ -22,51 +22,62 @@
         <script src="../../src/kendo.mobile.modalview.js"></script>
     </head>
     <body>
-        <div data-role="view" id="grouped" data-init="mobileListViewDataBindInitGrouped" data-transition="" data-title="ListView" data-layout="databinding">
-            <ul id="grouped-listview"></ul>
-            <a data-role="button" data-click="addItem">Add</a>
+        <div id="boatsView" data-role="view" data-title="Boats" data-model="LunchBoat.boatsViewModel">
+            <ul class="boat-list" data-bind="source: boats" data-style="inset" data-role="listview" data-template="boat-template"></ul>
         </div>
 
+        <script id="boat-template" type="text/x-kendo-template">
+            #= boatId #
+            <h2 class="destination" data-bind="text: destination"></h2>
+            <ul data-role="listview" data-bind="source: crewMembers" class="crew-member-list" data-template="crew-member-template"></ul>
+            <ul data-role="listview" class="crew-member-list">
+                <li>
+                    <button data-role="button" data-click="LunchBoat.addSelfToBoat" data-boat-id="#= data.boatId #">+</button>
+                </li>
+            </ul>
+        </script>
+
+        <script id="crew-member-template" type="text/x-kendo-template">
+            <span class="crew-member" data-bind="text: name"></span>
+        </script>
+
         <script>
-            var groupedData = [
-            {name: "Sashimi salad", letter: "S" },
-            {name: "Chirashi sushi", letter: "C" },
-            {name: "Seaweed salad", letter: "S" },
-            {name: "Edamame", letter: "E" },
-            {name: "Miso soup", letter: "M" },
-            {name: "Maguro", letter: "M" },
-            {name: "Shake", letter: "S" },
-            {name: "Shiromi", letter: "S" },
-            {name: "Tekka maki", letter: "T" },
-            {name: "Hosomaki Mix", letter: "H" },
-            {name: "California rolls", letter: "C" },
-            {name: "Seattle rolls", letter: "S" },
-            {name: "Spicy Tuna rolls", letter: "S" },
-            {name: "Ebi rolls", letter: "E" },
-            {name: "Chicken Teriyaki", letter: "C" },
-            {name: "Salmon Teriyaki", letter: "S" },
-            {name: "Gohan", letter: "G" },
-            {name: "Tori Katsu", letter: "T" },
-            {name: "Yaki Udon", letter: "Y" }
+            var Boat = kendo.data.Model.define({
+                id: "boatId",
+                fields: {
+                    destination: {
+                        type: "string"
+                    },
+                    crewMembers: {
+                        defaultValue: []
+                    },
+                    boatId: {
+                        type: "number"
+                    }
+                }
+            });
+            var data = [
+            new Boat({ destination: "Chipotle", crewMembers: [ { name: "Todd" }, { name: "Jeff" } ], boatId: 2 })
             ];
 
-            var ds = kendo.data.DataSource.create({data: groupedData, group: "letter"});
+            var dataSource = new kendo.data.DataSource({
+                data: data,
+                schema: {
+                    model: Boat
+                }
+            });
 
-            function mobileListViewDataBindInitGrouped() {
-                $("#grouped-listview").kendoMobileListView({
-                    dataSource: ds,
-                    template: "${name}",
-                    fixedHeaders: true
-                });
+            window.LunchBoat = {
+                boatsViewModel: kendo.observable({
+                    boats: dataSource
+                }),
+                addSelfToBoat: function (e) {
+                    var boat = window.LunchBoat.boatsViewModel.boats.data()[0];
+                    boat.crewMembers.push({ name: "Self" });
+                }
+            };
 
-            }
-
-            function addItem()
-            {
-                ds.add({name: "Test", letter: "T" });
-            }
-
-            new kendo.mobile.Application(document.body);
+            var app = new kendo.mobile.Application(document.body, {});
         </script>
     </body>
 </html>

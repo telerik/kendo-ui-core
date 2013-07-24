@@ -671,13 +671,21 @@ kendo_module({
                 prependOnRefresh = this.options.appendOnRefresh,
                 view = dataSource.view(),
                 groups = dataSource.group(),
-                groupedMode = groups && groups[0];
+                groupedMode = groups && groups[0],
+                item;
+
+            if (action === "itemchange") {
+                // the itemchange may come from a child collection
+                item = listView.findByDataItem(dataItems)[0];
+                if (item) {
+                    listView.setDataItem(item, dataItems[0]);
+                }
+                return;
+            }
 
             listView.trigger("dataBinding");
 
-            if (action === "itemchange") {
-                listView.setDataItem(listView.findByDataItem(dataItems)[0], dataItems[0]);
-            } else if (action === "add" && !groupedMode) {
+            if (action === "add" && !groupedMode) {
                 listView.append(dataItems);
             } else if (action === "remove" && !groupedMode) {
                 listView.remove(dataItems);
