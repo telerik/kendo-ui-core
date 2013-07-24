@@ -26,6 +26,7 @@
 
                 function createChart() {
                     $("#chart").kendoChart({
+                        renderAs: "canvas",
                         dataSource: {
                             data: data,
                             filter: getFilter(-10, 10)
