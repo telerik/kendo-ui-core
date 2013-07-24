@@ -303,13 +303,15 @@
         },
 
         render: function() {
-            var tools = this.tools,
+            var that = this,
+                tools = that.tools,
                 options, template, toolElement,
                 toolName,
-                editorElement = this._editor.element,
-                element = this.element.empty(),
+                editorElement = that._editor.element,
+                element = that.element.empty(),
                 groupName, newGroupName,
-                toolConfig = this._editor.options.tools,
+                toolConfig = that._editor.options.tools,
+                browser = kendo.support.browser,
                 group, i;
 
             function stringify(template) {
@@ -350,7 +352,7 @@
 
                 if (toolName == "break") {
                     endGroup();
-                    $("<li class='k-row-break' />").appendTo(this.element);
+                    $("<li class='k-row-break' />").appendTo(that.element);
                     startGroup();
                 }
 
@@ -358,7 +360,7 @@
                     continue;
                 }
 
-                newGroupName = this.toolGroupFor(toolName);
+                newGroupName = that.toolGroupFor(toolName);
 
                 if (groupName != newGroupName) {
                     endGroup();
@@ -382,16 +384,23 @@
 
             endGroup();
 
-            $(this.element).children(":has(> .k-tool-icon)").addClass("k-button-group");
+            $(that.element).children(":has(> .k-tool-icon)").addClass("k-button-group");
+
+            if (browser.msie && browser.version < 9) {
+                that.window.wrapper.find("*").attr("unselectable", "on");
+            }
 
             this.updateGroups();
         },
 
         updateGroups: function() {
-            $(this.element).children().each(function() {
-                $(this).children(":visible")
-                    .first().addClass("k-group-start").end()
-                    .last().addClass("k-group-end").end();
+            $(this.element).children().each(function(idx, element) {
+                var children = $(element).children(),
+                    firstTool = children.first(),
+                    lastTool = children.last();
+
+                firstTool.toggleClass("k-group-start", firstTool[0].style.display != "none");
+                lastTool.toggleClass("k-group-end", lastTool[0].style.display != "none");
             });
         },
 

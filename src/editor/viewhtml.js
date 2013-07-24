@@ -66,7 +66,7 @@ var ViewHtmlCommand = Command.extend({
 });
 
 extend(ViewHtmlCommand, {
-    template: "<div class='k-editor-dialog'>" +
+    template: "<div class='k-editor-dialog k-viewhtml-dialog'>" +
                 "<textarea class='k-editor-textarea k-input'></textarea>" +
                 "<div class='k-button-wrapper'>" +
                     "<button class='k-dialog-update k-button'>#: dialogUpdate #</button>" +
