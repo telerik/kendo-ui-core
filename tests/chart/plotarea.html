@@ -1526,6 +1526,20 @@
                     deepEqual(plotArea.series[0].data, [{ value: 300 }]);
                 });
 
+                test("Aggregates modify the series data with the value fields", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        field: "v",
+                        data: [{ v: 100 }, { v: 200 }, { v: 300 }]
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
+                });
+
                 test("Aggregates bound series data with custom field names", function() {
                     createPlotArea([{
                         type: "candlestick",
@@ -1546,7 +1560,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [{ o: 200, h: 200, l: 200, c: 200 }]);
+                    deepEqual(plotArea.series[0].data, [{ open: 200, high: 200, low: 200, close: 200 }]);
                 });
 
                 test("Aggregates series data with predefined function", function() {
@@ -1568,7 +1582,6 @@
                         type: "bar",
                         data: [100, 200, 300],
                         aggregate: function(values, series) {
-                            console.log(values);
                             deepEqual(values, series.data);
                             return 0;
                         }

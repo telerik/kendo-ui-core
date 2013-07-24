@@ -1350,6 +1350,23 @@ kendo_module({
             return result;
         },
 
+        _resetFields: function(series) {
+            var binder = this,
+                fields = binder.valueFields(series).concat(
+                    binder.otherFields(series)
+                ),
+                length = fields.length,
+                i, fieldName, sourceFieldName;
+
+            for (i = 0; i < length; i++) {
+                fieldName = fields[i];
+                sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
+                series[sourceFieldName] = fieldName;
+            }
+
+            return series;
+        },
+
         _makeNullValue: function(fields) {
             var value = {},
                 i,
@@ -1414,25 +1431,6 @@ kendo_module({
                     sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
 
                     sourceFields.push(series[sourceFieldName] || fieldName);
-                }
-            }
-
-            return sourceFields;
-        },
-
-        _mapSeriesFields: function(series, fields) {
-            var i, length, fieldName,
-                sourceFields, sourceFieldName;
-
-            if (fields) {
-                length = fields.length;
-                sourceFields = {};
-
-                for (i = 0; i < length; i++) {
-                    fieldName = fields[i];
-                    sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
-
-                    sourceFields[fieldName] = series[sourceFieldName] || fieldName;
                 }
             }
 
@@ -7224,6 +7222,7 @@ kendo_module({
                 srcDataItems = [],
                 range = categoryAxis.range(),
                 result = deepExtend({}, series),
+                aggregatorSeries = deepExtend({}, series),
                 i, category, categoryIx,
                 data, pointData, aggregator,
                 getFn = getField;
@@ -7253,7 +7252,7 @@ kendo_module({
                 }
             }
 
-            aggregator = new Aggregator(series);
+            aggregator = new Aggregator(aggregatorSeries);
 
             for (i = 0; i < categories.length; i++) {
                 data[i] = aggregator.calculate(
@@ -9191,7 +9190,8 @@ kendo_module({
         init: function(series) {
             var agg = this;
 
-            agg._series = series;
+            agg._series = SeriesBinder.current._resetFields(series);
+
             agg._initFields();
             agg._initAggregate();
         },
@@ -9204,8 +9204,6 @@ kendo_module({
             agg._fields = binder.valueFields(series).concat(
                 binder.otherFields(series)
             );
-
-            agg._srcFields = binder._mapSeriesFields(series, agg._fields);
         },
 
         _initAggregate: function() {
@@ -9245,16 +9243,14 @@ kendo_module({
                 aggregatedData = {},
                 values = [],
                 itemOptions = agg._itemOptions,
-                aggregate, i, field, item,
-                originalField;
+                aggregate, i, field, item;
 
             for (i = 0; i < itemOptions.length; i++) {
                 item = itemOptions[i];
                 field = item.field;
-                originalField = agg._srcFields[field];
                 values = agg.valuesByField(data, field, item.filter);
                 aggregate = item.aggregate;
-                aggregatedData[originalField] = aggregate(values, agg._series, dataItems, group);
+                aggregatedData[field] = aggregate(values, agg._series, dataItems, group);
 
                 values = [];
             }
