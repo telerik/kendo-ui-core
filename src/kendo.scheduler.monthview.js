@@ -734,16 +734,15 @@ kendo_module({
            x = Math.ceil(x);
            y = Math.ceil(y);
 
-           var slots = this._row.slots;
+           for (var groupIndex = 0; groupIndex < this.groups.length; groupIndex++) {
+               var slot = this.groups[groupIndex].daySlotByPosition(x, y);
 
-           for (var slotIndex = 0; slotIndex < slots.length; slotIndex++) {
-               var slot = slots[slotIndex];
-
-               if (y >= slot.offsetTop && y <= slot.offsetTop + slot.clientHeight &&
-                   x >= slot.offsetLeft && x < slot.offsetLeft + slot.clientWidth) {
+               if (slot) {
                    return slot;
                }
            }
+
+           return null;
        },
 
        _createResizeHint: function(direction, startSlot, endSlot) {
@@ -1102,7 +1101,7 @@ kendo_module({
                 var view = resource.dataSource.view();
 
                 for (var itemIdx = 0; itemIdx < view.length; itemIdx++) {
-                    var value = resourceValue(resource, view[itemIdx]);
+                    var value = this._resourceValue(resource, view[itemIdx]);
 
                     var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: SchedulerView.groupEqFilter(value) }).toArray();
 
@@ -1191,46 +1190,6 @@ kendo_module({
             return this._columnCountForLevel(index) / this._columnCountForLevel(index - 1);
         },
 
-        _resourceBySlot: function(slot) {
-            var resources = this.groupedResources;
-            var result = {};
-
-            if (resources.length) {
-                var index = slot.index;
-                var cellsInGroup = this._columnOffsetForResource(resources.length);
-
-                if (this._isVerticallyGrouped()) {
-                    cellsInGroup = NUMBER_OF_ROWS * NUMBER_OF_COLUMNS;
-                }
-
-                var cellsPerRow = cellsInGroup * this._groupCount();
-
-                for (var idx = 0, length = resources.length; idx < length; idx++) {
-                    var resource = resources[idx];
-
-                    var groupCount = resource.dataSource.view().length;
-                    var columnCount = cellsPerRow / groupCount;
-
-                    var rowIndex = Math.floor(index / cellsPerRow);
-                    var offset = (columnCount * groupCount * rowIndex);
-                    var groupIndex = Math.floor((index - offset) / columnCount);
-
-                    cellsPerRow /= groupCount;
-
-                    var value = resourceValue(resource, resource.dataSource.at(groupIndex));
-
-                    if (resource.multiple) {
-                        value = [value];
-                    }
-
-                    var setter = kendo.setter(resource.field);
-                    setter(result, value);
-                }
-            }
-
-            return result;
-        },
-
         destroy: function(){
             if (this.table) {
                 this.table.removeClass("k-scheduler-monthview");
@@ -1272,12 +1231,6 @@ kendo_module({
         }
     });
 
-    function resourceValue(resource, item) {
-        if (resource.valuePrimitive) {
-            item = kendo.getter(resource.dataValueField)(item);
-        }
-        return item;
-    }
 
     function getCalendarInfo() {
         return kendo.culture().calendars.standard;

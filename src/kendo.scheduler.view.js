@@ -186,6 +186,29 @@ kendo_module({
             return this._daySlotCollections.length;
         },
 
+        daySlotByPosition: function(x, y) {
+            return this._slotByPosition(x, y, this._daySlotCollections);
+        },
+
+        timeSlotByPosition: function(x, y) {
+            return this._slotByPosition(x, y, this._timeSlotCollections);
+        },
+
+        _slotByPosition: function(x, y, collections) {
+           for (var collectionIndex = 0; collectionIndex < collections.length; collectionIndex++) {
+               var collection = collections[collectionIndex];
+
+               for (var slotIndex = 0; slotIndex < collection.count(); slotIndex++) {
+                   var slot = collection.at(slotIndex);
+
+                   if (x >= slot.offsetLeft && x < slot.offsetLeft + slot.clientWidth &&
+                       y >= slot.offsetTop && y < slot.offsetTop + slot.clientHeight) {
+                       return slot;
+                   }
+               }
+           }
+        },
+
         addTimeSlotCollection: function(collection) {
             this._timeSlotCollections.push(collection);
         },
@@ -502,6 +525,39 @@ kendo_module({
 
         isInRange: function(date) {
             return this.startDate() <= date && date <= this.endDate();
+        },
+
+        _resourceValue: function(resource, item) {
+            if (resource.valuePrimitive) {
+                item = kendo.getter(resource.dataValueField)(item);
+            }
+            return item;
+        },
+
+        _resourceBySlot: function(slot) {
+            var resources = this.groupedResources;
+            var result = {};
+
+            if (resources.length) {
+                var resourceIndex = slot.groupIndex;
+
+                for (var idx = resources.length - 1; idx >=0; idx--) {
+                    var resource = resources[idx];
+
+                    var value = this._resourceValue(resource, resource.dataSource.at(resourceIndex % resource.dataSource.total()));
+
+                    if (resource.multiple) {
+                        value = [value];
+                    }
+
+                    var setter = kendo.setter(resource.field);
+                    setter(result, value);
+
+                    resourceIndex = Math.floor(resourceIndex / resource.dataSource.total());
+                }
+            }
+
+            return result;
         },
 
         _createResizeHint: function(left, top, width, height) {
