@@ -68,8 +68,7 @@
     height: auto;
 }
 
-.touchTarget:after {
-    content: "The Cuteness app is a performance proof of concept, made with Kendo UI Mobile and utilizing its Flat theme";
+.touchTarget p {
     display: block;
     height: 10%;
     bottom: 20%;
