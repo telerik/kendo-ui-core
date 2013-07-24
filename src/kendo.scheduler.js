@@ -931,13 +931,10 @@ kendo_module({
                 distance: 0,
                 filter: ".k-event",
                 dragstart: function(e) {
+                    var view = that.view();
                     var eventElement = e.currentTarget;
 
-                    var uid = eventElement.attr(kendo.attr("uid"));
-
-                    var view = that.view();
-
-                    event = getOccurrenceByUid(that._data, uid);
+                    event = that.occurrenceByUid(eventElement.attr(kendo.attr("uid")));
 
                     startSlot = view._slotByPosition(e.x.location, e.y.location);
 
@@ -1017,7 +1014,8 @@ kendo_module({
 
                     var uid = eventElement.attr(kendo.attr("uid"));
 
-                    event = getOccurrenceByUid(that._data, uid);
+                    event = that.occurrenceByUid(uid);
+
                     var view = that.view();
 
                     var events = this.element.find(kendo.format(".k-event[{0}={1}]", kendo.attr("uid"), uid));
@@ -1113,6 +1111,7 @@ kendo_module({
             });
         },
 
+        //TODO: Refactor
         _updateEvent: function(dir, event, eventInfo) {
             var that = this;
 
@@ -1154,14 +1153,7 @@ kendo_module({
 
             var updateOcurrence = function() {
                 var exception = recurrenceHead(event).toOccurrence({ start: event.start, end: event.end });
-
-                exception = that.dataSource.add(exception);
-                exception.update(eventInfo);
-
-                if (!that.trigger(SAVE, { model: exception })) {
-                    that._updateSelection(exception);
-                    that.dataSource.sync();
-                }
+                updateEvent(that.dataSource.add(exception));
             };
 
             var recurrenceMessages = that.options.messages.recurrenceMessages;
@@ -1315,7 +1307,7 @@ kendo_module({
         },
 
         editEvent: function(uid) {
-            var model = typeof uid == "string" ? this.getOccurrence(uid) : uid;
+            var model = typeof uid == "string" ? this.occurrenceByUid(uid) : uid;
 
             if (!model) {
                 return;
@@ -1672,21 +1664,24 @@ kendo_module({
         },
 
         removeEvent: function(uid) {
-            var model = typeof uid == "string" ? this.getOccurrence(uid) : uid;
+            var that = this,
+                model = typeof uid == "string" ? that.occurrenceByUid(uid) : uid;
 
             if (!model) {
                 return;
             }
 
             if (model.isRecurring()) {
-                this._deleteRecurringDialog(model);
+                that._deleteRecurringDialog(model);
             } else {
-                this._removeEvent(model);
+                that._confirmation(function() {
+                    that._removeEvent(model);
+                });
             }
         },
 
         //TODO: Test it
-        getOccurrence: function(uid) {
+        occurrenceByUid: function(uid) {
             var occurrence = this.dataSource.getByUid(uid);
             if (!occurrence) {
                 occurrence = getOccurrenceByUid(this._data, uid);
@@ -1696,14 +1691,11 @@ kendo_module({
         },
 
         _removeEvent: function(model) {
-            var that = this;
-            that._confirmation(function() {
-                if (!that.trigger(REMOVE, { event: model })) {
-                    if (that.dataSource.remove(model)) {
-                        that.dataSource.sync();
-                    }
+            if (!this.trigger(REMOVE, { event: model })) {
+                if (this.dataSource.remove(model)) {
+                    this.dataSource.sync();
                 }
-            });
+            }
         },
 
         _deleteRecurringDialog: function(model) {
@@ -1711,12 +1703,7 @@ kendo_module({
 
             var deleteOcurrence = function() {
                 var occurrence = model.recurrenceId ? model : model.toOccurrence();
-
-                if (!that.trigger(REMOVE, { event: occurrence })) {
-                    if (that.dataSource.remove(occurrence)) {
-                        that.dataSource.sync();
-                    }
-                }
+                that._removeEvent(occurrence);
             };
 
             var deleteSeries = function() {
@@ -1724,11 +1711,7 @@ kendo_module({
                     model = that.dataSource.get(model.recurrenceId);
                 }
 
-                if (!that.trigger(REMOVE, { event: model })) {
-                    if (that.dataSource.remove(model)) {
-                        that.dataSource.sync();
-                    }
-                }
+                that._removeEvent(model);
             };
 
             var recurrenceMessages = that.options.messages.recurrenceMessages;
