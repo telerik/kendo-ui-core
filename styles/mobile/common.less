@@ -1187,6 +1187,28 @@
     left: 0;
 }
 
+/* Center left/right item contents */
+.km-leftitem,
+.km-rightitem
+{
+  height: 100%;
+}
+.km-leftitem > *,
+.km-rightitem > *
+{
+  display: inline-block;
+  vertical-align: middle;
+}
+.km-leftitem:before,
+.km-rightitem:before
+{
+  content: "\a0";
+  display: inline-block;
+  height: 100%;
+  width: 0;
+  vertical-align: middle;
+}
+
 /* Dialog */
 
 .km-dialog
