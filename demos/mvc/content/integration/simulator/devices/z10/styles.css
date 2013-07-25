@@ -15,29 +15,30 @@
 
 .device-container.vertical
 {
-    bottom: -350px;
-    width: 1157px;
-    height: 1188px;
-    padding: 2.5cm 12.42cm 16.28cm 10.54cm;
+    bottom: -250px;
+    left: -100px;
+    width: 1600px;
+    height: 1085px;
+    padding: 2.5cm 18.22cm 16cm 16.14cm;
 }
 
 .device-container.horizontal
 {
     bottom: -450px;
-    width: 1571px;
-    height: 1064px;
-    padding: .94cm 14.26cm 19.56cm 14.66cm;
+    width: 1600px;
+    height: 1050px;
+    padding: .78cm 14.24cm 19.56cm 14.38cm;
     left: -150px
 }
 
 .device-container.vertical iframe
 {
-    height: 480px;
+    height: 490px;
 }
 
 .device-container.horizontal iframe
 {
-    height: 290px;
+    height: 310px;
 }
 
 #address-bar
