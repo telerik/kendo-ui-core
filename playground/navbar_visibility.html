@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+    <title>Fleet by ab2bc</title>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.router.js"></script>
+    <script src="../src/kendo.mobile.scroller.js"></script>
+    <script src="../src/kendo.mobile.navbar.js"></script>
+    <script src="../src/kendo.mobile.loader.js"></script>
+    <script src="../src/kendo.mobile.button.js"></script>
+    <script src="../src/kendo.mobile.tabstrip.js"></script>
+    <script src="../src/kendo.mobile.listview.js"></script>
+    <script src="../src/kendo.mobile.view.js"></script>
+    <script src="../src/kendo.mobile.switch.js"></script>
+    <script src="../src/kendo.mobile.pane.js"></script>
+    <script src="../src/kendo.mobile.application.js"></script>
+    <script src="../src/kendo.popup.js"></script>
+    <script src="../src/kendo.mobile.shim.js"></script>
+    <script src="../src/kendo.mobile.popover.js"></script>
+    <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+</head>
+<body>
+
+<!-- hook up to the init event of the view and initialize the google map -->
+<div data-role="view" id="map" data-title="Fleet" data-layout="map-layout" data-init="onInit">
+    <div data-role="popover" id="popover-location" data-popup='{"height": "10.6em", "width": "20em"}'>
+      <div data-role="view">
+        <ul data-role="listview" data-click="closeParentPopover">
+          <li><label>Sydney, Australia <input name="location" type="radio"></label></li>
+          <li><label>New York, USA <input name="location" type="radio"></label></li>
+          <li><label>Miami, USA <input name="location" type="radio"></label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div data-role="footer">
+        <div data-role="navbar">
+            <a data-align="right" class="popOverOpen" href="#popover-location" data-rel="popover" data-role="button">Select location</a>
+        </div>
+    </div>
+</div>
+
+<div data-role="layout" data-id="map-layout" data-show="onShow">
+    <header data-role="header">
+        <div data-role="navbar">
+            <div data-align="left">
+                <label for="backDest">Return to The Restaurant</label>
+                <input type="checkbox" checked id="backDest" data-role="switch"/>
+            </div>
+            <span data-role="view-title"></span>
+            <a data-align="right" id="location">No GPS</a>
+        </div>
+    </header>
+</div>
+
+<script>
+    new kendo.mobile.Application(document.body);
+
+    function onInit() {
+        $("#popover-location").data("kendoMobilePopOver").open($(".popOverOpen"));
+    }
+</script>
+
+</body>
+</html>

@@ -63,6 +63,10 @@ kendo_module({
             that.constrain = width - handleWidth;
             that.snapPoint = width / 2 - handleWidth / 2;
 
+            if (isNaN(that.origin)) {
+                that.origin = parseInt(that.background.css(MARGINLEFT), 10);
+            }
+
             that.background.data("origin", that.origin);
 
             that.check(that.element[0].checked);

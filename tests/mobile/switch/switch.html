@@ -10,6 +10,8 @@
         <script src="../../../src/kendo.draganddrop.js"></script>
         <script src="../../../src/kendo.mobile.switch.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+        <link type="text/css" href="../../../styles/mobile/common.less" rel="stylesheet/less"/>
+        <script type="text/javascript" src="../../../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">kendo.mobile.ui.Switch Tests</h1>
@@ -221,6 +223,16 @@
                 theSwitch.toggle();
 
                 ok(!theSwitch.wrapper.hasClass("km-switch-on"));
+            });
+
+            test("Switch refresh should set origin if it didn't on init", function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.wrapper.appendTo(document.body);
+                theSwitch.refresh();
+                theSwitch.wrapper.detach();
+
+                ok(theSwitch.origin);
             });
 
             test("Destroying removes event handling", function() {
