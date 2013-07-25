@@ -397,7 +397,7 @@ kendo_module({
 
     function dropDownResourceEditor(resource) {
         return function(container) {
-           $(kendo.format('<select name="{1}" data-{0}bind="value:{1}">', kendo.ns, resource.field))
+           $(kendo.format('<select data-{0}bind="value:{1}">', kendo.ns, resource.field))
              .appendTo(container)
              .kendoDropDownList({
                  dataTextField: resource.dataTextField,
