@@ -312,6 +312,11 @@ kendo_module({
             return this.id && this.recurrenceId;
         },
 
+        //TODO: test this
+        isOccurrence: function() {
+            return this.isNew() && this.recurrenceId;
+        },
+
         isRecurring: function() {
             return !!(this.recurrenceRule || this.recurrenceId);
         },
