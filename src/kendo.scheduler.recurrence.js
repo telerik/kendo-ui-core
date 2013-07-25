@@ -871,8 +871,7 @@ kendo_module({
         }
 
         rule._startTime = startTime = new Date(1980, 0, 1, hours, start.getMinutes(), start.getSeconds(), start.getMilliseconds());
-        offset = (eventEnd.getTimezoneOffset() - eventStart.getTimezoneOffset()) * date.MS_PER_MINUTE;
-        durationMS = eventEnd - eventStartMS - offset;
+        durationMS = event.duration();
 
         if (freq.setup) {
             freq.setup(rule, start, eventStart);

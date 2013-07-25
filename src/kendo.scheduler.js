@@ -295,6 +295,14 @@ kendo_module({
             return event;
         },
 
+        duration: function() {
+            var end = this.end;
+            var start = this.start;
+            var offset = (end.getTimezoneOffset() - start.getTimezoneOffset()) * kendo.date.MS_PER_MINUTE;
+
+            return end - start - offset;
+        },
+
         expand: function(start, end, zone) {
             return recurrence ? recurrence.expand(this, start, end, zone) : [this];
         },
