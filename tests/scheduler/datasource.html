@@ -340,6 +340,19 @@
                 ok(schedulerEvent.isException());
             });
 
+            test("isOccurrence method returns true if the model isNew and has recurrenceId", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    id: 0,
+                    title: "Title",
+                    recurrenceId: 2,
+                    start: new Date(2012, 2, 31, 0, 0),
+                    end: new Date(2012, 2, 31, 1, 0),
+                });
+
+                ok(schedulerEvent.isOccurrence());
+            });
+
+
             test("isRecurrenceHead method returns true if id and recurrenceRule are defined", function() {
                 var schedulerEvent = new SchedulerEvent({
                     id: 3,

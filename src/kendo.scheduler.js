@@ -312,7 +312,6 @@ kendo_module({
             return this.id && this.recurrenceId;
         },
 
-        //TODO: test this
         isOccurrence: function() {
             return this.isNew() && this.recurrenceId;
         },
@@ -437,7 +436,7 @@ kendo_module({
         },
 
         cancelChanges: function(model) {
-            if (model && model.isNew() && model.recurrenceId) {
+            if (model && model.isOccurrence()) {
                 this._removeExceptionDate(model);
             }
 
@@ -1157,7 +1156,7 @@ kendo_module({
             };
 
             var recurrenceMessages = that.options.messages.recurrenceMessages;
-            if (event.recurrenceRule || (event.recurrenceId && !event.id)) {
+            if (event.recurrenceRule || event.isOccurrence()) {
                 that.showDialog({
                     title: recurrenceMessages.editWindowTitle,
                     text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
