@@ -73,8 +73,6 @@ kendo_module({
 
             that._renderLayout(that.options.date);
 
-            that._slots();
-
             that._groups();
         },
 
@@ -907,49 +905,8 @@ kendo_module({
             }
        },
 
-       _slots: function() {
-            var row = {
-                slots: [],
-                events: []
-            };
-
-            var cells = this.content[0].getElementsByTagName("td");
-            var eventHeight = this.options.eventHeight;
-
-            for (var idx = 0, length = cells.length; idx < length; idx++) {
-                var cell = cells[idx];
-                var clientHeight = cell.clientHeight;
-                var firstChildHeight = cell.firstChild.offsetHeight + 3;
-
-                var groupIndex = this._groupIndex(idx);
-                var originalIndex = this._removeOffset(idx, groupIndex);
-
-                var start = kendo.date.addDays(this.startDate(), originalIndex);
-
-                row.slots.push({
-                   clientWidth: cell.clientWidth,
-                   clientHeight: clientHeight,
-                   offsetWidth: cell.offsetWidth,
-                   offsetTop: cell.offsetTop,
-                   firstChildHeight: firstChildHeight,
-                   offsetLeft: cell.offsetLeft,
-                   eventCount: Math.floor((clientHeight - firstChildHeight) / (eventHeight + 3)),
-                   start: start,
-                   end: start,
-                   element: cell,
-                   isAllDay: true,
-                   index: idx,
-                   groupIndex: groupIndex
-                });
-            }
-
-            this._row = row;
-        },
-
         render: function(events) {
             this.content.children(".k-event,.k-more-events").remove();
-
-            this._slots();
 
             this._groups();
 

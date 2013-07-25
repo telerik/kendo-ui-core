@@ -1313,7 +1313,6 @@
                 });
 
                 var view = scheduler.view();
-                var slots = view._columns[0].slots;
 
                 var eventInitialTop = view.content.find(".k-event")[0].offsetTop;
 
@@ -1350,7 +1349,7 @@
 
                 var view = scheduler.view();
 
-                var slot = view._columns[0].slots[25];
+                var slot = view.groups[0].getTimeSlotCollection(0).last();
                 deepEqual(slot.start, new Date("2013/6/6 23:30"));
                 deepEqual(slot.end, new Date("2013/6/7 00:00"));
             });
@@ -1712,14 +1711,19 @@
                 });
 
                 var view = scheduler.view();
-                var slots = view._rows[0].slots;
+                var slots = view.groups[0].getDaySlotCollection(0);
 
-                equal(slots[0].groupIndex, 0);
-                equal(slots[6].groupIndex, 0);
+                equal(slots.first().groupIndex, 0);
+                equal(slots.last().groupIndex, 0);
 
-                equal(slots[7].groupIndex, 1);
-                equal(slots[13].groupIndex, 1);
-                equal(slots[14].groupIndex, 2);
+                slots = view.groups[1].getDaySlotCollection(0);
+
+                equal(slots.first().groupIndex, 1);
+                equal(slots.last().groupIndex, 1);
+
+                slots = view.groups[2].getDaySlotCollection(0);
+                equal(slots.first().groupIndex, 2);
+                equal(slots.last().groupIndex, 2);
             });
 
             test("group index is set to the row slot with vertical grouping in week view", function() {
@@ -1752,13 +1756,15 @@
                     views: ["week"]
                 });
 
+
                 var view = scheduler.view();
+                var slots = view.groups[0].getDaySlotCollection(0);
+                equal(slots.first().groupIndex, 0);
+                equal(slots.last().groupIndex, 0);
 
-                equal(view._rows[0].slots[0].groupIndex, 0);
-                equal(view._rows[0].slots[6].groupIndex, 0);
-
-                equal(view._rows[1].slots[0].groupIndex, 1);
-                equal(view._rows[1].slots[6].groupIndex, 1);
+                slots = view.groups[1].getDaySlotCollection(0);
+                equal(slots.first().groupIndex, 1);
+                equal(slots.last().groupIndex, 1);
             });
 
 
@@ -1793,22 +1799,26 @@
 
                 var view = scheduler.view();
 
-                equal(view._columns[0].slots[0].groupIndex, 0);
-                equal(view._columns[1].slots[0].groupIndex, 0);
-                equal(view._columns[2].slots[0].groupIndex, 0);
-                equal(view._columns[3].slots[0].groupIndex, 0);
-                equal(view._columns[6].slots[0].groupIndex, 0);
+                var view = scheduler.view();
+                var slots = view.groups[0].getTimeSlotCollection(0);
 
-                equal(view._columns[7].slots[0].groupIndex, 1);
-                equal(view._columns[8].slots[0].groupIndex, 1);
-                equal(view._columns[9].slots[0].groupIndex, 1);
-                equal(view._columns[10].slots[0].groupIndex, 1);
-                equal(view._columns[13].slots[0].groupIndex, 1);
+                equal(slots.first().groupIndex, 0);
+                equal(slots.last().groupIndex, 0);
 
-                equal(view._columns[14].slots[0].groupIndex, 2);
-                equal(view._columns[20].slots[0].groupIndex, 2);
+                slots = view.groups[1].getTimeSlotCollection(0);
 
-                equal(view._columns[21].slots[0].groupIndex, 3);
+                equal(slots.first().groupIndex, 1);
+                equal(slots.last().groupIndex, 1);
+
+                slots = view.groups[2].getTimeSlotCollection(0);
+
+                equal(slots.first().groupIndex, 2);
+                equal(slots.last().groupIndex, 2);
+
+                slots = view.groups[3].getTimeSlotCollection(0);
+
+                equal(slots.first().groupIndex, 3);
+                equal(slots.last().groupIndex, 3);
             });
 
             test("group index is set to the slot with vertical grouping in day view", function() {
@@ -1843,10 +1853,15 @@
 
                 var view = scheduler.view();
 
-                var slots = view._columns[0].slots;
-                equal(slots[0].groupIndex, 0);
-                equal(slots[48].groupIndex, 1);
-                equal(slots[49].groupIndex, 1);
+                var slots = view.groups[0].getTimeSlotCollection(0);
+
+                equal(slots.first().groupIndex, 0);
+                equal(slots.last().groupIndex, 0);
+
+                var slots = view.groups[1].getTimeSlotCollection(0);
+
+                equal(slots.first().groupIndex, 1);
+                equal(slots.last().groupIndex, 1);
             });
 
             testSkip("group index is set to the slot with horizontal grouping on date in week view", function() {
@@ -2155,41 +2170,6 @@
                 });
                 var cell = view.content.find(".k-scheduler-header-all-day:eq(2) td:first");
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
-            });
-
-            test("slot end date is set when grouped vertically", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: ["ResourceName", "ResourceName2"],
-                        orientation: "vertical"
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        },
-                        {
-                            field: "bar",
-                            name: "ResourceName2",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-
-                    ],
-                    dataSource: [ ],
-                    views: ["day"]
-                });
-
-                var view = scheduler.view();
-                deepEqual(view._columns[0].slots[12].start, new Date("2013/6/6 6:00"));
-                deepEqual(view._columns[0].slots[12].end, new Date("2013/6/6 6:30"));
             });
 
             test("event in the last slot is position correctly when grouped vertically", function() {

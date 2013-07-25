@@ -134,8 +134,6 @@ kendo_module({
             that.calculateDateRange();
 
             that._groups();
-
-            that._slots();
        },
 
        _toDaySlot: function(slot) {
@@ -536,132 +534,6 @@ kendo_module({
                 this._daySlotGroups(groupCount, columnCount);
             }
         },
-
-        _slots: function() {
-            var tableRows = this.content[0].getElementsByTagName("tr");
-
-            var columnCount = tableRows[0].children.length;
-            var columns = [];
-
-            for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-                columns.push({
-                    slots: [],
-                    events: []
-                });
-            }
-
-            var tableCells;
-            var cellIndex;
-            var td;
-            var range;
-            var cell;
-            var visibleAllDayRowCount = 0;
-            var isVertical = this._groupOrientation() === "vertical";
-
-            var allDaySelector = ".k-scheduler-header-all-day tr";
-
-            if (this._isVerticallyGrouped()) {
-               allDaySelector = ".k-scheduler-header-all-day";
-            }
-
-            var allDayRows = this.element.find(allDaySelector);
-
-            var allDayRowCount = this._isVerticallyGrouped() ? allDayRows.length : 0;
-
-            for (var rowIndex = 0; rowIndex < tableRows.length; rowIndex++) {
-                var tr = tableRows[rowIndex];
-
-                if (tr.className && tr.className.indexOf("k-scheduler-header-all-day") > -1) {
-                    visibleAllDayRowCount++;
-                    continue;
-                }
-
-                tableCells = tr.children;
-
-                for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
-                    td = tableCells[cellIndex];
-
-                    range = this._rangeByIndex(rowIndex - visibleAllDayRowCount, cellIndex, tableRows.length - 1 - allDayRowCount);
-
-                    cell = {
-                        offsetTop: td.offsetTop,
-                        offsetLeft: td.offsetLeft,
-                        clientHeight: td.clientHeight,
-                        offsetHeight: td.offsetHeight,
-                        clientWidth: td.clientWidth,
-                        offsetWidth: td.offsetWidth,
-                        element: td,
-                        start: range.start,
-                        end: range.end
-                    };
-
-                    cell.index = columns[cellIndex].slots.length;
-                    cell.columnIndex = cellIndex;
-
-                    if (isVertical) {
-                        cell.groupIndex = this._groupVerticalIndex(rowIndex - visibleAllDayRowCount);
-                    } else {
-                        cell.groupIndex = this._groupHorizontalIndex(cellIndex);
-                    }
-
-                    columns[cellIndex].slots.push(cell);
-                    columns[cellIndex].offsetLeft = cell.offsetLeft;
-                    columns[cellIndex].clientWidth = cell.clientWidth;
-                }
-            }
-
-            this._columns = columns;
-
-            var rows = [];
-
-            var row = { slots: [], events: [] };
-            if (!allDayRows.length) {
-                rows.push(row);
-            } else {
-                var rowsInGroup = 0;
-                if (this._isVerticallyGrouped()) {
-                    rowsInGroup = this._rowCountInGroup();
-                }
-
-                for (rowIndex = 0; rowIndex < allDayRows.length; rowIndex++) {
-                    row = { slots: [], events: [] };
-
-                    tableCells = allDayRows[rowIndex].children;
-
-                    for (cellIndex = 0; cellIndex < tableCells.length; cellIndex++) {
-                        td = tableCells[cellIndex];
-
-                        range = this._rangeByIndex(rowIndex, cellIndex, allDayRows.length);
-
-                        cell = {
-                            offsetTop: allDayRows.length > 1 ? td.offsetTop : td.parentNode.parentNode.parentNode.offsetTop,
-                            offsetLeft: td.offsetLeft,
-                            clientHeight: td.clientHeight,
-                            offsetHeight: td.offsetHeight,
-                            offsetWidth: td.offsetWidth,
-                            clientWidth: td.clientWidth,
-                            element: td,
-                            isAllDay: true,
-                            start: range.start,
-                            end: range.end,
-                            index: rowIndex,
-                            columnIndex: cellIndex
-                        };
-
-                        if (isVertical) {
-                            cell.groupIndex = rowIndex;
-                        } else {
-                            cell.groupIndex = this._groupHorizontalIndex(cellIndex);
-                        }
-
-                        row.slots.push(cell);
-                    }
-                    rows.push(row);
-                }
-            }
-
-            this._rows = rows;
-       },
 
        options: {
             name: "MultiDayView",
@@ -1621,8 +1493,6 @@ kendo_module({
 
             this._groups();
 
-            this._slots();
-
             this.element.find(".k-event").remove();
 
             this._updateAllDayHeaderHeight(this._allDayHeaderHeight);
@@ -2341,5 +2211,4 @@ kendo_module({
            }
        })
     });
-
 })(window.kendo.jQuery);

@@ -1626,9 +1626,9 @@
                     endTime: new Date("2013/6/6 20:00")
                 });
 
-                var slots = view._columns[0].slots;
-                deepEqual(slots[slots.length - 1].start, new Date("2013/6/6 19:00"));
-                deepEqual(slots[slots.length - 1].end, new Date("2013/6/6 20:00"));
+                var slots = view.groups[0].getTimeSlotCollection(0);
+                deepEqual(slots.last().start, new Date("2013/6/6 19:00"));
+                deepEqual(slots.last().end, new Date("2013/6/6 20:00"));
             });
 
             test("next to last slot end date is set correctly", function() {
@@ -1637,9 +1637,10 @@
                     dates: [new Date("2013/6/6")]
                 });
 
-                var slots = view._columns[0].slots;
-                deepEqual(slots[slots.length - 2].start, new Date("2013/6/6 23:00"));
-                deepEqual(slots[slots.length - 2].end, new Date("2013/6/6 23:30"));
+                var slots = view.groups[0].getTimeSlotCollection(0);
+                var count = slots.count();
+                deepEqual(slots.at(count- 2).start, new Date("2013/6/6 23:00"));
+                deepEqual(slots.at(count -2).end, new Date("2013/6/6 23:30"));
             });
 
 
