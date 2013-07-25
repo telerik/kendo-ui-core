@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" href="../styles/web/kendo.common.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+    <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+
+    <script src="require.js"></script>
+
+    <!-- use requirejs to load kendo.menu and a culture should
+    not fail when the culture happens to be loaded before kendo.core.min.js -->
+    <script>//<![CDATA[
+      require([ "../src/jquery.min", "../src/cultures/kendo.culture.fr.min.js", "../src/kendo.menu.min" ],
+        function(){
+          $("#menu").kendoMenu({
+            select: function(e) {
+              alert("You clicked: " + $(e.item).text());
+            }
+          });
+        });
+    //]]></script>
+
+  </head>
+  <body>
+    <ul id="menu">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>
+        Item 3
+        <ul>
+          <li>SubItem 3.1</li>
+          <li>SubItem 3.2</li>
+          <li>SubItem 3.3</li>
+        </ul>
+      </li>
+      <li>Item 4</li>
+    </ul>
+  </body>
+</html>
