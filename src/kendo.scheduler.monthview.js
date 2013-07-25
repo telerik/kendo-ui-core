@@ -591,17 +591,6 @@ kendo_module({
             return this._slotIndices[getDate(date).getTime()];
         },
 
-        _calculateAllDayEventWidth: function(slots, startIndex, endIndex) {
-            var result = 0;
-            var width = startIndex == endIndex ? "clientWidth" : "offsetWidth";
-
-            for (var idx = startIndex; idx <= endIndex; idx++) {
-                result += slots[idx][width];
-            }
-
-            return result;
-        },
-
         _positionEvent: function(slotRange, element) {
             var eventHeight = this.options.eventHeight;
             var startSlot = slotRange.start;
@@ -654,71 +643,6 @@ kendo_module({
 
                 this.content[0].appendChild(element[0]);
             }
-        },
-
-        _splitEvents: function(events) {
-            var result = [],
-                idx,
-                event,
-                weekStartDates = this._weekStartDates,
-                eventDurationInDays,
-                weekStart,
-                length;
-
-            for (idx = 0, length = events.length; idx < length; idx++) {
-                event = extend({}, events[idx]);
-
-                for (var dateIdx = 0, dateLength = weekStartDates.length; dateIdx < dateLength; dateIdx++) {
-                    weekStart = weekStartDates[dateIdx];
-                    eventDurationInDays = Math.ceil((event.end - event.start) / MS_PER_DAY);
-
-                    if (isInDateRange(weekStart, event.start, event.end) && eventDurationInDays >= 1) {
-                        if (getDate(event.start).getTime() === getDate(weekStart).getTime()) {
-                            if (eventDurationInDays > 1) {
-                                if (event.tail) {
-                                    event.tail = false;
-                                    event.middle = true;
-                                } else if (eventDurationInDays > 7){
-                                    event.head = true;
-                                }
-                            }
-                        } else {
-                            var tmp = extend({}, event);
-
-                            if (event.tail) {
-                                event.tail = false;
-                                tmp.middle = true;
-                            } else {
-                                tmp.head = true;
-                            }
-
-                            tmp.start = event.start;
-
-                            tmp.end = kendo.date.previousDay(weekStart);
-
-                            result.push(tmp);
-
-                            event.start = weekStart;
-                            event.head = false;
-
-                            if (getDate(event.end).getTime() > getDate(this.endDate()).getTime() + MS_PER_DAY - 1) {
-                                event.middle = true;
-                            } else {
-                                event.tail = true;
-                            }
-                            event.end = event.end;
-                        }
-                    }
-                }
-
-                if (event.end > this.endDate()) {
-                    event.head = true;
-                }
-
-                result.push(event);
-            }
-
-            return result;
         },
 
        _slotByPosition: function(x, y) {

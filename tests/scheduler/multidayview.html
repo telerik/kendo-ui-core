@@ -1651,13 +1651,13 @@
                     dates: [new Date("2013/6/6")]
                 });
 
-                view.render([{
+                view.render([new SchedulerEvent({
                     uid: "foo",
                     title: "",
                     start: new Date("2013/6/6 11:00 PM"),
                     end: new Date("2013/6/7 12:00 AM"),
                     id: "2"
-                }]);
+                })]);
 
                 equal(view.element.find(".k-i-arrow-s").length, 0);
             });
