@@ -431,7 +431,7 @@ kendo_module({
         },
 
         cancelChanges: function(model) {
-            if (model.recurrenceId && !model.id) {
+            if (model && model.isNew() && model.recurrenceId) {
                 this._removeExceptionDate(model);
             }
 
@@ -461,7 +461,7 @@ kendo_module({
         remove: function(model) {
             if (model.isRecurrenceHead()) {
                 this._removeExceptions(model);
-            } else if (model.recurrenceId) {
+            } else if (model.isRecurring()) {
                 this._addExceptionDate(model);
             }
 
