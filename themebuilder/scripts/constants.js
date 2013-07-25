@@ -210,7 +210,7 @@
             "@filter-menu-content-background":          constant(BGCOLOR, ".k-secondary.k-filter-menu"),
             "@icon-background-color":                   constant(BGCOLOR, ".k-treeview .k-icon"),
             "@tabstrip-items-border":                   constant(BORDERCOLOR, ".k-tabstrip-items .k-state-default"),
-            "@tabstrip-active-background":              constant(BGCOLOR, ".k-tabstrip-items .k-state-active"),
+            "@tabstrip-active-background":              constant(BGCOLOR, ".k-tabstrip .k-content.k-state-active"),
             "@tabstrip-tabs-color":                     constant(COLOR, ".k-tabstrip-items .k-state-default .k-link"),
 
             "@form-widget-color":                       constant(COLOR, ".k-secondary .k-dropdown .k-dropdown-wrap.k-state-hover .k-input"),
@@ -304,6 +304,15 @@
 
                 "@input-text-color":              "Text color"
             },
+			"Drop-downs": {
+				"@drop-down-background":		  "Background color"
+			},
+			"TabStrip": {
+				"@tabstrip-active-background":    "Tabstrip active content background" 
+			},			
+			"Panelbar": {
+				"@panelbar-content-background":  "Background color"	
+			},			
             "Widget states": {
                 "@hover-gradient":                "Hover gradient",
                 "@hover-background-color":        "Hover background",
