@@ -146,6 +146,26 @@
                 equal(result.filter, "foo~eq~'bar'");
             });
 
+            test("parameterMap strips filter with no field names", function() {
+                var transport = new Transport({
+                    read: {
+                        url: "foo"
+                    }
+                }),
+
+                options = {
+                    filter: {
+                        logic: "and",
+                        filters: [
+                            { field: undefined , value: "bar", operator: "eq" }
+                        ]
+                    }
+                };
+
+                var result = transport.parameterMap(options);
+                equal(result.filter, "");
+            });
+
             test("parameterMap transforms single number filter", function() {
                 var transport = new Transport({
                     read: {

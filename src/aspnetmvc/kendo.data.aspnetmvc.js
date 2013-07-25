@@ -140,13 +140,21 @@ kendo_module({
        if (filter.filters) {
            return $.map(filter.filters, function(f) {
                var hasChildren = f.filters && f.filters.length > 1,
-                   result = hasChildren ? "(" : "";
+                   result = serializeFilter(f);
 
-               result += serializeFilter(f);
-               return result + (hasChildren ? ")" : "");
+               if (result && hasChildren) {
+                   result = "(" + result + ")";
+               }
+
+               return result;
            }).join("~" + filter.logic + "~");
        }
-       return filter.field + "~" + filter.operator + "~" + encodeFilterValue(filter.value);
+
+       if (filter.field) {
+           return filter.field + "~" + filter.operator + "~" + encodeFilterValue(filter.value);
+       } else {
+           return undefined;
+       }
     }
 
     function encodeFilterValue(value) {
