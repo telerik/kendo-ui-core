@@ -422,7 +422,7 @@
 
                 var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]");
 
-                equal(dropdownlist.attr("data-bind"), "value: foo");
+                equal(dropdownlist.attr("data-bind"), "value:foo");
                 equal(dropdownlist.children().eq(0).text(), "None");
                 equal(dropdownlist.children().eq(1).text(), "Foo 1");
                 equal(dropdownlist.children().eq(2).text(), "Foo 2");
