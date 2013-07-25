@@ -304,15 +304,15 @@
 
                 "@input-text-color":              "Text color"
             },
-			"Drop-downs": {
-				"@drop-down-background":		  "Background color"
-			},
-			"TabStrip": {
-				"@tabstrip-active-background":    "Tabstrip active content background" 
-			},			
-			"Panelbar": {
-				"@panelbar-content-background":  "Background color"	
-			},			
+            "Drop-downs": {
+                "@drop-down-background":          "Background color"
+            },
+            "TabStrip": {
+                "@tabstrip-active-background":    "Tabstrip active content background"
+            },
+            "Panelbar": {
+                "@panelbar-content-background":  "Background color"
+            },
             "Widget states": {
                 "@hover-gradient":                "Hover gradient",
                 "@hover-background-color":        "Hover background",
