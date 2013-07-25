@@ -1,5 +1,5 @@
 (function($, evil, undefined) {
-    var kendo = window.kendo = window.kendo || {},
+    var kendo = window.kendo = window.kendo || { cultures: {} },
         extend = $.extend,
         each = $.each,
         proxy = $.proxy,
@@ -453,7 +453,7 @@ function pad(number, digits, end) {
         objectToString = {}.toString;
 
     //cultures
-    kendo.cultures = {"en-US" : {
+    kendo.cultures["en-US"] = {
         name: EN,
         numberFormat: {
             pattern: ["-n"],
@@ -512,7 +512,7 @@ function pad(number, digits, end) {
                 twoDigitYearMax: 2029
             }
         }
-    }};
+    };
 
 
      function findCulture(culture) {

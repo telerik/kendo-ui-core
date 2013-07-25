@@ -301,13 +301,14 @@ function extract_widget_info(ast) {
 }
 
 function extract_deps(ast, comp_filename) {
-    // HACK: need to add "core" dependency to each culture file, so
-    // that cultures can be loaded with RequireJS.  Rather than adding
-    // it to the original sources, I think it's preferable that the
-    // build script handles this as a special case.
+    // HACK: modify cultures so that they define window.kendo if it
+    // doesn't exist.  This way we can avoid adding the dependency on
+    // kendo.core which caused lots of trouble.
     var m = /^src\/cultures\/kendo\.(.*)\.js$/.exec(comp_filename);
     if (m) {
-        ast.deps = [ "../core" ];
+        ast.deps = [];
+        var check_kendo = u2.parse("var kendo = (window.kendo || (window.kendo = { cultures: {} }));").body[0];
+        ast.body[0].body.expression.body.unshift(check_kendo);
         ast.component = {
             id: m[1]
         };
