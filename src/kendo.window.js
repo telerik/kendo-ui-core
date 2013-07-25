@@ -131,7 +131,7 @@ kendo_module({
                 options.actions = [];
             }
 
-            that.appendTo = $(($(options.appendTo)[0] ? options.appendTo : "") || document.body);
+            that.appendTo = $($(options.appendTo)[0] || document.body);
 
             that._animations();
 
