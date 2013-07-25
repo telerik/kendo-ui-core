@@ -9186,16 +9186,16 @@ kendo_module({
         }
     });
 
-    var Aggregator = Class.extend({
-        init: function(series) {
-            var agg = this;
+    var Aggregator = function(series) {
+        var agg = this;
 
-            agg._series = SeriesBinder.current._resetFields(series);
+        agg._series = SeriesBinder.current._resetFields(series);
 
-            agg._initFields();
-            agg._initAggregate();
-        },
+        agg._initFields();
+        agg._initAggregate();
+    };
 
+    Aggregator.prototype = {
         _initFields: function() {
             var agg = this,
                 series = agg._series,
@@ -9280,7 +9280,7 @@ kendo_module({
 
             return values;
         }
-    });
+    };
 
     function sparseArrayMin(arr) {
         return sparseArrayLimits(arr).min;
