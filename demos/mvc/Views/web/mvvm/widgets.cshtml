@@ -2,83 +2,40 @@
     <table class="metrotable">
         <tbody>
         <tr>
-            <th>Widget</th>
-            <th>Current view model state</th>
-        </tr>
-        <tr>
             <td>
+                <h4>AutoComplete:</h4>
                 <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue"/>
-                <h4>AutoComplete</h4>
             </td>
-            <td rowspan="11" style="background-color: #efefef; padding: 10px;">
-<pre>
-{
-    autoCompleteValue: <span data-bind="text: displayAutoCompleteValue"></span>,
-    comboBoxValue: <span data-bind="text: displayComboBoxValue"></span>,
-    datePickerValue: <span data-bind="text: displayDatePickerValue"></span>,
-    dropDownListValue: <span data-bind="text: displayDropDownListValue"></span>,
-    multiSelectValue: <span data-bind="text: displayMultiSelectValue"></span>,
-    gridSource: [
-<span data-bind="text: displayGridSource"></span>    ],
-    numericTextBoxValue: <span data-bind="text: displayNumericTextBoxValue"></span>,
-    sliderValue: <span data-bind="text: sliderValue"></span>,
-    timePickerValue: <span data-bind="text: displayTimePickerValue"></span>,
-    treeviewSource: [
-<span data-bind="text: displayTreeviewSource"></span>    ]
-}
-</pre>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <select data-role="combobox" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
-                <h4>ComboBox</h4>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input data-role="datepicker" data-bind="value: datePickerValue" />
-                <h4>DatePicker</h4>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <select data-role="dropdownlist" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
-                <h4>DropDownList </h4>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <select multiple="multiple" data-role="multiselect" data-text-field="name" data-value-field="value" data-bind="source: colors, value: multiSelectValue"></select>
-                <h4>MultiSelect </h4>
-            </td>
-        </tr>
-        <tr>
-            <td>
+            <td colspan="2" rowspan="3">
                 <h4>Grid</h4>
                 <div data-role="grid" data-sortable="true" data-editable="true" data-columns='["Name", "Price", "UnitsInStock", {"command": "destroy"}]' data-bind="source: gridSource"></div>
             </td>
         </tr>
         <tr>
             <td>
+                <h4>ComboBox:</h4>
+                <select data-role="combobox" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>DropDownList:</h4>
+                <select data-role="dropdownlist" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>NumericTextBox:</h4>
                 <input data-role="numerictextbox" data-format="c" data-bind="value: numericTextBoxValue" />
-                <h4>NumericTextBox</h4>
             </td>
-        </tr>
-        <tr>
-            <td>
-                <input data-role="slider" data-bind="value: sliderValue" />
-                <h4>Slider</h4>
+            <td rowspan="3">
+                <h4>Splitter</h4>
+                <div data-role="splitter" data-panes="[{size:'30%', collapsible:true},{size:'70%'}]">
+                    <div>Pane 1</div>
+                    <div>Pane 2</div>
+                </div>
             </td>
-        </tr>
-        <tr>
-            <td>
-                <input data-role="timepicker" data-bind="value: timePickerValue" />
-                <h4>TimePicker</h4>
-            </td>
-        </tr>
-        <tr>
-            <td>
+            <td rowspan="3">
                 <h4>TabStrip</h4>
                 <div data-role="tabstrip" data-animation="false">
                     <ul>
@@ -98,16 +55,50 @@
         </tr>
         <tr>
             <td>
+                <h4>DatePicker:</h4>
+                <input data-role="datepicker" data-bind="value: datePickerValue" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>TimePicker:</h4>
+                <input data-role="timepicker" data-bind="value: timePickerValue" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>MultiSelect:</h4>
+                <select multiple="multiple" data-role="multiselect" data-text-field="name" data-value-field="value" data-bind="source: colors, value: multiSelectValue"></select>
+            </td>
+            <td>
+                <h4>Slider:</h4>
+                <input data-role="slider" data-bind="value: sliderValue" />
+            </td>        
+            <td>
                 <h4>TreeView</h4>
                 <div data-role="treeview" data-drag-and-drop="true" data-bind="source: treeviewSource"></div>
             </td>
         </tr>
         <tr>
-            <td>
-                <h4>Splitter</h4>
-                <div data-role="splitter" data-panes="[{size:'30%', collapsible:true},{size:'70%'}]">
-                    <div>Pane 1</div>
-                    <div>Pane 2</div>
+            <td colspan="3">
+                <div class="demo-section">
+                <h3>Current view model state</h3>
+<pre>
+{
+    autoCompleteValue: <span data-bind="text: displayAutoCompleteValue"></span>,
+    comboBoxValue: <span data-bind="text: displayComboBoxValue"></span>,
+    dropDownListValue: <span data-bind="text: displayDropDownListValue"></span>,
+    numericTextBoxValue: <span data-bind="text: displayNumericTextBoxValue"></span>,
+    datePickerValue: <span data-bind="text: displayDatePickerValue"></span>,
+    timePickerValue: <span data-bind="text: displayTimePickerValue"></span>,
+    multiSelectValue: <span data-bind="text: displayMultiSelectValue"></span>,
+    gridSource: [
+<span data-bind="text: displayGridSource"></span>    ],
+    sliderValue: <span data-bind="text: sliderValue"></span>,
+    treeviewSource: [
+<span data-bind="text: displayTreeviewSource"></span>    ]
+}
+</pre>
                 </div>
             </td>
         </tr>
@@ -180,15 +171,27 @@
                     var comboBoxValue = this.get("comboBoxValue");
                     return kendo.stringify(comboBoxValue);
                 },
+                dropDownListValue: null,
+                displayDropDownListValue: function() {
+                    var dropDownListValue = this.get("dropDownListValue");
+                    return kendo.stringify(dropDownListValue);
+                },
+                numericTextBoxValue: 10,
+                displayNumericTextBoxValue: function() {
+                    var numericTextBoxValue = this.get("numericTextBoxValue");
+
+                    return kendo.toString(numericTextBoxValue, "c");
+                },
                 datePickerValue: new Date(),
                 displayDatePickerValue: function() {
                     var datePickerValue = this.get("datePickerValue");
                     return kendo.toString(datePickerValue, "yyyy-MM-dd");
                 },
-                dropDownListValue: null,
-                displayDropDownListValue: function() {
-                    var dropDownListValue = this.get("dropDownListValue");
-                    return kendo.stringify(dropDownListValue);
+                timePickerValue: new Date(),
+                displayTimePickerValue: function() {
+                    var timePickerValue = this.get("timePickerValue");
+
+                    return kendo.toString(timePickerValue, "hh:mm:ss");
                 },
                 multiSelectValue: [],
                 displayMultiSelectValue: function() {
@@ -202,18 +205,6 @@
                 ],
                 displayGridSource: function() {
                     return stringify(this.get("gridSource").toJSON());
-                },
-                numericTextBoxValue: 10,
-                displayNumericTextBoxValue: function() {
-                    var numericTextBoxValue = this.get("numericTextBoxValue");
-
-                    return kendo.toString(numericTextBoxValue, "c");
-                },
-                timePickerValue: new Date(),
-                displayTimePickerValue: function() {
-                    var timePickerValue = this.get("timePickerValue");
-
-                    return kendo.toString(timePickerValue, "hh:mm:ss");
                 },
                 sliderValue: 5,
                 treeviewSource: kendo.observableHierarchy([
@@ -239,63 +230,55 @@
     <pre class="prettyprint">
 &lt;table&gt;
     &lt;tr&gt;
-        &lt;th&gt;Widget&lt;/th&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
         &lt;td&gt;
-            &lt;h4&gt;AutoComplete&lt;/h4&gt;
-            &lt;input data-role=&quot;autocomplete&quot; data-text-field=&quot;name&quot; data-bind=&quot;source: colors, value: autoCompleteValue&quot;/&gt;
+            &lt;h4&gt;AutoComplete:&lt;/h4&gt;
+            &lt;input data-role=&quot;autocomplete&quot;
+            data-text-field=&quot;name&quot;
+            data-bind=&quot;source: colors, value: autoCompleteValue&quot;/&gt;
         &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;
-            &lt;h4&gt;ComboBox&lt;/h4&gt;
-            &lt;select data-role=&quot;combobox&quot;
-                data-text-field=&quot;name&quot; data-value-field=&quot;value&quot; data-bind=&quot;source: colors, value: comboBoxValue&quot;&gt;&lt;/select&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;
-            &lt;h4&gt;DatePicker&lt;/h4&gt;
-            &lt;input data-role=&quot;datepicker&quot; data-bind=&quot;value: datePickerValue&quot; /&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;
-            &lt;h4&gt;DropDownList &lt;/h4&gt;
-            &lt;select data-role=&quot;dropdownlist&quot;
-                data-text-field=&quot;name&quot; data-value-field=&quot;value&quot; data-bind=&quot;source: colors, value: dropDownListValue&quot;&gt;&lt;/select&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;
+        &lt;td colspan=&quot;2&quot; rowspan=&quot;3&quot;&gt;
             &lt;h4&gt;Grid&lt;/h4&gt;
             &lt;div data-role=&quot;grid&quot;
-                data-sortable=&quot;true&quot; data-editable=&quot;true&quot;
-                data-columns='[&quot;Name&quot;, &quot;Price&quot;, &quot;UnitsInStock&quot;, {&quot;command&quot;: &quot;destroy&quot;}]'
-                data-bind=&quot;source: gridSource&quot;&gt;&lt;/div&gt;
+            data-sortable=&quot;true&quot;
+            data-editable=&quot;true&quot;
+            data-columns='[&quot;Name&quot;, &quot;Price&quot;, &quot;UnitsInStock&quot;, {&quot;command&quot;: &quot;destroy&quot;}]'
+            data-bind=&quot;source: gridSource&quot;&gt;&lt;/div&gt;
         &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
         &lt;td&gt;
-            &lt;h4&gt;NumericTextBox&lt;/h4&gt;
-            &lt;input data-role=&quot;numerictextbox&quot; data-format=&quot;c&quot; data-bind=&quot;value: numericTextBoxValue&quot; /&gt;
+            &lt;h4&gt;ComboBox:&lt;/h4&gt;
+            &lt;select data-role=&quot;combobox&quot;
+            data-text-field=&quot;name&quot;
+            data-value-field=&quot;value&quot;
+            data-bind=&quot;source: colors, value: comboBoxValue&quot;&gt;&lt;/select&gt;
         &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
         &lt;td&gt;
-            &lt;h4&gt;Slider&lt;/h4&gt;
-            &lt;input data-role=&quot;slider&quot; data-bind=&quot;value: sliderValue&quot; /&gt;
+            &lt;h4&gt;DropDownList:&lt;/h4&gt;
+            &lt;select data-role=&quot;dropdownlist&quot;
+            data-text-field=&quot;name&quot;
+            data-value-field=&quot;value&quot;
+            data-bind=&quot;source: colors, value: dropDownListValue&quot;&gt;&lt;/select&gt;
         &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
         &lt;td&gt;
-            &lt;h4&gt;TimePicker&lt;/h4&gt;
-            &lt;input data-role=&quot;timepicker&quot; data-bind=&quot;value: timePickerValue&quot; /&gt;
+            &lt;h4&gt;NumericTextBox:&lt;/h4&gt;
+            &lt;input data-role=&quot;numerictextbox&quot;
+            data-format=&quot;c&quot;
+            data-bind=&quot;value: numericTextBoxValue&quot; /&gt;
         &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;
+            &lt;h4&gt;Splitter&lt;/h4&gt;
+            &lt;div data-role=&quot;splitter&quot;
+            data-panes=&quot;[{size:'30%', collapsible:true},{size:'70%'}]&quot;&gt;
+                &lt;div&gt;Pane 1&lt;/div&gt;
+                &lt;div&gt;Pane 2&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/td&gt;
+        &lt;td rowspan=&quot;3&quot;&gt;
             &lt;h4&gt;TabStrip&lt;/h4&gt;
             &lt;div data-role=&quot;tabstrip&quot; data-animation=&quot;false&quot;&gt;
                 &lt;ul&gt;
@@ -304,7 +287,8 @@
                 &lt;/ul&gt;
                 &lt;div&gt;
                     &lt;h4&gt;First page:&lt;/h4&gt;
-                    Pick a time: &lt;input data-role=&quot;timepicker&quot; data-bind=&quot;value: timePickerValue&quot;/&gt;
+                    Pick a time: &lt;input data-role=&quot;timepicker&quot;
+                    data-bind=&quot;value: timePickerValue&quot;/&gt;
                 &lt;/div&gt;
                 &lt;div&gt;
                     &lt;h4&gt;Second page:&lt;/h4&gt;
@@ -315,11 +299,35 @@
     &lt;/tr&gt;
     &lt;tr&gt;
         &lt;td&gt;
+            &lt;h4&gt;DatePicker:&lt;/h4&gt;
+            &lt;input data-role=&quot;datepicker&quot; data-bind=&quot;value: datePickerValue&quot; /&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;TimePicker:&lt;/h4&gt;
+            &lt;input data-role=&quot;timepicker&quot; data-bind=&quot;value: timePickerValue&quot; /&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;MultiSelect:&lt;/h4&gt;
+            &lt;select multiple=&quot;multiple&quot;
+            data-role=&quot;multiselect&quot;
+            data-text-field=&quot;name&quot;
+            data-value-field=&quot;value&quot;
+            data-bind=&quot;source: colors, value: multiSelectValue&quot;&gt;&lt;/select&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+            &lt;h4&gt;Slider:&lt;/h4&gt;
+            &lt;input data-role=&quot;slider&quot;
+            data-bind=&quot;value: sliderValue&quot; /&gt;
+        &lt;/td&gt;        
+        &lt;td&gt;
             &lt;h4&gt;TreeView&lt;/h4&gt;
             &lt;div data-role=&quot;treeview&quot;
-                data-animation=&quot;false&quot;
-                data-drag-and-drop=&quot;true&quot;
-                data-bind=&quot;source: treeviewSource&quot;&gt;&lt;/div&gt;
+            data-drag-and-drop=&quot;true&quot;
+            data-bind=&quot;source: treeviewSource&quot;&gt;&lt;/div&gt;
         &lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
@@ -344,15 +352,27 @@ var viewModel = kendo.observable({
         var comboBoxValue = this.get("comboBoxValue");
         return kendo.stringify(comboBoxValue);
     },
+    dropDownListValue: null,
+    displayDropDownListValue: function() {
+        var dropDownListValue = this.get("dropDownListValue");
+        return kendo.stringify(dropDownListValue);
+    },
+    numericTextBoxValue: 10,
+    displayNumericTextBoxValue: function() {
+        var numericTextBoxValue = this.get("numericTextBoxValue");
+
+        return kendo.toString(numericTextBoxValue, "c");
+    },
     datePickerValue: new Date(),
     displayDatePickerValue: function() {
         var datePickerValue = this.get("datePickerValue");
         return kendo.toString(datePickerValue, "yyyy-MM-dd");
     },
-    dropDownListValue: null,
-    displayDropDownListValue: function() {
-        var dropDownListValue = this.get("dropDownListValue");
-        return kendo.stringify(dropDownListValue);
+    timePickerValue: new Date(),
+    displayTimePickerValue: function() {
+        var timePickerValue = this.get("timePickerValue");
+
+        return kendo.toString(timePickerValue, "hh:mm:ss");
     },
     multiSelectValue: [],
     displayMultiSelectValue: function() {
@@ -366,18 +386,6 @@ var viewModel = kendo.observable({
     ],
     displayGridSource: function() {
         return stringify(this.get("gridSource"));
-    },
-    numericTextBoxValue: 10,
-    displayNumericTextBoxValue: function() {
-        var numericTextBoxValue = this.get("numericTextBoxValue");
-
-        return kendo.toString(numericTextBoxValue, "c");
-    },
-    timePickerValue: new Date(),
-    displayTimePickerValue: function() {
-        var timePickerValue = this.get("timePickerValue");
-
-        return kendo.toString(timePickerValue, "hh:mm:ss");
     },
     treeviewSource: kendo.observableHierarchy([
         { text: "Andrew", expanded: true, items: [
@@ -405,25 +413,13 @@ kendo.bind($("table"), viewModel);
 
         .metrotable > tbody > tr > td {
             display: table-cell;
-            padding: 5px 5px 5px 0;
+            padding: 5px 20px 5px 0;
             font-size: 1em;
             text-transform: none;
+            border: 0;
+            vertical-align: top;
         }
-
-        .metrotable td > .k-autocomplete,
-        .metrotable td > .k-dropdown,
-        .metrotable td > .k-combobox,
-        .metrotable td > .k-datepicker,
-        .metrotable td > .k-numerictextbox,
-        .metrotable td > .k-timepicker,
-        .metrotable td > .k-slider {
-            float: right;
-        }
-
-        .metrotable td > .k-slider {
-            margin-bottom: 10px;
-        }
-
+        
         .metrotable > tbody > tr > th {
             border-bottom: 1px solid #ccc;
             color: #787878;
@@ -432,16 +428,24 @@ kendo.bind($("table"), viewModel);
             padding: 0 1em 0 0;
             text-align: left;
         }
-
-        td h4 {
-            margin: 0;
-            padding: 7px 0;
-            font-weight: normal;
+        
+        .metrotable td > .k-splitter {
+            height: 130px;
+            width: 300px;
+        }
+        
+        .metrotable td > .k-slider {
+            width: 300px;
+        }
+        
+        .metrotable td > .k-tabstrip {
+            width: 200px;
         }
 
-        td label {
-            float: left;
-            clear: left;
+        #example td h4 {
+            margin: 0;
+            padding: 0 0 5px 0;
+            width: 200px;
         }
 
         td pre {
