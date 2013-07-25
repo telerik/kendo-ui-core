@@ -1,0 +1,8 @@
+{ "run_list": [
+    "recipe[chef_handler]",
+    "recipe[windows]",
+    "recipe[git]",
+    "recipe[ruby]",
+    "recipe[nodejs]",
+    "recipe[jenkins::slave]"
+]}

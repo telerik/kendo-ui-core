@@ -1,6 +1,9 @@
 [submodule "build/less-js"]
     path = build/less-js
     url = git@github.com:telerik/less.js.git
+[submodule "build/timezone-js"]
+    path = build/timezone-js
+    url = git@github.com:mde/timezone-js.git
 [submodule "tests/qunit"]
     path = tests/qunit
     url = git@github.com:jquery/qunit.git
@@ -13,6 +16,9 @@
 [submodule "ci/cookbooks/apt"]
     path = ci/cookbooks/apt
     url = git@github.com:opscode-cookbooks/apt.git
-[submodule "build/timezone-js"]
-	path = build/timezone-js
-	url = git@github.com:mde/timezone-js.git
+[submodule "ci/cookbooks/chef_handler"]
+    path = ci/cookbooks/chef_handler
+    url = https://github.com/opscode-cookbooks/chef_handler
+[submodule "ci/cookbooks/windows"]
+    path = ci/cookbooks/windows
+    url = git@github.com:opscode-cookbooks/windows.git

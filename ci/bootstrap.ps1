@@ -1,12 +1,13 @@
-$jenkins_root = "http://kendobuild/build"
-$jenkins_slave = "kendobuild-winslave1"
+# Install ruby + ruby devkit + chef, if necessary
+
+$donwload_root = "http://gyoshev.telerik.com/chef-prerequisites"
 
 function download([string]$url, [string]$filename) {
     if (!($PSBoundParameters.ContainsKey('filename'))) {
         $filename = $url.split("/")[-1].split("?")[0]
     }
 
-    $fullPath = "$home\Downloads\$filename"
+    $fullPath = $env:temp + "\$filename"
     if (!(test-path $fullPath)) {
         write-host "Downloading $filename..."
         $client = new-object System.Net.WebClient
@@ -38,7 +39,7 @@ function downloadAndInstall([string]$name, [string]$url, [string[]]$paramList, [
         if ($installer.split(".")[-1] = "exe") {
             start-process -FilePath $installer -ArgumentList $paramList -Wait
         } else {
-            $paramList = $("/i", $installer) + $paramList
+            $paramList = $("/package", $installer) + $paramList
             start-process -FilePath "msiexec" -ArgumentList $paramList -Wait
         }
     } else {
@@ -57,41 +58,29 @@ function unzip([string]$archive, [string]$destination) {
     return $exists
 }
 
-downloadAndInstall "git" "https://msysgit.googlecode.com/files/Git-1.8.3-preview20130601.exe" @(
-    "/sp-", "/verysilent", "/suppressmsgboxes",
-    "/noicons", "/type=default", "/components=assoc,assoc_sh",
-    "/closeapplications", "/restartapplications",
-    "/log=msysgit-install.log"
-)
-registerPath "C:\Program Files (x86)\Git\bin"
+if (!(installed("chef-solo"))) {
+    write-host "Bootstrapping node for chef-solo..."
 
-downloadAndInstall "ruby" "http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p448.exe" @(
-    "/sp-", "/verysilent", "/suppressmsgboxes",
-    "/noicons",
-    "/closeapplications", "/restartapplications",
-    "/log=ruby-install.log"
-)
-registerPath "C:\Ruby193\bin"
-
-downloadAndInstall "7z" "http://downloads.sourceforge.net/project/sevenzip/7-Zip/9.20/7z920.exe?r=&ts=1374160542&use_mirror=garr" @( "/S" )
-registerPath "C:\Program Files (x86)\7-Zip"
-
-$devkitDir = "C:\DevKit\"
-$devkit = download "https://github.com/downloads/oneclick/rubyinstaller/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe"
-if (!(unzip $devkit $devkitDir)) {
-    write-host "Installing the Ruby DevKit..."
-    cd $devkitDir
-    ruby dk.rb init
-    ruby dk.rb install
-}
-
-downloadAndInstall "java" "http://javadl.sun.com/webapps/download/AutoDL?BundleId=79063" @( "/s" ) "jre-7u25-windows-i586.exe"
-registerPath "C:\Program Files (x86)\Java\jre7\bin"
-
-if (!($jenkins_slave -eq $false)) {
-    $slaveJar = download "$jenkins_root/jnlpJars/slave.jar"
-    start-process -FilePath "java" -ArgumentList @(
-        "-jar", $slaveJar,
-        "-jnlpUrl", "$jenkins_root/computer/$jenkins_slave/slave-agent.jnlp"
+    downloadAndInstall "ruby" "$download_root/rubyinstaller-1.9.3-p448.exe" @(
+        "/sp-", "/verysilent", "/suppressmsgboxes",
+        "/noicons",
+        "/closeapplications", "/restartapplications",
+        "/log=ruby-install.log"
     )
+    registerPath "C:\Ruby193\bin"
+
+    downloadAndInstall "7z" "$download_root/7z920.exe" @( "/S" )
+    registerPath "C:\Program Files (x86)\7-Zip"
+
+    $devkitDir = "C:\DevKit\"
+    $devkit = download "$download_root/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe"
+    if (!(unzip $devkit $devkitDir)) {
+        write-host "Installing the Ruby DevKit..."
+        cd $devkitDir
+        ruby dk.rb init
+        ruby dk.rb install
+    }
+
+    downloadAndInstall "chef-solo" "$download_root/chef-client-11.6.0-1.windows.msi" @( "/quiet", "/norestart" ) "chef-11.6.msi"
+    registerPath "C:\opscode\chef\bin"
 }
