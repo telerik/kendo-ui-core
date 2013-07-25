@@ -130,7 +130,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
                                        "</script>\n" +
                                        "<style>\n" +
                                        "    html { font-size: " + currentMobile.size + " !important; }\n" +
-                                       "    body { overflow: hidden; }\n" +
+                                       "    body { overflow: hidden; height: 100% !important; }\n" +
                                        "</style>\n") ], { type: "text/html" }));
 
                 currentDevice = kendo.support.detectOS(currentMobile.ua);
