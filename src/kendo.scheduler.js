@@ -50,6 +50,7 @@ kendo_module({
         ADD = "add",
         EDIT = "edit",
         TODAY = getDate(new Date()),
+        RECURRENCE_EXCEPTION = "recurrenceException",
         RECURRENCE_DATE_FORMAT = "yyyyMMddTHHmmssZ",
         DELETECONFIRM = "Are you sure you want to delete this event?",
         DELETERECURRING = "Do you want to delete only this event occurrence or the whole series?",
@@ -469,55 +470,49 @@ kendo_module({
         },
 
         _removeExceptions: function(model) {
-            var dataSource = this,
-                data = dataSource.data(),
-                length = data.length,
-                idx = 0, dataItem,
+            var data = this.data().slice(0),
+                item = data.shift(),
                 id = model.id;
 
-            for (; idx < length; idx++) {
-                dataItem = data[idx];
-
-                if (dataItem.recurrenceId === id) {
-                    DataSource.fn.remove.call(this, dataItem);
-                    length -= 1;
-                    idx -= 1;
+            while(item) {
+                if (item.recurrenceId === id) {
+                    DataSource.fn.remove.call(this, item);
                 }
+
+                item = data.shift();
             }
 
-            model.set("recurrenceException", "");
+            model.set(RECURRENCE_EXCEPTION, "");
         },
 
-        //TODO: refactor
         _removeExceptionDate: function(model) {
-            var origin, exceptionDate, exception,
-            zone = model.startTimezone || model.endTimezone || this.reader.timezone,
-            start = model.start;
-
             if (model.recurrenceId) {
-                origin = this.get(model.recurrenceId);
-                start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
+                var head = this.get(model.recurrenceId);
 
-                if (origin) {
-                    exceptionDate = kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
-                    exception = origin.recurrenceException.replace(exceptionDate, "");
-                    origin.set("recurrenceException", exception);
+                if (head) {
+                    var start = model.start;
+
+                    start = kendo.timezone.convert(start, this.reader.timezone || start.getTimezoneOffset(), "Etc/UTC");
+
+                    var exceptionDate = kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
+
+                    head.set(RECURRENCE_EXCEPTION, head.recurrenceException.replace(exceptionDate, ""));
                 }
             }
         },
 
-        //TODO: refactor
         _addExceptionDate: function(model) {
-            var origin = this.get(model.recurrenceId),
-                zone = model.startTimezone || model.endTimezone || this.reader.timezone,
-                exception = origin.recurrenceException || "",
-                start = model.start;
+            var start = model.start;
+            var zone = this.reader.timezone;
+            var head = this.get(model.recurrenceId);
+            var recurrenceException = head.recurrenceException || "";
 
-            if (!recurrence.isException(exception, start, zone)) {
+            if (!recurrence.isException(recurrenceException, start, zone)) {
                 start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
-                exception += kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
 
-                origin.set("recurrenceException", exception);
+                recurrenceException += kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
+
+                head.set(RECURRENCE_EXCEPTION, recurrenceException);
             }
         }
     });
