@@ -7262,6 +7262,8 @@ kendo_module({
                 );
             }
 
+            result = SeriesBinder.current._resetFields(result);
+
             return result;
         },
 
@@ -9189,7 +9191,7 @@ kendo_module({
     var Aggregator = function(series) {
         var agg = this;
 
-        agg._series = SeriesBinder.current._resetFields(series);
+        agg._series = series;
 
         agg._initFields();
         agg._initAggregate();
