@@ -1675,7 +1675,6 @@ kendo_module({
             }
         },
 
-        //TODO: Test it
         occurrenceByUid: function(uid) {
             var occurrence = this.dataSource.getByUid(uid);
             if (!occurrence) {

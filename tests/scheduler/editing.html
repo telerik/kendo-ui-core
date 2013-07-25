@@ -66,6 +66,36 @@
                 );
             }
 
+            test("occurrenceByUid method returns event from dataSource", function() {
+                var date = kendo.date.today();
+                date.setHours(10);
+                var scheduler = setup({
+                    dataSource: {
+                        data: [ { id:1, recurrenceRule: "FREQ=DAILY;BYHOUR=10,12,14;", start: date, end: date, title: "my event" } ]
+                    }
+                });
+
+                var uid = scheduler.wrapper.find(".k-event:first").data("uid");
+
+                var occurrence = scheduler.occurrenceByUid(uid);
+                ok(occurrence);
+                ok(scheduler.dataSource.getByUid(uid));
+            });
+
+            test("occurrenceByUid method searches in scheduler._data events", function() {
+                var scheduler = setup({
+                    dataSource: {
+                        data: [ { id:1, recurrenceRule: "FREQ=DAILY;BYHOUR=10,12,14;", start: kendo.date.today(), end: kendo.date.today(), title: "my event" } ]
+                    }
+                });
+
+                var uid = scheduler.wrapper.find(".k-event:last").data("uid");
+
+                var occurrence = scheduler.occurrenceByUid(uid);
+                ok(occurrence);
+                ok(!scheduler.dataSource.getByUid(uid));
+            });
+
             test("adding model updates the view", function() {
                 var scheduler = setup(),
                     dataSource = scheduler.dataSource,
