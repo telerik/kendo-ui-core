@@ -745,28 +745,14 @@ kendo_module({
            return null;
        },
 
-       _createResizeHint: function(direction, startSlot, endSlot) {
-            var left = startSlot.offsetLeft;
+       _createResizeHint: function(range) {
+            var left = range.start.offsetLeft;
 
-            var top = startSlot.offsetTop;
+            var top = range.start.offsetTop;
 
-            var slots = this._row.slots;
+            var width = range.innerWidth();
 
-            var hintWidth = function(startIndex, endIndex) {
-                var result = 0;
-
-                for (var slotIndex = startIndex; slotIndex < endIndex; slotIndex++) {
-                    result += slots[slotIndex].offsetWidth;
-                }
-
-                result += slots[endIndex].clientWidth;
-
-                return result;
-            };
-
-            var width = hintWidth(startSlot.index, endSlot.index);
-
-            var height = startSlot.clientHeight - 2;
+            var height = range.start.clientHeight - 2;
 
             var hint = SchedulerView.fn._createResizeHint.call(this, left, top, width, height);
 
@@ -775,39 +761,15 @@ kendo_module({
             this._resizeHint = this._resizeHint.add(hint);
        },
 
-        _updateResizeHint: function(direction, startSlot, endSlot) {
-            var slots = this._row.slots;
-
-            var slotGroup = {
-               startSlot: startSlot,
-               endSlot: endSlot
-            };
-
-            var slotGroups = [slotGroup];
-
-            for (var slotIndex = startSlot.index; slotIndex <= endSlot.index; slotIndex++) {
-                var currentSlot = slots[slotIndex];
-
-                if (currentSlot.groupIndex != startSlot.groupIndex) {
-                    continue;
-                }
-
-                if (currentSlot.offsetTop > slotGroup.endSlot.offsetTop) {
-                    slotGroup = {
-                        startSlot: currentSlot,
-                        endSlot: currentSlot
-                    };
-                    slotGroups.push(slotGroup);
-                } else {
-                    slotGroup.endSlot = currentSlot;
-                }
-            }
-
+        _updateResizeHint: function(event, startSlot, endSlot) {
             this._removeResizeHint();
 
-            for (var groupIndex = 0; groupIndex < slotGroups.length; groupIndex++) {
-                slotGroup = slotGroups[groupIndex];
-                this._createResizeHint(direction, slotGroup.startSlot, slotGroup.endSlot);
+            var group = this.groups[endSlot.groupIndex];
+
+            var ranges = group.ranges(startSlot.start, endSlot.end, true, event.isAllDay);
+
+            for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
+                this._createResizeHint(ranges[rangeIndex]);
             }
 
             this._resizeHint.find(".k-label-top,.k-label-bottom").text("");

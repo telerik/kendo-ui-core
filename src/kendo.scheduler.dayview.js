@@ -160,98 +160,56 @@ kendo_module({
             return this._rows[slot.groupIndex].slots[slot.columnIndex];
        },
 
-       _updateResizeHint: function(direction, startSlot, endSlot) {
-            var vertical = direction == "south" || direction == "north";
+       _updateResizeHint: function(event, startSlot, endSlot) {
             var container = this.content;
-            var format;
 
-            var hintSize = function(slots, startIndex, endIndex, size) {
-                var result = 0;
+            var group = this.groups[endSlot.groupIndex];
 
-                for (var slotIndex = startIndex; slotIndex < endIndex; slotIndex++) {
-                    result += slots[slotIndex][size];
-                }
+            var multiday = group.multiday(event);
 
-                result += slots[endIndex][size];
+            var ranges = group.ranges(startSlot.start, endSlot.end, multiday, event.isAllDay);
 
-                return result;
-            };
+            // TODO: This should not be needed
+            if (multiday) {
+                ranges[0].end = endSlot;
+            }
 
             this._removeResizeHint();
 
-            if (vertical) {
-                startSlot = this._toDaySlot(startSlot);
+            for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
+                var range = ranges[rangeIndex];
+                var start = range.start;
 
-                endSlot = this._toDaySlot(endSlot);
+                var width = start.offsetWidth;
+                var height = start.clientHeight;
 
-                var slotGroups = [];
-
-                for (var columnIndex = startSlot.columnIndex; columnIndex <= endSlot.columnIndex; columnIndex++) {
-                    var slots = this._columns[columnIndex].slots;
-                    var firstIndex = 0;
-                    var lastIndex = slots.length - 1;
-
-                    if (this._isVerticallyGrouped()) {
-                        firstIndex = startSlot.groupIndex * this._rowCountInGroup();
-                        lastIndex = (startSlot.groupIndex + 1) * this._rowCountInGroup() - 1;
-                    }
-
-                    var first = slots[firstIndex];
-                    var last = slots[lastIndex];
-
-                    if (first.start < startSlot.start) {
-                        first = startSlot;
-                    }
-
-                    if (last.start > endSlot.start) {
-                        last = endSlot;
-                    }
-
-                    slotGroups.push( {
-                        startSlot: first,
-                        endSlot: last
-                    });
+                if (multiday) {
+                    width = range.innerWidth();
+                } else {
+                    height = range.innerHeight();
                 }
 
-                for (var groupIndex = 0; groupIndex < slotGroups.length; groupIndex++) {
-                    var slotGroup = slotGroups[groupIndex];
-                    startSlot = slotGroup.startSlot;
-                    endSlot = slotGroup.endSlot;
+                var hint = SchedulerView.fn._createResizeHint.call(this,
+                    start.offsetLeft,
+                    start.offsetTop,
+                    width,
+                    height
+                );
 
-                    var hint = SchedulerView.fn._createResizeHint.call(this,
-                        startSlot.offsetLeft,
-                        startSlot.offsetTop,
-                        startSlot.offsetWidth,
-                        hintSize(this._columns[startSlot.columnIndex].slots, startSlot.index, endSlot.index, "offsetHeight")
-                    );
+                this._resizeHint = this._resizeHint.add(hint);
+            }
 
-                    hint.appendTo(container);
+            var format = "t";
 
-                    this._resizeHint = this._resizeHint.add(hint);
-                }
-
-                format = "t";
-            } else {
-                startSlot = this._toAllDaySlot(startSlot);
-                endSlot = this._toAllDaySlot(endSlot);
-
-                container = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day)");
-
+            if (multiday) {
+                format = "M/dd";
+                container = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day) > div");
                 if (!container.length) {
                     container = this.content;
                 }
-
-                this._resizeHint = SchedulerView.fn._createResizeHint.call(this,
-                    startSlot.offsetLeft,
-                    startSlot.offsetTop,
-                    hintSize(this._rows[0].slots, startSlot.columnIndex, endSlot.columnIndex, "offsetWidth"),
-                    startSlot.clientHeight
-                );
-
-                this._resizeHint.appendTo(container);
-
-                format = "M/dd";
             }
+
+            this._resizeHint.appendTo(container);
 
             this._resizeHint.find(".k-label-top,.k-label-bottom").text("");
 
@@ -465,7 +423,7 @@ kendo_module({
 
                         kendo.date.setTime(end, interval);
 
-                        collection.addSlot(new kendo.ui.scheduler.DaySlot({
+                        collection.addSlot(new kendo.ui.scheduler.TimeSlot({
                            clientWidth: cell.clientWidth,
                            clientHeight: cell.clientHeight,
                            offsetWidth: cell.offsetWidth,
@@ -1629,7 +1587,14 @@ kendo_module({
                                 var occurrence = extend({}, event, { start: start, end: end });
 
                                 if (this._isInTimeSlot(occurrence)) {
-                                    element = this._createEventElement(event, !isMultiDayEvent, range.head, range.tail);
+                                    var head = range.head;
+
+                                    // TODO : This should not be needed
+                                    if (getMilliseconds(event.end) === 0 && getMilliseconds(this.options.endTime) === 0) {
+                                        head = false;
+                                    }
+
+                                    element = this._createEventElement(event, !isMultiDayEvent, head, range.tail);
 
                                     this._positionEvent(occurrence, element, range);
 

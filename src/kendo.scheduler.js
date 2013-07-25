@@ -1062,29 +1062,29 @@ kendo_module({
                     var update = false;
 
                     if (dir == "south") {
-                        if (startSlot.groupIndex == slot.groupIndex && slot.end - event.start >= view._timeSlotInterval()) {
+                        if (slot instanceof kendo.ui.scheduler.TimeSlot && startSlot.groupIndex == slot.groupIndex && slot.end - event.start >= view._timeSlotInterval()) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "north") {
-                        if (endSlot.groupIndex == slot.groupIndex && event.end - slot.start >= view._timeSlotInterval()) {
+                        if (slot instanceof kendo.ui.scheduler.TimeSlot && endSlot.groupIndex == slot.groupIndex && event.end - slot.start >= view._timeSlotInterval()) {
                             startSlot = slot;
                             update = true;
                         }
                     } else if (dir == "east") {
-                        if (startSlot.groupIndex == slot.groupIndex && kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
+                        if (slot instanceof kendo.ui.scheduler.DaySlot && startSlot.groupIndex == slot.groupIndex && kendo.date.getDate(slot.end).getTime() >= kendo.date.getDate(event.start).getTime()) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "west") {
-                        if (endSlot.groupIndex == slot.groupIndex && kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
+                        if (slot instanceof kendo.ui.scheduler.DaySlot && endSlot.groupIndex == slot.groupIndex && kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.start).getTime()) {
                             startSlot = slot;
                             update = true;
                         }
                     }
 
                     if (update) {
-                        view._updateResizeHint(dir, startSlot, endSlot);
+                        view._updateResizeHint(event, startSlot, endSlot);
                     }
                 },
                 dragend: function(e) {
