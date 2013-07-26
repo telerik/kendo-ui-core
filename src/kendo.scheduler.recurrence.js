@@ -818,8 +818,7 @@ kendo_module({
     }
 
     function expand(event, start, end, zone) {
-        var eventEnd = event.end,
-            eventStart = event.start,
+        var eventStart = event.start,
             eventStartMS = eventStart.getTime(),
             eventStartTime = getMilliseconds(eventStart),
             rule = parseRule(event.recurrenceRule),
@@ -829,8 +828,7 @@ kendo_module({
             exceptionDates,
             count, freq,
             current = 1,
-            events = [],
-            offset;
+            events = [];
 
         exceptionDates = parseExceptions(event.recurrenceException, zone);
         startPeriod = start = new Date(start);
