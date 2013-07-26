@@ -5,7 +5,6 @@
 xfreerdp $* -d telerik.com \
     --plugin rdpdr --data disk:local:$(dirname $0) -- \
     --app --plugin rail --data "powershell.exe:%systemdrive:\
-        -noexit \
         cd \\ ;\
         remove-item '\\chef\\' -recurse -force ;\
         new-item -itemtype directory -path '\\chef\\' | out-null;\

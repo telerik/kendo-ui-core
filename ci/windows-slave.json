@@ -4,5 +4,6 @@
     "recipe[git]",
     "recipe[ruby]",
     "recipe[nodejs]",
+    "recipe[java]",
     "recipe[jenkins::slave]"
 ]}
