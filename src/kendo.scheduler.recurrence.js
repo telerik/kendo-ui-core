@@ -830,13 +830,13 @@ kendo_module({
             current = 1,
             events = [];
 
-        exceptionDates = parseExceptions(event.recurrenceException, zone);
-        startPeriod = start = new Date(start);
-        end = new Date(end);
-
         if (!rule) {
             return [event];
         }
+
+        exceptionDates = parseExceptions(event.recurrenceException, zone);
+        startPeriod = start = new Date(start);
+        end = new Date(end);
 
         freq = frequencies[rule.freq];
         count = rule.count;
@@ -868,8 +868,8 @@ kendo_module({
             start.setHours(hours, minutes, seconds, eventStart.getMilliseconds());
         }
 
-        rule._startTime = startTime = new Date(1980, 0, 1, hours, start.getMinutes(), start.getSeconds(), start.getMilliseconds());
         durationMS = event.duration();
+        rule._startTime = startTime = kendo.date.toInvariantTime(start);
 
         if (freq.setup) {
             freq.setup(rule, start, eventStart);

@@ -4,7 +4,7 @@
         each = $.each,
         proxy = $.proxy,
         isArray = $.isArray,
-        noop = $.noop,
+        noop = $.noop,        
         math = Math,
         Template,
         JSON = window.JSON || {},
@@ -3338,6 +3338,16 @@ function pad(number, digits, end) {
            return getDate(date).getTime() == today().getTime();
         }
 
+        function toInvariantTime(date) {
+            var staticDate = new Date(1980, 1, 1, 0, 0, 0);
+
+            if (date) {
+                setTime(staticDate, getMilliseconds(date));
+            }
+
+            return staticDate;
+        }
+
         return {
             adjustDST: adjustDST,
             dayOfWeek: dayOfWeek,
@@ -3357,6 +3367,7 @@ function pad(number, digits, end) {
             setTime: setTime,
             addDays: addDays,
             today: today,
+            toInvariantTime: toInvariantTime,
             firstDayOfMonth: firstDayOfMonth,
             lastDayOfMonth: lastDayOfMonth,
             getMilliseconds: getMilliseconds
