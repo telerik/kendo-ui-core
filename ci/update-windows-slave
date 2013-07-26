@@ -12,5 +12,6 @@ xfreerdp $* -d telerik.com \
         cd chef ;\
         .\\bootstrap.ps1 ;\
         chef-solo -c solo.rb -j windows-slave.json ;\
+        logoff ;\
     " -- \
     kendoiis.telerik.com

@@ -1,5 +1,7 @@
 case node["platform"]
 when "windows"
+    include_recipe "jenkins::setup_user"
+
     if ::Win32::Service.exists?("jenkins-slave") then
         service "jenkins-slave" do
             action [:stop]
@@ -23,6 +25,10 @@ when "windows"
 
     service "jenkins-slave" do
         action [:enable, :start]
+    end
+
+    execute "Set jenkins-slave user" do
+        command "sc.exe config jenkins-slave obj= .\\jenkins password= jenkins-slave"
     end
 else
     user "jenkins" do
