@@ -850,8 +850,8 @@ div.k-window-content
     vertical-align: top;
 }
 
-.k-tabstrip .k-content,
-.k-panelbar .k-tabstrip .k-content
+.k-tabstrip > .k-content,
+.k-panelbar .k-tabstrip > .k-content
 {
     position: static;
     border-style: solid;
@@ -861,17 +861,17 @@ div.k-window-content
     zoom: 1;
 }
 
-.k-tabstrip>.k-content
+.k-tabstrip > .k-content
 {
     display: none;
 }
 
-.k-tabstrip .k-content.km-scroll-wrapper
+.k-tabstrip > .k-content.km-scroll-wrapper
 {
     padding: 0;
 }
 
-.k-tabstrip .k-content > .km-scroll-container
+.k-tabstrip > .k-content > .km-scroll-container
 {
     padding: .3em .92em;
     .border-box;
