@@ -354,6 +354,7 @@ kendo_module({
                     var resourceInfo = that._resourceBySlot(slot);
 
                     that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.startDate(), end: slot.startDate() }, resourceInfo ) });
+
                     e.preventDefault();
                 });
             }
