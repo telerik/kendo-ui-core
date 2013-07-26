@@ -11,9 +11,12 @@
     <title>Kendo UI Demos</title>
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")"/>
     <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/content/shared/styles/telerik-navigation.css")" rel="stylesheet" />
     @Html.Partial("GoogleAnalytics")
 </head>
 <body class="overview">
+
+@Html.Partial("Telerik-Navigation")
 
 <div id="header">
     <div class="centerWrap floatWrap">
@@ -190,6 +193,7 @@
 @Html.Partial("Footer")
 
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="@Url.Content("~/content/shared/js/telerik-navigation.min.js")"></script>
 
 <script>
 

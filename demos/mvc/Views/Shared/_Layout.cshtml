@@ -9,6 +9,7 @@
     @foreach (string styleName in ViewBag.styles) {
     <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }
+    <link href="@Url.Content("~/content/shared/styles/telerik-navigation.css")" rel="stylesheet" />
     @if (ViewBag.Debug) {
     <script src="@Url.Content("~/content/shared/js/less.js")"></script>
     } else {
@@ -21,8 +22,10 @@
     <script src="@Url.Content("~/content/shared/js/examples.js?20121115")"></script>
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
     <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
+    <script src="@Url.Content("~/content/shared/js/telerik-navigation.min.js")"></script>
 </head>
 <body>
+    @Html.Partial("Telerik-Navigation")
     @Html.Partial("Header")
 
     <div class="demos-nav widgetGrid">
