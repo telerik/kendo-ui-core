@@ -679,7 +679,7 @@ kendo_module({
                 }
             });
 
-            if (zIndex == 10001 || originalZIndex < zIndex) {
+            if (!wrapper[0].style.zIndex || originalZIndex < zIndex) {
                 wrapper.css(ZINDEX, zIndex + 2);
             }
             that.element.find("> .k-overlay").remove();
