@@ -3030,7 +3030,7 @@ kendo_module({
                 axisName = series.axis,
                 axisRange = chart.valueAxisRanges[axisName];
 
-            if (isNumber(value)) {
+            if (isFinite(value) && value !== null) {
                 axisRange = chart.valueAxisRanges[axisName] =
                     axisRange || { min: MAX_VALUE, max: MIN_VALUE };
 

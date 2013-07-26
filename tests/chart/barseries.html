@@ -121,6 +121,13 @@
                     deepEqual(series.valueAxisRanges[undefined].max, positiveSeries.data[1]);
                 });
 
+                test("Reports correct range with string value", function() {
+                    setupBarChart(plotArea, { series: [{ data: ["1", "2", "3"] }] });
+
+                    deepEqual(series.valueAxisRanges[undefined].min, 1);
+                    deepEqual(series.valueAxisRanges[undefined].max, 3);
+                });
+
                 test("Reports number of categories", function() {
                     setupBarChart(plotArea, {series: [ positiveSeries ]});
                     equal(categoriesCount(series.options.series), positiveSeries.data.length);
@@ -211,6 +218,13 @@
 
                 test("Reports maximum value for default axis", function() {
                     deepEqual(series.valueAxisRanges[undefined].max, negativeSeries.data[0]);
+                });
+
+                test("Reports correct range with string value", function() {
+                    setupBarChart(plotArea, { series: [{ data: ["-1", "-2", "-3"] }] });
+
+                    deepEqual(series.valueAxisRanges[undefined].min, -3);
+                    deepEqual(series.valueAxisRanges[undefined].max, -1);
                 });
 
                 test("bar tops are aligned to category axis", function() {
