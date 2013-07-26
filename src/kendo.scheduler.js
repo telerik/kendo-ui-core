@@ -1100,10 +1100,10 @@ kendo_module({
                     } else if (dir == "north") {
                         start = startSlot.start;
                     } else if (dir == "east") {
-                        end = kendo.date.getDate(endSlot.end);
-
-                        if (!event.isAllDay) {
-                            end = kendo.date.addDays(end, 1);
+                        if (event.isAllDay) {
+                            end = kendo.date.getDate(endSlot.start);
+                        } else {
+                            end = kendo.date.getDate(endSlot.end);
                         }
                     } else if (dir == "west") {
                         start = new Date(startSlot.start.getTime());
@@ -1111,8 +1111,10 @@ kendo_module({
                         start.setMinutes(0);
                     }
 
-                    if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
-                        that._updateEvent(dir, event, { start: start, end: end });
+                    if (end.getTime() >= start.getTime()) {
+                        if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
+                            that._updateEvent(dir, event, { start: start, end: end });
+                        }
                     }
                 },
                 dragcancel: function() {

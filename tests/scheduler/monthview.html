@@ -284,7 +284,7 @@
                    new kendo.data.SchedulerEvent({ start: new Date(2013, 2, 16), end: new Date(2013, 2, 17), title: "multi day event" })
                ]);
 
-               equal(view.content.find(".k-event").length, 2);
+               equal(view.content.find(".k-event").length, 1);
            });
 
            test("clicking the cell link trigger navigate event", 2, function() {

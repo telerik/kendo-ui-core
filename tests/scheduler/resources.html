@@ -1077,9 +1077,10 @@
                 var view = scheduler.view();
 
                 var slotEvents = view.groups[1].getTimeSlotCollection(0).events();
+
                 equal(slotEvents.length, 1);
                 equal(slotEvents[0].start, 2);
-                equal(slotEvents[0].end, 4);
+                equal(slotEvents[0].end, 3);
             });
 
             test("double clicking the first all day slot triggers add event in day view with vertical orientation", 1, function() {

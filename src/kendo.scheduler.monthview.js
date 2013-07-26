@@ -353,7 +353,7 @@ kendo_module({
                     var slot = that._slotByPosition(offset.left, offset.top);
                     var resourceInfo = that._resourceBySlot(slot);
 
-                    that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.start, end: slot.end }, resourceInfo ) });
+                    that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.start, end: slot.start }, resourceInfo ) });
                     e.preventDefault();
                 });
             }
@@ -786,7 +786,10 @@ kendo_module({
                 }
 
                 for (var rowIndex = rowMultiplier*rowCount; rowIndex < (rowMultiplier+1) *rowCount; rowIndex++) {
-                    var collection = new kendo.ui.scheduler.SlotCollection();
+                    var collection = new kendo.ui.scheduler.SlotCollection({
+                        start: kendo.date.addDays(this.startDate(), cellCount),
+                        end: kendo.date.addDays(this.startDate(), cellCount + columnCount)
+                    });
 
                     var group = groups[groupIndex];
                     group.addDaySlotCollection(collection);
@@ -817,7 +820,7 @@ kendo_module({
                            offsetLeft: cell.offsetLeft,
                            eventCount: Math.floor((clientHeight - firstChildHeight) / (this.options.eventHeight + 3)),
                            start: start,
-                           end: start,
+                           end: kendo.date.addDays(start, 1),
                            element: cell,
                            isAllDay: true,
                            index: collection.count(),

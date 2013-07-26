@@ -143,11 +143,6 @@ kendo_module({
 
             var ranges = group.ranges(startSlot.start, endSlot.end, multiday, event.isAllDay);
 
-            // TODO: This should not be needed
-            if (multiday) {
-                ranges[0].end = endSlot;
-            }
-
             this._removeResizeHint();
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
@@ -466,7 +461,7 @@ kendo_module({
                        offsetTop: cell.offsetTop,
                        offsetLeft: cell.offsetLeft,
                        start: start,
-                       end: start,
+                       end: kendo.date.addDays(start, 1),
                        element: cell,
                        isAllDay: true,
                        index: collection.count(),
@@ -495,10 +490,16 @@ kendo_module({
                 });
 
                 for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-                    view.addTimeSlotCollection(new ui.scheduler.SlotCollection());
+                    view.addTimeSlotCollection(new ui.scheduler.SlotCollection({
+                        start: this._dates[columnIndex],
+                        end: kendo.date.addDays(this._dates[columnIndex], 1)
+                    }));
                 }
 
-                view.addDaySlotCollection(new ui.scheduler.SlotCollection());
+                view.addDaySlotCollection(new ui.scheduler.SlotCollection({
+                    start: this._dates[0],
+                    end: this._dates[this._dates.length - 1]
+                }));
 
                 groups.push(view);
             }
@@ -578,7 +579,7 @@ kendo_module({
                     var slot = that._slotByPosition(e.pageX, e.pageY);
                     var resourceInfo = that._resourceBySlot(slot);
 
-                    that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.end) }, resourceInfo) });
+                    that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.start) }, resourceInfo) });
 
                     e.preventDefault();
                 });
@@ -1313,11 +1314,6 @@ kendo_module({
 
                                 if (this._isInTimeSlot(occurrence)) {
                                     var head = range.head;
-
-                                    // TODO : This should not be needed
-                                    if (getMilliseconds(event.end) === 0 && getMilliseconds(this.options.endTime) === 0) {
-                                        head = false;
-                                    }
 
                                     element = this._createEventElement(event, !isMultiDayEvent, head, range.tail);
 
