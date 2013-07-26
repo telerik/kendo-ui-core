@@ -3059,7 +3059,8 @@ table.k-editor
 
 .k-webkit .k-editor-toolbar li,
 .k-ff .k-editor-toolbar li,
-.k-ie9 .k-editor-toolbar li
+.k-ie9 .k-editor-toolbar li,
+.k-ie10 .k-editor-toolbar li
 {
     display: inline-block;
     padding: .1em 0;
@@ -3183,6 +3184,14 @@ table.k-editor
     padding: 1px;
 }
 
+.k-editor .k-editor-toolbar .k-row-break
+{
+    display: block;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
 .k-button-group .k-tool-icon
 {
     border-style: solid;
@@ -3197,14 +3206,6 @@ table.k-editor
 .k-button-group .k-state-disabled
 {
     display: none;
-}
-
-.k-row-break
-{
-    display: block;
-    height: 0;
-    font-size: 0;
-    line-height: 0;
 }
 
 .k-button-group .k-state-hover,
