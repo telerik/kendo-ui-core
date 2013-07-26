@@ -1372,6 +1372,7 @@ kendo_module({
         },
 
         normalizeSelection: function(selection) {
+            return;
             var columns = this._columns,
                 columnIndex = this._dateSlotIndex(selection.start),
                 slotIndex = this._timeSlotIndex(selection.start),
@@ -1457,13 +1458,15 @@ kendo_module({
         },
 
         _selectCells: function(selection) {
-            var startDate = selection.start,
-                endDate = selection.end,
-                backwardSelection = startDate > endDate;
+            var element;
+            var start = selection.start;
+            var end = selection.end;
+            var isAllDay = selection.isAllDay;
+            var backwardSelection = start > end;
 
             if (backwardSelection) {
-                startDate = new Date(endDate);
-                endDate = new Date(selection.start);
+                start = new Date(end);
+                end = new Date(selection.start);
             }
 
             var that = this,
@@ -1493,81 +1496,77 @@ kendo_module({
                 }
             }
 
-            if (startRow < 0) {
-                startRow = 0;
-            }
+            var ranges = group.ranges(start, end, isAllDay, isAllDay);
 
-            if (endRow < 0 || (startCol === endCol && endRow < startRow)) {
-                endRow = startRow;
-            }
+            for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
+                var range = ranges[rangeIndex];
 
-            var dayLengthMS = Math.abs((getMilliseconds(this.endTime()) - getMilliseconds(this.startTime())) || MS_PER_DAY);
-            if (backwardSelection && Math.abs(endDate - startDate) > dayLengthMS) {
-                endRow += 1;
-            }
-
-            if (!verticallyGrouped) {
-                horizontalOffset = this._columnOffsetForResource(resources.length);
-                horizontalOffset = selection.groupIndex * horizontalOffset || 0;
-
-                startCol += horizontalOffset;
-                endCol += horizontalOffset;
-            } else {
-                verticalOffset = this._rowCountInGroup() || 0;
-                verticalOffset = selection.groupIndex * verticalOffset;
-
-                startRow += verticalOffset;
-                endRow += verticalOffset;
-            }
-
-            if (!selection.isAllDay) {
-                if (endDateTime === 0 && endDateTime === endTime && startCol !== endCol) {
-                    endCol -= 1;
-                    endRow = this._rowCountInGroup() + (this._rowCountInGroup() * selection.groupIndex) || columns[endCol].slots.length;
+                var dayLengthMS = Math.abs((getMilliseconds(this.endTime()) - getMilliseconds(this.startTime())) || MS_PER_DAY);
+                if (backwardSelection && Math.abs(endDate - startDate) > dayLengthMS) {
+                    endRow += 1;
                 }
 
-                end = endRow;
-                for (; startCol <= endCol; startCol++) {
-                    if (startCol === endCol) {
-                        end = endRow;
-                    } else if (endCol > startCol) {
-                        end = this._rowCountInGroup() + (this._rowCountInGroup() * selection.groupIndex) || columns[endCol].slots.length;
-                    }
+                var collection = range.collection;
 
-                    slots = columns[startCol].slots;
-                    if (startRow !== end) {
-                        end -= 1;
-                    }
+                for (var slotIndex = range.start.index; slotIndex <= range.end.index; slotIndex++) {
+                    var slot = collection.at(slotIndex);
 
-                    for (; startRow <= end; startRow++) {
-                        cell = slots[startRow].element;
-                        addSelectedState(cell);
-                        if (!firstCell) {
-                            firstCell = cell;
-                        }
-                    }
-
-                    startRow = 0 + verticalOffset;
-                }
-            } else {
-                var index = verticallyGrouped ? selection.groupIndex : 0;
-                slots = that._rows[index].slots;
-
-                for (; startCol <= endCol; startCol++) {
-                    if (slots[startCol].groupIndex === selection.groupIndex) {
-                        cell = slots[startCol].element;
-                        addSelectedState(cell);
-                    }
+                    element = slot.element;
+                    addSelectedState(element);
                 }
             }
 
-            cell = backwardSelection ? firstCell : cell;
-            if (cell) {
-                that._scrollTo(cell, that.content[0]);
+            if (backwardSelection) {
+                range = ranges[0];
+                element = range.start.element;
             }
+
+            this._scrollTo(element, this.content[0]);
         },
 
-        move: function(selection, key, shiftKey) {
+        move: function(selection, key, shift) {
+            var interval = this._timeSlotInterval();
+            var start = selection.start;
+            var end = selection.end;
+            var handled = false;
+
+            if (key === keys.UP || key === keys.DOWN) {
+                handled = true;
+                var direction = (key === keys.DOWN ? 1 : -1);
+
+                if (!shift) {
+                    if (Math.abs(end - start) > interval) {
+                        start = new Date(Math[key === keys.DOWN ? "max" : "min"](start, end));
+                        end = new Date(start);
+                    } else {
+                        setTime(start, direction * interval);
+                    }
+                }
+
+                setTime(end, direction * interval);
+            }
+
+            if (key === keys.RIGHT || key === keys.LEFT) {
+                handled = true;
+                var direction = (key === keys.RIGHT ? 1 : -1);
+
+                if (!shift) {
+                    setTime(start, direction * MS_PER_DAY);
+                }
+
+                setTime(end, direction * MS_PER_DAY);
+            }
+
+            if (handled) {
+                selection.events = [];
+                selection.start = start;
+                selection.end = end;
+            }
+
+            return handled;
+        },
+
+        /*move: function(selection, key, shiftKey) {
             var groupedResources = this.groupedResources,
                 interval = this._timeSlotInterval(),
                 start = new Date(selection.start),
@@ -1727,6 +1726,7 @@ kendo_module({
 
             return handled;
         },
+        */
 
         _firstSlot: function(date) {
             return this._columns[this._dateSlotIndex(date)].slots[0];

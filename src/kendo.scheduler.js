@@ -775,11 +775,11 @@ kendo_module({
             } else if (view.move(selection, key, shiftKey)) {
                 start = selection.start;
 
-                if (view.isInRange(start)) {
+                //if (view.isInRange(start)) {
                     view.select(selection);
-                } else {
-                    that.date(start);
-                }
+                //} else {
+                //    that.date(start);
+                //}
 
                 e.preventDefault();
             }
