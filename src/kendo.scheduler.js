@@ -349,6 +349,9 @@ kendo_module({
             var obj = kendo.data.Model.fn.toJSON.call(this);
             obj.uid = this.uid;
 
+            delete obj.startTime;
+            delete obj.endTime;
+
             return obj;
         },
 
@@ -1299,12 +1302,6 @@ kendo_module({
             if (container) {
                 model = that._modelForContainer(container);
 
-                model.startTime = that._startTime;
-                model.endTime = that._endTime;
-
-                delete that._startTime;
-                delete that._endTime;
-
                 that.dataSource.cancelChanges(model);
 
                 //TODO: handle the cancel in UI
@@ -1528,11 +1525,6 @@ kendo_module({
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 paramName = settings.paramName,
                 editableFields = [];
-
-            this._startTime = model.startTime;
-            this._endTime = model.endTime;
-            delete model.startTime;
-            delete model.endTime;
 
            if (template) {
                 if (typeof template === STRING) {

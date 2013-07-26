@@ -973,35 +973,6 @@
                 ok(scheduler.dataSource.at(0).recurrenceRule);
             });
 
-            test("editEvent deletes startTime and endTime", function() {
-                var scheduler = setup(),
-                    model = scheduler.dataSource.data()[0],
-                    uid = model.uid;
-
-                model.startTime = new Date();
-                model.endTime = new Date();
-
-                scheduler.editEvent(uid);
-
-                ok(!model.startTime);
-                ok(!model.endTime);
-            });
-
-            test("editEvent returns startTime and endTime on cancel button", function() {
-                var scheduler = setup(),
-                    model = scheduler.dataSource.data()[0],
-                    uid = model.uid;
-
-                model.startTime = new Date();
-                model.endTime = new Date();
-
-                scheduler.editEvent(uid);
-                scheduler._editContainer.data("kendoWindow").wrapper.find(".k-window-action").click();
-
-                ok(model.startTime);
-                ok(model.endTime);
-            });
-
             module("Timezone editing", {
                 setup: function() {
                     var scriptTag = $("script:last");
