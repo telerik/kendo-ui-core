@@ -1673,8 +1673,10 @@ kendo_module({
             if (model.isRecurring()) {
                 that._deleteRecurringDialog(model);
             } else {
-                that._confirmation(function() {
-                    that._removeEvent(model);
+                that._confirmation(function(cancel) {
+                    if (!cancel) {
+                        that._removeEvent(model);
+                    }
                 });
             }
         },
