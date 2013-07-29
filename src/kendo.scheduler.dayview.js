@@ -348,6 +348,8 @@ kendo_module({
                 rowCount = Math.floor(rowCount / groupCount);
             }
 
+            var dateOffset = 0;
+
             for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
                 var rowMultiplier = 0;
 
@@ -404,11 +406,17 @@ kendo_module({
                 tableRows = this.element.find(".k-scheduler-header-all-day tr");
             }
 
+            var dateOffset = 0;
+
             for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
                 var rowMultiplier = 0;
 
                 if (this._isVerticallyGrouped()) {
                     rowMultiplier = groupIndex;
+                }
+
+                if (this._isGroupedByDate() && groupIndex % this._columnCountInResourceView() === 0 && groupIndex > 0) {
+                    dateOffset++;
                 }
 
                 var group = this.groups[groupIndex];
@@ -431,7 +439,7 @@ kendo_module({
                         cellCount = 0;
                     }
 
-                    var start = kendo.date.addDays(this.startDate(), cellCount);
+                    var start = kendo.date.addDays(this.startDate(), cellCount + dateOffset);
 
                     var currentTime = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
 
@@ -447,6 +455,14 @@ kendo_module({
             var columnCount = this._columnCountInResourceView();
 
             this.groups = [];
+
+            var groupedByDate = this._isGroupedByDate();
+
+            if (groupedByDate) {
+                columnCount = 1;
+            }
+
+            var dateOffset = 0;
 
             for (var idx = 0; idx < groupCount; idx++) {
                 var view = this._addResourceView(idx);
@@ -806,6 +822,12 @@ kendo_module({
             this._footer();
 
             this.refreshLayout();
+
+            var resources = this.groupedResources;
+
+            if (resources.length && this._isGroupedByDate() && !this._isVerticallyGrouped()) {
+                this.columnLevels.push(new Array(this._columnCountForLevel(this.columnLevels.length - 1)));
+            }
 
             var allDayHeader = this.element.find(".k-scheduler-header-all-day td");
 
