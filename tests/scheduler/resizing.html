@@ -1382,7 +1382,7 @@
                 equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
             });
 
-            testSkip("east and west resizing is disabled when grouped by date", function() {
+            test("east and west resizing is disabled when grouped by date", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     startTime: new Date("2013/6/6 10:00"),
                     endTime: new Date("2013/6/6 12:00 PM"),

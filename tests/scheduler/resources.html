@@ -1355,7 +1355,7 @@
                 deepEqual(slot.end, new Date("2013/6/7 00:00"));
             });
 
-            testSkip("date header is at the top when group by date", function() {
+            test("date header is at the top when group by date", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -1380,7 +1380,7 @@
                 equal(view.datesHeader.find("tr:first th").text(), "Thu 6/06");
             });
 
-            testSkip("slots for the same date but in diffrent groups as correct start and end date set", function() {
+            test("slots for the same date but in diffrent groups as correct start and end date set", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -1415,7 +1415,7 @@
                 deepEqual(secondGroupSlots.last().end, new Date("2013/6/7 00:00"));
             });
 
-            testSkip("slots for the same date but in diffrent groups as correct start and end date set in week view", function() {
+            test("slots for the same date but in diffrent groups as correct start and end date set in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -1463,7 +1463,7 @@
                 deepEqual(secondDateSecondGroupSlots.last().end, new Date("2013/6/4 00:00"));
             });
 
-            testSkip("events on the different dates but in the same group are position correctly in week view", function() {
+            test("events on the different dates but in the same group are position correctly in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -1494,7 +1494,7 @@
                 equal(view.groups[2].getTimeSlotCollection(0).events()[0].start, 20);
             });
 
-            testSkip("event on diffrent dates from same group are position correctly", function() {
+            test("event on diffrent dates from same group are position correctly", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -1519,13 +1519,13 @@
 
                 var view = scheduler.view();
 
-                equal(view._columns[0].events.length, 1);
-                equal(view._columns[0].events[0].start, 20);
-                equal(view._columns[1].events.length, 1);
-                equal(view._columns[1].events[0].start, 20);
+                equal(view.groups[0].getTimeSlotCollection(0).events().length, 1);
+                equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 20);
+                equal(view.groups[1].getTimeSlotCollection(0).events().length, 1);
+                equal(view.groups[1].getTimeSlotCollection(0).events()[0].start, 20);
             });
 
-            testSkip("correct number of header are render when grouped by date in day view", function() {
+            test("correct number of header are render when grouped by date in day view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -1552,7 +1552,7 @@
                 equal(view.datesHeader.find("tr:last th").length, 2);
             });
 
-            testSkip("all day event is split in the correct slots when grouped by date in week view", function() {
+            test("all day event is split in the correct slots when grouped by date in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -1576,16 +1576,19 @@
 
                 var view = scheduler.view();
 
-                equal(view._rows[0].events.length, 3);
-                equal(view._rows[0].events[0].start, 0);
-                equal(view._rows[0].events[0].end, 0);
-                equal(view._rows[0].events[1].end, 2);
-                equal(view._rows[0].events[1].end, 2);
-                equal(view._rows[0].events[2].end, 4);
-                equal(view._rows[0].events[2].end, 4);
+                equal(view.groups[0].getDaySlotCollection(0).events().length, 1);
+
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].end, 0);
+
+                equal(view.groups[2].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[2].getDaySlotCollection(0).events()[0].end, 0);
+
+                equal(view.groups[4].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[4].getDaySlotCollection(0).events()[0].end, 0);
             });
 
-            testSkip("multiple day event (in the end of the week) is split in the correct slots when grouped by date in week view", function() {
+            test("multiple day event (in the end of the week) is split in the correct slots when grouped by date in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -1609,49 +1612,18 @@
 
                 var view = scheduler.view();
 
-                equal(view._rows[0].events.length, 3);
-                equal(view._rows[0].events[0].start, 8);
-                equal(view._rows[0].events[0].end, 8);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[2].end, 12);
-                equal(view._rows[0].events[2].end, 12);
+                equal(view.groups[8].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[8].getDaySlotCollection(0).events()[0].end, 0);
+
+                equal(view.groups[10].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[10].getDaySlotCollection(0).events()[0].end, 0);
+
+                equal(view.groups[12].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[12].getDaySlotCollection(0).events()[0].end, 0);
+
             });
 
-            testSkip("multiple day event (in the end of the week) is split in the correct slots when grouped by date in week view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [
-                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/8 11:00"), title: "Event 1", foo: 1 }
-                    ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-
-                equal(view._rows[0].events.length, 3);
-                equal(view._rows[0].events[0].start, 8);
-                equal(view._rows[0].events[0].end, 8);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[2].end, 12);
-                equal(view._rows[0].events[2].end, 12);
-            });
-
-            testSkip("one day event is split in the correct slots when grouped by date in week view", function() {
+            test("one day event is split in the correct slots when grouped by date in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -1675,11 +1647,11 @@
 
                 var view = scheduler.view();
 
-                equal(view._rows[0].events.length, 2);
-                equal(view._rows[0].events[0].start, 8);
-                equal(view._rows[0].events[0].end, 8);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[1].end, 10);
+                equal(view.groups[8].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[8].getDaySlotCollection(0).events()[0].end, 0);
+
+                equal(view.groups[10].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[10].getDaySlotCollection(0).events()[0].end, 0);
             });
 
             test("group index is set to the row slot with horizontal grouping in week view", function() {
@@ -1863,53 +1835,6 @@
 
                 equal(slots.first().groupIndex, 1);
                 equal(slots.last().groupIndex, 1);
-            });
-
-            testSkip("group index is set to the slot with horizontal grouping on date in week view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: ["date", "ResourceName", "ResourceName2"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        },
-                        {
-                            field: "bar",
-                            name: "ResourceName2",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-
-                    ],
-                    dataSource: [ ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-                equal(view._columns.length, 28);
-                equal(view._columns[0].slots[0].groupIndex, 0);
-                equal(view._columns[1].slots[0].groupIndex, 0);
-                equal(view._columns[2].slots[0].groupIndex, 0);
-                equal(view._columns[3].slots[0].groupIndex, 0);
-
-                equal(view._columns[4].slots[0].groupIndex, 1);
-                equal(view._columns[5].slots[0].groupIndex, 1);
-                equal(view._columns[6].slots[0].groupIndex, 1);
-                equal(view._columns[7].slots[0].groupIndex, 1);
-
-                equal(view._columns[8].slots[0].groupIndex, 2);
-                equal(view._columns[9].slots[0].groupIndex, 2);
-                equal(view._columns[10].slots[0].groupIndex, 2);
-                equal(view._columns[11].slots[0].groupIndex, 2);
             });
 
             test("double clicking a day view cell triggers add event with resources information with horizontal single grouping", 3, function() {
@@ -2209,7 +2134,7 @@
                 equal(view.groups[1].getTimeSlotCollection(0).events()[0].end, 47);
             });
 
-            testSkip("double clicking a week view cell triggers add event with resources information and horizontal grouped by date", 4, function() {
+            test("double clicking a week view cell triggers add event with resources information and horizontal grouped by date", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -2255,7 +2180,7 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
-            testSkip("double clicking a week view all day cell triggers add event with resources information and horizontal grouped by date", 4, function() {
+            test("double clicking a week view all day cell triggers add event with resources information and horizontal grouped by date", 4, function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
