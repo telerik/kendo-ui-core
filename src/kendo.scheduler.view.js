@@ -1033,10 +1033,10 @@ kendo_module({
     }
 
     function createRows(eventElements) {
-        return _createColumns(eventElements, true);
+        return _createColumns(eventElements);
     }
 
-    function _createColumns(eventElements, isHorizontal) {
+    function _createColumns(eventElements) {
         var columns = [];
 
         for (var idx = 0; idx < eventElements.length; idx++) {
@@ -1045,7 +1045,7 @@ kendo_module({
             var column = null;
 
             for (var j = 0, columnLength = columns.length; j < columnLength; j++) {
-                var endOverlaps = isHorizontal ? eventRange.start > columns[j].end : eventRange.start >= columns[j].end;
+                var endOverlaps = eventRange.start > columns[j].end;
 
                 if (eventRange.start < columns[j].start || endOverlaps) {
 
