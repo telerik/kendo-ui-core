@@ -11,7 +11,7 @@
                     return data || [];
                 },
                 model: {
-                    id: "Name",
+                    id: "name",
                     fields: {
                         name: { field: "Name" },
                         size: { field: "Size" },
