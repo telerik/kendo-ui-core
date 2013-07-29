@@ -1905,10 +1905,18 @@ kendo_module({
     function fieldNameFromModel(fields, name) {
         if (fields && !isEmptyObject(fields)) {
             var descriptor = fields[name];
+            var fieldName;
             if (isPlainObject(descriptor)) {
-                return descriptor.from || descriptor.field || name;
+                fieldName = descriptor.from || descriptor.field || name;
+            } else {
+                fieldName = fields[name] || name;
             }
-            return fields[name] || name;
+
+            if (isFunction(fieldName)) {
+                return name;
+            }
+
+            return fieldName;
         }
         return name;
     }

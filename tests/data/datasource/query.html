@@ -6,6 +6,7 @@
     <script src="../../kendo-test-helpers.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.data.js"></script>
+    <script src="../../../src/kendo.data.xml.js"></script>
     <link rel="stylesheet" href="../../qunit/qunit/qunit.css" type="text/css" />
     <body>
         <h1 id="qunit-header">QUnit example</h1>
@@ -507,6 +508,35 @@
                         model: {
                             fields: {
                                 bar: "foo"
+                            }
+                        }
+                    },
+                    serverSorting: true,
+                });
+
+                $.mockjax({
+                    url: "foo",
+                });
+
+                dataSource.sort({ field: "bar", dir: "asc" });
+            });
+
+            test("sort original field name is used if projection is set if xml is used", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.sort[0].field, "bar");
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    schema: {
+                        type: "xml",
+                        model: {
+                            fields: {
+                                bar: "bar/text()"
                             }
                         }
                     },
