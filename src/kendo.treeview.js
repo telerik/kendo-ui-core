@@ -125,7 +125,7 @@ kendo_module({
             $("<span class='k-checkbox' />").appendTo(wrapper).append(checkbox);
         }
 
-        if (!innerWrapper.length) {
+        if (!innerWrapper.length && wrapper.length) {
             innerWrapper = $("<span class='k-in' />").appendTo(wrapper)[0];
 
             // move all non-group content in the k-in container

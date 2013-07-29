@@ -350,6 +350,20 @@
                 delete window.flag;
             });
 
+            test("moving expanded items to childless items", function() {
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [] },
+                        { text: "bar", expanded: true, items: [] }
+                    ]
+                });
+
+                moveNode(treeviewObject, "foo", "bar");
+
+                equal(treeview.find(".k-item .k-item").length, 1);
+            });
+
             module("keyboard support", {
                 teardown: cleanArtifacts
             });
