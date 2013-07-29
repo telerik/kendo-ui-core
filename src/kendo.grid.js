@@ -1119,6 +1119,8 @@ kendo_module({
                 } else {
                     //Required for the MVC server wrapper delete button
                     that.wrapper.on(CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible button.k-grid-delete", function(e) {
+                        e.stopPropagation();
+
                         if (!that._confirmation()) {
                             e.preventDefault();
                         }
@@ -1734,7 +1736,7 @@ kendo_module({
                     return true;
                 }
             }
-            
+
             return false;
         },
 
@@ -3080,7 +3082,7 @@ kendo_module({
                 classesRegEx = /k-grouping-row|k-detail-row|k-group-footer/,
                 idx = tr.sectionRowIndex,
                 j, correctIdx;
-            
+
             correctIdx = idx;
 
             for (j = 0; j < idx; j++) {
