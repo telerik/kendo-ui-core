@@ -15,14 +15,14 @@
     } else {
     @Html.Partial("GoogleAnalytics")
     }
-    <link href="@Url.Content("~/content/shared/styles/examples.css?20121115")" rel="stylesheet" />
+    <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
     @foreach (string scriptName in ViewBag.scripts) {
     <script src="@Url.Script(scriptName)"></script>
     }
-    <script src="@Url.Content("~/content/shared/js/examples.js?20121115")"></script>
+    <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
     <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
-    <script src="@Url.Content("~/content/shared/js/telerik-navigation.min.js")"></script>
+    <script src="@Url.Content("~/content/shared/js/telerik-navigation.js")"></script>
 </head>
 <body>
     @Html.Partial("Telerik-Navigation")
