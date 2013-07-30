@@ -594,6 +594,11 @@ kendo_module({
         _positionEvent: function(slotRange, element) {
             var eventHeight = this.options.eventHeight;
             var startSlot = slotRange.start;
+
+            if (slotRange.start.offsetLeft > slotRange.end.offsetLeft) {
+               startSlot = slotRange.end;
+            }
+
             var startIndex = slotRange.start.index;
             var endIndex = slotRange.end.index;
             var eventCount = startSlot.eventCount;
@@ -669,6 +674,12 @@ kendo_module({
 
        _createResizeHint: function(range) {
             var left = range.start.offsetLeft;
+
+            if (left > range.end.offsetLeft) {
+                left = range.end.offsetLeft;
+            }
+
+            left = this._scrollbarOffset(left);
 
             var top = range.start.offsetTop;
 

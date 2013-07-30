@@ -11,8 +11,7 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
-        NS = ".kendoSchedulerView",
-        isRtl;
+        NS = ".kendoSchedulerView";
 
     function levels(values, key) {
         var result = [];
@@ -561,11 +560,21 @@ kendo_module({
         init: function(options) {
             $.extend(this, options);
         },
+
         collectionIndex: function() {
             return this.columnIndex;
         },
+
         refresh: function() {
             this.offsetTop = this.element.offsetTop;
+        },
+
+        offsetX: function(rtl, offset) {
+            if (rtl) {
+                return this.offsetLeft + offset;
+            } else {
+                return this.offsetLeft + offset;
+            }
         }
     });
 
@@ -586,7 +595,7 @@ kendo_module({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
             this._scrollbar = kendo.support.scrollbar();
-            isRtl = kendo.support.isRtl(element);
+            this._isRtl = kendo.support.isRtl(element);
             this._resizeHint = $();
             this._moveHint = $();
             this._cellId = kendo.guid();
@@ -608,6 +617,14 @@ kendo_module({
 
         isInRange: function(date) {
             return this.startDate() <= date && date <= this.endDate();
+        },
+
+        _scrollbarOffset: function(value) {
+            if (!this._isRtl) {
+                return value;
+            }
+
+            return this._scrollbarWidth + value;
         },
 
         _resourceValue: function(resource, item) {
@@ -779,7 +796,7 @@ kendo_module({
                 height = that.element.innerHeight(),
                 scrollbar = this._scrollbar,
                 headerHeight = 0,
-                paddingDirection = isRtl ? "left" : "right";
+                paddingDirection = this._isRtl ? "left" : "right";
 
             if (toolbar.length) {
                 height -= toolbar.outerHeight();
@@ -831,6 +848,8 @@ kendo_module({
             var contentDiv = that.content[0],
                 scrollbarWidth = !kendo.support.kineticScrollNeeded ? scrollbar : 0;
 
+            this._scrollbarWidth = 0;
+
             if (isSchedulerHeightSet(that.element)) { // set content height only if needed
                 if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
                     that.content.height(height);
@@ -845,9 +864,11 @@ kendo_module({
                 }
             }
 
+
             if (contentDiv.offsetWidth - contentDiv.clientWidth > 0) {
                 that.table.addClass("k-scrollbar-v");
                 that.datesHeader.css("padding-" + paddingDirection, scrollbarWidth - parseInt(that.datesHeader.children().css("border-" + paddingDirection + "-width"), 10));
+                this._scrollbarWidth = scrollbarWidth;
             }
             if (contentDiv.offsetHeight - contentDiv.clientHeight > 0 || contentDiv.clientHeight > that.content.children(".k-scheduler-table").height()) {
                 that.table.addClass("k-scrollbar-h");
