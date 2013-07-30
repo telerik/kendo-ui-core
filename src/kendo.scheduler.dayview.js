@@ -147,11 +147,7 @@ kendo_module({
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 var range = ranges[rangeIndex];
-                var start = range.start;
-
-                if (range.start.offsetLeft > range.end.offsetLeft) {
-                    start = range.end;
-                }
+                var start = range.startSlot();
 
                 var width = start.offsetWidth;
                 var height = start.clientHeight;
@@ -163,7 +159,7 @@ kendo_module({
                 }
 
                 var hint = SchedulerView.fn._createResizeHint.call(this,
-                    (this._isRtl && !multiday ? this._scrollbar : 0) + start.offsetLeft,
+                    this._scrollbarOffset(start.offsetLeft, multiday),
                     start.offsetTop,
                     width,
                     height
@@ -233,7 +229,7 @@ kendo_module({
                 };
 
                 if (this._isRtl) {
-                   css.left = startSlot.clientWidth * 0.1 + this._scrollbar + startSlot.offsetLeft + 2;
+                   css.left = startSlot.clientWidth * 0.1 + this._scrollbarOffset(startSlot.offsetLeft) + 2;
                 }
 
                 if (multiday) {
@@ -1122,15 +1118,11 @@ kendo_module({
 
             var eventHeight = this._allDayHeaderHeight;
 
-            var start = slotRange.start;
-
-            if (slotRange.start.offsetLeft > slotRange.end.offsetLeft) {
-                start = slotRange.end;
-            }
+            var start = slotRange.startSlot();
 
             element
                 .css({
-                    left: start.offsetLeft + leftOffset,
+                    left: this._scrollbarOffset(start.offsetLeft + leftOffset, true),
                     width: slotWidth - rightOffset
                 });
 
@@ -1184,7 +1176,7 @@ kendo_module({
 
                 for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
                     columnEvents[j].element[0].style.width = columnWidth - 4 + "px";
-                    columnEvents[j].element[0].style.left = (this._isRtl ? eventRightOffset + this._scrollbar : 0 ) + slotRange.start.offsetLeft + idx * columnWidth + 2 + "px";
+                    columnEvents[j].element[0].style.left = (this._isRtl ? this._scrollbarOffset(eventRightOffset) : 0) + slotRange.start.offsetLeft + idx * columnWidth + 2 + "px";
                 }
             }
         },

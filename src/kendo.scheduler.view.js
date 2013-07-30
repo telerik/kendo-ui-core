@@ -406,7 +406,7 @@ kendo_module({
         }
     });
 
-    kendo.ui.scheduler.TimeSlotRange = kendo.Class.extend({
+    kendo.ui.scheduler.SlotRange = kendo.Class.extend({
         init: function(options) {
             $.extend(this, options);
         },
@@ -433,18 +433,42 @@ kendo_module({
 
         addEvent: function(event) {
             this.events().push(event);
+        },
+
+        startSlot: function() {
+            if (this.start.offsetLeft > this.end.offsetLeft) {
+                return this.end;
+            }
+            return this.start;
+        },
+
+        endSlot: function() {
+            if (this.start.offsetLeft > this.end.offsetLeft) {
+                return this.start;
+            }
+            return this.end;
         }
     });
 
-    kendo.ui.scheduler.DaySlotRange = kendo.Class.extend({
-        init: function(options) {
-            $.extend(this, options);
-        },
+    kendo.ui.scheduler.TimeSlotRange = kendo.ui.scheduler.SlotRange.extend({
+        innerHeight: function() {
+            var collection = this.collection;
 
-        events: function () {
-            return this.collection.events();
-        },
+            var startIndex = this.start.index;
 
+            var endIndex = this.end.index;
+
+            var result = 0;
+
+            for (var slotIndex = startIndex; slotIndex <= endIndex; slotIndex++) {
+               result += collection.at(slotIndex).offsetHeight;
+            }
+
+            return result;
+        }
+    });
+
+    kendo.ui.scheduler.DaySlotRange = kendo.ui.scheduler.SlotRange.extend({
         innerWidth: function() {
             var collection = this.collection;
 
@@ -461,10 +485,6 @@ kendo_module({
             }
 
             return result;
-        },
-
-        addEvent: function(event) {
-            this.events().push(event);
         }
     });
 
@@ -619,8 +639,8 @@ kendo_module({
             return this.startDate() <= date && date <= this.endDate();
         },
 
-        _scrollbarOffset: function(value) {
-            if (!this._isRtl) {
+        _scrollbarOffset: function(value, multiday) {
+            if (!this._isRtl || (multiday && !this._isVerticallyGrouped())) {
                 return value;
             }
 

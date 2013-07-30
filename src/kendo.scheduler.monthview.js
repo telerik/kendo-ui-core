@@ -673,11 +673,7 @@ kendo_module({
        },
 
        _createResizeHint: function(range) {
-            var left = range.start.offsetLeft;
-
-            if (left > range.end.offsetLeft) {
-                left = range.end.offsetLeft;
-            }
+            var left = range.startSlot().offsetLeft;
 
             left = this._scrollbarOffset(left);
 
@@ -734,9 +730,9 @@ kendo_module({
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 var range = ranges[rangeIndex];
 
-                var startSlot = range.start;
+                var startSlot = range.startSlot();
 
-                var endSlot = range.end;
+                var endSlot = range.endSlot();
 
                 var hint = this._createEventElement($.extend({}, event, { head: range.head, tail: range.tail }));
 

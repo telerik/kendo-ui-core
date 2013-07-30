@@ -107,6 +107,35 @@
                 equalWithRound(event.offset().left, slots.eq(0).offset().left);
             });
 
+            test("all day events are positioned in vertically grouped day view", function() {
+                var scheduler = new Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:30"),
+                    group: {
+                        resources: [ "foo" ],
+                        orientation: "vertical"
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "foo1", value: 1, color: "red" },
+                                { text: "foo2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        new SchedulerEvent( { start: new Date("2013/6/6 12:00 AM"), end: new Date("2013/6/6 12:00 AM"), isAllDay: true, title: "", foo: 1 } )
+                    ]
+                });
+
+                var slots = div.find(".k-scheduler-header-all-day td");
+                var event = div.find(".k-event");
+
+                equalWithRound(event.outerWidth(), slots.eq(0).outerWidth());
+                equalWithRound(event.offset().left, slots.eq(0).offset().left);
+            });
+
             test("south resize hint positioning in day view", function() {
                 var scheduler = new Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -186,7 +215,6 @@
                 equalWithRound(event.last().outerWidth(), 2 * slots.last().outerWidth());
                 equalWithRound(event.last().offset().left, slots.last().offset().left);
             });
-
 
             test("events are positioned in month view", function() {
                 var scheduler = new Scheduler(div, {
@@ -270,6 +298,25 @@
                 equalWithRound(hint.offset().left, slots.eq(1).offset().left);
                 equalWithRound(hint.outerWidth(), 2 * slots.outerWidth());
             });
+
+            test("move hint multiple week event in month view", function() {
+                var scheduler = new Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    dataSource: [
+                        new SchedulerEvent( { start: new Date("2013/5/26 12:00 AM"), end: new Date("2013/6/6 12:00 AM"), title: "" } )
+                    ],
+                    views: ["month"]
+                });
+
+                var slots = div.find(".k-scheduler-content tr:eq(1) td");
+                var event = div.find(".k-event").first();
+
+                movestart(scheduler, event, event.offset());
+                move(scheduler, event, slots.last().offset());
+
+                var hint = div.find(".k-event-drag-hint:first");
+                equalWithRound(hint.offset().left, slots.last().offset().left);
+           });
 
 
             function movestart(scheduler, target, offset) {
