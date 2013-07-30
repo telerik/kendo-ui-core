@@ -747,8 +747,7 @@ kendo_module({
                 view = that.view(),
                 editable = view.options.editable,
                 selection = that._selection,
-                shiftKey = e.shiftKey,
-                start;
+                shiftKey = e.shiftKey;
 
             that._ctrlKey = e.ctrlKey;
             that._shiftKey = e.shiftKey;
@@ -773,13 +772,11 @@ kendo_module({
                 // switch to view 1-9
                 that.view(that._viewByIndex(key - 49));
             } else if (view.move(selection, key, shiftKey)) {
-                start = selection.start;
-
-                //if (view.isInRange(start)) {
+                if (view.isInRange(selection.start)) {
                     view.select(selection);
-                //} else {
-                //    that.date(start);
-                //}
+                } else {
+                    that.date(selection.start);
+                }
 
                 e.preventDefault();
             }

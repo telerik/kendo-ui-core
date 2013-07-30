@@ -38,7 +38,7 @@ kendo_module({
                 '{0}' +
                 '<span class="k-event-actions">' +
                     '#if (showDelete) {#' +
-                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
+                                            '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
                     '#}#' +
                     '# if(data.head || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-e"></span>' +

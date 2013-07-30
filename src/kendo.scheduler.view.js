@@ -376,6 +376,30 @@ kendo_module({
             return null;
         },
 
+        prevSlot: function(slot) {
+            if (!slot.isAllDay) {
+                var collectionIndex = slot.collectionIndex();
+                var collection = this._collection(collectionIndex);
+
+                slot = collection.at(slot.index - 1);
+
+                if (!slot) {
+                    collection = this._collection(0 /* groupIndex */, true);
+                    slot = collection.at(collectionIndex);
+                }
+            }
+
+            return slot;
+        },
+
+        nextSlot: function(slot) {
+            var collectionIndex = slot.isAllDay ? slot.index : slot.collectionIndex();
+            var collection = this._collection(collectionIndex, false);
+            var index = slot.isAllDay ? 0 : slot.index + 1;
+
+            return collection.at(index);
+        },
+
         _startSlot: function(time, collections, isAllDay) {
             var collection = this._startCollection(time, collections);
 
