@@ -577,14 +577,20 @@ kendo_module({
                 children = element.children,
                 root = element.getRoot(),
                 modelId = element.options.modelId,
+                id = element.options.id,
+                pool = IDPool.current,
                 i;
 
-            if (root && modelId) {
-                if (root.modelMap[modelId]) {
-                    IDPool.current.free(modelId);
-                }
+            if (id) {
+                pool.free(id);
+            }
 
-                root.modelMap[modelId] = undefined;
+            if (modelId) {
+                pool.free(modelId);
+
+                if (root && root.modelMap[modelId]) {
+                    root.modelMap[modelId] = undefined;
+                }
             }
 
             for (i = 0; i < children.length; i++) {
@@ -2273,16 +2279,19 @@ kendo_module({
 
         refresh: $.noop,
 
-        traverse: function(callback) {
+        destroy: function() {
             var element = this,
+                id = element.options.id,
                 children = element.children,
                 length,
                 i;
 
-            callback(element);
+            if (id) {
+                IDPool.current.free(id);
+            }
 
             for (i = 0, length = children.length; i < length; i++) {
-                children[i].traverse(callback);
+                children[i].destroy();
             }
         },
 
@@ -2338,10 +2347,39 @@ kendo_module({
         },
 
         destroy: function() {
-            var animations = this.animations;
+            var view = this,
+                animations = view.animations,
+                viewElement = view._viewElement;
+
+            ViewElement.fn.destroy.call(this);
 
             while (animations.length > 0) {
                 animations.shift().destroy();
+            }
+
+            if (viewElement) {
+                view._freeIds(viewElement);
+                view._viewElement = null;
+            }
+        },
+
+        _freeIds: function(domElement) {
+            $("[id]", domElement).each(function() {
+                IDPool.current.free($(this).attr("id"));
+            });
+        },
+
+        replace: function(model) {
+            var view = this,
+                element = getElement(model.options.id);
+
+            if (element) {
+                view._freeIds(element);
+
+                element.parentNode.replaceChild(
+                    view.renderElement(model.getViewElements(view)[0]),
+                    element
+                );
             }
         },
 

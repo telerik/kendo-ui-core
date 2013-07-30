@@ -110,6 +110,8 @@ kendo_module({
 
             view.playAnimations();
 
+            view._viewElement = viewElement;
+
             return viewElement;
         },
 

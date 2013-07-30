@@ -1208,32 +1208,19 @@ kendo_module({
 
         _destroyView: function() {
             var chart = this,
-                pool = dataviz.IDPool.current,
                 model = chart._model,
                 view = chart._view,
-                viewElement = chart._viewElement,
                 selections = chart._selections;
 
             if (model) {
                 model.destroy();
+                chart._model = null;
             }
 
             if (view) {
-                view.traverse(function(element) {
-                    var id = element.options.id;
-                    if (id) {
-                        pool.free(id);
-                    }
-                });
                 view.destroy();
+                chart._view = null;
             }
-
-            if (viewElement) {
-                $("[id]", viewElement).each(function() {
-                    pool.free($(this).attr("id"));
-                });
-            }
-
 
             if (selections) {
                 while (selections.length > 0) {
@@ -6311,19 +6298,10 @@ kendo_module({
 
         refresh: function() {
             var pane = this,
-                view = pane.view,
-                element = getElement(pane.options.id);
+                view = pane.view;
 
             if (view) {
-                var content = pane.getViewElements(view)[0];
-                if (element) {
-                    element.parentNode.replaceChild(
-                        view.renderElement(content),
-                        element
-                    );
-                } else if (view.replace) {
-                    view.replace(content, pane.box);
-                }
+                view.replace(pane);
             }
         }
     });
@@ -6475,6 +6453,8 @@ kendo_module({
                 axis = plotArea.axes[i];
                 if (axisToRemove !== axis) {
                     filteredAxes.push(axis);
+                } else {
+                    axis.destroy();
                 }
             }
 
@@ -6501,6 +6481,8 @@ kendo_module({
                 chart = plotArea.charts[i];
                 if (chart !== chartToRemove) {
                     filteredCharts.push(chart);
+                } else {
+                    chart.destroy();
                 }
             }
 
