@@ -243,6 +243,14 @@
                 var chart = dom.data("kendoChart");
                 ok(!chart.options.series[0].data.length);
             });
+
+            test("initializes renderAs value", function() {
+                var dom = $('<div data-role="chart" data-render-as="canvas"/>');
+
+                kendo.bind(dom, {}, kendo.dataviz.ui);
+
+                equal(dom.data("kendoChart").options.renderAs, "canvas");
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

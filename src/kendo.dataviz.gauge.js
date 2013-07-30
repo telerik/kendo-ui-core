@@ -1222,6 +1222,7 @@ kendo_module({
         options: {
             plotArea: {},
             theme: "default",
+            renderAs: "",
             pointer: {},
             scale: {},
             gaugeArea: {}

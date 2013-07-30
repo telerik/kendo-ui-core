@@ -312,6 +312,7 @@ kendo_module({
 
         options: {
             name: "Chart",
+            renderAs: "",
             theme: "default",
             chartArea: {},
             legend: {

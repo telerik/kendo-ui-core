@@ -316,6 +316,23 @@
 
                 ok(radialgauge.wrapper.css("display") != "none", "lineargauge is not invisible");
             });
+
+            test("initializes renderAs value for the linear gauge", function() {
+                var dom = $('<div data-role="lineargauge" data-render-as="canvas"/>');
+
+                kendo.bind(dom, {}, kendo.dataviz.ui);
+
+                equal(dom.data("kendoLinearGauge").options.renderAs, "canvas");
+            });
+
+            test("initializes renderAs value for the radial gauge", function() {
+                var dom = $('<div data-role="radialgauge" data-render-as="canvas"/>');
+
+                kendo.bind(dom, {}, kendo.dataviz.ui);
+
+                equal(dom.data("kendoRadialGauge").options.renderAs, "canvas");
+            });
+
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
