@@ -725,7 +725,7 @@ kendo_module({
                 options = that.options,
                 target = $(kendo.eventTarget(e)),
                 nodeName = target[0] ? target[0].nodeName.toUpperCase() : "",
-                formNode = (nodeName == "INPUT" || nodeName == "SELECT" || nodeName == "BUTTON"),
+                formNode = (nodeName == "INPUT" || nodeName == "SELECT" || nodeName == "BUTTON" || nodeName == "LABEL"),
                 link = target.closest("." + LINK),
                 element = target.closest(allItemsSelector),
                 href = link.attr("href"), childGroup, childGroupVisible,
