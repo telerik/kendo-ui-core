@@ -114,6 +114,16 @@
                     });
                 });
 
+                test("selection extends to axis max", function() {
+                    setup({
+                        navigator: {
+                            select: { }
+                        }
+                    });
+
+                    deepEqual(sOpts.max, new Date("2012/01/11 00:00"));
+                });
+
                 // ------------------------------------------------------------
                 module("Selection / Event proxy", {
                     setup: function() {

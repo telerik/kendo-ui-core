@@ -328,8 +328,9 @@ kendo_module({
                 groups = axis.options.categories,
                 select = navi.options.select || {},
                 selection = navi.selection,
-                min = groups[0],
-                max = last(groups),
+                range = axis.range(),
+                min = range.min,
+                max = range.max,
                 from = select.from || min,
                 to = select.to || max;
 
@@ -358,8 +359,8 @@ kendo_module({
 
                 if (options.hint.visible) {
                     navi.hint = new NavigatorHint(chart.element, {
-                        min: groups[0],
-                        max: last(groups),
+                        min: min,
+                        max: max,
                         template: options.hint.template,
                         format: options.hint.format
                     });
