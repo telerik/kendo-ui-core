@@ -567,6 +567,29 @@
                 equal(dialog.wrapper.css("position"), "fixed");
             });
 
+            test("minimize() removes min-height", function() {
+                var dialog = createWindow({
+                        visible: true,
+                        animation: false
+                    });
+
+                dialog.minimize();
+
+                ok(!dialog.wrapper[0].style.minHeight);
+            });
+
+            test("restore() adds back min-height", function() {
+                var dialog = createWindow({
+                        visible: true,
+                        animation: false
+                    });
+
+                dialog.minimize();
+                dialog.restore();
+
+                ok(dialog.wrapper[0].style.minHeight);
+            });
+
             test("maximize() hides the pin/unpin icon", function() {
                 var dialog = createWindow({
                         visible: true,

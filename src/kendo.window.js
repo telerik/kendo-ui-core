@@ -712,17 +712,22 @@ kendo_module({
         },
 
         restore: function () {
-            var that = this,
-                options = that.options,
-                restoreOptions = that.restoreOptions;
+            var that = this;
+            var options = that.options;
+            var minHeight = options.minHeight;
+            var restoreOptions = that.restoreOptions;
 
             if (!options.isMaximized && !options.isMinimized) {
                 return;
             }
 
+            if (minHeight && minHeight != Infinity) {
+                that.wrapper.css("min-height", minHeight);
+            }
+
             that.wrapper
                 .css({
-                    position: that.options.pinned ? "fixed" : "absolute",
+                    position: options.pinned ? "fixed" : "absolute",
                     left: restoreOptions.left,
                     top: restoreOptions.top,
                     width: restoreOptions.width,
@@ -772,7 +777,11 @@ kendo_module({
         minimize: sizingAction("minimize", function() {
             var that = this;
 
-            that.wrapper.css("height", "");
+            that.wrapper.css({
+                height: "",
+                minHeight: ""
+            });
+
             that.element.hide();
 
             that.options.isMinimized = true;
