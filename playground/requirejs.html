@@ -18,13 +18,14 @@
 
     <script>//<![CDATA[
       require([ "jquery.min",
-                "kendo.menu.min",
+                "kendo.web.min",
                 "cultures/kendo.culture.fr.min" ],
         function(){
           $("#menu").kendoMenu({
-            select: function(e) {
-              alert("You clicked: " + $(e.item).text());
-            }
+            // select: function(e) {
+            //   alert("You clicked: " + $(e.item).text());
+            // },
+            select: "bug" // trigger error to check error reporting with source maps
           });
         });
     //]]></script>

@@ -23,7 +23,9 @@ demos/KendoCRUDService/KendoCRUDService/Content/UserFiles
 !src/docs
 !src/jquery.min.js
 src/**/*.min.js
+src/**/*.min.js.map
 src/*.min.js
+src/*.min.js.map
 src/kendo.all.js
 src/kendo.winjs.js
 src/kendo.dataviz.js

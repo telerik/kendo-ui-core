@@ -13,6 +13,7 @@ var ARGV = OPT
     .describe("overwrite", "Only for kendo-config, if specified the file will be overwritten")
     .describe("beautify", "Output indented code (helps debugging)")
     .describe("nomangle", "Don't mangle names (helps debugging)")
+    .describe("genmap", "Generate source maps")
     .boolean("amd").default("amd", true)
     .boolean("deps")
     .boolean("bundle")
@@ -20,6 +21,7 @@ var ARGV = OPT
     .boolean("overwrite")
     .boolean("beautify")
     .boolean("nomangle")
+    .boolean("genmap")
     .wrap(80)
     .argv;
 
@@ -79,7 +81,11 @@ if (ARGV.bundle) {
         toplevel.compute_char_frequency();
         toplevel.mangle_names();
     }
-    var codegen_options = {};
+    var source_map = u2.SourceMap({
+        file: path.basename(destination_min),
+        root: "../src/js/",     // for the bundles
+    });
+    var codegen_options = { source_map: source_map };
     if (ARGV["beautify"]) {
         codegen_options.beautify = true;
     }
@@ -93,7 +99,10 @@ if (ARGV.bundle) {
         }));
         toplevel = get_wrapper().wrap("kendo", [], toplevel);
     }
-    fs.writeFileSync(destination_min, toplevel.print_to_string(codegen_options));
+    var code = toplevel.print_to_string(codegen_options);
+    code += "\n//@ sourceMappingURL=" + path.basename(destination_min) + ".map";
+    fs.writeFileSync(destination_min, code);
+    fs.writeFileSync(destination_min + ".map", source_map.toString());
     process.exit(0);
 }
 
@@ -112,7 +121,7 @@ if (ARGV["kendo-config"]) {
     var components = [];
     js_files.forEach(function(filename){
         var code = fs.readFileSync(path.join(js_dir, filename), "utf8");
-        var ast = u2.parse(code, { filename: filename });
+        var ast = u2.parse(code, { filename: filename.replace(/^src\/+/, "") });
         ast = extract_deps(ast, filename);
         var c = ast.component;
         if (c) {
@@ -133,7 +142,7 @@ if (ARGV["kendo-config"]) {
 
 function compile_one_file(file, bundle) {
     var code = fs.readFileSync(file, "utf8");
-    var ast = u2.parse(code, { filename: file });
+    var ast = u2.parse(code, { filename: file.replace(/^src\/+/, "") });
     ast = extract_deps(ast, file);
     if (!ast.is_bundle && !bundle) {
         var deps = ast.deps;
@@ -183,7 +192,11 @@ files.forEach(function (file){
         ast.mangle_names();
     }
 
-    var codegen_options = {};
+    var source_map = u2.SourceMap({
+        file: path.basename(output),
+        root: "../src/js/",     // for the bundles
+    });
+    var codegen_options = { source_map: source_map };
     if (ARGV["beautify"]) {
         codegen_options.beautify = true;
     }
@@ -216,7 +229,9 @@ files.forEach(function (file){
     }
 
     code = ast.print_to_string(codegen_options);
+    code += "\n//@ sourceMappingURL=" + path.basename(output) + ".map";
     fs.writeFileSync(output, code);
+    fs.writeFileSync(output + ".map", source_map.toString());
 });
 
 function extract_widget_info(ast) {

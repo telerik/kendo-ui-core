@@ -123,6 +123,7 @@ WEB_JS = FileList[
 
 WEB_SRC_JS = FileList[WEB_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.web.js').exclude('**/*.min.js')
 WEB_MIN_JS = FileList[WEB_SRC_JS].ext('min.js').include('src/jquery.min.js')
+WEB_MIN_JS_MAP = FileList[WEB_SRC_JS].ext('min.js.map')
 
 DATAVIZ_JS = FileList[
     "src/kendo.core.js",
@@ -149,6 +150,7 @@ DATAVIZ_JS = FileList[
 
 DATAVIZ_SRC_JS = FileList[DATAVIZ_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.dataviz.js').exclude('**/*.min.js')
 DATAVIZ_MIN_JS = FileList[DATAVIZ_SRC_JS].ext('min.js').include('src/jquery.min.js')
+DATAVIZ_MIN_JS_MAP = FileList[DATAVIZ_SRC_JS].ext('min.js.map')
 
 MOBILE_JS = FileList[
     "src/kendo.core.js",
@@ -186,15 +188,21 @@ MOBILE_JS = FileList[
 
 MOBILE_SRC_JS = FileList[MOBILE_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.mobile.js').exclude('**/*.min.js')
 MOBILE_MIN_JS = FileList[MOBILE_SRC_JS].ext('min.js').include('src/jquery.min.js')
+MOBILE_MIN_JS_MAP = FileList[MOBILE_SRC_JS].ext('min.js.map')
 
 COMPLETE_MIN_JS = (WEB_MIN_JS + DATAVIZ_MIN_JS + MOBILE_MIN_JS).include('src/kendo.all.min.js').uniq
 COMPLETE_SRC_JS = (WEB_SRC_JS + DATAVIZ_SRC_JS + MOBILE_SRC_JS).include('src/kendo.all.js').uniq
+COMPLETE_MIN_JS_MAP = FileList[COMPLETE_SRC_JS].ext('min.js.map')
 
 MVC_MIN_JS = FileList[COMPLETE_MIN_JS].include('src/kendo.aspnetmvc.min.js')
 MVC_SRC_JS = FileList[COMPLETE_SRC_JS].include('src/kendo.aspnetmvc.js')
+MVC_MIN_JS_MAP = FileList[MVC_SRC_JS].ext('min.js.map')
 
 TRIAL_MIN_JS = FileList[MVC_MIN_JS]
 CDN_MIN_JS = FileList[MVC_MIN_JS]
+
+TRIAL_MIN_JS_MAP = FileList[MVC_MIN_JS_MAP]
+CDN_MIN_JS_MAP = FileList[MVC_MIN_JS_MAP]
 
 WIN_JS = FileList[
     "src/kendo.core.js",
@@ -251,9 +259,11 @@ WIN_JS = FileList[
 
 WIN_MIN_JS = FileList['src/kendo.winjs.min.js']
 WIN_SRC_JS = FileList['src/kendo.winjs.js']
+WIN_MIN_JS_MAP = FileList[WIN_SRC_JS].ext('min.js.map')
 
 ICENIUM_JS = (DATAVIZ_JS + MOBILE_JS).uniq
 ICENIUM_MIN_JS  = FileList['src/kendo.icenium.min.js'].include('src/jquery.min.js')
+ICENIUM_MIN_JS_MAP = FileList[ICENIUM_JS].ext('min.js.map')
 
 # file_merge "src/kendo.web.js" => WEB_JS
 # file "src/kendo.web.js" => JS_BUILDFILE
