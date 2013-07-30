@@ -350,6 +350,54 @@
                 equal(view.content.find("div.k-event").text(), "my event");
             });
 
+            test("title with quotes", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: '["my event"]' }];
+
+                view.render(events);
+
+                ok(view.content.find("div.k-event>div").attr("title").indexOf('["my event"]') > -1);
+            });
+
+            test("title with single quotes", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "['my event']" }];
+
+                view.render(events);
+
+                ok(view.content.find("div.k-event>div").attr("title").indexOf("['my event']") > -1);
+            });
+
+            test("all day event title with quotes", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+
+                var events = [{uid:"uid", start: new Date(2013, 1, 26, 0, 0, 0), end: new Date(2013, 1, 26, 0, 0, 0), isAllDay: true, title: '["my event"]' }];
+
+                view.render(events);
+
+                ok(view.element.find("div.k-event>div").attr("title").indexOf('["my event"]') > -1);
+            });
+
             test("get time slot index for date", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({

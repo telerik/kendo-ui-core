@@ -22,13 +22,13 @@ kendo_module({
         getMilliseconds = kendo.date.getMilliseconds,
         NS = ".kendoMultiDayView";
 
-    var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title#">' +
+    var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title.replace(/"/g,"&\\#34;")#">' +
                     '<dl>' +
                         '<dt>#=kendo.format("{0:t} - {1:t}", start, end)#</dt>' +
                         '<dd>${title}</dd>' +
                     '</dl>' +
                 '</div>'),
-        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t}", start)#): #=title#">' +
+        DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t}", start)#): #=title.replace(/"/g,"&\\#34;")#">' +
                     '<dl><dd>${title}</dd></dl>' +
                 '</div>'),
         DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),

@@ -51,7 +51,7 @@ kendo_module({
                 '<span class="k-resize-handle k-resize-e"></span>' +
                 '#}#' +
                 '</div>',
-        EVENT_TEMPLATE = kendo.template('<div title="#=title#">' +
+        EVENT_TEMPLATE = kendo.template('<div title="#=title.replace(/"/g,"&\\#34;")#">' +
                     '<dl><dd>#:title#</dd></dl>' +
                 '</div>');
 

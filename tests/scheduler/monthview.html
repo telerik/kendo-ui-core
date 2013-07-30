@@ -431,6 +431,38 @@
 
                 equalWithRound(view.content.find(".k-event").outerWidth(), 2 * removeDefaultHorizontalOffset(view.content.find("td").outerWidth()));
             });
+
+            test("title with quotes", function() {
+                var view = setup();
+
+                view.render([
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/28 12:00 AM"), end: new Date("2013/1/29 12:00 AM"),  isAllDay: true, title: '["my event"]' })
+                ]);
+
+                ok(view.content.find("div.k-event>div").attr("title").indexOf('["my event"]') > -1);
+            });
+
+            test("title with single quotes", function() {
+                var view = setup();
+
+                view.render([
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/28 12:00 AM"), end: new Date("2013/1/29 12:00 AM"),  isAllDay: true, title: "['my event']" })
+                ]);
+
+                ok(view.content.find("div.k-event>div").attr("title").indexOf("['my event']") > -1);
+            });
+
+            test("all day event title with quotes", function() {
+                var view = setup();
+
+                view.render([
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/28 12:00 AM"), end: new Date("2013/1/29 12:00 AM"),  isAllDay: true, title: '["my event"]' })
+                ]);
+
+                ok(view.element.find("div.k-event>div").attr("title").indexOf('["my event"]') > -1);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
