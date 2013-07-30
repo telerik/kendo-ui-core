@@ -1,7 +1,4 @@
-# Install ruby + ruby devkit + chef, if necessary
-
-$donwload_root = "http://gyoshev.telerik.com/chef-prerequisites"
-
+# Install chef
 function download([string]$url, [string]$filename) {
     if (!($PSBoundParameters.ContainsKey('filename'))) {
         $filename = $url.split("/")[-1].split("?")[0]
@@ -47,40 +44,5 @@ function downloadAndInstall([string]$name, [string]$url, [string[]]$paramList, [
     }
 }
 
-function unzip([string]$archive, [string]$destination) {
-    $exists = test-path $destination -pathType container
-    if (!($exists)) {
-        write-host "Unpacking $archive to $destination..."
-        start-process -FilePath "7z" -ArgumentList @("x", "-o$destination", $archive) -Wait
-    } else {
-        write-host "Destination directory $destination exists, skipping archive inflation"
-    }
-    return $exists
-}
-
-if (!(installed("chef-solo"))) {
-    write-host "Bootstrapping node for chef-solo..."
-
-    downloadAndInstall "ruby" "$download_root/rubyinstaller-1.9.3-p448.exe" @(
-        "/sp-", "/verysilent", "/suppressmsgboxes",
-        "/noicons",
-        "/closeapplications", "/restartapplications",
-        "/log=ruby-install.log"
-    )
-    registerPath "C:\Ruby193\bin"
-
-    downloadAndInstall "7z" "$download_root/7z920.exe" @( "/S" )
-    registerPath "C:\Program Files (x86)\7-Zip"
-
-    $devkitDir = "C:\DevKit\"
-    $devkit = download "$download_root/DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe"
-    if (!(unzip $devkit $devkitDir)) {
-        write-host "Installing the Ruby DevKit..."
-        cd $devkitDir
-        ruby dk.rb init
-        ruby dk.rb install
-    }
-
-    downloadAndInstall "chef-solo" "$download_root/chef-client-11.6.0-1.windows.msi" @( "/quiet", "/norestart" ) "chef-11.6.msi"
-    registerPath "C:\opscode\chef\bin"
-}
+downloadAndInstall "chef-solo" "http://opscode.com/chef/install.msi" @( "/quiet", "/norestart" ) "chef-install.msi"
+registerPath "C:\opscode\chef\bin"
