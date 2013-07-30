@@ -701,6 +701,22 @@
                     ok(dialog.wrapper.is(":visible"));
                 }, 100);
             });
+
+            test("setOptions can toggle draggable option", function() {
+                var dialog = createWindow();
+
+                dialog.setOptions({ draggable: true });
+
+                ok(dialog.dragging);
+
+
+                var draggingDestroy = stub(dialog.dragging, "destroy");
+
+                dialog.setOptions({ draggable: false });
+
+                ok(!dialog.dragging);
+                ok(draggingDestroy.calls("destroy"), 1);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

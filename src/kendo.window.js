@@ -222,9 +222,7 @@ kendo_module({
                 that.resizing = new WindowResizing(that);
             }
 
-            if (options.draggable) {
-                that.dragging = new WindowDragging(that, options.draggable.dragHandle || KWINDOWTITLEBAR);
-            }
+            this._draggable();
 
             id = element.attr("id");
             if (id) {
@@ -309,10 +307,22 @@ kendo_module({
             }
         },
 
+        _draggable: function() {
+            var draggable = this.options.draggable;
+
+            if (draggable) {
+                this.dragging = new WindowDragging(this, draggable.dragHandle || KWINDOWTITLEBAR);
+            } else if (this.dragging) {
+                this.dragging.destroy();
+                this.dragging = null;
+            }
+        },
+
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
             this._animations();
             this._dimensions();
+            this._draggable();
         },
 
         events:[
