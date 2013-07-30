@@ -9218,7 +9218,7 @@ kendo_module({
                 series = agg._series,
                 fields = agg._fields,
                 aggregate, i, field, fieldAggregate,
-                item = {}, filter, itemOptions = [];
+                item = {}, itemOptions = [];
 
             aggregate = series.aggregate || "max";
 
@@ -9230,13 +9230,10 @@ kendo_module({
                 field = item.field = fields[i];
                 fieldAggregate = aggregate[field];
                 if (fieldAggregate) {
-                    filter = true;
                     if (typeof fieldAggregate !== "function") {
                         fieldAggregate = Aggregates[fieldAggregate];
-                        filter = false;
                     }
                     item.aggregate = fieldAggregate;
-                    item.filter = filter;
                     itemOptions.push(item);
                 }
                 item = {};
@@ -9255,7 +9252,7 @@ kendo_module({
             for (i = 0; i < itemOptions.length; i++) {
                 item = itemOptions[i];
                 field = item.field;
-                values = agg.valuesByField(data, field, item.filter);
+                values = agg.valuesByField(data, field);
                 aggregate = item.aggregate;
                 aggregatedData[field] = aggregate(values, agg._series, dataItems, group);
 
@@ -9265,7 +9262,7 @@ kendo_module({
             return aggregatedData;
         },
 
-        valuesByField: function(data, field, filter) {
+        valuesByField: function(data, field) {
             var values = [],
                 count = (data || []).length,
                 i, item, value, valueFields;
@@ -9280,9 +9277,7 @@ kendo_module({
                     value = item.fields[field];
                 }
 
-                if (filter || (value !== null && isFinite(value))) {
-                    values.push(value);
-                }
+                values.push(value);
             }
 
             return values;
