@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>UI5.Chart Tests</title>
+        <title>kendo.stockChart</title>
         <script src="../jquery-loader.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
@@ -182,6 +182,38 @@
                         equal(chart.options.series[0].data.length, 1);
                         start();
                     }, 50);
+                });
+
+                test("roundToBaseUnit is set to true for equally sized series", function() {
+                    createStockChart({
+                        navigator: {
+                            series: [{
+                                type: "column"
+                            }]
+                        }
+                    });
+
+                    $.each(chart._plotArea.axes, function(i, a) {
+                        if (a instanceof dataviz.CategoryAxis && a.options.pane === "_navigator") {
+                            equal(a.options.roundToBaseUnit, true);
+                        }
+                    });
+                });
+
+                test("justified is set to false for equally sized series", function() {
+                    createStockChart({
+                        navigator: {
+                            series: [{
+                                type: "column"
+                            }]
+                        }
+                    });
+
+                    $.each(chart._plotArea.axes, function(i, a) {
+                        if (a instanceof dataviz.CategoryAxis && a.options.pane === "_navigator") {
+                            equal(a.options.justified, false);
+                        }
+                    });
                 });
 
                 // ------------------------------------------------------------

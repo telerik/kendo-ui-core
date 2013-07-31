@@ -190,6 +190,9 @@ kendo_module({
         ZOOM_END = "zoomEnd",
         BASE_UNITS = [
             SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
+        ],
+        EQUALLY_SPACED_SERIES = [
+            BAR, COLUMN, OHLC, CANDLESTICK, BULLET
         ];
 
     var DateLabelFormats = {
@@ -7403,9 +7406,7 @@ kendo_module({
 
         axisRequiresRounding: function(categoryAxisName, categoryAxisIndex) {
             var plotArea = this,
-                centeredSeries = filterSeriesByType(
-                    plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK, BULLET]
-                ),
+                centeredSeries = filterSeriesByType(plotArea.series, EQUALLY_SPACED_SERIES),
                 seriesIx,
                 seriesAxis;
 
@@ -9991,6 +9992,8 @@ kendo_module({
     );
 
     deepExtend(dataviz, {
+        EQUALLY_SPACED_SERIES: EQUALLY_SPACED_SERIES,
+
         Aggregates: Aggregates,
         AreaChart: AreaChart,
         AreaSegment: AreaSegment,

@@ -16,8 +16,9 @@ kendo_module({
         proxy = $.proxy,
 
         dataviz = kendo.dataviz,
-        template = kendo.template,
         defined = dataviz.defined,
+        filterSeriesByType = dataviz.filterSeriesByType,
+        template = kendo.template,
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
         addDuration = dataviz.addDuration,
@@ -36,6 +37,7 @@ kendo_module({
         DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
+        EQUALLY_SPACED_SERIES = dataviz.EQUALLY_SPACED_SERIES,
         ZOOM_ACCELERATION = 3,
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd";
@@ -633,16 +635,20 @@ kendo_module({
 
     Navigator.attachAxes = function(options, naviOptions) {
         var categoryAxes,
-            valueAxes;
+            valueAxes,
+            series = naviOptions.series || [];
 
         categoryAxes = options.categoryAxis = [].concat(options.categoryAxis);
         valueAxes = options.valueAxis = [].concat(options.valueAxis);
 
+        var equallySpacedSeries = filterSeriesByType(series, EQUALLY_SPACED_SERIES);
+        var justifyAxis = equallySpacedSeries.length === 0;
+
         var base = deepExtend({
             type: "date",
             pane: NAVIGATOR_PANE,
-            roundToBaseUnit: false,
-            justified: true,
+            roundToBaseUnit: !justifyAxis,
+            justified: justifyAxis,
             tooltip: { visible: false },
             labels: { step: 1 },
             autoBind: !naviOptions.dataSource,
@@ -700,7 +706,7 @@ kendo_module({
 
     Navigator.attachSeries = function(options, naviOptions, themeOptions) {
         var series = options.series = options.series || [],
-            navigatorSeries = [].concat(naviOptions.series),
+            navigatorSeries = [].concat(naviOptions.series || []),
             seriesColors = themeOptions.seriesColors,
             defaults = naviOptions.seriesDefaults,
             i;
