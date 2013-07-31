@@ -126,6 +126,12 @@ var ParagraphCommand = Command.extend({
 
             if (textNode) {
                 range.selectNodeContents(textNode);
+            } else {
+                while (next.childNodes.length && !dom.is(next.firstChild, "br")) {
+                    next = next.firstChild;
+                }
+
+                range.selectNodeContents(next);
             }
         }
 

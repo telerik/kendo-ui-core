@@ -364,6 +364,20 @@
             equal(editor.value(), '<p><strong></strong></p><p><strong><a></a>foo</strong></p>');
         });
 
+        test("paragraph at end of formatted text", function() {
+            editor.value('<p><strong>foo</strong></p>');
+
+            var range = editor.createRange();
+            range.setStart(editor.body.firstChild.firstChild.firstChild, 3);
+            range.collapse(true);
+
+            createParagraphCommand(range).exec();
+
+            insertCaretAnchor();
+
+            equal(editor.value(), '<p><strong>foo</strong></p><p><strong><a></a></strong></p>');
+        });
+
         test("paragraph discards preceding whitespace", function() {
             editor.value("<p>foo</p><p>    bar</p>");
 
