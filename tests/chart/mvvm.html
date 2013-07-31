@@ -251,6 +251,14 @@
 
                 equal(dom.data("kendoChart").options.renderAs, "canvas");
             });
+
+            test("initializes seriesColors", function() {
+                var dom = $('<div data-role="chart" data-series-colors="[\'red\']"/>');
+
+                kendo.bind(dom, {}, kendo.dataviz.ui);
+
+                deepEqual(dom.data("kendoChart").options.seriesColors, ["red"]);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

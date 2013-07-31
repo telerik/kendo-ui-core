@@ -248,6 +248,11 @@ kendo_module({
             resolveAxisAliases(options);
             chart._applyDefaults(options, themeOptions);
 
+            // Clean up default if not overriden by data attributes
+            if (options.seriesColors === null) {
+                options.seriesColors = undefined;
+            }
+
             chart.options = deepExtend({}, themeOptions, options);
             applySeriesColors(chart.options);
         },
@@ -333,6 +338,7 @@ kendo_module({
                 }
             },
             series: [],
+            seriesColors: null,
             tooltip: {
                 visible: false
             },
