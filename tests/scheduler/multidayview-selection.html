@@ -506,8 +506,8 @@
 
                 view.move(selection, keys.LEFT, true);
 
-                deepEqual(selection.start, new Date(2013, 6, 8, 10));
-                deepEqual(selection.end, new Date(2013, 6, 7, 10));
+                deepEqual(selection.start, new Date(2013, 6, 7, 10));
+                deepEqual(selection.end, new Date(2013, 6, 8, 10));
             });
 
             test("View moves selection with one slot on down arrow", function() {
@@ -965,6 +965,48 @@
                 deepEqual(selection.end, new Date(2013, 6, 7, 1));
             });
 
+            test("View selects initial slot after backward multiple selection", function() {
+                var view = setup({ dates: [new Date(2013, 6, 6), new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7),
+                    end: new Date(2013, 6, 7, 1)
+                });
+
+                var shiftKey = true;
+
+                view.move(selection, keys.LEFT, shiftKey);
+
+                deepEqual(selection.start, new Date(2013, 6, 6));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+
+                view.move(selection, keys.RIGHT, shiftKey);
+
+                ok(selection.backward);
+                deepEqual(selection.start, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+            });
+
+            test("View selects initial slot after forward multiple selection", function() {
+                var view = setup({ dates: [new Date(2013, 6, 6), new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 6),
+                    end: new Date(2013, 6, 6, 1)
+                });
+
+                var shiftKey = true;
+
+                view.move(selection, keys.RIGHT, shiftKey);
+
+                deepEqual(selection.start, new Date(2013, 6, 6));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+
+                view.move(selection, keys.LEFT, shiftKey);
+
+                ok(!selection.backward);
+                deepEqual(selection.start, new Date(2013, 6, 6));
+                deepEqual(selection.end, new Date(2013, 6, 6, 1));
+            });
+
             test("View selects two all day cells on backward selection", function() {
                 var view = setup({ dates: [new Date(2013, 6, 6), new Date(2013, 6, 7)] });
                 var selection = createSelection({
@@ -1017,6 +1059,54 @@
                 ok(selection.isAllDay);
                 deepEqual(selection.start, new Date(2013, 6, 6));
                 deepEqual(selection.end, new Date(2013, 6, 8));
+            });
+
+            test("View selects initial allDay cell after backward multiple selection", function() {
+                var view = setup({ dates: [new Date(2013, 6, 5), new Date(2013, 6, 6), new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 6),
+                    end: new Date(2013, 6, 7),
+                    isAllDay: true
+                });
+
+                var shiftKey = true;
+                view.move(selection, keys.LEFT, shiftKey);
+
+                ok(selection.isAllDay);
+                ok(selection.backward);
+                deepEqual(selection.start, new Date(2013, 6, 5));
+                deepEqual(selection.end, new Date(2013, 6, 7));
+
+                view.move(selection, keys.RIGHT, shiftKey);
+
+                ok(selection.isAllDay);
+                ok(selection.backward);
+                deepEqual(selection.start, new Date(2013, 6, 6));
+                deepEqual(selection.end, new Date(2013, 6, 7));
+            });
+
+            test("View selects initial allDay cell after forward multiple selection", function() {
+                var view = setup({ dates: [new Date(2013, 6, 5), new Date(2013, 6, 6), new Date(2013, 6, 7)] });
+                var selection = createSelection({
+                    start: new Date(2013, 6, 6),
+                    end: new Date(2013, 6, 7),
+                    isAllDay: true
+                });
+
+                var shiftKey = true;
+                view.move(selection, keys.RIGHT, shiftKey);
+
+                ok(selection.isAllDay);
+                ok(!selection.backward);
+                deepEqual(selection.start, new Date(2013, 6, 6));
+                deepEqual(selection.end, new Date(2013, 6, 8));
+
+                view.move(selection, keys.LEFT, shiftKey);
+
+                ok(selection.isAllDay);
+                ok(!selection.backward);
+                deepEqual(selection.start, new Date(2013, 6, 6));
+                deepEqual(selection.end, new Date(2013, 6, 7));
             });
 
             testSkip("View moveToEvent method returns true if find an event", function() {

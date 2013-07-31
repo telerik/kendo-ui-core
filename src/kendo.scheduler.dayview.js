@@ -1532,7 +1532,7 @@ kendo_module({
             var endSlot = group._slot(end, isAllDay, false, false).slot;
 
             if (key === keys.DOWN) {
-                if (shift && !isAllDay && startSlot.index === endSlot.index) {
+                if (shift && !isAllDay && startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
                     selection.backward = false;
                 }
 
@@ -1545,7 +1545,7 @@ kendo_module({
 
                 handled = true;
             } else if (key === keys.UP) {
-                if (shift && !isAllDay && startSlot.index === endSlot.index) {
+                if (shift && !isAllDay && startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
                     selection.backward = true;
                 }
 
@@ -1554,14 +1554,15 @@ kendo_module({
 
                 handled = true;
             } else if (key === keys.LEFT) {
-                var collectionIndex = isAllDay ? selection.groupIndex : startSlot.collectionIndex() - 1;
-                var collection = group._collection(collectionIndex, isAllDay /*multiday*/);
-
-                if (shift && startSlot.index === endSlot.index) {
+                if (shift && (isAllDay && startSlot.index === endSlot.index) || (!isAllDay && startSlot.collectionIndex() === endSlot.collectionIndex())) {
                     selection.backward = true;
                 }
 
-                if (collection && startSlot.index > 0) {
+                var slot = selection.backward ? startSlot : endSlot;
+                var collectionIndex = isAllDay ? selection.groupIndex : slot.collectionIndex() - 1;
+                var collection = group._collection(collectionIndex, isAllDay /*multiday*/);
+
+                if ((!isAllDay && collection) || (isAllDay && startSlot.index > 0)) {
                     if (isAllDay) {
                         startSlot = collection.at(startSlot.index - 1);
                         endSlot = collection.at(endSlot.index - 1);
@@ -1569,7 +1570,7 @@ kendo_module({
                         startSlot = collection.at(startSlot.index);
                         endSlot = collection.at(endSlot.index);
                     }
-                } else { //if (!shift) {
+                } else if (!shift) {
                     //TODO: Use this.previousDate()
                     setTime(startSlot.start, -MS_PER_DAY);
                     setTime(endSlot.end, -MS_PER_DAY);
@@ -1577,12 +1578,13 @@ kendo_module({
 
                 handled = true;
             } else if (key === keys.RIGHT) {
-                var collectionIndex = isAllDay ? selection.groupIndex : startSlot.collectionIndex() + 1;
-                var collection = group._collection(collectionIndex, isAllDay /*multiday*/);
-
-                if (shift && startSlot.index === endSlot.index) {
+                if (shift && (isAllDay && startSlot.index === endSlot.index) || (!isAllDay && startSlot.collectionIndex() === endSlot.collectionIndex())) {
                     selection.backward = false;
                 }
+
+                var slot = selection.backward ? startSlot : endSlot;
+                var collectionIndex = isAllDay ? selection.groupIndex : slot.collectionIndex() + 1;
+                var collection = group._collection(collectionIndex, isAllDay /*multiday*/);
 
                 if (collection && startSlot.index < collection.last().index) {
                     if (isAllDay) {
@@ -1592,7 +1594,7 @@ kendo_module({
                         startSlot = collection.at(startSlot.index);
                         endSlot = collection.at(endSlot.index);
                     }
-                } else {
+                } else if (!shift) {
                     //TODO: Use this.nextDate()
                     setTime(startSlot.start, MS_PER_DAY);
                     setTime(endSlot.end, MS_PER_DAY);
@@ -1604,6 +1606,7 @@ kendo_module({
             if (handled && startSlot && endSlot) {
 
                 if (shift) {
+                    console.log(selection.backward);
                     if (selection.backward) {
                         selection.start = startSlot.start;
                     } else {
