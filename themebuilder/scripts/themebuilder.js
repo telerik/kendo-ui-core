@@ -477,7 +477,11 @@
                 var w = "defaultView" in targetDocument ? targetDocument.defaultView : targetDocument.parentWindow;
 
                 this.source("json", function(theme) {
-                    w.kendo.dataviz.ui.registerTheme("newTheme", theme);
+					var dataviz = w.kendo.dataviz;
+					
+					if (dataviz && dataviz.ui && dataviz.ui.registerTheme) {
+						dataviz.ui.registerTheme("newTheme", theme);
+					}
                 });
 
                 function setTheme(selector, component) {

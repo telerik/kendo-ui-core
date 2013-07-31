@@ -66,6 +66,22 @@
 
                 collection.apply(document);
             });
+
+            test("apply does not depend on dataviz", 1, function() {
+                var json = new JsonConstants({
+                        constants: { "@foo": { value: "#ff0000" } }
+                    }),
+                    collection = new ThemeCollection([ json ]);
+					
+				var dataviz = kendo.dataviz;
+				try {
+					kendo.dataviz = null;
+					collection.apply(document);
+					ok(true);
+				} finally {
+					kendo.dataviz = dataviz;
+				}
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
