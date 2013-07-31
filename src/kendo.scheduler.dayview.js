@@ -1532,22 +1532,34 @@ kendo_module({
             var endSlot = group._slot(end, isAllDay, false, false).slot;
 
             if (key === keys.DOWN) {
+                if (shift && !isAllDay && startSlot.index === endSlot.index) {
+                    selection.backward = false;
+                }
+
                 if (isAllDay) {
                     endSlot = startSlot;
                 }
 
-                startSlot = group.nextSlot(startSlot);
-                endSlot = group.nextSlot(endSlot);
+                startSlot = group.nextSlot(startSlot, shift);
+                endSlot = group.nextSlot(endSlot, shift);
 
                 handled = true;
             } else if (key === keys.UP) {
-                startSlot = group.prevSlot(startSlot);
-                endSlot = group.prevSlot(endSlot);
+                if (shift && !isAllDay && startSlot.index === endSlot.index) {
+                    selection.backward = true;
+                }
+
+                startSlot = group.prevSlot(startSlot, shift);
+                endSlot = group.prevSlot(endSlot, shift);
 
                 handled = true;
             } else if (key === keys.LEFT) {
                 var collectionIndex = isAllDay ? selection.groupIndex : startSlot.collectionIndex() - 1;
                 var collection = group._collection(collectionIndex, isAllDay /*multiday*/);
+
+                if (shift && startSlot.index === endSlot.index) {
+                    selection.backward = true;
+                }
 
                 if (collection && startSlot.index > 0) {
                     if (isAllDay) {
@@ -1557,7 +1569,8 @@ kendo_module({
                         startSlot = collection.at(startSlot.index);
                         endSlot = collection.at(endSlot.index);
                     }
-                } else {
+                } else { //if (!shift) {
+                    //TODO: Use this.previousDate()
                     setTime(startSlot.start, -MS_PER_DAY);
                     setTime(endSlot.end, -MS_PER_DAY);
                 }
@@ -1566,6 +1579,10 @@ kendo_module({
             } else if (key === keys.RIGHT) {
                 var collectionIndex = isAllDay ? selection.groupIndex : startSlot.collectionIndex() + 1;
                 var collection = group._collection(collectionIndex, isAllDay /*multiday*/);
+
+                if (shift && startSlot.index === endSlot.index) {
+                    selection.backward = false;
+                }
 
                 if (collection && startSlot.index < collection.last().index) {
                     if (isAllDay) {
@@ -1576,6 +1593,7 @@ kendo_module({
                         endSlot = collection.at(endSlot.index);
                     }
                 } else {
+                    //TODO: Use this.nextDate()
                     setTime(startSlot.start, MS_PER_DAY);
                     setTime(endSlot.end, MS_PER_DAY);
                 }
@@ -1583,10 +1601,20 @@ kendo_module({
                 handled = true;
             }
 
-            if (startSlot && endSlot) {
-                selection.isAllDay = startSlot.isAllDay;
-                selection.start = startSlot.start;
-                selection.end = endSlot.end;
+            if (handled && startSlot && endSlot) {
+
+                if (shift) {
+                    if (selection.backward) {
+                        selection.start = startSlot.start;
+                    } else {
+                        selection.end = endSlot.end;
+                    }
+                } else {
+                    selection.isAllDay = startSlot.isAllDay;
+                    selection.start = startSlot.start;
+                    selection.end = endSlot.end;
+                }
+
                 selection.events = [];
             }
 

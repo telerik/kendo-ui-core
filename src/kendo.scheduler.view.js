@@ -376,14 +376,14 @@ kendo_module({
             return null;
         },
 
-        prevSlot: function(slot) {
+        prevSlot: function(slot, timeSlot) {
             if (!slot.isAllDay) {
                 var collectionIndex = slot.collectionIndex();
                 var collection = this._collection(collectionIndex);
 
                 slot = collection.at(slot.index - 1);
 
-                if (!slot) {
+                if (!slot && !timeSlot) {
                     collection = this._collection(0 /* groupIndex */, true);
                     slot = collection.at(collectionIndex);
                 }
@@ -392,7 +392,11 @@ kendo_module({
             return slot;
         },
 
-        nextSlot: function(slot) {
+        nextSlot: function(slot, daySlot) {
+            if (slot.isAllDay && daySlot) {
+                return slot;
+            }
+
             var collectionIndex = slot.isAllDay ? slot.index : slot.collectionIndex();
             var collection = this._collection(collectionIndex, false);
             var index = slot.isAllDay ? 0 : slot.index + 1;
