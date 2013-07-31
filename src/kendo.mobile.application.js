@@ -36,7 +36,7 @@ kendo_module({
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
-        HIDEBAR = (OS.device == "iphone" || OS.device == "ipod"),
+        HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.majorVersion < 7,
         BARCOMPENSATION = OS.browser == "mobilesafari" ? 60 : 0,
         WINDOW = $(window),
         HEAD = $("head"),
@@ -102,6 +102,7 @@ kendo_module({
 
             that.options = $.extend({
                 hideAddressBar: true,
+                useNativeScrolling: true,
                 transition: "",
                 updateDocumentTitle: true
             }, options);
@@ -245,6 +246,9 @@ kendo_module({
 
             element.parent().addClass("km-root km-" + (that.os.tablet ? "tablet" : "phone"));
             element.addClass(that.osCssClass + " " + getOrientationClass(element));
+            if (this.options.useNativeScrolling) {
+                element.parent().addClass("km-native-scrolling");
+            }
 
             if (support.wpDevicePixelRatio) {
                 element.parent().css("font-size", support.wpDevicePixelRatio + "em");
@@ -254,7 +258,7 @@ kendo_module({
                 applyViewportHeight();
             }
 
-            if (ENABLE_CLIP) {
+            if (ENABLE_CLIP && !this.options.useNativeScrolling) {
                 size = (window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight) + 100;
                 $(clipTemplate({ width: size, height: size })).appendTo(HEAD);
             }

@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.all.less">
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
@@ -22,17 +22,18 @@
         <script src="../../src/kendo.mobile.modalview.js"></script>
         <script src="../../src/kendo.mobile.tabstrip.js"></script>
     </head>
-    <body>
 
+    <body>
         <div data-role="view" data-title="My Application">
             <header data-role="header">
                 <div data-role="navbar">
                     <a data-role="backbutton" data-align="left">Back</a>
                     <span data-role="view-title"></span>
-                    <a data-role="button" data-icon="about" data-align="right"></a>
+                    <a data-role="button" data-icon="about" data-align="right" data-click="triggerScroll"></a>
                 </div>
             </header>
 
+            <ul data-role="listview" data-source="dummy" data-template="item-template"></ul>
             <footer data-role="footer">
                 <div data-role="tabstrip">
                     <a href="#" data-icon="home">Home</a>
@@ -43,8 +44,15 @@
             </footer>
         </div>
 
+        <script type="text/x-template" id="item-template">
+           <a>#: name #</a>
+        </script>
         <script>
-            new kendo.mobile.Application();
+            var dummy = [];
+            for (var i = 0; i < 200; i ++) {
+                dummy.push({ name: "Item " + i });
+            }
+            new kendo.mobile.Application(document.body, { platform: 'ios' });
         </script>
     </body>
 </html>

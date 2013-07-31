@@ -54,6 +54,8 @@ kendo_module({
 
             $.extend(that, options);
 
+            that.applicationNativeScrolling = mobile.application.options.useNativeScrolling;
+
             that._id();
             that._layout();
             that._scroller();
@@ -113,6 +115,7 @@ kendo_module({
             }
 
             that.trigger(SHOW, {view: that});
+            that._padIfNativeScrolling();
         },
 
         hideStart: function() {
@@ -137,11 +140,21 @@ kendo_module({
             this.switchWith(new ViewClone(this), transition, params, callback);
         },
 
+        _padIfNativeScrolling: function() {
+            if (this.applicationNativeScrolling) {
+                this.content.css({
+                    paddingTop: this.header.height(),
+                    paddingBottom: this.footer.height()
+                });
+            }
+        },
+
         switchWith: function(view, transition, params, callback) {
             var that = this,
                 paramsHistory = this._paramsHistory,
                 complete = function() {
                     that.trigger(AFTER_SHOW, {view: that});
+                    that._padIfNativeScrolling();
                     callback();
                 };
 
@@ -199,6 +212,9 @@ kendo_module({
         _scroller: function() {
             var that = this;
 
+            if (that.applicationNativeScrolling) {
+                return;
+            }
             if (that.options.stretch) {
                 that.content.addClass("km-stretched-view");
             } else {
