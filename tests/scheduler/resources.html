@@ -3707,6 +3707,60 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
+            test("grouping day view on a string value", 1, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    group: {
+                        resources: ["ResourceName"]
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: "foo1", color: "red" },
+                                { text: "Foo 2", value: "foo2", color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:00"), title: "foo", foo: "foo1" }
+                    ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                equal(div.find(".k-event").length, 1);
+            });
+
+            test("grouping month view on a string value", 1, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    group: {
+                        resources: ["ResourceName"]
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: "foo1", color: "red" },
+                                { text: "Foo 2", value: "foo2", color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:00"), title: "foo", foo: "foo1" }
+                    ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+
+                equal(div.find(".k-event").length, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

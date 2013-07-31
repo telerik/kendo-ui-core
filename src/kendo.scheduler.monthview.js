@@ -1007,7 +1007,7 @@ kendo_module({
                 for (var itemIdx = 0; itemIdx < view.length; itemIdx++) {
                     var value = resourceValue(resource, view[itemIdx]);
 
-                    var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: SchedulerView.groupEqFilter, value: value }).toArray();
+                    var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: SchedulerView.groupEqFilter(value) }).toArray();
 
                     if (resources.length > 1) {
                         offset = this._renderGroups(tmp, resources.slice(1), offset++, columnLevel + 1);

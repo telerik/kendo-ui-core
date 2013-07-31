@@ -637,16 +637,18 @@ kendo_module({
         return inner;
     }
 
-    function groupEqFilter(item, value) {
-        if ($.isArray(item)) {
-            for (var idx = 0; idx < item.length; idx++) {
-                if (item[idx] == value) {
-                    return true;
+    function groupEqFilter(value) {
+        return function(item) {
+            if ($.isArray(item)) {
+                for (var idx = 0; idx < item.length; idx++) {
+                    if (item[idx] == value) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            return item == value;
         }
-        return item == value;
     }
 
     $.extend(ui.SchedulerView, {
