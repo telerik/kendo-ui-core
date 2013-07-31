@@ -369,7 +369,7 @@ kendo_module({
             title: "Agenda",
             name: "agenda",
             selectedDateFormat: "{0:D}-{1:D}",
-            eventTemplate: '<div class="k-task" title="#:title#" data-#=kendo.ns#uid="#=uid#">' +
+            eventTemplate: '<div class="k-task" title="#:title.replace(/"/g,"\'")#" data-#=kendo.ns#uid="#=uid#">' +
                                '# if (resources[0]) {#' +
                                '<span class="k-scheduler-mark" style="background-color:#=resources[0].color#"></span>' +
                                "# } #" +
