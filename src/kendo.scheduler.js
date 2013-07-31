@@ -1843,7 +1843,7 @@ kendo_module({
         },
 
         _resize: function() {
-            this.refresh();
+            this.refresh({ action: "resize" });
         },
 
         _adjustSelectedDate: function() {
@@ -2124,7 +2124,9 @@ kendo_module({
 
             this.trigger("dataBinding");
 
-            this._destroyEditable();
+            if (!(e && e.action === "resize" && this.editable)) {
+                this._destroyEditable();
+            }
 
             this._data = this.dataSource.expand(view.startDate(), view.endDate());
 
