@@ -472,39 +472,13 @@ kendo_module({
 
         filterAxes: function() {
             var navi = this,
-                categories,
                 select = navi.options.select || {},
                 chart = navi.chart,
                 allAxes = chart.options.categoryAxis,
                 from = select.from,
                 to = select.to,
-                min,
-                max,
                 i,
                 axis;
-
-            for (i = 0; i < allAxes.length; i++) {
-                axis = allAxes[i];
-                if (axis.name === NAVIGATOR_AXIS) {
-                    categories = axis.categories;
-                    if (categories && categories.length > 0) {
-                        min = toTime(categories[0]);
-                        max = toTime(last(categories));
-
-                        from = toTime(from);
-                        if (from < min || from > max) {
-                            from = min;
-                        }
-
-                        to = toTime(to);
-                        if (to < min || to > max) {
-                            to = max;
-                        }
-
-                        break;
-                    }
-                }
-            }
 
             for (i = 0; i < allAxes.length; i++) {
                 axis = allAxes[i];
