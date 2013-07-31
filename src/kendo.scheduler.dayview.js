@@ -24,7 +24,7 @@ kendo_module({
 
     var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title.replace(/"/g,"&\\#34;")#">' +
                     '<dl>' +
-                        '<dt>#=kendo.format("{0:t} - {1:t}", start, end)#</dt>' +
+                        '<dt>#:kendo.format("{0:t} - {1:t}", start, end)#</dt>' +
                         '<dd>${title}</dd>' +
                     '</dl>' +
                 '</div>'),
