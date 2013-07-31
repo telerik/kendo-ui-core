@@ -9,6 +9,10 @@
       :type: String
       :description: Specifies the text displayed by the item
 
+    - :name: items.url
+      :type: String
+      :description: Specifies the URL that the item will link to. Used for navigational trees.
+
     - :name: items.imageUrl
       :type: String
       :description: Specifies the URL of the image displayed by the item
@@ -20,7 +24,7 @@
 
     - :name: items.enabled
       :type: Boolean
-      :description: Specifies whether the item is initially enabled
+      :description: Specifies whether the item is initially enabled. True by default.
 
     - :name: items.selected
       :type: Boolean

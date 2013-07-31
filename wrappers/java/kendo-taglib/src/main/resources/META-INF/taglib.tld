@@ -24309,7 +24309,7 @@ is expanded. Options include "expandVertical" and "fadeIn".</description>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>Specifies whether the item is initially enabled</description>
+            <description>Specifies whether the item is initially enabled. True by default.</description>
             <name>enabled</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -24341,6 +24341,12 @@ is expanded. Options include "expandVertical" and "fadeIn".</description>
         <attribute>
             <description>Specifies the text displayed by the item</description>
             <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the URL that the item will link to. Used for navigational trees.</description>
+            <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>

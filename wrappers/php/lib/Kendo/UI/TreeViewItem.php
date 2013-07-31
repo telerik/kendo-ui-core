@@ -23,6 +23,15 @@ class TreeViewItem extends \Kendo\UI\NavigationalItem {
     }
 
     /**
+    * Specifies the URL that the item will link to. Used for navigational trees.
+    * @param string $value
+    * @return \Kendo\UI\TreeViewItem
+    */
+    public function url($value) {
+        return $this->setProperty('url', $value);
+    }
+
+    /**
     * Specifies the URL of the image displayed by the item
     * @param string $value
     * @return \Kendo\UI\TreeViewItem
@@ -41,7 +50,7 @@ class TreeViewItem extends \Kendo\UI\NavigationalItem {
     }
 
     /**
-    * Specifies whether the item is initially enabled
+    * Specifies whether the item is initially enabled. True by default.
     * @param boolean $value
     * @return \Kendo\UI\TreeViewItem
     */
