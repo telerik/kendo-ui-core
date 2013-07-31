@@ -648,7 +648,7 @@ kendo_module({
                 return false;
             }
             return item == value;
-        }
+        };
     }
 
     $.extend(ui.SchedulerView, {
