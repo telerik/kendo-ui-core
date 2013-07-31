@@ -176,6 +176,15 @@ kendo_module({
         return Math.round(value * 100) / 100 + suffix;
     }
 
+    function fieldName(fields, name) {
+        var descriptor = fields[name];
+
+        if (isPlainObject(descriptor)) {
+            return descriptor.from || descriptor.field || name;
+        }
+        return descriptor;
+    }
+
     var ImageBrowser = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -372,6 +381,10 @@ kendo_module({
             this.createDirectory();
         },
 
+        _getFieldName: function(name) {
+            return fieldName(this.dataSource.reader.model.fields, name);
+        },
+
         _fileUpload: function(e) {
             var that = this,
                 options = that.options,
@@ -391,8 +404,8 @@ kendo_module({
                     e.preventDefault();
                 } else {
                     that.upload.one("success", function(e) {
-                        model.set(fileNameField, e.response[fileNameField]);
-                        model.set(sizeField, e.response[sizeField]);
+                        model.set(fileNameField, e.response[that._getFieldName(fileNameField)]);
+                        model.set(sizeField, e.response[that._getFieldName(sizeField)]);
                         that._tiles = that.listView.items().filter("[" + kendo.attr("type") + "=f]");
                         that._scroll();
                     });
