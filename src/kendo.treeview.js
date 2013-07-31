@@ -201,9 +201,7 @@ kendo_module({
 
             that._attachEvents();
 
-            if (options.dragAndDrop) {
-                that.dragging = new TreeViewDragAndDrop(that);
-            }
+            that._dragging();
 
             if (!inferred) {
                 if (options.autoBind) {
@@ -295,6 +293,18 @@ kendo_module({
             extend(animationOptions.collapse, { hide: true });
 
             options.animation = animationOptions;
+        },
+
+        _dragging: function() {
+            var enabled = this.options.dragAndDrop;
+            var dragging = this.dragging;
+
+            if (enabled && !dragging) {
+                this.dragging = new TreeViewDragAndDrop(this);
+            } else if (!enabled && dragging) {
+                dragging.destroy();
+                this.dragging = null;
+            }
         },
 
         _templates: function() {
@@ -595,17 +605,13 @@ kendo_module({
         },
 
         setOptions: function(options) {
-            var that = this;
+            Widget.fn.setOptions.call(this, options);
 
-            if (("dragAndDrop" in options) && options.dragAndDrop && !that.options.dragAndDrop) {
-                that.dragging = new TreeViewDragAndDrop(that);
-            }
+            this._animation();
 
-            Widget.fn.setOptions.call(that, options);
+            this._dragging();
 
-            that._animation();
-
-            that._templates();
+            this._templates();
         },
 
         _trigger: function (eventName, node) {
@@ -698,10 +704,9 @@ kendo_module({
         _checkboxChange: function(e) {
             var checkbox = $(e.target),
                 isChecked = checkbox.prop(CHECKED),
-                node = checkbox.closest(NODE),
-                that = this;
+                node = checkbox.closest(NODE);
 
-            that.dataItem(node).set(CHECKED, isChecked);
+            this.dataItem(node).set(CHECKED, isChecked);
         },
 
         _toggleButtonClick: function (e) {

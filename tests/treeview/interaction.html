@@ -1328,6 +1328,39 @@
                 equal(treeview.find(".k-item .k-item").length, 1);
             });
 
+            test("setOptions can disable dragAndDrop", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "bar" }
+                    ],
+                    dragAndDrop: true
+                });
+
+                treeviewObject.setOptions({ dragAndDrop: false });
+
+                moveNode(treeviewObject, "bar", "foo");
+
+                equal(treeview.find(".k-item .k-item").length, 0);
+            });
+
+            test("setOptions can enable a disabled dragAndDrop", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "bar" }
+                    ],
+                    dragAndDrop: true
+                });
+
+                treeviewObject.setOptions({ dragAndDrop: false });
+                treeviewObject.setOptions({ dragAndDrop: true });
+
+                moveNode(treeviewObject, "bar", "foo");
+
+                equal(treeview.find(".k-item .k-item").length, 1);
+            });
+
 
             module("drag & drop with load-on-demand", {
                 setup: function() {
