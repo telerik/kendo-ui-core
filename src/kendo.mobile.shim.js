@@ -72,6 +72,7 @@ kendo_module({
         },
 
         show: function() {
+            this.shim.css("height", this.shim.parent()[0].scrollHeight);
             this.popup.open();
         },
 
