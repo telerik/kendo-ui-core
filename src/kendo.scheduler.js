@@ -1809,19 +1809,21 @@ kendo_module({
         },
 
         _views: function() {
-            var views = this.options.views,
-                view,
-                defaultView,
-                selected,
-                isSettings,
-                name,
-                type,
-                idx,
-                length;
+            var views = this.options.views;
+            var view;
+            var defaultView;
+            var selected;
+            var isSettings;
+            var name;
+            var type;
+            var idx;
+            var length;
 
             this.views = {};
 
             for (idx = 0, length = views.length; idx < length; idx++) {
+                var hasType = false;
+
                 view = views[idx];
 
                 isSettings = isPlainObject(view);
@@ -1830,6 +1832,7 @@ kendo_module({
                     type = name = view.type ? view.type : view;
                     if (typeof type !== STRING) {
                         name = view.title;
+                        hasType = true;
                     }
                 } else {
                     type = name = view;
@@ -1837,7 +1840,7 @@ kendo_module({
 
                 defaultView = defaultViews[name];
 
-                if (defaultView) {
+                if (defaultView && !hasType) {
                     view.type = defaultView.type;
                     defaultView.title = this.options.messages.views[name];
                     if (defaultView.type === "day") {
