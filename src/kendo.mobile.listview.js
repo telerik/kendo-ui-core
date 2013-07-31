@@ -827,6 +827,13 @@ kendo_module({
                 allowSelection: true,
                 tap: function(e) {
                     listView._click(e);
+                },
+                // prevent the navigation when scrolled in this case
+                // in THEORY this should not break anything in the other mode, too - but let's not take any chances
+                end: function(e) {
+                    if (kendo.mobile.application.options.useNativeScrolling) {
+                        e.preventDefault();
+                    }
                 }
             });
 
