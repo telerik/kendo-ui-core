@@ -2167,7 +2167,7 @@ kendo_module({
                 to = range.max,
                 step;
 
-            if (options.categories.length > 0) {
+            if (range.min && range.max) {
                 while (rounds--) {
                     range = dateDiff(from, to);
                     step = math.round(range * 0.1);
@@ -2180,8 +2180,10 @@ kendo_module({
                     }
                 }
 
-                return { min: from, max: to };
+                range = { min: from, max: to };
             }
+
+            return range;
         },
 
         defaultBaseUnit: function(options) {
