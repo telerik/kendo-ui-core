@@ -21,8 +21,8 @@ kendo_module({
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
         addDuration = dataviz.addDuration,
-        duration = dataviz.duration,
         last = dataviz.last,
+        limitValue = dataviz.limitValue,
         lteDateIndex = dataviz.lteDateIndex,
         renderTemplate = dataviz.renderTemplate,
         toDate = dataviz.toDate,
@@ -393,13 +393,13 @@ kendo_module({
                 chart = navi.chart,
                 coords = chart._eventCoordinates(e.originalEvent),
                 navigatorAxis = navi.mainAxis(),
+                naviRange = navigatorAxis.range(),
                 inNavigator = navigatorAxis.pane.box.containsPoint(coords),
-                groups = navigatorAxis.options.categories,
                 axis = chart._plotArea.categoryAxis,
-                baseUnit = axis.options.baseUnit,
                 range = e.axisRanges[axis.options.name],
+                select = navi.options.select,
                 selection = navi.selection,
-                selectionDuration,
+                duration,
                 from,
                 to;
 
@@ -407,26 +407,20 @@ kendo_module({
                 return;
             }
 
-            if (axis.options.min && axis.options.max) {
-                selectionDuration = duration(
-                    axis.options.min, axis.options.max, baseUnit
-                );
+            if (select.from && select.to) {
+                duration = toTime(select.to) - toTime(select.from);
             } else {
-                selectionDuration = duration(
-                    selection.options.from, selection.options.to, baseUnit
-                );
+                duration = toTime(selection.options.to) - toTime(selection.options.from);
             }
 
-            from = toDate(math.min(
-                math.max(groups[0], range.min),
-                addDuration(
-                    dataviz.last(groups), -selectionDuration, baseUnit
-                )
+            from = toDate(limitValue(
+                toTime(range.min),
+                naviRange.min, toTime(naviRange.max) - duration
             ));
 
-            to = toDate(math.min(
-                addDuration(from, selectionDuration, baseUnit),
-                dataviz.last(groups)
+            to = toDate(limitValue(
+                toTime(from) + duration,
+                toTime(naviRange.min) + duration, naviRange.max
             ));
 
             navi.options.select = { from: from, to: to };
@@ -438,7 +432,7 @@ kendo_module({
 
             selection.set(
                 from,
-                addDuration(from, selectionDuration, baseUnit)
+                to
             );
 
             navi.showHint(from, to);
