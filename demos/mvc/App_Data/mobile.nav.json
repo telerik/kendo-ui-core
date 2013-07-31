@@ -282,7 +282,7 @@
                     "url": "scrollview/index.html",
                     "title": "Kendo UI Mobile ScrollView Example",
                     "meta": "This demo illustrates the intuitive scrolling on a touch device by using Kendo UI ScrollView widget in your HTML5 app."
-                }, 
+                },
                 {
                     "text": "Data binding",
                     "new": true,
@@ -380,7 +380,6 @@
         {
             "text": "Forms",
             "name": "forms",
-            "documentation": "mobile/forms",
             "spriteCssClass": "mobileAppIcon",
             "packages": ["!mvc"],
             "items": [
