@@ -121,6 +121,19 @@
                         }
                     });
 
+                    deepEqual(sOpts.max, new Date("2012/01/10 00:00"));
+                });
+
+                test("selection extends to axis max for non-justified series", function() {
+                    setup({
+                        navigator: {
+                            select: { },
+                            series: {
+                                type: "column"
+                            }
+                        }
+                    });
+
                     deepEqual(sOpts.max, new Date("2012/01/11 00:00"));
                 });
 

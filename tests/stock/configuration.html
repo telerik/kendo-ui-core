@@ -56,7 +56,11 @@
                 // ------------------------------------------------------------
                 module("Options / Date Field", {
                     setup: function() {
-                        createStockChart({ });
+                        createStockChart({
+                            navigator: {
+                                series: { }
+                            }
+                        });
                     },
                     teardown: destroyChart
                 });
@@ -66,7 +70,7 @@
                 });
 
                 test("dateField is applied as default categoryField", function() {
-                    createStockChart({ dateField: "d" });
+                    createStockChart({ dateField: "d", navigator: { series: { } } });
                     equal(chart.options.series[0].categoryField, "d");
                 });
 
@@ -74,6 +78,9 @@
                     createStockChart({
                         seriesDefaults: {
                             categoryField: "d"
+                        },
+                        navigator: {
+                            series: {}
                         }
                     });
                     equal(chart.options.series[0].categoryField, "d");
@@ -93,11 +100,11 @@
                                 data: [{
                                     Date: new Date("2012/09/01"),
                                     Volume: 100
-                                }],
-                                series: [{
-                                    field: "Volume"
                                 }]
-                            }
+                            },
+                            series: [{
+                                field: "Volume"
+                            }]
                         }
                     });
 
@@ -122,11 +129,11 @@
                                 data: [{
                                     Date: new Date("2012/09/01"),
                                     Volume: 100
-                                }],
-                                series: [{
-                                    field: "Volume"
                                 }]
-                            }
+                            },
+                            series: [{
+                                field: "Volume"
+                            }]
                         }
                     });
 
