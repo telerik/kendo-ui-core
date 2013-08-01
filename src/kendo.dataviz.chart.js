@@ -2110,6 +2110,8 @@ kendo_module({
                 }
 
                 axis.groupCategories(options);
+            } else {
+                options.baseUnit = options.baseUnit || DAYS;
             }
 
             CategoryAxis.fn.init.call(axis, options);

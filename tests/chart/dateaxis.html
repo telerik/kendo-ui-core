@@ -76,6 +76,12 @@
                     equal(dateAxis.options.baseUnit, "days");
                 });
 
+                test("Default base unit is days when no categories are defined", function() {
+                    createDateCategoryAxis();
+
+                    equal(dateAxis.options.baseUnit, "days");
+                });
+
                 test("Setting base unit to 'default' selects one based on minimum difference", function() {
                     createDateCategoryAxis({
                         categories: [
