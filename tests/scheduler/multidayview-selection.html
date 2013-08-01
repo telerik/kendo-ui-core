@@ -614,8 +614,8 @@
             test("View navigates from start to lower slot (multiple selection)", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
                     selection = createSelection({
-                        start: new Date(2013, 6, 8, 3, 0),
-                        end: new Date(2013, 6, 7, 2, 0)
+                        start: new Date(2013, 6, 7, 2, 0),
+                        end: new Date(2013, 6, 8, 3, 0)
                     });
 
                 view.move(selection, keys.DOWN);
