@@ -471,11 +471,9 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerBuilder<TModel> Editable(Action<SchedulerEditableSettingsBuilder> configurator)
+        public SchedulerBuilder<TModel> Editable(Action<SchedulerEditableSettingsBuilder<TModel>> configurator)
         {
-            Component.Editable = new SchedulerEditableSettings();
-
-            configurator(new SchedulerEditableSettingsBuilder(Component.Editable));
+            configurator(new SchedulerEditableSettingsBuilder<TModel>(Component.Editable));
 
             return this;
         }
@@ -499,10 +497,7 @@
         /// </example>
         public SchedulerBuilder<TModel> Editable(bool isEditable)
         {
-            Component.Editable = new SchedulerEditableSettings();
-
-            Component.Editable.Enable = isEditable;
-
+            Component.Editable.Enabled = isEditable;
             return this;
         }
 

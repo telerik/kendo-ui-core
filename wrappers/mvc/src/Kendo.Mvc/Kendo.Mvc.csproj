@@ -1016,6 +1016,7 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewMultiDayBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewWeekBuilder.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
+    <Compile Include="UI\Scheduler\SchedulerViewDataContainer.cs" />
     <Compile Include="UI\Scheduler\SchedulerGroupOrientation.cs" />
     <Compile Include="UI\Scheduler\SchedulerMessages.cs" />
     <Compile Include="UI\Scheduler\SchedulerModelDescriptor.cs" />

@@ -96,7 +96,7 @@
         {
             view.Editable = new SchedulerViewEditableSettings();
 
-            view.Editable.Enable = isEditable;
+            view.Editable.Enabled = isEditable;
 
             return this;
         }

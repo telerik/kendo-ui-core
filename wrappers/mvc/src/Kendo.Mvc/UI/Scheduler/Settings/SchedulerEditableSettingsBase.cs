@@ -6,7 +6,7 @@
     {
         protected SchedulerEditableSettingsBase()
         {
-            Create = Destroy = Update = Enable = true;
+            Create = Destroy = Update = Enabled = true;
         }
 
         public bool Create 
@@ -27,7 +27,7 @@
             set;
         }
 
-        public bool Enable
+        public bool Enabled
         {
             get;
             set;

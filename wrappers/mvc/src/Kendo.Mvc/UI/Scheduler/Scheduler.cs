@@ -5,6 +5,8 @@
     using System.IO;
     using System.Web.Mvc;
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Extensions;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// The server side wrapper for Kendo UI Scheduler
@@ -35,6 +37,7 @@
 
             Messages = new SchedulerMessages();
             Group = new SchedulerGroupSettings();
+            Editable = new SchedulerEditableSettings<TModel>();
         }
 
         public DataSource DataSource
@@ -170,7 +173,7 @@
             set;
         }
 
-        public SchedulerEditableSettings Editable
+        public SchedulerEditableSettings<TModel> Editable
         {
             get;
             set;
@@ -209,6 +212,8 @@
             base.WriteInitializationScript(writer);
         }
 
+        
+
         protected virtual IDictionary<string, object> SeriailzeBaseOptions()
         {
             var options = new Dictionary<string, object>(Events);
@@ -234,22 +239,21 @@
             {
                 options["height"] = Height;
             }
-
-            if (Editable != null)
+                        
+            if (Editable.Enabled == false)
             {
-                if (Editable.Enable == false)
-                {
-                    options["editable"] = false;
-                }
-                else
-                {
-                    IDictionary<string, object> editable = Editable.ToJson();
-                    if (editable.Count > 0)
-                    {
-                        options["editable"] = editable;
-                    }
-                }
+                options["editable"] = false;
             }
+            else
+            {
+                Editable.InitializeEditor(ViewContext, ViewData);
+
+                IDictionary<string, object> editable = Editable.ToJson();
+                if (editable.Count > 0)
+                {
+                    options["editable"] = editable;
+                }
+            }            
 
             if (!string.IsNullOrEmpty(EventTemplate))
             {

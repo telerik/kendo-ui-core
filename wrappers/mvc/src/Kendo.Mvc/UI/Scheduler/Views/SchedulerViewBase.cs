@@ -71,7 +71,7 @@
 
             if (Editable != null)
             {
-                if (Editable.Enable == false)
+                if (Editable.Enabled == false)
                 {
                     json["editable"] = false;
                 }
