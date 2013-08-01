@@ -1,4 +1,4 @@
-﻿kendo_module({
+kendo_module({
     id: "dataviz.barcode",
     name: "Barcode",
     category: "dataviz",
