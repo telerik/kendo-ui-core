@@ -1428,6 +1428,29 @@
                     }
                 });
 
+                test("translateRange with negative delta", function() {
+                    var range = dateAxis.translateRange(-400);
+                    deepEqual(range.min, new Date("2012/01/15"));
+                    deepEqual(range.max, new Date("2012/01/29"));
+                });
+
+                test("translateRange with positive delta", function() {
+                    var range = dateAxis.translateRange(400);
+                    deepEqual(range.min, new Date("2012/02/05"));
+                    deepEqual(range.max, new Date("2012/02/19"));
+                });
+
+                test("translateRange uses min/max when no categories are defined", function() {
+                    createDateCategoryAxis({
+                        min: new Date("2012/02/01"),
+                        max: new Date("2012/02/10")
+                    });
+
+                    var range = dateAxis.translateRange(-400);
+                    deepEqual(range.min, new Date("2012/01/26"));
+                    deepEqual(range.max, new Date("2012/02/04"));
+                });
+
                 test("scaleRange with negative delta shrinks range", function() {
                     var range = dateAxis.scaleRange(-2);
                     deepEqual(range.min, new Date("2012/01/25 22:04:48"));

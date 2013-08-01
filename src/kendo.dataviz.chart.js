@@ -2148,21 +2148,25 @@ kendo_module({
 
         translateRange: function(delta) {
             var axis = this,
-                range = CategoryAxis.fn.translateRange.call(axis, delta),
                 options = axis.options,
                 baseUnit = options.baseUnit,
-                offset = math.round(range.min),
-                weekStartDay = options.weekStartDay;
+                weekStartDay = options.weekStartDay,
+                lineBox = axis.lineBox(),
+                size = options.vertical ? lineBox.height() : lineBox.width(),
+                range = axis.range(),
+                scale = size / (range.max - range.min),
+                offset = round(delta / scale, DEFAULT_PRECISION),
+                from = addTicks(options.min || range.min, offset),
+                to = addTicks(options.max || range.max, offset);
 
             return {
-                min: addDuration(options.min, offset, baseUnit, weekStartDay),
-                max: addDuration(options.max, offset, baseUnit, weekStartDay)
+                min: addDuration(from, 0, baseUnit, weekStartDay),
+                max: addDuration(to, 0, baseUnit, weekStartDay)
             };
         },
 
         scaleRange: function(delta) {
             var axis = this,
-                options = axis.options,
                 rounds = math.abs(delta),
                 range = axis.range(),
                 from = range.min,
