@@ -1429,90 +1429,6 @@
                     });
                 });
 
-                test("max ignores NaN values", function() {
-                    createPlotArea([{
-                        type: "bar",
-                        data: [100, NaN, 300],
-                        aggregate: "max"
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
-                });
-
-                test("max ignores null values", function() {
-                    createPlotArea([{
-                        type: "bar",
-                        data: [100, null, 300],
-                        aggregate: "max"
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
-                });
-
-                test("min ignores NaN values", function() {
-                    createPlotArea([{
-                        type: "bar",
-                        data: [100, NaN, 300],
-                        aggregate: "min"
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    deepEqual(plotArea.series[0].data, [{ value: 100 }]);
-                });
-
-                test("min ignores null values", function() {
-                    createPlotArea([{
-                        type: "bar",
-                        data: [100, "undefined", 300],
-                        aggregate: "min"
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    deepEqual(plotArea.series[0].data, [{ value: 100 }]);
-                });
-
-                test("sum ignores NaN values", function() {
-                    createPlotArea([{
-                        type: "bar",
-                        data: [100, NaN, 300],
-                        aggregate: "sum"
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    deepEqual(plotArea.series[0].data, [{ value: 400 }]);
-                });
-
-                test("sum ignores null values", function() {
-                    createPlotArea([{
-                        type: "bar",
-                        data: [100, null, 300],
-                        aggregate: "sum"
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    deepEqual(plotArea.series[0].data, [{ value: 400 }]);
-                });
-
                 test("Aggregates bound series data", function() {
                     createPlotArea([{
                         type: "bar",
@@ -1561,6 +1477,57 @@
                     });
 
                     deepEqual(plotArea.series[0].data, [{ open: 200, high: 200, low: 200, close: 200 }]);
+                });
+
+                test("Does not change series fields", function() {
+                    createPlotArea([{
+                        type: "line",
+                        data: [{}, {}],
+                        field: "v"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    equal(plotArea.series[0].field, "v");
+                });
+
+                test("Binds to data items returned from aggregate (simple aggregate)", function() {
+                    createPlotArea([{
+                        type: "line",
+                        data: [{ v: 100 }, { v: 200 }],
+                        field: "v",
+                        aggregate: function() {
+                            return { v: 300 };
+                        }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ v: 300 }]);
+                });
+
+                test("Binds to data items returned from aggregate (compound aggregate)", function() {
+                    createPlotArea([{
+                        type: "candlestick",
+                        data: [{ o: 100, h: 100, l: 100, c: 100 }, { o: 200, h: 200, l: 200, c: 200 }],
+                        openField: "o",
+                        highField: "h",
+                        lowField: "l",
+                        closeField: "c",
+                        aggregate: function() {
+                            return { o: 300, h: 300, l: 300, c: 300 };
+                        }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ open: 300, high: 300, low: 300, close: 300 }]);
                 });
 
                 test("Aggregates series data with predefined function", function() {
@@ -1620,6 +1587,402 @@
                             baseUnit: "months"
                         }, dateCategoryAxis)
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Aggregates / max");
+
+                test("max ignores NaN values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, NaN, 300],
+                        aggregate: "max"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
+                });
+
+                test("max ignores null values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, null, 300],
+                        aggregate: "max"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
+                });
+
+                test("max ignores undefined values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, undefined, 300],
+                        aggregate: "max"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
+                });
+
+                test("max returns Infinity", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, Infinity, 300],
+                        aggregate: "max"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: Infinity }]);
+                });
+
+                test("max handles -Infinity", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, -Infinity, 300],
+                        aggregate: "max"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Aggregates / min");
+
+                test("min ignores NaN values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, NaN, 300],
+                        aggregate: "min"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }]);
+                });
+
+                test("min ignores null values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, null, 300],
+                        aggregate: "min"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }]);
+                });
+
+                test("min ignores undefined values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, undefined, 300],
+                        aggregate: "min"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }]);
+                });
+
+                test("min handles Infinity", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, Infinity, 300],
+                        aggregate: "min"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }]);
+                });
+
+                test("min returns -Infinity", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, -Infinity, 300],
+                        aggregate: "min"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: -Infinity }]);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Aggregates / sum");
+
+                test("sum ignores NaN values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, NaN, 300],
+                        aggregate: "sum"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 400 }]);
+                });
+
+                test("sum ignores null values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, null, 300],
+                        aggregate: "sum"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 400 }]);
+                });
+
+                test("sum ignores undefined values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, undefined, 300],
+                        aggregate: "sum"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 400 }]);
+                });
+
+                test("sum adds to Infinity", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, Infinity, 300],
+                        aggregate: "sum"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: Infinity }]);
+                });
+
+                test("sum adds to -Infinity", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, -Infinity, 300],
+                        aggregate: "sum"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: -Infinity }]);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Aggregates / count");
+
+                test("count ignores NaN values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, NaN, 300],
+                        aggregate: "count"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 2 }]);
+                });
+
+                test("count ignores null values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, null, 300],
+                        aggregate: "count"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 2 }]);
+                });
+
+                test("count ignores undefined values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, undefined, 300],
+                        aggregate: "count"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 2 }]);
+                });
+
+                test("count counts Infinity", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, Infinity, 300],
+                        aggregate: "count"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 3 }]);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Aggregates / avg");
+
+                test("avg ignores NaN values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, NaN, 300],
+                        aggregate: "avg"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 200 }]);
+                });
+
+                test("avg ignores null values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, null, 300],
+                        aggregate: "avg"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 200 }]);
+                });
+
+                test("avg ignores undefined values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, undefined, 300],
+                        aggregate: "avg"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 200 }]);
+                });
+
+                test("avg returns Infinity", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, Infinity, 300],
+                        aggregate: "avg"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: Infinity }]);
+                });
+
+                test("avg returns -Infinity", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [100, -Infinity, 300],
+                        aggregate: "avg"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: -Infinity }]);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Aggregates / first");
+
+                test("first ignores NaN values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [NaN, 300],
+                        aggregate: "first"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
+                });
+
+                test("first ignores null values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [null, 300],
+                        aggregate: "first"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
+                });
+
+                test("first ignores undefined values", function() {
+                    createPlotArea([{
+                        type: "bar",
+                        data: [undefined, 300],
+                        aggregate: "first"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
                 });
 
                 // ------------------------------------------------------------
