@@ -55,6 +55,19 @@ namespace Kendo.Mvc.UI.Tests
             GetJson().ContainsKey("border").ShouldBeFalse();
         }
 
+        [Fact]
+        public void Serializes_opacity()
+        {
+            plotArea.Opacity = 0.5;
+            GetJson()["opacity"].ShouldEqual(0.5);
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_opacity()
+        {
+            GetJson().ContainsKey("opacity").ShouldBeFalse();
+        }
+
         private IDictionary<string, object> GetJson()
         {
             return plotArea.CreateSerializer().Serialize();

@@ -19,6 +19,7 @@ namespace Kendo.Mvc.UI
             
             FluentDictionary.For(result)
                 .Add("background", plotArea.Background, () => plotArea.Background.HasValue())
+                .Add("opacity", plotArea.Opacity, () => plotArea.Opacity.HasValue)
                 .Add("margin", plotArea.Margin.CreateSerializer().Serialize(), ShouldSerializeMargin)
                 .Add("border", plotArea.Border.CreateSerializer().Serialize(), ShouldSerializeBorder);
 

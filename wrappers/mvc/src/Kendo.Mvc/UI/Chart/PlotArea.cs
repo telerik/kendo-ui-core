@@ -24,6 +24,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets the plot area opacity.
+        /// </summary>
+        /// <value>A value between 0 (transparent) and 1 (opaque).</value>
+        public double? Opacity
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the plot area border.
         /// </summary>
         /// <value>

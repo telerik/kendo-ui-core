@@ -59,5 +59,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Opacity_builder_should_configure_border()
+        {
+            builder.Opacity(0.5);
+            plotArea.Opacity.ShouldEqual(0.5);
+        }
+
+        [Fact]
+        public void Opacity_builder_should_return_builder()
+        {
+            builder.Opacity(0.5).ShouldBeSameAs(builder);
+        }
     }
 }

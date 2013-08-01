@@ -112,5 +112,27 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new ChartBorderBuilder(plotArea.Border));
             return this;
         }
+
+        /// <summary>
+        /// Sets the plot area opacity.
+        /// </summary>
+        /// <param name="opacity">
+        /// The plot area opacity in the range from 0 (transparent) to 1 (opaque).
+        /// The default value is 1.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .PlotArea(p => p.Background("green").Opacity(0.5))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public PlotAreaBuilder Opacity(double opacity)
+        {
+            plotArea.Opacity = opacity;
+
+            return this;
+        }
     }
 }
