@@ -2156,13 +2156,20 @@ kendo_module({
                 range = axis.range(),
                 scale = size / (range.max - range.min),
                 offset = round(delta / scale, DEFAULT_PRECISION),
-                from = addTicks(options.min || range.min, offset),
+                from,
+                to;
+
+            if (range.min && range.max) {
+                from = addTicks(options.min || range.min, offset);
                 to = addTicks(options.max || range.max, offset);
 
-            return {
-                min: addDuration(from, 0, baseUnit, weekStartDay),
-                max: addDuration(to, 0, baseUnit, weekStartDay)
-            };
+                range = {
+                    min: addDuration(from, 0, baseUnit, weekStartDay),
+                    max: addDuration(to, 0, baseUnit, weekStartDay)
+                };
+            }
+
+            return range;
         },
 
         scaleRange: function(delta) {

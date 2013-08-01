@@ -1451,6 +1451,13 @@
                     deepEqual(range.max, new Date("2012/02/04"));
                 });
 
+                test("translateRange with no categories and min/max", function() {
+                    createDateCategoryAxis();
+
+                    var range = dateAxis.translateRange(-400);
+                    deepEqual(range, dateAxis.range());
+                });
+
                 test("scaleRange with negative delta shrinks range", function() {
                     var range = dateAxis.scaleRange(-2);
                     deepEqual(range.min, new Date("2012/01/25 22:04:48"));
@@ -1473,6 +1480,14 @@
                     deepEqual(range.min, new Date("2012/02/02 19:12:00"));
                     deepEqual(range.max, new Date("2012/02/09 04:48:00"));
                 });
+
+                test("scaleRange with no categories and min/max", function() {
+                    createDateCategoryAxis();
+
+                    var range = dateAxis.scaleRange(-400);
+                    deepEqual(range, dateAxis.range());
+                });
+
             })();
 
             (function() {
