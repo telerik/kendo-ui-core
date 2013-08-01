@@ -94,7 +94,9 @@ namespace KendoCRUDService.Models
                     target.RecurrenceID = task.RecurrenceID;
                     target.OwnerID = task.OwnerID;
                     target.StartTimezone = task.StartTimezone;
-                    target.EndTimezone = task.EndTimezone;                    
+                    target.EndTimezone = task.EndTimezone;
+                    target.Start = task.Start;
+                    target.End = task.End;
                 }
             }
             else
