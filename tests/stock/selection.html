@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.chart</title>
+        <title>kendo.stockChart</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
@@ -112,6 +112,29 @@
                         setup();
                         navi.redraw();
                     });
+                });
+
+                test("selection extends to axis max", function() {
+                    setup({
+                        navigator: {
+                            select: { }
+                        }
+                    });
+
+                    deepEqual(sOpts.max, new Date("2012/01/10 00:00"));
+                });
+
+                test("selection extends to axis max for non-justified series", function() {
+                    setup({
+                        navigator: {
+                            select: { },
+                            series: {
+                                type: "column"
+                            }
+                        }
+                    });
+
+                    deepEqual(sOpts.max, new Date("2012/01/11 00:00"));
                 });
 
                 // ------------------------------------------------------------

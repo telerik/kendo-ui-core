@@ -190,6 +190,9 @@ kendo_module({
         ZOOM_END = "zoomEnd",
         BASE_UNITS = [
             SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
+        ],
+        EQUALLY_SPACED_SERIES = [
+            BAR, COLUMN, OHLC, CANDLESTICK, BULLET
         ];
 
     var DateLabelFormats = {
@@ -2107,6 +2110,8 @@ kendo_module({
                 }
 
                 axis.groupCategories(options);
+            } else {
+                options.baseUnit = options.baseUnit || DAYS;
             }
 
             CategoryAxis.fn.init.call(axis, options);
@@ -2143,28 +2148,32 @@ kendo_module({
 
         translateRange: function(delta) {
             var axis = this,
-                range = CategoryAxis.fn.translateRange.call(axis, delta),
                 options = axis.options,
                 baseUnit = options.baseUnit,
-                offset = math.round(range.min),
-                weekStartDay = options.weekStartDay;
+                weekStartDay = options.weekStartDay,
+                lineBox = axis.lineBox(),
+                size = options.vertical ? lineBox.height() : lineBox.width(),
+                range = axis.range(),
+                scale = size / (range.max - range.min),
+                offset = round(delta / scale, DEFAULT_PRECISION),
+                from = addTicks(options.min || range.min, offset),
+                to = addTicks(options.max || range.max, offset);
 
             return {
-                min: addDuration(options.min, offset, baseUnit, weekStartDay),
-                max: addDuration(options.max, offset, baseUnit, weekStartDay)
+                min: addDuration(from, 0, baseUnit, weekStartDay),
+                max: addDuration(to, 0, baseUnit, weekStartDay)
             };
         },
 
         scaleRange: function(delta) {
             var axis = this,
-                options = axis.options,
                 rounds = math.abs(delta),
                 range = axis.range(),
                 from = range.min,
                 to = range.max,
                 step;
 
-            if (options.categories.length > 0) {
+            if (range.min && range.max) {
                 while (rounds--) {
                     range = dateDiff(from, to);
                     step = math.round(range * 0.1);
@@ -2177,8 +2186,10 @@ kendo_module({
                     }
                 }
 
-                return { min: from, max: to };
+                range = { min: from, max: to };
             }
+
+            return range;
         },
 
         defaultBaseUnit: function(options) {
@@ -7403,9 +7414,7 @@ kendo_module({
 
         axisRequiresRounding: function(categoryAxisName, categoryAxisIndex) {
             var plotArea = this,
-                centeredSeries = filterSeriesByType(
-                    plotArea.series, [BAR, COLUMN, OHLC, CANDLESTICK, BULLET]
-                ),
+                centeredSeries = filterSeriesByType(plotArea.series, EQUALLY_SPACED_SERIES),
                 seriesIx,
                 seriesAxis;
 
@@ -9991,6 +10000,8 @@ kendo_module({
     );
 
     deepExtend(dataviz, {
+        EQUALLY_SPACED_SERIES: EQUALLY_SPACED_SERIES,
+
         Aggregates: Aggregates,
         AreaChart: AreaChart,
         AreaSegment: AreaSegment,

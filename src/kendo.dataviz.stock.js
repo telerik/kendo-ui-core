@@ -16,13 +16,14 @@ kendo_module({
         proxy = $.proxy,
 
         dataviz = kendo.dataviz,
-        template = kendo.template,
         defined = dataviz.defined,
+        filterSeriesByType = dataviz.filterSeriesByType,
+        template = kendo.template,
         Chart = dataviz.ui.Chart,
         Selection = dataviz.Selection,
         addDuration = dataviz.addDuration,
-        duration = dataviz.duration,
         last = dataviz.last,
+        limitValue = dataviz.limitValue,
         lteDateIndex = dataviz.lteDateIndex,
         renderTemplate = dataviz.renderTemplate,
         toDate = dataviz.toDate,
@@ -36,6 +37,7 @@ kendo_module({
         DRAG_END = "dragEnd",
         NAVIGATOR_PANE = "_navigator",
         NAVIGATOR_AXIS = NAVIGATOR_PANE,
+        EQUALLY_SPACED_SERIES = dataviz.EQUALLY_SPACED_SERIES,
         ZOOM_ACCELERATION = 3,
         ZOOM = "zoom",
         ZOOM_END = "zoomEnd";
@@ -328,8 +330,9 @@ kendo_module({
                 groups = axis.options.categories,
                 select = navi.options.select || {},
                 selection = navi.selection,
-                min = groups[0],
-                max = last(groups),
+                range = axis.range(),
+                min = range.min,
+                max = range.max,
                 from = select.from || min,
                 to = select.to || max;
 
@@ -358,8 +361,8 @@ kendo_module({
 
                 if (options.hint.visible) {
                     navi.hint = new NavigatorHint(chart.element, {
-                        min: groups[0],
-                        max: last(groups),
+                        min: min,
+                        max: max,
                         template: options.hint.template,
                         format: options.hint.format
                     });
@@ -392,13 +395,13 @@ kendo_module({
                 chart = navi.chart,
                 coords = chart._eventCoordinates(e.originalEvent),
                 navigatorAxis = navi.mainAxis(),
+                naviRange = navigatorAxis.range(),
                 inNavigator = navigatorAxis.pane.box.containsPoint(coords),
-                groups = navigatorAxis.options.categories,
                 axis = chart._plotArea.categoryAxis,
-                baseUnit = axis.options.baseUnit,
                 range = e.axisRanges[axis.options.name],
+                select = navi.options.select,
                 selection = navi.selection,
-                selectionDuration,
+                duration,
                 from,
                 to;
 
@@ -406,26 +409,20 @@ kendo_module({
                 return;
             }
 
-            if (axis.options.min && axis.options.max) {
-                selectionDuration = duration(
-                    axis.options.min, axis.options.max, baseUnit
-                );
+            if (select.from && select.to) {
+                duration = toTime(select.to) - toTime(select.from);
             } else {
-                selectionDuration = duration(
-                    selection.options.from, selection.options.to, baseUnit
-                );
+                duration = toTime(selection.options.to) - toTime(selection.options.from);
             }
 
-            from = toDate(math.min(
-                math.max(groups[0], range.min),
-                addDuration(
-                    dataviz.last(groups), -selectionDuration, baseUnit
-                )
+            from = toDate(limitValue(
+                toTime(range.min),
+                naviRange.min, toTime(naviRange.max) - duration
             ));
 
-            to = toDate(math.min(
-                addDuration(from, selectionDuration, baseUnit),
-                dataviz.last(groups)
+            to = toDate(limitValue(
+                toTime(from) + duration,
+                toTime(naviRange.min) + duration, naviRange.max
             ));
 
             navi.options.select = { from: from, to: to };
@@ -437,7 +434,7 @@ kendo_module({
 
             selection.set(
                 from,
-                addDuration(from, selectionDuration, baseUnit)
+                to
             );
 
             navi.showHint(from, to);
@@ -477,39 +474,13 @@ kendo_module({
 
         filterAxes: function() {
             var navi = this,
-                categories,
                 select = navi.options.select || {},
                 chart = navi.chart,
                 allAxes = chart.options.categoryAxis,
                 from = select.from,
                 to = select.to,
-                min,
-                max,
                 i,
                 axis;
-
-            for (i = 0; i < allAxes.length; i++) {
-                axis = allAxes[i];
-                if (axis.name === NAVIGATOR_AXIS) {
-                    categories = axis.categories;
-                    if (categories && categories.length > 0) {
-                        min = toTime(categories[0]);
-                        max = toTime(last(categories));
-
-                        from = toTime(from);
-                        if (from < min || from > max) {
-                            from = min;
-                        }
-
-                        to = toTime(to);
-                        if (to < min || to > max) {
-                            to = max;
-                        }
-
-                        break;
-                    }
-                }
-            }
 
             for (i = 0; i < allAxes.length; i++) {
                 axis = allAxes[i];
@@ -664,16 +635,20 @@ kendo_module({
 
     Navigator.attachAxes = function(options, naviOptions) {
         var categoryAxes,
-            valueAxes;
+            valueAxes,
+            series = naviOptions.series || [];
 
         categoryAxes = options.categoryAxis = [].concat(options.categoryAxis);
         valueAxes = options.valueAxis = [].concat(options.valueAxis);
 
+        var equallySpacedSeries = filterSeriesByType(series, EQUALLY_SPACED_SERIES);
+        var justifyAxis = equallySpacedSeries.length === 0;
+
         var base = deepExtend({
             type: "date",
             pane: NAVIGATOR_PANE,
-            roundToBaseUnit: false,
-            justified: true,
+            roundToBaseUnit: !justifyAxis,
+            justified: justifyAxis,
             tooltip: { visible: false },
             labels: { step: 1 },
             autoBind: !naviOptions.dataSource,
@@ -731,7 +706,7 @@ kendo_module({
 
     Navigator.attachSeries = function(options, naviOptions, themeOptions) {
         var series = options.series = options.series || [],
-            navigatorSeries = [].concat(naviOptions.series),
+            navigatorSeries = [].concat(naviOptions.series || []),
             seriesColors = themeOptions.seriesColors,
             defaults = naviOptions.seriesDefaults,
             i;

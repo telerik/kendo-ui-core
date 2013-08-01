@@ -124,19 +124,6 @@
                     deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/04"));
                 });
 
-                test("slave axis min is limited to navigator range", function() {
-                    createStockChart({
-                        navigator: {
-                            dataSource: null,
-                            select: {
-                                from: new Date("2012/06/01")
-                            }
-                        }
-                    });
-
-                    deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
-                });
-
                 test("slave axis max is set to selected range end", function() {
                     createStockChart({
                         navigator: {
@@ -148,19 +135,6 @@
                     });
 
                     deepEqual(chart.options.categoryAxis[0].max, new Date("2012/09/04"));
-                });
-
-                test("slave axis max is limited to navigator range", function() {
-                    createStockChart({
-                        navigator: {
-                            dataSource: null,
-                            select: {
-                                to: new Date("2012/10/01")
-                            }
-                        }
-                    });
-
-                    deepEqual(chart.options.categoryAxis[0].max, new Date("2012/09/06"));
                 });
 
                 test("navigator redrawn on main DS change", 2, function() {
@@ -230,36 +204,6 @@
                     equal(chart.options.categoryAxis[1].categories.length, 3);
                     equal(chart.options.categoryAxis[2].categories.length, 3);
                     equal(chart.options.categoryAxis[3].categories.length, 3);
-                });
-
-                test("slave axis min is limited to actual navigator range", function() {
-                    createStockChart({
-                        navigator: {
-                            autoBind: false,
-                            select: {
-                                from: new Date("2012/01/01")
-                            }
-                        }
-                    });
-
-                    chart._navigator.dataSource.fetch();
-
-                    deepEqual(chart.options.categoryAxis[0].min, new Date("2012/09/01"));
-                });
-
-                test("slave axis max is limited to actual navigator range", function() {
-                    createStockChart({
-                        navigator: {
-                            autoBind: false,
-                            select: {
-                                to: new Date("2012/01/01")
-                            }
-                        }
-                    });
-
-                    chart._navigator.dataSource.fetch();
-
-                    deepEqual(chart.options.categoryAxis[0].max, new Date("2012/11/01"));
                 });
 
                 asyncTest("data binding is not performed when autoBind is false", function() {
@@ -442,7 +386,7 @@
 
                     chart.trigger("zoomEnd");
                     deepEqual(chart.dataSource._filter.filters[0].value, new Date("2012/08/30"));
-                    deepEqual(chart.dataSource._filter.filters[1].value, new Date("2012/11/04"));
+                    deepEqual(chart.dataSource._filter.filters[1].value, new Date("2012/11/05"));
                 });
 
                 test("main DS is not filtered during zoom", function() {

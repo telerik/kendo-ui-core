@@ -45,7 +45,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Configuration", {
+                module("Date Category Axis / Configuration", {
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
@@ -72,6 +72,12 @@
                             new Date("2012/02/01")
                         ]
                     });
+
+                    equal(dateAxis.options.baseUnit, "days");
+                });
+
+                test("Default base unit is days when no categories are defined", function() {
+                    createDateCategoryAxis();
 
                     equal(dateAxis.options.baseUnit, "days");
                 });
@@ -240,7 +246,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / categoryIndex");
+                module("Date Category Axis / categoryIndex");
 
                 test("category indicies for aggregated categories", function() {
                     createDateCategoryAxis({
@@ -341,7 +347,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Min-Max values", {
+                module("Date Category Axis / Min-Max values", {
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
@@ -420,7 +426,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Minutes");
+                module("Date Category Axis / Base unit / Minutes");
 
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
@@ -532,7 +538,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Seconds");
+                module("Date Category Axis / Base unit / Seconds");
 
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
@@ -644,7 +650,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / No Rounding");
+                module("Date Category Axis / No Rounding");
 
                 test("Major ticks are positioned at exact time", function() {
                     createDateCategoryAxis({
@@ -689,7 +695,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / No Rounding / Justified");
+                module("Date Category Axis / No Rounding / Justified");
 
                 test("First label is hidden if it does not match base unit", function() {
                     createDateCategoryAxis({
@@ -704,7 +710,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / No Rounding / Reversed");
+                module("Date Category Axis / No Rounding / Reversed");
 
                 test("Major ticks are positioned at exact time", function() {
                     createDateCategoryAxis({
@@ -720,7 +726,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Hours");
+                module("Date Category Axis / Base unit / Hours");
 
                 test("Base unit is determined by series delta (day boundary)", function() {
                     createDateCategoryAxis({
@@ -785,7 +791,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Days");
+                module("Date Category Axis / Base unit / Days");
 
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
@@ -967,7 +973,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Weeks");
+                module("Date Category Axis / Base unit / Weeks");
 
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
@@ -1057,7 +1063,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Months");
+                module("Date Category Axis / Base unit / Months");
 
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
@@ -1155,7 +1161,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / Base unit / Years");
+                module("Date Category Axis / Base unit / Years");
 
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
@@ -1220,7 +1226,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / getSlot / No Rounding", {
+                module("Date Category Axis / getSlot / No Rounding", {
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
@@ -1256,7 +1262,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / getSlot / No Rounding / Justified", {
+                module("Date Category Axis / getSlot / No Rounding / Justified", {
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
@@ -1293,7 +1299,21 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / getCategory / No Rounding", {
+                module("Date Category Axis / getCategory", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [new Date("2012/01/01")],
+                            labels: { visible: false }
+                        });
+                    }
+                });
+
+                test("returns date", function() {
+                    deepEqual(dateAxis.getCategory(new Point2D(0, 0)), new Date("2012/01/01"));
+                });
+
+                // ------------------------------------------------------------
+                module("Date Category Axis / getCategory / No Rounding", {
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
@@ -1345,7 +1365,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / getCategory / No Rounding / Justified", {
+                module("Date Category Axis / getCategory / No Rounding / Justified", {
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
@@ -1397,28 +1417,62 @@
                          new Date("2012/02/05 01:00:00").toString());
                 });
 
-            })();
-
-            (function() {
-                var Point2D = kendo.dataviz.Point2D;
-                var categoryAxis;
-
                 // ------------------------------------------------------------
-                module("Date CategoryAxis / getCategory", {
+                module("Date Category Axis / Range manipulation", {
                     setup: function() {
-                        categoryAxis = new dataviz.DateCategoryAxis({
-                            categories: [new Date("2012/01/01")],
-                            labels: { visible: false }
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01"), new Date("2012/02/10")
+                            ]
                         });
-
-                        categoryAxis.reflow(chartBox);
                     }
                 });
 
-                test("returns date", function() {
-                    deepEqual(categoryAxis.getCategory(new Point2D(0, 0)), new Date("2012/01/01"));
+                test("translateRange with negative delta", function() {
+                    var range = dateAxis.translateRange(-400);
+                    deepEqual(range.min, new Date("2012/01/15"));
+                    deepEqual(range.max, new Date("2012/01/29"));
                 });
 
+                test("translateRange with positive delta", function() {
+                    var range = dateAxis.translateRange(400);
+                    deepEqual(range.min, new Date("2012/02/05"));
+                    deepEqual(range.max, new Date("2012/02/19"));
+                });
+
+                test("translateRange uses min/max when no categories are defined", function() {
+                    createDateCategoryAxis({
+                        min: new Date("2012/02/01"),
+                        max: new Date("2012/02/10")
+                    });
+
+                    var range = dateAxis.translateRange(-400);
+                    deepEqual(range.min, new Date("2012/01/26"));
+                    deepEqual(range.max, new Date("2012/02/04"));
+                });
+
+                test("scaleRange with negative delta shrinks range", function() {
+                    var range = dateAxis.scaleRange(-2);
+                    deepEqual(range.min, new Date("2012/01/25 22:04:48"));
+                    deepEqual(range.max, new Date("2012/02/15 01:55:12"));
+                });
+
+                test("scaleRange with positive delta expands range", function() {
+                    var range = dateAxis.scaleRange(2);
+                    deepEqual(range.min, new Date("2012/01/31 12:28:48"));
+                    deepEqual(range.max, new Date("2012/02/09 11:31:12"));
+                });
+
+                test("scaleRange uses min/max when no categories are defined", function() {
+                    createDateCategoryAxis({
+                        min: new Date("2012/02/01"),
+                        max: new Date("2012/02/10")
+                    });
+
+                    var range = dateAxis.scaleRange(2);
+                    deepEqual(range.min, new Date("2012/02/02 19:12:00"));
+                    deepEqual(range.max, new Date("2012/02/09 04:48:00"));
+                });
             })();
 
             (function() {
