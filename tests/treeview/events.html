@@ -188,6 +188,23 @@
                 equal(dropTriggered.dropPosition, "over");
             });
 
+            test("drop event setValid sets event valid state", 1, function () {
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "bar" }
+                    ],
+                    drop: function(e) {
+                        e.setValid(false);
+
+                        ok(!e.valid);
+                    }
+                });
+
+                moveNode(treeviewObject, "foo", "bar");
+            });
+
             test("moving node triggers dragstart/drag/drop/dragend", function () {
                 var dragEndTriggered;
 

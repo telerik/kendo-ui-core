@@ -1932,7 +1932,7 @@ kendo_module({
                 destinationNode,
                 dropHint = that.dropHint,
                 dropTarget = that.dropTarget,
-                valid, dropPrevented;
+                e, dropPrevented;
 
             if (dropHint.css(VISIBILITY) == "visible") {
                 dropPosition = dropHint.prevAll(".k-in").length > 0 ? "after" : "before";
@@ -1946,22 +1946,24 @@ kendo_module({
                 }
             }
 
-            valid = that._hintStatus() != "k-denied";
-
-            dropPrevented = treeview.trigger(DROP, {
+            e = {
                 sourceNode: sourceNode[0],
                 destinationNode: destinationNode[0],
-                valid: valid,
-                setValid: function(newValid) { valid = newValid; },
+                valid: that._hintStatus() != "k-denied",
+                setValid: function(newValid) {
+                    this.valid = newValid;
+                },
                 dropTarget: dropTarget[0],
                 dropPosition: dropPosition
-            });
+            };
+
+            dropPrevented = treeview.trigger(DROP, e);
 
             dropHint.remove();
             that._removeTouchHover();
 
-            if (!valid || dropPrevented) {
-                that._draggable.dropped = valid;
+            if (!e.valid || dropPrevented) {
+                that._draggable.dropped = e.valid;
                 return;
             }
 
