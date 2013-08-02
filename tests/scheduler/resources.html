@@ -1288,8 +1288,8 @@
 
                 var info = view._slotByPosition(slot.offset().left, slot.offset().top);
 
-                deepEqual(info.start, new Date("2013/6/6 11:30 PM"));
-                deepEqual(info.end, new Date("2013/6/7 00:00 AM"));
+                deepEqual(info.startDate(), new Date("2013/6/6 11:30 PM"));
+                deepEqual(info.endDate(), new Date("2013/6/7 00:00 AM"));
             });
 
             test("events are repositioned after all day slot is resized when vertically grouped", function() {
@@ -1351,8 +1351,8 @@
                 var view = scheduler.view();
 
                 var slot = view.groups[0].getTimeSlotCollection(0).last();
-                deepEqual(slot.start, new Date("2013/6/6 23:30"));
-                deepEqual(slot.end, new Date("2013/6/7 00:00"));
+                deepEqual(slot.startDate(), new Date("2013/6/6 23:30"));
+                deepEqual(slot.endDate(), new Date("2013/6/7 00:00"));
             });
 
             test("date header is at the top when group by date", function() {
@@ -1404,15 +1404,15 @@
                 var firstGroupSlots = view.groups[0].getTimeSlotCollection(0);
                 var secondGroupSlots = view.groups[1].getTimeSlotCollection(0);
 
-                deepEqual(firstGroupSlots.first().start, new Date("2013/6/6 00:00"));
-                deepEqual(firstGroupSlots.first().end, new Date("2013/6/6 00:30"));
-                deepEqual(firstGroupSlots.last().start, new Date("2013/6/6 23:30"));
-                deepEqual(firstGroupSlots.last().end, new Date("2013/6/7 00:00"));
+                deepEqual(firstGroupSlots.first().startDate(), new Date("2013/6/6 00:00"));
+                deepEqual(firstGroupSlots.first().endDate(), new Date("2013/6/6 00:30"));
+                deepEqual(firstGroupSlots.last().startDate(), new Date("2013/6/6 23:30"));
+                deepEqual(firstGroupSlots.last().endDate(), new Date("2013/6/7 00:00"));
 
-                deepEqual(secondGroupSlots.first().start, new Date("2013/6/6 00:00"));
-                deepEqual(secondGroupSlots.first().end, new Date("2013/6/6 00:30"));
-                deepEqual(secondGroupSlots.last().start, new Date("2013/6/6 23:30"));
-                deepEqual(secondGroupSlots.last().end, new Date("2013/6/7 00:00"));
+                deepEqual(secondGroupSlots.first().startDate(), new Date("2013/6/6 00:00"));
+                deepEqual(secondGroupSlots.first().endDate(), new Date("2013/6/6 00:30"));
+                deepEqual(secondGroupSlots.last().startDate(), new Date("2013/6/6 23:30"));
+                deepEqual(secondGroupSlots.last().endDate(), new Date("2013/6/7 00:00"));
             });
 
             test("slots for the same date but in diffrent groups as correct start and end date set in week view", function() {
@@ -1442,25 +1442,25 @@
                 var secondDateFirstGroupSlots = view.groups[2].getTimeSlotCollection(0);
                 var secondDateSecondGroupSlots = view.groups[3].getTimeSlotCollection(0);
 
-                deepEqual(firstGroupSlots.first().start, new Date("2013/6/2 00:00"));
-                deepEqual(firstGroupSlots.first().end, new Date("2013/6/2 00:30"));
-                deepEqual(firstGroupSlots.last().start, new Date("2013/6/2 23:30"));
-                deepEqual(firstGroupSlots.last().end, new Date("2013/6/3 00:00"));
+                deepEqual(firstGroupSlots.first().startDate(), new Date("2013/6/2 00:00"));
+                deepEqual(firstGroupSlots.first().endDate(), new Date("2013/6/2 00:30"));
+                deepEqual(firstGroupSlots.last().startDate(), new Date("2013/6/2 23:30"));
+                deepEqual(firstGroupSlots.last().endDate(), new Date("2013/6/3 00:00"));
 
-                deepEqual(secondGroupSlots.first().start, new Date("2013/6/2 00:00"));
-                deepEqual(secondGroupSlots.first().end, new Date("2013/6/2 00:30"));
-                deepEqual(secondGroupSlots.last().start, new Date("2013/6/2 23:30"));
-                deepEqual(secondGroupSlots.last().end, new Date("2013/6/3 00:00"));
+                deepEqual(secondGroupSlots.first().startDate(), new Date("2013/6/2 00:00"));
+                deepEqual(secondGroupSlots.first().endDate(), new Date("2013/6/2 00:30"));
+                deepEqual(secondGroupSlots.last().startDate(), new Date("2013/6/2 23:30"));
+                deepEqual(secondGroupSlots.last().endDate(), new Date("2013/6/3 00:00"));
 
-                deepEqual(secondDateFirstGroupSlots.first().start, new Date("2013/6/3 00:00"));
-                deepEqual(secondDateFirstGroupSlots.first().end, new Date("2013/6/3 00:30"));
-                deepEqual(secondDateFirstGroupSlots.last().start, new Date("2013/6/3 23:30"));
-                deepEqual(secondDateFirstGroupSlots.last().end, new Date("2013/6/4 00:00"));
+                deepEqual(secondDateFirstGroupSlots.first().startDate(), new Date("2013/6/3 00:00"));
+                deepEqual(secondDateFirstGroupSlots.first().endDate(), new Date("2013/6/3 00:30"));
+                deepEqual(secondDateFirstGroupSlots.last().startDate(), new Date("2013/6/3 23:30"));
+                deepEqual(secondDateFirstGroupSlots.last().endDate(), new Date("2013/6/4 00:00"));
 
-                deepEqual(secondDateSecondGroupSlots.first().start, new Date("2013/6/3 00:00"));
-                deepEqual(secondDateSecondGroupSlots.first().end, new Date("2013/6/3 00:30"));
-                deepEqual(secondDateSecondGroupSlots.last().start, new Date("2013/6/3 23:30"));
-                deepEqual(secondDateSecondGroupSlots.last().end, new Date("2013/6/4 00:00"));
+                deepEqual(secondDateSecondGroupSlots.first().startDate(), new Date("2013/6/3 00:00"));
+                deepEqual(secondDateSecondGroupSlots.first().endDate(), new Date("2013/6/3 00:30"));
+                deepEqual(secondDateSecondGroupSlots.last().startDate(), new Date("2013/6/3 23:30"));
+                deepEqual(secondDateSecondGroupSlots.last().endDate(), new Date("2013/6/4 00:00"));
             });
 
             test("events on the different dates but in the same group are position correctly in week view", function() {

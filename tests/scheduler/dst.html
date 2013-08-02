@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler DST</title>
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.tooltip.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.multiselect.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.agendaview.js"></script>
+        <script src="../../src/kendo.scheduler.monthview.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler DST</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var div = $("<div>").width(1000).height(1000);
+
+            var SchedulerEvent = kendo.data.SchedulerEvent;
+
+            function equalWithRound(value, expected) {
+                QUnit.close(value, expected, 2);
+            }
+
+            function testSkip() {
+               QUnit.test(arguments[0] + ' (SKIPPED)', 0, function() {
+                   var li = document.getElementById(QUnit.config.current.id);
+                   QUnit.done(function() {
+                       li.style.background = '#FFFF99';
+                   });
+               });
+            };
+
+            module("dst", {
+                setup: function() {
+                    div.appendTo(document.body);
+                },
+                teardown: function() {
+                    if (div.data("kendoScheduler")) {
+                        div.kendoScheduler("destroy").empty().remove();
+                        $("[data-role=window]").kendoWindow("destroy").remove();
+                    }
+                }
+            });
+
+        var dst = (new Date("2013/3/31 3:00 AM")).getHours() != 3;
+
+        test("clicking the slot from 2:30 to 3:00AM creates event which starts at 2:30 AM and ends at 4:00 AM", function() {
+            if (!dst) {
+                expect(0);
+                return;
+            }
+
+            var scheduler = new kendo.ui.Scheduler(div, {
+                startTime: new Date("2013/3/31 2:00 AM"),
+                date: new Date("2013/3/31"),
+                dataSource: [
+                ]
+            });
+
+            var slots = div.find(".k-scheduler-content td");
+
+            slots.eq(1).trigger({
+                type: "dblclick",
+                pageX: slots.eq(1).offset().left,
+                pageY: slots.eq(1).offset().top
+            });
+
+            $(".k-scheduler-update").click();
+
+            equal(scheduler.dataSource.at(0).start.getHours(), 2);
+            equal(scheduler.dataSource.at(0).start.getMinutes(), 30);
+            equal(scheduler.dataSource.at(0).end.getHours(), 4);
+            equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
+        });
+
+         test("clicking the slot from 4:00 to 4:30AM creates event which starts at 4:00 AM and ends at 4:30 AM", function() {
+            if (!dst) {
+                expect(0);
+                return;
+            }
+
+            var scheduler = new kendo.ui.Scheduler(div, {
+                startTime: new Date("2013/3/31 2:00 AM"),
+                date: new Date("2013/3/31"),
+                dataSource: [
+                ]
+            });
+
+            var slots = div.find(".k-scheduler-content td");
+
+            slots.eq(4).trigger({
+                type: "dblclick",
+                pageX: slots.eq(4).offset().left,
+                pageY: slots.eq(4).offset().top
+            });
+
+            $(".k-scheduler-update").click();
+
+            equal(scheduler.dataSource.at(0).start.getHours(), 4);
+            equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
+            equal(scheduler.dataSource.at(0).end.getHours(), 4);
+            equal(scheduler.dataSource.at(0).end.getMinutes(), 30);
+        });
+
+        test("event which starts at 2:30 AM and ends at 4:00 AM is properly positioned", function() {
+            if (!dst) {
+                expect(0);
+                return;
+            }
+
+            var scheduler = new kendo.ui.Scheduler(div, {
+                startTime: new Date("2013/3/31 2:00 AM"),
+                date: new Date("2013/3/31"),
+                dataSource: [
+                    new SchedulerEvent({ start: new Date("2013/3/31 2:30 AM"), end: new Date("2013/3/31 4:00 AM"), title: "" })
+                ]
+            });
+
+            var slots = div.find(".k-scheduler-content td");
+
+            var event = div.find(".k-event");
+
+            equalWithRound(event.outerHeight(), 3 * slots.outerHeight());
+            equalWithRound(event.offset().top, slots.eq(1).offset().top);
+        });
+
+        test("event which starts at 4:00 AM and ends at 4:30 AM is properly positioned", function() {
+            if (!dst) {
+                expect(0);
+                return;
+            }
+
+            var scheduler = new kendo.ui.Scheduler(div, {
+                startTime: new Date("2013/3/31 2:00 AM"),
+                date: new Date("2013/3/31"),
+                dataSource: [
+                    new SchedulerEvent({ start: new Date("2013/3/31 4:00 AM"), end: new Date("2013/3/31 4:30 AM"), title: "" })
+                ]
+            });
+
+            var slots = div.find(".k-scheduler-content td");
+
+            var event = div.find(".k-event");
+
+            equalWithRound(event.offset().top, slots.eq(4).offset().top);
+        });
+
+        test("resizing event by dragging the south handle skips DST slots", function() {
+            if (!dst) {
+                expect(0);
+                return;
+            }
+
+            var scheduler = new kendo.ui.Scheduler(div, {
+                startTime: new Date("2013/3/31 2:00 AM"),
+                date: new Date("2013/3/31"),
+                dataSource: [
+                    new SchedulerEvent({ start: new Date("2013/3/31 2:00 AM"), end: new Date("2013/3/31 2:30 AM"), title: "" })
+                ]
+            });
+
+            var slots = div.find(".k-scheduler-content td");
+
+            var handle = div.find(".k-resize-s");
+
+            resizeStart(scheduler, handle);
+
+            resize(scheduler, handle, slots.eq(1).offset());
+
+            var hint = div.find(".k-marquee");
+
+            equalWithRound(hint.outerHeight(), 4 * slots.outerHeight());
+        });
+
+        test("resizing event by dragging the north handle skips the DST slots", function() {
+            if (!dst) {
+                expect(0);
+                return;
+            }
+
+            var scheduler = new kendo.ui.Scheduler(div, {
+                startTime: new Date("2013/3/31 2:00 AM"),
+                date: new Date("2013/3/31"),
+                dataSource: [
+                    new SchedulerEvent({ start: new Date("2013/3/31 4:00 AM"), end: new Date("2013/3/31 4:30 AM"), title: "" })
+                ]
+            });
+
+            var slots = div.find(".k-scheduler-content td");
+
+            var handle = div.find(".k-resize-n");
+
+            resizeStart(scheduler, handle);
+
+            resize(scheduler, handle, slots.eq(2).offset());
+
+            var hint = div.find(".k-marquee");
+
+            equalWithRound(hint.outerHeight(), 1 * slots.outerHeight());
+        });
+
+        test("displays event occurring in DST", function() {
+            if (!dst) {
+                expect(0);
+                return;
+            }
+
+            var scheduler = new kendo.ui.Scheduler(div, {
+                startTime: new Date("2013/3/31 2:00 AM"),
+                date: new Date("2013/3/31"),
+                dataSource: [
+                    new SchedulerEvent({ start: new Date("2013/3/30 3:00 AM"), end: new Date("2013/3/30 3:30 AM"), recurrenceRule: "FREQ=DAILY;COUNT=2", title: "" })
+                ]
+            });
+
+            var slots = div.find(".k-scheduler-content td");
+
+            var event = div.find(".k-event");
+
+
+            equalWithRound(event.offset().top, slots.eq(2).offset().top);
+            equal(event.find("dt").text(), "3:00 AM - 3:30 AM");
+        });
+
+        function resizeStart(scheduler, target) {
+            var draggable = scheduler._resizeDraggable;
+
+            if (!draggable) {
+                return;
+            }
+
+            var offset = target.offset();
+
+            draggable.trigger("dragstart", {
+                currentTarget: target,
+                x: { location: offset.left },
+                y: { location: offset.top }
+            });
+        }
+
+        function resize(scheduler, target, offset) {
+            var draggable = scheduler._resizeDraggable;
+
+            if (!draggable) {
+                return;
+            }
+
+            draggable.trigger("drag", {
+                currentTarget: target,
+                x: { location: offset.left },
+                y: { location: offset.top }
+            });
+        }
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

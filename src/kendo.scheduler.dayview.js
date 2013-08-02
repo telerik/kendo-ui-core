@@ -141,7 +141,7 @@ kendo_module({
 
             var multiday = group.multiday(event);
 
-            var ranges = group.ranges(startSlot.start, endSlot.end, multiday, event.isAllDay);
+            var ranges = group.ranges(startSlot.startDate(), endSlot.endDate(), multiday, event.isAllDay);
 
             this._removeResizeHint();
 
@@ -183,9 +183,9 @@ kendo_module({
 
             this._resizeHint.find(".k-label-top,.k-label-bottom").text("");
 
-            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(startSlot.start, format));
+            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(startSlot.startDate(), format));
 
-            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(endSlot.end, format));
+            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(endSlot.endDate(), format));
         },
 
         _updateMoveHint: function(event, initialSlot, currentSlot) {
@@ -193,7 +193,7 @@ kendo_module({
 
             var multiday = group.multiday(event);
 
-            var distance = currentSlot.start.getTime() - initialSlot.start.getTime();
+            var distance = currentSlot.start - initialSlot.start;
 
             var duration = event.end.getTime() - event.start.getTime();
 
@@ -370,20 +370,20 @@ kendo_module({
                     dateOffset++;
                 }
 
-                for (var rowIndex = rowMultiplier*rowCount; rowIndex < (rowMultiplier+1) *rowCount; rowIndex++) {
+                var rowIndex = rowMultiplier * rowCount;
+                var time;
+                var cellMultiplier = 0;
+
+                if (!this._isVerticallyGrouped()) {
+                    cellMultiplier = groupIndex;
+                }
+
+                while (rowIndex < (rowMultiplier + 1) * rowCount) {
                     var cells = tableRows[rowIndex].children;
                     var group = this.groups[groupIndex];
 
-                    var time;
-
                     if (rowIndex % rowCount === 0) {
                         time = getMilliseconds(new Date(+this.options.startTime));
-                    }
-
-                    var cellMultiplier = 0;
-
-                    if (!this._isVerticallyGrouped()) {
-                        cellMultiplier = groupIndex;
                     }
 
                     for (var cellIndex = cellMultiplier * columnCount; cellIndex < (cellMultiplier + 1) * columnCount; cellIndex++) {
@@ -395,13 +395,13 @@ kendo_module({
 
                         var index = collection.count();
 
-                        var start = kendo.date.getDate(this._dates[collectionIndex + dateOffset]);
+                        var currentDate = this._dates[collectionIndex + dateOffset];
 
-                        kendo.date.setTime(start, time);
+                        var currentTime = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 
-                        var end = new Date(start);
+                        var start = currentTime + time;
 
-                        kendo.date.setTime(end, interval);
+                        var end = start + interval;
 
                         collection.addSlot(new kendo.ui.scheduler.TimeSlot({
                            clientWidth: cell.clientWidth,
@@ -420,6 +420,7 @@ kendo_module({
                     }
 
                     time += interval;
+                    rowIndex ++;
                 }
             }
         },
@@ -468,6 +469,8 @@ kendo_module({
 
                     var start = kendo.date.addDays(this.startDate(), cellCount + dateOffset);
 
+                    var currentTime = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
+
                     cellCount ++;
 
                     collection.addSlot(new kendo.ui.scheduler.DaySlot({
@@ -476,8 +479,8 @@ kendo_module({
                        offsetWidth: cell.offsetWidth,
                        offsetTop: cell.offsetTop,
                        offsetLeft: cell.offsetLeft,
-                       start: start,
-                       end: kendo.date.addDays(start, 1),
+                       start: currentTime,
+                       end: currentTime + kendo.date.MS_PER_DAY,
                        element: cell,
                        isAllDay: true,
                        index: collection.count(),
@@ -606,7 +609,7 @@ kendo_module({
 
                         var resourceInfo = that._resourceBySlot(slot);
 
-                        that.trigger("add", { eventInfo: extend({ start: slot.start, end: slot.end }, resourceInfo) });
+                        that.trigger("add", { eventInfo: extend({ start: slot.startDate(), end: slot.endDate() }, resourceInfo) });
 
                         e.preventDefault();
                     }
@@ -614,7 +617,7 @@ kendo_module({
                     var slot = that._slotByPosition(e.pageX, e.pageY);
                     var resourceInfo = that._resourceBySlot(slot);
 
-                    that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.start), end: kendo.date.getDate(slot.start) }, resourceInfo) });
+                    that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.startDate()), end: kendo.date.getDate(slot.startDate()) }, resourceInfo) });
 
                     e.preventDefault();
                 });
@@ -1365,12 +1368,12 @@ kendo_module({
 
                                 if (rangeCount > 1) {
                                     if (rangeIndex === 0) {
-                                        end = range.end.end;
+                                        end = range.end.endDate();
                                     } else if (rangeIndex == rangeCount - 1) {
-                                        start = range.start.start;
+                                        start = range.start.startDate();
                                     } else {
-                                        start = range.start.start;
-                                        end = range.end.end;
+                                        start = range.start.startDate();
+                                        end = range.end.endDate();
                                     }
                                 }
 

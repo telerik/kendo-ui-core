@@ -1387,8 +1387,8 @@
 
                 var result = view.selectionByElement(view.content.find("td").eq(2));
 
-                equal(result.start.getTime(), new Date(2013, 1, 26, 2, 0, 0).getTime());
-                equal(result.end.getTime(), new Date(2013, 1, 26, 3, 0, 0).getTime());
+                deepEqual(result.startDate(), new Date(2013, 1, 26, 2, 0, 0));
+                deepEqual(result.endDate(), new Date(2013, 1, 26, 3, 0, 0));
             });
 
             test("_dateSlotIndex returns correct index if date is same as endTime", function() {
@@ -1627,8 +1627,8 @@
                 });
 
                 var slots = view.groups[0].getTimeSlotCollection(0);
-                deepEqual(slots.last().start, new Date("2013/6/6 19:00"));
-                deepEqual(slots.last().end, new Date("2013/6/6 20:00"));
+                deepEqual(slots.last().startDate(), new Date("2013/6/6 19:00"));
+                deepEqual(slots.last().endDate(), new Date("2013/6/6 20:00"));
             });
 
             test("next to last slot end date is set correctly", function() {
@@ -1639,8 +1639,8 @@
 
                 var slots = view.groups[0].getTimeSlotCollection(0);
                 var count = slots.count();
-                deepEqual(slots.at(count- 2).start, new Date("2013/6/6 23:00"));
-                deepEqual(slots.at(count -2).end, new Date("2013/6/6 23:30"));
+                deepEqual(slots.at(count- 2).startDate(), new Date("2013/6/6 23:00"));
+                deepEqual(slots.at(count -2).endDate(), new Date("2013/6/6 23:30"));
             });
 
 

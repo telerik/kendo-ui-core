@@ -55,9 +55,8 @@
             <div id="scheduler"></div>
     <script>
        $("#scheduler").kendoScheduler({
-           startTime: new Date(2013, 1,1, 7,0,0),
-            views: ["month"],
-            date: new Date(2013, 5, 26),
+            views: ["day"],
+            date: new Date(2013, 2, 31),
             resources: [
                 {
                     field: "ownerId",
@@ -78,7 +77,7 @@
                     title: "Owner"
                 }*/
             ],
-            timezone: "Etc/UTC",
+            timezone: "Europe/Sofia",
             dataSource: {
                 batch: true,
                 transport: {

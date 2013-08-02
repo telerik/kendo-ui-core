@@ -228,33 +228,42 @@ kendo_module({
             }
         },
 
-        ranges: function(startDate, endDate, multiday, allday) {
-            var ranges = [];
-
-            var collection;
-
-            var start = this._slot(startDate, multiday, true, allday);
-
-            var startSlot = start.slot;
+        timeSlotRanges: function(startDate, startTime, endDate, endTime) {
+            var start = this._startTimeSlot(startDate, startTime);
 
             var end = start;
 
             if (startDate < endDate) {
-                end = this._slot(endDate, multiday, false, allday);
+                end = this._endTimeSlot(endDate, endTime);
             }
 
+
+            return this._continuousRange(kendo.ui.scheduler.TimeSlotRange, this._timeSlotCollections, start, end);
+        },
+
+        daySlotRanges: function(startDate, endDate, allday) {
+            var start = this._startDaySlot(startDate, allday);
+
+            var end = start;
+
+            if (startDate < endDate) {
+                end = this._endDaySlot(endDate, allday);
+            }
+
+            return this._continuousRange(kendo.ui.scheduler.DaySlotRange, this._daySlotCollections, start, end);
+        },
+
+        _continuousRange: function(range, collections, start, end) {
+            var startSlot = start.slot;
             var endSlot = end.slot;
-
-            if (endSlot.end.getTime() < startSlot.start.getTime()) {
-                collection = this._collection(startSlot.collectionIndex(), multiday);
-                endSlot = collection.last();
-            }
 
             var startIndex = startSlot.collectionIndex();
             var endIndex = endSlot.collectionIndex();
 
+            var ranges = [];
+
             for (var collectionIndex = startIndex; collectionIndex <= endIndex; collectionIndex++) {
-                collection = this._collection(collectionIndex, multiday);
+                var collection = collections[collectionIndex];
 
                 var first = collection.first();
                 var last = collection.last();
@@ -287,53 +296,46 @@ kendo_module({
                     }
                 }
 
-                if (multiday) {
-                    if (kendo.date.getMilliseconds(endDate) === 0 && endDate.getTime() != startDate.getTime() && !allday) {
-                        if (!tail && !head) {
-                            //last = collection.at(Math.max(0, last.index - 1));
-                        }
-                    }
-
-                    ranges.push(new kendo.ui.scheduler.DaySlotRange({
-                        start: first,
-                        end: last,
-                        collection: collection,
-                        head: head,
-                        tail: tail
-                    }));
-                } else {
-                    ranges.push(new kendo.ui.scheduler.TimeSlotRange({
-                        start: first,
-                        end: last,
-                        collection: collection,
-                        head: head,
-                        tail: tail
-                    }));
-                }
+                ranges.push(new range({
+                    start: first,
+                    end: last,
+                    collection: collection,
+                    head: head,
+                    tail: tail
+                }));
             }
 
             return ranges;
         },
 
         slotRanges: function(event) {
-            return this.ranges(event.start, event.end, this.multiday(event), event.isAllDay);
+            if (this.multiday(event)) {
+                return this.daySlotRanges(event.start, event.end, event.isAllDay);
+            }
+
+            var startTime = event.startTime;
+            var endTime = event.endTime;
+
+            if (startTime) {
+               startTime =  kendo.date.getMilliseconds(startTime) + Date.UTC(event.start.getFullYear(), event.start.getMonth(), event.start.getDate());
+            }
+
+            if (endTime) {
+               endTime =  kendo.date.getMilliseconds(endTime) + Date.UTC(event.end.getFullYear(), event.end.getMonth(), event.end.getDate());
+            }
+
+            return this.timeSlotRanges(event.start, startTime, event.end, endTime);
         },
 
-        _collection: function(index, multiday) {
-            var collections = multiday? this._daySlotCollections : this._timeSlotCollections;
+        ranges: function(startDate, endDate, isDay, isAllDay) {
+            if (isDay) {
+                return this.daySlotRanges(startDate, endDate, isAllDay);
+            }
 
-            return collections[index];
+            return this.timeSlotRanges(startDate, null, endDate, null);
         },
 
-        _lastCollection: function(multiday) {
-            var collections = multiday? this._daySlotCollections : this._timeSlotCollections;
-
-            return collections[collections.length - 1];
-        },
-
-        _startCollection: function(date, multiday) {
-            var collections = multiday? this._daySlotCollections : this._timeSlotCollections;
-
+        _startCollection: function(date, collections) {
             for (var collectionIndex = 0; collectionIndex < collections.length; collectionIndex++) {
                 var collection = collections[collectionIndex];
 
@@ -345,9 +347,7 @@ kendo_module({
             return null;
         },
 
-        _endCollection: function(date, multiday) {
-            var collections = multiday? this._daySlotCollections : this._timeSlotCollections;
-
+        _endCollection: function(date, collections) {
             for (var collectionIndex = 0; collectionIndex < collections.length; collectionIndex++) {
                 var collection = collections[collectionIndex];
 
@@ -359,35 +359,89 @@ kendo_module({
             return null;
         },
 
-        _slot: function(date, multiday, start, allday) {
-            var collection;
-            if (start) {
-                collection = this._startCollection(date, multiday);
-            } else {
-                collection = this._endCollection(date, multiday);
-            }
+        _startDaySlot: function(date, isAllDay) {
+            var collection = this._startCollection(date, this._daySlotCollections);
 
             var inRange = true;
 
             if (!collection) {
-                if (start) {
-                    collection = this._collection(0, multiday);
-                } else {
-                    collection = this._lastCollection(multiday);
-                }
+                collection = this._daySlotCollections[0];
                 inRange = false;
             }
 
-            var slot;
-
-            if (start) {
-                slot = collection.slotByStartDate(date, allday);
-            } else {
-                slot = collection.slotByEndDate(date, allday);
-            }
+            var slot = collection.slotByStartDate(date, isAllDay);
 
             if (!slot) {
-                slot = start ? collection.first() : collection.last();
+                slot = collection.first();
+                inRange = false;
+            }
+
+            return {
+                slot: slot,
+                inRange: inRange
+            };
+        },
+
+        _endDaySlot: function(date, isAllDay) {
+            var collection = this._endCollection(date, this._daySlotCollections);
+
+            var inRange = true;
+
+            if (!collection) {
+                collection = this._daySlotCollections[this._daySlotCollections.length - 1];
+                inRange = false;
+            }
+
+            var slot = collection.slotByEndDate(date, isAllDay);
+
+            if (!slot) {
+                slot = collection.last();
+                inRange = false;
+            }
+
+            return {
+                slot: slot,
+                inRange: inRange
+            };
+        },
+
+        _startTimeSlot: function(date, time) {
+            var collection = this._startCollection(date, this._timeSlotCollections);
+
+            var inRange = true;
+
+            if (!collection) {
+                collection = this._timeSlotCollections[0];
+                inRange = false;
+            }
+
+            var slot = collection.slotByStartDate(time || date);
+
+            if (!slot) {
+                slot = collection.first();
+                inRange = false;
+            }
+
+            return {
+                slot: slot,
+                inRange: inRange
+            };
+        },
+
+        _endTimeSlot: function(date, time) {
+            var collection = this._endCollection(date, this._timeSlotCollections, date);
+
+            var inRange = true;
+
+            if (!collection) {
+                collection = this._timeSlotCollections[this._timeSlotCollections.length - 1];
+                inRange = false;
+            }
+
+            var slot = collection.slotByEndDate(time || date);
+
+            if (!slot) {
+                slot = collection.last();
                 inRange = false;
             }
 
@@ -509,26 +563,24 @@ kendo_module({
         },
 
         startInRange: function(date) {
-            var time = date.getTime();
-
-            return this.start.getTime() <= time && time < this.end.getTime();
+            return this.start.getTime() <= date && date < this.end.getTime();
         },
 
         endInRange: function(date) {
-            var time = date.getTime();
-
-            return this.start.getTime() < time && time <= this.end.getTime();
+            return this.start.getTime() < date && date <= this.end.getTime();
         },
 
         slotByStartDate: function(date) {
-            var time = date.getTime();
+            var time = date;
+
+            if (typeof time != "number") {
+                time = kendo.date.toUtcTime(date);
+            }
 
             for (var slotIndex = 0; slotIndex < this._slots.length; slotIndex++) {
                 var slot = this._slots[slotIndex];
-                var startTime = slot.start.getTime();
-                var endTime = slot.end.getTime();
 
-                if (startTime <= time && time < endTime) {
+                if (slot.startInRange(time)) {
                     return slot;
                 }
             }
@@ -537,7 +589,11 @@ kendo_module({
         },
 
         slotByEndDate: function(date, allday) {
-            var time = date.getTime();
+            var time = date;
+
+            if (typeof time != "number") {
+                time = kendo.date.toUtcTime(date);
+            }
 
             if (allday) {
                 return this.slotByStartDate(date, false);
@@ -545,10 +601,8 @@ kendo_module({
 
             for (var slotIndex = 0; slotIndex < this._slots.length; slotIndex++) {
                 var slot = this._slots[slotIndex];
-                var startTime = slot.start.getTime();
-                var endTime = slot.end.getTime();
 
-                if (startTime < time && time <= endTime) {
+                if (slot.endInRange(time)) {
                     return slot;
                 }
             }
@@ -581,6 +635,18 @@ kendo_module({
             $.extend(this, options);
         },
 
+        startDate: function() {
+            var date = new Date(this.start);
+
+            return kendo.timezone.apply(date, "Etc/UTC");
+        },
+
+        endDate: function() {
+            var date = new Date(this.end);
+
+            return kendo.timezone.apply(date, "Etc/UTC");
+        },
+
         collectionIndex: function() {
             return this.columnIndex;
         },
@@ -595,6 +661,14 @@ kendo_module({
             } else {
                 return this.offsetLeft + offset;
             }
+        },
+
+        startInRange: function(date) {
+            return this.start <= date && date < this.end;
+        },
+
+        endInRange: function(date) {
+            return this.start < date && date <= this.end;
         }
     });
 
@@ -602,12 +676,34 @@ kendo_module({
         init: function(options) {
             $.extend(this, options);
         },
+
         collectionIndex: function() {
             return this.columnIndex;
         },
+
         refresh: function() {
             this.clientHeight = this.element.clientHeight;
             this.offsetTop = this.element.offsetTop;
+        },
+
+        startDate: function() {
+            var date = new Date(this.start);
+
+            return kendo.timezone.apply(date, "Etc/UTC");
+        },
+
+        endDate: function() {
+            var date = new Date(this.end);
+
+            return kendo.timezone.apply(date, "Etc/UTC");
+        },
+
+        startInRange: function(date) {
+            return this.start <= date && date < this.end;
+        },
+
+        endInRange: function(date) {
+            return this.start < date && date <= this.end;
         }
     });
 
