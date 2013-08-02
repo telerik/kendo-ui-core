@@ -1497,8 +1497,8 @@ kendo_module({
 
                 var direction = isLeft ? -1 : 1;
 
-                startSlot = group.slotFromSiblingCollection(startSlot, isAllDay, direction);
-                endSlot = group.slotFromSiblingCollection(endSlot, isAllDay, direction);
+                startSlot = group.siblingCollectionSlot(startSlot, isAllDay, direction);
+                endSlot = group.siblingCollectionSlot(endSlot, isAllDay, direction);
 
                 var slot = isLeft ? startSlot : endSlot;
                 var date = isLeft ? end : start;

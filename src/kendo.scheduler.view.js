@@ -364,7 +364,7 @@ kendo_module({
             return null;
         },
 
-        slotFromSiblingCollection: function(slot, isAllDay, direction) {
+        siblingCollectionSlot: function(slot, isAllDay, direction) {
             var collectionIndex = slot.collectionIndex();
 
             if (!isAllDay) {
@@ -388,7 +388,7 @@ kendo_module({
 
         prevSlot: function(slot, timeSlot) {
             if (slot.isAllDay) {
-                return undefined;
+                return;
             }
 
             var collectionIndex = slot.collectionIndex();
