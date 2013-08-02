@@ -197,6 +197,12 @@
     left: 0;
 }
 
+.k-rtl .k-group-footer .k-group-cell + td
+{
+    border-left-width: 0;
+    border-right-width: 1px;
+}
+
 /* Editing */
 
 .k-rtl .k-edit-label,
