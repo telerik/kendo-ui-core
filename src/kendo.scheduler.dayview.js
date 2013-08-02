@@ -1495,6 +1495,16 @@ kendo_module({
                 startSlot = group.slotFromSiblingCollection(startSlot, isAllDay, -1);
                 endSlot = group.slotFromSiblingCollection(endSlot, isAllDay, -1);
 
+                if (!shift && !startSlot) {
+                    if (selection.groupIndex >= 1) {
+                        startSlot = endSlot = group.lastSlot(end, isAllDay, false);
+                        selection.groupIndex -= 1;
+                    } else {
+                        startSlot = endSlot = null;
+                        selection.groupIndex = this.groups.length - 1;
+                    }
+                }
+
                 if (!shift && (!startSlot || !endSlot)) {
                     //TODO: REFACTOR
                     startSlot = {
@@ -1521,6 +1531,16 @@ kendo_module({
 
                 startSlot = group.slotFromSiblingCollection(startSlot, isAllDay, 1);
                 endSlot = group.slotFromSiblingCollection(endSlot, isAllDay, 1);
+
+                if (!shift && !endSlot) {
+                    if (selection.groupIndex < this.groups.length - 1) {
+                        startSlot = endSlot = group.firstSlot(end, isAllDay, false);
+                        selection.groupIndex += 1;
+                    } else {
+                        startSlot = endSlot = null;
+                        selection.groupIndex = 0;
+                    }
+                }
 
                 if (!shift && (!startSlot || !endSlot)) {
                     //TODO: REFACTOR

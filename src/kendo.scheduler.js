@@ -312,6 +312,7 @@ kendo_module({
                 this.set(field, eventInfo[field]);
             }
 
+            //TODO: Update only if there is startTime option
             this.set("startTime", toInvariantDate(this.start));
             this.set("endTime", toInvariantDate(this.end));
         },

@@ -344,6 +344,12 @@ kendo_module({
             return this.timeSlotRanges(startTime, endTime);
         },
 
+        _collection: function(index, multiday) {
+            var collections = multiday? this._daySlotCollections : this._timeSlotCollections;
+
+            return collections[index];
+        },
+
         ranges: function(startTime, endTime, isDay, isAllDay) {
             if (isDay) {
                 return this.daySlotRanges(startTime, endTime, isAllDay);
