@@ -1811,20 +1811,6 @@
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Date series / Aggregates / count");
 
-                test("count ignores NaN values", function() {
-                    createPlotArea([{
-                        type: "bar",
-                        data: [100, NaN, 300],
-                        aggregate: "count"
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    deepEqual(plotArea.series[0].data, [{ value: 2 }]);
-                });
-
                 test("count ignores null values", function() {
                     createPlotArea([{
                         type: "bar",
@@ -1851,20 +1837,6 @@
                     });
 
                     deepEqual(plotArea.series[0].data, [{ value: 2 }]);
-                });
-
-                test("count counts Infinity", function() {
-                    createPlotArea([{
-                        type: "bar",
-                        data: [100, Infinity, 300],
-                        aggregate: "count"
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    deepEqual(plotArea.series[0].data, [{ value: 3 }]);
                 });
 
                 // ------------------------------------------------------------
@@ -1942,20 +1914,6 @@
 
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Date series / Aggregates / first");
-
-                test("first ignores NaN values", function() {
-                    createPlotArea([{
-                        type: "bar",
-                        data: [NaN, 300],
-                        aggregate: "first"
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
-                });
 
                 test("first ignores null values", function() {
                     createPlotArea([{

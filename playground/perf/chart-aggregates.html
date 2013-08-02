@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chart Aggregates</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="benchmark.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="log-min">Running benchmark ... </div>
+        <script id="row-template" type="x-kendo/template">
+            <div>User agent: #= navigator.userAgent #
+            <table>
+                <tr>
+                    <th>Position</th><th>Contender</th>
+                    <th>Ops/sec (higher is better)</th>
+                </tr>
+                # for (var i = 0; i < data.length; i++) { #
+                    <tr>
+                        <td>#= (i + 1) #</td>
+                        <td>#= data[i].name #</td>
+                        <td>#= kendo.toString(data[i].hz, "N") #</td>
+                    </tr>
+                # } #
+            </table>
+            </div>
+        </script>
+        <script>
+            var dataviz = kendo.dataviz,
+                Aggregates = dataviz.Aggregates,
+                isNumber = dataviz.isNumber,
+                rowTemplate = kendo.template($("#row-template").html());
+
+            function data() {
+                var data = [];
+                for (var i = 0; i < 1000; i++) {
+                    data.push(i);
+                }
+
+                return data;
+            };
+
+            function minFilter(values) {
+                var result = values[0];
+
+                if (values.length > 1) {
+                    result = Math.min.apply(Math, values);
+                }
+
+                return result;
+            }
+
+            new Benchmark.Suite()
+            .add("Aggregates.min", function() {
+                var result = Aggregates.min(data());
+            })
+            .add("Math.min with pre-filtering", function() {
+                var data = [];
+                for (var i = 0; i < 1000; i++) {
+                    if (isNumber(i)) {
+                        data.push(i);
+                    }
+                }
+                var result = minFilter(data);
+            })
+            .on("complete", function() {
+                var results = $.makeArray(this);
+                results.sort(function(a, b) { return b.hz - a.hz });
+
+                $("#log-min").html(rowTemplate(results));
+            })
+            .run(true);
+        </script>
+    </body>
+</html>

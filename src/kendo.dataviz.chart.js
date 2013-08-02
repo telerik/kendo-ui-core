@@ -8656,23 +8656,35 @@ kendo_module({
 
     var Aggregates = {
         min: function(values) {
-            var result = values[0];
+            var min = MAX_VALUE,
+                i,
+                length = values.length,
+                n;
 
-            if (values.length > 1) {
-                result = math.min.apply(math, values);
+            for (i = 0; i < length; i++) {
+                n = values[i];
+                if (isNumber(n)) {
+                    min = math.min(min, n);
+                }
             }
 
-            return result;
+            return min === MAX_VALUE ? values[0] : min;
         },
 
         max: function(values) {
-            var result = values[0];
+            var max = MIN_VALUE,
+                i,
+                length = values.length,
+                n;
 
-            if (values.length > 1) {
-                result = math.max.apply(math, values);
+            for (i = 0; i < length; i++) {
+                n = values[i];
+                if (isNumber(n)) {
+                    max = math.max(max, n);
+                }
             }
 
-            return result;
+            return max === MIN_VALUE ? values[0] : max;
         },
 
         sum: function(values) {
@@ -8683,20 +8695,33 @@ kendo_module({
 
             for (i = 0; i < length; i++) {
                 n = values[i];
-                console.log(n);
+                if (isNumber(n)) {
                     sum += n;
+                }
             }
 
             return sum;
         },
 
         count: function(values) {
-            return values.length;
+            var length = values.length,
+                count = 0,
+                i,
+                val;
+
+            for (i = 0; i < length; i++) {
+                val = values[i];
+                if (val !== null && defined(val)) {
+                    count++;
+                }
+            }
+
+            return count;
         },
 
         avg: function(values) {
             var result = values[0],
-                count = Aggregates.count(values);
+                count = countNumbers(values);
 
             if (count > 0) {
                 result = Aggregates.sum(values) / count;
@@ -8706,6 +8731,17 @@ kendo_module({
         },
 
         first: function(values) {
+            var length = values.length,
+                i,
+                val;
+
+            for (i = 0; i < length; i++) {
+                val = values[i];
+                if (val !== null && defined(val)) {
+                    return val;
+                }
+            }
+
             return values[0];
         }
     };
@@ -9753,21 +9789,28 @@ kendo_module({
         }
     }
 
-    function areNumbers(values) {
-        var i,
-            length = values.length;
+    function isNumber(val) {
+        return typeof val === "number" && !isNaN(val);
+    }
+
+    function countNumbers(values) {
+        var length = values.length,
+            count = 0,
+            i,
+            num;
 
         for (i = 0; i < length; i++) {
-            if (!isNumber(values[i])) {
-                return false;
+            num = values[i];
+            if (isNumber(num)) {
+                count++;
             }
         }
 
-        return true;
+        return count;
     }
 
-    function isNumber(val) {
-        return typeof val === "number" && !isNaN(val);
+    function areNumbers(values) {
+        return countNumbers(values) === values.length;
     }
 
     function axisRanges(axes) {
@@ -10065,6 +10108,7 @@ kendo_module({
         axisGroupBox: axisGroupBox,
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
+        countNumbers: countNumbers,
         duration: duration,
         indexOf: indexOf,
         isNumber: isNumber,
