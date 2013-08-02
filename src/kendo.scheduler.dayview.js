@@ -1435,16 +1435,13 @@ kendo_module({
                 var collection = range.collection;
 
                 for (var slotIndex = range.start.index; slotIndex <= range.end.index; slotIndex++) {
-                    var slot = collection.at(slotIndex);
-
-                    element = slot.element;
+                    element = collection.at(slotIndex).element;
                     addSelectedState(element);
                 }
             }
 
-            if (backwardSelection) {
-                range = ranges[0];
-                element = range.start.element;
+            if (selection.backward) {
+                element = ranges[0].start.element;
             }
 
             this._scrollTo(element, this.content[0]);

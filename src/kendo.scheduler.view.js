@@ -921,7 +921,7 @@ kendo_module({
             this.clearSelection();
 
             if (!this._selectEvents(selection)) {
-                this._selectCells(selection);
+                this._selectSlots(selection);
             }
         },
 

@@ -378,18 +378,6 @@
                 equal(view.args("_scrollTo")[0], view.content.find(".k-event:last")[0]);
             });
 
-            test("View select method supports end date before start date", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 8, 2), end: new Date(2013, 6, 7) });
-
-                view.select(selection);
-
-                var allCells = view.content.find("table td"),
-                    cells = allCells.filter("td.k-state-selected");
-
-                equal(cells.length, 26);
-            });
-
             test("View select method scrolls to the first cell when start is bigger than end", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
                     selection = createSelection({ start: new Date(2013, 6, 8, 2, 0), end: new Date(2013, 6, 7) });
@@ -434,18 +422,6 @@
 
                 view.select(selection);
                 ok(true);
-            });
-
-            test("View with backward selection in one column does not increase end slot", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] });
-                var selection = createSelection({
-                    start: new Date(2013, 6, 8, 12),
-                    end: new Date(2013, 6, 8, 10)
-                });
-
-                view.select(selection);
-
-                equal(view.content.find(".k-state-selected").length, 2);
             });
 
             module("Multi Day View navigation", {
