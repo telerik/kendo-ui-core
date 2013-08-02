@@ -17,6 +17,7 @@
             e.Remove("scheduler_remove");
             e.Cancel("scheduler_cancel");
             e.Edit("scheduler_edit");
+            e.Add("scheduler_add");
         })
         .Views(views =>
         {
@@ -61,6 +62,10 @@
 
     function scheduler_edit(e) {
         kendoConsole.log("edit");
+    }
+
+    function scheduler_add(e) {
+        kendoConsole.log("add");
     }
 </script>
 

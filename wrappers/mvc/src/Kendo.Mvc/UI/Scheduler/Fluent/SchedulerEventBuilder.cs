@@ -76,6 +76,64 @@
         }
 
         /// <summary>
+        /// Defines the inline handler of the add event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler()
+        ///            .Name("Scheduler")
+        ///            .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        ///            .Events(events => events.Add(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder Add(Func<object, object> handler)
+        {
+            Handler("add", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the add event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///             .Name("Scheduler")
+        ///             .Events(events => events.Add("add"))
+        ///             .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder Add(string handler)
+        {
+            Handler("add", handler);
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the inline handler of the edit event.
         /// </summary>
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>

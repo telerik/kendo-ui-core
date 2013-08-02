@@ -953,16 +953,15 @@
     <Content Include="Areas\razor\Views\web\scheduler\templates.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\resources.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\api.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\resources_grouping_horizontal.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\resources_grouping_vertical.cshtml" />
     <Content Include="Areas\razor\Views\web\upload\templates.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\api.cshtml" />
     <Content Include="Areas\razor\Views\web\upload\templates.cshtml" />
     <Content Include="Areas\razor\Views\web\upload\initialfiles.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\globalization.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\selection.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\web\scheduler\api.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.designer.cs</LastGenOutput>
