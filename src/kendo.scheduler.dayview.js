@@ -1458,8 +1458,8 @@ kendo_module({
 
             var handled = false;
             var group = this.groups[selection.groupIndex];
-            var startSlot = group._slot(start, isAllDay, true, false).slot;
-            var endSlot = group._slot(end, isAllDay, false, false).slot;
+            var startSlot = group.slot(start, isAllDay, true);
+            var endSlot = group.slot(end, isAllDay, false);
             var vertical = this._isVerticallyGrouped();
 
             if (key === keys.DOWN) {

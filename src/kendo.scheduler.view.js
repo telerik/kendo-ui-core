@@ -352,18 +352,6 @@ kendo_module({
             return this.timeSlotRanges(startTime, endTime);
         },
 
-        _startCollection: function(date, collections) {
-            for (var collectionIndex = 0; collectionIndex < collections.length; collectionIndex++) {
-                var collection = collections[collectionIndex];
-
-                if (collection.startInRange(date)) {
-                    return collection;
-                }
-            }
-
-            return null;
-        },
-
         _endCollection: function(date, collections) {
             for (var collectionIndex = 0; collectionIndex < collections.length; collectionIndex++) {
                 var collection = collections[collectionIndex];
@@ -875,7 +863,7 @@ kendo_module({
         moveToEvent: function(selection, prev) {
             var isAllDay = !!selection.isAllDay;
             var group = this.groups[selection.groupIndex];
-            var slot = group._slot(selection.start, isAllDay, true, false).slot;
+            var slot = group.slot(selection.start, isAllDay, true);
             var slotIndex = slot.index;
             var events = selection.events;
             var eventInfo;
