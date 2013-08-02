@@ -298,7 +298,7 @@ kendo_module({
             var that = this,
                 hideBar = proxy(that, "_hideBar");
 
-            if (support.mobileOS.appMode || !that.options.hideAddressBar || !HIDEBAR) {
+            if (support.mobileOS.appMode || !that.options.hideAddressBar || !HIDEBAR || that.options.useNativeScrolling) {
                 return;
             }
 
