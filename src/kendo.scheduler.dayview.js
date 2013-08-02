@@ -1547,11 +1547,6 @@ kendo_module({
         }
     });
 
-    var selectedStateRegExp = /\s*k-state-selected/;
-    function addSelectedState(cell) {
-        cell.className = cell.className.replace(selectedStateRegExp, "") + " k-state-selected";
-    }
-
    extend(true, ui, {
        MultiDayView: MultiDayView,
        DayView: MultiDayView.extend({

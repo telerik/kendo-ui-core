@@ -925,6 +925,30 @@ kendo_module({
             }
         },
 
+        _selectSlots: function(selection) {
+            var group = this.groups[selection.groupIndex];
+            var ranges = group.ranges(selection.start, selection.end, selection.isAllDay, false);
+
+            for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
+                var range = ranges[rangeIndex];
+
+                var startSlot = range.start;
+
+                var collection = range.collection;
+
+                for (var slotIndex = range.start.index; slotIndex <= range.end.index; slotIndex++) {
+                    element = collection.at(slotIndex).element;
+                    addSelectedState(element);
+                }
+            }
+
+            if (selection.backward) {
+                element = ranges[0].start.element;
+            }
+
+            this._scrollTo(element, this.content[0]);
+        },
+
         _selectEvents: function(selection) {
             var found = false;
             var uidAttr = kendo.attr("uid");
@@ -1445,6 +1469,11 @@ kendo_module({
             }
             return item == value;
         };
+    }
+
+    var selectedStateRegExp = /\s*k-state-selected/;
+    function addSelectedState(cell) {
+        cell.className = cell.className.replace(selectedStateRegExp, "") + " k-state-selected";
     }
 
     $.extend(ui.SchedulerView, {

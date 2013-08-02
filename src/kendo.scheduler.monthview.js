@@ -76,24 +76,6 @@ kendo_module({
             that._groups();
         },
 
-        _selectSlots: function(startIndex, endIndex, slots, groupIndex) {
-            var idx = startIndex;
-            if (startIndex > endIndex) {
-                startIndex =  endIndex;
-                endIndex = idx;
-            }
-
-            for (idx = startIndex; idx <= endIndex; idx ++) {
-                if (groupIndex === slots[idx].groupIndex) {
-                    $(slots[idx].element).addClass("k-state-selected");
-                }
-            }
-
-            if (slots[endIndex]) {
-                this._scrollTo(slots[endIndex].element, this.content[0]);
-            }
-        },
-
         move: function(selection, key, keep) {
             var handled = false,
                 date = selection.end,
