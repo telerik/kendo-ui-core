@@ -1351,24 +1351,7 @@ kendo_module({
             return result;
         },
 
-        _resetFields: function(series) {
-            var binder = this,
-                fields = binder.valueFields(series).concat(
-                    binder.otherFields(series)
-                ),
-                length = fields.length,
-                i, fieldName, sourceFieldName;
-
-            for (i = 0; i < length; i++) {
-                fieldName = fields[i];
-                sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
-                series[sourceFieldName] = fieldName;
-            }
-
-            return series;
-        },
-
-        _makeValue: function(fields, value) {
+        _makeValue: function(fields, initialValue) {
             var value = {},
                 i,
                 length = fields.length,
@@ -1376,7 +1359,7 @@ kendo_module({
 
             for (i = 0; i < length; i++) {
                 fieldName = fields[i];
-                value[fieldName] = value;
+                value[fieldName] = initialValue;
             }
 
             return value;
@@ -7272,8 +7255,6 @@ kendo_module({
                     categories[i]
                 );
             }
-
-            result = SeriesBinder.current._resetFields(result);
 
             return result;
         },
