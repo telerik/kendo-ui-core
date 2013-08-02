@@ -10631,6 +10631,12 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>Defines the width of the column resize handle in pixels. Apply a larger value for easier grasping.</description>
+            <name>columnResizeHandleWidth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
 instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
@@ -14247,6 +14253,11 @@ That way all users would see the same dates and times no matter their configured
             <type>Object</type>
         </attribute>
         <attribute>
+            <description>Fired when the a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>add</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user cancels editing by clicking the "cancel" button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>cancel</name>
             <rtexprvalue>true</rtexprvalue>
@@ -14646,6 +14657,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
         <body-content>JSP</body-content>
     </tag>
 
+    <tag>
+        <description>Fired when the a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>scheduler-add</name>
+        <tag-class>com.kendoui.taglib.scheduler.AddFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Fired when the user cancels editing by clicking the "cancel" button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>scheduler-cancel</name>

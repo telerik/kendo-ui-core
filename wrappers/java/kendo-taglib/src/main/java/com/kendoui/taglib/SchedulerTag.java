@@ -71,6 +71,10 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     }
 
+    public void setAdd(AddFunctionTag value) {
+        setEvent("add", value.getBody());
+    }
+
     public void setCancel(CancelFunctionTag value) {
         setEvent("cancel", value.getBody());
     }
@@ -225,6 +229,18 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setWidth(Object value) {
         setProperty("width", value);
+    }
+
+    public String getAdd() {
+        Function property = ((Function)getProperty("add"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setAdd(String value) {
+        setProperty("add", new Function(value));
     }
 
     public String getCancel() {
