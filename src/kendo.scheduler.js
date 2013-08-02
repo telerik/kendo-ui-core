@@ -772,11 +772,11 @@ kendo_module({
                 // switch to view 1-9
                 that.view(that._viewByIndex(key - 49));
             } else if (view.move(selection, key, shiftKey)) {
-                //if (view.isInRange(selection.start)) {
+                if (view.inRange(selection)) {
                     view.select(selection);
-                //} else {
-                //    that.date(selection.start);
-                //}
+                } else {
+                    that.date(selection.start);
+                }
 
                 e.preventDefault();
             }

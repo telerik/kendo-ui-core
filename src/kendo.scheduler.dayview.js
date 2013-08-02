@@ -1367,48 +1367,14 @@ kendo_module({
             return rowLevel ? rowLevel.length : 0;
         },
 
-        _selectionOffset: function() {
-            return this._dates.length;
-        },
-
-        normalizeSelection: function(selection) {
-            return;
-            var columns = this._columns,
-                columnIndex = this._dateSlotIndex(selection.start),
-                slotIndex = this._timeSlotIndex(selection.start),
-                slot;
-
-            if (columnIndex < 0 || columnIndex >= columns.length) {
-                columnIndex = 0;
-            }
-
-            slot = this._columns[columnIndex].slots;
-
-            if (slotIndex < 0) {
-                slotIndex = 0;
-            } else if (slotIndex > (slot.length - 1)) {
-                slotIndex = slot.length - 1;
-            }
-
-            slot = this._columns[columnIndex].slots[slotIndex];
-            selection.start = new Date(slot.start);
-            selection.end = new Date(slot.end);
-        },
-
+        //TODO: Persist selected slot between views
         moveSelectionToPeriod: function(selection) {
-            var offset = this._selectionOffset(),
-                start = selection.start,
-                end = selection.end;
+            if (!this.inRange(selection)) {
+                var slot = this.groups[selection.groupIndex || 0]._collection(0, false).first();
 
-            if (this._dateSlotIndex(start) < 0 || this._dateSlotIndex(end) < 0) {
-                if (start >= this.endDate()) {
-                    offset = -offset;
-                }
-                selection.start = addDays(start, offset);
-                selection.end = addDays(end, offset);
-                selection.events = [];
-            } else {
-                 this.normalizeSelection(selection);
+                selection.isAllDay = slot.isAllDay;
+                selection.start = slot.start;
+                selection.end = slot.end;
             }
         },
 
@@ -1423,6 +1389,7 @@ kendo_module({
             var isAllDay = selection.isAllDay;
             var backwardSelection = start > end;
 
+            //TODO: Remove support for negative selection
             if (backwardSelection) {
                 start = new Date(end);
                 end = new Date(selection.start);
@@ -1525,22 +1492,25 @@ kendo_module({
                     selection.backward = true;
                 }
 
-                var slot = selection.backward ? startSlot : endSlot;
-                var collectionIndex = isAllDay ? selection.groupIndex : slot.collectionIndex() - 1;
-                var collection = group._collection(collectionIndex, isAllDay /*multiday*/);
+                startSlot = group.slotFromSiblingCollection(startSlot, isAllDay, -1);
+                endSlot = group.slotFromSiblingCollection(endSlot, isAllDay, -1);
 
-                if ((!isAllDay && collection) || (isAllDay && startSlot.index > 0)) {
-                    if (isAllDay) {
-                        startSlot = collection.at(startSlot.index - 1);
-                        endSlot = collection.at(endSlot.index - 1);
-                    } else {
-                        startSlot = collection.at(startSlot.index);
-                        endSlot = collection.at(endSlot.index);
-                    }
-                } else if (!shift) {
-                    //TODO: Use this.previousDate()
-                    setTime(startSlot.start, -MS_PER_DAY);
-                    setTime(endSlot.end, -MS_PER_DAY);
+                if (!shift && (!startSlot || !endSlot)) {
+                    //TODO: REFACTOR
+                    startSlot = {
+                        start: this.previousDate()
+                    };
+
+                    endSlot = {
+                        end: this.previousDate()
+                    };
+
+                    startSlot.isAllDay = selection.isAllDay;
+                    setTime(startSlot.start, getMilliseconds(selection.start));
+
+                    var endMilliseconds = selection.isAllDay ? MS_PER_DAY : getMilliseconds(selection.end);
+
+                    setTime(endSlot.end, endMilliseconds);
                 }
 
                 handled = true;
@@ -1549,36 +1519,38 @@ kendo_module({
                     selection.backward = false;
                 }
 
-                var slot = selection.backward ? startSlot : endSlot;
-                var collectionIndex = isAllDay ? selection.groupIndex : slot.collectionIndex() + 1;
-                var collection = group._collection(collectionIndex, isAllDay /*multiday*/);
+                startSlot = group.slotFromSiblingCollection(startSlot, isAllDay, 1);
+                endSlot = group.slotFromSiblingCollection(endSlot, isAllDay, 1);
 
-                if (collection && startSlot.index < collection.last().index) {
-                    if (isAllDay) {
-                        startSlot = collection.at(startSlot.index + 1);
-                        endSlot = collection.at(endSlot.index + 1);
-                    } else {
-                        startSlot = collection.at(startSlot.index);
-                        endSlot = collection.at(endSlot.index);
-                    }
-                } else if (!shift) {
-                    //TODO: Use this.nextDate()
-                    setTime(startSlot.start, MS_PER_DAY);
-                    setTime(endSlot.end, MS_PER_DAY);
+                if (!shift && (!startSlot || !endSlot)) {
+                    //TODO: REFACTOR
+                    startSlot = {
+                        start: this.nextDate()
+                    };
+
+                    endSlot = {
+                        end: this.nextDate()
+                    };
+
+                    startSlot.isAllDay = selection.isAllDay;
+                    setTime(startSlot.start, getMilliseconds(selection.start));
+
+                    var endMilliseconds = selection.isAllDay ? MS_PER_DAY : getMilliseconds(selection.end);
+
+                    setTime(endSlot.end, endMilliseconds);
                 }
 
                 handled = true;
             }
 
-            if (handled && startSlot && endSlot) {
+            if (handled) {
                 if (shift) {
-                    console.log(selection.backward);
-                    if (selection.backward) {
+                    if (selection.backward && startSlot) {
                         selection.start = startSlot.start;
-                    } else {
+                    } else if (!selection.backward && endSlot) {
                         selection.end = endSlot.end;
                     }
-                } else {
+                } else if (startSlot && endSlot) {
                     selection.isAllDay = startSlot.isAllDay;
                     selection.start = startSlot.start;
                     selection.end = endSlot.end;

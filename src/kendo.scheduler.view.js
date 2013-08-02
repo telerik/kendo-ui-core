@@ -376,6 +376,28 @@ kendo_module({
             return null;
         },
 
+        slotFromSiblingCollection: function(slot, isAllDay, direction) {
+            var collectionIndex = slot.collectionIndex();
+
+            if (!isAllDay) {
+                collectionIndex += direction;
+            }
+
+            var collection = this._collection(collectionIndex, isAllDay);
+
+            if (collection) {
+                if (isAllDay) {
+                    slot = collection.at(slot.index + direction);
+                } else {
+                    slot = collection.at(slot.index);
+                }
+            } else {
+                slot = undefined;
+            }
+
+            return slot;
+        },
+
         prevSlot: function(slot, timeSlot) {
             if (!slot.isAllDay) {
                 var collectionIndex = slot.collectionIndex();
@@ -936,8 +958,14 @@ kendo_module({
             return found;
         },
 
-        isInRange: function(date) {
-            return this.startDate() <= date && date <= this.endDate();
+        inRange: function(options) {
+            var startDate = this.startDate();
+            var nextDate = this.nextDate();
+            var start = options.start;
+            var end = options.end;
+
+            return startDate <= start && start < nextDate && startDate < end && end <= nextDate;
+>>>>>>> Introduce slotFromSiblingCollection method. Refactor horizontal navigation in MultiDay slot
         },
 
         _scrollbarOffset: function(value, multiday) {
