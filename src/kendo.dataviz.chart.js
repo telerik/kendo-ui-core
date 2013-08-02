@@ -9254,7 +9254,7 @@ kendo_module({
                 field = item.field = fields[i];
                 fieldAggregate = aggregate[field];
                 if (fieldAggregate) {
-                    if (typeof fieldAggregate !== "function") {
+                    if (!isFn(fieldAggregate)) {
                         fieldAggregate = Aggregates[fieldAggregate];
                     }
                     item.aggregate = fieldAggregate;

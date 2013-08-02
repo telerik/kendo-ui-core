@@ -1541,7 +1541,7 @@
                         }, dateCategoryAxis)
                     });
 
-                deepEqual(plotArea.series[0].data, [{ value: 100 }]);
+                    deepEqual(plotArea.series[0].data, [{ value: 100 }]);
                 });
 
                 test("Aggregates series data with user function", 1, function() {
@@ -1587,6 +1587,25 @@
                             baseUnit: "months"
                         }, dateCategoryAxis)
                     });
+                });
+
+                test("Does not drop note text", 1, function() {
+                    createPlotArea([{
+                        type: "bar",
+                        field: "v",
+                        noteTextField: "n",
+                        aggregate: {
+                            value: "max",
+                            noteText: "first"
+                        },
+                        data: [{ v: 1, n: "foo" }, { v: 2 }]
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    deepEqual(plotArea.series[0].data, [{ v: 2, n: "foo" }]);
                 });
 
                 // ------------------------------------------------------------
