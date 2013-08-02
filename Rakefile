@@ -15,7 +15,13 @@ CDN_ROOT = 'http://cdn.kendostatic.com/'
 KENDO_ORIGIN_HOST = 'kendoorigin'
 STAGING_CDN_ROOT = 'http://cdn.kendostatic.com/staging/'
 
-ARCHIVE_ROOT = "/kendo-builds"
+PLATFORM = RbConfig::CONFIG['host_os']
+
+if PLATFORM =~ /linux|darwin/
+    ARCHIVE_ROOT = "/kendo-builds"
+else
+    ARCHIVE_ROOT = "K:/"
+end
 
 if ENV['DRY_RUN']
     ADMIN_URL = 'http://integrationadmin.telerik.com/'
@@ -572,6 +578,11 @@ namespace :build do
             # sh "curl -s -m 300 --netrc \"http://localhost:8081/manager/text/reload?path=/staging-java\""
             sh "rsync -avc --del dist/demos/staging-php/ #{WEB_ROOT}/staging-php/"
             sh "rsync -avc --del dist/demos/staging-mvc/ /mnt/kendo-iis/staging-mvc/"
+        end
+
+        desc 'Build and publish ASP.NET MVC DLLs'
+        task :aspnetmvc_binaries => [ "mvc:binaries" ] do
+            sh "rsync -avc dist/binaries/ #{File.join(ARCHIVE_ROOT, "Stable", "binaries")}"
         end
 
         desc 'Package and publish bundles to the Stable directory'
