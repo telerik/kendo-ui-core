@@ -141,7 +141,7 @@ kendo_module({
 
             var group = this.groups[endSlot.groupIndex];
 
-            var ranges = group.ranges(startSlot.start, endSlot.end, multiday, event.isAllDay);
+            var ranges = group.ranges(startSlot.startDate(), endSlot.endDate(), multiday, event.isAllDay);
 
             this._removeResizeHint();
 

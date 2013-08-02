@@ -273,6 +273,8 @@ kendo_module({
 
             var ranges = [];
 
+            var ranges = [];
+
             for (var collectionIndex = startIndex; collectionIndex <= endIndex; collectionIndex++) {
                 var collection = collections[collectionIndex];
 
@@ -376,6 +378,22 @@ kendo_module({
 
         _startSlot: function(time, collections, isAllDay) {
             var collection = this._startCollection(time, collections);
+
+            var slot = collection.slotByStartDate(date, isAllDay);
+
+            if (!slot) {
+                slot = collection.first();
+                inRange = false;
+            }
+
+            return {
+                slot: slot,
+                inRange: inRange
+            };
+        },
+
+        _endDaySlot: function(date, isAllDay) {
+            var collection = this._endCollection(date, this._daySlotCollections);
 
             var inRange = true;
 
@@ -664,6 +682,14 @@ kendo_module({
             } else {
                 return this.offsetLeft + offset;
             }
+        },
+
+        startInRange: function(date) {
+            return this.start <= date && date < this.end;
+        },
+
+        endInRange: function(date) {
+            return this.start < date && date <= this.end;
         }
     });
 
@@ -675,9 +701,30 @@ kendo_module({
             this.isDaySlot = true;
             this.firstChildHeight = this.element.firstChild.offsetHeight + 3;
         },
+
         refresh: function() {
             this.clientHeight = this.element.clientHeight;
             this.offsetTop = this.element.offsetTop;
+        },
+
+        startDate: function() {
+            var date = new Date(this.start);
+
+            return kendo.timezone.apply(date, "Etc/UTC");
+        },
+
+        endDate: function() {
+            var date = new Date(this.end);
+
+            return kendo.timezone.apply(date, "Etc/UTC");
+        },
+
+        startInRange: function(date) {
+            return this.start <= date && date < this.end;
+        },
+
+        endInRange: function(date) {
+            return this.start < date && date <= this.end;
         }
     });
 
