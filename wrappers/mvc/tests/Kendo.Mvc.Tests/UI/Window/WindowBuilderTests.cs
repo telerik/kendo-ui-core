@@ -241,5 +241,21 @@ namespace Kendo.Mvc.UI.Tests
             builder.AppendTo("#foo").ShouldBeSameAs(builder);
         }
 
+        [Fact]
+        public void AutoFocus_sets_AutoFocus_property()
+        {
+            const bool autoFocus = false;
+
+            builder.AutoFocus(autoFocus);
+
+            component.AutoFocus.ShouldEqual(autoFocus);
+        }
+
+        [Fact]
+        public void AutoFocus_returns_builder()
+        {
+            builder.AutoFocus(false).ShouldBeSameAs(builder);
+        }
+
     }
 }

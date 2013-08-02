@@ -33,6 +33,8 @@ namespace Kendo.Mvc.UI
         private string clientRowTemplate;
         private string clientAltRowTemplate;
 
+        private int defaultColumnResizeHandleWidth = 3;
+
         public Grid(ViewContext viewContext,
                     IJavaScriptInitializer initializer,
                     IUrlGenerator urlGenerator,
@@ -81,6 +83,8 @@ namespace Kendo.Mvc.UI
 
             AutoGenerateColumns = true;
 
+            ColumnResizeHandleWidth = defaultColumnResizeHandleWidth;
+
             DataSource = new DataSource()
             {
                 Type = DataSourceType.Server,
@@ -116,6 +120,12 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
+        }
+
+        public int ColumnResizeHandleWidth
+        {
+            get;
+            set;
         }
 
         public GridReorderableSettings Reorderable
@@ -740,6 +750,11 @@ namespace Kendo.Mvc.UI
             if (Resizable.Enabled)
             {
                 options["resizable"] = true;
+            }
+
+            if (ColumnResizeHandleWidth != defaultColumnResizeHandleWidth)
+            {
+                options["columnResizeHandleWidth"] = ColumnResizeHandleWidth;
             }
 
             if (Reorderable.Enabled)

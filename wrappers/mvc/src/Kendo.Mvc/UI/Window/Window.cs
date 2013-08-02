@@ -37,6 +37,8 @@ namespace Kendo.Mvc.UI
             Scrollable = true;
 
             Visible = true;
+
+            AutoFocus = true;
         }
 
         public HtmlTemplate Template
@@ -118,6 +120,12 @@ namespace Kendo.Mvc.UI
         }
 
         public bool Pinned
+        {
+            get;
+            set;
+        }
+
+        public bool AutoFocus
         {
             get;
             set;
@@ -210,6 +218,10 @@ namespace Kendo.Mvc.UI
             options.Add("iframe", Iframe);
             options.Add("draggable", Draggable);
             options.Add("pinned", Pinned);
+            if (AutoFocus == false)
+            {
+                options.Add("autoFocus", AutoFocus);
+            }
             options.Add("title", Title);
             if (!string.IsNullOrEmpty(AppendTo))
             {

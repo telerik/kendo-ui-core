@@ -325,8 +325,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-
-
         /// <summary>
         /// Sets whether the window should have scrollbars.
         /// </summary>
@@ -407,6 +405,16 @@ namespace Kendo.Mvc.UI.Fluent
         public WindowBuilder Pinned()
         {
             return Pinned(true);
+        }
+
+        /// <summary>
+        /// Sets whether the window automatically gains focus when opened.
+        /// </summary>
+        public WindowBuilder AutoFocus(bool value)
+        {
+            Component.AutoFocus = value;
+
+            return this;
         }
 
         /// <summary>

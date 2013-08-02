@@ -483,6 +483,43 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the width of the column resize handle. Apply a larger value for easier grasping.
+        /// </summary>
+        /// <param name="width">width in pixels</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Grid&lt;Product&gt;()
+        ///     .Name("Grid")
+        ///     .DataSource(dataSource =&gt;
+        ///         // configure the data source
+        ///         dataSource
+        ///          .Ajax()
+        ///          .Read(read =&gt; read.Action(&quot;Products_Read&quot;, &quot;Home&quot;))
+        ///     )
+        ///    .ColumnResizeHandleWidth(8)
+        /// )
+        /// </code>
+        /// <code lang="ASPX">
+        ///  &lt;%= Html.Kendo().Grid&lt;Product&gt;()
+        ///     .Name("Grid")
+        ///     .DataSource(dataSource =&gt;
+        ///         // configure the data source
+        ///         dataSource
+        ///          .Ajax()
+        ///          .Read(read =&gt; read.Action(&quot;Products_Read&quot;, &quot;Home&quot;))
+        ///     )
+        ///    .ColumnResizeHandleWidth(8)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GridBuilder<T> ColumnResizeHandleWidth(int width)
+        {
+            Component.ColumnResizeHandleWidth = width;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the reordering configuration of the grid.
         /// </summary>
         /// <param name="configurator">The lambda which configures the reordering</param>

@@ -90,6 +90,15 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             builder.Sortable(sortable => sortable.AllowUnsort(false));
             Assert.Equal(false, grid.Sortable.AllowUnsort);
-        }       
+        }
+
+        [Fact]
+        public void ColumnResizeHandleWidth_sets_the_column_resize_handle_width()
+        {
+            var newWidth = 5;
+
+            builder.ColumnResizeHandleWidth(newWidth);
+            Assert.Equal(newWidth, grid.ColumnResizeHandleWidth);
+        }
     }
 }
