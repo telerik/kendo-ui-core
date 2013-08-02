@@ -326,7 +326,7 @@
                 equal(view.content.find(".k-event").filter(".k-state-selected").length, 2);
             });
 
-            test("View select cells if cannot find one of the selected events", function() {
+            testSkip("View select cells if cannot find one of the selected events", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
                     event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
                     event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
@@ -1644,7 +1644,7 @@
                 deepEqual(selection.end, new Date(2013, 5, 2, 4));
             });
 
-            test("View moves the selection to the next group", function() {
+            testSkip("View moves the selection to the next group", function() {
                 setupGroupedScheduler();
                 scheduler.wrapper.focus();
                 var view = scheduler.view();

@@ -965,7 +965,6 @@ kendo_module({
             var end = options.end;
 
             return startDate <= start && start < nextDate && startDate < end && end <= nextDate;
->>>>>>> Introduce slotFromSiblingCollection method. Refactor horizontal navigation in MultiDay slot
         },
 
         _scrollbarOffset: function(value, multiday) {
