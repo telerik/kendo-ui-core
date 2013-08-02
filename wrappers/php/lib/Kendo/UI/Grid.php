@@ -19,6 +19,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Defines the width of the column resize handle in pixels. Apply a larger value for easier grasping.
+    * @param float $value
+    * @return \Kendo\UI\Grid
+    */
+    public function columnResizeHandleWidth($value) {
+        return $this->setProperty('columnResizeHandleWidth', $value);
+    }
+
+    /**
     * Adds GridColumn to the Grid.
     * @param \Kendo\UI\GridColumn|array,... $value one or more GridColumn to add.
     * @return \Kendo\UI\Grid

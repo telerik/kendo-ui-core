@@ -6,6 +6,10 @@ module CodeGen::PHP
         'Window' => ['content']
     }
 
+    MANUALLY_GENERATED_EVENTS = {
+        'Scheduler' => ['add']
+    }
+
     TYPES = {
         'Number' => 'float',
         'String' => 'string',
@@ -33,6 +37,16 @@ module CodeGen::PHP
 
         def path
             php_namespace.gsub('\\', '/')
+        end
+
+        def events
+            result = @events
+
+            if MANUALLY_GENERATED_EVENTS.has_key?(@name)
+                result.delete_if { |o| MANUALLY_GENERATED_EVENTS[@name].include?(o.name) }
+            end
+
+            result
         end
 
         def unique_options

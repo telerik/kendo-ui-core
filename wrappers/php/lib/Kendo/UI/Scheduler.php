@@ -341,6 +341,19 @@ That way all users would see the same dates and times no matter their configured
 
 
 //<< Properties
+    /**
+    * Sets the add event of the Scheduler.
+    * Fired when the a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function addEvent($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('add', $value);
+    }
 }
 
 ?>

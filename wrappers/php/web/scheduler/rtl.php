@@ -40,25 +40,25 @@ $transport = new \Kendo\Data\DataSourceTransport();
 
 $create = new \Kendo\Data\DataSourceTransportCreate();
 
-$create->url('events.php?type=create')
+$create->url('rtl.php?type=create')
      ->contentType('application/json')
      ->type('POST');
 
 $read = new \Kendo\Data\DataSourceTransportRead();
 
-$read->url('events.php?type=read')
+$read->url('rtl.php?type=read')
      ->contentType('application/json')
      ->type('POST');
 
 $update = new \Kendo\Data\DataSourceTransportUpdate();
 
-$update->url('events.php?type=update')
+$update->url('rtl.php?type=update')
      ->contentType('application/json')
      ->type('POST');
 
 $destroy = new \Kendo\Data\DataSourceTransportDestroy();
 
-$destroy->url('events.php?type=destroy')
+$destroy->url('rtl.php?type=destroy')
      ->contentType('application/json')
      ->type('POST');
 
@@ -140,52 +140,16 @@ $dataSource->transport($transport)
 $scheduler = new \Kendo\UI\Scheduler('scheduler');
 $scheduler->timezone("Etc/UTC")
     ->date(new DateTime('2013/6/13', new DateTimeZone('UTC')))
-    ->height(600)
+    ->height(400)
     ->addView(
         array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00', new DateTimeZone('UTC'))),
-        array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00', new DateTimeZone('UTC'))),
+        array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00', new DateTimeZone('UTC') )),
         'month', 'agenda')
-    ->dataSource($dataSource)
-    ->dataBinding('scheduler_dataBinding')
-    ->dataBound('scheduler_dataBound')
-    ->save('scheduler_save')
-    ->remove('scheduler_remove')
-    ->cancel('scheduler_cancel')
-    ->addEvent('scheduler_add')
-    ->edit('scheduler_edit');
-
+    ->dataSource($dataSource);
+?>
+<div class="k-rtl">
+<?php
 echo $scheduler->render();
 ?>
-<div class="console"></div>
-
-<script>
-    function scheduler_dataBinding(e) {
-        kendoConsole.log("dataBinding");
-    }
-
-    function scheduler_dataBound(e) {
-        kendoConsole.log("dataBound");
-    }
-
-    function scheduler_save(e) {
-        kendoConsole.log("save");
-    }
-
-    function scheduler_remove(e) {
-        kendoConsole.log("remove");
-    }
-
-    function scheduler_cancel(e) {
-        kendoConsole.log("cancel");
-    }
-
-    function scheduler_edit(e) {
-        kendoConsole.log("edit");
-    }
-
-    function scheduler_add(e) {
-        kendoConsole.log("add");
-    }
-</script>
-
+</div>
 <?php require_once '../../include/footer.php'; ?>
