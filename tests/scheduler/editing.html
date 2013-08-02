@@ -129,6 +129,32 @@
                 equal(add.calls("add"), 1);
             });
 
+            test("addEvent triggers add event passing the start and end date and all day info", 3, function() {
+                var scheduler = setup({
+                    add: function(e) {
+                        deepEqual(e.start, new Date("2013/6/6"));
+                        deepEqual(e.end, new Date("2013/6/7"));
+                        deepEqual(e.isAllDay, true);
+                    }
+                });
+
+                scheduler.addEvent({ isAllDay: true, start: new Date("2013/6/6"), end: new Date("2013/6/7") });
+            });
+
+            test("cancelling addEvent prevent adding the event to the DataSource", function() {
+                var scheduler = setup({
+                        add: function(e) {
+                            e.preventDefault();
+                        }
+                    }),
+                    dataSource = scheduler.dataSource,
+                    add = stub(dataSource, "add");
+
+                scheduler.addEvent({ isAllDay: true, start: new Date("2013/6/6"), end: new Date("2013/6/7") });
+
+                equal(add.calls("add"), 0);
+            });
+
             test("addEvent with type allday creates allday event", function() {
                 var scheduler = setup(),
                     dataSource = scheduler.dataSource;

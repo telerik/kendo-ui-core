@@ -588,6 +588,7 @@ kendo_module({
 
         delete options.remove;
         delete options.edit;
+        delete options.add;
 
         return options;
     }
@@ -880,6 +881,7 @@ kendo_module({
             EDIT,
             CANCEL,
             SAVE,
+            "add",
             "dataBinding",
             "dataBound"
         ],
@@ -1254,11 +1256,15 @@ kendo_module({
         },
 
         addEvent: function(eventInfo) {
-            var editable = this.editable,
-                dataSource = this.dataSource,
-                event;
+            var editable = this.editable;
+            var dataSource = this.dataSource;
+            var event;
 
-            if ((editable && editable.end()) || !editable) {
+            eventInfo = eventInfo || {};
+
+            var prevented = this.trigger("add", { start: eventInfo.start, end: eventInfo.end, isAllDay: eventInfo.isAllDay });
+
+            if (!prevented && ((editable && editable.end()) || !editable)) {
 
                 this.cancelEvent();
 

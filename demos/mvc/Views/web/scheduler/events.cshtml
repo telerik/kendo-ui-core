@@ -31,6 +31,10 @@ $(function() {
         kendoConsole.log("edit");
     }
 
+    function scheduler_add(e) {
+        kendoConsole.log("add");
+    }
+
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
         startTime: new Date("2013/6/13 7:00"),
@@ -47,6 +51,7 @@ $(function() {
         save: scheduler_save,
         remove: scheduler_remove,
         edit: scheduler_edit,
+        add: scheduler_add,
         cancel: scheduler_cancel,
         dataSource: {
             batch: true,
