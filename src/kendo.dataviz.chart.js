@@ -1278,7 +1278,8 @@ kendo_module({
         init: function() {
             this._valueFields = {};
             this._otherFields = {};
-            this._nullValues = {};
+            this._nullValue = {};
+            this._undefinedValue = {};
         },
 
         register: function(seriesTypes, valueFields, otherFields) {
@@ -1293,7 +1294,8 @@ kendo_module({
 
                 binder._valueFields[type] = valueFields;
                 binder._otherFields[type] = otherFields;
-                binder._nullValues[type] = binder._makeNullValue(valueFields);
+                binder._nullValue[type] = binder._makeValue(valueFields, null);
+                binder._undefinedValue[type] = binder._makeValue(valueFields, undefined);
             }
         },
 
@@ -1316,8 +1318,10 @@ kendo_module({
                 otherFields = binder._otherFields[series.type],
                 value;
 
-            if (pointData === null || !defined(pointData)) {
-                value = binder._nullValues[series.type];
+            if (pointData === null) {
+                value = binder._nullValue[series.type];
+            } else if (!defined(pointData)) {
+                value = binder._undefinedValue[series.type];
             } else if (isArray(pointData)) {
                 fieldData = pointData.slice(valueFields.length);
                 value = binder._bindFromArray(pointData, valueFields);
@@ -1364,7 +1368,7 @@ kendo_module({
             return series;
         },
 
-        _makeNullValue: function(fields) {
+        _makeValue: function(fields, value) {
             var value = {},
                 i,
                 length = fields.length,
@@ -1372,7 +1376,7 @@ kendo_module({
 
             for (i = 0; i < length; i++) {
                 fieldName = fields[i];
-                value[fieldName] = null;
+                value[fieldName] = value;
             }
 
             return value;
@@ -8651,16 +8655,6 @@ kendo_module({
     });
 
     var Aggregates = {
-        max: function(values) {
-            var result = values[0];
-
-            if (values.length > 1) {
-                result = math.max.apply(math, values);
-            }
-
-            return result;
-        },
-
         min: function(values) {
             var result = values[0];
 
@@ -8671,13 +8665,26 @@ kendo_module({
             return result;
         },
 
+        max: function(values) {
+            var result = values[0];
+
+            if (values.length > 1) {
+                result = math.max.apply(math, values);
+            }
+
+            return result;
+        },
+
         sum: function(values) {
             var length = values.length,
-                sum = 0, i, number;
+                sum = 0,
+                i,
+                n;
 
             for (i = 0; i < length; i++) {
-                number = values[i];
-                sum += number;
+                n = values[i];
+                console.log(n);
+                    sum += n;
             }
 
             return sum;
