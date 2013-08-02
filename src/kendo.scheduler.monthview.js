@@ -76,40 +76,6 @@ kendo_module({
             that._groups();
         },
 
-        select: function(selection) {
-            var that = this;
-
-            that.clearSelection();
-
-            if (!that._selectEvents(selection.events)) {
-                that._selectSlots(
-                    that._applyOffset(that._slotIndex(selection.start), selection.groupIndex),
-                    that._applyOffset(that._slotIndex(selection.end), selection.groupIndex),
-                    that._row.slots,
-                    selection.groupIndex || 0
-                );
-            }
-        },
-
-        _selectEvents: function(events) {
-            var found = false;
-            var uidAttr = kendo.attr("uid");
-
-            if (!events[0]) {
-                return found;
-            }
-
-            var elements = this.table.find("[" + uidAttr + "=" + events.join("],[" + uidAttr + "=") + "]");
-            if (elements.length > 0) {
-                found = true;
-                elements.addClass("k-state-selected");
-
-                this._scrollTo(elements.last()[0], this.content[0]);
-            }
-
-            return found;
-        },
-
         _selectSlots: function(startIndex, endIndex, slots, groupIndex) {
             var idx = startIndex;
             if (startIndex > endIndex) {
@@ -126,10 +92,6 @@ kendo_module({
             if (slots[endIndex]) {
                 this._scrollTo(slots[endIndex].element, this.content[0]);
             }
-        },
-
-        clearSelection: function() {
-            this.table.find(".k-state-selected").removeClass("k-state-selected");
         },
 
         move: function(selection, key, keep) {
@@ -198,68 +160,6 @@ kendo_module({
             }
 
             return handled;
-        },
-
-        moveToEvent: function(selection, prev) {
-            var that = this,
-                event,
-                pad = prev ? -1 : 1,
-                groupIndex = selection.groupIndex || 0,
-                startSlotIndex = that._applyOffset(that._slotIndex(selection.start), groupIndex),
-                events = that._row.events,
-                idx = eventIndex(events, selection.events, groupIndex),
-                isGrouped = this.groupedResources.length,
-                slots = that._row.slots,
-                length = events.length;
-
-
-            if (prev) {
-                if (idx < 0 || (isGrouped && this._removeOffset(idx, groupIndex) === 0)) {
-                    idx = isGrouped ? idx + 1 : 0;
-                    for (; idx < length; idx ++) {
-                        if (events[idx].start < startSlotIndex && events[idx].groupIndex == groupIndex) {
-                            event = events[idx];
-                        } else {
-                            break;
-                        }
-                    }
-                } else {
-                    for (idx += pad; idx > -1; idx --) {
-                        if (events[idx].groupIndex < groupIndex) {
-                            event = events[idx];
-                            break;
-                        }
-
-                        if (events[idx].start <= startSlotIndex) {
-                            event = events[idx];
-                            break;
-                        }
-                    }
-                }
-            } else {
-                for (idx += pad; idx < length; idx ++) {
-                    if (events[idx].groupIndex > groupIndex) {
-                        event = events[idx];
-                        break;
-                    }
-
-                    if (events[idx].start >= startSlotIndex &&
-                        events[idx].element.attr(kendo.attr("uid")) != selection.events[0]) {
-
-                        event = events[idx];
-                        break;
-                    }
-                }
-            }
-
-            if (event) {
-                selection.events = [ event.element.attr(kendo.attr("uid")) ];
-                selection.start = slots[event.start].start;
-                selection.end = slots[event.end].end;
-                selection.groupIndex = this._groupIndex(event.start);
-            }
-
-            return event;
         },
 
         moveSelectionToPeriod: function(selection) {
@@ -1015,32 +915,6 @@ kendo_module({
         msValue = value.getTime();
 
         return msValue >= msMin && msValue <= msMax;
-    }
-
-    function eventIndex(events, selected, groupIndex) {
-        if (!selected || !selected.length) {
-            return firstEventIndex(events, groupIndex);
-        }
-
-        selected = selected[selected.length - 1];
-
-        events = $.map(events, function(item) {
-            return item.groupIndex == groupIndex && item.element.attr(kendo.attr("uid"));
-        });
-
-        return $.inArray(selected, events);
-    }
-
-    function firstEventIndex(events, groupIndex) {
-        var idx = 0, length = events.length;
-
-        for (; idx < length; idx ++) {
-            if (events[idx].groupIndex == groupIndex) {
-                return idx - 1;
-            }
-        }
-
-        return -1;
     }
 
     function moveLeftInHorizontalGroup(slotIndex, groupIndex, groupCount, date) {

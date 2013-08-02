@@ -790,8 +790,150 @@ kendo_module({
             return false;
         },
 
-        moveToEvent: function() {
+        _nextAllDayEvent: function(collection, index, selectionEvents, pad) {
+            var events = collection.events();
+            var slots = collection._slots;
+
+            events = $.grep(events, function(item) {
+                return item.start == index;
+            });
+
+            var idx = eventIndex(events, selectionEvents);
+            var event;
+
+            if (idx > -1) {
+                event = events[idx + pad];
+            } else {
+                event = pad > 0 ? events[0] : events[events.length - 1];
+            }
+
+            if (event) {
+                return {
+                    event: event,
+                    start: slots[event.start].start,
+                    end: slots[event.end].end,
+                    isAllDay: true
+                };
+            }
+
             return false;
+        },
+
+        _nextEvent: function(collection, slotIndex, selectionEvents, pad) {
+            var events = collection.events();
+            var idx = eventIndex(events, selectionEvents);
+            var event;
+
+            if (idx > -1) {
+                event = events[idx + pad];
+            } else {
+                events = $.grep(events, function(item) {
+                    if (pad > 0) {
+                        return item.start >= slotIndex;
+                    } else {
+                        return item.start <= slotIndex;
+                    }
+                });
+
+                event = pad > 0 ? events[0] : events[events.length - 1];
+            }
+
+            if (event) {
+                var slots = collection._slots;
+
+                return {
+                    event: event,
+                    start: slots[event.start].start,
+                    end: slots[event.end].end
+                };
+            }
+
+            return false;
+        },
+
+        moveToEvent: function(selection, prev) {
+            var isAllDay = !!selection.isAllDay;
+            var group = this.groups[selection.groupIndex];
+            var slot = group._slot(selection.start, isAllDay, true, false).slot;
+            var slotIndex = slot.index;
+            var events = selection.events;
+            var eventInfo;
+
+            var idx = isAllDay ? slot.index : slot.columnIndex;
+            var length = group._timeSlotCollections.length;
+            var pad = prev ? -1 : 1;
+            var origIdx = idx;
+
+            while (idx < length && idx > -1) {
+                if (isAllDay) {
+                    eventInfo = this._nextAllDayEvent(group._daySlotCollections[0], idx, events, pad);
+                    if (!eventInfo) {
+                        if (!prev) {
+                            eventInfo = this._nextEvent(group._timeSlotCollections[idx], 0, events, pad);
+                        }
+                        isAllDay = false;
+                    }
+                } else {
+                    if (prev && origIdx !== idx) {
+                        slotIndex = group._timeSlotCollections[idx].last().index;
+                    }
+                    eventInfo = this._nextEvent(group._timeSlotCollections[idx], slotIndex, events, pad);
+                    if (!eventInfo) {
+                        if (prev) {
+                            eventInfo = this._nextAllDayEvent(group._daySlotCollections[0], idx, events, pad);
+                        }
+
+                        if (prev && !eventInfo) {
+                            isAllDay = false;
+                        } else {
+                            isAllDay = true;
+                        }
+                    }
+                }
+
+                if (eventInfo) {
+                    break;
+                }
+
+                idx += pad;
+            }
+
+            if (eventInfo) {
+                selection.events = [ eventInfo.event.element.attr(kendo.attr("uid")) ];
+                selection.start = eventInfo.start;
+                selection.end = eventInfo.end;
+                selection.isAllDay = eventInfo.isAllDay;
+            }
+
+            return !!eventInfo;
+        },
+
+        select: function(selection) {
+            this.clearSelection();
+
+            if (!this._selectEvents(selection)) {
+                this._selectCells(selection);
+            }
+        },
+
+        _selectEvents: function(selection) {
+            var found = false;
+            var uidAttr = kendo.attr("uid");
+            var events = selection.events;
+
+            if (!events[0]) {
+                return found;
+            }
+
+            events = this.element.find("[" + uidAttr + "=" + events.join("],[" + uidAttr + "=") + "]");
+            if (events.length > 0) {
+                found = true;
+                events.addClass("k-state-selected");
+
+                this._scrollTo(events.last()[0], this.content[0]);
+            }
+
+            return found;
         },
 
         isInRange: function(date) {
@@ -1142,10 +1284,6 @@ kendo_module({
 
         clearSelection: function() {
             this.content.find(".k-state-selected").removeClass("k-state-selected");
-        },
-
-        select: function() {
-            //must be implemented by every SchedulerView
         },
 
         destroy: function() {
