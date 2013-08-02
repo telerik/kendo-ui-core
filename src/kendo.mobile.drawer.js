@@ -9,11 +9,12 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,
+        os = kendo.support.mobileOS,
         Transition = kendo.effects.Transition,
         roleSelector = kendo.roleSelector,
         AXIS = "x",
         ui = mobile.ui,
-
+        SWIPE_TO_OPEN = !(os.ios && os.majorVersion == 7),
         BEFORE_SHOW = "beforeShow",
         INIT = "init",
         SHOW = "show",
@@ -42,22 +43,31 @@ kendo_module({
                 drawer.hide();
             });
 
-            this.userEvents = new kendo.UserEvents(this.pane.element, {
+            var hide = function(e) {
+                if (drawer.visible) {
+                    drawer.hide();
+                    e.preventDefault();
+                }
+            };
+
+            var userEvents = this.userEvents = new kendo.UserEvents(this.pane.element, {
                 filter: roleSelector("view"),
                 allowSelection: true,
-                start: function(e) { drawer._start(e); },
-                move: function(e) { drawer._update(e); },
-                end: function(e) { drawer._end(e); },
-                tap: function() {
-                    if (drawer.visible) {
-                        drawer.hide();
-                    }
-                }
             });
+
+            if (SWIPE_TO_OPEN) {
+                userEvents.bind("start", function(e) { drawer._start(e); });
+                userEvents.bind("move", function(e) { drawer._update(e); });
+                userEvents.bind("end", function(e) { drawer._end(e); });
+                userEvents.bind("tap", hide);
+            } else {
+                userEvents.bind("press", hide);
+            }
 
             this.leftPositioned = this.options.position === "left";
 
             this.visible = false;
+
             this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer");
         },
 
@@ -215,6 +225,8 @@ kendo_module({
             }
 
             this.movable.moveAxis(AXIS, limitedPosition);
+            e.event.preventDefault();
+            e.event.stopPropagation();
         },
 
         _end: function(e) {
