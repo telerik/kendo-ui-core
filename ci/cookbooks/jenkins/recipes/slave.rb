@@ -1,6 +1,7 @@
 case node["platform"]
 when "windows"
     include_recipe "jenkins::setup_user"
+    include_recipe "jenkins::mount_filesrv"
 
     if ::Win32::Service.exists?("jenkins-slave") then
         service "jenkins-slave" do
