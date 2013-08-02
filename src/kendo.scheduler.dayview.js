@@ -1462,117 +1462,69 @@ kendo_module({
             var endSlot = group.slot(end, isAllDay, false);
             var vertical = this._isVerticallyGrouped();
 
-            if (key === keys.DOWN) {
+            if (key === keys.DOWN || key === keys.UP) {
+                var isUp = key === keys.UP;
+
                 if (shift) {
                     if (!isAllDay && startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
-                        selection.backward = false;
+                        selection.backward = isUp;
                     }
+                } else if (isUp) {
+                    endSlot = startSlot;
                 } else {
                     startSlot = endSlot;
                 }
 
-                startSlot = group.nextSlot(startSlot, shift);
-                endSlot = group.nextSlot(endSlot, shift);
+                startSlot = group[isUp ? "prevSlot" : "nextSlot"](startSlot, shift);
+                endSlot = group[isUp ? "prevSlot" : "nextSlot"](endSlot, shift);
 
-                if (!shift && !endSlot && vertical) {
-                    if (selection.groupIndex < this.groups.length - 1) {
-                        startSlot = endSlot = group.firstVerticalSlot(start);
-                        selection.groupIndex += 1;
-                    }
+                var direction = isUp ? -1 : 1;
+                var slot = isUp ? startSlot : endSlot;
+                var siblingGroup = isUp ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
+
+                if (!shift && !slot && vertical && siblingGroup) {
+                    startSlot = endSlot = group.verticalSlot(start, isUp);
+                    selection.groupIndex += direction;
                 }
 
                 handled = true;
-            } else if (key === keys.UP) {
-                if (shift) {
-                    if (!isAllDay && startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
-                        selection.backward = true;
-                    }
-                } else {
-                    endSlot = startSlot;
-                }
+            } else if (key === keys.LEFT || key === keys.RIGHT) {
+                var isLeft = key === keys.LEFT;
 
-                startSlot = group.prevSlot(startSlot, shift);
-                endSlot = group.prevSlot(endSlot, shift);
-
-                if (!shift && !startSlot && vertical) {
-                    if (selection.groupIndex >= 1) {
-                        startSlot = endSlot = group.lastVerticalSlot(start);
-                        selection.groupIndex -= 1;
-                    }
-                }
-
-                handled = true;
-            } else if (key === keys.LEFT) {
                 if (shift && (isAllDay && startSlot.index === endSlot.index) || (!isAllDay && startSlot.collectionIndex() === endSlot.collectionIndex())) {
-                    selection.backward = true;
+                    selection.backward = isLeft;
                 }
 
-                startSlot = group.slotFromSiblingCollection(startSlot, isAllDay, -1);
-                endSlot = group.slotFromSiblingCollection(endSlot, isAllDay, -1);
+                var direction = isLeft ? -1 : 1;
 
-                if (!shift && !startSlot && !vertical) {
-                    if (selection.groupIndex >= 1) {
-                        startSlot = endSlot = group.lastHorizontalSlot(end, isAllDay, false);
-                        selection.groupIndex -= 1;
+                startSlot = group.slotFromSiblingCollection(startSlot, isAllDay, direction);
+                endSlot = group.slotFromSiblingCollection(endSlot, isAllDay, direction);
+
+                var slot = isLeft ? startSlot : endSlot;
+                var date = isLeft ? end : start;
+
+                if (!shift && !slot && !vertical) {
+                    var siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
+
+                    if (siblingGroup) {
+                        startSlot = endSlot = group.horizontalSlot(date, isAllDay, !isLeft, isLeft);
+                        selection.groupIndex += direction;
                     } else {
                         startSlot = endSlot = null;
-                        selection.groupIndex = this.groups.length - 1;
+                        selection.groupIndex = isLeft ? this.groups.length - 1 : 0;
                     }
                 }
 
                 if (!shift && (!startSlot || !endSlot)) {
-                    //TODO: REFACTOR
-                    startSlot = {
-                        start: this.previousDate()
-                    };
+                    date = isLeft ? this.previousDate() : this.nextDate();
 
-                    endSlot = {
-                        end: this.previousDate()
-                    };
+                    selection.start = new Date(date);
+                    selection.end = new Date(date);
 
-                    startSlot.isAllDay = selection.isAllDay;
-                    setTime(startSlot.start, getMilliseconds(selection.start));
+                    var endMilliseconds = selection.isAllDay ? MS_PER_DAY : getMilliseconds(end);
 
-                    var endMilliseconds = selection.isAllDay ? MS_PER_DAY : getMilliseconds(selection.end);
-
-                    setTime(endSlot.end, endMilliseconds);
-                }
-
-                handled = true;
-            } else if (key === keys.RIGHT) {
-                if (shift && (isAllDay && startSlot.index === endSlot.index) || (!isAllDay && startSlot.collectionIndex() === endSlot.collectionIndex())) {
-                    selection.backward = false;
-                }
-
-                startSlot = group.slotFromSiblingCollection(startSlot, isAllDay, 1);
-                endSlot = group.slotFromSiblingCollection(endSlot, isAllDay, 1);
-
-                if (!shift && !endSlot && !vertical) {
-                    if (selection.groupIndex < this.groups.length - 1) {
-                        startSlot = endSlot = group.firstHorizontalSlot(end, isAllDay, false);
-                        selection.groupIndex += 1;
-                    } else {
-                        startSlot = endSlot = null;
-                        selection.groupIndex = 0;
-                    }
-                }
-
-                if (!shift && (!startSlot || !endSlot)) {
-                    //TODO: REFACTOR
-                    startSlot = {
-                        start: this.nextDate()
-                    };
-
-                    endSlot = {
-                        end: this.nextDate()
-                    };
-
-                    startSlot.isAllDay = selection.isAllDay;
-                    setTime(startSlot.start, getMilliseconds(selection.start));
-
-                    var endMilliseconds = selection.isAllDay ? MS_PER_DAY : getMilliseconds(selection.end);
-
-                    setTime(endSlot.end, endMilliseconds);
+                    setTime(selection.start, getMilliseconds(start));
+                    setTime(selection.end, endMilliseconds);
                 }
 
                 handled = true;
@@ -1595,34 +1547,6 @@ kendo_module({
             }
 
             return handled;
-        },
-
-        _firstSlot: function(date) {
-            return this._columns[this._dateSlotIndex(date)].slots[0];
-        },
-
-        _lastSlot: function(date) {
-            var slots = this._columns[this._dateSlotIndex(date)].slots;
-            return slots[slots.length - 1];
-        },
-
-        _slotByDate: function(date) {
-            var column = this._columns[this._dateSlotIndex(date)],
-                slot;
-
-            if (column) {
-                slot = column.slots[this._timeSlotIndex(date)];
-                if (slot && slot.start.getTime() === date.getTime()) {
-                    return slot;
-                }
-            }
-
-            return null;
-        },
-
-        _slotByAllDay: function(date) {
-            var slot = this._rows[0].slots[this._dateSlotIndex(date)];
-            return slot || null;
         }
     });
 
