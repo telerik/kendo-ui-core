@@ -612,7 +612,7 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-
+            options = that.options;
             element = that.element;
 
             kendo.stripWhitespace(element[0]);
@@ -627,7 +627,7 @@ kendo_module({
 
             that.inner = element.children().first();
             that.page = 0;
-            that.inner.css("height", that.options.contentHeight);
+            that.inner.css("height", options.contentHeight);
             that.container().bind("show", proxy(this, "viewShow")).bind("init", proxy(this, "viewInit"));
 
             that.pane = new ElasticPane(that.inner, {
@@ -638,9 +638,9 @@ kendo_module({
                 change: proxy(this, REFRESH)
             });
 
-            that.page = that.options.page;
+            that.page = options.page;
 
-            that._content = options.dataSource ? new VirtualScrollViewContent(that.inner, that.pane, that.options) : new ScrollViewContent(that.inner, that.pane);
+            that._content = options.dataSource ? new VirtualScrollViewContent(that.inner, that.pane, options) : new ScrollViewContent(that.inner, that.pane);
             that._content.page = that.page;
 
             that._content.bind("reset", function() {
