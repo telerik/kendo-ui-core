@@ -349,6 +349,23 @@
                 equal(timeCell.eq(1).text(), "12:00 AM-1:00 AM");
             });
 
+            test("delete icon is not rendered if view is not editable", 1, function() {
+
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00"), editable: false });
+
+                var event = new Event({
+                                start: new Date("2013/06/06 00:00"),
+                                end: new Date("2013/06/06 01:00"),
+                                title: ""
+                            });
+
+                agenda.render([ event ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                equal(table.find(".k-si-close").length, 0);
+            });
+
             test("clicking the delete icon fires the remove event", 1, function() {
                 var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
                 var event = new Event({

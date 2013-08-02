@@ -152,6 +152,8 @@ kendo_module({
 
         _renderTaskGroups: function(tasksGroups, groups) {
             var tableRows = [];
+            var editable = this.options.editable;
+            var showDelete = editable && editable.destroy !== false;
 
             for (var taskGroupIndex = 0; taskGroupIndex < tasksGroups.length; taskGroupIndex++) {
                 var date = tasksGroups[taskGroupIndex].value;
@@ -200,7 +202,7 @@ kendo_module({
                         task.tail || task.middle ? '<span class="k-icon k-i-arrow-w"></span>' : "",
                         this._timeTemplate(extend({}, task, { start: task.startTime || task.start, end: task.endTime || task.end })),
                         task.head || task.middle ? '<span class="k-icon k-i-arrow-e"></span>' : "",
-                        this._eventTemplate(task)
+                        this._eventTemplate(extend({ showDelete: showDelete }, task))
                     ));
 
                     tableRows.push("<tr" + (today ? ' class="k-today">' : ">") + tableRow.join("") + "</tr>");
@@ -368,6 +370,7 @@ kendo_module({
         options: {
             title: "Agenda",
             name: "agenda",
+            editable: true,
             selectedDateFormat: "{0:D}-{1:D}",
             eventTemplate: '<div class="k-task" title="#:title.replace(/"/g,"\'")#" data-#=kendo.ns#uid="#=uid#">' +
                                '# if (resources[0]) {#' +
@@ -379,7 +382,9 @@ kendo_module({
                                '<span class="k-icon k-i-refresh"></span>' +
                                "# } #" +
                                '#:title#' +
-                               '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
+                               '#if (showDelete) {#' +
+                                   '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
+                               '#}#' +
                            '</div>',
             eventTimeTemplate: "#if(data.isAllDay) {#" +
                             "all day" +
