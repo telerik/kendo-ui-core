@@ -20,7 +20,7 @@ PLATFORM = RbConfig::CONFIG['host_os']
 if PLATFORM =~ /linux|darwin/
     ARCHIVE_ROOT = "/kendo-builds"
 else
-    ARCHIVE_ROOT = "K:/"
+    ARCHIVE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\BUILDS"
 end
 
 if ENV['DRY_RUN']

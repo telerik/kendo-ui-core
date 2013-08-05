@@ -6,6 +6,5 @@
     "recipe[nodejs]",
     "recipe[java]",
     "recipe[dotnet]",
-    "recipe[sysinternals]",
     "recipe[jenkins::slave]"
 ]}
