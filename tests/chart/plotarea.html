@@ -1442,7 +1442,7 @@
                     deepEqual(plotArea.series[0].data, [{ value: 300 }]);
                 });
 
-                test("Aggregates modify the series data with the value fields", function() {
+                test("Aggregation does preserves value field name", function() {
                     createPlotArea([{
                         type: "bar",
                         field: "v",
@@ -1453,10 +1453,10 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [{ value: 300 }]);
+                    deepEqual(plotArea.series[0].data, [{ v: 300 }]);
                 });
 
-                test("Aggregates bound series data with custom field names", function() {
+                test("Aggregation preserves compound value field names", function() {
                     createPlotArea([{
                         type: "candlestick",
                         data: [{ o: 100, h: 100, l: 100, c: 100 }, { o: 200, h: 200, l: 200, c: 200 }],
@@ -1476,7 +1476,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [{ open: 200, high: 200, low: 200, close: 200 }]);
+                    deepEqual(plotArea.series[0].data, [{ o: 200, h: 200, l: 200, c: 200 }]);
                 });
 
                 test("Does not change series fields", function() {
@@ -1527,7 +1527,7 @@
                         }, dateCategoryAxis)
                     });
 
-                    deepEqual(plotArea.series[0].data, [{ open: 300, high: 300, low: 300, close: 300 }]);
+                    deepEqual(plotArea.series[0].data, [{ o: 300, h: 300, l: 300, c: 300 }]);
                 });
 
                 test("Aggregates series data with predefined function", function() {
