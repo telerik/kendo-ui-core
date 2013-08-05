@@ -215,8 +215,8 @@ kendo_module({
                     "style='position: absolute; " +
                     "left: #= d.options.x #px; top: #= d.options.y #px; " +
                     "font: #= d.options.font #; color: #= d.options.color #; " +
-                    "visibility: #= d.renderVisibility() #; white-space: nowrap;'" +
-                    "#= d.renderCursor() #>" +
+                    "visibility: #= d.renderVisibility() #; white-space: nowrap; " +
+                    "#= d.renderCursor() #'>" +
                     "#= d.content #</kvml:textbox>"
                 );
             }
@@ -372,9 +372,9 @@ kendo_module({
                 path.template = VMLPath.template = renderTemplate(
                     "<kvml:shape #= d.renderId() # " +
                     "#= d.renderDataAttributes() #" +
-                    "style='position:absolute; #= d.renderSize() # display:#= d.renderDisplay() #;' " +
-                    "coordorigin='0 0' #= d.renderCoordsize() #" +
-                    "#= d.renderCursor() #>" +
+                    "style='position:absolute; #= d.renderSize() # display:#= d.renderDisplay() #; " +
+                    "#= d.renderCursor() #' " +
+                    "coordorigin='0 0' #= d.renderCoordsize() #>" +
                         "<kvml:path v='#= d.renderPoints() # e' />" +
                         "#= d.fill.render() + d.stroke.render() #" +
                     "</kvml:shape>"
