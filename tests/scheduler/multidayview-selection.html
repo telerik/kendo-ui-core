@@ -326,12 +326,32 @@
                 equal(view.content.find(".k-event").filter(".k-state-selected").length, 2);
             });
 
-            testSkip("View select cells if cannot find one of the selected events", function() {
+            test("View select cells if cannot find one of the selected events", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    event = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    uid = event.uid;
+
+                view.render([
+                    event
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [kendo.guid()]
+                });
+
+                view.select(selection);
+
+                equal(view.content.find("td.k-state-selected").length, 2);
+                equal(view.content.find(".k-event").filter(".k-state-selected").length, 0);
+            });
+
+            test("View select only events found in current view", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
                     event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
                     event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
-                    uid1 = event1.uid,
-                    uid2 = event2.uid;
+                    uid = event1.uid;
 
                 view.render([
                     event1, event2
@@ -340,13 +360,14 @@
                 var selection = createSelection({
                     start: new Date(2013, 6, 7, 6),
                     end: new Date(2013, 6, 7, 8),
-                    events: [uid1, kendo.guid()]
+                    events: [uid, kendo.guid()]
                 });
 
                 view.select(selection);
 
-                equal(view.content.find("td.k-state-selected").length, 2);
-                equal(view.content.find(".k-event").filter(".k-state-selected").length, 0);
+                equal(view.content.find("td.k-state-selected").length, 0);
+                equal(view.content.find(".k-event").filter(".k-state-selected").length, 1);
+                equal(view.content.find(".k-event.k-state-selected").data("uid"), uid);
             });
 
             test("View scrolls to the last selected event", function() {
@@ -612,16 +633,20 @@
                 deepEqual(selection.end, new Date(2013, 6, 7, 1, 0));
             });
 
-            /*test("View selects the first slot below the last selected allDay event", function() {
+            test("View selects the first slot below the last selected allDay event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 8, 0, 0), isAllDay: true });
+                selection = createSelection({
+                    start: new Date(2013, 6, 7, 0, 0),
+                    end: new Date(2013, 6, 8, 0, 0),
+                    isAllDay: true
+                });
 
                 view.move(selection, keys.DOWN);
 
                 ok(!selection.isAllDay);
-                deepEqual(selection.start, new Date(2013, 6, 8, 0, 0));
-                deepEqual(selection.end, new Date(2013, 6, 8, 1, 0));
-            });*/
+                deepEqual(selection.start, new Date(2013, 6, 7, 0, 0));
+                deepEqual(selection.end, new Date(2013, 6, 7, 1, 0));
+            });
 
             test("View moves selection to allDay if first slot was selected", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
@@ -1086,10 +1111,10 @@
                 deepEqual(selection.end, new Date(2013, 6, 7));
             });
 
-            testSkip("View moveToEvent method returns true if find an event", function() {
+            test("View moveToEvent method returns true if find an event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
-                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
                     uid1 = event1.uid,
                     uid2 = event2.uid;
 
@@ -1106,10 +1131,10 @@
                 ok(view.moveToEvent(selection));
             });
 
-            testSkip("View moves to the first event after current slot", function() {
+            test("View moves to the first event after current slot", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
-                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
                     uid1 = event1.uid,
                     uid2 = event2.uid;
 
@@ -1131,10 +1156,34 @@
                 equal(selection.events[0], uid1);
             });
 
-            testSkip("View moves to the next event in the column", function() {
+            test("View moves to the closest event after current slot", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
-                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
+
+                view.render([
+                    event1, event2
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 4),
+                    end: new Date(2013, 6, 7, 4, 30)
+                });
+
+                view.moveToEvent(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 6));
+                deepEqual(selection.end, new Date(2013, 6, 7, 8));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid2);
+            });
+
+            test("View moves to the next event in the column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
                     uid1 = event1.uid,
                     uid2 = event2.uid;
 
@@ -1157,10 +1206,154 @@
                 equal(selection.events[0], uid2);
             });
 
-            testSkip("View moves to the first column in the next column", function() {
+            test("View moves from all day event to the first event in next column", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
-                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 8, 6), end: new Date(2013, 6, 8, 8), title: "Test" }),
+                    event1 = new SchedulerEvent({
+                        start: new Date(2013, 6, 7),
+                        end: new Date(2013, 6, 7),
+                        isAllDay: true,
+                        title: "Test"
+                    }),
+                    event2 = new SchedulerEvent({
+                        start: new Date(2013, 6, 8, 6),
+                        end: new Date(2013, 6, 8, 8),
+                        title: "Test"
+                    }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
+
+                view.render([
+                    event1, event2
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7),
+                    end: new Date(2013, 6, 7),
+                    events: [uid1],
+                    isAllDay: true
+                });
+
+                view.moveToEvent(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 8, 6));
+                deepEqual(selection.end, new Date(2013, 6, 8, 8));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid2);
+            });
+
+            test("View moves from all day event to the last event in prev column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    event1 = new SchedulerEvent({
+                        start: new Date(2013, 6, 8),
+                        end: new Date(2013, 6, 8),
+                        isAllDay: true,
+                        title: "Test1"
+                    }),
+                    event2 = new SchedulerEvent({
+                        start: new Date(2013, 6, 8, 4),
+                        end: new Date(2013, 6, 8, 8),
+                        title: "Test2"
+                    }),
+                    event3 = new SchedulerEvent({
+                        start: new Date(2013, 6, 7, 6),
+                        end: new Date(2013, 6, 7, 8),
+                        title: "Test3"
+                    });
+
+                view.render([
+                    event1, event2, event3
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 8),
+                    end: new Date(2013, 6, 8),
+                    events: [event1.uid],
+                    isAllDay: true
+                });
+
+                view.moveToEvent(selection, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 6));
+                deepEqual(selection.end, new Date(2013, 6, 7, 8));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], event3.uid);
+            });
+
+            test("View moves from all day slot to the first event in same column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    event1 = new SchedulerEvent({
+                        start: new Date(2013, 6, 7, 2),
+                        end: new Date(2013, 6, 7, 4),
+                        title: "Test"
+                    }),
+                    event2 = new SchedulerEvent({
+                        start: new Date(2013, 6, 7, 6),
+                        end: new Date(2013, 6, 7, 8),
+                        title: "Test"
+                    });
+
+                view.render([
+                    event1, event2
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7),
+                    end: new Date(2013, 6, 7),
+                    events: [],
+                    isAllDay: true
+                });
+
+                view.moveToEvent(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+                deepEqual(selection.end, new Date(2013, 6, 7, 4));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], event1.uid);
+                ok(!selection.isAllDay);
+            });
+
+            test("View selects the last event in previous column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    event1 = new SchedulerEvent({
+                        start: new Date(2013, 6, 8, 2),
+                        end: new Date(2013, 6, 8, 4),
+                        title: "Test"
+                    }),
+                    event2 = new SchedulerEvent({
+                        start: new Date(2013, 6, 7, 6),
+                        end: new Date(2013, 6, 7, 8),
+                        title: "Test"
+                    }),
+                    event3 = new SchedulerEvent({
+                        start: new Date(2013, 6, 7, 2),
+                        end: new Date(2013, 6, 7, 4),
+                        title: "Test"
+                    });
+
+                view.render([
+                    event1, event2, event3
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 8, 2),
+                    end: new Date(2013, 6, 8, 4),
+                    events: [ event1.uid ],
+                    isAllDay: false
+                });
+
+                view.moveToEvent(selection, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 6));
+                deepEqual(selection.end, new Date(2013, 6, 7, 8));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], event2.uid);
+                ok(!selection.isAllDay);
+            });
+
+            test("View moves to the first event in the next column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 8, 6), end: new Date(2013, 6, 8, 8), title: "Test" }),
                     uid1 = event1.uid,
                     uid2 = event2.uid;
 
@@ -1183,10 +1376,10 @@
                 equal(selection.events[0], uid2);
             });
 
-            testSkip("View moves to the next allDay event", function() {
+            test("View moves to the next allDay event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
-                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 8, 0), end: new Date(2013, 6, 8, 0), title: "Test", isAllDay: true }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 8, 0), end: new Date(2013, 6, 9, 0), title: "Test", isAllDay: true }),
                     uid1 = event1.uid,
                     uid2 = event2.uid;
 
@@ -1200,22 +1393,20 @@
                     events: [uid1]
                 });
 
-
                 view.moveToEvent(selection);
 
                 deepEqual(selection.start, new Date(2013, 6, 8));
-                deepEqual(selection.end, new Date(2013, 6, 8, 1));
+                deepEqual(selection.end, new Date(2013, 6, 9));
                 equal(selection.events.length, 1);
                 equal(selection.events[0], uid2);
                 equal(selection.isAllDay, true);
             });
 
-            testSkip("View moves to the first event before current slot", function() {
+            test("View moves to the first event before current slot", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
-                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
-                    uid1 = event1.uid,
-                    uid2 = event2.uid;
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid = event2.uid;
 
                 view.render([
                     event1, event2
@@ -1232,13 +1423,37 @@
                 deepEqual(selection.start, new Date(2013, 6, 7, 6));
                 deepEqual(selection.end, new Date(2013, 6, 7, 8));
                 equal(selection.events.length, 1);
-                equal(selection.events[0], uid2);
+                equal(selection.events[0], uid);
             });
 
-            testSkip("View moves to the previous event", function() {
+            test("View moves to the closest event before current slot", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
-                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    uid1 = event1.uid,
+                    uid2 = event2.uid;
+
+                view.render([
+                    event1, event2
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 4),
+                    end: new Date(2013, 6, 7, 4, 30)
+                });
+
+                view.moveToEvent(selection, true);
+
+                deepEqual(selection.start, new Date(2013, 6, 7, 2));
+                deepEqual(selection.end, new Date(2013, 6, 7, 4));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], uid1);
+            });
+
+            test("View moves to the previous event", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
                     uid1 = event1.uid,
                     uid2 = event2.uid;
 
@@ -1252,7 +1467,6 @@
                     events: [uid2]
                 });
 
-
                 view.moveToEvent(selection, true);
 
                 deepEqual(selection.start, new Date(2013, 6, 7, 2));
@@ -1261,10 +1475,10 @@
                 equal(selection.events[0], uid1);
             });
 
-            testSkip("View moves to the last event in previous column", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
-                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+            test("View moves to the last event in previous column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7)] }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
                     uid1 = event1.uid,
                     uid2 = event2.uid;
 
@@ -1273,11 +1487,10 @@
                 ]);
 
                 var selection = createSelection({
-                    start: new Date(2013, 6, 8, 6),
-                    end: new Date(2013, 6, 8, 8),
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
                     events: [uid2]
                 });
-
 
                 view.moveToEvent(selection, true);
 
@@ -1287,10 +1500,10 @@
                 equal(selection.events[0], uid1);
             });
 
-            testSkip("View moves to the previous all day event", function() {
+            test("View moves to the previous all day event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    event1 = new SchedulerEvent({ uid: uid1, start: new Date(2013, 6, 7, 0), end: new Date(2013, 6, 7, 1), title: "Test", isAllDay: true }),
-                    event2 = new SchedulerEvent({ uid: uid2, start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
+                    event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 0), end: new Date(2013, 6, 7, 0), title: "Test", isAllDay: true }),
+                    event2 = new SchedulerEvent({ start: new Date(2013, 6, 7, 6), end: new Date(2013, 6, 7, 8), title: "Test" }),
                     uid1 = event1.uid,
                     uid2 = event2.uid;
 
@@ -1307,7 +1520,7 @@
                 view.moveToEvent(selection, true);
 
                 deepEqual(selection.start, new Date(2013, 6, 7, 0));
-                deepEqual(selection.end, new Date(2013, 6, 7, 1));
+                deepEqual(selection.end, new Date(2013, 6, 8, 0));
                 equal(selection.events.length, 1);
                 equal(selection.events[0], uid1);
                 equal(selection.isAllDay, true);
