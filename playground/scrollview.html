@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <base href="http://m.boxandseal.co.uk/">
+    <link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.default.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2013.2.716/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div data-role="view" id="scrollview-home" data-title="Photo Gallery" data-stretch="true">
+    <div id="scrollview-container">
+        <div
+            data-role="scrollview"
+            data-source="_boxDS"
+            data-template="scrollview-binding-template"  data-enable-pager="false"
+            data-content-height="400">
+        </div>
+    </div>
+
+    <script id="scrollview-binding-template" type="text/x-kendo-template">
+        <div>
+        <div class="image" style="background-image: url(/webimages/gallery/#: Image #);"></div>
+            <p class="title">#: Caption #</p>
+        </div>
+    </script>
+
+
+<style scoped>
+    .title {
+        font-style: italic;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .image {
+        display: block;
+        margin: 3em auto;
+        height: 280px;
+        width: 280px;
+    }
+</style>
+
+<script>
+
+    var _boxDS = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "mobiledata.asmx/GetGallery",
+                dataType: "json",
+                type: "POST",
+                data: { SectionID: 3 },
+                contentType: "application/json; charset=utf-8"
+            },
+            parameterMap: function (data, operation) {
+
+                // web services need default values for every parameter
+                data = $.extend({}, data);
+
+                return JSON.stringify(data);
+
+            }
+        },
+
+        serverPaging: true,
+        pageSize: 30,
+        schema: {
+            data: "d[0].Items", total: "d[0].TotalItems"
+        },
+    });
+</script>
+</div>
+
+
+
+
+<script>
+    var app = new kendo.mobile.Application($(document.body));
+</script>
+
+</body>
+</html>
