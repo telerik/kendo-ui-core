@@ -582,7 +582,7 @@ namespace :build do
 
         desc 'Build and publish ASP.NET MVC DLLs'
         task :aspnetmvc_binaries => [ "mvc:binaries" ] do
-            sh "rsync -avc dist/binaries/ #{File.join(ARCHIVE_ROOT, "Stable", "binaries")}"
+            sh "xcopy dist/binaries/ #{File.join(ARCHIVE_ROOT, "Stable", "binaries")} /s"
         end
 
         desc 'Package and publish bundles to the Stable directory'
