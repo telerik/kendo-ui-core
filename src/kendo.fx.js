@@ -241,8 +241,6 @@ kendo_module({
 
         options.effects = kendo.parseEffects(effects);
 
-        options.previousDivisor = 3;
-
         if (ios7 && effects == "tile:left") {
             options.previousDivisor = 3;
         }
