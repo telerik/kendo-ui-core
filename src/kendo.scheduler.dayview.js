@@ -2083,7 +2083,7 @@ kendo_module({
            name: "week",
            calculateDateRange: function() {
                var selectedDate = this.options.date,
-                   start = kendo.date.dayOfWeek(selectedDate, 0, -1),
+                   start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
                    idx, length,
                    dates = [];
 

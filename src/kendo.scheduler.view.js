@@ -1109,6 +1109,10 @@ kendo_module({
 
                 that.table.remove();
             }
+        },
+
+        calendarInfo: function() {
+            return kendo.getCulture().calendars.standard;
         }
     });
 

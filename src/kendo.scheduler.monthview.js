@@ -310,7 +310,7 @@ kendo_module({
 
             this._lastDayOfMonth = kendo.date.lastDayOfMonth(date);
 
-            this._startDate = firstVisibleMonthDay(date);
+            this._startDate = firstVisibleMonthDay(date, this.calendarInfo());
 
             this.createLayout(this._layout());
 
@@ -517,7 +517,8 @@ kendo_module({
         },
 
         _layout: function() {
-            var names = getCalendarInfo().days.names;
+            var calendarInfo = this.calendarInfo();
+            var names = shiftArray(calendarInfo.days.names, calendarInfo.firstDay);
             var columns = $.map(names, function(value) { return { text: value }; });
             var resources = this.groupedResources;
             var rows;
@@ -1034,13 +1035,11 @@ kendo_module({
     });
 
 
-    function getCalendarInfo() {
-        return kendo.culture().calendars.standard;
+    function shiftArray(array, idx) {
+        return array.slice(idx).concat(array.slice(0, idx));
     }
 
-    function firstVisibleMonthDay(date) {
-        var calendarInfo = getCalendarInfo();
-
+    function firstVisibleMonthDay(date, calendarInfo) {
         var firstDay = calendarInfo.firstDay,
             firstVisibleDay = new Date(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 
