@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Chart</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="../qunit.ico" />
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+
+            var isFn = kendo.isFunction;
+            var defined = kendo.dataviz.defined;
+
+            var SeriesAggregator = function(series, binder) {
+                this._series = series;
+                this._binder = binder;
+
+                var fields = binder
+                    .valueFields(series).concat(
+                        binder.otherFields(series)
+                    );
+
+                var srcFields = binder.sourceFields(series, fields);
+
+                var meta = this._meta = [];
+
+                for (var i = 0; i < fields.length; i++) {
+                    var transform;
+
+                    if (isFn(series.aggregate)) {
+                        transform = series.aggregate;
+                    } else {
+                        transform = dataviz.Aggregates[series.aggregate || "max"]
+                    }
+
+                    meta.push({
+                        field: fields[i],
+                        source: srcFields[i],
+                        transform: transform
+                    });
+                }
+            };
+
+            SeriesAggregator.prototype = {
+                aggregatePoint: function(srcPoints, group) {
+                    var aggr = this,
+                        result = {},
+                        meta = aggr._meta;
+
+                    var binder = aggr._binder,
+                        series = aggr._series,
+                        srcValues = [],
+                        srcDataItems = [];
+
+                    for (var i = 0; i < srcPoints.length; i++) {
+                        var index = srcPoints[i];
+
+                        srcValues.push(binder.bindPoint(series, index));
+                        srcDataItems.push(series.data[index]);
+                    }
+
+                    for (var i = 0; i < meta.length; i++) {
+                        var metaField = meta[i];
+
+                        result[metaField.source] = metaField.transform(
+                            aggr._bindField(srcValues, metaField.source), series, srcDataItems, group
+                        );
+                    }
+
+                    return result;
+                },
+
+                _bindField: function(data, field) {
+                    var values = [],
+                        count = data.length,
+                        i, item, value, valueFields;
+
+                    for (i = 0; i < count; i++) {
+                        item = data[i];
+                        valueFields = item.valueFields;
+
+                        if (defined(valueFields[field])) {
+                            value = valueFields[field];
+                        } else {
+                            value = item.fields[field];
+                        }
+
+                        values.push(value);
+                    }
+
+                    return values;
+                }
+            };
+
+
+            var dataviz = kendo.dataviz,
+                binder,
+                series,
+                aggr;
+
+            function create(data, aggregate) {
+                aggr = new Aggregator({
+                    aggregate: aggregate
+                }, binder);
+            }
+
+            // ------------------------------------------------------------
+            module("Aggregator / Simple aggregates", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["value"], []);
+
+                    series = {
+                        type: "foo",
+                        data: [{
+                            value: 1
+                        }, {
+                            value: 2
+                        }]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = "min";
+                aggr = new SeriesAggregator(series, binder);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { value: 1 });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = function(values) { return 5; };
+                aggr = new SeriesAggregator(series, binder);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { value: 5 });
+            });
+
+            test("allows function aggregates to return data items", function() {
+                series.aggregate = function(values) { return { value: 5, bar: 1 }; };
+                aggr = new SeriesAggregator(series, binder);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { value: 5, bar: 1 });
+            });
+
+            // ------------------------------------------------------------
+            module("Aggregator / Compound aggregates", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["open", "close"], []);
+
+                    series = {
+                        type: "foo",
+                        data: [{
+                            open: 1,
+                            close: 2
+                        }, {
+                            open: 10,
+                            close: 20
+                        }]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = {
+                    open: "min",
+                    close: "max"
+                };
+                aggr = new SeriesAggregator(series, binder);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { open: 1, close: 20 });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = {
+                    open: function(values) { return 5; },
+                    close: "max"
+                };
+                aggr = new SeriesAggregator(series, binder);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 20 });
+            });
+
+            test("accepts data items from top-level aggregate", function() {
+                series.aggregate = function(values) {
+                    return { open: 5, close: 5 };
+                };
+                aggr = new SeriesAggregator(series, binder);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 1 });
+            });
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div>
+            <div id="container">
+            </div>
+        </div>
+
+    </body>
+</html>
