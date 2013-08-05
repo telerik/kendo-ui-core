@@ -17,11 +17,7 @@ STAGING_CDN_ROOT = 'http://cdn.kendostatic.com/staging/'
 
 PLATFORM = RbConfig::CONFIG['host_os']
 
-if PLATFORM =~ /linux|darwin/
-    ARCHIVE_ROOT = "/kendo-builds"
-else
-    ARCHIVE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\BUILDS"
-end
+ARCHIVE_ROOT = "/kendo-builds"
 
 if ENV['DRY_RUN']
     ADMIN_URL = 'http://integrationadmin.telerik.com/'
@@ -582,9 +578,10 @@ namespace :build do
 
         desc 'Build and publish ASP.NET MVC DLLs'
         task :aspnetmvc_binaries => [ "mvc:binaries" ] do
-            BINARIES_PATH = File.join(ARCHIVE_ROOT, "Stable", "binaries").gsub('/', '\\')
-            sh "mkdir #{BINARIES_PATH}"
-            sh "xcopy dist\\binaries\\ #{BINARIES_PATH} /s"
+            sh "net use L: /delete /yes"
+            sh "net use L: \\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\Builds /user:telerik.com\\TeamFoundationUser voyant69"
+            sh "mkdir L:\\Stable\\binaries\\"
+            sh "xcopy dist\\binaries\\* L:\\Stable\\binaries\\ /E /Y"
         end
 
         desc 'Package and publish bundles to the Stable directory'

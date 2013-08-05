@@ -193,7 +193,7 @@ namespace :mvc do
     desc('Build ASP.NET MVC binaries')
     task :binaries => [
         'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll',
-        #MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll',
+        MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll',
         'dist/binaries/'
     ]
 end
