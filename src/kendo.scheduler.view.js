@@ -771,6 +771,19 @@ kendo_module({
         return scrollbarWidth;
     }
 
+    //This should become method of the group
+    function eventElement(group, uid, isAllDay) {
+        var collection = isAllDay ? group._daySlotCollections : group._timeSlotCollections;
+
+        collection = $.map(collection, function(item) {
+            return item.events();
+        });
+
+        return $.grep(collection, function(item) {
+            return item.element.attr(kendo.attr("uid")) == uid;
+        })[0].element;
+    }
+
     kendo.ui.SchedulerView = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
@@ -861,12 +874,8 @@ kendo_module({
             return false;
         },
 
-        moveToEvent: function(selection, prev) {
-            var isAllDay = !!selection.isAllDay;
-            var group = this.groups[selection.groupIndex];
-            var slot = group.slot(selection.start, isAllDay, true);
+        _nextEventInGroup: function(isAllDay, group, slot, events, prev) {
             var slotIndex = slot.index;
-            var events = selection.events;
             var eventInfo;
 
             var idx = isAllDay ? slot.index : slot.columnIndex;
@@ -908,11 +917,44 @@ kendo_module({
                 idx += pad;
             }
 
+            return eventInfo;
+        },
+
+        moveToEvent: function(selection, prev) {
+            var eventInfo;
+            var isAllDay = !!selection.isAllDay;
+            var group = this.groups[selection.groupIndex];
+            var slot = group.slot(selection.start, isAllDay, true);
+            var events = selection.events;
+
+            var groupIndex = selection.groupIndex;
+            var length = this.groups.length;
+            var pad = prev ? -1 : 1;
+
+            while (groupIndex < length && groupIndex > -1) {
+                eventInfo = this._nextEventInGroup(isAllDay, group, slot, events, prev);
+
+                if (eventInfo) {
+                    break;
+                }
+
+                groupIndex += pad;
+                isAllDay = !prev;
+                events = [];
+                group = this.groups[groupIndex];
+                if (group) {
+                    slot = prev ?
+                        group._timeSlotCollections[group._timeSlotCollections.length - 1].last() :
+                        group._daySlotCollections[0].first();
+                }
+            }
+
             if (eventInfo) {
                 selection.events = [ eventInfo.event.element.attr(kendo.attr("uid")) ];
                 selection.start = eventInfo.start;
                 selection.end = eventInfo.end;
                 selection.isAllDay = eventInfo.isAllDay;
+                selection.groupIndex = groupIndex;
             }
 
             return !!eventInfo;
@@ -964,7 +1006,13 @@ kendo_module({
                 found = true;
                 events.addClass("k-state-selected");
 
-                this._scrollTo(events.last()[0], this.content[0]);
+                events = eventElement(
+                    this.groups[selection.groupIndex],
+                    events.last().attr(kendo.attr("uid")),
+                    selection.isAllDay
+                );
+
+                this._scrollTo(events[0], this.content[0]);
             }
 
             return found;
