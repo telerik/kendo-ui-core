@@ -928,11 +928,10 @@ kendo_module({
         _selectSlots: function(selection) {
             var group = this.groups[selection.groupIndex];
             var ranges = group.ranges(selection.start, selection.end, selection.isAllDay, false);
+            var element;
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 var range = ranges[rangeIndex];
-
-                var startSlot = range.start;
 
                 var collection = range.collection;
 

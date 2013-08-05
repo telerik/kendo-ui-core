@@ -439,7 +439,7 @@ kendo_module({
                         cellCount = 0;
                     }
 
-                    var start = kendo.date.addDays(this.startDate(), cellCount + dateOffset);
+                    var start = addDays(this.startDate(), cellCount + dateOffset);
 
                     var currentTime = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
 
@@ -455,14 +455,6 @@ kendo_module({
             var columnCount = this._columnCountInResourceView();
 
             this.groups = [];
-
-            var groupedByDate = this._isGroupedByDate();
-
-            if (groupedByDate) {
-                columnCount = 1;
-            }
-
-            var dateOffset = 0;
 
             for (var idx = 0; idx < groupCount; idx++) {
                 var view = this._addResourceView(idx);
@@ -481,7 +473,7 @@ kendo_module({
             }
         },
 
-       options: {
+        options: {
             name: "MultiDayView",
             selectedDateFormat: "{0:D}",
             allDaySlot: true,
@@ -1448,7 +1440,6 @@ kendo_module({
         },
 
         move: function(selection, key, shift) {
-            var interval = this._timeSlotInterval();
             var start = selection.start;
             var end = selection.end;
             var isAllDay = selection.isAllDay;
@@ -1458,6 +1449,7 @@ kendo_module({
             var startSlot = group.slot(start, isAllDay, true);
             var endSlot = group.slot(end, isAllDay, false);
             var vertical = this._isVerticallyGrouped();
+            var direction, slot, siblingGroup;
 
             if (key === keys.DOWN || key === keys.UP) {
                 var isUp = key === keys.UP;
@@ -1475,9 +1467,9 @@ kendo_module({
                 startSlot = group[isUp ? "prevSlot" : "nextSlot"](startSlot, shift);
                 endSlot = group[isUp ? "prevSlot" : "nextSlot"](endSlot, shift);
 
-                var direction = isUp ? -1 : 1;
-                var slot = isUp ? startSlot : endSlot;
-                var siblingGroup = isUp ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
+                direction = isUp ? -1 : 1;
+                slot = isUp ? startSlot : endSlot;
+                siblingGroup = isUp ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
 
                 if (!shift && !slot && vertical && siblingGroup) {
                     startSlot = endSlot = group.verticalSlot(start, isUp);
@@ -1492,16 +1484,16 @@ kendo_module({
                     selection.backward = isLeft;
                 }
 
-                var direction = isLeft ? -1 : 1;
+                direction = isLeft ? -1 : 1;
 
                 startSlot = group.siblingCollectionSlot(startSlot, isAllDay, direction);
                 endSlot = group.siblingCollectionSlot(endSlot, isAllDay, direction);
 
-                var slot = isLeft ? startSlot : endSlot;
+                slot = isLeft ? startSlot : endSlot;
                 var date = isLeft ? end : start;
 
                 if (!shift && !slot && !vertical) {
-                    var siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
+                    siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
 
                     if (siblingGroup) {
                         startSlot = endSlot = group.horizontalSlot(date, isAllDay, !isLeft, isLeft);
