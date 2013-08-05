@@ -1402,6 +1402,38 @@
                 equal(selection.isAllDay, true);
             });
 
+            test("View moves to the first event in last column", function() {
+                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8), new Date(2013, 6, 9)] }),
+                    event1 = new SchedulerEvent({
+                        start: new Date(2013, 6, 7, 6),
+                        end: new Date(2013, 6, 7, 8),
+                        title: "Test"
+                    }),
+                    event2 = new SchedulerEvent({
+                        start: new Date(2013, 6, 9, 2),
+                        end: new Date(2013, 6, 9, 4),
+                        title: "Test"
+                    });
+
+                view.render([
+                    event1, event2
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 6),
+                    end: new Date(2013, 6, 7, 8),
+                    events: [ event1.uid ]
+                });
+
+                view.moveToEvent(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 9, 2));
+                deepEqual(selection.end, new Date(2013, 6, 9, 4));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], event2.uid);
+                equal(selection.isAllDay, false);
+            });
+
             test("View moves to the first event before current slot", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
                     event1 = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),

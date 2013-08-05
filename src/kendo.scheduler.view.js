@@ -853,7 +853,8 @@ kendo_module({
                 return {
                     event: event,
                     start: slots[event.start].start,
-                    end: slots[event.end].end
+                    end: slots[event.end].end,
+                    isAllDay: false
                 };
             }
 
@@ -883,8 +884,8 @@ kendo_module({
                         isAllDay = false;
                     }
                 } else {
-                    if (prev && origIdx !== idx) {
-                        slotIndex = group._timeSlotCollections[idx].last().index;
+                    if (origIdx !== idx) {
+                        slotIndex = group._timeSlotCollections[idx][prev ? "last" : "first"]().index;
                     }
                     eventInfo = this._nextEvent(group._timeSlotCollections[idx], slotIndex, events, pad);
                     if (!eventInfo) {
@@ -958,6 +959,7 @@ kendo_module({
             }
 
             events = this.element.find("[" + uidAttr + "=" + events.join("],[" + uidAttr + "=") + "]");
+
             if (events.length > 0) {
                 found = true;
                 events.addClass("k-state-selected");
