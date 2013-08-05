@@ -101,13 +101,15 @@ kendo_module({
             if (support.mobileOS.tablet) {
                 this.shim.hide();
             } else { // phone
-                var positionedElement = this.wrapper.parent(),
-                    viewPort = positionedElement.parent();
+                if (this.element.is(":visible")) {
+                    var positionedElement = this.wrapper.parent(),
+                        viewPort = positionedElement.parent();
 
-                positionedElement.css({
-                    top: (viewPort.height() - positionedElement.height()) + "px",
-                    width: viewPort.width() + "px"
-                });
+                    positionedElement.css({
+                        top: (viewPort.height() - positionedElement.height()) + "px",
+                        width: viewPort.width() + "px"
+                    });
+                }
             }
         }
     });
