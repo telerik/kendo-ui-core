@@ -110,7 +110,8 @@ kendo_module({
             that.bind(that.events, that.options);
 
             $(function(){
-                that.element = $(element ? element : document.body);
+                element = $(element);
+                that.element = element[0] ? element : $(document.body);
                 that._setupPlatform();
                 that._setupElementClass();
                 that._attachHideBarHandlers();
