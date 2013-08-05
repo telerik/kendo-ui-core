@@ -582,7 +582,9 @@ namespace :build do
 
         desc 'Build and publish ASP.NET MVC DLLs'
         task :aspnetmvc_binaries => [ "mvc:binaries" ] do
-            sh "xcopy dist/binaries/ #{File.join(ARCHIVE_ROOT, "Stable", "binaries")} /s"
+            BINARIES_PATH = File.join(ARCHIVE_ROOT, "Stable", "binaries").gsub('/', '\\')
+            sh "mkdir #{BINARIES_PATH}"
+            sh "xcopy dist\\binaries\\ #{BINARIES_PATH} /s"
         end
 
         desc 'Package and publish bundles to the Stable directory'
