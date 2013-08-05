@@ -1336,13 +1336,9 @@ kendo_module({
 
             if (defined(value)) {
                 if (valueFields.length === 1) {
-                    value = value[valueFields[0]];
-                }
-
-                if (value !== null && typeof value === OBJECT) {
-                    result.valueFields = value;
+                    result.valueFields.value = value[valueFields[0]];
                 } else {
-                    result.valueFields.value = value;
+                    result.valueFields = value;
                 }
             }
 
