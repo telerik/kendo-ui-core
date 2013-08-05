@@ -31,7 +31,7 @@ var model,
         27: "Urban Exploration"
     },
     imagePlaceHolder = { image_url: "", calculatedWidth: "400px", noAvatar: true },
-    popularQuery = { url: '/photos', settings: { feature: 'popular', page: 1, image_size: 1, rpp: 50 } };
+    popularQuery = { url: "/photos", settings: { feature: "popular", exclude: "Nude", page: 1, image_size: 1, rpp: 50 } };
 
 var photos = new kendo.data.DataSource({
     transport: {
