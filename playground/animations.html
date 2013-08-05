@@ -7,51 +7,36 @@
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
         <style type="text/css" media="screen">
-            .animatee
-            {
-                position: absolute;
-                top: 100px;
-                left: 100px;
-                width: 200px;
-                height: 200px;
-                border:1px solid blue;
+            #a, #b {
+                width: 200px; height: 200px; position: absolute; top: 30px; left: 100px;
+            }
+
+            #b {
+                display: none;
             }
         </style>
     </head>
     <body>
         <button class="play">play</button>
         <button class="reverse">reverse</button>
-        <br><br>
-        <button class="pplay">play</button>
-        <button class="rreverse">reverse</button>
 
-        
+
         <div class="animatee">
-            <div style="width: 100%; height: 20px; background: red;">
-                Title: aaaaaaaaaaaaa
+            <div id="a">
+                View #1
             </div>
-            <div style="width: 100%; position: absolute; top: 20px; bottom: 0; background: yellow;">
-                Content: bbbbbbbbb
+
+            <div id="b">
+                View #2
             </div>
         </div>
+
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $("button.play").click(function() {
-                    $(".animatee").kendoStop(true).kendoAnimate("slide:up fadeIn", 2500);
+                    kendo.effects.animateTo($("#a"), $("#b"), { effects: "slide" });
+                    // $(".animatee").kendoStop(true).kendoAnimate("slide:up fadeIn", 2500);
                 });
-
-                $("button.reverse").click(function() {
-                    $(".animatee").kendoStop(true).kendoAnimate("slide:up fadeIn", 2500, true);
-                });
-
-                $("button.pplay").click(function() {
-                    $(".animatee").kendoStop(true).kendoAnimate("slide:right fadeIn", 250);
-                });
-
-                $("button.rreverse").click(function() {
-                    $(".animatee").kendoStop(true).kendoAnimate("slide:right fadeIn", 250, true);
-                });
-
             });
         </script>
     </body>
