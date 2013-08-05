@@ -92,6 +92,10 @@ kendo_module({
         },
 
         hide: function() {
+            if (this._transitioning) {
+                return;
+            }
+
             if (this.currentView.scroller) {
                 this.currentView.scroller.enable();
             }
@@ -125,6 +129,10 @@ kendo_module({
         },
 
         _show: function() {
+            if (this._transitioning) {
+                return;
+            }
+
             if (this.currentView.scroller) {
                 this.currentView.scroller.disable();
             }
@@ -153,11 +161,13 @@ kendo_module({
 
         _moveViewTo: function(offset) {
             this.userEvents.cancel();
+            this._transitioning = true;
             this.transition.moveTo({ location: offset, duration: 400, ease: Transition.easeOutExpo });
         },
 
         _viewShow: function(e) {
-            var movable = this.movable,
+            var that = this,
+                movable = this.movable,
                 currentOffset = movable && movable.x,
                 element;
 
@@ -176,6 +186,7 @@ kendo_module({
                 axis: AXIS,
                 movable: this.movable,
                 onEnd: function() {
+                    that._transitioning = false;
                     if (movable[AXIS] === 0) {
                         element[0].style.cssText = "";
                     }
