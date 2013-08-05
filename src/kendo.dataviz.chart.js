@@ -9231,6 +9231,8 @@ kendo_module({
             agg._fields = binder.valueFields(series).concat(
                 binder.otherFields(series)
             );
+
+            agg._srcFields = binder.sourceFields(series, agg._fields);
         },
 
         _initAggregate: function() {
@@ -9247,7 +9249,8 @@ kendo_module({
             }
 
             for (i = 0; i < fields.length; i++) {
-                field = item.field = fields[i];
+                item.field = field = fields[i];
+                item.srcField = agg._srcFields[i];
                 fieldAggregate = aggregate[field];
                 if (fieldAggregate) {
                     if (!isFn(fieldAggregate)) {
@@ -9274,7 +9277,13 @@ kendo_module({
                 field = item.field;
                 values = agg.valuesByField(data, field);
                 aggregate = item.aggregate;
-                aggregatedData[field] = aggregate(values, agg._series, dataItems, group);
+                var r = aggregate(values, agg._series, dataItems, group);
+                if (typeof r !== "object") {
+                    aggregatedData[item.srcField] = r;
+                } else {
+                    aggregatedData = r;
+                    break;
+                }
 
                 values = [];
             }
