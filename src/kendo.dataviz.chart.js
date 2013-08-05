@@ -1327,8 +1327,8 @@ kendo_module({
                 value = binder._bindFromArray(pointData, valueFields);
                 fields = binder._bindFromArray(fieldData, otherFields);
             } else if (typeof pointData === OBJECT) {
-                srcValueFields = binder._mapSeriesFieldsByIndex(series, valueFields);
-                srcPointFields = binder._mapSeriesFieldsByIndex(series, otherFields);
+                srcValueFields = binder.sourceFields(series, valueFields);
+                srcPointFields = binder.sourceFields(series, otherFields);
 
                 value = binder._bindFromObject(pointData, valueFields, srcValueFields);
                 fields = binder._bindFromObject(pointData, otherFields, srcPointFields);
@@ -1339,10 +1339,10 @@ kendo_module({
                     value = value[valueFields[0]];
                 }
 
-                if (typeof value === OBJECT && value !== null) {
-                    result = { valueFields: value };
+                if (value !== null && typeof value === OBJECT) {
+                    result.valueFields = value;
                 } else {
-                    result = { valueFields: { value: value } };
+                    result.valueFields.value = value;
                 }
             }
 
@@ -1402,7 +1402,7 @@ kendo_module({
             return value;
         },
 
-        _mapSeriesFieldsByIndex: function(series, fields) {
+        sourceFields: function(series, fields) {
             var i, length, fieldName,
                 sourceFields, sourceFieldName;
 
