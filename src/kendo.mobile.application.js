@@ -37,6 +37,8 @@ kendo_module({
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
         HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.majorVersion < 7,
+        SUPPORT_SWIPE_TO_GO_BACK = (OS.device == "iphone" || OS.device == "ipod") && OS.majorVersion >= 7,
+        HISTORY_TRANSITION = SUPPORT_SWIPE_TO_GO_BACK ? "none" : null,
         BARCOMPENSATION = OS.browser == "mobilesafari" ? 60 : 0,
         WINDOW = $(window),
         HEAD = $("head"),
@@ -102,7 +104,7 @@ kendo_module({
 
             that.options = $.extend({
                 hideAddressBar: true,
-                useNativeScrolling: true,
+                useNativeScrolling: false,
                 transition: "",
                 updateDocumentTitle: true
             }, options);
@@ -227,7 +229,7 @@ kendo_module({
                     },
 
                     routeMissing: function(e) {
-                        that.pane.navigate(e.url);
+                        that.pane.navigate(e.url, HISTORY_TRANSITION);
                     }
                 });
 
