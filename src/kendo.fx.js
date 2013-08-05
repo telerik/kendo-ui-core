@@ -48,6 +48,7 @@ kendo_module({
         PERSPECTIVE = cssPrefix + "perspective",
         DEFAULT_PERSPECTIVE = "1500px",
         TRANSFORM_PERSPECTIVE = "perspective(" + DEFAULT_PERSPECTIVE + ")",
+        ios7 = support.mobileOS && support.mobileOS.majorVersion == 7,
         directions = {
             left: {
                 reverse: "right",
@@ -239,6 +240,12 @@ kendo_module({
         }
 
         options.effects = kendo.parseEffects(effects);
+
+        options.previousDivisor = 3;
+
+        if (ios7 && effects == "tile:left") {
+            options.previousDivisor = 3;
+        }
 
         return options;
     }
@@ -942,6 +949,11 @@ kendo_module({
     createEffect("slideIn", {
         directions: FOUR_DIRECTIONS,
 
+        divisor: function(value) {
+            this.options.divisor = value;
+            return this;
+        },
+
         prepare: function(start, end) {
             var that = this,
                 tmp,
@@ -975,16 +987,22 @@ kendo_module({
             this.options = { previous: previous };
         },
 
+        previousDivisor: function(value) {
+            this.options.previousDivisor = value;
+            return this;
+        },
+
         children: function() {
             var that = this,
                 reverse = that._reverse,
                 previous = that.options.previous,
+                divisor = that.options.previousDivisor || 1,
                 dir = that._direction;
 
             var children = [ kendo.fx(that.element).slideIn(dir).setReverse(reverse) ];
 
             if (previous) {
-                children.push( kendo.fx(previous).slideIn(directions[dir].reverse).setReverse(!reverse) );
+                children.push( kendo.fx(previous).slideIn(directions[dir].reverse).divisor(divisor).setReverse(!reverse) );
             }
 
             return children;
