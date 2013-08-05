@@ -303,6 +303,16 @@
                 equal(view.content.find("div.k-event").length, 1);
             });
 
+            test("cross-midnight event is not rendered if ends at the begining of the View", function() {
+                var view = setup({
+                    startTime: new Date("2013/6/6 9:00"),
+                    dates: [ new Date("2013/6/6"), new Date("2013/6/7") ]
+                });
+
+                view.render([new SchedulerEvent({ uid: "uid", title: "", start: new Date("2013/6/5 10:00"), end: new Date("2013/6/6 00:00") })]);
+                equal(view.content.find("div.k-event").length, 0);
+            });
+
             test("old events are removed on multiple databind calls", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
@@ -1453,7 +1463,7 @@
             test("arrow is shown if multiday event starts before view's start date", function() {
                 var view = setup({ dates: [new Date(2013, 1, 2)] });
 
-                view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2) })]);
+                view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), isAllDay: true })]);
 
                 equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
             });
@@ -1514,7 +1524,7 @@
             test("refresh icon is shown if multiday event has recurring rule", function() {
                 var view = setup({ dates: [new Date(2013, 1, 2)] });
 
-                view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), recurrenceRule: "FREQ=DAILY" })]);
+                view.render([new SchedulerEvent({ uid: "foo", title: "", start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), isAllDay: true, recurrenceRule: "FREQ=DAILY" })]);
 
                 equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
             });
@@ -1522,13 +1532,13 @@
             test("refresh icon is shown if multiday event has recurrenceId", function() {
                 var view = setup({ dates: [new Date(2013, 1, 2)] });
 
-                view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), recurrenceId: "1" })]);
+                view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), isAllDay: true, recurrenceId: "1" })]);
 
                 equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
             });
 
             test("refresh icon is shown if multiday event is recurring exception event", function() {
-                var view = setup({ dates: [new Date(2013, 1, 2)] });
+                var view = setup({ dates: [new Date(2013, 1, 1)] });
 
                 view.render([new SchedulerEvent({
                     uid: "foo", title: "",
@@ -1642,7 +1652,6 @@
                 deepEqual(slots.at(count- 2).startDate(), new Date("2013/6/6 23:00"));
                 deepEqual(slots.at(count -2).endDate(), new Date("2013/6/6 23:30"));
             });
-
 
             test("slot ending at 12:00 AM doesn't have the south arrow", function() {
                 var view = setup({
