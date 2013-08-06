@@ -883,7 +883,10 @@ kendo_module({
             SAVE,
             "add",
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "moveStart",
+            "move",
+            "moveEnd"
         ],
 
         destroy: function() {
@@ -951,13 +954,17 @@ kendo_module({
                     startSlot = view._slotByPosition(e.x.location, e.y.location);
 
                     endSlot = startSlot;
+
+                    if (that.trigger("moveStart", { event: event })) {
+                        e.preventDefault();
+                    }
                 },
                 drag: function(e) {
                     var view = that.view();
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    if (!slot) {
+                    if (!slot || that.trigger("move", { event: event, slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() } })) {
                         return;
                     }
 
@@ -983,10 +990,14 @@ kendo_module({
                     var endResources = that.view()._resourceBySlot(endSlot);
                     var startResources = that.view()._resourceBySlot(startSlot);
 
-                    if (event.start.getTime() != start.getTime() ||
+                    var prevented = that.trigger("moveEnd", { event: event, slot: { element: endSlot.element, start: endSlot.startDate(), end: endSlot.endDate() }, resources: endResources });
+
+                    if (!prevented && (event.start.getTime() != start.getTime() ||
                         event.end.getTime() != end.getTime() ||
-                        kendo.stringify(endResources) != kendo.stringify(startResources))  {
+                        kendo.stringify(endResources) != kendo.stringify(startResources)))  {
                         that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
+                    } else {
+                        that.view()._removeMoveHint();
                     }
                 },
                 dragcancel: function() {

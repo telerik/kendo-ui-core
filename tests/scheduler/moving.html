@@ -1262,6 +1262,125 @@
                 equal(div.find(".k-event-drag-hint").length, 0);
             });
 
+            test("moving event triggers movestart event", 1, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ],
+                    moveStart: function(e) {
+                        equal(e.event, scheduler.dataSource.at(0));
+                    }
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragstart(scheduler, handle, handle.offset());
+            });
+
+            test("moving event triggers move event", 4, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ],
+                    move: function(e) {
+                        equal(e.event, scheduler.dataSource.at(0));
+                        ok(e.slot.element);
+                        deepEqual(e.slot.start, new Date("2013/6/2 11:00 PM"));
+                        deepEqual(e.slot.end, new Date("2013/6/2 11:30 PM"));
+                    }
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(slots.length-2).offset());
+            });
+
+            test("dropping event triggers moveend event", 4, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ],
+                    moveEnd: function(e) {
+                        equal(e.event, scheduler.dataSource.at(0));
+                        ok(e.slot.element);
+                        deepEqual(e.slot.start, new Date("2013/6/2 11:00 PM"));
+                        deepEqual(e.slot.end, new Date("2013/6/2 11:30 PM"));
+                    }
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+            });
+
+            test("preventing move event cancels the move", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ],
+                    move: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(slots.length-2).offset());
+
+                equal(div.find(".k-event-drag-hint").length, 0);
+            });
+
+            test("preventing moveEnd event cancels the move", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ],
+                    moveEnd: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+
+                var event = scheduler.dataSource.at(0);
+
+                deepEqual(event.start, new Date("2013/6/2 10:30 PM"));
+                deepEqual(event.end, new Date("2013/6/3 12:00 PM"));
+
+                equal(div.find(".k-event-drag-hint").length, 0);
+            });
+
             function dragcancel(scheduler) {
                 var draggable = scheduler._moveDraggable;
                 draggable.trigger("dragcancel");
