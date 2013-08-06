@@ -544,7 +544,7 @@ namespace :build do
         zip_bundles
     end
 
-    def copy_binaries(destination) do
+    def copy_binaries(destination)
         sh "net use L: /delete /yes"
         sh "net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69"
 
