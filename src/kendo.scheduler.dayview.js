@@ -209,6 +209,12 @@ kendo_module({
 
             this._removeMoveHint();
 
+            if (!multiday && (getMilliseconds(end) === 0 || getMilliseconds(end) < getMilliseconds(this.options.startTime))) {
+                if (ranges.length > 1) {
+                    ranges.pop();
+                }
+            }
+
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 var range = ranges[rangeIndex];
                 var startSlot = range.start;
@@ -517,19 +523,19 @@ kendo_module({
 
                 for (var columnIndex = dateOffset; columnIndex < columnCount+dateOffset; columnIndex++) {
                     view.addTimeSlotCollection(new ui.scheduler.SlotCollection({
-                        start: this._dates[columnIndex],
-                        end: kendo.date.addDays(this._dates[columnIndex], 1)
+                        start: kendo.date.toUtcTime(this._dates[columnIndex]),
+                        end: kendo.date.toUtcTime(kendo.date.addDays(this._dates[columnIndex], 1))
                     }));
                 }
                 if (groupedByDate) {
                     view.addDaySlotCollection(new ui.scheduler.SlotCollection({
-                        start: this._dates[dateOffset],
-                        end: kendo.date.addDays(this._dates[dateOffset], 1)
+                        start: kendo.date.toUtcTime(this._dates[dateOffset]),
+                        end: kendo.date.toUtcTime(kendo.date.addDays(this._dates[dateOffset], 1))
                     }));
                 } else {
                     view.addDaySlotCollection(new ui.scheduler.SlotCollection({
-                        start: this._dates[0],
-                        end: this._dates[this._dates.length - 1]
+                        start: kendo.date.toUtcTime(this._dates[0]),
+                        end: kendo.date.toUtcTime(this._dates[this._dates.length - 1])
                     }));
                 }
 

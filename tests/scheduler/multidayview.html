@@ -34,7 +34,7 @@
                     MultiDayView.fn.init.call(that, element, options);
                 },
                 calculateDateRange: function() {
-                    this._render(this.options.dates);
+                    this._render(this.options.dates || [new Date()]);
                 }
             });
 

@@ -1085,12 +1085,14 @@ kendo_module({
                             update = true;
                         }
                     } else if (dir == "east") {
-                        if (slot instanceof kendo.ui.scheduler.DaySlot && startSlot.groupIndex == slot.groupIndex && kendo.date.getDate(slot.endDate()).getTime() >= kendo.date.getDate(event.start).getTime()) {
+                        if (slot instanceof kendo.ui.scheduler.DaySlot && startSlot.groupIndex == slot.groupIndex &&
+                            kendo.date.toUtcTime(kendo.date.getDate(slot.endDate())) >= kendo.date.toUtcTime(kendo.date.getDate(event.start))) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "west") {
-                        if (slot instanceof kendo.ui.scheduler.DaySlot && endSlot.groupIndex == slot.groupIndex && kendo.date.getDate(event.end).getTime() >= kendo.date.getDate(slot.startDate()).getTime()) {
+                        if (slot instanceof kendo.ui.scheduler.DaySlot && endSlot.groupIndex == slot.groupIndex &&
+                            kendo.date.toUtcTime(kendo.date.getDate(event.end)) >= kendo.date.toUtcTime(kendo.date.getDate(slot.startDate()))) {
                             startSlot = slot;
                             update = true;
                         }

@@ -696,7 +696,7 @@ kendo_module({
 
             var group = this.groups[endSlot.groupIndex];
 
-            var ranges = group.ranges(startSlot.startDate(), endSlot.endDate(), true, event.isAllDay);
+            var ranges = group.ranges(startSlot.start, endSlot.end, true, event.isAllDay);
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 this._createResizeHint(ranges[rangeIndex]);
@@ -714,13 +714,9 @@ kendo_module({
 
             var duration = event.end.getTime() - event.start.getTime();
 
-            var start = new Date(event.start.getTime());
+            var start = kendo.date.toUtcTime(event.start) + distance;
 
-            kendo.date.setTime(start, distance);
-
-            var end = new Date(start.getTime());
-
-            kendo.date.setTime(end, duration);
+            var end = start + duration;
 
             var group = this.groups[currentSlot.groupIndex];
 
@@ -795,8 +791,8 @@ kendo_module({
 
                 for (var rowIndex = rowMultiplier*rowCount; rowIndex < (rowMultiplier+1) *rowCount; rowIndex++) {
                     var collection = new kendo.ui.scheduler.SlotCollection({
-                        start: kendo.date.addDays(this.startDate(), cellCount),
-                        end: kendo.date.addDays(this.startDate(), cellCount + columnCount)
+                        start: kendo.date.toUtcTime(kendo.date.addDays(this.startDate(), cellCount)),
+                        end: kendo.date.toUtcTime(kendo.date.addDays(this.startDate(), cellCount + columnCount))
                     });
 
                     var group = groups[groupIndex];
