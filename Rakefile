@@ -17,7 +17,11 @@ STAGING_CDN_ROOT = 'http://cdn.kendostatic.com/staging/'
 
 PLATFORM = RbConfig::CONFIG['host_os']
 
-ARCHIVE_ROOT = "/kendo-builds"
+if PLATFORM =~ /linux|darwin/
+    ARCHIVE_ROOT = "/kendo-builds"
+else
+    ARCHIVE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\Builds"
+end
 
 if ENV['DRY_RUN']
     ADMIN_URL = 'http://integrationadmin.telerik.com/'
@@ -540,6 +544,19 @@ namespace :build do
         zip_bundles
     end
 
+    def copy_binaries(destination) do
+        sh "net use L: /delete /yes"
+        sh "net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69"
+
+        target_dir = "L:\\#{destination}\\binaries\\"
+
+        ensure_path(target_dir)
+
+        tree :to => target_dir,
+             :from => 'dist/binaries/**/Kendo.*.dll',
+             :root => 'dist/binaries/'
+    end
+
     namespace :production do
         desc 'Run tests and VSDoc'
         task :tests => ["tests:Production", "vsdoc:production:test"]
@@ -578,10 +595,7 @@ namespace :build do
 
         desc 'Build and publish ASP.NET MVC DLLs'
         task :aspnetmvc_binaries => [ "mvc:binaries" ] do
-            sh "net use L: /delete /yes"
-            sh "net use L: \\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\Builds /user:telerik.com\\TeamFoundationUser voyant69"
-            sh "mkdir L:\\Stable\\binaries\\"
-            sh "xcopy dist\\binaries\\* L:\\Stable\\binaries\\ /E /Y"
+            copy_binaries "Stable"
         end
 
         desc 'Package and publish bundles to the Stable directory'
