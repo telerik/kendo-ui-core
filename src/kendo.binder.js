@@ -1246,11 +1246,11 @@ kendo_module({
         return result;
     }
 
-    function bindingTargetForRole(role, element, roles) {
-        var type = roles[role];
+    function bindingTargetForRole(element, roles) {
+        var widget = kendo.initWidget(element, {}, roles);
 
-        if (type) {
-            return new WidgetBindingTarget(kendo.initWidget(element, type.options, roles));
+        if (widget) {
+            return new WidgetBindingTarget(widget);
         }
     }
 
@@ -1315,7 +1315,7 @@ kendo_module({
         }
 
         if (role) {
-            target = bindingTargetForRole(role, element, roles);
+            target = bindingTargetForRole(element, roles);
         }
 
         if (bind) {

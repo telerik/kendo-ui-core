@@ -52,6 +52,12 @@
                 ok(div.find("#foo").data("kendoTestWidget"));
             });
 
+            test("full path widgets are initialized", function() {
+                var div = $('<div><span id="foo" data-role="kendo.ui.TestWidget" /></div>');
+                kendo.bind(div, {}, kendo.ui);
+                ok(div.find("#foo").data("kendoTestWidget"));
+            });
+
             test("widgets are initialized from multiple namespaces", function() {
                 var div = $('<div><span id="foo" data-role="testwidget" /><span id="bar" data-role="testwidget2" /></div>');
                 kendo.bind(div, {}, kendo.ui, kendo.mobile.ui);
