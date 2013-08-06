@@ -203,13 +203,17 @@ kendo_module({
 
             var ranges = group.ranges(start, end, multiday, event.isAllDay);
 
+            start = kendo.timezone.apply(new Date(start), "Etc/UTC");
+
+            end = kendo.timezone.apply(new Date(end), "Etc/UTC");
+
             this._removeMoveHint();
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 var range = ranges[rangeIndex];
                 var startSlot = range.start;
 
-                var hint = this._createEventElement($.extend({}, event, { start: kendo.timezone.apply(new Date(start), "Etc/UTC"), end: kendo.timezone.apply(new Date(end), "Etc/UTC") }), !multiday);
+                var hint = this._createEventElement($.extend({}, event, { start: start, startTime: start, end: end, endTime: end }), !multiday);
 
                 hint.addClass("k-event-drag-hint");
 
