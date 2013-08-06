@@ -20,7 +20,7 @@
     });
 
     test("remove icon is not rendered upon success if remove action is not configured", function() {
-        uploadInstance = createUpload( { async: { saveUrl: "javascript:''", removeUrl: null } } );
+        uploadInstance = createUpload( { async: { saveUrl: "javascript:;", removeUrl: null } } );
 
         simulateUpload();
         equal($(".k-delete", uploadInstance.wrapper).length, 0);

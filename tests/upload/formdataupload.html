@@ -546,6 +546,20 @@
                     $("input[name^='__RequestVerificationToken']").remove();
                 });
 
+                test("saveUrl set in upload event is applied", function() {
+                    uploadInstance = createUpload({ upload:
+                        function() {
+                            this.options.async.saveUrl = "foo";
+                        }
+                    });
+
+                    uploadInstance._module.postFormData = function (url) {
+                        equal(url, "foo");
+                    };
+
+                    simulateFileSelect();
+                });
+
                 test("cancelling upload event prevents the upload operation", function() {
                     uploadInstance = createUpload({ upload:
                         function(e) {

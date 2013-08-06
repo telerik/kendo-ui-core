@@ -782,6 +782,7 @@ kendo_module({
                 iframe.appendTo(document.body);
 
                 var form = iframe.data("form")
+                    .attr("action", upload.options.async.saveUrl)
                     .appendTo(document.body);
 
                 e.data = $.extend({ }, e.data, getAntiForgeryTokens());

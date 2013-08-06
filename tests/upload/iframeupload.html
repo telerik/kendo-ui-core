@@ -425,6 +425,18 @@
                 equal($("form[target='uploadInstance_0'] input[name='myId']").length, 1);
             });
 
+            test("saveUrl set in upload event is applied", function() {
+                uploadInstance = createUpload({ upload:
+                    function() {
+                        this.options.async.saveUrl = "javascript:void(0);";
+                    }
+                });
+
+                simulateFileSelect();
+
+                equal($("form[target='uploadInstance_0']").attr("action"), "javascript:void(0);");
+            });
+
             test("cancelling the upload event prevents the upload operation", function() {
                 uploadInstance = createUpload({ upload:
                     function(e) {
