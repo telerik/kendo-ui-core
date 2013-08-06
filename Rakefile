@@ -545,7 +545,7 @@ namespace :build do
     end
 
     def copy_binaries(destination)
-        sh "net use L: /delete /yes"
+        sh "if exist L: ( net use L: /delete /yes )"
         sh "net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69"
 
         target_dir = "L:\\#{destination}\\binaries\\"
