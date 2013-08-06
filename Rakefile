@@ -550,11 +550,8 @@ namespace :build do
 
         target_dir = "L:\\#{destination}\\binaries\\"
 
-        ensure_path(target_dir)
-
-        tree :to => target_dir,
-             :from => 'dist/binaries/**/Kendo.*.dll',
-             :root => 'dist/binaries/'
+        sh "if not exist #{target_dir} ( mkdir #{target_dir} )"
+        sh "xcopy dist\\binaries\\* #{target_dir} /E /Y"
     end
 
     namespace :production do
