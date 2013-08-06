@@ -308,11 +308,11 @@ kendo_module({
         },
 
         update: function(eventInfo) {
-            this.accept(eventInfo);
+            for (var field in eventInfo) {
+                this.set(field, eventInfo[field]);
+            }
 
-            this._set("startTime", toInvariantDate(this.start));
-
-            //Note one field should use public set to trigger the change
+            this.set("startTime", toInvariantDate(this.start));
             this.set("endTime", toInvariantDate(this.end));
         },
 
@@ -1141,7 +1141,14 @@ kendo_module({
             var that = this;
 
             var updateEvent = function(event) {
-                event.update(eventInfo);
+                try {
+                    that._preventRefresh = true;
+                    event.update(eventInfo);
+                } finally {
+                    that._preventRefresh = false;
+                }
+
+                that.refresh();
 
                 if (!that.trigger(SAVE, { model: event })) {
                     that._updateSelection(event);
@@ -2135,7 +2142,7 @@ kendo_module({
         refresh: function(e) {
             var view = this.view();
 
-            if (e && e.action === "itemchange" && this.editable) { // skip rebinding if editing is in progress
+            if (e && e.action === "itemchange" && (this.editable || this._preventRefresh)) { // skip rebinding if editing is in progress
                 return;
             }
 
