@@ -41,10 +41,23 @@ function scheduler_cancel(e) {
 function scheduler_edit(e) {
     kendoConsole.log("edit");
 }
+
+function scheduler_moveStart(e) {
+    kendoConsole.log("moveStart");
+}
+
+function scheduler_move(e) {
+    kendoConsole.log("move");
+}
+
+function scheduler_moveEnd(e) {
+    kendoConsole.log("moveEnd");
+}
 </script>
     <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="400" date="<%= date %>" startTime="<%= startTime %>"
     	dataBinding="scheduler_dataBinding" dataBound="scheduler_dataBound" save="scheduler_save"
-    	remove="scheduler_remove" edit="scheduler_edit" cancel="scheduler_cancel">
+    	remove="scheduler_remove" edit="scheduler_edit" cancel="scheduler_cancel" moveStart="scheduler_moveStart"
+    	moveEnd="scheduler_moveEnd" move="scheduler_move">
     	<kendo:scheduler-views>
     		<kendo:scheduler-view type="day" />
     		<kendo:scheduler-view type="week" selected="true" />

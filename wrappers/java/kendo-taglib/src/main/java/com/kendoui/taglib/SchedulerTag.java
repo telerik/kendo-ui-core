@@ -91,6 +91,18 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setEvent("edit", value.getBody());
     }
 
+    public void setMove(MoveFunctionTag value) {
+        setEvent("move", value.getBody());
+    }
+
+    public void setMoveEnd(MoveEndFunctionTag value) {
+        setEvent("moveEnd", value.getBody());
+    }
+
+    public void setMoveStart(MoveStartFunctionTag value) {
+        setEvent("moveStart", value.getBody());
+    }
+
     public void setRemove(RemoveFunctionTag value) {
         setEvent("remove", value.getBody());
     }
@@ -289,6 +301,42 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setEdit(String value) {
         setProperty("edit", new Function(value));
+    }
+
+    public String getMove() {
+        Function property = ((Function)getProperty("move"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setMove(String value) {
+        setProperty("move", new Function(value));
+    }
+
+    public String getMoveEnd() {
+        Function property = ((Function)getProperty("moveEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setMoveEnd(String value) {
+        setProperty("moveEnd", new Function(value));
+    }
+
+    public String getMoveStart() {
+        Function property = ((Function)getProperty("moveStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setMoveStart(String value) {
+        setProperty("moveStart", new Function(value));
     }
 
     public String getRemove() {
