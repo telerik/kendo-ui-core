@@ -345,11 +345,11 @@ kendo_module({
                 event.field = field;
             }
 
-            context.trigger(type, event);
-
             if (type == CHANGE && context._notifyChange) {
                 context._notifyChange(event);
             }
+
+            context.trigger(type, event);
         };
     }
 

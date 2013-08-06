@@ -20,6 +20,8 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+            var Model = kendo.data.Model;
+
             test("initializes a multiselect when data role is multiselect", function() {
                 var dom = $('<select data-role="multiselect"/>');
 
@@ -146,6 +148,84 @@
                 dom.data("kendoMultiSelect").trigger("change");
 
                 equal(observable.selectedItem, observableInstance);
+            });
+
+            test("selecting initial value marks model as dirty", 1, function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var observable = new Model({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: []
+                });
+
+                observable.bind("change", function() {
+                    equal(this.dirty, true);
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoMultiSelect").value(["foo"]);
+                dom.data("kendoMultiSelect").trigger("change");
+            });
+
+            test("remove marks model as dirty", 1, function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var observable = new Model({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: [ { name: "foo" } ]
+                });
+
+                observable.bind("change", function() {
+                    equal(this.dirty, true);
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoMultiSelect").value([]);
+                dom.data("kendoMultiSelect").trigger("change");
+            });
+
+            test("remove last item triggers change once", 2, function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var observable = new Model({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: [ { name: "foo" } ]
+                });
+
+                var timesCalled = 0;
+
+                observable.bind("change", function() {
+                    timesCalled ++;
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoMultiSelect").value([]);
+                dom.data("kendoMultiSelect").trigger("change");
+
+                equal(timesCalled, 1);
+                equal(observable.selectedItem.length, 0);
+            });
+
+            test("remove one item triggers change once", 2, function() {
+                var dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var observable = new Model({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: [ { name: "foo" }, { name: "bar" } ]
+                });
+
+                var timesCalled = 0;
+
+                observable.bind("change", function() {
+                    timesCalled ++;
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoMultiSelect").value([ "bar" ]);
+                dom.data("kendoMultiSelect").trigger("change");
+
+                equal(timesCalled, 1);
+                equal(observable.selectedItem.length, 1);
             });
 
             test("changing a value updates ObservableArray property when multiselect is filtered", function() {

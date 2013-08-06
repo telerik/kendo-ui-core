@@ -13,6 +13,7 @@ kendo_module({
         ObservableArray = kendo.data.ObservableArray,
         toString = {}.toString,
         binders = {},
+        splice = Array.prototype.splice,
         Class = kendo.Class,
         innerText,
         proxy = $.proxy,
@@ -1063,7 +1064,12 @@ kendo_module({
                     that._initChange = true;
 
                     if (value instanceof ObservableArray) {
-                        value.splice.apply(value, [0, value.length].concat(values));
+                        if (values.length) {
+                            splice.call(value, 0, value.length);
+                            value.splice.apply(value, [0, 0].concat(values));
+                        } else {
+                            value.splice.apply(value, [0, value.length].concat(values));
+                        }
                     } else {
                         that.bindings[VALUE].set(values);
                     }
