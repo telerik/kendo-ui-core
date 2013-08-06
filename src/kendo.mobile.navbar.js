@@ -43,7 +43,7 @@ kendo_module({
 
             that.container().bind("show", $.proxy(this, "refresh"));
 
-            element.addClass("km-navbar").wrapInner($('<div class="km-view-title" />'));
+            element.addClass("km-navbar").wrapInner($('<div class="km-view-title km-show-title" />'));
             that.leftElement = createContainer("left", element);
             that.rightElement = createContainer("right", element);
             that.centerElement = element.find(".km-view-title");
