@@ -990,7 +990,7 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    if (!slot) {
+                    if (!slot || that.trigger("move", { event: event, slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() } })) {
                         return;
                     }
 
@@ -1037,6 +1037,8 @@ kendo_module({
                         event.end.getTime() != end.getTime() ||
                         kendo.stringify(endResources) != kendo.stringify(startResources)))  {
                         that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
+                    } else {
+                        that.view()._removeMoveHint();
                     }
                 },
                 dragcancel: function() {
