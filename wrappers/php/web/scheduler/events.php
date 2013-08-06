@@ -152,7 +152,10 @@ $scheduler->timezone("Etc/UTC")
     ->remove('scheduler_remove')
     ->cancel('scheduler_cancel')
     ->addEvent('scheduler_add')
-    ->edit('scheduler_edit');
+    ->edit('scheduler_edit')
+    ->moveStart('scheduler_moveStart')
+    ->move('scheduler_move')
+    ->moveEnd('scheduler_moveEnd');
 
 echo $scheduler->render();
 ?>
@@ -185,6 +188,18 @@ echo $scheduler->render();
 
     function scheduler_add(e) {
         kendoConsole.log("add");
+    }
+
+    function scheduler_moveStart(e) {
+        kendoConsole.log("moveStart");
+    }
+
+    function scheduler_move(e) {
+        kendoConsole.log("move");
+    }
+
+    function scheduler_moveEnd(e) {
+        kendoConsole.log("moveEnd");
     }
 </script>
 

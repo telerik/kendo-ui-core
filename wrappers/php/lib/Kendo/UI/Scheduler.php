@@ -312,6 +312,48 @@ That way all users would see the same dates and times no matter their configured
     }
 
     /**
+    * Sets the moveStart event of the Scheduler.
+    * Fired when the user starts to drag an event.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function moveStart($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('moveStart', $value);
+    }
+
+    /**
+    * Sets the move event of the Scheduler.
+    * Fired when the user is moving an event.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function move($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('move', $value);
+    }
+
+    /**
+    * Sets the moveEnd event of the Scheduler.
+    * Fired when the user stops moving an event.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function moveEnd($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('moveEnd', $value);
+    }
+
+    /**
     * Sets the remove event of the Scheduler.
     * Fired when the user clicks the "destroy" button.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
