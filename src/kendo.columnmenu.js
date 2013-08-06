@@ -23,7 +23,6 @@ kendo_module({
         FILTERMENU = "kendoFilterMenu",
         MENU = "kendoMenu",
         NS = ".kendoColumnMenu",
-        nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g,
         Widget = ui.Widget;
 
     function trim(text) {
@@ -307,23 +306,26 @@ kendo_module({
         },
 
         _updateColumnsMenu: function() {
-            var attr = "[" + kendo.attr("field") + "=",
-                columns = this._ownerColumns(),
-                allselector = map(columns, function(col) {
-                    return attr + '"' + col.field.replace(nameSpecialCharRegExp, "\\$1") + '"]';
-                }).join(","),
-                visible = grep(columns, function(field) {
+            var attr = kendo.attr("field"),
+                visible = grep(this._ownerColumns(), function(field) {
                     return !field.hidden;
                 }),
                 visibleDataFields = grep(visible, function(field) {
                     return field.originalField;
-                }).length,
-                selector = map(visible, function(col) {
-                    return attr + '"' + col.field.replace(nameSpecialCharRegExp, "\\$1") + '"]';
-                }).join(",");
+                }).length;
 
-            this.wrapper.find(allselector).prop("checked", false);
-            this.wrapper.find(selector).prop("checked", true).prop("disabled", visibleDataFields == 1);
+            visible = map(visible, function(col) {
+                return col.field;
+            });
+
+            this.wrapper
+                .find(".k-columns-item input[" + attr + "]")
+                .prop("checked", false)
+                .filter(function() {
+                    return inArray($(this).attr(attr), visible) > -1;
+                })
+                .prop("checked", true)
+                .prop("disabled", visibleDataFields == 1);
         },
 
         _filter: function() {
@@ -374,7 +376,7 @@ kendo_module({
                     '#if(showColumns){#'+
                         '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
                         '#for (var col in columns) {#'+
-                            '<li><input type="checkbox" data-#=ns#field="#=columns[col].field#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</li>'+
+                            '<li><input type="checkbox" data-#=ns#field="#=columns[col].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</li>'+
                         '#}#'+
                         '</ul></li>'+
                         '#if(filterable){#'+

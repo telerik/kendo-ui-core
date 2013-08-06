@@ -235,6 +235,31 @@
                 ok(checkboxes.eq(2).prop("disabled"), "column is not disabled");
             });
 
+            test("hiding column with space in the field name", 2, function() {
+                var menu = setup({
+                    owner: {
+                        columns: [
+                            { field: '["foo bar"]', hidden: false },
+                            { field: "bar", hidden: false }
+                        ],
+                        dataSource: new DataSource({
+                            data: [
+                                {
+                                    "foo bar": "foo bar",
+                                    "bar": "bar"
+                                }
+                            ]
+                        }),
+                        hideColumn: function(index) {
+                            ok(true);
+                            equal(index, 0);
+                        }
+                    }
+                });
+
+                menu.wrapper.find("[type=checkbox]").eq(0).click();
+            });
+
             test("selecting sort asc item sorts the dataSource", function() {
                 var menu = setup({ field: "foo" });
 
