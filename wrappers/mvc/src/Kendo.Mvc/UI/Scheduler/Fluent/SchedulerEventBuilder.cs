@@ -422,5 +422,179 @@
 
             return this;
         }
+        
+        /// <summary>
+        /// Defines the inline handler of the moveStart event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///            .Name("Scheduler")
+        ///            .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        ///            .Events(events => events.MoveStart(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder MoveStart(Func<object, object> handler)
+        {
+            Handler("moveStart", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the moveStart event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///             .Name("Scheduler")
+        ///             .Events(events => events.MoveStart("moveStart"))
+        ///             .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder MoveStart(string handler)
+        {
+            Handler("moveStart", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the move event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///            .Name("Scheduler")
+        ///            .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        ///            .Events(events => events.Move(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder Move(Func<object, object> handler)
+        {
+            Handler("move", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the move event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///             .Name("Scheduler")
+        ///             .Events(events => events.Move("move"))
+        ///             .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder Move(string handler)
+        {
+            Handler("move", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the moveEnd event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///            .Name("Scheduler")
+        ///            .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        ///            .Events(events => events.MoveEnd(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder MoveEnd(Func<object, object> handler)
+        {
+            Handler("moveEnd", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the moveEnd event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///             .Name("Scheduler")
+        ///             .Events(events => events.MoveEnd("moveEnd"))
+        ///             .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder MoveEnd(string handler)
+        {
+            Handler("moveEnd", handler);
+
+            return this;
+        }
     }
 }
