@@ -170,7 +170,7 @@
             equalWithRound(event.offset().top, slots.eq(4).offset().top);
         });
 
-        test("resizing event by dragging the south handle skips DST slots", function() {
+        test("resizing event by dragging the south handle doesn't skip DST slots", function() {
             if (!dst) {
                 expect(0);
                 return;
@@ -190,14 +190,14 @@
 
             resizeStart(scheduler, handle);
 
-            resize(scheduler, handle, slots.eq(1).offset());
+            resize(scheduler, handle, slots.eq(2).offset());
 
             var hint = div.find(".k-marquee");
 
-            equalWithRound(hint.outerHeight(), 4 * slots.outerHeight());
+            equalWithRound(hint.outerHeight(), 3 * slots.outerHeight());
         });
 
-        test("resizing event by dragging the north handle skips the DST slots", function() {
+        test("resizing event by dragging the north handle doesn't skip the DST slots", function() {
             if (!dst) {
                 expect(0);
                 return;
@@ -221,7 +221,35 @@
 
             var hint = div.find(".k-marquee");
 
-            equalWithRound(hint.outerHeight(), 1 * slots.outerHeight());
+            equalWithRound(hint.outerHeight(), 3 * slots.outerHeight());
+        });
+
+        test("moving event doesn't skip DST slots", function() {
+            if (!dst) {
+                expect(0);
+                return;
+            }
+
+            var scheduler = new kendo.ui.Scheduler(div, {
+                startTime: new Date("2013/3/31 2:00 AM"),
+                date: new Date("2013/3/31"),
+                dataSource: [
+                    new SchedulerEvent({ start: new Date("2013/3/31 4:00 AM"), end: new Date("2013/3/31 4:30 AM"), title: "" })
+                ]
+            });
+
+            var slots = div.find(".k-scheduler-content td");
+
+            var event = div.find(".k-event");
+
+            moveStart(scheduler, event);
+
+            move(scheduler, event, slots.eq(2).offset());
+
+            var hint = div.find(".k-event-drag-hint");
+
+
+            equalWithRound(hint.offset().top,  slots.eq(2).offset().top);
         });
 
         test("displays event occurring in DST", function() {
@@ -277,7 +305,37 @@
             });
         }
 
-        </script>
+        function moveStart(scheduler, target) {
+            var draggable = scheduler._moveDraggable;
+
+            if (!draggable) {
+                return;
+            }
+
+            var offset = target.offset();
+
+            draggable.trigger("dragstart", {
+                currentTarget: target,
+                x: { location: offset.left },
+                y: { location: offset.top }
+            });
+        }
+
+        function move(scheduler, target, offset) {
+            var draggable = scheduler._moveDraggable;
+
+            if (!draggable) {
+                return;
+            }
+
+            draggable.trigger("drag", {
+                currentTarget: target,
+                x: { location: offset.left },
+                y: { location: offset.top }
+            });
+        }
+
+       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

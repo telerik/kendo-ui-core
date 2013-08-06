@@ -1075,12 +1075,12 @@ kendo_module({
                     var update = false;
 
                     if (dir == "south") {
-                        if (slot instanceof kendo.ui.scheduler.TimeSlot && startSlot.groupIndex == slot.groupIndex && slot.endDate() - event.start >= view._timeSlotInterval()) {
+                        if (slot instanceof kendo.ui.scheduler.TimeSlot && startSlot.groupIndex == slot.groupIndex && slot.end - kendo.date.toUtcTime(event.start) >= view._timeSlotInterval()) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "north") {
-                        if (slot instanceof kendo.ui.scheduler.TimeSlot && endSlot.groupIndex == slot.groupIndex && event.end - slot.startDate() >= view._timeSlotInterval()) {
+                        if (slot instanceof kendo.ui.scheduler.TimeSlot && endSlot.groupIndex == slot.groupIndex && kendo.date.toUtcTime(event.end) - slot.start >= view._timeSlotInterval()) {
                             startSlot = slot;
                             update = true;
                         }

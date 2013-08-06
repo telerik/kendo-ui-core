@@ -141,7 +141,7 @@ kendo_module({
 
             var multiday = group.multiday(event);
 
-            var ranges = group.ranges(startSlot.startDate(), endSlot.endDate(), multiday, event.isAllDay);
+            var ranges = group.ranges(startSlot.start, endSlot.end, multiday, event.isAllDay);
 
             this._removeResizeHint();
 
@@ -197,29 +197,19 @@ kendo_module({
 
             var duration = event.end.getTime() - event.start.getTime();
 
-            var start = new Date(event.start.getTime());
+            var start = kendo.date.toUtcTime(event.start) + distance;
 
-            kendo.date.setTime(start, distance);
-
-            var end = new Date(start.getTime());
-
-            setTime(end, duration);
+            var end = start + duration;
 
             var ranges = group.ranges(start, end, multiday, event.isAllDay);
 
             this._removeMoveHint();
 
-            if (!multiday && (getMilliseconds(end) === 0 || getMilliseconds(end) < getMilliseconds(this.options.startTime))) {
-                if (ranges.length > 1) {
-                    ranges.pop();
-                }
-            }
-
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 var range = ranges[rangeIndex];
                 var startSlot = range.start;
 
-                var hint = this._createEventElement($.extend({}, event, { start: start, end: end }), !multiday);
+                var hint = this._createEventElement($.extend({}, event, { start: kendo.timezone.apply(new Date(start), "Etc/UTC"), end: kendo.timezone.apply(new Date(end), "Etc/UTC") }), !multiday);
 
                 hint.addClass("k-event-drag-hint");
 
