@@ -44,6 +44,7 @@ namespace Kendo.Mvc.UI
             DialogInsert = Messages.Editor_DialogInsert;
             DialogButtonSeparator = Messages.Editor_DialogButtonSeparator;
             DialogCancel = Messages.Editor_DialogCancel;
+            CreateTable = Messages.Editor_CreateTable;
 
             ImageBrowserMessages = new EditorImageBrowserMessages();
         }
@@ -83,6 +84,7 @@ namespace Kendo.Mvc.UI
         public string DialogInsert { get; set; }
         public string DialogButtonSeparator { get; set; }
         public string DialogCancel { get; set; }
+        public string CreateTable { get; set; }
 
         public EditorImageBrowserMessages ImageBrowserMessages { get; set; }
 
@@ -113,7 +115,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultBackColor = "Background color";
         private const string DefaultForeColor = "Color";
         private const string DefaultImageWebAddress = "Web address";
-        private const string DefaultImageAltText = "Web address";
+        private const string DefaultImageAltText = "Alternate text";
         private const string DefaultLinkWebAddress = "Web address";
         private const string DefaultLinkText = "Text";
         private const string DefaultLinkToolTip = "ToolTip";
@@ -121,6 +123,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultDialogInsert = "Insert";
         private const string DefaultDialogButtonSeparator = "or";
         private const string DefaultDialogCancel = "Cancel";
+        private const string DefaultCreateTable = "Create table";
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -302,6 +305,11 @@ namespace Kendo.Mvc.UI
             if (DialogCancel != DefaultDialogCancel)
             {
                 json["dialogCancel"] = DialogCancel;
+            }
+
+            if (CreateTable != DefaultCreateTable)
+            {
+                json["createTable"] = CreateTable;
             }
         }
     }

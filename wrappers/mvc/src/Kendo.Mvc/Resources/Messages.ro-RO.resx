@@ -621,4 +621,7 @@
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
     <value>Încărcă fișierele</value>
   </data>
+  <data name="Editor_CreateTable" xml:space="preserve">
+    <value>Inserează tabelelor</value>
+  </data>
 </root>

@@ -137,7 +137,14 @@ kendo_module({
         dialogUpdate: "Update",
         dialogInsert: "Insert",
         dialogButtonSeparator: "or",
-        dialogCancel: "Cancel"
+        dialogCancel: "Cancel",
+        createTable: "Create table",
+        addColumnLeft: "Add column on the left",
+        addColumnRight: "Add column on the right",
+        addRowAbove: "Add row above",
+        addRowBelow: "Add row below 2",
+        deleteRow: "Delete row",
+        deleteColumn: "Delete column"
     };
 
     var supportedBrowser = !os || (os.ios && os.flatVersion >= 500) || (!os.ios && typeof(document.documentElement.contentEditable) != 'undefined');

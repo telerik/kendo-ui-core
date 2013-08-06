@@ -558,4 +558,7 @@
   <data name="Scheduler_View_Week" xml:space="preserve">
     <value>Week</value>
   </data>
+  <data name="Editor_CreateTable" xml:space="preserve">
+    <value>Створити таблицю</value>
+  </data>
 </root>
