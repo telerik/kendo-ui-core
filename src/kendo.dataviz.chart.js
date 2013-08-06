@@ -21,16 +21,16 @@ kendo_module({
         math = Math,
         extend = $.extend,
         proxy = $.proxy,
-        isFn = $.isFunction,
 
         kendo = window.kendo,
         Class = kendo.Class,
         Observable = kendo.Observable,
         DataSource = kendo.data.DataSource,
         Widget = kendo.ui.Widget,
-        template = kendo.template,
         deepExtend = kendo.deepExtend,
         getter = kendo.getter,
+        isFn = kendo.isFunction,
+        template = kendo.template,
 
         dataviz = kendo.dataviz,
         Axis = dataviz.Axis,
@@ -1299,6 +1299,10 @@ kendo_module({
             }
         },
 
+        canonicalFields: function(series) {
+            return this.valueFields(series).concat(this.otherFields(series));
+        },
+
         valueFields: function(series) {
             return this._valueFields[series.type] || [VALUE];
         },
@@ -1398,16 +1402,16 @@ kendo_module({
             return value;
         },
 
-        sourceFields: function(series, fields) {
+        sourceFields: function(series, canonicalFields) {
             var i, length, fieldName,
                 sourceFields, sourceFieldName;
 
-            if (fields) {
-                length = fields.length;
+            if (canonicalFields) {
+                length = canonicalFields.length;
                 sourceFields = [];
 
                 for (i = 0; i < length; i++) {
-                    fieldName = fields[i];
+                    fieldName = canonicalFields[i];
                     sourceFieldName = fieldName === VALUE ? "field" : fieldName + "Field";
 
                     sourceFields.push(series[sourceFieldName] || fieldName);
@@ -7208,13 +7212,13 @@ kendo_module({
                 categories = axisOptions.categories,
                 srcCategories = axisOptions.srcCategories || categories,
                 srcData = series.data,
-                srcValues = [],
-                srcDataItems = [],
+                srcPoints = [],
                 range = categoryAxis.range(),
                 result = deepExtend({}, series),
                 aggregatorSeries = deepExtend({}, series),
                 i, category, categoryIx,
-                data, pointData, aggregator,
+                data,
+                aggregator,
                 getFn = getField;
 
             result.data = data = [];
@@ -7232,23 +7236,18 @@ kendo_module({
 
                 categoryIx = categoryAxis.categoryIndex(category, range);
                 if (categoryIx > -1) {
-                    pointData = SeriesBinder.current.bindPoint(series, i);
-
-                    srcValues[categoryIx] = srcValues[categoryIx] || [];
-                    srcValues[categoryIx].push(pointData);
-
-                    srcDataItems[categoryIx] = srcDataItems[categoryIx] || [];
-                    srcDataItems[categoryIx].push(srcData[i]);
+                    srcPoints[categoryIx] = srcPoints[categoryIx] || [];
+                    srcPoints[categoryIx].push(i);
                 }
             }
 
-            aggregator = new Aggregator(aggregatorSeries);
+            aggregator = new SeriesAggregator(
+                aggregatorSeries, SeriesBinder.current, DefaultAggregates.current
+            );
 
             for (i = 0; i < categories.length; i++) {
-                data[i] = aggregator.calculate(
-                    srcValues[i],
-                    srcDataItems[i],
-                    categories[i]
+                data[i] = aggregator.aggregatePoint(
+                    srcPoints[i], categories[i]
                 );
             }
 
@@ -8723,6 +8722,24 @@ kendo_module({
         }
     };
 
+    function DefaultAggregates() {
+        this._defaults = {};
+    }
+
+    DefaultAggregates.prototype = {
+        register: function(seriesTypes, aggregates) {
+            for (var i = 0; i < seriesTypes.length; i++) {
+                this._defaults[seriesTypes[i]] = aggregates;
+            }
+        },
+
+        query: function(seriesType) {
+            return this._defaults[seriesType];
+        }
+    };
+
+    DefaultAggregates.current = new DefaultAggregates();
+
     var Selection = Observable.extend({
         init: function(chart, categoryAxis, options) {
             var that = this,
@@ -9213,96 +9230,114 @@ kendo_module({
         }
     });
 
-    var Aggregator = function(series) {
-        var agg = this;
+    var SeriesAggregator = function(series, binder, defaultAggregates) {
+        var sa = this,
+            canonicalFields = binder.canonicalFields(series),
+            sourceFields = binder.sourceFields(series, canonicalFields),
+            seriesFields = sa._seriesFields = [],
+            defaults = defaultAggregates.query(series.type),
+            i;
 
-        agg._series = series;
+        sa._series = series;
+        sa._binder = binder;
 
-        agg._initFields();
-        agg._initAggregate();
+        for (i = 0; i < canonicalFields.length; i++) {
+            var transform,
+                field = canonicalFields[i],
+                fieldAggregate;
+
+            if (typeof series.aggregate === "object") {
+                fieldAggregate = series.aggregate[field];
+            } else if (i === 0) {
+                fieldAggregate = series.aggregate;
+            } else {
+                // TODO: Aggregate is treated as "value" aggregate
+                // -> All other fields are not aggregated
+                // Is this OK?
+                break;
+            }
+
+            if (isFn(fieldAggregate)) {
+                transform = fieldAggregate;
+            } else {
+                fieldAggregate = fieldAggregate || defaults[field];
+                transform = dataviz.Aggregates[fieldAggregate];
+            }
+
+            if (fieldAggregate) {
+                seriesFields.push({
+                    canonicalName:field,
+                    name: sourceFields[i],
+                    transform: transform
+                });
+            }
+        }
     };
 
-    Aggregator.prototype = {
-        _initFields: function() {
-            var agg = this,
-                series = agg._series,
-                binder = SeriesBinder.current;
+    SeriesAggregator.prototype = {
+        aggregatePoint: function(srcPoints, group) {
+            var sa = this,
+                data = sa._bindPoints(srcPoints || []),
+                series = sa._series,
+                seriesFields = sa._seriesFields,
+                i,
+                field,
+                srcValues,
+                value,
+                result = {};
 
-            agg._fields = binder.valueFields(series).concat(
-                binder.otherFields(series)
-            );
+            for (i = 0; i < seriesFields.length; i++) {
+                field = seriesFields[i];
+                srcValues = sa._bindField(data.values, field.canonicalName);
+                value = field.transform(srcValues, series, data.dataItems, group);
 
-            agg._srcFields = binder.sourceFields(series, agg._fields);
-        },
-
-        _initAggregate: function() {
-            var agg = this,
-                series = agg._series,
-                fields = agg._fields,
-                aggregate, i, field, fieldAggregate,
-                item = {}, itemOptions = [];
-
-            aggregate = series.aggregate || "max";
-
-            if (typeof aggregate !== OBJECT) {
-                aggregate = { value: aggregate };
-            }
-
-            for (i = 0; i < fields.length; i++) {
-                item.field = field = fields[i];
-                item.srcField = agg._srcFields[i];
-                fieldAggregate = aggregate[field];
-                if (fieldAggregate) {
-                    if (!isFn(fieldAggregate)) {
-                        fieldAggregate = Aggregates[fieldAggregate];
-                    }
-                    item.aggregate = fieldAggregate;
-                    itemOptions.push(item);
-                }
-                item = {};
-            }
-
-            agg._itemOptions = itemOptions;
-        },
-
-        calculate: function(data, dataItems, group) {
-            var agg = this,
-                aggregatedData = {},
-                values = [],
-                itemOptions = agg._itemOptions,
-                aggregate, i, field, item;
-
-            for (i = 0; i < itemOptions.length; i++) {
-                item = itemOptions[i];
-                field = item.field;
-                values = agg.valuesByField(data, field);
-                aggregate = item.aggregate;
-                var r = aggregate(values, agg._series, dataItems, group);
-                if (typeof r !== "object") {
-                    aggregatedData[item.srcField] = r;
-                } else {
-                    aggregatedData = r;
+                if (value !== null && typeof value === "object") {
+                    result = value;
                     break;
+                } else {
+                    if (defined(value)) {
+                        result[field.name] = value;
+                    }
                 }
-
-                values = [];
             }
 
-            return aggregatedData;
+            return result;
         },
 
-        valuesByField: function(data, field) {
+        _bindPoints: function(points) {
+            var sa = this,
+                binder = sa._binder,
+                series = sa._series,
+                values = [],
+                dataItems = [],
+                i,
+                pointIx;
+
+            for (i = 0; i < points.length; i++) {
+                pointIx = points[i];
+
+                values.push(binder.bindPoint(series, pointIx));
+                dataItems.push(series.data[pointIx]);
+            }
+
+            return {
+                values: values,
+                dataItems: dataItems
+            };
+        },
+
+        _bindField: function(data, field) {
             var values = [],
-                count = (data || []).length,
+                count = data.length,
                 i, item, value, valueFields;
 
             for (i = 0; i < count; i++) {
                 item = data[i];
                 valueFields = item.valueFields;
 
-                if (defined(valueFields) && valueFields !== null && defined(valueFields[field])) {
+                if (defined(valueFields[field])) {
                     value = valueFields[field];
-                } else if (defined(item.fields)) {
+                } else {
                     value = item.fields[field];
                 }
 
@@ -10013,6 +10048,11 @@ kendo_module({
         [VALUE], [CATEGORY, COLOR, NOTE_TEXT]
     );
 
+    DefaultAggregates.current.register(
+        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+        { value: "max", color: "first", noteText: "first" }
+    );
+
     SeriesBinder.current.register(
         [SCATTER, SCATTER_LINE, BUBBLE],
         [X, Y], [COLOR, NOTE_TEXT]
@@ -10027,9 +10067,20 @@ kendo_module({
         ["open", "high", "low", "close"], [CATEGORY, COLOR, "downColor", NOTE_TEXT]
     );
 
+    DefaultAggregates.current.register(
+        [CANDLESTICK, OHLC],
+        { open: "max", high: "max", low: "min", close: "max",
+          color: "first", downColor: "first", noteText: "first" }
+    );
+
     SeriesBinder.current.register(
         [BULLET, VERTICAL_BULLET],
         ["current", "target"], [CATEGORY, COLOR, "visibleInLegend", NOTE_TEXT]
+    );
+
+    DefaultAggregates.current.register(
+        [BULLET, VERTICAL_BULLET],
+        { current: "max", target: "max", color: "first", noteText: "first" }
     );
 
     SeriesBinder.current.register(
@@ -10061,6 +10112,7 @@ kendo_module({
         CrosshairTooltip: CrosshairTooltip,
         DateCategoryAxis: DateCategoryAxis,
         DateValueAxis: DateValueAxis,
+        DefaultAggregates: DefaultAggregates,
         DonutChart: DonutChart,
         DonutPlotArea: DonutPlotArea,
         DonutSegment: DonutSegment,
@@ -10081,6 +10133,7 @@ kendo_module({
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
         Selection: Selection,
+        SeriesAggregator: SeriesAggregator,
         SeriesBinder: SeriesBinder,
         ShapeElement: ShapeElement,
         StackLayout: StackLayout,

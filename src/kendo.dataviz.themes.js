@@ -41,18 +41,10 @@ kendo_module({
                     margin: 1
                 },
                 line: {
-                    width: 4,
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
-                    }
+                    width: 4
                 },
                 vericalLine: {
-                    width: 4,
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
-                    }
+                    width: 4
                 },
                 scatterLine: {
                     width: 1
@@ -66,10 +58,6 @@ kendo_module({
                     line: {
                         opacity: 1,
                         width: 0
-                    },
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
                     }
                 },
                 verticalArea: {
@@ -81,10 +69,6 @@ kendo_module({
                     line: {
                         opacity: 1,
                         width: 0
-                    },
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
                     }
                 },
                 radarLine: {
@@ -102,10 +86,6 @@ kendo_module({
                     line: {
                         opacity: 1,
                         width: 0
-                    },
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
                     }
                 },
                 candlestick: {
@@ -120,13 +100,6 @@ kendo_module({
                     gap: 1,
                     spacing: 0.3,
                     downColor: WHITE,
-                    aggregate: {
-                        open: "max",
-                        high: "max",
-                        low: "min",
-                        close: "max",
-                        noteText: "first"
-                    },
                     highlight: {
                         line: {
                             width: 2
@@ -143,13 +116,6 @@ kendo_module({
                     },
                     gap: 1,
                     spacing: 0.3,
-                    aggregate: {
-                        open: "max",
-                        high: "max",
-                        low: "min",
-                        close: "max",
-                        noteText: "first"
-                    },
                     highlight: {
                         line: {
                             width: 3,
@@ -168,19 +134,11 @@ kendo_module({
                 },
                 bar: {
                     gap: BAR_GAP,
-                    spacing: BAR_SPACING,
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
-                    }
+                    spacing: BAR_SPACING
                 },
                 column: {
                     gap: BAR_GAP,
-                    spacing: BAR_SPACING,
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
-                    }
+                    spacing: BAR_SPACING
                 },
                 bullet: {
                     gap: BAR_GAP,

@@ -20,107 +20,22 @@
         <script src="util.js"></script>
         <script type="text/javascript">
 
-            var isFn = kendo.isFunction;
-            var defined = kendo.dataviz.defined;
-
-            var SeriesAggregator = function(series, binder) {
-                this._series = series;
-                this._binder = binder;
-
-                var fields = binder
-                    .valueFields(series).concat(
-                        binder.otherFields(series)
-                    );
-
-                var srcFields = binder.sourceFields(series, fields);
-
-                var meta = this._meta = [];
-
-                for (var i = 0; i < fields.length; i++) {
-                    var transform;
-
-                    if (isFn(series.aggregate)) {
-                        transform = series.aggregate;
-                    } else {
-                        transform = dataviz.Aggregates[series.aggregate || "max"]
-                    }
-
-                    meta.push({
-                        field: fields[i],
-                        source: srcFields[i],
-                        transform: transform
-                    });
-                }
-            };
-
-            SeriesAggregator.prototype = {
-                aggregatePoint: function(srcPoints, group) {
-                    var aggr = this,
-                        result = {},
-                        meta = aggr._meta;
-
-                    var binder = aggr._binder,
-                        series = aggr._series,
-                        srcValues = [],
-                        srcDataItems = [];
-
-                    for (var i = 0; i < srcPoints.length; i++) {
-                        var index = srcPoints[i];
-
-                        srcValues.push(binder.bindPoint(series, index));
-                        srcDataItems.push(series.data[index]);
-                    }
-
-                    for (var i = 0; i < meta.length; i++) {
-                        var metaField = meta[i];
-
-                        result[metaField.source] = metaField.transform(
-                            aggr._bindField(srcValues, metaField.source), series, srcDataItems, group
-                        );
-                    }
-
-                    return result;
-                },
-
-                _bindField: function(data, field) {
-                    var values = [],
-                        count = data.length,
-                        i, item, value, valueFields;
-
-                    for (i = 0; i < count; i++) {
-                        item = data[i];
-                        valueFields = item.valueFields;
-
-                        if (defined(valueFields[field])) {
-                            value = valueFields[field];
-                        } else {
-                            value = item.fields[field];
-                        }
-
-                        values.push(value);
-                    }
-
-                    return values;
-                }
-            };
-
-
             var dataviz = kendo.dataviz,
+                SeriesAggregator = dataviz.SeriesAggregator,
+                defined = dataviz.defined,
                 binder,
+                defaults,
                 series,
                 aggr;
 
-            function create(data, aggregate) {
-                aggr = new Aggregator({
-                    aggregate: aggregate
-                }, binder);
-            }
-
             // ------------------------------------------------------------
-            module("Aggregator / Simple aggregates", {
+            module("SeriesAggregator / Simple aggregates", {
                 setup: function() {
                     binder = new dataviz.SeriesBinder();
                     binder.register(["foo"], ["value"], []);
+
+                    defaults = new dataviz.DefaultAggregates();
+                    defaults.register(["foo"], { value: "max" });
 
                     series = {
                         type: "foo",
@@ -135,30 +50,145 @@
 
             test("accepts named aggregates", function() {
                 series.aggregate = "min";
-                aggr = new SeriesAggregator(series, binder);
+                aggr = new SeriesAggregator(series, binder, defaults);
 
                 deepEqual(aggr.aggregatePoint([0, 1]), { value: 1 });
             });
 
+            test("default aggregate is max", function() {
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { value: 2 });
+            });
+
             test("accepts function aggregates", function() {
                 series.aggregate = function(values) { return 5; };
-                aggr = new SeriesAggregator(series, binder);
+                aggr = new SeriesAggregator(series, binder, defaults);
 
                 deepEqual(aggr.aggregatePoint([0, 1]), { value: 5 });
             });
 
             test("allows function aggregates to return data items", function() {
                 series.aggregate = function(values) { return { value: 5, bar: 1 }; };
-                aggr = new SeriesAggregator(series, binder);
+                aggr = new SeriesAggregator(series, binder, defaults);
 
                 deepEqual(aggr.aggregatePoint([0, 1]), { value: 5, bar: 1 });
             });
 
+            test("returns empty aggregate for empty source points array", function() {
+                aggr = new SeriesAggregator(series, binder, defaults);
+                deepEqual(aggr.aggregatePoint(), {});
+            });
+
             // ------------------------------------------------------------
-            module("Aggregator / Compound aggregates", {
+            module("SeriesAggregator / Simple aggregates / Custom field", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["value"], []);
+
+                    defaults = new dataviz.DefaultAggregates();
+                    defaults.register(["foo"], { value: "max" });
+
+                    series = {
+                        type: "foo",
+                        field: "fooValue",
+                        data: [{
+                            fooValue: 1
+                        }, {
+                            fooValue: 2
+                        }]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = "min";
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { fooValue: 1 });
+            });
+
+            test("default aggregate is max", function() {
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { fooValue: 2 });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = function(values) { return 5; };
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { fooValue: 5 });
+            });
+
+            test("allows function aggregates to return data items", function() {
+                series.aggregate = function(values) { return { fooValue: 5, bar: 1 }; };
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { fooValue: 5, bar: 1 });
+            });
+
+            test("returns empty aggregate for empty source points array", function() {
+                aggr = new SeriesAggregator(series, binder, defaults);
+                deepEqual(aggr.aggregatePoint(), {});
+            });
+
+            // ------------------------------------------------------------
+            module("SeriesAggregator / Simple aggregates / Array data", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["value"], []);
+
+                    defaults = new dataviz.DefaultAggregates();
+                    defaults.register(["foo"], { value: "max" });
+
+                    series = {
+                        type: "foo",
+                        data: [1, 2]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = "min";
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { value: 1 });
+            });
+
+            test("default aggregate is max", function() {
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { value: 2 });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = function(values) { return 5; };
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { value: 5 });
+            });
+
+            test("allows function aggregates to return data items", function() {
+                series.aggregate = function(values) { return { value: 5, bar: 1 }; };
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { value: 5, bar: 1 });
+            });
+
+            test("returns empty aggregate for empty source points array", function() {
+                aggr = new SeriesAggregator(series, binder, defaults);
+                deepEqual(aggr.aggregatePoint(), {});
+            });
+
+            // ------------------------------------------------------------
+            module("SeriesAggregator / Compound aggregates", {
                 setup: function() {
                     binder = new dataviz.SeriesBinder();
                     binder.register(["foo"], ["open", "close"], []);
+
+                    defaults = new dataviz.DefaultAggregates();
+                    defaults.register(["foo"], { open: "max", close: "max" });
 
                     series = {
                         type: "foo",
@@ -178,9 +208,15 @@
                     open: "min",
                     close: "max"
                 };
-                aggr = new SeriesAggregator(series, binder);
+                aggr = new SeriesAggregator(series, binder, defaults);
 
                 deepEqual(aggr.aggregatePoint([0, 1]), { open: 1, close: 20 });
+            });
+
+            test("default aggregate is max", function() {
+                aggr = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(aggr.aggregatePoint([0, 1]), { open: 10, close: 20 });
             });
 
             test("accepts function aggregates", function() {
@@ -188,7 +224,7 @@
                     open: function(values) { return 5; },
                     close: "max"
                 };
-                aggr = new SeriesAggregator(series, binder);
+                aggr = new SeriesAggregator(series, binder, defaults);
 
                 deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 20 });
             });
@@ -197,9 +233,9 @@
                 series.aggregate = function(values) {
                     return { open: 5, close: 5 };
                 };
-                aggr = new SeriesAggregator(series, binder);
+                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 1 });
+                deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 5 });
             });
         </script>
 
