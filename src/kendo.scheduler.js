@@ -308,11 +308,11 @@ kendo_module({
         },
 
         update: function(eventInfo) {
-            for (var field in eventInfo) {
-                this.set(field, eventInfo[field]);
-            }
+            this.accept(eventInfo);
 
-            this.set("startTime", toInvariantDate(this.start));
+            this._set("startTime", toInvariantDate(this.start));
+
+            //Note one field should use public set to trigger the change
             this.set("endTime", toInvariantDate(this.end));
         },
 

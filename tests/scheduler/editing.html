@@ -1238,6 +1238,22 @@
                 deepEqual(model.start, timezone.convert(start, zone, "Etc/UTC"));
                 deepEqual(model.end, timezone.convert(end, zone, "Etc/UTC"));
             });
+
+            test("updateEvent refreshes the ui", 3, function() {
+                var scheduler = setup({
+                    dataSource: {
+                        data: [
+                            new kendo.data.SchedulerEvent({ start: new Date(), end: new Date(), isAllDay: true, title: "my event", id: 0 })
+                        ]
+                    },
+                    dataBound: function() {
+                        ok(true);
+                    }
+                });
+
+                var event = scheduler.dataSource.at(0);
+                scheduler._updateEvent(null, event, {});
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
