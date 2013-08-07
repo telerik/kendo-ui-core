@@ -18,6 +18,12 @@
             e.Cancel("scheduler_cancel");
             e.Edit("scheduler_edit");
             e.Add("scheduler_add");
+            e.MoveStart("scheduler_moveStart");
+            e.Move("scheduler_move");
+            e.MoveEnd("scheduler_moveEnd");
+            e.ResizeStart("scheduler_resizeStart");
+            e.Resize("scheduler_resize");
+            e.ResizeEnd("scheduler_resizeEnd");
         })
         .Views(views =>
         {
@@ -66,6 +72,30 @@
 
     function scheduler_add(e) {
         kendoConsole.log("add");
+    }
+
+    function scheduler_moveStart(e) {
+        kendoConsole.log("moveStart");
+    }
+
+    function scheduler_move(e) {
+        kendoConsole.log("move");
+    }
+
+    function scheduler_moveEnd(e) {
+        kendoConsole.log("moveEnd");
+    }
+
+    function scheduler_resizeStart(e) {
+        kendoConsole.log("resizeStart");
+    }
+
+    function scheduler_resize(e) {
+        kendoConsole.log("resize");
+    }
+
+    function scheduler_resizeEnd(e) {
+        kendoConsole.log("resizeEnd");
     }
 </script>
 

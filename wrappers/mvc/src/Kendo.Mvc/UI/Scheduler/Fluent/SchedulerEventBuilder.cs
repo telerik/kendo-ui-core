@@ -596,5 +596,180 @@
 
             return this;
         }
+
+
+        /// <summary>
+        /// Defines the inline handler of the resizeStart event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///            .Name("Scheduler")
+        ///            .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        ///            .Events(events => events.ResizeStart(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder ResizeStart(Func<object, object> handler)
+        {
+            Handler("resizeStart", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the resizeStart event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///             .Name("Scheduler")
+        ///             .Events(events => events.ResizeStart("resizeStart"))
+        ///             .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder ResizeStart(string handler)
+        {
+            Handler("resizeStart", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the resize event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///            .Name("Scheduler")
+        ///            .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        ///            .Events(events => events.Resize(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder Resize(Func<object, object> handler)
+        {
+            Handler("resize", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the resize event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///             .Name("Scheduler")
+        ///             .Events(events => events.Resize("resize"))
+        ///             .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder Resize(string handler)
+        {
+            Handler("resize", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the resizeEnd event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///            .Name("Scheduler")
+        ///            .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        ///            .Events(events => events.resizeEnd(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder ResizeEnd(Func<object, object> handler)
+        {
+            Handler("resizeEnd", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the resizeEnd event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///             .Name("Scheduler")
+        ///             .Events(events => events.ResizeEnd("resizeEnd"))
+        ///             .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder ResizeEnd(string handler)
+        {
+            Handler("resizeEnd", handler);
+
+            return this;
+        }
     }
 }
