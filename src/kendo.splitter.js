@@ -89,8 +89,6 @@ kendo_module({
 
             that._initPanes();
 
-            $(window).on("resize", that._resizeHandler);
-
             if (that.element.children(".k-splitbar-draggable-" + that.orientation).length) {
                 that.resizing = new PaneResizing(that);
             }
@@ -115,7 +113,8 @@ kendo_module({
 
         _attachEvents: function() {
             var that = this,
-                orientation = that.options.orientation;
+                orientation = that.options.orientation,
+                parentSplitter = that._parentSplitter();
 
             // do not use delegated events to increase performance of nested elements
             that.element
@@ -139,19 +138,20 @@ kendo_module({
                     .children(".k-expand-next, .k-expand-prev").on(CLICK + NS, that._arrowClick(EXPAND)).end()
                 .end();
 
-            that._parentSplitter().each(function() {
-                    var parentSplitter = $(this),
-                        splitter = parentSplitter.data("kendo" + that.options.name);
+            if (!parentSplitter.length) {
+                $(window).on("resize", that._resizeHandler);
+            } else {
+                var splitter = parentSplitter.data("kendo" + that.options.name);
 
-                    if (splitter) {
-                        splitter.bind(RESIZE, that._resizeHandler);
-                    } else {
-                        parentSplitter.off("init" + NS).one("init" + NS, function() {
-                            $(this).data("kendo" + that.options.name).bind(RESIZE, that._resizeHandler);
-                            that._resizeHandler();
-                        });
-                    }
-                });
+                if (splitter) {
+                    splitter.bind(RESIZE, that._resizeHandler);
+                } else {
+                    parentSplitter.off("init" + NS).one("init" + NS, function() {
+                        $(this).data("kendo" + that.options.name).bind(RESIZE, that._resizeHandler);
+                        that._resizeHandler();
+                    });
+                }
+            }
         },
 
         _detachEvents: function() {
@@ -165,6 +165,8 @@ kendo_module({
 
             if (parentSplitter) {
                 parentSplitter.unbind(RESIZE, that._resizeHandler);
+            } else {
+                $(window).off("resize", that._resizeHandler);
             }
         },
 
@@ -184,8 +186,6 @@ kendo_module({
             if (that.resizing) {
                 that.resizing.destroy();
             }
-
-            $(window).off("resize", that._resizeHandler);
 
             kendo.destroy(that.element);
         },
