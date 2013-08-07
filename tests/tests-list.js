@@ -35,6 +35,7 @@ var tests = [
     "calendar/lint.html",
     "calendar/navigation.html",
     "calendar/aria.html",
+    "chart/aggregates.html",
     "chart/configuration.html",
     "chart/databinding.html",
     "chart/helpers.html",
