@@ -9251,9 +9251,6 @@ kendo_module({
             } else if (i === 0) {
                 fieldAggregate = rootAggregate;
             } else {
-                // TODO: Aggregate is treated as "value" aggregate
-                // -> All other fields are not aggregated
-                // Is this OK?
                 break;
             }
 
