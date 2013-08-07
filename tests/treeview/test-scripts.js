@@ -13,3 +13,8 @@ document.write('\
     <link rel="stylesheet/less" href="../../styles/web/kendo.default.less">\
     <script src="../../demos/mvc/content/shared/js/less.js"></script>\
 ');
+
+function treeFromHtml(html, options) {
+    return $(html).appendTo("#qunit-fixture").kendoTreeView(options);
+}
+

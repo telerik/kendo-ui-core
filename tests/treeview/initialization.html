@@ -10,151 +10,99 @@
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
-        <script>
-            var dom;
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
 
-            module("basic initialization", {
-                teardown: function() {
-                    $(".k-treeview").remove();
-                }
-            });
+        <script>
+            var TreeView = kendo.ui.TreeView;
 
             test("adds necessary classes to div", function() {
-                dom = $("<div />").appendTo("body").kendoTreeView();
-
-                ok(dom.is(".k-widget.k-treeview"));
+                ok(treeFromHtml("<div />").is(".k-widget.k-treeview"));
             });
 
             test("attaches treeview object to div", function() {
-                dom = $("<div />").appendTo("body").kendoTreeView();
-
-                ok(dom.data("kendoTreeView") instanceof kendo.ui.TreeView);
+                ok(treeFromHtml("<div />").data("kendoTreeView") instanceof TreeView);
             });
 
             test("allows init from non-div elements", function() {
-                dom = $("<section id='tree' />").appendTo("body").kendoTreeView();
-
-                ok($.contains(document.body, dom[0]));
-            });
-
-            module("initialization from ul", {
-                teardown: function() {
-                    if (dom) {
-                        dom.remove();
-                    }
-                    $(".k-treeview").remove();
-                }
+                ok($.contains(document.body, treeFromHtml("<section id='tree' />")[0]));
             });
 
             test("attaches treeview object to ul", function() {
-                dom = $("<ul><li>foo</li></ul>").appendTo("body").kendoTreeView();
-
-                ok(dom.data("kendoTreeView") instanceof kendo.ui.TreeView);
+                ok(treeFromHtml("<ul><li>foo</li></ul>").data("kendoTreeView") instanceof TreeView);
             });
 
-            test("toggle buttons work when initializing from ul", function() {
-                dom = $("<ul><li>foo<ul><li>bar</li></ul></li></ul>").appendTo("body");
-
-                dom.kendoTreeView();
-
-                dom.find(".k-plus").trigger("click");
-
-                ok(dom.find(".k-minus").length);
-            });
-
-            test("kendoTreeView extends passed options", function() {
-                dom = $("<ul><li>foo</li></ul>").appendTo("body");
-                dom.kendoTreeView({ foo: "bar" });
-
+            test("extends passed options", function() {
+                var dom = treeFromHtml("<ul><li>foo</li></ul>", { foo: "bar" });
                 var options = dom.data("kendoTreeView").options;
+
                 notEqual(options.foo, undefined)
                 equal(options.foo, "bar");
             });
 
             test("unneeded whitespace is stripped from item text", function() {
-                dom = $("<ul><li>foo    </li></ul>").appendTo(document.body);
+                var treeview = treeFromHtml("<ul><li>foo    </li></ul>").data("kendoTreeView");
 
-                dom.kendoTreeView();
-
-                equal(dom.data("kendoTreeView").findByText("foo").length, 1);
+                equal(treeview.findByText("foo").length, 1);
             });
 
             test("initialization from fully rendered treeview", function() {
-                dom = $('<div class="k-widget k-treeview" id="treeview">' +
-                    '<ul class="k-group">' +
-                        '<li class="k-item k-first k-last">' +
-                            '<div class="k-top k-bot"><span class="k-icon k-minus"></span>' +
-                                '<span class="k-in">My Web Site</span>' +
+                var dom = treeFromHtml(
+                    '<div class="k-widget k-treeview" id="treeview">' +
+                        '<ul class="k-group">' +
+                            '<li class="k-item k-first k-last">' +
+                                '<div class="k-top k-bot">' +
+                                    '<span class="k-icon k-minus"></span>' +
+                                    '<span class="k-in">My Web Site</span>' +
                                 '</div>' +
-                        '</li>' +
-                    '</ul>' +
-                '</div>');
-
-
-                dom.kendoTreeView();
+                            '</li>' +
+                        '</ul>' +
+                    '</div>'
+                );
 
                 equal(dom.find(".k-item").length, 1);
             });
 
             test("toggle buttons are rendered correctly when initializing from html", function() {
-                dom = $("<ul>" +
+                var dom = treeFromHtml("<ul>" +
                     "<li>foo<ul><li>baz</li></ul></li>" +
                     "<li data-expanded='true'>bar<ul><li>qux</li></ul></li>" +
-                "</ul>").appendTo(document.body);
-
-                dom.kendoTreeView();
+                "</ul>");
 
                 equal(dom.find(".k-icon.k-plus").length, 1);
                 equal(dom.find(".k-icon.k-minus").length, 1);
             });
 
-            test("initialization sets tabindex=0 by default", function() {
-                dom = $("<div />").kendoTreeView();
-
-                equal(dom.attr("tabindex"), 0);
+            test("sets tabindex=0 by default", function() {
+                equal(treeFromHtml("<div />").attr("tabindex"), 0);
             });
 
-            test("initialization leaves wrapper tabindex, if available", function() {
-                dom = $("<div tabindex=3 />").kendoTreeView();
-
-                equal(dom.attr("tabindex"), 3);
+            test("leaves wrapper tabindex, if available", function() {
+                equal(treeFromHtml("<div tabindex=3 />").attr("tabindex"), 3);
             });
 
-            test("initialization leaves tabindex=-1", function() {
-                dom = $("<div tabindex='-1' />").kendoTreeView();
-
-                equal(dom.attr("tabindex"), -1);
+            test("leaves tabindex=-1", function() {
+                equal(treeFromHtml("<div tabindex='-1' />").attr("tabindex"), -1);
             });
 
-            test("initialization gets tabindex from list", function() {
-                dom = $("<ul tabindex='42'></ul>").kendoTreeView();
+            test("gets tabindex from list", function() {
+                var dom = treeFromHtml("<ul tabindex='42' />");
 
                 equal(dom.closest(".k-treeview").attr("tabindex"), 42);
                 ok(!dom.attr("tabindex"))
             });
 
-            module("initialization from array");
-
             test("initializing from array", function() {
-                var element = $("<div />").appendTo(document.body).kendoTreeView([{ text: "foo" }]);
+                var dom = treeFromHtml("<div />", [{ text: "foo" }]);
 
-                ok(element.is(".k-treeview.k-widget"));
-                equal(element.children("ul.k-treeview-lines.k-group").length, 1);
-                equal(element.find("li").length, 1);
-                ok(element.find("li").is(".k-item"));
-                equal(element.find("li").text(), "foo");
+                ok(dom.is(".k-treeview.k-widget"));
+                equal(dom.children("ul.k-treeview-lines.k-group").length, 1);
+                equal(dom.find("li").length, 1);
+                ok(dom.find("li").is(".k-item"));
+                equal(dom.find("li").text(), "foo");
             });
 
-            var treeview, treeviewObject;
-
-            function createTreeView(options) {
-                treeview = $("<div />").appendTo(document.body).kendoTreeView(options);
-                treeviewObject = treeview.data("kendoTreeView");
-            }
-
         </script>
-        <div id="qunit-fixture">test markup, will be hidden</div>
-        <ul id="log"></ul>
     </body>
 </html>
 

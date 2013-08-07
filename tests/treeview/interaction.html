@@ -99,6 +99,14 @@
                 equal(treeview.find(".k-icon.k-plus").length, 1);
             });
 
+            test("toggle buttons work when initializing from ul", function() {
+                var dom = treeFromHtml("<ul><li>foo<ul><li>bar</li></ul></li></ul>");
+
+                dom.find(".k-plus").trigger("click");
+
+                ok(dom.find(".k-minus").length);
+            });
+
             module("selection", {
                 teardown: cleanArtifacts
             });
