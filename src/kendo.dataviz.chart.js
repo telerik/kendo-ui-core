@@ -9236,20 +9236,20 @@ kendo_module({
             sourceFields = binder.sourceFields(series, canonicalFields),
             seriesFields = sa._seriesFields = [],
             defaults = defaultAggregates.query(series.type),
+            rootAggregate = series.aggregate || defaults,
             i;
 
         sa._series = series;
         sa._binder = binder;
 
         for (i = 0; i < canonicalFields.length; i++) {
-            var transform,
-                field = canonicalFields[i],
+            var field = canonicalFields[i],
                 fieldAggregate;
 
-            if (typeof series.aggregate === "object") {
-                fieldAggregate = series.aggregate[field];
+            if (typeof rootAggregate === OBJECT) {
+                fieldAggregate = rootAggregate[field];
             } else if (i === 0) {
-                fieldAggregate = series.aggregate;
+                fieldAggregate = rootAggregate;
             } else {
                 // TODO: Aggregate is treated as "value" aggregate
                 // -> All other fields are not aggregated
@@ -9257,18 +9257,12 @@ kendo_module({
                 break;
             }
 
-            if (isFn(fieldAggregate)) {
-                transform = fieldAggregate;
-            } else {
-                fieldAggregate = fieldAggregate || defaults[field];
-                transform = dataviz.Aggregates[fieldAggregate];
-            }
-
             if (fieldAggregate) {
                 seriesFields.push({
-                    canonicalName:field,
+                    canonicalName: field,
                     name: sourceFields[i],
-                    transform: transform
+                    transform: isFn(fieldAggregate) ?
+                        fieldAggregate : Aggregates[fieldAggregate]
                 });
             }
         }
@@ -9291,7 +9285,7 @@ kendo_module({
                 srcValues = sa._bindField(data.values, field.canonicalName);
                 value = field.transform(srcValues, series, data.dataItems, group);
 
-                if (value !== null && typeof value === "object") {
+                if (value !== null && typeof value === OBJECT) {
                     result = value;
                     break;
                 } else {

@@ -213,7 +213,7 @@
                 deepEqual(aggr.aggregatePoint([0, 1]), { open: 1, close: 20 });
             });
 
-            test("default aggregate is max", function() {
+            test("applies default aggregates", function() {
                 aggr = new SeriesAggregator(series, binder, defaults);
 
                 deepEqual(aggr.aggregatePoint([0, 1]), { open: 10, close: 20 });
