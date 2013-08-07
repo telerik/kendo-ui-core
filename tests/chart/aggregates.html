@@ -22,6 +22,7 @@
 
             var dataviz = kendo.dataviz,
                 SeriesAggregator = dataviz.SeriesAggregator,
+                DefaultAggregates = dataviz.DefaultAggregates,
                 defined = dataviz.defined,
                 binder,
                 defaults,
@@ -39,7 +40,7 @@
                     binder = new dataviz.SeriesBinder();
                     binder.register(["foo"], ["value"], []);
 
-                    defaults = new dataviz.DefaultAggregates();
+                    defaults = new DefaultAggregates();
                     defaults.register(["foo"], { value: "max" });
 
                     series = {
@@ -91,7 +92,7 @@
                     binder = new dataviz.SeriesBinder();
                     binder.register(["foo"], ["value"], []);
 
-                    defaults = new dataviz.DefaultAggregates();
+                    defaults = new DefaultAggregates();
                     defaults.register(["foo"], { value: "max" });
 
                     series = {
@@ -142,7 +143,7 @@
                     binder = new dataviz.SeriesBinder();
                     binder.register(["foo"], ["value"], []);
 
-                    defaults = new dataviz.DefaultAggregates();
+                    defaults = new DefaultAggregates();
                     defaults.register(["foo"], { value: "max" });
 
                     series = {
@@ -190,7 +191,7 @@
                     binder = new dataviz.SeriesBinder();
                     binder.register(["foo"], ["open", "close"], ["color"]);
 
-                    defaults = new dataviz.DefaultAggregates();
+                    defaults = new DefaultAggregates();
                     defaults.register(["foo"], { open: "max", close: "max", color: "first" });
 
                     series = {
@@ -249,7 +250,7 @@
                     binder = new dataviz.SeriesBinder();
                     binder.register(["foo"], ["open", "close"], []);
 
-                    defaults = new dataviz.DefaultAggregates();
+                    defaults = new DefaultAggregates();
                     defaults.register(["foo"], { open: "max", close: "max" });
 
                     series = {
@@ -303,7 +304,7 @@
                     binder = new dataviz.SeriesBinder();
                     binder.register(["foo"], ["open", "close"], []);
 
-                    defaults = new dataviz.DefaultAggregates();
+                    defaults = new DefaultAggregates();
                     defaults.register(["foo"], { open: "max", close: "max" });
 
                     series = {
@@ -342,6 +343,32 @@
 
                 deepEqual(aggregate(series), { open: 5, close: 5 });
             });
+
+            // ------------------------------------------------------------
+            var defaults;
+
+            module("DefaultAggregates", {
+                setup: function() {
+                    defaults = new DefaultAggregates();
+
+                    defaults.register(["foo", "bar"], {
+                        value: "min",
+                        color: "first"
+                    });
+                }
+            });
+
+            test("retrieves default aggregates", function() {
+                deepEqual(defaults.query("foo"), {
+                    value: "min",
+                    color: "first"
+                });
+            });
+
+            test("retrieves default aggregates for all series", function() {
+                deepEqual(defaults.query("foo"), defaults.query("bar"));
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
