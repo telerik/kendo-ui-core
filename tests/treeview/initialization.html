@@ -102,6 +102,36 @@
                 equal(dom.find("li").text(), "foo");
             });
 
+            test("initialization from ul with datasource", function() {
+                var dataSource = {
+                    transport: {
+                        read: function(options) {
+                            options.success([ { text: "foo", hasChildren: true } ]);
+                        }
+                    },
+                    schema: { model: { id: "id", hasChildren: "hasChildren" } }
+                };
+
+                var dom = treeFromHtml("<ul />", { dataSource: dataSource });
+
+                ok(true);
+            });
+
+            asyncTest("initialization from ul with static data", 1, function() {
+                var timeout = setTimeout(start, 500);
+
+                var dom = treeFromHtml("<ul />", {
+                    dataSource: {
+                        data: [ { text: "foo" } ],
+                        change: function () {
+                            clearTimeout(timeout);
+                            start();
+                            ok(true);
+                        }
+                    }
+                });
+            });
+
         </script>
     </body>
 </html>

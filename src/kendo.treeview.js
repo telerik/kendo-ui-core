@@ -149,7 +149,9 @@ kendo_module({
         init: function (element, options) {
             var that = this,
                 dataInit,
-                inferred = false;
+                inferred = false,
+                hasDataSource = options && !!options.dataSource,
+                list;
 
             if (isArray(options)) {
                 dataInit = true;
@@ -165,10 +167,13 @@ kendo_module({
             element = that.element;
             options = that.options;
 
-            inferred = element.is("ul") || element.hasClass(KTREEVIEW);
+            list = (element.is("ul") && element) ||
+                   (element.hasClass(KTREEVIEW) && element.children("ul"));
+
+            inferred = !hasDataSource && list.length;
 
             if (inferred) {
-                options.dataSource.list = element.is("ul") ? element : element.children("ul");
+                options.dataSource.list = list;
             }
 
             that._animation();
@@ -181,7 +186,7 @@ kendo_module({
             if (!element.hasClass(KTREEVIEW)) {
                 that._wrapper();
 
-                if (inferred) {
+                if (list) {
                     that.root = element;
                     that._group(that.wrapper);
                 }
@@ -621,7 +626,7 @@ kendo_module({
         },
 
         _setChecked: function(datasource, value) {
-            if (!datasource || !kendo.isFunction(datasource.view)) {
+            if (!datasource || !$.isFunction(datasource.view)) {
                 return;
             }
 

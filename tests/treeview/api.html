@@ -213,8 +213,6 @@
 
                 var appendedNode = treeviewObject.append({ text: "baz" }, parentNode);
 
-                console.log(treeviewObject.dataItem(parentNode).children.data());
-
                 equal(parentNode.find(".k-group").length, 1);
                 equal(parentNode.find(".k-group").css("display"), "block");
                 equal(parentNode.find(".k-item").length, 2);
