@@ -8,9 +8,10 @@
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.popup.js"></script>
-        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.router.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.shim.js"></script>
@@ -28,16 +29,19 @@
 
         <script>
             $(function() {
-                new kendo.mobile.Application(document.body, {transition: "slide"});
+                new kendo.mobile.Application(document.body, { transition: "slide"});
             });
+
+            function expandSplitView() {
+                $("[data-role=splitview]").data('kendoMobileSplitView').expandPanes();
+            }
         </script>
 
     </head>
     <body>
         <div data-role="splitview">
 
-            <div data-role="pane" data-transition="slide">
-
+            <div data-role="pane" data-transition="slide" data-collapsible="true" data-portrait-width="200">
                 <div data-role="view" data-title="Level 1">
                     <div data-role="header">
                         <div data-role="navbar">
@@ -63,10 +67,10 @@
             </div>
 
             <div data-role="pane" style="-webkit-box-flex: 4" id="main-pane" data-layout="main">
-
                 <div data-role="layout" data-id="main">
                     <div data-role="header">
                         <div data-role="navbar">
+                            <a data-role="button" data-align="left" data-click="expandSplitView">Expand</a>
                             <span data-role="view-title"></span>
                             <a data-role="button" data-align="right" href="#bar">Bar</a>
                         </div>

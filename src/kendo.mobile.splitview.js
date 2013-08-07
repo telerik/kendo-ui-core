@@ -10,6 +10,7 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
+        EXPANED_PANE_SHIM = "<div class='km-expanded-pane-shim' />";
         View = ui.View;
 
     var SplitView = View.extend({
@@ -26,16 +27,32 @@ kendo_module({
 
             that.panes = [];
             that._paramsHistory = [];
+
             that.element.children(kendo.roleSelector("pane")).each(function() {
                 pane = kendo.initWidget(this, {}, ui.roles);
                 that.panes.push(pane);
                 pane.navigateToInitial();
+            });
+            this.expandedPaneShim = $(EXPANED_PANE_SHIM).appendTo(that.element);
+
+            this._shimUserEvents = new kendo.UserEvents(this.expandedPaneShim, {
+                tap: function() {
+                    that.collapsePanes();
+                }
             });
         },
 
         options: {
             name: "SplitView",
             style: "horizontal"
+        },
+
+        expandPanes: function() {
+            this.element.addClass("km-expanded-splitview");
+        },
+
+        collapsePanes: function() {
+            this.element.removeClass("km-expanded-splitview");
         },
 
         // Implement view interface

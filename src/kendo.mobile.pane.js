@@ -48,6 +48,10 @@ kendo_module({
 
             element.addClass("km-pane");
 
+            if (that.options.collapsible) {
+                element.addClass("km-collapsible-pane");
+            }
+
             that.history = [];
 
             that.loader = new Loader(element, {
@@ -76,6 +80,11 @@ kendo_module({
                 }
             });
 
+            this._setPortraitWidth();
+
+            kendo.onResize(function() {
+                that._setPortraitWidth();
+            });
 
             that._setupAppLinks();
         },
@@ -88,10 +97,22 @@ kendo_module({
             }
         },
 
+        _setPortraitWidth: function() {
+            var width,
+                portraitWidth = this.options.portraitWidth;
+
+            if (portraitWidth) {
+                width = kendo.mobile.application.element.is(".km-vertical") ? portraitWidth : "auto";
+                this.element.css("width", width);
+            }
+        },
+
         options: {
             name: "Pane",
+            portraitWidth: "",
             transition: "",
             layout: "",
+            collapsible: false,
             initial: undefined,
             loading: undefined
         },
