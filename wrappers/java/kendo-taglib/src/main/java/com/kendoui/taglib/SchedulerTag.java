@@ -107,6 +107,18 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setEvent("remove", value.getBody());
     }
 
+    public void setResize(ResizeFunctionTag value) {
+        setEvent("resize", value.getBody());
+    }
+
+    public void setResizeEnd(ResizeEndFunctionTag value) {
+        setEvent("resizeEnd", value.getBody());
+    }
+
+    public void setResizeStart(ResizeStartFunctionTag value) {
+        setEvent("resizeStart", value.getBody());
+    }
+
     public void setSave(SaveFunctionTag value) {
         setEvent("save", value.getBody());
     }
@@ -349,6 +361,42 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setRemove(String value) {
         setProperty("remove", new Function(value));
+    }
+
+    public String getResize() {
+        Function property = ((Function)getProperty("resize"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setResize(String value) {
+        setProperty("resize", new Function(value));
+    }
+
+    public String getResizeEnd() {
+        Function property = ((Function)getProperty("resizeEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setResizeEnd(String value) {
+        setProperty("resizeEnd", new Function(value));
+    }
+
+    public String getResizeStart() {
+        Function property = ((Function)getProperty("resizeStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setResizeStart(String value) {
+        setProperty("resizeStart", new Function(value));
     }
 
     public String getSave() {

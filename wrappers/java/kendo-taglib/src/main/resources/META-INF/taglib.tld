@@ -14298,6 +14298,21 @@ That way all users would see the same dates and times no matter their configured
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the user starts to resize an event.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>resizeStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user is resizing an event.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>resize</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user releases the mouse after resizing an event.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>resizeEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user saves a scheduler event by clicking the "save" button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>save</name>
             <rtexprvalue>true</rtexprvalue>
@@ -14724,6 +14739,24 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
         <description>Fired when the user clicks the "destroy" button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>scheduler-remove</name>
         <tag-class>com.kendoui.taglib.scheduler.RemoveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user starts to resize an event.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>scheduler-resizeStart</name>
+        <tag-class>com.kendoui.taglib.scheduler.ResizeStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user is resizing an event.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>scheduler-resize</name>
+        <tag-class>com.kendoui.taglib.scheduler.ResizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user releases the mouse after resizing an event.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>scheduler-resizeEnd</name>
+        <tag-class>com.kendoui.taglib.scheduler.ResizeEndFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

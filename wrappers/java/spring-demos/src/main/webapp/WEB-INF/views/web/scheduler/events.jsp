@@ -53,11 +53,24 @@ function scheduler_move(e) {
 function scheduler_moveEnd(e) {
     kendoConsole.log("moveEnd");
 }
+
+function scheduler_resizeStart(e) {
+    kendoConsole.log("resizeStart");
+}
+
+function scheduler_resize(e) {
+    kendoConsole.log("resize");
+}
+
+function scheduler_resizeEnd(e) {
+    kendoConsole.log("resizeEnd");
+}
 </script>
     <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="400" date="<%= date %>" startTime="<%= startTime %>"
     	dataBinding="scheduler_dataBinding" dataBound="scheduler_dataBound" save="scheduler_save"
     	remove="scheduler_remove" edit="scheduler_edit" cancel="scheduler_cancel" moveStart="scheduler_moveStart"
-    	moveEnd="scheduler_moveEnd" move="scheduler_move">
+    	moveEnd="scheduler_moveEnd" move="scheduler_move" resizeStart="scheduler_resizeStart"
+    	resizeEnd="scheduler_resizeEnd" resize="scheduler_resize">
     	<kendo:scheduler-views>
     		<kendo:scheduler-view type="day" />
     		<kendo:scheduler-view type="week" selected="true" />
