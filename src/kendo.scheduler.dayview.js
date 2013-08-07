@@ -195,11 +195,9 @@ kendo_module({
 
             var distance = currentSlot.start - initialSlot.start;
 
-            var duration = event.end.getTime() - event.start.getTime();
-
             var start = kendo.date.toUtcTime(event.start) + distance;
 
-            var end = start + duration;
+            var end = start + event.duration();
 
             var ranges = group.ranges(start, end, multiday, event.isAllDay);
 

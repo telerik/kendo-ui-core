@@ -712,11 +712,9 @@ kendo_module({
        _updateMoveHint: function(event, initialSlot, currentSlot) {
             var distance = currentSlot.start - initialSlot.start;
 
-            var duration = event.end.getTime() - event.start.getTime();
-
             var start = kendo.date.toUtcTime(event.start) + distance;
 
-            var end = start + duration;
+            var end = start + event.duration();
 
             var group = this.groups[currentSlot.groupIndex];
 
