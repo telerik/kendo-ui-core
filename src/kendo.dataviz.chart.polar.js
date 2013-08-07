@@ -1219,6 +1219,11 @@ kendo_module({
     SeriesBinder.current.register(POLAR_CHARTS, [X, Y], ["color"]);
     SeriesBinder.current.register(RADAR_CHARTS, ["value"], ["color"]);
 
+    dataviz.DefaultAggregates.current.register(
+        RADAR_CHARTS,
+        { value: "max", color: "first" }
+    );
+
     deepExtend(dataviz, {
         PolarAxis: PolarAxis,
         PolarPlotArea: PolarPlotArea,

@@ -1047,6 +1047,7 @@
             (function() {
                 // ------------------------------------------------------------
                 var areNumbers = kendo.dataviz.areNumbers,
+                    countNumbers = kendo.dataviz.countNumbers,
                     isNumber = kendo.dataviz.isNumber;
 
                 module("Misc");
@@ -1065,6 +1066,22 @@
 
                 test("isNumber returns false if number is NaN", function() {
                     ok(!isNumber(NaN));
+                });
+
+                test("countNumbers counts finite numbers", function() {
+                    equal(countNumbers([1, 2, 3]), 3);
+                });
+
+                test("countNumbers skips nulls", function() {
+                    equal(countNumbers([1, 2, null]), 2);
+                });
+
+                test("countNumbers skips undefined", function() {
+                    equal(countNumbers([1, 2, undefined]), 2);
+                });
+
+                test("countNumbers skips NaN", function() {
+                    equal(countNumbers([1, 2, NaN]), 2);
                 });
 
                 test("areNumbers returns true if all numbers are finite", function() {

@@ -5,7 +5,6 @@
         proxy = $.proxy,
         isArray = $.isArray,
         noop = $.noop,
-        isFunction = $.isFunction,
         math = Math,
         Template,
         JSON = window.JSON || {},
@@ -56,6 +55,11 @@
 
         return subclass;
     };
+
+    function isFunction(fn) {
+        return typeof fn === "function";
+    }
+    kendo.isFunction = isFunction;
 
     var preventDefault = function() {
         this._defaultPrevented = true;

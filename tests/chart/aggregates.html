@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Chart</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="../qunit.ico" />
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz,
+                SeriesAggregator = dataviz.SeriesAggregator,
+                DefaultAggregates = dataviz.DefaultAggregates,
+                defined = dataviz.defined,
+                binder,
+                defaults,
+                series;
+
+            function aggregate(series) {
+                var sa = new SeriesAggregator(series, binder, defaults);
+
+                return sa.aggregatePoints([0, 1]);
+            }
+
+            // ------------------------------------------------------------
+            module("SeriesAggregator / Simple aggregates", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["value"], []);
+
+                    defaults = new DefaultAggregates();
+                    defaults.register(["foo"], { value: "max" });
+
+                    series = {
+                        type: "foo",
+                        data: [{
+                            value: 1
+                        }, {
+                            value: 2
+                        }]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = "min";
+
+                deepEqual(aggregate(series), { value: 1 });
+            });
+
+            test("default aggregate is max", function() {
+                deepEqual(aggregate(series), { value: 2 });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = function(values) {
+                    return 5;
+                };
+
+                deepEqual(aggregate(series), { value: 5 });
+            });
+
+            test("allows function aggregates to return data items", function() {
+                series.aggregate = function(values) {
+                    return { value: 5, bar: 1 };
+                };
+
+                deepEqual(aggregate(series), { value: 5, bar: 1 });
+            });
+
+            test("returns empty aggregate for empty source points array", function() {
+                var sa = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(sa.aggregatePoints(), {});
+            });
+
+            // ------------------------------------------------------------
+            module("SeriesAggregator / Simple aggregates / Custom field", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["value"], []);
+
+                    defaults = new DefaultAggregates();
+                    defaults.register(["foo"], { value: "max" });
+
+                    series = {
+                        type: "foo",
+                        field: "fooValue",
+                        data: [{
+                            fooValue: 1
+                        }, {
+                            fooValue: 2
+                        }]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = "min";
+
+                deepEqual(aggregate(series), { fooValue: 1 });
+            });
+
+            test("default aggregate is max", function() {
+                deepEqual(aggregate(series), { fooValue: 2 });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = function(values) { return 5; };
+
+                deepEqual(aggregate(series), { fooValue: 5 });
+            });
+
+            test("allows function aggregates to return data items", function() {
+                series.aggregate = function(values) {
+                    return { fooValue: 5, bar: 1 };
+                };
+
+                deepEqual(aggregate(series), { fooValue: 5, bar: 1 });
+            });
+
+            test("returns empty aggregate for empty source points array", function() {
+                var sa = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(sa.aggregatePoints(), {});
+            });
+
+            // ------------------------------------------------------------
+            module("SeriesAggregator / Simple aggregates / Array data", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["value"], []);
+
+                    defaults = new DefaultAggregates();
+                    defaults.register(["foo"], { value: "max" });
+
+                    series = {
+                        type: "foo",
+                        data: [1, 2]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = "min";
+
+                deepEqual(aggregate(series), { value: 1 });
+            });
+
+            test("default aggregate is max", function() {
+                deepEqual(aggregate(series), { value: 2 });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = function(values) {
+                    return 5;
+                };
+
+                deepEqual(aggregate(series), { value: 5 });
+            });
+
+            test("allows function aggregates to return data items", function() {
+                series.aggregate = function(values) {
+                    return { value: 5, bar: 1 };
+                };
+
+                deepEqual(aggregate(series), { value: 5, bar: 1 });
+            });
+
+            test("returns empty aggregate for empty source points array", function() {
+                var sa = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(sa.aggregatePoints(), {});
+            });
+
+            // ------------------------------------------------------------
+            module("SeriesAggregator / Compound aggregates", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["open", "close"], ["color"]);
+
+                    defaults = new DefaultAggregates();
+                    defaults.register(["foo"], { open: "max", close: "max", color: "first" });
+
+                    series = {
+                        type: "foo",
+                        data: [{
+                            open: 1,
+                            close: 2
+                        }, {
+                            open: 10,
+                            close: 20,
+                            color: "red"
+                        }]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = {
+                    open: "min",
+                    close: "max"
+                };
+
+                deepEqual(aggregate(series), { open: 1, close: 20 });
+            });
+
+            test("applies default aggregates", function() {
+                deepEqual(aggregate(series), { open: 10, close: 20, color: "red" });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = {
+                    open: function(values) { return 5; },
+                    close: "max"
+                };
+
+                deepEqual(aggregate(series), { open: 5, close: 20 });
+            });
+
+            test("accepts data items from top-level aggregate", function() {
+                series.aggregate = function(values) {
+                    return { open: 5, close: 5 };
+                };
+
+                deepEqual(aggregate(series), { open: 5, close: 5 });
+            });
+
+            test("root-level named aggregate is applied to value fields only", function() {
+                series.aggregate = "max";
+
+                deepEqual(aggregate(series), { open: 10, close: 20 });
+            });
+
+            // ------------------------------------------------------------
+            module("SeriesAggregator / Compound aggregates / Custom fields", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["open", "close"], []);
+
+                    defaults = new DefaultAggregates();
+                    defaults.register(["foo"], { open: "max", close: "max" });
+
+                    series = {
+                        type: "foo",
+                        openField: "fooOpen",
+                        closeField: "fooClose",
+                        data: [{
+                            fooOpen: 1,
+                            fooClose: 2
+                        }, {
+                            fooOpen: 10,
+                            fooClose: 20
+                        }]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = {
+                    open: "min",
+                    close: "max"
+                };
+
+                deepEqual(aggregate(series), { fooOpen: 1, fooClose: 20 });
+            });
+
+            test("applies default aggregates", function() {
+                deepEqual(aggregate(series), { fooOpen: 10, fooClose: 20 });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = {
+                    open: function(values) { return 5; },
+                    close: "max"
+                };
+
+                deepEqual(aggregate(series), { fooOpen: 5, fooClose: 20 });
+            });
+
+            test("accepts data items from top-level aggregate", function() {
+                series.aggregate = function(values) {
+                    return { fooOpen: 5, fooClose: 5 };
+                };
+
+                deepEqual(aggregate(series), { fooOpen: 5, fooClose: 5 });
+            });
+
+            // ------------------------------------------------------------
+            module("SeriesAggregator / Compound aggregates / Array data", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["open", "close"], []);
+
+                    defaults = new DefaultAggregates();
+                    defaults.register(["foo"], { open: "max", close: "max" });
+
+                    series = {
+                        type: "foo",
+                        data: [[1, 2], [10, 20]]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = {
+                    open: "min",
+                    close: "max"
+                };
+
+                deepEqual(aggregate(series), { open: 1, close: 20 });
+            });
+
+            test("applies default aggregates", function() {
+                deepEqual(aggregate(series), { open: 10, close: 20 });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = {
+                    open: function(values) { return 5; },
+                    close: "max"
+                };
+
+                deepEqual(aggregate(series), { open: 5, close: 20 });
+            });
+
+            test("accepts data items from top-level aggregate", function() {
+                series.aggregate = function(values) {
+                    return { open: 5, close: 5 };
+                };
+
+                deepEqual(aggregate(series), { open: 5, close: 5 });
+            });
+
+            // ------------------------------------------------------------
+            var defaults;
+
+            module("DefaultAggregates", {
+                setup: function() {
+                    defaults = new DefaultAggregates();
+
+                    defaults.register(["foo", "bar"], {
+                        value: "min",
+                        color: "first"
+                    });
+                }
+            });
+
+            test("retrieves default aggregates", function() {
+                deepEqual(defaults.query("foo"), {
+                    value: "min",
+                    color: "first"
+                });
+            });
+
+            test("retrieves default aggregates for all series", function() {
+                deepEqual(defaults.query("foo"), defaults.query("bar"));
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div>
+            <div id="container">
+            </div>
+        </div>
+
+    </body>
+</html>
