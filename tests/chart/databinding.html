@@ -990,6 +990,14 @@
 
                     deepEqual(binder.bindPoint(series, 0).fields, { });
                 });
+
+                test("returns canonical names for all fields", function() {
+                    binder.register(["bar"], ["value"], ["color"]);
+
+                    deepEqual(
+                        binder.canonicalFields({ type: "bar" }),
+                        ["value", "color"]);
+                });
             })();
         </script>
 

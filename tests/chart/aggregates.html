@@ -25,8 +25,13 @@
                 defined = dataviz.defined,
                 binder,
                 defaults,
-                series,
-                aggr;
+                series;
+
+            function aggregate(series) {
+                var sa = new SeriesAggregator(series, binder, defaults);
+
+                return sa.aggregatePoints([0, 1]);
+            }
 
             // ------------------------------------------------------------
             module("SeriesAggregator / Simple aggregates", {
@@ -50,34 +55,34 @@
 
             test("accepts named aggregates", function() {
                 series.aggregate = "min";
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { value: 1 });
+                deepEqual(aggregate(series), { value: 1 });
             });
 
             test("default aggregate is max", function() {
-                aggr = new SeriesAggregator(series, binder, defaults);
-
-                deepEqual(aggr.aggregatePoint([0, 1]), { value: 2 });
+                deepEqual(aggregate(series), { value: 2 });
             });
 
             test("accepts function aggregates", function() {
-                series.aggregate = function(values) { return 5; };
-                aggr = new SeriesAggregator(series, binder, defaults);
+                series.aggregate = function(values) {
+                    return 5;
+                };
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { value: 5 });
+                deepEqual(aggregate(series), { value: 5 });
             });
 
             test("allows function aggregates to return data items", function() {
-                series.aggregate = function(values) { return { value: 5, bar: 1 }; };
-                aggr = new SeriesAggregator(series, binder, defaults);
+                series.aggregate = function(values) {
+                    return { value: 5, bar: 1 };
+                };
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { value: 5, bar: 1 });
+                deepEqual(aggregate(series), { value: 5, bar: 1 });
             });
 
             test("returns empty aggregate for empty source points array", function() {
-                aggr = new SeriesAggregator(series, binder, defaults);
-                deepEqual(aggr.aggregatePoint(), {});
+                var sa = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(sa.aggregatePoints(), {});
             });
 
             // ------------------------------------------------------------
@@ -103,34 +108,32 @@
 
             test("accepts named aggregates", function() {
                 series.aggregate = "min";
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { fooValue: 1 });
+                deepEqual(aggregate(series), { fooValue: 1 });
             });
 
             test("default aggregate is max", function() {
-                aggr = new SeriesAggregator(series, binder, defaults);
-
-                deepEqual(aggr.aggregatePoint([0, 1]), { fooValue: 2 });
+                deepEqual(aggregate(series), { fooValue: 2 });
             });
 
             test("accepts function aggregates", function() {
                 series.aggregate = function(values) { return 5; };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { fooValue: 5 });
+                deepEqual(aggregate(series), { fooValue: 5 });
             });
 
             test("allows function aggregates to return data items", function() {
-                series.aggregate = function(values) { return { fooValue: 5, bar: 1 }; };
-                aggr = new SeriesAggregator(series, binder, defaults);
+                series.aggregate = function(values) {
+                    return { fooValue: 5, bar: 1 };
+                };
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { fooValue: 5, bar: 1 });
+                deepEqual(aggregate(series), { fooValue: 5, bar: 1 });
             });
 
             test("returns empty aggregate for empty source points array", function() {
-                aggr = new SeriesAggregator(series, binder, defaults);
-                deepEqual(aggr.aggregatePoint(), {});
+                var sa = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(sa.aggregatePoints(), {});
             });
 
             // ------------------------------------------------------------
@@ -151,34 +154,34 @@
 
             test("accepts named aggregates", function() {
                 series.aggregate = "min";
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { value: 1 });
+                deepEqual(aggregate(series), { value: 1 });
             });
 
             test("default aggregate is max", function() {
-                aggr = new SeriesAggregator(series, binder, defaults);
-
-                deepEqual(aggr.aggregatePoint([0, 1]), { value: 2 });
+                deepEqual(aggregate(series), { value: 2 });
             });
 
             test("accepts function aggregates", function() {
-                series.aggregate = function(values) { return 5; };
-                aggr = new SeriesAggregator(series, binder, defaults);
+                series.aggregate = function(values) {
+                    return 5;
+                };
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { value: 5 });
+                deepEqual(aggregate(series), { value: 5 });
             });
 
             test("allows function aggregates to return data items", function() {
-                series.aggregate = function(values) { return { value: 5, bar: 1 }; };
-                aggr = new SeriesAggregator(series, binder, defaults);
+                series.aggregate = function(values) {
+                    return { value: 5, bar: 1 };
+                };
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { value: 5, bar: 1 });
+                deepEqual(aggregate(series), { value: 5, bar: 1 });
             });
 
             test("returns empty aggregate for empty source points array", function() {
-                aggr = new SeriesAggregator(series, binder, defaults);
-                deepEqual(aggr.aggregatePoint(), {});
+                var sa = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(sa.aggregatePoints(), {});
             });
 
             // ------------------------------------------------------------
@@ -209,15 +212,12 @@
                     open: "min",
                     close: "max"
                 };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 1, close: 20 });
+                deepEqual(aggregate(series), { open: 1, close: 20 });
             });
 
             test("applies default aggregates", function() {
-                aggr = new SeriesAggregator(series, binder, defaults);
-
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 10, close: 20, color: "red" });
+                deepEqual(aggregate(series), { open: 10, close: 20, color: "red" });
             });
 
             test("accepts function aggregates", function() {
@@ -225,25 +225,22 @@
                     open: function(values) { return 5; },
                     close: "max"
                 };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 20 });
+                deepEqual(aggregate(series), { open: 5, close: 20 });
             });
 
             test("accepts data items from top-level aggregate", function() {
                 series.aggregate = function(values) {
                     return { open: 5, close: 5 };
                 };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 5 });
+                deepEqual(aggregate(series), { open: 5, close: 5 });
             });
 
             test("root-level named aggregate is applied to value fields only", function() {
                 series.aggregate = "max";
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 10, close: 20 });
+                deepEqual(aggregate(series), { open: 10, close: 20 });
             });
 
             // ------------------------------------------------------------
@@ -275,15 +272,12 @@
                     open: "min",
                     close: "max"
                 };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { fooOpen: 1, fooClose: 20 });
+                deepEqual(aggregate(series), { fooOpen: 1, fooClose: 20 });
             });
 
             test("applies default aggregates", function() {
-                aggr = new SeriesAggregator(series, binder, defaults);
-
-                deepEqual(aggr.aggregatePoint([0, 1]), { fooOpen: 10, fooClose: 20 });
+                deepEqual(aggregate(series), { fooOpen: 10, fooClose: 20 });
             });
 
             test("accepts function aggregates", function() {
@@ -291,18 +285,16 @@
                     open: function(values) { return 5; },
                     close: "max"
                 };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { fooOpen: 5, fooClose: 20 });
+                deepEqual(aggregate(series), { fooOpen: 5, fooClose: 20 });
             });
 
             test("accepts data items from top-level aggregate", function() {
                 series.aggregate = function(values) {
                     return { fooOpen: 5, fooClose: 5 };
                 };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { fooOpen: 5, fooClose: 5 });
+                deepEqual(aggregate(series), { fooOpen: 5, fooClose: 5 });
             });
 
             // ------------------------------------------------------------
@@ -326,15 +318,12 @@
                     open: "min",
                     close: "max"
                 };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 1, close: 20 });
+                deepEqual(aggregate(series), { open: 1, close: 20 });
             });
 
             test("applies default aggregates", function() {
-                aggr = new SeriesAggregator(series, binder, defaults);
-
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 10, close: 20 });
+                deepEqual(aggregate(series), { open: 10, close: 20 });
             });
 
             test("accepts function aggregates", function() {
@@ -342,18 +331,16 @@
                     open: function(values) { return 5; },
                     close: "max"
                 };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 20 });
+                deepEqual(aggregate(series), { open: 5, close: 20 });
             });
 
             test("accepts data items from top-level aggregate", function() {
                 series.aggregate = function(values) {
                     return { open: 5, close: 5 };
                 };
-                aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 5 });
+                deepEqual(aggregate(series), { open: 5, close: 5 });
             });
         </script>
 

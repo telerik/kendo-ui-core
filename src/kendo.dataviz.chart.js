@@ -7246,7 +7246,7 @@ kendo_module({
             );
 
             for (i = 0; i < categories.length; i++) {
-                data[i] = aggregator.aggregatePoint(
+                data[i] = aggregator.aggregatePoints(
                     srcPoints[i], categories[i]
                 );
             }
@@ -9267,7 +9267,7 @@ kendo_module({
     };
 
     SeriesAggregator.prototype = {
-        aggregatePoint: function(srcPoints, group) {
+        aggregatePoints: function(srcPoints, group) {
             var sa = this,
                 data = sa._bindPoints(srcPoints || []),
                 series = sa._series,
