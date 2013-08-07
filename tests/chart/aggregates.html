@@ -185,10 +185,10 @@
             module("SeriesAggregator / Compound aggregates", {
                 setup: function() {
                     binder = new dataviz.SeriesBinder();
-                    binder.register(["foo"], ["open", "close"], []);
+                    binder.register(["foo"], ["open", "close"], ["color"]);
 
                     defaults = new dataviz.DefaultAggregates();
-                    defaults.register(["foo"], { open: "max", close: "max" });
+                    defaults.register(["foo"], { open: "max", close: "max", color: "first" });
 
                     series = {
                         type: "foo",
@@ -197,7 +197,8 @@
                             close: 2
                         }, {
                             open: 10,
-                            close: 20
+                            close: 20,
+                            color: "red"
                         }]
                     };
                 }
@@ -216,7 +217,7 @@
             test("applies default aggregates", function() {
                 aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 10, close: 20 });
+                deepEqual(aggr.aggregatePoint([0, 1]), { open: 10, close: 20, color: "red" });
             });
 
             test("accepts function aggregates", function() {
@@ -238,11 +239,11 @@
                 deepEqual(aggr.aggregatePoint([0, 1]), { open: 5, close: 5 });
             });
 
-            test("root-level named aggregate is applied to first value field", function() {
+            test("root-level named aggregate is applied to value fields only", function() {
                 series.aggregate = "max";
                 aggr = new SeriesAggregator(series, binder, defaults);
 
-                deepEqual(aggr.aggregatePoint([0, 1]), { open: 10 });
+                deepEqual(aggr.aggregatePoint([0, 1]), { open: 10, close: 20 });
             });
 
             // ------------------------------------------------------------

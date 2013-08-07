@@ -9233,6 +9233,7 @@ kendo_module({
     var SeriesAggregator = function(series, binder, defaultAggregates) {
         var sa = this,
             canonicalFields = binder.canonicalFields(series),
+            valueFields = binder.valueFields(series),
             sourceFields = binder.sourceFields(series, canonicalFields),
             seriesFields = sa._seriesFields = [],
             defaults = defaultAggregates.query(series.type),
@@ -9248,7 +9249,7 @@ kendo_module({
 
             if (typeof rootAggregate === OBJECT) {
                 fieldAggregate = rootAggregate[field];
-            } else if (i === 0) {
+            } else if (i === 0 || inArray(field, valueFields)) {
                 fieldAggregate = rootAggregate;
             } else {
                 break;
