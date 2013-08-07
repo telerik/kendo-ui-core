@@ -1699,32 +1699,36 @@ kendo_module({
                 };
 
                 view.bind(EDIT, this._viewEditHandler);
-
-                if (that._viewNavigateHandler) {
-                    view.unbind("navigate", that._viewNavigateHandler);
-                }
-
-                that._viewNavigateHandler = function(e) {
-                    if (e.view) {
-                        that._selectView(e.view);
-                        that.date(e.date);
-                    }
-                };
-
-                view.bind("navigate", that._viewNavigateHandler);
-
-                that._viewActivateHandler = function() {
-                    var view = this;
-                    if (that._selection) {
-                        view.moveSelectionToPeriod(that._selection);
-                        view.select(that._selection);
-
-                        that._adjustSelectedDate();
-                    }
-                };
-
-                view.bind("activate", that._viewActivateHandler);
             }
+
+            if (that._viewNavigateHandler) {
+                view.unbind("navigate", that._viewNavigateHandler);
+            }
+
+            that._viewNavigateHandler = function(e) {
+                if (e.view) {
+                    that._selectView(e.view);
+                    that.date(e.date);
+                }
+            };
+
+            view.bind("navigate", that._viewNavigateHandler);
+
+            if (that._viewActivateHandler) {
+                view.unbind("activate", that._viewActivateHandler);
+            }
+
+            that._viewActivateHandler = function() {
+                var view = this;
+                if (that._selection) {
+                    view.moveSelectionToPeriod(that._selection);
+                    view.select(that._selection);
+
+                    that._adjustSelectedDate();
+                }
+            };
+
+            view.bind("activate", that._viewActivateHandler);
         },
 
         _selectView: function(name) {
