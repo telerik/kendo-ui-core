@@ -153,6 +153,9 @@ $scheduler->timezone("Etc/UTC")
     ->cancel('scheduler_cancel')
     ->addEvent('scheduler_add')
     ->edit('scheduler_edit')
+    ->resizeStart('scheduler_resizeStart')
+    ->resize('scheduler_resize')
+    ->resizeEnd('scheduler_resizeEnd')
     ->moveStart('scheduler_moveStart')
     ->move('scheduler_move')
     ->moveEnd('scheduler_moveEnd');
@@ -201,6 +204,19 @@ echo $scheduler->render();
     function scheduler_moveEnd(e) {
         kendoConsole.log("moveEnd");
     }
+
+    function scheduler_resizeStart(e) {
+        kendoConsole.log("resizeStart");
+    }
+
+    function scheduler_resize(e) {
+        kendoConsole.log("resize");
+    }
+
+    function scheduler_resizeEnd(e) {
+        kendoConsole.log("resizeEnd");
+    }
+
 </script>
 
 <?php require_once '../../include/footer.php'; ?>
