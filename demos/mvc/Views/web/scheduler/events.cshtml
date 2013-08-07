@@ -47,6 +47,18 @@ $(function() {
         kendoConsole.log("moveEnd");
     }
 
+    function scheduler_resizeStart(e) {
+        kendoConsole.log("resizeStart");
+    }
+
+    function scheduler_resize(e) {
+        kendoConsole.log("resize");
+    }
+
+    function scheduler_resizeEnd(e) {
+        kendoConsole.log("resizeEnd");
+    }
+
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
         startTime: new Date("2013/6/13 7:00"),
@@ -68,6 +80,9 @@ $(function() {
         moveStart: scheduler_moveStart,
         move: scheduler_move,
         moveEnd: scheduler_moveEnd,
+        resizeStart: scheduler_resizeStart,
+        resize: scheduler_resize,
+        resizeEnd: scheduler_resizeEnd,
         dataSource: {
             batch: true,
             transport: {

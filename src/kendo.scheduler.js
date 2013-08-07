@@ -886,7 +886,10 @@ kendo_module({
             "dataBound",
             "moveStart",
             "move",
-            "moveEnd"
+            "moveEnd",
+            "resizeStart",
+            "resize",
+            "resizeEnd"
         ],
 
         destroy: function() {
@@ -990,14 +993,18 @@ kendo_module({
                     var endResources = that.view()._resourceBySlot(endSlot);
                     var startResources = that.view()._resourceBySlot(startSlot);
 
-                    var prevented = that.trigger("moveEnd", { event: event, slot: { element: endSlot.element, start: endSlot.startDate(), end: endSlot.endDate() }, resources: endResources });
+                    var prevented = that.trigger("moveEnd", {
+                            event: event,
+                            slot: { element: endSlot.element, start: endSlot.startDate(), end: endSlot.endDate() },
+                            start: start,
+                            end: end,
+                            resources: endResources
+                        });
 
                     if (!prevented && (event.start.getTime() != start.getTime() ||
                         event.end.getTime() != end.getTime() ||
                         kendo.stringify(endResources) != kendo.stringify(startResources)))  {
                         that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
-                    } else {
-                        that.view()._removeMoveHint();
                     }
                 },
                 dragcancel: function() {
@@ -1039,6 +1046,10 @@ kendo_module({
 
                     event = that.occurrenceByUid(uid);
 
+                    if (that.trigger("resizeStart", { event: event })) {
+                        e.preventDefault();
+                    }
+
                     var view = that.view();
 
                     var events = this.element.find(kendo.format(".k-event[{0}={1}]", kendo.attr("uid"), uid));
@@ -1068,7 +1079,7 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    if (!slot) {
+                    if (!slot || that.trigger("resize", { event: event, slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() } })) {
                         return;
                     }
 
@@ -1126,7 +1137,14 @@ kendo_module({
                         start.setMinutes(0);
                     }
 
-                    if (end.getTime() >= start.getTime()) {
+                    var prevented = that.trigger("resizeEnd", {
+                        event: event,
+                        slot: { element: endSlot.element, start: endSlot.startDate(), end: endSlot.endDate() },
+                        start: start,
+                        end: end
+                    });
+
+                    if (!prevented && end.getTime() >= start.getTime()) {
                         if (event.start.getTime() != start.getTime() || event.end.getTime() != end.getTime()) {
                             that._updateEvent(dir, event, { start: start, end: end });
                         }
