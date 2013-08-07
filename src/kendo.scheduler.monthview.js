@@ -751,30 +751,11 @@ kendo_module({
             var groupCount = this._groupCount();
             var columnCount =  NUMBER_OF_COLUMNS;
             var rowCount =  NUMBER_OF_ROWS;
-            var that = this;
 
             var groups = [];
 
-            function collectionIndex(date) {
-               return Math.floor(that._slotIndex(date) / columnCount);
-            }
-
-            function slotIndex(date) {
-                return that._slotIndex(date) % columnCount;
-            }
-
-            function multiday() {
-                return true;
-            }
-
             for (var idx = 0; idx < groupCount; idx++) {
-                var view = new ui.scheduler.ResourceView({
-                    multiday: multiday,
-                    collectionIndex: collectionIndex,
-                    slotIndex: slotIndex
-                });
-
-                groups.push(view);
+                groups.push(new ui.scheduler.ResourceView());
             }
 
             this.groups = groups;
@@ -865,7 +846,7 @@ kendo_module({
                 if (this._isInDateSlot(event)) {
                     var group = this.groups[groupIndex];
 
-                    var ranges = group.slotRanges(event);
+                    var ranges = group.slotRanges(event, true);
 
                     var rangeCount = ranges.length;
 

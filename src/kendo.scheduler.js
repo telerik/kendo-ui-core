@@ -316,6 +316,10 @@ kendo_module({
             this.set("endTime", toInvariantDate(this.end));
         },
 
+        isMultiDay: function() {
+            return this.isAllDay || this.duration() >= kendo.date.MS_PER_DAY;
+        },
+
         isException: function() {
             return this.id && this.recurrenceId;
         },

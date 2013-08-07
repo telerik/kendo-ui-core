@@ -311,11 +311,15 @@ kendo_module({
             return ranges;
         },
 
-        slotRanges: function(event) {
+        slotRanges: function(event, isDay) {
             var startTime = kendo.date.toUtcTime(event.start);
             var endTime = kendo.date.toUtcTime(event.end);
 
-            if (this.multiday(event)) {
+            if (isDay === undefined) {
+                isDay = event.isMultiDay();
+            }
+
+            if (isDay) {
                 return this.daySlotRanges(startTime, endTime, event.isAllDay);
             }
 

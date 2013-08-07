@@ -137,9 +137,9 @@ kendo_module({
        },
 
        _updateResizeHint: function(event, startSlot, endSlot) {
-            var group = this.groups[endSlot.groupIndex];
+            var multiday = event.isMultiDay();
 
-            var multiday = group.multiday(event);
+            var group = this.groups[endSlot.groupIndex];
 
             var ranges = group.ranges(startSlot.start, endSlot.end, multiday, event.isAllDay);
 
@@ -189,9 +189,9 @@ kendo_module({
         },
 
         _updateMoveHint: function(event, initialSlot, currentSlot) {
-            var group = this.groups[currentSlot.groupIndex];
+            var multiday = event.isMultiDay();
 
-            var multiday = group.multiday(event);
+            var group = this.groups[currentSlot.groupIndex];
 
             var distance = currentSlot.start - initialSlot.start;
 
@@ -482,7 +482,6 @@ kendo_module({
                        start: currentTime,
                        end: currentTime + kendo.date.MS_PER_DAY,
                        element: cell,
-                       isAllDay: true,
                        index: collection.count(),
                        groupIndex: groupIndex,
                        columnIndex: group.daySlotCollectionCount() - 1
@@ -496,10 +495,6 @@ kendo_module({
             var columnCount = this._columnCountInResourceView();
 
             var groups = [];
-
-            function multiday(event) {
-                return event.isAllDay || event.end.getTime() - event.start.getTime() >= kendo.date.MS_PER_DAY;
-            }
 
             var groupedByDate = this._isGroupedByDate();
 
@@ -515,11 +510,7 @@ kendo_module({
                     dateOffset++;
                 }
 
-                var view = new ui.scheduler.ResourceView({
-                    multiday: multiday,
-                    collectionIndex: $.proxy(this._collectionIndex, this),
-                    slotIndex: $.proxy(this._slotIndex, this)
-                });
+                var view = new ui.scheduler.ResourceView();
 
                 for (var columnIndex = dateOffset; columnIndex < columnCount+dateOffset; columnIndex++) {
                     view.addTimeSlotCollection(new ui.scheduler.SlotCollection({
