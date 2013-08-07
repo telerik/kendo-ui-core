@@ -15,7 +15,7 @@ kendo_module({
         extend = $.extend,
         placeholderSupported = kendo.support.placeholder,
         browser = kendo.support.browser,
-        isFunction = $.isFunction,
+        isFunction = kendo.isFunction,
         trimSlashesRegExp = /(^\/|\/$)/g,
         CHANGE = "change",
         APPLY = "apply",

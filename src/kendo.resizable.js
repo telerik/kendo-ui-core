@@ -11,7 +11,7 @@ kendo_module({
         ui = kendo.ui,
         Widget = ui.Widget,
         proxy = $.proxy,
-        isFunction = $.isFunction,
+        isFunction = kendo.isFunction,
         extend = $.extend,
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",

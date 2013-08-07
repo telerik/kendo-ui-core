@@ -12,7 +12,7 @@ kendo_module({
         Widget = ui.Widget,
         extend = $.extend,
         oldIE = kendo.support.browser.msie && kendo.support.browser.version < 9,
-        isFunction = $.isFunction,
+        isFunction = kendo.isFunction,
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,

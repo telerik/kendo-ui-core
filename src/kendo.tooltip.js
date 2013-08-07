@@ -10,7 +10,7 @@ kendo_module({
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         Popup = kendo.ui.Popup,
-        isFunction = $.isFunction,
+        isFunction = kendo.isFunction,
         isPlainObject = $.isPlainObject,
         extend = $.extend,
         proxy = $.proxy,

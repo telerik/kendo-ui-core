@@ -20,7 +20,6 @@ kendo_module({
 (function($, undefined) {
     var extend = $.extend,
         proxy = $.proxy,
-        isFunction = $.isFunction,
         isPlainObject = $.isPlainObject,
         isEmptyObject = $.isEmptyObject,
         isArray = $.isArray,
@@ -30,6 +29,7 @@ kendo_module({
         each = $.each,
         noop = $.noop,
         kendo = window.kendo,
+        isFunction = kendo.isFunction,
         Observable = kendo.Observable,
         Class = kendo.Class,
         STRING = "string",

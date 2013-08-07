@@ -651,7 +651,7 @@ kendo_module({
                     that.hint.stop(true, true).remove();
                 }
 
-                that.hint = $.isFunction(hint) ? $(hint.call(that, that.currentTarget)) : hint;
+                that.hint = kendo.isFunction(hint) ? $(hint.call(that, that.currentTarget)) : hint;
 
                 var offset = getOffset(that.currentTarget);
                 that.hintOffset = offset;

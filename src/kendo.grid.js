@@ -68,7 +68,7 @@ kendo_module({
         isArray = $.isArray,
         inArray = $.inArray,
         proxy = $.proxy,
-        isFunction = $.isFunction,
+        isFunction = kendo.isFunction,
         isEmptyObject = $.isEmptyObject,
         math = Math,
         PROGRESS = "progress",

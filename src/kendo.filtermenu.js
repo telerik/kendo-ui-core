@@ -19,7 +19,7 @@ kendo_module({
             "number": "numerictextbox",
             "date": "datepicker"
         },
-        isFunction = $.isFunction,
+        isFunction = kendo.isFunction,
         Widget = ui.Widget;
 
     var booleanTemplate =

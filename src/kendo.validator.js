@@ -337,7 +337,7 @@ kendo_module({
                 customMessage = that.options.messages[ruleKey],
                 fieldName = input.attr(NAME);
 
-            customMessage = $.isFunction(customMessage) ? customMessage(input) : customMessage;
+            customMessage = kendo.isFunction(customMessage) ? customMessage(input) : customMessage;
 
             return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || input.attr("title") || customMessage || "", fieldName, input.attr(ruleKey));
         },

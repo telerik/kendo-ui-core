@@ -621,7 +621,7 @@ kendo_module({
         },
 
         _setChecked: function(datasource, value) {
-            if (!datasource || !$.isFunction(datasource.view)) {
+            if (!datasource || !kendo.isFunction(datasource.view)) {
                 return;
             }
 
