@@ -1,3 +1,3 @@
 package "firefox" do
-    version "22.0*"
+    version "23.*"
 end
