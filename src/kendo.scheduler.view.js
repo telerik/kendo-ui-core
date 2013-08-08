@@ -1017,21 +1017,7 @@ kendo_module({
             this.groupedResources = result;
         },
 
-        _isGroupedByDate: function() {
-            var groups = this.options.group;
-            groups = groups && groups.resources ? groups.resources : [];
-
-            return $.inArray("date", groups) > -1;
-        },
-
         _createColumnsLayout: function(resources, inner) {
-            if (this._isGroupedByDate()) {
-                for (var idx = 0, length = inner.length; idx < length; idx++) {
-                    inner[idx].columns = createLayoutConfiguration("columns", resources);
-                }
-                return inner;
-            }
-
             return createLayoutConfiguration("columns", resources, inner);
         },
 

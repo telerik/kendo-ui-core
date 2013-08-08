@@ -1382,34 +1382,6 @@
                 equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
             });
 
-            test("east and west resizing is disabled when grouped by date", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    startTime: new Date("2013/6/6 10:00"),
-                    endTime: new Date("2013/6/6 12:00 PM"),
-                    date: new Date("2013/6/6"),
-                    views: ["week"],
-                    dataSource: [
-                        { start: new Date("2013/6/2 11:30"), end: new Date("2013/6/3 12:00 PM"), ownerId: 1, title: "" }
-                    ],
-                    group: {
-                        resources: ["date", "Owner"]
-                    },
-                    resources: [
-                        {
-                            field: "ownerId",
-                            name: "Owner",
-                            dataSource: [
-                                { text: "Alex", value: 1, color: "red" },
-                                { text: "Bob", value: 2, color: "green" }
-                            ],
-                            title: "Owner"
-                        }
-                   ]
-                });
-
-                equal(div.find(".k-resize-e,.k-resize-w").length, 0);
-            });
-
             test("east resizing hint in month view is restricted by resource", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),

@@ -318,9 +318,6 @@ kendo_module({
             var resources = this.groupedResources;
 
             if (resources.length) {
-                if (this._isGroupedByDate()) {
-                    return this._columnCountForLevel(resources.length);
-                }
                 if (this._groupOrientation() === "vertical") {
                     return this._rowCountForLevel(resources.length - 1);
                 } else {
@@ -337,10 +334,6 @@ kendo_module({
                 return this._columnCountForLevel(0);
             }
 
-            if (this._isGroupedByDate()) {
-                return Math.floor(this._groupCount() / this._columnCountForLevel(0));
-            }
-
             return this._columnOffsetForResource(resources.length);
         },
 
@@ -355,17 +348,11 @@ kendo_module({
                 rowCount = Math.floor(rowCount / groupCount);
             }
 
-            var dateOffset = 0;
-
             for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
                 var rowMultiplier = 0;
 
                 if (this._isVerticallyGrouped()) {
                     rowMultiplier = groupIndex;
-                }
-
-                if (this._isGroupedByDate() && groupIndex % this._columnCountInResourceView() === 0 && groupIndex > 0) {
-                    dateOffset++;
                 }
 
                 var rowIndex = rowMultiplier * rowCount;
@@ -393,7 +380,7 @@ kendo_module({
 
                         var index = collection.count();
 
-                        var currentDate = this._dates[collectionIndex + dateOffset];
+                        var currentDate = this._dates[collectionIndex];
 
                         var currentTime = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 
@@ -432,17 +419,11 @@ kendo_module({
                 tableRows = this.element.find(".k-scheduler-header-all-day tr");
             }
 
-            var dateOffset = 0;
-
             for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
                 var rowMultiplier = 0;
 
                 if (this._isVerticallyGrouped()) {
                     rowMultiplier = groupIndex;
-                }
-
-                if (this._isGroupedByDate() && groupIndex % this._columnCountInResourceView() === 0 && groupIndex > 0) {
-                    dateOffset++;
                 }
 
                 var group = this.groups[groupIndex];
@@ -465,7 +446,7 @@ kendo_module({
                         cellCount = 0;
                     }
 
-                    var start = kendo.date.addDays(this.startDate(), cellCount + dateOffset);
+                    var start = kendo.date.addDays(this.startDate(), cellCount);
 
                     var currentTime = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
 
@@ -494,39 +475,21 @@ kendo_module({
 
             var groups = [];
 
-            var groupedByDate = this._isGroupedByDate();
-
-            if (groupedByDate) {
-                columnCount = 1;
-            }
-
-            var dateOffset = 0;
-
             for (var idx = 0; idx < groupCount; idx++) {
-
-                if (groupedByDate && idx % this._columnCountInResourceView() === 0 && idx > 0) {
-                    dateOffset++;
-                }
 
                 var view = new ui.scheduler.ResourceView();
 
-                for (var columnIndex = dateOffset; columnIndex < columnCount+dateOffset; columnIndex++) {
+                for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) {
                     view.addTimeSlotCollection(new ui.scheduler.SlotCollection({
                         start: kendo.date.toUtcTime(this._dates[columnIndex]),
                         end: kendo.date.toUtcTime(kendo.date.addDays(this._dates[columnIndex], 1))
                     }));
                 }
-                if (groupedByDate) {
-                    view.addDaySlotCollection(new ui.scheduler.SlotCollection({
-                        start: kendo.date.toUtcTime(this._dates[dateOffset]),
-                        end: kendo.date.toUtcTime(kendo.date.addDays(this._dates[dateOffset], 1))
-                    }));
-                } else {
-                    view.addDaySlotCollection(new ui.scheduler.SlotCollection({
-                        start: kendo.date.toUtcTime(this._dates[0]),
-                        end: kendo.date.toUtcTime(this._dates[this._dates.length - 1])
-                    }));
-                }
+
+                view.addDaySlotCollection(new ui.scheduler.SlotCollection({
+                    start: kendo.date.toUtcTime(this._dates[0]),
+                    end: kendo.date.toUtcTime(this._dates[this._dates.length - 1])
+                }));
 
                 groups.push(view);
             }
@@ -807,13 +770,7 @@ kendo_module({
                     }
                 } else {
                     groupsCount = this._columnCountForLevel(this.columnLevels.length - 2);
-
-                    if (this._isGroupedByDate()) {
-                        groupsCount = this._columnCountForLevel(resources.length);
-                        columnCount = 1;
-                    }
                 }
-
             }
 
             html += '<tbody>';
@@ -867,13 +824,8 @@ kendo_module({
 
             this.refreshLayout();
 
-            var resources = this.groupedResources;
-
-            if (resources.length && this._isGroupedByDate() && !this._isVerticallyGrouped()) {
-                this.columnLevels.push(new Array(this._columnCountForLevel(this.columnLevels.length - 1)));
-            }
-
             var allDayHeader = this.element.find(".k-scheduler-header-all-day td");
+
             if (allDayHeader.length) {
                 this._allDayHeaderHeight = allDayHeader.first()[0].clientHeight;
             }
@@ -994,10 +946,6 @@ kendo_module({
             if (this.groupedResources.length) {
                 var columnCount = this._columnCountInGroup();
 
-                if (this._isGroupedByDate()) {
-                    return Math.floor(index / columnCount);
-                }
-
                 return index - columnCount*Math.floor(index/columnCount);
             }
             return index;
@@ -1008,10 +956,6 @@ kendo_module({
 
             if (!resources.length) {
                 return 0;
-            }
-
-            if (this._isGroupedByDate()) {
-                return this._columnCountForLevel(resources.length)/this._columnCountForLevel(0);
             }
 
             return this._columnOffsetForResource(resources.length);
@@ -1079,10 +1023,6 @@ kendo_module({
             var slotStart;
             var slotEnd;
             var offset = 1;
-
-            if (this._isGroupedByDate()) {
-                offset = this._columnCountInGroup();
-            }
 
             for (idx = 0, length = slots.length; idx < length; idx++) {
                 slotStart = kendo.date.getDate(slots[idx]);
@@ -1255,7 +1195,7 @@ kendo_module({
                 middle: middle,
                 head: head,
                 tail: tail,
-                singleDay: this._dates.length == 1 || this._isGroupedByDate(),
+                singleDay: this._dates.length == 1,
                 resources: this.eventResources(event)
             }, event, {
                 start: event.startTime || event.start,
@@ -1325,7 +1265,6 @@ kendo_module({
 
             var idx;
             var length;
-            var dateOffset = 0;
 
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
@@ -1341,11 +1280,7 @@ kendo_module({
                     if (!isMultiDayEvent) {
 
                         if (this._isInTimeSlot(event)) {
-                            if (this._isGroupedByDate()) {
-                                dateOffset = this._dateIndex(event.start) * this._columnCountInGroup();
-                            }
-
-                            group = this.groups[groupIndex + dateOffset];
+                            group = this.groups[groupIndex];
 
                             ranges = group.slotRanges(event);
 
@@ -1382,11 +1317,7 @@ kendo_module({
                         }
 
                    } else if (this.options.allDaySlot) {
-                       if (this._isGroupedByDate()) {
-                           dateOffset = this._dateIndex(event.start) * this._columnCountInGroup();
-                       }
-
-                       group = this.groups[groupIndex + dateOffset];
+                       group = this.groups[groupIndex];
 
                        ranges = group.slotRanges(event);
 
@@ -1434,55 +1365,16 @@ kendo_module({
                 for (var itemIdx = 0; itemIdx < view.length; itemIdx++) {
                     var value = this._resourceValue(resource, view[itemIdx]);
 
-                    var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: SchedulerView.groupEqFilter(value) }).toArray();
+                    var eventsFilteredByResource = new kendo.data.Query(events).filter({ field: resource.field, operator: SchedulerView.groupEqFilter(value) }).toArray();
 
                     if (resources.length > 1) {
-                        offset = this._renderGroups(tmp, resources.slice(1), offset++);
+                        offset = this._renderGroups(eventsFilteredByResource, resources.slice(1), offset++);
                     } else {
-                        this._renderEvents(this._splitAllDayEvents(tmp), offset++);
+                        this._renderEvents(eventsFilteredByResource, offset++);
                     }
                 }
             }
             return offset;
-        },
-
-        _splitAllDayEvents: function(events) {
-            if (this._isGroupedByDate()) {
-                var result = [];
-
-                for (var idx = 0; idx < events.length; idx++) {
-                    var event = events[idx];
-                    var start = kendo.date.getDate(event.start);
-                    var end = event.end;
-
-                    var eventDurationInDays = Math.ceil((end - start) / kendo.date.MS_PER_DAY);
-
-                    if (eventDurationInDays === 1 && kendo.date.getDate(end).getTime() !== kendo.date.getDate(start).getTime()) {
-                        eventDurationInDays += 1;
-                    }
-
-                    var task = extend({}, event);
-                    result.push(task);
-
-                    if (eventDurationInDays > 1) {
-                        task.end = kendo.date.getDate(start);
-                        task.isAllDay = true;
-
-                        for (var day = 1; day < eventDurationInDays; day++) {
-                            start = kendo.date.getDate(kendo.date.nextDay(task.end));
-                            task = extend({}, event);
-                            task.start = start;
-
-                            task.isAllDay = true;
-                            task.end = kendo.date.getDate(start);
-
-                            result.push(task);
-                        }
-                    }
-                }
-                return result;
-            }
-            return events;
         },
 
         _columnOffsetForResource: function(index) {
