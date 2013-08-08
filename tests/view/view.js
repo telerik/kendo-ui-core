@@ -11,6 +11,13 @@ test("reads contents from a passed string", 1, function() {
     equal(view.render().html(), "<span>Foo</span>");
 });
 
+test("supports tag hoch-poch", 1, function() {
+    var html = 'foo<br><textarea id="html_editor" cols="50" rows="10"></textarea><br>bar',
+        view = new kendo.View(html);
+
+    equal(view.render().html(), html);
+});
+
 test("reads contents from a given script tag", 2, function() {
     var view = new kendo.View("#content");
 

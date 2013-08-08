@@ -14,7 +14,8 @@ kendo_module({
         SCRIPT = "SCRIPT",
         INIT = "init",
         SHOW = "show",
-        HIDE = "hide";
+        HIDE = "hide",
+        sizzleErrorRegExp = /unrecognized expression/;
 
     var View = Observable.extend({
         init: function(content, options) {
@@ -76,7 +77,14 @@ kendo_module({
                 element,
                 content;
 
-            content = $(document.getElementById(that.content) || that.content); // support passing id without #
+            try {
+                content = $(document.getElementById(that.content) || that.content); // support passing id without #
+            } catch(e) {
+                if (sizzleErrorRegExp.test(e.message)) {
+                    content = that.content;
+                }
+            }
+
             element = $("<" + that.tagName + " />").append(content[0].tagName === SCRIPT ? content.html() : content);
 
             // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like the one below
