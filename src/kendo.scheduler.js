@@ -1090,23 +1090,23 @@ kendo_module({
                     var update = false;
 
                     if (dir == "south") {
-                        if (slot instanceof kendo.ui.scheduler.TimeSlot && startSlot.groupIndex == slot.groupIndex && slot.end - kendo.date.toUtcTime(event.start) >= view._timeSlotInterval()) {
+                        if (!slot.isDaySlot && startSlot.groupIndex == slot.groupIndex && slot.end - kendo.date.toUtcTime(event.start) >= view._timeSlotInterval()) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "north") {
-                        if (slot instanceof kendo.ui.scheduler.TimeSlot && endSlot.groupIndex == slot.groupIndex && kendo.date.toUtcTime(event.end) - slot.start >= view._timeSlotInterval()) {
+                        if (!slot.isDaySlot && endSlot.groupIndex == slot.groupIndex && kendo.date.toUtcTime(event.end) - slot.start >= view._timeSlotInterval()) {
                             startSlot = slot;
                             update = true;
                         }
                     } else if (dir == "east") {
-                        if (slot instanceof kendo.ui.scheduler.DaySlot && startSlot.groupIndex == slot.groupIndex &&
+                        if (slot.isDaySlot && startSlot.groupIndex == slot.groupIndex &&
                             kendo.date.toUtcTime(kendo.date.getDate(slot.endDate())) >= kendo.date.toUtcTime(kendo.date.getDate(event.start))) {
                             endSlot = slot;
                             update = true;
                         }
                     } else if (dir == "west") {
-                        if (slot instanceof kendo.ui.scheduler.DaySlot && endSlot.groupIndex == slot.groupIndex &&
+                        if (slot.isDaySlot && endSlot.groupIndex == slot.groupIndex &&
                             kendo.date.toUtcTime(kendo.date.getDate(event.end)) >= kendo.date.toUtcTime(kendo.date.getDate(slot.startDate()))) {
                             startSlot = slot;
                             update = true;

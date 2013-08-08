@@ -378,8 +378,6 @@ kendo_module({
 
                         var collection = group.getTimeSlotCollection(collectionIndex);
 
-                        var index = collection.count();
-
                         var currentDate = this._dates[collectionIndex];
 
                         var currentTime = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
@@ -388,20 +386,7 @@ kendo_module({
 
                         var end = start + interval;
 
-                        collection.addSlot(new kendo.ui.scheduler.TimeSlot({
-                           clientWidth: cell.clientWidth,
-                           clientHeight: cell.clientHeight,
-                           offsetWidth: cell.offsetWidth,
-                           offsetHeight: cell.offsetHeight,
-                           offsetTop: cell.offsetTop,
-                           offsetLeft: cell.offsetLeft,
-                           start: start,
-                           end: end,
-                           element: cell,
-                           index: index,
-                           groupIndex: groupIndex,
-                           columnIndex: collectionIndex
-                        }));
+                        collection.addTimeSlot(cell, start, end);
                     }
 
                     time += interval;
@@ -452,19 +437,7 @@ kendo_module({
 
                     cellCount ++;
 
-                    collection.addSlot(new kendo.ui.scheduler.DaySlot({
-                       clientWidth: cell.clientWidth,
-                       clientHeight: cell.clientHeight,
-                       offsetWidth: cell.offsetWidth,
-                       offsetTop: cell.offsetTop,
-                       offsetLeft: cell.offsetLeft,
-                       start: currentTime,
-                       end: currentTime + kendo.date.MS_PER_DAY,
-                       element: cell,
-                       index: collection.count(),
-                       groupIndex: groupIndex,
-                       columnIndex: group.daySlotCollectionCount() - 1
-                    }));
+                    collection.addDaySlot(cell, currentTime, currentTime + kendo.date.MS_PER_DAY);
                 }
             }
         },
@@ -476,7 +449,7 @@ kendo_module({
             this.groups = [];
 
             for (var idx = 0; idx < groupCount; idx++) {
-                var view = this._addResourceView();
+                var view = this._addResourceView(idx);
 
                 for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) {
                     view.addTimeSlotCollection(this._dates[columnIndex], kendo.date.addDays(this._dates[columnIndex], 1));

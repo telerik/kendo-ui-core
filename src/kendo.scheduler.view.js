@@ -171,23 +171,24 @@ kendo_module({
     kendo.ui.scheduler = {};
 
     var ResourceView = kendo.Class.extend({
-        init: function() {
+        init: function(index) {
+            this._index = index;
             this._timeSlotCollections = [];
             this._daySlotCollections = [];
         },
 
         addTimeSlotCollection: function(startDate, endDate) {
-            var collection = new SlotCollection(startDate, endDate);
-
-            this._timeSlotCollections.push(collection);
-
-            return collection;
+            return this._addCollection(startDate, endDate, this._timeSlotCollections);
         },
 
         addDaySlotCollection: function(startDate, endDate) {
-            var collection = new SlotCollection(startDate, endDate);
+            return this._addCollection(startDate, endDate, this._daySlotCollections);
+        },
 
-            this._daySlotCollections.push(collection);
+        _addCollection: function(startDate, endDate, collections) {
+            var collection = new SlotCollection(startDate, endDate, this._index, collections.length);
+
+            collections.push(collection);
 
             return collection;
         },
@@ -267,8 +268,8 @@ kendo_module({
             var startSlot = start.slot;
             var endSlot = end.slot;
 
-            var startIndex = startSlot.collectionIndex();
-            var endIndex = endSlot.collectionIndex();
+            var startIndex = startSlot.collectionIndex;
+            var endIndex = endSlot.collectionIndex;
 
             var ranges = [];
 
@@ -511,7 +512,7 @@ kendo_module({
     });
 
     var SlotCollection = kendo.Class.extend({
-        init: function(startDate, endDate) {
+        init: function(startDate, endDate, groupIndex, collectionIndex) {
             this._slots = [];
 
             this._events = [];
@@ -519,6 +520,10 @@ kendo_module({
             this._start = kendo.date.toUtcTime(startDate);
 
             this._end = kendo.date.toUtcTime(endDate);
+
+            this._groupIndex = groupIndex;
+
+            this._collectionIndex = collectionIndex;
         },
         refresh: function() {
             for (var slotIndex = 0; slotIndex < this._slots.length; slotIndex++) {
@@ -588,7 +593,14 @@ kendo_module({
         events: function() {
             return this._events;
         },
-        addSlot: function(slot) {
+        addTimeSlot: function(element, start, end) {
+            var slot = new TimeSlot(element, start, end, this._groupIndex, this._collectionIndex, this._slots.length);
+
+            this._slots.push(slot);
+        },
+        addDaySlot: function(element, start, end, eventCount) {
+            var slot = new DaySlot(element, start, end, this._groupIndex, this._collectionIndex, this._slots.length, eventCount);
+
             this._slots.push(slot);
         },
         first: function() {
@@ -602,9 +614,22 @@ kendo_module({
         }
     });
 
-    kendo.ui.scheduler.TimeSlot = kendo.Class.extend({
-        init: function(options) {
-            $.extend(this, options);
+    var Slot = kendo.Class.extend({
+        init: function(element, start, end, groupIndex, collectionIndex, index) {
+            this.element = element;
+            this.clientWidth = element.clientWidth;
+            this.clientHeight = element.clientHeight;
+            this.offsetWidth = element.offsetWidth;
+            this.offsetHeight = element.offsetHeight;
+            this.offsetTop = element.offsetTop;
+            this.offsetLeft = element.offsetLeft;
+            this.start = start;
+            this.end = end;
+            this.element = element;
+            this.groupIndex = groupIndex;
+            this.collectionIndex = collectionIndex;
+            this.index = index;
+            this.isDaySlot = false;
         },
 
         startDate: function() {
@@ -617,22 +642,6 @@ kendo_module({
             var date = new Date(this.end);
 
             return kendo.timezone.apply(date, "Etc/UTC");
-        },
-
-        collectionIndex: function() {
-            return this.columnIndex;
-        },
-
-        refresh: function() {
-            this.offsetTop = this.element.offsetTop;
-        },
-
-        offsetX: function(rtl, offset) {
-            if (rtl) {
-                return this.offsetLeft + offset;
-            } else {
-                return this.offsetLeft + offset;
-            }
         },
 
         startInRange: function(date) {
@@ -644,38 +653,31 @@ kendo_module({
         }
     });
 
-    kendo.ui.scheduler.DaySlot = kendo.Class.extend({
-        init: function(options) {
-            $.extend(this, options);
-        },
-
-        collectionIndex: function() {
-            return this.columnIndex;
-        },
-
+    var TimeSlot = Slot.extend({
         refresh: function() {
-            this.clientHeight = this.element.clientHeight;
             this.offsetTop = this.element.offsetTop;
         },
 
-        startDate: function() {
-            var date = new Date(this.start);
+        offsetX: function(rtl, offset) {
+            if (rtl) {
+                return this.offsetLeft + offset;
+            } else {
+                return this.offsetLeft + offset;
+            }
+        }
+    });
 
-            return kendo.timezone.apply(date, "Etc/UTC");
+    var DaySlot = Slot.extend({
+        init: function(element, start, end, groupIndex, collectionIndex, index, eventCount) {
+            Slot.fn.init.apply(this, arguments);
+
+            this.eventCount = eventCount;
+            this.isDaySlot = true;
+            this.firstChildHeight = this.element.firstChild.offsetHeight + 3;
         },
-
-        endDate: function() {
-            var date = new Date(this.end);
-
-            return kendo.timezone.apply(date, "Etc/UTC");
-        },
-
-        startInRange: function(date) {
-            return this.start <= date && date < this.end;
-        },
-
-        endInRange: function(date) {
-            return this.start < date && date <= this.end;
+        refresh: function() {
+            this.clientHeight = this.element.clientHeight;
+            this.offsetTop = this.element.offsetTop;
         }
     });
 
@@ -691,7 +693,7 @@ kendo_module({
         },
 
         _addResourceView: function() {
-            var resourceView = new ResourceView();
+            var resourceView = new ResourceView(this.groups.length);
 
             this.groups.push(resourceView);
 

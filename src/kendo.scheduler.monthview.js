@@ -753,7 +753,7 @@ kendo_module({
             this.groups = [];
 
             for (var idx = 0; idx < groupCount; idx++) {
-                this._addResourceView();
+                this._addResourceView(idx);
             }
 
             var tableRows = this.content[0].getElementsByTagName("tr");
@@ -781,28 +781,16 @@ kendo_module({
                         var cell = cells[cellIndex];
 
                         var clientHeight = cell.clientHeight;
+
                         var firstChildHeight = cell.firstChild.offsetHeight + 3;
 
                         var start = kendo.date.toUtcTime(kendo.date.addDays(this.startDate(), cellCount));
 
                         cellCount ++;
 
-                        collection.addSlot(new kendo.ui.scheduler.DaySlot({
-                           clientWidth: cell.clientWidth,
-                           clientHeight: clientHeight,
-                           offsetWidth: cell.offsetWidth,
-                           offsetTop: cell.offsetTop,
-                           firstChildHeight: firstChildHeight,
-                           offsetLeft: cell.offsetLeft,
-                           eventCount: Math.floor((clientHeight - firstChildHeight) / (this.options.eventHeight + 3)),
-                           start: start,
-                           end: start + kendo.date.MS_PER_DAY,
-                           element: cell,
-                           isAllDay: true,
-                           index: collection.count(),
-                           groupIndex: groupIndex,
-                           columnIndex: group.daySlotCollectionCount() - 1
-                        }));
+                        var eventCount = Math.floor((clientHeight - firstChildHeight) / (this.options.eventHeight + 3));
+
+                        collection.addDaySlot(cell, start, start + kendo.date.MS_PER_DAY, eventCount);
                     }
                 }
             }
