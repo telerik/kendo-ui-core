@@ -358,7 +358,7 @@ end
 
 def get_type_script(sources)
 
-    sources = sources.find_all { |source| !CodeGen::TypeScript::EXCLUDE.include?(source) }
+    sources = sources.find_all { |source| !CodeGen::TypeScript::EXCLUDE.include?(source) && source.end_with?('.md') }
 
     components = sources.map do |source|
         parser = CodeGen::MarkdownParser.new

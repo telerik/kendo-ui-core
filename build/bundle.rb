@@ -85,8 +85,13 @@ def bundle(options)
     end
     if type_script_sources
         md = FileList["docs/api/{#{type_script_sources.keys[0].join(",")}}/*.md"]
+
+        type_script_build_files = FileList["build/codegen/lib/type_script/*.*"]
+
         type_script_path = File.join(path, "typescript", "kendo.#{type_script_sources.values[0]}.d.ts")
-        type_script type_script_path => md
+
+        type_script type_script_path => [md, type_script_build_files].flatten
+
         prerequisites.push(type_script_path)
     end
 
