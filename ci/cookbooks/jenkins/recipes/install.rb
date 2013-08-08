@@ -4,7 +4,9 @@ apt_repository "jenkins" do
   key "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key"
 end
 
-package "jenkins"
+package "jenkins" do
+    action :upgrade
+end
 
 cookbook_file "/var/lib/jenkins/config.xml" do
     source "config.xml"

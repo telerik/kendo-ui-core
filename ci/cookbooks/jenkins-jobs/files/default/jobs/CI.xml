@@ -95,6 +95,15 @@
       <smartNotify>false</smartNotify>
       <sound>false</sound>
     </hudson.plugins.campfire.CampfireNotifier>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.13">
+      <buildSteps>
+        <hudson.tasks.Shell>
+          <command>rm *-test-results.xml</command>
+        </hudson.tasks.Shell>
+      </buildSteps>
+      <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>true</scriptOnlyIfFailure>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers/>
 </project>

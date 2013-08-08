@@ -23,7 +23,7 @@ end
 bash "install_jenkins_plugins" do
     code %Q{
         sleep 10
-        java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' install-plugin git github chucknorris campfire android-emulator;
+        java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' install-plugin git github chucknorris campfire android-emulator postbuildscript;
         java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' restart;
     }
 end
