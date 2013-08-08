@@ -27,6 +27,10 @@ rule '.min.js' => lambda { |t| t.sub('min.js', 'js') } do |t|
     compilejs(t.source)
 end
 
+rule '.min.js.map' => lambda { |t| t.sub('.map', '') } do |t|
+    # nothing
+end
+
 #Rebuild kendo-config.json based on data present in the source code
 KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
 
