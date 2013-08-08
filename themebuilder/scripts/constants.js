@@ -200,7 +200,7 @@
             "@calendar-footer-background":          constant(BGCOLOR, ".k-calendar .k-footer .k-nav-today"),
             "@calendar-footer-text-decoration":         { readonly: true, value: "none" },
             "@calendar-footer-hover-text-decoration":   { readonly: true, value: "underline" },
-            "@calendar-footer-hover-background":        { readonly: true, value: "@widget-background-color" },
+            "@calendar-footer-hover-background":    constant("background-color", ".k-calendar .k-footer .k-nav-today.k-state-hover"),
             "@calendar-footer-active-background":       { readonly: true, value: "@widget-background-color" },
             "@calendar-header-hover-text-decoration":   constant("text-decoration", ".k-calendar .k-nav-fast.k-state-hover"),
             "@calendar-header-hover-background":        constant("background-color", ".k-calendar .k-nav-fast.k-state-hover"),
@@ -304,8 +304,12 @@
 
                 "@input-text-color":              "Text color"
             },
+			"Calendar": {
+                "@calendar-footer-hover-background": "Calendar footer hover background"
+            },
             "Drop-downs": {
-                "@drop-down-background":          "Background color"
+                "@drop-down-background":          "Background color",
+				"@drop-down-border-color":        "Border color"
             },
             "TabStrip": {
                 "@tabstrip-active-background":    "Tabstrip active content background"
