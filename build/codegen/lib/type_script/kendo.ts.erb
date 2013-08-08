@@ -142,13 +142,13 @@ declare module kendo {
     }
 
     var support: {
-        touch: bool;
-        pointers: bool;
+        touch: boolean;
+        pointers: boolean;
         scrollbar(): number;
-        hasHW3D: bool;
-        hasNativeScrolling: bool;
+        hasHW3D: boolean;
+        hasNativeScrolling: boolean;
         devicePixelRatio: number;
-        placeHolder: bool;
+        placeHolder: boolean;
         zoomLevel: number;
         mobileOS: {
             device: string;
@@ -158,20 +158,20 @@ declare module kendo {
             majorVersion: string;
             minorVersion: string;
             flatVersion: number;
-            appMode: bool;
+            appMode: boolean;
         };
         browser: {
-            msie: bool;
-            webkit: bool;
-            safari: bool;
-            opera: bool;
+            msie: boolean;
+            webkit: boolean;
+            safari: boolean;
+            opera: boolean;
             version: string;
         };
     }
 
     interface TemplateOptions {
         paramName?: string;
-        useWithBlock?: bool;
+        useWithBlock?: boolean;
     }
 
     class Class {
@@ -185,13 +185,13 @@ declare module kendo {
 
         bind(eventName: string, handler: Function): Observable;
         one(eventName: string, handler: Function): Observable;
-        trigger(eventName: string, e?: any): bool;
+        trigger(eventName: string, e?: any): boolean;
         unbind(eventName: string, handler?: any): Observable;
     }
 
     interface ViewOptions {
         tagName?: string;
-        wrap?: bool;
+        wrap?: boolean;
         model?: Object;
         init?: (e: ViewEvent) => void;
         show?: (e: ViewEvent) => void;
@@ -200,7 +200,7 @@ declare module kendo {
 
     interface ViewEvent {
         sender: View;
-        isDefaultPrevented(): bool;
+        isDefaultPrevented(): boolean;
         preventDefault: Function;
     }
 
@@ -228,7 +228,7 @@ declare module kendo {
         current: string;
         root: string;
         change(callback): void;
-        navigate(location: string, silent?: bool);
+        navigate(location: string, silent?: boolean);
     }
 
     var history: History;
@@ -241,7 +241,7 @@ declare module kendo {
 
     interface RouterEvent {
         sender: Router;
-        isDefaultPrevented(): bool;
+        isDefaultPrevented(): boolean;
         preventDefault: Function;
         url: string;
     }
@@ -258,7 +258,7 @@ declare module kendo {
         start(): void;
         destroy(): void;
         route(route: string, callback: Function): void;
-        navigate(location: string, silent?: bool);
+        navigate(location: string, silent?: boolean);
         routes: Route[];
     }
 
@@ -378,8 +378,8 @@ declare module kendo.data {
         source: any;
         parents: any[];
         path: string;
-        dependencies: { [path: string]: bool; };
-        observable: bool;
+        dependencies: { [path: string]: boolean; };
+        observable: boolean;
         constructor(parents: any[], path: string);
         change(e): void;
         start(source): void;
@@ -435,10 +435,10 @@ declare module kendo.data {
         defaults: any;
         constructor(data?: any);
         init(data?: any):void;
-        dirty: bool;
+        dirty: boolean;
         id: any;
-        editable(field: string): bool;
-        isNew(): bool;
+        editable(field: string): boolean;
+        isNew(): boolean;
         static idField: string;
         static fields: DataSourceSchemaModelFields;
         static define(options: DataSourceSchemaModelWithFieldsObject): {
@@ -460,7 +460,7 @@ declare module kendo.data {
         description: string;
         end: Date;
         endTimezone: string;
-        isAllDay: bool;
+        isAllDay: boolean;
         id: any;
         start: Date;
         startTimezone: string;
@@ -487,8 +487,8 @@ declare module kendo.data {
         append(model: any): void;
         level(): number;
         load(id: any): void;
-        loaded(value: bool): void;
-        loaded(): bool;
+        loaded(value: boolean): void;
+        loaded(): boolean;
         parentNode(): Node;
     }
 
@@ -601,15 +601,15 @@ declare module kendo.data {
         field?: string;
         from?: string;
         defaultValue?: any;
-        editable?: bool;
-        nullable?: bool;
+        editable?: boolean;
+        nullable?: boolean;
         parse?: Function;
         type?: string;
         validation?: DataSourceSchemaModelFieldValidation;
     }
 
     interface DataSourceSchemaModelFieldValidation {
-        required?: bool;
+        required?: boolean;
         min?: any;
         max?: any;
     }
@@ -633,10 +633,10 @@ declare module kendo.data {
         indexOf(item: any): number;
         forEach(callback: (item, index: number, source: ObservableArray) => void ): void;
         map(callback: (item, index: number, source: ObservableArray) => any): any[];
-        filter(callback: (item, index: number, source: ObservableArray) => bool): any[];
-        find(callback: (item, index: number, source: ObservableArray) => bool): any;
-        every(callback: (item, index: number, source: ObservableArray) => bool): bool;
-        some(callback: (item, index: number, source: ObservableArray) => bool): bool;
+        filter(callback: (item, index: number, source: ObservableArray) => boolean): any[];
+        find(callback: (item, index: number, source: ObservableArray) => boolean): any;
+        every(callback: (item, index: number, source: ObservableArray) => boolean): boolean;
+        some(callback: (item, index: number, source: ObservableArray) => boolean): boolean;
         remove(item): void;
     }
 
@@ -670,7 +670,7 @@ declare module kendo.data {
         getByUid(uid: string): kendo.data.Model;
         group(groups: any): void;
         group(): any;
-        hasChanges(): bool;
+        hasChanges(): boolean;
         indexOf(value: kendo.data.ObservableObject): number;
         insert(index: number, model: kendo.data.Model): kendo.data.Model;
         insert(index: number, model: Object): kendo.data.Model;
@@ -736,7 +736,7 @@ declare module kendo.data {
     }
 
     interface DataSourceTransportCreate {
-        cache?: bool;
+        cache?: boolean;
         contentType?: string;
         data?: any;
         dataType?: string;
@@ -745,7 +745,7 @@ declare module kendo.data {
     }
 
     interface DataSourceTransportDestroy {
-        cache?: bool;
+        cache?: boolean;
         contentType?: string;
         data?: any;
         dataType?: string;
@@ -754,7 +754,7 @@ declare module kendo.data {
     }
 
     interface DataSourceTransportRead {
-        cache?: bool;
+        cache?: boolean;
         contentType?: string;
         data?: any;
         dataType?: string;
@@ -763,7 +763,7 @@ declare module kendo.data {
     }
 
     interface DataSourceTransportUpdate {
-        cache?: bool;
+        cache?: boolean;
         contentType?: string;
         data?: any;
         dataType?: string;
@@ -819,19 +819,19 @@ declare module kendo.data {
 
     interface DataSourceOptions {
         aggregate?: DataSourceAggregateItem[];
-        autoSync?: bool;
-        batch?: bool;
+        autoSync?: boolean;
+        batch?: boolean;
         data?: any;
         filter?: any;
         group?: DataSourceGroupItem[];
         page?: number;
         pageSize?: number;
         schema?: DataSourceSchema;
-        serverAggregates?: bool;
-        serverFiltering?: bool;
-        serverGrouping?: bool;
-        serverPaging?: bool;
-        serverSorting?: bool;
+        serverAggregates?: boolean;
+        serverFiltering?: boolean;
+        serverGrouping?: boolean;
+        serverPaging?: boolean;
+        serverSorting?: boolean;
         sort?: any;
         transport?: DataSourceTransport;
         type?: string;
@@ -852,7 +852,7 @@ declare module kendo.data {
     interface DataSourceGroup extends DataSourceItemOrGroup {
         aggregates: any[];
         field: string;
-        hasSubgroups: bool;
+        hasSubgroups: boolean;
         items: DataSourceItemOrGroup[];
         value: any;
     }
@@ -887,7 +887,7 @@ declare module kendo.data.transports {
 }
 
 declare module kendo.ui {
-    function progress(container: JQuery, toggle: bool);
+    function progress(container: JQuery, toggle: boolean);
 
     class Widget extends Observable {
         static fn: Widget;
@@ -1021,13 +1021,13 @@ declare module kendo.mobile {
     }
 
     interface ApplicationOptions {
-        hideAddressBar?: bool;
-        updateDocumentTitle?: bool;
+        hideAddressBar?: boolean;
+        updateDocumentTitle?: boolean;
         initial?: string;
         layout?: string;
         loading?: string;
         platform?: string;
-        serverNavigation?: bool;
+        serverNavigation?: boolean;
         transition?: string;
     }
 

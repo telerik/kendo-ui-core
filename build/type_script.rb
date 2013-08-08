@@ -34,7 +34,7 @@ module CodeGen::TypeScript
     TYPES = {
         'Number' => 'number',
         'String' => 'string',
-        'Boolean' => 'bool',
+        'Boolean' => 'boolean',
         'Document' => 'Document',
         'Range' => 'Range',
         'Object' => 'any',
