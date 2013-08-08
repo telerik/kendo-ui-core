@@ -216,7 +216,10 @@
 
             test("View selects selection bigger than current column", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 8, 2, 0) });
+                    selection = createSelection({
+                        start: new Date(2013, 6, 7, 0, 0),
+                        end: new Date(2013, 6, 8, 2, 0)
+                    });
 
                 view.select(selection);
 
@@ -519,7 +522,10 @@
 
             test("View increases selection on DOWN arrow + ShiftKey", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 7, 1) });
+                    selection = createSelection({
+                        start: new Date(2013, 6, 7, 0, 0),
+                        end: new Date(2013, 6, 7, 1)
+                    });
 
                 view.move(selection, keys.DOWN, true);
 
@@ -529,12 +535,16 @@
 
             test("View decreases selection on DOWN arrow + ShiftKey", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7, 10), end: new Date(2013, 6, 7, 8) });
+                    selection = createSelection({
+                        start: new Date(2013, 6, 7, 8),
+                        end: new Date(2013, 6, 7, 10),
+                        backward: true
+                    });
 
                 view.move(selection, keys.DOWN, true);
 
-                deepEqual(selection.start, new Date(2013, 6, 7, 10));
-                deepEqual(selection.end, new Date(2013, 6, 7, 9));
+                deepEqual(selection.start, new Date(2013, 6, 7, 9));
+                deepEqual(selection.end, new Date(2013, 6, 7, 10));
             });
 
             test("View do nothing if Shift + DOWN when isAllDay", function() {
@@ -624,7 +634,11 @@
 
             test("View selects first slot if isAllDay", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7, 0, 0), end: new Date(2013, 6, 8, 0, 0), isAllDay: true });
+                    selection = createSelection({
+                        start: new Date(2013, 6, 7, 0, 0),
+                        end: new Date(2013, 6, 8, 0, 0),
+                        isAllDay: true
+                    });
 
                 view.move(selection, keys.DOWN);
 
@@ -683,7 +697,11 @@
 
             test("View moves selection to the right allDay event", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
-                    selection = createSelection({ start: new Date(2013, 6, 7), end: new Date(2013, 6, 8), isAllDay: true });
+                    selection = createSelection({
+                        start: new Date(2013, 6, 7),
+                        end: new Date(2013, 6, 8),
+                        isAllDay: true
+                    });
 
                 view.move(selection, keys.RIGHT);
 
@@ -1146,7 +1164,6 @@
                     start: new Date(2013, 6, 7),
                     end: new Date(2013, 6, 7, 1)
                 });
-
 
                 view.moveToEvent(selection);
 

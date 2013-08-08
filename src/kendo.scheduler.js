@@ -824,14 +824,14 @@ kendo_module({
                     var backward = dataItem.end < selection.end,
                         view = this.view();
 
-                    selection.end = new Date(dataItem.end);
+                    selection.end = dataItem.endDate ? dataItem.endDate() : dataItem.end;
 
                     if (backward && view._timeSlotInterval) {
                         kendo.date.setTime(selection.end, -view._timeSlotInterval());
                     }
                 } else {
-                    selection.start = new Date(dataItem.start.getTime());
-                    selection.end = new Date(dataItem.end.getTime());
+                    selection.start = dataItem.startDate ? dataItem.startDate() : dataItem.start;
+                    selection.end = dataItem.endDate ? dataItem.endDate() : dataItem.end;
                 }
 
                 selection.isAllDay = dataItem.isAllDay;

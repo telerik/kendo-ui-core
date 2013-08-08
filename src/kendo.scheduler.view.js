@@ -345,11 +345,31 @@ kendo_module({
         },
 
         ranges: function(startTime, endTime, isDay, isAllDay) {
+            if (typeof startTime != "number") {
+                startTime = kendo.date.toUtcTime(startTime);
+            }
+
+            if (typeof endTime != "number") {
+                endTime = kendo.date.toUtcTime(endTime);
+            }
+
             if (isDay) {
                 return this.daySlotRanges(startTime, endTime, isAllDay);
             }
 
             return this.timeSlotRanges(startTime, endTime);
+        },
+
+        _startCollection: function(date, collections) {
+            for (var collectionIndex = 0; collectionIndex < collections.length; collectionIndex++) {
+                var collection = collections[collectionIndex];
+
+                if (collection.startInRange(date)) {
+                    return collection;
+                }
+            }
+
+            return null;
         },
 
         _endCollection: function(date, collections) {
@@ -362,6 +382,39 @@ kendo_module({
             }
 
             return null;
+        },
+
+        horizontalSlot: function(date, daySlot, last) {
+            var collection;
+            var slot = this.ranges(date, date, daySlot, false)[0].start;
+
+            if (last) {
+                collection = daySlot ? this._daySlotCollections : this._timeSlotCollections;
+
+                collection = collection[collection.length - 1];
+            } else {
+                collection = this._collection(daySlot ? slot.collectionIndex() : 0, daySlot);
+            }
+
+
+            if (daySlot) {
+                return collection[last ? "last" : "first"]();
+            } else {
+                return collection.at(slot.index);
+            }
+        },
+
+        verticalSlot: function(date, last) {
+            var collection;
+            var slot = this.ranges(date, date, false, true)[0].start;
+
+            if (last) {
+                collection = this._collection(slot.collectionIndex(), false);
+            } else {
+                collection = this._collection(0, true);
+            }
+
+            return last ? collection.last() : collection.at(slot.collectionIndex());
         },
 
         siblingCollectionSlot: function(slot, isAllDay, direction) {
@@ -450,6 +503,29 @@ kendo_module({
             }
 
             return collections[index];
+        },
+
+        _startSlot: function(time, collections, isAllDay) {
+            var collection = this._startCollection(time, collections);
+
+            var inRange = true;
+
+            if (!collection) {
+                collection = collections[0];
+                inRange = false;
+            }
+
+            var slot = collection.slotByStartDate(time, isAllDay);
+
+            if (!slot) {
+                slot = collection.first();
+                inRange = false;
+            }
+
+            return {
+                slot: slot,
+                inRange: inRange
+            };
         },
 
         _endSlot: function(time, collections, isAllDay) {
@@ -832,8 +908,8 @@ kendo_module({
             if (event) {
                 return {
                     event: event,
-                    start: slots[event.start].start,
-                    end: slots[event.end].end,
+                    start: slots[event.start].startDate(),
+                    end: slots[event.end].endDate(),
                     isAllDay: true
                 };
             }
@@ -865,8 +941,8 @@ kendo_module({
 
                 return {
                     event: event,
-                    start: slots[event.start].start,
-                    end: slots[event.end].end,
+                    start: slots[event.start].startDate(),
+                    end: slots[event.end].endDate(),
                     isAllDay: false
                 };
             }
@@ -924,7 +1000,7 @@ kendo_module({
             var eventInfo;
             var isAllDay = !!selection.isAllDay;
             var group = this.groups[selection.groupIndex];
-            var slot = group.slot(selection.start, isAllDay, true);
+            var slot = group.ranges(selection.start, selection.end, isAllDay, false)[0].start;
             var events = selection.events;
 
             var groupIndex = selection.groupIndex;

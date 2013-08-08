@@ -1365,8 +1365,8 @@ kendo_module({
                 var slot = this.groups[selection.groupIndex || 0]._collection(0, false).first();
 
                 selection.isAllDay = slot.isAllDay;
-                selection.start = slot.start;
-                selection.end = slot.end;
+                selection.start = slot.startDate();
+                selection.end = slot.endDate();
             }
         },
 
@@ -1446,8 +1446,9 @@ kendo_module({
 
             var handled = false;
             var group = this.groups[selection.groupIndex];
-            var startSlot = group.slot(start, isAllDay, true);
-            var endSlot = group.slot(end, isAllDay, false);
+            var ranges = group.ranges(selection.start, selection.end, isAllDay, false);
+            var startSlot = ranges[0].start;
+            var endSlot = ranges[ranges.length - 1].end;
             var vertical = this._isVerticallyGrouped();
             var direction, slot, siblingGroup;
 
@@ -1496,7 +1497,7 @@ kendo_module({
                     siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
 
                     if (siblingGroup) {
-                        startSlot = endSlot = group.horizontalSlot(date, isAllDay, !isLeft, isLeft);
+                        startSlot = endSlot = group.horizontalSlot(start, isAllDay, isLeft);
                         selection.groupIndex += direction;
                     } else {
                         startSlot = endSlot = null;
@@ -1522,14 +1523,14 @@ kendo_module({
             if (handled) {
                 if (shift) {
                     if (selection.backward && startSlot) {
-                        selection.start = startSlot.start;
+                        selection.start = startSlot.startDate();
                     } else if (!selection.backward && endSlot) {
-                        selection.end = endSlot.end;
+                        selection.end = endSlot.endDate();
                     }
                 } else if (startSlot && endSlot) {
                     selection.isAllDay = startSlot.isAllDay;
-                    selection.start = startSlot.start;
-                    selection.end = endSlot.end;
+                    selection.start = startSlot.startDate();
+                    selection.end = endSlot.endDate();
                 }
 
                 selection.events = [];
