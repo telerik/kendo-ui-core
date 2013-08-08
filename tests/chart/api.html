@@ -505,6 +505,18 @@
                     equal(chart.options.series[0].data.length, 1);
                 });
 
+                test("calls redraw implicitly", function() {
+                    createChart();
+
+                    stubMethod(Chart.fn, "redraw", function() {
+                        ok(true);
+                    }, function() {
+                        chart.setOptions({
+                            foo: true
+                        });
+                    });
+                });
+
             })();
 
         </script>

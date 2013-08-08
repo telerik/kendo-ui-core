@@ -1196,6 +1196,8 @@ kendo_module({
                     DataSource.create(options.dataSource)
                 );
             }
+
+            chart.redraw();
         },
 
         destroy: function() {
