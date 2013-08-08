@@ -544,7 +544,7 @@ namespace :build do
         zip_bundles
     end
 
-    def copy_binaries(destination)
+    def publish_binaries(destination)
         sh "if exist L: ( net use L: /delete /yes )"
         sh "net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69"
 
@@ -561,6 +561,16 @@ namespace :build do
         desc 'Update the /production build machine web site'
         task :demos => [ 'demos:staging', 'download_builder:staging' ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
+        end
+
+        desc 'Build and publish ASP.NET MVC DLLs'
+        task :aspnetmvc_binaries => [ "mvc:binaries" ] do
+            publish_binaries "Production"
+        end
+
+        desc 'Copy ASP.NET MVC DLLs from distribution archive'
+        task :get_binaries do
+            sh "rsync -avc --del #{ARCHIVE_ROOT}/Production/binaries/* dist/binaries/"
         end
 
         changelog = "#{WEB_ROOT}/changelog/index.html"
@@ -592,7 +602,12 @@ namespace :build do
 
         desc 'Build and publish ASP.NET MVC DLLs'
         task :aspnetmvc_binaries => [ "mvc:binaries" ] do
-            copy_binaries "Stable"
+            publish_binaries "Stable"
+        end
+
+        desc 'Copy ASP.NET MVC DLLs from distribution archive'
+        task :get_binaries do
+            sh "rsync -avc --del #{ARCHIVE_ROOT}/Stable/binaries/* dist/binaries/"
         end
 
         desc 'Package and publish bundles to the Stable directory'
