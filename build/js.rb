@@ -19,6 +19,7 @@ SRC_JS = FileList['src/kendo*.js']
 MIN_JS = SRC_JS.ext('min.js').exclude(JS_BUNDLES_MIN)
 
 CLEAN.include(MIN_JS).include(JS_BUNDLES).include(JS_BUNDLES_MIN)
+CLEAN.include(FileList[MIN_JS].ext(".js.map"))
 
 JS_BUILDFILE = 'build/js.rb'
 
