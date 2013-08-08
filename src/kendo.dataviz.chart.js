@@ -154,6 +154,7 @@ kendo_module({
         SELECT_END = "selectEnd",
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
+        STEP_AREA = "stepArea",
         STEP_LINE = "stepLine",
         STRING = "string",
         TIME_PER_SECOND = 1000,
@@ -183,6 +184,7 @@ kendo_module({
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
         VERTICAL_LINE = "verticalLine",
+        VERTICAL_STEP_AREA = "verticalStepArea",
         VERTICAL_STEP_LINE = "verticalStepLine",
         WEEKS = "weeks",
         WHITE = "#fff",
@@ -831,7 +833,7 @@ kendo_module({
                 tooltipOptions, owner, seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords)) {
-                if (point && point.series && inArray(point.series.type, [ LINE, STEP_LINE, AREA ])) {
+                if (point && point.series && inArray(point.series.type, [ LINE, STEP_LINE, AREA, STEP_AREA ])) {
                     owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
@@ -4358,9 +4360,10 @@ kendo_module({
                 dir = reverse ? 2 : 1,
                 revDir = reverse ? 1 : 2,
                 vertical = categoryAxis.options.vertical,
-                linePoints = segment.linePoints.concat(visualPoints || []),
+                linePoints = segment.linePoints,
                 length = linePoints.length,
                 points = [],
+                points1 = [],
                 prevPoint, point, i,
                 prevMarkerBoxCenter, markerBoxCenter;
 
@@ -4393,7 +4396,39 @@ kendo_module({
                     }
                 }
             }
+            if (visualPoints && visualPoints.length) {
+                for (i = 1; i < visualPoints.length; i++) {
+                    prevPoint = visualPoints[i - 1];
+                    point = visualPoints[i];
+                    prevMarkerBoxCenter = prevPoint.markerBox().center();
+                    markerBoxCenter = point.markerBox().center();
+                    if (categoryAxis.options.justified) {
+                        points1.push(Point2D(prevMarkerBoxCenter.x, prevMarkerBoxCenter.y));
+                        points1.push(Point2D(markerBoxCenter.x, prevMarkerBoxCenter.y));
+                        points1.push(Point2D(markerBoxCenter.x, markerBoxCenter.y));
+                    } else {
+                        if (vertical) {
+                            points1.push(Point2D(prevMarkerBoxCenter.x, prevPoint.box[Y + dir]));
+                            points1.push(Point2D(prevMarkerBoxCenter.x, prevPoint.box[Y + revDir]));
+                            if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
+                                points1.push(Point2D(markerBoxCenter.x, prevPoint.box[Y + revDir]));
+                            }
+                            points1.push(Point2D(markerBoxCenter.x, point.box[Y + dir]));
+                            points1.push(Point2D(markerBoxCenter.x, point.box[Y + revDir]));
+                        } else {
+                            points1.push(Point2D(prevPoint.box[X + dir], prevMarkerBoxCenter.y));
+                            points1.push(Point2D(prevPoint.box[X + revDir], prevMarkerBoxCenter.y));
+                            if (chart.seriesMissingValues(segment.series) === INTERPOLATE) {
+                                points1.push(Point2D(prevPoint.box[X + revDir], markerBoxCenter.y));
+                            }
+                            points1.push(Point2D(point.box[X + dir], markerBoxCenter.y));
+                            points1.push(Point2D(point.box[X + revDir], markerBoxCenter.y));
+                        }
+                    }
+                }
 
+                points = points.concat(points1.slice(0).reverse());
+            }
             return points;
         }
     });
@@ -4494,6 +4529,109 @@ kendo_module({
             }
 
             return new AreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
+        },
+
+        seriesMissingValues: function(series) {
+            return series.missingValues || ZERO;
+        }
+    });
+
+    var StepAreaSegment = StepLineSegment.extend({
+        init: function(linePoints, stackPoints, currentSeries, seriesIx) {
+            var segment = this;
+
+            segment.stackPoints = stackPoints;
+
+            LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
+        },
+
+        points: function() {
+            var segment = this,
+                chart = segment.parent,
+                plotArea = chart.plotArea,
+                invertAxes = chart.options.invertAxes,
+                valueAxis = chart.seriesValueAxis(segment.series),
+                valueAxisLineBox = valueAxis.lineBox(),
+                categoryAxis = plotArea.seriesCategoryAxis(segment.series),
+                categoryAxisLineBox = categoryAxis.lineBox(),
+                end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
+                stackPoints = segment.stackPoints,
+                points = StepLineSegment.fn.points.call(segment, stackPoints),
+                pos = invertAxes ? X : Y,
+                firstPoint, lastPoint;
+
+            end = limitValue(end, valueAxisLineBox[pos + 1], valueAxisLineBox[pos + 2]);
+            if (!segment.stackPoints && points.length > 1) {
+                firstPoint = points[0];
+                lastPoint = last(points);
+
+                if (invertAxes) {
+                    points.unshift(Point2D(end, firstPoint.y));
+                    points.push(Point2D(end, lastPoint.y));
+                } else {
+                    points.unshift(Point2D(firstPoint.x, end));
+                    points.push(Point2D(lastPoint.x, end));
+                }
+            }
+
+            return points;
+        },
+
+        getViewElements: function(view) {
+            var segment = this,
+                series = segment.series,
+                defaults = series._defaults,
+                color = series.color,
+                lineOptions,
+                linePoints = StepLineSegment.fn.points.call(segment),
+                areaPoints = segment.points();
+
+            ChartElement.fn.getViewElements.call(segment, view);
+
+            if (isFn(color) && defaults) {
+                color = defaults.color;
+            }
+
+            lineOptions = deepExtend({
+                    color: color,
+                    opacity: series.opacity
+                }, series.line
+            );
+
+            return [
+                view.createPolyline(areaPoints, false, {
+                    id: segment.options.id,
+                    fillOpacity: series.opacity,
+                    fill: color,
+                    stack: series.stack,
+                    data: { modelId: segment.options.modelId },
+                    zIndex: -1
+                }),
+                view.createPolyline(linePoints, false, {
+                    stroke: lineOptions.color,
+                    strokeWidth: lineOptions.width,
+                    strokeOpacity: lineOptions.opacity,
+                    dashType: lineOptions.dashType,
+                    data: { modelId: segment.options.modelId },
+                    strokeLineCap: "butt",
+                    zIndex: -1,
+                    align: false
+                })
+            ];
+        }
+    });
+
+    var StepAreaChart = AreaChart.extend({
+        createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
+            var chart = this,
+                options = chart.options,
+                stackPoints;
+
+            if (options.isStacked && seriesIx > 0 && prevSegment) {
+                stackPoints = prevSegment.linePoints;
+            }
+
+            return new StepAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
         },
 
         seriesMissingValues: function(series) {
@@ -7114,7 +7252,7 @@ kendo_module({
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
-                    series[0].type, [BAR, BULLET, VERTICAL_STEP_LINE, VERTICAL_LINE, VERTICAL_AREA]
+                    series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_STEP_LINE, VERTICAL_AREA, VERTICAL_STEP_AREA]
                 );
             }
 
@@ -7193,6 +7331,11 @@ kendo_module({
 
                 plotArea.createStepLineChart(
                     filterSeriesByType(filteredSeries, [STEP_LINE, VERTICAL_STEP_LINE]),
+                    pane
+                );
+
+                plotArea.createStepAreaChart(
+                    filterSeriesByType(filteredSeries, [STEP_AREA, VERTICAL_STEP_AREA]),
                     pane
                 );
 
@@ -7388,13 +7531,29 @@ kendo_module({
 
             var plotArea = this,
                 firstSeries = series[0],
-                lineChart = new StepLineChart(plotArea, {
+                stepAreaChart = new StepLineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
                     isStacked: firstSeries.stack && series.length > 1,
                     series: series
                 });
 
-            plotArea.appendChart(lineChart, pane);
+            plotArea.appendChart(stepAreaChart, pane);
+        },
+
+        createStepAreaChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                stepAreaChart = new StepAreaChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    isStacked: firstSeries.stack && series.length > 1,
+                    series: series
+                });
+
+            plotArea.appendChart(stepAreaChart, pane);
         },
 
         createAreaChart: function(series, pane) {
@@ -7530,7 +7689,7 @@ kendo_module({
 
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
-                if (!inArray(currentSeries.type, [AREA, VERTICAL_AREA])) {
+                if (!inArray(currentSeries.type, [AREA, VERTICAL_AREA, STEP_AREA, VERTICAL_STEP_AREA])) {
                     return false;
                 }
             }
@@ -10071,7 +10230,7 @@ kendo_module({
     dataviz.ui.plugin(Chart);
 
     PlotAreaFactory.current.register(CategoricalPlotArea, [
-        BAR, COLUMN, LINE, VERTICAL_LINE, STEP_LINE, VERTICAL_STEP_LINE, AREA, VERTICAL_AREA,
+        BAR, COLUMN, LINE, VERTICAL_LINE, STEP_LINE, VERTICAL_STEP_LINE, STEP_AREA, VERTICAL_STEP_AREA, AREA, VERTICAL_AREA,
         CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
     ]);
 
@@ -10083,7 +10242,7 @@ kendo_module({
     PlotAreaFactory.current.register(DonutPlotArea, [DONUT]);
 
     SeriesBinder.current.register(
-        [BAR, COLUMN, LINE, STEP_LINE, VERTICAL_STEP_LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+        [BAR, COLUMN, LINE, STEP_LINE, VERTICAL_STEP_LINE, VERTICAL_STEP_AREA, VERTICAL_LINE, AREA, VERTICAL_AREA],
         [VALUE], [CATEGORY, COLOR, NOTE_TEXT]
     );
 

@@ -46,6 +46,20 @@ kendo_module({
                 vericalLine: {
                     width: 4
                 },
+                stepLine: {
+                    width: 4,
+                    aggregate: {
+                        value: "max",
+                        noteText: "first"
+                    }
+                },
+                vericalStepLine: {
+                    width: 4,
+                    aggregate: {
+                        value: "max",
+                        noteText: "first"
+                    }
+                },
                 scatterLine: {
                     width: 1
                 },
@@ -60,6 +74,21 @@ kendo_module({
                         width: 0
                     }
                 },
+                stepArea: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    },
+                    line: {
+                        opacity: 1,
+                        width: 0
+                    },
+                    aggregate: {
+                        value: "max",
+                        noteText: "first"
+                    }
+                },
                 verticalArea: {
                     opacity: 0.4,
                     markers: {
@@ -69,6 +98,21 @@ kendo_module({
                     line: {
                         opacity: 1,
                         width: 0
+                    }
+                },
+                verticalStepArea: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    },
+                    line: {
+                        opacity: 1,
+                        width: 0
+                    },
+                    aggregate: {
+                        value: "max",
+                        noteText: "first"
                     }
                 },
                 radarLine: {
