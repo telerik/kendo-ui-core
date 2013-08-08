@@ -767,13 +767,8 @@ kendo_module({
                 }
 
                 for (var rowIndex = rowMultiplier*rowCount; rowIndex < (rowMultiplier+1) *rowCount; rowIndex++) {
-                    var collection = new kendo.ui.scheduler.SlotCollection({
-                        start: kendo.date.toUtcTime(kendo.date.addDays(this.startDate(), cellCount)),
-                        end: kendo.date.toUtcTime(kendo.date.addDays(this.startDate(), cellCount + columnCount))
-                    });
-
                     var group = this.groups[groupIndex];
-                    group.addDaySlotCollection(collection);
+                    var collection = group.addDaySlotCollection(kendo.date.addDays(this.startDate(), cellCount), kendo.date.addDays(this.startDate(), cellCount + columnCount));
 
                     var cells = tableRows[rowIndex].children;
                     var cellMultiplier = 0;

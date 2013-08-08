@@ -479,16 +479,10 @@ kendo_module({
                 var view = this._addResourceView();
 
                 for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-                    view.addTimeSlotCollection(new ui.scheduler.SlotCollection({
-                        start: kendo.date.toUtcTime(this._dates[columnIndex]),
-                        end: kendo.date.toUtcTime(kendo.date.addDays(this._dates[columnIndex], 1))
-                    }));
+                    view.addTimeSlotCollection(this._dates[columnIndex], kendo.date.addDays(this._dates[columnIndex], 1));
                 }
 
-                view.addDaySlotCollection(new ui.scheduler.SlotCollection({
-                    start: kendo.date.toUtcTime(this._dates[0]),
-                    end: kendo.date.toUtcTime(this._dates[this._dates.length - 1])
-                }));
+                view.addDaySlotCollection(this._dates[0], this._dates[this._dates.length - 1]);
             }
 
             this._timeSlotGroups(groupCount, columnCount);

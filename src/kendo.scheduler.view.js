@@ -176,6 +176,22 @@ kendo_module({
             this._daySlotCollections = [];
         },
 
+        addTimeSlotCollection: function(startDate, endDate) {
+            var collection = new SlotCollection(startDate, endDate);
+
+            this._timeSlotCollections.push(collection);
+
+            return collection;
+        },
+
+        addDaySlotCollection: function(startDate, endDate) {
+            var collection = new SlotCollection(startDate, endDate);
+
+            this._daySlotCollections.push(collection);
+
+            return collection;
+        },
+
         timeSlotCollectionCount: function() {
             return this._timeSlotCollections.length;
         },
@@ -205,14 +221,6 @@ kendo_module({
                    }
                }
            }
-        },
-
-        addTimeSlotCollection: function(collection) {
-            this._timeSlotCollections.push(collection);
-        },
-
-        addDaySlotCollection: function(collection) {
-            this._daySlotCollections.push(collection);
         },
 
         refresh: function() {
@@ -502,11 +510,15 @@ kendo_module({
         }
     });
 
-    kendo.ui.scheduler.SlotCollection = kendo.Class.extend({
-        init: function(options) {
+    var SlotCollection = kendo.Class.extend({
+        init: function(startDate, endDate) {
             this._slots = [];
+
             this._events = [];
-            $.extend(this, options);
+
+            this._start = kendo.date.toUtcTime(startDate);
+
+            this._end = kendo.date.toUtcTime(endDate);
         },
         refresh: function() {
             for (var slotIndex = 0; slotIndex < this._slots.length; slotIndex++) {
@@ -523,11 +535,11 @@ kendo_module({
         },
 
         startInRange: function(date) {
-            return this.start <= date && date < this.end;
+            return this._start <= date && date < this._end;
         },
 
         endInRange: function(date) {
-            return this.start < date && date <= this.end;
+            return this._start < date && date <= this._end;
         },
 
         slotByStartDate: function(date) {
