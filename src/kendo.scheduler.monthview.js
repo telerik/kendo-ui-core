@@ -750,13 +750,11 @@ kendo_module({
             var columnCount =  NUMBER_OF_COLUMNS;
             var rowCount =  NUMBER_OF_ROWS;
 
-            var groups = [];
+            this.groups = [];
 
             for (var idx = 0; idx < groupCount; idx++) {
-                groups.push(new ui.scheduler.ResourceView());
+                this._addResourceView();
             }
-
-            this.groups = groups;
 
             var tableRows = this.content[0].getElementsByTagName("tr");
 
@@ -774,7 +772,7 @@ kendo_module({
                         end: kendo.date.toUtcTime(kendo.date.addDays(this.startDate(), cellCount + columnCount))
                     });
 
-                    var group = groups[groupIndex];
+                    var group = this.groups[groupIndex];
                     group.addDaySlotCollection(collection);
 
                     var cells = tableRows[rowIndex].children;

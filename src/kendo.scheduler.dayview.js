@@ -473,11 +473,10 @@ kendo_module({
             var groupCount = this._groupCount();
             var columnCount = this._columnCountInResourceView();
 
-            var groups = [];
+            this.groups = [];
 
             for (var idx = 0; idx < groupCount; idx++) {
-
-                var view = new ui.scheduler.ResourceView();
+                var view = this._addResourceView();
 
                 for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) {
                     view.addTimeSlotCollection(new ui.scheduler.SlotCollection({
@@ -490,11 +489,7 @@ kendo_module({
                     start: kendo.date.toUtcTime(this._dates[0]),
                     end: kendo.date.toUtcTime(this._dates[this._dates.length - 1])
                 }));
-
-                groups.push(view);
             }
-
-            this.groups = groups;
 
             this._timeSlotGroups(groupCount, columnCount);
 

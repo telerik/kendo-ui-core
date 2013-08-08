@@ -170,11 +170,10 @@ kendo_module({
 
     kendo.ui.scheduler = {};
 
-    kendo.ui.scheduler.ResourceView = kendo.Class.extend({
-        init: function(options) {
+    var ResourceView = kendo.Class.extend({
+        init: function() {
             this._timeSlotCollections = [];
             this._daySlotCollections = [];
-            $.extend(this, options);
         },
 
         timeSlotCollectionCount: function() {
@@ -676,8 +675,15 @@ kendo_module({
             this._resizeHint = $();
             this._moveHint = $();
             this._cellId = kendo.guid();
-
             this._resourcesForGroups();
+        },
+
+        _addResourceView: function() {
+            var resourceView = new ResourceView();
+
+            this.groups.push(resourceView);
+
+            return resourceView;
         },
 
         dateForTitle: function() {
