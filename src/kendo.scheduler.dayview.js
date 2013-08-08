@@ -831,9 +831,13 @@ kendo_module({
             }
 
             that.datesHeader.on("click" + NS, ".k-nav-day", function(e) {
-                var cell = $(e.currentTarget).closest("th");
+                var th = $(e.currentTarget).closest("th");
 
-                that.trigger("navigate", { view: "day", date: that._slotIndexDate(cell.index()) });
+                var offset = th.offset();
+
+                var slot = that._slotByPosition(offset.left, offset.top + th.outerHeight());
+
+                that.trigger("navigate", { view: "day", date: slot.startDate() });
             });
         },
 
@@ -906,49 +910,6 @@ kendo_module({
         _timeSlotInterval: function() {
             var options = this.options;
             return (options.majorTick/options.minorTickCount) * MS_PER_MINUTE;
-        },
-
-        _slotIndexDate: function(index) {
-            var idx;
-            var length;
-            var slots = this._dates || [];
-            var startTime = getMilliseconds(new Date(+this.options.startTime));
-            var endTime = getMilliseconds(new Date(+this.options.endTime));
-            var slotStart;
-
-            if (startTime >= endTime) {
-                endTime += MS_PER_DAY;
-            }
-
-            var resources = this.groupedResources;
-            var isVertical = this._groupOrientation() === "vertical";
-
-            if (resources.length && !isVertical) {
-                index = this._adjustColumnIndex(index);
-            }
-
-            for (idx = 0, length = slots.length; idx < length; idx++) {
-                slotStart = new Date(+slots[idx]);
-                setTime(slotStart, startTime);
-
-                if (index === idx) {
-                    return slotStart;
-                }
-            }
-            return null;
-        },
-
-        _adjustColumnIndex: function(index) {
-            if (this._isVerticallyGrouped()) {
-                return index;
-            }
-
-            if (this.groupedResources.length) {
-                var columnCount = this._columnCountInGroup();
-
-                return index - columnCount*Math.floor(index/columnCount);
-            }
-            return index;
         },
 
         _columnCountInGroup: function() {
