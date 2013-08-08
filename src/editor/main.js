@@ -142,7 +142,7 @@ kendo_module({
         addColumnLeft: "Add column on the left",
         addColumnRight: "Add column on the right",
         addRowAbove: "Add row above",
-        addRowBelow: "Add row below 2",
+        addRowBelow: "Add row below",
         deleteRow: "Delete row",
         deleteColumn: "Delete column"
     };
