@@ -61,6 +61,42 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add column on the left.
+        /// </summary>
+        public static string Editor_AddColumnLeft {
+            get {
+                return ResourceManager.GetString("Editor_AddColumnLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add column on the right.
+        /// </summary>
+        public static string Editor_AddColumnRight {
+            get {
+                return ResourceManager.GetString("Editor_AddColumnRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add row above.
+        /// </summary>
+        public static string Editor_AddRowAbove {
+            get {
+                return ResourceManager.GetString("Editor_AddRowAbove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add row below.
+        /// </summary>
+        public static string Editor_AddRowBelow {
+            get {
+                return ResourceManager.GetString("Editor_AddRowBelow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Background color.
         /// </summary>
         public static string Editor_BackColor {
@@ -97,11 +133,29 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete column.
+        /// </summary>
+        public static string Editor_DeleteColumn {
+            get {
+                return ResourceManager.GetString("Editor_DeleteColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete &quot;{0}&quot;?.
         /// </summary>
         public static string Editor_DeleteFile {
             get {
                 return ResourceManager.GetString("Editor_DeleteFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete row.
+        /// </summary>
+        public static string Editor_DeleteRow {
+            get {
+                return ResourceManager.GetString("Editor_DeleteRow", resourceCulture);
             }
         }
         

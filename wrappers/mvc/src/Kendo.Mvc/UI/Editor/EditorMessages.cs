@@ -45,6 +45,12 @@ namespace Kendo.Mvc.UI
             DialogButtonSeparator = Messages.Editor_DialogButtonSeparator;
             DialogCancel = Messages.Editor_DialogCancel;
             CreateTable = Messages.Editor_CreateTable;
+            AddColumnLeft = Messages.Editor_AddColumnLeft;
+            AddColumnRight = Messages.Editor_AddColumnRight;
+            AddRowAbove = Messages.Editor_AddRowAbove;
+            AddRowBelow = Messages.Editor_AddRowBelow;
+            DeleteRow = Messages.Editor_DeleteRow;
+            DeleteColumn = Messages.Editor_DeleteColumn;
 
             ImageBrowserMessages = new EditorImageBrowserMessages();
         }
@@ -85,6 +91,12 @@ namespace Kendo.Mvc.UI
         public string DialogButtonSeparator { get; set; }
         public string DialogCancel { get; set; }
         public string CreateTable { get; set; }
+        public string AddColumnLeft { get; set; }
+        public string AddColumnRight { get; set; }
+        public string AddRowAbove { get; set; }
+        public string AddRowBelow { get; set; }
+        public string DeleteRow { get; set; }
+        public string DeleteColumn { get; set; }
 
         public EditorImageBrowserMessages ImageBrowserMessages { get; set; }
 
@@ -124,6 +136,12 @@ namespace Kendo.Mvc.UI
         private const string DefaultDialogButtonSeparator = "or";
         private const string DefaultDialogCancel = "Cancel";
         private const string DefaultCreateTable = "Create table";
+        private const string DefaultAddColumnLeft = "Add column on the left";
+        private const string DefaultAddColumnRight = "Add column on the right";
+        private const string DefaultAddRowAbove = "Add row above";
+        private const string DefaultAddRowBelow = "Add row below";
+        private const string DefaultDeleteRow = "Delete row";
+        private const string DefaultDeleteColumn = "Delete column";
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -311,6 +329,36 @@ namespace Kendo.Mvc.UI
             {
                 json["createTable"] = CreateTable;
             }
+
+            if (AddColumnLeft != DefaultAddColumnLeft)
+            {
+                json["addColumnLeft"] = AddColumnLeft;
+            }
+
+            if (AddColumnRight != DefaultAddColumnRight)
+            {
+                json["addColumnRight"] = AddColumnRight;
+            }
+
+            if (AddRowAbove != DefaultAddRowAbove)
+            {
+                json["addRowAbove"] = AddRowAbove;
+            }
+
+            if (AddRowBelow != DefaultAddRowBelow)
+            {
+                json["addRowBelow"] = AddRowBelow;
+            }
+
+            if (DeleteColumn != DefaultDeleteColumn)
+            {
+                json["deleteColumn"] = DeleteColumn;
+            }
+            if (DeleteRow != DefaultDeleteRow)
+            {
+                json["deleteRow"] = DeleteRow;
+            }
+        
         }
     }
 }

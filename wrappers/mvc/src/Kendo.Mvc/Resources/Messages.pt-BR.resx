@@ -618,4 +618,22 @@
   <data name="Editor_CreateTable" xml:space="preserve">
     <value>Criar a tabela</value>
   </data>
+  <data name="Editor_AddColumnLeft" xml:space="preserve">
+    <value>Add column on the left</value>
+  </data>
+  <data name="Editor_AddColumnRight" xml:space="preserve">
+    <value>Add column on the right</value>
+  </data>
+  <data name="Editor_AddRowAbove" xml:space="preserve">
+    <value>Add row above</value>
+  </data>
+  <data name="Editor_AddRowBelow" xml:space="preserve">
+    <value>Add row below</value>
+  </data>
+  <data name="Editor_DeleteColumn" xml:space="preserve">
+    <value>Delete column</value>
+  </data>
+  <data name="Editor_DeleteRow" xml:space="preserve">
+    <value>Delete row</value>
+  </data>
 </root>
