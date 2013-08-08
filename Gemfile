@@ -4,7 +4,7 @@ gem "rake"
 gem "github_api"
 gem "kramdown"
 gem "nokogiri"
-gem "selenium-webdriver"
+gem "selenium-webdriver", "~> 2.34.0"
 gem "rubyzip", :require => 'zip/zip'
 
 group :development do
