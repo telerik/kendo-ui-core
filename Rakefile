@@ -577,7 +577,7 @@ namespace :build do
         write_changelog changelog, %w(web mobile dataviz framework aspnetmvc)
 
         desc 'Package and publish bundles to the Production directory, and update the changelog'
-        task :bundles => ['bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Production"), changelog].flatten
+        task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Production"), changelog].flatten
     end
 
     namespace :master do
@@ -611,7 +611,7 @@ namespace :build do
         end
 
         desc 'Package and publish bundles to the Stable directory'
-        task :bundles => ['bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
+        task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
     end
 end
 
