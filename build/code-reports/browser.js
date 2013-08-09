@@ -20,7 +20,7 @@ window.onload = function() {
 
         function gotoLine() {
             if (line) {
-                var el = $("#L" + line);
+                var el = $(".code .line:nth-child(" + line + ")");
                 el[0].scrollIntoView();
                 $(".highlight").removeClass("highlight");
                 el.addClass("highlight");
@@ -35,7 +35,7 @@ window.onload = function() {
                 var code = xhr.responseText;
                 code = code.split(/\r?\n/);
                 var output = $(".code").html(code.map(function(line, i){
-                    return "<div class='line' id='L" + (i + 1) + "'>"
+                    return "<div class='line'>"
                         + htmlescape(line) + "<br />"
                         + "</div>";
                 }).join(""));

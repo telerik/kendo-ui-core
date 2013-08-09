@@ -209,6 +209,9 @@ function is_access_prop(node) {
     });
 
     properties = properties.sort(function(a, b){
+        if (a.seen.length == b.seen.length) {
+            return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+        }
         // sort by number of occurrences.
         return a.seen.length - b.seen.length;
     });
