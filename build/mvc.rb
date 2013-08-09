@@ -199,14 +199,11 @@ namespace :mvc do
 end
 
 if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
-    # Copy dll files from ARCHIVE_ROOT
-    file 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' => MVC_WRAPPERS_SRC do |t|
-        # copy from dist/
-    end
-
-    file MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll' =>
-        MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll') do |t|
-        # copy from dist/
+    # get binaries from dist/
+    file 'wrappers/mvc/**/Kendo.*.dll' => MVC_WRAPPERS_SRC do |t|
+        tree :to => 'dist/binaries/',
+             :from => 'wrappers/mvc/**/Kendo.*.dll',
+             :root => 'wrappers/mvc/'
     end
 else
     # Produce Kendo.Mvc.dll by building Kendo.Mvc.csproj
@@ -230,6 +227,11 @@ else
         MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll') do |t|
         msbuild MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
     end
+
+    # copy binaries to dist/
+    tree :to => 'wrappers/mvc/',
+         :from => 'dist/binaries/**/Kendo.*.dll',
+         :root => 'dist/binaries/'
 end
 
 # Copy Source.snk as Kendo.snk (the original Kendo.snk should not be distributed)
@@ -243,17 +245,6 @@ file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/CommonAssembly
 # Copy Kendo.Mvc.csproj (needed for the next task)
 file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj',
           :from => 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
-
-# Copy binaries to dist
-if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
-    tree :to => 'wrappers/mvc/',
-         :from => 'dist/binaries/**/Kendo.*.dll',
-         :root => 'dist/binaries/'
-else
-    tree :to => 'dist/binaries/',
-         :from => 'wrappers/mvc/**/Kendo.*.dll',
-         :root => 'wrappers/mvc/'
-end
 
 # Patch Visual Studio Project - fix paths etc.
 file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj' do |t|
