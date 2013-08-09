@@ -1786,6 +1786,7 @@ kendo_module({
                 group.items = items;
                 if (!group.items.length) {
                     dest.splice(idx--, 1);
+                    count -= start;
                 }
             }
 
