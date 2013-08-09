@@ -199,10 +199,17 @@ namespace :mvc do
 end
 
 if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
-    file 'wrappers/mvc/**/Kendo.*.dll' do |t|
-        tree :to => 'wrappers/mvc/',
-             :from => 'dist/binaries/**/Kendo.*.dll',
-             :root => 'dist/binaries/'
+    file 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' => MVC_WRAPPERS_SRC do |t|
+        tree :to => 'wrappers/mvc/src/',
+             :from => 'dist/binaries/src/**/Kendo.*.dll',
+             :root => 'dist/binaries/src/'
+    end
+
+    file MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll' =>
+        MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll') do |t|
+        tree :to => 'wrappers/mvc/demos/',
+             :from => 'dist/binaries/demos/**/Kendo.*.dll',
+             :root => 'dist/binaries/demos/'
     end
 else
     # Produce Kendo.Mvc.dll by building Kendo.Mvc.csproj
