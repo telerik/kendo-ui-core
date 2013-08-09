@@ -2,8 +2,11 @@ document.write("<script src='../../src/jquery.js'></script>");
 
 function htmlescape(text) {
     return (text
+            .replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
-            .replace(/</g, "&gt;"));
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#x27;"));
 }
 
 window.onload = function() {
