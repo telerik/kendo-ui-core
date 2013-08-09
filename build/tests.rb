@@ -19,20 +19,20 @@ end
 
 tests = FileList["tests/**/*"]
 namespace :tests do
+    task :java do
+        mvn(POM, 'clean test')
+    end
+
+    task :aspnetmvc do
+        msbuild "wrappers/mvc/Kendo.Mvc.sln"
+        sh "build/xunit/xunit.console.clr4.exe wrappers/mvc/tests/Kendo.Mvc.Tests/bin/Release/Kendo.Mvc.Tests.dll"
+    end
+
     { CI: 8884, Production: 8885 }.each do |env, port|
         output = "#{env}-test-results.xml"
 
         file output => [MIN_JS, MIN_CSS, KENDO_CONFIG_FILE, tests].flatten do |t|
             run_tests(t.name, port)
-        end
-
-        task :java do
-            mvn(POM, 'clean test')
-        end
-
-        task :aspnetmvc do
-            msbuild "wrappers/mvc/Kendo.Mvc.sln"
-            sh "build/xunit/xunit.console.clr4.exe wrappers/mvc/tests/Kendo.Mvc.Tests/bin/Release/Kendo.Mvc.Tests.dll"
         end
 
         desc "Run #{env} tests"
