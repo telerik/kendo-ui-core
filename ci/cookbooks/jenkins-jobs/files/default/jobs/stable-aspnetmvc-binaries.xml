@@ -24,7 +24,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>build-aspnetmvc-binaries</name>
+        <name>stable</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <disableSubmodules>false</disableSubmodules>
@@ -76,6 +76,15 @@
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>stable-bundles</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
     <hudson.plugins.campfire.CampfireNotifier plugin="campfire@2.6">
       <campfire>
         <subdomain>kendoui</subdomain>
