@@ -8,7 +8,10 @@ var U2 = require("uglify-js");
 var YAJET = require("./yajet.js").YAJET;
 
 var OPTIMIST = require("optimist");
-var ARGS = OPTIMIST.argv;
+var ARGS = OPTIMIST
+    .describe("c", "Limit usage count")
+    .string("c")
+    .argv;
 
 var SRCDIR = PATH.join(__dirname, "..", "..", "src");
 function ADD_PATH(filename){
@@ -176,11 +179,15 @@ function is_access_prop(node) {
         // if (totals.properties > 5) return;
 
         var prop = PROPERTIES[name];
+        var use_count = prop.seen.length;
+
+        if (ARGS.c && use_count > ARGS.c) return;
+
         properties.push(prop);
 
         ++totals.properties;
-        totals.use_count += prop.seen.length;
-        totals.bytes += prop.seen.length * name.length;
+        totals.use_count += use_count;
+        totals.bytes += use_count * name.length;
 
         prop.seen.forEach(function(q){
             var file = get_file(q.file);
