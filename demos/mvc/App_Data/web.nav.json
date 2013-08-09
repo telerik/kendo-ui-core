@@ -1030,6 +1030,11 @@
                     "url": "scheduler/globalization.html",
                     "packages": ["mvc"]
                 }, {
+                    "text": "Restrictions",
+                    "url": "scheduler/restriction.html",
+                    "title": "Restricting events resizing and moving",
+                    "meta": "This demo shows how to use restrict the events in Kendo UI Scheduler"
+                }, {
                     "text": "Selection",
                     "url": "scheduler/selection.html",
                     "title": "Selection and Keyboard navigation in Kendo UI Scheduler",

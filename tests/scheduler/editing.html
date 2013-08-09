@@ -132,9 +132,9 @@
             test("addEvent triggers add event passing the start and end date and all day info", 3, function() {
                 var scheduler = setup({
                     add: function(e) {
-                        deepEqual(e.start, new Date("2013/6/6"));
-                        deepEqual(e.end, new Date("2013/6/7"));
-                        deepEqual(e.isAllDay, true);
+                        deepEqual(e.event.start, new Date("2013/6/6"));
+                        deepEqual(e.event.end, new Date("2013/6/7"));
+                        deepEqual(e.event.isAllDay, true);
                     }
                 });
 

@@ -1353,30 +1353,6 @@
                 dragdrop(scheduler, handle, slots.eq(2));
             });
 
-            test("preventing move event cancels the move", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    startTime: new Date("2013/6/6 22:00"),
-                    views: ["week"],
-                    dataSource: [
-                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
-                    ],
-                    move: function(e) {
-                        e.preventDefault();
-                    }
-                });
-
-                var handle = div.find(".k-event");
-
-                var slots = div.find(".k-scheduler-content td:nth-child(1)");
-
-                dragstart(scheduler, handle, handle.offset());
-
-                drag(scheduler, handle, slots.eq(slots.length-2).offset());
-
-                equal(div.find(".k-event-drag-hint").length, 0);
-            });
-
             test("preventing moveEnd event cancels the move", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),

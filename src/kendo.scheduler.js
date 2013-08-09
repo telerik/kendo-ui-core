@@ -417,13 +417,12 @@ kendo_module({
         },
 
         expand: function(start, end) {
-            var data = this.view(),
-                filter = {};
+            var data = this.view();
 
             if (start && end) {
                 end = new Date(end.getTime() + MS_PER_DAY - 1);
 
-                filter = {
+                var filter = {
                     logic: "or",
                     filters: [
                         {
@@ -625,6 +624,23 @@ kendo_module({
                  tagTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
              });
        };
+    }
+
+    function moveEventRange(event, distance) {
+        var duration = event.end.getTime() - event.start.getTime();
+
+        var start = new Date(event.start.getTime());
+
+        kendo.date.setTime(start, distance);
+
+        var end = new Date(start.getTime());
+
+        kendo.date.setTime(end, duration);
+
+        return {
+            start: start,
+            end: end
+        }
     }
 
     var Scheduler = Widget.extend({
@@ -962,7 +978,7 @@ kendo_module({
 
                     endSlot = startSlot;
 
-                    if (that.trigger("moveStart", { event: event })) {
+                    if (!startSlot || that.trigger("moveStart", { event: event })) {
                         e.preventDefault();
                     }
                 },
@@ -971,28 +987,37 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    if (!slot || that.trigger("move", { event: event, slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() } })) {
+                    if (!slot) {
                         return;
                     }
 
-                    endSlot = slot;
+                    view._updateMoveHint(event, startSlot, slot);
 
-                    view._updateMoveHint(event, startSlot, endSlot);
+                    var distance = slot.start - startSlot.start;
+                    var range = moveEventRange(event, distance);
+
+                    if (!that.trigger("move", {
+                            event: event,
+                            slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() },
+                            resources: view._resourceBySlot(slot),
+                            start: range.start,
+                            end: range.end
+                        })) {
+
+                        endSlot = slot;
+
+                    } else {
+                        view._updateMoveHint(event, startSlot, endSlot);
+                    }
                 },
                 dragend: function() {
                     that.view()._removeMoveHint();
 
                     var distance = endSlot.start - startSlot.start;
+                    var range = moveEventRange(event, distance);
 
-                    var duration = event.end.getTime() - event.start.getTime();
-
-                    var start = new Date(event.start.getTime());
-
-                    kendo.date.setTime(start, distance);
-
-                    var end = new Date(start.getTime());
-
-                    kendo.date.setTime(end, duration);
+                    var start = range.start;
+                    var end = range.end;
 
                     var endResources = that.view()._resourceBySlot(endSlot);
                     var startResources = that.view()._resourceBySlot(startSlot);
@@ -1083,11 +1108,13 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    if (!slot || that.trigger("resize", { event: event, slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() } })) {
+                    if (!slot) {
                         return;
                     }
 
                     var update = false;
+                    var originalStartSlot = startSlot;
+                    var originalEndSlot = endSlot;
 
                     if (dir == "south") {
                         if (!slot.isDaySlot && startSlot.groupIndex == slot.groupIndex && slot.end - kendo.date.toUtcTime(event.start) >= view._timeSlotInterval()) {
@@ -1114,7 +1141,21 @@ kendo_module({
                     }
 
                     if (update) {
-                        view._updateResizeHint(event, startSlot, endSlot);
+
+                        if (!that.trigger("resize", {
+                            event: event,
+                            slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() },
+                            start: startSlot.startDate(),
+                            end: endSlot.endDate(),
+                            resources: view._resourceBySlot(slot)
+                        })) {
+
+                            view._updateResizeHint(event, startSlot, endSlot);
+
+                        } else {
+                            startSlot = originalStartSlot;
+                            endSlot = originalEndSlot;
+                        }
                     }
                 },
                 dragend: function(e) {
@@ -1145,7 +1186,8 @@ kendo_module({
                         event: event,
                         slot: { element: endSlot.element, start: endSlot.startDate(), end: endSlot.endDate() },
                         start: start,
-                        end: end
+                        end: end,
+                        resources: that.view()._resourceBySlot(endSlot)
                     });
 
                     if (!prevented && end.getTime() >= start.getTime()) {
@@ -1174,7 +1216,7 @@ kendo_module({
 
                 that.refresh();
 
-                if (!that.trigger(SAVE, { model: event })) {
+                if (!that.trigger(SAVE, { event: event })) {
                     that._updateSelection(event);
                     that.dataSource.sync();
                 }
@@ -1304,7 +1346,7 @@ kendo_module({
 
             eventInfo = eventInfo || {};
 
-            var prevented = this.trigger("add", { start: eventInfo.start, end: eventInfo.end, isAllDay: eventInfo.isAllDay });
+            var prevented = this.trigger("add", { event:  eventInfo });
 
             if (!prevented && ((editable && editable.end()) || !editable)) {
 
@@ -1330,7 +1372,7 @@ kendo_module({
                 editable = that.editable;
 
             if (container && editable && editable.end() &&
-                !that.trigger(SAVE, { container: container, model: model } )) {
+                !that.trigger(SAVE, { container: container, event: model } )) {
 
                 if (!model.dirty) {
                     that._convertDates(model, "remove");
@@ -1738,6 +1780,29 @@ kendo_module({
             }
 
             return occurrence;
+        },
+
+        occurrencesInRange: function(start, end) {
+            return new kendo.data.Query(this._data).filter({
+                logic: "or",
+                filters: [
+                    {
+                        logic: "and",
+                        filters: [
+                            { field: "start", operator: "gte", value: start },
+                            { field: "end", operator: "gte", value: start },
+                            { field: "start", operator: "lt", value: end }
+                        ]
+                    },
+                    {
+                        logic: "and",
+                        filters: [
+                            { field: "start", operator: "lte", value: start },
+                            { field: "end", operator: "gt", value: start }
+                        ]
+                    }
+                ]
+            }).toArray();
         },
 
         _removeEvent: function(model) {
