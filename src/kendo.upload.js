@@ -664,7 +664,7 @@ kendo_module({
             var options = that.options;
 
             input.wrap("<div class='k-widget k-upload k-header'><div class='k-button k-upload-button'></div></div>");
-            
+
             if(!options.async.saveUrl) {
                 input.closest(".k-upload").addClass("k-upload-sync");
             }

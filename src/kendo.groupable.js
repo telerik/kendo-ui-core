@@ -114,7 +114,7 @@ kendo_module({
                             marginLeft = parseInt(element.css("marginLeft"), 10),
                             elementPosition = element.position(),
                             left = isRtl ? elementPosition.left - marginLeft : elementPosition.left + element.outerWidth();
-                            
+
                         intializePositions();
                         dropCue.css({top: dropCueOffsetTop(groupContainer), left: left}).appendTo(groupContainer);
                         this.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
