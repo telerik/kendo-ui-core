@@ -32,11 +32,11 @@ namespace :tests do
 
         task :aspnetmvc do
             msbuild "wrappers/mvc/Kendo.Mvc.sln"
-            sh "mono build/xunit/xunit.console.clr4.exe wrappers/mvc/tests/Kendo.Mvc.Tests/bin/Release/Kendo.Mvc.Tests.dll"
+            sh "build/xunit/xunit.console.clr4.exe wrappers/mvc/tests/Kendo.Mvc.Tests/bin/Release/Kendo.Mvc.Tests.dll"
         end
 
         desc "Run #{env} tests"
-        task env => [output, :java, :aspnetmvc] do
+        task env => [output, :java] do
             sh "touch #{output}"
         end
     end

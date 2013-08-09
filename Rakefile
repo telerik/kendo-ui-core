@@ -564,7 +564,7 @@ namespace :build do
         end
 
         desc 'Build and publish ASP.NET MVC DLLs'
-        task :aspnetmvc_binaries => [ "mvc:binaries" ] do
+        task :aspnetmvc_binaries => [ "mvc:binaries", "tests:aspnetmvc" ] do
             publish_binaries "Production"
         end
 
@@ -601,7 +601,7 @@ namespace :build do
         end
 
         desc 'Build and publish ASP.NET MVC DLLs'
-        task :aspnetmvc_binaries => [ "mvc:binaries" ] do
+        task :aspnetmvc_binaries => [ "mvc:binaries", "tests:aspnetmvc" ] do
             publish_binaries "Stable"
         end
 
