@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI
         protected void AppendSelectList(IDictionary<string, object> viewData, object dataItem)
         {        
             object selectedValue;
-            if (!Data.Any(i => i.Selected))
+            if (!Data.Any(i => i.Selected) && !typeof(TModel).IsDataRow())
             {
                 selectedValue = ((Expression<Func<TModel, TValue>>)System.Linq.Expressions.Expression.Lambda(typeof(Func<TModel, TValue>), ExpressionFactory.LiftMemberAccessToNull(Expression.Body), Expression.Parameters)).Compile().Invoke((TModel)dataItem);
             }
