@@ -1794,6 +1794,10 @@ kendo_module({
                 break;
             }
         }
+
+        if (idx < dest.length) {
+            dest.splice(idx, dest.length - idx);
+        }
     }
 
     function flattenGroups(data) {
