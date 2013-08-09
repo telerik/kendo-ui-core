@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Internal props/methods stats</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="browser.js"></script>
+  </head>
+  <body>
+    <pre class="code">
+    </pre>
+    <div class="content">
+      <div class="section totals">
+        <h1>Totals</h1>
+
+        <p>
+          Parsed <b>$this.total_parsed</b> characters and found:<br /><br />
+          — <b>$this.totals.properties</b> internal properties<br />
+          — <b>$this.totals.use_count</b> occurrences<br />
+          — <b>$this.totals.bytes</b> bytes spent in property names.
+        </p>
+
+        <p>
+          Properties that have been seen in strings:<br />
+            $(FOREACH (prop ∈ this.in_string)
+              <a href="#P$prop.name|html">$prop.name|html</a>
+            $)
+        </p>
+      </div>
+
+      <div class="section props">
+        <h1>Properties</h1>
+        $(FOREACH (prop ∈ this.properties)
+          <h2><a name="P$prop.name|html"></a><code>$prop.name|html</code> (use count: $prop.seen.length)</h2>
+          <ul>
+            $(FOREACH (loc ∈ prop.seen)
+              <li>${ file_link(loc.file, loc.line, loc.file + ":" + loc.line) } ($loc.type)</li>
+            $)
+          </ul>
+        $)
+      </div>
+
+      <div class="section warns">
+        <h1>Suspicious code</h1>
+        <ul>
+          $(FOREACH (w ∈ this.warnings)
+            <li>${ file_link(w.start.file, w.start.line, w.start.file + ":" + w.start.line)}</li>
+          $)
+        </ul>
+      </div>
+
+    </div>
+  </body>
+</html>
+
+$(BLOCK file_link(filename, line, text)
+  <a target="GITHUB"
+     data-file="$filename|html"
+     data-line="$line"
+     href="https://github.com/telerik/kendo/tree/master/src/$filename|html#L$line">${ text != null ? text : filename ∈ html }</a>
+$)

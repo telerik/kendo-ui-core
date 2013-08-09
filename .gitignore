@@ -65,3 +65,4 @@ wrappers/php/content
 .tern-port
 kendo-cdn
 src/.tern-port
+build/code-reports/internals.html

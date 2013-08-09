@@ -1,0 +1,81 @@
+html, body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: white;
+    font: 14px sans-serif;
+}
+
+h1 { font-size: 150%; }
+h2 { font-size: 120%; }
+
+.content {
+    position: absolute;
+    left: 0; top: 0;
+    right: 70%;
+    height: 100%;
+    box-sizing: border-box;
+    border-right: 2px solid #000;
+    overflow: auto;
+}
+
+.code {
+    margin: 0;
+    padding: 1em 0;
+    position: absolute;
+    left: 30%;
+    width: 70%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #eee;
+    overflow: auto;
+    counter-reset: line 0;
+}
+
+.code .line {
+    counter-increment: line;
+}
+
+.code .line:before {
+    border-right: 1px dotted #777;
+    color: #888;
+    display: inline-block;
+    width: 3em;
+    padding-right: 0.5em;
+    margin-right: 0.5em;
+    content: counter(line, decimal);
+    text-align: right;
+    user-select: none;
+    background-color: #ccc;
+    -webkit-user-select: none;
+}
+
+.code .filename {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    opacity: 0.1;
+    background: #fff;
+    font-size: 120%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.code .filename:hover {
+    opacity: 1;
+}
+
+.highlight {
+    background-color: #fea;
+}
+
+.section {
+    padding: 1px 1em 1em 1em;
+}
+.section.props {
+    background: #ffd;
+}
+.section.warns {
+    background: #fdd;
+}
