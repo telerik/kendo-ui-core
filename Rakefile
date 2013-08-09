@@ -586,6 +586,7 @@ namespace :build do
 
         desc 'Update the /staging build machine web site'
         task :demos => [
+            :get_binaries,
             'demos:staging',
             'download_builder:staging',
             'demos:staging_java',
