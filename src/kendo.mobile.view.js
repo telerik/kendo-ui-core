@@ -53,6 +53,7 @@ kendo_module({
 
             $.extend(that, options);
 
+            that._id();
             that._layout();
             that._scroller();
             that._model();
@@ -235,6 +236,12 @@ kendo_module({
             that.element.css("display", "none");
         },
 
+        _id: function() {
+            var element = this.element;
+
+            this.id = attrValue(element, "url") || "#" + element.attr("id");
+        },
+
         _layout: function() {
             var that = this,
                 contentSelector = roleSelector("content"),
@@ -254,8 +261,6 @@ kendo_module({
                                 .addClass("km-content");
 
             that.element.prepend(that.header).append(that.footer);
-
-            that.id = attrValue(element, "url") || "#" + element.attr("id");
 
             if (that.layout) {
                 that.layout.setup(that);

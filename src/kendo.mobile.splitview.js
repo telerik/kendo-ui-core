@@ -21,6 +21,8 @@ kendo_module({
             element = that.element;
 
             $.extend(that, options);
+
+            that._id();
             that._layout();
             that._style();
             kendo.mobile.init(element.children(kendo.roleSelector("modalview")));
@@ -33,9 +35,10 @@ kendo_module({
                 that.panes.push(pane);
                 pane.navigateToInitial();
             });
-            this.expandedPaneShim = $(EXPANED_PANE_SHIM).appendTo(that.element);
 
-            this._shimUserEvents = new kendo.UserEvents(this.expandedPaneShim, {
+            that.expandedPaneShim = $(EXPANED_PANE_SHIM).appendTo(that.element);
+
+            that._shimUserEvents = new kendo.UserEvents(that.expandedPaneShim, {
                 tap: function() {
                     that.collapsePanes();
                 }
