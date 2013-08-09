@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
   <actions/>
-  <description>Run the tests against the 'production' branch</description>
+  <description>Builds the ASP.NET MVC DLLs from the &apos;stable&apos; branch and publishes the build artifacts</description>
   <logRotator class="hudson.tasks.LogRotator">
-    <daysToKeep>-1</daysToKeep>
+    <daysToKeep>2</daysToKeep>
     <numToKeep>10</numToKeep>
-    <artifactDaysToKeep>-1</artifactDaysToKeep>
-    <artifactNumToKeep>-1</artifactNumToKeep>
+    <artifactDaysToKeep>2</artifactDaysToKeep>
+    <artifactNumToKeep>10</artifactNumToKeep>
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
@@ -17,8 +18,8 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <name/>
-        <refspec/>
+        <name></name>
+        <refspec></refspec>
         <url>git@github.com:telerik/kendo.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
@@ -43,40 +44,43 @@
       <url>https://github.com/telerik/kendo/</url>
     </browser>
     <submoduleCfg class="list"/>
-    <relativeTargetDir/>
-    <reference/>
-    <excludedRegions/>
-    <excludedUsers/>
-    <gitConfigName/>
-    <gitConfigEmail/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
     <skipTag>false</skipTag>
-    <includedRegions/>
-    <scmName/>
+    <includedRegions></includedRegions>
+    <scmName></scmName>
   </scm>
-  <canRoam>true</canRoam>
+  <assignedNode>windows</assignedNode>
+  <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.7">
-      <spec/>
-    </com.cloudbees.jenkins.GitHubPushTrigger>
-  </triggers>
+  <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; bundle exec rake build:production:tests</command>
+      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; BETA=true bundle exec rake build:production:aspnetmvc_binaries;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>git reset --hard</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
-    <hudson.tasks.junit.JUnitResultArchiver>
-      <testResults>*-test-results.xml</testResults>
-      <keepLongStdio>false</keepLongStdio>
-      <testDataPublishers/>
-    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>production-bundles</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
     <hudson.plugins.campfire.CampfireNotifier plugin="campfire@2.6">
       <campfire>
         <subdomain>kendoui</subdomain>
@@ -92,24 +96,6 @@
       <smartNotify>false</smartNotify>
       <sound>false</sound>
     </hudson.plugins.campfire.CampfireNotifier>
-    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.13">
-      <buildSteps>
-        <hudson.tasks.Shell>
-          <command>rm *-test-results.xml</command>
-        </hudson.tasks.Shell>
-      </buildSteps>
-      <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
-      <scriptOnlyIfFailure>true</scriptOnlyIfFailure>
-    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>production-demos, production-aspnetmvc-binaries</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers/>
 </project>
