@@ -199,11 +199,10 @@ namespace :mvc do
 end
 
 if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
-    # get binaries from dist/
-    file 'wrappers/mvc/**/Kendo.*.dll' => MVC_WRAPPERS_SRC do |t|
-        tree :to => 'dist/binaries/',
-             :from => 'wrappers/mvc/**/Kendo.*.dll',
-             :root => 'wrappers/mvc/'
+    file 'wrappers/mvc/**/Kendo.*.dll' do |t|
+        tree :to => 'wrappers/mvc/',
+             :from => 'dist/binaries/**/Kendo.*.dll',
+             :root => 'dist/binaries/'
     end
 else
     # Produce Kendo.Mvc.dll by building Kendo.Mvc.csproj
@@ -228,10 +227,9 @@ else
         msbuild MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
     end
 
-    # copy binaries to dist/
-    tree :to => 'wrappers/mvc/',
-         :from => 'dist/binaries/**/Kendo.*.dll',
-         :root => 'dist/binaries/'
+    tree :to => 'dist/binaries/',
+         :from => 'wrappers/mvc/**/Kendo.*.dll',
+         :root => 'wrappers/mvc/'
 end
 
 # Copy Source.snk as Kendo.snk (the original Kendo.snk should not be distributed)
