@@ -189,30 +189,47 @@ namespace :mvc do
 
     desc('Copy the minified CSS and JavaScript to Content and Scripts folder')
     task :assets => ['mvc:assets_js', 'mvc:assets_css']
+
+    desc('Build ASP.NET MVC binaries')
+    task :binaries => [
+        'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll',
+        MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll',
+        'dist/binaries/'
+    ]
 end
 
-# Produce Kendo.Mvc.dll by building Kendo.Mvc.csproj
-file 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' => MVC_WRAPPERS_SRC do |t|
-    msbuild 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
+if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
+    # copy pre-built binaries
 
-    MVC_RESOURCES.each do |resource|
-        platform = RbConfig::CONFIG['host_os']
+    tree :to => 'wrappers/mvc',
+         :from => 'dist/binaries/**/Kendo.*.dll',
+         :root => 'dist/binaries/'
+else
+    # Produce Kendo.Mvc.dll by building Kendo.Mvc.csproj
+    file 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll' => MVC_WRAPPERS_SRC do |t|
+        msbuild 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
 
-        # xbuild can't set the version of satellite assemblies so we build them using `al`
-        if platform =~ /linux|darwin/
-            culture = resource.pathmap("%-1d")
-            obj = "wrappers/mvc/src/Kendo.Mvc/obj/Release/Kendo.Mvc.Resources.Messages.#{culture}.resources";
-            key = 'wrappers/mvc/src/shared/Kendo.snk'
+        MVC_RESOURCES.each do |resource|
+            # xbuild can't set the version of satellite assemblies so we build them using `al`
+            if PLATFORM =~ /linux|darwin/
+                culture = resource.pathmap("%-1d")
+                obj = "wrappers/mvc/src/Kendo.Mvc/obj/Release/Kendo.Mvc.Resources.Messages.#{culture}.resources";
+                key = 'wrappers/mvc/src/shared/Kendo.snk'
 
-            sh "al /t:lib /embed:#{obj} /culture:#{culture} /out:#{resource} /template:#{t.name} /keyfile:#{key}", :verbose => VERBOSE
+                sh "al /t:lib /embed:#{obj} /culture:#{culture} /out:#{resource} /template:#{t.name} /keyfile:#{key}", :verbose => VERBOSE
+            end
         end
     end
-end
 
-# Produce Kendo.Mvc.Examples.dll by building Kendo.Mvc.Examples.csproj
-file MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll' =>
-    MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll') do |t|
-    msbuild MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
+    # Produce Kendo.Mvc.Examples.dll by building Kendo.Mvc.Examples.csproj
+    file MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll' =>
+        MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll') do |t|
+        msbuild MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
+    end
+
+    tree :to => 'dist/binaries/',
+         :from => 'wrappers/mvc/**/Kendo.*.dll',
+         :root => 'wrappers/mvc/'
 end
 
 # Copy Source.snk as Kendo.snk (the original Kendo.snk should not be distributed)

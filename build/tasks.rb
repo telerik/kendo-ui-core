@@ -56,13 +56,11 @@ def subject_to_license?(file)
 end
 
 def msbuild(project, options=nil)
-    platform = RbConfig::CONFIG['host_os']
-
     options = '/p:Configuration=Release' if options == nil
 
     msbuild_path = 'c:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\msbuild.exe'
 
-    msbuild_path = 'xbuild' if platform =~ /linux|darwin/
+    msbuild_path = 'xbuild' if PLATFORM =~ /linux|darwin/
 
     sh "#{msbuild_path} /v:q #{project} #{options}", :verbose => VERBOSE
 end

@@ -36,6 +36,8 @@ THE SOFTWARE.
     if you'd like to run Jenkins with a specific version of Java, specify a full path to java.exe.
     The following value assumes that you have java in your PATH.
   -->
+  <env name="JENKINS_HOME" value="C:\Jenkins" />
+  <env name="HOME" value="C:\Users\TeamFoundationUser" />
   <executable>C:\Program Files (x86)\Java\jre7\bin\java.exe</executable>
   <arguments>-jar "C:\Jenkins\slave.jar" -jnlpUrl http://kendobuild/build/computer/kendobuild-winslave1/slave-agent.jnlp</arguments>
   <!--

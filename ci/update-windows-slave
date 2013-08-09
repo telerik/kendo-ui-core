@@ -11,7 +11,7 @@ xfreerdp $* -d telerik.com \
         copy-item '\\\\tsclient\local\*' '\\chef\\' -recurse ;\
         cd chef ;\
         .\\bootstrap.ps1 ;\
-        chef-solo -c solo.rb -j windows-slave.json ;\
+        chef-solo -c solo.rb -j windows-slave.json -l info --logfile chef-solo.log;\
         logoff ;\
     " -- \
     kendoiis.telerik.com

@@ -25,4 +25,3 @@ mount "/mnt/kendo-iis" do
     pass 0
     action [:mount, :enable]
 end
-

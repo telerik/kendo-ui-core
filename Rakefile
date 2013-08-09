@@ -15,7 +15,13 @@ CDN_ROOT = 'http://cdn.kendostatic.com/'
 KENDO_ORIGIN_HOST = 'kendoorigin'
 STAGING_CDN_ROOT = 'http://cdn.kendostatic.com/staging/'
 
-ARCHIVE_ROOT = "/kendo-builds"
+PLATFORM = RbConfig::CONFIG['host_os']
+
+if PLATFORM =~ /linux|darwin/
+    ARCHIVE_ROOT = "/kendo-builds"
+else
+    ARCHIVE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\Builds"
+end
 
 if ENV['DRY_RUN']
     ADMIN_URL = 'http://integrationadmin.telerik.com/'
@@ -538,6 +544,26 @@ namespace :build do
         zip_bundles
     end
 
+    { :production => "Production", :master => "Stable" }.each do |env, destination|
+        namespace env do
+            desc 'Build and publish ASP.NET MVC DLLs for #{destination} distribution'
+            task :aspnetmvc_binaries => [ "mvc:binaries", "tests:aspnetmvc" ] do
+                sh "if exist L: ( net use L: /delete /yes )"
+                sh "net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69"
+
+                target_dir = "L:\\#{destination}\\binaries\\"
+
+                sh "if not exist #{target_dir} ( mkdir #{target_dir} )"
+                sh "xcopy dist\\binaries\\* #{target_dir} /E /Y"
+            end
+
+            desc 'Copy ASP.NET MVC DLLs from distribution archive'
+            task :get_binaries do
+                sh "rsync -avc --del #{ARCHIVE_ROOT}/#{destination}/binaries/* dist/binaries/"
+            end
+        end
+    end
+
     namespace :production do
         desc 'Run tests and VSDoc'
         task :tests => ["tests:Production", "vsdoc:production:test"]
@@ -551,7 +577,7 @@ namespace :build do
         write_changelog changelog, %w(web mobile dataviz framework aspnetmvc)
 
         desc 'Package and publish bundles to the Production directory, and update the changelog'
-        task :bundles => ['bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Production"), changelog].flatten
+        task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Production"), changelog].flatten
     end
 
     namespace :master do
@@ -575,8 +601,9 @@ namespace :build do
         end
 
         desc 'Package and publish bundles to the Stable directory'
-        task :bundles => ['bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
+        task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
     end
+
 end
 
 namespace :bundles do
