@@ -26,7 +26,7 @@ class LicenseTask < Rake::FileTask
     def execute(args=nil)
         ensure_path(name)
 
-        template = File.read(prerequisites[0])
+        template = File.read(prerequisites[0]).gsub(/\r\n/, "\n")
 
         File.open(name, "w") do |file|
             file.write(template.sub("#= version #", VERSION).sub("#= year #", Time.now.year.to_s))
