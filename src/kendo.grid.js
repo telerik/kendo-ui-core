@@ -1288,13 +1288,19 @@ kendo_module({
         },
 
         editRow: function(row) {
-            row = $(row);
+            var model;
+            var that = this;
 
-            var that = this,
-                model = that._modelForContainer(row),
-                mode = that._editMode(),
-                navigatable = that.options.navigatable,
-                container;
+            if (row instanceof kendo.data.ObservableObject) {
+                model = row;
+            } else {
+                row = $(row);
+                model = that._modelForContainer(row);
+            }
+
+            var mode = that._editMode();
+            var navigatable = that.options.navigatable;
+            var container;
 
             that.cancelRow();
 
@@ -1625,8 +1631,10 @@ kendo_module({
                     row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
                     cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").eq(that._firstEditableColumnIndex(row));
 
-                if ((mode === "inline" || mode === "popup") && row.length) {
+                if (mode === "inline" && row.length) {
                     that.editRow(row);
+                } else if (mode === "popup") {
+                    that.editRow(model);
                 } else if (cell.length) {
                     that.editCell(cell);
                 }

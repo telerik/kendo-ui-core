@@ -481,6 +481,15 @@
 
                 equal($(".k-grid-cancel:visible").length, 1);
             });
+
+            test("adding new row in filtered datasource shows the popup editor", function() {
+                var grid = setup();
+                grid.dataSource.filter({ field: "foo", operation: "eq", value: 2 });
+
+                grid.addRow();
+
+                ok(grid._editContainer.data("kendoWindow"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
