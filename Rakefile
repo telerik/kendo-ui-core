@@ -544,14 +544,24 @@ namespace :build do
         zip_bundles
     end
 
-    def publish_binaries(destination)
-        sh "if exist L: ( net use L: /delete /yes )"
-        sh "net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69"
+    { :production => "Production", :master => "Stable" }.each do |env, destination|
+        namespace env do
+            desc 'Build and publish ASP.NET MVC DLLs for #{destination} distribution'
+            task :aspnetmvc_binaries => [ "mvc:binaries", "tests:aspnetmvc" ] do
+                sh "if exist L: ( net use L: /delete /yes )"
+                sh "net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69"
 
-        target_dir = "L:\\#{destination}\\binaries\\"
+                target_dir = "L:\\#{destination}\\binaries\\"
 
-        sh "if not exist #{target_dir} ( mkdir #{target_dir} )"
-        sh "xcopy dist\\binaries\\* #{target_dir} /E /Y"
+                sh "if not exist #{target_dir} ( mkdir #{target_dir} )"
+                sh "xcopy dist\\binaries\\* #{target_dir} /E /Y"
+            end
+
+            desc 'Copy ASP.NET MVC DLLs from distribution archive'
+            task :get_binaries do
+                sh "rsync -avc --del #{ARCHIVE_ROOT}/#{destination}/binaries/* dist/binaries/"
+            end
+        end
     end
 
     namespace :production do
@@ -561,16 +571,6 @@ namespace :build do
         desc 'Update the /production build machine web site'
         task :demos => [ 'demos:staging', 'download_builder:staging' ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
-        end
-
-        desc 'Build and publish ASP.NET MVC DLLs'
-        task :aspnetmvc_binaries => [ "mvc:binaries", "tests:aspnetmvc" ] do
-            publish_binaries "Production"
-        end
-
-        desc 'Copy ASP.NET MVC DLLs from distribution archive'
-        task :get_binaries do
-            sh "rsync -avc --del #{ARCHIVE_ROOT}/Production/binaries/* dist/binaries/"
         end
 
         changelog = "#{WEB_ROOT}/changelog/index.html"
@@ -600,19 +600,10 @@ namespace :build do
             sh "rsync -avc --del dist/demos/staging-mvc/ /mnt/kendo-iis/staging-mvc/"
         end
 
-        desc 'Build and publish ASP.NET MVC DLLs'
-        task :aspnetmvc_binaries => [ "mvc:binaries", "tests:aspnetmvc" ] do
-            publish_binaries "Stable"
-        end
-
-        desc 'Copy ASP.NET MVC DLLs from distribution archive'
-        task :get_binaries do
-            sh "rsync -avc --del #{ARCHIVE_ROOT}/Stable/binaries/* dist/binaries/"
-        end
-
         desc 'Package and publish bundles to the Stable directory'
         task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
     end
+
 end
 
 namespace :bundles do
