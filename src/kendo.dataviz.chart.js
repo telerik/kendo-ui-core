@@ -3129,43 +3129,6 @@ kendo_module({
             return categoryAxis.getSlot(categoryIx);
         },
 
-        _traverseDataPoints: function(callback) {
-            var chart = this,
-                options = chart.options,
-                series = options.series,
-                plotArea = chart.plotArea,
-                categoryIx,
-                seriesIx,
-                pointData,
-                currentCategory,
-                currentSeries,
-                seriesCount = series.length;
-
-            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
-                currentSeries = series[seriesIx];
-                var categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
-                var categories = categoryAxis.options.categories || [];
-                var data = currentSeries.data;
-                var count = data.length;
-                var pointIx;
-
-                for (pointIx = 0; pointIx < count; pointIx++) {
-                    pointData = SeriesBinder.current.bindPoint(currentSeries, pointIx);
-
-                    var category = pointData.fields.category;
-                    if (category) {
-                        categoryIx = indexOf(category, categories);
-                    } else {
-                        categoryIx = pointIx;
-                    }
-
-                    currentCategory = categories[categoryIx];
-
-                    callback(pointData, currentCategory, categoryIx, currentSeries, seriesIx);
-                }
-            }
-        },
-
         traverseDataPoints: function(callback) {
             var chart = this,
                 options = chart.options,
