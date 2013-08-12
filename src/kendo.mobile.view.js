@@ -15,10 +15,11 @@ kendo_module({
         Class = kendo.Class,
         Widget = ui.Widget,
         INIT = "init",
-        SHOW = "show",
         TRANSITION_DURATION = 320,
         BEFORE_SHOW = "beforeShow",
+        SHOW = "show",
         AFTER_SHOW = "afterShow",
+        BEFORE_HIDE = "beforeHide",
         HIDE = "hide",
         Z_INDEX = "z-index",
         attrValue = kendo.attrValue,
@@ -64,6 +65,7 @@ kendo_module({
             BEFORE_SHOW,
             SHOW,
             AFTER_SHOW,
+            BEFORE_HIDE,
             HIDE
         ],
 
@@ -114,6 +116,7 @@ kendo_module({
         },
 
         hideStart: function() {
+            this.trigger(BEFORE_HIDE, {view: this});
         },
 
         hideComplete: function() {
