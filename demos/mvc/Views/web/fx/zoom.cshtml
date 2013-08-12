@@ -8,9 +8,9 @@
 
     <script>
         $("#wrap img").hover(function() {
-            kendo.fx(this).zoom("out").endValue(1).startValue(2).reverse();
+            kendo.fx(this).zoom("in").startValue(1).endValue(2).play();
         }, function() {
-            kendo.fx(this).zoom("out").endValue(1).startValue(2).play().then(function() { $(this).show() });
+            kendo.fx(this).zoom("out").endValue(1).startValue(2).play();
         });
     </script>
 
