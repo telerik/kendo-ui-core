@@ -281,6 +281,7 @@
 
                         if (!options.template && options.type == "button") {
                             options.template = editorNS.EditorUtils.buttonTemplate;
+                            options.title = options.title || options.tooltip;
                         }
 
                         result[name] = {

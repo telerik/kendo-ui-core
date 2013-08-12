@@ -378,6 +378,14 @@
                 dom.find(".k-tool-icon").trigger("click");
             });
 
+            test("buttons honor tooltip configuration", function() {
+                toolbar.bindTo(mockEditorTools([
+                    { name: "custom", tooltip: "foo" }
+                ]));
+
+                equal(dom.find(".k-tool-icon").attr("title"), "foo");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
