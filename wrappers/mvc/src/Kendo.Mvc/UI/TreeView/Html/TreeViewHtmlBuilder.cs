@@ -82,7 +82,7 @@ namespace Kendo.Mvc.UI
             var checkboxWrapper = new HtmlElement("span").AddClass("k-checkbox");
 
             new HtmlElement("input", TagRenderMode.SelfClosing)
-                .Attributes(new { type = "checkbox", name = "checkedNodes" })
+                .Attributes(new { type = "checkbox", name = Component.Checkboxes.Name })
                 .ToggleAttribute("value", item.Id, item.Id != null)
                 .ToggleAttribute("checked", "checked", item.Checked)
                 .ToggleAttribute("disabled", "disabled", !item.Enabled)

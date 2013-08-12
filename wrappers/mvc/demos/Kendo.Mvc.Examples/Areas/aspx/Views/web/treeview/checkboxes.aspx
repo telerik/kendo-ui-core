@@ -7,10 +7,10 @@
     <div class="treeview-back">
         <%:Html.Kendo().TreeView()
             .Name("treeview")
-            .Checkboxes(checkboxes =>
-                {
-                    checkboxes.CheckChildren(true);
-                })
+            .Checkboxes(checkboxes => checkboxes
+                .Name("checkedFiles")
+                .CheckChildren(true)
+            )
             .Items(treeview =>
             {
                 treeview.Add().Text("My Documents").Id("1")

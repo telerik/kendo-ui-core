@@ -100,5 +100,26 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// The name attribute of the checkbox fields. This will correlate to the name of the action method parameter that the nodes are posted to.
+        /// </summary>
+        /// <param name="name">The string that will be used in the name attribute.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .Checkboxes(config => config
+        ///                 .Name("checkedNodes")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewCheckboxesBuilder Name(string name)
+        {
+            settings.Name = name;
+
+            return this;
+        }
     }
 }

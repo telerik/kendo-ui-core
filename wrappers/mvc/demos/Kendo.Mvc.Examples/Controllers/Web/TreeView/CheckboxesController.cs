@@ -11,10 +11,10 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [HttpPost]
-        public ActionResult Checkboxes(string[] checkedNodes)
+        public ActionResult Checkboxes(string[] checkedFiles)
         {
-            checkedNodes = checkedNodes ?? new string[0];
-            return View(checkedNodes);
+            checkedFiles = checkedFiles ?? new string[0];
+            return View(checkedFiles);
         }
     }
 }

@@ -6,10 +6,11 @@
 
     public class TreeViewCheckboxesSettings : JsonObject
     {
-        public const string DefaultTemplate = "<input type='checkbox' name='checkedNodes' #= item.checked ? 'checked' : '' # value='#= item.id #' />";
+        public const string DefaultTemplate = "<input type='checkbox' name='#= treeview.checkboxes.name #' #= item.checked ? 'checked' : '' # value='#= item.id #' />";
 
         public TreeViewCheckboxesSettings()
         {
+            Name = "checkedNodes";
             Template = DefaultTemplate;
         }
 
@@ -19,12 +20,15 @@
 
         public object Template { get; set; }
 
+        public string Name { get; set; }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             if (Enabled)
             {
                 var options = new Dictionary<string, object>();
 
+                options["name"] = Name;
                 options["template"] = Template;
 
                 if (CheckChildren)
