@@ -53,6 +53,7 @@ var tests = [
     "chart/linechart.html",
     "chart/steplinechart.html",
     "chart/areachart.html",
+    "chart/stepareachart.html",
     "chart/piechart.html",
     "chart/donutchart.html",
     "chart/tooltip.html",

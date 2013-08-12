@@ -10315,6 +10315,7 @@ kendo_module({
         SeriesBinder: SeriesBinder,
         ShapeElement: ShapeElement,
         StackLayout: StackLayout,
+        StepAreaChart: StepAreaChart,
         StepLineChart: StepLineChart,
         Tooltip: Tooltip,
         OHLCChart: OHLCChart,
