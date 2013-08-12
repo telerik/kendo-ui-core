@@ -408,7 +408,9 @@ kendo_module({
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-            this.userEvents.destroy();
+            if (this.userEvents) {
+                this.userEvents.destroy();
+            }
         },
 
         _scale: function(scale) {
