@@ -9,7 +9,11 @@ kendo_module({
         id: "dataviz.chart-polar",
         name: "Polar & Radar",
         description: "Support for Polar and Radar charts.",
-        depends: ["dataviz.chart.polar"]
+        depends: ["dataviz.chart.polar"],
+        requireJS: false /* don't make dataviz.chart depend on
+                          * dataviz.chart.polar to avoid circular dependency.
+                          * Ticket 725435 */
+
     }]
 });
 

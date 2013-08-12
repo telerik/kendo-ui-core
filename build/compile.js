@@ -374,7 +374,11 @@ function extract_deps(ast, comp_filename) {
     if (!is_bundle) {
         var deps = component.depends ? component.depends.slice() : [];
         if (component.features) component.features.forEach(function(f){
-            if (f.depends) deps = deps.concat(f.depends);
+            if (f.depends) {
+                if (f.requireJS === undefined || f.requireJS) {
+                    deps = deps.concat(f.depends);
+                }
+            }
         });
         ast.deps = deps;
         ast.component = component;
