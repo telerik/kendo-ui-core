@@ -950,7 +950,7 @@ kendo_module({
 
         _click: function (e) {
             var that = this,
-                node = $(e.target),
+                node = $(e.currentTarget),
                 contents = nodeContents(node.closest(NODE)),
                 href = node.attr("href"),
                 shouldNavigate;
