@@ -37,9 +37,13 @@ test("Creating effects registers API constructor", 2, function() {
 
 module("FX integration tests")
 
-function verifyEffect(effectName, before, after, reverse) {
+function verifyEffect(effectName, before, after, withEffect) {
+    withEffect = withEffect || $.noop;
+
     var effect = kendo.fx($("<div style='width:200px; height: 200px' />").appendTo(document.body))[effectName]();
     effect.duration(0);
+
+    withEffect(effect);
 
     var setup = effect.setup;
     effect.setup = function() {
@@ -80,12 +84,28 @@ asyncTest("fade in fades the element", 2, function() {
     );
 });
 
+asyncTest("fade in accepts custom start/end values", 2, function() {
+    verifyEffect("fadeIn",
+        function(element) { QUnit.close(element.css("opacity"), 0.3, 0.1) },
+        function(element) { start(); QUnit.close(element.css("opacity"), 0.8, 0.1); },
+        function(effect) { effect.startValue(0.3).endValue(0.8); }
+    );
+});
+
+asyncTest("fade out can fade the element to a given value", 3, function() {
+    verifyEffect("fadeOut",
+        function(element) { QUnit.close(element.css("opacity"), 1, 0.1); },
+        function(element) { start(); QUnit.close(element.css("opacity"), 0.8, 0.1); equal(element.css("display"), "block"); },
+        function(effect) { effect.endValue(0.8); }
+    );
+});
+
 asyncTest("fade out fades the element and hides it", 3, function() {
     verifyEffect("fadeOut",
         function(element) { equal(element.css("opacity"), "1") },
         function(element) {
             start();
-            equal(element.css("opacity"), "1");
+            equal(element.css("opacity"), "0");
             equal(element.css("display"), "none");
         }
     );

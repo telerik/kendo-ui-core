@@ -991,11 +991,9 @@ kendo_module({
         }
     });
 
-    function createToggleEffect(name, property, endValue) {
+    function createToggleEffect(name, property, defaultStart, defaultEnd) {
         createEffect(name, {
             directions: IN_OUT,
-
-            restore: [ property ],
 
             startValue: function(value) {
                 this._startValue = value;
@@ -1008,36 +1006,46 @@ kendo_module({
             },
 
             shouldHide: function() {
-               return (this._direction === "out") ? !this._reverse : this._reverse;
-            },
-
-            _end: function() {
-                return this._endValue || endValue;
-            },
-
-            _start: function() {
-                return this._startValue || 1;
+               return this._shouldHide;
             },
 
             prepare: function(start, end) {
                 var that = this,
-                    opacity = that.element.data(property),
-                    out = that.shouldHide(),
-                    value = isNaN(opacity) || opacity === "" ? that._start() : opacity;
+                    startValue,
+                    endValue,
+                    out = this._direction === "out",
+                    startDataValue = that.element.data(property),
+                    startDataValueIsSet = !(isNaN(startDataValue) || startDataValue == defaultStart);
 
-                start[property] = end[property] = that._end();
-
-                if (out) {
-                    start[property] = value;
+                if (startDataValueIsSet) {
+                    startValue = startDataValue;
+                } else if (typeof this._startValue !== "undefined") {
+                    startValue = this._startValue;
                 } else {
-                    end[property] = value;
+                    startValue = out ? defaultStart : defaultEnd;
                 }
+
+                if (typeof this._endValue !== "undefined") {
+                    endValue = this._endValue;
+                } else {
+                    endValue = out ? defaultEnd : defaultStart;
+                }
+
+                if (this._reverse) {
+                    start[property] = endValue;
+                    end[property] = startValue;
+                } else {
+                    start[property] = startValue;
+                    end[property] = endValue;
+                }
+
+                that._shouldHide = end[property] === defaultEnd;
             }
         });
     }
 
-    createToggleEffect("fade", "opacity", 0);
-    createToggleEffect("zoom", "scale", 0.01);
+    createToggleEffect("fade", "opacity", 1, 0);
+    createToggleEffect("zoom", "scale", 1, 0.01);
 
     createEffect("slideMargin", {
         prepare: function(start, end) {
