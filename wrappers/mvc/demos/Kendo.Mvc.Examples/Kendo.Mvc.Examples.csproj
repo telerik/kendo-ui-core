@@ -810,6 +810,8 @@
     <Content Include="Areas\razor\Views\mobile\buttongroup\appearance.cshtml" />
     <Content Include="Areas\razor\Views\mobile\buttongroup\navbar.cshtml" />
     <Content Include="Areas\razor\Views\mobile\layout\index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.ascx" />
     <Content Include="Views\Shared\PlayMusic.cshtml" />
     <Content Include="Areas\razor\Views\mobile\view\zoomable.cshtml" />
     <Content Include="Areas\razor\Views\mobile\splitview\index.cshtml" />
@@ -935,6 +937,10 @@
     </None>
     <Content Include="Views\Shared\_MobileNavigation.cshtml" />
     <Content Include="Views\Shared\MusicStore.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
