@@ -11,6 +11,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using System.Web.Util;
+    using System.Web;
 
     public abstract class WidgetBase : IWidget, IScriptableComponent
     {
@@ -239,6 +240,10 @@ namespace Kendo.Mvc.UI
                            .Replace("%3D", "=")
                            .Replace("&#32;", " ");
             }
+
+            //must decode unicode symbols otherwise they will be rendered as HTML entities
+            //which will break the client template
+            html = HttpUtility.HtmlDecode(html);
 
             return MvcHtmlString.Create(html);
         }
