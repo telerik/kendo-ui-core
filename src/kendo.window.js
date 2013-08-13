@@ -206,21 +206,7 @@ kendo_module({
                 .on("focus" + NS, function() { wrapper.addClass(KFOCUSEDSTATE); })
                 .on("blur" + NS, function() { wrapper.removeClass(KFOCUSEDSTATE); });
 
-            if (options.resizable) {
-                wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, function(e) {
-                    if (!$(e.target).closest(".k-window-action").length) {
-                        that.toggleMaximization();
-                    }
-
-                    return this;
-                });
-
-                each("n e s w se sw ne nw".split(" "), function(index, handler) {
-                    wrapper.append(templates.resizeHandle(handler));
-                });
-
-                that.resizing = new WindowResizing(that);
-            }
+            this._resizable();
 
             this._draggable();
 
@@ -307,6 +293,32 @@ kendo_module({
             }
         },
 
+        _resizable: function() {
+            var resizable = this.options.resizable;
+            var wrapper = this.wrapper;
+
+            if (resizable) {
+                wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(function(e) {
+                    if (!$(e.target).closest(".k-window-action").length) {
+                        this.toggleMaximization();
+                    }
+                }, this));
+
+                each("n e s w se sw ne nw".split(" "), function(index, handler) {
+                    wrapper.append(templates.resizeHandle(handler));
+                });
+
+                this.resizing = new WindowResizing(this);
+            } else if (this.resizing) {
+                wrapper
+                    .off("dblclick" + NS)
+                    .find(KWINDOWRESIZEHANDLES).remove();
+
+                this.resizing.destroy();
+                this.resizing = null;
+            }
+        },
+
         _draggable: function() {
             var draggable = this.options.draggable;
 
@@ -322,6 +334,7 @@ kendo_module({
             Widget.fn.setOptions.call(this, options);
             this._animations();
             this._dimensions();
+            this._resizable();
             this._draggable();
         },
 
