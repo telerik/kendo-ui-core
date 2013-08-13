@@ -363,7 +363,6 @@ kendo_module({
                 });
 
             try {
-                doc.execCommand("enableObjectResizing", false, "false");
                 doc.execCommand("enableInlineTableEditing", null, false);
             } catch(e) { }
 
