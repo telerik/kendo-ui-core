@@ -35,6 +35,26 @@ var ParagraphCommand = Command.extend({
         return marker;
     },
 
+    _moveFocus: function(range, next) {
+        if (dom.is(next, 'img')) {
+            range.setStartBefore(next);
+        } else {
+            range.selectNodeContents(next);
+
+            var textNode = RangeUtils.textNodes(range)[0];
+
+            if (textNode) {
+                range.selectNodeContents(textNode);
+            } else {
+                while (next.childNodes.length && !dom.is(next.firstChild, "br")) {
+                    next = next.firstChild;
+                }
+
+                range.selectNodeContents(next);
+            }
+        }
+    },
+
     shouldTrim: function(range) {
         var blocks = 'p,h1,h2,h3,h4,h5,h6'.split(','),
             startInBlock = dom.parentOfType(range.startContainer, blocks),
@@ -117,23 +137,7 @@ var ParagraphCommand = Command.extend({
 
         normalize(next);
 
-        if (dom.is(next, 'img')) {
-            range.setStartBefore(next);
-        } else {
-            range.selectNodeContents(next);
-
-            var textNode = RangeUtils.textNodes(range)[0];
-
-            if (textNode) {
-                range.selectNodeContents(textNode);
-            } else {
-                while (next.childNodes.length && !dom.is(next.firstChild, "br")) {
-                    next = next.firstChild;
-                }
-
-                range.selectNodeContents(next);
-            }
-        }
+        this._moveFocus(range, next);
 
         range.collapse(true);
 
