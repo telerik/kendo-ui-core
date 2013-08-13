@@ -247,6 +247,20 @@
         equal(editor.value(), 'foo bar<strong> baz</strong>');
     });
 
+    test("BOM nodes are not accumulated when executing sequential commands", function() {
+        editor.value("foo");
+
+        var range = editor.createRange();
+        range.setStart(editor.body.firstChild, 3);
+        range.collapse(true);
+        editor.selectRange(range);
+
+        editor.exec("bold");
+        editor.exec("italic");
+
+        equal(editor.body.lastChild.childNodes.length, 1);
+    });
+
 </script>
 
 <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

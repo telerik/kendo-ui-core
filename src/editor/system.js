@@ -15,11 +15,10 @@
 
 var Command = Class.extend({
     init: function(options) {
-        var that = this;
-        that.options = options;
-        that.restorePoint = new RestorePoint(options.range);
-        that.marker = new Marker();
-        that.formatter = options.formatter;
+        this.options = options;
+        this.restorePoint = new RestorePoint(options.range);
+        this.marker = new Marker();
+        this.formatter = options.formatter;
     },
 
     getRange: function () {
@@ -54,11 +53,10 @@ var Command = Class.extend({
     },
 
     exec: function () {
-        var that = this,
-            range = that.lockRange(true);
-        that.formatter.editor = that.editor;
-        that.formatter.toggle(range);
-        that.releaseRange(range);
+        var range = this.lockRange(true);
+        this.formatter.editor = this.editor;
+        this.formatter.toggle(range);
+        this.releaseRange(range);
     }
 });
 
@@ -137,10 +135,8 @@ var UndoRedoStack = Class.extend({
     },
 
     push: function (command) {
-        var that = this;
-
-        that.stack = that.stack.slice(0, that.currentCommandIndex + 1);
-        that.currentCommandIndex = that.stack.push(command) - 1;
+        this.stack = this.stack.slice(0, this.currentCommandIndex + 1);
+        this.currentCommandIndex = this.stack.push(command) - 1;
     },
 
     undo: function () {

@@ -160,7 +160,7 @@ var ParagraphCommand = Command.extend({
                 node = node.firstChild;
             }
 
-            if (!dom.is(node, 'img') && /^\s*$/.test(node.innerHTML)) {
+            if (!dom.isEmpty(node) && /^\s*$/.test(node.innerHTML)) {
                 node.innerHTML = editorNS.emptyElementContent;
             }
         }

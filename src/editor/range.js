@@ -814,6 +814,8 @@ var Marker = Class.extend({
         that.start = that.end.cloneNode(true);
         rangeBoundary.insertNode(that.start);
 
+        that._removeDeadMarkers(that.start, that.end);
+
         if (collapsed) {
             var bom = doc.createTextNode("\ufeff");
             dom.insertAfter(bom.cloneNode(), that.start);
@@ -826,6 +828,16 @@ var Marker = Class.extend({
         normalize(range.commonAncestorContainer);
 
         return range;
+    },
+
+    _removeDeadMarkers: function(start, end) {
+        if (start.previousSibling && start.previousSibling.nodeValue == "\ufeff") {
+            dom.remove(start.previousSibling);
+        }
+
+        if (end.nextSibling && end.nextSibling.nodeValue == "\ufeff") {
+            dom.remove(end.nextSibling);
+        }
     },
 
     remove: function (range) {
