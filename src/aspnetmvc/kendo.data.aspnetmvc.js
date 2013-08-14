@@ -162,7 +162,7 @@ kendo_module({
            if (value.indexOf('Date(') > -1) {
                value = new Date(parseInt(value.replace(/^\/Date\((.*?)\)\/$/, '$1'), 10));
            } else {
-               return "'" + value.replace(escapeQuoteRegExp, "''") + "'";
+               return "'" + encodeURIComponent(value.replace(escapeQuoteRegExp, "''")) + "'";
            }
        }
 
