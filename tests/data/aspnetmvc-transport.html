@@ -35,6 +35,12 @@
                 equal("foo~eq~'%26'", transport.parameterMap({ filter: { logic: "and", filters: [ { field: "foo", operator: "eq", value: "&" }] } }).filter);
             });
 
+            test("ajax transport doesn't encode ampersand", function() {
+                var transport = new kendo.data.transports["aspnetmvc-ajax"]({ prefix: "" });
+
+                equal("foo~eq~'&'", transport.parameterMap({ filter: { logic: "and", filters: [ { field: "foo", operator: "eq", value: "&" }] } }).filter);
+            });
+
             test("read url is requested if no data is set", 1, function() {
                 var transport = new Transport({
                         read: {

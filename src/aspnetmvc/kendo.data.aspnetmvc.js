@@ -11,7 +11,7 @@ kendo_module({
         escapeQuoteRegExp = /'/ig,
         extend = $.extend;
 
-    function parameterMap(options, operation) {
+    function parameterMap(options, operation, encode) {
        var result = {};
 
        if (options.sort) {
@@ -55,7 +55,7 @@ kendo_module({
        }
 
        if (options.filter) {
-           result[this.options.prefix + "filter"] = serializeFilter(options.filter);
+           result[this.options.prefix + "filter"] = serializeFilter(options.filter, encode);
 
            delete options.filter;
        } else {
@@ -136,11 +136,11 @@ kendo_module({
         }
     }
 
-    function serializeFilter(filter) {
+    function serializeFilter(filter, encode) {
        if (filter.filters) {
            return $.map(filter.filters, function(f) {
                var hasChildren = f.filters && f.filters.length > 1,
-                   result = serializeFilter(f);
+                   result = serializeFilter(f, encode);
 
                if (result && hasChildren) {
                    result = "(" + result + ")";
@@ -151,18 +151,24 @@ kendo_module({
        }
 
        if (filter.field) {
-           return filter.field + "~" + filter.operator + "~" + encodeFilterValue(filter.value);
+           return filter.field + "~" + filter.operator + "~" + encodeFilterValue(filter.value, encode);
        } else {
            return undefined;
        }
     }
 
-    function encodeFilterValue(value) {
+    function encodeFilterValue(value, encode) {
        if (typeof value === "string") {
            if (value.indexOf('Date(') > -1) {
                value = new Date(parseInt(value.replace(/^\/Date\((.*?)\)\/$/, '$1'), 10));
            } else {
-               return "'" + encodeURIComponent(value.replace(escapeQuoteRegExp, "''")) + "'";
+               value = value.replace(escapeQuoteRegExp, "''");
+
+               if (encode) {
+                   value = encodeURIComponent(value);
+               }
+
+               return "'" + value + "'";
            }
        }
 
@@ -280,7 +286,15 @@ kendo_module({
         transports: {
             "aspnetmvc-server": kendo.data.RemoteTransport.extend({
                 init: function(options) {
-                    kendo.data.RemoteTransport.fn.init.call(this, extend(options, { parameterMap: $.proxy(parameterMap, this) } ));
+                    var that = this;
+
+                    kendo.data.RemoteTransport.fn.init.call(this,
+                        extend(options, {
+                            parameterMap: function(options, operation) {
+                                return parameterMap.call(that, options, operation, true);
+                            }
+                        }
+                    ));
                 },
                 read: function(options) {
                     var url,
