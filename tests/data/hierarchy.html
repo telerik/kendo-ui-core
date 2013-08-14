@@ -997,6 +997,103 @@
                 equal(root.items, root.children.data());
             });
 
+            module("HierarchicalDataSource : parameterMap", {
+                setup: function() {
+                    $.mockjaxSettings.responseTime = 0;
+                },
+                teardown: function() {
+                    $.mockjaxClear();
+                }
+            });
+
+            function addFoo(data) {
+                data.foo = "bar";
+                return data;
+            }
+
+            asyncTest("parameterMap gets called when fetching root nodes", function() {
+                $.mockjax({
+                    url: "bar", dataType: "json",
+                    response: function(e) {
+                        start();
+                        equal(e.data.foo, "bar");
+                    }
+                });
+
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: { url: "bar", dataType: "json" },
+                        parameterMap: addFoo
+                    }
+                });
+
+                dataSource.read();
+            });
+
+            asyncTest("parameterMap gets called when fetching child nodes", function() {
+                $.mockjax({
+                    url: "bar", dataType: "json", data: { id: 1 },
+                    response: function(e) {
+                        start();
+                        equal(e.data.foo, "bar");
+                    }
+                });
+
+                $.mockjax({
+                    url: "bar", dataType: "json",
+                    responseText: [{ id: 1, hasChildren: true, text: "foo" }]
+                });
+
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: { url: "bar", dataType: "json" },
+                        parameterMap: addFoo
+                    }
+                });
+
+                dataSource.one("change", function() {
+                    this.data()[0].load();
+                });
+
+                dataSource.read();
+            });
+
+            asyncTest("child parameterMap gets called when fetching child nodes", function() {
+                $.mockjax({
+                    url: "bar", dataType: "json", data: { id: 1 },
+                    response: function(e) {
+                        start();
+                        equal(e.data.foo, "bar");
+                    }
+                });
+
+                $.mockjax({
+                    url: "bar", dataType: "json",
+                    responseText: [{ id: 1, hasChildren: true, text: "foo" }]
+                });
+
+                var bar = { url: "bar", dataType: "json" };
+
+                var dataSource = new HierarchicalDataSource({
+                    transport: { read: bar },
+                    schema: {
+                        model: {
+                            id: "id",
+                            hasChildren: "hasChildren",
+                            children: {
+                                transport: { read: bar, parameterMap: addFoo }
+                            }
+                        }
+                    }
+                });
+
+                dataSource.one("change", function() {
+                    this.data()[0].load();
+                });
+
+                dataSource.read();
+            });
+
             /*
             test("child datasources inherit model", function() {
                 var CustomModel = kendo.data.Node.define({

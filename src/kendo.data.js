@@ -3277,7 +3277,7 @@ kendo_module({
 
             var transport = childrenOptions.transport;
 
-            if (transport) {
+            if (transport && !transport.parameterMap) {
                 transport.parameterMap = function(data) {
                     if (that.parentParameterMap) {
                         data = that.parentParameterMap.call(this, data);
