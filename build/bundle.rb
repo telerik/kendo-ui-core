@@ -4,6 +4,9 @@ def description(name)
     "Build Kendo UI #{name}"
 end
 
+desc "Upload all internal builds on kendoui.com"
+task "internal_builds:bundles:all" => [ "build:production:get_binaries" ]
+
 def bundle(options)
     name = options[:name]
     eula = options[:eula]
@@ -130,7 +133,7 @@ def bundle(options)
                 :archive_path => versioned_bundle_archive_path
         end
 
-        desc "Upload all internal builds on kendoui.com"
+        # add bundle to bundles:all
         task "internal_builds:bundles:all" => "internal_builds:bundles:#{name}"
     end
 end
