@@ -386,6 +386,14 @@
                 equal(dom.find(".k-tool-icon").attr("title"), "foo");
             });
 
+            test("nameless custom commands are rendered", function() {
+                toolbar.bindTo(mockEditorTools([
+                    { template: "<span class='foo' />" }
+                ]));
+
+                equal(dom.find(".foo").length, 1);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

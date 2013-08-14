@@ -349,6 +349,10 @@
                 toolName = toolConfig[i].name || toolConfig[i];
                 options = tools[toolName] && tools[toolName].options;
 
+                if (!options && $.isPlainObject(toolName)) {
+                    options = toolName;
+                }
+
                 template = options && options.template;
 
                 if (toolName == "break") {
