@@ -640,7 +640,7 @@ kendo_module({
         return {
             start: start,
             end: end
-        }
+        };
     }
 
     var Scheduler = Widget.extend({

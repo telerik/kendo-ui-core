@@ -681,10 +681,17 @@ kendo_module({
         }
     });
 
+    var scrollbarWidth;
+    function scrollbar() {
+        scrollbarWidth = scrollbarWidth ? scrollbarWidth : kendo.support.scrollbar();
+        return scrollbarWidth;
+    }
+
     kendo.ui.SchedulerView = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
-            this._scrollbar = kendo.support.scrollbar();
+
+            this._scrollbar = scrollbar();
             this._isRtl = kendo.support.isRtl(element);
             this._resizeHint = $();
             this._moveHint = $();
