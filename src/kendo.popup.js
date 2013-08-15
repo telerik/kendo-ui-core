@@ -353,6 +353,11 @@ kendo_module({
                 return;
             }
 
+            // This MAY result in popup not closing in certain cases.
+            if ($(e.target).closest("a").data("rel") === "popover") {
+                return;
+            }
+
             if (!contains(container, target) && !contains(anchor, target) && !(toggleTarget && contains($(toggleTarget)[0], target))) {
                 that.close();
             }
