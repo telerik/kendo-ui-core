@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>ErrorBar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+         <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet" />
+    </head>
+    <body>        
+        <div id="chart"></div>
+        <script>
+
+
+            $(function() {
+                 $("#chart").kendoChart({
+                    seriesDefaults: {
+                        type: "line"
+                    },
+                    series: [{
+                        name: "India",
+                        data: [3.907, 7.943, 7.848],
+                        color: "red",
+                        errorBars: {
+                            value: 0.5
+                        }
+                    }],
+                    categoryAxis: {
+                        categories: [2002, 2003, 2004]
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
+
