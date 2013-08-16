@@ -782,8 +782,8 @@ kendo_module({
             element = that.element;
 
             var value;
-            if (element.val()) {
-                value = parse(element.val(), true);
+            if (/\S/.test(element.attr("value"))) {
+                value = parse(element.attr("value"), true);
             } else {
                 value = parse(options.value, true);
             }
