@@ -2850,6 +2850,9 @@ kendo_module({
             }
 
             bar.createNote();
+            if(bar.errorBar){
+                bar.append(bar.errorBar);
+            }
         },
 
         createNote: function() {
@@ -3025,7 +3028,72 @@ kendo_module({
 
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
+        addPointErrorBar: function(value, point, categoryIx){
+                var chart = this,
+                    series = point.series,
+                    errorBar = new ErrorBar(chart, point, series),
+                    low = errorBar.low,
+                    high = errorBar.high;
+                point.low =  parseFloat(low.toFixed(3));
+                point.high = parseFloat(high.toFixed(3));;
+                if(series.stack){
+                    if(series.type == BAR || series.type == COLUMN){
+                        var totals = chart.groupTotals(series.stack),
+                            cluster = chart.children[categoryIx],
+                            stackWrap = chart.getStackWrap(series, cluster),
+                            positiveStack = stackWrap.children[0],
+                            negativeStack = stackWrap.children[1],
+                            idx,
+                            sum = 0;
+                        if(value > 0){
+                            for(idx = 0;idx < positiveStack.children.length; idx++){
+                                sum += positiveStack.children[idx].value;
+                            }
+                        }
+                        else{
+                            for(idx = 0;idx < negativeStack.children.length; idx++){
+                                sum += negativeStack.children[idx].value;
+                            }
+                        }
 
+                       errorBar.plotValue = sum;
+
+                        if(high < 0){
+                            incrementSlot(totals.negative, categoryIx, low);
+                        }
+                        else if(low < 0){
+                            incrementSlot(totals.positive,categoryIx, high);
+                            incrementSlot(totals.negative,categoryIx, low);
+                        }
+                        else{
+                            incrementSlot(totals.positive,categoryIx, high);
+                        }
+                    }
+                    else if(series.type == LINE){
+                        errorBar.plotValue = point.plotValue;
+                        chart.minValues = chart.minValues || []; chart.minValues[categoryIx] = chart.minValues[categoryIx] || 0;
+                        chart.maxValues = chart.maxValues || []; chart.maxValues[categoryIx] = chart.maxValues[categoryIx] || 0;
+
+                        chart.minValues[categoryIx] += low === null ? 0 : low; chart.maxValues[categoryIx] += high === null ? 0 : high;
+
+                        if(categoryIx > 0 && chart.minValues[categoryIx - 1] === undefined){
+                            chart.minValues[categoryIx - 1] = chart.maxValues[categoryIx - 1] = 0;
+                        }
+                        var totalsMin = Math.min.apply(null, chart.minValues),
+                            totalsMax = Math.max.apply(null, chart.maxValues),
+                            stackAxisRange = chart._stackAxisRange;
+
+                        stackAxisRange.min = math.min(stackAxisRange.min, totalsMin);
+                        stackAxisRange.max = math.max(stackAxisRange.max, totalsMax);
+                    }
+                }
+                else{
+                    errorBar.plotValue = value;
+                    chart.updateRange(low, categoryIx, series);
+                    chart.updateRange(high, categoryIx, series);
+                }
+            point.errorBar = errorBar;
+        },
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 categoryPoints = chart.categoryPoints[categoryIx],
@@ -3049,7 +3117,17 @@ kendo_module({
                 point.seriesIx = seriesIx;
                 point.owner = chart;
                 point.dataItem = series.data[categoryIx];
+                if(series.errorBars){
+                    chart.addPointErrorBar(value, point, categoryIx)
+                }
+                else{
+                    chart.updateRange(value, categoryIx, series);
+                }
             }
+            else{
+                chart.updateRange(value, categoryIx, series);
+            }
+
 
             chart.points.push(point);
             seriesPoints.push(point);
@@ -3284,7 +3362,15 @@ kendo_module({
 
             if (isStacked) {
                 var stackWrap = chart.getStackWrap(series, cluster),
-                    positiveStack, negativeStack;
+                    positiveStack, negativeStack,
+                    stackPoint = lastValue(chart.categoryPoints[categoryIx]),
+                    plotValue = 0;
+
+                if (stackPoint) {
+                    plotValue = stackPoint.testPlotValue;
+                }
+
+                point.testPlotValue = value + plotValue;
 
                 if (stackWrap.children.length === 0) {
                     positiveStack = new stackType({
@@ -3786,6 +3872,96 @@ kendo_module({
     var Target = ShapeElement.extend();
     deepExtend(Target.fn, PointEventsMixin);
 
+    var ErrorBar = ChartElement.extend({
+        init: function(chart, point, series){
+            var errorBar = this;
+            errorBar.parent = point;
+            errorBar.chart = chart;
+            errorBar.options = series.errorBars;
+            errorBar.orientation = series.type != BAR ? "vertical" : "horizontal";
+            errorBar.low = errorBar.calculateLow();
+            errorBar.high = errorBar.calculateHigh();
+            errorBar.children = [];
+        },
+        calculateLow: function(){
+            var errorBar = this,
+                parent = errorBar.parent;
+            if(errorBar.options.value){
+                return parent.value - errorBar.options.value;
+            }
+        },
+        calculateHigh: function(){
+            var errorBar = this,
+                parent = errorBar.parent;
+            if(errorBar.options.value){
+                return parent.value + errorBar.options.value;
+            }
+        },
+        reflow: function(targetBox){
+            this.box = targetBox;
+
+            this.render();
+        },
+        render: function(){
+
+        },
+        createHorizontalErrorBar: function(view,valueBox, box){
+            var center = box.center(),
+                capStart = center.y - 10,
+                capEnd = center.y + 10,
+                elements = [],
+                lineOptions = this.lineOptions;
+            elements.push(view.createLine(valueBox.x1, center.y, valueBox.x2, center.y, lineOptions));
+            elements.push(view.createLine(valueBox.x1, capStart, valueBox.x1, capEnd, lineOptions));
+            elements.push(view.createLine(valueBox.x2, capStart, valueBox.x2, capEnd, lineOptions));
+            return elements;
+        },
+        createVerticalErrorBar: function(view,valueBox, box){
+           var center = box.center(),
+               capStart = center.x - 10,
+               capEnd = center.x + 10,
+               elements = [],
+               lineOptions = this.lineOptions;
+            elements.push(view.createLine(center.x, valueBox.y1, center.x, valueBox.y2, lineOptions));
+            elements.push(view.createLine(capStart, valueBox.y1, capEnd, valueBox.y1, lineOptions));
+            elements.push(view.createLine(capStart, valueBox.y2, capEnd, valueBox.y2, lineOptions));
+            return elements;
+        },
+        getViewElements: function(view){
+            var errorBar = this,
+                chart = errorBar.chart,
+                parent = errorBar.parent,
+                valueAxis = chart.plotArea.valueAxis,
+                plotValue = errorBar.plotValue,
+                value = parent.value,
+                low = errorBar.low + (plotValue - parent.value),
+                high = errorBar.high + (plotValue - parent.value),
+                valueBox = valueAxis.getSlot(low, high),
+                box = errorBar.box,
+                orientation = errorBar.orientation,
+                elements = [];
+
+            if(orientation == "vertical"){
+               elements = errorBar.createVerticalErrorBar(view,valueBox,box);
+            }
+            else{
+               elements = errorBar.createHorizontalErrorBar(view,valueBox,box);
+            }
+
+            return elements;
+        },
+        lineOptions: {
+            stroke: "red",
+            strokeWidth: 1,
+            zIndex: 1,
+            align: false
+        },
+        options: {
+
+        }
+    });
+
+
     var LinePoint = ChartElement.extend({
         init: function(value, options) {
             var point = this,
@@ -3901,6 +4077,10 @@ kendo_module({
             }
 
             point.createNote();
+
+            if(point.errorBar){
+                point.append(point.errorBar);
+            }
         },
 
         createNote: function() {
@@ -3959,6 +4139,10 @@ kendo_module({
 
             point.marker.reflow(childBox);
             point.reflowLabel(childBox);
+
+            if(point.errorBar){
+                point.errorBar.reflow(childBox);
+            }
 
             if (point.note) {
                 if (point.marker.options.visible) {
@@ -8726,7 +8910,9 @@ kendo_module({
                     category: point.category,
                     series: point.series,
                     dataItem: point.dataItem,
-                    percentage: point.percentage
+                    percentage: point.percentage,
+                    low: point.low,
+                    high: point.high
                 });
             } else if (options.format) {
                 content = point.formatValue(options.format);
