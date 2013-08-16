@@ -46,6 +46,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the default settings for step line series.
+        /// </summary>
+        public virtual ChartStepLineSeriesBuilder<TModel> StepLine()
+        {
+            return new ChartStepLineSeriesBuilder<TModel>(chart.SeriesDefaults.StepLine);
+        }
+
+        /// <summary>
+        /// Defines the default settings for vertical step line series.
+        /// </summary>
+        public virtual ChartStepLineSeriesBuilder<TModel> VerticalStepLine()
+        {
+            return new ChartStepLineSeriesBuilder<TModel>(chart.SeriesDefaults.VerticalStepLine);
+        }
+
+        /// <summary>
         /// Defines the default settings for area series.
         /// </summary>
         public virtual ChartAreaSeriesBuilder<TModel> Area()

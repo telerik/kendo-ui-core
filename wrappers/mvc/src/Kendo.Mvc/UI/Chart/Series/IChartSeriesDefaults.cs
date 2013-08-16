@@ -35,6 +35,22 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The default settings for all step line series
+        /// </summary>
+        IChartStepLineSeries StepLine
+        {
+            get;
+        }
+
+        /// <summary>
+        /// The default settings for all vertical step line series
+        /// </summary>
+        IChartStepLineSeries VerticalStepLine
+        {
+            get;
+        }
+
+        /// <summary>
         /// The default settings for all area series
         /// </summary>
         IChartAreaSeries Area
@@ -46,6 +62,22 @@ namespace Kendo.Mvc.UI
         /// The default settings for all vertical area series
         /// </summary>
         IChartAreaSeries VerticalArea
+        {
+            get;
+        }
+
+        /// <summary>
+        /// The default settings for all step area series
+        /// </summary>
+        IChartStepAreaSeries StepArea
+        {
+            get;
+        }
+
+        /// <summary>
+        /// The default settings for all vertical step area series
+        /// </summary>
+        IChartStepAreaSeries VerticalStepArea
         {
             get;
         }

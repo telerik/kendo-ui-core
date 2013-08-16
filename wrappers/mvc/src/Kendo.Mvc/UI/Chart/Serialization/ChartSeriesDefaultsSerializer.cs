@@ -26,11 +26,23 @@ namespace Kendo.Mvc.UI
             var verticalLineData = seriesDefaults.VerticalLine.CreateSerializer().Serialize();
             verticalLineData.Remove("type");
 
+            var stepLineData = seriesDefaults.StepLine.CreateSerializer().Serialize();
+            stepLineData.Remove("type");
+
+            var verticalStepLineData = seriesDefaults.VerticalStepLine.CreateSerializer().Serialize();
+            verticalStepLineData.Remove("type");
+
             var areaData = seriesDefaults.Area.CreateSerializer().Serialize();
             areaData.Remove("type");
 
             var verticalAreaData = seriesDefaults.VerticalArea.CreateSerializer().Serialize();
             verticalAreaData.Remove("type");
+            
+            var areaStepData = seriesDefaults.StepArea.CreateSerializer().Serialize();
+            areaStepData.Remove("type");
+
+            var verticalStepAreaData = seriesDefaults.VerticalStepArea.CreateSerializer().Serialize();
+            verticalStepAreaData.Remove("type");
 
             var pieData = seriesDefaults.Pie.CreateSerializer().Serialize();
             pieData.Remove("type");

@@ -509,6 +509,221 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines bound step line series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> StepLine<TValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            return StepLine<TValue, string>(expression, null, noteTextExpression);
+        }
+
+        /// <summary>
+        /// Defines bound step line series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the category from the chart model.
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> StepLine<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TCategory>> categoryExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            ChartStepLineSeries<TModel, TValue, TCategory> stepLineSeries = new ChartStepLineSeries<TModel, TValue, TCategory>(expression, categoryExpression, noteTextExpression);
+
+            Container.Series.Add(stepLineSeries);
+
+            return new ChartStepLineSeriesBuilder<TModel>(stepLineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound step line series.
+        /// </summary>
+        /// <param name="memberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="noteTextMemberName">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> StepLine(string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        {
+            return StepLine(null, memberName, categoryMemberName, noteTextMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound step line series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="memberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="noteTextMemberName">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> StepLine(Type memberType, string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        {
+            var valueExpr = BuildMemberExpression(memberType, memberName);
+            var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
+            var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var seriesType = typeof(ChartStepLineSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
+            var series = (IChartStepLineSeries)BuildSeries(seriesType, valueExpr, categoryExpr, noteTextExpr);
+
+            series.Member = memberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = memberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartStepLineSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines step line series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> StepLine(IEnumerable data)
+        {
+            ChartStepLineSeries<TModel, object> stepLineSeries = new ChartStepLineSeries<TModel, object>(data);
+
+            Container.Series.Add(stepLineSeries);
+
+            return new ChartStepLineSeriesBuilder<TModel>(stepLineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound vertical step line series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the category from the chart model.
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> VerticalStepLine<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TCategory>> categoryExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = StepLine(expression, categoryExpression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound vertical step line series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> VerticalStepLine<TValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = StepLine(expression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound vertical step line series.
+        /// </summary>
+        /// <param name="memberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="noteTextMemberName">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> VerticalStepLine(string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        {
+            var builder = StepLine(memberName, categoryMemberName, noteTextMemberName);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound vertical step line series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="memberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="noteTextMemberName">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> VerticalStepLine(
+            Type memberType,
+            string memberName,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
+        {
+            var builder = StepLine(memberType, memberName, categoryMemberName, noteTextMemberName);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines vertical line series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartStepLineSeriesBuilder<TModel> VerticalStepLine(IEnumerable data)
+        {
+            ChartStepLineSeries<TModel, object> verticalStepLineSeries = new ChartStepLineSeries<TModel, object>(data);
+
+            Container.Series.Add(verticalStepLineSeries);
+
+            var builder = new ChartStepLineSeriesBuilder<TModel>(verticalStepLineSeries);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
         /// Defines bound area series.
         /// </summary>
         /// <param name="expression">
