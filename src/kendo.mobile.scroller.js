@@ -350,6 +350,7 @@ kendo_module({
             elastic: true,
             useNative: false,
             avoidScrolling: function() { return false; },
+            pullToRefresh: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing"
