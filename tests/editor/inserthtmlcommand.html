@@ -45,6 +45,15 @@
             equal(editor.value(), 'fo<span class="bar"></span>o');
         });
 
+        test("exec insertHtml honors split parameter", function() {
+            var range = createRangeFromText(editor, '<em>fo||o</em>');
+
+            editor.selectRange(range);
+            editor.exec("insertHtml", { html: "bar", split: false });
+
+            equal(editor.value(), '<em>fobaro</em>');
+        });
+
         test("exec places cursor after inserted text", function() {
             var range = createRangeFromText(editor, 'foo||');
             editor.selectRange(range);

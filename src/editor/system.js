@@ -87,12 +87,14 @@ var InsertHtmlCommand = Command.extend({
 
     exec: function() {
         var editor = this.editor;
-        var range = this.options.range;
+        var options = this.options;
+        var range = options.range;
         var startRestorePoint = new RestorePoint(range);
+        var html = options.html || options.value || '';
 
         editor.selectRange(range);
 
-        editor.clipboard.paste(this.options.value || '');
+        editor.clipboard.paste(html, options);
         editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
 
         editor.focus();
@@ -450,7 +452,7 @@ var Clipboard = Class.extend({
             args.html = html;
 
             editor.trigger("paste", args);
-            editor.clipboard.paste(args.html, true);
+            editor.clipboard.paste(args.html, { clean: true });
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
 
             editor._selectionChange();
@@ -476,9 +478,11 @@ var Clipboard = Class.extend({
         return parentNode;
     },
 
-    paste: function (html, clean) {
+    paste: function (html, options) {
         var editor = this.editor,
             i, l;
+
+        options = extend({ clean: false, split: true }, options);
 
         for (i = 0, l = this.cleaners.length; i < l; i++) {
             if (this.cleaners[i].applicable(html)) {
@@ -486,7 +490,7 @@ var Clipboard = Class.extend({
             }
         }
 
-        if (clean) {
+        if (options.clean) {
             // remove br elements which immediately precede block elements
             html = html.replace(/(<br>(\s|&nbsp;)*)+(<\/?(div|p|li|col|t))/ig, "$3");
             // remove empty inline elements
@@ -513,7 +517,7 @@ var Clipboard = Class.extend({
         var unwrap = false;
         var splittable = parent != editor.body && !dom.is(parent, "td");
 
-        if (splittable && (block || dom.isInline(parent))) {
+        if (options.split && splittable && (block || dom.isInline(parent))) {
             range.selectNode(caret);
             editorNS.RangeUtils.split(range, parent, true);
             unwrap = true;

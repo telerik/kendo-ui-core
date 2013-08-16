@@ -749,8 +749,8 @@ kendo_module({
             return kendo.ui.editor.Serializer.domToXhtml(this.getRange().cloneContents());
         },
 
-        paste: function (html) {
-            this.clipboard.paste(html);
+        paste: function (html, options) {
+            this.clipboard.paste(html, options);
         },
 
         exec: function (name, params) {
