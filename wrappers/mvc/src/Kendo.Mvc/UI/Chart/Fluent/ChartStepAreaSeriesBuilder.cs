@@ -7,14 +7,14 @@ namespace Kendo.Mvc.UI.Fluent
     /// Defines the fluent interface for configuring area series.
     /// </summary>
     /// <typeparam name="T">The type of the data item</typeparam>
-    public class ChartAreaSeriesBuilder<T> : ChartSeriesBuilderBase<IChartAreaSeries, ChartAreaSeriesBuilder<T>>
+    public class ChartStepAreaSeriesBuilder<T> : ChartSeriesBuilderBase<IChartStepAreaSeries, ChartStepAreaSeriesBuilder<T>>
         where T : class
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartAreaSeriesBuilder{T}"/> class.
+        /// Initializes a new instance of the <see cref="ChartStepAreaSeriesBuilder{T}"/> class.
         /// </summary>
         /// <param name="series">The series.</param>
-        public ChartAreaSeriesBuilder(IChartAreaSeries series)
+        public ChartStepAreaSeriesBuilder(IChartStepAreaSeries series)
             : base(series)
         {
         }
@@ -27,11 +27,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
-        ///             .Series(series => series.Area(s => s.Sales).Stack(true))
+        ///             .Series(series => series.StepArea(s => s.Sales).Stack(true))
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartAreaSeriesBuilder<T> Stack(bool stacked)
+        public ChartStepAreaSeriesBuilder<T> Stack(bool stacked)
         {
             Series.Stacked = stacked;
 
@@ -47,11 +47,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
-        ///             .Series(series => series.Area(s => s.Sales).Aggregate())
+        ///             .Series(series => series.StepArea(s => s.Sales).Aggregate())
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartAreaSeriesBuilder<T> Aggregate(ChartSeriesAggregate aggregate)
+        public ChartStepAreaSeriesBuilder<T> Aggregate(ChartSeriesAggregate aggregate)
         {
             Series.Aggregate = aggregate;
 
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
-        ///                 .Area(s => s.Sales)
+        ///                 .StepArea(s => s.Sales)
         ///                 .Labels(labels => labels
         ///                     .Position(ChartBarLabelsPosition.Above)
         ///                     .Visible(true)
@@ -76,9 +76,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartAreaSeriesBuilder<T> Labels(Action<ChartPointLabelsBuilder> configurator)
+        public ChartStepAreaSeriesBuilder<T> Labels(Action<ChartPointLabelsBuilder> configurator)
         {
-
             configurator(new ChartPointLabelsBuilder(Series.Labels));
 
             return this;
@@ -93,13 +92,13 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
-        ///                 .Area(s => s.Sales)
+        ///                 .StepArea(s => s.Sales)
         ///                 .Labels(true);
         ///              )
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartAreaSeriesBuilder<T> Labels(bool visible)
+        public ChartStepAreaSeriesBuilder<T> Labels(bool visible)
         {
             Series.Labels.Visible = visible;
 
@@ -117,14 +116,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
-        ///               .Area(s => s.Sales)        
+        ///               .StepArea(s => s.Sales)        
         ///               .Line(2, "red", ChartDashType.Dot)
         ///           )
         ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartAreaSeriesBuilder<T> Line(int width, string color, ChartDashType dashType)
+        public ChartStepAreaSeriesBuilder<T> Line(int width, string color, ChartDashType dashType)
         {
             Series.Line.Width = width;
             Series.Line.Color = color;
@@ -142,16 +141,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
-        ///               .Area(s => s.Sales)        
+        ///               .StepArea(s => s.Sales)        
         ///               .Line(line => line.Opacity(0.2))
         ///           )
         ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartAreaSeriesBuilder<T> Line(Action<ChartAreaLineBuilder> configurator)
+        public ChartStepAreaSeriesBuilder<T> Line(Action<ChartAreaLineBuilder> configurator)
         {
-
             configurator(new ChartAreaLineBuilder(Series.Line));
 
             return this;
@@ -166,7 +164,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
-        ///                 .Area(s => s.Sales)
+        ///                 .StepArea(s => s.Sales)
         ///                 .Markers(markers => markers
         ///                     .Type(ChartMarkerShape.Triangle)
         ///                 );
@@ -174,9 +172,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartAreaSeriesBuilder<T> Markers(Action<ChartMarkersBuilder> configurator)
+        public ChartStepAreaSeriesBuilder<T> Markers(Action<ChartMarkersBuilder> configurator)
         {
-
             configurator(new ChartMarkersBuilder(Series.Markers));
 
             return this;
@@ -191,13 +188,13 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
-        ///                 .Area(s => s.Sales)
+        ///                 .StepArea(s => s.Sales)
         ///                 .Markers(true);
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartAreaSeriesBuilder<T> Markers(bool visible)
+        public ChartStepAreaSeriesBuilder<T> Markers(bool visible)
         {
             Series.Markers.Visible = visible;
 
@@ -213,13 +210,13 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
-        ///                 .Area(s => s.Sales)
+        ///                 .StepArea(s => s.Sales)
         ///                 .MissingValues(ChartAreaMissingValues.Interpolate);
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartAreaSeriesBuilder<T> MissingValues(ChartAreaMissingValues missingValues)
+        public ChartStepAreaSeriesBuilder<T> MissingValues(ChartStepAreaMissingValues missingValues)
         {
             Series.MissingValues = missingValues;
 

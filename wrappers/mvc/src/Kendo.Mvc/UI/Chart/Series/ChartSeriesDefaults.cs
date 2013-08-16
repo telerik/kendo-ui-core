@@ -17,6 +17,8 @@ namespace Kendo.Mvc.UI
             ScatterLine = new ChartScatterLineSeries<T, object, object>();
             Area = new ChartAreaSeries<T, object>();
             VerticalArea = new ChartAreaSeries<T, object>();
+            StepArea = new ChartStepAreaSeries<T, object>();
+            VerticalStepArea = new ChartStepAreaSeries<T, object>();
             OHLC = new ChartOHLCSeries<T, object, string>();
             Bullet = new ChartBulletSeries<T, object, string>();
             VerticalBullet = new ChartBulletSeries<T, object, string>();
@@ -59,6 +61,24 @@ namespace Kendo.Mvc.UI
         /// The default settings for all vertical area series.
         /// </summary>
         public IChartAreaSeries VerticalArea
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all step area series.
+        /// </summary>
+        public IChartStepAreaSeries StepArea
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all vertical step area series.
+        /// </summary>
+        public IChartStepAreaSeries VerticalStepArea
         {
             get;
             private set;

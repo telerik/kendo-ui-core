@@ -724,6 +724,221 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines bound step area series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> StepArea<TValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            return StepArea<TValue, string>(expression, null, noteTextExpression);
+        }
+
+        /// <summary>
+        /// Defines bound step area series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the category from the chart model.
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> StepArea<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TCategory>> categoryExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            ChartStepAreaSeries<TModel, TValue, TCategory> stepAreaSeries = new ChartStepAreaSeries<TModel, TValue, TCategory>(expression, categoryExpression, noteTextExpression);
+
+            Container.Series.Add(stepAreaSeries);
+
+            return new ChartStepAreaSeriesBuilder<TModel>(stepAreaSeries);
+        }
+
+        /// <summary>
+        /// Defines bound step area series.
+        /// </summary>
+        /// <param name="memberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="noteTextMemberName">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> StepArea(string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        {
+            return StepArea(null, memberName, categoryMemberName, noteTextMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound step area series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="memberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="noteTextMemberName">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> StepArea(Type memberType, string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        {
+            var valueExpr = BuildMemberExpression(memberType, memberName);
+            var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
+            var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var seriesType = typeof(ChartStepAreaSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
+            var series = (IChartStepAreaSeries)BuildSeries(seriesType, valueExpr, categoryExpr, noteTextExpr);
+
+            series.Member = memberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = memberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartStepAreaSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines step area series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> StepArea(IEnumerable data)
+        {
+            ChartStepAreaSeries<TModel, object> stepAreaSeries = new ChartStepAreaSeries<TModel, object>(data);
+
+            Container.Series.Add(stepAreaSeries);
+
+            return new ChartStepAreaSeriesBuilder<TModel>(stepAreaSeries);
+        }
+
+        /// <summary>
+        /// Defines bound vertical step area series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the category from the chart model.
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> VerticalStepArea<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TCategory>> categoryExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = StepArea(expression, categoryExpression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound vertical step area series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> VerticalStepArea<TValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = StepArea(expression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound vertical step area series.
+        /// </summary>
+        /// <param name="memberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="noteTextMemberName">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> VerticalStepArea(string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        {
+            var builder = StepArea(memberName, categoryMemberName, noteTextMemberName);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound vertical step area series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="memberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="noteTextMemberName">
+        /// The name of the note text member.
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> VerticalStepArea(
+            Type memberType,
+            string memberName,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
+        {
+            var builder = StepArea(memberType, memberName, categoryMemberName, noteTextMemberName);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines vertical area series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartStepAreaSeriesBuilder<TModel> VerticalStepArea(IEnumerable data)
+        {
+            ChartStepAreaSeries<TModel, object> verticalStepAreaSeries = new ChartStepAreaSeries<TModel, object>(data);
+
+            Container.Series.Add(verticalStepAreaSeries);
+
+            var builder = new ChartStepAreaSeriesBuilder<TModel>(verticalStepAreaSeries);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
         /// Defines bound scatter series.
         /// </summary>
         /// <param name="xValueExpression">
