@@ -3016,22 +3016,23 @@ kendo_module({
     };
 
 
-    var ErrorRangeCalculator = function(errorValue, data, valueFields, field){
+    var ErrorRangeCalculator = function(errorValue, series, field){
         var that = this,
+            data = series.data,
             val;
         that.errorValue = errorValue;
         if((val = that.standardDeviationRegex.exec(errorValue))){
-            that.createValueGetter(valueFields, data[0] || [], field);
+            that.createValueGetter(series, field);
             var average = that.getAverage(data),
                 deviation = that.getStandardDeviation(data, average, false),
-                multiple = defined(val[2]) ? parseFloat(val[2]) : 1,
+                multiple = defined(val[1]) ? parseFloat(val[1]) : 1,
                 errorRange = new ErrorRange(average - deviation * multiple, average + deviation * multiple);
             that.globalRange = function(){
                 return errorRange;
             };
         }
         else if(errorValue.indexOf && errorValue.indexOf(STD_ERR) >= 0){
-            that.createValueGetter(valueFields, data[0] || [], field);
+            that.createValueGetter(series, field);
             var standardError = that.getStandardError(data);
             that.globalRange = function(value){
                 return new ErrorRange(value - standardError, value + standardError);
@@ -3041,18 +3042,24 @@ kendo_module({
 
     ErrorRangeCalculator.prototype = ErrorRangeCalculator.fn = {
         percentRegex: /percents\((\d+)\)/,
-        standardDeviationRegex: new RegExp(STD_DEV + "(\\((\\d+)\\))*"),
-        createValueGetter: function(valueFields, item, field){
-            var that = this;
+        standardDeviationRegex: new RegExp(STD_DEV + "(?:\\(((?:0|[1-9][0-9]*)(?:\.[0-9]+)?)\\))?"),
+        createValueGetter: function(series, field){
+            var that = this,
+                data = series.data,
+                binder = SeriesBinder.current,
+                valueFields = binder.valueFields(series),
+                item = data[0] || {};
+            
             if(isArray(item)){
-                var idx = field ? indexOf(valueFields, field): 0;
+                var idx = field ? indexOf(field, valueFields): 0;
                 that.valueGetter = getter("[" + idx + "]");
             }
             else if(isNumber(item)){
                 that.valueGetter = getter();
             }
             else if(typeof item === OBJECT){
-                that.valueGetter = getter(field || valueFields[0]);
+                var srcValueFields = binder.sourceFields(series, valueFields);
+                that.valueGetter = getter(srcValueFields[indexOf(field, valueFields)]);
             }
         },
         getErrorRange: function(pointValue, item, data){
@@ -3262,7 +3269,7 @@ kendo_module({
                 else if(series.errorBars){
                     chart.seriesErrorRanges = chart.seriesErrorRanges || [];
                     chart.seriesErrorRanges[seriesIx] = chart.seriesErrorRanges[seriesIx] ||
-                        new ErrorRangeCalculator(series.errorBars.value,series.data, SeriesBinder.current.valueFields(series), VALUE);
+                        new ErrorRangeCalculator(series.errorBars.value, series, VALUE);
                     var errorRange = chart.seriesErrorRanges[seriesIx].getErrorRange(
                         value, point.dataItem, series.data);
                     chart.addPointErrorBar(errorRange.low, errorRange.high, point, categoryIx);
@@ -4061,6 +4068,7 @@ kendo_module({
            var capStart = centerBox.x - 10,
                capEnd = centerBox.x + 10,
                elements = [];
+
             elements.push(view.createLine(centerBox.x, valueBox.y1, centerBox.x, valueBox.y2, lineOptions));
             if(endCaps){
                 elements.push(view.createLine(capStart, valueBox.y1, capEnd, valueBox.y1, lineOptions));
@@ -4960,7 +4968,7 @@ kendo_module({
                 seriesPoints = chart.seriesPoints[seriesIx];
 
             chart.updateRange(value, fields.series);
-
+            
             if (defined(x) && x !== null && defined(y) && y !== null) {
                 point = chart.createPoint(value, fields);
                 if (point) {
@@ -4983,7 +4991,7 @@ kendo_module({
                     if(errorBars && defined(errorBars.xValue)){
                         chart.xSeriesErrorRanges = chart.xSeriesErrorRanges || [];
                         chart.xSeriesErrorRanges[seriesIx] = chart.xSeriesErrorRanges[seriesIx] ||
-                            new ErrorRangeCalculator(errorBars.xValue, series.data, SeriesBinder.current.valueFields(series), X);
+                            new ErrorRangeCalculator(errorBars.xValue, series, X);
 
                         errorRange = chart.xSeriesErrorRanges[seriesIx].getErrorRange(x, value, series.data);
                         chart.addPointErrorBar(errorRange.low, errorRange.high, point, X, series, errorBars);
@@ -4991,7 +4999,7 @@ kendo_module({
                     if(errorBars && defined(errorBars.yValue)){
                         chart.ySeriesErrorRanges = chart.ySeriesErrorRanges || [];
                         chart.ySeriesErrorRanges[seriesIx] = chart.ySeriesErrorRanges[seriesIx] ||
-                            new ErrorRangeCalculator(errorBars.yValue, series.data, SeriesBinder.current.valueFields(series), Y);
+                            new ErrorRangeCalculator(errorBars.yValue, series, Y);
 
                         errorRange = chart.ySeriesErrorRanges[seriesIx].getErrorRange(y, value, series.data);
                         chart.addPointErrorBar(errorRange.low, errorRange.high, point, Y, series, errorBars);

@@ -17,6 +17,8 @@
          <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet" />
     </head>
     <body>        
+       
+    
         <div id="scatter"></div>
         <hr/>
         <div id="scatterGroup"></div>
@@ -24,6 +26,8 @@
         <div id="scatterBind"></div>
         <hr/>
         <div id="bubble"></div>
+        <hr/>
+        <div id="bubbleGroup"></div>
         <hr/>
         <div id="line"></div>
          <hr/>
@@ -403,6 +407,86 @@
                     visible: true,
                     format: "{3}: {2:N0} applications",
                     opacity: 1
+                }
+            });
+            
+            $("#bubbleGroup").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: function() {
+                                return "../demos/mvc/content/dataviz/js/olympics-japan.json";
+                            },
+                            dataType: "json"
+                        }
+                    },
+                    group: {
+                        field: "country"
+                    }
+                },
+                title: {
+                    text: "Olypmic Medals Won by Japan"
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    background: ""
+                },
+                series: [{
+                    type: "bubble",
+                    minSize: 0,
+                    maxSize: 70,
+                    xField: "year",
+                    yField: "standing",
+                    errorBars: {
+                        yValue: "0.4",
+                        xValue: "stddev",
+                        line: {
+                            zIndex: 30,
+                            width: 1
+                        }
+                    },
+                    sizeField: "number",
+                    colorField: "medalColor",
+                    opacity: 0.9
+                }],
+                xAxis: {
+                    labels: {
+                        skip: 1,
+                        margin: {top: -25}
+                    },
+                    majorUnit: 4,
+                    min: 1980,
+                    max: 2015,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        step: 1,
+                        skip: 1,
+                        template: "#= value # place",
+                        margin: {right: -30},
+                        padding: {left: 20}
+                    },
+                    majorUnit: 1,
+                    min: 0,
+                    max: 3.7,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= value.x #: #= value.size # Medals"
                 }
             });
                  $("#line").kendoChart({
