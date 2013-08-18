@@ -108,6 +108,12 @@ kendo_module({
         DRAG = "drag",
         DRAG_END = "dragEnd",
         DRAG_START = "dragStart",
+        ERROR_LOW_FIELD = "errorLow",
+        ERROR_HIGH_FIELD = "errorHigh",
+        X_ERROR_LOW_FIELD = "xErrorLow", 
+        X_ERROR_HIGH_FIELD = "xErrorHigh",
+        Y_ERROR_LOW_FIELD = "yErrorLow",
+        Y_ERROR_HIGH_FIELD = "yErrorHigh",
         FADEIN = "fadeIn",
         GLASS = "glass",
         HOURS = "hours",
@@ -156,6 +162,8 @@ kendo_module({
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
         STEP = "step",
+        STD_ERR = "stderr",
+        STD_DEV = "stddev",
         STRING = "string",
         TIME_PER_SECOND = 1000,
         TIME_PER_MINUTE = 60 * TIME_PER_SECOND,
@@ -2837,16 +2845,14 @@ kendo_module({
                 } else if (labels.format) {
                     labelText = autoFormat(labels.format, labelText);
                 }
-
-                bar.append(
-                    new BarLabel(labelText,
+                bar.label = new BarLabel(labelText,
                         deepExtend({
                             vertical: options.vertical,
                             id: uniqueId()
                         },
                         options.labels
-                    ))
-                );
+                    ));
+                bar.append(bar.label);
             }
 
             bar.createNote();
@@ -2885,7 +2891,7 @@ kendo_module({
             var bar = this,
                 options = bar.options,
                 children = bar.children,
-                label = children[0];
+                label = bar.label;
 
             bar.box = targetBox;
 
@@ -2896,6 +2902,12 @@ kendo_module({
 
             if (bar.note) {
                 bar.note.reflow(targetBox);
+            }
+            
+            if(bar.errorBarChildren){
+                for(var i = 0; i < bar.errorBarChildren.length;i++){
+                    bar.errorBarChildren[i].reflow(targetBox);
+                }
             }
         },
 
@@ -2997,6 +3009,114 @@ kendo_module({
     });
     deepExtend(Bar.fn, PointEventsMixin);
 
+    var ErrorRange = function(low, high){
+        var that = this;
+        that.low = low;
+        that.high = high;
+    };
+        
+    
+    var ErrorRangeCalculator = function(errorValue, data, valueFields, field){
+        var that = this,   
+            val;
+        that.errorValue = errorValue;
+        if((val = that.standardDeviationRegex.exec(errorValue))){
+            that.createValueGetter(valueFields, data[0] || [], field);
+            var average = that.getAverage(data),
+                deviation = that.getStandardDeviation(data, average, false),
+                multiple = defined(val[2]) ? parseFloat(val[2]) : 1,
+                errorRange = new ErrorRange(average - deviation * multiple, average + deviation * multiple);
+            that.globalRange = function(){
+                return errorRange;
+            };                              
+        }
+        else if(errorValue.indexOf && errorValue.indexOf(STD_ERR) >= 0){
+            that.createValueGetter(valueFields, data[0] || [], field);
+            var standardError = that.getStandardError(data);
+            that.globalRange = function(value){
+                return new ErrorRange(value - standardError, value + standardError);
+            }; 
+        }  
+    };
+    
+    ErrorRangeCalculator.prototype = ErrorRangeCalculator.fn = {
+        percentRegex: /percents\((\d+)\)/, 
+        standardDeviationRegex: new RegExp(STD_DEV + "(\\((\\d+)\\))*"),
+        createValueGetter: function(valueFields, item, field){
+            var that = this;
+            if(isArray(item)){
+                var idx = field ? indexOf(valueFields, field): 0;
+                that.valueGetter = getter("[" + idx + "]");
+            }
+            else if(isNumber(item)){
+                that.valueGetter = getter();
+            }            
+            else if(typeof item === OBJECT){
+                that.valueGetter = getter(field || valueFields[0]);
+            }
+        },
+        getErrorRange: function(pointValue, item, data){
+            var that = this, 
+                errorValue = that.errorValue,
+                low,
+                high,
+                val;
+                
+            
+            if(!defined(errorValue)){
+                return;
+            }
+                
+            if(that.globalRange){
+                return that.globalRange(pointValue);
+            }
+            
+            if(isArray(errorValue)){
+                low = pointValue - errorValue[0];
+                high = pointValue + errorValue[1];                
+            }
+            else if(isNumber(val = parseFloat(errorValue))){
+                low = pointValue - val;
+                high = pointValue + val;                
+            }
+            else if(typeof errorValue === "function"){
+                var customResult = errorValue(pointValue, item, data);
+                low = customResult[0];
+                high = customResult[1];                
+            }
+            else if((val = that.percentRegex.exec(errorValue))){
+                var percentValue = pointValue * (parseFloat(val[1]) / 100);
+                low = pointValue - percentValue;
+                high = pointValue + percentValue;                            
+            }
+            else {
+                throw new Error("Invalid ErrorBar value: " + errorValue);
+            }
+            return new ErrorRange(low, high);
+        },
+        getStandardError: function(data){
+            return this.getStandardDeviation(data, this.getAverage(data), true) / Math.sqrt(data.length);
+        },    
+        getStandardDeviation: function(data, average, isSample){
+            var that = this,
+                squareDifferenceSum = 0,
+                total = isSample ? data.length - 1 : data.length;
+                
+            for(var i = 0; i < data.length; i++){
+                squareDifferenceSum += Math.pow(average - that.valueGetter(data[i]), 2);
+            }
+            return Math.sqrt(squareDifferenceSum / total);
+        },
+        getAverage: function(data){
+            var sum = 0;            
+            for(var i = 0; i < data.length; i++){
+                sum += this.valueGetter(data[i]);
+            }
+            return sum / data.length;
+        }
+    };
+    
+    
     var CategoricalChart = ChartElement.extend({
         init: function(plotArea, options) {
             var chart = this;
@@ -3025,75 +3145,91 @@ kendo_module({
 
         render: function() {
             var chart = this;
-
             chart.traverseDataPoints(proxy(chart.addValue, chart));
-        },
-        addPointErrorBar: function(value, point, categoryIx){
-                var chart = this,
-                    series = point.series,
-                    errorBar = new ErrorBar(chart, point, series),
-                    low = errorBar.low,
-                    high = errorBar.high;
-                point.low =  parseFloat(low.toFixed(3));
-                point.high = parseFloat(high.toFixed(3));;
-                if(series.stack){
-                    if(series.type == BAR || series.type == COLUMN){
-                        var totals = chart.groupTotals(series.stack),
-                            cluster = chart.children[categoryIx],
-                            stackWrap = chart.getStackWrap(series, cluster),
-                            positiveStack = stackWrap.children[0],
-                            negativeStack = stackWrap.children[1],
-                            idx,
-                            sum = 0;
-                        if(value > 0){
-                            for(idx = 0;idx < positiveStack.children.length; idx++){
-                                sum += positiveStack.children[idx].value;
-                            }
-                        }
-                        else{
-                            for(idx = 0;idx < negativeStack.children.length; idx++){
-                                sum += negativeStack.children[idx].value;
-                            }
-                        }
-
-                       errorBar.plotValue = sum;
-
-                        if(high < 0){
-                            incrementSlot(totals.negative, categoryIx, low);
-                        }
-                        else if(low < 0){
-                            incrementSlot(totals.positive,categoryIx, high);
-                            incrementSlot(totals.negative,categoryIx, low);
-                        }
-                        else{
-                            incrementSlot(totals.positive,categoryIx, high);
+        },        
+        addPointErrorBar: function(low, high, point, categoryIx){
+            var chart = this,
+                value = point.value,
+                series = point.series,
+                isVertical = series.type !== BAR,
+                plotValue,
+                errorBar;
+            
+            point.low =  low;
+            point.high = high;
+        
+            if(chart.options.isStacked){
+                if(series.type == BAR || series.type == COLUMN){
+                    var totals = chart.groupTotals(series.stack),
+                        cluster = chart.children[categoryIx],
+                        stackWrap = chart.getStackWrap(series, cluster),
+                        positiveStack = stackWrap.children[0],
+                        negativeStack = stackWrap.children[1],
+                        idx,
+                        sum = 0;
+                        
+                    if(value > 0){
+                        for(idx = 0;idx < positiveStack.children.length; idx++){
+                            sum += positiveStack.children[idx].value;
                         }
                     }
-                    else if(series.type == LINE){
-                        errorBar.plotValue = point.plotValue;
-                        chart.minValues = chart.minValues || []; chart.minValues[categoryIx] = chart.minValues[categoryIx] || 0;
-                        chart.maxValues = chart.maxValues || []; chart.maxValues[categoryIx] = chart.maxValues[categoryIx] || 0;
-
-                        chart.minValues[categoryIx] += low === null ? 0 : low; chart.maxValues[categoryIx] += high === null ? 0 : high;
-
-                        if(categoryIx > 0 && chart.minValues[categoryIx - 1] === undefined){
-                            chart.minValues[categoryIx - 1] = chart.maxValues[categoryIx - 1] = 0;
+                    else{
+                        for(idx = 0;idx < negativeStack.children.length; idx++){
+                            sum += negativeStack.children[idx].value;
                         }
-                        var totalsMin = Math.min.apply(null, chart.minValues),
-                            totalsMax = Math.max.apply(null, chart.maxValues),
-                            stackAxisRange = chart._stackAxisRange;
+                    }
 
-                        stackAxisRange.min = math.min(stackAxisRange.min, totalsMin);
-                        stackAxisRange.max = math.max(stackAxisRange.max, totalsMax);
+                    plotValue = sum;
+                 
+                    if(high < 0){
+                        incrementSlot(totals.negative, categoryIx, plotValue + low);
+                    }
+                    else if(low < 0){
+                        incrementSlot(totals.positive,categoryIx, high);
+                        incrementSlot(totals.negative,categoryIx, plotValue + low);
+                    }
+                    else{
+                        incrementSlot(totals.positive,categoryIx, high);
                     }
                 }
-                else{
-                    errorBar.plotValue = value;
-                    chart.updateRange(low, categoryIx, series);
-                    chart.updateRange(high, categoryIx, series);
+                else if(series.type == LINE){
+                    plotValue = point.plotValue;
+                    chart.minErrorValues = chart.minErrorValues || []; 
+                    chart.maxErrorValues = chart.maxErrorValues || [];                      
+                    
+                    incrementSlot(chart.minErrorValues, categoryIx, low);
+                    incrementSlot(chart.maxErrorValues, categoryIx, high);
+
+                    var stackAxisRange = chart._stackAxisRange,
+                        totalsMin = stackAxisRange.min,
+                        totalsMax = stackAxisRange.max,                                                
+                        length = math.max(chart.minErrorValues.length, chart.maxErrorValues.length);
+                        
+                    for(var i = 0; i < length; i++){
+                        if(chart.minErrorValues[i] != null){
+                            totalsMin = math.min(chart.minErrorValues[i], totalsMin);
+                        }
+                        if(chart.maxErrorValues[i] != null){
+                            totalsMax = math.max(chart.maxErrorValues[i], totalsMax);
+                        }
+                    }
+                    stackAxisRange.min = totalsMin;
+                    stackAxisRange.max = totalsMax;
                 }
-            point.errorBar = errorBar;
+            }
+            else{
+                plotValue = value;
+                chart.updateRange(low, categoryIx, series);
+                chart.updateRange(high, categoryIx, series);
+            }
+            low = low + plotValue - value;
+            high = high + plotValue - value;
+    
+            errorBar = new ErrorBar(low, high, isVertical, chart.plotArea, series.errorBars);
+            point.errorBarChildren = [errorBar];
+            point.append(errorBar);
         },
+        
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 categoryPoints = chart.categoryPoints[categoryIx],
@@ -3117,8 +3253,19 @@ kendo_module({
                 point.seriesIx = seriesIx;
                 point.owner = chart;
                 point.dataItem = series.data[categoryIx];
-                if(series.errorBars){
-                    chart.addPointErrorBar(value, point, categoryIx)
+             
+                if(isNumber(data.fields[ERROR_LOW_FIELD]) && 
+                    isNumber(data.fields[ERROR_HIGH_FIELD])){
+                    chart.addPointErrorBar(data.fields[ERROR_LOW_FIELD], 
+                        data.fields[ERROR_HIGH_FIELD], point, categoryIx);
+                }
+                else if(series.errorBars){
+                    chart.seriesErrorRanges = chart.seriesErrorRanges || [];
+                    chart.seriesErrorRanges[seriesIx] = chart.seriesErrorRanges[seriesIx] ||
+                        new ErrorRangeCalculator(series.errorBars.value,series.data, SeriesBinder.current.valueFields(series), VALUE);
+                    var errorRange = chart.seriesErrorRanges[seriesIx].getErrorRange(
+                        value, point.dataItem, series.data);
+                    chart.addPointErrorBar(errorRange.low, errorRange.high, point, categoryIx);
                 }
                 else{
                     chart.updateRange(value, categoryIx, series);
@@ -3260,7 +3407,7 @@ kendo_module({
                 currentCategory,
                 currentSeries,
                 seriesCount = series.length;
-
+            
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
                 for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                     currentSeries = series[seriesIx];
@@ -3873,91 +4020,93 @@ kendo_module({
     deepExtend(Target.fn, PointEventsMixin);
 
     var ErrorBar = ChartElement.extend({
-        init: function(chart, point, series){
-            var errorBar = this;
-            errorBar.parent = point;
-            errorBar.chart = chart;
-            errorBar.options = series.errorBars;
-            errorBar.orientation = series.type != BAR ? "vertical" : "horizontal";
-            errorBar.low = errorBar.calculateLow();
-            errorBar.high = errorBar.calculateHigh();
-            errorBar.children = [];
+        init: function(low, high, isVertical, plotArea, options){
+            var errorBar = this;        
+            errorBar.low = low;
+            errorBar.high = high;
+            errorBar.isVertical = isVertical;
+            errorBar.plotArea = plotArea;    
+            
+            ChartElement.fn.init.call(errorBar, options);
         },
-        calculateLow: function(){
-            var errorBar = this,
-                parent = errorBar.parent;
-            if(errorBar.options.value){
-                return parent.value - errorBar.options.value;
+        getAxis: function(){
+            var that = this,
+                plotArea = that.plotArea,            
+                axis;
+            if(plotArea instanceof dataviz.XYPlotArea){
+                axis = that.isVertical ? plotArea.axisY : plotArea.axisX;
             }
-        },
-        calculateHigh: function(){
-            var errorBar = this,
-                parent = errorBar.parent;
-            if(errorBar.options.value){
-                return parent.value + errorBar.options.value;
+            else if(plotArea instanceof dataviz.CategoricalPlotArea){
+                axis = plotArea.valueAxis;
             }
+            return axis;
         },
         reflow: function(targetBox){
-            this.box = targetBox;
-
-            this.render();
+            var that = this;
+            that.box = targetBox;
+            that.valueAxis = that.getAxis();
         },
-        render: function(){
-
-        },
-        createHorizontalErrorBar: function(view,valueBox, box){
-            var center = box.center(),
-                capStart = center.y - 10,
-                capEnd = center.y + 10,
-                elements = [],
-                lineOptions = this.lineOptions;
-            elements.push(view.createLine(valueBox.x1, center.y, valueBox.x2, center.y, lineOptions));
-            elements.push(view.createLine(valueBox.x1, capStart, valueBox.x1, capEnd, lineOptions));
-            elements.push(view.createLine(valueBox.x2, capStart, valueBox.x2, capEnd, lineOptions));
+        createHorizontalErrorBar: function(view,valueBox, centerBox, lineOptions, endCaps){
+            var capStart = centerBox.y - 10,//determine caps size based on box or expose it as option
+                capEnd = centerBox.y + 10,
+                elements = [];
+            elements.push(view.createLine(valueBox.x1, centerBox.y, valueBox.x2, centerBox.y, lineOptions));
+            if(endCaps){
+                elements.push(view.createLine(valueBox.x1, capStart, valueBox.x1, capEnd, lineOptions));
+                elements.push(view.createLine(valueBox.x2, capStart, valueBox.x2, capEnd, lineOptions));
+            }
             return elements;
         },
-        createVerticalErrorBar: function(view,valueBox, box){
-           var center = box.center(),
-               capStart = center.x - 10,
-               capEnd = center.x + 10,
-               elements = [],
-               lineOptions = this.lineOptions;
-            elements.push(view.createLine(center.x, valueBox.y1, center.x, valueBox.y2, lineOptions));
-            elements.push(view.createLine(capStart, valueBox.y1, capEnd, valueBox.y1, lineOptions));
-            elements.push(view.createLine(capStart, valueBox.y2, capEnd, valueBox.y2, lineOptions));
+        createVerticalErrorBar: function(view,valueBox, centerBox, lineOptions, endCaps){
+           var capStart = centerBox.x - 10,
+               capEnd = centerBox.x + 10,
+               elements = [];
+            elements.push(view.createLine(centerBox.x, valueBox.y1, centerBox.x, valueBox.y2, lineOptions));
+            if(endCaps){
+                elements.push(view.createLine(capStart, valueBox.y1, capEnd, valueBox.y1, lineOptions));
+                elements.push(view.createLine(capStart, valueBox.y2, capEnd, valueBox.y2, lineOptions));
+            }
             return elements;
         },
         getViewElements: function(view){
-            var errorBar = this,
-                chart = errorBar.chart,
-                parent = errorBar.parent,
-                valueAxis = chart.plotArea.valueAxis,
-                plotValue = errorBar.plotValue,
-                value = parent.value,
-                low = errorBar.low + (plotValue - parent.value),
-                high = errorBar.high + (plotValue - parent.value),
-                valueBox = valueAxis.getSlot(low, high),
-                box = errorBar.box,
-                orientation = errorBar.orientation,
-                elements = [];
+            var errorBar = this,                
+                axis = errorBar.valueAxis,
+                low = errorBar.low,
+                high = errorBar.high,
+                valueBox = axis.getSlot(low, high),
+                centerBox = errorBar.box.center(),
+                isVertical = errorBar.isVertical,
+                options = errorBar.options,
+                line = options.line,               
+                lineOptions = {
+                    stroke: line.color,
+                    strokeWidth: line.width,
+                    zIndex: line.zIndex,
+                    align: false,
+                    dashType: line.dashType
+                },
+                elements;
 
-            if(orientation == "vertical"){
-               elements = errorBar.createVerticalErrorBar(view,valueBox,box);
+            if(isVertical){
+               elements = errorBar.createVerticalErrorBar(view, valueBox, centerBox, lineOptions, options.endCaps);
             }
             else{
-               elements = errorBar.createHorizontalErrorBar(view,valueBox,box);
+               elements = errorBar.createHorizontalErrorBar(view, valueBox, centerBox, lineOptions, options.endCaps);
             }
 
             return elements;
         },
-        lineOptions: {
-            stroke: "red",
-            strokeWidth: 1,
-            zIndex: 1,
-            align: false
-        },
         options: {
-
+            animation: {
+                type: FADEIN,
+                delay: INITIAL_ANIMATION_DURATION
+            },
+            endCaps: true,
+            line: {
+                color: "red",
+                width: 1,
+                zIndex: 1
+            }
         }
     });
 
@@ -4139,9 +4288,19 @@ kendo_module({
 
             point.marker.reflow(childBox);
             point.reflowLabel(childBox);
-
-            if(point.errorBar){
-                point.errorBar.reflow(childBox);
+      
+            if(point.errorBarChildren){                
+                for(var i = 0; i < point.errorBarChildren.length; i++){
+                     point.errorBarChildren[i].reflow(childBox);
+                }               
+            }
+            
+            if(point.xErrorBar){
+                point.xErrorBar.reflow(childBox);
+            }
+            
+            if(point.yErrorBar){
+                point.yErrorBar.reflow(childBox);
             }
 
             if (point.note) {
@@ -4783,7 +4942,23 @@ kendo_module({
 
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
-
+        
+        addPointErrorBar: function(low, high, point, field, series, options){
+            var chart = this,
+                errorBar,
+                isVertical = field === Y,
+                item = {};
+          
+            point.errorBarChildren = point.errorBarChildren || [];     
+            errorBar = new ErrorBar(low, high, isVertical, chart.plotArea, options);           
+            point.errorBarChildren.push(errorBar);
+            point.append(errorBar);
+            item[field] = low;
+            chart.updateRange(item, series);
+            item[field] = high;
+            chart.updateRange(item, series);
+        },
+        
         addValue: function(value, fields) {
             var chart = this,
                 point,
@@ -4791,13 +4966,44 @@ kendo_module({
                 y = value.y,
                 seriesIx = fields.seriesIx,
                 seriesPoints = chart.seriesPoints[seriesIx];
-
+            
             chart.updateRange(value, fields.series);
 
             if (defined(x) && x !== null && defined(y) && y !== null) {
                 point = chart.createPoint(value, fields);
                 if (point) {
                     extend(point, fields);
+                    //date axis error bars ???
+                    var errorRange,
+                        series = fields.series,
+                        errorBars = series.errorBars;                    
+
+                    if(isNumber(fields[X_ERROR_LOW_FIELD]) && isNumber(fields[X_ERROR_HIGH_FIELD])){
+                        chart.addPointErrorBar(fields[X_ERROR_LOW_FIELD], 
+                            fields[X_ERROR_HIGH_FIELD], point, X, series,errorBars);
+                    }
+                            
+                    if(isNumber(fields[Y_ERROR_LOW_FIELD]) && isNumber(fields[Y_ERROR_HIGH_FIELD])){
+                        chart.addPointErrorBar(fields[Y_ERROR_LOW_FIELD], 
+                            fields[Y_ERROR_HIGH_FIELD], point, Y, series,errorBars);
+                    }
+                    
+                    if(errorBars && defined(errorBars.xValue)){
+                        chart.xSeriesErrorRanges = chart.xSeriesErrorRanges || [];
+                        chart.xSeriesErrorRanges[seriesIx] = chart.xSeriesErrorRanges[seriesIx] ||
+                            new ErrorRangeCalculator(errorBars.xValue, series.data, SeriesBinder.current.valueFields(series), X);       
+                            
+                        errorRange = chart.xSeriesErrorRanges[seriesIx].getErrorRange(x, value, series.data);
+                        chart.addPointErrorBar(errorRange.low, errorRange.high, point, X, series, errorBars);
+                    }
+                    if(errorBars && defined(errorBars.yValue)){
+                        chart.ySeriesErrorRanges = chart.ySeriesErrorRanges || [];
+                        chart.ySeriesErrorRanges[seriesIx] = chart.ySeriesErrorRanges[seriesIx] ||
+                            new ErrorRangeCalculator(errorBars.yValue, series.data, SeriesBinder.current.valueFields(series), Y);       
+                            
+                        errorRange = chart.ySeriesErrorRanges[seriesIx].getErrorRange(y, value, series.data);
+                        chart.addPointErrorBar(errorRange.low, errorRange.high, point, Y, series, errorBars); 
+                    }                    
                 }
             }
 
@@ -7770,7 +7976,6 @@ kendo_module({
             },
             valueAxis: {}
         },
-
         render: function(panes) {
             var plotArea = this;
 
@@ -7778,10 +7983,9 @@ kendo_module({
 
             plotArea.createCategoryAxes(panes);
             plotArea.aggregateCategories(panes);
-            plotArea.createCharts(panes);
+            plotArea.createCharts(panes);            
             plotArea.createValueAxes(panes);
         },
-
         removeAxis: function(axis) {
             var plotArea = this,
                 axisName = axis.options.name;
@@ -8380,7 +8584,7 @@ kendo_module({
 
         appendChart: function(chart, pane) {
             var plotArea = this;
-
+            
             plotArea.xAxisRangeTracker.update(chart.xAxisRanges);
             plotArea.yAxisRangeTracker.update(chart.yAxisRanges);
 
@@ -10758,17 +10962,17 @@ kendo_module({
 
     SeriesBinder.current.register(
         [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
-        [VALUE], [CATEGORY, COLOR, NOTE_TEXT]
+        [VALUE], [CATEGORY, COLOR, NOTE_TEXT, ERROR_LOW_FIELD, ERROR_HIGH_FIELD]
     );
 
     DefaultAggregates.current.register(
         [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
-        { value: "max", color: "first", noteText: "first" }
+        { value: "max", color: "first", noteText: "first", errorLow: "min", errorHigh: "max" }
     );
 
     SeriesBinder.current.register(
         [SCATTER, SCATTER_LINE, BUBBLE],
-        [X, Y], [COLOR, NOTE_TEXT]
+        [X, Y], [COLOR, NOTE_TEXT, X_ERROR_LOW_FIELD, X_ERROR_HIGH_FIELD, Y_ERROR_LOW_FIELD, Y_ERROR_HIGH_FIELD]
     );
 
     SeriesBinder.current.register(
