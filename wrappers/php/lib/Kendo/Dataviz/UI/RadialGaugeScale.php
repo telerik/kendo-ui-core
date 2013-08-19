@@ -97,6 +97,24 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
     }
 
     /**
+    * The width of the range indicators.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
+    */
+    public function rangeSize($value) {
+        return $this->setProperty('rangeSize', $value);
+    }
+
+    /**
+    * The distance from the range indicators to the ticks.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\RadialGaugeScale
+    */
+    public function rangeDistance($value) {
+        return $this->setProperty('rangeDistance', $value);
+    }
+
+    /**
     * Reverses the scale direction - values are increase anticlockwise.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\RadialGaugeScale

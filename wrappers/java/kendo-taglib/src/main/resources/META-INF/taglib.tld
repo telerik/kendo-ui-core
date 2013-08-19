@@ -13759,10 +13759,22 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The distance from the range indicators to the ticks.</description>
+            <name>rangeDistance</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The default color for the ranges.</description>
             <name>rangePlaceholderColor</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the range indicators.</description>
+            <name>rangeSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
         <attribute>
             <description>Reverses the scale direction - values are increase anticlockwise.</description>

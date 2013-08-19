@@ -38,24 +38,6 @@ If it is not supported by the browser, the Gauge will switch to the first availa
     }
 
     /**
-    * The width of the range indicators.
-    * @param float $value
-    * @return \Kendo\Dataviz\UI\RadialGauge
-    */
-    public function rangeSize($value) {
-        return $this->setProperty('rangeSize', $value);
-    }
-
-    /**
-    * The distance from the range indicators to the ticks.
-    * @param float $value
-    * @return \Kendo\Dataviz\UI\RadialGauge
-    */
-    public function rangeDistance($value) {
-        return $this->setProperty('rangeDistance', $value);
-    }
-
-    /**
     * Configures the scale.
     * @param \Kendo\Dataviz\UI\RadialGaugeScale|array $value
     * @return \Kendo\Dataviz\UI\RadialGauge

@@ -108,12 +108,28 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("minorUnit", value);
     }
 
+    public float getRangeDistance() {
+        return (float)getProperty("rangeDistance");
+    }
+
+    public void setRangeDistance(float value) {
+        setProperty("rangeDistance", value);
+    }
+
     public String getRangePlaceholderColor() {
         return (String)getProperty("rangePlaceholderColor");
     }
 
     public void setRangePlaceholderColor(String value) {
         setProperty("rangePlaceholderColor", value);
+    }
+
+    public float getRangeSize() {
+        return (float)getProperty("rangeSize");
+    }
+
+    public void setRangeSize(float value) {
+        setProperty("rangeSize", value);
     }
 
     public boolean getReverse() {
