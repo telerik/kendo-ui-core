@@ -138,6 +138,61 @@
             });
 
             // ------------------------------------------------------------
+            module("SeriesAggregator / Simple aggregates / Nested field", {
+                setup: function() {
+                    binder = new dataviz.SeriesBinder();
+                    binder.register(["foo"], ["value"], []);
+
+                    defaults = new DefaultAggregates();
+                    defaults.register(["foo"], { value: "max" });
+
+                    series = {
+                        type: "foo",
+                        field: "foo.value",
+                        data: [{
+                            foo: {
+                                value: 1
+                            }
+                        }, {
+                            foo: {
+                                value: 2
+                            }
+                        }]
+                    };
+                }
+            });
+
+            test("accepts named aggregates", function() {
+                series.aggregate = "min";
+
+                deepEqual(aggregate(series), { foo: { value: 1 } });
+            });
+
+            test("default aggregate is max", function() {
+                deepEqual(aggregate(series), { foo: { value: 2 } });
+            });
+
+            test("accepts function aggregates", function() {
+                series.aggregate = function(values) { return 5; };
+
+                deepEqual(aggregate(series), { foo: { value: 5 } });
+            });
+
+            test("allows function aggregates to return data items", function() {
+                series.aggregate = function(values) {
+                    return { foo: { value: 5 }, bar: 1 };
+                };
+
+                deepEqual(aggregate(series), { foo: { value: 5 }, bar: 1 });
+            });
+
+            test("returns empty aggregate for empty source points array", function() {
+                var sa = new SeriesAggregator(series, binder, defaults);
+
+                deepEqual(sa.aggregatePoints(), {});
+            });
+
+            // ------------------------------------------------------------
             module("SeriesAggregator / Simple aggregates / Array data", {
                 setup: function() {
                     binder = new dataviz.SeriesBinder();

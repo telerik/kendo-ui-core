@@ -9475,7 +9475,8 @@ kendo_module({
                     break;
                 } else {
                     if (defined(value)) {
-                        result[field.name] = value;
+                        ensureTree(field.name, result);
+                        kendo.setter(field.name)(result, value);
                     }
                 }
             }
@@ -10204,6 +10205,19 @@ kendo_module({
         }
 
         return result;
+    }
+
+    function ensureTree(fieldName, target) {
+        if (fieldName.indexOf(".") > -1) {
+            var parts = fieldName.split("."),
+                path = "";
+
+            while (parts.length > 1) {
+                path += parts.shift();
+                target[path] = target[path] || {};
+                path += ".";
+            }
+        }
     }
 
     // Exports ================================================================
