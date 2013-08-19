@@ -841,6 +841,17 @@
 
                 equal(input.attr("readonly"), undefined);
             });
+
+            test("DropDownList selects option label even when it is initially available", function() {
+                var select = $("<select><option>Select...</option><option>Value1</option></select>");
+
+                select.kendoDropDownList({
+                    optionLabel: "Select...",
+                    dataSource: ["Value1"]
+                }).data("kendoDropDownList");
+
+                equal(select[0].selectedIndex, 0);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

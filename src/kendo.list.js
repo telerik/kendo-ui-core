@@ -846,9 +846,12 @@ kendo_module({
                 idx = 0;
 
             if (optionLabel) {
-                options = optionLabel;
-                selectedIndex += 1;
                 idx = 1;
+                options = optionLabel;
+
+                if (optionLabel.indexOf($(element[0].firstChild).text()) === -1) {
+                    selectedIndex += 1;
+                }
             }
 
             for (; idx < length; idx++) {
