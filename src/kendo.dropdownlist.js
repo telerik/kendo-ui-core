@@ -65,16 +65,17 @@ kendo_module({
 
             that._enable();
 
+            that._oldIndex = that.selectedIndex = -1;
+
             that._cascade();
 
-            that._oldIndex = that.selectedIndex = -1;
             if (index !== undefined) {
                 options.index = index;
             }
 
             if (options.autoBind) {
                 that.dataSource.fetch();
-            } else {
+            } else if (that.selectedIndex === -1) {
                 text = options.text || "";
                 if (!text) {
                     optionLabel = that._optionLabelText(options.optionLabel),

@@ -336,6 +336,41 @@
                 equal(childCB.value(), 1);
             });
 
+            test("child widget selects correct item when instantly bound", function() {
+                // array of all brands
+                var brands = [
+                    { brandId: 1, name: "Ford" },
+                    { brandId: 2, name: "BMW" },
+                    { brandId: 3, name: "Chevrolet" }
+                ];
+
+                // array of all models
+                var models = [
+                    { modelId: 1, name: "Explorer", brandId: 1},
+                    { modelId: 2, name: "Focus", brandId: 1},
+                    { modelId: 3, name: "X3", brandId: 2},
+                    { modelId: 4, name: "X5", brandId: 2},
+                    { modelId: 5, name: "Impala", brandId: 3},
+                    { modelId: 6, name: "Cruze", brandId: 3}
+                ];
+
+                parent.kendoDropDownList({
+                    dataTextField: "name",
+                    dataValueField: "brandId",
+                    dataSource: brands // bind it to the brands array
+                });
+
+                child.val("2").kendoDropDownList({
+                    dataTextField: "name",
+                    dataValueField: "modelId",
+                    optionLabel: { name: "", modelId: ""},
+                    cascadeFrom: "parent", // cascade from the brands dropdownlist
+                    dataSource: models // bind it to the models array
+                });
+
+                equal(child.data("kendoDropDownList").text(), "Focus");
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
