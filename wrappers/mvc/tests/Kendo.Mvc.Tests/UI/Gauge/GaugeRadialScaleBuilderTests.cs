@@ -122,5 +122,31 @@ namespace Kendo.Mvc.UI.Tests.Gauge
 
             scale.StartAngle.ShouldEqual(angle);
         }
+
+        [Fact]
+        public void RangeSize_should_set_RangeSize()
+        {
+            builder.RangeSize(1);
+            scale.RangeSize.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void RangeSize_should_return_builder()
+        {
+            builder.RangeSize(1).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void RangeDistance_should_set_RangeDistance()
+        {
+            builder.RangeDistance(1);
+            scale.RangeDistance.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void RangeDistance_should_return_builder()
+        {
+            builder.RangeDistance(1).ShouldBeSameAs(builder);
+        }
     }
 }

@@ -55,5 +55,33 @@ namespace Kendo.Mvc.UI.Tests
             scaleMock.SetupGet(a => a.EndAngle).Returns((double?)null);
             serializer.Serialize().ContainsKey("endAngle").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Should_serialize_RangeSize()
+        {
+            scaleMock.SetupGet(a => a.RangeSize).Returns(1.1);
+            serializer.Serialize()["rangeSize"].ShouldEqual(1.1);
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_RangeSize()
+        {
+            scaleMock.SetupGet(a => a.RangeSize).Returns((double?)null);
+            serializer.Serialize().ContainsKey("rangeSize").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_RangeDistance()
+        {
+            scaleMock.SetupGet(a => a.RangeDistance).Returns(1.1);
+            serializer.Serialize()["rangeDistance"].ShouldEqual(1.1);
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_RangeDistance()
+        {
+            scaleMock.SetupGet(a => a.RangeDistance).Returns((double?)null);
+            serializer.Serialize().ContainsKey("rangeDistance").ShouldBeFalse();
+        }
     }
 }

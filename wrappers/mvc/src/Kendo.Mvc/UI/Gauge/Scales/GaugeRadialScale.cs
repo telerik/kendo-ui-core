@@ -42,6 +42,24 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The width of the range indicators
+        /// </summary>
+        public double? RangeSize
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The distance from the range indicators to the ticks
+        /// </summary>
+        public double? RangeDistance
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The scale labels.
         /// </summary>
         public GaugeRadialScaleLabels Labels

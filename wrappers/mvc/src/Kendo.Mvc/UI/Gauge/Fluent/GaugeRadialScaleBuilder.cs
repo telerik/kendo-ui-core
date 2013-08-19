@@ -84,9 +84,48 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GaugeRadialScaleBuilder Labels(Action<GaugeRadialScaleLabelsBuilder> configurator)
         {
-
             configurator(new GaugeRadialScaleLabelsBuilder(Scale.Labels));
 
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the width of the range indicators.
+        /// </summary>
+        /// <param name="theme">The width of the range indicators.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().RadialGauge()
+        ///            .Name("radialGauge")
+        ///            .Scale(scale => scale
+        ///                .RangeSize(4)
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GaugeRadialScaleBuilder RangeSize(double size)
+        {
+            radialGauge.Scale.RangeSize = size;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the distance from the range indicators to the ticks.
+        /// </summary>
+        /// <param name="theme">The distance from the range indicators to the ticks.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().RadialGauge()
+        ///            .Name("radialGauge")
+        ///            .Scale(scale => scale
+        ///                .RangeDistance(4)
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GaugeRadialScaleBuilder RangeDistance(double distance)
+        {
+            radialGauge.Scale.RangeDistance = distance;
             return this;
         }
     }

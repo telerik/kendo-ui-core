@@ -18,6 +18,8 @@ namespace Kendo.Mvc.UI
             var result = base.Serialize();
             FluentDictionary.For(result)
                 .Add("endAngle", scale.EndAngle, () => scale.EndAngle.HasValue)
+                .Add("rangeSize", scale.RangeSize, () => scale.RangeSize.HasValue)
+                .Add("rangeDistance", scale.RangeDistance, () => scale.RangeDistance.HasValue)
                 .Add("startAngle", scale.StartAngle, () => scale.StartAngle.HasValue);
 
             var labelsData = scale.Labels.CreateSerializer().Serialize();
