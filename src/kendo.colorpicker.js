@@ -781,11 +781,14 @@ kendo_module({
             options = that.options;
             element = that.element;
 
-            var value;
-            if (/\S/.test(element.attr("value"))) {
-                value = parse(element.attr("value"), true);
+            var value = element.val() || element.attr("value");
+            if (/\S/.test(value)) {
+                value = parse(value, true);
             } else {
                 value = parse(options.value, true);
+            }
+            if (!value) {
+                value = parse("#000");
             }
             that._value = options.value = value;
 
