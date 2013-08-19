@@ -4,35 +4,59 @@
         <title>Barcode</title>
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../src/kendo.dataviz.core.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../src/kendo.dataviz.svg.js" type="text/javascript" charset="utf-8"></script>	
 		<script src="../src/kendo.dataviz.barcode.js" type="text/javascript" charset="utf-8"></script>	
     </head>
+    
     <body style="background:#aaa">
         <div id="ean8"></div> 
+		<div class="splitter"></div>
+        <div id="ean82"></div> 
 		<div class="splitter"></div>
 		<div id="code39"></div>
 		<div class="splitter"></div>
 		<div id="ean13"></div>
+        <div class="splitter"></div>
+        <div id="barcode" data-width="300" data-role="barcode" data-type="ean13" data-bind="value: barcodevalue"></div> 
+        <div class="splitter"></div>
+		<div id="ean132"></div>
+		
+        <script>
+               kendo.bind('body',{
+                    barcodevalue:"123456789012" 
+               });               
+				
+        </script>
         <script>
                 $('#ean8').kendoBarcode({
+                    width:300,
+					value: 5432167,
+				    type: "ean8"
+                });	
+                
+                $('#ean82').kendoBarcode({
+                    width:300,
 					value: "5432167",
-				    encoding: {
-						name: "ean8"
-					}
-                });				
+				    type: "ean8"
+                });	                
 				
 				$('#code39').kendoBarcode({
+                    width:300,
 					value: "KUR",
-				    encoding: {
-						name: "code39"
-					}
+				    type: "code39"
                 })
 				$('#ean13').kendoBarcode({
+                    width:300,
+					value: 323434544532,
+				    type :"ean13"
+                });
+                $('#ean132').kendoBarcode({
+                    width:300,
 					value: "323434544532",
-				    encoding: {
-						name: "ean13"
-					}
+				    type :"ean13"
                 });
 				
 				console.log($('#ean13').data('kendoBarcode').encoding.pattern);

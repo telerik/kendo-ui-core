@@ -38,6 +38,9 @@ kendo_module({
         },
         encode: function (value, width, height) {
             var that = this;
+            if(value!==undefined){
+                value+='';
+            }
             that.initValue(value, width, height);
             if(that.options.addQuietZone){
                 that.addQuietZone();
@@ -1533,11 +1536,13 @@ kendo_module({
             }
             if(!encodings[that.type]){
                 throw new Error('Encoding ' + that.type + 'is not supported.');
-            }
-            options.value+='';
+            }            
             that.encoding = new encodings[that.type]();
 
             that.options = $.extend(true,that.options, options);
+            if(options.value===undefined){
+                return;
+            }
             that.redraw();
         },
 
