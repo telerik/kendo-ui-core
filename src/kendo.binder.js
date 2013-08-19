@@ -1066,10 +1066,9 @@ kendo_module({
                     if (value instanceof ObservableArray) {
                         if (values.length) {
                             splice.call(value, 0, value.length);
-                            value.splice.apply(value, [0, 0].concat(values));
-                        } else {
-                            value.splice.apply(value, [0, value.length].concat(values));
                         }
+
+                        value.splice.apply(value, [0, value.length].concat(values));
                     } else {
                         that.bindings[VALUE].set(values);
                     }
