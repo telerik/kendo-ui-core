@@ -47,23 +47,26 @@ kendo_module({
                     width: 4
                 },
                 stepLine: {
-                    width: 4,
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
-                    }
+                    width: 4
                 },
                 vericalStepLine: {
-                    width: 4,
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
-                    }
+                    width: 4
                 },
                 scatterLine: {
                     width: 1
                 },
                 area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    },
+                    line: {
+                        opacity: 1,
+                        width: 0
+                    }
+                },
+                verticalArea: {
                     opacity: 0.4,
                     markers: {
                         visible: false,
@@ -83,21 +86,6 @@ kendo_module({
                     line: {
                         opacity: 1,
                         width: 0
-                    },
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
-                    }
-                },
-                verticalArea: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    },
-                    line: {
-                        opacity: 1,
-                        width: 0
                     }
                 },
                 verticalStepArea: {
@@ -109,10 +97,6 @@ kendo_module({
                     line: {
                         opacity: 1,
                         width: 0
-                    },
-                    aggregate: {
-                        value: "max",
-                        noteText: "first"
                     }
                 },
                 radarLine: {

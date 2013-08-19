@@ -9616,6 +9616,8 @@ kendo_module({
         delete seriesDefaults.donut;
         delete seriesDefaults.area;
         delete seriesDefaults.verticalArea;
+        delete seriesDefaults.stepArea;
+        delete seriesDefaults.verticalStepArea;
         delete seriesDefaults.scatter;
         delete seriesDefaults.scatterLine;
         delete seriesDefaults.bubble;
@@ -10241,7 +10243,7 @@ kendo_module({
     );
 
     DefaultAggregates.current.register(
-        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, STEP_AREA, VERTICAL_STEP_AREA, STEP_LINE, VERTICAL_STEP_LINE],
         { value: "max", color: "first", noteText: "first" }
     );
 
