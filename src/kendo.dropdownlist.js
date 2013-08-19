@@ -403,6 +403,8 @@ kendo_module({
             } else if (key === keys.END) {
                 e.preventDefault();
                 that._select(ul.lastChild);
+            } else if (key === keys.SPACEBAR) {
+                e.preventDefault();
             }
         },
 
