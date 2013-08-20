@@ -142,34 +142,31 @@ var ImageCommand = Command.extend({
             title: messages.insertImage,
             close: close,
             visible: false,
-            resizable: showBrowser,
-            activate: function() {
-                if (showBrowser) {
-                    var that = this;
-
-                    new kendo.ui.ImageBrowser(
-                        that.element.find(".k-imagebrowser"),
-                        extend({}, imageBrowser, {
-                            change: function() {
-                                that.element.find(KEDITORIMAGEURL).val(this.value());
-                            },
-                            apply: apply
-                        })
-                    );
-                }
-            }
+            resizable: showBrowser
         })
-                .toggleClass("k-imagebrowser-dialog", showBrowser)
-                .find(".k-dialog-insert").click(apply).end()
-                .find(".k-dialog-close").click(close).end()
-                .find(".k-edit-field input").keydown(keyDown).end()
-                // IE < 8 returns absolute url if getAttribute is not used
-                .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
-                .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()
-                .data("kendoWindow")
-                .center().open();
+            .toggleClass("k-imagebrowser-dialog", showBrowser)
+            .find(".k-dialog-insert").click(apply).end()
+            .find(".k-dialog-close").click(close).end()
+            .find(".k-edit-field input").keydown(keyDown).end()
+            // IE < 8 returns absolute url if getAttribute is not used
+            .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
+            .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()
+            .data("kendoWindow");
 
-        $(KEDITORIMAGEURL, dialog.element).focus().select();
+        if (showBrowser) {
+            new kendo.ui.ImageBrowser(
+                dialog.element.find(".k-imagebrowser"),
+                extend({}, imageBrowser, {
+                    change: function() {
+                        dialog.element.find(KEDITORIMAGEURL).val(this.value());
+                    },
+                    apply: apply
+                })
+            );
+        }
+
+        dialog.center().open();
+        dialog.element.find(KEDITORIMAGEURL).focus().select();
     }
 
 });
