@@ -7299,6 +7299,11 @@ kendo_module({
                     pane
                 );
 
+                plotArea.createStepAreaChart(
+                    filterSeriesByType(filteredSeries, [STEP_AREA, VERTICAL_STEP_AREA]),
+                    pane
+                );
+
                 plotArea.createBarChart(
                     filterSeriesByType(filteredSeries, [COLUMN, BAR]),
                     pane
@@ -7311,11 +7316,6 @@ kendo_module({
 
                 plotArea.createStepLineChart(
                     filterSeriesByType(filteredSeries, [STEP_LINE, VERTICAL_STEP_LINE]),
-                    pane
-                );
-
-                plotArea.createStepAreaChart(
-                    filterSeriesByType(filteredSeries, [STEP_AREA, VERTICAL_STEP_AREA]),
                     pane
                 );
 
