@@ -1536,7 +1536,7 @@ kendo_module({
             }
             if(!encodings[that.type]){
                 throw new Error('Encoding ' + that.type + 'is not supported.');
-            }            
+            }
             that.encoding = new encodings[that.type]();
 
             that.options = $.extend(true,that.options, options);
