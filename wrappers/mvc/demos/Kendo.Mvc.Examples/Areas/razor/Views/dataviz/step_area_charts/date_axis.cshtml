@@ -11,16 +11,9 @@
 }
 
 @(Html.Kendo().Chart(Model)
-    .Name("chart")
-    .Series(series =>
-    {
-        series.StepArea(model => model.Value, model => model.Date)
-              .Aggregate(ChartSeriesAggregate.Avg);
-    })
-    .CategoryAxis(axis => axis
-        .Date()
-        .BaseUnit(ChartAxisBaseUnit.Weeks)
-    )
+      .Name("chart")
+      .Series(series => series.StepArea(model => model.Value, model => model.Date).Aggregate(ChartSeriesAggregate.Avg))
+      .CategoryAxis(axis => axis.Date().BaseUnit(ChartAxisBaseUnit.Weeks))
 )
 
 <div class="configuration-horizontal">

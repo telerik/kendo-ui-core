@@ -9,10 +9,7 @@
             .Group(group => group.Add(model => model.Symbol))
             .Sort(sort => sort.Add(model => model.Date).Ascending())
         )
-        .Series(series => {
-            series.StepArea(model => model.Close)
-                  .Name("#= group.value # (close)");
-        })
+        .Series(series => series.StepArea(model => model.Close).Name("#= group.value # (close)"))
         .Legend(legend => legend
             .Position(ChartLegendPosition.Bottom)
         )
