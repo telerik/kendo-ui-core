@@ -2816,10 +2816,10 @@ kendo_module({
                 );
             }
 
-            bar.creteNote();
+            bar.createNote();
         },
 
-        creteNote: function() {
+        createNote: function() {
             var bar = this,
                 options = bar.options.notes,
                 text = options.label.text,
@@ -3642,10 +3642,10 @@ kendo_module({
 
             bullet.append(bullet.target);
 
-            bullet.creteNote();
+            bullet.createNote();
         },
 
-        creteNote: function() {
+        createNote: function() {
             var bullet = this,
                 options = bullet.options.notes,
                 text = options.label.text,
@@ -3888,10 +3888,10 @@ kendo_module({
                 point.append(point.label);
             }
 
-            point.creteNote();
+            point.createNote();
         },
 
-        creteNote: function() {
+        createNote: function() {
             var point = this,
                 options = point.options.notes,
                 text = options.label.text,
