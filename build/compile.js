@@ -131,6 +131,14 @@ if (ARGV["kendo-config"]) {
         }
     });
 
+    components.sort(function(a, b) {
+        if (a.name && b.name) {
+            return a.name.localeCompare(b.name);
+        } else {
+            return 0;
+        }
+    });
+
     template.components = components;
     if (ARGV.overwrite) {
         fs.writeFileSync(deps_file_name, JSON.stringify(template, null, 4));
