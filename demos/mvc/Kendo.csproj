@@ -784,6 +784,21 @@
     <Content Include="Views\web\scheduler\resources.cshtml" />
     <Content Include="Views\web\scheduler\templates.cshtml" />
     <Content Include="Views\dataviz\line-charts\notes.cshtml" />
+    <Content Include="Views\dataviz\step-area-charts\date-axis.cshtml" />
+    <Content Include="Views\dataviz\step-area-charts\grouped-data.cshtml" />
+    <Content Include="Views\dataviz\step-area-charts\index.cshtml" />
+    <Content Include="Views\dataviz\step-area-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\step-area-charts\multiple-axes.cshtml" />
+    <Content Include="Views\dataviz\step-area-charts\remote-data.cshtml" />
+    <Content Include="Views\dataviz\step-area-charts\stacked-area.cshtml" />
+    <Content Include="Views\dataviz\step-line-charts\date-axis.cshtml" />
+    <Content Include="Views\dataviz\step-line-charts\grouped-data.cshtml" />
+    <Content Include="Views\dataviz\step-line-charts\index.cshtml" />
+    <Content Include="Views\dataviz\step-line-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\step-line-charts\multiple-axes.cshtml" />
+    <Content Include="Views\dataviz\step-line-charts\notes.cshtml" />
+    <Content Include="Views\dataviz\step-line-charts\remote-data.cshtml" />
+    <Content Include="Views\dataviz\step-line-charts\stacked-line.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

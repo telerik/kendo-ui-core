@@ -1,0 +1,74 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Hybrid car mileage report"
+                },
+                legend: {
+                    position: "top"
+                },
+                series: [{
+                    type: "column",
+                    data: [20, 40, 45, 30, 50],
+                    stack: true,
+                    name: "on battery",
+                    color: "#003c72"
+                }, {
+                    type: "column",
+                    data: [20, 30, 35, 35, 40],
+                    stack: true,
+                    name: "on gas",
+                    color: "#0399d4"
+                }, {
+                    type: "stepArea",
+                    data: [30, 38, 40, 32, 42],
+                    name: "mpg",
+                    color: "#642381",
+                    axis: "mpg"
+                }, {
+                    type: "stepArea",
+                    data: [7.8, 6.2, 5.9, 7.4, 5.6],
+                    name: "l/100 km",
+                    color: "#e5388a",
+                    axis: "l100km"
+                }],
+                valueAxes: [{
+                    title: { text: "miles" },
+                    min: 0,
+                    max: 100
+                }, {
+                    name: "km",
+                    title: { text: "km" },
+                    min: 0,
+                    max: 161,
+                    majorUnit: 32
+                }, {
+                    name: "mpg",
+                    title: { text: "miles per gallon" },
+                    color: "#642381"
+                }, {
+                    name: "l100km",
+                    title: { text: "liters per 100km" },
+                    color: "#e5388a"
+                }],
+                categoryAxis: {
+                    categories: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                    // Align the first two value axes to the left
+                    // and the last two to the right.
+                    //
+                    // Right alignment is done by specifying a
+                    // crossing value greater than or equal to
+                    // the number of categories.
+                    axisCrossingValues: [0, 0, 10, 10]
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>
