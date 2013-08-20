@@ -3260,7 +3260,7 @@ kendo_module({
                 point.seriesIx = seriesIx;
                 point.owner = chart;
                 point.dataItem = series.data[categoryIx];
-                debugger;
+                
                 if(isNumber(data.fields[ERROR_LOW_FIELD]) &&
                     isNumber(data.fields[ERROR_HIGH_FIELD])){
                     chart.addPointErrorBar(data.fields[ERROR_LOW_FIELD],
