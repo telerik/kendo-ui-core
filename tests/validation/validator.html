@@ -442,39 +442,39 @@
 
                 ok(validator.validate());
             });
-                       
+
             test("validate returns true if input with data-type=number value is bigger than the min attribute when a culture with comma for the decimal separator is used", function() {
                 var input = $('<input ' + kendo.attr("type") + '="number" value="10,6" min="10.5" />'),
                     validator = setup(input),
                     culture = kendo.culture(),
                     defaultDecimalSeparator = culture.numberFormat["."],
                     defaultGroupSeparator = culture.numberFormat[","];
-                    
-                culture.numberFormat["."] = ","; 
+
+                culture.numberFormat["."] = ",";
                 culture.numberFormat[","] = ".";
 
                 ok(validator.validate());
-                
-                culture.numberFormat["."] = defaultDecimalSeparator; 
-                culture.numberFormat[","] = defaultGroupSeparator; 
+
+                culture.numberFormat["."] = defaultDecimalSeparator;
+                culture.numberFormat[","] = defaultGroupSeparator;
             });
-            
+
             test("validate returns false if input with data-type=number value is smaller than the min attribute when a culture with comma for the decimal separator is used", function() {
                 var input = $('<input ' + kendo.attr("type") + '="number" value="10,4" min="10.5" />'),
                     validator = setup(input),
                     culture = kendo.culture(),
                     defaultDecimalSeparator = culture.numberFormat["."],
                     defaultGroupSeparator = culture.numberFormat[","];
-                    
-                culture.numberFormat["."] = ","; 
+
+                culture.numberFormat["."] = ",";
                 culture.numberFormat[","] = ".";
-          
+
                 ok(!validator.validate());
-                
-                culture.numberFormat["."] = defaultDecimalSeparator; 
-                culture.numberFormat[","] = defaultGroupSeparator; 
+
+                culture.numberFormat["."] = defaultDecimalSeparator;
+                culture.numberFormat[","] = defaultGroupSeparator;
             });
-                        
+
             test("validate returns true if input with type=number value does have same value as max attribute", function() {
                 var input = $('<input type="number" value="10" max="10" />'),
                     validator = setup(input);
@@ -502,38 +502,38 @@
 
                 ok(!validator.validate());
             });
-            
+
             test("validate returns true if input with data-type=number value is smaller than the max attribute when a culture with comma for the decimal separator is used", function() {
                 var input = $('<input ' + kendo.attr("type") + '="number" value="10,4" max="10.5" />'),
                     validator = setup(input),
                     culture = kendo.culture(),
                     defaultDecimalSeparator = culture.numberFormat["."],
                     defaultGroupSeparator = culture.numberFormat[","];
-                    
-                culture.numberFormat["."] = ","; 
+
+                culture.numberFormat["."] = ",";
                 culture.numberFormat[","] = ".";
 
                 ok(validator.validate());
-                
-                culture.numberFormat["."] = defaultDecimalSeparator; 
-                culture.numberFormat[","] = defaultGroupSeparator; 
+
+                culture.numberFormat["."] = defaultDecimalSeparator;
+                culture.numberFormat[","] = defaultGroupSeparator;
             });
-            
+
             test("validate returns false if input with data-type=number value is bigger than the max attribute when a culture with comma for the decimal separator is used", function() {
                 var input = $('<input ' + kendo.attr("type") + '="number" value="10,6" max="10.5" />'),
                     validator = setup(input),
                     culture = kendo.culture(),
                     defaultDecimalSeparator = culture.numberFormat["."],
                     defaultGroupSeparator = culture.numberFormat[","];
-                    
-                culture.numberFormat["."] = ","; 
+
+                culture.numberFormat["."] = ",";
                 culture.numberFormat[","] = ".";
-          
+
                 ok(!validator.validate());
-                
-                culture.numberFormat["."] = defaultDecimalSeparator; 
-                culture.numberFormat[","] = defaultGroupSeparator; 
-            });            
+
+                culture.numberFormat["."] = defaultDecimalSeparator;
+                culture.numberFormat[","] = defaultGroupSeparator;
+            });
 
             test("validate returns false if input with type=number value does not match max attribute", function() {
                 var input = $('<input type="number" value="11" max="10" />'),
@@ -1269,6 +1269,12 @@
 
                 ok("foo" in validator.options.rules);
                 ok("bar" in validator.options.rules);
+            });
+
+            test("validating a container which contains svg", function() {
+                container.append($('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="120" height="120" viewBox="0 0 236 120"></svg><input type="text" required="required" />'));
+                var validator = setup(container);
+                ok(!validator.validate());
             });
         </script>
     </body>
