@@ -3,7 +3,8 @@ kendo_module({
     name: "Themes",
     description: "Built-in themes for the DataViz widgets",
     category: "dataviz",
-    depends: [ "dataviz.core" ]
+    depends: [ "dataviz.core" ],
+    hidden: true
 });
 
 (function () {

@@ -3,7 +3,7 @@ kendo_module({
     name: "Gauge",
     category: "dataviz",
     description: "Radial gauge.",
-    depends: [ "dataviz.core", "dataviz.svg" ]
+    depends: [ "dataviz.core", "dataviz.svg", "dataviz.themes" ]
 });
 
 (function ($, undefined) {

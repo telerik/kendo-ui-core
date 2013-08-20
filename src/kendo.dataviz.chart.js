@@ -4,7 +4,7 @@ kendo_module({
     category: "dataviz",
     description: "The Chart widget uses modern browser technologies to " +
                  "render high-quality data visualizations in the browser.",
-    depends: [ "data", "userevents", "dataviz.core", "dataviz.svg" ],
+    depends: [ "data", "userevents", "dataviz.core", "dataviz.svg", "dataviz.themes" ],
     features: [{
         id: "dataviz.chart-polar",
         name: "Polar & Radar",

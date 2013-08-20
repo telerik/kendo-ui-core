@@ -3,7 +3,8 @@ kendo_module({
     name: "Core",
     description: "The DataViz core functions",
     category: "dataviz",
-    depends: [ "core" ]
+    depends: [ "core" ],
+    hidden: true
 });
 
 (function ($, undefined) {
