@@ -11,18 +11,18 @@
 </head>
 <body>
 
-    <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+    <textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea>
 
     <script>
 
-        $("#Editor1").kendoEditor();
-
         function clean(html) {
-            return html.toLowerCase().replace(/class=k-marker/g, 'class="k-marker"').replace(/\r\n/g, '');
+            return html.toLowerCase()
+                .replace(/class=k-marker/g, 'class="k-marker"')
+                .replace(/\r\n/g, '');
         }
 
+        var editor = $("#Editor1").kendoEditor().data("kendoEditor");
         var ListFormatter = kendo.ui.editor.ListFormatter;
-        var editor = getEditor();
         var formatter;
 
         module("ListFormatter", {
@@ -312,7 +312,7 @@
             equal(editor.value(), '<p>foo</p><p>bar</p>');
         });
 
-        test("toggle removes empty lists", function() {
+        test("toggle removes meaningless whitespace nodes", function() {
             editor.value('<ul>   <li>foo</li>   <li>bar</li>   </ul>');
             var range = editor.createRange();
             var lis = $('li', editor.body.firstChild);
@@ -402,7 +402,6 @@
             editor.value("<table><tbody><tr><td>foo</td><td>bar</td></tr></tbody></table>");
             var foo = editor.body.getElementsByTagName("td")[0].firstChild;
             var bar = editor.body.getElementsByTagName("td")[1].firstChild;
-            formatter = new ListFormatter("ul");
 
             formatter.apply([foo, bar]);
             equal(editor.value(), "<table><tbody><tr><td><ul><li>foo</li></ul></td><td><ul><li>bar</li></ul></td></tr></tbody></table>");
@@ -412,7 +411,6 @@
             editor.value("<table><tbody><tr><td>foo</td></tr><tr><td>bar</td></tr></tbody></table>");
             var foo = editor.body.getElementsByTagName("td")[0].firstChild;
             var bar = editor.body.getElementsByTagName("td")[1].firstChild;
-            formatter = new ListFormatter("ul");
 
             formatter.apply([foo, bar]);
             equal(editor.value(), "<table><tbody><tr><td><ul><li>foo</li></ul></td></tr><tr><td><ul><li>bar</li></ul></td></tr></tbody></table>");
@@ -434,7 +432,6 @@
 
             var foo = editor.body.firstChild.firstChild;
             var bar = editor.body.lastChild.firstChild.firstChild;
-            formatter = new ListFormatter("ul");
 
             formatter.apply([foo, bar]);
             equal(editor.value(), "<ul><li>foo</li><li>bar</li></ul>");
@@ -454,16 +451,12 @@
         test("remove from nested list", function() {
             var range = createRangeFromText(editor, "<ul><li>foo<ul><li>|bar</li><li>baz|</li></ul></li></ul>");
 
-            formatter = new ListFormatter("ul");
-
             formatter.toggle(range);
             equal(editor.value(), "<ul><li>foo</li></ul><p>bar</p><p>baz</p>");
         });
 
         test("remove from deeply nested list", function() {
             var range = createRangeFromText(editor, "<ul><li>foo<ul><li>bar<ul><li>|baz|</li></ul></li></ul></li></ul>")
-
-            formatter = new ListFormatter("ul");
 
             formatter.toggle(range);
             equal(editor.value(), "<ul><li>foo<ul><li>bar</li></ul></li></ul><p>baz</p>");
@@ -472,16 +465,12 @@
         test("remove nested list in the middle of parent list", function() {
             var range = createRangeFromText(editor, "<ul><li>foo<ul><li>|bar|</li></ul></li><li>baz</li></ul>");
 
-            formatter = new ListFormatter("ul");
-
             formatter.toggle(range);
             equal(editor.value(), "<ul><li>foo</li></ul><p>bar</p><ul><li>baz</li></ul>");
         });
 
         test("remove partially selected nested list in the middle of parent list", function() {
             var range = createRangeFromText(editor, "<ul><li>foo<ul><li>|bar|</li><li>boo</li></ul></li><li>baz</li></ul>");
-
-            formatter = new ListFormatter("ul");
 
             formatter.toggle(range);
             equal(editor.value(), "<ul><li>foo</li></ul><p>bar</p><ul><li><ul><li>boo</li></ul></li><li>baz</li></ul>");
@@ -493,8 +482,6 @@
             var marker = new kendo.ui.editor.Marker();
             marker.add(range);
 
-            formatter = new ListFormatter("ul");
-
             formatter.toggle(range);
 
             marker.remove(range);
@@ -503,11 +490,14 @@
 
         test("divs are not converted to lists", function() {
             var range = createRangeFromText(editor, "<div><p>foo</p><p>|bar|</p></div>");
-
-            formatter = new ListFormatter("ul");
-
             formatter.toggle(range);
             equal(editor.value(), "<div><p>foo</p><ul><li>bar</li></ul></div>");
+        });
+
+        test("lists do not merge distant text", function() {
+            var range = createRangeFromText(editor, "foo<p>bar</p><p>|baz</p><p>qux|</p>");
+            formatter.toggle(range);
+            equal(editor.value(), "foo<p>bar</p><ul><li>baz</li><li>qux</li></ul>");
         });
 
     </script>

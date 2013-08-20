@@ -74,6 +74,12 @@ var ListFormatter = Class.extend({
         that.unwrapTag = unwrapTag;
     },
 
+    isList: function(node) {
+        var name = dom.name(node);
+
+        return name == "ul" || name == "ol" || name == "dl";
+    },
+
     wrap: function(list, nodes) {
         var li = dom.create(list.ownerDocument, "li"),
             i, node;
@@ -86,7 +92,7 @@ var ListFormatter = Class.extend({
                 continue;
             }
 
-            if (dom.is(node, 'ul') || dom.is(node, 'ol')) {
+            if (this.isList(node)) {
                 while (node.firstChild) {
                     list.appendChild(node.firstChild);
                 }
@@ -220,16 +226,24 @@ var ListFormatter = Class.extend({
             formatNode = new ListFormatFinder(tag == "ul" ? "ol" : "ul").findSuitable(nodes);
         }
 
-        var childNodes = dom.significantChildNodes(commonAncestor);
-
-        if (!childNodes.length) {
-            childNodes = nodes;
-        }
+        var childNodes;
 
         if (/table|tbody/.test(dom.name(commonAncestor))) {
             childNodes = $.map(nodes, function(node) {
                 return dom.parentOfType(node, ["td"]);
             });
+        } else {
+            childNodes = dom.significantChildNodes(commonAncestor);
+
+            if ($.grep(childNodes, dom.isBlock).length) {
+                childNodes = $.grep(childNodes, $.proxy(function(node) {
+                    return this.containsAny(node, nodes);
+                }, this));
+            }
+
+            if (!childNodes.length) {
+                childNodes = nodes;
+            }
         }
 
         function pushAncestor() {
@@ -238,16 +252,18 @@ var ListFormatter = Class.extend({
 
         for (var i = 0; i < childNodes.length; i++) {
             var child = childNodes[i];
-            var nodeName = dom.name(child);
-            if (this.suitable(child, nodes) && (!formatNode || !dom.isAncestorOrSelf(formatNode, child))) {
+            var suitable = (!formatNode || !dom.isAncestorOrSelf(formatNode, child)) && this.suitable(child, nodes);
 
-                if (formatNode && (nodeName == "ul" || nodeName == "ol")) {
-                    // merging lists
-                    $.each(child.childNodes, pushAncestor);
-                    dom.remove(child);
-                } else {
-                    ancestors.push(child);
-                }
+            if (!suitable) {
+                continue;
+            }
+
+            if (formatNode && this.isList(child)) {
+                // merging lists
+                $.each(child.childNodes, pushAncestor);
+                dom.remove(child);
+            } else {
+                ancestors.push(child);
             }
         }
 
