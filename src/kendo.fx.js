@@ -1016,17 +1016,22 @@ kendo_module({
                     out = this._direction === "out",
                     startDataValue = that.element.data(property),
                     startDataValueIsSet = !(isNaN(startDataValue) || startDataValue == defaultStart);
+                var cssValue = this.element.css(property);
 
                 if (startDataValueIsSet) {
                     startValue = startDataValue;
                 } else if (typeof this._startValue !== "undefined") {
                     startValue = this._startValue;
+                } else if (out && cssValue) {
+                    startValue = cssValue;
                 } else {
                     startValue = out ? defaultStart : defaultEnd;
                 }
 
                 if (typeof this._endValue !== "undefined") {
                     endValue = this._endValue;
+                } else if (!out && cssValue) {
+                    endValue = cssValue;
                 } else {
                     endValue = out ? defaultEnd : defaultStart;
                 }
