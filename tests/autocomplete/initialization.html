@@ -424,6 +424,13 @@
                 equal(input.attr("readonly"), undefined);
             });
 
+            test("AutoComplete does not focus input if refresh triggered from dataSource", function() {
+                var autocomplete = new AutoComplete(input);
+                autocomplete.suggest("test");
+
+                notEqual(input[0], document.activeElement);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

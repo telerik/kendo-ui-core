@@ -369,7 +369,9 @@ kendo_module({
 
             that._accessor(words.join(separator || ""));
 
-            selectText(element, caret, selectionEnd);
+            if (element === document.activeElement) {
+                selectText(element, caret, selectionEnd);
+            }
         },
 
         value: function (value) {
