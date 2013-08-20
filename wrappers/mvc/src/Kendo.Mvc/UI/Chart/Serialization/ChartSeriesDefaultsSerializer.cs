@@ -38,8 +38,8 @@ namespace Kendo.Mvc.UI
             var verticalAreaData = seriesDefaults.VerticalArea.CreateSerializer().Serialize();
             verticalAreaData.Remove("type");
             
-            var areaStepData = seriesDefaults.StepArea.CreateSerializer().Serialize();
-            areaStepData.Remove("type");
+            var stepAreaData = seriesDefaults.StepArea.CreateSerializer().Serialize();
+            stepAreaData.Remove("type");
 
             var verticalStepAreaData = seriesDefaults.VerticalStepArea.CreateSerializer().Serialize();
             verticalStepAreaData.Remove("type");
@@ -91,6 +91,10 @@ namespace Kendo.Mvc.UI
                   .Add("verticalLine", verticalLineData, () => verticalLineData.Count > 0)
                   .Add("area", areaData, () => areaData.Count > 0)
                   .Add("verticalArea", verticalAreaData, () => verticalAreaData.Count > 0)
+                  .Add("stepLine", stepLineData, () => stepLineData.Count > 0)
+                  .Add("verticalStepLine", verticalStepLineData, () => verticalStepLineData.Count > 0)
+                  .Add("stepArea", stepAreaData, () => stepAreaData.Count > 0)
+                  .Add("verticalStepArea", verticalStepAreaData, () => verticalStepAreaData.Count > 0)
                   .Add("pie", pieData, () => pieData.Count > 0)
                   .Add("donut", donutData, () => donutData.Count > 0)
                   .Add("scatter", scatterData, () => scatterData.Count > 0)

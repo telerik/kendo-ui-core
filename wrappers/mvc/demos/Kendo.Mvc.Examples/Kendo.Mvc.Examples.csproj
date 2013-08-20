@@ -95,6 +95,21 @@
     <Compile Include="Controllers\DataViz\Bullet_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bullet_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bullet_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Line_Charts\Date_AxisController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Line_Charts\Grouped_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Line_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Line_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Line_Charts\Multiple_AxesController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Line_Charts\NotesController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Line_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Line_Charts\Stacked_LineController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Area_Charts\Date_AxisController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Area_Charts\Grouped_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Area_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Area_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Area_Charts\Multiple_AxesController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Area_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Step_Area_Charts\Stacked_AreaController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Donut_LabelsController.cs" />
@@ -539,6 +554,21 @@
       <SubType>
       </SubType>
     </Content>
+    <Content Include="Areas\aspx\Views\dataviz\step_line_charts\date_axis.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_line_charts\grouped_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_line_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_line_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_line_charts\multiple_axes.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_line_charts\notes.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_line_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_line_charts\stacked_line.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_area_charts\date_axis.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_area_charts\grouped_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_area_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_area_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_area_charts\multiple_axes.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_area_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\step_area_charts\stacked_area.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\donut_labels.aspx" />
@@ -845,6 +875,21 @@
     <Content Include="Areas\razor\Views\dataviz\polar_charts\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\polar_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\line_charts\notes.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_area_charts\date_axis.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_area_charts\grouped_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_area_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_area_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_area_charts\multiple_axes.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_area_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_area_charts\stacked_area.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_line_charts\date_axis.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_line_charts\grouped_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_line_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_line_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_line_charts\multiple_axes.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_line_charts\notes.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_line_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\step_line_charts\stacked_line.cshtml" />
     <None Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
     <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
