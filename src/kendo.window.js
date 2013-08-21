@@ -579,10 +579,15 @@ kendo_module({
                     overlay = that._overlay(false);
 
                     if (showOptions.duration) {
-                        overlay.kendoStop().kendoAnimate({ effects: "fade:in", duration: showOptions.duration }).show();
+                        overlay.kendoStop().kendoAnimate({
+                            effects: "fade:in",
+                            duration: showOptions.duration
+                        });
                     } else {
-                        overlay.css("opacity", 0.5).show();
+                        overlay.css("opacity", 0.5);
                     }
+
+                    overlay.show();
                 }
 
                 if (!wrapper.is(VISIBLE)) {
@@ -643,7 +648,10 @@ kendo_module({
                         overlay.kendoStop().kendoAnimate({
                              effects: "fade:out",
                              duration: hideOptions.duration,
-                             hide: true
+                             hide: true,
+                             complete: function() {
+                                 overlay.css("opacity", "");
+                             }
                          });
                     } else {
                         overlay.hide();
@@ -657,7 +665,7 @@ kendo_module({
                     reverse: hideOptions.reverse === true,
                     duration: hideOptions.duration,
                     complete: function() {
-                        wrapper.hide();
+                        wrapper.hide().css("opacity","");
                         that.trigger(DEACTIVATE);
                     }
                 });
