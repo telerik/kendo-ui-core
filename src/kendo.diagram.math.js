@@ -1,11 +1,12 @@
 kendo_module({
-    id: "diagram.math",
-    name: "Math",
+    id      : "diagram.math",
+    name    : "Math",
     category: "diagram",
-    depends: ["dataviz.core"]
+    depends : ["dataviz.core"]
 });
 
-(function ($, undefined) {
+(function($, undefined)
+{
     var kendo = window.kendo,
         diagram = kendo.diagram = {},
         Graph = kendo.diagram.Graph,
@@ -22,94 +23,126 @@ kendo_module({
         EPSILON = 1e-06;
 
     deepExtend(Point.fn, {
-        plus: function (p) {
+        plus         : function(p)
+        {
             return new Point(this.x + p.x, this.y + p.y);
         },
-        minus: function (p) {
+        minus        : function(p)
+        {
             return new Point(this.x - p.x, this.y - p.y);
         },
-        offset: function (value) {
+        offset       : function(value)
+        {
             return new Point(this.x - value, this.y - value);
         },
-        times: function (s) {
+        times        : function(s)
+        {
             return new Point(this.x * s, this.y * s);
         },
-        normalize: function () {
-            if (this.length() == 0) {
+        normalize    : function()
+        {
+            if(this.length() == 0)
+            {
                 return new Point();
             }
             return this.times(1 / this.length());
         },
-        length: function () {
+        length       : function()
+        {
             return Math.sqrt(this.x * this.x + this.y * this.y);
         },
-        toString: function () {
+        toString     : function()
+        {
             return "(" + this.x + "," + this.y + ")";
         },
-        lengthSquared: function () {
+        lengthSquared: function()
+        {
             return (this.x * this.x + this.y * this.y);
         },
-        middleOf: function MiddleOf(p, q) {
+        middleOf     : function MiddleOf(p, q)
+        {
             return new Point(q.x - p.x, q.y - p.y).times(0.5).plus(p);
         },
-        toPolar: function (useDegrees) {
+        toPolar      : function(useDegrees)
+        {
             var factor = 1;
-            if (useDegrees) {
+            if(useDegrees)
+            {
                 factor = 180 / Math.PI;
             }
             var a = Math.atan2(Math.abs(this.y), Math.abs(this.x));
             var halfpi = Math.PI / 2;
-            if (this.x == 0) {
+            if(this.x == 0)
+            {
                 // note that the angle goes down and not the usual mathematical convention
                 var len = this.length();
-                if (this.y == 0) {
+                if(this.y == 0)
+                {
                     return new Polar(0, 0);
                 }
-                if (this.y > 0) {
+                if(this.y > 0)
+                {
                     return new Polar(len, factor * halfpi);
                 }
-                if (this.y < 0) {
+                if(this.y < 0)
+                {
                     return new Polar(len, factor * 3 * halfpi);
                 }
             }
-            else if (this.x > 0) {
-                if (this.y == 0) {
+            else if(this.x > 0)
+            {
+                if(this.y == 0)
+                {
                     return new Polar(len, 0);
                 }
-                if (this.y > 0) {
+                if(this.y > 0)
+                {
                     return new Polar(len, factor * a);
                 }
-                if (this.y < 0) {
+                if(this.y < 0)
+                {
                     return new Polar(len, factor * (4 * halfpi - a));
                 }
             }
-            else {
-                if (this.y == 0) {
+            else
+            {
+                if(this.y == 0)
+                {
                     return new Polar(len, 2 * halfpi);
                 }
-                if (this.y > 0) {
+                if(this.y > 0)
+                {
                     return new Polar(len, factor * (2 * halfpi - a));
                 }
-                if (this.y < 0) {
+                if(this.y < 0)
+                {
                     return new Polar(len, factor * (2 * halfpi + a));
                 }
             }
         },
-        isOnLine: function (from, to) {
-            if (from.x > to.x) { // from must be the leftmost point
+        isOnLine     : function(from, to)
+        {
+            if(from.x > to.x)
+            { // from must be the leftmost point
                 var temp = to;
                 to = from;
                 from = temp;
             }
             var r1 = new Rect(from.x, from.y).inflate(HITTESTAREA, HITTESTAREA),
                 r2 = new Rect(to.x, to.y).inflate(HITTESTAREA, HITTESTAREA);
-            if (r1.union(r2).contains(this)) {
-                if (from.x === to.x || from.y === to.y) {
+            if(r1.union(r2).contains(this))
+            {
+                if(from.x === to.x || from.y === to.y)
+                {
                     return true;
-                } else if (from.y < to.y) {
+                }
+                else if(from.y < to.y)
+                {
                     o1 = r1.x + (((r2.x - r1.x) * (this.y - (r1.y + r1.height))) / ((r2.y + r2.height) - (r1.y + r1.height)));
                     u1 = (r1.x + r1.width) + ((((r2.x + r2.width) - (r1.x + r1.width)) * (this.y - r1.y)) / (r2.y - r1.y));
-                } else {
+                }
+                else
+                {
                     o1 = r1.x + (((r2.x - r1.x) * (this.y - r1.y)) / (r2.y - r1.y));
                     u1 = (r1.x + r1.width) + ((((r2.x + r2.width) - (r1.x + r1.width)) * (this.y - (r1.y + r1.height))) / ((r2.y + r2.height) - (r1.y + r1.height)));
                 }
@@ -120,17 +153,21 @@ kendo_module({
     });
 
     var Rect = Class.extend({
-        init: function (x, y, width, height) {
+        init       : function(x, y, width, height)
+        {
             this.x = x || 0;
             this.y = y || 0;
             this.width = width || 0;
             this.height = height || 0;
         },
-        contains: function (point) {
+        contains   : function(point)
+        {
             return ((point.x >= this.x) && (point.x <= (this.x + this.width)) && (point.y >= this.y) && (point.y <= (this.y + this.height)));
         },
-        inflate: function (dx, dy) {
-            if (dy === undefined) {
+        inflate    : function(dx, dy)
+        {
+            if(dy === undefined)
+            {
                 dy = dx;
             }
 
@@ -140,69 +177,88 @@ kendo_module({
             this.height += 2 * dy + 1;
             return this;
         },
-        offset: function (dx, dy) {
+        offset     : function(dx, dy)
+        {
             this.x += dx;
             this.y += dy;
         },
-        union: function (r) {
+        union      : function(r)
+        {
             var x1 = Math.min(this.x, r.x);
             var y1 = Math.min(this.y, r.y);
             var x2 = Math.max((this.x + this.width), (r.x + r.width));
             var y2 = Math.max((this.y + this.height), (r.y + r.height));
             return new Rect(x1, y1, x2 - x1, y2 - y1);
         },
-        center: function () {
+        center     : function()
+        {
             return new Point(this.x + this.width / 2, this.y + this.height / 2);
         },
-        top: function () {
+        top        : function()
+        {
             return new Point(this.x + this.width / 2, this.y);
         },
-        right: function () {
+        right      : function()
+        {
             return new Point(this.x + this.width, this.y + this.height / 2);
         },
-        bottom: function () {
+        bottom     : function()
+        {
             return new Point(this.x + this.width / 2, this.y + this.height);
         },
-        left: function () {
+        left       : function()
+        {
             return new Point(this.x, this.y + this.height / 2);
         },
-        topLeft: function () {
+        topLeft    : function()
+        {
             return new Point(this.x, this.y);
         },
-        topRight: function () {
+        topRight   : function()
+        {
             return new Point(this.x + this.width, this.y);
         },
-        bottomLeft: function () {
+        bottomLeft : function()
+        {
             return new Point(this.x, this.y + this.height);
         },
-        bottomRight: function () {
+        bottomRight: function()
+        {
             return new Point(this.x + this.width, this.y + this.height);
         },
-        clone: function () {
+        clone      : function()
+        {
             return new Rect(this.x, this.y, this.width, this.height);
         },
-        empty: function () {
+        empty      : function()
+        {
             return new Rect(0, 0, 0, 0);
         },
-        isEmpty: function () {
+        isEmpty    : function()
+        {
             return !this.width && !this.height;
         },
-        fromPoints: function (p, q) {
-            if (isNaN(p.x) || isNaN(p.y) || isNaN(q.x) || isNaN(q.y)) {
+        fromPoints : function(p, q)
+        {
+            if(isNaN(p.x) || isNaN(p.y) || isNaN(q.x) || isNaN(q.y))
+            {
                 throw "Some values are NaN.";
             }
             return new Rect(Math.min(p.x, q.x), Math.min(p.y, q.y), Math.abs(p.x - q.x), Math.abs(p.y - q.y));
         },
-        equals: function (rect) {
+        equals     : function(rect)
+        {
             return this.x == rect.x && this.y === rect.y && this.width === rect.width && this.height === rect.height;
         },
-        toString: function () {
+        toString   : function()
+        {
             return this.x + " " + this.y + " " + this.width + " " + this.height;
         }
     });
 
     var Size = Class.extend({
-        init: function (width, height) {
+        init: function(width, height)
+        {
             this.width = width;
             this.height = height;
         }
@@ -210,21 +266,26 @@ kendo_module({
 
     Size.prototype.Empty = new Size(0, 0);
 
-    Rect.toRect = function (rect) {
-        if (!(rect instanceof Rect)) {
+    Rect.toRect = function(rect)
+    {
+        if(!(rect instanceof Rect))
+        {
             rect = new Rect(rect.x, rect.y, rect.width, rect.height);
         }
 
         return rect;
     };
 
-    function isNearZero(num) {
+    function isNearZero(num)
+    {
         return Math.abs(num) < EPSILON;
     }
 
-    function intersectLine(start1, end1, start2, end2, isSegment) {
+    function intersectLine(start1, end1, start2, end2, isSegment)
+    {
         var tangensdiff = ((end1.x - start1.x) * (end2.y - start2.y)) - ((end1.y - start1.y) * (end2.x - start2.x));
-        if (isNearZero(tangensdiff)) {
+        if(isNearZero(tangensdiff))
+        {
             //parallel lines
             return;
         }
@@ -234,7 +295,8 @@ kendo_module({
         var r = num1 / tangensdiff;
         var s = num2 / tangensdiff;
 
-        if (isSegment && (r < 0 || r > 1 || s < 0 || s > 1)) {
+        if(isSegment && (r < 0 || r > 1 || s < 0 || s > 1))
+        {
             //r < 0 => line 1 is below line 2
             //r > 1 => line 1 is above line 2
             //s < 0 => line 2 is below line 1
@@ -246,25 +308,30 @@ kendo_module({
     }
 
     var Intersect = {
-        lines: function (start1, end1, start2, end2) {
+        lines       : function(start1, end1, start2, end2)
+        {
             return intersectLine(start1, end1, start2, end2);
         },
-        segments: function (start1, end1, start2, end2) {
+        segments    : function(start1, end1, start2, end2)
+        {
             return intersectLine(start1, end1, start2, end2, true);
         },
-        rectWithLine: function (rect, start, end) {
+        rectWithLine: function(rect, start, end)
+        {
             return  Intersect.segments(start, end, rect.topLeft(), rect.topRight()) ||
                 Intersect.segments(start, end, rect.topRight(), rect.bottomRight()) ||
                 Intersect.segments(start, end, rect.bottomLeft(), rect.bottomRight()) ||
                 Intersect.segments(start, end, rect.topLeft(), rect.bottomLeft());
         },
-        rects: function (rect1, rect2, angle) {
+        rects       : function(rect1, rect2, angle)
+        {
             var tl = rect2.topLeft(),
                 tr = rect2.topRight(),
                 bl = rect2.bottomLeft(),
                 br = rect2.bottomRight();
 
-            if (angle) {
+            if(angle)
+            {
                 var center = rect2.center();
                 tl = tl.rotate(center, angle);
                 tr = tr.rotate(center, angle);
@@ -281,13 +348,15 @@ kendo_module({
                 Intersect.rectWithLine(rect1, tr, br) ||
                 Intersect.rectWithLine(rect1, bl, br);
 
-            if (!intersect) {//last possible case is rect1 to be completely within rect2
+            if(!intersect)
+            {//last possible case is rect1 to be completely within rect2
                 tl = rect1.topLeft();
                 tr = rect1.topRight();
                 bl = rect1.bottomLeft();
                 br = rect1.bottomRight();
 
-                if (angle) {
+                if(angle)
+                {
                     var reverseAngle = 360 - angle;
                     tl = tl.rotate(center, reverseAngle);
                     tr = tr.rotate(center, reverseAngle);
@@ -309,73 +378,93 @@ kendo_module({
      * Aligns two rectangles, where one is the container and the other is content.
      */
     var RectAlign = Class.extend({
-        init: function (container) {
+        init: function(container)
+        {
             this.container = Rect.toRect(container);
         },
 
-        align: function (content, alignment) {
+        align       : function(content, alignment)
+        {
             var alignValues = alignment.toLowerCase().split(" ");
 
-            for (var i = 0; i < alignValues.length; i++) {
+            for(var i = 0; i < alignValues.length; i++)
+            {
                 content = this._singleAlign(content, alignValues[i]);
             }
 
             return content;
         },
-        _singleAlign: function (content, alignment) {
-            if (isFunction(this[alignment])) {
+        _singleAlign: function(content, alignment)
+        {
+            if(isFunction(this[alignment]))
+            {
                 return this[alignment](content);
             }
-            else {
+            else
+            {
                 return content;
             }
         },
 
-        left: function (content) {
+        left  : function(content)
+        {
             return this._hAlign(content, this._left);
         },
-        center: function (content) {
+        center: function(content)
+        {
             return this._hAlign(content, this._center);
         },
-        right: function (content) {
+        right : function(content)
+        {
             return this._hAlign(content, this._right);
         },
-        top: function (content) {
+        top   : function(content)
+        {
             return this._vAlign(content, this._top);
         },
-        middle: function (content) {
+        middle: function(content)
+        {
             return this._vAlign(content, this._middle);
         },
-        bottom: function (content) {
+        bottom: function(content)
+        {
             return this._vAlign(content, this._bottom);
         },
 
-        _left: function (container, content) {
+        _left  : function(container, content)
+        {
             return container.x;
         },
-        _center: function (container, content) {
+        _center: function(container, content)
+        {
             return ((container.width - content.width) / 2) | 0;
         },
-        _right: function (container, content) {
+        _right : function(container, content)
+        {
             return container.width - content.width;
         },
-        _top: function (container, content) {
+        _top   : function(container, content)
+        {
             return container.y
         },
-        _middle: function (container, content) {
+        _middle: function(container, content)
+        {
             return ((container.height - content.height) / 2) | 0;
         },
-        _bottom: function (container, content) {
+        _bottom: function(container, content)
+        {
             return container.height - content.height;
         },
 
-        _hAlign: function (content, alignCalc) {
+        _hAlign: function(content, alignCalc)
+        {
             content = Rect.toRect(content);
             content.x = alignCalc(this.container, content);
 
             return content;
         },
-        _vAlign: function (content, alignCalc) {
+        _vAlign: function(content, alignCalc)
+        {
             content = Rect.toRect(content);
             content.y = alignCalc(this.container, content);
 
@@ -384,7 +473,8 @@ kendo_module({
     });
 
     var Polar = Class.extend({
-        init: function (r, a) {
+        init: function(r, a)
+        {
             this.r = r;
             this.angle = a;
         }
@@ -394,7 +484,8 @@ kendo_module({
      * SVG transformation matrix.
      */
     var Matrix = Class.extend({
-        init: function (a, b, c, d, e, f) {
+        init    : function(a, b, c, d, e, f)
+        {
             this.a = a || 0;
             this.b = b || 0;
             this.c = c || 0;
@@ -402,7 +493,8 @@ kendo_module({
             this.e = e || 0;
             this.f = f || 0;
         },
-        plus: function (m) {
+        plus    : function(m)
+        {
             this.a += m.a;
             this.b += m.b;
             this.c += m.c;
@@ -410,7 +502,8 @@ kendo_module({
             this.e += m.e;
             this.f += m.f;
         },
-        minus: function (m) {
+        minus   : function(m)
+        {
             this.a -= m.a;
             this.b -= m.b;
             this.c -= m.c;
@@ -418,7 +511,8 @@ kendo_module({
             this.e -= m.e;
             this.f -= m.f;
         },
-        times: function (m) {
+        times   : function(m)
+        {
             return Matrix.fromList([
                 this.a * m.a + this.c * m.b,
                 this.b * m.a + this.d * m.b,
@@ -428,16 +522,19 @@ kendo_module({
                 this.b * m.e + this.d * m.f + this.f
             ]);
         },
-        apply: function (p) {
+        apply   : function(p)
+        {
             return new Point(this.a * p.x + this.c * p.y + this.e, this.b * p.x + this.d * p.y + this.f);
         },
-        toString: function () {
+        toString: function()
+        {
             return "matrix(" + this.a + " " + this.b + " " + this.c + " " + this.d + " " + this.e + " " + this.f + ")";
         }
     });
 
     deepExtend(Matrix, {
-        fromSVGMatrix: function (vm) {
+        fromSVGMatrix   : function(vm)
+        {
             var m = new Matrix();
             m.a = vm.a;
             m.b = vm.b;
@@ -447,7 +544,8 @@ kendo_module({
             m.f = vm.f;
             return m;
         },
-        fromMatrixVector: function (v) {
+        fromMatrixVector: function(v)
+        {
             var m = new Matrix();
             m.a = v.a;
             m.b = v.b;
@@ -457,8 +555,10 @@ kendo_module({
             m.f = v.f;
             return m;
         },
-        fromList: function (v) {
-            if (v.length != 6) {
+        fromList        : function(v)
+        {
+            if(v.length != 6)
+            {
                 throw "The given list should consist of six elements.";
             }
             var m = new Matrix();
@@ -470,7 +570,8 @@ kendo_module({
             m.f = v[5];
             return m;
         },
-        translation: function (x, y) {
+        translation     : function(x, y)
+        {
             var m = new Matrix();
             m.a = 1;
             m.b = 0;
@@ -480,10 +581,12 @@ kendo_module({
             m.f = y;
             return m;
         },
-        unit: function () {
+        unit            : function()
+        {
             return fromList([1, 0, 0, 1, 0, 0]);
         },
-        rotation: function (angle, x, y) {
+        rotation        : function(angle, x, y)
+        {
             var m = new Matrix();
             m.a = Math.cos(angle * Math.PI / 180);
             m.b = Math.sin(angle * Math.PI / 180);
@@ -493,7 +596,8 @@ kendo_module({
             m.f = (y - y * m.a - x * m.b) || 0;
             return m;
         },
-        scaling: function (scaleX, scaleY) {
+        scaling         : function(scaleX, scaleY)
+        {
             var m = new Matrix();
             m.a = scaleX;
             m.b = 0;
@@ -503,42 +607,56 @@ kendo_module({
             m.f = 0;
             return m;
         },
-        parse: function (v) {
+        parse           : function(v)
+        {
             var parts, nums;
-            if (v) {
+            if(v)
+            {
                 v = v.trim();
                 // of the form "matrix(...)"
-                if (v.slice(0, 6).toLowerCase() == "matrix") {
+                if(v.slice(0, 6).toLowerCase() == "matrix")
+                {
                     nums = v.slice(7, v.length - 1).trim();
                     parts = nums.split(",");
-                    if (parts.length == 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                    if(parts.length == 6)
+                    {
+                        return Matrix.fromList(parts.map(function(p)
+                        {
                             return parseFloat(p);
                         }));
                     }
                     parts = nums.split(" ");
-                    if (parts.length == 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                    if(parts.length == 6)
+                    {
+                        return Matrix.fromList(parts.map(function(p)
+                        {
                             return parseFloat(p);
                         }));
                     }
                 }
                 // of the form "(...)"
-                if (v.slice(0, 1) == "(" && v.slice(v.length - 1) == ")") {
+                if(v.slice(0, 1) == "(" && v.slice(v.length - 1) == ")")
+                {
                     v = v.substr(1, v.length - 1);
                 }
-                if (v.indexOf(",") > 0) {
+                if(v.indexOf(",") > 0)
+                {
                     parts = v.split(",");
-                    if (parts.length == 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                    if(parts.length == 6)
+                    {
+                        return Matrix.fromList(parts.map(function(p)
+                        {
                             return parseFloat(p);
                         }));
                     }
                 }
-                if (v.indexOf(" ") > 0) {
+                if(v.indexOf(" ") > 0)
+                {
                     parts = v.split(" ");
-                    if (parts.length == 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                    if(parts.length == 6)
+                    {
+                        return Matrix.fromList(parts.map(function(p)
+                        {
                             return parseFloat(p);
                         }));
                     }
@@ -552,7 +670,8 @@ kendo_module({
      * SVG transformation represented as a vector.
      */
     var MatrixVector = Class.extend({
-        init: function (a, b, c, d, e, f) {
+        init      : function(a, b, c, d, e, f)
+        {
             this.a = a || 0;
             this.b = b || 0;
             this.c = c || 0;
@@ -560,7 +679,8 @@ kendo_module({
             this.e = e || 0;
             this.f = f || 0;
         },
-        fromMatrix: function FromMatrix(m) {
+        fromMatrix: function FromMatrix(m)
+        {
             var v = new MatrixVector();
             v.a = m.a;
             v.b = m.b;
@@ -579,24 +699,30 @@ kendo_module({
      * @param step The separation between the values (default:1).
      * @returns {Array}
      */
-    function Range(start, stop, step) {
-        if (typeof start == 'undefined' || typeof stop == 'undefined') {
+    function Range(start, stop, step)
+    {
+        if(typeof start == 'undefined' || typeof stop == 'undefined')
+        {
             return [];
         }
-        if (step && Math.sign(stop - start) != Math.sign(step)) {
+        if(step && Math.sign(stop - start) != Math.sign(step))
+        {
             throw "The sign of the increment should allow to reach the stop-value.";
         }
         step = step || 1;
         start = start || 0;
         stop = stop || start;
-        if ((stop - start) / step === Infinity) {
+        if((stop - start) / step === Infinity)
+        {
             throw "Infinite range defined.";
         }
         var range = [], i = -1, j;
 
-        function rangeIntegerScale(x) {
+        function rangeIntegerScale(x)
+        {
             var k = 1;
-            while (x * k % 1) {
+            while(x * k % 1)
+            {
                 k *= 10;
             }
             return k;
@@ -606,16 +732,21 @@ kendo_module({
         start *= k;
         stop *= k;
         step *= k;
-        if (start > stop && step > 0) {
+        if(start > stop && step > 0)
+        {
             step = -step;
         }
-        if (step < 0) {
-            while ((j = start + step * ++i) >= stop) {
+        if(step < 0)
+        {
+            while((j = start + step * ++i) >= stop)
+            {
                 range.push(j / k);
             }
         }
-        else {
-            while ((j = start + step * ++i) <= stop) {
+        else
+        {
+            while((j = start + step * ++i) <= stop)
+            {
                 range.push(j / k);
             }
         }
@@ -628,14 +759,15 @@ kendo_module({
      * @param deviation The deviation (spreading at half-height) of the distribution.
      * @returns {number}
      */
-    function normalVariable(mean, deviation) {
+    function normalVariable(mean, deviation)
+    {
         var x, y, r;
         do {
             x = Math.random() * 2 - 1;
             y = Math.random() * 2 - 1;
             r = x * x + y * y;
         }
-        while (!r || r > 1);
+        while(!r || r > 1);
         return mean + deviation * x * Math.sqrt(-2 * Math.log(r) / r);
     };
 
@@ -643,14 +775,17 @@ kendo_module({
      * Returns a random identifier which can be used as an ID of objects, eventually augmented with a prefix.
      * @returns {string}
      */
-    function randomId(length) {
-        if (isUndefined(length)) {
+    function randomId(length)
+    {
+        if(isUndefined(length))
+        {
             length = 10;
         }
         // old version return Math.floor((1 + Math.random()) * 0x1000000).toString(16).substring(1);
         var result = '';
         var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        for (var i = length; i > 0; --i) {
+        for(var i = length; i > 0; --i)
+        {
             result += chars[Math.round(Math.random() * (chars.length - 1))];
         }
         return result;
@@ -664,7 +799,8 @@ kendo_module({
      * Important: do not use the standard Array access method, use the get/Set methods instead.
      */
     var HashTable = kendo.Class.extend({
-        init: function () {
+        init: function()
+        {
 
             this._buckets = [];
             this.length = 0;
@@ -673,10 +809,12 @@ kendo_module({
         /**
          * Adds the literal object with the given key (of the form {key: key,....}).
          */
-        add: function (key, value) {
+        add: function(key, value)
+        {
 
             var obj = this._createGetBucket(key);
-            if (isDefined(value)) {
+            if(isDefined(value))
+            {
                 obj.value = value;
             }
             return obj;
@@ -685,8 +823,10 @@ kendo_module({
         /**
          * Gets the literal object with the given key.
          */
-        get: function (key) {
-            if (this._bucketExists(key)) {
+        get        : function(key)
+        {
+            if(this._bucketExists(key))
+            {
                 return this._createGetBucket(key);
             }
             return null;
@@ -696,13 +836,15 @@ kendo_module({
          * @param key The key of the entry.
          * @param value The value to set. If the key already exists the value will be overwritten.
          */
-        set: function (key, value) {
+        set        : function(key, value)
+        {
             this.add(key, value);
         },
         /**
          * Determines whether the HashTable contains a specific key.
          */
-        containsKey: function (key) {
+        containsKey: function(key)
+        {
             return this._bucketExists(key);
         },
 
@@ -710,8 +852,10 @@ kendo_module({
          * Removes the element with the specified key from the hashtable.
          * Returns the removed bucket.
          */
-        remove: function (key) {
-            if (this._bucketExists(key)) {
+        remove: function(key)
+        {
+            if(this._bucketExists(key))
+            {
                 var hashId = this._hash(key);
                 delete this._buckets[hashId];
                 this.length--;
@@ -724,27 +868,32 @@ kendo_module({
          * @returns {Array}
          * @private
          */
-        _hashes: function () {
+        _hashes: function()
+        {
             var hashes = [];
-            for (var hash in this._buckets) {
-                if (this._buckets.hasOwnProperty(hash)) {
+            for(var hash in this._buckets)
+            {
+                if(this._buckets.hasOwnProperty(hash))
+                {
                     hashes.push(hash);
                 }
             }
             return hashes;
         },
 
-
         /**
          * Foreach with an iterator working on the key-value pairs.
          * @param func
          */
-        forEach: function (func) {
+        forEach: function(func)
+        {
             var hashes = this._hashes();
-            for (var i = 0, len = hashes.length; i < len; i++) {
+            for(var i = 0, len = hashes.length; i < len; i++)
+            {
                 var hash = hashes[i];
                 var bucket = this._buckets[hash];
-                if (isUndefined(bucket)) {
+                if(isUndefined(bucket))
+                {
                     continue;
                 }
                 func(bucket);
@@ -752,7 +901,8 @@ kendo_module({
 
         },
 
-        _bucketExists: function (key) {
+        _bucketExists: function(key)
+        {
             var hashId = this._hash(key);
             return isDefined(this._buckets[hashId]);
         },
@@ -762,10 +912,12 @@ kendo_module({
          * be created and returned.
          * A createGetBucket is a literal object of the form {key: key, ...}.
          */
-        _createGetBucket: function (key) {
+        _createGetBucket: function(key)
+        {
             var hashId = this._hash(key);
             var bucket = this._buckets[hashId];
-            if (isUndefined(bucket)) {
+            if(isUndefined(bucket))
+            {
                 bucket = { key: key };
                 this._buckets[hashId] = bucket;
                 this.length++;
@@ -776,14 +928,18 @@ kendo_module({
         /**
          * Hashing of the given key.
          */
-        _hash: function (key) {
-            if (isNumber(key)) {
+        _hash: function(key)
+        {
+            if(isNumber(key))
+            {
                 return key & key;
             }
-            if (isString(key)) {
+            if(isString(key))
+            {
                 return this._hashString(key);
             }
-            if (isObject(key)) {
+            if(isObject(key))
+            {
                 return this._objectHashId(key);
             }
             throw "Unsupported key type.";
@@ -792,13 +948,16 @@ kendo_module({
         /**
          * Hashing of a string.
          */
-        _hashString: function (s) {
+        _hashString: function(s)
+        {
             // see for example http://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript-jquery
             var result = 0;
-            if (s.length == 0) {
+            if(s.length == 0)
+            {
                 return result;
             }
-            for (var i = 0; i < s.length; i++) {
+            for(var i = 0; i < s.length; i++)
+            {
                 var ch = s.charCodeAt(i);
                 result = ((result << 5) - result) + ch;
                 result = result & result;
@@ -806,13 +965,14 @@ kendo_module({
             return result;
         },
 
-
         /**
          * Returns the unique identifier for an object. This is automatically assigned and add on the object.
          */
-        _objectHashId: function (key) {
+        _objectHashId: function(key)
+        {
             var id = key._hashId;
-            if (isUndefined(id)) {
+            if(isUndefined(id))
+            {
                 id = randomId();
                 key._hashId = id;
             }
@@ -831,15 +991,19 @@ kendo_module({
          * Initializes a new instance of the Dictionary class.
          * @param dictionary Loads the content of the given dictionary into this new one.
          */
-        init: function (dictionary) {
+        init: function(dictionary)
+        {
             var that = this;
             kendo.Observable.fn.init.call(that);
-            that.bind('changed', function (e) {
+            that.bind('changed', function(e)
+            {
             });
             this._hashTable = new HashTable();
             this.length = 0;
-            if (isDefined(dictionary)) {
-                dictionary.forEach(function (k, v) {
+            if(isDefined(dictionary))
+            {
+                dictionary.forEach(function(k, v)
+                {
                     this.add(k, v);
                 }, this);
             }
@@ -849,9 +1013,11 @@ kendo_module({
          * Adds a key-value to the dictionary.
          * If the key already exists this will assign the given value to the existing entry.
          */
-        add: function (key, value) {
+        add: function(key, value)
+        {
             var entry = this._hashTable.get(key);
-            if (entry == null) {
+            if(entry == null)
+            {
                 entry = this._hashTable.add(key);
                 this.length++;
                 this.trigger('changed');
@@ -864,16 +1030,19 @@ kendo_module({
          * @param key The key of the entry.
          * @param value The value to set. If the key already exists the value will be overwritten.
          */
-        set: function (key, value) {
+        set: function(key, value)
+        {
             this.add(key, value);
         },
 
         /**
          * Gets the value associated with the given key in the dictionary.
          */
-        get: function (key) {
+        get: function(key)
+        {
             var entry = this._hashTable.get(key);
-            if (entry != null) {
+            if(entry != null)
+            {
                 return entry.value;
             }
             throw new Error("Cannot find key " + key);
@@ -882,15 +1051,18 @@ kendo_module({
         /**
          * Returns whether the dictionary contains the given key.
          */
-        containsKey: function (key) {
+        containsKey: function(key)
+        {
             return this._hashTable.containsKey(key);
         },
 
         /**
          * Removes the element with the specified key from the dictionary.
          */
-        remove: function (key) {
-            if (this.containsKey(key)) {
+        remove: function(key)
+        {
+            if(this.containsKey(key))
+            {
                 this.trigger("changed");
                 return this._hashTable.remove(key);
                 this.length--;
@@ -900,8 +1072,10 @@ kendo_module({
         /**
          * The functional gets the key and value as parameters.
          */
-        forEach: function (func, thisRef) {
-            this._hashTable.forEach(function (entry) {
+        forEach: function(func, thisRef)
+        {
+            this._hashTable.forEach(function(entry)
+            {
                 func.call(thisRef, entry.key, entry.value);
             });
         },
@@ -909,8 +1083,10 @@ kendo_module({
         /**
          * Same as forEach except that only the value is passed to the functional.
          */
-        forEachValue: function (func, thisRef) {
-            this._hashTable.forEach(function (entry) {
+        forEachValue: function(func, thisRef)
+        {
+            this._hashTable.forEach(function(entry)
+            {
                 func.call(thisRef, entry.value);
             });
         },
@@ -918,8 +1094,10 @@ kendo_module({
         /**
          * Calls a defined callback function for each key in the dictionary.
          */
-        forEachKey: function (func, thisRef) {
-            this._hashTable.forEach(function (entry) {
+        forEachKey: function(func, thisRef)
+        {
+            this._hashTable.forEach(function(entry)
+            {
                 func.call(thisRef, entry.key);
             });
         },
@@ -927,9 +1105,11 @@ kendo_module({
         /**
          * Gets an array with all keys in the dictionary.
          */
-        keys: function () {
+        keys: function()
+        {
             var keys = [];
-            this.forEachKey(function (key) {
+            this.forEachKey(function(key)
+            {
                 keys.push(key);
             });
             return keys;
@@ -940,7 +1120,8 @@ kendo_module({
 
     var Queue = kendo.Class.extend({
 
-        init: function () {
+        init: function()
+        {
             this._tail = null;
             this._head = null;
             this.length = 0;
@@ -949,13 +1130,16 @@ kendo_module({
         /**
          * Enqueues an object to the end of the queue.
          */
-        enqueue: function (value) {
+        enqueue: function(value)
+        {
             var entry = { value: value, next: null };
-            if (this._head == null) {
+            if(this._head == null)
+            {
                 this._head = entry;
                 this._tail = this._head;
             }
-            else {
+            else
+            {
                 this._tail.next = entry;
                 this._tail = this._tail.next;
             }
@@ -965,8 +1149,10 @@ kendo_module({
         /**
          * Removes and returns the object at top of the queue.
          */
-        dequeue: function () {
-            if (this.length < 1) {
+        dequeue: function()
+        {
+            if(this.length < 1)
+            {
                 throw new Error("The queue is empty.");
             }
             var value = this._head.value;
@@ -975,10 +1161,13 @@ kendo_module({
             return value;
         },
 
-        contains: function (item) {
+        contains: function(item)
+        {
             var current = this._head;
-            while (current != null) {
-                if (current.value == item) {
+            while(current != null)
+            {
+                if(current.value == item)
+                {
                     return true;
                 }
                 current = current.next;
@@ -994,7 +1183,8 @@ kendo_module({
      */
     var Node = kendo.Class.extend({
 
-        init: function (id, shape) {
+        init: function(id, shape)
+        {
 
             /**
              * Holds all the links incident with the current node.
@@ -1019,13 +1209,16 @@ kendo_module({
              */
             this.weight = 1;
 
-            if (isDefined(id)) {
+            if(isDefined(id))
+            {
                 this.id = id;
             }
-            else {
+            else
+            {
                 this.id = randomId();
             }
-            if (isDefined(shape)) {
+            if(isDefined(shape))
+            {
                 this.associatedShape = shape;
                 // transfer the shape's bounds to the runtime props
                 var b = shape.bounds();
@@ -1033,7 +1226,9 @@ kendo_module({
                 this.height = b.height;
                 this.x = b.x;
                 this.y = b.y;
-            } else {
+            }
+            else
+            {
                 this.associatedShape = null;
             }
             /**
@@ -1053,7 +1248,8 @@ kendo_module({
         /**
          * Returns whether this node has no links attached.
          */
-        isIsolated: function () {
+        isIsolated: function()
+        {
             return this.links.isEmpty();
         },
 
@@ -1061,8 +1257,10 @@ kendo_module({
          * Gets or sets the bounding rectangle of this node.
          * This should be considered as runtime data, the property is not hotlinked to a SVG item.
          */
-        bounds: function (r) {
-            if (!isDefined(r)) {
+        bounds: function(r)
+        {
+            if(!isDefined(r))
+            {
                 return new diagram.Rect(this.x, this.y, this.width, this.height);
             }
 
@@ -1076,9 +1274,11 @@ kendo_module({
          * Returns whether there is at least one link with the given (complementary) node. This can be either an
          * incoming or outgoing link.
          */
-        isLinkedTo: function (node) {
+        isLinkedTo: function(node)
+        {
             var thisRef = this;
-            return this.links.any(function (link) {
+            return this.links.any(function(link)
+            {
                 return link.getComplement(thisRef) === node;
             });
         },
@@ -1087,12 +1287,15 @@ kendo_module({
          * Gets the children of this node, defined as the adjacent nodes with a link from this node to the adjacent one.
          * @returns {Array}
          */
-        getChildren: function () {
-            if (this.outgoing.length == 0) {
+        getChildren: function()
+        {
+            if(this.outgoing.length == 0)
+            {
                 return [];
             }
             var children = [];
-            for (var i = 0, len = this.outgoing.length; i < len; i++) {
+            for(var i = 0, len = this.outgoing.length; i < len; i++)
+            {
                 var link = this.outgoing[i];
                 children.add(link.getComplement(this));
             }
@@ -1103,12 +1306,15 @@ kendo_module({
          * Gets the parents of this node, defined as the adjacent nodes with a link from the adjacent node to this one.
          * @returns {Array}
          */
-        getParents: function () {
-            if (this.incoming.length == 0) {
+        getParents: function()
+        {
+            if(this.incoming.length == 0)
+            {
                 return [];
             }
             var parents = [];
-            for (var i = 0, len = this.incoming.length; i < len; i++) {
+            for(var i = 0, len = this.incoming.length; i < len; i++)
+            {
                 var link = this.incoming[i];
                 parents.add(link.getComplement(this));
             }
@@ -1119,15 +1325,19 @@ kendo_module({
          * Returns a clone of the Node. Note that the identifier is not cloned since it's a different Node instance.
          * @returns {Node}
          */
-        clone: function () {
+        clone: function()
+        {
             var copy = new Node();
-            if (isDefined(this.weight)) {
+            if(isDefined(this.weight))
+            {
                 copy.weight = this.weight;
             }
-            if (isDefined(this.balance)) {
+            if(isDefined(this.balance))
+            {
                 copy.balance = this.balance;
             }
-            if (isDefined(this.owner)) {
+            if(isDefined(this.owner))
+            {
                 copy.owner = this.owner;
             }
             copy.associatedShape = this.associatedShape;
@@ -1141,7 +1351,8 @@ kendo_module({
         /**
          * Returns whether there is a link from the current node to the given node.
          */
-        adjacentTo: function (node) {
+        adjacentTo: function(node)
+        {
             return this.isLinkedTo(node) !== null;
         },
 
@@ -1149,14 +1360,17 @@ kendo_module({
          * Removes the given link from the link collection this node owns.
          * @param link
          */
-        removeLink: function (link) {
-            if (link.source == this) {
+        removeLink: function(link)
+        {
+            if(link.source == this)
+            {
                 this.links.remove(link);
                 this.outgoing.remove(link);
                 link.source = null;
             }
 
-            if (link.target == this) {
+            if(link.target == this)
+            {
                 this.links.remove(link);
                 this.incoming.remove(link);
                 link.target = null;
@@ -1166,8 +1380,10 @@ kendo_module({
         /**
          * Returns whether there is a (outgoing) link from the current node to the given one.
          */
-        hasLinkTo: function (node) {
-            return this.outgoing.any(function (link) {
+        hasLinkTo: function(node)
+        {
+            return this.outgoing.any(function(link)
+            {
                 return link.target == node;
             });
         },
@@ -1175,22 +1391,26 @@ kendo_module({
         /**
          * Returns the degree of this node, i.e. the sum of incoming and outgoing links.
          */
-        degree: function () {
+        degree: function()
+        {
             return this.links.length;
         },
 
         /**
          * Returns whether this node is either the source or the target of the given link.
          */
-        incidentWith: function (link) {
+        incidentWith: function(link)
+        {
             return this.links.contains(link);
         },
 
         /**
          * Returns the links between this node and the given one.
          */
-        getLinksWith: function (node) {
-            return this.links.all(function (link) {
+        getLinksWith: function(node)
+        {
+            return this.links.all(function(link)
+            {
                 return link.getComplement(this) === node;
             }, this);
         },
@@ -1198,12 +1418,15 @@ kendo_module({
         /**
          * Returns the nodes (either parent or child) which are linked to the current one.
          */
-        getNeighbors: function () {
+        getNeighbors: function()
+        {
             var neighbors = [];
-            this.incoming.forEach(function (e) {
+            this.incoming.forEach(function(e)
+            {
                 neighbors.push(e.getComplement(this));
             }, this);
-            this.outgoing.forEach(function (e) {
+            this.outgoing.forEach(function(e)
+            {
                 neighbors.push(e.getComplement(this));
             }, this);
             return neighbors;
@@ -1215,24 +1438,31 @@ kendo_module({
      */
     var Link = kendo.Class.extend({
 
-        init: function (source, target, id, connection) {
-            if (isUndefined(source)) {
+        init: function(source, target, id, connection)
+        {
+            if(isUndefined(source))
+            {
                 throw "The source of the new link is not set.";
             }
-            if (isUndefined(target)) {
+            if(isUndefined(target))
+            {
                 throw "The target of the new link is not set.";
             }
             var sourceFound, targetFound;
-            if (isString(source)) {
+            if(isString(source))
+            {
                 sourceFound = new Node(source);
             }
-            else {
+            else
+            {
                 sourceFound = source;
             }
-            if (isString(target)) {
+            if(isString(target))
+            {
                 targetFound = new Node(target);
             }
-            else {
+            else
+            {
                 targetFound = target;
             }
 
@@ -1242,16 +1472,20 @@ kendo_module({
             this.target.links.add(this);
             this.source.outgoing.add(this);
             this.target.incoming.add(this);
-            if (isDefined(id)) {
+            if(isDefined(id))
+            {
                 this.id = id;
             }
-            else {
+            else
+            {
                 this.id = randomId();
             }
-            if (isDefined(connection)) {
+            if(isDefined(connection))
+            {
                 this.associatedConnection = connection;
             }
-            else {
+            else
+            {
                 this.associatedConnection = null;
             }
             this.type = "Link";
@@ -1261,8 +1495,10 @@ kendo_module({
         /**
          * Returns the complementary node of the given one, if any.
          */
-        getComplement: function (node) {
-            if (this.source != node && this.target != node) {
+        getComplement: function(node)
+        {
+            if(this.source != node && this.target != node)
+            {
                 throw "The given node is not incident with this link.";
             }
             return this.source == node ? this.target : this.source;
@@ -1271,11 +1507,14 @@ kendo_module({
         /**
          * Returns the overlap of the current link with the given one, if any.
          */
-        getCommonNode: function (link) {
-            if (this.source == link.souce || this.source == link.target) {
+        getCommonNode: function(link)
+        {
+            if(this.source == link.souce || this.source == link.target)
+            {
                 return this.source;
             }
-            if (this.target == link.souce || this.target == link.target) {
+            if(this.target == link.souce || this.target == link.target)
+            {
                 return this.target;
             }
             return null;
@@ -1284,21 +1523,24 @@ kendo_module({
         /**
          * Returns whether the current link is bridging the given nodes.
          */
-        isBridging: function (v1, v2) {
+        isBridging: function(v1, v2)
+        {
             return this.source == v1 && this.target == v2 || this.source == v2 && this.target == v1;
         },
 
         /**
          * Returns the source and target of this link as a tuple.
          */
-        getNodes: function () {
+        getNodes: function()
+        {
             return [this.source, this.target];
         },
 
         /**
          * Returns whether the given node is either the source or the target of the current link.
          */
-        incidentWith: function (node) {
+        incidentWith: function(node)
+        {
             return this.source == node || this.target == node;
         },
 
@@ -1306,14 +1548,16 @@ kendo_module({
          * Returns whether the given link is a continuation of the current one. This can be both
          * via an incoming or outgoing link.
          */
-        adjacentTo: function (link) {
+        adjacentTo: function(link)
+        {
             return this.source.links.contains(link) || this.target.links.contains(link);
         },
 
         /**
          * Changes the source-node of this link.
          */
-        changeSource: function (node) {
+        changeSource: function(node)
+        {
             this.source.links.remove(this);
             this.source.outgoing.remove(this);
 
@@ -1327,7 +1571,8 @@ kendo_module({
          * Changes the target-node of this link.
          * @param node
          */
-        changeTarget: function (node) {
+        changeTarget: function(node)
+        {
             this.target.links.remove(this);
             this.target.incoming.remove(this);
 
@@ -1340,11 +1585,14 @@ kendo_module({
         /**
          * Changes both the source and the target nodes of this link.
          */
-        changesNodes: function (v, w) {
-            if (this.source == v) {
+        changesNodes: function(v, w)
+        {
+            if(this.source == v)
+            {
                 this.changeSource(w);
             }
-            else if (this.target == v) {
+            else if(this.target == v)
+            {
                 this.changeTarget(w);
             }
         },
@@ -1352,7 +1600,8 @@ kendo_module({
         /**
          * Reverses the direction of this link.
          */
-        reverse: function () {
+        reverse: function()
+        {
             var oldSource = this.source;
             var oldTarget = this.target;
 
@@ -1369,11 +1618,14 @@ kendo_module({
         /**
          * Ensures that the given target defines the endpoint of this link.
          */
-        directTo: function (target) {
-            if (this.source != target && this.target != target) {
+        directTo: function(target)
+        {
+            if(this.source != target && this.target != target)
+            {
                 throw "The given node is not incident with this link.";
             }
-            if (this.target != target) {
+            if(this.target != target)
+            {
                 this.reverse();
             }
         },
@@ -1381,7 +1633,8 @@ kendo_module({
         /**
          * Returns a reversed clone of this link.
          */
-        createReverseEdge: function () {
+        createReverseEdge: function()
+        {
             var r = this.clone();
             r.reverse();
             r.reversed = true;
@@ -1391,7 +1644,8 @@ kendo_module({
         /**
          * Returns a clone of this link.
          */
-        clone: function () {
+        clone: function()
+        {
             var clone = new Link(this.source, this.target);
             return clone;
         }
@@ -1404,7 +1658,8 @@ kendo_module({
      * inside the Graph.
      */
     var Graph = kendo.Class.extend({
-        init: function (idOrDiagram) {
+        init              : function(idOrDiagram)
+        {
             /**
              * The links or edge collection of this Graph.
              * @type {Array}
@@ -1427,15 +1682,20 @@ kendo_module({
              * @private
              */
             this._root = null;
-            if (isDefined(idOrDiagram)) {
-                if (isString(idOrDiagram)) {
+            if(isDefined(idOrDiagram))
+            {
+                if(isString(idOrDiagram))
+                {
                     this.id = idOrDiagram;
-                } else {
+                }
+                else
+                {
                     this.diagram = idOrDiagram;
                     this.id = idOrDiagram.id;
                 }
             }
-            else {
+            else
+            {
                 this.id = randomId();
             }
 
@@ -1453,14 +1713,18 @@ kendo_module({
          * properties.
          * @param forceRebuild If set to true the relational info will be rebuild even if already present.
          */
-        cacheRelationships: function (forceRebuild) {
-            if (isUndefined(forceRebuild)) {
+        cacheRelationships: function(forceRebuild)
+        {
+            if(isUndefined(forceRebuild))
+            {
                 forceRebuild = false;
             }
-            if (this._hasCachedRelationships && !forceRebuild) {
+            if(this._hasCachedRelationships && !forceRebuild)
+            {
                 return;
             }
-            for (var i = 0, len = this.nodes.length; i < len; i++) {
+            for(var i = 0, len = this.nodes.length; i < len; i++)
+            {
                 var node = this.nodes[i];
                 node.children = this.getChildren(node);
                 node.parents = this.getParents(node);
@@ -1476,27 +1740,34 @@ kendo_module({
          * @param visited The collection of visited nodes.
          * @param offset The offset or starting counter of the level info.
          */
-        assignLevels: function (startNode, offset, visited) {
-            if (startNode == null) {
+        assignLevels: function(startNode, offset, visited)
+        {
+            if(startNode == null)
+            {
                 throw "Start node not specified.";
             }
-            if (isUndefined(offset)) {
+            if(isUndefined(offset))
+            {
                 offset = 0;
             }
             // if not done before, cache the parents and children
             this.cacheRelationships();
-            if (isUndefined(visited)) {
+            if(isUndefined(visited))
+            {
                 visited = new Dictionary();
-                this.nodes.forEach(function (n) {
+                this.nodes.forEach(function(n)
+                {
                     visited.add(n, false);
                 });
             }
             visited.set(startNode, true);
             startNode.level = offset;
             var children = startNode.children;
-            for (var i = 0, len = children.length; i < len; i++) {
+            for(var i = 0, len = children.length; i < len; i++)
+            {
                 var child = children[i];
-                if (child == null || visited.get(child)) {
+                if(child == null || visited.get(child))
+                {
                     continue;
                 }
                 this.assignLevels(child, offset + 1, visited);
@@ -1509,18 +1780,25 @@ kendo_module({
          * @param value
          * @returns {*}
          */
-        root: function (value) {
-            if (isUndefined(value)) {
-                if (this._root == null) {
+        root: function(value)
+        {
+            if(isUndefined(value))
+            {
+                if(this._root == null)
+                {
                     // TODO: better to use the longest path for the most probable root?
-                    return this.nodes.first(function (n) {
+                    return this.nodes.first(function(n)
+                    {
                         return n.incoming.length == 0;
                     })
                 }
-                else {
+                else
+                {
                     return this._root;
                 }
-            } else {
+            }
+            else
+            {
                 this._root = value;
             }
         },
@@ -1531,41 +1809,50 @@ kendo_module({
          * If you alter the items of the components you'll alter the original graph and vice versa.
          * @returns {Array}
          */
-        getConnectedComponents: function () {
+        getConnectedComponents: function()
+        {
             this.componentIndex = 0;
             this.setItemIndices();
             var componentId = initArray(this.nodes.length, -1);
 
-            for (var v = 0; v < this.nodes.length; v++) {
-                if (componentId[v] == -1) {
+            for(var v = 0; v < this.nodes.length; v++)
+            {
+                if(componentId[v] == -1)
+                {
                     this._collectConnectedNodes(componentId, v);
                     this.componentIndex++;
                 }
             }
 
             var components = [];
-            for (var i = 0; i < this.componentIndex; ++i) {
+            for(var i = 0; i < this.componentIndex; ++i)
+            {
                 components[i] = new Graph();
             }
-            for (var i = 0; i < componentId.length; ++i) {
+            for(var i = 0; i < componentId.length; ++i)
+            {
                 var graph = components[componentId[i]];
                 graph.addNodeAndOutgoings(this.nodes[i]);
             }
             // sorting the components in decreasing order of node count
-            components.sort(function (a, b) {
+            components.sort(function(a, b)
+            {
                 return b.nodes.length - a.nodes.length;
             });
             return components;
         },
 
-        _collectConnectedNodes: function (setIds, nodeIndex) {
+        _collectConnectedNodes: function(setIds, nodeIndex)
+        {
             setIds[nodeIndex] = this.componentIndex; // part of the current component
             var node = this.nodes[nodeIndex];
             node.links.forEach(
-                function (link) {
+                function(link)
+                {
                     var next = link.getComplement(node);
                     var nextId = next.index;
-                    if (setIds[nextId] == -1) {
+                    if(setIds[nextId] == -1)
+                    {
                         this._collectConnectedNodes(setIds, nextId);
                     }
                 }, this);
@@ -1575,18 +1862,23 @@ kendo_module({
          * Calculates the bounds of this Graph if the Nodes have spatial dimensions defined.
          * @returns {Rect}
          */
-        calcBounds: function () {
-            if (this.isEmpty()) {
+        calcBounds: function()
+        {
+            if(this.isEmpty())
+            {
                 this.bounds = new Rect();
                 return this.bounds;
             }
             var b = null;
-            for (var i = 0, len = this.nodes.length; i < len; i++) {
+            for(var i = 0, len = this.nodes.length; i < len; i++)
+            {
                 var node = this.nodes[i];
-                if (b == null) {
+                if(b == null)
+                {
                     b = node.bounds();
                 }
-                else {
+                else
+                {
                     b = b.union(node.bounds());
                 }
             }
@@ -1602,7 +1894,8 @@ kendo_module({
          * @param root The root of the spanning tree.
          * @returns {Graph}
          */
-        getSpanningTree: function (root) {
+        getSpanningTree: function(root)
+        {
             var tree = new Graph();
             var map = new Dictionary(), source, target;
             tree.root = root.clone();
@@ -1618,37 +1911,47 @@ kendo_module({
             remaining.add(root);
 
             var levelCount = 1;
-            while (remaining.length > 0) {
+            while(remaining.length > 0)
+            {
                 var next = remaining.pop();
-                next.links.forEach(function (link) {
+                next.links.forEach(function(link)
+                {
                     var cn = link.getComplement(next);
-                    if (visited.contains(cn)) {
+                    if(visited.contains(cn))
+                    {
                         return;
                     }
 
                     cn.level = next.level + 1;
-                    if (levelCount < cn.level + 1) {
+                    if(levelCount < cn.level + 1)
+                    {
                         levelCount = cn.level + 1;
                     }
-                    if (!remaining.contains(cn)) {
+                    if(!remaining.contains(cn))
+                    {
                         remaining.add(cn);
                     }
-                    if (!visited.contains(cn)) {
+                    if(!visited.contains(cn))
+                    {
                         visited.add(cn);
                     }
-                    if (map.containsKey(next)) {
+                    if(map.containsKey(next))
+                    {
                         source = map.get(next);
                     }
-                    else {
+                    else
+                    {
                         source = next.clone();
                         source.level = next.level;
                         source.id = next.id;
                         map.add(next, source);
                     }
-                    if (map.containsKey(cn)) {
+                    if(map.containsKey(cn))
+                    {
                         target = map.get(cn);
                     }
-                    else {
+                    else
+                    {
                         target = cn.clone();
                         target.level = cn.level;
                         target.id = cn.id;
@@ -1661,11 +1964,13 @@ kendo_module({
             }
 
             var treeLevels = [];
-            for (var i = 0; i < levelCount; i++) {
+            for(var i = 0; i < levelCount; i++)
+            {
                 treeLevels.add([]);
             }
 
-            tree.nodes.forEach(function (node) {
+            tree.nodes.forEach(function(node)
+            {
                 treeLevels[node.level].add(node);
             });
 
@@ -1680,23 +1985,30 @@ kendo_module({
          * @param incidenceLessThan The maximum degree or incidence the random node should have.
          * @returns {*}
          */
-        takeRandomNode: function (excludedNodes, incidenceLessThan) {
-            if (isUndefined(excludedNodes)) {
+        takeRandomNode: function(excludedNodes, incidenceLessThan)
+        {
+            if(isUndefined(excludedNodes))
+            {
                 excludedNodes = [];
             }
-            if (isUndefined(incidenceLessThan)) {
+            if(isUndefined(incidenceLessThan))
+            {
                 incidenceLessThan = 4;
             }
-            if (this.nodes.length == 0) {
+            if(this.nodes.length == 0)
+            {
                 return null;
             }
-            if (this.nodes.length == 1) {
+            if(this.nodes.length == 1)
+            {
                 return excludedNodes.contains(this.nodes[0]) ? null : this.nodes[0];
             }
-            var pool = this.nodes.where(function (node) {
+            var pool = this.nodes.where(function(node)
+            {
                 return !excludedNodes.contains(node) && node.degree() <= incidenceLessThan
             });
-            if (pool.isEmpty()) {
+            if(pool.isEmpty())
+            {
                 return null;
             }
             return pool[randomInteger(0, pool.length)];
@@ -1705,15 +2017,18 @@ kendo_module({
         /**
          * Returns whether this is an empty graph.
          */
-        isEmpty: function () {
+        isEmpty: function()
+        {
             return this.nodes.isEmpty();
         },
 
         /**
          * Checks whether the endpoints of the links are all in the nodes collection.
          */
-        isHealthy: function () {
-            return this.links.all(function (link) {
+        isHealthy: function()
+        {
+            return this.links.all(function(link)
+            {
                 return this.nodes.contains(link.source) && this.nodes.contains(link.target);
             }, this)
         },
@@ -1722,8 +2037,10 @@ kendo_module({
          * Gets the parents of this node, defined as the adjacent nodes with a link from the adjacent node to this one.
          * @returns {Array}
          */
-        getParents: function (n) {
-            if (!this.hasNode(n)) {
+        getParents: function(n)
+        {
+            if(!this.hasNode(n))
+            {
                 throw "The given node is not part of this graph.";
             }
             return n.getParents();
@@ -1733,8 +2050,10 @@ kendo_module({
          * Gets the children of this node, defined as the adjacent nodes with a link from this node to the adjacent one.
          * @returns {Array}
          */
-        getChildren: function (n) {
-            if (!this.hasNode(n)) {
+        getChildren: function(n)
+        {
+            if(!this.hasNode(n))
+            {
                 throw "The given node is not part of this graph.";
             }
             return n.getChildren();
@@ -1743,37 +2062,44 @@ kendo_module({
         /**
          * Adds a new link to the graph between the given nodes.
          */
-        addLink: function (sourceOrLink, target, owner) {
+        addLink: function(sourceOrLink, target, owner)
+        {
 
-            if (isUndefined(sourceOrLink)) {
+            if(isUndefined(sourceOrLink))
+            {
                 throw "The source of the link is not defined.";
             }
-            if (isUndefined(target)) {
+            if(isUndefined(target))
+            {
                 // can only be undefined if the first one is a Link
-                if (isDefined(sourceOrLink.type) && sourceOrLink.type == "Link") {
+                if(isDefined(sourceOrLink.type) && sourceOrLink.type == "Link")
+                {
                     this.addExistingLink(sourceOrLink);
                     return;
                 }
-                else {
+                else
+                {
                     throw "The target of the link is not defined.";
                 }
             }
 
             var foundSource = this.getNode(sourceOrLink);
-            if (isUndefined(foundSource)) {
+            if(isUndefined(foundSource))
+            {
                 foundSource = this.addNode(sourceOrLink);
             }
             var foundTarget = this.getNode(target);
-            if (isUndefined(foundTarget)) {
+            if(isUndefined(foundTarget))
+            {
                 foundTarget = this.addNode(target);
             }
 
             var newLink = new Link(foundSource, foundTarget);
 
-            if (isDefined(owner)) {
+            if(isDefined(owner))
+            {
                 newLink.owner = owner;
             }
-
 
             /*newLink.source.outgoing.push(newLink);
              newLink.source.links.push(newLink);
@@ -1788,8 +2114,10 @@ kendo_module({
         /**
          * Removes all the links in this graph.
          */
-        removeAllLinks: function () {
-            while (this.links.length > 0) {
+        removeAllLinks: function()
+        {
+            while(this.links.length > 0)
+            {
                 var link = this.links[0];
                 this.removeLink(link);
             }
@@ -1798,24 +2126,32 @@ kendo_module({
         /**
          * Adds the given link to the current graph.
          */
-        addExistingLink: function (link) {
+        addExistingLink: function(link)
+        {
 
-            if (this.hasLink(link)) {
+            if(this.hasLink(link))
+            {
                 return;
             }
             this.links.push(link);
-            if (this.hasNode(link.source.id)) {
+            if(this.hasNode(link.source.id))
+            {
                 // priority to the existing node with the id even if other props are different
                 var s = this.getNode(link.source.id);
                 link.changeSource(s);
-            } else {
+            }
+            else
+            {
                 this.addNode(link.source);
             }
 
-            if (this.hasNode(link.target.id)) {
+            if(this.hasNode(link.target.id))
+            {
                 var t = this.getNode(link.target.id);
                 link.changeTarget(t);
-            } else {
+            }
+            else
+            {
                 this.addNode(link.target);
             }
 
@@ -1838,13 +2174,17 @@ kendo_module({
          * @param linkOrId An identifier or a Link object.
          * @returns {*}
          */
-        hasLink: function (linkOrId) {
-            if (isString(linkOrId)) {
-                return this.links.any(function (link) {
+        hasLink: function(linkOrId)
+        {
+            if(isString(linkOrId))
+            {
+                return this.links.any(function(link)
+                {
                     return link.id == linkOrId;
                 })
             }
-            if (linkOrId.type == "Link") {
+            if(linkOrId.type == "Link")
+            {
                 return this.links.contains(linkOrId);
             }
             throw "The given object is neither an identifier nor a Link.";
@@ -1852,20 +2192,27 @@ kendo_module({
         /**
          * Gets the node with the specified Id or null if not part of this graph.
          */
-        getNode: function (nodeOrId) {
-            if (isUndefined(nodeOrId)) {
+        getNode: function(nodeOrId)
+        {
+            if(isUndefined(nodeOrId))
+            {
                 throw "No identifier or Node specified.";
             }
-            if (isString(nodeOrId)) {
-                return this.nodes.find(function (n) {
+            if(isString(nodeOrId))
+            {
+                return this.nodes.find(function(n)
+                {
                     return n.id == nodeOrId;
                 });
             }
-            else {
-                if (this.hasNode(nodeOrId)) {
+            else
+            {
+                if(this.hasNode(nodeOrId))
+                {
                     return nodeOrId;
                 }
-                else {
+                else
+                {
                     return null;
                 }
             }
@@ -1874,14 +2221,19 @@ kendo_module({
         /**
          * Returns whether the given node or node Id is part of this graph.
          */
-        hasNode: function (nodeOrId) {
-            if (isString(nodeOrId)) {
-                return this.nodes.any(function (n) {
+        hasNode: function(nodeOrId)
+        {
+            if(isString(nodeOrId))
+            {
+                return this.nodes.any(function(n)
+                {
                     return n.id == nodeOrId;
                 });
             }
-            if (isObject(nodeOrId)) {
-                return this.nodes.any(function (n) {
+            if(isObject(nodeOrId))
+            {
+                return this.nodes.any(function(n)
+                {
                     return n == nodeOrId;
                 });
             }
@@ -1892,22 +2244,27 @@ kendo_module({
          * Removes the given node from this graph.
          * The node can be specified as an object or as an identifier (string).
          */
-        removeNode: function (nodeOrId) {
+        removeNode: function(nodeOrId)
+        {
             var n = nodeOrId;
-            if (isString(nodeOrId)) {
+            if(isString(nodeOrId))
+            {
                 n = this.getNode(nodeOrId);
             }
 
-            if (isDefined(n)) {
+            if(isDefined(n))
+            {
                 var links = n.links;
                 n.links = [];
-                for (var i = 0, len = links.length; i < len; i++) {
+                for(var i = 0, len = links.length; i < len; i++)
+                {
                     var link = links[i];
                     this.removeLink(link);
                 }
                 this.nodes.remove(n);
             }
-            else {
+            else
+            {
                 throw "The identifier should be a Node or the Id (string) of a node.";
             }
         },
@@ -1915,8 +2272,10 @@ kendo_module({
         /**
          * Returns whether the given nodes are connected with a least one link independently of the direction.
          */
-        areConnected: function (n1, n2) {
-            return this.links.any(function (link) {
+        areConnected: function(n1, n2)
+        {
+            return this.links.any(function(link)
+            {
                 return link.source == n1 && link.target == n2 || link.source == n2 && link.target == n1;
             })
         },
@@ -1924,7 +2283,8 @@ kendo_module({
         /**
          * Removes the given link from this graph.
          */
-        removeLink: function (link) {
+        removeLink: function(link)
+        {
             /*    if (!this.links.contains(link)) {
              throw "The given link is not part of the Graph.";
              }
@@ -1942,33 +2302,41 @@ kendo_module({
          * The node can be an existing Node or the identifier of a new node.
          * No error is thrown if the node is already there and the existing one is returned.
          */
-        addNode: function (nodeOrId, layoutRect, owner) {
+        addNode: function(nodeOrId, layoutRect, owner)
+        {
 
             var newNode = null;
 
-            if (!isDefined(nodeOrId)) {
+            if(!isDefined(nodeOrId))
+            {
                 throw "No Node or identifier for a new Node is given."
             }
 
-            if (isString(nodeOrId)) {
-                if (this.hasNode(nodeOrId)) {
+            if(isString(nodeOrId))
+            {
+                if(this.hasNode(nodeOrId))
+                {
                     return this.getNode(nodeOrId);
                 }
                 newNode = new Node(nodeOrId);
             }
-            else {
-                if (this.hasNode(nodeOrId)) {
+            else
+            {
+                if(this.hasNode(nodeOrId))
+                {
                     return this.getNode(nodeOrId);
                 }
                 // todo: ensure that the param is a Node?
                 newNode = nodeOrId;
             }
 
-            if (isDefined(layoutRect)) {
+            if(isDefined(layoutRect))
+            {
                 newNode.bounds(layoutRect);
             }
 
-            if (isDefined(owner)) {
+            if(isDefined(owner))
+            {
                 newNode.owner = owner;
             }
             this.nodes.add(newNode);
@@ -1978,16 +2346,18 @@ kendo_module({
         /**
          * Adds the given Node and its outgoing links.
          */
-        addNodeAndOutgoings: function (node) {
+        addNodeAndOutgoings: function(node)
+        {
 
-            if (!this.nodes.contains(node)) {
+            if(!this.nodes.contains(node))
+            {
                 this.nodes.push(node);
             }
 
-
             var newLinks = node.outgoing;
             node.outgoing = [];
-            newLinks.forEach(function (link) {
+            newLinks.forEach(function(link)
+            {
                 this.addExistingLink(link);
             }, this);
         },
@@ -1995,13 +2365,16 @@ kendo_module({
         /**
          * Sets the 'index' property on the links and nodes of this graph.
          */
-        setItemIndices: function () {
+        setItemIndices: function()
+        {
 
-            for (var i = 0; i < this.nodes.length; ++i) {
+            for(var i = 0; i < this.nodes.length; ++i)
+            {
                 this.nodes[i].index = i;
             }
 
-            for (var i = 0; i < this.links.length; ++i) {
+            for(var i = 0; i < this.links.length; ++i)
+            {
                 this.links[i].index = i;
             }
         },
@@ -2009,29 +2382,36 @@ kendo_module({
         /**
          * Returns a clone of this graph.
          */
-        clone: function (saveMapping) {
+        clone: function(saveMapping)
+        {
             var copy = new Graph();
             var save = isDefined(saveMapping) && saveMapping == true;
-            if (save) {
+            if(save)
+            {
                 copy.nodeMap = new Dictionary();
                 copy.linkMap = new Dictionary();
             }
             // we need a map even if the saveMapping is not set
             var map = new Dictionary();
-            this.nodes.forEach(function (nOriginal) {
+            this.nodes.forEach(function(nOriginal)
+            {
                 var nCopy = nOriginal.clone();
                 map.set(nOriginal, nCopy);
                 copy.nodes.push(nCopy);
 
-                if (save) {
+                if(save)
+                {
                     copy.nodeMap.set(nCopy, nOriginal);
                 }
             });
 
-            this.links.forEach(function (linkOriginal) {
-                if (map.containsKey(linkOriginal.source) && map.containsKey(linkOriginal.target)) {
+            this.links.forEach(function(linkOriginal)
+            {
+                if(map.containsKey(linkOriginal.source) && map.containsKey(linkOriginal.target))
+                {
                     var linkCopy = copy.addLink(map.get(linkOriginal.source), map.get(linkOriginal.target));
-                    if (save) {
+                    if(save)
+                    {
                         copy.linkMap.set(linkCopy, linkOriginal);
                     }
                 }
@@ -2045,7 +2425,8 @@ kendo_module({
          *  - ["n1->n2", "n2->n3"]: creates the three nodes and adds the links
          *  - ["n1->n2", {id: "QSDF"}, "n2->n3"]: same as previous but also performs a deep extend of the link between n1 and n2 with the given object.
          */
-        linearize: function (addIds) {
+        linearize: function(addIds)
+        {
             return Graph.Utils.linearize(this, addIds);
         },
 
@@ -2054,14 +2435,18 @@ kendo_module({
          * @param startNode a node or id of a node in this graph
          * @param action
          */
-        depthFirstTraversal: function (startNode, action) {
-            if (isUndefined(startNode)) {
+        depthFirstTraversal: function(startNode, action)
+        {
+            if(isUndefined(startNode))
+            {
                 throw "You need to supply a starting node.";
             }
-            if (isUndefined(action)) {
+            if(isUndefined(action))
+            {
                 throw "You need to supply an action."
             }
-            if (!this.hasNode(startNode)) {
+            if(!this.hasNode(startNode))
+            {
                 throw "The given start-node is not part of this graph";
             }
             var foundNode = this.getNode(startNode);// case the given one is an Id
@@ -2069,14 +2454,17 @@ kendo_module({
             this._dftIterator(foundNode, action, visited);
         },
 
-        _dftIterator: function (node, action, visited) {
+        _dftIterator: function(node, action, visited)
+        {
 
             action(node);
             visited.add(node);
             var children = node.getChildren();
-            for (var i = 0, len = children.length; i < len; i++) {
+            for(var i = 0, len = children.length; i < len; i++)
+            {
                 var child = children[i];
-                if (visited.contains(child)) {
+                if(visited.contains(child))
+                {
                     continue;
                 }
                 this._dftIterator(child, action, visited);
@@ -2088,16 +2476,20 @@ kendo_module({
          * @param startNode a node or id of a node in this graph
          * @param action
          */
-        breadthFirstTraversal: function (startNode, action) {
+        breadthFirstTraversal: function(startNode, action)
+        {
 
-            if (isUndefined(startNode)) {
+            if(isUndefined(startNode))
+            {
                 throw "You need to supply a starting node.";
             }
-            if (isUndefined(action)) {
+            if(isUndefined(action))
+            {
                 throw "You need to supply an action."
             }
 
-            if (!this.hasNode(startNode)) {
+            if(!this.hasNode(startNode))
+            {
                 throw "The given start-node is not part of this graph";
             }
             var foundNode = this.getNode(startNode);// case the given one is an Id
@@ -2105,14 +2497,17 @@ kendo_module({
             var visited = [];
             queue.enqueue(foundNode);
 
-            while (queue.length > 0) {
+            while(queue.length > 0)
+            {
                 var node = queue.dequeue();
                 action(node);
                 visited.add(node);
                 var children = node.getChildren();
-                for (var i = 0, len = children.length; i < len; i++) {
+                for(var i = 0, len = children.length; i < len; i++)
+                {
                     var child = children[i];
-                    if (visited.contains(child) || queue.contains(child)) {
+                    if(visited.contains(child) || queue.contains(child))
+                    {
                         continue;
                     }
                     queue.enqueue(child);
@@ -2132,7 +2527,8 @@ kendo_module({
          * @param index The counter of visited nodes used to assign the indices.
          * @private
          */
-        _stronglyConnectedComponents: function (excludeSingleItems, node, indices, lowLinks, connected, stack, index) {
+        _stronglyConnectedComponents: function(excludeSingleItems, node, indices, lowLinks, connected, stack, index)
+        {
             indices.add(node, index);
             lowLinks.add(node, index);
             index++;
@@ -2140,25 +2536,31 @@ kendo_module({
             stack.push(node);
 
             var children = node.getChildren();
-            for (var i = 0, len = children.length; i < len; i++) {
+            for(var i = 0, len = children.length; i < len; i++)
+            {
                 var next = children[i];
-                if (!indices.containsKey(next)) {
+                if(!indices.containsKey(next))
+                {
                     this._stronglyConnectedComponents(excludeSingleItems, next, indices, lowLinks, connected, stack, index);
                     lowLinks.add(node, Math.min(lowLinks.get(node), lowLinks.get(next)));
                 }
-                else if (stack.contains(next)) {
+                else if(stack.contains(next))
+                {
                     lowLinks.add(node, Math.min(lowLinks.get(node), indices.get(next)));
                 }
             }
             // If v is a root node, pop the stack and generate a strong component
-            if (lowLinks.get(node) == indices.get(node)) {
+            if(lowLinks.get(node) == indices.get(node))
+            {
                 var next, component = [];
                 do {
                     next = stack.pop();
                     component.add(next);
-                } while (next != node)
+                }
+                while(next != node)
 
-                if (!excludeSingleItems || (component.length > 1)) {
+                if(!excludeSingleItems || (component.length > 1))
+                {
                     connected.add(component)
                 }
             }
@@ -2170,17 +2572,21 @@ kendo_module({
          * @param excludeSingleItems Whether isolated nodes should be excluded.
          * @returns {Array} The array of cycles found.
          */
-        findCycles: function (excludeSingleItems) {
-            if (isUndefined(excludeSingleItems)) {
+        findCycles: function(excludeSingleItems)
+        {
+            if(isUndefined(excludeSingleItems))
+            {
                 excludeSingleItems = true;
             }
             var indices = new Dictionary();
             var lowLinks = new Dictionary();
             var connected = [];
             var stack = [];
-            for (var i = 0, len = this.nodes.length; i < len; i++) {
+            for(var i = 0, len = this.nodes.length; i < len; i++)
+            {
                 var node = this.nodes[i];
-                if (indices.containsKey(node)) {
+                if(indices.containsKey(node))
+                {
                     continue;
                 }
                 this._stronglyConnectedComponents(excludeSingleItems, node, indices, lowLinks, connected, stack, 0);
@@ -2192,7 +2598,8 @@ kendo_module({
          * Returns whether this graph is acyclic.
          * @returns {*}
          */
-        isAcyclic: function () {
+        isAcyclic: function()
+        {
             return this.findCycles().isEmpty();
         },
 
@@ -2200,10 +2607,12 @@ kendo_module({
          * Returns whether the given graph is a subgraph of this one.
          * @param other Another graph instance.
          */
-        isSubGraph: function (other) {
+        isSubGraph: function(other)
+        {
             var otherArray = other.linearize();
             var thisArray = this.linearize();
-            return otherArray.all(function (s) {
+            return otherArray.all(function(s)
+            {
                 return thisArray.contains(s);
             });
         },
@@ -2212,20 +2621,26 @@ kendo_module({
          *  Makes an acyclic graph from the current (connected) one.
          * * @returns {Array} The reversed links.
          */
-        makeAcyclic: function () {
+        makeAcyclic: function()
+        {
             // if empty or almost empty
-            if (this.isEmpty() || this.nodes.length <= 1 || this.links.length <= 1) {
+            if(this.isEmpty() || this.nodes.length <= 1 || this.links.length <= 1)
+            {
                 return [];
             }
             // singular case of just two nodes
-            if (this.nodes.length == 2) {
+            if(this.nodes.length == 2)
+            {
                 var result = [];
-                if (this.links.length > 1) {
+                if(this.links.length > 1)
+                {
                     var oneLink = this.links[0];
                     var oneNode = oneLink.source;
-                    for (var i = 0, len = this.links.length; i < len; i++) {
+                    for(var i = 0, len = this.links.length; i < len; i++)
+                    {
                         var link = this.links[i];
-                        if (link.source == oneNode) {
+                        if(link.source == oneNode)
+                        {
                             continue;
                         }
                         var rev = link.reverse();
@@ -2246,14 +2661,18 @@ kendo_module({
              * @param node
              * @returns {number}
              */
-            var flowIntensity = function (node) {
-                if (node.outgoing.length == 0) {
+            var flowIntensity = function(node)
+            {
+                if(node.outgoing.length == 0)
+                {
                     return (2 - N);
                 }
-                else if (node.incoming.length == 0) {
+                else if(node.incoming.length == 0)
+                {
                     return (N - 2);
                 }
-                else {
+                else
+                {
                     return node.outgoing.length - node.incoming.length;
                 }
             }
@@ -2263,28 +2682,34 @@ kendo_module({
              * @param node
              * @param intensityCatalog
              */
-            var catalogEqualIntensity = function (node, intensityCatalog) {
+            var catalogEqualIntensity = function(node, intensityCatalog)
+            {
                 var intensity = flowIntensity(node, N);
-                if (!intensityCatalog.containsKey(intensity)) {
+                if(!intensityCatalog.containsKey(intensity))
+                {
                     intensityCatalog.set(intensity, []);
                 }
                 intensityCatalog.get(intensity).push(node);
             }
 
-
-            copy.nodes.forEach(function (v) {
+            copy.nodes.forEach(function(v)
+            {
                 catalogEqualIntensity(v, intensityCatalog);
             });
 
             var sourceStack = [];
             var targetStack = [];
 
-            while (copy.nodes.length > 0) {
-                if (intensityCatalog.containsKey(2 - N)) {
+            while(copy.nodes.length > 0)
+            {
+                if(intensityCatalog.containsKey(2 - N))
+                {
                     var targets = intensityCatalog.get(2 - N); // nodes without outgoings
-                    while (targets.length > 0) {
+                    while(targets.length > 0)
+                    {
                         var target = targets.pop();
-                        target.links.forEach(function (link) {
+                        target.links.forEach(function(link)
+                        {
                             var source = link.getComplement(target);
                             var intensity = flowIntensity(source, N);
                             intensityCatalog.get(intensity).remove(source);
@@ -2297,11 +2722,14 @@ kendo_module({
                 }
 
                 // move sources to sourceStack
-                if (intensityCatalog.containsKey(N - 2)) {
+                if(intensityCatalog.containsKey(N - 2))
+                {
                     var sources = intensityCatalog.get(N - 2); // nodes without incomings
-                    while (sources.length > 0) {
+                    while(sources.length > 0)
+                    {
                         var source = sources.pop();
-                        source.links.forEach(function (link) {
+                        source.links.forEach(function(link)
+                        {
                             var target = link.getComplement(source);
                             var intensity = flowIntensity(target, N);
                             intensityCatalog.get(intensity).remove(target);
@@ -2313,13 +2741,17 @@ kendo_module({
                     }
                 }
 
-                if (copy.nodes.length > 0) {
-                    for (var i = N - 3; i > 2 - N; i--) {
-                        if (intensityCatalog.containsKey(i) &&
-                            intensityCatalog.get(i).length > 0) {
+                if(copy.nodes.length > 0)
+                {
+                    for(var i = N - 3; i > 2 - N; i--)
+                    {
+                        if(intensityCatalog.containsKey(i) &&
+                            intensityCatalog.get(i).length > 0)
+                        {
                             var maxdiff = intensityCatalog.get(i);
                             var v = maxdiff.pop();
-                            v.links.forEach(function (e) {
+                            v.links.forEach(function(e)
+                            {
                                 var u = e.getComplement(v);
                                 var intensity = flowIntensity(u, N);
                                 intensityCatalog.get(intensity).remove(u);
@@ -2338,13 +2770,16 @@ kendo_module({
             sourceStack = sourceStack.concat(targetStack);
 
             var vertexOrder = new Dictionary();
-            for (var i = 0; i < this.nodes.length; i++) {
+            for(var i = 0; i < this.nodes.length; i++)
+            {
                 vertexOrder.set(copy.nodeMap.get(sourceStack[i]), i);
             }
 
             var reversedEdges = [];
-            this.links.forEach(function (link) {
-                if (vertexOrder.get(link.source) > vertexOrder.get(link.target)) {
+            this.links.forEach(function(link)
+            {
+                if(vertexOrder.get(link.source) > vertexOrder.get(link.target))
+                {
                     link.reverse();
                     reversedEdges.push(link);
                 }
@@ -2362,7 +2797,8 @@ kendo_module({
          * @returns {*}
          * @constructor
          */
-        EightGraph: function () {
+        EightGraph: function()
+        {
             return Graph.Utils.parse([ "1->2", "2->3", "3->4", "4->1", "3->5", "5->6", "6->7", "7->3"]);
         },
 
@@ -2371,7 +2807,8 @@ kendo_module({
          * @returns {*}
          * @constructor
          */
-        ThreeGraph: function () {
+        ThreeGraph: function()
+        {
             return Graph.Utils.parse([ "1->2", "2->3", "3->1"]);
         },
 
@@ -2381,8 +2818,10 @@ kendo_module({
          * @returns {diagram.Graph}
          * @constructor
          */
-        BinaryTree: function (levels) {
-            if (isUndefined(levels)) {
+        BinaryTree: function(levels)
+        {
+            if(isUndefined(levels))
+            {
                 levels = 5;
             }
             return Graph.Utils.createBalancedTree(levels, 2);
@@ -2394,8 +2833,10 @@ kendo_module({
          * @returns {diagram.Graph}
          * @constructor
          */
-        Linear: function (length) {
-            if (isUndefined(length)) {
+        Linear: function(length)
+        {
+            if(isUndefined(length))
+            {
                 length = 10;
             }
             return Graph.Utils.createBalancedTree(length, 1);
@@ -2411,7 +2852,8 @@ kendo_module({
          * @returns {diagram.Graph}
          * @constructor
          */
-        Tree: function (levels, siblingsCount) {
+        Tree: function(levels, siblingsCount)
+        {
             return Graph.Utils.createBalancedTree(levels, siblingsCount);
         },
 
@@ -2426,7 +2868,8 @@ kendo_module({
          * @returns {diagram.Graph}
          * @constructor
          */
-        Forest: function (levels, siblingsCount, trees) {
+        Forest: function(levels, siblingsCount, trees)
+        {
             return Graph.Utils.createBalancedForest(levels, siblingsCount, trees);
         },
 
@@ -2435,7 +2878,8 @@ kendo_module({
          * @returns {*}
          * @constructor
          */
-        Workflow: function () {
+        Workflow: function()
+        {
             return Graph.Utils.parse(
                 ["0->1", "1->2", "2->3", "1->4", "4->3", "3->5", "5->6", "6->3", "6->7", "5->4"]
             );
@@ -2449,22 +2893,28 @@ kendo_module({
          * @param m Vertical count of grid cells. If zero this will result in a linear graph.
          * @constructor
          */
-        Grid: function (n, m) {
+        Grid: function(n, m)
+        {
             var g = new diagram.Graph();
-            if (n <= 0 && m <= 0) {
+            if(n <= 0 && m <= 0)
+            {
                 return g;
             }
 
-            for (var i = 0; i < n + 1; i++) {
+            for(var i = 0; i < n + 1; i++)
+            {
                 var previous = null;
-                for (var j = 0; j < m + 1; j++) {
+                for(var j = 0; j < m + 1; j++)
+                {
                     // using x-y coordinates to name the nodes
                     var node = new Node(i.toString() + "." + j.toString());
                     g.addNode(node);
-                    if (previous != null) {
+                    if(previous != null)
+                    {
                         g.addLink(previous, node);
                     }
-                    if (i > 0) {
+                    if(i > 0)
+                    {
                         var left = g.getNode((i - 1).toString() + "." + j.toString());
                         g.addLink(left, node)
                     }
@@ -2485,25 +2935,31 @@ kendo_module({
          *  - ["n1->n2", "n2->n3"]: creates the three nodes and adds the links
          *  - ["n1->n2", {id: "id177"}, "n2->n3"]: same as previous but also performs a deep extend of the link between n1 and n2 with the given object.
          */
-        parse: function (graphString) {
+        parse: function(graphString)
+        {
 
             var previousLink, graph = new diagram.Graph(), parts = graphString.slice();
-            for (var i = 0, len = parts.length; i < len; i++) {
+            for(var i = 0, len = parts.length; i < len; i++)
+            {
                 var part = parts[i];
-                if (isString(part)) // link spec
+                if(isString(part)) // link spec
                 {
-                    if (part.indexOf("->") < 0) {
+                    if(part.indexOf("->") < 0)
+                    {
                         throw "The link should be specified as 'a->b'.";
                     }
                     var p = part.split("->");
-                    if (p.length != 2) {
+                    if(p.length != 2)
+                    {
                         throw "The link should be specified as 'a->b'.";
                     }
                     previousLink = new Link(p[0], p[1]);
                     graph.addLink(previousLink);
                 }
-                if (isObject(part)) {
-                    if (previousLink == null) {
+                if(isObject(part))
+                {
+                    if(previousLink == null)
+                    {
                         throw "Specification found before Link definition.";
                     }
                     kendo.deepExtend(previousLink, part);
@@ -2516,18 +2972,23 @@ kendo_module({
          * Returns a linearized representation of the given Graph.
          * See also the Graph.Utils.parse method for the inverse operation.
          */
-        linearize: function (graph, addIds) {
-            if (isUndefined(graph)) {
+        linearize: function(graph, addIds)
+        {
+            if(isUndefined(graph))
+            {
                 throw "Expected an instance of a Graph object in slot one.";
             }
-            if (isUndefined(addIds)) {
+            if(isUndefined(addIds))
+            {
                 addIds = false;
             }
             var lin = [];
-            for (var i = 0, len = graph.links.length; i < len; i++) {
+            for(var i = 0, len = graph.links.length; i < len; i++)
+            {
                 var link = graph.links[i];
                 lin.add(link.source.id + "->" + link.target.id);
-                if (addIds) {
+                if(addIds)
+                {
                     lin.add({id: link.id});
                 }
             }
@@ -2543,21 +3004,24 @@ kendo_module({
          * @returns {*}
          * @private
          */
-        _addShape: function (kendoDiagram, p, id, shapeOptions) {
-            if (isUndefined(p)) {
+        _addShape             : function(kendoDiagram, p, id, shapeOptions)
+        {
+            if(isUndefined(p))
+            {
                 p = new diagram.Point(0, 0);
             }
-            if (isUndefined(id)) {
+            if(isUndefined(id))
+            {
                 id = randomId();
             }
             shapeOptions = kendo.deepExtend({
-                width: 20,
-                height: 20,
-                id: id,
-                center: new Point(10, 10),
-                radius: 10,
+                width     : 20,
+                height    : 20,
+                id        : id,
+                center    : new Point(10, 10),
+                radius    : 10,
                 background: "#778899",
-                data: "circle"
+                data      : "circle"
             }, shapeOptions);
 
             return kendoDiagram.addShape(p, shapeOptions);
@@ -2571,7 +3035,8 @@ kendo_module({
          * @returns {*}
          * @private
          */
-        _addConnection: function (diagram, from, to, options) {
+        _addConnection        : function(diagram, from, to, options)
+        {
             var f = from.getConnector("Top");
             var t = to.getConnector("Top");
             return diagram.connect(from, to, options);
@@ -2581,36 +3046,45 @@ kendo_module({
          * @param diagram The Kendo diagram where the diagram will be created.
          * @param graph The graph structure defining the diagram.
          */
-        createDiagramFromGraph: function (diagram, graph, doLayout) {
+        createDiagramFromGraph: function(diagram, graph, doLayout)
+        {
 
-            if (isUndefined(diagram)) {
+            if(isUndefined(diagram))
+            {
                 throw "The diagram surface is undefined.";
             }
-            if (isUndefined(graph)) {
+            if(isUndefined(graph))
+            {
                 throw "No graph specification defined."
             }
-            if (isUndefined(doLayout)) {
+            if(isUndefined(doLayout))
+            {
                 doLayout = true;
             }
 
             var width = diagram.element.clientWidth || 200;
             var height = diagram.element.clientHeight || 200;
             var map = [];
-            for (var i = 0, len = graph.nodes.length; i < len; i++) {
+            for(var i = 0, len = graph.nodes.length; i < len; i++)
+            {
                 var node = graph.nodes[i];
                 var p = node.position;
-                if (isUndefined(p)) {
-                    if (isDefined(node.x) && isDefined(node.y)) {
+                if(isUndefined(p))
+                {
+                    if(isDefined(node.x) && isDefined(node.y))
+                    {
                         p = new Point(node.x, node.y);
                     }
-                    else {
+                    else
+                    {
                         p = new Point(randomInteger(10, width - 20), randomInteger(10, height - 20));
                     }
                 }
                 var shape = this._addShape(diagram, p, node.id);
                 //shape.content(node.id);
                 var bounds = shape.bounds();
-                if (isDefined(bounds)) {
+                if(isDefined(bounds))
+                {
                     node.x = bounds.x;
                     node.y = bounds.y;
                     node.width = bounds.width;
@@ -2618,23 +3092,28 @@ kendo_module({
                 }
                 map[node.id] = shape;
             }
-            for (var i = 0, len = graph.links.length; i < len; i++) {
+            for(var i = 0, len = graph.links.length; i < len; i++)
+            {
                 var link = graph.links[i];
                 var sourceShape = map[link.source.id];
-                if (isUndefined(sourceShape)) {
+                if(isUndefined(sourceShape))
+                {
                     continue;
                 }
                 var targetShape = map[link.target.id];
-                if (isUndefined(targetShape)) {
+                if(isUndefined(targetShape))
+                {
                     continue;
                 }
                 this._addConnection(diagram, sourceShape, targetShape, {id: link.id});
 
             }
-            if (doLayout) {
+            if(doLayout)
+            {
                 var l = new SpringLayout(diagram);
                 l.layoutGraph(graph, {limitToView: false});
-                for (var i = 0, len = graph.nodes.length; i < len; i++) {
+                for(var i = 0, len = graph.nodes.length; i < len; i++)
+                {
                     var node = graph.nodes[i];
                     var shape = map[node.id];
                     shape.bounds(new Rect(node.x, node.y, node.width, node.height));
@@ -2647,7 +3126,8 @@ kendo_module({
          * @param diagram
          * @param shortForm
          */
-        createDiagramFromShort: function (diagram, shortForm) {
+        createDiagramFromShort: function(diagram, shortForm)
+        {
 
         },
 
@@ -2660,27 +3140,34 @@ kendo_module({
          * @param siblingsCount How many siblings each level should have.
          * @returns {diagram.Graph}
          */
-        createBalancedTree: function (levels, siblingsCount) {
-            if (isUndefined(levels)) {
+        createBalancedTree: function(levels, siblingsCount)
+        {
+            if(isUndefined(levels))
+            {
                 levels = 3;
             }
-            if (isUndefined(siblingsCount)) {
+            if(isUndefined(siblingsCount))
+            {
                 siblingsCount = 3;
             }
 
             var g = new diagram.Graph(), counter = -1, lastAdded = [], news;
-            if (levels <= 0 || siblingsCount <= 0) {
+            if(levels <= 0 || siblingsCount <= 0)
+            {
                 return g;
             }
             var root = new Node((++counter).toString());
             g.addNode(root);
             g.root = root;
             lastAdded.add(root);
-            for (var i = 0; i < levels; i++) {
+            for(var i = 0; i < levels; i++)
+            {
                 news = [];
-                for (var j = 0; j < lastAdded.length; j++) {
+                for(var j = 0; j < lastAdded.length; j++)
+                {
                     var parent = lastAdded[j];
-                    for (var k = 0; k < siblingsCount; k++) {
+                    for(var k = 0; k < siblingsCount; k++)
+                    {
                         var item = new Node((++counter).toString());
                         g.addLink(parent, item);
                         news.add(item);
@@ -2701,30 +3188,39 @@ kendo_module({
          * @returns {diagram.Graph}
          * @param treeCount The number of trees the forest should have.
          */
-        createBalancedForest: function (levels, siblingsCount, treeCount) {
-            if (isUndefined(levels)) {
+        createBalancedForest: function(levels, siblingsCount, treeCount)
+        {
+            if(isUndefined(levels))
+            {
                 levels = 3;
             }
-            if (isUndefined(siblingsCount)) {
+            if(isUndefined(siblingsCount))
+            {
                 siblingsCount = 3;
             }
-            if (isUndefined(treeCount)) {
+            if(isUndefined(treeCount))
+            {
                 treeCount = 5;
             }
             var g = new diagram.Graph(), counter = -1, lastAdded = [], news;
-            if (levels <= 0 || siblingsCount <= 0 || treeCount <= 0) {
+            if(levels <= 0 || siblingsCount <= 0 || treeCount <= 0)
+            {
                 return g;
             }
 
-            for (var t = 0; t < treeCount; t++) {
+            for(var t = 0; t < treeCount; t++)
+            {
                 var root = new Node((++counter).toString());
                 g.addNode(root);
                 lastAdded = [root];
-                for (var i = 0; i < levels; i++) {
+                for(var i = 0; i < levels; i++)
+                {
                     news = [];
-                    for (var j = 0; j < lastAdded.length; j++) {
+                    for(var j = 0; j < lastAdded.length; j++)
+                    {
                         var parent = lastAdded[j];
-                        for (var k = 0; k < siblingsCount; k++) {
+                        for(var k = 0; k < siblingsCount; k++)
+                        {
                             var item = new Node((++counter).toString());
                             g.addLink(parent, item);
                             news.add(item);
@@ -2743,7 +3239,8 @@ kendo_module({
          * @param isTree Whether the return graph should be a tree (default: false).
          * @returns {diagram.Graph}
          */
-        createRandomConnectedGraph: function (nodeCount, maxIncidence, isTree) {
+        createRandomConnectedGraph: function(nodeCount, maxIncidence, isTree)
+        {
 
             /* Swa's Mathematica export of random Bernoulli graphs
              gr[n_,p_]:=Module[{g=RandomGraph[BernoulliGraphDistribution[n,p],VertexLabels->"Name",DirectedEdges->True]},
@@ -2754,45 +3251,56 @@ kendo_module({
              export [g]
              */
 
-            if (isUndefined(nodeCount)) {
+            if(isUndefined(nodeCount))
+            {
                 nodeCount = 40;
             }
-            if (isUndefined(maxIncidence)) {
+            if(isUndefined(maxIncidence))
+            {
                 maxIncidence = 4;
             }
-            if (isUndefined(isTree)) {
+            if(isUndefined(isTree))
+            {
                 isTree = false;
             }
 
             var g = new diagram.Graph(), counter = -1;
-            if (nodeCount <= 0) {
+            if(nodeCount <= 0)
+            {
                 return g;
             }
 
             var root = new Node((++counter).toString());
             g.addNode(root);
-            if (nodeCount == 1) {
+            if(nodeCount == 1)
+            {
                 return g;
             }
-            if (nodeCount > 1) {
+            if(nodeCount > 1)
+            {
 
                 // random tree
-                for (var i = 1, len = nodeCount; i < len; i++) {
+                for(var i = 1, len = nodeCount; i < len; i++)
+                {
 
                     var poolNode = g.takeRandomNode([], maxIncidence);
-                    if (poolNode == null) {
+                    if(poolNode == null)
+                    {
                         //failed to find one so the graph will have less nodes than specified
                         break;
                     }
                     var newNode = g.addNode(i.toString());
                     g.addLink(newNode, poolNode);
                 }
-                if (!isTree && nodeCount > 1) {
+                if(!isTree && nodeCount > 1)
+                {
                     var randomAdditions = randomInteger(1, nodeCount);
-                    for (var i = 0; i < randomAdditions; i++) {
+                    for(var i = 0; i < randomAdditions; i++)
+                    {
                         var n1 = g.takeRandomNode([], maxIncidence);
                         var n2 = g.takeRandomNode([], maxIncidence);
-                        if (n1 != null && n2 != null && !g.areConnected(n1, n2)) {
+                        if(n1 != null && n2 != null && !g.areConnected(n1, n2))
+                        {
                             g.addLink(n1, n2);
                         }
                     }
@@ -2807,7 +3315,8 @@ kendo_module({
      * @type {*}
      */
     var ContainerGraph = kendo.Class.extend({
-        init: function (diagram) {
+        init: function(diagram)
+        {
             this.diagram = diagram;
             this.graph = new Graph(diagram);
             this.container = null;
@@ -2823,7 +3332,8 @@ kendo_module({
      * @type {*}
      */
     var DiagramToHyperTreeAdapter = kendo.Class.extend({
-        init: function (diagram) {
+        init: function(diagram)
+        {
 
             /**
              * The mapping to/from the original nodes.
@@ -2910,20 +3420,21 @@ kendo_module({
          *    The only reason a connection or node is not being mapped might be due to the visibility, which includes the visibility change through a collapsed parent container.
          * @param options
          */
-        convert: function (options) {
+        convert: function(options)
+        {
 
-            if (isUndefined(this.diagram)) {
+            if(isUndefined(this.diagram))
+            {
                 throw "No diagram to convert.";
             }
 
             this.options = kendo.deepExtend({
-                    ignoreInvisible: true,
-                    ignoreContainers: true,
+                    ignoreInvisible        : true,
+                    ignoreContainers       : true,
                     layoutContainerChildren: false
                 },
                 options || {}
             );
-
 
             this.clear();
             // create the nodes which participate effectively in the graph analysis
@@ -2937,10 +3448,12 @@ kendo_module({
             this.finalLinks = new Dictionary(this.edges);
 
             this.finalGraph = new Graph();
-            this.finalNodes.forEach(function (n) {
+            this.finalNodes.forEach(function(n)
+            {
                 this.finalGraph.addNode(n);
             }, this)
-            this.finalLinks.forEach(function (l) {
+            this.finalLinks.forEach(function(l)
+            {
                 this.finalGraph.addExistingLink(l);
             }, this)
             return this.finalGraph;
@@ -2951,8 +3464,10 @@ kendo_module({
          * @param connection
          * @returns {*}
          */
-        mapConnection: function (connection) {
-            return this.edgeMap.first(function (edge) {
+        mapConnection: function(connection)
+        {
+            return this.edgeMap.first(function(edge)
+            {
                 return this.edgeMap.get(edge).contains(connection);
             });
         },
@@ -2962,11 +3477,14 @@ kendo_module({
          * @param shape
          * @returns {*}
          */
-        mapShape: function (shape) {
+        mapShape: function(shape)
+        {
             var keys = this.nodeMap.keys();
-            for (var i = 0, len = keys.length; i < len; i++) {
+            for(var i = 0, len = keys.length; i < len; i++)
+            {
                 var key = keys[i];
-                if (this.nodeMap.get(key).contains(shape)) {
+                if(this.nodeMap.get(key).contains(shape))
+                {
                     return key;
                 }
             }
@@ -2977,8 +3495,10 @@ kendo_module({
          * @param a
          * @param b
          */
-        getEdge: function (a, b) {
-            return a.links.first(function (link) {
+        getEdge: function(a, b)
+        {
+            return a.links.first(function(link)
+            {
                 return link.getComplement(a) == b;
             })
         },
@@ -2986,7 +3506,8 @@ kendo_module({
         /**
          * Clears all the collections used by the conversion process.
          */
-        clear: function () {
+        clear: function()
+        {
             this.finalGraph = null;
             this.hyperTree = (!this.options.ignoreContainers && this.options.layoutContainerChildren) ? new HyperTree() : null;
             this.hyperMap = (!this.options.ignoreContainers && this.options.layoutContainerChildren) ? new Dictionary() : null;
@@ -3006,14 +3527,17 @@ kendo_module({
          * @param containerGraph
          * @returns {Array}
          */
-        listToRoot: function (containerGraph) {
+        listToRoot: function(containerGraph)
+        {
             var list = [];
             var s = containerGraph.container;
-            if (s == null) {
+            if(s == null)
+            {
                 return list;
             }
             list.add(s);
-            while (s.parentContainer != null) {
+            while(s.parentContainer != null)
+            {
                 s = s.parentContainer;
                 list.add(s);
             }
@@ -3021,15 +3545,19 @@ kendo_module({
             return list;
         },
 
-        firstNonIgnorableContainer: function (shape) {
+        firstNonIgnorableContainer: function(shape)
+        {
 
-            if (shape.isContainer && !this._isIgnorableItem(shape)) {
+            if(shape.isContainer && !this._isIgnorableItem(shape))
+            {
                 return shape;
             }
             return shape.parentContainer == null ? null : this.firstNonIgnorableContainer(shape.parentContainer);
         },
-        isContainerConnection: function (a, b) {
-            if (a.isContainer && this.isDescendantOf(a, b)) {
+        isContainerConnection     : function(a, b)
+        {
+            if(a.isContainer && this.isDescendantOf(a, b))
+            {
                 return true;
             }
             return b.isContainer && this.isDescendantOf(b, a);
@@ -3042,37 +3570,48 @@ kendo_module({
          * @param a
          * @returns {boolean}
          */
-        isDescendantOf: function (scope, a) {
-            if (!scope.isContainer) {
+        isDescendantOf : function(scope, a)
+        {
+            if(!scope.isContainer)
+            {
                 throw "Expecting a container.";
             }
-            if (scope == a) {
+            if(scope == a)
+            {
                 return false;
             }
-            if (scope.children.contains(a)) {
+            if(scope.children.contains(a))
+            {
                 return true;
             }
             var containers = [];
-            for (var i = 0, len = scope.children.length; i < len; i++) {
+            for(var i = 0, len = scope.children.length; i < len; i++)
+            {
                 var c = scope.children[i];
-                if (c.isContainer && this.isDescendantOf(c, a)) {
+                if(c.isContainer && this.isDescendantOf(c, a))
+                {
                     containers.push(c);
                 }
             }
 
             return containers.length > 0
         },
-        isIgnorableItem: function (shape) {
-            if (this.options.ignoreInvisible) {
-                if (shape.isCollapsed && this._isVisible(shape)) {
+        isIgnorableItem: function(shape)
+        {
+            if(this.options.ignoreInvisible)
+            {
+                if(shape.isCollapsed && this._isVisible(shape))
+                {
                     return false;
                 }
-                if (!shape.isCollapsed && this._isVisible(shape)) {
+                if(!shape.isCollapsed && this._isVisible(shape))
+                {
                     return false;
                 }
                 return true;
             }
-            else {
+            else
+            {
                 return shape.isCollapsed && !this._isTop(shape);
             }
         },
@@ -3083,43 +3622,55 @@ kendo_module({
          * necessarily a container in the parent hierarchy of the shape.
          * @param shape
          */
-        isShapeMapped: function (shape) {
+        isShapeMapped: function(shape)
+        {
             shape.isCollapsed && !this._isVisible(shape) && !this._isTop(shape);
         },
 
-        leastCommonAncestor: function (a, b) {
-            if (a == null) {
+        leastCommonAncestor: function(a, b)
+        {
+            if(a == null)
+            {
                 throw "Parameter should not be null.";
             }
-            if (b == null) {
+            if(b == null)
+            {
                 throw "Parameter should not be null.";
             }
 
-            if (this.hyperTree == null) {
+            if(this.hyperTree == null)
+            {
                 throw "No hypertree available.";
             }
             var al = this.listToRoot(a);
             var bl = this.listToRoot(b);
             var found = null;
-            if (al.isEmpty() || bl.isEmpty()) {
+            if(al.isEmpty() || bl.isEmpty())
+            {
                 return this.hyperTree.root.data;
             }
             var xa = al[0];
             var xb = bl[0];
             var i = 0;
-            while (xa == xb) {
+            while(xa == xb)
+            {
                 found = al[i];
                 i++;
-                if (i >= al.length || i >= bl.length) {
+                if(i >= al.length || i >= bl.length)
+                {
                     break;
                 }
                 xa = al[i];
                 xb = bl[i];
             }
-            if (found == null) {
+            if(found == null)
+            {
                 return this.hyperTree.root.data
-            } else {
-                return this.hyperTree.nodes.where(function (n) {
+            }
+            else
+            {
+                return this.hyperTree.nodes.where(function(n)
+                {
                     n.data.container == found;
                 });
             }
@@ -3130,7 +3681,8 @@ kendo_module({
          * @returns {boolean}
          * @private
          */
-        _isTop: function (item) {
+        _isTop             : function(item)
+        {
             return item.parentContainer == null;
         },
 
@@ -3141,17 +3693,21 @@ kendo_module({
          * @returns {*}
          * @private
          */
-        _isVisible: function (shape) {
+        _isVisible: function(shape)
+        {
 
-            if (!shape.visible()) {
+            if(!shape.visible())
+            {
                 return false;
             }
             return shape.parentContainer == null ? shape.visible() : this._isVisible(shape.parentContainer);
         },
 
-        _isCollapsed: function (shape) {
+        _isCollapsed: function(shape)
+        {
 
-            if (shape.isContainer && shape.isCollapsed) {
+            if(shape.isContainer && shape.isCollapsed)
+            {
                 return true;
             }
             return shape.parentContainer != null && this._isCollapsed(shape.parentContainer);
@@ -3161,14 +3717,18 @@ kendo_module({
          * First part of the graph creation; analyzing the shapes and containers and deciding whether they should be mapped to a Node.
          * @private
          */
-        _renormalizeShapes: function () {
+        _renormalizeShapes: function()
+        {
             // add the nodes, the adjacency structure will be reconstructed later on
-            if (this.options.ignoreContainers) {
-                for (var i = 0, len = this.diagram.shapes.length; i < len; i++) {
+            if(this.options.ignoreContainers)
+            {
+                for(var i = 0, len = this.diagram.shapes.length; i < len; i++)
+                {
                     var shape = this.diagram.shapes[i];
 
                     // if not visible (and ignoring the invisible ones) or a container we skip
-                    if ((this.options.ignoreInvisible && !this._isVisible(shape)) || shape.isContainer) {
+                    if((this.options.ignoreInvisible && !this._isVisible(shape)) || shape.isContainer)
+                    {
                         this.ignoredShapes.add(shape);
                         continue;
                     }
@@ -3180,7 +3740,8 @@ kendo_module({
                     this.nodes.add(node);
                 }
             }
-            else {
+            else
+            {
                 throw "Containers are not supported yet, but stay tuned.";
             }
         },
@@ -3189,14 +3750,18 @@ kendo_module({
          * Second part of the graph creation; analyzing the connections and deciding whether they should be mapped to an edge.
          * @private
          */
-        _renormalizeConnections: function () {
-            if (this.diagram.connections.length == 0) {
+        _renormalizeConnections: function()
+        {
+            if(this.diagram.connections.length == 0)
+            {
                 return;
             }
-            for (var i = 0, len = this.diagram.connections.length; i < len; i++) {
+            for(var i = 0, len = this.diagram.connections.length; i < len; i++)
+            {
                 var conn = this.diagram.connections[i];
 
-                if (this.isIgnorableItem(conn)) {
+                if(this.isIgnorableItem(conn))
+                {
                     this.ignoredConnections.add(conn);
                     continue;
                 }
@@ -3205,41 +3770,50 @@ kendo_module({
                 var sink = conn.targetConnector == null ? null : conn.targetConnector.shape;
 
                 // no layout for floating connections
-                if (source == null || sink == null) {
+                if(source == null || sink == null)
+                {
                     this.ignoredConnections.add(conn);
                     continue;
                 }
 
-                if (this.ignoredShapes.contains(source) && !this.shapeMap.containsKey(source)) {
+                if(this.ignoredShapes.contains(source) && !this.shapeMap.containsKey(source))
+                {
                     this.ignoredConnections.add(conn);
                     continue;
                 }
-                if (this.ignoredShapes.contains(sink) && !this.shapeMap.containsKey(sink)) {
+                if(this.ignoredShapes.contains(sink) && !this.shapeMap.containsKey(sink))
+                {
                     this.ignoredConnections.add(conn);
                     continue;
                 }
 
                 // if the endpoint sits in a collapsed container we need the container rather than the shape itself
-                if (this.shapeMap.containsKey(source)) {
+                if(this.shapeMap.containsKey(source))
+                {
                     source = this.shapeMap[source];
                 }
-                if (this.shapeMap.containsKey(sink)) {
+                if(this.shapeMap.containsKey(sink))
+                {
                     sink = this.shapeMap[sink];
                 }
 
                 var sourceNode = this.mapShape(source);
                 var sinkNode = this.mapShape(sink);
-                if ((sourceNode == sinkNode) || this.areConnectedAlready(sourceNode, sinkNode)) {
+                if((sourceNode == sinkNode) || this.areConnectedAlready(sourceNode, sinkNode))
+                {
                     this.ignoredConnections.add(conn);
                     continue;
                 }
 
-                if (sourceNode == null || sinkNode == null) {
+                if(sourceNode == null || sinkNode == null)
+                {
                     throw "A shape was not mapped to a node.";
                 }
-                if (this.options.ignoreContainers) {
+                if(this.options.ignoreContainers)
+                {
                     // much like a floating connection here since at least one end is attached to a container
-                    if (sourceNode.isVirtual || sinkNode.isVirtual) {
+                    if(sourceNode.isVirtual || sinkNode.isVirtual)
+                    {
                         this.ignoredConnections.add(conn);
                         continue;
                     }
@@ -3248,14 +3822,17 @@ kendo_module({
                     this.edgeMap.add(newEdge, [conn]);
                     this.edges.add(newEdge);
                 }
-                else {
+                else
+                {
                     throw "Containers are not supported yet, but stay tuned.";
                 }
             }
         },
 
-        areConnectedAlready: function (n, m) {
-            return this.edges.any(function (l) {
+        areConnectedAlready: function(n, m)
+        {
+            return this.edges.any(function(l)
+            {
                 return l.source == n && l.target == m || l.source == m && l.target == n;
             })
         },
@@ -3267,7 +3844,8 @@ kendo_module({
          * @param includeStart
          * @private
          */
-        _visitContainer: function (container, action, includeStart) {
+        _visitContainer: function(container, action, includeStart)
+        {
 
             /*if (container == null) throw new ArgumentNullException("container");
              if (action == null) throw new ArgumentNullException("action");
@@ -3299,8 +3877,10 @@ kendo_module({
      * @type {*}
      */
     var SpringLayout = kendo.Class.extend({
-        init: function (diagram) {
-            if (isUndefined(diagram)) {
+        init       : function(diagram)
+        {
+            if(isUndefined(diagram))
+            {
                 throw "Diagram is not specified.";
             }
             this.diagram = diagram;
@@ -3308,29 +3888,33 @@ kendo_module({
                 /**
                  * Whether the motion of the nodes should be limited by the boundaries of the diagram surface.
                  */
-                limitToView: false,
-                friction: 0.9,
-                margins: 10,
+                limitToView        : false,
+                friction           : 0.9,
+                margins            : 10,
                 requiresSimpleGraph: true,
-                nodeDistance: 50,
-                iterations: 300,
-                keepGroupLayout: false
+                nodeDistance       : 50,
+                iterations         : 300,
+                keepGroupLayout    : false
             };
 
         },
-        layout: function (options) {
+        layout     : function(options)
+        {
             var adapter = new DiagramToHyperTreeAdapter(this.diagram);
             var graph = adapter.convert(options);
             this.layoutGraph(graph, options);
-            for (var i = 0, len = graph.nodes.length; i < len; i++) {
+            for(var i = 0, len = graph.nodes.length; i < len; i++)
+            {
                 var node = graph.nodes[i];
                 var shape = node.associatedShape;
                 shape.bounds(new Rect(node.x, node.y, node.width, node.height));
             }
         },
-        layoutGraph: function (graph, options) {
+        layoutGraph: function(graph, options)
+        {
 
-            if (isDefined(options)) {
+            if(isDefined(options))
+            {
                 this.options = kendo.deepExtend(this.options, options);
             }
             this.graph = graph;
@@ -3338,12 +3922,12 @@ kendo_module({
             var initialTemperature = this.options.nodeDistance * 9;
             this.temperature = initialTemperature;
 
-
             var guessBounds = this._expectedBounds();
             this.width = guessBounds.width;
             this.height = guessBounds.height;
 
-            for (var step = 0; step < this.options.iterations; step++) {
+            for(var step = 0; step < this.options.iterations; step++)
+            {
                 this.refineStage = step >= this.options.iterations * 5 / 6;
                 this.tick();
                 // exponential cooldown
@@ -3356,26 +3940,32 @@ kendo_module({
         /**
          * Single iteration of the simulation.
          */
-        tick: function () {
+        tick: function()
+        {
             // collect the repulsive forces on each node
-            for (var i = 0; i < this.graph.nodes.length; i++) {
+            for(var i = 0; i < this.graph.nodes.length; i++)
+            {
                 this._repulsion(this.graph.nodes[i]);
             }
 
             // collect the attractive forces on each node
-            for (var i = 0; i < this.graph.links.length; i++) {
+            for(var i = 0; i < this.graph.links.length; i++)
+            {
                 this._attraction(this.graph.links[i]);
             }
             // update the positions
-            for (var i = 0, len = this.graph.nodes.length; i < len; i++) {
+            for(var i = 0, len = this.graph.nodes.length; i < len; i++)
+            {
                 var node = this.graph.nodes[i];
                 var offset = Math.sqrt(node.dx * node.dx + node.dy * node.dy);
-                if (offset == 0) {
+                if(offset == 0)
+                {
                     return;
                 }
                 node.x += Math.min(offset, this.temperature) * node.dx / offset;
                 node.y += Math.min(offset, this.temperature) * node.dy / offset;
-                if (this.options.limitToView) {
+                if(this.options.limitToView)
+                {
                     node.x = Math.min(this.width, Math.max(node.width / 2, node.x));
                     node.y = Math.min(this.height, Math.max(node.height / 2, node.y));
                 }
@@ -3387,7 +3977,8 @@ kendo_module({
          * @param node A Node.
          * @private
          */
-        _shake: function (node) {
+        _shake: function(node)
+        {
             // just a simple polar neighborhood
             var rho = Math.random() * this.options.nodeDistance / 4;
             var alpha = Math.random() * 2 * Math.PI;
@@ -3404,11 +3995,15 @@ kendo_module({
          * @returns {number}
          * @private
          */
-        _InverseSquareForce: function (d, n, m) {
+        _InverseSquareForce: function(d, n, m)
+        {
             var force;
-            if (!this.refineStage) {
+            if(!this.refineStage)
+            {
                 force = Math.pow(d, 2) / Math.pow(this.options.nodeDistance, 2);
-            } else {
+            }
+            else
+            {
                 var deltax = n.x - m.x;
                 var deltay = n.y - m.y;
 
@@ -3430,18 +4025,23 @@ kendo_module({
          * @returns {number}
          * @private
          */
-        _SquareForce: function (d, n, m) {
+        _SquareForce: function(d, n, m)
+        {
             return 1 / this._InverseSquareForce(d, n, m);
         },
 
-        _repulsion: function (n) {
+        _repulsion : function(n)
+        {
             n.dx = 0;
             n.dy = 0;
-            this.graph.nodes.forEach(function (m) {
-                if (m == n) {
+            this.graph.nodes.forEach(function(m)
+            {
+                if(m == n)
+                {
                     return;
                 }
-                while (n.x == m.x && n.y == m.y) {
+                while(n.x == m.x && n.y == m.y)
+                {
                     this._shake(m);
                 }
                 var vx = n.x - m.x;
@@ -3452,14 +4052,17 @@ kendo_module({
                 n.dy += (vy / distance) * r;
             }, this);
         },
-        _attraction: function (link) {
+        _attraction: function(link)
+        {
             var t = link.target;
             var s = link.source;
-            if (s == t) {
+            if(s == t)
+            {
                 // loops induce endless shakes
                 return;
             }
-            while (s.x == t.x && s.y == t.y) {
+            while(s.x == t.x && s.y == t.y)
+            {
                 this._shake(t);
             }
 
@@ -3476,21 +4079,24 @@ kendo_module({
             s.dy -= dy;
         },
 
-
         /**
          * Calculates the expected bounds after layout.
          * @returns {*}
          * @private
          */
-        _expectedBounds: function () {
+        _expectedBounds: function()
+        {
 
             var size, N = this.graph.nodes.length, /*golden ration optimal?*/ ratio = 1.5, multiplier = 4;
-            if (N == 0) {
+            if(N == 0)
+            {
                 return size;
             }
-            size = this.graph.nodes.fold(function (s, node) {
+            size = this.graph.nodes.fold(function(s, node)
+            {
                 var area = node.width * node.height;
-                if (area > 0) {
+                if(area > 0)
+                {
                     s += Math.sqrt(area);
                     return s;
                 }
@@ -3507,18 +4113,21 @@ kendo_module({
 
     var TreeLayoutProcessor = kendo.Class.extend({
 
-        init: function (options) {
+        init  : function(options)
+        {
             this.center = null;
             this.options = options;
         },
-        layout: function (treeGraph, root) {
+        layout: function(treeGraph, root)
+        {
             this.graph = treeGraph;
-            if (this.graph.nodes == null || this.graph.nodes.length == 0) {
+            if(this.graph.nodes == null || this.graph.nodes.length == 0)
+            {
                 return;
             }
 
-
-            if (!this.graph.nodes.contains(root)) {
+            if(!this.graph.nodes.contains(root))
+            {
                 throw "The given root is not in the graph.";
             }
 
@@ -3547,22 +4156,25 @@ kendo_module({
             // nonull.ForEach(n => n.associatedShape.Position = n.Location);
         },
 
-        layoutLeft: function (left) {
+        layoutLeft: function(left)
+        {
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Left, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
             var h = 0, w = 0, y;
-            for (var i = 0, len = left.length; i < len; i++) {
+            for(var i = 0, len = left.length; i < len; i++)
+            {
                 var node = left[i];
                 node.TreeDirection = kendo.diagram.TreeDirection.Left;
                 var s = this.measure(node, Size.Empty);
                 w = Math.max(w, s.Width);
-                h += s.Height + this.options.verticalSeparation;
+                h += s.height + this.options.verticalSeparation;
             }
 
             h -= this.options.verticalSeparation;
             var x = this.center.x - this.options.horizontalSeparation;
             y = this.center.y + ((this.center.height - h) / 2);
-            for (var i = 0, len = left.length; i < len; i++) {
+            for(var i = 0, len = left.length; i < len; i++)
+            {
                 var node = left[i];
                 var p = new Point(x - node.Size.width, y);
 
@@ -3571,11 +4183,13 @@ kendo_module({
             }
         },
 
-        layoutRight: function (right) {
+        layoutRight: function(right)
+        {
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Right, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
             var h = 0, w = 0, y;
-            for (var i = 0, len = right.length; i < len; i++) {
+            for(var i = 0, len = right.length; i < len; i++)
+            {
                 var node = right[i];
                 node.TreeDirection = kendo.diagram.TreeDirection.Right;
                 var s = this.measure(node, Size.Empty);
@@ -3586,7 +4200,8 @@ kendo_module({
             h -= this.options.verticalSeparation;
             var x = this.center.x + this.options.horizontalSeparation + this.center.width;
             y = this.center.y + ((this.center.height - h) / 2);
-            for (var i = 0, len = right.length; i < len; i++) {
+            for(var i = 0, len = right.length; i < len; i++)
+            {
                 var node = right[i];
                 var p = new Point(x, y);
                 this.arrange(node, p);
@@ -3594,22 +4209,25 @@ kendo_module({
             }
         },
 
-        layoutUp: function (up) {
+        layoutUp: function(up)
+        {
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Up, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
             var w = 0, y;
-            for (var i = 0, len = up.length; i < len; i++) {
+            for(var i = 0; i < up.length; i++)
+            {
                 var node = up[i];
                 node.TreeDirection = kendo.diagram.TreeDirection.Up;
                 var s = this.measure(node, Size.Empty);
-                w += s.Width + this.options.horizontalSeparation;
+                w += s.width + this.options.horizontalSeparation;
             }
 
             w -= this.options.horizontalSeparation;
             var x = this.center.x + (this.center.width / 2) - (w / 2);
 
             // y = this.center.y -verticalSeparation -this.center.height/2 - h;
-            for (var i = 0, len = up.length; i < len; i++) {
+            for(var i = 0; i < up.length; i++)
+            {
                 var node = up[i];
                 y = this.center.y - this.options.verticalSeparation - node.Size.height;
                 var p = new Point(x, y);
@@ -3618,11 +4236,13 @@ kendo_module({
             }
         },
 
-        layoutDown: function (down) {
+        layoutDown: function(down)
+        {
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Down, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
             var w = 0, y;
-            for (var i = 0, len = down.length; i < len; i++) {
+            for(var i = 0; i < down.length; i++)
+            {
                 var node = down[i];
                 node.treeDirection = kendo.diagram.TreeDirection.Down;
                 var s = this.measure(node, Size.Empty);
@@ -3632,7 +4252,8 @@ kendo_module({
             w -= this.options.horizontalSeparation;
             var x = this.center.x + (this.center.width / 2) - (w / 2);
             y = this.center.y + this.options.verticalSeparation + this.center.height;
-            for (var i = 0, len = down.length; i < len; i++) {
+            for(var i = 0; i < down.length; i++)
+            {
                 var node = down[i];
                 var p = new Point(x, y);
                 this.arrange(node, p);
@@ -3640,14 +4261,16 @@ kendo_module({
             }
         },
 
-        layoutRadialTree: function () {
+        layoutRadialTree: function()
+        {
             // var rmax = children.Aggregate(0D, (current, node) => Math.max(node.SectorAngle, current));
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Radial, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
             this.previousRoot = null;
             var startAngle = this.options.startRadialAngle;
             var endAngle = this.options.endRadialAngle;
-            if (endAngle <= startAngle) {
+            if(endAngle <= startAngle)
+            {
                 throw "Final angle should not be less than the start angle.";
             }
 
@@ -3656,7 +4279,8 @@ kendo_module({
             this.calculateAngularWidth(this.center, 0);
 
             // perform the layout
-            if (this.maxDepth > 0) {
+            if(this.maxDepth > 0)
+            {
                 this.radialLayout(this.center, this.options.radialFirstLevelSeparation, startAngle, endAngle);
             }
 
@@ -3664,51 +4288,61 @@ kendo_module({
             this.center.Angle = endAngle - startAngle;
         },
 
-        calculateAngularWidth: function (n, d) {
-            if (d > this.maxDepth) {
+        calculateAngularWidth: function(n, d)
+        {
+            if(d > this.maxDepth)
+            {
                 this.maxDepth = d;
             }
 
             var aw = 0, w = 1000, h = 1000, diameter = d == 0 ? 0 : Math.sqrt((w * w) + (h * h)) / d;
 
-            if (n.children.length > 0) {
+            if(n.children.length > 0)
+            {
                 // eventually with n.IsExpanded
-                for (var i = 0, len = n.children.length; i < len; i++) {
+                for(var i = 0, len = n.children.length; i < len; i++)
+                {
                     var child = n.children[i];
                     aw += this.calculateAngularWidth(child, d + 1);
                 }
                 aw = Math.max(diameter, aw);
             }
-            else {
+            else
+            {
                 aw = diameter;
             }
 
             n.sectorAngle = aw;
             return aw;
         },
-        sortChildren: function (n) {
+        sortChildren         : function(n)
+        {
             var basevalue = 0;
 
             // update basevalue angle for node ordering
-            if (n.parents.length > 1) {
+            if(n.parents.length > 1)
+            {
                 throw "Node is not part of a tree."
             }
             var p = n.parents[0];
-            if (p != null) {
+            if(p != null)
+            {
                 var pl = new Point(p.x, p.y);
                 var nl = new Point(n.x, n.y);
                 basevalue = this.normalizeAngle(Math.atan2(pl.y - nl.y, pl.x - nl.x));
             }
 
             var count = n.children.length;
-            if (count == 0) {
+            if(count == 0)
+            {
                 return null;
             }
 
             var angle = [];
             var idx = [];
 
-            for (var i = 0; i < count; ++i) {
+            for(var i = 0; i < count; ++i)
+            {
                 var c = n.children[i];
                 var l = new Point(c.x, c.y);
                 idx[i] = i;
@@ -3718,33 +4352,40 @@ kendo_module({
             Array.prototype.bisort(angle, idx);
             var col = []; // list of nodes
             var children = n.children;
-            for (var i = 0; i < count; ++i) {
+            for(var i = 0; i < count; ++i)
+            {
                 col.add(children[idx[i]]);
             }
 
             return col;
         },
 
-        normalizeAngle: function (angle) {
-            while (angle > Math.PI * 2) {
+        normalizeAngle  : function(angle)
+        {
+            while(angle > Math.PI * 2)
+            {
                 angle -= 2 * Math.PI;
             }
-            while (angle < 0) {
+            while(angle < 0)
+            {
                 angle += Math.PI * 2;
             }
             return angle;
         },
-        radialLayout: function (node, radius, startAngle, endAngle) {
+        radialLayout    : function(node, radius, startAngle, endAngle)
+        {
             var deltaTheta = endAngle - startAngle;
             var deltaThetaHalf = deltaTheta / 2.0;
             var parentSector = node.sectorAngle;
             var fraction = 0;
             var sorted = this.sortChildren(node);
-            for (var i = 0, len = sorted.length; i < len; i++) {
+            for(var i = 0, len = sorted.length; i < len; i++)
+            {
                 var childNode = sorted[i];
                 var cp = childNode;
                 var childAngleFraction = cp.sectorAngle / parentSector;
-                if (childNode.children.length > 0) {
+                if(childNode.children.length > 0)
+                {
                     this.radialLayout(childNode,
                         radius + this.options.radialSeparation,
                         startAngle + (fraction * deltaTheta),
@@ -3756,7 +4397,8 @@ kendo_module({
                 fraction += childAngleFraction;
             }
         },
-        setPolarLocation: function (node, radius, angle) {
+        setPolarLocation: function(node, radius, angle)
+        {
             node.x = this.origin.x + (radius * Math.cos(angle));
             node.y = this.origin.y + (radius * Math.sin(angle));
             node.BoundingRectangle = new Rect(node.x, node.y, node.width, node.height);
@@ -3768,12 +4410,15 @@ kendo_module({
          * @param direction
          * @param includeStart
          */
-        setChildrenDirection: function (node, direction, includeStart) {
+        setChildrenDirection: function(node, direction, includeStart)
+        {
             var rootDirection = node.treeDirection;
-            this.graph.depthFirstTraversal(node, function (n) {
+            this.graph.depthFirstTraversal(node, function(n)
+            {
                 n.treeDirection = direction;
             });
-            if (!includeStart) {
+            if(!includeStart)
+            {
                 node.treeDirection = rootDirection;
             }
         },
@@ -3785,31 +4430,39 @@ kendo_module({
          * @param includeStart
          * @param startFromLevel
          */
-        setChildrenLayout: function (node, layout, includeStart, startFromLevel) {
-            if (isUndefined(startFromLevel)) {
+        setChildrenLayout: function(node, layout, includeStart, startFromLevel)
+        {
+            if(isUndefined(startFromLevel))
+            {
                 startFromLevel = 0;
             }
             var rootLayout = node.childrenLayout;
-            if (startFromLevel > 0) {
+            if(startFromLevel > 0)
+            {
                 // assign levels to the Node.Level property
                 this.graph.assignLevels(node);
 
                 // assign the layout on the condition that the level is at least the 'startFromLevel'
                 this.graph.depthFirstTraversal(
-                    node, function (s) {
-                        if (s.level >= startFromLevel + 1) {
+                    node, function(s)
+                    {
+                        if(s.level >= startFromLevel + 1)
+                        {
                             s.childrenLayout = layout;
                         }
                     }
                 )
             }
-            else {
-                this.graph.depthFirstTraversal(node, function (s) {
+            else
+            {
+                this.graph.depthFirstTraversal(node, function(s)
+                {
                     s.childrenLayout = layout;
                 });
 
                 // if the start should not be affected we put the state back
-                if (!includeStart) {
+                if(!includeStart)
+                {
                     node.childrenLayout = rootLayout;
                 }
             }
@@ -3821,28 +4474,34 @@ kendo_module({
          * @param givenSize
          * @returns {Size}
          */
-        measure: function (node, givenSize) {
+        measure     : function(node, givenSize)
+        {
             var w = 0, h = 0, s;
             var result = new Size(0, 0);
             var b = node.associatedShape.bounds();
             var shapeWidth = b.width;
             var shapeHeight = b.height;
-            if (node.parents.length != 1) {
+            if(node.parents.length != 1)
+            {
                 throw "Node not in a spanning tree.";
             }
 
             var parent = node.parents[0];
-            if (node.treeDirection == kendo.diagram.TreeDirection.Undefined) {
+            if(node.treeDirection == kendo.diagram.TreeDirection.Undefined)
+            {
                 node.treeDirection = parent.treeDirection;
             }
 
-            if (node.children.isEmpty()) {
+            if(node.children.isEmpty())
+            {
                 result = new Size(
                     Math.abs(shapeWidth) < Math.epsilon ? 50 : shapeWidth,
                     Math.abs(shapeHeight) < Math.epsilon ? 25 : shapeHeight);
             }
-            else if (node.children.length == 1) {
-                switch (node.treeDirection) {
+            else if(node.children.length == 1)
+            {
+                switch(node.treeDirection)
+                {
                     case kendo.diagram.TreeDirection.Radial:
                         s = this.measure(node.children[0], givenSize); // child size
                         w = shapeWidth + (this.options.radialSeparation * Math.Cos(node.AngleToParent)) + s.width;
@@ -3850,7 +4509,8 @@ kendo_module({
                         break;
                     case kendo.diagram.TreeDirection.Left:
                     case kendo.diagram.TreeDirection.Right:
-                        switch (node.childrenLayout) {
+                        switch(node.childrenLayout)
+                        {
 
                             case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
                                 break;
@@ -3876,7 +4536,8 @@ kendo_module({
                         break;
                     case kendo.diagram.TreeDirection.Up:
                     case kendo.diagram.TreeDirection.Down:
-                        switch (node.childrenLayout) {
+                        switch(node.childrenLayout)
+                        {
 
                             case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
                                 break;
@@ -3906,11 +4567,14 @@ kendo_module({
 
                 result = new Size(w, h);
             }
-            else {
-                switch (node.treeDirection) {
+            else
+            {
+                switch(node.treeDirection)
+                {
                     case kendo.diagram.TreeDirection.Left:
                     case kendo.diagram.TreeDirection.Right:
-                        switch (node.childrenLayout) {
+                        switch(node.childrenLayout)
+                        {
 
                             case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
                                 break;
@@ -3921,7 +4585,8 @@ kendo_module({
                             case kendo.diagram.ChildrenLayout.Underneath:
                                 w = shapeWidth;
                                 h = shapeHeight + +this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
+                                for(var i = 0, len = node.children.length; i < len; i++)
+                                {
                                     var childNode = node.children[i];
                                     s = this.measure(childNode, givenSize);
                                     w = Math.max(w, s.width + this.options.UnderneathHorizontalOffset);
@@ -3934,7 +4599,8 @@ kendo_module({
                             case kendo.diagram.ChildrenLayout.Default:
                                 w = shapeWidth;
                                 h = 0;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
+                                for(var i = 0, len = node.children.length; i < len; i++)
+                                {
                                     var childNode = node.children[i];
                                     s = this.measure(childNode, givenSize);
                                     w = Math.max(w, shapeWidth + this.options.horizontalSeparation + s.width);
@@ -3951,7 +4617,8 @@ kendo_module({
                     case kendo.diagram.TreeDirection.Up:
                     case kendo.diagram.TreeDirection.Down:
 
-                        switch (node.childrenLayout) {
+                        switch(node.childrenLayout)
+                        {
 
                             case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
                                 break;
@@ -3962,7 +4629,8 @@ kendo_module({
                             case kendo.diagram.ChildrenLayout.Underneath:
                                 w = shapeWidth;
                                 h = shapeHeight + +this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
+                                for(var i = 0, len = node.children.length; i < len; i++)
+                                {
                                     var childNode = node.children[i];
                                     s = this.measure(childNode, givenSize);
                                     w = Math.max(w, s.width + this.options.UnderneathHorizontalOffset);
@@ -3975,7 +4643,8 @@ kendo_module({
                             case kendo.diagram.ChildrenLayout.Default:
                                 w = 0;
                                 h = 0;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
+                                for(var i = 0, len = node.children.length; i < len; i++)
+                                {
                                     var childNode = node.children[i];
                                     s = this.measure(childNode, givenSize);
                                     w += s.width + this.options.horizontalSeparation;
@@ -4001,21 +4670,26 @@ kendo_module({
             node.Size = result;
             return result;
         },
-        arrange: function (n, p) {
+        arrange     : function(n, p)
+        {
             var b = n.associatedShape.bounds();
             var shapeWidth = b.width;
             var shapeHeight = b.height;
-            if (n.children.isEmpty()) {
+            if(n.children.isEmpty())
+            {
                 n.x = p.x;
                 n.y = p.y;
                 n.BoundingRectangle = new Rect(p.x, p.y, shapeWidth, shapeHeight);
             }
-            else {
+            else
+            {
                 var x, y;
                 var selfLocation;
-                switch (n.treeDirection) {
+                switch(n.treeDirection)
+                {
                     case kendo.diagram.TreeDirection.Left:
-                        switch (n.childrenLayout) {
+                        switch(n.childrenLayout)
+                        {
                             case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
                                 break;
 
@@ -4028,7 +4702,8 @@ kendo_module({
                                 n.y = selfLocation.y;
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                                 y = p.y + shapeHeight + this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
+                                for(var i = 0, len = node.children.length; i < len; i++)
+                                {
                                     var node = node.children[i];
                                     x = selfLocation.x - node.associatedShape.width - this.options.UnderneathHorizontalOffset;
                                     var pp = new Point(x, y);
@@ -4044,7 +4719,8 @@ kendo_module({
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                                 x = selfLocation.x - this.options.horizontalSeparation; // alignment of children
                                 y = p.y;
-                                for (var i = 0, len = n.children.length; i < len; i++) {
+                                for(var i = 0, len = n.children.length; i < len; i++)
+                                {
                                     var node = n.children[i];
                                     var pp = new Point(x - node.Size.width, y);
                                     this.arrange(node, pp);
@@ -4058,7 +4734,8 @@ kendo_module({
 
                         break;
                     case kendo.diagram.TreeDirection.Right:
-                        switch (n.childrenLayout) {
+                        switch(n.childrenLayout)
+                        {
                             case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
                                 break;
 
@@ -4074,7 +4751,8 @@ kendo_module({
 
                                 // alignment of children left-underneath the parent
                                 y = p.y + shapeHeight + this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = n.children.length; i < len; i++) {
+                                for(var i = 0, len = n.children.length; i < len; i++)
+                                {
                                     var node = n.children[i];
                                     var pp = new Point(x, y);
                                     this.arrange(node, pp);
@@ -4090,7 +4768,8 @@ kendo_module({
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                                 x = p.x + shapeWidth + this.options.horizontalSeparation; // alignment of children
                                 y = p.y;
-                                for (var i = 0, len = n.children.length; i < len; i++) {
+                                for(var i = 0, len = n.children.length; i < len; i++)
+                                {
                                     var node = n.children[i];
                                     var pp = new Point(x, y);
                                     this.arrange(node, pp);
@@ -4108,21 +4787,25 @@ kendo_module({
                         n.x = selfLocation.x;
                         n.y = selfLocation.y;
                         n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
-                        if (Math.abs(selfLocation.x - p.x) < Math.epsilon) {
+                        if(Math.abs(selfLocation.x - p.x) < Math.epsilon)
+                        {
                             var childrenwidth = 0;
                             // means there is an aberration due to the oversized Element with respect to the children
-                            for (var i = 0, len = n.children.length; i < len; i++) {
+                            for(var i = 0, len = n.children.length; i < len; i++)
+                            {
                                 var child = n.children[i];
                                 childrenwidth += child.Size.width + this.options.horizontalSeparation;
                             }
                             childrenwidth -= this.options.horizontalSeparation;
                             x = p.x + ((shapeWidth - childrenwidth) / 2);
                         }
-                        else {
+                        else
+                        {
                             x = p.x;
                         }
 
-                        for (var i = 0, len = n.children.length; i < len; i++) {
+                        for(var i = 0, len = n.children.length; i < len; i++)
+                        {
                             var node = n.children[i];
                             y = selfLocation.y - this.options.verticalSeparation - node.Size.height;
                             var pp = new Point(x, y);
@@ -4133,7 +4816,8 @@ kendo_module({
 
                     case kendo.diagram.TreeDirection.Down:
 
-                        switch (n.childrenLayout) {
+                        switch(n.childrenLayout)
+                        {
                             case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
                                 break;
                             case kendo.diagram.ChildrenLayout.BottomAlignedWithParent:
@@ -4145,7 +4829,8 @@ kendo_module({
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                                 x = p.x + this.options.UnderneathHorizontalOffset; // alignment of children left-underneath the parent
                                 y = p.y + shapeHeight + this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = n.children.length; i < len; i++) {
+                                for(var i = 0, len = n.children.length; i < len; i++)
+                                {
                                     var node = n.children[i];
                                     var pp = new Point(x, y);
                                     this.arrange(node, pp);
@@ -4158,10 +4843,12 @@ kendo_module({
                                 n.x = selfLocation.x;
                                 n.y = selfLocation.y;
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
-                                if (Math.abs(selfLocation.x - p.x) < Math.epsilon) {
+                                if(Math.abs(selfLocation.x - p.x) < Math.epsilon)
+                                {
                                     var childrenwidth = 0;
                                     // means there is an aberration due to the oversized Element with respect to the children
-                                    for (var i = 0, len = n.children.length; i < len; i++) {
+                                    for(var i = 0, len = n.children.length; i < len; i++)
+                                    {
                                         var child = n.children[i];
                                         childrenwidth += child.Size.width + this.options.horizontalSeparation;
                                     }
@@ -4169,11 +4856,13 @@ kendo_module({
                                     childrenwidth -= this.options.horizontalSeparation;
                                     x = p.x + ((shapeWidth - childrenwidth) / 2);
                                 }
-                                else {
+                                else
+                                {
                                     x = p.x;
                                 }
 
-                                for (var i = 0, len = n.children.length; i < len; i++) {
+                                for(var i = 0, len = n.children.length; i < len; i++)
+                                {
                                     var node = n.children[i];
                                     y = selfLocation.y + this.options.verticalSeparation + shapeHeight;
                                     var pp = new Point(x, y);
@@ -4195,22 +4884,27 @@ kendo_module({
                 }
             }
         },
-        layoutSwitch: function () {
-            if (this.center == null) {
+        layoutSwitch: function()
+        {
+            if(this.center == null)
+            {
                 return;
             }
 
-            if (this.center.children.isEmpty()) {
+            if(this.center.children.isEmpty())
+            {
                 return;
             }
 
             var type = this.options.TreeLayoutType;
-            if (isUndefined(type)) {
+            if(isUndefined(type))
+            {
                 type = kendo.diagram.TreeLayoutType.TreeDown;
             }
             var single, male, female, leftcount;
             var children = this.center.children;
-            switch (type) {
+            switch(type)
+            {
                 case kendo.diagram.TreeLayoutType.RadialTree:
                     this.layoutRadialTree();
                     break;
@@ -4218,17 +4912,21 @@ kendo_module({
                 case kendo.diagram.TreeLayoutType.MindmapHorizontal:
                     single = this.center.children;
 
-                    if (this.center.children.length == 1) {
+                    if(this.center.children.length == 1)
+                    {
                         this.layoutRight(single);
                     }
-                    else {
+                    else
+                    {
                         // odd number will give one more at the right
-                        leftcount = Math.floor(children.length / 2);
-                        male = this.center.children.where(function (n) {
-                            return children.IndexOf(n) < leftcount
+                        leftcount = children.length / 2;
+                        male = this.center.children.where(function(n)
+                        {
+                            return children.indexOf(n) < leftcount;
                         });
-                        female = this.center.children.where(function (n) {
-                            return children.IndexOf(n) > leftcount
+                        female = this.center.children.where(function(n)
+                        {
+                            return children.indexOf(n) >= leftcount;
                         });
 
                         this.layoutLeft(male);
@@ -4239,17 +4937,21 @@ kendo_module({
                 case kendo.diagram.TreeLayoutType.MindmapVertical:
                     single = this.center.children;
 
-                    if (this.center.children.length == 1) {
+                    if(this.center.children.length == 1)
+                    {
                         this.layoutDown(single);
                     }
-                    else {
+                    else
+                    {
                         // odd number will give one more at the right
-                        leftcount = Math.floor(children.length / 2);
-                        male = this.center.children.where(function (n) {
-                            return children.IndexOf(n) < leftcount
+                        leftcount = children.length / 2;
+                        male = this.center.children.where(function(n)
+                        {
+                            return children.indexOf(n) < leftcount
                         });
-                        female = this.center.children.where(function (n) {
-                            return children.IndexOf(n) > leftcount
+                        female = this.center.children.where(function(n)
+                        {
+                            return children.indexOf(n) >= leftcount
                         });
                         this.layoutUp(male);
                         this.layoutDown(female);
@@ -4273,7 +4975,8 @@ kendo_module({
                     break;
 
                 case kendo.diagram.TreeLayoutType.TipOverTree:
-                    if (this.options.tipOverTreeStartLevel < 0) {
+                    if(this.options.tipOverTreeStartLevel < 0)
+                    {
                         throw  "The tip-over level should be a positive integer.";
                     }
                     this.TipOverTree(this.center.children, this.options.tipOverTreeStartLevel);
@@ -4289,8 +4992,10 @@ kendo_module({
      * @type {*}
      */
     var TreeLayout = kendo.Class.extend({
-        init: function (diagram) {
-            if (isUndefined(diagram)) {
+        init: function(diagram)
+        {
+            if(isUndefined(diagram))
+            {
                 throw "No diagram specified.";
             }
             this.diagram = diagram;
@@ -4299,28 +5004,29 @@ kendo_module({
         /**
          * Arranges the diagram in a tree-layout with the specified options and tree subtype.
          */
-        layout: function (options) {
+        layout: function(options)
+        {
             this.options = kendo.deepExtend({
-                    treeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
-                    horizontalSeparation: 90,
-                    verticalSeparation: 50,
-                    underneathVerticalTopOffset: 15,
-                    underneathHorizontalOffset: 15,
-                    underneathVerticalSeparation: 15,
-                    radialSeparation: 150,
-                    radialFirstLevelSeparation: 200,
-                    componentsGridWidth: 5000,
-                    totalMargin: new Size(50, 50),
-                    componentMargin: new Size(20, 20),
+                    treeLayoutType                 : kendo.diagram.TreeLayoutType.TreeDown,
+                    horizontalSeparation           : 90,
+                    verticalSeparation             : 50,
+                    underneathVerticalTopOffset    : 15,
+                    underneathHorizontalOffset     : 15,
+                    underneathVerticalSeparation   : 15,
+                    radialSeparation               : 150,
+                    radialFirstLevelSeparation     : 200,
+                    componentsGridWidth            : 5000, // TODO: default should be 800
+                    totalMargin                    : new Size(50, 50),
+                    componentMargin                : new Size(20, 20),
                     keepComponentsInOneRadialLayout: false,
-                    animateTransitions: false,
-                    startRadialAngle: 0,
-                    roots: [],
-                    endRadialAngle: 2 * Math.PI,
+                    animateTransitions             : false,
+                    startRadialAngle               : 0,
+                    roots                          : [],
+                    endRadialAngle                 : 2 * Math.PI,
                     // TODO: ensure to change this to false when containers are around
-                    ignoreContainers: true,
-                    layoutContainerChildren: false,
-                    ignoreInvisible: true
+                    ignoreContainers               : true,
+                    layoutContainerChildren        : false,
+                    ignoreInvisible                : true
                 },
                 options || {})
 
@@ -4341,32 +5047,38 @@ kendo_module({
             // run the unit in the undo service and get some rest
         },
 
-        layoutComponents: function () {
-            if (this.graph.isEmpty()) {
+        layoutComponents: function()
+        {
+            if(this.graph.isEmpty())
+            {
                 return;
             }
 
             // split into connected components
             var components = this.graph.getConnectedComponents();
-            if (components.isEmpty()) {
+            if(components.isEmpty())
+            {
                 return;
             }
 
             var layout = new TreeLayoutProcessor(this.options);
             var trees = [];
             // find a spanning tree for each component
-            for (var i = 0; i < components.length; i++) {
+            for(var i = 0; i < components.length; i++)
+            {
                 var component = components[i];
 
                 var treeGraph = this.getTree(component);
-                if (treeGraph == null) {
+                if(treeGraph == null)
+                {
                     throw "Failed to find a spanning tree for the component.";
                 }
                 var root = treeGraph.root;
                 var tree = treeGraph.tree;
                 layout.layout(tree, root);
 
-                for (var j = 0; j < tree.nodes.length; j++) {
+                for(var j = 0; j < tree.nodes.length; j++)
+                {
                     var node = tree.nodes[j];
                     var shape = node.associatedShape;
                     shape.bounds(new Rect(node.x, node.y, node.width, node.height));
@@ -4384,34 +5096,43 @@ kendo_module({
          * @param graph
          * @returns {*} A literal object consisting of the found root and the spanning tree.
          */
-        getTree: function (graph) {
+        getTree: function(graph)
+        {
             var root = null;
-            if (this.options.roots.length > 0) {
-                for (var i = 0, len = graph.nodes.length; i < len; i++) {
+            if(this.options.roots.length > 0)
+            {
+                for(var i = 0, len = graph.nodes.length; i < len; i++)
+                {
                     var node = graph.nodes[i];
-                    for (var j = 0, len = this.options.roots.length; j < len; j++) {
+                    for(var j = 0, len = this.options.roots.length; j < len; j++)
+                    {
                         var givenRootShape = this.options.roots[j];
-                        if (givenRootShape == node.associatedShape) {
+                        if(givenRootShape == node.associatedShape)
+                        {
                             root = givenRootShape;
                         }
                     }
                 }
             }
-            if (root == null) {
+            if(root == null)
+            {
                 // finds the most probable root on the basis of the longest path in the component
                 root = graph.root();
                 // should not happen really
-                if (root == null) {
+                if(root == null)
+                {
                     throw "Unable to find a root for the tree.";
                 }
             }
             return this.getTreeForRoot(graph, root);
         },
 
-        getTreeForRoot: function (graph, root) {
+        getTreeForRoot      : function(graph, root)
+        {
 
             var tree = graph.getSpanningTree(root);
-            if (isUndefined(tree) || tree.isEmpty()) {
+            if(isUndefined(tree) || tree.isEmpty())
+            {
                 return null;
             }
             return {
@@ -4423,21 +5144,24 @@ kendo_module({
          * Organizes the components in a grid.
          * @param components
          */
-        gridLayoutComponents: function (components) {
-            if (components == null) {
+        gridLayoutComponents: function(components)
+        {
+            if(components == null)
+            {
                 throw "No components supplied.";
             }
 
             // calculate and cache the bounds of the components
-            components.forEach(function (c) {
+            components.forEach(function(c)
+            {
                 c.calcBounds();
             })
 
             // order by decreasing width
-            components.sort(function (a, b) {
+            components.sort(function(a, b)
+            {
                 return b.bounds.width - a.bounds.width;
             })
-
 
             var maxWidth = this.options.componentsGridWidth,
                 offsetX = this.options.componentMargin.width,
@@ -4447,8 +5171,10 @@ kendo_module({
                 startY = this.options.totalMargin.height,
                 x = startX,
                 y = startY;
-            while (components.length > 0) {
-                if (x >= maxWidth) {
+            while(components.length > 0)
+            {
+                if(x >= maxWidth)
+                {
                     // start a new row
                     x = startX;
                     y += height + offsetY;
@@ -4458,8 +5184,8 @@ kendo_module({
                 var component = components.pop();
                 this.moveToOffset(component, new Point(x, y));
 
-
-                for (var j = 0; j < component.nodes.length; j++) {
+                for(var j = 0; j < component.nodes.length; j++)
+                {
                     var node = component.nodes[j];
                     var shape = node.associatedShape;
                     shape.bounds(new Rect(node.x, node.y, node.width, node.height));
@@ -4467,15 +5193,18 @@ kendo_module({
 
                 var boundingRect = component.bounds;
                 var currentHeight = boundingRect.height;
-                if (currentHeight <= 0 || isNaN(currentHeight)) {
+                if(currentHeight <= 0 || isNaN(currentHeight))
+                {
                     currentHeight = 0;
                 }
                 var currentWidth = boundingRect.width;
-                if (currentWidth <= 0 || isNaN(currentWidth)) {
+                if(currentWidth <= 0 || isNaN(currentWidth))
+                {
                     currentWidth = 0;
                 }
 
-                if (currentHeight >= height) {
+                if(currentHeight >= height)
+                {
                     height = currentHeight;
                 }
                 x += currentWidth + offsetX;
@@ -4483,15 +5212,18 @@ kendo_module({
 
         },
 
-        moveToOffset: function (component, p) {
+        moveToOffset: function(component, p)
+        {
             var bounds = component.bounds;
             var deltax = p.x - bounds.x;
             var deltay = p.y - bounds.y;
 
-            for (var i = 0, len = component.nodes.length; i < len; i++) {
+            for(var i = 0, len = component.nodes.length; i < len; i++)
+            {
                 var node = component.nodes[i];
                 var nodeBounds = node.bounds();
-                if (nodeBounds == Rect.Empty) {
+                if(nodeBounds == Rect.Empty)
+                {
                     nodeBounds = new Rect(0, 0, 0, 0);
                 }
                 nodeBounds.x += deltax;
@@ -4509,7 +5241,7 @@ kendo_module({
         /*
          * The topmost child will be aligned with the parent.
          */
-        TopAlignedWithParent: 0,
+        TopAlignedWithParent   : 0,
 
         /*
          *
@@ -4520,12 +5252,12 @@ kendo_module({
          * If the children are at the <see cref="TreeDirection.Right"/> or <see cref="TreeDirection.Left"/> this will furthermore
          * specify that they should be placed underneath the parent rather than at the distance from the right, respectively left of the parent.
          */
-        Underneath: 2,
+        Underneath             : 2,
 
         /*
          * Default layout.
          */
-        Default: 3
+        Default                : 3
     }
 
     var LayoutTypes = {
@@ -4534,7 +5266,7 @@ kendo_module({
          * The tree layout and its various variations.
          * See also the TreeLayoutType for subtypes of this.
          */
-        TreeLayout: 0,
+        TreeLayout         : 0,
 
         //LayeredLayout: 1,
         /*
@@ -4544,39 +5276,39 @@ kendo_module({
         /**
          * Unspecified layout.
          */
-        None: 3
+        None               : 3
     }
 
     var TreeDirection = {
         /*
          * Children evolve to the left.
          */
-        Left: 0,
+        Left     : 0,
 
         /*
          * Children evolve to the right.
          */
-        Right: 1,
+        Right    : 1,
 
         /*
          * Children evolve upwards.
          */
-        Up: 2,
+        Up       : 2,
 
         /*
          * Children evolve downwards.
          */
-        Down: 3,
+        Down     : 3,
 
         /*
          * No direction specified:0, this usually means the root node and it's a mind mapping root.
          */
-        None: 4,
+        None     : 4,
 
         /*
          * Radial layout.
          */
-        Radial: 5,
+        Radial   : 5,
 
         /*
          * Undefine layout.
@@ -4594,143 +5326,157 @@ kendo_module({
         /*
          * The standard mind mapping layout but with the two wings laid out vertically.
          */
-        MindmapVertical: 1,
+        MindmapVertical  : 1,
 
         /*
          * Standard tree layout with the children positioned at the right of the root.
          */
-        TreeRight: 2,
+        TreeRight        : 2,
 
         /*
          * Standard tree layout with the children positioned at the left of the root.
          */
-        TreeLeft: 3,
+        TreeLeft         : 3,
 
         /*
          *  Standard tree layout with the children positioned on top of the root.
          */
-        TreeUp: 4,
+        TreeUp           : 4,
 
         /*
          * Standard tree layout with the children positioned below the root.
          */
-        TreeDown: 5,
+        TreeDown         : 5,
 
         /*
          * Top-down layout with the children on the second level positioned as a tree view underneath the first level.
          */
-        TipOverTree: 6,
+        TipOverTree      : 6,
 
         /*
          * Experimental radial tree layout.
          */
-        RadialTree: 7,
+        RadialTree       : 7,
 
         /*
          * Unspecified layout. This is not an algorithm but just a tag for the host application to tell that the user has not specified any layout yet.
          */
-        Undefined: 8
+        Undefined        : 8
     }
 
     kendo.deepExtend(diagram, {
-        init: function (element) {
+        init: function(element)
+        {
             kendo.init(element, kendo.diagram.ui);
         },
 
-        Point: Point,
-        Intersect: Intersect,
-        Rect: Rect,
-        Size: Size,
-        RectAlign: RectAlign,
-        Matrix: Matrix,
-        MatrixVector: MatrixVector,
-        Range: Range,
+        Point         : Point,
+        Intersect     : Intersect,
+        Rect          : Rect,
+        Size          : Size,
+        RectAlign     : RectAlign,
+        Matrix        : Matrix,
+        MatrixVector  : MatrixVector,
+        Range         : Range,
         normalVariable: normalVariable,
-        randomId: randomId,
-        Dictionary: Dictionary,
-        HashTable: HashTable,
-        Queue: Queue,
-        Node: Node,
-        Link: Link,
-        Graph: Graph,
-        SpringLayout: SpringLayout,
-        TreeLayout: TreeLayout,
-        GraphAdapter: DiagramToHyperTreeAdapter,
+        randomId      : randomId,
+        Dictionary    : Dictionary,
+        HashTable     : HashTable,
+        Queue         : Queue,
+        Node          : Node,
+        Link          : Link,
+        Graph         : Graph,
+        SpringLayout  : SpringLayout,
+        TreeLayout    : TreeLayout,
+        GraphAdapter  : DiagramToHyperTreeAdapter,
         ChildrenLayout: ChildrenLayout,
-        LayoutTypes: LayoutTypes,
+        LayoutTypes   : LayoutTypes,
         TreeLayoutType: TreeLayoutType,
-        TreeDirection: TreeDirection
+        TreeDirection : TreeDirection
     });
 })
     (window.kendo.jQuery);
 
-
 /*-------------------Diverse math functions----------------------------*/
 
-Math.sign = function (number) {
+Math.sign = function(number)
+{
     return number ? number < 0 ? -1 : 1 : 0;
 };
 Math.epsilon = 0.000001;
 /*-------------------Diverse utilities----------------------------*/
 
-isDefined = function (obj) {
+isDefined = function(obj)
+{
     return !(typeof obj === 'undefined');
 };
 
-isUndefined = function (obj) {
+isUndefined = function(obj)
+{
     return (typeof obj === 'undefined') || obj == null;
 };
 
 /**
  * Returns whether the given object is an object or a value.
  */
-isObject = function (obj) {
+isObject = function(obj)
+{
     return obj === Object(obj);
 };
 
 /**
  * Returns whether the object has a property with the given name.
  */
-has = function (obj, key) {
+has = function(obj, key)
+{
     return hasOwnProperty.call(obj, key);
 };
 
 /**
  * Returns whether the given object is a function.
  */
-isFunction = function (obj) {
+isFunction = function(obj)
+{
     return typeof obj === 'function';
 };
 
 /**
  * Returns whether the given object is a string.
  */
-isString = function (obj) {
+isString = function(obj)
+{
     return Object.prototype.toString.call(obj) == '[object String]';
 };
 
-isType = function (obj, type) {
+isType = function(obj, type)
+{
     return Object.prototype.toString.call(obj) == '[object ' + type + ']';
 }
 /**
  * Returns whether the given object is a number.
  */
-isNumber = function (obj) {
+isNumber = function(obj)
+{
     return !isNaN(parseFloat(obj)) && isFinite(obj);
 };
 
 /**
  * Return whether the given object (array or dictionary).
  */
-isEmpty = function (obj) {
-    if (obj == null) {
+isEmpty = function(obj)
+{
+    if(obj == null)
+    {
         return true;
     }
-    if (isArray(obj) || isString(obj)) {
+    if(isArray(obj) || isString(obj))
+    {
         return obj.length === 0;
     }
-    for (var key in obj) {
-        if (has(obj, key)) {
+    for(var key in obj)
+    {
+        if(has(obj, key))
+        {
             return false;
         }
     }
@@ -4740,7 +5486,8 @@ isEmpty = function (obj) {
 /**
  * Returns whether the object is an array.
  */
-isArray = function (obj) {
+isArray = function(obj)
+{
     return Object.prototype.toString.call(obj) == '[object Array]';
 };
 
@@ -4750,9 +5497,11 @@ isArray = function (obj) {
  * @param value
  * @returns {Array}
  */
-initArray = function createIdArray(size, value) {
+initArray = function createIdArray(size, value)
+{
     var array = [];
-    for (var i = 0; i < size; ++i) {
+    for(var i = 0; i < size; ++i)
+    {
         array[i] = value;
     }
     return array;
@@ -4764,16 +5513,21 @@ initArray = function createIdArray(size, value) {
  * @param upper The exclusive upper bound.
  * @returns {number}
  */
-randomInteger = function (lower, upper) {
+randomInteger = function(lower, upper)
+{
     return Math.floor(Math.random() * upper) + lower;
 }
 
 /*-------------------Array Extensions ----------------------------*/
 
-if (!Array.prototype.any) {
-    Array.prototype.any = function (predicate, thisRef) {
-        for (var i = 0; i < this.length; ++i) {
-            if (predicate.call(thisRef, this[i])) {
+if(!Array.prototype.any)
+{
+    Array.prototype.any = function(predicate, thisRef)
+    {
+        for(var i = 0; i < this.length; ++i)
+        {
+            if(predicate.call(thisRef, this[i]))
+            {
                 return this[i];
             }
         }
@@ -4781,12 +5535,16 @@ if (!Array.prototype.any) {
     }
 }
 
-if (!Array.prototype.remove) {
-    Array.prototype.remove = function () {
+if(!Array.prototype.remove)
+{
+    Array.prototype.remove = function()
+    {
         var what, a = arguments, L = a.length, ax;
-        while (L && this.length) {
+        while(L && this.length)
+        {
             what = a[--L];
-            while ((ax = this.indexOf(what)) !== -1) {
+            while((ax = this.indexOf(what)) !== -1)
+            {
                 this.splice(ax, 1);
             }
         }
@@ -4794,18 +5552,24 @@ if (!Array.prototype.remove) {
     }
 }
 
-if (!Array.prototype.flatten) {
-    Array.prototype.flatten = function () {
+if(!Array.prototype.flatten)
+{
+    Array.prototype.flatten = function()
+    {
         return Array.prototype.concat.apply([], this);
     };
 }
 
-if (!Array.prototype.distinct) {
-    Array.prototype.distinct = function () {
+if(!Array.prototype.distinct)
+{
+    Array.prototype.distinct = function()
+    {
         var a = this;
         var r = [];
-        for (var i = 0; i < a.length; i++) {
-            if (r.indexOf(a[i]) < 0) {
+        for(var i = 0; i < a.length; i++)
+        {
+            if(r.indexOf(a[i]) < 0)
+            {
                 r.push(a[i]);
             }
         }
@@ -4813,11 +5577,15 @@ if (!Array.prototype.distinct) {
     };
 }
 
-if (!Array.prototype.contains) {
-    Array.prototype.contains = function (obj) {
+if(!Array.prototype.contains)
+{
+    Array.prototype.contains = function(obj)
+    {
         var i = this.length;
-        while (i--) {
-            if (this[i] == obj) {
+        while(i--)
+        {
+            if(this[i] == obj)
+            {
                 return true;
             }
         }
@@ -4825,10 +5593,14 @@ if (!Array.prototype.contains) {
     };
 }
 
-if (!Array.prototype.indexOf) {
-    Array.prototype.indexOf = function (element) {
-        for (var i = 0; i < this.length; ++i) {
-            if (this[i] === element) {
+if(!Array.prototype.indexOf)
+{
+    Array.prototype.indexOf = function(element)
+    {
+        for(var i = 0; i < this.length; ++i)
+        {
+            if(this[i] === element)
+            {
                 return i;
             }
         }
@@ -4836,11 +5608,15 @@ if (!Array.prototype.indexOf) {
     }
 }
 
-if (!Array.prototype.forEach) {
-    Array.prototype.forEach = function (predicate, thisRef) {
+if(!Array.prototype.forEach)
+{
+    Array.prototype.forEach = function(predicate, thisRef)
+    {
         var result = [];
-        for (var i = 0; i < this.length; ++i) {
-            if (predicate.call(thisRef, this[i])) {
+        for(var i = 0; i < this.length; ++i)
+        {
+            if(predicate.call(thisRef, this[i]))
+            {
                 result.push(this[i]);
             }
         }
@@ -4848,63 +5624,83 @@ if (!Array.prototype.forEach) {
     }
 }
 
-if (!Array.prototype.each) {
+if(!Array.prototype.each)
+{
     Array.prototype.each = Array.prototype.forEach;
 }
 
-if (!Array.prototype.map) {
+if(!Array.prototype.map)
+{
     /**
      Maps the given functional to each element of the array. See also the 'apply' method which accepts in addition some parameters.
      */
-    Array.prototype.map = function (iterator, context) {
+    Array.prototype.map = function(iterator, context)
+    {
         var results = [];
-        this.forEach(function (value, index, list) {
+        this.forEach(function(value, index, list)
+        {
             results.push(iterator.call(context, value, index, list));
         });
         return results;
     };
 }
 
-if (!Array.prototype.reduce) {
-    Array.prototype.reduce = function (iterator, acc, context) {
+if(!Array.prototype.reduce)
+{
+    Array.prototype.reduce = function(iterator, acc, context)
+    {
         var initial = arguments.length > 1;
-        this.forEach(function (value, index, list) {
-            if (!initial) {
+        this.forEach(function(value, index, list)
+        {
+            if(!initial)
+            {
                 acc = value;
                 initial = true;
             }
-            else {
+            else
+            {
                 acc = iterator.call(context, acc, value, index, list);
             }
         });
-        if (!initial) {
+        if(!initial)
+        {
             throw 'Reduce of empty array with no initial value';
         }
         return acc;
     }
 }
-if (!Array.prototype.fold) {
+if(!Array.prototype.fold)
+{
     Array.prototype.fold = Array.prototype.reduce;
 }
-if (!Array.prototype.foldl) {
+if(!Array.prototype.foldl)
+{
     Array.prototype.foldl = Array.prototype.reduce;
 } // aka fold left
 
-if (!Array.prototype.sameAs) {
-    Array.prototype.sameAs = function (array) {
-        if (!array) {
+if(!Array.prototype.sameAs)
+{
+    Array.prototype.sameAs = function(array)
+    {
+        if(!array)
+        {
             return false;
         }
-        if (this.length != array.length) {
+        if(this.length != array.length)
+        {
             return false;
         }
-        for (var i = 0; i < this.length; i++) {
-            if (this[i] instanceof Array && array[i] instanceof Array) {
-                if (!this[i].compare(array[i])) {
+        for(var i = 0; i < this.length; i++)
+        {
+            if(this[i] instanceof Array && array[i] instanceof Array)
+            {
+                if(!this[i].compare(array[i]))
+                {
                     return false;
                 }
             }
-            else if (this[i] != array[i]) {
+            else if(this[i] != array[i])
+            {
                 // Warning - two different object instances will never be equal: {x:20} != {x:20}
                 return false;
             }
@@ -4913,11 +5709,15 @@ if (!Array.prototype.sameAs) {
     }
 }
 
-if (!Array.prototype.find) {
-    Array.prototype.find = function (iterator, context) {
+if(!Array.prototype.find)
+{
+    Array.prototype.find = function(iterator, context)
+    {
         var result;
-        this.any(function (value, index, list) {
-            if (iterator.call(context, value, index, list)) {
+        this.any(function(value, index, list)
+        {
+            if(iterator.call(context, value, index, list))
+            {
                 result = value;
                 return true;
             }
@@ -4926,55 +5726,69 @@ if (!Array.prototype.find) {
         return result;
     };
 }
-if (!Array.prototype.first) {
+if(!Array.prototype.first)
+{
     Array.prototype.first = Array.prototype.find;
 }
 
-if (!Array.prototype.insert) {
+if(!Array.prototype.insert)
+{
 
     /**
      * Inserts the given element at the specified position and returns the result.
      */
-    Array.prototype.insert = function (element, position) {
+    Array.prototype.insert = function(element, position)
+    {
         this.splice(position, 0, element);
         return this;
     };
 }
 
-if (!Array.prototype.prepend) {
+if(!Array.prototype.prepend)
+{
     /**
      * Inserts the given item at begin of array.
      */
-    Array.prototype.prepend = function () {
+    Array.prototype.prepend = function()
+    {
         this.unshift.apply(this, arguments); // tricky way to prepend any number of arguments. by Niko :)
         // this.splice(0, 0, x);
         return this;
     };
 }
 
-if (!Array.prototype.append) {
-    Array.prototype.append = function (x) {
+if(!Array.prototype.append)
+{
+    Array.prototype.append = function(x)
+    {
         this.splice(this.length, 0, x);
         return this;
     };
 }
 
-if (!Array.prototype.apply) {
-    Array.prototype.apply = function (method) {
+if(!Array.prototype.apply)
+{
+    Array.prototype.apply = function(method)
+    {
         var args = Array.prototype.slice.call(arguments, 1).prepend(0);  // dummy holder at first position to replace in apply below
         var isFunc = isFunction(method);
-        return this.map(function (value) {
+        return this.map(function(value)
+        {
             args.splice(0, 1, value);
             return (isFunc ? method : value[method]).apply(method, args);
         });
     }
 }
 
-if (!Array.prototype.filter) {
-    Array.prototype.filter = function (iterator, context) {
+if(!Array.prototype.filter)
+{
+    Array.prototype.filter = function(iterator, context)
+    {
         var results = [];
-        this.forEach(function (value, index, list) {
-            if (iterator.call(context, value, index, list)) {
+        this.forEach(function(value, index, list)
+        {
+            if(iterator.call(context, value, index, list))
+            {
                 results.push(value);
             }
         });
@@ -4982,43 +5796,45 @@ if (!Array.prototype.filter) {
     };
 }
 
-if (!Array.prototype.select) {
+if(!Array.prototype.select)
+{
     Array.prototype.select = Array.prototype.filter;
 }
 
-if (!Array.prototype.where) {
-    Array.prototype.where = function (attrs, first) {
-        if (isUndefined(attrs)) {
+if(!Array.prototype.where)
+{
+    Array.prototype.where = function(constraint, first)
+    {
+        if(isUndefined(constraint))
+        {
             return first ? void 0 : [];
-        }   // void 0 <=> undefined
-
-        var crit = function (value) {
-            for (var key in attrs) {
-                if (attrs[key] !== value[key]) {
-                    return false;
-                }
-            }
-            return true;
-        };
-        return first ? this.first(crit) : this.filter(crit);
+        }
+        return first ? this.first(constraint) : this.filter(constraint);
     };
 }
 
-if (!Array.prototype.add) {
+if(!Array.prototype.add)
+{
     Array.prototype.add = Array.prototype.push;
 }
 
-if (!Array.prototype.isEmpty) {
-    Array.prototype.isEmpty = function () {
+if(!Array.prototype.isEmpty)
+{
+    Array.prototype.isEmpty = function()
+    {
         return this.length == 0;
     }
 }
 
-if (!Array.prototype.all) {
-    Array.prototype.all = function (iterator, context) {
+if(!Array.prototype.all)
+{
+    Array.prototype.all = function(iterator, context)
+    {
         var result = true;
-        this.forEach(function (value, index, list) {
-            if (!(result = result && iterator.call(context, value, index, list))) {
+        this.forEach(function(value, index, list)
+        {
+            if(!(result = result && iterator.call(context, value, index, list)))
+            {
                 return {};
             }
         });
@@ -5026,32 +5842,40 @@ if (!Array.prototype.all) {
     }
 }
 
-if (!Array.prototype.every) {
+if(!Array.prototype.every)
+{
     Array.prototype.every = Array.prototype.all;
 }
 
-if (!Array.prototype.shuffle) {
+if(!Array.prototype.shuffle)
+{
     /**
      * Shuffles the elements of this array in a random order.
      */
-    Array.prototype.shuffle = function () {
-        this.sort(function () {
+    Array.prototype.shuffle = function()
+    {
+        this.sort(function()
+        {
             return 0.5 - Math.random();
         })
     }
 }
 
-if (!Array.prototype.clear) {
+if(!Array.prototype.clear)
+{
 
     //why not just setting the variable to []? It causes problems if used as byref argument; it will be another object than the one passed.
-    Array.prototype.clear = function () {
-        while (this.length > 0) {
+    Array.prototype.clear = function()
+    {
+        while(this.length > 0)
+        {
             this.pop();
         }
     }
 }
 
-if (!Array.prototype.bisort) {
+if(!Array.prototype.bisort)
+{
 
     /**
      * Sort the arrays on the basis of the first one (considered as keys and the other array as values).
@@ -5059,40 +5883,53 @@ if (!Array.prototype.bisort) {
      * @param b
      * @param sortfunc (optiona) sorting function for the values in the first array
      */
-    Array.prototype.bisort = function (a, b, sortfunc) {
-        if (isUndefined(a)) {
+    Array.prototype.bisort = function(a, b, sortfunc)
+    {
+        if(isUndefined(a))
+        {
             throw "First array is not specified.";
         }
-        if (isUndefined(b)) {
+        if(isUndefined(b))
+        {
             throw "Second array is not specified.";
         }
-        if (a.length != b.length) {
+        if(a.length != b.length)
+        {
             throw "The two arrays should have equal length";
         }
 
         var all = [];
 
-        var sort_by = function (field, reverse, primer) {
+        var sort_by = function(field, reverse, primer)
+        {
 
-            var key = function (x) {
+            var key = function(x)
+            {
                 return primer ? primer(x[field]) : x[field]
             };
 
-            return function (a, b) {
+            return function(a, b)
+            {
                 var A = key(a), B = key(b);
                 return ((A < B) ? -1 : (A > B) ? +1 : 0) * [-1, 1][+!!reverse];
             }
         }
 
-        for (var i = 0; i < a.length; i++) {
+        for(var i = 0; i < a.length; i++)
+        {
             all.push({ 'x': a[i], 'y': b[i] });
         }
-        if (isUndefined(sortfunc)) {
-            all.sort(function (m, n) {
+        if(isUndefined(sortfunc))
+        {
+            all.sort(function(m, n)
+            {
                 return m.x - n.x;
             });
-        } else {
-            all.sort(function (m, n) {
+        }
+        else
+        {
+            all.sort(function(m, n)
+            {
                 return sortfunc(m.x, n.x);
             });
         }
@@ -5100,7 +5937,8 @@ if (!Array.prototype.bisort) {
         a.clear(); // do not set to [], the ref will be gone
         b.clear();
 
-        for (var i = 0; i < all.length; i++) {
+        for(var i = 0; i < all.length; i++)
+        {
             a.push(all[i].x);
             b.push(all[i].y);
         }
