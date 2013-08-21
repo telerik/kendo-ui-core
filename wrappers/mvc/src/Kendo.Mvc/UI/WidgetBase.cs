@@ -12,6 +12,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using System.Web.Util;
     using System.Web;
+    using System.Text.RegularExpressions;
 
     public abstract class WidgetBase : IWidget, IScriptableComponent
     {
@@ -235,10 +236,11 @@ namespace Kendo.Mvc.UI
 
             if (HttpEncoder.Current != null && HttpEncoder.Current.GetType().ToString().Contains("AntiXssEncoder"))
             {
-                html = html.Replace("\\u0026", "&")
-                           .Replace("%23", "#")
-                           .Replace("%3D", "=")
-                           .Replace("&#32;", " ");
+                html = Regex.Replace(html, "\\u0026", "&", RegexOptions.IgnoreCase);
+                html = Regex.Replace(html, "%23", "#", RegexOptions.IgnoreCase);
+                html = Regex.Replace(html, "%3D", "=", RegexOptions.IgnoreCase);
+                html = Regex.Replace(html, "&#32;", " ", RegexOptions.IgnoreCase);
+                html = Regex.Replace(html, @"\\u0026\\\\#32;", " ", RegexOptions.IgnoreCase);                
             }
 
             //must decode unicode symbols otherwise they will be rendered as HTML entities
