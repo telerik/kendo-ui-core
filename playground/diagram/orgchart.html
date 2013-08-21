@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Organization chart sample | js-diagram</title>
+   <style type="text/css">
+        #canvasframe
+        {
+            border: 1px DimGray solid;
+            background-color: #dcdcdc;
+        }
+
+        input
+        {
+            border: 1px DimGray solid;
+            background-color: dimgray;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+
+    <script src="../../src/kendo.diagram.math.js"></script>
+    <script src="../../src/kendo.diagram.svg.js"></script>
+    <script src="../../src/kendo.diagram.services.js"></script>
+    <script src="../../src/kendo.diagram.extensions.js"></script>
+    <script src="../../src/kendo.diagram.dom.js"></script>
+    <script src="orgchart.js"></script>
+</head>
+<body>
+    <p style="margin: 20px; color: silver;">Tree layout and orgchart sample...Swa's working on it.</p>
+    <div id="content">
+        <div>
+            <input type="button" id="undoButton" title="Undo (CTRL+Z)" value="Undo" />
+            <input type="button" id="redoButton" title="Redo (CTRL+Y)" value="Redo" />
+            <input type="button" id="deleteButton" title="Delete (DEL)" value="Delete" />
+            <input type="button" id="selectAllButton" title="Select All (CTRL+A)" value="SelectAll" />
+        </div>
+        <div id="canvasframe">
+            <div id="canvas"></div>
+        </div>
+    </div>
+    <!-- <svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+        <g>
+            <title>Layer 1</title>
+            <polyline se:connector="svg_3 svg_7" fill="none" stroke-width="5" stroke="#000000"
+                points="324.373 82 375.469 114.063 426.565 146.125" id="svg_22" />
+            <polyline se:connector="svg_3 svg_2" fill="none" stroke-width="5" stroke="#000000"
+                points="293.16 82 294.151 112 295.142 142" id="svg_21" />
+            <polyline se:connector="svg_3 svg_10" fill="none" stroke-width="5" stroke="#000000"
+                points="259.237 82 209.239 112.063 159.241 142.125" id="svg_20" />
+            <polyline se:connector="svg_8 svg_9" fill="none" stroke-width="5" stroke="#000000"
+                points="468 279.625 468 294.25 468 308.875" id="svg_19" />
+            <polyline se:connector="svg_7 svg_8" fill="none" stroke-width="5" stroke="#000000"
+                points="468 198.125 468 212.875 468 227.625" id="svg_18" />
+            <polyline se:connector="svg_5 svg_6" fill="none" stroke-width="5" stroke="#000000"
+                points="296 356.75 296 371.5 296 386.25" id="svg_17" />
+            <polyline se:connector="svg_4 svg_5" fill="none" stroke-width="5" stroke="#000000"
+                points="296 275.5 296 290.125 296 304.75" id="svg_16" />
+            <polyline se:connector="svg_2 svg_4" fill="none" stroke-width="5" stroke="#000000"
+                points="296 194 296 208.75 296 223.5" id="svg_15" />
+            <polyline se:connector="svg_11 svg_12" fill="none" stroke-width="5" stroke="#000000"
+                points="116 275.625 116 290.25 116 304.875" id="svg_14" />
+            <polyline se:connector="svg_10 svg_11" fill="none" stroke-width="5" stroke="#000000"
+                points="116 194.125 116 208.875 116 223.625" id="svg_13" />
+            <rect id="svg_2" height="52" width="90" y="142" x="251" stroke-linecap="null" stroke-linejoin="null"
+                stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#d4ffaa" />
+            <rect id="svg_3" height="40" width="147" y="42" x="219" stroke-linecap="null" stroke-linejoin="null"
+                stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#aaaaff" />
+            <rect id="svg_4" height="52" width="90" y="223.5" x="251" stroke-linecap="null" stroke-linejoin="null"
+                stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#aad4ff" />
+            <rect id="svg_5" height="52" width="90" y="304.75" x="251" stroke-linecap="null" stroke-linejoin="null"
+                stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#aad4ff" />
+            <rect id="svg_6" height="52" width="90" y="386.25" x="251" stroke-linecap="null" stroke-linejoin="null"
+                stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#bfbfbf" />
+            <rect id="svg_7" height="52" width="90" y="146.125" x="423" stroke-linecap="null"
+                stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#d4ffaa" />
+            <rect id="svg_8" height="52" width="90" y="227.625" x="423" stroke-linecap="null"
+                stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#aad4ff" />
+            <rect id="svg_9" height="52" width="90" y="308.875" x="423" stroke-linecap="null"
+                stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#aad4ff" />
+            <rect id="svg_10" height="52" width="90" y="142.125" x="71" stroke-linecap="null"
+                stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#ffd4aa" />
+            <rect id="svg_11" height="52" width="90" y="223.625" x="71" stroke-linecap="null"
+                stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#aad4ff" />
+            <rect id="svg_12" height="52" width="90" y="304.875" x="71" stroke-linecap="null"
+                stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#aad4ff" />
+        </g>
+    </svg>-->
+</body>
+</html>
