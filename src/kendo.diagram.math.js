@@ -2608,7 +2608,7 @@ kendo_module({
                     }
                 }
                 var shape = this._addShape(diagram, p, node.id);
-                shape.content(node.id);
+                //shape.content(node.id);
                 var bounds = shape.bounds();
                 if (isDefined(bounds)) {
                     node.x = bounds.x;
