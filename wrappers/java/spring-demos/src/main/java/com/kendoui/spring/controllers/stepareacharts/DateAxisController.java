@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-step_area_charts-date_axis-controller")
-@RequestMapping(value="/dataviz/step_area-charts/")
+@RequestMapping(value="/dataviz/step-area-charts/")
 public class DateAxisController {
     @RequestMapping(value = "/date-axis", method = RequestMethod.GET)
     public String index(Model model) throws ParseException {

@@ -8,7 +8,7 @@
              <kendo:dataSource data="${grandSlam}">
              </kendo:dataSource>
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="line" field="win" noteTextField="extremum" name="Wins">
+                <kendo:chart-seriesItem type="stepLine" field="win" noteTextField="extremum" name="Wins">
                 	<kendo:chart-seriesItem-notes position="bottom">
                 		<kendo:chart-seriesItem-notes-label position="outside" />
                 	</kendo:chart-seriesItem-notes>

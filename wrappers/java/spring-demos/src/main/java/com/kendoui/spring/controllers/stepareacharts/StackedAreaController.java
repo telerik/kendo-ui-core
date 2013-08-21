@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-step_area_charts-stacked_area-controller")
-@RequestMapping(value="/dataviz/ste--area-charts/")
+@RequestMapping(value="/dataviz/step-area-charts/")
 public class StackedAreaController {
     @RequestMapping(value = "/stacked-area", method = RequestMethod.GET)
     public String index() {
