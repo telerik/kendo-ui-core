@@ -33,7 +33,21 @@ var template = JSON.parse(fs.readFileSync("download-builder/config/categories.js
 var files = ARGV._.slice();
 
 var get_wrapper = (function(wrapper){
-    var code = '((typeof define == "function" && define.amd) ? define : function(deps, body){ return body() })($DEPS, $CONT)';
+    // For Dojo's AMD loader to work:
+    //
+    // - 'define' must be called directly and the name itself must not be mangled.
+    //
+    // - also, there must be a space before it (or it should be at the beginning of line).  for this
+    //   reason we need the `return`, otherwise the space gets lost after UglifyJS.
+    //
+    // - alternatively, we could include the string " define(" somewhere in the code, or a comment
+    //   like this: //>>built.  But I feel that a direct call to define is cleaner.
+    //
+    // Otherwise it rewrites our code, rendering it unusable.  The exact reason why it won't work
+    // remains buried in the pile of junk that is the Dojo AMD loader.  The glorious code starts
+    // here: https://github.com/dojo/dojo/blob/master/_base/loader.js#L333
+
+    var code = '(function(define){ return define($DEPS, $CONT) })((typeof define == "function" && define.amd) ? define : function(deps, body){ return body() })';
     return function() {
         if (wrapper) return wrapper;
         wrapper = u2.parse(code);
@@ -79,7 +93,9 @@ if (ARGV.bundle) {
     if (!ARGV["nomangle"]) {
         toplevel.figure_out_scope();
         toplevel.compute_char_frequency();
-        toplevel.mangle_names();
+        toplevel.mangle_names({
+            except: [ "define" ] // we can't minify this one, see explanation in get_wrapper()
+        });
     }
     var source_map = u2.SourceMap({
         file: path.basename(destination_min),
