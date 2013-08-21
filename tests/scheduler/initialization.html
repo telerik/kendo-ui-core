@@ -486,6 +486,32 @@
                 equal(rebindStub.calls("rebind"), 1);
             });
 
+            test("work day mode is set if present in the navigate events", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.view().trigger("navigate", { view: "day", isWorkDay: true });
+
+                ok(scheduler._workDayMode);
+            });
+
+            test("work day mode is not change if not present in the navigate events", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.view().trigger("navigate", { view: "day", isWorkDay: true });
+
+                scheduler.view().trigger("navigate", { view: "day" });
+
+                ok(scheduler._workDayMode);
+            });
+
+            test("work day mode is passed to the view", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.view().trigger("navigate", { view: "day", isWorkDay: true });
+
+                ok(scheduler.view().options.workDay);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

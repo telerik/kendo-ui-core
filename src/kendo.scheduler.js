@@ -1885,6 +1885,10 @@ kendo_module({
 
             that._viewNavigateHandler = function(e) {
                 if (e.view) {
+                    if ("isWorkDay" in e) {
+                        that._workDayMode = e.isWorkDay;
+                    }
+
                     that._selectView(e.view);
                     that.date(e.date);
                 }
@@ -1981,7 +1985,7 @@ kendo_module({
                 }
 
                 if (type) {
-                    view = new type(this.wrapper, trimOptions(extend(true, {}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date() })));
+                    view = new type(this.wrapper, trimOptions(extend(true, {}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date(), workDay: this._workDayMode })));
                 } else {
                     throw new Error("There is no such view");
                 }

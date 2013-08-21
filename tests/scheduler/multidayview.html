@@ -232,6 +232,28 @@
                 ok(view.footer.hasClass("k-scheduler-footer"));
             });
 
+            test("footer is not rendered", function() {
+                var view = setup({ footer: false });
+
+                ok(!view.element.find("k-scheduler-footer").length);
+            });
+
+            test("render workday button in the footer", function() {
+                var view = setup({
+                    workDayCommand: true
+                });
+
+                ok(view.footer.find(".k-scheduler-fullday").length);
+            });
+
+            test("workday button is not rendered", function() {
+                var view = setup({
+                    workDayCommand: false
+                });
+
+                ok(!view.footer.find(".k-scheduler-fullday").length);
+            });
+
             test("display basic event", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
@@ -1670,6 +1692,48 @@
 
                 equal(view.element.find(".k-i-arrow-s").length, 0);
             });
+
+            test("workDayStart is used when rendered in work mode", function() {
+                var view = setup({
+                    workDayStart: new Date("2013/6/6 10:00"),
+                    workDay: true,
+                    dates: [new Date("2013/6/6")]
+                });
+
+                equal(view.times.find("th:first").text(), "10:00 AM");
+            });
+
+            test("workDayEnd is used when rendered in work mode", function() {
+                var view = setup({
+                    workDayEnd: new Date("2013/6/6 14:00"),
+                    workDay: true,
+                    dates: [new Date("2013/6/6")]
+                });
+
+                equal(view.times.find("tr th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "12:00 PM");
+            });
+
+            test("default workDayEnd and workDayStart are used when rendered in work mode", function() {
+                var view = setup({
+                    workDay: true,
+                    dates: [new Date("2013/6/6")]
+                });
+
+                equal(view.times.find("th:first").text(), "8:00 AM");
+                equal(view.times.find("tr th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "4:00 PM");
+            });
+
+            test("clicking workday button triggers naivgate event", 2, function() {
+                var view = setup();
+
+                view.bind("navigate",function(e) {
+                    equal(e.view, "MultiDayView");
+                    ok(e.isWorkDay);
+                });
+
+                view.footer.find(".k-scheduler-fullday").click();
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -469,6 +469,7 @@ kendo_module({
             name: "MultiDayView",
             selectedDateFormat: "{0:D}",
             allDaySlot: true,
+            workDay: false,
             title: "",
             startTime: kendo.date.today(),
             endTime: kendo.date.today(),
@@ -480,8 +481,14 @@ kendo_module({
             allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE,
             dateHeaderTemplate: DATA_HEADER_TEMPLATE,
             editable: true,
+            workDayStart: new Date(1980, 1, 1, 8, 0, 0),
+            workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
+            workDayCommand: true,
+            footer: true,
             messages: {
-                allDay: "all day"
+                allDay: "all day",
+                showFullDay: "Show full day",
+                showWorkDay: "Show business hours"
             }
         },
 
@@ -645,14 +652,28 @@ kendo_module({
         },
 
         _footer: function() {
-            var html = '<div class="k-header k-scheduler-footer">&nbsp;';
-            // '<ul class="k-reset k-header k-toolbar"> <li>aaa</li></ul>';
+            var options = this.options;
 
-            //TODO: Toolbar command
+            if (options.footer) {
+                var html = '<div class="k-header k-scheduler-footer">';
+                if (options.workDayCommand) {
+                    html += '<ul class="k-reset k-header k-toolbar">';
+                    html += '<li class="k-state-default k-scheduler-fullday"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>';
+                    html += options.workDay ? options.messages.showFullDay : options.messages.showWorkDay + '</a></li>'
+                    html += '</ul>';
+                } else {
+                    html += "&nbsp;";
+                }
+                html += "</div>";
 
-            html += "</div>";
+                this.footer = $(html).appendTo(this.element);
 
-            this.footer = $(html).appendTo(this.element);
+                var that = this;
+                this.footer.on("click" + NS, ".k-scheduler-fullday", function(e) {
+                    e.preventDefault();
+                    that.trigger("navigate", { view: that.name || options.name, date: that.startDate(), isWorkDay: !options.workDay });
+                });
+            }
         },
 
         _forTimeRange: function(min, max, action, after) {
@@ -804,11 +825,13 @@ kendo_module({
         },
 
         startTime: function() {
-            return this.options.startTime;
+            var options = this.options;
+            return options.workDay ? options.workDayStart : options.startTime;
         },
 
         endTime: function() {
-            return this.options.endTime;
+            var options = this.options;
+            return options.workDay ? options.workDayEnd : options.endTime;
         },
 
         startDate: function() {
