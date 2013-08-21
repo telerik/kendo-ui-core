@@ -122,8 +122,34 @@ kendo_module({
                     startSlot = endSlot;
                 }
 
+                var startCollectionIndex = startSlot.collectionIndex();
+                var endCollectionIndex = endSlot.collectionIndex();
+
                 startSlot = group[isLeft ? "prevSlot" : "nextSlot"](startSlot, daySlot, false, shift);
                 endSlot = group[isLeft ? "prevSlot" : "nextSlot"](endSlot, daySlot, false, shift);
+
+                siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
+
+                var startCollection, endCollection;
+
+                if (!startSlot || !endSlot) {
+                    if (siblingGroup && !shift) {
+                        selection.groupIndex += isLeft ? -1 : 1;
+                    } else {
+                        startCollectionIndex = startCollectionIndex + (isLeft ? -1 : 1);
+                        endCollectionIndex = endCollectionIndex + (isLeft ? -1 : 1);
+
+                        if (!shift) {
+                            selection.groupIndex = isLeft ? this.groups.length - 1 : 0;
+                        }
+                    }
+
+                    startCollection = group._collection(startCollectionIndex, true);
+                    endCollection = group._collection(endCollectionIndex, true);
+
+                    startSlot = startCollection ? startCollection[isLeft ? "last" : "first"]() : null;
+                    endSlot = endCollection ? endCollection[isLeft ? "last" : "first"]() : null;
+                }
 
                 handled = true;
             }

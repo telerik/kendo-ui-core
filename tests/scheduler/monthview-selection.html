@@ -411,7 +411,8 @@
                 var view = setup();
                 var selection = createSelection({
                     start: new Date(2013, 1, 2),
-                    end: new Date(2013, 1, 4)
+                    end: new Date(2013, 1, 4),
+                    isAllDay: true
                 });
 
                 view.move(selection, keys.LEFT, true);
@@ -720,7 +721,7 @@
                 deepEqual(selection.end, new Date(2013,1,2));
             });
 
-            testSkip("left key in horizontally grouped view selects previous group cell on same row", function() {
+            test("left key in horizontally grouped view selects previous group cell on same row", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -741,18 +742,19 @@
                 });
                 var selection = createSelection({
                     start: new Date(2013, 5, 2),
-                    end: new Date(2013, 5, 2),
+                    end: new Date(2013, 5, 3),
+                    isAllDay: true,
                     groupIndex: 1
                 });
 
                 scheduler.view().move(selection, keys.LEFT);
 
                 deepEqual(selection.start, new Date(2013, 5, 8));
-                deepEqual(selection.end, new Date(2013, 5, 8));
+                deepEqual(selection.end, new Date(2013, 5, 9));
                 equal(selection.groupIndex, 0);
             });
 
-            testSkip("left key in horizontally grouped view selects last group cell on previous row", function() {
+            test("left key in horizontally grouped view selects last group cell on previous row", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -773,14 +775,14 @@
                 });
                 var selection = createSelection({
                     start: new Date(2013, 5, 2),
-                    end: new Date(2013, 5, 2),
+                    end: new Date(2013, 5, 3),
                     groupIndex: 0
                 });
 
                 scheduler.view().move(selection, keys.LEFT);
 
                 deepEqual(selection.start, new Date(2013, 5, 1));
-                deepEqual(selection.end, new Date(2013, 5, 1));
+                deepEqual(selection.end, new Date(2013, 5, 2));
                 equal(selection.groupIndex, 1);
             });
 
@@ -816,7 +818,7 @@
                 equal(selection.groupIndex, 1);
             });
 
-            testSkip("right key in horizontally grouped view selects next group cell on same row", function() {
+            test("right key in horizontally grouped view selects next group cell on same row", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -837,18 +839,18 @@
                 });
                 var selection = createSelection({
                     start: new Date(2013, 5, 8),
-                    end: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 9),
                     groupIndex: 0
                 });
 
                 scheduler.view().move(selection, keys.RIGHT);
 
                 deepEqual(selection.start, new Date(2013, 5, 2));
-                deepEqual(selection.end, new Date(2013, 5, 2));
+                deepEqual(selection.end, new Date(2013, 5, 3));
                 equal(selection.groupIndex, 1);
             });
 
-            testSkip("right key in horizontally grouped view selects first group cell on next row", function() {
+            test("right key in horizontally grouped view selects first group cell on next row", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -869,14 +871,14 @@
                 });
                 var selection = createSelection({
                     start: new Date(2013, 5, 8),
-                    end: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 9),
                     groupIndex: 1
                 });
 
                 scheduler.view().move(selection, keys.RIGHT);
 
                 deepEqual(selection.start, new Date(2013, 5, 9));
-                deepEqual(selection.end, new Date(2013, 5, 9));
+                deepEqual(selection.end, new Date(2013, 5, 10));
                 equal(selection.groupIndex, 0);
             });
 
@@ -1176,7 +1178,7 @@
                 equal(selection.groupIndex, 0);
             });
 
-            testSkip("shift + right key in horizontally grouped view", function() {
+            test("shift + right key in horizontally grouped view", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -1206,12 +1208,12 @@
                 view.select(selection);
 
                 deepEqual(selection.start, new Date(2013, 5, 8));
-                deepEqual(selection.end, new Date(2013, 5, 9));
+                deepEqual(selection.end, new Date(2013, 5, 10));
                 equal(selection.groupIndex, 0);
                 equal(view.table.find(".k-state-selected").length, 2);
             });
 
-            test("shift + down key in vertically grouped view is restricted to current group", function() {
+            testSkip("shift + down key in vertically grouped view is restricted to current group", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
