@@ -417,14 +417,14 @@ kendo_module({
             return last ? collection.last() : collection.at(slot.collectionIndex());
         },
 
-        siblingCollectionSlot: function(slot, isAllDay, direction) {
+        siblingCollectionSlot: function(slot, daySlot, isAllDay, direction) {
             var collectionIndex = slot.collectionIndex();
 
             if (!isAllDay) {
                 collectionIndex += direction;
             }
 
-            var collection = this._collection(collectionIndex, isAllDay);
+            var collection = this._collection(collectionIndex, daySlot);
 
             if (collection) {
                 if (isAllDay) {
@@ -439,34 +439,46 @@ kendo_module({
             return slot;
         },
 
-        prevSlot: function(slot, timeSlot) {
-            if (slot.isAllDay) {
+        prevSlot: function(slot, daySlot, isAllDay, shift) {
+            if (isAllDay) {
                 return;
             }
 
             var collectionIndex = slot.collectionIndex();
-            var collection = this._collection(collectionIndex);
+            var collection = this._collection(collectionIndex, daySlot);
 
             slot = collection.at(slot.index - 1);
 
-            if (!slot && !timeSlot) {
-                collection = this._collection(0 /* groupIndex */, true);
-                slot = collection.at(collectionIndex);
+            if (!slot) {
+                if (daySlot && !isAllDay) {
+                    collection = this._collection(collectionIndex - 1, true);
+                    slot = collection ? collection.last() : null;
+                } else if (!shift) {
+                    collection = this._collection(0, true);
+                    slot = collection.at(collectionIndex);
+                }
             }
 
             return slot;
         },
 
-        nextSlot: function(slot, daySlot) {
-            if (slot.isAllDay && daySlot) {
+        nextSlot: function(slot, daySlot, isAllDay, shift) {
+            if (isAllDay && shift) {
                 return slot;
             }
 
-            var collectionIndex = slot.isAllDay ? slot.index : slot.collectionIndex();
-            var collection = this._collection(collectionIndex, false);
-            var index = slot.isAllDay ? 0 : slot.index + 1;
+            var collectionIndex = isAllDay ? slot.index : slot.collectionIndex();
+            var collection = this._collection(collectionIndex, isAllDay && daySlot ? false : daySlot);
+            var index = isAllDay ? 0 : slot.index + 1;
 
-            return collection.at(index);
+            slot = collection.at(index);
+
+            if (!slot && daySlot && !isAllDay) {
+                collection = this._collection(collectionIndex + 1, daySlot);
+                slot = collection ? collection.first() : null;
+            }
+
+            return slot;
         },
 
         _startSlot: function(time, collections, isAllDay) {
