@@ -27,10 +27,7 @@ file 'themebuilder/scripts/template.js' => [ 'styles/web/template.less',
 end
 
 def live_cdn_version
-    demo_html = `curl -m10 -sS http://demos.kendoui.com/beta/web/overview/index.html` if BETA
-    demo_html = `curl -m10 -sS http://demos.kendoui.com/web/overview/index.html` if !BETA || demo_html =~ /Document Moved/
-
-    /cdn\.kendostatic\.com\/(\d+\.\d+\.\d+)\//.match(demo_html)[1]
+    '2013.2.716'
 end
 
 class PatchedBoostrapScriptTask < Rake::FileTask
