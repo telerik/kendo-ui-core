@@ -59,6 +59,10 @@ $(function() {
         kendoConsole.log("resizeEnd");
     }
 
+    function scheduler_navigate(e) {
+        kendoConsole.log(kendo.format("navigate:: action:{0}; view:{1}; date:{2:d};", e.action, e.view, e.date));
+    }
+
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
         startTime: new Date("2013/6/13 7:00"),
@@ -83,6 +87,7 @@ $(function() {
         resizeStart: scheduler_resizeStart,
         resize: scheduler_resize,
         resizeEnd: scheduler_resizeEnd,
+        navigate: scheduler_navigate,
         dataSource: {
             batch: true,
             transport: {

@@ -592,6 +592,7 @@ kendo_module({
         delete options.remove;
         delete options.edit;
         delete options.add;
+        delete options.navigate;
 
         return options;
     }
@@ -909,7 +910,8 @@ kendo_module({
             "moveEnd",
             "resizeStart",
             "resize",
-            "resizeEnd"
+            "resizeEnd",
+            "navigate"
         ],
 
         destroy: function() {
@@ -1879,18 +1881,23 @@ kendo_module({
                 view.bind(EDIT, this._viewEditHandler);
             }
 
-            if (that._viewNavigateHandler) {
+           if (that._viewNavigateHandler) {
                 view.unbind("navigate", that._viewNavigateHandler);
             }
 
             that._viewNavigateHandler = function(e) {
                 if (e.view) {
-                    if ("isWorkDay" in e) {
-                        that._workDayMode = e.isWorkDay;
-                    }
+                    var switchWorkDay = "isWorkDay" in e;
+                    var action = switchWorkDay ? "changeWorkDay" : "changeView";
 
-                    that._selectView(e.view);
-                    that.date(e.date);
+                    if (!that.trigger("navigate", { view: e.view, isWorkDay: e.isWorkDay, action: action, date: e.date })) {
+                        if (switchWorkDay) {
+                            that._workDayMode = e.isWorkDay;
+                        }
+
+                        that._selectView(e.view);
+                        that.date(e.date);
+                    }
                 }
             };
 
@@ -2159,9 +2166,9 @@ kendo_module({
         },
 
         _toolbar: function() {
-            var that = this,
-                options = that.options,
-                toolbar = $(TOOLBARTEMPLATE({
+            var that = this;
+            var options = that.options;
+            var toolbar = $(TOOLBARTEMPLATE({
                     messages: options.messages,
                     ns: kendo.ns,
                     views: that.views
@@ -2173,29 +2180,39 @@ kendo_module({
             kendo.bind(that.toolbar, that._model);
 
             toolbar.on(CLICK + NS, ".k-scheduler-navigation li", function(e) {
-                var li = $(this),
-                    date = new Date(that.date());
+                var li = $(this);
+                var date = new Date(that.date());
+                var action = "";
 
                 e.preventDefault();
 
                 if (li.hasClass("k-nav-today")) {
+                    action = "today";
                     date = new Date();
                 } else if (li.hasClass("k-nav-next")) {
+                    action = "next";
                     date = that.view().nextDate();
                 } else if (li.hasClass("k-nav-prev")) {
+                    action = "previous";
                     date = that.view().previousDate();
                 } else if (li.hasClass("k-nav-current")) {
                     that._showCalendar();
                     return; // TODO: Not good - refactor
                 }
 
-                that.date(date);
-
+                if (!that.trigger("navigate", { view: that._selectedViewName, action: action, date: date })) {
+                    that.date(date);
+                }
             });
 
             toolbar.on(CLICK + NS, ".k-scheduler-views li", function(e) {
-                that.view($(this).attr(kendo.attr("name")));
                 e.preventDefault();
+
+                var name = $(this).attr(kendo.attr("name"));
+
+                if (!that.trigger("navigate", { view: name, action: "changeView", date: that.date() })) {
+                    that.view(name);
+                }
             });
 
             toolbar.find("li").hover(function(){
@@ -2218,8 +2235,11 @@ kendo_module({
                             that.calendar = new Calendar(this.element.find(".k-scheduler-calendar"),
                             {
                                 change: function() {
-                                    that.date(this.value());
-                                    that.popup.close();
+                                    var date = this.value();
+                                    if (!that.trigger("navigate", { view: that._selectedViewName, action: "changeDate", date: date })) {
+                                        that.date(date);
+                                        that.popup.close();
+                                    }
                                 }
                             });
                         }
