@@ -35,8 +35,8 @@ kendo_module({
         Selector = diagram.Selector,
         ResizingAdorner = diagram.ResizingAdorner,
         ConnectorsAdorner = diagram.ConnectorsAdorner,
-        Cursors = diagram.Cursors
-    Observable = kendo.Observable;
+        Cursors = diagram.Cursors,
+        Observable = kendo.Observable;
 
     var Connector = Class.extend({
         init: function (shape, options) {
@@ -305,10 +305,12 @@ kendo_module({
             }
         },
         getConnector: function (name) {
-            for (var i = 0; i < this.connectors.length; i++) {
-                var connector = this.connectors[i];
-                if (connector.options.name === name) {
-                    return connector;
+            var i, ctr;
+            name = name.toLocaleLowerCase();
+            for (i = 0; i < this.connectors.length; i++) {
+                ctr = this.connectors[i];
+                if (ctr.options.name.toLocaleLowerCase() === name) {
+                    return ctr;
                 }
             }
         }
@@ -619,25 +621,25 @@ kendo_module({
         },
         _mouseDown: function (e) {
             var p = this._calculatePosition(e);
-            if (e.button == 0 && this.toolService.start(p, this._meta(e))) {
+            if (e.button === 0 && this.toolService.start(p, this._meta(e))) {
                 e.preventDefault();
             }
         },
         _mouseUp: function (e) {
             var p = this._calculatePosition(e);
-            if (e.button == 0 && this.toolService.end(p, this._meta(e))) {
+            if (e.button === 0 && this.toolService.end(p, this._meta(e))) {
                 e.preventDefault();
             }
         },
         _mouseMove: function (e) {
             var p = this._calculatePosition(e);
-            if (e.button == 0 && this.toolService.move(p, this._meta(e))) {
+            if (e.button === 0 && this.toolService.move(p, this._meta(e))) {
                 e.preventDefault();
             }
         },
         _doubleClick: function (e) {
             var p = this._calculatePosition(e);
-            if (e.button == 0 && this.toolService.doubleClick(p, this._meta(e))) {
+            if (e.button === 0 && this.toolService.doubleClick(p, this._meta(e))) {
                 e.preventDefault();
             }
         },

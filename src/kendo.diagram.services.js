@@ -16,24 +16,24 @@ kendo_module({
 
 (function ($, undefined) {
     var kendo = window.kendo,
-		diagram = kendo.diagram,
-		Class = kendo.Class,
-		Group = diagram.Group,
-		TextBlock = diagram.TextBlock,
-		Rect = diagram.Rect,
-		Rectangle = diagram.Rectangle,
-		Point = diagram.Point,
+        diagram = kendo.diagram,
+        Class = kendo.Class,
+        Group = diagram.Group,
+        TextBlock = diagram.TextBlock,
+        Rect = diagram.Rect,
+        Rectangle = diagram.Rectangle,
+        Point = diagram.Point,
         Circle = diagram.Circle,
         ZOOM_RATE = 1.1,
-		deepExtend = kendo.deepExtend,
-		Cursors = {
-		    arrow: "default",
-		    grip: "pointer",
-		    cross: "pointer",
-		    add: "pointer",
-		    move: "move",
-		    select: "pointer"
-		};
+        deepExtend = kendo.deepExtend,
+        Cursors = {
+            arrow: "default",
+            grip: "pointer",
+            cross: "pointer",
+            add: "pointer",
+            move: "move",
+            select: "pointer"
+        };
 
     diagram.Cursors = Cursors;
 
@@ -201,10 +201,10 @@ kendo_module({
         init: function (toolService) {
             this.toolService = toolService;
         },
-        start: function (pos) { },
-        move: function (pos) { },
-        end: function (pos) { },
-        doubleClick: function (pos) { },
+        start: function () { },
+        move: function () { },
+        end: function () { },
+        doubleClick: function () { },
         tryActivate: function () { return false; },
         getCursor: function () { return Cursors.arrow; }
     });
@@ -396,7 +396,7 @@ kendo_module({
         end: function () {
             this.adorner.stop();
             this.adorner = undefined;
-            this.item = undefined
+            this.item = undefined;
         },
         getCursor: function () {
             return Cursors.arrow;
@@ -439,7 +439,9 @@ kendo_module({
             this._positionEditor();
         },
         _positionEditor: function () {
-            if (!this.toolService.editShape) return;
+            if (!this.toolService.editShape) {
+                return;
+            }
 
             var diagram = this.toolService.diagram;
             var editor = this.editor;
@@ -603,7 +605,9 @@ kendo_module({
             }
         },
         _finishEditShape: function () {
-            if (!this.editShape) return;
+            if (!this.editShape) {
+                return;
+            }
 
             this.editShape.content(this.editable.content());
             this.editable.visible(false);
@@ -693,18 +697,18 @@ kendo_module({
 
     var ConnectorsAdorner = Class.extend({
         init: function (shape, options) {
-            var that = this;
+            var that = this, ctr, i;
             that.shape = shape;
             that.options = deepExtend({}, that.options, options);
             that.visual = new Group();
             var length = shape.connectors.length;
             that.connectors = [];
             for (i = 0; i < length; i++) {
-                connector = new ConnectorVisual(shape.connectors[i]);
-                that.connectors.push(connector);
-                that.visual.append(connector.visual);
+                ctr = new ConnectorVisual(shape.connectors[i]);
+                that.connectors.push(ctr);
+                that.visual.append(ctr.visual);
             }
-            that.shape.bind("boundsChange", function (e) {
+            that.shape.bind("boundsChange", function () {
                 that.refresh();
             });
             that.refresh();
@@ -740,9 +744,6 @@ kendo_module({
             this._c = connector;
             this.visual = new Circle(this.options);
             this.refresh();
-        },
-        _hover: function (value) {
-            this.visual.background(value ? this.options.hoveredBackground : this.options.background);
         },
         _hover: function (value) {
             this.visual.background(value ? this.options.hoveredBackground : this.options.background);
@@ -882,16 +883,16 @@ kendo_module({
                 if (hit.x == 1 && hit.y == -1) {
                     return "ne-resize";
                 }
-                if (hit.x == 0 && hit.y == -1) {
+                if (hit.x === 0 && hit.y == -1) {
                     return "n-resize";
                 }
-                if (hit.x == 0 && hit.y == 1) {
+                if (hit.x === 0 && hit.y == 1) {
                     return "s-resize";
                 }
-                if (hit.x == 1 && hit.y == 0) {
+                if (hit.x == 1 && hit.y === 0) {
                     return "e-resize";
                 }
-                if (hit.x == -1 && hit.y == 0) {
+                if (hit.x == -1 && hit.y === 0) {
                     return "w-resize";
                 }
             }
