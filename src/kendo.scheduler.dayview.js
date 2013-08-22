@@ -1465,8 +1465,8 @@ kendo_module({
                     startSlot = endSlot;
                 }
 
-                startSlot = group[isUp ? "prevSlot" : "nextSlot"](startSlot, isAllDay, isAllDay, shift);
-                endSlot = group[isUp ? "prevSlot" : "nextSlot"](endSlot, isAllDay, isAllDay, shift);
+                startSlot = group[isUp ? "upSlot" : "downSlot"](startSlot, shift);
+                endSlot = group[isUp ? "upSlot" : "downSlot"](endSlot, shift);
 
                 direction = isUp ? -1 : 1;
                 slot = isUp ? startSlot : endSlot;
@@ -1487,8 +1487,13 @@ kendo_module({
 
                 direction = isLeft ? -1 : 1;
 
-                startSlot = group.siblingCollectionSlot(startSlot, isAllDay, isAllDay, direction);
-                endSlot = group.siblingCollectionSlot(endSlot, isAllDay, isAllDay, direction);
+                if (isLeft) {
+                    startSlot = group.leftSlot(startSlot);
+                    endSlot = group.leftSlot(endSlot);
+                } else {
+                    startSlot = group.rightSlot(startSlot);
+                    endSlot = group.rightSlot(endSlot);
+                }
 
                 slot = isLeft ? startSlot : endSlot;
                 var date = isLeft ? end : start;

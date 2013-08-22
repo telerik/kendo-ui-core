@@ -86,8 +86,7 @@ kendo_module({
             var ranges = group.ranges(selection.start, selection.end, daySlot, false);
             var startSlot = ranges[0].start;
             var endSlot = ranges[ranges.length - 1].end;
-            var vertical = this._isVerticallyGrouped();
-            var direction, slot, siblingGroup;
+            var slot, siblingGroup;
 
             if (key === keys.DOWN || key === keys.UP) {
                 var isUp = key === keys.UP;
@@ -96,19 +95,18 @@ kendo_module({
                    if (startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
                        selection.backward = isUp;
                    }
-                } else if (selection.backward) {
-                    endSlot = startSlot;
                 } else {
-                    startSlot = endSlot;
+                    if (selection.backward) {
+                        endSlot = startSlot;
+                    } else {
+                        startSlot = endSlot;
+                    }
                 }
-
-
-                direction = isUp ? -1 : 1;
 
                 var index = selection.backward ? startSlot.index : endSlot.index;
 
-                startSlot = group.siblingCollectionSlot(startSlot, daySlot, false, direction);
-                endSlot = group.siblingCollectionSlot(endSlot, daySlot, false, direction);
+                startSlot = group[isUp ? "upSlot" : "downSlot"](startSlot, daySlot, false);
+                endSlot = group[isUp ? "upSlot" : "downSlot"](endSlot, daySlot, false);
 
                 siblingGroup = isUp ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
 
@@ -143,8 +141,8 @@ kendo_module({
                 var startCollectionIndex = startSlot.collectionIndex();
                 var endCollectionIndex = endSlot.collectionIndex();
 
-                startSlot = group[isLeft ? "prevSlot" : "nextSlot"](startSlot, daySlot, false, shift);
-                endSlot = group[isLeft ? "prevSlot" : "nextSlot"](endSlot, daySlot, false, shift);
+                startSlot = group[isLeft ? "leftSlot" : "rightSlot"](startSlot);
+                endSlot = group[isLeft ? "leftSlot" : "rightSlot"](endSlot);
 
                 siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
 
