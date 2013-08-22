@@ -1,18 +1,20 @@
-@flat-main-color: #4c5356;
-@flat-second-color: #bababa;
-@flat-background: #f4f4f4;
-@flat-dark-background: #363940;
-@flat-list-background: #fcfcfc;
-@flat-button-background: rgba(0,0,0,.1);
-@flat-border-width: 1px;
-@flat-border-color: rgba(0,0,0,.1);
-@flat-border-radius: 3px;
-@flat-inline-border-radius: @flat-border-radius - 1px;
-@flat-active-color: #fff;
-@flat-active-background: #10c4b2;
-@flat-second-active-background: #da2228;
-@flat-light-shadow: rgba(255,255,255,.2);
-@flat-overlay-background: rgba(0,0,0,.4);
+@ios7-main-color: #007aff;
+@ios7-second-color: #bababa;
+@ios7-background: #fff;
+@ios7-light-background: #f7f8f8;
+@ios7-dark-background: #363940;
+@ios7-list-background: #fcfcfc;
+@ios7-button-background: rgba(0,0,0,0);
+@ios7-border-width: 1px;
+@ios7-border-color: #007aff;
+@ios7-border-radius: 3px;
+@ios7-secondary-border-radius: 5px;
+@ios7-inline-border-radius: @ios7-border-radius - 1px;
+@ios7-active-color: #fff;
+@ios7-active-background: #007aff;
+@ios7-second-active-background: #fd472b;
+@ios7-light-shadow: rgba(255,255,255,.2);
+@ios7-overlay-background: rgba(0,0,0,.4);
 
 .km-ios7
 {
@@ -31,12 +33,16 @@
     -webkit-transform: none;
 }
 
+.km-ios7 .km-navbar
+{
+    color: @ios7-main-color;
+    background: @ios7-light-background;
+}
+
 .km-ios7,
-.km-ios7 .km-navbar,
 .km-ios7 .km-content
 {
-    color: @flat-main-color;
-    background: @flat-background;
+    background: @ios7-background;
 }
 
 .km-ios7,
@@ -50,7 +56,7 @@
 
 .km-ios7 .km-navbar
 {
-    border: @flat-border-width solid @flat-border-color;
+    border: @ios7-border-width solid @ios7-border-color;
     background: rgb(244, 244, 244);
 }
 .km-native-scrolling.km-ios7 .km-navbar
@@ -60,12 +66,12 @@
 
 .km-ios7 .km-header .km-navbar
 {
-    border-width: 0 0 @flat-border-width;
+    border-width: 0 0 @ios7-border-width;
 }
 
 .km-ios7 .km-footer .km-navbar
 {
-    border-width: @flat-border-width 0 0;
+    border-width: @ios7-border-width 0 0;
 }
 
 .km-ios7 .km-toolbar,
@@ -81,9 +87,9 @@
 .km-ios7 .km-button
 {
     padding: .5em .8em;
-    background: @flat-button-background;
-    border: 1px solid @flat-border-color;
-    .border-radius(@flat-border-radius);
+    background: @ios7-button-background;
+    border: 1px solid @ios7-border-color;
+    .border-radius(@ios7-border-radius);
 }
 
 .km-ios7 .km-tabstrip .km-button
@@ -113,9 +119,9 @@
     min-width: 1.4em;
     height: 1.4em;
     line-height: 1.4em;
-    color: @flat-main-color;
-    border: 1px solid @flat-border-color;
-    background-color: @flat-background;
+    color: @ios7-main-color;
+    border: 1px solid @ios7-border-color;
+    background-color: @ios7-background;
 }
 
 .km-ios7 .km-detaildisclose
@@ -135,7 +141,7 @@
 .km-ios7 .km-detail:active,
 .km-ios7 .km-state-active .km-detail
 {
-    .box-shadow(inset 0 0 0 1000px @flat-button-background);
+    .box-shadow(inset 0 0 0 1000px @ios7-button-background);
 }
 
 .km-ios7 .km-detail .km-icon:before
@@ -153,12 +159,12 @@
 
 .km-ios7 .km-buttongroup > *:first-child
 {
-    .border-radius(@flat-border-radius 0 0 @flat-border-radius);
+    .border-radius(@ios7-border-radius 0 0 @ios7-border-radius);
 }
 
 .km-ios7 .km-buttongroup > *:last-child
 {
-    .border-radius(0 @flat-border-radius @flat-border-radius 0);
+    .border-radius(0 @ios7-border-radius @ios7-border-radius 0);
 }
 
 .km-ios7 .km-buttongroup > *.km-state-active
@@ -184,14 +190,14 @@
 .km-ios7 .km-switch-wrapper
 {
     overflow: hidden;
-    background-color: @flat-second-color;
+    background-color: @ios7-second-color;
 }
 
 .km-ios7 .km-switch-background,
 .km-ios7 .k-slider-selection
 {
     background: 4.25em 0 no-repeat currentcolor;
-    .linear-gradient-image(top, @flat-second-color, @flat-second-color);
+    .linear-gradient-image(top, @ios7-second-color, @ios7-second-color);
     margin-left: -3.4rem;
 }
 
@@ -203,7 +209,7 @@
 
 .km-ios7 .km-switch-handle
 {
-    background: @flat-background;
+    background: @ios7-background;
     width: 1.6em;
     margin: 0 4px 0 0;
     border: 1px solid rgba(0,0,0,.1);
@@ -213,8 +219,8 @@
 
 .km-ios7 .km-switch-off .km-switch-handle
 {
-    -webkit-box-shadow: 0 1px 0 1px @flat-second-color, 0 -1px 0 1px @flat-second-color;
-    box-shadow: 0 1px 0 1px @flat-second-color, 0 -1px 0 1px @flat-second-color;
+    -webkit-box-shadow: 0 1px 0 1px @ios7-second-color, 0 -1px 0 1px @ios7-second-color;
+    box-shadow: 0 1px 0 1px @ios7-second-color, 0 -1px 0 1px @ios7-second-color;
 }
 
 .km-ios7 .km-switch-label-off
@@ -241,12 +247,12 @@
 .km-ios7 .km-switch-container,
 .km-ios7 .km-switch-background
 {
-    .border-radius(@flat-border-radius + 1px);
+    .border-radius(@ios7-border-radius + 1px);
 }
 
 .km-ios7 .km-switch-handle
 {
-    .border-radius(@flat-border-radius);
+    .border-radius(@ios7-border-radius);
 }
 
 .km-ios7 .km-switch-container,
@@ -269,7 +275,7 @@
 
 .km-ios7 .k-slider-track
 {
-    background-color: @flat-second-color;
+    background-color: @ios7-second-color;
 }
 
 .km-ios7 .k-slider-selection
@@ -281,45 +287,45 @@
 
 .km-ios7 .km-list > li
 {
-    background: @flat-list-background;
-    border: @flat-border-width solid @flat-border-color;
-    border-width: 0 0 @flat-border-width 0;
-    .box-shadow(inset 0 @flat-border-width 0 @flat-light-shadow);
+    background: @ios7-list-background;
+    border: @ios7-border-width solid @ios7-border-color;
+    border-width: 0 0 @ios7-border-width 0;
+    .box-shadow(inset 0 @ios7-border-width 0 @ios7-light-shadow);
 }
 
 .km-ios7 .km-listinset > li:first-child,
 .km-ios7 .km-listgroupinset .km-list > li:first-child
 {
-    border: @flat-border-width solid @flat-border-color;
-    border-width: @flat-border-width;
-    border-color: @flat-border-color;
-    .border-radius(@flat-border-radius @flat-border-radius 0 0);
+    border: @ios7-border-width solid @ios7-border-color;
+    border-width: @ios7-border-width;
+    border-color: @ios7-border-color;
+    .border-radius(@ios7-border-radius @ios7-border-radius 0 0);
 }
 
 .km-ios7 .km-listinset > li,
 .km-ios7 .km-listgroupinset .km-list > li
 {
-    border-width: 0 @flat-border-width @flat-border-width @flat-border-width;
+    border-width: 0 @ios7-border-width @ios7-border-width @ios7-border-width;
 }
 
 .km-ios7 .km-listinset > li:last-child,
 .km-ios7 .km-listgroupinset .km-list > li:last-child
 {
-    border: @flat-border-width solid @flat-border-color;
-    border-width: 0 @flat-border-width @flat-border-width @flat-border-width;
-    .border-radius(0 0 @flat-border-radius @flat-border-radius);
+    border: @ios7-border-width solid @ios7-border-color;
+    border-width: 0 @ios7-border-width @ios7-border-width @ios7-border-width;
+    .border-radius(0 0 @ios7-border-radius @ios7-border-radius);
 }
 
 .km-ios7 .km-listinset > li:first-child:last-child,
 .km-ios7 .km-listgroupinset .km-list > li:first-child:last-child
 {
-    border-width: @flat-border-width;
-    .border-radius(@flat-border-radius);
+    border-width: @ios7-border-width;
+    .border-radius(@ios7-border-radius);
 }
 
 .km-ios7 .km-listview-link:after
 {
-    color: lighten(@flat-main-color, 30);
+    color: lighten(@ios7-main-color, 30);
     width: .66rem;
     height: .64rem;
     border-width: 0;
@@ -331,7 +337,7 @@
 .km-ios7 .km-listinset li:first-child > .km-listview-label,
 .km-ios7 .km-listgroupinset li:first-child > .km-listview-label
 {
-    .border-radius(@flat-inline-border-radius @flat-inline-border-radius 0 0);
+    .border-radius(@ios7-inline-border-radius @ios7-inline-border-radius 0 0);
 }
 
 .km-ios7 .km-listinset li:last-child > .km-listview-link,
@@ -339,7 +345,7 @@
 .km-ios7 .km-listinset li:last-child > .km-listview-label,
 .km-ios7 .km-listgroupinset li:last-child > .km-listview-label
 {
-    .border-radius(0 0 @flat-inline-border-radius @flat-inline-border-radius);
+    .border-radius(0 0 @ios7-inline-border-radius @ios7-inline-border-radius);
 }
 
 .km-ios7 .km-listinset li:first-child:last-child > .km-listview-link,
@@ -347,19 +353,19 @@
 .km-ios7 .km-listinset li:first-child:last-child > .km-listview-label,
 .km-ios7 .km-listgroupinset li:first-child:last-child > .km-listview-label
 {
-    .border-radius(@flat-inline-border-radius);
+    .border-radius(@ios7-inline-border-radius);
 }
 
 .km-ios7 .km-group-title
 {
-    background: @flat-background;
-    border: @flat-border-width solid @flat-border-color;
-    border-width: @flat-border-width 0;
+    background: @ios7-background;
+    border: @ios7-border-width solid @ios7-border-color;
+    border-width: @ios7-border-width 0;
 }
 
 .km-ios7 .km-scroll-header .km-group-title
 {
-    border-width: 0 0 @flat-border-width;
+    border-width: 0 0 @ios7-border-width;
 }
 
 .km-ios7 .km-listgroupinset .km-group-title
@@ -412,7 +418,7 @@
 
 .km-ios7 .km-pages li
 {
-    background: @flat-border-color;
+    background: @ios7-border-color;
     .border-radius(1em);
 }
 
@@ -437,7 +443,7 @@
 .km-ios7 .km-filter-wrap:before,
 .km-ios7 .km-filter-reset .km-clear
 {
-	color: @flat-main-color;
+	color: @ios7-main-color;
 }
 
 .km-ios7 .km-filter-reset .km-clear:after
@@ -447,9 +453,9 @@
 
 .km-ios7 .km-filter-wrap > input
 {
-    color: @flat-main-color;
-    .border-radius(@flat-border-radius);
-    border: 1px solid @flat-border-color;
+    color: @ios7-main-color;
+    .border-radius(@ios7-border-radius);
+    border: 1px solid @ios7-border-color;
 }
 
 .km-ios7 .km-filter-wrap > input:focus
@@ -479,7 +485,7 @@
 {
     .appearance(none);
     font-size: 1.1rem;
-    color: @flat-main-color;
+    color: @ios7-main-color;
     min-width: 6em;
     border: 0;
     padding: .4em;
@@ -494,7 +500,7 @@
 
 .km-ios7 .km-list .k-dropdown-wrap .k-input
 {
-    color: @flat-main-color;
+    color: @ios7-main-color;
 }
 
 .km-ios7 .km-list .k-dropdown
@@ -548,11 +554,6 @@
     color: #fff;
 }
 
-.km-ios7 .km-content,
-.km-ios7 .km-footer {
-    .box-shadow(-2px 0 8px rgba(0,0,0,.3));
-}
-
 /* Checkboxes and Radios */
 
 .km-ios7 .km-listview-label input[type=checkbox]
@@ -563,11 +564,11 @@
 .km-ios7 .km-listview-label input[type=radio],
 .km-ios7 .km-listview-label input[type=checkbox]
 {
-    border: 1px solid @flat-border-color;
+    border: 1px solid @ios7-border-color;
     width: 1.4em;
     height: 1.4em;
-    .border-radius(@flat-border-radius);
-    background: @flat-background;
+    .border-radius(@ios7-border-radius);
+    background: @ios7-background;
 }
 
 .km-ios7 .km-listview-label input[type=radio]
@@ -622,17 +623,17 @@
 .km-ios7 .km-actionsheet > li > a
 {
     text-decoration: none;
-    background: @flat-dark-background;
+    background: @ios7-dark-background;
     padding: .5em 0 .5em .6em;
     border: 0;
     .border-radius(0);
-    border-bottom: 1px solid @flat-light-shadow;
+    border-bottom: 1px solid @ios7-light-shadow;
     .box-sizing(border-box);
 }
 
 .km-ios7 li.km-actionsheet-cancel > a
 {
-    color: @flat-second-color;
+    color: @ios7-second-color;
 }
 
 .km-ios7 .km-popup
@@ -641,7 +642,7 @@
     top: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    background: @flat-overlay-background;
+    background: @ios7-overlay-background;
     .box-sizing(border-box);
 }
 
@@ -660,10 +661,10 @@
 .km-ios7 .km-actionsheet-wrapper,
 .km-ios7 .km-popup .k-list-container
 {
-    background: @flat-overlay-background;
+    background: @ios7-overlay-background;
     bottom: 0;
     border: 0;
-    border-top: 1px solid @flat-light-shadow;
+    border-top: 1px solid @ios7-light-shadow;
     .border-radius(0);
     .box-sizing(border-box);
 }
@@ -701,7 +702,7 @@
 .km-ios7 .km-popup.km-pane,
 .km-tablet .km-ios7 .km-actionsheet-wrapper
 {
-    background-color: @flat-dark-background;
+    background-color: @ios7-dark-background;
 }
 
 .km-ios7 .km-popup.km-pane
@@ -712,7 +713,7 @@
 .km-ios7 .km-popup.km-pane,
 .km-ios7 .km-actionsheet-wrapper.km-popup
 {
-    .border-radius(@flat-border-radius);
+    .border-radius(@ios7-border-radius);
 }
 
 .km-ios7 .km-actionsheet-wrapper.km-popup
@@ -731,9 +732,9 @@
 {
     padding: 0 5px;
     margin: -5px -5px 2px;
-    .border-radius(@flat-border-radius @flat-border-radius 0 0);
-    -webkit-border-top-left-radius: @flat-border-radius;
-    -webkit-border-top-right-radius: @flat-border-radius;
+    .border-radius(@ios7-border-radius @ios7-border-radius 0 0);
+    -webkit-border-top-left-radius: @ios7-border-radius;
+    -webkit-border-top-right-radius: @ios7-border-radius;
     -webkit-margin-collapse: separate;
 }
 
@@ -747,13 +748,13 @@
 
 .km-ios7 .km-popup-arrow:after
 {
-    border-color: @flat-dark-background transparent;
+    border-color: @ios7-dark-background transparent;
 }
 
 .km-ios7 .km-left .km-popup-arrow:after,
 .km-ios7 .km-right .km-popup-arrow:after
 {
-    border-color: transparent @flat-dark-background;
+    border-color: transparent @ios7-dark-background;
 }
 
 .km-ios7 .km-down .km-popup-arrow:before
@@ -763,7 +764,7 @@
 
 .km-ios7 .km-down .km-popup-arrow:after
 {
-    border-color: @flat-dark-background transparent;
+    border-color: @ios7-dark-background transparent;
 }
 
 .km-ios7 .km-up .km-popup-arrow:after
@@ -837,7 +838,7 @@
 {
     display: none;
     font-size: 1em;
-    color: @flat-main-color;
+    color: @ios7-main-color;
     position: absolute;
     left: -50%;
     width: 200%;
@@ -1013,7 +1014,7 @@
 .km-ios7 li.km-state-active .km-listview-label,
 .km-ios7 .km-state-active .km-listview-link:after
 {
-    color: @flat-active-color;
+    color: @ios7-active-color;
 }
 
 .km-ios7 .km-loader > *:not(h1),
@@ -1022,14 +1023,14 @@
 .km-root .km-ios7 .km-scroller-refresh span:not(.km-template),
 .km-ios7 .km-listview-label input[type=checkbox]:checked:after
 {
-    background: @flat-active-color;
+    background: @ios7-active-color;
 }
 
 .km-ios7 .km-switch-handle,
 .km-ios7 .k-slider-selection,
 .km-ios7 .km-switch-background
 {
-    color: @flat-active-background;
+    color: @ios7-active-background;
 }
 
 .km-ios7 .km-loader,
@@ -1053,16 +1054,16 @@
 .km-ios7 .km-listview-label input[type=radio]:checked,
 .km-ios7 .km-listview-label input[type=checkbox]:checked
 {
-    background: @flat-active-background;
+    background: @ios7-active-background;
 }
 
 .km-ios7 .km-filter-wrap > input:focus
 {
-    border-color: @flat-active-background;
+    border-color: @ios7-active-background;
 }
 
 .km-ios7 .km-badge,
 .km-ios7 .km-rowdelete
 {
-    background: @flat-second-active-background;
+    background: @ios7-second-active-background;
 }

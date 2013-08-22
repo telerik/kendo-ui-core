@@ -57,7 +57,11 @@ kendo_module({
         if (os.skin) {
             classes.push("km-" + os.skin);
         } else {
-            classes.push("km-" + os.name);
+            if (os.name == "ios" && os.majorVersion > 6) {
+                classes.push("km-ios7");
+            } else {
+                classes.push("km-" + os.name);
+            }
             classes.push("km-" + os.name + os.majorVersion);
             classes.push("km-" + os.majorVersion);
             classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
@@ -259,9 +263,10 @@ kendo_module({
             if (BERRYPHONEGAP) {
                 applyViewportHeight();
             }
-
-            if (ENABLE_CLIP && !this.options.useNativeScrolling) {
-                size = (window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight) + 100;
+            if (that.options.useNativeScrolling) {
+                element.parent().addClass("km-native-scrolling");
+            } else if (ENABLE_CLIP) {
+                size = (window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight) + 200;
                 $(clipTemplate({ width: size, height: size })).appendTo(HEAD);
             }
 
