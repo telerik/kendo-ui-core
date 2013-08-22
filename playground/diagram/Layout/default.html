@@ -243,6 +243,9 @@ function layout()
     {
         return;
     }
+    // if a forest there are multiple roots but we for a random graph it'd be difficult to guess
+    // the most appropriate root
+    var knownRoot = diagram.getId("0");
     switch(selected)
     {
         case "QTreeDown":
@@ -250,7 +253,8 @@ function layout()
                     {
                         TreeLayoutType    : kendo.diagram.TreeLayoutType.TreeDown,
                         horizontalSeparation: 15,
-                        verticalSeparation: 80
+                        verticalSeparation: 80,
+                        roots : [knownRoot]
                     }
             )
             break;
@@ -259,7 +263,8 @@ function layout()
                     {
                         TreeLayoutType    : kendo.diagram.TreeLayoutType.TreeUp,
                         horizontalSeparation: 15,
-                        verticalSeparation: 80
+                        verticalSeparation: 80,
+                        roots: [knownRoot]
                     }
             )
             break;
@@ -268,7 +273,8 @@ function layout()
                     {
                         TreeLayoutType    : kendo.diagram.TreeLayoutType.TreeLeft,
                         horizontalSeparation: 15,
-                        verticalSeparation: 80
+                        verticalSeparation: 80,
+                        roots: [knownRoot]
                     }
             )
             break;
@@ -277,7 +283,8 @@ function layout()
                     {
                         TreeLayoutType    : kendo.diagram.TreeLayoutType.TreeRight,
                         horizontalSeparation: 15,
-                        verticalSeparation: 80
+                        verticalSeparation: 80,
+                        roots: [knownRoot]
                     }
             )
             break;
@@ -286,7 +293,8 @@ function layout()
                     {
                         TreeLayoutType    : kendo.diagram.TreeLayoutType.MindmapHorizontal,
                         horizontalSeparation: 15,
-                        verticalSeparation: 80
+                        verticalSeparation: 80,
+                        roots: [knownRoot]
                     }
             )
             break;
@@ -295,7 +303,8 @@ function layout()
                     {
                         TreeLayoutType    : kendo.diagram.TreeLayoutType.MindmapVertical,
                         horizontalSeparation: 15,
-                        verticalSeparation: 80
+                        verticalSeparation: 80,
+                        roots: [knownRoot]
                     }
             )
             break;
@@ -304,7 +313,8 @@ function layout()
                     {
                         TreeLayoutType    : kendo.diagram.TreeLayoutType.RadialTree,
                         horizontalSeparation: 15,
-                        verticalSeparation: 80
+                        verticalSeparation: 80,
+                        roots: [knownRoot]
                     }
             )
             break;
@@ -313,7 +323,8 @@ function layout()
                     {
                         TreeLayoutType    : kendo.diagram.TreeLayoutType.TipOverTree,
                         horizontalSeparation: 15,
-                        verticalSeparation: 80
+                        verticalSeparation: 80,
+                        roots: [knownRoot]
                     }
             )
             break;
@@ -324,6 +335,7 @@ function layout()
         case  "QForce":
             diagram.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
                     {
+                        roots: [knownRoot]
                     }
             )
             break;

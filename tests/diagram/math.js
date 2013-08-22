@@ -1598,9 +1598,8 @@ testSkip('Radial layout', function()
     ok(true);
 });
 
-test('Mindmap layout', function()
+testSkip('Mindmap layout', function()
 {
-
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     diagramElement.css("width", "800");
@@ -1622,7 +1621,86 @@ test('Mindmap layout', function()
     ok(true);
     diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
         {
+            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal
+        }
+    )
+    diagram.zoom(0.5);
+    ok(true);
+});
+
+testSkip('Mindmap layout', function()
+{
+    var g = Predefined.Tree(3, 3);
+    var div = GetRoot();
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
+    diagram.canvas.native.setAttribute("height", "1000");
+    GraphUtils.createDiagramFromGraph(diagram, g, false);
+
+    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+        {
             TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical
+        }
+    )
+    diagram.zoom(0.5);
+    ok(true);
+});
+
+testSkip('Mindmap layout', function()
+{
+    var g = Predefined.Mindmap();
+    var div = GetRoot();
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
+    diagram.canvas.native.setAttribute("height", "1000");
+    GraphUtils.createDiagramFromGraph(diagram, g, false);
+
+    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+        {
+            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal
+        }
+    )
+    diagram.zoom(0.5);
+    ok(true);
+});
+
+testSkip('Mindmap layout', function()
+{
+    var div = GetRoot();
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
+    diagram.canvas.native.setAttribute("height", "1000");
+    diagram.randomDiagram(250, 3, true);
+    var root = diagram.getId("0");
+    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+        {
+            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
+            verticalSeparation: 2,
+            horizontalSeparation: 150,
+            roots         : [root]
+        }
+    )
+    diagram.zoom(0.5);
+    ok(true);
+});
+
+test('Tip-over tree layout', function()
+{
+    var div = GetRoot();
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
+    diagram.canvas.native.setAttribute("height", "1000");
+    diagram.randomDiagram(50, 3, true);
+
+    var root = diagram.getId("0");
+    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+        {
+            TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree,
+            verticalSeparation: 25,
+            horizontalSeparation:10,
+            underneathHorizontalOffset: 10,
+            underneathVerticalTopOffset: 10,
+            roots         : [root]
         }
     )
     diagram.zoom(0.5);

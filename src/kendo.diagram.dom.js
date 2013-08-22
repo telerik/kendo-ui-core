@@ -759,6 +759,18 @@ kendo_module({
         randomDiagram: function (shapeCount, maxIncidence, isTree) {
             var g = kendo.diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
             kendo.diagram.Graph.Utils.createDiagramFromGraph(this, g, false);
+        },
+
+
+        /**
+         * Gets a shape on the basis of its identifier.
+         * @param id (string) the identifier of a shape.
+         * @returns {Shape}
+         */
+        getId: function (id) {
+            return this.shapes.first(function (s) {
+                return s.shapeVisual.native.id == id;
+            })
         }
 
     });
