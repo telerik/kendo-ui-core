@@ -5,7 +5,38 @@ require_once '../../lib/Kendo/Autoload.php';
 
 ?>
 
-<div class="demo-section" style="float: left">
+<div class="configuration-horizontal">
+    <div class="config-section">
+    <span class="configHead">Values</span>
+    <ul class="options">
+        <li>
+            <input id="value" value="#ff0000"  class="k-textbox" style="width: 100px; margin: 0;" />
+            <button id="set" class="k-button">Set value</button>
+        </li>
+        <li><button id="get" class="k-button">Get value</button></li>
+    </ul>
+    </div>
+    <div class="config-section">
+    <span class="configHead">Enable/Disable</span>
+    <ul class="options">
+        <li>
+            <button id="enable" class="k-button">Enable</button> 
+            <button id="disable" class="k-button">Disable</button>
+        </li>
+    </ul>
+    </div>
+    <div class="config-section">
+    <span class="configHead">Open/Close</span>
+    <ul class="options">
+        <li>
+            <button id="open" class="k-button">Open</button> 
+            <button id="close" class="k-button">Close</button>
+        </li>
+    </ul>
+    </div>
+</div>
+
+<div class="demo-section">
     <label for="colorpicker">ColorPicker:</label>
 <?php
     $colorPicker = new \Kendo\UI\ColorPicker('colorpicker');
@@ -16,25 +47,6 @@ require_once '../../lib/Kendo/Autoload.php';
 
     echo $colorPicker->render();
 ?>
-</div>
-
-<div class="configuration k-widget k-header" style="width: 220px">
-    <span class="configHead">API Functions</span>
-    <ul class="options">
-        <li><button id="get" class="k-button">Get value</button></li>
-        <li>
-            <input id="value" value="#ff0000" style="float: none; width: 6em" />
-            <button id="set" class="k-button">Set value</button>
-        </li>
-        <li>
-            <button id="enable" class="k-button">Enable</button> or
-            <button id="disable" class="k-button">Disable</button>
-        </li>
-        <li>
-            <button id="open" class="k-button">Open</button> or
-            <button id="close" class="k-button">Close</button> the color picker
-        </li>
-    </ul>
 </div>
 
 <script>
@@ -75,13 +87,16 @@ require_once '../../lib/Kendo/Autoload.php';
 
 <style scoped>
     .demo-section {
+        width: 660px;
         padding: 30px;
+        text-align: center;
     }
-
-    .demo-section label {
-        padding-right: 5px;
+    .k-button {
+        min-width: 80px;
     }
-
+    .configuration-horizontal .options li {
+        padding: 3px 0;
+    }
 </style>
 
 <?php require_once '../../include/footer.php'; ?>
