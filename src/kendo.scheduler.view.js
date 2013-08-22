@@ -471,38 +471,20 @@ kendo_module({
             return slot;
         },
 
-        _startSlot: function(time, collections, isAllDay) {
-            var collection = this._startCollection(time, collections);
+        firstSlot: function(daySlot) {
+            var collections = daySlot ? this._daySlotCollections : this._timeSlotCollections;
 
-            var slot = collection.slotByStartDate(date, isAllDay);
-
-            if (!slot) {
-                slot = collection.first();
-                inRange = false;
-            }
-
-            return {
-                slot: slot,
-                inRange: inRange
-            };
+            return collections[0].first();
         },
 
-        _endDaySlot: function(date, isAllDay) {
-            var collection = this._endCollection(date, this._daySlotCollections);
+        lastSlot: function(daySlot) {
+            var collections = daySlot ? this._daySlotCollections : this._timeSlotCollections;
 
-            var inRange = true;
+            return collections[collections.length - 1].last();
+        },
 
-            if (!collection) {
-                collection = collections[0];
-                inRange = false;
-            }
-
-            var slot = collection.slotByStartDate(time, isAllDay);
-
-            if (!slot) {
-                slot = collection.first();
-                inRange = false;
-            }
+        _collection: function(index, multiday) {
+            var collections = multiday? this._daySlotCollections : this._timeSlotCollections;
 
             return collections[index];
         },

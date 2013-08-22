@@ -105,8 +105,26 @@ kendo_module({
 
                 direction = isUp ? -1 : 1;
 
+                var index = selection.backward ? startSlot.index : endSlot.index;
+
                 startSlot = group.siblingCollectionSlot(startSlot, daySlot, false, direction);
                 endSlot = group.siblingCollectionSlot(endSlot, daySlot, false, direction);
+
+                siblingGroup = isUp ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
+
+                if (!startSlot || !endSlot) {
+                    if (siblingGroup && !shift && this._isVerticallyGrouped()) {
+                        selection.groupIndex += isUp ? -1 : 1;
+
+                        var collectionIndex = isUp ? group.lastSlot(true).collectionIndex() : 0;
+
+                        startCollection = group._collection(collectionIndex, true);
+                        endCollection = group._collection(collectionIndex, true);
+
+                        startSlot = startCollection.at(index);
+                        endSlot = endCollection.at(index);
+                    }
+                }
 
                 handled = true;
             } else if (key === keys.LEFT || key === keys.RIGHT) {
@@ -133,13 +151,13 @@ kendo_module({
                 var startCollection, endCollection;
 
                 if (!startSlot || !endSlot) {
-                    if (siblingGroup && !shift) {
+                    if (siblingGroup && !shift && !this._isVerticallyGrouped()) {
                         selection.groupIndex += isLeft ? -1 : 1;
                     } else {
                         startCollectionIndex = startCollectionIndex + (isLeft ? -1 : 1);
                         endCollectionIndex = endCollectionIndex + (isLeft ? -1 : 1);
 
-                        if (!shift) {
+                        if (!shift && !this._isVerticallyGrouped()) {
                             selection.groupIndex = isLeft ? this.groups.length - 1 : 0;
                         }
                     }
@@ -149,6 +167,12 @@ kendo_module({
 
                     startSlot = startCollection ? startCollection[isLeft ? "last" : "first"]() : null;
                     endSlot = endCollection ? endCollection[isLeft ? "last" : "first"]() : null;
+
+                    siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
+                    if (siblingGroup && !shift && this._isVerticallyGrouped() && (!startSlot || !endSlot)) {
+                        selection.groupIndex += isLeft ? -1 : 1;
+                        startSlot = endSlot = group[isLeft ? "lastSlot" : "firstSlot"](true);
+                    }
                 }
 
                 handled = true;
