@@ -659,7 +659,7 @@ kendo_module({
                 if (options.workDayCommand) {
                     html += '<ul class="k-reset k-header k-toolbar">';
                     html += '<li class="k-state-default k-scheduler-fullday"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>';
-                    html += options.workDay ? options.messages.showFullDay : options.messages.showWorkDay + '</a></li>'
+                    html += options.workDay ? options.messages.showFullDay : options.messages.showWorkDay + '</a></li>';
                     html += '</ul>';
                 } else {
                     html += "&nbsp;";
