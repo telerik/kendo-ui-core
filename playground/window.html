@@ -13,30 +13,24 @@
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
         <script src="../src/kendo.window.js"></script>
-        <link type="text/css" href="../styles/web/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
-        <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+        <link href="../styles/web/kendo.common.css" rel="stylesheet"/>
+        <link href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
-        <div id="cont">
-            <div id="win1" data-role="window" title="win1" data-modal="true" data-title="modal1">
-                <button data-bind="click: onClick">Click me to close this and open another modal dialog</button>
-            </div>
+        <div id="dialog">
+            <input /><br />
+            <textarea></textarea>
         </div>
+
+        <button>Open</button>
 
         <script>
             $(document).ready(function(){
-                kendo.bind($("#cont"), {
-                    onClick: function() {
-                        var dlg = $("<div><b>I should be modal, but am not<br/>Notice the modal layer fading out when you close me.</b></div>").kendoWindow({
-                        title: "Modal 2",
-                        modal: true
-                    }).data("kendoWindow");
-                    $("#win1").data("kendoWindow").close();
-                    dlg.open();
-                }
+                $("#dialog").kendoWindow();
+                
+                $("button").click(function() { $("#dialog").kendoWindow("open"); });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
