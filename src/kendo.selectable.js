@@ -229,7 +229,7 @@ kendo_module({
         },
 
         _select: function(e) {
-            if ($(e.event.target).is("input,a,textarea")) {
+            if ($(e.event.target).is("input,a,textarea,.k-multiselect-wrap")) {
                 this.userEvents.cancel();
                 this._downTarget = null;
             } else {
