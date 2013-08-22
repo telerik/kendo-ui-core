@@ -11,6 +11,9 @@
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
         <script src="../../src/kendo.groupable.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.validator.js"></script>
@@ -311,6 +314,29 @@
                 grid.cancelRow(tr);
 
                 ok(!table.find("tr:first").data("kendoEditable"));
+            });
+
+            test("cancelRow destroyes kendo widgets inside the editable form", function() {
+                var grid = setup(
+                    {
+                        columns: [
+                            {
+                                field: "foo",
+                                editor: function(container, model) {
+                                    $("<input />").appendTo(container).kendoDatePicker();
+                                }
+                            },
+                            "name"
+                        ],
+                        editable: "inline"
+                    }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                grid.cancelRow(tr);
+
+                ok(!table.find("tr:first").data("kendoEditable"));
+                equal($(".k-popup").length, 0);
             });
 
             test("cancelRow remove the css class from the edited row", function() {

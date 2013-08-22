@@ -1536,6 +1536,8 @@ kendo_module({
             if (container) {
                 model = that._modelForContainer(container);
 
+                that._destroyEditable();
+
                 that.dataSource.cancelChanges(model);
 
                 if (that._editMode() !== "popup") {
@@ -1543,8 +1545,6 @@ kendo_module({
                 } else {
                     that._displayRow(that.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]"));
                 }
-
-                that._destroyEditable();
             }
         },
 
