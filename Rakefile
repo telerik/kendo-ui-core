@@ -599,9 +599,7 @@ namespace :build do
             # sh "curl -s -m 300 --netrc \"http://localhost:8081/manager/text/reload?path=/staging-java\""
             sh "rsync -avc --del dist/demos/staging-php/ #{WEB_ROOT}/staging-php/"
 
-            sh "iisreset /stop"
             sh "rsync -avc --del dist/demos/staging-mvc/ /mnt/kendo-iis/staging-mvc/"
-            sh "iisreset /start"
         end
 
         desc 'Package and publish bundles to the Stable directory'
