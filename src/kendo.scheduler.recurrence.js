@@ -1190,13 +1190,17 @@ kendo_module({
             length = shortNames.length,
             result = "",
             idx = 0,
-            shortName;
-
-        shortNames = shortNames.slice(firstDay).concat(shortNames.slice(0, firstDay));
+            values = [];
 
         for (; idx < length; idx++) {
-            shortName = shortNames[idx];
-            result += '<label><input class="k-recur-weekday-checkbox" type="checkbox" value="' + WEEK_DAYS_IDX[shortName.toUpperCase()] + '" /> ' + shortName + "</label>";
+            values.push(idx);
+        }
+
+        shortNames = shortNames.slice(firstDay).concat(shortNames.slice(0, firstDay));
+        values = values.slice(firstDay).concat(values.slice(0, firstDay));
+
+        for (idx = 0; idx < length; idx++) {
+            result += '<label><input class="k-recur-weekday-checkbox" type="checkbox" value="' + values[idx] + '" /> ' + shortNames[idx] + "</label>";
         }
 
         return result;
