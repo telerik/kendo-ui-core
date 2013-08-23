@@ -95,7 +95,9 @@ var InsertHtmlCommand = Command.extend({
         editor.selectRange(range);
 
         editor.clipboard.paste(html, options);
-        editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
+        var genericCommand = new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange()));
+        genericCommand.editor = editor;
+        editor.undoRedoStack.push(genericCommand);
 
         editor.focus();
     }
@@ -186,7 +188,10 @@ var TypingHandler = Class.extend({
 
             keyboard.startTyping(function () {
                 editor.selectionRestorePoint = that.endRestorePoint = new RestorePoint(editor.getRange());
-                editor.undoRedoStack.push(new GenericCommand(that.startRestorePoint, that.endRestorePoint));
+                var genericCommand = new GenericCommand(that.startRestorePoint, that.endRestorePoint);
+                genericCommand.editor = editor;
+
+                editor.undoRedoStack.push(genericCommand);
             });
 
             return true;
@@ -219,7 +224,9 @@ var SystemHandler = Class.extend({
         var that = this;
 
         that.endRestorePoint = new RestorePoint(that.editor.getRange());
-        that.editor.undoRedoStack.push(new GenericCommand(that.startRestorePoint, that.endRestorePoint));
+        var command = new GenericCommand(that.startRestorePoint, that.endRestorePoint);
+        command.editor = that.editor;
+        that.editor.undoRedoStack.push(command);
         that.startRestorePoint = that.endRestorePoint;
     },
 
@@ -393,70 +400,85 @@ var Clipboard = Class.extend({
         return (/<(div|p|ul|ol|table|h[1-6])/i).test(html);
     },
 
-    oncut: function() {
-        var editor = this.editor,
-            startRestorePoint = new RestorePoint(editor.getRange());
-        setTimeout(function() {
-            editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
-        });
-    },
-
-    onpaste: function(e) {
-        var editor = this.editor,
-            range = editor.getRange(),
-            bom = "\ufeff",
-            startRestorePoint = new RestorePoint(range),
-            clipboardNode = dom.create(editor.document, 'div', {className:'k-paste-container', innerHTML: bom });
+    _contentModification: function(before, after) {
+        var editor = this.editor;
+        var range = editor.getRange();
+        var startRestorePoint = new RestorePoint(range);
 
         dom.persistScrollTop(editor.document);
 
-        editor.body.appendChild(clipboardNode);
-
-        if (editor.body.createTextRange) {
-            e.preventDefault();
-            var r = editor.createRange();
-            r.selectNodeContents(clipboardNode);
-            editor.selectRange(r);
-            var textRange = editor.body.createTextRange();
-            textRange.moveToElementText(clipboardNode);
-            $(editor.body).unbind('paste');
-            textRange.execCommand('Paste');
-            $(editor.body).bind('paste', $.proxy(arguments.callee, this));
-        } else {
-            var clipboardRange = editor.createRange();
-            clipboardRange.selectNodeContents(clipboardNode);
-            editor.selectRange(clipboardRange);
-        }
-
-        range.deleteContents();
+        before.call(this, editor, range);
 
         setTimeout(function() {
-            var html = "", args = { html: "" }, containers;
+            after.call(this, editor, range);
 
-            editor.selectRange(range);
-
-            containers = $(editor.body).children(".k-paste-container");
-
-            containers.each(function() {
-                if (this.lastChild && dom.is(this.lastChild, 'br')) {
-                    dom.remove(this.lastChild);
-                }
-
-                html += this.innerHTML;
-            });
-
-            containers.remove();
-
-            html = html.replace(/\ufeff/g, "");
-
-            args.html = html;
-
-            editor.trigger("paste", args);
-            editor.clipboard.paste(args.html, { clean: true });
-            editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
-
+            var endRestorePoint = new RestorePoint(editor.getRange());
+            var genericCommand = new GenericCommand(startRestorePoint, endRestorePoint);
+            genericCommand.editor = editor;
+            editor.undoRedoStack.push(genericCommand);
             editor._selectionChange();
         });
+    },
+
+    oncut: function() {
+        this._contentModification($.noop, $.noop);
+    },
+
+    onpaste: function(e) {
+        this._contentModification(
+            function beforePaste(editor, range) {
+                var clipboardNode = dom.create(editor.document, 'div', {
+                        className:'k-paste-container',
+                        innerHTML: "\ufeff"
+                    });
+
+                editor.body.appendChild(clipboardNode);
+
+                if (editor.body.createTextRange) {
+                    e.preventDefault();
+                    var r = editor.createRange();
+                    r.selectNodeContents(clipboardNode);
+                    editor.selectRange(r);
+                    var textRange = editor.body.createTextRange();
+                    textRange.moveToElementText(clipboardNode);
+                    $(editor.body).unbind('paste');
+                    textRange.execCommand('Paste');
+                    $(editor.body).bind('paste', $.proxy(this.onpaste, this));
+                } else {
+                    var clipboardRange = editor.createRange();
+                    clipboardRange.selectNodeContents(clipboardNode);
+                    editor.selectRange(clipboardRange);
+                }
+
+                range.deleteContents();
+            },
+            function afterPaste(editor, range) {
+                var html = "", args = { html: "" }, containers;
+
+                editor.selectRange(range);
+
+                containers = $(editor.body).children(".k-paste-container");
+
+                containers.each(function() {
+                    var lastChild = this.lastChild;
+
+                    if (lastChild && dom.is(lastChild, 'br')) {
+                        dom.remove(lastChild);
+                    }
+
+                    html += this.innerHTML;
+                });
+
+                containers.remove();
+
+                html = html.replace(/\ufeff/g, "");
+
+                args.html = html;
+
+                editor.trigger("paste", args);
+                editor.clipboard.paste(args.html, { clean: true });
+            }
+        );
     },
 
     splittableParent: function(block, node) {
