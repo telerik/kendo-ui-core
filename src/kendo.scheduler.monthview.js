@@ -86,6 +86,7 @@ kendo_module({
             var ranges = group.ranges(selection.start, selection.end, daySlot, false);
             var startSlot = ranges[0].start;
             var endSlot = ranges[ranges.length - 1].end;
+            var vertical = this._isVerticallyGrouped();
             var slot, siblingGroup;
 
             if (key === keys.DOWN || key === keys.UP) {
@@ -108,19 +109,15 @@ kendo_module({
                 startSlot = group[isUp ? "upSlot" : "downSlot"](startSlot, daySlot, false);
                 endSlot = group[isUp ? "upSlot" : "downSlot"](endSlot, daySlot, false);
 
-                siblingGroup = isUp ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
+                if (!shift && (!startSlot || !endSlot)) {
+                    if (isUp) {
+                        startSlot = endSlot = this.prevGroupSlot(start, selection.groupIndex, daySlot);
+                    } else {
+                        startSlot = endSlot = this.nextGroupSlot(start, selection.groupIndex, daySlot);
+                    }
 
-                if (!startSlot || !endSlot) {
-                    if (siblingGroup && !shift && this._isVerticallyGrouped()) {
-                        selection.groupIndex += isUp ? -1 : 1;
-
-                        var collectionIndex = isUp ? group.lastSlot(true).collectionIndex() : 0;
-
-                        startCollection = group._collection(collectionIndex, true);
-                        endCollection = group._collection(collectionIndex, true);
-
-                        startSlot = startCollection.at(index);
-                        endSlot = endCollection.at(index);
+                    if (startSlot) {
+                        selection.groupIndex += (isUp ? -1 : 1);
                     }
                 }
 
@@ -138,38 +135,46 @@ kendo_module({
                     startSlot = endSlot;
                 }
 
-                var startCollectionIndex = startSlot.collectionIndex();
-                var endCollectionIndex = endSlot.collectionIndex();
-
                 startSlot = group[isLeft ? "leftSlot" : "rightSlot"](startSlot);
                 endSlot = group[isLeft ? "leftSlot" : "rightSlot"](endSlot);
 
-                siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
-
-                var startCollection, endCollection;
-
                 if (!startSlot || !endSlot) {
-                    if (siblingGroup && !shift && !this._isVerticallyGrouped()) {
-                        selection.groupIndex += isLeft ? -1 : 1;
-                    } else {
-                        startCollectionIndex = startCollectionIndex + (isLeft ? -1 : 1);
-                        endCollectionIndex = endCollectionIndex + (isLeft ? -1 : 1);
+                    if (!vertical && !shift) {
+                        if (isLeft) {
+                            startSlot = endSlot = this.prevGroupSlot(start, selection.groupIndex, daySlot);
+                        } else {
+                            startSlot = endSlot = this.nextGroupSlot(start, selection.groupIndex, daySlot);
+                        }
 
-                        if (!shift && !this._isVerticallyGrouped()) {
-                            selection.groupIndex = isLeft ? this.groups.length - 1 : 0;
+                        if (startSlot) {
+                            selection.groupIndex += (isLeft ? -1 : 1);
                         }
                     }
 
-                    startCollection = group._collection(startCollectionIndex, true);
-                    endCollection = group._collection(endCollectionIndex, true);
+                    if (!startSlot || !endSlot) {
+                        var index = selection.backward ? 0 : ranges.length - 1;
 
-                    startSlot = startCollection ? startCollection[isLeft ? "last" : "first"]() : null;
-                    endSlot = endCollection ? endCollection[isLeft ? "last" : "first"]() : null;
+                        if (isLeft) {
+                            startSlot = endSlot = group.previousDaySlot(ranges[index].start);
+                        } else {
+                            startSlot = endSlot = group.nextDaySlot(ranges[index].end);
+                        }
 
-                    siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
-                    if (siblingGroup && !shift && this._isVerticallyGrouped() && (!startSlot || !endSlot)) {
-                        selection.groupIndex += isLeft ? -1 : 1;
-                        startSlot = endSlot = group[isLeft ? "lastSlot" : "firstSlot"](true);
+                        if (!vertical) {
+                           if (startSlot && !shift) {
+                               selection.groupIndex = isLeft ? this.groups.length - 1 : 0;
+                           }
+                        } else {
+                            if (!startSlot && !shift) {
+                                if (isLeft) {
+                                    startSlot = endSlot = group.lastSlot();
+                                    selection.groupIndex -= 1;
+                                } else {
+                                    startSlot = endSlot = group.firstSlot();
+                                    selection.groupIndex += 1;
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -194,74 +199,6 @@ kendo_module({
 
             return handled;
         },
-
-        /*move: function(selection, key, keep) {
-            var handled = false,
-                date = selection.end,
-                isInRange = true,
-                result = {
-                    date: date,
-                    groupIndex: selection.groupIndex || 0
-                },
-                isGrouped = !keep && this.groupedResources.length,
-                isVertical = this._isVerticallyGrouped(),
-                groupCount = this._groupCount(),
-                slotIndex = this._slotIndex(date);
-
-            if (key == keys.LEFT) {
-                if (!isGrouped) {
-                    result.date = kendo.date.addDays(date, -1);
-                } else if (!isVertical) {
-                    result = moveLeftInHorizontalGroup(slotIndex, selection.groupIndex, groupCount, date);
-                } else {
-                    result = moveLeftInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
-                }
-
-                handled = true;
-            } else if (key == keys.RIGHT) {
-                if (!isGrouped) {
-                    result.date = kendo.date.addDays(date, 1);
-                } else if (!isVertical) {
-                    result = moveRightInHorizontalGroup(slotIndex, selection.groupIndex, groupCount, date);
-                } else {
-                    result = moveRightInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
-                }
-
-                handled = true;
-            } else if (key == keys.DOWN) {
-                if (isGrouped && isVertical) {
-                    result = moveDownInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
-                } else {
-                    result.date = kendo.date.addDays(date, 7);
-                }
-
-                handled = true;
-            } else if (key == keys.UP) {
-                if (isGrouped && isVertical) {
-                    result = moveUpInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
-                } else {
-                    result.date = kendo.date.addDays(date, -7);
-                }
-
-                handled = true;
-            }
-
-            date = result.date;
-            if (keep) {
-                isInRange = this._isInDateSlot({start: date, end: date });
-            }
-
-            if (handled && isInRange) {
-                if (!keep) {
-                    selection.start = date;
-                }
-                selection.groupIndex = result.groupIndex;
-                selection.end = date;
-                selection.events = [];
-            }
-
-            return handled;
-        },*/
 
         moveSelectionToPeriod: function(selection) {
             var date = new Date(selection.start);

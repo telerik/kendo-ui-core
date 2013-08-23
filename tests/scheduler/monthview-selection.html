@@ -51,6 +51,28 @@
                 return new MonthView(container, $.extend(true, { eventHeight: 10, date: new Date(2013, 1, 2) }, options));
             }
 
+            function setupGroupedScheduler(orientation) {
+                return new kendo.ui.Scheduler(container, {
+                    date: new Date(2013, 5, 6),
+                    group: {
+                        resources: [ "ResourceName" ],
+                        orientation: orientation || "vertical"
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+            }
+
             function testSkip() {
                QUnit.test(arguments[0] + ' (SKIPPED)', 0, function() {
                    var li = document.getElementById(QUnit.config.current.id);
@@ -432,6 +454,19 @@
 
                 deepEqual(selection.start, new Date(2013,1,2));
                 deepEqual(selection.end, new Date(2013,1,10));
+            });
+
+            testSkip("view move: up key with shift move end selection to previous week same day (multiple selection)", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013,1,12),
+                    end: new Date(2013,1,14)
+                });
+
+                view.move(selection, keys.UP, true);
+
+                deepEqual(selection.start, new Date(2013,1,6));
+                deepEqual(selection.end, new Date(2013,1,13));
             });
 
             test("view move: down key with shift move end selection to next week same day", function() {
@@ -936,7 +971,7 @@
                 });
                 var selection = createSelection({
                     start: new Date(2013, 4, 26),
-                    end: new Date(2013, 4, 26),
+                    end: new Date(2013, 4, 27),
                     groupIndex: 1
                 });
 
@@ -1212,6 +1247,111 @@
                 equal(selection.groupIndex, 0);
                 equal(view.table.find(".k-state-selected").length, 2);
             });
+
+            test("shift + right key in horizontally grouped view does not change groupIndex", function() {
+                var scheduler = setupGroupedScheduler();
+                var selection = createSelection({
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 8),
+                    groupIndex: 1
+                });
+
+                var view = scheduler.view();
+                view.move(selection, keys.RIGHT, true);
+                view.select(selection);
+
+                deepEqual(selection.start, new Date(2013, 5, 8));
+                deepEqual(selection.end, new Date(2013, 5, 10));
+                equal(selection.groupIndex, 1);
+                equal(view.table.find(".k-state-selected").length, 2);
+            });
+
+            test("shift + right key in horizontally grouped view selects more then 2 rows", function() {
+                var scheduler = setupGroupedScheduler();
+                var selection = createSelection({
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 16),
+                    groupIndex: 0
+                });
+
+                var view = scheduler.view();
+                view.move(selection, keys.RIGHT, true);
+                view.select(selection);
+
+                deepEqual(selection.start, new Date(2013, 5, 8));
+                deepEqual(selection.end, new Date(2013, 5, 17));
+                equal(selection.groupIndex, 0);
+            });
+
+            test("shift + left key in horizontally grouped view selects more then 2 rows", function() {
+                var scheduler = setupGroupedScheduler();
+                var selection = createSelection({
+                    start: new Date(2013, 5, 2),
+                    end: new Date(2013, 5, 16),
+                    groupIndex: 0,
+                    backward: true
+                });
+
+                var view = scheduler.view();
+                view.move(selection, keys.LEFT, true);
+                view.select(selection);
+
+                deepEqual(selection.start, new Date(2013, 5, 1));
+                deepEqual(selection.end, new Date(2013, 5, 16));
+                equal(selection.groupIndex, 0);
+            });
+
+            test("multiple selected slots does not change group shift + right", function() {
+                var scheduler = setupGroupedScheduler();
+                var selection = createSelection({
+                    start: new Date(2013, 6, 5),
+                    end: new Date(2013, 6, 7),
+                    groupIndex: 0
+                });
+
+                var view = scheduler.view();
+                view.move(selection, keys.RIGHT, true);
+                view.select(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 5));
+                deepEqual(selection.end, new Date(2013, 6, 7));
+                equal(selection.groupIndex, 0);
+            });
+
+            test("shift + left key in horizontally grouped view does not change groupIndex", function() {
+                var scheduler = new kendo.ui.Scheduler(container, {
+                    date: new Date(2013, 5, 6),
+                    group: {
+                        resources: [ "ResourceName" ]
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["month"]
+                });
+                var selection = createSelection({
+                    start: new Date(2013, 5, 8),
+                    end: new Date(2013, 5, 9),
+                    groupIndex: 1
+                });
+
+                var view = scheduler.view();
+                view.move(selection, keys.LEFT, true);
+                view.select(selection);
+
+                deepEqual(selection.start, new Date(2013, 5, 7));
+                deepEqual(selection.end, new Date(2013, 5, 9));
+                equal(selection.groupIndex, 1);
+            });
+
 
             test("shift + down key in vertically grouped view is restricted to current group", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {

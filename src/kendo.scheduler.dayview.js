@@ -1468,13 +1468,16 @@ kendo_module({
                 startSlot = group[isUp ? "upSlot" : "downSlot"](startSlot, shift);
                 endSlot = group[isUp ? "upSlot" : "downSlot"](endSlot, shift);
 
-                direction = isUp ? -1 : 1;
-                slot = isUp ? startSlot : endSlot;
-                siblingGroup = isUp ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
+                if (!shift && vertical && (!startSlot || !endSlot)) {
+                    if (isUp) {
+                        startSlot = endSlot = this.prevGroupSlot(start, selection.groupIndex, isAllDay);
+                    } else {
+                        startSlot = endSlot = this.nextGroupSlot(start, selection.groupIndex, isAllDay);
+                    }
 
-                if (!shift && !slot && vertical && siblingGroup) {
-                    startSlot = endSlot = group.verticalSlot(start, isUp);
-                    selection.groupIndex += direction;
+                    if (startSlot) {
+                        selection.groupIndex += (isUp ? -1 : 1);
+                    }
                 }
 
                 handled = true;
@@ -1495,18 +1498,17 @@ kendo_module({
                     endSlot = group.rightSlot(endSlot);
                 }
 
-                slot = isLeft ? startSlot : endSlot;
-                var date = isLeft ? end : start;
+                if (!shift && (!startSlot || !endSlot)) {
+                    if (!vertical) {
+                        if (isLeft) {
+                            startSlot = endSlot = this.prevGroupSlot(start, selection.groupIndex, isAllDay);
+                        } else {
+                            startSlot = endSlot = this.nextGroupSlot(start, selection.groupIndex, isAllDay);
+                        }
 
-                if (!shift && !slot && !vertical) {
-                    siblingGroup = isLeft ? selection.groupIndex >= 1 : selection.groupIndex < this.groups.length - 1;
-
-                    if (siblingGroup) {
-                        startSlot = endSlot = group.horizontalSlot(start, isAllDay, isLeft);
-                        selection.groupIndex += direction;
-                    } else {
-                        startSlot = endSlot = null;
-                        selection.groupIndex = isLeft ? this.groups.length - 1 : 0;
+                        if (startSlot) {
+                            selection.groupIndex += (isLeft ? -1 : 1);
+                        }
                     }
                 }
 

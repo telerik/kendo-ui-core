@@ -384,39 +384,6 @@ kendo_module({
             return null;
         },
 
-        horizontalSlot: function(date, isDay, last) {
-            var collection;
-            var slot = this.ranges(date, date, isDay, false)[0].start;
-
-            if (last) {
-                collection = isDay ? this._daySlotCollections : this._timeSlotCollections;
-
-                collection = collection[collection.length - 1];
-            } else {
-                collection = this._collection(isDay ? slot.collectionIndex() : 0, isDay);
-            }
-
-
-            if (isDay) {
-                return collection[last ? "last" : "first"]();
-            } else {
-                return collection.at(slot.index);
-            }
-        },
-
-        verticalSlot: function(date, last) {
-            var collection;
-            var slot = this.ranges(date, date, false, true)[0].start;
-
-            if (last) {
-                collection = this._collection(slot.collectionIndex(), false);
-            } else {
-                collection = this._collection(0, true);
-            }
-
-            return last ? collection.last() : collection.at(slot.collectionIndex());
-        },
-
         upSlot: function(slot, keep) {
             var that = this;
             var moveToDaySlot = function(isAllDay, collectionIndex, index) {
@@ -492,40 +459,28 @@ kendo_module({
             return isDay ? this._daySlotCollections : this._timeSlotCollections;
         },
 
-        /*lastFromSlot: function(slot) {
-            var collections;
-            var collectionIndex = slot.collectionIndex();
+        previousDaySlot: function(slot) {
+            var collections = this._getCollections(true);
+            var collection = collections[slot.collectionIndex() - 1];
 
-            if (slot.isAllDay) {
-                collections = this._daySlotCollections;
-            } else {
-                collections = this._timeSlotCollections;
-            }
-
-            return collections[collectionIndex].last();
+            return collection ? collection.last() : undefined;
         },
 
-        firstFromSlot: function(slot) {
-            var collections;
-            var collectionIndex = slot.collectionIndex();
+        nextDaySlot: function(slot) {
+            var collections = this._getCollections(true);
+            var collection = collections[slot.collectionIndex() + 1];
 
-            if (slot.isAllDay) {
-                collections = this._daySlotCollections;
-            } else {
-                collections = this._timeSlotCollections;
-            }
+            return collection ? collection.first() : undefined;
+        },
 
-            return collections[collectionIndex].first();
-        },*/
-
-        firstSlot: function(isDay) {
-            var collections = isDay ? this._daySlotCollections : this._timeSlotCollections;
+        firstSlot: function() {
+            var collections = this._getCollections(this.daySlotCollectionCount());
 
             return collections[0].first();
         },
 
-        lastSlot: function(isDay) {
-            var collections = isDay ? this._daySlotCollections : this._timeSlotCollections;
+        lastSlot: function() {
+            var collections = this._getCollections(this.daySlotCollectionCount());
 
             return collections[collections.length - 1].last();
         },
@@ -1494,6 +1449,62 @@ kendo_module({
 
         calendarInfo: function() {
             return kendo.getCulture().calendars.standard;
+        },
+
+        prevGroupSlot: function(date, groupIndex, isDay) {
+            var collection;
+            var group = this.groups[groupIndex];
+            var slot = group.ranges(date, date, isDay, false)[0].start;
+
+            if (groupIndex <= 0) {
+                return;
+            }
+
+            if (this._isVerticallyGrouped()) {
+                if (!group.timeSlotCollectionCount()) {
+                    collection = group._collection(group.daySlotCollectionCount() - 1, true);
+                    return collection.at(slot.index);
+                } else {
+                    collection = group._collection(isDay ? slot.index : slot.collectionIndex(), false);
+                    return collection.last();
+                }
+            } else {
+                if (!group.timeSlotCollectionCount()) {
+                    collection = group._collection(slot.collectionIndex(), true);
+                    return collection.last();
+                } else {
+                    collection = group._collection(isDay ? 0 : group.timeSlotCollectionCount() - 1, isDay);
+                    return isDay ? collection.last() : collection.at(slot.index);
+                }
+            }
+        },
+
+        nextGroupSlot: function(date, groupIndex, isDay, verticalNavigation) {
+            var collection;
+            var group = this.groups[groupIndex];
+            var slot = group.ranges(date, date, isDay, false)[0].start;
+
+            if (groupIndex >= this.groups.length - 1) {
+                return;
+            }
+
+            if (this._isVerticallyGrouped()) {
+                if (!group.timeSlotCollectionCount()) {
+                    collection = group._collection(0, true);
+                    return collection.at(slot.index);
+                } else {
+                    collection = group._collection(0, group.daySlotCollectionCount());
+                    return isDay ? collection.last() : collection.at(slot.collectionIndex());
+                }
+            } else {
+                if (!group.timeSlotCollectionCount()) {
+                    collection = group._collection(slot.collectionIndex(), true);
+                    return collection.first();
+                } else {
+                    collection = group._collection(0, isDay);
+                    return isDay ? collection.first() : collection.at(slot.index);
+                }
+            }
         }
     });
 
