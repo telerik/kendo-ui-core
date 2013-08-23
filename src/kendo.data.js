@@ -1371,14 +1371,20 @@ kendo_module({
         min: function(accumulator, item, accessor) {
             var value = accessor.get(item);
 
-            accumulator = (accumulator || value);
+            if (!isNumber(accumulator)) {
+                accumulator = value;
+            }
 
-            if(accumulator > value) {
+            if(accumulator > value && isNumber(value)) {
                 accumulator = value;
             }
             return accumulator;
         }
     };
+
+    function isNumber(val) {
+        return typeof val === "number" && !isNaN(val);
+    }
 
     function toJSON(array) {
         var idx, length = array.length, result = new Array(length);

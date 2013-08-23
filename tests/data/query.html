@@ -1850,6 +1850,78 @@
                 equal(result.foo.min, 1);
             });
 
+            test("aggregate min returns min value for a given field with nulls", function() {
+                var data = [ {foo: 1, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: null, bar: "baz"},  {foo: 100, bar: "bar"}  ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "min" }] );
+
+                equal(result.foo.min, 1);
+            });
+
+            test("aggregate min returns min value for a given field with 0", function() {
+                var data = [ {foo: 1, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: 0, bar: "baz"},  {foo: 100, bar: "bar"}  ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "min" }] );
+
+                equal(result.foo.min, 0);
+            });
+
+            test("aggregate min returns min value for a given field with undefined", function() {
+                var data = [ {foo: 1, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: undefined, bar: "baz"},  {foo: 100, bar: "bar"}  ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "min" }] );
+
+                equal(result.foo.min, 1);
+            });
+
+            test("aggregate min returns min value for a given field with 0", function() {
+                var data = [ {foo: 1, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: 0, bar: "baz"},  {foo: 100, bar: "bar"}  ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "min" }] );
+
+                equal(result.foo.min, 0);
+            });
+
+            test("aggregate min returns min value for a given field with less than 0", function() {
+                var data = [ {foo: -1, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: 0, bar: "baz"},  {foo: 100, bar: "bar"}  ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "min" }] );
+
+                equal(result.foo.min, -1);
+            });
+
+            test("aggregate max returns min value for a given field with null", function() {
+                var data = [ {foo: 10, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: null, bar: "baz"},  {foo: 10, bar: "bar"}  ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "max" }] );
+
+                equal(result.foo.max, 100);
+            });
+
+            test("aggregate max returns min value for a given field with undefined", function() {
+                var data = [ {foo: 10, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: undefined, bar: "baz"},  {foo: 10, bar: "bar"}  ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "max" }] );
+
+                equal(result.foo.max, 100);
+            });
+
+            test("aggregate max returns min value for a given field with 0", function() {
+                var data = [ {foo: 10, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: 0, bar: "baz"},  {foo: 10, bar: "bar"}  ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "max" }] );
+
+                equal(result.foo.max, 100);
+            });
+
+            test("aggregate count with null", function() {
+                var data = [ {foo: 10, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: null, bar: "baz"},  {foo: 10, bar: "bar"}  ];
+
+                var result = new Query(data).aggregate( [{ field: "foo", aggregate: "count" }] );
+
+                equal(result.foo.count, 4);
+            });
+
             test("group parent group should have hasSubgroups set to true", function() {
                 var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
 
@@ -1863,6 +1935,7 @@
                 ok(result[0].hasSubgroups);
                 ok(!result[0].items[0].hasSubgroups);
             });
+
             test("group group should have hasSubgroups set to false", function() {
                 var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
 
