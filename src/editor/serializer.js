@@ -1,16 +1,17 @@
 (function($, undefined) {
 
 // Imports ================================================================
-var kendo = window.kendo,
-    Editor = kendo.ui.editor,
-    dom = Editor.Dom,
-    extend = $.extend;
+var kendo = window.kendo;
+var Editor = kendo.ui.editor;
+var dom = Editor.Dom;
+var extend = $.extend;
 
-var fontSizeMappings = 'xx-small,x-small,small,medium,large,x-large,xx-large'.split(','),
-    quoteRe = /"/g,
-    brRe = /<br[^>]*>/i,
-    emptyPRe = /<p><\/p>/i,
-    cssDeclaration = /([\w|\-]+)\s*:\s*([^;]+);?/i;
+var fontSizeMappings = 'xx-small,x-small,small,medium,large,x-large,xx-large'.split(',');
+var quoteRe = /"/g;
+var brRe = /<br[^>]*>/i;
+var emptyPRe = /<p><\/p>/i;
+var cssDeclaration = /([\w|\-]+)\s*:\s*([^;]+);?/i;
+var sizzleAttr = /^sizzle-\d+/i;
 
 var Serializer = {
     domToXhtml: function(root) {
@@ -55,11 +56,53 @@ var Serializer = {
             }
         };
 
+        function styleAttr(cssText) {
+            // In IE < 8 the style attribute does not return proper nodeValue
+            var trim = $.trim;
+            var css = trim(cssText).split(';');
+            var i, length = css.length;
+            var match;
+            var property, value;
+
+            for (i = 0, length = css.length; i < length; i++) {
+                if (!css[i].length) {
+                    continue;
+                }
+
+                match = cssDeclaration.exec(css[i]);
+
+                // IE8 does not provide a value for 'inherit'
+                if (!match) {
+                    continue;
+                }
+
+                property = trim(match[1].toLowerCase());
+                value = trim(match[2]);
+
+                if (property == "font-size-adjust" || property == "font-stretch") {
+                    continue;
+                }
+
+                if (property.indexOf('color') >= 0) {
+                    value = dom.toHex(value);
+                } else if (property.indexOf('font') >= 0) {
+                    value = value.replace(quoteRe, "'");
+                } else if (/\burl\(/g.test(value)) {
+                    value = value.replace(quoteRe, "");
+                }
+
+                result.push(property);
+                result.push(':');
+                result.push(value);
+                result.push(';');
+            }
+        }
+
         function attr(node) {
-            var specifiedAttributes = [],
-                attributes = node.attributes,
-                attribute, i, l,
-                trim = $.trim;
+            var specifiedAttributes = [];
+            var attributes = node.attributes;
+            var attribute, i, l;
+            var name, value, specified;
 
             if (dom.is(node, 'img')) {
                 var width = node.style.width,
@@ -79,15 +122,30 @@ var Serializer = {
 
             for (i = 0, l = attributes.length; i < l; i++) {
                 attribute = attributes[i];
-                var name = attribute.nodeName;
+
+                name = attribute.nodeName;
+                value = attribute.nodeValue;
+                specified = attribute.specified;
+
                 // In IE < 8 the 'value' attribute is not returned as 'specified'. The same goes for type="text"
-                if (name == "class" && !attribute.nodeValue) {
-                    continue;
-                } else if (attribute.specified || (name == 'value' && !node.value) || (name == 'type' && attribute.nodeValue == 'text')) {
-                    // altHtml is injected by IE8 when an <object> tag is used in the Editor
-                    if (name.indexOf('_moz') < 0 && name != 'complete' && name != 'altHtml') {
-                        specifiedAttributes.push(attribute);
-                    }
+                if (name == 'value' && 'value' in node && node.value) {
+                    specified = true;
+                } else if (name == 'type' && value == 'text') {
+                    specified = true;
+                } else if (name == "class" && !value) {
+                    specified = false;
+                } else if (sizzleAttr.test(name)) {
+                    specified = false;
+                } else if (name == 'complete') {
+                    specified = false;
+                } else if (name == 'altHtml') {
+                    specified = false;
+                } else if (name.indexOf('_moz') >= 0) {
+                    specified = false;
+                }
+
+                if (specified) {
+                    specifiedAttributes.push(attribute);
                 }
             }
 
@@ -101,59 +159,27 @@ var Serializer = {
 
             for (i = 0, l = specifiedAttributes.length; i < l; i++) {
                 attribute = specifiedAttributes[i];
-                var attributeName = attribute.nodeName;
-                var attributeValue = attribute.nodeValue;
+                name = attribute.nodeName;
+                value = attribute.nodeValue;
 
-                if (attributeName.toLowerCase() == "contenteditable" && (dom.is(node, "table") || dom.is(node, "td"))) {
+                if (name.toLowerCase() == "contenteditable" && (dom.is(node, "table") || dom.is(node, "td"))) {
                     continue;
                 }
 
-                if (attributeName == "class" && attributeValue == "k-table") {
+                if (name == "class" && value == "k-table") {
                     continue;
                 }
 
                 result.push(' ');
-                result.push(attributeName);
+                result.push(name);
                 result.push('="');
-                if (attributeName == 'style') {
-                    // In IE < 8 the style attribute does not return proper nodeValue
-                    var css = trim(attributeValue || node.style.cssText).split(';');
 
-                    for (var cssIndex = 0, len = css.length; cssIndex < len; cssIndex++) {
-                        var pair = css[cssIndex];
-                        if (pair.length) {
-                            var match = cssDeclaration.exec(pair);
-
-                            // IE8 does not provide a value for 'inherit'
-                            if (!match) {
-                                continue;
-                            }
-
-                            var property = trim(match[1].toLowerCase()),
-                                value = trim(match[2]);
-
-                            if (property == "font-size-adjust" || property == "font-stretch") {
-                                continue;
-                            }
-
-                            if (property.indexOf('color') >= 0) {
-                                value = dom.toHex(value);
-                            } else if (property.indexOf('font') >= 0) {
-                                value = value.replace(quoteRe, "'");
-                            } else if (/\burl\(/g.test(value)) {
-                                value = value.replace(quoteRe, "");
-                            }
-
-                            result.push(property);
-                            result.push(':');
-                            result.push(value);
-                            result.push(';');
-                        }
-                    }
-                } else if (attributeName == 'src' || attributeName == 'href') {
-                    result.push(node.getAttribute(attributeName, 2));
+                if (name == 'style') {
+                    styleAttr(value || node.style.cssText);
+                } else if (name == 'src' || name == 'href') {
+                    result.push(node.getAttribute(name, 2));
                 } else {
-                    result.push(dom.fillAttrs[attributeName] ? attributeName : attributeValue);
+                    result.push(dom.fillAttrs[name] ? name : value);
                 }
 
                 result.push('"');
