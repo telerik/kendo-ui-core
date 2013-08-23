@@ -729,7 +729,7 @@
         ///                     .Destroy("Destroy", "Scheduler")
         ///                     .Update("Update", "Scheduler")
         ///             )  
-        ///            .Events(events => events.resizeEnd(
+        ///            .Events(events => events.ResizeEnd(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -768,6 +768,64 @@
         public SchedulerEventBuilder ResizeEnd(string handler)
         {
             Handler("resizeEnd", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the navigate event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///            .Name("Scheduler")
+        ///            .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        ///            .Events(events => events.Navigate(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder Navigate(Func<object, object> handler)
+        {
+            Handler("navigate", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the navigate event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="Razor">
+        ///  @(Html.Kendo().Scheduler&lt;Task&gt;()
+        ///             .Name("Scheduler")
+        ///             .Events(events => events.Navigate("navigate"))
+        ///             .DataSource(d => d
+        ///                 .Model(m => m.Id(f => f.TaskID))
+        ///                     .Read("Read", "Scheduler")
+        ///                     .Create("Create", "Scheduler")
+        ///                     .Destroy("Destroy", "Scheduler")
+        ///                     .Update("Update", "Scheduler")
+        ///             )  
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerEventBuilder Navigate(string handler)
+        {
+            Handler("navigate", handler);
 
             return this;
         }

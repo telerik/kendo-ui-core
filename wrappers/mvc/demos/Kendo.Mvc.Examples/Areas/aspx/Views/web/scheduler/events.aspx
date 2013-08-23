@@ -24,6 +24,7 @@
             e.ResizeStart("scheduler_resizeStart");
             e.Resize("scheduler_resize");
             e.ResizeEnd("scheduler_resizeEnd");
+            e.Navigate("scheduler_navigate");            
         })
         .Views(views =>
         {
@@ -96,6 +97,10 @@
 
     function scheduler_resizeEnd(e) {
         kendoConsole.log("resizeEnd");
+    }
+
+    function scheduler_navigate(e) {
+        kendoConsole.log(kendo.format("navigate:: action:{0}; view:{1}; date:{2:d};", e.action, e.view, e.date));
     }
 </script>
 
