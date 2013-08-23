@@ -34,11 +34,11 @@
         )
         .Content(
             @<text>                
-                @ModalViewContentTempalte()
+                @ModalViewContentTemplate()
             </text>)
 )
 
-@helper ModalViewContentTempalte()
+@helper ModalViewContentTemplate()
     {
         @(Html.Kendo().MobileListView().Style("inset")
             .Items(items =>
