@@ -112,5 +112,25 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new ChartBorderBuilder(chartArea.Border));
             return this;
         }
+
+        /// <summary>
+        /// Sets the height of the chart area.
+        /// </summary>
+        /// <param name="height">The chart area height.</param>
+        public ChartAreaBuilder Height(int height)
+        {
+            chartArea.Height = height;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the width of the chart area.
+        /// </summary>
+        /// <param name="height">The chart area width.</param>
+        public ChartAreaBuilder Width(int width)
+        {
+            chartArea.Width = width;
+            return this;
+        }
     }
 }

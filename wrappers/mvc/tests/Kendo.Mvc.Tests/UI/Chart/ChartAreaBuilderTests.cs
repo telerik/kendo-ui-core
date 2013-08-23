@@ -59,5 +59,31 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Width_builder_should_configure_width()
+        {
+            builder.Width(5);
+            chartArea.Width.ShouldEqual(5);
+        }
+
+        [Fact]
+        public void Width_builder_should_return_builder()
+        {
+            builder.Width(5).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Height_builder_should_configure_height()
+        {
+            builder.Height(5);
+            chartArea.Height.ShouldEqual(5);
+        }
+
+        [Fact]
+        public void Height_builder_should_return_builder()
+        {
+            builder.Height(5).ShouldBeSameAs(builder);
+        }
     }
 }

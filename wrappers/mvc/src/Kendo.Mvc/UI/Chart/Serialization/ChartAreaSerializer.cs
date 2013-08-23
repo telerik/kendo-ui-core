@@ -19,6 +19,8 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("background", chartArea.Background, () => chartArea.Background.HasValue())
+                .Add("height", chartArea.Height, () => chartArea.Height.HasValue)
+                .Add("width", chartArea.Width, () => chartArea.Width.HasValue)
                 .Add("margin", chartArea.Margin.CreateSerializer().Serialize(), ShouldSerializeMargin)
                 .Add("border", chartArea.Border.CreateSerializer().Serialize(), ShouldSerializeBorder);
 

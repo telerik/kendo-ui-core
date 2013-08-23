@@ -47,6 +47,30 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the Chart area width.
+        /// </summary>
+        /// <value>
+        /// The Chart area width.
+        /// </value>
+        public int? Width
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the Chart area height.
+        /// </summary>
+        /// <value>
+        /// The Chart area height.
+        /// </value>
+        public int? Height
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartAreaSerializer(this);

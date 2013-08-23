@@ -59,5 +59,31 @@ namespace Kendo.Mvc.UI.Tests
         {
             return chartArea.CreateSerializer().Serialize();
         }
+
+        [Fact]
+        public void Serializes_width()
+        {
+            chartArea.Width = 4;
+            GetJson()["width"].ShouldEqual(4);
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_width()
+        {
+            GetJson().ContainsKey("width").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_height()
+        {
+            chartArea.Height = 4;
+            GetJson()["height"].ShouldEqual(4);
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_height()
+        {
+            GetJson().ContainsKey("height").ShouldBeFalse();
+        }
     }
 }
