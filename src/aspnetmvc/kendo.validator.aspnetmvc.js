@@ -118,7 +118,7 @@
 
             if (checkbox.length) {
                 name = checkbox[0].name.replace(nameSpecialCharRegExp, "\\$1");
-                var hidden = checkbox.next("input:hidden[name=" + name + "]");
+                var hidden = checkbox.next("input:hidden[name='" + name + "']");
                 if (hidden.length) {
                     value = hidden.val();
                 } else {
