@@ -421,14 +421,14 @@ kendo_module({
             this.f -= m.f;
         },
         times: function (m) {
-            return Matrix.fromList([
+            return new Matrix(
                 this.a * m.a + this.c * m.b,
                 this.b * m.a + this.d * m.b,
                 this.a * m.c + this.c * m.d,
                 this.b * m.c + this.d * m.d,
                 this.a * m.e + this.c * m.f + this.e,
                 this.b * m.e + this.d * m.f + this.f
-            ]);
+            );
         },
         apply: function (p) {
             return new Point(this.a * p.x + this.c * p.y + this.e, this.b * p.x + this.d * p.y + this.f);
@@ -483,7 +483,7 @@ kendo_module({
             return m;
         },
         unit: function () {
-            return fromList([1, 0, 0, 1, 0, 0]);
+            return new Matrix(1, 0, 0, 1, 0, 0);
         },
         rotation: function (angle, x, y) {
             var m = new Matrix();

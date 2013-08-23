@@ -111,13 +111,13 @@ test("composite transform toString - translate and scale", function() {
 test("composite transform toString - all", function() {
     var transform = new diagram.CompositeTransform(2, 3, 3, 4, 45, new diagram.Point(3, 2));
 
-    equal(transform.toString(), "translate(2,3)scale(3,4)rotate(45,3,2)");
+    equal(transform.toString(), "translate(2,3)rotate(45,3,2)scale(3,4)");
 });
 
 test("composite transform toString - all without rotation center", function() {
     var transform = new diagram.CompositeTransform(2, 3, 3, 4, 45);
 
-    equal(transform.toString(), "translate(2,3)scale(3,4)rotate(45)");
+    equal(transform.toString(), "translate(2,3)rotate(45)scale(3,4)");
 });
 
 test("composite tranform updates SVG node transformation", function() {

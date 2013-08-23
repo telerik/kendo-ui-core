@@ -173,54 +173,53 @@ kendo_module({
             resizable: true,
             background: "steelblue",
             hoveredBackground: "#70CAFF",
-            connectors: [{
-                name: "Top",
-                type: "Data [in]",
-                description: "Top Connector",
-                getConnectorPosition: function (shape, w, h) {
-                    return getShapeConnectorPos(shape, "top").plus(new Point(0, h / 2));
+            connectors: [
+                {
+                    name: "Top",
+                    type: "Data [in]",
+                    description: "Top Connector",
+                    getConnectorPosition: function (shape, w, h) {
+                        return getShapeConnectorPos(shape, "top").plus(new Point(0, h / 2));
+                    }
+                },
+                {
+                    name: "Right",
+                    type: "Data [in]",
+                    description: "Right Connector",
+                    getConnectorPosition: function (shape, w, h) {
+                        return getShapeConnectorPos(shape, "right").minus(new Point(w / 2, 0));
+                    }
+                },
+                {
+                    name: "Bottom",
+                    type: "Data [out] [array]",
+                    description: "Bottom Connector",
+                    getConnectorPosition: function (shape, w, h) {
+                        return getShapeConnectorPos(shape, "bottom").minus(new Point(0, h / 2));
+                    }
+                },
+                {
+                    name: "Left",
+                    type: "Data [in]",
+                    Description: "Left Connector",
+                    getConnectorPosition: function (shape, w, h) {
+                        return getShapeConnectorPos(shape, "left").plus(new Point(w / 2, 0));
+                    }
+                },
+                {
+                    name: "Auto",
+                    type: "Auto",
+                    Description: "Auto Connector",
+                    getConnectorPosition: function (shape) {
+                        return getShapeConnectorPos(shape, "center");
+                    }
                 }
-            },
-            {
-                name: "Right",
-                type: "Data [in]",
-                description: "Right Connector",
-                getConnectorPosition: function (shape, w, h) {
-                    return getShapeConnectorPos(shape, "right").minus(new Point(w / 2, 0));
-                }
-            },
-            {
-                name: "Bottom",
-                type: "Data [out] [array]",
-                description: "Bottom Connector",
-                getConnectorPosition: function (shape, w, h) {
-                    return getShapeConnectorPos(shape, "bottom").minus(new Point(0, h / 2));
-                }
-            },
-            {
-                name: "Left",
-                type: "Data [in]",
-                Description: "Left Connector",
-                getConnectorPosition: function (shape, w, h) {
-                    return getShapeConnectorPos(shape, "left").plus(new Point(w / 2, 0));
-                }
-            },
-            {
-                name: "Auto",
-                type: "Auto",
-                Description: "Auto Connector",
-                getConnectorPosition: function (shape) {
-                    return getShapeConnectorPos(shape, "center");
-                }
-            }]
+            ]
         },
         events: [BOUNDSCHANGE],
         bounds: function (value) {
             if (value) {
                 this._bounds = value;
-                if (this.adorner) {
-                    this.adorner.updateRectangle(value);
-                }
                 if (this.contentVisual) {
                     this.contentVisual.redraw(this.bounds());
                 }
@@ -235,6 +234,12 @@ kendo_module({
                 this.trigger(BOUNDSCHANGE, this._bounds);
             }
             return this._bounds;
+        },
+        actualBounds: function () {
+            var bounds = this.bounds(),
+                tl = bounds.topLeft(),
+                br = bounds.bottomRight();
+            return Rect.fn.fromPoints(this.diagram.transformPoint(tl), this.diagram.transformPoint(br));
         },
         select: function (value) {
             if (this.isSelected != value) {
@@ -438,7 +443,7 @@ kendo_module({
                 middle = Point.fn.middleOf(localSourcePoint, localSinkPoint);
                 this.contentVisual.position(middle);
             }
-            this.visual.position(boundsTopLeft);	//global coordinates!
+            this.visual.position(boundsTopLeft);    //global coordinates!
             this.line.redraw({ from: localSourcePoint, to: localSinkPoint });
             if (this.adorner) {
                 this.adorner.refresh();
@@ -476,6 +481,7 @@ kendo_module({
             name: "Diagram",
             zoomRate: 1.1
         },
+        events: ["zoom", "pan"],
         zoom: function (zoom, staticPoint) {
             if (zoom) {
                 var currentZoom = this._zoom;
@@ -490,7 +496,6 @@ kendo_module({
                 }
 
                 this.transformMainLayer();
-
                 this.trigger("zoom");
             }
             return this._zoom;
@@ -502,6 +507,7 @@ kendo_module({
             if (pan instanceof Point && !pan.equals(this._pan)) {
                 this._pan = pan;
                 this.transformMainLayer();
+                this.trigger("pan");
             }
 
             return this._pan;
@@ -512,6 +518,14 @@ kendo_module({
 
             var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
             transform.render(this.mainLayer.native);
+            this._matrix = transform.toMatrix();
+        },
+        transformPoint: function (p) { // transforms point from main canvas coordinates to non-transformed (origin).
+            var result = p;
+            if (this._matrix) {
+                result = this._matrix.apply(p);
+            }
+            return result;
         },
         focus: function () {
             this.canvas.focus();
@@ -677,9 +691,13 @@ kendo_module({
             this.connections = [];
             this._adorners = [];
             this.mainLayer = new Group({
-                id: "mainLayer"
+                id: "main-layer"
             });
             this.canvas.append(this.mainLayer);
+            this.adornerLayer = new Group({
+                id: "adorner-layer"
+            });
+            this.canvas.append(this.adornerLayer);
             this.undoRedoService = new UndoRedoService();
             this.toolService = new ToolService(this);
 
@@ -693,11 +711,11 @@ kendo_module({
             if (isActive !== undefined) {
                 if (isActive) {
                     this._adorners.push(adorner);
-                    this.mainLayer.append(adorner.visual);
+                    this.adornerLayer.append(adorner.visual);
                 }
                 else {
                     this._adorners.remove(adorner);
-                    this.mainLayer.remove(adorner.visual);
+                    this.adornerLayer.remove(adorner.visual);
                 }
             }
         },
@@ -736,9 +754,9 @@ kendo_module({
                     l = new diagram.TreeLayout(this);
                     break;
 
-                    /*  case diagram.LayoutTypes.LayeredLayout:
-                     l = new diagram.LayeredLayout(this);
-                     break;*/
+                /*  case diagram.LayoutTypes.LayeredLayout:
+                 l = new diagram.LayeredLayout(this);
+                 break;*/
 
                 case diagram.LayoutTypes.ForceDirectedLayout:
                     l = new diagram.SpringLayout(this);

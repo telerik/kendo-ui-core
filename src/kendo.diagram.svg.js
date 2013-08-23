@@ -17,7 +17,7 @@ kendo_module({
         Rect = diagram.Rect,
         RectAlign = diagram.RectAlign,
         Matrix = diagram.Matrix,
-        MatrixVector = diagram.MatrixVector
+        MatrixVector = diagram.MatrixVector;
 
     var Scale = Class.extend({
         init: function (x, y) {
@@ -107,6 +107,20 @@ kendo_module({
         },
         render: function (visual) {
             visual.setAttribute("transform", this.toString());
+        },
+        toMatrix: function () {
+            var m = Matrix.unit();
+
+            if(this.translate){
+                m = m.times(this.translate.toMatrix());
+            }
+            if(this.rotate){
+                m = m.times(this.rotate.toMatrix());
+            }
+            if(this.scale){
+                m = m.times(this.scale.toMatrix());
+            }
+            return m;
         }
     });
 
