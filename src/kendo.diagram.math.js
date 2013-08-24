@@ -2587,7 +2587,7 @@ kendo_module({
          * @param diagram The Kendo diagram where the diagram will be created.
          * @param graph The graph structure defining the diagram.
          */
-        createDiagramFromGraph: function (diagram, graph, doLayout) {
+        createDiagramFromGraph: function (diagram, graph, doLayout, randomSize) {
 
             if (isUndefined(diagram)) {
                 throw "The diagram surface is undefined.";
@@ -2597,6 +2597,9 @@ kendo_module({
             }
             if (isUndefined(doLayout)) {
                 doLayout = true;
+            }
+            if (isUndefined(randomSize)) {
+                randomSize = false;
             }
 
             var width = diagram.element.clientWidth || 200;
@@ -2614,9 +2617,21 @@ kendo_module({
                     }
                 }
                 var opt = {};
-                if (node.id == "0") {
-                    opt = {background: "Orange"};
+                if (randomSize) {
+                    kendo.deepExtend(opt, {
+                        width: Math.random() * 150 + 20,
+                        height: Math.random() * 80 + 50,
+                        data: 'rectangle',
+                        background: "#778899"
+                    })
                 }
+                if (node.id == "0") {
+                    kendo.deepExtend(opt,
+                        {
+                            background: "Orange"
+                        });
+                }
+
                 var shape = this._addShape(diagram, p, node.id, opt);
                 //shape.content(node.id);
 

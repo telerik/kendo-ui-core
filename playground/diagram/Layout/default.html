@@ -72,25 +72,6 @@
             font-weight: 600;
         }
 
-        rect {
-            fill: none;
-            pointer-events: all;
-        }
-
-        .node {
-            fill: #000;
-        }
-
-        .cursor {
-            fill: none;
-            stroke: brown;
-            pointer-events: none;
-        }
-
-        .link {
-            stroke: #999;
-        }
-
         #viz {
             height: 100%;
             width: 80%;
@@ -148,120 +129,106 @@
 <script src="../../../src/kendo.diagram.dom.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-var diagram, animId;
+var diagram, animId, useRandomSizes = false;
 var Predefined = kendo.diagram.Graph.Predefined;
 var GraphUtils = kendo.diagram.Graph.Utils;
 
-function ClearDiagram()
-{
+function ClearDiagram() {
     diagram.clear();
 }
 
-function init()
-{
+function init() {
     var diagramElement = $("#canvas").kendoDiagram();
     diagram = diagramElement.data("kendoDiagram");
-    diagramElement.css("width", "800");
+    diagramElement.css("width", "1200");
     diagramElement.css("height", "800");
     $("#QAnimate").focus();
 }
 
-function SingleRandomTree()
-{
+function SingleRandomTree() {
     ClearDiagram();
-    diagram.randomDiagram(20, 5, true);
+    diagram.randomDiagram(20, 5, true, useRandomSizes);
     layout();
 }
 
-function BalancedForest()
-{
+function BalancedForest() {
     ClearDiagram();
     var g = Predefined.Forest(3, 2, 3);
-    GraphUtils.createDiagramFromGraph(diagram, g, false);
+    GraphUtils.createDiagramFromGraph(diagram, g, false, useRandomSizes);
     layout();
 }
 
-function RandomForest()
-{
+function RandomForest() {
     ClearDiagram();
-    for(var i = 0; i < 5; i++)
-    {
-        diagram.randomDiagram(20, 5, true);
+    for (var i = 0; i < 5; i++) {
+        diagram.randomDiagram(20, 5, true, useRandomSizes);
     }
     layout();
 }
 
-function RandomGraph(count)
-{
-    if(!count)
-    {
+function RandomGraph(count) {
+    if (!count) {
         count = 1
     }
     ClearDiagram();
-    for(var i = 0; i < count; i++)
-    {
-        diagram.randomDiagram(20, 5, false);
+    for (var i = 0; i < count; i++) {
+        diagram.randomDiagram(20, 5, false, useRandomSizes);
     }
     layout();
 }
 
-function SingleBalancedTree()
-{
+function SingleBalancedTree() {
     ClearDiagram();
     var levels = parseInt(Math.random() * 6 + 2);
     var g = Predefined.Tree(levels, levels > 4 ? 2 : (Math.random() < .7 ? 2 : 3));
-    GraphUtils.createDiagramFromGraph(diagram, g, false);
+    GraphUtils.createDiagramFromGraph(diagram, g, false, useRandomSizes);
     layout();
 }
-
-function switchMode()
-{
+function randomSize() {
+    useRandomSizes = $("#QRandomSize").prop("checked");
+}
+function switchMode() {
     var isChecked = $("#QAnimate").prop("checked");
-    if(!isChecked)
-    {
+    if (!isChecked) {
         $("#QCreate").prop("disabled", false);
         stopAnimation();
     }
-    else
-    {
+    else {
         $("#QCreate").prop("disabled", true);
         startAnimation();
     }
 
 }
 
-function defineActions()
-{
+function defineActions() {
     $("#QCreate").bind("click", create);
     $("#QAnimate").bind("click", switchMode);
+    $("#QRandomSize").bind("click", randomSize);
 }
 
-function layout()
-{
+function layout() {
     var selected = $("input[name=LayoutGroup]:checked").attr("id");
-    if(!selected)
-    {
+    if (!selected) {
         return;
     }
     // if a forest there are multiple roots but we for a random graph it'd be difficult to guess
     // the most appropriate root
     var knownRoot = diagram.getId("0");
-    switch(selected)
-    {
+    switch (selected) {
         case "QTreeDown":
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
-                        TreeLayoutType    : kendo.diagram.TreeLayoutType.TreeDown,
+                        TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
-                        roots : [knownRoot]
+                        roots: [knownRoot]
                     }
             )
             break;
         case "QTreeUp":
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
-                        TreeLayoutType    : kendo.diagram.TreeLayoutType.TreeUp,
+                        TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot]
@@ -271,7 +238,7 @@ function layout()
         case  "QTreeLeft":
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
-                        TreeLayoutType    : kendo.diagram.TreeLayoutType.TreeLeft,
+                        TreeLayoutType: kendo.diagram.TreeLayoutType.TreeLeft,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot]
@@ -281,7 +248,7 @@ function layout()
         case  "QTreeRight":
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
-                        TreeLayoutType    : kendo.diagram.TreeLayoutType.TreeRight,
+                        TreeLayoutType: kendo.diagram.TreeLayoutType.TreeRight,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot]
@@ -291,7 +258,7 @@ function layout()
         case  "QMindmapHorizontal":
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
-                        TreeLayoutType    : kendo.diagram.TreeLayoutType.MindmapHorizontal,
+                        TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot]
@@ -301,7 +268,7 @@ function layout()
         case  "QMindmapVertical":
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
-                        TreeLayoutType    : kendo.diagram.TreeLayoutType.MindmapVertical,
+                        TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot]
@@ -311,7 +278,7 @@ function layout()
         case  "QRadial":
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
-                        TreeLayoutType    : kendo.diagram.TreeLayoutType.RadialTree,
+                        TreeLayoutType: kendo.diagram.TreeLayoutType.RadialTree,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot]
@@ -321,7 +288,7 @@ function layout()
         case "QTipOver":
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
-                        TreeLayoutType    : kendo.diagram.TreeLayoutType.TipOverTree,
+                        TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot]
@@ -342,16 +309,13 @@ function layout()
     }
     diagram.zoom(0.5);
 }
-function create()
-{
+function create() {
 
     var selected = $("input[name=GraphTypeGroup]:checked").attr("id");
-    if(!selected)
-    {
+    if (!selected) {
         return;
     }
-    switch(selected)
-    {
+    switch (selected) {
         case "QSingleRandomTree":
             SingleRandomTree();
             break;
@@ -374,8 +338,7 @@ function create()
     }
 }
 
-function randomChoice()
-{
+function randomChoice() {
     var graphs = ["QSingleRandomTree", "QSingleBalancedTree", "QBalancedForest", "QRandomForest", "QRandomConnectedGraph", "QRandomNonConnectedGraph"];
     var layouts = ["QTreeDown", "QTreeUp", "QTreeLeft", "QTreeRight", "QMindmapHorizontal", "QMindmapVertical", "QRadial", "QForce", "QTipOver"]; //, "QLayeredHorizontal", "QLayeredVertical"
     var pickedGraph = graphs[parseInt(Math.floor(Math.random() * graphs.length))];
@@ -385,18 +348,15 @@ function randomChoice()
     create();
 }
 
-function startAnimation()
-{
+function startAnimation() {
     animId = setInterval(randomChoice, 2000);
 }
 
-function stopAnimation()
-{
+function stopAnimation() {
     clearInterval(animId);
 }
 
-$(document).ready(function()
-{
+$(document).ready(function () {
     init();
     defineActions();
     startAnimation();
@@ -434,6 +394,7 @@ $(document).ready(function()
     </div>
     <input type="button" value="Create" id="QCreate" disabled/>
     <input type="checkbox" id="QAnimate" checked>Animate</input>
+    <input type="checkbox" id="QRandomSize">Random sizes</input>
     <div id="canvas"></div>
 </div>
 </body>

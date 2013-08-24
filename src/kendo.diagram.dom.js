@@ -133,16 +133,24 @@ kendo_module({
             if (isUndefined(this.options.data)) {
                 this.options.data = "rectangle";
             }
-            switch (this.options.data.toLocaleLowerCase()) {
-                case "rectangle":
-                    this.shapeVisual = new Rectangle(shapeOptions);
-                    break;
-                case "circle":
-                    this.shapeVisual = new Circle(shapeOptions);
-                    break;
-                default:
-                    this.shapeVisual = new Path(shapeOptions);
-                    break;
+            if (isString(this.options.data)) {
+                switch (this.options.data.toLocaleLowerCase()) {
+                    case "rectangle":
+                        this.shapeVisual = new Rectangle(shapeOptions);
+                        break;
+                    case "circle":
+                        this.shapeVisual = new Circle(shapeOptions);
+                        break;
+                    default:
+                        this.shapeVisual = new Path(shapeOptions);
+                        break;
+                }
+            }
+            else {// custom template
+                if (!isFunction(this.options.data)) {
+                    throw "The custom template should be a function returning a visual";
+                }
+                this.shapeVisual = this.options.data();
             }
 
             this.visual = new Group({
@@ -776,9 +784,9 @@ kendo_module({
          * @param isTree Whether the generated diagram should be a tree
          * @param layoutType The optional layout type to apply after the diagram is generated.
          */
-        randomDiagram: function (shapeCount, maxIncidence, isTree) {
+        randomDiagram: function (shapeCount, maxIncidence, isTree, randomSize) {
             var g = kendo.diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
-            kendo.diagram.Graph.Utils.createDiagramFromGraph(this, g, false);
+            kendo.diagram.Graph.Utils.createDiagramFromGraph(this, g, false, randomSize);
         },
 
 

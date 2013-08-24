@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Organization chart</title>
+    <style type="text/css">
+        html, body {
+            height: 800px;
+            color: #444;
+            font: 10pt/1 "Hoefler Text", "Georgia", Georgia, serif, sans-serif;
+        }
+
+        h1 a:visited {
+            text-decoration: none;
+            color: #404040;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-weight: 400;
+            font-size: 1.6em;
+            line-height: 0.9em;
+            padding: 0px 0 0;
+            margin: 1em 0em .25em 0em;
+        }
+
+        h1 a {
+            font-weight: 100;
+            letter-spacing: -0.05em;
+            position: relative;
+        }
+
+        h2 {
+            font-weight: 50;
+            font-size: 1.2em;
+            letter-spacing: -0.05em;
+            position: relative;
+            color: #888;
+            margin: 0;
+        }
+
+        h2 a {
+            text-decoration: none;
+            color: #404040;
+            font-weight: 600;
+        }
+
+        h2 a:hover {
+            color: #C71585;
+            font-weight: 600;
+        }
+
+        #Stage {
+            background: #21242c url('images/qfp-bgr.png') no-repeat -400px 0px;
+            color: #000;
+            padding-top: 120px;
+            height: 850px;
+        }
+
+        #TwoPaneBackground {
+            background-color: white;
+            width: 98%;
+            height: 600px;
+            position: absolute;
+
+        }
+
+        #LeftMenu {
+            background: url('images/leftmenu.png') center 0px no-repeat #21242c;
+            width: 300px;
+            height: 600px;
+            margin: 0;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+        #DiagramBackground {
+
+            background: url("images/marketing-bg.jpg") 0 0 no-repeat;
+            background-color: white;
+            overflow: auto;
+            width: 850px;
+            height: 550px;
+            position: absolute;
+            top: 10px;
+            left: 310px;
+        }
+
+        #Logo {
+            background: url("images/telerik-logo.png") 0 0 no-repeat;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            width: 150px;
+            height: 55px;
+        }
+
+        #Title {
+            color: #FFF;
+            font: 10pt/1 "Hoefler Text", "Georgia", Georgia, serif, sans-serif;
+            font-size: 25pt;
+            position: absolute;
+            top: 80px;
+            left: 40px;
+        }
+
+        #Menu {
+            margin: 25px;
+        }
+
+        rect {
+            stroke: #8ba0bc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<script src="http://cdn.kendostatic.com/2013.2.716/js/jquery.min.js"></script>
+
+<script src="../../../src/kendo.core.js"></script>
+<script src="../../../src/kendo.dataviz.core.js"></script>
+
+<script src="../../../src/kendo.diagram.math.js" type="text/javascript"></script>
+<script src="../../../src/kendo.diagram.svg.js" type="text/javascript"></script>
+<script src="../../../src/kendo.diagram.services.js" type="text/javascript"></script>
+<script src="../../../src/kendo.diagram.extensions.js" type="text/javascript"></script>
+<script src="../../../src/kendo.diagram.dom.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    var diagram, animId, useRandomSizes = false;
+    var Predefined = kendo.diagram.Graph.Predefined;
+    var GraphUtils = kendo.diagram.Graph.Utils;
+
+    function clearDiagram() {
+        diagram.clear();
+    }
+    function changeLayout() {
+        randomOrgChart();
+    }
+    function defineActions() {
+        $("#ChangeLayoutButton").bind("click", changeLayout);
+    }
+
+    function init() {
+        var diagramElement = $("#canvas").kendoDiagram();
+        diagram = diagramElement.data("kendoDiagram");
+        diagramElement.css("width", "840");
+        diagramElement.css("height", "540");
+        diagramElement.css("background-color", "none");
+
+
+    }
+
+    function randomOrgChart() {
+        clearDiagram();
+        var graph = kendo.diagram.Graph.Utils.createRandomConnectedGraph(10, 3, true);
+
+        var map = [];
+        var people = [
+            {
+                name: "Kate",
+                image: "images/LONEP.jpg"
+            },
+            {
+                name: "Peter",
+                image: "images/SAVEA.jpg"
+            },
+            {
+                name: "Arnold",
+                image: "images/LACOR.jpg"
+            },
+            {
+                name: "Mike",
+                image: "images/VAFFE.jpg"
+            },
+            {
+                name: "David",
+                image: "images/CENTC.jpg"
+            },
+            {
+                name: "Tim",
+                image: "images/GREAL.jpg"
+            },
+            {
+                name: "Nora",
+                image: "images/TRADH.jpg"
+            },
+        ];
+
+        function getVisual() {
+            var person = people[parseInt(Math.floor(Math.random()*people.length))];
+            var g = new kendo.diagram.Group();
+            var r = new kendo.diagram.Rectangle({
+                width: 200,
+                height: 80,
+                background: "#bdcbde",
+                cornerRadius: 6
+            });
+            g.append(r);
+            var im = new kendo.diagram.Image({
+                source: person.image,
+                height: "50",
+                width: "50",
+                x: 10,
+                y: 10
+            });
+            g.append(im);
+            var tb = new kendo.diagram.TextBlock({
+                text: person.name,
+                fontSize: 12,
+                x: 80,
+                y: 20
+            });
+            g.append(tb);
+            return g;
+        }
+
+        for (var i = 0, len = graph.nodes.length; i < len; i++) {
+            var node = graph.nodes[i];
+
+
+            var opt = {
+                data: getVisual,
+                width: 200,
+                height: 80
+            };
+            var shape = new kendo.diagram.Shape(opt);
+            diagram.addShape(shape);
+
+            var bounds = shape.bounds();
+            if (isDefined(bounds)) {
+                node.x = bounds.x;
+                node.y = bounds.y;
+                node.width = bounds.width;
+                node.height = bounds.height;
+            }
+            map[node.id] = shape;
+        }
+        for (var i = 0, len = graph.links.length; i < len; i++) {
+            var link = graph.links[i];
+            var sourceShape = map[link.source.id];
+            if (isUndefined(sourceShape)) {
+                continue;
+            }
+            var targetShape = map[link.target.id];
+            if (isUndefined(targetShape)) {
+                continue;
+            }
+            diagram.connect(sourceShape, targetShape);
+
+        }
+        diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                {
+                    TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown
+                }
+        )
+
+        diagram.zoom(0.7);
+    }
+    $(document).ready(function () {
+        init();
+        defineActions();
+        randomOrgChart();
+        $("#ChangeLayoutButton").focus();
+    })
+</script>
+<div id="Stage">
+    <div id="Logo"></div>
+    <div id="Title">Kendo diagrams</div>
+    <div id="TwoPaneBackground">
+        <div id="LeftMenu">
+            <div id="Menu">
+                <input type="BUTTON" value="Change" id="ChangeLayoutButton"/>
+            </div>
+        </div>
+        <div id="DiagramBackground">
+            <div id="canvas"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

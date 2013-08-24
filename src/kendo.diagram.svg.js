@@ -11,6 +11,7 @@ kendo_module({
         diagram = kendo.diagram,
         Class = kendo.Class,
         SVGNS = "http://www.w3.org/2000/svg",
+        SVGXLINK = "http://www.w3.org/1999/xlink",
         deepExtend = kendo.deepExtend,
         dataviz = kendo.dataviz,
         Point = diagram.Point,
@@ -102,8 +103,8 @@ kendo_module({
             };
 
             return toString(this.translate) +
-                   toString(this.rotate) +
-                   toString(this.scale);
+                toString(this.rotate) +
+                toString(this.scale);
         },
         render: function (visual) {
             visual.setAttribute("transform", this.toString());
@@ -111,13 +112,13 @@ kendo_module({
         toMatrix: function () {
             var m = Matrix.unit();
 
-            if(this.translate){
+            if (this.translate) {
                 m = m.times(this.translate.toMatrix());
             }
-            if(this.rotate){
+            if (this.rotate) {
                 m = m.times(this.rotate.toMatrix());
             }
-            if(this.scale){
+            if (this.scale) {
                 m = m.times(this.scale.toMatrix());
             }
             return m;
@@ -212,7 +213,7 @@ kendo_module({
             this.setAtr("stroke", "stroke");
             this.setAtr("stroke-dasharray", "strokeDashArray");
             this.setAtr("stroke-width", "strokeWidth");
-            this.setAtr("stroke-thickness", "strokeThickness");           
+            this.setAtr("stroke-thickness", "strokeThickness");
         }
     });
 
@@ -396,6 +397,15 @@ kendo_module({
     var Rectangle = Visual.extend({
         init: function (options) {
             Visual.fn.init.call(this, document.createElementNS(SVGNS, "rect"), options);
+        },
+        redraw: function (options) {
+            Visual.fn.redraw.call(this, options);
+            this.setAtr("rx", "cornerRadius");
+            this.setAtr("ry", "cornerRadius");
+            /*   this.setAtr("stroke", "stroke");
+             this.setAtr("stroke-dasharray", "strokeDashArray");
+             this.setAtr("stroke-width", "strokeWidth");
+             this.setAtr("stroke-thickness", "strokeThickness");*/
         }
     });
 
@@ -499,6 +509,20 @@ kendo_module({
         }
     });
 
+    var Image = Element.extend({
+        init: function (options) {
+            Element.fn.init.call(this, document.createElementNS(SVGNS, "image"), options);
+        },
+        redraw: function (options) {
+            Element.fn.redraw.call(this, options);
+            this.native.setAttributeNS(SVGXLINK, "href", this.options.source);
+            this.setAtr("width", "width");
+            this.setAtr("height", "height");
+            this.setAtr("x", "x");
+            this.setAtr("y", "x");
+        }
+    });
+
     var Group = Element.extend({
         init: function (options) {
             Element.fn.init.call(this, document.createElementNS(SVGNS, "g"), options);
@@ -530,7 +554,7 @@ kendo_module({
             var native = this.native,
                 o = this.options,
                 rx = o.width / 2, ry = o.height / 2;
-            
+
             native.rx.baseVal.value = rx;
             native.ry.baseVal.value = ry;
 
@@ -559,6 +583,8 @@ kendo_module({
             });
             this.element.appendChild(that.native);
             this.native.style.background = that.options.background;
+            this.native.setAttribute('xmlns', SVGNS);
+            this.native.setAttribute('xmlns:xlink', SVGXLINK);
             this.element.setAttribute("tabindex", "0"); //ensure tabindex so the the canvas receives key events
             this.focus();
 
@@ -598,7 +624,7 @@ kendo_module({
         options: {
             width: "100%",
             height: "100%",
-            background: "White",
+            background: "none",
             id: "SVGRoot"
         },
         focus: function () {
@@ -701,6 +727,7 @@ kendo_module({
         Polyline: Polyline,
         CompositeTransform: CompositeTransform,
         TextBlock: TextBlock,
-        TextBlockEditor: TextBlockEditor
+        TextBlockEditor: TextBlockEditor,
+        Image: Image
     });
 })(window.kendo.jQuery);

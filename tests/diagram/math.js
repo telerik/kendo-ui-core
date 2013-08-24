@@ -14,13 +14,10 @@ var Adapter = kendo.diagram.GraphAdapter;
 var Point = kendo.diagram.Point;
 /*-------------Testing Utils----------------------------------*/
 
-QUnit.testSkip = function()
-{
-    QUnit.test(arguments[0] + ' [SKIPPED]', function()
-    {
+QUnit.testSkip = function () {
+    QUnit.test(arguments[0] + ' [SKIPPED]', function () {
         var li = document.getElementById(QUnit.config.current.id);
-        QUnit.done(function()
-        {
+        QUnit.done(function () {
             li.style.background = '#FFFF99';
         });
         ok(true);
@@ -32,28 +29,23 @@ QUnit.testSkip = function()
  */
 testSkip = QUnit.testSkip;
 
-function Task(title)
-{
+function Task(title) {
     this.Count = 0;
     this.Title = title;
 }
 
 Task.prototype = {
     isEmpty: false,
-    undo   : function()
-    {
+    undo: function () {
         this.Count--;
     },
-    redo   : function()
-    {
+    redo: function () {
         this.Count++;
     }
 };
 
-function lexicCount(c, name)
-{
-    switch(c)
-    {
+function lexicCount(c, name) {
+    switch (c) {
         case 0:
             return null;
         case 1:
@@ -63,23 +55,18 @@ function lexicCount(c, name)
     }
 };
 
-var CountObjects = function(obj)
-{
+var CountObjects = function (obj) {
     var items = [];
-    if(obj.shapes && obj.shapes.Items)
-    {
+    if (obj.shapes && obj.shapes.Items) {
         items.push(lexicCount(obj.shapes.Items.length, "shape"));
     }
-    if(obj.groups && obj.groups.Items)
-    {
+    if (obj.groups && obj.groups.Items) {
         items.push(lexicCount(obj.groups.Items.length, "group"));
     }
-    if(obj.connections && obj.connections.Items)
-    {
+    if (obj.connections && obj.connections.Items) {
         items.push(lexicCount(obj.connections.Items.length, "connection"));
     }
-    switch(items.length)
-    {
+    switch (items.length) {
         case 0:
             return "The XML contained an empty diagram.";
         case 1:
@@ -93,54 +80,46 @@ var CountObjects = function(obj)
 
 var Accuracy = 1E-6;
 
-var AddShape = function(kendoDiagram, p, shapeOptions, id)
-{
-    if(typeof(p) === "undefined")
-    {
+var AddShape = function (kendoDiagram, p, shapeOptions, id) {
+    if (typeof(p) === "undefined") {
         p = new diagram.Point(0, 0);
     }
 
     shapeOptions = kendo.deepExtend({
-        width     : 200,
-        height    : 100,
-        id        : id,
+        width: 200,
+        height: 100,
+        id: id,
         background: "#778899",
-        data      : "rectangle"
+        data: "rectangle"
     }, shapeOptions);
 
     return kendoDiagram.addShape(p, shapeOptions);
 };
 
-var AddCircle = function(canvas, p, radius)
-{
+var AddCircle = function (canvas, p, radius) {
     var circ = new diagram.Circle({
-        x         : p.x,
-        y         : p.y,
+        x: p.x,
+        y: p.y,
         background: "orange",
-        radius    : radius || 25
+        radius: radius || 25
     });
     canvas.append(circ);
 
     return circ;
 };
 
-var AddConnection = function(diagram, from, to, options)
-{
+var AddConnection = function (diagram, from, to, options) {
     return diagram.connect(from, to, options);
 };
 
-var GetRoot = function()
-{
+var GetRoot = function () {
     var root = document.getElementById('canvas');
-    if(root == null)
-    {
+    if (root == null) {
         throw "The unit testing requires a DIV with name 'canvas'.";
     }
     var children = root.childNodes;
-    if(children.length > 0)
-    {
-        for(var i = 0; i < children.length; i++)
-        {
+    if (children.length > 0) {
+        for (var i = 0; i < children.length; i++) {
             root.removeChild(children[i]);
         }
     }
@@ -148,32 +127,27 @@ var GetRoot = function()
 };
 
 var Shapes = {
-    Rectangle     : function(point)
-    {
+    Rectangle: function (point) {
         return {
             data: "Rectangle"
         };
     },
-    Triangle      : function()
-    {
+    Triangle: function () {
         return {
             data: "m2.5,109.24985l61,-106.74985l61,106.74985l-122,0z"
         };
     },
-    SequentialData: function()
-    {
+    SequentialData: function () {
         return {
             data: "m50.21875,97.4375l0,0c-26.35457,0 -47.71875,-21.25185 -47.71875,-47.46875l0,0c0,-26.21678 21.36418,-47.46875 47.71875,-47.46875l0,0c12.65584,0 24.79359,5.00155 33.74218,13.90339c8.94862,8.90154 13.97657,20.97617 13.97657,33.56536l0,0c0,12.58895 -5.02795,24.66367 -13.97657,33.56542l13.97657,0l0,13.90333l-47.71875,0z"
         };
     },
-    Data          : function()
-    {
+    Data: function () {
         return {
             data: "m2.5,97.70305l19.07013,-95.20305l76.27361,0l-19.0702,95.20305l-76.27354,0z"
         };
     },
-    Wave          : function()
-    {
+    Wave: function () {
         return {
             data: "m2.5,15.5967c31.68356,-45.3672 63.37309,45.3642 95.05661,0l0,81.65914c-31.68353,45.36404 -63.37305,-45.36732 -95.05661,0l0,-81.65914z"
         };
@@ -183,8 +157,7 @@ var Shapes = {
 /*-----------Utilities tests------------------------------------*/
 QUnit.module("Utilities tests");
 
-test("Flatten Array", function()
-{
+test("Flatten Array", function () {
     var ar = [
         [1],
         [2, 3],
@@ -197,98 +170,82 @@ test("Flatten Array", function()
     deepEqual(res, [1, 2, 3, 4, 1], "Should be merged to a flattened array.");
 });
 
-test("Distinct array", function()
-{
+test("Distinct array", function () {
     var ar = [1, 2, 1, 3, 5, 4, 4];
     var dis = ar.distinct();
     ok(dis.length == 5, "Should have been reduced to distinct elements.");
 });
 
-test("Normal Distribution", function()
-{
+test("Normal Distribution", function () {
     var n = kendo.diagram.normalVariable;
-    var r = Range(0, 100).map(function(i)
-    {
+    var r = Range(0, 100).map(function (i) {
         return n();
     });
     ok(true, "Have to think about how to unit test the normal distribution...");
 });
 
-test('Random id', function()
-{
+test('Random id', function () {
     var a = new Range(0, 20);
     var counter = 0;
-    a.forEach(function(i, j, m)
-    {
+    a.forEach(function (i, j, m) {
         counter++;
     });
     ok(counter == 21, 'Passed 21 times.');
 });
 
-test('Any', function()
-{
+test('Any', function () {
     // mixed array
     var a = new Range(1, 15);
     a.push('Swa');
     a.push('Miro');
     a.push('Niko');
-    ok(a.any(function(x)
-    {
+    ok(a.any(function (x) {
         return x == 'Swa';
     }), 'Should find element Swa in the array.');
 });
 
-test('Remove', function()
-{
+test('Remove', function () {
     var a = new Range(1, 105);
     a.remove(7, 13);
-    var find = function(x)
-    {
+    var find = function (x) {
         return x == 7 || x == 13;
     };
     ok(!a.any(find), 'Elements 7 and 13 should have been removed.')
 });
 
-test('Distinct and contains', function()
-{
+test('Distinct and contains', function () {
     var a = [1, 3, 7, 5, 7, 5, 3];
     var ds = a.distinct();
     ok(ds.length == 4, 'Only 1,3,5,7 should remain.');
     ok(ds.contains(1, 3, 5, 7), 'Found the distinct elements.')
 });
 
-test('indexOf', function()
-{
+test('indexOf', function () {
     var a = [1, 4, 7, 8, 5, 2];
     ok(a.indexOf(7) == 2, 'Correct')
     ok(a.indexOf(2) == 5, 'Correct')
 });
 
-test('Fold', function()
-{
+test('Fold', function () {
     var a = new Range(1, 4);
-    var sum = a.fold(function(a, x)
-    {
+    var sum = a.fold(function (a, x) {
         return a + x;
     });
     ok(sum == 10);
 
-    sum = a.fold(function(a, x)
-    {
+    sum = a.fold(function (a, x) {
         return a + x;
     }, 10);
     ok(sum == 20);
 
     a = ['Niko', 'Miro', 'Swa'];
-    sum = a.fold(function(a, x)
-    {
+    sum = a.fold(function (a, x) {
         return a + ', ' + x;
     }, 'D^3 team: ');
     ok(sum == 'D^3 team: , Niko, Miro, Swa');
 });
 
-test('sameAs', function()
-{
+test('sameAs', function () {
     var a = new Range(1, 5);
     var b = new Range(1, 5);
     var c = new Range(1, 7);
@@ -297,27 +254,22 @@ test('sameAs', function()
     ok(!a.sameAs(c), 'They are not the same.')
 });
 
-test('Map', function()
-{
+test('Map', function () {
     var a = new Range(1, 5);
-    var b = a.map(function(x)
-    {
+    var b = a.map(function (x) {
         return x + 1;
     });
     var shouldbe = new Range(2, 6);
     ok(b.sameAs(shouldbe), 'Shifted array are the same.')
 });
 
-test('Find', function()
-{
+test('Find', function () {
     var a = ['Niko', 'Miro', 'Swa'];
-    ok(a.find(function(x)
-    {
+    ok(a.find(function (x) {
         return x == 'Niko';
     }), 'Found Niko.');
 
-    ok(!a.find(function(x)
-    {
+    ok(!a.find(function (x) {
         return x == 'Itzo';
     }), 'Itzo not supposed to be in there.');
     var stuff = [
@@ -325,64 +277,54 @@ test('Find', function()
         {"name": "Ian", "age": 47},
         {"name": "Mary", "age": 27}
     ];
-    var first = stuff.find(function(item)
-    {
+    var first = stuff.find(function (item) {
         return item["name"] == "Ian";
     });
     ok(first && first["age"] == 12);
 });
 
-test('Bi-sort', function()
-{
+test('Bi-sort', function () {
     var a = ['d', 'a', 'c', 'b'];
     var b = [4, 1, 3, 2];
-    Array.prototype.bisort(a, b, function(m, n)
-    {
+    Array.prototype.bisort(a, b, function (m, n) {
         return m.localeCompare(n);
     });
     var shouldbe = new Range(1, 4);
     ok(b.sameAs(shouldbe), "Reordering works.");
 });
 
-test('Call $*!', function()
-{
-    var f = function(x, r)
-    {
+test('Call $*!', function () {
+    var f = function (x, r) {
         return x + r;
     };
     var w = f.call(this, 5, 4);
     ok(w == 9);
 });
 
-test('Insert', function()
-{
+test('Insert', function () {
     var a = new Range(1, 5);
     var shouldbe = [1, 2, 3, 17, 4, 5];
     var b = a.insert(17, 3);
     ok(b.sameAs(shouldbe));
 });
 
-test('Prepend', function()
-{
+test('Prepend', function () {
     var a = new Range(1, 5);
     var shouldbe = new Range(0, 5);
     var b = a.prepend(0);
     ok(b.sameAs(shouldbe));
 });
 
-test('Append', function()
-{
+test('Append', function () {
     var a = new Range(1, 5);
     var shouldbe = new Range(1, 6);
     var b = a.append(6);
     ok(b.sameAs(shouldbe));
 });
 
-test('Apply', function()
-{
+test('Apply', function () {
     var a = new Range(3, 22);
-    var func = function(x, r)
-    {
+    var func = function (x, r) {
         return x + r;
     };
     var b = a.apply(func, 3);
@@ -390,16 +332,13 @@ test('Apply', function()
     ok(b.sameAs(shouldbe), 'Functional is lovely.');
 });
 
-test('isObject', function()
-{
+test('isObject', function () {
     ok(isObject({"stuff": 14}), "Should be considered as an object.")
     ok(!isObject(3.1415), "Should not be considered as an object.")
 });
 
-test('isFunction', function()
-{
-    var g = function(s)
-    {
+test('isFunction', function () {
+    var g = function (s) {
         return s;
     };
     ok(isFunction(g), "Obviously a function.");
@@ -407,85 +346,71 @@ test('isFunction', function()
     ok(!isFunction(25.26259), "Neither this one.");
 });
 
-test('isEmpty', function()
-{
+test('isEmpty', function () {
     ok(isEmpty([]), "Is an empty array.");
     ok(!isEmpty([3, 4]), "Not empty of course.");
     ok(!isEmpty({"a": 1}), "Non empty literal.");
 });
 
-test('has', function()
-{
+test('has', function () {
     var obj = {"a": 1, "b": 2};
     ok(has(obj, "a"), "Has prop 'a'.")
     ok(!has(obj, "k"), "Has no prop 'k'.")
 });
 
-test('isString', function()
-{
+test('isString', function () {
     ok(isString("Something"), "Is a string, cool.");
     ok(!isString({}), "Nope.");
 });
 
-test('NaN', function()
-{
+test('NaN', function () {
     ok(!isNaN(4585), "Is not NaN.");
     ok(isNaN(Number.NaN), "Bad bad math behavior.");
 });
 
-test('filter', function()
-{
+test('filter', function () {
     var a = new Range(1, 55);
-    var b = a.filter(function(x)
-    {
+    var b = a.filter(function (x) {
         return x >= 50;
     });
     var shouldbe = new Range(50, 55);
     ok(b.sameAs(shouldbe), "Should have filtered out.");
 });
 
-test('where', function()
-{
+test('where', function () {
     var stuff = [
         {"name": "Ian", "age": 12},
         {"name": "Ian", "age": 47},
         {"name": "Mary", "age": 27}
     ];
 
-    var subset = stuff.where(function(x)
-    {
+    var subset = stuff.where(function (x) {
         return x.name == "Ian";
     });
     ok(subset.length == 2, "Should have two items.");
-    var item = stuff.where(function(x)
-    {
+    var item = stuff.where(function (x) {
         return x.name == "Ian";
     }, true);
     ok(isObject(item) && !isArray(item) && item["age"] == 12, "Should be one item.");
 });
 
-test('all', function()
-{
+test('all', function () {
     var a = [1, 1, 1, 1, 1, 1];
-    ok(a.all(function(x)
-    {
+    ok(a.all(function (x) {
         return x == 1;
     }), "All ones.");
     a.add(2);
-    ok(!a.all(function(x)
-    {
+    ok(!a.all(function (x) {
         return x == 1;
     }), "Not all ones.");
 
-    ok([].all(function(x)
-    {
+    ok([].all(function (x) {
         return x > 1;
     }), "Empty fulfills all the requirements.");
 
 });
 
-test("Range test", function()
-{
+test("Range test", function () {
     var r = new Range(10, 20);
     ok(r.length == 11, "Should have length 11.");
     r = new Range(10, 20, 2);
@@ -500,8 +425,7 @@ test("Range test", function()
     ok(r.length == 0, 'One element array');
     r = new Range(5, 1);
     ok(r.length == 5, 'Length 5');
-    throws(function()
-        {
+    throws(function () {
             new Range(15, 1, 4);
         },
         'Should throw a separation error.'
@@ -511,8 +435,7 @@ test("Range test", function()
 /*-----------Hashtable tests------------------------------------*/
 QUnit.module("HashTable tests");
 
-test('Basics', function()
-{
+test('Basics', function () {
     var ht = new HashTable();
     ht.add(1);
     ok(ht.containsKey(1));
@@ -527,13 +450,11 @@ test('Basics', function()
     ok(!ht.containsKey(1));
 
     ht = new HashTable();
-    for(var i = 0; i < 10; i++)
-    {
+    for (var i = 0; i < 10; i++) {
         ht.add(new Node(i.toString()), i);
     }
     var vals = [];
-    var acc = function(x)
-    {
+    var acc = function (x) {
         vals.add(x.value);
     };
     ht.forEach(acc);
@@ -544,12 +465,10 @@ test('Basics', function()
 /*-----------Dictionary tests------------------------------------*/
 QUnit.module("Dictionary tests");
 
-test('Basics', function()
-{
+test('Basics', function () {
     var dic = new Dictionary();
     var counter = 0;
-    dic.bind("changed", function(e)
-    {
+    dic.bind("changed", function (e) {
         counter++;
     });
     dic.add(1, "Geri");
@@ -567,14 +486,11 @@ test('Basics', function()
     ok(!dic.containsKey(3));
     ok(dic.keys().length == 3);
     var r = [];
-    dic.forEachValue(function(v)
-    {
-        if(isString(v))
-        {
+    dic.forEachValue(function (v) {
+        if (isString(v)) {
             r.push(v);
         }
-        if(isObject(v))
-        {
+        if (isObject(v)) {
             r.push(v.name);
         }
     });
@@ -592,13 +508,11 @@ test('Basics', function()
     ok(!dic.containsKey(n), "Should be gone now.");
 
     dic = new Dictionary();
-    for(var i = 0; i < 10; i++)
-    {
+    for (var i = 0; i < 10; i++) {
         dic.add(new Node(i.toString()), i);
     }
     var vals = [];
-    var acc = function(k, v)
-    {
+    var acc = function (k, v) {
         vals.add(v);
     };
     dic.forEach(acc);
@@ -607,8 +521,7 @@ test('Basics', function()
     ok(shouldbe.sameAs(vals), "Should be just a range.");
 
     vals = [];
-    var acc = function(v)
-    {
+    var acc = function (v) {
         vals.add(v);
     };
     dic.forEachValue(acc);
@@ -617,12 +530,10 @@ test('Basics', function()
     ok(shouldbe.sameAs(vals), "Should be just a range again.");
 });
 
-test('Load from existing dictionary', function()
-{
+test('Load from existing dictionary', function () {
     var from = new Dictionary();
     var data = new Range(0, 14);
-    data.forEach(function(x)
-    {
+    data.forEach(function (x) {
         from.add(x, x.toString());
     });
     var to = new Dictionary(from);
@@ -633,17 +544,14 @@ test('Load from existing dictionary', function()
 /*-----------Queue tests------------------------------------*/
 QUnit.module("Queue tests");
 
-test('Basics', function()
-{
+test('Basics', function () {
     var q = new Queue();
     var r = new Range(1, 5);
-    r.forEach(function(x)
-    {
+    r.forEach(function (x) {
         q.enqueue(x);
     });
     var rev = [];
-    while(q.length > 0)
-    {
+    while (q.length > 0) {
         rev.push(q.dequeue());
     }
     var shouldbe = new Range(1, 5);
@@ -653,8 +561,7 @@ test('Basics', function()
 /*-----------Graph structure tests------------------------------------*/
 QUnit.module("Graph structure tests");
 
-test('Node basics', function()
-{
+test('Node basics', function () {
 
     var n = new Node();
     n.id = "GR";
@@ -675,8 +582,7 @@ test('Node basics', function()
     ok(!g.hasNode("A11"));
 
     var b7 = g.addNode("B7");
-    throws(function()
-        {
+    throws(function () {
             g.getNode(77);
         },
         'Should throw an error since it is neither a Node nor an identifier.'
@@ -694,8 +600,7 @@ test('Node basics', function()
     ok(ori.incoming.sameAs(clone.incoming));
 });
 
-test('Parents and children', function()
-{
+test('Parents and children', function () {
     var g = parse(["1->2", "0->2", "2->3", "3->4", "3->5", "3->6"]);
 
     var n0 = g.getNode("0");
@@ -714,12 +619,10 @@ test('Parents and children', function()
     ok(n5.getParents().length == 1, "Parent of n5.");
 });
 
-test('Depth-first traversal', function()
-{
+test('Depth-first traversal', function () {
     var g = parse(["0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
     var path = [];
-    var acc = function(node)
-    {
+    var acc = function (node) {
         path.add(node.id);
     }
     var n0 = g.getNode("0");
@@ -734,8 +637,7 @@ test('Depth-first traversal', function()
     ok(path.sameAs(shouldbe), "No revisit please.");
 });
 
-test('Subgraphs', function()
-{
+test('Subgraphs', function () {
     var g = parse(["0->1", "1->2", "1->3", "3->4", "2->4", "4->5", "5->6", "6->7", "6->8", "8->9", "7->9", "9->10"]);
     var h = parse(["3->4", "2->4", "4->5", "5->6", "6->7", "6->8"]);
     ok(g.isSubGraph(h), "Should be a subgraph.");
@@ -743,12 +645,10 @@ test('Subgraphs', function()
     ok(!g.isSubGraph(h), "Shouldn't be a subgraph.");
 });
 
-test('Breadth-first traversal', function()
-{
+test('Breadth-first traversal', function () {
     var g = parse(["0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
     var path = [];
-    var acc = function(node)
-    {
+    var acc = function (node) {
         path.add(node.id);
     }
     var n0 = g.getNode("0");
@@ -763,8 +663,7 @@ test('Breadth-first traversal', function()
     ok(path.sameAs(shouldbe), "No revisit please.");
 });
 
-test('Link basics', function()
-{
+test('Link basics', function () {
     var from = new Node("from");
     var to = new Node("to");
     var l = new Link(from, to);
@@ -785,8 +684,7 @@ test('Link basics', function()
     ok(clone.target == l.target);
 });
 
-test('Graph basics', function()
-{
+test('Graph basics', function () {
 
     var g = new Graph("D1");
     ok(g.id == "D1", "Id check.");
@@ -838,8 +736,7 @@ test('Graph basics', function()
     ok(g.nodes.length == 4);
 });
 
-test('Parsing', function()
-{
+test('Parsing', function () {
     var graphString = ["n1->n2", {id: "QSDF13"}, "n2->n3"];
     var g = parse(graphString);
     ok(g.nodes.length == 3 && g.nodes[0].id == "n1" && g.nodes[1].id == "n2" && g.nodes[2].id == "n3");
@@ -862,8 +759,7 @@ test('Parsing', function()
     ok(s[3].id == "44");
 });
 
-test('Components', function()
-{
+test('Components', function () {
     // two simple components
     var simple = parse(["1->2", "3->4"]);
     var components = simple.getConnectedComponents();
@@ -880,8 +776,7 @@ test('Components', function()
     ok(components.length == 3, "Should be three components.");
 });
 
-test('Spanning tree', function()
-{
+test('Spanning tree', function () {
     var g = parse(["0->1", "1->2", "1->3", "3->4", "2->4"]);
     var n0 = g.getNode("0");
     var tree = g.getSpanningTree(n0);
@@ -910,8 +805,7 @@ test('Spanning tree', function()
 
 });
 
-test('Make acyclic', function()
-{
+test('Make acyclic', function () {
     var g = Graph.Predefined.Grid(2, 2);
     ok(g.nodes.length == 9);
     ok(g.links.length == 12);
@@ -921,8 +815,7 @@ test('Make acyclic', function()
     ok(g.isAcyclic(), "Should be acyclic now");
 });
 
-test('Balance trees and forests', function()
-{
+test('Balance trees and forests', function () {
     var g = Graph.Utils.createBalancedTree(1, 2);
     ok(g.nodes.length == 3);
     ok(g.links.length == 2);
@@ -938,8 +831,7 @@ test('Balance trees and forests', function()
     ok(components[0].links.length == 84); // (4-4^4)/(1-4)
 });
 
-test('Acyclicity', function()
-{
+test('Acyclicity', function () {
     var g = parse(["0->1", "1->2", "2->3", "3->4", "4->1"]);
     var cycles = g.findCycles();
     ok(cycles.length == 1, "Should have a cycle.");
@@ -965,8 +857,7 @@ test('Acyclicity', function()
     ok(cycles.length == 0, "A balanced forest should not have any cycles.");
 });
 
-test('Assign levels', function()
-{
+test('Assign levels', function () {
     var tree = Predefined.Tree(3, 2);
     var root = tree.root;
     tree.assignLevels(root);
@@ -987,8 +878,7 @@ test('Assign levels', function()
 /*-----------Undoredo tests------------------------------------*/
 QUnit.module("UndoRedo tests");
 
-test("UndoRedoService basic", function()
-{
+test("UndoRedoService basic", function () {
     var ur = new diagram.UndoRedoService();
     var unit = new Task("Counting unit.");
     ur.begin();
@@ -1000,8 +890,7 @@ test("UndoRedoService basic", function()
     QUnit.equal(unit.Count, 0, "Unit undo was executed");
     ur.redo();
     ok(unit.Count == 1, "Unit was executed");
-    QUnit.throws(function()
-    {
+    QUnit.throws(function () {
         ur.Redo();
     }, "Supposed to raise an exception since we are passed the length of the stack.");
     ur.undo();
@@ -1015,8 +904,7 @@ test("UndoRedoService basic", function()
 /*-----------Canvas tests------------------------------------*/
 QUnit.module("Canvas tests");
 
-test("Add Canvas", function()
-{
+test("Add Canvas", function () {
     var root = GetRoot();
     var canvas = new diagram.Canvas(root);
     var found = document.getElementById('SVGRoot');
@@ -1024,8 +912,8 @@ test("Add Canvas", function()
     root = GetRoot();
 
     canvas = new diagram.Canvas(root, {
-        width     : 865,
-        height    : 287,
+        width: 865,
+        height: 287,
         background: "#121217"
     });
     found = document.getElementById('SVGRoot');
@@ -1037,13 +925,12 @@ test("Add Canvas", function()
 /*-----------Rectangle tests------------------------------------*/
 QUnit.module("Rectangle tests");
 
-test("Add Circle", function()
-{
+test("Add Circle", function () {
     var root = GetRoot();
     var canvas = new diagram.Canvas(root);
     var rec = new diagram.Rectangle({
-        id    : "MyRectangle",
-        width : 150,
+        id: "MyRectangle",
+        width: 150,
         height: 88
     });
     rec.position(new diagram.Point(100, 121));
@@ -1060,18 +947,17 @@ test("Add Circle", function()
 /*-----------Marker tests------------------------------------*/
 QUnit.module("Marker tests");
 
-test("Add/Remove/Clear Marker", function()
-{
+test("Add/Remove/Clear Marker", function () {
     var root = GetRoot();
     var canvas = new diagram.Canvas(root);
     AddCircle(canvas, new diagram.Point(100, 120));
     var marker = new diagram.Marker({
-        id          : "ArrowHead",
-        width       : 44,
-        height      : 21,
-        viewBox     : new diagram.Rect(10, 20, 33, 55),
+        id: "ArrowHead",
+        width: 44,
+        height: 21,
+        viewBox: new diagram.Rect(10, 20, 33, 55),
         orientantion: "auto",
-        data        : "m"
+        data: "m"
     });
     canvas.addMarker(marker);
     var found = document.getElementById("ArrowHead");
@@ -1081,7 +967,7 @@ test("Add/Remove/Clear Marker", function()
     equal(marker.native.firstChild.tagName.toLowerCase(), "path", "path should be there");
 
     var line = new diagram.Line({
-        id    : "Line1",
+        id: "Line1",
         endCap: marker.native.id
     });
     canvas.append(line);
@@ -1100,15 +986,14 @@ test("Add/Remove/Clear Marker", function()
 /*-----------Circle tests------------------------------------*/
 QUnit.module("Circle tests");
 
-test("Add Circle", function()
-{
+test("Add Circle", function () {
     var root = GetRoot();
     var canvas = new diagram.Canvas(root);
     var circ = new diagram.Circle({
-        id        : "MyCirc",
-        x         : 200, y: 121,
-        width     : 150,
-        height    : 150,
+        id: "MyCirc",
+        x: 200, y: 121,
+        width: 150,
+        height: 150,
         background: "#345656"
     });
     canvas.append(circ);
@@ -1122,13 +1007,12 @@ test("Add Circle", function()
 /*-----------Text tests------------------------------------*/
 QUnit.module("Text tests");
 
-test("Add Text", function()
-{
+test("Add Text", function () {
     var root = GetRoot();
     var canvas = new diagram.Canvas(root);
     var text = new diagram.TextBlock({
-        id  : "MyText",
-        x   : 100, y: 121,
+        id: "MyText",
+        x: 100, y: 121,
         text: "<<|Telerik|>>"
     });
 
@@ -1145,22 +1029,21 @@ test("Add Text", function()
 /*-----------Group tests------------------------------------*/
 QUnit.module("Group tests");
 
-test("Add group", function()
-{
+test("Add group", function () {
     var root = GetRoot();
     var canvas = new diagram.Canvas(root);
     var g = new diagram.Group({
         id: "G1",
-        x : 100,
-        y : 100
+        x: 100,
+        y: 100
     });
     canvas.append(g);
     var found = document.getElementById("G1");
     ok(found != null, "A SVG group with name 'G1' should be in the HTML tree.");
     var rec = new diagram.Rectangle({
-        id        : "MyRectangle",
-        width     : 50,
-        height    : 50,
+        id: "MyRectangle",
+        width: 50,
+        height: 50,
         background: "red"
     });
     g.append(rec);
@@ -1169,8 +1052,7 @@ test("Add group", function()
 /*-----------Transofrmations tests------------------------------------*/
 QUnit.module("Transformation tests");
 
-test("Matrix calculus", function()
-{
+test("Matrix calculus", function () {
     var m = diagram.Matrix.parse("matrix(1,2,3,4,5,6)");
     ok(m != null);
     ok(m.a == 1);
@@ -1281,8 +1163,7 @@ test("Matrix calculus", function()
 /*-----------Rect tests------------------------------------*/
 QUnit.module("Rect tests");
 
-test("Basic tests", function()
-{
+test("Basic tests", function () {
     var r = new diagram.Rect(122, 155);
     equal(r.width, 0, "if not specified, width should be 0");
     ok(!r.contains(new diagram.Point(150, 160)));
@@ -1302,23 +1183,21 @@ test("Basic tests", function()
 /*-----------Diagram tests------------------------------------*/
 QUnit.module("Diagram tests");
 
-test("Basic tests", function()
-{
+test("Basic tests", function () {
     GetRoot();
     $("#canvas").kendoDiagram();
     var found = document.getElementById('SVGRoot');
     ok(found != null, "The Diagram should add an <SVG/> element with name 'SVGRoot'.");
 });
 
-test("Adding shape tests", function()
-{
+test("Adding shape tests", function () {
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var kendoDiagram = diagramElement.data("kendoDiagram");
     kendoDiagram.addShape(new diagram.Point(100, 120), {
-        id        : "TestShape",
-        data      : "rectangle",
-        width     : 200, height: 100,
+        id: "TestShape",
+        data: "rectangle",
+        width: 200, height: 100,
         background: "#778899"
     });
     var found = document.getElementById("TestShape");
@@ -1334,17 +1213,16 @@ test("Adding shape tests", function()
     ok(found.attributes["visibility"].value == "visible", "The visibility should be 'visible' now.");
     item.IsSelected = true;
     kendoDiagram.addShape(new diagram.Point(350, 120), {
-        id        : "TestShape",
-        data      : "rectangle",
-        width     : 200,
-        height    : 100,
+        id: "TestShape",
+        data: "rectangle",
+        width: 200,
+        height: 100,
         background: "#778899"
     });
     //kendoDiagram.shapes[1].select(true);
 });
 
-test("Adding connections", function()
-{
+test("Adding connections", function () {
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var kendoDiagram = diagramElement.data("kendoDiagram");
@@ -1360,7 +1238,7 @@ test("Adding connections", function()
     var bottomCor = shape1.getConnector("Bottom");
     var con = AddConnection(kendoDiagram, bottomCor, topCor, {
         startCap: "ArrowEnd",
-        endCap  : "FilledCircle"
+        endCap: "FilledCircle"
     });
     var con2 = AddConnection(kendoDiagram, bottomCor, topCor2);
     con2.content("Connection Label");
@@ -1371,8 +1249,7 @@ test("Adding connections", function()
 
 /*-----------XML Loading tests------------------------------------*/
 QUnit.module("Graph adapter tests");
-test('Graph adapter', function()
-{
+test('Graph adapter', function () {
 
     var treeGraph = Predefined.Tree(2, 2); // 7 nodes and 6 links
     var div = GetRoot();
@@ -1447,8 +1324,7 @@ test('Graph adapter', function()
 
 QUnit.module("Layout algorithms");
 
-testSkip('Graph to diagram', function()
-{
+testSkip('Graph to diagram', function () {
     var g = Predefined.Grid(5, 5);
     //var g = Predefined.Forest(3,2,2);
     var div = GetRoot();
@@ -1459,8 +1335,7 @@ testSkip('Graph to diagram', function()
     ok(d.shapes.length == 36 && d.connections.length == 60, "Grid of 36 shapes and 60 connections.");
 });
 
-testSkip('Spring layout', function()
-{
+testSkip('Spring layout', function () {
     var g = Predefined.Forest(3, 3, 8);
     //var g = GraphUtils.createRandomConnectedGraph(300,2,true);
 
@@ -1471,8 +1346,7 @@ testSkip('Spring layout', function()
     ok(true);
 });
 
-testSkip('Spring layout', function()
-{
+testSkip('Spring layout', function () {
     var g = Predefined.Forest(3, 3, 3);
     //var g = GraphUtils.createRandomConnectedGraph(300,2,true);
 
@@ -1484,30 +1358,26 @@ testSkip('Spring layout', function()
     ok(true);
 });
 
-testSkip('Spring layout', function()
-{
+testSkip('Spring layout', function () {
 
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     var map = [];
-    for(var i = 0; i < 10; i++)
-    {
+    for (var i = 0; i < 10; i++) {
         var shape = diagram.addShape();
         shape.id = i.toString();
         map[i] = shape;
     }
     // create explicitly a radial diagram without passing through the graph structure
-    for(var i = 1; i < 10; i++)
-    {
+    for (var i = 1; i < 10; i++) {
         diagram.connect(map[0], map[i]);
     }
     diagram.layout();
     ok(true);
 });
 
-testSkip('Tree layout', function()
-{
+testSkip('Tree layout', function () {
     var g = Predefined.Tree(3, 3);
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
@@ -1518,14 +1388,12 @@ testSkip('Tree layout', function()
     ok(true);
 });
 
-testSkip('Grid layout', function()
-{
+testSkip('Grid layout', function () {
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     var map = [];
-    for(var i = 0; i < 10; i++)
-    {
+    for (var i = 0; i < 10; i++) {
         var shape = diagram.addShape();
         shape.id = i.toString();
         map[i] = shape;
@@ -1534,8 +1402,7 @@ testSkip('Grid layout', function()
     ok(true);
 });
 
-testSkip('Forest layout', function()
-{
+testSkip('Forest layout', function () {
     var g = Predefined.Forest(3, 2, 13);
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
@@ -1546,14 +1413,12 @@ testSkip('Forest layout', function()
     ok(true);
 });
 
-testSkip('Random diagram layout', function()
-{
+testSkip('Random diagram layout', function () {
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
-    for(var i = 0; i < 12; i++)
-    {
+    for (var i = 0; i < 12; i++) {
         diagram.randomDiagram(parseInt(Math.random() * 150 + 1), 3, false);
     }
     diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
@@ -1564,8 +1429,7 @@ testSkip('Random diagram layout', function()
     ok(true);
 });
 
-testSkip('Radial layout', function()
-{
+testSkip('Radial layout', function () {
     var g = Predefined.Tree(5, 3);
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
@@ -1581,8 +1445,7 @@ testSkip('Radial layout', function()
     ok(true);
 });
 
-testSkip('Radial layout', function()
-{
+testSkip('Radial layout', function () {
 
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
@@ -1598,23 +1461,20 @@ testSkip('Radial layout', function()
     ok(true);
 });
 
-testSkip('Mindmap layout', function()
-{
+testSkip('Mindmap layout', function () {
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     diagramElement.css("width", "800");
     diagramElement.css("height", "800");
     var diagram = diagramElement.data("kendoDiagram");
     var map = [];
-    for(var i = 0; i < 10; i++)
-    {
+    for (var i = 0; i < 10; i++) {
         var shape = diagram.addShape();
         shape.id = i.toString();
         map[i] = shape;
     }
     // create explicitly a radial diagram without passing through the graph structure
-    for(var i = 1; i < 10; i++)
-    {
+    for (var i = 1; i < 10; i++) {
         diagram.connect(map[0], map[i]);
     }
     diagram.layout();
@@ -1628,8 +1488,7 @@ testSkip('Mindmap layout', function()
     ok(true);
 });
 
-testSkip('Mindmap layout', function()
-{
+testSkip('Mindmap layout', function () {
     var g = Predefined.Tree(3, 3);
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
@@ -1646,8 +1505,7 @@ testSkip('Mindmap layout', function()
     ok(true);
 });
 
-testSkip('Mindmap layout', function()
-{
+testSkip('Mindmap layout', function () {
     var g = Predefined.Mindmap();
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
@@ -1664,8 +1522,7 @@ testSkip('Mindmap layout', function()
     ok(true);
 });
 
-testSkip('Mindmap layout', function()
-{
+testSkip('Mindmap layout', function () {
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
@@ -1677,15 +1534,14 @@ testSkip('Mindmap layout', function()
             TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
             verticalSeparation: 2,
             horizontalSeparation: 150,
-            roots         : [root]
+            roots: [root]
         }
     )
     diagram.zoom(0.5);
     ok(true);
 });
 
-test('Tip-over tree layout', function()
-{
+testSkip('Tip-over tree layout', function () {
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
@@ -1697,12 +1553,30 @@ test('Tip-over tree layout', function()
         {
             TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree,
             verticalSeparation: 25,
-            horizontalSeparation:10,
+            horizontalSeparation: 10,
             underneathHorizontalOffset: 10,
             underneathVerticalTopOffset: 10,
-            roots         : [root]
+            roots: [root]
         }
     )
     diagram.zoom(0.5);
     ok(true);
 });
+
+test('Varying shape size layout', function () {
+    var g = Predefined.Tree(3, 3);
+    var div = GetRoot();
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
+    diagram.canvas.native.setAttribute("height", "1000");
+    GraphUtils.createDiagramFromGraph(diagram, g, false, true);
+
+    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+        {
+            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp
+        }
+    )
+    diagram.zoom(0.5);
+    ok(true);
+});
+
