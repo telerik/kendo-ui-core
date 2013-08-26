@@ -1852,10 +1852,20 @@
 .km-native-scrolling,
 .km-native-scrolling .km-view
 {
+    min-height: 100%;
     height: auto;
-    display: block;
     -ms-touch-action: auto !important;
     -webkit-transform: none;
+}
+
+.km-native-scrolling .km-view
+{
+    position: relative;
+}
+
+.km-native-scrolling [style*=pointer-events] .km-view
+{
+    position: absolute;
 }
 
 .km-native-scrolling .km-header

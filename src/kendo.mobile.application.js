@@ -88,6 +88,11 @@ kendo_module({
         return isOrientationHorizontal(element) ? HORIZONTAL : VERTICAL;
     }
 
+    function setMinimumHeight(pane) {
+        pane.parent().addBack()
+               .css("min-height", window.innerHeight);
+    }
+
     function applyViewportHeight() {
         $("meta[name=viewport]").remove();
         HEAD.append(viewportTemplate({
@@ -275,6 +280,10 @@ kendo_module({
                     .removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass(element));
 
+                if (that.options.useNativeScrolling) {
+                    setMinimumHeight(element);
+                }
+
                 if (BERRYPHONEGAP) {
                     applyViewportHeight();
                 }
@@ -282,7 +291,8 @@ kendo_module({
         },
 
         _attachMeta: function() {
-            var icon = this.options.icon, size;
+            var options = this.options,
+                icon = options.icon, size;
 
             if (!BERRYPHONEGAP) {
                 HEAD.prepend(viewportMeta);
@@ -298,6 +308,10 @@ kendo_module({
                 for(size in icon) {
                     HEAD.prepend(iconMeta({ icon: icon[size], size: size }));
                 }
+            }
+
+            if (options.useNativeScrolling) {
+                setMinimumHeight(this.element);
             }
         },
 
