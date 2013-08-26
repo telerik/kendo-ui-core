@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UI
             var iconData = note.Icon.CreateSerializer().Serialize();
             if (iconData.Count > 0)
             {
-                result.Add("icon", labelData);
+                result.Add("icon", iconData);
             }
 
             var lineData = note.Line.CreateSerializer().Serialize();
