@@ -1880,6 +1880,12 @@
     bottom: 0;
 }
 
+.km-native-scrolling .km-modalview .km-header,
+.km-native-scrolling .km-modalview .km-footer
+{
+    position: relative;
+}
+
 .km-native-scrolling .km-content
 {
     width: 100%;
@@ -1887,8 +1893,10 @@
 
 .km-native-scrolling .km-shim
 {
+    position: fixed;
     top: 0;
-    bottom: auto;
+    bottom: 0;
+    height: auto !important;
 }
 
 .km-native-scrolling .km-drawer
