@@ -1448,7 +1448,7 @@
                 deepEqual(selection.end, new Date(2013, 6, 9, 4));
                 equal(selection.events.length, 1);
                 equal(selection.events[0], event2.uid);
-                equal(selection.isAllDay, false);
+                ok(!selection.isAllDay);
             });
 
             test("View moves to the first event before current slot", function() {
@@ -1786,7 +1786,7 @@
                 equal(cell, slot.element);
             });
 
-            testSkip("View selects event in first group", function() {
+            test("View selects all day slot in second group", function() {
                 setupGroupedScheduler();
 
                 scheduler.wrapper.focus();
@@ -1803,7 +1803,7 @@
 
                 var cell = view.datesHeader.find(".k-state-selected")[0];
 
-                equal(cell, view._rows[0].slots[13].element);
+                equal(cell, view.groups[1].ranges(selection.start, selection.end, true)[0].start.element);
             });
 
             test("View selects first event", function() {

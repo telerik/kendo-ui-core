@@ -874,152 +874,72 @@ kendo_module({
             return false;
         },
 
-        _nextAllDayEvent: function(collection, index, selectionEvents, pad) {
-            var events = collection.events();
-            var slots = collection._slots;
+        moveToEventInGroup: function(group, slot, selectedEvents, prev) {
+            var events = group._continuousEvents || [];
 
-            events = $.grep(events, function(item) {
-                return item.start == index;
-            });
+            var found, event;
 
-            var idx = eventIndex(events, selectionEvents);
-            var event;
-
-            if (idx > -1) {
-                event = events[idx + pad];
-            } else {
-                event = pad > 0 ? events[0] : events[events.length - 1];
-            }
-
-            if (event) {
-                return {
-                    event: event,
-                    start: slots[event.start].startDate(),
-                    end: slots[event.end].endDate(),
-                    isAllDay: true
-                };
-            }
-
-            return false;
-        },
-
-        _nextEvent: function(collection, slotIndex, selectionEvents, pad) {
-            var events = collection.events();
-            var idx = eventIndex(events, selectionEvents);
-            var event;
-
-            if (idx > -1) {
-                event = events[idx + pad];
-            } else {
-                events = $.grep(events, function(item) {
-                    if (pad > 0) {
-                        return item.start >= slotIndex;
-                    } else {
-                        return item.start <= slotIndex;
-                    }
-                });
-
-                event = pad > 0 ? events[0] : events[events.length - 1];
-            }
-
-            if (event) {
-                var slots = collection._slots;
-
-                return {
-                    event: event,
-                    start: slots[event.start].startDate(),
-                    end: slots[event.end].endDate(),
-                    isAllDay: false
-                };
-            }
-
-            return false;
-        },
-
-        _nextEventInGroup: function(isAllDay, group, slot, events, prev) {
-            var slotIndex = slot.index;
-            var eventInfo;
-
-            var idx = isAllDay ? slot.index : slot.columnIndex;
-            var length = group._timeSlotCollections.length;
             var pad = prev ? -1 : 1;
-            var origIdx = idx;
+
+            var length = events.length;
+            var idx = prev ? length - 1 : 0;
 
             while (idx < length && idx > -1) {
-                if (isAllDay) {
-                    eventInfo = this._nextAllDayEvent(group._daySlotCollections[0], idx, events, pad);
-                    if (!eventInfo) {
-                        if (!prev) {
-                            eventInfo = this._nextEvent(group._timeSlotCollections[idx], 0, events, pad);
-                        }
-                        isAllDay = false;
-                    }
-                } else {
-                    if (origIdx !== idx) {
-                        slotIndex = group._timeSlotCollections[idx][prev ? "last" : "first"]().index;
-                    }
-                    eventInfo = this._nextEvent(group._timeSlotCollections[idx], slotIndex, events, pad);
-                    if (!eventInfo) {
-                        if (prev) {
-                            eventInfo = this._nextAllDayEvent(group._daySlotCollections[0], idx, events, pad);
-                        }
+                event = events[idx];
 
-                        if (prev && !eventInfo) {
-                            isAllDay = false;
-                        } else {
-                            isAllDay = true;
-                        }
-                    }
-                }
+                if ( (!prev && event.start.startDate() >= slot.startDate()) ||
+                    (prev && event.start.startDate() <= slot.startDate()) ) {
 
-                if (eventInfo) {
+                    if (selectedEvents.length) {
+                        event = events[idx + pad];
+                    }
+                    found = !!event;
                     break;
                 }
 
                 idx += pad;
             }
 
-            return eventInfo;
+            return event;
         },
 
         moveToEvent: function(selection, prev) {
-            var eventInfo;
-            var isAllDay = !!selection.isAllDay;
-            var group = this.groups[selection.groupIndex];
-            var slot = group.ranges(selection.start, selection.end, isAllDay, false)[0].start;
-            var events = selection.events;
-
             var groupIndex = selection.groupIndex;
+            var group = this.groups[groupIndex];
+            var slot = group.ranges(selection.start, selection.end, selection.isAllDay, false)[0].start;
+
             var length = this.groups.length;
             var pad = prev ? -1 : 1;
+            var events = selection.events;
+            var event;
 
             while (groupIndex < length && groupIndex > -1) {
-                eventInfo = this._nextEventInGroup(isAllDay, group, slot, events, prev);
+                event = this.moveToEventInGroup(group, slot, events, prev);
 
-                if (eventInfo) {
+                groupIndex += pad;
+                group = this.groups[groupIndex];
+
+                if (!group || event) {
                     break;
                 }
 
-                groupIndex += pad;
-                isAllDay = !prev;
                 events = [];
-                group = this.groups[groupIndex];
-                if (group) {
-                    slot = prev ?
-                        group._timeSlotCollections[group._timeSlotCollections.length - 1].last() :
-                        group._daySlotCollections[0].first();
+                if (prev) {
+                    slot = group.lastSlot();
+                } else {
+                    slot = group.firstSlot(true);
                 }
             }
 
-            if (eventInfo) {
-                selection.events = [ eventInfo.event.element.attr(kendo.attr("uid")) ];
-                selection.start = eventInfo.start;
-                selection.end = eventInfo.end;
-                selection.isAllDay = eventInfo.isAllDay;
-                selection.groupIndex = groupIndex;
+            if (event) {
+                selection.events = [ event.uid ];
+                selection.start = event.start.startDate();
+                selection.end = event.end.endDate();
+                selection.isAllDay = event.start.isAllDay;
+                selection.groupIndex = event.start.groupIndex;
             }
 
-            return !!eventInfo;
+            return !!event;
         },
 
         select: function(selection) {
@@ -1053,6 +973,7 @@ kendo_module({
             this._scrollTo(element, this.content[0]);
         },
 
+        //TODO REFACTOR
         _selectEvents: function(selection) {
             var found = false;
             var uidAttr = kendo.attr("uid");

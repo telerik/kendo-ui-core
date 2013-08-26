@@ -1250,6 +1250,10 @@ kendo_module({
                         if (this._isInTimeSlot(event)) {
                             group = this.groups[groupIndex];
 
+                            if (!group._continuousEvents) {
+                                group._continuousEvents = [];
+                            }
+
                             ranges = group.slotRanges(event);
 
                             var rangeCount = ranges.length;
@@ -1279,6 +1283,15 @@ kendo_module({
 
                                     this._positionEvent(occurrence, element, range);
 
+                                    //TODO REFACTOR!!!
+                                    group._continuousEvents.push({
+                                        element: element,
+                                        uid: element.attr(kendo.attr("uid")),
+                                        start: range.start,
+                                        end: range.end,
+                                    });
+                                    //
+
                                     element.appendTo(container);
                                 }
                             }
@@ -1287,11 +1300,47 @@ kendo_module({
                    } else if (this.options.allDaySlot) {
                        group = this.groups[groupIndex];
 
+                       if (!group._continuousEvents) {
+                           group._continuousEvents = [];
+                       }
+
                        ranges = group.slotRanges(event);
 
                        element = this._createEventElement(event, !isMultiDayEvent);
 
                        this._positionAllDayEvent(element, ranges[0]);
+
+                       //TODO REFACTOR!!!
+                       var lastEvent = group._continuousEvents[group._continuousEvents.length - 1];
+                       var startDate = getDate(ranges[0].start.startDate()).getTime();
+                       //this handles all day event which is over multiple slots but starts
+                       //after one of the time events
+                       if (lastEvent &&
+                           getDate(lastEvent.start.startDate()).getTime() == startDate) {
+
+                           var i = group._continuousEvents.length - 1;
+                           for ( ; i > -1; i --) {
+                               if (group._continuousEvents[i].isAllDay ||
+                                   getDate(group._continuousEvents[i].start.startDate()).getTime() < startDate) {
+                                       break;
+                               }
+                           }
+
+                           group._continuousEvents.splice(i + 1, 0, {
+                               element: element,
+                               uid: element.attr(kendo.attr("uid")),
+                               start: ranges[0].start,
+                               end: ranges[0].end
+                           });
+                       } else {
+                           group._continuousEvents.push({
+                               element: element,
+                               uid: element.attr(kendo.attr("uid")),
+                               start: ranges[0].start,
+                               end: ranges[0].end
+                           });
+                       }
+                       //
 
                        element.appendTo(container);
                     }
