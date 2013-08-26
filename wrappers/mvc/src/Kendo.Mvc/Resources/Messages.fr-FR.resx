@@ -403,31 +403,31 @@
     <value>Couleur</value>
   </data>
   <data name="Editor_DialogButtonSeparator" xml:space="preserve">
-    <value>or</value>
+    <value>Ou</value>
   </data>
   <data name="Editor_DialogCancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Fermer</value>
   </data>
   <data name="Editor_DialogInsert" xml:space="preserve">
-    <value>Insert</value>
+    <value>Insérer</value>
   </data>
   <data name="Editor_ImageAltText" xml:space="preserve">
     <value>Alternate text</value>
   </data>
   <data name="Editor_ImageWebAddress" xml:space="preserve">
-    <value>Web address</value>
+    <value>Adresse Web</value>
   </data>
   <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
-    <value>Open link in new window</value>
+    <value>Ouvrir dans une nouvelle fenêtre</value>
   </data>
   <data name="Editor_LinkText" xml:space="preserve">
     <value>Text</value>
   </data>
   <data name="Editor_LinkToolTip" xml:space="preserve">
-    <value>ToolTip</value>
+    <value>Info-bulle</value>
   </data>
   <data name="Editor_LinkWebAddress" xml:space="preserve">
-    <value>Web address</value>
+    <value>Adresse Web</value>
   </data>
   <data name="Editor_Search" xml:space="preserve">
     <value>Search</value>
