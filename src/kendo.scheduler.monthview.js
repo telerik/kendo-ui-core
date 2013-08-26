@@ -78,7 +78,6 @@ kendo_module({
 
         move: function(selection, key, shift) {
             var start = selection.start;
-            var end = selection.end;
             var daySlot = true;
 
             var handled = false;
@@ -87,7 +86,7 @@ kendo_module({
             var startSlot = ranges[0].start;
             var endSlot = ranges[ranges.length - 1].end;
             var vertical = this._isVerticallyGrouped();
-            var slot, siblingGroup;
+            var index;
 
             if (key === keys.DOWN || key === keys.UP) {
                 var isUp = key === keys.UP;
@@ -104,7 +103,7 @@ kendo_module({
                     }
                 }
 
-                var index = selection.backward ? startSlot.index : endSlot.index;
+                index = selection.backward ? startSlot.index : endSlot.index;
 
                 startSlot = group[isUp ? "upSlot" : "downSlot"](startSlot, daySlot, false);
                 endSlot = group[isUp ? "upSlot" : "downSlot"](endSlot, daySlot, false);
@@ -152,7 +151,7 @@ kendo_module({
                     }
 
                     if (!startSlot || !endSlot) {
-                        var index = selection.backward ? 0 : ranges.length - 1;
+                        index = selection.backward ? 0 : ranges.length - 1;
 
                         if (isLeft) {
                             startSlot = endSlot = group.previousDaySlot(ranges[index].start);
@@ -954,120 +953,4 @@ kendo_module({
 
         return msValue >= msMin && msValue <= msMax;
     }
-
-    function moveLeftInHorizontalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex % NUMBER_OF_COLUMNS === 0) {
-            if (groupIndex === 0) {
-                date = kendo.date.addDays(date, -1);
-                groupIndex = groupCount - 1;
-            } else {
-                date = kendo.date.addDays(date, 6);
-                groupIndex --;
-            }
-        } else {
-            date = kendo.date.addDays(date, -1);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-    function moveLeftInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex === 0) {
-            if (groupIndex === 0) {
-                date = kendo.date.addDays(date, -1);
-                groupIndex = groupCount - 1;
-            } else {
-                date = kendo.date.addDays(date, NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - 1);
-                groupIndex --;
-            }
-        } else {
-            date = kendo.date.addDays(date, -1);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-    function moveRightInHorizontalGroup(slotIndex, groupIndex, groupCount, date) {
-        if ((slotIndex + 1) % NUMBER_OF_COLUMNS === 0) {
-            if (groupIndex == groupCount - 1) {
-                date = kendo.date.addDays(date, 1);
-                groupIndex = 0;
-            } else {
-                date = kendo.date.addDays(date, -6);
-                groupIndex ++;
-            }
-        } else {
-            date = kendo.date.addDays(date, 1);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-    function moveRightInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex == NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - 1) {
-            if (groupIndex == groupCount - 1) {
-                groupIndex = 0;
-                date = kendo.date.addDays(date, 1);
-            } else {
-                date = kendo.date.addDays(date, - (NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - 1));
-                groupIndex ++;
-            }
-        } else {
-            date = kendo.date.addDays(date, 1);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-    function moveUpInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex <= NUMBER_OF_ROWS) {
-            if (groupIndex === 0) {
-                date = kendo.date.addDays(date, -7);
-                groupIndex = groupCount - 1;
-            } else {
-                date = kendo.date.addDays(date, NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - NUMBER_OF_ROWS -1);
-                groupIndex --;
-            }
-        } else {
-            date = kendo.date.addDays(date, -7);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-
-    function moveDownInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex >= NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - NUMBER_OF_COLUMNS) {
-            if (groupIndex == groupCount -1) {
-                date = kendo.date.addDays(date, 7);
-                groupIndex = 0;
-            } else {
-                date = kendo.date.addDays(date, - (NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - NUMBER_OF_COLUMNS));
-                groupIndex ++;
-            }
-        } else {
-            date = kendo.date.addDays(date, 7);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
 })(window.kendo.jQuery);

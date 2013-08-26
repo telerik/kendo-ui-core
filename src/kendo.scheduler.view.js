@@ -1400,7 +1400,7 @@ kendo_module({
             }
         },
 
-        nextGroupSlot: function(date, groupIndex, isDay, verticalNavigation) {
+        nextGroupSlot: function(date, groupIndex, isDay) {
             var collection;
             var group = this.groups[groupIndex];
             var slot = group.ranges(date, date, isDay, false)[0].start;

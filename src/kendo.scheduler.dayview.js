@@ -1288,7 +1288,7 @@ kendo_module({
                                         element: element,
                                         uid: element.attr(kendo.attr("uid")),
                                         start: range.start,
-                                        end: range.end,
+                                        end: range.end
                                     });
                                     //
 
@@ -1499,7 +1499,7 @@ kendo_module({
             var startSlot = ranges[0].start;
             var endSlot = ranges[ranges.length - 1].end;
             var vertical = this._isVerticallyGrouped();
-            var direction, slot, siblingGroup;
+            var direction;
 
             if (key === keys.DOWN || key === keys.UP) {
                 var isUp = key === keys.UP;
@@ -1562,7 +1562,7 @@ kendo_module({
                 }
 
                 if (!shift && (!startSlot || !endSlot)) {
-                    date = isLeft ? this.previousDate() : this.nextDate();
+                    var date = isLeft ? this.previousDate() : this.nextDate();
 
                     selection.start = new Date(date);
                     selection.end = new Date(date);
