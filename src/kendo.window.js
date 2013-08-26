@@ -579,10 +579,10 @@ kendo_module({
                     overlay = that._overlay(false);
 
                     if (showOptions.duration) {
-                        overlay.kendoStop().kendoAnimate({
-                            effects: "fade:in",
-                            duration: showOptions.duration
-                        });
+                        var overlayFx = kendo.fx(overlay).fadeIn();
+                        overlayFx.duration(showOptions.duration || 0);
+                        overlayFx.endValue(0.5);
+                        overlayFx.play();
                     } else {
                         overlay.css("opacity", 0.5);
                     }
@@ -645,14 +645,10 @@ kendo_module({
 
                 if (shouldHideOverlay) {
                     if (hideOptions.duration) {
-                        overlay.kendoStop().kendoAnimate({
-                             effects: "fade:out",
-                             duration: hideOptions.duration,
-                             hide: true,
-                             complete: function() {
-                                 overlay.css("opacity", "");
-                             }
-                         });
+                        var overlayFx = kendo.fx(overlay).fadeOut();
+                        overlayFx.duration(hideOptions.duration || 0);
+                        overlayFx.startValue(0.5);
+                        overlayFx.play();
                     } else {
                         overlay.hide();
                     }
