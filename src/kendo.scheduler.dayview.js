@@ -119,6 +119,42 @@ kendo_module({
         return value > min && value < max;
     }
 
+    function addContinuousEvent(group, range, element, isAllDay) {
+        var events = group._continuousEvents;
+        var lastEvent = events[events.length - 1];
+        var startDate = getDate(range.start.startDate()).getTime();
+
+        //this handles all day event which is over multiple slots but starts
+        //after one of the time events
+        if (isAllDay && lastEvent &&
+            getDate(lastEvent.start.startDate()).getTime() == startDate) {
+
+                var idx = events.length - 1;
+                for ( ; idx > -1; idx --) {
+                    if (events[idx].isAllDay ||
+                        getDate(events[idx].start.startDate()).getTime() < startDate) {
+                            break;
+                        }
+                }
+
+                events.splice(idx + 1, 0, {
+                    element: element,
+                    isAllDay: true,
+                    uid: element.attr(kendo.attr("uid")),
+                    start: range.start,
+                    end: range.end
+                });
+            } else {
+                events.push({
+                    element: element,
+                    isAllDay: isAllDay,
+                    uid: element.attr(kendo.attr("uid")),
+                    start: range.start,
+                    end: range.end
+                });
+            }
+    }
+
     var MultiDayView = SchedulerView.extend({
         init: function(element, options) {
             var that = this;
@@ -1283,14 +1319,7 @@ kendo_module({
 
                                     this._positionEvent(occurrence, element, range);
 
-                                    //TODO REFACTOR!!!
-                                    group._continuousEvents.push({
-                                        element: element,
-                                        uid: element.attr(kendo.attr("uid")),
-                                        start: range.start,
-                                        end: range.end
-                                    });
-                                    //
+                                    addContinuousEvent(group, range, element, false);
 
                                     element.appendTo(container);
                                 }
@@ -1310,37 +1339,7 @@ kendo_module({
 
                        this._positionAllDayEvent(element, ranges[0]);
 
-                       //TODO REFACTOR!!!
-                       var lastEvent = group._continuousEvents[group._continuousEvents.length - 1];
-                       var startDate = getDate(ranges[0].start.startDate()).getTime();
-                       //this handles all day event which is over multiple slots but starts
-                       //after one of the time events
-                       if (lastEvent &&
-                           getDate(lastEvent.start.startDate()).getTime() == startDate) {
-
-                           var i = group._continuousEvents.length - 1;
-                           for ( ; i > -1; i --) {
-                               if (group._continuousEvents[i].isAllDay ||
-                                   getDate(group._continuousEvents[i].start.startDate()).getTime() < startDate) {
-                                       break;
-                               }
-                           }
-
-                           group._continuousEvents.splice(i + 1, 0, {
-                               element: element,
-                               uid: element.attr(kendo.attr("uid")),
-                               start: ranges[0].start,
-                               end: ranges[0].end
-                           });
-                       } else {
-                           group._continuousEvents.push({
-                               element: element,
-                               uid: element.attr(kendo.attr("uid")),
-                               start: ranges[0].start,
-                               end: ranges[0].end
-                           });
-                       }
-                       //
+                       addContinuousEvent(group, ranges[0], element, true);
 
                        element.appendTo(container);
                     }

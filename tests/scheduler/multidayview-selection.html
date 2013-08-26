@@ -285,6 +285,155 @@
                 equal(view.content.find("table td.k-state-selected").length, 0);
             });
 
+            test("view continues events collection is populated with events", function() {
+                var view = setup({
+                    dates: [ new Date(2013, 6, 7), new Date(2013, 6, 8) ]
+                });
+                var event1 = new SchedulerEvent({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 4),
+                    title: "Test"
+                });
+                var event2 = new SchedulerEvent({
+                    start: new Date(2013, 6, 8, 4),
+                    end: new Date(2013, 6, 8, 6),
+                    title: "Test"
+                });
+
+                view.render([
+                    event1,
+                    event2
+                ]);
+
+                var events = view.groups[0]._continuousEvents;
+
+                equal(events.length, 2);
+                equal(events[0].uid, event1.uid);
+                equal(events[1].uid, event2.uid);
+            });
+
+            test("view continues events collection is populated with all day events", function() {
+                var view = setup({
+                    dates: [ new Date(2013, 6, 7), new Date(2013, 6, 8) ]
+                });
+                var event1 = new SchedulerEvent({
+                    start: new Date(2013, 6, 7),
+                    end: new Date(2013, 6, 7),
+                    isAllDay: true,
+                    title: "Test"
+                });
+                var event2 = new SchedulerEvent({
+                    start: new Date(2013, 6, 7, 4),
+                    end: new Date(2013, 6, 7, 6),
+                    title: "Test"
+                });
+                var event3 = new SchedulerEvent({
+                    start: new Date(2013, 6, 8, 4),
+                    end: new Date(2013, 6, 8, 6),
+                    title: "Test"
+                });
+
+                view.render([
+                    event1,
+                    event2,
+                    event3
+                ]);
+
+                var events = view.groups[0]._continuousEvents;
+
+                equal(events.length, 3);
+                equal(events[0].uid, event1.uid);
+                equal(events[1].uid, event2.uid);
+                equal(events[2].uid, event3.uid);
+            });
+
+            test("all day event must be before same day events", function() {
+                var view = setup({
+                    dates: [
+                        new Date(2013, 6, 7),
+                        new Date(2013, 6, 8),
+                        new Date(2013, 6, 9),
+                    ]
+                });
+                var allDayEvent1 = new SchedulerEvent({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 9, 8),
+                    isAllDay: true,
+                    title: "Test"
+                });
+                var event1 = new SchedulerEvent({
+                    start: new Date(2013, 6, 7, 1),
+                    end: new Date(2013, 6, 7, 3),
+                    title: "Test"
+                });
+                var allDayEvent2 = new SchedulerEvent({
+                    start: new Date(2013, 6, 8, 2),
+                    end: new Date(2013, 6, 9, 8),
+                    isAllDay: true,
+                    title: "Test"
+                });
+                var event2 = new SchedulerEvent({
+                    start: new Date(2013, 6, 8, 1),
+                    end: new Date(2013, 6, 8, 6),
+                    title: "Test"
+                });
+
+                view.render([
+                    allDayEvent1,
+                    event1,
+                    allDayEvent2,
+                    event2
+                ]);
+
+                var events = view.groups[0]._continuousEvents;
+
+                equal(events.length, 4);
+                equal(events[0].uid, allDayEvent1.uid);
+                equal(events[1].uid, event1.uid);
+                equal(events[2].uid, allDayEvent2.uid);
+                equal(events[3].uid, event2.uid);
+            });
+
+            test("continuous all day events must be in same order as rendered", function() {
+                var view = setup({
+                    dates: [
+                        new Date(2013, 6, 7),
+                        new Date(2013, 6, 8),
+                        new Date(2013, 6, 9),
+                    ]
+                });
+                var allDayEvent1 = new SchedulerEvent({
+                    start: new Date(2013, 6, 7),
+                    end: new Date(2013, 6, 7),
+                    isAllDay: true,
+                    title: "Test"
+                });
+                var allDayEvent2 = new SchedulerEvent({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 9, 4),
+                    isAllDay: true,
+                    title: "Test"
+                });
+                var event = new SchedulerEvent({
+                    start: new Date(2013, 6, 7, 1),
+                    end: new Date(2013, 6, 7, 3),
+                    title: "Test"
+                });
+
+                view.render([
+                    allDayEvent1,
+                    allDayEvent2,
+                    event
+                ]);
+
+                var events = view.groups[0]._continuousEvents;
+
+                equal(events.length, 3);
+                equal(events[0].uid, allDayEvent1.uid);
+                equal(events[1].uid, allDayEvent2.uid);
+                equal(events[2].uid, event.uid);
+            });
+
             test("View select event by uid", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] }),
                     event = new SchedulerEvent({ start: new Date(2013, 6, 7, 2), end: new Date(2013, 6, 7, 4), title: "Test" }),
