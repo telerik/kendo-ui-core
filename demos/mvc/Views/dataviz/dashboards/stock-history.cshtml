@@ -137,6 +137,7 @@
                     },
                     sparklineOptions = function(field, color, data) {
                         return {
+                            renderAs: "canvas",
                             dataSource: data || yearlyStockValues,
                             series: [{
                                 field: field,
@@ -200,6 +201,7 @@
                     .find(".relative-value").text(format(yearlyRelativeValue(yearlyStockValues) - 100) + "%").end()
                     .find(".relative-value-sparkline").kendoChart(sparklineOptions("value", "#4da3d5", relativeValues)).end()
                     .find(".relative-value-pie").kendoChart({
+                        renderAs: "canvas",
                         dataSource: companyRelativeGain,
                         seriesDefaults: {
                             type: "pie",
@@ -214,6 +216,7 @@
                         legend: { visible: false }
                     }).end()
                     .find(".volume-chart").kendoChart({
+                        renderAs: "canvas",
                         dataSource: yearlyStockValues,
                         series: [{
                             field: "volume",
@@ -252,6 +255,7 @@
             }
 
             $("#yearly-stock-prices").kendoChart({
+                renderAs: "canvas",
                 dataSource: stocksDataSource,
 
                 autoBind: false,
