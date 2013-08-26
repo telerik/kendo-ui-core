@@ -744,7 +744,7 @@ kendo_module({
             }
 
             this.handle = undefined;
-            return new ConnectionEditUndoUnit(item, this._initialSource, this._initialTarget);
+            return new ConnectionEditUndoUnit(this.connection, this._initialSource, this._initialTarget);
         },
         _hitTest: function (p) {
             var sp = this.connection.sourcePoint(),
