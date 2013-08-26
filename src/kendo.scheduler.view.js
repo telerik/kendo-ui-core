@@ -976,11 +976,13 @@ kendo_module({
             this._scrollTo(element, this.content[0]);
         },
 
-        //TODO REFACTOR
         _selectEvents: function(selection) {
             var found = false;
             var uidAttr = kendo.attr("uid");
             var events = selection.events;
+            var lastEvent = events[events.length - 1];
+            var continuousEvents = this.groups[selection.groupIndex]._continuousEvents || [];
+            var event;
 
             if (!events[0]) {
                 return found;
@@ -992,13 +994,12 @@ kendo_module({
                 found = true;
                 events.addClass("k-state-selected");
 
-                events = eventElement(
-                    this.groups[selection.groupIndex],
-                    events.last().attr(kendo.attr("uid")),
-                    selection.isAllDay
-                );
+                event = $.grep(continuousEvents , function(event) {
+                    return event.uid == lastEvent;
+                })[0];
 
-                this._scrollTo(events[0], this.content[0]);
+                event = event ? event.element : events.last();
+                this._scrollTo(event[0], this.content[0]);
             }
 
             return found;
