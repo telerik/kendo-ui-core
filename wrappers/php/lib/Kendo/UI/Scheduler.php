@@ -354,6 +354,20 @@ That way all users would see the same dates and times no matter their configured
     }
 
     /**
+    * Sets the navigate event of the Scheduler.
+    * Fired when the user changes selected date, view or of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function navigate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('navigate', $value);
+    }
+
+    /**
     * Sets the remove event of the Scheduler.
     * Fired when the user clicks the "destroy" button.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.

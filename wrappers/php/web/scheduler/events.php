@@ -158,6 +158,7 @@ $scheduler->timezone("Etc/UTC")
     ->resizeEnd('scheduler_resizeEnd')
     ->moveStart('scheduler_moveStart')
     ->move('scheduler_move')
+    ->navigate('scheduler_navigate')
     ->moveEnd('scheduler_moveEnd');
 
 echo $scheduler->render();
@@ -217,6 +218,9 @@ echo $scheduler->render();
         kendoConsole.log("resizeEnd");
     }
 
+    function scheduler_navigate(e) {
+        kendoConsole.log(kendo.format("navigate:: action:{0}; view:{1}; date:{2:d};", e.action, e.view, e.date));
+    }
 </script>
 
 <?php require_once '../../include/footer.php'; ?>
