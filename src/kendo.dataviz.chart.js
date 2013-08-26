@@ -13,6 +13,12 @@ kendo_module({
         requireJS: false /* don't make dataviz.chart depend on
                           * dataviz.chart.polar to avoid circular dependency.
                           * Ticket 725435 */
+    }, {
+        id: "dataviz.chart-funnel",
+        name: "Funnel chart",
+        description: "Support for Funnel chart.",
+        depends: ["dataviz.chart.funnel"],
+        requireJS: false
     }]
 });
 
