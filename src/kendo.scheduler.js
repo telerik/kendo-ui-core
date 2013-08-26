@@ -801,7 +801,7 @@ kendo_module({
             slot = this.view().selectionByElement(item);
 
             if (slot) {
-                selection.groupIndex = slot.groupIndex;
+                selection.groupIndex = slot.groupIndex || 0;
             }
 
             if (uid) {
