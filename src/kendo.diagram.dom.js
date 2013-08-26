@@ -15,6 +15,8 @@ kendo_module({
         deepExtend = kendo.deepExtend,
         NS = ".kendoDiagram",
         BOUNDSCHANGE = "boundsChange",
+        Auto = "Auto",
+        MAXINT = 9007199254740992,
         Canvas = diagram.Canvas,
         Group = diagram.Group,
         Rectangle = diagram.Rectangle,
@@ -215,8 +217,8 @@ kendo_module({
                     }
                 },
                 {
-                    name: "Auto",
-                    type: "Auto",
+                    name: Auto,
+                    type: Auto,
                     Description: "Auto Connector",
                     getConnectorPosition: function (shape) {
                         return getShapeConnectorPos(shape, "center");
@@ -337,6 +339,8 @@ kendo_module({
             that.line = new Line(that.options);
             g.append(that.line);
             that.visual = g;
+            this._sourcePoint = new Point();
+            this._targetPoint = new Point();
             that.sourcePoint(from);
             that.targetPoint(to);
             that.refresh();
@@ -370,11 +374,19 @@ kendo_module({
                 this.refresh();
             }
             else if (source instanceof Shape) {
-                this.sourceConnector = source.getConnector("Auto");
+                this.sourceConnector = source.getConnector(Auto);
                 this.sourceConnector.connections.push(this);
                 this.refresh();
             }
-            return this.sourceConnector ? this.sourceConnector.position() : (this._sourcePoint ? this._sourcePoint : new Point());
+            var sp = this._sourcePoint;
+            if (this.sourceConnector) {
+                if (this.sourceConnector.options.name == Auto) {
+                    sp = _closestConnector(this._fastTarget(), this.sourceConnector).position();
+                } else {
+                    sp = this.sourceConnector.position();
+                }
+            }
+            return sp;
         },
         targetPoint: function (target) {
             if (target === null) { // detach
@@ -398,11 +410,25 @@ kendo_module({
                 this.refresh();
             }
             else if (target instanceof Shape) {
-                this.targetConnector = target.getConnector("Auto");
+                this.targetConnector = target.getConnector(Auto);
                 this.targetConnector.connections.push(this);
                 this.refresh();
             }
-            return this.targetConnector ? this.targetConnector.position() : (this._targetPoint ? this._targetPoint : new Point());
+            var tp = this._targetPoint;
+            if (this.targetConnector) {
+                if (this.targetConnector.options.name == Auto) {
+                    tp = _closestConnector(this._fastSource(), this.targetConnector).position();
+                } else {
+                    tp = this.targetConnector.position();
+                }
+            }
+            return tp;
+        },
+        _fastSource: function () {
+            return this.sourceConnector ? this.sourceConnector.position() : this._sourcePoint;
+        },
+        _fastTarget: function () {
+            return this.targetConnector ? this.targetConnector.position() : this._targetPoint;
         },
         source: function () {
             return this.sourceConnector ? this.sourceConnector : this._sourcePoint;
@@ -464,6 +490,21 @@ kendo_module({
             }
         }
     });
+
+    function _closestConnector(point, ac) {
+        var mindist = MAXINT, resCtr, ctrs = ac.shape.connectors;
+        for (var i = 0; i < ctrs.length; i++) {
+            var ctr = ctrs[i];
+            if (ctr != ac) {
+                var dist = point.distanceTo(ctr.position());
+                if (dist < mindist) {
+                    mindist = dist;
+                    resCtr = ctr;
+                }
+            }
+        }
+        return resCtr;
+    }
 
     function getShapeConnectorPos(shape, side) {
         var rotate = shape.rotate();
