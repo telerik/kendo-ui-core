@@ -893,8 +893,11 @@ kendo_module({
                     if (selectedEvents.length) {
                         event = events[idx + pad];
                     }
-                    found = !!event;
-                    break;
+
+                    if (event && $.inArray(event.uid, selectedEvents) === -1) {
+                        found = !!event;
+                        break;
+                    }
                 }
 
                 idx += pad;

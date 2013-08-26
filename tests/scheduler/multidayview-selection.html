@@ -1724,6 +1724,45 @@
                 equal(selection.isAllDay, true);
             });
 
+            test("move to next event when two events in same slot", function() {
+                var view = setup({
+                        dates: [ new Date(2013, 6, 7), new Date(2013, 6, 8)]
+                    }),
+                    event1 = new SchedulerEvent({
+                        start: new Date(2013, 6, 7, 2),
+                        end: new Date(2013, 6, 7, 4),
+                        title: "Test"
+                    }),
+                    event2 = new SchedulerEvent({
+                        start: new Date(2013, 6, 7, 2),
+                        end: new Date(2013, 6, 7, 4),
+                        title: "Test 2"
+                    }),
+                    event3 = new SchedulerEvent({
+                        start: new Date(2013, 6, 8, 1),
+                        end: new Date(2013, 6, 8, 2),
+                        title: "Test 3"
+                    });
+
+                view.render([
+                    event1, event2, event3
+                ]);
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 7, 2),
+                    end: new Date(2013, 6, 7, 4),
+                    events: [ event1.uid ]
+                });
+
+                view.moveToEvent(selection);
+                view.moveToEvent(selection);
+
+                deepEqual(selection.start, new Date(2013, 6, 8, 1));
+                deepEqual(selection.end, new Date(2013, 6, 8, 2));
+                equal(selection.events.length, 1);
+                equal(selection.events[0], event3.uid);
+            });
+
             function setupGroupedScheduler(orientation, view) {
                 orientation = orientation || "horizontal";
 
