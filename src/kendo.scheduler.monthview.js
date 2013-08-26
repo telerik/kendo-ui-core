@@ -530,7 +530,7 @@ kendo_module({
             return this._slotIndices[getDate(date).getTime()];
         },
 
-        _positionEvent: function(slotRange, element) {
+        _positionEvent: function(slotRange, element, group) {
             var eventHeight = this.options.eventHeight;
             var startSlot = slotRange.start;
 
@@ -584,6 +584,13 @@ kendo_module({
                 element[0].style.width = slotRange.innerWidth() - rightOffset + "px";
                 element[0].style.left = this._scrollbarOffset(startSlot.offsetLeft + 2) + "px";
                 element[0].style.height = eventHeight + "px";
+
+                group._continuousEvents.push({
+                    element: element,
+                    uid: element.attr(kendo.attr("uid")),
+                    start: slotRange.start,
+                    end: slotRange.end
+                });
 
                 this.content[0].appendChild(element[0]);
             }
@@ -763,6 +770,10 @@ kendo_module({
                 if (this._isInDateSlot(event)) {
                     var group = this.groups[groupIndex];
 
+                    if (!group._continuousEvents) {
+                        group._continuousEvents = [];
+                    }
+
                     var ranges = group.slotRanges(event, true);
 
                     var rangeCount = ranges.length;
@@ -785,7 +796,7 @@ kendo_module({
 
                         var occurrence = extend({}, event, { start: start, end: end, head: range.head, tail: range.tail });
 
-                        this._positionEvent(range, this._createEventElement(occurrence));
+                        this._positionEvent(range, this._createEventElement(occurrence), group);
                     }
                 }
             }
