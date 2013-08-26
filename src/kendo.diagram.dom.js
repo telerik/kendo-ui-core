@@ -404,6 +404,12 @@ kendo_module({
             }
             return this.targetConnector ? this.targetConnector.position() : (this._targetPoint ? this._targetPoint : new Point());
         },
+        source: function () {
+            return this.sourceConnector ? this.sourceConnector : this._sourcePoint;
+        },
+        target: function () {
+            return this.targetConnector ? this.targetConnector : this._targetPoint;
+        },
         select: function (value) {
             if (this.isSelected !== value) {
                 this.isSelected = value;
