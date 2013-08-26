@@ -578,7 +578,7 @@ kendo_module({
                 if (options.modal) {
                     overlay = that._overlay(false);
 
-                    if (showOptions.duration && kendo.fx.FadeIn) {
+                    if (showOptions.duration && kendo.effects.Fade) {
                         var overlayFx = kendo.fx(overlay).fadeIn();
                         overlayFx.duration(showOptions.duration || 0);
                         overlayFx.endValue(0.5);
@@ -644,7 +644,7 @@ kendo_module({
                 overlay = options.modal ? that._overlay(true) : $(undefined);
 
                 if (shouldHideOverlay) {
-                    if (hideOptions.duration && kendo.fx.FadeOut) {
+                    if (hideOptions.duration && kendo.effects.Fade) {
                         var overlayFx = kendo.fx(overlay).fadeOut();
                         overlayFx.duration(hideOptions.duration || 0);
                         overlayFx.startValue(0.5);
