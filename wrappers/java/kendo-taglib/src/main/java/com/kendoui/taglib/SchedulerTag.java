@@ -103,6 +103,10 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setEvent("moveStart", value.getBody());
     }
 
+    public void setNavigate(NavigateFunctionTag value) {
+        setEvent("navigate", value.getBody());
+    }
+
     public void setRemove(RemoveFunctionTag value) {
         setEvent("remove", value.getBody());
     }
@@ -349,6 +353,18 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setMoveStart(String value) {
         setProperty("moveStart", new Function(value));
+    }
+
+    public String getNavigate() {
+        Function property = ((Function)getProperty("navigate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setNavigate(String value) {
+        setProperty("navigate", new Function(value));
     }
 
     public String getRemove() {

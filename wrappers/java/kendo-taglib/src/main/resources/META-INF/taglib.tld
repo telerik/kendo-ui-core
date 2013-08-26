@@ -718,7 +718,7 @@ categoryAxis.line.color.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>If set to true the chart will position categories and series points on major ticks. This removes the empty space before and after the series.The default value is false except for "area" and "verticalArea".</description>
+            <description>If set to true the chart will position categories and series points on major ticks. This removes the empty space before and after the series.The default value is false except for "area", "verticalArea", "stepArea" and "verticalStepArea".</description>
             <name>justified</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -9908,7 +9908,7 @@ the minimum and maximum values.</description>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Indicates whether the Editor should submit encoded HTML tags.</description>
+            <description>Indicates whether the Editor should submit encoded HTML tags. By default, the submitted value is encoded.</description>
             <name>encoded</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -9946,7 +9946,7 @@ the minimum and maximum values.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires before when content is pasted in the Editor.</description>
+            <description>Fires before the content is pasted in the Editor.</description>
             <name>paste</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -9980,7 +9980,7 @@ the minimum and maximum values.</description>
     </tag>
 
     <tag>
-        <description>Defines texts shown within the pager.</description>
+        <description>Defines texts shown within the image browser.</description>
         <name>editor-imageBrowser-messages</name>
         <tag-class>com.kendoui.taglib.editor.ImageBrowserMessagesTag</tag-class>
         <body-content>empty</body-content>
@@ -10354,7 +10354,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+            <description>The content-type HTTP header sent to the server. Use "application/json" if the content is JSON.
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10382,7 +10382,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The remote url to call when creating a new record.</description>
+            <description>The remote url to call when fetching list of items.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10399,7 +10399,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The remote url to call when creating a new record.</description>
+        <description>The remote url to call when fetching list of items.</description>
         <name>editor-imageBrowser-transport-read-url</name>
         <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportReadUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -10421,16 +10421,18 @@ If function is assigned, the current path and image name will be provided.</desc
 
 
     <tag>
-        <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
-as a collection of required properties, while the insertHtml tool requires a collection of text-value pairs. A separator may be included multiple times.</description>
+        <description>A collection of tools that are used to interact with the Editor.
+Tools may be switched on by specifying their name.
+Custom tools and tools that require configuration are defined as objects.The available editor commands are:</description>
         <name>editor-tools</name>
         <tag-class>com.kendoui.taglib.editor.ToolsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
-as a collection of required properties, while the insertHtml tool requires a collection of text-value pairs. A separator may be included multiple times.</description>
+        <description>A collection of tools that are used to interact with the Editor.
+Tools may be switched on by specifying their name.
+Custom tools and tools that require configuration are defined as objects.The available editor commands are:</description>
         <name>editor-tool</name>
         <tag-class>com.kendoui.taglib.editor.ToolTag</tag-class>
 
@@ -10442,7 +10444,7 @@ as a collection of required properties, while the insertHtml tool requires a col
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The mandatory name of the tool.</description>
+            <description>When specifying a tool as an object, a tool name is required.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -10528,7 +10530,7 @@ as a collection of required properties, while the insertHtml tool requires a col
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires before when content is pasted in the Editor.</description>
+        <description>Fires before the content is pasted in the Editor.</description>
         <name>editor-paste</name>
         <tag-class>com.kendoui.taglib.editor.PasteFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -10920,7 +10922,8 @@ The supported aggregates are "average", "count", "max", "min" and "sum".</descri
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The field to which the column is bound. The value of this field is displayed by the column during data binding.</description>
+            <description>The field to which the column is bound. The value of this field is displayed by the column during data binding.
+The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.</description>
             <name>field</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -12398,6 +12401,11 @@ and is about to render it.</description>
             <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <description>Fired when a data item is saved.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>save</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
 
@@ -12565,6 +12573,12 @@ and is about to render it.</description>
         <description>Fires before the list view item is removed.</description>
         <name>listView-remove</name>
         <tag-class>com.kendoui.taglib.listview.RemoveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a data item is saved.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>listView-save</name>
+        <tag-class>com.kendoui.taglib.listview.SaveFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -13184,7 +13198,7 @@ by setting the close animation.  Each animation also has a direction which can b
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The template for selectbox with predefined page sizes.</description>
+            <description>The template for selected page number link.</description>
             <name>selectTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -13198,67 +13212,70 @@ by setting the close animation.  Each animation also has a direction which can b
     </tag>
 
     <tag>
-        <description>Defines texts shown within the pager.</description>
+        <description>Defines texts shown within the pager. Use this option to customize or localize the pager messages.</description>
         <name>pager-messages</name>
         <tag-class>com.kendoui.taglib.pager.MessagesTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Defines the info text.</description>
+            <description>The pager info text. Uses kendo.format.Contains three placeholders:
+- {0} - the first data item index
+- {1} - the last data item index
+- {2} - the total number of data items</description>
             <name>display</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the info text shown when there are no records to be displayed.</description>
+            <description>The text displayed when the DataSource view does no contain items.</description>
             <name>empty</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the first page button tooltip.</description>
+            <description>The tooltip of the button which navigates to the first page.</description>
             <name>first</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text displayed after the select element of the pageSizes mode.</description>
+            <description>The label displayed after the page size dropdown list.</description>
             <name>itemsPerPage</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the last page button tooltip.</description>
+            <description>The tooltip of the button which navigates to the last page.</description>
             <name>last</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the next page button tooltip.</description>
+            <description>The tooltip of the button which navigates to the next page.</description>
             <name>next</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the last part of the text of the input option.</description>
+            <description>The label displayed before the pager input. Uses kendo.format. Contains one optional placeholder {0} which represents the total number of pages.</description>
             <name>of</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the first part of the text of the input option.</description>
+            <description>The label displayed before the pager input.</description>
             <name>page</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the previous page button tooltip.</description>
+            <description>The tooltip of the button which navigates to the previous page.</description>
             <name>previous</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the refresh button tooltip.</description>
+            <description>The tooltip of the refresh button.</description>
             <name>refresh</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -13584,18 +13601,6 @@ If it is not supported by the browser, the QRCode will switch to the first avail
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>The distance from the range indicators to the ticks.</description>
-            <name>rangeDistance</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>The width of the range indicators.</description>
-            <name>rangeSize</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
         </attribute>
         <attribute>
             <description>Sets the preferred rendering engine.
@@ -14293,6 +14298,11 @@ That way all users would see the same dates and times no matter their configured
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the user changes selected date, view or of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>navigate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user clicks the "destroy" button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
@@ -14733,6 +14743,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
         <description>Fired when the user stops moving an event.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>scheduler-moveEnd</name>
         <tag-class>com.kendoui.taglib.scheduler.MoveEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user changes selected date, view or of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>scheduler-navigate</name>
+        <tag-class>com.kendoui.taglib.scheduler.NavigateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -16257,8 +16273,8 @@ If a type value is missing, the type is assumed to be the one specified in serie
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>Aggregate function for date series.This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.</description>
+            <description>The aggregate function to apply for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.The supported values are:</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -18704,7 +18720,7 @@ and is about to render it.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the orientation of the Splitter.</description>
+            <description>Specifies the orientation of the widget. Supported values are "horizontal" and "vertical".</description>
             <name>orientation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -20517,8 +20533,8 @@ Template variables:</description>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>Aggregate function for date series.This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.</description>
+            <description>The aggregate function to apply for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.The supported values are:</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -21303,8 +21319,8 @@ If a type value is missing, the type is assumed to be the one specified in serie
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>Aggregate function for date series.This function is used when a category (an year, month, etc.) contains two or more points.
-The function return value is displayed instead of the individual points.</description>
+            <description>The aggregate function to apply for date series.This function is used when a category (an year, month, etc.) contains two or more points.
+The function return value is displayed instead of the individual points.The supported values are:</description>
             <name>aggregate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -24058,7 +24074,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered before an AJAX request started.</description>
+            <description>Triggered before an AJAX request started. Note that this event is triggered only when an AJAX request, instead of an iframe, is used.</description>
             <name>requestStart</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -24145,7 +24161,7 @@ will disable all animations in the widget.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Triggered before an AJAX request started.</description>
+        <description>Triggered before an AJAX request started. Note that this event is triggered only when an AJAX request, instead of an iframe, is used.</description>
         <name>tooltip-requestStart</name>
         <tag-class>com.kendoui.taglib.tooltip.RequestStartFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -24169,6 +24185,13 @@ will disable all animations in the widget.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>A collection of visual animations used when items are expanded or collapsed through user interaction.
+Setting this option to false will disable all animations.</description>
+            <name>animation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.</description>
             <name>autoBind</name>
@@ -24176,63 +24199,59 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If true or an object, renders checkboxes within each treeview item.</description>
+            <description>If true or an object, renders checkboxes beside each node.</description>
             <name>checkboxes</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides
-the image URL of the treeview nodes.</description>
+            <description>Sets the field of the data item that provides the image URL of the treeview nodes.</description>
             <name>dataImageUrlField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>The data that the TreeView will be bound to.</description>
+            <description>The data source of the widget which is used render nodes. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.HierarchicalDataSource instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.HierarchicalDataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.HierarchicalDataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides
-the sprite CSS class of the treeview nodes.</description>
+            <description>Sets the field of the data item that provides the sprite CSS class of the nodes.
+If an array, each level uses the field that is at the same index in the array, or the last item in the array.</description>
             <name>dataSpriteCssClassField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the text content of the treeview nodes.
+            <description>Sets the field of the data item that provides the text content of the nodes.
 If an array, each level uses the field that is at the same index in the array, or the last item in the array.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides
-the link URL of the treeview nodes.</description>
+            <description>Sets the field of the data item that provides the link URL of the nodes.</description>
             <name>dataUrlField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Disables (false) or enables (true) drag-and-drop on the nodes of a
-TreeView.</description>
+            <description>Disables (false) or enables (true) drag-and-drop of the nodes.</description>
             <name>dragAndDrop</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates whether the child datasources should be fetched
-lazily, when parent groups get expanded. Setting this to false causes all child dataSources to
-be loaded at initialization time. Note: when initializing a TreeView from array (rather than from a
-HierarchicalDataSource instance), the default value of this option is false.</description>
+            <description>Indicates whether the child datasources should be fetched lazily when parent groups get expanded.
+Setting this to false causes all child dataSources to be loaded at initialization time.
+Note: when initializing the widget from an array (rather than from a HierarchicalDataSource instance), this option defaults to false, rather than true.</description>
             <name>loadOnDemand</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Template for rendering of the nodes of the treeview.</description>
+            <description>Template for rendering each node.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -24297,6 +24316,18 @@ Setting this option to false will disable all animations.</description>
         <tag-class>com.kendoui.taglib.treeview.AnimationTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>The animation that will be used when collapsing items.</description>
+            <name>collapse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The animation that will be used when expanding items.</description>
+            <name>expand</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
     </tag>
 
@@ -24313,8 +24344,8 @@ Setting this option to false will disable all animations.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A whitespace-delimited string of animation effects that are utilized when a TreeView node
-is collapsed. Options include "fadeOut".</description>
+            <description>A whitespace-delimited string of animation effects that are used when collapsing nodes.
+The supported effects are fadeOut and collapseVertical.</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -24337,17 +24368,11 @@ node is expanded.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A whitespace-delimited string of animation effects that are utilized when a TreeView node
-is expanded. Options include "expandVertical" and "fadeIn".</description>
+            <description>A whitespace-delimited string of animation effects that are used when expanding nodes.
+The supported effects are "expandVertical" and "fadeIn".</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
-        </attribute>
-        <attribute>
-            <description></description>
-            <name>show</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
         </attribute>
 
     </tag>
@@ -24356,25 +24381,27 @@ is expanded. Options include "expandVertical" and "fadeIn".</description>
 
 
     <tag>
-        <description>If true or an object, renders checkboxes within each treeview item.</description>
+        <description>If true or an object, renders checkboxes beside each node.</description>
         <name>treeView-checkboxes</name>
         <tag-class>com.kendoui.taglib.treeview.CheckboxesTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked.</description>
+            <description>Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked. This
+also enables tri-state checkboxes with an indeterminate state.</description>
             <name>checkChildren</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Indicates the name of the checkbox inputs that will be posted to the server.</description>
+            <description>Sets the name attribute of the checkbox inputs. That name will be posted to the server.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
         <attribute>
-            <description>Template for the checkbox rendering. Used to set the  checkbox name attribute, or to add hidden inputs that will be posted along the checkboxes.</description>
+            <description>The template which renders the checkboxes. Can be used to allow posting of
+additional information along the treeview checkboxes.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
@@ -24384,7 +24411,8 @@ is expanded. Options include "expandVertical" and "fadeIn".</description>
 
 
     <tag>
-        <description>Template for the checkbox rendering. Used to set the  checkbox name attribute, or to add hidden inputs that will be posted along the checkboxes.</description>
+        <description>The template which renders the checkboxes. Can be used to allow posting of
+additional information along the treeview checkboxes.The fields which can be used in the template are:</description>
         <name>treeView-checkboxes-template</name>
         <tag-class>com.kendoui.taglib.treeview.CheckboxesTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -24824,8 +24852,7 @@ Note that this does not constrain the window dragging within the given element.<
             <type>Object</type>
         </attribute>
         <attribute>
-            <description>Enables (true) or disables (false) the ability for users to move/drag a
-Window.</description>
+            <description>Enables (true) or disables (false) the ability for users to move/drag the widget.</description>
             <name>draggable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -24879,8 +24906,7 @@ Window.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Enables (true) or disables (false) the ability for users to resize a
-Window.</description>
+            <description>Enables (true) or disables (false) the ability for users to resize a Window.</description>
             <name>resizable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -24946,7 +24972,7 @@ has been clicked on a window with static content.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered when a Window has been resized by a user.</description>
+            <description>Triggered when a window has been resized by a user.</description>
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -24970,7 +24996,7 @@ will disable all animations in the widget.</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>Defines the close animation duration.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -24980,12 +25006,6 @@ will disable all animations in the widget.</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Whether the effect should play backwards, useful when doing the same animation but with the opposite direction, like opening and closing.</description>
-            <name>reverse</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
         </attribute>
 
     </tag>
@@ -24998,7 +25018,7 @@ will disable all animations in the widget.</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>Defines the open animation duration.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -25008,12 +25028,6 @@ will disable all animations in the widget.</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
-        </attribute>
-        <attribute>
-            <description>Whether the effect should play backwards, useful when doing the same animation but with the opposite direction, like opening and closing.</description>
-            <name>reverse</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
         </attribute>
 
     </tag>
@@ -25095,7 +25109,7 @@ has been clicked on a window with static content.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Triggered when a Window has been resized by a user.</description>
+        <description>Triggered when a window has been resized by a user.</description>
         <name>window-resize</name>
         <tag-class>com.kendoui.taglib.window.ResizeFunctionTag</tag-class>
         <body-content>JSP</body-content>

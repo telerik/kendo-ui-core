@@ -65,12 +65,16 @@ function scheduler_resize(e) {
 function scheduler_resizeEnd(e) {
     kendoConsole.log("resizeEnd");
 }
+
+function scheduler_navigate(e) {
+    kendoConsole.log(kendo.format("navigate:: action:{0}; view:{1}; date:{2:d};", e.action, e.view, e.date));
+}
 </script>
     <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="400" date="<%= date %>" startTime="<%= startTime %>"
     	dataBinding="scheduler_dataBinding" dataBound="scheduler_dataBound" save="scheduler_save"
     	remove="scheduler_remove" edit="scheduler_edit" cancel="scheduler_cancel" moveStart="scheduler_moveStart"
     	moveEnd="scheduler_moveEnd" move="scheduler_move" resizeStart="scheduler_resizeStart"
-    	resizeEnd="scheduler_resizeEnd" resize="scheduler_resize">
+    	resizeEnd="scheduler_resizeEnd" resize="scheduler_resize" navigate="scheduler_navigate">
     	<kendo:scheduler-views>
     		<kendo:scheduler-view type="day" />
     		<kendo:scheduler-view type="week" selected="true" />

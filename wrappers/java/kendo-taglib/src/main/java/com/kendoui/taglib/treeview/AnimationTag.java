@@ -58,6 +58,22 @@ public class AnimationTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("expand", value);
     }
 
+    public boolean getCollapse() {
+        return (boolean)getProperty("collapse");
+    }
+
+    public void setCollapse(boolean value) {
+        setProperty("collapse", value);
+    }
+
+    public boolean getExpand() {
+        return (boolean)getProperty("expand");
+    }
+
+    public void setExpand(boolean value) {
+        setProperty("expand", value);
+    }
+
 //<< Attributes
 
 }
