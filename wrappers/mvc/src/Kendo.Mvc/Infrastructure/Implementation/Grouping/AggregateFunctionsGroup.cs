@@ -25,9 +25,13 @@ namespace Kendo.Mvc.Infrastructure
                 if (AggregateFunctionsProjection != null)
                 {
                     var values = ExtractPropertyValues(AggregateFunctionsProjection);
+                    var aggregates = values.GroupBy(entry =>
+                    {
+                        var startIndex = entry.Key.IndexOf('_');
+                        return entry.Key.Substring(startIndex + 1, entry.Key.LastIndexOf('_') - startIndex - 1);
+                    });
 
-                    return values.GroupBy(entry => entry.Key.Split('_')[1].Replace("-", "."))
-                        .ToDictionary(g => g.Key, g => (object)g.ToDictionary(entry => entry.Key.Split('_')[0], entry => entry.Value));
+                    return aggregates.ToDictionary(g => g.Key, g => (object)g.ToDictionary(entry => entry.Key.Split('_').First(), entry => entry.Value));
                 }
 
                 return new Dictionary<string, object>();
