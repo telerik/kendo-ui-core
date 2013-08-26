@@ -59,7 +59,7 @@ kendo_module({
             return Math.sqrt(this.x * this.x + this.y * this.y);
         },
         normalize: function () {
-            if (this.Length == 0) {
+            if (this.Length === 0) {
                 return;
             }
             this.times(1 / this.length());
@@ -179,6 +179,8 @@ kendo_module({
             }
 
             return this._rotate || new Rotation(0);
+        },
+        _hover: function (value) {
         }
     });
 
@@ -187,7 +189,7 @@ kendo_module({
         init: function (native, options) {
             var that = this;
             Element.fn.init.call(that, native, options);
-            if (this.options.background != undefined) {
+            if (this.options.background !== undefined) {
                 this.background(this.options.background);
             }
         },
@@ -214,6 +216,9 @@ kendo_module({
             this.setAtr("stroke-dasharray", "strokeDashArray");
             this.setAtr("stroke-width", "strokeWidth");
             this.setAtr("stroke-thickness", "strokeThickness");
+        },
+        _hover: function (value) {
+            this.background(value ? this.options.hoveredBackground : this.options.background);
         }
     });
 
@@ -225,7 +230,7 @@ kendo_module({
         redraw: function (options) {
             VisualBase.fn.redraw.call(this, options);
 
-            if (this.options.x != undefined && this.options.y != undefined) {
+            if (this.options.x !== undefined && this.options.y !== undefined) {
                 this.position(this.options.x, this.options.y);
             }
             this.size();
@@ -371,6 +376,7 @@ kendo_module({
             return this.native.value;
         },
         redraw: function (options) {
+            this.options = deepExtend(this.options, options);
             this.content(this.options.text);
         },
         _createEditor: function () {

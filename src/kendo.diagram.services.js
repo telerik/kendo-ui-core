@@ -505,7 +505,9 @@ kendo_module({
         },
         end: function (p, meta) {
             meta = deepExtend({}, meta);
-            this.activeTool.end(p, meta);
+            if (this.activeTool) {
+                this.activeTool.end(p, meta);
+            }
             this.activeTool = undefined;
             this._updateCursor(p);
             return true;
@@ -628,18 +630,35 @@ kendo_module({
 
     // Adorners =========================================
 
-    var ConnectionEditAdorner = Class.extend({
+    var AdornerBase = Class.extend({
+        init: function (diagram, options) {
+            var that = this;
+            that.diagram = diagram;
+            that.options = deepExtend({}, that.options, options);
+            that.visual = new Group();
+            that.diagram.bind("pan", function () {
+                that.refresh();
+            });
+            that.diagram.bind("zoom", function () {
+                that.refresh();
+            });
+        },
+        refresh: function(){
+
+        }
+    });
+
+    var ConnectionEditAdorner = AdornerBase.extend({
         init: function (connection, options) {
             var that = this;
-            that.options = deepExtend({}, that.options, options);
             that.connection = connection;
-            that.visual = new Group();
+            AdornerBase.fn.init.call(that, that.connection.diagram, options);
             var sp = that.connection.sourcePoint();
             var tp = that.connection.targetPoint();
-            this.spVisual = new Circle(deepExtend(that.options.handles, { center: sp }));
-            this.epVisual = new Circle(deepExtend(that.options.handles, { center: tp }));
-            this.visual.append(this.spVisual);
-            this.visual.append(this.epVisual);
+            that.spVisual = new Circle(deepExtend(that.options.handles, { center: sp }));
+            that.epVisual = new Circle(deepExtend(that.options.handles, { center: tp }));
+            that.visual.append(that.spVisual);
+            that.visual.append(that.epVisual);
         },
         options: {
             handles: {
@@ -677,7 +696,7 @@ kendo_module({
             this.refresh();
         },
         stop: function () {
-            var ts = this.connection.diagram.toolService, item = ts.hoveredItem,
+            var ts = this.diagram.toolService, item = ts.hoveredItem,
                 target = item && ts._hoveredConnector ? ts._hoveredConnector._c : item;
             if (this.handle !== undefined) {
                 switch (this.handle) {
@@ -701,17 +720,16 @@ kendo_module({
             return sb.contains(p) ? -1 : (tb.contains(p) ? 1 : 0);
         },
         refresh: function () {
-            this.spVisual.redraw({ center: this.connection.sourcePoint() });
-            this.epVisual.redraw({ center: this.connection.targetPoint() });
+            this.spVisual.redraw({ center: this.diagram.transformPoint(this.connection.sourcePoint()) });
+            this.epVisual.redraw({ center: this.diagram.transformPoint(this.connection.targetPoint()) });
         }
     });
 
-    var ConnectorsAdorner = Class.extend({
+    var ConnectorsAdorner = AdornerBase.extend({
         init: function (shape, options) {
             var that = this, ctr, i, len;
             that.shape = shape;
-            that.options = deepExtend({}, that.options, options);
-            that.visual = new Group();
+            AdornerBase.fn.init.call(that, that.shape.diagram, options);
             len = shape.connectors.length;
             that.connectors = [];
             for (i = 0; i < len; i++) {
@@ -722,12 +740,7 @@ kendo_module({
             that.shape.bind("boundsChange", function () {
                 that.refresh();
             });
-            that.shape.diagram.bind("pan", function () {
-                that.refresh();
-            });
-            that.shape.diagram.bind("zoom", function () {
-                that.refresh();
-            });
+
             that.refresh();
         },
         _hitTest: function (p) {
@@ -742,7 +755,7 @@ kendo_module({
                         }
                     }
                     ctr._hover(true);
-                    this.shape.diagram.toolService._hoveredConnector = ctr;
+                    this.diagram.toolService._hoveredConnector = ctr;
                     break;
                 }
             }
@@ -756,39 +769,13 @@ kendo_module({
         }
     });
 
-    var ConnectorVisual = Class.extend({
-        init: function (connector) {
-            this.options = deepExtend({}, connector.options);
-            this._c = connector;
-            this.visual = new Circle(this.options);
-            this.refresh();
-        },
-        _hover: function (value) {
-            this.visual.background(value ? this.options.hoveredBackground : this.options.background);
-        },
-        refresh: function () {
-            var p = this.options.getConnectorPosition(this._c.shape, this.options.width, this.options.height),
-                relative = this._c.shape.diagram.transformPoint(p).minus(this._c.shape.actualBounds().topLeft()),
-                point = this._c.position(),
-                value = new Rect(point.x, point.y, 0, 0);
-            value.inflate(this.options.width / 2, this.options.height / 2);
-            this._bounds = value;
-            this.visual.redraw({ center: new Point(relative.x, relative.y) });
-        },
-        _hitTest: function (p) {
-            p = this._c.shape.diagram.transformPoint(p);
-            return this._bounds.contains(p);
-        }
-    });
-
-    var ResizingAdorner = Class.extend({
+    var ResizingAdorner = AdornerBase.extend({
         init: function (shape, options) {
             var that = this;
-            that.options = deepExtend({}, that.options, options);
             that.shape = shape;
+            AdornerBase.fn.init.call(that, that.shape.diagram, options);
             that.isManipulating = false;
             that.map = [];
-            that.visual = new Group();
             for (var x = -1; x <= 1; x++) {
                 for (var y = -1; y <= 1; y++) {
                     if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
@@ -800,14 +787,7 @@ kendo_module({
             }
             that.text = new TextBlock();
             that.visual.append(that.text);
-            that.shape.diagram.bind("pan", function () {
-                that.refresh();
-            });
-            that.shape.diagram.bind("zoom", function () {
-                that.refresh();
-            });
             that.refresh();
-            that.visual.visible(true);
         },
         options: {
             resizable: true,
@@ -828,6 +808,7 @@ kendo_module({
         },
         refresh: function () {
             this.bounds(this.shape.actualBounds().clone());
+            var sb = this.shape.bounds();
             this.visual.position(this._bounds.topLeft());
             var adorner = this;
             var b = this._bounds;
@@ -836,14 +817,14 @@ kendo_module({
                 this.visual.position(b.topLeft());
             });
             this.text.position(new Point(0, this._bounds.height + 20));
-            this.text.content("Width: " + this._bounds.width + ", Height: " + this._bounds.height);
+            this.text.content("x: " + sb.x + ", y: " + sb.y + " w: " + Math.round(sb.width) + ", h: " + Math.round(sb.height));
             this.visual.position(this._bounds.topLeft());
             if (this.options.angle) {
                 this.visual.rotate(this.options.angle, new Point(b.width / 2, b.height / 2));
             }
         },
         _hitTest: function (p) {
-            p = this.shape.diagram.transformPoint(p);
+            p = this.diagram.transformPoint(p);
             var i, hit, handleBounds, handlesCount = this.map.length, handle, bounds = this._bounds;//, bounds = this.shape.bounds();
             if (this.options.resizable) {
                 for (i = 0; i < handlesCount; i++) {
@@ -1001,6 +982,30 @@ kendo_module({
             var r = this.bounds();
             this.visual.position(r.topLeft());
             this.visual.redraw({ height: r.height + 1, width: r.width + 1 });
+        }
+    });
+
+    var ConnectorVisual = Class.extend({
+        init: function (connector) {
+            this.options = deepExtend({}, connector.options);
+            this._c = connector;
+            this.visual = new Circle(this.options);
+            this.refresh();
+        },
+        _hover: function (value) {
+            this.visual.background(value ? this.options.hoveredBackground : this.options.background);
+        },
+        refresh: function () {
+            var p = this._c.shape.diagram.transformPoint(this._c.position()),
+                relative = p.minus(this._c.shape.actualBounds().topLeft()),
+                value = new Rect(p.x, p.y, 0, 0);
+            value.inflate(this.options.width / 2, this.options.height / 2);
+            this._actualBounds = value;
+            this.visual.redraw({ center: new Point(relative.x, relative.y) });
+        },
+        _hitTest: function (p) {
+            p = this._c.shape.diagram.transformPoint(p);
+            return this._actualBounds.contains(p);
         }
     });
 

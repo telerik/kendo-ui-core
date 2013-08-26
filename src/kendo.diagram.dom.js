@@ -291,7 +291,7 @@ kendo_module({
             return cons;
         },
         _hover: function (value) {
-            this.shapeVisual.background(value ? this.options.hoveredBackground : this.options.background);
+            this.shapeVisual._hover(value);
             this.diagram._showConnectors(this, value);
         },
         refresh: function () {
