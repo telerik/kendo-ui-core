@@ -3281,19 +3281,6 @@ kendo_module({
                 extend(childrenOptions, that.children);
             }
 
-            var transport = childrenOptions.transport;
-
-            if (transport && !transport.parameterMap) {
-                transport.parameterMap = function(data) {
-                    if (that.parentParameterMap) {
-                        data = that.parentParameterMap.call(this, data);
-                    }
-
-                    data[that.idField || "id"] = that.id;
-                    return data;
-                };
-            }
-
             childrenOptions.data = value;
 
             if (!hasChildren) {
@@ -3319,19 +3306,34 @@ kendo_module({
 
         _initChildren: function() {
             var that = this;
+            var children, transport, parameterMap;
 
             if (!(that.children instanceof HierarchicalDataSource)) {
-                that.children = new HierarchicalDataSource(that._childrenOptions);
-                that.children.parent = function(){
+                children = that.children = new HierarchicalDataSource(that._childrenOptions);
+
+                transport = children.transport;
+                parameterMap = transport.parameterMap;
+
+                transport.parameterMap = function(data) {
+                    data[that.idField || "id"] = that.id;
+
+                    if (parameterMap) {
+                        data = parameterMap(data);
+                    }
+
+                    return data;
+                };
+
+                children.parent = function(){
                     return that;
                 };
 
-                that.children.bind(CHANGE, function(e){
+                children.bind(CHANGE, function(e){
                     e.node = e.node || that;
                     that.trigger(CHANGE, e);
                 });
 
-                that.children.bind(ERROR, function(e){
+                children.bind(ERROR, function(e){
                     var collection = that.parent();
 
                     if (collection) {
@@ -3435,10 +3437,6 @@ kendo_module({
             });
 
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
-
-            if (this.transport) {
-                node.fn.parentParameterMap = this.transport.parameterMap;
-            }
 
             this._attachBubbleHandlers();
         },
