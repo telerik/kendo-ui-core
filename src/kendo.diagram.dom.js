@@ -53,7 +53,12 @@ kendo_module({
             hoveredBackground: "#70CAFF"
         },
         position: function () {
-            return this.options.getConnectorPosition(this.shape, this.options.width, this.options.height);
+            if(this.options.position){
+                return this.options.position(this.shape);
+            }
+            else{
+                return getShapeConnectorPos(this.shape, this.options.name.toLowerCase());
+            }
         }
     });
 
@@ -187,40 +192,28 @@ kendo_module({
                 {
                     name: "Top",
                     type: "Data [in]",
-                    description: "Top Connector",
-                    getConnectorPosition: function (shape, w, h) {
-                        return getShapeConnectorPos(shape, "top").plus(new Point(0, h / 2));
-                    }
+                    description: "Top Connector"
                 },
                 {
                     name: "Right",
                     type: "Data [in]",
-                    description: "Right Connector",
-                    getConnectorPosition: function (shape, w, h) {
-                        return getShapeConnectorPos(shape, "right").minus(new Point(w / 2, 0));
-                    }
+                    description: "Right Connector"
                 },
                 {
                     name: "Bottom",
                     type: "Data [out] [array]",
-                    description: "Bottom Connector",
-                    getConnectorPosition: function (shape, w, h) {
-                        return getShapeConnectorPos(shape, "bottom").minus(new Point(0, h / 2));
-                    }
+                    description: "Bottom Connector"
                 },
                 {
                     name: "Left",
                     type: "Data [in]",
-                    Description: "Left Connector",
-                    getConnectorPosition: function (shape, w, h) {
-                        return getShapeConnectorPos(shape, "left").plus(new Point(w / 2, 0));
-                    }
+                    Description: "Left Connector"
                 },
                 {
                     name: Auto,
                     type: Auto,
                     Description: "Auto Connector",
-                    getConnectorPosition: function (shape) {
+                    position: function (shape) {
                         return getShapeConnectorPos(shape, "center");
                     }
                 }

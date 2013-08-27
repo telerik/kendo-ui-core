@@ -404,14 +404,20 @@ kendo_module({
         init: function (options) {
             Visual.fn.init.call(this, document.createElementNS(SVGNS, "rect"), options);
         },
+        options: {
+            strokeThickness: undefined,
+            strokeWidth: undefined,
+            strokeDashArray: undefined,
+            background: "none"
+        },
         redraw: function (options) {
             Visual.fn.redraw.call(this, options);
             this.setAtr("rx", "cornerRadius");
             this.setAtr("ry", "cornerRadius");
-            /*   this.setAtr("stroke", "stroke");
-             this.setAtr("stroke-dasharray", "strokeDashArray");
-             this.setAtr("stroke-width", "strokeWidth");
-             this.setAtr("stroke-thickness", "strokeThickness");*/
+            this.setAtr("stroke", "stroke");
+            this.setAtr("stroke-dasharray", "strokeDashArray");
+            this.setAtr("stroke-width", "strokeWidth");
+            this.setAtr("stroke-thickness", "strokeThickness");
         }
     });
 

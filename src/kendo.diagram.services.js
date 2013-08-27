@@ -342,26 +342,23 @@ kendo_module({
         },
         start: function (p, meta) {
             var diagram = this.toolService.diagram;
+            diagram.select(false);
             diagram.selector.start(p);
         },
         move: function (p) {
             var diagram = this.toolService.diagram;
-            if (diagram.selector.isActive) {
-                diagram.selector.currentPoint(p);
-            }
+            diagram.selector.move(p);
         },
         end: function (p, meta) {
             var diagram = this.toolService.diagram, hoveredItem = this.toolService.hoveredItem;
-            if (diagram.selector.isActive) {
-                var rect = diagram.selector.bounds();
-                if ((!hoveredItem || !hoveredItem.isSelected) && !meta.ctrlKey) {
-                    diagram.select(false);
-                }
-                if (!rect.isEmpty()) {
-                    diagram.select(true, { rect: rect });
-                }
-                diagram.selector.end();
+            var rect = diagram.selector.bounds();
+            if ((!hoveredItem || !hoveredItem.isSelected) && !meta.ctrlKey) {
+                diagram.select(false);
             }
+            if (!rect.isEmpty()) {
+                diagram.select(true, { rect: rect });
+            }
+            diagram.selector.end();
         },
         getCursor: function (p) {
             return Cursors.arrow;
@@ -823,6 +820,8 @@ kendo_module({
             }
             that.text = new TextBlock();
             that.visual.append(that.text);
+            that.rect = new Rectangle(that.options.rect);
+            that.visual.append(that.rect);
             that.refresh();
         },
         options: {
@@ -832,7 +831,15 @@ kendo_module({
                 width: 7,
                 height: 7,
                 background: "DimGray"
-            }
+            },
+            rect: {
+                stroke: "#778899",
+                strokeThickness: 1,
+                strokeWidth: 1,
+                strokeDashArray: "2, 2",
+                background: "none"
+            },
+            offset: 6
         },
         bounds: function (value) {
             if (value) {
@@ -843,21 +850,22 @@ kendo_module({
             }
         },
         refresh: function () {
-            this.bounds(this.shape.actualBounds().clone());
-            var sb = this.shape.bounds();
+            var sb = this.shape.bounds(),
+                innerBounds = this.shape.actualBounds().clone(),
+                that = this, b;
+            this.bounds(innerBounds.inflate(this.options.offset, this.options.offset));
             this.visual.position(this._bounds.topLeft());
-            var adorner = this;
-            var b = this._bounds;
             $.each(this.map, function () {
-                var b = adorner._getHandleBounds(new Point(this.x, this.y));
+                b = that._getHandleBounds(new Point(this.x, this.y));
                 this.visual.position(b.topLeft());
             });
             this.text.position(new Point(0, this._bounds.height + 20));
             this.text.content(kendo.format("x: {0}, y: {1}, w: {2}, h: {3}", Math.round(sb.x), Math.round(sb.y), Math.round(sb.width), Math.round(sb.height)));
             this.visual.position(this._bounds.topLeft());
             if (this.options.angle) {
-                this.visual.rotate(this.options.angle, new Point(b.width / 2, b.height / 2));
+                this.visual.rotate(this.options.angle, new Point(this._bounds.width / 2, this._bounds.height / 2));
             }
+            this.rect.redraw({width: innerBounds.width, height: innerBounds.height});
         },
         _hitTest: function (p) {
             p = this.diagram.transformPoint(p);
@@ -972,52 +980,40 @@ kendo_module({
 
     var Selector = Class.extend({
         init: function (diagram) {
-            var options = {
-                stroke: "#778899",
-                strokeThickness: 1,
-                strokeWidth: 1,
-                strokeDash: "2, 2",
-                background: "none"
-            };
-            this.visual = new Rectangle(options);
+            this.visual = new Rectangle(this.options);
             this.diagram = diagram;
         },
-        start: function (startPoint) {
-            this.startPoint = startPoint;
-            this._cp = startPoint;
-            this.visual.visible(true);
-            this.visual.position(startPoint);
-            this.diagram.mainLayer.append(this.visual);
-            this.isActive = true;
+        options: {
+            stroke: "#778899",
+            strokeThickness: 1,
+            strokeWidth: 1,
+            strokeDashArray: "2, 2",
+            background: "none"
+        },
+        start: function (p) {
+            this._sp = this._ep = p;
             this.refresh();
+            this.diagram._adorn(this, true);
         },
         end: function () {
-            if (this.isActive) {
-                this.startPoint = undefined;
-                this._cp = undefined;
-                this.visual.visible(false);
-                this.diagram.mainLayer.remove(this.visual);
-                this.isActive = false;
-            }
+            this._sp = this._ep = undefined;
+            this.diagram._adorn(this, false);
         },
-        bounds: function () {
-            var r = new Rect((this.startPoint.x <= this._cp.x) ? this.startPoint.x : this._cp.x, (this.startPoint.y <= this._cp.y) ? this.startPoint.y : this._cp.y, this._cp.x - this.startPoint.x, this._cp.y - this.startPoint.y);
-            if (r.width < 0) {
-                r.width *= -1;
+        bounds: function (value) {
+            if (value) {
+                this._bounds = value;
             }
-            if (r.height < 0) {
-                r.height *= -1;
-            }
-            return r;
+            return this._bounds;
         },
-        currentPoint: function (p) {
-            this._cp = p;
+        move: function (p) {
+            this._ep = p;
             this.refresh();
         },
         refresh: function () {
-            var r = this.bounds();
-            this.visual.position(r.topLeft());
-            this.visual.redraw({ height: r.height + 1, width: r.width + 1 });
+            var actualBounds = Rect.fn.fromPoints(this.diagram.transformPoint(this._sp), this.diagram.transformPoint(this._ep));
+            this.bounds(Rect.fn.fromPoints(this._sp, this._ep));
+            this.visual.position(actualBounds.topLeft());
+            this.visual.redraw({ height: actualBounds.height + 1, width: actualBounds.width + 1 });
         }
     });
 
