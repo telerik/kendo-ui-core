@@ -81,97 +81,85 @@ kendo_module({
             var daySlot = true;
 
             var handled = false;
-            var group = this.groups[selection.groupIndex];
-            var ranges = group.ranges(selection.start, selection.end, daySlot, false);
+            var backward = selection.backward;
+            var groupIndex = selection.groupIndex;
+            var vertical = this._isVerticallyGrouped();
+            var group = this.groups[groupIndex];
+            var ranges = group.ranges(start, selection.end, daySlot, false);
             var startSlot = ranges[0].start;
             var endSlot = ranges[ranges.length - 1].end;
-            var vertical = this._isVerticallyGrouped();
-            var index;
+            var method, reverse;
 
             if (key === keys.DOWN || key === keys.UP) {
-                var isUp = key === keys.UP;
+                reverse = key === keys.UP;
+                method = reverse ? "upSlot" : "downSlot";
 
                 if (shift) {
                    if (startSlot.index === endSlot.index || startSlot.collectionIndex() === endSlot.collectionIndex()) {
-                       selection.backward = isUp;
+                       backward = reverse;
                    }
-                } else {
-                    if (selection.backward) {
-                        endSlot = startSlot;
-                    } else {
-                        startSlot = endSlot;
-                    }
-                }
-
-                index = selection.backward ? startSlot.index : endSlot.index;
-
-                startSlot = group[isUp ? "upSlot" : "downSlot"](startSlot, daySlot, false);
-                endSlot = group[isUp ? "upSlot" : "downSlot"](endSlot, daySlot, false);
-
-                if (!shift && vertical && (!startSlot || !endSlot)) {
-                    if (isUp) {
-                        startSlot = endSlot = this.prevGroupSlot(start, selection.groupIndex, daySlot);
-                    } else {
-                        startSlot = endSlot = this.nextGroupSlot(start, selection.groupIndex, daySlot);
-                    }
-
-                    if (startSlot) {
-                        selection.groupIndex += (isUp ? -1 : 1);
-                    }
-                }
-
-                handled = true;
-            } else if (key === keys.LEFT || key === keys.RIGHT) {
-                var isLeft = key === keys.LEFT;
-
-                if (shift) {
-                    if (startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
-                        selection.backward = isLeft;
-                    }
-                } else if (isLeft) {
+                } else if (backward) {
                     endSlot = startSlot;
                 } else {
                     startSlot = endSlot;
                 }
 
-                startSlot = group[isLeft ? "leftSlot" : "rightSlot"](startSlot);
-                endSlot = group[isLeft ? "leftSlot" : "rightSlot"](endSlot);
+                startSlot = group[method](startSlot, daySlot);
+                endSlot = group[method](endSlot, daySlot);
+
+                if (!shift && vertical && (!startSlot || !endSlot)) {
+                    method = reverse ? "prevGroupSlot" : "nextGroupSlot";
+
+                    startSlot = endSlot = this[method](start, groupIndex, daySlot);
+
+                    if (startSlot) {
+                        groupIndex += (reverse ? -1 : 1);
+                    }
+                }
+
+                handled = true;
+            } else if (key === keys.LEFT || key === keys.RIGHT) {
+                reverse = key === keys.LEFT;
+                method = reverse ? "leftSlot" : "rightSlot";
+
+                if (shift) {
+                    if (startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
+                        backward = reverse;
+                    }
+                } else if (reverse) {
+                    endSlot = startSlot;
+                } else {
+                    startSlot = endSlot;
+                }
+
+                startSlot = group[method](startSlot);
+                endSlot = group[method](endSlot);
 
                 if (!startSlot || !endSlot) {
                     if (!vertical && !shift) {
-                        if (isLeft) {
-                            startSlot = endSlot = this.prevGroupSlot(start, selection.groupIndex, daySlot);
-                        } else {
-                            startSlot = endSlot = this.nextGroupSlot(start, selection.groupIndex, daySlot);
-                        }
+                        method = reverse ? "prevGroupSlot" : "nextGroupSlot"; //TODO: Rename prev to previous
+                        startSlot = endSlot = this[method](start, groupIndex, daySlot);
 
                         if (startSlot) {
-                            selection.groupIndex += (isLeft ? -1 : 1);
+                            groupIndex += (reverse ? -1 : 1);
                         }
                     }
 
                     if (!startSlot || !endSlot) {
-                        index = selection.backward ? 0 : ranges.length - 1;
+                        var index = backward ? 0 : ranges.length - 1;
 
-                        if (isLeft) {
-                            startSlot = endSlot = group.previousDaySlot(ranges[index].start);
-                        } else {
-                            startSlot = endSlot = group.nextDaySlot(ranges[index].end);
-                        }
+                        method = reverse ? "previousDaySlot" : "nextDaySlot";
 
-                        if (!vertical) {
-                           if (startSlot && !shift) {
-                               selection.groupIndex = isLeft ? this.groups.length - 1 : 0;
-                           }
+                        startSlot = endSlot = group[method](ranges[index].start);
+
+                        if (vertical) {
+                            if (!shift && !startSlot) {
+                                startSlot = endSlot = group[reverse ? "lastSlot" : "firstSlot"]();
+                                groupIndex += (reverse ? -1 : 1);
+                            }
                         } else {
-                            if (!startSlot && !shift) {
-                                if (isLeft) {
-                                    startSlot = endSlot = group.lastSlot();
-                                    selection.groupIndex -= 1;
-                                } else {
-                                    startSlot = endSlot = group.firstSlot();
-                                    selection.groupIndex += 1;
-                                }
+                            if (!shift && startSlot) {
+                                groupIndex = reverse ? this.groups.length - 1 : 0;
                             }
                         }
                     }
@@ -182,9 +170,9 @@ kendo_module({
 
             if (handled) {
                 if (shift) {
-                    if (selection.backward && startSlot) {
+                    if (backward && startSlot) {
                         selection.start = startSlot.startDate();
-                    } else if (!selection.backward && endSlot) {
+                    } else if (!backward && endSlot) {
                         selection.end = endSlot.endDate();
                     }
                 } else if (startSlot && endSlot) {
@@ -194,6 +182,8 @@ kendo_module({
                 }
 
                 selection.events = [];
+                selection.backward = backward;
+                selection.groupIndex = groupIndex;
             }
 
             return handled;

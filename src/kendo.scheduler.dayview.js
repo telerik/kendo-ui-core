@@ -1490,83 +1490,74 @@ kendo_module({
         move: function(selection, key, shift) {
             var start = selection.start;
             var end = selection.end;
-            var isAllDay = selection.isAllDay;
+            var daySlot = selection.isAllDay;
 
             var handled = false;
-            var group = this.groups[selection.groupIndex];
-            var ranges = group.ranges(selection.start, selection.end, isAllDay, false);
+            var backward = selection.backward;
+            var groupIndex = selection.groupIndex;
+            var vertical = this._isVerticallyGrouped();
+            var group = this.groups[groupIndex];
+            var ranges = group.ranges(selection.start, selection.end, daySlot, false);
             var startSlot = ranges[0].start;
             var endSlot = ranges[ranges.length - 1].end;
-            var vertical = this._isVerticallyGrouped();
-            var direction;
+            var method, reverse;
 
             if (key === keys.DOWN || key === keys.UP) {
-                var isUp = key === keys.UP;
+                reverse = key === keys.UP;
+                method = reverse ? "upSlot" : "downSlot";
 
                 if (shift) {
-                    if (!isAllDay && startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
-                        selection.backward = isUp;
+                    if (!daySlot && startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
+                        backward = reverse;
                     }
-                } else if (isUp) {
+                } else if (reverse) {
                     endSlot = startSlot;
                 } else {
                     startSlot = endSlot;
                 }
 
-                startSlot = group[isUp ? "upSlot" : "downSlot"](startSlot, shift);
-                endSlot = group[isUp ? "upSlot" : "downSlot"](endSlot, shift);
+                startSlot = group[method](startSlot, shift);
+                endSlot = group[method](endSlot, shift);
 
                 if (!shift && vertical && (!startSlot || !endSlot)) {
-                    if (isUp) {
-                        startSlot = endSlot = this.prevGroupSlot(start, selection.groupIndex, isAllDay);
-                    } else {
-                        startSlot = endSlot = this.nextGroupSlot(start, selection.groupIndex, isAllDay);
-                    }
+                    method = reverse ? "prevGroupSlot" : "nextGroupSlot";
+
+                    startSlot = endSlot = this[method](start, groupIndex, daySlot);
 
                     if (startSlot) {
-                        selection.groupIndex += (isUp ? -1 : 1);
+                        groupIndex += (reverse ? -1 : 1);
                     }
                 }
 
                 handled = true;
             } else if (key === keys.LEFT || key === keys.RIGHT) {
-                var isLeft = key === keys.LEFT;
+                reverse = key === keys.LEFT;
+                method = reverse ? "leftSlot" : "rightSlot";
 
-                if (shift && (isAllDay && startSlot.index === endSlot.index) || (!isAllDay && startSlot.collectionIndex() === endSlot.collectionIndex())) {
-                    selection.backward = isLeft;
+                if (shift && (daySlot && startSlot.index === endSlot.index) || (!daySlot && startSlot.collectionIndex() === endSlot.collectionIndex())) {
+                    backward = reverse;
                 }
 
-                direction = isLeft ? -1 : 1;
+                startSlot = group[method](startSlot);
+                endSlot = group[method](endSlot);
 
-                if (isLeft) {
-                    startSlot = group.leftSlot(startSlot);
-                    endSlot = group.leftSlot(endSlot);
-                } else {
-                    startSlot = group.rightSlot(startSlot);
-                    endSlot = group.rightSlot(endSlot);
-                }
+                if (!shift && !vertical && (!startSlot || !endSlot)) {
+                    method = reverse ? "prevGroupSlot" : "nextGroupSlot";
 
-                if (!shift && (!startSlot || !endSlot)) {
-                    if (!vertical) {
-                        if (isLeft) {
-                            startSlot = endSlot = this.prevGroupSlot(start, selection.groupIndex, isAllDay);
-                        } else {
-                            startSlot = endSlot = this.nextGroupSlot(start, selection.groupIndex, isAllDay);
-                        }
+                    startSlot = endSlot = this[method](start, groupIndex, daySlot);
 
-                        if (startSlot) {
-                            selection.groupIndex += (isLeft ? -1 : 1);
-                        }
+                    if (startSlot) {
+                        groupIndex += (reverse ? -1 : 1);
                     }
                 }
 
                 if (!shift && (!startSlot || !endSlot)) {
-                    var date = isLeft ? this.previousDate() : this.nextDate();
+                    var date = reverse ? this.previousDate() : this.nextDate();
 
                     selection.start = new Date(date);
                     selection.end = new Date(date);
 
-                    var endMilliseconds = selection.isAllDay ? MS_PER_DAY : getMilliseconds(end);
+                    var endMilliseconds = daySlot ? MS_PER_DAY : getMilliseconds(end);
 
                     setTime(selection.start, getMilliseconds(start));
                     setTime(selection.end, endMilliseconds);
@@ -1577,9 +1568,9 @@ kendo_module({
 
             if (handled) {
                 if (shift) {
-                    if (selection.backward && startSlot) {
+                    if (backward && startSlot) {
                         selection.start = startSlot.startDate();
-                    } else if (!selection.backward && endSlot) {
+                    } else if (!backward && endSlot) {
                         selection.end = endSlot.endDate();
                     }
                 } else if (startSlot && endSlot) {
@@ -1589,6 +1580,8 @@ kendo_module({
                 }
 
                 selection.events = [];
+                selection.backward = backward;
+                selection.groupIndex = groupIndex;
             }
 
             return handled;
