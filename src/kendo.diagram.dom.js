@@ -354,8 +354,7 @@ kendo_module({
             if (source === null) { // detach
                 if (this.sourceConnector) {
                     this._sourcePoint = this.sourceConnector.position();
-                    this.sourceConnector.connections.remove(this);
-                    this.sourceConnector = undefined;
+                    this._clearSourceConnector();
                 }
             }
             else if (source instanceof Connector) {
@@ -366,8 +365,7 @@ kendo_module({
             else if (source instanceof Point) {
                 this._sourcePoint = source;
                 if (this.sourceConnector) {
-                    this.sourceConnector.connections.remove(this);
-                    this.sourceConnector = undefined;
+                    this._clearSourceConnector();
                 }
                 this.refresh();
             }
@@ -382,8 +380,7 @@ kendo_module({
             if (target === null) { // detach
                 if (this.targetConnector) {
                     this._targetPoint = this.targetConnector.position();
-                    this.targetConnector.connections.remove(this);
-                    this.targetConnector = undefined;
+                    this._clearTargetConnector();
                 }
             }
             else if (target instanceof Connector) {
@@ -394,8 +391,7 @@ kendo_module({
             else if (target instanceof Point) {
                 this._targetPoint = target;
                 if (this.targetConnector) {
-                    this.targetConnector.connections.remove(this);
-                    this.targetConnector = undefined;
+                    this._clearTargetConnector();
                 }
                 this.refresh();
             }
@@ -465,7 +461,17 @@ kendo_module({
             if (this.adorner) {
                 this.adorner.refresh();
             }
-        }
+        },
+        _clearSourceConnector: function () {
+            this.sourceConnector.connections.remove(this);
+            this.sourceConnector = undefined;
+            this._resolvedSourceConnector = undefined;
+        },
+        _clearTargetConnector: function () {
+            this.targetConnector.connections.remove(this);
+            this.targetConnector = undefined;
+            this._resolvedTargetConnector = undefined;
+        },
     });
 
     function resolveConnectors(connection) {

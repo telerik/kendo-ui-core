@@ -169,5 +169,26 @@
         equal(c1._resolvedTargetConnector.options.name, "Left");
     });
 
+    test("Connection detach", function () {
+        var s1 = kdiagram.addShape(new Point(0, 0));
+        var s2 = kdiagram.addShape(new Point(200, 0));
+
+        var c1 = kdiagram.connect(s1, s2);
+        c1.select(true);
+        kdiagram.toolService.start(s2.bounds().left());
+
+        ok(c1.adorner, "The connection edit adorner is present");
+        ok(kdiagram.toolService.activeTool.type === "ConnectionTool", "The active tool is ConnectionEditTool");
+
+        kdiagram.toolService.move(new Point(400, 0));
+        kdiagram.toolService.end(new Point(400, 0));
+
+        ok(c1._resolvedTargetConnector === undefined);
+        ok(c1.targetConnector === undefined);
+
+        equal(c1._resolvedSourceConnector.options.name, "Right");
+        equal(c1.sourceConnector.options.name, "Auto");
+    });
+
 })(kendo.jQuery);
 

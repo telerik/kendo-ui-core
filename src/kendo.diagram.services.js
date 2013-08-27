@@ -37,7 +37,7 @@ kendo_module({
 
     diagram.Cursors = Cursors;
 
-    function selectSingle(item, meta){
+    function selectSingle(item, meta) {
         if (!item.isSelected) {
             if (!meta.ctrlKey) {
                 item.diagram.select(false);
@@ -371,6 +371,7 @@ kendo_module({
     var ConnectionTool = Class.extend({
         init: function (toolService) {
             this.toolService = toolService;
+            this.type = "ConnectionTool";
         },
         tryActivate: function (meta) {
             return this.toolService._hoveredConnector && !meta.ctrlKey; // connector it seems
@@ -406,6 +407,7 @@ kendo_module({
     var ConnectionEditTool = Class.extend({
         init: function (toolService) {
             this.toolService = toolService;
+            this.type = "ConnectionTool";
         },
         tryActivate: function () {
             var item = this.toolService.hoveredItem,
@@ -627,6 +629,17 @@ kendo_module({
                     return hit;
                 }
             }
+
+            if (!this.activeTool || this.activeTool.type !== "ConnectionTool") {
+                for (var j = 0; j < d._selectedItems.length; j++) {
+                    item = d._selectedItems[j];
+                    hit = item._hitTest(point);
+                    if (hit) {
+                        return item;
+                    }
+                }
+            }
+
             // shapes
             for (i = 0; i < d.shapes.length; i++) {
                 item = d.shapes[i];
@@ -780,16 +793,10 @@ kendo_module({
             that.refresh();
         },
         _hitTest: function (p) {
-            var ctr, c, i, j;
+            var ctr, i;
             for (i = 0; i < this.connectors.length; i++) {
                 ctr = this.connectors[i];
                 if (ctr._hitTest(p)) {
-                    for (j = 0; j < ctr._c.connections.length; j++) {
-                        c = ctr._c.connections[j];
-                        if (c.adorner) {
-                            return c;
-                        }
-                    }
                     ctr._hover(true);
                     this.diagram.toolService._hoveredConnector = ctr;
                     break;
