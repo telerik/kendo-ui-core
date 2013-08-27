@@ -238,7 +238,7 @@ kendo_module({
             }
             return this._bounds;
         },
-        actualBounds: function () {
+        visualBounds: function () {
             var bounds = this.bounds(),
                 tl = bounds.topLeft(),
                 br = bounds.bottomRight();

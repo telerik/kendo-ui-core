@@ -794,7 +794,7 @@ kendo_module({
             }
         },
         refresh: function () {
-            var bounds = this.shape.actualBounds();
+            var bounds = this.shape.visualBounds();
             this.visual.position(bounds.topLeft());
             $.each(this.connectors, function () {
                 this.refresh();
@@ -851,7 +851,7 @@ kendo_module({
         },
         refresh: function () {
             var sb = this.shape.bounds(),
-                innerBounds = this.shape.actualBounds().clone(),
+                innerBounds = this.shape.visualBounds().clone(),
                 that = this, b;
             this.bounds(innerBounds.inflate(this.options.offset, this.options.offset));
             this.visual.position(this._bounds.topLeft());
@@ -1010,10 +1010,10 @@ kendo_module({
             this.refresh();
         },
         refresh: function () {
-            var actualBounds = Rect.fn.fromPoints(this.diagram.transformPoint(this._sp), this.diagram.transformPoint(this._ep));
+            var visualBounds = Rect.fn.fromPoints(this.diagram.transformPoint(this._sp), this.diagram.transformPoint(this._ep));
             this.bounds(Rect.fn.fromPoints(this._sp, this._ep));
-            this.visual.position(actualBounds.topLeft());
-            this.visual.redraw({ height: actualBounds.height + 1, width: actualBounds.width + 1 });
+            this.visual.position(visualBounds.topLeft());
+            this.visual.redraw({ height: visualBounds.height + 1, width: visualBounds.width + 1 });
         }
     });
 
@@ -1029,15 +1029,15 @@ kendo_module({
         },
         refresh: function () {
             var p = this._c.shape.diagram.transformPoint(this._c.position()),
-                relative = p.minus(this._c.shape.actualBounds().topLeft()),
+                relative = p.minus(this._c.shape.visualBounds().topLeft()),
                 value = new Rect(p.x, p.y, 0, 0);
             value.inflate(this.options.width / 2, this.options.height / 2);
-            this._actualBounds = value;
+            this._visualBounds = value;
             this.visual.redraw({ center: new Point(relative.x, relative.y) });
         },
         _hitTest: function (p) {
             p = this._c.shape.diagram.transformPoint(p);
-            return this._actualBounds.contains(p);
+            return this._visualBounds.contains(p);
         }
     });
 

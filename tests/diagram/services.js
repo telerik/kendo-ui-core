@@ -60,15 +60,7 @@
         i.select(true);
 
         ok(i.adorner, "Adorner is present.");
-        deepEqual(i.bounds(), i.adorner.bounds(), "Adoner has correct bounds");
-    });
-
-    test("Resizing adorner activated", function () {
-        var i = d.shapes[0];
-        i.select(true);
-
-        ok(i.adorner, "Adorner is present.");
-        deepEqual(i.bounds(), i.adorner.bounds(), "Adoner has correct bounds");
+        deepEqual(i.visualBounds().inflate(i.adorner.options.offset, i.adorner.options.offset), i.adorner.bounds(), "Adoner has correct bounds");
     });
 
     module("Tooling tests. Ensure the tools are activated correctly.", {
