@@ -37,6 +37,17 @@ kendo_module({
 
     diagram.Cursors = Cursors;
 
+    function selectSingle(item, meta){
+        if (!item.isSelected) {
+            if (!meta.ctrlKey) {
+                item.diagram.select(false);
+            }
+            item.select(true);
+        } else if (meta.ctrlKey) {
+            item.select(false);
+        }
+    }
+
     var CompositeUnit = Class.extend({
         init: function (unit) {
             this.units = [];
@@ -293,15 +304,7 @@ kendo_module({
         start: function (p, meta) {
             var diagram = this.toolService.diagram, hoveredItem = this.toolService.hoveredItem;
             if (hoveredItem) {
-                if (!hoveredItem.isSelected) {
-                    if (!meta.ctrlKey) {
-                        diagram.select(false);
-                    }
-                    hoveredItem.select(true);
-                } else if (meta.ctrlKey) {
-                    hoveredItem.select(false);
-                }
-
+                selectSingle(hoveredItem, meta);
                 if (hoveredItem && hoveredItem.isSelected) {
                     this._selectedItems = diagram.select();
                     this.handle = hoveredItem.adorner._hitTest(p);
@@ -372,11 +375,11 @@ kendo_module({
         tryActivate: function (meta) {
             return this.toolService._hoveredConnector && !meta.ctrlKey; // connector it seems
         },
-        start: function (p) {
+        start: function (p, meta) {
             var diagram = this.toolService.diagram, connector = this.toolService._hoveredConnector, unit;
             unit = new AddConnectionUnit(diagram.connect(connector._c, p));
             this.toolService.newConnection = unit.connection;
-            this.toolService.newConnection.select(true);
+            selectSingle(this.toolService.newConnection, meta);
             diagram.undoRedoService.begin();
             diagram.undoRedoService.add(unit);
             diagram.undoRedoService.commit();
@@ -409,11 +412,11 @@ kendo_module({
                 isActive = item && item.line; // means it is connection
             if (isActive) {
                 this._c = item;
-                this._c.select(true);
             }
             return isActive;
         },
-        start: function (p) {
+        start: function (p, meta) {
+            selectSingle(this._c, meta);
             this.handle = this._c.adorner._hitTest(p);
             this._c.adorner.start(p);
         },

@@ -53,10 +53,10 @@ kendo_module({
             hoveredBackground: "#70CAFF"
         },
         position: function () {
-            if(this.options.position){
+            if (this.options.position) {
                 return this.options.position(this.shape);
             }
-            else{
+            else {
                 return getShapeConnectorPos(this.shape, this.options.name.toLowerCase());
             }
         }
@@ -223,13 +223,15 @@ kendo_module({
         bounds: function (value) {
             if (value) {
                 this._bounds = value;
+                var point = value.topLeft();
                 if (this.contentVisual) {
                     this.contentVisual.redraw(this.bounds());
                 }
-
+                this.options.x = point.x;
+                this.options.y = point.y;
                 this.options.width = this.shapeVisual.options.width = value.width;
                 this.options.height = this.shapeVisual.options.height = value.height;
-                this.position(value.topLeft());
+                this.visual.position(point);
 
                 this.shapeVisual.redraw({ width: value.width, height: value.height });
                 this.refresh();
@@ -237,6 +239,9 @@ kendo_module({
                 this.trigger(BOUNDSCHANGE, this._bounds);
             }
             return this._bounds;
+        },
+        position: function (point) {
+            this.bounds(new Rect(point.x, point.y, this._bounds.width, this._bounds.height));
         },
         visualBounds: function () {
             var bounds = this.bounds(),
@@ -371,15 +376,7 @@ kendo_module({
                 this.sourceConnector.connections.push(this);
                 this.refresh();
             }
-            var sp = this._sourcePoint;
-            if (this.sourceConnector) {
-                if (this.sourceConnector.options.name == Auto) {
-                    sp = _closestConnector(this._fastTarget(), this.sourceConnector).position();
-                } else {
-                    sp = this.sourceConnector.position();
-                }
-            }
-            return sp;
+            return this._resolvedSourceConnector ? this._resolvedSourceConnector.position() : this._sourcePoint;
         },
         targetPoint: function (target) {
             if (target === null) { // detach
@@ -407,21 +404,7 @@ kendo_module({
                 this.targetConnector.connections.push(this);
                 this.refresh();
             }
-            var tp = this._targetPoint;
-            if (this.targetConnector) {
-                if (this.targetConnector.options.name == Auto) {
-                    tp = _closestConnector(this._fastSource(), this.targetConnector).position();
-                } else {
-                    tp = this.targetConnector.position();
-                }
-            }
-            return tp;
-        },
-        _fastSource: function () {
-            return this.sourceConnector ? this.sourceConnector.position() : this._sourcePoint;
-        },
-        _fastTarget: function () {
-            return this.targetConnector ? this.targetConnector.position() : this._targetPoint;
+            return this._resolvedTargetConnector ? this._resolvedTargetConnector.position() : this._targetPoint;
         },
         source: function () {
             return this.sourceConnector ? this.sourceConnector : this._sourcePoint;
@@ -466,6 +449,7 @@ kendo_module({
             this.line.redraw({ stroke: value ? this.options.hoveredStroke : this.options.stroke });
         },
         refresh: function () {
+            resolveConnectors(this);
             var globalSourcePoint = this.sourcePoint(), globalSinkPoint = this.targetPoint(),
                 boundsTopLeft, localSourcePoint, localSinkPoint, middle;
             this.bounds(Rect.fn.fromPoints(globalSourcePoint, globalSinkPoint));
@@ -484,11 +468,69 @@ kendo_module({
         }
     });
 
-    function _closestConnector(point, ac) {
-        var mindist = MAXINT, resCtr, ctrs = ac.shape.connectors;
+    function resolveConnectors(connection) {
+        var minDist = MAXINT,
+            sourcePoint, targetPoint,
+            source = connection.source(),
+            target = connection.target(),
+            autoSourceShape, autoTargetShape,
+            sourceConnector, targetConnector;
+        if (source instanceof Point) {
+            sourcePoint = source;
+        }
+        else if (source instanceof Connector) {
+            if (source.options.name == Auto) {
+                autoSourceShape = source.shape;
+            }
+            else {
+                connection._resolvedSourceConnector = source;
+                sourcePoint = source.position();
+            }
+        }
+
+        if (target instanceof Point) {
+            targetPoint = target;
+        }
+        else if (target instanceof Connector) {
+            if (target.options.name == Auto) {
+                autoTargetShape = target.shape;
+            }
+            else {
+                connection._resolvedTargetConnector = target;
+                targetPoint = target.position();
+            }
+        }
+
+        if (sourcePoint) {
+            if (autoTargetShape) {
+                connection._resolvedTargetConnector = closestConnector(sourcePoint, autoTargetShape);
+            }
+        } else if (autoSourceShape) {
+            if (targetPoint) {
+                connection._resolvedSourceConnector = closestConnector(targetPoint, autoSourceShape);
+            } else if (autoTargetShape) {
+                for (var i = 0; i < autoSourceShape.connectors.length; i++) {
+                    sourceConnector = autoSourceShape.connectors[i];
+                    if (sourceConnector.options.name !== Auto) {
+                        var currentSourcePoint = sourceConnector.position(),
+                            currentTargetConnector = closestConnector(currentSourcePoint, autoTargetShape);
+                        var dist = currentTargetConnector.position().distanceTo(currentSourcePoint);
+                        if (dist < minDist) {
+                            minDist = dist;
+                            connection._resolvedSourceConnector = sourceConnector;
+                            connection._resolvedTargetConnector = currentTargetConnector;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function closestConnector(point, shape) {
+        var mindist = MAXINT, resCtr, ctrs = shape.connectors;
         for (var i = 0; i < ctrs.length; i++) {
             var ctr = ctrs[i];
-            if (ctr != ac) {
+            if (ctr.options.name != Auto) {
                 var dist = point.distanceTo(ctr.position());
                 if (dist < mindist) {
                     mindist = dist;
@@ -838,7 +880,7 @@ kendo_module({
         getId: function (id) {
             return this.shapes.first(function (s) {
                 return s.shapeVisual.native.id == id;
-            })
+            });
         }
 
     });

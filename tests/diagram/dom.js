@@ -1,7 +1,7 @@
 ﻿///<reference path="qunit-1.12.0.js" />
 
 (function ($, undefined) {
-    var diagram = kendo.diagram, kdiagram, tollerance = 0.0001;
+    var diagram = kendo.diagram, kdiagram, tollerance = 0.0001, Point = diagram.Point;
 
     QUnit.module("event handling", {
         setup: function () {
@@ -16,9 +16,9 @@
 
     test("get canvas point of mouse event", function () {
         var offset = $("#canvas").offset();
-        var point = kdiagram.documentToCanvasPoint(new diagram.Point(200, 200));
+        var point = kdiagram.documentToCanvasPoint(new Point(200, 200));
 
-        ok(point.equals(new diagram.Point(200 - offset.left, 200 - offset.top)));
+        ok(point.equals(new Point(200 - offset.left, 200 - offset.top)));
     });
 
     test("limit zoom with min/max values", function () {
@@ -39,12 +39,12 @@
     });
 
     test("zoom at position changes diagram zoom", function () {
-        var zoom = kdiagram.zoom(1.1, new diagram.Point(200, 200));
+        var zoom = kdiagram.zoom(1.1, new Point(200, 200));
         equal(zoom, 1.1);
     });
 
     test("zoom at position pans the diagram", function () {
-        kdiagram.zoom(1.1, new diagram.Point(200, 200));
+        kdiagram.zoom(1.1, new Point(200, 200));
 
         var pan = kdiagram.pan();
         ok(pan.x < 0, "x pan should be negative because the diagram has expanded around a static point");
@@ -52,16 +52,52 @@
     });
 
     test("zoom out at position pans the diagram", function () {
-        kdiagram.zoom(0.7, new diagram.Point(200, 200));
+        kdiagram.zoom(0.7, new Point(200, 200));
 
         var pan = kdiagram.pan();
         ok(pan.x > 0, "x pan should be positive because the diagram has shrunk around a static point");
         ok(pan.y > 0, "y pan should be positive because the diagram has shrunk around a static point");
     });
 
+    QUnit.module("Shape bounds", {
+        setup: function () {
+            $("#canvas").kendoDiagram();
+
+            kdiagram = $("#canvas").getKendoDiagram();
+        },
+        teardown: function () {
+            kdiagram.clear();
+        }
+    });
+
+    test("Shape bounds changed event is raised after position set", function () {
+        var s = kdiagram.addShape(new Point(0, 0)),
+            raised;
+
+        s.bind("boundsChange", function () {
+            raised = true;
+        });
+
+        s.position(new Point(100, 100));
+        ok(raised);
+    });
+
+    test("Shape bounds changed event is raised after bounds set", function () {
+        var s = kdiagram.addShape(new Point(0, 0)),
+            raised;
+
+        s.bind("boundsChange", function () {
+            raised = true;
+        });
+
+        s.bounds(new diagram.Rect(100, 100, 100, 100));
+
+        ok(raised);
+    });
+
     test("Shape visual bounds is ok after pan", function () {
-        var s = kdiagram.addShape(new kendo.diagram.Point(0, 0));
-        kdiagram.pan(new kendo.diagram.Point(100, 100));
+        var s = kdiagram.addShape(new Point(0, 0));
+        kdiagram.pan(new Point(100, 100));
 
         var pan = kdiagram.pan();
         var vb = s.visualBounds();
@@ -71,7 +107,7 @@
     });
 
     test("Shape visual bounds is ok after zoom", function () {
-        var s = kdiagram.addShape(new kendo.diagram.Point(0, 0));
+        var s = kdiagram.addShape(new Point(0, 0));
         var z = 0.5;
         z = kdiagram.zoom(z);
 
@@ -79,6 +115,58 @@
         var b = s.bounds();
         QUnit.close(b.width, vb.width / z, tollerance);
         QUnit.close(b.height, vb.height / z, tollerance);
+    });
+
+    QUnit.module("Connections and connectors", {
+        setup: function () {
+            $("#canvas").kendoDiagram();
+
+            kdiagram = $("#canvas").getKendoDiagram();
+        },
+        teardown: function () {
+            kdiagram.clear();
+        }
+    });
+
+    test("Connection connect - set auto connectors test", function () {
+        var s1 = kdiagram.addShape(new Point(0, 0));
+        var s2 = kdiagram.addShape(new Point(100, 0));
+
+        var c1 = kdiagram.connect(s1, s2);
+        equal(c1.sourceConnector.options.name, "Auto");
+        equal(c1.targetConnector.options.name, "Auto");
+    });
+
+    test("Connection connect - resolve auto connectors test", function () {
+        var s1 = kdiagram.addShape(new Point(0, 0));
+        var s2 = kdiagram.addShape(new Point(100, 0));
+
+        var c1 = kdiagram.connect(s1, s2);
+        equal(c1._resolvedSourceConnector.options.name, "Right");
+        equal(c1._resolvedTargetConnector.options.name, "Left");
+    });
+
+    test("Connection connect - resolve auto connectors border test", function () {
+        var s1 = kdiagram.addShape(new Point(100, 100));
+        var s2 = kdiagram.addShape(new Point(160, 160));
+
+        var c1 = kdiagram.connect(s1, s2);
+        equal(c1._resolvedSourceConnector.options.name, "Right");
+        equal(c1._resolvedTargetConnector.options.name, "Top");
+    });
+
+    test("Connection connect - resolve auto connectors after move test", function () {
+        var s1 = kdiagram.addShape(new Point(100, 100));
+        var s2 = kdiagram.addShape(new Point(160, 160));
+
+        var c1 = kdiagram.connect(s1, s2);
+        equal(c1._resolvedSourceConnector.options.name, "Right");
+        equal(c1._resolvedTargetConnector.options.name, "Top");
+
+        s2.position(new Point(300, 100));
+        c1.refresh();
+        equal(c1._resolvedSourceConnector.options.name, "Right");
+        equal(c1._resolvedTargetConnector.options.name, "Left");
     });
 
 })(kendo.jQuery);
