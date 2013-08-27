@@ -8,6 +8,20 @@ kendo_module({
 
 (function ($, undefined) {
     // Imports ================================================================
+    var dataviz = kendo.dataviz,
+        Widget = kendo.ui.Widget;
+
+    // Map ====================================================================
+    var Map = Widget.extend({
+        init: function(element, options) {
+        },
+
+        options: {
+            name: "Map"
+        }
+    });
 
     // Exports ================================================================
+    dataviz.ui.plugin(Map);
+
 })(window.kendo.jQuery);

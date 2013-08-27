@@ -2,20 +2,38 @@
 <html>
     <head>
         <title>Map sandbox</title>
-        <script src="../src/jquery.js"></script>
-        <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.userevents.js"></script>
-        <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.dataviz.core.js"></script>
-        <script src="../src/kendo.dataviz.vml.js"></script>
-        <script src="../src/kendo.dataviz.svg.js"></script>
-        <script src="../src/kendo.dataviz.canvas.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.canvas.js"></script>
+        <script src="../../src/kendo.dataviz.map.js"></script>
     </head>
     <body>
         <div id="map"></div>
         <script>
             $.getJSON("countries.geo.json", function(data) {
                 console.log(data);
+            });
+
+            $("#map").kendoMap({
+                view: {
+                    center: [51.505, -0.09],
+                    zoom: 12
+                },
+                layers: [{
+                    type: "tile",
+                    url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+                    copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+                }],
+                markers: [{
+                    position: [51.5, -0.09],
+                    text: "Marker with popup",
+                    open: true // ?
+                }]
             });
         </script>
     </body>
