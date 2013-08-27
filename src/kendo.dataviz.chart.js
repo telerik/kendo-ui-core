@@ -5395,6 +5395,293 @@ kendo_module({
         }
     });
 
+    var BoxPlotChart = CandlestickChart.extend({
+        addValue: function(data, category, categoryIx, series, seriesIx) {
+            var chart = this,
+                options = chart.options,
+                value = data.valueFields,
+                children = chart.children,
+                pointColor = data.fields.color || series.color,
+                valueParts = this.splitValue(value),
+                hasValue = areNumbers(valueParts),
+                categoryPoints = chart.categoryPoints[categoryIx],
+                dataItem = series.data[categoryIx],
+                point, cluster;
+
+            if (!categoryPoints) {
+                chart.categoryPoints[categoryIx] = categoryPoints = [];
+            }
+
+            if (hasValue) {
+                point = chart.createPoint(
+                    data, category, categoryIx,
+                    deepExtend({}, series, { color: pointColor })
+                );
+            }
+
+            cluster = children[categoryIx];
+            if (!cluster) {
+                cluster = new ClusterLayout({
+                    vertical: options.invertAxes,
+                    gap: options.gap,
+                    spacing: options.spacing
+                });
+                chart.append(cluster);
+            }
+
+            if (point) {
+                chart.updateRange(value, categoryIx, series);
+
+                cluster.append(point);
+
+                point.categoryIx = categoryIx;
+                point.category = category;
+                point.series = series;
+                point.seriesIx = seriesIx;
+                point.owner = chart;
+                point.dataItem = dataItem;
+            }
+
+            chart.points.push(point);
+            categoryPoints.push(point);
+        },
+
+        pointType: function() {
+            return BoxPlot;
+        },
+
+        splitValue: function(value) {
+            return [ value.min, value.lower, value.middle, value.upper, value.max ];
+        },
+
+        formatPointValue: function(point, format) {
+            var value = point.value;
+
+            return autoFormat(format,
+                value.min, value.lower, value.middle,
+                value.upper, value.max, point.category
+            );
+        }
+    });
+
+    var Boxplot = ChartElement.extend({
+        init: function(value, options) {
+            var point = this;
+
+            ChartElement.fn.init.call(point, options);
+            point.value = value;
+            point.options.id = uniqueId();
+            point.enableDiscovery();
+
+            point.createNote();
+        },
+
+        options: {
+            border: {
+                _brightness: 0.8
+            },
+            line: {
+                width: 2
+            },
+            overlay: {
+                gradient: GLASS
+            },
+            tooltip: {
+                format: "<table style='text-align: left;'>" +
+                        "<th colspan='2'>{4:d}</th>" +
+                        "<tr><td>Open:</td><td>{0:C}</td></tr>" +
+                        "<tr><td>High:</td><td>{1:C}</td></tr>" +
+                        "<tr><td>Low:</td><td>{2:C}</td></tr>" +
+                        "<tr><td>Close:</td><td>{3:C}</td></tr>" +
+                        "</table>"
+            },
+            highlight: {
+                opacity: 1,
+                border: {
+                    width: 1,
+                    opacity: 1
+                },
+                line: {
+                    width: 1,
+                    opacity: 1
+                }
+            },
+            notes: {
+                visible: true,
+                label: {}
+            }
+        },
+
+        reflow: function(box) {
+            var point = this,
+                options = point.options,
+                chart = point.owner,
+                value = point.value,
+                valueAxis = chart.seriesValueAxis(options),
+                points = [], mid, ocSlot, lhSlot;
+
+            ocSlot = valueAxis.getSlot(value.open, value.close);
+            lhSlot = valueAxis.getSlot(value.low, value.high);
+
+            ocSlot.x1 = lhSlot.x1 = box.x1;
+            ocSlot.x2 = lhSlot.x2 = box.x2;
+
+            point.realBody = ocSlot;
+
+            mid = lhSlot.center().x;
+            points.push([ Point2D(mid, lhSlot.y1), Point2D(mid, ocSlot.y1) ]);
+            points.push([ Point2D(mid, ocSlot.y2), Point2D(mid, lhSlot.y2) ]);
+
+            point.lowHighLinePoints = points;
+
+            point.box = lhSlot.clone().wrap(ocSlot);
+
+            point.reflowNote();
+        },
+
+        reflowNote: function() {
+            var point = this;
+
+            if (point.note) {
+                point.note.reflow(point.box);
+            }
+        },
+
+        createNote: function() {
+            var point = this,
+                options = point.options.notes,
+                text = options.label.text,
+                noteTemplate;
+
+            if (options.visible && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: point.dataItem,
+                        category: point.category,
+                        value: point.value,
+                        series: point.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                point.note = new Note(deepExtend({}, options, { label: { text: text }}));
+                point.append(point.note);
+            }
+        },
+
+        getViewElements: function(view) {
+            var point = this,
+                options = point.options,
+                elements = [],
+                border = options.border.width > 0 ? {
+                    stroke: point.getBorderColor(),
+                    strokeWidth: options.border.width,
+                    dashType: options.border.dashType,
+                    strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
+                } : {},
+                rectStyle = deepExtend({
+                    fill: options.color,
+                    fillOpacity: options.opacity
+                }, border),
+                lineStyle = {
+                    strokeOpacity: valueOrDefault(options.line.opacity, options.opacity),
+                    strokeWidth: options.line.width,
+                    stroke: options.line.color || options.color,
+                    dashType: options.line.dashType,
+                    strokeLineCap: "butt"
+                },
+                group = view.createGroup({
+                    animation: {
+                        type: CLIP
+                    }
+                });
+
+            if (options.overlay) {
+                rectStyle.overlay = deepExtend({
+                    rotation: 0
+                }, options.overlay);
+            }
+
+            elements.push(view.createRect(point.realBody, rectStyle));
+            elements.push(view.createPolyline(point.lowHighLinePoints[0], false, lineStyle));
+            elements.push(view.createPolyline(point.lowHighLinePoints[1], false, lineStyle));
+            elements.push(point.createOverlayRect(view, options));
+
+            append(elements,
+                ChartElement.fn.getViewElements.call(point, view)
+            );
+
+            group.children = elements;
+
+            return [group];
+        },
+
+        getBorderColor: function() {
+            var point = this,
+                options = point.options,
+                border = options.border,
+                borderColor = border.color;
+
+            if (!defined(borderColor)) {
+                borderColor =
+                    new Color(options.color).brightness(border._brightness).toHex();
+            }
+
+            return borderColor;
+        },
+
+        createOverlayRect: function(view, options) {
+            return view.createRect(this.box, {
+                data: { modelId: options.modelId },
+                fill: "#fff",
+                fillOpacity: 0
+            });
+        },
+
+        highlightOverlay: function(view, options) {
+            var point = this,
+                pointOptions = point.options,
+                highlight = pointOptions.highlight,
+                border = highlight.border,
+                borderColor = point.getBorderColor(),
+                line = highlight.line,
+                data = { data: { modelId: pointOptions.modelId } },
+                rectStyle = deepExtend({}, data, options, {
+                    stroke: borderColor,
+                    strokeOpacity: border.opacity,
+                    strokeWidth: border.width
+                }),
+                lineStyle = deepExtend({}, data, {
+                    stroke: line.color || borderColor,
+                    strokeWidth: line.width,
+                    strokeOpacity: line.opacity,
+                    strokeLineCap: "butt"
+                }),
+                group = view.createGroup();
+
+            group.children.push(view.createRect(point.realBody, rectStyle));
+            group.children.push(view.createPolyline(point.lowHighLinePoints[0], false, lineStyle));
+            group.children.push(view.createPolyline(point.lowHighLinePoints[1], false, lineStyle));
+
+            return group;
+        },
+
+        tooltipAnchor: function() {
+            var point = this,
+                box = point.box;
+
+            return new Point2D(box.x2 + TOOLTIP_OFFSET, box.y1 + TOOLTIP_OFFSET);
+        },
+
+        formatValue: function(format) {
+            var point = this;
+            return point.owner.formatPointValue(point, format);
+        }
+    });
+    deepExtend(Candlestick.fn, PointEventsMixin);
+
     // TODO: Rename to Segment?
     var PieSegment = ChartElement.extend({
         init: function(value, sector, options) {
