@@ -1,7 +1,7 @@
 @ios7-main-color: #007aff;
 @ios7-second-color: #bababa;
 @ios7-background: #fff;
-@ios7-light-background: #f7f8f8;
+@ios7-light-background: rgba(244,244,244,.95);
 @ios7-dark-background: #363940;
 @ios7-list-background: #fcfcfc;
 @ios7-button-background: rgba(0,0,0,0);
@@ -57,11 +57,6 @@
 .km-ios7 .km-navbar
 {
     border: @ios7-border-width solid @ios7-border-color;
-    background: rgb(244, 244, 244);
-}
-.km-native-scrolling.km-ios7 .km-navbar
-{
-    background: rgba(244, 244, 244, 0.95);
 }
 
 .km-ios7 .km-header .km-navbar
@@ -268,6 +263,7 @@
 .km-ios7 .k-slider .k-draghandle,
 .km-ios7 .k-slider .k-draghandle:hover
 {
+    top: -.6em;
     border: 0;
     .border-radius(5em);
     .box-shadow(0 0 0 3px currentcolor);
@@ -1031,6 +1027,14 @@
 
 /* Active States */
 
+.km-ios7 .km-button,
+.km-ios7 .km-switch-handle,
+.km-ios7 .k-slider-selection,
+.km-ios7 .km-switch-background
+{
+    color: @ios7-active-background;
+}
+
 .km-ios7 .km-badge,
 .km-ios7 .km-rowinsert,
 .km-ios7 .km-rowdelete,
@@ -1066,13 +1070,6 @@
 .km-ios7 .km-listview-label input[type=checkbox]:checked:after
 {
     background: @ios7-active-color;
-}
-
-.km-ios7 .km-switch-handle,
-.km-ios7 .k-slider-selection,
-.km-ios7 .km-switch-background
-{
-    color: @ios7-active-background;
 }
 
 .km-ios7 .km-rowinsert,
