@@ -321,6 +321,20 @@
                 equal(checkboxes.eq(0).val(), "6");
             });
 
+            test("Take into account firstWeekDay option when check the input", function() {
+                var editor = new RecurrenceEditor(div, {
+                    firstWeekDay: 1,
+                    start: new Date(2013, 7, 27)
+                }),
+                date = kendo.date.today();
+
+                editor.setView("weekly");
+
+                var checkboxes = editor.container.find("input[type=checkbox]:checked");
+
+                equal(checkboxes.eq(0).val(), "2");
+            });
+
             test("Use day of event start date to check correct checkbox", function() {
                 var date = kendo.date.today(),
                     editor = new RecurrenceEditor(div, {

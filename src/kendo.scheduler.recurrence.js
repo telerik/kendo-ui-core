@@ -1457,8 +1457,17 @@ kendo_module({
                 });
 
                 if (rule.weekDays) {
-                    for (var idx = 0, length = rule.weekDays.length; idx < length; idx ++) {
-                        weekDays.eq(rule.weekDays[idx].day).prop("checked", true);
+                    var idx, weekDay;
+                    var i = 0, l = weekDays.length;
+                    var length = rule.weekDays.length;
+
+                    for (; i < l; i++) {
+                        weekDay = weekDays[i];
+                        for (idx = 0; idx < length; idx ++) {
+                            if (weekDay.value == rule.weekDays[idx].day) {
+                                weekDay.checked = true;
+                            }
+                        }
                     }
                 }
             }
