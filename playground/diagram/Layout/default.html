@@ -53,7 +53,7 @@
         }
 
         h2 {
-            font-weight: 50;
+            font-weight: 100;
             font-size: 1.2em;
             letter-spacing: -0.05em;
             position: relative;
@@ -221,6 +221,9 @@ function layout() {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
+                        componentsGridWidth: 5000,
+                        totalMargin: new kendo.diagram.Size(50, 50),
+                        componentMargin: new kendo.diagram.Size(20, 20),
                         roots: [knownRoot]
                     }
             )
@@ -259,8 +262,8 @@ function layout() {
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
-                        horizontalSeparation: 15,
-                        verticalSeparation: 80,
+                        horizontalSeparation: 60,
+                        verticalSeparation: 10,
                         roots: [knownRoot]
                     }
             )
@@ -279,8 +282,8 @@ function layout() {
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.RadialTree,
-                        horizontalSeparation: 15,
-                        verticalSeparation: 80,
+                        radialFirstLevelSeparation: 250,
+                        radialSeparation: 50,
                         roots: [knownRoot]
                     }
             )
@@ -289,8 +292,10 @@ function layout() {
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                     {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree,
-                        horizontalSeparation: 15,
-                        verticalSeparation: 80,
+                        horizontalSeparation: 50,
+                        underneathVerticalTopOffset: 20,
+                        underneathHorizontalOffset: 50,
+                        underneathVerticalSeparation: 20,
                         roots: [knownRoot]
                     }
             )
@@ -302,6 +307,9 @@ function layout() {
         case  "QForce":
             diagram.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
                     {
+                        totalMargin: new kendo.diagram.Size(50, 50),
+                        componentMargin: new kendo.diagram.Size(120, 20),
+                        nodeDistance: 50,
                         roots: [knownRoot]
                     }
             )

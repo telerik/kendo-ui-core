@@ -2617,19 +2617,24 @@ kendo_module({
                     }
                 }
                 var opt = {};
-                if (randomSize) {
+
+                if (node.id == "0") {
+                    kendo.deepExtend(opt,
+                        {
+                            background: "Orange",
+                            data: 'circle',
+                            width: 100,
+                            height: 100,
+                            center: new Point(50, 50)
+                        });
+                }
+                else if (randomSize) {
                     kendo.deepExtend(opt, {
                         width: Math.random() * 150 + 20,
                         height: Math.random() * 80 + 50,
                         data: 'rectangle',
                         background: "#778899"
                     })
-                }
-                if (node.id == "0") {
-                    kendo.deepExtend(opt,
-                        {
-                            background: "Orange"
-                        });
                 }
 
                 var shape = this._addShape(diagram, p, node.id, opt);
@@ -3314,21 +3319,10 @@ kendo_module({
 
     })
 
-    /**
-     * The classic spring-embedder (aka force-directed, Fruchterman-Rheingold, barycentric) algorithm.
-     * http://en.wikipedia.org/wiki/Force-directed_graph_drawing
-     *  - Chapter 12 of Tamassia et al. "Handbook of graph drawing and visualization".
-     *  - Kobourov on preprint arXiv; http://arxiv.org/pdf/1201.3011.pdf
-     *  - Fruchterman and Rheingold in SOFTWARE-PRACTICE AND EXPERIENCE, VOL. 21(1 1), 1129-1164 (NOVEMBER 1991)
-     * @type {*}
-     */
-    var SpringLayout = kendo.Class.extend({
-        init: function (diagram) {
-            if (isUndefined(diagram)) {
-                throw "Diagram is not specified.";
-            }
-            this.diagram = diagram;
-            this.options = {
+    var LayoutBase = kendo.Class.extend({
+        defaultOptions: null,
+        init: function () {
+            this.defaultOptions = {
                 /**
                  * Whether the motion of the nodes should be limited by the boundaries of the diagram surface.
                  */
@@ -3338,24 +3332,175 @@ kendo_module({
                 requiresSimpleGraph: true,
                 nodeDistance: 50,
                 iterations: 300,
-                keepGroupLayout: false
+                keepGroupLayout: false,
+                treeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
+                horizontalSeparation: 90,
+                verticalSeparation: 50,
+                underneathVerticalTopOffset: 15,
+                underneathHorizontalOffset: 15,
+                underneathVerticalSeparation: 15,
+                radialSeparation: 150,
+                radialFirstLevelSeparation: 200,
+                componentsGridWidth: 5000, // TODO: default should be 800
+                totalMargin: new Size(50, 50),
+                componentMargin: new Size(20, 20),
+                keepComponentsInOneRadialLayout: false,
+                animateTransitions: false,
+                startRadialAngle: 0,
+                roots: null,
+                endRadialAngle: 2 * Math.PI,
+                // TODO: ensure to change this to false when containers are around
+                ignoreContainers: true,
+                layoutContainerChildren: false,
+                ignoreInvisible: true
             };
+        },
+        /**
+         * Organizes the components in a grid.
+         * @param components
+         */
+        gridLayoutComponents: function (components) {
+            if (components == null) {
+                throw "No components supplied.";
+            }
+
+            // calculate and cache the bounds of the components
+            components.forEach(function (c) {
+                c.calcBounds();
+            })
+
+            // order by decreasing width
+            components.sort(function (a, b) {
+                return b.bounds.width - a.bounds.width;
+            })
+
+            var maxWidth = this.options.componentsGridWidth,
+                offsetX = this.options.componentMargin.width,
+                offsetY = this.options.componentMargin.height,
+                height = 0,
+                startX = this.options.totalMargin.width,
+                startY = this.options.totalMargin.height,
+                x = startX,
+                y = startY;
+            while (components.length > 0) {
+                if (x >= maxWidth) {
+                    // start a new row
+                    x = startX;
+                    y += height + offsetY;
+                    // reset the row height
+                    height = 0;
+                }
+                var component = components.pop();
+                this.moveToOffset(component, new Point(x, y));
+
+                for (var j = 0; j < component.nodes.length; j++) {
+                    var node = component.nodes[j];
+                    var shape = node.associatedShape;
+                    shape.bounds(new Rect(node.x, node.y, node.width, node.height));
+                }
+
+                var boundingRect = component.bounds;
+                var currentHeight = boundingRect.height;
+                if (currentHeight <= 0 || isNaN(currentHeight)) {
+                    currentHeight = 0;
+                }
+                var currentWidth = boundingRect.width;
+                if (currentWidth <= 0 || isNaN(currentWidth)) {
+                    currentWidth = 0;
+                }
+
+                if (currentHeight >= height) {
+                    height = currentHeight;
+                }
+                x += currentWidth + offsetX;
+            }
 
         },
+
+        moveToOffset: function (component, p) {
+            var bounds = component.bounds;
+            var deltax = p.x - bounds.x;
+            var deltay = p.y - bounds.y;
+
+            for (var i = 0, len = component.nodes.length; i < len; i++) {
+                var node = component.nodes[i];
+                var nodeBounds = node.bounds();
+                if (nodeBounds == Rect.Empty) {
+                    nodeBounds = new Rect(0, 0, 0, 0);
+                }
+                nodeBounds.x += deltax;
+                nodeBounds.y += deltay;
+                node.bounds(nodeBounds);
+            }
+            this.currentHorizontalOffset += bounds.width + this.options.totalMargin.width;
+            return new Point(deltax, deltay);
+        },
+
+        transferOptions: function (options) {
+
+            // Size options lead to stackoverflow and need special handling
+
+            this.options = this.defaultOptions;
+            if (options["totalMargin"]) {
+                this.options["totalMargin"] = options["totalMargin"];
+                delete options["totalMargin"];
+            }
+            if (options["componentMargin"]) {
+                this.options["componentMargin"] = options["componentMargin"];
+                delete options["componentMargin"];
+            }
+            this.options = kendo.deepExtend(this.options, options || {})
+        }
+    });
+
+    /**
+     * The classic spring-embedder (aka force-directed, Fruchterman-Rheingold, barycentric) algorithm.
+     * http://en.wikipedia.org/wiki/Force-directed_graph_drawing
+     *  - Chapter 12 of Tamassia et al. "Handbook of graph drawing and visualization".
+     *  - Kobourov on preprint arXiv; http://arxiv.org/pdf/1201.3011.pdf
+     *  - Fruchterman and Rheingold in SOFTWARE-PRACTICE AND EXPERIENCE, VOL. 21(1 1), 1129-1164 (NOVEMBER 1991)
+     * @type {*}
+     */
+    var SpringLayout = LayoutBase.extend({
+        init: function (diagram) {
+            var that = this;
+            LayoutBase.fn.init.call(that);
+            if (isUndefined(diagram)) {
+                throw "Diagram is not specified.";
+            }
+            this.diagram = diagram;
+        },
+
         layout: function (options) {
+
+            this.transferOptions(options);
+
             var adapter = new DiagramToHyperTreeAdapter(this.diagram);
             var graph = adapter.convert(options);
-            this.layoutGraph(graph, options);
+            if (graph.isEmpty()) {
+                return;
+            }
+            // split into connected components
+            var components = graph.getConnectedComponents();
+            if (components.isEmpty()) {
+                return;
+            }
+            for (var i = 0; i < components.length; i++) {
+                var component = components[i];
+                this.layoutGraph(component, options);
+            }
+            this.gridLayoutComponents(components);
             for (var i = 0, len = graph.nodes.length; i < len; i++) {
                 var node = graph.nodes[i];
                 var shape = node.associatedShape;
                 shape.bounds(new Rect(node.x, node.y, node.width, node.height));
             }
         },
+
         layoutGraph: function (graph, options) {
 
             if (isDefined(options)) {
-                this.options = kendo.deepExtend(this.options, options);
+                this.transferOptions(options);
             }
             this.graph = graph;
 
@@ -4352,8 +4497,10 @@ kendo_module({
      * The various tree layout algorithms.
      * @type {*}
      */
-    var TreeLayout = kendo.Class.extend({
+    var TreeLayout = LayoutBase.extend({
         init: function (diagram) {
+            var that = this;
+            LayoutBase.fn.init.call(that);
             if (isUndefined(diagram)) {
                 throw "No diagram specified.";
             }
@@ -4364,29 +4511,8 @@ kendo_module({
          * Arranges the diagram in a tree-layout with the specified options and tree subtype.
          */
         layout: function (options) {
-            this.options = kendo.deepExtend({
-                    treeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
-                    horizontalSeparation: 90,
-                    verticalSeparation: 50,
-                    underneathVerticalTopOffset: 15,
-                    underneathHorizontalOffset: 15,
-                    underneathVerticalSeparation: 15,
-                    radialSeparation: 150,
-                    radialFirstLevelSeparation: 200,
-                    componentsGridWidth: 5000, // TODO: default should be 800
-                    totalMargin: new Size(50, 50),
-                    componentMargin: new Size(20, 20),
-                    keepComponentsInOneRadialLayout: false,
-                    animateTransitions: false,
-                    startRadialAngle: 0,
-                    roots: [],
-                    endRadialAngle: 2 * Math.PI,
-                    // TODO: ensure to change this to false when containers are around
-                    ignoreContainers: true,
-                    layoutContainerChildren: false,
-                    ignoreInvisible: true
-                },
-                options || {})
+
+            this.transferOptions(options);
 
             // transform the diagram into a Graph
             var adapter = new DiagramToHyperTreeAdapter(this.diagram);
@@ -4483,88 +4609,7 @@ kendo_module({
                 tree: tree,
                 root: tree.root
             };
-        },
-        /**
-         * Organizes the components in a grid.
-         * @param components
-         */
-        gridLayoutComponents: function (components) {
-            if (components == null) {
-                throw "No components supplied.";
-            }
-
-            // calculate and cache the bounds of the components
-            components.forEach(function (c) {
-                c.calcBounds();
-            })
-
-            // order by decreasing width
-            components.sort(function (a, b) {
-                return b.bounds.width - a.bounds.width;
-            })
-
-            var maxWidth = this.options.componentsGridWidth,
-                offsetX = this.options.componentMargin.width,
-                offsetY = this.options.componentMargin.height,
-                height = 0,
-                startX = this.options.totalMargin.width,
-                startY = this.options.totalMargin.height,
-                x = startX,
-                y = startY;
-            while (components.length > 0) {
-                if (x >= maxWidth) {
-                    // start a new row
-                    x = startX;
-                    y += height + offsetY;
-                    // reset the row height
-                    height = 0;
-                }
-                var component = components.pop();
-                this.moveToOffset(component, new Point(x, y));
-
-                for (var j = 0; j < component.nodes.length; j++) {
-                    var node = component.nodes[j];
-                    var shape = node.associatedShape;
-                    shape.bounds(new Rect(node.x, node.y, node.width, node.height));
-                }
-
-                var boundingRect = component.bounds;
-                var currentHeight = boundingRect.height;
-                if (currentHeight <= 0 || isNaN(currentHeight)) {
-                    currentHeight = 0;
-                }
-                var currentWidth = boundingRect.width;
-                if (currentWidth <= 0 || isNaN(currentWidth)) {
-                    currentWidth = 0;
-                }
-
-                if (currentHeight >= height) {
-                    height = currentHeight;
-                }
-                x += currentWidth + offsetX;
-            }
-
-        },
-
-        moveToOffset: function (component, p) {
-            var bounds = component.bounds;
-            var deltax = p.x - bounds.x;
-            var deltay = p.y - bounds.y;
-
-            for (var i = 0, len = component.nodes.length; i < len; i++) {
-                var node = component.nodes[i];
-                var nodeBounds = node.bounds();
-                if (nodeBounds == Rect.Empty) {
-                    nodeBounds = new Rect(0, 0, 0, 0);
-                }
-                nodeBounds.x += deltax;
-                nodeBounds.y += deltay;
-                node.bounds(nodeBounds);
-            }
-            this.currentHorizontalOffset += bounds.width + this.options.totalMargin.width;
-            return new Point(deltax, deltay);
         }
-
 
     });
 
@@ -4722,7 +4767,8 @@ kendo_module({
         ChildrenLayout: ChildrenLayout,
         LayoutTypes: LayoutTypes,
         TreeLayoutType: TreeLayoutType,
-        TreeDirection: TreeDirection
+        TreeDirection: TreeDirection,
+        LayoutBase: LayoutBase
     });
 })
     (window.kendo.jQuery);

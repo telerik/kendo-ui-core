@@ -1324,14 +1324,21 @@ test('Graph adapter', function () {
 
 QUnit.module("Layout algorithms");
 
-testSkip('Graph to diagram', function () {
+test('Graph to diagram', function () {
     var g = Predefined.Grid(5, 5);
     //var g = Predefined.Forest(3,2,2);
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var d = diagramElement.data("kendoDiagram");
+    d.canvas.native.setAttribute("height", "1000");
     // converting a Graph to a diagram (with internal spring layout to please the eyes)
-    GraphUtils.createDiagramFromGraph(d, g);
+    GraphUtils.createDiagramFromGraph(d, g,false);
+    d.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
+        {
+            iterations: 300,
+            nodeDistance: 50
+        }
+    )
     ok(d.shapes.length == 36 && d.connections.length == 60, "Grid of 36 shapes and 60 connections.");
 });
 
@@ -1563,7 +1570,7 @@ testSkip('Tip-over tree layout', function () {
     ok(true);
 });
 
-test('Varying shape size layout', function () {
+testSkip('Varying shape size layout', function () {
     var g = Predefined.Tree(3, 3);
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
