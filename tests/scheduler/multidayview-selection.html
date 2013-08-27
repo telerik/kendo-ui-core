@@ -2289,9 +2289,24 @@
                 deepEqual(selection.end, new Date(2013, 5, 9));
             });
 
-            /*test("View does not move selection to next group on DOWN key", function() {
+            test("View does not move selection to next group on DOWN key", function() {
+                setupGroupedScheduler("horizontal", "day");
+                scheduler.wrapper.focus();
+                var view = scheduler.view();
+                var selection = {
+                    start: new Date(2013, 5, 8, 23, 30),
+                    end: new Date(2013, 5, 9),
+                    groupIndex: 1,
+                    events: []
+                };
 
-            });*/
+                view.select(selection);
+                view.move(selection, keys.DOWN);
+
+                equal(selection.groupIndex, 1);
+                deepEqual(new Date(2013, 5, 8, 23, 30), selection.start);
+                deepEqual(new Date(2013, 5, 9), selection.end);
+            });
 
             test("View does not move selection if SHIFT + DOWN", function() {
                 setupGroupedScheduler("horizontal");

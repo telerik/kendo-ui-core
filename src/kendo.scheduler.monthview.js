@@ -108,7 +108,7 @@ kendo_module({
                 startSlot = group[isUp ? "upSlot" : "downSlot"](startSlot, daySlot, false);
                 endSlot = group[isUp ? "upSlot" : "downSlot"](endSlot, daySlot, false);
 
-                if (!shift && (!startSlot || !endSlot)) {
+                if (!shift && vertical && (!startSlot || !endSlot)) {
                     if (isUp) {
                         startSlot = endSlot = this.prevGroupSlot(start, selection.groupIndex, daySlot);
                     } else {

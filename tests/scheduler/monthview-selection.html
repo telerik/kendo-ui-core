@@ -885,24 +885,7 @@
             });
 
             test("right key in horizontally grouped view selects first group cell on next row", function() {
-                var scheduler = new kendo.ui.Scheduler(container, {
-                    date: new Date(2013, 5, 6),
-                    group: {
-                        resources: [ "ResourceName" ]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [ ],
-                    views: ["month"]
-                });
+                var scheduler = setupGroupedScheduler("horizontal");
                 var selection = createSelection({
                     start: new Date(2013, 5, 8),
                     end: new Date(2013, 5, 9),
@@ -913,6 +896,38 @@
 
                 deepEqual(selection.start, new Date(2013, 5, 9));
                 deepEqual(selection.end, new Date(2013, 5, 10));
+                equal(selection.groupIndex, 0);
+            });
+
+            test("down key in horizontally grouped view does not move to next group", function() {
+                var scheduler = setupGroupedScheduler("horizontal");
+
+                var selection = createSelection({
+                    start: new Date(2013, 5, 1),
+                    end: new Date(2013, 5, 2),
+                    groupIndex: 1
+                });
+
+                scheduler.view().move(selection, keys.UP);
+
+                deepEqual(new Date(2013, 5, 1), selection.start);
+                deepEqual(new Date(2013, 5, 2), selection.end);
+                equal(selection.groupIndex, 1);
+            });
+
+            test("down key in horizontally grouped view does not move to next group", function() {
+                var scheduler = setupGroupedScheduler("horizontal");
+
+                var selection = createSelection({
+                    start: new Date(2013, 6, 6),
+                    end: new Date(2013, 6, 7),
+                    groupIndex: 0
+                });
+
+                scheduler.view().move(selection, keys.DOWN);
+
+                deepEqual(new Date(2013, 6, 6), selection.start);
+                deepEqual(new Date(2013, 6, 7), selection.end);
                 equal(selection.groupIndex, 0);
             });
 
