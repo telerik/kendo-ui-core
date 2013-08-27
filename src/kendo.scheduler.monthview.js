@@ -92,7 +92,7 @@ kendo_module({
                 var isUp = key === keys.UP;
 
                 if (shift) {
-                   if (startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
+                   if (startSlot.index === endSlot.index || startSlot.collectionIndex() === endSlot.collectionIndex()) {
                        selection.backward = isUp;
                    }
                 } else {

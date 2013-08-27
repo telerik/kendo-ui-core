@@ -456,7 +456,7 @@
                 deepEqual(selection.end, new Date(2013,1,10));
             });
 
-            testSkip("view move: up key with shift move end selection to previous week same day (multiple selection)", function() {
+            test("view move: up key with shift move end selection to previous week same day (multiple selection)", function() {
                 var view = setup();
                 var selection = createSelection({
                     start: new Date(2013,1,12),
@@ -465,8 +465,21 @@
 
                 view.move(selection, keys.UP, true);
 
-                deepEqual(selection.start, new Date(2013,1,6));
-                deepEqual(selection.end, new Date(2013,1,13));
+                deepEqual(selection.start, new Date(2013,1,5));
+                deepEqual(selection.end, new Date(2013,1,14));
+            });
+
+            test("view move: up key with shift move end selection to previous week same day (multiple selection)", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013,1,12),
+                    end: new Date(2013,1,14)
+                });
+
+                view.move(selection, keys.DOWN, true);
+
+                deepEqual(selection.start, new Date(2013,1,12));
+                deepEqual(selection.end, new Date(2013,1,21));
             });
 
             test("view move: down key with shift move end selection to next week same day", function() {
