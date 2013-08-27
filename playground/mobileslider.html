@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.router.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.list.js"></script>
+    <script src="../src/kendo.popup.js"></script>
+    <script src="../src/kendo.dropdownlist.js"></script>
+    <script src="../src/kendo.slider.js"></script>
+    <script src="../src/kendo.mobile.button.js"></script>
+    <script src="../src/kendo.mobile.buttongroup.js"></script>
+    <script src="../src/kendo.mobile.scroller.js"></script>
+    <script src="../src/kendo.mobile.navbar.js"></script>
+    <script src="../src/kendo.mobile.shim.js"></script>
+    <script src="../src/kendo.mobile.view.js"></script>
+    <script src="../src/kendo.mobile.loader.js"></script>
+    <script src="../src/kendo.mobile.tabstrip.js"></script>
+    <script src="../src/kendo.mobile.pane.js"></script>
+    <script src="../src/kendo.mobile.modalview.js"></script>
+    <script src="../src/kendo.mobile.popover.js"></script>
+    <script src="../src/kendo.mobile.application.js"></script>
+    <script src="../src/kendo.mobile.listview.js"></script>
+    <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+    <style>
+        .km-root .km-slider-items
+        {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div data-role="view" id="test-view" data-title="Slider Test" data-stretch="true" data-init="initView">
+        <header data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+                <a data-align="left" id="popover-id" data-rel="popover" href="#slider-popover" data-role="button" data-icon="home"></a>
+             </div>
+         </header>
+
+         <div data-role="popover" id="slider-popover" data-popup='{"height": "8em", "width": "30em"}'>
+             <div data-role="view" data-title="Popover Slider" data-init="initPopOver">
+                 <div data-role="header">
+                     <div data-role="navbar">
+                         <span data-role="view-title"></span>
+                     </div>
+                 </div>
+
+                <ul data-role="listview" data-style="inset">
+                    <li>
+                        <label>Slider - doesn't work
+                            <input id="popover-slider" type="range" max="100" />
+                        </label>
+                    </li>
+                </ul>
+
+             </div>
+        </div>
+
+        <ul data-role="listview" data-style="inset">
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+            <li>
+                <label>Slider - works
+                    <input data-role="slider" type="range" max="100" />
+                </label>
+            </li>
+        </ul>
+
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#test-view" data-icon="home"></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        initPopOver = function() {
+            $("#popover-slider").kendoSlider({ tooltip: { enabled: false } });
+        };
+
+        var app = new kendo.mobile.Application($(document.body), {platform: "ios"});
+    </script>
+</body>
+</html>
