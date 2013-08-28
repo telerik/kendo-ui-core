@@ -1006,11 +1006,11 @@ kendo_module({
 
         inRange: function(options) {
             var startDate = this.startDate();
-            var nextDate = this.nextDate();
+            var endDate = kendo.date.addDays(this.endDate(), 1);
             var start = options.start;
             var end = options.end;
 
-            return startDate <= start && start < nextDate && startDate < end && end <= nextDate;
+            return startDate <= start && start < endDate && startDate < end && end <= endDate;
         },
 
         _scrollbarOffset: function(value, multiday) {

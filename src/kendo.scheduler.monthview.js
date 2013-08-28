@@ -107,13 +107,15 @@ kendo_module({
                 startSlot = group[method](startSlot, daySlot);
                 endSlot = group[method](endSlot, daySlot);
 
-                if (!shift && vertical && (!startSlot || !endSlot)) {
-                    method = reverse ? "prevGroupSlot" : "nextGroupSlot";
+                if (!shift && (!startSlot || !endSlot)) {
+                    if (vertical) {
+                        method = reverse ? "prevGroupSlot" : "nextGroupSlot";
 
-                    startSlot = endSlot = this[method](start, groupIndex, daySlot);
+                        startSlot = endSlot = this[method](start, groupIndex, daySlot);
 
-                    if (startSlot) {
-                        groupIndex += (reverse ? -1 : 1);
+                        if (startSlot) {
+                            groupIndex += (reverse ? -1 : 1);
+                        }
                     }
 
                     if (!startSlot) {
@@ -122,7 +124,10 @@ kendo_module({
                         selection.start = kendo.date.addDays(selection.start, pad);
                         selection.end = kendo.date.addDays(selection.end, pad);
 
-                        groupIndex = reverse ? this.groups.length - 1 : 0;
+                        if (vertical) {
+                            groupIndex = reverse ? this.groups.length - 1 : 0;
+                        }
+
                         startSlot = endSlot = null;
                     }
                 }

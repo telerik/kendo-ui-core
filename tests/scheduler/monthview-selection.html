@@ -913,7 +913,7 @@
                 equal(selection.groupIndex, 0);
             });
 
-            test("down key in horizontally grouped view does not move to next group", function() {
+            test("up key in horizontally grouped view persists group when change period", function() {
                 var scheduler = setupGroupedScheduler("horizontal");
 
                 var selection = createSelection({
@@ -924,25 +924,25 @@
 
                 scheduler.view().move(selection, keys.UP);
 
-                deepEqual(new Date(2013, 5, 1), selection.start);
-                deepEqual(new Date(2013, 5, 2), selection.end);
+                deepEqual(selection.start, new Date(2013, 4, 25));
+                deepEqual(selection.end, new Date(2013, 4, 26));
                 equal(selection.groupIndex, 1);
             });
 
-            test("down key in horizontally grouped view does not move to next group", function() {
+            test("down key in horizontally grouped view persists group when change period", function() {
                 var scheduler = setupGroupedScheduler("horizontal");
 
                 var selection = createSelection({
                     start: new Date(2013, 6, 6),
                     end: new Date(2013, 6, 7),
-                    groupIndex: 0
+                    groupIndex: 1
                 });
 
                 scheduler.view().move(selection, keys.DOWN);
 
-                deepEqual(new Date(2013, 6, 6), selection.start);
-                deepEqual(new Date(2013, 6, 7), selection.end);
-                equal(selection.groupIndex, 0);
+                deepEqual(selection.start, new Date(2013, 6, 13));
+                deepEqual(selection.end, new Date(2013, 6, 14));
+                equal(selection.groupIndex, 1);
             });
 
             test("right key in horizontally grouped view changes view period", function() {
