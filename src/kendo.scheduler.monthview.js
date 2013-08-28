@@ -115,6 +115,16 @@ kendo_module({
                     if (startSlot) {
                         groupIndex += (reverse ? -1 : 1);
                     }
+
+                    if (!startSlot) {
+                        var pad = reverse ? -7 : 7;
+
+                        selection.start = kendo.date.addDays(selection.start, pad);
+                        selection.end = kendo.date.addDays(selection.end, pad);
+
+                        groupIndex = reverse ? this.groups.length - 1 : 0;
+                        startSlot = endSlot = null;
+                    }
                 }
 
                 handled = true;
@@ -152,16 +162,25 @@ kendo_module({
 
                         startSlot = endSlot = group[method](ranges[index].start);
 
-                        if (vertical) {
-                            if (!shift && !startSlot) {
+                        if (!shift) {
+                            if (!startSlot && vertical) {
                                 startSlot = endSlot = group[reverse ? "lastSlot" : "firstSlot"]();
+
                                 groupIndex += (reverse ? -1 : 1);
-                            }
-                        } else {
-                            if (!shift && startSlot) {
+                            } else if (startSlot && !vertical) {
                                 groupIndex = reverse ? this.groups.length - 1 : 0;
                             }
+
+                            if (groupIndex < 0 || groupIndex >= this.groups.length || !startSlot) {
+                                var pad = reverse ? -1 : 1;
+
+                                selection.start = kendo.date.addDays(selection.start, pad);
+                                selection.end = kendo.date.addDays(selection.end, pad);
+                                groupIndex = reverse ? this.groups.length - 1 : 0;
+                                startSlot = endSlot = null;
+                            }
                         }
+
                     }
                 }
 

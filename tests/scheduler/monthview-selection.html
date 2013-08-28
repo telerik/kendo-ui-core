@@ -470,7 +470,7 @@
                 deepEqual(selection.end, new Date(2013,1,14));
             });
 
-            test("view move: up key with shift move end selection to previous week same day (multiple selection)", function() {
+            test("view move: down key with shift move end selection to previous week same day (multiple selection)", function() {
                 var view = setup();
                 var selection = createSelection({
                     start: new Date(2013,1,12),
@@ -834,7 +834,7 @@
                 equal(selection.groupIndex, 1);
             });
 
-            testSkip("left key in horizontally grouped view changes view period", function() {
+            test("left key in horizontally grouped view changes view period", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -945,7 +945,7 @@
                 equal(selection.groupIndex, 0);
             });
 
-            testSkip("right key in horizontally grouped view changes view period", function() {
+            test("right key in horizontally grouped view changes view period", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -966,14 +966,14 @@
                 });
                 var selection = createSelection({
                     start: new Date(2013, 6, 6),
-                    end: new Date(2013, 6, 6),
+                    end: new Date(2013, 6, 7),
                     groupIndex: 1
                 });
 
                 scheduler.view().move(selection, keys.RIGHT);
 
                 deepEqual(selection.start, new Date(2013, 6, 7));
-                deepEqual(selection.end, new Date(2013, 6, 7));
+                deepEqual(selection.end, new Date(2013, 6, 8));
                 equal(selection.groupIndex, 0);
             });
 
@@ -1010,7 +1010,7 @@
                 equal(selection.groupIndex, 0);
             });
 
-            testSkip("left key in vertically grouped view changes view period", function() {
+            test("left key in vertically grouped view changes view period", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -1076,7 +1076,7 @@
                 equal(selection.groupIndex, 1);
             });
 
-            testSkip("right key in vertically grouped view changes view period", function() {
+            test("right key in vertically grouped view changes view period", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -1142,7 +1142,7 @@
                 equal(selection.groupIndex, 0);
             });
 
-            testSkip("up key in vertically grouped view changes view period", function() {
+            test("up key in vertically grouped view changes view period", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -1208,7 +1208,7 @@
                 equal(selection.groupIndex, 1);
             });
 
-            testSkip("down key in vertically grouped view changes view period", function() {
+            test("down key in vertically grouped view changes view period", function() {
                 var scheduler = new kendo.ui.Scheduler(container, {
                     date: new Date(2013, 5, 6),
                     group: {
@@ -1230,7 +1230,7 @@
                 });
                 var selection = createSelection({
                     start: new Date(2013, 6, 2),
-                    end: new Date(2013, 6, 2),
+                    end: new Date(2013, 6, 3),
                     groupIndex: 1
                 });
 

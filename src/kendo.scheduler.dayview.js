@@ -1541,26 +1541,33 @@ kendo_module({
                 startSlot = group[method](startSlot);
                 endSlot = group[method](endSlot);
 
-                if (!shift && !vertical && (!startSlot || !endSlot)) {
-                    method = reverse ? "prevGroupSlot" : "nextGroupSlot";
-
-                    startSlot = endSlot = this[method](start, groupIndex, daySlot);
-
-                    if (startSlot) {
-                        groupIndex += (reverse ? -1 : 1);
-                    }
-                }
-
                 if (!shift && (!startSlot || !endSlot)) {
-                    var date = reverse ? this.previousDate() : this.nextDate();
+                    if (!vertical) {
+                        method = reverse ? "prevGroupSlot" : "nextGroupSlot";
 
-                    selection.start = new Date(date);
-                    selection.end = new Date(date);
+                        startSlot = endSlot = this[method](start, groupIndex, daySlot);
 
-                    var endMilliseconds = daySlot ? MS_PER_DAY : getMilliseconds(end);
+                        if (startSlot) {
+                            groupIndex += (reverse ? -1 : 1);
+                        }
+                    }
 
-                    setTime(selection.start, getMilliseconds(start));
-                    setTime(selection.end, endMilliseconds);
+                    if (!startSlot) {
+                        var date = reverse ? this.previousDate() : this.nextDate();
+
+                        selection.start = new Date(date);
+                        selection.end = new Date(date);
+
+                        var endMilliseconds = daySlot ? MS_PER_DAY : getMilliseconds(end);
+
+                        setTime(selection.start, getMilliseconds(start));
+                        setTime(selection.end, endMilliseconds);
+                        startSlot = endSlot = null;
+
+                        if (!vertical) {
+                            groupIndex = reverse ? this.groups.length - 1 : 0;
+                        }
+                    }
                 }
 
                 handled = true;

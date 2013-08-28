@@ -2109,7 +2109,7 @@
                 deepEqual(selection.end, new Date(2013, 5, 3));
             });
 
-            testSkip("View navigates to next period if last group has been reached", function() {
+            test("View navigates to next period if last group has been reached", function() {
                 setupGroupedScheduler();
                 scheduler.wrapper.focus();
                 var view = scheduler.view();
@@ -2129,7 +2129,7 @@
                 deepEqual(selection.end, new Date(2013, 5, 9, 0, 30));
             });
 
-            testSkip("View navigates to next period if last group has been reached (all day cell)", function() {
+            test("View navigates to next period if last group has been reached (all day cell)", function() {
                 setupGroupedScheduler("horizontal", "day");
                 scheduler.wrapper.focus();
                 var view = scheduler.view();
@@ -2209,7 +2209,7 @@
                 deepEqual(selection.end, new Date(2013, 5, 9));
             });
 
-            testSkip("View navigates to prev period if first group has been reached", function() {
+            test("View navigates to prev period if first group has been reached", function() {
                 setupGroupedScheduler();
                 scheduler.wrapper.focus();
                 var view = scheduler.view();

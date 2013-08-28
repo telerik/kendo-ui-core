@@ -459,6 +459,7 @@ kendo_module({
             return isDay ? this._daySlotCollections : this._timeSlotCollections;
         },
 
+        //TODO: previousContinuesSlot
         previousDaySlot: function(slot) {
             var collections = this._getCollections(true);
             var collection = collections[slot.collectionIndex() - 1];
@@ -466,6 +467,7 @@ kendo_module({
             return collection ? collection.last() : undefined;
         },
 
+        //TODO: nextContinuesSlot
         nextDaySlot: function(slot) {
             var collections = this._getCollections(true);
             var collection = collections[slot.collectionIndex() + 1];
