@@ -239,8 +239,8 @@ namespace Kendo.Mvc.UI
                 html = Regex.Replace(html, "\\u0026", "&", RegexOptions.IgnoreCase);
                 html = Regex.Replace(html, "%23", "#", RegexOptions.IgnoreCase);
                 html = Regex.Replace(html, "%3D", "=", RegexOptions.IgnoreCase);
-                html = Regex.Replace(html, "&#32;", " ", RegexOptions.IgnoreCase);
-                html = Regex.Replace(html, @"\\u0026\\\\#32;", " ", RegexOptions.IgnoreCase);                
+                html = Regex.Replace(html, "&#32;", " ", RegexOptions.IgnoreCase);               
+                html = Regex.Replace(html, @"\\u0026#32;", " ", RegexOptions.IgnoreCase);   
             }
 
             //must decode unicode symbols otherwise they will be rendered as HTML entities
