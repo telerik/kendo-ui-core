@@ -1238,7 +1238,7 @@ kendo_module({
             if (descriptors.length > 0) {
                 descriptor = descriptors[0];
                 result = result.groupBy(descriptor).select(function(group) {
-                    var data = new Query(allData).filter([ { field: group.field, operator: "eq", value: group.value } ]);
+                    var data = new Query(allData).filter([ { field: group.field, operator: "eq", value: group.value, ignoreCase: false } ]);
                     return {
                         field: group.field,
                         value: group.value,

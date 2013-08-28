@@ -1749,6 +1749,18 @@
                 equal(result[1].aggregates["foo"].sum, 200);
             });
 
+            test("group aggregates are caseinsensitive", function() {
+                var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "Baz"} ];
+
+                var result = new Query(data).group( [{ field: "bar", aggregates: [{ field: "foo", aggregate: "sum" }] }]).toArray();
+
+                equal(result.length, 3);
+
+                equal(result[0].aggregates["foo"].sum, 100);
+                equal(result[1].aggregates["foo"].sum, 100);
+                equal(result[2].aggregates["foo"].sum, 1);
+            });
+
             test("group aggregates are calculated  for multiple fields if provided", function() {
                 var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
 
