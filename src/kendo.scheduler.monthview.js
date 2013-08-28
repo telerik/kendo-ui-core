@@ -95,7 +95,7 @@ kendo_module({
                 method = reverse ? "upSlot" : "downSlot";
 
                 if (shift) {
-                   if (startSlot.index === endSlot.index || startSlot.collectionIndex() === endSlot.collectionIndex()) {
+                   if (startSlot.index === endSlot.index || startSlot.collectionIndex === endSlot.collectionIndex) {
                        backward = reverse;
                    }
                 } else if (backward) {
@@ -138,7 +138,7 @@ kendo_module({
                 method = reverse ? "leftSlot" : "rightSlot";
 
                 if (shift) {
-                    if (startSlot.index === endSlot.index && startSlot.collectionIndex() === endSlot.collectionIndex()) {
+                    if (startSlot.index === endSlot.index && startSlot.collectionIndex === endSlot.collectionIndex) {
                         backward = reverse;
                     }
                 } else if (reverse) {
@@ -200,7 +200,7 @@ kendo_module({
                         selection.end = endSlot.endDate();
                     }
                 } else if (startSlot && endSlot) {
-                    selection.isAllDay = startSlot.isAllDay;
+                    selection.isAllDay = startSlot.isDaySlot;
                     selection.start = startSlot.startDate();
                     selection.end = endSlot.endDate();
                 }

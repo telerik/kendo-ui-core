@@ -273,8 +273,6 @@ kendo_module({
 
             var ranges = [];
 
-            var ranges = [];
-
             for (var collectionIndex = startIndex; collectionIndex <= endIndex; collectionIndex++) {
                 var collection = collections[collectionIndex];
 
@@ -386,10 +384,10 @@ kendo_module({
 
         upSlot: function(slot, keep) {
             var that = this;
-            var moveToDaySlot = function(isAllDay, collectionIndex, index) {
+            var moveToDaySlot = function(isDaySlot, collectionIndex, index) {
                 var isFirstCell = index === 0;
 
-                if (!keep && !isAllDay && isFirstCell && that.daySlotCollectionCount()) {
+                if (!keep && !isDaySlot && isFirstCell && that.daySlotCollectionCount()) {
                     return that._daySlotCollections[0].at(collectionIndex);
                 }
             };
@@ -399,8 +397,8 @@ kendo_module({
 
         downSlot: function(slot, keep) {
             var that = this;
-            var moveToTimeSlot = function(isAllDay, collectionIndex, index) {
-                if (!keep && isAllDay && that.timeSlotCollectionCount()) {
+            var moveToTimeSlot = function(isDaySlot, collectionIndex, index) {
+                if (!keep && isDaySlot && that.timeSlotCollectionCount()) {
                     return that._timeSlotCollections[index].at(0);
                 }
             };
@@ -418,11 +416,11 @@ kendo_module({
 
         _horizontalSlot: function(slot, step) {
             var index = slot.index;
-            var isAllDay = slot.isAllDay;
-            var collectionIndex = slot.collectionIndex();
-            var collections = this._getCollections(isAllDay);
+            var isDaySlot = slot.isDaySlot;
+            var collectionIndex = slot.collectionIndex;
+            var collections = this._getCollections(isDaySlot);
 
-            if (isAllDay) {
+            if (isDaySlot) {
                 index += step;
             } else {
                 collectionIndex += step;
@@ -435,16 +433,16 @@ kendo_module({
 
         _verticalSlot: function(slot, step, swapCollection) {
             var index = slot.index;
-            var isAllDay = slot.isAllDay;
-            var collectionIndex = slot.collectionIndex();
-            var collections = this._getCollections(isAllDay);
+            var isDaySlot = slot.isDaySlot;
+            var collectionIndex = slot.collectionIndex;
+            var collections = this._getCollections(isDaySlot);
 
-            slot = swapCollection(isAllDay, collectionIndex, index);
+            slot = swapCollection(isDaySlot, collectionIndex, index);
             if (slot) {
                 return slot;
             }
 
-            if (isAllDay) {
+            if (isDaySlot) {
                 collectionIndex += step;
             } else {
                 index += step;
@@ -462,7 +460,7 @@ kendo_module({
         //TODO: previousContinuesSlot
         previousDaySlot: function(slot) {
             var collections = this._getCollections(true);
-            var collection = collections[slot.collectionIndex() - 1];
+            var collection = collections[slot.collectionIndex - 1];
 
             return collection ? collection.last() : undefined;
         },
@@ -470,7 +468,7 @@ kendo_module({
         //TODO: nextContinuesSlot
         nextDaySlot: function(slot) {
             var collections = this._getCollections(true);
-            var collection = collections[slot.collectionIndex() + 1];
+            var collection = collections[slot.collectionIndex + 1];
 
             return collection ? collection.first() : undefined;
         },
@@ -835,19 +833,6 @@ kendo_module({
         return scrollbarWidth;
     }
 
-    //This should become method of the group
-    function eventElement(group, uid, isAllDay) {
-        var collection = isAllDay ? group._daySlotCollections : group._timeSlotCollections;
-
-        collection = $.map(collection, function(item) {
-            return item.events();
-        });
-
-        return $.grep(collection, function(item) {
-            return item.element.attr(kendo.attr("uid")) == uid;
-        })[0].element;
-    }
-
     kendo.ui.SchedulerView = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
@@ -940,7 +925,7 @@ kendo_module({
                 selection.events = [ event.uid ];
                 selection.start = event.start.startDate();
                 selection.end = event.end.endDate();
-                selection.isAllDay = event.start.isAllDay;
+                selection.isAllDay = event.start.isDaySlot;
                 selection.groupIndex = event.start.groupIndex;
             }
 
@@ -1395,12 +1380,12 @@ kendo_module({
                     collection = group._collection(group.daySlotCollectionCount() - 1, true);
                     return collection.at(slot.index);
                 } else {
-                    collection = group._collection(isDay ? slot.index : slot.collectionIndex(), false);
+                    collection = group._collection(isDay ? slot.index : slot.collectionIndex, false);
                     return collection.last();
                 }
             } else {
                 if (!group.timeSlotCollectionCount()) {
-                    collection = group._collection(slot.collectionIndex(), true);
+                    collection = group._collection(slot.collectionIndex, true);
                     return collection.last();
                 } else {
                     collection = group._collection(isDay ? 0 : group.timeSlotCollectionCount() - 1, isDay);
@@ -1424,11 +1409,11 @@ kendo_module({
                     return collection.at(slot.index);
                 } else {
                     collection = group._collection(0, group.daySlotCollectionCount());
-                    return isDay ? collection.last() : collection.at(slot.collectionIndex());
+                    return isDay ? collection.last() : collection.at(slot.collectionIndex);
                 }
             } else {
                 if (!group.timeSlotCollectionCount()) {
-                    collection = group._collection(slot.collectionIndex(), true);
+                    collection = group._collection(slot.collectionIndex, true);
                     return collection.first();
                 } else {
                     collection = group._collection(0, isDay);

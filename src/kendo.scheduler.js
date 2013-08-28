@@ -988,7 +988,7 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    if (!slot || that.trigger("move", { event: event, slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() } })) {
+                    if (!slot) {
                         return;
                     }
 
@@ -1109,7 +1109,7 @@ kendo_module({
 
                     var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    if (!slot || that.trigger("resize", { event: event, slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() } })) {
+                    if (!slot) {
                         return;
                     }
 
