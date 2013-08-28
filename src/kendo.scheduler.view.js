@@ -956,8 +956,14 @@ kendo_module({
         },
 
         _selectSlots: function(selection) {
+            var isAllDay = selection.isAllDay;
             var group = this.groups[selection.groupIndex];
-            var ranges = group.ranges(selection.start, selection.end, selection.isAllDay, false);
+
+            if (isAllDay === undefined && !group.timeSlotCollectionCount()) {
+                isAllDay = true;
+            }
+
+            var ranges = group.ranges(selection.start, selection.end, isAllDay, false);
             var element;
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {

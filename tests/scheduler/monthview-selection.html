@@ -292,6 +292,21 @@
                 equal(selected.data("uid"), secondEvent.uid);
             });
 
+            test("view select: support selection when isAllDay is undefined", function() {
+                var view = setup();
+                var selection = createSelection({
+                    start: new Date(2013, 1, 1),
+                    end: new Date(2013, 1, 2)
+                });
+
+                selection.isAllDay = undefined;
+
+                view.select(selection);
+
+                var selected = view.table.find(".k-state-selected");
+                equal(selected.length, 1);
+            });
+
             test("view move: right key move selection to next day", function() {
                 var view = setup();
                 var selection = createSelection();

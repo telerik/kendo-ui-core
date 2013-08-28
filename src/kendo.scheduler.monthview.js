@@ -88,7 +88,7 @@ kendo_module({
             var ranges = group.ranges(start, selection.end, daySlot, false);
             var startSlot = ranges[0].start;
             var endSlot = ranges[ranges.length - 1].end;
-            var method, reverse;
+            var method, reverse, pad;
 
             if (key === keys.DOWN || key === keys.UP) {
                 reverse = key === keys.UP;
@@ -119,7 +119,7 @@ kendo_module({
                     }
 
                     if (!startSlot) {
-                        var pad = reverse ? -7 : 7;
+                        pad = reverse ? -7 : 7;
 
                         selection.start = kendo.date.addDays(selection.start, pad);
                         selection.end = kendo.date.addDays(selection.end, pad);
@@ -177,7 +177,7 @@ kendo_module({
                             }
 
                             if (groupIndex < 0 || groupIndex >= this.groups.length || !startSlot) {
-                                var pad = reverse ? -1 : 1;
+                                pad = reverse ? -1 : 1;
 
                                 selection.start = kendo.date.addDays(selection.start, pad);
                                 selection.end = kendo.date.addDays(selection.end, pad);
