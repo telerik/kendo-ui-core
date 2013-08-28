@@ -24,6 +24,7 @@
             .DataSource(dataSource => dataSource
                 .Ajax()
                 .Batch(true)
+                .PageSize(20)                
                 .ServerOperation(false)
                 .Events(events => events.Error("error_handler"))
                 .Model(model => model.Id(p => p.ProductID))
