@@ -391,10 +391,7 @@
                            selectedDate
                         ]
                     });
-
-
-                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: '["my event"]' }];
-
+                var events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: '["my event"]' })];
                 view.render(events);
 
                 ok(view.content.find("div.k-event>div").attr("title").indexOf('["my event"]') > -1);
@@ -408,8 +405,7 @@
                         ]
                     });
 
-
-                var events = [{uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "['my event']" }];
+                var events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "['my event']" })];
 
                 view.render(events);
 
@@ -424,8 +420,7 @@
                         ]
                     });
 
-
-                var events = [{uid:"uid", start: new Date(2013, 1, 26, 0, 0, 0), end: new Date(2013, 1, 26, 0, 0, 0), isAllDay: true, title: '["my event"]' }];
+                var events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 0, 0, 0), end: new Date(2013, 1, 26, 0, 0, 0), isAllDay: true, title: '["my event"]' })];
 
                 view.render(events);
 
