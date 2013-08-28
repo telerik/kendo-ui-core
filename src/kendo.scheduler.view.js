@@ -978,28 +978,25 @@ kendo_module({
 
         _selectEvents: function(selection) {
             var found = false;
-            var uidAttr = kendo.attr("uid");
             var events = selection.events;
-            var lastEvent = events[events.length - 1];
-            var continuousEvents = this.groups[selection.groupIndex]._continuousEvents || [];
-            var event;
+            var groupEvents = this.groups[selection.groupIndex]._continuousEvents || [];
+            var idx, length = groupEvents.length;
 
-            if (!events[0]) {
+            if (!events[0] || !groupEvents[0]) {
                 return found;
             }
 
-            events = this.element.find("[" + uidAttr + "=" + events.join("],[" + uidAttr + "=") + "]");
+            var result = $();
+            for (idx = 0; idx < length; idx ++) {
+                if ($.inArray(groupEvents[idx].uid, events) > -1) {
+                    result = result.add(groupEvents[idx].element);
+                }
+            }
 
-            if (events.length > 0) {
+            if (result[0]) {
+                result.addClass("k-state-selected");
+                this._scrollTo(result.last()[0], this.content[0]);
                 found = true;
-                events.addClass("k-state-selected");
-
-                event = $.grep(continuousEvents , function(event) {
-                    return event.uid == lastEvent;
-                })[0];
-
-                event = event ? event.element : events.last();
-                this._scrollTo(event[0], this.content[0]);
             }
 
             return found;
