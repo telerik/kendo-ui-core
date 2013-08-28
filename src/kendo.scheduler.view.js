@@ -332,17 +332,25 @@ kendo_module({
             }
 
             if (event.startTime) {
-               startTime =  kendo.date.getMilliseconds(event.startTime) + kendo.date.toUtcTime(kendo.date.getDate(event.start));
+                startTime =  kendo.date.getMilliseconds(event.startTime) + kendo.date.toUtcTime(kendo.date.getDate(event.start));
             }
 
             if (event.endTime) {
-               endTime =  kendo.date.getMilliseconds(event.endTime) + kendo.date.toUtcTime(kendo.date.getDate(event.end));
+                endTime =  kendo.date.getMilliseconds(event.endTime) + kendo.date.toUtcTime(kendo.date.getDate(event.end));
             }
 
             return this.timeSlotRanges(startTime, endTime);
         },
 
         ranges: function(startTime, endTime, isDay, isAllDay) {
+            if (typeof startTime != "number") {
+                startTime = kendo.date.toUtcTime(startTime);
+            }
+
+            if (typeof endTime != "number") {
+                endTime = kendo.date.toUtcTime(endTime);
+            }
+
             if (isDay) {
                 return this.daySlotRanges(startTime, endTime, isAllDay);
             }
@@ -372,6 +380,115 @@ kendo_module({
             }
 
             return null;
+        },
+
+        upSlot: function(slot, keep) {
+            var that = this;
+            var moveToDaySlot = function(isDaySlot, collectionIndex, index) {
+                var isFirstCell = index === 0;
+
+                if (!keep && !isDaySlot && isFirstCell && that.daySlotCollectionCount()) {
+                    return that._daySlotCollections[0].at(collectionIndex);
+                }
+            };
+
+            return this._verticalSlot(slot, -1, moveToDaySlot);
+        },
+
+        downSlot: function(slot, keep) {
+            var that = this;
+            var moveToTimeSlot = function(isDaySlot, collectionIndex, index) {
+                if (!keep && isDaySlot && that.timeSlotCollectionCount()) {
+                    return that._timeSlotCollections[index].at(0);
+                }
+            };
+
+            return this._verticalSlot(slot, 1, moveToTimeSlot);
+        },
+
+        leftSlot: function(slot) {
+            return this._horizontalSlot(slot, -1);
+        },
+
+        rightSlot: function(slot) {
+            return this._horizontalSlot(slot, 1);
+        },
+
+        _horizontalSlot: function(slot, step) {
+            var index = slot.index;
+            var isDaySlot = slot.isDaySlot;
+            var collectionIndex = slot.collectionIndex;
+            var collections = this._getCollections(isDaySlot);
+
+            if (isDaySlot) {
+                index += step;
+            } else {
+                collectionIndex += step;
+            }
+
+            var collection = collections[collectionIndex];
+
+            return collection ? collection.at(index) : undefined;
+        },
+
+        _verticalSlot: function(slot, step, swapCollection) {
+            var index = slot.index;
+            var isDaySlot = slot.isDaySlot;
+            var collectionIndex = slot.collectionIndex;
+            var collections = this._getCollections(isDaySlot);
+
+            slot = swapCollection(isDaySlot, collectionIndex, index);
+            if (slot) {
+                return slot;
+            }
+
+            if (isDaySlot) {
+                collectionIndex += step;
+            } else {
+                index += step;
+            }
+
+            var collection = collections[collectionIndex];
+
+            return collection ? collection.at(index) : undefined;
+        },
+
+        _getCollections: function(isDay) {
+            return isDay ? this._daySlotCollections : this._timeSlotCollections;
+        },
+
+        //TODO: previousContinuesSlot
+        previousDaySlot: function(slot) {
+            var collections = this._getCollections(true);
+            var collection = collections[slot.collectionIndex - 1];
+
+            return collection ? collection.last() : undefined;
+        },
+
+        //TODO: nextContinuesSlot
+        nextDaySlot: function(slot) {
+            var collections = this._getCollections(true);
+            var collection = collections[slot.collectionIndex + 1];
+
+            return collection ? collection.first() : undefined;
+        },
+
+        firstSlot: function() {
+            var collections = this._getCollections(this.daySlotCollectionCount());
+
+            return collections[0].first();
+        },
+
+        lastSlot: function() {
+            var collections = this._getCollections(this.daySlotCollectionCount());
+
+            return collections[collections.length - 1].last();
+        },
+
+        _collection: function(index, multiday) {
+            var collections = multiday? this._daySlotCollections : this._timeSlotCollections;
+
+            return collections[index];
         },
 
         _startSlot: function(time, collections, isAllDay) {
@@ -664,6 +781,14 @@ kendo_module({
             } else {
                 return this.offsetLeft + offset;
             }
+        },
+
+        startInRange: function(date) {
+            return this.start <= date && date < this.end;
+        },
+
+        endInRange: function(date) {
+            return this.start < date && date <= this.end;
         }
     });
 
@@ -675,9 +800,30 @@ kendo_module({
             this.isDaySlot = true;
             this.firstChildHeight = this.element.firstChild.offsetHeight + 3;
         },
+
         refresh: function() {
             this.clientHeight = this.element.clientHeight;
             this.offsetTop = this.element.offsetTop;
+        },
+
+        startDate: function() {
+            var date = new Date(this.start);
+
+            return kendo.timezone.apply(date, "Etc/UTC");
+        },
+
+        endDate: function() {
+            var date = new Date(this.end);
+
+            return kendo.timezone.apply(date, "Etc/UTC");
+        },
+
+        startInRange: function(date) {
+            return this.start <= date && date < this.end;
+        },
+
+        endInRange: function(date) {
+            return this.start < date && date <= this.end;
         }
     });
 
@@ -715,12 +861,147 @@ kendo_module({
             return false;
         },
 
-        moveToEvent: function() {
-            return false;
+        moveToEventInGroup: function(group, slot, selectedEvents, prev) {
+            var events = group._continuousEvents || [];
+
+            var found, event;
+
+            var pad = prev ? -1 : 1;
+
+            var length = events.length;
+            var idx = prev ? length - 1 : 0;
+
+            while (idx < length && idx > -1) {
+                event = events[idx];
+
+                if ( (!prev && event.start.startDate() >= slot.startDate()) ||
+                    (prev && event.start.startDate() <= slot.startDate()) ) {
+
+                    if (selectedEvents.length) {
+                        event = events[idx + pad];
+                    }
+
+                    if (event && $.inArray(event.uid, selectedEvents) === -1) {
+                        found = !!event;
+                        break;
+                    }
+                }
+
+                idx += pad;
+            }
+
+            return event;
         },
 
-        isInRange: function(date) {
-            return this.startDate() <= date && date <= this.endDate();
+        moveToEvent: function(selection, prev) {
+            var groupIndex = selection.groupIndex;
+            var group = this.groups[groupIndex];
+            var slot = group.ranges(selection.start, selection.end, selection.isAllDay, false)[0].start;
+
+            var length = this.groups.length;
+            var pad = prev ? -1 : 1;
+            var events = selection.events;
+            var event;
+
+            while (groupIndex < length && groupIndex > -1) {
+                event = this.moveToEventInGroup(group, slot, events, prev);
+
+                groupIndex += pad;
+                group = this.groups[groupIndex];
+
+                if (!group || event) {
+                    break;
+                }
+
+                events = [];
+                if (prev) {
+                    slot = group.lastSlot();
+                } else {
+                    slot = group.firstSlot(true);
+                }
+            }
+
+            if (event) {
+                selection.events = [ event.uid ];
+                selection.start = event.start.startDate();
+                selection.end = event.end.endDate();
+                selection.isAllDay = event.start.isDaySlot;
+                selection.groupIndex = event.start.groupIndex;
+            }
+
+            return !!event;
+        },
+
+        select: function(selection) {
+            this.clearSelection();
+
+            if (!this._selectEvents(selection)) {
+                this._selectSlots(selection);
+            }
+        },
+
+        _selectSlots: function(selection) {
+            var isAllDay = selection.isAllDay;
+            var group = this.groups[selection.groupIndex];
+
+            if (isAllDay === undefined && !group.timeSlotCollectionCount()) {
+                isAllDay = true;
+            }
+
+            var ranges = group.ranges(selection.start, selection.end, isAllDay, false);
+            var element;
+
+            for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
+                var range = ranges[rangeIndex];
+
+                var collection = range.collection;
+
+                for (var slotIndex = range.start.index; slotIndex <= range.end.index; slotIndex++) {
+                    element = collection.at(slotIndex).element;
+                    addSelectedState(element);
+                }
+            }
+
+            if (selection.backward) {
+                element = ranges[0].start.element;
+            }
+
+            this._scrollTo(element, this.content[0]);
+        },
+
+        _selectEvents: function(selection) {
+            var found = false;
+            var events = selection.events;
+            var groupEvents = this.groups[selection.groupIndex]._continuousEvents || [];
+            var idx, length = groupEvents.length;
+
+            if (!events[0] || !groupEvents[0]) {
+                return found;
+            }
+
+            var result = $();
+            for (idx = 0; idx < length; idx ++) {
+                if ($.inArray(groupEvents[idx].uid, events) > -1) {
+                    result = result.add(groupEvents[idx].element);
+                }
+            }
+
+            if (result[0]) {
+                result.addClass("k-state-selected");
+                this._scrollTo(result.last()[0], this.content[0]);
+                found = true;
+            }
+
+            return found;
+        },
+
+        inRange: function(options) {
+            var startDate = this.startDate();
+            var endDate = kendo.date.addDays(this.endDate(), 1);
+            var start = options.start;
+            var end = options.end;
+
+            return startDate <= start && start < endDate && startDate < end && end <= endDate;
         },
 
         _scrollbarOffset: function(value, multiday) {
@@ -1069,10 +1350,6 @@ kendo_module({
             this.content.find(".k-state-selected").removeClass("k-state-selected");
         },
 
-        select: function() {
-            //must be implemented by every SchedulerView
-        },
-
         destroy: function() {
             var that = this;
 
@@ -1087,6 +1364,62 @@ kendo_module({
 
         calendarInfo: function() {
             return kendo.getCulture().calendars.standard;
+        },
+
+        prevGroupSlot: function(date, groupIndex, isDay) {
+            var collection;
+            var group = this.groups[groupIndex];
+            var slot = group.ranges(date, date, isDay, false)[0].start;
+
+            if (groupIndex <= 0) {
+                return;
+            }
+
+            if (this._isVerticallyGrouped()) {
+                if (!group.timeSlotCollectionCount()) {
+                    collection = group._collection(group.daySlotCollectionCount() - 1, true);
+                    return collection.at(slot.index);
+                } else {
+                    collection = group._collection(isDay ? slot.index : slot.collectionIndex, false);
+                    return collection.last();
+                }
+            } else {
+                if (!group.timeSlotCollectionCount()) {
+                    collection = group._collection(slot.collectionIndex, true);
+                    return collection.last();
+                } else {
+                    collection = group._collection(isDay ? 0 : group.timeSlotCollectionCount() - 1, isDay);
+                    return isDay ? collection.last() : collection.at(slot.index);
+                }
+            }
+        },
+
+        nextGroupSlot: function(date, groupIndex, isDay) {
+            var collection;
+            var group = this.groups[groupIndex];
+            var slot = group.ranges(date, date, isDay, false)[0].start;
+
+            if (groupIndex >= this.groups.length - 1) {
+                return;
+            }
+
+            if (this._isVerticallyGrouped()) {
+                if (!group.timeSlotCollectionCount()) {
+                    collection = group._collection(0, true);
+                    return collection.at(slot.index);
+                } else {
+                    collection = group._collection(0, group.daySlotCollectionCount());
+                    return isDay ? collection.last() : collection.at(slot.collectionIndex);
+                }
+            } else {
+                if (!group.timeSlotCollectionCount()) {
+                    collection = group._collection(slot.collectionIndex, true);
+                    return collection.first();
+                } else {
+                    collection = group._collection(0, isDay);
+                    return isDay ? collection.first() : collection.at(slot.index);
+                }
+            }
         }
     });
 
@@ -1218,6 +1551,11 @@ kendo_module({
             }
             return item == value;
         };
+    }
+
+    var selectedStateRegExp = /\s*k-state-selected/;
+    function addSelectedState(cell) {
+        cell.className = cell.className.replace(selectedStateRegExp, "") + " k-state-selected";
     }
 
     $.extend(ui.SchedulerView, {

@@ -312,6 +312,7 @@ kendo_module({
                 this.set(field, eventInfo[field]);
             }
 
+            //TODO: Update only if there is startTime option
             this.set("startTime", toInvariantDate(this.start));
             this.set("endTime", toInvariantDate(this.end));
         },
@@ -417,12 +418,13 @@ kendo_module({
         },
 
         expand: function(start, end) {
-            var data = this.view();
+            var data = this.view(),
+                filter = {};
 
             if (start && end) {
                 end = new Date(end.getTime() + MS_PER_DAY - 1);
 
-                var filter = {
+                filter = {
                     logic: "or",
                     filters: [
                         {
@@ -746,8 +748,7 @@ kendo_module({
                 view = that.view(),
                 editable = view.options.editable,
                 selection = that._selection,
-                shiftKey = e.shiftKey,
-                start;
+                shiftKey = e.shiftKey;
 
             that._ctrlKey = e.ctrlKey;
             that._shiftKey = e.shiftKey;
@@ -772,12 +773,10 @@ kendo_module({
                 // switch to view 1-9
                 that.view(that._viewByIndex(key - 49));
             } else if (view.move(selection, key, shiftKey)) {
-                start = selection.start;
-
-                if (view.isInRange(start)) {
+                if (view.inRange(selection)) {
                     view.select(selection);
                 } else {
-                    that.date(start);
+                    that.date(selection.start);
                 }
 
                 e.preventDefault();
@@ -802,7 +801,7 @@ kendo_module({
             slot = this.view().selectionByElement(item);
 
             if (slot) {
-                selection.groupIndex = slot.groupIndex;
+                selection.groupIndex = slot.groupIndex || 0;
             }
 
             if (uid) {
@@ -825,14 +824,14 @@ kendo_module({
                     var backward = dataItem.end < selection.end,
                         view = this.view();
 
-                    selection.end = new Date(dataItem.end);
+                    selection.end = dataItem.endDate ? dataItem.endDate() : dataItem.end;
 
                     if (backward && view._timeSlotInterval) {
                         kendo.date.setTime(selection.end, -view._timeSlotInterval());
                     }
                 } else {
-                    selection.start = new Date(dataItem.start.getTime());
-                    selection.end = new Date(dataItem.end.getTime());
+                    selection.start = dataItem.startDate ? dataItem.startDate() : dataItem.start;
+                    selection.end = dataItem.endDate ? dataItem.endDate() : dataItem.end;
                 }
 
                 selection.isAllDay = dataItem.isAllDay;

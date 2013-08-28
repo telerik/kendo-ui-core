@@ -300,9 +300,14 @@ kendo_module({
 
             var index = cell.parent().index();
             var event = this._eventsList[index];
-            event.index = index;
 
-            return event;
+            return {
+                index: index,
+                start: event.start,
+                end: event.end,
+                isAllDay: event.isAllDay,
+                uid: event.uid
+            };
         },
 
         select: function(selection) {
@@ -342,6 +347,10 @@ kendo_module({
             }
 
             return handled;
+        },
+
+        moveToEvent: function() {
+            return false;
         },
 
         moveSelectionToPeriod: function(selection) {

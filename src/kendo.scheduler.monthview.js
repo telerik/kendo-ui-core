@@ -38,7 +38,7 @@ kendo_module({
                 '{0}' +
                 '<span class="k-event-actions">' +
                     '#if (showDelete) {#' +
-                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
+                                            '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
                     '#}#' +
                     '# if(data.head || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-e"></span>' +
@@ -76,190 +76,141 @@ kendo_module({
             that._groups();
         },
 
-        select: function(selection) {
-            var that = this;
+        move: function(selection, key, shift) {
+            var start = selection.start;
+            var daySlot = true;
 
-            that.clearSelection();
+            var handled = false;
+            var backward = selection.backward;
+            var groupIndex = selection.groupIndex;
+            var vertical = this._isVerticallyGrouped();
+            var group = this.groups[groupIndex];
+            var ranges = group.ranges(start, selection.end, daySlot, false);
+            var startSlot = ranges[0].start;
+            var endSlot = ranges[ranges.length - 1].end;
+            var method, reverse, pad;
 
-            if (!that._selectEvents(selection.events)) {
-                that._selectSlots(
-                    that._applyOffset(that._slotIndex(selection.start), selection.groupIndex),
-                    that._applyOffset(that._slotIndex(selection.end), selection.groupIndex),
-                    that._row.slots,
-                    selection.groupIndex || 0
-                );
-            }
-        },
+            if (key === keys.DOWN || key === keys.UP) {
+                reverse = key === keys.UP;
+                method = reverse ? "upSlot" : "downSlot";
 
-        _selectEvents: function(events) {
-            var found = false;
-            var uidAttr = kendo.attr("uid");
-
-            if (!events[0]) {
-                return found;
-            }
-
-            var elements = this.table.find("[" + uidAttr + "=" + events.join("],[" + uidAttr + "=") + "]");
-            if (elements.length > 0) {
-                found = true;
-                elements.addClass("k-state-selected");
-
-                this._scrollTo(elements.last()[0], this.content[0]);
-            }
-
-            return found;
-        },
-
-        _selectSlots: function(startIndex, endIndex, slots, groupIndex) {
-            var idx = startIndex;
-            if (startIndex > endIndex) {
-                startIndex =  endIndex;
-                endIndex = idx;
-            }
-
-            for (idx = startIndex; idx <= endIndex; idx ++) {
-                if (groupIndex === slots[idx].groupIndex) {
-                    $(slots[idx].element).addClass("k-state-selected");
-                }
-            }
-
-            if (slots[endIndex]) {
-                this._scrollTo(slots[endIndex].element, this.content[0]);
-            }
-        },
-
-        clearSelection: function() {
-            this.table.find(".k-state-selected").removeClass("k-state-selected");
-        },
-
-        move: function(selection, key, keep) {
-            var handled = false,
-                date = selection.end,
-                isInRange = true,
-                result = {
-                    date: date,
-                    groupIndex: selection.groupIndex || 0
-                },
-                isGrouped = !keep && this.groupedResources.length,
-                isVertical = this._isVerticallyGrouped(),
-                groupCount = this._groupCount(),
-                slotIndex = this._slotIndex(date);
-
-            if (key == keys.LEFT) {
-                if (!isGrouped) {
-                    result.date = kendo.date.addDays(date, -1);
-                } else if (!isVertical) {
-                    result = moveLeftInHorizontalGroup(slotIndex, selection.groupIndex, groupCount, date);
+                if (shift) {
+                   if (startSlot.index === endSlot.index || startSlot.collectionIndex === endSlot.collectionIndex) {
+                       backward = reverse;
+                   }
+                } else if (backward) {
+                    endSlot = startSlot;
                 } else {
-                    result = moveLeftInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
+                    startSlot = endSlot;
+                }
+
+                startSlot = group[method](startSlot, daySlot);
+                endSlot = group[method](endSlot, daySlot);
+
+                if (!shift && (!startSlot || !endSlot)) {
+                    if (vertical) {
+                        method = reverse ? "prevGroupSlot" : "nextGroupSlot";
+
+                        startSlot = endSlot = this[method](start, groupIndex, daySlot);
+
+                        if (startSlot) {
+                            groupIndex += (reverse ? -1 : 1);
+                        }
+                    }
+
+                    if (!startSlot) {
+                        pad = reverse ? -7 : 7;
+
+                        selection.start = kendo.date.addDays(selection.start, pad);
+                        selection.end = kendo.date.addDays(selection.end, pad);
+
+                        if (vertical) {
+                            groupIndex = reverse ? this.groups.length - 1 : 0;
+                        }
+
+                        startSlot = endSlot = null;
+                    }
                 }
 
                 handled = true;
-            } else if (key == keys.RIGHT) {
-                if (!isGrouped) {
-                    result.date = kendo.date.addDays(date, 1);
-                } else if (!isVertical) {
-                    result = moveRightInHorizontalGroup(slotIndex, selection.groupIndex, groupCount, date);
+            } else if (key === keys.LEFT || key === keys.RIGHT) {
+                reverse = key === keys.LEFT;
+                method = reverse ? "leftSlot" : "rightSlot";
+
+                if (shift) {
+                    if (startSlot.index === endSlot.index && startSlot.collectionIndex === endSlot.collectionIndex) {
+                        backward = reverse;
+                    }
+                } else if (reverse) {
+                    endSlot = startSlot;
                 } else {
-                    result = moveRightInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
+                    startSlot = endSlot;
                 }
 
-                handled = true;
-            } else if (key == keys.DOWN) {
-                if (isGrouped && isVertical) {
-                    result = moveDownInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
-                } else {
-                    result.date = kendo.date.addDays(date, 7);
-                }
+                startSlot = group[method](startSlot);
+                endSlot = group[method](endSlot);
 
-                handled = true;
-            } else if (key == keys.UP) {
-                if (isGrouped && isVertical) {
-                    result = moveUpInVerticalGroup(slotIndex, selection.groupIndex, groupCount, date);
-                } else {
-                    result.date = kendo.date.addDays(date, -7);
+                if (!startSlot || !endSlot) {
+                    if (!vertical && !shift) {
+                        method = reverse ? "prevGroupSlot" : "nextGroupSlot"; //TODO: Rename prev to previous
+                        startSlot = endSlot = this[method](start, groupIndex, daySlot);
+
+                        if (startSlot) {
+                            groupIndex += (reverse ? -1 : 1);
+                        }
+                    }
+
+                    if (!startSlot || !endSlot) {
+                        var index = backward ? 0 : ranges.length - 1;
+
+                        method = reverse ? "previousDaySlot" : "nextDaySlot";
+
+                        startSlot = endSlot = group[method](ranges[index].start);
+
+                        if (!shift) {
+                            if (!startSlot && vertical) {
+                                startSlot = endSlot = group[reverse ? "lastSlot" : "firstSlot"]();
+
+                                groupIndex += (reverse ? -1 : 1);
+                            } else if (startSlot && !vertical) {
+                                groupIndex = reverse ? this.groups.length - 1 : 0;
+                            }
+
+                            if (groupIndex < 0 || groupIndex >= this.groups.length || !startSlot) {
+                                pad = reverse ? -1 : 1;
+
+                                selection.start = kendo.date.addDays(selection.start, pad);
+                                selection.end = kendo.date.addDays(selection.end, pad);
+                                groupIndex = reverse ? this.groups.length - 1 : 0;
+                                startSlot = endSlot = null;
+                            }
+                        }
+
+                    }
                 }
 
                 handled = true;
             }
 
-            date = result.date;
-            if (keep) {
-                isInRange = this._isInDateSlot({start: date, end: date });
-            }
-
-            if (handled && isInRange) {
-                if (!keep) {
-                    selection.start = date;
+            if (handled) {
+                if (shift) {
+                    if (backward && startSlot) {
+                        selection.start = startSlot.startDate();
+                    } else if (!backward && endSlot) {
+                        selection.end = endSlot.endDate();
+                    }
+                } else if (startSlot && endSlot) {
+                    selection.isAllDay = startSlot.isDaySlot;
+                    selection.start = startSlot.startDate();
+                    selection.end = endSlot.endDate();
                 }
-                selection.groupIndex = result.groupIndex;
-                selection.end = date;
+
                 selection.events = [];
+                selection.backward = backward;
+                selection.groupIndex = groupIndex;
             }
 
             return handled;
-        },
-
-        moveToEvent: function(selection, prev) {
-            var that = this,
-                event,
-                pad = prev ? -1 : 1,
-                groupIndex = selection.groupIndex || 0,
-                startSlotIndex = that._applyOffset(that._slotIndex(selection.start), groupIndex),
-                events = that._row.events,
-                idx = eventIndex(events, selection.events, groupIndex),
-                isGrouped = this.groupedResources.length,
-                slots = that._row.slots,
-                length = events.length;
-
-
-            if (prev) {
-                if (idx < 0 || (isGrouped && this._removeOffset(idx, groupIndex) === 0)) {
-                    idx = isGrouped ? idx + 1 : 0;
-                    for (; idx < length; idx ++) {
-                        if (events[idx].start < startSlotIndex && events[idx].groupIndex == groupIndex) {
-                            event = events[idx];
-                        } else {
-                            break;
-                        }
-                    }
-                } else {
-                    for (idx += pad; idx > -1; idx --) {
-                        if (events[idx].groupIndex < groupIndex) {
-                            event = events[idx];
-                            break;
-                        }
-
-                        if (events[idx].start <= startSlotIndex) {
-                            event = events[idx];
-                            break;
-                        }
-                    }
-                }
-            } else {
-                for (idx += pad; idx < length; idx ++) {
-                    if (events[idx].groupIndex > groupIndex) {
-                        event = events[idx];
-                        break;
-                    }
-
-                    if (events[idx].start >= startSlotIndex &&
-                        events[idx].element.attr(kendo.attr("uid")) != selection.events[0]) {
-
-                        event = events[idx];
-                        break;
-                    }
-                }
-            }
-
-            if (event) {
-                selection.events = [ event.element.attr(kendo.attr("uid")) ];
-                selection.start = slots[event.start].start;
-                selection.end = slots[event.end].end;
-                selection.groupIndex = this._groupIndex(event.start);
-            }
-
-            return event;
         },
 
         moveSelectionToPeriod: function(selection) {
@@ -354,6 +305,7 @@ kendo_module({
                     var resourceInfo = that._resourceBySlot(slot);
 
                     that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.startDate(), end: slot.startDate() }, resourceInfo ) });
+
                     e.preventDefault();
                 });
             }
@@ -592,7 +544,7 @@ kendo_module({
             return this._slotIndices[getDate(date).getTime()];
         },
 
-        _positionEvent: function(slotRange, element) {
+        _positionEvent: function(slotRange, element, group) {
             var eventHeight = this.options.eventHeight;
             var startSlot = slotRange.start;
 
@@ -647,6 +599,13 @@ kendo_module({
                 element[0].style.left = this._scrollbarOffset(startSlot.offsetLeft + 2) + "px";
                 element[0].style.height = eventHeight + "px";
 
+                group._continuousEvents.push({
+                    element: element,
+                    uid: element.attr(kendo.attr("uid")),
+                    start: slotRange.start,
+                    end: slotRange.end
+                });
+
                 this.content[0].appendChild(element[0]);
             }
         },
@@ -696,7 +655,7 @@ kendo_module({
 
             var group = this.groups[endSlot.groupIndex];
 
-            var ranges = group.ranges(startSlot.start, endSlot.end, true, event.isAllDay);
+            var ranges = group.ranges(startSlot.startDate(), endSlot.endDate(), true, event.isAllDay);
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 this._createResizeHint(ranges[rangeIndex]);
@@ -825,6 +784,10 @@ kendo_module({
                 if (this._isInDateSlot(event)) {
                     var group = this.groups[groupIndex];
 
+                    if (!group._continuousEvents) {
+                        group._continuousEvents = [];
+                    }
+
                     var ranges = group.slotRanges(event, true);
 
                     var rangeCount = ranges.length;
@@ -847,7 +810,7 @@ kendo_module({
 
                         var occurrence = extend({}, event, { start: start, end: end, head: range.head, tail: range.tail });
 
-                        this._positionEvent(range, this._createEventElement(occurrence));
+                        this._positionEvent(range, this._createEventElement(occurrence), group);
                     }
                 }
             }
@@ -1015,146 +978,4 @@ kendo_module({
 
         return msValue >= msMin && msValue <= msMax;
     }
-
-    function eventIndex(events, selected, groupIndex) {
-        if (!selected || !selected.length) {
-            return firstEventIndex(events, groupIndex);
-        }
-
-        selected = selected[selected.length - 1];
-
-        events = $.map(events, function(item) {
-            return item.groupIndex == groupIndex && item.element.attr(kendo.attr("uid"));
-        });
-
-        return $.inArray(selected, events);
-    }
-
-    function firstEventIndex(events, groupIndex) {
-        var idx = 0, length = events.length;
-
-        for (; idx < length; idx ++) {
-            if (events[idx].groupIndex == groupIndex) {
-                return idx - 1;
-            }
-        }
-
-        return -1;
-    }
-
-    function moveLeftInHorizontalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex % NUMBER_OF_COLUMNS === 0) {
-            if (groupIndex === 0) {
-                date = kendo.date.addDays(date, -1);
-                groupIndex = groupCount - 1;
-            } else {
-                date = kendo.date.addDays(date, 6);
-                groupIndex --;
-            }
-        } else {
-            date = kendo.date.addDays(date, -1);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-    function moveLeftInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex === 0) {
-            if (groupIndex === 0) {
-                date = kendo.date.addDays(date, -1);
-                groupIndex = groupCount - 1;
-            } else {
-                date = kendo.date.addDays(date, NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - 1);
-                groupIndex --;
-            }
-        } else {
-            date = kendo.date.addDays(date, -1);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-    function moveRightInHorizontalGroup(slotIndex, groupIndex, groupCount, date) {
-        if ((slotIndex + 1) % NUMBER_OF_COLUMNS === 0) {
-            if (groupIndex == groupCount - 1) {
-                date = kendo.date.addDays(date, 1);
-                groupIndex = 0;
-            } else {
-                date = kendo.date.addDays(date, -6);
-                groupIndex ++;
-            }
-        } else {
-            date = kendo.date.addDays(date, 1);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-    function moveRightInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex == NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - 1) {
-            if (groupIndex == groupCount - 1) {
-                groupIndex = 0;
-                date = kendo.date.addDays(date, 1);
-            } else {
-                date = kendo.date.addDays(date, - (NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - 1));
-                groupIndex ++;
-            }
-        } else {
-            date = kendo.date.addDays(date, 1);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-    function moveUpInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex <= NUMBER_OF_ROWS) {
-            if (groupIndex === 0) {
-                date = kendo.date.addDays(date, -7);
-                groupIndex = groupCount - 1;
-            } else {
-                date = kendo.date.addDays(date, NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - NUMBER_OF_ROWS -1);
-                groupIndex --;
-            }
-        } else {
-            date = kendo.date.addDays(date, -7);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
-
-    function moveDownInVerticalGroup(slotIndex, groupIndex, groupCount, date) {
-        if (slotIndex >= NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - NUMBER_OF_COLUMNS) {
-            if (groupIndex == groupCount -1) {
-                date = kendo.date.addDays(date, 7);
-                groupIndex = 0;
-            } else {
-                date = kendo.date.addDays(date, - (NUMBER_OF_ROWS * NUMBER_OF_COLUMNS - NUMBER_OF_COLUMNS));
-                groupIndex ++;
-            }
-        } else {
-            date = kendo.date.addDays(date, 7);
-        }
-
-        return {
-            date: date,
-            groupIndex: groupIndex
-        };
-    }
-
 })(window.kendo.jQuery);

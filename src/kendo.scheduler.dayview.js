@@ -11,7 +11,6 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.ui,
         keys = kendo.keys,
-        addDays = kendo.date.addDays,
         setTime = kendo.date.setTime,
         SchedulerView = ui.SchedulerView,
         extend = $.extend,
@@ -119,6 +118,42 @@ kendo_module({
         return value > min && value < max;
     }
 
+    function addContinuousEvent(group, range, element, isAllDay) {
+        var events = group._continuousEvents;
+        var lastEvent = events[events.length - 1];
+        var startDate = getDate(range.start.startDate()).getTime();
+
+        //this handles all day event which is over multiple slots but starts
+        //after one of the time events
+        if (isAllDay && lastEvent &&
+            getDate(lastEvent.start.startDate()).getTime() == startDate) {
+
+                var idx = events.length - 1;
+                for ( ; idx > -1; idx --) {
+                    if (events[idx].isAllDay ||
+                        getDate(events[idx].start.startDate()).getTime() < startDate) {
+                            break;
+                        }
+                }
+
+                events.splice(idx + 1, 0, {
+                    element: element,
+                    isAllDay: true,
+                    uid: element.attr(kendo.attr("uid")),
+                    start: range.start,
+                    end: range.end
+                });
+            } else {
+                events.push({
+                    element: element,
+                    isAllDay: isAllDay,
+                    uid: element.attr(kendo.attr("uid")),
+                    start: range.start,
+                    end: range.end
+                });
+            }
+    }
+
     var MultiDayView = SchedulerView.extend({
         init: function(element, options) {
             var that = this;
@@ -134,9 +169,9 @@ kendo_module({
             that.calculateDateRange();
 
             that._groups();
-       },
+        },
 
-       _updateResizeHint: function(event, startSlot, endSlot) {
+        _updateResizeHint: function(event, startSlot, endSlot) {
             var multiday = event.isMultiDay();
 
             var group = this.groups[endSlot.groupIndex];
@@ -465,7 +500,7 @@ kendo_module({
             }
         },
 
-       options: {
+        options: {
             name: "MultiDayView",
             selectedDateFormat: "{0:D}",
             allDaySlot: true,
@@ -1236,6 +1271,10 @@ kendo_module({
                         if (this._isInTimeSlot(event)) {
                             group = this.groups[groupIndex];
 
+                            if (!group._continuousEvents) {
+                                group._continuousEvents = [];
+                            }
+
                             ranges = group.slotRanges(event);
 
                             var rangeCount = ranges.length;
@@ -1265,6 +1304,8 @@ kendo_module({
 
                                     this._positionEvent(occurrence, element, range);
 
+                                    addContinuousEvent(group, range, element, false);
+
                                     element.appendTo(container);
                                 }
                             }
@@ -1273,11 +1314,17 @@ kendo_module({
                    } else if (this.options.allDaySlot) {
                        group = this.groups[groupIndex];
 
+                       if (!group._continuousEvents) {
+                           group._continuousEvents = [];
+                       }
+
                        ranges = group.slotRanges(event);
 
                        element = this._createEventElement(event, !isMultiDayEvent);
 
                        this._positionAllDayEvent(element, ranges[0]);
+
+                       addContinuousEvent(group, ranges[0], element, true);
 
                        element.appendTo(container);
                     }
@@ -1345,51 +1392,14 @@ kendo_module({
             return rowLevel ? rowLevel.length : 0;
         },
 
-        _selectionOffset: function() {
-            return this._dates.length;
-        },
-
-        normalizeSelection: function(selection) {
-            var columns = this._columns,
-                columnIndex = this._dateSlotIndex(selection.start),
-                slotIndex = this._timeSlotIndex(selection.start),
-                slot;
-
-            if (columnIndex < 0 || columnIndex >= columns.length) {
-                columnIndex = 0;
-            }
-
-            slot = this._columns[columnIndex].slots;
-
-            if (slotIndex < 0) {
-                slotIndex = 0;
-            } else if (slotIndex > (slot.length - 1)) {
-                slotIndex = slot.length - 1;
-            }
-
-            slot = this._columns[columnIndex].slots[slotIndex];
-            selection.start = new Date(slot.start);
-            selection.end = new Date(slot.end);
-        },
-
-        isInRange: function(date) {
-            return this._slotByDate(date);
-        },
-
+        //TODO: Persist selected slot between views
         moveSelectionToPeriod: function(selection) {
-            var offset = this._selectionOffset(),
-                start = selection.start,
-                end = selection.end;
+            if (!this.inRange(selection)) {
+                var slot = this.groups[selection.groupIndex || 0]._collection(0, false).first();
 
-            if (this._dateSlotIndex(start) < 0 || this._dateSlotIndex(end) < 0) {
-                if (start >= this.endDate()) {
-                    offset = -offset;
-                }
-                selection.start = addDays(start, offset);
-                selection.end = addDays(end, offset);
-                selection.events = [];
-            } else {
-                 this.normalizeSelection(selection);
+                selection.isAllDay = slot.isDaySlot;
+                selection.start = slot.startDate();
+                selection.end = slot.endDate();
             }
         },
 
@@ -1397,511 +1407,113 @@ kendo_module({
             this.content.add(this.datesHeader).find(".k-state-selected").removeClass("k-state-selected");
         },
 
-        select: function(selection) {
-            if (selection) {
-                this.clearSelection();
+        move: function(selection, key, shift) {
+            var start = selection.start;
+            var end = selection.end;
+            var daySlot = selection.isAllDay;
 
-                if (selection.events[0]) {
-                    if (this._selectEvents(selection)) {
-                        return;
+            var handled = false;
+            var backward = selection.backward;
+            var groupIndex = selection.groupIndex;
+            var vertical = this._isVerticallyGrouped();
+            var group = this.groups[groupIndex];
+            var ranges = group.ranges(selection.start, selection.end, daySlot, false);
+            var startSlot = ranges[0].start;
+            var endSlot = ranges[ranges.length - 1].end;
+            var method, reverse;
+
+            if (key === keys.DOWN || key === keys.UP) {
+                reverse = key === keys.UP;
+                method = reverse ? "upSlot" : "downSlot";
+
+                if (shift) {
+                    if (!daySlot && startSlot.index === endSlot.index && startSlot.collectionIndex === endSlot.collectionIndex) {
+                        backward = reverse;
                     }
-                }
-
-                this._selectCells(selection);
-            }
-        },
-
-        _selectEvents: function(selection) {
-            var container = this.content.add(this.datesHeader.children()),
-                events = selection.events,
-                length = events.length,
-                idx = 0,
-                event;
-
-            for (; idx < length; idx++) {
-                event = container.children("[data-uid=" + events[idx] + "]").addClass("k-state-selected");
-                event = event[event.length - 1];
-
-                if (!event) {
-                    this.clearSelection();
-                    return;
-                }
-            }
-
-            if (event) {
-                this._scrollTo(event, this.content[0]);
-                return true;
-            }
-        },
-
-        _selectCells: function(selection) {
-            var startDate = selection.start,
-                endDate = selection.end,
-                backwardSelection = startDate > endDate;
-
-            if (backwardSelection) {
-                startDate = new Date(endDate);
-                endDate = new Date(selection.start);
-            }
-
-            var that = this,
-                resources = this.groupedResources,
-                columns = that._columns,
-                startRow = Math.floor(that._timeSlotIndex(startDate)),
-                endRow = Math.ceil(that._timeSlotIndex(endDate)),
-                startCol = that._dateSlotIndex(startDate),
-                endCol = that._dateSlotIndex(endDate),
-                endTime = getMilliseconds(this.endTime()),
-                endDateTime = getMilliseconds(endDate),
-                verticallyGrouped = this._isVerticallyGrouped(),
-                horizontalOffset = 0,
-                verticalOffset = 0,
-                slots, end,
-                firstCell, cell;
-
-            if (startCol < 0) {
-                startCol = 0;
-            }
-
-            if (endCol < 0) {
-                if (endTime === getMilliseconds(endDate)) {
-                    endCol = this._columnCountInGroup() || this._columns.length;
+                } else if (reverse) {
+                    endSlot = startSlot;
                 } else {
-                    endCol = startCol;
-                }
-            }
-
-            if (startRow < 0) {
-                startRow = 0;
-            }
-
-            if (endRow < 0 || (startCol === endCol && endRow < startRow)) {
-                endRow = startRow;
-            }
-
-            var dayLengthMS = Math.abs((getMilliseconds(this.endTime()) - getMilliseconds(this.startTime())) || MS_PER_DAY);
-            if (backwardSelection && Math.abs(endDate - startDate) > dayLengthMS) {
-                endRow += 1;
-            }
-
-            if (!verticallyGrouped) {
-                horizontalOffset = this._columnOffsetForResource(resources.length);
-                horizontalOffset = selection.groupIndex * horizontalOffset || 0;
-
-                startCol += horizontalOffset;
-                endCol += horizontalOffset;
-            } else {
-                verticalOffset = this._rowCountInGroup() || 0;
-                verticalOffset = selection.groupIndex * verticalOffset;
-
-                startRow += verticalOffset;
-                endRow += verticalOffset;
-            }
-
-            if (!selection.isAllDay) {
-                if (endDateTime === 0 && endDateTime === endTime && startCol !== endCol) {
-                    endCol -= 1;
-                    endRow = this._rowCountInGroup() + (this._rowCountInGroup() * selection.groupIndex) || columns[endCol].slots.length;
+                    startSlot = endSlot;
                 }
 
-                end = endRow;
-                for (; startCol <= endCol; startCol++) {
-                    if (startCol === endCol) {
-                        end = endRow;
-                    } else if (endCol > startCol) {
-                        end = this._rowCountInGroup() + (this._rowCountInGroup() * selection.groupIndex) || columns[endCol].slots.length;
-                    }
+                startSlot = group[method](startSlot, shift);
+                endSlot = group[method](endSlot, shift);
 
-                    slots = columns[startCol].slots;
-                    if (startRow !== end) {
-                        end -= 1;
-                    }
+                if (!shift && vertical && (!startSlot || !endSlot)) {
+                    method = reverse ? "prevGroupSlot" : "nextGroupSlot";
 
-                    for (; startRow <= end; startRow++) {
-                        cell = slots[startRow].element;
-                        addSelectedState(cell);
-                        if (!firstCell) {
-                            firstCell = cell;
-                        }
-                    }
+                    startSlot = endSlot = this[method](start, groupIndex, daySlot);
 
-                    startRow = 0 + verticalOffset;
-                }
-            } else {
-                var index = verticallyGrouped ? selection.groupIndex : 0;
-                slots = that._rows[index].slots;
-
-                for (; startCol <= endCol; startCol++) {
-                    if (slots[startCol].groupIndex === selection.groupIndex) {
-                        cell = slots[startCol].element;
-                        addSelectedState(cell);
+                    if (startSlot) {
+                        groupIndex += (reverse ? -1 : 1);
                     }
                 }
-            }
 
-            cell = backwardSelection ? firstCell : cell;
-            if (cell) {
-                that._scrollTo(cell, that.content[0]);
-            }
-        },
-
-        move: function(selection, key, shiftKey) {
-            var groupedResources = this.groupedResources,
-                interval = this._timeSlotInterval(),
-                start = new Date(selection.start),
-                end = new Date(selection.end),
-                multipleSelection = Math.abs(start - end) > interval,
-                groupColumnLength = this._columnCountInGroup(),
-                isAllDay = selection.isAllDay,
-                handled = false,
-                slot;
-
-            if (key === keys.DOWN) {
                 handled = true;
+            } else if (key === keys.LEFT || key === keys.RIGHT) {
+                reverse = key === keys.LEFT;
+                method = reverse ? "leftSlot" : "rightSlot";
 
-                if (isAllDay) {
-                    if (shiftKey) {
-                        selection.events = [];
-                        return handled;
-                    }
+                if (shift && (daySlot && startSlot.index === endSlot.index) || (!daySlot && startSlot.collectionIndex === endSlot.collectionIndex)) {
+                    backward = reverse;
+                }
 
-                    selection.isAllDay = false;
-                    slot = this._firstSlot(start);
-                    start = slot.start;
-                    end = slot.end;
-                } else {
-                    if (!shiftKey) {
-                        if (multipleSelection) {
-                            if (end > start) {
-                                start = new Date(end);
-                            } else {
-                                end = new Date(start + interval);
-                            }
-                        } else {
-                            setTime(start, interval);
+                startSlot = group[method](startSlot);
+                endSlot = group[method](endSlot);
+
+                if (!shift && (!startSlot || !endSlot)) {
+                    if (!vertical) {
+                        method = reverse ? "prevGroupSlot" : "nextGroupSlot";
+
+                        startSlot = endSlot = this[method](start, groupIndex, daySlot);
+
+                        if (startSlot) {
+                            groupIndex += (reverse ? -1 : 1);
                         }
                     }
 
-                    setTime(end, interval);
+                    if (!startSlot) {
+                        var date = reverse ? this.previousDate() : this.nextDate();
 
-                    if (start.getTime() === end.getTime()) {
-                        if (!shiftKey) {
-                            setTime(end, interval);
-                        } else {
-                            setTime(start, -interval);
-                            setTime(end, interval);
+                        selection.start = new Date(date);
+                        selection.end = new Date(date);
+
+                        var endMilliseconds = daySlot ? MS_PER_DAY : getMilliseconds(end);
+
+                        setTime(selection.start, getMilliseconds(start));
+                        setTime(selection.end, endMilliseconds);
+                        startSlot = endSlot = null;
+
+                        if (!vertical) {
+                            groupIndex = reverse ? this.groups.length - 1 : 0;
                         }
                     }
                 }
 
-                if (!this._slotByDate(new Date(end - interval)) || !this._slotByDate(start)) {
-                    var incrementGroup = (selection.groupIndex + 1) < Math.floor((this._rowCountForLevel(groupedResources.length) / this._rowCountInGroup()));
-                    if (groupedResources.length && this._isVerticallyGrouped() && incrementGroup) {
-                        selection.isAllDay = true;
-                        selection.groupIndex += 1;
-
-                        slot = this._firstSlot(selection.start);
-                        end = start = slot.start;
-                    } else {
-                        start = selection.start;
-                        end = selection.end;
-                    }
-                }
-            } else if (key === keys.UP) {
                 handled = true;
-                if (!shiftKey) {
-                    if (multipleSelection) {
-                        if (end < start) {
-                            start = new Date(end);
-                        }
-
-                        end = new Date(start);
-                    }
-                    setTime(start, -interval);
-                } else {
-                    //TODO: handle decrease of selection
-                }
-
-                setTime(end, -interval);
-
-                if (start.getTime() === end.getTime()) {
-                    if (!shiftKey) {
-                        setTime(end, interval);
-                    } else {
-                        setTime(start, interval);
-                        setTime(end, -interval);
-                    }
-                }
-
-                if (shiftKey && !this._slotByDate(end < start ? end : start)) {
-                    selection.events = [];
-                    return handled;
-                } else if (!shiftKey) {
-                    if (this._isVerticallyGrouped() && selection.isAllDay && (selection.groupIndex - 1) > -1) {
-                        selection.groupIndex -= 1;
-                        selection.isAllDay = false;
-
-                        slot = this._lastSlot(selection.start);
-                        start = slot.start;
-                        end = slot.end;
-                    } else if (!this._slotByDate(start) && this.options.allDaySlot) {
-                        selection.isAllDay = true;
-                        slot = this._firstSlot(selection.start);
-                        end = start = slot.start;
-                    }
-                }
-            } else if (key === keys.RIGHT) {
-                handled = true;
-
-                if (!shiftKey) {
-                    start = addDays(start, 1);
-                }
-                end = addDays(end, 1);
-
-                if (shiftKey && !multipleSelection) {
-                    end.setHours(start.getHours(), start.getMinutes(), start.getSeconds(), start.getMilliseconds());
-                    setTime(end, interval);
-                }
-
-                if (start > this._end(isAllDay) && groupedResources.length && !this._isVerticallyGrouped()) {
-                    selection.groupIndex += 1;
-
-                    if (this._columnCountForLevel(groupedResources.length) > (selection.groupIndex * groupColumnLength)) {
-                        start = addDays(start, -groupColumnLength);
-                        end = addDays(end, -groupColumnLength);
-                    } else {
-                        selection.groupIndex = 0;
-                    }
-                }
-
-            } else if (key === keys.LEFT) {
-                handled = true;
-                if (!shiftKey) {
-                    start = addDays(start, -1);
-                }
-                end = addDays(end, -1);
-
-                if (shiftKey && !multipleSelection) {
-                    end.setHours(start.getHours(), start.getMinutes(), start.getSeconds(), start.getMilliseconds());
-                }
-
-                if (start < this.startDate() && groupedResources.length && !this._isVerticallyGrouped()) {
-                    selection.groupIndex -= 1;
-
-                    if (selection.groupIndex > -1) {
-                        start = addDays(start, groupColumnLength);
-                        end = addDays(end, groupColumnLength);
-                    } else {
-                        selection.groupIndex = (this._columnCountForLevel(groupedResources.length) / groupColumnLength) - 1;
-                    }
-                }
             }
 
             if (handled) {
+                if (shift) {
+                    if (backward && startSlot) {
+                        selection.start = startSlot.startDate();
+                    } else if (!backward && endSlot) {
+                        selection.end = endSlot.endDate();
+                    }
+                } else if (startSlot && endSlot) {
+                    selection.isAllDay = startSlot.isDaySlot;
+                    selection.start = startSlot.startDate();
+                    selection.end = endSlot.endDate();
+                }
+
                 selection.events = [];
-                selection.start = start;
-                selection.end = end;
+                selection.backward = backward;
+                selection.groupIndex = groupIndex;
             }
 
             return handled;
-        },
-
-        _firstSlot: function(date) {
-            return this._columns[this._dateSlotIndex(date)].slots[0];
-        },
-
-        _lastSlot: function(date) {
-            var slots = this._columns[this._dateSlotIndex(date)].slots;
-            return slots[slots.length - 1];
-        },
-
-        _slotByDate: function(date) {
-            var column = this._columns[this._dateSlotIndex(date)],
-                slot;
-
-            if (column) {
-                slot = column.slots[this._timeSlotIndex(date)];
-                if (slot && slot.start.getTime() === date.getTime()) {
-                    return slot;
-                }
-            }
-
-            return null;
-        },
-
-        _slotByAllDay: function(date) {
-            var slot = this._rows[0].slots[this._dateSlotIndex(date)];
-            return slot || null;
-        },
-
-        _getAllDayEvents: function(col, selected) {
-            var allDayRow = this._rows[0],
-                events = allDayRow.events,
-                result,
-                event;
-
-            for (var i = eventIndex(events, selected), length = events.length; i < length; i++) {
-                event = events[i];
-
-                if (event.start === col) {
-                    result = event;
-                    break;
-                }
-            }
-
-            return result;
-        },
-
-        moveToEvent: function(selection, prev) {
-            var selectedEventsLength = selection.events.length,
-                length = this._columns.length,
-                columnIndex,
-                column,
-                events,
-                event,
-                index,
-                slot;
-
-            var prevPredicate = function(slot) {
-                return slot.start < selection.end;
-            };
-
-            var prevAllDayPredicate = function(slot) {
-                return kendo.date.getDate(slot.start).getTime() === kendo.date.getDate(selection.start).getTime();
-            };
-
-            var nextPredicate = function(slot) {
-                return slot.start >= selection.start;
-            };
-
-            var nextAllDayPredicate = function(slot) {
-                return slot.start >= selection.start;
-            };
-
-            if (selection.isAllDay) {
-                slot = this._slotByAllDay(selection.start);
-            } else {
-                slot = this._slotByDate(selection.start);
-            }
-
-            columnIndex = slot.columnIndex;
-
-            if (prev) {
-                for (; columnIndex >= 0; columnIndex--) {
-                    column = this._columns[columnIndex];
-                    events = filterEvents(column.slots, column.events, prevPredicate);
-
-                    if (events[0]) {
-                        index = -1;
-                        if (selectedEventsLength) {
-                            index = eventIndex(events, selection.events, prev);
-                            selectedEventsLength = 0;
-                        } else {
-                            index = events.length - 1;
-                        }
-                        event = events[index];
-
-                        if (event) {
-                            selection.start = column.slots[event.start].start;
-                            selection.end = column.slots[event.end - 1].end;
-                            selection.events = [event.element.data("uid")];
-                            return true;
-                        }
-                    }
-
-                    events = filterEvents(this._rows[0].slots, this._rows[0].events, prevAllDayPredicate);
-
-                    if (events[0]) {
-                        index = -1;
-                        if (selectedEventsLength) {
-                            index = eventIndex(events, selection.events, prev);
-                            selectedEventsLength = 0;
-                        } else {
-                            index = events.length - 1;
-                        }
-
-                        event = events[index];
-
-                        if (event) {
-                            selection.start = this._rows[0].slots[event.start].start;
-                            selection.end = this._rows[0].slots[event.end].end;
-                            selection.events = [event.element.data("uid")];
-                            selection.isAllDay = true;
-                            return true;
-                        }
-                    }
-                }
-            } else {
-                for (; columnIndex < length; columnIndex++) {
-                    column = this._columns[columnIndex];
-                    events = filterEvents(column.slots, column.events, nextPredicate);
-
-                    if (events[0]) {
-                        index = selectedEventsLength ? eventIndex(events, selection.events) : 0;
-                        event = events[index];
-
-                        if (event) {
-                            selection.start = column.slots[event.start].start;
-                            selection.end = column.slots[event.end - 1].end;
-                            selection.events = [event.element.data("uid")];
-                            return true;
-                        }
-                    } else {
-                        events = filterEvents(this._rows[0].slots, this._rows[0].events, nextAllDayPredicate);
-
-                        if (events[0]) {
-                            index = selectedEventsLength ? eventIndex(events, selection.events) : 0;
-                            event = events[index];
-
-                            if (event) {
-                                selection.start = this._rows[0].slots[event.start].start;
-                                selection.end = this._rows[0].slots[event.end].end;
-                                selection.events = [event.element.data("uid")];
-                                selection.isAllDay = true;
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
         }
     });
-
-    function filterEvents(slots, events, predicate) {
-        var idx = 0, length = events.length,
-            data = [],
-            event;
-
-        for (; idx < length; idx++) {
-            event = events[idx];
-            if (predicate(slots[event.start])) {
-                data.push(event);
-            }
-        }
-
-        return data;
-    }
-
-    var selectedStateRegExp = /\s*k-state-selected/;
-    function addSelectedState(cell) {
-        cell.className = cell.className.replace(selectedStateRegExp, "") + " k-state-selected";
-    }
-
-    function eventIndex(events, selected, prev) {
-        if (!selected || !selected.length) {
-            if (prev && selected) {
-                return selected.length - 1;
-            }
-
-            return 0;
-        }
-
-        selected = selected[selected.length - 1];
-
-        events = $.map(events, function(item) { return item.element.data("uid"); });
-
-        return $.inArray(selected, events) + (prev ? -1 : 1);
-    }
 
    extend(true, ui, {
        MultiDayView: MultiDayView,
