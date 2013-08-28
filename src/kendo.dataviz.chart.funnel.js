@@ -48,7 +48,8 @@ kendo_module({
                 firstSeries = series[0],
                 funnelChart = new FunnelChart(plotArea, {
                     series: series,
-                    legend: plotArea.options.legend
+                    legend: plotArea.options.legend,
+                    neckSize: firstSeries.neckSize
                 });
 
             plotArea.appendChart(funnelChart);
@@ -73,9 +74,10 @@ kendo_module({
         },
 
         options: {
-            neckSize:0.3,
-            width:300
+            neckSize: 0.3,
+            width: 300
         },
+
         render: function() {
             var chart = this,
                 options = chart.options,
@@ -101,6 +103,7 @@ kendo_module({
                     index: i,
                     owner: chart,
                     series: series,
+                    category: fields.category,
                     dataItem: data[i],
                     percentage: value / total,
                     visibleInLegend: fields.visibleInLegend,
