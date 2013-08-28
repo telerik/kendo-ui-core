@@ -1205,7 +1205,11 @@ kendo_module({
                 );
             }
 
-            chart.redraw();
+            if (chart.options.dataSource) {
+                chart.refresh();
+            }  else {
+                chart.redraw();
+            }
         },
 
         destroy: function() {

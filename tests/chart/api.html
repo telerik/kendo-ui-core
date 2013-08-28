@@ -517,6 +517,21 @@
                     });
                 });
 
+                test("calls refresh implicitly when bound to a data source", function() {
+                    createChart({
+                        series: [{ field: "foo" }],
+                        dataSource: { data: [{ "foo": 1 }] }
+                    });
+
+                    stubMethod(Chart.fn, "refresh", function() {
+                        ok(true);
+                    }, function() {
+                        chart.setOptions({
+                            foo: true
+                        });
+                    });
+                });
+
             })();
 
         </script>
