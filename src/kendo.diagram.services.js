@@ -1,12 +1,3 @@
-/*
- * - dragdrop
- * - undoredo
- * - keyboard
- * - touch
- * - tooling
- * - snapping
- * - ?MVVM or in the DOM
- * */
 kendo_module({
     id: "diagram",
     name: "Diagram Services",

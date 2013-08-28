@@ -563,19 +563,19 @@ kendo_module({
         },
         redraw: function (options) {
             VisualBase.fn.redraw.call(this, options);
-            var native = this.native,
+            var n = this.native,
                 o = this.options,
-                rx = o.width / 2, ry = o.height / 2;
+                rx = this.options.rx || o.width / 2, ry = this.options.rx || o.height / 2;
 
-            native.rx.baseVal.value = rx;
-            native.ry.baseVal.value = ry;
+            n.rx.baseVal.value = rx;
+            n.ry.baseVal.value = ry;
 
             if (o.center) {
-                native.cx.baseVal.value = o.center.x;
-                native.cy.baseVal.value = o.center.y;
+                n.cx.baseVal.value = o.center.x;
+                n.cy.baseVal.value = o.center.y;
             } else if (isDefined(o.x) && isDefined(o.y)) {
-                native.cx.baseVal.value = o.x + rx;
-                native.cy.baseVal.value = o.y + ry;
+                n.cx.baseVal.value = o.x + rx;
+                n.cy.baseVal.value = o.y + ry;
             }
         }
     });

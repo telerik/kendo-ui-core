@@ -6,6 +6,7 @@ kendo_module({
 });
 
 (function ($, undefined) {
+    // Imports ================================================================
     var kendo = window.kendo,
         diagram = kendo.diagram,
         ui = kendo.ui,
@@ -13,10 +14,6 @@ kendo_module({
         Class = kendo.Class,
         proxy = $.proxy,
         deepExtend = kendo.deepExtend,
-        NS = ".kendoDiagram",
-        BOUNDSCHANGE = "boundsChange",
-        Auto = "Auto",
-        MAXINT = 9007199254740992,
         Canvas = diagram.Canvas,
         Group = diagram.Group,
         Rectangle = diagram.Rectangle,
@@ -25,7 +22,6 @@ kendo_module({
         Rect = diagram.Rect,
         Path = diagram.Path,
         Line = diagram.Line,
-    //AddShapeUnit = diagram.AddShapeUnit,
         DeleteShapeUnit = diagram.DeleteShapeUnit,
         DeleteConnectionUnit = diagram.DeleteConnectionUnit,
         TextBlock = diagram.TextBlock,
@@ -39,6 +35,12 @@ kendo_module({
         ConnectorsAdorner = diagram.ConnectorsAdorner,
         Cursors = diagram.Cursors,
         Observable = kendo.Observable;
+
+    // Constants ==============================================================
+    var NS = ".kendoDiagram",
+        BOUNDSCHANGE = "boundsChange",
+        Auto = "Auto",
+        MAXINT = 9007199254740992;
 
     var Connector = Class.extend({
         init: function (shape, options) {
@@ -136,30 +138,10 @@ kendo_module({
             this.isSelected = false;
             this.connectors = [];
             this.type = "Shape";
-            var shapeOptions = deepExtend({}, that.options, { x: 0, y: 0 }); // Shape visual should not have position in its parent group.
             if (isUndefined(this.options.data)) {
                 this.options.data = "rectangle";
             }
-            if (isString(this.options.data)) {
-                switch (this.options.data.toLocaleLowerCase()) {
-                    case "rectangle":
-                        this.shapeVisual = new Rectangle(shapeOptions);
-                        break;
-                    case "circle":
-                        this.shapeVisual = new Circle(shapeOptions);
-                        break;
-                    default:
-                        this.shapeVisual = new Path(shapeOptions);
-                        break;
-                }
-            }
-            else {// custom template
-                if (!isFunction(this.options.data)) {
-                    throw "The custom template should be a function returning a visual";
-                }
-                this.shapeVisual = this.options.data();
-            }
-
+            this.shapeVisual = Shape.createShapeVisual(that.options);
             this.visual = new Group({
                 id: that.options.id,
                 title: that.options.id ? that.options.id : "Shape"
@@ -329,6 +311,26 @@ kendo_module({
         }
     });
 
+    Shape.createShapeVisual = function (options) {
+        var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }); // Shape visual should not have position in its parent group.
+        if (isString(options.data)) {
+            switch (options.data.toLocaleLowerCase()) {
+                case "rectangle":
+                    return new Rectangle(shapeOptions);
+                case "circle":
+                    return new Circle(shapeOptions);
+                default:
+                    return new Path(shapeOptions);
+            }
+        }
+        else {// custom template
+            if (!isFunction(options.data)) {
+                throw "The custom template should be a function returning a visual";
+            }
+            return this.options.data();
+        }
+    };
+
     var Connection = DiagramElement.extend({
         init: function (from, to, options) {
             var that = this,
@@ -471,7 +473,7 @@ kendo_module({
             this.targetConnector.connections.remove(this);
             this.targetConnector = undefined;
             this._resolvedTargetConnector = undefined;
-        },
+        }
     });
 
     function resolveConnectors(connection) {
@@ -480,7 +482,7 @@ kendo_module({
             source = connection.source(),
             target = connection.target(),
             autoSourceShape, autoTargetShape,
-            sourceConnector, targetConnector;
+            sourceConnector;
         if (source instanceof Point) {
             sourcePoint = source;
         }
@@ -877,7 +879,6 @@ kendo_module({
             kendo.diagram.Graph.Utils.createDiagramFromGraph(this, g, false, randomSize);
         },
 
-
         /**
          * Gets a shape on the basis of its identifier.
          * @param id (string) the identifier of a shape.
@@ -888,7 +889,6 @@ kendo_module({
                 return s.shapeVisual.native.id == id;
             });
         }
-
     });
 
     ui.plugin(Diagram);

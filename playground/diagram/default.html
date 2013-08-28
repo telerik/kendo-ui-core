@@ -2,83 +2,71 @@
 <!--Note from Swa; you can simply open this HTML page in the browser and the tests will run.-->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>JS Diagram </title>
     <style type="text/css">
-        html, body, #mainDiv
-        {
+        html, body, #mainDiv {
             height: 100%;
             overflow: hidden;
         }
 
-        #canvasDiv
-        {
+        #canvasDiv {
             float: left;
         }
 
-        #canvas
-        {
+        #canvas {
             height: 100%;
         }
 
-        input.diagramCommandBtn
-        {
+        input.diagramCommandBtn {
             border: 1px gray solid;
             background-color: gray;
             color: white;
             cursor: pointer;
         }
 
-        #toolBoxDiv
-        {
+        #toolBoxDiv {
             float: left;
         }
 
-        .shape
-        {
+        .shape {
             float: left;
             padding: 10px;
             cursor: pointer;
         }
 
-            .shape:hover
-            {
-                background-color: rgba(0,0,0,0.25);
-            }
+        .shape:hover {
+            background-color: rgba(0, 0, 0, 0.25);
+        }
 
-            .shape svg
-            {
-                width: 100px;
-                height: 100px;
-            }
+        .shape svg {
+            width: 100px;
+            height: 100px;
+        }
 
-            .shape h3
-            {
-                padding: 5px;
-                font-size: .9em;
-                overflow: hidden;
-                font-weight: normal;
-                max-width: 100px;
-                text-transform: uppercase;
-            }
+        .shape h3 {
+            padding: 5px;
+            font-size: .9em;
+            overflow: hidden;
+            font-weight: normal;
+            max-width: 100px;
+            text-transform: uppercase;
+        }
 
-        h2
-        {
+        h2 {
             margin: 10px;
         }
 
-        #splitter
-        {
+        #splitter {
             height: 90%;
         }
 
-        #toolbarDiv
-        {
+        #toolbarDiv {
         }
     </style>
 
-    <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
-    <link href="../../styles/web/kendo.default.css" rel="stylesheet" />
+    <link href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+    <link href="../../styles/web/kendo.default.css" rel="stylesheet"/>
 
     <script src="../../src/jquery.js"></script>
     <script src="../../src/kendo.core.js"></script>
@@ -98,66 +86,85 @@
     <script src="../../src/kendo.diagram.dom.js"></script>
 </head>
 <body>
-    <div id="mainDiv">
-        <div id="toolbarDiv">
-            <input type="button" class="diagramCommandBtn" id="undoButton" title="Undo (CTRL+Z)" value="Undo" />
-            <input type="button" class="diagramCommandBtn" id="redoButton" title="Redo (CTRL+Y)" value="Redo" />
-            <input type="button" class="diagramCommandBtn" id="deleteButton" title="Delete (DEL)" value="Delete" />
-            <input type="button" class="diagramCommandBtn" id="selectAllButton" title="Select All (CTRL+A)" value="SelectAll" />
-            rotate selection:<input id="rotateShape" />
+<div id="mainDiv">
+    <div id="toolbarDiv">
+        <input type="button" class="diagramCommandBtn" id="undoButton" title="Undo (CTRL+Z)" value="Undo"/>
+        <input type="button" class="diagramCommandBtn" id="redoButton" title="Redo (CTRL+Y)" value="Redo"/>
+        <input type="button" class="diagramCommandBtn" id="deleteButton" title="Delete (DEL)" value="Delete"/>
+        <input type="button" class="diagramCommandBtn" id="selectAllButton" title="Select All (CTRL+A)"
+               value="SelectAll"/>
+        rotate selection:<input id="rotateShape"/>
+    </div>
+    <div id="splitter">
+        <div id="toolBoxDiv">
+            <!--<h2>Shapes</h2>-->
+            <div id="toolBox"></div>
         </div>
-        <div id="splitter">
-            <div id="toolBoxDiv">
-                <!--<h2>Shapes</h2>-->
-                <div id="toolBox"></div>
-            </div>
-            <div id="canvasDiv">
-                <!--<h2>Diagram</h2>-->
-                <div id="canvas"></div>
-            </div>
+        <div id="canvasDiv">
+            <!--<h2>Diagram</h2>-->
+            <div id="canvas"></div>
         </div>
     </div>
+</div>
 </body>
 <script type="text/x-kendo-tmpl" id="template">
-    <div class="shape">        
-        <svg><path d="#=data#" fill="#=background#"/></svg>            
-        <h3>#:name#</h3>
+    <div class="shape">
+        <svg>
+            #= new XMLSerializer().serializeToString(kendo.diagram.Shape.createShapeVisual(options).native) #
+        </svg>
+        <h3>#:options.name#</h3>
     </div>
 </script>
-
+<!--<path d="#=data#" fill="#=background#"/>-->
+<!--#$("#=data").innerHtml(v); #-->
 <script>
     var shapesSource = [
         {
-            name: "Rectangle",
-            data: "m0,0 L0,100 L100,100 L100,0z",
-            background: "steelblue"
+            options: {
+                name: "Rectangle",
+                data: "m0,0 L0,100 L100,100 L100,0z",
+                background: "steelblue"
+            }
         },
         {
-            name: "Circle",
-            data: "Circle",
-            background: "steelblue"
+            options: {
+                name: "Circle",
+                data: "Circle",
+                rx: 50,
+                ry: 50,
+                background: "steelblue"
+            }
         },
         {
-            name: "Triangle",
-            data: "m0,100 L100,100 L50,0z",
-            background: "steelblue"
+            options: {
+                name: "Triangle",
+                data: "m0,100 L100,100 L50,0z",
+                background: "steelblue"
+            }
         },
         {
-            name: "Sequential Data",
-            data: "m50.21875,97.4375l0,0c-26.35457,0 -47.71875,-21.25185 -47.71875,-47.46875l0,0c0,-26.21678 21.36418,-47.46875 47.71875,-47.46875l0,0c12.65584,0 24.79359,5.00155 33.74218,13.90339c8.94862,8.90154 13.97657,20.97617 13.97657,33.56536l0,0c0,12.58895 -5.02795,24.66367 -13.97657,33.56542l13.97657,0l0,13.90333l-47.71875,0z",
-            background: "steelblue"
+            options: {
+                name: "Sequential Data",
+                data: "m50.21875,97.4375l0,0c-26.35457,0 -47.71875,-21.25185 -47.71875,-47.46875l0,0c0,-26.21678 21.36418,-47.46875 47.71875,-47.46875l0,0c12.65584,0 24.79359,5.00155 33.74218,13.90339c8.94862,8.90154 13.97657,20.97617 13.97657,33.56536l0,0c0,12.58895 -5.02795,24.66367 -13.97657,33.56542l13.97657,0l0,13.90333l-47.71875,0z",
+                background: "steelblue"
+            }
         },
         {
-            name: "Data",
-            data: "m2.5,97.70305l19.07013,-95.20305l76.27361,0l-19.0702,95.20305l-76.27354,0z",
-            background: "steelblue"
+            options: {
+                name: "Data",
+                data: "m2.5,97.70305l19.07013,-95.20305l76.27361,0l-19.0702,95.20305l-76.27354,0z",
+                background: "steelblue"
+            }
         },
         {
-            name: "Wave",
-            data: "m2.5,15.5967c31.68356,-45.3672 63.37309,45.3642 95.05661,0l0,81.65914c-31.68353,45.36404 -63.37305,-45.36732 -95.05661,0l0,-81.65914z",
-            background: "steelblue"
+            options: {
+                name: "Wave",
+                data: "m2.5,15.5967c31.68356,-45.3672 63.37309,45.3642 95.05661,0l0,81.65914c-31.68353,45.36404 -63.37305,-45.36732 -95.05661,0l0,-81.65914z",
+                background: "steelblue"
+            }
         }
     ];
+
     var Shapes = {
         Rectangle: {
             data: "Rectangle"
@@ -221,9 +228,9 @@
         $("#canvas").kendoDropTarget({
             drop: function (e) {
                 var item = e.draggable.hint.data("data"),
-                    pos = e.draggable.hintOffset,
-                    dp = diagram.documentToCanvasPoint(new Point(pos.left, pos.top)),
-                    normal = diagram._normalizePointZoom(dp.minus(diagram.pan()));
+                        pos = e.draggable.hintOffset,
+                        dp = diagram.documentToCanvasPoint(new Point(pos.left, pos.top)),
+                        normal = diagram._normalizePointZoom(dp.minus(diagram.pan()));
 
                 diagram.addShape(normal, item);
             }
@@ -241,10 +248,10 @@
             filter: "div[role=option]",
             hint: function (row) {
                 var svg = row.children("svg"),
-                    list = $("#toolBox").data("kendoListView"),
-                    item = list.dataSource.getByUid(row.data().uid);
+                        list = $("#toolBox").data("kendoListView"),
+                        item = list.dataSource.getByUid(row.data().uid);
                 svg = svg.clone();
-                svg.data("data", item);
+                svg.data("data", item.options);
                 return svg;
             }
         });
