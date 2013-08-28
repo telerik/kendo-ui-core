@@ -996,10 +996,10 @@ kendo_module({
                 }
                 var tl = bounds.topLeft().plus(dtl);
                 var br = bounds.bottomRight().plus(dbr);
-                //cut-off
-                if (Math.abs(br.x - tl.x) > 4 || Math.abs(br.y - tl.y) > 4) {
+                bounds = Rect.fn.fromPoints(tl, br);
+                if (br.x - tl.x > 0 && br.y - tl.y > 0 && bounds.width >= this.shape.options.minWidth && bounds.height >= this.shape.options.minHeight) {
                     this._cp = p;
-                    this.shape.bounds(Rect.fn.fromPoints(tl, br));
+                    this.shape.bounds(bounds);
                     this.refresh();
                 }
             }
