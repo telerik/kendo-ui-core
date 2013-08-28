@@ -85,19 +85,25 @@
 
 /* widget */
 
-.k-block,
-.k-widget,
-.k-inline-block,
 .k-textbox > input,
 .k-input[type="text"],
 .k-input[type="number"],
 .k-textbox,
 .k-picker-wrap .k-input,
-.k-button,
-.k-draghandle
+.k-button
 {
     font-size: 100%;
     font-family: inherit;
+    border-style: solid;
+    border-width: 1px;
+    -webkit-appearance: none;
+}
+
+.k-widget,
+.k-block,
+.k-inline-block,
+.k-draghandle
+{
     border-style: solid;
     border-width: 1px;
     -webkit-appearance: none;

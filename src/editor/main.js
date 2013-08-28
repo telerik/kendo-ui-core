@@ -158,8 +158,6 @@ kendo_module({
         tables: [ "createTable", "addColumnLeft", "addColumnRight", "addRowAbove", "addRowBelow", "deleteRow", "deleteColumn" ]
     };
 
-    var supportedElements = "textarea,main,article,section,aside,nav,header,footer,div".split(",");
-
     var Editor = Widget.extend({
         init: function (element, options) {
             var that = this,
@@ -171,10 +169,6 @@ kendo_module({
 
             /* suppress initialization in mobile webkit devices (w/o proper contenteditable support) */
             if (!supportedBrowser) {
-                return;
-            }
-
-            if ($.inArray(type, supportedElements) == -1) {
                 return;
             }
 

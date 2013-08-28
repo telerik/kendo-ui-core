@@ -80,6 +80,8 @@
 </head>
 <body>
     <div id="page">
+        <h1 id="title" contentEditable>Title</h1>
+
         <div id="comment" contentEditable style="height: 200px;"></div>
 
         <div id="content"></div>
@@ -91,6 +93,8 @@
         function showHTML() {
             $("#content").text(editor.value());
         }
+
+        $("#title").kendoEditor();
 
         editor = $("#comment")
             .html("<p>foo bar baz</p>")
