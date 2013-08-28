@@ -7,6 +7,7 @@ kendo_module({
 });
 
 (function ($, undefined) {
+
     // Imports ================================================================
     var kendo = window.kendo,
         Class = kendo.Class,
@@ -19,6 +20,7 @@ kendo_module({
         PlotAreaBase = dataviz.PlotAreaBase,
         PlotAreaFactory = dataviz.PlotAreaFactory,
         Point2D = dataviz.Point2D,
+        Box2D = dataviz.Box2D,
         SeriesBinder = dataviz.SeriesBinder,
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
@@ -71,8 +73,9 @@ kendo_module({
         },
 
         options: {
+            neckSize:0.3,
+            width:300
         },
-
         render: function() {
             var chart = this,
                 options = chart.options,
@@ -150,12 +153,27 @@ kendo_module({
         },
 
         reflow: function(box) {
-            var chart = this,
+            var chart = this,            
                 segments = chart.segments,
-                i;
-
-            for (i = 0; i < segments.length; i++) {
-                segments[i].points = box.points();
+                count = segments.length,
+                i,
+                segmentHeight = box.height() / count,
+                width = box.width(),
+                offset = 0,
+                neckSize = chart.options.neckSize,
+                //TODO support pixels and string as neckSize
+                narrowSize = (width-neckSize*width)/(count*2),
+                narrowOffset = 0; 
+                
+            for (i = 0; i < count; i++) {                
+                points = segments[i].points = [];
+                points.push(new Point2D(box.x1 + narrowOffset, box.y1 + offset));
+                points.push(new Point2D(box.x1+width - narrowOffset, box.y1 + offset));
+                points.push(new Point2D(box.x1+width - narrowOffset - narrowSize, box.y1 + offset + segmentHeight));
+                points.push(new Point2D(box.x1+ narrowOffset + narrowSize,box.y1 + offset + segmentHeight));
+                
+                narrowOffset += narrowSize;
+                offset += segmentHeight;
             }
         }
     });
