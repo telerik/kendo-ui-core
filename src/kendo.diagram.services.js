@@ -6,6 +6,7 @@ kendo_module({
 });
 
 (function ($, undefined) {
+    // Imports ================================================================
     var kendo = window.kendo,
         diagram = kendo.diagram,
         Class = kendo.Class,
@@ -15,16 +16,18 @@ kendo_module({
         Rectangle = diagram.Rectangle,
         Point = diagram.Point,
         Circle = diagram.Circle,
-        ZOOM_RATE = 1.1,
-        deepExtend = kendo.deepExtend,
-        Cursors = {
+        Path = diagram.Path,
+        deepExtend = kendo.deepExtend;
+    // Constants ==============================================================
+    var Cursors = {
             arrow: "default",
             grip: "pointer",
             cross: "pointer",
             add: "pointer",
             move: "move",
             select: "pointer"
-        };
+        },
+        ZOOM_RATE = 1.1;
 
     diagram.Cursors = Cursors;
 
@@ -810,12 +813,14 @@ kendo_module({
             AdornerBase.fn.init.call(that, that.shape.diagram, options);
             that.isManipulating = false;
             that.map = [];
-            for (var x = -1; x <= 1; x++) {
-                for (var y = -1; y <= 1; y++) {
-                    if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
-                        var visual = new Rectangle(that.options.handles);
-                        that.map.push({ x: x, y: y, visual: visual });
-                        that.visual.append(visual);
+            if (that.options.resizable) {
+                for (var x = -1; x <= 1; x++) {
+                    for (var y = -1; y <= 1; y++) {
+                        if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
+                            var visual = new Rectangle(that.options.handles);
+                            that.map.push({ x: x, y: y, visual: visual });
+                            that.visual.append(visual);
+                        }
                     }
                 }
             }
@@ -823,6 +828,10 @@ kendo_module({
             that.visual.append(that.text);
             that.rect = new Rectangle(that.options.rect);
             that.visual.append(that.rect);
+            if (that.options.rotatable) {
+                that.rotation = new Path(that.options.rotation);
+                that.visual.append(that.rotation);
+            }
             that.refresh();
         },
         options: {
@@ -839,6 +848,10 @@ kendo_module({
                 strokeWidth: 1,
                 strokeDashArray: "2, 2",
                 background: "none"
+            },
+            rotation: {
+                data: "M6.50012,0C8.21795,2.56698e-009 9.78015,0.666358 10.9423,1.75469L11.0482,1.85645L12.6557,0.541992L12.697,6.41699L7,5.16667L8.69918,3.77724L8.68162,3.76281C8.08334,3.28539 7.32506,3 6.50012,3C4.56709,3 3.00006,4.567 3.00006,6.5C3.00006,8.433 4.56709,10 6.50012,10C7.82908,10 8.98505,9.25935 9.57775,8.16831L9.59433,8.13594L12.333,9.37087L12.2891,9.45914C11.2124,11.5613 9.02428,13 6.50012,13C2.9102,13 -7.45058e-008,10.0899 0,6.5C-7.45058e-008,2.91015 2.9102,2.93369e-009 6.50012,0z",
+                y: -50
             },
             offset: 6
         },
@@ -867,10 +880,20 @@ kendo_module({
                 this.visual.rotate(this.options.angle, new Point(this._bounds.width / 2, this._bounds.height / 2));
             }
             this.rect.redraw({width: innerBounds.width, height: innerBounds.height});
+            if (this.rotation) {
+                this._rotationBounds = new Rect(sb.width / 2, sb.y + this.options.rotation.y, 10, 10);
+                this.rotation.redraw({x: sb.width / 2});
+            }
         },
         _hitTest: function (p) {
             p = this.diagram.transformPoint(p);
             var i, hit, handleBounds, handlesCount = this.map.length, handle;
+            if (this.options.rotatable) {
+                var rb = new Rect(this._bounds.center().x, this._bounds.y + this.options.rotation.y, 0, 0).inflate(8);
+                if (rb.contains(p)) {
+                    return new Point(-1, -2);
+                }
+            }
             if (this.options.resizable) {
                 for (i = 0; i < handlesCount; i++) {
                     handle = this.map[i];
@@ -956,25 +979,29 @@ kendo_module({
         },
         move: function (handle, p) {
             var dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds();
-            if (handle.x === -1 || (handle.x === 0 && handle.y === 0)) {
-                dtl.x = p.x - this._cp.x;
-            }
-            if (handle.x === 1 || (handle.x === 0 && handle.y === 0)) {
-                dbr.x = p.x - this._cp.x;
-            }
-            if (handle.y === -1 || (handle.x === 0 && handle.y === 0)) {
-                dtl.y = p.y - this._cp.y;
-            }
-            if (handle.y === 1 || (handle.x === 0 && handle.y === 0)) {
-                dbr.y = p.y - this._cp.y;
-            }
-            var tl = bounds.topLeft().plus(dtl);
-            var br = bounds.bottomRight().plus(dbr);
-            //cut-off
-            if (Math.abs(br.x - tl.x) > 4 || Math.abs(br.y - tl.y) > 4) {
-                this._cp = p;
-                this.shape.bounds(Rect.fn.fromPoints(tl, br));
-                this.refresh();
+            if (handle.y === -2 && handle.x === -1) {
+                this.shape.rotate(Math.findAngle(this._bounds.center(), p));
+            } else {
+                if (handle.x === -1 || (handle.x === 0 && handle.y === 0)) {
+                    dtl.x = p.x - this._cp.x;
+                }
+                if (handle.x === 1 || (handle.x === 0 && handle.y === 0)) {
+                    dbr.x = p.x - this._cp.x;
+                }
+                if (handle.y === -1 || (handle.x === 0 && handle.y === 0)) {
+                    dtl.y = p.y - this._cp.y;
+                }
+                if (handle.y === 1 || (handle.x === 0 && handle.y === 0)) {
+                    dbr.y = p.y - this._cp.y;
+                }
+                var tl = bounds.topLeft().plus(dtl);
+                var br = bounds.bottomRight().plus(dbr);
+                //cut-off
+                if (Math.abs(br.x - tl.x) > 4 || Math.abs(br.y - tl.y) > 4) {
+                    this._cp = p;
+                    this.shape.bounds(Rect.fn.fromPoints(tl, br));
+                    this.refresh();
+                }
             }
         }
     });

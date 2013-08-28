@@ -427,10 +427,10 @@ kendo_module({
             Visual.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
         },
         size: function () {
-            var x = this.options.width / 100,
-                y = this.options.height / 100;
-            var scale = new Scale(x, y);
-            this.native.setAttribute("transform", scale.toString());
+            var x = this.options.width / 100 || 1,
+                y = this.options.height / 100 || 1;
+            var transform = new CompositeTransform(this.options.x, this.options.y, x, y);
+            this.native.setAttribute("transform", transform.toString());
         },
         redraw: function (options) {
             Visual.fn.redraw.call(this, options);

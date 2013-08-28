@@ -115,6 +115,14 @@
         <h3>#:options.name#</h3>
     </div>
 </script>
+
+<!--TODO: Evaluate the template options. It does nothing for now.-->
+<script type="text/x-kendo-tmpl" id="shape-template">
+    <div>
+        <p>This is templated shape:</p>
+        <h3>#:name#</h3>
+    </div>
+</script>
 <!--<path d="#=data#" fill="#=background#"/>-->
 <!--#$("#=data").innerHtml(v); #-->
 <script>
@@ -167,7 +175,8 @@
 
     var Shapes = {
         Rectangle: {
-            data: "Rectangle"
+            data: "Rectangle",
+            template: kendo.template($("#shape-template").html())
         },
         Triangle: {
             data: "m0,100 L100,100 L50,0z"

@@ -137,10 +137,7 @@ kendo_module({
             DiagramElement.fn.init.call(that, options);
             this.isSelected = false;
             this.connectors = [];
-            this.type = "Shape";
-            if (isUndefined(this.options.data)) {
-                this.options.data = "rectangle";
-            }
+            this.type = that.options;
             this.shapeVisual = Shape.createShapeVisual(that.options);
             this.visual = new Group({
                 id: that.options.id,
@@ -159,6 +156,8 @@ kendo_module({
             this.isCollapsed = false;
         },
         options: {
+            type: "Shape",
+            data: "rectangle",
             stroke: "gray",
             strokeWidth: 0,
             strokeThickness: 1,
@@ -168,6 +167,7 @@ kendo_module({
             width: 100,
             height: 100,
             resizable: true,
+            rotatable: true,
             background: "steelblue",
             hoveredBackground: "#70CAFF",
             connectors: [
@@ -235,7 +235,7 @@ kendo_module({
             if (this.isSelected != value) {
                 this.isSelected = value;
                 if (this.isSelected) {
-                    this.adorner = new ResizingAdorner(this, { resizable: this.options.resizable, angle: this.rotate().angle });
+                    this.adorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable, angle: this.rotate().angle });
                     this.diagram._adorn(this.adorner, true);
                     this.diagram._selectedItems.push(this);
                 } else {
