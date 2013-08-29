@@ -893,8 +893,8 @@
 
                 var content = div.find(".k-scheduler-content")[0];
 
-                equal(content.offsetWidth, content.scrollWidth);
-                equal(content.offsetHeight, content.offsetHeight);
+                equalWithRound(content.offsetWidth, content.scrollWidth);
+                equalWithRound(content.offsetHeight, content.offsetHeight);
             });
 
             test("dragging the west handle moves the start of the event in month view", function() {
