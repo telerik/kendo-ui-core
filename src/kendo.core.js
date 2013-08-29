@@ -4,7 +4,7 @@
         each = $.each,
         proxy = $.proxy,
         isArray = $.isArray,
-        noop = $.noop,        
+        noop = $.noop,
         math = Math,
         Template,
         JSON = window.JSON || {},
@@ -3326,7 +3326,6 @@ function pad(number, digits, end) {
 
         function setTime(date, milliseconds, ignoreDST) {
             var offset = date.getTimezoneOffset();
-            var time = getMilliseconds(date);
             var difference;
 
             date.setTime(date.getTime() + milliseconds);
