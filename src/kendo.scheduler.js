@@ -860,6 +860,7 @@ kendo_module({
                 save: "Save",
                 cancel: "Cancel",
                 destroy: "Delete",
+                deleteWindowTitle: "Delete event",
                 views: {
                     day: "Day",
                     week: "Week",
@@ -1327,14 +1328,14 @@ kendo_module({
         _confirmation: function(callback) {
             var editable = this.options.editable;
 
-            if (editable === true || editable.confirmation) {
+            if (editable === true || editable.confirmation !== false) {
                 var messages = this.options.messages;
 
                 var text = typeof editable.confirmation === STRING ? editable.confirmation : DELETECONFIRM;
 
                 this.showDialog({
                     text: text,
-                    title: "Delete Event",
+                    title: messages.deleteWindowTitle,
                     buttons: [
                         { name: "destroy", text: messages.destroy, click: function() { callback(); } },
                         { name: "canceledit", text: messages.cancel, click: function() { callback(true); } }

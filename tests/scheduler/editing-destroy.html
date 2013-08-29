@@ -78,6 +78,21 @@
                 equal(remove.calls("remove"), 1);
                 equal(remove.args("remove")[0].uid, uid);
             });
+            
+          
+            test("confirmation message is shown when editor template is set", function() {
+                var scheduler = setup({ 
+                        editable: {
+                            template: " "
+                        }
+                }),
+                    dataSource = scheduler.dataSource,
+                    remove = stub(dataSource, "remove");
+
+                scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
+
+                equal(remove.calls("remove"), 0);
+            });
 
             test("clicking the destroy button does not call datasource remove if editable is false", function() {
                 var scheduler = setup({ editable: false }),
