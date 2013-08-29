@@ -411,12 +411,12 @@
                 equal(view.calls("render"), 1);
             });
 
-            test("renderEvent is called with events as plain objects", 1, function() {
+            test("renderEvent is called with events as SchedulerEvent", 1, function() {
                 var MyCustomView = kendo.ui.SchedulerView.extend({
                         title: "foo",
                         dateForTitle: $.noop,
                         render: function(events) {
-                            ok(!(events[0] instanceof kendo.data.SchedulerEvent));
+                            ok((events[0] instanceof kendo.data.SchedulerEvent));
                         },
                         renderLayout: function() {
                         },
@@ -484,6 +484,136 @@
                 scheduler.view().trigger("navigate", { view: "view2", date: new Date(2013, 1, 2) });
 
                 equal(rebindStub.calls("rebind"), 1);
+            });
+
+            test("work day mode is set if present in the navigate events", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.view().trigger("navigate", { view: "day", isWorkDay: true });
+
+                ok(scheduler._workDayMode);
+            });
+
+            test("work day mode is not change if not present in the navigate events", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.view().trigger("navigate", { view: "day", isWorkDay: true });
+
+                scheduler.view().trigger("navigate", { view: "day" });
+
+                ok(scheduler._workDayMode);
+            });
+
+            test("work day mode is passed to the view", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.view().trigger("navigate", { view: "day", isWorkDay: true });
+
+                ok(scheduler.view().options.workDay);
+            });
+
+            test("navigate event is rasied when view is switch to business hours", 3, function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.bind("navigate", function(e) {
+                    equal(e.isWorkDay, true);
+                    equal(e.view, "day");
+                    equal(e.action, "changeWorkDay");
+                });
+
+                scheduler.view().trigger("navigate", { view: "day", isWorkDay: true });
+            });
+
+            test("navigate event is rasied when navigating between views", 3, function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.bind("navigate", function(e) {
+                    ok(!e.isWorkDay);
+                    equal(e.view, "day");
+                    equal(e.action, "changeView");
+                });
+
+                scheduler.view().trigger("navigate", { view: "day" });
+            });
+
+            test("canceling the navigate events prevents switching the views", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.bind("navigate", function(e) {
+                    e.preventDefault();
+                });
+
+                scheduler.view().trigger("navigate", { view: "week" });
+                equal(scheduler.view().name, "day");
+            });
+
+            test("navigate event is raised when the next date button is clicked", 3, function() {
+                var selectedDate = new Date("1/2/2013"),
+                    scheduler = new Scheduler(container, {
+                        date: selectedDate,
+                        navigate: function(e) {
+                            equal(e.action, "next");
+                            deepEqual(e.date, new Date("1/3/2013"));
+                            equal(e.view, "day");
+                        }
+                    });
+
+                scheduler.toolbar.find(".k-nav-next").click();
+            });
+
+            test("navigate event is raised when the prev date button is clicked", 3, function() {
+                var selectedDate = new Date("1/2/2013"),
+                    scheduler = new Scheduler(container, {
+                        date: selectedDate,
+                        navigate: function(e) {
+                            equal(e.action, "previous");
+                            deepEqual(e.date, new Date("1/1/2013"));
+                            equal(e.view, "day");
+                        }
+                    });
+
+                scheduler.toolbar.find(".k-nav-prev").click();
+            });
+
+            test("navigate event is raised when the today date button is clicked", 3, function() {
+                var selectedDate = new Date("1/2/2013"),
+                    scheduler = new Scheduler(container, {
+                        date: selectedDate,
+                        navigate: function(e) {
+                            equal(e.action, "today");
+                            deepEqual(e.date, new Date());
+                            equal(e.view, "day");
+                        }
+                    });
+
+                scheduler.toolbar.find(".k-nav-today").click();
+            });
+
+            test("preventing navigate event does not change the selected date", function() {
+                var selectedDate = new Date("1/2/2013"),
+                    scheduler = new Scheduler(container, {
+                        date: selectedDate,
+                        navigate: function(e) {
+                            e.preventDefault();
+                        }
+                    });
+
+                scheduler.toolbar.find(".k-nav-today").click();
+
+                deepEqual(scheduler.date(), new Date("1/2/2013"));
+            });
+
+            test("navigate event is raised when button view is clicked", 3, function() {
+                var scheduler = new Scheduler(container, {
+                    views: [{ type: "day", selected: true }, "week"],
+                    navigate: function(e) {
+                        equal(e.action, "changeView");
+                        deepEqual(e.date, scheduler.date());
+                        equal(e.view, "week");
+                    }
+                });
+
+                scheduler.toolbar.find(".k-view-week").click();
             });
 
         </script>

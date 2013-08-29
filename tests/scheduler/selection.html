@@ -105,8 +105,8 @@
 
                 selection = scheduler._selection;
 
-                deepEqual(selection.start, slot.start);
-                deepEqual(selection.end, slot.end);
+                deepEqual(selection.start, slot.startDate());
+                deepEqual(selection.end, slot.endDate());
                 equal(selection.isAllDay, slot.isAllDay);
                 equal(selection.groupIndex, slot.groupIndex);
             });
@@ -124,9 +124,9 @@
 
                 selection = scheduler._selection;
 
-                equal(selection.start.getTime(), dataItem.start.getTime());
-                equal(selection.end.getTime(), dataItem.end.getTime());
-                equal(selection.isAllDay, slot.isAllDay);
+                deepEqual(selection.start, dataItem.start);
+                deepEqual(selection.end, dataItem.end);
+                equal(selection.isAllDay, false);
                 equal(selection.groupIndex, slot.groupIndex);
             });
 

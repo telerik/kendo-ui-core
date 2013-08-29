@@ -4,7 +4,7 @@
         each = $.each,
         proxy = $.proxy,
         isArray = $.isArray,
-        noop = $.noop,
+        noop = $.noop,        
         math = Math,
         Template,
         JSON = window.JSON || {},
@@ -3265,8 +3265,14 @@ function pad(number, digits, end) {
             return date;
         }
 
+        function toUtcTime(date) {
+            return  Date.UTC(date.getFullYear(), date.getMonth(),
+                        date.getDate(), date.getHours(), date.getMinutes(),
+                        date.getSeconds(), date.getMilliseconds());
+        }
+
         function getMilliseconds(date) {
-            return date.getHours() * 60 * MS_PER_MINUTE + date.getMinutes() * MS_PER_MINUTE + date.getSeconds() * 1000 + date.getMilliseconds();
+            return date.getTime() - getDate(date);
         }
 
         function isInTimeRange(value, min, max) {
@@ -3318,15 +3324,16 @@ function pad(number, digits, end) {
             return date;
         }
 
-        function setTime(date, time, ignoreDST) {
-            var offset = date.getTimezoneOffset(),
-                offsetDiff;
+        function setTime(date, milliseconds, ignoreDST) {
+            var offset = date.getTimezoneOffset();
+            var time = getMilliseconds(date);
+            var difference;
 
-            date.setTime(date.getTime() + time);
+            date.setTime(date.getTime() + milliseconds);
 
             if (!ignoreDST) {
-                offsetDiff = date.getTimezoneOffset() - offset;
-                date.setTime(date.getTime() + offsetDiff * MS_PER_MINUTE);
+                difference = date.getTimezoneOffset() - offset;
+                date.setTime(date.getTime() + difference * MS_PER_MINUTE);
             }
         }
 
@@ -3336,6 +3343,16 @@ function pad(number, digits, end) {
 
         function isToday(date) {
            return getDate(date).getTime() == today().getTime();
+        }
+
+        function toInvariantTime(date) {
+            var staticDate = new Date(1980, 1, 1, 0, 0, 0);
+
+            if (date) {
+                setTime(staticDate, getMilliseconds(date));
+            }
+
+            return staticDate;
         }
 
         return {
@@ -3352,11 +3369,13 @@ function pad(number, digits, end) {
             previousDay: function(date) {
                 return addDays(date, -1);
             },
+            toUtcTime: toUtcTime,
             MS_PER_DAY: MS_PER_DAY,
             MS_PER_MINUTE: MS_PER_MINUTE,
             setTime: setTime,
             addDays: addDays,
             today: today,
+            toInvariantTime: toInvariantTime,
             firstDayOfMonth: firstDayOfMonth,
             lastDayOfMonth: lastDayOfMonth,
             getMilliseconds: getMilliseconds

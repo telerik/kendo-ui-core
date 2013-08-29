@@ -44,13 +44,24 @@
                 QUnit.close(value, expected, 2);
             }
 
+            function testSkip() {
+               QUnit.test(arguments[0] + ' (SKIPPED)', 0, function() {
+                   var li = document.getElementById(QUnit.config.current.id);
+                   QUnit.done(function() {
+                       li.style.background = '#FFFF99';
+                   });
+               });
+            };
+
             module("resizing", {
                 setup: function() {
                     div.appendTo(document.body);
                 },
                 teardown: function() {
-                    div.kendoScheduler("destroy").empty().remove();
-                    $("[data-role=window]").kendoWindow("destroy").remove();
+                    if (div.data("kendoScheduler")) {
+                        div.kendoScheduler("destroy").empty().remove();
+                        $("[data-role=window]").kendoWindow("destroy").remove();
+                    }
                 }
             });
 
@@ -484,7 +495,7 @@
                 dragstart(scheduler, handle, handle.offset());
                 drag(scheduler, handle, slots.eq(1).prev().offset());
 
-                equal(div.find(".k-marquee:first .k-label-top").text(), "10:00 AM");
+                equal(div.find(".k-marquee:first .k-label-top").text(), "10:30 AM");
                 equal(div.find(".k-marquee:first .k-label-bottom").text(), "");
                 equal(div.find(".k-marquee:last .k-label-top").text(), "");
                 equal(div.find(".k-marquee:last .k-label-bottom").text(), "10:30 AM");
@@ -669,7 +680,7 @@
                     date: new Date("2013/6/6"),
                     views: ["week"],
                     dataSource: [
-                        { start: new Date("2013/6/2 11:00"), end: new Date("2013/6/2 11:30"), isAllDay: true, title: "" }
+                        { start: new Date("2013/6/2 12:00 AM"), end: new Date("2013/6/2 12:00 AM"), isAllDay: true, title: "" }
                     ]
                 });
 
@@ -808,7 +819,7 @@
                     date: new Date("2013/6/6"),
                     views: ["week"],
                     dataSource: [
-                        { start: new Date("2013/6/3 11:00"), end: new Date("2013/6/3 11:30"), isAllDay: true, title: "" }
+                        { start: new Date("2013/6/3 12:00 AM"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
                     ]
                 });
 
@@ -1209,7 +1220,7 @@
                 equal(scheduler.dataSource.at(1).start.getMonth(), 4);
             });
 
-            test("dragging the west handle of the exception changes the start of the exception", function() {
+            test("dragging the west handle of the exception preserve recurrenceException of the recurrence head", function() {
                 var recurrenceException = kendo.toString(kendo.timezone.apply(new Date("2013/6/7 11:00"), 0), "yyyyMMddTHHmmssZ") + ";";
 
                 var scheduler = new kendo.ui.Scheduler(div, {
@@ -1232,7 +1243,7 @@
                 equal(scheduler.dataSource.at(1).start.getDate(), 26);
                 equal(scheduler.dataSource.at(1).start.getMonth(), 4);
 
-                equal(scheduler.dataSource.at(0).recurrenceException, kendo.toString(kendo.timezone.apply(new Date("2013/5/26 00:00"), 0), "yyyyMMddTHHmmssZ") + ";");
+                equal(scheduler.dataSource.at(0).recurrenceException, recurrenceException);
             });
 
             test("east resizing is restricted by resource", function() {
@@ -1369,34 +1380,6 @@
 
                 equal(scheduler.dataSource.at(0).start.getHours(), 10);
                 equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
-            });
-
-            test("east and west resizing is disabled when grouped by date", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    startTime: new Date("2013/6/6 10:00"),
-                    endTime: new Date("2013/6/6 12:00 PM"),
-                    date: new Date("2013/6/6"),
-                    views: ["week"],
-                    dataSource: [
-                        { start: new Date("2013/6/2 11:30"), end: new Date("2013/6/3 12:00 PM"), ownerId: 1, title: "" }
-                    ],
-                    group: {
-                        resources: ["date", "Owner"]
-                    },
-                    resources: [
-                        {
-                            field: "ownerId",
-                            name: "Owner",
-                            dataSource: [
-                                { text: "Alex", value: 1, color: "red" },
-                                { text: "Bob", value: 2, color: "green" }
-                            ],
-                            title: "Owner"
-                        }
-                   ]
-                });
-
-                equal(div.find(".k-resize-e,.k-resize-w").length, 0);
             });
 
             test("east resizing hint in month view is restricted by resource", function() {
@@ -1797,6 +1780,142 @@
                 dragcancel(scheduler);
 
                 equal(div.find(".k-marquee").length, 0);
+            });
+
+            test("resizeStart event is raised", 1, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 8:00"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ],
+                    resizeStart: function(e) {
+                        equal(e.event, scheduler.dataSource.at(0));
+                    }
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(2)");
+
+                dragstart(scheduler, handle, handle.offset());
+            });
+
+            test("resize event is raised", 4, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 8:00"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ],
+                    resize: function(e) {
+                        equal(e.event, scheduler.dataSource.at(0));
+                        ok(e.slot.element);
+                        deepEqual(e.slot.start, new Date("2013/6/3"));
+                        deepEqual(e.slot.end, new Date("2013/6/4"));
+                    }
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(2)");
+
+                dragstart(scheduler, handle, handle.offset());
+                drag(scheduler, handle, slots.first().offset());
+            });
+
+            test("preventing resize event cancel the resize", 1, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 8:00"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ],
+                    resize: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(2)");
+
+                dragstart(scheduler, handle, handle.offset());
+                drag(scheduler, handle, slots.first().offset());
+
+                equal(div.find(".k-marquee").length, 0);
+            });
+
+            test("preventing resize event cancel prevent modification of the model", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 8:00"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ],
+                    resize: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                var event = scheduler.dataSource.at(0);
+                deepEqual(event.start, new Date("2013/6/2 12:00 AM"));
+                deepEqual(event.end, new Date("2013/6/3 12:00 AM"));
+            });
+
+            test("resizeEnd event is raised", 6, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 8:00"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ],
+                    resizeEnd: function(e) {
+                        equal(e.event, scheduler.dataSource.at(0));
+                        ok(e.slot.element);
+                        deepEqual(e.slot.start, new Date("2013/6/3"));
+                        deepEqual(e.slot.end, new Date("2013/6/4"));
+
+                        deepEqual(e.start, new Date("2013/6/3"));
+                        deepEqual(e.end, new Date("2013/6/3"));
+                    }
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+            });
+
+            test("preventing resizeEnd event cancel the resize", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 8:00"), end: new Date("2013/6/3 12:00 AM"), isAllDay: true, title: "" }
+                    ],
+                    resizeEnd: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var handle = div.find(".k-resize-w");
+
+                var slots = div.find(".k-scheduler-header-all-day td:nth-child(2)");
+
+                dragdrop(scheduler, handle, slots.eq(0));
+
+                var event = scheduler.dataSource.at(0);
+
+                deepEqual(event.start, new Date("2013/6/2 8:00"));
+                deepEqual(event.end, new Date("2013/6/3 12:00 AM"));
             });
 
             function dragcancel(scheduler) {

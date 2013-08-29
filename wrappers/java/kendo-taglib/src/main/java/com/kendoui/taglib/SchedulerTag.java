@@ -71,6 +71,10 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     }
 
+    public void setAdd(AddFunctionTag value) {
+        setEvent("add", value.getBody());
+    }
+
     public void setCancel(CancelFunctionTag value) {
         setEvent("cancel", value.getBody());
     }
@@ -87,8 +91,36 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setEvent("edit", value.getBody());
     }
 
+    public void setMove(MoveFunctionTag value) {
+        setEvent("move", value.getBody());
+    }
+
+    public void setMoveEnd(MoveEndFunctionTag value) {
+        setEvent("moveEnd", value.getBody());
+    }
+
+    public void setMoveStart(MoveStartFunctionTag value) {
+        setEvent("moveStart", value.getBody());
+    }
+
+    public void setNavigate(NavigateFunctionTag value) {
+        setEvent("navigate", value.getBody());
+    }
+
     public void setRemove(RemoveFunctionTag value) {
         setEvent("remove", value.getBody());
+    }
+
+    public void setResize(ResizeFunctionTag value) {
+        setEvent("resize", value.getBody());
+    }
+
+    public void setResizeEnd(ResizeEndFunctionTag value) {
+        setEvent("resizeEnd", value.getBody());
+    }
+
+    public void setResizeStart(ResizeStartFunctionTag value) {
+        setEvent("resizeStart", value.getBody());
     }
 
     public void setSave(SaveFunctionTag value) {
@@ -227,6 +259,18 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("width", value);
     }
 
+    public String getAdd() {
+        Function property = ((Function)getProperty("add"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setAdd(String value) {
+        setProperty("add", new Function(value));
+    }
+
     public String getCancel() {
         Function property = ((Function)getProperty("cancel"));
         if (property != null) {
@@ -275,6 +319,54 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("edit", new Function(value));
     }
 
+    public String getMove() {
+        Function property = ((Function)getProperty("move"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setMove(String value) {
+        setProperty("move", new Function(value));
+    }
+
+    public String getMoveEnd() {
+        Function property = ((Function)getProperty("moveEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setMoveEnd(String value) {
+        setProperty("moveEnd", new Function(value));
+    }
+
+    public String getMoveStart() {
+        Function property = ((Function)getProperty("moveStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setMoveStart(String value) {
+        setProperty("moveStart", new Function(value));
+    }
+
+    public String getNavigate() {
+        Function property = ((Function)getProperty("navigate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setNavigate(String value) {
+        setProperty("navigate", new Function(value));
+    }
+
     public String getRemove() {
         Function property = ((Function)getProperty("remove"));
         if (property != null) {
@@ -285,6 +377,42 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setRemove(String value) {
         setProperty("remove", new Function(value));
+    }
+
+    public String getResize() {
+        Function property = ((Function)getProperty("resize"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setResize(String value) {
+        setProperty("resize", new Function(value));
+    }
+
+    public String getResizeEnd() {
+        Function property = ((Function)getProperty("resizeEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setResizeEnd(String value) {
+        setProperty("resizeEnd", new Function(value));
+    }
+
+    public String getResizeStart() {
+        Function property = ((Function)getProperty("resizeStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setResizeStart(String value) {
+        setProperty("resizeStart", new Function(value));
     }
 
     public String getSave() {

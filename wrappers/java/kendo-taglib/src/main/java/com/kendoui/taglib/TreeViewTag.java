@@ -117,6 +117,14 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setEvent("select", value.getBody());
     }
 
+    public boolean getAnimation() {
+        return (boolean)getProperty("animation");
+    }
+
+    public void setAnimation(boolean value) {
+        setProperty("animation", value);
+    }
+
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }

@@ -1,0 +1,183 @@
+<div id="example" class="k-content">
+    <div id="scheduler"></div>
+</div>
+<script>
+$(function() {
+    $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/13"),
+        startTime: new Date("2013/6/13 07:00 AM"),
+        height: 600,
+        allDaySlot: false,
+        resize: function(e) {
+            if (roomIsOccupied(e.start, e.end, e.event, e.resources) || attendeeIsOccupied(e.start, e.end, e.event, e.resources)) {
+                this.wrapper.find(".k-marquee-color").addClass("invalid-slot");
+                e.preventDefault();
+            }
+        },
+        resizeEnd: function(e) {
+            if (!checkAvailability(e.start, e.end, e.events)) {
+                e.preventDefault();
+            }
+        },
+        move: function(e) {
+            if (roomIsOccupied(e.start, e.end, e.event, e.resources) || attendeeIsOccupied(e.start, e.end, e.event, e.resources)) {
+                this.wrapper.find(".k-event-drag-hint").addClass("invalid-slot");
+            }
+        },
+        moveEnd: function(e) {
+            if (!checkAvailability(e.start, e.end, e.event, e.resources)) {
+                e.preventDefault();
+            }
+        },
+        add: function(e) {
+            if (!checkAvailability(e.event.start, e.event.end, e.event)) {
+                e.preventDefault();
+            }
+        },
+        save: function(e) {
+            if (!checkAvailability(e.event.start, e.event.end, e.event)) {
+                e.preventDefault();
+            }
+        },
+        views: [
+            "day"
+        ],
+        dataSource: {
+            data: [
+                {
+                    meetingID: 1,
+                    title: "Call Charlie about the project",
+                    start: new Date("2013/6/13 10:30"),
+                    end: new Date("2013/6/13 11:30"),
+                    roomId: 1,
+                    attendee: 1
+                },
+                {
+                    meetingID: 2,
+                    title: "Performance review",
+                    start: new Date("2013/6/13 9:00"),
+                    end: new Date("2013/6/13 12:30"),
+                    roomId: 2,
+                    attendee: 2
+                },
+                {
+                    meetingID: 3,
+                    title: "HR Lecture",
+                    start: new Date("2013/6/13 13:00"),
+                    end: new Date("2013/6/13 14:30"),
+                    roomId: 1,
+                    attendee: 2
+                }
+            ],
+            schema: {
+                model: {
+                    id: "meetingID",
+                    fields: {
+                        meetingID: { type: "number" },
+                        title: { defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date" },
+                        end: { type: "date" },
+                        roomId: { nullable: true },
+                        attendee: { defaultValue: 1 },
+                        isAllDay: { type: "boolean" }
+                    }
+                }
+            }
+        },
+        group: {
+            resources: [ "room" ]
+        },
+        resources: [
+            {
+                field: "attendee",
+                dataSource: [
+                    { text: "Alex", value: 1, color: "#f8a398" },
+                    { text: "Bob", value: 2, color: "#51a0ed" }
+                ],
+                title: "Attendee"
+            },
+            {
+                field: "roomId",
+                name: "room",
+                dataSource: [
+                    { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                    { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                ],
+                title: "Room"
+            }
+        ]
+    });
+
+    function occurrencesInRangeByResource(start, end, resourceFieldName, event, resources) {
+        var scheduler = $("#scheduler").getKendoScheduler();
+
+        var occurrences = scheduler.occurrencesInRange(start, end);
+
+        var idx = occurrences.indexOf(event);
+        if (idx > -1) {
+           occurrences.splice(idx, 1);
+        }
+
+        event = $.extend({}, event, resources);
+
+        return filterByResource(occurrences, resourceFieldName, event[resourceFieldName]);
+    }
+
+    function filterByResource(occurrences, resourceFieldName, value) {
+        var result = [];
+        var occurrence;
+
+        for(var idx = 0, length = occurrences.length; idx < length; idx++) {
+            occurrence = occurrences[idx];
+            if (occurrence[resourceFieldName] === value) {
+                result.push(occurrence);
+            }
+        }
+        return result;
+    }
+
+    function attendeeIsOccupied(start, end, event, resources) {
+        var occurrences = occurrencesInRangeByResource(start, end, "attendee", event, resources);
+        if (occurrences.length > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    function roomIsOccupied(start, end, event, resources) {
+        var occurrences = occurrencesInRangeByResource(start, end, "roomId", event, resources);
+        if (occurrences.length > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    function checkAvailability(start, end, event, resources) {
+
+        if (attendeeIsOccupied(start, end, event, resources)) {
+            setTimeout(function() {
+                alert("This person is not available in this time period.");
+            }, 0);
+
+            return false;
+        }
+
+        if (roomIsOccupied(start, end, event, resources)) {
+            setTimeout(function() {
+                alert("This room is not available in this time period.");
+            }, 0);
+
+            return false;
+        }
+
+        return true;
+    }
+});
+</script>
+
+<style>
+    .invalid-slot {
+        background: red !important;
+        cursor: no-drop;
+    }
+</style>

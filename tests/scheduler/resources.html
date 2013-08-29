@@ -43,12 +43,27 @@
                 equal($(element)[0].style.backgroundColor, color);
             }
 
+            function equalWithRound(value, expected) {
+                QUnit.close(value, expected, 3);
+            }
+
+            function testSkip() {
+               QUnit.test(arguments[0] + ' (SKIPPED)', 0, function() {
+                   var li = document.getElementById(QUnit.config.current.id);
+                   QUnit.done(function() {
+                       li.style.background = '#FFFF99';
+                   });
+               });
+            };
+
             module("resources", {
                 setup: function() {
                     div.appendTo(document.body);
                 },
                 teardown: function() {
-                   div.kendoScheduler("destroy").empty().remove();
+                    if (div.data("kendoScheduler")) {
+                       div.kendoScheduler("destroy").empty().remove();
+                   }
                 }
             });
 
@@ -816,7 +831,7 @@
                 var view = scheduler.view();
 
                 equal(view.content.find(".k-event").length, 1);
-                equal(view._columns[1].events.length, 1);
+                equal(view.groups[1].getTimeSlotCollection(0).events().length, 1);
             });
 
             test("events are position in the correct group in day view in vertical orientation", function() {
@@ -845,7 +860,8 @@
 
                 var view = scheduler.view();
                 equal(view.content.find(".k-event").length, 2);
-                equal(view._columns[0].events.length, 2);
+                equal(view.groups[0].getTimeSlotCollection(0).events().length, 1);
+                equal(view.groups[1].getTimeSlotCollection(0).events().length, 1);
             });
 
             test("multi day events are position in the correct group in day view", function() {
@@ -871,9 +887,9 @@
                 });
 
                 var view = scheduler.view();
-                var event = view._rows[0].events[0];
+                var event = view.groups[0].getDaySlotCollection(0).events()[0];
                 equal(view.datesHeader.find(".k-event").length, 1);
-                equal(view._rows[0].events.length, 1);
+                equal(view.groups[0].getDaySlotCollection(0).events().length, 1);
                 equal(event.start, 0);
                 equal(event.end, 0);
             });
@@ -903,9 +919,9 @@
                 });
 
                 var view = scheduler.view();
-                var event = view._columns[0].events[0];
+                var event = view.groups[0].getTimeSlotCollection(0).events()[0];
                 equal(event.start, 20);
-                equal(event.end, 28);
+                equal(event.end, 27);
             });
 
             test("multiple copies of the event are position in the correct group in day view when multiple resources matched", function() {
@@ -934,15 +950,18 @@
                         }
 
                     ],
-                    dataSource: [ { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 12:00"), title:"foo", foo: 2, bar: [ 1, 2] } ],
+                    dataSource: [ { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 12:00"), title:"foo", foo: 2, bar: [1, 2] } ],
                     views: ["day"]
                 });
 
                 var view = scheduler.view();
 
                 equal(view.content.find(".k-event").length, 2);
-                equal(view._columns[2].events.length, 1);
-                equal(view._columns[3].events.length, 1);
+
+                var event = view.groups[0].getTimeSlotCollection(0).events()[0];
+
+                equal(view.groups[2].getTimeSlotCollection(0).events().length, 1);
+                equal(view.groups[3].getTimeSlotCollection(0).events().length, 1);
             });
 
             test("double clicking a day view cell triggers add event with grouping", 2, function() {
@@ -1057,10 +1076,11 @@
 
                 var view = scheduler.view();
 
-                var slotEvents = view._columns[0].events;
+                var slotEvents = view.groups[1].getTimeSlotCollection(0).events();
+
                 equal(slotEvents.length, 1);
-                equal(slotEvents[0].start, 12);
-                equal(slotEvents[0].end, 14);
+                equal(slotEvents[0].start, 2);
+                equal(slotEvents[0].end, 3);
             });
 
             test("double clicking the first all day slot triggers add event in day view with vertical orientation", 1, function() {
@@ -1175,7 +1195,7 @@
 
                 var view = scheduler.view();
 
-                equal(view._rows[0].events.length, 1);
+                equal(view.groups[1].getDaySlotCollection(0).events().length, 1);
             });
 
             test("all day events are added in the correct group allday slot when vertical grouping is applyed", function() {
@@ -1201,7 +1221,7 @@
 
                 var view = scheduler.view();
 
-                equal(view._rows[1].events.length, 1);
+                equal(view.groups[1].getDaySlotCollection(0).events().length, 1);
             });
 
             test("slots offsetTop is updated when all day event is inserted when vertical grouping is applyed", function() {
@@ -1226,20 +1246,20 @@
                 });
 
                 var view = scheduler.view();
-                var slots = view._columns[0].slots;
+                var slots = view.groups[0].getTimeSlotCollection(0);
 
                 var initialHeight = view._allDayHeaderHeight;
-                var firstSlotTop = slots[0].offsetTop;
-                var lastSlotTop = slots[slots.length - 1].offsetTop;
+                var firstSlotTop = slots.first().offsetTop;
+                var lastSlotTop = slots.last().offsetTop;
 
                 scheduler.dataSource.add({ start: new Date("2013/6/6 10:00 AM"), end: new Date("2013/6/6 11:00 AM"), isAllDay: true, title: "", foo: 1 });
 
                 var offset = view.element.find(".k-scheduler-header-all-day").first()[0].clientHeight - initialHeight;
 
-                slots = view._columns[0].slots;
+                slots = view.groups[0].getTimeSlotCollection(0);
 
-                equal(slots[0].offsetTop, firstSlotTop + offset);
-                equal(slots[slots.length - 1].offsetTop, lastSlotTop + offset * 2);  // there are two headers before this
+                equalWithRound(slots.first().offsetTop, firstSlotTop + offset);
+                equalWithRound(slots.last().offsetTop, lastSlotTop + offset);
             });
 
             test("slotByPosition returns correct date for slot for the last group with vertical orientation", function() {
@@ -1268,8 +1288,8 @@
 
                 var info = view._slotByPosition(slot.offset().left, slot.offset().top);
 
-                deepEqual(info.start, new Date("2013/6/6 11:30 PM"));
-                deepEqual(info.end, new Date("2013/6/7 00:00 AM"));
+                deepEqual(info.startDate(), new Date("2013/6/6 11:30 PM"));
+                deepEqual(info.endDate(), new Date("2013/6/7 00:00 AM"));
             });
 
             test("events are repositioned after all day slot is resized when vertically grouped", function() {
@@ -1294,7 +1314,6 @@
                 });
 
                 var view = scheduler.view();
-                var slots = view._columns[0].slots;
 
                 var eventInitialTop = view.content.find(".k-event")[0].offsetTop;
 
@@ -1304,7 +1323,7 @@
 
                 var offset = view.element.find(".k-scheduler-header-all-day").first()[0].clientHeight - initialHeight;
 
-                equal(view.content.find(".k-event:last")[0].offsetTop, eventInitialTop + offset * 2);
+                equalWithRound(view.content.find(".k-event:last")[0].offsetTop, eventInitialTop + offset * 2);
             });
 
             test("last slot in the group has correct date when groupped vertically", function() {
@@ -1331,336 +1350,9 @@
 
                 var view = scheduler.view();
 
-                var slot = view._columns[0].slots[25];
-                deepEqual(slot.start, new Date("2013/6/6 23:30"));
-                deepEqual(slot.end, new Date("2013/6/7 00:00"));
-            });
-
-            test("date header is at the top when group by date", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [ ],
-                    views: ["day"]
-                });
-
-                var view = scheduler.view();
-
-                equal(view.datesHeader.find("tr:first th").text(), "Thu 6/06");
-            });
-
-            test("slots for the same date but in diffrent groups as correct start and end date set", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [ ],
-                    views: ["day"]
-                });
-
-                var view = scheduler.view();
-                var firstGroupSlots = view._columns[0].slots;
-                var secondGroupSlots = view._columns[0].slots;
-
-                deepEqual(firstGroupSlots[0].start, new Date("2013/6/6 00:00"));
-                deepEqual(firstGroupSlots[0].end, new Date("2013/6/6 00:30"));
-                deepEqual(firstGroupSlots[firstGroupSlots.length - 1].start, new Date("2013/6/6 23:30"));
-                deepEqual(firstGroupSlots[firstGroupSlots.length - 1].end, new Date("2013/6/7 00:00"));
-
-                deepEqual(secondGroupSlots[0].start, new Date("2013/6/6 00:00"));
-                deepEqual(secondGroupSlots[0].end, new Date("2013/6/6 00:30"));
-                deepEqual(secondGroupSlots[secondGroupSlots.length - 1].start, new Date("2013/6/6 23:30"));
-                deepEqual(secondGroupSlots[secondGroupSlots.length - 1].end, new Date("2013/6/7 00:00"));
-            });
-
-            test("slots for the same date but in diffrent groups as correct start and end date set in week view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [ ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-                var firstGroupSlots = view._columns[0].slots;
-                var secondGroupSlots = view._columns[1].slots;
-
-                var secondDateFirstGroupSlots = view._columns[2].slots;
-                var secondDateSecondGroupSlots = view._columns[3].slots;
-
-                deepEqual(firstGroupSlots[0].start, new Date("2013/6/2 00:00"));
-                deepEqual(firstGroupSlots[0].end, new Date("2013/6/2 00:30"));
-                deepEqual(firstGroupSlots[firstGroupSlots.length - 1].start, new Date("2013/6/2 23:30"));
-                deepEqual(firstGroupSlots[firstGroupSlots.length - 1].end, new Date("2013/6/3 00:00"));
-
-                deepEqual(secondGroupSlots[0].start, new Date("2013/6/2 00:00"));
-                deepEqual(secondGroupSlots[0].end, new Date("2013/6/2 00:30"));
-                deepEqual(secondGroupSlots[secondGroupSlots.length - 1].start, new Date("2013/6/2 23:30"));
-                deepEqual(secondGroupSlots[secondGroupSlots.length - 1].end, new Date("2013/6/3 00:00"));
-
-                deepEqual(secondDateFirstGroupSlots[0].start, new Date("2013/6/3 00:00"));
-                deepEqual(secondDateFirstGroupSlots[0].end, new Date("2013/6/3 00:30"));
-                deepEqual(secondDateFirstGroupSlots[secondDateFirstGroupSlots.length - 1].start, new Date("2013/6/3 23:30"));
-                deepEqual(secondDateFirstGroupSlots[secondDateFirstGroupSlots.length - 1].end, new Date("2013/6/4 00:00"));
-
-                deepEqual(secondDateSecondGroupSlots[0].start, new Date("2013/6/3 00:00"));
-                deepEqual(secondDateSecondGroupSlots[0].end, new Date("2013/6/3 00:30"));
-                deepEqual(secondDateSecondGroupSlots[secondDateSecondGroupSlots.length - 1].start, new Date("2013/6/3 23:30"));
-                deepEqual(secondDateSecondGroupSlots[secondDateSecondGroupSlots.length - 1].end, new Date("2013/6/4 00:00"));
-            });
-
-            test("event on the same date but in diffrent groups are position correctly in week view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [
-                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/2 11:00"), title: "Group 1", foo: 1 },
-                        { start: new Date("2013/6/3 10:00"), end: new Date("2013/6/3 11:00"), title: "Group 1", foo: 1 }
-                    ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-
-                equal(view._columns[0].events.length, 1);
-                equal(view._columns[0].events[0].start, 20);
-                equal(view._columns[2].events.length, 1);
-                equal(view._columns[2].events[0].start, 20);
-            });
-
-            test("event on diffrent dates from same group are position correctly", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [
-                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "Group 1", foo: 1 },
-                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "Group 2", foo: 2 }
-                    ],
-                    views: ["day"]
-                });
-
-                var view = scheduler.view();
-
-                equal(view._columns[0].events.length, 1);
-                equal(view._columns[0].events[0].start, 20);
-                equal(view._columns[1].events.length, 1);
-                equal(view._columns[1].events[0].start, 20);
-            });
-
-            test("correct number of header are render when grouped by date in day view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    allDaySlot: false,
-                    dataSource: [ ],
-                    views: ["day"]
-                });
-
-                var view = scheduler.view();
-
-                equal(view.datesHeader.find("tr").length, 2);
-                equal(view.datesHeader.find("tr:last th").length, 2);
-            });
-
-            test("all day event is split in the correct slots when grouped by date in week view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [
-                        { start: new Date("2013/6/2 10:00"), end: new Date("2013/6/4 11:00"), isAllDay: true, title: "Event 1", foo: 1 }
-                    ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-
-                equal(view._rows[0].events.length, 3);
-                equal(view._rows[0].events[0].start, 0);
-                equal(view._rows[0].events[0].end, 0);
-                equal(view._rows[0].events[1].end, 2);
-                equal(view._rows[0].events[1].end, 2);
-                equal(view._rows[0].events[2].end, 4);
-                equal(view._rows[0].events[2].end, 4);
-            });
-
-            test("multiple day event (in the end of the week) is split in the correct slots when grouped by date in week view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [
-                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/8 11:00"), isAllDay: true, title: "Event 1", foo: 1 }
-                    ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-
-                equal(view._rows[0].events.length, 3);
-                equal(view._rows[0].events[0].start, 8);
-                equal(view._rows[0].events[0].end, 8);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[2].end, 12);
-                equal(view._rows[0].events[2].end, 12);
-            });
-
-            test("multiple day event (in the end of the week) is split in the correct slots when grouped by date in week view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [
-                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/8 11:00"), title: "Event 1", foo: 1 }
-                    ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-
-                equal(view._rows[0].events.length, 3);
-                equal(view._rows[0].events[0].start, 8);
-                equal(view._rows[0].events[0].end, 8);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[2].end, 12);
-                equal(view._rows[0].events[2].end, 12);
-            });
-
-            test("one day event is split in the correct slots when grouped by date in week view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: [ "date", "ResourceName", "ResourceName2"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-                    ],
-                    dataSource: [
-                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/7 00:00"), isAllDay: true, title: "Event 1", foo: 1 }
-                    ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-
-                equal(view._rows[0].events.length, 2);
-                equal(view._rows[0].events[0].start, 8);
-                equal(view._rows[0].events[0].end, 8);
-                equal(view._rows[0].events[1].end, 10);
-                equal(view._rows[0].events[1].end, 10);
+                var slot = view.groups[0].getTimeSlotCollection(0).last();
+                deepEqual(slot.startDate(), new Date("2013/6/6 23:30"));
+                deepEqual(slot.endDate(), new Date("2013/6/7 00:00"));
             });
 
             test("group index is set to the row slot with horizontal grouping in week view", function() {
@@ -1693,14 +1385,19 @@
                 });
 
                 var view = scheduler.view();
-                var slots = view._rows[0].slots;
+                var slots = view.groups[0].getDaySlotCollection(0);
 
-                equal(slots[0].groupIndex, 0);
-                equal(slots[6].groupIndex, 0);
+                equal(slots.first().groupIndex, 0);
+                equal(slots.last().groupIndex, 0);
 
-                equal(slots[7].groupIndex, 1);
-                equal(slots[13].groupIndex, 1);
-                equal(slots[14].groupIndex, 2);
+                slots = view.groups[1].getDaySlotCollection(0);
+
+                equal(slots.first().groupIndex, 1);
+                equal(slots.last().groupIndex, 1);
+
+                slots = view.groups[2].getDaySlotCollection(0);
+                equal(slots.first().groupIndex, 2);
+                equal(slots.last().groupIndex, 2);
             });
 
             test("group index is set to the row slot with vertical grouping in week view", function() {
@@ -1733,13 +1430,15 @@
                     views: ["week"]
                 });
 
+
                 var view = scheduler.view();
+                var slots = view.groups[0].getDaySlotCollection(0);
+                equal(slots.first().groupIndex, 0);
+                equal(slots.last().groupIndex, 0);
 
-                equal(view._rows[0].slots[0].groupIndex, 0);
-                equal(view._rows[0].slots[6].groupIndex, 0);
-
-                equal(view._rows[1].slots[0].groupIndex, 1);
-                equal(view._rows[1].slots[6].groupIndex, 1);
+                slots = view.groups[1].getDaySlotCollection(0);
+                equal(slots.first().groupIndex, 1);
+                equal(slots.last().groupIndex, 1);
             });
 
 
@@ -1774,22 +1473,26 @@
 
                 var view = scheduler.view();
 
-                equal(view._columns[0].slots[0].groupIndex, 0);
-                equal(view._columns[1].slots[0].groupIndex, 0);
-                equal(view._columns[2].slots[0].groupIndex, 0);
-                equal(view._columns[3].slots[0].groupIndex, 0);
-                equal(view._columns[6].slots[0].groupIndex, 0);
+                var view = scheduler.view();
+                var slots = view.groups[0].getTimeSlotCollection(0);
 
-                equal(view._columns[7].slots[0].groupIndex, 1);
-                equal(view._columns[8].slots[0].groupIndex, 1);
-                equal(view._columns[9].slots[0].groupIndex, 1);
-                equal(view._columns[10].slots[0].groupIndex, 1);
-                equal(view._columns[13].slots[0].groupIndex, 1);
+                equal(slots.first().groupIndex, 0);
+                equal(slots.last().groupIndex, 0);
 
-                equal(view._columns[14].slots[0].groupIndex, 2);
-                equal(view._columns[20].slots[0].groupIndex, 2);
+                slots = view.groups[1].getTimeSlotCollection(0);
 
-                equal(view._columns[21].slots[0].groupIndex, 3);
+                equal(slots.first().groupIndex, 1);
+                equal(slots.last().groupIndex, 1);
+
+                slots = view.groups[2].getTimeSlotCollection(0);
+
+                equal(slots.first().groupIndex, 2);
+                equal(slots.last().groupIndex, 2);
+
+                slots = view.groups[3].getTimeSlotCollection(0);
+
+                equal(slots.first().groupIndex, 3);
+                equal(slots.last().groupIndex, 3);
             });
 
             test("group index is set to the slot with vertical grouping in day view", function() {
@@ -1824,57 +1527,15 @@
 
                 var view = scheduler.view();
 
-                var slots = view._columns[0].slots;
-                equal(slots[0].groupIndex, 0);
-                equal(slots[48].groupIndex, 1);
-                equal(slots[49].groupIndex, 1);
-            });
+                var slots = view.groups[0].getTimeSlotCollection(0);
 
-            test("group index is set to the slot with horizontal grouping on date in week view", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: ["date", "ResourceName", "ResourceName2"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        },
-                        {
-                            field: "bar",
-                            name: "ResourceName2",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
+                equal(slots.first().groupIndex, 0);
+                equal(slots.last().groupIndex, 0);
 
-                    ],
-                    dataSource: [ ],
-                    views: ["week"]
-                });
+                var slots = view.groups[1].getTimeSlotCollection(0);
 
-                var view = scheduler.view();
-                equal(view._columns.length, 28);
-                equal(view._columns[0].slots[0].groupIndex, 0);
-                equal(view._columns[1].slots[0].groupIndex, 0);
-                equal(view._columns[2].slots[0].groupIndex, 0);
-                equal(view._columns[3].slots[0].groupIndex, 0);
-
-                equal(view._columns[4].slots[0].groupIndex, 1);
-                equal(view._columns[5].slots[0].groupIndex, 1);
-                equal(view._columns[6].slots[0].groupIndex, 1);
-                equal(view._columns[7].slots[0].groupIndex, 1);
-
-                equal(view._columns[8].slots[0].groupIndex, 2);
-                equal(view._columns[9].slots[0].groupIndex, 2);
-                equal(view._columns[10].slots[0].groupIndex, 2);
-                equal(view._columns[11].slots[0].groupIndex, 2);
+                equal(slots.first().groupIndex, 1);
+                equal(slots.last().groupIndex, 1);
             });
 
             test("double clicking a day view cell triggers add event with resources information with horizontal single grouping", 3, function() {
@@ -2138,41 +1799,6 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
-            test("slot end date is set when grouped vertically", function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: ["ResourceName", "ResourceName2"],
-                        orientation: "vertical"
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        },
-                        {
-                            field: "bar",
-                            name: "ResourceName2",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-
-                    ],
-                    dataSource: [ ],
-                    views: ["day"]
-                });
-
-                var view = scheduler.view();
-                deepEqual(view._columns[0].slots[12].start, new Date("2013/6/6 6:00"));
-                deepEqual(view._columns[0].slots[12].end, new Date("2013/6/6 6:30"));
-            });
-
             test("event in the last slot is position correctly when grouped vertically", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -2204,100 +1830,9 @@
                 });
 
                 var view = scheduler.view();
-                equal(view._columns[0].events[0].start, 95);
-                equal(view._columns[0].events[0].end, 96);
-            });
 
-            test("double clicking a week view cell triggers add event with resources information and horizontal grouped by date", 4, function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: ["date", "ResourceName", "ResourceName2"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        },
-                        {
-                            field: "bar",
-                            name: "ResourceName2",
-                            multiple: true,
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-
-                    ],
-                    dataSource: [ ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-
-                view.bind("add", function(e) {
-                    var event = e.eventInfo;
-
-                    deepEqual(event.start, new Date(2013, 5, 3, 2, 0, 0));
-                    deepEqual(event.end, new Date(2013, 5, 3, 2, 30, 0));
-
-                    equal(event.foo, 2);
-                    equal(event.bar[0], 1);
-                });
-
-                var cell = view.content.find("tr:eq(4) td:eq(6)");
-                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
-            });
-
-            test("double clicking a week view all day cell triggers add event with resources information and horizontal grouped by date", 4, function() {
-                var scheduler = new kendo.ui.Scheduler(div, {
-                    date: new Date("2013/6/6"),
-                    group: {
-                        resources: ["date", "ResourceName", "ResourceName2"]
-                    },
-                    resources: [
-                        {
-                            field: "foo",
-                            name: "ResourceName",
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        },
-                        {
-                            field: "bar",
-                            name: "ResourceName2",
-                            multiple: true,
-                            dataSource: [
-                                { text: "Foo 1", value: 1, color: "red" },
-                                { text: "Foo 2", value: 2, color: "green" }
-                            ]
-                        }
-
-                    ],
-                    dataSource: [ ],
-                    views: ["week"]
-                });
-
-                var view = scheduler.view();
-
-                view.bind("add", function(e) {
-                    var event = e.eventInfo;
-
-                    deepEqual(event.start, new Date(2013, 5, 3, 0, 0, 0));
-                    deepEqual(event.end, new Date(2013, 5, 3, 0, 0, 0));
-
-                    equal(event.foo, 2);
-                    equal(event.bar[0], 1);
-                });
-
-                var cell = view.datesHeader.find(".k-scheduler-header-all-day td:eq(6)");
-                cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
+                equal(view.groups[1].getTimeSlotCollection(0).events()[0].start, 47);
+                equal(view.groups[1].getTimeSlotCollection(0).events()[0].end, 47);
             });
 
             test("headers are rendered for groups in month view", function() {
@@ -2377,7 +1912,7 @@
                 equal(view.times.find("th.k-hidden").length, 6*2);
             });
 
-            test("event is position based on the group in horizontally oriented group month view - event in the first group first row", function() {
+            test("event is positioned based on the group in horizontally oriented group month view - event in the first group first row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -2399,12 +1934,12 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 4);
-                equal(view._row.events[0].end, 4);
+                equal(view.groups[0].getDaySlotCollection(0).events().length, 1);
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].start, 4);
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].end, 4);
             });
 
-            test("event is position based on the group in horizontally oriented group month view - event in the first group second row", function() {
+            test("event is positioned based on the group in horizontally oriented group month view - event in the first group second row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -2426,12 +1961,12 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 18);
-                equal(view._row.events[0].end, 18);
+                equal(view.groups[0].getDaySlotCollection(1).events().length, 1);
+                equal(view.groups[0].getDaySlotCollection(1).events()[0].start, 4);
+                equal(view.groups[0].getDaySlotCollection(1).events()[0].end, 4);
             });
 
-            test("event is position based on the group in horizontally oriented group month view - event in the first group third row", function() {
+            test("event is positioned based on the group in horizontally oriented group month view - event in the first group third row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -2453,12 +1988,12 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 32);
-                equal(view._row.events[0].end, 32);
+                equal(view.groups[0].getDaySlotCollection(2).events().length, 1);
+                equal(view.groups[0].getDaySlotCollection(2).events()[0].start, 4);
+                equal(view.groups[0].getDaySlotCollection(2).events()[0].end, 4);
             });
 
-            test("event is position based on the group in horizontally oriented group month view - event in the first group last row", function() {
+            test("event is positioned based on the group in horizontally oriented group month view - event in the first group last row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -2480,9 +2015,9 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 74);
-                equal(view._row.events[0].end, 74);
+                equal(view.groups[0].getDaySlotCollection(5).events().length, 1);
+                equal(view.groups[0].getDaySlotCollection(5).events()[0].start, 4);
+                equal(view.groups[0].getDaySlotCollection(5).events()[0].end, 4);
             });
 
             test("event is position based on the group in horizontally oriented group month view - event in the second group first row", function() {
@@ -2507,12 +2042,12 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 11);
-                equal(view._row.events[0].end, 11);
+                equal(view.groups[1].getDaySlotCollection(0).events().length, 1);
+                equal(view.groups[1].getDaySlotCollection(0).events()[0].start, 4);
+                equal(view.groups[1].getDaySlotCollection(0).events()[0].end, 4);
             });
 
-            test("event is position based on the group in horizontally oriented group month view - event in the second group second row", function() {
+            test("event is positioned based on the group in horizontally oriented group month view - event in the second group second row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -2534,12 +2069,12 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 25);
-                equal(view._row.events[0].end, 25);
+                equal(view.groups[1].getDaySlotCollection(1).events().length, 1);
+                equal(view.groups[1].getDaySlotCollection(1).events()[0].start, 4);
+                equal(view.groups[1].getDaySlotCollection(1).events()[0].end, 4);
             });
 
-            test("event is position based on the group in horizontally oriented group month view - event in the second group third row", function() {
+            test("event is positioned based on the group in horizontally oriented group month view - event in the second group third row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -2561,9 +2096,9 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 39);
-                equal(view._row.events[0].end, 39);
+                equal(view.groups[1].getDaySlotCollection(2).events().length, 1);
+                equal(view.groups[1].getDaySlotCollection(2).events()[0].start, 4);
+                equal(view.groups[1].getDaySlotCollection(2).events()[0].end, 4);
             });
 
             test("event is position based on the group in horizontally oriented group month view - event in the second group last row", function() {
@@ -2588,9 +2123,9 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 81);
-                equal(view._row.events[0].end, 81);
+                equal(view.groups[1].getDaySlotCollection(5).events().length, 1);
+                equal(view.groups[1].getDaySlotCollection(5).events()[0].start, 4);
+                equal(view.groups[1].getDaySlotCollection(5).events()[0].end, 4);
             });
 
             test("event passing the end of the month is position based on the group in horizontally oriented group month view - event in the second group", function() {
@@ -2615,10 +2150,9 @@
 
                 var view = scheduler.view();
 
-                var events = view._row.events;
-                equal(events.length, 6);
-                equal(events[events.length - 1].start, 77);
-                equal(events[events.length - 1].end, 83);
+                var events = view.groups[1].getDaySlotCollection(5).events();
+                equal(events[events.length - 1].start, 0);
+                equal(events[events.length - 1].end, 6);
             });
 
             test("event starting before the month start is position based on the group in horizontally oriented group month view - event in the second group", function() {
@@ -2643,12 +2177,13 @@
 
                 var view = scheduler.view();
 
-                var events = view._row.events;
-                equal(events.length, 2);
-                equal(events[0].start, 7);
-                equal(events[0].end, 13);
-                equal(events[events.length - 1].start, 21);
-                equal(events[events.length - 1].end, 25);
+                var events = view.groups[1].getDaySlotCollection(0).events();
+                equal(events[0].start, 0);
+                equal(events[0].end, 6);
+
+                events = view.groups[1].getDaySlotCollection(1).events();
+                equal(events[0].start, 0);
+                equal(events[0].end, 4);
             });
 
             test("event starting before the month start is position based on the group in horizontally oriented group month view - event in the first group", function() {
@@ -2673,12 +2208,13 @@
 
                 var view = scheduler.view();
 
-                var events = view._row.events;
-                equal(events.length, 2);
+                var events = view.groups[0].getDaySlotCollection(0).events();
                 equal(events[0].start, 0);
                 equal(events[0].end, 6);
-                equal(events[events.length - 1].start, 14);
-                equal(events[events.length - 1].end, 18);
+
+                events = view.groups[0].getDaySlotCollection(1).events();
+                equal(events[0].start, 0);
+                equal(events[0].end, 4);
             });
 
             test("event passing the end of the month is position based on the group in horizontally oriented group month view - event in the first group", function() {
@@ -2703,13 +2239,12 @@
 
                 var view = scheduler.view();
 
-                var events = view._row.events;
-                equal(events.length, 6);
-                equal(events[events.length - 1].start, 70);
-                equal(events[events.length - 1].end, 76);
+                var events = view.groups[0].getDaySlotCollection(5).events();
+                equal(events[events.length - 1].start, 0);
+                equal(events[events.length - 1].end, 6);
             });
 
-            test("event is position based on the group in horizontally oriented multiple group month view - event in the second group", function() {
+            test("event is positioned based on the group in horizontally oriented multiple group month view - event in the second group", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -2740,9 +2275,9 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 53);
-                equal(view._row.events[0].end, 53);
+                var events = view.groups[3].getDaySlotCollection(1).events();
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
             test("event is position based on the group in horizontally oriented multiple group month view - event in the first group", function() {
@@ -2776,9 +2311,9 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 39);
-                equal(view._row.events[0].end, 39);
+                var events = view.groups[1].getDaySlotCollection(1).events();
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
             test("event passing the end of the month is position based on the group in horizontally oriented multiple group month view - event in the first group", function() {
@@ -2812,10 +2347,9 @@
 
                 var view = scheduler.view();
 
-                var events = view._row.events;
-                equal(events.length, 6);
-                equal(events[events.length - 1].start, 147);
-                equal(events[events.length - 1].end, 153);
+                var events = view.groups[1].getDaySlotCollection(3).events();
+                equal(events[0].start, 0);
+                equal(events[0].end, 6);
             });
 
             test("double clicking a month view slot triggers add event with resources information with horizontal single grouping - first row first group", 3, function() {
@@ -3142,7 +2676,7 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
-            test("event is position based on the group in vertically oriented group month view - event in the first group first row", function() {
+            test("event is positioned based on the group in vertically oriented group month view - event in the first group first row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -3165,13 +2699,13 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 4);
-                equal(view._row.events[0].end, 4);
-                equal(view._row.slots[4].groupIndex, 0);
+                var events = view.groups[0].getDaySlotCollection(0).events();
+                equal(events.length, 1);
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
-            test("event is position based on the group in vertically oriented group month view - event in the first group second row", function() {
+            test("event is positioned based on the group in vertically oriented group month view - event in the first group second row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -3194,13 +2728,13 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 11);
-                equal(view._row.events[0].end, 11);
-                equal(view._row.slots[11].groupIndex, 0);
+                var events = view.groups[0].getDaySlotCollection(1).events();
+                equal(events.length, 1);
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
-            test("event is position based on the group in vertically oriented group month view - event in the first group third row", function() {
+            test("event is positioned based on the group in vertically oriented group month view - event in the first group third row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -3223,13 +2757,13 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 18);
-                equal(view._row.events[0].end, 18);
-                equal(view._row.slots[18].groupIndex, 0);
+                var events = view.groups[0].getDaySlotCollection(2).events();
+                equal(events.length, 1);
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
-            test("event is position based on the group in vertically oriented group month view - event in the first group last row", function() {
+            test("event is positioned based on the group in vertically oriented group month view - event in the first group last row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -3252,13 +2786,13 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 39);
-                equal(view._row.events[0].end, 39);
-                equal(view._row.slots[39].groupIndex, 0);
+                var events = view.groups[0].getDaySlotCollection(5).events();
+                equal(events.length, 1);
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
-            test("event is position based on the group in vertically oriented group month view - event in the second group first row", function() {
+            test("event is positioned based on the group in vertically oriented group month view - event in the second group first row", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     group: {
@@ -3281,10 +2815,10 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 46);
-                equal(view._row.events[0].end, 46);
-                equal(view._row.slots[46].groupIndex, 1);
+                var events = view.groups[1].getDaySlotCollection(0).events();
+                equal(events.length, 1);
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
             test("event is position based on the group in vertically oriented group month view - event in the second group second row", function() {
@@ -3310,10 +2844,10 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 53);
-                equal(view._row.events[0].end, 53);
-                equal(view._row.slots[53].groupIndex, 1);
+                var events = view.groups[1].getDaySlotCollection(1).events();
+                equal(events.length, 1);
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
             test("event is position based on the group in vertically oriented group month view - event in the second group third row", function() {
@@ -3339,10 +2873,10 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 60);
-                equal(view._row.events[0].end, 60);
-                equal(view._row.slots[60].groupIndex, 1);
+                var events = view.groups[1].getDaySlotCollection(2).events();
+                equal(events.length, 1);
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
             test("event is position based on the group in vertically oriented group month view - event in the second group last row", function() {
@@ -3368,10 +2902,10 @@
 
                 var view = scheduler.view();
 
-                equal(view._row.events.length, 1);
-                equal(view._row.events[0].start, 81);
-                equal(view._row.events[0].end, 81);
-                equal(view._row.slots[81].groupIndex, 1);
+                var events = view.groups[1].getDaySlotCollection(5).events();
+                equal(events.length, 1);
+                equal(events[0].start, 4);
+                equal(events[0].end, 4);
             });
 
             test("double clicking a month view slot triggers add event with resources information with vertical single grouping - first row first group", 3, function() {

@@ -196,6 +196,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("columnMenu", value);
     }
 
+    public float getColumnResizeHandleWidth() {
+        return (float)getProperty("columnResizeHandleWidth");
+    }
+
+    public void setColumnResizeHandleWidth(float value) {
+        setProperty("columnResizeHandleWidth", value);
+    }
+
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

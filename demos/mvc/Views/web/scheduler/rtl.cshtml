@@ -1,68 +1,13 @@
 <div id="example" class="k-content">
-    <div id="scheduler"></div>
-    <div class="demo-section">
-        <h3 class="title">Console log</h3>
-        <div class="console"></div>
+
+    <div class="k-rtl">
+        <div id="scheduler"></div>
     </div>
+
 </div>
+
 <script>
 $(function() {
-    function scheduler_dataBinding(e) {
-        kendoConsole.log("dataBinding");
-    }
-
-    function scheduler_dataBound(e) {
-        kendoConsole.log("dataBound");
-    }
-
-    function scheduler_save(e) {
-        kendoConsole.log("save");
-    }
-
-    function scheduler_remove(e) {
-        kendoConsole.log("remove");
-    }
-
-    function scheduler_cancel(e) {
-        kendoConsole.log("cancel");
-    }
-
-    function scheduler_edit(e) {
-        kendoConsole.log("edit");
-    }
-
-    function scheduler_add(e) {
-        kendoConsole.log("add");
-    }
-
-    function scheduler_moveStart(e) {
-        kendoConsole.log("moveStart");
-    }
-
-    function scheduler_move(e) {
-        kendoConsole.log("move");
-    }
-
-    function scheduler_moveEnd(e) {
-        kendoConsole.log("moveEnd");
-    }
-
-    function scheduler_resizeStart(e) {
-        kendoConsole.log("resizeStart");
-    }
-
-    function scheduler_resize(e) {
-        kendoConsole.log("resize");
-    }
-
-    function scheduler_resizeEnd(e) {
-        kendoConsole.log("resizeEnd");
-    }
-
-    function scheduler_navigate(e) {
-        kendoConsole.log(kendo.format("navigate:: action:{0}; view:{1}; date:{2:d};", e.action, e.view, e.date));
-    }
-
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
         startTime: new Date("2013/6/13 7:00"),
@@ -74,20 +19,7 @@ $(function() {
             "month",
             "agenda"
         ],
-        dataBinding: scheduler_dataBinding,
-        dataBound: scheduler_dataBound,
-        save: scheduler_save,
-        remove: scheduler_remove,
-        edit: scheduler_edit,
-        add: scheduler_add,
-        cancel: scheduler_cancel,
-        moveStart: scheduler_moveStart,
-        move: scheduler_move,
-        moveEnd: scheduler_moveEnd,
-        resizeStart: scheduler_resizeStart,
-        resize: scheduler_resize,
-        resizeEnd: scheduler_resizeEnd,
-        navigate: scheduler_navigate,
+        timezone: "Etc/UTC",
         dataSource: {
             batch: true,
             transport: {
@@ -136,8 +68,3 @@ $(function() {
     });
 });
 </script>
-<style scoped>
-    .demo-section {
-        margin-top: 30px;
-    }
-</style>

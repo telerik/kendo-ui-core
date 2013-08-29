@@ -312,6 +312,62 @@ That way all users would see the same dates and times no matter their configured
     }
 
     /**
+    * Sets the moveStart event of the Scheduler.
+    * Fired when the user starts to drag an event.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function moveStart($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('moveStart', $value);
+    }
+
+    /**
+    * Sets the move event of the Scheduler.
+    * Fired when the user is moving an event.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function move($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('move', $value);
+    }
+
+    /**
+    * Sets the moveEnd event of the Scheduler.
+    * Fired when the user stops moving an event.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function moveEnd($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('moveEnd', $value);
+    }
+
+    /**
+    * Sets the navigate event of the Scheduler.
+    * Fired when the user changes selected date, view or of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function navigate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('navigate', $value);
+    }
+
+    /**
     * Sets the remove event of the Scheduler.
     * Fired when the user clicks the "destroy" button.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
@@ -323,6 +379,48 @@ That way all users would see the same dates and times no matter their configured
         }
 
         return $this->setProperty('remove', $value);
+    }
+
+    /**
+    * Sets the resizeStart event of the Scheduler.
+    * Fired when the user starts to resize an event.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function resizeStart($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('resizeStart', $value);
+    }
+
+    /**
+    * Sets the resize event of the Scheduler.
+    * Fired when the user is resizing an event.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function resize($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('resize', $value);
+    }
+
+    /**
+    * Sets the resizeEnd event of the Scheduler.
+    * Fired when the user releases the mouse after resizing an event.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function resizeEnd($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('resizeEnd', $value);
     }
 
     /**
@@ -341,6 +439,19 @@ That way all users would see the same dates and times no matter their configured
 
 
 //<< Properties
+    /**
+    * Sets the add event of the Scheduler.
+    * Fired when the a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function addEvent($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('add', $value);
+    }
 }
 
 ?>

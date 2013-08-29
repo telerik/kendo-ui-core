@@ -145,6 +145,10 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("remove", value.getBody());
     }
 
+    public void setSave(SaveFunctionTag value) {
+        setEvent("save", value.getBody());
+    }
+
     public String getAltTemplate() {
         return (String)getProperty("altTemplate");
     }
@@ -283,6 +287,18 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
 
     public void setRemove(String value) {
         setProperty("remove", new Function(value));
+    }
+
+    public String getSave() {
+        Function property = ((Function)getProperty("save"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSave(String value) {
+        setProperty("save", new Function(value));
     }
 
 //<< Attributes

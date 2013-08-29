@@ -26,21 +26,7 @@
 
             module("Cloning scheduler event");
 
-            test("Strip observable object", function() {
-                var schedulerEvent = new SchedulerEvent({
-                    id: "id",
-                    title: "Title",
-                    start: new Date(2000, 10, 10, 16, 30),
-                    end: new Date(2000, 10, 10, 17, 0),
-                    recurrenceRule: "FREQ=DAILY"
-                });
-
-                var event = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17))[0];
-
-                ok(!event._events);
-            });
-
-            test("Occurrence clones original event", function() {
+            test("Expand method create occurrence from original event", function() {
                 var schedulerEvent = new SchedulerEvent({
                     id: 1,
                     uid: "id",
@@ -56,7 +42,7 @@
                 equal(events.length, 2);
                 notEqual(event.uid, schedulerEvent.uid);
                 equal(event.title, schedulerEvent.title);
-                equal(event.recurrence, undefined);
+                equal(event.recurrenceRule, undefined);
                 equal(event.recurrenceId, schedulerEvent.id);
                 equal(event.start.getTime(), +new Date(2000, 10, 11, 16, 30));
                 equal(event.end.getTime(), +new Date(2000, 10, 11, 17, 0));
@@ -64,13 +50,13 @@
 
             module("HOURLY Occurrences");
             test("HOURLY occurrences method repeat event in one hour", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 0),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=HOURLY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 18));
 
@@ -84,13 +70,13 @@
             });
 
             test("HOURLY occurrences method repeat event every 3 hours", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 0),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=HOURLY;INTERVAL=3"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
 
@@ -100,13 +86,13 @@
             });
 
             test("HOURLY method limits BYHOUR", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 0),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=HOURLY;BYHOUR=10,19"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
 
@@ -116,13 +102,13 @@
             });
 
             test("HOURLY method limits BYHOUR and expands BYMINUTE", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 10, 0),
                     end: new Date(2000, 10, 10, 11, 0),
                     recurrenceRule: "FREQ=HOURLY;BYHOUR=10;BYMINUTE=20,40"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
 
@@ -135,13 +121,13 @@
             });
 
             test("HOURLY method limits BYHOUR and expands BYSECOND", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 10, 0),
                     end: new Date(2000, 10, 10, 11, 0),
                     recurrenceRule: "FREQ=HOURLY;BYHOUR=10;BYMINUTE=20,40;BYSECOND=30"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
 
@@ -154,13 +140,13 @@
             });
 
             test("HOURLY method limits BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
                     recurrenceRule: "FREQ=HOURLY;BYDAY=WE"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15, 1, 30));
 
@@ -173,13 +159,13 @@
             });
 
             test("HOURLY method limits BYDAY and expands BYHOUR", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
                     recurrenceRule: "FREQ=HOURLY;BYDAY=WE;BYHOUR=8,10"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15, 10, 0));
 
@@ -192,13 +178,13 @@
             });
 
             test("HOURLY method limits BYMONTHDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
                     recurrenceRule: "FREQ=HOURLY;BYMONTHDAY=15"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15));
 
@@ -208,13 +194,13 @@
             });
 
             test("HOURLY method limits BYMONTHDAY and expands BYHOUR", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
                     recurrenceRule: "FREQ=HOURLY;BYMONTHDAY=15;BYHOUR=8,10"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15, 10, 0));
 
@@ -227,13 +213,13 @@
             });
 
             test("HOURLY method limits BYMONTH", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
                     recurrenceRule: "FREQ=HOURLY;BYMONTH=6"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 5, 1, 0, 30));
 
@@ -243,13 +229,13 @@
             });
 
             test("HOURLY method limits BYYEARDAY and expands BYHOUR", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 10, 0),
                     end: new Date(2013, 4, 10, 11, 0),
                     recurrenceRule: "FREQ=HOURLY;BYYEARDAY=135;BYHOUR=8,10"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10, 0, 0), new Date(2013, 4, 15, 10, 0));
 
@@ -262,13 +248,13 @@
             });
 
             test("HOURLY method honours DST", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 2, 31, 2, 0),
                     end: new Date(2013, 2, 31, 2, 30),
                     recurrenceRule: "FREQ=HOURLY;COUNT=3"
-                },
+                }),
                 afterDstDate = new Date(2013, 2, 31, 3);
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 31), new Date(2013, 3, 1));
@@ -292,13 +278,13 @@
             /*
             //Uncomment when timezone is Brasilia (-06:00)
             test("Hourly method honours DST in Brasilia", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 9, 19, 0, 0),
                     end: new Date(2013, 9, 19, 1, 0),
                     recurrenceRule: "FREQ=HOURLY;BYHOUR=0"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 9, 19, 10), new Date(2013, 9, 20, 3));
 
@@ -311,13 +297,13 @@
 
             module("DAILY Occurrences");
             test("DAILY occurrences method returns one occurrence (FREQ: DAILY)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 11, 17));
 
@@ -326,13 +312,13 @@
                 equal(events[1].end.getTime(), +new Date(2000, 10, 11, 17, 0));
             });
             test("DAILY occurrences method returns multiple occurrences (FREQ: DAILY)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16, 17));
 
@@ -345,13 +331,13 @@
             });
 
             test("DAILY occurrences method honours interval recurrence (FREQ: DAILY)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;INTERVAL=2"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16, 17));
 
@@ -365,13 +351,13 @@
             });
 
             test("DAILY occurrences method honours COUNT", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;COUNT=2"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
 
@@ -382,13 +368,13 @@
             });
 
             test("DAILY occurrences with COUNT return empty array", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;COUNT=2"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 14), new Date(2000, 10, 16));
 
@@ -396,13 +382,13 @@
             });
 
             test("DAILY occurrences method honours UNTIL", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 9, 16, 30),
                     end: new Date(2000, 10, 9, 17, 0),
                     recurrenceRule: "FREQ=DAILY;UNTIL=20001111T090000"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
 
@@ -412,27 +398,27 @@
                 equal(events[0].end.getTime(), +new Date(2000, 10, 10, 17, 0));
             });
 
-            test("DAILY occurrences method returns empty array if not valid recurrence", function() {
-                var schedulerEvent = {
+            test("DAILY occurrences method returns only the event if not valid recurrence", function() {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "UNTIL=20001111T090000"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
 
-                equal(events.length, 0);
+                equal(events.length, 1);
             });
 
-            test("DAILY occurrences method returns empty array if range is before the event", function() {
-                var schedulerEvent = {
+            test("DAILY occurrences method returns and empty array if range is before the event", function() {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;UNTIL=20001111T090000"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 9, 12), new Date(2000, 9, 16));
 
@@ -440,13 +426,13 @@
             });
 
             test("DAILY occurrences method limits BYMONTH", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYMONTH=11"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 30), new Date(2000, 11, 1, 17));
 
@@ -456,13 +442,13 @@
             });
 
             test("DAILY occurrences method limits BYMONTHDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYMONTHDAY=10,13,15"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 16));
 
@@ -476,13 +462,13 @@
             });
 
             test("DAILY occurrences method limits BYMONTHDAY (-3, 10)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYMONTHDAY=-3,10"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 1), new Date(2013, 4, 30));
 
@@ -493,13 +479,13 @@
             });
 
             test("DAILY occurrences method limits BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYDAY=SU, MO"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 13, 17));
 
@@ -513,13 +499,13 @@
             });
 
             test("DAILY occurrences method limits BYDAY (3FR)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYDAY=3FR"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 13));
 
@@ -527,13 +513,13 @@
             });
 
             test("DAILY occurrences method limits BYDAY (3TH)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYDAY=3TH"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10), new Date(2013, 4, 17));
 
@@ -543,13 +529,13 @@
             });
 
             test("DAILY occurrences method limits BYDAY (-3FR)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYDAY=-3FR"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10), new Date(2013, 4, 24));
 
@@ -560,13 +546,13 @@
             });
 
             test("DAILY occurrences method returns empty array if no such day", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYDAY=5FR"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10), new Date(2013, 4, 24));
 
@@ -574,26 +560,26 @@
             });
 
             test("DAILY occurrences method honours INTERVAL=2", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 10, 16, 30),
                     end: new Date(2013, 4, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;INTERVAL=2"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 10), new Date(2013, 4, 17));
                 equal(events.length, 4);
             });
 
             test("DAILY occurrences method honours BYDAY and INTERVAL", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 4, 17, 16, 30),
                     end: new Date(2013, 4, 17, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYDAY=TU,TH;INTERVAL=2;"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 17), new Date(2013, 5, 8));
                 equal(events.length, 4);
@@ -612,13 +598,13 @@
             });
 
             test("DAILY occurrences with INTERVAL starts recurring from event.start", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;INTERVAL=6"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 12), new Date(2000, 10, 18));
 
@@ -627,13 +613,13 @@
             });
 
             test("DAILY limit by BYMONTH and BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYMONTH=6;BYDAY=TU,TH"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 24), new Date(2013, 6, 10, 17));
 
@@ -647,13 +633,13 @@
             });
 
             test("DAILY expands BYHOUR", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYHOUR=8,18"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 11, 17));
 
@@ -670,13 +656,13 @@
             });
 
             test("DAILY expands BYHOUR and BYMINUTE", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYHOUR=8;BYMINUTE=15,45"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 11, 17));
 
@@ -696,13 +682,13 @@
             });
 
             test("DAILY expands BYHOUR and BYMINUTE (honours start hours and minutes)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYHOUR=16;BYMINUTE=15,45"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 17));
 
@@ -716,13 +702,13 @@
             });
 
             test("DAILY expands BYHOUR and BYMINUTE (BYHOUR === current hour and minute < current minute)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYHOUR=16;BYMINUTE=15"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 11, 17));
 
@@ -736,13 +722,13 @@
             });
 
             test("DAILY expands BYMINUTE", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYMINUTE=15"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 5, 10, 19));
 
@@ -756,13 +742,13 @@
             });
 
             test("DAILY expands BYHOUR and BYMINUTE (two minute rules)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYHOUR=17;BYMINUTE=20,40"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 17, 50));
 
@@ -776,13 +762,13 @@
             });
 
             test("DAILY expands BYSECONDS", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYSECOND=20,40"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 16, 31));
 
@@ -796,13 +782,13 @@
             });
 
             test("DAILY expands BYMINUTE and BYSECOND", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30, 40),
                     end: new Date(2000, 5, 10, 17, 0, 40),
                     recurrenceRule: "FREQ=DAILY;BYMINUTE=40;BYSECOND=40"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 16, 50));
 
@@ -813,13 +799,13 @@
             });
 
             test("DAILY expands BYMINUTE and BYSECOND (two second rules)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30, 40),
                     end: new Date(2000, 5, 10, 17, 0, 40),
                     recurrenceRule: "FREQ=DAILY;BYMINUTE=40;BYSECOND=20,40"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 16, 50));
 
@@ -833,13 +819,13 @@
             });
 
             test("DAILY expands BYDAY and BYHOUR", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=DAILY;BYDAY=TU;BYHOUR=10, 12"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 11, 16, 50));
 
@@ -853,13 +839,13 @@
             });
 
             test("DAILY honours BYSETPOS", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 10, 30),
                     end: new Date(2000, 5, 10, 11, 0),
                     recurrenceRule: "FREQ=DAILY;BYHOUR=10,12,16,18,20;BYSETPOS=1,3,5"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 5, 10, 23));
 
@@ -876,13 +862,13 @@
             });
 
             test("DAILY starts from event start", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 3, 16, 30),
                     end: new Date(2013, 0, 3, 17, 0),
                     recurrenceRule: "FREQ=DAILY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 0, 4, 17));
 
@@ -890,13 +876,13 @@
             });
 
             test("DAILY occurrences honours DST", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 2, 30, 16, 30),
                     end: new Date(2013, 2, 30, 17, 0),
                     recurrenceRule: "FREQ=DAILY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 30), new Date(2013, 3, 1, 17));
 
@@ -910,13 +896,13 @@
             });
 
             test("DAILY occurrences creates date when it is not possible", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 2, 29, 3, 0),
                     end: new Date(2013, 2, 29, 4, 0),
                     recurrenceRule: "FREQ=DAILY"
-                },
+                }),
                 afterDstDate = new Date(2013, 2, 31, 3);
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
@@ -932,13 +918,13 @@
             });
 
             test("DAILY method honours EEST when calculate duration", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 9, 27, 0, 0),
                     end: new Date(2013, 9, 27, 10, 0),
                     recurrenceRule: "FREQ=DAILY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 9, 27), new Date(2013, 9, 28, 17));
 
@@ -950,13 +936,13 @@
             });
 
             test("DAILY method honours EST when calculate duration", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 2, 31, 0, 0),
                     end: new Date(2013, 2, 31, 10, 0),
                     recurrenceRule: "FREQ=DAILY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
 
@@ -970,13 +956,13 @@
             /*
             //Uncomment when timezone is Brasilia (-06:00).
             test("DAILY method honours DST in Brasilia", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 9, 19, 0, 0),
                     end: new Date(2013, 9, 19, 1, 0),
                     recurrenceRule: "FREQ=DAILY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 9, 10), new Date(2013, 9, 21, 17));
 
@@ -994,13 +980,13 @@
             });
 
             test("DAILY method honours DST when use BYMONTHDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 9, 19, 0, 0),
                     end: new Date(2013, 9, 19, 1, 0),
                     recurrenceRule: "FREQ=DAILY;BYMONTHDAY=20"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 9, 10), new Date(2013, 10, 21, 17));
 
@@ -1019,13 +1005,13 @@
 
             module("WEEKLY Occurrences");
             test("WEEKLY occurrences method returns one event for each new week", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 11, 10));
 
@@ -1045,13 +1031,13 @@
             });
 
             test("WEEKLY occurrences method honours BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 10, 10, 16, 30),
                     end: new Date(2000, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=SU,MO"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 25));
 
@@ -1070,13 +1056,13 @@
             });
 
             test("WEEKLY occurrences method honours INTERVAL", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
 
@@ -1092,26 +1078,26 @@
             });
 
             test("WEEKLY occurrences method honours INTERVAL=3", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=3"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
                 equal(events.length, 2);
             });
 
             test("WEEKLY occurrences method honours COUNT=1", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2;COUNT=1"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
 
@@ -1121,13 +1107,13 @@
             });
 
             test("WEEKLY occurrences method honours COUNT=5", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2;COUNT=5"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2014, 10, 27));
 
@@ -1135,27 +1121,27 @@
             });
 
             test("WEEKLY occurrences method honours UNTIL", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2;UNTIL=20131126T000000"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 27));
 
                 equal(events.length, 2);
             });
 
-            test("WEEKLY occurrences method returns empty array if no events", function() {
-                var schedulerEvent = {
+            test("WEEKLY occurrences method returns ", function() {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;INTERVAL=2"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2010, 10, 10), new Date(2010, 10, 27));
 
@@ -1163,13 +1149,13 @@
             });
 
             test("WEEKLY occurrences method starts from second day of BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 25, 16, 30),
                     end: new Date(2013, 10, 25, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 27), new Date(2013, 10, 30));
 
@@ -1179,13 +1165,13 @@
             });
 
             test("WEEKLY occurrences method limits by BYMONTH=12 and INTERVAL=2", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 25, 16, 30),
                     end: new Date(2013, 10, 25, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=TU,FR;BYMONTH=12;INTERVAL=2"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 27), new Date(2014, 0, 1));
 
@@ -1193,13 +1179,13 @@
             });
 
             test("WEEKLY occurrences method limits by BYMONTH=11,12", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 25, 16, 30),
                     end: new Date(2013, 10, 25, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=FR;BYMONTH=11, 12"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 27), new Date(2014, 0, 1));
 
@@ -1207,13 +1193,13 @@
             });
 
             test("WEEKLY occurrences method honours BYDAY=5FR,-3TU", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=5FR,-3TU;WKST=SU"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 11, 1));
 
@@ -1227,13 +1213,13 @@
             });
 
             test("WEEKLY method expands by BYDAY and offset (future period)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 6, 7, 16, 30),
                     end: new Date(2013, 6, 7, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=2SU;WKST=SU"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 7, 4), new Date(2013, 7, 11));
 
@@ -1241,13 +1227,13 @@
             });
 
             test("WEEKLY occurrences expand BYHOUR", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 16));
 
@@ -1261,13 +1247,13 @@
             });
 
             test("WEEKLY occurrences expand BYHOUR and BYMINUTE", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 16));
 
@@ -1281,13 +1267,13 @@
             });
 
             test("WEEKLY occurrences expand BYHOUR and BYMINUTE and BYSECOND", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=WEEKLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20;BYSECOND=30"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 16));
 
@@ -1301,13 +1287,13 @@
             });
 
             test("WEEKLY occurrence sets startTime correctly", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 2, 24, 3, 0),
                     end: new Date(2013, 2, 24, 4, 0),
                     recurrenceRule: "FREQ=WEEKLY"
-                },
+                }),
                 afterDstDate = new Date(2013, 2, 31, 3),
                 endHour = afterDstDate.getHours() < 3 ? 2 : 5;
 
@@ -1328,13 +1314,13 @@
 
             module("MONTHLY Occurrences");
             test("MONTHLY method returns one event for each new month", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 9, 10, 17));
 
@@ -1354,13 +1340,13 @@
             });
 
             test("MONTHLY occurrence sets date to event.start if NO BYMONTHDAYS and BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 0, 31, 16, 30),
                     end: new Date(2000, 0, 31, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 0, 10), new Date(2000, 5, 10, 17));
 
@@ -1372,13 +1358,13 @@
             });
 
             test("MONTHLY method returns only if date is available in current month", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 0, 31, 16, 30),
                     end: new Date(2000, 0, 31, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 0, 10), new Date(2000, 5, 10, 17));
 
@@ -1388,13 +1374,13 @@
             });
 
             test("MONTHLY method limits by month", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYMONTH=6,8,10"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 9, 10, 17));
 
@@ -1408,26 +1394,26 @@
             });
 
             test("MONTHLY method limits by month and return empty array", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYMONTH=12"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 9, 10, 17));
                 equal(events.length, 0);
             });
 
             test("MONTHLY method expands by BYMONTHDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYMONTHDAY=6,10"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2000, 6, 10, 17));
 
@@ -1441,13 +1427,13 @@
             });
 
             test("MONTHLY method expands by BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYDAY=MO,WE"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 6, 10, 17));
 
@@ -1464,13 +1450,13 @@
             });
 
             test("MONTHLY method expands by BYDAY and offset", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 6, 7, 16, 30),
                     end: new Date(2013, 6, 7, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYDAY=2SU;WKST=SU"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 6, 1), new Date(2013, 6, 31));
 
@@ -1481,13 +1467,13 @@
             });
 
             test("MONTHLY method expands by BYDAY and offset (WKST=MO)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 6, 7, 16, 30),
                     end: new Date(2013, 6, 7, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYDAY=2SU;WKST=MO"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 6, 1), new Date(2013, 6, 31));
 
@@ -1498,13 +1484,13 @@
             });
 
             test("MONTHLY method expands by BYDAY and offset (WKST=SA)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 6, 7, 16, 30),
                     end: new Date(2013, 6, 7, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYDAY=2SU;WKST=SA"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 6, 1), new Date(2013, 6, 31));
 
@@ -1515,13 +1501,13 @@
             });
 
             test("MONTHLY expand by BYMONTHDAY and limit by BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYMONTHDAY=13,23,25;BYDAY=TU,TH"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 10), new Date(2013, 6, 10, 17));
 
@@ -1535,13 +1521,13 @@
             });
 
             test("MONTHLY expand by BYMONTH and limit by BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYMONTH=6;BYDAY=TU,TH"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 24), new Date(2013, 6, 10, 17));
 
@@ -1555,13 +1541,13 @@
             });
 
             test("MONTHLY occurrences expand BYHOUR and BYMINUTE and BYSECOND", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 10, 10, 16, 30),
                     end: new Date(2013, 10, 10, 17, 0),
                     recurrenceRule: "FREQ=MONTHLY;BYDAY=FR;BYHOUR=12,14;BYMINUTE=20;BYSECOND=30"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 10), new Date(2013, 10, 16));
 
@@ -1575,13 +1561,13 @@
             });
 
             test("MONTHLY occurrence sets startTime correctly", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 31, 3, 0),
                     end: new Date(2013, 0, 31, 4, 0),
                     recurrenceRule: "FREQ=MONTHLY"
-                },
+                }),
                 afterDstDate = new Date(2013, 2, 31, 3),
                 endHour = afterDstDate.getHours() < 3 ? 2 : 5;
 
@@ -1604,13 +1590,13 @@
 
             module("YEARLY Occurrences");
             test("YEARLY method returns one event for each new year", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=YEARLY"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2002, 9, 10, 17));
 
@@ -1624,13 +1610,13 @@
             });
 
             test("YEARLY method expands BYMONTH", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2000, 5, 10, 16, 30),
                     end: new Date(2000, 5, 10, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYMONTH=12"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2000, 5, 10), new Date(2002, 11, 10, 17));
 
@@ -1647,13 +1633,13 @@
             });
 
             test("YEARLY method expands BYWEEKNO", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 10, 16, 30),
                     end: new Date(2013, 0, 10, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYWEEKNO=10;WKST=MO"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 10), new Date(2013, 11, 10, 17));
                 equal(events.length, 7); //04 - 10 March
@@ -1666,13 +1652,13 @@
             });
 
             test("YEARLY method expands BYYEARDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYYEARDAY=10,100,200"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
                 equal(events.length, 3);
@@ -1688,13 +1674,13 @@
             });
 
             test("YEARLY method expands negative BYYEARDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYYEARDAY=10, -100"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
                 equal(events.length, 2);
@@ -1707,13 +1693,13 @@
             });
 
             test("YEARLY method expands BYMONTHDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYMONTHDAY=31"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
                 equal(events.length, 7);
@@ -1726,13 +1712,13 @@
             });
 
             test("YEARLY method expands BYDAY", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYDAY=TH"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 4, 1), new Date(2013, 4, 31, 17));
                 equal(events.length, 5);
@@ -1745,13 +1731,13 @@
             });
 
             test("YEARLY method expands negative BYWEEKNO", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYWEEKNO=-10;WKST=MO"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 11, 31, 17));
                 equal(events.length, 7); //21 - 27 October
@@ -1764,13 +1750,13 @@
             });
 
             test("YEARLY method expands BYMONTH and limit by BYWEEKNO", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYMONTH=3;BYWEEKNO=10;WKST=MO"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
                 equal(events.length, 7); //04 - 10 March
@@ -1783,26 +1769,26 @@
             });
 
             test("YEARLY method expands BYMONTH and limit by BYYEARDAY (returns 0)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYMONTH=3;BYYEARDAY=200"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
                 equal(events.length, 0);
             });
 
             test("YEARLY method expands BYMONTH and limit by BYYEARDAY (returns 1)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2012, 0, 1, 16, 30),
                     end: new Date(2012, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYYEARDAY=60"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2012, 4, 31, 17));
                 equal(events.length, 1);
@@ -1812,13 +1798,13 @@
             });
 
             test("YEARLY method expands BYMONTH and limit by BYMONTHDAY (returns 1)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2012, 0, 1, 16, 30),
                     end: new Date(2012, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
@@ -1828,13 +1814,13 @@
             });
 
             test("YEARLY method expands BYMONTH and limit by BYDAY (returns 4)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2013, 0, 1, 16, 30),
                     end: new Date(2013, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYDAY=WE"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
@@ -1847,13 +1833,13 @@
             });
 
             test("YEARLY method expands BYMONTH, BYHOUR, BYMINUTE and limit by BYMONTHDAY (returns 2)", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2012, 0, 1, 16, 30),
                     end: new Date(2012, 0, 1, 17, 0),
                     recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
 
@@ -1866,13 +1852,13 @@
             });
 
             test("YEARLY occurrence sets startTime correctly", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2012, 2, 31, 3, 0),
                     end: new Date(2012, 2, 31, 4, 0),
                     recurrenceRule: "FREQ=YEARLY"
-                },
+                }),
                 afterDstDate = new Date(2013, 2, 31, 3),
                 endHour = afterDstDate.getHours() < 3 ? 2 : 5;
 
@@ -1894,13 +1880,13 @@
             /*
             //Uncomment when timezone is Brasilia (-06:00)
             test("YEARLY occurrence honours Brasil DST when BYYEARDAY is defined", function() {
-                var schedulerEvent = {
+                var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2012, 2, 31, 0, 0),
                     end: new Date(2012, 2, 31, 1, 0),
                     recurrenceRule: "FREQ=YEARLY;BYYEARDAY=293" //2013-10-20
-                }
+                });
 
                 var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2014, 10, 10));
 
@@ -1917,157 +1903,22 @@
                 equal(events[2].endTime.getHours(), 1);
             });*/
 
-            module("Expanding recurring events");
-
-            test("Expand recurring events", function() {
-                var events = [new SchedulerEvent({
-                        id: "id1",
-                        title: "Title",
-                        start: new Date(2013, 0, 1, 16, 30),
-                        end: new Date(2013, 0, 1, 17, 0),
-                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
-                    }),
-                    new SchedulerEvent({
-                        id: "id2",
-                        title: "Title",
-                        start: new Date(2013, 0, 1, 10, 30),
-                        end: new Date(2013, 0, 1, 11, 30),
-                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
-                    })];
-
-                var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
-
-                equal(events.length, 3);
-
-                equal(events[0].start.getTime(), +new Date(2013, 1, 1, 17, 40));
-                equal(events[0].end.getTime(), +new Date(2013, 1, 1, 18, 10));
-
-                equal(events[1].start.getTime(), +new Date(2013, 1, 1, 18, 40));
-                equal(events[1].end.getTime(), +new Date(2013, 1, 1, 19, 10));
-
-                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 10, 30));
-                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 11, 30));
-            });
-
-            test("Expand recurring events (origin event satisfies recurring rule)", function() {
-                var events = [new SchedulerEvent({
-                        id: "id1",
-                        title: "Title",
-                        start: new Date(2013, 0, 1, 16, 30),
-                        end: new Date(2013, 0, 1, 17, 0),
-                        recurrenceRule: "FREQ=YEARLY;BYMONTH=1,2;BYMONTHDAY=1, 29"
-                    })];
-
-                var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
-                console.log(events);
-
-                equal(events.length, 3);
-
-                equal(events[0].start.getTime(), +new Date(2013, 0, 1, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 0, 1, 17, 00));
-
-                equal(events[1].start.getTime(), +new Date(2013, 0, 29, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2013, 0, 29, 17, 00));
-
-                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 16, 30));
-                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 17, 00));
-            });
-
-            test("Expand recurring events which are outside of period", function() {
-                var events = [new SchedulerEvent({
-                        id: "Test1",
-                        title: "Title",
-                        start: new Date(2012, 0, 1, 16, 30),
-                        end: new Date(2012, 0, 1, 17, 0),
-                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;BYHOUR=17,18;BYMINUTE=40"
-                    }),
-                    new SchedulerEvent({
-                        id: "Test2",
-                        title: "Title",
-                        start: new Date(2012, 0, 1, 10, 30),
-                        end: new Date(2012, 0, 1, 11, 30),
-                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
-                    })];
-
-                var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
-
-                equal(events.length, 3);
-                equal(events[0].recurrenceId, "Test1");
-                equal(events[1].recurrenceId, "Test1");
-                equal(events[2].recurrenceId, "Test2");
-
-                equal(events[0].start.getTime(), +new Date(2013, 1, 1, 17, 40));
-                equal(events[0].end.getTime(), +new Date(2013, 1, 1, 18, 10));
-
-                equal(events[1].start.getTime(), +new Date(2013, 1, 1, 18, 40));
-                equal(events[1].end.getTime(), +new Date(2013, 1, 1, 19, 10));
-
-                equal(events[2].start.getTime(), +new Date(2013, 1, 1, 10, 30));
-                equal(events[2].end.getTime(), +new Date(2013, 1, 1, 11, 30));
-            });
-
-            test("ExpandAll does not modify array if no recurring events", function() {
-                var events = [{
-                        uid: "id",
-                        title: "Title",
-                        start: new Date(2013, 0, 1, 16, 30),
-                        end: new Date(2013, 0, 1, 17, 0)
-                    },
-                    {
-                        uid: "id",
-                        title: "Title",
-                        start: new Date(2013, 0, 1, 10, 30),
-                        end: new Date(2013, 0, 1, 11, 30)
-                    }];
-
-                var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
-
-                equal(events.length, 2);
-                ok(!events[0].recurrenceId);
-                ok(!events[1].recurrenceId);
-
-                equal(events[0].start.getTime(), +new Date(2013, 0, 1, 16, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 0, 1, 17, 0));
-
-                equal(events[1].start.getTime(), +new Date(2013, 0, 1, 10, 30));
-                equal(events[1].end.getTime(), +new Date(2013, 0, 1, 11, 30));
-            });
-
-            test("Expand returns recurring events which are outside of period", function() {
-                var events = [{
-                        uid: "id",
-                        title: "Title",
-                        start: new Date(2013, 0, 1, 16, 30),
-                        end: new Date(2013, 0, 1, 17, 0)
-                    },
-                    {
-                        uid: "id",
-                        title: "Title",
-                        start: new Date(2012, 0, 1, 10, 30),
-                        end: new Date(2012, 0, 1, 11, 30),
-                        recurrenceRule: "FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=1,29;"
-                    },
-                    {
-                        uid: "id",
-                        title: "Title",
-                        start: new Date(2013, 0, 3, 16, 30),
-                        end: new Date(2013, 0, 3, 17, 0)
-                    }];
-
-                var events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 4, 31, 17));
-
-                equal(events.length, 3);
-                deepEqual(events[0].start, new Date(2013, 0, 1, 16, 30));
-                deepEqual(events[0].end, new Date(2013, 0, 1, 17, 0));
-
-                deepEqual(events[1].start, new Date(2013, 1, 1, 10, 30));
-                deepEqual(events[1].end, new Date(2013, 1, 1, 11, 30));
-
-                deepEqual(events[2].start, new Date(2013, 0, 3, 16, 30));
-                deepEqual(events[2].end, new Date(2013, 0, 3, 17, 0));
-            });
-
             module("Exception recurring dates");
+
+            test("expand method should return the event if no recurrenceRule", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    id: 1,
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2012, 2, 31, 0, 0),
+                    end: new Date(2012, 2, 31, 1, 0)
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2014, 10, 10));
+
+                equal(events.length, 1);
+                equal(events[0].id, schedulerEvent.id);
+            });
 
             test("Remove event which exist in RecurrenceException", function() {
                 var expDate1 = new Date(2013, 0, 1, 10, 30),
@@ -2079,14 +1930,14 @@
                 var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";" +
                                 kendo.toString(expDate2, "yyyyMMddTHHmmssZ") + ";";
 
-                var events = {
+                var events = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
                     start: new Date(2012, 0, 1, 10, 30),
                     end: new Date(2012, 0, 1, 11, 30),
                     recurrenceRule: "FREQ=DAILY",
                     recurrenceException: exception
-                };
+                });
 
                 var events = occurrences(events, new Date(2013, 0, 1), new Date(2013, 0, 5, 17));
 
@@ -2101,164 +1952,26 @@
                 equal(events[2].end.getTime(), +new Date(2013, 0, 5, 11, 30));
             });
 
-            test("Remove original event from series if it is part of exception", function() {
-                var expDate1 = new Date(2013, 0, 1, 10, 30),
-                    expDate2 = new Date(2013, 0, 2, 10, 30);
-
-                expDate1 = timezone.apply(expDate1, 0);
-                expDate2 = timezone.apply(expDate2, 0);
-
-                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";" +
-                                kendo.toString(expDate2, "yyyyMMddTHHmmssZ") + ";";
-
-                var events = [{
-                    uid: "id",
-                    title: "Title",
-                    start: new Date(2013, 0, 1, 10, 30),
-                    end: new Date(2013, 0, 1, 11, 30),
+            test("expand method returns event directly when if it satisfies recurrence rule", function() {
+                var start = new Date(2010, 10, 10);
+                var event = new SchedulerEvent({
+                    id: 1,
                     recurrenceRule: "FREQ=DAILY",
-                    recurrenceException: exception
-                }]
-
-                events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 0, 3, 17));
-
-                equal(events.length, 1);
-                equal(events[0].start.getTime(), +new Date(2013, 0, 3, 10, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 0, 3, 11, 30));
-            });
-
-            test("Do not remove original event if exception is not equal to start date", function() {
-                var expDate1 = new Date(2013, 0, 2, 10, 30);
-
-                expDate1 = timezone.apply(expDate1, 0);
-
-                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
-
-                var events = [{
-                    uid: "id",
-                    title: "Title",
-                    start: new Date(2013, 0, 1, 10, 30),
-                    end: new Date(2013, 0, 1, 11, 30),
-                    recurrenceRule: "FREQ=DAILY",
-                    recurrenceException: exception
-                }]
-
-                events = expandAll(events, new Date(2013, 0, 1), new Date(2013, 0, 3, 17));
-
-                equal(events.length, 2);
-                equal(events[0].start.getTime(), +new Date(2013, 0, 1, 10, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 0, 1, 11, 30));
-
-                equal(events[1].start.getTime(), +new Date(2013, 0, 3, 10, 30));
-                equal(events[1].end.getTime(), +new Date(2013, 0, 3, 11, 30));
-            });
-
-            test("Expand event with recurrence exception in America/Los_Angeles timezone", function() {
-                var start = new Date(2013, 0, 1, 0, 0), //"America/Los_Angeles"
-                    end = new Date(2013, 0, 2, 22, 0); //"America/Los_Angeles"
-
-                var expDate1 = timezone.convert(new Date(2013, 0, 2, 10, 30), "America/Los_Angeles", "Etc/UTC"); //make it UTC
-                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
-
-                var events = [{
-                    uid: "id",
-                    title: "Title",
-                    start: new Date(2013, 0, 1, 10, 30), //"America/Los_Angeles"
-                    end: new Date(2013, 0, 1, 11, 30), //"America/Los_Angeles"
-                    recurrenceRule: "FREQ=DAILY;COUNT=2",
-                    recurrenceException: exception
-                }]
-
-                equal(expandAll(events, start, end, "America/Los_Angeles").length, 1);
-            });
-
-            test("Expand event with recurrence exception in America/Los_Angeles timezone", function() {
-                var start = new Date(2013, 0, 1, 0, 0), //"America/Los_Angeles"
-                    end = new Date(2013, 0, 2, 22, 0); //"America/Los_Angeles"
-
-                var expDate1 = timezone.convert(new Date(2013, 0, 2, 10, 30), "America/Los_Angeles", "Etc/UTC"); //make it UTC
-                var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + ";";
-
-                var events = [{
-                    uid: "id",
-                    title: "Title",
-                    start: new Date(2013, 0, 1, 10, 30), //"America/Los_Angeles"
-                    end: new Date(2013, 0, 1, 11, 30), //"America/Los_Angeles"
-                    recurrenceRule: "FREQ=DAILY;COUNT=2",
-                    recurrenceException: exception
-                }]
-
-                equal(expandAll(events, start, end, "America/Los_Angeles").length, 1);
-            });
-
-            test("Expand method strips SchedulerEvent instance before expand", function() {
-                var start = new Date(2013, 0, 1, 0, 0),
-                    end = new Date(2013, 0, 2, 22, 0);
-
-                var event = new kendo.data.SchedulerEvent({
-                    uid: "id",
-                    id: 10,
-                    title: "Title",
-                    start: new Date(2013, 0, 1, 10, 30),
-                    startTimezone: "America/Los_Angeles",
-                    end: new Date(2013, 0, 1, 11, 30),
-                    recurrenceRule: "FREQ=DAILY;COUNT=2"
+                    recurrenceException: "20001111T090000",
+                    start: start,
+                    end: start
                 });
 
-                var events = occurrences(event, start, end);
+                var occurrence = event.expand(start, kendo.date.addDays(start, 2))[0];
 
-                ok(!events[0].toJSON);
+                ok(!occurrence.recurrenceId);
+                equal(occurrence.uid, event.uid);
+                deepEqual(occurrence.start, start);
+
+                equal(occurrence.id, event.id);
+                equal(occurrence.recurrenceRule, event.recurrenceRule);
+                equal(occurrence.recurrenceException, event.recurrenceException);
             });
-
-            test("ExpandAll method strips SchedulerEvent instances", function() {
-                var start = new Date(2013, 0, 1, 0, 0),
-                    end = new Date(2013, 0, 2, 22, 0);
-
-                var events = [new kendo.data.SchedulerEvent({
-                    uid: "id",
-                    id: 10,
-                    title: "Title",
-                    start: new Date(2013, 0, 1, 10, 30),
-                    startTimezone: "America/Los_Angeles",
-                    end: new Date(2013, 0, 1, 11, 30),
-                    recurrenceRule: "FREQ=DAILY;COUNT=2"
-                })];
-
-                events = expandAll(events, start, end);
-
-                ok(!events[0].toJSON);
-                ok(events[0].id);
-            });
-
-            test("Expand add not recurring event outside of the period", function() {
-                var events = [new SchedulerEvent({
-                        id: "Test1",
-                        title: "Title",
-                        start: new Date(2012, 0, 1, 16, 30),
-                        end: new Date(2012, 0, 1, 17, 0)
-                    })];
-
-                var events = expandAll(events, new Date(2013, 1, 1), new Date(2013, 4, 31, 17));
-
-                equal(events.length, 1);
-            });
-
-            test("Expand add not recurring event outside of the period", function() {
-                var events = [new SchedulerEvent({
-                        id: "Test1",
-                        title: "Title",
-                        start: new Date(2013, 1, 1, 16, 30),
-                        end: new Date(2013, 1, 3, 17, 0),
-                        isAllDay: true,
-                        recurrenceRule: "FREQ=MONTHLY"
-                    })];
-
-                var data = expandAll(events, new Date(2013, 1, 2), new Date(2013, 4, 31, 17));
-
-                deepEqual(data[0].start, events[0].start);
-                deepEqual(data[0].end, events[0].end);
-            });
-
         </script>
     </body>
 </html>

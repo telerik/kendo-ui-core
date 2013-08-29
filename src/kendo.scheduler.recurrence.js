@@ -17,6 +17,7 @@ kendo_module({
         setDayOfWeek = date.setDayOfWeek,
         adjustDST = date.adjustDST,
         firstDayOfMonth = date.firstDayOfMonth,
+        getMilliseconds = date.getMilliseconds,
         DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
@@ -804,10 +805,11 @@ kendo_module({
 
     function isException(exceptions, date, zone) {
         var dates = $.isArray(exceptions) ? exceptions : parseExceptions(exceptions, zone),
+            dateTime = date.getTime() - date.getMilliseconds(),
             idx = 0, length = dates.length;
 
         for (; idx < length; idx++) {
-            if (dates[idx].getTime() === date.getTime()) {
+            if (dates[idx].getTime() === dateTime) {
                 return true;
             }
         }
@@ -816,43 +818,25 @@ kendo_module({
     }
 
     function expand(event, start, end, zone) {
-        var idField = event.idField,
-            eventEnd = event.end,
-            eventStart = event.start,
+        var eventStart = event.start,
             eventStartMS = eventStart.getTime(),
+            eventStartTime = getMilliseconds(eventStart),
             rule = parseRule(event.recurrenceRule),
-            id, uid, recurrenceRule, recurrenceException,
             startTime, endTime, endDate,
             hours, minutes, seconds,
             durationMS, startPeriod,
-            first, count, freq,
             exceptionDates,
+            count, freq,
             current = 1,
-            events = [],
-            offset;
+            events = [];
+
+        if (!rule) {
+            return [event];
+        }
 
         exceptionDates = parseExceptions(event.recurrenceException, zone);
-
-        recurrenceException = event.recurrenceException;
-        recurrenceRule = event.recurrenceRule;
-        id = event[idField] || event.id;
-        uid = event.uid;
-
-        if (event.toJSON) {
-            event = event.toJSON();
-
-            delete event.recurrenceException;
-            delete event.recurrenceRule;
-            delete event[idField];
-            delete event.id;
-        }
-
         startPeriod = start = new Date(start);
         end = new Date(end);
-
-        if (!rule || event.start > end) {
-            return events;
-        }
 
         freq = frequencies[rule.freq];
         count = rule.count;
@@ -884,9 +868,8 @@ kendo_module({
             start.setHours(hours, minutes, seconds, eventStart.getMilliseconds());
         }
 
-        rule._startTime = startTime = new Date(1980, 0, 1, hours, start.getMinutes(), start.getSeconds(), start.getMilliseconds());
-        offset = (eventEnd.getTimezoneOffset() - eventStart.getTimezoneOffset()) * date.MS_PER_MINUTE;
-        durationMS = eventEnd - eventStartMS - offset;
+        durationMS = event.duration();
+        rule._startTime = startTime = kendo.date.toInvariantTime(start);
 
         if (freq.setup) {
             freq.setup(rule, start, eventStart);
@@ -902,14 +885,18 @@ kendo_module({
                 endTime = new Date(rule._startTime);
                 setTime(endTime, durationMS);
 
-                events.push($.extend({}, event, {
-                    uid: kendo.guid(),
-                    recurrenceId: id,
-                    start: new Date(start),
-                    startTime: new Date(startTime),
-                    end: endDate,
-                    endTime: endTime
-                }));
+                if (eventStartMS !== start.getTime() || eventStartTime !== getMilliseconds(startTime)) {
+                    events.push(event.toOccurrence({
+                        start: new Date(start),
+                        startTime: new Date(startTime),
+                        end: endDate,
+                        endTime: endTime
+                    }));
+                } else {
+                    event.startTime = startTime;
+                    event.endTime = endTime;
+                    events.push(event);
+                }
             }
 
             if (count && count === current) {
@@ -921,16 +908,6 @@ kendo_module({
             freq.limit(start, end, rule);
         }
 
-        first = events[0];
-        if (first && first.start.getTime() === eventStartMS) {
-            delete first.recurrenceId;
-
-            first.recurrenceException = recurrenceException;
-            first.recurrenceRule = recurrenceRule;
-            first.uid = uid;
-            first.id = id;
-        }
-
         if (rule.setPositions) {
             events = eventsByPosition(events, rule.setPositions);
         }
@@ -938,31 +915,7 @@ kendo_module({
         return events;
     }
 
-    function expandAll(events, start, end, zone) {
-        var length = events.length,
-            idx = 0, event, result,
-            data = [],
-            id;
 
-        for (; idx < length; idx++) {
-            event = events[idx];
-            result = expand(event, start, end, zone);
-
-            if (!event.recurrenceRule) {
-                if (event.toJSON) {
-                    id = event.id;
-                    event = event.toJSON();
-                    event.id = id;
-                }
-
-                data.push(event);
-            } else {
-                data = data.concat(result);
-            }
-        }
-
-        return data;
-    }
 
     function parseRule(rule, zone) {
         var instance = {},
@@ -1140,7 +1093,6 @@ kendo_module({
             serialize: serialize
         },
         expand: expand,
-        expandAll: expandAll,
         dayInYear: dayInYear,
         weekInYear: weekInYear,
         weekInMonth: weekInMonth,

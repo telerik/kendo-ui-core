@@ -15,6 +15,7 @@
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -175,6 +176,75 @@
                 scheduler.wrapper.find(".k-event a:has(.k-si-close)").click();
                 equal(removeEvent.calls("removeEvent"), 1);
             });
+
+            test("Remove recurring event opens delete recurring dialog", 1, function() {
+                var scheduler = setup({
+                    dataSource: {
+                        data: [ { recurrenceRule: "FREQ=DAILY", start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
+                    },
+                    editable: true
+                });
+
+                scheduler.removeEvent(scheduler.wrapper.find(".k-event:first").data("uid"));
+
+                equal($(".k-popup-message").text(), "Do you want to delete only this event occurrence or the whole series?");
+            });
+
+            test("Remove only current recurring event will remove only current occurrence", 1, function() {
+                var scheduler = setup({
+                    dataSource: {
+                        data: [ { id: 1, recurrenceRule: "FREQ=DAILY", start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
+                    },
+                    editable: true
+                });
+
+                stub(scheduler.dataSource, {
+                    remove: scheduler.dataSource.remove
+                });
+
+                scheduler.removeEvent(scheduler.wrapper.find(".k-event:last").data("uid"));
+                $(".k-window").find(".k-button:first").click();
+
+                ok(scheduler.dataSource.args("remove")[0].isOccurrence());
+            });
+
+            test("Remove recurrence head will remove the corresponding series", 1, function() {
+                var scheduler = setup({
+                    dataSource: {
+                        data: [ { id: 1, recurrenceRule: "FREQ=DAILY", start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
+                    },
+                    views: ["week"],
+                    editable: true
+                });
+
+                stub(scheduler.dataSource, {
+                    remove: scheduler.dataSource.remove
+                });
+
+                scheduler.removeEvent(scheduler.wrapper.find(".k-event:last").data("uid"));
+                $(".k-window").find(".k-button:last").click();
+
+                ok(scheduler.dataSource.args("remove")[0].isRecurrenceHead());
+            });
+
+            test("Canceling event removal persist instance in the DataSource", 2, function() {
+                var scheduler = setup({
+                    dataSource: {
+                        data: [ { id: 1, start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
+                    },
+                    editable: true
+                });
+
+                stub(scheduler.dataSource, {
+                    remove: scheduler.dataSource.remove
+                });
+
+                scheduler.removeEvent(scheduler.wrapper.find(".k-event:last").data("uid"));
+                $(".k-window").find(".k-button:last").click();
+
+                equal(scheduler.dataSource.calls("remove"), 0);
+                equal(scheduler.dataSource.data().length, 1);
+            })
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

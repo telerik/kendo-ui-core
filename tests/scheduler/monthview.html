@@ -14,6 +14,7 @@
         <script src="../../src/kendo.scheduler.monthview.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <script src="../../cultures/kendo.culture.de-DE.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">Scheduler Month View rendering</h1>
@@ -248,6 +249,8 @@
 
                 var firstEvent = view.content.find(".k-event:first");
 
+                ok(firstEvent.length);
+
                 ok(!firstEvent.find(".k-event-actions:first .k-i-arrow-w").length);
                 equal(firstEvent.find(".k-event-actions:last .k-i-arrow-e").length, 1);
            });
@@ -282,7 +285,7 @@
                    new kendo.data.SchedulerEvent({ start: new Date(2013, 2, 16), end: new Date(2013, 2, 17), title: "multi day event" })
                ]);
 
-               equal(view.content.find(".k-event").length, 2);
+               equal(view.content.find(".k-event").length, 1);
            });
 
            test("clicking the cell link trigger navigate event", 2, function() {
@@ -374,8 +377,8 @@
                     new kendo.data.SchedulerEvent({ start: new Date("2013/1/27 10:00"), end: new Date("2013/1/27 10:00"),  title: "day event" })
                 ]);
 
-                equal(view._row.events[0].start, 0);
-                equal(view._row.events[0].end, 0);
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].start, 0);
+                equal(view.groups[0].getDaySlotCollection(0).events()[0].end, 0);
             });
 
             test("more button is shown for every cell with more events than possible to show", function() {

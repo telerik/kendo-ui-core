@@ -72,6 +72,29 @@
                 equal($(".k-event-drag-hint dt").text(), "10:30 AM - 11:30 AM");
             });
 
+            test("hint shows updated start and end time when moving event in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 11:00"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragdrop(scheduler, handle, slots.eq(1));
+
+                handle = div.find(".k-event");
+
+                dragstart(scheduler, handle, handle.offset());
+                drag(scheduler, handle, slots.eq(2).offset());
+
+                equal($(".k-event-drag-hint dt").text(), "11:00 AM - 12:00 PM");
+            });
+
             test("hint shows north icon when start time is before the start of the view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -155,7 +178,7 @@
                 equal($(".k-event-drag-hint .k-i-arrow-s").length, 1);
             });
 
-            test("hint shows east icon when the start time is before the start of the month view", function() {
+            test("hint shows west icon when the start time is before the start of the month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -172,7 +195,7 @@
 
                 drag(scheduler, handle, slots.first().offset());
 
-                equal($(".k-event-drag-hint .k-i-arrow-e").length, 1);
+                equal($(".k-event-drag-hint .k-i-arrow-w").length, 1);
             });
 
             test("move hint in month view is two slots long when the event is two days long", function() {
@@ -329,7 +352,7 @@
                 equal(scheduler.dataSource.at(1).start.getMonth(), 4);
             });
 
-            test("hint shows west icon when the end time is after the end of the month view", function() {
+            test("hint shows east icon when the end time is after the end of the month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -346,7 +369,7 @@
 
                 drag(scheduler, handle, slots.last().offset());
 
-                equal($(".k-event-drag-hint .k-i-arrow-w").length, 1);
+                equal($(".k-event-drag-hint .k-i-arrow-e").length, 1);
             });
 
             test("moving event in day view changes its start time", function() {
@@ -1072,7 +1095,7 @@
                 equal(scheduler.dataSource.at(0).ownerId, 1);
             });
 
-            test("hint when moving event in month view to another resource group", function() {
+            test("the hint is positoned to another resource group in month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
                     views: ["month"],
@@ -1105,6 +1128,41 @@
 
                 equalWithRound(div.find(".k-event-drag-hint").outerWidth(), slots.eq(0).outerWidth());
                 equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(0).offset().left);
+            });
+
+            test("the hint is positoned to another resource group in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["day"],
+                    dataSource: [
+                        { start: new Date("2013/6/6 1:00"), end: new Date("2013/6/6 1:30"), ownerId: 1, title: "" }
+                    ],
+                    group: {
+                        resources: ["Owner"]
+                    },
+                    resources: [
+                        {
+                            field: "ownerId",
+                            name: "Owner",
+                            dataSource: [
+                                { text: "Alex", value: 1, color: "red" },
+                                { text: "Bob", value: 2, color: "green" }
+                            ],
+                            title: "Owner"
+                        }
+                   ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(2)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(0).offset());
+
+                equalWithRound(div.find(".k-event-drag-hint").offset().left, slots.eq(0).offset().left);
+                equalWithRound(div.find(".k-event-drag-hint").offset().top, slots.eq(0).offset().top);
             });
 
             test("moving long event at the end of the month view is restricted by resource", function() {
@@ -1223,6 +1281,101 @@
                 drag(scheduler, handle, slots.eq(slots.length-2).offset());
 
                 dragcancel(scheduler);
+
+                equal(div.find(".k-event-drag-hint").length, 0);
+            });
+
+            test("moving event triggers movestart event", 1, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ],
+                    moveStart: function(e) {
+                        equal(e.event, scheduler.dataSource.at(0));
+                    }
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragstart(scheduler, handle, handle.offset());
+            });
+
+            test("moving event triggers move event", 4, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ],
+                    move: function(e) {
+                        equal(e.event, scheduler.dataSource.at(0));
+                        ok(e.slot.element);
+                        deepEqual(e.slot.start, new Date("2013/6/2 11:00 PM"));
+                        deepEqual(e.slot.end, new Date("2013/6/2 11:30 PM"));
+                    }
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                drag(scheduler, handle, slots.eq(slots.length-2).offset());
+            });
+
+            test("dropping event triggers moveend event", 4, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ],
+                    moveEnd: function(e) {
+                        equal(e.event, scheduler.dataSource.at(0));
+                        ok(e.slot.element);
+                        deepEqual(e.slot.start, new Date("2013/6/2 11:00 PM"));
+                        deepEqual(e.slot.end, new Date("2013/6/2 11:30 PM"));
+                    }
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+            });
+
+            test("preventing moveEnd event cancels the move", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 22:00"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+                    ],
+                    moveEnd: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+                dragdrop(scheduler, handle, slots.eq(2));
+
+                var event = scheduler.dataSource.at(0);
+
+                deepEqual(event.start, new Date("2013/6/2 10:30 PM"));
+                deepEqual(event.end, new Date("2013/6/3 12:00 PM"));
 
                 equal(div.find(".k-event-drag-hint").length, 0);
             });
