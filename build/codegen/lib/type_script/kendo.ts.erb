@@ -295,8 +295,8 @@ declare module kendo.effects {
     }
 
     interface Effect {
-        play(): JQueryPromise;
-        reverse(): JQueryPromise;
+        play(): JQueryPromise<any>;
+        reverse(): JQueryPromise<any>;
         duration(value: number): Effect;
         add(effect: Effect): Effect;
         stop(): Effect;
@@ -1082,7 +1082,7 @@ interface JQueryXHR {
 interface JQueryEventObject {
 }
 
-interface JQueryPromise {
+interface JQueryPromise<T> {
 }
 
 interface JQuery {
