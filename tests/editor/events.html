@@ -72,6 +72,9 @@
                     changeRaised = false;
                     editor = getEditor();
 
+                    // reset to default
+                    editor.options.encoded = true;
+
                     editor.bind('select', function () {
                         changeRaised = true;
                     });
@@ -104,6 +107,13 @@
                 editor.body.innerHTML = "<em>bar</em>";
                 $(editor.window).trigger("blur");
                 equal($(editor.textarea).val(), "<em>bar</em>");
+            });
+
+            test("blurring an encoded editor does not trigger change event", function() {
+                editor.options.encoded = false;
+                editor.value("<em>foo</em>");
+                $(editor.window).trigger("blur");
+                ok(!changeRaised);
             });
 
             test('on selection change executed', function() {

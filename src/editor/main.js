@@ -347,7 +347,7 @@ kendo_module({
             $(blurTrigger)
                 .on("blur" + NS, function () {
                     var old = editor.textarea ? editor.textarea.val() : editor._oldValue;
-                    var value = editor.encodedValue();
+                    var value = editor.options.encoded ? editor.encodedValue() : editor.value();
 
                     editor.update();
 
